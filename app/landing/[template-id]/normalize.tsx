@@ -33,16 +33,16 @@ export function normalizeData(data: any): LandingData {
     // เพื่อให้ Template แต่ละตัวใช้ Logic ของตัวเองในการเลือกภาษา
     name: data.name || "Business Name",
     description: data.description || "",
-    
+
     variant: data.variant || "starter",
-    
+
     theme: {
       primary: data.theme?.primary || "#2563eb",
       secondary: data.theme?.secondary || "#0f172a",
       accent: data.theme?.accent || "#fbbf24",
       ...data.theme,
     },
-    
+
     contact,
     socials,
 
@@ -61,11 +61,7 @@ export function normalizeData(data: any): LandingData {
  * - ล้างค่า Style ที่อาจตกค้างจาก Layout หลัก
  * - กำหนดพื้นหลังและ Antialiased ให้เทมเพลตดูคมชัด
  */
-export function NormalizeWrapper({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function NormalizeWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div className="landing-template-wrapper relative min-h-screen w-full bg-white font-sans antialiased">
       {/* Container นี้จะช่วยให้เทมเพลตทำงานเป็นเอกเทศ 

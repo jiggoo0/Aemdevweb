@@ -1,7 +1,14 @@
 /** @format */
 import React from "react"
 import Link from "next/link"
-import { Facebook, MessageCircle, Mail, MapPin, Phone, ArrowUpRight } from "lucide-react"
+import {
+  Facebook,
+  MessageCircle,
+  Mail,
+  MapPin,
+  Phone,
+  ArrowUpRight,
+} from "lucide-react"
 
 // 🟢 ดึง Type มาจากไฟล์กลางเพื่อให้สอดคล้องกัน
 import { MultiLangText } from "@/app/landing/[template-id]/types"
@@ -27,9 +34,10 @@ export default function Footer({ data }: FooterProps) {
    * 🛠️ Helper: จัดการแสดงผลชื่อแบรนด์
    * ถ้าเป็น Object จะเลือกภาษาไทยก่อน ถ้าไม่มีให้ไปภาษาอังกฤษ
    */
-  const displayName = typeof data.name === "string" 
-    ? data.name 
-    : data.name?.th || data.name?.en || "AEMDEVWEB"
+  const displayName =
+    typeof data.name === "string"
+      ? data.name
+      : data.name?.th || data.name?.en || "AEMDEVWEB"
 
   return (
     <footer className="border-t-8 border-slate-900 bg-white pb-8 pt-16">
@@ -53,7 +61,10 @@ export default function Footer({ data }: FooterProps) {
                   icon: <MessageCircle size={20} />,
                   href: `https://line.me/ti/p/~${data.lineId}`,
                 },
-                { icon: <Mail size={20} />, href: "mailto:contact@aemdevweb.com" },
+                {
+                  icon: <Mail size={20} />,
+                  href: "mailto:contact@aemdevweb.com",
+                },
               ].map((social, i) => (
                 <a
                   key={i}

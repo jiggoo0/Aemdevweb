@@ -5,7 +5,11 @@ import Footer from "@/components/Footer"
 import { siteConfig } from "@/config/siteConfig"
 import { cn } from "@/lib/utils"
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
       {/* 📢 1. ANNOUNCEMENT LAYER: Banner ประกาศเปิดตัว */}
@@ -32,16 +36,18 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       {/* ส่งข้อมูล Mock Data เข้าไปเพื่อให้ Footer เรนเดอร์ได้ 
          โดยไม่กระทบกับตัวแปรในหน้า Landing Page 
       */}
-      <Footer 
-        data={{
-          name: siteConfig.name,
-          phone: "08x-xxx-xxxx", 
-          lineId: "@aemdevweb",
-          address: "Bangkok, Thailand",
-          socials: {
-            facebook: "https://facebook.com/aemdevweb",
-          }
-        } as any} 
+      <Footer
+        data={
+          {
+            name: siteConfig.name,
+            phone: "08x-xxx-xxxx",
+            lineId: "@aemdevweb",
+            address: "Bangkok, Thailand",
+            socials: {
+              facebook: "https://facebook.com/aemdevweb",
+            },
+          } as any
+        }
       />
 
       {/* ─── 6. BRANDING MARK (Desktop Only) ─── */}

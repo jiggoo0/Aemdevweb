@@ -1,16 +1,17 @@
 /** @format */
-// 🟢 แก้ไข Path ให้ตรงกับที่ย้ายไป landing/[template-id]/types/index.ts
+
 import { ServiceCategory } from "@/app/landing/[template-id]/types"
-
-// 🟢 แก้ไข Path ให้ตรงกับที่ย้ายไป components/iconMap.ts
 import { ServiceIconKey } from "@/components/iconMap"
-
 import {
   Rocket,
   Stethoscope,
   HardHat,
   Building2,
   Coffee,
+  Truck,
+  Briefcase,
+  Store,
+  Cpu,
   LucideIcon,
 } from "lucide-react"
 
@@ -29,7 +30,7 @@ export interface ServiceItem {
 
 /**
  * 🛠️ ฟังก์ชันสำหรับดึง Icon ตาม Key
- * แก้ปัญหา TS2339/TS2305 โดยระบุ Return Type เป็น LucideIcon
+ * Mapping ให้ครบตาม ServiceIconKey เพื่อรองรับ Type Safety 100%
  */
 export const getServiceIcon = (iconKey: ServiceIconKey): LucideIcon => {
   const iconMap: Record<ServiceIconKey, LucideIcon> = {
@@ -38,8 +39,12 @@ export const getServiceIcon = (iconKey: ServiceIconKey): LucideIcon => {
     construction: HardHat,
     realEstate: Building2,
     cafe: Coffee,
+    logistics: Truck,
+    corporate: Briefcase,
+    retail: Store,
+    custom: Cpu,
   }
-  // คืนค่า Rocket เป็น Default หากหา Key ไม่เจอ
+
   return iconMap[iconKey] || Rocket
 }
 
@@ -50,7 +55,7 @@ export const servicesData: ServiceItem[] = [
     title: "Aemdev Starter Kit",
     description:
       "หน้า Landing Page สำหรับธุรกิจเริ่มต้น ออกแบบมาเพื่อ Conversion สูงสุด",
-    icon: "starter", // 🟢 ต้องตรงกับ Key ใน iconMap
+    icon: "starter",
     targetGroup: "ธุรกิจเริ่มต้น / SME / Online Seller",
     priceTag: "โปรโมชั่น 3,900.-",
     isHot: true,

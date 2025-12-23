@@ -27,7 +27,8 @@ export interface BaseTemplateProps {
     subtitle: MultiLangText | string
     image?: string
   }
-  socials?: {      // ✅ เพิ่มเพื่อให้ตรงกับ Footer
+  socials?: {
+    // ✅ เพิ่มเพื่อให้ตรงกับ Footer
     facebook?: string
     instagram?: string
   }
@@ -48,7 +49,7 @@ export interface BaseTemplateProps {
  * 📦 LandingData: Type หลักที่ใช้ใน Normalize และ Fetcher
  * ✅ เปลี่ยนเป็น Type Alias เพื่อป้องกัน ESLint Error: @typescript-eslint/no-empty-object-type
  */
-export type LandingData = BaseTemplateProps;
+export type LandingData = BaseTemplateProps
 
 /**
  * 🟢 Template Variants
@@ -118,5 +119,5 @@ export type ServiceCategory =
  * 🛠️ Helper สำหรับเช็คว่าเป็น MultiLang หรือไม่
  */
 export const isMultiLang = (text: any): text is MultiLangText => {
-  return text && typeof text === "object" && "th" in text;
+  return text && typeof text === "object" && "th" in text
 }

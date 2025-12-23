@@ -30,7 +30,8 @@ async function fetchLandingData(id: string) {
     if (lowerId.includes("estate")) data = Object.values(realEstateMock)[0]
     else if (lowerId.includes("cafe")) data = Object.values(cafeMock)[0]
     else if (lowerId.includes("clinic")) data = Object.values(clinicMock)[0]
-    else if (lowerId.includes("construction")) data = Object.values(constructionMock)[0]
+    else if (lowerId.includes("construction"))
+      data = Object.values(constructionMock)[0]
   }
 
   return data || null
@@ -60,14 +61,16 @@ export default async function LandingPage({ params }: PageProps) {
   const VariantComponent = registry[data.variant as keyof typeof registry]
 
   if (!VariantComponent) {
-    console.error(`[LandingPage] 404: Variant "${data.variant}" not found in registry`)
+    console.error(
+      `[LandingPage] 404: Variant "${data.variant}" not found in registry`
+    )
     return notFound()
   }
 
   const ComponentToRender = VariantComponent as any
 
   return (
-    /** * ✅ ใช้ NormalizeWrapper เพื่อคุม Layout พื้นฐาน 
+    /** * ✅ ใช้ NormalizeWrapper เพื่อคุม Layout พื้นฐาน
      * และมั่นใจว่าไม่มี Header/Footer ของเว็บหลักมาปน
      */
     <NormalizeWrapper>
@@ -83,10 +86,11 @@ export async function generateMetadata({ params }: PageProps) {
   const { "template-id": id } = await params
   const rawData = await fetchLandingData(id)
   if (!rawData) return { title: "Landing Page Not Found" }
-  
+
   const data = normalizeData(rawData)
-  const name = typeof data.name === 'string' ? data.name : (data.name?.th || data.name?.en)
-  
+  const name =
+    typeof data.name === "string" ? data.name : data.name?.th || data.name?.en
+
   return {
     title: `${name} | Preview Template`,
     description: `ระบบออกแบบเว็บไซต์อัตโนมัติโดย aemdevweb สำหรับธุรกิจ ${name}`,

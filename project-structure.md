@@ -28,8 +28,6 @@ app
   landing
     [template-id]
       page.tsx
-      types
-        index.ts
       variants
         starter
           components
