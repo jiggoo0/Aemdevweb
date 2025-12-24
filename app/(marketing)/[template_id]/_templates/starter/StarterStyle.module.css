@@ -1,0 +1,46 @@
+.wrapper {
+  @apply min-h-screen w-full overflow-x-hidden bg-yellow-50 text-slate-900;
+}
+
+/* ⚡ Flash Sale Hero */
+.hero {
+  @apply relative flex flex-col items-center border-b-[10px] border-slate-900 bg-white px-8 py-20 text-center;
+}
+
+.badge {
+  @apply mb-6 rotate-[-2deg] bg-[#ff3e3e] px-4 py-1 text-sm font-black italic text-white shadow-[4px_4px_0px_0px_#000];
+}
+
+.heroTitle {
+  @apply mb-6 text-6xl font-black uppercase italic leading-[0.85] tracking-tighter md:text-9xl;
+}
+
+/* 🛒 Floating Cart Section */
+.cartWidget {
+  @apply sticky top-24 z-40 mx-auto mt-[-50px] max-w-sm border-4 border-slate-900 bg-white p-6 shadow-[10px_10px_0px_0px_#ff3e3e];
+}
+
+.priceTag {
+  @apply mb-4 flex items-end gap-3;
+}
+
+.currentPrice {
+  @apply text-5xl font-black leading-none text-[#ff3e3e];
+}
+
+.oldPrice {
+  @apply text-xl font-bold text-slate-400 line-through;
+}
+
+/* 🚀 Feature List */
+.featureList {
+  @apply mx-auto mt-20 grid max-w-4xl grid-cols-1 gap-4 px-4 md:grid-cols-2;
+}
+
+.featureItem {
+  @apply flex items-center gap-3 border-2 border-slate-900 bg-white p-4 font-bold italic transition-all hover:bg-slate-900 hover:text-white;
+}
+
+.checkoutBtn {
+  @apply mt-6 w-full bg-slate-900 py-5 text-2xl font-black uppercase italic text-white shadow-[6px_6px_0px_0px_#ff3e3e] transition-all active:translate-x-1 active:translate-y-1 active:shadow-none;
+}

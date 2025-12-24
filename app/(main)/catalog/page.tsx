@@ -15,8 +15,14 @@ export default function CatalogPage() {
     <main className="relative min-h-screen overflow-hidden bg-white selection:bg-blue-600 selection:text-white">
       {/* ─── 🛠️ BACKGROUND ARCHITECTURE ─── */}
       {/* ใช้ลายเส้นตารางแบบ Blueprint จางๆ */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] opacity-60 [background-size:40px_40px]" />
-      <div className="absolute left-0 right-0 top-0 -z-10 h-96 bg-gradient-to-b from-slate-50 to-transparent" />
+      <div
+        className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] opacity-60 [background-size:40px_40px]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute left-0 right-0 top-0 -z-10 h-96 bg-gradient-to-b from-slate-50 to-transparent"
+        aria-hidden="true"
+      />
 
       <section className="mx-auto max-w-7xl px-6 py-24 md:py-40">
         {/* ─── 1. INDUSTRIAL HEADER ─── */}
@@ -47,6 +53,7 @@ export default function CatalogPage() {
               </p>
             </div>
             <div className="hidden items-center justify-end md:col-span-4 md:flex">
+              {/* Spinning Badge Decor */}
               <div className="h-24 w-24 animate-[spin_10s_linear_infinite] rounded-full border-4 border-dashed border-slate-200 p-2">
                 <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-50 text-[10px] font-black uppercase tracking-tighter text-slate-300">
                   AEM.DEV
@@ -57,7 +64,6 @@ export default function CatalogPage() {
         </header>
 
         {/* ─── 2. CATALOG GRID ─── */}
-        {/* หุ้มด้วย div ที่มี padding เพิ่มเติมเพื่อป้องกันเงาของการ์ดโดนตัด */}
         <div className="relative pb-20">
           <CatalogProjectsGrid
             projects={catalogProjects}
@@ -67,14 +73,14 @@ export default function CatalogPage() {
         </div>
 
         {/* ─── 3. BOTTOM DECOR ─── */}
-        <div className="mt-20 flex items-center gap-4 border-t-2 border-slate-100 pt-10">
+        <footer className="mt-20 flex items-center gap-4 border-t-2 border-slate-100 pt-10">
           <div className="flex h-10 w-10 items-center justify-center bg-slate-900 text-white">
             <Sparkles size={18} />
           </div>
           <p className="text-xs font-black uppercase tracking-widest text-slate-400">
             More projects are being added to the database.
           </p>
-        </div>
+        </footer>
       </section>
     </main>
   )

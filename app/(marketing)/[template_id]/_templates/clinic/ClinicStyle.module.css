@@ -1,0 +1,47 @@
+.wrapper {
+  @apply min-h-screen w-full bg-white text-slate-900;
+}
+
+.hero {
+  @apply relative flex flex-col items-center overflow-hidden border-b-8 border-blue-600 bg-slate-50 px-8 py-32 text-center;
+}
+
+.heroTag {
+  @apply mb-6 inline-block bg-blue-600 px-4 py-1 font-mono text-xs font-black uppercase text-white;
+}
+
+.heroTitle {
+  @apply mb-8 text-5xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-8xl;
+}
+
+.heroSubtitle {
+  @apply mb-10 max-w-2xl text-lg font-bold text-slate-500 md:text-xl;
+}
+
+.statsGrid {
+  @apply relative z-20 mx-auto -mt-12 grid w-full max-w-7xl grid-cols-1 gap-0 border-y-4 border-slate-900 bg-white md:grid-cols-3;
+}
+
+.statItem {
+  @apply border-r-0 border-slate-900 p-10 text-center transition-colors last:border-r-0 hover:bg-blue-50 md:border-r-4;
+}
+
+.statValue {
+  @apply mb-2 text-5xl font-black italic text-blue-600;
+}
+
+.statLabel {
+  @apply font-mono text-xs font-black uppercase tracking-[0.2em] text-slate-400;
+}
+
+.serviceSection {
+  @apply mx-auto max-w-7xl px-8 py-24;
+}
+
+.serviceGrid {
+  @apply grid grid-cols-1 gap-8 md:grid-cols-3;
+}
+
+.serviceCard {
+  @apply border-4 border-slate-900 p-8 shadow-[8px_8px_0px_0px_#2563eb] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+}

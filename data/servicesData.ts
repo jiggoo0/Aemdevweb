@@ -1,136 +1,109 @@
 /** @format */
+// ----------------------------------------------------
+// 🏗️ JP-VISOUL: Services Data Hub (Production Version)
+// Role: รวมศูนย์ข้อมูลบริการจากทุกลูกค้า (Sync กับ Marketing Config)
+// ----------------------------------------------------
 
-import { ServiceCategory } from "@/app/landing/[template-id]/types"
-import { ServiceIconKey } from "@/components/iconMap"
-import {
-  Rocket,
-  Stethoscope,
-  HardHat,
-  Building2,
-  Coffee,
-  Truck,
-  Briefcase,
-  Store,
-  Cpu,
-  LucideIcon,
-} from "lucide-react"
+import { clinicConfig } from "@/app/(marketing)/[template_id]/_templates/clinic/config"
+import { cafeConfig } from "@/app/(marketing)/[template_id]/_templates/cafe/config"
+import { realEstateConfig } from "@/app/(marketing)/[template_id]/_templates/realestate/config"
+import { constructionConfig } from "@/app/(marketing)/[template_id]/_templates/construction/config"
+import { starterConfig } from "@/app/(marketing)/[template_id]/_templates/starter/config"
 
 export interface ServiceItem {
   id: string
   slug: string
   title: string
   description: string
-  icon: ServiceIconKey
-  features: string[]
-  targetGroup: string
-  priceTag: string
-  isHot?: boolean
-  categoryRef: ServiceCategory
-}
-
-/**
- * 🛠️ ฟังก์ชันสำหรับดึง Icon ตาม Key
- * Mapping ให้ครบตาม ServiceIconKey เพื่อรองรับ Type Safety 100%
- */
-export const getServiceIcon = (iconKey: ServiceIconKey): LucideIcon => {
-  const iconMap: Record<ServiceIconKey, LucideIcon> = {
-    starter: Rocket,
-    clinic: Stethoscope,
-    construction: HardHat,
-    realEstate: Building2,
-    cafe: Coffee,
-    logistics: Truck,
-    corporate: Briefcase,
-    retail: Store,
-    custom: Cpu,
-  }
-
-  return iconMap[iconKey] || Rocket
+  detail: string
+  price: string
+  promoPrice?: string
+  image: string
+  category: "MEDICAL" | "CAFE" | "PROPERTY" | "CONSTRUCTION" | "STARTER"
+  status: "READY" | "PLANNING"
 }
 
 export const servicesData: ServiceItem[] = [
   {
-    id: "service-starter",
-    slug: "starter-landing-01",
-    title: "Aemdev Starter Kit",
+    id: "1",
+    slug: "clinic",
+    title: clinicConfig?.name ?? "Wellness & Clinic",
     description:
-      "หน้า Landing Page สำหรับธุรกิจเริ่มต้น ออกแบบมาเพื่อ Conversion สูงสุด",
-    icon: "starter",
-    targetGroup: "ธุรกิจเริ่มต้น / SME / Online Seller",
-    priceTag: "โปรโมชั่น 3,900.-",
-    isHot: true,
-    categoryRef: "starter",
-    features: [
-      "Industrial Sharp Design รองรับมือถือ 100%",
-      "Next.js Architecture โหลดเร็วระดับ Enterprise",
-      "Tracking (GA4 / Pixel) พร้อมใช้งาน",
-      "ฟรี Domain + Hosting + SSL 1 ปี",
-    ],
+      clinicConfig?.content?.heroSubtitle ??
+      "ระบบจัดการคลินิกและ Wellness Center ครบวงจร",
+    detail:
+      "บริการออกแบบระบบจัดการคลินิกและ Wellness Center ครบวงจร พร้อมหน้า Landing Page สำหรับนัดหมายแพทย์ มาตรฐานความปลอดภัยข้อมูลระดับสูง",
+    price: "15,000 - 45,000 THB",
+    image: "/images/projects/clinic-bg.jpg", // ใช้ static path เพื่อความชัวร์ หรือใช้ config?.metadata?.ogImage
+    category: "MEDICAL",
+    status: "READY",
   },
   {
-    id: "service-clinic",
-    slug: "clinic-solution-01",
-    title: "Care Clinic Solution",
-    description: "เว็บไซต์คลินิกที่ออกแบบมาเพื่อสร้าง Trust และเพิ่มการจองคิว",
-    icon: "clinic",
-    targetGroup: "คลินิก / สถานพยาบาล / ความงาม",
-    priceTag: "เริ่มต้น 7,900.-",
-    categoryRef: "clinic",
-    features: [
-      "Before–After รีวิวแบบ High Impact",
-      "ระบบจองคิว เชื่อม Line OA",
-      "โครงสร้างรองรับ PDPA",
-      "SEO Ready สำหรับธุรกิจพื้นที่",
-    ],
-  },
-  {
-    id: "service-construction",
-    slug: "construction-industrial-01",
-    title: "Steel & Construction Hub",
+    id: "2",
+    slug: "cafe",
+    title: cafeConfig?.name ?? "Cafe & Matrix Menu",
     description:
-      "เว็บไซต์สำหรับบริษัทรับเหมาและอุตสาหกรรม โชว์ผลงานอย่างเป็นระบบ",
-    icon: "construction",
-    targetGroup: "บริษัทรับเหมา / โรงงาน / วิศวกรรม",
-    priceTag: "เริ่มต้น 4,900.-",
-    categoryRef: "construction",
-    features: [
-      "Project Gallery แยกหมวดหมู่",
-      "Workflow การทำงานแบบ Engineering",
-      "ดาวน์โหลด Company Profile",
-      "Blueprint / Industrial Design",
-    ],
+      cafeConfig?.content?.heroSubtitle ??
+      "เทมเพลตร้านกาแฟระดับพรีเมียม พร้อมระบบเมนูสินค้า",
+    detail:
+      "เทมเพลตร้านกาแฟระดับพรีเมียม แรงบันดาลใจจาก Starbucks พร้อมระบบเมนูสินค้าแบบตาราง (Matrix) และหน้าระบบสมาชิกสะสมแต้ม",
+    price: "8,500 - 18,000 THB",
+    image: "/images/projects/cafe-bg.jpg",
+    category: "CAFE",
+    status: "READY",
   },
   {
-    id: "service-real-estate",
-    slug: "real-estate-premium-01",
-    title: "The Prime Real Estate",
-    description: "นำเสนอโครงการอสังหาริมทรัพย์ด้วยภาพขนาดใหญ่ และข้อมูลทำเล",
-    icon: "realEstate",
-    targetGroup: "โครงการอสังหาฯ / เอเจนซี่ / นายหน้า",
-    priceTag: "เริ่มต้น 5,900.-",
-    categoryRef: "real-estate",
-    features: [
-      "Location Insight วิเคราะห์ทำเล",
-      "Lead Capture Form",
-      "Cinematic Gallery",
-      "รองรับ 2 ภาษา",
-    ],
-  },
-  {
-    id: "service-cafe",
-    slug: "aem-cafe-industrial",
-    title: "Urban Cafe & Artisan",
+    id: "3",
+    slug: "realestate",
+    title: realEstateConfig?.name ?? "Luxury Real Estate",
     description:
-      "หน้าเว็บสำหรับร้านอาหารและคาเฟ่ โชว์บรรยากาศและเมนูอย่างมืออาชีพ",
-    icon: "cafe",
-    targetGroup: "คาเฟ่ / ร้านอาหาร / Craft Bar",
-    priceTag: "เริ่มต้น 3,900.-",
-    categoryRef: "cafe",
-    features: [
-      "Digital Menu อัปเดตง่าย",
-      "Google Maps นำทาง",
-      "ปุ่มจองโต๊ะ / ติดต่อ",
-      "Minimal Industrial Design",
-    ],
+      realEstateConfig?.content?.heroSubtitle ??
+      "Landing Page สำหรับโครงการอสังหาริมทรัพย์และ Agency",
+    detail:
+      "Landing Page สำหรับโครงการอสังหาริมทรัพย์และ Agency จัดหาที่พัก เน้นความ Luxury โชว์ภาพโครงการแบบ High-Resolution เพื่อปิดการขาย",
+    price: "25,000 - 60,000 THB",
+    image: "/images/projects/real-estate-bg.jpg",
+    category: "PROPERTY",
+    status: "READY",
+  },
+  {
+    id: "4",
+    slug: "construction",
+    title: constructionConfig?.name ?? "Construction & Engineering",
+    // 🛡️ แก้ไขจุดที่เป็น Error: ดึงจาก content.heroSubtitle แทน metadata.description
+    description:
+      constructionConfig?.content?.heroSubtitle ??
+      "ระบบโชว์พอร์ตโฟลิโอก่อสร้างและวิศวกรรมโยธา",
+    detail:
+      "ระบบโชว์พอร์ตโฟลิโอก่อสร้างและวิศวกรรมโยธา สำหรับหน่วยงานรัฐและเอกชน มาตรฐาน Business Professional พร้อมตาราง Track Record",
+    price: "12,000 - 35,000 THB",
+    image: "/images/projects/construction-bg.jpg",
+    category: "CONSTRUCTION",
+    status: "READY",
+  },
+  {
+    id: "5",
+    slug: "starter",
+    title: starterConfig?.name ?? "SME Starter Pack",
+    description:
+      starterConfig?.content?.heroSubtitle ??
+      "แพ็คเกจเริ่มต้นสำหรับ SME ที่ต้องการความไวสูงสุด",
+    detail:
+      "แพ็คเกจเริ่มต้นสำหรับ SME ที่ต้องการความไวสูงสุด มาพร้อมระบบ Loading Speed Optimization และหน้า Conversion Landing Page",
+    price: "7,500 THB",
+    promoPrice: "3,900 THB", // ราคาโปรโมชั่น 3,900 ตามสั่ง
+    image: "/images/projects/starter-bg.jpg",
+    category: "STARTER",
+    status: "READY",
   },
 ]
+
+/**
+ * 🔍 Helper: ดึงข้อมูลบริการด้วย Slug
+ */
+export const getServiceBySlug = (slug: string): ServiceItem | undefined => {
+  if (!slug) return undefined
+  return servicesData.find(
+    (service) => service.slug.toLowerCase() === slug.toLowerCase()
+  )
+}

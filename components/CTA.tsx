@@ -13,7 +13,6 @@ import {
   MessageSquare,
   PenTool,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 interface CTAProps {
   title?: string
@@ -32,11 +31,17 @@ export default function CTA({
   return (
     <div className="bg-white px-6 py-24 md:py-32">
       <section className="relative mx-auto max-w-7xl overflow-hidden border-4 border-brand-navy bg-brand-navy px-8 py-20 shadow-enterprise-lg md:px-20 md:py-28">
-        <div className="absolute inset-0 z-0 bg-industrial-grid opacity-20" />
-        <div className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-brand-blue/20 blur-[120px]" />
+        <div
+          className="absolute inset-0 z-0 bg-industrial-grid opacity-20"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-brand-blue/20 blur-[120px]"
+          aria-hidden="true"
+        />
 
         <div className="relative z-10 flex flex-col items-center space-y-14 text-center">
-          {/* ✅ CUSTOM DESIGN NOTICE BLOCK (ส่วนที่เพิ่มใหม่) */}
+          {/* ✅ CUSTOM DESIGN NOTICE BLOCK */}
           {customNotice && (
             <div className="group relative w-full max-w-3xl border-2 border-dashed border-white/20 bg-white/5 p-8 transition-colors hover:border-brand-blue/50">
               <div className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 bg-brand-navy px-4">
@@ -68,14 +73,14 @@ export default function CTA({
             </span>
           </div>
 
-          <div className="max-w-4xl space-y-8">
+          <header className="max-w-4xl space-y-8">
             <h2 className="text-4xl font-black uppercase italic leading-[0.95] tracking-tighter text-white md:text-7xl">
               {title}
             </h2>
             <p className="mx-auto max-w-2xl border-l-2 border-brand-blue/30 px-6 text-lg font-bold leading-relaxed text-slate-400 md:text-xl">
               {subtitle}
             </p>
-          </div>
+          </header>
 
           <div className="flex w-full flex-col items-center justify-center gap-6 pt-6 sm:flex-row">
             <Button
@@ -105,13 +110,13 @@ export default function CTA({
             </Button>
           </div>
 
-          <div className="flex w-full max-w-2xl flex-col items-center gap-8 border-t-2 border-white/5 pt-12">
+          <footer className="flex w-full max-w-2xl flex-col items-center gap-8 border-t-2 border-white/5 pt-12">
             <div className="grid w-full grid-cols-1 gap-8 md:grid-cols-2">
               <div className="flex items-center justify-center gap-4 md:justify-end">
                 <div className="flex h-10 w-10 items-center justify-center border-2 border-brand-blue bg-brand-blue/10">
                   <MessageSquare size={18} className="text-brand-blue" />
                 </div>
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col items-start text-left">
                   <span className="text-[9px] font-black uppercase italic tracking-widest text-slate-500">
                     LINE Official
                   </span>
@@ -125,7 +130,7 @@ export default function CTA({
                 <div className="flex h-10 w-10 items-center justify-center border-2 border-emerald-500/50 bg-emerald-500/10">
                   <ShieldCheck size={18} className="text-emerald-500" />
                 </div>
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col items-start text-left">
                   <span className="text-[9px] font-black uppercase italic tracking-widest text-slate-500">
                     Integrity Check
                   </span>
@@ -139,7 +144,7 @@ export default function CTA({
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
               Technical Excellence & Genuine Support
             </p>
-          </div>
+          </footer>
         </div>
       </section>
     </div>

@@ -1,3 +1,4 @@
+/** @format */
 {
   "compilerOptions": {
     "target": "ES2017",
@@ -17,11 +18,13 @@
     "plugins": [{ "name": "next" }],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@/components/*": ["./components/*"],
-      "@/data/*": ["./data/*"],
-      "@/app/*": ["./app/*"],
-      "@/types/*": ["./types/*"]
+      "@/config/*": ["config/*"],
+      "@/components/*": ["components/*"],
+      "@/data/*": ["data/*"],
+      "@/app/*": ["app/*"],
+      "@/types/*": ["types/*"],
+      "@/lib/*": ["lib/*"],
+      "@/*": ["*"]
     }
   },
   "include": [
@@ -29,8 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "data/**/*.ts",
-    "types/**/*.ts"
+    "config/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

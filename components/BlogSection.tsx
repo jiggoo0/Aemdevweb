@@ -7,7 +7,6 @@ import Image from "next/image"
 import { BlogPost } from "@/types"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, BookOpen, Calendar, Clock, Sparkles } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 interface BlogSectionProps {
   posts?: BlogPost[]
@@ -20,7 +19,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
   return (
     <Link href={blogLink} className="group block h-full">
       {/* ─── CARD: ENTERPRISE BRUTALISM ─── */}
-      <div className="relative flex h-full flex-col border-2 border-brand-navy bg-white transition-all duration-300 hover:shadow-enterprise-md group-hover:-translate-x-1 group-hover:-translate-y-1">
+      <article className="relative flex h-full flex-col border-2 border-brand-navy bg-white transition-all duration-300 hover:shadow-enterprise-md group-hover:-translate-x-1 group-hover:-translate-y-1">
         {/* Thumbnail with Grayscale effect */}
         <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-brand-navy bg-slate-100">
           <Image
@@ -43,9 +42,12 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
           <div className="flex items-center gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400">
             <div className="flex items-center gap-1.5">
               <Calendar size={12} className="text-brand-blue" />
-              <span>{post.date}</span>
+              <time dateTime={post.date}>{post.date}</time>
             </div>
-            <div className="h-1 w-1 rounded-full bg-slate-300" />
+            <div
+              className="h-1 w-1 rounded-full bg-slate-300"
+              aria-hidden="true"
+            />
             <div className="flex items-center gap-1.5">
               <Clock size={12} className="text-brand-blue" />
               <span>{post.readTime || "5 MIN READ"}</span>
@@ -72,7 +74,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </Link>
   )
 }
@@ -87,12 +89,15 @@ export default function BlogSection({ posts = [] }: BlogSectionProps) {
       className="relative scroll-mt-20 overflow-hidden bg-white py-24 md:py-32"
     >
       {/* Industrial Grid Background */}
-      <div className="absolute inset-0 -z-10 bg-industrial-grid opacity-40" />
+      <div
+        className="absolute inset-0 -z-10 bg-industrial-grid opacity-40"
+        aria-hidden="true"
+      />
 
       <div className="mx-auto max-w-7xl px-6">
         {/* Header Area */}
         <div className="mb-20 flex flex-col items-start justify-between gap-10 border-b-2 border-slate-200 pb-12 lg:flex-row lg:items-end">
-          <div className="max-w-3xl space-y-8">
+          <header className="max-w-3xl space-y-8">
             <div className="inline-flex items-center gap-3 border-l-4 border-brand-blue bg-white px-5 py-2 shadow-enterprise-sm">
               <Sparkles size={14} className="text-brand-blue" />
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">
@@ -110,7 +115,7 @@ export default function BlogSection({ posts = [] }: BlogSectionProps) {
               <br className="hidden md:block" />
               เน้นภาษาที่เข้าใจง่าย และนำไปใช้จริงกับธุรกิจของคุณได้ทันทีครับ
             </p>
-          </div>
+          </header>
 
           <Button
             variant="outline"
@@ -130,7 +135,11 @@ export default function BlogSection({ posts = [] }: BlogSectionProps) {
           </div>
         ) : (
           <div className="border-4 border-dashed border-slate-200 bg-slate-50 py-32 text-center">
-            <BookOpen size={40} className="mx-auto mb-6 text-slate-300" />
+            <BookOpen
+              size={40}
+              className="mx-auto mb-6 text-slate-300"
+              aria-hidden="true"
+            />
             <h3 className="text-xl font-black uppercase tracking-[0.1em] text-brand-navy">
               Data Synchronizing...
             </h3>

@@ -8,9 +8,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { ArrowRight, Sparkles, HelpCircle, MessageSquare } from "lucide-react"
+import { ArrowRight, HelpCircle, MessageSquare } from "lucide-react"
 
-// ค่า Default ในกรณีที่ไม่มีการส่ง props มาจาก Template
+// ✅ 1. นิยามตัวแปร Default เพื่อป้องกัน Error no-undef
 const defaultFaqs = [
   {
     question: "ใช้เวลาทำนานไหม กว่าจะได้เว็บไซต์?",
@@ -20,37 +20,41 @@ const defaultFaqs = [
   {
     question: "มีค่าบริการรายปีเพิ่มเติมไหม?",
     answer:
-      "ปีแรกผมดูแลค่า Hosting และ SSL (กุญแจล็อกความปลอดภัย) ให้ฟรีครับ ปีถัดไปจะมีค่าต่ออายุโดเมนและพื้นที่เว็บ เริ่มต้นประมาณ 1,500 - 2,500 บาทต่อปี ตามขนาดเว็บครับ ไม่มีค่าบริการแอบแฝงแน่นอน",
+      "ปีแรกผมดูแลค่า Hosting และ SSL ให้ฟรีครับ ปีถัดไปจะมีค่าต่ออายุโดเมนและพื้นที่เว็บ เริ่มต้นประมาณ 1,500 - 2,500 บาทต่อปี ตามขนาดเว็บครับ ไม่มีค่าบริการแอบแฝงแน่นอน",
   },
   {
     question: "ทำแล้วจะติดหน้าแรก Google (SEO) หรือเปล่า?",
     answer:
-      "ผมวางโครงสร้างเว็บตามมาตรฐาน SEO 100% ครับ ทั้งความเร็วและการจัดวาง Tag ต่างๆ ซึ่งจะช่วยให้ Google เข้ามาเก็บข้อมูลได้ง่ายขึ้น ส่วนการจะติดอันดับ 1 เลยนั้นต้องอาศัยการลงเนื้อหาอย่างต่อเนื่องด้วยครับ",
+      "ผมวางโครงสร้างเว็บตามมาตรฐาน SEO 100% ครับ ทั้งความเร็วและการจัดวาง Tag ต่างๆ ซึ่งจะช่วยให้ Google เข้ามาเก็บข้อมูลได้ง่ายขึ้น",
   },
   {
     question: "ถ้าต้องการแก้ไขข้อมูลเองในอนาคต ทำได้ไหม?",
     answer:
-      "ทำได้แน่นอนครับ! ผมใช้ระบบที่จัดการง่าย (WordPress หรือ Next.js CMS) ลูกค้าสามารถเปลี่ยนรูป แก้ไขข้อความเองได้เลย และผมจะมีคลิปวิดีโอสอนใช้งานเบื้องต้นส่งให้ด้วยครับ ไม่ต้องกลัวงง",
+      "ทำได้แน่นอนครับ! ผมมีคลิปวิดีโอสอนใช้งานเบื้องต้นส่งให้ด้วยครับ ไม่ต้องกลัวงง",
   },
 ]
 
+// ✅ 2. นิยาม Interface สำหรับ Props
 interface FAQSectionProps {
-  config?: any // รองรับ TemplateData
+  config?: any
 }
 
 const FAQSection = ({ config }: FAQSectionProps) => {
   const [hasMounted, setHasMounted] = useState(false)
 
-  // ตรวจสอบว่ามีข้อมูล FAQ จาก config หรือไม่ ถ้าไม่มีให้ใช้ค่า default
+  // ✅ 3. ใช้ requestAnimationFrame เพื่อเลี่ยง Cascading Render (React 19 Safe)
+  useEffect(() => {
+    const frameId = requestAnimationFrame(() => {
+      setHasMounted(true)
+    })
+    return () => cancelAnimationFrame(frameId)
+  }, [])
+
   const displayFaqs = config?.faqs
     ? config.faqs.map((f: any) => ({ question: f.q_th, answer: f.a_th }))
     : defaultFaqs
 
   const primaryColor = config?.primaryColor || "#2563eb"
-
-  useEffect(() => {
-    setHasMounted(true)
-  }, [])
 
   return (
     <section
@@ -117,10 +121,6 @@ const FAQSection = ({ config }: FAQSectionProps) => {
                     key={index}
                     value={`item-${index}`}
                     className="border-4 border-slate-900 bg-white px-6 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] data-[state=open]:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-                    style={{
-                      boxShadow: `0px 0px 0px 0px ${primaryColor}`,
-                      // เพิ่มเงาสีตามแบรนด์เมื่อถูกเปิด
-                    }}
                   >
                     <AccordionTrigger className="group py-8 text-left text-xl font-black uppercase tracking-tight text-slate-900 hover:no-underline data-[state=open]:text-blue-600">
                       <div className="flex items-start gap-6">
@@ -140,6 +140,7 @@ const FAQSection = ({ config }: FAQSectionProps) => {
                 ))}
               </Accordion>
             ) : (
+              // Skeleton UI ระหว่างรอ Mount
               <div className="space-y-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div

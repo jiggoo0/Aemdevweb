@@ -3,6 +3,33 @@
 ```
 app
   layout.tsx
+  (marketing)
+    [template_id]
+      _templates
+        cafe
+          CafeTemplate.tsx
+          CafeStyle.module.css
+          config.ts
+        realestate
+          RealEstateTemplate.tsx
+          RealEstateStyle.module.css
+          config.ts
+        construction
+          ConstructionTemplate.tsx
+          ConstructionStyle.module.css
+          config.ts
+        starter
+          StarterTemplate.tsx
+          StarterStyle.module.css
+          config.ts
+        clinic
+          ClinicTemplate.tsx
+          ClinicStyle.module.css
+          config.ts
+      page.tsx
+      layout.tsx
+      _config
+        registry.ts
   globals.css
   api
     contact
@@ -25,86 +52,16 @@ app
       ServicesPageClient.tsx
     page.tsx
     layout.tsx
-  landing
-    [template-id]
-      page.tsx
-      variants
-        starter
-          components
-            ConversionForm.tsx
-            FeatureHighlights.tsx
-            HeroStarter.tsx
-            SocialProof.tsx
-            StarterFAQ.tsx
-            TrustBadges.tsx
-          StarterVariant.tsx
-          template.tsx
-        clinic
-          components
-            BeforeAfter.tsx
-            DoctorProfile.tsx
-            FAQSection.tsx
-            SocialProof.tsx
-          ClinicVariant.tsx
-          template.tsx
-        real-estate
-          components
-            FAQSection.tsx
-            LocationInsight.tsx
-            RoomTypeCards.tsx
-            SocialProof.tsx
-          RealEstateVariant.tsx
-          template.tsx
-        cafe
-          components
-            CafeGallery.tsx
-            FAQSection.tsx
-            MenuHighlight.tsx
-            OpeningHours.tsx
-            SocialProof.tsx
-          CafeVariant.tsx
-          template.tsx
-        construction
-          components
-            FAQSection.tsx
-            ProjectGallery.tsx
-            SocialProof.tsx
-            StepWork.tsx
-          ConstructionVariant.tsx
-          template.tsx
-      shared
-        BrandBadge.tsx
-        ContactForm.tsx
-        FloatingAction.tsx
-        GoogleMap.tsx
-        PricingSection.tsx
-        PromoBanner.tsx
-        Section.tsx
-        ServiceInclusionSection.tsx
-        ServicePolicy.tsx
-        Testimonials.tsx
-      registry.ts
-      mocks
-        starter.ts
-        cafe.ts
-        clinic.ts
-        construction.ts
-        real-estate.ts
-      types.ts
-      layout.tsx
-      normalize.tsx
   sitemap.ts
   robots.txt
   favicon.ico
 components
   Header.tsx
   Footer.tsx
-  Navbar.tsx
   catalog
     CatalogProjectCard.tsx
     CatalogProjectsGrid.tsx
   Services.tsx
-  Seo.tsx
   Hero.tsx
   About.tsx
   shared
@@ -125,13 +82,11 @@ components
     select.tsx
     textarea.tsx
     toaster.tsx
+    form.tsx
   iconMap.ts
-  BlogCard.tsx
   ContactInfo.tsx
   ContactForm.tsx
   CTA.tsx
-  Banner.tsx
-  PriceTable.tsx
   SocialProof.tsx
   FAQSection.tsx
   BlogSection.tsx

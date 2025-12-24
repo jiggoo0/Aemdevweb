@@ -6,7 +6,6 @@ import Link from "next/link"
 import { blogData } from "@/data/blogData"
 import { siteConfig } from "@/config/siteConfig"
 import { Calendar, Clock, Sparkles, MoveRight, BookOpen } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: `คลังความรู้ SME และเทคนิคการทำเว็บไซต์ | ${siteConfig.name}`,
@@ -24,10 +23,7 @@ const BlogPage = () => {
     <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
       {/* ─── 1. HEADER SECTION: INDUSTRIAL INSIGHTS ─── */}
       <section className="relative overflow-hidden border-b-[6px] border-slate-900 bg-slate-50 py-24 md:py-40">
-        {/* Blueprint Grid Background */}
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60" />
-
-        {/* Glow Element */}
         <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]" />
 
         <div className="container mx-auto px-6">
@@ -76,7 +72,6 @@ const BlogPage = () => {
                     key={post.id}
                     className="group flex flex-col bg-white transition-all duration-500 hover:z-10 hover:bg-slate-50"
                   >
-                    {/* Image Section: Sharp Frame */}
                     <Link
                       href={`/blog/${post.slug}`}
                       className="relative block aspect-[16/10] overflow-hidden border-b-2 border-slate-900 bg-slate-100"
@@ -96,7 +91,6 @@ const BlogPage = () => {
                       </div>
                     </Link>
 
-                    {/* Content Section */}
                     <div className="flex flex-1 flex-col p-10 md:p-12">
                       <div className="mb-8 flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                         <div className="flex items-center gap-2 transition-colors group-hover:text-blue-600">
@@ -117,7 +111,6 @@ const BlogPage = () => {
                         {post.description}
                       </p>
 
-                      {/* Author & Footer: Engineering Badge Style */}
                       <div className="mt-auto flex items-center justify-between border-t-2 border-slate-100 pt-10">
                         <div className="flex items-center gap-4">
                           <div className="relative h-14 w-14 overflow-hidden border-2 border-slate-900 bg-slate-50 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] transition-transform group-hover:rotate-6">
@@ -164,7 +157,6 @@ const BlogPage = () => {
       {/* ─── 3. CTA: THE PARTNERSHIP CONVERSION ─── */}
       <section className="container mx-auto px-6 pb-32 md:pb-48">
         <div className="relative overflow-hidden border-[8px] border-slate-900 bg-slate-900 p-12 shadow-2xl md:p-32">
-          {/* Subtle Grid for CTA */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20" />
 
           <div className="relative z-10 flex flex-col items-center space-y-12 text-center">
@@ -187,7 +179,7 @@ const BlogPage = () => {
                 className="flex h-24 items-center justify-center bg-blue-600 px-16 text-sm font-black uppercase italic tracking-[0.3em] text-white shadow-[10px_10px_0px_0px_rgba(255,255,255,0.1)] transition-all hover:-translate-y-2 hover:bg-white hover:text-slate-900 hover:shadow-none active:scale-95"
               >
                 Add Friend on LINE
-                <MoveRight className="ml-5 transition-transform group-hover:translate-x-3" />
+                <MoveRight className="ml-5 transition-transform" />
               </a>
             </div>
           </div>

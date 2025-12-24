@@ -7,12 +7,15 @@ import dynamic from "next/dynamic"
 import { ArrowRight } from "lucide-react"
 
 import { blogData } from "@/data/blogData"
+import { servicesData } from "@/data/servicesData" // ✅ นำเข้าข้อมูล Services
 import Hero from "@/components/Hero"
 import SocialProof from "@/components/SocialProof"
 
 // --- 🛠️ Optimized Dynamic Imports ---
-// ถอด PriceTable ออก และเรียกใช้ Services แทน
-const Services = dynamic(() => import("@/components/Services"), { ssr: true })
+// ✅ แก้ไข: นำเข้า ServiceCard แยกต่างหาก หรือใช้ตัวหลักที่จัดการ Loop ข้อมูลเอง
+const ServiceCard = dynamic(() => import("@/components/Services"), {
+  ssr: true,
+})
 const BlogSection = dynamic(() => import("@/components/BlogSection"), {
   ssr: true,
 })
@@ -23,7 +26,7 @@ const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
 
 export default function HomePage() {
   /**
-   * ✅ Normalization Logic (เหมือนเดิมเพื่อความเสถียรของ Blog)
+   * ✅ Normalization Logic สำหรับ Blog
    */
   const featuredPosts = useMemo(() => {
     return blogData.slice(0, 4).map((post: any) => {
@@ -69,7 +72,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─── 3. OUR SERVICES (แทนที่ PriceTable เดิม) ─── */}
+      {/* ─── 3. OUR SERVICES ─── */}
       <section
         id="services-showcase"
         className="border-t-4 border-slate-900 bg-slate-50 py-24 md:py-32"
@@ -86,9 +89,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 🟢 Render Services Component */}
-          <div className="relative">
-            <Services />
+          {/* 🟢 แก้ไขจุดตาย: ทำการ Loop ข้อมูล Services และส่ง Props ให้ ServiceCard */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {servicesData.map((item) => (
+              <ServiceCard key={item.id} service={item as any} />
+            ))}
           </div>
         </div>
       </section>

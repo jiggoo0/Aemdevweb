@@ -3,7 +3,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, TrendingUp, Activity } from "lucide-react"
+import { ArrowRight, Activity } from "lucide-react"
 
 import { Project } from "@/data/types"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -19,19 +19,25 @@ export function CatalogProjectCard({
   project,
   showCTA = true,
 }: CatalogProjectCardProps) {
+  /**
+   * 💡 NOTE: ข้อมูล project.title และ project.description
+   * ได้ถูกอัปเดตให้ตรงกับไฟล์ Config มาจาก catalogProjects.ts เรียบร้อยแล้ว
+   */
+
   return (
     <Card className="group relative overflow-hidden rounded-none border-4 border-slate-900 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(37,99,235,1)]">
       {/* ─── 1. THUMBNAIL AREA ─── */}
       <div className="relative aspect-[16/10] overflow-hidden border-b-4 border-slate-900 bg-slate-100">
         <Image
           src={project.image}
-          alt={project.title}
+          alt={`Project Preview: ${project.title}`}
           fill
           className="object-cover grayscale-[30%] transition-transform duration-700 group-hover:scale-110 group-hover:grayscale-0"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={false}
         />
 
-        {/* Label: Industrial Tag Style */}
+        {/* Industrial Category Tag */}
         <Badge className="absolute left-0 top-6 rounded-none border-y-2 border-r-2 border-slate-900 bg-white px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
           {project.category}
         </Badge>
@@ -39,17 +45,19 @@ export function CatalogProjectCard({
 
       {/* ─── 2. CONTENT AREA ─── */}
       <CardContent className="space-y-6 p-8">
-        <div className="space-y-3">
+        <header className="space-y-3">
+          {/* ชื่อโปรเจกต์ (Sync กับ Config อัตโนมัติ) */}
           <h3 className="text-2xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-3xl">
             {project.title}
           </h3>
+          {/* คำอธิบาย (Sync กับ Config อัตโนมัติ) */}
           <p className="line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
             {project.description}
           </p>
-        </div>
+        </header>
 
-        {/* Tags: Small blueprints style */}
-        <div className="flex flex-wrap gap-2">
+        {/* Tags: Blueprint labels style */}
+        <div className="flex flex-wrap gap-2" aria-label="Project Tags">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -60,14 +68,21 @@ export function CatalogProjectCard({
           ))}
         </div>
 
-        {/* ─── 3. STATS (Enterprise Performance) ─── */}
+        {/* ─── 3. STATS (Sync กับ Performance Data) ─── */}
         {project.stats && (
-          <div className="flex items-center gap-4 border-l-4 border-blue-600 bg-blue-50/50 p-4 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+          <div
+            className="flex items-center gap-4 border-l-4 border-blue-600 bg-blue-50/50 p-4 transition-colors group-hover:bg-blue-600 group-hover:text-white"
+            role="status"
+          >
             <div className="shrink-0 bg-white p-2 text-blue-600 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
-              <Activity size={20} className="animate-pulse" />
+              <Activity
+                size={20}
+                className="animate-pulse"
+                aria-hidden="true"
+              />
             </div>
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-90">
                 {project.stats.label}
               </p>
               <p className="text-xl font-black tabular-nums tracking-tighter">
@@ -87,7 +102,10 @@ export function CatalogProjectCard({
           >
             <Link href={`/landing/${project.templateId}`}>
               Preview Architecture
-              <ArrowRight className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-3" />
+              <ArrowRight
+                className="ml-3 h-5 w-5 transition-transform group-hover:translate-x-3"
+                aria-hidden="true"
+              />
             </Link>
           </Button>
         </CardFooter>

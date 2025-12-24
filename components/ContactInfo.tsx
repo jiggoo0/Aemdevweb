@@ -13,7 +13,6 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { siteConfig } from "@/config/siteConfig"
-import { cn } from "@/lib/utils"
 
 export default function ContactInfo() {
   const contactDetails = [
@@ -50,7 +49,7 @@ export default function ContactInfo() {
   return (
     <div className="space-y-12">
       {/* 1. Header Section: Industrial Command */}
-      <div className="space-y-6">
+      <header className="space-y-6">
         <div className="inline-block border-b-4 border-brand-blue pb-2">
           <h2 className="text-4xl font-black uppercase italic tracking-tighter text-white">
             Connection <span className="text-brand-blue">Hub</span>
@@ -60,7 +59,7 @@ export default function ContactInfo() {
           ยินดีให้คำปรึกษาฟรีแบบพาร์ทเนอร์ ทักมาคุยรายละเอียดก่อนได้เลยครับ
           ผมพร้อมช่วยวางแผนระบบที่คุ้มค่าที่สุดให้ธุรกิจคุณ
         </p>
-      </div>
+      </header>
 
       {/* 2. Contact Cards Grid: Data Log Style */}
       <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/10">
@@ -105,7 +104,10 @@ export default function ContactInfo() {
 
       {/* 3. Office Location Box: Plaque Style */}
       <div className="group relative overflow-hidden border-2 border-brand-blue/30 bg-brand-blue/5 p-8">
-        <div className="absolute right-0 top-0 p-2 opacity-10">
+        <div
+          className="absolute right-0 top-0 p-2 opacity-10"
+          aria-hidden="true"
+        >
           <MapPin size={80} className="text-brand-blue" />
         </div>
 
@@ -120,7 +122,7 @@ export default function ContactInfo() {
             {siteConfig.contact.address}
           </p>
           <a
-            href={`http://googleusercontent.com/maps.google.com/4{encodeURIComponent(siteConfig.contact.address)}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.contact.address)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-brand-blue transition-all hover:gap-5"
@@ -132,13 +134,13 @@ export default function ContactInfo() {
       </div>
 
       {/* 4. Social & Verification Support */}
-      <div className="flex flex-col gap-6 pt-4">
+      <footer className="flex flex-col gap-6 pt-4">
         <div className="flex items-center gap-4">
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1 bg-white/10" aria-hidden="true" />
           <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-500">
             Secure Network
           </span>
-          <div className="h-px flex-1 bg-white/10" />
+          <div className="h-px flex-1 bg-white/10" aria-hidden="true" />
         </div>
 
         <div className="flex justify-center gap-4">
@@ -146,6 +148,7 @@ export default function ContactInfo() {
             href={siteConfig.links.facebook}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Facebook"
             className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/5 text-white shadow-enterprise-sm transition-all hover:-translate-y-1 hover:border-brand-blue hover:text-brand-blue"
           >
             <Facebook size={20} />
@@ -154,6 +157,7 @@ export default function ContactInfo() {
             href={siteConfig.links.github}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="X (formerly Twitter) / GitHub"
             className="flex h-12 w-12 items-center justify-center border border-white/10 bg-white/5 text-white shadow-enterprise-sm transition-all hover:-translate-y-1 hover:border-white hover:text-white"
           >
             <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
@@ -161,7 +165,7 @@ export default function ContactInfo() {
             </svg>
           </a>
         </div>
-      </div>
+      </footer>
     </div>
   )
 }

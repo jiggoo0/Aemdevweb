@@ -1,96 +1,88 @@
 /** @format */
-
 import { Project } from "./types"
 
+// 🛡️ นำเข้า Config เพื่อใช้เป็น Single Source of Truth
+import { clinicConfig } from "@/app/(marketing)/[template_id]/_templates/clinic/config"
+import { cafeConfig } from "@/app/(marketing)/[template_id]/_templates/cafe/config"
+import { realEstateConfig } from "@/app/(marketing)/[template_id]/_templates/realestate/config"
+import { constructionConfig } from "@/app/(marketing)/[template_id]/_templates/construction/config"
+import { starterConfig } from "@/app/(marketing)/[template_id]/_templates/starter/config"
+
 /**
- * Catalog of real projects that are tied to templates & services
- * ใช้สำหรับ:
- * - หน้า /catalog
- * - หน้า /landing/[templateSlug]
- * - Proof / Case study ที่ผูกกับ template
+ * Catalog of real projects
+ * ข้อมูลจะถูก Sync โดยตรงจากไฟล์ Config ของแต่ละเทมเพลต
  */
 export const catalogProjects: Project[] = [
   {
     id: "project-cafe-01",
-    title: "The Caffeine Hub / SMJ Coffee",
+    title: cafeConfig?.name || "The Caffeine Hub / SMJ Coffee",
     category: "cafe",
-    serviceSlug: "aem-cafe-industrial",
-    templateId: "aem-cafe-industrial",
+    serviceSlug: "cafe",
+    templateId: "cafe",
     description:
+      cafeConfig?.content?.heroSubtitle ||
       "เปลี่ยนจากเมนูกระดาษสู่ Digital Menu ที่เพิ่มยอดขายได้จริง พร้อมดีไซน์เท่ที่ช่วยสร้างภาพจำให้แบรนด์โรงคั่วกาแฟ",
     image: "/images/projects/smj-cafe.jpg",
     tags: ["Digital Menu", "Brand Identity", "Cafe Industrial"],
-    stats: {
-      label: "User Experience Score",
-      value: "100/100",
-    },
+    stats: { label: "User Experience Score", value: "100/100" },
   },
   {
     id: "project-construction-01",
-    title: "Master Craft Construction",
+    title: constructionConfig?.name || "Master Craft Construction",
     category: "construction",
-    serviceSlug: "construction-industrial-01",
-    templateId: "construction-industrial-01",
+    serviceSlug: "construction",
+    templateId: "construction",
     description:
-      "ยกระดับความน่าเชื่อถือให้บริษัทรับเหมาด้วยระบบ Project Portfolio ที่ดูแกร่งและเป็นมืออาชีพ จบปัญหาภาพลักษณ์บริษัทไม่ชัดเจน",
+      constructionConfig?.content?.heroSubtitle ||
+      "ยกระดับความน่าเชื่อถือให้บริษัทรับเหมาด้วยระบบ Project Portfolio ที่ดูแกร่งและเป็นมืออาชีพ",
     image: "/images/projects/construction.jpg",
     tags: ["Engineering Look", "Portfolio System", "Trust Builder"],
-    stats: {
-      label: "Ultra-Fast Load",
-      value: "0.45s",
-    },
+    stats: { label: "Ultra-Fast Load", value: "0.45s" },
   },
   {
     id: "project-clinic-01",
-    title: "Aura Clinic & Wellness",
+    title: clinicConfig?.name || "Aura Clinic & Wellness",
     category: "clinic",
-    serviceSlug: "clinic-solution-01",
-    templateId: "clinic-solution-01",
+    serviceSlug: "clinic",
+    templateId: "clinic",
     description:
+      clinicConfig?.content?.heroSubtitle ||
       "Landing Page ที่เน้นผลลัพธ์ Before/After อย่างชัดเจน ช่วยเพิ่มจำนวนเคสจริงจากผู้เข้าชมเว็บไซต์",
     image: "/images/projects/clinic.jpg",
     tags: ["Conversion Focused", "Medical Grade UI", "Smart Lead Gen"],
-    stats: {
-      label: "Conversion Rate",
-      value: "+45%",
-    },
+    stats: { label: "Conversion Rate", value: "+45%" },
   },
   {
     id: "project-real-estate-01",
-    title: "Modern Living Residency",
+    title: realEstateConfig?.name || "Modern Living Residency",
     category: "real-estate",
-    serviceSlug: "real-estate-premium-01",
-    templateId: "real-estate-premium-01",
+    serviceSlug: "realestate",
+    templateId: "realestate",
     description:
-      "นำเสนอทำเลศักยภาพด้วยระบบ Location Insight ที่แม่นยำ ช่วยปิดการขายโครงการอสังหาฯ ระดับพรีเมียมได้รวดเร็วยิ่งขึ้น",
+      realEstateConfig?.content?.heroSubtitle ||
+      "นำเสนอทำเลศักยภาพด้วยระบบ Location Insight ที่แม่นยำ ช่วยปิดการขายโครงการระดับพรีเมียม",
     image: "/images/projects/real-estate.jpg",
     tags: ["Luxury Interface", "Location Insight", "Lead Magnet"],
-    stats: {
-      label: "Customer Lead Growth",
-      value: "+30%",
-    },
+    stats: { label: "Customer Lead Growth", value: "+30%" },
   },
   {
     id: "project-starter-01",
-    title: "Minimalist Gadget Store",
+    title: starterConfig?.name || "Minimalist Gadget Store",
     category: "starter",
-    serviceSlug: "starter-landing-01",
-    templateId: "starter-landing-01",
+    serviceSlug: "starter",
+    templateId: "starter",
     description:
-      "ตัวอย่างความสำเร็จของ Single Product Store ที่สร้างยอดขายหลักล้าน ด้วยหน้าเว็บที่โหลดไวและ Conversion สูง",
+      starterConfig?.content?.heroSubtitle ||
+      "ตัวอย่างความสำเร็จของ Single Product Store ที่สร้างยอดขายหลักล้าน ด้วยหน้าเว็บที่โหลดไว",
     image: "/images/projects/gadget-store.jpg",
     tags: ["Direct Sell", "High Performance", "Starter Success"],
-    stats: {
-      label: "Mobile Performance",
-      value: "98/100",
-    },
+    stats: { label: "Mobile Performance", value: "98/100" },
   },
 ]
 
 /**
- * Utility helpers (optional but recommended)
+ * Utility helpers
  */
-
 export const getProjectsByTemplate = (templateId: string): Project[] =>
   catalogProjects.filter((project) => project.templateId === templateId)
 

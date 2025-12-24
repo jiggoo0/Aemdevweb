@@ -18,7 +18,6 @@ import ContactMap from "./_components/ContactMap"
 import JsonLd from "@/components/shared/JsonLd"
 
 import { siteConfig } from "@/config/siteConfig"
-import { cn } from "@/lib/utils"
 
 /**
  * 🛠️ SEO Optimization: ดึงดูด SME ด้วย Keyword ที่ตรงจุด
@@ -56,9 +55,16 @@ const ContactPage = () => {
       {/* ─── 1. HERO SECTION ─── */}
       <section className="relative overflow-hidden border-b-[6px] border-slate-900 bg-slate-50 py-24 md:py-40">
         {/* Blueprint Grid Background */}
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60" />
+        <div
+          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60"
+          aria-hidden="true"
+        />
         {/* Cinematic Glow */}
-        <div className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]" />
+        <div
+          className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]"
+          aria-hidden="true"
+        />
+
         <div className="container mx-auto px-6">
           <div className="max-w-5xl space-y-12">
             <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-6 py-3 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] transition-all hover:shadow-none">
@@ -89,10 +95,12 @@ const ContactPage = () => {
       <section className="relative z-10 -mt-12 bg-white pb-24 md:pb-40">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 gap-px overflow-hidden border-[6px] border-slate-900 bg-slate-900 shadow-2xl lg:grid-cols-12">
-            {/* Left Side */}
+            {/* Left Side: Technical Info */}
             <div className="relative bg-slate-900 p-10 text-white md:p-16 lg:col-span-5">
-              {/* Subtle Blueprint Grid */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20" />
+              <div
+                className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20"
+                aria-hidden="true"
+              />
               <div className="relative z-10">
                 <div className="mb-16 space-y-4">
                   <div className="inline-block border-b-4 border-blue-600 pb-3">
@@ -129,7 +137,7 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Right Side */}
+            {/* Right Side: Contact Form */}
             <div className="bg-white p-10 md:p-16 lg:col-span-7">
               <div className="mb-14 flex items-start justify-between">
                 <div className="space-y-4">
