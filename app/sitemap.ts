@@ -1,12 +1,12 @@
 /** @format */
 import { MetadataRoute } from "next"
 import { siteConfig } from "@/config/siteConfig"
-// 🟢 เปลี่ยนมาดึงจาก catalogProjects ซึ่งเป็นแหล่งข้อมูลหลักของหน้า Landing
 import { catalogProjects } from "@/data/catalog.projects"
 import { blogData } from "@/data/blogData"
 
 /**
  * 🛠️ Helper: ตรวจสอบวันที่ให้ปลอดภัยก่อนส่งให้ Sitemap
+ * เพื่อความถูกต้องตามมาตรฐาน XML Sitemap
  */
 function getSafeDate(dateStr: string | undefined | null): Date {
   if (!dateStr) return new Date()
@@ -15,26 +15,26 @@ function getSafeDate(dateStr: string | undefined | null): Date {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // ดึง Base URL จาก SiteConfig หรือ Fallback กรณีไม่มี Config
-  const baseUrl = siteConfig?.url || "https://yourdomain.com"
+  const baseUrl = siteConfig?.url || "https://www.aemdevweb.com"
 
   // 1. 📂 หน้าหลัก (Static Routes)
+  // 📝 UX Note: ปรับ /portfolio เป็น /catalog ให้ตรงกับโครงสร้างเมนูที่เราคุยกันไว้
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
     "/services",
-    "/portfolio",
+    "/catalog",
     "/contact",
     "/blog",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
+    changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. 🚀 หน้า Landing Templates (Dynamic Routes)
-  // 🟢 ใช้ข้อมูลจาก catalogProjects โดยตรง เพื่อแก้ปัญหา Path Error ของ allTemplates
+  // 2. 🚀 หน้า Landing Templates (Dynamic Routes) - ส่วนที่ทำเงินที่สุด
+  // 📝 SEO Note: หน้าเหล่านี้คือสินค้าตัวจริงของเรา ให้ Priority สูงเกือบเท่าหน้าแรก
   const templateRoutes: MetadataRoute.Sitemap = catalogProjects.map(
     (project) => ({
       url: `${baseUrl}/landing/${project.templateId}`,
@@ -44,8 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   )
 
-  // 3. 📝 หน้าบทความ Blog
-  // 🛡️ ป้องกันกรณี blogData เป็น undefined
+  // 3. 📝 หน้าบทความ Blog - ส่วนที่สร้าง Trust และ Traffic
   const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: getSafeDate(post.date),
