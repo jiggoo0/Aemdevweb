@@ -9,26 +9,53 @@ export interface MultiLangText {
 }
 
 /**
+ * 🏷️ Service Categories
+ * แก้ปัญหา: Module '"..."' has no exported member 'ServiceCategory'
+ */
+export type ServiceCategory =
+  | "starter"
+  | "cafe"
+  | "clinic"
+  | "construction"
+  | "real-estate"
+
+/**
+ * 🟢 AEM Infrastructure Type
+ * แก้ปัญหา: standardFeatures does not exist in type 'AEMServicePackage'
+ */
+export interface AEMServicePackage {
+  supportLevel: string
+  infrastructure: {
+    framework: string
+    hosting: string
+  }
+  // ✅ เพิ่มเพื่อรองรับข้อมูลใน Mock
+  standardFeatures?: any[]
+}
+
+/**
  * 🧱 Base Props สำหรับทุก Template
- * ออกแบบมาให้รองรับทั้งข้อมูลดิบ (Raw) และข้อมูลที่ผ่านการ Normalize
+ * ออกแบบมาเป็นรากฐาน (Source of Truth) ของทุก Variant
  */
 export interface BaseTemplateProps {
   id: string
-  variant: string
+  variant: ServiceCategory
   name: MultiLangText | string
   description?: MultiLangText | string
   phone?: string
   lineId?: string
-  address?: string // ✅ เพิ่มเพื่อให้ตรงกับ Footer
+  address?: string
   primaryColor?: string
   defaultLanguage?: "th" | "en"
+  googleMapUrl?: string
+  // ✅ แก้ปัญหา Property 'aemService' does not exist
+  aemService?: AEMServicePackage
   hero?: {
     title: MultiLangText | string
     subtitle: MultiLangText | string
     image?: string
   }
   socials?: {
-    // ✅ เพิ่มเพื่อให้ตรงกับ Footer
     facebook?: string
     instagram?: string
   }
@@ -46,24 +73,22 @@ export interface BaseTemplateProps {
 }
 
 /**
- * 📦 LandingData: Type หลักที่ใช้ใน Normalize และ Fetcher
- * ✅ เปลี่ยนเป็น Type Alias เพื่อป้องกัน ESLint Error: @typescript-eslint/no-empty-object-type
- */
-export type LandingData = BaseTemplateProps
-
-/**
  * 🟢 Template Variants
+ * แยก Interface เพื่อความชัดเจนของแต่ละธุรกิจ
  */
+
 export interface StarterTemplateProps extends BaseTemplateProps {
   variant: "starter"
+  // ✅ แก้ปัญหา 'badges' does not exist in type 'StarterTemplateProps'
+  badges?: any[]
   form?: any
 }
 
 export interface CafeTemplateProps extends BaseTemplateProps {
   variant: "cafe"
-  menu?: any[]
+  // ✅ แก้ปัญหา Property 'map' does not exist on type '{ categories: any[]; }'
+  menu?: any[] | { categories: any[] }
   openingHours?: any[]
-  googleMapUrl?: string
 }
 
 export interface ClinicTemplateProps extends BaseTemplateProps {
@@ -83,6 +108,17 @@ export interface RealEstateTemplateProps extends BaseTemplateProps {
   roomTypes?: any[]
   locationInsight?: any
 }
+
+/**
+ * 📦 LandingData: Discriminated Union Type
+ * ช่วยแก้ปัญหา Never Intersection ใน page.tsx
+ */
+export type LandingData =
+  | StarterTemplateProps
+  | CafeTemplateProps
+  | ClinicTemplateProps
+  | ConstructionTemplateProps
+  | RealEstateTemplateProps
 
 /**
  * 📰 Blog & Content Types
@@ -106,17 +142,7 @@ export interface BlogPost {
 }
 
 /**
- * 🏷️ Categories & Utilities
- */
-export type ServiceCategory =
-  | "starter"
-  | "cafe"
-  | "clinic"
-  | "construction"
-  | "real-estate"
-
-/**
- * 🛠️ Helper สำหรับเช็คว่าเป็น MultiLang หรือไม่
+ * 🛠️ Helpers
  */
 export const isMultiLang = (text: any): text is MultiLangText => {
   return text && typeof text === "object" && "th" in text

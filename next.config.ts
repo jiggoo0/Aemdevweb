@@ -5,36 +5,37 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
-    // ✅ 1. ตั้งค่าความปลอดภัยสำหรับไฟล์ SVG (จำเป็นสำหรับ Dicebear/Logos)
+    // ✅ ตั้งค่าความปลอดภัยสำหรับไฟล์ SVG
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
-    // ✅ 2. กำหนด Format ที่ทันสมัยเพื่อลดขนาดไฟล์ภาพ (WebP/AVIF)
+    // ✅ กำหนด Format ที่ทันสมัยเพื่อลดขนาดไฟล์ภาพ
     formats: ["image/avif", "image/webp"],
 
-    // ✅ 3. ลงทะเบียน Remote Hostnames (ป้องกัน Error: hostname is not configured)
+    // ✅ ลงทะเบียน Remote Hostnames
     remotePatterns: [
       {
-        // Supabase Storage (แหล่งเก็บรูปภาพหลักของโปรเจกต์)
+        protocol: "https",
+        hostname: "ui-avatars.com", // 🔴 แก้ไข Error จากการโหลดรูป Avatar
+        pathname: "/api/**",
+      },
+      {
         protocol: "https",
         hostname: "dpgmfbnzyhnhwzyozoxe.supabase.co",
         pathname: "/storage/v1/object/public/**",
       },
       {
-        // Unsplash (สำหรับรูปภาพ Portfolio และภาพประกอบ)
         protocol: "https",
         hostname: "images.unsplash.com",
         pathname: "/**",
       },
       {
-        // Avatars / Mockup Logos
         protocol: "https",
         hostname: "api.dicebear.com",
         pathname: "/**",
       },
       {
-        // Production Domain
         protocol: "https",
         hostname: "www.aemdevweb.com",
         pathname: "/**",
@@ -42,14 +43,9 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // ✅ 4. Performance Tuning (ลดขนาด Bundle Size)
+  // ✅ Performance Tuning
   experimental: {
     optimizePackageImports: ["lucide-react"],
-  },
-
-  // ✅ 5. ลบ Error ลำดับความสำคัญต่ำในช่วง Build
-  typescript: {
-    ignoreBuildErrors: false, // แนะนำเป็น false เพื่อความ Sharp ของโค้ด
   },
 }
 

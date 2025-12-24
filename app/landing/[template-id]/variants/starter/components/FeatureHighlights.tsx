@@ -1,12 +1,10 @@
 /** @format */
+"use client"
+
 import React from "react"
 import * as Icons from "lucide-react"
-import { MultiLangText } from "../../../types"
+import { MultiLangText } from "@/app/landing/[template-id]/types"
 
-/**
- * 🟢 แก้ไข Interface: เพิ่ม primaryColor และระบุโครงสร้าง Feature ให้ชัดเจน
- * เพื่อแก้ปัญหา Property 'primaryColor' does not exist on type 'IntrinsicAttributes & FeatureHighlightsProps'
- */
 export interface FeatureItem {
   id?: string | number
   title: string | MultiLangText
@@ -25,65 +23,55 @@ export default function FeatureHighlights({
   primaryColor = "#000000",
   t,
 }: FeatureHighlightsProps) {
-  if (!features.length) return null
+  if (!features || features.length === 0) return null
 
   /**
-   * Helper: ดึง Icon จาก Lucide ตามชื่อที่ระบุใน Data
+   * 🛡️ Safe Icon Loader: ป้องกันแอปพังถ้าระบุชื่อ Icon ผิด
    */
-  const getIcon = (iconName: string | undefined) => {
-    const LucideIcon = (Icons as any)[iconName || "Zap"] || Icons.Zap
-    return <LucideIcon size={24} />
+  const renderIcon = (iconName: string | undefined) => {
+    // ดึง Icon จาก library (ถ้าไม่มีให้ใช้ Zap เป็น fallback)
+    const LucideIcon = (Icons as any)[iconName || ""] || Icons.Zap
+    return <LucideIcon size={28} strokeWidth={2.5} />
   }
 
   return (
-    <section id="services" className="bg-white py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Section Header */}
-        <div className="mb-16 flex flex-col items-center text-center">
+    <div className="w-full bg-white">
+      <div className="grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        {features.map((feature, idx) => (
           <div
-            className="mb-4 h-1.5 w-12"
-            style={{ backgroundColor: primaryColor }}
-          />
-          <h2 className="text-3xl font-black uppercase italic tracking-tighter text-slate-900 md:text-5xl">
-            Why Choose Us
-          </h2>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, idx) => (
+            key={feature.id || idx}
+            className="group relative flex flex-col items-start transition-all"
+          >
+            {/* 🏗️ Icon Box: Neobrutalism Design */}
             <div
-              key={feature.id || idx}
-              className="group relative flex flex-col items-start"
+              className="mb-8 flex h-16 w-16 items-center justify-center border-4 border-slate-900 bg-white transition-all group-hover:translate-x-[-4px] group-hover:translate-y-[-4px] group-hover:shadow-[8px_8px_0px_0px_#0f172a]"
+              style={{ color: primaryColor, borderColor: "#0f172a" }}
             >
-              {/* Icon Box with Brutalist Shadow */}
-              <div
-                className="mb-6 flex h-14 w-14 items-center justify-center border-2 border-slate-900 bg-white transition-all group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[6px_6px_0px_0px_rgba(15,23,42,1)]"
-                style={{ color: primaryColor }}
-              >
-                {getIcon(feature.icon)}
-              </div>
-
-              {/* Text Content */}
-              <div className="space-y-3">
-                <h3 className="text-xl font-black uppercase tracking-tight text-slate-900">
-                  {t(feature.title)}
-                </h3>
-                <div
-                  className="h-1 w-8 opacity-20"
-                  style={{ backgroundColor: primaryColor }}
-                />
-                <p className="text-sm font-bold leading-relaxed text-slate-500">
-                  {t(feature.description)}
-                </p>
-              </div>
+              {renderIcon(feature.icon)}
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Background Decor */}
-      <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-    </section>
+            {/* 🏗️ Content Layer */}
+            <div className="flex flex-col space-y-4">
+              <h3 className="text-2xl font-black uppercase italic tracking-tighter text-slate-900">
+                {t(feature.title)}
+              </h3>
+
+              {/* Divider Line */}
+              <div
+                className="h-1.5 w-10 transition-all group-hover:w-20"
+                style={{ backgroundColor: primaryColor }}
+              />
+
+              <p className="text-base font-bold leading-relaxed text-slate-500">
+                {t(feature.description)}
+              </p>
+            </div>
+
+            {/* Decoration: ลายเส้นอุตสาหกรรมเบาๆ ด้านหลัง (Optional) */}
+            <div className="absolute -left-4 -top-4 -z-10 h-20 w-20 bg-[radial-gradient(#e2e8f0_2px,transparent_2px)] opacity-0 transition-opacity [bg-size:8px_8px] group-hover:opacity-100" />
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }

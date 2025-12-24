@@ -7,14 +7,15 @@ import {
   MultiLangText,
 } from "@/app/landing/[template-id]/types"
 
-// ✅ Direct Import
+// ✅ UI Framework & Structure
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 
-// 🛡️ Shared Components
+// 🛡️ Shared Components (AEM DEV & Layout Layer)
 import Section from "@/app/landing/[template-id]/shared/Section"
+import ServiceInclusionSection from "@/app/landing/[template-id]/shared/ServiceInclusionSection"
 
-// 🧱 Local Components
+// 🧱 Local Components (Business Content Layer)
 import HeroStarter from "./components/HeroStarter"
 import FeatureHighlights from "./components/FeatureHighlights"
 import ConversionForm from "./components/ConversionForm"
@@ -27,7 +28,7 @@ export default function StarterTemplate({
 }) {
   if (!data) return null
 
-  // Helper สำหรับจัดการข้อความหลายภาษา
+  // ✅ Helper จัดการภาษา (Centralized Logic)
   const t = (content: string | MultiLangText | undefined): string => {
     if (!content) return ""
     if (typeof content === "string") return content
@@ -45,9 +46,7 @@ export default function StarterTemplate({
       />
 
       <main className="flex-grow">
-        {/* ✅ FIX TS2322: ส่ง title และ subtitle แบบ Explicit 
-          เพื่อป้องกันค่า undefined และจัดการ Fallback ให้ตรงตาม HeroStarterProps
-        */}
+        {/* 🚀 1. Hero Starter Section */}
         <HeroStarter
           {...(data.hero || {})}
           title={data.hero?.title || ""}
@@ -56,9 +55,12 @@ export default function StarterTemplate({
           t={t}
         />
 
+        {/* 🚀 2. Feature Highlights (Content Layer) */}
         <Section
           id="features"
-          title="Our Services"
+          title={
+            data.defaultLanguage === "en" ? "Our Services" : "บริการของเรา"
+          }
           config={{ primaryColor: data.primaryColor }}
         >
           <FeatureHighlights
@@ -68,24 +70,33 @@ export default function StarterTemplate({
           />
         </Section>
 
+        {/* 🚀 3. Social Proof & Testimonials (Content Layer) */}
         <Section
           id="reviews"
-          title="Client Success"
+          title={
+            data.defaultLanguage === "en" ? "Client Success" : "เสียงจากลูกค้า"
+          }
           className="bg-slate-50"
           config={{ primaryColor: data.primaryColor }}
         >
-          {/* ✅ data.socialProof มีอยู่แล้วใน BaseTemplateProps ที่เราเพิ่มไปก่อนหน้า */}
           <SocialProof testimonials={data.socialProof || []} t={t} />
         </Section>
 
+        {/* 🟢 4. AEM DEV ENGINEERING INCLUSION (Infrastructure Layer) 🟢 */}
+        {/* แทรกส่วนมาตรฐานทางเทคนิคของ AEM เพื่อปิดการขายความมั่นคงของระบบ */}
+        <ServiceInclusionSection
+          data={data.aemService}
+          lang={data.defaultLanguage === "en" ? "en" : "th"}
+        />
+
+        {/* 🚀 5. Conversion Form (Action Layer) */}
         <Section
           id="contact"
-          title="Get Started"
+          title={
+            data.defaultLanguage === "en" ? "Get Started" : "เริ่มต้นใช้งาน"
+          }
           config={{ primaryColor: data.primaryColor }}
         >
-          {/* ✅ FIX: กระจายฟิลด์จาก data.form เข้าไปโดยตรง 
-            เพื่อให้ตรงกับ IntrinsicAttributes & ConversionFormProps
-          */}
           <ConversionForm
             {...(data.form || {})}
             primaryColor={data.primaryColor || "#000000"}

@@ -1,105 +1,101 @@
 /** @format */
-import React from "react"
-import Image from "next/image"
-import { Star, Quote } from "lucide-react"
-import { MultiLangText } from "../../../types"
+"use client"
 
-/**
- * 🟢 แก้ไข Interface: เพิ่มฟังก์ชัน t และระบุโครงสร้าง Review ให้ชัดเจน
- */
-export interface Review {
-  id: string | number
-  name: string
-  role?: string
-  avatar?: string
-  comment: string | MultiLangText
-  rating?: number
+import React, { useState } from "react"
+import { ChevronDown, HelpCircle } from "lucide-react"
+import { MultiLangText } from "@/app/landing/[template-id]/types"
+
+export interface FAQItem {
+  question: string | MultiLangText
+  answer: string | MultiLangText
 }
 
-export interface SocialProofProps {
-  testimonials: Review[]
+export interface StarterFAQProps {
+  items: FAQItem[]
+  primaryColor?: string
   t: (content: string | MultiLangText | undefined) => string
 }
 
-export default function SocialProof({
-  testimonials = [],
+export default function StarterFAQ({
+  items = [],
+  primaryColor = "#000000",
   t,
-}: SocialProofProps) {
-  if (!testimonials.length) return null
+}: StarterFAQProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  if (!items || items.length === 0) return null
 
   return (
-    <section className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header */}
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl font-black uppercase italic tracking-tighter text-slate-900 md:text-5xl">
-            Trusted by Professionals
-          </h2>
-          <div className="mx-auto mt-4 h-1.5 w-24 bg-slate-900" />
-        </div>
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="flex flex-col gap-4">
+        {items.map((item, idx) => {
+          const isOpen = openIndex === idx
 
-        {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((review, idx) => (
+          return (
             <div
-              key={review.id || idx}
-              className="relative flex flex-col border-2 border-slate-900 bg-white p-8 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)] transition-transform hover:-translate-y-1"
+              key={idx}
+              className={`group border-4 border-slate-900 bg-white transition-all ${
+                isOpen
+                  ? "translate-x-[-2px] translate-y-[-2px] shadow-[8px_8px_0px_0px_rgba(15,23,42,1)]"
+                  : "hover:shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]"
+              }`}
             >
-              {/* Quote Icon Decor */}
-              <div className="absolute -right-4 -top-4 z-10 bg-slate-900 p-3 text-white">
-                <Quote size={20} fill="currentColor" />
-              </div>
-
-              {/* Rating */}
-              <div className="mb-6 flex gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className={
-                      i < (review.rating || 5)
-                        ? "fill-yellow-400 text-yellow-400"
-                        : "text-slate-200"
+              {/* 🏗️ Question Toggle */}
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : idx)}
+                className="flex w-full items-center justify-between p-6 text-left"
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center border-2 border-slate-900 transition-colors ${
+                      isOpen
+                        ? "bg-slate-900 text-white"
+                        : "bg-white text-slate-900"
+                    }`}
+                    style={
+                      isOpen
+                        ? { backgroundColor: primaryColor, color: "#fff" }
+                        : {}
                     }
-                  />
-                ))}
-              </div>
-
-              {/* Comment */}
-              <p className="mb-8 flex-grow text-lg font-medium italic leading-relaxed text-slate-700">
-                "{t(review.comment)}"
-              </p>
-
-              {/* Author Info */}
-              <div className="flex items-center gap-4 border-t border-slate-100 pt-6">
-                {/* ✅ เปลี่ยนเป็น Next.js Image Component */}
-                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden border-2 border-slate-900 bg-slate-200">
-                  <Image
-                    src={
-                      review.avatar ||
-                      `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}`
-                    }
-                    alt={review.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
+                  >
+                    <HelpCircle size={20} />
+                  </div>
+                  <span className="text-lg font-black uppercase italic tracking-tighter text-slate-900 md:text-xl">
+                    {t(item.question)}
+                  </span>
                 </div>
-                <div>
-                  <h4 className="font-black uppercase leading-none tracking-tight text-slate-900">
-                    {review.name}
-                  </h4>
-                  {review.role && (
-                    <p className="mt-1 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                      {review.role}
-                    </p>
-                  )}
+
+                <div
+                  className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                >
+                  <ChevronDown size={24} strokeWidth={3} />
+                </div>
+              </button>
+
+              {/* 🏗️ Answer Content */}
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  isOpen
+                    ? "max-h-[500px] border-t-4 border-slate-900"
+                    : "max-h-0"
+                }`}
+              >
+                <div className="bg-slate-50 p-8">
+                  <p className="text-base font-bold leading-relaxed text-slate-600 md:text-lg">
+                    {t(item.answer)}
+                  </p>
+
+                  {/* Decorative Blueprint Line */}
+                  <div
+                    className="mt-6 h-1.5 w-12"
+                    style={{ backgroundColor: primaryColor }}
+                  />
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          )
+        })}
       </div>
-    </section>
+    </div>
   )
 }

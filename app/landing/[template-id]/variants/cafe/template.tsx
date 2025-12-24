@@ -9,7 +9,10 @@ import Footer from "@/components/Footer"
 import Section from "@/app/landing/[template-id]/shared/Section"
 import GoogleMap from "@/app/landing/[template-id]/shared/GoogleMap"
 
-// 🧱 Local Components
+// ✅ Shared Components (AEM DEV Layer)
+import ServiceInclusionSection from "@/app/landing/[template-id]/shared/ServiceInclusionSection"
+
+// 🧱 Local Components (Business Content Layer)
 import CafeGallery from "./components/CafeGallery"
 import MenuHighlight from "./components/MenuHighlight"
 import OpeningHours from "./components/OpeningHours"
@@ -17,13 +20,21 @@ import OpeningHours from "./components/OpeningHours"
 export default function CafeTemplate({ data }: { data: CafeTemplateProps }) {
   if (!data) return null
 
-  // Helper ฟังก์ชันสำหรับการจัดการข้อความหลายภาษา
+  // Helper สำหรับจัดการข้อความหลายภาษา
   const t = (content: any): string => {
     if (!content) return ""
     if (typeof content === "string") return content
     const lang = data.defaultLanguage || "th"
     return content[lang] || content["th"] || ""
   }
+
+  /**
+   * 🛠️ แก้ไข: จัดการข้อมูล Menu ที่อาจมาเป็น Array หรือ Object with Categories
+   * ช่วยแก้ปัญหา TS2339: Property 'map' does not exist on type...
+   */
+  const menuItems = Array.isArray(data.menu)
+    ? data.menu
+    : data.menu?.categories || []
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
@@ -35,15 +46,14 @@ export default function CafeTemplate({ data }: { data: CafeTemplateProps }) {
       />
 
       <main className="flex-grow">
-        {/* --- Hero Section --- */}
+        {/* ☕ 1. Hero Section (Cafe Atmosphere) */}
         <section className="relative flex h-[80vh] items-center justify-center overflow-hidden bg-slate-900 text-white">
           {data.hero?.image && (
-            /* ✅ แก้ไข Warning: เปลี่ยนเป็น Next.js Image Component */
             <Image
               src={data.hero.image}
-              alt="Hero Background"
+              alt="Cafe Atmosphere"
               fill
-              priority // สำคัญมากสำหรับรูปภาพส่วนบนสุดของหน้า (Hero) เพื่อลด LCP
+              priority
               className="absolute inset-0 object-cover opacity-60"
               sizes="100vw"
             />
@@ -58,14 +68,14 @@ export default function CafeTemplate({ data }: { data: CafeTemplateProps }) {
           </div>
         </section>
 
-        {/* --- Menu Section --- */}
+        {/* ☕ 2. Menu Section (Content Layer) */}
         <Section
           id="menu"
-          title="Artisan Menu"
+          title={data.defaultLanguage === "en" ? "Artisan Menu" : "เมนูแนะนำ"}
           config={{ primaryColor: data.primaryColor }}
         >
           <MenuHighlight
-            items={(data.menu || []).map((item: any) => ({
+            items={menuItems.map((item: any) => ({
               ...item,
               name: t(item.name),
               description: t(item.description),
@@ -74,7 +84,15 @@ export default function CafeTemplate({ data }: { data: CafeTemplateProps }) {
           />
         </Section>
 
-        {/* --- Opening Hours & Map --- */}
+        {/* ☕ 3. Gallery (Content Layer) */}
+        {data.gallery && data.gallery.length > 0 && (
+          <Section id="gallery" title="Atmosphere" className="bg-slate-50">
+            {/* ✅ แก้ปัญหาเรื่องการส่ง Prop images ให้ตรงตาม Interface ของ CafeGallery */}
+            <CafeGallery images={data.gallery} />
+          </Section>
+        )}
+
+        {/* ☕ 4. Opening Hours & Map (Business Info) */}
         <div className="grid gap-0 border-y-2 border-slate-900 md:grid-cols-2">
           <div className="flex flex-col justify-center bg-white p-12">
             <OpeningHours
@@ -89,6 +107,12 @@ export default function CafeTemplate({ data }: { data: CafeTemplateProps }) {
             <GoogleMap url={data.googleMapUrl || ""} />
           </div>
         </div>
+
+        {/* 🟢 5. AEM DEV ENGINEERING INCLUSION (Engineering Layer) 🟢 */}
+        <ServiceInclusionSection
+          data={data.aemService}
+          lang={data.defaultLanguage === "en" ? "en" : "th"}
+        />
       </main>
 
       <Footer data={data} />

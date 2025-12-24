@@ -1,6 +1,7 @@
 /** @format */
-export const constructionMock = {
-  // ✅ เปลี่ยน Key ให้ตรงกับ URL: construction-industrial-01
+import { ConstructionTemplateProps } from "../types"
+
+export const constructionMock: Record<string, ConstructionTemplateProps> = {
   "construction-industrial-01": {
     id: "construction-industrial-01",
     variant: "construction",
@@ -8,14 +9,28 @@ export const constructionMock = {
     primaryColor: "#ca8a04",
     phone: "088-777-6666",
     lineId: "@mconstruction",
+    address: "789 Industrial Estate, Rayong, Thailand",
+    defaultLanguage: "th",
+
+    // 🟢 AEM DEV LAYER: มอบความมั่นใจด้านระบบดิจิทัล (Real Service)
+    aemService: {
+      supportLevel: "Direct Developer Support",
+      infrastructure: {
+        framework: "Next.js 15 (App Router)",
+        hosting: "Cloud-Native Vercel/Edge",
+      },
+      standardFeatures: [], // ดึงมาตรฐานความปลอดภัยและการโหลดไวจาก ServiceInclusionSection
+    },
+
+    // 🔵 CONSTRUCTION CONTENT LAYER: ข้อมูลธุรกิจจำลอง (Mock Business)
     hero: {
       title: {
         th: "งานโครงสร้างเหล็กและอุตสาหกรรม",
         en: "Industrial Steel Works",
       },
       subtitle: {
-        th: "มาตรฐานวิศวกรรมสากล รับประกันผลงาน",
-        en: "Engineering Standards Guaranteed",
+        th: "มาตรฐานวิศวกรรมสากล รับประกันผลงานด้วยทีมงานมืออาชีพ",
+        en: "Global Engineering Standards Guaranteed by Experts",
       },
       image:
         "https://images.unsplash.com/photo-1513828583688-c52646db42da?q=80",
@@ -32,8 +47,15 @@ export const constructionMock = {
       {
         title: { th: "ออกแบบทางวิศวกรรม", en: "Engineering Design" },
         description: {
-          th: "คำนวณโครงสร้างด้วยซอฟต์แวร์มาตรฐาน",
-          en: "Structural calculation by standard software",
+          th: "คำนวณโครงสร้างด้วยซอฟต์แวร์มาตรฐานสากล เพื่อความปลอดภัยสูงสุด",
+          en: "Structural calculation by global standard software for maximum safety.",
+        },
+      },
+      {
+        title: { th: "วางแผนการผลิต", en: "Production Planning" },
+        description: {
+          th: "จัดทำ Timeline และงบประมาณที่ชัดเจน ไม่บานปลาย",
+          en: "Detailed timeline and budget management without hidden costs.",
         },
       },
     ],
