@@ -22,7 +22,8 @@ export const catalogProjects: Project[] = [
     description:
       cafeConfig?.content?.heroSubtitle ||
       "เปลี่ยนจากเมนูกระดาษสู่ Digital Menu ที่เพิ่มยอดขายได้จริง พร้อมดีไซน์เท่ที่ช่วยสร้างภาพจำให้แบรนด์โรงคั่วกาแฟ",
-    image: "/images/projects/smj-cafe.jpg",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/smj-cafe.jpg",
     tags: ["Digital Menu", "Brand Identity", "Cafe Industrial"],
     stats: { label: "User Experience Score", value: "100/100" },
   },
@@ -35,7 +36,8 @@ export const catalogProjects: Project[] = [
     description:
       constructionConfig?.content?.heroSubtitle ||
       "ยกระดับความน่าเชื่อถือให้บริษัทรับเหมาด้วยระบบ Project Portfolio ที่ดูแกร่งและเป็นมืออาชีพ",
-    image: "/images/projects/construction.jpg",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/construction.jpg",
     tags: ["Engineering Look", "Portfolio System", "Trust Builder"],
     stats: { label: "Ultra-Fast Load", value: "0.45s" },
   },
@@ -48,7 +50,8 @@ export const catalogProjects: Project[] = [
     description:
       clinicConfig?.content?.heroSubtitle ||
       "Landing Page ที่เน้นผลลัพธ์ Before/After อย่างชัดเจน ช่วยเพิ่มจำนวนเคสจริงจากผู้เข้าชมเว็บไซต์",
-    image: "/images/projects/clinic.jpg",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/clinic.jpg",
     tags: ["Conversion Focused", "Medical Grade UI", "Smart Lead Gen"],
     stats: { label: "Conversion Rate", value: "+45%" },
   },
@@ -61,7 +64,8 @@ export const catalogProjects: Project[] = [
     description:
       realEstateConfig?.content?.heroSubtitle ||
       "นำเสนอทำเลศักยภาพด้วยระบบ Location Insight ที่แม่นยำ ช่วยปิดการขายโครงการระดับพรีเมียม",
-    image: "/images/projects/real-estate.jpg",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/real-estate.jpg",
     tags: ["Luxury Interface", "Location Insight", "Lead Magnet"],
     stats: { label: "Customer Lead Growth", value: "+30%" },
   },
@@ -74,7 +78,8 @@ export const catalogProjects: Project[] = [
     description:
       starterConfig?.content?.heroSubtitle ||
       "ตัวอย่างความสำเร็จของ Single Product Store ที่สร้างยอดขายหลักล้าน ด้วยหน้าเว็บที่โหลดไว",
-    image: "/images/projects/gadget-store.jpg",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/gadget-store.jpg",
     tags: ["Direct Sell", "High Performance", "Starter Success"],
     stats: { label: "Mobile Performance", value: "98/100" },
   },

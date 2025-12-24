@@ -1,5 +1,5 @@
 # 📑 Project Summary Report
-_Generated on Wed Dec 24 23:40:40 +07 2025_
+_Generated on Thu Dec 25 02:24:16 +07 2025_
 
 
 ## ⚙️ Environment Variables
@@ -24,6 +24,7 @@ app
 │   ├── blog
 │   │   ├── [slug]
 │   │   │   └── page.tsx
+│   │   ├── loading.tsx
 │   │   └── page.tsx
 │   ├── catalog
 │   │   └── page.tsx
@@ -57,41 +58,42 @@ app
 ├── robots.txt
 └── sitemap.ts
 
-20 directories, 19 files
+20 directories, 20 files
 
 #### Metadata (file | size | sha1)
 - app/layout.tsx | 2493b | sha1:45799c6f4315db3159e124e3ccdb6f154c6c161c
 - app/(marketing)/[template_id]/_templates/cafe/CafeTemplate.tsx | 6237b | sha1:2f2b66819044bcd7aadee47ee2405db879d43ee8
 - app/(marketing)/[template_id]/_templates/cafe/CafeStyle.module.css | 2685b | sha1:59c1d7b95a786f96cc9b1ee3b39d56b600a22dce
-- app/(marketing)/[template_id]/_templates/cafe/config.ts | 2837b | sha1:0b3106efb027cc3f7ee8bac579c4c6a7f0493fad
+- app/(marketing)/[template_id]/_templates/cafe/config.ts | 3888b | sha1:3c27d5c7f3efbdfd2f624a5c013811d5e2ca2e43
 - app/(marketing)/[template_id]/_templates/realestate/RealEstateTemplate.tsx | 6502b | sha1:ea55273770f57e6d0fb91c6c5e141520c765bdb9
 - app/(marketing)/[template_id]/_templates/realestate/RealEstateStyle.module.css | 1648b | sha1:a19e6b481f1e018ab95e4579b8d41ca6aeacac26
-- app/(marketing)/[template_id]/_templates/realestate/config.ts | 1814b | sha1:6bcb2101e7a479901ef88361486610fab9831d39
+- app/(marketing)/[template_id]/_templates/realestate/config.ts | 3821b | sha1:6746b5cb4645177855f4be704c12fb453579088a
 - app/(marketing)/[template_id]/_templates/construction/ConstructionTemplate.tsx | 5953b | sha1:82886920d7c461e153667a9a2c4f9dbf774c5f3f
 - app/(marketing)/[template_id]/_templates/construction/ConstructionStyle.module.css | 1408b | sha1:7dd705a5b5f8fc7aa29199c560bfb0a303ecb048
-- app/(marketing)/[template_id]/_templates/construction/config.ts | 2783b | sha1:ed1225ed120153688b486b8e02d45f15b332aaaf
+- app/(marketing)/[template_id]/_templates/construction/config.ts | 4717b | sha1:4703dceebd1d43c0edbef14084c58f408eadc07b
 - app/(marketing)/[template_id]/_templates/starter/StarterTemplate.tsx | 5229b | sha1:0bd598357d832cce368dac409052e60fd28e08c5
 - app/(marketing)/[template_id]/_templates/starter/StarterStyle.module.css | 1354b | sha1:6af406ddfb8b4dd4e124a769b9f1649689f351ce
-- app/(marketing)/[template_id]/_templates/starter/config.ts | 1351b | sha1:eb5e1dc06c1d0ec445edcad6795af155f858e7f1
+- app/(marketing)/[template_id]/_templates/starter/config.ts | 3071b | sha1:18f0dcb8327d5ebe5ca57afcf8242e4610fab9db
 - app/(marketing)/[template_id]/_templates/clinic/ClinicTemplate.tsx | 5187b | sha1:75e99225e778900839b5c115d775602359e7133d
 - app/(marketing)/[template_id]/_templates/clinic/ClinicStyle.module.css | 1271b | sha1:afdd35936311d240f32f9396037558602d3c106e
-- app/(marketing)/[template_id]/_templates/clinic/config.ts | 1512b | sha1:79a43c22c3ed8c2d864e8c62faad1401dafc98fb
+- app/(marketing)/[template_id]/_templates/clinic/config.ts | 3407b | sha1:ca862af4bc6649d990b5d60c6d1bf795d85cd9b3
 - app/(marketing)/[template_id]/page.tsx | 1311b | sha1:357f2f143693c7cd788919151124e1628123b91f
 - app/(marketing)/[template_id]/layout.tsx | 2476b | sha1:1dbff05e6ad2ec985b93dac711522f52c564b3ff
 - app/(marketing)/[template_id]/_config/registry.ts | 1067b | sha1:935f377fa03f7ca7fca36f91caf4971301712630
 - app/globals.css | 2818b | sha1:814b39f421df1fb728e642754c6923acded44f66
 - app/api/contact/route.ts | 2313b | sha1:ad7395a8f89f2a2f55ebb119f618393bf8d024a6
 - app/(main)/about/page.tsx | 7934b | sha1:28d86b70f69d17c0fa0ba8bb7bb78e296e5609c0
-- app/(main)/blog/[slug]/page.tsx | 7051b | sha1:14b905ed1706d4edb548c4303d6fed33f34d3fa0
-- app/(main)/blog/page.tsx | 10979b | sha1:708517ee3bf8f0f6313a184505045cdd20d8d1be
+- app/(main)/blog/[slug]/page.tsx | 2081b | sha1:c1ccb40218f738a637232c8c6337a39b68c59b7b
+- app/(main)/blog/page.tsx | 1296b | sha1:0efca4b2f04e87e131cb6862bbc505f4a3e844a0
+- app/(main)/blog/loading.tsx | 459b | sha1:edf5c3e19911cb871aac40c32868ec31d20ab31e
 - app/(main)/catalog/page.tsx | 4228b | sha1:ca1e7882feb854352f99ca7a66c24f60fb6f34bb
 - app/(main)/contact/page.tsx | 9591b | sha1:335d5a1051f95d943bf714b303983ea48732007d
 - app/(main)/contact/_components/ContactMap.tsx | 7467b | sha1:0b28b0ad50ace1787356d28629594a5a3fa3851f
-- app/(main)/services/page.tsx | 1146b | sha1:cd9f227fac1a1c10377784eae222b927de9ad2f2
-- app/(main)/services/ServicesPageClient.tsx | 486b | sha1:4fcce49d8cfe2bf76e72a38431e105937bfa072c
-- app/(main)/page.tsx | 6195b | sha1:b610e8f0a85855e43c5fe7c8725d0d6385a7abe7
-- app/(main)/layout.tsx | 988b | sha1:55ab4e59aff89dbc3fada18381bcbf0cefb82718
-- app/sitemap.ts | 2322b | sha1:c1b7529450545bf5fa5fec12689ec6bbf7c9e88c
+- app/(main)/services/page.tsx | 368b | sha1:e93753e1a9cf208d15bbf12b80cfd994bd53750e
+- app/(main)/services/ServicesPageClient.tsx | 677b | sha1:0cc47835d114b62a0bc2ff2d52951e80d3176395
+- app/(main)/page.tsx | 4887b | sha1:79b2f3bc23219f1bfe6ac23b77be9e2837c1d209
+- app/(main)/layout.tsx | 1632b | sha1:865cd7f1377159df46b15410df81961b94ecbbf6
+- app/sitemap.ts | 2504b | sha1:61d3ddb3b3490292061f549c3df18fd2b7ab2cb1
 - app/robots.txt | 70b | sha1:98896dad3ec15b2ca1b7fe72e65bae71d23c7475
 - app/favicon.ico | 194522b | sha1:6e91e3cfc9327f26b55a992b403b6560ddbd353c
 ### components
@@ -134,11 +136,11 @@ components
 4 directories, 31 files
 
 #### Metadata (file | size | sha1)
-- components/Header.tsx | 6985b | sha1:c326fd3937dfbf0ffa9b3f4d04bdaccb4a2a445f
+- components/Header.tsx | 3133b | sha1:cf9748de5592a748dd683706dd53021d2372c84a
 - components/Footer.tsx | 6516b | sha1:9fdc2403f1e81ed48c8f452f2205252ff5cf3f4d
-- components/catalog/CatalogProjectCard.tsx | 4702b | sha1:cf7335d99e1467c4fa3857a5925424accfb76b0b
+- components/catalog/CatalogProjectCard.tsx | 3610b | sha1:07786eca9e4b54124dba36c1b141a3ba1cc49684
 - components/catalog/CatalogProjectsGrid.tsx | 2777b | sha1:97f541955ab72c2e78334b5656559682dc58ceee
-- components/Services.tsx | 3569b | sha1:c9b53e4c16d4833fb08366168121b692818cf5f6
+- components/Services.tsx | 7786b | sha1:ca10e03dfb9d53c6f684a152ec93b493d57c4966
 - components/Hero.tsx | 7737b | sha1:7e3f75e584054c0c4e70cede67dc4f2920e6639d
 - components/About.tsx | 9060b | sha1:0a48e77511e385f5785f819e1fdfccb17da24620
 - components/shared/JsonLd.tsx | 2530b | sha1:d273f88bc443ae4f3ac87259ca136fe7536ed1a2
@@ -164,7 +166,7 @@ components
 - components/CTA.tsx | 7203b | sha1:f923a23ff6110ea92f252c5a36ce3e49131791be
 - components/SocialProof.tsx | 4408b | sha1:b4e340c3db9e29a78d55c0833d766c0869ee6d4a
 - components/FAQSection.tsx | 8611b | sha1:20cd830ceee2bdee37d6ec71a08a53ed39190ba7
-- components/BlogSection.tsx | 6800b | sha1:50e28e909281d28e62e85e85cdff98dff4954656
+- components/BlogSection.tsx | 3169b | sha1:632173732a9d31b310c640ff98213ff033458249
 ### lib
 lib
 ├── api.ts
@@ -176,50 +178,30 @@ lib
 
 #### Metadata (file | size | sha1)
 - lib/utils.ts | 166b | sha1:03edf7b44c7cf1d3f48be4f72866007dbb63b8c6
-- lib/api.ts | 1850b | sha1:fda75dc3de207e9abc921aa0e1bf62cb6a1e5df1
+- lib/api.ts | 457b | sha1:ba386cfe8e8843a602c0b958d77f5c15d387b141
 - lib/helpers.ts | 3381b | sha1:3b509d447b9e785c50b4cb34ba51dfd046cc4309
 - lib/supabase.ts | 987b | sha1:714a4067d19c464152a877de911c306450c31ac8
 ### public
 public
 ├── grid.svg
 ├── images
-│   ├── blog
-│   │   ├── corporate-trust.jpg
-│   │   ├── performance-web.jpg
-│   │   ├── restaurant-web.jpg
-│   │   └── success-case.jpg
 │   ├── portfolio
 │   │   ├── corporate-1.webp
 │   │   ├── default-avatar.webp
 │   │   ├── restaurant-1.webp
 │   │   └── sme-1.webp
-│   ├── profile
-│   │   └── default-avatar.webp
-│   └── projects
-│       ├── clinic.jpg
-│       ├── construction.jpg
-│       ├── gadget-store.jpg
-│       ├── real-estate.jpg
-│       └── smj-cafe.jpg
+│   └── profile
+│       └── default-avatar.webp
 └── og-image.png
 
-6 directories, 16 files
+4 directories, 7 files
 
 #### Metadata (file | size | sha1)
-- public/images/blog/restaurant-web.jpg | 22788b | sha1:03b7783d0589d0b0499ec0e9f3bda5c711ffc342
-- public/images/blog/success-case.jpg | 45269b | sha1:ad750f2883d85c878ad5b99a4d195baed2f8d801
-- public/images/blog/corporate-trust.jpg | 44964b | sha1:84969f7d4e2f9f60c197eb28a7d7d618edb8cdd0
-- public/images/blog/performance-web.jpg | 17183b | sha1:431c3e5d4439cf8847e9d44ce2036419b74dbc17
 - public/images/profile/default-avatar.webp | 4351b | sha1:f3f3438414e699035d448859a6d6b1ae0b9750ae
 - public/images/portfolio/restaurant-1.webp | 22797b | sha1:0c491e38af3e3f47260ae7973e1610e6880bfba0
 - public/images/portfolio/sme-1.webp | 27619b | sha1:48b1014ff6b99454b6ac68372ecaf0b04154fdcd
 - public/images/portfolio/default-avatar.webp | 5586b | sha1:97038bafeb268c23a6ec0e9695a9eea18a457731
 - public/images/portfolio/corporate-1.webp | 44174b | sha1:9b0f4099faf3cb115d393a8b9c8c2f63f81efa06
-- public/images/projects/clinic.jpg | 31375b | sha1:96776186bb212db0d2bfa9cb52da5cbeb1f3c6ed
-- public/images/projects/gadget-store.jpg | 27895b | sha1:04ec8d11ceb8d6c411da9afa4694d3905e990ab7
-- public/images/projects/construction.jpg | 40060b | sha1:858033eb9cdae9d66093f6d90d93f6088f95c216
-- public/images/projects/real-estate.jpg | 334333b | sha1:15669c1648d29aaeba95aa97374d2868c3efed69
-- public/images/projects/smj-cafe.jpg | 197157b | sha1:5272006bb3e1eb4b8e76e29405c4f7d430fabb2c
 - public/og-image.png | 132909b | sha1:7102561a00e219c617ff0ddd2fd0c094ffd49782
 - public/grid.svg | 185b | sha1:71a836ea40052f09230c3f3cef63c47e4703f0b1
 ### scripts
@@ -234,20 +216,29 @@ scripts
 - scripts/tree-projects.sh | 862b | sha1:6de4d4cefa660072eaf34961340437a16836bbca
 ### data
 data
-├── blogData.ts
+├── blog
+│   ├── allposts.ts
+│   ├── post1.ts
+│   ├── post2.ts
+│   ├── post3.ts
+│   └── post4.ts
 ├── catalog.projects.ts
 ├── reviews.ts
 ├── servicesData.ts
 └── types.ts
 
-1 directory, 5 files
+2 directories, 9 files
 
 #### Metadata (file | size | sha1)
-- data/servicesData.ts | 5434b | sha1:3e07065d085a131bd303d090e1289619181aecf5
-- data/blogData.ts | 10488b | sha1:0d065a345b99e83f3013984b54a6c9b27d3aaf02
+- data/servicesData.ts | 5567b | sha1:cef0e57d4f1119a77cc0bd4c51c07c9321f6a0ab
 - data/types.ts | 2191b | sha1:022669eecbec9d7d3130188713007d53a0990e9c
 - data/reviews.ts | 4093b | sha1:ac2064dcad2796c1ea3eb43b14e846bf2ea5ff76
-- data/catalog.projects.ts | 4512b | sha1:14594916fd89accf816fc20e13c5252d0c4c44e6
+- data/blog/post1.ts | 1085b | sha1:f1adee5e7de54babaf647be6923e89f2210fce8c
+- data/blog/post2.ts | 1038b | sha1:702800536c5a549bb11356283395d8783697f54f
+- data/blog/post3.ts | 956b | sha1:745f41d4f8307078eb09d84eb43cf13b6fdd7bc9
+- data/blog/post4.ts | 1103b | sha1:caa429d27dd75caaf6fb1bf3eb5c82fd3b0aabc7
+- data/blog/allposts.ts | 700b | sha1:d570729c0b799c8c30b589da625fb12e445769f8
+- data/catalog.projects.ts | 4877b | sha1:2391c71625b22f07c3ab834f11274d34ed5d6804
 ### hooks
 hooks
 └── use-toast.ts
@@ -255,7 +246,7 @@ hooks
 1 directory, 1 file
 
 #### Metadata (file | size | sha1)
-- hooks/use-toast.ts | 3813b | sha1:e220a71104d86f9da4a137a55cad177c2f6f4c0e
+- hooks/use-toast.ts | 3943b | sha1:6eac08b90d28dd8ccf6bc813c4bd6df0c2f34a9f
 ### config
 config
 └── siteConfig.ts
@@ -710,73 +701,70 @@ export default function CafeTemplate({ data }: CafeProps) {
 
 ### `app/(marketing)/[template_id]/_templates/cafe/config.ts`
 ```ts
-// app/(marketing)/[template_id]/_templates/cafe/config.ts
+/** @format */
+// ----------------------------------------------------
+// 🛠️ AI CONTEXT GUIDELINE:
+// 1. IDENTITY: นี่คือ "แบรนด์จำลอง" สำหรับธุรกิจประเภท Cafe
+// 2. PRIMARY BRAND: AEMDEVWEB (Developer) - ห้ามนำชื่อนี้ไปใส่ในเมนูหรือบริการลูกค้า
+// 3. MOCK DATA: ต้องสมจริง (Realistic) เพื่อให้ลูกค้าเห็นภาพธุรกิจของตนเอง
+// ----------------------------------------------------
+
 export const cafeConfig = {
-  id: "cafe",
-  name: "AEMDEVWEB CAFE",
-  themeColor: "#1e3932", // สีเขียว Starbucks Signature
-  secondaryColor: "#d4e9e2", // สีเขียวอ่อน/มิ้นท์
+  id: "template-cafe-industrial", // ระบุว่าเป็น Template
+  name: "THE SOURCE ROASTERS", // 👈 เปลี่ยนเป็นชื่อแบรนด์สมมติที่ดูแพงและสมจริง
+  themeColor: "#1e3932",
+  secondaryColor: "#d4e9e2",
   metadata: {
-    title: "Cafe Aemdevweb | Experience the Perfect Brew",
+    // 🛡️ แยกชื่อแบรนด์เว็บเรา (AEMDEVWEB) ไว้เฉพาะในส่วน SEO Title เพื่อระบุผู้สร้าง
+    title: "The Source Roasters | Premium Cafe Template by AEMDEVWEB",
     description:
-      "พื้นที่สร้างสรรค์ของเหล่านักพัฒนาและคนรักกาแฟ กลิ่นอาย Starbucks สไตล์ Modern Industrial",
+      "ยกระดับร้านกาแฟของคุณด้วยระบบ Digital Menu สไตล์ Industrial Modern",
     ogImage: "/images/projects/smj-cafe.jpg",
   },
   content: {
-    heroTitle: "BREW_AND_CODE",
-    heroSubtitle: "Crafting exceptional coffee for exceptional developers.",
+    // ☕ เปลี่ยนเนื้อหาให้โฟกัสที่ "ธุรกิจกาแฟ" 100% (เพื่อความสมจริงในการปิดการขาย)
+    heroTitle: "CRAFTED_FOR_PERFECTION",
+    heroSubtitle: "ประสบการณ์กาแฟระดับ Specialty ในบรรยากาศ Industrial Modern",
     features: [
       {
         id: 1,
-        label: "PREMIUM_BEANS",
-        detail: "เมล็ดกาแฟคัดพิเศษระดับ Micro-lot",
+        label: "DIRECT_TRADE",
+        detail: "สนับสนุนเกษตรกรด้วยเมล็ดกาแฟ Direct Trade คัดพิเศษ",
       },
       {
         id: 2,
-        label: "DEV_FRIENDLY",
-        detail: "ปลั๊กไฟครบ สัญญาณ Wi-Fi ระดับ Fiber",
+        label: "ROASTERY_LAB",
+        detail: "คั่วสดใหม่ทุกวันด้วยเทคโนโลยีการคุมอุณหภูมิขั้นสูง",
       },
       {
         id: 3,
-        label: "SIGNATURE_MENU",
-        detail: "เมนูพิเศษที่มีเฉพาะที่นี่ที่เดียว",
+        label: "WORKSPACE_READY",
+        detail: "พื้นที่ทำงานที่ออกแบบมาเพื่อสมาธิและความสร้างสรรค์",
       },
     ],
     menuItems: [
       {
         id: "1",
-        name: "ESPRESSO_CORE",
+        name: "SIGNATURE_ESPRESSO", // 👈 เปลี่ยนจาก ESPRESSO_CORE เพื่อความสมจริง
         price: "120.00 THB",
         img: "/images/cafe/espresso.webp",
-        desc: "กาแฟคั่วเข้ม สกัดด้วยแรงดันสูง เพื่อความเข้มข้นถึงขีดสุด",
+        desc: "กาแฟคั่วเข้ม Body หนักแน่น พร้อม Notes ของ Dark Chocolate",
       },
       {
         id: "2",
-        name: "CODE_LATTE",
+        name: "VELVET_LATTE",
         price: "145.00 THB",
         img: "/images/cafe/latte.webp",
-        desc: "ลาเต้ร้อน/เย็น ผสมผสานอย่างลงตัว เพื่อการเขียนโค้ดที่ลื่นไหล",
+        desc: "สัมผัสนุ่มละมุนจากนมคุณภาพเยี่ยมและกาแฟคั่วกลาง",
       },
-      {
-        id: "3",
-        name: "BUG_FIX_TEA",
-        price: "110.00 THB",
-        img: "/images/cafe/tea.webp",
-        desc: "ชาสมุนไพรสูตรพิเศษ คลายความเครียดจากการ Debug",
-      },
-      {
-        id: "4",
-        name: "MEMORY_LEAK_CAKE",
-        price: "95.00 THB",
-        img: "/images/cafe/cake.webp",
-        desc: "เค้กช็อกโกแลตเข้มข้น อร่อยจนลืม Memory Leak ไปเลย",
-      },
+      // ... ตัวอย่างเมนูอื่นๆ
     ],
+    // 🛡️ ส่วนนี้คือจุดแข็ง (Selling Point) ที่ลูกค้าจะซื้อเว็บคุณ
     memberBenefits: [
-      "สะสมคะแนนทุกการสั่งซื้อ",
-      "ส่วนลดพิเศษสำหรับเมนูใหม่",
-      "เข้าถึง Exclusive Wi-Fi Zone",
-      "กิจกรรม Workshop พิเศษสำหรับสมาชิก",
+      "ระบบสะสมแต้มผ่านเบอร์โทรศัพท์",
+      "รับสิทธิ์ซื้อ 1 แถม 1 ในวันเกิด",
+      "จองโต๊ะผ่านระบบออนไลน์ล่วงหน้า",
+      "รับข่าวสารเมนูใหม่ผ่าน Line OA อัตโนมัติ",
     ],
   },
 }
@@ -868,35 +856,62 @@ export default function RealEstateTemplate({ data }: Props) {
 
 ### `app/(marketing)/[template_id]/_templates/realestate/config.ts`
 ```ts
+/** @format */
+// ----------------------------------------------------
+// 💎 AI CONTEXT: LUXURY REAL ESTATE & INVESTMENT
+// Identity: เอเจนซี่อสังหาริมทรัพย์ระดับพรีเมียม (ไม่ใช่แบรนด์ไอที)
+// Tone: หรูหรา, น่าเชื่อถือ, สุขุม (Exclusive & Sophisticated)
+// ----------------------------------------------------
+
 export const realEstateConfig = {
-  id: "realestate",
-  name: "AEMDEVWEB REAL ESTATE",
-  themeColor: "#c2a35d", // Champagne Gold
-  secondaryColor: "#0f172a", // Midnight Navy
+  id: "template-realestate-luxury",
+  name: "VAULT & VEST PROPERTY", // 👈 เปลี่ยนชื่อแบรนด์ให้สื่อถึงความมั่นคง (Vault) และการลงทุน (Vest)
+  themeColor: "#c2a35d", // Champagne Gold (สื่อถึงความมั่งคั่ง)
+  secondaryColor: "#0f172a", // Midnight Navy (สื่อถึงความภูมิฐาน)
   metadata: {
+    // 🛡️ ระบุชื่อผู้สร้างเทคโนโลยีไว้ใน Metadata เช่นเคย
     title:
-      "Aemdevweb Real Estate | คัดสรรที่อยู่อาศัยระดับพรีเมียมและโอกาสการลงทุน",
+      "Vault & Vest | คัดสรรอสังหาริมทรัพย์และโอกาสการลงทุนระดับพรีเมียม by AEMDEVWEB",
     description:
-      "Agency มืออาชีพ จัดหาคอนโด บ้านหรู และพื้นที่ธุรกิจ บนทำเลศักยภาพทั่วกรุงเทพฯ",
+      "ที่ปรึกษาด้านอสังหาริมทรัพย์ระดับ Exclusive มอบดีลที่ดีที่สุดบนทำเลศักยภาพทั่วประเทศ",
     ogImage: "/images/projects/real-estate.jpg",
   },
   content: {
-    heroTitle: "REDEFINING_LUXURY_LIVING",
+    // 🏰 เน้นภาษาที่ดึงดูดกลุ่มลูกค้าระดับบน (High Net Worth)
+    heroTitle: "EXCEPTIONAL_LIVING_CURATED",
     heroSubtitle:
-      "คัดสรรเฉพาะยูนิตที่ดีที่สุด เพื่อไลฟ์สไตล์ที่เหนือระดับและการลงทุนที่คุ้มค่า",
+      "รวบรวมสุดยอดที่อยู่อาศัยที่ผ่านการคัดสรรอย่างพิถีพิถัน เพื่อสุนทรียภาพแห่งการใช้ชีวิตและการเติบโตของสินทรัพย์",
+
+    // 🏷️ ปรับหมวดหมู่ให้ดูมีความเป็นพอร์ตโฟลิโอการลงทุน
     categories: [
-      { id: "CONDO", label: "LUXURY_CONDOMINIUMS", count: "120+ Units" },
-      { id: "HOUSE", label: "EXCLUSIVE_RESIDENCES", count: "45+ Houses" },
-      { id: "INVEST", label: "INVESTMENT_ASSETS", count: "15+ Projects" },
-      { id: "COMM", label: "COMMERCIAL_SPACE", count: "30+ Locations" },
+      { id: "CONDO", label: "ELITE_COLLECTION", count: "120+ Units" },
+      { id: "HOUSE", label: "PRIVATE_ESTATES", count: "45+ Houses" },
+      { id: "INVEST", label: "STRATEGIC_INVESTMENTS", count: "15+ Projects" },
+      { id: "LAND", label: "LAND_ACQUISITION", count: "30+ Locations" },
     ],
+
+    // ✨ ไฮไลท์ที่เน้นความ Exclusive และบริการแบบมืออาชีพ
     highlights: [
-      { title: "PRIME_LOCATION", detail: "ติดรถไฟฟ้าและย่านธุรกิจใจกลางเมือง" },
-      { title: "EXPERT_ADVISORY", detail: "ปรึกษาฟรีด้านสินเชื่อและการลงทุน" },
       {
-        id: "FULL_SERVICE",
-        detail: "ดูแลครบตั้งแต่เลือกยูนิตจนถึงโอนกรรมสิทธิ์",
+        title: "CURATED_SELECTION",
+        detail: "ทุกยูนิตผ่านการประเมินศักยภาพและความคุ้มค่าโดยผู้เชี่ยวชาญ",
       },
+      {
+        title: "CONCIERGE_ADVISORY",
+        detail: "บริการที่ปรึกษาส่วนตัวด้านสินเชื่อและสิทธิประโยชน์ทางภาษี",
+      },
+      {
+        title: "END_TO_END_EXCELLENCE",
+        detail:
+          "ดูแลทุกขั้นตอนอย่างใกล้ชิด ตั้งแต่การเยี่ยมชมจนถึงการบริหารทรัพย์สิน",
+      },
+    ],
+
+    // 🏆 ส่วนเสริมเพื่อสร้างความมั่นใจ (Authority Building)
+    expertService: [
+      "Market Analysis & Insight",
+      "Portfolio Management",
+      "International Property Access",
     ],
   },
 }
@@ -989,67 +1004,85 @@ export default function ConstructionTemplate({ data }: Props) {
 ### `app/(marketing)/[template_id]/_templates/construction/config.ts`
 ```ts
 /** @format */
+// ----------------------------------------------------
+// 🏗️ AI CONTEXT: ENGINEERING & INFRASTRUCTURE TEMPLATE
+// Identity: บริษัทรับเหมาก่อสร้างและวิศวกรรมโยธา (ไม่ใช่บริษัทไอที)
+// Tone: แข็งแกร่ง, แม่นยำ, มาตรฐานความปลอดภัยสูง (Industrial Professionalism)
+// ----------------------------------------------------
 
 export const constructionConfig = {
-  id: "construction-template-001",
-  name: "CONSTRUCTION_PRO",
+  id: "template-construction-industrial",
+  name: "TITAN STRUCTURES & ENGINEERING", // 👈 เปลี่ยนชื่อแบรนด์ให้ดูแกร่งและเป็นมืออาชีพ
+  themeColor: "#1e293b", // Slate 800 (สื่อถึงเหล็กและโครงสร้าง)
+  secondaryColor: "#f59e0b", // Amber 500 (สีสัญลักษณ์ความปลอดภัย/เครื่องจักร)
   metadata: {
-    description: "รับเหมาก่อสร้างและงานวิศวกรรมโยธามาตรฐานสากล",
+    title:
+      "Titan Structures | มาตรฐานวิศวกรรมและรับเหมาก่อสร้างระดับสากล by AEMDEVWEB",
+    description:
+      "บริษัทผู้นำด้านงานก่อสร้างอุตสาหกรรมและโครงสร้างพื้นฐานระดับชาติ",
     ogImage: "/images/projects/construction-bg.jpg",
   },
   content: {
-    heroTitle: "ENGINEERING_THE_FUTURE",
+    // 🚧 เน้นคำศัพท์ที่สร้างความเชื่อมั่นในงานโครงสร้าง
+    heroTitle: "STRENGTH_THROUGH_PRECISION",
     heroSubtitle:
-      "เราสร้างโครงสร้างพื้นฐานที่มั่นคง ด้วยมาตรฐานวิศวกรรมระดับสากล และนวัตกรรมการก่อสร้างที่ล้ำสมัย",
+      "ออกแบบและก่อสร้างโครงสร้างพื้นฐานที่ยั่งยืน ด้วยมาตรฐานวิศวกรรมชั้นสูงและนวัตกรรมการบริหารโครงการที่แม่นยำ",
 
-    // 📊 ส่วนแสดงตัวเลขความสำเร็จ
+    // 📊 สถิติที่เน้นความเก๋าของบริษัทรับเหมา
     trackRecord: [
-      { label: "PROJECTS_COMPLETED", value: "250+" },
-      { label: "ENGINEERING_EXPERTS", value: "45" },
-      { label: "YEARS_OF_SERVICE", value: "15" },
+      { label: "PROJECTS_DELIVERED", value: "250+" },
+      { label: "CERTIFIED_ENGINEERS", value: "45" },
+      { label: "SAFETY_MILESTONE", value: "1M+ Hours" }, // ชั่วโมงการทำงานที่ปลอดภัย
     ],
 
-    // 🛡️ FIX ERROR บรรทัดที่ 60: เพิ่มข้อมูลความเชี่ยวชาญ (Expertise)
+    // 🛡️ ข้อมูลความเชี่ยวชาญ (Expertise)
     expertise: [
       {
         id: "exp-1",
-        label: "STRUCTURAL_DESIGN",
+        label: "STRUCTURAL_INTEGRITY",
         detail:
-          "ออกแบบโครงสร้างที่ทนทานต่อทุกสภาวะ ด้วยซอฟต์แวร์วิศวกรรมขั้นสูง",
+          "วิเคราะห์และคำนวณโครงสร้างเพื่อความคงทนสูงสุดด้วยเทคโนโลยี BIM (Building Information Modeling)",
       },
       {
         id: "exp-2",
-        label: "PROJECT_MANAGEMENT",
+        label: "EPC_MANAGEMENT",
         detail:
-          "บริหารจัดการงบประมาณและเวลาอย่างแม่นยำ ด้วยระบบติดตามงานแบบ Real-time",
+          "การบริหารโครงการแบบครบวงจร (Engineering, Procurement, Construction) ควบคุมงบประมาณและเวลาได้ 100%",
       },
       {
         id: "exp-3",
-        label: "GREEN_BUILDING",
+        label: "SUSTAINABLE_CIVIL",
         detail:
-          "ก่อสร้างด้วยแนวคิดรักษ์โลก ลดการใช้พลังงาน และเลือกใช้วัสดุที่เป็นมิตรต่อสิ่งแวดล้อม",
+          "นวัตกรรมการก่อสร้างสีเขียวที่เน้นการใช้ทรัพยากรอย่างคุ้มค่าตามมาตรฐาน LEED",
       },
     ],
 
+    // 🏗️ บริการหลักในเชิงธุรกิจ
     services: [
       {
         id: 1,
-        title: "INDUSTRIAL_BUILD",
-        desc: "รับเหมาก่อสร้างโรงงานและอาคารอุตสาหกรรมขนาดใหญ่",
+        title: "INDUSTRIAL_FACILITIES",
+        desc: "เชี่ยวชาญการก่อสร้างคลังสินค้าและโรงงานอุตสาหกรรมหนักตามมาตรฐานสากล",
       },
       {
         id: 2,
-        title: "INFRASTRUCTURE",
-        desc: "พัฒนาระบบสาธารณูปโภคและโครงสร้างพื้นฐานครบวงจร",
+        title: "PUBLIC_INFRASTRUCTURE",
+        desc: "พัฒนาระบบสาธารณูปโภค ถนน สะพาน และโครงสร้างพื้นฐานขนาดใหญ่เพื่อชุมชน",
       },
       {
         id: 3,
-        title: "CONSULTANCY",
-        desc: "ที่ปรึกษาด้านการบริหารโครงการและการควบคุมงานก่อสร้าง",
+        title: "STRATEGIC_CONSULTANCY",
+        desc: "บริการที่ปรึกษาเชิงวิศวกรรมและการตรวจสอบความปลอดภัยโครงสร้างอาคาร",
       },
     ],
+
+    // 🎖️ ส่วนเสริมความน่าเชื่อถือ (ปิดการขาย)
+    certifications: [
+      "ISO 9001:2015 Certified",
+      "Council of Engineers Standard",
+      "OHSAS 18001 Safety Excellence",
+    ],
   },
-}
 ```
 
 ### `app/(marketing)/[template_id]/_templates/starter/StarterTemplate.tsx`
@@ -1138,33 +1171,60 @@ export default function StarterTemplate({ data }: Props) {
 
 ### `app/(marketing)/[template_id]/_templates/starter/config.ts`
 ```ts
+/** @format */
+// ----------------------------------------------------
+// ⚡ AI CONTEXT: SME STARTER & FAST-TRACK LAUNCH
+// Identity: บริการเว็บสำเร็จรูปเกรดพรีเมียม (Speed & Conversion Focused)
+// Tone: กระฉับกระเฉง, เร้าใจ, เน้นความคุ้มค่า (Action-Oriented & High Value)
+// ----------------------------------------------------
+
 export const starterConfig = {
-  id: "starter",
-  name: "STARTER_LAUNCHPAD",
-  themeColor: "#ff3e3e", // Electric Red (สีแห่งความเร่งรีบและโปรโมชั่น)
+  id: "template-starter-launchpad",
+  name: "FASTTRACK DIGITAL", // 👈 ชื่อแบรนด์ที่สื่อถึงความเร็วและการเติบโต
+  themeColor: "#ff3e3e", // Electric Red (สีกระตุ้นการตัดสินใจ)
   secondaryColor: "#000000",
   metadata: {
-    title: "Starter Web Launch | เริ่มต้นธุรกิจออนไลน์ในราคาสุดคุ้ม",
+    // 🛡️ เน้นความคุ้มค่าใน SEO Title
+    title:
+      "FastTrack Digital | เว็บไซต์ SME เริ่มต้นเพียง 3,900.- ครบ จบ ในที่เดียว",
     description:
-      "แพ็คเกจสร้างเว็บไซต์เริ่มต้น ราคาเดียวจบ พร้อมใช้งานใน 24 ชม.",
+      "ยกระดับธุรกิจสู่โลกออนไลน์ด้วยเว็บไซต์ประสิทธิภาพสูง โหลดไว ติดหน้าแรก Google ได้ง่ายกว่า",
     ogImage: "/images/projects/starter.jpg",
   },
   content: {
+    // 💰 ข้อมูลราคา (Price Strategy)
     promoPrice: "3,900",
     originalPrice: "7,500",
     savePercent: "48%",
-    heroTitle: "START_FAST_GROW_BIG",
-    heroSubtitle: "เว็บไซต์คุณภาพสูง ดีไซน์ระดับสากล ในราคาที่ SME เอื้อมถึง",
+
+    // 🚀 เน้นผลลัพธ์ที่รวดเร็ว (Time-to-Market)
+    heroTitle: "GO_DIGITAL_IN_24HRS",
+    heroSubtitle:
+      "สร้างตัวตนบนโลกออนไลน์ด้วยเว็บไซต์มาตรฐานสากล ที่ออกแบบมาเพื่อเปลี่ยนผู้เข้าชมให้เป็นยอดขาย",
+
+    // 🛠️ Feature ที่ SME แคร์ที่สุด
     features: [
-      { id: 1, text: "Responsive Design (รองรับมือถือ 100%)" },
-      { id: 2, text: "High-Speed Loading (คะแนน 90+)" },
-      { id: 3, text: "SEO Optimization เบื้องต้น" },
-      { id: 4, text: "ฟรี! Domain & Hosting 1 ปี" },
+      { id: 1, text: "ULTRA_RESPONSIVE (แสดงผลสมบูรณ์บนทุกหน้าจอ)" },
+      { id: 2, text: "LIGHTNING_SPEED (โหลดไวภายใน 1 วินาที)" },
+      { id: 3, text: "READY_FOR_ADS (รองรับการทำ Facebook/Google Ads)" },
+      {
+        id: 4,
+        text: "FREE_ALL_IN_ONE (ฟรี! โดเมน โฮสติ้ง และระบบรักษาความปลอดภัย)",
+      },
     ],
+
+    // 🛒 สินค้าในแพ็คเกจ (Product Psychology)
     cartItem: {
-      name: "PRO_WEBSITE_PACKAGE",
-      status: "IN_STOCK_READY",
+      name: "SME_GROWTH_PACKAGE",
+      status: "LIMITED_SLOTS_AVAILABLE", // 👈 เปลี่ยนเพื่อให้เกิดความรู้สึกเร่งด่วน (Urgency)
     },
+
+    // 🛡️ ส่วนการันตี (Trust Builders)
+    guarantee: [
+      "100% Satisfaction Guarantee",
+      "No Hidden Fees",
+      "Lifetime Security Updates",
+    ],
   },
 }
 ```
@@ -1255,30 +1315,55 @@ export default function ClinicTemplate({ data }: ClinicProps) {
 
 ### `app/(marketing)/[template_id]/_templates/clinic/config.ts`
 ```ts
+/** @format */
+// ----------------------------------------------------
+// 🏥 AI CONTEXT: MEDICAL & WELLNESS TEMPLATE
+// Identity: คลินิกเวชกรรม/ศูนย์สุขภาพพรีเมียม (ไม่ใช่แบรนด์ไอที)
+// Tone: สะอาด, น่าเชื่อถือ, อบอุ่น (Medical Professionalism)
+// ----------------------------------------------------
+
 export const clinicConfig = {
-  id: "clinic",
-  name: "AEMDEVWEB CLINIC",
-  themeColor: "#2563eb", // Royal Blue
-  secondaryColor: "#f8fafc", // Slate 50 (ความสะอาด)
+  id: "template-medical-wellness",
+  name: "AURA WELLNESS CENTER", // 👈 เปลี่ยนชื่อแบรนด์สมมติให้ดูน่าเชื่อถือในสายการแพทย์
+  themeColor: "#0f766e", // 👈 ปรับเป็นสี Teal/Dark Green (ให้ความรู้สึกเยียวยาและพรีเมียมกว่า Blue ทั่วไป)
+  secondaryColor: "#f0fdfa",
   metadata: {
-    title: "Aemdevweb Clinic | นวัตกรรมการดูแลสุขภาพระดับพรีเมียม",
+    // 🛡️ SEO ยังคงให้เครดิต AEMDEVWEB ในฐานะ Developer
+    title:
+      "Aura Wellness Center | นวัตกรรมการดูแลสุขภาพระดับพรีเมียม by AEMDEVWEB",
     description:
-      "คลีนิกเวชกรรมเฉพาะทาง ดูแลโดยทีมแพทย์ผู้เชี่ยวชาญ พร้อมเทคโนโลยีที่ทันสมัยที่สุดในไทย",
+      "คลินิกเวชกรรมเฉพาะทางที่ผสานเทคโนโลยีสมัยใหม่เข้ากับการดูแลอย่างเหนือระดับ",
     ogImage: "/images/projects/clinic.jpg",
   },
   content: {
-    heroTitle: "MEDICAL_CARE_REDEFINED",
+    // 🩺 เปลี่ยนจากคำศัพท์เชิงระบบ (Redefined) เป็นคำศัพท์ที่ลูกค้าต้องการได้ยิน
+    heroTitle: "PRECISION_CARE_FOR_YOU",
     heroSubtitle:
-      "สัมผัสประสบการณ์การรักษาที่แม่นยำและใส่ใจ ในทุกรายละเอียดการบริการ",
+      "นิยามใหม่ของการดูแลสุขภาพเชิงป้องกัน โดยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่แม่นยำที่สุด",
     stats: [
-      { id: 1, label: "SPECIALISTS", value: "15+" },
-      { id: 2, label: "SUCCESS_CASES", value: "5,000+" },
-      { id: 3, label: "SATISFACTION", value: "99%" },
+      { id: 1, label: "BOARD_CERTIFIED", value: "15+" }, // เน้นวุฒิบัตรแพทย์
+      { id: 2, label: "HAPPY_PATIENTS", value: "12,000+" }, // เน้นผลลัพธ์คนไข้
+      { id: 3, label: "PRECISION_TECH", value: "99.9%" }, // เน้นความแม่นยำเครื่องมือ
     ],
     services: [
-      { title: "HEALTH_CHECKUP", detail: "ตรวจสุขภาพประจำปีเชิงลึก" },
-      { title: "SPECIFIC_CARE", detail: "การรักษาโรคเฉพาะทาง" },
-      { title: "WELLNESS_PROGRAM", detail: "โปรแกรมฟื้นฟูสุขภาพแบบองค์รวม" },
+      {
+        title: "EXECUTIVE_CHECKUP",
+        detail: "โปรแกรมตรวจสุขภาพระดับผู้บริหารที่เจาะลึกถึงระดับยีน",
+      },
+      {
+        title: "ANTI_AGING_MEDICINE",
+        detail: "ศาสตร์แห่งการชะลอวัยและฟื้นฟูเซลล์จากภายในสู่ภายนอก",
+      },
+      {
+        title: "PERSONALIZED_WELLNESS",
+        detail: "โปรแกรมฟื้นฟูสุขภาพเฉพาะบุคคล ออกแบบโดยแพทย์ผู้เชี่ยวชาญ",
+      },
+    ],
+    // 🚀 ส่วนเสริมเพื่อปิดการขาย (Conversion Drivers)
+    trustBadges: [
+      "JCI International Standard",
+      "Medical Innovation Award 2024",
+      "Certified Specialist Doctors",
     ],
   },
 }
@@ -1598,169 +1683,117 @@ const AboutPage = () => {
 ### `app/(main)/blog/[slug]/page.tsx`
 ```ts
 /** @format */
-
 import React from "react"
-import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
-import { blogData } from "@/data/blogData"
-import { siteConfig } from "@/config/siteConfig"
-import { Button } from "@/components/ui/button"
-import { CalendarDays, ChevronLeft, Clock, Share2 } from "lucide-react"
-import { Metadata } from "next"
+import { blogData } from "@/data/blog/allposts"
+import Image from "next/image"
 
-interface Props {
-  params: Promise<{ slug: string }>
-}
-
-/**
- * 🛠️ SSG Optimization: สร้างหน้า Static ไว้ล่วงหน้าตอน Build
- */
+// 🛠️ สร้างหน้า Static ล่วงหน้าตาม Slug ที่มี
 export async function generateStaticParams() {
   return blogData.map((post) => ({
-    slug: post.slug,
+    slug: post.slug || post.id, // รองรับทั้ง slug และ id
   }))
 }
 
-/**
- * 🚀 SEO Metadata: ปรับปรุงการเรียกใช้ Metadata ให้สมบูรณ์
- */
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const post = blogData.find((p) => p.slug === slug)
-  if (!post) return { title: "ไม่พบบทความ | aemdevweb" }
-
-  return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      url: `${siteConfig.url}/blog/${post.slug}`,
-      images: [{ url: post.image, width: 1200, height: 630, alt: post.title }],
-      type: "article",
-      publishedTime: post.date, // สำหรับ Schema Markup
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      images: [post.image],
-    },
-  }
-}
-
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params
-  const post = blogData.find((p) => p.slug === slug)
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = blogData.find((p) => (p.slug || p.id) === params.slug)
 
   if (!post) notFound()
 
-  // Normalize Author
-  const author = {
-    name:
-      typeof post.author === "object"
-        ? post.author.name
-        : post.author || "AemDev Team",
-    role: typeof post.author === "object" ? post.author.role : "Web Specialist",
-    avatar:
-      typeof post.author === "object"
-        ? post.author.avatar
-        : "/images/profile/default-avatar.webp",
-  }
-
   return (
-    <main className="min-h-screen bg-white pb-20">
-      {/* Article Header */}
-      <div className="mx-auto max-w-4xl px-4 pt-12 md:pt-20">
-        <Button
-          variant="ghost"
-          asChild
-          className="-ml-4 mb-8 text-slate-500 transition-colors hover:text-primary"
+    <article className="min-h-screen bg-white pb-32 pt-40">
+      <div className="container mx-auto max-w-4xl px-6">
+        {/* Post Meta */}
+        <div className="mb-8 flex items-center gap-4">
+          <span className="bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
+            {post.category}
+          </span>
+          <time className="font-mono text-sm font-bold text-slate-400">
+            {post.date}
+          </time>
+        </div>
+
+        <h1 className="mb-12 text-4xl font-black uppercase italic leading-[1.1] tracking-tighter text-slate-900 md:text-7xl">
+          {post.title}
+        </h1>
+
+        {/* Featured Image */}
+        <div className="relative mb-16 aspect-video overflow-hidden border-4 border-slate-900 shadow-[12px_12px_0px_0px_#2563eb]">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {/* Content Render */}
+        <div
+          className="prose prose-slate prose-lg prose-headings:font-black prose-headings:uppercase prose-headings:italic prose-headings:tracking-tighter prose-strong:text-slate-900 prose-blockquote:border-l-8 prose-blockquote:border-blue-600 prose-img:border-4 prose-img:border-slate-900 max-w-none shadow-blue-600"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
+      </div>
+    </article>
+  )
+}
 ```
 
 ### `app/(main)/blog/page.tsx`
 ```ts
 /** @format */
-import React, { memo } from "react"
+import React from "react"
 import { Metadata } from "next"
-import Image from "next/image"
-import Link from "next/link"
-import { blogData } from "@/data/blogData"
-import { siteConfig } from "@/config/siteConfig"
-import { Calendar, Clock, Sparkles, MoveRight, BookOpen } from "lucide-react"
+import { blogData } from "@/data/blog/allposts"
+import BlogSection from "@/components/BlogSection"
 
 export const metadata: Metadata = {
-  title: `คลังความรู้ SME และเทคนิคการทำเว็บไซต์ | ${siteConfig.name}`,
+  title: "Insights & Knowledge | AEMDEVWEB",
   description:
-    "รวมบทความเทคนิคการทำเว็บไซต์ การตลาดออนไลน์ และแนวทางการปรับตัวสำหรับธุรกิจ SME ร้านอาหาร และ หจก. โดยผู้เชี่ยวชาญ",
+    "รวบรวมเทคนิคการทำเว็บไซต์และการตลาดออนไลน์ฉบับพาร์ทเนอร์ เน้นนำไปใช้จริงกับธุรกิจของคุณ",
 }
 
-const BlogPage = () => {
-  // เรียงลำดับบทความใหม่สุดขึ้นก่อน (Defensive Check)
-  const allPosts = blogData
-    ? [...blogData].sort((a, b) => Number(b.id) - Number(a.id))
-    : []
-
+export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 1. HEADER SECTION: INDUSTRIAL INSIGHTS ─── */}
-      <section className="relative overflow-hidden border-b-[6px] border-slate-900 bg-slate-50 py-24 md:py-40">
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60" />
-        <div className="absolute right-0 top-0 -mr-20 -mt-20 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]" />
-
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl space-y-12">
-            <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-6 py-3 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] transition-all hover:shadow-none">
-              <Sparkles size={16} className="animate-pulse text-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-900 md:text-xs">
-                Business Intelligence & Tech Insights
-              </span>
-            </div>
-
-            <h1 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-8xl lg:text-[100px]">
-              คลังความรู้ <br />
-              <span className="text-blue-600 underline decoration-slate-900 decoration-8 underline-offset-[12px]">
-                สำหรับผู้ประกอบการ
-              </span>
-            </h1>
-
-            <p className="max-w-2xl border-l-[10px] border-blue-600/20 pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-              ถอดรหัสเทคนิคการสร้างตัวตนบนโลกออนไลน์ การจัดการระบบหลังบ้าน
-              และกลยุทธ์ที่ช่วยให้ธุรกิจคุณเติบโตอย่างแม่นยำด้วยเทคโนโลยี
-            </p>
+    <main className="min-h-screen bg-white py-24 lg:py-32">
+      <div className="container mx-auto px-6">
+        {/* HEADER */}
+        <div className="mb-20 border-b-8 border-slate-900 pb-12">
+          <div className="mb-4 inline-block bg-blue-600 px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-white">
+            KNOWLEDGE_HUB v2.0
           </div>
+          <h1 className="text-6xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-9xl">
+            Latest <br />
+            <span className="text-blue-600">Insights.</span>
+          </h1>
         </div>
-      </section>
 
-      {/* ─── 2. BLOG GRID: MODULAR INDUSTRIAL CARDS ─── */}
-      <section className="py-24 md:py-40">
-        <div className="container mx-auto px-6">
-          {allPosts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-px border-[6px] border-slate-900 bg-slate-900 shadow-2xl md:grid-cols-2 lg:grid-cols-3">
-              {allPosts.map((post, index) => {
-                const authorData =
-                  typeof post.author === "object" && post.author !== null
-                    ? post.author
-                    : {
-                        name:
-                          typeof post.author === "string"
-                            ? post.author
-                            : "AEMDEVWEB Admin",
-                        avatar: "/images/default-avatar.png",
-                      }
+        {/* CONTENT */}
+        <BlogSection posts={blogData} />
+      </div>
+    </main>
+  )
+}
+```
 
-                return (
-                  <article
-                    key={post.id}
-                    className="group flex flex-col bg-white transition-all duration-500 hover:z-10 hover:bg-slate-50"
-                  >
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="relative block aspect-[16/10] overflow-hidden border-b-2 border-slate-900 bg-slate-100"
-                    >
-                      <Image
-                        src={post.image}
+### `app/(main)/blog/loading.tsx`
+```ts
+/** @format */
+export default function Loading() {
+  return (
+    <div className="container mx-auto px-6 py-32">
+      <div className="h-20 w-3/4 animate-pulse bg-slate-100" />
+      <div className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-2">
+        {[1, 2, 3, 4].map((i) => (
+          <div
+            key={i}
+            className="h-96 w-full animate-pulse border-4 border-slate-100 bg-slate-50"
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 ```
 
 ### `app/(main)/catalog/page.tsx`
@@ -2017,62 +2050,42 @@ export default function ContactMap() {
 
 ### `app/(main)/services/page.tsx`
 ```ts
-// app/(main)/services/page.tsx
-import React from "react"
-import { Metadata } from "next"
-import { servicesData } from "@/data/servicesData"
+/** @format */
 import ServicesPageClient from "./ServicesPageClient"
-
-export const metadata: Metadata = {
-  title: "",
-  description: "",
-}
+import { servicesData } from "@/data/servicesData"
 
 export default function ServicesPage() {
   return (
-    <section className="container mx-auto px-4 py-24">
-      {/* Header Section */}
-      <div className="mb-20 border-l-8 border-slate-900 pl-8">
-        <h1 className="text-6xl font-black uppercase italic tracking-tighter text-slate-900 md:text-8xl">
-          SERVICE<span className="text-blue-600 text-primary">_</span>MATRIX
-        </h1>
-        <p className="mt-4 max-w-2xl text-xl font-bold text-slate-500">""</p>
-      </div>
-
-      {/* Services Grid */}
+    <>
+      {/* ✅ ส่งข้อมูลเข้า Client Component ตามที่ระบุ Type ไว้ */}
       <ServicesPageClient services={servicesData} />
-
-      {/* Footer Note */}
-      <div className="mt-20 border-t-4 border-slate-900 pt-10 text-center">
-        <p className="font-mono text-sm font-black uppercase tracking-[0.3em] text-slate-400">
-          All templates are optimized for SEO & High-Performance
-        </p>
-      </div>
-    </section>
+    </>
   )
 }
 ```
 
 ### `app/(main)/services/ServicesPageClient.tsx`
 ```ts
-// app/(main)/services/ServicesPageClient.tsx
+/** @format */
 "use client"
 
 import React from "react"
-import ServiceCard from "@/components/Services"
-import { ServiceItem } from "@/data/servicesData"
+// ✅ Import จาก Path จริง: components/Services.tsx
+import { Services } from "@/components/Services" 
+import { ServiceItem } from "@/types/service"
 
-export default function ServicesPageClient({
-  services,
-}: {
+interface ServicesPageClientProps {
   services: ServiceItem[]
-}) {
+}
+
+export default function ServicesPageClient({ services }: ServicesPageClientProps) {
   return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-      {services.map((service) => (
-        <ServiceCard key={service.id} service={service} />
-      ))}
-    </div>
+    <main className="min-h-screen bg-white">
+      <div className="container mx-auto px-4">
+        {/* ✅ ส่งต่อข้อมูลไปยัง Component ที่มึงตั้งชื่อไว้ */}
+        <Services services={services} />
+      </div>
+    </main>
   )
 }
 ```
@@ -2087,14 +2100,14 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import { ArrowRight } from "lucide-react"
 
-import { blogData } from "@/data/blogData"
-import { servicesData } from "@/data/servicesData" // ✅ นำเข้าข้อมูล Services
+// ✅ แก้ไข Path จากเดิมที่ Error (@/data/blogData) เป็น Path ใหม่ที่รวมไฟล์แล้ว
+import { blogData } from "@/data/blog/allposts"
+
 import Hero from "@/components/Hero"
 import SocialProof from "@/components/SocialProof"
 
 // --- 🛠️ Optimized Dynamic Imports ---
-// ✅ แก้ไข: นำเข้า ServiceCard แยกต่างหาก หรือใช้ตัวหลักที่จัดการ Loop ข้อมูลเอง
-const ServiceCard = dynamic(() => import("@/components/Services"), {
+const ServicesSection = dynamic(() => import("@/components/Services"), {
   ssr: true,
 })
 const BlogSection = dynamic(() => import("@/components/BlogSection"), {
@@ -2108,8 +2121,11 @@ const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
 export default function HomePage() {
   /**
    * ✅ Normalization Logic สำหรับ Blog
+   * ดึงข้อมูลจาก allposts มากรองเฉพาะบทความล่าสุด
    */
   const featuredPosts = useMemo(() => {
+    if (!blogData) return []
+
     return blogData.slice(0, 4).map((post: any) => {
       const getString = (val: any) => val?.th || val?.en || val || ""
       return {
@@ -2146,7 +2162,7 @@ export default function HomePage() {
         }
       />
 
-      {/* ─── 2. SOCIAL PROOF (Neobrutalism Overlap) ─── */}
+      {/* ─── 2. SOCIAL PROOF ─── */}
       <div className="relative z-20 -mt-12 border-y-4 border-slate-900 bg-white shadow-[0px_10px_0px_0px_rgba(15,23,42,1)]">
         <div className="container mx-auto px-6 py-10">
           <SocialProof />
@@ -2154,17 +2170,13 @@ export default function HomePage() {
       </div>
 
       {/* ─── 3. OUR SERVICES ─── */}
-      <section
-        id="services-showcase"
-        className="border-t-4 border-slate-900 bg-slate-50 py-24 md:py-32"
-      >
-        <div className="container mx-auto px-6">
+      {/* เรียกก้อนเดียวจบ ไม่ซ้ำซ้อน */}
+      <ServicesSection />
 ```
 
 ### `app/(main)/layout.tsx`
 ```ts
 /** @format */
-
 import React from "react"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
@@ -2175,18 +2187,30 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
-      {/* 1. Header มักจะตั้งค่าเป็น fixed/sticky 
-          จึงแนะนำให้ตรวจเช็ค padding-top ในหน้าย่อย 
+    // min-h-screen และ flex-col ช่วยให้ Footer ติดล่างเสมอแม้เนื้อหาน้อย
+    <div className="relative flex min-h-screen flex-col bg-white font-sans antialiased">
+      {/* ─── HEADER ─── 
+          แนะนำให้ใส่ z-index สูงๆ ไว้ใน Header component 
+          เพื่อไม่ให้โดน Shadow ของตัว Card ในหน้า Services ทับ
       */}
       <Header />
 
-      {/* 2. flex-1: ดัน Footer ลงล่างเสมอ
-          3. overflow-x-hidden: ป้องกันจอดิ้นในแนวนอนจาก Animation หรือ Component ที่กว้างเกินไป
+      {/* ─── MAIN CONTENT ─── 
+          1. flex-1: ดัน Footer ลงล่าง
+          2. overflow-x-hidden: สำคัญมากสำหรับสไตล์ Neo-Brutalism 
+             เพราะเงา [8px_8px_0px_0px] มักจะทำให้เกิด Scrollbar แนวนอนโดยไม่ตั้งใจ
       */}
-      <main className="flex-1 overflow-x-hidden">{children}</main>
+      <main className="relative flex-1 overflow-x-hidden">
+        {/* คุณสามารถใส่สีกรอบ หรือ Grid พื้นหลังแบบ Global ได้ที่นี่ */}
+        <div
+          className="absolute inset-0 z-[-1] opacity-[0.01]"
+          style={{ backgroundImage: 'url("/grid.svg")' }}
+        />
 
-      {/* 4. Footer ส่วนท้ายเว็บไซต์ */}
+        {children}
+      </main>
+
+      {/* ─── FOOTER ─── */}
       <Footer />
     </div>
   )
@@ -2199,11 +2223,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
 import { MetadataRoute } from "next"
 import { siteConfig } from "@/config/siteConfig"
 import { catalogProjects } from "@/data/catalog.projects"
-import { blogData } from "@/data/blogData"
+// ✅ แก้ไขจาก @/data/blogData เป็น Path ใหม่ที่รวมไฟล์แล้ว
+import { blogData } from "@/data/blog/allposts"
+import { BlogPost } from "@/types/blog"
 
 /**
  * 🛠️ Helper: ตรวจสอบวันที่ให้ปลอดภัยก่อนส่งให้ Sitemap
- * เพื่อความถูกต้องตามมาตรฐาน XML Sitemap
  */
 function getSafeDate(dateStr: string | undefined | null): Date {
   if (!dateStr) return new Date()
@@ -2215,7 +2240,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig?.url || "https://www.aemdevweb.com"
 
   // 1. 📂 หน้าหลัก (Static Routes)
-  // 📝 UX Note: ปรับ /portfolio เป็น /catalog ให้ตรงกับโครงสร้างเมนูที่เราคุยกันไว้
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -2230,24 +2254,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. 🚀 หน้า Landing Templates (Dynamic Routes) - ส่วนที่ทำเงินที่สุด
-  // 📝 SEO Note: หน้าเหล่านี้คือสินค้าตัวจริงของเรา ให้ Priority สูงเกือบเท่าหน้าแรก
+  // 2. 🚀 หน้า Landing Templates (Dynamic Routes)
+  // 📝 แก้ไข: ปรับ Path ให้ตรงกับที่เราคุยกัน (ถ้าคุณใช้ /[template_id] โดยไม่มีคำว่า landing)
+  // แต่ถ้าคุณยืนยันจะใช้ /landing/ ก็นำหน้าได้ครับ
   const templateRoutes: MetadataRoute.Sitemap = catalogProjects.map(
     (project) => ({
-      url: `${baseUrl}/landing/${project.templateId}`,
+      url: `${baseUrl}/${project.templateId}`, // หรือ `/landing/${project.templateId}` ตามโครงสร้างโฟลเดอร์จริง
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })
   )
 
-  // 3. 📝 หน้าบทความ Blog - ส่วนที่สร้าง Trust และ Traffic
-  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: getSafeDate(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  // 3. 📝 หน้าบทความ Blog
+  // ✅ ระบุ Type ให้ (post: BlogPost) เพื่อแก้ปัญหา Parameter implicitly has an 'any' type
+  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map(
+    (post: BlogPost) => ({
+      url: `${baseUrl}/blog/${post.slug || post.id}`,
+      lastModified: getSafeDate(post.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })
+  )
 
   return [...staticRoutes, ...templateRoutes, ...blogRoutes]
 }
@@ -2258,83 +2286,83 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 /** @format */
 "use client"
 
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { Menu, X, Code2 } from "lucide-react"
 import { siteConfig } from "@/config/siteConfig"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Code2, Sparkles, ArrowRight } from "lucide-react"
-import { cn } from "@/lib/utils"
 
-export default function Header() {
+export function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
-  // 1. Scroll Effect: ใช้ useCallback เพื่อประสิทธิภาพสูงสุด
-  const handleScroll = useCallback(() => {
-    const isScrolled = window.scrollY > 20
-    setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev))
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [handleScroll])
-
-  /**
-   * ✅ 2. FIX: react-hooks/exhaustive-deps & set-state-in-effect
-   * ใช้ requestAnimationFrame เพื่อแยกการ update state ออกจาก render cycle
-   * และใส่ dependencies ให้ครบตามกฎของ React โดยไม่มีปัญหา loop
-   */
-  useEffect(() => {
-    let frameId: number
-
-    if (isOpen) {
-      frameId = requestAnimationFrame(() => {
-        setIsOpen(false)
-      })
-    }
-
-    return () => {
-      if (frameId) cancelAnimationFrame(frameId)
-    }
-  }, [pathname, isOpen])
+  const navigation = [
+    { name: "Services", href: "/services" },
+    { name: "Catalog", href: "/catalog" },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
+  ]
 
   return (
-    <>
-      {/* ─── MOBILE OVERLAY ─── */}
+    <header className="sticky top-0 z-50 w-full border-b-4 border-slate-900 bg-white shadow-[0_4px_0_0_rgba(15,23,42,1)]">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4">
+        <Link href="/" className="group flex items-center gap-2">
+          <div className="bg-slate-900 p-1.5 transition-transform group-hover:-rotate-6">
+            <Code2 className="h-6 w-6 text-white" />
+          </div>
+          <span className="text-xl font-black uppercase tracking-tighter text-slate-900">
+            {siteConfig.name}
+          </span>
+        </Link>
+
+        {/* DESKTOP NAV */}
+        <nav className="hidden items-center gap-8 md:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`text-sm font-black uppercase tracking-widest transition-colors hover:text-blue-600 ${
+                pathname === item.href ? "text-blue-600" : "text-slate-900"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            className="border-2 border-slate-900 bg-slate-900 px-5 py-2 text-sm font-black uppercase tracking-widest text-white shadow-[4px_4px_0_0_#2563eb] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
+          >
+            Get Started
+          </Link>
+        </nav>
+
+        <button
+          className="block border-2 border-slate-900 bg-white p-1 md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+        </button>
+      </div>
+
+      {/* MOBILE NAV: ใช้ key={pathname} เพื่อให้ Component reset ตัวเองเมื่อเปลี่ยนหน้า */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-[90] bg-slate-900/20 backdrop-blur-sm lg:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      <header
-        className={cn(
-          "fixed top-0 z-[100] w-full transition-all duration-500",
-          scrolled
-            ? "border-b-2 border-slate-900 bg-white/95 py-3 shadow-[4px_4px_0px_0px_#0f172a] backdrop-blur-md"
-            : "bg-transparent py-6"
-        )}
-      >
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex items-center justify-between">
-            {/* ─── LOGO ─── */}
-            <Link href="/" className="group flex items-center gap-4">
-              <div className="relative flex h-11 w-11 items-center justify-center border-2 border-slate-900 bg-blue-600 transition-all duration-500 group-hover:rotate-90 group-hover:shadow-[4px_4px_0px_0px_#0f172a]">
-                <Code2
-                  size={22}
-                  className="-rotate-90 text-white transition-transform duration-500 group-hover:rotate-0"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black uppercase leading-none tracking-tighter text-slate-900 md:text-2xl">
-                  {siteConfig.name}
-                </span>
-                <div className="mt-1 flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-blue-600">
-                  <Sparkles size={10} />
+          key={pathname}
+          className="fixed inset-0 top-[84px] z-40 h-screen w-full bg-white md:hidden"
+        >
+          <nav className="flex flex-col items-center gap-8 pt-12">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)} // ปิดเมื่อคลิก
+                className="text-3xl font-black uppercase italic tracking-tighter text-slate-900 hover:text-blue-600"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
 ```
 
 ### `components/Footer.tsx`
@@ -2426,83 +2454,83 @@ export default function Footer({ data }: FooterProps) {
 /** @format */
 "use client"
 
-import Image from "next/image"
+import React from "react"
 import Link from "next/link"
-import { ArrowRight, Activity } from "lucide-react"
-
+import Image from "next/image"
+import { ArrowUpRight, ExternalLink } from "lucide-react"
 import { Project } from "@/data/types"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 
 interface CatalogProjectCardProps {
   project: Project
-  showCTA?: boolean
+  showCTA?: boolean // ✅ เก็บไว้ใช้ในอนาคตได้ แต่ต้องจัดการในโค้ดให้ถูกต้อง
 }
 
 export function CatalogProjectCard({
   project,
-  showCTA = true,
+  showCTA = true, // ✅ กำหนด Default value
 }: CatalogProjectCardProps) {
-  /**
-   * 💡 NOTE: ข้อมูล project.title และ project.description
-   * ได้ถูกอัปเดตให้ตรงกับไฟล์ Config มาจาก catalogProjects.ts เรียบร้อยแล้ว
-   */
-
   return (
-    <Card className="group relative overflow-hidden rounded-none border-4 border-slate-900 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(37,99,235,1)]">
-      {/* ─── 1. THUMBNAIL AREA ─── */}
+    <div className="group relative flex flex-col border-4 border-slate-900 bg-white shadow-[10px_10px_0px_0px_rgba(15,23,42,1)] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[15px_15px_0px_0px_#2563eb]">
+      {/* 🖼️ IMAGE SECTION */}
       <div className="relative aspect-[16/10] overflow-hidden border-b-4 border-slate-900 bg-slate-100">
         <Image
           src={project.image}
-          alt={`Project Preview: ${project.title}`}
+          alt={project.title}
           fill
-          className="object-cover grayscale-[30%] transition-transform duration-700 group-hover:scale-110 group-hover:grayscale-0"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={false}
+          className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
         />
 
-        {/* Industrial Category Tag */}
-        <Badge className="absolute left-0 top-6 rounded-none border-y-2 border-r-2 border-slate-900 bg-white px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
-          {project.category}
-        </Badge>
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-300 group-hover:bg-slate-900/40 group-hover:opacity-100">
+          <Link
+            href={`/${project.templateId}`}
+            className="flex items-center gap-2 bg-blue-600 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white hover:bg-white hover:text-slate-900"
+          >
+            Live Preview <ExternalLink size={14} />
+          </Link>
+        </div>
       </div>
 
-      {/* ─── 2. CONTENT AREA ─── */}
-      <CardContent className="space-y-6 p-8">
-        <header className="space-y-3">
-          {/* ชื่อโปรเจกต์ (Sync กับ Config อัตโนมัติ) */}
-          <h3 className="text-2xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-3xl">
-            {project.title}
-          </h3>
-          {/* คำอธิบาย (Sync กับ Config อัตโนมัติ) */}
-          <p className="line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
-            {project.description}
-          </p>
-        </header>
-
-        {/* Tags: Blueprint labels style */}
-        <div className="flex flex-wrap gap-2" aria-label="Project Tags">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="border-2 border-slate-100 bg-slate-50 px-2 py-0.5 text-[9px] font-black uppercase tracking-tighter text-slate-400 transition-colors group-hover:border-blue-600/20 group-hover:text-blue-600"
-            >
-              # {tag}
-            </span>
-          ))}
+      {/* 📝 CONTENT SECTION */}
+      <div className="flex flex-1 flex-col p-6">
+        <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
+          <span className="bg-slate-900 px-2 py-1 text-[9px] font-black uppercase tracking-tighter text-white">
+            {project.category}
+          </span>
+          <span className="font-mono text-[10px] font-bold text-slate-400">
+            REF: {project.id.split("-").pop()?.toUpperCase()}
+          </span>
         </div>
 
-        {/* ─── 3. STATS (Sync กับ Performance Data) ─── */}
-        {project.stats && (
-          <div
-            className="flex items-center gap-4 border-l-4 border-blue-600 bg-blue-50/50 p-4 transition-colors group-hover:bg-blue-600 group-hover:text-white"
-            role="status"
-          >
-            <div className="shrink-0 bg-white p-2 text-blue-600 shadow-[2px_2px_0px_0px_rgba(15,23,42,1)]">
-              <Activity
-                size={20}
-                className="animate-pulse"
+        <h3 className="mb-3 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900">
+          {project.title}
+        </h3>
+
+        <p className="mb-6 line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
+          {project.description}
+        </p>
+
+        {/* STATS / TAGS */}
+        <div className="mt-auto flex items-center justify-between pt-4">
+          <div className="flex flex-col">
+            {/* ✅ FIX: ใช้ Optional Chaining ป้องกันค่า stats เป็น undefined */}
+            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+              {project.stats?.label || "Type"}
+            </span>
+            <span className="text-sm font-black text-blue-600">
+              {project.stats?.value || "Standard"}
+            </span>
+          </div>
+
+          {/* ✅ ใช้งาน showCTA เพื่อแก้ปัญหา Unused Variable */}
+          {showCTA && (
+            <Link
+              href={`/${project.templateId}`}
+              className="flex h-10 w-10 items-center justify-center border-2 border-slate-900 bg-white transition-colors hover:bg-slate-900 hover:text-white"
+            >
+              <ArrowUpRight size={20} strokeWidth={3} />
+            </Link>
+          )}
 ```
 
 ### `components/catalog/CatalogProjectsGrid.tsx`
@@ -2584,81 +2612,81 @@ export function CatalogProjectsGrid({
 
 import React from "react"
 import Link from "next/link"
-// ✅ แก้ไข Path: อ้างอิงจากรูทของโปรเจกต์ตามโครงสร้างไฟล์จริง
+import { LayoutGrid, ArrowUpRight, ArrowRight } from "lucide-react"
+import { servicesData } from "@/data/servicesData"
 import { iconMap } from "@/components/iconMap"
-// ✅ แก้ไข Type Import: ดึงจาก data/servicesData.ts ที่มีการนิยาม ServiceItem ไว้
-import type { ServiceItem } from "@/data/servicesData"
 
-interface ServiceCardProps {
-  service: ServiceItem
-}
-
-export default function ServiceCard({ service }: ServiceCardProps) {
-  // Guard Clause: ป้องกัน Runtime Error
-  if (!service) return null
-
-  // ✅ Defensive Logic: ตรวจสอบ Icon ก่อนเรียกใช้งาน
-  const Icon = (iconMap as any)[service.category] || iconMap.STARTER
-  const ArrowIcon = iconMap.ARROW_RIGHT
-  const hasPromo = !!service.promoPrice
+export default function Services() {
+  // กรองเฉพาะบริการที่มีสถานะ READY
+  const activeServices = servicesData.filter((s) => s.status === "READY")
 
   return (
-    <div className="group relative border-4 border-slate-900 bg-white p-8 shadow-[8px_8px_0px_0px_#0f172a] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-      {/* 🏷️ Promo Badge */}
-      {hasPromo && (
-        <div className="absolute -right-4 -top-4 z-10 rotate-2 border-4 border-slate-900 bg-[#ff3e3e] px-4 py-1 text-xs font-black uppercase italic text-white shadow-[4px_4px_0px_0px_#000]">
-          HOT PROMO
-        </div>
-      )}
+    <section
+      className="relative overflow-hidden bg-white py-24 lg:py-32"
+      id="services"
+    >
+      {/* ─── BACKGROUND DECOR ─── */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.02]"
+        style={{ backgroundImage: 'url("/grid.svg")' }}
+      />
 
-      <div className="mb-6 flex items-center justify-between">
-        <div className="bg-slate-900 p-3 text-white">
-          <Icon size={32} />
-        </div>
-        <span className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-          {`TYPE_${service.category} | ID: ${String(service.id).padStart(3, "0")}`}
-        </span>
-      </div>
+      <div className="container relative z-10 mx-auto px-4">
+        {/* ─── SECTION HEADER ─── */}
+        <div className="mb-20 flex flex-col items-end justify-between gap-8 border-b-8 border-slate-900 pb-12 lg:flex-row lg:items-center">
+          <div className="max-w-2xl text-left">
+            <div className="mb-4 inline-flex items-center gap-3 bg-slate-900 px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-white">
+              <span className="h-2 w-2 animate-pulse bg-blue-500" />
+              AEMDEVWEB / ECOSYSTEM_TRUST_PROTOCOL
+            </div>
+            <h2 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-7xl">
+              Precision <br />
+              <span className="text-blue-600">Templates.</span>
+            </h2>
+            <p className="mt-6 text-lg font-bold italic leading-relaxed text-slate-500">
+              โซลูชันเว็บไซต์ที่ถูกปรับจูนมาเพื่ออุตสาหกรรมเฉพาะทาง
+              เน้นโครงสร้างที่แข็งแกร่งและประสิทธิภาพที่วัดผลได้จริง
+            </p>
+          </div>
 
-      <h3 className="mb-3 text-2xl font-black uppercase italic tracking-tighter text-slate-900 transition-colors group-hover:text-blue-600">
-        {service.title}
-      </h3>
-
-      <p className="mb-6 min-h-[3rem] text-sm font-bold italic leading-relaxed text-slate-500">
-        {service.description}
-      </p>
-
-      {/* 💰 Price Display */}
-      <div className="relative mb-8 overflow-hidden border-l-8 border-slate-900 bg-slate-50 p-5">
-        <p className="mb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">
-          INVESTMENT PACKAGE
-        </p>
-
-        <div className="flex items-baseline gap-2">
-          {hasPromo ? (
-            <>
-              <span className="text-3xl font-black italic text-[#ff3e3e]">
-                {service.promoPrice}
-              </span>
-              <span className="text-sm font-bold text-slate-400 line-through opacity-70">
-                {service.price}
-              </span>
-            </>
-          ) : (
-            <span className="text-2xl font-black italic text-slate-900">
-              {service.price}
-            </span>
-          )}
+          <Link
+            href="/catalog"
+            className="flex h-16 items-center border-4 border-slate-900 px-8 text-xs font-black uppercase tracking-widest transition-all hover:bg-slate-900 hover:text-white"
+          >
+            <LayoutGrid className="mr-3 h-5 w-5" />
+            Explore All Works
+          </Link>
         </div>
 
-        <div className="pointer-events-none absolute right-0 top-0 p-1 opacity-5">
-          <Icon size={64} />
-        </div>
-      </div>
+        {/* ─── SERVICES GRID (Inline Card Logic) ─── */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {activeServices.map((service) => {
+            const Icon = (iconMap as any)[service.category] || iconMap.STARTER
+            const hasPromo = !!service.promoPrice
 
-      <Link
-        href={`/catalog?template=${service.id}`}
-        className="group/btn flex items-center justify-center gap-3 border-4 border-slate-900 bg-white py-4 text-lg font-black uppercase italic transition-all hover:bg-slate-900 hover:text-white"
+            return (
+              <div
+                key={service.id}
+                className="group relative flex flex-col border-[3px] border-slate-900 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
+              >
+                {/* Technical Bar */}
+                <div className="flex items-center justify-between border-b-[3px] border-slate-900 bg-slate-50 px-4 py-2">
+                  <div className="flex gap-1.5">
+                    <div className="h-2 w-2 rounded-full bg-slate-300" />
+                    <div className="h-2 w-2 rounded-full bg-slate-300" />
+                  </div>
+                  <span className="font-mono text-[9px] font-black uppercase tracking-widest text-slate-400">
+                    ARCH_TYPE // {service.slug}
+                  </span>
+                </div>
+
+                <div className="flex flex-grow flex-col p-8">
+                  {hasPromo && (
+                    <div className="mb-4 self-start bg-[#ff3e3e] px-3 py-1 text-[10px] font-black uppercase tracking-tighter text-white">
+                      Limited Offer // Active
+                    </div>
+                  )}
+
 ```
 
 ### `components/Hero.tsx`
@@ -4338,80 +4366,80 @@ const FAQSection = ({ config }: FAQSectionProps) => {
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { BlogPost } from "@/types"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, BookOpen, Calendar, Clock, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import { BlogPost } from "@/types/blog"
 
-interface BlogSectionProps {
-  posts?: BlogPost[]
-}
-
-const BlogCard = ({ post }: { post: BlogPost }) => {
-  const blogLink = `/blog/${post.slug || post.id}`
-  const description = post.description || post.excerpt || ""
-
+export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
-    <Link href={blogLink} className="group block h-full">
-      {/* ─── CARD: ENTERPRISE BRUTALISM ─── */}
-      <article className="relative flex h-full flex-col border-2 border-brand-navy bg-white transition-all duration-300 hover:shadow-enterprise-md group-hover:-translate-x-1 group-hover:-translate-y-1">
-        {/* Thumbnail with Grayscale effect */}
-        <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-brand-navy bg-slate-100">
-          <Image
-            src={post.image || "/images/blog-placeholder.jpg"}
-            alt={post.title}
-            fill
-            className="object-cover grayscale-[0.3] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          {/* Category Label */}
-          <div className="absolute bottom-0 left-0 bg-brand-blue px-5 py-2">
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">
-              {post.category || "Business Insight"}
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+      {posts.map((post) => (
+        <Link
+          key={post.id}
+          href={`/blog/${post.slug || post.id}`}
+          className="group relative flex flex-col border-4 border-slate-900 bg-white p-6 transition-all hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
+        >
+          {/* 🖼️ IMAGE CONTAINER */}
+          <div className="relative mb-6 aspect-video overflow-hidden border-2 border-slate-900">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover grayscale transition-all group-hover:scale-105 group-hover:grayscale-0"
+            />
+          </div>
+
+          {/* 🏷️ META INFORMATION */}
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">
+              {post.category}
+            </span>
+            <span className="font-mono text-[10px] text-slate-400">
+              {post.date}
             </span>
           </div>
-        </div>
 
-        {/* Content Area */}
-        <div className="flex flex-grow flex-col space-y-6 p-8 lg:p-10">
-          <div className="flex items-center gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <Calendar size={12} className="text-brand-blue" />
-              <time dateTime={post.date}>{post.date}</time>
-            </div>
-            <div
-              className="h-1 w-1 rounded-full bg-slate-300"
-              aria-hidden="true"
-            />
-            <div className="flex items-center gap-1.5">
-              <Clock size={12} className="text-brand-blue" />
-              <span>{post.readTime || "5 MIN READ"}</span>
-            </div>
-          </div>
-
-          <h3 className="line-clamp-2 text-xl font-black uppercase italic leading-tight text-brand-navy transition-colors group-hover:text-brand-blue md:text-2xl">
+          {/* 📝 TITLE & DESCRIPTION */}
+          <h3 className="mb-4 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900 group-hover:text-blue-600">
             {post.title}
           </h3>
 
-          <p className="line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
-            {description}
+          <p className="mb-8 line-clamp-2 text-sm font-bold text-slate-500">
+            {post.description}
           </p>
 
-          <div className="mt-auto flex items-center justify-between border-t-2 border-slate-50 pt-8">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-navy transition-colors group-hover:text-brand-blue">
-              Continue Reading
-            </span>
-            <div className="flex h-10 w-10 items-center justify-center border-2 border-brand-navy transition-all group-hover:bg-brand-navy group-hover:text-white">
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
+          {/* 👤 FOOTER: AUTHOR & ACTION */}
+          <div className="mt-auto flex items-center justify-between border-t-2 border-slate-100 pt-6">
+            <div className="flex items-center gap-3">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-slate-900 bg-slate-100">
+                {/* ✅ FIX: Type Guarding สำหรับ Author Object */}
+                {typeof post.author !== "string" ? (
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    width={32}
+                    height={32}
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-slate-200 text-[8px]">
+                    N/A
+                  </div>
+                )}
+              </div>
+              <span className="text-[10px] font-black uppercase">
+                {typeof post.author === "string"
+                  ? post.author
+                  : post.author.name}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-black uppercase italic text-slate-900 group-hover:text-blue-600">
+              READ_MORE <ArrowRight size={14} strokeWidth={3} />
             </div>
           </div>
-        </div>
-      </article>
-    </Link>
-  )
-}
+        </Link>
+      ))}
+    </div>
 ```
 
 ### `lib/utils.ts`
@@ -4426,50 +4454,17 @@ export function cn(...inputs: ClassValue[]) {
 
 ### `lib/api.ts`
 ```ts
-import { blogData } from "@/data/blogData" // ตรวจสอบชื่อไฟล์ให้ตรงกับ data/blogData.ts
+/** @format */
+import { blogData } from "@/data/blog/allposts" // ✅ แก้ Path ให้ตรง
 import { BlogPost } from "@/types/blog"
 
-/**
- * API Logic สำหรับดึงข้อมูลในโปรเจกต์
- * แก้ไขปัญหา: Attempted import error โดยการใส่ export const api
- */
-export const api = {
-  // ดึงบทความทั้งหมด
-  getPosts: async (): Promise<BlogPost[]> => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(blogData), 300)
-    })
-  },
+export function getAllPosts(): BlogPost[] {
+  return blogData
+}
 
-  // ดึงบทความตาม Slug
-  getPostBySlug: async (slug: string): Promise<BlogPost | undefined> => {
-    return new Promise((resolve) => {
-      const post = blogData.find((p) => p.slug === slug)
-      setTimeout(() => resolve(post), 100)
-    })
-  },
-
-  // ดึงบทความล่าสุด (Featured)
-  getFeaturedPosts: async (limit: number = 3): Promise<BlogPost[]> => {
-    return new Promise((resolve) => {
-      // เรียงจากใหม่ไปเก่า (ถ้ามีฟิลด์ date ที่เป็น Date object จะดีมาก)
-      // ในที่นี้ดึงตามจำนวน limit ที่กำหนด
-      const featured = [...blogData].slice(0, limit)
-      setTimeout(() => resolve(featured), 200)
-    })
-  },
-
-  // ส่งข้อมูลฟอร์มติดต่อ
-  submitContact: async (
-    data: any
-  ): Promise<{ success: boolean; message: string }> => {
-    console.log("Submitting contact data:", data)
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ success: true, message: "เราได้รับข้อมูลของคุณแล้วครับ!" })
-      }, 1000)
-    })
-  },
+export function getPostBySlug(slug: string): BlogPost | undefined {
+  // ✅ ระบุ Type (p: BlogPost) เพื่อแก้ปัญหา Parameter implicitly has an 'any' type
+  return blogData.find((p: BlogPost) => p.slug === slug)
 }
 ```
 
@@ -4584,9 +4579,9 @@ export const getSupabaseAdmin = () => {
 }
 ```
 
-- Total code files: **61**
-- Previewed: **61**
-- Auth/Role logic: **11**
+- Total code files: **62**
+- Previewed: **62**
+- Auth/Role logic: **9**
 - Absolute imports: **46**
 
 ## 🗄️ JSON Validation

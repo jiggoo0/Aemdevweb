@@ -41,6 +41,7 @@ app
       [slug]
         page.tsx
       page.tsx
+      loading.tsx
     catalog
       page.tsx
     contact
@@ -49,7 +50,6 @@ app
         ContactMap.tsx
     services
       page.tsx
-      ServicesPageClient.tsx
     page.tsx
     layout.tsx
   sitemap.ts
@@ -92,20 +92,20 @@ components
   BlogSection.tsx
 data
   servicesData.ts
-  blogData.ts
   types.ts
   reviews.ts
+  blog
+    post1.ts
+    post2.ts
+    post3.ts
+    post4.ts
+    allposts.ts
   catalog.projects.ts
 scripts
   project-summary.sh
   tree-projects.sh
 public
   images
-    blog
-      restaurant-web.jpg
-      success-case.jpg
-      corporate-trust.jpg
-      performance-web.jpg
     profile
       default-avatar.webp
     portfolio
@@ -113,12 +113,6 @@ public
       sme-1.webp
       default-avatar.webp
       corporate-1.webp
-    projects
-      clinic.jpg
-      gadget-store.jpg
-      construction.jpg
-      real-estate.jpg
-      smj-cafe.jpg
   og-image.png
   grid.svg
 lib

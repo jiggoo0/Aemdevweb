@@ -1,8 +1,10 @@
 /** @format */
 // ----------------------------------------------------
-// 🏗️ JP-VISOUL: Services Data Hub (Production Version)
-// Role: รวมศูนย์ข้อมูลบริการจากทุกลูกค้า (Sync กับ Marketing Config)
+// 🏗️ AEMDEVWEB: Services Data Hub (Production Version)
+// Role: Normalization Layer for Marketing Templates
 // ----------------------------------------------------
+
+import { ServiceItem, TargetGroup } from "@/types/services"
 
 import { clinicConfig } from "@/app/(marketing)/[template_id]/_templates/clinic/config"
 import { cafeConfig } from "@/app/(marketing)/[template_id]/_templates/cafe/config"
@@ -10,100 +12,133 @@ import { realEstateConfig } from "@/app/(marketing)/[template_id]/_templates/rea
 import { constructionConfig } from "@/app/(marketing)/[template_id]/_templates/construction/config"
 import { starterConfig } from "@/app/(marketing)/[template_id]/_templates/starter/config"
 
-export interface ServiceItem {
-  id: string
-  slug: string
-  title: string
-  description: string
-  detail: string
-  price: string
-  promoPrice?: string
-  image: string
-  category: "MEDICAL" | "CAFE" | "PROPERTY" | "CONSTRUCTION" | "STARTER"
-  status: "READY" | "PLANNING"
+/**
+ * 🔧 Normalize heterogeneous feature sources
+ * รองรับโครงสร้างที่แตกต่างกันของแต่ละ template
+ */
+type FeatureSource =
+  | string
+  | { title?: string }
+  | { label?: string }
+  | { text?: string }
+  | { detail?: string }
+
+const normalizeFeatures = (
+  source?: FeatureSource[]
+): string[] => {
+  if (!source) return []
+
+  return source
+    .map((item) => {
+      if (typeof item === "string") return item
+      if ("title" in item && item.title) return item.title
+      if ("label" in item && item.label) return item.label
+      if ("text" in item && item.text) return item.text
+      if ("detail" in item && item.detail) return item.detail
+      return undefined
+    })
+    .filter((v): v is string => Boolean(v))
+    .slice(0, 3)
 }
 
 export const servicesData: ServiceItem[] = [
   {
     id: "1",
     slug: "clinic",
-    title: clinicConfig?.name ?? "Wellness & Clinic",
+    title: clinicConfig.name ?? "Aura Wellness Center",
     description:
-      clinicConfig?.content?.heroSubtitle ??
-      "ระบบจัดการคลินิกและ Wellness Center ครบวงจร",
-    detail:
-      "บริการออกแบบระบบจัดการคลินิกและ Wellness Center ครบวงจร พร้อมหน้า Landing Page สำหรับนัดหมายแพทย์ มาตรฐานความปลอดภัยข้อมูลระดับสูง",
+      clinicConfig.content.heroSubtitle ??
+      "นวัตกรรมการดูแลสุขภาพเชิงป้องกันระดับพรีเมียม",
+    longDescription:
+      "บริการออกแบบระบบจัดการคลินิกและ Wellness Center ครบวงจร พร้อมหน้า Landing Page สำหรับนัดหมายแพทย์",
     price: "15,000 - 45,000 THB",
-    image: "/images/projects/clinic-bg.jpg", // ใช้ static path เพื่อความชัวร์ หรือใช้ config?.metadata?.ogImage
-    category: "MEDICAL",
+    iconName: "MEDICAL",
+    targetGroup: "หจก./บริษัท",
+    features: normalizeFeatures(clinicConfig.content.services),
     status: "READY",
   },
   {
     id: "2",
     slug: "cafe",
-    title: cafeConfig?.name ?? "Cafe & Matrix Menu",
+    title: cafeConfig.name ?? "The Source Roasters",
     description:
-      cafeConfig?.content?.heroSubtitle ??
-      "เทมเพลตร้านกาแฟระดับพรีเมียม พร้อมระบบเมนูสินค้า",
-    detail:
-      "เทมเพลตร้านกาแฟระดับพรีเมียม แรงบันดาลใจจาก Starbucks พร้อมระบบเมนูสินค้าแบบตาราง (Matrix) และหน้าระบบสมาชิกสะสมแต้ม",
+      cafeConfig.content.heroSubtitle ??
+      "ประสบการณ์กาแฟระดับ Specialty ในบรรยากาศ Industrial Modern",
+    longDescription:
+      "เทมเพลตร้านกาแฟระดับพรีเมียม พร้อมระบบเมนูสินค้าและระบบสมาชิก",
     price: "8,500 - 18,000 THB",
-    image: "/images/projects/cafe-bg.jpg",
-    category: "CAFE",
+    iconName: "CAFE",
+    targetGroup: "ร้านอาหาร",
+    features: normalizeFeatures(cafeConfig.content.features),
     status: "READY",
   },
   {
     id: "3",
     slug: "realestate",
-    title: realEstateConfig?.name ?? "Luxury Real Estate",
+    title: realEstateConfig.name ?? "Vault & Vest Property",
     description:
-      realEstateConfig?.content?.heroSubtitle ??
-      "Landing Page สำหรับโครงการอสังหาริมทรัพย์และ Agency",
-    detail:
-      "Landing Page สำหรับโครงการอสังหาริมทรัพย์และ Agency จัดหาที่พัก เน้นความ Luxury โชว์ภาพโครงการแบบ High-Resolution เพื่อปิดการขาย",
+      realEstateConfig.content.heroSubtitle ??
+      "คัดสรรสุดยอดที่อยู่อาศัยเพื่อการลงทุนและคุณภาพชีวิต",
+    longDescription:
+      "Landing Page สำหรับโครงการอสังหาริมทรัพย์และ Agency เน้นข้อมูล Location Insight",
     price: "25,000 - 60,000 THB",
-    image: "/images/projects/real-estate-bg.jpg",
-    category: "PROPERTY",
+    iconName: "PROPERTY",
+    targetGroup: "หจก./บริษัท",
+    features: normalizeFeatures(realEstateConfig.content.highlights),
     status: "READY",
   },
   {
     id: "4",
     slug: "construction",
-    title: constructionConfig?.name ?? "Construction & Engineering",
-    // 🛡️ แก้ไขจุดที่เป็น Error: ดึงจาก content.heroSubtitle แทน metadata.description
+    title: constructionConfig.name ?? "Titan Structures & Engineering",
     description:
-      constructionConfig?.content?.heroSubtitle ??
-      "ระบบโชว์พอร์ตโฟลิโอก่อสร้างและวิศวกรรมโยธา",
-    detail:
-      "ระบบโชว์พอร์ตโฟลิโอก่อสร้างและวิศวกรรมโยธา สำหรับหน่วยงานรัฐและเอกชน มาตรฐาน Business Professional พร้อมตาราง Track Record",
+      constructionConfig.content.heroSubtitle ??
+      "ออกแบบและก่อสร้างโครงสร้างพื้นฐานด้วยมาตรฐานวิศวกรรม",
+    longDescription:
+      "ระบบโชว์พอร์ตโฟลิโอก่อสร้างสำหรับหน่วยงานรัฐและเอกชน",
     price: "12,000 - 35,000 THB",
-    image: "/images/projects/construction-bg.jpg",
-    category: "CONSTRUCTION",
+    iconName: "CONSTRUCTION",
+    targetGroup: "หจก./บริษัท",
+    features: normalizeFeatures(constructionConfig.content.services),
     status: "READY",
   },
   {
     id: "5",
     slug: "starter",
-    title: starterConfig?.name ?? "SME Starter Pack",
+    title: starterConfig.name ?? "FastTrack Digital",
     description:
-      starterConfig?.content?.heroSubtitle ??
-      "แพ็คเกจเริ่มต้นสำหรับ SME ที่ต้องการความไวสูงสุด",
-    detail:
-      "แพ็คเกจเริ่มต้นสำหรับ SME ที่ต้องการความไวสูงสุด มาพร้อมระบบ Loading Speed Optimization และหน้า Conversion Landing Page",
+      starterConfig.content.heroSubtitle ??
+      "เริ่มต้นธุรกิจออนไลน์ด้วยเว็บไซต์มาตรฐานสากล",
+    longDescription:
+      "แพ็คเกจเริ่มต้นสำหรับ SME ที่ต้องการความไวและ Conversion สูง",
     price: "7,500 THB",
-    promoPrice: "3,900 THB", // ราคาโปรโมชั่น 3,900 ตามสั่ง
-    image: "/images/projects/starter-bg.jpg",
-    category: "STARTER",
+    promoPrice: "3,900 THB",
+    iconName: "STARTER",
+    targetGroup: "SME",
+    features: normalizeFeatures(starterConfig.content.features),
     status: "READY",
+    isPopular: true,
   },
 ]
 
 /**
- * 🔍 Helper: ดึงข้อมูลบริการด้วย Slug
+ * 🔍 Get service by slug
  */
-export const getServiceBySlug = (slug: string): ServiceItem | undefined => {
+export const getServiceBySlug = (
+  slug: string | string[] | undefined
+): ServiceItem | undefined => {
   if (!slug) return undefined
+  const targetSlug = Array.isArray(slug) ? slug[0] : slug
   return servicesData.find(
-    (service) => service.slug.toLowerCase() === slug.toLowerCase()
+    (service) => service.slug.toLowerCase() === targetSlug.toLowerCase()
+  )
+}
+
+/**
+ * 🏷️ Filter services by target group
+ */
+export const getServicesByTarget = (target: TargetGroup): ServiceItem[] => {
+  return servicesData.filter(
+    (service) => service.targetGroup === target
   )
 }

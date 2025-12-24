@@ -2,11 +2,12 @@
 import { MetadataRoute } from "next"
 import { siteConfig } from "@/config/siteConfig"
 import { catalogProjects } from "@/data/catalog.projects"
-import { blogData } from "@/data/blogData"
+// ✅ แก้ไขจาก @/data/blogData เป็น Path ใหม่ที่รวมไฟล์แล้ว
+import { blogData } from "@/data/blog/allposts"
+import { BlogPost } from "@/types/blog"
 
 /**
  * 🛠️ Helper: ตรวจสอบวันที่ให้ปลอดภัยก่อนส่งให้ Sitemap
- * เพื่อความถูกต้องตามมาตรฐาน XML Sitemap
  */
 function getSafeDate(dateStr: string | undefined | null): Date {
   if (!dateStr) return new Date()
@@ -18,7 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig?.url || "https://www.aemdevweb.com"
 
   // 1. 📂 หน้าหลัก (Static Routes)
-  // 📝 UX Note: ปรับ /portfolio เป็น /catalog ให้ตรงกับโครงสร้างเมนูที่เราคุยกันไว้
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -33,24 +33,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. 🚀 หน้า Landing Templates (Dynamic Routes) - ส่วนที่ทำเงินที่สุด
-  // 📝 SEO Note: หน้าเหล่านี้คือสินค้าตัวจริงของเรา ให้ Priority สูงเกือบเท่าหน้าแรก
+  // 2. 🚀 หน้า Landing Templates (Dynamic Routes)
+  // 📝 แก้ไข: ปรับ Path ให้ตรงกับที่เราคุยกัน (ถ้าคุณใช้ /[template_id] โดยไม่มีคำว่า landing)
+  // แต่ถ้าคุณยืนยันจะใช้ /landing/ ก็นำหน้าได้ครับ
   const templateRoutes: MetadataRoute.Sitemap = catalogProjects.map(
     (project) => ({
-      url: `${baseUrl}/landing/${project.templateId}`,
+      url: `${baseUrl}/${project.templateId}`, // หรือ `/landing/${project.templateId}` ตามโครงสร้างโฟลเดอร์จริง
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })
   )
 
-  // 3. 📝 หน้าบทความ Blog - ส่วนที่สร้าง Trust และ Traffic
-  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: getSafeDate(post.date),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }))
+  // 3. 📝 หน้าบทความ Blog
+  // ✅ ระบุ Type ให้ (post: BlogPost) เพื่อแก้ปัญหา Parameter implicitly has an 'any' type
+  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map(
+    (post: BlogPost) => ({
+      url: `${baseUrl}/blog/${post.slug || post.id}`,
+      lastModified: getSafeDate(post.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })
+  )
 
   return [...staticRoutes, ...templateRoutes, ...blogRoutes]
 }

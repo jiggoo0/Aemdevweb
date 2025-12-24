@@ -4,151 +4,79 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { BlogPost } from "@/types"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, BookOpen, Calendar, Clock, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import { BlogPost } from "@/types/blog"
 
-interface BlogSectionProps {
-  posts?: BlogPost[]
-}
-
-const BlogCard = ({ post }: { post: BlogPost }) => {
-  const blogLink = `/blog/${post.slug || post.id}`
-  const description = post.description || post.excerpt || ""
-
+export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
-    <Link href={blogLink} className="group block h-full">
-      {/* ─── CARD: ENTERPRISE BRUTALISM ─── */}
-      <article className="relative flex h-full flex-col border-2 border-brand-navy bg-white transition-all duration-300 hover:shadow-enterprise-md group-hover:-translate-x-1 group-hover:-translate-y-1">
-        {/* Thumbnail with Grayscale effect */}
-        <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-brand-navy bg-slate-100">
-          <Image
-            src={post.image || "/images/blog-placeholder.jpg"}
-            alt={post.title}
-            fill
-            className="object-cover grayscale-[0.3] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-          {/* Category Label */}
-          <div className="absolute bottom-0 left-0 bg-brand-blue px-5 py-2">
-            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-white">
-              {post.category || "Business Insight"}
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+      {posts.map((post) => (
+        <Link
+          key={post.id}
+          href={`/blog/${post.slug || post.id}`}
+          className="group relative flex flex-col border-4 border-slate-900 bg-white p-6 transition-all hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
+        >
+          {/* 🖼️ IMAGE CONTAINER */}
+          <div className="relative mb-6 aspect-video overflow-hidden border-2 border-slate-900">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover grayscale transition-all group-hover:scale-105 group-hover:grayscale-0"
+            />
+          </div>
+
+          {/* 🏷️ META INFORMATION */}
+          <div className="mb-3 flex items-center justify-between">
+            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">
+              {post.category}
+            </span>
+            <span className="font-mono text-[10px] text-slate-400">
+              {post.date}
             </span>
           </div>
-        </div>
 
-        {/* Content Area */}
-        <div className="flex flex-grow flex-col space-y-6 p-8 lg:p-10">
-          <div className="flex items-center gap-4 text-[9px] font-black uppercase tracking-widest text-slate-400">
-            <div className="flex items-center gap-1.5">
-              <Calendar size={12} className="text-brand-blue" />
-              <time dateTime={post.date}>{post.date}</time>
-            </div>
-            <div
-              className="h-1 w-1 rounded-full bg-slate-300"
-              aria-hidden="true"
-            />
-            <div className="flex items-center gap-1.5">
-              <Clock size={12} className="text-brand-blue" />
-              <span>{post.readTime || "5 MIN READ"}</span>
-            </div>
-          </div>
-
-          <h3 className="line-clamp-2 text-xl font-black uppercase italic leading-tight text-brand-navy transition-colors group-hover:text-brand-blue md:text-2xl">
+          {/* 📝 TITLE & DESCRIPTION */}
+          <h3 className="mb-4 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900 group-hover:text-blue-600">
             {post.title}
           </h3>
 
-          <p className="line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
-            {description}
+          <p className="mb-8 line-clamp-2 text-sm font-bold text-slate-500">
+            {post.description}
           </p>
 
-          <div className="mt-auto flex items-center justify-between border-t-2 border-slate-50 pt-8">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-navy transition-colors group-hover:text-brand-blue">
-              Continue Reading
-            </span>
-            <div className="flex h-10 w-10 items-center justify-center border-2 border-brand-navy transition-all group-hover:bg-brand-navy group-hover:text-white">
-              <ArrowRight
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </div>
-          </div>
-        </div>
-      </article>
-    </Link>
-  )
-}
-
-export default function BlogSection({ posts = [] }: BlogSectionProps) {
-  // แสดงผลสูงสุด 4 บทความในหน้า Home
-  const displayPosts = posts.slice(0, 4)
-
-  return (
-    <section
-      id="blog"
-      className="relative scroll-mt-20 overflow-hidden bg-white py-24 md:py-32"
-    >
-      {/* Industrial Grid Background */}
-      <div
-        className="absolute inset-0 -z-10 bg-industrial-grid opacity-40"
-        aria-hidden="true"
-      />
-
-      <div className="mx-auto max-w-7xl px-6">
-        {/* Header Area */}
-        <div className="mb-20 flex flex-col items-start justify-between gap-10 border-b-2 border-slate-200 pb-12 lg:flex-row lg:items-end">
-          <header className="max-w-3xl space-y-8">
-            <div className="inline-flex items-center gap-3 border-l-4 border-brand-blue bg-white px-5 py-2 shadow-enterprise-sm">
-              <Sparkles size={14} className="text-brand-blue" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-600">
-                Knowledge Hub
+          {/* 👤 FOOTER: AUTHOR & ACTION */}
+          <div className="mt-auto flex items-center justify-between border-t-2 border-slate-100 pt-6">
+            <div className="flex items-center gap-3">
+              <div className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-slate-900 bg-slate-100">
+                {/* ✅ FIX: Type Guarding สำหรับ Author Object */}
+                {typeof post.author !== "string" ? (
+                  <Image
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    width={32}
+                    height={32}
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-slate-200 text-[8px]">
+                    N/A
+                  </div>
+                )}
+              </div>
+              <span className="text-[10px] font-black uppercase">
+                {typeof post.author === "string"
+                  ? post.author
+                  : post.author.name}
               </span>
             </div>
 
-            <h2 className="text-5xl font-black uppercase italic leading-[0.95] tracking-tighter text-brand-navy md:text-7xl">
-              สาระน่ารู้ <br />
-              <span className="text-brand-blue">ฉบับคนทำธุรกิจ</span>
-            </h2>
-
-            <p className="border-l-4 border-slate-100 pl-8 text-lg font-bold leading-relaxed text-slate-500 md:text-xl">
-              รวบรวมเทคนิคการทำเว็บไซต์และการตลาดออนไลน์ฉบับพาร์ทเนอร์{" "}
-              <br className="hidden md:block" />
-              เน้นภาษาที่เข้าใจง่าย และนำไปใช้จริงกับธุรกิจของคุณได้ทันทีครับ
-            </p>
-          </header>
-
-          <Button
-            variant="outline"
-            asChild
-            className="h-16 rounded-none border-2 border-brand-navy bg-white px-12 text-xs font-black uppercase tracking-[0.2em] shadow-enterprise-sm transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-brand-navy hover:text-white hover:shadow-none"
-          >
-            <Link href="/blog">View All Articles</Link>
-          </Button>
-        </div>
-
-        {/* Blog Grid: Modular Blueprint Layout */}
-        {displayPosts.length > 0 ? (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {displayPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
+            <div className="flex items-center gap-2 text-xs font-black uppercase italic text-slate-900 group-hover:text-blue-600">
+              READ_MORE <ArrowRight size={14} strokeWidth={3} />
+            </div>
           </div>
-        ) : (
-          <div className="border-4 border-dashed border-slate-200 bg-slate-50 py-32 text-center">
-            <BookOpen
-              size={40}
-              className="mx-auto mb-6 text-slate-300"
-              aria-hidden="true"
-            />
-            <h3 className="text-xl font-black uppercase tracking-[0.1em] text-brand-navy">
-              Data Synchronizing...
-            </h3>
-            <p className="mt-2 text-sm font-bold uppercase text-slate-400">
-              กำลังปั้นเนื้อหาคุณภาพเพื่อ SME ไทยครับ
-            </p>
-          </div>
-        )}
-      </div>
-    </section>
+        </Link>
+      ))}
+    </div>
   )
 }

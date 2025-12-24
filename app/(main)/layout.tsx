@@ -1,7 +1,7 @@
 /** @format */
-
 import React from "react"
-import Header from "@/components/Header"
+// ✅ แก้ไข: เพิ่มปีกกาครอบ Header
+import { Header } from "@/components/Header" 
 import Footer from "@/components/Footer"
 
 interface MainLayoutProps {
@@ -10,18 +10,19 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white">
-      {/* 1. Header มักจะตั้งค่าเป็น fixed/sticky 
-          จึงแนะนำให้ตรวจเช็ค padding-top ในหน้าย่อย 
-      */}
+    <div className="relative flex min-h-screen flex-col bg-white font-sans antialiased">
       <Header />
 
-      {/* 2. flex-1: ดัน Footer ลงล่างเสมอ
-          3. overflow-x-hidden: ป้องกันจอดิ้นในแนวนอนจาก Animation หรือ Component ที่กว้างเกินไป
-      */}
-      <main className="flex-1 overflow-x-hidden">{children}</main>
+      <main className="relative flex-1 overflow-x-hidden">
+        {/* Background Grid */}
+        <div
+          className="absolute inset-0 z-[-1] opacity-[0.01] pointer-events-none"
+          style={{ backgroundImage: 'url("/grid.svg")' }}
+        />
 
-      {/* 4. Footer ส่วนท้ายเว็บไซต์ */}
+        {children}
+      </main>
+
       <Footer />
     </div>
   )

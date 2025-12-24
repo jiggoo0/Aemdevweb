@@ -1,3 +1,5 @@
+/** @format */
+
 /**
  * กำหนดประเภทของกลุ่มลูกค้าเป้าหมาย
  * เพื่อให้ง่ายต่อการ Filter และการแสดงผล Badge
@@ -22,6 +24,7 @@ export interface ServiceFeature {
  */
 export interface ServiceItem {
   id: string
+  slug: string // สำหรับ URL เช่น /services/restaurant-package
   title: string
   description: string
   longDescription?: string // สำหรับหน้า Service Detail (ถ้ามี)
@@ -29,8 +32,9 @@ export interface ServiceItem {
   targetGroup: TargetGroup
   features: string[] // รายการสิ่งที่จะได้รับ
   price?: string // ราคาเริ่มต้น (ถ้าต้องการแสดง)
-  slug: string // สำหรับ URL เช่น /services/restaurant-package
+  promoPrice?: string // ราคาโปรโมชั่น (ถ้ามี)
   isPopular?: boolean // สำหรับติดป้าย "แนะนำ" หรือ "ยอดฮิต"
+  status?: "READY" | "DRAFT" | "ARCHIVED" // สถานะการแสดงผล
 }
 
 /**
