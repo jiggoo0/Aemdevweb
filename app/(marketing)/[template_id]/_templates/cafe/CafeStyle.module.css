@@ -1,115 +1,192 @@
-/* ☕ Cafe Starbucks-Inspired Styles */
+/** @format */
 .wrapper {
-  @apply min-h-screen w-full bg-[#f2f0eb] text-[#1e3932];
+  background-color: #ffffff;
+  color: #1e3932;
+  font-family: sans-serif;
 }
 
-/* Hero Section */
 .hero {
-  @apply relative flex flex-col items-center justify-between overflow-hidden bg-[#1e3932] px-8 py-24 text-white md:flex-row;
-}
-
-.heroText {
-  @apply z-10 md:w-1/2;
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem;
+  background-color: #1e3932;
+  color: white;
+  overflow: hidden;
 }
 
 .heroTitle {
-  @apply mb-4 text-6xl font-black uppercase italic tracking-tighter md:text-8xl;
-  text-shadow: 4px 4px 0px #000;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 0.9;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  opacity: 0.8;
+  max-width: 500px;
+}
+
+.ctaButton {
+  margin-top: 3rem;
+  padding: 1rem 3rem;
+  background: white;
+  color: #1e3932;
+  border: none;
+  font-weight: 900;
+  font-style: italic;
+  box-shadow: 6px 6px 0px #000;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ctaButton:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px #000;
 }
 
 .heroImage {
-  @apply z-10 mt-12 flex justify-center md:mt-0 md:w-1/2;
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40vw;
+  height: 40vw;
+  background: #d4e9e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .circleBadge {
-  @apply h-64 w-64 rounded-full border-[12px] border-[#d4e9e2] bg-cover bg-center md:h-96 md:w-96;
-  background-image: url("/images/cafe/hero-coffee.webp"); /* ใช้ภาพ Hero เฉพาะ Cafe */
+  font-weight: 900;
+  color: #1e3932;
+  border: 4px double #1e3932;
+  padding: 2rem;
+  border-radius: 50%;
 }
 
-/* Feature Grid */
 .featureGrid {
-  @apply grid grid-cols-1 gap-0 border-t-4 border-slate-900 md:grid-cols-3;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  border-bottom: 1px solid #1e3932;
 }
 
 .featureCard {
-  @apply cursor-default border-b-4 border-slate-900 bg-white p-12 transition-colors hover:bg-[#d4e9e2] md:border-b-0 md:border-r-4;
+  padding: 4rem 2rem;
+  border-right: 1px solid #1e3932;
+  transition: 0.3s;
+}
+
+.featureCard:hover {
+  background: #f1f5f9;
 }
 
 .featureLabel {
-  @apply mb-4 block font-mono text-xs font-bold opacity-60;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .featureTitle {
-  @apply mb-2 text-2xl font-black uppercase italic;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
 }
 
-/* Menu Gallery Section */
-.menuGallery {
-  @apply border-t-4 border-slate-900 bg-white px-8 py-20;
+.featureDetail {
+  font-weight: 700;
+  font-style: italic;
+  color: #64748b;
+}
+
+.menuSection {
+  padding: 8rem 2rem;
+  background: #ffffff;
+}
+
+.sectionTitle {
+  font-size: 4rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 5rem;
+  text-decoration: underline;
+  text-decoration-thickness: 10px;
 }
 
 .menuGrid {
-  @apply mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.menuItemCard {
-  @apply border-4 border-slate-900 shadow-[8px_8px_0px_0px_rgba(30,57,50,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.menuItemImage {
-  @apply h-48 w-full border-b-4 border-slate-900 object-cover;
+.imageBox {
+  position: relative;
+  aspect-ratio: 1;
+  background: #f1f5f9;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
 }
 
-.menuItemBody {
-  @apply p-6;
+.img {
+  object-cover: cover;
+  filter: grayscale(1);
+  transition: 0.5s;
 }
 
-.menuItemName {
-  @apply mb-2 text-xl font-black uppercase italic;
+.menuItem:hover .img {
+  filter: grayscale(0);
+  transform: scale(1.05);
 }
 
-.menuItemPrice {
-  @apply mb-4 text-base font-bold text-gray-600;
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px solid #1e3932;
+  padding-bottom: 0.5rem;
 }
 
-/* Member Card Section */
-.memberSection {
-  @apply border-t-4 border-slate-900 bg-[#1e3932] px-8 py-20 text-white;
+.itemName {
+  font-weight: 900;
+  font-size: 1.25rem;
 }
 
-.memberCard {
-  @apply relative flex flex-col overflow-hidden border-4 border-slate-900 bg-[#d4e9e2] p-12 text-[#1e3932] shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] md:flex-row;
+.itemPrice {
+  font-family: monospace;
+  font-weight: 900;
+  background: #1e3932;
+  color: white;
+  padding: 0 0.5rem;
 }
 
-.memberText {
-  @apply relative z-10 md:w-1/2;
+.itemDesc {
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #64748b;
 }
 
-.memberTitle {
-  @apply mb-6 text-4xl font-black uppercase italic;
-}
-
-.memberList {
-  @apply list-inside list-disc space-y-3 text-lg font-medium;
-}
-
-.memberImage {
-  @apply relative z-10 flex items-center justify-center md:w-1/2;
-}
-
-.memberQrCode {
-  @apply h-48 w-48 border-4 border-slate-900 bg-white p-4;
-}
-
-/* Background elements for Member Card */
-.memberBgCircle {
-  @apply pointer-events-none absolute rounded-full opacity-10;
-}
-
-.memberBgCircle1 {
-  @apply -left-20 -top-20 h-80 w-80 bg-white;
-}
-
-.memberBgCircle2 {
-  @apply -bottom-20 -right-20 h-64 w-64 bg-white;
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem;
+    text-align: left;
+  }
+  .heroImage {
+    display: none;
+  }
 }

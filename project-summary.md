@@ -1,10 +1,11 @@
 # 📑 Project Summary Report
-_Generated on Thu Dec 25 02:24:16 +07 2025_
 
+_Generated on Thu Dec 25 02:24:16 +07 2025_
 
 ## ⚙️ Environment Variables
 
 > Loaded from .env (sensitive values masked)
+
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` = `***`
 - `POSTGRES_PASSWORD` = `***`
 - `POSTGRES_PRISMA_URL` = `***`
@@ -17,6 +18,7 @@ _Generated on Thu Dec 25 02:24:16 +07 2025_
 ## 📁 Folder Structure (Depth ≤ 4)
 
 ### app
+
 app
 ├── (main)
 │   ├── about
@@ -29,29 +31,29 @@ app
 │   ├── catalog
 │   │   └── page.tsx
 │   ├── contact
-│   │   ├── _components
+│   │   ├── \_components
 │   │   │   └── ContactMap.tsx
 │   │   └── page.tsx
 │   ├── layout.tsx
 │   ├── page.tsx
 │   └── services
-│       ├── ServicesPageClient.tsx
-│       └── page.tsx
+│   ├── ServicesPageClient.tsx
+│   └── page.tsx
 ├── (marketing)
 │   └── [template_id]
-│       ├── _config
-│       │   └── registry.ts
-│       ├── _templates
-│       │   ├── cafe
-│       │   ├── clinic
-│       │   ├── construction
-│       │   ├── realestate
-│       │   └── starter
-│       ├── layout.tsx
-│       └── page.tsx
+│   ├── \_config
+│   │   └── registry.ts
+│   ├── \_templates
+│   │   ├── cafe
+│   │   ├── clinic
+│   │   ├── construction
+│   │   ├── realestate
+│   │   └── starter
+│   ├── layout.tsx
+│   └── page.tsx
 ├── api
 │   └── contact
-│       └── route.ts
+│   └── route.ts
 ├── favicon.ico
 ├── globals.css
 ├── layout.tsx
@@ -61,25 +63,26 @@ app
 20 directories, 20 files
 
 #### Metadata (file | size | sha1)
+
 - app/layout.tsx | 2493b | sha1:45799c6f4315db3159e124e3ccdb6f154c6c161c
-- app/(marketing)/[template_id]/_templates/cafe/CafeTemplate.tsx | 6237b | sha1:2f2b66819044bcd7aadee47ee2405db879d43ee8
-- app/(marketing)/[template_id]/_templates/cafe/CafeStyle.module.css | 2685b | sha1:59c1d7b95a786f96cc9b1ee3b39d56b600a22dce
-- app/(marketing)/[template_id]/_templates/cafe/config.ts | 3888b | sha1:3c27d5c7f3efbdfd2f624a5c013811d5e2ca2e43
-- app/(marketing)/[template_id]/_templates/realestate/RealEstateTemplate.tsx | 6502b | sha1:ea55273770f57e6d0fb91c6c5e141520c765bdb9
-- app/(marketing)/[template_id]/_templates/realestate/RealEstateStyle.module.css | 1648b | sha1:a19e6b481f1e018ab95e4579b8d41ca6aeacac26
-- app/(marketing)/[template_id]/_templates/realestate/config.ts | 3821b | sha1:6746b5cb4645177855f4be704c12fb453579088a
-- app/(marketing)/[template_id]/_templates/construction/ConstructionTemplate.tsx | 5953b | sha1:82886920d7c461e153667a9a2c4f9dbf774c5f3f
-- app/(marketing)/[template_id]/_templates/construction/ConstructionStyle.module.css | 1408b | sha1:7dd705a5b5f8fc7aa29199c560bfb0a303ecb048
-- app/(marketing)/[template_id]/_templates/construction/config.ts | 4717b | sha1:4703dceebd1d43c0edbef14084c58f408eadc07b
-- app/(marketing)/[template_id]/_templates/starter/StarterTemplate.tsx | 5229b | sha1:0bd598357d832cce368dac409052e60fd28e08c5
-- app/(marketing)/[template_id]/_templates/starter/StarterStyle.module.css | 1354b | sha1:6af406ddfb8b4dd4e124a769b9f1649689f351ce
-- app/(marketing)/[template_id]/_templates/starter/config.ts | 3071b | sha1:18f0dcb8327d5ebe5ca57afcf8242e4610fab9db
-- app/(marketing)/[template_id]/_templates/clinic/ClinicTemplate.tsx | 5187b | sha1:75e99225e778900839b5c115d775602359e7133d
-- app/(marketing)/[template_id]/_templates/clinic/ClinicStyle.module.css | 1271b | sha1:afdd35936311d240f32f9396037558602d3c106e
-- app/(marketing)/[template_id]/_templates/clinic/config.ts | 3407b | sha1:ca862af4bc6649d990b5d60c6d1bf795d85cd9b3
+- app/(marketing)/[template_id]/\_templates/cafe/CafeTemplate.tsx | 6237b | sha1:2f2b66819044bcd7aadee47ee2405db879d43ee8
+- app/(marketing)/[template_id]/\_templates/cafe/CafeStyle.module.css | 2685b | sha1:59c1d7b95a786f96cc9b1ee3b39d56b600a22dce
+- app/(marketing)/[template_id]/\_templates/cafe/config.ts | 3888b | sha1:3c27d5c7f3efbdfd2f624a5c013811d5e2ca2e43
+- app/(marketing)/[template_id]/\_templates/realestate/RealEstateTemplate.tsx | 6502b | sha1:ea55273770f57e6d0fb91c6c5e141520c765bdb9
+- app/(marketing)/[template_id]/\_templates/realestate/RealEstateStyle.module.css | 1648b | sha1:a19e6b481f1e018ab95e4579b8d41ca6aeacac26
+- app/(marketing)/[template_id]/\_templates/realestate/config.ts | 3821b | sha1:6746b5cb4645177855f4be704c12fb453579088a
+- app/(marketing)/[template_id]/\_templates/construction/ConstructionTemplate.tsx | 5953b | sha1:82886920d7c461e153667a9a2c4f9dbf774c5f3f
+- app/(marketing)/[template_id]/\_templates/construction/ConstructionStyle.module.css | 1408b | sha1:7dd705a5b5f8fc7aa29199c560bfb0a303ecb048
+- app/(marketing)/[template_id]/\_templates/construction/config.ts | 4717b | sha1:4703dceebd1d43c0edbef14084c58f408eadc07b
+- app/(marketing)/[template_id]/\_templates/starter/StarterTemplate.tsx | 5229b | sha1:0bd598357d832cce368dac409052e60fd28e08c5
+- app/(marketing)/[template_id]/\_templates/starter/StarterStyle.module.css | 1354b | sha1:6af406ddfb8b4dd4e124a769b9f1649689f351ce
+- app/(marketing)/[template_id]/\_templates/starter/config.ts | 3071b | sha1:18f0dcb8327d5ebe5ca57afcf8242e4610fab9db
+- app/(marketing)/[template_id]/\_templates/clinic/ClinicTemplate.tsx | 5187b | sha1:75e99225e778900839b5c115d775602359e7133d
+- app/(marketing)/[template_id]/\_templates/clinic/ClinicStyle.module.css | 1271b | sha1:afdd35936311d240f32f9396037558602d3c106e
+- app/(marketing)/[template_id]/\_templates/clinic/config.ts | 3407b | sha1:ca862af4bc6649d990b5d60c6d1bf795d85cd9b3
 - app/(marketing)/[template_id]/page.tsx | 1311b | sha1:357f2f143693c7cd788919151124e1628123b91f
 - app/(marketing)/[template_id]/layout.tsx | 2476b | sha1:1dbff05e6ad2ec985b93dac711522f52c564b3ff
-- app/(marketing)/[template_id]/_config/registry.ts | 1067b | sha1:935f377fa03f7ca7fca36f91caf4971301712630
+- app/(marketing)/[template_id]/\_config/registry.ts | 1067b | sha1:935f377fa03f7ca7fca36f91caf4971301712630
 - app/globals.css | 2818b | sha1:814b39f421df1fb728e642754c6923acded44f66
 - app/api/contact/route.ts | 2313b | sha1:ad7395a8f89f2a2f55ebb119f618393bf8d024a6
 - app/(main)/about/page.tsx | 7934b | sha1:28d86b70f69d17c0fa0ba8bb7bb78e296e5609c0
@@ -88,7 +91,7 @@ app
 - app/(main)/blog/loading.tsx | 459b | sha1:edf5c3e19911cb871aac40c32868ec31d20ab31e
 - app/(main)/catalog/page.tsx | 4228b | sha1:ca1e7882feb854352f99ca7a66c24f60fb6f34bb
 - app/(main)/contact/page.tsx | 9591b | sha1:335d5a1051f95d943bf714b303983ea48732007d
-- app/(main)/contact/_components/ContactMap.tsx | 7467b | sha1:0b28b0ad50ace1787356d28629594a5a3fa3851f
+- app/(main)/contact/\_components/ContactMap.tsx | 7467b | sha1:0b28b0ad50ace1787356d28629594a5a3fa3851f
 - app/(main)/services/page.tsx | 368b | sha1:e93753e1a9cf208d15bbf12b80cfd994bd53750e
 - app/(main)/services/ServicesPageClient.tsx | 677b | sha1:0cc47835d114b62a0bc2ff2d52951e80d3176395
 - app/(main)/page.tsx | 4887b | sha1:79b2f3bc23219f1bfe6ac23b77be9e2837c1d209
@@ -96,7 +99,9 @@ app
 - app/sitemap.ts | 2504b | sha1:61d3ddb3b3490292061f549c3df18fd2b7ab2cb1
 - app/robots.txt | 70b | sha1:98896dad3ec15b2ca1b7fe72e65bae71d23c7475
 - app/favicon.ico | 194522b | sha1:6e91e3cfc9327f26b55a992b403b6560ddbd353c
+
 ### components
+
 components
 ├── About.tsx
 ├── BlogSection.tsx
@@ -116,26 +121,27 @@ components
 ├── shared
 │   └── JsonLd.tsx
 └── ui
-    ├── accordion.tsx
-    ├── avatar.tsx
-    ├── badge.tsx
-    ├── button.tsx
-    ├── card.tsx
-    ├── dialog.tsx
-    ├── empty.tsx
-    ├── form.tsx
-    ├── input.tsx
-    ├── label.tsx
-    ├── modal.tsx
-    ├── select.tsx
-    ├── tabs.tsx
-    ├── textarea.tsx
-    ├── toast.tsx
-    └── toaster.tsx
+├── accordion.tsx
+├── avatar.tsx
+├── badge.tsx
+├── button.tsx
+├── card.tsx
+├── dialog.tsx
+├── empty.tsx
+├── form.tsx
+├── input.tsx
+├── label.tsx
+├── modal.tsx
+├── select.tsx
+├── tabs.tsx
+├── textarea.tsx
+├── toast.tsx
+└── toaster.tsx
 
 4 directories, 31 files
 
 #### Metadata (file | size | sha1)
+
 - components/Header.tsx | 3133b | sha1:cf9748de5592a748dd683706dd53021d2372c84a
 - components/Footer.tsx | 6516b | sha1:9fdc2403f1e81ed48c8f452f2205252ff5cf3f4d
 - components/catalog/CatalogProjectCard.tsx | 3610b | sha1:07786eca9e4b54124dba36c1b141a3ba1cc49684
@@ -167,7 +173,9 @@ components
 - components/SocialProof.tsx | 4408b | sha1:b4e340c3db9e29a78d55c0833d766c0869ee6d4a
 - components/FAQSection.tsx | 8611b | sha1:20cd830ceee2bdee37d6ec71a08a53ed39190ba7
 - components/BlogSection.tsx | 3169b | sha1:632173732a9d31b310c640ff98213ff033458249
+
 ### lib
+
 lib
 ├── api.ts
 ├── helpers.ts
@@ -177,11 +185,14 @@ lib
 1 directory, 4 files
 
 #### Metadata (file | size | sha1)
+
 - lib/utils.ts | 166b | sha1:03edf7b44c7cf1d3f48be4f72866007dbb63b8c6
 - lib/api.ts | 457b | sha1:ba386cfe8e8843a602c0b958d77f5c15d387b141
 - lib/helpers.ts | 3381b | sha1:3b509d447b9e785c50b4cb34ba51dfd046cc4309
 - lib/supabase.ts | 987b | sha1:714a4067d19c464152a877de911c306450c31ac8
+
 ### public
+
 public
 ├── grid.svg
 ├── images
@@ -191,12 +202,13 @@ public
 │   │   ├── restaurant-1.webp
 │   │   └── sme-1.webp
 │   └── profile
-│       └── default-avatar.webp
+│   └── default-avatar.webp
 └── og-image.png
 
 4 directories, 7 files
 
 #### Metadata (file | size | sha1)
+
 - public/images/profile/default-avatar.webp | 4351b | sha1:f3f3438414e699035d448859a6d6b1ae0b9750ae
 - public/images/portfolio/restaurant-1.webp | 22797b | sha1:0c491e38af3e3f47260ae7973e1610e6880bfba0
 - public/images/portfolio/sme-1.webp | 27619b | sha1:48b1014ff6b99454b6ac68372ecaf0b04154fdcd
@@ -204,7 +216,9 @@ public
 - public/images/portfolio/corporate-1.webp | 44174b | sha1:9b0f4099faf3cb115d393a8b9c8c2f63f81efa06
 - public/og-image.png | 132909b | sha1:7102561a00e219c617ff0ddd2fd0c094ffd49782
 - public/grid.svg | 185b | sha1:71a836ea40052f09230c3f3cef63c47e4703f0b1
+
 ### scripts
+
 scripts
 ├── project-summary.sh
 └── tree-projects.sh
@@ -212,9 +226,12 @@ scripts
 1 directory, 2 files
 
 #### Metadata (file | size | sha1)
+
 - scripts/project-summary.sh | 7551b | sha1:56b30ca598ca62a3983fda302a6e2ffed9864927
 - scripts/tree-projects.sh | 862b | sha1:6de4d4cefa660072eaf34961340437a16836bbca
+
 ### data
+
 data
 ├── blog
 │   ├── allposts.ts
@@ -230,6 +247,7 @@ data
 2 directories, 9 files
 
 #### Metadata (file | size | sha1)
+
 - data/servicesData.ts | 5567b | sha1:cef0e57d4f1119a77cc0bd4c51c07c9321f6a0ab
 - data/types.ts | 2191b | sha1:022669eecbec9d7d3130188713007d53a0990e9c
 - data/reviews.ts | 4093b | sha1:ac2064dcad2796c1ea3eb43b14e846bf2ea5ff76
@@ -239,23 +257,31 @@ data
 - data/blog/post4.ts | 1103b | sha1:caa429d27dd75caaf6fb1bf3eb5c82fd3b0aabc7
 - data/blog/allposts.ts | 700b | sha1:d570729c0b799c8c30b589da625fb12e445769f8
 - data/catalog.projects.ts | 4877b | sha1:2391c71625b22f07c3ab834f11274d34ed5d6804
+
 ### hooks
+
 hooks
 └── use-toast.ts
 
 1 directory, 1 file
 
 #### Metadata (file | size | sha1)
+
 - hooks/use-toast.ts | 3943b | sha1:6eac08b90d28dd8ccf6bc813c4bd6df0c2f34a9f
+
 ### config
+
 config
 └── siteConfig.ts
 
 1 directory, 1 file
 
 #### Metadata (file | size | sha1)
+
 - config/siteConfig.ts | 5711b | sha1:ba95d92240f03b298bb1d93925824018ea59f72c
+
 ### types
+
 types
 ├── blog.ts
 ├── index.ts
@@ -265,6 +291,7 @@ types
 1 directory, 4 files
 
 #### Metadata (file | size | sha1)
+
 - types/blog.ts | 304b | sha1:710f2c3bad973f8463358f521719f4a0450fcad4
 - types/services.ts | 1662b | sha1:27a3a67f67fc94ca53c55aa407249b178b2eedcd
 - types/review.ts | 260b | sha1:58d2f8960e8689ba0e268f28a1ef26363885f933
@@ -272,8 +299,8 @@ types
 
 ## ⚙️ Root Config Previews
 
-
 ### `.prettierrc`
+
 ```text
 {
   "semi": false,
@@ -290,6 +317,7 @@ types
 ```
 
 ### `eslint.config.mjs`
+
 ```js
 /** @format */
 import js from "@eslint/js"
@@ -353,6 +381,7 @@ export default [
 ```
 
 ### `tailwind.config.ts`
+
 ```ts
 /** @format */
 import type { Config } from "tailwindcss"
@@ -437,6 +466,7 @@ const config: Config = {
 ```
 
 ### `tsconfig.json`
+
 ```json
 /** @format */
 {
@@ -479,6 +509,7 @@ const config: Config = {
 ```
 
 ### `next.config.ts`
+
 ```ts
 /** @format */
 import type { NextConfig } from "next"
@@ -536,8 +567,8 @@ export default nextConfig
 
 ## 👀 Code Preview & Coverage
 
-
 ### `app/layout.tsx`
+
 ```ts
 /** @format */
 
@@ -616,6 +647,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/cafe/CafeTemplate.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -700,6 +732,7 @@ export default function CafeTemplate({ data }: CafeProps) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/cafe/config.ts`
+
 ```ts
 /** @format */
 // ----------------------------------------------------
@@ -771,6 +804,7 @@ export const cafeConfig = {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/realestate/RealEstateTemplate.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -855,6 +889,7 @@ export default function RealEstateTemplate({ data }: Props) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/realestate/config.ts`
+
 ```ts
 /** @format */
 // ----------------------------------------------------
@@ -918,6 +953,7 @@ export const realEstateConfig = {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/construction/ConstructionTemplate.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -1002,6 +1038,7 @@ export default function ConstructionTemplate({ data }: Props) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/construction/config.ts`
+
 ```ts
 /** @format */
 // ----------------------------------------------------
@@ -1086,6 +1123,7 @@ export const constructionConfig = {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/starter/StarterTemplate.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -1170,6 +1208,7 @@ export default function StarterTemplate({ data }: Props) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/starter/config.ts`
+
 ```ts
 /** @format */
 // ----------------------------------------------------
@@ -1230,6 +1269,7 @@ export const starterConfig = {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/clinic/ClinicTemplate.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -1314,6 +1354,7 @@ export default function ClinicTemplate({ data }: ClinicProps) {
 ```
 
 ### `app/(marketing)/[template_id]/_templates/clinic/config.ts`
+
 ```ts
 /** @format */
 // ----------------------------------------------------
@@ -1370,6 +1411,7 @@ export const clinicConfig = {
 ```
 
 ### `app/(marketing)/[template_id]/page.tsx`
+
 ```ts
 import { notFound } from "next/navigation"
 import { TEMPLATE_REGISTRY } from "./_config/registry"
@@ -1417,6 +1459,7 @@ export default async function MarketingPage({ params }: Props) {
 ```
 
 ### `app/(marketing)/[template_id]/layout.tsx`
+
 ```ts
 // app/(marketing)/[template_id]/layout.tsx
 import React from "react"
@@ -1490,6 +1533,7 @@ export default async function MarketingLayout({
 ```
 
 ### `app/(marketing)/[template_id]/_config/registry.ts`
+
 ```ts
 import { clinicConfig } from "../_templates/clinic/config"
 import { cafeConfig } from "../_templates/cafe/config"
@@ -1513,6 +1557,7 @@ export const TEMPLATE_REGISTRY: Record<string, any> = {
 ```
 
 ### `app/api/contact/route.ts`
+
 ```ts
 /** @format */
 import { NextResponse } from "next/server"
@@ -1597,6 +1642,7 @@ export async function POST(request: Request) {
 ```
 
 ### `app/(main)/about/page.tsx`
+
 ```ts
 /** @format */
 import React, { memo } from "react"
@@ -1681,6 +1727,7 @@ const AboutPage = () => {
 ```
 
 ### `app/(main)/blog/[slug]/page.tsx`
+
 ```ts
 /** @format */
 import React from "react"
@@ -1740,6 +1787,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 ```
 
 ### `app/(main)/blog/page.tsx`
+
 ```ts
 /** @format */
 import React from "react"
@@ -1777,6 +1825,7 @@ export default function BlogPage() {
 ```
 
 ### `app/(main)/blog/loading.tsx`
+
 ```ts
 /** @format */
 export default function Loading() {
@@ -1797,6 +1846,7 @@ export default function Loading() {
 ```
 
 ### `app/(main)/catalog/page.tsx`
+
 ```ts
 /** @format */
 import { Metadata } from "next"
@@ -1881,6 +1931,7 @@ export default function CatalogPage() {
 ```
 
 ### `app/(main)/contact/page.tsx`
+
 ```ts
 /** @format */
 import React, { memo } from "react"
@@ -1965,6 +2016,7 @@ const ContactPage = () => {
 ```
 
 ### `app/(main)/contact/_components/ContactMap.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2049,6 +2101,7 @@ export default function ContactMap() {
 ```
 
 ### `app/(main)/services/page.tsx`
+
 ```ts
 /** @format */
 import ServicesPageClient from "./ServicesPageClient"
@@ -2065,13 +2118,14 @@ export default function ServicesPage() {
 ```
 
 ### `app/(main)/services/ServicesPageClient.tsx`
+
 ```ts
 /** @format */
 "use client"
 
 import React from "react"
 // ✅ Import จาก Path จริง: components/Services.tsx
-import { Services } from "@/components/Services" 
+import { Services } from "@/components/Services"
 import { ServiceItem } from "@/types/service"
 
 interface ServicesPageClientProps {
@@ -2091,6 +2145,7 @@ export default function ServicesPageClient({ services }: ServicesPageClientProps
 ```
 
 ### `app/(main)/page.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2175,6 +2230,7 @@ export default function HomePage() {
 ```
 
 ### `app/(main)/layout.tsx`
+
 ```ts
 /** @format */
 import React from "react"
@@ -2189,15 +2245,15 @@ export default function MainLayout({ children }: MainLayoutProps) {
   return (
     // min-h-screen และ flex-col ช่วยให้ Footer ติดล่างเสมอแม้เนื้อหาน้อย
     <div className="relative flex min-h-screen flex-col bg-white font-sans antialiased">
-      {/* ─── HEADER ─── 
-          แนะนำให้ใส่ z-index สูงๆ ไว้ใน Header component 
+      {/* ─── HEADER ───
+          แนะนำให้ใส่ z-index สูงๆ ไว้ใน Header component
           เพื่อไม่ให้โดน Shadow ของตัว Card ในหน้า Services ทับ
       */}
       <Header />
 
-      {/* ─── MAIN CONTENT ─── 
+      {/* ─── MAIN CONTENT ───
           1. flex-1: ดัน Footer ลงล่าง
-          2. overflow-x-hidden: สำคัญมากสำหรับสไตล์ Neo-Brutalism 
+          2. overflow-x-hidden: สำคัญมากสำหรับสไตล์ Neo-Brutalism
              เพราะเงา [8px_8px_0px_0px] มักจะทำให้เกิด Scrollbar แนวนอนโดยไม่ตั้งใจ
       */}
       <main className="relative flex-1 overflow-x-hidden">
@@ -2218,6 +2274,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
 ```
 
 ### `app/sitemap.ts`
+
 ```ts
 /** @format */
 import { MetadataRoute } from "next"
@@ -2282,6 +2339,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ```
 
 ### `components/Header.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2366,6 +2424,7 @@ export function Header() {
 ```
 
 ### `components/Footer.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2450,6 +2509,7 @@ export default function Footer({ data }: FooterProps) {
 ```
 
 ### `components/catalog/CatalogProjectCard.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2534,6 +2594,7 @@ export function CatalogProjectCard({
 ```
 
 ### `components/catalog/CatalogProjectsGrid.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2606,6 +2667,7 @@ export function CatalogProjectsGrid({
 ```
 
 ### `components/Services.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2690,6 +2752,7 @@ export default function Services() {
 ```
 
 ### `components/Hero.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2774,6 +2837,7 @@ const Hero = ({
 ```
 
 ### `components/About.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -2858,6 +2922,7 @@ const AboutContent = () => {
 ```
 
 ### `components/shared/JsonLd.tsx`
+
 ```ts
 /** @format */
 import React from "react"
@@ -2925,6 +2990,7 @@ export default JsonLd
 ```
 
 ### `components/ui/button.tsx`
+
 ```ts
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
@@ -2987,6 +3053,7 @@ export { Button, buttonVariants }
 ```
 
 ### `components/ui/card.tsx`
+
 ```ts
 import * as React from "react"
 
@@ -3067,6 +3134,7 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
 ```
 
 ### `components/ui/badge.tsx`
+
 ```ts
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -3108,6 +3176,7 @@ export { Badge, badgeVariants }
 ```
 
 ### `components/ui/label.tsx`
+
 ```ts
 "use client"
 
@@ -3138,6 +3207,7 @@ export { Label }
 ```
 
 ### `components/ui/empty.tsx`
+
 ```ts
 import { cva, type VariantProps } from "class-variance-authority"
 
@@ -3222,6 +3292,7 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
 ```
 
 ### `components/ui/avatar.tsx`
+
 ```ts
 "use client"
 
@@ -3276,6 +3347,7 @@ export { Avatar, AvatarImage, AvatarFallback }
 ```
 
 ### `components/ui/accordion.tsx`
+
 ```ts
 /** @format */
 
@@ -3339,6 +3411,7 @@ export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
 ```
 
 ### `components/ui/tabs.tsx`
+
 ```ts
 /** @format */
 
@@ -3404,6 +3477,7 @@ export { Tabs, TabsList, TabsTrigger, TabsContent }
 ```
 
 ### `components/ui/input.tsx`
+
 ```ts
 import * as React from "react"
 
@@ -3430,6 +3504,7 @@ export { Input }
 ```
 
 ### `components/ui/modal.tsx`
+
 ```ts
 /** @format */
 
@@ -3514,6 +3589,7 @@ const ModalFooter = ({
 ```
 
 ### `components/ui/toast.tsx`
+
 ```ts
 "use client"
 
@@ -3598,6 +3674,7 @@ const ToastClose = React.forwardRef<
 ```
 
 ### `components/ui/dialog.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -3682,6 +3759,7 @@ const DialogFooter = ({
 ```
 
 ### `components/ui/select.tsx`
+
 ```ts
 "use client"
 
@@ -3766,6 +3844,7 @@ const SelectContent = React.forwardRef<
 ```
 
 ### `components/ui/textarea.tsx`
+
 ```ts
 import * as React from "react"
 
@@ -3792,6 +3871,7 @@ export { Textarea }
 ```
 
 ### `components/ui/toaster.tsx`
+
 ```ts
 "use client"
 
@@ -3831,6 +3911,7 @@ export function Toaster() {
 ```
 
 ### `components/ui/form.tsx`
+
 ```ts
 "use client"
 
@@ -3915,6 +3996,7 @@ const FormItem = React.forwardRef<
 ```
 
 ### `components/iconMap.ts`
+
 ```ts
 // components/iconMap.ts
 import {
@@ -3939,6 +4021,7 @@ export const iconMap = {
 ```
 
 ### `components/ContactInfo.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4023,6 +4106,7 @@ export default function ContactInfo() {
 ```
 
 ### `components/ContactForm.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4107,6 +4191,7 @@ export default function ContactForm({ templateId }: ContactFormProps) {
 ```
 
 ### `components/CTA.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4191,6 +4276,7 @@ export default function CTA({
 ```
 
 ### `components/SocialProof.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4275,6 +4361,7 @@ const SocialProof = () => {
 ```
 
 ### `components/FAQSection.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4359,6 +4446,7 @@ const FAQSection = ({ config }: FAQSectionProps) => {
 ```
 
 ### `components/BlogSection.tsx`
+
 ```ts
 /** @format */
 "use client"
@@ -4443,6 +4531,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
 ```
 
 ### `lib/utils.ts`
+
 ```ts
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -4453,6 +4542,7 @@ export function cn(...inputs: ClassValue[]) {
 ```
 
 ### `lib/api.ts`
+
 ```ts
 /** @format */
 import { blogData } from "@/data/blog/allposts" // ✅ แก้ Path ให้ตรง
@@ -4469,6 +4559,7 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 ```
 
 ### `lib/helpers.ts`
+
 ```ts
 /**
  * lib/helpers.ts
@@ -4553,6 +4644,7 @@ export const generateId = (prefix: string = "id"): string => {
 ```
 
 ### `lib/supabase.ts`
+
 ```ts
 /** @format */
 import { createClient } from "@supabase/supabase-js"
@@ -4586,13 +4678,10 @@ export const getSupabaseAdmin = () => {
 
 ## 🗄️ JSON Validation
 
-
 > JSON validity: **100%**
 
 ## 📄 CSV Preview
 
-
 > CSV readable: **100%**
 
 ## 🎯 Project Intent Detection
-

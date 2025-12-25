@@ -1,46 +1,180 @@
-.wrapper {
-  @apply min-h-screen w-full overflow-x-hidden bg-yellow-50 text-slate-900;
+/** @format */
+/* ----------------------------------------------------
+   🚀 AI CONTEXT: PRODUCTION PROFESSIONAL CSS (MASTER)
+   Identity: Stable, Geometric, Systematic
+   Fix: ป้องกัน Layout ยืด (Overflow) และสระไทยทับกัน 100%
+   ---------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  /* ป้องกันการกระตุกของ Scrollbar */
+  scrollbar-gutter: stable;
 }
 
-/* ⚡ Flash Sale Hero */
+/* 🏗️ HERO_SECTION: ควบคุมโครงสร้างแบบ Industrial Grid */
 .hero {
-  @apply relative flex flex-col items-center border-b-[10px] border-slate-900 bg-white px-8 py-20 text-center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(6rem, 12vw, 10rem) 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  /* Grid Pattern สไตล์ Engineering Blueprint */
+  background-image:
+    linear-gradient(#f1f5f9 1px, transparent 1px),
+    linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center top;
 }
 
-.badge {
-  @apply mb-6 rotate-[-2deg] bg-[#ff3e3e] px-4 py-1 text-sm font-black italic text-white shadow-[4px_4px_0px_0px_#000];
+/* 📢 HEADLINE: Thai Typography Optimization */
+.mainTitle {
+  font-weight: 900; /* font-black */
+  letter-spacing: -0.04em; /* tracking-tighter */
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  /* ระยะบรรทัดสากลสำหรับสระไทย (1.1 - 1.2) เพื่อป้องกันสระทับกัน */
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 2rem;
+  max-width: 1000px;
+  word-wrap: break-word;
+  /* ป้องกันการตัดคำที่ผิดพลาด */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
-.heroTitle {
-  @apply mb-6 text-6xl font-black uppercase italic leading-[0.85] tracking-tighter md:text-9xl;
+/* ⚡ BUTTONS: Elite Sharp Geometric (Zero Radius) */
+.primaryButton {
+  appearance: none;
+  background-color: var(--theme-color, #1e40af);
+  color: #ffffff;
+  border: none;
+  border-radius: 0 !important; /* บังคับเหลี่ยมคม */
+  padding: 1.25rem 3rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
 }
 
-/* 🛒 Floating Cart Section */
-.cartWidget {
-  @apply sticky top-24 z-40 mx-auto mt-[-50px] max-w-sm border-4 border-slate-900 bg-white p-6 shadow-[10px_10px_0px_0px_#ff3e3e];
+.primaryButton:hover {
+  filter: brightness(1.1);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
 }
 
-.priceTag {
-  @apply mb-4 flex items-end gap-3;
+.primaryButton:active {
+  transform: translateY(-1px);
 }
 
-.currentPrice {
-  @apply text-5xl font-black leading-none text-[#ff3e3e];
+/* 🏁 GRID_SYSTEM: Stable Architecture */
+.gridContainer {
+  display: grid;
+  /* ใช้เทคนิค Repeat Auto-fill เพื่อความยืดหยุ่น */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  width: 100%;
+  border-left: 1px solid #e2e8f0;
+  border-top: 1px solid #e2e8f0;
+  gap: 0;
 }
 
-.oldPrice {
-  @apply text-xl font-bold text-slate-400 line-through;
+.gridItem {
+  padding: clamp(2.5rem, 6vw, 4.5rem);
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 🚀 Feature List */
-.featureList {
-  @apply mx-auto mt-20 grid max-w-4xl grid-cols-1 gap-4 px-4 md:grid-cols-2;
+.gridItem:hover {
+  background-color: #f8fafc;
+  z-index: 1;
 }
 
-.featureItem {
-  @apply flex items-center gap-3 border-2 border-slate-900 bg-white p-4 font-bold italic transition-all hover:bg-slate-900 hover:text-white;
+/* 🏷️ TYPOGRAPHY: Elite Metadata Hierarchy */
+.label {
+  font-weight: 800;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  color: #64748b;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  /* ป้องกันการยุบตัวของอักษรภาษาอังกฤษตัวเล็ก */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-.checkoutBtn {
-  @apply mt-6 w-full bg-slate-900 py-5 text-2xl font-black uppercase italic text-white shadow-[6px_6px_0px_0px_#ff3e3e] transition-all active:translate-x-1 active:translate-y-1 active:shadow-none;
+.description {
+  color: #475569; /* Slate-600 */
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 700px;
+  font-weight: 500;
+  /* จัดการความห่างของอักษรภาษาไทยให้อ่านง่ายขึ้น */
+  letter-spacing: -0.01em;
+}
+
+/* 📱 MOBILE_OPTIMIZATION: ปรับแต่งเพื่อการแสดงผลบนจอเล็ก */
+@media (max-width: 768px) {
+  .hero {
+    padding: 5rem 1.5rem;
+    text-align: left;
+    align-items: flex-start;
+    /* ลดความเข้มของลายตารางบนมือถือ */
+    background-size: 30px 30px;
+  }
+
+  .mainTitle {
+    line-height: 1.25; /* เพิ่มระยะบรรทัดขึ้นอีกนิดบนมือถือเพื่อความชัดเจน */
+    font-size: clamp(2.25rem, 10vw, 3.5rem);
+    letter-spacing: -0.03em;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .primaryButton {
+    width: 100%; /* ปุ่มเต็มความกว้างบนมือถือ */
+    padding: 1.25rem 2rem;
+  }
+
+  .gridItem {
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+/* 🎨 UTILITIES: System Decorators */
+.borderAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: var(--theme-color);
+  transition: width 0.5s ease;
+}
+
+.gridItem:hover .borderAccent {
+  width: 100%;
 }

@@ -1,140 +1,71 @@
 /** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION PROFESSIONAL MASTER LAYOUT (REFACTORED)
+// Identity: Dynamic Data Injection, Stable Grid Architecture
+// Function: รับ Data Props จาก Registry เพื่อแสดงผลตาม Template ID
+// ----------------------------------------------------
+
 "use client"
 
 import React from "react"
 import styles from "./StarterStyle.module.css"
-import { iconMap } from "@/components/iconMap"
 
-interface Props {
-  data: any
+// นำเข้า Components ที่ได้รับการ Refactor แล้ว (ย้ายจาก Folder ภายในมาใช้งาน)
+import Header from "./components/Header"
+import HeroSection from "./components/HeroSection"
+import FeaturesSection from "./components/FeaturesSection"
+import PerformanceSection from "./components/PerformanceSection"
+import CartSection from "./components/CartSection"
+import FAQSection from "./components/FAQSection"
+import SuccessSection from "./components/SuccessSection"
+import Footer from "./components/Footer"
+
+interface StarterTemplateProps {
+  data: any // รับข้อมูล config ทั้งหมดมาจาก MarketingPage (page.tsx)
 }
 
-export default function StarterTemplate({ data }: Props) {
-  // 🛡️ Defensive Programming: ป้องกันกรณี data หรือ content ว่าง
-  const { content } = data || {}
-  const Check = iconMap.CHECK
-  const Rocket = iconMap.STARTER
-
-  if (!content) return null
+export default function StarterTemplate({ data }: StarterTemplateProps) {
+  // Safe Destructuring: ดึงข้อมูลจาก Data Props
+  // หากไม่มีข้อมูล ให้ใช้ค่าจากโครงสร้างที่เตรียมไว้ป้องกัน Error
+  const {
+    content = {},
+    themeColor = "#1e40af",
+    contact = {},
+    pricing = { starter: { price: "0" } },
+  } = data
 
   return (
-    <div className={styles.wrapper}>
-      {/* 🚀 Header: Flash Sale Vibe */}
-      <section className={styles.hero}>
-        <div className={styles.badge}>LIMITED_OFFER: FIRST_10_CUSTOMERS</div>
-        <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
-        <p className="max-w-xl text-xl font-bold italic text-slate-500">
-          {content.heroSubtitle}
-        </p>
+    <div className={styles.container}>
+      {/* 1. HEADER: ล็อกตำแหน่งบนสุด และรองรับ Theme Color จาก Config */}
+      <Header themeColor={themeColor} contact={contact} />
 
-        {/* Background Decor */}
-        <div
-          className="absolute left-10 top-10 hidden rotate-[-15deg] opacity-10 md:block"
-          aria-hidden="true"
-        >
-          {Rocket && <Rocket size={150} />}
-        </div>
-      </section>
+      <main className="relative">
+        {/* 2. HERO: ส่งผ่านข้อมูลพาดหัวและราคาเริ่มต้น */}
+        <HeroSection
+          title={content.heroTitle}
+          subtitle={content.heroSubtitle}
+          themeColor={themeColor}
+          price={pricing.starter?.price}
+        />
 
-      {/* 🛒 The Promotion Cart: จุดขายสำคัญ */}
-      <div className="relative z-50 px-4">
-        <section className={styles.cartWidget}>
-          <div className="mb-6 flex items-start justify-between">
-            <div className="font-mono text-[10px] font-black uppercase text-slate-400">
-              Item_Order: {content.cartItem?.name}
-            </div>
-            <span className="animate-pulse text-[10px] font-bold text-green-600">
-              ● {content.cartItem?.status}
-            </span>
-          </div>
+        {/* 3. FEATURES: ระบบตารางที่เปลี่ยน Content ตามธุรกิจ */}
+        <FeaturesSection features={content.features} themeColor={themeColor} />
 
-          <div className={styles.priceTag}>
-            <span className={styles.currentPrice}>฿{content.promoPrice}</span>
-            <span className={styles.oldPrice}>฿{content.originalPrice}</span>
-            <span className="rounded bg-green-100 px-2 py-0.5 text-[10px] font-black text-green-600">
-              SAVE {content.savePercent}
-            </span>
-          </div>
+        {/* 4. PERFORMANCE: แสดงสถิติความเร็ว (Static หรือ Dynamic ก็ได้) */}
+        <PerformanceSection />
 
-          <div className="space-y-2 border-t-2 border-dashed border-slate-200 pt-4">
-            <p className="text-[10px] font-bold uppercase text-slate-400">
-              Inclusions:
-            </p>
-            <div className="text-xs font-bold italic">
-              + SSL Certificate Free
-            </div>
-            <div className="text-xs font-bold italic">
-              + Mobile-First Engine
-            </div>
-          </div>
+        {/* 5. PRICING: ตารางราคาที่เชื่อมต่อกับระบบการตัดสินใจซื้อ */}
+        <CartSection pricing={pricing} themeColor={themeColor} />
 
-          <button className={styles.checkoutBtn} type="button">
-            CLAIM_OFFER_NOW
-          </button>
+        {/* 6. FAQ: ช่วยลดภาระฝ่ายแอดมินด้วยคำถามที่พบบ่อย */}
+        <FAQSection />
 
-          <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-widest text-slate-400">
-            * No Hidden Fees // One-time Payment
-          </p>
-        </section>
-      </div>
+        {/* 7. SUCCESS CTA: ส่วนปิดการขายที่ดึง Contact ไปใช้งานจริง */}
+        <SuccessSection themeColor={themeColor} contact={contact} />
+      </main>
 
-      {/* 🛠️ Technical Highlights */}
-      <section className="mx-auto max-w-7xl py-24">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900">
-            WHY_CHOOSE_US?
-          </h2>
-          <div
-            className="mx-auto mt-2 h-2 w-12 bg-slate-900"
-            aria-hidden="true"
-          ></div>
-        </div>
-
-        <div className={styles.featureList}>
-          {content.features?.map((f: any) => (
-            <div key={f.id} className={styles.featureItem}>
-              {Check && <Check className="text-[#ff3e3e]" size={20} />}
-              <span className="font-bold italic text-slate-700">{f.text}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ⚡ Performance Banner */}
-      <section className="relative overflow-hidden bg-slate-900 px-8 py-16 text-white">
-        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center justify-between gap-10 md:flex-row">
-          <div className="md:w-1/2">
-            <h2 className="mb-4 text-5xl font-black uppercase italic leading-none">
-              ULTRA_FAST
-              <br />
-              LOADING.
-            </h2>
-            <p className="font-bold italic text-slate-400">
-              เราใช้เทคโนโลยี Next.js 15 ล่าสุด
-              เพื่อให้หน้าเว็บของคุณโหลดเร็วกว่าคู่แข่ง 3 เท่า
-            </p>
-          </div>
-          <div className="flex justify-end md:w-1/2">
-            <div className="border-4 border-[#ff3e3e] bg-white p-8 text-6xl font-black italic text-slate-900 shadow-[8px_8px_0px_0px_rgba(255,62,62,0.5)]">
-              99/100
-              <p className="text-xs uppercase tracking-tighter text-slate-400">
-                PageSpeed Score
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Decorative Engineering Grid */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-10"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        ></div>
-      </section>
+      {/* 8. FOOTER: แสดงข้อมูลบริษัทและช่องทางโซเชียล */}
+      <Footer contact={contact} />
     </div>
   )
 }

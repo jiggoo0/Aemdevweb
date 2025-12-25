@@ -88,7 +88,8 @@ export const reducer = (state: State, action: Action): State => {
         ),
       }
 
-    case actionTypes.DISMISS_TOAST: { // ✅ แก้ไข: ใช้ actionTypes
+    case actionTypes.DISMISS_TOAST: {
+      // ✅ แก้ไข: ใช้ actionTypes
       const { toastId } = action
 
       if (toastId) {
@@ -146,7 +147,8 @@ function toast({ ...props }: Toast) {
       type: actionTypes.UPDATE_TOAST, // ✅ แก้ไข: ใช้ actionTypes
       toast: { ...props, id },
     })
-  const dismiss = () => dispatch({ type: actionTypes.DISMISS_TOAST, toastId: id })
+  const dismiss = () =>
+    dispatch({ type: actionTypes.DISMISS_TOAST, toastId: id })
 
   dispatch({
     type: actionTypes.ADD_TOAST, // ✅ แก้ไข: ใช้ actionTypes

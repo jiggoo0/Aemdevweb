@@ -13,9 +13,7 @@ interface ServicesProps {
 
 export default function Services({ services }: ServicesProps) {
   // กรองเฉพาะบริการที่มีสถานะ READY
-  const activeServices = services.filter(
-    (s) => (s as any).status === "READY"
-  )
+  const activeServices = services.filter((s) => (s as any).status === "READY")
 
   return (
     <section
@@ -54,8 +52,7 @@ export default function Services({ services }: ServicesProps) {
         {/* Services Grid */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {activeServices.map((service) => {
-            const Icon =
-              (iconMap as any)[service.iconName] || iconMap.STARTER
+            const Icon = (iconMap as any)[service.iconName] || iconMap.STARTER
             const hasPromo = !!(service as any).promoPrice
 
             return (

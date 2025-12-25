@@ -1,47 +1,80 @@
-.wrapper {
-  @apply min-h-screen w-full bg-white text-slate-900;
+/* app/(marketing)/[template_id]/_templates/clinic/ClinicStyle.module.css */
+
+.container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  font-family: "Inter", sans-serif;
 }
 
 .hero {
-  @apply relative flex flex-col items-center overflow-hidden border-b-8 border-blue-600 bg-slate-50 px-8 py-32 text-center;
-}
-
-.heroTag {
-  @apply mb-6 inline-block bg-blue-600 px-4 py-1 font-mono text-xs font-black uppercase text-white;
+  background-color: #f0fdfa; /* secondaryColor จาก config */
+  padding: 80px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .heroTitle {
-  @apply mb-8 text-5xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-8xl;
+  color: #0f766e; /* themeColor จาก config */
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
 }
 
 .heroSubtitle {
-  @apply mb-10 max-w-2xl text-lg font-bold text-slate-500 md:text-xl;
+  color: #374151;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1.2rem;
 }
 
 .statsGrid {
-  @apply relative z-20 mx-auto -mt-12 grid w-full max-w-7xl grid-cols-1 gap-0 border-y-4 border-slate-900 bg-white md:grid-cols-3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: -50px auto 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
 .statItem {
-  @apply border-r-0 border-slate-900 p-10 text-center transition-colors last:border-r-0 hover:bg-blue-50 md:border-r-4;
+  text-align: center;
+  padding: 20px;
 }
 
 .statValue {
-  @apply mb-2 text-5xl font-black italic text-blue-600;
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f766e;
 }
 
 .statLabel {
-  @apply font-mono text-xs font-black uppercase tracking-[0.2em] text-slate-400;
+  font-size: 0.875rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .serviceSection {
-  @apply mx-auto max-w-7xl px-8 py-24;
-}
-
-.serviceGrid {
-  @apply grid grid-cols-1 gap-8 md:grid-cols-3;
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .serviceCard {
-  @apply border-4 border-slate-900 p-8 shadow-[8px_8px_0px_0px_#2563eb] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #f0fdfa;
+  transition: all 0.3s ease;
+}
+
+.serviceCard:hover {
+  border-color: #0f766e;
+  transform: translateY(-5px);
 }

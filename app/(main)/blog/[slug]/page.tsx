@@ -19,9 +19,7 @@ export function generateStaticParams() {
 }
 
 /* Metadata */
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = blogData.find((p) => p.slug === slug)
 
@@ -42,7 +40,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white py-24 lg:py-32">
-      <div className="container mx-auto px-6 max-w-4xl">
+      <div className="container mx-auto max-w-4xl px-6">
         {/* Back */}
         <Link
           href="/blog"
@@ -52,7 +50,7 @@ export default async function BlogDetailPage({ params }: Props) {
         </Link>
 
         {/* Title */}
-        <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter text-slate-900">
+        <h1 className="text-5xl font-black uppercase italic tracking-tighter text-slate-900 md:text-7xl">
           {post.title}
         </h1>
 

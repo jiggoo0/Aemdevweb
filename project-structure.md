@@ -22,6 +22,16 @@ app
           StarterTemplate.tsx
           StarterStyle.module.css
           config.ts
+          components
+            Header.tsx
+            HeroSection.tsx
+            FeaturesSection.tsx
+            GuaranteeSection.tsx
+            PerformanceSection.tsx
+            Footer.tsx
+            CartSection.tsx
+            FAQSection.tsx
+            SuccessSection.tsx
         clinic
           ClinicTemplate.tsx
           ClinicStyle.module.css
@@ -30,6 +40,11 @@ app
       layout.tsx
       _config
         registry.ts
+      services
+        page.tsx
+      contact
+        page.tsx
+  apple-touch-icon.png
   globals.css
   api
     contact
@@ -106,6 +121,13 @@ scripts
   tree-projects.sh
 public
   images
+    badge.svg
+    feature.svg
+    svg
+      guarantee-badge.svg
+      speed.svg
+      mobile.svg
+      performance.svg
     profile
       default-avatar.webp
     portfolio
@@ -113,8 +135,11 @@ public
       sme-1.webp
       default-avatar.webp
       corporate-1.webp
+    hero.svg
+    performance.svg
   og-image.png
   grid.svg
+  apple-touch-icon.png
 lib
   utils.ts
   api.ts
