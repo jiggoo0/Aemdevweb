@@ -86,7 +86,7 @@ export default function ContactPage() {
         {/* 2. RIGHT_SIDE: FORM (CONNECTED TO API) */}
         <div className="border border-slate-200 bg-slate-50 p-10">
           {success ? (
-            <div className="flex h-full flex-col items-center justify-center py-20 text-center animate-in fade-in zoom-in duration-500">
+            <div className="flex h-full flex-col items-center justify-center py-20 text-center duration-500 animate-in fade-in zoom-in">
               <CheckCircle size={64} className="mb-6 text-green-500" />
               <h3 className="mb-4 text-3xl font-black uppercase text-slate-900">
                 ส่งข้อมูลสำเร็จ!

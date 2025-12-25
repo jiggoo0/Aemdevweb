@@ -78,7 +78,8 @@ export default function PerformanceSection() {
 
                 {/* DESCRIPTION: Fixed Comment Text Node Error */}
                 <p className="text-[10px] font-bold uppercase leading-none tracking-[0.1em] text-slate-500">
-                  <span className="mr-1 text-blue-900 opacity-50">#</span> {item.desc}
+                  <span className="mr-1 text-blue-900 opacity-50">#</span>{" "}
+                  {item.desc}
                 </p>
               </div>
             ))}

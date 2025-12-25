@@ -157,8 +157,12 @@ export default function Header({
             ))}
           </div>
           <div className="mt-10 flex flex-col gap-4 border-t border-slate-50 pt-8">
-            <a href={`tel:${contact?.phone}`} className="flex items-center gap-3 font-bold text-slate-600">
-              <Phone size={18} style={{ color: themeColor }} /> {contact?.phone || "02-xxx-xxxx"}
+            <a
+              href={`tel:${contact?.phone}`}
+              className="flex items-center gap-3 font-bold text-slate-600"
+            >
+              <Phone size={18} style={{ color: themeColor }} />{" "}
+              {contact?.phone || "02-xxx-xxxx"}
             </a>
             <Link
               href={`/${templateId}/contact`}
