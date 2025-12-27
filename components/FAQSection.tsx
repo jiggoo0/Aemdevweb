@@ -1,7 +1,7 @@
 /** @format */
 "use client"
 
-import React from "react"
+import React, { useId } from "react"
 import {
   Accordion,
   AccordionContent,
@@ -48,8 +48,9 @@ const FAQSection = ({
   faqs = DEFAULT_FAQS,
   primaryColor = "#1E3A8A",
 }: FAQSectionProps) => {
-  // 💡 ตัดการใช้ useEffect/setHasMounted ออกเพื่อลด Cascading Renders และ Hydration Warning
-  // Accordion ของ Radix UI รองรับ SSR ได้ดีอยู่แล้ว
+  // 💡 ใช้ useId เพื่อสร้างฐาน ID ที่เสถียรระหว่าง Server และ Client
+  // ป้องกันข้อผิดพลาด "Hydration Mismatch" ของ Radix UI Accordion
+  const baseId = useId()
 
   return (
     <section
@@ -112,25 +113,30 @@ const FAQSection = ({
           {/* ─── ⚡ RIGHT: SHARP ACCORDION ─── */}
           <div className="lg:col-span-7">
             <Accordion type="single" collapsible className="w-full space-y-5">
-              {faqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`item-${index}`}
-                  className="border-4 border-slate-900 bg-white px-6 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_#1E3A8A] data-[state=open]:shadow-[8px_8px_0px_0px_#F97316]"
-                >
-                  <AccordionTrigger className="group py-8 text-left text-xl font-black uppercase tracking-tight text-slate-900 hover:no-underline data-[state=open]:text-[#1E3A8A]">
-                    <div className="flex items-start gap-6">
-                      <span className="mt-1 text-xs font-black text-[#F97316] opacity-40">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="leading-tight">{faq.question}</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="border-t-2 border-slate-100 pb-8 pl-12 pt-6 text-lg font-bold leading-relaxed text-slate-500">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
+              {faqs.map((faq, index) => {
+                // สร้าง ID ที่เสถียรสำหรับแต่ละ Item
+                const itemId = `${baseId}-item-${index}`
+
+                return (
+                  <AccordionItem
+                    key={itemId}
+                    value={itemId}
+                    className="border-4 border-slate-900 bg-white px-6 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_#1E3A8A] data-[state=open]:shadow-[8px_8px_0px_0px_#F97316]"
+                  >
+                    <AccordionTrigger className="group py-8 text-left text-xl font-black uppercase tracking-tight text-slate-900 hover:no-underline data-[state=open]:text-[#1E3A8A]">
+                      <div className="flex items-start gap-6">
+                        <span className="mt-1 text-xs font-black text-[#F97316] opacity-40">
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span className="leading-tight">{faq.question}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="border-t-2 border-slate-100 pb-8 pl-12 pt-6 text-lg font-bold leading-relaxed text-slate-500">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                )
+              })}
             </Accordion>
 
             {/* 💬 BOTTOM HELP NOTE */}

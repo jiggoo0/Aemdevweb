@@ -1,8 +1,7 @@
 /** @format */
 // ----------------------------------------------------
 // 🚀 AI CONTEXT: PRODUCTION PROFESSIONAL MASTER LAYOUT (REFACTORED)
-// Identity: Dynamic Data Injection, Stable Grid Architecture
-// Function: รับ Data Props จาก Registry เพื่อแสดงผลตาม Template ID
+// Path: starter/StarterTemplate.tsx
 // ----------------------------------------------------
 
 "use client"
@@ -10,7 +9,7 @@
 import React from "react"
 import styles from "./StarterStyle.module.css"
 
-// นำเข้า Components ที่ได้รับการ Refactor แล้ว (ย้ายจาก Folder ภายในมาใช้งาน)
+// นำเข้า Components
 import Header from "./components/Header"
 import HeroSection from "./components/HeroSection"
 import FeaturesSection from "./components/FeaturesSection"
@@ -20,27 +19,33 @@ import FAQSection from "./components/FAQSection"
 import SuccessSection from "./components/SuccessSection"
 import Footer from "./components/Footer"
 
+// 🏗️ นำเข้า Marketing Components
+import { TechStackBadge } from "@/components/marketing/TechStackBadge"
+import { ReviewTrustLayer } from "@/components/marketing/ReviewTrustLayer"
+
+// ✅ นำเข้า Mock Data เพื่อใช้เป็นค่า Default สำหรับ Starter Template
+import { reviews } from "@/data/reviews"
+
 interface StarterTemplateProps {
-  data: any // รับข้อมูล config ทั้งหมดมาจาก MarketingPage (page.tsx)
+  data: any
 }
 
 export default function StarterTemplate({ data }: StarterTemplateProps) {
-  // Safe Destructuring: ดึงข้อมูลจาก Data Props
-  // หากไม่มีข้อมูล ให้ใช้ค่าจากโครงสร้างที่เตรียมไว้ป้องกัน Error
+  // 🛡️ Safe Destructuring พร้อมกำหนดค่าเริ่มต้นที่แข็งแกร่ง
   const {
     content = {},
-    themeColor = "#1e40af",
+    themeColor = "#1e40af", // สีน้ำเงินมาตรฐานสำหรับ Starter (ความน่าเชื่อถือแบบ Tech)
     contact = {},
     pricing = { starter: { price: "0" } },
-  } = data
+  } = data || {}
 
   return (
     <div className={styles.container}>
-      {/* 1. HEADER: ล็อกตำแหน่งบนสุด และรองรับ Theme Color จาก Config */}
+      {/* 1. HEADER: สไตล์มาตรฐานแบบ Nav-Centered */}
       <Header themeColor={themeColor} contact={contact} />
 
       <main className="relative">
-        {/* 2. HERO: ส่งผ่านข้อมูลพาดหัวและราคาเริ่มต้น */}
+        {/* 2. HERO SECTION: เน้นความชัดเจนของ Value Proposition */}
         <HeroSection
           title={content.heroTitle}
           subtitle={content.heroSubtitle}
@@ -48,23 +53,38 @@ export default function StarterTemplate({ data }: StarterTemplateProps) {
           price={pricing.starter?.price}
         />
 
-        {/* 3. FEATURES: ระบบตารางที่เปลี่ยน Content ตามธุรกิจ */}
+        {/* 🚀 LAYER 1: Tech Stack Authority */}
+        <div className="container relative z-30 mx-auto -mt-10 px-6">
+          <TechStackBadge />
+        </div>
+
+        {/* 3. FEATURES */}
         <FeaturesSection features={content.features} themeColor={themeColor} />
 
-        {/* 4. PERFORMANCE: แสดงสถิติความเร็ว (Static หรือ Dynamic ก็ได้) */}
+        {/* 4. PERFORMANCE: แสดงสถิติมาตรฐานแบบ Grid 3 คอลัมน์ */}
         <PerformanceSection />
 
-        {/* 5. PRICING: ตารางราคาที่เชื่อมต่อกับระบบการตัดสินใจซื้อ */}
+        {/* 🚀 LAYER 2: Social Proof
+            ✅ แก้ไข TS2741: ส่ง reviews และกำหนด variant เป็น "industrial" 
+            เพื่อให้ Starter Template ดูมีความเป็น Tech/Startup (เส้นหนา, สีสด) 
+            ซึ่งจะตรงข้ามกับ Wood Business ที่ใช้ "minimal" */}
+        <ReviewTrustLayer
+          reviews={reviews}
+          variant="industrial"
+          accentColor={themeColor}
+        />
+
+        {/* 5. PRICING */}
         <CartSection pricing={pricing} themeColor={themeColor} />
 
-        {/* 6. FAQ: ช่วยลดภาระฝ่ายแอดมินด้วยคำถามที่พบบ่อย */}
+        {/* 6. FAQ */}
         <FAQSection />
 
-        {/* 7. SUCCESS CTA: ส่วนปิดการขายที่ดึง Contact ไปใช้งานจริง */}
+        {/* 7. SUCCESS CTA */}
         <SuccessSection themeColor={themeColor} contact={contact} />
       </main>
 
-      {/* 8. FOOTER: แสดงข้อมูลบริษัทและช่องทางโซเชียล */}
+      {/* 8. FOOTER */}
       <Footer contact={contact} />
     </div>
   )

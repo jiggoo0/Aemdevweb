@@ -1,8 +1,6 @@
 /** @format */
 // ----------------------------------------------------
-// 🚀 AI CONTEXT: WOOD BUSINESS PRICING & CART SECTION
-// Identity: Sales Closer (ส่วนการเลือกแพ็กเกจและราคา)
-// Function: แยกกลุ่มเป้าหมาย ชวนช่างไม้และเจ้าของบ้านให้ติดต่อถูกช่องทาง
+// 🚀 AI CONTEXT: WOOD BUSINESS PRICING & CART SECTION (REFACTORED)
 // ----------------------------------------------------
 
 "use client"
@@ -22,127 +20,137 @@ interface CartSectionProps {
     starter: PricingPlan
     business: PricingPlan
   }
-  themeColor?: string // ✅ ทำเป็น optional พร้อม default value
+  themeColor?: string
+  // ✅ เก็บ Interface ไว้เพื่อให้เข้ากันได้กับ Props ที่ส่งมาจากหน้า Template หลัก
+  products?: any
 }
 
 export default function CartSection({
   pricing,
   themeColor = "#7B3F00",
+  // ✅ แก้ไข: ลบ products ออกจากตรงนี้เพื่อเคลียร์ 'no-unused-vars'
+  // เนื่องจากเราไม่ได้นำข้อมูลสินค้ามา Render ในส่วนของตารางราคา
 }: CartSectionProps) {
   const plans = [
     {
       key: "starter",
       data: pricing.starter,
-      icon: <Home size={24} className="text-slate-400" />,
+      icon: <Home size={22} className="text-slate-400" />,
       target: "สำหรับเจ้าของบ้าน",
+      buttonText: "เช็คราคาสินค้าปลีก",
     },
     {
       key: "business",
       data: pricing.business,
-      icon: <HardHat size={24} style={{ color: themeColor }} />,
+      icon: <HardHat size={22} style={{ color: themeColor }} />,
       target: "สำหรับช่าง & ผู้รับเหมา",
+      buttonText: "ขอใบเสนอราคาส่ง",
     },
   ]
 
+  const scrollToContact = () => {
+    const targetSection = document.getElementById("contact")
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" })
+    } else {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+    }
+  }
+
   return (
-    <section id="pricing" className="border-b border-slate-200 bg-slate-50">
-      <div className="mx-auto max-w-7xl border-x border-slate-200 bg-white">
-        {/* 🏗️ SECTION_HEADER */}
-        <div className="border-b border-slate-200 p-10 text-center md:p-20">
-          <span className="mb-4 inline-block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
-            Choose_Your_Requirement
+    <section id="pricing" className="border-t border-slate-100 bg-white py-24">
+      <div className="container mx-auto px-6">
+        <div className="mb-20 text-center">
+          <span
+            className="mb-4 inline-block font-mono text-[10px] font-black uppercase tracking-[0.4em]"
+            style={{ color: themeColor }}
+          >
+            Pricing_Strategy
           </span>
-          <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-6xl">
-            ราคาตรงจาก <span style={{ color: themeColor }}>โรงไม้</span>
+          <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+            ราคาตรงจาก <span className="text-slate-400">โรงไม้ถึงมือคุณ</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg font-medium text-slate-500">
-            เลือกรูปแบบการสั่งซื้อที่ตรงกับความต้องการของคุณ{" "}
-            <br className="hidden md:block" />
-            เพื่อให้ได้รับข้อเสนอและบริการที่คุ้มค่าที่สุด
-          </p>
+          <div
+            className="mx-auto mt-6 h-1 w-20 rounded-full"
+            style={{ backgroundColor: themeColor }}
+          />
         </div>
 
-        {/* 📦 PRICING_CARDS_GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {plans.map((plan, idx) => (
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+          {plans.map((plan) => (
             <div
               key={plan.key}
-              className={`relative flex flex-col p-10 md:p-16 ${
-                idx === 0 ? "border-b md:border-b-0 md:border-r" : ""
-              } border-slate-200`}
+              className="group relative flex flex-col border border-slate-100 bg-white p-12 transition-all duration-500 hover:border-transparent hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)]"
             >
-              {/* RECOMMENDED_TAG */}
               {plan.data.isRecommended && (
                 <div
-                  className="absolute right-10 top-10 flex items-center gap-2 px-3 py-1 text-[9px] font-black uppercase tracking-widest text-white"
+                  className="absolute -top-3 right-8 flex items-center gap-2 rounded-full px-4 py-1 text-[9px] font-bold uppercase tracking-widest text-white shadow-lg"
                   style={{ backgroundColor: themeColor }}
                 >
                   <ShieldCheck size={12} /> Recommended
                 </div>
               )}
 
-              {/* PLAN_ICON & LABEL */}
-              <div className="mb-8 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center border border-slate-200 bg-slate-50">
+              <div className="mb-10 flex items-center gap-5">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 transition-colors group-hover:bg-white group-hover:shadow-inner">
                   {plan.icon}
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     {plan.target}
                   </p>
-                  <h3 className="text-xl font-black uppercase text-slate-900">
+                  <h3 className="text-xl font-bold text-slate-900">
                     {plan.data.label.replace("_", " ")}
                   </h3>
                 </div>
               </div>
 
-              {/* PRICE_DISPLAY */}
               <div className="mb-10">
-                <span className="text-4xl font-black tracking-tighter text-slate-900 md:text-5xl">
+                <div className="text-4xl font-bold tracking-tighter text-slate-900 md:text-5xl">
                   {plan.data.price}
-                </span>
+                </div>
+                <p className="mt-2 text-xs font-medium italic text-slate-400">
+                  *ราคานี้ไม่รวมค่าจัดส่งตามระยะทาง
+                </p>
               </div>
 
-              {/* FEATURES_LIST */}
               <ul className="mb-12 flex-grow space-y-5">
                 {plan.data.details.map((detail, i) => (
                   <li
                     key={i}
-                    className="flex items-start gap-3 text-base font-medium text-slate-600"
+                    className="flex items-start gap-3 text-sm font-medium text-slate-600 transition-colors group-hover:text-slate-900"
                   >
                     <Check
-                      size={18}
-                      className="mt-1 shrink-0"
+                      size={16}
+                      className="mt-0.5 shrink-0"
                       style={{ color: themeColor }}
                     />
-                    {detail}
+                    <span>{detail}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* CTA_BUTTON */}
               <button
-                className={`flex w-full items-center justify-center gap-3 py-5 text-[11px] font-black uppercase tracking-[0.2em] transition-all active:scale-95 ${
+                onClick={scrollToContact}
+                className={`flex w-full items-center justify-center gap-3 rounded-xl py-5 text-[11px] font-bold uppercase tracking-widest transition-all active:scale-[0.98] ${
                   plan.data.isRecommended
-                    ? "text-white shadow-xl shadow-slate-200 hover:brightness-110"
-                    : "border border-slate-200 text-slate-900 hover:bg-slate-50"
+                    ? "text-white shadow-xl hover:brightness-110"
+                    : "border border-slate-200 text-slate-600 hover:border-slate-900 hover:bg-slate-900 hover:text-white"
                 }`}
                 style={
                   plan.data.isRecommended ? { backgroundColor: themeColor } : {}
                 }
               >
-                สนใจซื้อใน{plan.data.price} <ArrowRight size={16} />
+                {plan.buttonText} <ArrowRight size={16} />
               </button>
             </div>
           ))}
         </div>
 
-        {/* 📟 SYSTEM_NOTICE */}
-        <div className="border-t border-slate-100 bg-slate-50/50 p-6 text-center">
+        <div className="mt-16 text-center">
           <p className="font-mono text-[9px] font-bold uppercase tracking-widest text-slate-400">
-            * ราคาสินค้าอาจมีการเปลี่ยนแปลงตามปริมาณการสั่งซื้อและระยะทางจัดส่ง
-            {/* ✅ แก้ไขจุดนี้: ใช้ JSX Comment แทน // เพื่อไม่ให้ ESLint พ่น Error */}{" "}
-            โปรดตรวจสอบกับฝ่ายขายอีกครั้ง
+            หมายเหตุ:
+            ราคาสินค้าไม้แปรรูปอาจเปลี่ยนแปลงตามปริมาณสต็อกและกลไกตลาดหน้าโรงงาน
           </p>
         </div>
       </div>

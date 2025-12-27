@@ -5,10 +5,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
+    // อนุญาตให้ใช้ SVG เพื่อความยืดหยุ่นของ Icon/Logo
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
+    // รองรับฟอร์แมตสมัยใหม่เพื่อความเร็ว (High Performance)
     formats: ["image/avif", "image/webp"],
 
     remotePatterns: [
@@ -20,7 +22,8 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "dpgmfbnzyhnhwzyozoxe.supabase.co",
-        pathname: "/storage/v1/object/public/**",
+        // ✅ ปรับเป็น /** เพื่อให้ครอบคลุมทุกโฟลเดอร์และแก้ปัญหาเรื่อง Case Sensitive
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -39,13 +42,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "picsum.photos", // ✅ เพิ่มบรรทัดนี้
+        hostname: "picsum.photos",
         pathname: "/**",
       },
     ],
   },
 
   experimental: {
+    // เพิ่มความเร็วในการรัน Dev mode โดยโหลดเฉพาะที่จำเป็น
     optimizePackageImports: ["lucide-react"],
   },
 }

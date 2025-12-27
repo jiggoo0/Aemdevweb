@@ -1,16 +1,11 @@
 /** @format */
-// ----------------------------------------------------
-// 🚀 AI CONTEXT: WOOD BUSINESS TEMPLATE (SUKHOTHAI EDITION)
-// Identity: โรงไม้แปรรูป & วัสดุก่อสร้าง (โครงสร้างระดับโปร)
-// Function: จัดการเลย์เอาต์หลักและดึงข้อมูลจาก Config มาแสดงผล
-// ----------------------------------------------------
 
 "use client"
 
 import React from "react"
+// 🏗️ นำเข้าสไตล์ที่แยกอัตลักษณ์ (Isolation Style)
 import styles from "./WoodStyle.module.css"
 
-// นำเข้า Components จากโฟลเดอร์ภายใน (Refactored Names)
 import Header from "./components/Header"
 import HeroSection from "./components/HeroSection"
 import FeaturesSection from "./components/FeaturesSection"
@@ -20,57 +15,79 @@ import FAQSection from "./components/FAQSection"
 import SuccessSection from "./components/SuccessSection"
 import Footer from "./components/Footer"
 
+import { TechStackBadge } from "@/components/marketing/TechStackBadge"
+import { ReviewTrustLayer } from "@/components/marketing/ReviewTrustLayer"
+
+// นำเข้าข้อมูลรีวิว (Mock data หรือจาก Data source)
+import { reviews } from "@/data/reviews"
+
 interface WoodBusinessTemplateProps {
-  data: any // รับข้อมูลจาก config.ts
+  data: any
 }
 
 export default function WoodBusinessTemplate({
   data,
 }: WoodBusinessTemplateProps) {
-  // Safe Destructuring: ป้องกัน Error หากข้อมูลบางส่วนหายไป
-  // โดยดึงข้อมูลจาก config.ts ที่เราตั้งค่าไว้สำหรับ "สุโขทัยค้าไม้"
   const {
     content = {},
-    themeColor = "#7B3F00", // Default: สีน้ำตาลไม้
+    themeColor = "#7B3F00", // สีหลักของแบรนด์โรงไม้
     contact = {},
-    pricing = { starter: { price: "สอบถามราคา" } },
+    pricing = {},
     products = [],
-  } = data
+  } = data || {}
 
   return (
-    <div className={styles.container}>
-      {/* 1. ส่วนหัวเว็บไซต์: เน้นชื่อร้านและเบอร์โทรติดต่อคนสุโขทัย */}
+    // 🛡️ ครอบด้วย Wrapper เพื่อ Scope ดีไซน์ไม่ให้หลุดไปหาเว็บหลัก
+    <div
+      className={styles.woodThemeWrapper}
+      style={{ "--primary-wood": themeColor } as React.CSSProperties}
+    >
       <Header themeColor={themeColor} contact={contact} />
 
-      <main className="relative">
-        {/* 2. ส่วนต้อนรับ (HERO): แสดงพาดหัว "ไม้ดีเมืองเก่า" และรูปโรงไม้ */}
+      <main className="relative bg-white">
+        {/* 1. HERO SECTION */}
         <HeroSection
           title={content.heroTitle}
           subtitle={content.heroSubtitle}
           themeColor={themeColor}
-          price={pricing.starter?.price}
-          // สามารถเพิ่มรูปภาพจาก products[0].image มาแสดงเป็นพื้นหลังได้
-          image={products[0]?.image}
+          price={products[0]?.price || pricing.starter?.price}
+          image={content.heroImage || products[0]?.image}
+          contact={contact}
         />
 
-        {/* 3. จุดเด่นของโรงไม้ (FEATURES): ส่งไวทั่วสุโขทัย / คัดไม้เกรด A */}
+        {/* 🚀 Tech Badge Area */}
+        <div className="relative z-30 -mt-12 mb-12 flex justify-center">
+          <TechStackBadge />
+        </div>
+
+        {/* 2. FEATURES & PROOF */}
         <FeaturesSection features={content.features} themeColor={themeColor} />
+        <PerformanceSection themeColor={themeColor} />
 
-        {/* 4. สถิติความเชื่อมั่น (PERFORMANCE): ประสบการณ์ 25 ปี / 9 อำเภอ */}
-        <PerformanceSection />
+        {/* 🌟 REVIEW LAYER (Shared Component)
+            ส่ง variant="minimal" เพื่อให้สไตล์นุ่มนวลตามแบบ SME ไทย
+            สไตล์เส้นขอบและเงาจะถูกคุมผ่าน CSS Module อีกชั้นหนึ่ง */}
+        <ReviewTrustLayer
+          reviews={reviews}
+          themeColor="#1e293b"
+          accentColor={themeColor}
+          variant="minimal"
+        />
 
-        {/* 5. ตารางราคาและบริการ (PRICING): แยกกลุ่มช่างและกลุ่มลูกค้าปลีก */}
-        <CartSection pricing={pricing} themeColor={themeColor} />
+        {/* 3. TRANSACTION & SUPPORT */}
+        <CartSection
+          pricing={pricing}
+          themeColor={themeColor}
+          products={products}
+        />
 
-        {/* 6. คำถามพบบ่อย (FAQ): ตอบเรื่องการส่งสินค้าในพื้นที่ จ.สุโขทัย */}
-        <FAQSection />
+        <FAQSection themeColor={themeColor} />
 
-        {/* 7. ส่วนปิดการขาย (SUCCESS CTA): ปุ่มทัก LINE สีเขียวเด่นชัด */}
+        {/* 4. CLOSING SECTION */}
         <SuccessSection themeColor={themeColor} contact={contact} />
       </main>
 
-      {/* 8. ส่วนท้าย (FOOTER): ที่อยู่ร้านในกงไกรลาศ และแผนที่ */}
-      <Footer contact={contact} />
+      <Footer themeColor={themeColor} contact={contact} />
     </div>
   )
 }
