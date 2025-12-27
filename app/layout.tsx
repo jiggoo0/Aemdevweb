@@ -5,9 +5,9 @@ import "./globals.css"
 import { siteConfig } from "@/config/siteConfig"
 import { Toaster } from "@/components/ui/toaster"
 import { cn } from "@/lib/utils"
+import JsonLd from "@/components/seo/JsonLd" // ✅ Import JsonLd
 
 // 🔤 1. Font Configurations
-// Kanit: ใช้สำหรับ Headings (สไตล์ Brutalist ที่เน้นความหนาและทรงพลัง)
 const kanit = Kanit({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -15,7 +15,6 @@ const kanit = Kanit({
   display: "swap",
 })
 
-// Prompt: ใช้สำหรับ Body Text (เน้นการอ่านง่าย สบายตา)
 const prompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600"],
@@ -23,7 +22,6 @@ const prompt = Prompt({
   display: "swap",
 })
 
-// JetBrains Mono: ใช้สำหรับตัวเลขหรือโค้ด (เน้นความรู้สึก Technical/Engineering)
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
@@ -35,10 +33,10 @@ export const viewport: Viewport = {
   themeColor: "#1E3A8A",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // อนุญาตให้ User Zoom ได้เพื่อ Accessibility
+  maximumScale: 5,
 }
 
-// 🔍 3. SEO Metadata
+// 🔍 3. SEO Metadata (Refined for Rank Math 100/100)
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
@@ -47,13 +45,12 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "รับทำเว็บไซต์",
-    "SME",
-    "Landing Page",
-    "Next.js",
-    "React",
+    "รับทำเว็บไซต์ SME",
+    "รับทำ Landing Page",
+    "ทำเว็บไซต์ราคาถูก",
     "AEMDEVWEB",
     "ทำเว็บติดหน้าแรก",
-    "สถาปัตยกรรมดิจิทัล",
+    "Digital Marketing SME",
   ],
   authors: [{ name: "AEMDEVWEB Team", url: siteConfig.url }],
   creator: "AEMDEVWEB",
@@ -106,19 +103,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="th" suppressHydrationWarning className="scroll-smooth">
+      <head>
+        {/* ✅ แทรก Structured Data สำหรับ SEO Analyzer */}
+        <JsonLd />
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          // ผูก Font Variables เข้ากับ Class เพื่อให้ Tailwind เรียกใช้ได้
           kanit.variable,
           prompt.variable,
           jetbrains.variable
         )}
       >
-        {/* Main Content Architecture */}
         <main className="relative flex min-h-screen flex-col">{children}</main>
-
-        {/* Global UI Components */}
         <Toaster />
       </body>
     </html>

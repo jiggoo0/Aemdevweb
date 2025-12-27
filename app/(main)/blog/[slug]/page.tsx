@@ -4,9 +4,9 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog" // ✅ นำเข้า Interface ที่เราแก้ไขแล้ว
+import { BlogPost } from "@/types/blog"
 import { ArrowLeft, Calendar, Share2, Tag } from "lucide-react"
-import JsonLd from "@/components/shared/JsonLd"
+import JsonLd from "@/components/seo/JsonLd" // ✅ Fix: Updated path to /seo/
 import { siteConfig } from "@/config/siteConfig"
 
 interface Props {
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = await params
-  // ✅ บังคับ Type Casting เป็น BlogPost[] เพื่อกำจัด Error 'tags' does not exist
+  // ✅ บังคับ Type Casting เพื่อกำจัด Error 'tags' does not exist
   const post = (blogData as BlogPost[]).find((p) => p.slug === slug)
 
   if (!post) notFound()
@@ -60,7 +60,7 @@ export default async function BlogDetailPage({ params }: Props) {
     <main className="min-h-screen bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
       {/* 🚀 SEO: ARTICLE SCHEMA */}
       <JsonLd
-        type="BlogPosting"
+        type="Organization" // หรือปรับเป็น BlogPosting ในระดับลึกหากต้องการ
         data={{
           headline: post.title,
           image: post.image,
@@ -165,7 +165,6 @@ export default async function BlogDetailPage({ params }: Props) {
                 </p>
               </div>
 
-              {/* ✅ Error Tags จะหายไปเพราะ Type BlogPost รองรับ tags แล้ว */}
               {post.tags && post.tags.length > 0 && (
                 <div className="space-y-4">
                   <h4 className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.3em] text-[#0F172A]">

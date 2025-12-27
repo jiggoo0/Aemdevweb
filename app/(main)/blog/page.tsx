@@ -2,10 +2,10 @@
 import React from "react"
 import { Metadata } from "next"
 import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog" // ✅ นำเข้า Type เพื่อความแม่นยำ
+import { BlogPost } from "@/types/blog"
 import BlogSection from "@/components/BlogSection"
 import { BookOpen, Terminal, Activity, Hash } from "lucide-react"
-import JsonLd from "@/components/shared/JsonLd"
+import JsonLd from "@/components/seo/JsonLd" // ✅ Fix: Updated path to /seo/
 import { siteConfig } from "@/config/siteConfig"
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `Insights - ${siteConfig.name}`,
     description: "Technical insights for modern business owners",
-    images: [`${siteConfig.url}${siteConfig.ogImage}`], // ✅ ใช้จาก siteConfig โดยตรง
+    images: [`${siteConfig.url}${siteConfig.ogImage}`],
     type: "website",
   },
 }
@@ -28,7 +28,7 @@ export default function BlogPage() {
     <main className="relative min-h-screen overflow-hidden bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
       {/* 🚀 SEO STRUCTURED DATA */}
       <JsonLd
-        type="CollectionPage"
+        type="Organization" // ใช้ Base Organization และ Website สำหรับหน้า List
         data={{
           name: `${siteConfig.name} Knowledge Hub`,
           description: "Technical insights and digital strategy for Thai SME",
@@ -100,7 +100,6 @@ export default function BlogPage() {
             <div className="h-[2px] flex-1 bg-slate-200" />
           </div>
 
-          {/* ✅ ส่งข้อมูลพร้อมระบุ Type ให้ชัดเจน */}
           <BlogSection posts={blogData as BlogPost[]} />
         </section>
 

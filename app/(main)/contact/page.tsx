@@ -15,7 +15,7 @@ import {
 // Import Components
 import ContactForm from "@/components/ContactForm"
 import ContactInfo from "@/components/ContactInfo"
-import JsonLd from "@/components/shared/JsonLd"
+import JsonLd from "@/components/seo/JsonLd"
 import { siteConfig } from "@/config/siteConfig"
 
 const ContactPage = () => {
@@ -27,8 +27,13 @@ const ContactPage = () => {
         data={{
           name: siteConfig.name,
           description: siteConfig.description,
-          phone: siteConfig.contact.tel,
-          address: siteConfig.contact.address,
+          telephone: siteConfig.contact.tel,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: siteConfig.contact.address,
+            addressLocality: "Bangkok",
+            addressCountry: "TH",
+          },
           url: `${siteConfig.url}/contact`,
         }}
       />
@@ -51,7 +56,7 @@ const ContactPage = () => {
             <div className="inline-flex items-center gap-3 border-4 border-brand-navy bg-white px-6 py-3 shadow-[6px_6px_0px_0px_#0F172A] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
               <Sparkles size={16} className="animate-pulse text-brand-orange" />
               <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-navy md:text-xs">
-                Protocol: Open for Project v{new Date().getFullYear()}
+                Protocol: Open for Project v{siteConfig.version}
               </span>
             </div>
 
@@ -110,7 +115,7 @@ const ContactPage = () => {
                         Operating_Status
                       </p>
                       <p className="text-sm font-bold italic leading-relaxed text-slate-400">
-                        จันทร์ - ศุกร์ (09:00 - 18:00) <br />
+                        {siteConfig.contact.workHours} <br />
                         <span className="font-black not-italic text-white underline decoration-brand-orange">
                           Emergency: Line OA Active 24/7
                         </span>
@@ -172,9 +177,8 @@ const ContactPage = () => {
           <div className="relative grid grid-cols-1 lg:grid-cols-12">
             {/* Map Frame */}
             <div className="relative min-h-[500px] overflow-hidden bg-slate-300 lg:col-span-8">
-              {/* ใส่ Iframe Google Maps ตรงนี้ */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.559286438814!2d100.523186!3d13.736717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMxJzIzLjUiRQ!5e0!3m2!1sth!2sth!4v1630000000000!5m2!1sth!2sth"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.281141725791!2d100.523186!3d13.756331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ1JzIyLjgiTiAxMDDCsDMxJzIzLjUiRQ!5e0!3m2!1sth!2sth!4v1700000000000!5m2!1sth!2sth"
                 width="100%"
                 height="100%"
                 style={{
@@ -224,7 +228,7 @@ const ContactPage = () => {
                     }
                     className="flex w-full items-center justify-between border-4 border-brand-navy bg-brand-navy px-6 py-4 text-sm font-black uppercase tracking-widest text-white shadow-[6px_6px_0_0_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
                   >
-                    Get Directions
+                    Contact via LINE
                     <ArrowDownRight size={20} className="text-brand-orange" />
                   </button>
                 </div>

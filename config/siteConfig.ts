@@ -28,26 +28,27 @@ export interface Feature {
 // ─── CONFIGURATION ───
 
 export const siteConfig = {
-  // 🏢 Brand Identity & SEO
+  // 🏢 Brand Identity & SEO (Updated: Focus on Business Results)
   name: "AEMDEVWEB",
-  title: "AEM DEV | Digital Architecture for SME & Landing Pages",
+  // ปรับ Title ใหม่ให้สั้น กระชับ และตรงกลุ่มเป้าหมาย SME
+  title: "AEM DEV | รับทำเว็บไซต์ SME & Landing Page เน้นปิดการขาย",
   description:
-    "สร้างเว็บไซต์สำหรับธุรกิจ SME ที่โหลดไว ใช้งานง่าย และช่วยปิดการขายได้จริง ด้วยสถาปัตยกรรมเว็บที่มั่นคงและมาตรฐานวิศวกรรม",
+    "บริการรับทำเว็บไซต์ธุรกิจ และ Landing Page คุณภาพสูง โหลดไว ใช้งานง่าย ช่วยเพิ่มยอดขายด้วยโครงสร้างเว็บที่มั่นคงและมาตรฐานวิศวกรรมระดับมืออาชีพ",
   url: "https://www.aemdevweb.com",
-  ogImage: "/og-image.png", // Path ใน public folder
-  version: "1.5.0",
+  ogImage: "/og-image.png",
+  version: "1.5.1", // Bump version for SEO fix
 
   // 📞 Contact Information (Technical Support & Sales)
   contact: {
     email: "contact@aemdevweb.com",
-    tel: "08x-xxx-xxxx",
+    tel: "08x-xxx-xxxx", // แนะนำให้ใส่เบอร์จริงเพื่อเพิ่ม Trust ใน Local SEO
     lineId: "@127cnhtm",
     lineUrl: "https://lin.ee/XwdZGsn",
     address: "Bangkok, Thailand",
     workHours: "Mon - Fri, 09:00 - 18:00",
   },
 
-  // 🧭 Navigation System (ใช้งานร่วมกับ Header & Footer)
+  // 🧭 Navigation System
   navLinks: [
     { title: "หน้าแรก", href: "/" },
     { title: "คลังผลงาน", href: "/catalog" },
@@ -108,7 +109,7 @@ export const siteConfig = {
     },
   ] as PricingPlan[],
 
-  // 🛠️ Brand Pillars (Core Features)
+  // 🛠️ Brand Pillars
   features: [
     {
       title: "คุยง่าย ภาษาธุรกิจ",
