@@ -1,85 +1,122 @@
 /** @format */
 "use client"
 
-import React from "react"
+import React, { memo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { ArrowUpRight, ExternalLink, Box, Terminal } from "lucide-react"
 import { Project } from "@/data/types"
+import { cn } from "@/lib/utils"
 
 interface CatalogProjectCardProps {
   project: Project
-  showCTA?: boolean // ✅ เก็บไว้ใช้ในอนาคตได้ แต่ต้องจัดการในโค้ดให้ถูกต้อง
+  showCTA?: boolean
+  className?: string
 }
 
-export function CatalogProjectCard({
+export const CatalogProjectCard = memo(function CatalogProjectCard({
   project,
-  showCTA = true, // ✅ กำหนด Default value
+  showCTA = true,
+  className,
 }: CatalogProjectCardProps) {
+  // สร้างตัวย่อ ID สำหรับใช้แสดงผลแบบ Ref Code
+  const refCode = project.id.split("-").pop()?.toUpperCase() || "ID-ERR"
+
   return (
-    <div className="group relative flex flex-col border-4 border-slate-900 bg-white shadow-[10px_10px_0px_0px_rgba(15,23,42,1)] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[15px_15px_0px_0px_#2563eb]">
-      {/* 🖼️ IMAGE SECTION */}
-      <div className="relative aspect-[16/10] overflow-hidden border-b-4 border-slate-900 bg-slate-100">
+    <article
+      className={cn(
+        "group relative flex h-full flex-col border-[6px] border-slate-900 bg-white transition-all duration-300",
+        "hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[20px_20px_0px_0px_#1E3A8A]",
+        "shadow-[10px_10px_0px_0px_rgba(15,23,42,1)]",
+        className
+      )}
+    >
+      {/* ─── 🖼️ IMAGE SECTION: INDUSTRIAL VIEWPORT ─── */}
+      <div className="relative aspect-[16/10] overflow-hidden border-b-[6px] border-slate-900 bg-slate-200">
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+          priority={false}
         />
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-300 group-hover:bg-slate-900/40 group-hover:opacity-100">
+        {/* Hover Action Overlay */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-500 group-hover:bg-slate-900/60 group-hover:opacity-100">
           <Link
             href={`/${project.templateId}`}
-            className="flex items-center gap-2 bg-blue-600 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white hover:bg-white hover:text-slate-900"
+            className="group/btn flex items-center gap-3 bg-brand-orange px-8 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:scale-105 active:scale-95"
           >
-            Live Preview <ExternalLink size={14} />
+            Explore System <ExternalLink size={16} strokeWidth={3} />
           </Link>
+        </div>
+
+        {/* Category Floating Badge */}
+        <div className="absolute left-6 top-6 z-20 hidden border-4 border-slate-900 bg-white px-3 py-1 shadow-[4px_4px_0px_0px_#000] md:block">
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-900">
+            {project.category}
+          </span>
         </div>
       </div>
 
-      {/* 📝 CONTENT SECTION */}
-      <div className="flex flex-1 flex-col p-6">
-        <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
-          <span className="bg-slate-900 px-2 py-1 text-[9px] font-black uppercase tracking-tighter text-white">
-            {project.category}
-          </span>
-          <span className="font-mono text-[10px] font-bold text-slate-400">
-            REF: {project.id.split("-").pop()?.toUpperCase()}
-          </span>
-        </div>
-
-        <h3 className="mb-3 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900">
-          {project.title}
-        </h3>
-
-        <p className="mb-6 line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
-          {project.description}
-        </p>
-
-        {/* STATS / TAGS */}
-        <div className="mt-auto flex items-center justify-between pt-4">
-          <div className="flex flex-col">
-            {/* ✅ FIX: ใช้ Optional Chaining ป้องกันค่า stats เป็น undefined */}
-            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-              {project.stats?.label || "Type"}
-            </span>
-            <span className="text-sm font-black text-blue-600">
-              {project.stats?.value || "Standard"}
+      {/* ─── 📝 CONTENT SECTION ─── */}
+      <div className="flex flex-1 flex-col p-8">
+        {/* Technical Metadata Header */}
+        <div className="mb-6 flex items-center justify-between border-b-4 border-slate-100 pb-5">
+          <div className="flex items-center gap-2">
+            <Terminal size={14} className="text-brand-blue" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-tighter text-slate-400">
+              REF_SPEC: {refCode}
             </span>
           </div>
+          <div className="flex items-center gap-1">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            <span className="text-[9px] font-black uppercase text-emerald-600">
+              Active_Link
+            </span>
+          </div>
+        </div>
 
-          {/* ✅ ใช้งาน showCTA เพื่อแก้ปัญหา Unused Variable */}
+        {/* Headline & Description */}
+        <div className="mb-8 space-y-3">
+          <h3 className="font-heading text-3xl font-black uppercase italic leading-none tracking-tighter text-slate-900 transition-colors group-hover:text-brand-blue">
+            {project.title}
+          </h3>
+          <p className="line-clamp-2 text-base font-bold leading-relaxed text-slate-500">
+            {project.description}
+          </p>
+        </div>
+
+        {/* ─── 📊 FOOTER: SYSTEM STATS & CTA ─── */}
+        <div className="mt-auto flex items-end justify-between border-t-2 border-dashed border-slate-200 pt-6">
+          <div className="space-y-1">
+            <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+              {project.stats?.label || "Architecture"}
+            </span>
+            <div className="flex items-center gap-2">
+              <Box size={16} className="text-brand-orange" />
+              <span className="text-lg font-black uppercase tracking-tight text-slate-900">
+                {project.stats?.value || "Standard_v1"}
+              </span>
+            </div>
+          </div>
+
           {showCTA && (
             <Link
               href={`/${project.templateId}`}
-              className="flex h-10 w-10 items-center justify-center border-2 border-slate-900 bg-white transition-colors hover:bg-slate-900 hover:text-white"
+              aria-label={`View ${project.title}`}
+              className="group/cta relative flex h-16 w-16 items-center justify-center border-4 border-slate-900 bg-white transition-all hover:bg-slate-900"
             >
-              <ArrowUpRight size={20} strokeWidth={3} />
+              <ArrowUpRight
+                size={32}
+                strokeWidth={3}
+                className="text-slate-900 transition-all group-hover/cta:-translate-y-1 group-hover/cta:translate-x-1 group-hover/cta:text-white"
+              />
             </Link>
           )}
         </div>
       </div>
-    </div>
+    </article>
   )
-}
+})

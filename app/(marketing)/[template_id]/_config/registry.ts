@@ -13,6 +13,8 @@ import { cafeConfig } from "../_templates/cafe/config"
 import { realEstateConfig } from "../_templates/realestate/config"
 import { constructionConfig } from "../_templates/construction/config"
 import { starterConfig } from "../_templates/starter/config"
+// เพิ่ม Config ของสุโขทัยค้าไม้
+import { starterConfig as woodBusinessConfig } from "../_templates/WoodBusiness/config"
 
 // 2. IMPORT TEMPLATES
 import ClinicTemplate from "../_templates/clinic/ClinicTemplate"
@@ -20,6 +22,8 @@ import CafeTemplate from "../_templates/cafe/CafeTemplate"
 import RealEstateTemplate from "../_templates/realestate/RealEstateTemplate"
 import ConstructionTemplate from "../_templates/construction/ConstructionTemplate"
 import StarterTemplate from "../_templates/starter/StarterTemplate"
+// เพิ่ม Template ของสุโขทัยค้าไม้
+import WoodBusinessTemplate from "../_templates/WoodBusiness/WoodBusinessTemplate"
 
 // 3. DEFINE TYPES
 export interface TemplateEntry {
@@ -58,6 +62,11 @@ export const TEMPLATE_REGISTRY: Record<string, TemplateEntry> = {
   starter: {
     config: starterConfig,
     component: StarterTemplate,
+  },
+  // ลงทะเบียน "สุโขทัยค้าไม้" สำหรับ URL: /[your-site]/wood-business
+  "wood-business": {
+    config: woodBusinessConfig,
+    component: WoodBusinessTemplate,
   },
 }
 

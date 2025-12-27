@@ -10,6 +10,19 @@ app
           CafeTemplate.tsx
           CafeStyle.module.css
           config.ts
+        WoodBusiness
+          WoodBusinessTemplate.tsx
+          WoodStyle.module.css
+          config.ts
+          components
+            Header.tsx
+            FeaturesSection.tsx
+            PerformanceSection.tsx
+            HeroSection.tsx
+            CartSection.tsx
+            FAQSection.tsx
+            Footer.tsx
+            SuccessSection.tsx
         realestate
           RealEstateTemplate.tsx
           RealEstateStyle.module.css
@@ -44,6 +57,7 @@ app
         page.tsx
       contact
         page.tsx
+  loading.tsx
   apple-touch-icon.png
   globals.css
   api
@@ -78,7 +92,6 @@ components
     CatalogProjectsGrid.tsx
   Services.tsx
   Hero.tsx
-  About.tsx
   shared
     JsonLd.tsx
   ui
@@ -102,6 +115,7 @@ components
   ContactInfo.tsx
   ContactForm.tsx
   CTA.tsx
+  PricingSection.tsx
   SocialProof.tsx
   FAQSection.tsx
   BlogSection.tsx
@@ -117,8 +131,9 @@ data
     allposts.ts
   catalog.projects.ts
 scripts
-  project-summary.sh
-  tree-projects.sh
+  dev
+    project-summary.sh
+    tree-projects.sh
 public
   images
     badge.svg
@@ -137,6 +152,7 @@ public
       corporate-1.webp
     hero.svg
     performance.svg
+    line-qr.png
   og-image.png
   grid.svg
   apple-touch-icon.png

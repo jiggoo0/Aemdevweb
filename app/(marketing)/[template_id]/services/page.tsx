@@ -41,7 +41,7 @@ export default async function ServicesPage({ params }: Props) {
             className="group flex flex-col border border-slate-200 bg-white transition-all duration-500 hover:border-slate-900"
           >
             {/* PRODUCT_IMAGE_PLACEHOLDER */}
-            <div className="relative flex aspect-video items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50">
+            <div className="aspect-video relative flex items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50">
               <div className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 transition-transform duration-700 group-hover:scale-110">
                 Product_Image_Visual
               </div>

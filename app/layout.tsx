@@ -1,81 +1,125 @@
 /** @format */
-
-import React from "react"
 import type { Metadata, Viewport } from "next"
-import { Kanit } from "next/font/google"
+import { Kanit, Prompt, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import { siteConfig } from "@/config/siteConfig"
+import { Toaster } from "@/components/ui/toaster"
+import { cn } from "@/lib/utils"
 
+// 🔤 1. Font Configurations
+// Kanit: ใช้สำหรับ Headings (สไตล์ Brutalist ที่เน้นความหนาและทรงพลัง)
 const kanit = Kanit({
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "700", "900"],
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-kanit",
   display: "swap",
 })
 
-/**
- * 🛠️ การตั้งค่า Metadata (Fixed OG Images)
- */
+// Prompt: ใช้สำหรับ Body Text (เน้นการอ่านง่าย สบายตา)
+const prompt = Prompt({
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-prompt",
+  display: "swap",
+})
+
+// JetBrains Mono: ใช้สำหรับตัวเลขหรือโค้ด (เน้นความรู้สึก Technical/Engineering)
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+})
+
+// 📱 2. Viewport Settings
+export const viewport: Viewport = {
+  themeColor: "#1E3A8A",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5, // อนุญาตให้ User Zoom ได้เพื่อ Accessibility
+}
+
+// 🔍 3. SEO Metadata
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NODE_ENV === "production"
-      ? "https://www.aemdevweb.com"
-      : "http://localhost:3000"
-  ),
   title: {
-    default: "AEMDEVWEB | Industrial Web Architecture",
-    template: "%s | AEMDEVWEB",
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "บริการพัฒนาเว็บไซต์ระดับ Enterprise และวางโครงสร้าง Digital Architecture ที่แข็งแกร่ง",
-  keywords: ["Web Development", "Next.js", "Industrial Design", "AEMDEVWEB"],
-  authors: [{ name: "AEMDEVWEB" }],
+  description: siteConfig.description,
+  keywords: [
+    "รับทำเว็บไซต์",
+    "SME",
+    "Landing Page",
+    "Next.js",
+    "React",
+    "AEMDEVWEB",
+    "ทำเว็บติดหน้าแรก",
+    "สถาปัตยกรรมดิจิทัล",
+  ],
+  authors: [{ name: "AEMDEVWEB Team", url: siteConfig.url }],
+  creator: "AEMDEVWEB",
+  publisher: "AEMDEVWEB",
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "AEMDEVWEB | Industrial Web Architecture",
-    description:
-      "Enterprise-level web development and digital architecture solutions.",
-    url: "https://www.aemdevweb.com",
-    siteName: "AEMDEVWEB",
-    locale: "th_TH",
     type: "website",
-    // ✅ เพิ่มส่วนนี้เพื่อให้ Social Media แสดงรูปภาพ
+    locale: "th_TH",
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image.png", // ไฟล์ต้องอยู่ที่ public/og-image.png
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "AEMDEVWEB Industrial Web Architecture Preview",
+        alt: siteConfig.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AEMDEVWEB",
-    description: "Industrial Web Architecture & Development",
-    // ✅ เพิ่มส่วนนี้สำหรับ Twitter/X
-    images: ["/og-image.png"],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: "@aemdevweb",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 }
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#0f172a",
-}
-
-interface RootLayoutProps {
+// 🏗️ 4. Root Layout Component
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+}) {
   return (
-    <html lang="th" suppressHydrationWarning className={kanit.variable}>
-      <body className="min-h-screen font-sans antialiased selection:bg-blue-600 selection:text-white">
-        {children}
+    <html lang="th" suppressHydrationWarning className="scroll-smooth">
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          // ผูก Font Variables เข้ากับ Class เพื่อให้ Tailwind เรียกใช้ได้
+          kanit.variable,
+          prompt.variable,
+          jetbrains.variable
+        )}
+      >
+        {/* Main Content Architecture */}
+        <main className="relative flex min-h-screen flex-col">{children}</main>
+
+        {/* Global UI Components */}
+        <Toaster />
       </body>
     </html>
   )

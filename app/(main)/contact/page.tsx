@@ -1,45 +1,26 @@
 /** @format */
+"use client"
+
 import React, { memo } from "react"
-import { Metadata } from "next"
 import {
   Sparkles,
   MessageCircle,
   ArrowDownRight,
   ShieldCheck,
   Zap,
+  MapPin,
+  Activity,
 } from "lucide-react"
 
 // Import Components
 import ContactForm from "@/components/ContactForm"
 import ContactInfo from "@/components/ContactInfo"
-import ContactMap from "./_components/ContactMap"
-
-// ✅ ใช้ shared JsonLd
 import JsonLd from "@/components/shared/JsonLd"
-
 import { siteConfig } from "@/config/siteConfig"
-
-/**
- * 🛠️ SEO Optimization: ดึงดูด SME ด้วย Keyword ที่ตรงจุด
- */
-export const metadata: Metadata = {
-  title: `ติดต่อพาร์ทเนอร์โปรเจกต์ | ${siteConfig.name}`,
-  description:
-    "เริ่มต้นเว็บไซต์ธุรกิจของคุณด้วยระบบวิศวกรรมที่แม่นยำ ปรึกษาฟรีสำหรับ SME และ หจก. คุยง่าย ตรงไปตรงมา งบไม่บานปลาย",
-  openGraph: {
-    title: `ติดต่อพาร์ทเนอร์โปรเจกต์ | ${siteConfig.name}`,
-    description:
-      "ยินดีให้คำปรึกษาฟรีเหมือนพาร์ทเนอร์สายเทคส่วนตัว เพื่อเว็บไซต์ที่ปิดการขายได้จริง",
-    url: `${siteConfig.url}/contact`,
-    siteName: siteConfig.name,
-    locale: "th_TH",
-    type: "website",
-  },
-}
 
 const ContactPage = () => {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
+    <main className="min-h-screen bg-background font-sans antialiased selection:bg-brand-blue selection:text-white">
       {/* 🚀 SEO STRUCTURED DATA */}
       <JsonLd
         type="LocalBusiness"
@@ -52,83 +33,86 @@ const ContactPage = () => {
         }}
       />
 
-      {/* ─── 1. HERO SECTION ─── */}
-      <section className="relative overflow-hidden border-b-[6px] border-slate-900 bg-slate-50 py-24 md:py-40">
-        {/* Blueprint Grid Background */}
+      {/* ─── 01. HERO SECTION ─── */}
+      <section className="relative overflow-hidden border-b-[6px] border-brand-navy bg-slate-50 py-24 md:py-40">
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60"
-          aria-hidden="true"
-        />
-        {/* Cinematic Glow */}
-        <div
-          className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]"
+          className="absolute inset-0 z-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-40 [background-size:24px_24px]"
           aria-hidden="true"
         />
 
-        <div className="container mx-auto px-6">
+        <div
+          className="pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-brand-blue/10 blur-[120px]"
+          aria-hidden="true"
+        />
+
+        <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl space-y-12">
-            <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-6 py-3 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] transition-all hover:shadow-none">
-              <Sparkles size={16} className="animate-pulse text-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 md:text-xs">
-                Available for New Projects v2025
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-3 border-4 border-brand-navy bg-white px-6 py-3 shadow-[6px_6px_0px_0px_#0F172A] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+              <Sparkles size={16} className="animate-pulse text-brand-orange" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-navy md:text-xs">
+                Protocol: Open for Project v{new Date().getFullYear()}
               </span>
             </div>
-            <h1 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-8xl lg:text-[100px]">
-              เปลี่ยนไอเดียให้เป็น <br />
-              <span className="text-blue-600 underline decoration-slate-900 decoration-8 underline-offset-[12px]">
-                ผลลัพธ์ที่จับต้องได้
+
+            {/* Headline */}
+            <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-brand-navy md:text-8xl lg:text-9xl">
+              Turn Vision into <br />
+              <span className="text-brand-blue underline decoration-brand-navy decoration-[12px] underline-offset-[16px]">
+                Reality.
               </span>
             </h1>
+
             <div className="flex flex-col gap-8 md:flex-row md:items-center">
-              <p className="max-w-2xl border-l-[10px] border-blue-600/20 pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-                ผมยินดีให้คำปรึกษาฟรีสำหรับ SME ไทยที่อยากมีเว็บไซต์คุณภาพสูง
-                คุยง่าย ตรงไปตรงมา เหมือนมี{" "}
-                <span className="text-slate-900">Chief Technology Partner</span>{" "}
-                ดูแลด้วยตัวเองครับ
+              <p className="max-w-2xl border-l-[12px] border-brand-orange pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
+                ปรึกษาฟรีสำหรับ SME ไทยที่ต้องการโครงสร้างเว็บที่แข็งแกร่ง
+                คุยง่าย ตรงจุด เหมือนมี{" "}
+                <span className="text-brand-navy">Technology Partner</span>{" "}
+                ดูแลโปรเจกต์ด้วยตัวเอง
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 2. MAIN CONTENT GRID ─── */}
-      <section className="relative z-10 -mt-12 bg-white pb-24 md:pb-40">
+      {/* ─── 02. MAIN CONTENT GRID (FORM & INFO) ─── */}
+      <section className="relative z-10 -mt-16 pb-24 md:pb-32">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 gap-px overflow-hidden border-[6px] border-slate-900 bg-slate-900 shadow-2xl lg:grid-cols-12">
-            {/* Left Side: Technical Info */}
-            <div className="relative bg-slate-900 p-10 text-white md:p-16 lg:col-span-5">
-              <div
-                className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-20"
-                aria-hidden="true"
-              />
-              <div className="relative z-10">
+          <div className="grid grid-cols-1 overflow-hidden border-[6px] border-brand-navy bg-brand-navy shadow-[20px_20px_0px_0px_#1E3A8A] lg:grid-cols-12">
+            {/* 🟦 LEFT: TECHNICAL DATA CENTER */}
+            <div className="relative bg-brand-navy p-10 text-white md:p-16 lg:col-span-5">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:40px_40px] opacity-10" />
+
+              <div className="relative z-10 flex h-full flex-col">
                 <div className="mb-16 space-y-4">
-                  <div className="inline-block border-b-4 border-blue-600 pb-3">
-                    <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-blue-500">
-                      Technical Station
+                  <div className="inline-block border-b-4 border-brand-orange pb-3">
+                    <h2 className="text-[10px] font-black uppercase tracking-[0.5em] text-brand-orange">
+                      System_Inquiry
                     </h2>
                   </div>
-                  <h3 className="text-5xl font-black uppercase italic tracking-tighter">
-                    Contact <br />
-                    Information
+                  <h3 className="font-heading text-6xl uppercase tracking-tighter">
+                    Contact <br /> Hub.
                   </h3>
                 </div>
-                <div className="space-y-12">
+
+                <div className="flex-grow">
                   <ContactInfo />
                 </div>
-                <div className="mt-24 border-t border-white/10 pt-12">
-                  <div className="flex items-start gap-5">
-                    <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center bg-blue-600/20 text-blue-500">
-                      <ShieldCheck size={24} strokeWidth={2.5} />
+
+                {/* Status Protocol Footer */}
+                <div className="mt-24 border-t-2 border-white/10 pt-12">
+                  <div className="flex items-start gap-6">
+                    <div className="mt-1 flex h-14 w-14 shrink-0 items-center justify-center border-2 border-brand-blue/50 bg-brand-blue/10 text-brand-blue shadow-[4px_4px_0_0_#1E3A8A]">
+                      <ShieldCheck size={32} strokeWidth={2.5} />
                     </div>
-                    <div>
-                      <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500">
-                        Support Protocol
+                    <div className="space-y-2">
+                      <p className="text-[10px] font-black uppercase leading-none tracking-[0.4em] text-brand-blue">
+                        Operating_Status
                       </p>
-                      <p className="mt-1 text-sm font-bold italic leading-relaxed text-slate-400">
+                      <p className="text-sm font-bold italic leading-relaxed text-slate-400">
                         จันทร์ - ศุกร์ (09:00 - 18:00) <br />
-                        <span className="font-black not-italic text-white">
-                          ฉุกเฉิน: ติดต่อผ่าน Line OA ได้ 24 ชม.
+                        <span className="font-black not-italic text-white underline decoration-brand-orange">
+                          Emergency: Line OA Active 24/7
                         </span>
                       </p>
                     </div>
@@ -137,48 +121,114 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Right Side: Contact Form */}
+            {/* ⬜ RIGHT: WORK ORDER FORM */}
             <div className="bg-white p-10 md:p-16 lg:col-span-7">
-              <div className="mb-14 flex items-start justify-between">
+              <div className="mb-14 flex flex-col justify-between gap-8 sm:flex-row sm:items-start">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-blue-600">
-                    <Zap size={18} fill="currentColor" />
+                  <div className="flex items-center gap-3 text-brand-orange">
+                    <Zap size={20} fill="currentColor" />
                     <h2 className="text-[10px] font-black uppercase tracking-[0.4em]">
-                      Direct Message Channel
+                      Direct_Message_Channel
                     </h2>
                   </div>
-                  <h3 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900 md:text-5xl">
-                    ส่งข้อมูลโปรเจกต์
+                  <h3 className="font-heading text-5xl uppercase tracking-tighter text-brand-navy md:text-6xl">
+                    Project Brief.
                   </h3>
                   <p className="max-w-md text-lg font-bold leading-relaxed text-slate-500">
-                    บอกเล่าไอเดียหรือปัญหาที่คุณเจอไว้
-                    แล้วผมจะทำการวิเคราะห์เบื้องต้น
-                    และติดต่อกลับพร้อมทางออกภายใน 24 ชม. ครับ
+                    บอกเล่าเป้าหมายหรือปัญหาที่คุณเจอ
+                    เราจะวิเคราะห์สถาปัตยกรรมเบื้องต้น และติดต่อกลับภายใน 24 ชม.
                   </p>
                 </div>
-                <div className="hidden h-20 w-20 items-center justify-center border-4 border-slate-900 bg-white text-slate-900 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] sm:flex">
-                  <MessageCircle size={36} strokeWidth={2.5} />
+                <div className="flex h-24 w-24 shrink-0 items-center justify-center border-[6px] border-brand-navy bg-white text-brand-navy shadow-[8px_8px_0px_0px_#0F172A]">
+                  <MessageCircle size={40} strokeWidth={2.5} />
                 </div>
               </div>
+
               <ContactForm templateId="main-contact-page" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 3. GOOGLE MAP ─── */}
-      <section className="relative border-y-[6px] border-slate-900">
-        <div className="relative aspect-[21/9] min-h-[400px] w-full grayscale-[0.8] transition-all duration-1000 hover:grayscale-0">
-          <ContactMap />
-          <div className="absolute bottom-12 left-12 z-10 hidden border-l-[12px] border-blue-600 bg-slate-900 px-10 py-6 text-white shadow-2xl md:block">
-            <div className="flex flex-col gap-2">
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-500">
-                Satellite Geolocation
+      {/* ─── 03. GEOLOCATION INTERFACE (MAP AREA) ─── */}
+      <section className="container mx-auto px-6 pb-24 md:pb-40">
+        <div className="relative overflow-hidden border-[6px] border-brand-navy bg-slate-200 shadow-[15px_15px_0px_0px_#cbd5e1]">
+          {/* Header Bar for Map */}
+          <div className="flex items-center justify-between border-b-[6px] border-brand-navy bg-white px-8 py-4">
+            <div className="flex items-center gap-3">
+              <Activity size={18} className="text-brand-orange" />
+              <span className="font-mono text-xs font-black uppercase tracking-widest text-brand-navy">
+                Satellite_Tracker // Physical_Geolocation
               </span>
-              <span className="flex items-center gap-4 text-xl font-black uppercase italic tracking-widest">
-                Our Workspace{" "}
-                <ArrowDownRight size={24} className="text-blue-500" />
+            </div>
+            <div className="hidden items-center gap-4 md:flex">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              <span className="font-mono text-[10px] font-bold text-slate-400">
+                SIGNAL_STRENGTH: 100%
               </span>
+            </div>
+          </div>
+
+          <div className="relative grid grid-cols-1 lg:grid-cols-12">
+            {/* Map Frame */}
+            <div className="relative min-h-[500px] overflow-hidden bg-slate-300 lg:col-span-8">
+              {/* ใส่ Iframe Google Maps ตรงนี้ */}
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.559286438814!2d100.523186!3d13.736717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ0JzEyLjIiTiAxMDDCsDMxJzIzLjUiRQ!5e0!3m2!1sth!2sth!4v1630000000000!5m2!1sth!2sth"
+                width="100%"
+                height="100%"
+                style={{
+                  border: 0,
+                  filter: "grayscale(1) contrast(1.2) invert(0.05)",
+                }}
+                allowFullScreen
+                loading="lazy"
+                title="AEMDEVWEB_LOCATION"
+                className="absolute inset-0 transition-all hover:grayscale-0"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-brand-blue/5 mix-blend-multiply" />
+            </div>
+
+            {/* Map Info Sidebar */}
+            <div className="flex flex-col justify-center border-l-[6px] border-brand-navy bg-white p-10 lg:col-span-4">
+              <div className="space-y-10">
+                <div className="space-y-4">
+                  <div className="h-1 w-12 bg-brand-orange" />
+                  <h4 className="font-heading text-4xl uppercase tracking-tighter text-brand-navy">
+                    Central Node.
+                  </h4>
+                  <p className="text-lg font-bold leading-relaxed text-slate-500">
+                    ตั้งอยู่ใจกลางกรุงเทพฯ พร้อมสนับสนุนการขยายตัวของ SME
+                    ทุกภูมิภาคผ่านระบบ Remote Consulting
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="group flex items-center gap-5">
+                    <div className="flex h-12 w-12 items-center justify-center border-4 border-brand-navy bg-slate-50 shadow-[4px_4px_0_0_#F97316] transition-all group-hover:shadow-none">
+                      <MapPin size={24} className="text-brand-navy" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[9px] font-black uppercase text-slate-400">
+                        Headquarters
+                      </p>
+                      <p className="font-black uppercase text-brand-navy">
+                        {siteConfig.contact.address}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      window.open(siteConfig.contact.lineUrl, "_blank")
+                    }
+                    className="flex w-full items-center justify-between border-4 border-brand-navy bg-brand-navy px-6 py-4 text-sm font-black uppercase tracking-widest text-white shadow-[6px_6px_0_0_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
+                  >
+                    Get Directions
+                    <ArrowDownRight size={20} className="text-brand-orange" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

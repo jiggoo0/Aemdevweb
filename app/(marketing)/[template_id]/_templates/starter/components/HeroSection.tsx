@@ -130,7 +130,7 @@ export default function HeroSection({
               </span>
             </div>
 
-            <div className="relative aspect-video w-full overflow-hidden border border-slate-200 bg-slate-200">
+            <div className="aspect-video relative w-full overflow-hidden border border-slate-200 bg-slate-200">
               <Image
                 src={image}
                 alt="System Interface Preview"

@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Ticket Confirmation - Vifily Airlines</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        --primary-color: #003366; /* Navy Blue */
+        --accent-color: #00aeef; /* Sky Blue */
+        --success-color: #28a745;
+        --bg-color: #f4f7f6;
+        --card-bg: #ffffff;
+        --text-main: #2c3e50;
+        --text-light: #7f8c8d;
+        --border-radius: 12px;
+      }
+
+      body {
+        font-family: "Kanit", sans-serif;
+        background-color: var(--bg-color);
+        margin: 0;
+        padding: 20px;
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+
+      /* Header Section */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          #004080 100%
+        );
+        color: white;
+        padding: 35px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand-logo {
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+      }
+
+      .brand-logo i {
+        color: var(--accent-color);
+        font-size: 24px;
+      }
+
+      .booking-ref-top {
+        text-align: right;
+      }
+
+      .booking-ref-top span {
+        display: block;
+        font-size: 13px;
+        opacity: 0.85;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .booking-ref-top strong {
+        font-size: 26px;
+        letter-spacing: 2px;
+        color: var(--accent-color);
+        font-weight: 600;
+      }
+
+      /* Status Banner */
+      .status-banner {
+        background-color: #e8f5e9;
+        color: var(--success-color);
+        padding: 16px 40px;
+        text-align: center;
+        font-weight: 500;
+        border-bottom: 1px solid #c3e6cb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 15px;
+      }
+
+      /* Content Area */
+      .content {
+        padding: 40px;
+      }
+
+      h2 {
+        color: var(--primary-color);
+        border-bottom: 2px solid #f1f1f1;
+        padding-bottom: 12px;
+        margin-bottom: 25px;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* Flight Route */
+      .flight-route {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 35px;
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid #e9ecef;
+      }
+
+      .airport {
+        text-align: center;
+        width: 30%;
+      }
+
+      .airport-code {
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--primary-color);
+        line-height: 1;
+      }
+
+      .airport-name {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-top: 5px;
+      }
+
+      .flight-time {
+        font-size: 16px;
+        font-weight: 500;
+        margin-top: 8px;
+        color: var(--text-main);
+      }
+
+      .flight-path {
+        flex-grow: 1;
+        text-align: center;
+        position: relative;
+        color: var(--accent-color);
+        padding: 0 20px;
+      }
+
+      .flight-path i {
+        font-size: 22px;
+        background: #f8f9fa;
+        padding: 0 15px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .flight-path::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #ddd;
+        z-index: 0;
+        border-top: 2px dashed #bbb;
+      }
+
+      .duration-label {
+        font-size: 12px;
+        margin-bottom: 8px;
+        color: #777;
+        display: block;
+      }
+
+      /* Flight Details Grid */
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 25px;
+        margin-bottom: 45px;
+        background: #fff;
+      }
+
+      .detail-item {
+        margin-bottom: 5px;
+      }
+
+      .detail-label {
+        font-size: 12px;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+      }
+
+      .detail-value {
+        font-size: 16px;
+        font-weight: 500;
+        color: var(--text-main);
+      }
+
+      /* Passenger Section */
+      .passenger-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 35px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+      }
+
+      .passenger-info {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .avatar-placeholder {
+        width: 55px;
+        height: 55px;
+        background-color: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 22px;
+      }
+
+      .passenger-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      .passenger-meta {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-top: 3px;
+      }
+
+      /* QR Code Area */
+      .qr-area {
+        text-align: center;
+        padding-left: 20px;
+        border-left: 1px dashed #ddd;
+      }
+
+      .qr-code-img {
+        width: 90px;
+        height: 90px;
+        mix-blend-mode: multiply;
+      }
+
+      /* Payment Section */
+      .payment-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .total-amount {
+        font-size: 22px;
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        text-align: center;
+        padding: 25px;
+        font-size: 13px;
+      }
+
+      .footer-links {
+        margin-bottom: 15px;
+      }
+
+      .footer-links a {
+        color: #bdc3c7;
+        text-decoration: none;
+        margin: 0 12px;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: #fff;
+      }
+
+      /* Buttons */
+      .action-bar {
+        text-align: right;
+        margin-top: 40px;
+        border-top: 1px solid #eee;
+        padding-top: 25px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 28px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+        font-family: "Kanit", sans-serif;
+        font-size: 15px;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 51, 102, 0.2);
+      }
+
+      .btn-primary:hover {
+        background-color: #004080;
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        border: 1px solid #cbd5e0;
+        color: var(--text-main);
+        background: white;
+      }
+
+      .btn-outline:hover {
+        background-color: #f8f9fa;
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .header {
+          flex-direction: column;
+          text-align: center;
+          gap: 15px;
+        }
+        .booking-ref-top {
+          text-align: center;
+        }
+        .passenger-section {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+        }
+        .passenger-info {
+          flex-direction: column;
+        }
+        .qr-area {
+          border-left: none;
+          border-top: 1px dashed #ddd;
+          padding-left: 0;
+          padding-top: 20px;
+          width: 100%;
+        }
+        .action-bar {
+          flex-direction: column-reverse;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-plane-up"></i> Vifily Airlines
+        </div>
+        <div class="booking-ref-top">
+          <span>Booking Reference</span>
+          <strong>VF88X9</strong>
+        </div>
+      </div>
+
+      <div class="status-banner">
+        <i class="fa-solid fa-circle-check"></i>
+        Your booking is confirmed and ticketed.
+      </div>
+
+      <div class="content">
+        <h2><i class="fa-solid fa-plane-departure"></i> Flight Details</h2>
+
+        <div class="flight-route">
+          <div class="airport">
+            <div class="airport-code">BKK</div>
+            <div class="airport-name">Bangkok</div>
+            <div class="flight-time">10 Nov, 23:55</div>
+          </div>
+          <div class="flight-path">
+            <span class="duration-label">5h 45m</span>
+            <i class="fa-solid fa-plane"></i>
+            <div
+              style="
+                font-size: 12px;
+                margin-top: 5px;
+                color: var(--primary-color);
+                font-weight: bold;
+              "
+            >
+              VF 702
+            </div>
+          </div>
+          <div class="airport">
+            <div class="airport-code">NRT</div>
+            <div class="airport-name">Tokyo (Narita)</div>
+            <div class="flight-time">11 Nov, 07:40</div>
+          </div>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-label">Airline</div>
+            <div class="detail-value">Vifily Airlines</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Class</div>
+            <div class="detail-value">Economy Flex</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Seat Assignment</div>
+            <div class="detail-value">12A (Window)</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Baggage Allowance</div>
+            <div class="detail-value">30 KG / 1 Piece</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Aircraft Type</div>
+            <div class="detail-value">Boeing 787-9</div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Flight Status</div>
+            <div class="detail-value" style="color: var(--success-color)">
+              Confirmed
+            </div>
+          </div>
+        </div>
+
+        <h2><i class="fa-solid fa-user"></i> Passenger Information</h2>
+        <div class="passenger-section">
+          <div class="passenger-info">
+            <div class="avatar-placeholder">
+              <span>JP</span>
+            </div>
+            <div>
+              <div class="passenger-name">Mr. JP Chaopa</div>
+              <div class="passenger-meta">Adult • Vifily Gold Member</div>
+              <div class="passenger-meta">Ticket No: 217-4459001234</div>
+            </div>
+          </div>
+          <div class="qr-area">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VF-JPCHAOPA-VF88X9"
+              alt="Boarding QR"
+              class="qr-code-img"
+            />
+            <div class="detail-label" style="margin-top: 8px">Check-in QR</div>
+          </div>
+        </div>
+
+        <h2><i class="fa-solid fa-receipt"></i> Payment Receipt</h2>
+        <div style="padding-top: 10px">
+          <div class="payment-row">
+            <div class="detail-label">Base Fare</div>
+            <div class="detail-value">THB 15,000.00</div>
+          </div>
+          <div class="payment-row">
+            <div class="detail-label">Taxes & Fees</div>
+            <div class="detail-value">THB 3,500.00</div>
+          </div>
+          <div
+            class="payment-row"
+            style="
+              border-top: 1px dashed #ddd;
+              padding-top: 15px;
+              margin-top: 10px;
+            "
+          >
+            <div class="detail-label">Payment Method</div>
+            <div class="detail-value">Visa Credit Card (**** 4242)</div>
+          </div>
+          <div class="payment-row">
+            <div class="detail-label" style="font-weight: 600; color: #333">
+              Total Amount Paid
+            </div>
+            <div class="total-amount">THB 18,500.00</div>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button class="btn btn-outline" onclick="window.print()">
+            <i class="fa-solid fa-print"></i> Print Confirmation
+          </button>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-suitcase"></i> Manage My Booking
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-links">
+          <a href="#">Terms & Conditions</a> • <a href="#">Privacy Policy</a> •
+          <a href="#">Support Center</a>
+        </div>
+        <p>&copy; 2024 Vifily Airlines. All rights reserved.</p>
+        <p style="opacity: 0.5; font-size: 11px">
+          This is an automated system message. Please do not reply to this
+          email.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

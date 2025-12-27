@@ -1,24 +1,22 @@
 /** @format */
-import { MetadataRoute } from "next"
+import type { MetadataRoute } from "next"
 import { siteConfig } from "@/config/siteConfig"
 import { catalogProjects } from "@/data/catalog.projects"
-// ✅ แก้ไขจาก @/data/blogData เป็น Path ใหม่ที่รวมไฟล์แล้ว
 import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog"
+import { BlogPost } from "@/types/blog" // ✅ แก้ไข: ดึง Type จาก source ที่ถูกต้อง
 
 /**
- * 🛠️ Helper: ตรวจสอบวันที่ให้ปลอดภัยก่อนส่งให้ Sitemap
+ * 🛠️ Helper: จัดการวันที่ให้ปลอดภัยสำหรับ Sitemap
  */
-function getSafeDate(dateStr: string | undefined | null): Date {
-  if (!dateStr) return new Date()
-  const parsedDate = new Date(dateStr)
-  return isNaN(parsedDate.getTime()) ? new Date() : parsedDate
+function parseSafeDate(dateStr: string): Date {
+  const date = new Date(dateStr)
+  return isNaN(date.getTime()) ? new Date() : date
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig?.url || "https://www.aemdevweb.com"
 
-  // 1. 📂 หน้าหลัก (Static Routes)
+  // 1. 🏠 Static Pages: หน้าหลักของเว็บไซต์
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -29,32 +27,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
+    changeFrequency: route === "" ? "daily" : "weekly",
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. 🚀 หน้า Landing Templates (Dynamic Routes)
-  // 📝 แก้ไข: ปรับ Path ให้ตรงกับที่เราคุยกัน (ถ้าคุณใช้ /[template_id] โดยไม่มีคำว่า landing)
-  // แต่ถ้าคุณยืนยันจะใช้ /landing/ ก็นำหน้าได้ครับ
-  const templateRoutes: MetadataRoute.Sitemap = catalogProjects.map(
+  // 2. 📂 Dynamic Catalog Pages: หน้าโครงการ/เทมเพลต
+  const templateRoutes: MetadataRoute.Sitemap = (catalogProjects || []).map(
     (project) => ({
-      url: `${baseUrl}/${project.templateId}`, // หรือ `/landing/${project.templateId}` ตามโครงสร้างโฟลเดอร์จริง
+      url: `${baseUrl}/catalog/${project.templateId}`,
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+      changeFrequency: "weekly",
       priority: 0.9,
     })
   )
 
-  // 3. 📝 หน้าบทความ Blog
-  // ✅ ระบุ Type ให้ (post: BlogPost) เพื่อแก้ปัญหา Parameter implicitly has an 'any' type
-  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map(
-    (post: BlogPost) => ({
-      url: `${baseUrl}/blog/${post.slug || post.id}`,
-      lastModified: getSafeDate(post.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })
-  )
+  // 3. 📝 Dynamic Blog Pages: หน้าบทความ
+  const blogRoutes: MetadataRoute.Sitemap = (
+    (blogData as BlogPost[]) || []
+  ).map((post) => ({
+    url: `${baseUrl}/blog/${post.slug || post.id}`,
+    lastModified: parseSafeDate(post.date), // ✅ ใช้ Helper ที่สร้างใหม่แทน getSafeDate ที่หายไป
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }))
 
   return [...staticRoutes, ...templateRoutes, ...blogRoutes]
 }

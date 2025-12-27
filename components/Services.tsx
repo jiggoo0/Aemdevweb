@@ -1,113 +1,185 @@
 /** @format */
 "use client"
 
-import React from "react"
+import React, { memo, useMemo } from "react"
 import Link from "next/link"
-import { LayoutGrid, ArrowRight } from "lucide-react"
+import { LayoutGrid, ArrowRight, Sparkles, Zap } from "lucide-react"
 import { ServiceItem } from "@/types/services"
-import { iconMap } from "@/components/iconMap"
+import { iconMap, type IconKey } from "@/components/iconMap" // ✅ นำเข้า Type ที่ถูกต้อง
+import { cn } from "@/lib/utils"
 
 interface ServicesProps {
   services: ServiceItem[]
 }
 
-export default function Services({ services }: ServicesProps) {
-  // กรองเฉพาะบริการที่มีสถานะ READY
-  const activeServices = services.filter((s) => (s as any).status === "READY")
+const Services = ({ services }: ServicesProps) => {
+  // ✅ 1. ใช้ useMemo เพื่อป้องกันการ Filter ใหม่ทุกครั้งที่ Render
+  const activeServices = useMemo(
+    () => services.filter((s) => s.status === "READY"),
+    [services]
+  )
 
   return (
     <section
       className="relative overflow-hidden bg-white py-24 lg:py-32"
       id="services"
     >
-      {/* Background Decor */}
+      {/* ─── 1. Background Decor (Blueprint Style) ─── */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.02]"
-        style={{ backgroundImage: 'url("/grid.svg")' }}
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(#1E3A8A 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
       />
 
-      <div className="container relative z-10 mx-auto px-4">
-        {/* Section Header */}
-        <div className="mb-20 flex flex-col items-end justify-between gap-8 border-b-8 border-slate-900 pb-12 lg:flex-row lg:items-center">
-          <div className="max-w-2xl text-left">
-            <div className="mb-4 inline-flex items-center gap-3 bg-slate-900 px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-white">
-              <span className="h-2 w-2 animate-pulse bg-blue-500" />
-              AEMDEVWEB / ECOSYSTEM_TRUST_PROTOCOL
+      <div className="container relative z-10 mx-auto px-6">
+        {/* ─── 2. Section Header ─── */}
+        <div className="mb-20 flex flex-col items-start justify-between gap-8 border-l-[12px] border-[#1E3A8A] pl-8 lg:flex-row lg:items-end lg:pb-4">
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-3 bg-[#1E3A8A] px-4 py-1.5 shadow-[4px_4px_0px_0px_#F97316]">
+              <Sparkles size={12} className="animate-pulse text-white" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
+                Service Modules
+              </span>
             </div>
-            <h2 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-7xl">
-              Precision <br />
-              <span className="text-blue-600">Templates.</span>
+            <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter text-slate-900 md:text-6xl">
+              โซลูชัน <br />
+              <span className="text-[#1E3A8A]">ที่ออกแบบเพื่อธุรกิจคุณ</span>
             </h2>
           </div>
 
           <Link
             href="/catalog"
-            className="flex h-16 items-center border-4 border-slate-900 px-8 text-xs font-black uppercase tracking-widest transition-all hover:bg-slate-900 hover:text-white"
+            className="group flex items-center gap-3 border-2 border-[#1E3A8A] bg-white px-8 py-4 text-xs font-black uppercase tracking-widest text-[#1E3A8A] transition-all hover:bg-[#1E3A8A] hover:text-white active:scale-95"
           >
-            <LayoutGrid className="mr-3 h-5 w-5" />
-            Explore All Works
+            <LayoutGrid className="h-5 w-5" />
+            ดูผลงานทั้งหมด
           </Link>
         </div>
 
-        {/* Services Grid */}
+        {/* ─── 3. Service Cards Grid ─── */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {activeServices.map((service) => {
-            const Icon = (iconMap as any)[service.iconName] || iconMap.STARTER
-            const hasPromo = !!(service as any).promoPrice
+            // ✅ 2. Type-Safe Icon Selection
+            const iconKey = service.iconName as IconKey
+            const Icon = iconMap[iconKey] || iconMap.STARTER
+            const hasPromo = !!service.promoPrice
+            const isPopular = service.isPopular
 
             return (
-              <div
+              <article
                 key={service.id}
-                className="group relative flex flex-col border-[3px] border-slate-900 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
+                className={cn(
+                  "group relative flex flex-col border-2 transition-all duration-500 hover:-translate-y-2",
+                  hasPromo
+                    ? "border-[#F97316] bg-white shadow-[12px_12px_0px_0px_#F97316]"
+                    : isPopular
+                      ? "border-[#1E3A8A] bg-white shadow-[12px_12px_0px_0px_#1E3A8A]"
+                      : "border-slate-200 bg-slate-50 hover:border-[#1E3A8A] hover:bg-white hover:shadow-[12px_12px_0px_0px_rgba(30,58,138,0.1)]"
+                )}
               >
-                {/* Technical Bar */}
-                <div className="flex items-center justify-between border-b-[3px] border-slate-900 bg-slate-50 px-4 py-2">
-                  <div className="flex gap-1.5">
-                    <div className="h-2 w-2 rounded-full bg-slate-300" />
-                    <div className="h-2 w-2 rounded-full bg-slate-300" />
-                  </div>
-                  <span className="font-mono text-[9px] font-black uppercase tracking-widest text-slate-400">
-                    ARCH_TYPE // {(service as any).slug || "N/A"}
+                {/* Module Label & Badges */}
+                <div className="flex items-center justify-between border-b-2 border-inherit bg-inherit px-6 py-3">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    ID: {service.id.toString().padStart(2, "0")} /{" "}
+                    {service.slug}
                   </span>
+                  <div className="flex gap-2">
+                    {hasPromo && (
+                      <span className="flex items-center gap-1 bg-[#F97316] px-2 py-0.5 text-[9px] font-black uppercase text-white">
+                        <Zap size={10} fill="currentColor" /> Best Value
+                      </span>
+                    )}
+                    {isPopular && (
+                      <span className="bg-[#1E3A8A] px-2 py-0.5 text-[9px] font-black uppercase text-white">
+                        Popular
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="flex flex-grow flex-col p-8">
-                  {hasPromo && (
-                    <div className="mb-4 self-start bg-[#ff3e3e] px-3 py-1 text-[10px] font-black uppercase tracking-tighter text-white">
-                      Limited Offer // Active
-                    </div>
-                  )}
+                  {/* Icon Box */}
+                  <div
+                    className={cn(
+                      "mb-8 inline-flex h-16 w-16 items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[4px_4px_0px_0px_#F97316]",
+                      hasPromo
+                        ? "border-[#F97316] text-[#F97316]"
+                        : "border-[#1E3A8A] text-[#1E3A8A]",
+                      "group-hover:border-[#1E3A8A] group-hover:bg-[#1E3A8A] group-hover:text-white"
+                    )}
+                  >
+                    <Icon size={32} strokeWidth={1.5} />
+                  </div>
 
-                  <div className="mb-6 flex items-end gap-4">
-                    <div className="border-[3px] border-slate-900 bg-white p-4 text-slate-900 shadow-[4px_4px_0px_0px_#0f172a] transition-all group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-none">
-                      <Icon size={32} />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">
-                        Module 0{service.id}
-                      </span>
-                      <h3 className="text-2xl font-black uppercase italic tracking-tighter text-slate-900">
-                        {service.title}
-                      </h3>
+                  {/* Title & Price */}
+                  <div className="mb-4">
+                    <h3 className="mb-1 text-2xl font-black uppercase tracking-tighter text-slate-900">
+                      {service.title}
+                    </h3>
+                    <div className="flex items-baseline gap-2">
+                      {hasPromo ? (
+                        <>
+                          <span className="text-2xl font-black text-[#F97316]">
+                            ฿{service.promoPrice}
+                          </span>
+                          <span className="text-sm font-bold text-slate-300 line-through">
+                            ฿{service.price}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-sm font-bold uppercase text-slate-500">
+                          เริ่มต้น{" "}
+                          <span className="text-lg text-[#1E3A8A]">
+                            ฿{service.price}
+                          </span>
+                        </span>
+                      )}
                     </div>
                   </div>
 
-                  <p className="mb-8 line-clamp-2 text-sm font-bold italic leading-relaxed text-slate-500">
+                  {/* Description */}
+                  <p className="mb-8 line-clamp-3 text-sm font-medium leading-relaxed text-slate-500">
                     {service.description}
                   </p>
 
+                  {/* Features List */}
+                  <ul className="mb-10 space-y-3 border-t-2 border-dashed border-slate-100 pt-6">
+                    {service.features?.slice(0, 3).map((f, i) => (
+                      <li
+                        key={i}
+                        className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-tight text-slate-600"
+                      >
+                        <div
+                          className={cn(
+                            "h-1.5 w-1.5",
+                            hasPromo ? "bg-[#F97316]" : "bg-[#1E3A8A]"
+                          )}
+                        />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Action Button */}
                   <Link
-                    href={`/${(service as any).slug || ""}`}
-                    className="flex items-center justify-center gap-3 border-[3px] border-slate-900 bg-slate-900 py-4 text-sm font-black uppercase italic text-white transition-all hover:bg-blue-600"
+                    href={`/catalog?type=${service.slug}`}
+                    className={cn(
+                      "mt-auto flex items-center justify-center gap-3 py-4 text-xs font-black uppercase tracking-widest text-white transition-all active:scale-95",
+                      hasPromo
+                        ? "bg-[#F97316] hover:bg-[#1E3A8A]"
+                        : "bg-[#1E3A8A] hover:bg-[#F97316]"
+                    )}
                   >
-                    Deploy Template
+                    ดูรายละเอียด
                     <ArrowRight
-                      size={20}
+                      size={16}
                       className="transition-transform group-hover:translate-x-2"
                     />
                   </Link>
                 </div>
-              </div>
+              </article>
             )
           })}
         </div>
@@ -115,3 +187,5 @@ export default function Services({ services }: ServicesProps) {
     </section>
   )
 }
+
+export default memo(Services)

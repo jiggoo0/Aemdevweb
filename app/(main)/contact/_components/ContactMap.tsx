@@ -25,7 +25,7 @@ export default function ContactMap() {
       id="location"
     >
       {/* ─── INDUSTRIAL BACKGROUND ─── */}
-      <div className="absolute inset-0 -z-10 bg-industrial-grid opacity-30" />
+      <div className="bg-industrial-grid absolute inset-0 -z-10 opacity-30" />
 
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-7xl">

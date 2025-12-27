@@ -1,6 +1,6 @@
 # 📑 Project Summary Report
 
-_Generated on Thu Dec 25 02:24:16 +07 2025_
+_Generated on Sun Dec 28 01:57:50 +07 2025_
 
 ## ⚙️ Environment Variables
 
@@ -37,73 +37,101 @@ app
 │   ├── layout.tsx
 │   ├── page.tsx
 │   └── services
-│   ├── ServicesPageClient.tsx
 │   └── page.tsx
 ├── (marketing)
 │   └── [template_id]
 │   ├── \_config
 │   │   └── registry.ts
 │   ├── \_templates
+│   │   ├── WoodBusiness
 │   │   ├── cafe
 │   │   ├── clinic
 │   │   ├── construction
 │   │   ├── realestate
 │   │   └── starter
+│   ├── contact
+│   │   └── page.tsx
 │   ├── layout.tsx
+│   ├── page.tsx
+│   └── services
 │   └── page.tsx
 ├── api
 │   └── contact
 │   └── route.ts
+├── apple-touch-icon.png
 ├── favicon.ico
 ├── globals.css
 ├── layout.tsx
+├── loading.tsx
 ├── robots.txt
 └── sitemap.ts
 
-20 directories, 20 files
+23 directories, 23 files
 
 #### Metadata (file | size | sha1)
 
-- app/layout.tsx | 2493b | sha1:45799c6f4315db3159e124e3ccdb6f154c6c161c
-- app/(marketing)/[template_id]/\_templates/cafe/CafeTemplate.tsx | 6237b | sha1:2f2b66819044bcd7aadee47ee2405db879d43ee8
-- app/(marketing)/[template_id]/\_templates/cafe/CafeStyle.module.css | 2685b | sha1:59c1d7b95a786f96cc9b1ee3b39d56b600a22dce
-- app/(marketing)/[template_id]/\_templates/cafe/config.ts | 3888b | sha1:3c27d5c7f3efbdfd2f624a5c013811d5e2ca2e43
+- app/layout.tsx | 3506b | sha1:4a1b544bddf688cf43d2244be982da94dbbb4e38
+- app/(marketing)/[template_id]/\_templates/cafe/CafeTemplate.tsx | 2371b | sha1:41a6f70c291d14093663b49cf54803cce6116572
+- app/(marketing)/[template_id]/\_templates/cafe/CafeStyle.module.css | 3011b | sha1:c9ec81ba23f7fec8ae048a0e8e8ff5aa652b0f87
+- app/(marketing)/[template_id]/\_templates/cafe/config.ts | 4424b | sha1:2662174f919d114b111758f859d4b25c5f8c8a1b
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/WoodBusinessTemplate.tsx | 3957b | sha1:f86c218e354f14fb8666a4926db1bd2a56fb5301
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/WoodStyle.module.css | 3172b | sha1:50c17bea63c3835bb1b52299ecc704002a3dd769
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/config.ts | 6584b | sha1:94c69a96136cde0a9001442d855bea2e7b8af23c
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/Header.tsx | 6490b | sha1:b9517c88f9e4702354c21f8fa14dbbf06fe43642
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/FeaturesSection.tsx | 4335b | sha1:dfb2e5bb65be0999aaa016ce95edba8cfd3cdb25
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/PerformanceSection.tsx | 4066b | sha1:450998dddaef08f1ab547cb4761c6a014d137d4a
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/HeroSection.tsx | 6146b | sha1:5d0a914cb8b3db57721b7a0a5a73817c2a8f5a28
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/CartSection.tsx | 6341b | sha1:b0196e363073614023ca633c14be5e635ee61db2
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/FAQSection.tsx | 6721b | sha1:c7448f4e3c1e5d9bd7020f441c69be3896b6ddb3
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/Footer.tsx | 7224b | sha1:ae05cfebb36457eb53d9c1392f21b4a3d1391c71
+- app/(marketing)/[template_id]/\_templates/WoodBusiness/components/SuccessSection.tsx | 4869b | sha1:4c7ad014fbfdfeddaf4ef1f53cb5e4d3c1beed3d
 - app/(marketing)/[template_id]/\_templates/realestate/RealEstateTemplate.tsx | 6502b | sha1:ea55273770f57e6d0fb91c6c5e141520c765bdb9
 - app/(marketing)/[template_id]/\_templates/realestate/RealEstateStyle.module.css | 1648b | sha1:a19e6b481f1e018ab95e4579b8d41ca6aeacac26
-- app/(marketing)/[template_id]/\_templates/realestate/config.ts | 3821b | sha1:6746b5cb4645177855f4be704c12fb453579088a
+- app/(marketing)/[template_id]/\_templates/realestate/config.ts | 6606b | sha1:3c5bf22d529f5272ecf6f38e5f3d4cac82757d7a
 - app/(marketing)/[template_id]/\_templates/construction/ConstructionTemplate.tsx | 5953b | sha1:82886920d7c461e153667a9a2c4f9dbf774c5f3f
 - app/(marketing)/[template_id]/\_templates/construction/ConstructionStyle.module.css | 1408b | sha1:7dd705a5b5f8fc7aa29199c560bfb0a303ecb048
-- app/(marketing)/[template_id]/\_templates/construction/config.ts | 4717b | sha1:4703dceebd1d43c0edbef14084c58f408eadc07b
-- app/(marketing)/[template_id]/\_templates/starter/StarterTemplate.tsx | 5229b | sha1:0bd598357d832cce368dac409052e60fd28e08c5
-- app/(marketing)/[template_id]/\_templates/starter/StarterStyle.module.css | 1354b | sha1:6af406ddfb8b4dd4e124a769b9f1649689f351ce
-- app/(marketing)/[template_id]/\_templates/starter/config.ts | 3071b | sha1:18f0dcb8327d5ebe5ca57afcf8242e4610fab9db
+- app/(marketing)/[template_id]/\_templates/construction/config.ts | 7209b | sha1:823799d5494bea40fa50551d2484e6b06f36920e
+- app/(marketing)/[template_id]/\_templates/starter/StarterTemplate.tsx | 3373b | sha1:d67314c1fda2b48703d2d118659a9b96f4ed1fe7
+- app/(marketing)/[template_id]/\_templates/starter/StarterStyle.module.css | 5158b | sha1:c5ccff1ba315f024fdb4cb09939eab9a9348f128
+- app/(marketing)/[template_id]/\_templates/starter/config.ts | 5577b | sha1:c5f06f9f76fe359af983b91789f3c1fc78653561
+- app/(marketing)/[template_id]/\_templates/starter/components/Header.tsx | 6395b | sha1:25d0b3165dda0900232355cda124a78596685cea
+- app/(marketing)/[template_id]/\_templates/starter/components/HeroSection.tsx | 5589b | sha1:c63d17c92554fbee2eab9e8e7ca04bd9f5fe0ab9
+- app/(marketing)/[template_id]/\_templates/starter/components/FeaturesSection.tsx | 2642b | sha1:b0828885dcf1328d73a26564b770daf5ce1c8ab8
+- app/(marketing)/[template_id]/\_templates/starter/components/GuaranteeSection.tsx | 3474b | sha1:dc55fa693c20b8dab3d4aa78dbf4529f4fc06e56
+- app/(marketing)/[template_id]/\_templates/starter/components/PerformanceSection.tsx | 3879b | sha1:2b4d6615c4bc08a08df6745e62a68dac7d1b10db
+- app/(marketing)/[template_id]/\_templates/starter/components/Footer.tsx | 7764b | sha1:44b9d9436fbf6cb9041a6a70228810cb7ee19a71
+- app/(marketing)/[template_id]/\_templates/starter/components/CartSection.tsx | 5103b | sha1:64b67bbfe87314d88b49e47924b219f54a928482
+- app/(marketing)/[template_id]/\_templates/starter/components/FAQSection.tsx | 4995b | sha1:30c35f9dfe64815eef898959be4eb3221e99de87
+- app/(marketing)/[template_id]/\_templates/starter/components/SuccessSection.tsx | 4457b | sha1:3be7139a32b678bcb1e7911d6f2ca191720699df
 - app/(marketing)/[template_id]/\_templates/clinic/ClinicTemplate.tsx | 5187b | sha1:75e99225e778900839b5c115d775602359e7133d
-- app/(marketing)/[template_id]/\_templates/clinic/ClinicStyle.module.css | 1271b | sha1:afdd35936311d240f32f9396037558602d3c106e
-- app/(marketing)/[template_id]/\_templates/clinic/config.ts | 3407b | sha1:ca862af4bc6649d990b5d60c6d1bf795d85cd9b3
-- app/(marketing)/[template_id]/page.tsx | 1311b | sha1:357f2f143693c7cd788919151124e1628123b91f
-- app/(marketing)/[template_id]/layout.tsx | 2476b | sha1:1dbff05e6ad2ec985b93dac711522f52c564b3ff
-- app/(marketing)/[template_id]/\_config/registry.ts | 1067b | sha1:935f377fa03f7ca7fca36f91caf4971301712630
-- app/globals.css | 2818b | sha1:814b39f421df1fb728e642754c6923acded44f66
+- app/(marketing)/[template_id]/\_templates/clinic/ClinicStyle.module.css | 1410b | sha1:850c1a594d25e951977e0495cb3437eebe49c8d9
+- app/(marketing)/[template_id]/\_templates/clinic/config.ts | 4380b | sha1:00d97054be911a912cf906e110af74335c647e37
+- app/(marketing)/[template_id]/page.tsx | 3034b | sha1:566334971cec9e5c4c9816a02eaf19ad648c1cc4
+- app/(marketing)/[template_id]/layout.tsx | 668b | sha1:1776d8607f2cd485ea86dbf3a7c6d21a42a1c64b
+- app/(marketing)/[template_id]/\_config/registry.ts | 2556b | sha1:9132cce96174332474ac0486645d108d930b40d4
+- app/(marketing)/[template_id]/services/page.tsx | 4468b | sha1:fbc3747c6580ff3378949bcf7b2cca8076995738
+- app/(marketing)/[template_id]/contact/page.tsx | 7073b | sha1:43f467c3a56d024b82128111fa029b5243ddd870
+- app/loading.tsx | 4161b | sha1:30e18187622b23da3ae37d5debb335058fb47dc5
+- app/apple-touch-icon.png | 194522b | sha1:6e91e3cfc9327f26b55a992b403b6560ddbd353c
+- app/globals.css | 2601b | sha1:b5e0d537d90ab16683decd0fa1d54bf4e532943b
 - app/api/contact/route.ts | 2313b | sha1:ad7395a8f89f2a2f55ebb119f618393bf8d024a6
-- app/(main)/about/page.tsx | 7934b | sha1:28d86b70f69d17c0fa0ba8bb7bb78e296e5609c0
-- app/(main)/blog/[slug]/page.tsx | 2081b | sha1:c1ccb40218f738a637232c8c6337a39b68c59b7b
-- app/(main)/blog/page.tsx | 1296b | sha1:0efca4b2f04e87e131cb6862bbc505f4a3e844a0
-- app/(main)/blog/loading.tsx | 459b | sha1:edf5c3e19911cb871aac40c32868ec31d20ab31e
-- app/(main)/catalog/page.tsx | 4228b | sha1:ca1e7882feb854352f99ca7a66c24f60fb6f34bb
-- app/(main)/contact/page.tsx | 9591b | sha1:335d5a1051f95d943bf714b303983ea48732007d
-- app/(main)/contact/\_components/ContactMap.tsx | 7467b | sha1:0b28b0ad50ace1787356d28629594a5a3fa3851f
-- app/(main)/services/page.tsx | 368b | sha1:e93753e1a9cf208d15bbf12b80cfd994bd53750e
-- app/(main)/services/ServicesPageClient.tsx | 677b | sha1:0cc47835d114b62a0bc2ff2d52951e80d3176395
-- app/(main)/page.tsx | 4887b | sha1:79b2f3bc23219f1bfe6ac23b77be9e2837c1d209
-- app/(main)/layout.tsx | 1632b | sha1:865cd7f1377159df46b15410df81961b94ecbbf6
-- app/sitemap.ts | 2504b | sha1:61d3ddb3b3490292061f549c3df18fd2b7ab2cb1
+- app/(main)/about/page.tsx | 8866b | sha1:4c059128edbf1dcce64ad3d4f3525cf2e4f003f8
+- app/(main)/blog/[slug]/page.tsx | 8193b | sha1:dff734861744fae9e02df43977e9f0b4a29579f8
+- app/(main)/blog/page.tsx | 7018b | sha1:cfc0c642a8244b7f2c83825c5981776f2fdf1e25
+- app/(main)/blog/loading.tsx | 4161b | sha1:30e18187622b23da3ae37d5debb335058fb47dc5
+- app/(main)/catalog/page.tsx | 6166b | sha1:09cac5d593c921303295819a419949364f52ae9b
+- app/(main)/contact/page.tsx | 11942b | sha1:dd02a659f6721ec6cf4b2f3d9a727a7d246af08a
+- app/(main)/contact/\_components/ContactMap.tsx | 7467b | sha1:df7df844fbac3d7baf4bbe34a636d12be5ece81e
+- app/(main)/services/page.tsx | 9500b | sha1:3044df1f4947363baaf90a23a9d21588f0b242a5
+- app/(main)/page.tsx | 9340b | sha1:48ab222760cc004714b7d752e2f9f4ace6ea1773
+- app/(main)/layout.tsx | 3305b | sha1:6135a4012e275625fa7c0a2ceecbf97ad861f554
+- app/sitemap.ts | 1970b | sha1:0116a7b04a8882dc3c1036a4965535d615fec136
 - app/robots.txt | 70b | sha1:98896dad3ec15b2ca1b7fe72e65bae71d23c7475
 - app/favicon.ico | 194522b | sha1:6e91e3cfc9327f26b55a992b403b6560ddbd353c
 
 ### components
 
 components
-├── About.tsx
 ├── BlogSection.tsx
 ├── CTA.tsx
 ├── ContactForm.tsx
@@ -112,6 +140,7 @@ components
 ├── Footer.tsx
 ├── Header.tsx
 ├── Hero.tsx
+├── PricingSection.tsx
 ├── Services.tsx
 ├── SocialProof.tsx
 ├── catalog
@@ -142,37 +171,37 @@ components
 
 #### Metadata (file | size | sha1)
 
-- components/Header.tsx | 3133b | sha1:cf9748de5592a748dd683706dd53021d2372c84a
-- components/Footer.tsx | 6516b | sha1:9fdc2403f1e81ed48c8f452f2205252ff5cf3f4d
-- components/catalog/CatalogProjectCard.tsx | 3610b | sha1:07786eca9e4b54124dba36c1b141a3ba1cc49684
-- components/catalog/CatalogProjectsGrid.tsx | 2777b | sha1:97f541955ab72c2e78334b5656559682dc58ceee
-- components/Services.tsx | 7786b | sha1:ca10e03dfb9d53c6f684a152ec93b493d57c4966
-- components/Hero.tsx | 7737b | sha1:7e3f75e584054c0c4e70cede67dc4f2920e6639d
-- components/About.tsx | 9060b | sha1:0a48e77511e385f5785f819e1fdfccb17da24620
-- components/shared/JsonLd.tsx | 2530b | sha1:d273f88bc443ae4f3ac87259ca136fe7536ed1a2
-- components/ui/button.tsx | 1906b | sha1:f184334b52aa6dce5431d21ed02974120af19625
-- components/ui/card.tsx | 1828b | sha1:c90a853903b78e8954330602b9d97f6f156eda85
+- components/Header.tsx | 6146b | sha1:c2c8977f9214f733773afa84717704c9d9226515
+- components/Footer.tsx | 8920b | sha1:7fb4abb221df0a4518709119f04e7c1b05d53a8b
+- components/catalog/CatalogProjectCard.tsx | 5155b | sha1:dc7e5a32a73b58d57b50c6c3404e1046697e35c5
+- components/catalog/CatalogProjectsGrid.tsx | 4503b | sha1:cf669d1b212e90cfb5d6ce09298561d4a17c0ea0
+- components/Services.tsx | 8405b | sha1:500dd5651f7b71a36d2da25134fb6e8fd91154d3
+- components/Hero.tsx | 8026b | sha1:b5fb49db7d39f2f1e2854ffd043f9a6c8ac0bb01
+- components/shared/JsonLd.tsx | 767b | sha1:3452647409918e00538559e10276662001c441f6
+- components/ui/button.tsx | 2702b | sha1:85a9b20001d58465f4027ebcbb389a60644f70a8
+- components/ui/card.tsx | 1828b | sha1:e684fece98288a2c3c177fd5df9a92748a38c3ca
 - components/ui/badge.tsx | 1144b | sha1:4255f9fbc9862219d16be2ac566b2f65af92294e
 - components/ui/label.tsx | 724b | sha1:c40f1bfdae352eab497210cedf32d113c0855143
-- components/ui/empty.tsx | 2396b | sha1:a0f1e982e1386df6dc720985e7c958fe14fad552
-- components/ui/avatar.tsx | 1419b | sha1:50ceaf0561e1d9967175b0c3ae0f2101b0e578fc
-- components/ui/accordion.tsx | 2087b | sha1:c166c068cac9c471a9b6539ac3b60df1615edb58
-- components/ui/tabs.tsx | 2384b | sha1:25d7ebd5b25354dc6a472dd1bab904f6137a0ffb
-- components/ui/input.tsx | 768b | sha1:6fcb78d951139d4923eae26c6ae452c51b07ef7a
-- components/ui/modal.tsx | 3989b | sha1:403602299dabd22184c474d81549011512c6880b
-- components/ui/toast.tsx | 4832b | sha1:2123060c51054ade60c2bb42175b4473509ad718
-- components/ui/dialog.tsx | 4196b | sha1:7b5096e886c5f0fdf2fc44a9406bd802cddd385a
-- components/ui/select.tsx | 5745b | sha1:42f83400bb6efda7b2513e837933f72eb97c5da0
-- components/ui/textarea.tsx | 649b | sha1:0f6ede6e3460545d0f5cdf7a3d0c5f7d465f28fd
+- components/ui/empty.tsx | 2396b | sha1:21edbf649d861f24cb259552918cd2f1c22e48fb
+- components/ui/avatar.tsx | 1419b | sha1:12b874ba34f8cb795f7ee75b4bf79c47a57a7a63
+- components/ui/accordion.tsx | 2087b | sha1:2442d2db0343ff2a16fd8843de59c5afdae230cb
+- components/ui/tabs.tsx | 2384b | sha1:df5fc8c82e2c100a79f4b90f7509fdcbd25fe56b
+- components/ui/input.tsx | 768b | sha1:445b6918b9fecce250f61b404c9871fe15d81a6a
+- components/ui/modal.tsx | 3989b | sha1:981f21648df23793b3655c24769020baf04161eb
+- components/ui/toast.tsx | 4832b | sha1:78583eb0ce3b321f0895298ba30978e83edeec98
+- components/ui/dialog.tsx | 4196b | sha1:471fc1850d8d97d43ed8ecea8b81874fc13dfaae
+- components/ui/select.tsx | 5745b | sha1:6deb3bf13be67e85fc6f04e9edf8ad9a1de9d3d2
+- components/ui/textarea.tsx | 649b | sha1:955ab0ff3e147bcb3632c224dd22b64c8e7ac4f2
 - components/ui/toaster.tsx | 786b | sha1:fdc46a5e17cdbe9102e35848126f606e6ff6bc91
-- components/ui/form.tsx | 4191b | sha1:502ddef697454276ea2d9b40eda859c7ed1c5c99
+- components/ui/form.tsx | 4191b | sha1:eb8cacdf9f93a7921d1b6f4631245ff54ee158fd
 - components/iconMap.ts | 320b | sha1:cf1db53e9073c95efeca033ed6e29dfe50d40673
-- components/ContactInfo.tsx | 6820b | sha1:08e590ece5a50d36e44113575b02387cfa2cbff9
-- components/ContactForm.tsx | 8746b | sha1:27ba2fd67b390388b508f97fa1be73757e38adec
-- components/CTA.tsx | 7203b | sha1:f923a23ff6110ea92f252c5a36ce3e49131791be
-- components/SocialProof.tsx | 4408b | sha1:b4e340c3db9e29a78d55c0833d766c0869ee6d4a
-- components/FAQSection.tsx | 8611b | sha1:20cd830ceee2bdee37d6ec71a08a53ed39190ba7
-- components/BlogSection.tsx | 3169b | sha1:632173732a9d31b310c640ff98213ff033458249
+- components/ContactInfo.tsx | 7635b | sha1:f727b079845708f8d4990292003af5d4d4a7849e
+- components/ContactForm.tsx | 9819b | sha1:1478bbfd43bd05975b1b5a1c87b408fb2d63576d
+- components/CTA.tsx | 7740b | sha1:d056c663500715f4232531404837c9f58496702b
+- components/PricingSection.tsx | 7609b | sha1:cedde27799a70fbb8d8562c7a6c46b0f06589a1c
+- components/SocialProof.tsx | 6452b | sha1:18585eb78c78aeedfb61b40bb6643503a36deff2
+- components/FAQSection.tsx | 8376b | sha1:31443293211dd5727084acd0760c4c4952616f06
+- components/BlogSection.tsx | 4382b | sha1:4d770163bfe5181e58e3e2aefbd4e2a8d52c09f0
 
 ### lib
 
@@ -186,7 +215,7 @@ lib
 
 #### Metadata (file | size | sha1)
 
-- lib/utils.ts | 166b | sha1:03edf7b44c7cf1d3f48be4f72866007dbb63b8c6
+- lib/utils.ts | 281b | sha1:641fa21978a85219059d527f9bc2280b7a0ca531
 - lib/api.ts | 457b | sha1:ba386cfe8e8843a602c0b958d77f5c15d387b141
 - lib/helpers.ts | 3381b | sha1:3b509d447b9e785c50b4cb34ba51dfd046cc4309
 - lib/supabase.ts | 987b | sha1:714a4067d19c464152a877de911c306450c31ac8
@@ -194,41 +223,63 @@ lib
 ### public
 
 public
+├── apple-touch-icon.png
 ├── grid.svg
 ├── images
+│   ├── badge.svg
+│   ├── feature.svg
+│   ├── hero.svg
+│   ├── line-qr.png
+│   ├── performance.svg
 │   ├── portfolio
 │   │   ├── corporate-1.webp
 │   │   ├── default-avatar.webp
 │   │   ├── restaurant-1.webp
 │   │   └── sme-1.webp
-│   └── profile
-│   └── default-avatar.webp
+│   ├── profile
+│   │   └── default-avatar.webp
+│   └── svg
+│   ├── guarantee-badge.svg
+│   ├── mobile.svg
+│   ├── performance.svg
+│   └── speed.svg
 └── og-image.png
 
-4 directories, 7 files
+5 directories, 17 files
 
 #### Metadata (file | size | sha1)
 
+- public/images/badge.svg | 268b | sha1:a9e5622c6b62a32f167a217ee1f83562fcb19b30
+- public/images/feature.svg | 262b | sha1:d70720661f9d8fdf8dc4d98caa66c9134b5261de
+- public/images/svg/guarantee-badge.svg | 296b | sha1:65e9dce2b6adea290cebbaa54984c220818e7654
+- public/images/svg/speed.svg | 340b | sha1:12e081a97a5203b9911896b3f950d7ee5899d10f
+- public/images/svg/mobile.svg | 280b | sha1:74982c85c6b91fc7a81a0b5a5adb988f45deedae
+- public/images/svg/performance.svg | 592b | sha1:33f4faf55a6f1cee5cd1253f8e9c58b6a5143aea
 - public/images/profile/default-avatar.webp | 4351b | sha1:f3f3438414e699035d448859a6d6b1ae0b9750ae
 - public/images/portfolio/restaurant-1.webp | 22797b | sha1:0c491e38af3e3f47260ae7973e1610e6880bfba0
 - public/images/portfolio/sme-1.webp | 27619b | sha1:48b1014ff6b99454b6ac68372ecaf0b04154fdcd
 - public/images/portfolio/default-avatar.webp | 5586b | sha1:97038bafeb268c23a6ec0e9695a9eea18a457731
 - public/images/portfolio/corporate-1.webp | 44174b | sha1:9b0f4099faf3cb115d393a8b9c8c2f63f81efa06
+- public/images/hero.svg | 380b | sha1:b8272591dbda15ef657c67a221609610190a6854
+- public/images/performance.svg | 360b | sha1:a59e672a3d175a70b48c96345bc6c8bd3455fd04
+- public/images/line-qr.png | 30399b | sha1:0401f40265b1bbfbd7e97679c518691d768bd224
 - public/og-image.png | 132909b | sha1:7102561a00e219c617ff0ddd2fd0c094ffd49782
 - public/grid.svg | 185b | sha1:71a836ea40052f09230c3f3cef63c47e4703f0b1
+- public/apple-touch-icon.png | 194522b | sha1:6e91e3cfc9327f26b55a992b403b6560ddbd353c
 
 ### scripts
 
 scripts
+└── dev
 ├── project-summary.sh
 └── tree-projects.sh
 
-1 directory, 2 files
+2 directories, 2 files
 
 #### Metadata (file | size | sha1)
 
-- scripts/project-summary.sh | 7551b | sha1:56b30ca598ca62a3983fda302a6e2ffed9864927
-- scripts/tree-projects.sh | 862b | sha1:6de4d4cefa660072eaf34961340437a16836bbca
+- scripts/dev/project-summary.sh | 7551b | sha1:56b30ca598ca62a3983fda302a6e2ffed9864927
+- scripts/dev/tree-projects.sh | 862b | sha1:6de4d4cefa660072eaf34961340437a16836bbca
 
 ### data
 
@@ -248,15 +299,15 @@ data
 
 #### Metadata (file | size | sha1)
 
-- data/servicesData.ts | 5567b | sha1:cef0e57d4f1119a77cc0bd4c51c07c9321f6a0ab
+- data/servicesData.ts | 7401b | sha1:742fe767bb35b0aa0aae4f1f7d648a832f823756
 - data/types.ts | 2191b | sha1:022669eecbec9d7d3130188713007d53a0990e9c
 - data/reviews.ts | 4093b | sha1:ac2064dcad2796c1ea3eb43b14e846bf2ea5ff76
-- data/blog/post1.ts | 1085b | sha1:f1adee5e7de54babaf647be6923e89f2210fce8c
-- data/blog/post2.ts | 1038b | sha1:702800536c5a549bb11356283395d8783697f54f
-- data/blog/post3.ts | 956b | sha1:745f41d4f8307078eb09d84eb43cf13b6fdd7bc9
-- data/blog/post4.ts | 1103b | sha1:caa429d27dd75caaf6fb1bf3eb5c82fd3b0aabc7
+- data/blog/post1.ts | 2745b | sha1:7901975e147719156fa9a06caa39f230a3e2ce8a
+- data/blog/post2.ts | 3937b | sha1:115e9eed10aeef30d9413e0d670f67a2d0015e54
+- data/blog/post3.ts | 4171b | sha1:cc93810075646594519d3ee96e2ccfae953ad9a9
+- data/blog/post4.ts | 4539b | sha1:9a9f2c5cd0d40ae9fb612603a4a876c3c5b0efd4
 - data/blog/allposts.ts | 700b | sha1:d570729c0b799c8c30b589da625fb12e445769f8
-- data/catalog.projects.ts | 4877b | sha1:2391c71625b22f07c3ab834f11274d34ed5d6804
+- data/catalog.projects.ts | 7122b | sha1:38f8580a7dcf7b0120b12a265446fce164e230fb
 
 ### hooks
 
@@ -267,7 +318,7 @@ hooks
 
 #### Metadata (file | size | sha1)
 
-- hooks/use-toast.ts | 3943b | sha1:6eac08b90d28dd8ccf6bc813c4bd6df0c2f34a9f
+- hooks/use-toast.ts | 4403b | sha1:698e618d13b107e52b459aaaf0690108ef2aceeb
 
 ### config
 
@@ -278,7 +329,7 @@ config
 
 #### Metadata (file | size | sha1)
 
-- config/siteConfig.ts | 5711b | sha1:ba95d92240f03b298bb1d93925824018ea59f72c
+- config/siteConfig.ts | 6363b | sha1:c8c7967a46658cde2768a292fe01d702e194c9ae
 
 ### types
 
@@ -292,8 +343,8 @@ types
 
 #### Metadata (file | size | sha1)
 
-- types/blog.ts | 304b | sha1:710f2c3bad973f8463358f521719f4a0450fcad4
-- types/services.ts | 1662b | sha1:27a3a67f67fc94ca53c55aa407249b178b2eedcd
+- types/blog.ts | 1715b | sha1:11b848e846b07cfc350e48826d300f184992d2da
+- types/services.ts | 1726b | sha1:2bba7371df6009fecbe9a5b3978b0c933d175386
 - types/review.ts | 260b | sha1:58d2f8960e8689ba0e268f28a1ef26363885f933
 - types/index.ts | 547b | sha1:4a8e38fde7c270d7f6912648361e04deac36baa8
 
@@ -385,84 +436,84 @@ export default [
 ```ts
 /** @format */
 import type { Config } from "tailwindcss"
-import animatePlugin from "tailwindcss-animate"
 
 const config: Config = {
-  darkMode: ["class"],
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./data/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
   ],
-
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: "1.5rem",
-        sm: "2rem",
-        lg: "4rem",
-      },
-      screens: {
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
-        "2xl": "1440px",
-      },
-    },
-
     extend: {
+      // 🎨 Color Tokens: นิยามสีหลักสไตล์ AEM Architecture
       colors: {
         brand: {
-          blue: "#2563EB",
-          navy: "#0F172A",
-          green: "#22C55E",
-          slate: "#64748B",
-          emerald: "#065F46",
-          gold: "#C5A059",
-          orange: "#F97316",
+          navy: "#0F172A", // Deep Navy (Base)
+          blue: "#1E3A8A", // Brand Blue (Signature)
+          orange: "#F97316", // Vibrant Orange (Call to Action)
+          slate: "#64748B", // Technical Slate
+          gold: "#D4AF37", // Premium Accent
         },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+        neutral: {
+          50: "#F9FAFB",
+          100: "#F3F4F6",
+          200: "#E5E7EB",
+          300: "#D1D5DB",
+          400: "#9CA3AF",
+          500: "#6B7280",
+          600: "#4B5563",
+          700: "#374151",
+          800: "#1F2937",
+          900: "#111827",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        background: "#FFFFFF",
+        surface: "#F9FAFB",
+        border: "#E5E7EB",
+        success: "#22C55E",
+        warning: "#FACC15",
+        error: "#EF4444",
+        accent: "#F97316",
       },
 
+      // 🔤 Typography Tokens: กำหนดฟอนต์ที่ใช้ในโปรเจกต์
       fontFamily: {
-        prompt: ["var(--font-prompt)", "sans-serif"],
-        sans: ["var(--font-prompt)", "var(--font-inter)", "sans-serif"],
-        heading: ["var(--font-prompt)", "var(--font-inter)", "sans-serif"],
+        sans: ["var(--font-prompt)", "sans-serif"],
+        heading: ["var(--font-kanit)", "sans-serif"],
+        mono: ["var(--font-jetbrains)", "monospace"],
+      },
+      fontSize: {
+        "display-xl": ["3rem", { lineHeight: "1" }],
+        "display-lg": ["2.25rem", { lineHeight: "1.1" }],
+        "display-md": ["1.75rem", { lineHeight: "1.2" }],
+        h1: ["2rem", { lineHeight: "1.3" }],
+        h2: ["1.5rem", { lineHeight: "1.4" }],
+        h3: ["1.25rem", { lineHeight: "1.4" }],
+        body: ["1rem", { lineHeight: "1.6" }],
+        small: ["0.875rem", { lineHeight: "1.4" }],
+        tiny: ["0.75rem", { lineHeight: "1.3" }],
+      },
+
+      // 📐 Spacing Tokens: ระยะห่างมาตรฐานระบบ Grid
+      spacing: {
+        xs: "0.5rem",
+        sm: "1rem",
+        md: "1.5rem",
+        lg: "2rem",
+        xl: "3rem",
+        "2xl": "4rem",
+        "3xl": "6rem",
+      },
+
+      // 🟦 Radius Tokens: ความมนของขอบ (Card & Button เป็น 0 ตามสไตล์ Brutalist)
+      borderRadius: {
+        none: "0",
+        sm: "0.125rem",
+        md: "0.25rem",
+        lg: "0.5rem",
+        xl: "1rem",
+        full: "9999px",
+        card: "0",
 ```
 
 ### `tsconfig.json`
@@ -494,6 +545,7 @@ const config: Config = {
       "@/app/*": ["app/*"],
       "@/types/*": ["types/*"],
       "@/lib/*": ["lib/*"],
+      "@/content/*": ["content/*"],
       "@/*": ["*"]
     }
   },
@@ -502,7 +554,8 @@ const config: Config = {
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "config/**/*.ts"
+    "config/**/*.ts",
+    "content/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }
@@ -518,19 +571,16 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
-    // ✅ ตั้งค่าความปลอดภัยสำหรับไฟล์ SVG
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
-    // ✅ กำหนด Format ที่ทันสมัยเพื่อลดขนาดไฟล์ภาพ
     formats: ["image/avif", "image/webp"],
 
-    // ✅ ลงทะเบียน Remote Hostnames
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ui-avatars.com", // 🔴 แก้ไข Error จากการโหลดรูป Avatar
+        hostname: "ui-avatars.com",
         pathname: "/api/**",
       },
       {
@@ -553,10 +603,14 @@ const nextConfig: NextConfig = {
         hostname: "www.aemdevweb.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos", // ✅ เพิ่มบรรทัดนี้
+        pathname: "/**",
+      },
     ],
   },
 
-  // ✅ Performance Tuning
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
@@ -571,79 +625,85 @@ export default nextConfig
 
 ```ts
 /** @format */
-
-import React from "react"
 import type { Metadata, Viewport } from "next"
-import { Kanit } from "next/font/google"
+import { Kanit, Prompt, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
+import { siteConfig } from "@/config/siteConfig"
+import { Toaster } from "@/components/ui/toaster"
+import { cn } from "@/lib/utils"
 
-// 🔹 ใช้ฟอนต์ Kanit พร้อมตั้งค่า display: 'swap' เพื่อลดปัญหา Layout Shift (CLS)
+// 🔤 1. Font Configurations
+// Kanit: ใช้สำหรับ Headings (สไตล์ Brutalist ที่เน้นความหนาและทรงพลัง)
 const kanit = Kanit({
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "700", "900"],
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-kanit",
-  display: "swap", // 👈 ช่วยให้แสดงตัวอักษรทันทีด้วยฟอนต์สำรองก่อน Kanit จะโหลดเสร็จ
+  display: "swap",
 })
 
-/**
- * 🛠️ การตั้งค่า Metadata
- */
-export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NODE_ENV === "production"
-      ? "https://www.aemdevweb.com"
-      : "http://localhost:3000"
-  ),
-  title: {
-    default: "AEMDEVWEB | Industrial Web Architecture",
-    template: "%s | AEMDEVWEB",
-  },
-  description:
-    "บริการพัฒนาเว็บไซต์ระดับ Enterprise และวางโครงสร้าง Digital Architecture ที่แข็งแกร่ง",
-  keywords: ["Web Development", "Next.js", "Industrial Design", "AEMDEVWEB"],
-  authors: [{ name: "AEMDEVWEB" }],
-  openGraph: {
-    title: "AEMDEVWEB | Industrial Web Architecture",
-    description:
-      "Enterprise-level web development and digital architecture solutions.",
-    url: "https://www.aemdevweb.com",
-    siteName: "AEMDEVWEB",
-    locale: "th_TH",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "AEMDEVWEB",
-    description: "Industrial Web Architecture & Development",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png", // 👈 แนะนำให้เพิ่มสำหรับ iOS
-  },
-}
+// Prompt: ใช้สำหรับ Body Text (เน้นการอ่านง่าย สบายตา)
+const prompt = Prompt({
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-prompt",
+  display: "swap",
+})
 
+// JetBrains Mono: ใช้สำหรับตัวเลขหรือโค้ด (เน้นความรู้สึก Technical/Engineering)
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+})
+
+// 📱 2. Viewport Settings
 export const viewport: Viewport = {
+  themeColor: "#1E3A8A",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // 👈 ปรับเป็น 5 เพื่อ Accessibility (ให้คนสายตาไม่ดีซูมดูได้)
-  themeColor: "#0f172a",
+  maximumScale: 5, // อนุญาตให้ User Zoom ได้เพื่อ Accessibility
 }
 
-interface RootLayoutProps {
-  children: React.ReactNode
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  return (
-    <html lang="th" suppressHydrationWarning className={kanit.variable}>
-      <body
-        className={`min-h-screen font-sans antialiased selection:bg-blue-600 selection:text-white`}
-      >
-        {children}
-      </body>
-    </html>
-  )
-}
+// 🔍 3. SEO Metadata
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: [
+    "รับทำเว็บไซต์",
+    "SME",
+    "Landing Page",
+    "Next.js",
+    "React",
+    "AEMDEVWEB",
+    "ทำเว็บติดหน้าแรก",
+    "สถาปัตยกรรมดิจิทัล",
+  ],
+  authors: [{ name: "AEMDEVWEB Team", url: siteConfig.url }],
+  creator: "AEMDEVWEB",
+  publisher: "AEMDEVWEB",
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "th_TH",
+    url: siteConfig.url,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
 ```
 
 ### `app/(marketing)/[template_id]/_templates/cafe/CafeTemplate.tsx`
@@ -655,80 +715,67 @@ export default function RootLayout({ children }: RootLayoutProps) {
 import React from "react"
 import Image from "next/image"
 import styles from "./CafeStyle.module.css"
-import { cn } from "@/lib/utils"
 
-interface CafeProps {
-  data: any
-}
-
-export default function CafeTemplate({ data }: CafeProps) {
-  // 🛡️ ป้องกันกรณีข้อมูลไม่ถูกส่งมา
-  const { content } = data || {}
-
-  if (!content) return null
+export default function CafeTemplate({ data }: { data: any }) {
+  // ดึง content ออกมา ถ้าไม่มี data ให้ใช้ object ว่างป้องกันหน้าขาว
+  const content = data?.content || {}
 
   return (
     <div className={styles.wrapper}>
-      {/* 🟢 Hero Section: Starbucks Vibe */}
+      {/* HERO_SECTION */}
       <section className={styles.hero}>
         <div className={styles.heroText}>
-          <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
-          <p className="max-w-md text-xl font-bold italic opacity-80">
-            {content.heroSubtitle}
-          </p>
-          <button className="mt-8 bg-white px-10 py-4 text-xl font-black uppercase italic text-[#1e3932] shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-            {"Order_Now"}
-          </button>
+          <h1 className={styles.heroTitle}>
+            {content.heroTitle || "CAFE_COLLECTION"}
+          </h1>
+          <p className={styles.heroSubtitle}>{content.heroSubtitle}</p>
+          <button className={styles.ctaButton}>ORDER_NOW</button>
         </div>
-
         <div className={styles.heroImage}>
-          <div className={styles.circleBadge}></div>
-        </div>
-
-        {/* Decor: Background Typography */}
-        <div className="pointer-events-none absolute right-0 top-0 select-none text-[20vw] font-black opacity-10">
-          {"COFFEE"}
+          <div className={styles.circleBadge}>EST.2025</div>
         </div>
       </section>
 
-      {/* 📦 Feature Grid: Modern Industrial Layout */}
+      {/* FEATURE_GRID */}
       <section className={styles.featureGrid}>
         {content.features?.map((item: any) => (
           <div key={item.id} className={styles.featureCard}>
-            <span className={styles.featureLabel}>LOG_{item.id}</span>
+            <span className={styles.featureLabel}>LOG_0{item.id}</span>
             <h3 className={styles.featureTitle}>{item.label}</h3>
-            <p className="font-bold italic text-slate-500">{item.detail}</p>
+            <p className={styles.featureDetail}>{item.detail}</p>
           </div>
         ))}
       </section>
 
-      {/* 🥤 Signature Section */}
-      <section className="flex flex-col items-center gap-16 bg-white px-8 py-24 md:flex-row">
-        <div className="bg-[#d4e9e2] p-4 shadow-[12px_12px_0px_0px_rgba(30,57,50,1)] md:w-1/2">
-          <Image
-            src="/images/cafe/signature-brew.webp"
-            alt="Coffee"
-            width={800}
-            height={600}
-            className="h-auto w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
-            priority // เพิ่ม priority สำหรับภาพที่อยู่ส่วนบนของหน้า
-          />
-        </div>
-        <div className="md:w-1/2">
-          <h2 className="mb-6 text-4xl font-black uppercase italic underline decoration-[#1e3932] decoration-8">
-            {"Crafted_By_Hand"}
-          </h2>
-          <p className="mb-8 text-lg font-bold italic leading-relaxed">
-            {
-              "เราพิถีพิถันในทุกกระบวนการ ตั้งแต่การคัดเมล็ด การคั่ว จนถึงการสกัดน้ำกาแฟ เพื่อให้มั่นใจว่าทุกแก้วที่ส่งถึงมือคุณคือความสมบูรณ์แบบ"
-            }
-          </p>
-          <div className="border-l-8 border-[#1e3932] bg-slate-50 p-4 font-mono text-sm italic">
-            {'"Better Code, Better Coffee." - Aemdevweb'}
-          </div>
+      {/* MENU_SECTION */}
+      <section className={styles.menuSection}>
+        <h2 className={styles.sectionTitle}>MENU_MATRIX</h2>
+        <div className={styles.menuGrid}>
+          {content.menuItems?.map((item: any) => (
+            <div key={item.id} className={styles.menuItem}>
+              <div className={styles.imageBox}>
+                <Image
+                  src={item.img}
+                  alt={item.name}
+                  fill
+                  unoptimized
+                  className={styles.img}
+                />
+              </div>
+              <div className={styles.menuText}>
+                <div className={styles.menuHeader}>
+                  <span className={styles.itemName}>{item.name}</span>
+                  <span className={styles.itemPrice}>{item.price}</span>
+                </div>
+                <p className={styles.itemDesc}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
-
+    </div>
+  )
+}
 ```
 
 ### `app/(marketing)/[template_id]/_templates/cafe/config.ts`
@@ -736,71 +783,930 @@ export default function CafeTemplate({ data }: CafeProps) {
 ```ts
 /** @format */
 // ----------------------------------------------------
-// 🛠️ AI CONTEXT GUIDELINE:
-// 1. IDENTITY: นี่คือ "แบรนด์จำลอง" สำหรับธุรกิจประเภท Cafe
-// 2. PRIMARY BRAND: AEMDEVWEB (Developer) - ห้ามนำชื่อนี้ไปใส่ในเมนูหรือบริการลูกค้า
-// 3. MOCK DATA: ต้องสมจริง (Realistic) เพื่อให้ลูกค้าเห็นภาพธุรกิจของตนเอง
+// 🏗️ CAFE CONFIGURATION (NAMED EXPORT)
+// Path: app/(marketing)/[template_id]/_templates/cafe/config.ts
+// Fix: Added explicit named export to resolve import errors
 // ----------------------------------------------------
 
 export const cafeConfig = {
-  id: "template-cafe-industrial", // ระบุว่าเป็น Template
-  name: "THE SOURCE ROASTERS", // 👈 เปลี่ยนเป็นชื่อแบรนด์สมมติที่ดูแพงและสมจริง
-  themeColor: "#1e3932",
-  secondaryColor: "#d4e9e2",
+  id: "template-cafe-industrial",
+  name: "THE SOURCE ROASTERS",
+  themeColor: "#1e3932", // Deep Forest Green
+  secondaryColor: "#d4e9e2", // Mint Cream
+
   metadata: {
-    // 🛡️ แยกชื่อแบรนด์เว็บเรา (AEMDEVWEB) ไว้เฉพาะในส่วน SEO Title เพื่อระบุผู้สร้าง
     title: "The Source Roasters | Premium Cafe Template by AEMDEVWEB",
     description:
-      "ยกระดับร้านกาแฟของคุณด้วยระบบ Digital Menu สไตล์ Industrial Modern",
-    ogImage: "/images/projects/smj-cafe.jpg",
+      "ยกระดับร้านกาแฟของคุณด้วยระบบเว็บไซต์ Digital Menu สไตล์ Industrial Modern โหลดไว พร้อมระบบสะสมแต้ม",
+    ogImage:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/og-image.jpg",
   },
+
   content: {
-    // ☕ เปลี่ยนเนื้อหาให้โฟกัสที่ "ธุรกิจกาแฟ" 100% (เพื่อความสมจริงในการปิดการขาย)
+    // --- Hero Section ---
     heroTitle: "CRAFTED_FOR_PERFECTION",
-    heroSubtitle: "ประสบการณ์กาแฟระดับ Specialty ในบรรยากาศ Industrial Modern",
+    heroSubtitle:
+      "ประสบการณ์กาแฟระดับ Specialty ในบรรยากาศ Industrial Modern ที่ออกแบบมาเพื่อคุณ",
+
+    // --- Value Propositions ---
     features: [
       {
         id: 1,
-        label: "DIRECT_TRADE",
-        detail: "สนับสนุนเกษตรกรด้วยเมล็ดกาแฟ Direct Trade คัดพิเศษ",
+        label: "DIRECT_TRADE_BEANS",
+        detail: "เมล็ดกาแฟคัดพิเศษส่งตรงจากเกษตรกรไทยและแหล่งปลูกระดับโลก",
       },
       {
         id: 2,
-        label: "ROASTERY_LAB",
-        detail: "คั่วสดใหม่ทุกวันด้วยเทคโนโลยีการคุมอุณหภูมิขั้นสูง",
+        label: "ARTISAN_ROASTERY",
+        detail:
+          "คั่วสดใหม่ในโรงคั่วของเราเอง ควบคุมโปรไฟล์รสชาติด้วยระบบดิจิทัล",
       },
       {
         id: 3,
-        label: "WORKSPACE_READY",
-        detail: "พื้นที่ทำงานที่ออกแบบมาเพื่อสมาธิและความสร้างสรรค์",
+        label: "CO-CREATIVE_SPACE",
+        detail:
+          "พื้นที่กว้างขวาง ปลั๊กไฟครบครัน รองรับทั้งการพักผ่อนและการทำงาน",
       },
     ],
+
+    // --- Digital Menu Mockup ---
     menuItems: [
       {
         id: "1",
-        name: "SIGNATURE_ESPRESSO", // 👈 เปลี่ยนจาก ESPRESSO_CORE เพื่อความสมจริง
-        price: "120.00 THB",
-        img: "/images/cafe/espresso.webp",
-        desc: "กาแฟคั่วเข้ม Body หนักแน่น พร้อม Notes ของ Dark Chocolate",
+        name: "SIGNATURE_ESPRESSO",
+        price: "120",
+        currency: "THB",
+        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/espresso.webp",
+        desc: "กาแฟคั่วเข้ม Body หนักแน่น พร้อม Notes ของ Dark Chocolate และ Caramelized",
       },
       {
         id: "2",
-        name: "VELVET_LATTE",
-        price: "145.00 THB",
-        img: "/images/cafe/latte.webp",
-        desc: "สัมผัสนุ่มละมุนจากนมคุณภาพเยี่ยมและกาแฟคั่วกลาง",
+        name: "DIRTY_SOUL",
+        price: "155",
+        currency: "THB",
+        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/dirty.webp",
+        desc: "กาแฟสกัดเข้มข้น On-top บนนมเย็นจัดสูตรลับเฉพาะ ให้สัมผัสแยกชั้นที่กลมกล่อม",
       },
-      // ... ตัวอย่างเมนูอื่นๆ
+      {
+        id: "3",
+        name: "VELVET_LATTE",
+        price: "145",
+        currency: "THB",
+        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/latte.webp",
+        desc: "สัมผัสนุ่มละมุนดุจผ้ากำมะหยี่ จากนมคุณภาพเยี่ยมและกาแฟคั่วกลาง (Medium Roast)",
+      },
     ],
-    // 🛡️ ส่วนนี้คือจุดแข็ง (Selling Point) ที่ลูกค้าจะซื้อเว็บคุณ
+
+    // --- Services & CRM (Upsell Features) ---
     memberBenefits: [
-      "ระบบสะสมแต้มผ่านเบอร์โทรศัพท์",
-      "รับสิทธิ์ซื้อ 1 แถม 1 ในวันเกิด",
-      "จองโต๊ะผ่านระบบออนไลน์ล่วงหน้า",
-      "รับข่าวสารเมนูใหม่ผ่าน Line OA อัตโนมัติ",
+      "ระบบสมาชิกดิจิทัล สะสมแต้มง่ายๆ ผ่านเบอร์โทรศัพท์",
+      "สิทธิพิเศษวันเกิด รับส่วนลดพิเศษอัตโนมัติ",
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/WoodBusinessTemplate.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS TEMPLATE (SUKHOTHAI EDITION)
+// Identity: โรงไม้แปรรูป & วัสดุก่อสร้าง (โครงสร้างระดับโปร)
+// Function: จัดการเลย์เอาต์หลักและดึงข้อมูลจาก Config มาแสดงผล
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import styles from "./WoodStyle.module.css"
+
+// นำเข้า Components จากโฟลเดอร์ภายใน (Refactored Names)
+import Header from "./components/Header"
+import HeroSection from "./components/HeroSection"
+import FeaturesSection from "./components/FeaturesSection"
+import PerformanceSection from "./components/PerformanceSection"
+import CartSection from "./components/CartSection"
+import FAQSection from "./components/FAQSection"
+import SuccessSection from "./components/SuccessSection"
+import Footer from "./components/Footer"
+
+interface WoodBusinessTemplateProps {
+  data: any // รับข้อมูลจาก config.ts
+}
+
+export default function WoodBusinessTemplate({
+  data,
+}: WoodBusinessTemplateProps) {
+  // Safe Destructuring: ป้องกัน Error หากข้อมูลบางส่วนหายไป
+  // โดยดึงข้อมูลจาก config.ts ที่เราตั้งค่าไว้สำหรับ "สุโขทัยค้าไม้"
+  const {
+    content = {},
+    themeColor = "#7B3F00", // Default: สีน้ำตาลไม้
+    contact = {},
+    pricing = { starter: { price: "สอบถามราคา" } },
+    products = [],
+  } = data
+
+  return (
+    <div className={styles.container}>
+      {/* 1. ส่วนหัวเว็บไซต์: เน้นชื่อร้านและเบอร์โทรติดต่อคนสุโขทัย */}
+      <Header themeColor={themeColor} contact={contact} />
+
+      <main className="relative">
+        {/* 2. ส่วนต้อนรับ (HERO): แสดงพาดหัว "ไม้ดีเมืองเก่า" และรูปโรงไม้ */}
+        <HeroSection
+          title={content.heroTitle}
+          subtitle={content.heroSubtitle}
+          themeColor={themeColor}
+          price={pricing.starter?.price}
+          // สามารถเพิ่มรูปภาพจาก products[0].image มาแสดงเป็นพื้นหลังได้
+          image={products[0]?.image}
+        />
+
+        {/* 3. จุดเด่นของโรงไม้ (FEATURES): ส่งไวทั่วสุโขทัย / คัดไม้เกรด A */}
+        <FeaturesSection features={content.features} themeColor={themeColor} />
+
+        {/* 4. สถิติความเชื่อมั่น (PERFORMANCE): ประสบการณ์ 25 ปี / 9 อำเภอ */}
+        <PerformanceSection />
+
+        {/* 5. ตารางราคาและบริการ (PRICING): แยกกลุ่มช่างและกลุ่มลูกค้าปลีก */}
+        <CartSection pricing={pricing} themeColor={themeColor} />
+
+        {/* 6. คำถามพบบ่อย (FAQ): ตอบเรื่องการส่งสินค้าในพื้นที่ จ.สุโขทัย */}
+        <FAQSection />
+
+        {/* 7. ส่วนปิดการขาย (SUCCESS CTA): ปุ่มทัก LINE สีเขียวเด่นชัด */}
+        <SuccessSection themeColor={themeColor} contact={contact} />
+      </main>
+
+      {/* 8. ส่วนท้าย (FOOTER): ที่อยู่ร้านในกงไกรลาศ และแผนที่ */}
+      <Footer contact={contact} />
+    </div>
+  )
+}
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/config.ts`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: SUKHOTHAI TIMBER BUSINESS CONFIGURATION
+// Identity: โรงไม้แปรรูปคุณภาพแห่งเมืองเก่าสุโขทัย
+// Path: WoodBusiness/config.ts
+// ----------------------------------------------------
+
+export const starterConfig = {
+  id: "sukhothai-wood-pro-v1",
+  name: "สุโขทัยค้าไม้ (Sukhothai Timber)",
+  themeColor: "#7B3F00", // สีน้ำตาลไม้แก่น (สร้างความเชื่อมั่นและดูมีพลัง)
+
+  metadata: {
+    title: "สุโขทัยค้าไม้ | โรงไม้แปรรูป คัดเกรด ส่งทั่วสุโขทัย",
+    description:
+      "จำหน่ายไม้โครง ไม้พื้น ไม้ระแนง คุณภาพดี ราคาโรงงาน บริการโดยคนสุโขทัย ส่งด่วนถึงหน้างาน",
+  },
+
+  // 1. CONTENT: สำหรับส่วน Hero และจุดเด่น (หน้าแรก)
+  content: {
+    heroTitle: "ไม้ดีเมืองเก่า\nคัดสวยทุกแผ่น ส่งถึงหน้างาน",
+    heroSubtitle:
+      "โรงไม้แปรรูปมาตรฐานคนสุโขทัย สำหรับช่างและผู้รับเหมา มีไม้โครง ไม้พื้น ไม้ระแนง สต็อกแน่นพร้อมส่งทันทีทุกอำเภอในจังหวัด",
+
+    features: [
+      {
+        id: 1,
+        title: "LOCAL_PRIDE: ส่งไวทั่วสุโขทัย",
+        description:
+          "เรามีรถขนส่งเอง บริการส่งด่วนถึงที่ ไม่ว่าจะเป็นกงไกรลาศ สวรรคโลก หรือศรีสำโรง สินค้าถึงไวไม่ต้องรอนาน",
+        icon: "Zap",
+      },
+      {
+        id: 2,
+        title: "CRAFT_QUALITY: คัดไม้โดยช่างไม้",
+        description:
+          "ไม้ทุกแผ่นผ่านการคัดเกรด ไสเรียบ ไม่คด ไม่โก่ง พร้อมใช้งานทันที ช่วยช่างลดเวลาการทำงานและลดการสูญเสีย",
+        icon: "Smartphone", // สื่อถึงการเลือกได้ง่าย/เช็คสเปคง่าย
+      },
+      {
+        id: 3,
+        title: "FAIR_PRICE: ราคามิตรภาพ",
+        description:
+          "คุยง่าย เป็นกันเองแบบคนพื้นที่ ออกใบเสนอราคาไวภายใน 30 นาที เพื่อให้ท่านบริหารงบประมาณได้แม่นยำ",
+        icon: "MessageCircle",
+      },
     ],
   },
+
+  // 2. PRICING: ตารางบริการสำหรับลูกค้าแต่ละกลุ่ม
+  pricing: {
+    starter: {
+      price: "ราคาขายปลีก",
+      label: "HOME_OWNER",
+      details: [
+        "จำหน่ายไม้ปลีกสำหรับงานซ่อมแซมบ้าน",
+        "มีไม้ระแนง ไม้โครง หลายขนาดให้เลือก",
+        "บริการไสและตัดไม้ตามขนาดที่ต้องการ",
+        "ยินดีให้คำปรึกษาการเลือกไม้ฟรี",
+      ],
+    },
+    business: {
+      price: "ราคาส่งผู้รับเหมา",
+      label: "CONTRACTOR_PRO",
+      isRecommended: true,
+      details: [
+        "ราคาขายส่งพิเศษสำหรับงานโครงการ",
+        "สต็อกไม้จำนวนมากพร้อมจัดส่งทันที",
+        "ออกใบกำกับภาษีได้ถูกต้องครบถ้วน",
+        "จัดส่งฟรีในเขตอำเภอเมืองสุโขทัย",
+      ],
+    },
+  },
+
+  // 3. PRODUCTS: รายการไม้ที่นิยม (แคตตาล็อกเบื้องต้น)
+  products: [
+    {
+      id: "p1",
+      name: "ไม้โครง/ไม้ระแนง",
+      price: "เช็คราคาวันนี้",
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/Header.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🏥 AI CONTEXT: WOOD BUSINESS HEADER (SUKHOTHAI EDITION)
+// Identity: Local Professional (เน้นความน่าเชื่อถือและการติดต่อที่รวดเร็ว)
+// ----------------------------------------------------
+
+"use client"
+
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
+import { useParams, usePathname } from "next/navigation"
+import { Phone, ShieldCheck, Menu, X, MessageCircle } from "lucide-react"
+
+interface HeaderProps {
+  themeColor?: string
+  contact?: {
+    lineId: string
+    phone: string
+  }
 }
+
+export default function Header({
+  themeColor = "#7B3F00", // สีน้ำตาลไม้
+  contact,
+}: HeaderProps) {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const params = useParams()
+  const pathname = usePathname()
+
+  // กำหนด ID พื้นฐานเป็น starter หากไม่มี params
+  const templateId = (params?.template_id as string) || "WoodBusiness"
+
+  const navLinks = [
+    { name: "หน้าแรก", href: `/${templateId}` },
+    { name: "รายการไม้", href: `/${templateId}/products` },
+    { name: "ติดต่อเรา", href: `/${templateId}/contact` },
+  ]
+
+  // ตรวจสอบการเลื่อนหน้าจอเพื่อปรับพื้นหลัง Header
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  return (
+    <header
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-slate-200 bg-white/90 py-3 backdrop-blur-md"
+          : "bg-transparent py-5"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <div className="flex items-center justify-between">
+          {/* 1. LOGO: ชื่อร้านพร้อมไอคอนยืนยันคุณภาพ */}
+          <Link
+            href={`/${templateId}`}
+            className="group flex items-center gap-2"
+          >
+            <div
+              className="flex h-10 w-10 items-center justify-center font-black italic text-white transition-transform group-hover:rotate-3"
+              style={{ backgroundColor: themeColor }}
+            >
+              ST
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-black uppercase tracking-tighter text-slate-900">
+                สุโขทัยค้าไม้
+              </span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                Sukhothai_Timber
+              </span>
+            </div>
+          </Link>
+
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/FeaturesSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS FEATURES SECTION (SUKHOTHAI)
+// Identity: Service Capabilities (จุดแข็งของโรงไม้)
+// Function: แสดงจุดเด่น 3 ด้านที่ทำให้ลูกค้าตัดสินใจเลือกซื้อไม้ที่นี่
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import {
+  Zap,
+  Smartphone,
+  MessageCircle,
+  Truck,
+  ShieldCheck,
+  HardHat,
+} from "lucide-react"
+
+interface Feature {
+  id: number
+  title: string
+  description: string
+  icon: string
+}
+
+interface FeaturesSectionProps {
+  features: Feature[]
+  themeColor: string
+}
+
+export default function FeaturesSection({
+  features,
+  themeColor,
+}: FeaturesSectionProps) {
+  // 🛠️ ICON_PICKER: เลือกไอคอนที่เหมาะสมกับธุรกิจไม้แปรรูป
+  const renderIcon = (iconName: string) => {
+    const props = { size: 36, strokeWidth: 1.5, style: { color: themeColor } }
+    switch (iconName) {
+      case "Zap":
+        return <Truck {...props} /> // เปลี่ยน Zap เป็นรถบรรทุก (ส่งไว)
+      case "Smartphone":
+        return <ShieldCheck {...props} /> // เปลี่ยน Smartphone เป็นโล่ (ไม้คัดเกรด)
+      case "MessageCircle":
+        return <HardHat {...props} /> // เปลี่ยน Message เป็นหมวกช่าง (ปรึกษาฟรี)
+      default:
+        return <Zap {...props} />
+    }
+  }
+
+  return (
+    <section id="features" className="border-b border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        {/* 🏗️ HEADER_CELL: หัวข้อหลักของโรงไม้ */}
+        <div className="border-b border-slate-200 p-10 md:p-16">
+          <span
+            className="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em]"
+            style={{ color: themeColor }}
+          >
+            Sukhothai_Timber_Service
+          </span>
+          <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-5xl">
+            ทำไมต้องเลือก <br className="md:hidden" />
+            <span style={{ color: themeColor }}>สุโขทัยค้าไม้?</span>
+          </h2>
+        </div>
+
+        {/* 📦 FEATURES_GRID: ตารางจุดเด่น 3 ช่อง */}
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {features &&
+            features.map((feature, idx) => (
+              <div
+                key={feature.id}
+                className={`group border-b border-slate-200 p-10 transition-all duration-300 hover:bg-slate-50 md:border-b-0 md:p-14 ${
+                  idx !== features.length - 1 ? "md:border-r" : ""
+                }`}
+              >
+                {/* ICON_CONTAINER */}
+                <div className="mb-10 transition-transform duration-500 group-hover:scale-110">
+                  {renderIcon(feature.icon)}
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/PerformanceSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS PERFORMANCE (SUKHOTHAI EDITION)
+// Identity: สถิติความเชื่อมั่นและความยิ่งใหญ่ของโรงไม้
+// Function: แสดงผลข้อมูลเชิงตัวเลขที่ทำให้ลูกค้ามั่นใจในบริการ
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Zap, ShieldCheck, Award, MapPin } from "lucide-react"
+
+export default function PerformanceSection() {
+  const stats = [
+    {
+      label: "YEARS_EXPERIENCE",
+      value: "25",
+      unit: "ปี",
+      desc: "ความเชี่ยวชาญด้านไม้แปรรูป",
+      icon: <Award size={10} />,
+    },
+    {
+      label: "SERVICE_AREAS",
+      value: "9",
+      unit: "อำเภอ",
+      desc: "ส่งด่วนครอบคลุมทั่วสุโขทัย",
+      icon: <MapPin size={10} />,
+    },
+    {
+      label: "STOCK_AVAILABILITY",
+      value: "100",
+      unit: "%",
+      desc: "มีสินค้าพร้อมส่ง ไม่ต้องรอนาน",
+      icon: <Zap size={10} />,
+    },
+  ]
+
+  return (
+    <section className="overflow-hidden border-b border-slate-800 bg-slate-900 text-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          {/* 1. BRAND_HEADER_CELL: ส่วนหัวของเซกชันสถิติ */}
+          <div className="border-b border-slate-800 p-10 md:col-span-4 md:border-b-0 md:border-r md:p-16">
+            <div className="mb-8 flex h-10 w-10 items-center justify-center bg-[#7B3F00] font-black italic text-white">
+              ST
+            </div>
+            <h2 className="mb-6 text-3xl font-black uppercase leading-none tracking-tighter">
+              ตัวเลขยืนยัน <br />
+              <span className="text-slate-500">ความเป็นมืออาชีพ</span>
+            </h2>
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500">
+              Sukhothai_Timber_System_Verified // 2024
+            </p>
+          </div>
+
+          {/* 2. STATS_GRID: ส่วนแสดงสถิติ 3 ช่อง */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:col-span-8">
+            {stats.map((item, idx) => (
+              <div
+                key={idx}
+                className="group flex flex-col justify-center border-b border-slate-800 p-10 transition-colors last:border-b-0 last:border-r-0 hover:bg-slate-800/30 sm:border-b-0 sm:border-r md:p-12"
+              >
+                {/* METRIC_LABEL: ชื่อสถิติ */}
+                <span className="mb-8 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.3em] text-[#A0522D]">
+                  {item.icon} {item.label}
+                </span>
+
+                {/* MAIN_VALUE: ตัวเลขขนาดใหญ่ */}
+                <div className="mb-3 flex items-baseline transition-transform duration-500 group-hover:translate-x-1">
+                  <span className="text-6xl font-black italic leading-none tracking-tighter md:text-7xl">
+                    {item.value}
+                  </span>
+                  <span className="ml-1 font-mono text-xl font-bold text-slate-600">
+                    {item.unit}
+                  </span>
+                </div>
+
+                {/* DESCRIPTION: คำอธิบายภาษาไทย */}
+                <p className="text-[10px] font-bold uppercase leading-none tracking-[0.1em] text-slate-400">
+                  <span className="mr-1 text-[#7B3F00] opacity-50">#</span>{" "}
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/HeroSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS HERO SECTION (SUKHOTHAI)
+// Identity: First-Impression Specialist (ความประทับใจแรก)
+// Function: นำเสนอจุดเด่น "ไม้ดีเมืองเก่า" พร้อมปุ่มโทรออก/ทักไลน์
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import Image from "next/image"
+import { motion, Variants, easeOut } from "framer-motion"
+import { Phone, MessageSquare, ShieldCheck } from "lucide-react"
+
+interface HeroProps {
+  title?: string
+  subtitle?: string
+  image?: string
+  price?: string
+  themeColor?: string
+}
+
+// ------------------------
+// Animation Variants: ให้ตัวอักษรค่อยๆ เลื่อนขึ้นดูพรีเมียม
+// ------------------------
+const containerVars: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+}
+
+const itemVars: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: easeOut },
+  },
+}
+
+export default function HeroSection({
+  title = "ไม้ดีเมืองเก่า\nคัดสวยทุกแผ่น ส่งถึงหน้างาน",
+  subtitle = "โรงไม้แปรรูปมาตรฐานคนสุโขทัย สำหรับช่างและผู้รับเหมา มีไม้โครง ไม้พื้น ไม้ระแนง สต็อกแน่นพร้อมส่งทันทีทุกอำเภอ",
+  image = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/starter/hero-placeholder.jpg",
+  price = "เช็คราคาวันนี้",
+  themeColor = "#7B3F00",
+}: HeroProps) {
+  return (
+    <section className="relative overflow-hidden border-b border-slate-200 bg-white">
+      {/* 🏗️ GRID_BACKGROUND: ลายตารางสไตล์ช่างวัดไม้ */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(${themeColor} 1px, transparent 1px), linear-gradient(90deg, ${themeColor} 1px, transparent 1px)`,
+          backgroundSize: "40px 40px",
+        }}
+      />
+
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        <motion.div
+          variants={containerVars}
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 flex flex-col items-center px-6 py-20 text-center md:px-10 md:py-32"
+        >
+          {/* 🏷️ BADGE: ยืนยันพิกัดร้าน */}
+          <motion.div
+            variants={itemVars}
+            className="mb-8 flex items-center gap-2 border border-slate-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 shadow-sm"
+          >
+            <ShieldCheck size={14} style={{ color: themeColor }} />
+            โรงไม้มาตรฐาน จ.สุโขทัย
+          </motion.div>
+
+          {/* 📢 MAIN_HEADLINE */}
+          <motion.h1
+            variants={itemVars}
+            className="mb-8 whitespace-pre-line text-5xl font-black leading-[1.1] tracking-tighter text-slate-900 md:text-8xl"
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/CartSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS PRICING & CART SECTION
+// Identity: Sales Closer (ส่วนการเลือกแพ็กเกจและราคา)
+// Function: แยกกลุ่มเป้าหมาย ชวนช่างไม้และเจ้าของบ้านให้ติดต่อถูกช่องทาง
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Check, ArrowRight, Home, HardHat, ShieldCheck } from "lucide-react"
+
+interface PricingPlan {
+  price: string
+  label: string
+  isRecommended?: boolean
+  details: string[]
+}
+
+interface CartSectionProps {
+  pricing: {
+    starter: PricingPlan
+    business: PricingPlan
+  }
+  themeColor?: string // ✅ ทำเป็น optional พร้อม default value
+}
+
+export default function CartSection({
+  pricing,
+  themeColor = "#7B3F00",
+}: CartSectionProps) {
+  const plans = [
+    {
+      key: "starter",
+      data: pricing.starter,
+      icon: <Home size={24} className="text-slate-400" />,
+      target: "สำหรับเจ้าของบ้าน",
+    },
+    {
+      key: "business",
+      data: pricing.business,
+      icon: <HardHat size={24} style={{ color: themeColor }} />,
+      target: "สำหรับช่าง & ผู้รับเหมา",
+    },
+  ]
+
+  return (
+    <section id="pricing" className="border-b border-slate-200 bg-slate-50">
+      <div className="mx-auto max-w-7xl border-x border-slate-200 bg-white">
+        {/* 🏗️ SECTION_HEADER */}
+        <div className="border-b border-slate-200 p-10 text-center md:p-20">
+          <span className="mb-4 inline-block font-mono text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
+            Choose_Your_Requirement
+          </span>
+          <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-6xl">
+            ราคาตรงจาก <span style={{ color: themeColor }}>โรงไม้</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg font-medium text-slate-500">
+            เลือกรูปแบบการสั่งซื้อที่ตรงกับความต้องการของคุณ{" "}
+            <br className="hidden md:block" />
+            เพื่อให้ได้รับข้อเสนอและบริการที่คุ้มค่าที่สุด
+          </p>
+        </div>
+
+        {/* 📦 PRICING_CARDS_GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {plans.map((plan, idx) => (
+            <div
+              key={plan.key}
+              className={`relative flex flex-col p-10 md:p-16 ${
+                idx === 0 ? "border-b md:border-b-0 md:border-r" : ""
+              } border-slate-200`}
+            >
+              {/* RECOMMENDED_TAG */}
+              {plan.data.isRecommended && (
+                <div
+                  className="absolute right-10 top-10 flex items-center gap-2 px-3 py-1 text-[9px] font-black uppercase tracking-widest text-white"
+                  style={{ backgroundColor: themeColor }}
+                >
+                  <ShieldCheck size={12} /> Recommended
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/FAQSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS FAQ SECTION (SUKHOTHAI)
+// Identity: Expert Consultant (ผู้ช่วยแก้ไขข้อสงสัย)
+// Function: ตอบคำถามที่พบบ่อยเพื่อสร้างความมั่นใจก่อนตัดสินใจซื้อ
+// ----------------------------------------------------
+
+"use client"
+
+import React, { useState } from "react"
+import { Plus, Minus, HelpCircle } from "lucide-react"
+
+interface FAQItem {
+  question: string
+  answer: string
+}
+
+export default function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0) // เปิดข้อแรกไว้เป็นตัวอย่าง
+
+  const faqs: FAQItem[] = [
+    {
+      question: "ทางโรงไม้มีบริการจัดส่งถึงหน้างานในอำเภอไหนบ้าง?",
+      answer:
+        "เรามีรถขนส่งส่วนตัวให้บริการครอบคลุมทั้ง 9 อำเภอในจังหวัดสุโขทัย (เมือง, กงไกรลาศ, สวรรคโลก, ศรีสำโรง, ศรีสัชนาลัย, คีรีมาศ, ทุ่งเสลี่ยม, บ้านด่านลานหอย, ศรีนคร) และจังหวัดใกล้เคียงอย่างพิษณุโลกหรือตากด้วยครับ",
+    },
+    {
+      question: "ไม้แปรรูปของที่ร้านมีการอบแห้งและกันปลวกหรือไม่?",
+      answer:
+        "ไม้โครงและไม้แปรรูปเกรด A ของเราผ่านกระบวนการอบแห้ง (Kiln Dried) เพื่อลดการบิดงอ และมีการลงน้ำยากันปลวกมาตรฐานโรงงาน พร้อมสำหรับการนำไปใช้งานก่อสร้างหรือตกแต่งทันทีครับ",
+    },
+    {
+      question: "ถ้าต้องการใช้ไม้จำนวนมากสำหรับงานโครงการ มีราคาส่งไหม?",
+      answer:
+        "มีครับ! เรามีราคาส่งพิเศษสำหรับผู้รับเหมาและงานโครงการที่สั่งซื้อจำนวนมาก พร้อมบริการออกใบเสนอราคาอย่างรวดเร็วและออกใบกำกับภาษีได้ถูกต้องครับ",
+    },
+    {
+      question: "สามารถเข้าไปดูหน้าไม้จริงที่โรงงานได้วันไหนบ้าง?",
+      answer:
+        "ลูกค้าสามารถเข้ามาเลือกดูหน้าไม้จริงได้ที่โรงงานใน อ.กงไกรลาศ ได้ทุกวันจันทร์ - เสาร์ เวลา 08:00 - 17:00 น. ครับ แนะนำให้โทรนัดหมายก่อนเพื่อความสะดวกในการจัดเตรียมเจ้าหน้าที่พาชมครับ",
+    },
+  ]
+
+  return (
+    <section className="border-b border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          {/* 1. LEFT_SIDE: หัวข้อและคำโปรย */}
+          <div className="border-b border-slate-200 p-10 md:col-span-4 md:border-b-0 md:border-r md:p-16">
+            <div className="mb-8 flex h-10 w-10 items-center justify-center bg-slate-100 text-[#7B3F00]">
+              <HelpCircle size={20} />
+            </div>
+            <h2 className="mb-6 text-4xl font-black uppercase tracking-tighter text-slate-900">
+              คำถาม <br />
+              <span className="text-slate-400">ที่พบบ่อย</span>
+            </h2>
+            <p className="text-sm font-medium leading-relaxed text-slate-500">
+              รวบรวมข้อมูลเบื้องต้นที่คุณควรรู้เกี่ยวกับไม้และการบริการของเรา
+              หากมีข้อสงสัยเพิ่มเติม สามารถทักแชทสอบถามแอดมินได้ทันที
+            </p>
+          </div>
+
+          {/* 2. RIGHT_SIDE: รายการคำถามแบบ Accordion */}
+          <div className="md:col-span-8">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="border-b border-slate-200 last:border-b-0"
+              >
+                <button
+                  onClick={() =>
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
+                  className="flex w-full items-center justify-between p-8 text-left transition-colors hover:bg-slate-50 md:p-10"
+                >
+                  <span className="text-lg font-bold tracking-tight text-slate-900 md:text-xl">
+                    {faq.question}
+                  </span>
+                  <div
+                    className={`ml-4 flex h-8 w-8 shrink-0 items-center justify-center border border-slate-200 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/Footer.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS FOOTER (SUKHOTHAI EDITION)
+// Identity: Stable Local Enterprise (ความมั่นคงและที่ตั้งที่ชัดเจน)
+// Function: แสดงที่อยู่ร้าน แผนที่ และเวลาเปิดทำการ
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import {
+  Mail,
+  Phone,
+  MessageCircle,
+  MapPin,
+  ShieldCheck,
+  Facebook,
+} from "lucide-react"
+
+interface FooterProps {
+  contact?: {
+    lineId: string
+    phone: string
+    facebook?: string
+    email: string
+    address?: string
+    workingHours?: string
+  }
+}
+
+export default function Footer({ contact }: FooterProps) {
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer className="border-t border-slate-800 bg-slate-900 text-white">
+      <div className="mx-auto max-w-7xl">
+        {/* MAIN_FOOTER_GRID: ระบบตารางที่แข็งแรงสไตล์โรงงาน */}
+        <div className="grid grid-cols-1 gap-0 border-x border-slate-800 md:grid-cols-12">
+          {/* 1. BRAND & IDENTITY: ยืนยันตัวตนคนสุโขทัย */}
+          <div className="border-b border-slate-800 p-10 transition-colors hover:bg-slate-800/20 md:col-span-5 md:border-r md:p-16">
+            <div className="mb-8 flex select-none items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center bg-[#7B3F00] font-black italic text-white">
+                ST
+              </div>
+              <span className="text-xl font-black uppercase tracking-tighter">
+                สุโขทัยค้าไม้
+              </span>
+            </div>
+            <p className="mb-10 max-w-sm text-sm font-medium leading-relaxed text-slate-400">
+              ตัวแทนจำหน่ายไม้แปรรูปคุณภาพสูง ประสบการณ์กว่า 25
+              ปีในจังหวัดสุโขทัย
+              เรามุ่งมั่นส่งมอบไม้ที่ดีที่สุดเพื่อบ้านที่แข็งแรงของท่าน
+            </p>
+            <div className="flex items-center gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-slate-500">
+              <ShieldCheck size={14} className="text-[#7B3F00]" />
+              Verified_Sukhothai_Business
+            </div>
+          </div>
+
+          {/* 2. CONTACT_INFO: ข้อมูลติดต่อที่รวดเร็ว */}
+          <div className="border-b border-slate-800 p-10 md:col-span-4 md:border-r md:p-16">
+            <h4 className="mb-10 text-[10px] font-bold uppercase tracking-[0.3em] text-[#A0522D]">
+              Contact_Details
+            </h4>
+            <div className="space-y-6">
+              <a
+                href={`tel:${contact?.phone}`}
+                className="group flex items-center gap-4 transition-colors hover:text-[#A0522D]"
+              >
+                <div className="flex h-10 w-10 items-center justify-center border border-slate-700 group-hover:border-[#A0522D]">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-widest text-slate-500">
+                    โทรศัพท์
+                  </p>
+                  <p className="font-bold">{contact?.phone || "055-xxx-xxx"}</p>
+                </div>
+              </a>
+              <a
+```
+
+### `app/(marketing)/[template_id]/_templates/WoodBusiness/components/SuccessSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: WOOD BUSINESS SUCCESS SECTION (CTA)
+// Identity: Closing Specialist (ส่วนปิดการขาย)
+// Function: ดึงลูกค้าเข้าสู่การสนทนาผ่าน LINE และโทรศัพท์
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { MessageSquare, Phone, ArrowRight, Zap } from "lucide-react"
+
+interface SuccessSectionProps {
+  themeColor?: string
+  contact?: {
+    lineId: string
+    phone: string
+  }
+}
+
+export default function SuccessSection({
+  themeColor = "#7B3F00", // สีน้ำตาลไม้
+  contact,
+}: SuccessSectionProps) {
+  return (
+    <section className="overflow-hidden border-b border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        <div className="relative flex flex-col items-center px-6 py-24 text-center md:px-10 md:py-36">
+          {/* 🧩 DECORATIVE_ELEMENTS: มุมกรอบแบบงานช่างไม้ */}
+          <div className="absolute left-0 top-0 h-16 w-16 border-l-4 border-t-4 border-slate-100" />
+          <div className="absolute bottom-0 right-0 h-16 w-16 border-b-4 border-r-4 border-slate-100" />
+
+          {/* 🏷️ SECTION_BADGE */}
+          <div className="mb-12 flex items-center gap-3 border border-slate-200 bg-white px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-500 shadow-sm">
+            <span className="flex h-2 w-2 animate-pulse rounded-full bg-green-500" />
+            พร้อมประเมินราคาหน้างานฟรี
+          </div>
+
+          {/* 📢 MAIN_CALL_TO_ACTION */}
+          <h2 className="mb-8 max-w-4xl text-4xl font-black uppercase leading-[1.15] tracking-tighter text-slate-900 md:text-7xl">
+            อยากได้ไม้ดี <span style={{ color: themeColor }}>ราคาโรงงาน</span>{" "}
+            <br />
+            ทักแชทคุยกับเราได้เลย
+          </h2>
+
+          <p className="mb-14 max-w-2xl text-lg font-medium leading-relaxed text-slate-500">
+            ไม่ว่าจะเป็นงานบ้าน งานโครงการ หรือร้านค้าช่วง{" "}
+            <br className="hidden md:block" />
+            เรายินดีให้คำปรึกษาเรื่องสเปคไม้และบริการจัดส่งทั่วสุโขทัยและจังหวัดใกล้เคียง
+          </p>
+
+          {/* ⚡ ACTION_BUTTONS: เน้น LINE และ โทร */}
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href={`https://line.me/ti/p/${contact?.lineId?.replace("@", "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center gap-3 bg-green-600 px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-green-500/20 transition-all hover:bg-green-700 active:scale-95 sm:w-auto"
+            >
+              <MessageSquare size={20} /> ทัก LINE เช็คราคาส่ง
+            </a>
+
+            <a
+              href={`tel:${contact?.phone}`}
+              className="flex w-full items-center justify-center gap-3 bg-slate-900 px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-slate-900/10 transition-all hover:bg-slate-800 active:scale-95 sm:w-auto"
+            >
+              <Phone size={20} /> โทรคุยกับฝ่ายขาย
+            </a>
+          </div>
+
+          {/* 📟 SYSTEM_FOOTNOTE: ข้อมูลยืนยันความไว */}
+          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
+              ไม้คัดเกรด_100%
+            </div>
+            <span className="hidden text-slate-200 sm:block">|</span>
+            <div className="flex items-center gap-2">
+              ตอบกลับไวภายใน: <span className="text-slate-900">30_นาที</span>
+            </div>
 ```
 
 ### `app/(marketing)/[template_id]/_templates/realestate/RealEstateTemplate.tsx`
@@ -894,62 +1800,83 @@ export default function RealEstateTemplate({ data }: Props) {
 /** @format */
 // ----------------------------------------------------
 // 💎 AI CONTEXT: LUXURY REAL ESTATE & INVESTMENT
-// Identity: เอเจนซี่อสังหาริมทรัพย์ระดับพรีเมียม (ไม่ใช่แบรนด์ไอที)
+// Identity: เอเจนซี่อสังหาริมทรัพย์ระดับพรีเมียม (Luxury Property Brokerage)
 // Tone: หรูหรา, น่าเชื่อถือ, สุขุม (Exclusive & Sophisticated)
+// 🛠️ PRIMARY BRAND: AEMDEVWEB (Developer Credit)
 // ----------------------------------------------------
 
 export const realEstateConfig = {
   id: "template-realestate-luxury",
-  name: "VAULT & VEST PROPERTY", // 👈 เปลี่ยนชื่อแบรนด์ให้สื่อถึงความมั่นคง (Vault) และการลงทุน (Vest)
-  themeColor: "#c2a35d", // Champagne Gold (สื่อถึงความมั่งคั่ง)
-  secondaryColor: "#0f172a", // Midnight Navy (สื่อถึงความภูมิฐาน)
+  name: "VAULT & VEST PROPERTY", // แบรนด์สมมติที่สื่อถึงความปลอดภัยและการเติบโตของทรัพย์สิน
+  themeColor: "#c2a35d", // Champagne Gold: สีทองหรูหราแบบไม่ตะโกน
+  secondaryColor: "#0f172a", // Midnight Navy: สีน้ำเงินเข้มขรึม เสริมความภูมิฐาน
+
   metadata: {
-    // 🛡️ ระบุชื่อผู้สร้างเทคโนโลยีไว้ใน Metadata เช่นเคย
+    // SEO เน้น Keyword ที่ดึงกลุ่ม High Net Worth พร้อมเครดิต AEMDEVWEB
     title:
       "Vault & Vest | คัดสรรอสังหาริมทรัพย์และโอกาสการลงทุนระดับพรีเมียม by AEMDEVWEB",
     description:
-      "ที่ปรึกษาด้านอสังหาริมทรัพย์ระดับ Exclusive มอบดีลที่ดีที่สุดบนทำเลศักยภาพทั่วประเทศ",
+      "ที่ปรึกษาด้านอสังหาริมทรัพย์ระดับ Exclusive มอบดีลที่ดีที่สุดบนทำเลศักยภาพและพอร์ตการลงทุนที่คุ้มค่า",
     ogImage: "/images/projects/real-estate.jpg",
   },
+
   content: {
-    // 🏰 เน้นภาษาที่ดึงดูดกลุ่มลูกค้าระดับบน (High Net Worth)
+    // --- ส่วนต้อนรับ (Elite Impression) ---
     heroTitle: "EXCEPTIONAL_LIVING_CURATED",
     heroSubtitle:
-      "รวบรวมสุดยอดที่อยู่อาศัยที่ผ่านการคัดสรรอย่างพิถีพิถัน เพื่อสุนทรียภาพแห่งการใช้ชีวิตและการเติบโตของสินทรัพย์",
+      "รวบรวมสุดยอดที่อยู่อาศัยที่ผ่านการคัดสรรอย่างพิถีพิถัน เพื่อสุนทรียภาพแห่งการใช้ชีวิตและการเติบโตของสินทรัพย์ในระยะยาว",
 
-    // 🏷️ ปรับหมวดหมู่ให้ดูมีความเป็นพอร์ตโฟลิโอการลงทุน
+    // --- หมวดหมู่พอร์ตโฟลิโอ (Investment Portfolio) ---
+    // 🏷️ เปลี่ยนจากการหาบ้านทั่วไป ให้เป็นการเลือก "สินทรัพย์" (Assets)
     categories: [
-      { id: "CONDO", label: "ELITE_COLLECTION", count: "120+ Units" },
-      { id: "HOUSE", label: "PRIVATE_ESTATES", count: "45+ Houses" },
-      { id: "INVEST", label: "STRATEGIC_INVESTMENTS", count: "15+ Projects" },
-      { id: "LAND", label: "LAND_ACQUISITION", count: "30+ Locations" },
+      {
+        id: "CONDO",
+        label: "ELITE_COLLECTION",
+        count: "120+ Units",
+        detail: "คอนโดมิเนียมระดับ Ultimate Luxury บนทำเล CBD",
+      },
+      {
+        id: "HOUSE",
+        label: "PRIVATE_ESTATES",
+        count: "45+ Houses",
+        detail: "คฤหาสน์หรูในสังคมคุณภาพและบรรยากาศที่เป็นส่วนตัว",
+      },
+      {
+        id: "INVEST",
+        label: "STRATEGIC_INVESTMENTS",
+        count: "15+ Projects",
+        detail: "โครงการอสังหาฯ เพื่อการลงทุนที่มี Yield สูงและมั่นคง",
+      },
+      {
+        id: "LAND",
+        label: "LAND_ACQUISITION",
+        count: "30+ Locations",
+        detail: "ที่ดินศักยภาพสูงสำหรับการพัฒนาโครงการในอนาคต",
+      },
     ],
 
-    // ✨ ไฮไลท์ที่เน้นความ Exclusive และบริการแบบมืออาชีพ
+    // --- จุดเด่นของบริการ (High-End Services) ---
     highlights: [
       {
+        id: "h-1",
         title: "CURATED_SELECTION",
-        detail: "ทุกยูนิตผ่านการประเมินศักยภาพและความคุ้มค่าโดยผู้เชี่ยวชาญ",
+        detail:
+          "ทุกยูนิตผ่านการประเมินศักยภาพและความคุ้มค่าโดยผู้เชี่ยวชาญก่อนนำเสนอแด่คุณ",
+        icon: "Gem",
       },
       {
+        id: "h-2",
         title: "CONCIERGE_ADVISORY",
-        detail: "บริการที่ปรึกษาส่วนตัวด้านสินเชื่อและสิทธิประโยชน์ทางภาษี",
+        detail:
+          "บริการที่ปรึกษาส่วนตัวด้านสินเชื่อ ดอกเบี้ยพิเศษ และสิทธิประโยชน์ทางภาษี",
+        icon: "UserCheck",
       },
       {
+        id: "h-3",
         title: "END_TO_END_EXCELLENCE",
         detail:
-          "ดูแลทุกขั้นตอนอย่างใกล้ชิด ตั้งแต่การเยี่ยมชมจนถึงการบริหารทรัพย์สิน",
-      },
-    ],
-
-    // 🏆 ส่วนเสริมเพื่อสร้างความมั่นใจ (Authority Building)
-    expertService: [
-      "Market Analysis & Insight",
-      "Portfolio Management",
-      "International Property Access",
-    ],
-  },
-}
+          "ดูแลทุกขั้นตอนอย่างใกล้ชิด ตั้งแต่การเยี่ยมชม การเจรจา จนถึงการบริหารจัดการทรัพย์สิน",
+        icon: "Key",
 ```
 
 ### `app/(marketing)/[template_id]/_templates/construction/ConstructionTemplate.tsx`
@@ -1043,168 +1970,159 @@ export default function ConstructionTemplate({ data }: Props) {
 /** @format */
 // ----------------------------------------------------
 // 🏗️ AI CONTEXT: ENGINEERING & INFRASTRUCTURE TEMPLATE
-// Identity: บริษัทรับเหมาก่อสร้างและวิศวกรรมโยธา (ไม่ใช่บริษัทไอที)
+// Identity: บริษัทรับเหมาก่อสร้างและวิศวกรรมโยธา (Industrial & Civil Engineering)
 // Tone: แข็งแกร่ง, แม่นยำ, มาตรฐานความปลอดภัยสูง (Industrial Professionalism)
+// 🛠️ PRIMARY BRAND: AEMDEVWEB (Developer Credit)
 // ----------------------------------------------------
 
 export const constructionConfig = {
   id: "template-construction-industrial",
-  name: "TITAN STRUCTURES & ENGINEERING", // 👈 เปลี่ยนชื่อแบรนด์ให้ดูแกร่งและเป็นมืออาชีพ
-  themeColor: "#1e293b", // Slate 800 (สื่อถึงเหล็กและโครงสร้าง)
-  secondaryColor: "#f59e0b", // Amber 500 (สีสัญลักษณ์ความปลอดภัย/เครื่องจักร)
+  name: "TITAN STRUCTURES & ENGINEERING", // แบรนด์สมมติที่สื่อถึงความแข็งแกร่งดุจไททัน
+  themeColor: "#1e293b", // Slate 800: สีเทาเหล็ก สื่อถึงโครงสร้างและความมั่นคง
+  secondaryColor: "#f59e0b", // Amber 500: สีเหลืองความปลอดภัย (Safety Yellow)
+
   metadata: {
+    // SEO เน้น Keyword งานวิศวกรรมและรับเหมา พร้อมเครดิต AEMDEVWEB
     title:
       "Titan Structures | มาตรฐานวิศวกรรมและรับเหมาก่อสร้างระดับสากล by AEMDEVWEB",
     description:
-      "บริษัทผู้นำด้านงานก่อสร้างอุตสาหกรรมและโครงสร้างพื้นฐานระดับชาติ",
+      "บริษัทผู้นำด้านงานก่อสร้างอุตสาหกรรมและโครงสร้างพื้นฐานระดับชาติ ควบคุมงานโดยวิศวกรวิชาชีพ พร้อมมาตรฐาน ISO",
     ogImage: "/images/projects/construction-bg.jpg",
   },
+
   content: {
-    // 🚧 เน้นคำศัพท์ที่สร้างความเชื่อมั่นในงานโครงสร้าง
+    // --- ส่วนต้อนรับ (Hero Content) ---
     heroTitle: "STRENGTH_THROUGH_PRECISION",
     heroSubtitle:
-      "ออกแบบและก่อสร้างโครงสร้างพื้นฐานที่ยั่งยืน ด้วยมาตรฐานวิศวกรรมชั้นสูงและนวัตกรรมการบริหารโครงการที่แม่นยำ",
+      "ออกแบบและก่อสร้างโครงสร้างพื้นฐานที่ยั่งยืน ด้วยมาตรฐานวิศวกรรมชั้นสูงและนวัตกรรมการบริหารโครงการที่แม่นยำ พร้อมส่งมอบงานตรงเวลา",
 
-    // 📊 สถิติที่เน้นความเก๋าของบริษัทรับเหมา
+    // --- สถิติความสำเร็จ (Track Record) ---
+    // 📊 ส่วนนี้สำคัญมากสำหรับธุรกิจรับเหมาเพื่อใช้ประมูลงานหรือยื่น Profile
     trackRecord: [
-      { label: "PROJECTS_DELIVERED", value: "250+" },
-      { label: "CERTIFIED_ENGINEERS", value: "45" },
-      { label: "SAFETY_MILESTONE", value: "1M+ Hours" }, // ชั่วโมงการทำงานที่ปลอดภัย
+      {
+        id: 1,
+        label: "PROJECTS_DELIVERED",
+        value: "250+",
+        detail: "โครงการที่ส่งมอบสำเร็จ",
+      },
+      {
+        id: 2,
+        label: "CERTIFIED_ENGINEERS",
+        value: "45",
+        detail: "ทีมวิศวกรวิชาชีพประสบการณ์สูง",
+      },
+      {
+        id: 3,
+        label: "SAFETY_MILESTONE",
+        value: "1M+ Hours",
+        detail: "ชั่วโมงการทำงานที่ปลอดภัย (LTI Free)",
+      },
     ],
 
-    // 🛡️ ข้อมูลความเชี่ยวชาญ (Expertise)
+    // --- ความเชี่ยวชาญเฉพาะทาง (Expertise) ---
     expertise: [
       {
         id: "exp-1",
         label: "STRUCTURAL_INTEGRITY",
         detail:
-          "วิเคราะห์และคำนวณโครงสร้างเพื่อความคงทนสูงสุดด้วยเทคโนโลยี BIM (Building Information Modeling)",
+          "วิเคราะห์และคำนวณโครงสร้างเพื่อความคงทนสูงสุดด้วยเทคโนโลยี BIM (Building Information Modeling) ลดข้อผิดพลาดในการก่อสร้าง",
+        icon: "Ruler",
       },
       {
         id: "exp-2",
         label: "EPC_MANAGEMENT",
         detail:
-          "การบริหารโครงการแบบครบวงจร (Engineering, Procurement, Construction) ควบคุมงบประมาณและเวลาได้ 100%",
+          "การบริหารโครงการแบบครบวงจรตั้งแต่ ออกแบบ จัดซื้อ และก่อสร้าง ควบคุมงบประมาณไม่ให้บานปลาย 100%",
+        icon: "ClipboardCheck",
       },
       {
         id: "exp-3",
         label: "SUSTAINABLE_CIVIL",
         detail:
-          "นวัตกรรมการก่อสร้างสีเขียวที่เน้นการใช้ทรัพยากรอย่างคุ้มค่าตามมาตรฐาน LEED",
+          "นวัตกรรมการก่อสร้างสีเขียวที่เน้นการใช้ทรัพยากรอย่างคุ้มค่าตามมาตรฐาน LEED เพื่อสิ่งแวดล้อมที่ยั่งยืน",
+        icon: "Leaf",
       },
     ],
 
-    // 🏗️ บริการหลักในเชิงธุรกิจ
+    // --- บริการหลัก (Core Services) ---
     services: [
       {
-        id: 1,
-        title: "INDUSTRIAL_FACILITIES",
-        desc: "เชี่ยวชาญการก่อสร้างคลังสินค้าและโรงงานอุตสาหกรรมหนักตามมาตรฐานสากล",
-      },
-      {
-        id: 2,
-        title: "PUBLIC_INFRASTRUCTURE",
-        desc: "พัฒนาระบบสาธารณูปโภค ถนน สะพาน และโครงสร้างพื้นฐานขนาดใหญ่เพื่อชุมชน",
-      },
-      {
-        id: 3,
-        title: "STRATEGIC_CONSULTANCY",
-        desc: "บริการที่ปรึกษาเชิงวิศวกรรมและการตรวจสอบความปลอดภัยโครงสร้างอาคาร",
-      },
-    ],
-
-    // 🎖️ ส่วนเสริมความน่าเชื่อถือ (ปิดการขาย)
-    certifications: [
-      "ISO 9001:2015 Certified",
-      "Council of Engineers Standard",
-      "OHSAS 18001 Safety Excellence",
-    ],
-  },
 ```
 
 ### `app/(marketing)/[template_id]/_templates/starter/StarterTemplate.tsx`
 
 ```ts
 /** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION PROFESSIONAL MASTER LAYOUT (REFACTORED)
+// Identity: Dynamic Data Injection, Stable Grid Architecture
+// Function: รับ Data Props จาก Registry เพื่อแสดงผลตาม Template ID
+// ----------------------------------------------------
+
 "use client"
 
 import React from "react"
 import styles from "./StarterStyle.module.css"
-import { iconMap } from "@/components/iconMap"
 
-interface Props {
-  data: any
+// นำเข้า Components ที่ได้รับการ Refactor แล้ว (ย้ายจาก Folder ภายในมาใช้งาน)
+import Header from "./components/Header"
+import HeroSection from "./components/HeroSection"
+import FeaturesSection from "./components/FeaturesSection"
+import PerformanceSection from "./components/PerformanceSection"
+import CartSection from "./components/CartSection"
+import FAQSection from "./components/FAQSection"
+import SuccessSection from "./components/SuccessSection"
+import Footer from "./components/Footer"
+
+interface StarterTemplateProps {
+  data: any // รับข้อมูล config ทั้งหมดมาจาก MarketingPage (page.tsx)
 }
 
-export default function StarterTemplate({ data }: Props) {
-  // 🛡️ Defensive Programming: ป้องกันกรณี data หรือ content ว่าง
-  const { content } = data || {}
-  const Check = iconMap.CHECK
-  const Rocket = iconMap.STARTER
-
-  if (!content) return null
+export default function StarterTemplate({ data }: StarterTemplateProps) {
+  // Safe Destructuring: ดึงข้อมูลจาก Data Props
+  // หากไม่มีข้อมูล ให้ใช้ค่าจากโครงสร้างที่เตรียมไว้ป้องกัน Error
+  const {
+    content = {},
+    themeColor = "#1e40af",
+    contact = {},
+    pricing = { starter: { price: "0" } },
+  } = data
 
   return (
-    <div className={styles.wrapper}>
-      {/* 🚀 Header: Flash Sale Vibe */}
-      <section className={styles.hero}>
-        <div className={styles.badge}>LIMITED_OFFER: FIRST_10_CUSTOMERS</div>
-        <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
-        <p className="max-w-xl text-xl font-bold italic text-slate-500">
-          {content.heroSubtitle}
-        </p>
+    <div className={styles.container}>
+      {/* 1. HEADER: ล็อกตำแหน่งบนสุด และรองรับ Theme Color จาก Config */}
+      <Header themeColor={themeColor} contact={contact} />
 
-        {/* Background Decor */}
-        <div
-          className="absolute left-10 top-10 hidden rotate-[-15deg] opacity-10 md:block"
-          aria-hidden="true"
-        >
-          {Rocket && <Rocket size={150} />}
-        </div>
-      </section>
+      <main className="relative">
+        {/* 2. HERO: ส่งผ่านข้อมูลพาดหัวและราคาเริ่มต้น */}
+        <HeroSection
+          title={content.heroTitle}
+          subtitle={content.heroSubtitle}
+          themeColor={themeColor}
+          price={pricing.starter?.price}
+        />
 
-      {/* 🛒 The Promotion Cart: จุดขายสำคัญ */}
-      <div className="relative z-50 px-4">
-        <section className={styles.cartWidget}>
-          <div className="mb-6 flex items-start justify-between">
-            <div className="font-mono text-[10px] font-black uppercase text-slate-400">
-              Item_Order: {content.cartItem?.name}
-            </div>
-            <span className="animate-pulse text-[10px] font-bold text-green-600">
-              ● {content.cartItem?.status}
-            </span>
-          </div>
+        {/* 3. FEATURES: ระบบตารางที่เปลี่ยน Content ตามธุรกิจ */}
+        <FeaturesSection features={content.features} themeColor={themeColor} />
 
-          <div className={styles.priceTag}>
-            <span className={styles.currentPrice}>฿{content.promoPrice}</span>
-            <span className={styles.oldPrice}>฿{content.originalPrice}</span>
-            <span className="rounded bg-green-100 px-2 py-0.5 text-[10px] font-black text-green-600">
-              SAVE {content.savePercent}
-            </span>
-          </div>
+        {/* 4. PERFORMANCE: แสดงสถิติความเร็ว (Static หรือ Dynamic ก็ได้) */}
+        <PerformanceSection />
 
-          <div className="space-y-2 border-t-2 border-dashed border-slate-200 pt-4">
-            <p className="text-[10px] font-bold uppercase text-slate-400">
-              Inclusions:
-            </p>
-            <div className="text-xs font-bold italic">
-              + SSL Certificate Free
-            </div>
-            <div className="text-xs font-bold italic">
-              + Mobile-First Engine
-            </div>
-          </div>
+        {/* 5. PRICING: ตารางราคาที่เชื่อมต่อกับระบบการตัดสินใจซื้อ */}
+        <CartSection pricing={pricing} themeColor={themeColor} />
 
-          <button className={styles.checkoutBtn} type="button">
-            CLAIM_OFFER_NOW
-          </button>
+        {/* 6. FAQ: ช่วยลดภาระฝ่ายแอดมินด้วยคำถามที่พบบ่อย */}
+        <FAQSection />
 
-          <p className="mt-4 text-center font-mono text-[9px] uppercase tracking-widest text-slate-400">
-            * No Hidden Fees // One-time Payment
-          </p>
-        </section>
-      </div>
+        {/* 7. SUCCESS CTA: ส่วนปิดการขายที่ดึง Contact ไปใช้งานจริง */}
+        <SuccessSection themeColor={themeColor} contact={contact} />
+      </main>
 
+      {/* 8. FOOTER: แสดงข้อมูลบริษัทและช่องทางโซเชียล */}
+      <Footer contact={contact} />
+    </div>
+  )
+}
 ```
 
 ### `app/(marketing)/[template_id]/_templates/starter/config.ts`
@@ -1212,60 +2130,843 @@ export default function StarterTemplate({ data }: Props) {
 ```ts
 /** @format */
 // ----------------------------------------------------
-// ⚡ AI CONTEXT: SME STARTER & FAST-TRACK LAUNCH
-// Identity: บริการเว็บสำเร็จรูปเกรดพรีเมียม (Speed & Conversion Focused)
-// Tone: กระฉับกระเฉง, เร้าใจ, เน้นความคุ้มค่า (Action-Oriented & High Value)
+// 🚀 AI CONTEXT: ELITE BUSINESS CONFIGURATION (STARTER TEMPLATE)
+// Identity: Production-Ready Data Structure for Multi-Page System
+// Path: app/(marketing)/[template_id]/_templates/starter/config.ts
 // ----------------------------------------------------
 
 export const starterConfig = {
-  id: "template-starter-launchpad",
-  name: "FASTTRACK DIGITAL", // 👈 ชื่อแบรนด์ที่สื่อถึงความเร็วและการเติบโต
-  themeColor: "#ff3e3e", // Electric Red (สีกระตุ้นการตัดสินใจ)
-  secondaryColor: "#000000",
+  id: "production-master-v1",
+  name: "PRODUCTION_MASTER",
+  themeColor: "#1e40af", // Deep Navy (สีกรมท่าเข้ม มั่นคง)
+
   metadata: {
-    // 🛡️ เน้นความคุ้มค่าใน SEO Title
-    title:
-      "FastTrack Digital | เว็บไซต์ SME เริ่มต้นเพียง 3,900.- ครบ จบ ในที่เดียว",
-    description:
-      "ยกระดับธุรกิจสู่โลกออนไลน์ด้วยเว็บไซต์ประสิทธิภาพสูง โหลดไว ติดหน้าแรก Google ได้ง่ายกว่า",
-    ogImage: "/images/projects/starter.jpg",
+    title: "AEMDEVWEB | เว็บไซต์มาตรฐานสากลเพื่อธุรกิจไทย",
+    description: "ระบบเว็บไซต์โหลดไว แม่นยำ และใช้งานง่าย จบงานไวใน 3 วัน",
   },
+
+  // 1. CONTENT: สำหรับ Hero และ Features (หน้าแรก)
   content: {
-    // 💰 ข้อมูลราคา (Price Strategy)
-    promoPrice: "3,900",
-    originalPrice: "7,500",
-    savePercent: "48%",
-
-    // 🚀 เน้นผลลัพธ์ที่รวดเร็ว (Time-to-Market)
-    heroTitle: "GO_DIGITAL_IN_24HRS",
+    heroTitle: "จบทุกปัญหาเรื่องทำเว็บ\nสร้างความน่าเชื่อถือทันที",
     heroSubtitle:
-      "สร้างตัวตนบนโลกออนไลน์ด้วยเว็บไซต์มาตรฐานสากล ที่ออกแบบมาเพื่อเปลี่ยนผู้เข้าชมให้เป็นยอดขาย",
+      "เราส่งมอบเว็บไซต์ที่เปิดไว อ่านง่าย และช่วยให้ลูกค้าตัดสินใจซื้อได้เร็วขึ้น ไม่ใช้ศัพท์เทคนิคให้ปวดหัว จบงานตามกำหนด 100%",
 
-    // 🛠️ Feature ที่ SME แคร์ที่สุด
     features: [
-      { id: 1, text: "ULTRA_RESPONSIVE (แสดงผลสมบูรณ์บนทุกหน้าจอ)" },
-      { id: 2, text: "LIGHTNING_SPEED (โหลดไวภายใน 1 วินาที)" },
-      { id: 3, text: "READY_FOR_ADS (รองรับการทำ Facebook/Google Ads)" },
       {
-        id: 4,
-        text: "FREE_ALL_IN_ONE (ฟรี! โดเมน โฮสติ้ง และระบบรักษาความปลอดภัย)",
+        id: 1,
+        title: "CORE_SPEED: เปิดไวทันใจ",
+        description:
+          "ระบบแสดงผลทันทีที่กด ไม่ต้องรอหมุนให้เสียอารมณ์ ลูกค้าไม่เปลี่ยนใจหนี",
+        icon: "Zap",
+      },
+      {
+        id: 2,
+        title: "RESPONSIVE: อ่านง่ายทุกหน้าจอ",
+        description:
+          "ตัวหนังสือขนาดพอดี ปุ่มกดชัดเจน ไม่ว่าลูกค้าใช้มือถือรุ่นไหนก็ใช้งานถนัด",
+        icon: "Smartphone",
+      },
+      {
+        id: 3,
+        title: "DIRECT_CHAT: ทักง่าย ได้ยอดเร็ว",
+        description:
+          "เชื่อมปุ่ม LINE และเบอร์โทรศัพท์ให้พร้อมใช้งาน ลูกค้าทักหาคุณได้ในคลิกเดียว",
+        icon: "MessageCircle",
       },
     ],
+  },
 
-    // 🛒 สินค้าในแพ็คเกจ (Product Psychology)
-    cartItem: {
-      name: "SME_GROWTH_PACKAGE",
-      status: "LIMITED_SLOTS_AVAILABLE", // 👈 เปลี่ยนเพื่อให้เกิดความรู้สึกเร่งด่วน (Urgency)
+  // 2. PRICING: ข้อมูลราคาหลัก (สำหรับหน้าแรก)
+  pricing: {
+    starter: {
+      price: "3,900",
+      label: "CORE_PACKAGE",
+      details: [
+        "หน้าเว็บสวยงาม ข้อมูลครบในหน้าเดียว",
+        "รองรับมือถือ แท็บเล็ต และคอมพิวเตอร์",
+        "ติดตั้งปุ่มติดต่อ LINE & โทรศัพท์",
+        "ดูแลระบบพื้นฐานให้ฟรีตลอดการใช้งาน",
+      ],
     },
+    business: {
+      price: "5,900",
+      label: "PRO_GROWTH",
+      isRecommended: true,
+      details: [
+        "ฟรี! ชื่อเว็บไซต์ (.com) และพื้นที่ 1 ปี",
+        "ระบบหลายหน้า (Multi-page) ลงข้อมูลได้ลึก",
+        "ระบบแจ้งเตือนลูกค้าทักแชทเข้า LINE",
+        "วิดีโอสอนวิธีเปลี่ยนข้อมูลเองแบบง่ายๆ",
+      ],
+    },
+  },
 
-    // 🛡️ ส่วนการันตี (Trust Builders)
-    guarantee: [
-      "100% Satisfaction Guarantee",
-      "No Hidden Fees",
-      "Lifetime Security Updates",
-    ],
+  // 3. PRODUCTS: ข้อมูลสินค้า/บริการ สำหรับวางขาย (หน้า Services/Catalog)
+  products: [
+    {
+      id: "p1",
+      name: "Standard Web Package",
+      price: "3,900",
+      description: "เริ่มต้นธุรกิจออนไลน์ด้วยเว็บไซต์หน้าเดียวที่ทรงพลัง",
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/Header.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🏥 AI CONTEXT: PRODUCTION PROFESSIONAL HEADER (FIXED)
+// ----------------------------------------------------
+
+"use client"
+
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
+import { useParams, usePathname } from "next/navigation"
+import { Phone, ShieldCheck, Menu, X } from "lucide-react"
+
+interface HeaderProps {
+  themeColor?: string
+  contact?: {
+    lineId: string
+    phone: string
+  }
+}
+
+export default function Header({
+  themeColor = "#0f766e", // Default เป็นสี Teal ตาม Medical Template
+  contact,
+}: HeaderProps) {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const params = useParams()
+  const pathname = usePathname()
+
+  const templateId = (params?.template_id as string) || "starter"
+
+  const navLinks = [
+    { name: "Home", href: `/${templateId}` },
+    { name: "Services", href: `/${templateId}/services` },
+    { name: "Contact", href: `/${templateId}/contact` },
+  ]
+
+  // ตรวจสอบการเลื่อนหน้าจอ
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // ✅ FIX: แก้ไข Error "Calling setState synchronously within an effect"
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
+  return (
+    <header
+      className={`fixed left-0 right-0 top-0 z-[100] transition-all duration-300 ${
+        isScrolled || isMobileMenuOpen
+          ? "border-b border-slate-100 bg-white/95 py-3 shadow-sm backdrop-blur-md"
+          : "border-b border-transparent bg-white py-5"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
+        {/* 1. BRAND_IDENTITY */}
+        <Link
+          href={`/${templateId}`}
+          className="group flex select-none items-center gap-3"
+        >
+          <div
+            className="flex h-10 w-10 items-center justify-center font-black text-white transition-transform group-hover:scale-105"
+            style={{ backgroundColor: themeColor }}
+          >
+            A
+          </div>
+          <div className="flex flex-col">
+            <span className="text-xl font-black uppercase leading-none tracking-tighter text-slate-900">
+              AEMDEVWEB<span style={{ color: themeColor }}>.</span>
+            </span>
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/HeroSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION HERO SECTION (MASTER)
+// Identity: First-Impression Specialist, Stable Framer Motion
+// Fix: Image Optimization for All Environments (Unoptimized)
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import Image from "next/image"
+import { motion, Variants, easeOut } from "framer-motion"
+import { ArrowRight, ShieldCheck } from "lucide-react"
+import styles from "../StarterStyle.module.css"
+
+interface HeroProps {
+  title?: string
+  subtitle?: string
+  image?: string
+  price?: string
+  themeColor?: string
+}
+
+// ------------------------
+// Animation Variants
+// ------------------------
+const containerVars: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
   },
 }
+
+const itemVars: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+}
+
+// ------------------------
+// HeroSection Component
+// ------------------------
+export default function HeroSection({
+  title = "จบทุกปัญหาเรื่องทำเว็บ\nสร้างความน่าเชื่อถือทันที",
+  subtitle = "เราส่งมอบเว็บไซต์ที่เปิดไว อ่านง่าย และช่วยให้ลูกค้าตัดสินใจซื้อได้เร็วขึ้น ไม่ใช้ศัพท์เทคนิคให้ปวดหัว จบงานตามกำหนด 100%",
+  image = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/starter/hero-placeholder.jpg",
+  price = "3,900",
+  themeColor = "#1e40af",
+}: HeroProps) {
+  return (
+    <section className={styles.hero}>
+      <motion.div
+        variants={containerVars}
+        initial="hidden"
+        animate="visible"
+        className="mx-auto w-full max-w-7xl"
+      >
+        <div className="flex flex-col items-center px-6">
+          {/* 🛰️ SYSTEM_STATUS_LABEL */}
+          <motion.div variants={itemVars} className={styles.label}>
+            <ShieldCheck size={14} className="text-blue-600" />
+            System_Ready_2025 // Production_Active
+          </motion.div>
+
+          {/* 📢 MAIN_HEADLINE */}
+          <motion.h1 variants={itemVars} className={styles.mainTitle}>
+            {title.split("\n").map((line, i) => (
+              <React.Fragment key={i}>
+                {line}
+                {i === 0 && <br />}
+              </React.Fragment>
+            ))}
+          </motion.h1>
+
+          {/* 📝 SUBTITLE */}
+          <motion.p
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/FeaturesSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: ELITE BUSINESS & THAI-USER EXPERIENCE
+// Identity: Production Professional (Seamless Grid Cell)
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Zap, Smartphone, MessageCircle } from "lucide-react"
+
+interface Feature {
+  id: number
+  title: string
+  description: string
+  icon: string
+}
+
+interface FeaturesSectionProps {
+  features: Feature[]
+  themeColor: string
+}
+
+export default function FeaturesSection({
+  features,
+  themeColor,
+}: FeaturesSectionProps) {
+  // ฟังก์ชันเลือก Icon ให้ตรงกับข้อมูล
+  const renderIcon = (iconName: string) => {
+    const props = { size: 32, strokeWidth: 1.5, style: { color: themeColor } }
+    switch (iconName) {
+      case "Zap":
+        return <Zap {...props} />
+      case "Smartphone":
+        return <Smartphone {...props} />
+      case "MessageCircle":
+        return <MessageCircle {...props} />
+      default:
+        return <Zap {...props} />
+    }
+  }
+
+  return (
+    <section id="features" className="border-b border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        {/* HEADER_CELL: หัวข้อในกรอบตาราง */}
+        <div className="border-b border-slate-200 p-10 md:p-16">
+          <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em] text-blue-600">
+            Service_Capabilities
+          </span>
+          <h2 className="text-4xl font-black uppercase tracking-tighter">
+            คุณสมบัติที่ธุรกิจคุณจะได้รับ
+          </h2>
+        </div>
+
+        {/* FEATURES_GRID: ตาราง 3 ช่องแบบไร้รอยต่อ */}
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {features.map((feature, idx) => (
+            <div
+              key={feature.id}
+              className={`border-b border-slate-200 p-10 transition-colors hover:bg-slate-50 md:border-b-0 md:p-14 ${
+                idx !== features.length - 1 ? "md:border-r" : ""
+              }`}
+            >
+              <div className="mb-8">{renderIcon(feature.icon)}</div>
+
+              <h3 className="mb-4 text-xl font-black uppercase tracking-tight">
+                {feature.title}
+              </h3>
+
+              <p className="font-medium leading-relaxed text-slate-500">
+                {feature.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/GuaranteeSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION GUARANTEE SECTION
+// Identity: Trust & Stability (ความเชื่อมั่นและบริการ)
+// Design: Sharp Grid Architecture (สไตล์เหลี่ยมคม)
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Heart, ShieldCheck, Headphones } from "lucide-react"
+
+export default function GuaranteeSection() {
+  const guarantees = [
+    {
+      icon: <ShieldCheck size={32} />,
+      title: "มั่นใจ ไม่ทิ้งงาน",
+      desc: "จดทะเบียนชัดเจน มีตัวตนจริง ติดต่อได้ตลอดเวลา พร้อมสัญญาจ้างมาตรฐาน",
+      label: "IDENTITY_VERIFIED",
+    },
+    {
+      icon: <Headphones size={32} />,
+      title: "สอนใช้งานฟรี",
+      desc: "มีคู่มือและคลิปสอนแก้ข้อมูลเองได้ ไม่ต้องรอช่างให้เสียเวลา จัดการเองได้ 100%",
+      label: "HANDOVER_READY",
+    },
+    {
+      icon: <Heart size={32} />,
+      title: "ดูแลหลังการขาย",
+      desc: "ระบบมีปัญหาเราแก้ให้ฟรี ตลอดอายุการใช้งาน มั่นใจได้ว่าธุรกิจจะไม่สะดุด",
+      label: "LIFETIME_SUPPORT",
+    },
+  ]
+
+  return (
+    <section className="overflow-hidden border-b border-blue-700 bg-blue-600 text-white">
+      <div className="mx-auto max-w-7xl border-x border-blue-500/30">
+        {/* GRID_LAYOUT: แบ่ง 3 ส่วนด้วยเส้นขอบบางๆ สไตล์ Industrial */}
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-3">
+          {guarantees.map((item, idx) => (
+            <div
+              key={idx}
+              className={`group flex flex-col gap-6 p-10 transition-all duration-300 hover:bg-blue-700/50 md:p-14 ${
+                idx !== guarantees.length - 1
+                  ? "border-b border-blue-500/30 md:border-b-0 md:border-r"
+                  : ""
+              }`}
+            >
+              {/* ICON_HOLDER: ปรับให้ดูเป็นระบบเครื่องจักร */}
+              <div className="text-blue-200 transition-transform duration-500 group-hover:scale-110 group-hover:text-white">
+                {item.icon}
+              </div>
+
+              <div className="space-y-3">
+                <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-blue-300/60">
+                  {item.label}
+                </span>
+                <h4 className="text-2xl font-black uppercase leading-none tracking-tighter">
+                  {item.title}
+                </h4>
+                <p className="text-sm font-medium uppercase leading-relaxed tracking-tight text-blue-100/80">
+                  {item.desc}
+                </p>
+              </div>
+
+              {/* DECORATIVE_BAR: เส้นขอบล่างเพิ่มมิติ */}
+              <div className="h-1 w-12 bg-white/20 transition-all duration-500 group-hover:w-full" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/PerformanceSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: ELITE BUSINESS PERFORMANCE (FIXED)
+// Identity: Production Professional (Data Visualization)
+// Design: Industrial Grid, High-Contrast Data Display
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Zap, Activity, ShieldCheck, BarChart3 } from "lucide-react"
+
+export default function PerformanceSection() {
+  const stats = [
+    {
+      label: "PAGESPEED_SCORE",
+      value: "99",
+      unit: "/100",
+      desc: "คะแนนการโหลดหน้าเว็บ",
+      icon: <Zap size={10} />,
+    },
+    {
+      label: "UPTIME_RATIO",
+      value: "99.9",
+      unit: "%",
+      desc: "ความเสถียรของเซิร์ฟเวอร์",
+      icon: <Activity size={10} />,
+    },
+    {
+      label: "SECURITY_LEVEL",
+      value: "A+",
+      unit: "V",
+      desc: "มาตรฐานความปลอดภัย",
+      icon: <ShieldCheck size={10} />,
+    },
+  ]
+
+  return (
+    <section className="overflow-hidden border-b border-slate-800 bg-slate-900 text-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          {/* 1. BRAND_HEADER_CELL */}
+          <div className="border-b border-slate-800 bg-slate-900/50 p-10 md:col-span-4 md:border-b-0 md:border-r md:p-16">
+            <div className="mb-8 flex items-center gap-3">
+              <div className="h-1 w-10 bg-blue-500" />
+              <BarChart3 size={16} className="text-slate-500" />
+            </div>
+            <h2 className="mb-6 text-3xl font-black uppercase leading-[1.1] tracking-tighter md:text-4xl">
+              HIGH_SPEED <br /> PRODUCTION
+            </h2>
+            <p className="text-sm font-bold uppercase leading-relaxed tracking-tight text-slate-400">
+              เราไม่ได้ออกแบบแค่ความสวยงาม แต่เราเน้นที่ประสิทธิภาพสูงสุด
+              เพื่อให้แน่ใจว่าลูกค้าของคุณจะไม่เสียเวลารอแม้แต่วินาทีเดียว
+            </p>
+          </div>
+
+          {/* 2. DATA_CELLS_GRID */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:col-span-8">
+            {stats.map((item, idx) => (
+              <div
+                key={idx}
+                className="group flex flex-col justify-center border-b border-slate-800 p-10 transition-colors last:border-b-0 last:border-r-0 hover:bg-slate-800/30 sm:border-b-0 sm:border-r md:p-12"
+              >
+                {/* METRIC_LABEL */}
+                <span className="mb-8 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.3em] text-blue-500">
+                  {item.icon} {item.label}
+                </span>
+
+                {/* MAIN_VALUE */}
+                <div className="mb-3 flex items-baseline transition-transform duration-500 group-hover:translate-x-1">
+                  <span className="text-6xl font-black italic leading-none tracking-tighter md:text-7xl">
+                    {item.value}
+                  </span>
+                  <span className="ml-1 font-mono text-xl font-bold text-slate-600">
+                    {item.unit}
+                  </span>
+                </div>
+
+                {/* DESCRIPTION: Fixed Comment Text Node Error */}
+                <p className="text-[10px] font-bold uppercase leading-none tracking-[0.1em] text-slate-500">
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/Footer.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION PROFESSIONAL FOOTER
+// Identity: Stable Grid Architecture, Industrial Design
+// Accessibility: Direct Thai Communication
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import {
+  Mail,
+  Phone,
+  MessageCircle,
+  ArrowUpRight,
+  ShieldCheck,
+} from "lucide-react"
+
+interface FooterProps {
+  contact?: {
+    lineId: string
+    phone: string
+    facebook?: string
+    email: string
+  }
+}
+
+export default function Footer({ contact }: FooterProps) {
+  const currentYear = new Date().getFullYear()
+
+  return (
+    <footer className="border-t border-slate-800 bg-slate-900 text-white">
+      <div className="mx-auto max-w-7xl">
+        {/* MAIN_FOOTER_GRID: ระบบตารางที่แข็งแรง */}
+        <div className="grid grid-cols-1 gap-0 border-x border-slate-800 md:grid-cols-12">
+          {/* 1. BRAND & VISION: ความน่าเชื่อถือในแวบแรก */}
+          <div className="border-b border-slate-800 p-10 transition-colors hover:bg-slate-800/20 md:col-span-5 md:border-r md:p-16">
+            <div className="mb-8 flex select-none items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center bg-blue-600 font-black italic text-white">
+                A
+              </div>
+              <span className="text-xl font-black uppercase tracking-tighter">
+                AEMDEVWEB<span className="text-blue-500">.</span>
+              </span>
+            </div>
+            <p className="mb-8 max-w-sm text-lg font-medium leading-relaxed text-slate-400">
+              เราเปลี่ยนเทคโนโลยีที่ซับซ้อน ให้กลายเป็นเครื่องมือที่ใช้งานง่าย
+              เพื่อขับเคลื่อนธุรกิจของคุณสู่มาตรฐานสากลด้วยระบบที่แม่นยำที่สุด
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-2 border border-slate-700 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                <ShieldCheck size={12} /> System_v1.0
+              </div>
+              <div className="flex items-center gap-2 border border-slate-700 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-slate-500">
+                Verified_Production
+              </div>
+            </div>
+          </div>
+
+          {/* 2. CONTACT_CHANNELS: ช่องทางที่เข้าถึงง่ายที่สุด */}
+          <div className="border-b border-slate-800 bg-slate-900/50 p-10 md:col-span-4 md:border-r md:p-16">
+            <span className="mb-8 block text-[10px] font-bold uppercase tracking-[0.3em] text-blue-500">
+              Direct_Communication
+            </span>
+            <ul className="space-y-6">
+              <li>
+                <a
+                  href={`tel:${contact?.phone}`}
+                  className="group flex items-center justify-between transition-all duration-300 hover:text-blue-400"
+                >
+                  <div className="flex items-center gap-4">
+                    <Phone
+                      size={18}
+                      className="text-slate-600 group-hover:text-blue-400"
+                    />
+                    <span className="font-bold tracking-tight">
+                      {contact?.phone || "08x-xxx-xxxx"}
+                    </span>
+                  </div>
+                  <ArrowUpRight
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/CartSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: ELITE BUSINESS PRICING (REFACTORED)
+// Identity: Production Professional (Stable Grid Architecture)
+// Fix: Thai Typography Leading & Responsive Grid Overflow
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { Check, ArrowRight } from "lucide-react"
+
+interface PricingPlan {
+  price: string
+  label: string
+  isRecommended?: boolean
+  details: string[]
+}
+
+interface CartSectionProps {
+  pricing?: {
+    starter: PricingPlan
+    business: PricingPlan
+  }
+  themeColor?: string
+}
+
+export default function CartSection({
+  pricing,
+  themeColor = "#1e40af",
+}: CartSectionProps) {
+  // Safe Access: ป้องกัน Error หากข้อมูล Pricing หายไปหรือไม่ครบ
+  if (!pricing || !pricing.starter || !pricing.business) return null
+
+  const plans = [
+    { key: "starter", data: pricing.starter },
+    { key: "business", data: pricing.business },
+  ]
+
+  return (
+    <section
+      id="pricing"
+      className="overflow-hidden border-b border-slate-200 bg-white"
+    >
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        {/* PRICING_HEADER: ปรับ Leading สำหรับฟอนต์ไทย */}
+        <div className="border-b border-slate-200 bg-slate-50/50 p-10 md:p-16">
+          <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
+            Investment_Structure
+          </span>
+          <h2 className="text-4xl font-black uppercase leading-[1.15] tracking-tighter md:text-6xl">
+            ราคาโปร่งใส <br />
+            ไม่มีค่าใช้จ่ายแฝง
+          </h2>
+        </div>
+
+        {/* PRICING_GRID: แบ่ง 2 ฝั่งชัดเจน ล็อกความกว้างป้องกันการยืด */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {plans.map((plan) => (
+            <div
+              key={plan.key}
+              className={`flex flex-col p-10 transition-all duration-300 md:p-16 ${
+                plan.data.isRecommended
+                  ? "bg-slate-900 text-white"
+                  : "border-b border-slate-200 bg-white text-slate-900 last:border-b-0 md:border-b-0 md:border-r"
+              }`}
+            >
+              <div className="mb-12">
+                <span
+                  className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
+                    plan.data.isRecommended ? "text-blue-400" : "text-slate-400"
+                  }`}
+                >
+                  {plan.data.label}
+                </span>
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="text-6xl font-black italic leading-none tracking-tighter md:text-7xl">
+                    {plan.data.price}
+                  </span>
+                  <span className="font-mono text-lg font-bold tracking-tighter opacity-50">
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/FAQSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: ELITE BUSINESS & THAI-USER EXPERIENCE
+// Identity: Production Professional (Sharp Accordion System)
+// Fix: Layout Stability & Thai Typography Optimized
+// ----------------------------------------------------
+
+"use client"
+
+import React, { useState } from "react"
+import { Plus, Minus } from "lucide-react"
+
+export default function FAQSection() {
+  // เริ่มต้นด้วยการเปิดคำถามแรกไว้เพื่อเป็น Guide ให้ผู้ใช้งาน
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
+
+  const faqs = [
+    {
+      q: "ต้องเตรียมข้อมูลอะไรบ้างในการเริ่มงาน?",
+      a: "เตรียมเพียงข้อมูลพื้นฐานธุรกิจ รูปภาพสินค้า/บริการ และเบอร์โทรติดต่อครับ ทีมงานจะช่วยเรียบเรียงเนื้อหาให้เข้ากับโครงสร้างเว็บไซต์ที่โหลดไวที่สุดให้เอง",
+    },
+    {
+      q: "เว็บไซต์รองรับการแสดงผลในมือถือหรือไม่?",
+      a: "รองรับ 100% ครับ เราใช้ระบบ Responsive มาตรฐานสากล เว็บจะปรับขนาดให้สวยงามอัตโนมัติทั้งบน iPhone, Android และแท็บเล็ตทุกรุ่น",
+    },
+    {
+      q: "มีค่าใช้จ่ายรายปีเพิ่มเติมไหม?",
+      a: "ในปีแรกราคาแพ็กเกจรวมค่าจดชื่อเว็บและพื้นที่จัดเก็บแล้วครับ ปีถัดไปจะมีเพียงค่าต่ออายุชื่อโดเมนและเซิร์ฟเวอร์ตามจริง ซึ่งเราจะแจ้งเตือนล่วงหน้า 30 วัน",
+    },
+  ]
+
+  return (
+    <section id="faq" className="border-b border-slate-200 bg-slate-50">
+      <div className="mx-auto max-w-7xl border-x border-slate-200 bg-white">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-12">
+          {/* 1. SECTION_SIDEBAR: หัวข้อหลัก */}
+          <div className="border-b border-slate-200 bg-white p-10 md:col-span-4 md:border-b-0 md:border-r md:p-16">
+            <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em] text-blue-600">
+              Common_Inquiries
+            </span>
+            <h2 className="text-4xl font-black uppercase leading-[1.1] tracking-tighter">
+              คำถาม <br />
+              ที่พบบ่อย
+            </h2>
+          </div>
+
+          {/* 2. ACCORDION_LIST: รายการคำถามแบบโต้ตอบ */}
+          <div className="flex flex-col bg-white md:col-span-8">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className={`cursor-pointer border-b border-slate-200 transition-all duration-300 last:border-b-0 ${
+                  openIndex === idx ? "bg-slate-50/80" : "hover:bg-slate-50"
+                }`}
+                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+              >
+                {/* QUESTION_ROW */}
+                <div className="flex items-center justify-between gap-4 p-8">
+                  <h3
+                    className={`text-lg font-bold tracking-tight transition-colors duration-300 ${
+                      openIndex === idx ? "text-blue-600" : "text-slate-900"
+                    }`}
+                  >
+                    {faq.q}
+                  </h3>
+                  <div
+                    className={`flex-shrink-0 transition-transform duration-300 ${openIndex === idx ? "rotate-180" : "rotate-0"}`}
+                  >
+                    {openIndex === idx ? (
+                      <Minus size={20} className="text-blue-600" />
+                    ) : (
+                      <Plus size={20} className="text-slate-400" />
+                    )}
+                  </div>
+                </div>
+
+                {/* ANSWER_ROW: แอนิเมชันเปิด-ปิดที่นุ่มนวล */}
+                {openIndex === idx && (
+                  <div className="px-8 pb-8 font-medium leading-relaxed text-slate-500 duration-300 animate-in fade-in slide-in-from-top-2">
+                    <p className="max-w-2xl text-base">{faq.a}</p>
+```
+
+### `app/(marketing)/[template_id]/_templates/starter/components/SuccessSection.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: ELITE BUSINESS & THAI-USER EXPERIENCE
+// Identity: Production Professional (Final Call to Action)
+// Design: High-Contrast Minimalist, Grid-Stable
+// ----------------------------------------------------
+
+"use client"
+
+import React from "react"
+import { MessageSquare, ArrowRight, Zap } from "lucide-react"
+
+interface SuccessSectionProps {
+  themeColor?: string
+  contact?: {
+    lineId: string
+  }
+}
+
+export default function SuccessSection({
+  themeColor = "#1e40af",
+  contact,
+}: SuccessSectionProps) {
+  return (
+    <section className="overflow-hidden border-b border-slate-200 bg-white">
+      <div className="mx-auto max-w-7xl border-x border-slate-200">
+        <div className="relative flex flex-col items-center px-6 py-24 text-center md:px-10 md:py-36">
+          {/* 🧩 DECORATIVE_BACKGROUND_ELEMENTS */}
+          <div className="absolute left-0 top-0 h-20 w-20 border-l border-t border-slate-100" />
+          <div className="absolute bottom-0 right-0 h-20 w-20 border-b border-r border-slate-100" />
+
+          {/* 🏷️ SECTION_BADGE */}
+          <div className="mb-12 flex items-center gap-3 border border-slate-200 bg-white px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
+            <Zap size={12} className="text-yellow-500" /> Next_Step_Execution
+          </div>
+
+          {/* 📢 HEADLINE: Direct Thai UX Focus */}
+          <h2 className="mb-10 text-5xl font-black uppercase leading-[0.9] tracking-tighter text-slate-900 md:text-8xl">
+            เริ่มสร้างความต่าง <br />
+            <span style={{ color: themeColor }} className="italic">
+              ให้ธุรกิจวันนี้
+            </span>
+          </h2>
+
+          {/* 📝 SUB-COPY */}
+          <p className="mb-14 max-w-2xl text-lg font-bold uppercase leading-relaxed tracking-tight text-slate-500 md:text-xl">
+            ไม่ต้องเสียเวลากับระบบที่ซับซ้อน ให้เราดูแลเรื่องเทคนิคทั้งหมดแทนคุณ
+            เพื่อให้คุณโฟกัสกับการขยายธุรกิจได้อย่างเต็มที่
+          </p>
+
+          {/* ⚡ ACTION_GROUP: ปุ่มกดที่ออกแบบมาเพื่อ Conversion */}
+          <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
+            <a
+              href={`https://line.me/ti/p/${contact?.lineId || "@aemdev"}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 bg-[#00b900] px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-green-500/10 transition-all hover:brightness-105 active:scale-95"
+            >
+              <MessageSquare size={20} /> ทักแชทสอบถามทันที
+            </a>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex items-center justify-center gap-3 bg-slate-900 px-12 py-6 text-xs font-black uppercase tracking-[0.3em] text-white shadow-xl shadow-slate-900/10 transition-all hover:bg-slate-800 active:scale-95"
+            >
+              ดูผลงานที่ผ่านมา <ArrowRight size={20} />
+            </button>
+          </div>
+
+          {/* 📟 SYSTEM_FOOTNOTE: เพิ่มความน่าเชื่อถือทางเทคนิค */}
+          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
+              Project_Inquiry_Open
+            </div>
+            <span className="hidden text-slate-200 sm:block">|</span>
+            <div className="flex items-center gap-2">
+              Response_Time: <span className="text-slate-900">&lt; 30_Min</span>
+            </div>
+            <span className="hidden text-slate-200 sm:block">|</span>
 ```
 
 ### `app/(marketing)/[template_id]/_templates/clinic/ClinicTemplate.tsx`
@@ -1358,61 +3059,96 @@ export default function ClinicTemplate({ data }: ClinicProps) {
 ```ts
 /** @format */
 // ----------------------------------------------------
-// 🏥 AI CONTEXT: MEDICAL & WELLNESS TEMPLATE
-// Identity: คลินิกเวชกรรม/ศูนย์สุขภาพพรีเมียม (ไม่ใช่แบรนด์ไอที)
-// Tone: สะอาด, น่าเชื่อถือ, อบอุ่น (Medical Professionalism)
+// 🏥 CLINIC WELLNESS CONFIGURATION (NAMED EXPORT)
+// Path: app/(marketing)/[template_id]/_templates/clinic/config.ts
+// Identity: Aura Wellness Center (Premium Medical)
 // ----------------------------------------------------
 
 export const clinicConfig = {
   id: "template-medical-wellness",
-  name: "AURA WELLNESS CENTER", // 👈 เปลี่ยนชื่อแบรนด์สมมติให้ดูน่าเชื่อถือในสายการแพทย์
-  themeColor: "#0f766e", // 👈 ปรับเป็นสี Teal/Dark Green (ให้ความรู้สึกเยียวยาและพรีเมียมกว่า Blue ทั่วไป)
-  secondaryColor: "#f0fdfa",
+  name: "AURA WELLNESS CENTER",
+  themeColor: "#0f766e", // Deep Teal (Professional & Trust)
+  secondaryColor: "#f0fdfa", // Mint Water (Clean & Sterile)
+
   metadata: {
-    // 🛡️ SEO ยังคงให้เครดิต AEMDEVWEB ในฐานะ Developer
     title:
       "Aura Wellness Center | นวัตกรรมการดูแลสุขภาพระดับพรีเมียม by AEMDEVWEB",
     description:
-      "คลินิกเวชกรรมเฉพาะทางที่ผสานเทคโนโลยีสมัยใหม่เข้ากับการดูแลอย่างเหนือระดับ",
-    ogImage: "/images/projects/clinic.jpg",
+      "คลินิกเวชกรรมเฉพาะทางที่ผสานเทคโนโลยีสมัยใหม่เข้ากับการดูแลอย่างเหนือระดับ พร้อมระบบนัดหมายออนไลน์",
+    ogImage:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/clinic/og-medical.jpg",
   },
+
   content: {
-    // 🩺 เปลี่ยนจากคำศัพท์เชิงระบบ (Redefined) เป็นคำศัพท์ที่ลูกค้าต้องการได้ยิน
+    // --- Hero Section ---
     heroTitle: "PRECISION_CARE_FOR_YOU",
     heroSubtitle:
       "นิยามใหม่ของการดูแลสุขภาพเชิงป้องกัน โดยทีมแพทย์ผู้เชี่ยวชาญและเทคโนโลยีที่แม่นยำที่สุด",
+
+    // --- Statistics (Trust Indicators) ---
     stats: [
-      { id: 1, label: "BOARD_CERTIFIED", value: "15+" }, // เน้นวุฒิบัตรแพทย์
-      { id: 2, label: "HAPPY_PATIENTS", value: "12,000+" }, // เน้นผลลัพธ์คนไข้
-      { id: 3, label: "PRECISION_TECH", value: "99.9%" }, // เน้นความแม่นยำเครื่องมือ
+      {
+        id: 1,
+        label: "BOARD_CERTIFIED",
+        value: "15+",
+        detail: "ทีมแพทย์วุฒิบัตรผู้เชี่ยวชาญเฉพาะทาง",
+      },
+      {
+        id: 2,
+        label: "HAPPY_PATIENTS",
+        value: "12,000+",
+        detail: "ความไว้วางใจจากคนไข้ทั่วประเทศ",
+      },
+      {
+        id: 3,
+        label: "PRECISION_TECH",
+        value: "99.9%",
+        detail: "ความแม่นยำของนวัตกรรมการคัดกรอง",
+      },
     ],
+
+    // --- Core Medical Services ---
     services: [
       {
+        id: "svc-1",
         title: "EXECUTIVE_CHECKUP",
-        detail: "โปรแกรมตรวจสุขภาพระดับผู้บริหารที่เจาะลึกถึงระดับยีน",
+        detail:
+          "โปรแกรมตรวจสุขภาพระดับผู้บริหารที่เจาะลึกถึงระดับ DNA เพื่อวิเคราะห์ความเสี่ยงเฉพาะบุคคล",
+        icon: "Stethoscope",
       },
       {
+        id: "svc-2",
         title: "ANTI_AGING_MEDICINE",
-        detail: "ศาสตร์แห่งการชะลอวัยและฟื้นฟูเซลล์จากภายในสู่ภายนอก",
+        detail:
+          "ศาสตร์แห่งการชะลอวัยและฟื้นฟูเซลล์จากภายในสู่ภายนอก ด้วยนวัตกรรมทางการแพทย์ล่าสุด",
+        icon: "ShieldPlus",
       },
       {
+        id: "svc-3",
         title: "PERSONALIZED_WELLNESS",
-        detail: "โปรแกรมฟื้นฟูสุขภาพเฉพาะบุคคล ออกแบบโดยแพทย์ผู้เชี่ยวชาญ",
+        detail:
+          "โปรแกรมฟื้นฟูสุขภาพเฉพาะบุคคล ออกแบบโดยแพทย์เพื่อตอบโจทย์ไลฟ์สไตล์ของคุณ",
+        icon: "Activity",
       },
     ],
-    // 🚀 ส่วนเสริมเพื่อปิดการขาย (Conversion Drivers)
+
+    // --- Social Proof & Conversion ---
     trustBadges: [
-      "JCI International Standard",
+      "JCI International Standard Accredited",
       "Medical Innovation Award 2024",
-      "Certified Specialist Doctors",
-    ],
-  },
-}
+      "Certified Specialist Doctors Team",
 ```
 
 ### `app/(marketing)/[template_id]/page.tsx`
 
 ```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: DYNAMIC TEMPLATE ROUTER (STABLE)
+// Path: app/(marketing)/[template_id]/page.tsx
+// Identity: Central Entry Point for Dynamic Routing
+// ----------------------------------------------------
+
 import { notFound } from "next/navigation"
 import { TEMPLATE_REGISTRY } from "./_config/registry"
 
@@ -1420,42 +3156,72 @@ interface Props {
   params: Promise<{ template_id: string }>
 }
 
-// 🛰️ Dynamic SEO: ดึงค่าจาก config.ts ของแต่ละโฟลเดอร์มาใช้
+/**
+ * 🛰️ DYNAMIC_SEO_GENERATOR
+ * ดึงค่า Metadata จาก config.ts ของแต่ละเทมเพลตมาสร้าง SEO โดยอัตโนมัติ
+ */
 export async function generateMetadata({ params }: Props) {
   const { template_id } = await params
   const entry = TEMPLATE_REGISTRY[template_id.toLowerCase()]
 
-  if (!entry) return {}
+  // ป้องกันกรณีไม่พบข้อมูล Metadata
+  if (!entry || !entry.config?.metadata) {
+    return {
+      title: "Marketing Template | AEMDEVWEB",
+    }
+  }
+
+  const { metadata } = entry.config
 
   return {
-    title: entry.config.metadata.title,
-    description: entry.config.metadata.description,
+    title: metadata.title,
+    description: metadata.description,
     openGraph: {
-      images: [entry.config.metadata.ogImage],
+      title: metadata.title,
+      description: metadata.description,
+      images: metadata.ogImage ? [metadata.ogImage] : [],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: metadata.ogImage ? [metadata.ogImage] : [],
     },
   }
 }
 
-// ⚡ Static Generation
+/**
+ * ⚡ STATIC_GENERATION (SSG)
+ * สร้าง Path ของเทมเพลตทั้งหมดไว้ล่วงหน้าตอน Build Time เพื่อความเร็วสูงสุด
+ */
 export async function generateStaticParams() {
-  return Object.keys(TEMPLATE_REGISTRY).map((id) => ({ template_id: id }))
+  return Object.keys(TEMPLATE_REGISTRY).map((id) => ({
+    template_id: id,
+  }))
 }
 
+/**
+ * 🎨 MARKETING_PAGE_RENDERER
+ * หน้าแสดงผลหลักที่สลับเทมเพลตตาม [template_id]
+ */
 export default async function MarketingPage({ params }: Props) {
+  // จัดการ Async Params ตามมาตรฐาน Next.js 15
   const { template_id } = await params
+
+  // ดึงข้อมูลจาก Registry (Case-insensitive)
   const entry = TEMPLATE_REGISTRY[template_id.toLowerCase()]
 
+  // หากไม่มีเทมเพลตใน Registry ให้ส่งไปหน้า 404
   if (!entry) return notFound()
 
+  // ดึง Component ออกมา (เช่น StarterTemplate, CafeTemplate, ClinicTemplate)
   const SelectedTemplate = entry.component
 
   return (
-    <div className="selection:bg-slate-900 selection:text-white">
-      {/* ส่งข้อมูล config เข้าไปใน Template เป็น Props ได้เลย */}
-      <SelectedTemplate data={entry.config} />
-    </div>
-  )
-}
+    <main className="selection:bg-slate-900 selection:text-white">
+      {/* 🚀 PASS_DATA: ส่งก้อน config ทั้งหมดเข้าไปในชื่อ 'data'
+        เพื่อให้ทุก Template ดึงไปใช้งานผ่าน props.data ได้เหมือนกันทั้งหมด
 ```
 
 ### `app/(marketing)/[template_id]/layout.tsx`
@@ -1463,7 +3229,6 @@ export default async function MarketingPage({ params }: Props) {
 ```ts
 // app/(marketing)/[template_id]/layout.tsx
 import React from "react"
-import { TEMPLATE_REGISTRY } from "./_config/registry"
 
 interface MarketingLayoutProps {
   children: React.ReactNode
@@ -1472,61 +3237,14 @@ interface MarketingLayoutProps {
 
 export default async function MarketingLayout({
   children,
-  params,
 }: MarketingLayoutProps) {
-  const { template_id } = await params
-  const entry = TEMPLATE_REGISTRY[template_id.toLowerCase()]
-
-  // ดึงค่าสีหลักจาก Config (ถ้าไม่มีให้ใช้ Slate-900 เป็นค่าพื้นฐาน)
-  const brandColor = entry?.config?.themeColor || "#0f172a"
-  const brandName = entry?.config?.name || "MARKETING_UNIT"
+  // ❌ ลบ Header และ Footer ออกจากไฟล์นี้ทั้งหมด
+  // เพื่อให้แต่ละ Template (Starter, Cafe, Clinic) แสดง Header ของตัวเองได้อิสระ
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 🛠️ Dynamic Navigation */}
-      <nav className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between p-4">
-          <div className="text-xl font-black uppercase tracking-tighter text-slate-900">
-            {brandName}
-            <span style={{ color: brandColor }}>.</span>
-          </div>
-
-          <button
-            style={{ backgroundColor: brandColor }}
-            className="rounded-none px-6 py-2 text-sm font-bold text-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:opacity-90 active:scale-95"
-          >
-            CONNECT_NOW
-          </button>
-        </div>
-      </nav>
-
       {/* 🚀 Main Content Area */}
-      <main
-        role="main"
-        className="duration-700 animate-in fade-in slide-in-from-bottom-2"
-      >
-        {children}
-      </main>
-
-      {/* 🏁 Industrial Footer */}
-      <footer className="border-t bg-slate-50 py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-slate-400">
-              © 2025 JP-ENGINE // SYSTEM_READY
-            </p>
-            <div className="flex gap-4">
-              <div
-                className="h-2 w-2 animate-pulse rounded-full"
-                style={{ backgroundColor: brandColor }}
-              />
-              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
-                Status: Optimized
-              </span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <main role="main">{children}</main>
     </div>
   )
 }
@@ -1535,25 +3253,339 @@ export default async function MarketingLayout({
 ### `app/(marketing)/[template_id]/_config/registry.ts`
 
 ```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: TEMPLATE REGISTRY MASTER SYSTEM
+// Path: app/(marketing)/[template_id]/_config/registry.ts
+// Identity: Central Router for Multi-Industry Templates
+// ----------------------------------------------------
+
+import React from "react"
+
+// 1. IMPORT CONFIGS
 import { clinicConfig } from "../_templates/clinic/config"
 import { cafeConfig } from "../_templates/cafe/config"
 import { realEstateConfig } from "../_templates/realestate/config"
 import { constructionConfig } from "../_templates/construction/config"
 import { starterConfig } from "../_templates/starter/config"
+// เพิ่ม Config ของสุโขทัยค้าไม้
+import { starterConfig as woodBusinessConfig } from "../_templates/WoodBusiness/config"
 
+// 2. IMPORT TEMPLATES
 import ClinicTemplate from "../_templates/clinic/ClinicTemplate"
 import CafeTemplate from "../_templates/cafe/CafeTemplate"
 import RealEstateTemplate from "../_templates/realestate/RealEstateTemplate"
 import ConstructionTemplate from "../_templates/construction/ConstructionTemplate"
 import StarterTemplate from "../_templates/starter/StarterTemplate"
+// เพิ่ม Template ของสุโขทัยค้าไม้
+import WoodBusinessTemplate from "../_templates/WoodBusiness/WoodBusinessTemplate"
 
-export const TEMPLATE_REGISTRY: Record<string, any> = {
-  clinic: { config: clinicConfig, component: ClinicTemplate },
-  cafe: { config: cafeConfig, component: CafeTemplate },
-  realestate: { config: realEstateConfig, component: RealEstateTemplate },
-  construction: { config: constructionConfig, component: ConstructionTemplate },
-  starter: { config: starterConfig, component: StarterTemplate },
+// 3. DEFINE TYPES
+export interface TemplateEntry {
+  config: {
+    themeColor?: string
+    metadata: {
+      title: string
+      description: string
+      ogImage?: string
+    }
+    contact?: any
+    products?: any[]
+    [key: string]: any
+  }
+  component: React.ComponentType<any>
 }
+
+// 4. MASTER REGISTRY
+export const TEMPLATE_REGISTRY: Record<string, TemplateEntry> = {
+  clinic: {
+    config: clinicConfig,
+    component: ClinicTemplate,
+  },
+  cafe: {
+    config: cafeConfig,
+    component: CafeTemplate,
+  },
+  realestate: {
+    config: realEstateConfig,
+    component: RealEstateTemplate,
+  },
+  construction: {
+    config: constructionConfig,
+    component: ConstructionTemplate,
+  },
+  starter: {
+    config: starterConfig,
+    component: StarterTemplate,
+  },
+  // ลงทะเบียน "สุโขทัยค้าไม้" สำหรับ URL: /[your-site]/wood-business
+  "wood-business": {
+    config: woodBusinessConfig,
+    component: WoodBusinessTemplate,
+  },
+}
+
+/**
+ * Helper function สำหรับดึงข้อมูล Template ตาม ID
+ */
+export const getTemplateData = (id: string): TemplateEntry | undefined => {
+  return TEMPLATE_REGISTRY[id]
+}
+```
+
+### `app/(marketing)/[template_id]/services/page.tsx`
+
+```ts
+/** @format */
+// ----------------------------------------------------
+// 🚀 AI CONTEXT: PRODUCTION PRODUCT CATALOG (REFACTORED)
+// Identity: Grid-based Inventory, Thai UX Optimized
+// ----------------------------------------------------
+
+import React from "react"
+import { notFound } from "next/navigation"
+import { Check, ArrowRight } from "lucide-react" // ✅ Removed unused ShoppingCart
+import { TEMPLATE_REGISTRY } from "../_config/registry"
+
+interface Props {
+  params: Promise<{ template_id: string }>
+}
+
+export default async function ServicesPage({ params }: Props) {
+  const { template_id } = await params
+  const entry = TEMPLATE_REGISTRY[template_id.toLowerCase()]
+
+  if (!entry) return notFound()
+
+  const { themeColor, products } = entry.config
+
+  return (
+    <div className="mx-auto min-h-screen max-w-7xl bg-white px-6 pb-20 pt-40">
+      {/* 1. SECTION_HEADER: Industrial Sharp Design */}
+      <div className="mb-16 border-l-8 border-slate-900 pl-6">
+        <span className="mb-2 block text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
+          Available_Inventory
+        </span>
+        <h1 className="text-6xl font-black uppercase leading-none tracking-tighter text-slate-900">
+          บริการและแพ็กเกจ
+        </h1>
+      </div>
+
+      {/* 2. PRODUCT_GRID: High-Contrast Display */}
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
+        {products?.map((item: any) => (
+          <div
+            key={item.id}
+            className="group flex flex-col border border-slate-200 bg-white transition-all duration-500 hover:border-slate-900"
+          >
+            {/* PRODUCT_IMAGE_PLACEHOLDER */}
+            <div className="aspect-video relative flex items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50">
+              <div className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-300 transition-transform duration-700 group-hover:scale-110">
+                Product_Image_Visual
+              </div>
+              {/* Animated Accent Line */}
+              <div
+                className="absolute bottom-0 left-0 h-1.5 w-0 transition-all duration-500 group-hover:w-full"
+                style={{ backgroundColor: themeColor }}
+              />
+            </div>
+
+            <div className="flex flex-grow flex-col p-8 md:p-10">
+              <div className="mb-6 flex items-start justify-between">
+                <h3 className="text-3xl font-black uppercase leading-tight tracking-tighter text-slate-900">
+                  {item.name}
+                </h3>
+                <div className="text-right">
+                  <span className="block text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                    Starting_At
+                  </span>
+                  <span className="text-3xl font-black italic text-slate-900">
+                    ฿{item.price.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              <p className="mb-8 text-sm font-bold uppercase leading-relaxed tracking-tight text-slate-500">
+                {item.description}
+              </p>
+
+              {/* SPECS_LIST */}
+              <ul className="mb-10 flex-grow space-y-4">
+                {item.specs?.map((spec: string, idx: number) => (
+                  <li
+                    key={idx}
+                    className="flex items-center gap-3 text-xs font-bold uppercase tracking-wide text-slate-700"
+                  >
+```
+
+### `app/(marketing)/[template_id]/contact/page.tsx`
+
+```ts
+/** @format */
+"use client"
+
+import React, { useState } from "react"
+import { useParams } from "next/navigation"
+import { Send, Loader2, CheckCircle } from "lucide-react" // ✅ Removed unused MapPin
+import { TEMPLATE_REGISTRY } from "../_config/registry"
+
+export default function ContactPage() {
+  const { template_id } = useParams()
+  const entry = TEMPLATE_REGISTRY[(template_id as string).toLowerCase()]
+
+  // Form State
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    businessType: "",
+    budget: "",
+  })
+
+  if (!entry) return null
+  const { themeColor, contact } = entry.config
+  const methods = contact?.methods || []
+
+  // Handle Submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          templateId: template_id,
+          source_url: typeof window !== "undefined" ? window.location.href : "",
+        }),
+      })
+
+      if (response.ok) {
+        setSuccess(true)
+        setFormData({ name: "", phone: "", businessType: "", budget: "" })
+      }
+    } catch (error) {
+      console.error("Submission failed", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="mx-auto min-h-screen max-w-7xl bg-white px-6 pb-20 pt-40">
+      <div className="grid grid-cols-1 gap-20 lg:grid-cols-2">
+        {/* 1. LEFT_SIDE: INFO - Industrial Style */}
+        <div>
+          <div className="mb-12 border-l-8 border-slate-900 pl-6">
+            <span className="mb-2 block text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
+              Connect_With_Us
+            </span>
+            <h1 className="text-6xl font-black uppercase leading-none tracking-tighter text-slate-900">
+              คุยกับเรา <br />
+              เพื่อเริ่มงาน
+            </h1>
+          </div>
+          <div className="space-y-8">
+            {methods.map((method: any) => (
+              <a
+                href={method.link}
+                key={method.label}
+                className="group block border-b border-slate-100 pb-6 transition-colors"
+              >
+                <span className="mb-1 block text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                  {method.label}
+                </span>
+                <span className="text-2xl font-bold text-slate-800 transition-colors group-hover:opacity-70">
+                  {method.value}
+                </span>
+```
+
+### `app/loading.tsx`
+
+```ts
+/** @format */
+import React from "react"
+import { Cpu, Terminal } from "lucide-react"
+
+export default function Loading() {
+  return (
+    <main className="relative min-h-screen w-full overflow-hidden bg-slate-50 font-sans antialiased">
+      {/* 🛠️ BACKGROUND GRID DECOR (สไตล์กระดาษไขเขียนแบบ) */}
+      <div
+        className="absolute inset-0 z-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-40 [background-size:24px_24px]"
+        aria-hidden="true"
+      />
+
+      <div className="container relative z-10 mx-auto px-6 py-24 lg:py-40">
+        {/* ─── 01. HEADER SKELETON (หัวข้อหน้า) ─── */}
+        <div className="mb-20 space-y-8">
+          {/* Badge Skeleton */}
+          <div className="h-10 w-48 animate-pulse border-2 border-slate-300 bg-slate-200 shadow-[4px_4px_0px_0px_#e2e8f0]" />
+
+          <div className="space-y-4">
+            {/* Title Skeleton */}
+            <div className="h-20 w-full max-w-2xl animate-pulse bg-slate-900/10 md:h-32" />
+            {/* Subtitle Skeleton */}
+            <div className="h-6 w-full max-w-lg animate-pulse bg-slate-200" />
+          </div>
+        </div>
+
+        {/* ─── 02. GRID SKELETON (โครงร่างการ์ด 6 ใบ) ─── */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:gap-14">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="group relative flex flex-col border-[6px] border-slate-200 bg-white p-6 shadow-[10px_10px_0px_0px_#f1f5f9]"
+            >
+              {/* Image Skeleton with Shimmer Effect */}
+              <div className="relative mb-8 aspect-[16/10] overflow-hidden border-b-4 border-slate-200 bg-slate-100">
+                {/* Shimmer Overlay: วิ่งจากซ้ายไปขวา */}
+                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              </div>
+
+              {/* Meta Skeleton (Category & Ref) */}
+              <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
+                <div className="h-4 w-20 animate-pulse bg-slate-200" />
+                <div className="h-4 w-12 animate-pulse bg-slate-100" />
+              </div>
+
+              {/* Content Skeleton (Title & Description) */}
+              <div className="space-y-4">
+                <div className="h-8 w-3/4 animate-pulse bg-slate-200" />
+                <div className="space-y-2">
+                  <div className="h-4 w-full animate-pulse bg-slate-100" />
+                  <div className="h-4 w-5/6 animate-pulse bg-slate-100" />
+                </div>
+              </div>
+
+              {/* Footer Skeleton (Stats & Button) */}
+              <div className="mt-10 flex items-center justify-between border-t-2 border-slate-100 pt-6">
+                <div className="h-10 w-24 animate-pulse bg-slate-100" />
+                <div className="h-12 w-12 animate-pulse bg-slate-200" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ─── 03. SYSTEM STATUS INDICATOR (มุมขวาล่าง) ─── */}
+        <div className="fixed bottom-10 right-10 z-50 flex items-center gap-4 border-4 border-slate-900 bg-white px-6 py-3 shadow-[8px_8px_0px_0px_#0F172A]">
+          <div className="relative">
+            {/* ใช้ animate-spin-slow ที่ตั้งค่าไว้ใน tailwind.config.ts */}
+            <Cpu className="h-6 w-6 animate-spin-slow text-brand-orange" />
+            <div className="absolute inset-0 animate-ping rounded-full bg-brand-orange/20" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              System_Loading
+            </span>
+            <span className="font-mono text-xs font-bold uppercase text-slate-900">
+              Fetching_Registry...
+            </span>
+          </div>
+        </div>
 ```
 
 ### `app/api/contact/route.ts`
@@ -1645,145 +3677,170 @@ export async function POST(request: Request) {
 
 ```ts
 /** @format */
+"use client"
+
 import React, { memo } from "react"
-import AboutContent from "@/components/About"
-import CTA from "@/components/CTA"
-import { siteConfig } from "@/config/siteConfig"
-import { Metadata } from "next"
-import { Users, Code2, Heart, ArrowDownRight, Sparkles } from "lucide-react"
-import { cn } from "@/lib/utils"
+import Image from "next/image"
+import {
+  Check,
+  Code2,
+  HeartHandshake,
+  Lightbulb,
+  Sparkles,
+  ShieldCheck,
+} from "lucide-react"
+import { Card } from "@/components/ui/card"
 
-export const metadata: Metadata = {
-  title: `รู้จักเรา | ${siteConfig.name}`,
-  description:
-    "ทำความรู้จักกับ aemdevweb พาร์ทเนอร์ผู้ช่วยสร้างตัวตนบนโลกออนไลน์ให้กับธุรกิจ SME ด้วยมาตรฐานวิศวกรรมและความจริงใจ",
-}
+const AboutContent = () => {
+  const values = [
+    {
+      icon: <Code2 className="h-6 w-6 stroke-[1.5]" />,
+      title: "เทคโนโลยีระดับสากล",
+      description:
+        "เลือกใช้เครื่องมือที่เหมาะสมที่สุดกับธุรกิจคุณ เพื่อให้เว็บไซต์โหลดไว ปลอดภัย และพร้อมขยายตัวได้ในระยะยาว",
+    },
+    {
+      icon: <HeartHandshake className="h-6 w-6 stroke-[1.5]" />,
+      title: "สื่อสารตรงไปตรงมา",
+      description:
+        "ปรึกษาได้ทุกขั้นตอนเหมือนเพื่อนคู่คิด ไม่ใช้ศัพท์เทคนิคฟุ่มเฟือย เน้นช่วยแก้ปัญหาให้ธุรกิจจริง",
+    },
+    {
+      icon: <Lightbulb className="h-6 w-6 stroke-[1.5]" />,
+      title: "เน้นผลลัพธ์จริง",
+      description:
+        "เว็บไซต์ต้องไม่ใช่แค่สวย แต่ต้องเป็นพนักงานขายที่ทำงานได้จริง สร้างความน่าเชื่อถือและเปลี่ยนผู้เข้าชมเป็นลูกค้า",
+    },
+  ]
 
-const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 1. HERO SECTION: INDUSTRIAL BLUEPRINT ─── */}
-      <section className="relative overflow-hidden bg-slate-900 py-32 md:py-56">
-        {/* Blueprint Grid Background: สลับสีเส้นให้ดูมีความลึก */}
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1.5px,transparent_1.5px),linear-gradient(to_bottom,#1e293b_1.5px,transparent_1.5px)] bg-[size:5rem_5rem] opacity-40" />
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-20" />
-
-        {/* Cinematic Glows */}
-        <div className="absolute right-0 top-0 -mr-32 -mt-32 h-[600px] w-[600px] bg-blue-600/10 blur-[130px]" />
-
-        <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <div className="space-y-16">
-            <div className="group inline-flex items-center gap-3 border-l-4 border-blue-600 bg-white/5 px-6 py-3 backdrop-blur-md transition-all hover:bg-white/10">
-              <Sparkles size={14} className="animate-pulse text-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 md:text-xs">
-                Engineering Digital Trust
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
-              <div className="lg:col-span-8">
-                <h1 className="text-5xl font-black uppercase italic leading-[0.85] tracking-tighter text-white md:text-8xl lg:text-[110px]">
-                  เราสร้างเว็บเพื่อให้ <br />
-                  <span className="text-blue-600 underline decoration-white/10 underline-offset-8">
-                    ธุรกิจคุณไปได้ไกล
-                  </span>
-                </h1>
-              </div>
-              <div className="lg:col-span-4 lg:pb-4">
-                <p className="border-l-4 border-blue-600/30 pl-8 text-xl font-bold leading-relaxed text-slate-400 md:text-2xl">
-                  พาร์ทเนอร์ที่พร้อมเติบโตไปกับ{" "}
-                  <span className="text-white underline decoration-blue-600 decoration-4">
-                    SME และ หจก.
-                  </span>{" "}
-                  ทั่วไทยด้วยความแม่นยำครับ
-                </p>
-              </div>
-            </div>
+    <div className="space-y-24 py-12 md:space-y-40">
+      {/* ─── 1. STORY SECTION ─── */}
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-20">
+        {/* Image Area - ปรับสี Border เป็น Deep Blue และ Accent Orange */}
+        <div className="relative aspect-[4/5] overflow-hidden border-l-8 border-t-8 border-[#1E3A8A] shadow-2xl md:border-l-[16px] md:border-t-[16px] lg:col-span-5">
+          <Image
+            src="https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/About/About.png"
+            alt="aemdevweb vision"
+            fill
+            priority
+            className="object-cover grayscale-[20%] transition-all duration-1000 hover:scale-105 hover:grayscale-0"
+          />
+          <div className="absolute bottom-0 left-0 flex items-center gap-3 bg-[#1E3A8A] px-6 py-4 text-white md:px-8 md:py-5">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-[#F97316] shadow-[0_0_10px_#F97316]" />
+            <span className="text-[9px] font-black uppercase tracking-[0.3em] md:text-[10px]">
+              Crafting Digital Architecture
+            </span>
           </div>
         </div>
-      </section>
 
-      {/* ─── 2. CORE VALUES: BENTO SHARP STRUCTURE ─── */}
-      <section className="relative z-20 -mt-24 px-6">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-px border-4 border-slate-900 bg-slate-900 shadow-[20px_20px_0px_0px_rgba(30,41,59,0.2)] md:grid-cols-3">
-          {[
-            {
-              icon: <Code2 size={24} />,
-              color: "text-blue-600",
-              t: "Precision Craft",
-              d: "วิศวกรรมเว็บที่โหลดไว และรองรับโครงสร้าง SEO",
-            },
-            {
-              icon: <Heart size={24} />,
-              color: "text-rose-500",
-              t: "Genuine Care",
-              d: "ดูแลธุรกิจคุณ เหมือนเป็นธุรกิจของเราเอง",
-            },
-            {
-              icon: <Users size={24} />,
-              color: "text-emerald-500",
-              t: "Real Partnership",
-              d: "คุยตรงไปตรงมา ปรึกษาได้ทุกขั้นตอนงาน",
+        {/* Text Content */}
+        <div className="space-y-8 md:space-y-12 lg:col-span-7">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-3 border-b-2 border-[#F97316] pb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1E3A8A] md:text-xs">
+              <Sparkles size={14} className="text-[#F97316]" />
+              <span>ปรัชญาการทำงาน</span>
+            </div>
+            <h2 className="text-[clamp(2.5rem,7vw,4.5rem)] font-black leading-[0.9] tracking-tighter text-[#1E3A8A]">
+              จากโครงร่าง <br />
+              <span className="font-light italic text-slate-500">
+                สู่ความสำเร็จของคุณ
+              </span>
+            </h2>
+          </div>
+
+          <div className="space-y-6 text-base font-medium leading-relaxed text-slate-600 md:text-xl">
+            <p>
+              ผมเริ่มต้น{" "}
+              <span className="font-bold text-[#1E3A8A] underline decoration-[#F97316]/40 underline-offset-4">
+                aemdevweb
+              </span>{" "}
+              ด้วยแนวคิดที่ต้องการให้ SME ไทย มีเว็บไซต์มาตรฐานสากล
 ```
 
 ### `app/(main)/blog/[slug]/page.tsx`
 
 ```ts
 /** @format */
-import React from "react"
 import { notFound } from "next/navigation"
-import { blogData } from "@/data/blog/allposts"
+import { Metadata } from "next"
+import Link from "next/link"
 import Image from "next/image"
+import { blogData } from "@/data/blog/allposts"
+import { BlogPost } from "@/types/blog" // ✅ นำเข้า Interface ที่เราแก้ไขแล้ว
+import { ArrowLeft, Calendar, Share2, Tag } from "lucide-react"
+import JsonLd from "@/components/shared/JsonLd"
+import { siteConfig } from "@/config/siteConfig"
 
-// 🛠️ สร้างหน้า Static ล่วงหน้าตาม Slug ที่มี
+interface Props {
+  params: Promise<{ slug: string }>
+}
+
+/**
+ * 🛠️ Generate Static Params สำหรับทำ SSG
+ */
 export async function generateStaticParams() {
   return blogData.map((post) => ({
-    slug: post.slug || post.id, // รองรับทั้ง slug และ id
+    slug: post.slug,
   }))
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogData.find((p) => (p.slug || p.id) === params.slug)
+/**
+ * 🛡️ Dynamic Metadata เพื่อผลทาง SEO
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const post = (blogData as BlogPost[]).find((p) => p.slug === slug)
+
+  if (!post) return {}
+
+  return {
+    title: `${post.title} | ${siteConfig.name}`,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      images: post.image ? [post.image] : [],
+      type: "article",
+    },
+  }
+}
+
+export default async function BlogDetailPage({ params }: Props) {
+  const { slug } = await params
+  // ✅ บังคับ Type Casting เป็น BlogPost[] เพื่อกำจัด Error 'tags' does not exist
+  const post = (blogData as BlogPost[]).find((p) => p.slug === slug)
 
   if (!post) notFound()
 
+  // จัดการข้อมูล Author ให้เป็นมาตรฐาน
+  const authorName =
+    typeof post.author === "string" ? post.author : post.author.name
+  const authorAvatar =
+    typeof post.author !== "string" ? post.author.avatar : null
+
   return (
-    <article className="min-h-screen bg-white pb-32 pt-40">
-      <div className="container mx-auto max-w-4xl px-6">
-        {/* Post Meta */}
-        <div className="mb-8 flex items-center gap-4">
-          <span className="bg-slate-900 px-3 py-1 text-xs font-black uppercase tracking-widest text-white">
-            {post.category}
-          </span>
-          <time className="font-mono text-sm font-bold text-slate-400">
-            {post.date}
-          </time>
-        </div>
+    <main className="min-h-screen bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
+      {/* 🚀 SEO: ARTICLE SCHEMA */}
+      <JsonLd
+        type="BlogPosting"
+        data={{
+          headline: post.title,
+          image: post.image,
+          datePublished: post.date,
+          author: { "@type": "Person", name: authorName },
+          description: post.description,
+        }}
+      />
 
-        <h1 className="mb-12 text-4xl font-black uppercase italic leading-[1.1] tracking-tighter text-slate-900 md:text-7xl">
-          {post.title}
-        </h1>
-
-        {/* Featured Image */}
-        <div className="relative mb-16 aspect-video overflow-hidden border-4 border-slate-900 shadow-[12px_12px_0px_0px_#2563eb]">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
-        {/* Content Render */}
+      {/* ─── 01. HEADER SECTION ─── */}
+      <header className="relative border-b-[6px] border-[#0F172A] bg-white py-20 lg:py-32">
         <div
-          className="prose prose-slate prose-lg prose-headings:font-black prose-headings:uppercase prose-headings:italic prose-headings:tracking-tighter prose-strong:text-slate-900 prose-blockquote:border-l-8 prose-blockquote:border-blue-600 prose-img:border-4 prose-img:border-slate-900 max-w-none shadow-blue-600"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          className="bg-grid-pattern absolute inset-0 opacity-[0.03]"
+          aria-hidden="true"
         />
-      </div>
-    </article>
-  )
-}
+
+        <div className="container relative z-10 mx-auto max-w-5xl px-6">
 ```
 
 ### `app/(main)/blog/page.tsx`
@@ -1793,188 +3850,280 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 import React from "react"
 import { Metadata } from "next"
 import { blogData } from "@/data/blog/allposts"
+import { BlogPost } from "@/types/blog" // ✅ นำเข้า Type เพื่อความแม่นยำ
 import BlogSection from "@/components/BlogSection"
+import { BookOpen, Terminal, Activity, Hash } from "lucide-react"
+import JsonLd from "@/components/shared/JsonLd"
+import { siteConfig } from "@/config/siteConfig"
 
 export const metadata: Metadata = {
-  title: "Insights & Knowledge | AEMDEVWEB",
+  title: `Insights & Knowledge | ${siteConfig.name}`,
   description:
-    "รวบรวมเทคนิคการทำเว็บไซต์และการตลาดออนไลน์ฉบับพาร์ทเนอร์ เน้นนำไปใช้จริงกับธุรกิจของคุณ",
+    "รวบรวมเทคนิคการสร้างเว็บไซต์และการวางโครงสร้าง Digital Architecture ฉบับเจาะลึก เน้นการนำไปใช้จริงเพื่อเพิ่ม Conversion ให้ธุรกิจ SME ไทย",
+  openGraph: {
+    title: `Insights - ${siteConfig.name}`,
+    description: "Technical insights for modern business owners",
+    images: [`${siteConfig.url}${siteConfig.ogImage}`], // ✅ ใช้จาก siteConfig โดยตรง
+    type: "website",
+  },
 }
 
 export default function BlogPage() {
-  return (
-    <main className="min-h-screen bg-white py-24 lg:py-32">
-      <div className="container mx-auto px-6">
-        {/* HEADER */}
-        <div className="mb-20 border-b-8 border-slate-900 pb-12">
-          <div className="mb-4 inline-block bg-blue-600 px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-white">
-            KNOWLEDGE_HUB v2.0
-          </div>
-          <h1 className="text-6xl font-black uppercase italic leading-none tracking-tighter text-slate-900 md:text-9xl">
-            Latest <br />
-            <span className="text-blue-600">Insights.</span>
-          </h1>
-        </div>
+  // คำนวณ Metadata สำหรับ System Status Display
+  const totalArticles = blogData.length.toString().padStart(2, "0")
 
-        {/* CONTENT */}
-        <BlogSection posts={blogData} />
-      </div>
-    </main>
-  )
-}
+  return (
+    <main className="relative min-h-screen overflow-hidden bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
+      {/* 🚀 SEO STRUCTURED DATA */}
+      <JsonLd
+        type="CollectionPage"
+        data={{
+          name: `${siteConfig.name} Knowledge Hub`,
+          description: "Technical insights and digital strategy for Thai SME",
+          url: `${siteConfig.url}/blog`,
+        }}
+      />
+
+      {/* ─── 🛠️ TECHNICAL BACKGROUND DECOR ─── */}
+      <div
+        className="bg-grid-pattern absolute inset-0 -z-10 opacity-[0.03]"
+        aria-hidden="true"
+      />
+
+      <div className="container relative z-10 mx-auto px-6 py-24 lg:py-40">
+        {/* ─── 01. INDUSTRIAL HEADER ─── */}
+        <header className="mb-20 border-b-[10px] border-[#0F172A] pb-16">
+          <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
+            <div className="max-w-3xl space-y-8">
+              {/* Technical Badge */}
+              <div className="inline-flex items-center gap-3 border-2 border-[#0F172A] bg-[#0F172A] px-5 py-2 shadow-[4px_4px_0px_0px_#F97316]">
+                <Terminal size={16} className="text-[#F97316]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">
+                  KNOWLEDGE_DATABASE / LOG_V{siteConfig.version}
+                </span>
+              </div>
+
+              <h1 className="font-heading text-7xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-9xl">
+                Technical <br />
+                <span className="text-[#1E3A8A] underline decoration-[#F97316] decoration-[12px] underline-offset-[12px]">
+                  Insights.
+                </span>
+              </h1>
+
+              <p className="max-w-xl text-lg font-bold leading-relaxed text-slate-500 md:text-xl">
+                เจาะลึกเบื้องหลังการออกแบบโครงสร้างเว็บที่
+                &quot;ขายได้จริง&quot; เปลี่ยน Technical Debt
+                ให้เป็นกลยุทธ์ที่สร้างแต้มต่อให้ธุรกิจ
+              </p>
+            </div>
+
+            {/* System Status Display (Desktop) */}
+            <div className="hidden flex-col items-end gap-4 text-right md:flex">
+              <div className="flex gap-2">
+                <div className="flex h-14 w-14 items-center justify-center border-4 border-[#0F172A] bg-white shadow-[6px_6px_0px_0px_#0F172A]">
+                  <BookOpen size={24} className="text-[#0F172A]" />
+                </div>
+                <div className="flex h-14 w-14 items-center justify-center border-4 border-[#0F172A] bg-[#1E3A8A] text-white shadow-[6px_6px_0px_0px_#0F172A]">
+                  <Activity size={24} />
+                </div>
 ```
 
 ### `app/(main)/blog/loading.tsx`
 
 ```ts
 /** @format */
+import React from "react"
+import { Cpu, Terminal } from "lucide-react"
+
 export default function Loading() {
   return (
-    <div className="container mx-auto px-6 py-32">
-      <div className="h-20 w-3/4 animate-pulse bg-slate-100" />
-      <div className="mt-20 grid grid-cols-1 gap-10 md:grid-cols-2">
-        {[1, 2, 3, 4].map((i) => (
-          <div
-            key={i}
-            className="h-96 w-full animate-pulse border-4 border-slate-100 bg-slate-50"
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
+    <main className="relative min-h-screen w-full overflow-hidden bg-slate-50 font-sans antialiased">
+      {/* 🛠️ BACKGROUND GRID DECOR (สไตล์กระดาษไขเขียนแบบ) */}
+      <div
+        className="absolute inset-0 z-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-40 [background-size:24px_24px]"
+        aria-hidden="true"
+      />
+
+      <div className="container relative z-10 mx-auto px-6 py-24 lg:py-40">
+        {/* ─── 01. HEADER SKELETON (หัวข้อหน้า) ─── */}
+        <div className="mb-20 space-y-8">
+          {/* Badge Skeleton */}
+          <div className="h-10 w-48 animate-pulse border-2 border-slate-300 bg-slate-200 shadow-[4px_4px_0px_0px_#e2e8f0]" />
+
+          <div className="space-y-4">
+            {/* Title Skeleton */}
+            <div className="h-20 w-full max-w-2xl animate-pulse bg-slate-900/10 md:h-32" />
+            {/* Subtitle Skeleton */}
+            <div className="h-6 w-full max-w-lg animate-pulse bg-slate-200" />
+          </div>
+        </div>
+
+        {/* ─── 02. GRID SKELETON (โครงร่างการ์ด 6 ใบ) ─── */}
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:gap-14">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div
+              key={i}
+              className="group relative flex flex-col border-[6px] border-slate-200 bg-white p-6 shadow-[10px_10px_0px_0px_#f1f5f9]"
+            >
+              {/* Image Skeleton with Shimmer Effect */}
+              <div className="relative mb-8 aspect-[16/10] overflow-hidden border-b-4 border-slate-200 bg-slate-100">
+                {/* Shimmer Overlay: วิ่งจากซ้ายไปขวา */}
+                <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+              </div>
+
+              {/* Meta Skeleton (Category & Ref) */}
+              <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
+                <div className="h-4 w-20 animate-pulse bg-slate-200" />
+                <div className="h-4 w-12 animate-pulse bg-slate-100" />
+              </div>
+
+              {/* Content Skeleton (Title & Description) */}
+              <div className="space-y-4">
+                <div className="h-8 w-3/4 animate-pulse bg-slate-200" />
+                <div className="space-y-2">
+                  <div className="h-4 w-full animate-pulse bg-slate-100" />
+                  <div className="h-4 w-5/6 animate-pulse bg-slate-100" />
+                </div>
+              </div>
+
+              {/* Footer Skeleton (Stats & Button) */}
+              <div className="mt-10 flex items-center justify-between border-t-2 border-slate-100 pt-6">
+                <div className="h-10 w-24 animate-pulse bg-slate-100" />
+                <div className="h-12 w-12 animate-pulse bg-slate-200" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ─── 03. SYSTEM STATUS INDICATOR (มุมขวาล่าง) ─── */}
+        <div className="fixed bottom-10 right-10 z-50 flex items-center gap-4 border-4 border-slate-900 bg-white px-6 py-3 shadow-[8px_8px_0px_0px_#0F172A]">
+          <div className="relative">
+            {/* ใช้ animate-spin-slow ที่ตั้งค่าไว้ใน tailwind.config.ts */}
+            <Cpu className="h-6 w-6 animate-spin-slow text-brand-orange" />
+            <div className="absolute inset-0 animate-ping rounded-full bg-brand-orange/20" />
+          </div>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+              System_Loading
+            </span>
+            <span className="font-mono text-xs font-bold uppercase text-slate-900">
+              Fetching_Registry...
+            </span>
+          </div>
+        </div>
 ```
 
 ### `app/(main)/catalog/page.tsx`
 
 ```ts
 /** @format */
-import { Metadata } from "next"
+"use client"
+
+import React from "react"
+import { Layers, Zap, Target, Search } from "lucide-react" // ✅ แก้ layers -> Layers และลบ LayoutDashboard
 import { catalogProjects } from "@/data/catalog.projects"
 import { CatalogProjectsGrid } from "@/components/catalog/CatalogProjectsGrid"
-import { Sparkles, LayoutPanelLeft } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Project Catalog | AEM Dev",
-  description:
-    "รวมผลงานเว็บไซต์และ Landing Page สำหรับธุรกิจจริง ที่ออกแบบเพื่อ Conversion, Performance และ Trust",
+// ─── 🏗️ TYPE DEFINITIONS ───
+interface SectionHeaderProps {
+  title: string
+  subtitle: string
+  icon: React.ReactNode
+  light?: boolean
 }
 
 export default function CatalogPage() {
+  // กรองโปรเจกต์แยกตามกลุ่มหลักเพื่อจัด Section
+  const industrialProjects = catalogProjects.filter(
+    (p) =>
+      ["construction", "wood-business"].includes(p.category) ||
+      p.templateId === "wood-business"
+  )
+  const lifestyleProjects = catalogProjects.filter((p) =>
+    ["cafe", "starter"].includes(p.category)
+  )
+  const professionalProjects = catalogProjects.filter((p) =>
+    ["clinic", "real-estate"].includes(p.category)
+  )
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 🛠️ BACKGROUND ARCHITECTURE ─── */}
-      {/* ใช้ลายเส้นตารางแบบ Blueprint จางๆ */}
-      <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] opacity-60 [background-size:40px_40px]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute left-0 right-0 top-0 -z-10 h-96 bg-gradient-to-b from-slate-50 to-transparent"
-        aria-hidden="true"
-      />
-
-      <section className="mx-auto max-w-7xl px-6 py-24 md:py-40">
-        {/* ─── 1. INDUSTRIAL HEADER ─── */}
-        <header className="relative mb-24 max-w-4xl">
-          {/* Badge Style Label */}
-          <div className="mb-8 inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-5 py-2 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
-            <LayoutPanelLeft size={16} className="text-blue-600" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900">
-              Registry / Project_Catalog_V1
-            </span>
-          </div>
-
-          <h1 className="text-5xl font-black uppercase italic leading-[0.85] tracking-tighter text-slate-900 md:text-8xl lg:text-[100px]">
-            ตัวอย่างผลงาน <br />
-            <span className="text-blue-600 underline decoration-slate-900 decoration-[12px] underline-offset-[12px]">
-              ที่ใช้งานจริง
-            </span>
-          </h1>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-12">
-            <div className="md:col-span-8">
-              <p className="text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-                ทุกโปรเจกต์ถูกออกแบบจากโจทย์ธุรกิจจริง เน้นผลลัพธ์ด้านยอดขาย
-                ความน่าเชื่อถือ และประสิทธิภาพระดับ{" "}
-                <span className="text-slate-900 underline decoration-blue-600/30">
-                  Enterprise
-                </span>
-              </p>
+    <main className="min-h-screen bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
+      {/* ─── 01. CATALOG HERO ─── */}
+      <section className="relative overflow-hidden border-b-[6px] border-[#0F172A] bg-white py-24 md:py-32">
+        <div className="bg-grid-pattern absolute inset-0 opacity-10" />
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="max-w-4xl space-y-8">
+            <div className="inline-flex items-center gap-3 border-4 border-[#0F172A] bg-[#F97316] px-6 py-2 shadow-[6px_6px_0px_0px_#0F172A]">
+              <Zap size={16} fill="white" className="text-white" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">
+                Project Registry v2.5.0
+              </span>
             </div>
-            <div className="hidden items-center justify-end md:col-span-4 md:flex">
-              {/* Spinning Badge Decor */}
-              <div className="h-24 w-24 animate-[spin_10s_linear_infinite] rounded-full border-4 border-dashed border-slate-200 p-2">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-50 text-[10px] font-black uppercase tracking-tighter text-slate-300">
-                  AEM.DEV
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
 
-        {/* ─── 2. CATALOG GRID ─── */}
-        <div className="relative pb-20">
-          <CatalogProjectsGrid
-            projects={catalogProjects}
-            columns={3}
-            showCTA={true}
-          />
+            <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-8xl lg:text-9xl">
+              Solutions <br />
+              <span className="text-[#1E3A8A] underline decoration-[#0F172A] decoration-[10px] underline-offset-[12px]">
+                Catalog.
+              </span>
+            </h1>
+
+            <p className="max-w-2xl border-l-[12px] border-[#1E3A8A] pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
+              สำรวจสถาปัตยกรรมเว็บไซต์ที่เราออกแบบมาเพื่อแก้ปัญหาธุรกิจโดยเฉพาะ
+              เลือกโครงสร้างที่ใช่สำหรับอุตสาหกรรมของคุณ
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* ─── 3. BOTTOM DECOR ─── */}
-        <footer className="mt-20 flex items-center gap-4 border-t-2 border-slate-100 pt-10">
-          <div className="flex h-10 w-10 items-center justify-center bg-slate-900 text-white">
-            <Sparkles size={18} />
-          </div>
-          <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+      {/* ─── 02. SECTION: INDUSTRIAL & B2B ─── */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <SectionHeader
+            title="Industrial & Infrastructure"
+            subtitle="ระบบสำหรับงานก่อสร้าง, โรงงาน และธุรกิจค้าส่งที่เน้นความเชื่อมั่นสูง"
+            icon={<Target className="text-[#F97316]" />}
+          />
+          <CatalogProjectsGrid projects={industrialProjects} columns={3} />
+        </div>
+      </section>
+
+      {/* ─── 03. SECTION: LIFESTYLE & E-COMMERCE ─── */}
+      <section className="bg-[#0F172A] py-24 text-white md:py-32">
+        <div className="container mx-auto px-6">
+          <SectionHeader
+            title="Lifestyle & Modern Retail"
+            subtitle="โซลูชันสำหรับคาเฟ่และร้านค้าปลีก ที่เน้นประสบการณ์ลูกค้าและยอดขาย"
+            icon={<Layers className="text-[#1E3A8A]" />} // ✅ เปลี่ยนจาก Zap เป็น Layers เพื่อความสวยงามและใช้ Icon ที่ถูกต้อง
+            light
+          />
 ```
 
 ### `app/(main)/contact/page.tsx`
 
 ```ts
 /** @format */
+"use client"
+
 import React, { memo } from "react"
-import { Metadata } from "next"
 import {
   Sparkles,
   MessageCircle,
   ArrowDownRight,
   ShieldCheck,
   Zap,
+  MapPin,
+  Activity,
 } from "lucide-react"
 
 // Import Components
 import ContactForm from "@/components/ContactForm"
 import ContactInfo from "@/components/ContactInfo"
-import ContactMap from "./_components/ContactMap"
-
-// ✅ ใช้ shared JsonLd
 import JsonLd from "@/components/shared/JsonLd"
-
 import { siteConfig } from "@/config/siteConfig"
-
-/**
- * 🛠️ SEO Optimization: ดึงดูด SME ด้วย Keyword ที่ตรงจุด
- */
-export const metadata: Metadata = {
-  title: `ติดต่อพาร์ทเนอร์โปรเจกต์ | ${siteConfig.name}`,
-  description:
-    "เริ่มต้นเว็บไซต์ธุรกิจของคุณด้วยระบบวิศวกรรมที่แม่นยำ ปรึกษาฟรีสำหรับ SME และ หจก. คุยง่าย ตรงไปตรงมา งบไม่บานปลาย",
-  openGraph: {
-    title: `ติดต่อพาร์ทเนอร์โปรเจกต์ | ${siteConfig.name}`,
-    description:
-      "ยินดีให้คำปรึกษาฟรีเหมือนพาร์ทเนอร์สายเทคส่วนตัว เพื่อเว็บไซต์ที่ปิดการขายได้จริง",
-    url: `${siteConfig.url}/contact`,
-    siteName: siteConfig.name,
-    locale: "th_TH",
-    type: "website",
-  },
-}
 
 const ContactPage = () => {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
+    <main className="min-h-screen bg-background font-sans antialiased selection:bg-brand-blue selection:text-white">
       {/* 🚀 SEO STRUCTURED DATA */}
       <JsonLd
         type="LocalBusiness"
@@ -1987,32 +4136,51 @@ const ContactPage = () => {
         }}
       />
 
-      {/* ─── 1. HERO SECTION ─── */}
-      <section className="relative overflow-hidden border-b-[6px] border-slate-900 bg-slate-50 py-24 md:py-40">
-        {/* Blueprint Grid Background */}
+      {/* ─── 01. HERO SECTION ─── */}
+      <section className="relative overflow-hidden border-b-[6px] border-brand-navy bg-slate-50 py-24 md:py-40">
         <div
-          className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60"
-          aria-hidden="true"
-        />
-        {/* Cinematic Glow */}
-        <div
-          className="absolute -left-20 top-0 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px]"
+          className="absolute inset-0 z-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-40 [background-size:24px_24px]"
           aria-hidden="true"
         />
 
-        <div className="container mx-auto px-6">
+        <div
+          className="pointer-events-none absolute -left-20 top-0 h-96 w-96 rounded-full bg-brand-blue/10 blur-[120px]"
+          aria-hidden="true"
+        />
+
+        <div className="container relative z-10 mx-auto px-6">
           <div className="max-w-5xl space-y-12">
-            <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-6 py-3 shadow-[6px_6px_0px_0px_rgba(37,99,235,1)] transition-all hover:shadow-none">
-              <Sparkles size={16} className="animate-pulse text-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900 md:text-xs">
-                Available for New Projects v2025
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-3 border-4 border-brand-navy bg-white px-6 py-3 shadow-[6px_6px_0px_0px_#0F172A] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+              <Sparkles size={16} className="animate-pulse text-brand-orange" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-navy md:text-xs">
+                Protocol: Open for Project v{new Date().getFullYear()}
               </span>
             </div>
-            <h1 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-8xl lg:text-[100px]">
-              เปลี่ยนไอเดียให้เป็น <br />
-              <span className="text-blue-600 underline decoration-slate-900 decoration-8 underline-offset-[12px]">
-                ผลลัพธ์ที่จับต้องได้
+
+            {/* Headline */}
+            <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-brand-navy md:text-8xl lg:text-9xl">
+              Turn Vision into <br />
+              <span className="text-brand-blue underline decoration-brand-navy decoration-[12px] underline-offset-[16px]">
+                Reality.
               </span>
+            </h1>
+
+            <div className="flex flex-col gap-8 md:flex-row md:items-center">
+              <p className="max-w-2xl border-l-[12px] border-brand-orange pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
+                ปรึกษาฟรีสำหรับ SME ไทยที่ต้องการโครงสร้างเว็บที่แข็งแกร่ง
+                คุยง่าย ตรงจุด เหมือนมี{" "}
+                <span className="text-brand-navy">Technology Partner</span>{" "}
+                ดูแลโปรเจกต์ด้วยตัวเอง
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 02. MAIN CONTENT GRID (FORM & INFO) ─── */}
+      <section className="relative z-10 -mt-16 pb-24 md:pb-32">
+        <div className="container mx-auto px-6">
 ```
 
 ### `app/(main)/contact/_components/ContactMap.tsx`
@@ -2045,7 +4213,7 @@ export default function ContactMap() {
       id="location"
     >
       {/* ─── INDUSTRIAL BACKGROUND ─── */}
-      <div className="absolute inset-0 -z-10 bg-industrial-grid opacity-30" />
+      <div className="bg-industrial-grid absolute inset-0 -z-10 opacity-30" />
 
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-7xl">
@@ -2104,44 +4272,85 @@ export default function ContactMap() {
 
 ```ts
 /** @format */
-import ServicesPageClient from "./ServicesPageClient"
-import { servicesData } from "@/data/servicesData"
-
-export default function ServicesPage() {
-  return (
-    <>
-      {/* ✅ ส่งข้อมูลเข้า Client Component ตามที่ระบุ Type ไว้ */}
-      <ServicesPageClient services={servicesData} />
-    </>
-  )
-}
-```
-
-### `app/(main)/services/ServicesPageClient.tsx`
-
-```ts
-/** @format */
 "use client"
 
 import React from "react"
-// ✅ Import จาก Path จริง: components/Services.tsx
-import { Services } from "@/components/Services"
-import { ServiceItem } from "@/types/service"
+import { servicesData } from "@/data/servicesData"
+import Services from "@/components/Services"
+import PricingSection from "@/components/PricingSection" // เพิ่ม PricingSection เข้ามา
+import { siteConfig } from "@/config/siteConfig"
+import {
+  CheckCircle2,
+  Zap,
+  ShieldCheck,
+  BarChart3,
+  ChevronRight,
+} from "lucide-react"
 
-interface ServicesPageClientProps {
-  services: ServiceItem[]
-}
+export default function ServicesPage() {
+  // ข้อมูลบริการจะถูกเรียงตามที่จัดไว้ใน servicesData.ts (Starter > Wood > Clinic ...)
+  const allServices = servicesData.filter((s) => s.status === "READY")
 
-export default function ServicesPageClient({ services }: ServicesPageClientProps) {
+  const benefits = [
+    {
+      icon: <Zap className="text-[#F97316]" />,
+      title: "Ultra Fast Loading",
+      desc: "เว็บไซต์โหลดไว คะแนน Google PageSpeed 90+ เพิ่มโอกาสปิดการขายและดีต่อ SEO",
+    },
+    {
+      icon: <ShieldCheck className="text-[#F97316]" />,
+      title: "Security First",
+      desc: "โครงสร้างปลอดภัยด้วยมาตรฐานวิศวกรรมซอฟต์แวร์ พร้อมระบบ SSL ป้องกันข้อมูลทุกโปรเจกต์",
+    },
+    {
+      icon: <BarChart3 className="text-[#F97316]" />,
+      title: "Conversion Focus",
+      desc: "ออกแบบ UI/UX ให้ใช้งานง่าย นำทางลูกค้าไปสู่เป้าหมาย (การติดต่อ/การสั่งซื้อ) ได้อย่างลื่นไหล",
+    },
+  ]
+
   return (
     <main className="min-h-screen bg-white">
-      <div className="container mx-auto px-4">
-        {/* ✅ ส่งต่อข้อมูลไปยัง Component ที่มึงตั้งชื่อไว้ */}
-        <Services services={services} />
+      {/* ─── 1. Page Header: Architectural Blueprint Style ─── */}
+      <section className="relative overflow-hidden bg-[#1E3A8A] py-28 text-white lg:py-36">
+        {/* ลายตาราง Blueprint จางๆ */}
+        <div
+          className="absolute inset-0 opacity-[0.15]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="max-w-4xl">
+            <div className="mb-6 inline-flex items-center gap-2 bg-[#F97316] px-4 py-1 text-[10px] font-black uppercase tracking-[0.3em]">
+              Engineering Solutions
+            </div>
+            <h1 className="text-5xl font-black uppercase leading-[0.9] tracking-tighter md:text-8xl">
+              Professional <br />
+              <span className="text-white/40">Web Modules</span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg font-medium leading-relaxed text-blue-100/80 md:text-xl">
+              เราไม่ได้ขายแค่เว็บไซต์ แต่เราสร้าง "เครื่องมือทำเงิน"
+              ที่มีโครงสร้างแข็งแรง ปรับแต่งให้เข้ากับธุรกิจเฉพาะทาง
+              เพื่อผลลัพธ์ที่เป็นรูปธรรม
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 2. Services Grid: แสดงตามลำดับที่เน้นขาย (Hook > Trust > Specialist) ─── */}
+      <div className="relative z-10 -mt-10">
+        <Services services={allServices} />
       </div>
-    </main>
-  )
-}
+
+      {/* ─── 3. Pricing Section: ดึงความสนใจด้วยราคาที่จับต้องได้ ─── */}
+      <div className="border-y border-slate-200 bg-slate-50">
+        <PricingSection />
+      </div>
+
 ```
 
 ### `app/(main)/page.tsx`
@@ -2150,19 +4359,23 @@ export default function ServicesPageClient({ services }: ServicesPageClientProps
 /** @format */
 "use client"
 
-import React, { useMemo } from "react"
+import React, { useMemo, useCallback } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
-import { ArrowRight } from "lucide-react"
+import Image from "next/image"
+import { Zap, ChevronRight, Layout, Database, ShieldCheck } from "lucide-react"
 
-// ✅ แก้ไข Path จากเดิมที่ Error (@/data/blogData) เป็น Path ใหม่ที่รวมไฟล์แล้ว
+// ✅ Data Sources
+import { servicesData } from "@/data/servicesData"
 import { blogData } from "@/data/blog/allposts"
 
+// ✅ Critical Components (โหลดทันทีเพื่อ LCP)
 import Hero from "@/components/Hero"
 import SocialProof from "@/components/SocialProof"
 
-// --- 🛠️ Optimized Dynamic Imports ---
+// --- 🛠️ Optimized Dynamic Imports (โหลดเมื่อจำเป็น) ---
 const ServicesSection = dynamic(() => import("@/components/Services"), {
+  loading: () => <div className="h-[600px] animate-pulse bg-slate-50" />,
   ssr: true,
 })
 const BlogSection = dynamic(() => import("@/components/BlogSection"), {
@@ -2175,99 +4388,131 @@ const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
 
 export default function HomePage() {
   /**
-   * ✅ Normalization Logic สำหรับ Blog
-   * ดึงข้อมูลจาก allposts มากรองเฉพาะบทความล่าสุด
+   * ✅ Blog Data Normalization: ปรับ Format ข้อมูลให้พร้อมใช้งาน
    */
-  const featuredPosts = useMemo(() => {
-    if (!blogData) return []
-
-    return blogData.slice(0, 4).map((post: any) => {
-      const getString = (val: any) => val?.th || val?.en || val || ""
-      return {
-        ...post,
-        title: getString(post.title),
-        excerpt: getString(post.excerpt || post.description),
-        author:
-          typeof post.author === "string"
-            ? {
-                name: post.author,
-                avatar: "/images/profile/default-avatar.webp",
-                role: "Team Member",
-              }
-            : post.author,
-        readTime: post.readTime || "5 min read",
-      }
-    })
+  const normalizePost = useCallback((post: any) => {
+    const getString = (val: any) => val?.th || val?.en || val || ""
+    return {
+      ...post,
+      title: getString(post.title),
+      excerpt: getString(post.excerpt || post.description),
+      author:
+        typeof post.author === "string"
+          ? {
+              name: post.author,
+              avatar: "/images/profile/default-avatar.webp",
+              role: "Technical Partner",
+            }
+          : post.author,
+      readTime: post.readTime || "5 MIN READ",
+    }
   }, [])
 
+  const featuredPosts = useMemo(
+    () => (blogData || []).slice(0, 4).map(normalizePost),
+    [normalizePost]
+  )
+
   return (
-    <main className="flex w-full flex-col overflow-x-hidden bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 1. HERO AREA ─── */}
+    <main className="flex w-full flex-col overflow-x-hidden bg-background font-sans antialiased">
+      {/* ─── 1. HERO AREA: First Contentful Paint ─── */}
       <Hero
-        badgeText="Digital Architecture for Business"
+        badgeText="Industrial Web Architecture for Business"
         headline={
-          <div className="leading-[0.85] tracking-tighter">
+          <>
             BUILD{" "}
-            <span className="italic text-blue-600 underline decoration-blue-600/20 underline-offset-8">
-              FASTER
+            <span className="text-brand-orange underline decoration-brand-navy/10 decoration-8 underline-offset-8">
+              SMART
             </span>
-            ,<br />
-            <span className="text-slate-900">SELL BETTER.</span>
-          </div>
+            , <br />
+            RELIABLE <span className="text-brand-blue">SOLUTIONS.</span>
+          </>
         }
+        description="เปลี่ยนหน้าเว็บธรรมดาให้เป็นวิศวกรรมการขายที่ทำงาน 24 ชั่วโมง เสถียร แม่นยำ และรองรับการขยายตัวของธุรกิจไทยโดยเฉพาะ"
       />
 
-      {/* ─── 2. SOCIAL PROOF ─── */}
-      <div className="relative z-20 -mt-12 border-y-4 border-slate-900 bg-white shadow-[0px_10px_0px_0px_rgba(15,23,42,1)]">
+      {/* ─── 2. TRUST PROTOCOL (Social Proof) ─── */}
+      <section className="relative z-20 -mt-10 overflow-hidden border-y-4 border-slate-900 bg-white shadow-enterprise-lg">
         <div className="container mx-auto px-6 py-10">
-          <SocialProof />
-        </div>
-      </div>
-
-      {/* ─── 3. OUR SERVICES ─── */}
-      {/* เรียกก้อนเดียวจบ ไม่ซ้ำซ้อน */}
-      <ServicesSection />
+          <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
+            {/* Engineering Status Label */}
 ```
 
 ### `app/(main)/layout.tsx`
 
 ```ts
 /** @format */
-import React from "react"
+"use client"
+
+import React, { useEffect } from "react"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import { motion, AnimatePresence } from "framer-motion"
+import { usePathname } from "next/navigation"
 
 interface MainLayoutProps {
   children: React.ReactNode
 }
 
 export default function MainLayout({ children }: MainLayoutProps) {
+  const pathname = usePathname()
+
+  // Reset scroll position เมื่อเปลี่ยนหน้า (สำคัญสำหรับ Single Page Application)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
-    // min-h-screen และ flex-col ช่วยให้ Footer ติดล่างเสมอแม้เนื้อหาน้อย
-    <div className="relative flex min-h-screen flex-col bg-white font-sans antialiased">
-      {/* ─── HEADER ───
-          แนะนำให้ใส่ z-index สูงๆ ไว้ใน Header component
-          เพื่อไม่ให้โดน Shadow ของตัว Card ในหน้า Services ทับ
-      */}
+    <div className="relative flex min-h-screen flex-col bg-white selection:bg-brand-blue selection:text-white">
+      {/* ─── 1. Navigation (Fixed with High Z-Index) ─── */}
       <Header />
 
-      {/* ─── MAIN CONTENT ───
-          1. flex-1: ดัน Footer ลงล่าง
-          2. overflow-x-hidden: สำคัญมากสำหรับสไตล์ Neo-Brutalism
-             เพราะเงา [8px_8px_0px_0px] มักจะทำให้เกิด Scrollbar แนวนอนโดยไม่ตั้งใจ
-      */}
-      <main className="relative flex-1 overflow-x-hidden">
-        {/* คุณสามารถใส่สีกรอบ หรือ Grid พื้นหลังแบบ Global ได้ที่นี่ */}
-        <div
-          className="absolute inset-0 z-[-1] opacity-[0.01]"
-          style={{ backgroundImage: 'url("/grid.svg")' }}
-        />
+      {/* ─── 2. Main Content Area ─── */}
+      {/* pt-[80px] เพื่อป้องกันคอนเทนต์จมใต้ Header ที่เป็น Fixed */}
+      <AnimatePresence mode="wait">
+        <motion.main
+          key={pathname}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -15 }}
+          transition={{
+            duration: 0.4,
+            ease: [0.22, 1, 0.36, 1], // Custom Cubic Bezier เพื่อความหรูหรา
+          }}
+          className="flex-grow focus:outline-none"
+          id="main-content"
+          role="main"
+        >
+          {/* จัดการขอบเขตเนื้อหาให้ยืดหยุ่นทุกหน้าจอ */}
+          <div className="relative min-h-[calc(100vh-80px)] pt-20 md:pt-24">
+            {children}
+          </div>
+        </motion.main>
+      </AnimatePresence>
 
-        {children}
-      </main>
+      {/* ─── 3. Global CTA Layer (Conditional Rendering) ─── */}
+      {/* แสดงเฉพาะหน้าที่ไม่ใช่ Contact และเน้นให้เป็นระนาบเดียวกับดีไซน์ใหม่ */}
+      {pathname !== "/contact" && (
+        <aside className="border-t-4 border-slate-900 bg-white py-12 md:py-16">
+          <div className="container mx-auto px-6 text-center">
+            <h3 className="text-2xl font-black uppercase tracking-tighter text-slate-900 md:text-4xl">
+              พร้อมให้เราวางโครงสร้าง <br className="md:hidden" />
+              <span className="text-brand-blue">ความสำเร็จให้คุณหรือยัง?</span>
+            </h3>
+            <div className="mt-8">
+              <button className="bg-slate-900 px-10 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
+                เริ่มปรึกษาโปรเจกต์
+              </button>
+            </div>
+          </div>
+        </aside>
+      )}
 
-      {/* ─── FOOTER ─── */}
+      {/* ─── 4. Footer ─── */}
       <Footer />
+
+      {/* ─── 5. Mobile Mobile Bottom Gap (สำหรับ iOS Safari Toolbar) ─── */}
+      <div className="h-[env(safe-area-inset-bottom)] w-full bg-slate-900" />
     </div>
   )
 }
@@ -2277,26 +4522,24 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
 ```ts
 /** @format */
-import { MetadataRoute } from "next"
+import type { MetadataRoute } from "next"
 import { siteConfig } from "@/config/siteConfig"
 import { catalogProjects } from "@/data/catalog.projects"
-// ✅ แก้ไขจาก @/data/blogData เป็น Path ใหม่ที่รวมไฟล์แล้ว
 import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog"
+import { BlogPost } from "@/types/blog" // ✅ แก้ไข: ดึง Type จาก source ที่ถูกต้อง
 
 /**
- * 🛠️ Helper: ตรวจสอบวันที่ให้ปลอดภัยก่อนส่งให้ Sitemap
+ * 🛠️ Helper: จัดการวันที่ให้ปลอดภัยสำหรับ Sitemap
  */
-function getSafeDate(dateStr: string | undefined | null): Date {
-  if (!dateStr) return new Date()
-  const parsedDate = new Date(dateStr)
-  return isNaN(parsedDate.getTime()) ? new Date() : parsedDate
+function parseSafeDate(dateStr: string): Date {
+  const date = new Date(dateStr)
+  return isNaN(date.getTime()) ? new Date() : date
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig?.url || "https://www.aemdevweb.com"
 
-  // 1. 📂 หน้าหลัก (Static Routes)
+  // 1. 🏠 Static Pages: หน้าหลักของเว็บไซต์
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -2307,32 +4550,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: route === "" ? ("daily" as const) : ("weekly" as const),
+    changeFrequency: route === "" ? "daily" : "weekly",
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. 🚀 หน้า Landing Templates (Dynamic Routes)
-  // 📝 แก้ไข: ปรับ Path ให้ตรงกับที่เราคุยกัน (ถ้าคุณใช้ /[template_id] โดยไม่มีคำว่า landing)
-  // แต่ถ้าคุณยืนยันจะใช้ /landing/ ก็นำหน้าได้ครับ
-  const templateRoutes: MetadataRoute.Sitemap = catalogProjects.map(
+  // 2. 📂 Dynamic Catalog Pages: หน้าโครงการ/เทมเพลต
+  const templateRoutes: MetadataRoute.Sitemap = (catalogProjects || []).map(
     (project) => ({
-      url: `${baseUrl}/${project.templateId}`, // หรือ `/landing/${project.templateId}` ตามโครงสร้างโฟลเดอร์จริง
+      url: `${baseUrl}/catalog/${project.templateId}`,
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+      changeFrequency: "weekly",
       priority: 0.9,
     })
   )
 
-  // 3. 📝 หน้าบทความ Blog
-  // ✅ ระบุ Type ให้ (post: BlogPost) เพื่อแก้ปัญหา Parameter implicitly has an 'any' type
-  const blogRoutes: MetadataRoute.Sitemap = (blogData || []).map(
-    (post: BlogPost) => ({
-      url: `${baseUrl}/blog/${post.slug || post.id}`,
-      lastModified: getSafeDate(post.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })
-  )
+  // 3. 📝 Dynamic Blog Pages: หน้าบทความ
+  const blogRoutes: MetadataRoute.Sitemap = (
+    (blogData as BlogPost[]) || []
+  ).map((post) => ({
+    url: `${baseUrl}/blog/${post.slug || post.id}`,
+    lastModified: parseSafeDate(post.date), // ✅ ใช้ Helper ที่สร้างใหม่แทน getSafeDate ที่หายไป
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }))
 
   return [...staticRoutes, ...templateRoutes, ...blogRoutes]
 }
@@ -2344,83 +4584,83 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 /** @format */
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Menu, X, Code2 } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
+import { Menu, X, Code2, ArrowRight, Zap } from "lucide-react"
 import { siteConfig } from "@/config/siteConfig"
+import { cn } from "@/lib/utils"
 
-export function Header() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
 
-  const navigation = [
-    { name: "Services", href: "/services" },
-    { name: "Catalog", href: "/catalog" },
-    { name: "About", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
-  ]
+  // ✅ 1. Optimized Scroll Listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20
+      setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev))
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // ✅ 2. Body Scroll Lock
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = isOpen ? "hidden" : "unset"
+    }
+    return () => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "unset"
+      }
+    }
+  }, [isOpen])
+
+  // ✅ 3. Navigation Logic (Event-based instead of Effect-based)
+  const handleNavigate = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      // ปิดเมนูก่อนเสมอเพื่อป้องกันปัญหา UI ค้าง
+      setIsOpen(false)
+
+      if (href.startsWith("/#")) {
+        e.preventDefault()
+        const targetId = href.replace("/#", "")
+
+        if (pathname === "/") {
+          document
+            .getElementById(targetId)
+            ?.scrollIntoView({ behavior: "smooth" })
+        } else {
+          router.push("/")
+          setTimeout(() => {
+            document
+              .getElementById(targetId)
+              ?.scrollIntoView({ behavior: "smooth" })
+          }, 150)
+        }
+      }
+    },
+    [pathname, router]
+  )
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b-4 border-slate-900 bg-white shadow-[0_4px_0_0_rgba(15,23,42,1)]">
-      <div className="container mx-auto flex h-20 items-center justify-between px-4">
-        <Link href="/" className="group flex items-center gap-2">
-          <div className="bg-slate-900 p-1.5 transition-transform group-hover:-rotate-6">
-            <Code2 className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-xl font-black uppercase tracking-tighter text-slate-900">
-            {siteConfig.name}
-          </span>
-        </Link>
-
-        {/* DESKTOP NAV */}
-        <nav className="hidden items-center gap-8 md:flex">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`text-sm font-black uppercase tracking-widest transition-colors hover:text-blue-600 ${
-                pathname === item.href ? "text-blue-600" : "text-slate-900"
-              }`}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="border-2 border-slate-900 bg-slate-900 px-5 py-2 text-sm font-black uppercase tracking-widest text-white shadow-[4px_4px_0_0_#2563eb] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none"
-          >
-            Get Started
-          </Link>
-        </nav>
-
-        <button
-          className="block border-2 border-slate-900 bg-white p-1 md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-        </button>
-      </div>
-
-      {/* MOBILE NAV: ใช้ key={pathname} เพื่อให้ Component reset ตัวเองเมื่อเปลี่ยนหน้า */}
-      {isOpen && (
-        <div
-          key={pathname}
-          className="fixed inset-0 top-[84px] z-40 h-screen w-full bg-white md:hidden"
-        >
-          <nav className="flex flex-col items-center gap-8 pt-12">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)} // ปิดเมื่อคลิก
-                className="text-3xl font-black uppercase italic tracking-tighter text-slate-900 hover:text-blue-600"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
+    <header
+      className={cn(
+        "fixed left-0 right-0 top-0 z-[100] w-full transition-all duration-300",
+        scrolled
+          ? "border-b-4 border-slate-900 bg-white/95 py-4 shadow-[0_4px_0_0_rgba(15,23,42,0.1)] backdrop-blur-md"
+          : "bg-transparent py-6"
+      )}
+    >
+      <div className="container relative z-[101] mx-auto flex items-center justify-between px-6">
+        {/* LOGO */}
+        <Link
+          href="/"
+          onClick={() => setIsOpen(false)} // ปิดเมนูเมื่อกด Logo
 ```
 
 ### `components/Footer.tsx`
@@ -2437,12 +4677,18 @@ import {
   Mail,
   MapPin,
   Phone,
-  ArrowUpRight,
+  Globe,
+  Instagram,
+  Zap,
 } from "lucide-react"
 
 import { siteConfig } from "@/config/siteConfig"
-// ✅ แก้ไข: เปลี่ยนจาก Path ที่ Error เป็นการใช้ Type จากศูนย์กลางของข้อมูล
-import type { MultiLangText } from "@/data/types"
+
+// ✅ แก้ไข: ประกาศ Interface ภายในเพื่อลด Dependency Error หากไฟล์ types/services มีปัญหา
+interface MultiLangText {
+  th?: string
+  en?: string
+}
 
 interface FooterProps {
   data?: {
@@ -2460,52 +4706,46 @@ interface FooterProps {
 export default function Footer({ data }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
-  // Defensive Logic: ป้องกัน Error หากข้อมูลมาไม่ครบ
-  const displayName =
-    typeof data?.name === "string"
-      ? data.name
-      : (data?.name as MultiLangText)?.th ||
-        (data?.name as MultiLangText)?.en ||
-        siteConfig.name ||
-        "AEMDEVWEB"
+  const displayName = React.useMemo(() => {
+    if (!data?.name) return siteConfig.name
+    if (typeof data.name === "string") return data.name
+    // ✅ Type Guard ที่ปลอดภัยขึ้น
+    const nameObj = data.name as MultiLangText
+    return nameObj.th || nameObj.en || siteConfig.name
+  }, [data?.name])
 
   return (
-    <footer className="border-t-8 border-slate-900 bg-white pb-8 pt-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* ─── BRAND IDENTITY ─── */}
-          <div className="space-y-6 lg:col-span-5">
-            <div className="inline-block border-4 border-slate-900 bg-blue-600 px-4 py-2 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)]">
-              <span className="text-2xl font-black uppercase italic tracking-tighter text-white">
+    <footer className="relative mt-20 border-t-[12px] border-[#0F172A] bg-white pb-10 pt-24">
+      {/* 🛠️ TECHNICAL ACCENT */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-30 [background-size:32px_32px]" />
+
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          {/* ─── 01. BRAND IDENTITY ─── */}
+          <div className="space-y-10 lg:col-span-5">
+            <Link
+              href="/"
+              className="inline-block border-[6px] border-[#0F172A] bg-[#1E3A8A] px-8 py-4 shadow-[10px_10px_0px_0px_#F97316] transition-transform hover:-rotate-2"
+            >
+              <span className="text-4xl font-black uppercase italic tracking-tighter text-white">
                 {displayName}
               </span>
-            </div>
-            <p className="max-w-md text-lg font-bold italic leading-relaxed text-slate-500">
-              รับออกแบบสถาปัตยกรรมดิจิทัลและพัฒนาเว็บไซต์ที่เน้นผลลัพธ์
-              เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วย{" "}
-              <span className="font-black text-slate-900 underline decoration-blue-600/30">
-                เทคโนโลยีมาตรฐานสากล
-              </span>
-            </p>
+            </Link>
 
-            <div className="flex gap-3 pt-2">
-              {[
-                {
-                  icon: <Facebook size={20} />,
-                  href: data?.socials?.facebook || siteConfig.links.facebook,
-                },
-                {
-                  icon: <MessageCircle size={20} />,
-                  href: data?.lineId
-                    ? `https://line.me/ti/p/~${data.lineId}`
-                    : siteConfig.contact.lineUrl,
-                },
-                {
-                  icon: <Mail size={20} />,
-                  href: `mailto:${siteConfig.contact.email}`,
-                },
-              ].map((social, i) => (
-                <a
+            <div className="space-y-4">
+              <p className="max-w-md text-2xl font-black leading-[1.1] tracking-tighter text-[#0F172A] md:text-3xl">
+                DIGITAL ARCHITECTURE <br />
+                <span className="text-[#F97316]">FOR MODERN BUSINESS.</span>
+              </p>
+              <p className="max-w-sm text-lg font-bold leading-relaxed text-slate-500">
+                เราไม่ได้แค่ทำเว็บ แต่เราวางโครงสร้าง{" "}
+                <span className="text-[#0F172A] underline decoration-[#F97316] decoration-4">
+                  สถาปัตยกรรมดิจิทัล
+                </span>{" "}
+                เพื่อการเติบโตของ SME
+              </p>
+            </div>
+
 ```
 
 ### `components/catalog/CatalogProjectCard.tsx`
@@ -2514,83 +4754,83 @@ export default function Footer({ data }: FooterProps) {
 /** @format */
 "use client"
 
-import React from "react"
+import React, { memo } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, ExternalLink } from "lucide-react"
+import { ArrowUpRight, ExternalLink, Box, Terminal } from "lucide-react"
 import { Project } from "@/data/types"
+import { cn } from "@/lib/utils"
 
 interface CatalogProjectCardProps {
   project: Project
-  showCTA?: boolean // ✅ เก็บไว้ใช้ในอนาคตได้ แต่ต้องจัดการในโค้ดให้ถูกต้อง
+  showCTA?: boolean
+  className?: string
 }
 
-export function CatalogProjectCard({
+export const CatalogProjectCard = memo(function CatalogProjectCard({
   project,
-  showCTA = true, // ✅ กำหนด Default value
+  showCTA = true,
+  className,
 }: CatalogProjectCardProps) {
+  // สร้างตัวย่อ ID สำหรับใช้แสดงผลแบบ Ref Code
+  const refCode = project.id.split("-").pop()?.toUpperCase() || "ID-ERR"
+
   return (
-    <div className="group relative flex flex-col border-4 border-slate-900 bg-white shadow-[10px_10px_0px_0px_rgba(15,23,42,1)] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[15px_15px_0px_0px_#2563eb]">
-      {/* 🖼️ IMAGE SECTION */}
-      <div className="relative aspect-[16/10] overflow-hidden border-b-4 border-slate-900 bg-slate-100">
+    <article
+      className={cn(
+        "group relative flex h-full flex-col border-[6px] border-slate-900 bg-white transition-all duration-300",
+        "hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[20px_20px_0px_0px_#1E3A8A]",
+        "shadow-[10px_10px_0px_0px_rgba(15,23,42,1)]",
+        className
+      )}
+    >
+      {/* ─── 🖼️ IMAGE SECTION: INDUSTRIAL VIEWPORT ─── */}
+      <div className="relative aspect-[16/10] overflow-hidden border-b-[6px] border-slate-900 bg-slate-200">
         <Image
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover grayscale transition-all duration-700 group-hover:scale-110 group-hover:grayscale-0"
+          priority={false}
         />
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-300 group-hover:bg-slate-900/40 group-hover:opacity-100">
+        {/* Hover Action Overlay */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-slate-900/0 opacity-0 transition-all duration-500 group-hover:bg-slate-900/60 group-hover:opacity-100">
           <Link
             href={`/${project.templateId}`}
-            className="flex items-center gap-2 bg-blue-600 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white hover:bg-white hover:text-slate-900"
+            className="group/btn flex items-center gap-3 bg-brand-orange px-8 py-4 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#000] transition-transform hover:scale-105 active:scale-95"
           >
-            Live Preview <ExternalLink size={14} />
+            Explore System <ExternalLink size={16} strokeWidth={3} />
           </Link>
+        </div>
+
+        {/* Category Floating Badge */}
+        <div className="absolute left-6 top-6 z-20 hidden border-4 border-slate-900 bg-white px-3 py-1 shadow-[4px_4px_0px_0px_#000] md:block">
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-900">
+            {project.category}
+          </span>
         </div>
       </div>
 
-      {/* 📝 CONTENT SECTION */}
-      <div className="flex flex-1 flex-col p-6">
-        <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
-          <span className="bg-slate-900 px-2 py-1 text-[9px] font-black uppercase tracking-tighter text-white">
-            {project.category}
-          </span>
-          <span className="font-mono text-[10px] font-bold text-slate-400">
-            REF: {project.id.split("-").pop()?.toUpperCase()}
-          </span>
-        </div>
-
-        <h3 className="mb-3 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900">
-          {project.title}
-        </h3>
-
-        <p className="mb-6 line-clamp-2 text-sm font-bold leading-relaxed text-slate-500">
-          {project.description}
-        </p>
-
-        {/* STATS / TAGS */}
-        <div className="mt-auto flex items-center justify-between pt-4">
-          <div className="flex flex-col">
-            {/* ✅ FIX: ใช้ Optional Chaining ป้องกันค่า stats เป็น undefined */}
-            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-              {project.stats?.label || "Type"}
-            </span>
-            <span className="text-sm font-black text-blue-600">
-              {project.stats?.value || "Standard"}
+      {/* ─── 📝 CONTENT SECTION ─── */}
+      <div className="flex flex-1 flex-col p-8">
+        {/* Technical Metadata Header */}
+        <div className="mb-6 flex items-center justify-between border-b-4 border-slate-100 pb-5">
+          <div className="flex items-center gap-2">
+            <Terminal size={14} className="text-brand-blue" />
+            <span className="font-mono text-[10px] font-black uppercase tracking-tighter text-slate-400">
+              REF_SPEC: {refCode}
             </span>
           </div>
+          <div className="flex items-center gap-1">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            <span className="text-[9px] font-black uppercase text-emerald-600">
+              Active_Link
+            </span>
+          </div>
+        </div>
 
-          {/* ✅ ใช้งาน showCTA เพื่อแก้ปัญหา Unused Variable */}
-          {showCTA && (
-            <Link
-              href={`/${project.templateId}`}
-              className="flex h-10 w-10 items-center justify-center border-2 border-slate-900 bg-white transition-colors hover:bg-slate-900 hover:text-white"
-            >
-              <ArrowUpRight size={20} strokeWidth={3} />
-            </Link>
-          )}
 ```
 
 ### `components/catalog/CatalogProjectsGrid.tsx`
@@ -2599,71 +4839,83 @@ export function CatalogProjectCard({
 /** @format */
 "use client"
 
+import React, { useMemo } from "react"
 import { Project } from "@/data/types"
 import { CatalogProjectCard } from "./CatalogProjectCard"
-import { LayoutDashboard } from "lucide-react"
+import { LayoutDashboard, Database, SearchX } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface CatalogProjectsGridProps {
   projects: Project[]
   columns?: 2 | 3 | 4
   showCTA?: boolean
+  className?: string
 }
 
 export function CatalogProjectsGrid({
   projects,
   columns = 3,
   showCTA = true,
+  className,
 }: CatalogProjectsGridProps) {
-  // ─── 1. Empty State (Industrial Style) ───
+  // ─── 1. COLUMN LOGIC (Performance Optimized) ───
+  const gridConfig = useMemo(() => {
+    const configs = {
+      2: "lg:grid-cols-2",
+      3: "lg:grid-cols-3",
+      4: "lg:grid-cols-4 xl:grid-cols-4",
+    }
+    return configs[columns] || configs[3]
+  }, [columns])
+
+  // ─── 2. EMPTY STATE: REGISTRY NOT FOUND ───
   if (!projects || projects.length === 0) {
     return (
-      <div className="group relative flex h-80 flex-col items-center justify-center border-4 border-dashed border-slate-200 bg-slate-50/50 p-12 transition-colors hover:border-blue-600/30">
-        {/* Blueprint Corner Decor */}
-        <div className="absolute left-4 top-4 h-8 w-8 border-l-2 border-t-2 border-slate-200 group-hover:border-blue-600/30" />
-        <div className="absolute bottom-4 right-4 h-8 w-8 border-b-2 border-r-2 border-slate-200 group-hover:border-blue-600/30" />
+      <div className="group relative flex min-h-[400px] flex-col items-center justify-center border-[6px] border-dashed border-slate-200 bg-slate-50/30 p-12 text-center transition-all hover:border-brand-blue/30">
+        {/* Blueprint Decorative Elements */}
+        <div className="absolute left-6 top-6 h-12 w-12 border-l-4 border-t-4 border-slate-200 group-hover:border-brand-blue/30" />
+        <div className="absolute bottom-6 right-6 h-12 w-12 border-b-4 border-r-4 border-slate-200 group-hover:border-brand-blue/30" />
 
-        <div className="mb-6 flex h-16 w-16 items-center justify-center bg-white shadow-[4px_4px_0px_0px_rgba(226,232,240,1)]">
-          <LayoutDashboard className="h-8 w-8 text-slate-300" />
+        <div className="relative mb-8">
+          <div className="flex h-20 w-20 items-center justify-center border-4 border-slate-200 bg-white shadow-[8px_8px_0px_0px_#e2e8f0] transition-all group-hover:shadow-[8px_8px_0px_0px_#1E3A8A]">
+            <SearchX className="h-10 w-10 text-slate-300 group-hover:text-brand-blue" />
+          </div>
+          <Database className="absolute -bottom-2 -right-2 h-6 w-6 text-slate-400 opacity-50" />
         </div>
 
-        <p className="text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-          No active projects found in registry
-        </p>
+        <div className="space-y-2">
+          <h3 className="font-heading text-xl font-black uppercase tracking-widest text-slate-900">
+            Registry_Empty
+          </h3>
+          <p className="max-w-[280px] text-[10px] font-bold uppercase leading-relaxed tracking-[0.3em] text-slate-400">
+            No active project specifications found matching your current filter
+            criteria
+          </p>
+        </div>
       </div>
     )
   }
 
-  // ─── 2. Column Logic ───
-  // ปรับให้ Tablet (md) เริ่มต้นที่ 2 คอลัมน์เสมอเพื่อความสมดุล
-  const gridColsClass = {
-    2: "lg:grid-cols-2",
-    3: "lg:grid-cols-3",
-    4: "lg:grid-cols-4",
-  }[columns]
-
+  // ─── 3. MAIN GRID RENDER ───
   return (
-    <section className="relative">
-      {/* 🛠️ Background Grid: สื่อถึงกระดาษไขเขียนแบบ */}
-      <div className="absolute inset-x-0 -bottom-12 -top-12 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] opacity-60 [background-size:32px_32px]" />
-
-      {/* Grid Container */}
+    <section className={cn("relative py-8", className)}>
+      {/* 🛠️ TECHNICAL BACKGROUND GRID */}
+      {/* เลเยอร์กระดาษไข (Blueprint Overlay) */}
       <div
-        className={`grid grid-cols-1 gap-8 md:grid-cols-2 ${gridColsClass} xl:gap-12`}
+        className="absolute inset-x-0 -bottom-20 -top-20 -z-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-40 [background-size:24px_24px]"
+        aria-hidden="true"
+      />
+
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-10 md:grid-cols-2 xl:gap-14",
+          gridConfig
+        )}
       >
         {projects.map((project, index) => (
           <div
-            key={project.id || index}
-            // เพิ่มจังหวะการเลื่อนขึ้นเล็กน้อย (ถ้าคุณใช้ Framer Motion สามารถเปลี่ยนเป็น motion.div ได้)
-            className="duration-500 animate-in fade-in slide-in-from-bottom-4 fill-mode-both"
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            <CatalogProjectCard project={project} showCTA={showCTA} />
-          </div>
-        ))}
-      </div>
-    </section>
-  )
-}
+            key={project.id || `project-${index}`}
+            className={cn(
 ```
 
 ### `components/Services.tsx`
@@ -2672,83 +4924,83 @@ export function CatalogProjectsGrid({
 /** @format */
 "use client"
 
-import React from "react"
+import React, { memo, useMemo } from "react"
 import Link from "next/link"
-import { LayoutGrid, ArrowUpRight, ArrowRight } from "lucide-react"
-import { servicesData } from "@/data/servicesData"
-import { iconMap } from "@/components/iconMap"
+import { LayoutGrid, ArrowRight, Sparkles, Zap } from "lucide-react"
+import { ServiceItem } from "@/types/services"
+import { iconMap, type IconKey } from "@/components/iconMap" // ✅ นำเข้า Type ที่ถูกต้อง
+import { cn } from "@/lib/utils"
 
-export default function Services() {
-  // กรองเฉพาะบริการที่มีสถานะ READY
-  const activeServices = servicesData.filter((s) => s.status === "READY")
+interface ServicesProps {
+  services: ServiceItem[]
+}
+
+const Services = ({ services }: ServicesProps) => {
+  // ✅ 1. ใช้ useMemo เพื่อป้องกันการ Filter ใหม่ทุกครั้งที่ Render
+  const activeServices = useMemo(
+    () => services.filter((s) => s.status === "READY"),
+    [services]
+  )
 
   return (
     <section
       className="relative overflow-hidden bg-white py-24 lg:py-32"
       id="services"
     >
-      {/* ─── BACKGROUND DECOR ─── */}
+      {/* ─── 1. Background Decor (Blueprint Style) ─── */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.02]"
-        style={{ backgroundImage: 'url("/grid.svg")' }}
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(#1E3A8A 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
       />
 
-      <div className="container relative z-10 mx-auto px-4">
-        {/* ─── SECTION HEADER ─── */}
-        <div className="mb-20 flex flex-col items-end justify-between gap-8 border-b-8 border-slate-900 pb-12 lg:flex-row lg:items-center">
-          <div className="max-w-2xl text-left">
-            <div className="mb-4 inline-flex items-center gap-3 bg-slate-900 px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-white">
-              <span className="h-2 w-2 animate-pulse bg-blue-500" />
-              AEMDEVWEB / ECOSYSTEM_TRUST_PROTOCOL
+      <div className="container relative z-10 mx-auto px-6">
+        {/* ─── 2. Section Header ─── */}
+        <div className="mb-20 flex flex-col items-start justify-between gap-8 border-l-[12px] border-[#1E3A8A] pl-8 lg:flex-row lg:items-end lg:pb-4">
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-3 bg-[#1E3A8A] px-4 py-1.5 shadow-[4px_4px_0px_0px_#F97316]">
+              <Sparkles size={12} className="animate-pulse text-white" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
+                Service Modules
+              </span>
             </div>
-            <h2 className="text-5xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 md:text-7xl">
-              Precision <br />
-              <span className="text-blue-600">Templates.</span>
+            <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter text-slate-900 md:text-6xl">
+              โซลูชัน <br />
+              <span className="text-[#1E3A8A]">ที่ออกแบบเพื่อธุรกิจคุณ</span>
             </h2>
-            <p className="mt-6 text-lg font-bold italic leading-relaxed text-slate-500">
-              โซลูชันเว็บไซต์ที่ถูกปรับจูนมาเพื่ออุตสาหกรรมเฉพาะทาง
-              เน้นโครงสร้างที่แข็งแกร่งและประสิทธิภาพที่วัดผลได้จริง
-            </p>
           </div>
 
           <Link
             href="/catalog"
-            className="flex h-16 items-center border-4 border-slate-900 px-8 text-xs font-black uppercase tracking-widest transition-all hover:bg-slate-900 hover:text-white"
+            className="group flex items-center gap-3 border-2 border-[#1E3A8A] bg-white px-8 py-4 text-xs font-black uppercase tracking-widest text-[#1E3A8A] transition-all hover:bg-[#1E3A8A] hover:text-white active:scale-95"
           >
-            <LayoutGrid className="mr-3 h-5 w-5" />
-            Explore All Works
+            <LayoutGrid className="h-5 w-5" />
+            ดูผลงานทั้งหมด
           </Link>
         </div>
 
-        {/* ─── SERVICES GRID (Inline Card Logic) ─── */}
+        {/* ─── 3. Service Cards Grid ─── */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {activeServices.map((service) => {
-            const Icon = (iconMap as any)[service.category] || iconMap.STARTER
+            // ✅ 2. Type-Safe Icon Selection
+            const iconKey = service.iconName as IconKey
+            const Icon = iconMap[iconKey] || iconMap.STARTER
             const hasPromo = !!service.promoPrice
+            const isPopular = service.isPopular
 
             return (
-              <div
+              <article
                 key={service.id}
-                className="group relative flex flex-col border-[3px] border-slate-900 bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
-              >
-                {/* Technical Bar */}
-                <div className="flex items-center justify-between border-b-[3px] border-slate-900 bg-slate-50 px-4 py-2">
-                  <div className="flex gap-1.5">
-                    <div className="h-2 w-2 rounded-full bg-slate-300" />
-                    <div className="h-2 w-2 rounded-full bg-slate-300" />
-                  </div>
-                  <span className="font-mono text-[9px] font-black uppercase tracking-widest text-slate-400">
-                    ARCH_TYPE // {service.slug}
-                  </span>
-                </div>
-
-                <div className="flex flex-grow flex-col p-8">
-                  {hasPromo && (
-                    <div className="mb-4 self-start bg-[#ff3e3e] px-3 py-1 text-[10px] font-black uppercase tracking-tighter text-white">
-                      Limited Offer // Active
-                    </div>
-                  )}
-
+                className={cn(
+                  "group relative flex flex-col border-2 transition-all duration-500 hover:-translate-y-2",
+                  hasPromo
+                    ? "border-[#F97316] bg-white shadow-[12px_12px_0px_0px_#F97316]"
+                    : isPopular
+                      ? "border-[#1E3A8A] bg-white shadow-[12px_12px_0px_0px_#1E3A8A]"
+                      : "border-slate-200 bg-slate-50 hover:border-[#1E3A8A] hover:bg-white hover:shadow-[12px_12px_0px_0px_rgba(30,58,138,0.1)]"
+                )}
 ```
 
 ### `components/Hero.tsx`
@@ -2768,157 +5020,72 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react"
+import { cn } from "@/lib/utils"
+
+interface FloatingElement {
+  title: string
+  desc?: string
+}
+
+interface HeroProps {
+  badgeText?: string
+  headline?: React.ReactNode
+  description?: string
+  primaryActionText?: string
+  primaryActionHref?: string
+  secondaryActionText?: string
+  secondaryActionHref?: string
+  imageSrc?: string
+  imageAlt?: string
+  trustBadges?: string[]
+  floatingElement1?: FloatingElement
+  floatingElement2?: FloatingElement
+}
 
 const Hero = ({
-  badgeText = "Website Solution สำหรับธุรกิจไทยโดยเฉพาะ",
+  badgeText = "Industrial Web Architecture สำหรับธุรกิจไทย",
   headline = (
     <>
-      สร้างเว็บไซต์ที่เป็น <br />
-      <span className="italic text-blue-600">พนักงานขายเบอร์ 1</span>
+      Build Smart, <br />
+      <span className="text-brand-blue">Reliable Web</span> <br />
+      Solutions
     </>
   ),
-  description = "เปลี่ยนหน้าเว็บธรรมดาให้เป็นเครื่องมือผลิตยอดขายที่ทำงาน 24 ชั่วโมง ด้วยสถาปัตยกรรมระดับสากลที่โหลดไว มั่นคง และออกแบบมาเพื่อปิดการขายสำหรับ SME โดยเฉพาะ",
-  primaryActionText = "เริ่มสร้างโปรเจกต์ของคุณ",
-  primaryActionHref = "/services",
-  secondaryActionText = "ดูราคาและแพ็กเกจ",
-  secondaryActionHref = "/services#pricing",
+  description = "ยกระดับธุรกิจด้วยสถาปัตยกรรมเว็บระดับ Enterprise ที่ออกแบบมาเพื่อความเสถียร ความเร็ว และการเติบโตที่ไร้ขีดจำกัด พร้อมรองรับระบบ Automation เต็มรูปแบบ",
+  primaryActionText = "เริ่มสร้างโปรเจกต์",
+  primaryActionHref = "/contact",
+  secondaryActionText = "บริการของเรา",
+  secondaryActionHref = "#services",
   imageSrc = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Hero/Hero.png",
-  imageAlt = "aemdevweb digital architecture workspace",
+  imageAlt = "AEMDEVWEB Digital Architecture Workspace",
   trustBadges = [
-    "High-Performance Speed",
-    "สวยเป๊ะทุกหน้าจอมือถือ",
-    "โครงสร้างรองรับ Google (SEO)",
+    "Enterprise Performance",
+    "Mobile First Design",
+    "Workflow Automation",
   ],
-  floatingElement1 = { title: "Mobile Optimized", desc: "สวยงามทุกหน้าจอ" },
-  floatingElement2 = { title: "Secure & Stable", desc: "ระบบมั่นคง ปลอดภัย" },
-}) => {
+  floatingElement1 = { title: "Mobile Optimized" },
+  floatingElement2 = { title: "Secure Architecture" },
+}: HeroProps) => {
   return (
-    <section className="relative flex min-h-[95vh] items-center overflow-hidden bg-white pb-20 pt-32 md:pt-40">
-      {/* ─── 1. ADVANCED BLUEPRINT GRID ─── */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_2px,transparent_2px),linear-gradient(to_bottom,#80808012_2px,transparent_2px)] bg-[size:200px_200px]" />
-
-      <div className="pointer-events-none absolute left-0 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-[120px]" />
+    <section
+      className="relative flex min-h-[90vh] items-center overflow-hidden bg-background pb-20 pt-32 md:pt-40"
+      aria-labelledby="hero-heading"
+    >
+      {/* ─── 1. Background Architecture ─── */}
+      <div
+        className="bg-grid-pattern absolute inset-0 -z-10 opacity-40"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue/10 blur-[120px]"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* ─── 2. CONTENT AREA ─── */}
+          {/* ─── 2. Content Column ─── */}
           <div className="space-y-10 lg:col-span-7">
-            {/* Brand Badge: Neobrutalism Style */}
-            <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] transition-transform hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              <Sparkles size={14} className="animate-pulse text-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 md:text-xs">
-                {badgeText}
-              </span>
-            </div>
-
-            {/* Headline: Fluid & Powerful */}
-            <h1 className="text-[clamp(2.5rem,8vw,6.5rem)] font-black uppercase italic leading-[0.85] tracking-tighter text-slate-900">
-              {headline}
-            </h1>
-
-            {/* Description: High Contrast */}
-            <p className="max-w-xl border-l-4 border-blue-600 pl-6 text-base font-bold leading-relaxed text-slate-500 md:text-xl">
-              {description}
-            </p>
-
-            {/* CTA Buttons: Industrial Interactions */}
-            <div className="flex flex-col gap-5 pt-4 sm:flex-row">
-              <Button
-                size="lg"
-                className="group relative h-16 overflow-hidden rounded-none bg-blue-600 px-10 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#0f172a] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#0f172a] active:translate-x-0 active:translate-y-0 active:shadow-none"
-                asChild
-              >
-                <Link href={primaryActionHref} className="flex items-center">
-                  {primaryActionText}
-                  <ArrowRight className="ml-3 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-```
-
-### `components/About.tsx`
-
-```ts
-/** @format */
-"use client"
-
-import React, { memo } from "react"
-import Image from "next/image"
-import {
-  Check,
-  Code2,
-  HeartHandshake,
-  Lightbulb,
-  Sparkles,
-  ShieldCheck,
-} from "lucide-react"
-import { Card } from "@/components/ui/card"
-
-const AboutContent = () => {
-  const values = [
-    {
-      icon: <Code2 className="h-6 w-6 stroke-[1.5]" />,
-      title: "เทคโนโลยีระดับสากล",
-      description:
-        "เลือกใช้เครื่องมือที่เหมาะสมที่สุดกับธุรกิจคุณ (Optimal Tech Stack) เพื่อให้เว็บไซต์โหลดไว ปลอดภัย และพร้อมขยายตัวได้ในระยะยาว",
-    },
-    {
-      icon: <HeartHandshake className="h-6 w-6 stroke-[1.5]" />,
-      title: "คุยง่ายแบบพาร์ทเนอร์",
-      description:
-        "ผมเชื่อในการสื่อสารที่ตรงไปตรงมา ปรึกษาได้ทุกขั้นตอนเหมือนเพื่อนคู่คิด ไม่ใช้ศัพท์เทคนิคฟุ่มเฟือย เน้นช่วยแก้ปัญหาให้ธุรกิจจริง",
-    },
-    {
-      icon: <Lightbulb className="h-6 w-6 stroke-[1.5]" />,
-      title: "เน้นผลลัพธ์ที่ใช้งานจริง",
-      description:
-        "เว็บไซต์ต้องไม่ใช่แค่สวย แต่ต้องเป็นพนักงานขายที่ทำงานได้จริง สร้างความน่าเชื่อถือและเปลี่ยนผู้เข้าชมเป็นลูกค้าให้ธุรกิจตลอด 24 ชม.",
-    },
-  ]
-
-  return (
-    <div className="space-y-24 md:space-y-40">
-      {/* ─── 1. STORY SECTION ─── */}
-      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-20">
-        {/* Image Area: Responsive Border */}
-        <div className="relative aspect-[4/5] overflow-hidden border-l-8 border-t-8 border-blue-600 shadow-2xl md:border-l-[16px] md:border-t-[16px] lg:col-span-5">
-          <Image
-            src="https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/About/About.png"
-            alt="aemdevweb vision"
-            fill
-            priority
-            className="object-cover grayscale-[20%] transition-all duration-1000 hover:scale-105 hover:grayscale-0"
-          />
-          <div className="absolute bottom-0 left-0 flex items-center gap-3 bg-slate-900 px-6 py-4 text-white md:px-8 md:py-5">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_10px_#10b981]" />
-            <span className="text-[9px] font-black uppercase tracking-[0.3em] md:text-[10px]">
-              Crafting Digital Architecture
-            </span>
-          </div>
-        </div>
-
-        {/* Text Content */}
-        <div className="space-y-8 md:space-y-12 lg:col-span-7">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-3 border-b-2 border-blue-600 pb-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 md:text-xs">
-              <Sparkles size={14} />
-              <span>Our Core Philosophy</span>
-            </div>
-            <h2 className="text-[clamp(2.5rem,7vw,5.5rem)] font-black leading-[0.85] tracking-tighter text-slate-900">
-              จากโครงร่าง <br />
-              <span className="font-light italic text-slate-400">
-                สู่ความสำเร็จของคุณ
-              </span>
-            </h2>
-          </div>
-
-          <div className="space-y-6 text-base font-bold leading-relaxed text-slate-500 md:text-xl">
-            <p>
-              ผมเริ่มต้น{" "}
-              <span className="text-slate-900 underline decoration-blue-600/30">
-                aemdevweb
-              </span>{" "}
-              ด้วยแนวคิดที่ต้องการให้ SME ไทย มีเว็บไซต์มาตรฐานสากล
+            {/* 🏷️ Badge: Brutalist Style */}
 ```
 
 ### `components/shared/JsonLd.tsx`
@@ -2928,60 +5095,27 @@ const AboutContent = () => {
 import React from "react"
 
 interface JsonLdProps {
-  // รองรับประเภทธุรกิจตามเทมเพลตของ aemdevweb
-  type?:
-    | "LocalBusiness" // ทั่วไป
-    | "MedicalBusiness" // คลินิก
-    | "Restaurant" // คาเฟ่/ร้านอาหาร
-    | "RealEstateAgent" // อสังหาริมทรัพย์
-    | "ProfessionalService" // รับเหมาก่อสร้าง / บริการวิชาชีพ
-  data: {
-    name: string
-    description: string
-    url: string
-    phone?: string
-    address?: string
-    image?: string
-    priceRange?: string
-    socialLinks?: string[] // เพิ่มเพื่อสร้างความน่าเชื่อถือ (SameAs)
-  }
+  type: string
+  data: Record<string, any>
 }
 
 /**
- * 🛠️ JsonLd Component (Industrial Sharp SEO)
- * ส่วนประกอบสำคัญในการทำให้ Google เข้าใจประเภทธุรกิจของลูกค้า SME
- * ช่วยให้แสดงผลบน Google Maps และ Search Results ได้โดดเด่นขึ้น
+ * ✅ JsonLd Component (App Router Optimized)
+ * ใช้สำหรับฉีด Structured Data (JSON-LD) เพื่อให้ Google เข้าใจเนื้อหาเว็บได้ดีขึ้น
+ * * วิธีใช้ในหน้า Page:
+ * <JsonLd type="LocalBusiness" data={{ name: "Aemdevweb", ... }} />
  */
-const JsonLd: React.FC<JsonLdProps> = ({ type = "LocalBusiness", data }) => {
-  const schema = {
+const JsonLd = ({ type, data }: JsonLdProps) => {
+  const jsonLd = {
     "@context": "https://schema.org",
     "@type": type,
-    name: data.name,
-    description: data.description,
-    url: data.url,
-    telephone: data.phone || "",
-    image: data.image || "https://www.aemdevweb.com/og-image.png",
-    priceRange: data.priceRange || "฿฿", // เปลี่ยนเป็นสัญลักษณ์เงินบาทให้เข้ากับบริบทไทย
-    address: data.address
-      ? {
-          "@type": "PostalAddress",
-          streetAddress: data.address,
-          addressLocality: "Bangkok", // สามารถปรับ Dynamic ได้ในอนาคต
-          addressCountry: "TH",
-        }
-      : undefined,
-    // ช่วยให้ Google เชื่อมโยงเว็บไซต์กับ Social Media ของแบรนด์
-    sameAs: data.socialLinks || [
-      "https://www.facebook.com/aemdevweb",
-      "https://lin.ee/XwdZGsn",
-    ],
+    ...data,
   }
 
   return (
     <script
       type="application/ld+json"
-      // ป้องกันการ Render ผิดพลาดด้วยการเช็คโครงสร้าง Schema
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   )
 }
@@ -2992,6 +5126,7 @@ export default JsonLd
 ### `components/ui/button.tsx`
 
 ```ts
+/** @format */
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -2999,26 +5134,35 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
+        // 🧱 สไตล์หลัก: พื้นหลังเข้ม เงาสีส้ม (Brutalist Signature)
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "border-4 border-brand-navy bg-brand-navy text-white shadow-[4px_4px_0px_0px_#F97316] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์อันตราย: สีแดงขอบหนา
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "border-4 border-brand-navy bg-error text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์เส้นขอบ: พื้นหลังขาว เงาสีน้ำเงิน
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border-4 border-brand-navy bg-white text-brand-navy shadow-[4px_4px_0px_0px_#1E3A8A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์รอง: สีส้มโดดเด่น
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-4 border-brand-navy bg-brand-orange text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        ghost: "text-brand-navy hover:bg-brand-blue/10",
+
+        link: "text-brand-blue underline-offset-8 decoration-2 hover:underline font-bold",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-14 px-8 py-4",
+        sm: "h-10 px-4 text-[10px]",
+        lg: "h-16 px-10 text-sm",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {
@@ -3066,7 +5210,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
+      "bg-card text-card-foreground rounded-xl border shadow",
       className
     )}
     {...props}
@@ -3104,7 +5248,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-muted-foreground text-sm", className)}
     {...props}
   />
 ))
@@ -3284,7 +5428,7 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
     <div
       data-slot="empty-description"
       className={cn(
-        "text-sm/relaxed text-muted-foreground [&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
+        "text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4",
         className
       )}
       {...props}
@@ -3335,7 +5479,7 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      "bg-muted flex h-full w-full items-center justify-center rounded-full",
       className
     )}
     {...props}
@@ -3399,7 +5543,7 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-slate-600 transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-slate-600 transition-all"
     {...props}
   >
     <div className={cn("pb-6 pt-0 leading-relaxed", className)}>{children}</div>
@@ -3432,7 +5576,7 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "inline-flex h-10 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
+      "bg-muted text-muted-foreground inline-flex h-10 items-center justify-center rounded-lg p-1",
       className
     )}
     {...props}
@@ -3448,7 +5592,7 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
+      "focus-visible:ring-ring data-[state=active]:text-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:shadow-sm",
       className
     )}
     {...props}
@@ -3464,7 +5608,7 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-2 ring-offset-background duration-300 animate-in fade-in-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "focus-visible:ring-ring mt-2 ring-offset-background duration-300 animate-in fade-in-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
       className
     )}
     {...props}
@@ -3489,7 +5633,7 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
       <input
         type={type}
         className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          "border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
           className
         )}
         ref={ref}
@@ -3558,7 +5702,7 @@ const ModalContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-xl opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+      <DialogPrimitive.Close className="focus:ring-ring data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-xl opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent">
         <X className="h-5 w-5" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -3655,7 +5799,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-1 focus:ring-ring disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive",
+      "hover:bg-secondary focus:ring-ring group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive inline-flex h-8 shrink-0 items-center justify-center rounded-md border bg-transparent px-3 text-sm font-medium transition-colors focus:outline-none focus:ring-1 disabled:pointer-events-none disabled:opacity-50",
       className
     )}
     {...props}
@@ -3670,7 +5814,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      "absolute right-1 top-1 rounded-md p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600",
+      "text-foreground/50 hover:text-foreground absolute right-1 top-1 rounded-md p-1 opacity-0 transition-opacity focus:opacity-100 focus:outline-none focus:ring-1 group-hover:opacity-100 group-[.destructive]:text-red-300 group-[.destructive]:hover:text-red-50 group-[.destructive]:focus:ring-red-400 group-[.destructive]:focus:ring-offset-red-600",
 ```
 
 ### `components/ui/dialog.tsx`
@@ -3727,7 +5871,7 @@ const DialogContent = React.forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+      <DialogPrimitive.Close className="focus:ring-ring data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent">
         <X className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
@@ -3782,7 +5926,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1",
+      "border-input focus:ring-ring data-[placeholder]:text-muted-foreground flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -3838,7 +5982,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] origin-[--radix-select-content-transform-origin] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "bg-popover text-popover-foreground relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] origin-[--radix-select-content-transform-origin] overflow-y-auto overflow-x-hidden rounded-md border shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
 ```
@@ -3857,7 +6001,7 @@ const Textarea = React.forwardRef<
   return (
     <textarea
       className={cn(
-        "flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "border-input placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[60px] w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-sm focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
         className
       )}
       ref={ref}
@@ -4038,6 +6182,7 @@ import {
   ArrowRight,
 } from "lucide-react"
 import { siteConfig } from "@/config/siteConfig"
+import { cn } from "@/lib/utils"
 
 export default function ContactInfo() {
   const contactDetails = [
@@ -4047,6 +6192,7 @@ export default function ContactInfo() {
       value: siteConfig.contact.tel,
       href: `tel:${siteConfig.contact.tel.replace(/-/g, "")}`,
       status: "Available Now",
+      accent: "border-brand-blue",
     },
     {
       icon: <MessageCircle className="h-5 w-5" />,
@@ -4054,6 +6200,7 @@ export default function ContactInfo() {
       value: siteConfig.contact.lineId,
       href: siteConfig.contact.lineUrl,
       status: "Fast Response",
+      accent: "border-emerald-500",
     },
     {
       icon: <Mail className="h-5 w-5" />,
@@ -4061,6 +6208,7 @@ export default function ContactInfo() {
       value: siteConfig.contact.email,
       href: `mailto:${siteConfig.contact.email}`,
       status: "Official Inquiries",
+      accent: "border-brand-orange",
     },
     {
       icon: <Clock className="h-5 w-5" />,
@@ -4068,41 +6216,37 @@ export default function ContactInfo() {
       value: "Mon - Sat (09:00 - 18:00)",
       href: null,
       status: "Office Time",
+      accent: "border-slate-500",
     },
   ]
 
   return (
     <div className="space-y-12">
-      {/* 1. Header Section: Industrial Command */}
+      {/* ─── 01. HEADER SECTION: INDUSTRIAL COMMAND ─── */}
       <header className="space-y-6">
-        <div className="inline-block border-b-4 border-brand-blue pb-2">
-          <h2 className="text-4xl font-black uppercase italic tracking-tighter text-white">
-            Connection <span className="text-brand-blue">Hub</span>
+        <div className="inline-block border-b-[6px] border-brand-blue pb-3">
+          <h2 className="font-heading text-5xl font-black uppercase italic tracking-tighter text-white lg:text-6xl">
+            Connection <span className="text-brand-blue">Hub.</span>
           </h2>
         </div>
-        <p className="text-lg font-bold leading-relaxed text-slate-400">
+        <p className="max-w-md text-lg font-bold leading-relaxed text-slate-400">
           ยินดีให้คำปรึกษาฟรีแบบพาร์ทเนอร์ ทักมาคุยรายละเอียดก่อนได้เลยครับ
-          ผมพร้อมช่วยวางแผนระบบที่คุ้มค่าที่สุดให้ธุรกิจคุณ
+          <span className="block text-white">
+            ผมพร้อมช่วยวางแผนระบบที่คุ้มค่าที่สุด
+          </span>
         </p>
       </header>
 
-      {/* 2. Contact Cards Grid: Data Log Style */}
-      <div className="grid grid-cols-1 gap-px border border-white/10 bg-white/10">
+      {/* ─── 02. CONTACT CARDS: DATA LOG STYLE ─── */}
+      <div className="grid grid-cols-1 gap-4">
         {contactDetails.map((item, index) => (
           <div
             key={index}
-            className="group relative flex items-center justify-between bg-brand-navy p-6 transition-all hover:bg-white/5"
+            className="group relative border-2 border-white/5 bg-brand-navy p-6 shadow-[4px_4px_0px_0px_rgba(255,255,255,0.05)] transition-all hover:border-brand-blue hover:bg-white/5 hover:shadow-[4px_4px_0px_0px_#1E3A8A]"
           >
-            <div className="flex items-center gap-6">
-              <div className="flex h-12 w-12 items-center justify-center border-2 border-slate-700 bg-slate-800 text-brand-blue transition-transform group-hover:scale-110 group-hover:border-brand-blue group-hover:text-white">
-                {item.icon}
-              </div>
-              <div className="space-y-1">
-                <div className="flex items-center gap-3">
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-                    {item.label}
-                  </span>
-                  <span className="border border-brand-blue/30 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest text-brand-blue/60">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                {/* ICON BOX */}
 ```
 
 ### `components/ContactForm.tsx`
@@ -4112,10 +6256,10 @@ export default function ContactInfo() {
 "use client"
 
 import React, { useState } from "react"
-import { useForm, ControllerRenderProps } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { Send, Loader2, CheckCircle2 } from "lucide-react"
+import { Send, Loader2, CheckCircle2 } from "lucide-react" // ✅ ลบ AlertCircle ออก
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -4128,18 +6272,21 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
+// ✅ ลบ ControllerRenderProps และ cn ออกเนื่องจากไม่ได้ใช้
 
 const formSchema = z.object({
   name: z.string().min(2, "กรุณากรอกชื่อ-นามสกุล"),
   email: z.string().email("รูปแบบอีเมลไม่ถูกต้อง"),
-  phone: z.string().min(9, "กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง"),
+  phone: z
+    .string()
+    .regex(/^[0-9]+$/, "กรุณากรอกเฉพาะตัวเลข")
+    .min(9, "กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง"),
   subject: z.string().min(5, "กรุณาระบุหัวข้อที่ต้องการปรึกษา"),
   message: z.string().min(10, "กรุณากรอกรายละเอียดอย่างน้อย 10 ตัวอักษร"),
 })
 
 type FormValues = z.infer<typeof formSchema>
 
-// ✅ เพิ่ม Interface สำหรับ Props เพื่อรับ templateId
 interface ContactFormProps {
   templateId?: string
 }
@@ -4163,14 +6310,15 @@ export default function ContactForm({ templateId }: ContactFormProps) {
   async function onSubmit(values: FormValues) {
     setIsPending(true)
     try {
-      // ✅ นำ templateId ไปใช้ร่วมกับข้อมูล (เช่น ส่งไปกับ Metadata ของ Email)
-      console.log("Form Values:", { ...values, source: templateId })
+      const payload = { ...values, source: templateId || "direct_contact" }
+      console.log("Transmitting Data:", payload)
 
+      // Simulate API Call
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
       setIsSuccess(true)
       toast({
-        title: "ส่งข้อมูลสำเร็จ!",
+        title: "DATA TRANSMITTED",
         description: "ผมได้รับข้อมูลแล้ว จะติดต่อกลับหาคุณโดยเร็วที่สุดครับ",
       })
       form.reset()
@@ -4178,16 +6326,12 @@ export default function ContactForm({ templateId }: ContactFormProps) {
       console.error("Submit Error:", err)
       toast({
         variant: "destructive",
-        title: "เกิดข้อผิดพลาด",
-        description: "ไม่สามารถส่งข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้งครับ",
+        title: "SYSTEM ERROR",
+        description: "ไม่สามารถส่งข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้ง",
       })
     } finally {
       setIsPending(false)
     }
-  }
-
-  if (isSuccess) {
-    return (
 ```
 
 ### `components/CTA.tsx`
@@ -4212,22 +6356,26 @@ import {
 interface CTAProps {
   title?: string
   subtitle?: string
-  config?: any // รับข้อมูล TemplateData เพื่อแสดง Custom Notice
+  config?: any
 }
 
 export default function CTA({
-  title = "พร้อมยกระดับธุรกิจของคุณ สู่มาตรฐานใหม่หรือยังครับ?",
-  subtitle = "ไม่ว่าจะเป็นร้านอาหาร หรือบริษัท หจก. ผมยินดีให้คำปรึกษาฟรีแบบพาร์ทเนอร์ พร้อมช่วยวางแผนให้คุ้มค่ากับงบประมาณที่สุด",
+  // ✅ อัปเดตข้อความ Title และ Subtitle ตามที่คุณต้องการ
+  title = "พร้อมให้เราวางโครงสร้าง ความสำเร็จให้คุณหรือยัง?",
+  subtitle = "เริ่มปรึกษาโปรเจกต์กับเราวันนี้ เพื่อเปลี่ยนไอเดียของคุณให้เป็นสถาปัตยกรรมดิจิทัลที่แข็งแกร่งและยั่งยืน",
   config,
 }: CTAProps) {
-  // ดึงข้อมูล Custom Design Notice ถ้ามี
   const customNotice = config?.customDesignNotice
 
   return (
-    <div className="bg-white px-6 py-24 md:py-32">
-      <section className="relative mx-auto max-w-7xl overflow-hidden border-4 border-brand-navy bg-brand-navy px-8 py-20 shadow-enterprise-lg md:px-20 md:py-28">
+    <section
+      className="bg-white px-6 py-24 md:py-32"
+      aria-labelledby="cta-heading"
+    >
+      <div className="relative mx-auto max-w-7xl overflow-hidden border-[6px] border-slate-900 bg-brand-navy px-8 py-20 shadow-[16px_16px_0px_0px_#1E3A8A] md:px-20 md:py-28">
+        {/* ─── 🧩 BACKGROUND LAYER ─── */}
         <div
-          className="absolute inset-0 z-0 bg-industrial-grid opacity-20"
+          className="bg-grid-pattern absolute inset-0 z-0 opacity-10"
           aria-hidden="true"
         />
         <div
@@ -4236,24 +6384,24 @@ export default function CTA({
         />
 
         <div className="relative z-10 flex flex-col items-center space-y-14 text-center">
-          {/* ✅ CUSTOM DESIGN NOTICE BLOCK */}
+          {/* ─── 🛠️ CUSTOM DESIGN NOTICE ─── */}
           {customNotice && (
-            <div className="group relative w-full max-w-3xl border-2 border-dashed border-white/20 bg-white/5 p-8 transition-colors hover:border-brand-blue/50">
-              <div className="absolute -top-4 left-1/2 flex -translate-x-1/2 items-center gap-2 bg-brand-navy px-4">
-                <PenTool size={14} className="text-brand-blue" />
+            <div className="group relative w-full max-w-3xl border-4 border-dashed border-white/20 bg-white/5 p-8 transition-colors hover:border-brand-blue">
+              <div className="absolute -top-5 left-1/2 flex -translate-x-1/2 items-center gap-2 border-2 border-white/20 bg-brand-navy px-6 py-1">
+                <PenTool size={14} className="text-brand-orange" />
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
                   Bespoke Solution
                 </span>
               </div>
               <div className="space-y-4">
-                <h3 className="text-xl font-black uppercase tracking-tight text-brand-blue">
+                <h3 className="text-2xl font-black uppercase tracking-tight text-brand-blue">
                   {customNotice.title_th}
                 </h3>
-                <p className="text-sm font-medium leading-relaxed text-slate-300">
+                <p className="text-base font-bold leading-relaxed text-slate-300">
                   {customNotice.description_th}
                 </p>
-                <div className="pt-2">
-                  <p className="text-[10px] font-bold uppercase italic tracking-widest text-slate-500 opacity-60">
+                <div className="pt-2 opacity-40">
+                  <p className="text-[9px] font-black uppercase italic tracking-[0.2em] text-slate-400">
                     {customNotice.title_en}: {customNotice.description_en}
                   </p>
                 </div>
@@ -4261,18 +6409,99 @@ export default function CTA({
             </div>
           )}
 
-          <div className="inline-flex items-center gap-3 border-2 border-brand-blue bg-brand-blue/10 px-6 py-2.5 shadow-[4px_4px_0px_0px_rgba(59,130,246,0.3)]">
-            <Sparkles className="h-4 w-4 text-brand-blue" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-blue">
-              Direct Consultation v2.0
+          {/* 🏷️ BADGE */}
+          <div className="inline-flex items-center gap-3 border-2 border-brand-blue bg-brand-blue/10 px-6 py-3 shadow-[4px_4px_0px_0px_rgba(30,58,138,0.5)]">
+            <Sparkles className="h-4 w-4 animate-pulse text-brand-orange" />
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue">
+              Direct Consultation v2.5
             </span>
           </div>
 
-          <header className="max-w-4xl space-y-8">
-            <h2 className="text-4xl font-black uppercase italic leading-[0.95] tracking-tighter text-white md:text-7xl">
-              {title}
+```
+
+### `components/PricingSection.tsx`
+
+```ts
+/** @format */
+"use client"
+
+import React, { memo } from "react"
+import { Check, Sparkles, ArrowRight, Zap } from "lucide-react"
+import { siteConfig } from "@/config/siteConfig"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+
+const PricingSection = () => {
+  // จัดลำดับแผนการลงทุน: เอา Starter ขึ้นก่อน ตามด้วย Professional และ Maintenance
+  const sortedPlans = [...siteConfig.pricingPlans].sort((a, b) => {
+    const order = { starter: 1, professional: 2, maintenance: 3 }
+    return (
+      (order[a.id as keyof typeof order] || 99) -
+      (order[b.id as keyof typeof order] || 99)
+    )
+  })
+
+  return (
+    <section
+      className="relative overflow-hidden bg-white py-24 lg:py-32"
+      id="pricing"
+    >
+      {/* ─── Background Decor: Blueprint Grid ─── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(#1E3A8A 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="container relative z-10 mx-auto px-6">
+        {/* ─── Header ─── */}
+        <div className="mb-20 flex flex-col justify-between gap-6 text-center md:flex-row md:items-end md:text-left">
+          <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-3 bg-[#1E3A8A] px-4 py-1.5 shadow-[4px_4px_0px_0px_#F97316]">
+              <Sparkles size={14} className="text-white" />
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
+                Investment Plans
+              </span>
+            </div>
+            <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-6xl">
+              เลือกระดับ <br className="hidden md:block" />
+              <span className="text-[#1E3A8A]">การลงทุนที่คุ้มค่า</span>
             </h2>
-            <p className="mx-auto max-w-2xl border-l-2 border-brand-blue/30 px-6 text-lg font-bold leading-relaxed text-slate-400 md:text-xl">
+          </div>
+          <div className="hidden pb-2 lg:block">
+            <p className="text-right text-sm font-bold uppercase leading-relaxed tracking-widest text-slate-400">
+              Transparent Pricing <br />
+              <span className="text-[#F97316]">No Hidden Fees</span>
+            </p>
+          </div>
+        </div>
+
+        {/* ─── Pricing Cards Grid ─── */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {sortedPlans.map((plan) => {
+            const isStarter = plan.id === "starter"
+            const isPro = plan.isRecommended // ตัว 12,900.-
+
+            return (
+              <div
+                key={plan.id}
+                className={cn(
+                  "relative flex flex-col border-2 p-8 transition-all duration-500",
+                  isStarter || isPro
+                    ? "z-10 scale-[1.02] border-[#1E3A8A] bg-white shadow-[12px_12px_0px_0px_#1E3A8A]"
+                    : "border-slate-200 bg-slate-50 shadow-sm hover:border-[#1E3A8A]/50"
+                )}
+              >
+                {/* Badge สำหรับแพ็กเกจยอดนิยม หรือ Flash Sale */}
+                {isStarter && (
+                  <div className="absolute -top-5 left-6 flex items-center gap-2 bg-[#F97316] px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white">
+                    <Zap size={12} fill="currentColor" /> Flash Sale
+                  </div>
+                )}
+                {isPro && (
 ```
 
 ### `components/SocialProof.tsx`
@@ -4283,81 +6512,81 @@ export default function CTA({
 
 import React from "react"
 import { motion } from "framer-motion"
-import { Star, Quote } from "lucide-react"
+import { Star, Quote, CheckCircle2 } from "lucide-react"
 import { reviews } from "@/data/reviews"
 import Image from "next/image"
 
 const SocialProof = () => {
   return (
     <section
-      className="relative overflow-hidden border-y-[6px] border-slate-900 bg-white py-24 md:py-32"
+      className="relative overflow-hidden border-y-[8px] border-slate-900 bg-white py-24 lg:py-32"
       id="social-proof"
     >
       {/* ─── BACKGROUND ARCHITECTURE ─── */}
       <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] bg-[size:32px_32px] opacity-40"
+        className="bg-[size:40px:40px] absolute inset-0 -z-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-30"
         aria-hidden="true"
       />
 
-      <div className="mx-auto max-w-[1440px] px-6">
-        <div className="flex flex-col items-center">
-          {/* ─── INFINITE MARQUEE REVIEWS ─── */}
-          <div className="relative w-screen overflow-hidden py-10">
-            <motion.div
-              className="flex w-max gap-8 px-4 will-change-transform"
-              animate={{ x: [0, "-50%"] }}
-              transition={{
-                x: {
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  duration: 50,
-                  ease: "linear",
-                },
-              }}
-            >
-              {/* แนะนำให้ทำ Double ลิสต์เพื่อให้ Marquee ลื่นไหล (Smooth Loop) */}
-              {[...reviews, ...reviews].map((review, index) => (
-                <article
-                  key={`${review.id}-${index}`}
-                  className="relative w-[380px] border-4 border-slate-900 bg-white p-10 shadow-[8px_8px_0px_0px_rgba(15,23,42,1)]"
-                >
-                  <Quote
-                    className="absolute right-8 top-8 h-12 w-12 text-slate-50"
-                    aria-hidden="true"
-                  />
+      <div className="mx-auto max-w-[1440px]">
+        {/* ─── 1. TRUST STATS HEADER ─── */}
+        <div className="mb-16 px-6 text-center lg:mb-24">
+          <div className="mb-6 inline-flex items-center gap-3 border-4 border-slate-900 bg-yellow-400 px-6 py-2 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)]">
+            <CheckCircle2 size={16} className="text-slate-900" />
+            <span className="text-xs font-black uppercase tracking-[0.4em] text-slate-900">
+              Trust_Protocol_Active
+            </span>
+          </div>
 
-                  <div className="mb-6 flex gap-1 text-yellow-400">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={14} fill="currentColor" />
-                    ))}
-                  </div>
+          <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-7xl">
+            ผลลัพธ์ที่พิสูจน์ได้ <br />
+            <span className="text-[#1E3A8A]">โดยทีมวิศวกรและพาร์ทเนอร์</span>
+          </h2>
 
-                  <blockquote className="mb-10 min-h-[100px] text-base font-bold italic leading-relaxed text-slate-700">
-                    "{review.comment}"
-                  </blockquote>
+          <div className="mt-12 flex flex-wrap justify-center gap-12 border-y-2 border-dashed border-slate-200 py-10">
+            {[
+              { label: "Happy Clients", value: "50+", suffix: "" },
+              { label: "Projects Delivered", value: "120+", suffix: "" },
+              { label: "Customer Satisfaction", value: "99", suffix: "%" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <p className="text-4xl font-black tracking-tighter text-slate-900 md:text-5xl">
+                  {stat.value}
+                  {stat.suffix}
+                </p>
+                <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-                  <div className="flex items-center gap-4 border-t-2 border-slate-100 pt-6">
-                    {/* Avatar Container */}
-                    <div className="relative h-12 w-12 shrink-0 overflow-hidden border-2 border-slate-900 bg-slate-100">
-                      <Image
-                        src={review.avatar}
-                        alt={`รีวิวจาก ${review.name}`}
-                        width={48}
-                        height={48}
-                        className="h-full w-full object-cover"
-                        unoptimized
-                      />
-                    </div>
-                    <div className="flex flex-col">
-                      <cite className="text-[11px] font-black uppercase not-italic tracking-widest text-slate-900">
-                        {review.name}
-                      </cite>
-                      <span className="mt-1 self-start border border-blue-100 bg-blue-50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-tight text-blue-600">
-                        {review.businessType}
-                      </span>
-                    </div>
-                  </div>
-                </article>
+        {/* ─── 2. INFINITE MARQUEE REVIEWS ─── */}
+        <div className="relative w-full overflow-hidden py-12">
+          {/* Marquee Container */}
+          <motion.div
+            className="flex w-max gap-8 px-4"
+            animate={{ x: [0, "-50%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 60, // ปรับความเร็วให้ดูพรีเมียม (ไม่เร็วเกินไป)
+                ease: "linear",
+              },
+            }}
+          >
+            {/* Double the list for seamless looping */}
+            {[...reviews, ...reviews].map((review, index) => (
+              <article
+                key={`${review.id}-${index}`}
+                className="group relative w-[420px] border-4 border-slate-900 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(30,58,138,1)]"
+              >
+                <Quote
+                  className="absolute right-8 top-8 h-12 w-12 text-slate-50 transition-colors group-hover:text-blue-50/50"
+                  aria-hidden="true"
+                />
 ```
 
 ### `components/FAQSection.tsx`
@@ -4366,7 +6595,7 @@ const SocialProof = () => {
 /** @format */
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React from "react"
 import {
   Accordion,
   AccordionContent,
@@ -4375,8 +6604,8 @@ import {
 } from "@/components/ui/accordion"
 import { ArrowRight, HelpCircle, MessageSquare } from "lucide-react"
 
-// ✅ 1. นิยามตัวแปร Default เพื่อป้องกัน Error no-undef
-const defaultFaqs = [
+// ✅ Data Structure: คำถามที่พบบ่อย
+const DEFAULT_FAQS = [
   {
     question: "ใช้เวลาทำนานไหม กว่าจะได้เว็บไซต์?",
     answer:
@@ -4390,44 +6619,43 @@ const defaultFaqs = [
   {
     question: "ทำแล้วจะติดหน้าแรก Google (SEO) หรือเปล่า?",
     answer:
-      "ผมวางโครงสร้างเว็บตามมาตรฐาน SEO 100% ครับ ทั้งความเร็วและการจัดวาง Tag ต่างๆ ซึ่งจะช่วยให้ Google เข้ามาเก็บข้อมูลได้ง่ายขึ้น",
+      "ผมวางโครงสร้างเว็บตามมาตรฐาน SEO 100% ครับ ทั้งความเร็วและการจัดวาง Tag ต่างๆ ซึ่งจะช่วยให้ Google เข้ามาเก็บข้อมูลได้ง่ายขึ้น ส่งผลดีต่ออันดับในระยะยาวครับ",
   },
   {
     question: "ถ้าต้องการแก้ไขข้อมูลเองในอนาคต ทำได้ไหม?",
     answer:
-      "ทำได้แน่นอนครับ! ผมมีคลิปวิดีโอสอนใช้งานเบื้องต้นส่งให้ด้วยครับ ไม่ต้องกลัวงง",
+      "ทำได้แน่นอนครับ! ผมมีคลิปวิดีโอสอนใช้งานเบื้องต้นส่งให้ด้วยครับ หากติดขัดตรงไหนสามารถทักมาสอบถามได้ตลอด เป็นบริการหลังการขายครับ",
   },
 ]
 
-// ✅ 2. นิยาม Interface สำหรับ Props
-interface FAQSectionProps {
-  config?: any
+interface FAQProps {
+  question: string
+  answer: string
 }
 
-const FAQSection = ({ config }: FAQSectionProps) => {
-  const [hasMounted, setHasMounted] = useState(false)
+interface FAQSectionProps {
+  faqs?: FAQProps[]
+  primaryColor?: string
+}
 
-  // ✅ 3. ใช้ requestAnimationFrame เพื่อเลี่ยง Cascading Render (React 19 Safe)
-  useEffect(() => {
-    const frameId = requestAnimationFrame(() => {
-      setHasMounted(true)
-    })
-    return () => cancelAnimationFrame(frameId)
-  }, [])
-
-  const displayFaqs = config?.faqs
-    ? config.faqs.map((f: any) => ({ question: f.q_th, answer: f.a_th }))
-    : defaultFaqs
-
-  const primaryColor = config?.primaryColor || "#2563eb"
+const FAQSection = ({
+  faqs = DEFAULT_FAQS,
+  primaryColor = "#1E3A8A",
+}: FAQSectionProps) => {
+  // 💡 ตัดการใช้ useEffect/setHasMounted ออกเพื่อลด Cascading Renders และ Hydration Warning
+  // Accordion ของ Radix UI รองรับ SSR ได้ดีอยู่แล้ว
 
   return (
     <section
       className="relative scroll-mt-20 overflow-hidden bg-white py-24 md:py-32"
       id="faq"
+      aria-labelledby="faq-title"
     >
-      {/* ─── BACKGROUND DECOR ─── */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+      {/* ─── 🧩 BACKGROUND DECOR ─── */}
+      <div
+        className="bg-grid-pattern absolute inset-0 -z-10 opacity-[0.05]"
+        aria-hidden="true"
+      />
       <div
         className="absolute -right-24 top-0 -z-10 h-96 w-96 rounded-full opacity-[0.03] blur-3xl"
         style={{ backgroundColor: primaryColor }}
@@ -4435,14 +6663,15 @@ const FAQSection = ({ config }: FAQSectionProps) => {
 
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 items-start gap-20 lg:grid-cols-12">
-          {/* ─── LEFT: STRATEGIC HEADER ─── */}
+          {/* ─── 🏛️ LEFT: STRATEGIC HEADER ─── */}
           <div className="space-y-10 lg:sticky lg:top-32 lg:col-span-5">
-            <div className="space-y-4">
-              <div
-                className="inline-flex items-center gap-2 border-l-4 px-4 py-1 text-[10px] font-black uppercase tracking-[0.3em] text-white"
-                style={{
-                  backgroundColor: primaryColor,
-                  borderColor: primaryColor,
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-4 py-2 shadow-[4px_4px_0px_0px_#F97316]">
+                <HelpCircle size={16} className="text-[#F97316]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900">
+                  Knowledge Database
+                </span>
+              </div>
 ```
 
 ### `components/BlogSection.tsx`
@@ -4454,8 +6683,9 @@ const FAQSection = ({ config }: FAQSectionProps) => {
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Terminal } from "lucide-react"
 import { BlogPost } from "@/types/blog"
+import { cn } from "@/lib/utils"
 
 export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
@@ -4464,70 +6694,69 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
         <Link
           key={post.id}
           href={`/blog/${post.slug || post.id}`}
-          className="group relative flex flex-col border-4 border-slate-900 bg-white p-6 transition-all hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_#2563eb]"
+          className="group relative flex flex-col border-[6px] border-slate-900 bg-white p-6 transition-all hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_#1E3A8A]"
         >
-          {/* 🖼️ IMAGE CONTAINER */}
-          <div className="relative mb-6 aspect-video overflow-hidden border-2 border-slate-900">
+          {/* 🖼️ IMAGE CONTAINER: INDUSTRIAL FRAME */}
+          <div className="relative mb-8 aspect-[16/9] overflow-hidden border-4 border-slate-900 bg-slate-100">
             <Image
               src={post.image}
               alt={post.title}
               fill
-              className="object-cover grayscale transition-all group-hover:scale-105 group-hover:grayscale-0"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover grayscale transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0"
             />
+            {/* OVERLAY BADGE */}
+            <div className="absolute left-4 top-4 border-2 border-slate-900 bg-white px-3 py-1 shadow-[4px_4px_0px_0px_#0F172A]">
+              <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">
+                {post.category}
+              </span>
+            </div>
           </div>
 
           {/* 🏷️ META INFORMATION */}
-          <div className="mb-3 flex items-center justify-between">
-            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600">
-              {post.category}
-            </span>
-            <span className="font-mono text-[10px] text-slate-400">
-              {post.date}
+          <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
+            <div className="flex items-center gap-2">
+              <Terminal size={14} className="text-brand-orange" />
+              <span className="font-mono text-[10px] font-bold uppercase tracking-tighter text-slate-500">
+                LOG_ID: {post.id.slice(0, 8)}
+              </span>
+            </div>
+            <span className="font-mono text-[10px] font-black text-slate-900">
+              [{post.date}]
             </span>
           </div>
 
           {/* 📝 TITLE & DESCRIPTION */}
-          <h3 className="mb-4 text-2xl font-black uppercase italic leading-tight tracking-tighter text-slate-900 group-hover:text-blue-600">
-            {post.title}
-          </h3>
+          <div className="space-y-4">
+            <h3 className="text-3xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 group-hover:text-brand-blue">
+              {post.title}
+            </h3>
 
-          <p className="mb-8 line-clamp-2 text-sm font-bold text-slate-500">
-            {post.description}
-          </p>
+            <p className="line-clamp-2 text-base font-bold leading-relaxed text-slate-500">
+              {post.description}
+            </p>
+          </div>
 
           {/* 👤 FOOTER: AUTHOR & ACTION */}
-          <div className="mt-auto flex items-center justify-between border-t-2 border-slate-100 pt-6">
-            <div className="flex items-center gap-3">
-              <div className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-slate-900 bg-slate-100">
-                {/* ✅ FIX: Type Guarding สำหรับ Author Object */}
+          <div className="mt-10 flex items-center justify-between border-t-4 border-slate-900 pt-8">
+            <div className="flex items-center gap-4">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden border-2 border-slate-900 bg-slate-100 shadow-[2px_2px_0px_0px_#000]">
                 {typeof post.author !== "string" ? (
                   <Image
                     src={post.author.avatar}
                     alt={post.author.name}
-                    width={32}
-                    height={32}
+                    width={40}
+                    height={40}
                     className="object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-200 text-[8px]">
-                    N/A
+                  <div className="flex h-full w-full items-center justify-center bg-slate-900 text-[10px] text-white">
+                    {post.author.slice(0, 2).toUpperCase()}
                   </div>
                 )}
               </div>
-              <span className="text-[10px] font-black uppercase">
-                {typeof post.author === "string"
-                  ? post.author
-                  : post.author.name}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs font-black uppercase italic text-slate-900 group-hover:text-blue-600">
-              READ_MORE <ArrowRight size={14} strokeWidth={3} />
-            </div>
-          </div>
-        </Link>
-      ))}
-    </div>
+              <div className="flex flex-col">
+                <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
 ```
 
 ### `lib/utils.ts`
@@ -4536,6 +6765,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+// ✅ ฟังก์ชัน cn ใช้รวม class หลายตัวเข้าด้วยกัน
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -4671,10 +6901,10 @@ export const getSupabaseAdmin = () => {
 }
 ```
 
-- Total code files: **62**
-- Previewed: **62**
-- Auth/Role logic: **9**
-- Absolute imports: **46**
+- Total code files: **83**
+- Previewed: **83**
+- Auth/Role logic: **12**
+- Absolute imports: **44**
 
 ## 🗄️ JSON Validation
 

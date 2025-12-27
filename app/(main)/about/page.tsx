@@ -1,152 +1,166 @@
 /** @format */
+"use client"
+
 import React, { memo } from "react"
-import AboutContent from "@/components/About"
-import CTA from "@/components/CTA"
-import { siteConfig } from "@/config/siteConfig"
-import { Metadata } from "next"
-import { Users, Code2, Heart, ArrowDownRight, Sparkles } from "lucide-react"
-import { cn } from "@/lib/utils"
+import Image from "next/image"
+import {
+  Check,
+  Code2,
+  HeartHandshake,
+  Lightbulb,
+  Sparkles,
+  ShieldCheck,
+} from "lucide-react"
+import { Card } from "@/components/ui/card"
 
-export const metadata: Metadata = {
-  title: `รู้จักเรา | ${siteConfig.name}`,
-  description:
-    "ทำความรู้จักกับ aemdevweb พาร์ทเนอร์ผู้ช่วยสร้างตัวตนบนโลกออนไลน์ให้กับธุรกิจ SME ด้วยมาตรฐานวิศวกรรมและความจริงใจ",
-}
+const AboutContent = () => {
+  const values = [
+    {
+      icon: <Code2 className="h-6 w-6 stroke-[1.5]" />,
+      title: "เทคโนโลยีระดับสากล",
+      description:
+        "เลือกใช้เครื่องมือที่เหมาะสมที่สุดกับธุรกิจคุณ เพื่อให้เว็บไซต์โหลดไว ปลอดภัย และพร้อมขยายตัวได้ในระยะยาว",
+    },
+    {
+      icon: <HeartHandshake className="h-6 w-6 stroke-[1.5]" />,
+      title: "สื่อสารตรงไปตรงมา",
+      description:
+        "ปรึกษาได้ทุกขั้นตอนเหมือนเพื่อนคู่คิด ไม่ใช้ศัพท์เทคนิคฟุ่มเฟือย เน้นช่วยแก้ปัญหาให้ธุรกิจจริง",
+    },
+    {
+      icon: <Lightbulb className="h-6 w-6 stroke-[1.5]" />,
+      title: "เน้นผลลัพธ์จริง",
+      description:
+        "เว็บไซต์ต้องไม่ใช่แค่สวย แต่ต้องเป็นพนักงานขายที่ทำงานได้จริง สร้างความน่าเชื่อถือและเปลี่ยนผู้เข้าชมเป็นลูกค้า",
+    },
+  ]
 
-const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 1. HERO SECTION: INDUSTRIAL BLUEPRINT ─── */}
-      <section className="relative overflow-hidden bg-slate-900 py-32 md:py-56">
-        {/* Blueprint Grid Background: สลับสีเส้นให้ดูมีความลึก */}
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1.5px,transparent_1.5px),linear-gradient(to_bottom,#1e293b_1.5px,transparent_1.5px)] bg-[size:5rem_5rem] opacity-40" />
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:1rem_1rem] opacity-20" />
+    <div className="space-y-24 py-12 md:space-y-40">
+      {/* ─── 1. STORY SECTION ─── */}
+      <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-20">
+        {/* Image Area - ปรับสี Border เป็น Deep Blue และ Accent Orange */}
+        <div className="relative aspect-[4/5] overflow-hidden border-l-8 border-t-8 border-[#1E3A8A] shadow-2xl md:border-l-[16px] md:border-t-[16px] lg:col-span-5">
+          <Image
+            src="https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/About/About.png"
+            alt="aemdevweb vision"
+            fill
+            priority
+            className="object-cover grayscale-[20%] transition-all duration-1000 hover:scale-105 hover:grayscale-0"
+          />
+          <div className="absolute bottom-0 left-0 flex items-center gap-3 bg-[#1E3A8A] px-6 py-4 text-white md:px-8 md:py-5">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-[#F97316] shadow-[0_0_10px_#F97316]" />
+            <span className="text-[9px] font-black uppercase tracking-[0.3em] md:text-[10px]">
+              Crafting Digital Architecture
+            </span>
+          </div>
+        </div>
 
-        {/* Cinematic Glows */}
-        <div className="absolute right-0 top-0 -mr-32 -mt-32 h-[600px] w-[600px] bg-blue-600/10 blur-[130px]" />
+        {/* Text Content */}
+        <div className="space-y-8 md:space-y-12 lg:col-span-7">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-3 border-b-2 border-[#F97316] pb-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#1E3A8A] md:text-xs">
+              <Sparkles size={14} className="text-[#F97316]" />
+              <span>ปรัชญาการทำงาน</span>
+            </div>
+            <h2 className="text-[clamp(2.5rem,7vw,4.5rem)] font-black leading-[0.9] tracking-tighter text-[#1E3A8A]">
+              จากโครงร่าง <br />
+              <span className="font-light italic text-slate-500">
+                สู่ความสำเร็จของคุณ
+              </span>
+            </h2>
+          </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <div className="space-y-16">
-            <div className="group inline-flex items-center gap-3 border-l-4 border-blue-600 bg-white/5 px-6 py-3 backdrop-blur-md transition-all hover:bg-white/10">
-              <Sparkles size={14} className="animate-pulse text-blue-500" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 md:text-xs">
-                Engineering Digital Trust
+          <div className="space-y-6 text-base font-medium leading-relaxed text-slate-600 md:text-xl">
+            <p>
+              ผมเริ่มต้น{" "}
+              <span className="font-bold text-[#1E3A8A] underline decoration-[#F97316]/40 underline-offset-4">
+                aemdevweb
+              </span>{" "}
+              ด้วยแนวคิดที่ต้องการให้ SME ไทย มีเว็บไซต์มาตรฐานสากล
+              เน้นการใช้งานจริงและสร้างยอดขายได้ต่อเนื่อง
+            </p>
+
+            <div className="font-medium text-slate-600">
+              ดูแลงานทุกชิ้นด้วยตัวเองเหมือนงานฝีมือ เพื่อให้มั่นใจว่า
+              โครงสร้างระบบที่คุณได้รับจะเป็นฟันเฟืองสำคัญในการขับเคลื่อนธุรกิจ...
+              <span className="mt-4 block border-l-4 border-[#F97316] bg-[#1E3A8A]/5 py-4 pl-6 font-bold italic text-[#1E3A8A]">
+                "ความภูมิใจของผม คือการได้เห็นธุรกิจคุณเติบโต"
               </span>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-end">
-              <div className="lg:col-span-8">
-                <h1 className="text-5xl font-black uppercase italic leading-[0.85] tracking-tighter text-white md:text-8xl lg:text-[110px]">
-                  เราสร้างเว็บเพื่อให้ <br />
-                  <span className="text-blue-600 underline decoration-white/10 underline-offset-8">
-                    ธุรกิจคุณไปได้ไกล
-                  </span>
-                </h1>
+          {/* Value Checklist */}
+          <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2">
+            {[
+              "โครงสร้างเว็บไซต์มั่นคง",
+              "คุยตรงกับคนทำงานจริง",
+              "ราคาชัดเจน โปร่งใส",
+              "ดูแลเหมือนพาร์ทเนอร์ธุรกิจ",
+            ].map((item) => (
+              <div key={item} className="group flex items-center gap-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center bg-[#1E3A8A] text-white transition-colors group-hover:bg-[#F97316]">
+                  <Check className="h-3.5 w-3.5 stroke-[4]" />
+                </div>
+                <span className="text-sm font-bold uppercase tracking-tight text-[#1E3A8A]">
+                  {item}
+                </span>
               </div>
-              <div className="lg:col-span-4 lg:pb-4">
-                <p className="border-l-4 border-blue-600/30 pl-8 text-xl font-bold leading-relaxed text-slate-400 md:text-2xl">
-                  พาร์ทเนอร์ที่พร้อมเติบโตไปกับ{" "}
-                  <span className="text-white underline decoration-blue-600 decoration-4">
-                    SME และ หจก.
-                  </span>{" "}
-                  ทั่วไทยด้วยความแม่นยำครับ
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ─── 2. CORE VALUES: BENTO SHARP STRUCTURE ─── */}
-      <section className="relative z-20 -mt-24 px-6">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-px border-4 border-slate-900 bg-slate-900 shadow-[20px_20px_0px_0px_rgba(30,41,59,0.2)] md:grid-cols-3">
-          {[
-            {
-              icon: <Code2 size={24} />,
-              color: "text-blue-600",
-              t: "Precision Craft",
-              d: "วิศวกรรมเว็บที่โหลดไว และรองรับโครงสร้าง SEO",
-            },
-            {
-              icon: <Heart size={24} />,
-              color: "text-rose-500",
-              t: "Genuine Care",
-              d: "ดูแลธุรกิจคุณ เหมือนเป็นธุรกิจของเราเอง",
-            },
-            {
-              icon: <Users size={24} />,
-              color: "text-emerald-500",
-              t: "Real Partnership",
-              d: "คุยตรงไปตรงมา ปรึกษาได้ทุกขั้นตอนงาน",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="group flex flex-col justify-between bg-white p-12 transition-all duration-500 hover:bg-slate-50"
+      {/* ─── 2. VALUES SECTION ─── */}
+      <div className="overflow-hidden border-2 border-[#1E3A8A] bg-[#1E3A8A] shadow-2xl">
+        <div className="grid grid-cols-1 gap-px md:grid-cols-3">
+          {values.map((value, index) => (
+            <Card
+              key={index}
+              className="group rounded-none border-none bg-white p-10 transition-all duration-500 hover:bg-slate-50 lg:p-14"
             >
-              <div className="space-y-10">
-                <div
-                  className={cn(
-                    "inline-block border-2 border-slate-900 p-6 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] transition-all group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none",
-                    item.color
-                  )}
-                >
-                  {item.icon}
-                </div>
-                <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-                    {item.t}
-                  </h4>
-                  <p className="text-2xl font-black uppercase italic leading-tight text-slate-900 md:text-3xl">
-                    {item.d}
-                  </p>
-                </div>
+              <div className="mb-8 flex h-14 w-14 items-center justify-center bg-slate-100 text-[#1E3A8A] transition-all duration-500 group-hover:bg-[#1E3A8A] group-hover:text-white group-hover:shadow-[6px_6px_0px_0px_#F97316]">
+                {value.icon}
               </div>
-              <div className="mt-12 flex justify-end">
-                <ArrowDownRight
-                  className="text-slate-100 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-blue-600"
-                  size={64}
-                  strokeWidth={2}
-                />
-              </div>
-            </div>
+              <h3 className="mb-4 text-lg font-black uppercase tracking-tighter text-[#1E3A8A]">
+                {value.title}
+              </h3>
+              <p className="text-sm font-medium leading-relaxed text-slate-500">
+                {value.description}
+              </p>
+            </Card>
           ))}
         </div>
-      </section>
+      </div>
 
-      {/* ─── 3. MAIN CONTENT: ARCHITECTURAL DOCUMENT ─── */}
-      <section className="relative py-32 md:py-48">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] bg-[size:3rem_3rem] opacity-50" />
-
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="relative border-2 border-slate-200 bg-white p-10 shadow-sm md:p-24">
-            {/* Corner Marks: เพิ่มความกว้างให้ดูเด่นขึ้น */}
-            <div className="absolute -left-2 -top-2 h-16 w-16 border-l-[10px] border-t-[10px] border-blue-600" />
-            <div className="absolute -bottom-2 -right-2 h-16 w-16 border-b-[10px] border-r-[10px] border-slate-900" />
-
-            <div className="relative z-10">
-              <AboutContent />
-            </div>
-
-            {/* Industrial Meta Label */}
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-slate-900 px-8 py-2 text-[10px] font-black uppercase tracking-[0.5em] text-white">
-              AEMDEVWEB / SYSTEM_OVERVIEW
-            </div>
+      {/* ─── 3. TRUST BANNER ─── */}
+      <div className="flex flex-col items-center justify-between gap-8 border-l-[8px] border-[#1E3A8A] bg-slate-50 p-8 md:flex-row md:border-l-[16px] md:p-12">
+        <div className="flex items-center gap-6">
+          <div className="hidden h-14 w-14 shrink-0 items-center justify-center border border-slate-200 bg-white shadow-sm md:flex">
+            <ShieldCheck className="h-7 w-7 text-[#F97316]" />
+          </div>
+          <div className="space-y-1">
+            <h4 className="text-lg font-black uppercase tracking-tighter text-[#1E3A8A]">
+              ส่งมอบงานด้วยมาตรฐานวิศวกรรม
+            </h4>
+            <p className="text-sm font-bold text-slate-500">
+              ตรงเวลา พร้อมคู่มือจัดการเว็บไซต์ด้วยตัวเองแบบมืออาชีพ
+            </p>
           </div>
         </div>
-      </section>
 
-      {/* ─── 4. CTA SECTION ─── */}
-      <section className="px-6 pb-32">
-        <div className="mx-auto max-w-7xl">
-          <CTA
-            title="พร้อมจะเริ่มสร้างความสำเร็จไปกับเราหรือยังครับ?"
-            subtitle="ผมยินดีให้คำปรึกษาฟรี คุยงานตรงไปตรงมา เพื่อให้งบประมาณของคุณถูกใช้อย่างคุ้มค่าที่สุด"
-          />
+        <div className="flex shrink-0 flex-col items-center border-t border-slate-200 pt-6 md:items-end md:border-l md:border-t-0 md:pl-10 md:pt-0">
+          <p className="text-[9px] font-black uppercase tracking-[0.3em] text-slate-400">
+            Support Response
+          </p>
+          <p className="text-2xl font-black text-[#1E3A8A]">FAST & DIRECT</p>
+          <p className="text-[10px] font-bold italic text-[#F97316]">
+            ภายใน 24 ชม.
+          </p>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }
 
-export default memo(AboutPage)
+export default memo(AboutContent)

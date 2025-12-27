@@ -1,87 +1,145 @@
 /** @format */
-import { Metadata } from "next"
+"use client"
+
+import React from "react"
+import { Layers, Zap, Target, Search } from "lucide-react" // ✅ แก้ layers -> Layers และลบ LayoutDashboard
 import { catalogProjects } from "@/data/catalog.projects"
 import { CatalogProjectsGrid } from "@/components/catalog/CatalogProjectsGrid"
-import { Sparkles, LayoutPanelLeft } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Project Catalog | AEM Dev",
-  description:
-    "รวมผลงานเว็บไซต์และ Landing Page สำหรับธุรกิจจริง ที่ออกแบบเพื่อ Conversion, Performance และ Trust",
+// ─── 🏗️ TYPE DEFINITIONS ───
+interface SectionHeaderProps {
+  title: string
+  subtitle: string
+  icon: React.ReactNode
+  light?: boolean
 }
 
 export default function CatalogPage() {
+  // กรองโปรเจกต์แยกตามกลุ่มหลักเพื่อจัด Section
+  const industrialProjects = catalogProjects.filter(
+    (p) =>
+      ["construction", "wood-business"].includes(p.category) ||
+      p.templateId === "wood-business"
+  )
+  const lifestyleProjects = catalogProjects.filter((p) =>
+    ["cafe", "starter"].includes(p.category)
+  )
+  const professionalProjects = catalogProjects.filter((p) =>
+    ["clinic", "real-estate"].includes(p.category)
+  )
+
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white selection:bg-blue-600 selection:text-white">
-      {/* ─── 🛠️ BACKGROUND ARCHITECTURE ─── */}
-      {/* ใช้ลายเส้นตารางแบบ Blueprint จางๆ */}
-      <div
-        className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] opacity-60 [background-size:40px_40px]"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute left-0 right-0 top-0 -z-10 h-96 bg-gradient-to-b from-slate-50 to-transparent"
-        aria-hidden="true"
-      />
-
-      <section className="mx-auto max-w-7xl px-6 py-24 md:py-40">
-        {/* ─── 1. INDUSTRIAL HEADER ─── */}
-        <header className="relative mb-24 max-w-4xl">
-          {/* Badge Style Label */}
-          <div className="mb-8 inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-5 py-2 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
-            <LayoutPanelLeft size={16} className="text-blue-600" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-900">
-              Registry / Project_Catalog_V1
-            </span>
-          </div>
-
-          <h1 className="text-5xl font-black uppercase italic leading-[0.85] tracking-tighter text-slate-900 md:text-8xl lg:text-[100px]">
-            ตัวอย่างผลงาน <br />
-            <span className="text-blue-600 underline decoration-slate-900 decoration-[12px] underline-offset-[12px]">
-              ที่ใช้งานจริง
-            </span>
-          </h1>
-
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-12">
-            <div className="md:col-span-8">
-              <p className="text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-                ทุกโปรเจกต์ถูกออกแบบจากโจทย์ธุรกิจจริง เน้นผลลัพธ์ด้านยอดขาย
-                ความน่าเชื่อถือ และประสิทธิภาพระดับ{" "}
-                <span className="text-slate-900 underline decoration-blue-600/30">
-                  Enterprise
-                </span>
-              </p>
+    <main className="min-h-screen bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
+      {/* ─── 01. CATALOG HERO ─── */}
+      <section className="relative overflow-hidden border-b-[6px] border-[#0F172A] bg-white py-24 md:py-32">
+        <div className="bg-grid-pattern absolute inset-0 opacity-10" />
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="max-w-4xl space-y-8">
+            <div className="inline-flex items-center gap-3 border-4 border-[#0F172A] bg-[#F97316] px-6 py-2 shadow-[6px_6px_0px_0px_#0F172A]">
+              <Zap size={16} fill="white" className="text-white" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">
+                Project Registry v2.5.0
+              </span>
             </div>
-            <div className="hidden items-center justify-end md:col-span-4 md:flex">
-              {/* Spinning Badge Decor */}
-              <div className="h-24 w-24 animate-[spin_10s_linear_infinite] rounded-full border-4 border-dashed border-slate-200 p-2">
-                <div className="flex h-full w-full items-center justify-center rounded-full bg-slate-50 text-[10px] font-black uppercase tracking-tighter text-slate-300">
-                  AEM.DEV
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
 
-        {/* ─── 2. CATALOG GRID ─── */}
-        <div className="relative pb-20">
-          <CatalogProjectsGrid
-            projects={catalogProjects}
-            columns={3}
-            showCTA={true}
-          />
+            <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-8xl lg:text-9xl">
+              Solutions <br />
+              <span className="text-[#1E3A8A] underline decoration-[#0F172A] decoration-[10px] underline-offset-[12px]">
+                Catalog.
+              </span>
+            </h1>
+
+            <p className="max-w-2xl border-l-[12px] border-[#1E3A8A] pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
+              สำรวจสถาปัตยกรรมเว็บไซต์ที่เราออกแบบมาเพื่อแก้ปัญหาธุรกิจโดยเฉพาะ
+              เลือกโครงสร้างที่ใช่สำหรับอุตสาหกรรมของคุณ
+            </p>
+          </div>
         </div>
+      </section>
 
-        {/* ─── 3. BOTTOM DECOR ─── */}
-        <footer className="mt-20 flex items-center gap-4 border-t-2 border-slate-100 pt-10">
-          <div className="flex h-10 w-10 items-center justify-center bg-slate-900 text-white">
-            <Sparkles size={18} />
-          </div>
-          <p className="text-xs font-black uppercase tracking-widest text-slate-400">
-            More projects are being added to the database.
-          </p>
-        </footer>
+      {/* ─── 02. SECTION: INDUSTRIAL & B2B ─── */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <SectionHeader
+            title="Industrial & Infrastructure"
+            subtitle="ระบบสำหรับงานก่อสร้าง, โรงงาน และธุรกิจค้าส่งที่เน้นความเชื่อมั่นสูง"
+            icon={<Target className="text-[#F97316]" />}
+          />
+          <CatalogProjectsGrid projects={industrialProjects} columns={3} />
+        </div>
+      </section>
+
+      {/* ─── 03. SECTION: LIFESTYLE & E-COMMERCE ─── */}
+      <section className="bg-[#0F172A] py-24 text-white md:py-32">
+        <div className="container mx-auto px-6">
+          <SectionHeader
+            title="Lifestyle & Modern Retail"
+            subtitle="โซลูชันสำหรับคาเฟ่และร้านค้าปลีก ที่เน้นประสบการณ์ลูกค้าและยอดขาย"
+            icon={<Layers className="text-[#1E3A8A]" />} // ✅ เปลี่ยนจาก Zap เป็น Layers เพื่อความสวยงามและใช้ Icon ที่ถูกต้อง
+            light
+          />
+          <CatalogProjectsGrid projects={lifestyleProjects} columns={3} />
+        </div>
+      </section>
+
+      {/* ─── 04. SECTION: PROFESSIONAL SERVICES ─── */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <SectionHeader
+            title="High-Value Services"
+            subtitle="โครงสร้างสำหรับคลินิกและอสังหาฯ ที่ต้องการระบบคัดกรองลูกค้าคุณภาพ"
+            icon={<Search className="text-[#F97316]" />}
+          />
+          <CatalogProjectsGrid projects={professionalProjects} columns={3} />
+        </div>
       </section>
     </main>
+  )
+}
+
+/**
+ * 🛠️ SUB-COMPONENT: SECTION HEADER
+ * รีแฟกเตอร์ให้ใช้ Type แทน Any เพื่อความปลอดภัย
+ */
+function SectionHeader({
+  title,
+  subtitle,
+  icon,
+  light = false,
+}: SectionHeaderProps) {
+  return (
+    <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          {icon}
+          <h2
+            className={`text-[10px] font-black uppercase tracking-[0.5em] ${
+              light ? "text-[#1E3A8A]" : "text-slate-400"
+            }`}
+          >
+            Category_Stream
+          </h2>
+        </div>
+        <h3
+          className={`font-heading text-4xl uppercase tracking-tighter md:text-6xl ${
+            light ? "text-white" : "text-[#0F172A]"
+          }`}
+        >
+          {title}
+        </h3>
+        <p
+          className={`max-w-xl font-bold ${
+            light ? "text-slate-400" : "text-slate-500"
+          }`}
+        >
+          {subtitle}
+        </p>
+      </div>
+      <div
+        className={`mx-12 hidden h-px flex-1 bg-current opacity-10 md:block ${
+          light ? "text-white" : "text-[#0F172A]"
+        }`}
+      />
+    </div>
   )
 }

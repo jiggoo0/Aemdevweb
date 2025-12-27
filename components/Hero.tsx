@@ -12,133 +12,174 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react"
+// ✅ ลบ import { cn } ออกเนื่องจากไม่ได้ถูกเรียกใช้งาน
+
+interface FloatingElement {
+  title: string
+  desc?: string
+}
+
+interface HeroProps {
+  badgeText?: string
+  headline?: React.ReactNode
+  description?: string
+  primaryActionText?: string
+  primaryActionHref?: string
+  secondaryActionText?: string
+  secondaryActionHref?: string
+  imageSrc?: string
+  imageAlt?: string
+  trustBadges?: string[]
+  floatingElement1?: FloatingElement
+  floatingElement2?: FloatingElement
+}
 
 const Hero = ({
-  badgeText = "Website Solution สำหรับธุรกิจไทยโดยเฉพาะ",
+  badgeText = "Industrial Web Architecture สำหรับธุรกิจไทย",
   headline = (
     <>
-      สร้างเว็บไซต์ที่เป็น <br />
-      <span className="italic text-blue-600">พนักงานขายเบอร์ 1</span>
+      Build Smart, <br />
+      <span className="text-brand-blue">Reliable Web</span> <br />
+      Solutions
     </>
   ),
-  description = "เปลี่ยนหน้าเว็บธรรมดาให้เป็นเครื่องมือผลิตยอดขายที่ทำงาน 24 ชั่วโมง ด้วยสถาปัตยกรรมระดับสากลที่โหลดไว มั่นคง และออกแบบมาเพื่อปิดการขายสำหรับ SME โดยเฉพาะ",
-  primaryActionText = "เริ่มสร้างโปรเจกต์ของคุณ",
-  primaryActionHref = "/services",
-  secondaryActionText = "ดูราคาและแพ็กเกจ",
-  secondaryActionHref = "/services#pricing",
+  description = "ยกระดับธุรกิจด้วยสถาปัตยกรรมเว็บระดับ Enterprise ที่ออกแบบมาเพื่อความเสถียร ความเร็ว และการเติบโตที่ไร้ขีดจำกัด พร้อมรองรับระบบ Automation เต็มรูปแบบ",
+  primaryActionText = "เริ่มสร้างโปรเจกต์",
+  primaryActionHref = "/contact",
+  secondaryActionText = "บริการของเรา",
+  secondaryActionHref = "#services",
   imageSrc = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Hero/Hero.png",
-  imageAlt = "aemdevweb digital architecture workspace",
+  imageAlt = "AEMDEVWEB Digital Architecture Workspace",
   trustBadges = [
-    "High-Performance Speed",
-    "สวยเป๊ะทุกหน้าจอมือถือ",
-    "โครงสร้างรองรับ Google (SEO)",
+    "Enterprise Performance",
+    "Mobile First Design",
+    "Workflow Automation",
   ],
-  floatingElement1 = { title: "Mobile Optimized", desc: "สวยงามทุกหน้าจอ" },
-  floatingElement2 = { title: "Secure & Stable", desc: "ระบบมั่นคง ปลอดภัย" },
-}) => {
+  floatingElement1 = { title: "Mobile Optimized" },
+  floatingElement2 = { title: "Secure Architecture" },
+}: HeroProps) => {
   return (
-    <section className="relative flex min-h-[95vh] items-center overflow-hidden bg-white pb-20 pt-32 md:pt-40">
-      {/* ─── 1. ADVANCED BLUEPRINT GRID ─── */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#80808012_2px,transparent_2px),linear-gradient(to_bottom,#80808012_2px,transparent_2px)] bg-[size:200px_200px]" />
-
-      <div className="pointer-events-none absolute left-0 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-[120px]" />
+    <section
+      className="relative flex min-h-[90vh] items-center overflow-hidden bg-background pb-20 pt-32 md:pt-40"
+      aria-labelledby="hero-heading"
+    >
+      {/* ─── 1. Background Architecture ─── */}
+      <div
+        className="bg-grid-pattern absolute inset-0 -z-10 opacity-40"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-blue/10 blur-[120px]"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* ─── 2. CONTENT AREA ─── */}
+          {/* ─── 2. Content Column ─── */}
           <div className="space-y-10 lg:col-span-7">
-            {/* Brand Badge: Neobrutalism Style */}
-            <div className="group inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)] transition-transform hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-              <Sparkles size={14} className="animate-pulse text-blue-600" />
+            {/* 🏷️ Badge: Brutalist Style */}
+            <div className="inline-flex items-center gap-3 border-2 border-slate-900 bg-white px-4 py-2 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
+              <Sparkles size={16} className="animate-pulse text-brand-orange" />
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 md:text-xs">
                 {badgeText}
               </span>
             </div>
 
-            {/* Headline: Fluid & Powerful */}
-            <h1 className="text-[clamp(2.5rem,8vw,6.5rem)] font-black uppercase italic leading-[0.85] tracking-tighter text-slate-900">
+            {/* 📢 Headline */}
+            <h1
+              id="hero-heading"
+              className="font-heading text-5xl font-black uppercase leading-[0.95] tracking-tighter text-slate-900 md:text-7xl lg:text-8xl"
+            >
               {headline}
             </h1>
 
-            {/* Description: High Contrast */}
-            <p className="max-w-xl border-l-4 border-blue-600 pl-6 text-base font-bold leading-relaxed text-slate-500 md:text-xl">
+            {/* 📝 Description */}
+            <p className="max-w-xl border-l-[6px] border-brand-orange pl-8 text-lg font-bold leading-relaxed text-slate-600 md:text-xl">
               {description}
             </p>
 
-            {/* CTA Buttons: Industrial Interactions */}
+            {/* 🚀 CTA Action Group */}
             <div className="flex flex-col gap-5 pt-4 sm:flex-row">
-              <Button
-                size="lg"
-                className="group relative h-16 overflow-hidden rounded-none bg-blue-600 px-10 text-[11px] font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#0f172a] transition-all hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_#0f172a] active:translate-x-0 active:translate-y-0 active:shadow-none"
-                asChild
-              >
-                <Link href={primaryActionHref} className="flex items-center">
+              <Link href={primaryActionHref} className="group">
+                <Button
+                  size="lg"
+                  className="h-16 w-full rounded-none border-4 border-slate-900 bg-slate-900 px-10 text-xs font-black uppercase tracking-[0.2em] text-white shadow-[6px_6px_0px_0px_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none sm:w-auto"
+                >
                   {primaryActionText}
-                  <ArrowRight className="ml-3 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
+                  <ArrowRight
+                    className="ml-3 transition-transform group-hover:translate-x-2"
+                    size={18}
+                  />
+                </Button>
+              </Link>
 
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-16 rounded-none border-2 border-slate-900 bg-transparent px-10 text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 transition-all hover:bg-slate-900 hover:text-white active:scale-95"
-                asChild
-              >
-                <Link href={secondaryActionHref}>{secondaryActionText}</Link>
-              </Button>
+              <Link href={secondaryActionHref}>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-16 w-full rounded-none border-4 border-slate-900 bg-transparent px-10 text-xs font-black uppercase tracking-[0.2em] text-slate-900 transition-all hover:bg-slate-50 sm:w-auto"
+                >
+                  {secondaryActionText}
+                </Button>
+              </Link>
             </div>
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap gap-x-10 gap-y-5 pt-6">
+            {/* ✅ Trust Indicators */}
+            <ul className="flex flex-wrap gap-x-10 gap-y-5 pt-6" role="list">
               {trustBadges.map((badge, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 opacity-70 transition-opacity hover:opacity-100"
-                >
-                  <ShieldCheck size={16} className="text-emerald-600" />
-                  <span className="text-[9px] font-black uppercase tracking-widest text-slate-500">
+                <li key={index} className="group flex items-center gap-3">
+                  <div className="bg-brand-blue/10 p-1.5 transition-colors group-hover:bg-brand-blue/20">
+                    <ShieldCheck size={20} className="text-brand-blue" />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                     {badge}
                   </span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          {/* ─── 3. SHOWCASE AREA ─── */}
+          {/* ─── 3. Visual Showcase Column ─── */}
           <div className="relative lg:col-span-5">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-[480px]">
-              {/* Main Image Block */}
-              <div className="relative h-full w-full border-4 border-slate-900 bg-white p-3 shadow-2xl">
+              {/* Main Image Frame */}
+              <div className="relative h-full w-full border-[6px] border-slate-900 bg-white p-4 shadow-[12px_12px_0px_0px_rgba(15,23,42,1)] transition-transform duration-700 hover:-translate-y-3">
                 <div className="relative h-full w-full overflow-hidden bg-slate-100">
                   <Image
                     src={imageSrc}
                     alt={imageAlt}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
+                    className="object-cover"
                     priority
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
                 </div>
 
-                {/* Floating Elements (Responsive Hidden) */}
-                <div className="absolute -left-6 bottom-20 z-20 hidden items-center gap-4 border-4 border-slate-900 bg-white p-4 shadow-[6px_6px_0px_0px_#2563eb] md:flex">
-                  <Smartphone className="text-blue-600" />
-                  <span className="text-xs font-black uppercase tracking-tighter">
+                {/* 📱 Floating Element 1: Mobile */}
+                <div className="absolute -left-10 top-1/4 z-20 hidden animate-float items-center gap-4 border-4 border-slate-900 bg-white p-5 shadow-[6px_6px_0px_0px_#2563EB] md:flex">
+                  <Smartphone className="text-brand-blue" size={24} />
+                  <span className="text-[11px] font-black uppercase tracking-tighter">
                     {floatingElement1.title}
                   </span>
                 </div>
 
-                <div className="absolute -right-6 top-20 z-20 hidden items-center gap-4 border-4 border-slate-900 bg-white p-4 shadow-[6px_6px_0px_0px_#0f172a] md:flex">
-                  <Monitor className="text-slate-900" />
-                  <span className="text-xs font-black uppercase tracking-tighter">
+                {/* 💻 Floating Element 2: Desktop */}
+                <div
+                  className="absolute -right-10 bottom-1/4 z-20 hidden animate-float items-center gap-4 border-4 border-slate-900 bg-white p-5 shadow-[6px_6px_0px_0px_#F97316] md:flex"
+                  style={{ animationDelay: "1.5s" }}
+                >
+                  <Monitor className="text-brand-orange" size={24} />
+                  <span className="text-[11px] font-black uppercase tracking-tighter">
                     {floatingElement2.title}
                   </span>
                 </div>
               </div>
 
-              {/* Blueprint Frame Decor */}
-              <div className="absolute -bottom-4 -right-4 -z-10 h-full w-full border-2 border-dashed border-blue-600/30" />
+              {/* Decorative Background Grid Layer */}
+              <div
+                className="absolute -bottom-8 -right-8 -z-10 h-full w-full border-4 border-dashed border-slate-200"
+                aria-hidden="true"
+              />
             </div>
           </div>
         </div>

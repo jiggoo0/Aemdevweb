@@ -9,12 +9,18 @@ import {
   Mail,
   MapPin,
   Phone,
-  ArrowUpRight,
+  Globe,
+  Instagram,
+  Zap,
 } from "lucide-react"
 
 import { siteConfig } from "@/config/siteConfig"
-// ✅ แก้ไข: เปลี่ยนจาก Path ที่ Error เป็นการใช้ Type จากศูนย์กลางของข้อมูล
-import type { MultiLangText } from "@/data/types"
+
+// ✅ แก้ไข: ประกาศ Interface ภายในเพื่อลด Dependency Error หากไฟล์ types/services มีปัญหา
+interface MultiLangText {
+  th?: string
+  en?: string
+}
 
 interface FooterProps {
   data?: {
@@ -32,49 +38,67 @@ interface FooterProps {
 export default function Footer({ data }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
-  // Defensive Logic: ป้องกัน Error หากข้อมูลมาไม่ครบ
-  const displayName =
-    typeof data?.name === "string"
-      ? data.name
-      : (data?.name as MultiLangText)?.th ||
-        (data?.name as MultiLangText)?.en ||
-        siteConfig.name ||
-        "AEMDEVWEB"
+  const displayName = React.useMemo(() => {
+    if (!data?.name) return siteConfig.name
+    if (typeof data.name === "string") return data.name
+    // ✅ Type Guard ที่ปลอดภัยขึ้น
+    const nameObj = data.name as MultiLangText
+    return nameObj.th || nameObj.en || siteConfig.name
+  }, [data?.name])
 
   return (
-    <footer className="border-t-8 border-slate-900 bg-white pb-8 pt-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          {/* ─── BRAND IDENTITY ─── */}
-          <div className="space-y-6 lg:col-span-5">
-            <div className="inline-block border-4 border-slate-900 bg-blue-600 px-4 py-2 shadow-[6px_6px_0px_0px_rgba(15,23,42,1)]">
-              <span className="text-2xl font-black uppercase italic tracking-tighter text-white">
+    <footer className="relative mt-20 border-t-[12px] border-[#0F172A] bg-white pb-10 pt-24">
+      {/* 🛠️ TECHNICAL ACCENT */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-30 [background-size:32px_32px]" />
+
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          {/* ─── 01. BRAND IDENTITY ─── */}
+          <div className="space-y-10 lg:col-span-5">
+            <Link
+              href="/"
+              className="inline-block border-[6px] border-[#0F172A] bg-[#1E3A8A] px-8 py-4 shadow-[10px_10px_0px_0px_#F97316] transition-transform hover:-rotate-2"
+            >
+              <span className="text-4xl font-black uppercase italic tracking-tighter text-white">
                 {displayName}
               </span>
-            </div>
-            <p className="max-w-md text-lg font-bold italic leading-relaxed text-slate-500">
-              รับออกแบบสถาปัตยกรรมดิจิทัลและพัฒนาเว็บไซต์ที่เน้นผลลัพธ์
-              เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วย{" "}
-              <span className="font-black text-slate-900 underline decoration-blue-600/30">
-                เทคโนโลยีมาตรฐานสากล
-              </span>
-            </p>
+            </Link>
 
-            <div className="flex gap-3 pt-2">
+            <div className="space-y-4">
+              <p className="max-w-md text-2xl font-black leading-[1.1] tracking-tighter text-[#0F172A] md:text-3xl">
+                DIGITAL ARCHITECTURE <br />
+                <span className="text-[#F97316]">FOR MODERN BUSINESS.</span>
+              </p>
+              <p className="max-w-sm text-lg font-bold leading-relaxed text-slate-500">
+                เราไม่ได้แค่ทำเว็บ แต่เราวางโครงสร้าง{" "}
+                <span className="text-[#0F172A] underline decoration-[#F97316] decoration-4">
+                  สถาปัตยกรรมดิจิทัล
+                </span>{" "}
+                เพื่อการเติบโตของ SME
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
               {[
                 {
-                  icon: <Facebook size={20} />,
+                  icon: <Facebook size={22} strokeWidth={2.5} />,
                   href: data?.socials?.facebook || siteConfig.links.facebook,
+                  color: "hover:bg-[#1877F2]",
                 },
                 {
-                  icon: <MessageCircle size={20} />,
-                  href: data?.lineId
-                    ? `https://line.me/ti/p/~${data.lineId}`
-                    : siteConfig.contact.lineUrl,
+                  icon: <MessageCircle size={22} strokeWidth={2.5} />,
+                  href: siteConfig.contact.lineUrl,
+                  color: "hover:bg-[#06C755]",
                 },
                 {
-                  icon: <Mail size={20} />,
+                  icon: <Instagram size={22} strokeWidth={2.5} />,
+                  href: siteConfig.links.instagram,
+                  color: "hover:bg-[#E4405F]",
+                },
+                {
+                  icon: <Mail size={22} strokeWidth={2.5} />,
                   href: `mailto:${siteConfig.contact.email}`,
+                  color: "hover:bg-[#F97316]",
                 },
               ].map((social, i) => (
                 <a
@@ -82,7 +106,7 @@ export default function Footer({ data }: FooterProps) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-slate-900 bg-white p-3 transition-all hover:-translate-y-1 hover:bg-yellow-400 hover:shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]"
+                  className={`flex h-14 w-14 items-center justify-center border-4 border-[#0F172A] bg-white text-[#0F172A] transition-all hover:-translate-y-2 hover:text-white hover:shadow-[6px_6px_0px_0px_#0F172A] ${social.color}`}
                 >
                   {social.icon}
                 </a>
@@ -90,22 +114,22 @@ export default function Footer({ data }: FooterProps) {
             </div>
           </div>
 
-          {/* ─── NAVIGATION ─── */}
+          {/* ─── 02. NAV_SYSTEM ─── */}
           <div className="lg:col-span-3">
-            <h4 className="mb-6 font-mono text-xs font-black uppercase tracking-[0.3em] text-slate-400">
-              NAV_SYSTEM
-            </h4>
-            <ul className="space-y-4 font-bold italic text-slate-600">
-              {siteConfig.navLinks.slice(1).map((item) => (
+            <div className="mb-10 flex items-center gap-2">
+              <Zap size={16} className="fill-[#F97316] text-[#F97316]" />
+              <h4 className="font-mono text-xs font-black uppercase tracking-[0.4em] text-slate-400">
+                NAV_SYSTEM
+              </h4>
+            </div>
+            <ul className="grid grid-cols-1 gap-5">
+              {siteConfig.navLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-2 transition-colors hover:text-blue-600"
+                    className="group flex items-center gap-3 text-xl font-black uppercase tracking-tighter text-[#0F172A] transition-all hover:translate-x-2 hover:text-[#1E3A8A]"
                   >
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
-                    />
+                    <div className="h-2 w-6 bg-slate-200 transition-all group-hover:w-8 group-hover:bg-[#F97316]" />
                     {item.title}
                   </Link>
                 </li>
@@ -113,34 +137,42 @@ export default function Footer({ data }: FooterProps) {
             </ul>
           </div>
 
-          {/* ─── CONTACT ─── */}
-          <div className="space-y-6 lg:col-span-4">
-            <h4 className="mb-6 font-mono text-xs font-black uppercase tracking-[0.3em] text-slate-400">
-              CONTACT_DIRECT
-            </h4>
-            <div className="space-y-5">
-              <div className="group flex items-start gap-4">
-                <div className="mt-1 border-2 border-slate-900 bg-yellow-400 p-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <Phone size={16} className="text-slate-900" />
+          {/* ─── 03. CONTACT_DIRECT ─── */}
+          <div className="lg:col-span-4">
+            <div className="mb-10 flex items-center gap-2">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              <h4 className="font-mono text-xs font-black uppercase tracking-[0.4em] text-slate-400">
+                CONTACT_DIRECT
+              </h4>
+            </div>
+            <div className="space-y-8">
+              <div className="group flex items-center gap-6">
+                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-yellow-400 shadow-[6px_6px_0px_0px_#0F172A] transition-transform group-hover:rotate-6">
+                  <Phone
+                    size={28}
+                    strokeWidth={2.5}
+                    className="text-[#0F172A]"
+                  />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    Call Now
+                  <p className="font-mono text-[10px] font-black uppercase italic tracking-[0.2em] text-slate-400">
+                    Call_The_Engineer
                   </p>
-                  <p className="text-lg font-black text-slate-900 transition-colors group-hover:text-blue-600">
+                  <p className="text-2xl font-black tracking-tighter text-[#0F172A]">
                     {data?.phone || siteConfig.contact.tel}
                   </p>
                 </div>
               </div>
-              <div className="group flex items-start gap-4">
-                <div className="mt-1 border-2 border-slate-900 bg-blue-600 p-2 text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <MapPin size={16} />
+
+              <div className="group flex items-start gap-6">
+                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-[#1E3A8A] text-white shadow-[6px_6px_0px_0px_#0F172A] transition-transform group-hover:-rotate-6">
+                  <MapPin size={28} strokeWidth={2.5} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    Location
+                  <p className="font-mono text-[10px] font-black uppercase italic tracking-[0.2em] text-slate-400">
+                    Base_Location
                   </p>
-                  <p className="font-black text-slate-900 transition-colors group-hover:text-blue-600">
+                  <p className="max-w-[200px] text-lg font-black leading-tight tracking-tighter text-[#0F172A]">
                     {data?.address || siteConfig.contact.address}
                   </p>
                 </div>
@@ -149,13 +181,31 @@ export default function Footer({ data }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between border-t-4 border-slate-900 pt-8 md:flex-row">
-          <p className="font-mono text-[10px] font-black uppercase tracking-widest text-slate-400">
-            © {currentYear} {displayName}. ALL RIGHTS RESERVED.
-          </p>
-          <span className="mt-4 text-[10px] font-bold italic tracking-[0.2em] text-slate-300 md:mt-0">
-            ENGINEERED_BY_AEMDEVWEB
-          </span>
+        {/* ─── BOTTOM BAR ─── */}
+        <div className="mt-24 border-t-[8px] border-[#0F172A] pt-10">
+          <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
+            <div className="flex items-center gap-3">
+              <Globe size={18} className="animate-spin-slow text-[#F97316]" />
+              <div className="flex flex-col">
+                <p className="font-mono text-[11px] font-black uppercase leading-none tracking-[0.2em] text-[#0F172A]">
+                  © {currentYear} {displayName}.
+                </p>
+                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                  ALL SYSTEMS OPERATIONAL // READY TO DEPLOY
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="border-2 border-slate-900 px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.1em] text-[#0F172A] shadow-[4px_4px_0px_0px_#E2E8F0]">
+                BUILD_v{siteConfig.version || "1.5.0"}
+              </div>
+              <span className="hidden h-8 w-[2px] bg-slate-100 md:block" />
+              <p className="text-[10px] font-black uppercase italic tracking-[0.3em] text-slate-300">
+                Engineered_by_AemDevWeb
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,3 +1,4 @@
+/** @format */
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -5,26 +6,35 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
   {
     variants: {
       variant: {
+        // 🧱 สไตล์หลัก: พื้นหลังเข้ม เงาสีส้ม (Brutalist Signature)
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+          "border-4 border-brand-navy bg-brand-navy text-white shadow-[4px_4px_0px_0px_#F97316] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์อันตราย: สีแดงขอบหนา
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "border-4 border-brand-navy bg-error text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์เส้นขอบ: พื้นหลังขาว เงาสีน้ำเงิน
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border-4 border-brand-navy bg-white text-brand-navy shadow-[4px_4px_0px_0px_#1E3A8A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        // 🧱 สไตล์รอง: สีส้มโดดเด่น
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border-4 border-brand-navy bg-brand-orange text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+
+        ghost: "text-brand-navy hover:bg-brand-blue/10",
+
+        link: "text-brand-blue underline-offset-8 decoration-2 hover:underline font-bold",
       },
       size: {
-        default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        default: "h-14 px-8 py-4",
+        sm: "h-10 px-4 text-[10px]",
+        lg: "h-16 px-10 text-sm",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: {
