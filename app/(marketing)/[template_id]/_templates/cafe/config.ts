@@ -1,97 +1,61 @@
 /** @format */
-// ----------------------------------------------------
-// 🏗️ CAFE CONFIGURATION (NAMED EXPORT)
-// Path: app/(marketing)/[template_id]/_templates/cafe/config.ts
-// Fix: Added explicit named export to resolve import errors
-// ----------------------------------------------------
 
 export const cafeConfig = {
-  id: "template-cafe-industrial",
-  name: "THE SOURCE ROASTERS",
-  themeColor: "#1e3932", // Deep Forest Green
-  secondaryColor: "#d4e9e2", // Mint Cream
+  id: "cafe",
+  name: "Premium Cafe & Restaurant",
 
+  // ✅ เพิ่ม metadata เพื่อให้ตรงกับ TemplateEntry interface ใน registry.ts
   metadata: {
-    title: "The Source Roasters | Premium Cafe Template by AEMDEVWEB",
+    title: "Premium Specialty Cafe | Experience the Art of Coffee",
     description:
-      "ยกระดับร้านกาแฟของคุณด้วยระบบเว็บไซต์ Digital Menu สไตล์ Industrial Modern โหลดไว พร้อมระบบสะสมแต้ม",
-    ogImage:
-      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/og-image.jpg",
+      "สัมผัสประสบการณ์กาแฟพิเศษและขนมอบโฮมเมดในบรรยากาศพรีเมียมใจกลางเมือง",
+    ogImage: "/images/template/cafe/cafe-hero.webp",
+  },
+
+  theme: {
+    primary: "#4A3428", // Coffee Brown
+    secondary: "#F5F5DC", // Beige
+    accent: "#D4AF37", // Gold
   },
 
   content: {
-    // --- Hero Section ---
-    heroTitle: "CRAFTED_FOR_PERFECTION",
-    heroSubtitle:
-      "ประสบการณ์กาแฟระดับ Specialty ในบรรยากาศ Industrial Modern ที่ออกแบบมาเพื่อคุณ",
+    hero: {
+      title: "Experience the Art of Specialty Coffee",
+      subtitle: "บรรยากาศที่ลงตัว พร้อมรสชาติกาแฟที่คุณจะลืมไม่ลง",
+      cta: "จองโต๊ะตอนนี้",
+    },
 
-    // --- Value Propositions ---
+    // สำหรับส่วนสิทธิประโยชน์หรือจุดเด่นของร้าน
     features: [
+      "Specialty Coffee Beans",
+      "Homemade Bakery",
+      "Co-working Space & Free Wi-Fi",
+      "Pet-Friendly Area",
+    ],
+
+    // รายการบริการหลัก
+    services: [
       {
-        id: 1,
-        label: "DIRECT_TRADE_BEANS",
-        detail: "เมล็ดกาแฟคัดพิเศษส่งตรงจากเกษตรกรไทยและแหล่งปลูกระดับโลก",
+        title: "Signature Drinks",
+        detail: "กาแฟสูตรพิเศษจากบาริสต้ามืออาชีพที่พิถีพิถันทุกแก้ว",
       },
       {
-        id: 2,
-        label: "ARTISAN_ROASTERY",
-        detail:
-          "คั่วสดใหม่ในโรงคั่วของเราเอง ควบคุมโปรไฟล์รสชาติด้วยระบบดิจิทัล",
+        title: "Bakery & Brunch",
+        detail: "ขนมอบสดใหม่จากเตาและอาหารเช้าสไตล์ยุโรป",
       },
       {
-        id: 3,
-        label: "CO-CREATIVE_SPACE",
-        detail:
-          "พื้นที่กว้างขวาง ปลั๊กไฟครบครัน รองรับทั้งการพักผ่อนและการทำงาน",
+        title: "Event Hosting",
+        detail: "พื้นที่ส่วนตัวสำหรับจัดงานเลี้ยงและประชุมขนาดเล็ก",
       },
     ],
 
-    // --- Digital Menu Mockup ---
-    menuItems: [
-      {
-        id: "1",
-        name: "SIGNATURE_ESPRESSO",
-        price: "120",
-        currency: "THB",
-        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/espresso.webp",
-        desc: "กาแฟคั่วเข้ม Body หนักแน่น พร้อม Notes ของ Dark Chocolate และ Caramelized",
-      },
-      {
-        id: "2",
-        name: "DIRTY_SOUL",
-        price: "155",
-        currency: "THB",
-        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/dirty.webp",
-        desc: "กาแฟสกัดเข้มข้น On-top บนนมเย็นจัดสูตรลับเฉพาะ ให้สัมผัสแยกชั้นที่กลมกล่อม",
-      },
-      {
-        id: "3",
-        name: "VELVET_LATTE",
-        price: "145",
-        currency: "THB",
-        img: "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Template/cafe/latte.webp",
-        desc: "สัมผัสนุ่มละมุนดุจผ้ากำมะหยี่ จากนมคุณภาพเยี่ยมและกาแฟคั่วกลาง (Medium Roast)",
-      },
-    ],
-
-    // --- Services & CRM (Upsell Features) ---
-    memberBenefits: [
-      "ระบบสมาชิกดิจิทัล สะสมแต้มง่ายๆ ผ่านเบอร์โทรศัพท์",
-      "สิทธิพิเศษวันเกิด รับส่วนลดพิเศษอัตโนมัติ",
-      "ระบบจองโต๊ะล่วงหน้า ผ่านหน้าเว็บได้ทันที",
-      "เชื่อมต่อ LINE OA รับข่าวสารและโปรโมชั่นใหม่ๆ",
-    ],
-  },
-
-  // --- Contact Information ---
-  contact: {
-    address: "123 Industrial Park, Sukhumvit Rd, Bangkok",
-    googleMap: "https://goo.gl/maps/example",
-    openHours: "Mon - Sun | 08:00 AM - 06:00 PM",
-    social: {
-      line: "@thesourceroasters",
-      facebook: "thesourceroasters",
-      instagram: "thesourceroasters",
+    // ข้อมูลติดต่อและการนำทาง
+    contact: {
+      address: "123 Creative Street, Bangkok",
+      phone: "08X-XXX-XXXX",
+      lineId: "@premiumcafe",
+      openHours: "08:00 - 18:00 (Everyday)",
+      mapsUrl: "https://goo.gl/maps/example",
     },
   },
 }

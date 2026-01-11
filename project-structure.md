@@ -1,189 +1,198 @@
 # 📁 รายงานโครงสร้างโปรเจกต์ (Extended Scan)
-
-_สร้างเมื่อ: Sun Jan 11 13:29:15 +07 2026_
+_สร้างเมื่อ: Sun Jan 11 15:40:09 +07 2026_
 
 ## 🌳 Folder Structure
-
 📂 config
-📄 siteConfig.ts
+  📄 siteConfig.ts
 📂 app
-📂 (main)
-📂 about
-📄 page.tsx
-📂 blog
-📂 [slug]
-📄 page.tsx
-📄 loading.tsx
-📄 page.tsx
-📂 catalog
-📄 page.tsx
-📂 contact
-📂 \_components
-📄 ContactMap.tsx
-📄 page.tsx
-📄 layout.tsx
-📄 page.tsx
-📂 services
-📄 page.tsx
-📂 (marketing)
-📂 [template_id]
-📂 \_config
-📄 registry.ts
-📂 \_templates
-📂 WoodBusiness
-📄 WoodBusinessTemplate.tsx
-📄 WoodStyle.module.css
+  📂 (main)
+    📂 about
+      📄 page.tsx
+    📂 blog
+      📂 [slug]
+        📄 page.tsx
+      📄 loading.tsx
+      📄 page.tsx
+    📂 catalog
+      📄 page.tsx
+    📂 contact
+      📂 _components
+        📄 ContactMap.tsx
+      📄 page.tsx
+    📄 layout.tsx
+    📄 page.tsx
+    📂 services
+      📄 page.tsx
+  📂 (marketing)
+    📂 [template_id]
+      📂 _config
+        📄 registry.ts
+      📂 _templates
+        📂 WoodBusiness
+          📄 WoodBusinessTemplate.tsx
+          📄 WoodStyle.module.css
+          📂 components
+            📄 CartSection.tsx
+            📄 FAQSection.tsx
+            📄 FeaturesSection.tsx
+            📄 Footer.tsx
+            📄 Header.tsx
+            📄 HeroSection.tsx
+            📄 PerformanceSection.tsx
+            📄 SuccessSection.tsx
+          📄 config.ts
+        📂 cafe
+          📄 CafeStyle.module.css
+          📄 CafeTemplate.tsx
+          📂 components
+            📄 AmbienceGallery.tsx
+            📄 HeroSection.tsx
+            📄 MenuPreview.tsx
+            📄 ReservationCTA.tsx
+          📄 config.ts
+        📂 clinic
+          📄 ClinicStyle.module.css
+          📄 ClinicTemplate.tsx
+          📄 config.ts
+        📂 construction
+          📄 ConstructionStyle.module.css
+          📄 ConstructionTemplate.tsx
+          📄 config.ts
+        📂 realestate
+          📄 RealEstateStyle.module.css
+          📄 RealEstateTemplate.tsx
+          📄 config.ts
+        📂 starter
+          📄 StarterStyle.module.css
+          📄 StarterTemplate.tsx
+          📂 components
+            📄 CartSection.tsx
+            📄 FAQSection.tsx
+            📄 FeaturesSection.tsx
+            📄 Footer.tsx
+            📄 GuaranteeSection.tsx
+            📄 Header.tsx
+            📄 HeroSection.tsx
+            📄 PerformanceSection.tsx
+            📄 SuccessSection.tsx
+          📄 config.ts
+      📂 contact
+        📄 page.tsx
+      📄 layout.tsx
+      📄 page.tsx
+      📂 services
+        📄 page.tsx
+  📂 api
+    📂 contact
+      📄 route.ts
+  📄 apple-touch-icon.png
+  📄 favicon.ico
+  📄 globals.css
+  📄 layout.tsx
+  📄 loading.tsx
+  📄 robots.txt
+  📄 sitemap.ts
 📂 components
-📄 CartSection.tsx
-📄 FAQSection.tsx
-📄 FeaturesSection.tsx
-📄 Footer.tsx
-📄 Header.tsx
-📄 HeroSection.tsx
-📄 PerformanceSection.tsx
-📄 SuccessSection.tsx
-📄 config.ts
-📂 cafe
-📄 CafeStyle.module.css
-📄 CafeTemplate.tsx
-📄 config.ts
-📂 clinic
-📄 ClinicStyle.module.css
-📄 ClinicTemplate.tsx
-📄 config.ts
-📂 construction
-📄 ConstructionStyle.module.css
-📄 ConstructionTemplate.tsx
-📄 config.ts
-📂 realestate
-📄 RealEstateStyle.module.css
-📄 RealEstateTemplate.tsx
-📄 config.ts
-📂 starter
-📄 StarterStyle.module.css
-📄 StarterTemplate.tsx
-📂 components
-📄 CartSection.tsx
-📄 FAQSection.tsx
-📄 FeaturesSection.tsx
-📄 Footer.tsx
-📄 GuaranteeSection.tsx
-📄 Header.tsx
-📄 HeroSection.tsx
-📄 PerformanceSection.tsx
-📄 SuccessSection.tsx
-📄 config.ts
-📂 contact
-📄 page.tsx
-📄 layout.tsx
-📄 page.tsx
-📂 services
-📄 page.tsx
-📂 api
-📂 contact
-📄 route.ts
-📄 apple-touch-icon.png
-📄 favicon.ico
-📄 globals.css
-📄 layout.tsx
-📄 loading.tsx
-📄 robots.txt
-📄 sitemap.ts
-📂 components
-📄 BlogSection.tsx
-📄 CTA.tsx
-📄 ContactForm.tsx
-📄 ContactInfo.tsx
-📄 Ecosystem.tsx
-📄 FAQSection.tsx
-📄 Footer.tsx
-📄 Header.tsx
-📄 Hero.tsx
-📄 PricingSection.tsx
-📄 Services.tsx
-📄 SocialProof.tsx
-📂 catalog
-📄 CatalogProjectCard.tsx
-📄 CatalogProjectsGrid.tsx
-📄 iconMap.ts
-📄 logo.tsx
-📂 marketing
-📄 ReviewTrustLayer.tsx
-📄 StickyPurchaseBar.tsx
-📄 TechStackBadge.tsx
-📂 seo
-📄 JsonLd.tsx
-📂 ui
-📄 accordion.tsx
-📄 avatar.tsx
-📄 badge.tsx
-📄 button.tsx
-📄 card.tsx
-📄 dialog.tsx
-📄 empty.tsx
-📄 form.tsx
-📄 input.tsx
-📄 label.tsx
-📄 modal.tsx
-📄 select.tsx
-📄 tabs.tsx
-📄 textarea.tsx
-📄 toast.tsx
-📄 toaster.tsx
+  📄 BlogSection.tsx
+  📄 CTA.tsx
+  📄 ContactForm.tsx
+  📄 ContactInfo.tsx
+  📄 Ecosystem.tsx
+  📄 FAQSection.tsx
+  📄 Footer.tsx
+  📄 Header.tsx
+  📄 Hero.tsx
+  📄 PricingSection.tsx
+  📄 Services.tsx
+  📄 SocialProof.tsx
+  📂 catalog
+    📄 CatalogProjectCard.tsx
+    📄 CatalogProjectsGrid.tsx
+  📄 iconMap.ts
+  📄 logo.tsx
+  📂 marketing
+    📄 ReviewTrustLayer.tsx
+    📄 StickyPurchaseBar.tsx
+    📄 TechStackBadge.tsx
+  📂 seo
+    📄 JsonLd.tsx
+  📂 ui
+    📄 accordion.tsx
+    📄 avatar.tsx
+    📄 badge.tsx
+    📄 button.tsx
+    📄 card.tsx
+    📄 dialog.tsx
+    📄 empty.tsx
+    📄 form.tsx
+    📄 input.tsx
+    📄 label.tsx
+    📄 modal.tsx
+    📄 select.tsx
+    📄 tabs.tsx
+    📄 textarea.tsx
+    📄 toast.tsx
+    📄 toaster.tsx
 📂 lib
-📄 api.ts
-📄 helpers.ts
-📄 supabase.ts
-📄 utils.ts
+  📄 api.ts
+  📄 helpers.ts
+  📄 supabase.ts
+  📄 utils.ts
 📂 hooks
-📄 use-toast.ts
+  📄 use-toast.ts
 📂 types
-📄 blog.ts
-📄 index.ts
-📄 review.ts
-📄 services.ts
+  📄 blog.ts
+  📄 index.ts
+  📄 review.ts
+  📄 services.ts
 📂 scripts
-📂 dev
-📄 project-summary.sh
-📄 tree-projects.sh
-📄 pre-deploy-check.sh
+  📂 dev
+    📄 project-summary.sh
+    📄 tree-projects.sh
+  📄 pre-deploy-check.sh
 📂 public
-📄 apple-touch-icon.png
-📄 grid.svg
-📂 images
-📄 badge.svg
-📄 feature.svg
-📄 hero.svg
-📄 line-qr.png
-📄 performance.svg
-📂 portfolio
-📄 corporate-1.webp
-📄 default-avatar.webp
-📄 restaurant-1.webp
-📄 sme-1.webp
-📂 profile
-📄 default-avatar.webp
-📂 svg
-📄 guarantee-badge.svg
-📄 mobile.svg
-📄 performance.svg
-📄 speed.svg
-📄 og-image.png
+  📄 apple-touch-icon.png
+  📄 grid.svg
+  📂 images
+    📄 badge.svg
+    📄 feature.svg
+    📄 hero.svg
+    📄 line-qr.png
+    📄 performance.svg
+    📂 portfolio
+      📄 corporate-1.webp
+      📄 default-avatar.webp
+      📄 restaurant-1.webp
+      📄 sme-1.webp
+    📂 profile
+      📄 default-avatar.webp
+    📂 svg
+      📄 guarantee-badge.svg
+      📄 mobile.svg
+      📄 performance.svg
+      📄 speed.svg
+    📂 template
+      📂 cafe
+        📄 ambience-1.webp
+        📄 ambience-2.webp
+        📄 ambience-3.webp
+        📄 cafe-hero.webp
+        📄 menu-dirty.webp
+  📄 og-image.png
 📂 data
-📂 blog
-📄 allposts.ts
-📄 post1.ts
-📄 post2.ts
-📄 post3.ts
-📄 post4.ts
-📄 post5.ts
-📄 catalog.projects.ts
-📄 reviews.ts
-📄 servicesData.ts
-📄 types.ts
+  📂 blog
+    📄 allposts.ts
+    📄 post1.ts
+    📄 post2.ts
+    📄 post3.ts
+    📄 post4.ts
+    📄 post5.ts
+  📄 catalog.projects.ts
+  📄 reviews.ts
+  📄 servicesData.ts
+  📄 types.ts
 
 ## 📦 ตรวจหา package.json
-
 ```json
 พบ package.json ที่ root ของโปรเจกต์
 
@@ -252,36 +261,33 @@ _สร้างเมื่อ: Sun Jan 11 13:29:15 +07 2026_
 ```
 
 ## 📝 ผลการวิเคราะห์และปัญหาที่พบ
-
----
-
+________
 🔍 ตรวจพบรายงานการตรวจสอบล่าสุด:
 
 ✅ สถานะปัจจุบัน: **READY FOR DEPLOY**
 
 ### 📍 Production Route Map
-
-````text
+```text
 ```text
 Route (app)                                              Size  First Load JS
-┌ ○ /                                                 15.8 kB         178 kB
+┌ ○ /                                                 15.9 kB         177 kB
 ├ ○ /_not-found                                         991 B         103 kB
-├ ● /[template_id]                                      327 B         177 kB
+├ ● /[template_id]                                    1.17 kB         179 kB
 ├   ├ /clinic
 ├   ├ /cafe
 ├   ├ /realestate
 ├   └ [+3 more paths]
-├ ƒ /[template_id]/contact                            2.31 kB         186 kB
-├ ƒ /[template_id]/services                             327 B         177 kB
-├ ○ /about                                            4.41 kB         119 kB
+├ ƒ /[template_id]/contact                            2.31 kB         187 kB
+├ ƒ /[template_id]/services                           1.17 kB         179 kB
+├ ○ /about                                            4.42 kB         119 kB
 ├ ƒ /api/contact                                        131 B         102 kB
-├ ○ /blog                                             2.89 kB         113 kB
+├ ○ /blog                                              2.9 kB         113 kB
 ├ ● /blog/[slug]                                        173 B         111 kB
 ├   ├ /blog/case-study-high-performance-orm-platform
 ├   ├ /blog/nextjs-performance-2025
 ├   ├ /blog/sme-success-story
 ├   └ [+2 more paths]
-├ ○ /catalog                                          9.35 kB         134 kB
+├ ○ /catalog                                          9.37 kB         134 kB
 ├ ○ /contact                                          51.2 kB         160 kB
 ├ ○ /robots.txt                                           0 B            0 B
 ├ ○ /services                                         11.1 kB         131 kB
@@ -293,12 +299,10 @@ Route (app)                                              Size  First Load JS
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-````
-
+```
 ```
 ### ⚠️ Issues Highlight
 ✅ ไม่พบปัญหาสำคัญในรายงานล่าสุด
 
 ---
 Status: Scanning process completed successfully.
-```

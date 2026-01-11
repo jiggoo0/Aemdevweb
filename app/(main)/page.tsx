@@ -216,8 +216,8 @@ export default function HomePage() {
                     @aemdevweb
                   </h4>
                   <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-slate-500">
-                    สแกนเพื่อคุยกับเราโดยตรง รับคำแนะนำเบื้องต้นและประเมินราคาฟรี
-                    โดยทีมงานผู้เชี่ยวชาญ
+                    สแกนเพื่อคุยกับเราโดยตรง
+                    รับคำแนะนำเบื้องต้นและประเมินราคาฟรี โดยทีมงานผู้เชี่ยวชาญ
                   </p>
                 </div>
               </div>

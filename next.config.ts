@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   images: {
+    // ✅ 1. แก้ไข Warning: ลงทะเบียนค่า Quality ที่อนุญาตให้ใช้งาน
+    // วิธีนี้จะช่วยให้ Build ผ่านโดยไม่มีข้อความเตือนใน Console
+    qualities: [25, 50, 75, 90],
+
     // อนุญาตให้ใช้ SVG เพื่อความยืดหยุ่นของ Icon/Logo
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
@@ -22,7 +26,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "dpgmfbnzyhnhwzyozoxe.supabase.co",
-        // ✅ ปรับเป็น /** เพื่อให้ครอบคลุมทุกโฟลเดอร์และแก้ปัญหาเรื่อง Case Sensitive
         pathname: "/**",
       },
       {
@@ -49,7 +52,7 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    // เพิ่มความเร็วในการรัน Dev mode โดยโหลดเฉพาะที่จำเป็น
+    // เพิ่มความเร็วในการรัน Dev mode
     optimizePackageImports: ["lucide-react"],
   },
 }
