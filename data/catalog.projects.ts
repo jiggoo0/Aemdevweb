@@ -113,7 +113,7 @@ export const catalogProjects: Project[] = [
     description:
       "เว็บหน้าเดียวที่เน้นขายสินค้าตัวท็อป โหลดเร็วที่สุดและสั่งซื้อได้สั้นที่สุด เพื่อโอกาสการปิดการขายที่ดีที่สุดสำหรับแบรนด์ที่กำลังเริ่มต้น",
     image:
-      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/gadget-store.jpg",
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/gadget-storeNew.jpg",
     tags: ["เน้นปิดการขาย", "สำหรับแบรนด์เริ่มต้น", "เว็บหน้าเดียว"],
     stats: { label: "ประสิทธิภาพเว็บ", value: "98/100" },
   },

@@ -1,122 +1,177 @@
 /** @format */
+
 "use client"
 
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styles from "./ClinicStyle.module.css"
-import { iconMap } from "@/components/iconMap"
+import { clinicConfig } from "./config"
 
-interface ClinicProps {
-  data: any
-}
+// Layout & Core Components
+import Header from "./components/Header"
+import ClinicHero from "./components/ClinicHero"
+import ServiceGrid from "./components/ServiceGrid"
+import AppointmentForm from "./components/AppointmentForm"
 
-export default function ClinicTemplate({ data }: ClinicProps) {
-  // 🛡️ Safe Data Access: ป้องกันกรณีข้อมูลไม่มา หน้าเว็บจะไม่พัง
-  const { content } = data || {}
-  const CheckIcon = iconMap.CHECK
+// Enhanced Components
+import TestimonialSlider from "./components/TestimonialSlider"
+import FAQSection from "./components/FAQSection"
+import LocationMap from "./components/LocationMap"
 
-  // Guard Clause
-  if (!content) return null
+export default function ClinicTemplate() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    /**
+     * ✅ ปิดกฎ ESLint เฉพาะจุดสำหรับแพทเทิร์น Hydration Fix
+     * การตั้งค่า mounted state ใน useEffect เป็นมาตรฐานสำหรับ Next.js
+     * เพื่อป้องกันความแตกต่างระหว่าง Server และ Client UI
+     */
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true)
+  }, [])
+
+  // แสดง Placeholder ระหว่างรอนะบบ Hydration เพื่อรักษาประสิทธิภาพ LCP
+  if (!isMounted) {
+    return <div className="min-h-screen bg-slate-50" />
+  }
 
   return (
-    <div className={styles.wrapper}>
-      {/* 🏥 Hero Section: Premium Clean Look */}
-      <section className={styles.hero}>
-        <span className={styles.heroTag}>Trusted Medical Center</span>
-        <h1 className={styles.heroTitle}>{content.heroTitle}</h1>
-        <p className={styles.heroSubtitle}>{content.heroSubtitle}</p>
+    <article className={styles.container} suppressHydrationWarning>
+      {/* ─── NAVIGATION ─── */}
+      <Header />
 
-        <div className="flex flex-wrap gap-4">
-          <button className="bg-blue-600 px-10 py-4 font-black uppercase italic text-white shadow-[6px_6px_0px_0px_rgba(15,23,42,1)] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none">
-            Book Appointment
-          </button>
-          <button className="border-4 border-slate-900 bg-white px-10 py-4 font-black uppercase italic text-slate-900 transition-colors hover:bg-slate-900 hover:text-white">
-            Services
-          </button>
-        </div>
-
-        {/* Decor: Medical Grid Background */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "radial-gradient(#2563eb 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
-          }}
-        />
+      {/* ─── 1. HERO SECTION ─── */}
+      <section id="home">
+        <ClinicHero data={clinicConfig.content.hero} />
       </section>
 
-      {/* 📊 Stats Section: Trust Building */}
-      <div className="px-8">
-        <section className={styles.statsGrid}>
-          {content.stats?.map((stat: any) => (
-            <div key={stat.id} className={styles.statItem}>
-              <div className={styles.statValue}>{stat.value}</div>
-              <div className={styles.statLabel}>{stat.label}</div>
-            </div>
-          ))}
-        </section>
-      </div>
-
-      {/* 🩺 Services: Clean Industrial Design */}
-      <section className={styles.serviceSection}>
-        <div className="mb-16 border-l-8 border-blue-600 pl-6">
-          <h2 className="text-4xl font-black uppercase italic tracking-tighter text-slate-900">
-            OUR SPECIALTIES
-          </h2>
-          <p className="mt-2 font-bold italic text-slate-400">
-            บริการทางการแพทย์ที่เราเชี่ยวชาญ
-          </p>
+      {/* ─── 2. SERVICES SECTION ─── */}
+      <section id="services" className="bg-white py-24 lg:py-32">
+        <div className="container mx-auto px-6">
+          <header className="mb-16 text-center">
+            <span className="mb-4 block text-sm font-bold uppercase tracking-[0.2em] text-sky-600">
+              Our Medical Expertise
+            </span>
+            <h2 className="text-4xl font-extrabold text-slate-900 md:text-5xl">
+              บริการทางการแพทย์
+            </h2>
+            <div className="mx-auto mt-6 h-1 w-20 rounded-full bg-gradient-to-r from-sky-500 to-emerald-400" />
+          </header>
+          <ServiceGrid items={clinicConfig.content.services} />
         </div>
+      </section>
 
-        <div className={styles.serviceGrid}>
-          {content.services?.map((service: any, idx: number) => (
-            <div key={idx} className={styles.serviceCard}>
-              <div className="mb-4 text-blue-600">
-                {CheckIcon && <CheckIcon size={32} />}
-              </div>
-              <h3 className="mb-4 text-xl font-black uppercase italic text-slate-900">
-                {service.title}
+      {/* ─── 3. TESTIMONIALS SECTION ─── */}
+      <section id="testimonials">
+        <TestimonialSlider />
+      </section>
+
+      {/* ─── 4. APPOINTMENT SECTION ─── */}
+      <section
+        id="appointment"
+        className="relative overflow-hidden bg-slate-50 py-24 lg:py-32"
+      >
+        <div className="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 opacity-5">
+          <div className="h-[600px] w-[600px] rounded-full border-[80px] border-sky-500" />
+        </div>
+        <div className="container relative z-10 mx-auto px-6">
+          <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-start">
+            {/* Trust Content Section */}
+            <div className="flex-1 space-y-8 text-center lg:text-left">
+              <h3 className="text-3xl font-bold text-slate-900 md:text-5xl">
+                เริ่มต้นการดูแลสุขภาพที่ดีกับเรา
               </h3>
-              <p className="text-sm font-bold leading-relaxed text-slate-500">
-                {service.detail}
+              <p className="text-lg leading-relaxed text-slate-600">
+                นัดหมายปรึกษาแพทย์ล่วงหน้า เพื่อความสะดวกรวดเร็ว
+                และรับการดูแลที่เป็นส่วนตัวในระดับพรีเมียม
               </p>
+              <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2">
+                {[
+                  "ปรึกษาเบื้องต้นไม่มีค่าใช้จ่าย",
+                  "เครื่องมือแพทย์มาตรฐานสากล",
+                  "รับสิทธิประกันสุขภาพชั้นนำ",
+                  "นัดหมายออนไลน์ 24 ชม.",
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <div className="h-2 w-2 rounded-full bg-sky-500" />
+                    <span className="text-sm font-semibold text-slate-700">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* 👨‍⚕️ Trust Banner: ดีไซน์แบบคลีนิกพรีเมียม */}
-      <section className="flex flex-col items-center justify-between gap-10 bg-slate-900 px-8 py-20 text-white md:flex-row">
-        <div className="md:w-1/2">
-          <h2 className="mb-6 text-5xl font-black uppercase italic leading-tight tracking-tighter">
-            Expert Hands.
-            <br />
-            Modern Mind.
-          </h2>
-          <p className="text-lg font-bold italic text-blue-200">
-            เราให้ความสำคัญกับจริยธรรมทางการแพทย์และความเป็นส่วนตัวของคนไข้เป็นอันดับหนึ่ง
-          </p>
-        </div>
-        <div className="border-4 border-blue-600 bg-white/5 p-8 shadow-[12px_12px_0px_0px_rgba(37,99,235,0.3)] backdrop-blur-lg md:w-1/3">
-          {/* ✅ แก้ไขจุด Error: ใช้คอมเมนต์ JSX ที่ถูกต้อง */}
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-blue-400">
-            CLINIC HOURS
-          </p>
-          <div className="space-y-4 font-bold italic">
-            <div className="flex justify-between">
-              <span className="text-slate-400">MON - FRI</span>
-              <span className="text-white underline decoration-blue-500 underline-offset-4">
-                09:00 - 20:00
-              </span>
-            </div>
-            <div className="flex justify-between border-t border-white/10 pt-4">
-              <span className="text-slate-400">SAT - SUN</span>
-              <span className="text-white underline decoration-blue-500 underline-offset-4">
-                10:00 - 18:00
-              </span>
+            {/* Conversion Form */}
+            <div className="w-full lg:w-[550px]">
+              <AppointmentForm />
             </div>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* ─── 5. FAQ SECTION ─── */}
+      <section id="faq">
+        <FAQSection />
+      </section>
+
+      {/* ─── 6. LOCATION SECTION ─── */}
+      <section id="location">
+        <LocationMap />
+      </section>
+
+      {/* ─── 7. FOOTER SECTION ─── */}
+      <footer className="bg-slate-950 py-20 text-white">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 gap-16 border-b border-slate-800 pb-20 md:grid-cols-2 lg:grid-cols-3">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-black tracking-tighter">
+                {clinicConfig.name}
+              </h3>
+              <p className="text-slate-400">
+                {clinicConfig.metadata.description}
+              </p>
+            </div>
+            <div className="space-y-4 md:text-center">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-sky-500">
+                ติดต่อเรา
+              </h4>
+              <p className="text-slate-300">
+                {clinicConfig.content.contact.address}
+              </p>
+              <p className="text-xl font-bold">
+                {clinicConfig.content.contact.phone}
+              </p>
+            </div>
+            <div className="space-y-4 md:text-right">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-sky-500">
+                เวลาเปิดทำการ
+              </h4>
+              <p className="text-lg font-semibold">
+                {clinicConfig.content.contact.openHours}
+              </p>
+              <p className="text-sm italic text-slate-500">
+                ดูแลคุณทุกวันไม่เว้นวันหยุด
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col items-center justify-between gap-6 md:flex-row">
+            <p className="text-xs text-slate-600">
+              © {new Date().getFullYear()} {clinicConfig.name}. Medical
+              Excellence & Care.
+            </p>
+            <div className="flex gap-6 text-[10px] font-bold uppercase tracking-tighter text-slate-700">
+              <a href="#" className="transition-colors hover:text-sky-500">
+                Privacy Policy
+              </a>
+              <a href="#" className="transition-colors hover:text-sky-500">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </article>
   )
 }
