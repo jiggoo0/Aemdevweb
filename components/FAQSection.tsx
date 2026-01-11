@@ -88,7 +88,9 @@ const FAQSection = ({
 
             <p className="max-w-md border-l-[8px] border-[#F97316] pl-8 text-xl font-bold leading-relaxed text-slate-500">
               ทุกข้อสงสัยเกี่ยวกับการสร้าง <br />
-              <span className="text-2xl text-slate-900">เว็บไซต์ธุรกิจ</span>{" "}
+              <span className="text-2xl text-slate-900">
+                เว็บไซต์ธุรกิจ
+              </span>{" "}
               <br />
               เราเตรียมคำตอบไว้ให้คุณแล้ว
             </p>

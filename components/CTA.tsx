@@ -21,9 +21,9 @@ interface CTAProps {
 }
 
 export default function CTA({
-  // ✅ อัปเดตข้อความ Title และ Subtitle ตามที่คุณต้องการ
-  title = "พร้อมให้เราวางโครงสร้าง ความสำเร็จให้คุณหรือยัง?",
-  subtitle = "เริ่มปรึกษาโปรเจกต์กับเราวันนี้ เพื่อเปลี่ยนไอเดียของคุณให้เป็นสถาปัตยกรรมดิจิทัลที่แข็งแกร่งและยั่งยืน",
+  // ✅ ปรับจูนข้อความให้ "เข้าถึงง่าย" และ "ทรงพลัง" สำหรับทุกระดับสังคม
+  title = "เริ่มสร้างความสำเร็จ บนโลกออนไลน์ไปกับเรา",
+  subtitle = "เปลี่ยนไอเดียธุรกิจของคุณ ให้เป็นเว็บไซต์ที่แข็งแรง น่าเชื่อถือ และทำเงินได้จริง พร้อมทีมงานที่ดูแลคุณเหมือนพาร์ทเนอร์",
   config,
 }: CTAProps) {
   const customNotice = config?.customDesignNotice
@@ -45,13 +45,13 @@ export default function CTA({
         />
 
         <div className="relative z-10 flex flex-col items-center space-y-14 text-center">
-          {/* ─── 🛠️ CUSTOM DESIGN NOTICE ─── */}
+          {/* ─── 🛠️ ส่วนบริการออกแบบพิเศษ (Bespoke) ─── */}
           {customNotice && (
             <div className="group relative w-full max-w-3xl border-4 border-dashed border-white/20 bg-white/5 p-8 transition-colors hover:border-brand-blue">
               <div className="absolute -top-5 left-1/2 flex -translate-x-1/2 items-center gap-2 border-2 border-white/20 bg-brand-navy px-6 py-1">
                 <PenTool size={14} className="text-brand-orange" />
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">
-                  Bespoke Solution
+                  ออกแบบเฉพาะคุณ
                 </span>
               </div>
               <div className="space-y-4">
@@ -70,15 +70,15 @@ export default function CTA({
             </div>
           )}
 
-          {/* 🏷️ BADGE */}
+          {/* 🏷️ BADGE: ยืนยันสถานะความเป็นที่ปรึกษา */}
           <div className="inline-flex items-center gap-3 border-2 border-brand-blue bg-brand-blue/10 px-6 py-3 shadow-[4px_4px_0px_0px_rgba(30,58,138,0.5)]">
             <Sparkles className="h-4 w-4 animate-pulse text-brand-orange" />
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-blue">
-              Direct Consultation v2.5
+              ยินดีให้คำปรึกษาฟรี
             </span>
           </div>
 
-          {/* 📢 MAIN HEADER */}
+          {/* 📢 MAIN HEADER: ข้อความกระตุ้นการตัดสินใจ */}
           <header className="max-w-4xl space-y-10">
             <h2
               id="cta-heading"
@@ -91,7 +91,7 @@ export default function CTA({
             </p>
           </header>
 
-          {/* 🚀 ACTION BUTTONS */}
+          {/* 🚀 ACTION BUTTONS: ช่องทางติดต่อที่ง่ายที่สุด */}
           <div className="flex w-full flex-col items-center justify-center gap-6 pt-10 sm:flex-row">
             <Button
               size="lg"
@@ -99,7 +99,7 @@ export default function CTA({
               asChild
             >
               <Link href="/contact" className="flex items-center gap-4">
-                เริ่มปรึกษาโปรเจกต์
+                ส่งข้อความหาเรา
                 <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-2" />
               </Link>
             </Button>
@@ -115,12 +115,12 @@ export default function CTA({
                 className="flex items-center gap-4"
               >
                 <PhoneCall className="h-5 w-5" />
-                โทรหาพาร์ทเนอร์โดยตรง
+                โทรสอบถามโดยตรง
               </Link>
             </Button>
           </div>
 
-          {/* 🛡️ TRUST FOOTER */}
+          {/* 🛡️ TRUST FOOTER: ยืนยันความจริงใจ */}
           <footer className="flex w-full max-w-3xl flex-col items-center gap-10 border-t-4 border-white/10 pt-16">
             <div className="grid w-full grid-cols-1 gap-12 md:grid-cols-2">
               <div className="flex items-center justify-center gap-5 md:justify-end">
@@ -143,7 +143,7 @@ export default function CTA({
                 </div>
                 <div className="flex flex-col items-start text-left">
                   <span className="text-[10px] font-black uppercase italic tracking-widest text-slate-500">
-                    Integrity Check
+                    Integrity First
                   </span>
                   <span className="text-lg font-black uppercase leading-tight text-white">
                     ดูแลเอง ไม่ผ่านคนกลาง
@@ -155,7 +155,7 @@ export default function CTA({
             <div className="flex items-center gap-4 opacity-30">
               <div className="h-[2px] w-12 bg-slate-600" />
               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-600">
-                Technical Excellence & Genuine Support
+                ดูแลงานด้วยหัวใจ เข้าใจทุกระดับธุรกิจ
               </p>
               <div className="h-[2px] w-12 bg-slate-600" />
             </div>

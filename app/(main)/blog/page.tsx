@@ -4,8 +4,8 @@ import { Metadata } from "next"
 import { blogData } from "@/data/blog/allposts"
 import { BlogPost } from "@/types/blog"
 import BlogSection from "@/components/BlogSection"
-import { BookOpen, Terminal, Activity, Hash } from "lucide-react"
-import JsonLd from "@/components/seo/JsonLd" // ✅ Fix: Updated path to /seo/
+import { BookOpen, Terminal, Activity, Hash, Zap } from "lucide-react"
+import JsonLd from "@/components/seo/JsonLd"
 import { siteConfig } from "@/config/siteConfig"
 
 export const metadata: Metadata = {
@@ -21,14 +21,13 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  // คำนวณ Metadata สำหรับ System Status Display
   const totalArticles = blogData.length.toString().padStart(2, "0")
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-50 font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
-      {/* 🚀 SEO STRUCTURED DATA */}
+    <main className="relative min-h-screen overflow-hidden bg-white font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
+      {/* 🚀 SEO STRUCTURED DATA - ใช้ WebSite ชั่วคราวจนกว่าจะแก้ Types ในคอมโพเนนต์ */}
       <JsonLd
-        type="Organization" // ใช้ Base Organization และ Website สำหรับหน้า List
+        type="WebSite"
         data={{
           name: `${siteConfig.name} Knowledge Hub`,
           description: "Technical insights and digital strategy for Thai SME",
@@ -36,100 +35,124 @@ export default function BlogPage() {
         }}
       />
 
-      {/* ─── 🛠️ TECHNICAL BACKGROUND DECOR ─── */}
+      {/* ─── 🛠️ TECHNICAL BACKGROUND ─── */}
       <div
-        className="bg-grid-pattern absolute inset-0 -z-10 opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(#0F172A 1.5px, transparent 1.5px)",
+          backgroundSize: "32px 32px",
+        }}
         aria-hidden="true"
       />
 
       <div className="container relative z-10 mx-auto px-6 py-24 lg:py-40">
-        {/* ─── 01. INDUSTRIAL HEADER ─── */}
         <header className="mb-20 border-b-[10px] border-[#0F172A] pb-16">
-          <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-            <div className="max-w-3xl space-y-8">
-              {/* Technical Badge */}
-              <div className="inline-flex items-center gap-3 border-2 border-[#0F172A] bg-[#0F172A] px-5 py-2 shadow-[4px_4px_0px_0px_#F97316]">
+          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
+            <div className="max-w-4xl space-y-8">
+              <div className="inline-flex items-center gap-3 border-4 border-[#0F172A] bg-[#0F172A] px-5 py-2 shadow-[6px_6px_0px_0px_#F97316]">
                 <Terminal size={16} className="text-[#F97316]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white">
-                  KNOWLEDGE_DATABASE / LOG_V{siteConfig.version}
+                <span className="font-mono text-[10px] font-black uppercase tracking-[0.4em] text-white">
+                  KNOWLEDGE_DATABASE / SRC_V{siteConfig.version}
                 </span>
               </div>
 
-              <h1 className="font-heading text-7xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-9xl">
+              <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-8xl lg:text-9xl">
                 Technical <br />
-                <span className="text-[#1E3A8A] underline decoration-[#F97316] decoration-[12px] underline-offset-[12px]">
+                <span className="text-[#1E3A8A] underline decoration-[#F97316] decoration-[10px] underline-offset-[8px] md:decoration-[16px] md:underline-offset-[12px]">
                   Insights.
                 </span>
               </h1>
 
-              <p className="max-w-xl text-lg font-bold leading-relaxed text-slate-500 md:text-xl">
+              <p className="max-w-2xl text-lg font-bold leading-relaxed text-slate-600 md:text-xl">
                 เจาะลึกเบื้องหลังการออกแบบโครงสร้างเว็บที่
-                &quot;ขายได้จริง&quot; เปลี่ยน Technical Debt
-                ให้เป็นกลยุทธ์ที่สร้างแต้มต่อให้ธุรกิจ
+                <span className="text-[#0F172A]"> "ขายได้จริง" </span>
+                เปลี่ยนความซับซ้อนทางเทคนิคให้เป็นกลยุทธ์ที่สร้างแต้มต่อให้ธุรกิจ
               </p>
             </div>
 
-            {/* System Status Display (Desktop) */}
-            <div className="hidden flex-col items-end gap-4 text-right md:flex">
-              <div className="flex gap-2">
-                <div className="flex h-14 w-14 items-center justify-center border-4 border-[#0F172A] bg-white shadow-[6px_6px_0px_0px_#0F172A]">
-                  <BookOpen size={24} className="text-[#0F172A]" />
+            <div className="hidden flex-col items-end gap-5 text-right sm:flex">
+              <div className="flex gap-3">
+                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-white shadow-[8px_8px_0px_0px_#0F172A] transition-transform hover:-translate-y-1">
+                  <BookOpen size={28} className="text-[#0F172A]" />
                 </div>
-                <div className="flex h-14 w-14 items-center justify-center border-4 border-[#0F172A] bg-[#1E3A8A] text-white shadow-[6px_6px_0px_0px_#0F172A]">
-                  <Activity size={24} />
+                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-[#1E3A8A] text-white shadow-[8px_8px_0px_0px_#0F172A] transition-transform hover:-translate-y-1">
+                  <Activity size={28} className="animate-pulse" />
                 </div>
               </div>
-              <div className="font-mono text-[10px] font-black uppercase leading-tight text-[#0F172A]">
-                <span className="text-[#F97316]">STATUS:</span> ACTIVE_SYNC{" "}
-                <br />
-                <span className="text-[#F97316]">TOTAL_ENTRIES:</span>{" "}
-                {totalArticles} <br />
-                <span className="text-[#F97316]">LAST_PUSH:</span> WEEKLY_SUBMIT
+              <div className="font-mono text-[11px] font-black uppercase leading-relaxed text-[#0F172A]">
+                <div>
+                  <span className="text-[#F97316]">STATUS:</span> ACTIVE_SYNC
+                </div>
+                <div>
+                  <span className="text-[#F97316]">TOTAL_ENTRIES:</span>{" "}
+                  {totalArticles}
+                </div>
               </div>
             </div>
           </div>
         </header>
 
-        {/* ─── 02. CONTENT GRID ─── */}
         <section className="relative min-h-[600px]">
-          <div className="mb-12 flex items-center gap-4">
-            <Hash className="text-[#F97316]" size={20} strokeWidth={3} />
-            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-[#0F172A]">
+          <div className="mb-16 flex items-center gap-6">
+            <div className="flex h-10 w-10 items-center justify-center bg-[#F97316] text-white">
+              <Hash size={20} strokeWidth={4} />
+            </div>
+            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-[#0F172A]">
               Latest_Archives
             </h2>
-            <div className="h-[2px] flex-1 bg-slate-200" />
+            <div className="h-[4px] flex-1 bg-[#0F172A]/5" />
           </div>
-
           <BlogSection posts={blogData as BlogPost[]} />
         </section>
 
-        {/* ─── 03. FOOTER PROTOCOL ─── */}
-        <footer className="mt-32 border-t-4 border-slate-900 bg-[#0F172A] p-10 text-white md:p-16">
-          <div className="flex flex-col gap-12 lg:flex-row lg:items-center lg:justify-between">
-            <div className="space-y-6">
-              <div className="inline-block border-b-2 border-[#F97316] pb-2">
-                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-[#F97316]">
-                  Subscription_Protocol
-                </h3>
+        <footer className="mt-32 border-[6px] border-[#0F172A] bg-[#0F172A] p-10 text-white shadow-[20px_20px_0px_0px_rgba(30,58,138,0.1)] md:p-20">
+          <div className="flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl space-y-8">
+              <div className="inline-flex items-center gap-3 bg-[#F97316] px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-[#0F172A]">
+                <Zap size={12} fill="currentColor" />
+                Stay_Updated
               </div>
-              <p className="max-w-md text-xl font-bold leading-relaxed text-slate-300">
-                ไม่พลาดทุก Technical Insight ส่งตรงถึงหน้ากระดานงานของคุณ
-                เพื่อการตัดสินใจทางธุรกิจที่แม่นยำขึ้น
-              </p>
+              <h3 className="font-heading text-4xl font-black uppercase leading-tight tracking-tighter md:text-6xl">
+                Subscribe To <br />
+                <span className="text-[#1E3A8A] brightness-150">
+                  Technical_Feed.
+                </span>
+              </h3>
             </div>
 
-            <div className="flex flex-col items-start gap-6 border-l-4 border-[#1E3A8A] pl-8 md:flex-row md:items-center">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F97316]/20">
-                <div className="h-3 w-3 animate-pulse rounded-full bg-[#F97316]" />
+            <div className="flex flex-col gap-8 lg:w-1/3">
+              <div className="group relative border-b-4 border-slate-700 pb-2 transition-colors focus-within:border-[#F97316]">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  Access_Point
+                </span>
+                <input
+                  type="email"
+                  placeholder="ENTER_YOUR_EMAIL"
+                  className="w-full bg-transparent py-4 font-mono text-xl font-bold uppercase outline-none placeholder:text-slate-800"
+                />
+                <button className="absolute bottom-4 right-0 text-[#F97316] transition-transform hover:translate-x-2">
+                  <ArrowRight />
+                </button>
               </div>
-              <span className="font-mono text-xs font-bold tracking-widest text-slate-400">
-                AI System is monitoring <br />
-                industry trends in real-time.
-              </span>
             </div>
           </div>
         </footer>
       </div>
     </main>
+  )
+}
+
+function ArrowRight() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="4"
+    >
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
   )
 }

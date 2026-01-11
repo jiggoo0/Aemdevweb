@@ -2,7 +2,13 @@
 import { siteConfig } from "@/config/siteConfig"
 
 interface JsonLdProps {
-  type?: "Organization" | "LocalBusiness" | "WebSite"
+  // ✅ เพิ่ม BlogPosting และ CollectionPage เพื่อแก้ TypeScript Error
+  type?:
+    | "Organization"
+    | "LocalBusiness"
+    | "WebSite"
+    | "BlogPosting"
+    | "CollectionPage"
   data?: any
 }
 
@@ -20,20 +26,21 @@ export default function JsonLd({ type = "Organization", data }: JsonLdProps) {
           "@type": "ImageObject",
           url: `${siteConfig.url}/logo.png`,
           width: 600,
-          height: 60, // ✅ Fixed: เปลี่ยนจาก ; เป็น , เรียบร้อยแล้ว
+          height: 60,
         },
         description: siteConfig.description,
         sameAs: [
           siteConfig.links.facebook,
           siteConfig.links.instagram,
           siteConfig.links.github,
-        ],
+          siteConfig.links.line,
+        ].filter(Boolean),
       },
       {
         "@type": "WebSite",
         "@id": `${siteConfig.url}/#website`,
         url: siteConfig.url,
-        name: siteConfig.title,
+        name: siteConfig.name,
         publisher: {
           "@id": `${siteConfig.url}/#organization`,
         },
@@ -42,21 +49,32 @@ export default function JsonLd({ type = "Organization", data }: JsonLdProps) {
     ],
   }
 
-  // 2. ถ้ามีการส่ง type เป็น LocalBusiness (เช่น จากหน้า Contact) ให้เพิ่ม Schema เข้าไปใน Graph
-  if (type === "LocalBusiness" && data) {
+  // 2. Logic สำหรับเพิ่ม Schema ตามประเภทที่ระบุ
+  if (type === "LocalBusiness") {
+    const localData = data || {}
     baseSchema["@graph"].push({
-      "@type": "LocalBusiness",
-      "@id": `${siteConfig.url}/contact/#localbusiness`,
-      name: data.name || siteConfig.name,
-      description: data.description || siteConfig.description,
-      telephone: data.telephone || siteConfig.contact.tel,
-      url: data.url || `${siteConfig.url}/contact`,
-      address: data.address || {
-        "@type": "PostalAddress",
-        addressLocality: "Bangkok",
-        addressCountry: "TH",
-      },
-      image: data.image || `${siteConfig.url}${siteConfig.ogImage}`,
+      "@type": "ProfessionalService",
+      "@id": `${siteConfig.url}/#localbusiness`,
+      ...localData, // ใช้ข้อมูลที่ส่งมา overwrite หรือเพิ่มเข้าไป
+    })
+  }
+
+  // ✅ เพิ่มรองรับ BlogPosting (สำหรับหน้าบทความเดี่ยว)
+  if (type === "BlogPosting" && data) {
+    baseSchema["@graph"].push({
+      "@type": "BlogPosting",
+      ...data,
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+      isPartOf: { "@id": `${siteConfig.url}/#website` },
+    })
+  }
+
+  // ✅ เพิ่มรองรับ CollectionPage (สำหรับหน้า Catalog หรือ Blog List)
+  if (type === "CollectionPage" && data) {
+    baseSchema["@graph"].push({
+      "@type": "CollectionPage",
+      ...data,
+      isPartOf: { "@id": `${siteConfig.url}/#website` },
     })
   }
 

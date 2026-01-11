@@ -16,7 +16,7 @@ import {
 
 import { siteConfig } from "@/config/siteConfig"
 
-// ✅ แก้ไข: ประกาศ Interface ภายในเพื่อลด Dependency Error หากไฟล์ types/services มีปัญหา
+// ✅ Interface สำหรับรองรับข้อมูลหลายภาษา
 interface MultiLangText {
   th?: string
   en?: string
@@ -38,17 +38,17 @@ interface FooterProps {
 export default function Footer({ data }: FooterProps) {
   const currentYear = new Date().getFullYear()
 
+  // ✅ ปรับ Logic การเลือกชื่อแบรนด์ให้แสดงผลภาษาไทยเป็นหลัก
   const displayName = React.useMemo(() => {
     if (!data?.name) return siteConfig.name
     if (typeof data.name === "string") return data.name
-    // ✅ Type Guard ที่ปลอดภัยขึ้น
     const nameObj = data.name as MultiLangText
     return nameObj.th || nameObj.en || siteConfig.name
   }, [data?.name])
 
   return (
     <footer className="relative mt-20 border-t-[12px] border-[#0F172A] bg-white pb-10 pt-24">
-      {/* 🛠️ TECHNICAL ACCENT */}
+      {/* 🛠️ TECHNICAL ACCENT: ลายตารางวิศวกรรมพื้นหลัง */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-30 [background-size:32px_32px]" />
 
       <div className="container mx-auto px-6">
@@ -74,10 +74,11 @@ export default function Footer({ data }: FooterProps) {
                 <span className="text-[#0F172A] underline decoration-[#F97316] decoration-4">
                   สถาปัตยกรรมดิจิทัล
                 </span>{" "}
-                เพื่อการเติบโตของ SME
+                ที่ช่วยเพิ่มความน่าเชื่อถือและยอดขายให้ธุรกิจคุณ
               </p>
             </div>
 
+            {/* Social Connectors */}
             <div className="flex flex-wrap gap-4">
               {[
                 {
@@ -156,7 +157,7 @@ export default function Footer({ data }: FooterProps) {
                 </div>
                 <div>
                   <p className="font-mono text-[10px] font-black uppercase italic tracking-[0.2em] text-slate-400">
-                    Call_The_Engineer
+                    Call_The_Expert
                   </p>
                   <p className="text-2xl font-black tracking-tighter text-[#0F172A]">
                     {data?.phone || siteConfig.contact.tel}
@@ -170,9 +171,9 @@ export default function Footer({ data }: FooterProps) {
                 </div>
                 <div>
                   <p className="font-mono text-[10px] font-black uppercase italic tracking-[0.2em] text-slate-400">
-                    Base_Location
+                    Office_Location
                   </p>
-                  <p className="max-w-[200px] text-lg font-black leading-tight tracking-tighter text-[#0F172A]">
+                  <p className="max-w-[240px] text-lg font-black leading-tight tracking-tighter text-[#0F172A]">
                     {data?.address || siteConfig.contact.address}
                   </p>
                 </div>
@@ -197,6 +198,7 @@ export default function Footer({ data }: FooterProps) {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Build Version จาก siteConfig */}
               <div className="border-2 border-slate-900 px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.1em] text-[#0F172A] shadow-[4px_4px_0px_0px_#E2E8F0]">
                 BUILD_v{siteConfig.version || "1.5.0"}
               </div>

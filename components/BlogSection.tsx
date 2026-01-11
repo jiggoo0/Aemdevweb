@@ -4,9 +4,8 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Terminal } from "lucide-react"
+import { ArrowRight, Terminal, BookOpen } from "lucide-react"
 import { BlogPost } from "@/types/blog"
-// ✅ ลบ import { cn } ออกเรียบร้อย
 
 export default function BlogSection({ posts }: { posts: BlogPost[] }) {
   return (
@@ -20,41 +19,45 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
           {/* 🖼️ IMAGE CONTAINER: INDUSTRIAL FRAME */}
           <div className="relative mb-8 aspect-[16/9] overflow-hidden border-4 border-slate-900 bg-slate-100">
             <Image
-              src={post.image}
+              src={post.image || "/images/blog/default-blog.webp"}
               alt={post.title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover grayscale transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0"
+              priority={false}
             />
             {/* OVERLAY BADGE */}
             <div className="absolute left-4 top-4 border-2 border-slate-900 bg-white px-3 py-1 shadow-[4px_4px_0px_0px_#0F172A]">
-              <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">
-                {post.category}
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#1E3A8A]">
+                {post.category || "INSIGHTS"}
               </span>
             </div>
           </div>
 
-          {/* 🏷️ META INFORMATION */}
+          {/* 🏷️ META INFORMATION: LOG STYLE */}
           <div className="mb-4 flex items-center justify-between border-b-2 border-slate-100 pb-4">
             <div className="flex items-center gap-2">
-              <Terminal size={14} className="text-brand-orange" />
+              <Terminal size={14} className="text-[#F97316]" />
               <span className="font-mono text-[10px] font-bold uppercase tracking-tighter text-slate-500">
-                LOG_ID: {post.id.slice(0, 8)}
+                ENTRY_ID: {post.id.slice(0, 8).toUpperCase()}
               </span>
             </div>
-            <span className="font-mono text-[10px] font-black text-slate-900">
-              [{post.date}]
-            </span>
+            <div className="flex items-center gap-2">
+              <BookOpen size={12} className="text-slate-400" />
+              <span className="font-mono text-[10px] font-black text-slate-900">
+                [{post.date}]
+              </span>
+            </div>
           </div>
 
           {/* 📝 TITLE & DESCRIPTION */}
-          <div className="space-y-4">
-            <h3 className="text-3xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 group-hover:text-brand-blue">
+          <div className="flex-grow space-y-4">
+            <h3 className="text-3xl font-black uppercase italic leading-[0.9] tracking-tighter text-slate-900 transition-colors group-hover:text-[#1E3A8A] md:text-4xl">
               {post.title}
             </h3>
 
             <p className="line-clamp-2 text-base font-bold leading-relaxed text-slate-500">
-              {post.description}
+              {post.excerpt || post.description}
             </p>
           </div>
 
@@ -62,7 +65,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
           <div className="mt-10 flex items-center justify-between border-t-4 border-slate-900 pt-8">
             <div className="flex items-center gap-4">
               <div className="relative h-10 w-10 shrink-0 overflow-hidden border-2 border-slate-900 bg-slate-100 shadow-[2px_2px_0px_0px_#000]">
-                {typeof post.author !== "string" ? (
+                {typeof post.author !== "string" && post.author?.avatar ? (
                   <Image
                     src={post.author.avatar}
                     alt={post.author.name}
@@ -71,27 +74,29 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
                     className="object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-900 text-[10px] text-white">
-                    {post.author.slice(0, 2).toUpperCase()}
+                  <div className="flex h-full w-full items-center justify-center bg-slate-900 text-[10px] font-bold text-white">
+                    {typeof post.author === "string"
+                      ? post.author.slice(0, 2).toUpperCase()
+                      : post.author?.name.slice(0, 2).toUpperCase() || "AD"}
                   </div>
                 )}
               </div>
               <div className="flex flex-col">
                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                  Published By
+                  Written By
                 </span>
                 <span className="text-xs font-black uppercase text-slate-900">
                   {typeof post.author === "string"
                     ? post.author
-                    : post.author.name}
+                    : post.author?.name || "AEMDEV TEAM"}
                 </span>
               </div>
             </div>
 
-            <div className="group/btn flex items-center gap-3 bg-slate-900 px-4 py-2 text-xs font-black uppercase italic text-white transition-colors group-hover:bg-brand-blue">
+            <div className="group/btn flex items-center gap-3 bg-slate-900 px-5 py-3 text-[10px] font-black uppercase italic text-white transition-all group-hover:bg-[#1E3A8A]">
               READ_ENTRY
               <ArrowRight
-                size={16}
+                size={14}
                 strokeWidth={3}
                 className="transition-transform group-hover:translate-x-2"
               />

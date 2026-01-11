@@ -5,17 +5,17 @@ import React, { useMemo, useCallback } from "react"
 import Link from "next/link"
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { Zap, ChevronRight, Database, ShieldCheck } from "lucide-react" // ✅ ลบ Layout ออกเพื่อแก้ Warning
+import { Zap, ChevronRight, Database, ShieldCheck } from "lucide-react"
 
 // ✅ Data Sources
 import { servicesData } from "@/data/servicesData"
 import { blogData } from "@/data/blog/allposts"
 
-// ✅ Critical Components (โหลดทันทีเพื่อ LCP)
+// ✅ Critical Components (โหลดทันทีเพื่อให้หน้าเว็บแสดงผลไวที่สุด)
 import Hero from "@/components/Hero"
 import SocialProof from "@/components/SocialProof"
 
-// --- 🛠️ Optimized Dynamic Imports (โหลดเมื่อจำเป็น) ---
+// --- 🛠️ Optimized Dynamic Imports (โหลดเมื่อเลื่อนมาถึงเพื่อประหยัดทรัพยากร) ---
 const ServicesSection = dynamic(() => import("@/components/Services"), {
   loading: () => <div className="h-[600px] animate-pulse bg-slate-50" />,
   ssr: true,
@@ -23,14 +23,16 @@ const ServicesSection = dynamic(() => import("@/components/Services"), {
 const BlogSection = dynamic(() => import("@/components/BlogSection"), {
   ssr: true,
 })
+// ปิด ssr สำหรับ FAQSection เพื่อลดปัญหา ID mismatch จาก Radix UI ใน Next.js 15
 const FAQSection = dynamic(() => import("@/components/FAQSection"), {
-  ssr: true,
+  ssr: false,
+  loading: () => <div className="h-[400px] animate-pulse bg-slate-50" />,
 })
 const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
 
 export default function HomePage() {
   /**
-   * ✅ Blog Data Normalization: ปรับ Format ข้อมูลให้พร้อมใช้งาน
+   * ✅ Blog Data Normalization: เตรียมข้อมูลบทความให้พร้อมแสดงผล
    */
   const normalizePost = useCallback((post: any) => {
     const getString = (val: any) => val?.th || val?.en || val || ""
@@ -46,7 +48,7 @@ export default function HomePage() {
               role: "Technical Partner",
             }
           : post.author,
-      readTime: post.readTime || "5 MIN READ",
+      readTime: post.readTime || "5 นาที",
     }
   }, [])
 
@@ -57,23 +59,23 @@ export default function HomePage() {
 
   return (
     <main className="flex w-full flex-col overflow-x-hidden bg-white font-sans antialiased">
-      {/* ─── 1. HERO AREA ─── */}
+      {/* ─── 1. ส่วนต้อนรับ (HERO AREA) ─── */}
       <Hero
-        badgeText="Industrial Web Architecture for Business"
+        badgeText="บริการรับทำเว็บไซต์สำหรับบริษัท และ หจก. ทั่วไทย"
         headline={
           <>
-            BUILD{" "}
+            สร้างเว็บ <br />
             <span className="text-[#F97316] underline decoration-slate-900/10 decoration-8 underline-offset-8">
-              SMART
+              ที่ปิดการขาย
             </span>
-            , <br />
-            RELIABLE <span className="text-[#1E3A8A]">SOLUTIONS.</span>
+            <br />
+            <span className="text-[#1E3A8A]">ให้ธุรกิจของคุณ</span>
           </>
         }
-        description="เปลี่ยนหน้าเว็บธรรมดาให้เป็นวิศวกรรมการขายที่ทำงาน 24 ชั่วโมง เสถียร แม่นยำ และรองรับการขยายตัวของธุรกิจไทยโดยเฉพาะ"
+        description="เปลี่ยนหน้าเว็บธรรมดา ให้เป็นพนักงานขายดิจิทัลที่ทำงาน 24 ชั่วโมง ช่วยให้ธุรกิจของคุณดูน่าเชื่อถือ โหลดไว และรองรับลูกค้าผ่านมือถือได้ดีเยี่ยม"
       />
 
-      {/* ─── 2. TRUST PROTOCOL (Social Proof) ─── */}
+      {/* ─── 2. ยืนยันความมั่นใจ (TRUST PROTOCOL) ─── */}
       <section className="relative z-20 -mt-10 overflow-hidden border-y-4 border-slate-900 bg-white shadow-xl">
         <div className="container mx-auto px-6 py-10">
           <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
@@ -83,10 +85,10 @@ export default function HomePage() {
               </div>
               <div>
                 <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
-                  System Status
+                  Business Trust
                 </span>
                 <span className="text-sm font-black uppercase tracking-widest text-slate-900">
-                  Verified Protocol 2025
+                  มาตรฐานความปลอดภัย 2026
                 </span>
               </div>
             </div>
@@ -98,7 +100,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 3. OUR SERVICES ─── */}
+      {/* ─── 3. บริการของเรา (OUR SERVICES) ─── */}
       <section className="relative overflow-hidden bg-slate-50">
         <div className="absolute inset-0 z-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-20 [background-size:20px_20px]" />
         <div className="relative z-10">
@@ -106,7 +108,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 4. KNOWLEDGE DATABASE (Blog) ─── */}
+      {/* ─── 4. คลังความรู้ธุรกิจ (KNOWLEDGE BASE) ─── */}
       <section
         id="blog"
         className="border-t-[6px] border-slate-900 bg-white py-24 lg:py-32"
@@ -116,10 +118,11 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <div className="mb-4 inline-flex items-center gap-3 bg-[#1E3A8A] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white">
                 <Database size={12} />
-                Knowledge Base_v1.0
+                Knowledge Base v2.0
               </div>
               <h2 className="font-heading text-5xl font-black uppercase leading-none tracking-tighter text-slate-900 md:text-7xl">
-                Technical <span className="text-[#1E3A8A]">Insights.</span>
+                สาระน่ารู้ <br />
+                <span className="text-[#1E3A8A]">เพื่อ SME.</span>
               </h2>
             </div>
 
@@ -127,7 +130,7 @@ export default function HomePage() {
               href="/blog"
               className="group flex items-center gap-4 border-4 border-slate-900 bg-white px-8 py-4 text-xs font-black uppercase tracking-[0.2em] text-slate-900 shadow-[6px_6px_0px_0px_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
             >
-              Access Database
+              อ่านบทความทั้งหมด
               <ChevronRight
                 size={18}
                 className="transition-transform group-hover:translate-x-1"
@@ -139,23 +142,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── 5. FAQS ─── */}
+      {/* ─── 5. คำถามที่พบบ่อย (FAQS) ─── */}
       <section className="relative border-y-[6px] border-slate-900 bg-slate-50 py-24 lg:py-32">
         <div className="container relative z-10 mx-auto max-w-4xl px-6">
           <div className="mb-20 text-center">
             <h2 className="font-heading text-5xl font-black uppercase tracking-tighter text-slate-900 md:text-7xl">
-              FAQ<span className="text-[#F97316]">S</span>
+              คำถาม<span className="text-[#F97316]">ที่พบบ่อย</span>
             </h2>
             <div className="mx-auto mt-6 h-2 w-24 bg-[#1E3A8A]" />
             <p className="mt-8 text-sm font-bold uppercase tracking-widest text-slate-400">
-              Technical Clearances & Business Logic
+              ทุกข้อสงสัยเรื่องเว็บไซต์และการทำธุรกิจออนไลน์
             </p>
           </div>
           <FAQSection />
         </div>
       </section>
 
-      {/* ─── 6. FINAL ARCHITECTURE (CTA) ─── */}
+      {/* ─── 6. ส่วนปิดการขาย (FINAL CTA) ─── */}
       <section id="contact" className="container mx-auto px-6 py-24 lg:py-40">
         <div className="relative border-[8px] border-slate-900 bg-white p-8 shadow-[20px_20px_0px_0px_#1E3A8A] md:p-20">
           <div className="absolute -left-2 -top-2 h-12 w-12 border-l-[12px] border-t-[12px] border-[#F97316]" />
@@ -163,8 +166,8 @@ export default function HomePage() {
 
           <div className="relative z-10">
             <CTA
-              title="พร้อมวางรากฐานความสำเร็จให้ธุรกิจหรือยัง?"
-              subtitle="เราไม่เพียงแค่ทำเว็บไซต์ แต่เราออกแบบเครื่องมือทำเงินที่ทรงพลังที่สุดให้คุณ"
+              title="พร้อมเริ่มโปรเจกต์กับเราหรือยัง?"
+              subtitle="ให้เราช่วยสร้างหน้าบ้านออนไลน์ที่มั่นคงและทรงพลัง เพื่อการเติบโตของธุรกิจคุณในระยะยาว"
             />
 
             <div className="mt-16 flex flex-col items-center justify-center gap-10 border-t-4 border-dashed border-slate-100 pt-16 lg:flex-row">
@@ -183,13 +186,14 @@ export default function HomePage() {
 
               <div className="text-center lg:text-left">
                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-                  Direct Line Support
+                  ช่องทางปรึกษาด่วน
                 </p>
                 <h4 className="mt-2 text-3xl font-black text-slate-900">
                   @aemdevweb
                 </h4>
                 <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-slate-500">
-                  สแกนเพื่อรับคำปรึกษาเบื้องต้นและประเมินงบประมาณโครงการโดยวิศวกรผู้เชี่ยวชาญ
+                  สแกนเพื่อคุยกับเราโดยตรง รับคำแนะนำเบื้องต้นและประเมินราคาฟรี
+                  โดยทีมงานผู้เชี่ยวชาญ
                 </p>
               </div>
             </div>

@@ -13,9 +13,9 @@ const SocialProof = () => {
       className="relative overflow-hidden border-y-[8px] border-slate-900 bg-white py-24 lg:py-32"
       id="social-proof"
     >
-      {/* ─── BACKGROUND ARCHITECTURE ─── */}
+      {/* ─── BACKGROUND ARCHITECTURE (Blueprint Grid) ─── */}
       <div
-        className="bg-[size:40px:40px] absolute inset-0 -z-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-30"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] opacity-30 [background-size:40px_40px]"
         aria-hidden="true"
       />
 
@@ -29,7 +29,7 @@ const SocialProof = () => {
             </span>
           </div>
 
-          <h2 className="text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-7xl">
+          <h2 className="font-heading text-4xl font-black uppercase tracking-tighter text-slate-900 md:text-7xl">
             ผลลัพธ์ที่พิสูจน์ได้ <br />
             <span className="text-[#1E3A8A]">โดยทีมวิศวกรและพาร์ทเนอร์</span>
           </h2>
@@ -54,8 +54,8 @@ const SocialProof = () => {
         </div>
 
         {/* ─── 2. INFINITE MARQUEE REVIEWS ─── */}
+        {/* ใช้การเลื่อนแบบไร้รอยต่อ (Seamless Loop) */}
         <div className="relative w-full overflow-hidden py-12">
-          {/* Marquee Container */}
           <motion.div
             className="flex w-max gap-8 px-4"
             animate={{ x: [0, "-50%"] }}
@@ -63,36 +63,36 @@ const SocialProof = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 60, // ปรับความเร็วให้ดูพรีเมียม (ไม่เร็วเกินไป)
+                duration: 50, // ปรับความเร็วให้พอดีกับการอ่าน
                 ease: "linear",
               },
             }}
           >
-            {/* Double the list for seamless looping */}
+            {/* วนลูป reviews 2 รอบเพื่อให้ Marquee ทำงานได้ต่อเนื่อง */}
             {[...reviews, ...reviews].map((review, index) => (
               <article
                 key={`${review.id}-${index}`}
-                className="group relative w-[420px] border-4 border-slate-900 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(30,58,138,1)]"
+                className="group relative w-[380px] border-4 border-slate-900 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_0px_0px_rgba(30,58,138,1)] md:w-[420px]"
               >
                 <Quote
                   className="absolute right-8 top-8 h-12 w-12 text-slate-50 transition-colors group-hover:text-blue-50/50"
                   aria-hidden="true"
                 />
 
-                {/* Rating & Indicator */}
                 <div className="mb-6 flex items-center justify-between">
                   <div className="flex gap-1 text-[#F97316]">
-                    {[...Array(review.rating)].map((_, i) => (
+                    {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
                         size={16}
-                        fill="currentColor"
-                        strokeWidth={0}
+                        fill={i < review.rating ? "currentColor" : "none"}
+                        stroke={i < review.rating ? "none" : "currentColor"}
+                        strokeWidth={2}
                       />
                     ))}
                   </div>
                   <span className="font-mono text-[9px] font-black text-slate-300">
-                    LOG_0{index + 1}
+                    LOG_#{String(index + 1).padStart(3, "0")}
                   </span>
                 </div>
 
@@ -100,16 +100,14 @@ const SocialProof = () => {
                   "{review.comment}"
                 </blockquote>
 
-                <div className="flex items-center gap-4 border-t-4 border-slate-900 pt-8 transition-colors group-hover:border-blue-600">
-                  {/* Avatar with Brutalist Frame */}
+                <div className="flex items-center gap-4 border-t-4 border-slate-900 pt-8 transition-colors group-hover:border-[#1E3A8A]">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden border-2 border-slate-900 bg-slate-100 shadow-[4px_4px_0px_0px_rgba(15,23,42,1)]">
                     <Image
-                      src={review.avatar}
+                      src={review.avatar || "/images/avatar-placeholder.webp"}
                       alt={review.name}
                       width={56}
                       height={56}
                       className="h-full w-full object-cover grayscale transition-all group-hover:grayscale-0"
-                      unoptimized
                     />
                   </div>
                   <div className="flex flex-col">
@@ -125,9 +123,9 @@ const SocialProof = () => {
             ))}
           </motion.div>
 
-          {/* Cinematic Faders */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-48 bg-gradient-to-r from-white via-white/80 to-transparent md:w-64" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-48 bg-gradient-to-l from-white via-white/80 to-transparent md:w-64" />
+          {/* Cinematic Faders: ไล่สีพื้นหลังให้ Marquee ดูนุ่มนวลที่ขอบ */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white via-white/80 to-transparent md:w-64" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white via-white/80 to-transparent md:w-64" />
         </div>
 
         {/* ─── 3. FOOTER CTA ─── */}
