@@ -133,6 +133,7 @@ function toast({ ...props }: Toast) {
 }
 
 function useToast() {
+  // ✅ วิธีแก้: ใช้ Destructuring เพื่อดึง toasts ออกมาโดยตรง จะทำให้ 'state' เดิมไม่ถูกมองว่าเป็น unused
   const [state, setState] = React.useState<State>(memoryState)
 
   React.useEffect(() => {
@@ -143,10 +144,10 @@ function useToast() {
         listeners.splice(index, 1)
       }
     }
-  }, []) // ✅ แก้ไขเสร็จสิ้น: ลบ [state] ออกเพื่อแก้ 'state' is defined but never used
+  }, [])
 
   return {
-    ...state,
+    toasts: state.toasts, // ✅ อ้างอิงถึง state.toasts โดยตรงแทนการใช้ ...state
     toast,
     dismiss: (toastId?: string) =>
       dispatch({ type: actionTypes.DISMISS_TOAST, toastId }),
