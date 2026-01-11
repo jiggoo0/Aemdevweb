@@ -1,5 +1,5 @@
 # 📑 รายงานสรุปโปรเจกต์และบริบท AI (Full Context)
-_สร้างเมื่อ: 2026-01-11 11:36:40_
+_สร้างเมื่อ: 2026-01-11 13:29:38_
 > **Status:** Fresh Scan | รวมข้อมูลวิเคราะห์ Route & Code
 
 ## 🔴 1. สถานะสุขภาพโปรเจกต์ล่าสุด
@@ -8,33 +8,33 @@ _สร้างเมื่อ: 2026-01-11 11:36:40_
 ### 📍 Production Route Map
 ```text
 ```text
-Route (app)                                  Size  First Load JS
-┌ ○ /                                     14.6 kB         176 kB
-├ ○ /_not-found                             991 B         103 kB
-├ ● /[template_id]                          327 B         176 kB
+Route (app)                                              Size  First Load JS
+┌ ○ /                                                 15.8 kB         178 kB
+├ ○ /_not-found                                         991 B         103 kB
+├ ● /[template_id]                                      327 B         177 kB
 ├   ├ /clinic
 ├   ├ /cafe
 ├   ├ /realestate
 ├   └ [+3 more paths]
-├ ƒ /[template_id]/contact                2.31 kB         186 kB
-├ ƒ /[template_id]/services                 327 B         176 kB
-├ ○ /about                                4.41 kB         119 kB
-├ ƒ /api/contact                            131 B         102 kB
-├ ○ /blog                                 2.43 kB         113 kB
-├ ● /blog/[slug]                            173 B         111 kB
+├ ƒ /[template_id]/contact                            2.31 kB         186 kB
+├ ƒ /[template_id]/services                             327 B         177 kB
+├ ○ /about                                            4.41 kB         119 kB
+├ ƒ /api/contact                                        131 B         102 kB
+├ ○ /blog                                             2.89 kB         113 kB
+├ ● /blog/[slug]                                        173 B         111 kB
+├   ├ /blog/case-study-high-performance-orm-platform
 ├   ├ /blog/nextjs-performance-2025
 ├   ├ /blog/sme-success-story
-├   ├ /blog/how-to-build-corporate-trust
-├   └ /blog/why-restaurant-need-website
-├ ○ /catalog                               8.7 kB         134 kB
-├ ○ /contact                              51.2 kB         160 kB
-├ ○ /robots.txt                               0 B            0 B
-├ ○ /services                             11.1 kB         131 kB
-└ ○ /sitemap.xml                            131 B         102 kB
-+ First Load JS shared by all              102 kB
-  ├ chunks/3c4078ff-db1510ea385e11c8.js   54.2 kB
-  ├ chunks/667-fc91a2d66fb02623.js        45.6 kB
-  └ other shared chunks (total)           2.07 kB
+├   └ [+2 more paths]
+├ ○ /catalog                                          9.35 kB         134 kB
+├ ○ /contact                                          51.2 kB         160 kB
+├ ○ /robots.txt                                           0 B            0 B
+├ ○ /services                                         11.1 kB         131 kB
+└ ○ /sitemap.xml                                        131 B         102 kB
++ First Load JS shared by all                          102 kB
+  ├ chunks/3c4078ff-db1510ea385e11c8.js               54.2 kB
+  ├ chunks/667-fc91a2d66fb02623.js                    45.6 kB
+  └ other shared chunks (total)                       2.09 kB
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
@@ -43,8 +43,8 @@ Route (app)                                  Size  First Load JS
 
 ## 📊 2. สถิติไฟล์แบ่งตามนามสกุล
 ```text
-     73 tsx
-     28 ts
+     74 tsx
+     29 ts
       9 svg
       7 css
       5 webp
@@ -179,6 +179,7 @@ Route (app)                                  Size  First Load JS
     📄 toast.tsx
     📄 toaster.tsx
   📄 logo.tsx
+  📄 Ecosystem.tsx
 📂 lib
   📄 api.ts
   📄 helpers.ts
@@ -225,6 +226,7 @@ Route (app)                                  Size  First Load JS
     📄 post2.ts
     📄 post3.ts
     📄 post4.ts
+    📄 post5.ts
   📄 catalog.projects.ts
   📄 reviews.ts
   📄 servicesData.ts
@@ -286,7 +288,7 @@ AEMDEVWEB คือแพลตฟอร์ม "Dynamic Marketing & Catalog" ท
 #### 🔍 Path: pre-deploy-report.md
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-11 11:32:41
+Generated at: 2026-01-11 13:23:47
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -301,33 +303,33 @@ Branch: main
 ✅ Status: Build successfully optimized.
 ### 📊 Route Statistics & Bundle Size
 ```text
-Route (app)                                  Size  First Load JS
-┌ ○ /                                     14.6 kB         176 kB
-├ ○ /_not-found                             991 B         103 kB
-├ ● /[template_id]                          327 B         176 kB
+Route (app)                                              Size  First Load JS
+┌ ○ /                                                 15.8 kB         178 kB
+├ ○ /_not-found                                         991 B         103 kB
+├ ● /[template_id]                                      327 B         177 kB
 ├   ├ /clinic
 ├   ├ /cafe
 ├   ├ /realestate
 ├   └ [+3 more paths]
-├ ƒ /[template_id]/contact                2.31 kB         186 kB
-├ ƒ /[template_id]/services                 327 B         176 kB
-├ ○ /about                                4.41 kB         119 kB
-├ ƒ /api/contact                            131 B         102 kB
-├ ○ /blog                                 2.43 kB         113 kB
-├ ● /blog/[slug]                            173 B         111 kB
+├ ƒ /[template_id]/contact                            2.31 kB         186 kB
+├ ƒ /[template_id]/services                             327 B         177 kB
+├ ○ /about                                            4.41 kB         119 kB
+├ ƒ /api/contact                                        131 B         102 kB
+├ ○ /blog                                             2.89 kB         113 kB
+├ ● /blog/[slug]                                        173 B         111 kB
+├   ├ /blog/case-study-high-performance-orm-platform
 ├   ├ /blog/nextjs-performance-2025
 ├   ├ /blog/sme-success-story
-├   ├ /blog/how-to-build-corporate-trust
-├   └ /blog/why-restaurant-need-website
-├ ○ /catalog                               8.7 kB         134 kB
-├ ○ /contact                              51.2 kB         160 kB
-├ ○ /robots.txt                               0 B            0 B
-├ ○ /services                             11.1 kB         131 kB
-└ ○ /sitemap.xml                            131 B         102 kB
-+ First Load JS shared by all              102 kB
-  ├ chunks/3c4078ff-db1510ea385e11c8.js   54.2 kB
-  ├ chunks/667-fc91a2d66fb02623.js        45.6 kB
-  └ other shared chunks (total)           2.07 kB
+├   └ [+2 more paths]
+├ ○ /catalog                                          9.35 kB         134 kB
+├ ○ /contact                                          51.2 kB         160 kB
+├ ○ /robots.txt                                           0 B            0 B
+├ ○ /services                                         11.1 kB         131 kB
+└ ○ /sitemap.xml                                        131 B         102 kB
++ First Load JS shared by all                          102 kB
+  ├ chunks/3c4078ff-db1510ea385e11c8.js               54.2 kB
+  ├ chunks/667-fc91a2d66fb02623.js                    45.6 kB
+  └ other shared chunks (total)                       2.09 kB
 
 
 ○  (Static)   prerendered as static content

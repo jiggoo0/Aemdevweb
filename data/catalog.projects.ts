@@ -1,7 +1,7 @@
 /** @format */
 import { Project } from "./types"
 
-// 🛡️ ระบบ Single Source of Truth: ดึงข้อมูลแบรนด์และคำเปรยจากต้นฉบับ
+// 🛡️ ระบบ Single Source of Truth
 import { cafeConfig } from "@/app/(marketing)/[template_id]/_templates/cafe/config"
 import { constructionConfig } from "@/app/(marketing)/[template_id]/_templates/construction/config"
 import { clinicConfig } from "@/app/(marketing)/[template_id]/_templates/clinic/config"
@@ -10,10 +10,24 @@ import { starterConfig } from "@/app/(marketing)/[template_id]/_templates/starte
 import { starterConfig as woodBusinessConfig } from "@/app/(marketing)/[template_id]/_templates/WoodBusiness/config"
 
 /**
- * 🏛️ CATALOG REGISTRY
- * การรวบรวม "ผลงานที่ใช้งานจริง" เพื่อสร้างความมั่นใจให้ลูกค้า
+ * 🏛️ CATALOG REGISTRY (Updated: Unlink-TH Verified)
  */
 export const catalogProjects: Project[] = [
+  // ─── 00. ผลิตภัณฑ์หลัก (Online Reputation Management Platform) ───
+  {
+    id: "project-unlink-th",
+    title: "Unlink-TH (Official)",
+    category: "starter", // หรือ 'specialized'
+    serviceSlug: "online-reputation",
+    templateId: "professional",
+    description:
+      "แพลตฟอร์มบริการลบลิงก์และจัดการชื่อเสียงออนไลน์ (ORM) ระดับมืออาชีพ ช่วยแก้ไขปัญหาข้อมูลด้านลบบนโลกโซเชียลและ Google พัฒนาด้วยเทคโนโลยีความปลอดภัยขั้นสูง",
+    image:
+      "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/unlink-preview.jpg",
+    tags: ["Online Reputation", "Content Removal", "Cyber Security"],
+    stats: { label: "Success Rate", value: "High Priority" },
+  },
+
   // ─── 01. คาเฟ่และร้านอาหาร (Premium Look) ───
   {
     id: "project-cafe-01",
@@ -105,9 +119,6 @@ export const catalogProjects: Project[] = [
   },
 ]
 
-/**
- * 🛠️ DATA RETRIEVAL HELPERS
- */
 export const helpers = {
   getByTemplate: (id: string): Project[] =>
     catalogProjects.filter((p) => p.templateId === id),
