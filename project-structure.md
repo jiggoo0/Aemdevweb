@@ -1,5 +1,5 @@
 # 📁 รายงานโครงสร้างโปรเจกต์ (Extended Scan)
-_สร้างเมื่อ: Sun Jan 11 15:40:09 +07 2026_
+_สร้างเมื่อ: Sun Jan 11 16:28:27 +07 2026_
 
 ## 🌳 Folder Structure
 📂 config
@@ -53,6 +53,7 @@ _สร้างเมื่อ: Sun Jan 11 15:40:09 +07 2026_
         📂 clinic
           📄 ClinicStyle.module.css
           📄 ClinicTemplate.tsx
+          📂 components
           📄 config.ts
         📂 construction
           📄 ConstructionStyle.module.css

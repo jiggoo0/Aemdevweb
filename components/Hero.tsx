@@ -47,7 +47,7 @@ const Hero = ({
   primaryActionHref = "/contact",
   secondaryActionText = "ชมผลงานของเรา",
   secondaryActionHref = "/catalog",
-  imageSrc = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Hero/Hero.png",
+  imageSrc = "https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/Hero/Hero.jpg",
   imageAlt = "ตัวอย่างการออกแบบเว็บไซต์สไตล์มืออาชีพโดย AEMDEVWEB",
   trustBadges = [
     "เว็บโหลดไว ไม่เสียลูกค้า",

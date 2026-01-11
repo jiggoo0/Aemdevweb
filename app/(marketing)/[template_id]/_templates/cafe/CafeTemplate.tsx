@@ -1,18 +1,18 @@
 /** @format */
 
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import styles from "./CafeStyle.module.css";
-import { cafeConfig } from "./config";
-import HeroSection from "./components/HeroSection";
-import MenuPreview from "./components/MenuPreview";
-import AmbienceGallery from "./components/AmbienceGallery";
-import ReservationCTA from "./components/ReservationCTA";
+import React, { useState, useEffect } from "react"
+import styles from "./CafeStyle.module.css"
+import { cafeConfig } from "./config"
+import HeroSection from "./components/HeroSection"
+import MenuPreview from "./components/MenuPreview"
+import AmbienceGallery from "./components/AmbienceGallery"
+import ReservationCTA from "./components/ReservationCTA"
 
 export default function CafeTemplate() {
-  const { content } = cafeConfig;
-  const [isMounted, setIsMounted] = useState(false);
+  const { content } = cafeConfig
+  const [isMounted, setIsMounted] = useState(false)
 
   /**
    * ✅ แก้ไข ESLint Error: react-hooks/set-state-in-effect
@@ -21,12 +21,12 @@ export default function CafeTemplate() {
    */
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
 
   // แสดงผลเบื้องต้นให้สอดคล้องกับ Server-rendered HTML
   if (!isMounted) {
-    return <article className="min-h-screen bg-white" />;
+    return <article className="min-h-screen bg-white" />
   }
 
   return (
@@ -103,5 +103,5 @@ export default function CafeTemplate() {
         </p>
       </footer>
     </article>
-  );
+  )
 }
