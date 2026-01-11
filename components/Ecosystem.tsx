@@ -36,10 +36,12 @@ export default function Ecosystem() {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="flex items-center gap-3 font-black uppercase tracking-tight text-[#0F172A]">
-                <Zap className="text-[#F97316]" /> 0.5s Loading Speed
+                <Zap className="text-[#F97316]" size={20} />
+                <span>0.5s Loading Speed</span>
               </div>
               <div className="flex items-center gap-3 font-black uppercase tracking-tight text-[#0F172A]">
-                <ShieldCheck className="text-[#F97316]" /> Enterprise Security
+                <ShieldCheck className="text-[#F97316]" size={20} />
+                <span>Enterprise Security</span>
               </div>
             </div>
 
@@ -61,34 +63,34 @@ export default function Ecosystem() {
 
           {/* Right Side: Mockup & Dashboard Preview */}
           <div className="relative">
-            {/* Background Block */}
-            <div className="absolute inset-0 translate-x-6 translate-y-6 border-4 border-[#0F172A] bg-slate-100" />
+            {/* Background Block Decor */}
+            <div className="absolute inset-0 translate-x-4 translate-y-4 border-4 border-[#0F172A] bg-slate-100 md:translate-x-6 md:translate-y-6" />
 
             {/* Main Image Container */}
-            <div className="relative border-4 border-[#0F172A] bg-white p-4 shadow-2xl">
-              <div className="aspect-video relative w-full overflow-hidden border-2 border-slate-200 bg-slate-50">
-                {/* ✅ แก้ไขจาก <img> เป็น <Image /> เพื่อประสิทธิภาพสูงสุด */}
+            <div className="relative border-4 border-[#0F172A] bg-white p-2 shadow-2xl md:p-4">
+              <div className="aspect-video relative w-full overflow-hidden border-2 border-slate-200 bg-slate-100">
                 <Image
                   src="https://dpgmfbnzyhnhwzyozoxe.supabase.co/storage/v1/object/public/aemdevweb/catalog/unlink-preview.jpg"
-                  alt="Unlink-TH Dashboard"
+                  alt="Unlink-TH Dashboard Production Preview"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover grayscale transition-all duration-500 hover:grayscale-0"
-                  priority
+                  priority={true} // โหลดทันที
+                  unoptimized // ข้ามการทำ Image Optimization ของ Next.js เพื่อทดสอบการโหลด
                 />
               </div>
 
-              {/* Floating Badge */}
-              <div className="absolute -bottom-8 -left-8 border-4 border-[#0F172A] bg-white p-6 shadow-[8px_8px_0px_0px_#1E3A8A]">
+              {/* Floating Badge Status */}
+              <div className="absolute -bottom-6 -left-4 border-4 border-[#0F172A] bg-white p-4 shadow-[6px_6px_0px_0px_#1E3A8A] md:-bottom-8 md:-left-8 md:p-6 md:shadow-[8px_8px_0px_0px_#1E3A8A]">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border-4 border-[#0F172A] bg-[#10b981] text-white">
-                    <Globe size={24} />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#0F172A] bg-[#10b981] text-white md:h-12 md:w-12">
+                    <Globe size={20} className="md:size-6" />
                   </div>
                   <div>
-                    <div className="text-[10px] font-black uppercase text-slate-400">
+                    <div className="text-[8px] font-black uppercase text-slate-400 md:text-[10px]">
                       Live_Status
                     </div>
-                    <div className="font-black text-[#0F172A]">
+                    <div className="text-xs font-black text-[#0F172A] md:text-base">
                       Online_Production
                     </div>
                   </div>

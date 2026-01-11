@@ -17,30 +17,40 @@ import SocialProof from "@/components/SocialProof"
 
 // --- 🛠️ Optimized Dynamic Imports ---
 const Ecosystem = dynamic(() => import("@/components/Ecosystem"), {
-  loading: () => <div className="h-[500px] animate-pulse bg-white" />,
+  loading: () => <div className="h-[500px] animate-pulse bg-slate-50" />,
   ssr: true,
 })
+
 const ServicesSection = dynamic(() => import("@/components/Services"), {
   loading: () => <div className="h-[600px] animate-pulse bg-slate-50" />,
   ssr: true,
 })
+
 const BlogSection = dynamic(() => import("@/components/BlogSection"), {
   ssr: true,
+  loading: () => (
+    <div className="grid h-[400px] animate-pulse grid-cols-1 gap-8 bg-white md:grid-cols-2" />
+  ),
 })
+
 const FAQSection = dynamic(() => import("@/components/FAQSection"), {
   ssr: false,
   loading: () => <div className="h-[400px] animate-pulse bg-slate-50" />,
 })
+
 const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
 
 export default function HomePage() {
+  // ✅ 1. Mounting State: จัดการการแสดงผลฝั่ง Client เพื่อป้องกัน Hydration Error
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    // ปิดการเตือน ESLint เฉพาะบรรทัดนี้ เพราะเราจำเป็นต้องใช้ pattern นี้สำหรับ Next.js Client Components
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true)
   }, [])
 
+  // ✅ 2. Blog Data Normalization (Memoized)
   const normalizePost = useCallback((post: any) => {
     const getString = (val: any) =>
       typeof val === "string" ? val : val?.th || val?.en || ""
@@ -65,10 +75,13 @@ export default function HomePage() {
     [normalizePost]
   )
 
-  if (!isMounted) return <div className="min-h-screen bg-white" />
-
   return (
-    <main className="flex w-full flex-col overflow-x-hidden bg-white font-sans antialiased">
+    <main
+      className={`flex w-full flex-col overflow-x-hidden bg-white font-sans antialiased transition-opacity duration-500 ${
+        isMounted ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {/* ─── SECTION 1: HERO ─── */}
       <Hero
         badgeText="บริการรับทำเว็บไซต์สำหรับบริษัท และ หจก. ทั่วไทย"
         headline={
@@ -84,6 +97,7 @@ export default function HomePage() {
         description="เปลี่ยนหน้าเว็บธรรมดา ให้เป็นพนักงานขายดิจิทัลที่ทำงาน 24 ชั่วโมง ช่วยให้ธุรกิจของคุณดูน่าเชื่อถือ โหลดไว และรองรับลูกค้าผ่านมือถือได้ดีเยี่ยม"
       />
 
+      {/* ─── SECTION 2: TRUST PROTOCOL ─── */}
       <section className="relative z-20 -mt-10 overflow-hidden border-y-4 border-slate-900 bg-white shadow-xl">
         <div className="container mx-auto px-6 py-10">
           <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
@@ -101,14 +115,20 @@ export default function HomePage() {
               </div>
             </div>
             <div className="w-full flex-1 overflow-hidden">
-              <SocialProof />
+              {isMounted ? (
+                <SocialProof />
+              ) : (
+                <div className="h-12 w-full animate-pulse bg-slate-50" />
+              )}
             </div>
           </div>
         </div>
       </section>
 
+      {/* ─── SECTION 3: ECOSYSTEM ─── */}
       <Ecosystem />
 
+      {/* ─── SECTION 4: OUR SERVICES ─── */}
       <section className="relative overflow-hidden bg-slate-50">
         <div className="absolute inset-0 z-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-20 [background-size:20px_20px]" />
         <div className="relative z-10">
@@ -116,6 +136,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── SECTION 5: BLOG ─── */}
       <section
         id="blog"
         className="border-t-[6px] border-slate-900 bg-white py-24 lg:py-32"
@@ -147,6 +168,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── SECTION 6: FAQS ─── */}
       <section className="relative border-y-[6px] border-slate-900 bg-slate-50 py-24 lg:py-32">
         <div className="container relative z-10 mx-auto max-w-4xl px-6">
           <div className="mb-20 text-center">
@@ -162,6 +184,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ─── SECTION 7: FINAL CTA ─── */}
       <section id="contact" className="container mx-auto px-6 py-24 lg:py-40">
         <div className="relative border-[8px] border-slate-900 bg-white p-8 shadow-[20px_20px_0px_0px_#1E3A8A] md:p-20">
           <div className="absolute -left-2 -top-2 h-12 w-12 border-l-[12px] border-t-[12px] border-[#F97316]" />
@@ -171,32 +194,34 @@ export default function HomePage() {
               title="พร้อมเริ่มโปรเจกต์กับเราหรือยัง?"
               subtitle="ให้เราช่วยสร้างหน้าบ้านออนไลน์ที่มั่นคงและทรงพลัง เพื่อการเติบโตของธุรกิจคุณในระยะยาว"
             />
-            <div className="mt-16 flex flex-col items-center justify-center gap-10 border-t-4 border-dashed border-slate-100 pt-16 lg:flex-row">
-              <div className="group relative border-4 border-slate-900 bg-white p-3 transition-transform hover:-rotate-3">
-                <Image
-                  src="/images/line-qr.png"
-                  alt="Line OA QR"
-                  width={140}
-                  height={140}
-                  className="grayscale transition-all group-hover:grayscale-0"
-                />
-                <div className="absolute -right-4 -top-4 bg-[#F97316] p-2 text-white shadow-md">
-                  <Zap size={16} fill="currentColor" />
+            {isMounted && (
+              <div className="mt-16 flex flex-col items-center justify-center gap-10 border-t-4 border-dashed border-slate-100 pt-16 lg:flex-row">
+                <div className="group relative border-4 border-slate-900 bg-white p-3 transition-transform hover:-rotate-3">
+                  <Image
+                    src="/images/line-qr.png"
+                    alt="Line OA QR"
+                    width={140}
+                    height={140}
+                    className="grayscale transition-all group-hover:grayscale-0"
+                  />
+                  <div className="absolute -right-4 -top-4 bg-[#F97316] p-2 text-white shadow-md">
+                    <Zap size={16} fill="currentColor" />
+                  </div>
+                </div>
+                <div className="text-center lg:text-left">
+                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
+                    ช่องทางปรึกษาด่วน
+                  </p>
+                  <h4 className="mt-2 text-3xl font-black text-slate-900">
+                    @aemdevweb
+                  </h4>
+                  <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-slate-500">
+                    สแกนเพื่อคุยกับเราโดยตรง รับคำแนะนำเบื้องต้นและประเมินราคาฟรี
+                    โดยทีมงานผู้เชี่ยวชาญ
+                  </p>
                 </div>
               </div>
-              <div className="text-center lg:text-left">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-                  ช่องทางปรึกษาด่วน
-                </p>
-                <h4 className="mt-2 text-3xl font-black text-slate-900">
-                  @aemdevweb
-                </h4>
-                <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-slate-500">
-                  สแกนเพื่อคุยกับเราโดยตรง รับคำแนะนำเบื้องต้นและประเมินราคาฟรี
-                  โดยทีมงานผู้เชี่ยวชาญ
-                </p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

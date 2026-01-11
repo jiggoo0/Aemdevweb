@@ -1,12 +1,16 @@
 # 📑 รายงานสรุปโปรเจกต์และบริบท AI (Full Context)
+
 _สร้างเมื่อ: 2026-01-11 13:29:38_
+
 > **Status:** Fresh Scan | รวมข้อมูลวิเคราะห์ Route & Code
 
 ## 🔴 1. สถานะสุขภาพโปรเจกต์ล่าสุด
+
 ✅ **READY FOR DEPLOY** (ผ่านการตรวจสอบทุกขั้นตอน)
 
 ### 📍 Production Route Map
-```text
+
+````text
 ```text
 Route (app)                                              Size  First Load JS
 ┌ ○ /                                                 15.8 kB         178 kB
@@ -38,8 +42,9 @@ Route (app)                                              Size  First Load JS
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-```
-```
+````
+
+````
 
 ## 📊 2. สถิติไฟล์แบ่งตามนามสกุล
 ```text
@@ -52,9 +57,10 @@ Route (app)                                              Size  First Load JS
       3 sh
       1 txt
       1 ico
-```
+````
 
 ## 📁 3. โครงสร้างโฟลเดอร์ (Tree)
+
 ```text
 📂 app
   📂 (main)
@@ -234,7 +240,9 @@ Route (app)                                              Size  First Load JS
 ```
 
 ## 📄 4. เนื้อหาโค้ดและบริบททางเทคนิค
+
 #### 🔍 Path: ai-context.md
+
 ```markdown
 🧠 AI Context: AEMDEVWEB (Multi-Template Web Solutions)
 Project Status: Ready for Deploy | Stack: Next.js 15.5.7 (App Router) | React: v19
@@ -283,25 +291,39 @@ AEMDEVWEB คือแพลตฟอร์ม "Dynamic Marketing & Catalog" ท
 - [HUMAN-EXPLAIN]: สรุปเรื่องยากให้เข้าใจง่ายใน 2 ประโยคสำหรับเจ้าของธุรกิจ
   "Empowering Businesses with High-Performance Digital Identity & Industry-Standard Templates"
 ```
+
 ---
 
 #### 🔍 Path: pre-deploy-report.md
-```markdown
+
+````markdown
 # 🚀 Pre-deploy Inspection Report
+
 Generated at: 2026-01-11 13:23:47
 Branch: main
 
 ## 🔐 1. Environment Check
+
 ✅ Status: .env file exists and verified.
-## 🛠️  2. Auto-Fix Procedure
+
+## 🛠️ 2. Auto-Fix Procedure
+
 ✅ Status: Auto-fix completed or no issues found.
+
 ## 🧹 3. Code Linting (ESLint)
+
 ✅ Status: Linting passed.
+
 ## ⌨️ 4. Type Safety Check
+
 ✅ Status: TypeScript verified.
-## 🏗️  5. Production Build Test
+
+## 🏗️ 5. Production Build Test
+
 ✅ Status: Build successfully optimized.
+
 ### 📊 Route Statistics & Bundle Size
+
 ```text
 Route (app)                                              Size  First Load JS
 ┌ ○ /                                                 15.8 kB         178 kB
@@ -335,14 +357,18 @@ Route (app)                                              Size  First Load JS
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-
 ```
+````
 
 ---
+
 ## 🏆 Summary Result
+
 ### ✅ READY FOR DEPLOY
+
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-```
+
+````
 ---
 
 #### 🔍 Path: app/globals.css
@@ -454,10 +480,12 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     @apply border border-white/20 bg-white/80 backdrop-blur-md;
   }
 }
-```
+````
+
 ---
 
 #### 🔍 Path: app/layout.tsx
+
 ```typescript
 /** @format */
 import type { Metadata, Viewport } from "next"
@@ -578,9 +606,9 @@ export default function RootLayout({
           jetbrains.variable
         )}
       >
-        {/* โครงสร้างหลัก: 
-            เน้นการจัดวางที่ยืดหยุ่น (Flexbox) 
-            เพื่อให้หน้าเว็บแสดงผลสวยงามในทุกขนาดหน้าจอ 
+        {/* โครงสร้างหลัก:
+            เน้นการจัดวางที่ยืดหยุ่น (Flexbox)
+            เพื่อให้หน้าเว็บแสดงผลสวยงามในทุกขนาดหน้าจอ
         */}
         <main className="relative flex min-h-screen flex-col">{children}</main>
 
@@ -591,9 +619,11 @@ export default function RootLayout({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: data/servicesData.ts
+
 ```typescript
 /** @format */
 // ----------------------------------------------------
@@ -736,9 +766,11 @@ export const getServicesByTarget = (target: TargetGroup): ServiceItem[] => {
   return servicesData.filter((s) => s.targetGroup === target)
 }
 ```
+
 ---
 
 #### 🔍 Path: package.json
+
 ```json
 {
   "name": "aemdevweb",
@@ -803,9 +835,11 @@ export const getServicesByTarget = (target: TargetGroup): ServiceItem[] => {
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: next.config.ts
+
 ```typescript
 /** @format */
 import type { NextConfig } from "next"
@@ -865,9 +899,11 @@ const nextConfig: NextConfig = {
 
 export default nextConfig
 ```
+
 ---
 
 #### 🔍 Path: lib/supabase.ts
+
 ```typescript
 /** @format */
 import { createClient } from "@supabase/supabase-js"
@@ -893,9 +929,11 @@ export const getSupabaseAdmin = () => {
   return createClient(supabaseUrl, serviceKey)
 }
 ```
+
 ---
 
 #### 🔍 Path: tailwind.config.ts
+
 ```typescript
 /** @format */
 import type { Config } from "tailwindcss"
@@ -1052,9 +1090,11 @@ const config: Config = {
 
 export default config
 ```
+
 ---
 
 #### 🔍 Path: types/blog.ts
+
 ```typescript
 /** @format */
 
@@ -1112,9 +1152,11 @@ export interface BlogPost {
  */
 export type BlogPostSummary = Omit<BlogPost, "content">
 ```
+
 ---
 
 #### 🔍 Path: config/siteConfig.ts
+
 ```typescript
 /** @format */
 
@@ -1280,9 +1322,11 @@ export const siteConfig = {
 
 export type SiteConfig = typeof siteConfig
 ```
+
 ---
 
 #### 🔍 Path: types/review.ts
+
 ```typescript
 /** @format */
 export interface ReviewItem {
@@ -1297,10 +1341,12 @@ export interface ReviewItem {
   isFeatured: boolean
 }
 ```
+
 ---
 
 #### 🔍 Path: .env
-```text
+
+````text
 NEXT_PUBLIC_SUPABASE_ANON_KEY= "********"
 POSTGRES_PASSWORD= "********"
 POSTGRES_PRISMA_URL= "********"
@@ -1314,3 +1360,4 @@ SUPABASE_SERVICE_ROLE_KEY= "********"```
 ## 📝 บทสรุป
 การสแกนเสร็จสิ้น ข้อมูลถูกจัดรูปแบบให้ AI ประมวลผลได้ทันที
 . Format code in: Optimized
+````
