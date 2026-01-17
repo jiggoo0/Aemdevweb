@@ -1,60 +1,62 @@
 /** @format */
 import type { NextConfig } from "next"
+import createMDX from "@next/mdx"
 
+/**
+ * 🚀 Next.js Config: Luminous Performance Edition
+ * ปรับแต่งเพื่อความเร็วสูงสุดสำหรับโดเมน www.unlink-th.com
+ * รองรับ Image Optimization และ MDX Rust-based Compiler
+ */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  // 📄 รองรับไฟล์หลากหลายนามสกุลสำหรับระบบ Content & Sales Hub
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+
+  // 🖼️ Image Optimization: ยกระดับความเร็วด้วย AVIF และ WebP
   images: {
-    // ✅ 1. แก้ไข Warning: ลงทะเบียนค่า Quality ที่อนุญาตให้ใช้งาน
-    // วิธีนี้จะช่วยให้ Build ผ่านโดยไม่มีข้อความเตือนใน Console
-    qualities: [25, 50, 75, 90],
-
-    // อนุญาตให้ใช้ SVG เพื่อความยืดหยุ่นของ Icon/Logo
-    dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-
-    // รองรับฟอร์แมตสมัยใหม่เพื่อความเร็ว (High Performance)
     formats: ["image/avif", "image/webp"],
-
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ui-avatars.com",
-        pathname: "/api/**",
+        hostname: "lin.ee", // สำหรับ Assets จาก Line Official
       },
       {
         protocol: "https",
-        hostname: "dpgmfbnzyhnhwzyozoxe.supabase.co",
-        pathname: "/**",
+        hostname: "**.supabase.co", // สำหรับ Database Assets จาก Supabase
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "api.dicebear.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "www.aemdevweb.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        pathname: "/**",
+        hostname: "images.unsplash.com", // สำหรับรูปประกอบชั่วคราว
       },
     ],
   },
 
+  // ⚡ Experimental Features: ขีดสุดของความเร็วระดับ Unlink-TH
   experimental: {
-    // เพิ่มความเร็วในการรัน Dev mode
-    optimizePackageImports: ["lucide-react"],
+    mdxRs: true, // 🦀 ใช้ Rust-based Compiler เพื่อความเร็วในการบิวด์ MDX
+    optimizePackageImports: ["lucide-react", "framer-motion", "sonner"], // ลดขนาด Bundle Size อัตโนมัติ
+  },
+
+  // 🛠️ Logging & Performance Monitoring
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
   },
 }
 
-export default nextConfig
+/**
+ * 📝 MDX Configuration
+ * ติดตั้ง Plugin พื้นฐานเพื่อความลื่นไหลในการเขียน Content
+ */
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
+export default withMDX(nextConfig)

@@ -1,195 +1,224 @@
 /** @format */
-import { notFound } from "next/navigation"
-import { Metadata } from "next"
-import Link from "next/link"
-import Image from "next/image"
-import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog"
-import { ArrowLeft, Calendar, Share2, Terminal } from "lucide-react" // ✅ ลบ Tag ออกแล้ว
-import JsonLd from "@/components/seo/JsonLd"
-import { siteConfig } from "@/config/siteConfig"
 
-interface Props {
-  params: Promise<{ slug: string }>
-}
+import { getAllPosts, getPostBySlug } from "@/lib/mdx";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Metadata } from "next";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Share2,
+  Sparkles,
+  MessageCircle,
+} from "lucide-react";
 
+// 🛠️ Components
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+
+/**
+ * 🎨 MDX Components Configuration
+ * ✅ Fixed: แก้ไขปัญหา href เป็น undefined โดยรองรับทั้ง url และ href จาก MDX
+ */
+const mdxComponents = {
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const imgSrc = typeof props.src === "string" ? props.src : "";
+    return (
+      <Image
+        src={imgSrc}
+        width={800}
+        height={450}
+        className="rounded-3xl border border-white/10"
+        alt={props.alt || "Blog Image Content"}
+        loading="lazy"
+      />
+    );
+  },
+  // 🚀 CallToAction: รองรับทั้งการพิมพ์ <CallToAction url="..." /> หรือ href="..."
+  CallToAction: ({
+    title,
+    description,
+    href,
+    url,
+  }: {
+    title: string;
+    description: string;
+    href?: string;
+    url?: string;
+  }) => {
+    // 🎯 Fallback logic: ถ้าไม่มีทั้งคู่ให้ไปหน้า contact
+    const targetPath = href || url || "/contact";
+
+    return (
+      <div className="my-12 p-8 rounded-[2rem] border border-aurora-cyan/20 bg-aurora-cyan/5 text-center shadow-luminous">
+        <h3 className="font-prompt mb-4 text-2xl font-black uppercase italic text-white">
+          {title}
+        </h3>
+        <p className="font-anuphan mb-8 text-slate-400">{description}</p>
+        <Button variant="premium" asChild className="h-12 px-10">
+          <Link href={targetPath}>เริ่มโปรเจกต์ของคุณ</Link>
+        </Button>
+      </div>
+    );
+  },
+};
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+// ⚙️ SSG Build: สร้างหน้า Static ไว้ล่วงหน้า
 export async function generateStaticParams() {
-  return blogData.map((post) => ({
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
+// 🔍 SEO Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const post = (blogData as BlogPost[]).find((p) => p.slug === slug)
-  if (!post) return {}
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) return {};
 
   return {
-    title: `${post.title} | ${siteConfig.name}`,
+    title: `${post.title} | AemDevWeb`,
     description: post.description,
     openGraph: {
       title: post.title,
       description: post.description,
-      images: post.image ? [post.image] : [],
-      type: "article",
-      publishedTime: post.date,
-      authors: [
-        typeof post.author === "string" ? post.author : post.author.name,
-      ],
+      images: [post.coverImage],
     },
-  }
+  };
 }
 
-export default async function BlogDetailPage({ params }: Props) {
-  const { slug } = await params
-  const post = (blogData as BlogPost[]).find((p) => p.slug === slug)
+/**
+ * 📄 BlogPostPage: Luminous Edition
+ */
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
-  if (!post) notFound()
-
-  const authorName =
-    typeof post.author === "string" ? post.author : post.author.name
-  const authorAvatar =
-    typeof post.author !== "string" ? post.author.avatar : null
+  if (!post) return notFound();
 
   return (
-    <main className="min-h-screen bg-white font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
-      {/* 🚀 SEO: BLOG POSTING 
-          หมายเหตุ: หาก TS ยังฟ้องที่ type="BlogPosting" ให้ไปแก้ที่ components/seo/JsonLd.tsx ตามวิธีด้านล่าง
-      */}
-      <JsonLd
-        type="WebSite" // 🟢 เปลี่ยนชั่วคราวเป็น WebSite เพื่อให้ผ่าน Type Check หรือแก้ Interface ใน JsonLd.tsx
-        data={{
-          headline: post.title,
-          image: post.image,
-          datePublished: post.date,
-          author: { "@type": "Person", name: authorName },
-          description: post.description,
-        }}
-      />
+    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+      {/* 🌌 Background Decor: Aurora Ambient */}
+      <div className="aurora-bg top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
 
-      {/* ─── 01. HEADER SECTION ─── */}
-      <header className="relative border-b-[6px] border-[#0F172A] bg-slate-50 py-16 lg:py-24">
-        <div
-          className="bg-grid-pattern absolute inset-0 opacity-[0.03]"
-          aria-hidden="true"
-        />
+      <div className="relative z-10 container mx-auto max-w-4xl px-4">
+        {/* 🔙 Navigation: Back Link */}
+        <Link
+          href="/blog"
+          className="hover:text-aurora-cyan group font-prompt mb-12 inline-flex items-center text-xs font-black tracking-widest text-slate-500 uppercase transition-all"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-2" />
+          Back to Insights
+        </Link>
 
-        <div className="container relative z-10 mx-auto max-w-5xl px-6">
-          <Link
-            href="/blog"
-            className="group mb-10 inline-flex items-center gap-3 border-4 border-[#0F172A] bg-white px-5 py-2 text-[10px] font-black uppercase tracking-widest shadow-[6px_6px_0px_0px_#0F172A] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-          >
-            <ArrowLeft size={14} strokeWidth={3} className="text-[#F97316]" />
-            Knowledge_Base_Return
-          </Link>
-
-          <div className="space-y-8">
-            <div className="flex items-center gap-4">
-              <span className="bg-[#F97316] px-3 py-1 text-[10px] font-black uppercase tracking-tighter text-[#0F172A]">
-                {post.category}
+        {/* 🏷️ Header: Luminous Title */}
+        <header className="mb-16 space-y-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <Badge variant="luminous" className="px-4 py-1.5">
+              {post.category}
+            </Badge>
+            <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
+              <span className="flex items-center">
+                <Calendar className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
+                {post.date.split("T")[0]}
               </span>
-              <span className="font-mono text-[10px] font-bold text-slate-400">
-                <Calendar size={12} className="mr-1 inline" /> {post.date}
+              <span className="flex items-center">
+                <Clock className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
+                {post.readingTime} READ
               </span>
             </div>
-
-            <h1 className="font-heading text-5xl font-black uppercase italic leading-[0.95] tracking-tighter text-[#0F172A] md:text-7xl lg:text-8xl">
-              {post.title}
-            </h1>
-
-            <p className="max-w-3xl border-l-[12px] border-[#1E3A8A] pl-8 text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-              {post.description}
-            </p>
           </div>
+
+          <h1 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-balance text-white uppercase italic md:text-6xl">
+            {post.title}
+          </h1>
+
+          <p className="font-anuphan text-xl leading-relaxed font-medium text-balance text-slate-400">
+            {post.description}
+          </p>
+        </header>
+
+        {/* 🖼️ Cover Image: Glass Showcase */}
+        <div className="shadow-luminous group relative mb-20 aspect-video w-full overflow-hidden rounded-[2.5rem] border border-white/10">
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/60 to-transparent" />
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            priority
+          />
         </div>
-      </header>
 
-      {/* ─── 02. CONTENT SECTION ─── */}
-      <div className="container mx-auto max-w-6xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            {post.image && (
-              <div className="group relative mb-16 aspect-[16/9] w-full overflow-hidden border-[6px] border-[#0F172A] bg-slate-200 shadow-[20px_20px_0px_0px_rgba(30,58,138,0.1)]">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  priority
-                />
+        {/* ✍️ Content Body: Humanistic Reading */}
+        <div className="prose prose-lg md:prose-xl prose-invert prose-emerald prose-headings:font-prompt prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-white prose-p:font-anuphan prose-p:text-slate-300 prose-p:leading-relaxed prose-p:font-medium prose-strong:text-aurora-cyan prose-a:text-aurora-cyan prose-a:no-underline hover:prose-a:underline prose-img:rounded-3xl prose-img:border prose-img:border-white/10 prose-code:text-aurora-emerald prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md mx-auto max-w-none">
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </div>
+
+        {/* 👤 Author & Share: Glass Panel */}
+        <div className="mt-20 flex flex-col items-center justify-between gap-8 rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl md:flex-row">
+          <div className="flex items-center gap-5">
+            <div className="from-aurora-cyan to-aurora-emerald shadow-aurora-glow relative size-14 rounded-2xl bg-gradient-to-br p-[1px]">
+              <div className="font-prompt flex h-full w-full items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">
+                A
               </div>
-            )}
-
-            <article
-              className="prose prose-lg prose-slate max-w-none prose-headings:font-heading prose-headings:uppercase prose-headings:italic prose-headings:tracking-tighter prose-headings:text-[#0F172A] prose-blockquote:border-l-[8px] prose-blockquote:border-[#F97316] prose-strong:font-black prose-code:bg-slate-900 prose-code:text-white"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-
-            <div className="mt-24 flex items-center justify-between border-t-[6px] border-[#0F172A] pt-12">
-              <div className="flex items-center gap-6">
-                <span className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">
-                  Distribute_Insight:
-                </span>
-                <button className="flex h-12 w-12 items-center justify-center border-4 border-[#0F172A] bg-white shadow-[4px_4px_0px_0px_#0F172A] transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-[#1E3A8A] hover:text-white hover:shadow-none">
-                  <Share2 size={20} />
-                </button>
+            </div>
+            <div>
+              <div className="font-prompt font-black tracking-wider text-white uppercase">
+                นายเอ็มซ่ามากส์
               </div>
-              <div className="font-mono text-[10px] font-black text-slate-300">
-                END_OF_TRANSMISSION
+              <div className="font-anuphan mt-1 text-xs font-bold tracking-widest text-slate-500 uppercase">
+                Fullstack Dev & Consultant
               </div>
             </div>
           </div>
 
-          <aside className="lg:col-span-4">
-            <div className="sticky top-32 space-y-12">
-              <div className="border-[6px] border-[#0F172A] bg-white p-8 shadow-[12px_12px_0px_0px_#1E3A8A]">
-                <div className="mb-6 flex items-center gap-5">
-                  <div className="relative h-14 w-14 overflow-hidden border-4 border-[#0F172A] bg-slate-100">
-                    {authorAvatar && (
-                      <Image
-                        src={authorAvatar}
-                        alt={authorName}
-                        fill
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div>
-                    <span className="block text-[10px] font-black uppercase tracking-widest text-slate-400">
-                      Expert_Node
-                    </span>
-                    <span className="text-lg font-black uppercase text-[#0F172A]">
-                      {authorName}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-sm font-bold text-slate-600">
-                  สถาปนิกดิจิทัลผู้เชี่ยวชาญด้านโครงสร้าง High-Performance
-                </p>
-              </div>
+          <Button
+            variant="outline"
+            className="hover:border-aurora-cyan group h-12 gap-2 rounded-xl px-8"
+          >
+            <Share2 className="h-4 w-4 transition-transform group-hover:scale-110" />
+            Share Insight
+          </Button>
+        </div>
 
-              {post.tags && (
-                <div className="space-y-6">
-                  <h4 className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.4em] text-[#0F172A]">
-                    <Terminal size={16} className="text-[#F97316]" />{" "}
-                    Index_Keywords
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="border-2 border-[#0F172A] px-2 py-1 text-[10px] font-black uppercase tracking-wider text-[#0F172A]"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </aside>
+        {/* 🚀 Final CTA */}
+        <div className="border-aurora-cyan/30 bg-aurora-cyan/5 group shadow-luminous relative mt-16 overflow-hidden rounded-[3rem] border p-10 text-center md:p-16">
+          <div className="aurora-bg -top-1/2 -left-1/2 h-full w-full opacity-10 transition-opacity group-hover:opacity-20" />
+          <div className="relative z-10">
+            <Sparkles className="text-aurora-cyan mx-auto mb-6 h-10 w-10 animate-pulse" />
+            <h3 className="font-prompt mb-6 text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
+              อ่านจบแล้ว... <br />
+              อยากมีเว็บที่ <span className="text-aurora-cyan">ไบร์ท</span>{" "}
+              แบบนี้ไหม?
+            </h3>
+            <p className="font-anuphan mx-auto mb-10 max-w-xl text-lg leading-relaxed font-medium text-slate-400">
+              ปรึกษาฟรี ไม่คิดเงิน นายเอ็มพร้อมช่วยวางโครงสร้างที่ปิดการขายได้จริง
+              ทักมาคุยไอเดียกันก่อนได้ครับ
+            </p>
+            <Button
+              variant="premium"
+              size="lg"
+              className="shadow-aurora-glow group h-18 px-12 text-lg"
+              asChild
+            >
+              <Link href="/contact">
+                <MessageCircle className="mr-3 h-6 w-6" />{" "}
+                ทักไลน์คุยงานกับคุณเอ็ม
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
-    </main>
-  )
+    </article>
+  );
 }

@@ -1,5 +1,0 @@
-<!-- public/images/svg/mobile.svg -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <rect x="20" y="8" width="24" height="48" rx="4" ry="4" fill="#3b82f6" stroke="#000" stroke-width="2"/>
-  <circle cx="32" cy="50" r="2" fill="#fff"/>
-</svg>

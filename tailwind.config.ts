@@ -1,154 +1,153 @@
 /** @format */
 import type { Config } from "tailwindcss"
+import animate from "tailwindcss-animate"
+import typography from "@tailwindcss/typography"
+import defaultTheme from "tailwindcss/defaultTheme"
 
 const config: Config = {
+  // 🎯 1. Content Scanned
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./data/**/*.{js,ts,jsx,tsx}",
-    "./lib/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts}",
+    "./constants/**/*.{js,ts}",
+    "./content/**/*.{js,ts,md,mdx}",
   ],
+
+  // 🌓 Dark Mode Strategy
+  darkMode: "class",
+
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "1.5rem",
+        sm: "2rem",
+        lg: "4rem",
+      },
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
-      // 🎨 Color Tokens: นิยามสีหลักสไตล์ AEM Architecture
-      colors: {
-        brand: {
-          navy: "#0F172A", // Deep Navy (Base)
-          blue: "#1E3A8A", // Brand Blue (Signature)
-          orange: "#F97316", // Vibrant Orange (Call to Action)
-          slate: "#64748B", // Technical Slate
-          gold: "#D4AF37", // Premium Accent
-        },
-        neutral: {
-          50: "#F9FAFB",
-          100: "#F3F4F6",
-          200: "#E5E7EB",
-          300: "#D1D5DB",
-          400: "#9CA3AF",
-          500: "#6B7280",
-          600: "#4B5563",
-          700: "#374151",
-          800: "#1F2937",
-          900: "#111827",
-        },
-        background: "#FFFFFF",
-        surface: "#F9FAFB",
-        border: "#E5E7EB",
-        success: "#22C55E",
-        warning: "#FACC15",
-        error: "#EF4444",
-        accent: "#F97316",
-      },
-
-      // 🔤 Typography Tokens: กำหนดฟอนต์ที่ใช้ในโปรเจกต์
+      // 🔤 2. Fonts: เน้นความโปร่งและอ่านง่าย (Anuphan = Modern Friendly)
       fontFamily: {
-        sans: ["var(--font-prompt)", "sans-serif"],
-        heading: ["var(--font-kanit)", "sans-serif"],
-        mono: ["var(--font-jetbrains)", "monospace"],
-      },
-      fontSize: {
-        "display-xl": ["3rem", { lineHeight: "1" }],
-        "display-lg": ["2.25rem", { lineHeight: "1.1" }],
-        "display-md": ["1.75rem", { lineHeight: "1.2" }],
-        h1: ["2rem", { lineHeight: "1.3" }],
-        h2: ["1.5rem", { lineHeight: "1.4" }],
-        h3: ["1.25rem", { lineHeight: "1.4" }],
-        body: ["1rem", { lineHeight: "1.6" }],
-        small: ["0.875rem", { lineHeight: "1.4" }],
-        tiny: ["0.75rem", { lineHeight: "1.3" }],
+        sans: ["var(--font-prompt)", ...defaultTheme.fontFamily.sans],
+        kanit: ["var(--font-kanit)"],
+        prompt: ["var(--font-prompt)"],
+        anuphan: ["var(--font-anuphan)"],
+        mono: ["var(--font-jetbrains)", ...defaultTheme.fontFamily.mono],
       },
 
-      // 📐 Spacing Tokens: ระยะห่างมาตรฐานระบบ Grid
-      spacing: {
-        xs: "0.5rem",
-        sm: "1rem",
-        md: "1.5rem",
-        lg: "2rem",
-        xl: "3rem",
-        "2xl": "4rem",
-        "3xl": "6rem",
+      // 🎨 3. Luminous Color Palette: ฉีกความหมองด้วยโทน Midnight & Aurora
+      colors: {
+        border: "var(--border)",
+        input: "var(--input)",
+        ring: "var(--ring)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+
+        // Brand Colors: ใช้ OKLCH เพื่อความสว่างที่แม่นยำ
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+
+        // Aurora Accent: สีที่ช่วยให้เว็บดู "สว่างจากข้างใน"
+        aurora: {
+          cyan: "oklch(0.78 0.12 200)", // ความสดใสของท้องฟ้า
+          violet: "oklch(0.65 0.18 280)", // ความพรีเมียมของยามค่ำคืน
+          emerald: "oklch(0.82 0.18 155)", // เขียวสว่าง (Electric Emerald)
+          white: "oklch(0.98 0.01 240)", // ขาวนวลลดความกระด้าง
+        },
+
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
+        },
       },
 
-      // 🟦 Radius Tokens: ความมนของขอบ (Card & Button เป็น 0 ตามสไตล์ Brutalist)
+      // 🔘 4. Weightless Radius: โค้งมนระดับ Super-ellipse เพื่อความเป็นมิตรสูงสุด
       borderRadius: {
-        none: "0",
-        sm: "0.125rem",
-        md: "0.25rem",
-        lg: "0.5rem",
-        xl: "1rem",
-        full: "9999px",
-        card: "0",
-        button: "0",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+        xl: "1.25rem",
+        "2xl": "2rem",
+        "3xl": "3rem",
+        "4xl": "4.5rem",
       },
 
-      // 🕶️ Shadow Tokens: เงาแบบหนาและแข็ง (Hard Shadows)
-      boxShadow: {
-        soft: "0 1px 3px rgba(0,0,0,0.06)",
-        "enterprise-sm": "0 2px 4px rgba(0,0,0,0.08)",
-        "enterprise-md": "0 4px 8px rgba(0,0,0,0.12)",
-        "enterprise-lg": "0 8px 16px rgba(0,0,0,0.16)",
-        "brutal-blue": "4px 4px 0px #1E3A8A",
-        "brutal-orange": "4px 4px 0px #F97316",
-        "brutal-navy": "8px 8px 0px #0F172A",
-        "brutal-lg": "12px 12px 0px #0F172A",
-      },
-
-      // 🎞️ Animation & Keyframes: รวมระบบ Loading และ Motion
-      animation: {
-        float: "float 3s ease-in-out infinite",
-        fade: "fade 0.5s ease-in-out",
-        slide: "slide 0.3s ease-in-out",
-        scale: "scale 0.3s ease-in-out",
-        "spin-slow": "spin 3s linear infinite", // ปรับความเร็วให้เหมาะกับ Loader
-        shimmer: "shimmer 2s infinite", // สำหรับ Skeleton Loading
-        marquee: "marquee 60s linear infinite",
-      },
+      // 🎬 5. Keyframes: เพิ่ม Aurora Movement ให้เว็บดูมีชีวิต
       keyframes: {
-        shimmer: {
-          "100%": { transform: "translateX(100%)" },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        // การลอยแบบนุ่มนวล (Human-like movement)
         float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-6px)" },
+          "0%, 100%": { transform: "translateY(0) scale(1)" },
+          "50%": { transform: "translateY(-20px) scale(1.02)" },
         },
-        fade: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
+        // แสงออโรร่าเต้นระบำพื้นหลัง
+        aurora: {
+          "0%, 100%": { opacity: "0.3", transform: "translate(0, 0) scale(1)" },
+          "33%": {
+            opacity: "0.5",
+            transform: "translate(30px, -50px) scale(1.1)",
+          },
+          "66%": {
+            opacity: "0.4",
+            transform: "translate(-20px, 20px) scale(0.9)",
+          },
         },
-        slide: {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
-        },
-        scale: {
-          "0%": { transform: "scale(0.95)", opacity: "0" },
-          "100%": { transform: "scale(1)", opacity: "1" },
-        },
-        marquee: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(40px) scale(0.95)" },
+          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
         },
       },
 
-      // 📦 Container Tokens
-      container: {
-        center: true,
-        padding: "1rem",
-        screens: {
-          sm: "640px",
-          md: "768px",
-          lg: "1024px",
-          xl: "1280px",
-          "2xl": "1536px",
-        },
+      // ⚡ 6. Animations
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        float: "float 6s ease-in-out infinite",
+        aurora: "aurora 15s ease-in-out infinite",
+        "fade-in-up": "fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+      },
+
+      // 🪄 7. Luminous Utilities
+      backgroundImage: {
+        "luminous-gradient":
+          "linear-gradient(135deg, oklch(0.78 0.12 200) 0%, oklch(0.82 0.18 155) 100%)",
+        "midnight-mesh":
+          "radial-gradient(at 0% 0%, oklch(0.15 0.05 260) 0%, transparent 50%), radial-gradient(at 100% 100%, oklch(0.12 0.03 280) 0%, transparent 50%)",
+      },
+      boxShadow: {
+        // เงาที่ดูเบาและฟุ้ง (Soft Ambient Shadow)
+        luminous: "0 20px 80px -15px rgba(0, 0, 0, 0.3)",
+        "aurora-glow": "0 0 60px -10px oklch(0.78 0.12 200 / 0.3)",
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/aspect-ratio"),
-    require("tailwindcss-animate"), // แนะนำให้ติดตั้งเพิ่มสำหรับแอนิเมชันที่ซับซ้อนขึ้น
-  ],
+
+  plugins: [animate, typography],
 }
 
 export default config

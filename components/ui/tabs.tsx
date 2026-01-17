@@ -1,15 +1,17 @@
 /** @format */
+"use client";
 
-"use client"
+import * as React from "react";
+import * as TabsPrimitive from "@radix-ui/react-tabs";
+// ✅ Fixed: Removed unused 'motion' import to clear ESLint error
+import { cn } from "@/lib/utils";
 
-import * as React from "react"
-import * as TabsPrimitive from "@radix-ui/react-tabs"
-import { cn } from "@/lib/utils"
+const Tabs = TabsPrimitive.Root;
 
-// 1. นำเข้าคอมโพเนนต์พื้นฐานจาก Radix UI
-const Tabs = TabsPrimitive.Root
-
-// 2. TabsList: ส่วนแถบเมนูสำหรับเลือก Tab
+/**
+ * 🍱 TabsList: Luminous Glass Rail
+ * แถบรางสำหรับเลือก Tab ที่เน้นความโปร่งแสงและสว่างนวลตา
+ */
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
@@ -17,15 +19,18 @@ const TabsList = React.forwardRef<
   <TabsPrimitive.List
     ref={ref}
     className={cn(
-      "bg-muted text-muted-foreground inline-flex h-10 items-center justify-center rounded-lg p-1",
+      "shadow-luminous inline-flex h-14 items-center justify-center rounded-2xl border border-white/5 bg-white/5 p-1.5 backdrop-blur-xl",
       className
     )}
     {...props}
   />
-))
-TabsList.displayName = TabsPrimitive.List.displayName
+));
+TabsList.displayName = TabsPrimitive.List.displayName;
 
-// 3. TabsTrigger: ปุ่มสำหรับคลิกเพื่อสลับเนื้อหา
+/**
+ * 🔘 TabsTrigger: Aurora Interaction
+ * ปุ่มสลับที่ใช้ฟอนต์ Prompt/Black เพื่อความพรีเมียมและเปลี่ยนสีเมื่อ Active
+ */
 const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
@@ -33,15 +38,20 @@ const TabsTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "focus-visible:ring-ring data-[state=active]:text-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:shadow-sm",
+      "relative inline-flex items-center justify-center rounded-xl px-6 py-2 text-[10px] font-black tracking-[0.25em] uppercase transition-all duration-500 select-none md:text-xs",
+      "font-prompt text-slate-500 hover:text-white disabled:pointer-events-none disabled:opacity-50",
+      "data-[state=active]:text-aurora-cyan data-[state=active]:shadow-aurora-glow data-[state=active]:bg-white/5",
       className
     )}
     {...props}
   />
-))
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName
+));
+TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
 
-// 4. TabsContent: ส่วนแสดงเนื้อหาตามที่เลือก
+/**
+ * 📄 TabsContent: Smooth Aurora Entrance
+ * ส่วนแสดงเนื้อหาที่มาพร้อมแอนิเมชัน Fade-in และ Slide-up อย่างนุ่มนวล
+ */
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
@@ -49,13 +59,13 @@ const TabsContent = React.forwardRef<
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "focus-visible:ring-ring mt-2 ring-offset-background duration-300 animate-in fade-in-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+      "ring-offset-background focus-visible:ring-aurora-cyan/30 mt-6 transition-all duration-700 focus-visible:ring-2 focus-visible:outline-none",
+      "data-[state=active]:animate-in data-[state=active]:fade-in-50 data-[state=active]:slide-in-from-bottom-2",
       className
     )}
     {...props}
   />
-))
-TabsContent.displayName = TabsPrimitive.Content.displayName
+));
+TabsContent.displayName = TabsPrimitive.Content.displayName;
 
-// 5. ส่งออกแบบ Named Exports
-export { Tabs, TabsList, TabsTrigger, TabsContent }
+export { Tabs, TabsList, TabsTrigger, TabsContent };

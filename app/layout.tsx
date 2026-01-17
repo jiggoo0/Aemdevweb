@@ -1,71 +1,63 @@
 /** @format */
 import type { Metadata, Viewport } from "next"
-import { Kanit, Prompt, JetBrains_Mono } from "next/font/google"
-import "./globals.css"
-import { siteConfig } from "@/config/siteConfig"
-import { Toaster } from "@/components/ui/toaster"
+import { Inter, Kanit, Prompt, Anuphan } from "next/font/google"
+import NextTopLoader from "nextjs-toploader"
+import { Toaster } from "@/components/ui/sonner"
+import { AppProvider } from "@/providers/AppProvider"
+import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
-import JsonLd from "@/components/seo/JsonLd"
+import "./globals.css"
 
-// 🔤 1. Font Configurations (เลือกใช้ฟอนต์ยอดนิยม อ่านง่ายสำหรับคนทุกวัย)
+// --- 1. Setup Fonts: Humanistic Palette ---
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
 const kanit = Kanit({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-kanit",
   display: "swap",
 })
 
 const prompt = Prompt({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600"],
   variable: "--font-prompt",
   display: "swap",
 })
 
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
+const anuphan = Anuphan({
+  subsets: ["thai", "latin"],
+  variable: "--font-anuphan",
   display: "swap",
 })
 
-// 📱 2. Viewport Settings (รองรับการขยายหน้าจอเพื่อกลุ่มผู้สูงอายุ)
-export const viewport: Viewport = {
-  themeColor: "#1E3A8A",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5, // อนุญาตให้ขยายได้ เพื่อความสะดวกในการอ่าน (Accessibility)
-}
-
-// 🔍 3. SEO Metadata (ปรับจูนภาษาให้เข้าถึงใจเจ้าของธุรกิจไทย)
+// --- 2. SEO & Metadata Strategy ---
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.title,
+    default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: [
     "รับทำเว็บไซต์",
-    "รับทำเว็บไซต์ SME",
-    "รับทำ Landing Page",
-    "ทำเว็บไซต์ราคาถูก",
-    "ทำเว็บไซต์ปิดการขาย", // เพิ่ม: เน้นผลลัพธ์ทางธุรกิจ
-    "รับทำเว็บ หจก บริษัท", // เพิ่ม: กลุ่มธุรกิจจดทะเบียน
-    "AEMDEVWEB",
-    "ทำเว็บติดหน้าแรก Google", // เพิ่ม: ภาษาที่คนทั่วไปเข้าใจง่าย
-    "Digital Marketing SME",
+    "Next.js 15",
+    "ทำเว็บ SME",
+    "Web Development Thailand",
+    "Sale Page",
+    "aemdevweb",
+    ...siteConfig.keywords,
   ],
-  authors: [{ name: "AEMDEVWEB Team", url: siteConfig.url }],
-  creator: "AEMDEVWEB",
-  publisher: "AEMDEVWEB",
-  metadataBase: new URL(siteConfig.url),
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.companyName,
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: siteConfig.url,
-    title: siteConfig.title,
+    title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -79,52 +71,74 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.title,
+    title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: "@aemdevweb",
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
+  metadataBase: new URL(siteConfig.url),
 }
 
-// 🏗️ 4. Root Layout Component
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+}
+
+// --- 3. Root Layout Component ---
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   return (
-    <html lang="th" suppressHydrationWarning className="scroll-smooth">
-      <head>
-        {/* ✅ แทรก Structured Data เพื่อสร้างความน่าเชื่อถือในระบบค้นหา */}
-        <JsonLd />
-      </head>
+    <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          kanit.variable, // ใช้สำหรับหัวข้อ (Heading) เพื่อความทันสมัย
-          prompt.variable, // ใช้สำหรับเนื้อหา (Body) เพื่อการอ่านที่สบายตา
-          jetbrains.variable
+          "bg-background min-h-screen font-sans antialiased transition-colors duration-500",
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // ปรับให้เข้ากับธีม Luminous
+          inter.variable,
+          kanit.variable,
+          prompt.variable,
+          anuphan.variable
         )}
       >
-        {/* โครงสร้างหลัก: 
-            เน้นการจัดวางที่ยืดหยุ่น (Flexbox) 
-            เพื่อให้หน้าเว็บแสดงผลสวยงามในทุกขนาดหน้าจอ 
-        */}
-        <main className="relative flex min-h-screen flex-col">{children}</main>
+        {/* แถบโหลด: Gradient สไตล์ Luminous Tech */}
+        <NextTopLoader
+          color="linear-gradient(to right, oklch(0.75 0.12 200), oklch(0.82 0.18 155))"
+          initialPosition={0.08}
+          height={3}
+          showSpinner={false}
+          easing="ease"
+          speed={300}
+        />
 
-        {/*ระบบแจ้งเตือนที่เข้าใจง่าย เมื่อลูกค้าส่งฟอร์มหรือมีปฏิสัมพันธ์กับเว็บ */}
-        <Toaster />
+        <AppProvider>
+          <div className="relative flex min-h-screen flex-col">{children}</div>
+
+          <Toaster
+            position="bottom-right"
+            richColors
+            closeButton
+            theme="system"
+            toastOptions={{
+              style: {
+                borderRadius: "1.25rem",
+                padding: "1rem",
+                fontFamily: "var(--font-prompt)",
+              },
+            }}
+          />
+        </AppProvider>
       </body>
     </html>
   )

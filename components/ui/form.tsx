@@ -1,3 +1,4 @@
+/** @format */
 "use client"
 
 import * as React from "react"
@@ -72,6 +73,10 @@ type FormItemContextValue = {
 
 const FormItemContext = React.createContext<FormItemContextValue | null>(null)
 
+/**
+ * 🍱 FormItem: Luminous Layout
+ * ปรับระยะห่างให้โปร่งสบายตามสไตล์ Weightless Design
+ */
 const FormItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -80,12 +85,16 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2.5", className)} {...props} />
     </FormItemContext.Provider>
   )
 })
 FormItem.displayName = "FormItem"
 
+/**
+ * 🏷️ FormLabel: Humanistic Typography
+ * ใช้ฟอนต์ Prompt เพื่อความชัดเจนและเปลี่ยนสีเมื่อมี Error แบบ Luminous
+ */
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
@@ -95,7 +104,11 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(
+        "font-prompt text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase transition-colors duration-300",
+        error ? "text-rose-400" : "group-focus-within:text-aurora-cyan",
+        className
+      )}
       htmlFor={formItemId}
       {...props}
     />
@@ -125,6 +138,10 @@ const FormControl = React.forwardRef<
 })
 FormControl.displayName = "FormControl"
 
+/**
+ * 📝 FormDescription: Gentle Information
+ * ใช้ฟอนต์ Anuphan เพื่อให้อ่านง่ายและไม่กวนสายตา
+ */
 const FormDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -135,13 +152,20 @@ const FormDescription = React.forwardRef<
     <p
       ref={ref}
       id={formDescriptionId}
-      className={cn("text-muted-foreground text-[0.8rem]", className)}
+      className={cn(
+        "font-anuphan text-[13px] font-medium text-slate-500 opacity-80",
+        className
+      )}
       {...props}
     />
   )
 })
 FormDescription.displayName = "FormDescription"
 
+/**
+ * ⚠️ FormMessage: Electric Error Feedback
+ * ใช้สีแดงกุหลาบที่ส่องสว่าง (Electric Rose) เพื่อให้เห็นชัดบนพื้นหลัง Midnight
+ */
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -157,7 +181,10 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-destructive text-[0.8rem] font-medium", className)}
+      className={cn(
+        "font-anuphan animate-in fade-in slide-in-from-top-1 text-xs font-bold text-rose-400 drop-shadow-[0_0_8px_rgba(251,113,133,0.3)] duration-300",
+        className
+      )}
       {...props}
     >
       {body}

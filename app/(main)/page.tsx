@@ -1,230 +1,141 @@
 /** @format */
-"use client"
+import { Metadata } from "next"
+import { Suspense } from "react"
 
-import React, { useMemo, useCallback, useState, useEffect } from "react"
-import Link from "next/link"
-import dynamic from "next/dynamic"
-import Image from "next/image"
-import { Zap, ChevronRight, Database, ShieldCheck } from "lucide-react"
+// 🧩 Components - Landing
+import { Hero } from "@/components/landing/Hero"
+import { ValueProp } from "@/components/landing/ValueProp"
+import { Testimonials } from "@/components/landing/Testimonials"
+import { InsightsSection } from "@/components/landing/InsightsSection"
 
-// ✅ Data Sources
-import { servicesData } from "@/data/servicesData"
-import { blogData } from "@/data/blog/allposts"
+// 🧩 Components - Sales Engine
+import { PriceEstimator } from "@/components/sales-engine/PriceEstimator"
+import { WorkProcess } from "@/components/sales-engine/WorkProcess"
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
-// ✅ Critical Components
-import Hero from "@/components/Hero"
-import SocialProof from "@/components/SocialProof"
+// 🧩 Components - Shared
+import { TrustBadge } from "@/components/shared/TrustBadge"
+import ServiceCard from "@/components/shared/ServiceCard"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
-// --- 🛠️ Optimized Dynamic Imports ---
-const Ecosystem = dynamic(() => import("@/components/Ecosystem"), {
-  loading: () => <div className="h-[500px] animate-pulse bg-slate-50" />,
-  ssr: true,
-})
+// 📦 Data
+import { servicesData } from "@/constants/services-data"
 
-const ServicesSection = dynamic(() => import("@/components/Services"), {
-  loading: () => <div className="h-[600px] animate-pulse bg-slate-50" />,
-  ssr: true,
-})
-
-const BlogSection = dynamic(() => import("@/components/BlogSection"), {
-  ssr: true,
-  loading: () => (
-    <div className="grid h-[400px] animate-pulse grid-cols-1 gap-8 bg-white md:grid-cols-2" />
-  ),
-})
-
-const FAQSection = dynamic(() => import("@/components/FAQSection"), {
-  ssr: false,
-  loading: () => <div className="h-[400px] animate-pulse bg-slate-50" />,
-})
-
-const CTA = dynamic(() => import("@/components/CTA"), { ssr: true })
+export const metadata: Metadata = {
+  title: "AemDevWeb | รับทำเว็บไซต์ Next.js มาตรฐานปี 2026",
+  description:
+    "เปลี่ยนยอดวิวเป็นยอดโอน ด้วยเว็บไซต์ High-Performance ที่ออกแบบมาเพื่อปิดการขายโดยเฉพาะ เร็ว แรง ติด Google",
+}
 
 export default function HomePage() {
-  // ✅ 1. Mounting State: จัดการการแสดงผลฝั่ง Client เพื่อป้องกัน Hydration Error
-  const [isMounted, setIsMounted] = useState(false)
-
-  useEffect(() => {
-    // ปิดการเตือน ESLint เฉพาะบรรทัดนี้ เพราะเราจำเป็นต้องใช้ pattern นี้สำหรับ Next.js Client Components
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMounted(true)
-  }, [])
-
-  // ✅ 2. Blog Data Normalization (Memoized)
-  const normalizePost = useCallback((post: any) => {
-    const getString = (val: any) =>
-      typeof val === "string" ? val : val?.th || val?.en || ""
-    return {
-      ...post,
-      title: getString(post.title),
-      excerpt: getString(post.excerpt || post.description),
-      author:
-        typeof post.author === "string"
-          ? {
-              name: post.author,
-              avatar: "/images/profile/default-avatar.webp",
-              role: "Technical Partner",
-            }
-          : post.author,
-      readTime: post.readTime || "5 นาที",
-    }
-  }, [])
-
-  const featuredPosts = useMemo(
-    () => (blogData || []).slice(0, 4).map(normalizePost),
-    [normalizePost]
-  )
-
   return (
-    <main
-      className={`flex w-full flex-col overflow-x-hidden bg-white font-sans antialiased transition-opacity duration-500 ${
-        isMounted ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      {/* ─── SECTION 1: HERO ─── */}
-      <Hero
-        badgeText="บริการรับทำเว็บไซต์สำหรับบริษัท และ หจก. ทั่วไทย"
-        headline={
-          <>
-            สร้างเว็บ <br />
-            <span className="text-[#F97316] underline decoration-slate-900/10 decoration-8 underline-offset-8">
-              ที่ปิดการขาย
+    <main className="bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan relative flex min-h-screen flex-col overflow-x-hidden">
+      {/* 🌌 Luminous Background: แสง Aurora เต้นระบำทั่วหน้าเว็บ */}
+      <div className="aurora-bg -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.15]" />
+      <div className="aurora-bg top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.1]" />
+
+      {/* 1. HERO SECTION: ประตูบานแรกสู่ความสว่างพรีเมียม */}
+      <Hero />
+
+      {/* 2. TRUST BADGE: เชื่อมั่นทันทีใน 3 วินาที */}
+      <div className="relative z-10 -mt-12 md:-mt-16">
+        <TrustBadge />
+      </div>
+
+      {/* 3. VALUE PROPOSITION: จุดต่างที่เหนือกว่าด้วย Technology */}
+      <section className="relative overflow-hidden py-24">
+        {/* Soft Aurora Mesh Background */}
+        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 z-0 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br blur-3xl" />
+        <ValueProp />
+      </section>
+
+      {/* 4. IMPACT STATS: ตัวเลขพลังที่ชัดเจนและสว่างไสว */}
+      <section className="shadow-luminous relative z-10 border-y border-white/5 bg-white/[0.03] py-24 backdrop-blur-3xl">
+        <ImpactStats />
+      </section>
+
+      {/* 5. INSIGHTS & CASE STUDIES: ผลงานและบทความในสไตล์ Smart Tabs */}
+      <InsightsSection />
+
+      {/* 6. SERVICES: โซลูชันที่ปรับตามสเกลธุรกิจ (Luminous Card Style) */}
+      <section id="services" className="relative container mx-auto px-4 py-32">
+        <div className="mx-auto mb-20 max-w-3xl text-center">
+          <h2 className="text-luminous mb-8 text-4xl uppercase md:text-7xl">
+            Services <span className="text-slate-600">&</span> Solutions
+          </h2>
+          <p className="text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
+            เลือกแพ็กเกจที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืน{" "}
+            <br className="hidden md:block" />
+            ตั้งแต่ธุรกิจเริ่มต้นจนถึงระดับ Corporate
+          </p>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          {servicesData.map((service) => (
+            <ServiceCard key={service.id} {...service} className="h-full" />
+          ))}
+        </div>
+      </section>
+
+      {/* 7. PROCESS: ความชัดเจนที่นุ่มนวลและเป็นมิตร */}
+      <WorkProcess />
+
+      {/* 8. PRICE ESTIMATOR: ระบบประเมินราคา (Interactive Luminous) */}
+      <section id="pricing" className="container mx-auto px-4 py-32">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16 text-center">
+            <span className="text-aurora-cyan mb-4 block text-[10px] font-black tracking-[0.3em] uppercase">
+              Transparent Pricing
             </span>
-            <br />
-            <span className="text-[#1E3A8A]">ให้ธุรกิจของคุณ</span>
-          </>
-        }
-        description="เปลี่ยนหน้าเว็บธรรมดา ให้เป็นพนักงานขายดิจิทัลที่ทำงาน 24 ชั่วโมง ช่วยให้ธุรกิจของคุณดูน่าเชื่อถือ โหลดไว และรองรับลูกค้าผ่านมือถือได้ดีเยี่ยม"
-      />
-
-      {/* ─── SECTION 2: TRUST PROTOCOL ─── */}
-      <section className="relative z-20 -mt-10 overflow-hidden border-y-4 border-slate-900 bg-white shadow-xl">
-        <div className="container mx-auto px-6 py-10">
-          <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
-            <div className="flex shrink-0 items-center gap-5 border-slate-900/10 lg:border-r lg:pr-12">
-              <div className="flex h-12 w-12 items-center justify-center bg-slate-900 text-[#F97316] shadow-[4px_4px_0px_0px_#2563EB]">
-                <ShieldCheck size={24} />
-              </div>
-              <div>
-                <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
-                  Business Trust
-                </span>
-                <span className="text-sm font-black uppercase tracking-widest text-slate-900">
-                  มาตรฐานความปลอดภัย 2026
-                </span>
-              </div>
-            </div>
-            <div className="w-full flex-1 overflow-hidden">
-              {isMounted ? (
-                <SocialProof />
-              ) : (
-                <div className="h-12 w-full animate-pulse bg-slate-50" />
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── SECTION 3: ECOSYSTEM ─── */}
-      <Ecosystem />
-
-      {/* ─── SECTION 4: OUR SERVICES ─── */}
-      <section className="relative overflow-hidden bg-slate-50">
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] opacity-20 [background-size:20px_20px]" />
-        <div className="relative z-10">
-          <ServicesSection services={servicesData} />
-        </div>
-      </section>
-
-      {/* ─── SECTION 5: BLOG ─── */}
-      <section
-        id="blog"
-        className="border-t-[6px] border-slate-900 bg-white py-24 lg:py-32"
-      >
-        <div className="container mx-auto px-6">
-          <div className="mb-20 flex flex-col items-start justify-between gap-8 border-b-4 border-slate-900 pb-12 lg:flex-row lg:items-end">
-            <div className="max-w-2xl">
-              <div className="mb-4 inline-flex items-center gap-3 bg-[#1E3A8A] px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white">
-                <Database size={12} />
-                Knowledge Base v2.0
-              </div>
-              <h2 className="font-heading text-5xl font-black uppercase leading-none tracking-tighter text-slate-900 md:text-7xl">
-                สาระน่ารู้ <br />
-                <span className="text-[#1E3A8A]">เพื่อ SME.</span>
-              </h2>
-            </div>
-            <Link
-              href="/blog"
-              className="group flex items-center gap-4 border-4 border-slate-900 bg-white px-8 py-4 text-xs font-black uppercase tracking-[0.2em] text-slate-900 shadow-[6px_6px_0px_0px_#F97316] transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none"
-            >
-              อ่านบทความทั้งหมด
-              <ChevronRight
-                size={18}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
-          </div>
-          <BlogSection posts={featuredPosts} />
-        </div>
-      </section>
-
-      {/* ─── SECTION 6: FAQS ─── */}
-      <section className="relative border-y-[6px] border-slate-900 bg-slate-50 py-24 lg:py-32">
-        <div className="container relative z-10 mx-auto max-w-4xl px-6">
-          <div className="mb-20 text-center">
-            <h2 className="font-heading text-5xl font-black uppercase tracking-tighter text-slate-900 md:text-7xl">
-              คำถาม<span className="text-[#F97316]">ที่พบบ่อย</span>
+            <h2 className="text-luminous text-3xl tracking-tighter uppercase md:text-6xl">
+              ประเมินราคาเบื้องต้น
             </h2>
-            <div className="mx-auto mt-6 h-2 w-24 bg-[#1E3A8A]" />
-            <p className="mt-8 text-sm font-bold uppercase tracking-widest text-slate-400">
-              ทุกข้อสงสัยเรื่องเว็บไซต์และการทำธุรกิจออนไลน์
-            </p>
           </div>
-          <FAQSection />
+
+          <Suspense
+            fallback={
+              <div className="h-[500px] w-full animate-pulse rounded-4xl border border-white/10 bg-white/5" />
+            }
+          >
+            <PriceEstimator />
+          </Suspense>
         </div>
       </section>
 
-      {/* ─── SECTION 7: FINAL CTA ─── */}
-      <section id="contact" className="container mx-auto px-6 py-24 lg:py-40">
-        <div className="relative border-[8px] border-slate-900 bg-white p-8 shadow-[20px_20px_0px_0px_#1E3A8A] md:p-20">
-          <div className="absolute -left-2 -top-2 h-12 w-12 border-l-[12px] border-t-[12px] border-[#F97316]" />
-          <div className="absolute -bottom-2 -right-2 h-12 w-12 border-b-[12px] border-r-[12px] border-[#F97316]" />
-          <div className="relative z-10">
-            <CTA
-              title="พร้อมเริ่มโปรเจกต์กับเราหรือยัง?"
-              subtitle="ให้เราช่วยสร้างหน้าบ้านออนไลน์ที่มั่นคงและทรงพลัง เพื่อการเติบโตของธุรกิจคุณในระยะยาว"
-            />
-            {isMounted && (
-              <div className="mt-16 flex flex-col items-center justify-center gap-10 border-t-4 border-dashed border-slate-100 pt-16 lg:flex-row">
-                <div className="group relative border-4 border-slate-900 bg-white p-3 transition-transform hover:-rotate-3">
-                  <Image
-                    src="/images/line-qr.png"
-                    alt="Line OA QR"
-                    width={140}
-                    height={140}
-                    className="grayscale transition-all group-hover:grayscale-0"
-                  />
-                  <div className="absolute -right-4 -top-4 bg-[#F97316] p-2 text-white shadow-md">
-                    <Zap size={16} fill="currentColor" />
-                  </div>
-                </div>
-                <div className="text-center lg:text-left">
-                  <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">
-                    ช่องทางปรึกษาด่วน
-                  </p>
-                  <h4 className="mt-2 text-3xl font-black text-slate-900">
-                    @aemdevweb
-                  </h4>
-                  <p className="mt-4 max-w-xs text-sm font-bold leading-relaxed text-slate-500">
-                    สแกนเพื่อคุยกับเราโดยตรง
-                    รับคำแนะนำเบื้องต้นและประเมินราคาฟรี โดยทีมงานผู้เชี่ยวชาญ
-                  </p>
-                </div>
-              </div>
-            )}
+      {/* 9. TESTIMONIALS: คำยืนยันจากลูกค้าตัวจริงบนพื้นหลัง Midnight */}
+      <section className="rounded-t-4xl border-t border-white/5 bg-white/[0.01] py-32">
+        <Testimonials />
+      </section>
+
+      {/* 10. FINAL CTA: จุดปิดการขายที่ส่องสว่างและทรงพลัง */}
+      <section className="container mx-auto mb-40 px-4">
+        <div className="shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] p-12 text-center transition-all duration-700 md:p-32">
+          <div className="aurora-bg -right-40 -bottom-40 h-[600px] w-[600px] opacity-20" />
+
+          <h2 className="text-luminous relative z-10 mb-10 text-4xl leading-none tracking-tighter uppercase md:text-8xl">
+            Ready to <span className="text-aurora-emerald">Scale</span> <br />
+            Your Business?
+          </h2>
+          <p className="relative z-10 mx-auto mb-16 max-w-2xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
+            หยุดให้เว็บไซต์ช้าฉุดรั้งกำไรของคุณ
+            เริ่มสร้างระบบปิดการขายอัตโนมัติวันนี้
+          </p>
+
+          <div className="relative z-10 flex flex-col items-center justify-center gap-10 sm:flex-row">
+            <LineLeadForm variant="button" label="เริ่มโปรเจกต์กับเรา" />
+            <div className="flex items-center gap-4 text-xs font-black tracking-[0.25em] text-slate-500 uppercase">
+              <span className="relative flex h-4 w-4">
+                <span className="bg-aurora-cyan absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
+                <span className="bg-aurora-cyan relative inline-flex h-4 w-4 rounded-full"></span>
+              </span>
+              Available Now
+            </div>
           </div>
         </div>
       </section>
+
+      <LineStickyButton />
     </main>
   )
 }

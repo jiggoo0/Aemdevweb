@@ -2,39 +2,47 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
 
+/**
+ * 🔘 Button: Luminous Tech Edition
+ * ยกระดับปุ่มกดให้มีความ "ซ่า" และพรีเมียมด้วยระบบแสง Aurora
+ */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-xs font-black uppercase tracking-[0.2em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl text-sm font-black uppercase tracking-widest transition-all duration-500 active:scale-95 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-aurora-cyan/50 font-prompt select-none",
   {
     variants: {
       variant: {
-        // 🧱 สไตล์หลัก: พื้นหลังเข้ม เงาสีส้ม (Brutalist Signature)
+        // ⚡ Default: สไตล์ Luminous Cyan สว่างพรีเมียม
         default:
-          "border-4 border-brand-navy bg-brand-navy text-white shadow-[4px_4px_0px_0px_#F97316] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "bg-aurora-cyan text-slate-950 shadow-aurora-glow hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]",
 
-        // 🧱 สไตล์อันตราย: สีแดงขอบหนา
-        destructive:
-          "border-4 border-brand-navy bg-error text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+        // 🌿 Success/Sales: เขียว Aurora Emerald เน้นปิดการขาย
+        aurora:
+          "bg-aurora-emerald text-slate-950 shadow-aurora-glow hover:bg-white hover:shadow-[0_0_30px_rgba(130,255,180,0.4)]",
 
-        // 🧱 สไตล์เส้นขอบ: พื้นหลังขาว เงาสีน้ำเงิน
+        // 💎 Premium: ไล่เฉดสี Luminous จาก Cyan ไป Emerald
+        premium:
+          "bg-gradient-to-br from-aurora-cyan via-aurora-emerald to-aurora-cyan bg-[length:200%_auto] text-slate-950 shadow-luminous hover:bg-right transition-[background-position,all]",
+
+        // 🌑 Glass: กระจกโปร่งแสง สไตล์ Midnight
         outline:
-          "border-4 border-brand-navy bg-white text-brand-navy shadow-[4px_4px_0px_0px_#1E3A8A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "border-2 border-white/10 bg-white/5 text-white backdrop-blur-md hover:border-aurora-cyan hover:text-aurora-cyan hover:bg-aurora-cyan/5",
 
-        // 🧱 สไตล์รอง: สีส้มโดดเด่น
-        secondary:
-          "border-4 border-brand-navy bg-brand-orange text-white shadow-[4px_4px_0px_0px_#0F172A] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+        ghost: "text-slate-400 hover:text-white hover:bg-white/5",
 
-        ghost: "text-brand-navy hover:bg-brand-blue/10",
+        destructive:
+          "bg-rose-500 text-white hover:bg-rose-600 shadow-lg shadow-rose-500/20",
 
-        link: "text-brand-blue underline-offset-8 decoration-2 hover:underline font-bold",
+        link: "text-aurora-cyan underline-offset-8 hover:underline p-0 h-auto lowercase tracking-normal font-medium",
       },
       size: {
         default: "h-14 px-8 py-4",
-        sm: "h-10 px-4 text-[10px]",
-        lg: "h-16 px-10 text-sm",
-        icon: "h-12 w-12",
+        sm: "h-10 rounded-xl px-5 text-[10px]",
+        lg: "h-20 rounded-[2rem] px-12 text-lg font-black tracking-[0.2em]",
+        icon: "size-14",
+        "icon-sm": "size-10",
+        "icon-lg": "size-20",
       },
     },
     defaultVariants: {
@@ -63,6 +71,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
+
 Button.displayName = "Button"
 
 export { Button, buttonVariants }

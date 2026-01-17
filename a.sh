@@ -1,28 +1,21 @@
 #!/bin/bash
 
-# ----------------------------------------------------
-# 🧹 JP-STYLE CLEANUP SCRIPT
-# Role: ลบโครงสร้างเก่าที่ไม่ได้ใช้งานแล้ว
-# ----------------------------------------------------
+echo "🚀 อัปเกรดโครงสร้าง www.aemdevweb.com สู่ Sales Engine Platform..."
 
-echo "🧹 Cleaning up old project structures..."
+# 1. สร้างโฟลเดอร์ Core Logic และ Sales Engine Components
+mkdir -p core/engines
+mkdir -p core/themes
+mkdir -p components/sales-engine
 
-# 1. ลบโฟลเดอร์ landing เดิมทั้งหมด
-rm -rf app/landing
+# 2. ปรับโครงสร้างใน (marketing) ให้เป็นแบบ Industry-Based
+# หมายเหตุ: เราจะสร้างโฟลเดอร์กลุ่มตัวอย่างไว้ก่อน
+mkdir -p app/\(marketing\)/\[industry\]/_skeletons
 
-# 2. ลบไฟล์สำรอง layout เก่า
-rm app/layout.tsx.bak
+# 3. สร้างไฟล์ Config และ Boilerplate สำหรับปิดการขาย
+touch constants/industry-config.ts
+touch components/sales-engine/PriceEstimator.tsx
+touch components/sales-engine/WorkProcess.tsx
+touch components/sales-engine/LineLeadForm.tsx
+touch components/shared/AemBrandBadge.tsx
 
-# 3. ลบไฟล์ที่อยู่นอกกลุ่ม (main) ที่เราย้ายเข้าไปแล้ว
-rm app/about/page.tsx 2>/dev/null
-rm app/blog/page.tsx 2>/dev/null
-rm app/blog/\[slug\]/page.tsx 2>/dev/null
-rm app/catalog/page.tsx 2>/dev/null
-rm app/contact/page.tsx 2>/dev/null
-rm app/services/page.tsx 2>/dev/null
-rm app/page.tsx 2>/dev/null
-
-# 4. ลบโฟลเดอร์เปล่าที่อาจเหลืออยู่
-find app -type d -empty -delete
-
-echo "✨ Project is now clean and optimized!"
+echo "✅ โครงสร้างถูกอัปเกรดให้รองรับระบบปิดการขายเฉพาะอาชีพแล้ว!"

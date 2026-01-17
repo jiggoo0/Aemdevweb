@@ -1,13 +1,19 @@
+/** @format */
+import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
+
+/**
+ * 🍃 Empty State: Luminous Edition
+ * ออกแบบมาเพื่อเปลี่ยนหน้าจอว่างเปล่าให้ดูมีระดับ ไม่หมอง
+ */
 
 function Empty({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="empty"
       className={cn(
-        "flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border-dashed p-6 text-center md:p-12",
+        "glass-card flex min-w-0 flex-1 flex-col items-center justify-center gap-8 rounded-[2rem] border-dashed p-10 text-center text-balance transition-all duration-500 md:p-20",
         className
       )}
       {...props}
@@ -20,7 +26,7 @@ function EmptyHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="empty-header"
       className={cn(
-        "flex max-w-sm flex-col items-center gap-2 text-center",
+        "flex max-w-sm flex-col items-center gap-4 text-center",
         className
       )}
       {...props}
@@ -29,12 +35,13 @@ function EmptyHeader({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 const emptyMediaVariants = cva(
-  "mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "mb-4 flex shrink-0 items-center justify-center transition-all duration-500 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default: "bg-transparent",
-        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*='size-'])]:size-6",
+        // 💎 Icon Variant: ปรับให้สว่างด้วยแสง Aurora
+        icon: "bg-white/5 text-aurora-cyan flex size-20 shrink-0 items-center justify-center rounded-2xl border border-white/10 shadow-aurora-glow [&_svg:not([class*='size-'])]:size-10",
       },
     },
     defaultVariants: {
@@ -62,7 +69,10 @@ function EmptyTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="empty-title"
-      className={cn("text-lg font-medium tracking-tight", className)}
+      className={cn(
+        "font-prompt text-2xl font-black tracking-tighter text-white uppercase",
+        className
+      )}
       {...props}
     />
   )
@@ -73,7 +83,7 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<"p">) {
     <div
       data-slot="empty-description"
       className={cn(
-        "text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4",
+        "font-anuphan [&>a:hover]:text-aurora-cyan text-base/relaxed font-medium text-slate-400 opacity-80 [&>a]:text-white [&>a]:underline [&>a]:underline-offset-4",
         className
       )}
       {...props}
@@ -86,7 +96,7 @@ function EmptyContent({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="empty-content"
       className={cn(
-        "flex w-full min-w-0 max-w-sm flex-col items-center gap-4 text-balance text-sm",
+        "flex w-full max-w-sm min-w-0 flex-col items-center gap-6 text-sm text-balance",
         className
       )}
       {...props}

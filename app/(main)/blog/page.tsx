@@ -1,158 +1,138 @@
 /** @format */
-import React from "react"
-import { Metadata } from "next"
-import { blogData } from "@/data/blog/allposts"
-import { BlogPost } from "@/types/blog"
-import BlogSection from "@/components/BlogSection"
-import { BookOpen, Terminal, Activity, Hash, Zap } from "lucide-react"
-import JsonLd from "@/components/seo/JsonLd"
-import { siteConfig } from "@/config/siteConfig"
+
+import { getAllPosts } from "@/lib/mdx";
+import Link from "next/link";
+import Image from "next/image";
+import { Metadata } from "next";
+// ✅ Fixed: Removed unused 'Zap' import to clear ESLint error
+import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+// ✅ Fixed: Removed unused 'cn' import to clear ESLint error
 
 export const metadata: Metadata = {
-  title: `Insights & Knowledge | ${siteConfig.name}`,
-  description:
-    "รวบรวมเทคนิคการสร้างเว็บไซต์และการวางโครงสร้าง Digital Architecture ฉบับเจาะลึก เน้นการนำไปใช้จริงเพื่อเพิ่ม Conversion ให้ธุรกิจ SME ไทย",
-  openGraph: {
-    title: `Insights - ${siteConfig.name}`,
-    description: "Technical insights for modern business owners",
-    images: [`${siteConfig.url}${siteConfig.ogImage}`],
-    type: "website",
-  },
-}
+  title: "Knowledge Hub | AEMDEVWEB",
+  description: "รวมเทคนิคการทำเว็บ High-Conversion และการตลาดออนไลน์สำหรับ SME ปี 2026",
+};
 
-export default function BlogPage() {
-  const totalArticles = blogData.length.toString().padStart(2, "0")
+export default async function BlogPage() {
+  const posts = await getAllPosts();
+  const featuredPost = posts.find((p) => p.isFeatured) || posts[0];
+  const regularPosts = posts.filter((p) => p.slug !== featuredPost?.slug);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white font-sans antialiased selection:bg-[#1E3A8A] selection:text-white">
-      {/* 🚀 SEO STRUCTURED DATA - ใช้ WebSite ชั่วคราวจนกว่าจะแก้ Types ในคอมโพเนนต์ */}
-      <JsonLd
-        type="WebSite"
-        data={{
-          name: `${siteConfig.name} Knowledge Hub`,
-          description: "Technical insights and digital strategy for Thai SME",
-          url: `${siteConfig.url}/blog`,
-        }}
-      />
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+      {/* 🌌 Aurora Background Decorations */}
+      <div className="aurora-bg top-0 left-1/2 h-[500px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
+      <div className="aurora-bg bg-aurora-violet -bottom-40 -left-40 h-[600px] w-[600px] opacity-[0.03] blur-[150px]" />
 
-      {/* ─── 🛠️ TECHNICAL BACKGROUND ─── */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.04]"
-        style={{
-          backgroundImage: "radial-gradient(#0F172A 1.5px, transparent 1.5px)",
-          backgroundSize: "32px 32px",
-        }}
-        aria-hidden="true"
-      />
+      {/* 🎯 1. Hero Section: Hub Header */}
+      <section className="relative z-10 container mx-auto mb-24 px-4 text-center">
+        <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
+          <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Knowledge Hub
+        </div>
+        <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-white uppercase italic md:text-8xl">
+          คลังอาวุธ <br className="md:hidden" />
+          <span className="text-aurora-cyan drop-shadow-luminous">SME ยุคใหม่</span>
+        </h1>
+        <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
+          ไม่ใช่แค่บทความ แต่คือคู่มือการใช้งานเทคโนโลยีเพื่อสร้างยอดขาย <br className="hidden md:block" />
+          <span className="text-white">คัดเนื้อเน้นๆ เพื่อเครื่องยนต์ธุรกิจที่แรงกว่าเดิม</span>
+        </p>
+      </section>
 
-      <div className="container relative z-10 mx-auto px-6 py-24 lg:py-40">
-        <header className="mb-20 border-b-[10px] border-[#0F172A] pb-16">
-          <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
-            <div className="max-w-4xl space-y-8">
-              <div className="inline-flex items-center gap-3 border-4 border-[#0F172A] bg-[#0F172A] px-5 py-2 shadow-[6px_6px_0px_0px_#F97316]">
-                <Terminal size={16} className="text-[#F97316]" />
-                <span className="font-mono text-[10px] font-black uppercase tracking-[0.4em] text-white">
-                  KNOWLEDGE_DATABASE / SRC_V{siteConfig.version}
-                </span>
-              </div>
-
-              <h1 className="font-heading text-6xl uppercase leading-[0.85] tracking-tighter text-[#0F172A] md:text-8xl lg:text-9xl">
-                Technical <br />
-                <span className="text-[#1E3A8A] underline decoration-[#F97316] decoration-[10px] underline-offset-[8px] md:decoration-[16px] md:underline-offset-[12px]">
-                  Insights.
-                </span>
-              </h1>
-
-              <p className="max-w-2xl text-lg font-bold leading-relaxed text-slate-600 md:text-xl">
-                เจาะลึกเบื้องหลังการออกแบบโครงสร้างเว็บที่
-                <span className="text-[#0F172A]"> "ขายได้จริง" </span>
-                เปลี่ยนความซับซ้อนทางเทคนิคให้เป็นกลยุทธ์ที่สร้างแต้มต่อให้ธุรกิจ
-              </p>
-            </div>
-
-            <div className="hidden flex-col items-end gap-5 text-right sm:flex">
-              <div className="flex gap-3">
-                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-white shadow-[8px_8px_0px_0px_#0F172A] transition-transform hover:-translate-y-1">
-                  <BookOpen size={28} className="text-[#0F172A]" />
-                </div>
-                <div className="flex h-16 w-16 items-center justify-center border-4 border-[#0F172A] bg-[#1E3A8A] text-white shadow-[8px_8px_0px_0px_#0F172A] transition-transform hover:-translate-y-1">
-                  <Activity size={28} className="animate-pulse" />
-                </div>
-              </div>
-              <div className="font-mono text-[11px] font-black uppercase leading-relaxed text-[#0F172A]">
-                <div>
-                  <span className="text-[#F97316]">STATUS:</span> ACTIVE_SYNC
-                </div>
-                <div>
-                  <span className="text-[#F97316]">TOTAL_ENTRIES:</span>{" "}
-                  {totalArticles}
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <section className="relative min-h-[600px]">
-          <div className="mb-16 flex items-center gap-6">
-            <div className="flex h-10 w-10 items-center justify-center bg-[#F97316] text-white">
-              <Hash size={20} strokeWidth={4} />
-            </div>
-            <h2 className="text-xl font-black uppercase tracking-[0.2em] text-[#0F172A]">
-              Latest_Archives
-            </h2>
-            <div className="h-[4px] flex-1 bg-[#0F172A]/5" />
-          </div>
-          <BlogSection posts={blogData as BlogPost[]} />
-        </section>
-
-        <footer className="mt-32 border-[6px] border-[#0F172A] bg-[#0F172A] p-10 text-white shadow-[20px_20px_0px_0px_rgba(30,58,138,0.1)] md:p-20">
-          <div className="flex flex-col gap-16 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl space-y-8">
-              <div className="inline-flex items-center gap-3 bg-[#F97316] px-4 py-1 text-[10px] font-black uppercase tracking-[0.4em] text-[#0F172A]">
-                <Zap size={12} fill="currentColor" />
-                Stay_Updated
-              </div>
-              <h3 className="font-heading text-4xl font-black uppercase leading-tight tracking-tighter md:text-6xl">
-                Subscribe To <br />
-                <span className="text-[#1E3A8A] brightness-150">
-                  Technical_Feed.
-                </span>
-              </h3>
-            </div>
-
-            <div className="flex flex-col gap-8 lg:w-1/3">
-              <div className="group relative border-b-4 border-slate-700 pb-2 transition-colors focus-within:border-[#F97316]">
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                  Access_Point
-                </span>
-                <input
-                  type="email"
-                  placeholder="ENTER_YOUR_EMAIL"
-                  className="w-full bg-transparent py-4 font-mono text-xl font-bold uppercase outline-none placeholder:text-slate-800"
+      <div className="relative z-10 container mx-auto px-4">
+        {/* 🏆 2. Featured Post: The Spotlight Card */}
+        {featuredPost && (
+          <Link
+            href={`/blog/${featuredPost.slug}`}
+            className="group shadow-luminous hover:border-aurora-cyan/30 relative mb-24 block overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.02] backdrop-blur-sm transition-all duration-500"
+          >
+            <div className="grid min-h-[500px] gap-0 md:grid-cols-2">
+              <div className="relative aspect-video md:aspect-auto">
+                <Image
+                  src={featuredPost.coverImage}
+                  alt={featuredPost.title}
+                  fill
+                  className="object-cover grayscale transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"
                 />
-                <button className="absolute bottom-4 right-0 text-[#F97316] transition-transform hover:translate-x-2">
-                  <ArrowRight />
-                </button>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/20" />
+              </div>
+              <div className="flex flex-col justify-center p-10 md:p-16">
+                <div className="mb-8 flex items-center gap-6">
+                  <Badge variant="luminous" className="px-4 py-1">
+                    {featuredPost.category}
+                  </Badge>
+                  <span className="font-prompt text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                    {featuredPost.date.split("T")[0]}
+                  </span>
+                </div>
+                <h2 className="font-prompt group-hover:text-aurora-cyan mb-6 text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors md:text-5xl">
+                  {featuredPost.title}
+                </h2>
+                <p className="font-anuphan mb-10 line-clamp-3 text-lg leading-relaxed font-medium text-slate-400">
+                  {featuredPost.description}
+                </p>
+                <div className="font-prompt flex items-center gap-3 text-xs font-black tracking-widest text-white uppercase transition-all group-hover:translate-x-3">
+                  READ ARTICLE <ArrowRight className="text-aurora-cyan h-5 w-5" />
+                </div>
               </div>
             </div>
-          </div>
-        </footer>
+          </Link>
+        )}
+
+        {/* 📚 3. Regular Grid: Insight Gallery */}
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {regularPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous flex flex-col overflow-hidden rounded-[2.5rem] border-white/5 transition-all duration-500"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  className="object-cover grayscale transition-transform duration-700 group-hover:scale-110 hover:grayscale-0"
+                />
+                <div className="absolute top-6 left-6 z-10">
+                  <Badge
+                    variant="outline"
+                    className="border-white/10 bg-slate-950/40 backdrop-blur-md"
+                  >
+                    {post.category}
+                  </Badge>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-60" />
+              </div>
+
+              <div className="flex flex-1 flex-col p-8">
+                <div className="mb-6 flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="text-aurora-cyan h-3.5 w-3.5" /> {post.date.split("T")[0]}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="text-aurora-cyan h-3.5 w-3.5" /> {post.readingTime}
+                  </span>
+                </div>
+
+                <h3 className="font-prompt group-hover:text-aurora-cyan mb-4 line-clamp-2 text-2xl leading-tight font-black tracking-tighter text-white uppercase transition-colors">
+                  {post.title}
+                </h3>
+
+                <p className="font-anuphan mb-8 line-clamp-3 flex-1 text-base leading-relaxed font-medium text-slate-400 opacity-80">
+                  {post.description}
+                </p>
+
+                <div className="font-prompt mt-auto flex items-center gap-2 border-t border-white/5 pt-6 text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase transition-all group-hover:text-white">
+                  Full Details{" "}
+                  <ArrowRight className="text-aurora-cyan ml-auto h-4 w-4 transition-transform group-hover:-rotate-45" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </main>
-  )
-}
-
-function ArrowRight() {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="4"
-    >
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  )
+  );
 }
