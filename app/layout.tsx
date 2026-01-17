@@ -8,11 +8,13 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-// --- 1. Setup Fonts: Humanistic Palette ---
+// --- 1. Setup Fonts: Humanistic Palette (Optimized) ---
+// ✅ เพิ่ม preload: true และคงค่า display: "swap" เพื่อลด LCP Delay ตามรายงาน PageSpeed
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
 })
 
 const kanit = Kanit({
@@ -20,6 +22,7 @@ const kanit = Kanit({
   subsets: ["thai", "latin"],
   variable: "--font-kanit",
   display: "swap",
+  preload: true,
 })
 
 const prompt = Prompt({
@@ -27,12 +30,14 @@ const prompt = Prompt({
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
+  preload: true,
 })
 
 const anuphan = Anuphan({
   subsets: ["thai", "latin"],
   variable: "--font-anuphan",
   display: "swap",
+  preload: true,
 })
 
 // --- 2. SEO & Metadata Strategy ---
@@ -84,6 +89,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
+// ✅ ปรับจูน Viewport เพื่อลด Layout Shift และกำหนดสีธีมให้ชัดเจน
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -105,21 +111,21 @@ export default function RootLayout({
       <body
         className={cn(
           "bg-background min-h-screen font-sans antialiased transition-colors duration-500",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // ปรับให้เข้ากับธีม Luminous
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", 
           inter.variable,
           kanit.variable,
           prompt.variable,
           anuphan.variable
         )}
       >
-        {/* แถบโหลด: Gradient สไตล์ Luminous Tech */}
+        {/* แถบโหลด: ปรับความเร็วเพื่อให้ไม่กวน Tรดหลักมากเกินไป */}
         <NextTopLoader
           color="linear-gradient(to right, oklch(0.75 0.12 200), oklch(0.82 0.18 155))"
           initialPosition={0.08}
-          height={3}
+          height={2} // ✅ ลดความหนาลงเพื่อลดงานของเบราว์เซอร์
           showSpinner={false}
           easing="ease"
-          speed={300}
+          speed={200} // ✅ ปรับความเร็วให้ snappy ขึ้น
         />
 
         <AppProvider>

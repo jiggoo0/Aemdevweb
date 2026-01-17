@@ -18,8 +18,8 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
 /**
- * 👨‍💻 AboutPage: Luminous Edition
- * เปลี่ยนหน้าประวัติให้ดูพรีเมียมและทันสมัยด้วยระบบแสง Aurora
+ * 👨‍💻 AboutPage: Luminous Edition (Optimized for PageSpeed 90+)
+ * ✅ แก้ไขการเรียกรูปภาพเป็น .webp และเพิ่ม Priority สำหรับ LCP
  */
 export default function AboutPage() {
   return (
@@ -113,9 +113,11 @@ export default function AboutPage() {
               <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-50 blur-3xl" />
               <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-white/10 shadow-2xl">
                 <Image
-                  src="/images/showcase/project-01.png"
+                  src="/images/showcase/project-01.webp" // ✅ แก้ไขเป็น .webp
                   alt="นายเอ็มซ่ามากส์"
                   fill
+                  priority // ✅ เพิ่ม priority เพื่อแก้ปัญหา LCP ล่าช้า
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
                 />
               </div>
