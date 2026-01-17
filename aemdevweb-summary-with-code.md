@@ -1,15 +1,15 @@
 # 📑 Project Context Summary (Full Scan)
 
 <!--
-  Domain: www.unlink-th.com
-  Canonical: https://www.unlink-th.com
-  Generated: 2026-01-18 03:01:14
+  Domain: www.aemdevweb.com
+  Canonical: https://aemdevweb.com
+  Generated: 2026-01-18 03:46:33
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 03:01:14**_
-> **Project:** www.unlink-th.com
-> **URL:** https://www.unlink-th.com
+_Generated on: **2026-01-18 03:46:33**_
+> **Project:** www.aemdevweb.com
+> **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
@@ -19,14 +19,14 @@ _Generated on: **2026-01-18 03:01:14**_
 ```text
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.6 kB         249 kB
+┌ ○ /                                    16.1 kB         246 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                          2.45 kB         242 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
 ├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         244 kB
+├ ● /[template]/[slug]                   4.86 kB         245 kB
 ├   ├ /SalePage/shop-master-pro
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
@@ -38,10 +38,10 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                           3 kB         162 kB
+├ ○ /case-studies                        2.87 kB         162 kB
 ├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th                 3 kB         162 kB
-├ ○ /contact                             3.12 kB         224 kB
+├ ○ /case-studies/unlink-th              2.87 kB         162 kB
+├ ○ /contact                             3.12 kB         225 kB
 ├ ○ /robots.txt                              0 B            0 B
 ├ ○ /services                            4.44 kB         229 kB
 ├ ● /services/[slug]                     4.46 kB         234 kB
@@ -53,7 +53,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          1.94 kB
+  └ other shared chunks (total)          2.02 kB
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
@@ -62,7 +62,7 @@ Route (app)                                 Size  First Load JS
 
 ## 📊 2. File Statistics by Extension
 ```text
-     62 tsx
+     63 tsx
      16 ts
      10 png
       6 webp
@@ -118,6 +118,7 @@ Route (app)                                 Size  First Load JS
     📄 ValueProp.tsx
     📄 Testimonials.tsx
     📄 InsightsSection.tsx
+    📄 HomeClientSections.tsx
   📂 sales-engine/
     📄 PriceEstimator.tsx
     📄 WorkProcess.tsx
@@ -386,7 +387,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 02:56:00
+Generated at: 2026-01-18 03:31:26
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -402,14 +403,14 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.6 kB         249 kB
+┌ ○ /                                    16.1 kB         246 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                          2.45 kB         242 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
 ├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         244 kB
+├ ● /[template]/[slug]                   4.86 kB         245 kB
 ├   ├ /SalePage/shop-master-pro
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
@@ -421,10 +422,10 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                           3 kB         162 kB
+├ ○ /case-studies                        2.87 kB         162 kB
 ├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th                 3 kB         162 kB
-├ ○ /contact                             3.12 kB         224 kB
+├ ○ /case-studies/unlink-th              2.87 kB         162 kB
+├ ○ /contact                             3.12 kB         225 kB
 ├ ○ /robots.txt                              0 B            0 B
 ├ ○ /services                            4.44 kB         229 kB
 ├ ● /services/[slug]                     4.46 kB         234 kB
@@ -436,7 +437,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          1.94 kB
+  └ other shared chunks (total)          2.02 kB
 
 
 ○  (Static)   prerendered as static content
@@ -772,25 +773,21 @@ export default function RootLayout({
 #### 🔍 Path: `app/(main)/page.tsx`
 ```typescript
 /** @format */
-import { Metadata } from "next"
-import { Suspense } from "react"
 
-// 🧩 Components - Landing
+import { Metadata } from "next"
+
+// 🧩 Components - Static Imports (ส่วนที่ต้องการความเร็ว FCP สูงสุด)
 import { Hero } from "@/components/landing/Hero"
 import { ValueProp } from "@/components/landing/ValueProp"
-import { Testimonials } from "@/components/landing/Testimonials"
 import { InsightsSection } from "@/components/landing/InsightsSection"
-
-// 🧩 Components - Sales Engine
-import { PriceEstimator } from "@/components/sales-engine/PriceEstimator"
 import { WorkProcess } from "@/components/sales-engine/WorkProcess"
-import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
-
-// 🧩 Components - Shared
 import { TrustBadge } from "@/components/shared/TrustBadge"
 import ServiceCard from "@/components/shared/ServiceCard"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
+
+// 🚀 นำเข้ากลุ่ม Client Sections ที่เราแยกออกมา
+import HomeClientSections from "@/components/landing/HomeClientSections"
 
 // 📦 Data
 import { servicesData } from "@/constants/services-data"
@@ -804,43 +801,36 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className="bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan relative flex min-h-screen flex-col overflow-x-hidden">
-      {/* 🌌 Luminous Background: แสง Aurora เต้นระบำทั่วหน้าเว็บ */}
+      {/* 🌌 Luminous Background */}
       <div className="aurora-bg -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.15]" />
       <div className="aurora-bg top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.1]" />
 
-      {/* 1. HERO SECTION: ประตูบานแรกสู่ความสว่างพรีเมียม */}
+      {/* 1. HERO & 2. TRUST BADGE */}
       <Hero />
-
-      {/* 2. TRUST BADGE: เชื่อมั่นทันทีใน 3 วินาที */}
       <div className="relative z-10 -mt-12 md:-mt-16">
         <TrustBadge />
       </div>
 
-      {/* 3. VALUE PROPOSITION: จุดต่างที่เหนือกว่าด้วย Technology */}
+      {/* 3. VALUE PROPOSITION */}
       <section className="relative overflow-hidden py-24">
-        {/* Soft Aurora Mesh Background */}
         <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 z-0 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br blur-3xl" />
         <ValueProp />
       </section>
 
-      {/* 4. IMPACT STATS: ตัวเลขพลังที่ชัดเจนและสว่างไสว */}
-      <section className="shadow-luminous relative z-10 border-y border-white/5 bg-white/[0.03] py-24 backdrop-blur-3xl">
-        <ImpactStats />
-      </section>
+      {/* 🚀 4, 8, 9. DYNAMIC SECTIONS (Client-side Load) */}
+      <HomeClientSections />
 
-      {/* 5. INSIGHTS & CASE STUDIES: ผลงานและบทความในสไตล์ Smart Tabs */}
+      {/* 5. INSIGHTS */}
       <InsightsSection />
 
-      {/* 6. SERVICES: โซลูชันที่ปรับตามสเกลธุรกิจ (Luminous Card Style) */}
+      {/* 6. SERVICES */}
       <section id="services" className="relative container mx-auto px-4 py-32">
         <div className="mx-auto mb-20 max-w-3xl text-center">
           <h2 className="text-luminous mb-8 text-4xl uppercase md:text-7xl">
             Services <span className="text-slate-600">&</span> Solutions
           </h2>
-          <p className="text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
-            เลือกแพ็กเกจที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืน{" "}
-            <br className="hidden md:block" />
-            ตั้งแต่ธุรกิจเริ่มต้นจนถึงระดับ Corporate
+          <p className="text-lg font-medium text-slate-400 md:text-xl">
+            เลือกแพ็กเกจที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืน
           </p>
         </div>
 
@@ -851,59 +841,18 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. PROCESS: ความชัดเจนที่นุ่มนวลและเป็นมิตร */}
+      {/* 7. PROCESS */}
       <WorkProcess />
 
-      {/* 8. PRICE ESTIMATOR: ระบบประเมินราคา (Interactive Luminous) */}
-      <section id="pricing" className="container mx-auto px-4 py-32">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-16 text-center">
-            <span className="text-aurora-cyan mb-4 block text-[10px] font-black tracking-[0.3em] uppercase">
-              Transparent Pricing
-            </span>
-            <h2 className="text-luminous text-3xl tracking-tighter uppercase md:text-6xl">
-              ประเมินราคาเบื้องต้น
-            </h2>
-          </div>
-
-          <Suspense
-            fallback={
-              <div className="h-[500px] w-full animate-pulse rounded-4xl border border-white/10 bg-white/5" />
-            }
-          >
-            <PriceEstimator />
-          </Suspense>
-        </div>
-      </section>
-
-      {/* 9. TESTIMONIALS: คำยืนยันจากลูกค้าตัวจริงบนพื้นหลัง Midnight */}
-      <section className="rounded-t-4xl border-t border-white/5 bg-white/[0.01] py-32">
-        <Testimonials />
-      </section>
-
-      {/* 10. FINAL CTA: จุดปิดการขายที่ส่องสว่างและทรงพลัง */}
+      {/* 10. FINAL CTA */}
       <section className="container mx-auto mb-40 px-4">
         <div className="shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] p-12 text-center transition-all duration-700 md:p-32">
-          <div className="aurora-bg -right-40 -bottom-40 h-[600px] w-[600px] opacity-20" />
-
-          <h2 className="text-luminous relative z-10 mb-10 text-4xl leading-none tracking-tighter uppercase md:text-8xl">
+          <h2 className="text-luminous relative z-10 mb-10 text-4xl uppercase md:text-8xl">
             Ready to <span className="text-aurora-emerald">Scale</span> <br />
             Your Business?
           </h2>
-          <p className="relative z-10 mx-auto mb-16 max-w-2xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
-            หยุดให้เว็บไซต์ช้าฉุดรั้งกำไรของคุณ
-            เริ่มสร้างระบบปิดการขายอัตโนมัติวันนี้
-          </p>
-
           <div className="relative z-10 flex flex-col items-center justify-center gap-10 sm:flex-row">
             <LineLeadForm variant="button" label="เริ่มโปรเจกต์กับเรา" />
-            <div className="flex items-center gap-4 text-xs font-black tracking-[0.25em] text-slate-500 uppercase">
-              <span className="relative flex h-4 w-4">
-                <span className="bg-aurora-cyan absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-                <span className="bg-aurora-cyan relative inline-flex h-4 w-4 rounded-full"></span>
-              </span>
-              Available Now
-            </div>
           </div>
         </div>
       </section>
@@ -915,38 +864,112 @@ export default function HomePage() {
 ```
 ---
 
+#### 🔍 Path: `components/landing/HomeClientSections.tsx`
+```typescript
+/** @format */
+"use client"
+
+import React from "react"
+import dynamic from "next/dynamic"
+
+/**
+ * 🚀 HomeClientSections: Luminous Performance Engine (Fix: Named Export)
+ * ✅ แก้ไข Error: Element type is invalid โดยการระบุ Property ในการ Import
+ */
+
+// 1. 🏗️ Dynamic Imports: ต้องระบุ .then(mod => mod.ComponentName)
+const PriceEstimator = dynamic(
+  () =>
+    import("@/components/sales-engine/PriceEstimator").then(
+      (mod) => mod.PriceEstimator
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-[600px] w-full animate-pulse rounded-[3rem] bg-white/5" />
+    ),
+  }
+)
+
+const Testimonials = dynamic(
+  () =>
+    import("@/components/landing/Testimonials").then((mod) => mod.Testimonials),
+  { ssr: false }
+)
+
+const ImpactStats = dynamic(
+  () =>
+    import("@/components/sales-engine/ImpactStats").then(
+      (mod) => mod.ImpactStats
+    ),
+  { ssr: false }
+)
+
+export default function HomeClientSections() {
+  return (
+    <>
+      {/* 📊 ส่วนที่ 4: Impact Stats */}
+      <section className="shadow-luminous relative z-10 border-y border-white/5 bg-white/[0.03] py-24 backdrop-blur-3xl">
+        <ImpactStats />
+      </section>
+
+      {/* 💰 ส่วนที่ 8: Pricing */}
+      <section id="pricing" className="container mx-auto px-4 py-32">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16 text-center">
+            <span className="text-aurora-cyan mb-4 block text-[10px] font-black tracking-[0.3em] uppercase">
+              Transparent Pricing
+            </span>
+            <h2 className="text-luminous text-3xl tracking-tighter uppercase md:text-6xl">
+              ประเมินราคาเบื้องต้น
+            </h2>
+          </div>
+          <PriceEstimator />
+        </div>
+      </section>
+
+      {/* ⭐ ส่วนที่ 9: Testimonials */}
+      <section className="rounded-t-4xl border-t border-white/5 bg-white/[0.01] py-32">
+        <Testimonials />
+      </section>
+    </>
+  )
+}
+```
+---
+
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
 ```typescript
 /** @format */
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
 import {
   CheckCircle2,
   ArrowRight,
   Sparkles,
   // ✅ Fixed: Removed unused 'MessageCircle' to clear ESLint error
   Zap,
-} from "lucide-react";
+} from "lucide-react"
 
 // 📦 Data & Utils
 import {
   getServiceBySlug,
   getOtherServices,
   servicesData,
-} from "@/constants/services-data";
-import { siteConfig } from "@/constants/site-config";
+} from "@/constants/services-data"
+import { siteConfig } from "@/constants/site-config"
 
 // 🛠️ Components
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm";
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
-import { ServiceCard } from "@/components/shared/ServiceCard";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { ServiceCard } from "@/components/shared/ServiceCard"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }
 
 /**
@@ -955,7 +978,7 @@ interface PageProps {
 export async function generateStaticParams() {
   return servicesData.map((service) => ({
     slug: service.slug,
-  }));
+  }))
 }
 
 /**
@@ -964,10 +987,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
-  if (!service) return { title: "Service Not Found" };
+  if (!service) return { title: "Service Not Found" }
 
   return {
     title: `${service.title} | บริการทำเว็บไซต์โดย ${siteConfig.shortName}`,
@@ -975,19 +998,19 @@ export async function generateMetadata({
     openGraph: {
       images: [service.mockups.desktop],
     },
-  };
+  }
 }
 
 /**
  * 🚀 3. Main Service Detail Page
  */
 export default async function ServiceDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
-  if (!service) return notFound();
+  if (!service) return notFound()
 
-  const otherServices = getOtherServices(slug);
+  const otherServices = getOtherServices(slug)
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
@@ -1102,7 +1125,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </h3>
                 <p className="font-anuphan mb-8 font-medium text-slate-400">
                   ส่งข้อมูลให้เราประเมิน หรือนัดคุยรายละเอียดผ่าน{" "}
-                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5 นาทีครับ
+                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5
+                  นาทีครับ
                 </p>
                 {/* ✅ เรียกใช้ Lead Form */}
                 <LineLeadForm variant="default" />
@@ -1144,7 +1168,458 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <LineStickyButton />
     </main>
-  );
+  )
+}
+```
+---
+
+#### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
+```typescript
+/** @format */
+
+import { getAllPosts, getPostBySlug } from "@/lib/mdx"
+import { notFound } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { Metadata } from "next"
+import { MDXRemote } from "next-mdx-remote/rsc"
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Share2,
+  Sparkles,
+  MessageCircle,
+} from "lucide-react"
+
+// 🛠️ Components
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+
+/**
+ * 🎨 MDX Components Configuration
+ * ✅ Fixed: แก้ไขปัญหา href เป็น undefined โดยรองรับทั้ง url และ href จาก MDX
+ */
+const mdxComponents = {
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    const imgSrc = typeof props.src === "string" ? props.src : ""
+    return (
+      <Image
+        src={imgSrc}
+        width={800}
+        height={450}
+        className="rounded-3xl border border-white/10"
+        alt={props.alt || "Blog Image Content"}
+        loading="lazy"
+      />
+    )
+  },
+  // 🚀 CallToAction: รองรับทั้งการพิมพ์ <CallToAction url="..." /> หรือ href="..."
+  CallToAction: ({
+    title,
+    description,
+    href,
+    url,
+  }: {
+    title: string
+    description: string
+    href?: string
+    url?: string
+  }) => {
+    // 🎯 Fallback logic: ถ้าไม่มีทั้งคู่ให้ไปหน้า contact
+    const targetPath = href || url || "/contact"
+
+    return (
+      <div className="border-aurora-cyan/20 bg-aurora-cyan/5 shadow-luminous my-12 rounded-[2rem] border p-8 text-center">
+        <h3 className="font-prompt mb-4 text-2xl font-black text-white uppercase italic">
+          {title}
+        </h3>
+        <p className="font-anuphan mb-8 text-slate-400">{description}</p>
+        <Button variant="premium" asChild className="h-12 px-10">
+          <Link href={targetPath}>เริ่มโปรเจกต์ของคุณ</Link>
+        </Button>
+      </div>
+    )
+  },
+}
+
+type Props = {
+  params: Promise<{ slug: string }>
+}
+
+// ⚙️ SSG Build: สร้างหน้า Static ไว้ล่วงหน้า
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
+}
+
+// 🔍 SEO Metadata
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
+
+  if (!post) return {}
+
+  return {
+    title: `${post.title} | AemDevWeb`,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      images: [post.coverImage],
+    },
+  }
+}
+
+/**
+ * 📄 BlogPostPage: Luminous Edition
+ */
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
+
+  if (!post) return notFound()
+
+  return (
+    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+      {/* 🌌 Background Decor: Aurora Ambient */}
+      <div className="aurora-bg top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
+
+      <div className="relative z-10 container mx-auto max-w-4xl px-4">
+        {/* 🔙 Navigation: Back Link */}
+        <Link
+          href="/blog"
+          className="hover:text-aurora-cyan group font-prompt mb-12 inline-flex items-center text-xs font-black tracking-widest text-slate-500 uppercase transition-all"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-2" />
+          Back to Insights
+        </Link>
+
+        {/* 🏷️ Header: Luminous Title */}
+        <header className="mb-16 space-y-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <Badge variant="luminous" className="px-4 py-1.5">
+              {post.category}
+            </Badge>
+            <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
+              <span className="flex items-center">
+                <Calendar className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
+                {post.date.split("T")[0]}
+              </span>
+              <span className="flex items-center">
+                <Clock className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
+                {post.readingTime} READ
+              </span>
+            </div>
+          </div>
+
+          <h1 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-balance text-white uppercase italic md:text-6xl">
+            {post.title}
+          </h1>
+
+          <p className="font-anuphan text-xl leading-relaxed font-medium text-balance text-slate-400">
+            {post.description}
+          </p>
+        </header>
+
+        {/* 🖼️ Cover Image: Glass Showcase */}
+        <div className="shadow-luminous group relative mb-20 aspect-video w-full overflow-hidden rounded-[2.5rem] border border-white/10">
+          <div className="absolute inset-0 z-10 bg-gradient-to-t from-slate-950/60 to-transparent" />
+          <Image
+            src={post.coverImage}
+            alt={post.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            priority
+          />
+        </div>
+
+        {/* ✍️ Content Body: Humanistic Reading */}
+        <div className="prose prose-lg md:prose-xl prose-invert prose-emerald prose-headings:font-prompt prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-white prose-p:font-anuphan prose-p:text-slate-300 prose-p:leading-relaxed prose-p:font-medium prose-strong:text-aurora-cyan prose-a:text-aurora-cyan prose-a:no-underline hover:prose-a:underline prose-img:rounded-3xl prose-img:border prose-img:border-white/10 prose-code:text-aurora-emerald prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md mx-auto max-w-none">
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </div>
+
+        {/* 👤 Author & Share: Glass Panel */}
+        <div className="mt-20 flex flex-col items-center justify-between gap-8 rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl md:flex-row">
+          <div className="flex items-center gap-5">
+            <div className="from-aurora-cyan to-aurora-emerald shadow-aurora-glow relative size-14 rounded-2xl bg-gradient-to-br p-[1px]">
+              <div className="font-prompt flex h-full w-full items-center justify-center rounded-2xl bg-slate-950 text-xl font-black text-white">
+                A
+              </div>
+            </div>
+            <div>
+              <div className="font-prompt font-black tracking-wider text-white uppercase">
+                นายเอ็มซ่ามากส์
+              </div>
+              <div className="font-anuphan mt-1 text-xs font-bold tracking-widest text-slate-500 uppercase">
+                Fullstack Dev & Consultant
+              </div>
+            </div>
+          </div>
+
+          <Button
+            variant="outline"
+            className="hover:border-aurora-cyan group h-12 gap-2 rounded-xl px-8"
+          >
+            <Share2 className="h-4 w-4 transition-transform group-hover:scale-110" />
+            Share Insight
+          </Button>
+        </div>
+
+        {/* 🚀 Final CTA */}
+        <div className="border-aurora-cyan/30 bg-aurora-cyan/5 group shadow-luminous relative mt-16 overflow-hidden rounded-[3rem] border p-10 text-center md:p-16">
+          <div className="aurora-bg -top-1/2 -left-1/2 h-full w-full opacity-10 transition-opacity group-hover:opacity-20" />
+          <div className="relative z-10">
+            <Sparkles className="text-aurora-cyan mx-auto mb-6 h-10 w-10 animate-pulse" />
+            <h3 className="font-prompt mb-6 text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
+              อ่านจบแล้ว... <br />
+              อยากมีเว็บที่ <span className="text-aurora-cyan">ไบร์ท</span>{" "}
+              แบบนี้ไหม?
+            </h3>
+            <p className="font-anuphan mx-auto mb-10 max-w-xl text-lg leading-relaxed font-medium text-slate-400">
+              ปรึกษาฟรี ไม่คิดเงิน
+              นายเอ็มพร้อมช่วยวางโครงสร้างที่ปิดการขายได้จริง
+              ทักมาคุยไอเดียกันก่อนได้ครับ
+            </p>
+            <Button
+              variant="premium"
+              size="lg"
+              className="shadow-aurora-glow group h-18 px-12 text-lg"
+              asChild
+            >
+              <Link href="/contact">
+                <MessageCircle className="mr-3 h-6 w-6" />{" "}
+                ทักไลน์คุยงานกับคุณเอ็ม
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+```
+---
+
+#### 🔍 Path: `app/(main)/case-studies/page.tsx`
+```typescript
+/** @format */
+
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
+
+// ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles, Rocket)
+import { Trophy, Zap, ArrowRight } from "lucide-react"
+
+// ✅ Components & UI
+// ✅ Fixed: Removed unused LineLeadForm import
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+
+/**
+ * 🔍 SEO Metadata
+ */
+export const metadata: Metadata = {
+  title: "เบื้องหลัง Unlink-TH | เว็บไซต์ที่โหลดเร็วที่สุดในปี 2026",
+  description:
+    "เจาะลึกเบื้องหลังการสร้างเว็บไซต์ www.unlink-th.com ด้วย Next.js 15 และเทคนิค Technical SEO ขั้นสูง",
+  openGraph: {
+    images: ["/images/showcase/unlink-th.webp"],
+  },
+}
+
+/**
+ * 🚀 Case Study Page: Unlink-TH Engine
+ */
+export default function UnlinkCaseStudyPage() {
+  return (
+    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
+      {/* 🌌 1. HERO: Luminous Identity */}
+      <section className="relative pt-40 pb-24 text-center">
+        {/* Background Decor */}
+        <div className="aurora-bg top-0 left-1/2 h-[700px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
+
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex animate-pulse items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
+            <Trophy className="h-4 w-4" />
+            Flagship Project: Unlink-TH Engine
+          </div>
+
+          <h1 className="font-prompt mb-8 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase italic md:text-8xl">
+            เราทำเว็บให้ตัวเอง <br />
+            <span className="text-aurora-cyan drop-shadow-luminous">
+              เหมือนที่ทำให้ลูกค้า
+            </span>
+          </h1>
+
+          <p className="font-anuphan mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
+            นี่ไม่ใช่แค่ Portfolio แต่คือบทพิสูจน์ว่าทำไม{" "}
+            <span className="text-white italic">"ความเร็ว"</span> และ{" "}
+            <span className="text-white italic">"โครงสร้างที่ถูกต้อง"</span>{" "}
+            ถึงเป็นหัวใจสำคัญของการปิดการขายในปี 2026
+          </p>
+
+          <div className="flex justify-center">
+            <Button
+              variant="premium"
+              size="lg"
+              className="shadow-aurora-glow group h-20 px-12 text-xl"
+              asChild
+            >
+              <Link href="/contact">
+                อยากได้เว็บแรงๆ แบบนี้{" "}
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* 📊 2. STATS BAR: Luminous Impact */}
+      <section className="relative z-10 border-y border-white/5 bg-white/[0.02] py-16 backdrop-blur-xl">
+        <ImpactStats />
+      </section>
+
+      {/* 🛠️ 3. PROBLEM & SOLUTION: Technical Power */}
+      <section className="relative z-10 container mx-auto px-4 py-32">
+        <div className="grid items-center gap-20 lg:grid-cols-2">
+          {/* Image Side: PageSpeed Score */}
+          <div className="group relative">
+            <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-30 blur-3xl transition duration-1000 group-hover:opacity-60" />
+            <div className="shadow-luminous relative aspect-square overflow-hidden rounded-[3rem] border border-white/10 bg-slate-900">
+              <Image
+                src="/images/showcase/unlink-th.webp"
+                alt="Unlink-TH Performance Score"
+                fill
+                className="object-cover grayscale transition-all duration-1000 group-hover:grayscale-0"
+              />
+              <div className="glass-card border-aurora-emerald/40 shadow-aurora-glow absolute right-10 bottom-10 scale-110 rounded-[2rem] p-8 text-center">
+                <div className="font-prompt mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Google PageSpeed
+                </div>
+                <div className="font-prompt text-aurora-emerald text-6xl leading-none font-black tracking-tighter italic">
+                  100
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Side: Technical Specs */}
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <Badge
+                variant="luminous"
+                className="px-4 py-1 tracking-widest uppercase"
+              >
+                Technical Excellence
+              </Badge>
+              <h2 className="font-prompt text-4xl leading-tight font-black tracking-tighter text-white uppercase md:text-5xl">
+                ทำไมต้องเขียนใหม่ <br />
+                ด้วย <span className="text-aurora-cyan">Next.js 15?</span>
+              </h2>
+              <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
+                เป้าหมายของเราคือการสร้างมาตรฐานใหม่{" "}
+                <span className="text-white italic">"กดปุ๊บ มาปั๊บ"</span>{" "}
+                เพื่อลดอัตราการกดออกของลูกค้าที่ใจร้อนขึ้นทุกวัน
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                "ใช้ React Server Components (RSC) ลด JavaScript ฝั่ง Client",
+                "ทำ Image Optimization อัตโนมัติด้วย Next/Image Engine",
+                "โครงสร้าง Technical SEO 100% (JSON-LD, Semantic HTML)",
+                "Global Edge Deploy: เร็วแรงทั่วโลกผ่าน Vercel Infrastructure",
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="hover:border-aurora-cyan/30 group flex gap-5 rounded-2xl border border-white/5 bg-white/5 p-6 transition-all"
+                >
+                  <div className="bg-aurora-cyan/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <Zap className="text-aurora-cyan h-5 w-5 transition-transform group-hover:scale-125" />
+                  </div>
+                  <span className="font-anuphan leading-relaxed font-bold text-slate-200">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🚀 4. BUSINESS IMPACT: Result Cards */}
+      <section className="relative border-t border-white/5 bg-white/[0.01] py-32">
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <h2 className="font-prompt mb-20 text-4xl font-black tracking-tighter text-white uppercase italic md:text-6xl">
+            ผลลัพธ์ทางธุรกิจ <br />
+            <span className="text-aurora-cyan">ที่จับต้องได้</span>
+          </h2>
+          <div className="grid gap-10 md:grid-cols-3">
+            <div className="glass-card hover:border-aurora-cyan/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
+              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
+                3X
+              </div>
+              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                จำนวน Leads เพิ่มขึ้นต่อวัน
+              </div>
+            </div>
+
+            <div className="glass-card border-aurora-emerald/20 bg-aurora-emerald/5 shadow-luminous rounded-[2.5rem] p-12">
+              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
+                0.8s
+              </div>
+              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                เวลาโหลดเฉลี่ย (LCP)
+              </div>
+            </div>
+
+            <div className="glass-card hover:border-aurora-violet/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
+              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
+                No.1
+              </div>
+              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                Keyword หลักติดหน้าแรก
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 📢 5. FINAL CTA */}
+      <section className="relative z-10 container mx-auto px-4 py-40">
+        <div className="shadow-luminous relative overflow-hidden rounded-[4rem] border border-white/10 p-12 text-center md:p-24">
+          <div className="aurora-bg from-aurora-cyan to-aurora-violet inset-0 bg-gradient-to-br opacity-[0.1]" />
+          <div className="relative z-10 mx-auto max-w-4xl">
+            <h2 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-8xl">
+              ธุรกิจของคุณ <br />
+              <span className="text-aurora-cyan">ก็ "แรง" แบบนี้ได้</span>
+            </h2>
+            <div className="flex flex-col justify-center gap-6 sm:flex-row">
+              <Button
+                variant="premium"
+                size="lg"
+                className="shadow-aurora-glow group h-20 px-12 text-xl"
+                asChild
+              >
+                <Link href="/contact">
+                  ขอคำปรึกษาฟรี (ไม่ซื้อไม่ว่า){" "}
+                  <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <LineStickyButton />
+    </main>
+  )
 }
 ```
 ---
@@ -1425,24 +1900,24 @@ export type ServiceIconName =
   | "ShieldCheck"
   | "Code2"
   | "Gauge"
-  | "Zap";
+  | "Zap"
 
 export interface ServiceItem {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  longDescription?: string;
+  id: string
+  slug: string
+  title: string
+  description: string
+  longDescription?: string
   // ✅ เก็บชื่อ Icon เป็น String เพื่อความไหลลื่นของ Server/Client Components
-  iconName: ServiceIconName;
-  priceStart: number;
-  priceDisplay: string;
-  features: string[];
-  isFeatured?: boolean;
+  iconName: ServiceIconName
+  priceStart: number
+  priceDisplay: string
+  features: string[]
+  isFeatured?: boolean
   mockups: {
-    mobile: string;
-    desktop: string;
-  };
+    mobile: string
+    desktop: string
+  }
 }
 
 /**
@@ -1542,7 +2017,7 @@ export const servicesData: ServiceItem[] = [
       desktop: "/images/templates/project-01.webp",
     },
   },
-];
+]
 
 /**
  * 🛠️ Helpers Functionality
@@ -1550,15 +2025,509 @@ export const servicesData: ServiceItem[] = [
 
 // 🔍 ดึงข้อมูลบริการตาม Slug
 export const getServiceBySlug = (slug: string): ServiceItem | undefined =>
-  servicesData.find((s) => s.slug === slug);
+  servicesData.find((s) => s.slug === slug)
 
 // 🔍 ดึงเฉพาะบริการแนะนำ (Featured)
 export const getFeaturedServices = (): ServiceItem[] =>
-  servicesData.filter((s) => s.isFeatured);
+  servicesData.filter((s) => s.isFeatured)
 
 // 🔍 ดึงบริการอื่นๆ ที่ไม่ใช่ตัวปัจจุบัน (สำหรับ Cross-sell)
 export const getOtherServices = (currentSlug: string): ServiceItem[] =>
-  servicesData.filter((s) => s.slug !== currentSlug);
+  servicesData.filter((s) => s.slug !== currentSlug)
+```
+---
+
+#### 🔍 Path: `constants/site-config.ts`
+```typescript
+/** @format */
+import { Metadata } from "next"
+
+export const siteConfig = {
+  // 🏢 1. Brand Information (Identity)
+  name: "นายเอ็มซ่ามากส์",
+  companyName: "นายเอ็มซ่ามากส์ DevWeb Solutions",
+  shortName: "เอ็มซ่ามากส์",
+  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+
+  // 🏷️ SEO Defaults
+  title: "นายเอ็มซ่ามากส์ - รับทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+  description:
+    "รับทำเว็บไซต์หน้าเดียวปิดการขายฉบับ นายเอ็มซ่ามากส์ - คุยง่าย งานไว ไม่เรื่องเยอะ เน้นกดลิงก์ทักไลน์แล้วจบงานได้เลย ด้วยเทคโนโลยี Next.js 15",
+
+  // 🌐 2. Canonical URLs & Assets
+  url: "https://www.aemdevweb.com",
+  ogImage: "https://www.aemdevweb.com/og-image.png",
+
+  // 🔗 3. Social Media & Direct Links (The Sales Engine 🚀)
+  links: {
+    facebook: "https://www.facebook.com/share/186gv7BAsc/",
+    messenger: "https://m.me/aemdevweb",
+    line: "https://lin.ee/SVMBEJ8", // Link สำหรับกด Add Friend
+    lineId: "@127cnhtn", // Display ID
+    github: "https://github.com/aemdevweb", // Optional
+  },
+
+  // 📞 4. Contact Details
+  contact: {
+    email: "aemdevweb@gmail.com",
+    tel: "099-999-8989",
+    telDisplay: "099-999-8989",
+    address: "Bangkok, Thailand",
+  },
+
+  // 📣 5. Call to Action (Wording)
+  cta: {
+    main: "ทักไลน์ ปรึกษาเอ็มเลย",
+    secondary: "ดูผลงานที่ผ่านมา",
+    consult: "จองคิวทำเว็บ",
+    pricing: "เช็คราคาประเมิน",
+  },
+
+  // 📈 6. Keywords Strategy
+  keywords: [
+    "นายเอ็มซ่ามากส์",
+    "เอ็มซ่ามากส์รับทำเว็บ",
+    "รับทำเว็บไซต์ SME",
+    "รับทำ Sale Page",
+    "เว็บหน้าเดียวปิดการขาย",
+    "AEMDEVWEB",
+    "ทำเว็บทักไลน์",
+    "รับทำเว็บ Next.js",
+    "จ้างทำเว็บราคาถูก",
+  ],
+
+  // 🎨 7. Theme Identity
+  themeColor: "#059669", // Emerald-600 (AEM Green)
+} as const
+
+export type SiteConfig = typeof siteConfig
+
+/**
+ * 🛠️ Metadata Generator Helper
+ * ฟังก์ชันช่วยสร้าง SEO Tags ให้แต่ละหน้าอัตโนมัติ (Next.js 15 Standard)
+ */
+export function constructMetadata({
+  title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  icons = "/favicon.ico",
+  noIndex = false,
+}: {
+  title?: string
+  description?: string
+  image?: string
+  icons?: string
+  noIndex?: boolean
+} = {}): Metadata {
+  return {
+    title: {
+      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      template: `%s | ${siteConfig.shortName}`,
+    },
+    description,
+    // ✅ Fix: Cast as string[] to resolve 'readonly' incompatibility with Metadata type
+    keywords: siteConfig.keywords as unknown as string[],
+    authors: [
+      {
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
+    ],
+    creator: siteConfig.companyName,
+    openGraph: {
+      title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      description,
+      url: siteConfig.url,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title || siteConfig.name,
+        },
+      ],
+      type: "website",
+      locale: "th_TH",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      description,
+      images: [image],
+      creator: "@aemdevweb",
+    },
+    icons,
+    metadataBase: new URL(siteConfig.url),
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
+  }
+}
+```
+---
+
+#### 🔍 Path: `constants/templates-data.ts`
+```typescript
+/** @format */
+
+// 1. นำเข้า Type กลาง และทำการ Export ออกไปเพื่อให้ไฟล์อื่นที่ Import จากที่นี่ไม่พัง
+import { TemplateItem, CategoryInfo } from "@/types"
+export type { TemplateItem, CategoryInfo } // ✅ เพิ่มบรรทัดนี้เพื่อส่งต่อ Type
+
+// ⬇️ Import ข้อมูลจากไฟล์ย่อย
+import { temp_eco_01 } from "@/constants/template/temp_eco_01"
+import { temp_fb_01 } from "@/constants/template/temp_fb_01"
+import { temp_svc_01 } from "@/constants/template/temp_svc_01"
+import { temp_hb_01 } from "@/constants/template/temp_hb_01"
+
+// --------------------------------------------------------
+// 2. Define Categories
+// --------------------------------------------------------
+export const categoriesData: CategoryInfo[] = [
+  {
+    slug: "sale-page",
+    name: "Sale Page & E-Commerce",
+    description: "เทมเพลตสำหรับขายของออนไลน์ เน้นปิดการขายไว รองรับ Pixel/API",
+    themeColor: "emerald",
+  },
+  {
+    slug: "food-beverage",
+    name: "Food & Beverage",
+    description:
+      "ร้านอาหาร คาเฟ่ และธุรกิจเครื่องดื่ม ฟังก์ชันจองโต๊ะและเมนูออนไลน์",
+    themeColor: "amber",
+  },
+  {
+    slug: "corporate",
+    name: "Corporate & Services",
+    description: "บริษัท องค์กร และงานบริการ สร้างภาพลักษณ์ความน่าเชื่อถือ",
+    themeColor: "blue",
+  },
+  {
+    slug: "health-beauty",
+    name: "Health & Beauty",
+    description: "คลินิก สปา และสินค้าความงาม ดีไซน์สะอาดตา ดูพรีเมียม",
+    themeColor: "rose",
+  },
+]
+
+// --------------------------------------------------------
+// 3. Central Registry
+// --------------------------------------------------------
+export const templatesData: TemplateItem[] = [
+  temp_eco_01 as TemplateItem,
+  temp_fb_01 as TemplateItem,
+  temp_svc_01 as TemplateItem,
+  temp_hb_01 as TemplateItem,
+]
+
+// --------------------------------------------------------
+// 4. Helper Functions
+// --------------------------------------------------------
+export const getAllCategories = (): CategoryInfo[] => categoriesData
+
+export const getCategoryInfo = (slug: string): CategoryInfo | undefined => {
+  return categoriesData.find((c) => c.slug === slug)
+}
+
+export const getTemplatesByCategory = (
+  categorySlug: string
+): TemplateItem[] => {
+  if (!categorySlug || categorySlug === "all") return templatesData
+  return templatesData.filter((t) => t.category === categorySlug)
+}
+
+export const getTemplateBySlug = (slug: string): TemplateItem | undefined => {
+  return templatesData.find((t) => t.slug === slug)
+}
+
+export const getFeaturedTemplates = (): TemplateItem[] => {
+  // ✅ ใช้ Optional Chaining ป้องกันค่าว่าง
+  return templatesData.filter((t) => t.isBestSeller || t.isNew || t.isPopular)
+}
+
+export const getRelatedTemplates = (
+  currentSlug: string,
+  category: string,
+  limit: number = 3
+): TemplateItem[] => {
+  return templatesData
+    .filter((t) => t.category === category && t.slug !== currentSlug)
+    .slice(0, limit)
+}
+```
+---
+
+#### 🔍 Path: `constants/site-config.ts`
+```typescript
+/** @format */
+import { Metadata } from "next"
+
+export const siteConfig = {
+  // 🏢 1. Brand Information (Identity)
+  name: "นายเอ็มซ่ามากส์",
+  companyName: "นายเอ็มซ่ามากส์ DevWeb Solutions",
+  shortName: "เอ็มซ่ามากส์",
+  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+
+  // 🏷️ SEO Defaults
+  title: "นายเอ็มซ่ามากส์ - รับทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+  description:
+    "รับทำเว็บไซต์หน้าเดียวปิดการขายฉบับ นายเอ็มซ่ามากส์ - คุยง่าย งานไว ไม่เรื่องเยอะ เน้นกดลิงก์ทักไลน์แล้วจบงานได้เลย ด้วยเทคโนโลยี Next.js 15",
+
+  // 🌐 2. Canonical URLs & Assets
+  url: "https://www.aemdevweb.com",
+  ogImage: "https://www.aemdevweb.com/og-image.png",
+
+  // 🔗 3. Social Media & Direct Links (The Sales Engine 🚀)
+  links: {
+    facebook: "https://www.facebook.com/share/186gv7BAsc/",
+    messenger: "https://m.me/aemdevweb",
+    line: "https://lin.ee/SVMBEJ8", // Link สำหรับกด Add Friend
+    lineId: "@127cnhtn", // Display ID
+    github: "https://github.com/aemdevweb", // Optional
+  },
+
+  // 📞 4. Contact Details
+  contact: {
+    email: "aemdevweb@gmail.com",
+    tel: "099-999-8989",
+    telDisplay: "099-999-8989",
+    address: "Bangkok, Thailand",
+  },
+
+  // 📣 5. Call to Action (Wording)
+  cta: {
+    main: "ทักไลน์ ปรึกษาเอ็มเลย",
+    secondary: "ดูผลงานที่ผ่านมา",
+    consult: "จองคิวทำเว็บ",
+    pricing: "เช็คราคาประเมิน",
+  },
+
+  // 📈 6. Keywords Strategy
+  keywords: [
+    "นายเอ็มซ่ามากส์",
+    "เอ็มซ่ามากส์รับทำเว็บ",
+    "รับทำเว็บไซต์ SME",
+    "รับทำ Sale Page",
+    "เว็บหน้าเดียวปิดการขาย",
+    "AEMDEVWEB",
+    "ทำเว็บทักไลน์",
+    "รับทำเว็บ Next.js",
+    "จ้างทำเว็บราคาถูก",
+  ],
+
+  // 🎨 7. Theme Identity
+  themeColor: "#059669", // Emerald-600 (AEM Green)
+} as const
+
+export type SiteConfig = typeof siteConfig
+
+/**
+ * 🛠️ Metadata Generator Helper
+ * ฟังก์ชันช่วยสร้าง SEO Tags ให้แต่ละหน้าอัตโนมัติ (Next.js 15 Standard)
+ */
+export function constructMetadata({
+  title,
+  description = siteConfig.description,
+  image = siteConfig.ogImage,
+  icons = "/favicon.ico",
+  noIndex = false,
+}: {
+  title?: string
+  description?: string
+  image?: string
+  icons?: string
+  noIndex?: boolean
+} = {}): Metadata {
+  return {
+    title: {
+      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      template: `%s | ${siteConfig.shortName}`,
+    },
+    description,
+    // ✅ Fix: Cast as string[] to resolve 'readonly' incompatibility with Metadata type
+    keywords: siteConfig.keywords as unknown as string[],
+    authors: [
+      {
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
+    ],
+    creator: siteConfig.companyName,
+    openGraph: {
+      title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      description,
+      url: siteConfig.url,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title || siteConfig.name,
+        },
+      ],
+      type: "website",
+      locale: "th_TH",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
+      description,
+      images: [image],
+      creator: "@aemdevweb",
+    },
+    icons,
+    metadataBase: new URL(siteConfig.url),
+    ...(noIndex && {
+      robots: {
+        index: false,
+        follow: false,
+      },
+    }),
+  }
+}
+```
+---
+
+#### 🔍 Path: `constants/navigation.ts`
+```typescript
+/** @format */
+
+// --- 🏷️ INTERFACES ---
+export interface NavItem {
+  name: string
+  href: string
+  disabled?: boolean // ปุ่มจาง กดไม่ได้
+  external?: boolean // เปิดแท็บใหม่
+  badge?: "New" | "Hot" | "Sale" // ป้ายกำกับ
+  description?: string // คำอธิบายสั้นๆ (สำหรับ Mega Menu)
+}
+
+export interface FooterNavigation {
+  services: NavItem[]
+  company: NavItem[]
+  support: NavItem[]
+  legal: NavItem[] // ส่วนกฎหมาย
+}
+
+export interface NavigationConfig {
+  main: NavItem[]
+  footer: FooterNavigation
+}
+
+/**
+ * 🧭 ระบบ Navigation ฉบับ AemDevWeb (Updated 2026)
+ * จัดการลิงก์ทั้งหมดให้ตรงกับ Folder Structure ใน app/(main)/ และ app/(marketing)/
+ */
+export const navigation: NavigationConfig = {
+  // 🌟 เมนูหลัก (Header / Mobile Menu)
+  main: [
+    {
+      name: "หน้าแรก",
+      href: "/",
+    },
+    {
+      name: "บริการ",
+      href: "/services",
+    },
+    {
+      name: "เทมเพลต",
+      href: "/sale-page", // ชี้ไปที่ Category แรกของ Marketing Route
+      badge: "New",
+    },
+    {
+      name: "ผลงาน",
+      href: "/case-studies", // ✅ อ้างอิงตาม Folder: app/(main)/case-studies/
+    },
+    {
+      name: "บทความ",
+      href: "/blog",
+    },
+    {
+      name: "ติดต่อเรา",
+      href: "/contact",
+    },
+  ],
+
+  // 🦶 เมนูท้ายเว็บ (Footer)
+  footer: {
+    // 🛠️ หมวดหมู่บริการหลัก
+    services: [
+      {
+        name: "Sale Page ปิดการขาย",
+        href: "/services/sale-page",
+        badge: "Hot",
+      },
+      { name: "เว็บไซต์บริษัท SME", href: "/services/corporate" },
+      { name: "ระบบจัดการสต็อก", href: "/services/internal-system" },
+      { name: "ปรับความเร็ว & SEO", href: "/services/speed-seo" },
+    ],
+
+    // 🏢 หมวดหมู่บริษัท
+    company: [
+      { name: "เกี่ยวกับนายเอ็ม", href: "/about" },
+      { name: "ผลงานที่ผ่านมา", href: "/case-studies" },
+      {
+        name: "Unlink-TH Case Study",
+        href: "/case-studies/unlink-th",
+        badge: "Hot",
+      },
+      { name: "ร่วมงานกับเรา", href: "/careers", disabled: true },
+    ],
+
+    // 💬 ส่วนสนับสนุนและช่องทางติดต่อ
+    support: [
+      {
+        name: "ปรึกษาผ่าน Line",
+        href: "https://lin.ee/SVMBEJ8", // ✅ ตรวจสอบ ID กับ site-config
+        external: true,
+      },
+      { name: "เช็คราคาประเมิน", href: "/#pricing" },
+      { name: "แจ้งชำระเงิน", href: "/contact" },
+    ],
+
+    // ⚖️ กฎหมายและนโยบาย
+    legal: [
+      {
+        name: "นโยบายความเป็นส่วนตัว",
+        href: "/privacy-policy",
+        disabled: true,
+      },
+      {
+        name: "เงื่อนไขการให้บริการ",
+        href: "/terms-of-service",
+        disabled: true,
+      },
+    ],
+  },
+}
+
+// --- 🚀 NAMED EXPORTS ---
+// แยก export เพื่อให้เรียกใช้งานได้เบาเครื่องขึ้น (Tree-shaking)
+export const mainNav = navigation.main as NavItem[]
+export const footerNav = navigation.footer as FooterNavigation
+
+/**
+ * ✅ Keywords Cast Fix
+ * ใช้สำหรับ Metadata ในไฟล์ที่เรียกใช้ siteConfig เพื่อป้องกัน TS Error 'readonly'
+ * หมายเหตุ: ปกติจะทำที่ site-config.ts แต่ถ้าเรียกใช้ตรงนี้ให้ทำดังนี้:
+ */
+export const siteKeywords = [
+  "นายเอ็มซ่ามากส์",
+  "เอ็มซ่ามากส์รับทำเว็บ",
+  "รับทำเว็บไซต์ SME",
+  "รับทำ Sale Page",
+  "เว็บหน้าเดียวปิดการขาย",
+  "AEMDEVWEB",
+  "ทำเว็บทักไลน์",
+  "รับทำเว็บ Next.js",
+] as string[]
 ```
 ---
 
@@ -1848,61 +2817,61 @@ export default config
 
 // --- 🌐 SITE & NAVIGATION CONFIG ---
 export interface NavItem {
-  title: string;
-  name?: string; // รองรับคอมโพเนนต์ที่เรียกใช้ .name
-  href: string;
-  disabled?: boolean;
-  external?: boolean;
-  badge?: string;
+  title: string
+  name?: string // รองรับคอมโพเนนต์ที่เรียกใช้ .name
+  href: string
+  disabled?: boolean
+  external?: boolean
+  badge?: string
 }
 
 export interface NavSection {
-  title: string;
-  items: NavItem[];
+  title: string
+  items: NavItem[]
 }
 
 export interface SiteConfig {
-  name: string;
-  companyName: string;
-  description: string;
-  url: string;
-  ogImage: string;
+  name: string
+  companyName: string
+  description: string
+  url: string
+  ogImage: string
   links: {
-    line: string;
-    facebook?: string;
-    messenger?: string;
-    lineId?: string;
-    github?: string;
-  };
-  keywords: string[];
+    line: string
+    facebook?: string
+    messenger?: string
+    lineId?: string
+    github?: string
+  }
+  keywords: string[]
 }
 
 // --- 📄 BLOG & CONTENT (MDX) ---
 export interface BlogPostProps {
-  title: string;
-  excerpt?: string;
-  description?: string; // รองรับการดึงจาก MDX Metadata
-  slug: string;
-  date: string;
-  coverImage: string;
-  category?: string;
-  readingTime?: string; // แก้ Error ใน BlogCard.tsx
+  title: string
+  excerpt?: string
+  description?: string // รองรับการดึงจาก MDX Metadata
+  slug: string
+  date: string
+  coverImage: string
+  category?: string
+  readingTime?: string // แก้ Error ใน BlogCard.tsx
 }
 
 export interface BlogMetadata {
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  coverImage: string;
-  author: string;
-  readingTime?: string;
+  title: string
+  description: string
+  date: string
+  category: string
+  coverImage: string
+  author: string
+  readingTime?: string
 }
 
 export interface BlogPost extends BlogMetadata {
-  slug: string;
+  slug: string
   // ✅ Fixed: เปลี่ยน any เป็น unknown เพื่อความปลอดภัยของข้อมูล content
-  content?: unknown; 
+  content?: unknown
 }
 
 // --- 💼 SERVICES & SOLUTIONS ---
@@ -1911,44 +2880,44 @@ export type ServiceIconName =
   | "ShieldCheck"
   | "Code2"
   | "Gauge"
-  | "Zap";
+  | "Zap"
 
 export interface ServiceItem {
-  id: string;
-  title: string;
-  description: string;
-  longDescription?: string;
-  icon: ServiceIconName;
-  features: string[];
-  priceRange?: string;
-  slug: string;
-  priceDisplay?: string;
+  id: string
+  title: string
+  description: string
+  longDescription?: string
+  icon: ServiceIconName
+  features: string[]
+  priceRange?: string
+  slug: string
+  priceDisplay?: string
   mockups?: {
-    desktop: string;
-    mobile: string;
-  };
+    desktop: string
+    mobile: string
+  }
 }
 
 // --- 🏆 CASE STUDIES & SHOWCASE ---
 export interface ShowcaseStats {
-  label: string;
-  value: string;
+  label: string
+  value: string
 }
 
 export interface CaseStudyItem {
-  id: string;
-  title: string;
-  slug: string;
-  category: string;
-  description: string;
-  image: string;
-  stats: ShowcaseStats;
-  tags: string[];
-  results: string[];
+  id: string
+  title: string
+  slug: string
+  category: string
+  description: string
+  image: string
+  stats: ShowcaseStats
+  tags: string[]
+  results: string[]
   clientQuote?: {
-    text: string;
-    author: string;
-  };
+    text: string
+    author: string
+  }
 }
 
 // --- 🎨 TEMPLATE ENGINE ---
@@ -1958,64 +2927,64 @@ export type TemplateCategory =
   | "ECommerce"
   | "Service"
   | "Portfolio"
-  | string;
+  | string
 
 export interface CategoryInfo {
-  slug: string;
-  name: string;
-  description: string;
-  themeColor?: string;
+  slug: string
+  name: string
+  description: string
+  themeColor?: string
 }
 
 export interface TemplateItem {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  category: TemplateCategory;
-  image: string;
-  demoUrl?: string;
-  price?: number;
-  salePrice?: number;
-  features: string[];
-  isPopular?: boolean;
-  isNew?: boolean;
-  isBestSeller?: boolean;
-  themeColor?: string;
-  
+  id: string
+  slug: string
+  title: string
+  description: string
+  category: TemplateCategory
+  image: string
+  demoUrl?: string
+  price?: number
+  salePrice?: number
+  features: string[]
+  isPopular?: boolean
+  isNew?: boolean
+  isBestSeller?: boolean
+  themeColor?: string
+
   mockups?: {
-    desktop?: string;
-    mobile?: string;
-  };
+    desktop?: string
+    mobile?: string
+  }
 
   salesData?: {
-    soldCount: number;
-    rating: number;
-    reviews: number;
-  };
+    soldCount: number
+    rating: number
+    reviews: number
+  }
 }
 
 // --- 📩 LEAD & CONVERSION ---
 export interface LeadFormSubmission {
-  name: string;
-  email?: string;
-  lineId: string;
-  businessType: string;
-  budget: string;
-  message: string;
-  source: string;
-  timestamp: string;
+  name: string
+  email?: string
+  lineId: string
+  businessType: string
+  budget: string
+  message: string
+  source: string
+  timestamp: string
 }
 
 // --- ⭐ SOCIAL PROOF ---
 export interface TestimonialItem {
-  id: number;
-  content: string;
-  author: string;
-  role: string;
-  rating: number;
-  image?: string;
-  company?: string;
+  id: number
+  content: string
+  author: string
+  role: string
+  rating: number
+  image?: string
+  company?: string
 }
 ```
 ---
@@ -2027,17 +2996,19 @@ import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
 
 /**
- * 🚀 Next.js Config: Luminous Performance Edition
- * ปรับแต่งเพื่อความเร็วสูงสุดสำหรับโดเมน www.unlink-th.com
- * รองรับ Image Optimization และ MDX Rust-based Compiler
+ * 🚀 Next.js Config: Luminous Performance Edition (Tuned for 90+ Score)
+ * ปรับแต่งเพื่อลด TBT และ JavaScript Execution Time ตามรายงาน PageSpeed
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  // ✅ 1. เปิดระบบบีบอัดไฟล์ระดับสูงเพื่อลดขนาดการโอนถ่ายข้อมูล
+  compress: true,
+
   // 📄 รองรับไฟล์หลากหลายนามสกุลสำหรับระบบ Content & Sales Hub
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // 🖼️ Image Optimization: ยกระดับความเร็วด้วย AVIF และ WebP
+  // 🖼️ Image Optimization: ใช้ AVIF เป็น Priority เพื่อขนาดไฟล์ที่เล็กกว่า WebP อีก 20%
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -2045,23 +3016,30 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "lin.ee", // สำหรับ Assets จาก Line Official
+        hostname: "lin.ee",
       },
       {
         protocol: "https",
-        hostname: "**.supabase.co", // สำหรับ Database Assets จาก Supabase
+        hostname: "**.supabase.co",
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com", // สำหรับรูปประกอบชั่วคราว
+        hostname: "images.unsplash.com",
       },
     ],
   },
 
   // ⚡ Experimental Features: ขีดสุดของความเร็วระดับ Unlink-TH
   experimental: {
-    mdxRs: true, // 🦀 ใช้ Rust-based Compiler เพื่อความเร็วในการบิวด์ MDX
-    optimizePackageImports: ["lucide-react", "framer-motion", "sonner"], // ลดขนาด Bundle Size อัตโนมัติ
+    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX
+    // ✅ เพิ่มการ Optimize Package ที่ใช้ใน UI และ Animation ทั้งหมด
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "sonner",
+      "clsx",
+      "tailwind-merge",
+    ],
   },
 
   // 🛠️ Logging & Performance Monitoring
@@ -2074,7 +3052,6 @@ const nextConfig: NextConfig = {
 
 /**
  * 📝 MDX Configuration
- * ติดตั้ง Plugin พื้นฐานเพื่อความลื่นไหลในการเขียน Content
  */
 const withMDX = createMDX({
   options: {
@@ -2197,4 +3174,4 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 
-_Report generated by www.unlink-th.com Internal Automation._
+_Report generated by www.aemdevweb.com Internal Automation._

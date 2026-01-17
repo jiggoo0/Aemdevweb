@@ -3,17 +3,19 @@ import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
 
 /**
- * 🚀 Next.js Config: Luminous Performance Edition
- * ปรับแต่งเพื่อความเร็วสูงสุดสำหรับโดเมน www.unlink-th.com
- * รองรับ Image Optimization และ MDX Rust-based Compiler
+ * 🚀 Next.js Config: Luminous Performance Edition (Tuned for 90+ Score)
+ * ปรับแต่งเพื่อลด TBT และ JavaScript Execution Time ตามรายงาน PageSpeed
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
+  // ✅ 1. เปิดระบบบีบอัดไฟล์ระดับสูงเพื่อลดขนาดการโอนถ่ายข้อมูล
+  compress: true,
+
   // 📄 รองรับไฟล์หลากหลายนามสกุลสำหรับระบบ Content & Sales Hub
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // 🖼️ Image Optimization: ยกระดับความเร็วด้วย AVIF และ WebP
+  // 🖼️ Image Optimization: ใช้ AVIF เป็น Priority เพื่อขนาดไฟล์ที่เล็กกว่า WebP อีก 20%
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -21,23 +23,30 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "lin.ee", // สำหรับ Assets จาก Line Official
+        hostname: "lin.ee",
       },
       {
         protocol: "https",
-        hostname: "**.supabase.co", // สำหรับ Database Assets จาก Supabase
+        hostname: "**.supabase.co",
       },
       {
         protocol: "https",
-        hostname: "images.unsplash.com", // สำหรับรูปประกอบชั่วคราว
+        hostname: "images.unsplash.com",
       },
     ],
   },
 
   // ⚡ Experimental Features: ขีดสุดของความเร็วระดับ Unlink-TH
   experimental: {
-    mdxRs: true, // 🦀 ใช้ Rust-based Compiler เพื่อความเร็วในการบิวด์ MDX
-    optimizePackageImports: ["lucide-react", "framer-motion", "sonner"], // ลดขนาด Bundle Size อัตโนมัติ
+    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX
+    // ✅ เพิ่มการ Optimize Package ที่ใช้ใน UI และ Animation ทั้งหมด
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "sonner",
+      "clsx",
+      "tailwind-merge",
+    ],
   },
 
   // 🛠️ Logging & Performance Monitoring
@@ -50,7 +59,6 @@ const nextConfig: NextConfig = {
 
 /**
  * 📝 MDX Configuration
- * ติดตั้ง Plugin พื้นฐานเพื่อความลื่นไหลในการเขียน Content
  */
 const withMDX = createMDX({
   options: {

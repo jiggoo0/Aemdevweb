@@ -1,33 +1,33 @@
 /** @format */
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
 import {
   CheckCircle2,
   ArrowRight,
   Sparkles,
   // ✅ Fixed: Removed unused 'MessageCircle' to clear ESLint error
   Zap,
-} from "lucide-react";
+} from "lucide-react"
 
 // 📦 Data & Utils
 import {
   getServiceBySlug,
   getOtherServices,
   servicesData,
-} from "@/constants/services-data";
-import { siteConfig } from "@/constants/site-config";
+} from "@/constants/services-data"
+import { siteConfig } from "@/constants/site-config"
 
 // 🛠️ Components
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm";
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
-import { ServiceCard } from "@/components/shared/ServiceCard";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { ServiceCard } from "@/components/shared/ServiceCard"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }
 
 /**
@@ -36,7 +36,7 @@ interface PageProps {
 export async function generateStaticParams() {
   return servicesData.map((service) => ({
     slug: service.slug,
-  }));
+  }))
 }
 
 /**
@@ -45,10 +45,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
-  if (!service) return { title: "Service Not Found" };
+  if (!service) return { title: "Service Not Found" }
 
   return {
     title: `${service.title} | บริการทำเว็บไซต์โดย ${siteConfig.shortName}`,
@@ -56,19 +56,19 @@ export async function generateMetadata({
     openGraph: {
       images: [service.mockups.desktop],
     },
-  };
+  }
 }
 
 /**
  * 🚀 3. Main Service Detail Page
  */
 export default async function ServiceDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  const service = getServiceBySlug(slug);
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
 
-  if (!service) return notFound();
+  if (!service) return notFound()
 
-  const otherServices = getOtherServices(slug);
+  const otherServices = getOtherServices(slug)
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
@@ -183,7 +183,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 </h3>
                 <p className="font-anuphan mb-8 font-medium text-slate-400">
                   ส่งข้อมูลให้เราประเมิน หรือนัดคุยรายละเอียดผ่าน{" "}
-                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5 นาทีครับ
+                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5
+                  นาทีครับ
                 </p>
                 {/* ✅ เรียกใช้ Lead Form */}
                 <LineLeadForm variant="default" />
@@ -225,5 +226,5 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
       <LineStickyButton />
     </main>
-  );
+  )
 }

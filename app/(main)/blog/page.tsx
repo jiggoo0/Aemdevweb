@@ -1,23 +1,24 @@
 /** @format */
 
-import { getAllPosts } from "@/lib/mdx";
-import Link from "next/link";
-import Image from "next/image";
-import { Metadata } from "next";
+import { getAllPosts } from "@/lib/mdx"
+import Link from "next/link"
+import Image from "next/image"
+import { Metadata } from "next"
 // ✅ Fixed: Removed unused 'Zap' import to clear ESLint error
-import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 // ✅ Fixed: Removed unused 'cn' import to clear ESLint error
 
 export const metadata: Metadata = {
   title: "Knowledge Hub | AEMDEVWEB",
-  description: "รวมเทคนิคการทำเว็บ High-Conversion และการตลาดออนไลน์สำหรับ SME ปี 2026",
-};
+  description:
+    "รวมเทคนิคการทำเว็บ High-Conversion และการตลาดออนไลน์สำหรับ SME ปี 2026",
+}
 
 export default async function BlogPage() {
-  const posts = await getAllPosts();
-  const featuredPost = posts.find((p) => p.isFeatured) || posts[0];
-  const regularPosts = posts.filter((p) => p.slug !== featuredPost?.slug);
+  const posts = await getAllPosts()
+  const featuredPost = posts.find((p) => p.isFeatured) || posts[0]
+  const regularPosts = posts.filter((p) => p.slug !== featuredPost?.slug)
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
@@ -32,11 +33,16 @@ export default async function BlogPage() {
         </div>
         <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-white uppercase italic md:text-8xl">
           คลังอาวุธ <br className="md:hidden" />
-          <span className="text-aurora-cyan drop-shadow-luminous">SME ยุคใหม่</span>
+          <span className="text-aurora-cyan drop-shadow-luminous">
+            SME ยุคใหม่
+          </span>
         </h1>
         <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
-          ไม่ใช่แค่บทความ แต่คือคู่มือการใช้งานเทคโนโลยีเพื่อสร้างยอดขาย <br className="hidden md:block" />
-          <span className="text-white">คัดเนื้อเน้นๆ เพื่อเครื่องยนต์ธุรกิจที่แรงกว่าเดิม</span>
+          ไม่ใช่แค่บทความ แต่คือคู่มือการใช้งานเทคโนโลยีเพื่อสร้างยอดขาย{" "}
+          <br className="hidden md:block" />
+          <span className="text-white">
+            คัดเนื้อเน้นๆ เพื่อเครื่องยนต์ธุรกิจที่แรงกว่าเดิม
+          </span>
         </p>
       </section>
 
@@ -73,7 +79,8 @@ export default async function BlogPage() {
                   {featuredPost.description}
                 </p>
                 <div className="font-prompt flex items-center gap-3 text-xs font-black tracking-widest text-white uppercase transition-all group-hover:translate-x-3">
-                  READ ARTICLE <ArrowRight className="text-aurora-cyan h-5 w-5" />
+                  READ ARTICLE{" "}
+                  <ArrowRight className="text-aurora-cyan h-5 w-5" />
                 </div>
               </div>
             </div>
@@ -109,10 +116,12 @@ export default async function BlogPage() {
               <div className="flex flex-1 flex-col p-8">
                 <div className="mb-6 flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="text-aurora-cyan h-3.5 w-3.5" /> {post.date.split("T")[0]}
+                    <Calendar className="text-aurora-cyan h-3.5 w-3.5" />{" "}
+                    {post.date.split("T")[0]}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Clock className="text-aurora-cyan h-3.5 w-3.5" /> {post.readingTime}
+                    <Clock className="text-aurora-cyan h-3.5 w-3.5" />{" "}
+                    {post.readingTime}
                   </span>
                 </div>
 
@@ -134,5 +143,5 @@ export default async function BlogPage() {
         </div>
       </div>
     </main>
-  );
+  )
 }

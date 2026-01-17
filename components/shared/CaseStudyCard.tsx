@@ -1,17 +1,17 @@
 /** @format */
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight, Zap, Sparkles } from "lucide-react";
-import { cn } from "@/lib/utils";
+import React from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { ArrowUpRight, Zap, Sparkles } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 interface CaseStudyCardProps {
-  title: string;
-  slug: string;
-  category: string;
-  image: string;
-  stats: { label: string; value: string };
-  themeColor?: string;
+  title: string
+  slug: string
+  category: string
+  image: string
+  stats: { label: string; value: string }
+  themeColor?: string
 }
 
 /**
@@ -59,9 +59,12 @@ export function CaseStudyCard({
               className={cn(
                 "shadow-aurora-glow inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-colors",
                 // ✅ แก้ไข: นำ themeColor มาใช้จริงเพื่อกำหนดสีข้อความ
-                themeColor === "aurora-cyan" && "text-aurora-cyan group-hover:text-white",
-                themeColor === "aurora-violet" && "text-aurora-violet group-hover:text-white",
-                themeColor === "aurora-emerald" && "text-aurora-emerald group-hover:text-white"
+                themeColor === "aurora-cyan" &&
+                  "text-aurora-cyan group-hover:text-white",
+                themeColor === "aurora-violet" &&
+                  "text-aurora-violet group-hover:text-white",
+                themeColor === "aurora-emerald" &&
+                  "text-aurora-emerald group-hover:text-white"
               )}
             >
               <Sparkles className="h-3 w-3 animate-pulse" />
@@ -72,8 +75,10 @@ export function CaseStudyCard({
                 "font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase transition-colors md:text-4xl",
                 // ✅ แก้ไข: นำ themeColor มาใช้ตอน hover title
                 themeColor === "aurora-cyan" && "group-hover:text-aurora-cyan",
-                themeColor === "aurora-violet" && "group-hover:text-aurora-violet",
-                themeColor === "aurora-emerald" && "group-hover:text-aurora-emerald"
+                themeColor === "aurora-violet" &&
+                  "group-hover:text-aurora-violet",
+                themeColor === "aurora-emerald" &&
+                  "group-hover:text-aurora-emerald"
               )}
             >
               {title}
@@ -83,7 +88,8 @@ export function CaseStudyCard({
           {/* ⚡ Luminous Performance Badge */}
           <div className="shadow-luminous group-hover:shadow-aurora-glow min-w-[120px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-3 group-hover:bg-white/10">
             <p className="font-anuphan mb-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-              <Zap className="text-aurora-emerald fill-aurora-emerald h-3 w-3 animate-pulse" /> {stats.label}
+              <Zap className="text-aurora-emerald fill-aurora-emerald h-3 w-3 animate-pulse" />{" "}
+              {stats.label}
             </p>
             <p className="text-2xl font-black tracking-tighter text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
               {stats.value}
@@ -116,5 +122,5 @@ export function CaseStudyCard({
         )}
       />
     </Link>
-  );
+  )
 }

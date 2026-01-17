@@ -60,7 +60,9 @@ export const getCategoryInfo = (slug: string): CategoryInfo | undefined => {
   return categoriesData.find((c) => c.slug === slug)
 }
 
-export const getTemplatesByCategory = (categorySlug: string): TemplateItem[] => {
+export const getTemplatesByCategory = (
+  categorySlug: string
+): TemplateItem[] => {
   if (!categorySlug || categorySlug === "all") return templatesData
   return templatesData.filter((t) => t.category === categorySlug)
 }

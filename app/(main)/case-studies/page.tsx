@@ -1,18 +1,18 @@
 /** @format */
 
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
 
 // ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles, Rocket)
-import { Trophy, Zap, ArrowRight } from "lucide-react";
+import { Trophy, Zap, ArrowRight } from "lucide-react"
 
 // ✅ Components & UI
 // ✅ Fixed: Removed unused LineLeadForm import
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
-import { ImpactStats } from "@/components/sales-engine/ImpactStats";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 /**
  * 🔍 SEO Metadata
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: ["/images/showcase/unlink-th.webp"],
   },
-};
+}
 
 /**
  * 🚀 Case Study Page: Unlink-TH Engine
@@ -212,5 +212,5 @@ export default function UnlinkCaseStudyPage() {
 
       <LineStickyButton />
     </main>
-  );
+  )
 }

@@ -1,13 +1,13 @@
 /** @format */
-"use client";
+"use client"
 
-import React from "react";
-import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
+import React from "react"
+import Link from "next/link"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CaseStudyCard } from "@/components/shared/CaseStudyCard"
 // ✅ Fixed: Removed unused 'BlogCard' import to clear ESLint error
 // import { BlogCard } from "@/components/shared/BlogCard";
-import { ArrowRight, Trophy, BookOpen, Sparkles } from "lucide-react";
+import { ArrowRight, Trophy, BookOpen, Sparkles } from "lucide-react"
 
 /**
  * 💡 InsightsSection: Luminous Edition
@@ -26,7 +26,8 @@ export function InsightsSection() {
           <div className="mb-24 flex flex-col items-center justify-between gap-12 lg:flex-row lg:items-end">
             <div className="max-w-3xl text-center lg:text-left">
               <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Latest Success Stories
+                <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Latest
+                Success Stories
               </div>
               <h2 className="text-luminous mb-8 text-5xl uppercase md:text-8xl">
                 Success <span className="text-slate-600">&</span> <br />
@@ -85,7 +86,9 @@ export function InsightsSection() {
             <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
               {/* ✅ ส่วนนี้รอพี่เอ็มดึงข้อมูล Blog มา Map ใส่ BlogCard ครับ */}
               <div className="col-span-full py-20 text-center">
-                <p className="font-anuphan text-slate-500">บทความใหม่กำลังเตรียมการผลิต...</p>
+                <p className="font-anuphan text-slate-500">
+                  บทความใหม่กำลังเตรียมการผลิต...
+                </p>
               </div>
             </div>
           </TabsContent>
@@ -105,5 +108,5 @@ export function InsightsSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

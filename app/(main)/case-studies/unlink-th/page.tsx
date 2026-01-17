@@ -1,24 +1,24 @@
 /** @format */
 
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
 
 // ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles)
-import { Zap, Trophy, ArrowRight } from "lucide-react";
+import { Zap, Trophy, ArrowRight } from "lucide-react"
 
 // ✅ Components & UI Layer
 // ✅ Fixed: Removed unused 'LineLeadForm' import
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
-import { ImpactStats } from "@/components/sales-engine/ImpactStats";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 export const metadata: Metadata = {
   title: "เบื้องหลัง Unlink-TH | เว็บไซต์ที่โหลดเร็วที่สุดในปี 2026",
   description:
     "เจาะลึกเบื้องหลังการสร้างเว็บไซต์ aemdevweb.com (Unlink-TH) ด้วย Next.js 15 และเทคนิค SEO ขั้นสูง",
-};
+}
 
 /**
  * 🚀 Unlink-TH Case Study: Flagship Performance
@@ -206,5 +206,5 @@ export default function UnlinkCaseStudyPage() {
 
       <LineStickyButton />
     </main>
-  );
+  )
 }

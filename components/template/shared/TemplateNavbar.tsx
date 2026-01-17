@@ -1,48 +1,48 @@
 /** @format */
 
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ArrowLeft, Menu, X, ShoppingBag } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { ArrowLeft, Menu, X, ShoppingBag } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 
 /**
  * 🔑 TemplateNavbar Component
  * แก้ไขปัญหา ESLint: react-hooks/set-state-in-effect แบบถาวร
  */
 export function TemplateNavbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   // 1. Scroll Detection
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // 2. ปิดเมนูอัตโนมัติเมื่อมีการเปลี่ยนหน้า
-  // ✅ แก้ไข: ใช้ requestAnimationFrame เพื่อเลื่อนการ setState ออกไป 
+  // ✅ แก้ไข: ใช้ requestAnimationFrame เพื่อเลื่อนการ setState ออกไป
   // ป้องกัน Error: cascading renders (react-hooks/set-state-in-effect)
   useEffect(() => {
     if (isMobileMenuOpen) {
       const timeoutId = setTimeout(() => {
-        setIsMobileMenuOpen(false);
-      }, 0);
-      return () => clearTimeout(timeoutId);
+        setIsMobileMenuOpen(false)
+      }, 0)
+      return () => clearTimeout(timeoutId)
     }
-  }, [pathname, isMobileMenuOpen]);
+  }, [pathname, isMobileMenuOpen])
 
   const navLinks = [
     { name: "ทั้งหมด", href: "/sale-page" },
     { name: "Sale Page", href: "/sale-page" },
     { name: "บริษัท", href: "/corporate" },
     { name: "ร้านอาหาร", href: "/food-beverage" },
-  ];
+  ]
 
   return (
     <header
@@ -83,7 +83,7 @@ export function TemplateNavbar() {
             {navLinks.map((link) => {
               const isActive =
                 pathname === link.href ||
-                (link.href !== "/" && pathname?.startsWith(link.href));
+                (link.href !== "/" && pathname?.startsWith(link.href))
 
               return (
                 <Link
@@ -98,7 +98,7 @@ export function TemplateNavbar() {
                 >
                   {link.name}
                 </Link>
-              );
+              )
             })}
           </div>
 
@@ -161,5 +161,5 @@ export function TemplateNavbar() {
         </div>
       )}
     </header>
-  );
+  )
 }

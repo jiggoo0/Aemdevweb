@@ -1,5 +1,5 @@
 /** @format */
-import { TemplateItem } from "../templates-data";
+import { TemplateItem } from "../templates-data"
 
 /**
  * ⚖️ Template: Elite Law Firm & Partners (Corporate & Professional)
@@ -44,4 +44,4 @@ export const temp_svc_01: TemplateItem = {
   },
 
   isPopular: true, // ✅ ใช้ isPopular แทน isBestSeller ตาม Interface
-};
+}

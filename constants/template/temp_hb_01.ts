@@ -1,5 +1,5 @@
 /** @format */
-import { TemplateItem } from "../templates-data";
+import { TemplateItem } from "../templates-data"
 
 /**
  * 💄 Template: Aura Beauty Clinic (Health & Beauty)
@@ -44,4 +44,4 @@ export const temp_hb_01: TemplateItem = {
   },
 
   isPopular: false, // ✅ ใช้ isPopular ตาม Interface
-};
+}

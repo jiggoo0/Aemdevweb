@@ -1,10 +1,10 @@
 /** @format */
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 import {
   MessageSquare,
   Copy,
@@ -12,12 +12,12 @@ import {
   ArrowRight,
   Loader2,
   CheckCircle2,
-} from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { siteConfig } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+} from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -25,16 +25,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
 
 // 🛡️ Validation Schema
 const formSchema = z.object({
@@ -44,13 +44,13 @@ const formSchema = z.object({
     .regex(/^0[689]\d{8}$/, "เบอร์โทรศัพท์ไม่ถูกต้อง (เช่น 0812345678)"),
   service: z.string().min(1, "กรุณาเลือกบริการ"),
   requirement: z.string().optional(),
-});
+})
 
 interface LineLeadFormProps {
-  defaultService?: string;
-  variant?: "default" | "button";
-  label?: string;
-  className?: string;
+  defaultService?: string
+  variant?: "default" | "button"
+  label?: string
+  className?: string
 }
 
 /**
@@ -63,8 +63,8 @@ export function LineLeadForm({
   label = "ส่งข้อมูลปรึกษาฟรี",
   className,
 }: LineLeadFormProps) {
-  const [isRedirecting, setIsRedirecting] = useState(false);
-  const { toast } = useToast();
+  const [isRedirecting, setIsRedirecting] = useState(false)
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,14 +74,14 @@ export function LineLeadForm({
       service: defaultService,
       requirement: "",
     },
-  });
+  })
 
   const handleDirectLine = () => {
-    window.open(siteConfig.links.line, "_blank");
-  };
+    window.open(siteConfig.links.line, "_blank")
+  }
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsRedirecting(true);
+    setIsRedirecting(true)
 
     const message = `
 👋 สนใจทำเว็บครับ/ค่ะ (${values.service})
@@ -91,28 +91,28 @@ export function LineLeadForm({
 📝 รายละเอียด: ${values.requirement || "-"}
 ----------------
 *ส่งจากหน้าเว็บ ${siteConfig.name}*
-    `.trim();
+    `.trim()
 
     try {
-      await navigator.clipboard.writeText(message);
+      await navigator.clipboard.writeText(message)
 
       toast({
         title: "✅ คัดลอกข้อมูลสำเร็จ!",
         description: "กำลังเปิด LINE... กด 'วาง' ในแชทได้เลยครับ",
         className: "bg-emerald-500 text-white font-bold border-none",
-      });
+      })
 
       setTimeout(() => {
-        window.open(siteConfig.links.line, "_blank");
-        setIsRedirecting(false);
-        form.reset();
-      }, 1500);
+        window.open(siteConfig.links.line, "_blank")
+        setIsRedirecting(false)
+        form.reset()
+      }, 1500)
     } catch {
       // ✅ Fixed: ลบ _err ออกเพื่อให้ Linter ผ่าน (Fallback redirect)
-      window.open(siteConfig.links.line, "_blank");
-      setIsRedirecting(false);
+      window.open(siteConfig.links.line, "_blank")
+      setIsRedirecting(false)
     }
-  };
+  }
 
   if (variant === "button") {
     return (
@@ -128,7 +128,7 @@ export function LineLeadForm({
         {label}
         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
       </Button>
-    );
+    )
   }
 
   return (
@@ -148,7 +148,8 @@ export function LineLeadForm({
           <div className="text-aurora-cyan/90 border-aurora-cyan/20 bg-aurora-cyan/5 flex items-start gap-3 rounded-2xl border p-4 text-sm backdrop-blur-md">
             <Sparkles className="text-aurora-cyan mt-0.5 h-5 w-5 shrink-0 animate-pulse" />
             <p className="font-anuphan leading-relaxed font-medium">
-              กรอกข้อมูลเบื้องต้นเพื่อให้เราเตรียมคำตอบที่แม่นยำที่สุด แล้วกดปุ่มเพื่อเริ่มคุยงานใน LINE ได้ทันทีครับ
+              กรอกข้อมูลเบื้องต้นเพื่อให้เราเตรียมคำตอบที่แม่นยำที่สุด
+              แล้วกดปุ่มเพื่อเริ่มคุยงานใน LINE ได้ทันทีครับ
             </p>
           </div>
 
@@ -271,5 +272,5 @@ export function LineLeadForm({
         </form>
       </Form>
     </div>
-  );
+  )
 }

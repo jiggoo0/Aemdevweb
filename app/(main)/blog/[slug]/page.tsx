@@ -1,11 +1,11 @@
 /** @format */
 
-import { getAllPosts, getPostBySlug } from "@/lib/mdx";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { getAllPosts, getPostBySlug } from "@/lib/mdx"
+import { notFound } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { Metadata } from "next"
+import { MDXRemote } from "next-mdx-remote/rsc"
 import {
   ArrowLeft,
   Calendar,
@@ -13,11 +13,11 @@ import {
   Share2,
   Sparkles,
   MessageCircle,
-} from "lucide-react";
+} from "lucide-react"
 
 // 🛠️ Components
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
 /**
  * 🎨 MDX Components Configuration
@@ -25,7 +25,7 @@ import { Badge } from "@/components/ui/badge";
  */
 const mdxComponents = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    const imgSrc = typeof props.src === "string" ? props.src : "";
+    const imgSrc = typeof props.src === "string" ? props.src : ""
     return (
       <Image
         src={imgSrc}
@@ -35,7 +35,7 @@ const mdxComponents = {
         alt={props.alt || "Blog Image Content"}
         loading="lazy"
       />
-    );
+    )
   },
   // 🚀 CallToAction: รองรับทั้งการพิมพ์ <CallToAction url="..." /> หรือ href="..."
   CallToAction: ({
@@ -44,17 +44,17 @@ const mdxComponents = {
     href,
     url,
   }: {
-    title: string;
-    description: string;
-    href?: string;
-    url?: string;
+    title: string
+    description: string
+    href?: string
+    url?: string
   }) => {
     // 🎯 Fallback logic: ถ้าไม่มีทั้งคู่ให้ไปหน้า contact
-    const targetPath = href || url || "/contact";
+    const targetPath = href || url || "/contact"
 
     return (
-      <div className="my-12 p-8 rounded-[2rem] border border-aurora-cyan/20 bg-aurora-cyan/5 text-center shadow-luminous">
-        <h3 className="font-prompt mb-4 text-2xl font-black uppercase italic text-white">
+      <div className="border-aurora-cyan/20 bg-aurora-cyan/5 shadow-luminous my-12 rounded-[2rem] border p-8 text-center">
+        <h3 className="font-prompt mb-4 text-2xl font-black text-white uppercase italic">
           {title}
         </h3>
         <p className="font-anuphan mb-8 text-slate-400">{description}</p>
@@ -62,28 +62,28 @@ const mdxComponents = {
           <Link href={targetPath}>เริ่มโปรเจกต์ของคุณ</Link>
         </Button>
       </div>
-    );
+    )
   },
-};
+}
 
 type Props = {
-  params: Promise<{ slug: string }>;
-};
+  params: Promise<{ slug: string }>
+}
 
 // ⚙️ SSG Build: สร้างหน้า Static ไว้ล่วงหน้า
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts()
   return posts.map((post) => ({
     slug: post.slug,
-  }));
+  }))
 }
 
 // 🔍 SEO Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
 
-  if (!post) return {};
+  if (!post) return {}
 
   return {
     title: `${post.title} | AemDevWeb`,
@@ -93,17 +93,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       images: [post.coverImage],
     },
-  };
+  }
 }
 
 /**
  * 📄 BlogPostPage: Luminous Edition
  */
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
 
-  if (!post) return notFound();
+  if (!post) return notFound()
 
   return (
     <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
@@ -202,7 +202,8 @@ export default async function BlogPostPage({ params }: Props) {
               แบบนี้ไหม?
             </h3>
             <p className="font-anuphan mx-auto mb-10 max-w-xl text-lg leading-relaxed font-medium text-slate-400">
-              ปรึกษาฟรี ไม่คิดเงิน นายเอ็มพร้อมช่วยวางโครงสร้างที่ปิดการขายได้จริง
+              ปรึกษาฟรี ไม่คิดเงิน
+              นายเอ็มพร้อมช่วยวางโครงสร้างที่ปิดการขายได้จริง
               ทักมาคุยไอเดียกันก่อนได้ครับ
             </p>
             <Button
@@ -220,5 +221,5 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </div>
     </article>
-  );
+  )
 }

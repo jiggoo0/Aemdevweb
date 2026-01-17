@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 02:56:00
+Generated at: 2026-01-18 03:31:26
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -15,14 +15,14 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.6 kB         249 kB
+┌ ○ /                                    16.1 kB         246 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                          2.45 kB         242 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
 ├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         244 kB
+├ ● /[template]/[slug]                   4.86 kB         245 kB
 ├   ├ /SalePage/shop-master-pro
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
@@ -34,10 +34,10 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                           3 kB         162 kB
+├ ○ /case-studies                        2.87 kB         162 kB
 ├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th                 3 kB         162 kB
-├ ○ /contact                             3.12 kB         224 kB
+├ ○ /case-studies/unlink-th              2.87 kB         162 kB
+├ ○ /contact                             3.12 kB         225 kB
 ├ ○ /robots.txt                              0 B            0 B
 ├ ○ /services                            4.44 kB         229 kB
 ├ ● /services/[slug]                     4.46 kB         234 kB
@@ -49,7 +49,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          1.94 kB
+  └ other shared chunks (total)          2.02 kB
 
 
 ○  (Static)   prerendered as static content

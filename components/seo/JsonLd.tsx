@@ -1,38 +1,38 @@
 /** @format */
 
-import React from "react";
-import { siteConfig } from "@/constants/site-config";
+import React from "react"
+import { siteConfig } from "@/constants/site-config"
 
 // ✅ 1. Type Definitions: Strong Typing for SEO Data
 export interface FAQItem {
-  question: string;
-  answer: string;
+  question: string
+  answer: string
 }
 
 export interface BreadcrumbItem {
-  name: string;
-  path: string;
+  name: string
+  path: string
 }
 
 export interface JsonLdData {
-  slug?: string;
-  name?: string; // ✅ รองรับชื่อองค์กรหรือชื่อหน้า
-  title?: string; // ✅ รองรับ Title ของหน้า
-  description?: string;
-  excerpt?: string;
-  image?: string;
-  url?: string;
-  coverImage?: string;
-  date?: string;
-  updatedAt?: string;
-  faqs?: FAQItem[];
-  items?: BreadcrumbItem[];
+  slug?: string
+  name?: string // ✅ รองรับชื่อองค์กรหรือชื่อหน้า
+  title?: string // ✅ รองรับ Title ของหน้า
+  description?: string
+  excerpt?: string
+  image?: string
+  url?: string
+  coverImage?: string
+  date?: string
+  updatedAt?: string
+  faqs?: FAQItem[]
+  items?: BreadcrumbItem[]
 }
 
 export interface JsonLdProps {
   // ✅ กำหนด Type ให้ชัดเจนเพื่อป้องกันการส่งค่าผิด (TS2820 Fixed)
-  type?: "Website" | "ProfessionalService" | "Article" | "FAQ" | "Breadcrumb";
-  data?: JsonLdData;
+  type?: "Website" | "ProfessionalService" | "Article" | "FAQ" | "Breadcrumb"
+  data?: JsonLdData
 }
 
 /**
@@ -41,11 +41,11 @@ export interface JsonLdProps {
  * เครื่องมือสร้าง Structured Data (Schema.org) เพื่อดันอันดับ SEO ในปี 2026
  */
 export const JsonLd = ({ type = "Website", data }: JsonLdProps) => {
-  if (!data && type !== "Website") return null;
+  if (!data && type !== "Website") return null
 
-  const baseUrl = siteConfig.url;
-  const currentUrl = data?.url || baseUrl;
-  const defaultImage = `${baseUrl}/images/og-image.png`;
+  const baseUrl = siteConfig.url
+  const currentUrl = data?.url || baseUrl
+  const defaultImage = `${baseUrl}/images/og-image.png`
 
   // 🏢 1. Schema: Website & Professional Service (Home & Landing)
   const websiteSchema = {
@@ -92,7 +92,7 @@ export const JsonLd = ({ type = "Website", data }: JsonLdProps) => {
       "https://facebook.com/aemdevweb",
       "https://github.com/aemdevweb",
     ].filter(Boolean), // Filter out empty strings
-  };
+  }
 
   // 📝 2. Schema: Article (Blog Post)
   const articleSchema =
@@ -127,7 +127,7 @@ export const JsonLd = ({ type = "Website", data }: JsonLdProps) => {
             "@id": currentUrl,
           },
         }
-      : null;
+      : null
 
   // ❓ 3. Schema: FAQ (Service & Support)
   const faqSchema =
@@ -144,7 +144,7 @@ export const JsonLd = ({ type = "Website", data }: JsonLdProps) => {
             },
           })),
         }
-      : null;
+      : null
 
   // 🍞 4. Schema: Breadcrumb (Navigation)
   const breadcrumbSchema =
@@ -161,32 +161,32 @@ export const JsonLd = ({ type = "Website", data }: JsonLdProps) => {
               : `${baseUrl}${item.path}`,
           })),
         }
-      : null;
+      : null
 
   // 🎯 Selector Logic
   const getSelectedSchema = () => {
     switch (type) {
       case "Article":
-        return articleSchema;
+        return articleSchema
       case "FAQ":
-        return faqSchema;
+        return faqSchema
       case "Breadcrumb":
-        return breadcrumbSchema;
+        return breadcrumbSchema
       case "ProfessionalService":
       case "Website":
       default:
-        return websiteSchema;
+        return websiteSchema
     }
-  };
+  }
 
-  const finalSchema = getSelectedSchema();
+  const finalSchema = getSelectedSchema()
 
-  if (!finalSchema) return null;
+  if (!finalSchema) return null
 
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(finalSchema) }}
     />
-  );
-};
+  )
+}

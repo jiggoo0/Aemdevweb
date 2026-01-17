@@ -1,5 +1,5 @@
 /** @format */
-import { TemplateItem } from "../templates-data";
+import { TemplateItem } from "../templates-data"
 
 /**
  * 🍣 Template: Sushi Master Omakase (Food & Beverage)
@@ -10,7 +10,7 @@ export const temp_fb_01: TemplateItem = {
   slug: "sushi-omakase",
   title: "Sushi Master Omakase",
   category: "Service", // ✅ ปรับให้ตรงกับ TemplateCategory ใน types/index.ts (หรือ SalePage ตามความเหมาะสม)
-  
+
   // 📝 Copywriting สำหรับ Hero: เน้นอารมณ์และการจอง
   description:
     "เปลี่ยนความพิถีพิถันของเชฟ ให้กลายเป็นประสบการณ์ดิจิทัลที่น่าหลงใหล ด้วยเทมเพลตที่ออกแบบมาเพื่อร้าน Fine Dining โดยเฉพาะ โดดเด่นด้วยระบบจองโต๊ะอัจฉริยะและ Digital Menu ที่สวยงาม",
@@ -19,7 +19,7 @@ export const temp_fb_01: TemplateItem = {
   // salePrice: 3900, // ข้อมูลส่วนลดสามารถใส่เพิ่มใน metadata หรือแสดงใน UI
 
   image: "/images/templates/project-01.webp",
-  
+
   // ✅ เชื่อมต่อ Demo URL
   demoUrl: "https://demo.aemdevweb.com/sushi-omakase",
 
@@ -44,4 +44,4 @@ export const temp_fb_01: TemplateItem = {
   },
 
   isPopular: true, // ✅ ใช้ isPopular แทน isBestSeller ตาม Interface ใน types/index.ts
-};
+}

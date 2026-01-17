@@ -1,7 +1,7 @@
 /** @format */
-"use client";
+"use client"
 
-import React from "react";
+import React from "react"
 // ✅ Fixed: Removed unused 'cn' and 'Zap' imports to clear ESLint errors
 import {
   Building2,
@@ -13,7 +13,7 @@ import {
   Gem,
   Cpu,
   Sparkles,
-} from "lucide-react";
+} from "lucide-react"
 
 const clients = [
   { id: 1, name: "Siam Cafe", icon: Coffee, category: "F&B" },
@@ -24,7 +24,7 @@ const clients = [
   { id: 6, name: "Fashionista", icon: ShoppingBag, category: "Ecommerce" },
   { id: 7, name: "Glow Spa", icon: Gem, category: "Beauty" },
   { id: 8, name: "Biz Corp", icon: Briefcase, category: "Corporate" },
-];
+]
 
 /**
  * 🎡 SocialProofBanner: Luminous Marquee Edition
@@ -70,8 +70,8 @@ export const SocialProofBanner = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 const LogoItem = ({ client }: { client: (typeof clients)[0] }) => (
   <div className="group flex cursor-pointer flex-col items-center gap-4 transition-all duration-500 hover:-translate-y-2">
@@ -85,6 +85,6 @@ const LogoItem = ({ client }: { client: (typeof clients)[0] }) => (
       {client.name}
     </span>
   </div>
-);
+)
 
-export default SocialProofBanner;
+export default SocialProofBanner

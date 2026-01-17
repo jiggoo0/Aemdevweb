@@ -7,24 +7,24 @@ export type ServiceIconName =
   | "ShieldCheck"
   | "Code2"
   | "Gauge"
-  | "Zap";
+  | "Zap"
 
 export interface ServiceItem {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  longDescription?: string;
+  id: string
+  slug: string
+  title: string
+  description: string
+  longDescription?: string
   // ✅ เก็บชื่อ Icon เป็น String เพื่อความไหลลื่นของ Server/Client Components
-  iconName: ServiceIconName;
-  priceStart: number;
-  priceDisplay: string;
-  features: string[];
-  isFeatured?: boolean;
+  iconName: ServiceIconName
+  priceStart: number
+  priceDisplay: string
+  features: string[]
+  isFeatured?: boolean
   mockups: {
-    mobile: string;
-    desktop: string;
-  };
+    mobile: string
+    desktop: string
+  }
 }
 
 /**
@@ -124,7 +124,7 @@ export const servicesData: ServiceItem[] = [
       desktop: "/images/templates/project-01.webp",
     },
   },
-];
+]
 
 /**
  * 🛠️ Helpers Functionality
@@ -132,12 +132,12 @@ export const servicesData: ServiceItem[] = [
 
 // 🔍 ดึงข้อมูลบริการตาม Slug
 export const getServiceBySlug = (slug: string): ServiceItem | undefined =>
-  servicesData.find((s) => s.slug === slug);
+  servicesData.find((s) => s.slug === slug)
 
 // 🔍 ดึงเฉพาะบริการแนะนำ (Featured)
 export const getFeaturedServices = (): ServiceItem[] =>
-  servicesData.filter((s) => s.isFeatured);
+  servicesData.filter((s) => s.isFeatured)
 
 // 🔍 ดึงบริการอื่นๆ ที่ไม่ใช่ตัวปัจจุบัน (สำหรับ Cross-sell)
 export const getOtherServices = (currentSlug: string): ServiceItem[] =>
-  servicesData.filter((s) => s.slug !== currentSlug);
+  servicesData.filter((s) => s.slug !== currentSlug)

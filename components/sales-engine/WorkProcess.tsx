@@ -1,18 +1,18 @@
 /** @format */
-"use client";
+"use client"
 
-import React from "react";
-import { motion } from "framer-motion";
+import React from "react"
+import { motion } from "framer-motion"
 import {
   MessageSquare,
   LayoutTemplate,
   ShieldCheck,
   ArrowRight,
   Sparkles,
-} from "lucide-react";
+} from "lucide-react"
 // ✅ Fixed: Removed unused 'Badge' import to clear ESLint error
-import { siteConfig } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
 const steps = [
   {
@@ -36,7 +36,7 @@ const steps = [
     color: "from-aurora-violet to-aurora-emerald",
     shadow: "shadow-aurora-glow",
   },
-];
+]
 
 /**
  * 🛣️ WorkProcess Component
@@ -66,7 +66,8 @@ export const WorkProcess = () => {
             มีเว็บเป็น <span className="text-aurora-emerald">ของตัวเอง</span>
           </h2>
           <p className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-            "ไม่ต้องกังวลเรื่องเทคนิค พี่เอ็มดูแลให้ครบทุกขั้นตอน จนกว่าเว็บจะออนไลน์ทำเงินให้คุณครับ"
+            "ไม่ต้องกังวลเรื่องเทคนิค พี่เอ็มดูแลให้ครบทุกขั้นตอน
+            จนกว่าเว็บจะออนไลน์ทำเงินให้คุณครับ"
           </p>
         </div>
 
@@ -161,5 +162,5 @@ export const WorkProcess = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
 /** @format */
-"use client";
+"use client"
 
-import React from "react";
-import Link from "next/link";
+import React from "react"
+import Link from "next/link"
 import {
   Facebook,
   Mail,
@@ -13,14 +13,14 @@ import {
   Github,
   Sparkles,
   LucideIcon,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { siteConfig } from "@/constants/site-config";
-import { navigation } from "@/constants/navigation";
-import { AemBrandBadge } from "./AemBrandBadge";
+} from "lucide-react"
+import { cn } from "@/lib/utils"
+import { siteConfig } from "@/constants/site-config"
+import { navigation } from "@/constants/navigation"
+import { AemBrandBadge } from "./AemBrandBadge"
 
 interface FooterProps {
-  className?: string;
+  className?: string
 }
 
 /**
@@ -28,7 +28,7 @@ interface FooterProps {
  * ปิดท้ายหน้าเว็บด้วยความพรีเมียมและความสว่างที่นวลตา
  */
 export function Footer({ className }: FooterProps) {
-  const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer
@@ -190,24 +190,19 @@ export function Footer({ className }: FooterProps) {
         </div>
       </div>
     </footer>
-  );
+  )
 }
 
 // 🧩 Footer Sub-components
 
 interface SocialIconProps {
-  href: string;
-  icon: LucideIcon; // ✅ Fixed: Specify LucideIcon instead of any
-  label: string;
-  colorClass: string;
+  href: string
+  icon: LucideIcon // ✅ Fixed: Specify LucideIcon instead of any
+  label: string
+  colorClass: string
 }
 
-function SocialIcon({
-  href,
-  icon: Icon,
-  label,
-  colorClass,
-}: SocialIconProps) {
+function SocialIcon({ href, icon: Icon, label, colorClass }: SocialIconProps) {
   return (
     <a
       href={href}
@@ -221,13 +216,13 @@ function SocialIcon({
     >
       <Icon className="h-5 w-5" />
     </a>
-  );
+  )
 }
 
 interface ContactItemProps {
-  icon: LucideIcon; // ✅ Fixed: Specify LucideIcon instead of any
-  text: string;
-  href?: string;
+  icon: LucideIcon // ✅ Fixed: Specify LucideIcon instead of any
+  text: string
+  href?: string
 }
 
 function ContactItem({ icon: Icon, text, href }: ContactItemProps) {
@@ -240,7 +235,7 @@ function ContactItem({ icon: Icon, text, href }: ContactItemProps) {
         {text}
       </span>
     </>
-  );
+  )
 
   return (
     <li className="group flex items-start gap-4">
@@ -254,5 +249,5 @@ function ContactItem({ icon: Icon, text, href }: ContactItemProps) {
         </div>
       )}
     </li>
-  );
+  )
 }

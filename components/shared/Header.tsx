@@ -1,22 +1,22 @@
 /** @format */
 
-"use client";
+"use client"
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight } from "lucide-react";
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Menu, X, ArrowRight } from "lucide-react"
 
-import { cn } from "@/lib/utils";
-import { siteConfig } from "@/constants/site-config";
-import { navigation } from "@/constants/navigation";
+import { cn } from "@/lib/utils"
+import { siteConfig } from "@/constants/site-config"
+import { navigation } from "@/constants/navigation"
 
-import Navbar from "@/components/shared/Navbar";
-import { Button } from "@/components/ui/button";
-import { AemBrandBadge } from "./AemBrandBadge";
+import Navbar from "@/components/shared/Navbar"
+import { Button } from "@/components/ui/button"
+import { AemBrandBadge } from "./AemBrandBadge"
 
 interface HeaderProps {
-  className?: string;
+  className?: string
 }
 
 /**
@@ -24,39 +24,39 @@ interface HeaderProps {
  * ระบบ Header ที่รองรับทั้ง Desktop และ Mobile พร้อมการจัดการ Scroll Interaction
  */
 export function Header({ className }: HeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   // 🖱️ 1. ระบบตรวจจับการ Scroll เพื่อเปลี่ยนดีไซน์ Header
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // 🔒 2. ล็อกการ Scroll ของ Body เมื่อเปิดเมนูมือถือ
   useEffect(() => {
     if (typeof document !== "undefined") {
-      document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
+      document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset"
     }
     return () => {
       if (typeof document !== "undefined")
-        document.body.style.overflow = "unset";
-    };
-  }, [isMobileMenuOpen]);
+        document.body.style.overflow = "unset"
+    }
+  }, [isMobileMenuOpen])
 
   // 🚩 3. ปิดเมนูอัตโนมัติเมื่อมีการเปลี่ยนหน้า (Pathname Change)
   useEffect(() => {
     if (isMobileMenuOpen) {
       const timeoutId = setTimeout(() => {
-        setIsMobileMenuOpen(false);
-      }, 0);
-      return () => clearTimeout(timeoutId);
+        setIsMobileMenuOpen(false)
+      }, 0)
+      return () => clearTimeout(timeoutId)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]); // ✅ ปิด Warning เพื่อให้ทำงานเฉพาะตอนเปลี่ยนหน้าเท่านั้น
+  }, [pathname]) // ✅ ปิด Warning เพื่อให้ทำงานเฉพาะตอนเปลี่ยนหน้าเท่านั้น
 
   return (
     <>
@@ -129,8 +129,8 @@ export function Header({ className }: HeaderProps) {
         className={cn(
           "bg-background/95 fixed inset-0 z-50 flex flex-col px-8 pt-36 pb-16 backdrop-blur-3xl transition-all duration-700 lg:hidden",
           isMobileMenuOpen
-            ? "visible translate-y-0 opacity-100 pointer-events-auto"
-            : "invisible -translate-y-full opacity-0 pointer-events-none"
+            ? "pointer-events-auto visible translate-y-0 opacity-100"
+            : "pointer-events-none invisible -translate-y-full opacity-0"
         )}
       >
         <div className="aurora-bg top-1/2 left-1/2 h-[500px] w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.1]" />
@@ -140,7 +140,7 @@ export function Header({ className }: HeaderProps) {
             const isActive =
               item.href === "/"
                 ? pathname === "/"
-                : pathname?.startsWith(item.href);
+                : pathname?.startsWith(item.href)
 
             return (
               <Link
@@ -148,7 +148,9 @@ export function Header({ className }: HeaderProps) {
                 href={item.href}
                 className={cn(
                   "font-prompt flex items-center justify-between border-b border-white/5 py-8 text-4xl font-black tracking-tighter uppercase transition-all",
-                  isActive ? "text-aurora-cyan" : "text-slate-500 hover:text-white"
+                  isActive
+                    ? "text-aurora-cyan"
+                    : "text-slate-500 hover:text-white"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -159,10 +161,10 @@ export function Header({ className }: HeaderProps) {
                   </span>
                 )}
               </Link>
-            );
+            )
           })}
         </div>
       </div>
     </>
-  );
+  )
 }

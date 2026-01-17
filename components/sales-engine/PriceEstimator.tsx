@@ -1,8 +1,8 @@
 /** @format */
-"use client";
+"use client"
 
-import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useMemo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   CheckCircle2,
   Calculator,
@@ -11,17 +11,17 @@ import {
   ShieldCheck,
   Zap,
   LucideIcon,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
 interface Feature {
-  id: string;
-  label: string;
-  price: number;
-  fixed?: boolean;
-  desc: string;
+  id: string
+  label: string
+  price: number
+  fixed?: boolean
+  desc: string
 }
 
 const features: Feature[] = [
@@ -56,27 +56,27 @@ const features: Feature[] = [
     price: 2500,
     desc: "ออกแบบเนื้อหาและพาดหัวเพื่อปิดการขายโดยเฉพาะ",
   },
-];
+]
 
 /**
  * 🍱 PriceEstimator Component
  * ระบบคำนวณราคาโปรเจกต์แบบ Interactive
  */
 export function PriceEstimator() {
-  const [selected, setSelected] = useState<string[]>(["base"]);
+  const [selected, setSelected] = useState<string[]>(["base"])
 
   const toggleFeature = (id: string, isFixed: boolean) => {
-    if (isFixed) return;
+    if (isFixed) return
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    );
-  };
+    )
+  }
 
   const totalPrice = useMemo(() => {
     return features
       .filter((f) => selected.includes(f.id))
-      .reduce((sum, f) => sum + f.price, 0);
-  }, [selected]);
+      .reduce((sum, f) => sum + f.price, 0)
+  }, [selected])
 
   return (
     <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
@@ -218,12 +218,12 @@ export function PriceEstimator() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 interface FeatureItemProps {
-  icon: LucideIcon;
-  text: string;
+  icon: LucideIcon
+  text: string
 }
 
 function FeatureItem({ icon: Icon, text }: FeatureItemProps) {
@@ -234,5 +234,5 @@ function FeatureItem({ icon: Icon, text }: FeatureItemProps) {
       </div>
       <span className="font-anuphan font-medium tracking-wide">{text}</span>
     </div>
-  );
+  )
 }

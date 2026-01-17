@@ -1,5 +1,5 @@
 /** @format */
-import { TemplateItem } from "../templates-data";
+import { TemplateItem } from "../templates-data"
 
 /**
  * 💎 Template: Shop Master Pro (E-Commerce Elite)
@@ -10,7 +10,7 @@ export const temp_eco_01: TemplateItem = {
   slug: "shop-master-pro",
   title: "Shop Master Pro",
   category: "SalePage", // ✅ ปรับให้ตรงกับ TemplateCategory ใน types/index.ts
-  
+
   // 📝 Copywriting สำหรับ Hero Section
   description:
     "หยุดเสียค่าธรรมเนียม Marketplace แพงๆ แล้วย้ายมาเป็นเจ้าของระบบร้านค้าที่ 'ปิดการขาย' ไวกว่าเดิม 3 เท่า ด้วยโครงสร้าง Next.js 15 ที่แรงที่สุดในปี 2026",
@@ -19,7 +19,7 @@ export const temp_eco_01: TemplateItem = {
   // salePrice: 5900, // ใส่ข้อมูลไว้ใน Context หากต้องการแสดงส่วนลดใน UI
 
   image: "/images/templates/project-01.webp",
-  
+
   // ✅ เชื่อมต่อ Demo URL
   demoUrl: "https://demo.aemdevweb.com/shop-master-pro",
 
@@ -45,4 +45,4 @@ export const temp_eco_01: TemplateItem = {
   },
 
   isPopular: true, // ✅ ใช้ isPopular แทน isBestSeller ตาม Interface
-};
+}

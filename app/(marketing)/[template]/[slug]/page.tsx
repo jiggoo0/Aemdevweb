@@ -1,32 +1,32 @@
 /** @format */
 
-import React, { Suspense } from "react";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { Rocket, Paintbrush, ShieldCheck } from "lucide-react";
+import React, { Suspense } from "react"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { Rocket, Paintbrush, ShieldCheck } from "lucide-react"
 
 // 📦 Data & Utils
-import { getTemplateBySlug, templatesData } from "@/constants/templates-data";
-import { siteConfig } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+import { getTemplateBySlug, templatesData } from "@/constants/templates-data"
+import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
 // 🧩 Layout Components
-import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar";
-import { Footer } from "@/components/shared/Footer";
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
+import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
+import { Footer } from "@/components/shared/Footer"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 // 🧩 Page Components (Updated Paths)
-import { TemplateHero } from "@/components/template/marketplace/TemplateHero";
-import { TemplateFeatures } from "@/components/template/shared/TemplateFeatures";
-import { DevicePreview } from "@/components/template/shared/DevicePreview";
-import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard";
-import { SalesHook } from "@/components/template/shared/SalesHook";
+import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
+import { TemplateFeatures } from "@/components/template/shared/TemplateFeatures"
+import { DevicePreview } from "@/components/template/shared/DevicePreview"
+import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
+import { SalesHook } from "@/components/template/shared/SalesHook"
 
 interface DetailPageProps {
   params: Promise<{
-    template: string;
-    slug: string;
-  }>;
+    template: string
+    slug: string
+  }>
 }
 
 /**
@@ -36,7 +36,7 @@ export async function generateStaticParams() {
   return templatesData.map((tpl) => ({
     template: tpl.category || "sale-page",
     slug: tpl.slug,
-  }));
+  }))
 }
 
 /**
@@ -45,12 +45,12 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: DetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const data = getTemplateBySlug(slug);
+  const { slug } = await params
+  const data = getTemplateBySlug(slug)
 
-  if (!data) return { title: "Template Not Found" };
+  if (!data) return { title: "Template Not Found" }
 
-  const title = `${data.title} - Sales Page Template | ${siteConfig.shortName}`;
+  const title = `${data.title} - Sales Page Template | ${siteConfig.shortName}`
   return {
     title,
     description: data.description,
@@ -59,28 +59,29 @@ export async function generateMetadata({
       title,
       description: data.description,
     },
-  };
+  }
 }
 
 /**
  * 🚀 3. Main Detail Page Component
  */
 export default async function TemplateDetailPage({ params }: DetailPageProps) {
-  const { slug } = await params;
-  const data = getTemplateBySlug(slug);
+  const { slug } = await params
+  const data = getTemplateBySlug(slug)
 
-  if (!data) return notFound();
+  if (!data) return notFound()
 
   // ✅ Theme Identity
   // ✅ Fixed Error TS2322: ใช้ Type Assertion เพื่อระบุกลุ่มสีที่ยอมรับ
-  const themeColor = (data.themeColor as
-    | "emerald"
-    | "blue"
-    | "indigo"
-    | "rose"
-    | "amber"
-    | "slate"
-    | "red") || "emerald";
+  const themeColor =
+    (data.themeColor as
+      | "emerald"
+      | "blue"
+      | "indigo"
+      | "rose"
+      | "amber"
+      | "slate"
+      | "red") || "emerald"
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased">
@@ -183,7 +184,9 @@ export default async function TemplateDetailPage({ params }: DetailPageProps) {
 
               {/* Step Process */}
               <section className="space-y-8">
-                <h3 className="text-2xl font-bold">ขั้นตอนการสั่งซื้อและติดตั้ง</h3>
+                <h3 className="text-2xl font-bold">
+                  ขั้นตอนการสั่งซื้อและติดตั้ง
+                </h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <StepItem number="01" text="เลือกเทมเพลตและชำระเงิน" />
                   <StepItem number="02" text="ส่งข้อมูลธุรกิจและรูปภาพแบรนด์" />
@@ -237,7 +240,7 @@ export default async function TemplateDetailPage({ params }: DetailPageProps) {
       <Footer />
       <LineStickyButton />
     </div>
-  );
+  )
 }
 
 // --- 🧩 SUB-COMPONENTS ---
@@ -247,9 +250,9 @@ function ServiceCard({
   title,
   description,
 }: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
+  icon: React.ReactNode
+  title: string
+  description: string
 }) {
   return (
     <div className="group rounded-[2rem] border border-slate-800 bg-slate-950 p-8 transition-all hover:bg-slate-900/50">
@@ -259,7 +262,7 @@ function ServiceCard({
       <h3 className="mb-3 text-xl font-bold text-white">{title}</h3>
       <p className="text-sm leading-relaxed text-slate-400">{description}</p>
     </div>
-  );
+  )
 }
 
 function StepItem({ number, text }: { number: string; text: string }) {
@@ -268,5 +271,5 @@ function StepItem({ number, text }: { number: string; text: string }) {
       <span className="text-2xl font-black text-slate-800">{number}</span>
       <span className="text-sm font-medium text-slate-300">{text}</span>
     </div>
-  );
+  )
 }

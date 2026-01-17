@@ -1,20 +1,27 @@
 /** @format */
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Monitor, Smartphone } from "lucide-react";
-import { cn } from "@/lib/utils";
+import React, { useState } from "react"
+import Image from "next/image"
+import { motion, AnimatePresence } from "framer-motion"
+import { Monitor, Smartphone } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 // ✅ Fixed: Removed unused Badge import to clear ESLint error
 // import { Badge } from "@/components/ui/badge";
 
 interface DevicePreviewProps {
-  desktopSrc: string;
-  mobileSrc: string;
-  title?: string;
-  themeColor?: "emerald" | "blue" | "indigo" | "rose" | "amber" | "slate" | "red";
+  desktopSrc: string
+  mobileSrc: string
+  title?: string
+  themeColor?:
+    | "emerald"
+    | "blue"
+    | "indigo"
+    | "rose"
+    | "amber"
+    | "slate"
+    | "red"
 }
 
 /**
@@ -27,7 +34,7 @@ export function DevicePreview({
   title = "Responsive Preview",
   themeColor = "emerald",
 }: DevicePreviewProps) {
-  const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
+  const [device, setDevice] = useState<"desktop" | "mobile">("desktop")
 
   // 🎨 Safe Tailwind Class Mapping
   const themeClasses = {
@@ -38,7 +45,7 @@ export function DevicePreview({
     amber: "bg-amber-600 shadow-amber-900/40 text-amber-500",
     slate: "bg-slate-600 shadow-slate-900/40 text-slate-500",
     red: "bg-red-600 shadow-red-900/40 text-red-500",
-  };
+  }
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 py-10">
@@ -151,5 +158,5 @@ export function DevicePreview({
         Interactive Preview Mode
       </div>
     </div>
-  );
+  )
 }

@@ -1,43 +1,43 @@
 /** @format */
 
-import React, { Suspense } from "react";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import React, { Suspense } from "react"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
 
 // 📦 Data & Utils
 import {
   getTemplatesByCategory,
   getAllCategories,
   getCategoryInfo,
-} from "@/constants/templates-data";
-import { siteConfig } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+} from "@/constants/templates-data"
+import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
 // 🧩 Layout Components (Updated Paths)
-import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar";
-import { Footer } from "@/components/shared/Footer";
-import { LineStickyButton } from "@/components/shared/LineStickyButton";
+import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
+import { Footer } from "@/components/shared/Footer"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 // 🧩 Page Components (Updated Paths)
-import { TemplateHero } from "@/components/template/marketplace/TemplateHero";
-import { TemplateGrid } from "@/components/template/marketplace/TemplateGrid";
-import { TemplateFilter } from "@/components/template/marketplace/TemplateFilter";
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm";
+import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
+import { TemplateGrid } from "@/components/template/marketplace/TemplateGrid"
+import { TemplateFilter } from "@/components/template/marketplace/TemplateFilter"
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
 interface CategoryPageProps {
   params: Promise<{
-    template: string; // Category Slug (e.g., 'sale-page')
-  }>;
+    template: string // Category Slug (e.g., 'sale-page')
+  }>
 }
 
 /**
  * 🧬 1. SSG: Pre-generate all category pages
  */
 export async function generateStaticParams() {
-  const categories = getAllCategories();
+  const categories = getAllCategories()
   return categories.map((cat) => ({
     template: cat.slug,
-  }));
+  }))
 }
 
 /**
@@ -46,15 +46,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: CategoryPageProps): Promise<Metadata> {
-  const { template: slug } = await params;
-  const categoryInfo = getCategoryInfo(slug);
+  const { template: slug } = await params
+  const categoryInfo = getCategoryInfo(slug)
 
-  if (!categoryInfo) return { title: "Category Not Found" };
+  if (!categoryInfo) return { title: "Category Not Found" }
 
-  const title = `${categoryInfo.name} - คลังเทมเพลตเว็บไซต์คุณภาพ | ${siteConfig.shortName}`;
+  const title = `${categoryInfo.name} - คลังเทมเพลตเว็บไซต์คุณภาพ | ${siteConfig.shortName}`
   const description =
     categoryInfo.description ||
-    `เลือกชมเทมเพลต ${categoryInfo.name} ที่ออกแบบมาเพื่อเพิ่ม Conversion ให้ธุรกิจคุณโดยเฉพาะ`;
+    `เลือกชมเทมเพลต ${categoryInfo.name} ที่ออกแบบมาเพื่อเพิ่ม Conversion ให้ธุรกิจคุณโดยเฉพาะ`
 
   return {
     title,
@@ -68,7 +68,7 @@ export async function generateMetadata({
     alternates: {
       canonical: `${siteConfig.url}/${slug}`,
     },
-  };
+  }
 }
 
 /**
@@ -77,18 +77,18 @@ export async function generateMetadata({
 export default async function TemplateCategoryPage({
   params,
 }: CategoryPageProps) {
-  const { template: categorySlug } = await params;
+  const { template: categorySlug } = await params
 
   // Fetch Data
-  const categoryInfo = getCategoryInfo(categorySlug);
-  const templates = getTemplatesByCategory(categorySlug);
-  const allCategories = getAllCategories();
+  const categoryInfo = getCategoryInfo(categorySlug)
+  const templates = getTemplatesByCategory(categorySlug)
+  const allCategories = getAllCategories()
 
   // 🛡️ Guard Clause
-  if (!categoryInfo) return notFound();
+  if (!categoryInfo) return notFound()
 
   // 🎨 Category DNA: กำหนดธีมสีตามหมวดหมู่เพื่อความเฉพาะตัว
-  const themeColor = categoryInfo.themeColor || "emerald";
+  const themeColor = categoryInfo.themeColor || "emerald"
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
@@ -210,13 +210,13 @@ export default async function TemplateCategoryPage({
                   className={cn(
                     "h-14 px-8 text-lg font-bold shadow-xl transition-transform hover:scale-105",
                     themeColor === "emerald" &&
-                      "bg-emerald-600 hover:bg-emerald-500 shadow-emerald-900/20",
+                      "bg-emerald-600 shadow-emerald-900/20 hover:bg-emerald-500",
                     themeColor === "blue" &&
-                      "bg-blue-600 hover:bg-blue-500 shadow-blue-900/20",
+                      "bg-blue-600 shadow-blue-900/20 hover:bg-blue-500",
                     themeColor === "rose" &&
-                      "bg-rose-600 hover:bg-rose-500 shadow-rose-900/20",
+                      "bg-rose-600 shadow-rose-900/20 hover:bg-rose-500",
                     themeColor === "amber" &&
-                      "bg-amber-600 hover:bg-amber-500 shadow-amber-900/20"
+                      "bg-amber-600 shadow-amber-900/20 hover:bg-amber-500"
                   )}
                 />
               </div>
@@ -228,5 +228,5 @@ export default async function TemplateCategoryPage({
       <Footer />
       <LineStickyButton />
     </div>
-  );
+  )
 }

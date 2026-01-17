@@ -1,16 +1,16 @@
 /** @format */
-"use client";
+"use client"
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowRight, Star, Zap, LayoutTemplate } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { TemplateItem } from "@/constants/templates-data";
+import React from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { ArrowRight, Star, Zap, LayoutTemplate } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { TemplateItem } from "@/constants/templates-data"
 
 interface TemplateGridProps {
-  templates?: TemplateItem[];
+  templates?: TemplateItem[]
 }
 
 /**
@@ -36,13 +36,13 @@ export function TemplateGrid({ templates = [] }: TemplateGridProps) {
           ลองดูหมวดอื่นก่อน หรือทักไลน์เพื่อสั่งทำพิเศษได้เลย
         </p>
       </motion.div>
-    );
+    )
   }
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {templates.map((template, index) => {
-        const detailUrl = `/${template.category}/${template.slug}`;
+        const detailUrl = `/${template.category}/${template.slug}`
 
         return (
           <motion.div
@@ -96,14 +96,16 @@ export function TemplateGrid({ templates = [] }: TemplateGridProps) {
               </Link>
 
               <div className="mb-4 flex flex-wrap gap-2">
-                {template.features.slice(0, 2).map((feature: string, i: number) => (
-                  <span
-                    key={i}
-                    className="flex items-center gap-1 rounded border border-slate-800 bg-slate-950 px-2 py-1 text-[10px] font-medium tracking-wider text-slate-500 uppercase"
-                  >
-                    <Zap className="h-3 w-3" /> {feature.split(":")[0]}
-                  </span>
-                ))}
+                {template.features
+                  .slice(0, 2)
+                  .map((feature: string, i: number) => (
+                    <span
+                      key={i}
+                      className="flex items-center gap-1 rounded border border-slate-800 bg-slate-950 px-2 py-1 text-[10px] font-medium tracking-wider text-slate-500 uppercase"
+                    >
+                      <Zap className="h-3 w-3" /> {feature.split(":")[0]}
+                    </span>
+                  ))}
               </div>
 
               {/* 💰 Pricing Area */}
@@ -114,8 +116,11 @@ export function TemplateGrid({ templates = [] }: TemplateGridProps) {
                   </span>
                   <div className="flex items-baseline gap-2">
                     <span className="text-lg font-bold text-emerald-400">
-                      {/* ✅ แก้ไข: เพิ่มวงเล็บครอบการทำ Logic ก่อนใช้ ?? 0 */}
-                      ฿{((template.salePrice || template.price) ?? 0).toLocaleString()}
+                      {/* ✅ แก้ไข: เพิ่มวงเล็บครอบการทำ Logic ก่อนใช้ ?? 0 */}฿
+                      {(
+                        (template.salePrice || template.price) ??
+                        0
+                      ).toLocaleString()}
                     </span>
                     {template.salePrice && (
                       <span className="text-xs text-slate-600 line-through">
@@ -131,8 +136,8 @@ export function TemplateGrid({ templates = [] }: TemplateGridProps) {
               </div>
             </div>
           </motion.div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

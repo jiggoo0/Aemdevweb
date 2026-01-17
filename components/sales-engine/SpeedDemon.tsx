@@ -1,18 +1,25 @@
 /** @format */
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Zap, Trophy, Search, Smartphone, Gauge, LucideIcon } from "lucide-react";
+import { useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import {
+  Zap,
+  Trophy,
+  Search,
+  Smartphone,
+  Gauge,
+  LucideIcon,
+} from "lucide-react"
 // ✅ Fixed: Removed unused 'cn' import to clear ESLint error
 
 interface MetricItem {
-  id: string;
-  label: string;
-  score: number;
-  icon: LucideIcon;
-  color: string;
-  delay: number;
+  id: string
+  label: string
+  score: number
+  icon: LucideIcon
+  color: string
+  delay: number
 }
 
 const metrics: MetricItem[] = [
@@ -48,11 +55,11 @@ const metrics: MetricItem[] = [
     color: "var(--aurora-emerald)",
     delay: 0.6,
   },
-];
+]
 
 export const SpeedDemon = () => {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const ref = useRef<HTMLElement>(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
     <section className="bg-background relative overflow-hidden py-32" ref={ref}>
@@ -158,12 +165,12 @@ export const SpeedDemon = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
 interface ScoreCardProps {
-  metric: MetricItem;
-  isInView: boolean;
+  metric: MetricItem
+  isInView: boolean
 }
 
 const ScoreCard = ({ metric, isInView }: ScoreCardProps) => {
@@ -211,7 +218,7 @@ const ScoreCard = ({ metric, isInView }: ScoreCardProps) => {
         {metric.label}
       </h3>
     </div>
-  );
-};
+  )
+}
 
-export default SpeedDemon;
+export default SpeedDemon

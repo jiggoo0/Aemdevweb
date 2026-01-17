@@ -1,16 +1,16 @@
 /** @format */
 
-import React from "react";
-import { Header } from "@/components/shared/Header";
-import { Footer } from "@/components/shared/Footer";
-import { cn } from "@/lib/utils";
+import React from "react"
+import { Header } from "@/components/shared/Header"
+import { Footer } from "@/components/shared/Footer"
+import { cn } from "@/lib/utils"
 
 /**
  * 💡 Main Layout Props Interface
  * ✅ Fixed TS2552: แก้ไขปัญหาหาชื่อ 'MainLayoutProps' ไม่เจอ
  */
 interface MainLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 /**
@@ -31,14 +31,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
       </div>
 
       {/* 🟢 Header Layer: ยกขึ้น z-[100] เพื่อให้กด Navbar ได้เสมอ */}
-      <header className="fixed top-0 left-0 right-0 z-[100]">
+      <header className="fixed top-0 right-0 left-0 z-[100]">
         <Header />
       </header>
 
       {/* 📦 Content Area: เลื่อนลงมาเล็กน้อยเพื่อไม่ให้โดน Header บัง */}
-      <main className="relative z-10 flex-1 pt-24 lg:pt-28">
-        {children}
-      </main>
+      <main className="relative z-10 flex-1 pt-24 lg:pt-28">{children}</main>
 
       {/* ⚫ Footer Layer */}
       <Footer />
@@ -49,5 +47,5 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* Subtle Bottom Glow: ปิดรอยต่อระหว่าง Content และ Footer */}
       <div className="from-aurora-cyan/5 pointer-events-none fixed right-0 bottom-0 left-0 z-0 h-40 bg-gradient-to-t to-transparent" />
     </div>
-  );
+  )
 }
