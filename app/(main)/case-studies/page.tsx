@@ -1,216 +1,175 @@
 /** @format */
 
 import { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
+import { ArrowRight, Star, MousePointer2, Code2 } from "lucide-react"
 
-// ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles, Rocket)
-import { Trophy, Zap, ArrowRight } from "lucide-react"
-
-// ✅ Components & UI
-// ✅ Fixed: Removed unused LineLeadForm import
-import { LineStickyButton } from "@/components/shared/LineStickyButton"
-import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+// ✅ Components & UI: มั่นใจว่า Import ตัวที่ใช้จริงเท่านั้น
+import { siteConfig, constructMetadata } from "@/constants/site-config"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 /**
- * 🔍 SEO Metadata
+ * 🔍 SEO Metadata: Case Studies Hub
+ * DNA: "ติดหน้าแรก Google" - เน้นผลลัพธ์ที่ SME ต้องการ
  */
-export const metadata: Metadata = {
-  title: "เบื้องหลัง Unlink-TH | เว็บไซต์ที่โหลดเร็วที่สุดในปี 2026",
-  description:
-    "เจาะลึกเบื้องหลังการสร้างเว็บไซต์ www.unlink-th.com ด้วย Next.js 15 และเทคนิค Technical SEO ขั้นสูง",
-  openGraph: {
-    images: ["/images/showcase/unlink-th.webp"],
-  },
+export const metadata: Metadata = constructMetadata({
+  title: "รวมเคสความสำเร็จ SME | ผลงานการสร้างเครื่องจักรผลิตเงิน",
+  description: "ส่องผลงานและเคสการันตีความสำเร็จจากลูกค้าที่ใช้บริการ AEMDEVWEB เปลี่ยนเว็บอืดเป็นเว็บแรงที่ปิดการขายได้จริง",
+})
+
+/**
+ * 🚀 Case Studies Hub Page: AEMDEVWEB Engine
+ * โครงสร้าง: Hero > Featured (Unlink-TH) > Success Grid > Final CTA
+ */
+export default function CaseStudiesPage() {
+  const canonicalUrl = `${siteConfig.url}/case-studies`
+
+  return (
+    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
+      {/* 🛠️ SEO Schema: CollectionPage */}
+      <JsonLd 
+        type="CollectionPage"
+        data={{
+          name: "AEMDEVWEB Success Stories",
+          description: "A collection of high-performance web development case studies for Thai SMEs.",
+          url: canonicalUrl,
+        }}
+      />
+
+      {/* 🌌 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 md:pt-48">
+        <div className="aurora-bg absolute top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
+        
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <Badge variant="luminous" className="mb-6 px-4 py-1.5 font-black uppercase tracking-widest">
+            Success Stories
+          </Badge>
+          <h1 className="font-prompt mb-8 text-5xl font-black italic leading-none tracking-tighter text-white uppercase md:text-8xl">
+            ผลงานที่ <span className="text-aurora-cyan text-luminous">เปลี่ยนชีวิต</span> <br />
+            เจ้าของธุรกิจ
+          </h1>
+          <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium leading-relaxed text-slate-400 md:text-xl">
+            เราไม่ได้แค่ส่งมอบ Code แต่เราส่งมอบ <span className="text-white italic">"ผลลัพธ์ทางธุรกิจ"</span>
+          </p>
+        </div>
+      </section>
+
+      {/* 🏆 2. FEATURED CASE STUDY: Unlink-TH */}
+      <section className="container mx-auto px-4 py-20">
+        <Link href="/case-studies/unlink-th" className="group block">
+          <div className="glass-card relative overflow-hidden border-white/10 p-1 transition-all duration-700 hover:border-aurora-cyan/40">
+            <div className="flex flex-col lg:flex-row lg:items-center">
+              <div className="relative aspect-video w-full overflow-hidden rounded-[1.8rem] lg:w-3/5">
+                <Image 
+                  src="/images/showcase/unlink-th.webp"
+                  alt="Unlink-TH Case Study Performance"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 flex gap-3">
+                  <Badge className="border-aurora-emerald/30 bg-aurora-emerald/20 font-black text-aurora-emerald">LCP 0.8s</Badge>
+                  <Badge className="border-aurora-cyan/30 bg-aurora-cyan/20 font-black text-aurora-cyan">PageSpeed 100</Badge>
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-6 p-8 lg:p-12">
+                <div className="flex items-center gap-2 text-aurora-cyan">
+                  <Star className="h-5 w-5 fill-current" />
+                  <span className="font-prompt text-sm font-black uppercase tracking-widest">Flagship Project</span>
+                </div>
+                <h2 className="font-prompt text-4xl font-black italic leading-none text-white uppercase transition-colors group-hover:text-aurora-cyan">
+                  Unlink-TH Engine
+                </h2>
+                <p className="font-anuphan text-lg leading-relaxed text-slate-400">
+                  สถาปัตยกรรม Next.js 15 ที่ทำให้ยอดขายโตขึ้น 300% ภายในเดือนแรก
+                </p>
+                <div className="flex items-center gap-2 font-bold text-white transition-all group-hover:gap-4">
+                  Read Case Study <ArrowRight className="h-5 w-5" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* 📂 3. SUCCESS GRID */}
+      <section className="container mx-auto px-4 py-12 pb-40">
+        <div className="grid gap-8 md:grid-cols-2">
+           <CaseLinkCard 
+             href="/case-studies/aemdevweb"
+             title="The Luminous Core"
+             category="Internal Architecture"
+             desc="เบื้องหลังการสร้างระบบปิดการขายอัตโนมัติของ AEMDEVWEB"
+           />
+           
+           <div className="glass-card flex items-center justify-center border-dashed border-white/10 bg-transparent p-12">
+             <p className="font-prompt text-2xl font-black italic uppercase tracking-tighter text-slate-600">
+               Your Success is Next...
+             </p>
+           </div>
+        </div>
+      </section>
+
+      {/* 📢 4. FINAL CTA */}
+      <section className="container mx-auto px-4 pb-40">
+        <div className="shadow-luminous group relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.02] p-12 text-center md:p-32">
+          <div className="aurora-bg from-aurora-cyan to-aurora-violet absolute inset-0 opacity-[0.05]" />
+          <h2 className="font-prompt relative z-10 mb-8 text-4xl font-black italic leading-none text-white uppercase md:text-7xl">
+            อยากเป็นเคส <br />
+            <span className="text-aurora-emerald">ต่อไปของเอ็มไหม?</span>
+          </h2>
+          <Button variant="premium" size="lg" className="shadow-aurora-glow group relative z-10 h-20 px-12 text-xl" asChild>
+            <Link href={siteConfig.links.line}>
+              จองคิววิเคราะห์เว็บฟรี <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+      
+      {/* ✅ Fixed: มั่นใจว่า LineStickyButton แสดงผลถูกต้อง */}
+      <LineStickyButton />
+    </main>
+  )
 }
 
 /**
- * 🚀 Case Study Page: Unlink-TH Engine
+ * 🧩 Sub-Components: Fixed Types & Unused Vars
  */
-export default function UnlinkCaseStudyPage() {
+
+interface CaseLinkCardProps {
+  href: string
+  title: string
+  category: string
+  desc: string
+}
+
+function CaseLinkCard({ href, title, category, desc }: CaseLinkCardProps) {
   return (
-    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
-      {/* 🌌 1. HERO: Luminous Identity */}
-      <section className="relative pt-40 pb-24 text-center">
-        {/* Background Decor */}
-        <div className="aurora-bg top-0 left-1/2 h-[700px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
-
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex animate-pulse items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-            <Trophy className="h-4 w-4" />
-            Flagship Project: Unlink-TH Engine
-          </div>
-
-          <h1 className="font-prompt mb-8 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase italic md:text-8xl">
-            เราทำเว็บให้ตัวเอง <br />
-            <span className="text-aurora-cyan drop-shadow-luminous">
-              เหมือนที่ทำให้ลูกค้า
-            </span>
-          </h1>
-
-          <p className="font-anuphan mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
-            นี่ไม่ใช่แค่ Portfolio แต่คือบทพิสูจน์ว่าทำไม{" "}
-            <span className="text-white italic">"ความเร็ว"</span> และ{" "}
-            <span className="text-white italic">"โครงสร้างที่ถูกต้อง"</span>{" "}
-            ถึงเป็นหัวใจสำคัญของการปิดการขายในปี 2026
-          </p>
-
-          <div className="flex justify-center">
-            <Button
-              variant="premium"
-              size="lg"
-              className="shadow-aurora-glow group h-20 px-12 text-xl"
-              asChild
-            >
-              <Link href="/contact">
-                อยากได้เว็บแรงๆ แบบนี้{" "}
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
-              </Link>
-            </Button>
+    <Link href={href} className="group">
+      <div className="glass-card border-white/5 bg-white/[0.01] p-10 transition-all duration-500 hover:border-aurora-cyan/30 hover:bg-white/[0.03]">
+        <div className="mb-8 flex items-center justify-between">
+          <Badge className="border-white/10 bg-white/5 px-3 uppercase tracking-widest text-slate-400">{category}</Badge>
+          <div className="text-aurora-cyan opacity-40 transition-opacity group-hover:opacity-100">
+            <MousePointer2 className="h-6 w-6" />
           </div>
         </div>
-      </section>
-
-      {/* 📊 2. STATS BAR: Luminous Impact */}
-      <section className="relative z-10 border-y border-white/5 bg-white/[0.02] py-16 backdrop-blur-xl">
-        <ImpactStats />
-      </section>
-
-      {/* 🛠️ 3. PROBLEM & SOLUTION: Technical Power */}
-      <section className="relative z-10 container mx-auto px-4 py-32">
-        <div className="grid items-center gap-20 lg:grid-cols-2">
-          {/* Image Side: PageSpeed Score */}
-          <div className="group relative">
-            <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-30 blur-3xl transition duration-1000 group-hover:opacity-60" />
-            <div className="shadow-luminous relative aspect-square overflow-hidden rounded-[3rem] border border-white/10 bg-slate-900">
-              <Image
-                src="/images/showcase/unlink-th.webp"
-                alt="Unlink-TH Performance Score"
-                fill
-                className="object-cover grayscale transition-all duration-1000 group-hover:grayscale-0"
-              />
-              <div className="glass-card border-aurora-emerald/40 shadow-aurora-glow absolute right-10 bottom-10 scale-110 rounded-[2rem] p-8 text-center">
-                <div className="font-prompt mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Google PageSpeed
-                </div>
-                <div className="font-prompt text-aurora-emerald text-6xl leading-none font-black tracking-tighter italic">
-                  100
-                </div>
-              </div>
-            </div>
+        <div className="mb-6 flex items-center gap-4">
+          <div className="bg-aurora-cyan/10 rounded-xl p-3 text-aurora-cyan">
+             <Code2 className="h-6 w-6" />
           </div>
-
-          {/* Content Side: Technical Specs */}
-          <div className="space-y-10">
-            <div className="space-y-6">
-              <Badge
-                variant="luminous"
-                className="px-4 py-1 tracking-widest uppercase"
-              >
-                Technical Excellence
-              </Badge>
-              <h2 className="font-prompt text-4xl leading-tight font-black tracking-tighter text-white uppercase md:text-5xl">
-                ทำไมต้องเขียนใหม่ <br />
-                ด้วย <span className="text-aurora-cyan">Next.js 15?</span>
-              </h2>
-              <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
-                เป้าหมายของเราคือการสร้างมาตรฐานใหม่{" "}
-                <span className="text-white italic">"กดปุ๊บ มาปั๊บ"</span>{" "}
-                เพื่อลดอัตราการกดออกของลูกค้าที่ใจร้อนขึ้นทุกวัน
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                "ใช้ React Server Components (RSC) ลด JavaScript ฝั่ง Client",
-                "ทำ Image Optimization อัตโนมัติด้วย Next/Image Engine",
-                "โครงสร้าง Technical SEO 100% (JSON-LD, Semantic HTML)",
-                "Global Edge Deploy: เร็วแรงทั่วโลกผ่าน Vercel Infrastructure",
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="hover:border-aurora-cyan/30 group flex gap-5 rounded-2xl border border-white/5 bg-white/5 p-6 transition-all"
-                >
-                  <div className="bg-aurora-cyan/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                    <Zap className="text-aurora-cyan h-5 w-5 transition-transform group-hover:scale-125" />
-                  </div>
-                  <span className="font-anuphan leading-relaxed font-bold text-slate-200">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <h3 className="font-prompt text-3xl font-black italic text-white uppercase transition-colors group-hover:text-aurora-cyan">{title}</h3>
         </div>
-      </section>
-
-      {/* 🚀 4. BUSINESS IMPACT: Result Cards */}
-      <section className="relative border-t border-white/5 bg-white/[0.01] py-32">
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h2 className="font-prompt mb-20 text-4xl font-black tracking-tighter text-white uppercase italic md:text-6xl">
-            ผลลัพธ์ทางธุรกิจ <br />
-            <span className="text-aurora-cyan">ที่จับต้องได้</span>
-          </h2>
-          <div className="grid gap-10 md:grid-cols-3">
-            <div className="glass-card hover:border-aurora-cyan/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                3X
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                จำนวน Leads เพิ่มขึ้นต่อวัน
-              </div>
-            </div>
-
-            <div className="glass-card border-aurora-emerald/20 bg-aurora-emerald/5 shadow-luminous rounded-[2.5rem] p-12">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                0.8s
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                เวลาโหลดเฉลี่ย (LCP)
-              </div>
-            </div>
-
-            <div className="glass-card hover:border-aurora-violet/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                No.1
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                Keyword หลักติดหน้าแรก
-              </div>
-            </div>
-          </div>
+        <p className="font-anuphan mb-8 leading-relaxed text-slate-400">{desc}</p>
+        <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white transition-all group-hover:gap-4">
+          Explore Detail <ArrowRight className="h-4 w-4" />
         </div>
-      </section>
-
-      {/* 📢 5. FINAL CTA */}
-      <section className="relative z-10 container mx-auto px-4 py-40">
-        <div className="shadow-luminous relative overflow-hidden rounded-[4rem] border border-white/10 p-12 text-center md:p-24">
-          <div className="aurora-bg from-aurora-cyan to-aurora-violet inset-0 bg-gradient-to-br opacity-[0.1]" />
-          <div className="relative z-10 mx-auto max-w-4xl">
-            <h2 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-8xl">
-              ธุรกิจของคุณ <br />
-              <span className="text-aurora-cyan">ก็ "แรง" แบบนี้ได้</span>
-            </h2>
-            <div className="flex flex-col justify-center gap-6 sm:flex-row">
-              <Button
-                variant="premium"
-                size="lg"
-                className="shadow-aurora-glow group h-20 px-12 text-xl"
-                asChild
-              >
-                <Link href="/contact">
-                  ขอคำปรึกษาฟรี (ไม่ซื้อไม่ว่า){" "}
-                  <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <LineStickyButton />
-    </main>
+      </div>
+    </Link>
   )
 }

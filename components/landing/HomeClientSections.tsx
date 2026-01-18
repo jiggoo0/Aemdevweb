@@ -10,14 +10,14 @@ import dynamic from "next/dynamic"
  * ✅ Strategy: Selective Hydration & SSR-Ready for SEO
  */
 
-// 1. 📊 Impact Stats: (SSR: True) - สถิติความสำเร็จช่วยเรื่อง SEO และ Social Proof
+// 1. 📊 Impact Stats: ใช้ Loading State ง่ายๆ เพื่อหลอกตาว่าเร็ว
 const ImpactStats = dynamic(
   () =>
     import("@/components/sales-engine/ImpactStats").then(
       (mod) => mod.ImpactStats
     ),
   {
-    ssr: true,
+    ssr: true, // SEO ต้องการตัวเลข
     loading: () => (
       <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -25,7 +25,6 @@ const ImpactStats = dynamic(
             <div key={i} className="flex flex-col items-center space-y-5">
               <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5 shadow-inner" />
               <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5 opacity-50" />
             </div>
           ))}
         </div>
@@ -34,20 +33,19 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator: (SSR: False) - ระบบคำนวณราคาเป็น Logic ฝั่ง Client 100%
+// 2. 💰 Price Estimator: Logic หนัก -> SSR: FALSE เท่านั้น
+// ไม่จำเป็นต้องให้ Server Render เพราะ User ต้องกดเล่นเอง
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
       (mod) => mod.PriceEstimator
     ),
   {
-    ssr: false,
+    ssr: false, // ⚡ Critical Optimization: ไม่ต้อง Render ฝั่ง Server
     loading: () => (
       <div className="glass-card shadow-luminous mx-auto flex min-h-[500px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
         <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
         <div className="w-full max-w-2xl space-y-6 px-10">
-          <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
-          <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
         </div>
       </div>
@@ -55,7 +53,7 @@ const PriceEstimator = dynamic(
   }
 )
 
-// 3. ⭐ Testimonials: (SSR: True) - ข้อมูลรีวิวสำคัญต่อ Search Engine Trust
+// 3. ⭐ Testimonials: SSR: True (เพื่อ SEO)
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then(
@@ -65,11 +63,7 @@ const Testimonials = dynamic(
     ssr: true,
     loading: () => (
       <div className="container mx-auto px-4 py-20">
-        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-96 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-88 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-        </div>
+        <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
       </div>
     ),
   }
@@ -89,16 +83,16 @@ export function HomeClientSections() {
         </div>
       </section>
 
-      {/* 💰 Section: Interactive Pricing */}
+      {/* 💰 Section: Interactive Pricing (Render On Client Only) */}
       <section
         id="pricing"
-        className="relative container mx-auto px-4 py-32 lg:py-48"
+        className="relative container mx-auto px-4 py-32 lg:py-48 content-visibility-auto"
       >
         {/* Background Ambient Glow */}
-        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
+        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[100px] will-change-transform" />
 
         <div className="mx-auto max-w-5xl">
-          <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="mb-20 text-center">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
               Transparent Pricing
             </span>
@@ -119,9 +113,8 @@ export function HomeClientSections() {
       </section>
 
       {/* ⭐ Section: Social Proof & Testimonials */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem]">
-        {/* Decorative Light Layer */}
-        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40" />
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem] content-visibility-auto">
+        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40 will-change-transform" />
 
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
@@ -140,5 +133,4 @@ export function HomeClientSections() {
   )
 }
 
-// ✅ Default Export เพื่อความยืดหยุ่นในการ Import
 export default HomeClientSections

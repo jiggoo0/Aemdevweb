@@ -12,16 +12,24 @@ import {
   Gem,
   Cpu,
   Sparkles,
+  LucideIcon,
 } from "lucide-react"
 
 /**
  * 🎡 SocialProofBanner: Luminous Marquee Server Edition (v.2026)
- * ส่วนแสดงรายชื่อลูกค้าแบบเลื่อนวนลูป (Infinite Loop) 
+ * ส่วนแสดงรายชื่อลูกค้าแบบเลื่อนวนลูป (Infinite Loop)
  * ✅ Optimized: ใช้ Native CSS Animations แทน Library เพื่อ PageSpeed 100
  * ✅ Accessibility: รองรับการหยุดเคลื่อนไหวตามความต้องการของผู้ใช้ (Reduced Motion)
  */
 
-const clients = [
+interface Client {
+  id: number
+  name: string
+  icon: LucideIcon
+  category: string
+}
+
+const clients: Client[] = [
   { id: 1, name: "Siam Cafe", icon: Coffee, category: "F&B" },
   { id: 2, name: "Tech Build", icon: Cpu, category: "Tech" },
   { id: 3, name: "Grand Home", icon: Building2, category: "Real Estate" },
@@ -34,13 +42,13 @@ const clients = [
 
 export function SocialProofBanner() {
   return (
-    <section 
+    <section
       className="bg-background relative w-full overflow-hidden border-y border-white/5 py-16"
       aria-label="ลูกค้าที่ไว้วางใจเรา"
     >
       {/* 🌌 Aurora Ambient Light: Decorative Layer */}
-      <div 
-        className="aurora-bg pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-[0.08] blur-[80px]" 
+      <div
+        className="aurora-bg pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-[0.08] blur-[80px]"
         aria-hidden="true"
       />
 
@@ -52,18 +60,16 @@ export function SocialProofBanner() {
           </div>
           <p className="font-anuphan text-center text-lg font-medium text-slate-400 opacity-80 md:text-xl">
             ได้รับความไว้วางใจจาก SME ไทยกว่า{" "}
-            <span className="border-aurora-emerald/40 border-b-2 font-black text-white italic">
+            <span className="border-aurora-emerald/40 border-b-2 font-black italic text-white">
               100+ ธุรกิจ
             </span>
           </p>
         </div>
 
         {/* 🎡 Marquee Container: Native CSS Performance with Masking */}
-        {/* ใช้ mask-image เพื่อสร้างเอฟเฟกต์ค่อยๆ จางออกที่ขอบซ้าย-ขวา */}
         <div className="relative flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          
           {/* Track 1: Main Loop */}
-          <div className="animate-marquee motion-reduce:animate-none flex min-w-full shrink-0 items-center justify-around gap-16 md:gap-24">
+          <div className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 motion-reduce:animate-none md:gap-24">
             {clients.map((client) => (
               <LogoItem key={client.id} client={client} />
             ))}
@@ -71,7 +77,7 @@ export function SocialProofBanner() {
 
           {/* Track 2: Infinite Clone (Aria Hidden for SEO) */}
           <div
-            className="animate-marquee motion-reduce:animate-none flex min-w-full shrink-0 items-center justify-around gap-16 md:gap-24"
+            className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 motion-reduce:animate-none md:gap-24"
             aria-hidden="true"
           >
             {clients.map((client) => (
@@ -87,9 +93,13 @@ export function SocialProofBanner() {
 /**
  * 🧩 LogoItem Sub-component
  */
-const LogoItem = ({ client }: { client: (typeof clients)[0] }) => {
+interface LogoItemProps {
+  client: Client
+}
+
+const LogoItem = ({ client }: LogoItemProps) => {
   const Icon = client.icon
-  
+
   return (
     <div className="group flex cursor-default flex-col items-center gap-4 transition-all duration-500 hover:-translate-y-2">
       {/* Icon Placeholder with Luminous Glass Style */}
@@ -98,7 +108,7 @@ const LogoItem = ({ client }: { client: (typeof clients)[0] }) => {
       </div>
 
       {/* Client Name Label */}
-      <span className="font-anuphan text-xs font-black tracking-widest text-slate-500 uppercase transition-colors duration-300 group-hover:text-white">
+      <span className="font-anuphan text-xs font-black uppercase tracking-widest text-slate-500 transition-colors duration-300 group-hover:text-white">
         {client.name}
       </span>
     </div>

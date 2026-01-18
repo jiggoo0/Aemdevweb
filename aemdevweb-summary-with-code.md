@@ -3,17 +3,65 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 19:56:07
+  Generated: 2026-01-18 20:18:27
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 19:56:07**_
+_Generated on: **2026-01-18 20:18:27**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
-⚠️ *Warning: `pre-deploy-report.md` not found. Run `pre-deploy-check.sh` for health metrics.*
+✅ **READY FOR DEPLOY:** The project meets all production standards.
+
+### 📍 Production Route Map
+```text
+```text
+Route (app)                                     Size  First Load JS
+┌ ○ /                                        17.7 kB         137 kB
+├ ○ /_not-found                                988 B         103 kB
+├ ● /[template]                              3.51 kB         165 kB
+├   ├ /sale-page
+├   ├ /food-beverage
+├   ├ /corporate
+├   └ /health-beauty
+├ ● /[template]/[slug]                         138 B         171 kB
+├   ├ /salepage/shop-master-pro
+├   ├ /service/sushi-omakase
+├   ├ /corporate/law-firm-pro
+├   └ /service/aura-clinic
+├ ○ /about                                   2.42 kB         122 kB
+├ ○ /blog                                      174 B         111 kB
+├ ● /blog/[slug]                               174 B         111 kB
+├   ├ /blog/5-points-killing-sales
+├   ├ /blog/copywriting-secrets
+├   ├ /blog/facebook-ads-vs-website
+├   └ [+2 more paths]
+├ ○ /case-studies                              132 B         161 kB
+├ ● /case-studies/[slug]                     2.42 kB         122 kB
+├   ├ /case-studies/project-01
+├   ├ /case-studies/tech-build-construction
+├   ├ /case-studies/glow-skin-ecommerce
+├   └ /case-studies/unlink-th
+├ ○ /case-studies/unlink-th                    132 B         161 kB
+├ ○ /contact                                 2.53 kB         117 kB
+├ ○ /robots.txt                                132 B         102 kB
+├ ○ /services                                3.22 kB         117 kB
+├ ● /services/[slug]                           137 B         171 kB
+├   ├ /services/sale-page
+├   ├ /services/corporate
+├   ├ /services/internal-system
+├   └ /services/speed-seo
+└ ○ /sitemap.xml                               132 B         102 kB
++ First Load JS shared by all                 102 kB
+  ├ chunks/291-6ac79937ecd9ac89.js           45.7 kB
+  ├ chunks/455135d8-30ce3918f044b0b7.js      54.2 kB
+  └ other shared chunks (total)              2.05 kB
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+```
+```
 
 ## 📊 2. File Statistics by Extension
 ```text
@@ -52,6 +100,7 @@ _Generated on: **2026-01-18 19:56:07**_
       📂 unlink-th/
         📄 page.tsx
       📄 page.tsx
+      📂 aemdevweb/
   📄 favicon.ico
   📂 api/
   📄 apple-touch-icon.png
@@ -332,6 +381,78 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 - Code Snippet: โชว์รูป Code สวยๆ (JetBrains Mono) นิดหน่อย เพื่อโชว์ความเป็น Expert ว่าเขียนเอง ไม่ได้ลากวางมั่วๆ
   Documentation maintained by AEMDEVWEB Creative Team.
   Last Updated: 2026-01-17
+```
+---
+
+#### 🔍 Path: `pre-deploy-report.md`
+```markdown
+# 🚀 Pre-deploy Inspection Report
+Generated at: 2026-01-18 20:11:04
+Branch: main
+
+## 🔐 1. Environment Check
+✅ Status: .env file exists and verified.
+## 🛠️  2. Auto-Fix Procedure
+✅ Status: Auto-fix completed or no issues found.
+## 🧹 3. Code Linting (ESLint)
+✅ Status: Linting passed.
+## ⌨️ 4. Type Safety Check
+✅ Status: TypeScript verified.
+## 🏗️  5. Production Build Test
+✅ Status: Build successfully optimized.
+### 📊 Route Statistics & Bundle Size
+```text
+Route (app)                                     Size  First Load JS
+┌ ○ /                                        17.7 kB         137 kB
+├ ○ /_not-found                                988 B         103 kB
+├ ● /[template]                              3.51 kB         165 kB
+├   ├ /sale-page
+├   ├ /food-beverage
+├   ├ /corporate
+├   └ /health-beauty
+├ ● /[template]/[slug]                         138 B         171 kB
+├   ├ /salepage/shop-master-pro
+├   ├ /service/sushi-omakase
+├   ├ /corporate/law-firm-pro
+├   └ /service/aura-clinic
+├ ○ /about                                   2.42 kB         122 kB
+├ ○ /blog                                      174 B         111 kB
+├ ● /blog/[slug]                               174 B         111 kB
+├   ├ /blog/5-points-killing-sales
+├   ├ /blog/copywriting-secrets
+├   ├ /blog/facebook-ads-vs-website
+├   └ [+2 more paths]
+├ ○ /case-studies                              132 B         161 kB
+├ ● /case-studies/[slug]                     2.42 kB         122 kB
+├   ├ /case-studies/project-01
+├   ├ /case-studies/tech-build-construction
+├   ├ /case-studies/glow-skin-ecommerce
+├   └ /case-studies/unlink-th
+├ ○ /case-studies/unlink-th                    132 B         161 kB
+├ ○ /contact                                 2.53 kB         117 kB
+├ ○ /robots.txt                                132 B         102 kB
+├ ○ /services                                3.22 kB         117 kB
+├ ● /services/[slug]                           137 B         171 kB
+├   ├ /services/sale-page
+├   ├ /services/corporate
+├   ├ /services/internal-system
+├   └ /services/speed-seo
+└ ○ /sitemap.xml                               132 B         102 kB
++ First Load JS shared by all                 102 kB
+  ├ chunks/291-6ac79937ecd9ac89.js           45.7 kB
+  ├ chunks/455135d8-30ce3918f044b0b7.js      54.2 kB
+  └ other shared chunks (total)              2.05 kB
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
+```
+
+---
+## 🏆 Summary Result
+### ✅ READY FOR DEPLOY
+All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
 ```
 ---
 
@@ -831,7 +952,6 @@ export default function HomePage() {
 
 import React from "react"
 import dynamic from "next/dynamic"
-import { cn } from "@/lib/utils"
 
 /**
  * 🛰️ HomeClientSections: Luminous Performance Engine (v.2026)

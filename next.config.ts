@@ -9,21 +9,20 @@ import createMDX from "@next/mdx"
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // 🔒 Security & Size: ปิดการแสดง Header ว่าใช้ Next.js (ประหยัด Bytes + ปลอดภัย)
+  // 🔒 Security & Size: ปิดการแสดง Header ว่าใช้ Next.js
   poweredByHeader: false,
 
-  // ✅ 1. Compression: บีบอัดไฟล์สูงสุด (Gzip/Brotli)
+  // ✅ 1. Compression: บีบอัดไฟล์สูงสุด
   compress: true,
 
   // 📄 Extensions: รองรับ MDX เต็มรูปแบบ
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes ที่ไม่จำเป็น
+  // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes
   images: {
     formats: ["image/avif", "image/webp"],
-    // ⚠️ Tips: ตัดขนาดที่ไม่ได้ใช้ออก เพื่อลดภาระ Server ในการ Generate รูป
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96], // ตัด 128+ ออกถ้าใช้ deviceSizes คุมแล้ว
+    imageSizes: [16, 32, 48, 64, 96],
     remotePatterns: [
       {
         protocol: "https",
@@ -38,46 +37,42 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
-    // ⚡ Cache: เพิ่มเวลา Cache รูปภาพให้นานขึ้น (ลดการโหลดซ้ำ)
     minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true, // อนุญาต SVG (ถ้าจำเป็น) แต่ต้องระวัง
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // 🛠️ Compiler Options: หัวใจสำคัญของการลด TBT
+  // 🛠️ Compiler Options
   compiler: {
-    // 🚀 Remove Console: ลบ console.log ใน Production เพื่อคืน Main Thread ให้ Browser
     removeConsole:
       process.env.NODE_ENV === "production"
         ? {
-            exclude: ["error"], // เก็บ console.error ไว้ debug
+            exclude: ["error"],
           }
         : false,
   },
 
   // ⚡ Experimental Features: ขีดสุดของความเร็ว Next.js 15
   experimental: {
-    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX (Build ไวขึ้น 5x)
-
-    // 📦 Optimize Imports: Tree-shaking แบบละเอียด
+    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX
+    
+    // 📦 Optimize Imports: Tree-shaking แบบละเอียด (เพิ่ม List ให้ครบ)
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
       "sonner",
       "clsx",
       "tailwind-merge",
-      "date-fns", // ✅ เพิ่ม: มักใช้บ่อยและขนาดใหญ่
-      "lodash", // ✅ เพิ่ม: เผื่อมีการหลุดเข้ามา
-      "@radix-ui/react-icons", // ✅ เพิ่ม: ถ้ามีการใช้ Icons ของ Radix
-      "@/components/ui", // ✅ เพิ่ม: ช่วย Tree-shake UI components ภายในโปรเจกต์
+      "date-fns",
+      "lodash",
+      "@radix-ui/react-icons",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-label",
+      "@/components/ui",
     ],
-
-    // 🚀 Turbo: ถ้าใช้ Turbopack ใน dev ให้ config เพิ่มได้ที่นี่ (Optional)
-  },
-
-  // 🛠️ Logging: ช่วย Debug ตอน Dev
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
   },
 }
 
@@ -88,8 +83,6 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
-    // ⚡ Performance: บังคับใช้ Rust Compiler ในระดับ MDX Loader
-    // (Next.js 15 experimental.mdxRs จัดการให้แล้ว แต่ใส่ options ว่างไว้ตาม pattern)
   },
 })
 

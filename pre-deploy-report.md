@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 20:11:04
+Generated at: 2026-01-18 21:05:57
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -15,9 +15,9 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                     Size  First Load JS
-┌ ○ /                                        17.7 kB         137 kB
+┌ ○ /                                        17.6 kB         137 kB
 ├ ○ /_not-found                                988 B         103 kB
-├ ● /[template]                              3.51 kB         165 kB
+├ ● /[template]                              3.55 kB         165 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
@@ -34,13 +34,14 @@ Route (app)                                     Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                              132 B         161 kB
+├ ○ /case-studies                            2.42 kB         122 kB
 ├ ● /case-studies/[slug]                     2.42 kB         122 kB
 ├   ├ /case-studies/project-01
 ├   ├ /case-studies/tech-build-construction
 ├   ├ /case-studies/glow-skin-ecommerce
 ├   └ /case-studies/unlink-th
-├ ○ /case-studies/unlink-th                    132 B         161 kB
+├ ○ /case-studies/aemdevweb                    161 B         105 kB
+├ ○ /case-studies/unlink-th                  4.05 kB         161 kB
 ├ ○ /contact                                 2.53 kB         117 kB
 ├ ○ /robots.txt                                132 B         102 kB
 ├ ○ /services                                3.22 kB         117 kB

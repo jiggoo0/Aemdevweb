@@ -1,13 +1,38 @@
 /** @format */
 import { MetadataRoute } from "next"
+import { siteConfig } from "@/constants/site-config"
 
+/**
+ * 🤖 Robots.ts: The Crawler Instruction Manual
+ * ทำหน้าที่ควบคุมการเก็บข้อมูลของ Search Engine (Indexing Control)
+ * DNA: "Security & SEO" - เปิดให้บอทเก็บข้อมูลหน้าขาย แต่ปิดกั้นส่วนระบบหลังบ้าน
+ */
 export default function robots(): MetadataRoute.Robots {
+  // ดึงค่า URL หลักจาก siteConfig เพื่อความแม่นยำ (SSOT)
+  const baseUrl = siteConfig.url 
+
   return {
     rules: {
       userAgent: "*",
-      allow: "/",
-      disallow: ["/api/", "/admin/"],
+      // ✅ อนุญาตให้เก็บข้อมูลทุกหน้าหลัก (Trust & Marketing Layers)
+      allow: [
+        "/",
+        "/about",
+        "/services/",
+        "/case-studies/",
+        "/blog/",
+        "/templates/",
+      ],
+      // 🚫 ปิดกั้นส่วนที่ไม่ต้องการให้โชว์บนหน้า Google (Security First)
+      disallow: [
+        "/api/",       // ระบบ API หลังบ้าน
+        "/admin/",     // หน้าจัดการ (ถ้ามีในอนาคต)
+        "/_next/",     // ไฟล์ระบบของ Next.js
+        "/private/",   // ข้อมูลส่วนตัว
+        "/*.json$",    // ไฟล์ Config ต่างๆ
+      ],
     },
-    sitemap: "https://aemdevweb.com/sitemap.xml",
+    // ✅ เชื่อมโยงไปยัง Sitemap.xml ที่เราเพิ่งจูนไป
+    sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

@@ -4,7 +4,7 @@
 @plugin "@tailwindcss/typography";
 
 /* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
-   Performance Tuning: TBT & Main-thread Work Optimization (Updated)
+   Performance Tuning: TBT & Main-thread Work Optimization (Final Polish)
 */
 
 @theme {
@@ -15,21 +15,21 @@
 
   /* --- 2. Animations (Smooth & Lightweight) --- */
   @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(12deg); }
-    50% { transform: translateY(-15px) rotate(14deg); }
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(12deg); }
+    50% { transform: translate3d(0, -15px, 0) rotate(14deg); }
   }
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes aurora {
-    0%, 100% { opacity: 0.3; transform: translate(0, 0) scale(1); }
-    33% { opacity: 0.4; transform: translate(20px, -30px) scale(1.05); }
-    66% { opacity: 0.35; transform: translate(-15px, 15px) scale(0.95); }
+    0%, 100% { opacity: 0.3; transform: translate3d(0, 0, 0) scale(1); }
+    33% { opacity: 0.4; transform: translate3d(20px, -30px, 0) scale(1.05); }
+    66% { opacity: 0.35; transform: translate3d(-15px, 15px, 0) scale(0.95); }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 2.5rem)); }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(calc(-100% - 2.5rem), 0, 0); }
   }
   --animate-marquee: marquee 50s linear infinite;
 
@@ -83,7 +83,7 @@
     @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
     font-family: var(--font-prompt);
     
-    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
+    /* ระบบแสง Ambient พื้นหลัง (Noise-free & GPU Optimized) */
     background-image:
       radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
       radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
@@ -141,7 +141,10 @@
   }
 
   .glass-card {
-    @apply shadow-luminous border backdrop-blur-2xl transition-all duration-500;
+    @apply shadow-luminous border transition-all duration-500;
+    /* ลด backdrop-blur บน mobile เพื่อความลื่นไหล */
+    @apply backdrop-blur-md md:backdrop-blur-2xl;
+    
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border-color: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-2xl);
