@@ -18,7 +18,7 @@ interface Brand {
 
 /**
  * 🛡️ TrustBadge: Luminous Server-Optimized Edition (v.2026)
- * ออกแบบมาเพื่อสร้างความน่าเชื่อถือทันทีที่โหลดหน้าแรก
+ * ✅ FIXED: Accessibility (Contrast Ratio) - ปรับ text-slate-500 -> text-slate-400
  * ✅ Optimized: PageSpeed 100 | CSS-Driven transitions
  */
 export function TrustBadge({ className }: { className?: string }) {
@@ -45,7 +45,8 @@ export function TrustBadge({ className }: { className?: string }) {
           <div className="text-aurora-cyan shadow-aurora-glow mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Verified Partners
           </div>
-          <p className="font-anuphan text-center text-sm font-medium tracking-wide text-slate-500 opacity-80 md:text-base">
+          {/* ✅ แก้ไขสีข้อความบรรยายพาร์ทเนอร์ให้สว่างขึ้นเพื่อ Accessibility */}
+          <p className="font-anuphan text-center text-sm font-medium tracking-wide text-slate-400 opacity-90 md:text-base">
             ได้รับความไว้วางใจจากธุรกิจชั้นนำกว่า{" "}
             <span className="font-bold text-white">50+ แห่ง</span> ทั่วประเทศ
           </p>
@@ -68,15 +69,17 @@ export function TrustBadge({ className }: { className?: string }) {
 
                   {/* Glass Box for Icon */}
                   <div className="shadow-luminous group-hover:border-aurora-cyan/40 relative flex h-16 w-16 transform items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10">
+                    {/* ✅ ปรับสี Icon ให้สว่างขึ้นเล็กน้อยให้สอดคล้องกับ Text */}
                     <Icon
-                      className="group-hover:text-aurora-cyan h-8 w-8 text-slate-500 transition-all duration-500"
+                      className="group-hover:text-aurora-cyan h-8 w-8 text-slate-400 transition-all duration-500"
                       strokeWidth={1.5}
                     />
                   </div>
                 </div>
 
                 {/* Brand Name: Anuphan Font */}
-                <span className="font-anuphan text-xs font-black tracking-[0.2em] text-slate-500 uppercase transition-colors duration-300 group-hover:text-white">
+                {/* ✅ ปรับสีชื่อแบรนด์เป็น text-slate-400 เพื่อเพิ่ม Contrast Ratio */}
+                <span className="font-anuphan text-xs font-black tracking-[0.2em] text-slate-400 uppercase transition-colors duration-300 group-hover:text-white">
                   {brand.name}
                 </span>
               </div>

@@ -9,21 +9,20 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 
 /**
- * 🚀 Hero Section: Luminous Tech Engine (v.2026 - LCP Tuned)
- * ✅ FIXED: ลบ Animation ที่ H1 เพื่อแก้ LCP 3.0s -> 0.8s
+ * 🚀 Hero Section: Luminous Tech Engine (v.2026 - LCP Optimized)
+ * ✅ แก้ไข: ลบแอนิเมชันที่ครอบ H1 ออกเพื่อให้แสดงผลทันที (Instant Paint) แก้ปัญหา LCP ช้า
+ * ✅ ประสิทธิภาพ: แยกแอนิเมชันส่วนอื่นให้โหลดตามหลัง (Deferred Animation) เพื่อลด TBT
  */
 export const Hero = () => {
   return (
     <section className="bg-background relative flex min-h-[95vh] items-center justify-center overflow-hidden pt-32 pb-24 md:pt-48 md:pb-40">
-      {/* 🌌 Optimized Background */}
+      {/* 🌌 1. Optimized Background: ลด Blur และ Opacity เพื่อลดภาระการประมวลผล */}
       <div className="pointer-events-none absolute inset-0 -z-10 select-none">
         <div className="aurora-bg absolute top-[-10%] left-1/2 h-[500px] w-[800px] -translate-x-1/2 opacity-15 blur-[80px]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 text-center">
-        {/* ❌ ลบ animate-in ตัวใหญ่ที่ครอบทั้งหมดออก */}
-        
-        {/* Badge: ให้ Fade เข้ามาเบาๆ */}
+        {/* 🏷️ Badge: แสดงผลพร้อมแอนิเมชันแยกส่วน */}
         <div className="mb-12 inline-block animate-in fade-in zoom-in-50 duration-500">
           <Badge
             variant="outline"
@@ -34,21 +33,22 @@ export const Hero = () => {
           </Badge>
         </div>
 
-        {/* Headline: ⚡ SHOW IMMEDIATELY (No Animation) for LCP Score */}
+        {/* ⚡ 2. Headline: ลบ Wrapper Animation ออกเพื่อให้เรนเดอร์ทันที แก้ปัญหา LCP */}
         <h1 className="text-luminous mx-auto mb-10 max-w-7xl text-6xl md:text-8xl lg:text-[9rem]">
           เปลี่ยนเว็บนิ่ง <br />
           <span className="relative mt-8 inline-block">
             <span className="from-aurora-cyan to-aurora-emerald bg-gradient-to-r via-white bg-clip-text pb-8 text-transparent drop-shadow-xl">
               เครื่องจักรผลิตเงิน
             </span>
-            
-            {/* Rocket: ซ่อนใน Mobile เพื่อลด Layout Shift */}
+
+            {/* Rocket: ซ่อนในหน้าจอมือถือเพื่อลด Layout Shift (CLS) */}
             <Rocket className="text-aurora-emerald animate-float absolute -top-16 -right-24 hidden h-28 w-28 lg:block" />
           </span>
         </h1>
 
-        {/* Description & Buttons: Fade ตามมาทีหลังได้ ไม่กระทบ LCP */}
+        {/* 📦 3. Deferred Area: ส่วนคำอธิบายและปุ่ม ให้ Fade-in ตามหลังเพื่อไม่ให้ขัดจังหวะ LCP */}
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 fill-mode-forwards opacity-0">
+          {/* Description */}
           <p className="font-anuphan mx-auto mb-16 max-w-4xl text-xl font-medium text-slate-300 md:text-3xl">
             รับทำเว็บไซต์ที่เน้น{" "}
             <span className="border-aurora-cyan/40 border-b-2 font-bold text-white">
@@ -57,6 +57,7 @@ export const Hero = () => {
             เป็นหลัก ด้วยระบบที่โหลดไวที่สุดในปี 2026
           </p>
 
+          {/* Action Area: Conversion Buttons */}
           <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
             <Button
               asChild

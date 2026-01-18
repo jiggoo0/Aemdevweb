@@ -1,17 +1,19 @@
 /** @format */
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
-@plugin "@tailwindcss/typography"; /* ✅ เพิ่ม Typography Plugin */
+@plugin "@tailwindcss/typography";
 
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH */
+/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
+   Performance Tuning: TBT & Main-thread Work Optimization
+*/
 
 @theme {
-  /* --- Typography --- */
+  /* --- 1. Typography Hierarchy --- */
   --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
   --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* --- Animations --- */
+  /* --- 2. Animations (Smooth & Lightweight) --- */
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(12deg); }
     50% { transform: translateY(-15px) rotate(14deg); }
@@ -31,7 +33,7 @@
   }
   --animate-marquee: marquee 50s linear infinite;
 
-  /* --- Colors Mapping --- */
+  /* --- 3. Colors Mapping (OKLCH Color Space) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
@@ -41,7 +43,7 @@
   --color-aurora-violet: var(--aurora-violet);
   --color-aurora-emerald: var(--aurora-emerald);
 
-  /* --- Shadows --- */
+  /* --- 4. Shadows & Radius --- */
   --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
   --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
 
@@ -62,7 +64,7 @@
   }
 
   .dark {
-    /* 🌑 Midnight Deep Tech */
+    /* 🌑 Dark Mode: Midnight Deep Tech (Stable Edition) */
     --background: oklch(0.14 0.02 260);
     --foreground: oklch(0.98 0.005 240);
     --border: oklch(0.25 0.03 260 / 0.5);
@@ -81,7 +83,7 @@
     @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
     font-family: var(--font-prompt);
     
-    /* Noise-free Gradient */
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
     background-image:
       radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
       radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
@@ -98,18 +100,25 @@
 }
 
 @layer components {
-  /* 🪄 Layered UI */
+  /* 🪄 Layered UI Components */
+
   .aurora-bg {
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
     
-    /* ⚡ Mobile Optimized: Reduced Blur & Complexity */
+    /* ⚡ Mobile Performance: ลด Blur เหลือ 60px และใช้ Radial Gradient เพื่อลด TBT */
     filter: blur(60px);
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
+      /* Desktop: จัดเต็ม Blur 140px และ Animation เต็มรูปแบบ */
       filter: blur(140px);
-      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet), var(--aurora-emerald));
+      background: linear-gradient(
+        135deg,
+        var(--aurora-cyan),
+        var(--aurora-violet),
+        var(--aurora-emerald)
+      );
       animation: var(--animate-aurora);
     }
   }
@@ -133,6 +142,7 @@
   }
 }
 
+/* ⚡ Utilities */
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

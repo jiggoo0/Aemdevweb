@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 11:36:01
+  Generated: 2026-01-18 11:53:42
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 11:36:01**_
+_Generated on: **2026-01-18 11:53:42**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -30,7 +30,7 @@ Route (app)                                 Size  First Load JS
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
 ├   └ /Service/aura-clinic
-├ ○ /about                               6.67 kB         163 kB
+├ ○ /about                               6.68 kB         163 kB
 ├ ○ /blog                                  174 B         111 kB
 ├ ● /blog/[slug]                           174 B         111 kB
 ├   ├ /blog/5-points-killing-sales
@@ -38,11 +38,11 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
 ├ ○ /case-studies                          132 B         161 kB
-├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ƒ /case-studies/[slug]                  2.5 kB         122 kB
 ├ ○ /case-studies/unlink-th                132 B         161 kB
-├ ○ /contact                             5.16 kB         157 kB
+├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                             3.1 kB         117 kB
+├ ○ /services                            3.11 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase
@@ -382,7 +382,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 11:30:54
+Generated at: 2026-01-18 11:48:22
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -409,7 +409,7 @@ Route (app)                                 Size  First Load JS
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
 ├   └ /Service/aura-clinic
-├ ○ /about                               6.67 kB         163 kB
+├ ○ /about                               6.68 kB         163 kB
 ├ ○ /blog                                  174 B         111 kB
 ├ ● /blog/[slug]                           174 B         111 kB
 ├   ├ /blog/5-points-killing-sales
@@ -417,11 +417,11 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
 ├ ○ /case-studies                          132 B         161 kB
-├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ƒ /case-studies/[slug]                  2.5 kB         122 kB
 ├ ○ /case-studies/unlink-th                132 B         161 kB
-├ ○ /contact                             5.16 kB         157 kB
+├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                             3.1 kB         117 kB
+├ ○ /services                            3.11 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase
@@ -452,19 +452,17 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 /** @format */
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography"; /* ✅ เพิ่ม Typography Plugin */
 
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH
-   Focus: Stability, Readability, and High-End Tech Aesthetics
-   Tech Stack: Tailwind CSS v4.0 + OKLCH Color Space
-*/
+/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH */
 
 @theme {
-  /* --- 1. Typography Hierarchy --- */
+  /* --- Typography --- */
   --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
   --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* --- 2. Animations (Smooth & Lightweight) --- */
+  /* --- Animations --- */
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(12deg); }
     50% { transform: translateY(-15px) rotate(14deg); }
@@ -480,22 +478,21 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   @keyframes marquee {
     from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 2.5rem)); } /* gap-10 = 2.5rem */
+    to { transform: translateX(calc(-100% - 2.5rem)); }
   }
   --animate-marquee: marquee 50s linear infinite;
 
-  /* --- 3. Colors Mapping (The "Nailing" Colors) --- */
+  /* --- Colors Mapping --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
-  --color-primary: var(--primary);
-
+  
   /* Aurora Accents */
   --color-aurora-cyan: var(--aurora-cyan);
   --color-aurora-violet: var(--aurora-violet);
   --color-aurora-emerald: var(--aurora-emerald);
 
-  /* --- 4. Shadows & Radius --- */
+  /* --- Shadows --- */
   --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
   --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
 
@@ -506,33 +503,27 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
 @layer base {
   :root {
-    /* 🟢 Light Mode */
+    /* 🟢 Light Mode Fallback */
     --background: oklch(0.99 0.005 240);
     --foreground: oklch(0.2 0.02 240);
-    --primary: oklch(0.6 0.16 160);
     --border: oklch(0.92 0.01 240);
-    
-    /* Fallback Aurora Colors for Light Mode */
     --aurora-cyan: oklch(0.65 0.15 200);
     --aurora-violet: oklch(0.55 0.20 280);
     --aurora-emerald: oklch(0.70 0.15 155);
   }
 
   .dark {
-    /* 🌑 Dark Mode: Midnight Deep Tech (Stable) */
-    /* 0.14 = ความมืดสนิทที่ยังเห็นมิติสี / 0.02 = ความสดที่ดูแพง / 260 = โทนน้ำเงินเย็น */
+    /* 🌑 Midnight Deep Tech */
     --background: oklch(0.14 0.02 260);
     --foreground: oklch(0.98 0.005 240);
-    --primary: oklch(0.78 0.18 155);
     --border: oklch(0.25 0.03 260 / 0.5);
-
-    /* Aurora Colors: High Gamut Neon */
+    
+    /* Neon Accents */
     --aurora-cyan: oklch(0.75 0.12 200);
     --aurora-violet: oklch(0.65 0.18 280);
     --aurora-emerald: oklch(0.82 0.18 155);
   }
 
-  /* ✅ Global Reset & Font Smoothing */
   * {
     border-color: var(--border);
   }
@@ -540,59 +531,36 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   body {
     @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
     font-family: var(--font-prompt);
-    text-rendering: optimizeLegibility;
-
-    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
+    
+    /* Noise-free Gradient */
     background-image:
-      radial-gradient(
-        circle at 2% 2%,
-        color-mix(in oklch, var(--aurora-cyan), transparent 97%),
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 98% 98%,
-        color-mix(in oklch, var(--aurora-violet), transparent 97%),
-        transparent 40%
-      );
+      radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
+      radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-black tracking-tighter uppercase;
   }
-
-  p, li, span {
-    font-family: var(--font-anuphan);
-  }
   
   p {
     @apply leading-relaxed font-medium;
+    font-family: var(--font-anuphan);
   }
 }
 
 @layer components {
-  /* 🪄 Layered UI Components */
-
+  /* 🪄 Layered UI */
   .aurora-bg {
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
     
-    /* ⚡ Mobile Performance: ลด Blur เหลือ 60px และใช้ Radial Gradient ที่คำนวณง่ายกว่า */
+    /* ⚡ Mobile Optimized: Reduced Blur & Complexity */
     filter: blur(60px);
-    background: radial-gradient(
-      circle, 
-      var(--aurora-cyan), 
-      var(--aurora-violet)
-    );
+    background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
-      /* Desktop: จัดเต็ม Blur 140px และ Animation */
       filter: blur(140px);
-      background: linear-gradient(
-        135deg,
-        var(--aurora-cyan),
-        var(--aurora-violet),
-        var(--aurora-emerald)
-      );
+      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet), var(--aurora-emerald));
       animation: var(--animate-aurora);
     }
   }
@@ -604,33 +572,22 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   .btn-luminous {
     @apply shadow-aurora-glow relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 font-bold transition-all duration-500 hover:scale-[1.03] active:scale-95;
-    background: linear-gradient(
-      135deg,
-      var(--aurora-cyan),
-      var(--aurora-emerald)
-    );
+    background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-emerald));
     color: oklch(0.14 0.02 260);
   }
 
   .glass-card {
     @apply shadow-luminous border backdrop-blur-2xl transition-all duration-500;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.03),
-      rgba(255, 255, 255, 0.01)
-    );
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border-color: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-2xl);
   }
 }
 
-/* ⚡ Utilities */
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  &::-webkit-scrollbar { display: none; }
 }
 ```
 ---
@@ -917,25 +874,19 @@ export default function HomePage() {
 import React from "react"
 import dynamic from "next/dynamic"
 
-/**
- * 🚀 HomeClientSections: Luminous Performance Engine (v.2026)
- * หน้าที่: โหลดส่วนประกอบที่ใช้ Logic หนักแบบ Deferred Loading
- * ✅ Optimized: ลด TBT และแก้ปัญหา CLS ด้วย Precise Skeletons
- */
-
 // 1. 🏗️ Impact Stats Loading Skeleton
 const ImpactStats = dynamic(
   () => import("@/components/sales-engine/ImpactStats").then((mod) => mod.ImpactStats),
   {
     ssr: false,
     loading: () => (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col items-center space-y-4">
               <div className="h-14 w-14 animate-pulse rounded-2xl bg-white/5" />
-              <div className="h-8 w-20 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5" />
             </div>
           ))}
         </div>
@@ -944,18 +895,18 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator Loading Skeleton
+// 2. 💰 Price Estimator Loading Skeleton (Height Fixed: 600px)
 const PriceEstimator = dynamic(
   () => import("@/components/sales-engine/PriceEstimator").then((mod) => mod.PriceEstimator),
   {
     ssr: false,
     loading: () => (
-      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] bg-white/5 border border-white/10">
-        <div className="h-12 w-48 rounded-xl bg-white/5 mb-8" />
-        <div className="w-full px-12 space-y-4">
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
+      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center border border-white/10 bg-white/5 rounded-[2.5rem]">
+        <div className="mb-8 h-8 w-48 rounded-xl bg-white/10" />
+        <div className="w-full space-y-6 px-12">
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
         </div>
       </div>
     ),
@@ -968,12 +919,10 @@ const Testimonials = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="container mx-auto px-4">
-        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="glass-card h-64 w-full animate-pulse rounded-3xl bg-white/5 p-10" />
-          ))}
-        </div>
+      <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="glass-card h-80 w-full animate-pulse rounded-[2rem] bg-white/5 p-10 mb-8 border border-white/5" />
+        ))}
       </div>
     ),
   }
@@ -982,18 +931,16 @@ const Testimonials = dynamic(
 export default function HomeClientSections() {
   return (
     <>
-      {/* 📊 Section 4: Impact Statistics (Social Proof) */}
+      {/* 📊 Section 4: Impact Statistics */}
       <section className="relative z-10 border-y border-white/5 bg-white/[0.01] py-24 backdrop-blur-3xl">
         <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <div className="relative">
-          <ImpactStats />
-        </div>
+        <ImpactStats />
       </section>
 
-      {/* 💰 Section 8: Calculator & Pricing (Conversion Engine) */}
+      {/* 💰 Section 8: Pricing Engine */}
       <section id="pricing" className="relative container mx-auto px-4 py-32 lg:py-48">
         <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
-
+        
         <div className="mx-auto max-w-5xl">
           <div className="mb-20 text-center">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
@@ -1007,16 +954,13 @@ export default function HomeClientSections() {
               <span className="text-white/60 text-sm">(งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงาน)</span>
             </p>
           </div>
-
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ Section 9: Client Testimonials (Trust Signals) */}
+      {/* ⭐ Section 9: Testimonials */}
       <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] py-32 md:rounded-t-[4.5rem]">
-        {/* Decor Accent */}
         <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-50" />
-
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
              <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
@@ -1978,8 +1922,9 @@ export const siteConfig = {
     "AEMDEVWEB",
   ],
 
-  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
-  themeColor: "#059669",
+  // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
+  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
+  themeColor: "oklch(0.82 0.18 155)", 
 } as const
 
 export type SiteConfig = typeof siteConfig
@@ -2250,8 +2195,9 @@ export const siteConfig = {
     "AEMDEVWEB",
   ],
 
-  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
-  themeColor: "#059669",
+  // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
+  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
+  themeColor: "oklch(0.82 0.18 155)", 
 } as const
 
 export type SiteConfig = typeof siteConfig
@@ -2466,8 +2412,9 @@ export const siteConfig = {
     "AEMDEVWEB",
   ],
 
-  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
-  themeColor: "#059669",
+  // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
+  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
+  themeColor: "oklch(0.82 0.18 155)", 
 } as const
 
 export type SiteConfig = typeof siteConfig
