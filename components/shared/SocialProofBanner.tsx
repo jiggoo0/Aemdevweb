@@ -1,8 +1,6 @@
 /** @format */
-"use client"
 
 import React from "react"
-// ✅ Fixed: Removed unused 'cn' and 'Zap' imports to clear ESLint errors
 import {
   Building2,
   Coffee,
@@ -27,14 +25,14 @@ const clients = [
 ]
 
 /**
- * 🎡 SocialProofBanner: Luminous Marquee Edition
- * จัดการส่วนแสดงโลโก้ลูกค้าให้ดูพรีเมียม สว่าง และไม่หมอง
+ * 🎡 SocialProofBanner: Luminous Marquee Server Edition
+ * Optimized for PageSpeed 100. Uses native CSS animations.
  */
 export const SocialProofBanner = () => {
   return (
     <section className="bg-background relative w-full overflow-hidden border-y border-white/5 py-16">
-      {/* 🌌 Aurora Ambient Light */}
-      <div className="aurora-bg top-1/2 left-1/2 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-[0.08]" />
+      {/* 🌌 Aurora Ambient Light: เลเยอร์แสงหลังสุด */}
+      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-[0.08]" />
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Title: Humanistic Friendly Typography */}
@@ -50,15 +48,16 @@ export const SocialProofBanner = () => {
           </p>
         </div>
 
-        {/* Marquee Container with Masking */}
+        {/* Marquee Container with Masking for Smooth Fading Edges */}
         <div className="relative flex w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          {/* Logo Tracks */}
+          {/* Track 1: Main Loop */}
           <div className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 md:gap-24">
             {clients.map((client) => (
               <LogoItem key={client.id} client={client} />
             ))}
           </div>
 
+          {/* Track 2: Infinite Clone (Aria Hidden for SEO) */}
           <div
             className="animate-marquee flex min-w-full shrink-0 items-center justify-around gap-16 md:gap-24"
             aria-hidden="true"
@@ -73,15 +72,18 @@ export const SocialProofBanner = () => {
   )
 }
 
+/**
+ * 🧩 LogoItem: Individual Client Identity
+ */
 const LogoItem = ({ client }: { client: (typeof clients)[0] }) => (
   <div className="group flex cursor-pointer flex-col items-center gap-4 transition-all duration-500 hover:-translate-y-2">
     {/* Icon Placeholder with Luminous Glass Style */}
     <div className="group-hover:text-aurora-cyan group-hover:bg-aurora-cyan/10 group-hover:border-aurora-cyan/30 group-hover:shadow-aurora-glow flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-slate-500 backdrop-blur-sm transition-all duration-500">
-      <client.icon className="h-7 w-7 transition-transform group-hover:scale-110" />
+      <client.icon className="h-7 w-7 transition-transform duration-500 group-hover:scale-110" />
     </div>
 
     {/* Client Name: Anuphan Font */}
-    <span className="font-anuphan text-xs font-black tracking-widest text-slate-500 uppercase transition-colors group-hover:text-white">
+    <span className="font-anuphan text-xs font-black tracking-widest text-slate-500 uppercase transition-colors duration-300 group-hover:text-white">
       {client.name}
     </span>
   </div>

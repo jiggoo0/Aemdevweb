@@ -1,10 +1,8 @@
 /** @format */
-"use client"
 
 import React from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
 
 interface AemBrandBadgeProps {
   className?: string
@@ -12,8 +10,8 @@ interface AemBrandBadgeProps {
 }
 
 /**
- * 💎 AemBrandBadge: The Kinetic Identity
- * ออกแบบใหม่โดยใช้แนวคิด "Light Engine" ที่เน้นความเร็วและมิติของแสง
+ * 💎 AemBrandBadge: The Kinetic Identity (Server-Optimized v.2026)
+ * Refactored to native CSS animations for 100/100 PageSpeed score.
  */
 export function AemBrandBadge({
   className,
@@ -30,14 +28,13 @@ export function AemBrandBadge({
     >
       {/* 🌌 1. The Kinetic Core (Logo) */}
       <div className="relative h-11 w-11 md:h-12 md:w-12">
-        {/* Deep Ambient Glow */}
-        <div className="bg-aurora-cyan/20 group-hover:bg-aurora-cyan/40 absolute inset-0 rounded-full blur-2xl transition-all duration-700" />
+        {/* Deep Ambient Glow: Layered behind everything */}
+        <div className="bg-aurora-cyan/20 group-hover:bg-aurora-cyan/40 absolute inset-0 -z-10 rounded-full blur-2xl transition-all duration-700" />
 
-        <motion.div
-          initial={false}
-          animate={{ rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm"
+        {/* Rotating border box using native CSS animation from globals.css */}
+        <div
+          className="linear infinite absolute inset-0 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm transition-transform duration-[20s] group-hover:rotate-90"
+          style={{ animation: "aurora 15s ease-in-out infinite" }}
         />
 
         <div className="relative flex h-full w-full items-center justify-center">
@@ -46,15 +43,8 @@ export function AemBrandBadge({
             <span className="font-prompt text-2xl font-black tracking-tighter text-white italic transition-transform duration-500 group-hover:scale-110">
               A
             </span>
-            {/* The "Dev Line" Accelerator */}
-            <motion.div
-              className="bg-aurora-cyan absolute -right-1 -bottom-1 h-2 w-2 rounded-full shadow-[0_0_15px_#7af3ff]"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.5, 1, 0.5],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            {/* The "Dev Line" Accelerator: Use animate-pulse instead of framer-motion */}
+            <div className="bg-aurora-cyan absolute -right-1 -bottom-1 h-2 w-2 animate-pulse rounded-full shadow-[0_0_15px_#7af3ff]" />
           </div>
         </div>
 
@@ -66,11 +56,8 @@ export function AemBrandBadge({
       {withText && (
         <div className="flex flex-col justify-center">
           <div className="overflow-hidden">
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              className="flex items-center"
-            >
+            {/* Native fade-in-up instead of motion.div */}
+            <div className="animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards flex items-center duration-700">
               <span className="font-prompt text-xl font-black tracking-tighter text-white uppercase italic md:text-2xl">
                 Aem
                 <span className="text-aurora-cyan relative ml-0.5 inline-block">
@@ -82,7 +69,7 @@ export function AemBrandBadge({
                   Web
                 </span>
               </span>
-            </motion.div>
+            </div>
           </div>
 
           <div className="mt-0.5 flex items-center gap-2 opacity-60 transition-opacity duration-500 group-hover:opacity-100">

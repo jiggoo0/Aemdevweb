@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 03:31:26
+Generated at: 2026-01-18 10:37:59
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -15,41 +15,40 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.1 kB         246 kB
+┌ ○ /                                      16 kB         135 kB
 ├ ○ /_not-found                            990 B         103 kB
-├ ● /[template]                          2.45 kB         242 kB
-├   ├ /sale-page
-├   ├ /food-beverage
-├   ├ /corporate
-├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         245 kB
+├ ● /[template]                            134 B         170 kB
+├   ├ /SalePage
+├   ├ /Service
+├   └ /Corporate
+├ ● /[template]/[slug]                     134 B         170 kB
 ├   ├ /SalePage/shop-master-pro
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
 ├   └ /Service/aura-clinic
-├ ○ /about                               6.42 kB         163 kB
+├ ○ /about                               6.67 kB         163 kB
 ├ ○ /blog                                  174 B         111 kB
 ├ ● /blog/[slug]                           174 B         111 kB
 ├   ├ /blog/5-points-killing-sales
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                        2.87 kB         162 kB
-├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th              2.87 kB         162 kB
-├ ○ /contact                             3.12 kB         225 kB
-├ ○ /robots.txt                              0 B            0 B
-├ ○ /services                            4.44 kB         229 kB
-├ ● /services/[slug]                     4.46 kB         234 kB
-├   ├ /services/sale-page
-├   ├ /services/corporate
-├   ├ /services/internal-system
-├   └ /services/speed-seo
-└ ○ /sitemap.xml                           128 B         102 kB
+├ ○ /case-studies                          132 B         161 kB
+├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ○ /case-studies/unlink-th                132 B         161 kB
+├ ○ /contact                             5.16 kB         157 kB
+├ ○ /robots.txt                            132 B         102 kB
+├ ○ /services                             3.1 kB         117 kB
+├ ● /services/[slug]                       134 B         170 kB
+├   ├ /services/shop-master-pro
+├   ├ /services/sushi-omakase
+├   ├ /services/law-firm-pro
+├   └ /services/aura-clinic
+└ ○ /sitemap.xml                           132 B         102 kB
 + First Load JS shared by all             102 kB
-  ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
+  ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.02 kB
+  └ other shared chunks (total)          2.05 kB
 
 
 ○  (Static)   prerendered as static content

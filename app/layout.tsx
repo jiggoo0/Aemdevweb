@@ -1,6 +1,6 @@
 /** @format */
 import type { Metadata, Viewport } from "next"
-import { Inter, Kanit, Prompt, Anuphan } from "next/font/google"
+import { Prompt, Anuphan } from "next/font/google"
 import NextTopLoader from "nextjs-toploader"
 import { Toaster } from "@/components/ui/sonner"
 import { AppProvider } from "@/providers/AppProvider"
@@ -8,32 +8,17 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-// --- 1. Setup Fonts: Humanistic Palette (Optimized) ---
-// ✅ เพิ่ม preload: true และคงค่า display: "swap" เพื่อลด LCP Delay ตามรายงาน PageSpeed
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-})
-
-const kanit = Kanit({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["thai", "latin"],
-  variable: "--font-kanit",
-  display: "swap",
-  preload: true,
-})
-
-const prompt = Prompt({
-  weight: ["300", "400", "500", "600", "700"],
+// --- 1. Setup Fonts: Modern Thai Stack ---
+const fontPrompt = Prompt({
+  weight: ["400", "600", "700"],
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
   preload: true,
 })
 
-const anuphan = Anuphan({
+const fontAnuphan = Anuphan({
+  weight: ["400", "500", "600"],
   subsets: ["thai", "latin"],
   variable: "--font-anuphan",
   display: "swap",
@@ -51,7 +36,6 @@ export const metadata: Metadata = {
     "รับทำเว็บไซต์",
     "Next.js 15",
     "ทำเว็บ SME",
-    "Web Development Thailand",
     "Sale Page",
     "aemdevweb",
     ...siteConfig.keywords,
@@ -89,15 +73,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
-// ✅ ปรับจูน Viewport เพื่อลด Layout Shift และกำหนดสีธีมให้ชัดเจน
+// ✅ Viewport Optimization
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" }, // Matches bg-background
   ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
 }
 
 // --- 3. Root Layout Component ---
@@ -110,36 +95,36 @@ export default function RootLayout({
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background min-h-screen font-sans antialiased transition-colors duration-500",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", 
-          inter.variable,
-          kanit.variable,
-          prompt.variable,
-          anuphan.variable
+          "bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
+          fontPrompt.variable,
+          fontAnuphan.variable
         )}
       >
-        {/* แถบโหลด: ปรับความเร็วเพื่อให้ไม่กวน Tรดหลักมากเกินไป */}
+        {/* 🚀 NextTopLoader: Tuned for Midnight Theme */}
         <NextTopLoader
-          color="linear-gradient(to right, oklch(0.75 0.12 200), oklch(0.82 0.18 155))"
+          color="oklch(0.78 0.12 200)" // Aurora Cyan
           initialPosition={0.08}
-          height={2} // ✅ ลดความหนาลงเพื่อลดงานของเบราว์เซอร์
+          height={2}
           showSpinner={false}
           easing="ease"
-          speed={200} // ✅ ปรับความเร็วให้ snappy ขึ้น
+          speed={200}
+          shadow="0 0 10px oklch(0.78 0.12 200),0 0 5px oklch(0.78 0.12 200)"
         />
 
         <AppProvider>
+          {/* Main Wrapper */}
           <div className="relative flex min-h-screen flex-col">{children}</div>
 
+          {/* Global Notification Engine */}
           <Toaster
             position="bottom-right"
             richColors
             closeButton
             theme="system"
             toastOptions={{
+              className:
+                "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
               style: {
-                borderRadius: "1.25rem",
-                padding: "1rem",
                 fontFamily: "var(--font-prompt)",
               },
             }}

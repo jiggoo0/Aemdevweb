@@ -1,7 +1,6 @@
 /** @format */
-"use client"
 
-import { motion } from "framer-motion"
+import React from "react"
 import {
   Zap,
   Search,
@@ -21,6 +20,7 @@ const features = [
       "ลืม WordPress ช้าๆ ไปได้เลย เราใช้ Next.js 15 (Server Components) ทำให้เว็บโหลดเสร็จในพริบตา ลูกค้าไม่ต้องรอ",
     color: "text-aurora-cyan",
     glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
+    delay: "delay-100",
   },
   {
     icon: Search,
@@ -29,6 +29,7 @@ const features = [
       "ไม่ใช่แค่ทำเว็บให้เสร็จ แต่เราวางโครงสร้าง H1-H6, Schema และ Meta Tags ให้ Google รักเว็บคุณตั้งแต่วันแรก",
     color: "text-aurora-violet",
     glow: "shadow-[0_0_20px_rgba(165,180,252,0.3)]",
+    delay: "delay-200",
   },
   {
     icon: MousePointerClick,
@@ -37,6 +38,7 @@ const features = [
       "เราไม่ได้ออกแบบตามใจศิลปิน แต่ออกแบบตามหลักจิตวิทยา (UX/UI) เพื่อให้ลูกค้าหาปุ่ม 'สั่งซื้อ' เจอไวที่สุด",
     color: "text-aurora-emerald",
     glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
+    delay: "delay-300",
   },
   {
     icon: Smartphone,
@@ -45,6 +47,7 @@ const features = [
       "ลูกค้า 90% ของคุณเข้าผ่านมือถือ เราจึงออกแบบบนหน้าจอมือถือเป็นหลัก ใช้นิ้วโป้งกดง่าย ไม่ต้องซูม",
     color: "text-aurora-cyan",
     glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
+    delay: "delay-400",
   },
   {
     icon: ShieldCheck,
@@ -53,6 +56,7 @@ const features = [
       "หมดห่วงเรื่องเว็บโดนแฮก หรือโดนฝังสคริปต์พนัน เพราะเราไม่มี Plugin รูรั่วเยอะเหมือน CMS ทั่วไป",
     color: "text-aurora-emerald",
     glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
+    delay: "delay-500",
   },
   {
     icon: LineChart,
@@ -61,6 +65,7 @@ const features = [
       "สายยิงแอดต้องชอบ! เราเตรียมพื้นที่สำหรับฝัง Facebook Pixel, TikTok Pixel และ GTM ไว้ให้พร้อมใช้งาน",
     color: "text-aurora-violet",
     glow: "shadow-[0_0_20px_rgba(165,180,252,0.3)]",
+    delay: "delay-600",
   },
 ]
 
@@ -68,15 +73,10 @@ export const ValueProp = () => {
   return (
     <div className="relative z-10 container mx-auto px-4">
       {/* 🌌 Luminous Section Header */}
-      <div className="mx-auto mb-20 max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          className="text-aurora-cyan mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-xl"
-        >
-          <Sparkles className="h-3.5 w-3.5 animate-pulse" /> The Unfair
-          Advantage
-        </motion.div>
+      <div className="animate-in fade-in slide-in-from-bottom-10 fill-mode-forwards mx-auto mb-20 max-w-4xl text-center duration-1000">
+        <div className="text-aurora-cyan mb-8 inline-flex animate-pulse items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-xl">
+          <Sparkles className="h-3.5 w-3.5" /> The Unfair Advantage
+        </div>
 
         <h2 className="text-luminous mb-8 text-4xl tracking-tighter uppercase md:text-7xl">
           ทำไมต้องจ้าง <span className="text-aurora-emerald">AemDevWeb?</span>
@@ -94,17 +94,13 @@ export const ValueProp = () => {
 
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: index * 0.1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            viewport={{ once: true }}
-            className="group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500"
+            className={cn(
+              "group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500",
+              "animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700",
+              feature.delay
+            )}
           >
             {/* Luminous Hover Decor */}
             <div className="bg-aurora-cyan/10 absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 blur-[60px] transition-opacity duration-700 group-hover:opacity-100" />
@@ -128,7 +124,7 @@ export const ValueProp = () => {
                 {feature.description}
               </p>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

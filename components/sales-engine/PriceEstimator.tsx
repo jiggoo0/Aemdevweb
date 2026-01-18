@@ -10,7 +10,7 @@ import {
   Sparkles,
   ShieldCheck,
   Zap,
-  LucideIcon,
+  type LucideIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/constants/site-config"
@@ -59,8 +59,8 @@ const features: Feature[] = [
 ]
 
 /**
- * 🍱 PriceEstimator Component
- * ระบบคำนวณราคาโปรเจกต์แบบ Interactive
+ * 🍱 PriceEstimator: Luminous Interactive Engine (v.2026)
+ * ระบบคำนวณราคาที่จูนมาเพื่อความลื่นไหลระดับ 100 PageSpeed
  */
 export function PriceEstimator() {
   const [selected, setSelected] = useState<string[]>(["base"])
@@ -80,9 +80,10 @@ export function PriceEstimator() {
 
   return (
     <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
-      {/* 🟢 Left Side: Options */}
+      {/* 🟢 Left Side: Options Engine */}
       <div className="relative flex-1 overflow-hidden p-8 md:p-12">
-        <div className="aurora-bg -top-20 -left-20 h-64 w-64 opacity-10" />
+        {/* Background Decor Layer */}
+        <div className="aurora-bg pointer-events-none -top-20 -left-20 -z-10 h-64 w-64 opacity-10" />
 
         <div className="relative z-10 mb-10 flex items-center gap-4">
           <div className="bg-aurora-cyan/10 border-aurora-cyan/20 rounded-2xl border p-3">
@@ -102,8 +103,8 @@ export function PriceEstimator() {
           {features.map((f) => (
             <motion.div
               key={f.id}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.015 }}
+              whileTap={{ scale: 0.985 }}
               onClick={() => toggleFeature(f.id, !!f.fixed)}
               className={cn(
                 "group flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition-all duration-500",
@@ -115,7 +116,7 @@ export function PriceEstimator() {
               <div className="flex items-start gap-4">
                 <div
                   className={cn(
-                    "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all",
+                    "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500",
                     selected.includes(f.id)
                       ? "bg-aurora-cyan border-aurora-cyan"
                       : "group-hover:border-aurora-cyan border-slate-600 bg-transparent"
@@ -138,7 +139,7 @@ export function PriceEstimator() {
                       {f.label}
                     </p>
                     {f.fixed && (
-                      <span className="bg-aurora-cyan/20 text-aurora-cyan rounded-full px-2 py-0.5 text-[10px] font-black tracking-widest uppercase">
+                      <span className="bg-aurora-cyan/20 text-aurora-cyan border-aurora-cyan/20 rounded-full border px-2 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase">
                         Required
                       </span>
                     )}
@@ -150,7 +151,7 @@ export function PriceEstimator() {
               </div>
               <span
                 className={cn(
-                  "ml-4 text-base font-black whitespace-nowrap",
+                  "ml-4 text-base font-black whitespace-nowrap transition-colors duration-500",
                   selected.includes(f.id)
                     ? "text-aurora-cyan"
                     : "text-slate-500"
@@ -163,9 +164,9 @@ export function PriceEstimator() {
         </div>
       </div>
 
-      {/* 🔵 Right Side: Summary */}
+      {/* 🔵 Right Side: Summary Engine */}
       <div className="relative flex flex-col justify-between border-l border-white/5 bg-slate-900/40 p-10 backdrop-blur-md md:w-[420px] md:p-14">
-        <div className="aurora-bg -right-20 -bottom-40 h-80 w-80 opacity-20" />
+        <div className="aurora-bg pointer-events-none -right-20 -bottom-40 -z-10 h-80 w-80 opacity-20" />
 
         <div className="relative z-10">
           <p className="mb-4 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
@@ -178,9 +179,10 @@ export function PriceEstimator() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={totalPrice}
-                initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 className="text-6xl leading-none font-black tracking-tighter text-white md:text-8xl"
               >
                 {totalPrice.toLocaleString()}
@@ -201,17 +203,18 @@ export function PriceEstimator() {
         <div className="relative z-10 mt-16">
           <Button
             asChild
-            className="btn-luminous shadow-luminous h-16 w-full text-lg tracking-widest uppercase"
+            className="btn-luminous shadow-luminous group h-16 w-full text-lg font-bold tracking-widest uppercase"
           >
             <a
               href={siteConfig.links?.line || "#"}
               target="_blank"
               rel="noopener noreferrer"
             >
-              Lock This Price <ArrowRight className="ml-2 h-5 w-5" />
+              Lock This Price{" "}
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
           </Button>
-          <p className="font-anuphan mt-6 text-center text-[11px] leading-relaxed font-medium text-slate-500">
+          <p className="font-anuphan mt-6 text-center text-[10px] leading-relaxed font-medium tracking-wider text-slate-500 uppercase">
             * ราคาประเมินเบื้องต้นเพื่อใช้ในการวางแผน <br />
             งบประมาณจริงอาจปรับตามสเกลงานของท่าน
           </p>
@@ -221,18 +224,19 @@ export function PriceEstimator() {
   )
 }
 
-interface FeatureItemProps {
-  icon: LucideIcon
-  text: string
-}
-
+/** 🧩 Sub-component: Feature Points */
 function FeatureItem({ icon: Icon, text }: FeatureItemProps) {
   return (
     <div className="group flex items-center gap-4 text-sm text-slate-400 transition-colors hover:text-slate-200 md:text-base">
-      <div className="group-hover:border-aurora-cyan/30 rounded-lg border border-white/10 bg-white/5 p-1.5 transition-all">
+      <div className="group-hover:border-aurora-cyan/30 rounded-lg border border-white/10 bg-white/5 p-1.5 transition-all duration-300">
         <Icon className="text-aurora-emerald h-5 w-5 shrink-0" />
       </div>
       <span className="font-anuphan font-medium tracking-wide">{text}</span>
     </div>
   )
+}
+
+interface FeatureItemProps {
+  icon: LucideIcon
+  text: string
 }

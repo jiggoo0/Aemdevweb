@@ -3,78 +3,36 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 03:46:33
+  Generated: 2026-01-18 06:56:33
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 03:46:33**_
+_Generated on: **2026-01-18 06:56:33**_
+
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
-✅ **READY FOR DEPLOY:** The project meets all production standards.
 
-### 📍 Production Route Map
-```text
-```text
-Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.1 kB         246 kB
-├ ○ /_not-found                            990 B         103 kB
-├ ● /[template]                          2.45 kB         242 kB
-├   ├ /sale-page
-├   ├ /food-beverage
-├   ├ /corporate
-├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         245 kB
-├   ├ /SalePage/shop-master-pro
-├   ├ /Service/sushi-omakase
-├   ├ /Corporate/law-firm-pro
-├   └ /Service/aura-clinic
-├ ○ /about                               6.42 kB         163 kB
-├ ○ /blog                                  174 B         111 kB
-├ ● /blog/[slug]                           174 B         111 kB
-├   ├ /blog/5-points-killing-sales
-├   ├ /blog/copywriting-secrets
-├   ├ /blog/facebook-ads-vs-website
-├   └ [+2 more paths]
-├ ○ /case-studies                        2.87 kB         162 kB
-├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th              2.87 kB         162 kB
-├ ○ /contact                             3.12 kB         225 kB
-├ ○ /robots.txt                              0 B            0 B
-├ ○ /services                            4.44 kB         229 kB
-├ ● /services/[slug]                     4.46 kB         234 kB
-├   ├ /services/sale-page
-├   ├ /services/corporate
-├   ├ /services/internal-system
-├   └ /services/speed-seo
-└ ○ /sitemap.xml                           128 B         102 kB
-+ First Load JS shared by all             102 kB
-  ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
-  ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.02 kB
-○  (Static)   prerendered as static content
-●  (SSG)      prerendered as static HTML (uses generateStaticParams)
-ƒ  (Dynamic)  server-rendered on demand
-```
-```
+⚠️ _Warning: `pre-deploy-report.md` not found. Run `pre-deploy-check.sh` for health metrics._
 
 ## 📊 2. File Statistics by Extension
+
 ```text
      63 tsx
-     16 ts
-     10 png
+     17 ts
+      7 png
       6 webp
       5 sh
       5 mdx
-      1 txt
       1 svg
       1 ico
       1 css
 ```
 
 ## 📁 3. Directory Structure (Architecture Tree)
+
 ```text
 📂 app/
   📂 (main)/
@@ -101,10 +59,10 @@ Route (app)                                 Size  First Load JS
   📄 favicon.ico
   📂 api/
   📄 apple-touch-icon.png
+  📄 robots.ts
   📄 globals.css
   📄 layout.tsx
   📄 loading.tsx
-  📄 robots.txt
   📄 sitemap.ts
   📂 (marketing)/
     📂 [template]/
@@ -185,23 +143,20 @@ Route (app)                                 Size  First Load JS
   📄 tree.sh
   📄 clean-project.sh
 📂 public/
-  📄 apple-touch-icon.png
+  📄 og-image.png
   📄 grid.svg
   📂 images/
     📄 og-image.png
     📂 showcase/
       📄 unlink-th1.webp
       📄 project-01.webp
-      📄 project-01.png
       📄 unlink-th.webp
     📂 blog/
       📄 project-01.webp
     📂 templates/
       📄 project-01.webp
       📄 project-01-mobile.webp
-  📄 og-image.png
   📂 download/
-  📄 icon.png
   📄 android-chrome-192x192.png
   📄 android-chrome-512x512.png
   📄 favicon-16x16.png
@@ -232,7 +187,9 @@ Route (app)                                 Size  First Load JS
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
+
 #### 🔍 Path: `ai-context.md`
+
 ```markdown
 🧬 Project DNA: AEMDEVWEB (v.2026)
 Project Identity: High-Conversion Web Factory for SMEs
@@ -382,78 +339,11 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
   Documentation maintained by AEMDEVWEB Creative Team.
   Last Updated: 2026-01-17
 ```
----
 
-#### 🔍 Path: `pre-deploy-report.md`
-```markdown
-# 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 03:31:26
-Branch: main
-
-## 🔐 1. Environment Check
-✅ Status: .env file exists and verified.
-## 🛠️  2. Auto-Fix Procedure
-✅ Status: Auto-fix completed or no issues found.
-## 🧹 3. Code Linting (ESLint)
-✅ Status: Linting passed.
-## ⌨️ 4. Type Safety Check
-✅ Status: TypeScript verified.
-## 🏗️  5. Production Build Test
-✅ Status: Build successfully optimized.
-### 📊 Route Statistics & Bundle Size
-```text
-Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.1 kB         246 kB
-├ ○ /_not-found                            990 B         103 kB
-├ ● /[template]                          2.45 kB         242 kB
-├   ├ /sale-page
-├   ├ /food-beverage
-├   ├ /corporate
-├   └ /health-beauty
-├ ● /[template]/[slug]                   4.86 kB         245 kB
-├   ├ /SalePage/shop-master-pro
-├   ├ /Service/sushi-omakase
-├   ├ /Corporate/law-firm-pro
-├   └ /Service/aura-clinic
-├ ○ /about                               6.42 kB         163 kB
-├ ○ /blog                                  174 B         111 kB
-├ ● /blog/[slug]                           174 B         111 kB
-├   ├ /blog/5-points-killing-sales
-├   ├ /blog/copywriting-secrets
-├   ├ /blog/facebook-ads-vs-website
-├   └ [+2 more paths]
-├ ○ /case-studies                        2.87 kB         162 kB
-├ ƒ /case-studies/[slug]                  3.6 kB         160 kB
-├ ○ /case-studies/unlink-th              2.87 kB         162 kB
-├ ○ /contact                             3.12 kB         225 kB
-├ ○ /robots.txt                              0 B            0 B
-├ ○ /services                            4.44 kB         229 kB
-├ ● /services/[slug]                     4.46 kB         234 kB
-├   ├ /services/sale-page
-├   ├ /services/corporate
-├   ├ /services/internal-system
-├   └ /services/speed-seo
-└ ○ /sitemap.xml                           128 B         102 kB
-+ First Load JS shared by all             102 kB
-  ├ chunks/291-90e2272a9717bdbd.js       45.7 kB
-  ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.02 kB
-
-
-○  (Static)   prerendered as static content
-●  (SSG)      prerendered as static HTML (uses generateStaticParams)
-ƒ  (Dynamic)  server-rendered on demand
-
-```
-
----
-## 🏆 Summary Result
-### ✅ READY FOR DEPLOY
-All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-```
 ---
 
 #### 🔍 Path: `app/globals.css`
+
 ```css
 /** @format */
 
@@ -618,9 +508,11 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/layout.tsx`
+
 ```typescript
 /** @format */
 import type { Metadata, Viewport } from "next"
@@ -632,11 +524,13 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-// --- 1. Setup Fonts: Humanistic Palette ---
+// --- 1. Setup Fonts: Humanistic Palette (Optimized) ---
+// ✅ เพิ่ม preload: true และคงค่า display: "swap" เพื่อลด LCP Delay ตามรายงาน PageSpeed
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
 })
 
 const kanit = Kanit({
@@ -644,6 +538,7 @@ const kanit = Kanit({
   subsets: ["thai", "latin"],
   variable: "--font-kanit",
   display: "swap",
+  preload: true,
 })
 
 const prompt = Prompt({
@@ -651,12 +546,14 @@ const prompt = Prompt({
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
+  preload: true,
 })
 
 const anuphan = Anuphan({
   subsets: ["thai", "latin"],
   variable: "--font-anuphan",
   display: "swap",
+  preload: true,
 })
 
 // --- 2. SEO & Metadata Strategy ---
@@ -708,6 +605,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
+// ✅ ปรับจูน Viewport เพื่อลด Layout Shift และกำหนดสีธีมให้ชัดเจน
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
@@ -729,21 +627,21 @@ export default function RootLayout({
       <body
         className={cn(
           "bg-background min-h-screen font-sans antialiased transition-colors duration-500",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // ปรับให้เข้ากับธีม Luminous
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan",
           inter.variable,
           kanit.variable,
           prompt.variable,
           anuphan.variable
         )}
       >
-        {/* แถบโหลด: Gradient สไตล์ Luminous Tech */}
+        {/* แถบโหลด: ปรับความเร็วเพื่อให้ไม่กวน Tรดหลักมากเกินไป */}
         <NextTopLoader
           color="linear-gradient(to right, oklch(0.75 0.12 200), oklch(0.82 0.18 155))"
           initialPosition={0.08}
-          height={3}
+          height={2} // ✅ ลดความหนาลงเพื่อลดงานของเบราว์เซอร์
           showSpinner={false}
           easing="ease"
-          speed={300}
+          speed={200} // ✅ ปรับความเร็วให้ snappy ขึ้น
         />
 
         <AppProvider>
@@ -768,9 +666,11 @@ export default function RootLayout({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -862,9 +762,11 @@ export default function HomePage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
+
 ```typescript
 /** @format */
 "use client"
@@ -936,9 +838,11 @@ export default function HomeClientSections() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 import { Metadata } from "next"
@@ -1171,9 +1075,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1401,9 +1307,11 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1622,9 +1530,11 @@ export default function UnlinkCaseStudyPage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
+
 ```typescript
 /** @format */
 import type { MDXComponents } from "mdx/types"
@@ -1754,76 +1664,83 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
+
 import { Metadata } from "next"
 
 export const siteConfig = {
-  // 🏢 1. Brand Information (Identity)
-  name: "นายเอ็มซ่ามากส์",
+  // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
+  name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
   companyName: "นายเอ็มซ่ามากส์ DevWeb Solutions",
   shortName: "เอ็มซ่ามากส์",
-  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
 
-  // 🏷️ SEO Defaults
-  title: "นายเอ็มซ่ามากส์ - รับทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+  // 📢 Tagline: เน้นเรื่องการขายและปากท้อง
+  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
+
+  // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
+  title:
+    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
   description:
-    "รับทำเว็บไซต์หน้าเดียวปิดการขายฉบับ นายเอ็มซ่ามากส์ - คุยง่าย งานไว ไม่เรื่องเยอะ เน้นกดลิงก์ทักไลน์แล้วจบงานได้เลย ด้วยเทคโนโลยี Next.js 15",
+    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
 
-  // 🔗 3. Social Media & Direct Links (The Sales Engine 🚀)
+  // 🔗 3. Social Media & Direct Links (เน้น Line เพราะคนไทยชอบใช้)
   links: {
     facebook: "https://www.facebook.com/share/186gv7BAsc/",
     messenger: "https://m.me/aemdevweb",
-    line: "https://lin.ee/SVMBEJ8", // Link สำหรับกด Add Friend
-    lineId: "@127cnhtn", // Display ID
-    github: "https://github.com/aemdevweb", // Optional
+    line: "https://lin.ee/SVMBEJ8",
+    lineId: "@127cnhtn",
+    github: "https://github.com/aemdevweb",
   },
 
   // 📞 4. Contact Details
   contact: {
-    email: "aemdevweb@gmail.com",
+    email: "me@aemdevweb.com",
     tel: "099-999-8989",
-    telDisplay: "099-999-8989",
-    address: "Bangkok, Thailand",
+    telDisplay: "099-999-8989 (สายตรงคุณเอ็ม)",
+    address: "กรุงเทพฯ และทั่วประเทศ (คุยออนไลน์ได้เลย)",
   },
 
-  // 📣 5. Call to Action (Wording)
+  // 📣 5. Call to Action (เน้นความเป็นกันเอง ลดกำแพงลูกค้า)
   cta: {
-    main: "ทักไลน์ ปรึกษาเอ็มเลย",
-    secondary: "ดูผลงานที่ผ่านมา",
-    consult: "จองคิวทำเว็บ",
-    pricing: "เช็คราคาประเมิน",
+    main: "ทักไลน์ปรึกษาเอ็ม (ฟรีครับ)",
+    secondary: "ส่องผลงานที่ผ่านมา",
+    consult: "จองคิวทำเว็บวันนี้",
+    pricing: "เช็คราคาประเมิน (ไม่บานปลาย)",
   },
 
-  // 📈 6. Keywords Strategy
+  // 📈 6. Keywords Strategy (ใช้คำที่คนไทยค้นหาจริง เวลาเจอปัญหา)
   keywords: [
     "นายเอ็มซ่ามากส์",
     "เอ็มซ่ามากส์รับทำเว็บ",
-    "รับทำเว็บไซต์ SME",
-    "รับทำ Sale Page",
+    "จ้างทำเว็บคุยง่ายๆ",
+    "คนทำเว็บไม่ทิ้งงาน",
+    "รับทำเซลเพจ SME",
     "เว็บหน้าเดียวปิดการขาย",
+    "ทำเว็บทักไลน์จบ",
+    "รับทำเว็บไซต์ราคาถูกและดี",
+    "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    "ทำเว็บทักไลน์",
-    "รับทำเว็บ Next.js",
-    "จ้างทำเว็บราคาถูก",
   ],
 
-  // 🎨 7. Theme Identity
-  themeColor: "#059669", // Emerald-600 (AEM Green)
+  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
+  themeColor: "#059669",
 } as const
 
 export type SiteConfig = typeof siteConfig
 
 /**
  * 🛠️ Metadata Generator Helper
- * ฟังก์ชันช่วยสร้าง SEO Tags ให้แต่ละหน้าอัตโนมัติ (Next.js 15 Standard)
+ * ปรับแต่งมาเพื่อ SEO ที่คนไทยชอบ (เน้นชื่อแบรนด์และจุดเด่น)
  */
 export function constructMetadata({
   title,
@@ -1840,32 +1757,22 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
-      template: `%s | ${siteConfig.shortName}`,
+      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
+      default: title
+        ? `${title} | ${siteConfig.shortName}`
+        : `${siteConfig.title}`,
+      template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
-    // ✅ Fix: Cast as string[] to resolve 'readonly' incompatibility with Metadata type
-    keywords: siteConfig.keywords as unknown as string[],
-    authors: [
-      {
-        name: siteConfig.name,
-        url: siteConfig.url,
-      },
-    ],
+    keywords: [...siteConfig.keywords],
+    authors: [{ name: siteConfig.name }],
     creator: siteConfig.companyName,
     openGraph: {
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       url: siteConfig.url,
       siteName: siteConfig.name,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title || siteConfig.name,
-        },
-      ],
+      images: [{ url: image }],
       type: "website",
       locale: "th_TH",
     },
@@ -1874,22 +1781,20 @@ export function constructMetadata({
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       images: [image],
-      creator: "@aemdevweb",
     },
     icons,
     metadataBase: new URL(siteConfig.url),
     ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
-      },
+      robots: { index: false, follow: false },
     }),
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
+
 ```typescript
 /** @format */
 
@@ -2035,76 +1940,83 @@ export const getFeaturedServices = (): ServiceItem[] =>
 export const getOtherServices = (currentSlug: string): ServiceItem[] =>
   servicesData.filter((s) => s.slug !== currentSlug)
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
+
 import { Metadata } from "next"
 
 export const siteConfig = {
-  // 🏢 1. Brand Information (Identity)
-  name: "นายเอ็มซ่ามากส์",
+  // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
+  name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
   companyName: "นายเอ็มซ่ามากส์ DevWeb Solutions",
   shortName: "เอ็มซ่ามากส์",
-  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
 
-  // 🏷️ SEO Defaults
-  title: "นายเอ็มซ่ามากส์ - รับทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+  // 📢 Tagline: เน้นเรื่องการขายและปากท้อง
+  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
+
+  // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
+  title:
+    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
   description:
-    "รับทำเว็บไซต์หน้าเดียวปิดการขายฉบับ นายเอ็มซ่ามากส์ - คุยง่าย งานไว ไม่เรื่องเยอะ เน้นกดลิงก์ทักไลน์แล้วจบงานได้เลย ด้วยเทคโนโลยี Next.js 15",
+    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
 
-  // 🔗 3. Social Media & Direct Links (The Sales Engine 🚀)
+  // 🔗 3. Social Media & Direct Links (เน้น Line เพราะคนไทยชอบใช้)
   links: {
     facebook: "https://www.facebook.com/share/186gv7BAsc/",
     messenger: "https://m.me/aemdevweb",
-    line: "https://lin.ee/SVMBEJ8", // Link สำหรับกด Add Friend
-    lineId: "@127cnhtn", // Display ID
-    github: "https://github.com/aemdevweb", // Optional
+    line: "https://lin.ee/SVMBEJ8",
+    lineId: "@127cnhtn",
+    github: "https://github.com/aemdevweb",
   },
 
   // 📞 4. Contact Details
   contact: {
-    email: "aemdevweb@gmail.com",
+    email: "me@aemdevweb.com",
     tel: "099-999-8989",
-    telDisplay: "099-999-8989",
-    address: "Bangkok, Thailand",
+    telDisplay: "099-999-8989 (สายตรงคุณเอ็ม)",
+    address: "กรุงเทพฯ และทั่วประเทศ (คุยออนไลน์ได้เลย)",
   },
 
-  // 📣 5. Call to Action (Wording)
+  // 📣 5. Call to Action (เน้นความเป็นกันเอง ลดกำแพงลูกค้า)
   cta: {
-    main: "ทักไลน์ ปรึกษาเอ็มเลย",
-    secondary: "ดูผลงานที่ผ่านมา",
-    consult: "จองคิวทำเว็บ",
-    pricing: "เช็คราคาประเมิน",
+    main: "ทักไลน์ปรึกษาเอ็ม (ฟรีครับ)",
+    secondary: "ส่องผลงานที่ผ่านมา",
+    consult: "จองคิวทำเว็บวันนี้",
+    pricing: "เช็คราคาประเมิน (ไม่บานปลาย)",
   },
 
-  // 📈 6. Keywords Strategy
+  // 📈 6. Keywords Strategy (ใช้คำที่คนไทยค้นหาจริง เวลาเจอปัญหา)
   keywords: [
     "นายเอ็มซ่ามากส์",
     "เอ็มซ่ามากส์รับทำเว็บ",
-    "รับทำเว็บไซต์ SME",
-    "รับทำ Sale Page",
+    "จ้างทำเว็บคุยง่ายๆ",
+    "คนทำเว็บไม่ทิ้งงาน",
+    "รับทำเซลเพจ SME",
     "เว็บหน้าเดียวปิดการขาย",
+    "ทำเว็บทักไลน์จบ",
+    "รับทำเว็บไซต์ราคาถูกและดี",
+    "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    "ทำเว็บทักไลน์",
-    "รับทำเว็บ Next.js",
-    "จ้างทำเว็บราคาถูก",
   ],
 
-  // 🎨 7. Theme Identity
-  themeColor: "#059669", // Emerald-600 (AEM Green)
+  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
+  themeColor: "#059669",
 } as const
 
 export type SiteConfig = typeof siteConfig
 
 /**
  * 🛠️ Metadata Generator Helper
- * ฟังก์ชันช่วยสร้าง SEO Tags ให้แต่ละหน้าอัตโนมัติ (Next.js 15 Standard)
+ * ปรับแต่งมาเพื่อ SEO ที่คนไทยชอบ (เน้นชื่อแบรนด์และจุดเด่น)
  */
 export function constructMetadata({
   title,
@@ -2121,32 +2033,22 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
-      template: `%s | ${siteConfig.shortName}`,
+      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
+      default: title
+        ? `${title} | ${siteConfig.shortName}`
+        : `${siteConfig.title}`,
+      template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
-    // ✅ Fix: Cast as string[] to resolve 'readonly' incompatibility with Metadata type
-    keywords: siteConfig.keywords as unknown as string[],
-    authors: [
-      {
-        name: siteConfig.name,
-        url: siteConfig.url,
-      },
-    ],
+    keywords: [...siteConfig.keywords],
+    authors: [{ name: siteConfig.name }],
     creator: siteConfig.companyName,
     openGraph: {
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       url: siteConfig.url,
       siteName: siteConfig.name,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title || siteConfig.name,
-        },
-      ],
+      images: [{ url: image }],
       type: "website",
       locale: "th_TH",
     },
@@ -2155,22 +2057,20 @@ export function constructMetadata({
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       images: [image],
-      creator: "@aemdevweb",
     },
     icons,
     metadataBase: new URL(siteConfig.url),
     ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
-      },
+      robots: { index: false, follow: false },
     }),
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/templates-data.ts`
+
 ```typescript
 /** @format */
 
@@ -2260,76 +2160,83 @@ export const getRelatedTemplates = (
     .slice(0, limit)
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
+
 import { Metadata } from "next"
 
 export const siteConfig = {
-  // 🏢 1. Brand Information (Identity)
-  name: "นายเอ็มซ่ามากส์",
+  // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
+  name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
   companyName: "นายเอ็มซ่ามากส์ DevWeb Solutions",
   shortName: "เอ็มซ่ามากส์",
-  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
 
-  // 🏷️ SEO Defaults
-  title: "นายเอ็มซ่ามากส์ - รับทำเว็บซ่าๆ ปิดการขายไวมากส์ สำหรับ SME ไทย",
+  // 📢 Tagline: เน้นเรื่องการขายและปากท้อง
+  tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
+
+  // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
+  title:
+    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
   description:
-    "รับทำเว็บไซต์หน้าเดียวปิดการขายฉบับ นายเอ็มซ่ามากส์ - คุยง่าย งานไว ไม่เรื่องเยอะ เน้นกดลิงก์ทักไลน์แล้วจบงานได้เลย ด้วยเทคโนโลยี Next.js 15",
+    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
 
-  // 🔗 3. Social Media & Direct Links (The Sales Engine 🚀)
+  // 🔗 3. Social Media & Direct Links (เน้น Line เพราะคนไทยชอบใช้)
   links: {
     facebook: "https://www.facebook.com/share/186gv7BAsc/",
     messenger: "https://m.me/aemdevweb",
-    line: "https://lin.ee/SVMBEJ8", // Link สำหรับกด Add Friend
-    lineId: "@127cnhtn", // Display ID
-    github: "https://github.com/aemdevweb", // Optional
+    line: "https://lin.ee/SVMBEJ8",
+    lineId: "@127cnhtn",
+    github: "https://github.com/aemdevweb",
   },
 
   // 📞 4. Contact Details
   contact: {
-    email: "aemdevweb@gmail.com",
+    email: "me@aemdevweb.com",
     tel: "099-999-8989",
-    telDisplay: "099-999-8989",
-    address: "Bangkok, Thailand",
+    telDisplay: "099-999-8989 (สายตรงคุณเอ็ม)",
+    address: "กรุงเทพฯ และทั่วประเทศ (คุยออนไลน์ได้เลย)",
   },
 
-  // 📣 5. Call to Action (Wording)
+  // 📣 5. Call to Action (เน้นความเป็นกันเอง ลดกำแพงลูกค้า)
   cta: {
-    main: "ทักไลน์ ปรึกษาเอ็มเลย",
-    secondary: "ดูผลงานที่ผ่านมา",
-    consult: "จองคิวทำเว็บ",
-    pricing: "เช็คราคาประเมิน",
+    main: "ทักไลน์ปรึกษาเอ็ม (ฟรีครับ)",
+    secondary: "ส่องผลงานที่ผ่านมา",
+    consult: "จองคิวทำเว็บวันนี้",
+    pricing: "เช็คราคาประเมิน (ไม่บานปลาย)",
   },
 
-  // 📈 6. Keywords Strategy
+  // 📈 6. Keywords Strategy (ใช้คำที่คนไทยค้นหาจริง เวลาเจอปัญหา)
   keywords: [
     "นายเอ็มซ่ามากส์",
     "เอ็มซ่ามากส์รับทำเว็บ",
-    "รับทำเว็บไซต์ SME",
-    "รับทำ Sale Page",
+    "จ้างทำเว็บคุยง่ายๆ",
+    "คนทำเว็บไม่ทิ้งงาน",
+    "รับทำเซลเพจ SME",
     "เว็บหน้าเดียวปิดการขาย",
+    "ทำเว็บทักไลน์จบ",
+    "รับทำเว็บไซต์ราคาถูกและดี",
+    "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    "ทำเว็บทักไลน์",
-    "รับทำเว็บ Next.js",
-    "จ้างทำเว็บราคาถูก",
   ],
 
-  // 🎨 7. Theme Identity
-  themeColor: "#059669", // Emerald-600 (AEM Green)
+  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
+  themeColor: "#059669",
 } as const
 
 export type SiteConfig = typeof siteConfig
 
 /**
  * 🛠️ Metadata Generator Helper
- * ฟังก์ชันช่วยสร้าง SEO Tags ให้แต่ละหน้าอัตโนมัติ (Next.js 15 Standard)
+ * ปรับแต่งมาเพื่อ SEO ที่คนไทยชอบ (เน้นชื่อแบรนด์และจุดเด่น)
  */
 export function constructMetadata({
   title,
@@ -2346,32 +2253,22 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
-      template: `%s | ${siteConfig.shortName}`,
+      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
+      default: title
+        ? `${title} | ${siteConfig.shortName}`
+        : `${siteConfig.title}`,
+      template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
-    // ✅ Fix: Cast as string[] to resolve 'readonly' incompatibility with Metadata type
-    keywords: siteConfig.keywords as unknown as string[],
-    authors: [
-      {
-        name: siteConfig.name,
-        url: siteConfig.url,
-      },
-    ],
+    keywords: [...siteConfig.keywords],
+    authors: [{ name: siteConfig.name }],
     creator: siteConfig.companyName,
     openGraph: {
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       url: siteConfig.url,
       siteName: siteConfig.name,
-      images: [
-        {
-          url: image,
-          width: 1200,
-          height: 630,
-          alt: title || siteConfig.name,
-        },
-      ],
+      images: [{ url: image }],
       type: "website",
       locale: "th_TH",
     },
@@ -2380,22 +2277,20 @@ export function constructMetadata({
       title: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       description,
       images: [image],
-      creator: "@aemdevweb",
     },
     icons,
     metadataBase: new URL(siteConfig.url),
     ...(noIndex && {
-      robots: {
-        index: false,
-        follow: false,
-      },
+      robots: { index: false, follow: false },
     }),
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
+
 ```typescript
 /** @format */
 
@@ -2529,9 +2424,11 @@ export const siteKeywords = [
   "รับทำเว็บ Next.js",
 ] as string[]
 ```
+
 ---
 
 #### 🔍 Path: `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -2577,9 +2474,11 @@ export const siteKeywords = [
   "exclude": ["node_modules"]
 }
 ```
+
 ---
 
 #### 🔍 Path: `tailwind.config.ts`
+
 ```typescript
 /** @format */
 import type { Config } from "tailwindcss"
@@ -2735,9 +2634,11 @@ const config: Config = {
 
 export default config
 ```
+
 ---
 
 #### 🔍 Path: `package.json`
+
 ```json
 {
   "name": "aemdevweb.com",
@@ -2809,9 +2710,11 @@ export default config
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `types/index.ts`
+
 ```typescript
 /** @format */
 
@@ -2987,9 +2890,11 @@ export interface TestimonialItem {
   company?: string
 }
 ```
+
 ---
 
 #### 🔍 Path: `next.config.ts`
+
 ```typescript
 /** @format */
 import type { NextConfig } from "next"
@@ -3062,9 +2967,11 @@ const withMDX = createMDX({
 
 export default withMDX(nextConfig)
 ```
+
 ---
 
 #### 🔍 Path: `components.json`
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -3089,9 +2996,11 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/mdx.ts`
+
 ```typescript
 /** @format */
 import fs from "fs"
@@ -3163,14 +3072,19 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   return allPosts.find((post) => post.slug === slug) || null
 }
 ```
+
 ---
 
 #### 🔍 Path: `.env`
+
 ```text
+
 ```
+
 ---
 
 ## 📝 Summary
+
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

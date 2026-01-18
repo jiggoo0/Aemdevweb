@@ -1,15 +1,17 @@
 /** @format */
 
 /**
- * ✅ แก้ไขปัญหา Lint: Assign object to a variable before exporting
- * กฎ: import/no-anonymous-default-export
+ * 📄 postcss.config.mjs
+ * ✅ Configured for Tailwind CSS v4 & Next.js 15
+ * แก้ปัญหา Lint: Assign object to a variable before exporting
  */
-const postcssConfig = {
+const config = {
   plugins: {
-    // ✅ ใช้ปลั๊กอินใหม่สำหรับ Tailwind CSS v4 ตามที่พี่อัปเดต
+    // 🚀 Tailwind v4 Engine
     "@tailwindcss/postcss": {},
+    // 🛠️ Auto-prefixer for cross-browser compatibility
     autoprefixer: {},
   },
 }
 
-export default postcssConfig
+export default config

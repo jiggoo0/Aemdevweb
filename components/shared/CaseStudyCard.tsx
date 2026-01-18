@@ -1,4 +1,5 @@
 /** @format */
+
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -11,12 +12,13 @@ interface CaseStudyCardProps {
   category: string
   image: string
   stats: { label: string; value: string }
-  themeColor?: string
+  themeColor?: "aurora-cyan" | "aurora-violet" | "aurora-emerald"
+  priority?: boolean // ✅ เพิ่มพร็อพเพื่อคุมการโหลดรูป LCP
 }
 
 /**
- * 🏆 CaseStudyCard: Luminous Showcase Edition
- * ปรับปรุง: ใช้ Aurora Glow และ Layered Glass เพื่อสร้าง Impact สูงสุดให้กับผลงาน
+ * 🏆 CaseStudyCard: Luminous Showcase Server Edition
+ * Architecture: Next.js 15.x + Tailwind CSS 4.0
  */
 export function CaseStudyCard({
   title,
@@ -24,17 +26,42 @@ export function CaseStudyCard({
   category,
   image,
   stats,
-  themeColor = "aurora-cyan", // ✅ Default theme color
+  themeColor = "aurora-cyan",
+  priority = false,
 }: CaseStudyCardProps) {
+  // 🎨 Theme Mapping Dictionary เพื่อความคลีนของโค้ด
+  const themes = {
+    "aurora-cyan": {
+      border: "hover:border-aurora-cyan/30",
+      text: "text-aurora-cyan",
+      hoverTitle: "group-hover:text-aurora-cyan",
+      bg: "bg-aurora-cyan",
+      via: "via-aurora-cyan/40",
+    },
+    "aurora-violet": {
+      border: "hover:border-aurora-violet/30",
+      text: "text-aurora-violet",
+      hoverTitle: "group-hover:text-aurora-violet",
+      bg: "bg-aurora-violet",
+      via: "via-aurora-violet/40",
+    },
+    "aurora-emerald": {
+      border: "hover:border-aurora-emerald/30",
+      text: "text-aurora-emerald",
+      hoverTitle: "group-hover:text-aurora-emerald",
+      bg: "bg-aurora-emerald",
+      via: "via-aurora-emerald/40",
+    },
+  }
+
+  const currentTheme = themes[themeColor]
+
   return (
     <Link
       href={`/case-studies/${slug}`}
       className={cn(
         "group bg-background shadow-luminous relative block overflow-hidden rounded-4xl border border-white/5 transition-all duration-700 hover:-translate-y-2",
-        // ✅ ใช้ themeColor เพื่อกำหนดสีขอบตอน Hover
-        themeColor === "aurora-cyan" && "hover:border-aurora-cyan/30",
-        themeColor === "aurora-violet" && "hover:border-aurora-violet/30",
-        themeColor === "aurora-emerald" && "hover:border-aurora-emerald/30"
+        currentTheme.border
       )}
     >
       {/* 🖼️ Premium Image Layer */}
@@ -42,13 +69,13 @@ export function CaseStudyCard({
         <Image
           src={image}
           alt={title}
-          width={800}
-          height={500}
-          className="object-cover opacity-70 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-100"
-          priority
+          fill
+          className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-90"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority={priority}
         />
-        {/* Luminous Overlay Shade */}
-        <div className="from-background via-background/20 absolute inset-0 bg-gradient-to-t to-transparent opacity-80" />
+        {/* Luminous Overlay Shade: ปรับให้เข้มขึ้นที่ฐานเพื่อให้ตัวหนังสืออ่านง่าย */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90" />
       </div>
 
       {/* ✨ Luminous Info Overlay */}
@@ -57,14 +84,9 @@ export function CaseStudyCard({
           <div className="max-w-[70%] space-y-4">
             <span
               className={cn(
-                "shadow-aurora-glow inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-colors",
-                // ✅ แก้ไข: นำ themeColor มาใช้จริงเพื่อกำหนดสีข้อความ
-                themeColor === "aurora-cyan" &&
-                  "text-aurora-cyan group-hover:text-white",
-                themeColor === "aurora-violet" &&
-                  "text-aurora-violet group-hover:text-white",
-                themeColor === "aurora-emerald" &&
-                  "text-aurora-emerald group-hover:text-white"
+                "shadow-aurora-glow inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-colors duration-500",
+                currentTheme.text,
+                "group-hover:text-white"
               )}
             >
               <Sparkles className="h-3 w-3 animate-pulse" />
@@ -72,26 +94,21 @@ export function CaseStudyCard({
             </span>
             <h3
               className={cn(
-                "font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase transition-colors md:text-4xl",
-                // ✅ แก้ไข: นำ themeColor มาใช้ตอน hover title
-                themeColor === "aurora-cyan" && "group-hover:text-aurora-cyan",
-                themeColor === "aurora-violet" &&
-                  "group-hover:text-aurora-violet",
-                themeColor === "aurora-emerald" &&
-                  "group-hover:text-aurora-emerald"
+                "font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase transition-colors duration-500 md:text-4xl",
+                currentTheme.hoverTitle
               )}
             >
               {title}
             </h3>
           </div>
 
-          {/* ⚡ Luminous Performance Badge */}
-          <div className="shadow-luminous group-hover:shadow-aurora-glow min-w-[120px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-3 group-hover:bg-white/10">
-            <p className="font-anuphan mb-2 flex items-center justify-center gap-1.5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+          {/* ⚡ Performance Badge */}
+          <div className="shadow-luminous group-hover:shadow-aurora-glow min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10">
+            <p className="font-anuphan mb-1.5 flex items-center justify-center gap-1.5 text-[9px] font-black tracking-widest text-slate-400 uppercase">
               <Zap className="text-aurora-emerald fill-aurora-emerald h-3 w-3 animate-pulse" />{" "}
               {stats.label}
             </p>
-            <p className="text-2xl font-black tracking-tighter text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">
+            <p className="text-2xl font-black tracking-tighter text-white">
               {stats.value}
             </p>
           </div>
@@ -102,10 +119,7 @@ export function CaseStudyCard({
       <div
         className={cn(
           "shadow-aurora-glow absolute top-8 right-8 flex h-12 w-12 translate-y-6 scale-75 items-center justify-center rounded-2xl text-slate-950 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100",
-          // ✅ แก้ไข: ปุ่ม CTA เปลี่ยนสีตาม Theme
-          themeColor === "aurora-cyan" && "bg-aurora-cyan",
-          themeColor === "aurora-violet" && "bg-aurora-violet",
-          themeColor === "aurora-emerald" && "bg-aurora-emerald"
+          currentTheme.bg
         )}
       >
         <ArrowUpRight className="h-6 w-6 stroke-[3px]" />
@@ -115,10 +129,7 @@ export function CaseStudyCard({
       <div
         className={cn(
           "absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100",
-          // ✅ แก้ไข: เส้นเรืองแสงด้านล่างตาม Theme
-          themeColor === "aurora-cyan" && "via-aurora-cyan/40",
-          themeColor === "aurora-violet" && "via-aurora-violet/40",
-          themeColor === "aurora-emerald" && "via-aurora-emerald/40"
+          currentTheme.via
         )}
       />
     </Link>

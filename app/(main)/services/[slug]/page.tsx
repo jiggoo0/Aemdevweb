@@ -1,230 +1,291 @@
 /** @format */
+
+import React, { Suspense } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import {
-  CheckCircle2,
-  ArrowRight,
-  Sparkles,
-  // ✅ Fixed: Removed unused 'MessageCircle' to clear ESLint error
-  Zap,
-} from "lucide-react"
+import { Rocket, Paintbrush, ShieldCheck } from "lucide-react"
 
 // 📦 Data & Utils
-import {
-  getServiceBySlug,
-  getOtherServices,
-  servicesData,
-} from "@/constants/services-data"
+import { getTemplateBySlug, templatesData } from "@/constants/templates-data"
 import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
-// 🛠️ Components
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+// 🧩 Layout Components
+import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
+import { Footer } from "@/components/shared/Footer"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
-import { ServiceCard } from "@/components/shared/ServiceCard"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
-interface PageProps {
-  params: Promise<{ slug: string }>
+// 🧩 Page Components
+import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
+import { TemplateFeatures } from "@/components/template/shared/TemplateFeatures"
+import { DevicePreview } from "@/components/template/shared/DevicePreview"
+import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
+import { SalesHook } from "@/components/template/shared/SalesHook"
+
+interface DetailPageProps {
+  params: Promise<{
+    template: string
+    slug: string
+  }>
 }
 
 /**
- * 🧬 1. Static Params (SSG)
+ * 🧬 1. Static Params Generation: Pre-render all templates at build time
  */
 export async function generateStaticParams() {
-  return servicesData.map((service) => ({
-    slug: service.slug,
+  return templatesData.map((tpl) => ({
+    template: tpl.category || "sale-page",
+    slug: tpl.slug,
   }))
 }
 
 /**
- * 🔍 2. Dynamic Metadata
+ * 🔍 2. Dynamic Metadata: Optimized for High CTR Social Sharing
  */
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: DetailPageProps): Promise<Metadata> {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const data = getTemplateBySlug(slug)
 
-  if (!service) return { title: "Service Not Found" }
+  if (!data) return { title: "Template Not Found" }
 
+  const title = `${data.title} - Professional Web Template | ${siteConfig.shortName}`
   return {
-    title: `${service.title} | บริการทำเว็บไซต์โดย ${siteConfig.shortName}`,
-    description: service.description,
+    title,
+    description: data.description,
     openGraph: {
-      images: [service.mockups.desktop],
+      images: [data.image],
+      title,
+      description: data.description,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: data.description,
+      images: [data.image],
     },
   }
 }
 
 /**
- * 🚀 3. Main Service Detail Page
+ * 🚀 3. Main Detail Page Component
  */
-export default async function ServiceDetailPage({ params }: PageProps) {
+export default async function TemplateDetailPage({ params }: DetailPageProps) {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const data = getTemplateBySlug(slug)
 
-  if (!service) return notFound()
+  if (!data) return notFound()
 
-  const otherServices = getOtherServices(slug)
+  // ✅ Theme Identity: Mapping to Design System Colors
+  const themeColor =
+    (data.themeColor as
+      | "emerald"
+      | "blue"
+      | "indigo"
+      | "rose"
+      | "amber"
+      | "slate"
+      | "red") || "emerald"
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
-      {/* 🌌 Background Decor: Aurora Ambient */}
-      <div className="aurora-bg top-0 right-0 h-[600px] w-[600px] opacity-[0.1] blur-[120px]" />
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
+      <TemplateNavbar />
 
-      {/* --- HEADER: Hero & Pricing --- */}
-      <section className="relative z-10 container mx-auto mb-24 px-4">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          {/* Left: Content Area */}
-          <div className="space-y-8">
-            <Badge
-              variant="luminous"
-              className="px-4 py-1.5 tracking-widest uppercase"
-            >
-              ✨ Best Value Solution
-            </Badge>
+      <main className="relative z-10 flex-1">
+        {/* --- SECTION 1: HERO (Visual Impact) --- */}
+        <TemplateHero
+          title={data.title}
+          subtitle={data.description}
+          image={data.image}
+          category={data.category}
+          themeColor={themeColor}
+        />
 
-            <h1 className="font-prompt text-5xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-7xl">
-              {service.title}
-            </h1>
-
-            <p className="font-anuphan max-w-xl text-xl leading-relaxed font-medium text-slate-400">
-              {service.description}
-            </p>
-
-            <div className="flex flex-col items-start gap-8 pt-6 sm:flex-row sm:items-center">
-              <div className="flex flex-col">
-                <span className="font-anuphan mb-1 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
-                  Starting at
+        {/* --- SECTION 2: VALUE PROPOSITIONS (Trust Signals) --- */}
+        <section className="border-y border-white/5 bg-white/[0.02] py-20 backdrop-blur-sm">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-16 max-w-3xl text-center">
+              <h2 className="font-prompt mb-4 text-3xl font-black tracking-tighter uppercase md:text-4xl">
+                ทุกสิ่งที่คุณต้องการเพื่อ{" "}
+                <span
+                  className={cn(
+                    "transition-colors duration-500",
+                    themeColor === "emerald" && "text-emerald-400",
+                    themeColor === "blue" && "text-blue-400",
+                    themeColor === "rose" && "text-rose-400",
+                    themeColor === "amber" && "text-amber-400"
+                  )}
+                >
+                  เติบโตบนโลกออนไลน์
                 </span>
-                <span className="font-prompt text-aurora-cyan drop-shadow-luminous text-4xl font-black italic">
-                  {service.priceDisplay}
-                </span>
-              </div>
-              <Button
-                variant="premium"
-                size="lg"
-                className="shadow-aurora-glow group h-16 px-10 text-lg"
-                asChild
-              >
-                <Link href="/contact">
-                  สนใจแพ็กเกจนี้{" "}
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* Right: Mockup Glass Panel */}
-          <div className="group relative">
-            <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-30 blur-3xl transition-all duration-1000 group-hover:opacity-50" />
-            <div className="shadow-luminous relative aspect-video w-full rounded-[2.5rem] border border-white/10 bg-slate-900/50 p-3 backdrop-blur-sm transition-all duration-700 hover:rotate-0 lg:rotate-2">
-              <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-slate-800">
-                <Image
-                  src={service.mockups.desktop}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- DETAILS: Deep Dive Content --- */}
-      <section className="relative z-10 container mx-auto px-4 py-20">
-        <div className="grid gap-16 lg:grid-cols-12">
-          {/* Main Content Area */}
-          <div className="space-y-16 lg:col-span-8">
-            {/* รายละเอียดบริการ */}
-            <div className="space-y-6">
-              <h3 className="font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-white uppercase">
-                <div className="bg-aurora-cyan h-8 w-1.5 rounded-full" />
-                รายละเอียดบริการ
-              </h3>
-              <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400">
-                {service.longDescription}
+              </h2>
+              <p className="font-anuphan text-lg font-medium text-slate-400">
+                เทมเพลตนี้เตรียม Infrastructure สำหรับการปิดการขายไว้ให้ครบถ้วน
               </p>
             </div>
 
-            {/* Features List Grid */}
-            <div className="rounded-[3rem] border border-white/5 bg-white/[0.03] p-10 backdrop-blur-sm">
-              <h3 className="font-prompt mb-10 flex items-center gap-3 text-xl font-black tracking-widest text-white uppercase">
-                <Zap className="text-aurora-cyan h-6 w-6 animate-pulse" />
-                สิ่งที่คุณจะได้รับ
-              </h3>
-              <ul className="grid gap-6 sm:grid-cols-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="group flex items-start gap-4">
-                    <div className="bg-aurora-emerald/10 group-hover:bg-aurora-emerald/30 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors">
-                      <CheckCircle2 className="text-aurora-emerald h-4 w-4" />
-                    </div>
-                    <span className="font-anuphan text-base font-bold text-slate-300">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <ServiceCard
+                icon={<Rocket className="text-emerald-400" />}
+                title="High-Speed"
+                description="คะแนน Google PageSpeed 90+ โหลดไวใน 0.5 วินาที"
+              />
+              <ServiceCard
+                icon={<Paintbrush className="text-blue-400" />}
+                title="Premium UI/UX"
+                description="ดีไซน์ทันสมัย ปรับแต่ง CI ได้ตามอัตลักษณ์แบรนด์"
+              />
+              <ServiceCard
+                icon={<ShieldCheck className="text-rose-400" />}
+                title="Conversion Ready"
+                description="ติดตั้ง Facebook CAPI และ TikTok Pixel พร้อมใช้งาน"
+              />
             </div>
           </div>
+        </section>
 
-          {/* Sidebar CTA */}
-          <div className="lg:col-span-4">
-            <div className="border-aurora-cyan/30 bg-aurora-cyan/5 shadow-luminous group sticky top-32 overflow-hidden rounded-[2.5rem] border p-8">
-              <div className="aurora-bg -top-1/2 -right-1/2 opacity-10 transition-opacity group-hover:opacity-20" />
-              <div className="relative z-10">
-                <h3 className="font-prompt mb-4 text-2xl font-black tracking-tighter text-white uppercase italic">
-                  พร้อมเริ่มงาน?
+        {/* --- SECTION 3: CONTENT & CONVERSION GRID (Main Layout) --- */}
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+            {/* 👈 LEFT: CONTENT AREA */}
+            <article className="space-y-32 lg:col-span-8">
+              {/* 🛠️ Features List */}
+              <section id="features" className="scroll-mt-32">
+                <TemplateFeatures data={data} themeColor={themeColor} />
+              </section>
+
+              {/* 📱 Interactive Preview */}
+              <section id="preview" className="scroll-mt-32">
+                <div
+                  className={cn(
+                    "mb-10 border-l-4 pl-6 transition-colors duration-500",
+                    themeColor === "emerald" && "border-emerald-500",
+                    themeColor === "blue" && "border-blue-500",
+                    themeColor === "rose" && "border-rose-500",
+                    themeColor === "amber" && "border-amber-500"
+                  )}
+                >
+                  <h3 className="font-prompt text-3xl font-black text-white uppercase">
+                    ตัวอย่างประสบการณ์การใช้งาน
+                  </h3>
+                  <p className="font-anuphan mt-3 text-lg font-medium text-slate-400">
+                    จำลองการแสดงผลจริงบนอุปกรณ์ที่ลูกค้าของคุณใช้งาน
+                  </p>
+                </div>
+
+                <Suspense
+                  fallback={
+                    <div className="h-[500px] w-full animate-pulse rounded-3xl bg-white/5" />
+                  }
+                >
+                  <DevicePreview
+                    desktopSrc={data.image}
+                    mobileSrc={data.mockups?.mobile || data.image}
+                    title={data.title}
+                    themeColor={themeColor}
+                  />
+                </Suspense>
+              </section>
+
+              {/* 🛣️ Step Process */}
+              <section className="space-y-8">
+                <h3 className="font-prompt text-2xl font-black text-white uppercase">
+                  ขั้นตอนการสั่งซื้อและติดตั้ง
                 </h3>
-                <p className="font-anuphan mb-8 font-medium text-slate-400">
-                  ส่งข้อมูลให้เราประเมิน หรือนัดคุยรายละเอียดผ่าน{" "}
-                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5
-                  นาทีครับ
-                </p>
-                {/* ✅ เรียกใช้ Lead Form */}
-                <LineLeadForm variant="default" />
-                <div className="mt-8 border-t border-white/10 pt-6 text-center">
-                  <div className="font-prompt text-aurora-cyan inline-flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
-                    <Sparkles className="h-3 w-3" /> Sales Engine Expert
-                  </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <StepItem number="01" text="เลือกเทมเพลตและชำระเงิน" />
+                  <StepItem number="02" text="ส่งข้อมูลธุรกิจและรูปภาพแบรนด์" />
+                  <StepItem number="03" text="ทีมงานปรับแต่งระบบ (3-7 วัน)" />
+                  <StepItem number="04" text="ตรวจงานและส่งมอบ Source Code" />
+                </div>
+              </section>
+            </article>
+
+            {/* 👉 RIGHT: CONVERSION SIDEBAR (Sticky Engine) */}
+            <aside className="lg:col-span-4">
+              <div className="sticky top-28 space-y-8">
+                <TemplatePricingCard
+                  title={data.title}
+                  price={data.price ?? 0}
+                  salePrice={data.salePrice}
+                  features={data.features}
+                  demoUrl={data.demoUrl || "#"}
+                  themeColor={themeColor}
+                />
+
+                {/* Developer Insight Card */}
+                <div className="glass-card rounded-3xl border border-white/5 bg-white/[0.02] p-8 text-sm text-slate-400 backdrop-blur-xl">
+                  <h4
+                    className={cn(
+                      "font-prompt mb-4 flex items-center gap-2 font-black tracking-widest uppercase",
+                      themeColor === "emerald" && "text-emerald-400",
+                      themeColor === "blue" && "text-blue-400",
+                      themeColor === "rose" && "text-rose-400",
+                      themeColor === "amber" && "text-amber-400"
+                    )}
+                  >
+                    Developer Insight
+                  </h4>
+                  <p className="font-anuphan leading-relaxed opacity-80">
+                    เทมเพลตนี้รองรับการทำ{" "}
+                    <span className="font-bold text-slate-100">
+                      SEO Semantic HTML
+                    </span>{" "}
+                    ติดหน้าแรก Google ได้ง่ายและยั่งยืน
+                  </p>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
-      </section>
 
-      {/* --- CROSS SELL: Other Services --- */}
-      <section className="relative z-10 border-t border-white/5 bg-white/[0.01] py-32">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row">
-            <h2 className="font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-5xl">
-              บริการอื่นๆ <br />
-              <span className="text-aurora-cyan">ที่น่าสนใจ</span>
-            </h2>
-            <Link
-              href="/services"
-              className="font-prompt group flex items-center gap-2 text-xs font-black tracking-[0.2em] text-slate-500 uppercase transition-colors hover:text-white"
-            >
-              View All Solutions{" "}
-              <ArrowRight className="text-aurora-cyan h-4 w-4 transition-transform group-hover:translate-x-2" />
-            </Link>
-          </div>
+        {/* --- SECTION 4: FINAL CALL TO ACTION --- */}
+        <SalesHook data={data} isTemplate={true} themeColor={themeColor} />
+      </main>
 
-          <div className="grid gap-10 md:grid-cols-3">
-            {otherServices.slice(0, 3).map((svc) => (
-              <ServiceCard key={svc.id} {...svc} />
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <Footer />
       <LineStickyButton />
-    </main>
+    </div>
+  )
+}
+
+// --- 🧩 SUB-COMPONENTS ---
+
+function ServiceCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+}) {
+  return (
+    <div className="group glass-card rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 transition-all duration-500 hover:bg-white/[0.05]">
+      <div className="mb-6 inline-block rounded-2xl bg-white/5 p-4 transition-transform duration-500 group-hover:scale-110 group-hover:bg-white/10">
+        {icon}
+      </div>
+      <h3 className="font-prompt mb-3 text-xl font-black text-white uppercase">
+        {title}
+      </h3>
+      <p className="font-anuphan text-sm leading-relaxed text-slate-400 opacity-80">
+        {description}
+      </p>
+    </div>
+  )
+}
+
+function StepItem({ number, text }: { number: string; text: string }) {
+  return (
+    <div className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:bg-white/[0.05]">
+      <span className="font-prompt text-2xl font-black text-slate-700 transition-colors group-hover:text-white/20">
+        {number}
+      </span>
+      <span className="font-anuphan text-sm font-bold text-slate-300">
+        {text}
+      </span>
+    </div>
   )
 }

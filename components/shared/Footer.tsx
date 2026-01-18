@@ -1,5 +1,4 @@
 /** @format */
-"use client"
 
 import React from "react"
 import Link from "next/link"
@@ -12,7 +11,7 @@ import {
   ArrowRight,
   Github,
   Sparkles,
-  LucideIcon,
+  type LucideIcon,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
@@ -24,8 +23,8 @@ interface FooterProps {
 }
 
 /**
- * 🌑 Footer: Luminous Midnight Edition
- * ปิดท้ายหน้าเว็บด้วยความพรีเมียมและความสว่างที่นวลตา
+ * 🌑 Footer: Luminous Midnight Server Edition (v.2026)
+ * ปิดท้ายหน้าเว็บด้วยความพรีเมียมและความเร็วระดับ 100 PageSpeed
  */
 export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear()
@@ -38,11 +37,11 @@ export function Footer({ className }: FooterProps) {
       )}
       aria-label="Site Footer"
     >
-      {/* 🌌 Aurora Ambient: แสงจางๆ ท้ายหน้าเว็บ */}
-      <div className="aurora-bg -bottom-20 left-1/2 h-64 w-full -translate-x-1/2 opacity-[0.05]" />
+      {/* 🌌 Aurora Ambient: เลเยอร์แสงหลังสุด (z-index ต่ำสุด) */}
+      <div className="aurora-bg pointer-events-none -bottom-20 left-1/2 -z-10 h-64 w-full -translate-x-1/2 opacity-[0.05]" />
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* Main Grid */}
+        {/* Main Grid: Architecture Tree */}
         <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
           {/* 1. Brand & Value Section */}
           <div className="space-y-8">
@@ -84,7 +83,7 @@ export function Footer({ className }: FooterProps) {
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className="hover:text-aurora-cyan group flex w-fit items-center gap-3 text-slate-400 transition-all"
+                    className="hover:text-aurora-cyan group flex w-fit items-center gap-3 text-slate-400 transition-all duration-300"
                   >
                     <ArrowRight className="text-aurora-cyan h-3 w-3 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                     <span className="transition-transform group-hover:translate-x-1">
@@ -113,7 +112,7 @@ export function Footer({ className }: FooterProps) {
                   <Link
                     href={item.href}
                     className={cn(
-                      "hover:text-aurora-violet group flex w-fit items-center gap-3 text-slate-400 transition-all",
+                      "hover:text-aurora-violet group flex w-fit items-center gap-3 text-slate-400 transition-all duration-300",
                       item.disabled && "pointer-events-none opacity-30"
                     )}
                   >
@@ -147,7 +146,7 @@ export function Footer({ className }: FooterProps) {
               <ContactItem icon={MapPin} text={siteConfig.contact.address} />
 
               <li className="pt-4">
-                <div className="glass-card hover:border-aurora-cyan/30 group shadow-luminous cursor-default border-white/5 p-5 transition-all">
+                <div className="glass-card hover:border-aurora-cyan/30 group shadow-luminous cursor-default border-white/5 p-5 transition-all duration-500">
                   <p className="group-hover:text-aurora-cyan mb-2 flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase transition-colors">
                     <Sparkles className="h-3 w-3 animate-pulse" /> Direct Line
                   </p>
@@ -197,7 +196,7 @@ export function Footer({ className }: FooterProps) {
 
 interface SocialIconProps {
   href: string
-  icon: LucideIcon // ✅ Fixed: Specify LucideIcon instead of any
+  icon: LucideIcon
   label: string
   colorClass: string
 }
@@ -220,7 +219,7 @@ function SocialIcon({ href, icon: Icon, label, colorClass }: SocialIconProps) {
 }
 
 interface ContactItemProps {
-  icon: LucideIcon // ✅ Fixed: Specify LucideIcon instead of any
+  icon: LucideIcon
   text: string
   href?: string
 }

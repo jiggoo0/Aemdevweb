@@ -3,25 +3,28 @@ import React from "react"
 import { Zap, Sparkles } from "lucide-react"
 
 /**
- * ⏳ Luminous Loading Screen - 2026 Edition
- * ออกแบบมาเพื่อให้ลูกค้ารู้สึกถึงความเร็วและความใส่ใจ (Humanistic Tech)
- * ฉีกความหมองด้วย Aurora Glow และ Animation ที่นุ่มนวล
+ * ⏳ Luminous Loading Screen - 2026 Edition (Performance Optimized)
+ * ออกแบบมาเพื่อให้ลูกค้ารู้สึกถึงความเร็ว (Unlink-TH Engine Style)
  */
 export default function Loading() {
   return (
-    <div className="bg-background fixed inset-0 z-[100] flex flex-col items-center justify-center transition-colors duration-500">
-      {/* 🌌 Aurora Ambient Background - สร้างบรรยากาศสว่างนวลตา */}
-      <div className="aurora-bg top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 opacity-[0.15]" />
+    <div
+      className="bg-background fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden transition-colors duration-500"
+      aria-busy="true"
+      aria-label="กำลังโหลดข้อมูล"
+    >
+      {/* 🌌 Aurora Ambient Background - เลเยอร์แสงหลังสุด (Static on Mobile) */}
+      <div className="aurora-bg top-1/2 left-1/2 -z-10 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 opacity-[0.15]" />
 
       {/* 🚀 Loading Content Container */}
       <div className="relative z-10 flex flex-col items-center">
-        {/* 1. Luminous Energy Core - วงกลมพลังงานออโรร่า */}
+        {/* 1. Luminous Energy Core - ใช้ CSS Animations ระดับ Native */}
         <div className="relative flex h-32 w-32 items-center justify-center">
           {/* External Pulse Glow (วงแหวนกระจายแสง) */}
-          <div className="bg-aurora-cyan/20 absolute inset-0 animate-ping rounded-full duration-[2000ms]"></div>
+          <div className="bg-aurora-cyan/20 absolute inset-0 animate-pulse rounded-full duration-[2000ms]" />
 
           {/* Core Spinning Ring (วงแหวนหลัก) */}
-          <div className="border-t-aurora-cyan shadow-aurora-glow h-24 w-24 animate-spin rounded-full border-[3px] border-white/5"></div>
+          <div className="border-t-aurora-cyan shadow-aurora-glow h-24 w-24 animate-spin rounded-full border-[3px] border-white/5" />
 
           {/* Central Brand Icon (จุดกึ่งกลางส่องแสง) */}
           <div className="absolute inset-0 flex items-center justify-center">
@@ -32,8 +35,8 @@ export default function Loading() {
           </div>
         </div>
 
-        {/* 2. Brand Identity - Typography สว่างพรีเมียม */}
-        <div className="mt-12 text-center">
+        {/* 2. Brand Identity - Typography พรีเมียม */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 mt-12 text-center duration-1000">
           <h3 className="font-prompt text-2xl leading-none font-black tracking-tighter text-white uppercase">
             AEM
             <span className="text-aurora-cyan drop-shadow-[0_0_10px_rgba(122,243,255,0.4)]">
@@ -45,20 +48,21 @@ export default function Loading() {
           </p>
         </div>
 
-        {/* 3. Luminous Progress Bars - จำลองการโหลดแบบ High-Tech */}
-        <div className="mt-10 w-56 space-y-3">
+        {/* 3. Luminous Progress Bars - จำลองความไวระดับปีศาจ */}
+        <div className="mt-10 w-56 space-y-3 opacity-60">
           <div className="h-1.5 w-full overflow-hidden rounded-full border border-white/5 bg-white/5">
-            <div className="from-aurora-cyan to-aurora-emerald h-full w-2/3 animate-[shimmer_2s_infinite] bg-gradient-to-r opacity-40"></div>
+            {/* Shimmer Effect คุมผ่านคลาส animate-pulse เพื่อประหยัด CPU */}
+            <div className="from-aurora-cyan to-aurora-emerald h-full w-2/3 animate-pulse bg-gradient-to-r" />
           </div>
           <div className="mx-auto h-1 w-3/4 overflow-hidden rounded-full bg-white/5">
-            <div className="from-aurora-violet to-aurora-cyan h-full w-1/2 animate-[shimmer_2.5s_infinite] bg-gradient-to-r opacity-30"></div>
+            <div className="from-aurora-violet to-aurora-cyan h-full w-1/2 animate-pulse bg-gradient-to-r delay-300" />
           </div>
         </div>
       </div>
 
-      {/* 🎨 Background Texture - ลายตารางจางๆ แบบ Luminous */}
+      {/* 🎨 Background Texture - ลายตาราง Luminous Mix-blend */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 h-full w-full bg-[url('/grid.svg')] bg-[size:40px_40px] opacity-[0.02] mix-blend-screen"
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full bg-[url('/grid.svg')] bg-[size:40px_40px] opacity-[0.02]"
         aria-hidden="true"
       />
     </div>

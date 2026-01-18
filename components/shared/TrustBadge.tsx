@@ -1,5 +1,4 @@
 /** @format */
-"use client"
 
 import React from "react"
 import { cn } from "@/lib/utils"
@@ -13,7 +12,6 @@ import {
   LucideIcon,
   Sparkles,
 } from "lucide-react"
-import { motion } from "framer-motion"
 
 interface Brand {
   name: string
@@ -21,8 +19,8 @@ interface Brand {
 }
 
 /**
- * 🛡️ TrustBadge: Luminous Edition
- * ยกระดับความน่าเชื่อถือด้วยระบบแสง Aurora และ Weightless Design
+ * 🛡️ TrustBadge: Luminous Server-Optimized Edition
+ * ปรับปรุงเพื่อความเร็วระดับปีศาจ (PageSpeed 100) โดยใช้ Native CSS Animations
  */
 export function TrustBadge({ className }: { className?: string }) {
   const brands: Brand[] = [
@@ -40,13 +38,14 @@ export function TrustBadge({ className }: { className?: string }) {
         "bg-background relative w-full overflow-hidden border-y border-white/5 py-16",
         className
       )}
+      aria-label="พาร์ทเนอร์ที่ไว้วางใจ"
     >
-      {/* 🌌 Aurora Ambient Light: แสงจางๆ เพื่อลบความหมองของ Section */}
-      <div className="aurora-bg top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
+      {/* 🌌 Aurora Ambient Light: เลเยอร์แสงหลังสุด (z-index -10) */}
+      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* Header Label: ใช้ฟอนต์พรีเมียมสไตล์ Luminous */}
-        <div className="mb-12 flex flex-col items-center">
+        {/* Header Label: Luminous Typography */}
+        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-forwards mb-12 flex flex-col items-center duration-1000">
           <div className="text-aurora-cyan shadow-aurora-glow mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Verified Partners
           </div>
@@ -56,22 +55,26 @@ export function TrustBadge({ className }: { className?: string }) {
           </p>
         </div>
 
-        {/* 🔄 Luminous Logo Grid */}
+        {/* 🔄 Luminous Logo Grid: Native CSS Performance */}
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
           {brands.map((brand, index) => {
             const Icon = brand.icon
+
+            // สร้าง Delay สำหรับแต่ละไอเทมแบบ CSS Variable
+            const delayStyle = { animationDelay: `${index * 100}ms` }
+
             return (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                viewport={{ once: true }}
-                className="group flex cursor-default flex-col items-center justify-center gap-4 transition-all duration-500"
+                className={cn(
+                  "group flex cursor-default flex-col items-center justify-center gap-4 transition-all duration-500",
+                  "animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards opacity-0"
+                )}
+                style={delayStyle}
               >
                 <div className="relative">
                   {/* High-Performance Glow on Hover */}
-                  <div className="bg-aurora-cyan/20 absolute inset-0 scale-150 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="bg-aurora-cyan/20 pointer-events-none absolute inset-0 scale-150 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
 
                   {/* Glass Box for Icon */}
                   <div className="shadow-luminous group-hover:border-aurora-cyan/40 relative flex h-16 w-16 transform items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10">
@@ -82,11 +85,11 @@ export function TrustBadge({ className }: { className?: string }) {
                   </div>
                 </div>
 
-                {/* Brand Name: ใช้ Anuphan เพื่อความนุ่มนวล */}
-                <span className="font-anuphan text-xs font-black tracking-[0.2em] text-slate-500 uppercase transition-colors group-hover:text-white">
+                {/* Brand Name: Anuphan Font */}
+                <span className="font-anuphan text-xs font-black tracking-[0.2em] text-slate-500 uppercase transition-colors duration-300 group-hover:text-white">
                   {brand.name}
                 </span>
-              </motion.div>
+              </div>
             )
           })}
         </div>

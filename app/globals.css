@@ -1,29 +1,29 @@
 /** @format */
-
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: LUMINOUS TECH
-   Concept: Midnight Aurora & Weightless Glass
+/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH
+   Focus: Stability, Readability, and High-End Tech Aesthetics
 */
 
 @theme {
-  /* --- 1. Typography --- */
+  /* --- 1. Typography Hierarchy --- */
   --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
-  --font-kanit: var(--font-kanit), ui-sans-serif, system-ui;
   --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* --- 2. Radius Expansion --- */
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2.5rem;
-  --radius-3xl: 3.5rem;
-  --radius-4xl: 4.5rem;
+  /* --- 2. Animations (Smooth & Lightweight) --- */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(12deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(14deg);
+    }
+  }
+  --animate-float: float 6s ease-in-out infinite;
 
-  /* --- 3. Luminous Shadow (Fix: Build Error) --- */
-  --shadow-luminous: 0 20px 80px -15px rgba(0, 0, 0, 0.3);
-
-  /* --- 4. Custom Animations --- */
   @keyframes aurora {
     0%,
     100% {
@@ -31,124 +31,142 @@
       transform: translate(0, 0) scale(1);
     }
     33% {
-      opacity: 0.5;
-      transform: translate(30px, -50px) scale(1.1);
+      opacity: 0.4;
+      transform: translate(20px, -30px) scale(1.05);
     }
     66% {
-      opacity: 0.4;
-      transform: translate(-20px, 20px) scale(0.9);
+      opacity: 0.35;
+      transform: translate(-15px, 15px) scale(0.95);
     }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
 
-  /* --- 5. Core Mapping --- */
+  /* --- 3. Colors Mapping (The "Nailing" Colors) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
   --color-border: var(--border);
-  --color-ring: var(--ring);
+  --color-primary: var(--primary);
 
-  /* Mapping Aurora Colors */
+  /* Aurora Accents */
   --color-aurora-cyan: var(--aurora-cyan);
   --color-aurora-violet: var(--aurora-violet);
   --color-aurora-emerald: var(--aurora-emerald);
+
+  /* --- 4. Shadows & Radius --- */
+  --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+  --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.75rem;
 }
 
 @layer base {
   :root {
     /* 🟢 Light Mode */
     --background: oklch(0.99 0.005 240);
-    --foreground: oklch(0.18 0.02 240);
-    --primary: oklch(0.65 0.18 160);
-    --border: oklch(0.94 0.01 240);
-    --ring: oklch(0.65 0.18 160 / 0.3);
-    --radius: 1.25rem;
+    --foreground: oklch(0.2 0.02 240);
+    --primary: oklch(0.6 0.16 160);
+    --border: oklch(0.92 0.01 240);
   }
 
   .dark {
-    /* 🌑 Dark Mode: Midnight Violet Glow */
-    --background: oklch(0.12 0.025 260);
+    /* 🌑 Dark Mode: Midnight Deep Tech (Stable) */
+    /* 0.14 = ความมืดสนิทที่ยังเห็นมิติสี / 0.02 = ความสดที่ดูแพง / 260 = โทนน้ำเงินเย็น */
+    --background: oklch(0.14 0.02 260);
     --foreground: oklch(0.98 0.005 240);
     --primary: oklch(0.78 0.18 155);
-    --border: oklch(0.25 0.05 260 / 0.5);
-    --ring: oklch(0.78 0.18 155 / 0.4);
+    --border: oklch(0.25 0.03 260 / 0.5);
 
-    /* Aurora Colors Definition */
+    /* Aurora Colors */
     --aurora-cyan: oklch(0.75 0.12 200);
     --aurora-violet: oklch(0.65 0.18 280);
     --aurora-emerald: oklch(0.82 0.18 155);
   }
 
+  /* ✅ บังคับใช้ตัวแปรสีที่ตัว Body และกำหนดฟอนต์หลัก */
   * {
     border-color: var(--border);
-    outline-color: color-mix(in srgb, var(--ring), transparent 60%);
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-prompt), ui-sans-serif, system-ui;
-    -webkit-font-smoothing: antialiased;
-    /* แสง Aurora จางๆ บนพื้นหลังเพื่อลบความหมอง */
+    @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
+    font-family: var(--font-prompt);
+    text-rendering: optimizeLegibility;
+
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% */
     background-image:
       radial-gradient(
-        circle at 0% 0%,
-        color-mix(in oklch, var(--aurora-cyan, transparent), transparent 96%),
+        circle at 2% 2%,
+        color-mix(in oklch, var(--aurora-cyan), transparent 97%),
         transparent 40%
       ),
       radial-gradient(
-        circle at 100% 100%,
-        color-mix(in oklch, var(--aurora-violet, transparent), transparent 96%),
+        circle at 98% 98%,
+        color-mix(in oklch, var(--aurora-violet), transparent 97%),
         transparent 40%
       );
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-black tracking-tighter uppercase;
+  }
+
+  p {
+    @apply leading-relaxed font-medium;
+    font-family: var(--font-anuphan);
   }
 }
 
 @layer components {
-  /* 🪄 Luminous UI Components */
-
-  .btn-luminous {
-    @apply relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-10 py-4 font-bold transition-all duration-500 hover:scale-105 active:scale-95;
-    background: linear-gradient(
-      135deg,
-      var(--aurora-cyan),
-      var(--aurora-emerald)
-    );
-    color: oklch(0.12 0.025 260);
-    box-shadow: 0 0 30px
-      color-mix(in oklch, var(--aurora-cyan), transparent 70%);
-  }
-
-  .glass-card {
-    @apply shadow-luminous border backdrop-blur-3xl transition-all duration-500;
-    /* ไล่เฉดให้สว่างจากภายใน */
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklch, var(--background), white 8%),
-      color-mix(in oklch, var(--background), white 2%)
-    );
-    border-color: rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-3xl);
-  }
+  /* 🪄 Layered UI Components */
 
   .aurora-bg {
-    @apply animate-aurora pointer-events-none absolute opacity-20 blur-[120px];
+    @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
+    z-index: -20;
+    filter: blur(80px);
     background: linear-gradient(
       135deg,
       var(--aurora-cyan),
       var(--aurora-violet),
       var(--aurora-emerald)
     );
+
+    @media (min-width: 768px) {
+      filter: blur(140px);
+      animation: var(--animate-aurora);
+    }
   }
 
   .text-luminous {
-    @apply leading-[0.9] font-black tracking-tighter text-white uppercase;
-    background: linear-gradient(to bottom, #fff 50%, rgba(255, 255, 255, 0.4));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(
-      0 0 15px color-mix(in srgb, var(--aurora-cyan), transparent 85%)
+    @apply font-black tracking-tighter text-white uppercase;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  .btn-luminous {
+    @apply shadow-aurora-glow relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 font-bold transition-all duration-500 hover:scale-[1.03] active:scale-95;
+    background: linear-gradient(
+      135deg,
+      var(--aurora-cyan),
+      var(--aurora-emerald)
     );
+    color: oklch(0.14 0.02 260);
+  }
+
+  .glass-card {
+    @apply shadow-luminous border backdrop-blur-2xl transition-all duration-500;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.01)
+    );
+    border-color: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-2xl);
   }
 }
 
