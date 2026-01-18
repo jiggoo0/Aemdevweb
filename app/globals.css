@@ -14,6 +14,7 @@
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   /* --- 2. Animations (Smooth & Lightweight) --- */
+  /* ✅ Optimized: ใช้ translate3d เพื่อ Force Hardware Acceleration */
   @keyframes float {
     0%, 100% { transform: translate3d(0, 0, 0) rotate(12deg); }
     50% { transform: translate3d(0, -15px, 0) rotate(14deg); }
@@ -117,7 +118,7 @@
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
-      /* Desktop: สวยเต็มสูบ */
+      /* Desktop: สวยเต็มสูบ ใส่ Blur ได้หนักๆ เพราะเครื่องแรงกว่า */
       filter: blur(140px);
       background: linear-gradient(
         135deg,

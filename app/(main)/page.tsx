@@ -132,7 +132,10 @@ export default function HomePage() {
       </div>
 
       {/* 6. SERVICES GRID */}
-      <section id="services" className="relative py-32 lg:py-48 content-visibility-auto">
+      <section
+        id="services"
+        className="relative py-32 lg:py-48 content-visibility-auto"
+      >
         <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
           <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
             Solutions for Growth

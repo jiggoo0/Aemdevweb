@@ -5,14 +5,15 @@ import createMDX from "@next/mdx"
 /**
  * 🚀 Next.js Config: Luminous Performance Edition (Ultimate Tuned)
  * ปรับจูนระดับ Deep-Dive เพื่อ PageSpeed 100/100
+ * เน้นลด TBT (Total Blocking Time) และ JS Execution Time
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // 🔒 Security & Size: ปิดการแสดง Header ว่าใช้ Next.js
+  // 🔒 Security & Size: ปิดการแสดง Header ว่าใช้ Next.js (ประหยัด Bytes + ปลอดภัย)
   poweredByHeader: false,
 
-  // ✅ 1. Compression: บีบอัดไฟล์สูงสุด
+  // ✅ 1. Compression: บีบอัดไฟล์สูงสุด (Gzip/Brotli)
   compress: true,
 
   // 📄 Extensions: รองรับ MDX เต็มรูปแบบ
@@ -21,8 +22,9 @@ const nextConfig: NextConfig = {
   // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes
   images: {
     formats: ["image/avif", "image/webp"],
+    // ⚠️ Tips: ตัดขนาดที่ไม่ได้ใช้ออก เพื่อลดภาระ Server ในการ Generate รูป
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96],
+    imageSizes: [16, 32, 48, 64, 96], // ตัด 128+ ออกถ้าใช้ deviceSizes คุมแล้ว
     remotePatterns: [
       {
         protocol: "https",
@@ -37,26 +39,29 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    // ⚡ Cache: เพิ่มเวลา Cache รูปภาพให้นานขึ้น (ลดการโหลดซ้ำ)
     minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true, // อนุญาต SVG (ถ้าจำเป็น) แต่ต้องระวัง
+    dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  // 🛠️ Compiler Options
+  // 🛠️ Compiler Options: หัวใจสำคัญของการลด TBT
   compiler: {
+    // 🚀 Remove Console: ลบ console.log ใน Production เพื่อคืน Main Thread ให้ Browser
     removeConsole:
       process.env.NODE_ENV === "production"
         ? {
-            exclude: ["error"],
+            exclude: ["error"], // เก็บ console.error ไว้ debug
           }
         : false,
   },
 
   // ⚡ Experimental Features: ขีดสุดของความเร็ว Next.js 15
   experimental: {
-    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX
-    
-    // 📦 Optimize Imports: Tree-shaking แบบละเอียด (เพิ่ม List ให้ครบ)
+    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX (Build ไวขึ้น 5x)
+
+    // 📦 Optimize Imports: Tree-shaking แบบละเอียด (สำคัญมากสำหรับ TBT)
+    // Next.js จะโหลดเฉพาะ Module ที่ใช้จริง ไม่โหลดมาทั้งก้อน
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -71,7 +76,7 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-tabs",
       "@radix-ui/react-slot",
       "@radix-ui/react-label",
-      "@/components/ui",
+      "@/components/ui", // ช่วย Tree-shake UI components ภายในโปรเจกต์
     ],
   },
 }

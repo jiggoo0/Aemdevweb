@@ -11,13 +11,14 @@ import dynamic from "next/dynamic"
  */
 
 // 1. 📊 Impact Stats: ใช้ Loading State ง่ายๆ เพื่อหลอกตาว่าเร็ว
+// (SSR: True เพื่อให้ตัวเลขสำคัญติด Index SEO)
 const ImpactStats = dynamic(
   () =>
     import("@/components/sales-engine/ImpactStats").then(
       (mod) => mod.ImpactStats
     ),
   {
-    ssr: true, // SEO ต้องการตัวเลข
+    ssr: true,
     loading: () => (
       <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
@@ -34,7 +35,7 @@ const ImpactStats = dynamic(
 )
 
 // 2. 💰 Price Estimator: Logic หนัก -> SSR: FALSE เท่านั้น
-// ไม่จำเป็นต้องให้ Server Render เพราะ User ต้องกดเล่นเอง
+// ไม่จำเป็นต้องให้ Server Render เพราะ User ต้องกดเล่นเอง ช่วยลด TBT ได้เยอะที่สุด
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
@@ -54,6 +55,7 @@ const PriceEstimator = dynamic(
 )
 
 // 3. ⭐ Testimonials: SSR: True (เพื่อ SEO)
+// รีวิวลูกค้าเป็น Content สำคัญที่ Google ควรเห็น
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then(
