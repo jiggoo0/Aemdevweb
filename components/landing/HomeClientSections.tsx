@@ -4,25 +4,19 @@
 import React from "react"
 import dynamic from "next/dynamic"
 
-/**
- * 🚀 HomeClientSections: Luminous Performance Engine (v.2026)
- * หน้าที่: โหลดส่วนประกอบที่ใช้ Logic หนักแบบ Deferred Loading
- * ✅ Optimized: ลด TBT และแก้ปัญหา CLS ด้วย Precise Skeletons
- */
-
 // 1. 🏗️ Impact Stats Loading Skeleton
 const ImpactStats = dynamic(
   () => import("@/components/sales-engine/ImpactStats").then((mod) => mod.ImpactStats),
   {
     ssr: false,
     loading: () => (
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col items-center space-y-4">
               <div className="h-14 w-14 animate-pulse rounded-2xl bg-white/5" />
-              <div className="h-8 w-20 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5" />
             </div>
           ))}
         </div>
@@ -31,18 +25,18 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator Loading Skeleton
+// 2. 💰 Price Estimator Loading Skeleton (Height Fixed: 600px)
 const PriceEstimator = dynamic(
   () => import("@/components/sales-engine/PriceEstimator").then((mod) => mod.PriceEstimator),
   {
     ssr: false,
     loading: () => (
-      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] bg-white/5 border border-white/10">
-        <div className="h-12 w-48 rounded-xl bg-white/5 mb-8" />
-        <div className="w-full px-12 space-y-4">
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
-            <div className="h-16 w-full rounded-2xl bg-white/5" />
+      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center border border-white/10 bg-white/5 rounded-[2.5rem]">
+        <div className="mb-8 h-8 w-48 rounded-xl bg-white/10" />
+        <div className="w-full space-y-6 px-12">
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5" />
         </div>
       </div>
     ),
@@ -55,12 +49,10 @@ const Testimonials = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="container mx-auto px-4">
-        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="glass-card h-64 w-full animate-pulse rounded-3xl bg-white/5 p-10" />
-          ))}
-        </div>
+      <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="glass-card h-80 w-full animate-pulse rounded-[2rem] bg-white/5 p-10 mb-8 border border-white/5" />
+        ))}
       </div>
     ),
   }
@@ -69,18 +61,16 @@ const Testimonials = dynamic(
 export default function HomeClientSections() {
   return (
     <>
-      {/* 📊 Section 4: Impact Statistics (Social Proof) */}
+      {/* 📊 Section 4: Impact Statistics */}
       <section className="relative z-10 border-y border-white/5 bg-white/[0.01] py-24 backdrop-blur-3xl">
         <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <div className="relative">
-          <ImpactStats />
-        </div>
+        <ImpactStats />
       </section>
 
-      {/* 💰 Section 8: Calculator & Pricing (Conversion Engine) */}
+      {/* 💰 Section 8: Pricing Engine */}
       <section id="pricing" className="relative container mx-auto px-4 py-32 lg:py-48">
         <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
-
+        
         <div className="mx-auto max-w-5xl">
           <div className="mb-20 text-center">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
@@ -94,16 +84,13 @@ export default function HomeClientSections() {
               <span className="text-white/60 text-sm">(งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงาน)</span>
             </p>
           </div>
-
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ Section 9: Client Testimonials (Trust Signals) */}
+      {/* ⭐ Section 9: Testimonials */}
       <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] py-32 md:rounded-t-[4.5rem]">
-        {/* Decor Accent */}
         <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-50" />
-
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
              <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">

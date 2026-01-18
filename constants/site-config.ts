@@ -60,8 +60,9 @@ export const siteConfig = {
     "AEMDEVWEB",
   ],
 
-  // 🎨 7. Theme Identity (สีเขียว Aurora ที่สื่อถึงเงินและกำไร)
-  themeColor: "#059669",
+  // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
+  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
+  themeColor: "oklch(0.82 0.18 155)", 
 } as const
 
 export type SiteConfig = typeof siteConfig

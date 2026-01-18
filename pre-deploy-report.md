@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 11:30:54
+Generated at: 2026-01-18 11:48:22
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -26,7 +26,7 @@ Route (app)                                 Size  First Load JS
 ├   ├ /Service/sushi-omakase
 ├   ├ /Corporate/law-firm-pro
 ├   └ /Service/aura-clinic
-├ ○ /about                               6.67 kB         163 kB
+├ ○ /about                               6.68 kB         163 kB
 ├ ○ /blog                                  174 B         111 kB
 ├ ● /blog/[slug]                           174 B         111 kB
 ├   ├ /blog/5-points-killing-sales
@@ -34,11 +34,11 @@ Route (app)                                 Size  First Load JS
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
 ├ ○ /case-studies                          132 B         161 kB
-├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ƒ /case-studies/[slug]                  2.5 kB         122 kB
 ├ ○ /case-studies/unlink-th                132 B         161 kB
-├ ○ /contact                             5.16 kB         157 kB
+├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                             3.1 kB         117 kB
+├ ○ /services                            3.11 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase

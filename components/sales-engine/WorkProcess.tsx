@@ -9,24 +9,25 @@ import {
   Sparkles,
 } from "lucide-react"
 import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
 const steps = [
   {
-    icon: <MessageSquare className="h-10 w-10" />,
+    icon: MessageSquare,
     title: "คุยความต้องการ",
     desc: "บอกโจทย์ธุรกิจของคุณให้พี่เอ็มฟัง พี่เอ็มจะช่วยวางแผนการขายบนหน้าเว็บให้ฟรี แบบไม่มีกั๊ก!",
     color: "from-aurora-cyan to-aurora-violet",
     delay: "delay-100",
   },
   {
-    icon: <LayoutTemplate className="h-10 w-10" />,
+    icon: LayoutTemplate,
     title: "เลือกทรง & ปรับแต่ง",
     desc: "เลือกโครงสร้างที่คุณชอบ แล้วส่งข้อมูลมา พี่เอ็มจัดการวาง Layout ที่ปิดการขายได้จริงและสวยงาม",
     color: "from-aurora-emerald to-aurora-cyan",
     delay: "delay-300",
   },
   {
-    icon: <ShieldCheck className="h-10 w-10" />,
+    icon: ShieldCheck,
     title: "ส่งงาน & ดูแลตลอดชีพ",
     desc: "เว็บออนไลน์ได้จริงใน 3-7 วัน พร้อมสอนใช้งานเบื้องต้น มีปัญหาทักถามพี่เอ็มได้ตลอดชีพ ไม่ทิ้งงานแน่นอน",
     color: "from-aurora-violet to-aurora-emerald",
@@ -43,7 +44,7 @@ export const WorkProcess = () => {
   return (
     <section className="bg-background relative overflow-hidden py-32">
       {/* 🌌 Luminous Background Decor: Layered behind everything */}
-      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.08]" />
+      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.08] blur-[100px]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-[size:50px_50px] opacity-[0.02] mix-blend-overlay" />
 
       <div className="relative z-10 container mx-auto px-4">
@@ -65,13 +66,19 @@ export const WorkProcess = () => {
 
         {/* 🛣️ Steps Grid: Staggered Loading with CSS Delays */}
         <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Connecting Line (Desktop) */}
+          {/* Connecting Line (Desktop Only) */}
           <div className="absolute top-1/2 left-0 -z-10 hidden h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent lg:block" />
 
-          {steps.map((step, i) => (
+          {steps.map((step, i) => {
+             const Icon = step.icon
+             
+             return (
             <div
               key={i}
-              className={`group animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards relative opacity-0 duration-1000 ${step.delay}`}
+              className={cn(
+                "group animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards relative opacity-0 duration-1000",
+                step.delay
+              )}
             >
               {/* Connector Arrow (Desktop Only) */}
               {i < steps.length - 1 && (
@@ -84,10 +91,13 @@ export const WorkProcess = () => {
                 {/* 🎨 Icon Holder with Glow Effect */}
                 <div className="relative mb-10">
                   <div
-                    className={`shadow-luminous flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br text-white transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3 ${step.color}`}
+                    className={cn(
+                      "shadow-luminous flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br text-white transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3",
+                      step.color
+                    )}
                   >
                     <div className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
-                      {step.icon}
+                      <Icon className="h-10 w-10" />
                     </div>
                   </div>
                   <div className="text-aurora-cyan absolute -top-4 -right-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-900 text-lg font-black shadow-xl">
@@ -96,7 +106,7 @@ export const WorkProcess = () => {
                 </div>
 
                 {/* 📝 Content Typography */}
-                <h3 className="font-prompt group-hover:text-aurora-cyan mb-6 text-3xl leading-none font-black tracking-tight text-white uppercase transition-colors duration-500">
+                <h3 className="font-prompt group-hover:text-aurora-cyan mb-6 text-3xl leading-none font-black tracking-tight text-white uppercase transition-colors duration-500 italic">
                   {step.title}
                 </h3>
                 <p className="font-anuphan px-4 text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity duration-500 group-hover:opacity-100 md:px-0 md:text-lg">
@@ -104,7 +114,7 @@ export const WorkProcess = () => {
                 </p>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
         {/* 📢 Final Call to Action Area */}
