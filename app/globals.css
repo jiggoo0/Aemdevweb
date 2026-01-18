@@ -124,16 +124,24 @@
   .aurora-bg {
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
-    filter: blur(80px);
-    background: linear-gradient(
-      135deg,
-      var(--aurora-cyan),
-      var(--aurora-violet),
-      var(--aurora-emerald)
+    
+    /* ⚡ Mobile Performance: ลด Blur เหลือ 60px และใช้ Radial Gradient ที่คำนวณง่ายกว่า */
+    filter: blur(60px);
+    background: radial-gradient(
+      circle, 
+      var(--aurora-cyan), 
+      var(--aurora-violet)
     );
 
     @media (min-width: 768px) {
+      /* Desktop: จัดเต็ม Blur 140px และ Animation */
       filter: blur(140px);
+      background: linear-gradient(
+        135deg,
+        var(--aurora-cyan),
+        var(--aurora-violet),
+        var(--aurora-emerald)
+      );
       animation: var(--animate-aurora);
     }
   }

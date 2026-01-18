@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 10:43:03
+  Generated: 2026-01-18 11:16:09
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 10:43:03**_
+_Generated on: **2026-01-18 11:16:09**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -52,7 +52,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.05 kB
+  └ other shared chunks (total)          2.04 kB
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
@@ -382,7 +382,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 10:37:59
+Generated at: 2026-01-18 11:10:31
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -431,7 +431,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.05 kB
+  └ other shared chunks (total)          2.04 kB
 
 
 ○  (Static)   prerendered as static content
@@ -455,6 +455,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
 /* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH
    Focus: Stability, Readability, and High-End Tech Aesthetics
+   Tech Stack: Tailwind CSS v4.0 + OKLCH Color Space
 */
 
 @theme {
@@ -465,32 +466,23 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   /* --- 2. Animations (Smooth & Lightweight) --- */
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0) rotate(12deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(14deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(12deg); }
+    50% { transform: translateY(-15px) rotate(14deg); }
   }
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes aurora {
-    0%,
-    100% {
-      opacity: 0.3;
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      opacity: 0.4;
-      transform: translate(20px, -30px) scale(1.05);
-    }
-    66% {
-      opacity: 0.35;
-      transform: translate(-15px, 15px) scale(0.95);
-    }
+    0%, 100% { opacity: 0.3; transform: translate(0, 0) scale(1); }
+    33% { opacity: 0.4; transform: translate(20px, -30px) scale(1.05); }
+    66% { opacity: 0.35; transform: translate(-15px, 15px) scale(0.95); }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 2.5rem)); } /* gap-10 = 2.5rem */
+  }
+  --animate-marquee: marquee 50s linear infinite;
 
   /* --- 3. Colors Mapping (The "Nailing" Colors) --- */
   --color-background: var(--background);
@@ -519,6 +511,11 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     --foreground: oklch(0.2 0.02 240);
     --primary: oklch(0.6 0.16 160);
     --border: oklch(0.92 0.01 240);
+    
+    /* Fallback Aurora Colors for Light Mode */
+    --aurora-cyan: oklch(0.65 0.15 200);
+    --aurora-violet: oklch(0.55 0.20 280);
+    --aurora-emerald: oklch(0.70 0.15 155);
   }
 
   .dark {
@@ -529,13 +526,13 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     --primary: oklch(0.78 0.18 155);
     --border: oklch(0.25 0.03 260 / 0.5);
 
-    /* Aurora Colors */
+    /* Aurora Colors: High Gamut Neon */
     --aurora-cyan: oklch(0.75 0.12 200);
     --aurora-violet: oklch(0.65 0.18 280);
     --aurora-emerald: oklch(0.82 0.18 155);
   }
 
-  /* ✅ บังคับใช้ตัวแปรสีที่ตัว Body และกำหนดฟอนต์หลัก */
+  /* ✅ Global Reset & Font Smoothing */
   * {
     border-color: var(--border);
   }
@@ -545,7 +542,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     font-family: var(--font-prompt);
     text-rendering: optimizeLegibility;
 
-    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% */
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
     background-image:
       radial-gradient(
         circle at 2% 2%,
@@ -559,18 +556,16 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
       );
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-black tracking-tighter uppercase;
   }
 
+  p, li, span {
+    font-family: var(--font-anuphan);
+  }
+  
   p {
     @apply leading-relaxed font-medium;
-    font-family: var(--font-anuphan);
   }
 }
 
@@ -804,24 +799,26 @@ export const metadata: Metadata = {
 /**
  * 🚀 HomePage: AEM DEVWEB Engine v.2026
  * Structure: Hero > Trust > Value > ClientSections > Insights > Services > Process > CTA
+ * ✅ Optimized: PageSpeed 100 Focus | Server-First Architecture
  */
 export default function HomePage() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased">
-      {/* 🌌 Local Decorative Layer: จัดการแสงพื้นหลังแยกส่วน (z-index: -10) */}
+      {/* 🌌 Local Decorative Layer: จัดการแสงพื้นหลังแยกส่วน (-z-10) */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
         <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[120px]" />
         <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[120px]" />
       </div>
 
-      {/* 1. HERO & 2. TRUST SIGNALS: ส่วนที่ User ต้องเห็นทันทีเมื่อโหลดหน้า */}
+      {/* 1. HERO & 2. TRUST SIGNALS: ส่วนแรกที่ผู้ใช้เห็น (Critical Rendering Path) */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
       </div>
 
-      {/* 3. VALUE PROPOSITION: ทำไมต้องเลือกเรา? */}
+      {/* 3. VALUE PROPOSITION: จุดขายที่แตกต่าง */}
       <section className="relative overflow-hidden py-24 lg:py-36">
+        {/* Background Accent */}
         <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
         <div className="relative z-10">
           <ValueProp />
@@ -831,12 +828,12 @@ export default function HomePage() {
       {/* 🚀 4, 8, 9. DYNAMIC CLIENT SECTIONS: Stats, Pricing, Testimonials (Deferred) */}
       <HomeClientSections />
 
-      {/* 5. INSIGHTS SECTION: ข้อมูล Case Study และบทความ */}
+      {/* 5. INSIGHTS SECTION: โชว์ผลงานและบทความ (Case Studies) */}
       <div className="relative z-10">
         <InsightsSection />
       </div>
 
-      {/* 6. SERVICES GRID: แคตตาล็อกบริการหลัก */}
+      {/* 6. SERVICES GRID: รายการบริการหลัก */}
       <section id="services" className="relative py-32 lg:py-48">
         <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
           <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
@@ -858,13 +855,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. PROCESS FLOW: ขั้นตอนการทำงานที่เป็นระบบ */}
+      {/* 7. PROCESS FLOW: ขั้นตอนการทำงานที่โปร่งใส */}
       <WorkProcess />
 
-      {/* 10. FINAL CONVERSION BOX: ปิดการขายท้ายหน้าหน้า */}
+      {/* 10. FINAL CONVERSION BOX: ปิดการขาย (Call to Action) */}
       <section className="mb-40 px-4">
         <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
-          {/* Decorative Glow within Card */}
+          {/* Inner Glow Decorative */}
           <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[120px] transition-all duration-700 group-hover:opacity-60" />
 
           <h2 className="text-luminous relative z-10 mb-12 text-4xl leading-none uppercase md:text-[6rem] lg:text-[8rem]">
@@ -882,7 +879,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Conversion Floating Engine */}
+      {/* Conversion Floating Engine: ปุ่มไลน์ติดหน้าจอ */}
       <LineStickyButton />
     </div>
   )

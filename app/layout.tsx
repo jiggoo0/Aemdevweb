@@ -8,9 +8,9 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-// --- 1. Setup Fonts: Modern Thai Stack ---
+// --- 1. Setup Fonts: High-Performance Thai Stack ---
 const fontPrompt = Prompt({
-  weight: ["400", "600", "700"],
+  weight: ["400", "600", "700", "900"],
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
@@ -25,28 +25,32 @@ const fontAnuphan = Anuphan({
   preload: true,
 })
 
-// --- 2. SEO & Metadata Strategy ---
+// --- 2. SEO & Metadata Strategy (ฉบับนายเอ็มซ่ามากส์) ---
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    // นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน
+    default: siteConfig.name, 
+    // [ชื่อหน้า] | เอ็มซ่ามากส์ - รับทำเว็บคุยง่าย
+    template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`, 
   },
   description: siteConfig.description,
   keywords: [
-    "รับทำเว็บไซต์",
-    "Next.js 15",
-    "ทำเว็บ SME",
-    "Sale Page",
-    "aemdevweb",
+    "นายเอ็มซ่ามากส์",
+    "เอ็มซ่ามากส์รับทำเว็บ",
+    "จ้างทำเว็บคุยง่ายๆ",
+    "คนทำเว็บไม่ทิ้งงาน",
+    "รับทำเซลเพจ SME",
+    "เว็บหน้าเดียวปิดการขาย",
+    "AEMDEVWEB",
     ...siteConfig.keywords,
   ],
-  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  authors: [{ name: "นายเอ็มซ่ามากส์", url: siteConfig.url }],
   creator: siteConfig.companyName,
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: siteConfig.url,
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.name,
     images: [
@@ -54,13 +58,13 @@ export const metadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: "นายเอ็มซ่ามากส์ - High-Conversion Web Factory",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
     creator: "@aemdevweb",
@@ -73,16 +77,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
-// ✅ Viewport Optimization
+// ✅ Viewport Optimization: แถบสถานะสี Midnight
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f172a" }, // Matches bg-background
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  userScalable: true,
 }
 
 // --- 3. Root Layout Component ---
@@ -95,14 +98,14 @@ export default function RootLayout({
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
+          "bg-background text-foreground selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
           fontPrompt.variable,
           fontAnuphan.variable
         )}
       >
-        {/* 🚀 NextTopLoader: Tuned for Midnight Theme */}
+        {/* 🚀 NextTopLoader: สี Aurora Cyan พร้อมเงาเรืองแสง */}
         <NextTopLoader
-          color="oklch(0.78 0.12 200)" // Aurora Cyan
+          color="oklch(0.78 0.12 200)"
           initialPosition={0.08}
           height={2}
           showSpinner={false}
@@ -112,8 +115,10 @@ export default function RootLayout({
         />
 
         <AppProvider>
-          {/* Main Wrapper */}
-          <div className="relative flex min-h-screen flex-col">{children}</div>
+          {/* Main Wrapper Structure */}
+          <div className="relative flex min-h-screen flex-col">
+            {children}
+          </div>
 
           {/* Global Notification Engine */}
           <Toaster
@@ -122,11 +127,8 @@ export default function RootLayout({
             closeButton
             theme="system"
             toastOptions={{
-              className:
-                "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
-              style: {
-                fontFamily: "var(--font-prompt)",
-              },
+              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
+              style: { fontFamily: "var(--font-prompt)" },
             }}
           />
         </AppProvider>

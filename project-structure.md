@@ -1,5 +1,5 @@
 # 📁 รายงานโครงสร้างโปรเจกต์ (Extended Scan)
-_สร้างเมื่อ: Sun Jan 18 10:42:34 +07 2026_
+_สร้างเมื่อ: Sun Jan 18 11:15:50 +07 2026_
 
 ## 🌳 Folder Structure
 ⚠️ ไม่พบโฟลเดอร์: config (Skipped)
@@ -272,7 +272,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.05 kB
+  └ other shared chunks (total)          2.04 kB
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand

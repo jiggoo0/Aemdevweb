@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 11:10:31
+Generated at: 2026-01-18 11:30:54
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -15,7 +15,7 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                      16 kB         135 kB
+┌ ○ /                                    16.3 kB         135 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                            134 B         170 kB
 ├   ├ /SalePage
