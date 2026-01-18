@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 20:18:27
+  Generated: 2026-01-18 22:00:12
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 20:18:27**_
+_Generated on: **2026-01-18 22:00:12**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -19,9 +19,9 @@ _Generated on: **2026-01-18 20:18:27**_
 ```text
 ```text
 Route (app)                                     Size  First Load JS
-┌ ○ /                                        17.7 kB         137 kB
+┌ ○ /                                        17.6 kB         137 kB
 ├ ○ /_not-found                                988 B         103 kB
-├ ● /[template]                              3.51 kB         165 kB
+├ ● /[template]                              3.55 kB         165 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
@@ -38,13 +38,14 @@ Route (app)                                     Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                              132 B         161 kB
+├ ○ /case-studies                            2.42 kB         122 kB
 ├ ● /case-studies/[slug]                     2.42 kB         122 kB
 ├   ├ /case-studies/project-01
 ├   ├ /case-studies/tech-build-construction
 ├   ├ /case-studies/glow-skin-ecommerce
 ├   └ /case-studies/unlink-th
-├ ○ /case-studies/unlink-th                    132 B         161 kB
+├ ○ /case-studies/aemdevweb                    161 B         105 kB
+├ ○ /case-studies/unlink-th                  4.05 kB         161 kB
 ├ ○ /contact                                 2.53 kB         117 kB
 ├ ○ /robots.txt                                132 B         102 kB
 ├ ○ /services                                3.22 kB         117 kB
@@ -65,10 +66,10 @@ Route (app)                                     Size  First Load JS
 
 ## 📊 2. File Statistics by Extension
 ```text
-     63 tsx
+     64 tsx
      17 ts
+      7 webp
       7 png
-      6 webp
       5 sh
       5 mdx
       1 svg
@@ -101,6 +102,7 @@ Route (app)                                     Size  First Load JS
         📄 page.tsx
       📄 page.tsx
       📂 aemdevweb/
+        📄 page.tsx
   📄 favicon.ico
   📂 api/
   📄 apple-touch-icon.png
@@ -196,6 +198,7 @@ Route (app)                                     Size  First Load JS
       📄 unlink-th1.webp
       📄 project-01.webp
       📄 unlink-th.webp
+      📄 aemdevweb-hero.webp
     📂 blog/
       📄 project-01.webp
     📂 templates/
@@ -387,7 +390,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 20:11:04
+Generated at: 2026-01-18 21:49:12
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -403,9 +406,9 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                     Size  First Load JS
-┌ ○ /                                        17.7 kB         137 kB
+┌ ○ /                                        17.6 kB         137 kB
 ├ ○ /_not-found                                988 B         103 kB
-├ ● /[template]                              3.51 kB         165 kB
+├ ● /[template]                              3.55 kB         165 kB
 ├   ├ /sale-page
 ├   ├ /food-beverage
 ├   ├ /corporate
@@ -422,13 +425,14 @@ Route (app)                                     Size  First Load JS
 ├   ├ /blog/copywriting-secrets
 ├   ├ /blog/facebook-ads-vs-website
 ├   └ [+2 more paths]
-├ ○ /case-studies                              132 B         161 kB
+├ ○ /case-studies                            2.42 kB         122 kB
 ├ ● /case-studies/[slug]                     2.42 kB         122 kB
 ├   ├ /case-studies/project-01
 ├   ├ /case-studies/tech-build-construction
 ├   ├ /case-studies/glow-skin-ecommerce
 ├   └ /case-studies/unlink-th
-├ ○ /case-studies/unlink-th                    132 B         161 kB
+├ ○ /case-studies/aemdevweb                    161 B         105 kB
+├ ○ /case-studies/unlink-th                  4.05 kB         161 kB
 ├ ○ /contact                                 2.53 kB         117 kB
 ├ ○ /robots.txt                                132 B         102 kB
 ├ ○ /services                                3.22 kB         117 kB
@@ -464,7 +468,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 @plugin "@tailwindcss/typography";
 
 /* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
-   Performance Tuning: TBT & Main-thread Work Optimization (Updated)
+   Performance Tuning: TBT & Main-thread Work Optimization (Final Polish)
 */
 
 @theme {
@@ -474,22 +478,23 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   /* --- 2. Animations (Smooth & Lightweight) --- */
+  /* ✅ Optimized: ใช้ translate3d เพื่อ Force Hardware Acceleration */
   @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(12deg); }
-    50% { transform: translateY(-15px) rotate(14deg); }
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(12deg); }
+    50% { transform: translate3d(0, -15px, 0) rotate(14deg); }
   }
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes aurora {
-    0%, 100% { opacity: 0.3; transform: translate(0, 0) scale(1); }
-    33% { opacity: 0.4; transform: translate(20px, -30px) scale(1.05); }
-    66% { opacity: 0.35; transform: translate(-15px, 15px) scale(0.95); }
+    0%, 100% { opacity: 0.3; transform: translate3d(0, 0, 0) scale(1); }
+    33% { opacity: 0.4; transform: translate3d(20px, -30px, 0) scale(1.05); }
+    66% { opacity: 0.35; transform: translate3d(-15px, 15px, 0) scale(0.95); }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 2.5rem)); }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(calc(-100% - 2.5rem), 0, 0); }
   }
   --animate-marquee: marquee 50s linear infinite;
 
@@ -543,7 +548,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
     font-family: var(--font-prompt);
     
-    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
+    /* ระบบแสง Ambient พื้นหลัง (Noise-free & GPU Optimized) */
     background-image:
       radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
       radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
@@ -577,7 +582,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
-      /* Desktop: สวยเต็มสูบ */
+      /* Desktop: สวยเต็มสูบ ใส่ Blur ได้หนักๆ เพราะเครื่องแรงกว่า */
       filter: blur(140px);
       background: linear-gradient(
         135deg,
@@ -601,7 +606,10 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   }
 
   .glass-card {
-    @apply shadow-luminous border backdrop-blur-2xl transition-all duration-500;
+    @apply shadow-luminous border transition-all duration-500;
+    /* ลด backdrop-blur บน mobile เพื่อความลื่นไหล */
+    @apply backdrop-blur-md md:backdrop-blur-2xl;
+    
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
     border-color: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-2xl);
@@ -780,34 +788,38 @@ import { JsonLd } from "@/components/seo/JsonLd"
 import { servicesData } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
 
-// 🚀 Dynamic Imports (Lazy Loading)
-// ✅ Fixed: ใช้ .then(...) เพื่อรองรับ Named Exports ให้ถูกต้อง
+// 🚀 Dynamic Imports (Lazy Loading) - แยก Chunk เพื่อลด TBT
 const HomeClientSections = dynamic(
   () =>
     import("@/components/landing/HomeClientSections").then(
       (mod) => mod.HomeClientSections
     ),
-  { ssr: true } // สำคัญสำหรับ SEO เพราะมี Content/Stats อยู่ข้างใน
+  { ssr: true } // ยังคง SSR ไว้เพื่อ SEO แต่ Code Split JS ออกไป
 )
 
-const ValueProp = dynamic(() =>
-  import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
-)
-const InsightsSection = dynamic(() =>
-  import("@/components/landing/InsightsSection").then(
-    (mod) => mod.InsightsSection
-  )
-)
 const WorkProcess = dynamic(() =>
   import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess)
 )
+
 const LineLeadForm = dynamic(() =>
   import("@/components/sales-engine/LineLeadForm").then(
     (mod) => mod.LineLeadForm
   )
 )
+
 const ServiceCard = dynamic(() =>
   import("@/components/shared/ServiceCard").then((mod) => mod.ServiceCard)
+)
+
+// Dynamic import Components ที่อยู่ลึกๆ เพื่อประหยัด Initial Payload
+const InsightsSection = dynamic(() =>
+  import("@/components/landing/InsightsSection").then(
+    (mod) => mod.InsightsSection
+  )
+)
+
+const ValueProp = dynamic(() =>
+  import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
 )
 
 export const metadata: Metadata = {
@@ -860,22 +872,26 @@ export default function HomePage() {
         }}
       />
 
-      {/* 🌌 Local Decorative Layer */}
+      {/* 🌌 Local Decorative Layer (Optimized for Mobile) */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
-        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[80px]" />
-        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[80px]" />
+        {/* ลด Blur และ Opacity เพื่อให้ Render เร็วขึ้น */}
+        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[600px] w-[800px] opacity-[0.08] blur-[60px] md:h-[800px] md:w-[1000px] md:blur-[80px]" />
+        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[600px] w-[600px] opacity-[0.05] blur-[60px] md:h-[800px] md:w-[800px] md:blur-[80px]" />
       </div>
 
       {/* 1. HERO & 2. TRUST SIGNALS: Critical Rendering Path */}
-      <Hero />
-      <div className="relative z-20 -mt-12 md:-mt-16">
-        <TrustBadge />
+      {/* วางโครงสร้างให้อ่าน HTML ปุ๊บเจอเลย ไม่ต้องรอ JS */}
+      <div className="content-visibility-auto contain-layout">
+        <Hero />
+        <div className="relative z-20 -mt-12 md:-mt-16">
+          <TrustBadge />
+        </div>
       </div>
 
       {/* 3. VALUE PROPOSITION */}
-      <section className="relative overflow-hidden py-24 lg:py-36">
-        {/* Background Accent */}
-        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
+      <section className="relative overflow-hidden py-24 lg:py-36 content-visibility-auto">
+        {/* Background Accent - ใช้ CSS Gradient แทนรูปภาพเพื่อ Performance */}
+        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl will-change-transform" />
         <div className="relative z-10">
           <ValueProp />
         </div>
@@ -885,12 +901,15 @@ export default function HomePage() {
       <HomeClientSections />
 
       {/* 5. INSIGHTS SECTION */}
-      <div className="relative z-10">
+      <div className="relative z-10 content-visibility-auto">
         <InsightsSection />
       </div>
 
       {/* 6. SERVICES GRID */}
-      <section id="services" className="relative py-32 lg:py-48">
+      <section
+        id="services"
+        className="relative py-32 lg:py-48 content-visibility-auto"
+      >
         <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
           <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
             Solutions for Growth
@@ -917,10 +936,10 @@ export default function HomePage() {
       <WorkProcess />
 
       {/* 8. FINAL CONVERSION BOX */}
-      <section className="mb-40 px-4">
+      <section className="mb-40 px-4 content-visibility-auto">
         <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
           {/* Inner Glow Decorative */}
-          <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[120px] transition-all duration-700 group-hover:opacity-60" />
+          <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[80px] transition-all duration-700 group-hover:opacity-60 will-change-transform" />
 
           <h2 className="text-luminous relative z-10 mb-12 text-4xl leading-none uppercase md:text-[6rem] lg:text-[8rem] italic">
             Ready to <span className="text-aurora-emerald">Scale</span> <br />
@@ -959,7 +978,8 @@ import dynamic from "next/dynamic"
  * ✅ Strategy: Selective Hydration & SSR-Ready for SEO
  */
 
-// 1. 📊 Impact Stats: (SSR: True) - สถิติความสำเร็จช่วยเรื่อง SEO และ Social Proof
+// 1. 📊 Impact Stats: ใช้ Loading State ง่ายๆ เพื่อหลอกตาว่าเร็ว
+// (SSR: True เพื่อให้ตัวเลขสำคัญติด Index SEO)
 const ImpactStats = dynamic(
   () =>
     import("@/components/sales-engine/ImpactStats").then(
@@ -974,7 +994,6 @@ const ImpactStats = dynamic(
             <div key={i} className="flex flex-col items-center space-y-5">
               <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5 shadow-inner" />
               <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5 opacity-50" />
             </div>
           ))}
         </div>
@@ -983,20 +1002,19 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator: (SSR: False) - ระบบคำนวณราคาเป็น Logic ฝั่ง Client 100%
+// 2. 💰 Price Estimator: Logic หนัก -> SSR: FALSE เท่านั้น
+// ไม่จำเป็นต้องให้ Server Render เพราะ User ต้องกดเล่นเอง ช่วยลด TBT ได้เยอะที่สุด
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
       (mod) => mod.PriceEstimator
     ),
   {
-    ssr: false,
+    ssr: false, // ⚡ Critical Optimization: ไม่ต้อง Render ฝั่ง Server
     loading: () => (
       <div className="glass-card shadow-luminous mx-auto flex min-h-[500px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
         <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
         <div className="w-full max-w-2xl space-y-6 px-10">
-          <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
-          <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
         </div>
       </div>
@@ -1004,7 +1022,8 @@ const PriceEstimator = dynamic(
   }
 )
 
-// 3. ⭐ Testimonials: (SSR: True) - ข้อมูลรีวิวสำคัญต่อ Search Engine Trust
+// 3. ⭐ Testimonials: SSR: True (เพื่อ SEO)
+// รีวิวลูกค้าเป็น Content สำคัญที่ Google ควรเห็น
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then(
@@ -1014,11 +1033,7 @@ const Testimonials = dynamic(
     ssr: true,
     loading: () => (
       <div className="container mx-auto px-4 py-20">
-        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-96 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-88 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-        </div>
+        <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
       </div>
     ),
   }
@@ -1038,16 +1053,16 @@ export function HomeClientSections() {
         </div>
       </section>
 
-      {/* 💰 Section: Interactive Pricing */}
+      {/* 💰 Section: Interactive Pricing (Render On Client Only) */}
       <section
         id="pricing"
-        className="relative container mx-auto px-4 py-32 lg:py-48"
+        className="relative container mx-auto px-4 py-32 lg:py-48 content-visibility-auto"
       >
         {/* Background Ambient Glow */}
-        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
+        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[100px] will-change-transform" />
 
         <div className="mx-auto max-w-5xl">
-          <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="mb-20 text-center">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
               Transparent Pricing
             </span>
@@ -1068,9 +1083,8 @@ export function HomeClientSections() {
       </section>
 
       {/* ⭐ Section: Social Proof & Testimonials */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem]">
-        {/* Decorative Light Layer */}
-        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40" />
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem] content-visibility-auto">
+        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40 will-change-transform" />
 
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
@@ -1089,7 +1103,6 @@ export function HomeClientSections() {
   )
 }
 
-// ✅ Default Export เพื่อความยืดหยุ่นในการ Import
 export default HomeClientSections
 ```
 ---
@@ -1721,217 +1734,176 @@ export default async function BlogPostPage({ params }: Props) {
 /** @format */
 
 import { Metadata } from "next"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
+import { ArrowRight, Star, MousePointer2, Code2 } from "lucide-react"
 
-// ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles, Rocket)
-import { Trophy, Zap, ArrowRight } from "lucide-react"
-
-// ✅ Components & UI
-// ✅ Fixed: Removed unused LineLeadForm import
-import { LineStickyButton } from "@/components/shared/LineStickyButton"
-import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+// ✅ Components & UI: มั่นใจว่า Import ตัวที่ใช้จริงเท่านั้น
+import { siteConfig, constructMetadata } from "@/constants/site-config"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 /**
- * 🔍 SEO Metadata
+ * 🔍 SEO Metadata: Case Studies Hub
+ * DNA: "ติดหน้าแรก Google" - เน้นผลลัพธ์ที่ SME ต้องการ
  */
-export const metadata: Metadata = {
-  title: "เบื้องหลัง Unlink-TH | เว็บไซต์ที่โหลดเร็วที่สุดในปี 2026",
-  description:
-    "เจาะลึกเบื้องหลังการสร้างเว็บไซต์ www.unlink-th.com ด้วย Next.js 15 และเทคนิค Technical SEO ขั้นสูง",
-  openGraph: {
-    images: ["/images/showcase/unlink-th.webp"],
-  },
+export const metadata: Metadata = constructMetadata({
+  title: "รวมเคสความสำเร็จ SME | ผลงานการสร้างเครื่องจักรผลิตเงิน",
+  description: "ส่องผลงานและเคสการันตีความสำเร็จจากลูกค้าที่ใช้บริการ AEMDEVWEB เปลี่ยนเว็บอืดเป็นเว็บแรงที่ปิดการขายได้จริง",
+})
+
+/**
+ * 🚀 Case Studies Hub Page: AEMDEVWEB Engine
+ * โครงสร้าง: Hero > Featured (Unlink-TH) > Success Grid > Final CTA
+ */
+export default function CaseStudiesPage() {
+  const canonicalUrl = `${siteConfig.url}/case-studies`
+
+  return (
+    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
+      {/* 🛠️ SEO Schema: CollectionPage */}
+      <JsonLd 
+        type="CollectionPage"
+        data={{
+          name: "AEMDEVWEB Success Stories",
+          description: "A collection of high-performance web development case studies for Thai SMEs.",
+          url: canonicalUrl,
+        }}
+      />
+
+      {/* 🌌 1. HERO SECTION */}
+      <section className="relative pt-32 pb-20 md:pt-48">
+        <div className="aurora-bg absolute top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
+        
+        <div className="container relative z-10 mx-auto px-4 text-center">
+          <Badge variant="luminous" className="mb-6 px-4 py-1.5 font-black uppercase tracking-widest">
+            Success Stories
+          </Badge>
+          <h1 className="font-prompt mb-8 text-5xl font-black italic leading-none tracking-tighter text-white uppercase md:text-8xl">
+            ผลงานที่ <span className="text-aurora-cyan text-luminous">เปลี่ยนชีวิต</span> <br />
+            เจ้าของธุรกิจ
+          </h1>
+          <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium leading-relaxed text-slate-400 md:text-xl">
+            เราไม่ได้แค่ส่งมอบ Code แต่เราส่งมอบ <span className="text-white italic">"ผลลัพธ์ทางธุรกิจ"</span>
+          </p>
+        </div>
+      </section>
+
+      {/* 🏆 2. FEATURED CASE STUDY: Unlink-TH */}
+      <section className="container mx-auto px-4 py-20">
+        <Link href="/case-studies/unlink-th" className="group block">
+          <div className="glass-card relative overflow-hidden border-white/10 p-1 transition-all duration-700 hover:border-aurora-cyan/40">
+            <div className="flex flex-col lg:flex-row lg:items-center">
+              <div className="relative aspect-video w-full overflow-hidden rounded-[1.8rem] lg:w-3/5">
+                <Image 
+                  src="/images/showcase/unlink-th.webp"
+                  alt="Unlink-TH Case Study Performance"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 flex gap-3">
+                  <Badge className="border-aurora-emerald/30 bg-aurora-emerald/20 font-black text-aurora-emerald">LCP 0.8s</Badge>
+                  <Badge className="border-aurora-cyan/30 bg-aurora-cyan/20 font-black text-aurora-cyan">PageSpeed 100</Badge>
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-6 p-8 lg:p-12">
+                <div className="flex items-center gap-2 text-aurora-cyan">
+                  <Star className="h-5 w-5 fill-current" />
+                  <span className="font-prompt text-sm font-black uppercase tracking-widest">Flagship Project</span>
+                </div>
+                <h2 className="font-prompt text-4xl font-black italic leading-none text-white uppercase transition-colors group-hover:text-aurora-cyan">
+                  Unlink-TH Engine
+                </h2>
+                <p className="font-anuphan text-lg leading-relaxed text-slate-400">
+                  สถาปัตยกรรม Next.js 15 ที่ทำให้ยอดขายโตขึ้น 300% ภายในเดือนแรก
+                </p>
+                <div className="flex items-center gap-2 font-bold text-white transition-all group-hover:gap-4">
+                  Read Case Study <ArrowRight className="h-5 w-5" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </section>
+
+      {/* 📂 3. SUCCESS GRID */}
+      <section className="container mx-auto px-4 py-12 pb-40">
+        <div className="grid gap-8 md:grid-cols-2">
+           <CaseLinkCard 
+             href="/case-studies/aemdevweb"
+             title="The Luminous Core"
+             category="Internal Architecture"
+             desc="เบื้องหลังการสร้างระบบปิดการขายอัตโนมัติของ AEMDEVWEB"
+           />
+           
+           <div className="glass-card flex items-center justify-center border-dashed border-white/10 bg-transparent p-12">
+             <p className="font-prompt text-2xl font-black italic uppercase tracking-tighter text-slate-600">
+               Your Success is Next...
+             </p>
+           </div>
+        </div>
+      </section>
+
+      {/* 📢 4. FINAL CTA */}
+      <section className="container mx-auto px-4 pb-40">
+        <div className="shadow-luminous group relative overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.02] p-12 text-center md:p-32">
+          <div className="aurora-bg from-aurora-cyan to-aurora-violet absolute inset-0 opacity-[0.05]" />
+          <h2 className="font-prompt relative z-10 mb-8 text-4xl font-black italic leading-none text-white uppercase md:text-7xl">
+            อยากเป็นเคส <br />
+            <span className="text-aurora-emerald">ต่อไปของเอ็มไหม?</span>
+          </h2>
+          <Button variant="premium" size="lg" className="shadow-aurora-glow group relative z-10 h-20 px-12 text-xl" asChild>
+            <Link href={siteConfig.links.line}>
+              จองคิววิเคราะห์เว็บฟรี <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+      
+      {/* ✅ Fixed: มั่นใจว่า LineStickyButton แสดงผลถูกต้อง */}
+      <LineStickyButton />
+    </main>
+  )
 }
 
 /**
- * 🚀 Case Study Page: Unlink-TH Engine
+ * 🧩 Sub-Components: Fixed Types & Unused Vars
  */
-export default function UnlinkCaseStudyPage() {
+
+interface CaseLinkCardProps {
+  href: string
+  title: string
+  category: string
+  desc: string
+}
+
+function CaseLinkCard({ href, title, category, desc }: CaseLinkCardProps) {
   return (
-    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
-      {/* 🌌 1. HERO: Luminous Identity */}
-      <section className="relative pt-40 pb-24 text-center">
-        {/* Background Decor */}
-        <div className="aurora-bg top-0 left-1/2 h-[700px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
-
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex animate-pulse items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-            <Trophy className="h-4 w-4" />
-            Flagship Project: Unlink-TH Engine
-          </div>
-
-          <h1 className="font-prompt mb-8 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase italic md:text-8xl">
-            เราทำเว็บให้ตัวเอง <br />
-            <span className="text-aurora-cyan drop-shadow-luminous">
-              เหมือนที่ทำให้ลูกค้า
-            </span>
-          </h1>
-
-          <p className="font-anuphan mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
-            นี่ไม่ใช่แค่ Portfolio แต่คือบทพิสูจน์ว่าทำไม{" "}
-            <span className="text-white italic">"ความเร็ว"</span> และ{" "}
-            <span className="text-white italic">"โครงสร้างที่ถูกต้อง"</span>{" "}
-            ถึงเป็นหัวใจสำคัญของการปิดการขายในปี 2026
-          </p>
-
-          <div className="flex justify-center">
-            <Button
-              variant="premium"
-              size="lg"
-              className="shadow-aurora-glow group h-20 px-12 text-xl"
-              asChild
-            >
-              <Link href="/contact">
-                อยากได้เว็บแรงๆ แบบนี้{" "}
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
-              </Link>
-            </Button>
+    <Link href={href} className="group">
+      <div className="glass-card border-white/5 bg-white/[0.01] p-10 transition-all duration-500 hover:border-aurora-cyan/30 hover:bg-white/[0.03]">
+        <div className="mb-8 flex items-center justify-between">
+          <Badge className="border-white/10 bg-white/5 px-3 uppercase tracking-widest text-slate-400">{category}</Badge>
+          <div className="text-aurora-cyan opacity-40 transition-opacity group-hover:opacity-100">
+            <MousePointer2 className="h-6 w-6" />
           </div>
         </div>
-      </section>
-
-      {/* 📊 2. STATS BAR: Luminous Impact */}
-      <section className="relative z-10 border-y border-white/5 bg-white/[0.02] py-16 backdrop-blur-xl">
-        <ImpactStats />
-      </section>
-
-      {/* 🛠️ 3. PROBLEM & SOLUTION: Technical Power */}
-      <section className="relative z-10 container mx-auto px-4 py-32">
-        <div className="grid items-center gap-20 lg:grid-cols-2">
-          {/* Image Side: PageSpeed Score */}
-          <div className="group relative">
-            <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-30 blur-3xl transition duration-1000 group-hover:opacity-60" />
-            <div className="shadow-luminous relative aspect-square overflow-hidden rounded-[3rem] border border-white/10 bg-slate-900">
-              <Image
-                src="/images/showcase/unlink-th.webp"
-                alt="Unlink-TH Performance Score"
-                fill
-                className="object-cover grayscale transition-all duration-1000 group-hover:grayscale-0"
-              />
-              <div className="glass-card border-aurora-emerald/40 shadow-aurora-glow absolute right-10 bottom-10 scale-110 rounded-[2rem] p-8 text-center">
-                <div className="font-prompt mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Google PageSpeed
-                </div>
-                <div className="font-prompt text-aurora-emerald text-6xl leading-none font-black tracking-tighter italic">
-                  100
-                </div>
-              </div>
-            </div>
+        <div className="mb-6 flex items-center gap-4">
+          <div className="bg-aurora-cyan/10 rounded-xl p-3 text-aurora-cyan">
+             <Code2 className="h-6 w-6" />
           </div>
-
-          {/* Content Side: Technical Specs */}
-          <div className="space-y-10">
-            <div className="space-y-6">
-              <Badge
-                variant="luminous"
-                className="px-4 py-1 tracking-widest uppercase"
-              >
-                Technical Excellence
-              </Badge>
-              <h2 className="font-prompt text-4xl leading-tight font-black tracking-tighter text-white uppercase md:text-5xl">
-                ทำไมต้องเขียนใหม่ <br />
-                ด้วย <span className="text-aurora-cyan">Next.js 15?</span>
-              </h2>
-              <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
-                เป้าหมายของเราคือการสร้างมาตรฐานใหม่{" "}
-                <span className="text-white italic">"กดปุ๊บ มาปั๊บ"</span>{" "}
-                เพื่อลดอัตราการกดออกของลูกค้าที่ใจร้อนขึ้นทุกวัน
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                "ใช้ React Server Components (RSC) ลด JavaScript ฝั่ง Client",
-                "ทำ Image Optimization อัตโนมัติด้วย Next/Image Engine",
-                "โครงสร้าง Technical SEO 100% (JSON-LD, Semantic HTML)",
-                "Global Edge Deploy: เร็วแรงทั่วโลกผ่าน Vercel Infrastructure",
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="hover:border-aurora-cyan/30 group flex gap-5 rounded-2xl border border-white/5 bg-white/5 p-6 transition-all"
-                >
-                  <div className="bg-aurora-cyan/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                    <Zap className="text-aurora-cyan h-5 w-5 transition-transform group-hover:scale-125" />
-                  </div>
-                  <span className="font-anuphan leading-relaxed font-bold text-slate-200">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+          <h3 className="font-prompt text-3xl font-black italic text-white uppercase transition-colors group-hover:text-aurora-cyan">{title}</h3>
         </div>
-      </section>
-
-      {/* 🚀 4. BUSINESS IMPACT: Result Cards */}
-      <section className="relative border-t border-white/5 bg-white/[0.01] py-32">
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <h2 className="font-prompt mb-20 text-4xl font-black tracking-tighter text-white uppercase italic md:text-6xl">
-            ผลลัพธ์ทางธุรกิจ <br />
-            <span className="text-aurora-cyan">ที่จับต้องได้</span>
-          </h2>
-          <div className="grid gap-10 md:grid-cols-3">
-            <div className="glass-card hover:border-aurora-cyan/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                3X
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                จำนวน Leads เพิ่มขึ้นต่อวัน
-              </div>
-            </div>
-
-            <div className="glass-card border-aurora-emerald/20 bg-aurora-emerald/5 shadow-luminous rounded-[2.5rem] p-12">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                0.8s
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                เวลาโหลดเฉลี่ย (LCP)
-              </div>
-            </div>
-
-            <div className="glass-card hover:border-aurora-violet/30 rounded-[2.5rem] border-white/5 p-12 transition-all duration-500">
-              <div className="font-prompt mb-4 text-6xl font-black tracking-tighter text-white">
-                No.1
-              </div>
-              <div className="font-anuphan text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                Keyword หลักติดหน้าแรก
-              </div>
-            </div>
-          </div>
+        <p className="font-anuphan mb-8 leading-relaxed text-slate-400">{desc}</p>
+        <div className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-white transition-all group-hover:gap-4">
+          Explore Detail <ArrowRight className="h-4 w-4" />
         </div>
-      </section>
-
-      {/* 📢 5. FINAL CTA */}
-      <section className="relative z-10 container mx-auto px-4 py-40">
-        <div className="shadow-luminous relative overflow-hidden rounded-[4rem] border border-white/10 p-12 text-center md:p-24">
-          <div className="aurora-bg from-aurora-cyan to-aurora-violet inset-0 bg-gradient-to-br opacity-[0.1]" />
-          <div className="relative z-10 mx-auto max-w-4xl">
-            <h2 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-8xl">
-              ธุรกิจของคุณ <br />
-              <span className="text-aurora-cyan">ก็ "แรง" แบบนี้ได้</span>
-            </h2>
-            <div className="flex flex-col justify-center gap-6 sm:flex-row">
-              <Button
-                variant="premium"
-                size="lg"
-                className="shadow-aurora-glow group h-20 px-12 text-xl"
-                asChild
-              >
-                <Link href="/contact">
-                  ขอคำปรึกษาฟรี (ไม่ซื้อไม่ว่า){" "}
-                  <ArrowRight className="ml-2 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <LineStickyButton />
-    </main>
+      </div>
+    </Link>
   )
 }
 ```
@@ -2075,6 +2047,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
 import { Metadata } from "next"
 
+/**
+ * 🧬 AEMDEVWEB Site Configuration (v.2026)
+ * แหล่งรวมข้อมูลพื้นฐานของแบรนด์ เพื่อใช้ในระบบ Metadata และ Schema.org
+ */
 export const siteConfig = {
   // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
   name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
@@ -2085,10 +2061,8 @@ export const siteConfig = {
   tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
 
   // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
-  title:
-    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
-  description:
-    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
+  title: "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
+  description: "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
@@ -2131,16 +2105,14 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
     "รับทำเว็บ Next.js",
     "รับทำ Landing Page",
     "จ้างทำเว็บ WordPress (ทางเลือก)",
-    "ที่ปรึกษาการตลาดออนไลน์"
+    "ที่ปรึกษาการตลาดออนไลน์",
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
-  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
-  themeColor: "oklch(0.82 0.18 155)", 
+  themeColor: "oklch(0.82 0.18 155)",
 } as const
 
 export type SiteConfig = typeof siteConfig
@@ -2164,10 +2136,7 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
-      default: title
-        ? `${title} | ${siteConfig.shortName}`
-        : `${siteConfig.title}`,
+      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
@@ -2354,6 +2323,10 @@ export const getOtherServices = (currentSlug: string): ServiceItem[] =>
 
 import { Metadata } from "next"
 
+/**
+ * 🧬 AEMDEVWEB Site Configuration (v.2026)
+ * แหล่งรวมข้อมูลพื้นฐานของแบรนด์ เพื่อใช้ในระบบ Metadata และ Schema.org
+ */
 export const siteConfig = {
   // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
   name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
@@ -2364,10 +2337,8 @@ export const siteConfig = {
   tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
 
   // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
-  title:
-    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
-  description:
-    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
+  title: "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
+  description: "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
@@ -2410,16 +2381,14 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
     "รับทำเว็บ Next.js",
     "รับทำ Landing Page",
     "จ้างทำเว็บ WordPress (ทางเลือก)",
-    "ที่ปรึกษาการตลาดออนไลน์"
+    "ที่ปรึกษาการตลาดออนไลน์",
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
-  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
-  themeColor: "oklch(0.82 0.18 155)", 
+  themeColor: "oklch(0.82 0.18 155)",
 } as const
 
 export type SiteConfig = typeof siteConfig
@@ -2443,10 +2412,7 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
-      default: title
-        ? `${title} | ${siteConfig.shortName}`
-        : `${siteConfig.title}`,
+      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
@@ -2576,6 +2542,10 @@ export const getRelatedTemplates = (
 
 import { Metadata } from "next"
 
+/**
+ * 🧬 AEMDEVWEB Site Configuration (v.2026)
+ * แหล่งรวมข้อมูลพื้นฐานของแบรนด์ เพื่อใช้ในระบบ Metadata และ Schema.org
+ */
 export const siteConfig = {
   // 🏢 1. Brand Identity (ตัวตนที่คนไทยเชื่อใจ)
   name: "นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน",
@@ -2586,10 +2556,8 @@ export const siteConfig = {
   tagline: "ทำเว็บซ่าๆ ปิดการขายไวมากส์ ช่วย SME ไทยโกยยอดขายออนไลน์",
 
   // 🏷️ SEO จริตคนไทย (เน้นความกังวล: คุยง่าย / งานไว / ไม่หายหัว)
-  title:
-    "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
-  description:
-    "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
+  title: "นายเอ็มซ่ามากส์ | รับทำเว็บหน้าเดียวปิดการขาย คุยง่าย งานไว ไม่ทิ้งงาน",
+  description: "หาคนทำเว็บที่คุยรู้เรื่องอยู่ใช่ไหม? มาหาเอ็มครับ รับทำเว็บ Sale Page งานเนี๊ยบ ปิดการขายไว เน้นกดทักไลน์แล้วจบงานได้เลย ไม่ต้องเก่งคอมก็มีเว็บสวยๆ ไว้ทำเงินได้",
 
   // 🌐 2. Canonical URLs & Assets
   url: "https://www.aemdevweb.com",
@@ -2632,16 +2600,14 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
-    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
     "รับทำเว็บ Next.js",
     "รับทำ Landing Page",
     "จ้างทำเว็บ WordPress (ทางเลือก)",
-    "ที่ปรึกษาการตลาดออนไลน์"
+    "ที่ปรึกษาการตลาดออนไลน์",
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
-  // ✅ ใช้ค่า OKLCH เพื่อความสดและเข้ากับ Design System
-  themeColor: "oklch(0.82 0.18 155)", 
+  themeColor: "oklch(0.82 0.18 155)",
 } as const
 
 export type SiteConfig = typeof siteConfig
@@ -2665,10 +2631,7 @@ export function constructMetadata({
 } = {}): Metadata {
   return {
     title: {
-      // โครงสร้าง Title: [ชื่อหน้า] | เอ็มซ่ามากส์ - [จุดขายหลัก]
-      default: title
-        ? `${title} | ${siteConfig.shortName}`
-        : `${siteConfig.title}`,
+      default: title ? `${title} | ${siteConfig.shortName}` : siteConfig.title,
       template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
     },
     description,
@@ -3265,6 +3228,7 @@ import createMDX from "@next/mdx"
 /**
  * 🚀 Next.js Config: Luminous Performance Edition (Ultimate Tuned)
  * ปรับจูนระดับ Deep-Dive เพื่อ PageSpeed 100/100
+ * เน้นลด TBT (Total Blocking Time) และ JS Execution Time
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -3278,7 +3242,7 @@ const nextConfig: NextConfig = {
   // 📄 Extensions: รองรับ MDX เต็มรูปแบบ
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes ที่ไม่จำเป็น
+  // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes
   images: {
     formats: ["image/avif", "image/webp"],
     // ⚠️ Tips: ตัดขนาดที่ไม่ได้ใช้ออก เพื่อลดภาระ Server ในการ Generate รูป
@@ -3300,6 +3264,8 @@ const nextConfig: NextConfig = {
     ],
     // ⚡ Cache: เพิ่มเวลา Cache รูปภาพให้นานขึ้น (ลดการโหลดซ้ำ)
     minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // 🛠️ Compiler Options: หัวใจสำคัญของการลด TBT
@@ -3317,27 +3283,24 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX (Build ไวขึ้น 5x)
 
-    // 📦 Optimize Imports: Tree-shaking แบบละเอียด
+    // 📦 Optimize Imports: Tree-shaking แบบละเอียด (สำคัญมากสำหรับ TBT)
+    // Next.js จะโหลดเฉพาะ Module ที่ใช้จริง ไม่โหลดมาทั้งก้อน
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
       "sonner",
       "clsx",
       "tailwind-merge",
-      "date-fns", // ✅ เพิ่ม: มักใช้บ่อยและขนาดใหญ่
-      "lodash", // ✅ เพิ่ม: เผื่อมีการหลุดเข้ามา
-      "@radix-ui/react-icons", // ✅ เพิ่ม: ถ้ามีการใช้ Icons ของ Radix
-      "@/components/ui", // ✅ เพิ่ม: ช่วย Tree-shake UI components ภายในโปรเจกต์
+      "date-fns",
+      "lodash",
+      "@radix-ui/react-icons",
+      "@radix-ui/react-accordion",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-tabs",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-label",
+      "@/components/ui", // ช่วย Tree-shake UI components ภายในโปรเจกต์
     ],
-
-    // 🚀 Turbo: ถ้าใช้ Turbopack ใน dev ให้ config เพิ่มได้ที่นี่ (Optional)
-  },
-
-  // 🛠️ Logging: ช่วย Debug ตอน Dev
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
   },
 }
 
@@ -3348,8 +3311,6 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
-    // ⚡ Performance: บังคับใช้ Rust Compiler ในระดับ MDX Loader
-    // (Next.js 15 experimental.mdxRs จัดการให้แล้ว แต่ใส่ options ว่างไว้ตาม pattern)
   },
 })
 
