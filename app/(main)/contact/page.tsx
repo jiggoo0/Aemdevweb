@@ -1,9 +1,8 @@
 /** @format */
-"use client"
 
 import React from "react"
-import { siteConfig } from "@/constants/site-config"
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+import { Metadata } from "next"
+import Link from "next/link"
 import {
   MessageCircle,
   Mail,
@@ -13,12 +12,27 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react"
+
+// 📦 Data & Config
+import { siteConfig, constructMetadata } from "@/constants/site-config"
+
+// 🧩 Components & UI
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { Badge } from "@/components/ui/badge"
-import { motion } from "framer-motion"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 📞 Contact Page: Luminous Edition
- * ยกระดับหน้าติดต่อให้ดูพรีเมียมและน่าเชื่อถือด้วยระบบแสง Midnight Aurora
+ * 🔍 SEO Configuration
+ */
+export const metadata: Metadata = constructMetadata({
+  title: "ติดต่อเรา - ปรึกษาฟรี ไม่มีกั๊ก",
+  description:
+    "ทักไลน์มาคุยสโคปงานฟรี นายเอ็มตอบเองทุกแชท! พร้อมประเมินราคาเบื้องต้น รับทำเว็บ Sale Page และระบบออนไลน์ครบวงจร",
+})
+
+/**
+ * 📞 Contact Page: Luminous Edition (Server Component)
+ * ยกระดับหน้าติดต่อด้วย CSS Animation (เบากว่า Framer Motion) เพื่อ SEO 100%
  */
 export default function ContactPage() {
   const contactInfo = [
@@ -27,44 +41,58 @@ export default function ContactPage() {
       label: "Line Official",
       value: siteConfig.links.lineId || "@aemdevweb",
       href: siteConfig.links.line,
-      glow: "group-hover:shadow-[0_0_20px_rgba(6,199,85,0.4)]",
+      glow: "hover:shadow-[0_0_20px_rgba(6,199,85,0.4)]",
       iconBg: "bg-[#06C755]",
+      color: "text-[#06C755]",
     },
     {
       icon: <Mail className="h-6 w-6" />,
       label: "Email Support",
       value: siteConfig.contact.email,
       href: `mailto:${siteConfig.contact.email}`,
-      glow: "group-hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
+      glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
       iconBg: "bg-blue-500",
+      color: "text-blue-400",
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       label: "Service Area",
       value: "Online Service (ทั่วประเทศ)",
       href: "#",
-      glow: "group-hover:shadow-[0_0_20px_rgba(122,243,255,0.4)]",
+      glow: "hover:shadow-[0_0_20px_rgba(122,243,255,0.4)]",
       iconBg: "bg-slate-800",
+      color: "text-slate-400",
     },
   ]
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-40 pb-24">
-      {/* 🌌 Background Decor: Aurora Ambient */}
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-40 pb-24 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema */}
+      <JsonLd
+        type="ProfessionalService"
+        data={{
+          name: siteConfig.name,
+          url: `${siteConfig.url}/contact`,
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: siteConfig.contact.tel,
+            contactType: "customer service",
+            areaServed: "TH",
+            availableLanguage: "Thai",
+          },
+        }}
+      />
+
+      {/* 🌌 Background Decor */}
       <div className="aurora-bg top-0 left-1/4 h-[600px] w-[600px] opacity-[0.1] blur-[120px]" />
       <div className="aurora-bg bg-aurora-violet right-1/4 bottom-0 h-[500px] w-[500px] opacity-[0.05] blur-[150px]" />
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
-          {/* 🟢 Left Side: Content & Branding */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
+          {/* 🟢 Left Side: Content & Branding (Animated via CSS) */}
+          <div className="relative animate-in fade-in slide-in-from-left-8 duration-1000 fill-mode-both">
             <Badge variant="luminous" className="mb-8 px-5 py-2">
-              <Zap className="fill-aurora-cyan mr-2 h-4 w-4" />
+              <Zap className="text-aurora-cyan mr-2 h-4 w-4 fill-current" />
               <span className="text-[10px] font-black tracking-widest uppercase">
                 Ready to scale
               </span>
@@ -89,12 +117,11 @@ export default function ContactPage() {
             {/* Contact Cards: Luminous Glass Style */}
             <div className="mb-12 space-y-4">
               {contactInfo.map((info, i) => (
-                <a
+                <Link
                   key={i}
                   href={info.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group flex items-center gap-6 rounded-[2.5rem] border border-white/5 bg-white/[0.03] p-6 backdrop-blur-xl transition-all hover:border-white/10 hover:bg-white/[0.08] ${info.glow}`}
+                  target={info.href.startsWith("http") ? "_blank" : "_self"}
+                  className={`group flex items-center gap-6 rounded-[2.5rem] border border-white/5 bg-white/[0.03] p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/10 hover:bg-white/[0.08] ${info.glow}`}
                 >
                   <div
                     className={`h-16 w-16 rounded-2xl ${info.iconBg} flex items-center justify-center text-white shadow-lg transition-all group-hover:scale-110 group-hover:rotate-3`}
@@ -105,12 +132,14 @@ export default function ContactPage() {
                     <p className="font-prompt mb-1 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
                       {info.label}
                     </p>
-                    <p className="font-prompt group-hover:text-aurora-cyan text-2xl font-black tracking-tight text-white transition-colors">
+                    <p className="font-prompt text-2xl font-black tracking-tight text-white transition-colors">
                       {info.value}
                     </p>
                   </div>
-                  <ArrowRight className="group-hover:text-aurora-cyan h-6 w-6 text-slate-700 transition-all group-hover:translate-x-2" />
-                </a>
+                  <ArrowRight
+                    className={`h-6 w-6 transition-all group-hover:translate-x-2 ${info.color}`}
+                  />
+                </Link>
               ))}
             </div>
 
@@ -130,15 +159,10 @@ export default function ContactPage() {
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* 🔵 Right Side: Form (Sticky on Desktop) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:sticky lg:top-40"
-          >
+          <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 fill-mode-both lg:sticky lg:top-40">
             <div className="relative">
               {/* Decorative Glow behind the form */}
               <div className="bg-aurora-cyan/20 absolute -inset-4 animate-pulse rounded-[4rem] opacity-30 blur-3xl" />
@@ -169,7 +193,7 @@ export default function ContactPage() {
                 🔒 ข้อมูลส่วนตัวของคุณจะถูกเก็บเป็นความลับสูงสุด
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </main>

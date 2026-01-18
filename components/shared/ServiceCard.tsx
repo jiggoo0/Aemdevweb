@@ -1,4 +1,5 @@
 /** @format */
+
 import React from "react"
 import Link from "next/link"
 import {
@@ -9,7 +10,7 @@ import {
   Code2,
   Gauge,
   Zap,
-  LucideIcon,
+  type LucideIcon,
   Sparkles,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -47,7 +48,7 @@ const iconMap: Record<string, LucideIcon> = {
  * ออกแบบมาเพื่อสร้างความน่าเชื่อถือและปิดการขายด้วย Visual ที่ทรงพลัง
  * ✅ Optimized: PageSpeed 100 | CSS-Driven transitions
  */
-export const ServiceCard = ({
+export function ServiceCard({
   slug,
   title,
   description,
@@ -57,7 +58,7 @@ export const ServiceCard = ({
   features,
   isFeatured = false,
   className,
-}: ServiceCardProps) => {
+}: ServiceCardProps) {
   // เลือกใช้ Icon ตามลำดับความสำคัญ (Prop > Mapping > Default)
   const IconComponent =
     icon || (iconName ? iconMap[iconName] || iconMap.Default : iconMap.Default)
@@ -157,5 +158,3 @@ export const ServiceCard = ({
     </Link>
   )
 }
-
-export default ServiceCard

@@ -1,27 +1,54 @@
 /** @format */
 
-import { getAllPosts } from "@/lib/mdx"
+import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { Metadata } from "next"
-// ✅ Fixed: Removed unused 'Zap' import to clear ESLint error
 import { Calendar, Clock, ArrowRight, Sparkles } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-// ✅ Fixed: Removed unused 'cn' import to clear ESLint error
 
+// 📦 Data & Config
+import { getAllPosts } from "@/lib/mdx"
+import { siteConfig } from "@/constants/site-config"
+
+// 🧩 Components & UI
+import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
+
+/**
+ * 🔍 SEO Configuration
+ */
 export const metadata: Metadata = {
-  title: "Knowledge Hub | AEMDEVWEB",
+  title: "Knowledge Hub | เทคนิคทำเว็บและ SEO สำหรับ SME",
   description:
-    "รวมเทคนิคการทำเว็บ High-Conversion และการตลาดออนไลน์สำหรับ SME ปี 2026",
+    "รวมบทความและเทคนิคการทำเว็บไซต์ High-Conversion, การทำ SEO ปี 2026 และกลยุทธ์การตลาดออนไลน์สำหรับ SME ไทย",
 }
 
+/**
+ * 📚 Blog Hub Page: Luminous Edition
+ * ศูนย์รวมบทความที่ออกแบบด้วย Layout แบบ Luminous Grid
+ */
 export default async function BlogPage() {
   const posts = await getAllPosts()
   const featuredPost = posts.find((p) => p.isFeatured) || posts[0]
   const regularPosts = posts.filter((p) => p.slug !== featuredPost?.slug)
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: Blog Collection */}
+      <JsonLd
+        type="Website" // หรือ CollectionPage ถ้าต้องการระบุเจาะจง
+        data={{
+          "@type": "Blog",
+          name: "AEMDEVWEB Knowledge Hub",
+          description: metadata.description,
+          url: `${siteConfig.url}/blog`,
+          blogPost: posts.map((post) => ({
+            "@type": "BlogPosting",
+            headline: post.title,
+            url: `${siteConfig.url}/blog/${post.slug}`,
+          })),
+        }}
+      />
+
       {/* 🌌 Aurora Background Decorations */}
       <div className="aurora-bg top-0 left-1/2 h-[500px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
       <div className="aurora-bg bg-aurora-violet -bottom-40 -left-40 h-[600px] w-[600px] opacity-[0.03] blur-[150px]" />
@@ -60,6 +87,7 @@ export default async function BlogPage() {
                   alt={featuredPost.title}
                   fill
                   className="object-cover grayscale transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0"
+                  priority // Featured post priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-950/20" />
               </div>
@@ -69,7 +97,7 @@ export default async function BlogPage() {
                     {featuredPost.category}
                   </Badge>
                   <span className="font-prompt text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                    {featuredPost.date.split("T")[0]}
+                    {new Date(featuredPost.date).toLocaleDateString("th-TH")}
                   </span>
                 </div>
                 <h2 className="font-prompt group-hover:text-aurora-cyan mb-6 text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors md:text-5xl">
@@ -117,7 +145,7 @@ export default async function BlogPage() {
                 <div className="mb-6 flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
                   <span className="flex items-center gap-1.5">
                     <Calendar className="text-aurora-cyan h-3.5 w-3.5" />{" "}
-                    {post.date.split("T")[0]}
+                    {new Date(post.date).toLocaleDateString("th-TH")}
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Clock className="text-aurora-cyan h-3.5 w-3.5" />{" "}

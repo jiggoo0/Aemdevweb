@@ -13,13 +13,14 @@ interface LineStickyButtonProps {
 /**
  * 🟢 LineStickyButton: Luminous Conversion Engine (v.2026)
  * ออกแบบมาเพื่อกระตุ้นยอดขาย (Conversion) โดยไม่รบกวน UX หลัก
+ * ✅ Features: Auto-Tooltip, Pulse Effect, Fake Notification Badge
  */
-export const LineStickyButton = ({ className }: LineStickyButtonProps) => {
+export function LineStickyButton({ className }: LineStickyButtonProps) {
   const [showTooltip, setShowTooltip] = useState(false)
 
-  // ⏱️ จังหวะการทักทายลูกค้า (Delay 2s เพื่อไม่ให้แย่งซีน Hero)
+  // ⏱️ จังหวะการทักทายลูกค้า (Delay 3s เพื่อให้ลูกค้าโฟกัสที่เนื้อหาหลักก่อน)
   useEffect(() => {
-    const timer = setTimeout(() => setShowTooltip(true), 2000)
+    const timer = setTimeout(() => setShowTooltip(true), 3000)
     return () => clearTimeout(timer)
   }, [])
 
@@ -39,7 +40,7 @@ export const LineStickyButton = ({ className }: LineStickyButtonProps) => {
               <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]" />
             </span>
 
-            {/* Arrow Pointer: ปรับให้เนียนตาขึ้น */}
+            {/* Arrow Pointer */}
             <div className="absolute right-6 -bottom-1 h-3 w-3 rotate-45 border-r border-b border-white/10 bg-slate-900/90" />
 
             {/* Subtle Sparkle Decor */}
@@ -50,7 +51,7 @@ export const LineStickyButton = ({ className }: LineStickyButtonProps) => {
 
       {/* 🟢 Main Line Button Container */}
       <div className="group pointer-events-auto relative">
-        {/* Pulse Effect: เรียกร้องความสนใจแบบนุ่มนวล (Soft Ambient Pulse) */}
+        {/* Pulse Effect: เรียกร้องความสนใจแบบนุ่มนวล */}
         <span className="absolute inset-0 animate-ping rounded-full bg-[#06C755] opacity-20 duration-1000" />
 
         <a
@@ -59,7 +60,7 @@ export const LineStickyButton = ({ className }: LineStickyButtonProps) => {
           rel="noopener noreferrer"
           className={cn(
             "relative flex items-center justify-center rounded-full transition-all duration-500",
-            "h-16 w-16 md:h-18 md:w-18", // ปรับขนาดให้กดง่ายขึ้น (Mobile-first)
+            "h-16 w-16 md:h-[4.5rem] md:w-[4.5rem]", // ✅ Fixed Size (72px on Desktop)
             "bg-[#06C755] text-white",
             "shadow-[0_10px_30px_-5px_rgba(6,199,85,0.4)] hover:shadow-[0_15px_40px_-5px_rgba(6,199,85,0.6)]",
             "border-2 border-white/20 hover:scale-110 active:scale-95"

@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 13:45:19
+  Generated: 2026-01-18 19:56:07
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 13:45:19**_
+_Generated on: **2026-01-18 19:56:07**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -644,24 +644,31 @@ export default function RootLayout({
 #### 🔍 Path: `app/(main)/page.tsx`
 ```typescript
 /** @format */
+
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// 🧩 Components - Static Imports (Instant LCP Engine)
-// โหลดทันทีเพื่อให้หน้าแรก (Hero Section) แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
+// 🧩 Components - Static Imports (Critical Path for LCP)
+// โหลดทันทีเพื่อให้ Hero Section แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
 import { Hero } from "@/components/landing/Hero"
 import { TrustBadge } from "@/components/shared/TrustBadge"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { JsonLd } from "@/components/seo/JsonLd"
 
-// 🚀 Client-Side Sections (Deferred Loading - Lazy Load)
-// ✅ FIXED: ย้าย HomeClientSections มาเป็น Dynamic Import เพื่อลด TBT บน Mobile
-// ใช้ ssr: true เพื่อให้ Search Engine ยังเห็น Headings/Content ภายในได้
+// 📦 Data & Configuration
+import { servicesData } from "@/constants/services-data"
+import { siteConfig } from "@/constants/site-config"
+
+// 🚀 Dynamic Imports (Lazy Loading)
+// ✅ Fixed: ใช้ .then(...) เพื่อรองรับ Named Exports ให้ถูกต้อง
 const HomeClientSections = dynamic(
-  () => import("@/components/landing/HomeClientSections"),
-  { ssr: true }
+  () =>
+    import("@/components/landing/HomeClientSections").then(
+      (mod) => mod.HomeClientSections
+    ),
+  { ssr: true } // สำคัญสำหรับ SEO เพราะมี Content/Stats อยู่ข้างใน
 )
 
-// Components ส่วนล่างอื่นๆ โหลดแบบ Lazy ทั้งหมด
 const ValueProp = dynamic(() =>
   import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
 )
@@ -678,44 +685,73 @@ const LineLeadForm = dynamic(() =>
     (mod) => mod.LineLeadForm
   )
 )
-// ServiceCard เป็น Default Export ไม่ต้องใช้ .then
-const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
-
-// 📦 Data & Configuration
-import { servicesData } from "@/constants/services-data"
-import { siteConfig } from "@/constants/site-config"
+const ServiceCard = dynamic(() =>
+  import("@/components/shared/ServiceCard").then((mod) => mod.ServiceCard)
+)
 
 export const metadata: Metadata = {
-  title: `นายเอ็มซ่ามากส์ | ${siteConfig.tagline}`,
+  title: `${siteConfig.name} | ${siteConfig.tagline}`,
   description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
-    title: `นายเอ็มซ่ามากส์ | ${siteConfig.tagline}`,
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
+    url: siteConfig.url,
+    type: "website",
   },
 }
 
 /**
  * 🚀 HomePage: AEM DEVWEB Engine v.2026
  * สถาปัตยกรรม: Hero > Trust > Value > ClientSections > Insights > Services > Process > CTA
- * ✅ Optimized: PageSpeed 100 Focus | Server-First Architecture | High-Conversion
  */
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased">
-      {/* 🌌 Local Decorative Layer: ลดความซับซ้อนของ Background เพื่อ Performance */}
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased bg-slate-950 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: WebSite & Service */}
+      <JsonLd
+        type="Website"
+        data={{
+          name: siteConfig.name,
+          url: siteConfig.url,
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${siteConfig.url}/search?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
+        }}
+      />
+      <JsonLd
+        type="ProfessionalService"
+        data={{
+          name: siteConfig.companyName,
+          image: siteConfig.ogImage,
+          url: siteConfig.url,
+          telephone: siteConfig.contact.tel,
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "TH",
+          },
+          priceRange: "฿2,590 - ฿12,900",
+        }}
+      />
+
+      {/* 🌌 Local Decorative Layer */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
         <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[80px]" />
         <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[80px]" />
       </div>
 
-      {/* 1. HERO & 2. TRUST SIGNALS: วินาทีแรกที่ผู้ใช้สัมผัส (Critical Rendering Path) */}
+      {/* 1. HERO & 2. TRUST SIGNALS: Critical Rendering Path */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
       </div>
 
-      {/* 3. VALUE PROPOSITION: ขยี้ปัญหาและนำเสนอทางออก */}
+      {/* 3. VALUE PROPOSITION */}
       <section className="relative overflow-hidden py-24 lg:py-36">
         {/* Background Accent */}
         <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
@@ -724,16 +760,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🚀 4, 8, 9. DYNAMIC CLIENT SECTIONS: Stats, Pricing, Testimonials */}
-      {/* ✅ FIXED: Dynamic Import ไม่บล็อก Main Thread ตอนโหลดหน้าแรก */}
+      {/* 4. DYNAMIC CLIENT SECTIONS (Stats, Pricing, Testimonials) */}
       <HomeClientSections />
 
-      {/* 5. INSIGHTS SECTION: โชว์ผลงาน Case Study และบทความความรู้ */}
+      {/* 5. INSIGHTS SECTION */}
       <div className="relative z-10">
         <InsightsSection />
       </div>
 
-      {/* 6. SERVICES GRID: แคตตาล็อกบริการสำหรับ SME */}
+      {/* 6. SERVICES GRID */}
       <section id="services" className="relative py-32 lg:py-48">
         <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
           <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
@@ -757,10 +792,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. PROCESS FLOW: แสดงขั้นตอนการทำงานที่โปร่งใส */}
+      {/* 7. PROCESS FLOW */}
       <WorkProcess />
 
-      {/* 10. FINAL CONVERSION BOX: กระตุ้นการตัดสินใจขั้นสุดท้าย */}
+      {/* 8. FINAL CONVERSION BOX */}
       <section className="mb-40 px-4">
         <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
           {/* Inner Glow Decorative */}
@@ -781,7 +816,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🛰️ Conversion Floating Engine */}
+      {/* 9. Floating CTA Engine */}
       <LineStickyButton />
     </div>
   )
@@ -796,30 +831,30 @@ export default function HomePage() {
 
 import React from "react"
 import dynamic from "next/dynamic"
+import { cn } from "@/lib/utils"
 
 /**
- * 🚀 HomeClientSections: Luminous Performance Engine (v.2026)
- * ✅ FIXED: ปรับจูนความสูง Skeleton เพื่อค่า CLS = 0
- * ✅ Strategy: จองพื้นที่หน้าจอ (Space Reservation) ให้ตรงกับคอมโพเนนต์จริง
- * ✅ Optimization: ใช้ Internal Dynamic Imports เพื่อแยก Bundle ของ Interactivity หนักๆ
+ * 🛰️ HomeClientSections: Luminous Performance Engine (v.2026)
+ * รวม Components ที่ทำงานฝั่ง Client เพื่อลด TBT ในหน้าแรก
+ * ✅ Strategy: Selective Hydration & SSR-Ready for SEO
  */
 
-// 1. 🏗️ Impact Stats Loading Skeleton (Height Reserved)
+// 1. 📊 Impact Stats: (SSR: True) - สถิติความสำเร็จช่วยเรื่อง SEO และ Social Proof
 const ImpactStats = dynamic(
   () =>
     import("@/components/sales-engine/ImpactStats").then(
       (mod) => mod.ImpactStats
     ),
   {
-    ssr: false,
+    ssr: true,
     loading: () => (
       <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col items-center space-y-5">
-              <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5" />
-              <div className="h-10 w-28 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-36 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5 shadow-inner" />
+              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5 opacity-50" />
             </div>
           ))}
         </div>
@@ -828,7 +863,7 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator Loading Skeleton (Height Fixed: 600px)
+// 2. 💰 Price Estimator: (SSR: False) - ระบบคำนวณราคาเป็น Logic ฝั่ง Client 100%
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
@@ -837,10 +872,8 @@ const PriceEstimator = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-card shadow-luminous mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
-        {/* Header Placeholder */}
+      <div className="glass-card shadow-luminous mx-auto flex min-h-[500px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
         <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
-        {/* List Placeholders */}
         <div className="w-full max-w-2xl space-y-6 px-10">
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
@@ -851,78 +884,80 @@ const PriceEstimator = dynamic(
   }
 )
 
-// 3. ⭐ Testimonials Loading Skeleton (Masonry Simulation)
+// 3. ⭐ Testimonials: (SSR: True) - ข้อมูลรีวิวสำคัญต่อ Search Engine Trust
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then(
       (mod) => mod.Testimonials
     ),
   {
-    ssr: false,
+    ssr: true,
     loading: () => (
-      <div className="container mx-auto px-4 pb-20">
+      <div className="container mx-auto px-4 py-20">
         <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {/* สร้างกล่องจำลองความสูงต่างกันเพื่อลด Layout Shift ใน Masonry */}
-          <div className="glass-card h-[320px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-[400px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-[350px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-96 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-88 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
         </div>
       </div>
     ),
   }
 )
 
-export default function HomeClientSections() {
+/**
+ * ✅ HomeClientSections Logic
+ */
+export function HomeClientSections() {
   return (
     <>
-      {/* 📊 Section 4: Impact Statistics (Social Proof) */}
-      <section className="relative z-10 border-y border-white/5 bg-white/[0.01] backdrop-blur-3xl">
+      {/* 📊 Section: Success Metrics */}
+      <section className="relative z-10 border-y border-white/5 bg-slate-950/20 backdrop-blur-3xl">
         <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <div className="relative">
+        <div className="relative py-12 md:py-20">
           <ImpactStats />
         </div>
       </section>
 
-      {/* 💰 Section 8: Pricing Engine (Conversion Hub) */}
+      {/* 💰 Section: Interactive Pricing */}
       <section
         id="pricing"
         className="relative container mx-auto px-4 py-32 lg:py-48"
       >
-        {/* Background Glow สำหรับการจองพื้นที่สายตา */}
+        {/* Background Ambient Glow */}
         <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
 
         <div className="mx-auto max-w-5xl">
-          <div className="mb-20 text-center">
+          <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
               Transparent Pricing
             </span>
-            <h2 className="text-luminous mb-6 text-4xl uppercase md:text-6xl italic">
+            <h2 className="text-luminous mb-6 text-4xl uppercase italic md:text-6xl">
               ประเมินราคา<span className="text-aurora-emerald">เบื้องต้น</span>
             </h2>
             <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400">
               เลือกฟีเจอร์ที่ต้องการ แล้วระบบจะคำนวณงบประมาณให้ทันที{" "}
               <br className="hidden md:block" />
               <span className="text-sm text-white/60">
-                (งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงาน)
+                (งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงานของคุณ)
               </span>
             </p>
           </div>
 
-          {/* Logic Engine ลบ CLS ด้วย Fixed Height Skeleton */}
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ Section 9: Testimonials (Trust Signals) */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 md:rounded-t-[4.5rem]">
-        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-50" />
+      {/* ⭐ Section: Social Proof & Testimonials */}
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem]">
+        {/* Decorative Light Layer */}
+        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40" />
 
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
             <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
               Customer Voices
             </div>
-            <h2 className="text-luminous text-4xl uppercase md:text-6xl italic">
+            <h2 className="text-luminous text-4xl uppercase italic md:text-6xl">
               Voice of <span className="text-slate-500">Success</span>
             </h2>
           </div>
@@ -933,6 +968,9 @@ export default function HomeClientSections() {
     </>
   )
 }
+
+// ✅ Default Export เพื่อความยืดหยุ่นในการ Import
+export default HomeClientSections
 ```
 ---
 
@@ -943,175 +981,221 @@ export default function HomeClientSections() {
 import React, { Suspense } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { Rocket, Paintbrush, ShieldCheck } from "lucide-react"
+import { Rocket, Paintbrush, ShieldCheck, ChevronRight } from "lucide-react"
 
 // 📦 Data & Utils
-import { getTemplateBySlug, templatesData } from "@/constants/templates-data"
+import { getServiceBySlug, servicesData } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 
-// 🧩 Layout Components
+// 🧩 Components
 import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
-import { Footer } from "@/components/shared/Footer"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { JsonLd } from "@/components/seo/JsonLd"
 
-// 🧩 Page Components
+// 🧩 Page Sub-Components (Reusing Template System)
 import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
 import { TemplateFeatures } from "@/components/template/shared/TemplateFeatures"
 import { DevicePreview } from "@/components/template/shared/DevicePreview"
 import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
 import { SalesHook } from "@/components/template/shared/SalesHook"
 
-interface DetailPageProps {
+// ✅ Define Theme Color Type
+type ThemeColor =
+  | "emerald"
+  | "blue"
+  | "indigo"
+  | "rose"
+  | "amber"
+  | "slate"
+  | "red"
+
+interface ServiceDetailPageProps {
   params: Promise<{
-    template: string
     slug: string
   }>
 }
 
 /**
- * 🧬 1. Static Params Generation: Pre-render all templates at build time
+ * 🎨 Helper: Map Service Slug to Theme Color
+ */
+const getThemeColor = (slug: string): ThemeColor => {
+  switch (slug) {
+    case "corporate":
+      return "blue"
+    case "food-beverage":
+      return "amber"
+    case "health-beauty":
+      return "rose"
+    case "internal-system":
+      return "indigo"
+    default:
+      return "emerald"
+  }
+}
+
+/**
+ * 🧬 1. Static Params Generation
  */
 export async function generateStaticParams() {
-  return templatesData.map((tpl) => ({
-    template: tpl.category || "sale-page",
-    slug: tpl.slug,
+  return servicesData.map((service) => ({
+    slug: service.slug,
   }))
 }
 
 /**
- * 🔍 2. Dynamic Metadata: Optimized for High CTR Social Sharing
+ * 🔍 2. Dynamic Metadata
  */
 export async function generateMetadata({
   params,
-}: DetailPageProps): Promise<Metadata> {
+}: ServiceDetailPageProps): Promise<Metadata> {
   const { slug } = await params
-  const data = getTemplateBySlug(slug)
+  const data = getServiceBySlug(slug)
 
-  if (!data) return { title: "Template Not Found" }
+  if (!data) return { title: "Service Not Found" }
 
-  const title = `${data.title} - Professional Web Template | ${siteConfig.shortName}`
+  const title = `${data.title} | ${siteConfig.shortName}`
   return {
     title,
     description: data.description,
     openGraph: {
-      images: [data.image],
+      images: [data.mockups.desktop],
       title,
       description: data.description,
       type: "website",
+      url: `${siteConfig.url}/services/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: data.description,
-      images: [data.image],
+      images: [data.mockups.desktop],
     },
   }
 }
 
 /**
- * 🚀 3. Main Detail Page Component
+ * 🚀 3. Main Service Detail Page
  */
-export default async function TemplateDetailPage({ params }: DetailPageProps) {
+export default async function ServiceDetailPage({
+  params,
+}: ServiceDetailPageProps) {
   const { slug } = await params
-  const data = getTemplateBySlug(slug)
+  const data = getServiceBySlug(slug)
 
   if (!data) return notFound()
 
-  // ✅ Theme Identity: Mapping to Design System Colors
-  const themeColor =
-    (data.themeColor as
-      | "emerald"
-      | "blue"
-      | "indigo"
-      | "rose"
-      | "amber"
-      | "slate"
-      | "red") || "emerald"
+  // ✅ Theme Identity
+  const themeColor = getThemeColor(slug)
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema for Service */}
+      <JsonLd
+        type="ProfessionalService"
+        data={{
+          name: data.title,
+          description: data.longDescription || data.description,
+          image: data.mockups.desktop,
+          url: `${siteConfig.url}/services/${slug}`,
+          priceRange: `฿${data.priceStart.toLocaleString()} - ฿${(
+            data.priceStart * 2
+          ).toLocaleString()}`,
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "TH",
+          },
+        }}
+      />
+
       <TemplateNavbar />
 
       <main className="relative z-10 flex-1">
-        {/* --- SECTION 1: HERO (Visual Impact) --- */}
+        {/* --- SECTION 1: HERO --- */}
         <TemplateHero
           title={data.title}
           subtitle={data.description}
-          image={data.image}
-          category={data.category}
+          image={data.mockups.desktop}
+          category="Service"
           themeColor={themeColor}
         />
 
-        {/* --- SECTION 2: VALUE PROPOSITIONS (Trust Signals) --- */}
+        {/* --- SECTION 2: VALUE PROPOSITIONS --- */}
         <section className="border-y border-white/5 bg-white/[0.02] py-20 backdrop-blur-sm">
           <div className="container mx-auto px-4">
             <div className="mx-auto mb-16 max-w-3xl text-center">
               <h2 className="font-prompt mb-4 text-3xl font-black tracking-tighter uppercase md:text-4xl">
-                ทุกสิ่งที่คุณต้องการเพื่อ{" "}
+                บริการที่ช่วยให้ธุรกิจคุณ{" "}
                 <span
                   className={cn(
                     "transition-colors duration-500",
-                    themeColor === "emerald" && "text-emerald-400",
+                    themeColor === "emerald" && "text-aurora-emerald",
                     themeColor === "blue" && "text-blue-400",
                     themeColor === "rose" && "text-rose-400",
-                    themeColor === "amber" && "text-amber-400"
+                    themeColor === "amber" && "text-amber-400",
+                    themeColor === "indigo" && "text-indigo-400"
                   )}
                 >
-                  เติบโตบนโลกออนไลน์
+                  ไปได้ไกลกว่าเดิม
                 </span>
               </h2>
               <p className="font-anuphan text-lg font-medium text-slate-400">
-                เทมเพลตนี้เตรียม Infrastructure สำหรับการปิดการขายไว้ให้ครบถ้วน
+                เราเตรียม Infrastructure และเครื่องมือที่ดีที่สุดไว้ให้คุณแล้ว
               </p>
             </div>
 
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
               <ServiceCard
-                icon={<Rocket className="text-emerald-400" />}
+                icon={<Rocket className="text-aurora-emerald" />}
                 title="High-Speed"
                 description="คะแนน Google PageSpeed 90+ โหลดไวใน 0.5 วินาที"
               />
               <ServiceCard
-                icon={<Paintbrush className="text-blue-400" />}
-                title="Premium UI/UX"
-                description="ดีไซน์ทันสมัย ปรับแต่ง CI ได้ตามอัตลักษณ์แบรนด์"
+                icon={<Paintbrush className="text-aurora-cyan" />}
+                title="Premium Standard"
+                description="งานดีไซน์และโค้ดคุณภาพสูง มาตรฐานสากล"
               />
               <ServiceCard
                 icon={<ShieldCheck className="text-rose-400" />}
-                title="Conversion Ready"
-                description="ติดตั้ง Facebook CAPI และ TikTok Pixel พร้อมใช้งาน"
+                title="Business Ready"
+                description="ติดตั้งเครื่องมือการตลาดพร้อมลุยทันที"
               />
             </div>
           </div>
         </section>
 
-        {/* --- SECTION 3: CONTENT & CONVERSION GRID (Main Layout) --- */}
+        {/* --- SECTION 3: CONTENT & GRID --- */}
         <div className="container mx-auto px-4 py-20">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
             {/* 👈 LEFT: CONTENT AREA */}
             <article className="space-y-32 lg:col-span-8">
-              {/* 🛠️ Features List */}
+              {/* Features List */}
               <section id="features" className="scroll-mt-32">
-                <TemplateFeatures data={data} themeColor={themeColor} />
+                {/* Note: Reuse TemplateFeatures (ensure it handles ServiceItem structure) */}
+                <TemplateFeatures
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  data={data as any}
+                  themeColor={themeColor}
+                />
               </section>
 
-              {/* 📱 Interactive Preview */}
+              {/* Interactive Preview */}
               <section id="preview" className="scroll-mt-32">
                 <div
                   className={cn(
                     "mb-10 border-l-4 pl-6 transition-colors duration-500",
-                    themeColor === "emerald" && "border-emerald-500",
+                    themeColor === "emerald" && "border-aurora-emerald",
                     themeColor === "blue" && "border-blue-500",
                     themeColor === "rose" && "border-rose-500",
-                    themeColor === "amber" && "border-amber-500"
+                    themeColor === "amber" && "border-amber-500",
+                    themeColor === "indigo" && "border-indigo-500"
                   )}
                 >
-                  <h3 className="font-prompt text-3xl font-black text-white uppercase">
-                    ตัวอย่างประสบการณ์การใช้งาน
+                  <h3 className="font-prompt text-3xl font-black text-white uppercase italic">
+                    ตัวอย่างผลงานจริง
                   </h3>
                   <p className="font-anuphan mt-3 text-lg font-medium text-slate-400">
-                    จำลองการแสดงผลจริงบนอุปกรณ์ที่ลูกค้าของคุณใช้งาน
+                    ดูตัวอย่างงานที่เราส่งมอบให้กับลูกค้าในแพ็กเกจนี้
                   </p>
                 </div>
 
@@ -1121,59 +1205,54 @@ export default async function TemplateDetailPage({ params }: DetailPageProps) {
                   }
                 >
                   <DevicePreview
-                    desktopSrc={data.image}
-                    mobileSrc={data.mockups?.mobile || data.image}
+                    desktopSrc={data.mockups.desktop}
+                    mobileSrc={data.mockups.mobile}
                     title={data.title}
                     themeColor={themeColor}
                   />
                 </Suspense>
               </section>
 
-              {/* 🛣️ Step Process */}
+              {/* Step Process */}
               <section className="space-y-8">
-                <h3 className="font-prompt text-2xl font-black text-white uppercase">
-                  ขั้นตอนการสั่งซื้อและติดตั้ง
+                <h3 className="font-prompt text-2xl font-black text-white uppercase italic">
+                  ขั้นตอนการเริ่มงาน
                 </h3>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <StepItem number="01" text="เลือกเทมเพลตและชำระเงิน" />
-                  <StepItem number="02" text="ส่งข้อมูลธุรกิจและรูปภาพแบรนด์" />
-                  <StepItem number="03" text="ทีมงานปรับแต่งระบบ (3-7 วัน)" />
-                  <StepItem number="04" text="ตรวจงานและส่งมอบ Source Code" />
+                  <StepItem number="01" text="เลือกแพ็กเกจและมัดจำ" />
+                  <StepItem number="02" text="ส่งข้อมูลธุรกิจและบรีฟงาน" />
+                  <StepItem number="03" text="ทีมงานพัฒนาและปรับแก้" />
+                  <StepItem number="04" text="ส่งมอบงานพร้อมคู่มือ" />
                 </div>
               </section>
             </article>
 
-            {/* 👉 RIGHT: CONVERSION SIDEBAR (Sticky Engine) */}
+            {/* 👉 RIGHT: SIDEBAR */}
             <aside className="lg:col-span-4">
               <div className="sticky top-28 space-y-8">
                 <TemplatePricingCard
                   title={data.title}
-                  price={data.price ?? 0}
-                  salePrice={data.salePrice}
+                  price={data.priceStart}
                   features={data.features}
-                  demoUrl={data.demoUrl || "#"}
+                  demoUrl="#" // Services might not have a direct demo URL
                   themeColor={themeColor}
                 />
 
-                {/* Developer Insight Card */}
-                <div className="glass-card rounded-3xl border border-white/5 bg-white/[0.02] p-8 text-sm text-slate-400 backdrop-blur-xl">
+                <div className="glass-card rounded-[2rem] border border-white/5 bg-white/[0.02] p-8 text-sm text-slate-400 backdrop-blur-xl">
                   <h4
                     className={cn(
                       "font-prompt mb-4 flex items-center gap-2 font-black tracking-widest uppercase",
-                      themeColor === "emerald" && "text-emerald-400",
+                      themeColor === "emerald" && "text-aurora-emerald",
                       themeColor === "blue" && "text-blue-400",
                       themeColor === "rose" && "text-rose-400",
-                      themeColor === "amber" && "text-amber-400"
+                      themeColor === "amber" && "text-amber-400",
+                      themeColor === "indigo" && "text-indigo-400"
                     )}
                   >
-                    Developer Insight
+                    Expert Insight
                   </h4>
                   <p className="font-anuphan leading-relaxed opacity-80">
-                    เทมเพลตนี้รองรับการทำ{" "}
-                    <span className="font-bold text-slate-100">
-                      SEO Semantic HTML
-                    </span>{" "}
-                    ติดหน้าแรก Google ได้ง่ายและยั่งยืน
+                    {data.longDescription}
                   </p>
                 </div>
               </div>
@@ -1181,11 +1260,15 @@ export default async function TemplateDetailPage({ params }: DetailPageProps) {
           </div>
         </div>
 
-        {/* --- SECTION 4: FINAL CALL TO ACTION --- */}
-        <SalesHook data={data} isTemplate={true} themeColor={themeColor} />
+        {/* --- SECTION 4: FINAL CTA --- */}
+        <SalesHook
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          data={data as any}
+          isTemplate={false}
+          themeColor={themeColor}
+        />
       </main>
 
-      <Footer />
       <LineStickyButton />
     </div>
   )
@@ -1203,11 +1286,11 @@ function ServiceCard({
   description: string
 }) {
   return (
-    <div className="group glass-card rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 transition-all duration-500 hover:bg-white/[0.05]">
+    <div className="group glass-card rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 transition-all duration-500 hover:bg-white/[0.05] hover:shadow-luminous">
       <div className="mb-6 inline-block rounded-2xl bg-white/5 p-4 transition-transform duration-500 group-hover:scale-110 group-hover:bg-white/10">
         {icon}
       </div>
-      <h3 className="font-prompt mb-3 text-xl font-black text-white uppercase">
+      <h3 className="font-prompt mb-3 text-xl font-black text-white uppercase italic">
         {title}
       </h3>
       <p className="font-anuphan text-sm leading-relaxed text-slate-400 opacity-80">
@@ -1219,13 +1302,14 @@ function ServiceCard({
 
 function StepItem({ number, text }: { number: string; text: string }) {
   return (
-    <div className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:bg-white/[0.05]">
-      <span className="font-prompt text-2xl font-black text-slate-700 transition-colors group-hover:text-white/20">
+    <div className="group flex items-center gap-5 rounded-2xl border border-white/5 bg-white/[0.02] p-6 transition-all hover:bg-white/[0.05] hover:border-white/10">
+      <span className="font-prompt text-3xl font-black text-slate-800 transition-colors group-hover:text-aurora-cyan/40">
         {number}
       </span>
-      <span className="font-anuphan text-sm font-bold text-slate-300">
+      <span className="font-anuphan text-base font-bold text-slate-300">
         {text}
       </span>
+      <ChevronRight className="ml-auto h-4 w-4 text-slate-600 transition-transform group-hover:translate-x-1" />
     </div>
   )
 }
@@ -1236,10 +1320,10 @@ function StepItem({ number, text }: { number: string; text: string }) {
 ```typescript
 /** @format */
 
-import { getAllPosts, getPostBySlug } from "@/lib/mdx"
-import { notFound } from "next/navigation"
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import {
@@ -1251,29 +1335,33 @@ import {
   MessageCircle,
 } from "lucide-react"
 
-// 🛠️ Components
+// 📦 Data & Config
+import { getAllPosts, getPostBySlug } from "@/lib/mdx"
+import { siteConfig } from "@/constants/site-config"
+
+// 🧩 Components & UI
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
  * 🎨 MDX Components Configuration
- * ✅ Fixed: แก้ไขปัญหา href เป็น undefined โดยรองรับทั้ง url และ href จาก MDX
  */
 const mdxComponents = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    // Ensure src is a string to satisfy Next.js Image types
     const imgSrc = typeof props.src === "string" ? props.src : ""
     return (
       <Image
         src={imgSrc}
         width={800}
         height={450}
-        className="rounded-3xl border border-white/10"
+        className="my-8 rounded-3xl border border-white/10 shadow-lg"
         alt={props.alt || "Blog Image Content"}
         loading="lazy"
       />
     )
   },
-  // 🚀 CallToAction: รองรับทั้งการพิมพ์ <CallToAction url="..." /> หรือ href="..."
   CallToAction: ({
     title,
     description,
@@ -1285,9 +1373,8 @@ const mdxComponents = {
     href?: string
     url?: string
   }) => {
-    // 🎯 Fallback logic: ถ้าไม่มีทั้งคู่ให้ไปหน้า contact
+    // Fallback logic for URL
     const targetPath = href || url || "/contact"
-
     return (
       <div className="border-aurora-cyan/20 bg-aurora-cyan/5 shadow-luminous my-12 rounded-[2rem] border p-8 text-center">
         <h3 className="font-prompt mb-4 text-2xl font-black text-white uppercase italic">
@@ -1321,13 +1408,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return {}
 
+  const ogImage = post.coverImage.startsWith("http")
+    ? post.coverImage
+    : `${siteConfig.url}${post.coverImage}`
+
   return {
-    title: `${post.title} | AemDevWeb`,
+    title: `${post.title} | ${siteConfig.shortName}`,
     description: post.description,
     openGraph: {
       title: post.title,
       description: post.description,
-      images: [post.coverImage],
+      type: "article",
+      url: `${siteConfig.url}/blog/${slug}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      authors: [siteConfig.name],
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [ogImage],
     },
   }
 }
@@ -1341,8 +1449,34 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) return notFound()
 
+  // Format Date (Thai Locale)
+  const formattedDate = new Date(post.date).toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
   return (
-    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: Article */}
+      <JsonLd
+        type="Article"
+        data={{
+          headline: post.title,
+          description: post.description,
+          image: post.coverImage.startsWith("http")
+            ? post.coverImage
+            : `${siteConfig.url}${post.coverImage}`,
+          datePublished: post.date,
+          dateModified: post.date,
+          author: {
+            "@type": "Person",
+            name: siteConfig.name,
+            url: siteConfig.url,
+          },
+        }}
+      />
+
       {/* 🌌 Background Decor: Aurora Ambient */}
       <div className="aurora-bg top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
 
@@ -1365,11 +1499,11 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
               <span className="flex items-center">
                 <Calendar className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
-                {post.date.split("T")[0]}
+                {formattedDate}
               </span>
               <span className="flex items-center">
                 <Clock className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
-                {post.readingTime} READ
+                {post.readingTime}
               </span>
             </div>
           </div>
@@ -1410,7 +1544,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <div>
               <div className="font-prompt font-black tracking-wider text-white uppercase">
-                นายเอ็มซ่ามากส์
+                {siteConfig.name}
               </div>
               <div className="font-anuphan mt-1 text-xs font-bold tracking-widest text-slate-500 uppercase">
                 Fullstack Dev & Consultant
@@ -1877,6 +2011,11 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
+    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
+    "รับทำเว็บ Next.js",
+    "รับทำ Landing Page",
+    "จ้างทำเว็บ WordPress (ทางเลือก)",
+    "ที่ปรึกษาการตลาดออนไลน์"
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
@@ -1974,6 +2113,7 @@ export interface ServiceItem {
 /**
  * 🛠️ รายการบริการ AemDevWeb (Updated SME 2026 Strategy)
  * ปรับราคาและเนื้อหาเพื่อเน้นความคุ้มค่าและความเร็วระดับปีศาจ
+ * DNA: "Turn Code into Cash" (เปลี่ยนโค้ดให้เป็นเงิน)
  */
 export const servicesData: ServiceItem[] = [
   {
@@ -1983,14 +2123,14 @@ export const servicesData: ServiceItem[] = [
     description:
       "หน้าเดียวจบ ปิดดีลไว! ออกแบบเพื่อยิง Ads Facebook/TikTok โดยเฉพาะ",
     longDescription:
-      "เปลี่ยนคนดูให้กลายเป็นลูกค้าด้วยโครงสร้าง Sale Page ระดับสากล ผสานการเขียนคำขายด้วย AI Copywriting ช่วยกระตุ้นการตัดสินใจ โหลดไวระดับ 0.8 วินาที เพื่อไม่ให้คุณเสียโอกาสแม้แต่วินาทีเดียว",
+      "เปลี่ยนจาก 'คนดู' เป็น 'ยอดโอน' ด้วย Sale Page โครงสร้างดูดทรัพย์ โหลดไวระดับ 0.8 วินาที (LCP) ตัดปัญหาเว็บอืดจนลูกค้าหนี พร้อมฝัง AI Copywriting ที่ช่วยสะกดจิตลูกค้าให้กดปุ่มสั่งซื้อแบบไม่รู้ตัว",
     iconName: "Rocket",
     priceStart: 2590,
     priceDisplay: "2,590.-",
     features: [
       "ฟรี Domain & Hosting (.com) 1 ปีแรก",
       "AI Copywriting ช่วยร่างคำขายปิดดีล",
-      "ติดตั้ง Facebook CAPI & TikTok Pixel",
+      "ติดตั้ง Facebook CAPI & TikTok Pixel แม่นยำ", // ✅ เพิ่มคำขยายความแม่นยำ
       "ระบบแจ้งเตือนออเดอร์เข้า Line OA ทันที",
     ],
     isFeatured: true,
@@ -2006,13 +2146,13 @@ export const servicesData: ServiceItem[] = [
     description:
       "สร้างความน่าเชื่อถือระดับบริษัทจดทะเบียน รองรับ SEO ติดหน้าแรก Google",
     longDescription:
-      "เว็บไซต์กึ่งทางการที่เน้นสร้าง Brand Authority ให้กับ หจก. และบริษัทเปิดใหม่ จัดโครงสร้างถูกต้องตามหลัก SEO On-Page 100% เพื่อให้ธุรกิจของคุณดูเป็นมืออาชีพและค้นหาง่ายบนโลกออนไลน์",
+      "อย่าให้ลูกค้าหลุดมือเพราะเว็บดูไม่น่าเชื่อถือ! ยกระดับภาพลักษณ์ธุรกิจด้วยเว็บไซต์ Corporate Design มาตรฐานสากล วางโครงสร้าง Semantic HTML ถูกหลัก SEO 100% ดันอันดับติดหน้าแรก Google ได้ง่ายขึ้นแบบ Organic",
     iconName: "ShieldCheck",
     priceStart: 6900,
     priceDisplay: "6,900.-",
     features: [
-      "ระบบหลังบ้าน (CMS) แก้ไขข้อมูลเองได้",
-      "โครงสร้างรองรับ SEO 100% (On-Page)",
+      "ระบบหลังบ้าน (CMS) แก้ไขข้อมูลเองได้ง่ายๆ",
+      "โครงสร้างรองรับ SEO 100% (On-Page Optimized)", // ✅ เน้น Keywords SEO
       "SSL Certificate มาตรฐานความปลอดภัยสูง",
       "รองรับ Responsive แสดงผลคมชัดทุกหน้าจอ",
     ],
@@ -2029,14 +2169,14 @@ export const servicesData: ServiceItem[] = [
     description:
       "เปลี่ยนงาน Excel ที่ยุ่งยาก เป็นระบบอัตโนมัติที่ออกแบบตามการทำงานจริง",
     longDescription:
-      "เลิกปวดหัวกับข้อมูลกระจัดกระจาย ด้วยระบบ Web Application ที่ออกแบบมาเพื่อธุรกิจคุณโดยเฉพาะ ไม่ว่าจะเป็นระบบสต็อก, ระบบจัดการสมาชิก หรือ Dashboard สรุปยอดขายแบบ Real-time",
+      "เลิกปวดหัวกับข้อมูลกระจัดกระจาย หรือไฟล์ Excel ที่ใครแก้ก็ไม่รู้ เปลี่ยนมาใช้ Web Application ที่ออกแบบ Workflow ตามธุรกิจคุณเป๊ะๆ ลดงานซ้ำซ้อน ลดความผิดพลาด และดู Dashboard สรุปยอดขายได้แบบ Real-time",
     iconName: "Code2",
     priceStart: 12900,
     priceDisplay: "12,900.-",
     features: [
-      "Dashboard สรุปภาพรวมแบบ Real-time",
+      "Dashboard สรุปภาพรวมธุรกิจแบบ Real-time",
       "ระบบฐานข้อมูล (Database) ความปลอดภัยสูง",
-      "Custom Workflow ตามหน้างานจริง",
+      "Custom Workflow ออกแบบตามหน้างานจริง",
       "Database Backup อัตโนมัติ ป้องกันข้อมูลสูญหาย",
     ],
     isFeatured: false,
@@ -2052,12 +2192,12 @@ export const servicesData: ServiceItem[] = [
     description:
       "ผ่าตัดเว็บเก่าให้แรงติดจรวด ปรับจูนคะแนน Google ให้เขียวทั้งกระดาน",
     longDescription:
-      "บริการ Technical Optimization สำหรับเจ้าของเว็บที่มีปัญหาเว็บอืด โหลดช้า หรืออันดับตก เราจะเข้าไปผ่าตัดโครงสร้างโค้ด ปรับจูน Core Web Vitals ให้ผ่านเกณฑ์ Google เพื่อประสบการณ์ใช้งานที่ดีที่สุด",
+      "บริการ Technical Optimization สำหรับเจ้าของเว็บที่มีปัญหาเว็บอืด โหลดช้า หรืออันดับตก เราจะเข้าไป 'ผ่าตัด' โค้ดหลังบ้าน ปรับจูน Core Web Vitals (LCP, CLS, INP) ให้ผ่านเกณฑ์ Google เพื่อประสบการณ์ใช้งานที่ดีที่สุดและคะแนน SEO ที่พุ่งทะยาน",
     iconName: "Gauge",
     priceStart: 1900,
     priceDisplay: "1,900.-",
     features: [
-      "การันตี Google PageSpeed (Mobile > 90)",
+      "การันตี Google PageSpeed (Mobile Score > 90)", // ✅ เน้นผลลัพธ์ชัดเจน
       "แก้ไข Core Web Vitals (LCP, CLS, INP)",
       "Image Optimization ลดขนาดรูปไม่ลดความชัด",
       "ตั้งค่า Search Console & Analytics 4",
@@ -2150,6 +2290,11 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
+    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
+    "รับทำเว็บ Next.js",
+    "รับทำ Landing Page",
+    "จ้างทำเว็บ WordPress (ทางเลือก)",
+    "ที่ปรึกษาการตลาดออนไลน์"
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
@@ -2367,6 +2512,11 @@ export const siteConfig = {
     "รับทำเว็บไซต์ราคาถูกและดี",
     "สอนทำเว็บ SME",
     "AEMDEVWEB",
+    // เพิ่มเติมจากเดิมเพื่อให้ครอบคลุม
+    "รับทำเว็บ Next.js",
+    "รับทำ Landing Page",
+    "จ้างทำเว็บ WordPress (ทางเลือก)",
+    "ที่ปรึกษาการตลาดออนไลน์"
   ],
 
   // 🎨 7. Theme Identity (สีเขียว Aurora Emerald แบบ Luminous)
@@ -2434,21 +2584,28 @@ export function constructMetadata({
 ```typescript
 /** @format */
 
+/**
+ * 🧭 ระบบ Navigation ฉบับ AemDevWeb (v.2026)
+ * แหล่งรวมลิงก์ทั้งหมดของเว็บไซต์ เพื่อให้ง่ายต่อการจัดการ SEO และ Route
+ * ✅ รองรับ Tooltip Description สำหรับ User-Friendly Navbar
+ */
+
 // --- 🏷️ INTERFACES ---
+
 export interface NavItem {
   name: string
   href: string
-  disabled?: boolean // ปุ่มจาง กดไม่ได้
-  external?: boolean // เปิดแท็บใหม่
-  badge?: "New" | "Hot" | "Sale" // ป้ายกำกับ
-  description?: string // คำอธิบายสั้นๆ (สำหรับ Mega Menu)
+  disabled?: boolean
+  external?: boolean
+  badge?: "New" | "Hot" | "Sale" | string
+  description?: string // สำหรับแสดงใน Tooltip เพื่อเพิ่ม User Experience
 }
 
 export interface FooterNavigation {
   services: NavItem[]
   company: NavItem[]
   support: NavItem[]
-  legal: NavItem[] // ส่วนกฎหมาย
+  legal: NavItem[]
 }
 
 export interface NavigationConfig {
@@ -2456,55 +2613,73 @@ export interface NavigationConfig {
   footer: FooterNavigation
 }
 
-/**
- * 🧭 ระบบ Navigation ฉบับ AemDevWeb (Updated 2026)
- * จัดการลิงก์ทั้งหมดให้ตรงกับ Folder Structure ใน app/(main)/ และ app/(marketing)/
- */
+// --- 🧭 CORE NAVIGATION CONFIGURATION ---
+
 export const navigation: NavigationConfig = {
-  // 🌟 เมนูหลัก (Header / Mobile Menu)
+  /**
+   * 🌟 Main Menu: แสดงผลที่ Header, Mobile Menu และ Navbar Tooltips
+   */
   main: [
     {
       name: "หน้าแรก",
       href: "/",
+      description: "กลับสู่หน้าหลักและภาพรวมบริการทั้งหมด",
     },
     {
       name: "บริการ",
       href: "/services",
+      description: "แพ็กเกจทำเว็บไซต์ Sale Page และระบบภายในองค์กร",
     },
     {
       name: "เทมเพลต",
-      href: "/sale-page", // ชี้ไปที่ Category แรกของ Marketing Route
+      href: "/templates", // ชี้ไปยัง app/(marketing)/
       badge: "New",
+      description: "เลือกชมโครงสร้างเว็บไซต์สำเร็จรูปที่พร้อมใช้งานทันที",
     },
     {
       name: "ผลงาน",
-      href: "/case-studies", // ✅ อ้างอิงตาม Folder: app/(main)/case-studies/
+      href: "/case-studies",
+      description: "รวมเคสความสำเร็จและรีวิวจากลูกค้าที่ใช้งานจริง",
     },
     {
       name: "บทความ",
       href: "/blog",
+      description: "เคล็ดลับการทำเว็บ SEO และเทคนิคเพิ่มยอดขายออนไลน์",
     },
     {
       name: "ติดต่อเรา",
       href: "/contact",
+      description: "สอบถามข้อมูลเพิ่มเติมหรือขอคำปรึกษาฟรีกับพี่เอ็ม",
     },
   ],
 
-  // 🦶 เมนูท้ายเว็บ (Footer)
+  /**
+   * 🦶 Footer Menu: จัดกลุ่มตามโครงสร้างธุรกิจ
+   */
   footer: {
-    // 🛠️ หมวดหมู่บริการหลัก
     services: [
       {
         name: "Sale Page ปิดการขาย",
         href: "/services/sale-page",
         badge: "Hot",
+        description: "เน้น Conversion สำหรับสายยิงแอด",
       },
-      { name: "เว็บไซต์บริษัท SME", href: "/services/corporate" },
-      { name: "ระบบจัดการสต็อก", href: "/services/internal-system" },
-      { name: "ปรับความเร็ว & SEO", href: "/services/speed-seo" },
+      { 
+        name: "เว็บไซต์บริษัท SME", 
+        href: "/services/corporate",
+        description: "สร้างความน่าเชื่อถือให้ธุรกิจระดับสากล"
+      },
+      { 
+        name: "ระบบจัดการสต็อก", 
+        href: "/services/internal-system",
+        description: "หลังบ้านอัจฉริยะเพื่อการจัดการที่ง่ายขึ้น" 
+      },
+      { 
+        name: "ปรับความเร็ว & SEO", 
+        href: "/services/speed-seo",
+        description: "จูนเว็บให้แรง โหลดไว Google รัก"
+      },
     ],
-
-    // 🏢 หมวดหมู่บริษัท
     company: [
       { name: "เกี่ยวกับนายเอ็ม", href: "/about" },
       { name: "ผลงานที่ผ่านมา", href: "/case-studies" },
@@ -2515,19 +2690,15 @@ export const navigation: NavigationConfig = {
       },
       { name: "ร่วมงานกับเรา", href: "/careers", disabled: true },
     ],
-
-    // 💬 ส่วนสนับสนุนและช่องทางติดต่อ
     support: [
       {
         name: "ปรึกษาผ่าน Line",
-        href: "https://lin.ee/SVMBEJ8", // ✅ ตรวจสอบ ID กับ site-config
+        href: "https://lin.ee/SVMBEJ8",
         external: true,
       },
       { name: "เช็คราคาประเมิน", href: "/#pricing" },
       { name: "แจ้งชำระเงิน", href: "/contact" },
     ],
-
-    // ⚖️ กฎหมายและนโยบาย
     legal: [
       {
         name: "นโยบายความเป็นส่วนตัว",
@@ -2543,17 +2714,19 @@ export const navigation: NavigationConfig = {
   },
 }
 
-// --- 🚀 NAMED EXPORTS ---
-// แยก export เพื่อให้เรียกใช้งานได้เบาเครื่องขึ้น (Tree-shaking)
-export const mainNav = navigation.main as NavItem[]
-export const footerNav = navigation.footer as FooterNavigation
+// --- 🚀 HELPER EXPORTS ---
+// เพื่อการเรียกใช้งานที่เจาะจงและประหยัดทรัพยากร (Tree-shaking)
+
+export const mainNav = navigation.main
+export const footerServicesNav = navigation.footer.services
+export const footerCompanyNav = navigation.footer.company
+export const footerSupportNav = navigation.footer.support
+export const footerLegalNav = navigation.footer.legal
 
 /**
- * ✅ Keywords Cast Fix
- * ใช้สำหรับ Metadata ในไฟล์ที่เรียกใช้ siteConfig เพื่อป้องกัน TS Error 'readonly'
- * หมายเหตุ: ปกติจะทำที่ site-config.ts แต่ถ้าเรียกใช้ตรงนี้ให้ทำดังนี้:
+ * 📝 Site Keywords: สำหรับใช้ใน Metadata (layout.tsx)
  */
-export const siteKeywords = [
+export const siteKeywords: string[] = [
   "นายเอ็มซ่ามากส์",
   "เอ็มซ่ามากส์รับทำเว็บ",
   "รับทำเว็บไซต์ SME",
@@ -2561,8 +2734,10 @@ export const siteKeywords = [
   "เว็บหน้าเดียวปิดการขาย",
   "AEMDEVWEB",
   "ทำเว็บทักไลน์",
-  "รับทำเว็บ Next.js",
-] as string[]
+  "รับทำเว็บ Next.js 15",
+  "Next.js 15.1 Thailand",
+  "ทำเว็บโหลดไว PageSpeed 100",
+]
 ```
 ---
 

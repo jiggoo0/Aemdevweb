@@ -1,22 +1,29 @@
 /** @format */
+
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// 🧩 Components - Static Imports (Instant LCP Engine)
-// โหลดทันทีเพื่อให้หน้าแรก (Hero Section) แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
+// 🧩 Components - Static Imports (Critical Path for LCP)
+// โหลดทันทีเพื่อให้ Hero Section แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
 import { Hero } from "@/components/landing/Hero"
 import { TrustBadge } from "@/components/shared/TrustBadge"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
+import { JsonLd } from "@/components/seo/JsonLd"
 
-// 🚀 Client-Side Sections (Deferred Loading - Lazy Load)
-// ✅ FIXED: ย้าย HomeClientSections มาเป็น Dynamic Import เพื่อลด TBT บน Mobile
-// ใช้ ssr: true เพื่อให้ Search Engine ยังเห็น Headings/Content ภายในได้
+// 📦 Data & Configuration
+import { servicesData } from "@/constants/services-data"
+import { siteConfig } from "@/constants/site-config"
+
+// 🚀 Dynamic Imports (Lazy Loading)
+// ✅ Fixed: ใช้ .then(...) เพื่อรองรับ Named Exports ให้ถูกต้อง
 const HomeClientSections = dynamic(
-  () => import("@/components/landing/HomeClientSections"),
-  { ssr: true }
+  () =>
+    import("@/components/landing/HomeClientSections").then(
+      (mod) => mod.HomeClientSections
+    ),
+  { ssr: true } // สำคัญสำหรับ SEO เพราะมี Content/Stats อยู่ข้างใน
 )
 
-// Components ส่วนล่างอื่นๆ โหลดแบบ Lazy ทั้งหมด
 const ValueProp = dynamic(() =>
   import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
 )
@@ -33,44 +40,73 @@ const LineLeadForm = dynamic(() =>
     (mod) => mod.LineLeadForm
   )
 )
-// ServiceCard เป็น Default Export ไม่ต้องใช้ .then
-const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
-
-// 📦 Data & Configuration
-import { servicesData } from "@/constants/services-data"
-import { siteConfig } from "@/constants/site-config"
+const ServiceCard = dynamic(() =>
+  import("@/components/shared/ServiceCard").then((mod) => mod.ServiceCard)
+)
 
 export const metadata: Metadata = {
-  title: `นายเอ็มซ่ามากส์ | ${siteConfig.tagline}`,
+  title: `${siteConfig.name} | ${siteConfig.tagline}`,
   description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
-    title: `นายเอ็มซ่ามากส์ | ${siteConfig.tagline}`,
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
+    url: siteConfig.url,
+    type: "website",
   },
 }
 
 /**
  * 🚀 HomePage: AEM DEVWEB Engine v.2026
  * สถาปัตยกรรม: Hero > Trust > Value > ClientSections > Insights > Services > Process > CTA
- * ✅ Optimized: PageSpeed 100 Focus | Server-First Architecture | High-Conversion
  */
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased">
-      {/* 🌌 Local Decorative Layer: ลดความซับซ้อนของ Background เพื่อ Performance */}
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased bg-slate-950 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: WebSite & Service */}
+      <JsonLd
+        type="Website"
+        data={{
+          name: siteConfig.name,
+          url: siteConfig.url,
+          potentialAction: {
+            "@type": "SearchAction",
+            target: `${siteConfig.url}/search?q={search_term_string}`,
+            "query-input": "required name=search_term_string",
+          },
+        }}
+      />
+      <JsonLd
+        type="ProfessionalService"
+        data={{
+          name: siteConfig.companyName,
+          image: siteConfig.ogImage,
+          url: siteConfig.url,
+          telephone: siteConfig.contact.tel,
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: "TH",
+          },
+          priceRange: "฿2,590 - ฿12,900",
+        }}
+      />
+
+      {/* 🌌 Local Decorative Layer */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
         <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[80px]" />
         <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[80px]" />
       </div>
 
-      {/* 1. HERO & 2. TRUST SIGNALS: วินาทีแรกที่ผู้ใช้สัมผัส (Critical Rendering Path) */}
+      {/* 1. HERO & 2. TRUST SIGNALS: Critical Rendering Path */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
       </div>
 
-      {/* 3. VALUE PROPOSITION: ขยี้ปัญหาและนำเสนอทางออก */}
+      {/* 3. VALUE PROPOSITION */}
       <section className="relative overflow-hidden py-24 lg:py-36">
         {/* Background Accent */}
         <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
@@ -79,16 +115,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🚀 4, 8, 9. DYNAMIC CLIENT SECTIONS: Stats, Pricing, Testimonials */}
-      {/* ✅ FIXED: Dynamic Import ไม่บล็อก Main Thread ตอนโหลดหน้าแรก */}
+      {/* 4. DYNAMIC CLIENT SECTIONS (Stats, Pricing, Testimonials) */}
       <HomeClientSections />
 
-      {/* 5. INSIGHTS SECTION: โชว์ผลงาน Case Study และบทความความรู้ */}
+      {/* 5. INSIGHTS SECTION */}
       <div className="relative z-10">
         <InsightsSection />
       </div>
 
-      {/* 6. SERVICES GRID: แคตตาล็อกบริการสำหรับ SME */}
+      {/* 6. SERVICES GRID */}
       <section id="services" className="relative py-32 lg:py-48">
         <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
           <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
@@ -112,10 +147,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. PROCESS FLOW: แสดงขั้นตอนการทำงานที่โปร่งใส */}
+      {/* 7. PROCESS FLOW */}
       <WorkProcess />
 
-      {/* 10. FINAL CONVERSION BOX: กระตุ้นการตัดสินใจขั้นสุดท้าย */}
+      {/* 8. FINAL CONVERSION BOX */}
       <section className="mb-40 px-4">
         <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
           {/* Inner Glow Decorative */}
@@ -136,7 +171,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🛰️ Conversion Floating Engine */}
+      {/* 9. Floating CTA Engine */}
       <LineStickyButton />
     </div>
   )

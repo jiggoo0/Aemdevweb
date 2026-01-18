@@ -9,15 +9,26 @@ import {
   MousePointerClick,
   LineChart,
   Sparkles,
+  type LucideIcon,
 } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 /**
  * 💎 ValueProp Component: The Unfair Advantage (v.2026)
  * ส่วนแสดงจุดเด่นของบริการที่จูนมาเพื่อความ "น่าเชื่อถือ" และ "ความเร็ว"
- * ✅ Optimized: ใช้ Native Tailwind Animations และ Template Literals เพื่อลด TBT
+ * ✅ Optimized: ใช้ Native Tailwind Animations (animate-in) เพื่อลด TBT
  */
 
-const features = [
+interface FeatureItem {
+  icon: LucideIcon
+  title: string
+  description: string
+  color: string
+  glow: string
+  delay: string
+}
+
+const features: FeatureItem[] = [
   {
     icon: Zap,
     title: "โหลดไวระดับปีศาจ",
@@ -87,21 +98,26 @@ export const ValueProp = () => {
           ทำไมต้องจ้าง <span className="text-aurora-emerald">AemDevWeb?</span>
         </h2>
         <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-          เพราะเราไม่ได้แค่ "รับทำเว็บ" แต่เราคือพาร์ทเนอร์สาย Tech ที่เข้าใจว่า{" "}
-          <br className="hidden md:block" />
+          เพราะเราไม่ได้แค่ &quot;รับทำเว็บ&quot; แต่เราคือพาร์ทเนอร์สาย Tech
+          ที่เข้าใจว่า <br className="hidden md:block" />
           คุณต้องการ{" "}
           <span className="decoration-aurora-cyan/30 font-bold text-white underline underline-offset-8">
-            "ยอดขาย"
+            &quot;ยอดขาย&quot;
           </span>{" "}
           ไม่ใช่แค่เว็บสวยๆ ที่ไม่มีคนเข้า
         </p>
       </div>
 
+      {/* 🛠️ Features Grid */}
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => (
           <div
             key={index}
-            className={`group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500 animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700 ${feature.delay}`}
+            className={cn(
+              "group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500",
+              "animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700",
+              feature.delay
+            )}
           >
             {/* Luminous Hover Decor: แสง Aurora ฟุ้งเมื่อเมาส์ชี้ */}
             <div className="bg-aurora-cyan/10 absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 blur-[60px] transition-opacity duration-700 group-hover:opacity-100" />
@@ -109,16 +125,19 @@ export const ValueProp = () => {
             <div className="relative z-10">
               {/* Icon with Aurora Glow */}
               <div
-                className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:bg-white/10 ${feature.glow}`}
+                className={cn(
+                  "mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:bg-white/10",
+                  feature.glow
+                )}
               >
-                <feature.icon className={`h-8 w-8 ${feature.color}`} />
+                <feature.icon className={cn("h-8 w-8", feature.color)} />
               </div>
 
-              <h3 className="group-hover:text-aurora-cyan mb-4 text-2xl font-black tracking-tight text-white uppercase transition-colors italic">
+              <h3 className="group-hover:text-aurora-cyan mb-4 text-2xl font-black tracking-tight text-white uppercase transition-colors duration-300 italic">
                 {feature.title}
               </h3>
 
-              <p className="font-anuphan text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity group-hover:opacity-100 md:text-lg">
+              <p className="font-anuphan text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity duration-500 group-hover:opacity-100 md:text-lg">
                 {feature.description}
               </p>
             </div>

@@ -25,10 +25,10 @@ export function InsightsSection() {
           <div className="mb-24 flex flex-col items-center justify-between gap-12 lg:flex-row lg:items-end">
             <div className="max-w-3xl text-center lg:text-left">
               <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-                <Sparkles className="h-3.5 w-3.5 animate-pulse" /> 
+                <Sparkles className="h-3.5 w-3.5 animate-pulse" />
                 Latest Success Stories
               </div>
-              <h2 className="text-luminous mb-8 text-5xl uppercase md:text-8xl">
+              <h2 className="text-luminous mb-8 text-5xl uppercase md:text-8xl italic">
                 Success <span className="text-slate-600">&</span> <br />
                 <span className="text-aurora-emerald">Knowledge</span>
               </h2>
@@ -85,7 +85,7 @@ export function InsightsSection() {
             className="animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards mt-0 duration-1000 outline-none"
           >
             <div className="grid grid-cols-1 gap-10">
-              <div className="glass-card flex flex-col items-center justify-center rounded-4xl border border-dashed border-white/10 py-32 text-center">
+              <div className="glass-card flex flex-col items-center justify-center rounded-[2.5rem] border border-dashed border-white/10 py-32 text-center">
                 <p className="font-prompt text-lg font-black tracking-[0.3em] text-slate-500 uppercase italic">
                   Coming Soon: Insights & Strategies
                 </p>

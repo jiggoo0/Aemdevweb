@@ -3,12 +3,9 @@
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-
-// ✅ Fixed: Removed unused imports (CheckCircle2, TrendingUp, Sparkles)
 import { Zap, Trophy, ArrowRight } from "lucide-react"
 
 // ✅ Components & UI Layer
-// ✅ Fixed: Removed unused 'LineLeadForm' import
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { Button } from "@/components/ui/button"
@@ -26,7 +23,7 @@ export const metadata: Metadata = {
  */
 export default function UnlinkCaseStudyPage() {
   return (
-    <main className="selection:bg-aurora-cyan/30 relative min-h-screen overflow-hidden bg-slate-950 text-slate-50">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-50 selection:bg-aurora-cyan/30">
       {/* 🌌 1. HERO: Luminous Identity */}
       <section className="relative pt-40 pb-24 text-center">
         {/* Background Decor */}
@@ -47,8 +44,10 @@ export default function UnlinkCaseStudyPage() {
 
           <p className="font-anuphan mx-auto mb-12 max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
             นี่ไม่ใช่แค่ Portfolio แต่คือบทพิสูจน์ว่าทำไม{" "}
-            <span className="text-white italic">"ความเร็ว"</span> และ{" "}
-            <span className="text-white italic">"โครงสร้างที่ถูกต้อง"</span>{" "}
+            <span className="text-white italic">&quot;ความเร็ว&quot;</span> และ{" "}
+            <span className="text-white italic">
+              &quot;โครงสร้างที่ถูกต้อง&quot;
+            </span>{" "}
             ถึงเป็นหัวใจสำคัญของการปิดการขายในปี 2026
           </p>
 
@@ -85,6 +84,7 @@ export default function UnlinkCaseStudyPage() {
                 alt="Unlink-TH Performance Score"
                 fill
                 className="object-cover grayscale transition-all duration-1000 group-hover:grayscale-0"
+                priority
               />
               <div className="glass-card border-aurora-emerald/40 shadow-aurora-glow absolute right-10 bottom-10 scale-110 rounded-[2rem] p-8 text-center">
                 <div className="font-prompt mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
@@ -111,7 +111,9 @@ export default function UnlinkCaseStudyPage() {
               </h2>
               <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
                 เป้าหมายของเราคือการสร้างมาตรฐานใหม่{" "}
-                <span className="text-white italic">"กดปุ๊บ มาปั๊บ"</span>{" "}
+                <span className="text-white italic">
+                  &quot;กดปุ๊บ มาปั๊บ&quot;
+                </span>{" "}
                 เพื่อลดอัตราการกดออกของลูกค้าที่ใจร้อนขึ้นทุกวัน
               </p>
             </div>
@@ -125,7 +127,7 @@ export default function UnlinkCaseStudyPage() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="hover:border-aurora-cyan/30 group flex gap-5 rounded-2xl border border-white/5 bg-white/5 p-6 transition-all"
+                  className="group flex gap-5 rounded-2xl border border-white/5 bg-white/5 p-6 transition-all hover:border-aurora-cyan/30"
                 >
                   <div className="bg-aurora-cyan/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
                     <Zap className="text-aurora-cyan h-5 w-5 transition-transform group-hover:scale-125" />
@@ -185,7 +187,7 @@ export default function UnlinkCaseStudyPage() {
           <div className="relative z-10 mx-auto max-w-4xl">
             <h2 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-8xl">
               ธุรกิจของคุณ <br />
-              <span className="text-aurora-cyan">ก็ "แรง" แบบนี้ได้</span>
+              <span className="text-aurora-cyan">ก็ &quot;แรง&quot; แบบนี้ได้</span>
             </h2>
             <div className="flex flex-col justify-center gap-6 sm:flex-row">
               <Button

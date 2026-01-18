@@ -1,10 +1,9 @@
 /** @format */
-"use client"
 
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { siteConfig } from "@/constants/site-config"
+import { Metadata } from "next"
 import {
   CheckCircle2,
   Heart,
@@ -14,27 +13,54 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react"
+
+// 📦 Data & Config
+import { siteConfig, constructMetadata } from "@/constants/site-config"
+
+// 🧩 Components & UI
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { JsonLd } from "@/components/seo/JsonLd"
+import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 /**
- * 👨‍💻 AboutPage: Luminous Edition (Optimized for PageSpeed 90+)
- * ✅ แก้ไขการเรียกรูปภาพเป็น .webp และเพิ่ม Priority สำหรับ LCP
+ * 🔍 SEO Configuration
+ */
+export const metadata: Metadata = constructMetadata({
+  title: "เกี่ยวกับนายเอ็ม - เบื้องหลังความซ่า",
+  description:
+    "รู้จักตัวตนของนายเอ็มซ่ามากส์ โปรแกรมเมอร์ผู้เชื่อว่าเว็บไซต์ต้องขายได้จริง ไม่ใช่แค่สวย พร้อมทีมงานคุณภาพที่ไม่ทิ้งงาน",
+})
+
+/**
+ * 👨‍💻 AboutPage: Luminous Edition (Server Component)
+ * Optimized for PageSpeed 90+ using Server Components & CSS Animations
  */
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: AboutPage Profile */}
+      <JsonLd
+        type="Website" // หรือ ProfilePage ถ้ามี
+        data={{
+          "@type": "AboutPage",
+          name: "เกี่ยวกับนายเอ็ม AEMDEVWEB",
+          description: siteConfig.description,
+          mainEntity: {
+            "@type": "Person",
+            name: "นายเอ็มซ่ามากส์",
+            jobTitle: "Fullstack Developer & Consultant",
+            image: `${siteConfig.url}/images/showcase/project-01.webp`,
+          },
+        }}
+      />
+
       {/* 🌌 Background Decor: Aurora Ambient */}
       <div className="aurora-bg top-0 left-1/4 h-[500px] w-[500px] opacity-[0.1] blur-[120px]" />
       <div className="aurora-bg bg-aurora-violet right-1/4 bottom-0 h-[600px] w-[600px] opacity-[0.05] blur-[150px]" />
 
       {/* 🌤️ 1. Hero Section: The Identity */}
       <section className="relative container mx-auto mb-32 px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-both">
           <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" /> About AEMDEVWEB
           </div>
@@ -47,16 +73,16 @@ export default function AboutPage() {
           <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
             นายเอ็มเริ่มจากความเข้าใจว่า SME ไทย{" "}
             <span className="text-white italic">
-              "ต้องการเว็บที่ขายได้จริง ไม่ใช่แค่เว็บสวย"
-            </span>
+              &quot;ต้องการเว็บที่ขายได้จริง ไม่ใช่แค่เว็บสวย&quot;
+            </span>{" "}
             ผมจึงสร้างระบบที่จะเป็นเครื่องยนต์ถล่มยอดขายให้คุณครับ
           </p>
-        </motion.div>
+        </div>
       </section>
 
       {/* 🚀 2. Our Mission: Luminous Bento Grid */}
       <section className="container mx-auto mb-40 px-4">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-200 fill-mode-both">
           {/* Card: เร็วและแรง */}
           <div className="glass-card group hover:border-aurora-cyan/30 rounded-[2.5rem] border-white/5 p-10 transition-all duration-500">
             <div className="bg-aurora-cyan/10 border-aurora-cyan/20 shadow-aurora-glow mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border transition-transform group-hover:-translate-y-2">
@@ -97,7 +123,7 @@ export default function AboutPage() {
             </h3>
             <p className="font-anuphan leading-relaxed font-medium text-slate-400">
               สวยอย่างเดียวไม่พอ ต้อง{" "}
-              <span className="text-white">"ปิดการขายได้"</span>{" "}
+              <span className="text-white">&quot;ปิดการขายได้&quot;</span>{" "}
               นายเอ็มใส่ใจเรื่อง UX และปุ่ม CTA
               ที่สว่างโดดเด่นช่วยให้ลูกค้าทักคุณง่ายที่สุด
             </p>
@@ -113,10 +139,10 @@ export default function AboutPage() {
               <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-50 blur-3xl" />
               <div className="relative aspect-square overflow-hidden rounded-[3rem] border border-white/10 shadow-2xl">
                 <Image
-                  src="/images/showcase/project-01.webp" // ✅ แก้ไขเป็น .webp
+                  src="/images/showcase/project-01.webp"
                   alt="นายเอ็มซ่ามากส์"
                   fill
-                  priority // ✅ เพิ่ม priority เพื่อแก้ปัญหา LCP ล่าช้า
+                  priority // ✅ Priority LCP
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover grayscale transition-all duration-700 hover:grayscale-0"
                 />
@@ -129,9 +155,9 @@ export default function AboutPage() {
               </h2>
               <div className="font-anuphan space-y-6 text-lg leading-relaxed font-medium text-slate-400">
                 <p>
-                  "ผมเห็นลูกค้าหลายคนไปจ้างทำเว็บแล้วปวดหัว บางคนงานดอง
+                  &quot;ผมเห็นลูกค้าหลายคนไปจ้างทำเว็บแล้วปวดหัว บางคนงานดอง
                   บางคนคุยไม่รู้เรื่อง
-                  หรือบางคนทำเสร็จแล้วใช้งานยากจนต้องปล่อยร้าง"
+                  หรือบางคนทำเสร็จแล้วใช้งานยากจนต้องปล่อยร้าง&quot;
                 </p>
                 <p>
                   นั่นคือเหตุผลที่{" "}
@@ -200,6 +226,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <LineStickyButton />
     </main>
   )
 }

@@ -1,9 +1,9 @@
 /** @format */
 
-import { getAllPosts, getPostBySlug } from "@/lib/mdx"
-import { notFound } from "next/navigation"
+import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import {
@@ -15,29 +15,33 @@ import {
   MessageCircle,
 } from "lucide-react"
 
-// 🛠️ Components
+// 📦 Data & Config
+import { getAllPosts, getPostBySlug } from "@/lib/mdx"
+import { siteConfig } from "@/constants/site-config"
+
+// 🧩 Components & UI
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
  * 🎨 MDX Components Configuration
- * ✅ Fixed: แก้ไขปัญหา href เป็น undefined โดยรองรับทั้ง url และ href จาก MDX
  */
 const mdxComponents = {
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
+    // Ensure src is a string to satisfy Next.js Image types
     const imgSrc = typeof props.src === "string" ? props.src : ""
     return (
       <Image
         src={imgSrc}
         width={800}
         height={450}
-        className="rounded-3xl border border-white/10"
+        className="my-8 rounded-3xl border border-white/10 shadow-lg"
         alt={props.alt || "Blog Image Content"}
         loading="lazy"
       />
     )
   },
-  // 🚀 CallToAction: รองรับทั้งการพิมพ์ <CallToAction url="..." /> หรือ href="..."
   CallToAction: ({
     title,
     description,
@@ -49,9 +53,8 @@ const mdxComponents = {
     href?: string
     url?: string
   }) => {
-    // 🎯 Fallback logic: ถ้าไม่มีทั้งคู่ให้ไปหน้า contact
+    // Fallback logic for URL
     const targetPath = href || url || "/contact"
-
     return (
       <div className="border-aurora-cyan/20 bg-aurora-cyan/5 shadow-luminous my-12 rounded-[2rem] border p-8 text-center">
         <h3 className="font-prompt mb-4 text-2xl font-black text-white uppercase italic">
@@ -85,13 +88,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) return {}
 
+  const ogImage = post.coverImage.startsWith("http")
+    ? post.coverImage
+    : `${siteConfig.url}${post.coverImage}`
+
   return {
-    title: `${post.title} | AemDevWeb`,
+    title: `${post.title} | ${siteConfig.shortName}`,
     description: post.description,
     openGraph: {
       title: post.title,
       description: post.description,
-      images: [post.coverImage],
+      type: "article",
+      url: `${siteConfig.url}/blog/${slug}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      authors: [siteConfig.name],
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [ogImage],
     },
   }
 }
@@ -105,8 +129,34 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) return notFound()
 
+  // Format Date (Thai Locale)
+  const formattedDate = new Date(post.date).toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  })
+
   return (
-    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+    <article className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: Article */}
+      <JsonLd
+        type="Article"
+        data={{
+          headline: post.title,
+          description: post.description,
+          image: post.coverImage.startsWith("http")
+            ? post.coverImage
+            : `${siteConfig.url}${post.coverImage}`,
+          datePublished: post.date,
+          dateModified: post.date,
+          author: {
+            "@type": "Person",
+            name: siteConfig.name,
+            url: siteConfig.url,
+          },
+        }}
+      />
+
       {/* 🌌 Background Decor: Aurora Ambient */}
       <div className="aurora-bg top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.05] blur-[120px]" />
 
@@ -129,11 +179,11 @@ export default async function BlogPostPage({ params }: Props) {
             <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-500 uppercase">
               <span className="flex items-center">
                 <Calendar className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
-                {post.date.split("T")[0]}
+                {formattedDate}
               </span>
               <span className="flex items-center">
                 <Clock className="text-aurora-cyan mr-2 h-3.5 w-3.5" />{" "}
-                {post.readingTime} READ
+                {post.readingTime}
               </span>
             </div>
           </div>
@@ -174,7 +224,7 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
             <div>
               <div className="font-prompt font-black tracking-wider text-white uppercase">
-                นายเอ็มซ่ามากส์
+                {siteConfig.name}
               </div>
               <div className="font-anuphan mt-1 text-xs font-bold tracking-widest text-slate-500 uppercase">
                 Fullstack Dev & Consultant

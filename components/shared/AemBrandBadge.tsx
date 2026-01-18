@@ -31,9 +31,9 @@ export function AemBrandBadge({
         {/* Deep Ambient Glow: Layered behind everything */}
         <div className="bg-aurora-cyan/20 group-hover:bg-aurora-cyan/40 absolute inset-0 -z-10 rounded-full blur-2xl transition-all duration-700" />
 
-        {/* Rotating border box using native CSS animation from globals.css */}
+        {/* Rotating border box using native CSS animation */}
         <div
-          className="linear infinite absolute inset-0 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm transition-transform duration-[20s] group-hover:rotate-90"
+          className="absolute inset-0 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm transition-transform duration-[20s] group-hover:rotate-90"
           style={{ animation: "aurora 15s ease-in-out infinite" }}
         />
 
@@ -56,7 +56,7 @@ export function AemBrandBadge({
       {withText && (
         <div className="flex flex-col justify-center">
           <div className="overflow-hidden">
-            {/* Native fade-in-up instead of motion.div */}
+            {/* Native fade-in-up */}
             <div className="animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards flex items-center duration-700">
               <span className="font-prompt text-xl font-black tracking-tighter text-white uppercase italic md:text-2xl">
                 Aem

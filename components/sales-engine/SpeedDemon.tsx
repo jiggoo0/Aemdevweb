@@ -1,234 +1,242 @@
 /** @format */
 "use client"
 
-import React, { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import React, { useState, useMemo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import {
+  CheckCircle2,
+  Calculator,
+  ArrowRight,
+  Sparkles,
+  ShieldCheck,
   Zap,
-  Trophy,
-  Search,
-  Smartphone,
-  Gauge,
   type LucideIcon,
 } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/constants/site-config"
 
-interface MetricItem {
+/**
+ * 🍱 PriceEstimator: Luminous Interactive Engine (v.2026)
+ * ระบบคำนวณราคาที่จูนมาเพื่อความลื่นไหลระดับ 100 PageSpeed
+ * ✅ Optimized: ลด TBT ด้วยการจำกัดการเรียกใช้ Function ภายนอกใน Render Loop
+ */
+
+interface Feature {
   id: string
   label: string
-  score: number
-  icon: LucideIcon
-  color: string
-  delay: number
+  price: number
+  fixed?: boolean
+  desc: string
 }
 
-interface ScoreCardProps {
-  metric: MetricItem
-  isInView: boolean
-}
-
-const metrics: MetricItem[] = [
+const features: Feature[] = [
   {
-    id: "performance",
-    label: "Performance",
-    score: 100,
-    icon: Zap,
-    color: "var(--aurora-cyan)",
-    delay: 0,
+    id: "base",
+    label: "Landing Page คุณภาพสูง",
+    price: 15000,
+    fixed: true,
+    desc: "ดีไซน์ Modern High-Performance รองรับมือถือ 100%",
   },
   {
-    id: "accessibility",
-    label: "Accessibility",
-    score: 100,
-    icon: Smartphone,
-    color: "var(--aurora-emerald)",
-    delay: 0.2,
+    id: "domain",
+    label: "Domain & High-Speed Hosting",
+    price: 1500,
+    desc: "จดโดเมนใหม่พร้อมเซ็ตอัพ Server ที่เร็วที่สุดสำหรับคุณ",
   },
   {
     id: "seo",
-    label: "SEO Support",
-    score: 100,
-    icon: Search,
-    color: "var(--aurora-violet)",
-    delay: 0.4,
+    label: "SEO & Speed Optimization",
+    price: 3500,
+    desc: "ปรับโครงสร้างให้ Google รักและโหลดไวระดับปีศาจ",
   },
   {
-    id: "best-practices",
-    label: "Best Practices",
-    score: 100,
-    icon: Trophy,
-    color: "var(--aurora-emerald)",
-    delay: 0.6,
+    id: "notify",
+    label: "Line Notify Automation",
+    price: 1500,
+    desc: "ระบบแจ้งเตือนลูกค้าทักผ่านไลน์ทันทีแบบ Real-time",
+  },
+  {
+    id: "content",
+    label: "Copywriting (เขียนคำขาย)",
+    price: 2500,
+    desc: "ออกแบบเนื้อหาและพาดหัวเพื่อปิดการขายโดยเฉพาะ",
   },
 ]
 
-/**
- * ⚡ SpeedDemon: Luminous Performance Showcase
- * ออกแบบมาเพื่อโชว์คะแนน PageSpeed 100 และความไวระดับปีศาจ
- */
-export const SpeedDemon = () => {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+export function PriceEstimator() {
+  const [selected, setSelected] = useState<string[]>(["base"])
+
+  const toggleFeature = (id: string, isFixed: boolean) => {
+    if (isFixed) return
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    )
+  }
+
+  const totalPrice = useMemo(() => {
+    return features
+      .filter((f) => selected.includes(f.id))
+      .reduce((sum, f) => sum + f.price, 0)
+  }, [selected])
 
   return (
-    <section className="bg-background relative overflow-hidden py-32" ref={ref}>
-      {/* 🌌 Luminous Background Decor: Layered behind everything */}
-      <div className="aurora-bg pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 -translate-y-1/2 opacity-[0.12]" />
+    <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
+      {/* 🟢 Left Side: Options Engine */}
+      <div className="relative flex-1 overflow-hidden p-8 md:p-12">
+        <div className="aurora-bg pointer-events-none -top-20 -left-20 -z-10 h-64 w-64 opacity-10" />
 
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="border-aurora-cyan/30 text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border bg-white/5 px-5 py-2 text-xs font-black tracking-[0.3em] uppercase backdrop-blur-xl"
+        <div className="relative z-10 mb-10 flex items-center gap-4">
+          <div className="bg-aurora-cyan/10 border-aurora-cyan/20 rounded-2xl border p-3">
+            <Calculator className="text-aurora-cyan h-6 w-6" />
+          </div>
+          <div>
+            <h3 className="font-prompt text-2xl font-black tracking-tight text-white uppercase italic">
+              เลือกฟีเจอร์ที่ต้องการ
+            </h3>
+            <p className="font-anuphan mt-1 text-sm text-slate-500">
+              ปรับแต่งความแรงให้ตรงโจทย์ธุรกิจคุณ
+            </p>
+          </div>
+        </div>
+
+        <div className="relative z-10 space-y-4">
+          {features.map((f) => {
+            const isSelected = selected.includes(f.id)
+            return (
+              <motion.div
+                key={f.id}
+                whileHover={{ scale: 1.015 }}
+                whileTap={{ scale: 0.985 }}
+                onClick={() => toggleFeature(f.id, !!f.fixed)}
+                className={`group flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition-all duration-500 ${
+                  isSelected
+                    ? "border-aurora-cyan/40 shadow-aurora-glow bg-white/5"
+                    : "border-white/5 bg-white/[0.02] hover:border-white/20 hover:bg-white/5"
+                }`}
+              >
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
+                      isSelected
+                        ? "bg-aurora-cyan border-aurora-cyan"
+                        : "group-hover:border-aurora-cyan border-slate-600 bg-transparent"
+                    }`}
+                  >
+                    {isSelected && (
+                      <CheckCircle2 className="h-4 w-4 stroke-[3] text-slate-950" />
+                    )}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p
+                        className={`font-prompt text-base font-bold tracking-tight transition-colors md:text-lg ${
+                          isSelected
+                            ? "text-white"
+                            : "text-slate-400 group-hover:text-slate-200"
+                        }`}
+                      >
+                        {f.label}
+                      </p>
+                      {f.fixed && (
+                        <span className="bg-aurora-cyan/20 text-aurora-cyan border-aurora-cyan/20 rounded-full border px-2 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase">
+                          Required
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-anuphan mt-1 text-sm text-slate-500 transition-colors group-hover:text-slate-400">
+                      {f.desc}
+                    </p>
+                  </div>
+                </div>
+                <span
+                  className={`ml-4 text-base font-black whitespace-nowrap transition-colors duration-500 ${
+                    isSelected ? "text-aurora-cyan" : "text-slate-500"
+                  }`}
+                >
+                  +{f.price.toLocaleString()}
+                </span>
+              </motion.div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* 🔵 Right Side: Summary Engine */}
+      <div className="relative flex flex-col justify-between border-l border-white/5 bg-slate-900/40 p-10 backdrop-blur-md md:w-[420px] md:p-14">
+        <div className="aurora-bg pointer-events-none -right-20 -bottom-40 -z-10 h-80 w-80 opacity-20" />
+
+        <div className="relative z-10">
+          <p className="font-prompt mb-4 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
+            Estimated Budget
+          </p>
+          <div className="flex items-baseline gap-3">
+            <span className="text-aurora-cyan text-2xl font-black md:text-3xl">
+              ฿
+            </span>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={totalPrice}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="font-prompt text-6xl leading-none font-black tracking-tighter text-white md:text-8xl"
+              >
+                {totalPrice.toLocaleString()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="mt-12 space-y-5">
+            <FeatureItem
+              icon={ShieldCheck}
+              text="ฟรี! ดูแล Server & SSL ปีแรก"
+            />
+            <FeatureItem icon={Zap} text="งานเสร็จไวใน 7-14 วันทำการ" />
+            <FeatureItem icon={Sparkles} text="รับประกันแก้ไขงานจนกว่าจะพอใจ" />
+          </div>
+        </div>
+
+        <div className="relative z-10 mt-16 text-center">
+          <Button
+            asChild
+            className="btn-luminous shadow-luminous group h-16 w-full text-lg font-bold tracking-widest uppercase"
           >
-            <Gauge className="h-4 w-4 animate-pulse" />
-            <span>Google PageSpeed Score</span>
-          </motion.div>
-
-          <h2 className="text-luminous mb-8 text-4xl tracking-tighter uppercase md:text-7xl">
-            ความเร็วระดับ <span className="text-aurora-emerald">ปีศาจ</span>
-          </h2>
-          <p className="font-anuphan text-xl leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-            อย่าปล่อยให้ลูกค้าหลุดมือเพราะเว็บโหลดช้า เราการันตีคะแนน
-            Performance ระดับท็อป{" "}
-            <span className="font-bold text-white">(90-100)</span>{" "}
-            เพื่อดันอันดับ SEO และยอดขาย
+            <a
+              href={siteConfig.links.line}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Lock This Price{" "}
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </a>
+          </Button>
+          <p className="font-anuphan mt-6 text-[10px] leading-relaxed font-medium tracking-wider text-slate-500 uppercase">
+            * ราคาประเมินเบื้องต้นเพื่อใช้ในการวางแผน <br />
+            งบประมาณจริงอาจปรับตามสเกลงานของท่าน
           </p>
         </div>
-
-        {/* --- SCORE CARDS GRID --- */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {metrics.map((metric) => (
-            <ScoreCard key={metric.id} metric={metric} isInView={isInView} />
-          ))}
-        </div>
-
-        {/* --- PERFORMANCE COMPARISON BAR --- */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="glass-card group shadow-luminous relative mt-20 overflow-hidden border-white/10 p-10 md:p-14"
-        >
-          {/* Ambient Glow behind bar */}
-          <div className="bg-aurora-cyan/5 pointer-events-none absolute top-0 right-0 -z-10 h-64 w-64 blur-[80px]" />
-
-          <div className="mb-10 flex flex-col items-center justify-between gap-4 md:flex-row">
-            <h3 className="text-2xl font-black tracking-tight text-white uppercase italic">
-              ผลทดสอบความเร็ว (Load Time)
-            </h3>
-            <span className="rounded-full border border-white/5 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
-              ทดสอบผ่านเครือข่าย 4G Mobile
-            </span>
-          </div>
-
-          <div className="space-y-12">
-            {/* Competitor Bar (WordPress) */}
-            <div className="space-y-4">
-              <div className="flex justify-between text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase">
-                <span>เว็บไซต์ทั่วไป (WordPress / CMS)</span>
-                <span className="text-rose-500">4.5s (ช้าจนลูกค้าหนี)</span>
-              </div>
-              <div className="h-3 w-full overflow-hidden rounded-full border border-white/5 bg-white/5">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: "85%" } : {}}
-                  transition={{ duration: 2.5, ease: "easeOut", delay: 1 }}
-                  className="h-full bg-rose-500/30"
-                />
-              </div>
-            </div>
-
-            {/* AemDevWeb Bar (Next.js 15) */}
-            <div className="space-y-4">
-              <div className="text-aurora-emerald flex justify-between text-[10px] font-black tracking-[0.25em] uppercase">
-                <span className="flex items-center gap-2">
-                  AemDevWeb Engine (v.2026){" "}
-                  <Zap className="h-3.5 w-3.5 animate-pulse fill-current" />
-                </span>
-                <span className="text-white drop-shadow-[0_0_10px_rgba(122,243,255,0.5)]">
-                  0.8s (เร็วระดับปีศาจ)
-                </span>
-              </div>
-              <div className="shadow-aurora-glow relative h-6 w-full overflow-hidden rounded-full border border-white/5 bg-white/5">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: "18%" } : {}}
-                  transition={{ duration: 1.2, ease: "circOut", delay: 1.4 }}
-                  className="from-aurora-cyan to-aurora-emerald absolute top-0 left-0 h-full bg-gradient-to-r"
-                />
-                {/* Sonic Pulse Effect */}
-                <motion.div
-                  initial={{ x: "-100%" }}
-                  animate={isInView ? { x: "400%" } : {}}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 3,
-                    ease: "linear",
-                    delay: 2.5,
-                  }}
-                  className="absolute top-0 h-full w-1/4 -skew-x-[30deg] bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
-    </section>
-  )
-}
-
-/**
- * 🧩 ScoreCard: Individual Metric Display
- */
-const ScoreCard = ({ metric, isInView }: ScoreCardProps) => {
-  return (
-    <div className="glass-card group hover:border-aurora-cyan/30 relative flex flex-col items-center justify-center p-10 text-center transition-all duration-500 hover:-translate-y-3">
-      {/* Hover Light Decor */}
-      <div className="aurora-bg pointer-events-none absolute top-0 left-0 h-20 w-20 opacity-0 transition-opacity duration-700 group-hover:opacity-10" />
-
-      <div className="relative mb-8 h-28 w-28">
-        <svg
-          className="h-full w-full -rotate-90 transform"
-          viewBox="0 0 100 100"
-        >
-          <circle
-            cx="50"
-            cy="50"
-            r="42"
-            fill="none"
-            stroke="rgba(255,255,255,0.05)"
-            strokeWidth="6"
-          />
-          <motion.circle
-            cx="50"
-            cy="50"
-            r="42"
-            fill="none"
-            stroke={metric.color}
-            strokeWidth="6"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            animate={isInView ? { pathLength: 1 } : {}}
-            transition={{ duration: 2.5, ease: "circOut", delay: metric.delay }}
-            style={{ filter: `drop-shadow(0 0 10px ${metric.color})` }}
-          />
-        </svg>
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-4xl font-black tracking-tighter text-white drop-shadow-sm">
-            {metric.score}
-          </span>
-          <metric.icon className="mt-1 h-3.5 w-3.5 text-white/40 transition-colors duration-500 group-hover:text-white" />
-        </div>
-      </div>
-
-      <h3 className="text-[10px] font-black tracking-[0.35em] text-slate-500 uppercase transition-colors duration-500 group-hover:text-slate-300">
-        {metric.label}
-      </h3>
     </div>
   )
 }
 
-export default SpeedDemon
+/** 🧩 Sub-component: Feature Points */
+interface FeatureItemProps {
+  icon: LucideIcon
+  text: string
+}
+
+function FeatureItem({
+  icon: Icon,
+  text,
+}: FeatureItemProps): React.JSX.Element {
+  return (
+    <div className="group flex items-center gap-4 text-sm text-slate-400 transition-colors hover:text-slate-200 md:text-base">
+      <div className="group-hover:border-aurora-cyan/30 rounded-lg border border-white/10 bg-white/5 p-1.5 transition-all duration-300">
+        <Icon className="text-aurora-emerald h-5 w-5 shrink-0" />
+      </div>
+      <span className="font-anuphan font-medium tracking-wide">{text}</span>
+    </div>
+  )
+}

@@ -1,9 +1,38 @@
 /** @format */
+
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowUpRight, Zap, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
+
+// 🎨 Theme Configuration (Defined outside for performance)
+const themeConfig = {
+  "aurora-cyan": {
+    border: "hover:border-aurora-cyan/40",
+    text: "text-aurora-cyan",
+    hoverTitle: "group-hover:text-aurora-cyan",
+    bg: "bg-aurora-cyan",
+    fill: "fill-aurora-cyan",
+    glow: "group-hover:shadow-aurora-glow",
+  },
+  "aurora-violet": {
+    border: "hover:border-aurora-violet/40",
+    text: "text-aurora-violet",
+    hoverTitle: "group-hover:text-aurora-violet",
+    bg: "bg-aurora-violet",
+    fill: "fill-aurora-violet",
+    glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.68_0.15_280_/_0.25)]",
+  },
+  "aurora-emerald": {
+    border: "hover:border-aurora-emerald/40",
+    text: "text-aurora-emerald",
+    hoverTitle: "group-hover:text-aurora-emerald",
+    bg: "bg-aurora-emerald",
+    fill: "fill-aurora-emerald",
+    glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.84_0.15_155_/_0.25)]",
+  },
+}
 
 interface CaseStudyCardProps {
   title: string
@@ -11,8 +40,8 @@ interface CaseStudyCardProps {
   category: string
   image: string
   stats: { label: string; value: string }
-  themeColor?: "aurora-cyan" | "aurora-violet" | "aurora-emerald"
-  priority?: boolean // ✅ สำหรับควบคุม Image Priority (LCP Engine)
+  themeColor?: keyof typeof themeConfig
+  priority?: boolean // ✅ Control LCP Loading Strategy
 }
 
 /**
@@ -29,44 +58,18 @@ export function CaseStudyCard({
   themeColor = "aurora-cyan",
   priority = false,
 }: CaseStudyCardProps) {
-  
-  // 🎨 Theme Mapping: ซิงค์กับระบบสี OKLCH ใน globals.css
-  const themes = {
-    "aurora-cyan": {
-      border: "hover:border-aurora-cyan/40",
-      text: "text-aurora-cyan",
-      hoverTitle: "group-hover:text-aurora-cyan",
-      bg: "bg-aurora-cyan",
-      glow: "group-hover:shadow-aurora-glow",
-    },
-    "aurora-violet": {
-      border: "hover:border-aurora-violet/40",
-      text: "text-aurora-violet",
-      hoverTitle: "group-hover:text-aurora-violet",
-      bg: "bg-aurora-violet",
-      glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.68_0.15_280_/_0.25)]",
-    },
-    "aurora-emerald": {
-      border: "hover:border-aurora-emerald/40",
-      text: "text-aurora-emerald",
-      hoverTitle: "group-hover:text-aurora-emerald",
-      bg: "bg-aurora-emerald",
-      glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.84_0.15_155_/_0.25)]",
-    },
-  }
-
-  const currentTheme = themes[themeColor]
+  const currentTheme = themeConfig[themeColor]
 
   return (
     <Link
       href={`/case-studies/${slug}`}
       className={cn(
-        "group bg-background shadow-luminous relative block overflow-hidden rounded-4xl border border-white/5 transition-all duration-700 hover:-translate-y-2",
+        "group bg-background shadow-luminous relative block overflow-hidden rounded-[2.5rem] border border-white/5 transition-all duration-700 hover:-translate-y-2",
         currentTheme.border
       )}
     >
       {/* 🖼️ Premium Image Layer (LCP Optimized) */}
-      <div className="relative aspect-[16/10] overflow-hidden">
+      <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
         <Image
           src={image}
           alt={title}
@@ -104,12 +107,20 @@ export function CaseStudyCard({
           </div>
 
           {/* ⚡ Performance Badge (Trust Signal) */}
-          <div className={cn(
-            "min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10",
-            currentTheme.glow
-          )}>
+          <div
+            className={cn(
+              "min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10",
+              currentTheme.glow
+            )}
+          >
             <p className="font-anuphan mb-1.5 flex items-center justify-center gap-1.5 text-[9px] font-black tracking-widest text-slate-400 uppercase">
-              <Zap className="text-aurora-emerald fill-aurora-emerald h-3 w-3 animate-pulse" />{" "}
+              <Zap
+                className={cn(
+                  "h-3 w-3 animate-pulse",
+                  currentTheme.text,
+                  currentTheme.fill
+                )}
+              />{" "}
               {stats.label}
             </p>
             <p className="font-prompt text-2xl font-black tracking-tighter text-white italic">

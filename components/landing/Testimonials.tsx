@@ -33,10 +33,11 @@ export const Testimonials = () => {
         </div>
 
         {/* Testimonials Grid: Optimized Modern Masonry (Native CSS) */}
+        {/* break-inside-avoid สำคัญมากสำหรับ CSS Masonry เพื่อไม่ให้การ์ดขาด */}
         <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {testimonials.map((item) => (
+          {testimonials.map((item, index) => (
             <div
-              key={item.id}
+              key={item.id || index}
               className="glass-card group relative break-inside-avoid p-10 transition-all duration-700 hover:shadow-luminous hover:border-aurora-cyan/30 hover:-translate-y-3"
             >
               {/* Decorative Quote Icon */}
@@ -54,12 +55,13 @@ export const Testimonials = () => {
 
               {/* Content Block */}
               <blockquote className="font-anuphan mb-10 text-xl leading-relaxed font-medium text-slate-200 italic opacity-90 transition-opacity group-hover:opacity-100">
-                "{item.content}"
+                &quot;{item.content}&quot;
               </blockquote>
 
               {/* Author Profile: Luminous Style */}
               <div className="flex items-center gap-5 border-t border-white/5 pt-8">
                 <div className="from-aurora-cyan to-aurora-violet shadow-aurora-glow h-14 w-14 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-tr p-[1.5px]">
+                  {/* Fallback Avatar: ใช้ตัวอักษรแรกของชื่อเสมอ เพื่อ Speed/CLS */}
                   <div className="flex h-full w-full items-center justify-center rounded-[calc(1rem+1px)] bg-slate-900 text-lg font-black text-white uppercase">
                     {item.author.charAt(0)}
                   </div>

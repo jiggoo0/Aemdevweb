@@ -4,7 +4,7 @@
 # เพิ่ม "config" เข้าไปใน WHITELIST_DIRS เพื่อให้ระบบสแกนโฟลเดอร์นี้ด้วย
 OUTPUT_FILE="project-structure.md"
 PRE_DEPLOY_REPORT="pre-deploy-report.md"
-WHITELIST_DIRS=("config" "app" "components" "lib" "hooks" "constants" "content" "types" "scripts" "public" "providers")
+WHITELIST_DIRS=("config" "app" "components" "lib" "hooks" "constants" "content" "types" "content"  "public" "providers")
 
 # ✅ 1. ลบไฟล์เก่าทิ้งก่อนเริ่มงาน
 rm -f "$OUTPUT_FILE"

@@ -5,28 +5,27 @@ import React from "react"
 import dynamic from "next/dynamic"
 
 /**
- * 🚀 HomeClientSections: Luminous Performance Engine (v.2026)
- * ✅ FIXED: ปรับจูนความสูง Skeleton เพื่อค่า CLS = 0
- * ✅ Strategy: จองพื้นที่หน้าจอ (Space Reservation) ให้ตรงกับคอมโพเนนต์จริง
- * ✅ Optimization: ใช้ Internal Dynamic Imports เพื่อแยก Bundle ของ Interactivity หนักๆ
+ * 🛰️ HomeClientSections: Luminous Performance Engine (v.2026)
+ * รวม Components ที่ทำงานฝั่ง Client เพื่อลด TBT ในหน้าแรก
+ * ✅ Strategy: Selective Hydration & SSR-Ready for SEO
  */
 
-// 1. 🏗️ Impact Stats Loading Skeleton (Height Reserved)
+// 1. 📊 Impact Stats: (SSR: True) - สถิติความสำเร็จช่วยเรื่อง SEO และ Social Proof
 const ImpactStats = dynamic(
   () =>
     import("@/components/sales-engine/ImpactStats").then(
       (mod) => mod.ImpactStats
     ),
   {
-    ssr: false,
+    ssr: true,
     loading: () => (
       <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex flex-col items-center space-y-5">
-              <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5" />
-              <div className="h-10 w-28 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-36 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5 shadow-inner" />
+              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5 opacity-50" />
             </div>
           ))}
         </div>
@@ -35,7 +34,7 @@ const ImpactStats = dynamic(
   }
 )
 
-// 2. 💰 Price Estimator Loading Skeleton (Height Fixed: 600px)
+// 2. 💰 Price Estimator: (SSR: False) - ระบบคำนวณราคาเป็น Logic ฝั่ง Client 100%
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
@@ -44,10 +43,8 @@ const PriceEstimator = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-card shadow-luminous mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
-        {/* Header Placeholder */}
+      <div className="glass-card shadow-luminous mx-auto flex min-h-[500px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
         <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
-        {/* List Placeholders */}
         <div className="w-full max-w-2xl space-y-6 px-10">
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
           <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
@@ -58,78 +55,80 @@ const PriceEstimator = dynamic(
   }
 )
 
-// 3. ⭐ Testimonials Loading Skeleton (Masonry Simulation)
+// 3. ⭐ Testimonials: (SSR: True) - ข้อมูลรีวิวสำคัญต่อ Search Engine Trust
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then(
       (mod) => mod.Testimonials
     ),
   {
-    ssr: false,
+    ssr: true,
     loading: () => (
-      <div className="container mx-auto px-4 pb-20">
+      <div className="container mx-auto px-4 py-20">
         <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {/* สร้างกล่องจำลองความสูงต่างกันเพื่อลด Layout Shift ใน Masonry */}
-          <div className="glass-card h-[320px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-[400px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-          <div className="glass-card h-[350px] w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-96 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
+          <div className="glass-card h-88 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
         </div>
       </div>
     ),
   }
 )
 
-export default function HomeClientSections() {
+/**
+ * ✅ HomeClientSections Logic
+ */
+export function HomeClientSections() {
   return (
     <>
-      {/* 📊 Section 4: Impact Statistics (Social Proof) */}
-      <section className="relative z-10 border-y border-white/5 bg-white/[0.01] backdrop-blur-3xl">
+      {/* 📊 Section: Success Metrics */}
+      <section className="relative z-10 border-y border-white/5 bg-slate-950/20 backdrop-blur-3xl">
         <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <div className="relative">
+        <div className="relative py-12 md:py-20">
           <ImpactStats />
         </div>
       </section>
 
-      {/* 💰 Section 8: Pricing Engine (Conversion Hub) */}
+      {/* 💰 Section: Interactive Pricing */}
       <section
         id="pricing"
         className="relative container mx-auto px-4 py-32 lg:py-48"
       >
-        {/* Background Glow สำหรับการจองพื้นที่สายตา */}
+        {/* Background Ambient Glow */}
         <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
 
         <div className="mx-auto max-w-5xl">
-          <div className="mb-20 text-center">
+          <div className="mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
               Transparent Pricing
             </span>
-            <h2 className="text-luminous mb-6 text-4xl uppercase md:text-6xl italic">
+            <h2 className="text-luminous mb-6 text-4xl uppercase italic md:text-6xl">
               ประเมินราคา<span className="text-aurora-emerald">เบื้องต้น</span>
             </h2>
             <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400">
               เลือกฟีเจอร์ที่ต้องการ แล้วระบบจะคำนวณงบประมาณให้ทันที{" "}
               <br className="hidden md:block" />
               <span className="text-sm text-white/60">
-                (งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงาน)
+                (งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงานของคุณ)
               </span>
             </p>
           </div>
 
-          {/* Logic Engine ลบ CLS ด้วย Fixed Height Skeleton */}
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ Section 9: Testimonials (Trust Signals) */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 md:rounded-t-[4.5rem]">
-        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-50" />
+      {/* ⭐ Section: Social Proof & Testimonials */}
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem]">
+        {/* Decorative Light Layer */}
+        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40" />
 
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
             <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
               Customer Voices
             </div>
-            <h2 className="text-luminous text-4xl uppercase md:text-6xl italic">
+            <h2 className="text-luminous text-4xl uppercase italic md:text-6xl">
               Voice of <span className="text-slate-500">Success</span>
             </h2>
           </div>
@@ -140,3 +139,6 @@ export default function HomeClientSections() {
     </>
   )
 }
+
+// ✅ Default Export เพื่อความยืดหยุ่นในการ Import
+export default HomeClientSections

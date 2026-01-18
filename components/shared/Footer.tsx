@@ -44,7 +44,6 @@ export function Footer({ className }: FooterProps) {
       <div className="relative z-10 container mx-auto px-4">
         {/* Main Grid: Information Architecture */}
         <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
-          
           {/* 1. Brand Identity & Value Proposition */}
           <div className="space-y-8">
             <AemBrandBadge withText={true} className="origin-left scale-110" />
@@ -163,8 +162,10 @@ export function Footer({ className }: FooterProps) {
         {/* Bottom Bar: Copyright & Legal Compliance */}
         <div className="flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-10 text-[10px] font-black tracking-[0.25em] text-slate-600 uppercase md:flex-row">
           <p className="text-center md:text-left">
-            © {currentYear} {siteConfig.companyName}. <br className="md:hidden" />
-            Crafted with Precision by <span className="text-slate-400 italic">Luminous Tech Engine</span>
+            © {currentYear} {siteConfig.companyName}.{" "}
+            <br className="md:hidden" />
+            Crafted with Precision by{" "}
+            <span className="text-slate-400 italic">Luminous Tech Engine</span>
           </p>
 
           <div className="flex gap-8">

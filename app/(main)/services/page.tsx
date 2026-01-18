@@ -1,6 +1,7 @@
 /** @format */
+
 import { Metadata } from "next"
-import { servicesData } from "@/constants/services-data"
+import Link from "next/link"
 import {
   Sparkles,
   MessageCircle,
@@ -9,17 +10,25 @@ import {
   ShieldCheck,
 } from "lucide-react"
 
-// ✅ Components & UI
+// 📦 Data & Config
+import { servicesData } from "@/constants/services-data"
+import { siteConfig, constructMetadata } from "@/constants/site-config"
+
+// 🧩 Components & UI
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 import { Button } from "@/components/ui/button"
+import { JsonLd } from "@/components/seo/JsonLd"
 
-export const metadata: Metadata = {
-  title: "บริการทำเว็บไซต์ครบวงจร | AEMDEVWEB",
+/**
+ * 🔍 SEO: ใช้ constructMetadata เพื่อคุม Tone & Branding
+ */
+export const metadata: Metadata = constructMetadata({
+  title: "บริการทำเว็บไซต์ครบวงจร",
   description:
     "รวมแพ็กเกจทำเว็บไซต์ Sale Page, Corporate, และระบบ Custom ที่ออกแบบมาเพื่อปิดการขายและรองรับ SEO ปี 2026",
-}
+})
 
 /**
  * 🛠️ Services Hub: Luminous Edition
@@ -27,7 +36,17 @@ export const metadata: Metadata = {
  */
 export default function ServicesPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema: ระบุว่าเป็นหน้าบริการของธุรกิจ */}
+      <JsonLd
+        type="ProfessionalService"
+        data={{
+          name: "บริการทำเว็บไซต์ AEMDEVWEB",
+          description: "รวมแพ็กเกจบริการทำเว็บไซต์และโซลูชันออนไลน์ครบวงจร",
+          url: `${siteConfig.url}/services`,
+        }}
+      />
+
       {/* 🌌 Background Decor: Aurora Ambient */}
       <div className="aurora-bg top-0 left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
       <div className="aurora-bg bg-aurora-violet -bottom-40 -left-40 h-[600px] w-[600px] opacity-[0.05] blur-[150px]" />
@@ -47,7 +66,7 @@ export default function ServicesPage() {
 
         <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
           เลือกแพ็กเกจที่เหมาะกับสเกลธุรกิจของคุณ ทุกงานขับเคลื่อนด้วย{" "}
-          <span className="text-white italic">"Luminous Engine"</span>
+          <span className="text-white italic">"Luminous Engine"</span>{" "}
           (Next.js 15) โหลดไว ติด SEO และทรงพลังที่สุดในปี 2026
         </p>
 
@@ -101,13 +120,18 @@ export default function ServicesPage() {
 
           <div className="flex flex-col justify-center gap-6 sm:flex-row">
             <LineLeadForm variant="button" label="ทักไลน์ ปรึกษานายเอ็ม" />
+            
+            {/* ✅ Fixed: Wrapped Button with Link and asChild for proper navigation */}
             <Button
               variant="outline"
               size="lg"
               className="hover:border-aurora-cyan group h-16 rounded-2xl border-white/10 px-10 text-lg transition-all"
+              asChild
             >
-              ดูผลงานที่ผ่านมา{" "}
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
+              <Link href="/case-studies">
+                ดูผลงานที่ผ่านมา{" "}
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
+              </Link>
             </Button>
           </div>
         </div>

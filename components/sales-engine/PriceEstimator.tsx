@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils" // ตรวจสอบว่ามี utility นี้สำหรับจัดการ class
 
 /**
  * 🍱 PriceEstimator: Luminous Interactive Engine (v.2026)
@@ -73,6 +74,7 @@ export function PriceEstimator() {
     )
   }
 
+  // คำนวณราคารวมด้วย useMemo เพื่อลดภาระการประมวลผลเมื่อ State อื่นเปลี่ยน
   const totalPrice = useMemo(() => {
     return features
       .filter((f) => selected.includes(f.id))
@@ -80,7 +82,7 @@ export function PriceEstimator() {
   }, [selected])
 
   return (
-    <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
+    <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
       {/* 🟢 Left Side: Options Engine */}
       <div className="relative flex-1 overflow-hidden p-8 md:p-12">
         <div className="aurora-bg pointer-events-none -top-20 -left-20 -z-10 h-64 w-64 opacity-10" />
@@ -108,19 +110,21 @@ export function PriceEstimator() {
                 whileHover={{ scale: 1.015 }}
                 whileTap={{ scale: 0.985 }}
                 onClick={() => toggleFeature(f.id, !!f.fixed)}
-                className={`group flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition-all duration-500 ${
+                className={cn(
+                  "group flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition-all duration-500",
                   isSelected
                     ? "border-aurora-cyan/40 shadow-aurora-glow bg-white/5"
                     : "border-white/5 bg-white/[0.02] hover:border-white/20 hover:bg-white/5"
-                }`}
+                )}
               >
                 <div className="flex items-start gap-4">
                   <div
-                    className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
+                    className={cn(
+                      "mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500",
                       isSelected
                         ? "bg-aurora-cyan border-aurora-cyan"
                         : "group-hover:border-aurora-cyan border-slate-600 bg-transparent"
-                    }`}
+                    )}
                   >
                     {isSelected && (
                       <CheckCircle2 className="h-4 w-4 stroke-[3] text-slate-950" />
@@ -129,9 +133,12 @@ export function PriceEstimator() {
                   <div>
                     <div className="flex items-center gap-2">
                       <p
-                        className={`font-prompt text-base font-bold tracking-tight transition-colors md:text-lg ${
-                          isSelected ? "text-white" : "text-slate-400 group-hover:text-slate-200"
-                        }`}
+                        className={cn(
+                          "font-prompt text-base font-bold tracking-tight transition-colors md:text-lg",
+                          isSelected
+                            ? "text-white"
+                            : "text-slate-400 group-hover:text-slate-200"
+                        )}
                       >
                         {f.label}
                       </p>
@@ -147,9 +154,10 @@ export function PriceEstimator() {
                   </div>
                 </div>
                 <span
-                  className={`ml-4 text-base font-black whitespace-nowrap transition-colors duration-500 ${
+                  className={cn(
+                    "ml-4 text-base font-black whitespace-nowrap transition-colors duration-500",
                     isSelected ? "text-aurora-cyan" : "text-slate-500"
-                  }`}
+                  )}
                 >
                   +{f.price.toLocaleString()}
                 </span>
@@ -168,7 +176,9 @@ export function PriceEstimator() {
             Estimated Budget
           </p>
           <div className="flex items-baseline gap-3">
-            <span className="text-aurora-cyan text-2xl font-black md:text-3xl">฿</span>
+            <span className="text-aurora-cyan text-2xl font-black md:text-3xl">
+              ฿
+            </span>
             <AnimatePresence mode="wait">
               <motion.div
                 key={totalPrice}
@@ -184,7 +194,10 @@ export function PriceEstimator() {
           </div>
 
           <div className="mt-12 space-y-5">
-            <FeatureItem icon={ShieldCheck} text="ฟรี! ดูแล Server & SSL ปีแรก" />
+            <FeatureItem
+              icon={ShieldCheck}
+              text="ฟรี! ดูแล Server & SSL ปีแรก"
+            />
             <FeatureItem icon={Zap} text="งานเสร็จไวใน 7-14 วันทำการ" />
             <FeatureItem icon={Sparkles} text="รับประกันแก้ไขงานจนกว่าจะพอใจ" />
           </div>
@@ -195,7 +208,11 @@ export function PriceEstimator() {
             asChild
             className="btn-luminous shadow-luminous group h-16 w-full text-lg font-bold tracking-widest uppercase"
           >
-            <a href={siteConfig.links.line} target="_blank" rel="noopener noreferrer">
+            <a
+              href={siteConfig.links.line}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Lock This Price{" "}
               <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </a>
@@ -211,7 +228,15 @@ export function PriceEstimator() {
 }
 
 /** 🧩 Sub-component: Feature Points */
-function FeatureItem({ icon: Icon, text }: FeatureItemProps): React.JSX.Element {
+interface FeatureItemProps {
+  icon: LucideIcon
+  text: string
+}
+
+function FeatureItem({
+  icon: Icon,
+  text,
+}: FeatureItemProps): React.JSX.Element {
   return (
     <div className="group flex items-center gap-4 text-sm text-slate-400 transition-colors hover:text-slate-200 md:text-base">
       <div className="group-hover:border-aurora-cyan/30 rounded-lg border border-white/10 bg-white/5 p-1.5 transition-all duration-300">
@@ -220,9 +245,4 @@ function FeatureItem({ icon: Icon, text }: FeatureItemProps): React.JSX.Element 
       <span className="font-anuphan font-medium tracking-wide">{text}</span>
     </div>
   )
-}
-
-interface FeatureItemProps {
-  icon: LucideIcon
-  text: string
 }

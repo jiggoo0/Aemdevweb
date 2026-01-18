@@ -1,10 +1,12 @@
 /** @format */
+
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, Clock, ArrowRight, Hash, Sparkles } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { BlogPostProps } from "@/types"
+// ตรวจสอบว่ามี Type Definition นี้อยู่จริง หรือถ้าไม่มีให้สร้าง Interface ภายในไฟล์ได้เลย
+import { type BlogPostProps } from "@/types"
 
 /**
  * 📝 BlogCard: Luminous Server Edition (v.2026)
@@ -18,9 +20,16 @@ export function BlogCard({
   coverImage,
   date,
   category,
-  readingTime = "5 นาที",
+  readingTime = "5 min read",
   className,
 }: BlogPostProps & { className?: string }) {
+  // Format Date Logic (Safe Handling)
+  const formattedDate = new Date(date).toLocaleDateString("th-TH", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+
   return (
     <Link
       href={`/blog/${slug}`}
@@ -34,8 +43,11 @@ export function BlogCard({
             alt={title}
             fill
             className="object-cover opacity-70 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-100"
-            // ✅ ช่วยให้เบราว์เซอร์เลือกขนาดรูปภาพที่เล็กที่สุดที่ยังชัดเจนตามขนาดหน้าจอ
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            // ✅ Sizes Optimization: ตรงตาม Breakpoints ของ Tailwind Grid
+            // Mobile (1 col) -> 100vw
+            // Tablet (2 cols) -> 50vw
+            // Desktop (3 cols) -> 33vw
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             loading="lazy"
           />
 
@@ -57,13 +69,7 @@ export function BlogCard({
           <div className="mb-6 flex items-center gap-5 text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase">
             <div className="group-hover:text-aurora-emerald flex items-center gap-2 transition-colors duration-500">
               <Calendar className="text-aurora-emerald/60 h-3.5 w-3.5" />
-              <time dateTime={date}>
-                {new Date(date).toLocaleDateString("th-TH", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </time>
+              <time dateTime={date}>{formattedDate}</time>
             </div>
             <div className="group-hover:text-aurora-cyan flex items-center gap-2 transition-colors duration-500">
               <Clock className="text-aurora-cyan/60 h-3.5 w-3.5" />
@@ -96,5 +102,3 @@ export function BlogCard({
     </Link>
   )
 }
-
-export default BlogCard

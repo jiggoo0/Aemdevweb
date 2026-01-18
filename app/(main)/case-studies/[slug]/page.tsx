@@ -1,4 +1,6 @@
 /** @format */
+
+import React from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Image from "next/image"
@@ -13,78 +15,98 @@ import {
   MessageCircle,
 } from "lucide-react"
 
-// ✅ Components & UI
+// 📦 Data & Utils
+import {
+  getCaseStudyBySlug,
+  caseStudiesData,
+} from "@/constants/case-studies/case-studies-data"
+import { siteConfig } from "@/constants/site-config"
+
+// 🧩 Components & UI
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
-
-// 📦 Mock Data Manager (Luminous Edition)
-const getCaseStudy = (slug: string) => {
-  const cases = [
-    {
-      slug: "project-01",
-      title: "Raan-Aroi Delivery",
-      client: "ร้านอร่อย เดลิเวอรี่",
-      category: "Food & Beverage",
-      impact: "ยอดขายเพิ่มขึ้น 300% ใน 3 เดือน",
-      description:
-        "เปลี่ยนร้านอาหารธรรมดาให้กลายเป็น Digital Franchise ด้วยระบบสั่งอาหารที่เสถียรที่สุด ตัดบัตรได้ทันที ลดภาระแอดมิน 100%",
-      image: "/images/showcase/project-01.webp",
-      tech: ["Next.js 15", "Tailwind CSS", "Stripe Payment", "Line API"],
-      stats: [
-        { label: "Page Speed", value: "99/100" },
-        { label: "Conversion", value: "+4.5%" },
-        { label: "Traffic", value: "15k/mo" },
-      ],
-    },
-  ]
-  return cases.find((c) => c.slug === slug)
-}
+import { JsonLd } from "@/components/seo/JsonLd"
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
 /**
- * 🔍 SEO Metadata
+ * 🧬 1. Static Params Generation
+ */
+export async function generateStaticParams() {
+  return caseStudiesData.map((project) => ({
+    slug: project.slug,
+  }))
+}
+
+/**
+ * 🔍 2. Dynamic Metadata
  */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const project = getCaseStudy(slug)
+  const project = getCaseStudyBySlug(slug)
 
   if (!project) return { title: "Case Study Not Found" }
 
   return {
-    title: `${project.title} | Case Study by AEMDEVWEB`,
-    description: `เบื้องหลังการสร้างรายได้เพิ่มขึ้น 300% ของ ${project.client}`,
-    openGraph: { images: [project.image] },
+    title: `${project.title} | Case Study by ${siteConfig.shortName}`,
+    description: `เบื้องหลังความสำเร็จของ ${project.client}: ${project.impact}`,
+    openGraph: {
+      images: [project.image],
+      title: project.title,
+      description: project.description,
+    },
   }
 }
 
 /**
- * 🚀 Case Study: Luminous Edition
+ * 🚀 3. Case Study Page: Luminous Edition
  */
 export default async function CaseStudyPage({ params }: PageProps) {
   const { slug } = await params
-  const project = getCaseStudy(slug)
+  const project = getCaseStudyBySlug(slug)
 
   if (!project) return notFound()
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
-      {/* 🌌 Aurora Ambient: แสงจางๆ ขับให้ตัวหนังสือเด่น */}
+    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
+      {/* 🛠️ SEO Schema */}
+      <JsonLd
+        type="Article"
+        data={{
+          headline: project.title,
+          description: project.description,
+          image: project.image,
+          author: {
+            "@type": "Person",
+            name: siteConfig.name,
+          },
+          publisher: {
+            "@type": "Organization",
+            name: siteConfig.companyName,
+            logo: {
+              "@type": "ImageObject",
+              url: `${siteConfig.url}/android-chrome-192x192.png`,
+            },
+          },
+        }}
+      />
+
+      {/* 🌌 Aurora Ambient */}
       <div className="aurora-bg top-0 right-0 h-[600px] w-full opacity-[0.05] blur-[120px]" />
 
       <div className="relative z-10 container mx-auto px-4">
         {/* 🔙 Back Navigation */}
         <Link
-          href="/services"
+          href="/case-studies" // แก้ไข Link กลับไปยังหน้ารวม Case Studies (ถ้ามี) หรือ services
           className="hover:text-aurora-cyan group font-prompt mb-12 inline-flex items-center text-[10px] font-black tracking-widest text-slate-500 uppercase transition-all"
         >
           <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-2" />
-          Back to Services
+          Back to Case Studies
         </Link>
 
         {/* 🏆 Header Section: The Impact */}
@@ -133,6 +155,8 @@ export default async function CaseStudyPage({ params }: PageProps) {
           {/* Left: The Story (8/12) */}
           <div className="space-y-20 lg:col-span-8">
             <div className="prose prose-invert prose-lg md:prose-xl prose-headings:font-prompt prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-white prose-p:font-anuphan prose-p:text-slate-400 prose-p:font-medium prose-p:leading-relaxed max-w-none">
+              {/* Note: เนื้อหา Case Study แบบละเอียดควรดึงจาก MDX หรือ field longDescription */}
+              {/* ส่วนนี้จำลองโครงสร้างเนื้อหา */}
               <div className="mb-8 flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                   <Target className="text-aurora-cyan h-6 w-6" />
@@ -143,7 +167,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                 ลูกค้าต้องการขยายฐานลูกค้าจากออฟไลน์สู่ออนไลน์
                 แต่ติดปัญหาเรื่องเว็บเดิมโหลดช้า และลูกค้าไม่กล้ากรอกบัตรเครดิต
                 เราจึงทำการรื้อระบบใหม่ทั้งหมดโดยใช้{" "}
-                <span className="text-white">Next.js 15+</span>
+                <span className="text-white">Next.js 15+</span>{" "}
                 เพื่อความเร็วและความปลอดภัยสูงสุดที่คู่แข่งในตลาดเทียบไม่ติด
               </p>
 
