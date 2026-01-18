@@ -9,25 +9,37 @@ import { TrustBadge } from "@/components/shared/TrustBadge"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
 // 🚀 Client-Side Sections (Deferred Loading - Lazy Load)
-// ย้าย Components หนักๆ ที่ต้อง Scroll ถึงจะเจอ มาโหลดแบบ Dynamic เพื่อลด TBT
-const ValueProp = dynamic(() => import("@/components/landing/ValueProp").then((mod) => mod.ValueProp))
-const InsightsSection = dynamic(() => import("@/components/landing/InsightsSection").then((mod) => mod.InsightsSection))
-const WorkProcess = dynamic(() => import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess))
-const LineLeadForm = dynamic(() => import("@/components/sales-engine/LineLeadForm").then((mod) => mod.LineLeadForm))
+// ✅ FIXED: ย้าย HomeClientSections มาเป็น Dynamic Import เพื่อลด TBT บน Mobile
+// ใช้ ssr: true เพื่อให้ Search Engine ยังเห็น Headings/Content ภายในได้
+const HomeClientSections = dynamic(
+  () => import("@/components/landing/HomeClientSections"),
+  { ssr: true }
+)
+
+// Components ส่วนล่างอื่นๆ โหลดแบบ Lazy ทั้งหมด
+const ValueProp = dynamic(() =>
+  import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
+)
+const InsightsSection = dynamic(() =>
+  import("@/components/landing/InsightsSection").then(
+    (mod) => mod.InsightsSection
+  )
+)
+const WorkProcess = dynamic(() =>
+  import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess)
+)
+const LineLeadForm = dynamic(() =>
+  import("@/components/sales-engine/LineLeadForm").then(
+    (mod) => mod.LineLeadForm
+  )
+)
 // ServiceCard เป็น Default Export ไม่ต้องใช้ .then
 const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
-
-// 📦 Already Dynamic Internal (ตามที่คุณแจ้งไว้)
-import HomeClientSections from "@/components/landing/HomeClientSections"
 
 // 📦 Data & Configuration
 import { servicesData } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
 
-/**
- * 🔍 Metadata SEO Strategy
- * จูน Title และ Description ให้ตรงกับตัวตนแบรนด์นายเอ็มซ่ามากส์
- */
 export const metadata: Metadata = {
   title: `นายเอ็มซ่ามากส์ | ${siteConfig.tagline}`,
   description: siteConfig.description,
@@ -46,15 +58,13 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased">
-      
-      {/* 🌌 Local Decorative Layer: จัดการแสงพื้นหลังแยกส่วน (-z-10) */}
+      {/* 🌌 Local Decorative Layer: ลดความซับซ้อนของ Background เพื่อ Performance */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
-        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[120px]" />
-        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[120px]" />
+        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[80px]" />
+        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[80px]" />
       </div>
 
       {/* 1. HERO & 2. TRUST SIGNALS: วินาทีแรกที่ผู้ใช้สัมผัส (Critical Rendering Path) */}
-      {/* ส่วนนี้ยังคง Static ไว้เพื่อ LCP ที่ดีที่สุด */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
@@ -62,7 +72,7 @@ export default function HomePage() {
 
       {/* 3. VALUE PROPOSITION: ขยี้ปัญหาและนำเสนอทางออก */}
       <section className="relative overflow-hidden py-24 lg:py-36">
-        {/* Background Accent: สร้างมิติด้วย Gradient เอียงจางๆ */}
+        {/* Background Accent */}
         <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
         <div className="relative z-10">
           <ValueProp />
@@ -70,7 +80,7 @@ export default function HomePage() {
       </section>
 
       {/* 🚀 4, 8, 9. DYNAMIC CLIENT SECTIONS: Stats, Pricing, Testimonials */}
-      {/* ส่วนนี้ถูกแยกโหลดแบบ Lazy เพื่อไม่ให้บล็อกการแสดงผล Hero ด้านบน */}
+      {/* ✅ FIXED: Dynamic Import ไม่บล็อก Main Thread ตอนโหลดหน้าแรก */}
       <HomeClientSections />
 
       {/* 5. INSIGHTS SECTION: โชว์ผลงาน Case Study และบทความความรู้ */}
@@ -89,7 +99,9 @@ export default function HomePage() {
           </h2>
           <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400 md:text-2xl">
             เลือกโซลูชันที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืนของ{" "}
-            <span className="text-white italic underline decoration-aurora-cyan/30 underline-offset-8">SME ไทย</span>
+            <span className="text-white italic underline decoration-aurora-cyan/30 underline-offset-8">
+              SME ไทย
+            </span>
           </p>
         </div>
 
@@ -106,7 +118,7 @@ export default function HomePage() {
       {/* 10. FINAL CONVERSION BOX: กระตุ้นการตัดสินใจขั้นสุดท้าย */}
       <section className="mb-40 px-4">
         <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
-          {/* Inner Glow Decorative: แสงรัศมีภายในหน้าบัตร */}
+          {/* Inner Glow Decorative */}
           <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[120px] transition-all duration-700 group-hover:opacity-60" />
 
           <h2 className="text-luminous relative z-10 mb-12 text-4xl leading-none uppercase md:text-[6rem] lg:text-[8rem] italic">
@@ -124,7 +136,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🛰️ Conversion Floating Engine: ปุ่มติดต่อที่เข้าถึงง่ายที่สุด */}
+      {/* 🛰️ Conversion Floating Engine */}
       <LineStickyButton />
     </div>
   )

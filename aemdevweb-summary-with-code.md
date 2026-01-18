@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 12:07:31
+  Generated: 2026-01-18 12:21:54
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 12:07:31**_
+_Generated on: **2026-01-18 12:21:54**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -42,7 +42,7 @@ Route (app)                                 Size  First Load JS
 ├ ○ /case-studies/unlink-th                132 B         161 kB
 ├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                            3.11 kB         117 kB
+├ ○ /services                            3.12 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase
@@ -52,7 +52,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.04 kB
+  └ other shared chunks (total)          2.05 kB
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
@@ -382,7 +382,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 12:03:07
+Generated at: 2026-01-18 12:17:22
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -421,7 +421,7 @@ Route (app)                                 Size  First Load JS
 ├ ○ /case-studies/unlink-th                132 B         161 kB
 ├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                            3.11 kB         117 kB
+├ ○ /services                            3.12 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase
@@ -431,7 +431,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.04 kB
+  └ other shared chunks (total)          2.05 kB
 
 
 ○  (Static)   prerendered as static content
@@ -455,7 +455,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 @plugin "@tailwindcss/typography";
 
 /* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
-   Performance Tuning: TBT & Main-thread Work Optimization
+   Performance Tuning: TBT & Main-thread Work Optimization (Updated)
 */
 
 @theme {
@@ -553,12 +553,17 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 @layer components {
   /* 🪄 Layered UI Components */
 
+  /* ✅ FIXED: Optimized Aurora Background for Mobile Performance */
   .aurora-bg {
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
     
-    /* ⚡ Mobile Performance: ลด Blur เหลือ 60px และใช้ Radial Gradient เพื่อลด TBT */
-    filter: blur(60px);
+    /* ⚡ Performance Optimization: */
+    will-change: transform, opacity; /* แจ้ง Browser ล่วงหน้าเพื่อลด Main-thread work */
+    transform: translateZ(0); /* บังคับใช้ GPU (Hardware Acceleration) */
+    
+    /* Mobile: ลด Blur เหลือ 40px และใช้ Static Radial Gradient */
+    filter: blur(40px);
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
@@ -615,8 +620,9 @@ import { cn } from "@/lib/utils"
 import "./globals.css"
 
 // --- 1. Setup Fonts: High-Performance Thai Stack ---
+// ใช้ display: 'swap' เพื่อให้ Text ขึ้นทันที (ลด LCP)
 const fontPrompt = Prompt({
-  weight: ["400", "600", "700", "900"],
+  weight: ["400", "500", "600", "700", "900"], // เพิ่ม 500 เผื่อบางเคส
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
@@ -631,12 +637,10 @@ const fontAnuphan = Anuphan({
   preload: true,
 })
 
-// --- 2. SEO & Metadata Strategy (ฉบับนายเอ็มซ่ามากส์) ---
+// --- 2. SEO & Metadata Strategy ---
 export const metadata: Metadata = {
   title: {
-    // นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน
     default: siteConfig.name, 
-    // [ชื่อหน้า] | เอ็มซ่ามากส์ - รับทำเว็บคุยง่าย
     template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`, 
   },
   description: siteConfig.description,
@@ -644,7 +648,6 @@ export const metadata: Metadata = {
     "นายเอ็มซ่ามากส์",
     "เอ็มซ่ามากส์รับทำเว็บ",
     "จ้างทำเว็บคุยง่ายๆ",
-    "คนทำเว็บไม่ทิ้งงาน",
     "รับทำเซลเพจ SME",
     "เว็บหน้าเดียวปิดการขาย",
     "AEMDEVWEB",
@@ -652,6 +655,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "นายเอ็มซ่ามากส์", url: siteConfig.url }],
   creator: siteConfig.companyName,
+  // ตั้งค่า Base URL เพื่อแก้ปัญหา OG Image ไม่ขึ้นในบาง Platform
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -680,10 +685,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  metadataBase: new URL(siteConfig.url),
 }
 
-// ✅ Viewport Optimization: แถบสถานะสี Midnight
+// ✅ Viewport Optimization
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -701,17 +705,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    // suppressHydrationWarning จำเป็นสำหรับการใช้ next-themes ใน AppProvider
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background text-foreground selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
+          "min-h-screen bg-background font-sans text-foreground antialiased",
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // Theme Selection Color
+          "transition-colors duration-500", // Smooth Theme Switch
           fontPrompt.variable,
           fontAnuphan.variable
         )}
       >
-        {/* 🚀 NextTopLoader: สี Aurora Cyan พร้อมเงาเรืองแสง */}
+        {/* 🚀 NextTopLoader: Custom Color for Luminous Theme */}
         <NextTopLoader
-          color="oklch(0.78 0.12 200)"
+          color="oklch(0.78 0.12 200)" // Aurora Cyan
           initialPosition={0.08}
           height={2}
           showSpinner={false}
@@ -733,7 +740,7 @@ export default function RootLayout({
             closeButton
             theme="system"
             toastOptions={{
-              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
+              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl font-prompt",
               style: { fontFamily: "var(--font-prompt)" },
             }}
           />
@@ -749,20 +756,24 @@ export default function RootLayout({
 ```typescript
 /** @format */
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
 // 🧩 Components - Static Imports (Instant LCP Engine)
-// ส่วนประกอบกลุ่มนี้จะถูกโหลดทันทีเพื่อให้ First Contentful Paint (FCP) ไวที่สุด
+// โหลดทันทีเพื่อให้หน้าแรก (Hero Section) แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
 import { Hero } from "@/components/landing/Hero"
-import { ValueProp } from "@/components/landing/ValueProp"
-import { InsightsSection } from "@/components/landing/InsightsSection"
-import { WorkProcess } from "@/components/sales-engine/WorkProcess"
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { TrustBadge } from "@/components/shared/TrustBadge"
-import ServiceCard from "@/components/shared/ServiceCard"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
-// 🚀 Client-Side Sections (Deferred Loading)
-// ใช้ dynamic import ภายในไฟล์นี้เพื่อลดค่า Total Blocking Time (TBT) บน Desktop
+// 🚀 Client-Side Sections (Deferred Loading - Lazy Load)
+// ย้าย Components หนักๆ ที่ต้อง Scroll ถึงจะเจอ มาโหลดแบบ Dynamic เพื่อลด TBT
+const ValueProp = dynamic(() => import("@/components/landing/ValueProp").then((mod) => mod.ValueProp))
+const InsightsSection = dynamic(() => import("@/components/landing/InsightsSection").then((mod) => mod.InsightsSection))
+const WorkProcess = dynamic(() => import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess))
+const LineLeadForm = dynamic(() => import("@/components/sales-engine/LineLeadForm").then((mod) => mod.LineLeadForm))
+// ServiceCard เป็น Default Export ไม่ต้องใช้ .then
+const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
+
+// 📦 Already Dynamic Internal (ตามที่คุณแจ้งไว้)
 import HomeClientSections from "@/components/landing/HomeClientSections"
 
 // 📦 Data & Configuration
@@ -799,6 +810,7 @@ export default function HomePage() {
       </div>
 
       {/* 1. HERO & 2. TRUST SIGNALS: วินาทีแรกที่ผู้ใช้สัมผัส (Critical Rendering Path) */}
+      {/* ส่วนนี้ยังคง Static ไว้เพื่อ LCP ที่ดีที่สุด */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
@@ -3103,6 +3115,7 @@ const nextConfig: NextConfig = {
       "date-fns", // ✅ เพิ่ม: มักใช้บ่อยและขนาดใหญ่
       "lodash", // ✅ เพิ่ม: เผื่อมีการหลุดเข้ามา
       "@radix-ui/react-icons", // ✅ เพิ่ม: ถ้ามีการใช้ Icons ของ Radix
+      "@/components/ui", // ✅ เพิ่ม: ช่วย Tree-shake UI components ภายในโปรเจกต์
     ],
 
     // 🚀 Turbo: ถ้าใช้ Turbopack ใน dev ให้ config เพิ่มได้ที่นี่ (Optional)

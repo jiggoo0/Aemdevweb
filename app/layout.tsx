@@ -10,12 +10,14 @@ import "./globals.css"
 
 // --- 1. Setup Fonts: High-Performance Thai Stack ---
 // ใช้ display: 'swap' เพื่อให้ Text ขึ้นทันที (ลด LCP)
+// adjustFontFallback: false ช่วยลด CLS โดยไม่ให้ Next.js พยายามปรับ size font สำรอง
 const fontPrompt = Prompt({
-  weight: ["400", "500", "600", "700", "900"], // เพิ่ม 500 เผื่อบางเคส
+  weight: ["400", "500", "600", "700", "900"],
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
   preload: true,
+  adjustFontFallback: false, // ✅ Critical for CLS Optimization
 })
 
 const fontAnuphan = Anuphan({
@@ -24,13 +26,14 @@ const fontAnuphan = Anuphan({
   variable: "--font-anuphan",
   display: "swap",
   preload: true,
+  adjustFontFallback: false, // ✅ Critical for CLS Optimization
 })
 
 // --- 2. SEO & Metadata Strategy ---
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name, 
-    template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`, 
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
   },
   description: siteConfig.description,
   keywords: [
@@ -44,7 +47,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "นายเอ็มซ่ามากส์", url: siteConfig.url }],
   creator: siteConfig.companyName,
-  // ตั้งค่า Base URL เพื่อแก้ปัญหา OG Image ไม่ขึ้นในบาง Platform
   metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
@@ -94,18 +96,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // suppressHydrationWarning จำเป็นสำหรับการใช้ next-themes ใน AppProvider
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // Theme Selection Color
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // Theme Selection
           "transition-colors duration-500", // Smooth Theme Switch
           fontPrompt.variable,
           fontAnuphan.variable
         )}
       >
-        {/* 🚀 NextTopLoader: Custom Color for Luminous Theme */}
+        {/* 🚀 NextTopLoader: Optimized Minimal Loader */}
         <NextTopLoader
           color="oklch(0.78 0.12 200)" // Aurora Cyan
           initialPosition={0.08}
@@ -118,9 +119,7 @@ export default function RootLayout({
 
         <AppProvider>
           {/* Main Wrapper Structure */}
-          <div className="relative flex min-h-screen flex-col">
-            {children}
-          </div>
+          <div className="relative flex min-h-screen flex-col">{children}</div>
 
           {/* Global Notification Engine */}
           <Toaster
@@ -129,7 +128,8 @@ export default function RootLayout({
             closeButton
             theme="system"
             toastOptions={{
-              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl font-prompt",
+              className:
+                "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl font-prompt",
               style: { fontFamily: "var(--font-prompt)" },
             }}
           />

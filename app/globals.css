@@ -107,16 +107,17 @@
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
     
-    /* ⚡ Performance Optimization: */
-    will-change: transform, opacity; /* แจ้ง Browser ล่วงหน้าเพื่อลด Main-thread work */
-    transform: translateZ(0); /* บังคับใช้ GPU (Hardware Acceleration) */
+    /* ⚡ Performance Optimization: High Performance Mode */
+    will-change: transform, opacity; 
+    transform: translate3d(0, 0, 0); /* บังคับใช้ GPU เร็วกว่า translateZ */
+    backface-visibility: hidden; /* ลดการกระพริบ */
     
-    /* Mobile: ลด Blur เหลือ 40px และใช้ Static Radial Gradient */
-    filter: blur(40px);
+    /* Mobile: ลดความละเอียด Blur ลงเพื่อ FPS ที่สูงขึ้น (30px) */
+    filter: blur(30px); 
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
-      /* Desktop: จัดเต็ม Blur 140px และ Animation เต็มรูปแบบ */
+      /* Desktop: สวยเต็มสูบ */
       filter: blur(140px);
       background: linear-gradient(
         135deg,
