@@ -1,19 +1,23 @@
 /** @format */
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
 // 🧩 Components - Static Imports (Instant LCP Engine)
-// ส่วนประกอบกลุ่มนี้จะถูกโหลดทันทีเพื่อให้ First Contentful Paint (FCP) ไวที่สุด
+// โหลดทันทีเพื่อให้หน้าแรก (Hero Section) แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
 import { Hero } from "@/components/landing/Hero"
-import { ValueProp } from "@/components/landing/ValueProp"
-import { InsightsSection } from "@/components/landing/InsightsSection"
-import { WorkProcess } from "@/components/sales-engine/WorkProcess"
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { TrustBadge } from "@/components/shared/TrustBadge"
-import ServiceCard from "@/components/shared/ServiceCard"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
-// 🚀 Client-Side Sections (Deferred Loading)
-// ใช้ dynamic import ภายในไฟล์นี้เพื่อลดค่า Total Blocking Time (TBT) บน Desktop
+// 🚀 Client-Side Sections (Deferred Loading - Lazy Load)
+// ย้าย Components หนักๆ ที่ต้อง Scroll ถึงจะเจอ มาโหลดแบบ Dynamic เพื่อลด TBT
+const ValueProp = dynamic(() => import("@/components/landing/ValueProp").then((mod) => mod.ValueProp))
+const InsightsSection = dynamic(() => import("@/components/landing/InsightsSection").then((mod) => mod.InsightsSection))
+const WorkProcess = dynamic(() => import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess))
+const LineLeadForm = dynamic(() => import("@/components/sales-engine/LineLeadForm").then((mod) => mod.LineLeadForm))
+// ServiceCard เป็น Default Export ไม่ต้องใช้ .then
+const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
+
+// 📦 Already Dynamic Internal (ตามที่คุณแจ้งไว้)
 import HomeClientSections from "@/components/landing/HomeClientSections"
 
 // 📦 Data & Configuration
@@ -50,6 +54,7 @@ export default function HomePage() {
       </div>
 
       {/* 1. HERO & 2. TRUST SIGNALS: วินาทีแรกที่ผู้ใช้สัมผัส (Critical Rendering Path) */}
+      {/* ส่วนนี้ยังคง Static ไว้เพื่อ LCP ที่ดีที่สุด */}
       <Hero />
       <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />

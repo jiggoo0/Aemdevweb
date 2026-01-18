@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 12:03:07
+Generated at: 2026-01-18 12:17:22
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -38,7 +38,7 @@ Route (app)                                 Size  First Load JS
 ├ ○ /case-studies/unlink-th                132 B         161 kB
 ├ ○ /contact                             5.17 kB         157 kB
 ├ ○ /robots.txt                            132 B         102 kB
-├ ○ /services                            3.11 kB         117 kB
+├ ○ /services                            3.12 kB         117 kB
 ├ ● /services/[slug]                       134 B         170 kB
 ├   ├ /services/shop-master-pro
 ├   ├ /services/sushi-omakase
@@ -48,7 +48,7 @@ Route (app)                                 Size  First Load JS
 + First Load JS shared by all             102 kB
   ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
   ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
-  └ other shared chunks (total)          2.04 kB
+  └ other shared chunks (total)          2.05 kB
 
 
 ○  (Static)   prerendered as static content

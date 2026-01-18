@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 11:53:42
+  Generated: 2026-01-18 12:07:31
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 11:53:42**_
+_Generated on: **2026-01-18 12:07:31**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
@@ -19,7 +19,7 @@ _Generated on: **2026-01-18 11:53:42**_
 ```text
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.3 kB         135 kB
+┌ ○ /                                    16.3 kB         136 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                            134 B         170 kB
 ├   ├ /SalePage
@@ -382,7 +382,7 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
 #### 🔍 Path: `pre-deploy-report.md`
 ```markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-18 11:48:22
+Generated at: 2026-01-18 12:03:07
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -398,7 +398,7 @@ Branch: main
 ### 📊 Route Statistics & Bundle Size
 ```text
 Route (app)                                 Size  First Load JS
-┌ ○ /                                    16.3 kB         135 kB
+┌ ○ /                                    16.3 kB         136 kB
 ├ ○ /_not-found                            990 B         103 kB
 ├ ● /[template]                            134 B         170 kB
 ├   ├ /SalePage
@@ -452,17 +452,19 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 /** @format */
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
-@plugin "@tailwindcss/typography"; /* ✅ เพิ่ม Typography Plugin */
+@plugin "@tailwindcss/typography";
 
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH */
+/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
+   Performance Tuning: TBT & Main-thread Work Optimization
+*/
 
 @theme {
-  /* --- Typography --- */
+  /* --- 1. Typography Hierarchy --- */
   --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
   --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* --- Animations --- */
+  /* --- 2. Animations (Smooth & Lightweight) --- */
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(12deg); }
     50% { transform: translateY(-15px) rotate(14deg); }
@@ -482,7 +484,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   }
   --animate-marquee: marquee 50s linear infinite;
 
-  /* --- Colors Mapping --- */
+  /* --- 3. Colors Mapping (OKLCH Color Space) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
@@ -492,7 +494,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --color-aurora-violet: var(--aurora-violet);
   --color-aurora-emerald: var(--aurora-emerald);
 
-  /* --- Shadows --- */
+  /* --- 4. Shadows & Radius --- */
   --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
   --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
 
@@ -513,7 +515,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   }
 
   .dark {
-    /* 🌑 Midnight Deep Tech */
+    /* 🌑 Dark Mode: Midnight Deep Tech (Stable Edition) */
     --background: oklch(0.14 0.02 260);
     --foreground: oklch(0.98 0.005 240);
     --border: oklch(0.25 0.03 260 / 0.5);
@@ -532,7 +534,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
     font-family: var(--font-prompt);
     
-    /* Noise-free Gradient */
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
     background-image:
       radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
       radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
@@ -549,18 +551,25 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 }
 
 @layer components {
-  /* 🪄 Layered UI */
+  /* 🪄 Layered UI Components */
+
   .aurora-bg {
     @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
     z-index: -20;
     
-    /* ⚡ Mobile Optimized: Reduced Blur & Complexity */
+    /* ⚡ Mobile Performance: ลด Blur เหลือ 60px และใช้ Radial Gradient เพื่อลด TBT */
     filter: blur(60px);
     background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
 
     @media (min-width: 768px) {
+      /* Desktop: จัดเต็ม Blur 140px และ Animation เต็มรูปแบบ */
       filter: blur(140px);
-      background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-violet), var(--aurora-emerald));
+      background: linear-gradient(
+        135deg,
+        var(--aurora-cyan),
+        var(--aurora-violet),
+        var(--aurora-emerald)
+      );
       animation: var(--animate-aurora);
     }
   }
@@ -584,6 +593,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   }
 }
 
+/* ⚡ Utilities */
 @utility no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -874,19 +884,25 @@ export default function HomePage() {
 import React from "react"
 import dynamic from "next/dynamic"
 
-// 1. 🏗️ Impact Stats Loading Skeleton
+/**
+ * 🚀 HomeClientSections: Luminous Performance Engine (v.2026)
+ * ✅ FIXED: ปรับจูนความสูง Skeleton เพื่อค่า CLS = 0
+ * ✅ Strategy: จองพื้นที่หน้าจอ (Space Reservation) ให้ตรงกับคอมโพเนนต์จริง
+ */
+
+// 1. 🏗️ Impact Stats Loading Skeleton (Height Reserved)
 const ImpactStats = dynamic(
   () => import("@/components/sales-engine/ImpactStats").then((mod) => mod.ImpactStats),
   {
     ssr: false,
     loading: () => (
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-24">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex flex-col items-center space-y-4">
-              <div className="h-14 w-14 animate-pulse rounded-2xl bg-white/5" />
-              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
-              <div className="h-4 w-32 animate-pulse rounded-lg bg-white/5" />
+            <div key={i} className="flex flex-col items-center space-y-5">
+              <div className="h-16 w-16 animate-pulse rounded-2xl bg-white/5 border border-white/5" />
+              <div className="h-10 w-28 animate-pulse rounded-lg bg-white/5" />
+              <div className="h-4 w-36 animate-pulse rounded-lg bg-white/5" />
             </div>
           ))}
         </div>
@@ -901,28 +917,33 @@ const PriceEstimator = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center border border-white/10 bg-white/5 rounded-[2.5rem]">
-        <div className="mb-8 h-8 w-48 rounded-xl bg-white/10" />
-        <div className="w-full space-y-6 px-12">
-          <div className="h-20 w-full rounded-2xl bg-white/5" />
-          <div className="h-20 w-full rounded-2xl bg-white/5" />
-          <div className="h-20 w-full rounded-2xl bg-white/5" />
+      <div className="glass-card mx-auto flex h-[600px] w-full max-w-5xl animate-pulse flex-col items-center justify-center border border-white/10 bg-white/5 rounded-[2.5rem] shadow-luminous">
+        {/* Header Placeholder */}
+        <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
+        {/* List Placeholders */}
+        <div className="w-full max-w-2xl space-y-6 px-10">
+          <div className="h-20 w-full rounded-2xl bg-white/5 border border-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5 border border-white/5" />
+          <div className="h-20 w-full rounded-2xl bg-white/5 border border-white/5" />
         </div>
       </div>
     ),
   }
 )
 
-// 3. ⭐ Testimonials Loading Skeleton
+// 3. ⭐ Testimonials Loading Skeleton (Masonry Simulation)
 const Testimonials = dynamic(
   () => import("@/components/landing/Testimonials").then((mod) => mod.Testimonials),
   {
     ssr: false,
     loading: () => (
-      <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-        {[...Array(3)].map((_, i) => (
-          <div key={i} className="glass-card h-80 w-full animate-pulse rounded-[2rem] bg-white/5 p-10 mb-8 border border-white/5" />
-        ))}
+      <div className="container mx-auto px-4 pb-20">
+        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
+          {/* สร้างกล่องจำลองความสูงต่างกันเพื่อลด Layout Shift ใน Masonry */}
+          <div className="glass-card h-[320px] w-full animate-pulse rounded-[2rem] bg-white/5 border border-white/5" />
+          <div className="glass-card h-[400px] w-full animate-pulse rounded-[2rem] bg-white/5 border border-white/5" />
+          <div className="glass-card h-[350px] w-full animate-pulse rounded-[2rem] bg-white/5 border border-white/5" />
+        </div>
       </div>
     ),
   }
@@ -931,14 +952,17 @@ const Testimonials = dynamic(
 export default function HomeClientSections() {
   return (
     <>
-      {/* 📊 Section 4: Impact Statistics */}
-      <section className="relative z-10 border-y border-white/5 bg-white/[0.01] py-24 backdrop-blur-3xl">
+      {/* 📊 Section 4: Impact Statistics (Social Proof) */}
+      <section className="relative z-10 border-y border-white/5 bg-white/[0.01] backdrop-blur-3xl">
         <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <ImpactStats />
+        <div className="relative">
+          <ImpactStats />
+        </div>
       </section>
 
-      {/* 💰 Section 8: Pricing Engine */}
+      {/* 💰 Section 8: Pricing Engine (Conversion Hub) */}
       <section id="pricing" className="relative container mx-auto px-4 py-32 lg:py-48">
+        {/* Background Glow สำหรับการจองพื้นที่สายตา */}
         <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]" />
         
         <div className="mx-auto max-w-5xl">
@@ -954,13 +978,16 @@ export default function HomeClientSections() {
               <span className="text-white/60 text-sm">(งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงาน)</span>
             </p>
           </div>
+
+          {/* Logic Engine ลบ CLS ด้วย Fixed Height Skeleton */}
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ Section 9: Testimonials */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] py-32 md:rounded-t-[4.5rem]">
+      {/* ⭐ Section 9: Testimonials (Trust Signals) */}
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 md:rounded-t-[4.5rem]">
         <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-50" />
+        
         <div className="relative z-10 container mx-auto px-4">
           <div className="mb-20 text-center">
              <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
@@ -970,6 +997,7 @@ export default function HomeClientSections() {
               Voice of <span className="text-slate-500">Success</span>
             </h2>
           </div>
+          
           <Testimonials />
         </div>
       </section>

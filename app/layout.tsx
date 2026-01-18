@@ -9,8 +9,9 @@ import { cn } from "@/lib/utils"
 import "./globals.css"
 
 // --- 1. Setup Fonts: High-Performance Thai Stack ---
+// ใช้ display: 'swap' เพื่อให้ Text ขึ้นทันที (ลด LCP)
 const fontPrompt = Prompt({
-  weight: ["400", "600", "700", "900"],
+  weight: ["400", "500", "600", "700", "900"], // เพิ่ม 500 เผื่อบางเคส
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
@@ -25,12 +26,10 @@ const fontAnuphan = Anuphan({
   preload: true,
 })
 
-// --- 2. SEO & Metadata Strategy (ฉบับนายเอ็มซ่ามากส์) ---
+// --- 2. SEO & Metadata Strategy ---
 export const metadata: Metadata = {
   title: {
-    // นายเอ็มซ่ามากส์ - รับทำเว็บคุยง่าย ไม่ทิ้งงาน
     default: siteConfig.name, 
-    // [ชื่อหน้า] | เอ็มซ่ามากส์ - รับทำเว็บคุยง่าย
     template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`, 
   },
   description: siteConfig.description,
@@ -38,7 +37,6 @@ export const metadata: Metadata = {
     "นายเอ็มซ่ามากส์",
     "เอ็มซ่ามากส์รับทำเว็บ",
     "จ้างทำเว็บคุยง่ายๆ",
-    "คนทำเว็บไม่ทิ้งงาน",
     "รับทำเซลเพจ SME",
     "เว็บหน้าเดียวปิดการขาย",
     "AEMDEVWEB",
@@ -46,6 +44,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "นายเอ็มซ่ามากส์", url: siteConfig.url }],
   creator: siteConfig.companyName,
+  // ตั้งค่า Base URL เพื่อแก้ปัญหา OG Image ไม่ขึ้นในบาง Platform
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -74,10 +74,9 @@ export const metadata: Metadata = {
     shortcut: "/favicon-16x16.png",
     apple: "/apple-touch-icon.png",
   },
-  metadataBase: new URL(siteConfig.url),
 }
 
-// ✅ Viewport Optimization: แถบสถานะสี Midnight
+// ✅ Viewport Optimization
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -95,17 +94,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    // suppressHydrationWarning จำเป็นสำหรับการใช้ next-themes ใน AppProvider
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background text-foreground selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
+          "min-h-screen bg-background font-sans text-foreground antialiased",
+          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // Theme Selection Color
+          "transition-colors duration-500", // Smooth Theme Switch
           fontPrompt.variable,
           fontAnuphan.variable
         )}
       >
-        {/* 🚀 NextTopLoader: สี Aurora Cyan พร้อมเงาเรืองแสง */}
+        {/* 🚀 NextTopLoader: Custom Color for Luminous Theme */}
         <NextTopLoader
-          color="oklch(0.78 0.12 200)"
+          color="oklch(0.78 0.12 200)" // Aurora Cyan
           initialPosition={0.08}
           height={2}
           showSpinner={false}
@@ -127,7 +129,7 @@ export default function RootLayout({
             closeButton
             theme="system"
             toastOptions={{
-              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
+              className: "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl font-prompt",
               style: { fontFamily: "var(--font-prompt)" },
             }}
           />
