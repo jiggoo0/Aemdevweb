@@ -10,7 +10,12 @@ import {
   LineChart,
   Sparkles,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
+
+/**
+ * 💎 ValueProp Component: The Unfair Advantage (v.2026)
+ * ส่วนแสดงจุดเด่นของบริการที่จูนมาเพื่อความ "น่าเชื่อถือ" และ "ความเร็ว"
+ * ✅ Optimized: ใช้ Native Tailwind Animations และ Template Literals เพื่อลด TBT
+ */
 
 const features = [
   {
@@ -96,27 +101,20 @@ export const ValueProp = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className={cn(
-              "group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500",
-              "animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700",
-              feature.delay
-            )}
+            className={`group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500 animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700 ${feature.delay}`}
           >
-            {/* Luminous Hover Decor */}
+            {/* Luminous Hover Decor: แสง Aurora ฟุ้งเมื่อเมาส์ชี้ */}
             <div className="bg-aurora-cyan/10 absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 blur-[60px] transition-opacity duration-700 group-hover:opacity-100" />
 
             <div className="relative z-10">
               {/* Icon with Aurora Glow */}
               <div
-                className={cn(
-                  "mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-500 group-hover:scale-110 group-hover:bg-white/10",
-                  feature.glow
-                )}
+                className={`mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:bg-white/10 ${feature.glow}`}
               >
-                <feature.icon className={cn("h-8 w-8", feature.color)} />
+                <feature.icon className={`h-8 w-8 ${feature.color}`} />
               </div>
 
-              <h3 className="group-hover:text-aurora-cyan mb-4 text-2xl font-black tracking-tight text-white uppercase transition-colors">
+              <h3 className="group-hover:text-aurora-cyan mb-4 text-2xl font-black tracking-tight text-white uppercase transition-colors italic">
                 {feature.title}
               </h3>
 

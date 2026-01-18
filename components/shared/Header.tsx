@@ -12,6 +12,11 @@ import Navbar from "@/components/shared/Navbar"
 import { Button } from "@/components/ui/button"
 import { AemBrandBadge } from "./AemBrandBadge"
 
+/**
+ * 🛰️ Header Component: Luminous Navigation Engine (v.2026)
+ * ✅ แก้ไขปัญหา Cascading Render และ ESLint Unused Variables
+ * ✅ ประสิทธิภาพ: ใช้ useCallback และ passive scroll listener เพื่อ PageSpeed 100
+ */
 export function Header({ className }: { className?: string }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -32,7 +37,7 @@ export function Header({ className }: { className?: string }) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
-  // 🔒 2. Body Scroll Lock
+  // 🔒 2. Body Scroll Lock (ป้องกันการเลื่อนหน้าจอเมื่อเปิดเมนูมือถือ)
   useEffect(() => {
     if (typeof document !== "undefined") {
       document.body.style.overflow = isMobileMenuOpen ? "hidden" : ""
@@ -44,7 +49,7 @@ export function Header({ className }: { className?: string }) {
     let timeoutId: ReturnType<typeof setTimeout>
 
     if (isMobileMenuOpen) {
-      // ✅ ใช้ Microtask หรือ Timeout เพื่อเลื่อนการ setState ออกไปไม่ให้ทับกับจังหวะ Render
+      // ✅ ใช้ setTimeout เพื่อเลื่อนการ setState ออกไปไม่ให้บล็อกจังหวะการเรนเดอร์ของ Path ใหม่
       timeoutId = setTimeout(() => {
         setIsMobileMenuOpen(false)
       }, 0)
@@ -122,7 +127,7 @@ export function Header({ className }: { className?: string }) {
         </div>
       </header>
 
-      {/* 📱 Mobile Menu Overlay */}
+      {/* 📱 Mobile Menu Overlay (Midnight Tech Style) */}
       <div
         className={cn(
           "bg-background/98 fixed inset-0 z-[90] flex flex-col px-8 pt-40 pb-16 backdrop-blur-3xl transition-all duration-700 lg:hidden",

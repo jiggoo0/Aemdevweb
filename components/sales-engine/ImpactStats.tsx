@@ -4,7 +4,6 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { TrendingUp, Users, Zap, Award } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const stats = [
   {
@@ -52,6 +51,7 @@ const stats = [
 /**
  * 📊 ImpactStats: Luminous Evidence Engine (v.2026)
  * ส่วนแสดงสถิติที่จูนมาเพื่อความน่าเชื่อถือและประสิทธิภาพสูงสุด
+ * ✅ Optimized: ลด TBT ด้วยการใช้ CSS Transitions ร่วมกับ Framer Motion
  */
 export const ImpactStats = () => {
   const ref = useRef(null)
@@ -59,7 +59,7 @@ export const ImpactStats = () => {
 
   return (
     <div ref={ref} className="relative z-10 container mx-auto px-4">
-      {/* 🌌 Luminous Background Decor: Layered behind everything */}
+      {/* 🌌 Luminous Background Decor */}
       <div className="bg-aurora-cyan/5 pointer-events-none absolute top-1/2 left-1/2 -z-20 h-full w-full -translate-x-1/2 -translate-y-1/2 blur-[120px]" />
 
       <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:gap-16">
@@ -67,17 +67,10 @@ export const ImpactStats = () => {
           <div key={stat.id} className="group relative text-center">
             {/* 💎 Icon Holder: Modern Glass Style */}
             <div
-              className={cn(
-                "mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700",
-                "group-hover:scale-110 group-hover:border-white/20 group-hover:bg-white/10",
-                stat.glow
-              )}
+              className={`mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:border-white/20 group-hover:bg-white/10 ${stat.glow}`}
             >
               <stat.icon
-                className={cn(
-                  "h-7 w-7 transition-colors duration-500",
-                  stat.color
-                )}
+                className={`h-7 w-7 transition-colors duration-500 ${stat.color}`}
               />
             </div>
 
@@ -90,17 +83,14 @@ export const ImpactStats = () => {
                 delay: stat.delay,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className={cn(
-                "mb-3 text-4xl font-black tracking-tighter uppercase md:text-5xl lg:text-6xl",
-                "bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]"
-              )}
+              className="mb-3 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-4xl font-black tracking-tighter text-transparent uppercase drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] md:text-5xl lg:text-6xl"
             >
               {stat.value}
             </motion.div>
 
             {/* 📝 Info Area: Humanistic Friendly Design */}
             <div className="space-y-1">
-              <p className="font-prompt group-hover:text-aurora-cyan text-sm font-black tracking-[0.2em] text-white uppercase opacity-90 transition-colors duration-300 md:text-base">
+              <p className="font-prompt text-sm font-black tracking-[0.2em] text-white uppercase opacity-90 transition-colors duration-300 group-hover:text-aurora-cyan md:text-base">
                 {stat.label}
               </p>
               <p className="font-anuphan text-xs leading-relaxed font-medium text-slate-500 opacity-80 transition-opacity duration-300 group-hover:opacity-100 md:text-sm">

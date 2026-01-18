@@ -3,22 +3,63 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-18 06:56:33
+  Generated: 2026-01-18 10:43:03
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-18 06:56:33**_
-
+_Generated on: **2026-01-18 10:43:03**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
+✅ **READY FOR DEPLOY:** The project meets all production standards.
 
-⚠️ _Warning: `pre-deploy-report.md` not found. Run `pre-deploy-check.sh` for health metrics._
+### 📍 Production Route Map
+```text
+```text
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      16 kB         135 kB
+├ ○ /_not-found                            990 B         103 kB
+├ ● /[template]                            134 B         170 kB
+├   ├ /SalePage
+├   ├ /Service
+├   └ /Corporate
+├ ● /[template]/[slug]                     134 B         170 kB
+├   ├ /SalePage/shop-master-pro
+├   ├ /Service/sushi-omakase
+├   ├ /Corporate/law-firm-pro
+├   └ /Service/aura-clinic
+├ ○ /about                               6.67 kB         163 kB
+├ ○ /blog                                  174 B         111 kB
+├ ● /blog/[slug]                           174 B         111 kB
+├   ├ /blog/5-points-killing-sales
+├   ├ /blog/copywriting-secrets
+├   ├ /blog/facebook-ads-vs-website
+├   └ [+2 more paths]
+├ ○ /case-studies                          132 B         161 kB
+├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ○ /case-studies/unlink-th                132 B         161 kB
+├ ○ /contact                             5.16 kB         157 kB
+├ ○ /robots.txt                            132 B         102 kB
+├ ○ /services                             3.1 kB         117 kB
+├ ● /services/[slug]                       134 B         170 kB
+├   ├ /services/shop-master-pro
+├   ├ /services/sushi-omakase
+├   ├ /services/law-firm-pro
+├   └ /services/aura-clinic
+└ ○ /sitemap.xml                           132 B         102 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
+  ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
+  └ other shared chunks (total)          2.05 kB
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+```
+```
 
 ## 📊 2. File Statistics by Extension
-
 ```text
      63 tsx
      17 ts
@@ -32,7 +73,6 @@ _Generated on: **2026-01-18 06:56:33**_
 ```
 
 ## 📁 3. Directory Structure (Architecture Tree)
-
 ```text
 📂 app/
   📂 (main)/
@@ -187,9 +227,7 @@ _Generated on: **2026-01-18 06:56:33**_
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
-
 #### 🔍 Path: `ai-context.md`
-
 ```markdown
 🧬 Project DNA: AEMDEVWEB (v.2026)
 Project Identity: High-Conversion Web Factory for SMEs
@@ -339,38 +377,104 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
   Documentation maintained by AEMDEVWEB Creative Team.
   Last Updated: 2026-01-17
 ```
+---
 
+#### 🔍 Path: `pre-deploy-report.md`
+```markdown
+# 🚀 Pre-deploy Inspection Report
+Generated at: 2026-01-18 10:37:59
+Branch: main
+
+## 🔐 1. Environment Check
+✅ Status: .env file exists and verified.
+## 🛠️  2. Auto-Fix Procedure
+✅ Status: Auto-fix completed or no issues found.
+## 🧹 3. Code Linting (ESLint)
+✅ Status: Linting passed.
+## ⌨️ 4. Type Safety Check
+✅ Status: TypeScript verified.
+## 🏗️  5. Production Build Test
+✅ Status: Build successfully optimized.
+### 📊 Route Statistics & Bundle Size
+```text
+Route (app)                                 Size  First Load JS
+┌ ○ /                                      16 kB         135 kB
+├ ○ /_not-found                            990 B         103 kB
+├ ● /[template]                            134 B         170 kB
+├   ├ /SalePage
+├   ├ /Service
+├   └ /Corporate
+├ ● /[template]/[slug]                     134 B         170 kB
+├   ├ /SalePage/shop-master-pro
+├   ├ /Service/sushi-omakase
+├   ├ /Corporate/law-firm-pro
+├   └ /Service/aura-clinic
+├ ○ /about                               6.67 kB         163 kB
+├ ○ /blog                                  174 B         111 kB
+├ ● /blog/[slug]                           174 B         111 kB
+├   ├ /blog/5-points-killing-sales
+├   ├ /blog/copywriting-secrets
+├   ├ /blog/facebook-ads-vs-website
+├   └ [+2 more paths]
+├ ○ /case-studies                          132 B         161 kB
+├ ƒ /case-studies/[slug]                 2.49 kB         122 kB
+├ ○ /case-studies/unlink-th                132 B         161 kB
+├ ○ /contact                             5.16 kB         157 kB
+├ ○ /robots.txt                            132 B         102 kB
+├ ○ /services                             3.1 kB         117 kB
+├ ● /services/[slug]                       134 B         170 kB
+├   ├ /services/shop-master-pro
+├   ├ /services/sushi-omakase
+├   ├ /services/law-firm-pro
+├   └ /services/aura-clinic
+└ ○ /sitemap.xml                           132 B         102 kB
++ First Load JS shared by all             102 kB
+  ├ chunks/291-6ac79937ecd9ac89.js       45.7 kB
+  ├ chunks/455135d8-30ce3918f044b0b7.js  54.2 kB
+  └ other shared chunks (total)          2.05 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
+```
+
+---
+## 🏆 Summary Result
+### ✅ READY FOR DEPLOY
+All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
+```
 ---
 
 #### 🔍 Path: `app/globals.css`
-
 ```css
 /** @format */
-
 @import "tailwindcss";
 @plugin "tailwindcss-animate";
 
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: LUMINOUS TECH
-   Concept: Midnight Aurora & Weightless Glass
+/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH
+   Focus: Stability, Readability, and High-End Tech Aesthetics
 */
 
 @theme {
-  /* --- 1. Typography --- */
+  /* --- 1. Typography Hierarchy --- */
   --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
-  --font-kanit: var(--font-kanit), ui-sans-serif, system-ui;
   --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  /* --- 2. Radius Expansion --- */
-  --radius-xl: 1.5rem;
-  --radius-2xl: 2.5rem;
-  --radius-3xl: 3.5rem;
-  --radius-4xl: 4.5rem;
+  /* --- 2. Animations (Smooth & Lightweight) --- */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(12deg);
+    }
+    50% {
+      transform: translateY(-15px) rotate(14deg);
+    }
+  }
+  --animate-float: float 6s ease-in-out infinite;
 
-  /* --- 3. Luminous Shadow (Fix: Build Error) --- */
-  --shadow-luminous: 0 20px 80px -15px rgba(0, 0, 0, 0.3);
-
-  /* --- 4. Custom Animations --- */
   @keyframes aurora {
     0%,
     100% {
@@ -378,124 +482,142 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
       transform: translate(0, 0) scale(1);
     }
     33% {
-      opacity: 0.5;
-      transform: translate(30px, -50px) scale(1.1);
+      opacity: 0.4;
+      transform: translate(20px, -30px) scale(1.05);
     }
     66% {
-      opacity: 0.4;
-      transform: translate(-20px, 20px) scale(0.9);
+      opacity: 0.35;
+      transform: translate(-15px, 15px) scale(0.95);
     }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
 
-  /* --- 5. Core Mapping --- */
+  /* --- 3. Colors Mapping (The "Nailing" Colors) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
   --color-border: var(--border);
-  --color-ring: var(--ring);
+  --color-primary: var(--primary);
 
-  /* Mapping Aurora Colors */
+  /* Aurora Accents */
   --color-aurora-cyan: var(--aurora-cyan);
   --color-aurora-violet: var(--aurora-violet);
   --color-aurora-emerald: var(--aurora-emerald);
+
+  /* --- 4. Shadows & Radius --- */
+  --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+  --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.75rem;
 }
 
 @layer base {
   :root {
     /* 🟢 Light Mode */
     --background: oklch(0.99 0.005 240);
-    --foreground: oklch(0.18 0.02 240);
-    --primary: oklch(0.65 0.18 160);
-    --border: oklch(0.94 0.01 240);
-    --ring: oklch(0.65 0.18 160 / 0.3);
-    --radius: 1.25rem;
+    --foreground: oklch(0.2 0.02 240);
+    --primary: oklch(0.6 0.16 160);
+    --border: oklch(0.92 0.01 240);
   }
 
   .dark {
-    /* 🌑 Dark Mode: Midnight Violet Glow */
-    --background: oklch(0.12 0.025 260);
+    /* 🌑 Dark Mode: Midnight Deep Tech (Stable) */
+    /* 0.14 = ความมืดสนิทที่ยังเห็นมิติสี / 0.02 = ความสดที่ดูแพง / 260 = โทนน้ำเงินเย็น */
+    --background: oklch(0.14 0.02 260);
     --foreground: oklch(0.98 0.005 240);
     --primary: oklch(0.78 0.18 155);
-    --border: oklch(0.25 0.05 260 / 0.5);
-    --ring: oklch(0.78 0.18 155 / 0.4);
+    --border: oklch(0.25 0.03 260 / 0.5);
 
-    /* Aurora Colors Definition */
+    /* Aurora Colors */
     --aurora-cyan: oklch(0.75 0.12 200);
     --aurora-violet: oklch(0.65 0.18 280);
     --aurora-emerald: oklch(0.82 0.18 155);
   }
 
+  /* ✅ บังคับใช้ตัวแปรสีที่ตัว Body และกำหนดฟอนต์หลัก */
   * {
     border-color: var(--border);
-    outline-color: color-mix(in srgb, var(--ring), transparent 60%);
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-prompt), ui-sans-serif, system-ui;
-    -webkit-font-smoothing: antialiased;
-    /* แสง Aurora จางๆ บนพื้นหลังเพื่อลบความหมอง */
+    @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
+    font-family: var(--font-prompt);
+    text-rendering: optimizeLegibility;
+
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% */
     background-image:
       radial-gradient(
-        circle at 0% 0%,
-        color-mix(in oklch, var(--aurora-cyan, transparent), transparent 96%),
+        circle at 2% 2%,
+        color-mix(in oklch, var(--aurora-cyan), transparent 97%),
         transparent 40%
       ),
       radial-gradient(
-        circle at 100% 100%,
-        color-mix(in oklch, var(--aurora-violet, transparent), transparent 96%),
+        circle at 98% 98%,
+        color-mix(in oklch, var(--aurora-violet), transparent 97%),
         transparent 40%
       );
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-black tracking-tighter uppercase;
+  }
+
+  p {
+    @apply leading-relaxed font-medium;
+    font-family: var(--font-anuphan);
   }
 }
 
 @layer components {
-  /* 🪄 Luminous UI Components */
-
-  .btn-luminous {
-    @apply relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-10 py-4 font-bold transition-all duration-500 hover:scale-105 active:scale-95;
-    background: linear-gradient(
-      135deg,
-      var(--aurora-cyan),
-      var(--aurora-emerald)
-    );
-    color: oklch(0.12 0.025 260);
-    box-shadow: 0 0 30px
-      color-mix(in oklch, var(--aurora-cyan), transparent 70%);
-  }
-
-  .glass-card {
-    @apply shadow-luminous border backdrop-blur-3xl transition-all duration-500;
-    /* ไล่เฉดให้สว่างจากภายใน */
-    background: linear-gradient(
-      135deg,
-      color-mix(in oklch, var(--background), white 8%),
-      color-mix(in oklch, var(--background), white 2%)
-    );
-    border-color: rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-3xl);
-  }
+  /* 🪄 Layered UI Components */
 
   .aurora-bg {
-    @apply animate-aurora pointer-events-none absolute opacity-20 blur-[120px];
+    @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
+    z-index: -20;
+    filter: blur(80px);
     background: linear-gradient(
       135deg,
       var(--aurora-cyan),
       var(--aurora-violet),
       var(--aurora-emerald)
     );
+
+    @media (min-width: 768px) {
+      filter: blur(140px);
+      animation: var(--animate-aurora);
+    }
   }
 
   .text-luminous {
-    @apply leading-[0.9] font-black tracking-tighter text-white uppercase;
-    background: linear-gradient(to bottom, #fff 50%, rgba(255, 255, 255, 0.4));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(
-      0 0 15px color-mix(in srgb, var(--aurora-cyan), transparent 85%)
+    @apply font-black tracking-tighter text-white uppercase;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  .btn-luminous {
+    @apply shadow-aurora-glow relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 font-bold transition-all duration-500 hover:scale-[1.03] active:scale-95;
+    background: linear-gradient(
+      135deg,
+      var(--aurora-cyan),
+      var(--aurora-emerald)
     );
+    color: oklch(0.14 0.02 260);
+  }
+
+  .glass-card {
+    @apply shadow-luminous border backdrop-blur-2xl transition-all duration-500;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.01)
+    );
+    border-color: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-2xl);
   }
 }
 
@@ -508,15 +630,13 @@ Key Promise: "Turn Code into Cash" (เปลี่ยนโค้ดให้�
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/layout.tsx`
-
 ```typescript
 /** @format */
 import type { Metadata, Viewport } from "next"
-import { Inter, Kanit, Prompt, Anuphan } from "next/font/google"
+import { Prompt, Anuphan } from "next/font/google"
 import NextTopLoader from "nextjs-toploader"
 import { Toaster } from "@/components/ui/sonner"
 import { AppProvider } from "@/providers/AppProvider"
@@ -524,32 +644,17 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-// --- 1. Setup Fonts: Humanistic Palette (Optimized) ---
-// ✅ เพิ่ม preload: true และคงค่า display: "swap" เพื่อลด LCP Delay ตามรายงาน PageSpeed
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  preload: true,
-})
-
-const kanit = Kanit({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["thai", "latin"],
-  variable: "--font-kanit",
-  display: "swap",
-  preload: true,
-})
-
-const prompt = Prompt({
-  weight: ["300", "400", "500", "600", "700"],
+// --- 1. Setup Fonts: Modern Thai Stack ---
+const fontPrompt = Prompt({
+  weight: ["400", "600", "700"],
   subsets: ["thai", "latin"],
   variable: "--font-prompt",
   display: "swap",
   preload: true,
 })
 
-const anuphan = Anuphan({
+const fontAnuphan = Anuphan({
+  weight: ["400", "500", "600"],
   subsets: ["thai", "latin"],
   variable: "--font-anuphan",
   display: "swap",
@@ -567,7 +672,6 @@ export const metadata: Metadata = {
     "รับทำเว็บไซต์",
     "Next.js 15",
     "ทำเว็บ SME",
-    "Web Development Thailand",
     "Sale Page",
     "aemdevweb",
     ...siteConfig.keywords,
@@ -605,15 +709,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 }
 
-// ✅ ปรับจูน Viewport เพื่อลด Layout Shift และกำหนดสีธีมให้ชัดเจน
+// ✅ Viewport Optimization
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" }, // Matches bg-background
   ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
 }
 
 // --- 3. Root Layout Component ---
@@ -626,36 +731,36 @@ export default function RootLayout({
     <html lang="th" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background min-h-screen font-sans antialiased transition-colors duration-500",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan",
-          inter.variable,
-          kanit.variable,
-          prompt.variable,
-          anuphan.variable
+          "bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan min-h-screen font-sans antialiased transition-colors duration-500",
+          fontPrompt.variable,
+          fontAnuphan.variable
         )}
       >
-        {/* แถบโหลด: ปรับความเร็วเพื่อให้ไม่กวน Tรดหลักมากเกินไป */}
+        {/* 🚀 NextTopLoader: Tuned for Midnight Theme */}
         <NextTopLoader
-          color="linear-gradient(to right, oklch(0.75 0.12 200), oklch(0.82 0.18 155))"
+          color="oklch(0.78 0.12 200)" // Aurora Cyan
           initialPosition={0.08}
-          height={2} // ✅ ลดความหนาลงเพื่อลดงานของเบราว์เซอร์
+          height={2}
           showSpinner={false}
           easing="ease"
-          speed={200} // ✅ ปรับความเร็วให้ snappy ขึ้น
+          speed={200}
+          shadow="0 0 10px oklch(0.78 0.12 200),0 0 5px oklch(0.78 0.12 200)"
         />
 
         <AppProvider>
+          {/* Main Wrapper */}
           <div className="relative flex min-h-screen flex-col">{children}</div>
 
+          {/* Global Notification Engine */}
           <Toaster
             position="bottom-right"
             richColors
             closeButton
             theme="system"
             toastOptions={{
+              className:
+                "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl",
               style: {
-                borderRadius: "1.25rem",
-                padding: "1rem",
                 fontFamily: "var(--font-prompt)",
               },
             }}
@@ -666,17 +771,14 @@ export default function RootLayout({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
-
 ```typescript
 /** @format */
-
 import { Metadata } from "next"
 
-// 🧩 Components - Static Imports (ส่วนที่ต้องการความเร็ว FCP สูงสุด)
+// 🧩 Components - Static Imports (Instant LCP Engine)
 import { Hero } from "@/components/landing/Hero"
 import { ValueProp } from "@/components/landing/ValueProp"
 import { InsightsSection } from "@/components/landing/InsightsSection"
@@ -686,87 +788,109 @@ import { TrustBadge } from "@/components/shared/TrustBadge"
 import ServiceCard from "@/components/shared/ServiceCard"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
 
-// 🚀 นำเข้ากลุ่ม Client Sections ที่เราแยกออกมา
+// 🚀 Client-Side Sections (Deferred Loading เพื่อประสิทธิภาพสูงสุด)
 import HomeClientSections from "@/components/landing/HomeClientSections"
 
-// 📦 Data
+// 📦 Data & Configuration
 import { servicesData } from "@/constants/services-data"
+import { siteConfig } from "@/constants/site-config"
 
+// ✅ Metadata SEO Strategy
 export const metadata: Metadata = {
-  title: "AemDevWeb | รับทำเว็บไซต์ Next.js มาตรฐานปี 2026",
-  description:
-    "เปลี่ยนยอดวิวเป็นยอดโอน ด้วยเว็บไซต์ High-Performance ที่ออกแบบมาเพื่อปิดการขายโดยเฉพาะ เร็ว แรง ติด Google",
+  title: `AemDevWeb | ${siteConfig.tagline}`,
+  description: siteConfig.description,
 }
 
+/**
+ * 🚀 HomePage: AEM DEVWEB Engine v.2026
+ * Structure: Hero > Trust > Value > ClientSections > Insights > Services > Process > CTA
+ */
 export default function HomePage() {
   return (
-    <main className="bg-background selection:bg-aurora-cyan/30 selection:text-aurora-cyan relative flex min-h-screen flex-col overflow-x-hidden">
-      {/* 🌌 Luminous Background */}
-      <div className="aurora-bg -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.15]" />
-      <div className="aurora-bg top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.1]" />
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased">
+      {/* 🌌 Local Decorative Layer: จัดการแสงพื้นหลังแยกส่วน (z-index: -10) */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
+        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[800px] w-[1000px] opacity-[0.1] blur-[120px]" />
+        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[800px] w-[800px] opacity-[0.05] blur-[120px]" />
+      </div>
 
-      {/* 1. HERO & 2. TRUST BADGE */}
+      {/* 1. HERO & 2. TRUST SIGNALS: ส่วนที่ User ต้องเห็นทันทีเมื่อโหลดหน้า */}
       <Hero />
-      <div className="relative z-10 -mt-12 md:-mt-16">
+      <div className="relative z-20 -mt-12 md:-mt-16">
         <TrustBadge />
       </div>
 
-      {/* 3. VALUE PROPOSITION */}
-      <section className="relative overflow-hidden py-24">
-        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 z-0 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br blur-3xl" />
-        <ValueProp />
+      {/* 3. VALUE PROPOSITION: ทำไมต้องเลือกเรา? */}
+      <section className="relative overflow-hidden py-24 lg:py-36">
+        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl" />
+        <div className="relative z-10">
+          <ValueProp />
+        </div>
       </section>
 
-      {/* 🚀 4, 8, 9. DYNAMIC SECTIONS (Client-side Load) */}
+      {/* 🚀 4, 8, 9. DYNAMIC CLIENT SECTIONS: Stats, Pricing, Testimonials (Deferred) */}
       <HomeClientSections />
 
-      {/* 5. INSIGHTS */}
-      <InsightsSection />
+      {/* 5. INSIGHTS SECTION: ข้อมูล Case Study และบทความ */}
+      <div className="relative z-10">
+        <InsightsSection />
+      </div>
 
-      {/* 6. SERVICES */}
-      <section id="services" className="relative container mx-auto px-4 py-32">
-        <div className="mx-auto mb-20 max-w-3xl text-center">
-          <h2 className="text-luminous mb-8 text-4xl uppercase md:text-7xl">
+      {/* 6. SERVICES GRID: แคตตาล็อกบริการหลัก */}
+      <section id="services" className="relative py-32 lg:py-48">
+        <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
+          <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
+            Solutions for Growth
+          </div>
+          <h2 className="text-luminous mb-10 text-4xl uppercase md:text-8xl">
             Services <span className="text-slate-600">&</span> Solutions
           </h2>
-          <p className="text-lg font-medium text-slate-400 md:text-xl">
-            เลือกแพ็กเกจที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืน
+          <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400 md:text-2xl">
+            เลือกโซลูชันที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืนของ{" "}
+            <span className="text-white">SME ไทย</span>
           </p>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 px-4 md:grid-cols-2 lg:grid-cols-4">
           {servicesData.map((service) => (
             <ServiceCard key={service.id} {...service} className="h-full" />
           ))}
         </div>
       </section>
 
-      {/* 7. PROCESS */}
+      {/* 7. PROCESS FLOW: ขั้นตอนการทำงานที่เป็นระบบ */}
       <WorkProcess />
 
-      {/* 10. FINAL CTA */}
-      <section className="container mx-auto mb-40 px-4">
-        <div className="shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden rounded-4xl border border-white/10 bg-white/[0.02] p-12 text-center transition-all duration-700 md:p-32">
-          <h2 className="text-luminous relative z-10 mb-10 text-4xl uppercase md:text-8xl">
+      {/* 10. FINAL CONVERSION BOX: ปิดการขายท้ายหน้าหน้า */}
+      <section className="mb-40 px-4">
+        <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
+          {/* Decorative Glow within Card */}
+          <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[120px] transition-all duration-700 group-hover:opacity-60" />
+
+          <h2 className="text-luminous relative z-10 mb-12 text-4xl leading-none uppercase md:text-[6rem] lg:text-[8rem]">
             Ready to <span className="text-aurora-emerald">Scale</span> <br />
             Your Business?
           </h2>
+
           <div className="relative z-10 flex flex-col items-center justify-center gap-10 sm:flex-row">
-            <LineLeadForm variant="button" label="เริ่มโปรเจกต์กับเรา" />
+            <LineLeadForm
+              variant="button"
+              label="เริ่มโปรเจกต์กับเรา"
+              className="scale-110 md:scale-125"
+            />
           </div>
         </div>
       </section>
 
+      {/* Conversion Floating Engine */}
       <LineStickyButton />
-    </main>
+    </div>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
-
 ```typescript
 /** @format */
 "use client"
@@ -775,11 +899,26 @@ import React from "react"
 import dynamic from "next/dynamic"
 
 /**
- * 🚀 HomeClientSections: Luminous Performance Engine (Fix: Named Export)
- * ✅ แก้ไข Error: Element type is invalid โดยการระบุ Property ในการ Import
+ * 🚀 HomeClientSections: Luminous Performance Engine
+ * ทำหน้าที่โหลด Component ที่มี Client Logic หนักๆ แบบ Lazy Loading (Deferred)
+ * ช่วยลดค่า TBT (Total Blocking Time) ให้หน้าแรกโหลดเสร็จไวที่สุด
  */
 
-// 1. 🏗️ Dynamic Imports: ต้องระบุ .then(mod => mod.ComponentName)
+// 1. 🏗️ Impact Stats: โหลดแบบไม่ต้องรอ (Priority Low)
+const ImpactStats = dynamic(
+  () =>
+    import("@/components/sales-engine/ImpactStats").then(
+      (mod) => mod.ImpactStats
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="container mx-auto h-32 w-full animate-pulse rounded-xl bg-white/5" />
+    ),
+  }
+)
+
+// 2. 💰 Price Estimator: Logic หนักสุด แยกออกมาเพื่อไม่ให้บล็อก Main Thread
 const PriceEstimator = dynamic(
   () =>
     import("@/components/sales-engine/PriceEstimator").then(
@@ -788,298 +927,377 @@ const PriceEstimator = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[600px] w-full animate-pulse rounded-[3rem] bg-white/5" />
+      <div className="glass-card mx-auto h-[600px] w-full max-w-5xl animate-pulse rounded-[2.5rem] bg-white/5" />
     ),
   }
 )
 
+// 3. ⭐ Testimonials: โหลดท้ายสุด
 const Testimonials = dynamic(
   () =>
     import("@/components/landing/Testimonials").then((mod) => mod.Testimonials),
-  { ssr: false }
-)
-
-const ImpactStats = dynamic(
-  () =>
-    import("@/components/sales-engine/ImpactStats").then(
-      (mod) => mod.ImpactStats
+  {
+    ssr: false,
+    loading: () => (
+      <div className="container mx-auto h-[500px] w-full animate-pulse rounded-3xl bg-white/5" />
     ),
-  { ssr: false }
+  }
 )
 
 export default function HomeClientSections() {
   return (
     <>
-      {/* 📊 ส่วนที่ 4: Impact Stats */}
-      <section className="shadow-luminous relative z-10 border-y border-white/5 bg-white/[0.03] py-24 backdrop-blur-3xl">
-        <ImpactStats />
+      {/* 📊 Section 4: Impact Statistics (Banner Style) */}
+      <section className="relative z-10 border-y border-white/5 bg-white/[0.02] py-24 backdrop-blur-3xl">
+        <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-50" />
+        <div className="relative">
+          <ImpactStats />
+        </div>
       </section>
 
-      {/* 💰 ส่วนที่ 8: Pricing */}
-      <section id="pricing" className="container mx-auto px-4 py-32">
+      {/* 💰 Section 8: Calculator & Pricing */}
+      <section
+        id="pricing"
+        className="relative container mx-auto px-4 py-32 lg:py-48"
+      >
+        {/* Background Glow for Pricing */}
+        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-[120px]" />
+
         <div className="mx-auto max-w-5xl">
-          <div className="mb-16 text-center">
-            <span className="text-aurora-cyan mb-4 block text-[10px] font-black tracking-[0.3em] uppercase">
+          <div className="mb-20 text-center">
+            <span className="text-aurora-cyan mb-6 block text-[10px] font-black tracking-[0.3em] uppercase">
               Transparent Pricing
             </span>
-            <h2 className="text-luminous text-3xl tracking-tighter uppercase md:text-6xl">
-              ประเมินราคาเบื้องต้น
+            <h2 className="text-luminous mb-6 text-4xl uppercase md:text-6xl">
+              ประเมินราคา<span className="text-aurora-emerald">เบื้องต้น</span>
             </h2>
+            <p className="font-anuphan mx-auto max-w-2xl text-lg text-slate-400">
+              เลือกฟีเจอร์ที่ต้องการ แล้วระบบจะคำนวณงบประมาณให้ทันที
+              (ราคาจริงอาจปรับเปลี่ยนตามขอบเขตงาน)
+            </p>
           </div>
+
           <PriceEstimator />
         </div>
       </section>
 
-      {/* ⭐ ส่วนที่ 9: Testimonials */}
-      <section className="rounded-t-4xl border-t border-white/5 bg-white/[0.01] py-32">
-        <Testimonials />
+      {/* ⭐ Section 9: Client Testimonials */}
+      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] py-32 md:rounded-t-[4.5rem]">
+        {/* Decor */}
+        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px]" />
+
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="mb-16 text-center">
+            <h2 className="text-luminous text-3xl uppercase md:text-5xl">
+              Voice of <span className="text-slate-500">Success</span>
+            </h2>
+          </div>
+          <Testimonials />
+        </div>
       </section>
     </>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
-
 ```typescript
 /** @format */
+
+import React, { Suspense } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import {
-  CheckCircle2,
-  ArrowRight,
-  Sparkles,
-  // ✅ Fixed: Removed unused 'MessageCircle' to clear ESLint error
-  Zap,
-} from "lucide-react"
+import { Rocket, Paintbrush, ShieldCheck } from "lucide-react"
 
 // 📦 Data & Utils
-import {
-  getServiceBySlug,
-  getOtherServices,
-  servicesData,
-} from "@/constants/services-data"
+import { getTemplateBySlug, templatesData } from "@/constants/templates-data"
 import { siteConfig } from "@/constants/site-config"
+import { cn } from "@/lib/utils"
 
-// 🛠️ Components
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+// 🧩 Layout Components
+import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
+import { Footer } from "@/components/shared/Footer"
 import { LineStickyButton } from "@/components/shared/LineStickyButton"
-import { ServiceCard } from "@/components/shared/ServiceCard"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
-interface PageProps {
-  params: Promise<{ slug: string }>
+// 🧩 Page Components
+import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
+import { TemplateFeatures } from "@/components/template/shared/TemplateFeatures"
+import { DevicePreview } from "@/components/template/shared/DevicePreview"
+import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
+import { SalesHook } from "@/components/template/shared/SalesHook"
+
+interface DetailPageProps {
+  params: Promise<{
+    template: string
+    slug: string
+  }>
 }
 
 /**
- * 🧬 1. Static Params (SSG)
+ * 🧬 1. Static Params Generation: Pre-render all templates at build time
  */
 export async function generateStaticParams() {
-  return servicesData.map((service) => ({
-    slug: service.slug,
+  return templatesData.map((tpl) => ({
+    template: tpl.category || "sale-page",
+    slug: tpl.slug,
   }))
 }
 
 /**
- * 🔍 2. Dynamic Metadata
+ * 🔍 2. Dynamic Metadata: Optimized for High CTR Social Sharing
  */
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: DetailPageProps): Promise<Metadata> {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const data = getTemplateBySlug(slug)
 
-  if (!service) return { title: "Service Not Found" }
+  if (!data) return { title: "Template Not Found" }
 
+  const title = `${data.title} - Professional Web Template | ${siteConfig.shortName}`
   return {
-    title: `${service.title} | บริการทำเว็บไซต์โดย ${siteConfig.shortName}`,
-    description: service.description,
+    title,
+    description: data.description,
     openGraph: {
-      images: [service.mockups.desktop],
+      images: [data.image],
+      title,
+      description: data.description,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: data.description,
+      images: [data.image],
     },
   }
 }
 
 /**
- * 🚀 3. Main Service Detail Page
+ * 🚀 3. Main Detail Page Component
  */
-export default async function ServiceDetailPage({ params }: PageProps) {
+export default async function TemplateDetailPage({ params }: DetailPageProps) {
   const { slug } = await params
-  const service = getServiceBySlug(slug)
+  const data = getTemplateBySlug(slug)
 
-  if (!service) return notFound()
+  if (!data) return notFound()
 
-  const otherServices = getOtherServices(slug)
+  // ✅ Theme Identity: Mapping to Design System Colors
+  const themeColor =
+    (data.themeColor as
+      | "emerald"
+      | "blue"
+      | "indigo"
+      | "rose"
+      | "amber"
+      | "slate"
+      | "red") || "emerald"
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20">
-      {/* 🌌 Background Decor: Aurora Ambient */}
-      <div className="aurora-bg top-0 right-0 h-[600px] w-[600px] opacity-[0.1] blur-[120px]" />
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
+      <TemplateNavbar />
 
-      {/* --- HEADER: Hero & Pricing --- */}
-      <section className="relative z-10 container mx-auto mb-24 px-4">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          {/* Left: Content Area */}
-          <div className="space-y-8">
-            <Badge
-              variant="luminous"
-              className="px-4 py-1.5 tracking-widest uppercase"
-            >
-              ✨ Best Value Solution
-            </Badge>
+      <main className="relative z-10 flex-1">
+        {/* --- SECTION 1: HERO (Visual Impact) --- */}
+        <TemplateHero
+          title={data.title}
+          subtitle={data.description}
+          image={data.image}
+          category={data.category}
+          themeColor={themeColor}
+        />
 
-            <h1 className="font-prompt text-5xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-7xl">
-              {service.title}
-            </h1>
-
-            <p className="font-anuphan max-w-xl text-xl leading-relaxed font-medium text-slate-400">
-              {service.description}
-            </p>
-
-            <div className="flex flex-col items-start gap-8 pt-6 sm:flex-row sm:items-center">
-              <div className="flex flex-col">
-                <span className="font-anuphan mb-1 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
-                  Starting at
+        {/* --- SECTION 2: VALUE PROPOSITIONS (Trust Signals) --- */}
+        <section className="border-y border-white/5 bg-white/[0.02] py-20 backdrop-blur-sm">
+          <div className="container mx-auto px-4">
+            <div className="mx-auto mb-16 max-w-3xl text-center">
+              <h2 className="font-prompt mb-4 text-3xl font-black tracking-tighter uppercase md:text-4xl">
+                ทุกสิ่งที่คุณต้องการเพื่อ{" "}
+                <span
+                  className={cn(
+                    "transition-colors duration-500",
+                    themeColor === "emerald" && "text-emerald-400",
+                    themeColor === "blue" && "text-blue-400",
+                    themeColor === "rose" && "text-rose-400",
+                    themeColor === "amber" && "text-amber-400"
+                  )}
+                >
+                  เติบโตบนโลกออนไลน์
                 </span>
-                <span className="font-prompt text-aurora-cyan drop-shadow-luminous text-4xl font-black italic">
-                  {service.priceDisplay}
-                </span>
-              </div>
-              <Button
-                variant="premium"
-                size="lg"
-                className="shadow-aurora-glow group h-16 px-10 text-lg"
-                asChild
-              >
-                <Link href="/contact">
-                  สนใจแพ็กเกจนี้{" "}
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          {/* Right: Mockup Glass Panel */}
-          <div className="group relative">
-            <div className="bg-aurora-cyan/20 absolute -inset-4 rounded-[3rem] opacity-30 blur-3xl transition-all duration-1000 group-hover:opacity-50" />
-            <div className="shadow-luminous relative aspect-video w-full rounded-[2.5rem] border border-white/10 bg-slate-900/50 p-3 backdrop-blur-sm transition-all duration-700 hover:rotate-0 lg:rotate-2">
-              <div className="relative h-full w-full overflow-hidden rounded-[2rem] bg-slate-800">
-                <Image
-                  src={service.mockups.desktop}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- DETAILS: Deep Dive Content --- */}
-      <section className="relative z-10 container mx-auto px-4 py-20">
-        <div className="grid gap-16 lg:grid-cols-12">
-          {/* Main Content Area */}
-          <div className="space-y-16 lg:col-span-8">
-            {/* รายละเอียดบริการ */}
-            <div className="space-y-6">
-              <h3 className="font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-white uppercase">
-                <div className="bg-aurora-cyan h-8 w-1.5 rounded-full" />
-                รายละเอียดบริการ
-              </h3>
-              <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400">
-                {service.longDescription}
+              </h2>
+              <p className="font-anuphan text-lg font-medium text-slate-400">
+                เทมเพลตนี้เตรียม Infrastructure สำหรับการปิดการขายไว้ให้ครบถ้วน
               </p>
             </div>
 
-            {/* Features List Grid */}
-            <div className="rounded-[3rem] border border-white/5 bg-white/[0.03] p-10 backdrop-blur-sm">
-              <h3 className="font-prompt mb-10 flex items-center gap-3 text-xl font-black tracking-widest text-white uppercase">
-                <Zap className="text-aurora-cyan h-6 w-6 animate-pulse" />
-                สิ่งที่คุณจะได้รับ
-              </h3>
-              <ul className="grid gap-6 sm:grid-cols-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="group flex items-start gap-4">
-                    <div className="bg-aurora-emerald/10 group-hover:bg-aurora-emerald/30 mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors">
-                      <CheckCircle2 className="text-aurora-emerald h-4 w-4" />
-                    </div>
-                    <span className="font-anuphan text-base font-bold text-slate-300">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <ServiceCard
+                icon={<Rocket className="text-emerald-400" />}
+                title="High-Speed"
+                description="คะแนน Google PageSpeed 90+ โหลดไวใน 0.5 วินาที"
+              />
+              <ServiceCard
+                icon={<Paintbrush className="text-blue-400" />}
+                title="Premium UI/UX"
+                description="ดีไซน์ทันสมัย ปรับแต่ง CI ได้ตามอัตลักษณ์แบรนด์"
+              />
+              <ServiceCard
+                icon={<ShieldCheck className="text-rose-400" />}
+                title="Conversion Ready"
+                description="ติดตั้ง Facebook CAPI และ TikTok Pixel พร้อมใช้งาน"
+              />
             </div>
           </div>
+        </section>
 
-          {/* Sidebar CTA */}
-          <div className="lg:col-span-4">
-            <div className="border-aurora-cyan/30 bg-aurora-cyan/5 shadow-luminous group sticky top-32 overflow-hidden rounded-[2.5rem] border p-8">
-              <div className="aurora-bg -top-1/2 -right-1/2 opacity-10 transition-opacity group-hover:opacity-20" />
-              <div className="relative z-10">
-                <h3 className="font-prompt mb-4 text-2xl font-black tracking-tighter text-white uppercase italic">
-                  พร้อมเริ่มงาน?
+        {/* --- SECTION 3: CONTENT & CONVERSION GRID (Main Layout) --- */}
+        <div className="container mx-auto px-4 py-20">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+            {/* 👈 LEFT: CONTENT AREA */}
+            <article className="space-y-32 lg:col-span-8">
+              {/* 🛠️ Features List */}
+              <section id="features" className="scroll-mt-32">
+                <TemplateFeatures data={data} themeColor={themeColor} />
+              </section>
+
+              {/* 📱 Interactive Preview */}
+              <section id="preview" className="scroll-mt-32">
+                <div
+                  className={cn(
+                    "mb-10 border-l-4 pl-6 transition-colors duration-500",
+                    themeColor === "emerald" && "border-emerald-500",
+                    themeColor === "blue" && "border-blue-500",
+                    themeColor === "rose" && "border-rose-500",
+                    themeColor === "amber" && "border-amber-500"
+                  )}
+                >
+                  <h3 className="font-prompt text-3xl font-black text-white uppercase">
+                    ตัวอย่างประสบการณ์การใช้งาน
+                  </h3>
+                  <p className="font-anuphan mt-3 text-lg font-medium text-slate-400">
+                    จำลองการแสดงผลจริงบนอุปกรณ์ที่ลูกค้าของคุณใช้งาน
+                  </p>
+                </div>
+
+                <Suspense
+                  fallback={
+                    <div className="h-[500px] w-full animate-pulse rounded-3xl bg-white/5" />
+                  }
+                >
+                  <DevicePreview
+                    desktopSrc={data.image}
+                    mobileSrc={data.mockups?.mobile || data.image}
+                    title={data.title}
+                    themeColor={themeColor}
+                  />
+                </Suspense>
+              </section>
+
+              {/* 🛣️ Step Process */}
+              <section className="space-y-8">
+                <h3 className="font-prompt text-2xl font-black text-white uppercase">
+                  ขั้นตอนการสั่งซื้อและติดตั้ง
                 </h3>
-                <p className="font-anuphan mb-8 font-medium text-slate-400">
-                  ส่งข้อมูลให้เราประเมิน หรือนัดคุยรายละเอียดผ่าน{" "}
-                  <span className="text-white">LINE Official</span> ตอบไวภายใน 5
-                  นาทีครับ
-                </p>
-                {/* ✅ เรียกใช้ Lead Form */}
-                <LineLeadForm variant="default" />
-                <div className="mt-8 border-t border-white/10 pt-6 text-center">
-                  <div className="font-prompt text-aurora-cyan inline-flex items-center gap-2 text-[10px] font-black tracking-widest uppercase">
-                    <Sparkles className="h-3 w-3" /> Sales Engine Expert
-                  </div>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <StepItem number="01" text="เลือกเทมเพลตและชำระเงิน" />
+                  <StepItem number="02" text="ส่งข้อมูลธุรกิจและรูปภาพแบรนด์" />
+                  <StepItem number="03" text="ทีมงานปรับแต่งระบบ (3-7 วัน)" />
+                  <StepItem number="04" text="ตรวจงานและส่งมอบ Source Code" />
+                </div>
+              </section>
+            </article>
+
+            {/* 👉 RIGHT: CONVERSION SIDEBAR (Sticky Engine) */}
+            <aside className="lg:col-span-4">
+              <div className="sticky top-28 space-y-8">
+                <TemplatePricingCard
+                  title={data.title}
+                  price={data.price ?? 0}
+                  salePrice={data.salePrice}
+                  features={data.features}
+                  demoUrl={data.demoUrl || "#"}
+                  themeColor={themeColor}
+                />
+
+                {/* Developer Insight Card */}
+                <div className="glass-card rounded-3xl border border-white/5 bg-white/[0.02] p-8 text-sm text-slate-400 backdrop-blur-xl">
+                  <h4
+                    className={cn(
+                      "font-prompt mb-4 flex items-center gap-2 font-black tracking-widest uppercase",
+                      themeColor === "emerald" && "text-emerald-400",
+                      themeColor === "blue" && "text-blue-400",
+                      themeColor === "rose" && "text-rose-400",
+                      themeColor === "amber" && "text-amber-400"
+                    )}
+                  >
+                    Developer Insight
+                  </h4>
+                  <p className="font-anuphan leading-relaxed opacity-80">
+                    เทมเพลตนี้รองรับการทำ{" "}
+                    <span className="font-bold text-slate-100">
+                      SEO Semantic HTML
+                    </span>{" "}
+                    ติดหน้าแรก Google ได้ง่ายและยั่งยืน
+                  </p>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
-      </section>
 
-      {/* --- CROSS SELL: Other Services --- */}
-      <section className="relative z-10 border-t border-white/5 bg-white/[0.01] py-32">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 flex flex-col items-end justify-between gap-6 md:flex-row">
-            <h2 className="font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-5xl">
-              บริการอื่นๆ <br />
-              <span className="text-aurora-cyan">ที่น่าสนใจ</span>
-            </h2>
-            <Link
-              href="/services"
-              className="font-prompt group flex items-center gap-2 text-xs font-black tracking-[0.2em] text-slate-500 uppercase transition-colors hover:text-white"
-            >
-              View All Solutions{" "}
-              <ArrowRight className="text-aurora-cyan h-4 w-4 transition-transform group-hover:translate-x-2" />
-            </Link>
-          </div>
+        {/* --- SECTION 4: FINAL CALL TO ACTION --- */}
+        <SalesHook data={data} isTemplate={true} themeColor={themeColor} />
+      </main>
 
-          <div className="grid gap-10 md:grid-cols-3">
-            {otherServices.slice(0, 3).map((svc) => (
-              <ServiceCard key={svc.id} {...svc} />
-            ))}
-          </div>
-        </div>
-      </section>
-
+      <Footer />
       <LineStickyButton />
-    </main>
+    </div>
+  )
+}
+
+// --- 🧩 SUB-COMPONENTS ---
+
+function ServiceCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+}) {
+  return (
+    <div className="group glass-card rounded-[2rem] border border-white/5 bg-white/[0.01] p-8 transition-all duration-500 hover:bg-white/[0.05]">
+      <div className="mb-6 inline-block rounded-2xl bg-white/5 p-4 transition-transform duration-500 group-hover:scale-110 group-hover:bg-white/10">
+        {icon}
+      </div>
+      <h3 className="font-prompt mb-3 text-xl font-black text-white uppercase">
+        {title}
+      </h3>
+      <p className="font-anuphan text-sm leading-relaxed text-slate-400 opacity-80">
+        {description}
+      </p>
+    </div>
+  )
+}
+
+function StepItem({ number, text }: { number: string; text: string }) {
+  return (
+    <div className="group flex items-center gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:bg-white/[0.05]">
+      <span className="font-prompt text-2xl font-black text-slate-700 transition-colors group-hover:text-white/20">
+        {number}
+      </span>
+      <span className="font-anuphan text-sm font-bold text-slate-300">
+        {text}
+      </span>
+    </div>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1307,11 +1525,9 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1530,11 +1746,9 @@ export default function UnlinkCaseStudyPage() {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
-
 ```typescript
 /** @format */
 import type { MDXComponents } from "mdx/types"
@@ -1664,11 +1878,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
@@ -1790,11 +2002,9 @@ export function constructMetadata({
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
-
 ```typescript
 /** @format */
 
@@ -1940,11 +2150,9 @@ export const getFeaturedServices = (): ServiceItem[] =>
 export const getOtherServices = (currentSlug: string): ServiceItem[] =>
   servicesData.filter((s) => s.slug !== currentSlug)
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
@@ -2066,11 +2274,9 @@ export function constructMetadata({
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/templates-data.ts`
-
 ```typescript
 /** @format */
 
@@ -2160,11 +2366,9 @@ export const getRelatedTemplates = (
     .slice(0, limit)
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
@@ -2286,11 +2490,9 @@ export function constructMetadata({
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
-
 ```typescript
 /** @format */
 
@@ -2424,11 +2626,9 @@ export const siteKeywords = [
   "รับทำเว็บ Next.js",
 ] as string[]
 ```
-
 ---
 
 #### 🔍 Path: `tsconfig.json`
-
 ```json
 {
   "compilerOptions": {
@@ -2474,20 +2674,17 @@ export const siteKeywords = [
   "exclude": ["node_modules"]
 }
 ```
-
 ---
 
 #### 🔍 Path: `tailwind.config.ts`
-
 ```typescript
 /** @format */
 import type { Config } from "tailwindcss"
 import animate from "tailwindcss-animate"
 import typography from "@tailwindcss/typography"
-import defaultTheme from "tailwindcss/defaultTheme"
 
 const config: Config = {
-  // 🎯 1. Content Scanned
+  // 🎯 1. Content Scanned: ครอบคลุมทุกเลเยอร์ของ AEM DEVWEB
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -2496,15 +2693,15 @@ const config: Config = {
     "./content/**/*.{js,ts,md,mdx}",
   ],
 
-  // 🌓 Dark Mode Strategy
+  // 🌓 Dark Mode: บังคับใช้ Class เพื่อความแม่นยำของ Midnight Theme
   darkMode: "class",
 
   theme: {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1.5rem",
-        sm: "2rem",
+        DEFAULT: "1rem",
+        md: "2rem",
         lg: "4rem",
       },
       screens: {
@@ -2512,16 +2709,15 @@ const config: Config = {
       },
     },
     extend: {
-      // 🔤 2. Fonts: เน้นความโปร่งและอ่านง่าย (Anuphan = Modern Friendly)
+      // 🔤 2. Fonts: เชื่อมโยงกับ Next.js Fonts
       fontFamily: {
-        sans: ["var(--font-prompt)", ...defaultTheme.fontFamily.sans],
-        kanit: ["var(--font-kanit)"],
+        sans: ["var(--font-prompt)", "ui-sans-serif", "system-ui"],
         prompt: ["var(--font-prompt)"],
         anuphan: ["var(--font-anuphan)"],
-        mono: ["var(--font-jetbrains)", ...defaultTheme.fontFamily.mono],
+        mono: ["var(--font-jetbrains)", "ui-monospace"],
       },
 
-      // 🎨 3. Luminous Color Palette: ฉีกความหมองด้วยโทน Midnight & Aurora
+      // 🎨 3. Luminous Palette: ดึงค่าจาก CSS Variables ใน globals.css
       colors: {
         border: "var(--border)",
         input: "var(--input)",
@@ -2529,102 +2725,41 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
 
-        // Brand Colors: ใช้ OKLCH เพื่อความสว่างที่แม่นยำ
         primary: {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
         },
 
-        // Aurora Accent: สีที่ช่วยให้เว็บดู "สว่างจากข้างใน"
+        // Aurora Accent (Static fallback for components)
         aurora: {
-          cyan: "oklch(0.78 0.12 200)", // ความสดใสของท้องฟ้า
-          violet: "oklch(0.65 0.18 280)", // ความพรีเมียมของยามค่ำคืน
-          emerald: "oklch(0.82 0.18 155)", // เขียวสว่าง (Electric Emerald)
-          white: "oklch(0.98 0.01 240)", // ขาวนวลลดความกระด้าง
-        },
-
-        secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
-        },
-        muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
-        },
-        accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
-        },
-        card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          cyan: "var(--aurora-cyan)",
+          violet: "var(--aurora-violet)",
+          emerald: "var(--aurora-emerald)",
         },
       },
 
-      // 🔘 4. Weightless Radius: โค้งมนระดับ Super-ellipse เพื่อความเป็นมิตรสูงสุด
+      // 🔘 4. Radius Expansion
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        xl: "1.25rem",
-        "2xl": "2rem",
-        "3xl": "3rem",
-        "4xl": "4.5rem",
+        "3xl": "2.75rem",
+        "4xl": "3.5rem",
       },
 
-      // 🎬 5. Keyframes: เพิ่ม Aurora Movement ให้เว็บดูมีชีวิต
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        // การลอยแบบนุ่มนวล (Human-like movement)
-        float: {
-          "0%, 100%": { transform: "translateY(0) scale(1)" },
-          "50%": { transform: "translateY(-20px) scale(1.02)" },
-        },
-        // แสงออโรร่าเต้นระบำพื้นหลัง
-        aurora: {
-          "0%, 100%": { opacity: "0.3", transform: "translate(0, 0) scale(1)" },
-          "33%": {
-            opacity: "0.5",
-            transform: "translate(30px, -50px) scale(1.1)",
-          },
-          "66%": {
-            opacity: "0.4",
-            transform: "translate(-20px, 20px) scale(0.9)",
-          },
-        },
-        "fade-in-up": {
-          "0%": { opacity: "0", transform: "translateY(40px) scale(0.95)" },
-          "100%": { opacity: "1", transform: "translateY(0) scale(1)" },
-        },
-      },
-
-      // ⚡ 6. Animations
+      // ⚡ 5. Essential Animations: ซิงค์กับ CSS Keyframes
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 6s ease-in-out infinite",
         aurora: "aurora 15s ease-in-out infinite",
-        "fade-in-up": "fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        marquee: "marquee 40s linear infinite",
       },
 
-      // 🪄 7. Luminous Utilities
-      backgroundImage: {
-        "luminous-gradient":
-          "linear-gradient(135deg, oklch(0.78 0.12 200) 0%, oklch(0.82 0.18 155) 100%)",
-        "midnight-mesh":
-          "radial-gradient(at 0% 0%, oklch(0.15 0.05 260) 0%, transparent 50%), radial-gradient(at 100% 100%, oklch(0.12 0.03 280) 0%, transparent 50%)",
-      },
+      // 🪄 6. Custom Luminous Shadows
       boxShadow: {
-        // เงาที่ดูเบาและฟุ้ง (Soft Ambient Shadow)
-        luminous: "0 20px 80px -15px rgba(0, 0, 0, 0.3)",
-        "aurora-glow": "0 0 60px -10px oklch(0.78 0.12 200 / 0.3)",
+        luminous: "var(--shadow-luminous)",
+        "aurora-glow": "var(--shadow-aurora-glow)",
       },
     },
   },
@@ -2634,11 +2769,9 @@ const config: Config = {
 
 export default config
 ```
-
 ---
 
 #### 🔍 Path: `package.json`
-
 ```json
 {
   "name": "aemdevweb.com",
@@ -2710,11 +2843,9 @@ export default config
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `types/index.ts`
-
 ```typescript
 /** @format */
 
@@ -2890,34 +3021,36 @@ export interface TestimonialItem {
   company?: string
 }
 ```
-
 ---
 
 #### 🔍 Path: `next.config.ts`
-
 ```typescript
 /** @format */
 import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
 
 /**
- * 🚀 Next.js Config: Luminous Performance Edition (Tuned for 90+ Score)
- * ปรับแต่งเพื่อลด TBT และ JavaScript Execution Time ตามรายงาน PageSpeed
+ * 🚀 Next.js Config: Luminous Performance Edition (Ultimate Tuned)
+ * ปรับจูนระดับ Deep-Dive เพื่อ PageSpeed 100/100
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  // ✅ 1. เปิดระบบบีบอัดไฟล์ระดับสูงเพื่อลดขนาดการโอนถ่ายข้อมูล
+  // 🔒 Security & Size: ปิดการแสดง Header ว่าใช้ Next.js (ประหยัด Bytes + ปลอดภัย)
+  poweredByHeader: false,
+
+  // ✅ 1. Compression: บีบอัดไฟล์สูงสุด (Gzip/Brotli)
   compress: true,
 
-  // 📄 รองรับไฟล์หลากหลายนามสกุลสำหรับระบบ Content & Sales Hub
+  // 📄 Extensions: รองรับ MDX เต็มรูปแบบ
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  // 🖼️ Image Optimization: ใช้ AVIF เป็น Priority เพื่อขนาดไฟล์ที่เล็กกว่า WebP อีก 20%
+  // 🖼️ Image Optimization: เน้น AVIF และลดขนาด Device Sizes ที่ไม่จำเป็น
   images: {
     formats: ["image/avif", "image/webp"],
+    // ⚠️ Tips: ตัดขนาดที่ไม่ได้ใช้ออก เพื่อลดภาระ Server ในการ Generate รูป
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    imageSizes: [16, 32, 48, 64, 96], // ตัด 128+ ออกถ้าใช้ deviceSizes คุมแล้ว
     remotePatterns: [
       {
         protocol: "https",
@@ -2932,22 +3065,41 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    // ⚡ Cache: เพิ่มเวลา Cache รูปภาพให้นานขึ้น (ลดการโหลดซ้ำ)
+    minimumCacheTTL: 60,
   },
 
-  // ⚡ Experimental Features: ขีดสุดของความเร็วระดับ Unlink-TH
+  // 🛠️ Compiler Options: หัวใจสำคัญของการลด TBT
+  compiler: {
+    // 🚀 Remove Console: ลบ console.log ใน Production เพื่อคืน Main Thread ให้ Browser
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? {
+            exclude: ["error"], // เก็บ console.error ไว้ debug
+          }
+        : false,
+  },
+
+  // ⚡ Experimental Features: ขีดสุดของความเร็ว Next.js 15
   experimental: {
-    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX
-    // ✅ เพิ่มการ Optimize Package ที่ใช้ใน UI และ Animation ทั้งหมด
+    mdxRs: true, // 🦀 Rust Compiler สำหรับ MDX (Build ไวขึ้น 5x)
+
+    // 📦 Optimize Imports: Tree-shaking แบบละเอียด
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
       "sonner",
       "clsx",
       "tailwind-merge",
+      "date-fns", // ✅ เพิ่ม: มักใช้บ่อยและขนาดใหญ่
+      "lodash", // ✅ เพิ่ม: เผื่อมีการหลุดเข้ามา
+      "@radix-ui/react-icons", // ✅ เพิ่ม: ถ้ามีการใช้ Icons ของ Radix
     ],
+
+    // 🚀 Turbo: ถ้าใช้ Turbopack ใน dev ให้ config เพิ่มได้ที่นี่ (Optional)
   },
 
-  // 🛠️ Logging & Performance Monitoring
+  // 🛠️ Logging: ช่วย Debug ตอน Dev
   logging: {
     fetches: {
       fullUrl: true,
@@ -2962,16 +3114,16 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [],
     rehypePlugins: [],
+    // ⚡ Performance: บังคับใช้ Rust Compiler ในระดับ MDX Loader
+    // (Next.js 15 experimental.mdxRs จัดการให้แล้ว แต่ใส่ options ว่างไว้ตาม pattern)
   },
 })
 
 export default withMDX(nextConfig)
 ```
-
 ---
 
 #### 🔍 Path: `components.json`
-
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -2996,11 +3148,9 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/mdx.ts`
-
 ```typescript
 /** @format */
 import fs from "fs"
@@ -3072,19 +3222,14 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   return allPosts.find((post) => post.slug === slug) || null
 }
 ```
-
 ---
 
 #### 🔍 Path: `.env`
-
 ```text
-
 ```
-
 ---
 
 ## 📝 Summary
-
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

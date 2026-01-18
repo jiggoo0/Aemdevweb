@@ -9,7 +9,6 @@ import {
   Sparkles,
 } from "lucide-react"
 import { siteConfig } from "@/constants/site-config"
-import { cn } from "@/lib/utils"
 
 const steps = [
   {
@@ -37,7 +36,8 @@ const steps = [
 
 /**
  * 🛣️ WorkProcess Component: Luminous Server Edition (v.2026)
- * Optimized for PageSpeed 100. Uses native CSS-Driven animations.
+ * ออกแบบมาเพื่อความน่าเชื่อถือระดับมืออาชีพ และ PageSpeed 100
+ * ✅ Optimized: ใช้ Native CSS Animations แทน JavaScript Library เพื่อลดค่า TBT
  */
 export const WorkProcess = () => {
   return (
@@ -71,31 +71,20 @@ export const WorkProcess = () => {
           {steps.map((step, i) => (
             <div
               key={i}
-              className={cn(
-                "group animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards relative opacity-0 duration-1000",
-                step.delay
-              )}
+              className={`group animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards relative opacity-0 duration-1000 ${step.delay}`}
             >
-              {/* Connector Arrow (Desktop Only): CSS Float Animation */}
+              {/* Connector Arrow (Desktop Only) */}
               {i < steps.length - 1 && (
                 <div className="text-aurora-cyan/20 group-hover:text-aurora-cyan/50 absolute top-1/3 -right-10 z-20 hidden transition-all duration-500 lg:block">
                   <ArrowRight className="animate-float h-10 w-10" />
                 </div>
               )}
 
-              <div
-                className={cn(
-                  "glass-card flex flex-col items-center p-12 text-center transition-all duration-700",
-                  "hover:border-aurora-cyan/40 hover:shadow-luminous hover:-translate-y-4"
-                )}
-              >
+              <div className="glass-card flex flex-col items-center p-12 text-center transition-all duration-700 hover:border-aurora-cyan/40 hover:shadow-luminous hover:-translate-y-4">
                 {/* 🎨 Icon Holder with Glow Effect */}
                 <div className="relative mb-10">
                   <div
-                    className={cn(
-                      "shadow-luminous flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br text-white transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3",
-                      step.color
-                    )}
+                    className={`shadow-luminous flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br text-white transition-all duration-700 group-hover:scale-110 group-hover:-rotate-3 ${step.color}`}
                   >
                     <div className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
                       {step.icon}

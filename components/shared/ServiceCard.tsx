@@ -1,5 +1,4 @@
 /** @format */
-
 import React from "react"
 import Link from "next/link"
 import {
@@ -15,12 +14,15 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+/**
+ * 💎 ServiceCard Props Interface
+ */
 export interface ServiceCardProps {
   id?: string
   slug: string
   title: string
   description: string
-  iconName?: string
+  iconName?: "Rocket" | "ShieldCheck" | "Code2" | "Gauge" | "Zap"
   icon?: LucideIcon
   priceDisplay: string
   features: string[]
@@ -28,6 +30,9 @@ export interface ServiceCardProps {
   className?: string
 }
 
+/**
+ * 🗺️ Icon Mapping Dictionary
+ */
 const iconMap: Record<string, LucideIcon> = {
   Rocket,
   ShieldCheck,
@@ -38,8 +43,9 @@ const iconMap: Record<string, LucideIcon> = {
 }
 
 /**
- * 💎 ServiceCard: Luminous Server Edition
- * Optimized for PageSpeed 100. Native CSS-Driven transitions.
+ * 💎 ServiceCard: Luminous Server Edition (v.2026)
+ * ออกแบบมาเพื่อสร้างความน่าเชื่อถือและปิดการขายด้วย Visual ที่ทรงพลัง
+ * ✅ Optimized: PageSpeed 100 | CSS-Driven transitions
  */
 export const ServiceCard = ({
   slug,
@@ -52,6 +58,7 @@ export const ServiceCard = ({
   isFeatured = false,
   className,
 }: ServiceCardProps) => {
+  // เลือกใช้ Icon ตามลำดับความสำคัญ (Prop > Mapping > Default)
   const IconComponent =
     icon || (iconName ? iconMap[iconName] || iconMap.Default : iconMap.Default)
 
@@ -59,16 +66,17 @@ export const ServiceCard = ({
     <Link
       href={`/services/${slug}`}
       className={cn("group relative block h-full outline-none", className)}
+      aria-label={`ดูรายละเอียดบริการ ${title}`}
     >
-      {/* 🌌 Aurora Glow: เลเยอร์แสงพื้นหลังสำหรับแพ็กเกจแนะนำ */}
+      {/* 🌌 Aurora Glow Effect: แสดงผลเฉพาะแพ็กเกจแนะนำ (Featured) */}
       {isFeatured && (
-        <div className="from-aurora-cyan/20 via-aurora-emerald/20 to-aurora-violet/20 pointer-events-none absolute -inset-1 -z-10 rounded-[2.2rem] bg-gradient-to-r opacity-50 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
+        <div className="from-aurora-cyan/20 via-aurora-emerald/20 to-aurora-violet/20 pointer-events-none absolute -inset-1 -z-10 rounded-[2.25rem] bg-gradient-to-r opacity-50 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
       )}
 
-      {/* 🏷️ Luminous Featured Badge */}
+      {/* 🏷️ Luminous Popular Badge */}
       {isFeatured && (
         <div className="pointer-events-none absolute -top-4 left-1/2 z-20 -translate-x-1/2">
-          <span className="bg-aurora-emerald shadow-aurora-glow inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] font-black tracking-widest whitespace-nowrap text-slate-950 uppercase">
+          <span className="bg-aurora-emerald shadow-aurora-glow inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] font-black tracking-widest whitespace-nowrap text-slate-950 uppercase italic">
             <Sparkles className="h-3 w-3 animate-pulse" /> Popular Choice
           </span>
         </div>
@@ -78,8 +86,8 @@ export const ServiceCard = ({
         className={cn(
           "glass-card relative flex h-full flex-col overflow-hidden p-8 transition-all duration-700",
           isFeatured
-            ? "border-aurora-cyan/30 shadow-luminous bg-white/[0.08]"
-            : "hover:border-aurora-cyan/20 hover:shadow-luminous"
+            ? "border-aurora-cyan/40 shadow-luminous bg-white/[0.06]"
+            : "hover:border-aurora-cyan/30 hover:shadow-luminous"
         )}
       >
         {/* --- 1. Header: Luminous Icon & Price --- */}
@@ -96,27 +104,27 @@ export const ServiceCard = ({
           </div>
 
           <div className="text-right">
-            <p className="mb-1 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
+            <p className="font-prompt mb-1 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
               Starting at
             </p>
-            <p className="text-2xl font-black tracking-tighter text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+            <p className="font-prompt text-2xl font-black tracking-tighter text-white italic drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
               {priceDisplay}
             </p>
           </div>
         </div>
 
-        {/* --- 2. Body: Humanistic Typography --- */}
-        <h3 className="font-prompt group-hover:text-aurora-cyan mb-4 text-2xl leading-none font-black tracking-tight text-white uppercase transition-colors duration-500">
+        {/* --- 2. Body Content --- */}
+        <h3 className="font-prompt group-hover:text-aurora-cyan mb-4 text-2xl leading-none font-black tracking-tight text-white uppercase transition-colors duration-500 italic">
           {title}
         </h3>
 
-        <p className="font-anuphan mb-8 line-clamp-2 text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity duration-500 group-hover:opacity-100">
+        <p className="font-anuphan mb-8 line-clamp-2 text-base leading-relaxed font-medium text-slate-400 opacity-85 transition-opacity duration-500 group-hover:opacity-100">
           {description}
         </p>
 
         <div className="mb-8 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
 
-        {/* --- 3. Features Area --- */}
+        {/* --- 3. Features Checklist --- */}
         <ul className="mb-10 flex-1 space-y-4">
           {features?.slice(0, 4).map((feature, idx) => (
             <li
@@ -131,14 +139,14 @@ export const ServiceCard = ({
           ))}
         </ul>
 
-        {/* --- 4. Footer: Call to Action --- */}
+        {/* --- 4. Footer CTA --- */}
         <div className="mt-auto">
           <div
             className={cn(
-              "flex w-full items-center justify-center gap-3 rounded-2xl py-4 text-sm font-black tracking-widest uppercase transition-all duration-500",
+              "flex w-full items-center justify-center gap-3 rounded-2xl py-4 text-[11px] font-black tracking-[0.25em] uppercase transition-all duration-500",
               isFeatured
-                ? "bg-aurora-cyan shadow-aurora-glow text-slate-950 hover:scale-105 active:scale-95"
-                : "group-hover:bg-aurora-cyan group-hover:shadow-aurora-glow border border-white/5 bg-white/5 text-slate-300 group-hover:text-slate-950"
+                ? "bg-aurora-cyan shadow-aurora-glow text-slate-950 hover:scale-[1.03] active:scale-95"
+                : "group-hover:bg-aurora-cyan group-hover:shadow-aurora-glow border border-white/10 bg-white/5 text-slate-300 group-hover:text-slate-950"
             )}
           >
             View Solution

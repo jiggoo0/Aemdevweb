@@ -3,19 +3,19 @@
 
 import React from "react"
 import { Star, Quote, Sparkles } from "lucide-react"
-import { cn } from "@/lib/utils"
-// ตรวจสอบให้แน่ใจว่าได้ทำการ Export testimonials จาก constants แล้ว
+// นำเข้าข้อมูลรีวิวจากระบบ Constants
 import { testimonials } from "@/constants/testimonials/testimonials"
 
 /**
  * ⭐ Testimonials Component: Luminous Edition (v.2026)
  * จัดการส่วนรีวิวลูกค้าให้ดูพรีเมียมและโหลดไวด้วยระบบ Modern Masonry
+ * ✅ Optimized: ใช้ CSS Columns แทน JS Masonry เพื่อประสิทธิภาพ PageSpeed สูงสุด
  */
 export const Testimonials = () => {
   return (
     <section className="bg-background relative overflow-hidden py-32">
-      {/* 🌌 Aurora Ambient Background: แสงฟุ้งจางๆ เลเยอร์หลังสุด */}
-      <div className="aurora-bg top-1/2 left-1/2 -z-10 h-[700px] w-[1000px] -translate-x-1/2 -translate-y-1/2 opacity-[0.12]" />
+      {/* 🌌 Aurora Ambient Background: เลเยอร์แสงฟุ้งจางๆ (-z-10) */}
+      <div className="aurora-bg top-1/2 left-1/2 -z-10 h-[700px] w-[1000px] -translate-x-1/2 -translate-y-1/2 opacity-[0.12] blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Header Section: Luminous Typography */}
@@ -28,22 +28,18 @@ export const Testimonials = () => {
             <span className="text-aurora-emerald">Industry Leaders</span>
           </h2>
           <p className="font-anuphan text-xl leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-            ความภูมิใจของเรา
-            คือการได้เห็นธุรกิจของคุณเติบโตด้วยเทคโนโลยีที่เหนือกว่า
+            ความภูมิใจของเรา คือการได้เห็นธุรกิจของคุณเติบโตด้วยเทคโนโลยีที่เหนือกว่า
           </p>
         </div>
 
-        {/* Testimonials Grid: Optimized Modern Masonry */}
+        {/* Testimonials Grid: Optimized Modern Masonry (Native CSS) */}
         <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className={cn(
-                "glass-card group relative break-inside-avoid p-10 transition-all duration-700",
-                "hover:shadow-luminous hover:border-aurora-cyan/30 hover:-translate-y-3"
-              )}
+              className="glass-card group relative break-inside-avoid p-10 transition-all duration-700 hover:shadow-luminous hover:border-aurora-cyan/30 hover:-translate-y-3"
             >
-              {/* Decorative Quote Icon: Aurora Accent */}
+              {/* Decorative Quote Icon */}
               <Quote className="text-aurora-cyan/5 group-hover:text-aurora-cyan/15 absolute top-10 right-10 h-12 w-12 transition-colors duration-500" />
 
               {/* Stars Score: Luminous Emerald Effect */}

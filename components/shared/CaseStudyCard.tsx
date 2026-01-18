@@ -1,5 +1,4 @@
 /** @format */
-
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -13,12 +12,13 @@ interface CaseStudyCardProps {
   image: string
   stats: { label: string; value: string }
   themeColor?: "aurora-cyan" | "aurora-violet" | "aurora-emerald"
-  priority?: boolean // ✅ เพิ่มพร็อพเพื่อคุมการโหลดรูป LCP
+  priority?: boolean // ✅ สำหรับควบคุม Image Priority (LCP Engine)
 }
 
 /**
- * 🏆 CaseStudyCard: Luminous Showcase Server Edition
+ * 🏆 CaseStudyCard: Luminous Showcase Engine (v.2026)
  * Architecture: Next.js 15.x + Tailwind CSS 4.0
+ * Concept: High-Conversion Visual Trust
  */
 export function CaseStudyCard({
   title,
@@ -29,28 +29,29 @@ export function CaseStudyCard({
   themeColor = "aurora-cyan",
   priority = false,
 }: CaseStudyCardProps) {
-  // 🎨 Theme Mapping Dictionary เพื่อความคลีนของโค้ด
+  
+  // 🎨 Theme Mapping: ซิงค์กับระบบสี OKLCH ใน globals.css
   const themes = {
     "aurora-cyan": {
-      border: "hover:border-aurora-cyan/30",
+      border: "hover:border-aurora-cyan/40",
       text: "text-aurora-cyan",
       hoverTitle: "group-hover:text-aurora-cyan",
       bg: "bg-aurora-cyan",
-      via: "via-aurora-cyan/40",
+      glow: "group-hover:shadow-aurora-glow",
     },
     "aurora-violet": {
-      border: "hover:border-aurora-violet/30",
+      border: "hover:border-aurora-violet/40",
       text: "text-aurora-violet",
       hoverTitle: "group-hover:text-aurora-violet",
       bg: "bg-aurora-violet",
-      via: "via-aurora-violet/40",
+      glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.68_0.15_280_/_0.25)]",
     },
     "aurora-emerald": {
-      border: "hover:border-aurora-emerald/30",
+      border: "hover:border-aurora-emerald/40",
       text: "text-aurora-emerald",
       hoverTitle: "group-hover:text-aurora-emerald",
       bg: "bg-aurora-emerald",
-      via: "via-aurora-emerald/40",
+      glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.84_0.15_155_/_0.25)]",
     },
   }
 
@@ -64,29 +65,29 @@ export function CaseStudyCard({
         currentTheme.border
       )}
     >
-      {/* 🖼️ Premium Image Layer */}
+      {/* 🖼️ Premium Image Layer (LCP Optimized) */}
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-90"
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={priority}
         />
-        {/* Luminous Overlay Shade: ปรับให้เข้มขึ้นที่ฐานเพื่อให้ตัวหนังสืออ่านง่าย */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90" />
+        {/* Luminous Overlay: การไล่เฉดสีเพื่อให้ข้อความโดดเด่น */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-95" />
       </div>
 
       {/* ✨ Luminous Info Overlay */}
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10">
         <div className="flex items-end justify-between gap-6">
-          <div className="max-w-[70%] space-y-4">
+          <div className="max-w-[75%] space-y-4">
             <span
               className={cn(
-                "shadow-aurora-glow inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-colors duration-500",
+                "inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-all duration-500 shadow-luminous",
                 currentTheme.text,
-                "group-hover:text-white"
+                "group-hover:text-white group-hover:border-white/20"
               )}
             >
               <Sparkles className="h-3 w-3 animate-pulse" />
@@ -94,7 +95,7 @@ export function CaseStudyCard({
             </span>
             <h3
               className={cn(
-                "font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase transition-colors duration-500 md:text-4xl",
+                "font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase transition-colors duration-500 md:text-4xl italic",
                 currentTheme.hoverTitle
               )}
             >
@@ -102,13 +103,16 @@ export function CaseStudyCard({
             </h3>
           </div>
 
-          {/* ⚡ Performance Badge */}
-          <div className="shadow-luminous group-hover:shadow-aurora-glow min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10">
+          {/* ⚡ Performance Badge (Trust Signal) */}
+          <div className={cn(
+            "min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10",
+            currentTheme.glow
+          )}>
             <p className="font-anuphan mb-1.5 flex items-center justify-center gap-1.5 text-[9px] font-black tracking-widest text-slate-400 uppercase">
               <Zap className="text-aurora-emerald fill-aurora-emerald h-3 w-3 animate-pulse" />{" "}
               {stats.label}
             </p>
-            <p className="text-2xl font-black tracking-tighter text-white">
+            <p className="font-prompt text-2xl font-black tracking-tighter text-white italic">
               {stats.value}
             </p>
           </div>
@@ -125,11 +129,11 @@ export function CaseStudyCard({
         <ArrowUpRight className="h-6 w-6 stroke-[3px]" />
       </div>
 
-      {/* Subtle Bottom Glow Line */}
+      {/* Bottom Glow Line Engine */}
       <div
         className={cn(
-          "absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100",
-          currentTheme.via
+          "absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100",
+          currentTheme.bg
         )}
       />
     </Link>

@@ -1,7 +1,5 @@
 /** @format */
-
 import React from "react"
-import { cn } from "@/lib/utils"
 import {
   Briefcase,
   Building2,
@@ -19,8 +17,9 @@ interface Brand {
 }
 
 /**
- * 🛡️ TrustBadge: Luminous Server-Optimized Edition
- * ปรับปรุงเพื่อความเร็วระดับปีศาจ (PageSpeed 100) โดยใช้ Native CSS Animations
+ * 🛡️ TrustBadge: Luminous Server-Optimized Edition (v.2026)
+ * ออกแบบมาเพื่อสร้างความน่าเชื่อถือทันทีที่โหลดหน้าแรก
+ * ✅ Optimized: PageSpeed 100 | CSS-Driven transitions
  */
 export function TrustBadge({ className }: { className?: string }) {
   const brands: Brand[] = [
@@ -34,14 +33,11 @@ export function TrustBadge({ className }: { className?: string }) {
 
   return (
     <section
-      className={cn(
-        "bg-background relative w-full overflow-hidden border-y border-white/5 py-16",
-        className
-      )}
+      className={`bg-background relative w-full overflow-hidden border-y border-white/5 py-16 ${className || ""}`}
       aria-label="พาร์ทเนอร์ที่ไว้วางใจ"
     >
-      {/* 🌌 Aurora Ambient Light: เลเยอร์แสงหลังสุด (z-index -10) */}
-      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
+      {/* 🌌 Aurora Ambient Light: เลเยอร์แสงหลังสุด (-z-10) */}
+      <div className="aurora-bg pointer-events-none top-1/2 left-1/2 -z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.05] blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-4">
         {/* Header Label: Luminous Typography */}
@@ -60,17 +56,11 @@ export function TrustBadge({ className }: { className?: string }) {
           {brands.map((brand, index) => {
             const Icon = brand.icon
 
-            // สร้าง Delay สำหรับแต่ละไอเทมแบบ CSS Variable
-            const delayStyle = { animationDelay: `${index * 100}ms` }
-
             return (
               <div
                 key={index}
-                className={cn(
-                  "group flex cursor-default flex-col items-center justify-center gap-4 transition-all duration-500",
-                  "animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards opacity-0"
-                )}
-                style={delayStyle}
+                className="group animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards flex cursor-default flex-col items-center justify-center gap-4 opacity-0 transition-all duration-500"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative">
                   {/* High-Performance Glow on Hover */}

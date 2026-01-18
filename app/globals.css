@@ -4,6 +4,7 @@
 
 /* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH
    Focus: Stability, Readability, and High-End Tech Aesthetics
+   Tech Stack: Tailwind CSS v4.0 + OKLCH Color Space
 */
 
 @theme {
@@ -14,32 +15,23 @@
 
   /* --- 2. Animations (Smooth & Lightweight) --- */
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0) rotate(12deg);
-    }
-    50% {
-      transform: translateY(-15px) rotate(14deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(12deg); }
+    50% { transform: translateY(-15px) rotate(14deg); }
   }
   --animate-float: float 6s ease-in-out infinite;
 
   @keyframes aurora {
-    0%,
-    100% {
-      opacity: 0.3;
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      opacity: 0.4;
-      transform: translate(20px, -30px) scale(1.05);
-    }
-    66% {
-      opacity: 0.35;
-      transform: translate(-15px, 15px) scale(0.95);
-    }
+    0%, 100% { opacity: 0.3; transform: translate(0, 0) scale(1); }
+    33% { opacity: 0.4; transform: translate(20px, -30px) scale(1.05); }
+    66% { opacity: 0.35; transform: translate(-15px, 15px) scale(0.95); }
   }
   --animate-aurora: aurora 15s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 2.5rem)); } /* gap-10 = 2.5rem */
+  }
+  --animate-marquee: marquee 50s linear infinite;
 
   /* --- 3. Colors Mapping (The "Nailing" Colors) --- */
   --color-background: var(--background);
@@ -68,6 +60,11 @@
     --foreground: oklch(0.2 0.02 240);
     --primary: oklch(0.6 0.16 160);
     --border: oklch(0.92 0.01 240);
+    
+    /* Fallback Aurora Colors for Light Mode */
+    --aurora-cyan: oklch(0.65 0.15 200);
+    --aurora-violet: oklch(0.55 0.20 280);
+    --aurora-emerald: oklch(0.70 0.15 155);
   }
 
   .dark {
@@ -78,13 +75,13 @@
     --primary: oklch(0.78 0.18 155);
     --border: oklch(0.25 0.03 260 / 0.5);
 
-    /* Aurora Colors */
+    /* Aurora Colors: High Gamut Neon */
     --aurora-cyan: oklch(0.75 0.12 200);
     --aurora-violet: oklch(0.65 0.18 280);
     --aurora-emerald: oklch(0.82 0.18 155);
   }
 
-  /* ✅ บังคับใช้ตัวแปรสีที่ตัว Body และกำหนดฟอนต์หลัก */
+  /* ✅ Global Reset & Font Smoothing */
   * {
     border-color: var(--border);
   }
@@ -94,7 +91,7 @@
     font-family: var(--font-prompt);
     text-rendering: optimizeLegibility;
 
-    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% */
+    /* ระบบแสง Ambient พื้นหลังแบบจางๆ 3% (Noise-free) */
     background-image:
       radial-gradient(
         circle at 2% 2%,
@@ -108,18 +105,16 @@
       );
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-black tracking-tighter uppercase;
   }
 
+  p, li, span {
+    font-family: var(--font-anuphan);
+  }
+  
   p {
     @apply leading-relaxed font-medium;
-    font-family: var(--font-anuphan);
   }
 }
 

@@ -25,6 +25,7 @@ interface FooterProps {
 /**
  * 🌑 Footer: Luminous Midnight Server Edition (v.2026)
  * ปิดท้ายหน้าเว็บด้วยความพรีเมียมและความเร็วระดับ 100 PageSpeed
+ * ✅ Optimized: SEO Ready | Next.js Server Component | Zero Unused Vars
  */
 export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear()
@@ -37,22 +38,22 @@ export function Footer({ className }: FooterProps) {
       )}
       aria-label="Site Footer"
     >
-      {/* 🌌 Aurora Ambient: เลเยอร์แสงหลังสุด (z-index ต่ำสุด) */}
-      <div className="aurora-bg pointer-events-none -bottom-20 left-1/2 -z-10 h-64 w-full -translate-x-1/2 opacity-[0.05]" />
+      {/* 🌌 Aurora Ambient: เลเยอร์แสงหลังสุดเพื่อสร้างมิติความลึก (-z-10) */}
+      <div className="aurora-bg pointer-events-none -bottom-20 left-1/2 -z-10 h-64 w-full -translate-x-1/2 opacity-[0.05] blur-[100px]" />
 
       <div className="relative z-10 container mx-auto px-4">
-        {/* Main Grid: Architecture Tree */}
+        {/* Main Grid: Information Architecture */}
         <div className="mb-20 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
-          {/* 1. Brand & Value Section */}
+          
+          {/* 1. Brand Identity & Value Proposition */}
           <div className="space-y-8">
             <AemBrandBadge withText={true} className="origin-left scale-110" />
-            <p className="font-anuphan max-w-xs text-base leading-relaxed text-slate-400 opacity-80">
-              {siteConfig.description ||
-                "High-Conversion Web Factory for SMEs. เปลี่ยนเว็บไซต์ให้เป็นเครื่องจักรผลิตยอดขาย"}
+            <p className="font-anuphan max-w-xs text-base leading-relaxed text-slate-400 opacity-85">
+              {siteConfig.description}
             </p>
             <div className="flex gap-4">
               <SocialIcon
-                href={siteConfig.links.facebook || "#"}
+                href={siteConfig.links.facebook}
                 icon={Facebook}
                 label="Facebook"
                 colorClass="hover:bg-[#1877F2] hover:border-white/20"
@@ -64,7 +65,7 @@ export function Footer({ className }: FooterProps) {
                 colorClass="hover:bg-[#06C755] hover:border-white/20"
               />
               <SocialIcon
-                href={siteConfig.links.github || "#"}
+                href={siteConfig.links.github}
                 icon={Github}
                 label="GitHub"
                 colorClass="hover:bg-white/10 hover:border-white/20"
@@ -72,9 +73,9 @@ export function Footer({ className }: FooterProps) {
             </div>
           </div>
 
-          {/* 2. Solutions Area */}
+          {/* 2. Solutions Area (Service Links) */}
           <div>
-            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white">
+            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white italic">
               <span className="bg-aurora-cyan h-1 w-4 rounded-full" />
               SOLUTIONS
             </h4>
@@ -90,7 +91,7 @@ export function Footer({ className }: FooterProps) {
                       {item.name}
                     </span>
                     {item.badge && (
-                      <span className="bg-aurora-cyan/10 text-aurora-cyan border-aurora-cyan/20 rounded-full border px-2 py-0.5 text-[9px] font-black tracking-widest uppercase">
+                      <span className="bg-aurora-cyan/10 text-aurora-cyan border-aurora-cyan/20 rounded-full border px-2 py-0.5 text-[9px] font-black tracking-widest uppercase italic">
                         {item.badge}
                       </span>
                     )}
@@ -100,9 +101,9 @@ export function Footer({ className }: FooterProps) {
             </ul>
           </div>
 
-          {/* 3. Knowledge & Company */}
+          {/* 3. Knowledge & Company (Internal Links) */}
           <div>
-            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white">
+            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white italic">
               <span className="bg-aurora-violet h-1 w-4 rounded-full" />
               COMPANY
             </h4>
@@ -126,9 +127,9 @@ export function Footer({ className }: FooterProps) {
             </ul>
           </div>
 
-          {/* 4. Support & Direct Contact */}
+          {/* 4. Support & Direct Contact (Conversion Point) */}
           <div>
-            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white">
+            <h4 className="font-prompt mb-8 flex items-center gap-2 text-lg font-black text-white italic">
               <span className="bg-aurora-emerald h-1 w-4 rounded-full" />
               SUPPORT
             </h4>
@@ -146,7 +147,7 @@ export function Footer({ className }: FooterProps) {
               <ContactItem icon={MapPin} text={siteConfig.contact.address} />
 
               <li className="pt-4">
-                <div className="glass-card hover:border-aurora-cyan/30 group shadow-luminous cursor-default border-white/5 p-5 transition-all duration-500">
+                <div className="glass-card hover:border-aurora-cyan/40 group shadow-luminous cursor-default border-white/5 p-5 transition-all duration-500">
                   <p className="group-hover:text-aurora-cyan mb-2 flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase transition-colors">
                     <Sparkles className="h-3 w-3 animate-pulse" /> Direct Line
                   </p>
@@ -159,11 +160,11 @@ export function Footer({ className }: FooterProps) {
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Legal */}
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-10 text-[11px] font-black tracking-[0.2em] text-slate-600 uppercase md:flex-row">
+        {/* Bottom Bar: Copyright & Legal Compliance */}
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-10 text-[10px] font-black tracking-[0.25em] text-slate-600 uppercase md:flex-row">
           <p className="text-center md:text-left">
-            © {currentYear} {siteConfig.companyName}. Crafted by{" "}
-            <span className="text-slate-400">Luminous Tech Engine</span>
+            © {currentYear} {siteConfig.companyName}. <br className="md:hidden" />
+            Crafted with Precision by <span className="text-slate-400 italic">Luminous Tech Engine</span>
           </p>
 
           <div className="flex gap-8">
@@ -192,7 +193,7 @@ export function Footer({ className }: FooterProps) {
   )
 }
 
-// 🧩 Footer Sub-components
+// --- 🧩 Footer Sub-components ---
 
 interface SocialIconProps {
   href: string
@@ -230,7 +231,7 @@ function ContactItem({ icon: Icon, text, href }: ContactItemProps) {
       <div className="text-aurora-cyan group-hover:bg-aurora-cyan shadow-luminous flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/5 bg-white/5 transition-all duration-500 group-hover:text-slate-950">
         <Icon className="h-4 w-4" />
       </div>
-      <span className="font-anuphan text-sm leading-relaxed font-medium opacity-70 transition-colors group-hover:text-white group-hover:opacity-100 md:text-base">
+      <span className="font-anuphan text-sm leading-relaxed font-medium opacity-75 transition-colors group-hover:text-white group-hover:opacity-100 md:text-base">
         {text}
       </span>
     </>
