@@ -1,105 +1,210 @@
 /** @format */
+
 "use client"
 
-import React from "react"
-import Link from "next/link"
-import { MessageCircle, ArrowRight, Sparkles } from "lucide-react"
+import React, { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  MessageCircle,
+  Send,
+  CheckCircle2,
+  Loader2,
+  Sparkles,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
 
+// 🛡️ Schema สำหรับการคัดกรองลูกค้า (เน้นภาษาที่เป็นกันเอง)
+const formSchema = z.object({
+  name: z.string().min(2, "ขอชื่อเล่นหรือชื่อบริษัทเพื่อความสะดวกในการคุยครับ"),
+  businessType: z.string().min(1, "เลือกประเภทธุรกิจให้เอ็มนิดนึงครับ"),
+  requirement: z
+    .string()
+    .min(5, "บอกสิ่งที่ต้องการคร่าวๆ เพื่อให้เอ็มเตรียมข้อมูลรอคุยครับ"),
+  budget: z.string().optional(),
+})
+
+type FormData = z.infer<typeof formSchema>
+
 interface LineLeadFormProps {
-  variant?: "button" | "card" | "minimal"
+  variant?: "inline" | "button"
   label?: string
   className?: string
-  showIcon?: boolean
 }
 
-/**
- * 🟢 LineLeadForm: High-Conversion Closing Engine
- * ตัวแปรสำคัญที่ใช้ปิดการขายผ่าน Line OA
- * ✅ Optimized: ใช้ Next/Link และเพิ่ม Micro-interactions เพื่อ CTR สูงสุด
- */
-export function LineLeadForm({
-  variant = "button",
-  label = "ปรึกษาโปรเจกต์ฟรี",
+export const LineLeadForm = ({
+  variant = "inline",
+  label = "ส่งข้อมูลให้ผมประเมินงาน",
   className,
-  showIcon = true,
-}: LineLeadFormProps) {
-  // 🔗 URL สำหรับปิดการขาย (Fallback to '#' if undefined)
-  const lineUrl = siteConfig.links.line || "#"
+}: LineLeadFormProps) => {
+  const [isPending, setIsPending] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
-  // 1. Minimal Variant (Text Link)
-  if (variant === "minimal") {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+  })
+
+  const onSubmit = async (data: FormData) => {
+    setIsPending(true)
+
+    // 🧬 จำลองการส่งข้อมูล (ตรงนี้คุณสามารถยิง API หรือ Webhook เข้า LINE Notify ได้ในอนาคต)
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    // 🚀 สร้างข้อความเพื่อส่งเข้า LINE OA โดยตรง
+    const message = `สวัสดีครับนายเอ็มซ่ามากส์ ผมชื่อ ${data.name} ทำธุรกิจ ${data.businessType} สนใจเรื่อง: ${data.requirement} (งบประมาณเบื้องต้น: ${data.budget || "ยังไม่ได้ระบุ"})`
+    const lineUrl = `https://line.me/R/oaMessage/${siteConfig.links.lineId}/?${encodeURIComponent(message)}`
+
+    setIsPending(false)
+    setIsSuccess(true)
+
+    // เปิดหน้า LINE ทันที
+    window.open(lineUrl, "_blank")
+
+    setTimeout(() => {
+      setIsSuccess(false)
+      reset()
+    }, 3000)
+  }
+
+  // --- Variant สำหรับแสดงผลเป็นปุ่มกดทักเลย ---
+  if (variant === "button") {
     return (
-      <Link
-        href={lineUrl}
+      <a
+        href={siteConfig.links.line}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "group inline-flex items-center gap-2 text-sm font-bold text-slate-400 transition-colors hover:text-white",
+          "group flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-12 py-6 text-lg font-black tracking-widest text-slate-950 transition-all hover:scale-105 hover:shadow-2xl active:scale-95",
           className
         )}
       >
-        <span className="decoration-aurora-cyan/50 decoration-2 underline-offset-4 group-hover:underline">
-          {label}
-        </span>
-        <ArrowRight className="text-aurora-cyan h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </Link>
+        <MessageCircle className="h-6 w-6 fill-slate-950" />
+        {label}
+        <Sparkles className="h-5 w-5 animate-pulse text-white" />
+      </a>
     )
   }
 
-  // 2. Card Variant (Sidebar / Section Insert)
-  if (variant === "card") {
-    return (
-      <div
-        className={cn(
-          "glass-card group hover:border-aurora-emerald/30 relative overflow-hidden p-8 text-center transition-all duration-500 hover:shadow-luminous",
-          className
-        )}
-      >
-        <div className="bg-aurora-emerald/10 absolute -top-10 -right-10 h-32 w-32 blur-3xl transition-opacity group-hover:opacity-100" />
-        <div className="relative z-10">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 shadow-inner">
-            <MessageCircle className="text-aurora-emerald h-7 w-7" />
-          </div>
-          <h3 className="font-prompt mb-2 text-xl font-black text-white uppercase italic">
-            พร้อมเริ่มโปรเจกต์หรือยัง?
-          </h3>
-          <p className="font-anuphan mb-6 text-sm font-medium text-slate-400">
-            คุยโจทย์ธุรกิจกับพี่เอ็มได้โดยตรง พร้อมประเมินราคาเบื้องต้นทันที
-          </p>
-          <Link
-            href={lineUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-luminous flex w-full items-center justify-center gap-2 shadow-lg"
-          >
-            {label} <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    )
-  }
-
-  // 3. Default: Main CTA Button
+  // --- Variant สำหรับแสดงเป็นฟอร์มข้อมูล (Inline Form) ---
   return (
-    <Link
-      href={lineUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "btn-luminous shadow-aurora-glow group relative inline-flex h-14 items-center justify-center gap-3 overflow-hidden px-8 text-base font-black tracking-wider text-white transition-all duration-300 hover:scale-105 active:scale-95",
-        className
-      )}
-    >
-      {/* Shine Effect Animation */}
-      <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover:animate-shine" />
+    <div className={cn("relative mx-auto w-full", className)}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        className="overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-2xl md:p-12"
+      >
+        <AnimatePresence mode="wait">
+          {!isSuccess ? (
+            <motion.form
+              key="form"
+              onSubmit={handleSubmit(onSubmit)}
+              className="space-y-6"
+              exit={{ opacity: 0, scale: 0.95 }}
+            >
+              <div className="text-center">
+                <h3 className="font-prompt text-2xl font-black text-slate-900">
+                  บอกโปรเจกต์ของคุณ
+                </h3>
+                <p className="font-anuphan mt-2 text-sm font-bold text-slate-400">
+                  ส่งข้อมูลเบื้องต้น แล้วคุยกับผมต่อทาง LINE ได้เลยครับ
+                </p>
+              </div>
 
-      {showIcon && (
-        <MessageCircle className="h-5 w-5 fill-current transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
-      )}
-      <span className="relative uppercase">{label}</span>
-      <Sparkles className="text-aurora-cyan h-4 w-4 animate-pulse opacity-70" />
-    </Link>
+              <div className="space-y-4">
+                {/* ช่องใส่ชื่อ */}
+                <div>
+                  <input
+                    {...register("name")}
+                    placeholder="ชื่อของคุณ หรือ ชื่อบริษัท"
+                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                  />
+                  {errors.name && (
+                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* เลือกประเภทธุรกิจ */}
+                <div>
+                  <select
+                    {...register("businessType")}
+                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                  >
+                    <option value="">เลือกประเภทธุรกิจของคุณ</option>
+                    <option value="SME / ร้านค้าออนไลน์">
+                      SME / ร้านค้าออนไลน์
+                    </option>
+                    <option value="โรงงานอุตสาหกรรม">โรงงานอุตสาหกรรม</option>
+                    <option value="บริษัท / หจก.">บริษัท / หจก.</option>
+                    <option value="อื่นๆ">อื่นๆ</option>
+                  </select>
+                  {errors.businessType && (
+                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                      {errors.businessType.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* อธิบายความต้องการ */}
+                <div>
+                  <textarea
+                    {...register("requirement")}
+                    placeholder="เล่าให้ผมฟังคร่าวๆ ว่าอยากได้เว็บแบบไหนครับ? (เช่น เว็บโรงงาน 2 ภาษา, เซลล์เพจยิงแอด)"
+                    rows={3}
+                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                  />
+                  {errors.requirement && (
+                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                      {errors.requirement.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isPending}
+                className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-slate-950 py-5 text-base font-black tracking-widest text-white transition-all hover:bg-emerald-500 hover:text-slate-950 active:scale-95 disabled:opacity-50"
+              >
+                {isPending ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    {label}
+                  </>
+                )}
+              </button>
+            </motion.form>
+          ) : (
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center py-10 text-center"
+            >
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100">
+                <CheckCircle2 className="h-10 w-10 text-emerald-500" />
+              </div>
+              <h3 className="font-prompt text-2xl font-black text-slate-900">
+                เรียบร้อยครับ!
+              </h3>
+              <p className="font-anuphan mt-2 font-bold text-slate-500">
+                ผมได้รับข้อมูลแล้ว กำลังพาคุณไปคุยต่อที่ LINE นะครับ...
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
   )
 }

@@ -1,189 +1,172 @@
 /** @format */
 
-import { Metadata } from "next"
+import React, { Suspense } from "react"
+import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// 🧩 Components - Static Imports (Critical Path for LCP)
-// โหลดทันทีเพื่อให้ Hero Section แสดงผลเร็วที่สุดโดยไม่มี Layout Shift
-import { Hero } from "@/components/landing/Hero"
-import { TrustBadge } from "@/components/shared/TrustBadge"
-import { LineStickyButton } from "@/components/shared/LineStickyButton"
+// 📂 ข้อมูลตัวตนและโครงสร้างระบบ
+import { siteConfig } from "@/constants/site-config"
+import { services } from "@/constants/services-data"
 import { JsonLd } from "@/components/seo/JsonLd"
 
-// 📦 Data & Configuration
-import { servicesData } from "@/constants/services-data"
-import { siteConfig } from "@/constants/site-config"
+// 🧩 ส่วนประกอบหน้าเว็บที่เน้นความเร็ว (LCP Optimized)
+import Hero from "@/components/landing/Hero"
 
-// 🚀 Dynamic Imports (Lazy Loading) - แยก Chunk เพื่อลด TBT
+/**
+ * 🚀 ระบบโหลดคอมโพเนนต์แบบอัจฉริยะ (Dynamic Loading)
+ * ช่วยให้หน้าเว็บเปิดไวขึ้นโดยโหลดส่วนที่จำเป็นก่อน
+ */
 const HomeClientSections = dynamic(
-  () =>
-    import("@/components/landing/HomeClientSections").then(
-      (mod) => mod.HomeClientSections
-    ),
-  { ssr: true } // ยังคง SSR ไว้เพื่อ SEO แต่ Code Split JS ออกไป
+  () => import("@/components/landing/HomeClientSections"),
+  {
+    ssr: true,
+    loading: () => <div className="h-40 w-full animate-pulse bg-slate-50" />,
+  }
 )
 
-const WorkProcess = dynamic(() =>
-  import("@/components/sales-engine/WorkProcess").then((mod) => mod.WorkProcess)
+const ValueProp = dynamic(() => import("@/components/landing/ValueProp"))
+const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
+const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
+const WorkProcess = dynamic(
+  () => import("@/components/sales-engine/WorkProcess")
 )
+const CTASection = dynamic(() => import("@/components/landing/CTASection"))
 
-const LineLeadForm = dynamic(() =>
-  import("@/components/sales-engine/LineLeadForm").then(
-    (mod) => mod.LineLeadForm
-  )
-)
-
-const ServiceCard = dynamic(() =>
-  import("@/components/shared/ServiceCard").then((mod) => mod.ServiceCard)
-)
-
-// Dynamic import Components ที่อยู่ลึกๆ เพื่อประหยัด Initial Payload
-const InsightsSection = dynamic(() =>
-  import("@/components/landing/InsightsSection").then(
-    (mod) => mod.InsightsSection
-  )
-)
-
-const ValueProp = dynamic(() =>
-  import("@/components/landing/ValueProp").then((mod) => mod.ValueProp)
-)
-
+/**
+ * 🎯 การตั้งค่า SEO รายหน้า (Metadata)
+ */
 export const metadata: Metadata = {
-  title: `${siteConfig.name} | ${siteConfig.tagline}`,
+  title: siteConfig.title,
   description: siteConfig.description,
-  alternates: {
-    canonical: siteConfig.url,
-  },
-  openGraph: {
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    url: siteConfig.url,
-    type: "website",
-  },
+  keywords: siteConfig.keywords,
+  alternates: { canonical: siteConfig.url },
 }
 
 /**
- * 🚀 HomePage: AEM DEVWEB Engine v.2026
- * สถาปัตยกรรม: Hero > Trust > Value > ClientSections > Insights > Services > Process > CTA
+ * 🧬 HomePage — "เปลี่ยนเว็บให้เป็นพนักงานขายที่เก่งที่สุด"
  */
 export default function HomePage() {
+  // ดึงข้อมูลบริการเฉพาะกลุ่มที่ต้องการโชว์หน้าแรก
+  const featuredServices = services.filter((s) =>
+    ["sme-speed-launch", "corporate-pro", "industrial-enterprise"].includes(
+      s.id
+    )
+  )
+
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden antialiased bg-slate-950 text-slate-50 selection:bg-aurora-cyan/30">
-      {/* 🛠️ SEO Schema: WebSite & Service */}
+    <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/20">
+      {/* 🔎 บอก Google ว่าเว็บนี้คือใครและทำอะไร */}
       <JsonLd
-        type="Website"
+        type="WebSite"
         data={{
           name: siteConfig.name,
           url: siteConfig.url,
-          potentialAction: {
-            "@type": "SearchAction",
-            target: `${siteConfig.url}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string",
-          },
-        }}
-      />
-      <JsonLd
-        type="ProfessionalService"
-        data={{
-          name: siteConfig.companyName,
-          image: siteConfig.ogImage,
-          url: siteConfig.url,
-          telephone: siteConfig.contact.tel,
-          address: {
-            "@type": "PostalAddress",
-            addressCountry: "TH",
-          },
-          priceRange: "฿2,590 - ฿12,900",
+          description: siteConfig.description,
+          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์" },
         }}
       />
 
-      {/* 🌌 Local Decorative Layer (Optimized for Mobile) */}
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden select-none">
-        {/* ลด Blur และ Opacity เพื่อให้ Render เร็วขึ้น */}
-        <div className="aurora-bg absolute -top-[10%] -right-[10%] h-[600px] w-[800px] opacity-[0.08] blur-[60px] md:h-[800px] md:w-[1000px] md:blur-[80px]" />
-        <div className="aurora-bg absolute top-1/2 -left-[10%] h-[600px] w-[600px] opacity-[0.05] blur-[60px] md:h-[800px] md:w-[800px] md:blur-[80px]" />
-      </div>
+      {/* 1️⃣ ส่วนหัวหน้าเว็บ (Hero): ความประทับใจแรกเมื่อลูกค้าคลิกเข้ามา */}
+      <Hero />
 
-      {/* 1. HERO & 2. TRUST SIGNALS: Critical Rendering Path */}
-      {/* วางโครงสร้างให้อ่าน HTML ปุ๊บเจอเลย ไม่ต้องรอ JS */}
-      <div className="content-visibility-auto contain-layout">
-        <Hero />
-        <div className="relative z-20 -mt-12 md:-mt-16">
-          <TrustBadge />
-        </div>
-      </div>
-
-      {/* 3. VALUE PROPOSITION */}
-      <section className="relative overflow-hidden py-24 lg:py-36 content-visibility-auto">
-        {/* Background Accent - ใช้ CSS Gradient แทนรูปภาพเพื่อ Performance */}
-        <div className="from-aurora-emerald/5 to-aurora-violet/5 absolute inset-0 -z-10 origin-top-left scale-110 -skew-y-3 transform bg-gradient-to-br opacity-50 blur-3xl will-change-transform" />
-        <div className="relative z-10">
-          <ValueProp />
-        </div>
+      {/* 2️⃣ ความไว้วางใจ (Social Proof): โลโก้ลูกค้าและรีวิว */}
+      <section className="relative border-y border-slate-50 bg-white">
+        <Suspense
+          fallback={<div className="h-40 w-full animate-pulse bg-slate-50" />}
+        >
+          <HomeClientSections />
+        </Suspense>
       </section>
 
-      {/* 4. DYNAMIC CLIENT SECTIONS (Stats, Pricing, Testimonials) */}
-      <HomeClientSections />
+      {/* 3️⃣ จุดขาย (Value Prop): ทำไมต้องทำเว็บกับผม? */}
+      <section className="relative py-24 lg:py-32">
+        <ValueProp />
+      </section>
 
-      {/* 5. INSIGHTS SECTION */}
-      <div className="relative z-10 content-visibility-auto">
-        <InsightsSection />
-      </div>
-
-      {/* 6. SERVICES GRID */}
-      <section
-        id="services"
-        className="relative py-32 lg:py-48 content-visibility-auto"
-      >
-        <div className="mx-auto mb-24 max-w-4xl px-4 text-center">
-          <div className="text-aurora-cyan font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
-            Solutions for Growth
+      {/* 🛠️ 4️⃣ แพ็กเกจบริการ (Services): เลือกที่ใช่สำหรับธุรกิจคุณ */}
+      <section className="relative bg-slate-50/50 py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-16 text-center lg:text-left">
+            <h2 className="font-prompt text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
+              บริการ <span className="text-emerald-500">ที่ผมเตรียมไว้ให้</span>
+            </h2>
+            <p className="font-anuphan mt-4 max-w-2xl text-lg font-bold text-slate-500">
+              ไม่ว่าคุณจะเป็นเจ้าของกิจการ SME หรือเจ้าของโรงงาน
+              ผมมีโซลูชันที่ช่วยให้ธุรกิจของคุณดูดีและหาเงินได้จริง
+            </p>
           </div>
-          <h2 className="text-luminous mb-10 text-4xl uppercase md:text-8xl italic">
-            Services <span className="text-slate-600">&</span> Solutions
-          </h2>
-          <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400 md:text-2xl">
-            เลือกโซลูชันที่ออกแบบมาเพื่อการเติบโตอย่างยั่งยืนของ{" "}
-            <span className="text-white italic underline decoration-aurora-cyan/30 underline-offset-8">
-              SME ไทย
-            </span>
-          </p>
-        </div>
 
-        <div className="container mx-auto grid gap-8 px-4 md:grid-cols-2 lg:grid-cols-4">
-          {servicesData.map((service) => (
-            <ServiceCard key={service.id} {...service} className="h-full" />
-          ))}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {featuredServices.map((service) => (
+              <ServiceCard
+                key={service.id}
+                title={service.title}
+                price={service.priceValue}
+                slug={service.slug}
+                features={service.features.slice(0, 3)} // โชว์แค่ 3 ฟีเจอร์หลัก
+                isPopular={service.highlight}
+                themeColor={service.themeColor}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 7. PROCESS FLOW */}
-      <WorkProcess />
+      {/* 5️⃣ ขั้นตอนการทำงาน (Workflow): ทำงานกับผม ง่ายและไว */}
+      <section className="relative bg-slate-950 py-24 lg:py-32">
+        <WorkProcess />
+      </section>
 
-      {/* 8. FINAL CONVERSION BOX */}
-      <section className="mb-40 px-4 content-visibility-auto">
-        <div className="glass-card group shadow-luminous hover:border-aurora-cyan/30 relative overflow-hidden p-12 text-center transition-all duration-700 md:p-32">
-          {/* Inner Glow Decorative */}
-          <div className="bg-aurora-emerald/10 absolute -top-24 -right-24 h-96 w-96 rounded-full opacity-40 blur-[80px] transition-all duration-700 group-hover:opacity-60 will-change-transform" />
+      {/* 📚 6️⃣ บทความน่ารู้ (Blog): แชร์เทคนิคการตลาดออนไลน์ */}
+      <section className="relative py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-16">
+            <h2 className="font-prompt text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
+              เทคนิค <span className="text-emerald-500">จากประสบการณ์จริง</span>
+            </h2>
+            <p className="font-anuphan mt-4 text-lg font-bold text-slate-500">
+              กลยุทธ์ทำเว็บและดันอันดับ Google
+              ที่ผมสรุปมาให้เจ้าของธุรกิจโดยเฉพาะ
+            </p>
+          </div>
 
-          <h2 className="text-luminous relative z-10 mb-12 text-4xl leading-none uppercase md:text-[6rem] lg:text-[8rem] italic">
-            Ready to <span className="text-aurora-emerald">Scale</span> <br />
-            Your Business?
-          </h2>
-
-          <div className="relative z-10 flex flex-col items-center justify-center gap-10 sm:flex-row">
-            <LineLeadForm
-              variant="button"
-              label="เริ่มโปรเจกต์กับนายเอ็ม"
-              className="scale-110 md:scale-125"
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <BlogCard
+              slug="seo-for-sme-2026"
+              title="วิธีดันอันดับ Google 2026 สำหรับธุรกิจ SME"
+              excerpt="แค่มีเว็บยังไม่พอ ทำยังไงให้ลูกค้าค้นหาธุรกิจของคุณเจอเป็นเจ้าแรก..."
+              date="2026-01-20"
+              thumbnail="/images/blog/project-01.webp"
+            />
+            <BlogCard
+              slug="facebook-ads-vs-website"
+              title="ยิงแอด FB หรือทำเว็บดี? แบบไหนปิดการขายไวกว่ากัน"
+              excerpt="เจาะลึกจากเคสจริงที่ผมดูแลลูกค้ามา กว่าจะรู้ตัวเงินก็หายไปเยอะแล้ว..."
+              date="2026-01-18"
+              thumbnail="/images/blog/project-01.webp"
+            />
+            <BlogCard
+              slug="unlink-th-case-study"
+              title="เบื้องหลังความสำเร็จของเว็บ Unlink TH"
+              excerpt="จากเว็บโหลดช้าสู่เว็บที่ปิดการขายได้ทุกวัน เขาทำกันยังไง?"
+              date="2026-01-15"
+              thumbnail="/images/blog/project-01.webp"
             />
           </div>
         </div>
       </section>
 
-      {/* 9. Floating CTA Engine */}
-      <LineStickyButton />
-    </div>
+      {/* 7️⃣ ส่วนปิดการขาย (CTA): ทักมาคุยกับผมได้เลย */}
+      <section className="relative py-24 lg:py-40">
+        <CTASection />
+      </section>
+
+      {/* 📍 ส่วนท้ายสุด (Specialist Branding) */}
+      <footer className="container mx-auto px-4 pb-12 text-center opacity-30 select-none">
+        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
+          Managed & Build by นายเอ็มซ่ามากส์ v2026 — Next.js 16 High-Performance
+        </p>
+      </footer>
+    </main>
   )
 }

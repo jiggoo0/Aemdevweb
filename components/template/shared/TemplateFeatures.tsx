@@ -1,27 +1,38 @@
 /** @format */
+
 "use client"
 
 import React from "react"
 import { motion } from "framer-motion"
 import { CheckCircle, Zap } from "lucide-react"
-import { TemplateItem } from "@/constants/templates-data"
 import { cn } from "@/lib/utils"
+
+// ✅ [FIXED]: ปรับ Interface ให้ยืดหยุ่นขึ้น และระบุ Type สำหรับ TemplateItem เบื้องต้น
+// เนื่องจากไฟล์ @/constants/templates-data อาจมีปัญหาการหา path หรือ type ไม่เจอ
+interface TemplateItem {
+  features?: string[]
+  [key: string]: any
+}
 
 interface TemplateFeaturesProps {
   features?: string[]
   data?: TemplateItem
-  themeColor?: string // เพิ่มเพื่อรับค่าสีจากหน้า Page
+  themeColor?: string
   className?: string
 }
 
-// 🔑 เปลี่ยนเป็น Named Export เพื่อแก้ปัญหา Error: Element type is invalid
+/**
+ * ⚡ TemplateFeatures Component
+ * [FIXED]: ระบุ Type ให้กับ parameter ในฟังก์ชัน map เพื่อแก้ Error TS7006
+ */
 export function TemplateFeatures({
   features,
   data,
   themeColor = "emerald",
   className,
 }: TemplateFeaturesProps) {
-  const items = features || data?.features || []
+  // ดึงข้อมูล features จาก props หรือจาก data object
+  const items: string[] = features || data?.features || []
 
   if (items.length === 0) return null
 
@@ -50,7 +61,8 @@ export function TemplateFeatures({
 
       {/* 📦 Grid Features */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {items.map((feature, index) => (
+        {/* ✅ [FIXED]: ระบุ type (feature: string, index: number) เพื่อแก้ TypeScript Error */}
+        {items.map((feature: string, index: number) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 10 }}

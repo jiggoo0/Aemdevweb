@@ -1,100 +1,129 @@
 /** @format */
+
+"use client"
+
 import React from "react"
-import {
-  Briefcase,
-  Building2,
-  Globe2,
-  LayoutTemplate,
-  ShieldCheck,
-  Zap,
-  LucideIcon,
-  Sparkles,
-} from "lucide-react"
+import { motion } from "framer-motion"
+import { ShieldCheck, Zap, Search, BarChart3 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-interface Brand {
-  name: string
-  icon: LucideIcon
+// 🛡️ ข้อมูล Trust Badges ที่เน้นจุดแข็งของแบรนด์นายเอ็มซ่ามากส์
+const trustItems = [
+  {
+    icon: Zap,
+    label: "Next.js 16",
+    subLabel: "Latest Stack",
+    color: "text-emerald-500",
+    bg: "bg-emerald-500/5",
+  },
+  {
+    icon: Search,
+    label: "SEO Expert",
+    subLabel: "AI-Ready",
+    color: "text-blue-500",
+    bg: "bg-blue-500/5",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Secure Code",
+    subLabel: "Industrial",
+    color: "text-indigo-500",
+    bg: "bg-indigo-500/5",
+  },
+  {
+    icon: BarChart3,
+    label: "Score 100",
+    subLabel: "PageSpeed",
+    color: "text-orange-500",
+    bg: "bg-orange-500/5",
+  },
+]
+
+interface TrustBadgeProps {
+  variant?: "horizontal" | "grid"
+  className?: string
 }
 
 /**
- * 🛡️ TrustBadge: Luminous Server-Optimized Edition (v.2026)
- * ส่วนแสดงรายชื่อพาร์ทเนอร์ที่จูนมาเพื่อความน่าเชื่อถือและ PageSpeed 100
- * ✅ FIXED: Accessibility - ปรับสีข้อความเป็น text-slate-400 เพื่อ Contrast ที่ดีขึ้น
- * ✅ Optimized: ใช้ CSS Animations (animate-in) เพื่อลด TBT (Total Blocking Time)
+ * 🏗️ TrustBadge Specialist Edition (v2026)
+ * [FIXED]: เปลี่ยนเป็น Default Export เพื่อรองรับระบบนำเข้าของหน้า Contact และหน้าอื่นๆ
+ * ปรับปรุง Visual Hierarchy ให้ดูพรีเมียมและเน้นความน่าเชื่อถือระดับอุตสาหกรรม
  */
-export function TrustBadge({ className }: { className?: string }) {
-  const brands: Brand[] = [
-    { name: "TechGrowth", icon: Zap },
-    { name: "SME Inter", icon: Globe2 },
-    { name: "BuildPlus", icon: Building2 },
-    { name: "SecurePay", icon: ShieldCheck },
-    { name: "DesignLab", icon: LayoutTemplate },
-    { name: "ConsultPro", icon: Briefcase },
-  ]
-
+const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
   return (
-    <section
+    <div
       className={cn(
-        "bg-background relative w-full overflow-hidden border-y border-white/5 py-16",
+        "flex flex-wrap items-center justify-center gap-4 md:gap-8",
+        variant === "grid" ? "grid grid-cols-2 md:grid-cols-4" : "",
         className
       )}
-      aria-label="พาร์ทเนอร์ที่ไว้วางใจ"
     >
-      {/* 🌌 Aurora Ambient Light: Decorative Layer */}
-      <div 
-        className="aurora-bg pointer-events-none absolute top-1/2 left-1/2 -z-10 h-full w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.05] blur-[100px]" 
+      {trustItems.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: index * 0.1 }}
+          className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white/50 p-3 pr-6 backdrop-blur-sm transition-all duration-500 hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/5"
+        >
+          {/* 🧩 Icon Box: Interactive Effect */}
+          <div
+            className={cn(
+              "flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:bg-[#0F172A] group-hover:text-white",
+              item.bg,
+              item.color
+            )}
+          >
+            <item.icon className="h-5 w-5" />
+          </div>
+
+          {/* 📄 Label Area: Sharp Typography */}
+          <div className="flex flex-col">
+            <span className="font-prompt text-[11px] font-black tracking-wider text-[#0F172A] uppercase">
+              {item.label}
+            </span>
+            <span className="font-anuphan text-[9px] font-bold tracking-[0.2em] text-slate-400 uppercase">
+              {item.subLabel}
+            </span>
+          </div>
+        </motion.div>
+      ))}
+
+      {/* 🚀 Specialist Indicator (Floating Label) */}
+      <div
+        className="mx-4 hidden h-10 w-px bg-slate-100 lg:block"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 container mx-auto px-4">
-        {/* Header Label: Luminous Typography */}
-        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-forwards mb-12 flex flex-col items-center duration-1000">
-          <div className="text-aurora-cyan shadow-aurora-glow mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-            <Sparkles className="h-3.5 w-3.5 animate-pulse" /> Verified Partners
-          </div>
-          <p className="font-anuphan text-center text-sm font-medium tracking-wide text-slate-400 opacity-90 md:text-base">
-            ได้รับความไว้วางใจจากธุรกิจชั้นนำกว่า{" "}
-            <span className="font-bold text-white">50+ แห่ง</span> ทั่วประเทศ
-          </p>
+      <div className="flex items-center gap-4">
+        {/* User Avatars Placeholder (Industrial Partners) */}
+        <div className="flex -space-x-3">
+          {[1, 2, 3].map((i) => (
+            <div
+              key={i}
+              className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-slate-100 shadow-sm"
+            >
+              <div className="h-full w-full animate-pulse rounded-full bg-slate-200" />
+            </div>
+          ))}
         </div>
 
-        {/* 🔄 Luminous Logo Grid: High Performance Layout */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
-          {brands.map((brand, index) => {
-            const Icon = brand.icon
-
-            return (
-              <div
-                key={brand.name}
-                className="group animate-in fade-in slide-in-from-bottom-2 fill-mode-forwards flex cursor-default flex-col items-center justify-center gap-4 opacity-0 transition-all duration-500"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative">
-                  {/* High-Performance Glow Effect */}
-                  <div 
-                    className="bg-aurora-cyan/20 pointer-events-none absolute inset-0 scale-150 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" 
-                    aria-hidden="true"
-                  />
-
-                  {/* Icon Container: Glass-morphism Style */}
-                  <div className="shadow-luminous group-hover:border-aurora-cyan/40 relative flex h-16 w-16 transform items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10">
-                    <Icon
-                      className="group-hover:text-aurora-cyan h-8 w-8 text-slate-400 transition-all duration-500"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                </div>
-
-                {/* Brand Name Label */}
-                <span className="font-anuphan text-xs font-black tracking-[0.2em] text-slate-400 uppercase transition-colors duration-300 group-hover:text-white">
-                  {brand.name}
-                </span>
-              </div>
-            )
-          })}
+        <div className="flex flex-col">
+          <span className="font-prompt text-[10px] font-black tracking-tighter text-emerald-500 uppercase italic">
+            Trusted by SME & Factories
+          </span>
+          <span className="font-anuphan text-[8px] font-bold tracking-widest text-slate-400 uppercase">
+            Verified Specialist V. 2026
+          </span>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
+
+/**
+ * ✅ หัวใจสำคัญ: ต้องใช้ Default Export เพื่อให้ตรงตามคำสั่งเรียกใช้ใน Page อื่นๆ
+ * และป้องกันปัญหา Element type is invalid (undefined)
+ */
+export default TrustBadge

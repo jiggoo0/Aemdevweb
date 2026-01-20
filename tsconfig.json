@@ -12,9 +12,13 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "baseUrl": ".",
     "paths": {
       /* 🚀 Global Shortcut */
@@ -37,7 +41,8 @@
     ".next/types/**/*.ts",
     "constants/**/*.ts",
     "config/**/*.ts",
-    "content/**/*.ts"
+    "content/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

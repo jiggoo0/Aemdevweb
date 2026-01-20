@@ -1,149 +1,194 @@
 /** @format */
 
+"use client"
+
 import React from "react"
+import { motion } from "framer-motion"
 import {
   Zap,
-  Search,
   ShieldCheck,
-  Smartphone,
-  MousePointerClick,
-  LineChart,
-  Sparkles,
-  type LucideIcon,
+  BarChart3,
+  Clock3,
+  Search,
+  LayoutTemplate,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 /**
- * 💎 ValueProp Component: The Unfair Advantage (v.2026)
- * ส่วนแสดงจุดเด่นของบริการที่จูนมาเพื่อความ "น่าเชื่อถือ" และ "ความเร็ว"
- * ✅ Optimized: ใช้ Native Tailwind Animations (animate-in) เพื่อลด TBT
+ * 💎 ข้อมูลความแตกต่างที่ผมมอบให้ (Value Props)
+ * ผมเน้นที่ผลลัพธ์จริงๆ ไม่ใช่แค่ศัพท์เทคนิค: ความเร็ว, อันดับบน Google และยอดขาย
  */
-
-interface FeatureItem {
-  icon: LucideIcon
-  title: string
-  description: string
-  color: string
-  glow: string
-  delay: string
-}
-
-const features: FeatureItem[] = [
+const advantages = [
   {
-    icon: Zap,
-    title: "โหลดไวระดับปีศาจ",
+    icon: Clock3,
+    title: "เร็วแบบสั่งได้",
     description:
-      "ลืม WordPress ช้าๆ ไปได้เลย เราใช้ Next.js 15 (Server Components) ทำให้เว็บโหลดเสร็จในพริบตา ลูกค้าไม่ต้องรอ",
-    color: "text-aurora-cyan",
-    glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
-    delay: "delay-100",
+      "เว็บผมโหลดเสร็จในพริบตา ไม่ต้องรอจนลูกค้าหนี ช่วยเพิ่มโอกาสให้คนทักหาคุณมากขึ้น",
+    detail: "ความไวระดับ LCP < 1.0 วินาที",
   },
   {
     icon: Search,
-    title: "โครงสร้าง SEO 100%",
+    title: "Google หาเจอง่าย",
     description:
-      "ไม่ใช่แค่ทำเว็บให้เสร็จ แต่เราวางโครงสร้าง H1-H6, Schema และ Meta Tags ให้ Google รักเว็บคุณตั้งแต่วันแรก",
-    color: "text-aurora-violet",
-    glow: "shadow-[0_0_20px_rgba(165,180,252,0.3)]",
-    delay: "delay-200",
+      "ผมวางโครงสร้างให้ Google และ AI ยุคใหม่เข้าใจธุรกิจคุณทันที ไม่ต้องรอนานกว่าจะติดอันดับ",
+    detail: "รองรับเทคโนโลยี Search AI 2026",
   },
   {
-    icon: MousePointerClick,
-    title: "ดีไซน์ปิดการขาย (Conversion)",
+    icon: LayoutTemplate,
+    title: "ออกแบบเพื่อปิดการขาย",
     description:
-      "เราไม่ได้ออกแบบตามใจศิลปิน แต่ออกแบบตามหลักจิตวิทยา (UX/UI) เพื่อให้ลูกค้าหาปุ่ม 'สั่งซื้อ' เจอไวที่สุด",
-    color: "text-aurora-emerald",
-    glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
-    delay: "delay-300",
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile First Design",
-    description:
-      "ลูกค้า 90% ของคุณเข้าผ่านมือถือ เราจึงออกแบบบนหน้าจอมือถือเป็นหลัก ใช้นิ้วโป้งกดง่าย ไม่ต้องซูม",
-    color: "text-aurora-cyan",
-    glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
-    delay: "delay-400",
-  },
-  {
-    icon: ShieldCheck,
-    title: "ความปลอดภัยขั้นสูง",
-    description:
-      "หมดห่วงเรื่องเว็บโดนแฮก หรือโดนฝังสคริปต์พนัน เพราะเราไม่มี Plugin รูรั่วเยอะเหมือน CMS ทั่วไป",
-    color: "text-aurora-emerald",
-    glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
-    delay: "delay-500",
-  },
-  {
-    icon: LineChart,
-    title: "รองรับ Pixel & Tracking",
-    description:
-      "สายยิงแอดต้องชอบ! เราเตรียมพื้นที่สำหรับฝัง Facebook Pixel, TikTok Pixel และ GTM ไว้ให้พร้อมใช้งาน",
-    color: "text-aurora-violet",
-    glow: "shadow-[0_0_20px_rgba(165,180,252,0.3)]",
-    delay: "delay-600",
+      "ผมไม่ได้แค่จัดวางให้สวย แต่ผมเน้นให้ลูกค้าตัดสินใจทัก LINE หรือโทรหาคุณให้ง่ายที่สุด",
+    detail: "เน้นการเปลี่ยนผู้เข้าชมเป็นยอดขาย",
   },
 ]
 
-export const ValueProp = () => {
+/**
+ * 🏗️ ValueProp — "ทำไมถึงต้องเลือกทำกับผม?"
+ * ส่วนนี้ผมแสดงให้เห็นถึงความคุ้มค่าและประสิทธิภาพที่เหนือกว่าเว็บทั่วไปครับ
+ */
+const ValueProp = () => {
   return (
-    <div className="relative z-10 container mx-auto px-4">
-      {/* 🌌 Luminous Section Header */}
-      <div className="animate-in fade-in slide-in-from-bottom-10 fill-mode-forwards mx-auto mb-20 max-w-4xl text-center duration-1000">
-        <div className="text-aurora-cyan mb-8 inline-flex animate-pulse items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-xl">
-          <Sparkles className="h-3.5 w-3.5" /> The Unfair Advantage
+    <div className="container mx-auto px-4">
+      <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
+        {/* 1️⃣ ฝั่งเนื้อหา: เล่าถึงความใส่ใจในคุณภาพของผม */}
+        <div className="flex-1 lg:max-w-xl">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5"
+          >
+            <Zap className="h-4 w-4 text-emerald-500" />
+            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-500 uppercase">
+              The Edge of Excellence
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-slate-950 uppercase italic md:text-6xl"
+          >
+            เหนือกว่าด้วย <br />
+            <span className="text-emerald-500 underline decoration-emerald-500/20 underline-offset-8">
+              งานที่เนี๊ยบกว่าใคร
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="font-anuphan mb-12 text-lg leading-relaxed font-bold text-slate-500"
+          >
+            ผมไม่ได้แค่รับทำเว็บไซต์ไปวันๆ แต่ผมสร้าง "หน้าร้านออนไลน์"
+            ที่ทรงพลังที่สุด ให้กับธุรกิจ SME และโรงงาน
+            ด้วยงานคุณภาพสูงที่ผมตั้งใจทำให้ทุกโปรเจกต์ครับ
+          </motion.p>
+
+          <div className="space-y-10">
+            {advantages.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group flex items-start gap-6"
+              >
+                <div className="mt-1 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-emerald-500/30 group-hover:shadow-2xl">
+                  <item.icon className="h-7 w-7 text-slate-900 transition-colors group-hover:text-emerald-500" />
+                </div>
+                <div>
+                  <h3 className="font-prompt mb-1 text-xl font-black text-slate-950 uppercase italic">
+                    {item.title}
+                  </h3>
+                  <p className="font-anuphan text-sm leading-snug font-bold text-slate-500">
+                    {item.description}
+                  </p>
+                  <div className="mt-2 text-[10px] font-black tracking-widest text-emerald-500/80 uppercase">
+                    {item.detail}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        <h2 className="text-luminous mb-8 text-4xl tracking-tighter uppercase md:text-7xl">
-          ทำไมต้องจ้าง <span className="text-aurora-emerald">AemDevWeb?</span>
-        </h2>
-        <p className="font-anuphan text-lg leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-          เพราะเราไม่ได้แค่ &quot;รับทำเว็บ&quot; แต่เราคือพาร์ทเนอร์สาย Tech
-          ที่เข้าใจว่า <br className="hidden md:block" />
-          คุณต้องการ{" "}
-          <span className="decoration-aurora-cyan/30 font-bold text-white underline underline-offset-8">
-            &quot;ยอดขาย&quot;
-          </span>{" "}
-          ไม่ใช่แค่เว็บสวยๆ ที่ไม่มีคนเข้า
-        </p>
-      </div>
+        {/* 2️⃣ ฝั่งภาพกราฟ: เปรียบเทียบประสิทธิภาพให้เห็นชัดๆ */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="relative flex-1"
+        >
+          <div className="relative z-10 overflow-hidden rounded-[3.5rem] border border-slate-200 bg-white p-10 shadow-2xl md:p-16">
+            {/* พื้นหลังลายตารางจางๆ */}
+            <div
+              className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"
+              aria-hidden="true"
+            />
 
-      {/* 🛠️ Features Grid */}
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className={cn(
-              "group glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative overflow-hidden p-10 transition-all duration-500",
-              "animate-in fade-in slide-in-from-bottom-8 fill-mode-forwards duration-700",
-              feature.delay
-            )}
-          >
-            {/* Luminous Hover Decor: แสง Aurora ฟุ้งเมื่อเมาส์ชี้ */}
-            <div className="bg-aurora-cyan/10 absolute -top-24 -right-24 h-48 w-48 rounded-full opacity-0 blur-[60px] transition-opacity duration-700 group-hover:opacity-100" />
+            <div className="mb-12 flex items-center justify-between border-b border-slate-50 pb-6">
+              <div className="font-prompt text-2xl font-black tracking-tighter text-slate-900 uppercase italic">
+                System Performance
+              </div>
+              <BarChart3 className="h-6 w-6 text-slate-300" />
+            </div>
 
-            <div className="relative z-10">
-              {/* Icon with Aurora Glow */}
-              <div
-                className={cn(
-                  "mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:bg-white/10",
-                  feature.glow
-                )}
-              >
-                <feature.icon className={cn("h-8 w-8", feature.color)} />
+            {/* กราฟเปรียบเทียบคะแนนความเร็ว */}
+            <div className="space-y-10">
+              <div className="space-y-4">
+                <div className="flex justify-between text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                  <span className="text-slate-950">AEMDEVWEB Engine v2026</span>
+                  <span className="text-emerald-500">99.8%</span>
+                </div>
+                <div className="h-4 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-0.5">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "99.8%" }}
+                    transition={{ duration: 1.8, ease: "circOut" }}
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.4)]"
+                  />
+                </div>
               </div>
 
-              <h3 className="group-hover:text-aurora-cyan mb-4 text-2xl font-black tracking-tight text-white uppercase transition-colors duration-300 italic">
-                {feature.title}
-              </h3>
+              <div className="space-y-4">
+                <div className="flex justify-between text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                  <span>เว็บสำเร็จรูป / Template ทั่วไป</span>
+                  <span>42.3%</span>
+                </div>
+                <div className="h-4 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-0.5">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "42.3%" }}
+                    transition={{ duration: 1.2, ease: "circOut" }}
+                    className="h-full rounded-full bg-slate-200"
+                  />
+                </div>
+              </div>
+            </div>
 
-              <p className="font-anuphan text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity duration-500 group-hover:opacity-100 md:text-lg">
-                {feature.description}
-              </p>
+            {/* ป้ายการันตีงานคุณภาพ */}
+            <div className="group relative mt-16 overflow-hidden rounded-[2.5rem] bg-slate-950 p-8 text-center shadow-2xl">
+              <div className="absolute inset-0 bg-emerald-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <ShieldCheck className="relative z-10 mx-auto mb-4 h-10 w-10 text-emerald-400" />
+              <div className="font-prompt relative z-10 text-lg font-black tracking-widest text-white uppercase italic">
+                Verified Technical Specialist
+              </div>
+              <div className="relative z-10 mt-2 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase">
+                มาตรฐานงานระดับพรีเมียม 100%
+              </div>
             </div>
           </div>
-        ))}
+
+          {/* เงาตกแต่งด้านหลัง */}
+          <div className="absolute -right-6 -bottom-6 -z-10 h-full w-full rounded-[3.5rem] border border-slate-100 bg-slate-50/50 transition-transform group-hover:translate-x-2" />
+        </motion.div>
       </div>
     </div>
   )
 }
+
+export default ValueProp

@@ -1,160 +1,179 @@
 /** @format */
 
+"use client"
+
 import React from "react"
+import { motion } from "framer-motion"
+import { Check, ArrowRight, Zap, ShieldCheck } from "lucide-react"
 import Link from "next/link"
-import {
-  ArrowRight,
-  CheckCircle2,
-  Rocket,
-  ShieldCheck,
-  Code2,
-  Gauge,
-  Zap,
-  type LucideIcon,
-  Sparkles,
-} from "lucide-react"
 import { cn } from "@/lib/utils"
 
-/**
- * 💎 ServiceCard Props Interface
- */
-export interface ServiceCardProps {
-  id?: string
-  slug: string
+interface ServiceCardProps {
   title: string
-  description: string
-  iconName?: "Rocket" | "ShieldCheck" | "Code2" | "Gauge" | "Zap"
-  icon?: LucideIcon
-  priceDisplay: string
+  description?: string
+  price: number | string
+  slug: string
   features: string[]
-  isFeatured?: boolean
+  isPopular?: boolean
   className?: string
+  index?: number
+  themeColor?: string // เพิ่มเพื่อรองรับการปรับแต่งสีตามประเภทบริการ
 }
 
 /**
- * 🗺️ Icon Mapping Dictionary
+ * 🏗️ ServiceCard — "หน้าด่านการเสนอขายโซลูชัน"
+ * ผมออกแบบมาให้ข้อมูลราคาและฟีเจอร์อ่านง่ายที่สุด
+ * เพื่อให้ลูกค้า SME และโรงงานตัดสินใจได้ทันทีครับ
  */
-const iconMap: Record<string, LucideIcon> = {
-  Rocket,
-  ShieldCheck,
-  Code2,
-  Gauge,
-  Zap,
-  Default: Zap,
-}
-
-/**
- * 💎 ServiceCard: Luminous Server Edition (v.2026)
- * ออกแบบมาเพื่อสร้างความน่าเชื่อถือและปิดการขายด้วย Visual ที่ทรงพลัง
- * ✅ Optimized: PageSpeed 100 | CSS-Driven transitions
- */
-export function ServiceCard({
-  slug,
+const ServiceCard = ({
   title,
-  description,
-  iconName,
-  icon,
-  priceDisplay,
+  description = "โซลูชันระดับ Specialist โดย นายเอ็มซ่ามากส์",
+  price,
+  slug,
   features,
-  isFeatured = false,
+  isPopular = false,
   className,
-}: ServiceCardProps) {
-  // เลือกใช้ Icon ตามลำดับความสำคัญ (Prop > Mapping > Default)
-  const IconComponent =
-    icon || (iconName ? iconMap[iconName] || iconMap.Default : iconMap.Default)
-
+  index = 0,
+}: ServiceCardProps) => {
   return (
-    <Link
-      href={`/services/${slug}`}
-      className={cn("group relative block h-full outline-none", className)}
-      aria-label={`ดูรายละเอียดบริการ ${title}`}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className={cn(
+        "group relative flex flex-col rounded-[2.5rem] border p-8 transition-all duration-500 md:p-10 lg:p-12",
+        isPopular
+          ? "border-emerald-500 bg-slate-950 text-white shadow-2xl"
+          : "border-slate-100 bg-white text-slate-900 hover:border-emerald-500/30 hover:shadow-xl",
+        className
+      )}
     >
-      {/* 🌌 Aurora Glow Effect: แสดงผลเฉพาะแพ็กเกจแนะนำ (Featured) */}
-      {isFeatured && (
-        <div className="from-aurora-cyan/20 via-aurora-emerald/20 to-aurora-violet/20 pointer-events-none absolute -inset-1 -z-10 rounded-[2.25rem] bg-gradient-to-r opacity-50 blur-xl transition-opacity duration-700 group-hover:opacity-100" />
-      )}
-
-      {/* 🏷️ Luminous Popular Badge */}
-      {isFeatured && (
-        <div className="pointer-events-none absolute -top-4 left-1/2 z-20 -translate-x-1/2">
-          <span className="bg-aurora-emerald shadow-aurora-glow inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-[10px] font-black tracking-widest whitespace-nowrap text-slate-950 uppercase italic">
-            <Sparkles className="h-3 w-3 animate-pulse" /> Popular Choice
-          </span>
+      {/* 🌟 ป้ายแนะนำ (Popular Badge) */}
+      {isPopular && (
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-emerald-500 px-6 py-2 text-[10px] font-black tracking-[0.2em] whitespace-nowrap text-slate-950 uppercase shadow-lg">
+          🔥 แพ็กเกจแนะนำ
         </div>
       )}
 
-      <article
-        className={cn(
-          "glass-card relative flex h-full flex-col overflow-hidden p-8 transition-all duration-700",
-          isFeatured
-            ? "border-aurora-cyan/40 shadow-luminous bg-white/[0.06]"
-            : "hover:border-aurora-cyan/30 hover:shadow-luminous"
-        )}
-      >
-        {/* --- 1. Header: Luminous Icon & Price --- */}
-        <div className="mb-8 flex items-start justify-between">
-          <div
-            className={cn(
-              "flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 transition-all duration-500",
-              isFeatured
-                ? "bg-aurora-cyan/10 text-aurora-cyan shadow-aurora-glow"
-                : "group-hover:bg-aurora-cyan/10 group-hover:text-aurora-cyan group-hover:shadow-aurora-glow bg-white/5 text-slate-400"
-            )}
-          >
-            <IconComponent className="h-7 w-7" />
-          </div>
-
-          <div className="text-right">
-            <p className="font-prompt mb-1 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
-              Starting at
-            </p>
-            <p className="font-prompt text-2xl font-black tracking-tighter text-white italic drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-              {priceDisplay}
-            </p>
-          </div>
-        </div>
-
-        {/* --- 2. Body Content --- */}
-        <h3 className="font-prompt group-hover:text-aurora-cyan mb-4 text-2xl leading-none font-black tracking-tight text-white uppercase transition-colors duration-500 italic">
+      {/* 🏷️ ส่วนหัวข้อ (Header) */}
+      <div className="mb-10">
+        <h3
+          className={cn(
+            "font-prompt mb-4 text-3xl leading-none font-black tracking-tighter uppercase italic transition-colors",
+            isPopular
+              ? "text-white"
+              : "text-slate-950 group-hover:text-emerald-500"
+          )}
+        >
           {title}
         </h3>
-
-        <p className="font-anuphan mb-8 line-clamp-2 text-base leading-relaxed font-medium text-slate-400 opacity-85 transition-opacity duration-500 group-hover:opacity-100">
+        <p
+          className={cn(
+            "font-anuphan text-sm leading-relaxed font-bold",
+            isPopular ? "text-slate-400" : "text-slate-500"
+          )}
+        >
           {description}
         </p>
+      </div>
 
-        <div className="mb-8 h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
+      {/* 💰 ส่วนราคา (Pricing) */}
+      <div className="mb-10 flex items-baseline gap-2">
+        <span
+          className={cn(
+            "font-prompt text-xs font-black tracking-widest uppercase",
+            isPopular ? "text-emerald-400" : "text-slate-400"
+          )}
+        >
+          เริ่มต้น ฿
+        </span>
+        <span className="font-prompt text-6xl leading-none font-black tracking-tighter italic">
+          {typeof price === "number" ? price.toLocaleString() : price}
+        </span>
+      </div>
 
-        {/* --- 3. Features Checklist --- */}
-        <ul className="mb-10 flex-1 space-y-4">
-          {features?.slice(0, 4).map((feature, idx) => (
-            <li
-              key={idx}
-              className="font-anuphan group/item flex items-start gap-3 text-sm font-medium text-slate-300 md:text-base"
+      {/* ✅ รายการฟีเจอร์ (Features List) */}
+      <div className="mb-12 flex-grow space-y-5">
+        <div
+          className={cn(
+            "mb-6 text-[10px] font-black tracking-[0.3em] uppercase opacity-60",
+            isPopular ? "text-slate-400" : "text-slate-300"
+          )}
+        >
+          Technical Deliverables
+        </div>
+        {features?.map((feature, i) => (
+          <div key={i} className="group/item flex items-start gap-4">
+            <div
+              className={cn(
+                "mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-lg transition-all duration-300 group-hover/item:scale-110",
+                isPopular ? "bg-emerald-500/20" : "bg-emerald-50"
+              )}
             >
-              <CheckCircle2 className="text-aurora-emerald h-5 w-5 shrink-0 opacity-40 transition-opacity group-hover/item:opacity-100" />
-              <span className="leading-tight transition-colors duration-300 group-hover/item:text-white">
-                {feature}
-              </span>
-            </li>
-          ))}
-        </ul>
+              <Check
+                className={cn(
+                  "h-3 w-3",
+                  isPopular ? "text-emerald-500" : "text-emerald-600"
+                )}
+              />
+            </div>
+            <span
+              className={cn(
+                "font-anuphan text-[15px] leading-snug font-bold transition-colors",
+                isPopular
+                  ? "text-slate-300"
+                  : "text-slate-600 group-hover:text-slate-950"
+              )}
+            >
+              {feature}
+            </span>
+          </div>
+        ))}
+      </div>
 
-        {/* --- 4. Footer CTA --- */}
-        <div className="mt-auto">
-          <div
+      {/* 🚀 ปุ่มดำเนินการ (Action Area) */}
+      <div className="mt-auto space-y-6">
+        <Link
+          href={`/services/${slug}`}
+          className={cn(
+            "font-prompt flex w-full items-center justify-center gap-3 rounded-2xl py-6 text-sm font-black tracking-widest uppercase transition-all duration-500 active:scale-95",
+            isPopular
+              ? "bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20 hover:bg-emerald-400"
+              : "bg-slate-50 text-slate-950 hover:bg-emerald-500 hover:text-white"
+          )}
+        >
+          ดูรายละเอียดบริการ
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+        </Link>
+
+        {/* ส่วนท้ายแสดงความมั่นใจ (Verification Footer) */}
+        <div className="flex items-center justify-center gap-3 opacity-40 select-none">
+          {isPopular ? (
+            <Zap className="h-4 w-4 text-emerald-400" />
+          ) : (
+            <ShieldCheck className="h-4 w-4 text-slate-300" />
+          )}
+          <span
             className={cn(
-              "flex w-full items-center justify-center gap-3 rounded-2xl py-4 text-[11px] font-black tracking-[0.25em] uppercase transition-all duration-500",
-              isFeatured
-                ? "bg-aurora-cyan shadow-aurora-glow text-slate-950 hover:scale-[1.03] active:scale-95"
-                : "group-hover:bg-aurora-cyan group-hover:shadow-aurora-glow border border-white/10 bg-white/5 text-slate-300 group-hover:text-slate-950"
+              "text-[9px] leading-none font-black tracking-[0.4em] uppercase",
+              isPopular ? "text-slate-400" : "text-slate-300"
             )}
           >
-            View Solution
-            <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-2" />
-          </div>
+            Specialist Standard v.2026
+          </span>
         </div>
-      </article>
-    </Link>
+      </div>
+
+      {/* แสงฟุ้งมรกตสำหรับแพ็กเกจเด่น */}
+      {isPopular && (
+        <div
+          className="pointer-events-none absolute -right-4 -bottom-4 h-32 w-32 rounded-full bg-emerald-500/5 blur-[40px]"
+          aria-hidden="true"
+        />
+      )}
+    </motion.div>
   )
 }
+
+export default ServiceCard

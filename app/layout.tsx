@@ -1,139 +1,84 @@
 /** @format */
-import type { Metadata, Viewport } from "next"
-import { Prompt, Anuphan } from "next/font/google"
-import NextTopLoader from "nextjs-toploader"
-import { Toaster } from "@/components/ui/sonner"
-import { AppProvider } from "@/providers/AppProvider"
-import { siteConfig } from "@/constants/site-config"
-import { cn } from "@/lib/utils"
-import "./globals.css"
 
-// --- 1. Setup Fonts: High-Performance Thai Stack ---
-// ใช้ display: 'swap' เพื่อให้ Text ขึ้นทันที (ลด LCP)
-// adjustFontFallback: false ช่วยลด CLS โดยไม่ให้ Next.js พยายามปรับ size font สำรอง
+import React from "react"
+import type { Metadata, Viewport } from "next"
+import NextTopLoader from "nextjs-toploader"
+
+// 📂 Logic & Config
+import { cn } from "@/lib/utils"
+import { defaultMetadata } from "./metadata" // ดึง Metadata ชุดเต็มที่เราแก้กันไว้
+import { viewport as defaultViewport } from "./viewport" // ดึง Viewport ที่ตั้งค่าไว้
+
+// 📂 Local Assets & Fonts
+import "./globals.css"
+import { Prompt, Anuphan } from "next/font/google"
+
+/* -------------------------------------------------------------------------- */
+/* 🅰️ Font Setup: Industrial Typography                                       */
+/* -------------------------------------------------------------------------- */
+
+// Prompt: ใช้สำหรับ Heading และ UI ที่ต้องการความมั่นคง (Modern Thai)
 const fontPrompt = Prompt({
-  weight: ["400", "500", "600", "700", "900"],
   subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-prompt",
   display: "swap",
-  preload: true,
-  adjustFontFallback: false, // ✅ Critical for CLS Optimization
 })
 
+// Anuphan: ใช้สำหรับ Body Text ให้อ่านง่าย สบายตา (Humanist Thai)
 const fontAnuphan = Anuphan({
-  weight: ["400", "500", "600"],
   subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap",
-  preload: true,
-  adjustFontFallback: false, // ✅ Critical for CLS Optimization
 })
 
-// --- 2. SEO & Metadata Strategy ---
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.shortName} - รับทำเว็บคุยง่าย`,
-  },
-  description: siteConfig.description,
-  keywords: [
-    "นายเอ็มซ่ามากส์",
-    "เอ็มซ่ามากส์รับทำเว็บ",
-    "จ้างทำเว็บคุยง่ายๆ",
-    "รับทำเซลเพจ SME",
-    "เว็บหน้าเดียวปิดการขาย",
-    "AEMDEVWEB",
-    ...siteConfig.keywords,
-  ],
-  authors: [{ name: "นายเอ็มซ่ามากส์", url: siteConfig.url }],
-  creator: siteConfig.companyName,
-  metadataBase: new URL(siteConfig.url),
-  openGraph: {
-    type: "website",
-    locale: "th_TH",
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: "นายเอ็มซ่ามากส์ - High-Conversion Web Factory",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@aemdevweb",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-}
+/* -------------------------------------------------------------------------- */
+/* 🧬 SEO & Performance Config                                                */
+/* -------------------------------------------------------------------------- */
 
-// ✅ Viewport Optimization
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
-  ],
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 5,
-}
+export const metadata: Metadata = defaultMetadata
+export const viewport: Viewport = defaultViewport
 
-// --- 3. Root Layout Component ---
-export default function RootLayout({
-  children,
-}: Readonly<{
+/* -------------------------------------------------------------------------- */
+/* 🏗️ Root Layout Infrastructure                                              */
+/* -------------------------------------------------------------------------- */
+
+interface RootLayoutProps {
   children: React.ReactNode
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="th" className="scroll-smooth" suppressHydrationWarning>
+    <html
+      lang="th"
+      className={cn("scroll-smooth", fontPrompt.variable, fontAnuphan.variable)}
+      suppressHydrationWarning
+    >
       <body
         className={cn(
-          "min-h-screen bg-background font-sans text-foreground antialiased",
-          "selection:bg-aurora-cyan/30 selection:text-aurora-cyan", // Theme Selection
-          "transition-colors duration-500", // Smooth Theme Switch
-          fontPrompt.variable,
-          fontAnuphan.variable
+          "font-anuphan min-h-screen bg-slate-50/50 text-slate-900 antialiased",
+          "selection:bg-emerald-500/20 selection:text-emerald-900",
+          "transition-colors duration-300"
         )}
       >
-        {/* 🚀 NextTopLoader: Optimized Minimal Loader */}
+        {/* 🚀 Top Loading Bar: Brand Primary (Emerald 500) */}
         <NextTopLoader
-          color="oklch(0.78 0.12 200)" // Aurora Cyan
+          color="#10B981"
           initialPosition={0.08}
-          height={2}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
           showSpinner={false}
           easing="ease"
           speed={200}
-          shadow="0 0 10px oklch(0.78 0.12 200),0 0 5px oklch(0.78 0.12 200)"
+          shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
-        <AppProvider>
-          {/* Main Wrapper Structure */}
-          <div className="relative flex min-h-screen flex-col">{children}</div>
-
-          {/* Global Notification Engine */}
-          <Toaster
-            position="bottom-right"
-            richColors
-            closeButton
-            theme="system"
-            toastOptions={{
-              className:
-                "rounded-3xl border-white/10 bg-background/80 backdrop-blur-xl font-prompt",
-              style: { fontFamily: "var(--font-prompt)" },
-            }}
-          />
-        </AppProvider>
+        {/* 🌍 App Content Infrastructure */}
+        <div className="bg-background relative flex min-h-screen flex-col">
+          {children}
+        </div>
       </body>
     </html>
   )

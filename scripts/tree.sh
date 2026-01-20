@@ -30,13 +30,14 @@ WHITELIST_DIRS=(
   "styles"
   "services"
   "config"
+  "viewport"
 )
 
 # Required root-level configuration files
 ROOT_FILES=(
   "eslint.config.mjs"
   "mdx-components.tsx"
-  "next.config.ts"
+  "next.config.mjs"
   "package.json"
   "components.json"
   "tsconfig.json"

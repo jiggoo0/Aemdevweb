@@ -1,108 +1,153 @@
 /** @format */
+
 "use client"
 
-import { useRef } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { TrendingUp, Users, Zap, Award } from "lucide-react"
+import { Zap, TrendingUp, Users, Globe } from "lucide-react"
+import { cn } from "@/lib/utils"
 
+/**
+ * 📈 ข้อมูลสถิติที่เปลี่ยนความซ่าให้เป็นความเชื่อใจ (Core Data)
+ * ผมเลือก 4 ตัวเลขนี้เพื่อยืนยันว่างานของผมช่วยธุรกิจคุณได้จริงครับ
+ */
 const stats = [
   {
-    id: 1,
-    label: "ลูกค้าที่ไว้วางใจ",
-    value: "150+",
-    icon: Users,
-    desc: "SME และบริษัทชั้นนำ",
-    color: "text-aurora-cyan",
-    glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
-    delay: 0,
-  },
-  {
-    id: 2,
-    label: "สร้างยอดขายรวม",
-    value: "50M+",
-    icon: TrendingUp,
-    desc: "จากลูกค้าทั้งหมด",
-    color: "text-aurora-emerald",
-    glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
-    delay: 0.1,
-  },
-  {
-    id: 3,
-    label: "Google Score",
-    value: "99/100",
+    label: "คะแนน PageSpeed",
+    value: 99,
+    suffix: "/100",
     icon: Zap,
-    desc: "ความเร็วเฉลี่ย (Mobile)",
-    color: "text-aurora-cyan",
-    glow: "shadow-[0_0_20px_rgba(122,243,255,0.3)]",
-    delay: 0.2,
+    description: "เน้นความไวระดับสูงสุด",
+    color: "text-emerald-500",
   },
   {
-    id: 4,
-    label: "ส่งงานตรงเวลา",
-    value: "100%",
-    icon: Award,
-    desc: "ไม่เคยเท ไม่เคยทิ้งงาน",
-    color: "text-aurora-emerald",
-    glow: "shadow-[0_0_20px_rgba(130,255,180,0.3)]",
-    delay: 0.3,
+    label: "โอกาสปิดการขาย",
+    value: 300,
+    suffix: "%",
+    icon: TrendingUp,
+    description: "Conversion ที่ดีกว่าเดิม",
+    color: "text-blue-500",
+  },
+  {
+    label: "ธุรกิจที่ดูแล",
+    value: 50,
+    suffix: "+",
+    icon: Users,
+    description: "SME & Factory ทั่วไทย",
+    color: "text-slate-900",
+  },
+  {
+    label: "เทคโนโลยีปี 2026",
+    value: 2026,
+    suffix: "",
+    icon: Globe,
+    description: "ทันสมัยที่สุดในตอนนี้",
+    color: "text-indigo-500",
   },
 ]
 
 /**
- * 📊 ImpactStats: Luminous Evidence Engine (v.2026)
- * ส่วนแสดงสถิติที่จูนมาเพื่อความน่าเชื่อถือและประสิทธิภาพสูงสุด
- * ✅ Optimized: ลด TBT ด้วยการใช้ CSS Transitions ร่วมกับ Framer Motion
+ * 🔢 Counter Engine
+ * ระบบนับเลขวิ่ง เพื่อให้เจ้าของธุรกิจเห็นความเติบโตที่จับต้องได้
  */
-export const ImpactStats = () => {
+const Counter = ({
+  value,
+  duration = 2,
+}: {
+  value: number
+  duration?: number
+}) => {
+  const [count, setCount] = useState(0)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  useEffect(() => {
+    if (isInView) {
+      let startTime: number | null = null
+      let animationFrame: number
+
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp
+        const progress = Math.min(
+          (timestamp - startTime) / (duration * 1000),
+          1
+        )
+        const currentCount = Math.floor(progress * value)
+
+        setCount(currentCount)
+
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(animate)
+        } else {
+          setCount(value)
+        }
+      }
+
+      animationFrame = requestAnimationFrame(animate)
+      return () => cancelAnimationFrame(animationFrame)
+    }
+  }, [isInView, value, duration])
+
+  return <span ref={ref}>{count.toLocaleString()}</span>
+}
+
+/**
+ * 🧬 ImpactStats — ส่วนแสดงสถิติความสำเร็จ
+ * ผมใช้ตัวเลขเชิงเทคนิคเพื่อสร้างความมั่นใจให้กับลูกค้าก่อนเริ่มงานกันครับ
+ */
+export const ImpactStats = () => {
   return (
-    <div ref={ref} className="relative z-10 container mx-auto px-4">
-      {/* 🌌 Luminous Background Decor */}
-      <div className="bg-aurora-cyan/5 pointer-events-none absolute top-1/2 left-1/2 -z-20 h-full w-full -translate-x-1/2 -translate-y-1/2 blur-[120px]" />
-
-      <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:gap-16">
-        {stats.map((stat) => (
-          <div key={stat.id} className="group relative text-center">
-            {/* 💎 Icon Holder: Modern Glass Style */}
-            <div
-              className={`mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-700 group-hover:scale-110 group-hover:border-white/20 group-hover:bg-white/10 ${stat.glow}`}
-            >
-              <stat.icon
-                className={`h-7 w-7 transition-colors duration-500 ${stat.color}`}
-              />
-            </div>
-
-            {/* ⚡ Value: Luminous Typography with Reflection */}
+    <section className="relative overflow-hidden bg-white py-20 lg:py-32">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 lg:gap-12">
+          {stats.map((stat, index) => (
             <motion.div
+              key={index}
               initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.8,
-                delay: stat.delay,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="mb-3 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-4xl font-black tracking-tighter text-transparent uppercase drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] md:text-5xl lg:text-6xl"
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="group relative flex flex-col items-center text-center"
             >
-              {stat.value}
-            </motion.div>
+              {/* 🛡️ Icon Container: ดีไซน์พรีเมียมสไตล์นายเอ็มซ่ามากส์ */}
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-slate-50 text-slate-900 transition-all duration-500 group-hover:scale-110 group-hover:bg-slate-950 group-hover:text-emerald-400 group-hover:shadow-2xl group-hover:shadow-emerald-500/20">
+                <stat.icon className="h-10 w-10 transition-transform duration-500 group-hover:rotate-12" />
+              </div>
 
-            {/* 📝 Info Area: Humanistic Friendly Design */}
-            <div className="space-y-1">
-              <p className="font-prompt text-sm font-black tracking-[0.2em] text-white uppercase opacity-90 transition-colors duration-300 group-hover:text-aurora-cyan md:text-base">
+              {/* 🔢 ตัวเลขวิ่ง (Animated Value) */}
+              <div className="mb-2 flex items-baseline justify-center">
+                <h3 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 italic md:text-5xl lg:text-6xl">
+                  <Counter value={stat.value} />
+                </h3>
+                <span
+                  className={cn(
+                    "font-prompt ml-1 text-xl font-black italic",
+                    stat.color
+                  )}
+                >
+                  {stat.suffix}
+                </span>
+              </div>
+
+              {/* 📄 หัวข้อและคำอธิบาย */}
+              <div className="font-prompt text-[11px] font-black tracking-[0.3em] text-slate-500 uppercase">
                 {stat.label}
+              </div>
+              <p className="font-anuphan mt-3 max-w-[150px] text-sm font-bold text-slate-400">
+                {stat.description}
               </p>
-              <p className="font-anuphan text-xs leading-relaxed font-medium text-slate-500 opacity-80 transition-opacity duration-300 group-hover:opacity-100 md:text-sm">
-                {stat.desc}
-              </p>
-            </div>
 
-            {/* Bottom Glow Indicator */}
-            <div className="bg-aurora-cyan absolute -bottom-4 left-1/2 h-0.5 w-0 -translate-x-1/2 opacity-0 transition-all duration-500 group-hover:w-12 group-hover:opacity-50" />
-          </div>
-        ))}
+              {/* เส้นคั่นกลางระหว่างข้อมูล (เฉพาะหน้าจอคอม) */}
+              {index < stats.length - 1 && (
+                <div
+                  className="absolute top-1/2 -right-6 hidden h-16 w-[1px] -translate-y-1/2 bg-slate-100 opacity-50 lg:block"
+                  aria-hidden="true"
+                />
+              )}
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   )
 }

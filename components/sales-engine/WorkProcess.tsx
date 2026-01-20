@@ -1,146 +1,130 @@
 /** @format */
+
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React from "react"
+import { motion } from "framer-motion"
 import {
-  MessageSquare,
-  LayoutTemplate,
+  PenTool,
+  Code2,
+  Rocket,
   ShieldCheck,
-  ArrowRight,
-  Sparkles,
-  LucideIcon,
+  MessagesSquare,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// 📝 Interface Definition
-interface WorkStep {
-  icon: LucideIcon
-  title: string
-  desc: string
-  color: string
-  delay: string
-}
-
-// 📦 Data: ขั้นตอนการทำงาน
-const steps: WorkStep[] = [
+/**
+ * 🛤️ ขั้นตอนการทำงาน (My Working Process)
+ * ผมแบ่งขั้นตอนให้ชัดเจน เพื่อให้คุณมั่นใจว่างานจะออกมาเนี๊ยบและตรงเวลาครับ
+ */
+const steps = [
   {
-    icon: MessageSquare,
-    title: "คุยความต้องการ",
-    desc: "บอกโจทย์ธุรกิจของคุณให้พี่เอ็มฟัง พี่เอ็มจะช่วยวางแผนการขายบนหน้าเว็บให้ฟรี แบบไม่มีกั๊ก!",
-    color: "from-aurora-cyan to-aurora-violet",
-    delay: "100ms",
+    title: "คุยกลยุทธ์ธุรกิจ",
+    description:
+      "ผมเริ่มจากการฟังโจทย์ของคุณ เพื่อวางแผนโครงสร้างเว็บที่ช่วยแก้ปัญหาธุรกิจและเน้นปิดการขายได้จริง",
+    icon: MessagesSquare,
   },
   {
-    icon: LayoutTemplate,
-    title: "เลือกทรง & ปรับแต่ง",
-    desc: "เลือกโครงสร้างที่คุณชอบ แล้วส่งข้อมูลมา พี่เอ็มจัดการวาง Layout ที่ปิดการขายได้จริงและสวยงาม",
-    color: "from-aurora-emerald to-aurora-cyan",
-    delay: "300ms",
+    title: "ออกแบบอย่างมีระดับ",
+    description:
+      "ดีไซน์หน้าเว็บให้ดูแพง ทันสมัย และต้องใช้งานง่ายทั้งบนคอมและมือถือ เพื่อภาพลักษณ์ที่ดีของแบรนด์คุณ",
+    icon: PenTool,
   },
   {
-    icon: ShieldCheck,
-    title: "ส่งงาน & ดูแลตลอดชีพ",
-    desc: "เว็บออนไลน์ได้จริงใน 3-7 วัน พร้อมสอนใช้งานเบื้องต้น มีปัญหาทักถามพี่เอ็มได้ตลอดชีพ ไม่ทิ้งงานแน่นอน",
-    color: "from-aurora-violet to-aurora-emerald",
-    delay: "500ms",
+    title: "ลงมือสร้างด้วยใจ",
+    description:
+      "ผมเขียนโค้ดด้วยเทคโนโลยีล่าสุด เพื่อให้เว็บคุณโหลดไวที่สุดและปลอดภัยที่สุด เหนือกว่าเว็บทั่วไปแน่นอน",
+    icon: Code2,
+  },
+  {
+    title: "ส่งมอบความสำเร็จ",
+    description:
+      "ตรวจสอบความเรียบร้อยทุกจุดก่อนออนไลน์ พร้อมสอนวิธีใช้งานเบื้องต้น เพื่อให้คุณเริ่มธุรกิจได้ทันที",
+    icon: Rocket,
   },
 ]
 
-export const WorkProcess = () => {
-  const [isMounted, setIsMounted] = useState(false)
-
-  // ✅ Hydration Fix: ใช้ setTimeout เพื่อผลัก State Update ไปยัง Event Loop รอบถัดไป
-  // ช่วยแก้ Error: "Calling setState synchronously within an effect"
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsMounted(true)
-    }, 0)
-
-    return () => clearTimeout(timer)
-  }, [])
-
+/**
+ * 🏗️ WorkProcess — "ทำงานกับผม ง่ายและเป็นระบบ"
+ * ส่วนนี้ผมแสดงให้เห็นถึงความใส่ใจในทุกขั้นตอนการสร้างเว็บไซต์ครับ
+ */
+const WorkProcess = () => {
   return (
-    <section className="bg-slate-950 relative overflow-hidden py-32">
-      {/* 🌌 Background Decor */}
-      <div className="aurora-bg pointer-events-none absolute top-1/2 left-1/2 -z-10 h-[600px] w-full -translate-x-1/2 -translate-y-1/2 opacity-[0.08] blur-[100px]" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-[size:50px_50px] opacity-[0.02]" />
-
+    <section className="relative overflow-hidden py-12">
       <div className="relative z-10 container mx-auto px-4">
-        {/* 🎯 Header Section */}
-        <div
-          className={cn(
-            "mx-auto mb-24 max-w-4xl text-center transition-all duration-1000",
-            isMounted
-              ? "translate-y-0 opacity-100"
-              : "translate-y-10 opacity-0"
-          )}
-        >
-          <div className="text-aurora-cyan shadow-aurora-glow mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-xl">
-            <Sparkles className="h-4 w-4 animate-pulse" /> Simple Process
-          </div>
+        {/* 📣 ส่วนหัวข้อ: บอกเล่าถึงความเป็นมืออาชีพ */}
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-1.5 shadow-sm"
+          >
+            <ShieldCheck className="h-4 w-4 text-emerald-500" />
+            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-400 uppercase">
+              My Professional Workflow
+            </span>
+          </motion.div>
 
-          <h2 className="text-luminous mb-10 text-4xl tracking-tighter uppercase md:text-7xl">
-            3 ขั้นตอนง่ายๆ <br className="md:hidden" />
-            มีเว็บเป็น <span className="text-aurora-emerald">ของตัวเอง</span>
+          <h2 className="font-prompt mb-6 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
+            ขั้นตอนการทำงาน <br className="hidden md:block" />
+            <span className="text-emerald-500">ที่เนี๊ยบและวัดผลได้จริง</span>
           </h2>
-          <p className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400 opacity-90 md:text-2xl">
-            &quot;ไม่ต้องกังวลเรื่องเทคนิค พี่เอ็มดูแลให้ครบทุกขั้นตอน
-            จนกว่าเว็บจะออนไลน์ครับ&quot;
-          </p>
         </div>
 
-        {/* 🛣️ Steps Grid */}
-        <div className="relative grid grid-cols-1 gap-12 lg:grid-cols-3">
-          {/* Connecting Line (Desktop) */}
-          <div className="absolute top-1/2 left-0 -z-10 hidden h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent lg:block" />
+        {/* 🛤️ ส่วนไทม์ไลน์: ลำดับการทำงาน (Process Timeline) */}
+        <div className="relative mx-auto max-w-5xl">
+          {/* เส้นแกนกลาง (แสดงผลเฉพาะหน้าจอคอม) */}
+          <div
+            className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-emerald-500/50 via-white/10 to-transparent lg:block"
+            aria-hidden="true"
+          />
 
-          {steps.map((step, i) => {
-            const Icon = step.icon
-            return (
-              <div
-                key={i}
+          <div className="space-y-16 lg:space-y-32">
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
                 className={cn(
-                  "group relative transition-all duration-1000",
-                  isMounted
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
+                  "relative flex flex-col items-center gap-8 lg:flex-row lg:gap-20",
+                  index % 2 !== 0 && "lg:flex-row-reverse"
                 )}
-                style={{ transitionDelay: isMounted ? step.delay : "0ms" }}
               >
-                {/* Connector Arrow (Desktop) */}
-                {i < steps.length - 1 && (
-                  <div className="text-aurora-cyan/20 group-hover:text-aurora-cyan/50 absolute top-1/3 -right-10 z-20 hidden transition-all duration-500 lg:block">
-                    <ArrowRight className="h-10 w-10" />
+                {/* 🛡️ ส่วนของไอคอนลำดับขั้นตอน */}
+                <div className="relative z-10 flex h-24 w-24 shrink-0 items-center justify-center rounded-[2.5rem] bg-white text-slate-950 shadow-2xl ring-8 ring-white/5 transition-all duration-500 hover:scale-110 hover:rotate-6">
+                  <step.icon className="h-10 w-10" />
+                  <div className="font-prompt absolute -right-2 -bottom-2 flex h-10 w-10 items-center justify-center rounded-full border-4 border-slate-950 bg-emerald-500 text-sm font-black text-slate-950 shadow-lg">
+                    {index + 1}
                   </div>
-                )}
+                </div>
 
-                <div className="glass-card flex flex-col items-center p-12 text-center transition-all duration-700 hover:-translate-y-4 hover:border-aurora-cyan/40 hover:shadow-luminous">
-                  <div className="relative mb-10">
-                    <div
-                      className={cn(
-                        "shadow-luminous flex h-28 w-28 items-center justify-center rounded-3xl bg-gradient-to-br text-white transition-all duration-700 group-hover:scale-110",
-                        step.color
-                      )}
-                    >
-                      <Icon className="h-10 w-10 drop-shadow-lg" />
-                    </div>
-                    <div className="text-aurora-cyan absolute -top-4 -right-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-900 text-lg font-black">
-                      0{i + 1}
-                    </div>
-                  </div>
-
-                  <h3 className="font-prompt group-hover:text-aurora-cyan mb-6 text-3xl font-black italic tracking-tight text-white uppercase transition-colors">
+                {/* 📝 การ์ดแสดงรายละเอียดเนื้อหา */}
+                <div
+                  className={cn(
+                    "w-full rounded-[3rem] border border-white/10 bg-white/5 p-10 backdrop-blur-md transition-all duration-500 hover:border-emerald-500/30 hover:bg-white/10 md:p-14 lg:flex-1",
+                    index % 2 === 0 ? "lg:text-right" : "lg:text-left"
+                  )}
+                >
+                  <h3 className="font-prompt mb-4 text-2xl font-black tracking-tight text-white uppercase italic md:text-4xl">
                     {step.title}
                   </h3>
-                  <p className="font-anuphan text-base leading-relaxed font-medium text-slate-400 opacity-80 group-hover:opacity-100">
-                    {step.desc}
+                  <p className="font-anuphan text-lg leading-relaxed font-bold text-slate-400">
+                    {step.description}
                   </p>
                 </div>
-              </div>
-            )
-          })}
+
+                {/* ช่องว่างเพื่อความสมดุลของ Layout (เฉพาะหน้าจอคอม) */}
+                <div className="hidden lg:block lg:flex-1" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )
 }
+
+export default WorkProcess

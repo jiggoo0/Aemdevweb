@@ -1,268 +1,159 @@
 /** @format */
 
 import React from "react"
-import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import Image from "next/image"
+import { Metadata } from "next"
+import { ArrowLeft, Calendar, Tag } from "lucide-react"
 import Link from "next/link"
-import {
-  ArrowLeft,
-  Sparkles,
-  Code2,
-  LineChart,
-  Target,
-  Zap,
-  MessageCircle,
-} from "lucide-react"
+import Image from "next/image"
 
-// 📦 Data & Utils
-import {
-  getCaseStudyBySlug,
-  caseStudiesData,
-} from "@/constants/case-studies/case-studies-data"
+/** * ✅ [FIXED]: เปลี่ยนจาก next-md-remote เป็น next-mdx-remote
+ * เพื่อให้ตรงกับแพ็กเกจที่ติดตั้งผ่าน pnpm
+ */
+import { MDXRemote } from "next-mdx-remote/rsc"
+
+// 📂 Logic & Config Architecture
+import { getCaseStudyBySlug, getCaseStudySlugs } from "@/lib/case-studies"
+import { useMDXComponents } from "@/mdx-components"
 import { siteConfig } from "@/constants/site-config"
 
-// 🧩 Components & UI
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { LineStickyButton } from "@/components/shared/LineStickyButton"
+// 🧩 Specialist Components
 import { JsonLd } from "@/components/seo/JsonLd"
+import CTASection from "@/components/landing/CTASection"
 
-interface PageProps {
+// ⚡ Sales Engine Components (สำหรับเรียกใช้ภายในเนื้อหา MDX)
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
+import WorkProcess from "@/components/sales-engine/WorkProcess"
+
+interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
 }
 
-/**
- * 🧬 1. Static Params Generation
- */
 export async function generateStaticParams() {
-  return caseStudiesData.map((project) => ({
-    slug: project.slug,
-  }))
+  const slugs = getCaseStudySlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
-/**
- * 🔍 2. Dynamic Metadata
- */
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
+}: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params
-  const project = getCaseStudyBySlug(slug)
+  const caseStudy = await getCaseStudyBySlug(slug)
 
-  if (!project) return { title: "Case Study Not Found" }
+  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.shortName}` }
 
   return {
-    title: `${project.title} | Case Study by ${siteConfig.shortName}`,
-    description: `เบื้องหลังความสำเร็จของ ${project.client}: ${project.impact}`,
+    title: `${caseStudy.frontmatter.title} | ${siteConfig.shortName}`,
+    description: caseStudy.frontmatter.excerpt,
     openGraph: {
-      images: [project.image],
-      title: project.title,
-      description: project.description,
+      title: caseStudy.frontmatter.title,
+      description: caseStudy.frontmatter.excerpt,
+      images: [{ url: caseStudy.frontmatter.thumbnail || siteConfig.ogImage }],
     },
   }
 }
 
 /**
- * 🚀 3. Case Study Page: Luminous Edition
+ * 🧬 Case Study Detail Engine v2026
+ * จัดการ Error 'Module not found' สำเร็จแล้ว
  */
-export default async function CaseStudyPage({ params }: PageProps) {
+export default async function CaseStudyDetailPage({
+  params,
+}: CaseStudyPageProps) {
+  // Next.js 15/16 มาตรฐาน Specialist ต้อง await params
   const { slug } = await params
-  const project = getCaseStudyBySlug(slug)
+  const caseStudy = await getCaseStudyBySlug(slug)
 
-  if (!project) return notFound()
+  if (!caseStudy) notFound()
+
+  // ลงทะเบียนคอมโพเนนต์สำหรับ MDX
+  const mdxComponents = {
+    ...useMDXComponents({}),
+    ImpactStats,
+    SpeedDemon,
+    WorkProcess,
+  }
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-32 pb-20 text-slate-50 selection:bg-aurora-cyan/30">
-      {/* 🛠️ SEO Schema */}
+    <article className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Article"
         data={{
-          headline: project.title,
-          description: project.description,
-          image: project.image,
-          author: {
-            "@type": "Person",
-            name: siteConfig.name,
-          },
-          publisher: {
-            "@type": "Organization",
-            name: siteConfig.companyName,
-            logo: {
-              "@type": "ImageObject",
-              url: `${siteConfig.url}/android-chrome-192x192.png`,
-            },
-          },
+          headline: caseStudy.frontmatter.title,
+          description: caseStudy.frontmatter.excerpt,
+          image: caseStudy.frontmatter.thumbnail,
+          datePublished: caseStudy.frontmatter.date,
+          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์" },
         }}
       />
 
-      {/* 🌌 Aurora Ambient */}
-      <div className="aurora-bg top-0 right-0 h-[600px] w-full opacity-[0.05] blur-[120px]" />
+      <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
+        <div className="container mx-auto px-4">
+          <Link
+            href="/case-studies"
+            className="group mb-8 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
+          >
+            <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />{" "}
+            ย้อนกลับไปดูผลงานทั้งหมด
+          </Link>
 
-      <div className="relative z-10 container mx-auto px-4">
-        {/* 🔙 Back Navigation */}
-        <Link
-          href="/case-studies" // แก้ไข Link กลับไปยังหน้ารวม Case Studies (ถ้ามี) หรือ services
-          className="hover:text-aurora-cyan group font-prompt mb-12 inline-flex items-center text-[10px] font-black tracking-widest text-slate-500 uppercase transition-all"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-2" />
-          Back to Case Studies
-        </Link>
+          <div className="max-w-4xl">
+            <h1 className="font-prompt mb-8 text-4xl leading-tight font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl lg:text-7xl">
+              {caseStudy.frontmatter.title}
+            </h1>
 
-        {/* 🏆 Header Section: The Impact */}
-        <header className="mb-20">
-          <div className="flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
-            <div className="max-w-3xl">
-              <Badge
-                variant="luminous"
-                className="mb-6 px-4 py-1.5 tracking-widest uppercase"
-              >
-                {project.category}
-              </Badge>
-              <h1 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-7xl">
-                {project.title}
-              </h1>
-              <p className="font-anuphan text-xl leading-relaxed font-medium text-slate-400 md:text-2xl">
-                {project.description}
-              </p>
-            </div>
-
-            <div className="glass-card border-aurora-emerald/30 bg-aurora-emerald/5 shadow-luminous min-w-[300px] rounded-3xl p-8">
-              <span className="font-prompt mb-2 block text-[10px] font-black tracking-widest text-slate-500 uppercase">
-                Project Impact
-              </span>
-              <span className="font-prompt text-aurora-emerald text-2xl leading-tight font-black uppercase italic md:text-3xl">
-                {project.impact}
-              </span>
+            <div className="flex flex-wrap gap-8 border-y border-slate-100 py-8">
+              <div className="flex items-center gap-2.5">
+                <Calendar className="h-4 w-4 text-emerald-500" />
+                <span className="font-anuphan text-[11px] font-bold tracking-widest text-slate-500 uppercase">
+                  {caseStudy.frontmatter.date}
+                </span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Tag className="h-4 w-4 text-emerald-500" />
+                <span className="font-anuphan text-[11px] font-bold tracking-widest text-slate-500 uppercase">
+                  {caseStudy.frontmatter.service ||
+                    caseStudy.frontmatter.category}
+                </span>
+              </div>
             </div>
           </div>
-        </header>
-
-        {/* 🖼️ Hero Showcase Image */}
-        <div className="shadow-luminous group relative mb-24 aspect-video w-full overflow-hidden rounded-[3rem] border border-white/10">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
         </div>
+      </header>
 
-        {/* 📄 Content Grid */}
-        <div className="grid items-start gap-16 lg:grid-cols-12">
-          {/* Left: The Story (8/12) */}
-          <div className="space-y-20 lg:col-span-8">
-            <div className="prose prose-invert prose-lg md:prose-xl prose-headings:font-prompt prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-white prose-p:font-anuphan prose-p:text-slate-400 prose-p:font-medium prose-p:leading-relaxed max-w-none">
-              {/* Note: เนื้อหา Case Study แบบละเอียดควรดึงจาก MDX หรือ field longDescription */}
-              {/* ส่วนนี้จำลองโครงสร้างเนื้อหา */}
-              <div className="mb-8 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  <Target className="text-aurora-cyan h-6 w-6" />
-                </div>
-                <h2 className="!mb-0 text-3xl">🎯 โจทย์ที่ได้รับ</h2>
-              </div>
-              <p>
-                ลูกค้าต้องการขยายฐานลูกค้าจากออฟไลน์สู่ออนไลน์
-                แต่ติดปัญหาเรื่องเว็บเดิมโหลดช้า และลูกค้าไม่กล้ากรอกบัตรเครดิต
-                เราจึงทำการรื้อระบบใหม่ทั้งหมดโดยใช้{" "}
-                <span className="text-white">Next.js 15+</span>{" "}
-                เพื่อความเร็วและความปลอดภัยสูงสุดที่คู่แข่งในตลาดเทียบไม่ติด
-              </p>
-
-              <div className="mt-16 mb-8 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  <Zap className="text-aurora-emerald h-6 w-6" />
-                </div>
-                <h2 className="!mb-0 text-3xl">💡 สิ่งที่นายเอ็มจัดให้</h2>
-              </div>
-              <ul className="grid list-none gap-4 p-0 md:grid-cols-1">
-                {[
-                  "ออกแบบ UX/UI ใหม่ เน้น Mobile First เพื่อการสั่งซื้อที่ลื่นไหลที่สุด",
-                  "เชื่อมต่อ Payment Gateway ตัดยอดทันที ไม่ต้องรอแอดมินคอนเฟิร์ม",
-                  "วางโครงสร้าง SEO แบบ Technical เพื่อให้ติดหน้าแรก Google ในระยะยาว",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="font-anuphan flex gap-4 rounded-2xl border border-white/5 bg-white/5 p-6 text-slate-300"
-                  >
-                    <Sparkles className="text-aurora-cyan h-5 w-5 shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Right: Sidebar Stats & CTA (4/12) */}
-          <aside className="sticky top-32 space-y-8 lg:col-span-4">
-            {/* Stats Glass Card */}
-            <div className="glass-card rounded-[2.5rem] border-white/5 p-8">
-              <h4 className="font-prompt mb-8 flex items-center gap-3 text-xs font-black tracking-widest text-white uppercase">
-                <LineChart className="text-aurora-cyan h-4 w-4" /> Results
-              </h4>
-              <div className="space-y-6">
-                {project.stats.map((stat, i) => (
-                  <div
-                    key={i}
-                    className="group flex items-center justify-between"
-                  >
-                    <span className="font-anuphan text-[10px] font-bold tracking-widest text-slate-500 uppercase">
-                      {stat.label}
-                    </span>
-                    <span className="font-prompt group-hover:text-aurora-cyan text-xl font-black text-white transition-colors">
-                      {stat.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Tech Stack Card */}
-            <div className="glass-card rounded-[2.5rem] border-white/5 p-8">
-              <h4 className="font-prompt mb-6 flex items-center gap-3 text-xs font-black tracking-widest text-white uppercase">
-                <Code2 className="text-aurora-emerald h-4 w-4" /> Tech Stack
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((t) => (
-                  <Badge
-                    key={t}
-                    variant="outline"
-                    className="border-white/10 bg-white/5 font-medium text-slate-400"
-                  >
-                    {t}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-            {/* Dynamic CTA Card */}
-            <div className="border-aurora-cyan/30 bg-aurora-cyan/5 group relative overflow-hidden rounded-[2.5rem] border p-10 text-center">
-              <div className="aurora-bg -top-1/2 -left-1/2 opacity-10 transition-opacity group-hover:opacity-20" />
-              <h3 className="font-prompt relative z-10 mb-4 text-2xl font-black tracking-tighter text-white uppercase italic">
-                อยากได้เว็บ <br />
-                <span className="text-aurora-cyan">แบบนี้บ้างไหม?</span>
-              </h3>
-              <p className="font-anuphan relative z-10 mb-8 text-sm font-medium text-slate-400">
-                อย่ารอให้คู่แข่งแซงหน้า ทักมาคุยไอเดีย <br />
-                ให้นายเอ็มวางเครื่องยนต์ธุรกิจให้ครับ
-              </p>
-              <Button
-                variant="premium"
-                className="shadow-aurora-glow relative z-10 h-14 w-full text-sm font-black"
-                asChild
-              >
-                <Link href="/contact">
-                  <MessageCircle className="mr-2 h-5 w-5" /> ขอใบเสนอราคาฟรี
-                </Link>
-              </Button>
-            </div>
-          </aside>
+      <div className="container mx-auto mb-20 px-4">
+        <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
+          <Image
+            src={caseStudy.frontmatter.thumbnail}
+            alt={caseStudy.frontmatter.title}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1536px) 100vw, 1536px"
+          />
         </div>
       </div>
 
-      <LineStickyButton />
-    </main>
+      <main className="container mx-auto px-4">
+        <div className="prose prose-slate prose-lg prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-900 prose-headings:uppercase prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-24 max-w-4xl">
+          <MDXRemote source={caseStudy.content} components={mdxComponents} />
+        </div>
+      </main>
+
+      <div className="border-y border-slate-50 bg-white py-12">
+        <ImpactStats />
+      </div>
+
+      <div className="mt-32">
+        <CTASection />
+      </div>
+
+      <footer className="mt-20 text-center opacity-40 select-none">
+        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
+          Build & Proof by นายเอ็มซ่ามากส์ v2026 — Case Analysis
+        </p>
+      </footer>
+    </article>
   )
 }

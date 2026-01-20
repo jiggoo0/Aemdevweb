@@ -1,0 +1,26 @@
+{
+  "id": "fb-ads-expert-01",
+  "name": "Facebook Ads Expert Landing Page",
+  "slug": "facebook-ads-expert",
+  "category": "landing-page",
+  "price": 3500,
+  "salePrice": 1900,
+  "isPopular": true,
+  "themeColor": "blue",
+  "stats": {
+    "sold": 210,
+    "rating": 4.8
+  },
+  "tech": {
+    "framework": "สถาปัตยกรรมความเร็วสูง (App Router)",
+    "speedScore": 99,
+    "seoReady": true
+  },
+  "features": [
+    "โครงสร้างเน้นปิดการขาย (High-Conversion Layout)",
+    "ระบบเชื่อมต่อ Line/Messenger ทันที",
+    "ติดตั้ง Facebook Pixel พร้อมเก็บข้อมูลทันที",
+    "โหลดไวในพริบตา (< 1 วินาที) ไม่เสียค่าแอดฟรี"
+  ],
+  "image": "/images/templates/project-01.webp"
+}

@@ -1,152 +1,118 @@
 /** @format */
 
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight, Zap, Sparkles } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-// 🎨 Theme Configuration (Defined outside for performance)
-const themeConfig = {
-  "aurora-cyan": {
-    border: "hover:border-aurora-cyan/40",
-    text: "text-aurora-cyan",
-    hoverTitle: "group-hover:text-aurora-cyan",
-    bg: "bg-aurora-cyan",
-    fill: "fill-aurora-cyan",
-    glow: "group-hover:shadow-aurora-glow",
-  },
-  "aurora-violet": {
-    border: "hover:border-aurora-violet/40",
-    text: "text-aurora-violet",
-    hoverTitle: "group-hover:text-aurora-violet",
-    bg: "bg-aurora-violet",
-    fill: "fill-aurora-violet",
-    glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.68_0.15_280_/_0.25)]",
-  },
-  "aurora-emerald": {
-    border: "hover:border-aurora-emerald/40",
-    text: "text-aurora-emerald",
-    hoverTitle: "group-hover:text-aurora-emerald",
-    bg: "bg-aurora-emerald",
-    fill: "fill-aurora-emerald",
-    glow: "group-hover:shadow-[0_0_50px_-10px_oklch(0.84_0.15_155_/_0.25)]",
-  },
-}
+import { motion } from "framer-motion"
+import { ArrowUpRight, ShieldCheck, Zap, ImageOff } from "lucide-react"
 
 interface CaseStudyCardProps {
   title: string
+  description: string
+  image?: string
   slug: string
-  category: string
-  image: string
-  stats: { label: string; value: string }
-  themeColor?: keyof typeof themeConfig
-  priority?: boolean // ✅ Control LCP Loading Strategy
+  industry: string
+  result?: string
+  index?: number
 }
 
 /**
- * 🏆 CaseStudyCard: Luminous Showcase Engine (v.2026)
- * Architecture: Next.js 15.x + Tailwind CSS 4.0
- * Concept: High-Conversion Visual Trust
+ * 🏗️ CaseStudyCard — "หน้าด่านโชว์ผลงานความสำเร็จ"
+ * ผมออกแบบมาให้ดูพรีเมียม เพื่อให้ลูกค้า SME และโรงงานเห็นภาพว่า
+ * งานที่ผมทำให้จะช่วยยกระดับธุรกิจของเขาได้จริงครับ
  */
-export function CaseStudyCard({
+const CaseStudyCard = ({
   title,
-  slug,
-  category,
+  description,
   image,
-  stats,
-  themeColor = "aurora-cyan",
-  priority = false,
-}: CaseStudyCardProps) {
-  const currentTheme = themeConfig[themeColor]
+  slug,
+  industry,
+  result = "เน้นความไวระดับพรีเมียม",
+  index = 0,
+}: CaseStudyCardProps) => {
+  // 🛡️ [FIXED]: Image Safety Check — ป้องกันแอป Crash เมื่อรูปภาพมีปัญหา
+  const imageSrc =
+    image && image.trim() !== "" ? image : "/images/showcase/placeholder.webp"
 
   return (
-    <Link
-      href={`/case-studies/${slug}`}
-      className={cn(
-        "group bg-background shadow-luminous relative block overflow-hidden rounded-[2.5rem] border border-white/5 transition-all duration-700 hover:-translate-y-2",
-        currentTheme.border
-      )}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      className="group relative h-[480px] overflow-hidden rounded-[3rem] bg-slate-950 shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:shadow-emerald-500/10"
     >
-      {/* 🖼️ Premium Image Layer (LCP Optimized) */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-        <Image
-          src={image}
-          alt={title}
-          fill
-          className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-90"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={priority}
-        />
-        {/* Luminous Overlay: การไล่เฉดสีเพื่อให้ข้อความโดดเด่น */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent opacity-95" />
+      {/* 🖼️ ส่วนแสดงภาพพื้นหลัง (Background Image Layer) */}
+      <div className="absolute inset-0 z-0">
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={title || "ผลงานโดย นายเอ็มซ่ามากส์"}
+            fill
+            className="object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-30"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={index < 3}
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-slate-900">
+            <ImageOff className="text-slate-700" size={48} />
+          </div>
+        )}
+        {/* Cinematic Gradient: ช่วยให้ตัวหนังสืออ่านง่ายขึ้น */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
       </div>
 
-      {/* ✨ Luminous Info Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10">
-        <div className="flex items-end justify-between gap-6">
-          <div className="max-w-[75%] space-y-4">
-            <span
-              className={cn(
-                "inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/60 px-4 py-1.5 text-[10px] font-black tracking-[0.25em] uppercase backdrop-blur-xl transition-all duration-500 shadow-luminous",
-                currentTheme.text,
-                "group-hover:text-white group-hover:border-white/20"
-              )}
-            >
-              <Sparkles className="h-3 w-3 animate-pulse" />
-              {category}
-            </span>
-            <h3
-              className={cn(
-                "font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase transition-colors duration-500 md:text-4xl italic",
-                currentTheme.hoverTitle
-              )}
-            >
-              {title}
-            </h3>
-          </div>
+      {/* 🏷️ ส่วนป้ายบอกสถานะ (Status Badges) */}
+      <div className="absolute top-8 left-8 z-20 flex flex-wrap gap-3">
+        <div className="flex items-center gap-2 rounded-full border border-white/5 bg-white/10 px-4 py-2 shadow-xl ring-1 ring-white/20 backdrop-blur-md">
+          <ShieldCheck size={14} className="text-emerald-400" />
+          <span className="font-prompt text-[10px] font-black tracking-widest text-white uppercase">
+            {industry}
+          </span>
+        </div>
 
-          {/* ⚡ Performance Badge (Trust Signal) */}
-          <div
-            className={cn(
-              "min-w-[110px] rounded-3xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-2xl transition-all duration-500 group-hover:-translate-y-2 group-hover:bg-white/10",
-              currentTheme.glow
-            )}
-          >
-            <p className="font-anuphan mb-1.5 flex items-center justify-center gap-1.5 text-[9px] font-black tracking-widest text-slate-400 uppercase">
-              <Zap
-                className={cn(
-                  "h-3 w-3 animate-pulse",
-                  currentTheme.text,
-                  currentTheme.fill
-                )}
-              />{" "}
-              {stats.label}
-            </p>
-            <p className="font-prompt text-2xl font-black tracking-tighter text-white italic">
-              {stats.value}
-            </p>
+        <div className="flex items-center gap-2 rounded-full border border-emerald-500/10 bg-emerald-500/20 px-4 py-2 shadow-xl ring-1 ring-emerald-500/30 backdrop-blur-md">
+          <Zap size={14} className="fill-emerald-400 text-emerald-400" />
+          <span className="font-prompt text-[10px] font-black tracking-widest text-emerald-400 uppercase">
+            {result}
+          </span>
+        </div>
+      </div>
+
+      {/* 📝 พื้นที่เนื้อหาหลัก (Content Area) */}
+      <div className="absolute inset-x-0 bottom-0 z-20 p-8 md:p-10 lg:p-12">
+        <div className="flex flex-col gap-5">
+          <h3 className="font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors duration-500 group-hover:text-emerald-400 md:text-4xl">
+            {title}
+          </h3>
+          <p className="font-anuphan line-clamp-2 text-[15px] leading-relaxed font-bold text-slate-300 transition-colors group-hover:text-white">
+            {description}
+          </p>
+
+          <div className="mt-4 border-t border-white/10 pt-8">
+            <Link
+              href={`/case-studies/${slug}`}
+              className="font-prompt group/btn inline-flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-white uppercase transition-all duration-300 hover:gap-5 hover:text-emerald-400"
+            >
+              ดูเบื้องหลังความสำเร็จ
+              <ArrowUpRight
+                size={18}
+                className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+              />
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* 🚀 Floating Action Button */}
+      {/* 🌑 แสงฟุ้งมรกต (Interaction Glow) */}
       <div
-        className={cn(
-          "shadow-aurora-glow absolute top-8 right-8 flex h-12 w-12 translate-y-6 scale-75 items-center justify-center rounded-2xl text-slate-950 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100",
-          currentTheme.bg
-        )}
-      >
-        <ArrowUpRight className="h-6 w-6 stroke-[3px]" />
-      </div>
-
-      {/* Bottom Glow Line Engine */}
-      <div
-        className={cn(
-          "absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100",
-          currentTheme.bg
-        )}
+        className="absolute -inset-1 z-10 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
+        aria-hidden="true"
       />
-    </Link>
+    </motion.div>
   )
 }
+
+export default CaseStudyCard

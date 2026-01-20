@@ -1,242 +1,207 @@
 /** @format */
+
 "use client"
 
-import React, { useState, useMemo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import {
-  CheckCircle2,
-  Calculator,
-  ArrowRight,
-  Sparkles,
-  ShieldCheck,
-  Zap,
-  type LucideIcon,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { siteConfig } from "@/constants/site-config"
+import React, { useState, useEffect, useRef } from "react"
+import { motion, useInView } from "framer-motion"
+import { Zap, Gauge, MousePointerClick, RefreshCw } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 /**
- * 🍱 PriceEstimator: Luminous Interactive Engine (v.2026)
- * ระบบคำนวณราคาที่จูนมาเพื่อความลื่นไหลระดับ 100 PageSpeed
- * ✅ Optimized: ลด TBT ด้วยการจำกัดการเรียกใช้ Function ภายนอกใน Render Loop
+ * 🏎️ SpeedDemon — ระบบจำลองความเร็ว
+ * ผมสร้างส่วนนี้มาเพื่อให้คุณเห็นภาพชัดๆ ว่าเว็บที่ผมทำให้นั้น
+ * โหลดไวต่างจากเว็บทั่วไปขนาดไหน เพราะทุกวินาทีที่ช้าคือยอดขายที่หายไปครับ
  */
+export const SpeedDemon = () => {
+  const [isRunning, setIsRunning] = useState(false)
+  const [progressAEM, setProgressAEM] = useState(0)
+  const [progressGeneral, setProgressGeneral] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, amount: 0.5 })
 
-interface Feature {
-  id: string
-  label: string
-  price: number
-  fixed?: boolean
-  desc: string
-}
+  const runTest = () => {
+    if (isRunning) return
+    setIsRunning(true)
+    setProgressAEM(0)
+    setProgressGeneral(0)
 
-const features: Feature[] = [
-  {
-    id: "base",
-    label: "Landing Page คุณภาพสูง",
-    price: 15000,
-    fixed: true,
-    desc: "ดีไซน์ Modern High-Performance รองรับมือถือ 100%",
-  },
-  {
-    id: "domain",
-    label: "Domain & High-Speed Hosting",
-    price: 1500,
-    desc: "จดโดเมนใหม่พร้อมเซ็ตอัพ Server ที่เร็วที่สุดสำหรับคุณ",
-  },
-  {
-    id: "seo",
-    label: "SEO & Speed Optimization",
-    price: 3500,
-    desc: "ปรับโครงสร้างให้ Google รักและโหลดไวระดับปีศาจ",
-  },
-  {
-    id: "notify",
-    label: "Line Notify Automation",
-    price: 1500,
-    desc: "ระบบแจ้งเตือนลูกค้าทักผ่านไลน์ทันทีแบบ Real-time",
-  },
-  {
-    id: "content",
-    label: "Copywriting (เขียนคำขาย)",
-    price: 2500,
-    desc: "ออกแบบเนื้อหาและพาดหัวเพื่อปิดการขายโดยเฉพาะ",
-  },
-]
+    // 🚀 เว็บที่ผมทำ (AEM Engine) - โหลดพริบตาเดียวด้วยเทคนิคพิเศษ
+    const timerAEM = setInterval(() => {
+      setProgressAEM((prev) => {
+        if (prev >= 100) {
+          clearInterval(timerAEM)
+          setIsRunning(false)
+          return 100
+        }
+        return prev + 5
+      })
+    }, 30)
 
-export function PriceEstimator() {
-  const [selected, setSelected] = useState<string[]>(["base"])
-
-  const toggleFeature = (id: string, isFixed: boolean) => {
-    if (isFixed) return
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-    )
+    // 🐢 เว็บทั่วไป - โหลดตามสภาพระบบเก่าที่โครงสร้างไม่ดี
+    const timerGeneral = setInterval(() => {
+      setProgressGeneral((prev) => {
+        if (prev >= 100) {
+          clearInterval(timerGeneral)
+          return 100
+        }
+        return prev + 0.8
+      })
+    }, 50)
   }
 
-  const totalPrice = useMemo(() => {
-    return features
-      .filter((f) => selected.includes(f.id))
-      .reduce((sum, f) => sum + f.price, 0)
-  }, [selected])
+  useEffect(() => {
+    if (isInView && !isRunning && progressAEM === 0) {
+      runTest()
+    }
+  }, [isInView])
 
   return (
-    <div className="shadow-luminous mx-auto flex max-w-5xl flex-col overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] backdrop-blur-3xl md:flex-row">
-      {/* 🟢 Left Side: Options Engine */}
-      <div className="relative flex-1 overflow-hidden p-8 md:p-12">
-        <div className="aurora-bg pointer-events-none -top-20 -left-20 -z-10 h-64 w-64 opacity-10" />
+    <section className="relative overflow-hidden bg-slate-950 py-24 lg:py-40">
+      {/* 🧩 พื้นหลังลายตารางจางๆ แบบ Industrial */}
+      <div
+        className="absolute inset-0 z-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)] opacity-[0.05]"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center" />
+      </div>
 
-        <div className="relative z-10 mb-10 flex items-center gap-4">
-          <div className="bg-aurora-cyan/10 border-aurora-cyan/20 rounded-2xl border p-3">
-            <Calculator className="text-aurora-cyan h-6 w-6" />
-          </div>
-          <div>
-            <h3 className="font-prompt text-2xl font-black tracking-tight text-white uppercase italic">
-              เลือกฟีเจอร์ที่ต้องการ
-            </h3>
-            <p className="font-anuphan mt-1 text-sm text-slate-500">
-              ปรับแต่งความแรงให้ตรงโจทย์ธุรกิจคุณ
+      <div className="relative z-10 container mx-auto px-4" ref={ref}>
+        <div className="flex flex-col items-center gap-16 lg:flex-row">
+          {/* 1️⃣ ฝั่งเนื้อหา: บอกเล่าถึงความสำคัญของความเร็ว */}
+          <div className="flex-1 lg:max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 shadow-lg"
+            >
+              <Zap className="h-4 w-4 text-emerald-400" />
+              <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-400 uppercase">
+                Speed is Revenue
+              </span>
+            </motion.div>
+
+            <h2 className="font-prompt mb-8 text-4xl leading-[0.9] font-black tracking-tighter text-white uppercase italic md:text-6xl">
+              ลูกค้าไม่รอ... <br />
+              <span className="text-emerald-400">ถ้าเปิดช้าเขาหนีแน่</span>
+            </h2>
+
+            <p className="font-anuphan mb-10 text-lg leading-relaxed font-bold text-slate-400">
+              เชื่อไหมครับ? หากเว็บโหลดช้าเกิน 3 วินาที ลูกค้ากว่า 40%
+              จะกดปิดทันที ผมเลยเน้นย้ำเรื่องความเร็วมาเป็นอันดับหนึ่ง
+              เพื่อให้ธุรกิจของคุณ
+              <span className="text-xl font-bold text-white italic underline decoration-emerald-500/30">
+                {" "}
+                "ติดสปีด"{" "}
+              </span>
+              ตั้งแต่วินาทีแรกที่ลูกค้าคลิกเข้ามาครับ
             </p>
-          </div>
-        </div>
 
-        <div className="relative z-10 space-y-4">
-          {features.map((f) => {
-            const isSelected = selected.includes(f.id)
-            return (
-              <motion.div
-                key={f.id}
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.985 }}
-                onClick={() => toggleFeature(f.id, !!f.fixed)}
-                className={`group flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition-all duration-500 ${
-                  isSelected
-                    ? "border-aurora-cyan/40 shadow-aurora-glow bg-white/5"
-                    : "border-white/5 bg-white/[0.02] hover:border-white/20 hover:bg-white/5"
-                }`}
-              >
-                <div className="flex items-start gap-4">
-                  <div
-                    className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-500 ${
-                      isSelected
-                        ? "bg-aurora-cyan border-aurora-cyan"
-                        : "group-hover:border-aurora-cyan border-slate-600 bg-transparent"
-                    }`}
-                  >
-                    {isSelected && (
-                      <CheckCircle2 className="h-4 w-4 stroke-[3] text-slate-950" />
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p
-                        className={`font-prompt text-base font-bold tracking-tight transition-colors md:text-lg ${
-                          isSelected
-                            ? "text-white"
-                            : "text-slate-400 group-hover:text-slate-200"
-                        }`}
-                      >
-                        {f.label}
-                      </p>
-                      {f.fixed && (
-                        <span className="bg-aurora-cyan/20 text-aurora-cyan border-aurora-cyan/20 rounded-full border px-2 py-0.5 text-[9px] font-black tracking-[0.2em] uppercase">
-                          Required
-                        </span>
-                      )}
+            <button
+              onClick={runTest}
+              disabled={isRunning}
+              className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-8 py-4 text-[11px] font-black tracking-widest text-white uppercase transition-all hover:bg-emerald-500 hover:text-slate-950 disabled:opacity-50"
+            >
+              <RefreshCw
+                className={cn(
+                  "h-4 w-4 transition-transform duration-700",
+                  isRunning && "animate-spin"
+                )}
+              />
+              {isRunning
+                ? "กำลังทดสอบความเร็ว..."
+                : "เริ่มการทดสอบใหม่อีกครั้ง"}
+            </button>
+          </div>
+
+          {/* 2️⃣ ฝั่งภาพกราฟ: เปรียบเทียบให้เห็นกับตา */}
+          <div className="w-full flex-1">
+            <div className="rounded-[3rem] border border-white/5 bg-white/[0.02] p-8 shadow-2xl backdrop-blur-xl md:p-14">
+              <div className="space-y-16">
+                {/* 🚀 เว็บที่ทำกับ นายเอ็มซ่ามากส์ */}
+                <div className="space-y-5">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20">
+                        <Zap className="h-5 w-5 fill-current" />
+                      </div>
+                      <span className="font-prompt text-sm font-black tracking-[0.2em] text-white uppercase italic">
+                        เว็บสไตล์ AEMDEVWEB
+                      </span>
                     </div>
-                    <p className="font-anuphan mt-1 text-sm text-slate-500 transition-colors group-hover:text-slate-400">
-                      {f.desc}
+                    <span className="font-prompt text-2xl font-black text-emerald-400 italic">
+                      {progressAEM === 100
+                        ? "0.8s"
+                        : `${(progressAEM / 10).toFixed(1)}s`}
+                    </span>
+                  </div>
+                  <div className="h-5 w-full overflow-hidden rounded-full bg-white/5 p-1">
+                    <motion.div
+                      animate={{ width: `${progressAEM}%` }}
+                      transition={{ type: "spring", stiffness: 50 }}
+                      className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.5)]"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[10px] font-black tracking-widest text-emerald-500/80 uppercase">
+                      Status: ลื่นปรื๊ด พร้อมรับยอดขาย
                     </p>
+                    <div className="flex gap-1">
+                      {[1, 2, 3].map((i) => (
+                        <div
+                          key={i}
+                          className="h-1 w-3 animate-pulse rounded-full bg-emerald-500"
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <span
-                  className={`ml-4 text-base font-black whitespace-nowrap transition-colors duration-500 ${
-                    isSelected ? "text-aurora-cyan" : "text-slate-500"
-                  }`}
-                >
-                  +{f.price.toLocaleString()}
-                </span>
-              </motion.div>
-            )
-          })}
-        </div>
-      </div>
 
-      {/* 🔵 Right Side: Summary Engine */}
-      <div className="relative flex flex-col justify-between border-l border-white/5 bg-slate-900/40 p-10 backdrop-blur-md md:w-[420px] md:p-14">
-        <div className="aurora-bg pointer-events-none -right-20 -bottom-40 -z-10 h-80 w-80 opacity-20" />
+                {/* 🐢 เว็บสำเร็จรูปทั่วไป */}
+                <div className="space-y-5 opacity-40 grayscale-[0.5]">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-slate-400">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-700">
+                        <Gauge className="h-5 w-5" />
+                      </div>
+                      <span className="font-prompt text-sm font-black tracking-[0.2em] uppercase italic">
+                        เว็บสำเร็จรูปทั่วไป
+                      </span>
+                    </div>
+                    <span className="font-prompt text-2xl font-black text-slate-400 italic">
+                      {progressGeneral === 100
+                        ? "7.2s"
+                        : `${(progressGeneral / 10).toFixed(1)}s`}
+                    </span>
+                  </div>
+                  <div className="h-5 w-full overflow-hidden rounded-full bg-white/5 p-1">
+                    <motion.div
+                      animate={{ width: `${progressGeneral}%` }}
+                      className="h-full rounded-full bg-slate-600"
+                    />
+                  </div>
+                  <p className="text-[10px] font-black tracking-widest text-slate-500 uppercase">
+                    Status: โหลดนานไป ลูกค้าหนีหมดแล้ว
+                  </p>
+                </div>
+              </div>
 
-        <div className="relative z-10">
-          <p className="font-prompt mb-4 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase">
-            Estimated Budget
-          </p>
-          <div className="flex items-baseline gap-3">
-            <span className="text-aurora-cyan text-2xl font-black md:text-3xl">
-              ฿
-            </span>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={totalPrice}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="font-prompt text-6xl leading-none font-black tracking-tighter text-white md:text-8xl"
-              >
-                {totalPrice.toLocaleString()}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="mt-12 space-y-5">
-            <FeatureItem
-              icon={ShieldCheck}
-              text="ฟรี! ดูแล Server & SSL ปีแรก"
-            />
-            <FeatureItem icon={Zap} text="งานเสร็จไวใน 7-14 วันทำการ" />
-            <FeatureItem icon={Sparkles} text="รับประกันแก้ไขงานจนกว่าจะพอใจ" />
+              {/* 💡 ส่วนอธิบายเทคนิคเล็กๆ น้อยๆ */}
+              <div className="mt-14 flex items-center gap-5 rounded-[2rem] border border-emerald-500/10 bg-emerald-500/5 p-8">
+                <MousePointerClick className="h-10 w-10 shrink-0 text-emerald-400" />
+                <p className="font-anuphan text-sm leading-relaxed text-slate-300">
+                  <span className="mb-1 block font-bold text-white">
+                    ความลับของผม:
+                  </span>
+                  ผมเลือกใช้เทคโนโลยีที่ดีที่สุดอย่าง Next.js 15 และ 16
+                  เพื่อให้หน้าเว็บปรากฏทันทีที่กดคลิก
+                  โดยไม่ต้องรอโหลดข้อมูลทั้งหน้าให้เสียเวลาครับ
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="relative z-10 mt-16 text-center">
-          <Button
-            asChild
-            className="btn-luminous shadow-luminous group h-16 w-full text-lg font-bold tracking-widest uppercase"
-          >
-            <a
-              href={siteConfig.links.line}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Lock This Price{" "}
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </a>
-          </Button>
-          <p className="font-anuphan mt-6 text-[10px] leading-relaxed font-medium tracking-wider text-slate-500 uppercase">
-            * ราคาประเมินเบื้องต้นเพื่อใช้ในการวางแผน <br />
-            งบประมาณจริงอาจปรับตามสเกลงานของท่าน
-          </p>
-        </div>
       </div>
-    </div>
-  )
-}
-
-/** 🧩 Sub-component: Feature Points */
-interface FeatureItemProps {
-  icon: LucideIcon
-  text: string
-}
-
-function FeatureItem({
-  icon: Icon,
-  text,
-}: FeatureItemProps): React.JSX.Element {
-  return (
-    <div className="group flex items-center gap-4 text-sm text-slate-400 transition-colors hover:text-slate-200 md:text-base">
-      <div className="group-hover:border-aurora-cyan/30 rounded-lg border border-white/10 bg-white/5 p-1.5 transition-all duration-300">
-        <Icon className="text-aurora-emerald h-5 w-5 shrink-0" />
-      </div>
-      <span className="font-anuphan font-medium tracking-wide">{text}</span>
-    </div>
+    </section>
   )
 }

@@ -1,138 +1,167 @@
 /** @format */
-"use client"
 
-import React from "react"
-import dynamic from "next/dynamic"
+"use client";
+
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { CheckCircle2, Users, Factory, Zap } from "lucide-react";
 
 /**
- * 🛰️ HomeClientSections: Luminous Performance Engine (v.2026)
- * รวม Components ที่ทำงานฝั่ง Client เพื่อลด TBT ในหน้าแรก
- * ✅ Strategy: Selective Hydration & SSR-Ready for SEO
+ * 🤝 รายชื่อลูกค้าที่ไว้ใจผม (Client Portfolio)
+ * แนะนำ: ใช้รูป .webp ขนาดเล็กเพื่อให้เว็บโหลดไวที่สุดตามมาตรฐานผมครับ
  */
+const clients = [
+  { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
+  { name: "Industrial Solutions", logo: "/images/showcase/project-01.webp" },
+  { name: "SME Thailand", logo: "/images/showcase/aemdevweb-hero.webp" },
+  { name: "Factory Pro", logo: "/images/showcase/project-01.webp" },
+  { name: "Digital Partner", logo: "/images/showcase/unlink-th1.webp" },
+  { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
+];
 
-// 1. 📊 Impact Stats: ใช้ Loading State ง่ายๆ เพื่อหลอกตาว่าเร็ว
-// (SSR: True เพื่อให้ตัวเลขสำคัญติด Index SEO)
-const ImpactStats = dynamic(
-  () =>
-    import("@/components/sales-engine/ImpactStats").then(
-      (mod) => mod.ImpactStats
-    ),
+/**
+ * 📊 สถิติที่ผมสร้างให้ลูกค้า (Impact Stats)
+ * ผมเน้นตัวเลขที่เจ้าของธุรกิจให้ความสำคัญ: การเติบโต, ความน่าเชื่อถือ และความเร็ว
+ */
+const stats = [
   {
-    ssr: true,
-    loading: () => (
-      <div className="container mx-auto px-4 py-24">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="flex flex-col items-center space-y-5">
-              <div className="h-16 w-16 animate-pulse rounded-2xl border border-white/5 bg-white/5 shadow-inner" />
-              <div className="h-8 w-24 animate-pulse rounded-lg bg-white/5" />
-            </div>
+    label: "ดูแลธุรกิจมาแล้ว",
+    value: "50+",
+    icon: Users,
+    description: "ช่วย SME และสตาร์ทอัพไทยให้เติบโตบนโลกออนไลน์",
+  },
+  {
+    label: "กลุ่มโรงงานอุตสาหกรรม",
+    value: "12+",
+    icon: Factory,
+    description: "วางระบบและดูแลเว็บไซต์ให้โรงงานระดับประเทศ",
+  },
+  {
+    label: "คะแนนความเร็วเว็บ",
+    value: "99/100",
+    icon: Zap,
+    description: "คะแนนเฉลี่ย Google PageSpeed ที่ผมทำให้ทุกโปรเจกต์",
+  },
+];
+
+/**
+ * 🧬 HomeClientSections — ส่วนแสดงความน่าเชื่อถือ
+ */
+const HomeClientSections = () => {
+  return (
+    <section className="relative overflow-hidden bg-slate-50 py-24 antialiased lg:py-32">
+      {/* 📐 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4">
+        
+        {/* --- 🤝 ส่วนที่ 1: โลโก้ลูกค้า (Infinite Auto-Slider) --- */}
+        <div className="mb-32 text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase"
+          >
+            Trusted by Forward-Thinking Businesses
+          </motion.p>
+
+          {/* ระบบสไลด์โลโก้: เน้นความลื่นไหลและไม่กินทรัพยากรเครื่อง */}
+          <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)] py-10">
+            <motion.div
+              animate={{ x: [0, -1920] }}
+              transition={{
+                duration: 40,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="flex shrink-0 items-center gap-16 md:gap-24"
+            >
+              {[...Array(4)].map((_, groupIndex) => (
+                <React.Fragment key={groupIndex}>
+                  {clients.map((client, i) => (
+                    <div
+                      key={`${groupIndex}-${i}`}
+                      className="relative h-10 w-32 shrink-0 opacity-40 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-12 md:w-40"
+                    >
+                      <Image
+                        src={client.logo}
+                        alt={client.name}
+                        fill
+                        sizes="(max-width: 768px) 128px, 160px"
+                        className="object-contain"
+                        priority={groupIndex === 0}
+                      />
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+        {/* --- 📊 ส่วนที่ 2: สถิติผลงาน (Impact Stats) --- */}
+        <div className="grid gap-8 md:grid-cols-3">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.15,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              viewport={{ once: true }}
+              className="group relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-10 transition-all duration-500 hover:-translate-y-3 hover:border-emerald-500/30 hover:shadow-2xl"
+            >
+              {/* Icon Container */}
+              <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all duration-500 group-hover:rotate-[10deg] group-hover:bg-emerald-500 group-hover:text-white">
+                <stat.icon className="h-7 w-7" />
+              </div>
+
+              {/* ตัวเลขสถิติ */}
+              <div className="mb-3 flex items-baseline gap-2">
+                <span className="font-prompt text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+                  {stat.value}
+                </span>
+                <CheckCircle2 className="h-6 w-6 animate-pulse text-emerald-500" />
+              </div>
+
+              <h3 className="font-prompt text-[11px] font-black tracking-[0.25em] text-slate-500 uppercase italic">
+                {stat.label}
+              </h3>
+              <p className="font-anuphan mt-4 text-sm leading-relaxed font-bold text-slate-400 transition-colors group-hover:text-slate-500">
+                {stat.description}
+              </p>
+            </motion.div>
           ))}
         </div>
-      </div>
-    ),
-  }
-)
 
-// 2. 💰 Price Estimator: Logic หนัก -> SSR: FALSE เท่านั้น
-// ไม่จำเป็นต้องให้ Server Render เพราะ User ต้องกดเล่นเอง ช่วยลด TBT ได้เยอะที่สุด
-const PriceEstimator = dynamic(
-  () =>
-    import("@/components/sales-engine/PriceEstimator").then(
-      (mod) => mod.PriceEstimator
-    ),
-  {
-    ssr: false, // ⚡ Critical Optimization: ไม่ต้อง Render ฝั่ง Server
-    loading: () => (
-      <div className="glass-card shadow-luminous mx-auto flex min-h-[500px] w-full max-w-5xl animate-pulse flex-col items-center justify-center rounded-[2.5rem] border border-white/10 bg-white/5">
-        <div className="mb-12 h-10 w-64 rounded-2xl bg-white/10" />
-        <div className="w-full max-w-2xl space-y-6 px-10">
-          <div className="h-20 w-full rounded-2xl border border-white/5 bg-white/5" />
-        </div>
-      </div>
-    ),
-  }
-)
-
-// 3. ⭐ Testimonials: SSR: True (เพื่อ SEO)
-// รีวิวลูกค้าเป็น Content สำคัญที่ Google ควรเห็น
-const Testimonials = dynamic(
-  () =>
-    import("@/components/landing/Testimonials").then(
-      (mod) => mod.Testimonials
-    ),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="container mx-auto px-4 py-20">
-        <div className="glass-card h-80 w-full animate-pulse rounded-[2rem] border border-white/5 bg-white/5" />
-      </div>
-    ),
-  }
-)
-
-/**
- * ✅ HomeClientSections Logic
- */
-export function HomeClientSections() {
-  return (
-    <>
-      {/* 📊 Section: Success Metrics */}
-      <section className="relative z-10 border-y border-white/5 bg-slate-950/20 backdrop-blur-3xl">
-        <div className="from-aurora-cyan/5 to-aurora-violet/5 absolute inset-0 bg-gradient-to-r via-transparent opacity-30" />
-        <div className="relative py-12 md:py-20">
-          <ImpactStats />
-        </div>
-      </section>
-
-      {/* 💰 Section: Interactive Pricing (Render On Client Only) */}
-      <section
-        id="pricing"
-        className="relative container mx-auto px-4 py-32 lg:py-48 content-visibility-auto"
-      >
-        {/* Background Ambient Glow */}
-        <div className="bg-aurora-cyan/10 absolute top-1/2 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[100px] will-change-transform" />
-
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-20 text-center">
-            <span className="text-aurora-cyan font-prompt mb-6 block text-[10px] font-black tracking-[0.3em] uppercase italic">
-              Transparent Pricing
-            </span>
-            <h2 className="text-luminous mb-6 text-4xl uppercase italic md:text-6xl">
-              ประเมินราคา<span className="text-aurora-emerald">เบื้องต้น</span>
-            </h2>
-            <p className="font-anuphan mx-auto max-w-2xl text-lg font-medium text-slate-400">
-              เลือกฟีเจอร์ที่ต้องการ แล้วระบบจะคำนวณงบประมาณให้ทันที{" "}
+        {/* --- 💡 ส่วนที่ 3: ข้อความปิดท้าย (Final Hook) --- */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mt-28 rounded-[3.5rem] bg-slate-950 p-12 text-center shadow-2xl md:p-24"
+        >
+          <div className="mx-auto max-w-4xl">
+            <h2 className="font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-5xl lg:text-6xl">
+              ตั้งแต่ธุรกิจ SME จนถึงโรงงานอุตสาหกรรม{" "}
               <br className="hidden md:block" />
-              <span className="text-sm text-white/60">
-                (งบประมาณจริงอาจปรับเปลี่ยนตามขอบเขตงานของคุณ)
+              <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
+                ผมเปลี่ยน "ความเร็ว" ให้เป็น "ยอดขาย"
               </span>
-            </p>
-          </div>
-
-          <PriceEstimator />
-        </div>
-      </section>
-
-      {/* ⭐ Section: Social Proof & Testimonials */}
-      <section className="relative overflow-hidden rounded-t-[3rem] border-t border-white/10 bg-white/[0.01] pt-32 pb-24 md:rounded-t-[4.5rem] content-visibility-auto">
-        <div className="bg-aurora-violet/10 absolute top-0 right-0 h-96 w-96 rounded-full blur-[100px] opacity-40 will-change-transform" />
-
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="mb-20 text-center">
-            <div className="text-aurora-violet font-prompt mb-6 inline-block text-[10px] font-black tracking-[0.4em] uppercase">
-              Customer Voices
-            </div>
-            <h2 className="text-luminous text-4xl uppercase italic md:text-6xl">
-              Voice of <span className="text-slate-500">Success</span>
             </h2>
           </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
-          <Testimonials />
-        </div>
-      </section>
-    </>
-  )
-}
-
-export default HomeClientSections
+export default HomeClientSections;

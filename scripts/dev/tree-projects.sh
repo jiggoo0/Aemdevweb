@@ -1,39 +1,99 @@
 #!/bin/bash
 
-# === CONFIG ===
-# เพิ่ม "config" เข้าไปใน WHITELIST_DIRS เพื่อให้ระบบสแกนโฟลเดอร์นี้ด้วย
+# ==============================================================================
+# Project: www.aemdevweb.com
+# Purpose: Project Structure + Config + MDX + Next.js + Pre-deploy Context Report
+# Output : project-structure.md
+# ==============================================================================
+
+# ===============================
+# CONFIG / METADATA
+# ===============================
 OUTPUT_FILE="project-structure.md"
 PRE_DEPLOY_REPORT="pre-deploy-report.md"
-WHITELIST_DIRS=("config" "app" "components" "lib" "hooks" "constants" "content" "types" "content"  "public" "providers")
 
-# ✅ 1. ลบไฟล์เก่าทิ้งก่อนเริ่มงาน
+MDX_COMPONENTS_FILE="mdx-components.tsx"
+NEXT_CONFIG_FILE="next.config.ts"
+
+SITE_NAME="AEMDevWeb"
+SITE_URL="https://www.aemdevweb.com"
+AUTHOR="AEMDevWeb Automation"
+ENVIRONMENT="pre-deploy"
+PROJECT_TYPE="Web Application"
+BUILD_ID=$(git rev-parse --short HEAD 2>/dev/null || echo "local")
+GENERATED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+WHITELIST_DIRS=(
+  "config"
+  "app"
+  "components"
+  "lib"
+  "hooks"
+  "constants"
+  "content"
+  "types"
+  "public"
+  "providers"
+)
+
+# ===============================
+# CLEAN OLD OUTPUT
+# ===============================
 rm -f "$OUTPUT_FILE"
 
-# === EXECUTE ===
-echo "🚀 กำลังสแกนโครงสร้างโฟลเดอร์รวมถึงชุดคำสั่ง Config และวิเคราะห์โปรเจกต์..."
+echo "🚀 Scanning project structure for $SITE_NAME..."
 
 {
-  echo "# 📁 รายงานโครงสร้างโปรเจกต์ (Extended Scan)"
-  echo "_สร้างเมื่อ: $(date)_"
-  echo ""
+  # ===============================
+  # FRONT MATTER METADATA
+  # ===============================
+  cat <<EOF
+---
+title: "Project Structure Report"
+site: "$SITE_NAME"
+url: "$SITE_URL"
+author: "$AUTHOR"
+projectType: "$PROJECT_TYPE"
+environment: "$ENVIRONMENT"
+buildId: "$BUILD_ID"
+generatedAt: "$GENERATED_AT"
+contentType: "technical-documentation"
+tags:
+  - project-structure
+  - mdx
+  - nextjs
+  - pre-deploy
+  - aemdevweb
+---
 
-  # --- 2. โครงสร้างโฟลเดอร์ ---
+# 📁 Project Structure Report
+_Generated: **$GENERATED_AT**_
+
+> **Site:** $SITE_URL  
+> **Environment:** $ENVIRONMENT  
+> **Build ID:** $BUILD_ID
+
+EOF
+
+  # ===============================
+  # FOLDER STRUCTURE
+  # ===============================
   echo "## 🌳 Folder Structure"
+
   for dir in "${WHITELIST_DIRS[@]}"; do
     if [ -d "$dir" ]; then
+      echo ""
       echo "📂 $dir"
-      # ปรับปรุงการหาไฟล์ให้ข้ามโฟลเดอร์ที่ไม่จำเป็นและจัดการลำดับชั้นให้สวยงาม
+
       find "$dir" -maxdepth 10 -mindepth 1 \
         -path "*/node_modules" -prune -o \
         -path "*/.*" -prune -o \
         -print | sort | while read -r path; do
-          # คำนวณความลึกของโฟลเดอร์เพื่อสร้าง Indent
+
           depth=$(echo "$path" | tr -cd '/' | wc -c)
-          # ปรับ Indent ให้เหมาะสมกับจุดเริ่มต้น
-          indent_count=$(( (depth) * 2 ))
-          indent=$(printf '%*s' $indent_count "")
+          indent=$(printf '%*s' $((depth * 2)) "")
           name=$(basename "$path")
-          
+
           if [ -d "$path" ]; then
             echo "${indent}📂 $name"
           else
@@ -41,72 +101,136 @@ echo "🚀 กำลังสแกนโครงสร้างโฟลเด
           fi
         done
     else
-      echo "⚠️ ไม่พบโฟลเดอร์: $dir (Skipped)"
+      echo ""
+      echo "⚠️ Skipped: $dir (not found)"
     fi
   done
 
+  # ===============================
+  # PACKAGE.JSON OVERVIEW
+  # ===============================
   echo ""
-  echo "## 📦 ตรวจหา package.json"
+  echo "## 📦 package.json Overview"
   echo '```json'
+
   if [ -f "package.json" ]; then
-    echo "พบ package.json ที่ root ของโปรเจกต์"
-    echo ""
     if command -v jq >/dev/null 2>&1; then
-      # แสดงเฉพาะส่วนที่สำคัญต่อการ Deploy และโครงสร้างโปรเจกต์
       jq '{name, version, scripts, dependencies, devDependencies}' package.json
     else
       cat package.json
     fi
   else
-    echo "ไม่พบ package.json"
+    echo "package.json not found"
   fi
+
   echo '```'
+
+  # ===============================
+  # MDX COMPONENTS CHECK
+  # ===============================
   echo ""
+  echo "## 🧩 MDX Components Check"
 
-  # --- 3. ส่วนวิเคราะห์ปัญหา (ดึงมาจาก Pre-deploy Report) ---
-  echo "## 📝 ผลการวิเคราะห์และปัญหาที่พบ"
+  if [ -f "$MDX_COMPONENTS_FILE" ]; then
+    echo "✅ File found: \`$MDX_COMPONENTS_FILE\`"
+    echo ""
+    echo "**Purpose**"
+    echo "- Central mapping for MDX rendering"
+    echo "- Controls how headings, links, images, and code appear"
+    echo "- Direct impact on SEO, accessibility, and content consistency"
+    echo ""
+    echo "**Review checklist**"
+    echo "- [ ] Heading hierarchy is semantic (h1–h6)"
+    echo "- [ ] External links handle target / rel correctly"
+    echo "- [ ] No inline script or unsafe HTML"
+    echo "- [ ] Compatible with App Router + MDX pipeline"
+    echo ""
+    echo "**Source snapshot**"
+    echo '```typescript'
+    cat "$MDX_COMPONENTS_FILE"
+    echo '```'
+  else
+    echo "⚠️ mdx-components.tsx not found"
+    echo "MDX rendering may rely on defaults or be incomplete"
+  fi
+
+  # ===============================
+  # NEXT.JS CONFIG CHECK
+  # ===============================
+  echo ""
+  echo "## ⚙️ Next.js Configuration Check"
+
+  if [ -f "$NEXT_CONFIG_FILE" ]; then
+    echo "✅ File found: \`$NEXT_CONFIG_FILE\`"
+    echo ""
+    echo "**Focus areas**"
+    echo "- App Router / experimental flags"
+    echo "- Image domains & remote patterns"
+    echo "- MDX / compiler / transpilation rules"
+    echo "- Output mode (standalone / server)"
+    echo ""
+    echo "**Source snapshot**"
+    echo '```typescript'
+    cat "$NEXT_CONFIG_FILE"
+    echo '```'
+  else
+    echo "⚠️ next.config.ts not found"
+    echo "Using default Next.js behavior"
+  fi
+
+  # ===============================
+  # PRE-DEPLOY ANALYSIS
+  # ===============================
+  echo ""
+  echo "## 📝 Pre-deploy Analysis"
   echo "________"
-  
+
   if [ -f "$PRE_DEPLOY_REPORT" ]; then
-    echo "🔍 ตรวจพบรายงานการตรวจสอบล่าสุด:"
-    echo ""
-    
-    # 3.1 ตรวจสอบสถานะภาพรวม
-    if grep -qi "READY FOR DEPLOY" "$PRE_DEPLOY_REPORT"; then
-      echo "✅ สถานะปัจจุบัน: **READY FOR DEPLOY**"
-    else
-      echo "❌ สถานะปัจจุบัน: **FIX REQUIRED**"
-    fi
+    echo "🔍 Latest pre-deploy report detected"
     echo ""
 
-    # 3.2 ดึงรายละเอียด Route Statistics
+    if grep -qi "READY FOR DEPLOY" "$PRE_DEPLOY_REPORT"; then
+      echo "✅ Status: **READY FOR DEPLOY**"
+    else
+      echo "❌ Status: **FIX REQUIRED**"
+    fi
+
+    echo ""
+
     if grep -q "### 📊 Route Statistics" "$PRE_DEPLOY_REPORT"; then
       echo "### 📍 Production Route Map"
-      echo "\`\`\`text"
-      # ใช้ sed ดึงเนื้อหาเฉพาะส่วนตาราง Route
-      sed -n '/### 📊 Route Statistics/,/---/p' "$PRE_DEPLOY_REPORT" | \
-      grep -v "###" | \
-      grep -v -- "---" | \
-      sed '/^$/d'
-      echo "\`\`\`"
+      echo '```text'
+      sed -n '/### 📊 Route Statistics/,/---/p' "$PRE_DEPLOY_REPORT" \
+        | grep -v "###" \
+        | grep -v -- "---" \
+        | sed '/^$/d'
+      echo '```'
     fi
 
-    # 3.3 ดึง Error/Warning
+    echo ""
     echo "### ⚠️ Issues Highlight"
-    ERRORS=$(grep -E -- "❌|⚠️|error|warning|failed" "$PRE_DEPLOY_REPORT")
-    if [ -z "$ERRORS" ]; then
-      echo "✅ ไม่พบปัญหาสำคัญในรายงานล่าสุด"
+
+    ISSUES=$(grep -E -- "❌|⚠️|error|warning|failed" "$PRE_DEPLOY_REPORT")
+    if [ -z "$ISSUES" ]; then
+      echo "✅ No critical issues detected"
     else
-      echo "$ERRORS"
+      echo "$ISSUES"
     fi
   else
-    echo "⚠️ ไม่พบไฟล์ $PRE_DEPLOY_REPORT กรุณารัน pre-deploy-check.sh เพื่อสร้างข้อมูลล่าสุด"
+    echo "⚠️ pre-deploy-report.md not found"
+    echo "Run pre-deploy-check.sh to generate it"
   fi
 
+  # ===============================
+  # FINAL STATUS
+  # ===============================
   echo ""
   echo "---"
-  echo "Status: Scanning process completed successfully."
+  echo "Status: Scan completed successfully."
+  echo "Scope: Architecture • MDX • Next.js • Pre-deploy"
+  echo "Target: Production readiness & AI context"
 
 } > "$OUTPUT_FILE"
 
-echo "✅ เพิ่มการตรวจสอบโฟลเดอร์ config และสแกนเสร็จสิ้น → $OUTPUT_FILE"
+echo "✅ Scan completed → $OUTPUT_FILE"
+echo "🌐 Context ready for → $SITE_URL"

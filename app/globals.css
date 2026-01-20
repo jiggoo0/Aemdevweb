@@ -1,161 +1,103 @@
 /** @format */
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
-@plugin "@tailwindcss/typography";
-
-/* 🎨 AEM DEVWEB DESIGN SYSTEM 2026: MIDNIGHT DEEP TECH 
-   Performance Tuning: TBT & Main-thread Work Optimization (Final Polish)
-   DNA: "กดปุ๊บ มาปั๊บ" - จูนเพื่อคะแนน Performance 100/100
-*/
 
 @theme {
-  /* --- 1. Typography Hierarchy --- */
-  --font-prompt: var(--font-prompt), ui-sans-serif, system-ui;
-  --font-anuphan: var(--font-anuphan), ui-sans-serif, system-ui;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  /* 🏢 Brand Identity & Core Colors (Shadcn v4 compatible) */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
 
-  /* --- 2. Animations (Smooth & Lightweight) --- */
-  /* ✅ Optimized: ใช้ translate3d เพื่อ Force Hardware Acceleration */
-  @keyframes float {
-    0%, 100% { transform: translate3d(0, 0, 0) rotate(12deg); }
-    50% { transform: translate3d(0, -15px, 0) rotate(14deg); }
+  --color-primary: hsl(222.2 47.4% 11.2%);
+  --color-primary-foreground: hsl(210 40% 98%);
+
+  --color-secondary: hsl(210 40% 96.1%);
+  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
+
+  --color-accent: hsl(210 40% 96.1%);
+  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+
+  --color-success: hsl(158 64% 52%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+
+  /* 🎨 UI Elements */
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-input: hsl(214.3 31.8% 91.4%);
+  --color-ring: hsl(222.2 84% 4.9%);
+
+  /* 📐 Industrial Geometry */
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+
+  /* 🖋️ Typography Bridge (Connecting with Next/Font) */
+  --font-prompt: var(--font-prompt);
+  --font-anuphan: var(--font-anuphan);
+
+  /* 🎞️ Industrial Micro-Interactions */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
-  --animate-float: float 6s ease-in-out infinite;
-
-  @keyframes aurora {
-    0%, 100% { opacity: 0.3; transform: translate3d(0, 0, 0) scale(1); }
-    33% { opacity: 0.4; transform: translate3d(20px, -30px, 0) scale(1.05); }
-    66% { opacity: 0.35; transform: translate3d(-15px, 15px, 0) scale(0.95); }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
-  --animate-aurora: aurora 15s ease-in-out infinite;
-
-  @keyframes marquee {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(calc(-100% - 2.5rem), 0, 0); }
-  }
-  --animate-marquee: marquee 50s linear infinite;
-
-  /* --- 3. Colors Mapping (OKLCH Color Space) --- */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-border: var(--border);
-  
-  /* Aurora Accents */
-  --color-aurora-cyan: var(--aurora-cyan);
-  --color-aurora-violet: var(--aurora-violet);
-  --color-aurora-emerald: var(--aurora-emerald);
-
-  /* --- 4. Shadows & Radius --- */
-  --shadow-luminous: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
-  --shadow-aurora-glow: 0 0 50px -10px oklch(0.75 0.12 200 / 0.2);
-
-  --radius-xl: 1.25rem;
-  --radius-2xl: 2rem;
-  --radius-3xl: 2.75rem;
 }
 
+/* -------------------------------------------------------------------------- */
+/* 🏭 Base Layer: Industrial SME Foundation                                   */
+/* -------------------------------------------------------------------------- */
+
 @layer base {
-  :root {
-    /* 🟢 Light Mode Fallback */
-    --background: oklch(0.99 0.005 240);
-    --foreground: oklch(0.2 0.02 240);
-    --border: oklch(0.92 0.01 240);
-    --aurora-cyan: oklch(0.65 0.15 200);
-    --aurora-violet: oklch(0.55 0.20 280);
-    --aurora-emerald: oklch(0.70 0.15 155);
-  }
-
-  .dark {
-    /* 🌑 Dark Mode: Midnight Deep Tech (Stable Edition) */
-    --background: oklch(0.14 0.02 260);
-    --foreground: oklch(0.98 0.005 240);
-    --border: oklch(0.25 0.03 260 / 0.5);
-    
-    /* Neon Accents */
-    --aurora-cyan: oklch(0.75 0.12 200);
-    --aurora-violet: oklch(0.65 0.18 280);
-    --aurora-emerald: oklch(0.82 0.18 155);
-  }
-
   * {
-    border-color: var(--border);
+    @apply border-border outline-ring/50;
   }
 
   body {
-    @apply bg-background text-foreground selection:bg-aurora-cyan/30 antialiased;
-    font-family: var(--font-prompt);
-    
-    /* ระบบแสง Ambient พื้นหลัง (Noise-free & GPU Optimized) */
-    background-image:
-      radial-gradient(circle at 2% 2%, color-mix(in oklch, var(--aurora-cyan), transparent 97%), transparent 40%),
-      radial-gradient(circle at 98% 98%, color-mix(in oklch, var(--aurora-violet), transparent 97%), transparent 40%);
+    @apply bg-background text-foreground font-anuphan selection:bg-success/20 selection:text-primary antialiased;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-black tracking-tighter uppercase;
-  }
-  
-  p {
-    @apply leading-relaxed font-medium;
-    font-family: var(--font-anuphan);
-  }
-}
-
-@layer components {
-  /* 🪄 Layered UI Components */
-
-  /* ✅ FIXED: Optimized Aurora Background for Mobile Performance */
-  .aurora-bg {
-    @apply pointer-events-none absolute opacity-10 transition-all duration-1000;
-    z-index: -20;
-    
-    /* ⚡ Performance Optimization: High Performance Mode */
-    will-change: transform, opacity; 
-    transform: translate3d(0, 0, 0); /* บังคับใช้ GPU เร็วกว่า translateZ */
-    backface-visibility: hidden; /* ลดการกระพริบ */
-    
-    /* Mobile: ลดความละเอียด Blur ลงเพื่อ FPS ที่สูงขึ้น (30px) */
-    filter: blur(30px); 
-    background: radial-gradient(circle, var(--aurora-cyan), var(--aurora-violet));
-
-    @media (min-width: 768px) {
-      /* Desktop: สวยเต็มสูบ ใส่ Blur ได้หนักๆ เพราะเครื่องแรงกว่า */
-      filter: blur(140px);
-      background: linear-gradient(
-        135deg,
-        var(--aurora-cyan),
-        var(--aurora-violet),
-        var(--aurora-emerald)
-      );
-      animation: var(--animate-aurora);
-    }
+  /* Typography Strategy for Industrial Authority */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-prompt text-primary font-bold tracking-tight;
   }
 
-  .text-luminous {
-    @apply font-black tracking-tighter text-white uppercase;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
-  }
-
-  .btn-luminous {
-    @apply shadow-aurora-glow relative flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-4 font-bold transition-all duration-500 hover:scale-[1.03] active:scale-95;
-    background: linear-gradient(135deg, var(--aurora-cyan), var(--aurora-emerald));
-    color: oklch(0.14 0.02 260);
-  }
-
-  .glass-card {
-    @apply shadow-luminous border transition-all duration-500;
-    /* ลด backdrop-blur บน mobile เพื่อความลื่นไหล */
-    @apply backdrop-blur-md md:backdrop-blur-2xl;
-    
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border-color: rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-2xl);
+  /* เน้นหัวข้อหลักให้มีความดุดันตามสไตล์ Industrial Italic ที่คุณวางไว้ */
+  .heading-heavy {
+    @apply font-prompt font-black tracking-tighter uppercase italic;
   }
 }
 
-/* ⚡ Utilities */
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar { display: none; }
+/* -------------------------------------------------------------------------- */
+/* 🚀 Utilities Layer                                                        */
+/* -------------------------------------------------------------------------- */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* แก้อาการ Flash ของตัวอักษรไทยในบาง Browser */
+  .thai-font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

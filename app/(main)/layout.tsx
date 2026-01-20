@@ -1,40 +1,76 @@
 /** @format */
+
 import React from "react"
-import { Header } from "@/components/shared/Header"
-import { Footer } from "@/components/shared/Footer"
+// 🛠️ ปรับการนำเข้าคอมโพเนนต์ให้เป็นระบบ และตรงตามมาตรฐานโปรเจกต์
+import Navbar from "@/components/shared/Navbar"
+import Footer from "@/components/shared/Footer"
+import LineStickyButton from "@/components/shared/LineStickyButton"
 import { cn } from "@/lib/utils"
 
 interface MainLayoutProps {
   children: React.ReactNode
 }
 
+/**
+ * 🏗️ MainLayout — โครงสร้างหลักสำหรับหน้าบริการและเนื้อหา
+ * ผมออกแบบมาให้ดูสะอาดตา แต่แฝงไปด้วยรายละเอียดที่สะท้อนถึงความเนี๊ยบ
+ * เพื่อให้ลูกค้า SME และโรงงานที่เข้ามาอ่าน รู้สึกถึงความเป็นมืออาชีพของผมครับ
+ */
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div
       className={cn(
-        "bg-slate-950 relative flex min-h-svh flex-col font-sans antialiased text-slate-50",
-        "selection:bg-aurora-cyan/30 selection:text-aurora-cyan"
+        "relative flex min-h-screen flex-col bg-white antialiased",
+        "selection:bg-emerald-500/20 selection:text-emerald-900"
       )}
     >
-      {/* 🌌 Background Decor */}
-      <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none">
-        <div className="aurora-bg -top-[15%] left-1/2 h-[700px] w-[1100px] -translate-x-1/2 opacity-[0.12] blur-[100px]" />
-        <div className="bg-aurora-violet/5 absolute -right-[10%] -bottom-[10%] h-[600px] w-[600px] rounded-full blur-[130px]" />
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-[0.02] mix-blend-soft-light" />
+      {/* 🌌 ส่วนตกแต่งพื้นหลัง: ผมใช้ลายตารางจางๆ เพื่อให้ความรู้สึกถึง "งานระบบ" ที่แม่นยำ */}
+      <div
+        className="pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none"
+        aria-hidden="true"
+      >
+        {/* 🟢 แสงฟุ้งมรกต: เพิ่มมิติให้เว็บดูไม่จืดชืดจนเกินไป */}
+        <div className="absolute -top-[10%] left-1/2 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-emerald-500/5 blur-[120px]" />
+
+        {/* 📐 ลายตาราง (Engineering Grid): สะท้อนถึงความละเอียดรอบคอบในงานสร้าง */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-[0.02]" />
+
+        {/* 🌑 พื้นผิวนอยซ์ (Subtle Noise): เพิ่มความพรีเมียมให้พื้นหลังดูมีมิติมากขึ้น */}
+        <div
+          className="absolute inset-0 opacity-[0.012] contrast-150 grayscale filter"
+          style={{ filter: "url(#noiseFilter)" }}
+        />
       </div>
 
-      {/* 🟢 Header: เรียกใช้โดยตรง (z-index ถูกคุมใน Header.tsx แล้ว) */}
-      <Header />
+      {/* 🧭 แถบนำทาง: ผมใช้ Navbar ที่เราดีไซน์ไว้ให้ใช้ง่ายทั้งบนคอมและมือถือ */}
+      <Navbar />
 
-      {/* 📦 Content */}
-      <main id="main-content" className="relative z-10 flex-1">
+      {/* 📦 พื้นที่เนื้อหาหลัก: ส่วนที่จะแสดงข้อมูลบริการ, ผลงาน หรือบทความ */}
+      <main
+        id="main-content"
+        className="relative z-10 flex-1 pt-20 transition-all duration-700 ease-in-out"
+      >
         {children}
       </main>
 
-      {/* ⚫ Footer */}
-      <footer className="bg-slate-950/50 relative z-10 border-t border-white/5 backdrop-blur-md">
-        <Footer />
-      </footer>
+      {/* ⚫ ส่วนท้ายเว็บ: รวบรวมข้อมูลติดต่อและเมนูสำคัญทั้งหมด */}
+      <Footer />
+
+      {/* 📱 ปุ่มไลน์ (Sticky Button): เพื่อให้ลูกค้าทักหาผมได้ทันทีที่สงสัย */}
+      <LineStickyButton />
+
+      {/* 🎨 ระบบฟิลเตอร์พิเศษ: ตัวสร้าง Effect Noise สำหรับพื้นหลัง */}
+      <svg className="invisible absolute h-0 w-0" aria-hidden="true">
+        <filter id="noiseFilter">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.6"
+            numOctaves="3"
+            stitchTiles="stitch"
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+      </svg>
     </div>
   )
 }

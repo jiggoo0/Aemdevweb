@@ -1,88 +1,159 @@
 /** @format */
+
 "use client"
 
 import React from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { MessageCircle, Rocket, Sparkles, ArrowRight } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowRight, Zap, ShieldCheck, Star } from "lucide-react"
 import { siteConfig } from "@/constants/site-config"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 
 /**
- * 🚀 Hero Section: Luminous Tech Engine (v.2026 - LCP Optimized)
- * ✅ Strategy: Instant Paint for H1 (No Animation Wrapper) -> Excellent LCP
- * ✅ Performance: Deferred Animation for secondary content -> Low TBT
+ * 🏗️ Hero Section — "ความประทับใจแรกที่เปลี่ยนเป็นยอดขาย"
+ * ผมออกแบบส่วนนี้มาเพื่อบอกให้ลูกค้า SME และโรงงานรู้ทันทีว่า
+ * เว็บที่ผมทำให้นั้น "เน้นความไว" และ "ใช้งานได้จริง" ครับ
  */
-export const Hero = () => {
+const Hero = () => {
   return (
-    <section className="bg-background relative flex min-h-[95vh] items-center justify-center overflow-hidden pt-32 pb-24 md:pt-48 md:pb-40">
-      {/* 🌌 1. Optimized Background: Static Layer for Zero Paint Delay */}
-      <div className="pointer-events-none absolute inset-0 -z-10 select-none">
-        <div className="aurora-bg absolute top-[-10%] left-1/2 h-[500px] w-[800px] -translate-x-1/2 opacity-15 blur-[80px]" />
+    <section className="relative min-h-[90vh] w-full overflow-hidden bg-white pt-32 lg:pt-48">
+      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
+      <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] [mask-image:linear-gradient(180deg,white,transparent)] bg-center" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        {/* 🏷️ Badge: Independent Animation */}
-        <div className="mb-12 inline-block animate-in fade-in zoom-in-50 duration-500">
-          <Badge
-            variant="outline"
-            className="text-aurora-cyan border-white/10 bg-white/5 px-6 py-2.5 text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-3xl"
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="flex flex-col items-center text-center">
+          {/* 🏷️ Badge: ตอกย้ำเทคโนโลยีที่ผมเลือกใช้ */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-5 py-2"
           >
-            <Sparkles className="mr-2 h-4 w-4" />
-            SME Sale Engine Expert 2026
-          </Badge>
-        </div>
-
-        {/* ⚡ 2. Headline: Critical LCP Element (No Animation) */}
-        <h1 className="text-luminous mx-auto mb-10 max-w-7xl text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter uppercase italic leading-[0.9]">
-          เปลี่ยนเว็บนิ่ง <br />
-          <span className="relative mt-8 inline-block">
-            <span className="from-aurora-cyan to-aurora-emerald bg-gradient-to-r via-white bg-clip-text pb-8 text-transparent drop-shadow-xl">
-              เครื่องจักรผลิตเงิน
+            <Zap className="h-4 w-4 text-emerald-500" />
+            <span className="text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase">
+              Next.js 15 & 16 Specialist v.2026
             </span>
+          </motion.div>
 
-            {/* Rocket Icon: Hidden on Mobile to prevent CLS */}
-            <Rocket className="text-aurora-emerald animate-float absolute -top-16 -right-24 hidden h-28 w-28 lg:block" />
-          </span>
-        </h1>
+          {/* 📣 พาดหัวหลัก (Main Headline) */}
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-prompt mb-8 max-w-5xl text-5xl leading-[1.1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl"
+          >
+            ทำเว็บให้เนี๊ยบ <br className="hidden md:block" />
+            <span className="bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
+              ปิดการขายให้ไว
+            </span>
+          </motion.h1>
 
-        {/* 📦 3. Deferred Content: Slide-up Animation */}
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100 fill-mode-forwards opacity-0">
-          {/* Description */}
-          <p className="font-anuphan mx-auto mb-16 max-w-4xl text-xl font-medium text-slate-300 md:text-3xl leading-relaxed">
-            รับทำเว็บไซต์ที่เน้น{" "}
-            <span className="border-aurora-cyan/40 border-b-2 font-bold text-white">
-              &quot;ยอดขาย&quot;
-            </span>{" "}
-            เป็นหลัก ด้วยระบบที่โหลดไวที่สุดในปี 2026
-          </p>
+          {/* 📝 พาดหัวรอง (Sub-headline) */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="font-anuphan mb-12 max-w-2xl text-lg leading-relaxed font-bold text-slate-500 md:text-xl"
+          >
+            ผมช่วยยกระดับธุรกิจ SME และโรงงานของคุณด้วยเว็บไซต์ที่โหลดไว
+            ใช้งานง่าย และคุ้มค่าเงินที่สุด งานเนี๊ยบ ไม่ทิ้งงาน 100% โดย{" "}
+            <span className="font-black text-slate-950 italic">
+              นายเอ็มซ่ามากส์
+            </span>
+          </motion.p>
 
-          {/* Action Area */}
-          <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="btn-luminous shadow-aurora-glow h-20 px-14 text-xl rounded-full"
+          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-col items-center gap-6 sm:flex-row"
+          >
+            <Link
+              href={siteConfig.links?.line || "#"}
+              target="_blank"
+              className="group relative flex items-center gap-3 rounded-full bg-slate-950 px-10 py-5 text-base font-black tracking-wider text-white shadow-2xl transition-all hover:scale-105 active:scale-95"
             >
-              <Link href={siteConfig.links.line} target="_blank">
-                <MessageCircle className="mr-3 h-7 w-7" /> คุยงานกับพี่เอ็ม
-              </Link>
-            </Button>
+              {siteConfig.cta?.main || "ทักมาคุยกับผม"}
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            </Link>
 
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="group h-20 rounded-full border-white/10 px-14 text-xl font-bold text-slate-300 backdrop-blur-2xl transition-all duration-300 hover:bg-white/5 hover:text-white"
+            <Link
+              href="/services"
+              className="flex items-center gap-2 text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
             >
-              <Link href="/case-studies">
-                ดูผลงานที่ผ่านมา{" "}
-                <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-3" />
-              </Link>
-            </Button>
-          </div>
+              {siteConfig.cta?.pricing || "ดูราคาแต่ละแพ็กเกจ"}
+            </Link>
+          </motion.div>
+
+          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-20 flex flex-wrap justify-center gap-12 border-t border-slate-100 pt-12"
+          >
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-1 text-emerald-500">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </div>
+              <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                ลูกค้าพึงพอใจ 100%
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-2 text-slate-900">
+                <Zap className="h-5 w-5" />
+                <span className="font-prompt text-xl font-black italic">
+                  LCP &lt; 1.0s
+                </span>
+              </div>
+              <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                เปิดไวไม่ต้องรอนาน
+              </span>
+            </div>
+
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-2 text-slate-900">
+                <ShieldCheck className="h-5 w-5" />
+                <span className="font-prompt text-xl font-black italic">
+                  2026 Ready
+                </span>
+              </div>
+              <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                ปลอดภัยและทันสมัย
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* 🖼️ รูปภาพผลงาน (Decorative Image) */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="container mx-auto mt-20 px-4"
+      >
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
+          <Image
+            src="/images/showcase/aemdevweb-hero.webp"
+            alt="ผลงานของนายเอ็มซ่ามากส์"
+            fill
+            priority
+            className="object-cover transition-transform duration-700 hover:scale-105"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+        </div>
+      </motion.div>
     </section>
   )
 }
+
+export default Hero

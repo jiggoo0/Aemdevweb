@@ -1,37 +1,59 @@
 /** @format */
+
 import type { MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, Sparkles } from "lucide-react"
+import {
+  ArrowRight,
+  Sparkles,
+  CheckCircle2,
+  Zap,
+  ShieldCheck,
+} from "lucide-react"
 
+// 🧩 Specialist Components Integration
+/**
+ * ✅ [FIXED] นำเข้า ImpactStats เพื่อลงทะเบียนเข้ากับระบบ MDX
+ * ป้องกัน Error: Expected component ImpactStats to be defined
+ */
+import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+
+/**
+ * 🏗️ MDX Components Specialist Edition v2026
+ * ออกแบบมาเพื่อยกระดับ Content Marketing สำหรับ SME และโรงงาน
+ */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // 1. 🖼️ Custom Image (Fixed: HTML Validation & Luminous Style)
-    // เปลี่ยนจาก div เป็น span เพื่อป้องกัน Error: <div> cannot be a descendant of <p>
+    ...components,
+
+    // 🔗 1. Core Logic Components
+    ImpactStats, // ✅ ลงทะเบียนที่นี่เพื่อให้เรียกใช้ <ImpactStats /> ในไฟล์ .mdx ได้ทันที
+
+    // 🖼️ 2. Optimized Luminous Image (Industrial Standard)
     img: (props) => (
-      <span className="shadow-luminous group relative my-12 block w-full overflow-hidden rounded-[2rem] border border-white/10">
+      <span className="group relative my-16 block w-full overflow-hidden rounded-[2.5rem] border border-slate-200 bg-slate-50 shadow-2xl">
         <span className="relative block aspect-video w-full overflow-hidden">
           <Image
             src={props.src || ""}
-            alt={props.alt || "Blog Image"}
+            alt={props.alt || "AEM DEV WEB Specialist Image"}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 1200px"
           />
         </span>
         {props.alt && (
-          <span className="font-prompt block border-t border-white/5 bg-slate-950/90 p-4 text-center text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
+          <span className="font-prompt block border-t border-slate-100 bg-white p-5 text-center text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase">
             {props.alt}
           </span>
         )}
       </span>
     ),
 
-    // 2. 🔗 Custom Link: Luminous Cyan Style
+    // 🔗 3. Smart Logic Links
     a: ({ href, children }) => {
       const isInternal = href?.startsWith("/") || href?.startsWith("#")
       const baseClass =
-        "font-bold transition-all decoration-aurora-cyan/30 underline-offset-4 hover:decoration-aurora-cyan underline text-aurora-cyan hover:text-white"
+        "font-bold transition-all text-emerald-600 hover:text-emerald-500 underline decoration-emerald-500/30 underline-offset-4 hover:decoration-emerald-500"
 
       if (isInternal) {
         return (
@@ -47,22 +69,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           rel="noopener noreferrer"
           className={baseClass}
         >
-          {children} <span className="text-[10px] opacity-50">↗</span>
+          {children}{" "}
+          <span className="ml-1 text-[10px] italic opacity-50">↗</span>
         </a>
       )
     },
 
-    // 3. 📣 Callout / Quote Box: Aurora Emerald Glow
+    // 📣 4. Trust Quote / Expert Insights
     blockquote: ({ children }) => (
-      <div className="border-aurora-emerald bg-aurora-emerald/5 shadow-luminous group relative my-10 rounded-r-[2rem] border-l-4 p-8 text-slate-300 italic">
-        <div className="absolute top-4 right-6 opacity-10 transition-opacity group-hover:opacity-20">
-          <Sparkles className="text-aurora-emerald h-10 w-10" />
+      <div className="group relative my-12 overflow-hidden rounded-r-[2.5rem] border-l-4 border-emerald-500 bg-emerald-500/[0.03] p-8 text-slate-600 md:p-10">
+        <div className="pointer-events-none absolute -top-4 -right-4 opacity-5 transition-opacity group-hover:opacity-10">
+          <Zap className="h-24 w-24 text-emerald-500" />
         </div>
-        {children}
+        <div className="font-anuphan relative z-10 text-xl leading-relaxed font-medium italic">
+          {children}
+        </div>
       </div>
     ),
 
-    // 4. 📢 CTA Box: The Conversion Engine
+    // 🚀 5. Marketing Specialist Blocks
     CallToAction: ({
       title,
       url,
@@ -72,56 +97,71 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       url: string
       label?: string
     }) => (
-      <div className="shadow-luminous group relative my-12 overflow-hidden rounded-[3rem] border border-white/10 bg-white/[0.02] p-10 text-center md:p-14">
-        <div className="aurora-bg inset-0 opacity-5 transition-opacity group-hover:opacity-10" />
-        <h3 className="font-prompt relative z-10 mb-8 text-2xl font-black tracking-tighter text-white uppercase italic md:text-3xl">
+      <div className="relative my-16 overflow-hidden rounded-[3rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-10 text-center md:p-16">
+        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-40" />
+        <h3 className="font-prompt relative z-10 mb-8 text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
           {title}
         </h3>
         <Link
           href={url}
-          className="btn-luminous shadow-aurora-glow relative z-10 inline-flex items-center justify-center px-10 py-5 text-sm"
+          className="relative z-10 inline-flex items-center justify-center rounded-full bg-[#0F172A] px-12 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:scale-105 hover:bg-emerald-500 active:scale-95"
         >
-          {label}{" "}
-          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-2" />
+          {label} <ArrowRight className="ml-3 h-4 w-4" />
         </Link>
       </div>
     ),
 
-    // 5. Headings: High-End Typography
+    FeatureList: ({ items }: { items: string[] }) => (
+      <div className="my-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+        {items.map((item, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-4 rounded-[1.5rem] border border-slate-100 bg-slate-50/50 p-5 transition-colors hover:bg-white"
+          >
+            <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-500" />
+            <span className="font-anuphan text-lg font-medium text-slate-700">
+              {item}
+            </span>
+          </div>
+        ))}
+      </div>
+    ),
+
+    // ✒️ 6. Typography System (Light Mode Optimized for Readability)
     h1: ({ children }) => (
-      <h1 className="font-prompt mt-16 mb-8 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
+      <h1 className="font-prompt mt-24 mb-10 text-5xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-7xl">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-prompt mt-14 mb-6 flex items-center gap-3 border-b border-white/5 pb-4 text-3xl font-black tracking-tighter text-white uppercase italic md:text-4xl">
-        <div className="bg-aurora-cyan h-8 w-1.5 rounded-full" /> {children}
+      <h2 className="font-prompt mt-20 mb-8 flex items-center gap-4 border-b border-slate-100 pb-6 text-4xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-5xl">
+        <div className="h-10 w-2 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
+        {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-prompt mt-10 mb-4 text-2xl font-black tracking-tight text-slate-100 uppercase md:text-3xl">
+      <h3 className="font-prompt mt-14 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase md:text-4xl">
         {children}
       </h3>
     ),
-
-    // 6. Lists & Paragraphs
     p: ({ children }) => (
-      <p className="font-anuphan mb-6 text-lg leading-relaxed font-medium text-slate-400">
+      <p className="font-anuphan mb-8 text-xl leading-[1.9] font-medium text-slate-600">
         {children}
       </p>
     ),
-    ul: ({ children }) => (
-      <ul className="mb-8 ml-2 list-none space-y-4 text-slate-400">
-        {children}
-      </ul>
-    ),
+    ul: ({ children }) => <ul className="mb-10 ml-2 space-y-6">{children}</ul>,
     li: ({ children }) => (
-      <li className="flex items-start gap-3">
-        <div className="bg-aurora-cyan mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full shadow-[0_0_8px_rgba(122,243,255,0.8)]" />
-        <span className="font-anuphan text-lg font-medium">{children}</span>
+      <li className="flex items-start gap-4">
+        <div className="mt-3 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+        <span className="font-anuphan text-xl font-medium text-slate-600">
+          {children}
+        </span>
       </li>
     ),
 
-    ...components,
+    // Export Icons & Components for Inline Usage
+    Zap,
+    ShieldCheck,
+    Sparkles,
   }
 }

@@ -1,91 +1,91 @@
 /** @format */
 
-import { MetadataRoute } from "next"
-import { siteConfig } from "@/constants/site-config"
-import { getAllPosts } from "@/lib/mdx"
-import { servicesData } from "@/constants/services-data"
-import { templatesData } from "@/constants/templates-data"
-// ✅ Fix: นำเข้าข้อมูล Case Studies และระบุ Type ให้ชัดเจน
-import { caseStudiesData } from "@/constants/case-studies/case-studies-data"
+import { MetadataRoute } from "next";
+import { siteConfig } from "@/constants/site-config";
+import { getAllPosts } from "@/lib/blog";
+import { services } from "@/constants/services-data";
+import { getAllCaseStudies } from "@/lib/case-studies";
+import { getAllTemplates } from "@/lib/template";
 
 /**
- * 🗺️ Sitemap.ts: Dynamic SEO Map (AEMDEVWEB Engine v.2026)
- * ทำหน้าที่สร้าง XML Sitemap แบบอัตโนมัติเพื่อให้ Search Engine ค้นพบทุกหน้าได้ 100%
- * DNA: "ติดหน้าแรก Google" - จูนค่า Priority ตามความสำคัญทางธุรกิจ
+ * 🗺️ Dynamic sitemap.ts — 2026 Specialist Edition
+ * ออกแบบมาเพื่อนำทาง Search Engine ไปยังจุดยุทธศาสตร์ของธุรกิจ
+ * * Strategy:
+ * 1. Static Routes: หน้าหลักและหน้าความน่าเชื่อถือ (Priority 1.0 - 0.7)
+ * 2. Service Routes: หน้าสร้างรายได้หลัก (Priority 0.9)
+ * 3. Case Studies: บทพิสูจน์ผลงาน (Priority 0.8)
+ * 4. Templates: ตลาดขายสถาปัตยกรรมเว็บไซต์ (Priority 0.8)
+ * 5. Blog: ดึง Traffic จากเนื้อหาความรู้ (Priority 0.6)
  */
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url
 
-  // 1. 🟢 Static Routes: โครงสร้างหลัก (The Trust Layer)
-  const staticRoutes = [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = siteConfig.url;
+
+  // 1. หน้าพื้นฐานของเว็บไซต์ (Static Routes)
+  const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
     "/services",
     "/case-studies",
     "/blog",
     "/contact",
+    "/careers",
+    "/privacy",
+    "/terms",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
-  }))
+    changeFrequency: "weekly",
+    priority: route === "" ? 1.0 : 0.7,
+  }));
 
-  // 2. 🔵 Service Routes: บริการหลัก (The Money Maker)
-  const serviceRoutes = servicesData.map((service) => ({
+  // 2. หน้าบริการรายชิ้น (Revenue Layer)
+  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.9, 
-  }))
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
 
-  // 3. 🟣 Marketing & Template Routes: (The Marketplace)
-  const templateRoutes = templatesData.map((tpl) => ({
-    // อิงตามโครงสร้าง app/(marketing)/[template]/[slug]
-    url: `${baseUrl}/${tpl.category || "sale-page"}/${tpl.slug}`,
+  // 3. หน้าผลงานความสำเร็จ (Social Proof Layer)
+  const caseStudies = await getAllCaseStudies();
+  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
+    url: `${baseUrl}/case-studies/${study.slug}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
+    changeFrequency: "monthly",
     priority: 0.8,
-  }))
+  }));
 
-  // 4. 🟠 Case Study Routes: (The Social Proof)
-  // รวมทั้ง Dynamic [slug] และ Static paths ที่ระบุใน Directory Tree
-  const caseStudyRoutes = [
-    ...caseStudiesData.map((study) => ({
-      url: `${baseUrl}/case-studies/${study.slug}`,
-      lastModified: new Date(),
-      priority: 0.7,
-    })),
-    // ✅ เพิ่มหน้าสำคัญที่ระบุใน Directory (Hard-coded เพื่อความชัวร์)
-    { url: `${baseUrl}/case-studies/unlink-th`, lastModified: new Date(), priority: 0.8 },
-    { url: `${baseUrl}/case-studies/aemdevweb`, lastModified: new Date(), priority: 0.8 },
-  ].map(route => ({
-    ...route,
-    changeFrequency: "monthly" as const,
-  }))
+  // 4. หน้าเทมเพลตใน Marketplace (Market Conversion Layer)
+  // ✅ [FIXED]: Mapping URL ให้ตรงกับโครงสร้าง /templates/[category]/[slug]
+  const templates = await getAllTemplates();
+  const templateRoutes: MetadataRoute.Sitemap = templates.map((tpl) => ({
+    url: `${baseUrl}/templates/${tpl.category.toLowerCase()}/${tpl.slug.toLowerCase()}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
 
-  // 5. 🟡 Blog Routes: หน้าบทความ (The Content Engine)
-  const posts = await getAllPosts()
-  const blogRoutes = posts.map((post) => ({
+  // 5. หน้าบทความคลังความรู้ (Knowledge Hub)
+  const posts = await getAllPosts();
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    // ใช้เวลาที่โพสต์จริงเพื่อความแม่นยำของ Crawler
-    lastModified: new Date(post.date || new Date()),
-    changeFrequency: "monthly" as const,
+    lastModified: post.date ? new Date(post.date) : new Date(),
+    changeFrequency: "monthly",
     priority: 0.6,
-  }))
+  }));
 
-  // 🚀 Combine & Finalize
-  // ลบข้อมูลที่ซ้ำกันออก (Unique URLs)
+  // 🚀 รวบรวมทุกเส้นทางเข้าด้วยกัน
   const allRoutes = [
     ...staticRoutes,
     ...serviceRoutes,
-    ...templateRoutes,
     ...caseStudyRoutes,
+    ...templateRoutes,
     ...blogRoutes,
-  ]
+  ];
 
-  // Filter เพื่อกันค่าว่างหรือ URL ผิดพลาด
-  return allRoutes.filter((route, index, self) => 
-    index === self.findIndex((t) => t.url === route.url)
-  )
+  // คัดกรอง URL ที่อาจซ้ำซ้อนเพื่อความคลีนของไฟล์ XML
+  return allRoutes.filter(
+    (route, index, self) => index === self.findIndex((r) => r.url === route.url)
+  );
 }

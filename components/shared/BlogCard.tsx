@@ -3,102 +3,126 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, Clock, ArrowRight, Hash, Sparkles } from "lucide-react"
+import { Calendar, ChevronRight } from "lucide-react"
+
+// 📂 Logic & Utils Architecture
 import { cn } from "@/lib/utils"
-// ตรวจสอบว่ามี Type Definition นี้อยู่จริง หรือถ้าไม่มีให้สร้าง Interface ภายในไฟล์ได้เลย
-import { type BlogPostProps } from "@/types"
 
 /**
- * 📝 BlogCard: Luminous Server Edition (v.2026)
- * ปรับปรุงโครงสร้างเพื่อรองรับ SEO และความเร็วในการแสดงผลสูงสุด
- * ✅ Optimized: Next.js 15.x + Tailwind CSS 4.0
+ * 🏗️ BlogCard Specialist Edition — "หน้าด่านความรู้สู่ SME และโรงงาน"
+ * ผมออกแบบมาให้ดูพรีเมียม เพื่อสะท้อนความใส่ใจในรายละเอียดของเนื้อหาครับ
  */
-export function BlogCard({
+
+interface BlogCardProps {
+  slug: string
+  title: string
+  excerpt: string
+  date: string
+  thumbnail: string
+  tags?: string[]
+  className?: string
+}
+
+export default function BlogCard({
   slug,
   title,
-  description,
-  coverImage,
+  excerpt,
   date,
-  category,
-  readingTime = "5 min read",
+  thumbnail,
+  tags = [],
   className,
-}: BlogPostProps & { className?: string }) {
-  // Format Date Logic (Safe Handling)
-  const formattedDate = new Date(date).toLocaleDateString("th-TH", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  })
+}: BlogCardProps) {
+  // 🛡️ [FIXED]: Alt Text Safety — ตรวจสอบข้อความประกอบภาพเพื่อคะแนน SEO ที่ดีที่สุด
+  const imageAlt =
+    title && title.trim() !== ""
+      ? title
+      : "เทคนิคทำเว็บไซต์และ SEO โดย นายเอ็มซ่ามากส์"
+
+  // 🛡️ [FIXED]: Locale Formatting — แสดงวันที่แบบไทยที่เจ้าของธุรกิจคุ้นเคย
+  const formattedDate = date
+    ? new Date(date).toLocaleDateString("th-TH", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "เร็วๆ นี้"
 
   return (
     <Link
       href={`/blog/${slug}`}
-      className={cn("group block h-full outline-none", className)}
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white transition-all duration-500",
+        "hover:-translate-y-2 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/5",
+        className
+      )}
     >
-      <article className="glass-card hover:border-aurora-cyan/30 hover:shadow-luminous relative flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-xl transition-all duration-700 hover:-translate-y-3">
-        {/* --- 1. Image Section: Luminous Overlay (Optimized LCP) --- */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-900">
-          <Image
-            src={coverImage}
-            alt={title}
-            fill
-            className="object-cover opacity-70 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-100"
-            // ✅ Sizes Optimization: ตรงตาม Breakpoints ของ Tailwind Grid
-            // Mobile (1 col) -> 100vw
-            // Tablet (2 cols) -> 50vw
-            // Desktop (3 cols) -> 33vw
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            loading="lazy"
+      {/* 🖼️ Image Showcase Layer: Next.js 16 Optimized Loading */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
+        <Image
+          src={thumbnail || "/images/blog/placeholder.webp"}
+          alt={imageAlt}
+          fill
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+
+        {/* Cinematic Gradient: เพิ่มความหรูหราให้ภาพปกบทความ */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+        {/* Floating Category Tag: หมวดหมู่บทความ */}
+        {tags.length > 0 && (
+          <div className="absolute top-6 left-6 z-10">
+            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[9px] font-black tracking-[0.25em] text-white uppercase shadow-xl backdrop-blur-md">
+              {tags[0]}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* ✍️ Content Details Layer: Typography Excellence */}
+      <div className="flex flex-1 flex-col p-8 lg:p-10">
+        {/* Meta Line: บันทึกข้อมูลเทคนิค */}
+        <div className="mb-6 flex items-center gap-4">
+          <div className="flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-emerald-600 uppercase italic">
+            <Calendar size={12} className="text-emerald-500" />
+            {formattedDate}
+          </div>
+          <div
+            className="h-1 w-1 rounded-full bg-slate-200"
+            aria-hidden="true"
           />
-
-          {/* Gradient Shade: เพิ่มมิติความลึกเพื่อให้ Badge อ่านง่าย */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-80" />
-
-          {/* Category Badge: Luminous Glass Style */}
-          <div className="absolute top-5 left-5 z-10">
-            <span className="text-aurora-cyan shadow-aurora-glow inline-flex items-center gap-2 rounded-xl border border-white/10 bg-slate-950/60 px-4 py-2 text-[10px] font-black tracking-[0.2em] uppercase backdrop-blur-xl transition-all group-hover:border-white/20">
-              <Hash className="h-3 w-3" />
-              {category || "Insight"}
-            </span>
-          </div>
+          <span className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase italic">
+            Specialist Insights
+          </span>
         </div>
 
-        {/* --- 2. Content Section: Humanistic Typography --- */}
-        <div className="flex flex-1 flex-col p-8 md:p-10">
-          {/* Meta Info: Minimal & Bright */}
-          <div className="mb-6 flex items-center gap-5 text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase">
-            <div className="group-hover:text-aurora-emerald flex items-center gap-2 transition-colors duration-500">
-              <Calendar className="text-aurora-emerald/60 h-3.5 w-3.5" />
-              <time dateTime={date}>{formattedDate}</time>
-            </div>
-            <div className="group-hover:text-aurora-cyan flex items-center gap-2 transition-colors duration-500">
-              <Clock className="text-aurora-cyan/60 h-3.5 w-3.5" />
-              <span>{readingTime}</span>
-            </div>
+        {/* Headline: พาดหัวที่ต้องคมและจูงใจ */}
+        <h3 className="font-prompt mb-5 line-clamp-2 text-2xl leading-[1.15] font-black tracking-tighter text-slate-900 uppercase italic transition-colors duration-300 group-hover:text-emerald-500">
+          {title || "กำลังรวบรวมข้อมูล..."}
+        </h3>
+
+        {/* Excerpt: เนื้อหาเกริ่นนำเพื่อคนทำธุรกิจ SME และโรงงาน */}
+        <p className="font-anuphan mb-10 line-clamp-3 flex-1 text-[15px] leading-relaxed font-bold text-slate-500 transition-colors group-hover:text-slate-600">
+          {excerpt ||
+            "ผมเตรียมรายละเอียดเชิงลึกที่จะช่วยให้ธุรกิจของคุณเติบโตด้วยเทคโนโลยี Next.js 16 และ SEO ยุคใหม่ไว้ให้แล้ว คลิกอ่านต่อได้เลยครับ"}
+        </p>
+
+        {/* Footer Action: การจบงานอย่างมีชั้นเชิง */}
+        <div className="mt-auto flex items-center justify-between border-t border-slate-50 pt-8">
+          <div className="flex items-center gap-2">
+            <span className="font-prompt text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all duration-300 group-hover:tracking-[0.5em] group-hover:text-slate-950">
+              อ่านเนื้อหาเต็มๆ
+            </span>
           </div>
 
-          {/* Title: Strong Luminous Style (Prompt Font) */}
-          <h3 className="font-prompt group-hover:text-aurora-cyan mb-4 line-clamp-2 text-2xl leading-[1.2] font-black tracking-tighter text-white uppercase italic transition-colors duration-500">
-            {title}
-          </h3>
-
-          {/* Description: Friendly Anuphan Font */}
-          <p className="font-anuphan mb-8 line-clamp-3 flex-1 text-base leading-relaxed font-medium text-slate-400 opacity-80 transition-opacity duration-500 group-hover:opacity-100">
-            {description}
-          </p>
-
-          {/* --- 3. Action Link: Luminous Footer --- */}
-          <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-8">
-            <span className="flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase transition-all duration-500 group-hover:text-white">
-              Read Insight{" "}
-              <Sparkles className="text-aurora-cyan h-3 w-3 animate-pulse opacity-0 group-hover:opacity-100" />
-            </span>
-            <div className="group-hover:bg-aurora-cyan group-hover:shadow-aurora-glow flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 transition-all duration-500 group-hover:text-slate-950">
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </div>
+          <div className="flex size-11 items-center justify-center rounded-2xl bg-slate-50 text-slate-950 shadow-inner transition-all duration-500 group-hover:rotate-[12deg] group-hover:bg-slate-950 group-hover:text-white group-hover:shadow-xl group-hover:shadow-slate-900/20">
+            <ChevronRight
+              size={20}
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
+            />
           </div>
         </div>
-      </article>
+      </div>
     </Link>
   )
 }

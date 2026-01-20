@@ -1,201 +1,144 @@
 /** @format */
 
 import React from "react"
-import { Metadata } from "next"
-import Link from "next/link"
-import {
-  MessageCircle,
-  Mail,
-  MapPin,
-  ShieldCheck,
-  Zap,
-  ArrowRight,
-  Sparkles,
-} from "lucide-react"
+import type { Metadata } from "next"
+import { Mail, MessageCircle, MapPin, Clock } from "lucide-react"
 
-// 📦 Data & Config
-import { siteConfig, constructMetadata } from "@/constants/site-config"
-
-// 🧩 Components & UI
-import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
-import { Badge } from "@/components/ui/badge"
+// 📂 ข้อมูลตัวตนและโครงสร้างระบบ
+import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 
+// 🧩 ส่วนประกอบหน้าเว็บ (จัดการการนำเข้าให้เสถียร)
+import TrustBadge from "@/components/shared/TrustBadge"
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+
 /**
- * 🔍 SEO Configuration
+ * 🚀 Metadata — เน้นความจริงใจและเข้าถึงง่าย
  */
-export const metadata: Metadata = constructMetadata({
-  title: "ติดต่อเรา - ปรึกษาฟรี ไม่มีกั๊ก",
+export const metadata: Metadata = {
+  title: `คุยงานกับ นายเอ็มซ่ามากส์ | ปรึกษาเรื่องเว็บ SME และโรงงาน`,
   description:
-    "ทักไลน์มาคุยสโคปงานฟรี นายเอ็มตอบเองทุกแชท! พร้อมประเมินราคาเบื้องต้น รับทำเว็บ Sale Page และระบบออนไลน์ครบวงจร",
-})
+    "ทักมาคุยกับผมได้เลยครับ ไม่ว่าจะเป็นเจ้าของกิจการหรือเจ้าของโรงงาน ผมพร้อมช่วยวางแผนทำเว็บให้เปิดไวและช่วยคุณหาเงินได้จริง",
+}
 
 /**
- * 📞 Contact Page: Luminous Edition (Server Component)
- * ยกระดับหน้าติดต่อด้วย CSS Animation (เบากว่า Framer Motion) เพื่อ SEO 100%
+ * 🧬 Contact Page — "คุยตรงกับคนทำงาน ไม่ต้องผ่านเซลล์"
  */
-export default function ContactPage() {
-  const contactInfo = [
-    {
-      icon: <MessageCircle className="h-6 w-6" />,
-      label: "Line Official",
-      value: siteConfig.links.lineId || "@aemdevweb",
-      href: siteConfig.links.line,
-      glow: "hover:shadow-[0_0_20px_rgba(6,199,85,0.4)]",
-      iconBg: "bg-[#06C755]",
-      color: "text-[#06C755]",
-    },
-    {
-      icon: <Mail className="h-6 w-6" />,
-      label: "Email Support",
-      value: siteConfig.contact.email,
-      href: `mailto:${siteConfig.contact.email}`,
-      glow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]",
-      iconBg: "bg-blue-500",
-      color: "text-blue-400",
-    },
-    {
-      icon: <MapPin className="h-6 w-6" />,
-      label: "Service Area",
-      value: "Online Service (ทั่วประเทศ)",
-      href: "#",
-      glow: "hover:shadow-[0_0_20px_rgba(122,243,255,0.4)]",
-      iconBg: "bg-slate-800",
-      color: "text-slate-400",
-    },
-  ]
-
+export default async function ContactPage() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 pt-40 pb-24 text-slate-50 selection:bg-aurora-cyan/30">
-      {/* 🛠️ SEO Schema */}
+    <main className="font-anuphan relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* 🔎 ข้อมูลโครงสร้างสำหรับ Google Search AI */}
       <JsonLd
-        type="ProfessionalService"
+        type="ContactPage"
         data={{
-          name: siteConfig.name,
+          name: `ติดต่อ นายเอ็มซ่ามากส์ - AEMDEVWEB`,
+          description: "ช่องทางการติดต่อเพื่อปรึกษาการทำเว็บไซต์และ SEO",
           url: `${siteConfig.url}/contact`,
-          contactPoint: {
-            "@type": "ContactPoint",
-            telephone: siteConfig.contact.tel,
-            contactType: "customer service",
-            areaServed: "TH",
-            availableLanguage: "Thai",
-          },
         }}
       />
 
-      {/* 🌌 Background Decor */}
-      <div className="aurora-bg top-0 left-1/4 h-[600px] w-[600px] opacity-[0.1] blur-[120px]" />
-      <div className="aurora-bg bg-aurora-violet right-1/4 bottom-0 h-[500px] w-[500px] opacity-[0.05] blur-[150px]" />
-
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
-          {/* 🟢 Left Side: Content & Branding (Animated via CSS) */}
-          <div className="relative animate-in fade-in slide-in-from-left-8 duration-1000 fill-mode-both">
-            <Badge variant="luminous" className="mb-8 px-5 py-2">
-              <Zap className="text-aurora-cyan mr-2 h-4 w-4 fill-current" />
-              <span className="text-[10px] font-black tracking-widest uppercase">
-                Ready to scale
-              </span>
-            </Badge>
-
-            <h1 className="font-prompt mb-8 text-5xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-7xl">
-              เริ่มสร้าง <br />
-              <span className="text-aurora-cyan drop-shadow-luminous">
-                เครื่องจักรปิดการขาย
-              </span>{" "}
-              ของคุณวันนี้
+      {/* 🔝 1. ส่วนหัวหน้าเว็บ (Hero Header) */}
+      <section className="relative overflow-hidden bg-slate-50/30 pt-32 pb-20 lg:pt-48 lg:pb-32">
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="max-w-4xl border-l-4 border-emerald-500 pl-8">
+            <h1 className="font-prompt text-5xl leading-none font-black tracking-tighter text-slate-900 md:text-7xl lg:text-8xl">
+              ทักมาคุย <br />
+              <span className="text-emerald-500 italic">กับผม.</span>
             </h1>
-
-            <p className="font-anuphan mb-12 max-w-lg text-xl leading-relaxed font-medium text-slate-400">
-              ยินดีให้คำปรึกษาฟรีครับ! ไม่ว่าพี่จะเพิ่งเริ่มขายออนไลน์
-              หรืออยากอัปเกรดธุรกิจให้ดูพรีเมียม นายเอ็มพร้อมช่วยวางโครงสร้าง
-              <span className="ml-1 text-white italic">
-                ใจดี ไม่กดดัน คุยภาษาพี่น้องครับ
-              </span>
+            <p className="mt-8 max-w-2xl text-xl leading-relaxed font-bold text-slate-500">
+              ไม่ว่าคุณจะเป็นเจ้าของกิจการหรือเจ้าของโรงงาน
+              ทักมาปรึกษาผมได้โดยตรงครับ ผมสแตนด์บายรอช่วยคุณ
+              วางโครงสร้างเว็บที่ "ใช้งานได้จริง" ในพื้นที่กรุงเทพฯ และทั่วไทย
             </p>
+          </div>
+        </div>
+      </section>
 
-            {/* Contact Cards: Luminous Glass Style */}
-            <div className="mb-12 space-y-4">
-              {contactInfo.map((info, i) => (
-                <Link
-                  key={i}
-                  href={info.href}
-                  target={info.href.startsWith("http") ? "_blank" : "_self"}
-                  className={`group flex items-center gap-6 rounded-[2.5rem] border border-white/5 bg-white/[0.03] p-6 backdrop-blur-xl transition-all hover:-translate-y-1 hover:border-white/10 hover:bg-white/[0.08] ${info.glow}`}
-                >
-                  <div
-                    className={`h-16 w-16 rounded-2xl ${info.iconBg} flex items-center justify-center text-white shadow-lg transition-all group-hover:scale-110 group-hover:rotate-3`}
-                  >
-                    {info.icon}
-                  </div>
-                  <div className="flex-grow">
-                    <p className="font-prompt mb-1 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase">
-                      {info.label}
-                    </p>
-                    <p className="font-prompt text-2xl font-black tracking-tight text-white transition-colors">
-                      {info.value}
-                    </p>
-                  </div>
-                  <ArrowRight
-                    className={`h-6 w-6 transition-all group-hover:translate-x-2 ${info.color}`}
-                  />
-                </Link>
-              ))}
-            </div>
+      {/* 🏗️ 2. ส่วนข้อมูลการติดต่อหลัก */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-start">
+          {/* 📥 ฝั่งซ้าย: ฟอร์มส่งข้อมูลด่วน (LineLeadForm) */}
+          <div className="rounded-[3rem] border border-slate-100 bg-white p-8 shadow-2xl shadow-slate-200/50 md:p-12">
+            <h2 className="font-prompt mb-8 text-2xl font-black tracking-tight text-slate-900 uppercase italic">
+              ทิ้งข้อมูลให้ผมติดต่อกลับ
+            </h2>
 
-            {/* Trust Banner: Luminous Shield */}
-            <div className="glass-card bg-aurora-cyan/5 relative flex items-start gap-6 overflow-hidden rounded-[3rem] border-white/5 p-8">
-              <div className="bg-aurora-cyan/10 absolute top-0 right-0 h-32 w-32 rounded-full blur-3xl" />
-              <div className="shadow-aurora-glow flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                <ShieldCheck className="text-aurora-cyan h-8 w-8" />
-              </div>
-              <div>
-                <h4 className="font-prompt mb-2 text-xl font-black tracking-tight text-white uppercase italic">
-                  การันตีดูแลหลังการขาย 100%
-                </h4>
-                <p className="font-anuphan leading-relaxed font-medium text-slate-400">
-                  นายเอ็มไม่ทิ้งงานแน่นอน มีคู่มือสอนใช้งานเบื้องต้นให้
-                  และสอบถามได้ตลอดชีพ พัฒนาด้วยความจริงใจภาษาพี่น้องครับ
-                </p>
-              </div>
+            <LineLeadForm />
+
+            <div className="mt-12 border-t border-slate-50 pt-10">
+              <TrustBadge variant="grid" />
             </div>
           </div>
 
-          {/* 🔵 Right Side: Form (Sticky on Desktop) */}
-          <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200 fill-mode-both lg:sticky lg:top-40">
-            <div className="relative">
-              {/* Decorative Glow behind the form */}
-              <div className="bg-aurora-cyan/20 absolute -inset-4 animate-pulse rounded-[4rem] opacity-30 blur-3xl" />
-
-              <div className="shadow-luminous group relative overflow-hidden rounded-[3.5rem] border border-white/10 bg-slate-900/50 p-4 backdrop-blur-2xl">
-                {/* Visual Header for the form area */}
-                <div className="px-8 pt-8 pb-4 text-center">
-                  <div className="mb-4 flex justify-center">
-                    <div className="bg-aurora-cyan/10 border-aurora-cyan/20 flex h-12 w-12 items-center justify-center rounded-full border">
-                      <Sparkles className="text-aurora-cyan h-6 w-6" />
-                    </div>
-                  </div>
-                  <h3 className="font-prompt mb-2 text-2xl font-black tracking-tight text-white uppercase italic">
-                    ส่งข้อมูลให้คุณเอ็ม
+          {/* 📍 ฝั่งขวา: ข้อมูลช่องทางอื่นๆ และพิกัด */}
+          <div className="lg:pt-12">
+            <div className="space-y-12">
+              <div className="grid gap-8 sm:grid-cols-2">
+                <div className="group rounded-3xl border border-slate-50 bg-slate-50/50 p-8 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-xl">
+                  <Mail className="mb-4 h-8 w-8 text-emerald-500" />
+                  <h3 className="font-prompt text-sm font-black tracking-widest text-slate-400 uppercase">
+                    อีเมล
                   </h3>
-                  <p className="font-anuphan text-sm font-medium text-slate-400 italic">
-                    นายเอ็มจะติดต่อกลับเพื่อประเมินแผนงานฟรีภายใน 24 ชม.
+                  <p className="mt-2 text-lg font-bold text-slate-900">
+                    {siteConfig.email}
                   </p>
                 </div>
 
-                <div className="p-2">
-                  <LineLeadForm />
+                <div className="group rounded-3xl border border-slate-50 bg-slate-50/50 p-8 transition-all hover:-translate-y-1 hover:bg-white hover:shadow-xl">
+                  <MessageCircle className="mb-4 h-8 w-8 text-emerald-500" />
+                  <h3 className="font-prompt text-sm font-black tracking-widest text-slate-400 uppercase">
+                    LINE ID
+                  </h3>
+                  <p className="mt-2 text-lg font-bold text-slate-900">
+                    {siteConfig.links.lineId}
+                  </p>
                 </div>
               </div>
 
-              {/* Extra Info under form */}
-              <p className="font-anuphan mt-8 text-center text-xs font-bold tracking-[0.3em] text-slate-500 uppercase opacity-60">
-                🔒 ข้อมูลส่วนตัวของคุณจะถูกเก็บเป็นความลับสูงสุด
-              </p>
+              {/* ข้อมูลพิกัด (Location Context) */}
+              <div className="space-y-6 rounded-3xl border border-slate-100 bg-white p-8 shadow-sm md:p-10">
+                <div className="flex gap-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-500">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-prompt text-sm font-black tracking-widest text-slate-400 uppercase">
+                      พื้นที่ดูแล
+                    </h3>
+                    <p className="mt-2 text-lg leading-relaxed font-bold text-slate-600">
+                      กรุงเทพมหานคร และ ทั่วประเทศ
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-slate-400 italic">
+                      ทำงานแบบออนไลน์ 100% งานเดินไว ไม่ต้องเสียเวลาเดินทาง
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-6 border-t border-slate-50 pt-6">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400">
+                    <Clock className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-prompt text-sm font-black tracking-widest text-slate-400 uppercase">
+                      เวลาคุยงาน
+                    </h3>
+                    <p className="mt-2 text-lg font-bold text-slate-600">
+                      จันทร์ - เสาร์: 09:00 - 18:00
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* 📍 ส่วนท้ายหน้า (Specialist Footer Hook) */}
+      <footer className="mt-20 text-center opacity-40">
+        <p className="font-prompt text-[9px] font-black tracking-[0.4em] text-slate-400 uppercase">
+          Build & Care by นายเอ็มซ่ามากส์ v2026 — Bangkok Hub
+        </p>
+      </footer>
     </main>
   )
 }

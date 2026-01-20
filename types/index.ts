@@ -1,47 +1,55 @@
 /** @format */
 
-// --- 🌐 SITE & NAVIGATION CONFIG ---
+/**
+ * 🧬 Core System Types – AEMDEVWEB (v.2026)
+ * ศูนย์รวม Interface และ Types สำหรับระบบสถาปัตยกรรมเว็บไซต์
+ * ออกแบบมาเพื่อความเสถียรของระบบ (Type Safety) และรองรับการทำ SEO Specialist
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 🌐 SITE & NAVIGATION                                                       */
+/* -------------------------------------------------------------------------- */
+
 export interface NavItem {
-  title: string
-  name?: string // รองรับคอมโพเนนต์ที่เรียกใช้ .name
-  href: string
+  name: string // ชื่อที่แสดงผล
+  href: string // ลิงก์ปลายทาง
+  title?: string // รองรับกรณีใช้ title แทน name
   disabled?: boolean
   external?: boolean
-  badge?: string
+  badge?: "New" | "Hot" | "Sale" | "Special" | string
+  description?: string
 }
 
-export interface NavSection {
-  title: string
-  items: NavItem[]
+export interface FooterNavigation {
+  services: NavItem[]
+  company: NavItem[]
+  support: NavItem[]
+  legal: NavItem[]
 }
 
 export interface SiteConfig {
   name: string
+  shortName: string
   companyName: string
   description: string
   url: string
   ogImage: string
+  keywords: string[]
   links: {
     line: string
+    github?: string
     facebook?: string
     messenger?: string
-    lineId?: string
-    github?: string
   }
-  keywords: string[]
+  cta: {
+    main: string
+    secondary: string
+  }
 }
 
-// --- 📄 BLOG & CONTENT (MDX) ---
-export interface BlogPostProps {
-  title: string
-  excerpt?: string
-  description?: string // รองรับการดึงจาก MDX Metadata
-  slug: string
-  date: string
-  coverImage: string
-  category?: string
-  readingTime?: string // แก้ Error ใน BlogCard.tsx
-}
+/* -------------------------------------------------------------------------- */
+/* 📄 BLOG & CONTENT (MDX Engine)                                             */
+/* -------------------------------------------------------------------------- */
 
 export interface BlogMetadata {
   title: string
@@ -50,40 +58,50 @@ export interface BlogMetadata {
   category: string
   coverImage: string
   author: string
+  excerpt?: string
   readingTime?: string
+  tags?: string[]
 }
 
 export interface BlogPost extends BlogMetadata {
   slug: string
-  // ✅ Fixed: เปลี่ยน any เป็น unknown เพื่อความปลอดภัยของข้อมูล content
-  content?: unknown
+  content?: string | unknown
 }
 
-// --- 💼 SERVICES & SOLUTIONS ---
+/* -------------------------------------------------------------------------- */
+/* 💼 SERVICES & SOLUTIONS                                                   */
+/* -------------------------------------------------------------------------- */
+
 export type ServiceIconName =
   | "Rocket"
   | "ShieldCheck"
   | "Code2"
   | "Gauge"
   | "Zap"
+  | "Layout"
+  | "TrendingUp"
 
 export interface ServiceItem {
   id: string
   title: string
+  slug: string
   description: string
   longDescription?: string
   icon: ServiceIconName
   features: string[]
-  priceRange?: string
-  slug: string
   priceDisplay?: string
+  priceRange?: string
+  badge?: string
   mockups?: {
     desktop: string
     mobile: string
   }
 }
 
-// --- 🏆 CASE STUDIES & SHOWCASE ---
+/* -------------------------------------------------------------------------- */
+/* 🏆 CASE STUDIES & SHOWCASE                                                */
+/* -------------------------------------------------------------------------- */
+
 export interface ShowcaseStats {
   label: string
   value: string
@@ -91,35 +109,33 @@ export interface ShowcaseStats {
 
 export interface CaseStudyItem {
   id: string
-  title: string
   slug: string
+  title: string
+  client: string
+  industry: string
   category: string
   description: string
-  image: string
-  stats: ShowcaseStats
-  tags: string[]
-  results: string[]
+  thumbnail: string
+  results: ShowcaseStats[]
+  keyFeatures?: string[]
   clientQuote?: {
     text: string
     author: string
+    role?: string
   }
 }
 
-// --- 🎨 TEMPLATE ENGINE ---
+/* -------------------------------------------------------------------------- */
+/* 🎨 TEMPLATE ENGINE                                                        */
+/* -------------------------------------------------------------------------- */
+
 export type TemplateCategory =
   | "SalePage"
   | "Corporate"
   | "ECommerce"
   | "Service"
-  | "Portfolio"
+  | "Industrial"
   | string
-
-export interface CategoryInfo {
-  slug: string
-  name: string
-  description: string
-  themeColor?: string
-}
 
 export interface TemplateItem {
   id: string
@@ -128,46 +144,47 @@ export interface TemplateItem {
   description: string
   category: TemplateCategory
   image: string
+  features: string[]
   demoUrl?: string
   price?: number
   salePrice?: number
-  features: string[]
   isPopular?: boolean
   isNew?: boolean
-  isBestSeller?: boolean
   themeColor?: string
-
+  salesData?: {
+    soldCount: number
+    rating: number
+  }
   mockups?: {
     desktop?: string
     mobile?: string
   }
-
-  salesData?: {
-    soldCount: number
-    rating: number
-    reviews: number
-  }
 }
 
-// --- 📩 LEAD & CONVERSION ---
+/* -------------------------------------------------------------------------- */
+/* 📩 LEAD & CONVERSION                                                      */
+/* -------------------------------------------------------------------------- */
+
 export interface LeadFormSubmission {
   name: string
-  email?: string
   lineId: string
   businessType: string
   budget: string
-  message: string
-  source: string
+  message?: string
+  source?: string
   timestamp: string
 }
 
-// --- ⭐ SOCIAL PROOF ---
+/* -------------------------------------------------------------------------- */
+/* ⭐ SOCIAL PROOF                                                           */
+/* -------------------------------------------------------------------------- */
+
 export interface TestimonialItem {
-  id: number
+  id: string | number
   content: string
   author: string
   role: string
+  company?: string
   rating: number
   image?: string
-  company?: string
 }

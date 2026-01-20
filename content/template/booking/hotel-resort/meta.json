@@ -1,0 +1,26 @@
+{
+  "id": "hotel-resort-01",
+  "name": "Hotel & Resort Premium",
+  "slug": "hotel-resort",
+  "category": "booking",
+  "price": 9900,
+  "salePrice": 6900,
+  "isPopular": true,
+  "themeColor": "rose",
+  "stats": {
+    "sold": 45,
+    "rating": 5.0
+  },
+  "tech": {
+    "framework": "สถาปัตยกรรมความเร็วสูง (App Router)",
+    "speedScore": 99,
+    "seoReady": true
+  },
+  "features": [
+    "ระบบจองห้องพักอัจฉริยะ (Booking Engine)",
+    "ปฏิทินเช็คสถานะว่างแบบ Real-time",
+    "ระบบแจ้งเตือนผ่าน Line ทันทีเมื่อมีการจอง",
+    "โครงสร้างรองรับ Google AI Specialist"
+  ],
+  "image": "/images/templates/project-01.webp"
+}
