@@ -11,18 +11,19 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * 🏗️ Hero Section — "ความประทับใจแรกที่เปลี่ยนเป็นยอดขาย"
+ * ปรับปรุงการสื่อสารให้เป็นภาษาคนทำงาน (Human-Centric) และตัดการระบุเวอร์ชัน V. ออก
  */
 const Hero = () => {
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden bg-white pt-32 lg:pt-48">
-      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
+      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern): สะท้อนงานระบบที่แม่นยำ */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] [mask-image:linear-gradient(180deg,white,transparent)] bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
-          {/* 🏷️ Badge: ตอกย้ำเทคโนโลยีที่ผมเลือกใช้ */}
+          {/* 🏷️ Badge: ตอกย้ำมาตรฐานสากล (ตัดการระบุเลขเวอร์ชัน V. เพื่อความเป็นมืออาชีพ) */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -31,11 +32,11 @@ const Hero = () => {
           >
             <Zap className="h-4 w-4 text-emerald-500" />
             <span className="text-[10px] font-black tracking-[0.25em] text-slate-500 uppercase">
-              Next.js 15 & 16 Specialist v.2026
+              Modern Web Architecture Specialist
             </span>
           </motion.div>
 
-          {/* 📣 พาดหัวหลัก (Main Headline) */}
+          {/* 📣 พาดหัวหลัก (Main Headline): ดุดันและคมชัดด้วย Font Prompt */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -48,7 +49,7 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* 📝 พาดหัวรอง (Sub-headline) */}
+          {/* 📝 พาดหัวรอง (Sub-headline): อ่านง่าย สบายตาด้วย Font Anuphan */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -62,7 +63,7 @@ const Hero = () => {
             </span>
           </motion.p>
 
-          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons) */}
+          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons): เน้นความชัดเจนในการติดต่อ */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -86,7 +87,7 @@ const Hero = () => {
             </Link>
           </motion.div>
 
-          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators) */}
+          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators): พิสูจน์ด้วยสถิติ */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -120,18 +121,18 @@ const Hero = () => {
               <div className="flex items-center gap-2 text-slate-900">
                 <ShieldCheck className="h-5 w-5" />
                 <span className="font-prompt text-xl font-black italic">
-                  2026 Ready
+                  Industrial Grade
                 </span>
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                ปลอดภัยและทันสมัย
+                ระบบเสถียรและปลอดภัย
               </span>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* 🖼️ รูปภาพผลงาน (Decorative Image) */}
+      {/* 🖼️ รูปภาพผลงาน (Decorative Image): บังคับโหลดทันทีเพื่อความไวสูงสุด */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -143,10 +144,10 @@ const Hero = () => {
             src="/images/showcase/aemdevweb-hero.webp"
             alt="ผลงานการออกแบบเว็บไซต์โดย นายเอ็มซ่ามากส์"
             fill
-            priority // ✅ บังคับโหลดทันทีเพื่อแก้ปัญหา LCP ช้าบนมือถือ
+            priority // ✅ สำคัญ: บังคับโหลดทันทีเพื่อแก้ปัญหา LCP
             className="object-cover transition-transform duration-700 hover:scale-105"
-            // ✅ ปรับขนาดรูปตามหน้าจอจริง เพื่อลดภาระการโหลดบนมือถือ
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px" 
+            // ✅ ปรับขนาดรูปตามหน้าจอจริง เพื่อประหยัด Data ลูกค้า
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>

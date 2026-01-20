@@ -15,7 +15,11 @@
   --color-accent: hsl(210 40% 96.1%);
   --color-accent-foreground: hsl(222.2 47.4% 11.2%);
 
+  /* 🟢 Specialist Emerald Logic (Brand DNA) */
   --color-success: hsl(158 64% 52%);
+  --color-emerald-500: #10b981;
+  --color-emerald-400: #34d399;
+
   --color-destructive: hsl(0 84.2% 60.2%);
 
   /* 🎨 UI Elements */
@@ -55,7 +59,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: Industrial SME Foundation                                   */
+/* 🏭 Base Layer: Industrial SME Foundation                      */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
@@ -64,6 +68,7 @@
   }
 
   body {
+    /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
     @apply bg-background text-foreground font-anuphan selection:bg-success/20 selection:text-primary antialiased;
     font-feature-settings:
       "rlig" 1,
@@ -77,6 +82,7 @@
   h4,
   h5,
   h6 {
+    /* ใช้ฟอนต์ Prompt เพื่อความมั่นคงและดูเป็นมืออาชีพ */
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -87,7 +93,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer                                                        */
+/* 🚀 Utilities Layer                                            */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
@@ -95,9 +101,15 @@
     text-wrap: balance;
   }
 
-  /* แก้อาการ Flash ของตัวอักษรไทยในบาง Browser */
+  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) ในบาง Browser */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* เพิ่มมิติความลึกให้กับ Card แบบ Industrial */
+  .industrial-shadow {
+    box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 }

@@ -1,33 +1,33 @@
 /** @format */
 
-import { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Calendar, ArrowRight, Sparkles, ChevronRight } from "lucide-react";
+import { Metadata } from "next"
+import Link from "next/link"
+import Image from "next/image"
+import { Calendar, ArrowRight, Sparkles, ChevronRight } from "lucide-react"
 
 // 📂 ข้อมูลตัวตนและระบบจัดการบทความ
-import { getAllPosts } from "@/lib/blog";
-import { siteConfig } from "@/constants/site-config";
+import { getAllPosts } from "@/lib/blog"
+import { siteConfig } from "@/constants/site-config"
 
 // 🧩 ส่วนประกอบหน้าเว็บ (Specialist Components)
-import { Badge } from "@/components/ui/badge";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 export const metadata: Metadata = {
   title: "คลังความรู้ SME & โรงงาน | กลยุทธ์เว็บไซต์และ SEO",
   description:
     "รวมเทคนิคการทำเว็บไซต์ให้โหลดไว ดันอันดับ Google และกลยุทธ์การตลาดออนไลน์ที่ผมสรุปมาให้เจ้าของธุรกิจโดยเฉพาะ โดย นายเอ็มซ่ามากส์",
   alternates: { canonical: `${siteConfig.url}/blog` },
-};
+}
 
 /**
  * 📚 Blog Hub — "คลังอาวุธลับของคนทำธุรกิจ"
  */
 export default async function BlogPage() {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts()
 
-  const featuredPost = posts[0];
-  const regularPosts = posts.slice(1);
+  const featuredPost = posts[0]
+  const regularPosts = posts.slice(1)
 
   return (
     <main className="relative min-h-screen bg-white pt-32 pb-24 selection:bg-emerald-500/20">
@@ -63,8 +63,9 @@ export default async function BlogPage() {
           คลังอาวุธ <br className="md:hidden" />
           <span className="text-emerald-500">SME ยุคใหม่</span>
         </h1>
-        <p className="font-anuphan mx-auto max-w-3xl text-xl font-bold leading-relaxed text-slate-500 md:text-2xl">
-          แชร์เทคนิคจากประสบการณ์ตรง เพื่อช่วยเพิ่มยอดขายให้ <br className="hidden md:block" />
+        <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+          แชร์เทคนิคจากประสบการณ์ตรง เพื่อช่วยเพิ่มยอดขายให้{" "}
+          <br className="hidden md:block" />
           <span className="text-slate-950 underline decoration-emerald-500/20">
             เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรม
           </span>
@@ -100,14 +101,15 @@ export default async function BlogPage() {
                     })}
                   </span>
                 </div>
-                <h2 className="font-prompt mb-6 text-3xl font-black leading-[1.1] tracking-tighter text-slate-900 uppercase italic transition-colors group-hover:text-emerald-500 md:text-5xl lg:text-6xl">
+                <h2 className="font-prompt mb-6 text-3xl leading-[1.1] font-black tracking-tighter text-slate-900 uppercase italic transition-colors group-hover:text-emerald-500 md:text-5xl lg:text-6xl">
                   {featuredPost.title}
                 </h2>
-                <p className="font-anuphan mb-10 text-lg font-bold leading-relaxed text-slate-500">
+                <p className="font-anuphan mb-10 text-lg leading-relaxed font-bold text-slate-500">
                   {featuredPost.excerpt}
                 </p>
                 <div className="font-prompt flex items-center gap-3 text-xs font-black tracking-widest text-slate-950 uppercase transition-all group-hover:translate-x-3">
-                  อ่านบทความนี้ต่อ <ArrowRight className="h-5 w-5 text-emerald-500" />
+                  อ่านบทความนี้ต่อ{" "}
+                  <ArrowRight className="h-5 w-5 text-emerald-500" />
                 </div>
               </div>
             </div>
@@ -134,17 +136,19 @@ export default async function BlogPage() {
               <div className="flex flex-1 flex-col p-8">
                 <div className="mb-6 flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-400 uppercase">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-emerald-500" /> {new Date(post.date).toLocaleDateString("th-TH")}
+                    <Calendar className="h-3.5 w-3.5 text-emerald-500" />{" "}
+                    {new Date(post.date).toLocaleDateString("th-TH")}
                   </span>
                 </div>
                 <h3 className="font-prompt mb-4 line-clamp-2 text-2xl font-black tracking-tighter text-slate-900 uppercase transition-colors group-hover:text-emerald-500">
                   {post.title}
                 </h3>
-                <p className="font-anuphan mb-8 line-clamp-3 flex-1 text-base font-bold leading-relaxed text-slate-500">
+                <p className="font-anuphan mb-8 line-clamp-3 flex-1 text-base leading-relaxed font-bold text-slate-500">
                   {post.excerpt}
                 </p>
                 <div className="font-prompt mt-auto flex items-center gap-2 border-t border-slate-50 pt-6 text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase transition-all group-hover:text-slate-900">
-                  อ่านเนื้อหาเต็มๆ <ChevronRight className="ml-auto h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
+                  อ่านเนื้อหาเต็มๆ{" "}
+                  <ChevronRight className="ml-auto h-4 w-4 text-emerald-500 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
             </Link>
@@ -158,5 +162,5 @@ export default async function BlogPage() {
         </p>
       </footer>
     </main>
-  );
+  )
 }

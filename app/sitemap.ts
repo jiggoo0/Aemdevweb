@@ -1,11 +1,11 @@
 /** @format */
 
-import { MetadataRoute } from "next";
-import { siteConfig } from "@/constants/site-config";
-import { getAllPosts } from "@/lib/blog";
-import { services } from "@/constants/services-data";
-import { getAllCaseStudies } from "@/lib/case-studies";
-import { getAllTemplates } from "@/lib/template";
+import { MetadataRoute } from "next"
+import { siteConfig } from "@/constants/site-config"
+import { getAllPosts } from "@/lib/blog"
+import { services } from "@/constants/services-data"
+import { getAllCaseStudies } from "@/lib/case-studies"
+import { getAllTemplates } from "@/lib/template"
 
 /**
  * 🗺️ Dynamic sitemap.ts — 2026 Specialist Edition
@@ -19,7 +19,7 @@ import { getAllTemplates } from "@/lib/template";
  */
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url;
+  const baseUrl = siteConfig.url
 
   // 1. หน้าพื้นฐานของเว็บไซต์ (Static Routes)
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -37,7 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: route === "" ? 1.0 : 0.7,
-  }));
+  }))
 
   // 2. หน้าบริการรายชิ้น (Revenue Layer)
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
@@ -45,35 +45,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.9,
-  }));
+  }))
 
   // 3. หน้าผลงานความสำเร็จ (Social Proof Layer)
-  const caseStudies = await getAllCaseStudies();
+  const caseStudies = await getAllCaseStudies()
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${baseUrl}/case-studies/${study.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
-  }));
+  }))
 
   // 4. หน้าเทมเพลตใน Marketplace (Market Conversion Layer)
   // ✅ [FIXED]: Mapping URL ให้ตรงกับโครงสร้าง /templates/[category]/[slug]
-  const templates = await getAllTemplates();
+  const templates = await getAllTemplates()
   const templateRoutes: MetadataRoute.Sitemap = templates.map((tpl) => ({
     url: `${baseUrl}/templates/${tpl.category.toLowerCase()}/${tpl.slug.toLowerCase()}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
-  }));
+  }))
 
   // 5. หน้าบทความคลังความรู้ (Knowledge Hub)
-  const posts = await getAllPosts();
+  const posts = await getAllPosts()
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: post.date ? new Date(post.date) : new Date(),
     changeFrequency: "monthly",
     priority: 0.6,
-  }));
+  }))
 
   // 🚀 รวบรวมทุกเส้นทางเข้าด้วยกัน
   const allRoutes = [
@@ -82,10 +82,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...caseStudyRoutes,
     ...templateRoutes,
     ...blogRoutes,
-  ];
+  ]
 
   // คัดกรอง URL ที่อาจซ้ำซ้อนเพื่อความคลีนของไฟล์ XML
   return allRoutes.filter(
     (route, index, self) => index === self.findIndex((r) => r.url === route.url)
-  );
+  )
 }
