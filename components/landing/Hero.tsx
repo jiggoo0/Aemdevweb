@@ -11,8 +11,6 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * 🏗️ Hero Section — "ความประทับใจแรกที่เปลี่ยนเป็นยอดขาย"
- * ผมออกแบบส่วนนี้มาเพื่อบอกให้ลูกค้า SME และโรงงานรู้ทันทีว่า
- * เว็บที่ผมทำให้นั้น "เน้นความไว" และ "ใช้งานได้จริง" ครับ
  */
 const Hero = () => {
   return (
@@ -82,7 +80,7 @@ const Hero = () => {
 
             <Link
               href="/services"
-              className="flex items-center gap-2 text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
+              className="font-prompt flex items-center gap-2 text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
             >
               {siteConfig.cta?.pricing || "ดูราคาแต่ละแพ็กเกจ"}
             </Link>
@@ -143,11 +141,12 @@ const Hero = () => {
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
             src="/images/showcase/aemdevweb-hero.webp"
-            alt="ผลงานของนายเอ็มซ่ามากส์"
+            alt="ผลงานการออกแบบเว็บไซต์โดย นายเอ็มซ่ามากส์"
             fill
-            priority
+            priority // ✅ บังคับโหลดทันทีเพื่อแก้ปัญหา LCP ช้าบนมือถือ
             className="object-cover transition-transform duration-700 hover:scale-105"
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            // ✅ ปรับขนาดรูปตามหน้าจอจริง เพื่อลดภาระการโหลดบนมือถือ
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>
