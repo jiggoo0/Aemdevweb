@@ -6,9 +6,8 @@ import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-// ✅ [FIXED]: แนะนำให้เรียกใช้ constructMetadata โดยตรงเพื่อให้ระบบ OG Image ทำงานได้แม่นยำที่สุด
-import { constructMetadata } from "@/constants/site-config" 
-import { viewport as defaultViewport } from "./viewport"
+import { defaultMetadata } from "./metadata" // ดึง Metadata ชุดเต็มที่เราแก้กันไว้
+import { viewport as defaultViewport } from "./viewport" // ดึง Viewport ที่ตั้งค่าไว้
 
 // 📂 Local Assets & Fonts
 import "./globals.css"
@@ -18,6 +17,7 @@ import { Prompt, Anuphan } from "next/font/google"
 /* 🅰️ Font Setup: Industrial Typography                                       */
 /* -------------------------------------------------------------------------- */
 
+// Prompt: ใช้สำหรับ Heading และ UI ที่ต้องการความมั่นคง (Modern Thai)
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -25,6 +25,7 @@ const fontPrompt = Prompt({
   display: "swap",
 })
 
+// Anuphan: ใช้สำหรับ Body Text ให้อ่านง่าย สบายตา (Humanist Thai)
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -36,8 +37,7 @@ const fontAnuphan = Anuphan({
 /* 🧬 SEO & Performance Config                                                */
 /* -------------------------------------------------------------------------- */
 
-// ✅ เรียกใช้ Helper ที่เราจูนไว้ เพื่อให้มั่นใจว่ารูป OG Image จะขึ้นทุกหน้าครับ
-export const metadata: Metadata = constructMetadata()
+export const metadata: Metadata = defaultMetadata
 export const viewport: Viewport = defaultViewport
 
 /* -------------------------------------------------------------------------- */
