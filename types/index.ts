@@ -4,6 +4,7 @@
  * 🧬 Core System Types – AEMDEVWEB (v.2026)
  * ศูนย์รวม Interface และ Types สำหรับระบบสถาปัตยกรรมเว็บไซต์
  * ออกแบบมาเพื่อความเสถียรของระบบ (Type Safety) และรองรับการทำ SEO Specialist
+ * Update: รองรับโครงสร้าง Keywords แบบ Complex Object และ Facebook ID
  */
 
 /* -------------------------------------------------------------------------- */
@@ -30,20 +31,54 @@ export interface FooterNavigation {
 export interface SiteConfig {
   name: string
   shortName: string
+  nameTH: string
   companyName: string
+  title: string
+  slogan: string
+  expert: string
+  role: string
   description: string
   url: string
   ogImage: string
-  keywords: string[]
+  email: string
+  
+  // 🛠️ Updated Keywords Structure: รองรับการทำ Metadata แบบเจาะจง
+  keywords: {
+    list: string[]      // สำหรับ Metadata Array
+    all: string         // สำหรับ Legacy String
+    core: string[]
+    tech: string[]
+    brand: string[]
+  }
+
   links: {
     line: string
-    github?: string
+    lineId: string
     facebook?: string
+    linkedin?: string
+    github?: string
     messenger?: string
   }
+  
+  contact: {            // ✅ Semantic Contact สำหรับ SEO และเครื่องมือติดต่อ
+    email: string
+    lineId: string
+    facebook?: string
+    linkedin?: string
+    phone?: string
+  }
+
   cta: {
     main: string
     secondary: string
+    pricing: string
+  }
+
+  standards: {          // ✅ Technical Standards ประจำปี 2026
+    performance: number
+    lcp: number
+    security: string
+    aiReadiness: string
   }
 }
 

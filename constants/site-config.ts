@@ -13,13 +13,13 @@ export const siteConfig = {
   // 🆔 Brand Identity
   name: "AEMDEVWEB",
   nameTH: "เอ็ม-เดฟ-เว็บ",
-  shortName: "AEM", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Header/Footer
-  companyName: "AEMDEVWEB Co., Ltd.", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน metadata.ts/Footer
+  shortName: "AEM",
+  companyName: "AEMDEVWEB Co., Ltd.",
   expert: "นายเอ็มซ่ามากส์ (Alongkorl)",
   role: "ที่ปรึกษา Technical SEO และผู้พัฒนาเว็บไซต์ Next.js สำหรับ SME",
 
   // 🎯 USP & Positioning
-  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน page.tsx
+  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง",
   slogan: "Speed Launch & High Performance",
   description:
     "บริการรับทำเว็บไซต์ Next.js โหลดเร็วอันดับ 1 และรับวางโครงสร้าง Technical SEO รองรับ Google AI Search (SGE) สำหรับ SME โดยเฉพาะ",
@@ -27,7 +27,7 @@ export const siteConfig = {
   // 🌐 URLs & Contact Infrastructure
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
-  email: "me@aemdevweb.com", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Contact/Footer
+  email: "me@aemdevweb.com",
 
   // 🖱️ CTA Settings (สำหรับไฟล์ Hero/CTASection)
   cta: {
@@ -41,7 +41,8 @@ export const siteConfig = {
     line: "https://line.me/ti/p/@aemdevweb",
     lineId: "@aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin:
+      "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
   // ℹ️ ข้อมูลการติดต่อ (New Structure)
@@ -49,7 +50,8 @@ export const siteConfig = {
     email: "me@aemdevweb.com",
     lineId: "@aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin:
+      "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
   // 📊 The 2026 Standard (Technical Guarantees)
@@ -74,8 +76,18 @@ export const siteConfig = {
     ],
     // สำหรับ Legacy metadata.ts (String)
     all: "รับทำ SEO SME, จ้างทำเว็บไซต์ราคาประหยัด, บริษัทรับทำ SEO สายขาว, รับทำเว็บไซต์ Next.js, SME Speed Launch, AEMDEVWEB, นายเอ็มซ่ามากส์",
-    core: ["รับทำ SEO SME", "จ้างทำเว็บไซต์ราคาประหยัด", "บริษัทรับทำ SEO สายขาว", "รับทำเว็บไซต์ Next.js"],
-    tech: ["SME Speed Launch", "บริการวางระบบ SEO Technical", "Web Performance Optimization", "Google AI Search Optimization"],
+    core: [
+      "รับทำ SEO SME",
+      "จ้างทำเว็บไซต์ราคาประหยัด",
+      "บริษัทรับทำ SEO สายขาว",
+      "รับทำเว็บไซต์ Next.js",
+    ],
+    tech: [
+      "SME Speed Launch",
+      "บริการวางระบบ SEO Technical",
+      "Web Performance Optimization",
+      "Google AI Search Optimization",
+    ],
     brand: ["AEMDEVWEB", "เอ็มเดฟเว็บ", "นายเอ็มซ่ามากส์"],
   },
 }
@@ -101,13 +113,13 @@ export function constructMetadata({
   return {
     title: {
       default: `${title} | ${siteConfig.slogan}`,
-      template: `%s | ${siteConfig.shortName}`, // ✅ [FIXED]: ใช้ shortName เป็น template ตามมาตรฐานเดิม
+      template: `%s | ${siteConfig.shortName}`,
     },
     description,
     authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
     creator: siteConfig.expert,
     publisher: siteConfig.companyName,
-    keywords: siteConfig.keywords.list, // ✅ [FIXED]: ส่งค่าเป็น Array เท่านั้น ป้องกัน TS Error
+    keywords: siteConfig.keywords.list,
     openGraph: {
       type: "website",
       locale: "th_TH",
@@ -139,7 +151,7 @@ export function constructMetadata({
         follow: false,
       },
     }),
-    // 🔌 Connect Facebook Page ID: 914706508399571
+    // 🔌 Connect Facebook Page ID: 914706508399571 (Verified from Screenshot)
     other: {
       "fb:pages": "914706508399571",
     },

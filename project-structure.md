@@ -5,8 +5,8 @@ url: "https://www.aemdevweb.com"
 author: "AEMDevWeb Automation"
 projectType: "Web Application"
 environment: "pre-deploy"
-buildId: "7b3846b"
-generatedAt: "2026-01-20T18:31:18Z"
+buildId: "4c3c10c"
+generatedAt: "2026-01-21T15:54:29Z"
 contentType: "technical-documentation"
 tags:
   - project-structure
@@ -17,186 +17,188 @@ tags:
 ---
 
 # 📁 Project Structure Report
-
-_Generated: **2026-01-20T18:31:18Z**_
+_Generated: **2026-01-21T15:54:29Z**_
 
 > **Site:** https://www.aemdevweb.com  
 > **Environment:** pre-deploy  
-> **Build ID:** 7b3846b
+> **Build ID:** 4c3c10c
 
 ## 🌳 Folder Structure
 
 📂 config
-📄 ai-context.core.md
-📄 ai-context.marketing.md
-📄 ai-context.seo.md
-📄 ai-context.tech.md
+  📄 ai-context.core.md
+  📄 ai-context.marketing.md
+  📄 ai-context.seo.md
+  📄 ai-context.tech.md
 
 📂 app
-📂 (main)
-📂 about
-📄 page.tsx
-📂 blog
-📂 [slug]
-📄 page.tsx
-📄 page.tsx
-📂 careers
-📄 page.tsx
-📂 case-studies
-📂 [slug]
-📄 page.tsx
-📄 page.tsx
-📂 contact
-📄 page.tsx
-📄 layout.tsx
-📄 page.tsx
-📂 privacy
-📄 page.tsx
-📂 services
-📂 [slug]
-📄 page.tsx
-📄 page.tsx
-📂 terms
-📄 page.tsx
-📂 (marketing)
-📂 [template]
-📂 [category]
-📂 [slug]
-📄 page.tsx
-📄 page.tsx
-📄 page.tsx
-📄 layout.tsx
-📄 favicon.ico
-📄 globals.css
-📄 layout.tsx
-📄 loading.tsx
-📄 metadata.ts
-📄 not-found.tsx
-📄 robots.ts
-📄 sitemap.ts
-📄 viewport.ts
+  📂 (main)
+    📂 about
+      📄 page.tsx
+    📂 blog
+      📂 [slug]
+        📄 page.tsx
+      📄 page.tsx
+    📂 careers
+      📄 page.tsx
+    📂 case-studies
+      📂 [slug]
+        📄 page.tsx
+      📄 page.tsx
+    📂 contact
+      📄 page.tsx
+    📄 layout.tsx
+    📄 page.tsx
+    📂 privacy
+      📄 page.tsx
+    📂 services
+      📂 [slug]
+        📄 page.tsx
+      📄 page.tsx
+    📂 terms
+      📄 page.tsx
+  📂 (marketing)
+    📂 [template]
+      📂 [category]
+        📂 [slug]
+          📄 page.tsx
+        📄 page.tsx
+      📄 page.tsx
+    📄 layout.tsx
+  📄 favicon.ico
+  📄 globals.css
+  📄 layout.tsx
+  📄 loading.tsx
+  📄 metadata.ts
+  📄 not-found.tsx
+  📄 robots.ts
+  📄 sitemap.ts
+  📄 viewport.ts
 
 📂 components
-📂 landing
-📄 CTASection.tsx
-📄 Hero.tsx
-📄 HomeClientSections.tsx
-📄 LandingContent.tsx
-📄 ValueProp.tsx
-📂 sales-engine
-📄 ImpactStats.tsx
-📄 LineLeadForm.tsx
-📄 PriceEstimator.tsx
-📄 SpeedDemon.tsx
-📄 WorkProcess.tsx
-📂 seo
-📄 JsonLd.tsx
-📂 shared
-📄 BlogCard.tsx
-📄 CaseStudyCard.tsx
-📄 Footer.tsx
-📄 Header.tsx
-📄 LineStickyButton.tsx
-📄 Navbar.tsx
-📄 ServiceCard.tsx
-📄 TrustBadge.tsx
-📂 template
-📂 marketplace
-📄 TemplateFilter.tsx
-📄 TemplateGrid.tsx
-📄 TemplateHero.tsx
-📄 TemplateSearch.tsx
-📂 shared
-📄 DevicePreview.tsx
-📄 TemplateFeatures.tsx
-📄 TemplateNavbar.tsx
-📄 TemplatePricingCard.tsx
-📂 ui
-📄 badge.tsx
-📄 button.tsx
-📄 card.tsx
-📄 form.tsx
-📄 input.tsx
-📄 label.tsx
-📄 modal.tsx
-📄 skeleton.tsx
-📄 sonner.tsx
-📄 textarea.tsx
+  📂 landing
+    📄 CTASection.tsx
+    📄 Hero.tsx
+    📄 HomeClientSections.tsx
+    📄 LandingContent.tsx
+    📄 ValueProp.tsx
+  📂 sales-engine
+    📄 ImpactStats.tsx
+    📄 LineLeadForm.tsx
+    📄 PriceEstimator.tsx
+    📄 SpeedDemon.tsx
+    📄 WorkProcess.tsx
+  📂 seo
+    📄 JsonLd.tsx
+  📂 shared
+    📄 BlogCard.tsx
+    📄 CaseStudyCard.tsx
+    📄 Footer.tsx
+    📄 Header.tsx
+    📄 LineStickyButton.tsx
+    📄 Navbar.tsx
+    📄 ServiceCard.tsx
+    📄 TrustBadge.tsx
+  📂 template
+    📂 marketplace
+      📄 TemplateFilter.tsx
+      📄 TemplateGrid.tsx
+      📄 TemplateHero.tsx
+      📄 TemplateSearch.tsx
+    📂 shared
+      📄 DevicePreview.tsx
+      📄 TemplateFeatures.tsx
+      📄 TemplateNavbar.tsx
+      📄 TemplatePricingCard.tsx
+  📂 ui
+    📄 badge.tsx
+    📄 button.tsx
+    📄 card.tsx
+    📄 form.tsx
+    📄 input.tsx
+    📄 label.tsx
+    📄 modal.tsx
+    📄 skeleton.tsx
+    📄 sonner.tsx
+    📄 textarea.tsx
 
 📂 lib
-📄 blog.ts
-📄 case-studies.ts
-📄 template.ts
-📄 utils.ts
+  📄 blog.ts
+  📄 case-studies.ts
+  📄 template.ts
+  📄 utils.ts
 
 📂 hooks
 
 📂 constants
-📄 navigation.ts
-📄 services-data.ts
-📄 site-config.ts
+  📄 navigation.ts
+  📄 services-data.ts
+  📄 site-config.ts
 
 📂 content
-📂 blog
-📄 5-points-killing-sales.mdx
-📄 copywriting-secrets.mdx
-📄 facebook-ads-vs-website.mdx
-📄 seo-for-sme-2026.mdx
-📄 unlink-th-case-study.mdx
-📂 case-studies
-📄 case-studies-1.mdx
-📄 case-studies-2.mdx
-📄 case-studies-3.mdx
-📂 template
-📂 booking
-📂 hotel-resort
-📄 index.mdx
-📄 meta.json
-📂 e-commerce
-📂 shop-master-pro
-📄 index.mdx
-📄 meta.json
-📂 landing-page
-📂 facebook-ads-expert
-📄 index.mdx
-📄 meta.json
-📂 service
-📂 cleaning-pro
-📄 index.mdx
-📄 meta.json
+  📂 blog
+    📄 5-points-killing-sales.mdx
+    📄 copywriting-secrets.mdx
+    📄 facebook-ads-vs-website.mdx
+    📄 seo-for-sme-2026.mdx
+    📄 unlink-th-case-study.mdx
+  📂 case-studies
+    📄 case-studies-1.mdx
+    📄 case-studies-2.mdx
+    📄 case-studies-3.mdx
+  📂 template
+    📂 booking
+      📂 hotel-resort
+        📄 index.mdx
+        📄 meta.json
+    📂 e-commerce
+      📂 shop-master-pro
+        📄 index.mdx
+        📄 meta.json
+    📂 landing-page
+      📂 facebook-ads-expert
+        📄 index.mdx
+        📄 meta.json
+    📂 service
+      📂 cleaning-pro
+        📄 index.mdx
+        📄 meta.json
 
 📂 types
-📄 index.ts
+  📄 index.ts
 
 📂 public
-📄 android-chrome-192x192.png
-📄 android-chrome-512x512.png
-📄 apple-touch-icon.png
-📂 download
-📄 favicon-16x16.png
-📄 favicon-32x32.png
-📄 grid.svg
-📂 images
-📂 blog
-📄 placeholder.webp
-📄 project-01.webp
-📂 showcase
-📄 aemdevweb-hero.webp
-📄 project-01.webp
-📄 unlink-th.webp
-📄 unlink-th1.webp
-📂 templates
-📂 booking
-📂 e-commerce
-📂 landing-page
-📄 project-01.webp
-📂 service
-📄 og-image.png
+  📄 android-chrome-192x192.png
+  📄 android-chrome-512x512.png
+  📄 apple-touch-icon.png
+  📂 download
+  📄 favicon-16x16.png
+  📄 favicon-32x32.png
+  📄 grid.svg
+  📂 images
+    📂 blog
+      📄 placeholder.webp
+      📄 project-01.webp
+    📄 og-image.png
+    📂 showcase
+      📄 Unlike-th-destop99.webp
+      📄 Unlink-th-mobile94.webp
+      📄 aemdevweb-hero.webp
+      📄 project-01.webp
+      📄 unlink-th.webp
+      📄 unlink-th1.webp
+      📄 unlink-th3.webp
+    📂 templates
+      📂 booking
+      📂 e-commerce
+      📂 landing-page
+      📄 project-01.webp
+      📂 service
+  📄 og-image.png
 
 ⚠️ Skipped: providers (not found)
 
 ## 📦 package.json Overview
-
 ```json
 {
   "name": "aemdevweb.com",
@@ -266,24 +268,20 @@ _Generated: **2026-01-20T18:31:18Z**_
 ```
 
 ## 🧩 MDX Components Check
-
 ✅ File found: `mdx-components.tsx`
 
 **Purpose**
-
 - Central mapping for MDX rendering
 - Controls how headings, links, images, and code appear
 - Direct impact on SEO, accessibility, and content consistency
 
 **Review checklist**
-
 - [ ] Heading hierarchy is semantic (h1–h6)
 - [ ] External links handle target / rel correctly
 - [ ] No inline script or unsafe HTML
 - [ ] Compatible with App Router + MDX pipeline
 
 **Source snapshot**
-
 ```typescript
 /** @format */
 
@@ -455,21 +453,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 ```
 
 ## ⚙️ Next.js Configuration Check
-
 ⚠️ next.config.ts not found
 Using default Next.js behavior
 
 ## 📝 Pre-deploy Analysis
-
----
-
+________
 🔍 Latest pre-deploy report detected
 
 ✅ Status: **READY FOR DEPLOY**
 
 ### 📍 Production Route Map
-
-````text
+```text
 ```text
 Route (app)
 ┌ ○ /
@@ -504,8 +498,7 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-````
-
+```
 ```
 
 ### ⚠️ Issues Highlight
@@ -515,4 +508,3 @@ Route (app)
 Status: Scan completed successfully.
 Scope: Architecture • MDX • Next.js • Pre-deploy
 Target: Production readiness & AI context
-```

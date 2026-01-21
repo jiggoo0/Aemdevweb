@@ -3,23 +3,20 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-21 01:31:36
+  Generated: 2026-01-21 22:56:06
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-21 01:31:36**_
-
+_Generated on: **2026-01-21 22:56:06**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
-
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-
-````text
+```text
 ```text
 Route (app)
 ┌ ○ /
@@ -54,27 +51,25 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-````
-
-````
+```
+```
 
 ## 📊 2. File Statistics by Extension
 ```text
      57 tsx
      12 ts
      12 mdx
-      7 webp
-      6 png
+     10 webp
+      7 png
       5 sh
       4 md
       4 json
       1 svg
       1 ico
       1 css
-````
+```
 
 ## 📁 3. Directory Structure (Architecture Tree)
-
 ```text
 📂 app/
   📂 (main)/
@@ -184,11 +179,15 @@ Route (app)
   📄 og-image.png
   📄 grid.svg
   📂 images/
+    📄 og-image.png
     📂 showcase/
       📄 unlink-th1.webp
       📄 project-01.webp
       📄 aemdevweb-hero.webp
       📄 unlink-th.webp
+      📄 Unlike-th-destop99.webp
+      📄 Unlink-th-mobile94.webp
+      📄 unlink-th3.webp
     📂 blog/
       📄 project-01.webp
       📄 placeholder.webp
@@ -244,9 +243,7 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
-
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -339,11 +336,9 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
-
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -477,11 +472,9 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
-
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -601,11 +594,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -698,11 +689,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
-
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -807,39 +796,25 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
-
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-
-````markdown
+```markdown
 # 🚀 Pre-deploy Inspection Report
-
-Generated at: 2026-01-21 01:25:51
+Generated at: 2026-01-21 22:47:51
 Branch: main
 
 ## 🔐 1. Environment Check
-
 ✅ Status: .env file exists and verified.
-
-## 🛠️ 2. Auto-Fix Procedure
-
+## 🛠️  2. Auto-Fix Procedure
 ✅ Status: Auto-fix completed or no issues found.
-
 ## 🧹 3. Code Linting (ESLint)
-
 ✅ Status: Linting passed.
-
 ## ⌨️ 4. Type Safety Check
-
 ✅ Status: TypeScript verified.
-
-## 🏗️ 5. Production Build Test
-
+## 🏗️  5. Production Build Test
 ✅ Status: Build successfully optimized.
-
 ### 📊 Route Statistics & Bundle Size
-
 ```text
 Route (app)
 ┌ ○ /
@@ -876,18 +851,14 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
+
 ```
-````
 
 ---
-
 ## 🏆 Summary Result
-
 ### ✅ READY FOR DEPLOY
-
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-
-````
+```
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -1007,22 +978,20 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 }
-````
-
+```
 ---
 
 #### 🔍 Path: `app/layout.tsx`
-
 ```typescript
 /** @format */
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script" // 📦 เพิ่ม Script Component
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-// ✅ [FIXED]: เปลี่ยนมาเรียกใช้ constructMetadata โดยตรงเพื่อให้รูป OG Image ขึ้นทุกหน้า
 import { constructMetadata } from "@/constants/site-config"
 import { viewport as defaultViewport } from "./viewport"
 
@@ -1034,23 +1003,15 @@ import { Prompt, Anuphan } from "next/font/google"
 /* 🅰️ Font Setup: Industrial Typography Specialist v2026                      */
 /* -------------------------------------------------------------------------- */
 
-/**
- * 🏢 Prompt: สำหรับ Heading ที่ต้องการความสุขุมและมั่นคง
- * ปรับจูนให้รองรับภาษาไทยระดับ Industrial Grade
- */
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap", // ✅ ป้องกันอาการตัวหนังสือหายระหว่างโหลด
+  display: "swap",
   preload: true,
-  adjustFontFallback: true, // ✅ จูนระยะบรรทัดให้ไม่กระตุกเมื่อฟอนต์โหลดเสร็จ
+  adjustFontFallback: true,
 })
 
-/**
- * 🧬 Anuphan: สำหรับ Body Text ที่เน้นการอ่านข้อมูลจำนวนมาก (SME & Factory)
- * ออกแบบมาให้สบายตาและดูทันสมัย (Humanist Thai)
- */
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -1064,7 +1025,6 @@ const fontAnuphan = Anuphan({
 /* 🧬 SEO & Performance Config                                                */
 /* -------------------------------------------------------------------------- */
 
-// ✅ ใช้ระบบ Metadata ที่จูน Path รูปภาพมาแล้ว 100%
 export const metadata: Metadata = constructMetadata()
 export const viewport: Viewport = defaultViewport
 
@@ -1084,7 +1044,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "scroll-smooth",
         fontPrompt.variable,
         fontAnuphan.variable,
-        "thai-font-smoothing" // ✅ ใช้ Utility สำหรับรีดความชัดของฟอนต์ไทย
+        "thai-font-smoothing"
       )}
       suppressHydrationWarning
     >
@@ -1095,7 +1055,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "transition-colors duration-300"
         )}
       >
-        {/* 🚀 Top Loading Bar: Emerald-500 Brand Primary */}
+        {/* 🚀 1. Top Loading Bar: Emerald-500 Brand Primary */}
         <NextTopLoader
           color="#10B981"
           initialPosition={0.08}
@@ -1108,18 +1068,56 @@ export default function RootLayout({ children }: RootLayoutProps) {
           shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
-        {/* 🌍 App Content Infrastructure */}
+        {/* 💬 2. Facebook Customer Chat (Messenger) */}
+        {/* จำเป็นต้องมี div id="fb-root" และ div id="fb-customer-chat" */}
+        <div id="fb-root" />
+        <div id="fb-customer-chat" className="fb-customerchat" />
+
+        <Script id="facebook-chat" strategy="lazyOnload">
+          {`
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "914706508399571");
+            chatbox.setAttribute("attribution", "biz_inbox");
+
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v18.0'
+              });
+            };
+
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          `}
+        </Script>
+
+        {/* 📊 3. Google Analytics (Placeholder) - ใส่ Measurement ID เมื่อพร้อม */}
+        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script> 
+        */}
+
+        {/* 🌍 4. App Content Infrastructure */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
       </body>
     </html>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1294,11 +1292,9 @@ export default function HomePage() {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
-
 ```typescript
 /** @format */
 
@@ -1467,11 +1463,9 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1652,11 +1646,9 @@ export default async function TemplateDetailPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1827,11 +1819,9 @@ export default async function TemplateCategoryPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1992,11 +1982,9 @@ export default async function TemplateMainPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2251,11 +2239,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2524,11 +2510,9 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2647,24 +2631,37 @@ export default async function CaseStudiesPage() {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
 import React from "react"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { ArrowLeft, Calendar, Tag } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-/** * ✅ [FIXED]: เปลี่ยนจาก next-md-remote เป็น next-mdx-remote
- * เพื่อให้ตรงกับแพ็กเกจที่ติดตั้งผ่าน pnpm
- */
+// 📂 Icon & UI Assets
+import {
+  ArrowLeft,
+  Calendar,
+  Tag,
+  ShieldCheck,
+  TrendingUp,
+  Fingerprint,
+  Cpu,
+  CheckCircle2,
+  Lock,
+  Zap,
+  BarChart3,
+  Rocket,
+  MessageSquare,
+  AlertTriangle,
+} from "lucide-react"
+
+// 📦 MDX Engine: มาตรฐาน Next.js 15/16 pnpm
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 // 📂 Logic & Config Architecture
@@ -2680,10 +2677,19 @@ import CTASection from "@/components/landing/CTASection"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+
+/* -------------------------------------------------------------------------- */
+/* 🧩 Types & Interfaces                                                       */
+/* -------------------------------------------------------------------------- */
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
 }
+
+/* -------------------------------------------------------------------------- */
+/* 🧬 Server Side Logic                                                       */
+/* -------------------------------------------------------------------------- */
 
 export async function generateStaticParams() {
   const slugs = getCaseStudySlugs()
@@ -2696,10 +2702,10 @@ export async function generateMetadata({
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
-  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.shortName}` }
+  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.name}` }
 
   return {
-    title: `${caseStudy.frontmatter.title} | ${siteConfig.shortName}`,
+    title: `${caseStudy.frontmatter.title} | ${siteConfig.name}`,
     description: caseStudy.frontmatter.excerpt,
     openGraph: {
       title: caseStudy.frontmatter.title,
@@ -2709,29 +2715,47 @@ export async function generateMetadata({
   }
 }
 
-/**
- * 🧬 Case Study Detail Engine v2026
- * จัดการ Error 'Module not found' สำเร็จแล้ว
- */
+/* -------------------------------------------------------------------------- */
+/* 🏗️ Case Study Detail Page                                                  */
+/* -------------------------------------------------------------------------- */
+
 export default async function CaseStudyDetailPage({
   params,
 }: CaseStudyPageProps) {
-  // Next.js 15/16 มาตรฐาน Specialist ต้อง await params
+  // มาตรฐาน Next.js 16 ต้อง await params
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
   if (!caseStudy) notFound()
 
-  // ลงทะเบียนคอมโพเนนต์สำหรับ MDX
+  /**
+   * ✅ [FIXED]: ลงทะเบียนคอมโพเนนต์ทั้งหมดที่ใช้ใน MDX
+   * ป้องกัน Error: Expected component X to be defined
+   */
   const mdxComponents = {
     ...useMDXComponents({}),
+    // 📊 Sales Engine
     ImpactStats,
     SpeedDemon,
     WorkProcess,
+    LineLeadForm,
+    // 💎 Icons (ส่งผ่านเข้าไปให้ MDX เรียกใช้ได้)
+    ShieldCheck,
+    TrendingUp,
+    Fingerprint,
+    Cpu,
+    CheckCircle2,
+    Lock,
+    Zap,
+    BarChart3,
+    Rocket,
+    MessageSquare,
+    AlertTriangle,
   }
 
   return (
     <article className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* 🚀 Structured Data for SEO */}
       <JsonLd
         type="Article"
         data={{
@@ -2739,10 +2763,11 @@ export default async function CaseStudyDetailPage({
           description: caseStudy.frontmatter.excerpt,
           image: caseStudy.frontmatter.thumbnail,
           datePublished: caseStudy.frontmatter.date,
-          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์" },
+          author: { "@type": "Person", name: siteConfig.expert },
         }}
       />
 
+      {/* 🔝 Header Section */}
       <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="container mx-auto px-4">
           <Link
@@ -2777,6 +2802,7 @@ export default async function CaseStudyDetailPage({
         </div>
       </header>
 
+      {/* 🖼️ Featured Image */}
       <div className="container mx-auto mb-20 px-4">
         <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
@@ -2790,34 +2816,38 @@ export default async function CaseStudyDetailPage({
         </div>
       </div>
 
+      {/* 📝 MDX Content Content */}
       <main className="container mx-auto px-4">
         <div className="prose prose-slate prose-lg prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-900 prose-headings:uppercase prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-24 max-w-4xl">
           <MDXRemote source={caseStudy.content} components={mdxComponents} />
         </div>
       </main>
 
+      {/* 📈 Results & Impact Section */}
       <div className="border-y border-slate-50 bg-white py-12">
-        <ImpactStats />
+        <div className="container mx-auto px-4">
+          <ImpactStats />
+        </div>
       </div>
 
+      {/* 🚀 CTA Section */}
       <div className="mt-32">
         <CTASection />
       </div>
 
+      {/* 🏛️ Footer Branding */}
       <footer className="mt-20 text-center opacity-40 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build & Proof by นายเอ็มซ่ามากส์ v2026 — Case Analysis
+          Build & Proof by {siteConfig.expert} v2026 — Case Analysis
         </p>
       </footer>
     </article>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
-
 ```typescript
 /** @format */
 
@@ -2987,176 +3017,172 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
 import type { Metadata } from "next"
 
 /**
- * 🌐 Site Configuration – AEMDEVWEB (v.2026)
- * ศูนย์กลางข้อมูลตัวตนสำหรับ SME เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรม
+ * 🛠️ AEMDEVWEB Identity Configuration (2026 Edition)
+ * ข้อมูลอัตลักษณ์แบรนด์ กลยุทธ์ SEO และมาตรฐานทางเทคนิค
+ *
+ * @path src/constants/site-config.ts
  */
 
 export const siteConfig = {
-  /* 🏢 Brand Identity: นายเอ็มซ่ามากส์ */
-  name: "นายเอ็มซ่ามากส์ (AEMDEVWEB)",
-  companyName: "AEMDEVWEB Specialist Solutions",
-  shortName: "นายเอ็มซ่ามากส์",
-  email: "me@aemdevweb.com",
+  // 🆔 Brand Identity
+  name: "AEMDEVWEB",
+  nameTH: "เอ็ม-เดฟ-เว็บ",
+  shortName: "AEM", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Header/Footer
+  companyName: "AEMDEVWEB Co., Ltd.", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน metadata.ts/Footer
+  expert: "นายเอ็มซ่ามากส์ (Alongkorl)",
+  role: "ที่ปรึกษา Technical SEO และผู้พัฒนาเว็บไซต์ Next.js สำหรับ SME",
 
-  // 🧬 DNA: ความไวที่สร้างแต้มต่อให้ธุรกิจ
-  tagline: "สร้างเว็บที่เปิดไวทันใจ เพื่อให้ธุรกิจของคุณนำหน้าคู่แข่งในทุกคลิก",
-
-  title:
-    "นายเอ็มซ่ามากส์ | รับทำเว็บไซต์ SME เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรม",
+  // 🎯 USP & Positioning
+  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน page.tsx
+  slogan: "Speed Launch & High Performance",
   description:
-    "บริการทำเว็บไซต์ที่เน้นความเร็วและการปิดการขาย สำหรับเจ้าของกิจการและโรงงาน โดยนายเอ็มซ่ามากส์ งานเนี๊ยบ ดูแลดี ไม่ทิ้งงาน พร้อมดันอันดับ Google ให้ธุรกิจของคุณ",
+    "บริการรับทำเว็บไซต์ Next.js โหลดเร็วอันดับ 1 และรับวางโครงสร้าง Technical SEO รองรับ Google AI Search (SGE) สำหรับ SME โดยเฉพาะ",
 
-  /* 🌐 URLs & Assets */
+  // 🌐 URLs & Contact Infrastructure
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
+  email: "me@aemdevweb.com", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Contact/Footer
 
-  /* 🔗 Social & Direct Links */
-  links: {
-    facebook: "https://www.facebook.com/share/186gv7BAsc/",
-    messenger: "https://m.me/aemdevweb",
-    line: "https://lin.ee/SVMBEJ8",
-    lineId: "@127cnhtn",
-    github: "https://github.com/jiggoo0",
-  },
-
-  /* 🚀 Call to Action */
+  // 🖱️ CTA Settings (สำหรับไฟล์ Hero/CTASection)
   cta: {
-    main: "ปรึกษา นายเอ็มซ่ามากส์",
-    secondary: "ดูผลงานทั้งหมด",
-    pricing: "ประเมินราคาโปรเจกต์",
+    main: "ทักมาคุยโปรเจกต์กับผม",
+    secondary: "ดูแพ็กเกจบริการทั้งหมด",
+    pricing: "ดูราคาแต่ละแพ็กเกจ",
   },
 
-  /* 📞 Contact Channel */
+  // 🔗 Legacy Links (Backward Compatibility)
+  links: {
+    line: "https://line.me/ti/p/@aemdevweb",
+    lineId: "@aemdevweb",
+    facebook: "https://facebook.com/aemdevweb",
+    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  },
+
+  // ℹ️ ข้อมูลการติดต่อ (New Structure)
   contact: {
     email: "me@aemdevweb.com",
-    tel: "099-999-8989",
-    telDisplay: "099-999-8989 (สายตรง นายเอ็มซ่ามากส์)",
-    address: "Technical Office: Thailand / Service Online 24/7",
+    lineId: "@aemdevweb",
+    facebook: "https://facebook.com/aemdevweb",
+    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
-  /* 📈 SEO Keywords (2026 Specialist Strategy) */
-  keywords: [
-    // --- Brand & Identity ---
-    "นายเอ็มซ่ามากส์",
-    "เอ็มซ่ามากส์",
-    "AEMDEVWEB",
+  // 📊 The 2026 Standard (Technical Guarantees)
+  standards: {
+    performance: 100, // Google PageSpeed Insights Goal
+    lcp: 1.2, // Largest Contentful Paint (Seconds)
+    security: "Enterprise SSL (HTTPS)",
+    aiReadiness: "Schema Markup & JSON-LD Embedded",
+  },
 
-    // --- Core Services (SME & Corporate) ---
-    "รับทำเว็บไซต์ SME",
-    "รับทำเว็บไซต์บริษัท",
-    "จ้างทำเว็บไซต์ หจก",
-    "ทำเว็บ Sale Page ปิดการขาย",
-    "รับทำ Landing Page ยิงแอด",
-    "ออกแบบเว็บไซต์ธุรกิจ",
-
-    // --- Industrial Focus ---
-    "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
-    "ทำเว็บแคตตาล็อกสินค้าอุตสาหกรรม",
-    "เว็บไซต์บริษัท B2B",
-
-    // --- Performance & SEO Specialist ---
-    "รับทำ SEO ดันอันดับ",
-    "Technical SEO Specialist Thailand",
-    "รับแก้เว็บไซต์ช้า",
-    "เว็บไซต์โหลดไวที่สุด 2026",
-
-    // --- Trust & Pain Points ---
-    "คนทำเว็บไม่ทิ้งงาน",
-    "รับทำเว็บไซต์ราคาคุ้มค่า",
-    "คนทำเว็บคุยง่าย",
-  ] as string[],
-
-  /* 🎨 Visual Theme */
-  themeColor: "#0F172A",
+  // 🎯 SEO Strategy: Keyword Groups
+  keywords: {
+    // สำหรับ Metadata Constructor (Array)
+    list: [
+      "รับทำ SEO SME",
+      "จ้างทำเว็บไซต์ราคาประหยัด",
+      "บริษัทรับทำ SEO สายขาว",
+      "รับทำเว็บไซต์ Next.js",
+      "SME Speed Launch",
+      "AEMDEVWEB",
+      "นายเอ็มซ่ามากส์",
+    ],
+    // สำหรับ Legacy metadata.ts (String)
+    all: "รับทำ SEO SME, จ้างทำเว็บไซต์ราคาประหยัด, บริษัทรับทำ SEO สายขาว, รับทำเว็บไซต์ Next.js, SME Speed Launch, AEMDEVWEB, นายเอ็มซ่ามากส์",
+    core: ["รับทำ SEO SME", "จ้างทำเว็บไซต์ราคาประหยัด", "บริษัทรับทำ SEO สายขาว", "รับทำเว็บไซต์ Next.js"],
+    tech: ["SME Speed Launch", "บริการวางระบบ SEO Technical", "Web Performance Optimization", "Google AI Search Optimization"],
+    brand: ["AEMDEVWEB", "เอ็มเดฟเว็บ", "นายเอ็มซ่ามากส์"],
+  },
 }
 
-export type SiteConfig = typeof siteConfig
-
-/* 🛠️ Metadata Helper: ตัวช่วยสร้างข้อมูล SEO รายหน้า */
+/**
+ * ⚙️ Metadata Constructor
+ * ฟังก์ชันสร้าง Metadata อัตโนมัติสำหรับ Next.js App Router
+ * รองรับ OpenGraph และ Twitter Cards แบบ Dynamic
+ */
 export function constructMetadata({
-  title,
+  title = siteConfig.title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
+  icons = "/favicon.ico",
   noIndex = false,
 }: {
   title?: string
   description?: string
   image?: string
+  icons?: string
   noIndex?: boolean
 } = {}): Metadata {
-  const pageTitle = title
-    ? `${title} | ${siteConfig.shortName}`
-    : siteConfig.title
-
   return {
-    title: pageTitle,
+    title: {
+      default: `${title} | ${siteConfig.slogan}`,
+      template: `%s | ${siteConfig.shortName}`, // ✅ [FIXED]: ใช้ shortName เป็น template ตามมาตรฐานเดิม
+    },
     description,
-    keywords: siteConfig.keywords, // ใช้ Keywords ชุดใหญ่เป็นฐาน
-    authors: [{ name: siteConfig.shortName }],
-    creator: siteConfig.companyName,
-    metadataBase: new URL(siteConfig.url),
+    authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
+    creator: siteConfig.expert,
+    publisher: siteConfig.companyName,
+    keywords: siteConfig.keywords.list, // ✅ [FIXED]: ส่งค่าเป็น Array เท่านั้น ป้องกัน TS Error
     openGraph: {
       type: "website",
       locale: "th_TH",
       url: siteConfig.url,
-      siteName: siteConfig.shortName,
-      title: pageTitle,
+      title,
       description,
+      siteName: siteConfig.name,
       images: [
         {
           url: image,
           width: 1200,
           height: 630,
-          alt: pageTitle,
+          alt: `${siteConfig.name} - ${siteConfig.slogan}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: pageTitle,
+      title,
       description,
       images: [image],
+      creator: siteConfig.expert,
     },
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon-16x16.png",
-      apple: "/apple-touch-icon.png",
-    },
+    icons,
+    metadataBase: new URL(siteConfig.url),
     ...(noIndex && {
       robots: {
         index: false,
         follow: false,
       },
     }),
+    // 🔌 Connect Facebook Page ID: 914706508399571
+    other: {
+      "fb:pages": "914706508399571",
+    },
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
-
 ```typescript
 /** @format */
 
 /**
  * 🏢 ข้อมูลบริการ — AEMDEVWEB (Specialist Edition 2026)
  * ปรับปรุง Keyword ให้สอดคล้องกับกลุ่ม SME, บริษัท และโรงงานอุตสาหกรรม
+ * Path: src/constants/services-data.ts
  */
 
 /* -------------------------------------------------------------------------- */
-/* 🧩 ประเภทข้อมูล                                                               */
+/* 🧩 Type Definitions (Strict Mode)                                          */
 /* -------------------------------------------------------------------------- */
 
 export type ServiceCategory =
@@ -3180,13 +3206,13 @@ export interface ServiceItem {
   title: string
   description: string
   price: string
-  priceValue: number
+  priceValue: number // ใช้สำหรับ Sort หรือคำนวณ
   features: string[]
   promotion?: string
   slug: string
   themeColor: ThemeColor
   category: ServiceCategory
-  highlight?: boolean
+  highlight?: boolean // สำหรับแสดงป้าย Best Seller
 }
 
 export interface CategoryInfo {
@@ -3194,134 +3220,172 @@ export interface CategoryInfo {
   name: string
   themeColor: ThemeColor
   description: string
-  icon?: string
+  icon?: string // เผื่อใส่ Icon Component ในอนาคต
 }
 
 /* -------------------------------------------------------------------------- */
-/* 📁 กลุ่มบริการ (ปรับปรุงคำค้นหายอดนิยม)                                              */
+/* 📁 Categories (หมวดหมู่บริการ)                                               */
 /* -------------------------------------------------------------------------- */
 
 export const categoriesData: CategoryInfo[] = [
   {
     slug: "starter",
-    name: "รับทำ Sale Page",
+    name: "Sale Page (หน้าเดียว)",
     themeColor: "slate",
     description:
-      "เน้นปิดการขายหน้าเดียว เหมาะสำหรับสินค้าชิ้นเดียวหรือแคมเปญโฆษณา",
+      "เปลี่ยนคลิกเป็นยอดขาย! เว็บหน้าเดียว เน้นปิดการขายไว เหมาะสำหรับยิง Ads",
   },
   {
     slug: "sme",
-    name: "เว็บไซต์ SME",
+    name: "เว็บไซต์ SME (ยอดนิยม)",
     themeColor: "emerald",
-    description: "เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยเว็บไซต์ประสิทธิภาพสูง",
+    description:
+      "ยกระดับธุรกิจให้ดูโปรฯ เพิ่มความน่าเชื่อถือ และปิดการขายได้จริง บน Google",
   },
   {
     slug: "corporate",
     name: "เว็บไซต์บริษัท & องค์กร",
     themeColor: "blue",
-    description: "สร้างความน่าเชื่อถือระดับสากลสำหรับบริษัท หจก. และธุรกิจ B2B",
+    description:
+      "ภาพลักษณ์ระดับสากล สร้างความมั่นใจให้คู่ค้า รองรับมาตรฐาน B2B เต็มรูปแบบ",
   },
   {
     slug: "industrial",
-    name: "เว็บไซต์โรงงานอุตสาหกรรม",
+    name: "เว็บไซต์โรงงาน & E-Catalog",
     themeColor: "indigo",
-    description: "จัดการข้อมูลสินค้าและแคตตาล็อกขนาดใหญ่ พร้อมระบบที่เสถียร",
+    description:
+      "ระบบจัดการสินค้าอุตสาหกรรม รองรับ SKU หลักหมื่น ค้นหาง่าย โหลดไว ไม่หน่วง",
   },
   {
     slug: "seo-technical",
-    name: "รับแก้โครงสร้าง SEO",
+    name: "รับแก้เว็บช้า & Technical SEO",
     themeColor: "amber",
-    description: "ปรับจูนระบบหลังบ้านให้ Google ชอบ และเพิ่มคะแนนความเร็วเว็บ",
+    description:
+      "แก้ปัญหาเว็บอืด ปรับโครงสร้างหลังบ้านให้ Google รัก ดันคะแนน Performance เต็ม 100",
   },
   {
     slug: "seo-organic",
-    name: "รับทำ SEO ดันอันดับ",
+    name: "รับทำ SEO ดันอันดับระยะยาว",
     themeColor: "rose",
     description:
-      "เน้นปั้น Keyword ทำเงิน เพื่อรับลูกค้าฟรีจาก Google ในระยะยาว",
+      "สร้างลูกค้าฟรีจาก Google ลดต้นทุนค่าโฆษณา ด้วยกลยุทธ์ Keyword ทำเงิน",
   },
 ]
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 รายละเอียดแพ็กเกจ (ปรับปรุง Feature Keywords)                                   */
+/* 🚀 Services Data (ข้อมูลบริการละเอียด)                                        */
 /* -------------------------------------------------------------------------- */
 
 export const services: ServiceItem[] = [
   {
     id: "starter-one-page",
-    title: "Sale Page ปิดการขาย",
+    title: "Sale Page: ปิดการขายไว (High Conversion)",
     slug: "starter-one-page",
     category: "Starter",
     description:
-      "Landing Page หน้าเดียวครบถ้วน ออกแบบมาเพื่อเน้นยอดขายและรองรับแรงยิง Ads",
-    price: "5,900.-",
+      "Landing Page หน้าเดียวจบ ออกแบบมาเพื่อรับแรงยิง Ads โดยเฉพาะ โหลดไวใน 1 วินาที ลูกค้าไม่หนี ปิดการขายง่าย",
+    price: "เริ่มต้น 5,900.-",
     priceValue: 5900,
     features: [
-      "เว็บไซต์โหลดไวที่สุด (Fastest Loading)",
-      "รองรับการแสดงผลบนมือถือ 100%",
-      "ติดตั้งปุ่มทัก LINE และปุ่มโทรออกด่วน",
-      "ระบบความปลอดภัยมาตรฐาน SSL ฟรี",
+      "⚡ Ultra Fast Loading: โหลดไวระดับวินาที (รองรับ Traffic สูง)",
+      "📱 100% Mobile Responsive: แสดงผลสวยงามทุกหน้าจอ",
+      "💬 Conversion Focus: ปุ่ม Call-to-Action (LINE/โทร) กดง่ายที่สุด",
+      "🔒 Free SSL: แถมฟรีใบรับรองความปลอดภัย (https)",
     ],
     themeColor: "slate",
   },
   {
     id: "sme-speed-launch",
-    title: "SME Speed Launch (ยอดนิยม)",
+    title: "SME Pro: เว็บธุรกิจครบวงจร (Best Seller 🔥)",
     slug: "sme-speed-launch",
     category: "SME",
     description:
-      "เว็บไซต์ธุรกิจที่เน้น Conversion และความเร็วที่เหนือกว่าคู่แข่ง",
-    price: "12,900.-",
+      "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ครบเครื่องทั้งดีไซน์และฟังก์ชัน วางโครงสร้าง SEO ตั้งแต่วันแรก",
+    price: "เริ่มต้น 12,900.-",
     priceValue: 12900,
     highlight: true,
     features: [
-      "สถาปัตยกรรมเว็บความเร็วสูง (LCP Specialist)",
-      "ออกแบบ UI/UX ตามหลักการปิดการขาย",
-      "โครงสร้างรองรับ Google Search AI 2026",
-      "ระบบจัดการเนื้อหา (CMS) ที่ใช้งานง่าย",
+      "🚀 Performance 100/100: ความเร็วสูงพิเศษ (LCP < 1.5s)",
+      "🎨 Custom Design: ออกแบบ UX/UI เฉพาะธุรกิจคุณ (ไม่ใช้ Template โหล)",
+      "🤖 AI Search Ready: รองรับโครงสร้าง SEO ยุคใหม่ (Google SGE)",
+      "📝 Easy CMS: ระบบหลังบ้านจัดการง่าย (พร้อมสอนใช้งานฟรี)",
     ],
     themeColor: "emerald",
   },
   {
+    id: "corporate-trust",
+    title: "Corporate Identity: เว็บไซต์องค์กรชั้นนำ",
+    slug: "corporate-trust",
+    category: "Corporate",
+    description:
+      "สร้างความเชื่อมั่นสูงสุดให้คู่ค้าและนักลงทุน ด้วยเว็บไซต์ภาพลักษณ์องค์กรที่ดูทันสมัย มั่นคง และปลอดภัย",
+    price: "เริ่มต้น 25,900.-",
+    priceValue: 25900,
+    features: [
+      "🛡️ Enterprise Grade Security: ระบบความปลอดภัยขั้นสูง",
+      "🌍 Multi-Language: รองรับระบบ 2 ภาษา (ไทย/อังกฤษ)",
+      "📊 Investor Relations: รองรับหน้าข่าวสาร/กิจกรรม/นักลงทุน",
+      "🔧 Maintenance: บริการดูแลและอัปเดตระบบฟรี 1 ปี",
+    ],
+    themeColor: "blue",
+  },
+  {
+    id: "industrial-catalog",
+    title: "Industrial E-Catalog: โรงงานอุตสาหกรรม",
+    slug: "industrial-catalog",
+    category: "Industrial",
+    description:
+      "โชว์สินค้าโรงงานนับพันรายการได้ลื่นไหล ไม่หน่วง ค้นหาง่ายด้วยระบบ Filter รองรับสเปกสินค้าละเอียด (Datasheet)",
+    price: "เริ่มต้น 39,900.-",
+    priceValue: 39900,
+    features: [
+      "📦 Massive Inventory: รองรับสินค้าได้มากกว่า 10,000+ รายการ",
+      "🔍 Advanced Filter: ระบบกรองสินค้าอัจฉริยะ (ค้นหาปุ๊บเจอ ปั๊บ)",
+      "📥 Auto RFQ: ระบบขอใบเสนอราคาอัตโนมัติ ส่งเข้าอีเมลฝ่ายขาย",
+      "⚡ Heavy Database Optimization: โครงสร้างฐานข้อมูลโหลดหนักแค่ไหนก็ไหว",
+    ],
+    themeColor: "indigo",
+  },
+  {
     id: "seo-technical-audit",
-    title: "Technical SEO Audit & Setup",
+    title: "Technical SEO Audit: ปรับจูนเว็บให้แรง",
     slug: "seo-technical",
     category: "SEO_Technical",
     description:
-      "จัดการปัญหา Technical SEO ที่ทำให้เว็บไม่ติดอันดับหรือโหลดช้า",
-    price: "4,900.-",
+      "บริการกู้เว็บพัง แก้ปัญหาเว็บช้า Google ไม่เก็บข้อมูล ด้วยการปรับปรุงโครงสร้าง Code ระดับลึก (Core Web Vitals)",
+    price: "เริ่มต้น 4,900.-",
     priceValue: 4900,
     features: [
-      "แก้ไขโครงสร้างข้อมูล (Schema Markup)",
-      "ปรับจูน Core Web Vitals (คะแนนความเร็ว)",
-      "ติดตั้งและตั้งค่า Google Search Console",
-      "สร้าง Sitemap และ Robots.txt มาตรฐานสูง",
+      "🛠️ Schema Markup Fix: แก้ไขโค้ดให้ Google เข้าใจธุรกิจลึกถึงโครงสร้าง",
+      "⚡ Score Booster: ปรับจูน Core Web Vitals (การันตีคะแนนเขียว 90+)",
+      "📈 Google Tools Setup: ติดตั้ง Search Console & Analytics ถูกวิธี",
+      "🗺️ Sitemap & Robots: สร้างแผนผังเว็บไซต์ฉบับสมบูรณ์",
     ],
-    promotion: "รับส่วนลดพิเศษ เมื่อใช้คู่กับบริการทำเว็บไซต์",
+    promotion: "🔥 ส่วนลด 50% เมื่อทำพร้อมสั่งทำเว็บไซต์ใหม่",
     themeColor: "amber",
   },
   {
     id: "seo-organic-growth",
-    title: "Organic SEO Strategy",
+    title: "SEO Monthly Growth: ปั้นเว็บติดหน้าแรก",
     slug: "seo-organic",
     category: "SEO_Organic",
     description:
-      "บริการดันอันดับ Keyword ทำเงิน เพื่อลดค่าโฆษณาและสร้างลูกค้าที่ยั่งยืน",
-    price: "8,900.- / เดือน",
+      "บริการดูแลอันดับรายเดือน (Monthly Service) เน้น Keyword ที่สร้างยอดขายจริง ไม่เน้น Traffic ขยะ",
+    price: "เริ่มต้น 8,900.- / เดือน",
     priceValue: 8900,
     features: [
-      "วิเคราะห์ Keyword ที่คู่แข่งใช้หาเงิน",
-      "เขียนบทความคุณภาพ (SEO Content 2026)",
-      "ปรับปรุงเนื้อหาเดิม (On-Page Tuning)",
-      "รายงานผลอันดับและจำนวนคนเข้าเว็บทุกเดือน",
+      "🎯 Money Keywords: วิเคราะห์คำค้นหาที่ทำเงินจริงให้ธุรกิจ",
+      "✍️ High Quality Content: เขียนบทความ SEO คุณภาพสูง (รองรับ AI Search)",
+      "🔧 On-Page Optimization: ปรับปรุงโครงสร้างหน้าเว็บต่อเนื่องทุกเดือน",
+      "📊 Transparent Report: รายงานผลอันดับและสถิติอย่างโปร่งใส",
     ],
-    promotion: "สัญญาขั้นต่ำ 3 เดือน เพื่อผลลัพธ์ที่ชัดเจน",
+    promotion: "📝 สัญญาขั้นต่ำ 3 เดือน (เพื่อให้เห็นผลลัพธ์ที่ชัดเจน)",
     themeColor: "rose",
   },
 ]
 
 /* -------------------------------------------------------------------------- */
-/* ✅ ฟังก์ชันช่วยเหลือ                                                           */
+/* ✅ Helper Functions (ฟังก์ชันช่วยดึงข้อมูล)                                   */
 /* -------------------------------------------------------------------------- */
 
 export const getCategoryInfo = (slug: string): CategoryInfo | null => {
@@ -3333,6 +3397,7 @@ export const getServiceBySlug = (slug: string): ServiceItem | null => {
 }
 
 export const getServicesByCategory = (categorySlug: string): ServiceItem[] => {
+  // Mapping slug จาก URL ให้ตรงกับ Enum Category
   const categoryMap: Record<string, ServiceCategory | ServiceCategory[]> = {
     starter: "Starter",
     sme: "SME",
@@ -3351,11 +3416,9 @@ export const getServicesByCategory = (categorySlug: string): ServiceItem[] => {
   return services.filter((s) => s.category === target)
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
-
 ```typescript
 /** @format */
 
@@ -3403,30 +3466,30 @@ export const navigation: NavigationConfig = {
       description: "เริ่มต้นสร้างตัวตนธุรกิจที่เน้นความไวและยอดขาย",
     },
     {
-      name: "บริการทำเว็บ",
+      name: "บริการ & ราคา",
       href: "/services",
-      description: "แพ็กเกจสำหรับ SME บริษัท และโรงงานอุตสาหกรรม",
+      description: "เช็คราคาแพ็กเกจทำเว็บ SME, บริษัท และโรงงาน",
     },
     {
-      name: "เทมเพลตพร้อมใช้",
+      name: "เว็บสำเร็จรูป",
       href: "/templates",
-      badge: "Hot",
-      description: "โครงสร้างเว็บมาตรฐานที่ช่วยคุณประหยัดเวลาและงบประมาณ",
+      badge: "New",
+      description: "เทมเพลตเว็บโหลดไว ราคาประหยัด เริ่มต้นงานได้ทันที",
     },
     {
-      name: "ผลงานที่ผ่านมา",
+      name: "ผลงานจริง",
       href: "/case-studies",
-      description: "รวมเคสความสำเร็จจากเจ้าของธุรกิจที่ไว้วางใจผม",
+      description: "ดูตัวอย่างเว็บลูกค้าและผลลัพธ์ทางธุรกิจ",
     },
     {
-      name: "บทความน่ารู้",
+      name: "บทความ",
       href: "/blog",
-      description: "แชร์เทคนิคทำเว็บและกลยุทธ์ดันอันดับ Google",
+      description: "ความรู้เรื่อง SEO และการตลาดออนไลน์ฉบับเจ้าของกิจการ",
     },
     {
-      name: "คุยกับผม",
+      name: "ติดต่อผม",
       href: "/contact",
-      description: "ปรึกษาโปรเจกต์โดยตรงกับ นายเอ็มซ่ามากส์",
+      description: "ช่องทางติดต่อ นายเอ็มซ่ามากส์ (LINE/Tel)",
     },
   ],
 
@@ -3434,25 +3497,25 @@ export const navigation: NavigationConfig = {
   footer: {
     services: [
       {
-        name: "Sale Page เน้นยอดขาย",
+        name: "Sale Page (ปิดการขาย)",
         href: "/services/starter-one-page",
         badge: "Hot",
-        description: "เว็บหน้าเดียวปิดการขาย เหมาะสำหรับคนยิงแอด",
+        description: "เว็บหน้าเดียวโหลดไว รองรับคนยิงแอด",
       },
       {
-        name: "เว็บไซต์บริษัท & SME",
+        name: "เว็บไซต์ SME & ธุรกิจ",
         href: "/services/sme-speed-launch",
-        description: "ยกระดับความน่าเชื่อถือให้บริษัทและ หจก. ของคุณ",
+        description: "สร้างความน่าเชื่อถือ ปิดการขายได้ 24 ชม.",
       },
       {
-        name: "เว็บโรงงานอุตสาหกรรม",
-        href: "/services/industrial-enterprise",
-        description: "ระบบจัดการแคตตาเล็อกสินค้าขนาดใหญ่ที่เสถียรที่สุด",
+        name: "เว็บโรงงาน (E-Catalog)",
+        href: "/services/industrial-catalog",
+        description: "ระบบโชว์สินค้าโรงงาน รองรับ SKU หลักหมื่น",
       },
       {
-        name: "รับแก้โครงสร้าง SEO",
+        name: "รับแก้เว็บช้า (Technical SEO)",
         href: "/services/seo-technical",
-        description: "ปรับจูนหลังบ้านให้ Google ชอบ และโหลดไวขึ้น",
+        description: "จูนหลังบ้านให้ Google รัก ดันคะแนนเต็ม 100",
       },
     ],
 
@@ -3462,16 +3525,16 @@ export const navigation: NavigationConfig = {
         href: "/about",
       },
       {
-        name: "รีวิวผลงานทั้งหมด",
+        name: "รีวิวผลงาน (Showcase)",
         href: "/case-studies",
       },
       {
-        name: "เคสศึกษา Unlink TH",
-        href: "/case-studies/unlink-th-case-study",
+        name: "เบื้องหลังเคส Unlink-TH",
+        href: "/blog/unlink-th-case-study", // แก้ไขให้ตรงกับไฟล์ content/blog
         badge: "Special",
       },
       {
-        name: "ร่วมงานกับผม",
+        name: "ร่วมงานกับ AEMDEVWEB",
         href: "/careers",
         disabled: true,
       },
@@ -3488,7 +3551,7 @@ export const navigation: NavigationConfig = {
         href: "/services#pricing",
       },
       {
-        name: "นัดหมายคุยงาน",
+        name: "แจ้งปัญหาการใช้งาน",
         href: "/contact",
       },
     ],
@@ -3519,26 +3582,24 @@ export const {
 } = navigation.footer
 
 /* -------------------------------------------------------------------------- */
-/* 📈 SEO Strategic Keywords                                                   */
+/* 📈 SEO Strategic Keywords (Updated 2026)                                    */
 /* -------------------------------------------------------------------------- */
 
 export const siteKeywords: string[] = [
   "นายเอ็มซ่ามากส์",
-  "รับทำเว็บไซต์ SME",
-  "รับทำเว็บไซต์บริษัท",
-  "รับทำเว็บไซต์โรงงาน",
-  "ทำเว็บไซต์ หจก",
-  "รับทำ Sale Page ยิงแอด",
-  "Technical SEO Specialist Thailand",
-  "คนทำเว็บไม่ทิ้งงาน",
   "AEMDEVWEB",
+  "รับทำเว็บไซต์ SME",
+  "รับทำเว็บไซต์โรงงาน",
+  "ทำเว็บ Sale Page",
+  "รับทำ SEO สายขาว",
+  "แก้ไขเว็บไซต์ช้า",
+  "Technical SEO Specialist",
+  "คนทำเว็บไม่ทิ้งงาน",
 ]
 ```
-
 ---
 
 #### 🔍 Path: `tsconfig.json`
-
 ```json
 {
   "compilerOptions": {
@@ -3589,11 +3650,9 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
-
 ---
 
 #### 🔍 Path: `package.json`
-
 ```json
 {
   "name": "aemdevweb.com",
@@ -3661,11 +3720,9 @@ export const siteKeywords: string[] = [
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `types/index.ts`
-
 ```typescript
 /** @format */
 
@@ -3858,11 +3915,9 @@ export interface TestimonialItem {
   image?: string
 }
 ```
-
 ---
 
 #### 🔍 Path: `next.config.mjs`
-
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
@@ -3903,11 +3958,9 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
-
 ---
 
 #### 🔍 Path: `components.json`
-
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -3932,11 +3985,9 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/blog.ts`
-
 ```typescript
 /** @format */
 
@@ -4017,11 +4068,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/template.ts`
-
 ```typescript
 /** @format */
 
@@ -4165,11 +4214,9 @@ export async function getTemplatesByServiceCategory(
   })
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
-
 ```typescript
 /** @format */
 
@@ -4300,19 +4347,14 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
-
 ---
 
 #### 🔍 Path: `.env`
-
 ```text
-
 ```
-
 ---
 
 ## 📝 Summary
-
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 
