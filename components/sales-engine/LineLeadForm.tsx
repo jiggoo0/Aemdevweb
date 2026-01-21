@@ -15,9 +15,10 @@ import {
   Sparkles,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+// ✅ Import Config เข้ามา
 import { siteConfig } from "@/constants/site-config"
 
-// 🛡️ Schema สำหรับการคัดกรองลูกค้า (เน้นภาษาที่เป็นกันเอง)
+// 🛡️ Schema สำหรับการคัดกรองลูกค้า
 const formSchema = z.object({
   name: z.string().min(2, "ขอชื่อเล่นหรือชื่อบริษัทเพื่อความสะดวกในการคุยครับ"),
   businessType: z.string().min(1, "เลือกประเภทธุรกิจให้เอ็มนิดนึงครับ"),
@@ -55,17 +56,21 @@ export const LineLeadForm = ({
   const onSubmit = async (data: FormData) => {
     setIsPending(true)
 
-    // 🧬 จำลองการส่งข้อมูล (ตรงนี้คุณสามารถยิง API หรือ Webhook เข้า LINE Notify ได้ในอนาคต)
+    // 🧬 จำลอง Delay เพื่อความสมจริง
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // 🚀 สร้างข้อความเพื่อส่งเข้า LINE OA โดยตรง
+    // 🚀 สร้างข้อความ
     const message = `สวัสดีครับนายเอ็มซ่ามากส์ ผมชื่อ ${data.name} ทำธุรกิจ ${data.businessType} สนใจเรื่อง: ${data.requirement} (งบประมาณเบื้องต้น: ${data.budget || "ยังไม่ได้ระบุ"})`
-    const lineUrl = `https://line.me/R/oaMessage/${siteConfig.links.lineId}/?${encodeURIComponent(message)}`
+
+    // ✅ [FIXED]: แก้จาก siteConfig.links.lineId เป็น siteConfig.contact.lineId
+    // (เพราะ ID เราเก็บไว้ใน contact ส่วน links เก็บ URL เต็ม)
+    const lineId = siteConfig.contact?.lineId || "@aemdevweb"
+    const lineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`
 
     setIsPending(false)
     setIsSuccess(true)
 
-    // เปิดหน้า LINE ทันที
+    // เปิดหน้า LINE
     window.open(lineUrl, "_blank")
 
     setTimeout(() => {
@@ -74,11 +79,14 @@ export const LineLeadForm = ({
     }, 3000)
   }
 
-  // --- Variant สำหรับแสดงผลเป็นปุ่มกดทักเลย ---
+  // --- Variant: Button ---
   if (variant === "button") {
+    // ✅ [FIXED]: เพิ่ม Optional chaining (?.) ป้องกัน Error จอขาวกรณี Config ยังไม่อัปเดต
+    const lineHref = siteConfig.links?.line || "https://line.me/ti/p/@aemdevweb"
+
     return (
       <a
-        href={siteConfig.links.line}
+        href={lineHref}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
@@ -93,7 +101,7 @@ export const LineLeadForm = ({
     )
   }
 
-  // --- Variant สำหรับแสดงเป็นฟอร์มข้อมูล (Inline Form) ---
+  // --- Variant: Form ---
   return (
     <div className={cn("relative mx-auto w-full", className)}>
       <motion.div
@@ -119,7 +127,7 @@ export const LineLeadForm = ({
               </div>
 
               <div className="space-y-4">
-                {/* ช่องใส่ชื่อ */}
+                {/* 1. Name */}
                 <div>
                   <input
                     {...register("name")}
@@ -133,7 +141,7 @@ export const LineLeadForm = ({
                   )}
                 </div>
 
-                {/* เลือกประเภทธุรกิจ */}
+                {/* 2. Business Type */}
                 <div>
                   <select
                     {...register("businessType")}
@@ -154,7 +162,7 @@ export const LineLeadForm = ({
                   )}
                 </div>
 
-                {/* อธิบายความต้องการ */}
+                {/* 3. Requirement */}
                 <div>
                   <textarea
                     {...register("requirement")}

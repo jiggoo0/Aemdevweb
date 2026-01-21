@@ -3,13 +3,13 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://www.aemdevweb.com
-  Generated: 2026-01-21 00:58:53
+  Generated: 2026-01-21 21:01:16
   Type: Architecture / Documentation
 -->
 
 > **Project:** www.aemdevweb.com  
 > **URL:** https://www.aemdevweb.com  
-> **Generated on:** 2026-01-21 00:58:53
+> **Generated on:** 2026-01-21 21:01:16
 
 ## ⚙️ Root Configuration Files
 

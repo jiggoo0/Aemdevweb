@@ -6,7 +6,7 @@ import { siteConfig } from "@/constants/site-config"
 /**
  * 🧬 Global Metadata Configuration — Specialist Edition
  * Optimized for SME, Corporate, and Industrial Search Performance.
- * * * Objectives:
+ * * * * Objectives:
  * 1. Brand Integrity: ใช้ MetadataBase เพื่อให้ Social Share ลิงก์รูปภาพถูกต้องเสมอ
  * 2. Search AI Ready: ปรับแต่ง Robots Meta Tags ให้สอดคล้องกับพฤติกรรม AI Crawlers 2026
  * 3. Canonical Excellence: ป้องกันปัญหาหน้าซ้ำ (SEO Duplicate Content)
@@ -18,17 +18,20 @@ export const defaultMetadata: Metadata = {
 
   // 🏷️ Title Configuration
   title: {
+    // ✅ [FIXED]: ใช้ siteConfig.title ที่เราเพิ่มกลับเข้าไป
     default: siteConfig.title,
+    // ✅ [FIXED]: ใช้ siteConfig.shortName เพื่อแก้ TS2339
     template: `%s | ${siteConfig.shortName}`,
   },
 
   // 📝 Primary Metadata
   description: siteConfig.description,
-  keywords: siteConfig.keywords,
+  // ✅ [FIXED]: keywords ต้องเป็น string[] หรือ string เท่านั้น (ใช้ .list จาก config ใหม่)
+  keywords: siteConfig.keywords.list,
   category: "technology",
 
   // 👤 Attribution
-  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  authors: [{ name: siteConfig.expert, url: siteConfig.links.linkedin }],
   creator: siteConfig.companyName,
   publisher: siteConfig.companyName,
 
@@ -47,6 +50,7 @@ export const defaultMetadata: Metadata = {
     locale: "th_TH",
     url: siteConfig.url,
     siteName: siteConfig.name,
+    // ✅ [FIXED]: ใช้ siteConfig.title
     title: siteConfig.title,
     description: siteConfig.description,
     images: [
@@ -62,6 +66,7 @@ export const defaultMetadata: Metadata = {
   // 🐦 Twitter / X
   twitter: {
     card: "summary_large_image",
+    // ✅ [FIXED]: ใช้ siteConfig.title
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
@@ -103,15 +108,14 @@ export const defaultMetadata: Metadata = {
 
   // 🔍 Verification Tools
   verification: {
-    google: "your-google-verification-id", // แทนที่ด้วย ID จริง
-    // yandex: 'yandex-id',
-    // me: 'email@aemdevweb.com',
+    google: "your-google-verification-id", // แทนที่ด้วย ID จริงจาก Search Console
   },
 
   // 📱 Mobile App Linkage (Optional)
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
+    // ✅ [FIXED]: ใช้ siteConfig.shortName
     title: siteConfig.shortName,
   },
 }

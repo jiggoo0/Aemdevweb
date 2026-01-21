@@ -3,13 +3,28 @@
 import React from "react"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { ArrowLeft, Calendar, Tag } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
-/** * ✅ [FIXED]: เปลี่ยนจาก next-md-remote เป็น next-mdx-remote
- * เพื่อให้ตรงกับแพ็กเกจที่ติดตั้งผ่าน pnpm
- */
+// 📂 Icon & UI Assets
+import {
+  ArrowLeft,
+  Calendar,
+  Tag,
+  ShieldCheck,
+  TrendingUp,
+  Fingerprint,
+  Cpu,
+  CheckCircle2,
+  Lock,
+  Zap,
+  BarChart3,
+  Rocket,
+  MessageSquare,
+  AlertTriangle,
+} from "lucide-react"
+
+// 📦 MDX Engine: มาตรฐาน Next.js 15/16 pnpm
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 // 📂 Logic & Config Architecture
@@ -25,10 +40,19 @@ import CTASection from "@/components/landing/CTASection"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
+import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
+
+/* -------------------------------------------------------------------------- */
+/* 🧩 Types & Interfaces                                                       */
+/* -------------------------------------------------------------------------- */
 
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
 }
+
+/* -------------------------------------------------------------------------- */
+/* 🧬 Server Side Logic                                                       */
+/* -------------------------------------------------------------------------- */
 
 export async function generateStaticParams() {
   const slugs = getCaseStudySlugs()
@@ -41,10 +65,10 @@ export async function generateMetadata({
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
-  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.shortName}` }
+  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.name}` }
 
   return {
-    title: `${caseStudy.frontmatter.title} | ${siteConfig.shortName}`,
+    title: `${caseStudy.frontmatter.title} | ${siteConfig.name}`,
     description: caseStudy.frontmatter.excerpt,
     openGraph: {
       title: caseStudy.frontmatter.title,
@@ -54,29 +78,47 @@ export async function generateMetadata({
   }
 }
 
-/**
- * 🧬 Case Study Detail Engine v2026
- * จัดการ Error 'Module not found' สำเร็จแล้ว
- */
+/* -------------------------------------------------------------------------- */
+/* 🏗️ Case Study Detail Page                                                  */
+/* -------------------------------------------------------------------------- */
+
 export default async function CaseStudyDetailPage({
   params,
 }: CaseStudyPageProps) {
-  // Next.js 15/16 มาตรฐาน Specialist ต้อง await params
+  // มาตรฐาน Next.js 16 ต้อง await params
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
   if (!caseStudy) notFound()
 
-  // ลงทะเบียนคอมโพเนนต์สำหรับ MDX
+  /**
+   * ✅ [FIXED]: ลงทะเบียนคอมโพเนนต์ทั้งหมดที่ใช้ใน MDX
+   * ป้องกัน Error: Expected component X to be defined
+   */
   const mdxComponents = {
     ...useMDXComponents({}),
+    // 📊 Sales Engine
     ImpactStats,
     SpeedDemon,
     WorkProcess,
+    LineLeadForm,
+    // 💎 Icons (ส่งผ่านเข้าไปให้ MDX เรียกใช้ได้)
+    ShieldCheck,
+    TrendingUp,
+    Fingerprint,
+    Cpu,
+    CheckCircle2,
+    Lock,
+    Zap,
+    BarChart3,
+    Rocket,
+    MessageSquare,
+    AlertTriangle,
   }
 
   return (
     <article className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* 🚀 Structured Data for SEO */}
       <JsonLd
         type="Article"
         data={{
@@ -84,10 +126,11 @@ export default async function CaseStudyDetailPage({
           description: caseStudy.frontmatter.excerpt,
           image: caseStudy.frontmatter.thumbnail,
           datePublished: caseStudy.frontmatter.date,
-          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์" },
+          author: { "@type": "Person", name: siteConfig.expert },
         }}
       />
 
+      {/* 🔝 Header Section */}
       <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="container mx-auto px-4">
           <Link
@@ -122,6 +165,7 @@ export default async function CaseStudyDetailPage({
         </div>
       </header>
 
+      {/* 🖼️ Featured Image */}
       <div className="container mx-auto mb-20 px-4">
         <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
@@ -135,23 +179,29 @@ export default async function CaseStudyDetailPage({
         </div>
       </div>
 
+      {/* 📝 MDX Content Content */}
       <main className="container mx-auto px-4">
         <div className="prose prose-slate prose-lg prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-900 prose-headings:uppercase prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-24 max-w-4xl">
           <MDXRemote source={caseStudy.content} components={mdxComponents} />
         </div>
       </main>
 
+      {/* 📈 Results & Impact Section */}
       <div className="border-y border-slate-50 bg-white py-12">
-        <ImpactStats />
+        <div className="container mx-auto px-4">
+          <ImpactStats />
+        </div>
       </div>
 
+      {/* 🚀 CTA Section */}
       <div className="mt-32">
         <CTASection />
       </div>
 
+      {/* 🏛️ Footer Branding */}
       <footer className="mt-20 text-center opacity-40 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build & Proof by นายเอ็มซ่ามากส์ v2026 — Case Analysis
+          Build & Proof by {siteConfig.expert} v2026 — Case Analysis
         </p>
       </footer>
     </article>

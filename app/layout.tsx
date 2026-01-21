@@ -2,11 +2,11 @@
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
+import Script from "next/script" // 📦 เพิ่ม Script Component
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-// ✅ [FIXED]: เปลี่ยนมาเรียกใช้ constructMetadata โดยตรงเพื่อให้รูป OG Image ขึ้นทุกหน้า
 import { constructMetadata } from "@/constants/site-config"
 import { viewport as defaultViewport } from "./viewport"
 
@@ -18,23 +18,15 @@ import { Prompt, Anuphan } from "next/font/google"
 /* 🅰️ Font Setup: Industrial Typography Specialist v2026                      */
 /* -------------------------------------------------------------------------- */
 
-/**
- * 🏢 Prompt: สำหรับ Heading ที่ต้องการความสุขุมและมั่นคง
- * ปรับจูนให้รองรับภาษาไทยระดับ Industrial Grade
- */
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap", // ✅ ป้องกันอาการตัวหนังสือหายระหว่างโหลด
+  display: "swap",
   preload: true,
-  adjustFontFallback: true, // ✅ จูนระยะบรรทัดให้ไม่กระตุกเมื่อฟอนต์โหลดเสร็จ
+  adjustFontFallback: true,
 })
 
-/**
- * 🧬 Anuphan: สำหรับ Body Text ที่เน้นการอ่านข้อมูลจำนวนมาก (SME & Factory)
- * ออกแบบมาให้สบายตาและดูทันสมัย (Humanist Thai)
- */
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
@@ -48,7 +40,6 @@ const fontAnuphan = Anuphan({
 /* 🧬 SEO & Performance Config                                                */
 /* -------------------------------------------------------------------------- */
 
-// ✅ ใช้ระบบ Metadata ที่จูน Path รูปภาพมาแล้ว 100%
 export const metadata: Metadata = constructMetadata()
 export const viewport: Viewport = defaultViewport
 
@@ -68,7 +59,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "scroll-smooth",
         fontPrompt.variable,
         fontAnuphan.variable,
-        "thai-font-smoothing" // ✅ ใช้ Utility สำหรับรีดความชัดของฟอนต์ไทย
+        "thai-font-smoothing"
       )}
       suppressHydrationWarning
     >
@@ -79,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "transition-colors duration-300"
         )}
       >
-        {/* 🚀 Top Loading Bar: Emerald-500 Brand Primary */}
+        {/* 🚀 1. Top Loading Bar: Emerald-500 Brand Primary */}
         <NextTopLoader
           color="#10B981"
           initialPosition={0.08}
@@ -92,7 +83,47 @@ export default function RootLayout({ children }: RootLayoutProps) {
           shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
-        {/* 🌍 App Content Infrastructure */}
+        {/* 💬 2. Facebook Customer Chat (Messenger) */}
+        {/* จำเป็นต้องมี div id="fb-root" และ div id="fb-customer-chat" */}
+        <div id="fb-root" />
+        <div id="fb-customer-chat" className="fb-customerchat" />
+
+        <Script id="facebook-chat" strategy="lazyOnload">
+          {`
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "914706508399571");
+            chatbox.setAttribute("attribution", "biz_inbox");
+
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v18.0'
+              });
+            };
+
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          `}
+        </Script>
+
+        {/* 📊 3. Google Analytics (Placeholder) - ใส่ Measurement ID เมื่อพร้อม */}
+        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script> 
+        */}
+
+        {/* 🌍 4. App Content Infrastructure */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
       </body>
     </html>

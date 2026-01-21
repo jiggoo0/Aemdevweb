@@ -3,11 +3,11 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-21 01:11:14
+  Generated: 2026-01-21 01:31:36
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-21 01:11:14**_
+_Generated on: **2026-01-21 01:31:36**_
 
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
@@ -15,10 +15,50 @@ _Generated on: **2026-01-21 01:11:14**_
 
 ## 🔴 1. Project Health & Deployment Readiness
 
-⚠️ _Warning: `pre-deploy-report.md` not found. Run `pre-deploy-check.sh` for health metrics._
+✅ **READY FOR DEPLOY:** The project meets all production standards.
+
+### 📍 Production Route Map
+
+````text
+```text
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /[template]
+├ ƒ /[template]/[category]
+├ ● /[template]/[category]/[slug]
+│ ├ /templates/booking/hotel-resort
+│ ├ /templates/e-commerce/shop-master-pro
+│ ├ /templates/landing-page/facebook-ads-expert
+│ └ /templates/service/cleaning-pro
+├ ○ /about
+├ ○ /blog
+├ ● /blog/[slug]
+│ ├ /blog/5-points-killing-sales
+│ ├ /blog/copywriting-secrets
+│ ├ /blog/facebook-ads-vs-website
+│ └ [+2 more paths]
+├ ○ /careers
+├ ○ /case-studies
+├ ● /case-studies/[slug]
+│ ├ /case-studies/case-studies-1
+│ ├ /case-studies/case-studies-2
+│ └ /case-studies/case-studies-3
+├ ○ /contact
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /services
+├ ƒ /services/[slug]
+├ ○ /sitemap.xml
+└ ○ /terms
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+````
+
+````
 
 ## 📊 2. File Statistics by Extension
-
 ```text
      57 tsx
      12 ts
@@ -31,7 +71,7 @@ _Generated on: **2026-01-21 01:11:14**_
       1 svg
       1 ico
       1 css
-```
+````
 
 ## 📁 3. Directory Structure (Architecture Tree)
 
@@ -770,8 +810,87 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 ---
 
-#### 🔍 Path: `app/globals.css`
+#### 🔍 Path: `pre-deploy-report.md`
 
+````markdown
+# 🚀 Pre-deploy Inspection Report
+
+Generated at: 2026-01-21 01:25:51
+Branch: main
+
+## 🔐 1. Environment Check
+
+✅ Status: .env file exists and verified.
+
+## 🛠️ 2. Auto-Fix Procedure
+
+✅ Status: Auto-fix completed or no issues found.
+
+## 🧹 3. Code Linting (ESLint)
+
+✅ Status: Linting passed.
+
+## ⌨️ 4. Type Safety Check
+
+✅ Status: TypeScript verified.
+
+## 🏗️ 5. Production Build Test
+
+✅ Status: Build successfully optimized.
+
+### 📊 Route Statistics & Bundle Size
+
+```text
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /[template]
+├ ƒ /[template]/[category]
+├ ● /[template]/[category]/[slug]
+│ ├ /templates/booking/hotel-resort
+│ ├ /templates/e-commerce/shop-master-pro
+│ ├ /templates/landing-page/facebook-ads-expert
+│ └ /templates/service/cleaning-pro
+├ ○ /about
+├ ○ /blog
+├ ● /blog/[slug]
+│ ├ /blog/5-points-killing-sales
+│ ├ /blog/copywriting-secrets
+│ ├ /blog/facebook-ads-vs-website
+│ └ [+2 more paths]
+├ ○ /careers
+├ ○ /case-studies
+├ ● /case-studies/[slug]
+│ ├ /case-studies/case-studies-1
+│ ├ /case-studies/case-studies-2
+│ └ /case-studies/case-studies-3
+├ ○ /contact
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /services
+├ ƒ /services/[slug]
+├ ○ /sitemap.xml
+└ ○ /terms
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+```
+````
+
+---
+
+## 🏆 Summary Result
+
+### ✅ READY FOR DEPLOY
+
+All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
+
+````
+---
+
+#### 🔍 Path: `app/globals.css`
 ```css
 /** @format */
 @import "tailwindcss";
@@ -790,7 +909,11 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
   --color-accent: hsl(210 40% 96.1%);
   --color-accent-foreground: hsl(222.2 47.4% 11.2%);
 
+  /* 🟢 Specialist Emerald Logic (Brand DNA) */
   --color-success: hsl(158 64% 52%);
+  --color-emerald-500: #10b981;
+  --color-emerald-400: #34d399;
+
   --color-destructive: hsl(0 84.2% 60.2%);
 
   /* 🎨 UI Elements */
@@ -830,7 +953,7 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: Industrial SME Foundation                                   */
+/* 🏭 Base Layer: Industrial SME Foundation                      */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
@@ -839,6 +962,7 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
   }
 
   body {
+    /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
     @apply bg-background text-foreground font-anuphan selection:bg-success/20 selection:text-primary antialiased;
     font-feature-settings:
       "rlig" 1,
@@ -852,6 +976,7 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
   h4,
   h5,
   h6 {
+    /* ใช้ฟอนต์ Prompt เพื่อความมั่นคงและดูเป็นมืออาชีพ */
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -862,7 +987,7 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer                                                        */
+/* 🚀 Utilities Layer                                            */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
@@ -870,13 +995,19 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
     text-wrap: balance;
   }
 
-  /* แก้อาการ Flash ของตัวอักษรไทยในบาง Browser */
+  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) ในบาง Browser */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* เพิ่มมิติความลึกให้กับ Card แบบ Industrial */
+  .industrial-shadow {
+    box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 }
-```
+````
 
 ---
 
@@ -891,38 +1022,50 @@ import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-import { defaultMetadata } from "./metadata" // ดึง Metadata ชุดเต็มที่เราแก้กันไว้
-import { viewport as defaultViewport } from "./viewport" // ดึง Viewport ที่ตั้งค่าไว้
+// ✅ [FIXED]: เปลี่ยนมาเรียกใช้ constructMetadata โดยตรงเพื่อให้รูป OG Image ขึ้นทุกหน้า
+import { constructMetadata } from "@/constants/site-config"
+import { viewport as defaultViewport } from "./viewport"
 
 // 📂 Local Assets & Fonts
 import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 /* -------------------------------------------------------------------------- */
-/* 🅰️ Font Setup: Industrial Typography                                       */
+/* 🅰️ Font Setup: Industrial Typography Specialist v2026                      */
 /* -------------------------------------------------------------------------- */
 
-// Prompt: ใช้สำหรับ Heading และ UI ที่ต้องการความมั่นคง (Modern Thai)
+/**
+ * 🏢 Prompt: สำหรับ Heading ที่ต้องการความสุขุมและมั่นคง
+ * ปรับจูนให้รองรับภาษาไทยระดับ Industrial Grade
+ */
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap",
+  display: "swap", // ✅ ป้องกันอาการตัวหนังสือหายระหว่างโหลด
+  preload: true,
+  adjustFontFallback: true, // ✅ จูนระยะบรรทัดให้ไม่กระตุกเมื่อฟอนต์โหลดเสร็จ
 })
 
-// Anuphan: ใช้สำหรับ Body Text ให้อ่านง่าย สบายตา (Humanist Thai)
+/**
+ * 🧬 Anuphan: สำหรับ Body Text ที่เน้นการอ่านข้อมูลจำนวนมาก (SME & Factory)
+ * ออกแบบมาให้สบายตาและดูทันสมัย (Humanist Thai)
+ */
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 })
 
 /* -------------------------------------------------------------------------- */
 /* 🧬 SEO & Performance Config                                                */
 /* -------------------------------------------------------------------------- */
 
-export const metadata: Metadata = defaultMetadata
+// ✅ ใช้ระบบ Metadata ที่จูน Path รูปภาพมาแล้ว 100%
+export const metadata: Metadata = constructMetadata()
 export const viewport: Viewport = defaultViewport
 
 /* -------------------------------------------------------------------------- */
@@ -937,17 +1080,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="th"
-      className={cn("scroll-smooth", fontPrompt.variable, fontAnuphan.variable)}
+      className={cn(
+        "scroll-smooth",
+        fontPrompt.variable,
+        fontAnuphan.variable,
+        "thai-font-smoothing" // ✅ ใช้ Utility สำหรับรีดความชัดของฟอนต์ไทย
+      )}
       suppressHydrationWarning
     >
       <body
         className={cn(
-          "font-anuphan min-h-screen bg-slate-50/50 text-slate-900 antialiased",
+          "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
           "selection:bg-emerald-500/20 selection:text-emerald-900",
           "transition-colors duration-300"
         )}
       >
-        {/* 🚀 Top Loading Bar: Brand Primary (Emerald 500) */}
+        {/* 🚀 Top Loading Bar: Emerald-500 Brand Primary */}
         <NextTopLoader
           color="#10B981"
           initialPosition={0.08}
@@ -961,9 +1109,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
 
         {/* 🌍 App Content Infrastructure */}
-        <div className="bg-background relative flex min-h-screen flex-col">
-          {children}
-        </div>
+        <div className="relative flex min-h-screen flex-col">{children}</div>
       </body>
     </html>
   )
@@ -982,7 +1128,7 @@ import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 
 // 📂 ข้อมูลตัวตนและโครงสร้างระบบ
-import { siteConfig } from "@/constants/site-config"
+import { siteConfig, constructMetadata } from "@/constants/site-config" // ✅ นำเข้า Metadata Helper
 import { services } from "@/constants/services-data"
 import { JsonLd } from "@/components/seo/JsonLd"
 
@@ -991,7 +1137,7 @@ import Hero from "@/components/landing/Hero"
 
 /**
  * 🚀 ระบบโหลดคอมโพเนนต์แบบอัจฉริยะ (Dynamic Loading)
- * ช่วยให้หน้าเว็บเปิดไวขึ้นโดยโหลดส่วนที่จำเป็นก่อน
+ * ช่วยรักษาคะแนนประสิทธิภาพ (Performance) ให้เขียวสดใสเสมอ
  */
 const HomeClientSections = dynamic(
   () => import("@/components/landing/HomeClientSections"),
@@ -1010,20 +1156,20 @@ const WorkProcess = dynamic(
 const CTASection = dynamic(() => import("@/components/landing/CTASection"))
 
 /**
- * 🎯 การตั้งค่า SEO รายหน้า (Metadata)
+ * 🎯 [FIXED] การตั้งค่า SEO รายหน้า (Metadata)
+ * เรียกใช้ฟังก์ชัน constructMetadata เพื่อให้รูป OG Image และ Twitter Card แสดงผลถูกต้อง
  */
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: siteConfig.title,
   description: siteConfig.description,
-  keywords: siteConfig.keywords,
-  alternates: { canonical: siteConfig.url },
-}
+  // 💡 ไม่ต้องใส่ image เพราะระบบจะดึงค่ามาตรฐานจาก site-config มาให้โดยอัตโนมัติ
+})
 
 /**
  * 🧬 HomePage — "เปลี่ยนเว็บให้เป็นพนักงานขายที่เก่งที่สุด"
  */
 export default function HomePage() {
-  // ดึงข้อมูลบริการเฉพาะกลุ่มที่ต้องการโชว์หน้าแรก
+  // 🎯 ดึงข้อมูลบริการเฉพาะกลุ่ม (SME & Industrial) ตามกลยุทธ์แบรนด์
   const featuredServices = services.filter((s) =>
     ["sme-speed-launch", "corporate-pro", "industrial-enterprise"].includes(
       s.id
@@ -1032,7 +1178,7 @@ export default function HomePage() {
 
   return (
     <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/20">
-      {/* 🔎 บอก Google ว่าเว็บนี้คือใครและทำอะไร */}
+      {/* 🔎 บอก Google Search AI ว่าเว็บนี้คือใครและทำอะไร (Structured Data) */}
       <JsonLd
         type="WebSite"
         data={{
@@ -1043,10 +1189,10 @@ export default function HomePage() {
         }}
       />
 
-      {/* 1️⃣ ส่วนหัวหน้าเว็บ (Hero): ความประทับใจแรกเมื่อลูกค้าคลิกเข้ามา */}
+      {/* 1️⃣ ส่วนหัวหน้าเว็บ (Hero): ความประทับใจแรกพร้อม LCP Optimization */}
       <Hero />
 
-      {/* 2️⃣ ความไว้วางใจ (Social Proof): โลโก้ลูกค้าและรีวิว */}
+      {/* 2️⃣ ความไว้วางใจ (Social Proof): โลโก้ลูกค้าและสถิติผลงาน */}
       <section className="relative border-y border-slate-50 bg-white">
         <Suspense
           fallback={<div className="h-40 w-full animate-pulse bg-slate-50" />}
@@ -1055,12 +1201,12 @@ export default function HomePage() {
         </Suspense>
       </section>
 
-      {/* 3️⃣ จุดขาย (Value Prop): ทำไมต้องทำเว็บกับผม? */}
+      {/* 3️⃣ จุดขาย (Value Prop): ขยี้ Pain Point และเสนอทางออกสไตล์ Specialist */}
       <section className="relative py-24 lg:py-32">
         <ValueProp />
       </section>
 
-      {/* 🛠️ 4️⃣ แพ็กเกจบริการ (Services): เลือกที่ใช่สำหรับธุรกิจคุณ */}
+      {/* 🛠️ 4️⃣ แพ็กเกจบริการ (Services): เน้นความคุ้มค่าระดับอุตสาหกรรม */}
       <section className="relative bg-slate-50/50 py-24">
         <div className="container mx-auto px-4">
           <div className="mb-16 text-center lg:text-left">
@@ -1080,7 +1226,7 @@ export default function HomePage() {
                 title={service.title}
                 price={service.priceValue}
                 slug={service.slug}
-                features={service.features.slice(0, 3)} // โชว์แค่ 3 ฟีเจอร์หลัก
+                features={service.features.slice(0, 3)}
                 isPopular={service.highlight}
                 themeColor={service.themeColor}
               />
@@ -1089,12 +1235,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5️⃣ ขั้นตอนการทำงาน (Workflow): ทำงานกับผม ง่ายและไว */}
+      {/* 5️⃣ ขั้นตอนการทำงาน (Workflow): การทำงานที่นิ่งและโปร่งใส */}
       <section className="relative bg-slate-950 py-24 lg:py-32">
         <WorkProcess />
       </section>
 
-      {/* 📚 6️⃣ บทความน่ารู้ (Blog): แชร์เทคนิคการตลาดออนไลน์ */}
+      {/* 📚 6️⃣ บทความน่ารู้ (Blog): สร้างความน่าเชื่อถือด้วย Expert Content */}
       <section className="relative py-24">
         <div className="container mx-auto px-4">
           <div className="mb-16">
@@ -1113,27 +1259,27 @@ export default function HomePage() {
               title="วิธีดันอันดับ Google 2026 สำหรับธุรกิจ SME"
               excerpt="แค่มีเว็บยังไม่พอ ทำยังไงให้ลูกค้าค้นหาธุรกิจของคุณเจอเป็นเจ้าแรก..."
               date="2026-01-20"
-              thumbnail="/images/blog/project-01.webp"
+              thumbnail="/images/blog/placeholder.webp"
             />
             <BlogCard
               slug="facebook-ads-vs-website"
               title="ยิงแอด FB หรือทำเว็บดี? แบบไหนปิดการขายไวกว่ากัน"
               excerpt="เจาะลึกจากเคสจริงที่ผมดูแลลูกค้ามา กว่าจะรู้ตัวเงินก็หายไปเยอะแล้ว..."
               date="2026-01-18"
-              thumbnail="/images/blog/project-01.webp"
+              thumbnail="/images/blog/placeholder.webp"
             />
             <BlogCard
               slug="unlink-th-case-study"
               title="เบื้องหลังความสำเร็จของเว็บ Unlink TH"
               excerpt="จากเว็บโหลดช้าสู่เว็บที่ปิดการขายได้ทุกวัน เขาทำกันยังไง?"
               date="2026-01-15"
-              thumbnail="/images/blog/project-01.webp"
+              thumbnail="/images/showcase/unlink-th.webp"
             />
           </div>
         </div>
       </section>
 
-      {/* 7️⃣ ส่วนปิดการขาย (CTA): ทักมาคุยกับผมได้เลย */}
+      {/* 7️⃣ ส่วนปิดการขาย (CTA): เปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้า */}
       <section className="relative py-24 lg:py-40">
         <CTASection />
       </section>
@@ -1156,16 +1302,16 @@ export default function HomePage() {
 ```typescript
 /** @format */
 
-"use client";
+"use client"
 
-import React from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { CheckCircle2, Users, Factory, Zap } from "lucide-react";
+import React from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
 /**
  * 🤝 รายชื่อลูกค้าที่ไว้ใจผม (Client Portfolio)
- * แนะนำ: ใช้รูป .webp ขนาดเล็กเพื่อให้เว็บโหลดไวที่สุดตามมาตรฐานผมครับ
+ * แนะนำ: ใช้รูป .webp ขนาดเล็กเพื่อให้เว็บโหลดไวที่สุดตามมาตรฐาน Specialist
  */
 const clients = [
   { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
@@ -1174,7 +1320,7 @@ const clients = [
   { name: "Factory Pro", logo: "/images/showcase/project-01.webp" },
   { name: "Digital Partner", logo: "/images/showcase/unlink-th1.webp" },
   { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
-];
+]
 
 /**
  * 📊 สถิติที่ผมสร้างให้ลูกค้า (Impact Stats)
@@ -1199,33 +1345,32 @@ const stats = [
     icon: Zap,
     description: "คะแนนเฉลี่ย Google PageSpeed ที่ผมทำให้ทุกโปรเจกต์",
   },
-];
+]
 
 /**
- * 🧬 HomeClientSections — ส่วนแสดงความน่าเชื่อถือ
+ * 🧬 HomeClientSections — ส่วนแสดงความน่าเชื่อถือ (Trust & Authority)
  */
 const HomeClientSections = () => {
   return (
     <section className="relative overflow-hidden bg-slate-50 py-24 antialiased lg:py-32">
-      {/* 📐 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
+      {/* 📐 พื้นหลังลายตาราง (Industrial Grid Pattern): สะท้อนความเนี๊ยบของงานระบบ */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
-
         {/* --- 🤝 ส่วนที่ 1: โลโก้ลูกค้า (Infinite Auto-Slider) --- */}
         <div className="mb-32 text-center">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase"
+            className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic"
           >
             Trusted by Forward-Thinking Businesses
           </motion.p>
 
-          {/* ระบบสไลด์โลโก้: เน้นความลื่นไหลและไม่กินทรัพยากรเครื่อง */}
+          {/* ระบบสไลด์โลโก้: เน้นความลื่นไหลและไม่กินทรัพยากรเครื่องตามมาตรฐาน LCP */}
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)] py-10">
             <motion.div
               animate={{ x: [0, -1920] }}
@@ -1249,11 +1394,11 @@ const HomeClientSections = () => {
                         fill
                         sizes="(max-width: 768px) 128px, 160px"
                         className="object-contain"
-                        priority={groupIndex === 0}
+                        priority={groupIndex === 0} // ✅ โหลดรูปกลุ่มแรกทันทีเพื่อประสิทธิภาพ
                       />
                     </div>
                   ))}
-                </React.Fragment>
+                </React.Fragment> // ✅ แก้ไขลบตัวแปรส่วนเกินออกเรียบร้อย
               ))}
             </motion.div>
           </div>
@@ -1274,12 +1419,12 @@ const HomeClientSections = () => {
               viewport={{ once: true }}
               className="group relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-10 transition-all duration-500 hover:-translate-y-3 hover:border-emerald-500/30 hover:shadow-2xl"
             >
-              {/* Icon Container */}
+              {/* Icon Container: เปลี่ยนสีเป็น Emerald เมื่อ Hover ตาม Brand DNA */}
               <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all duration-500 group-hover:rotate-[10deg] group-hover:bg-emerald-500 group-hover:text-white">
                 <stat.icon className="h-7 w-7" />
               </div>
 
-              {/* ตัวเลขสถิติ */}
+              {/* ตัวเลขสถิติ: ใช้ Font Prompt เพื่อความหนักแน่น */}
               <div className="mb-3 flex items-baseline gap-2">
                 <span className="font-prompt text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
                   {stat.value}
@@ -1317,10 +1462,10 @@ const HomeClientSections = () => {
         </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default HomeClientSections;
+export default HomeClientSections
 ```
 
 ---
@@ -2114,17 +2259,17 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 ```typescript
 /** @format */
 
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import React from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { Metadata } from "next"
 
 /**
  * ✅ [FIXED]: ใช้ next-mdx-remote เพื่อรองรับสถาปัตยกรรม Server Components
  * มั่นใจได้ว่าโหลดไวและเป็นมิตรกับ SEO สำหรับ SME และโรงงาน
  */
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote/rsc"
 
 import {
   ArrowLeft,
@@ -2132,17 +2277,17 @@ import {
   Share2,
   Sparkles,
   MessageCircle,
-} from "lucide-react";
+} from "lucide-react"
 
 // 📂 ข้อมูลตัวตนและระบบจัดการบทความ
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
-import { siteConfig } from "@/constants/site-config";
-import { useMDXComponents } from "@/mdx-components";
+import { getAllPosts, getPostBySlug } from "@/lib/blog"
+import { siteConfig } from "@/constants/site-config"
+import { useMDXComponents } from "@/mdx-components"
 
 // 🧩 ส่วนประกอบหน้าเว็บ (Specialist UI)
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
  * 🛠️ MDX Components Mapping — "ปรับแต่งการแสดงผลภายในบทความ"
@@ -2150,7 +2295,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 const mdxComponents = {
   ...useMDXComponents({}),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    const safeSrc = typeof props.src === "string" ? props.src : "/images/og-image.png";
+    const safeSrc =
+      typeof props.src === "string" ? props.src : "/images/og-image.png"
     return (
       <span className="relative my-12 block aspect-video w-full overflow-hidden rounded-[2.5rem] border border-slate-100 shadow-2xl">
         <Image
@@ -2162,7 +2308,7 @@ const mdxComponents = {
           sizes="(max-width: 1200px) 100vw, 1200px"
         />
       </span>
-    );
+    )
   },
   h2: (props: any) => (
     <h2
@@ -2172,16 +2318,26 @@ const mdxComponents = {
   ),
   p: (props: any) => (
     <p
-      className="font-anuphan mb-8 text-xl font-bold leading-relaxed text-slate-500"
+      className="font-anuphan mb-8 text-xl leading-relaxed font-bold text-slate-500"
       {...props}
     />
   ),
-  CallToAction: ({ title, description, url }: { title: string; description: string; url?: string }) => (
+  CallToAction: ({
+    title,
+    description,
+    url,
+  }: {
+    title: string
+    description: string
+    url?: string
+  }) => (
     <div className="my-20 rounded-[3rem] border border-emerald-500/20 bg-emerald-50/5 p-12 text-center shadow-2xl shadow-emerald-500/5 lg:p-20">
       <h3 className="font-prompt mb-6 text-3xl font-black text-slate-900 uppercase italic">
         {title}
       </h3>
-      <p className="font-anuphan mb-10 text-lg font-bold text-slate-500">{description}</p>
+      <p className="font-anuphan mb-10 text-lg font-bold text-slate-500">
+        {description}
+      </p>
       <Button
         asChild
         className="font-prompt h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase transition-all hover:bg-emerald-500 hover:text-slate-950"
@@ -2190,28 +2346,28 @@ const mdxComponents = {
       </Button>
     </div>
   ),
-};
+}
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string }>
 }
 
 /**
  * ⚙️ SSG Engine — "สร้างหน้าล่วงหน้าเพื่อความเร็วที่เหนือกว่า"
  */
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  const posts = await getAllPosts()
+  return posts.map((post) => ({ slug: post.slug }))
 }
 
 /**
  * 🔍 SEO Specialist Metadata
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
 
-  if (!post) return { title: `ไม่พบบทความ | ${siteConfig.shortName}` };
+  if (!post) return { title: `ไม่พบบทความ | ${siteConfig.shortName}` }
 
   return {
     title: `${post.title} | ${siteConfig.shortName}`,
@@ -2224,23 +2380,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: post.thumbnail || siteConfig.ogImage }],
       authors: ["นายเอ็มซ่ามากส์"],
     },
-  };
+  }
 }
 
 /**
  * 📄 BlogPostPage
  */
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
 
-  if (!post) return notFound();
+  if (!post) return notFound()
 
   const formattedDate = new Date(post.date).toLocaleDateString("th-TH", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+  })
 
   return (
     <article className="relative min-h-screen bg-white pt-32 pb-24 antialiased selection:bg-emerald-500/20">
@@ -2251,7 +2407,11 @@ export default async function BlogPostPage({ params }: Props) {
           description: post.excerpt,
           image: post.thumbnail,
           datePublished: post.date,
-          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์", url: siteConfig.url },
+          author: {
+            "@type": "Person",
+            name: "นายเอ็มซ่ามากส์",
+            url: siteConfig.url,
+          },
         }}
       />
 
@@ -2278,15 +2438,16 @@ export default async function BlogPostPage({ params }: Props) {
               </Badge>
             ))}
             <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-300 uppercase italic">
-              <Calendar className="h-3.5 w-3.5 text-emerald-500" /> {formattedDate}
+              <Calendar className="h-3.5 w-3.5 text-emerald-500" />{" "}
+              {formattedDate}
             </div>
           </div>
 
-          <h1 className="font-prompt mb-10 text-4xl font-black leading-[1.05] tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl">
+          <h1 className="font-prompt mb-10 text-4xl leading-[1.05] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl">
             {post.title}
           </h1>
 
-          <p className="font-anuphan text-2xl font-bold italic leading-relaxed text-slate-500/80">
+          <p className="font-anuphan text-2xl leading-relaxed font-bold text-slate-500/80 italic">
             {post.excerpt}
           </p>
         </header>
@@ -2309,11 +2470,17 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3rem] border border-slate-100 bg-slate-50/50 p-12 shadow-sm md:flex-row">
           <div className="flex items-center gap-6">
             <div className="relative h-20 w-20 overflow-hidden rounded-[1.5rem] bg-slate-950 shadow-lg">
-              <div className="font-prompt flex h-full w-full items-center justify-center text-3xl font-black text-emerald-500 italic">M</div>
+              <div className="font-prompt flex h-full w-full items-center justify-center text-3xl font-black text-emerald-500 italic">
+                M
+              </div>
             </div>
             <div>
-              <div className="font-prompt text-xl font-black tracking-tight text-slate-900 uppercase italic">นายเอ็มซ่ามากส์</div>
-              <div className="font-anuphan mt-1 text-[11px] font-black tracking-[0.25em] text-emerald-600 uppercase">Technical SEO & Specialist Dev</div>
+              <div className="font-prompt text-xl font-black tracking-tight text-slate-900 uppercase italic">
+                นายเอ็มซ่ามากส์
+              </div>
+              <div className="font-anuphan mt-1 text-[11px] font-black tracking-[0.25em] text-emerald-600 uppercase">
+                Technical SEO & Specialist Dev
+              </div>
             </div>
           </div>
 
@@ -2327,11 +2494,14 @@ export default async function BlogPostPage({ params }: Props) {
 
         <div className="mt-24 overflow-hidden rounded-[4rem] bg-slate-950 p-16 text-center text-white shadow-2xl lg:p-24">
           <Sparkles className="mx-auto mb-10 h-14 w-14 animate-pulse text-emerald-500" />
-          <h3 className="font-prompt mb-8 text-4xl font-black leading-none tracking-tighter uppercase italic md:text-6xl lg:text-7xl">
+          <h3 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter uppercase italic md:text-6xl lg:text-7xl">
             พร้อมอัปเกรด <br />
-            <span className="text-emerald-500 underline decoration-emerald-500/30 underline-offset-8">รายได้</span> หรือยัง?
+            <span className="text-emerald-500 underline decoration-emerald-500/30 underline-offset-8">
+              รายได้
+            </span>{" "}
+            หรือยัง?
           </h3>
-          <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium leading-relaxed text-slate-400">
+          <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl leading-relaxed font-medium text-slate-400">
             ถ้าบทความนี้ทำให้คุณเห็นทางออก ทักมาปรึกษาผมได้โดยตรงครับ
             ผมช่วยจูนระบบให้ SME และโรงงานอุตสาหกรรมมานับไม่ถ้วน
           </p>
@@ -2344,13 +2514,14 @@ export default async function BlogPostPage({ params }: Props) {
               href="/contact"
               className="font-prompt text-lg font-black tracking-widest uppercase italic"
             >
-              <MessageCircle className="mr-4 h-6 w-6 fill-current" /> ทักคุยกับ นายเอ็มซ่ามากส์
+              <MessageCircle className="mr-4 h-6 w-6 fill-current" /> ทักคุยกับ
+              นายเอ็มซ่ามากส์
             </Link>
           </Button>
         </div>
       </div>
     </article>
-  );
+  )
 }
 ```
 
@@ -3692,7 +3863,7 @@ export interface TestimonialItem {
 
 #### 🔍 Path: `next.config.mjs`
 
-````javascript
+```javascript
 /** @format */
 import createMDX from "@next/mdx"
 
@@ -3730,10 +3901,13 @@ const nextConfig = {
 }
 
 const withMDX = createMDX({})
-export default withMDX(nextConfig)```
+export default withMDX(nextConfig)
+```
+
 ---
 
 #### 🔍 Path: `components.json`
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -3757,7 +3931,7 @@ export default withMDX(nextConfig)```
   },
   "registries": {}
 }
-````
+```
 
 ---
 

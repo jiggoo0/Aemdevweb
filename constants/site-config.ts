@@ -3,146 +3,145 @@
 import type { Metadata } from "next"
 
 /**
- * 🌐 Site Configuration – AEMDEVWEB (v.2026)
- * ศูนย์กลางข้อมูลตัวตนสำหรับ SME เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรม
+ * 🛠️ AEMDEVWEB Identity Configuration (2026 Edition)
+ * ข้อมูลอัตลักษณ์แบรนด์ กลยุทธ์ SEO และมาตรฐานทางเทคนิค
+ *
+ * @path src/constants/site-config.ts
  */
 
 export const siteConfig = {
-  /* 🏢 Brand Identity: นายเอ็มซ่ามากส์ */
-  name: "นายเอ็มซ่ามากส์ (AEMDEVWEB)",
-  companyName: "AEMDEVWEB Specialist Solutions",
-  shortName: "นายเอ็มซ่ามากส์",
-  email: "me@aemdevweb.com",
+  // 🆔 Brand Identity
+  name: "AEMDEVWEB",
+  nameTH: "เอ็ม-เดฟ-เว็บ",
+  shortName: "AEM", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Header/Footer
+  companyName: "AEMDEVWEB Co., Ltd.", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน metadata.ts/Footer
+  expert: "นายเอ็มซ่ามากส์ (Alongkorl)",
+  role: "ที่ปรึกษา Technical SEO และผู้พัฒนาเว็บไซต์ Next.js สำหรับ SME",
 
-  // 🧬 DNA: ความไวที่สร้างแต้มต่อให้ธุรกิจ
-  tagline: "สร้างเว็บที่เปิดไวทันใจ เพื่อให้ธุรกิจของคุณนำหน้าคู่แข่งในทุกคลิก",
-
-  title:
-    "นายเอ็มซ่ามากส์ | รับทำเว็บไซต์ SME เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรม",
+  // 🎯 USP & Positioning
+  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน page.tsx
+  slogan: "Speed Launch & High Performance",
   description:
-    "บริการทำเว็บไซต์ที่เน้นความเร็วและการปิดการขาย สำหรับเจ้าของกิจการและโรงงาน โดยนายเอ็มซ่ามากส์ งานเนี๊ยบ ดูแลดี ไม่ทิ้งงาน พร้อมดันอันดับ Google ให้ธุรกิจของคุณ",
+    "บริการรับทำเว็บไซต์ Next.js โหลดเร็วอันดับ 1 และรับวางโครงสร้าง Technical SEO รองรับ Google AI Search (SGE) สำหรับ SME โดยเฉพาะ",
 
-  /* 🌐 URLs & Assets */
+  // 🌐 URLs & Contact Infrastructure
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
+  email: "me@aemdevweb.com", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Contact/Footer
 
-  /* 🔗 Social & Direct Links */
-  links: {
-    facebook: "https://www.facebook.com/share/186gv7BAsc/",
-    messenger: "https://m.me/aemdevweb",
-    line: "https://lin.ee/SVMBEJ8",
-    lineId: "@127cnhtn",
-    github: "https://github.com/jiggoo0",
-  },
-
-  /* 🚀 Call to Action */
+  // 🖱️ CTA Settings (สำหรับไฟล์ Hero/CTASection)
   cta: {
-    main: "ปรึกษา นายเอ็มซ่ามากส์",
-    secondary: "ดูผลงานทั้งหมด",
-    pricing: "ประเมินราคาโปรเจกต์",
+    main: "ทักมาคุยโปรเจกต์กับผม",
+    secondary: "ดูแพ็กเกจบริการทั้งหมด",
+    pricing: "ดูราคาแต่ละแพ็กเกจ",
   },
 
-  /* 📞 Contact Channel */
+  // 🔗 Legacy Links (Backward Compatibility)
+  links: {
+    line: "https://line.me/ti/p/@aemdevweb",
+    lineId: "@aemdevweb",
+    facebook: "https://facebook.com/aemdevweb",
+    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  },
+
+  // ℹ️ ข้อมูลการติดต่อ (New Structure)
   contact: {
     email: "me@aemdevweb.com",
-    tel: "099-999-8989",
-    telDisplay: "099-999-8989 (สายตรง นายเอ็มซ่ามากส์)",
-    address: "Technical Office: Thailand / Service Online 24/7",
+    lineId: "@aemdevweb",
+    facebook: "https://facebook.com/aemdevweb",
+    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
-  /* 📈 SEO Keywords (2026 Specialist Strategy) */
-  keywords: [
-    // --- Brand & Identity ---
-    "นายเอ็มซ่ามากส์",
-    "เอ็มซ่ามากส์",
-    "AEMDEVWEB",
+  // 📊 The 2026 Standard (Technical Guarantees)
+  standards: {
+    performance: 100, // Google PageSpeed Insights Goal
+    lcp: 1.2, // Largest Contentful Paint (Seconds)
+    security: "Enterprise SSL (HTTPS)",
+    aiReadiness: "Schema Markup & JSON-LD Embedded",
+  },
 
-    // --- Core Services (SME & Corporate) ---
-    "รับทำเว็บไซต์ SME",
-    "รับทำเว็บไซต์บริษัท",
-    "จ้างทำเว็บไซต์ หจก",
-    "ทำเว็บ Sale Page ปิดการขาย",
-    "รับทำ Landing Page ยิงแอด",
-    "ออกแบบเว็บไซต์ธุรกิจ",
-
-    // --- Industrial Focus ---
-    "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
-    "ทำเว็บแคตตาล็อกสินค้าอุตสาหกรรม",
-    "เว็บไซต์บริษัท B2B",
-
-    // --- Performance & SEO Specialist ---
-    "รับทำ SEO ดันอันดับ",
-    "Technical SEO Specialist Thailand",
-    "รับแก้เว็บไซต์ช้า",
-    "เว็บไซต์โหลดไวที่สุด 2026",
-
-    // --- Trust & Pain Points ---
-    "คนทำเว็บไม่ทิ้งงาน",
-    "รับทำเว็บไซต์ราคาคุ้มค่า",
-    "คนทำเว็บคุยง่าย",
-  ] as string[],
-
-  /* 🎨 Visual Theme */
-  themeColor: "#0F172A",
+  // 🎯 SEO Strategy: Keyword Groups
+  keywords: {
+    // สำหรับ Metadata Constructor (Array)
+    list: [
+      "รับทำ SEO SME",
+      "จ้างทำเว็บไซต์ราคาประหยัด",
+      "บริษัทรับทำ SEO สายขาว",
+      "รับทำเว็บไซต์ Next.js",
+      "SME Speed Launch",
+      "AEMDEVWEB",
+      "นายเอ็มซ่ามากส์",
+    ],
+    // สำหรับ Legacy metadata.ts (String)
+    all: "รับทำ SEO SME, จ้างทำเว็บไซต์ราคาประหยัด, บริษัทรับทำ SEO สายขาว, รับทำเว็บไซต์ Next.js, SME Speed Launch, AEMDEVWEB, นายเอ็มซ่ามากส์",
+    core: ["รับทำ SEO SME", "จ้างทำเว็บไซต์ราคาประหยัด", "บริษัทรับทำ SEO สายขาว", "รับทำเว็บไซต์ Next.js"],
+    tech: ["SME Speed Launch", "บริการวางระบบ SEO Technical", "Web Performance Optimization", "Google AI Search Optimization"],
+    brand: ["AEMDEVWEB", "เอ็มเดฟเว็บ", "นายเอ็มซ่ามากส์"],
+  },
 }
 
-export type SiteConfig = typeof siteConfig
-
-/* 🛠️ Metadata Helper: ตัวช่วยสร้างข้อมูล SEO รายหน้า */
+/**
+ * ⚙️ Metadata Constructor
+ * ฟังก์ชันสร้าง Metadata อัตโนมัติสำหรับ Next.js App Router
+ * รองรับ OpenGraph และ Twitter Cards แบบ Dynamic
+ */
 export function constructMetadata({
-  title,
+  title = siteConfig.title,
   description = siteConfig.description,
   image = siteConfig.ogImage,
+  icons = "/favicon.ico",
   noIndex = false,
 }: {
   title?: string
   description?: string
   image?: string
+  icons?: string
   noIndex?: boolean
 } = {}): Metadata {
-  const pageTitle = title
-    ? `${title} | ${siteConfig.shortName}`
-    : siteConfig.title
-
   return {
-    title: pageTitle,
+    title: {
+      default: `${title} | ${siteConfig.slogan}`,
+      template: `%s | ${siteConfig.shortName}`, // ✅ [FIXED]: ใช้ shortName เป็น template ตามมาตรฐานเดิม
+    },
     description,
-    keywords: siteConfig.keywords, // ใช้ Keywords ชุดใหญ่เป็นฐาน
-    authors: [{ name: siteConfig.shortName }],
-    creator: siteConfig.companyName,
-    metadataBase: new URL(siteConfig.url),
+    authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
+    creator: siteConfig.expert,
+    publisher: siteConfig.companyName,
+    keywords: siteConfig.keywords.list, // ✅ [FIXED]: ส่งค่าเป็น Array เท่านั้น ป้องกัน TS Error
     openGraph: {
       type: "website",
       locale: "th_TH",
       url: siteConfig.url,
-      siteName: siteConfig.shortName,
-      title: pageTitle,
+      title,
       description,
+      siteName: siteConfig.name,
       images: [
         {
           url: image,
           width: 1200,
           height: 630,
-          alt: pageTitle,
+          alt: `${siteConfig.name} - ${siteConfig.slogan}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: pageTitle,
+      title,
       description,
       images: [image],
+      creator: siteConfig.expert,
     },
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon-16x16.png",
-      apple: "/apple-touch-icon.png",
-    },
+    icons,
+    metadataBase: new URL(siteConfig.url),
     ...(noIndex && {
       robots: {
         index: false,
         follow: false,
       },
     }),
+    // 🔌 Connect Facebook Page ID: 914706508399571
+    other: {
+      "fb:pages": "914706508399571",
+    },
   }
 }

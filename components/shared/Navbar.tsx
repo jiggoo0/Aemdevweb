@@ -16,15 +16,19 @@ import { cn } from "@/lib/utils"
 /**
  * 🏗️ Navbar Specialist Edition (v2026)
  * มาพร้อมระบบ Glassmorphism และ Active Link Detection ระดับพรีเมียม
- * ออกแบบมาเพื่อสร้างความประทับใจแรกให้กับเจ้าของธุรกิจ SME และโรงงาน
+ * แก้ไขปัญหา Hydration Mismatch และปรับจูนการดึงข้อมูลอัตลักษณ์แบรนด์
  */
 const Navbar = () => {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  // 🛡️ [FIXED]: ป้องกัน Hydration Error (SSR vs Client Mismatch)
+  const [isMounted, setIsMounted] = useState(false)
+
   // 🧬 ตรวจจับความลึกของการ Scroll (Sticky Glass Effect)
   useEffect(() => {
+    setIsMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
@@ -56,9 +60,10 @@ const Navbar = () => {
             <Zap className="h-5 w-5 fill-emerald-400 text-emerald-400" />
           </div>
           <span className="flex items-center uppercase">
-            {siteConfig.shortName}
-            <span className="text-emerald-500">DEV</span>
-            <span className="ml-1 hidden text-[8px] font-black tracking-[0.4em] text-slate-400 uppercase opacity-60 md:block">
+            {/* ✅ [FIXED]: ใช้ siteConfig.name แทน shortName ตามที่อัปเดตใน site-config.ts */}
+            {siteConfig.name}
+            <span className="ml-1 text-emerald-500">DEV</span>
+            <span className="ml-2 hidden text-[8px] font-black tracking-[0.4em] text-slate-400 uppercase opacity-60 md:block">
               Specialist 2026
             </span>
           </span>
@@ -66,33 +71,39 @@ const Navbar = () => {
 
         {/* 🧭 Desktop Menu: High-Scanning Layout */}
         <div className="hidden items-center gap-8 lg:flex">
-          {mainNav?.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "font-prompt relative text-[11px] font-black tracking-[0.3em] uppercase transition-all hover:text-emerald-500",
-                pathname === item.href ? "text-emerald-500" : "text-slate-500",
-                item.disabled && "pointer-events-none opacity-50"
-              )}
-            >
-              {item.name}
-              {/* Active Indicator: Next.js Layout Animation */}
-              {pathname === item.href && (
-                <motion.div
-                  layoutId="nav-glow"
-                  className="absolute -bottom-2 left-0 h-0.5 w-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-              {/* Feature Badges */}
-              {item.badge && (
-                <span className="absolute -top-2 -right-7 flex h-4 items-center rounded-full bg-emerald-500 px-1.5 text-[7px] font-black tracking-tighter text-white uppercase shadow-sm">
-                  {item.badge}
-                </span>
-              )}
-            </Link>
-          ))}
+          {mainNav?.map((item) => {
+            const isActive = pathname === item.href
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "font-prompt relative text-[11px] font-black tracking-[0.3em] uppercase transition-all hover:text-emerald-500",
+                  isActive ? "text-emerald-500" : "text-slate-500",
+                  item.disabled && "pointer-events-none opacity-50"
+                )}
+              >
+                {item.name}
+
+                {/* 🚀 Active Indicator: เรนเดอร์เฉพาะเมื่อเป็น Client แล้วเพื่อกัน Hydration Error */}
+                {isMounted && isActive && (
+                  <motion.div
+                    layoutId="nav-glow"
+                    className="absolute -bottom-2 left-0 h-0.5 w-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+
+                {/* Feature Badges */}
+                {item.badge && (
+                  <span className="absolute -top-2 -right-7 flex h-4 items-center rounded-full bg-emerald-500 px-1.5 text-[7px] font-black tracking-tighter text-white uppercase shadow-sm">
+                    {item.badge}
+                  </span>
+                )}
+              </Link>
+            )
+          })}
 
           {/* 🚀 Conversion Hook: Start Project */}
           <Link
@@ -148,7 +159,7 @@ const Navbar = () => {
                 href="/contact"
                 className="font-prompt flex w-full items-center justify-center gap-4 rounded-3xl bg-emerald-500 py-5 text-sm font-black tracking-[0.2em] text-slate-950 uppercase shadow-xl shadow-emerald-500/30 transition-transform active:scale-95"
               >
-                ปรึกษา นายเอ็มซ่ามากส์
+                ปรึกษา {siteConfig.expert}
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
