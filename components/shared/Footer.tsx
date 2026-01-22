@@ -15,21 +15,20 @@ import {
   Building2,
 } from "lucide-react"
 
-// 📂 Logic & Config Architecture
 import { siteConfig } from "@/constants/site-config"
 import { footerServicesNav, footerCompanyNav } from "@/constants/navigation"
 import { cn } from "@/lib/utils"
 
 /**
- * 🏗️ Footer Industrial Specialist Identity (v2026)
- * ออกแบบมาเพื่อสร้าง Trust ให้กับกลุ่มเจ้าของกิจการและโรงงาน
+ * Footer Industrial Specialist Identity (v2026)
+ * Engineered for trust acquisition among SME owners and industrial sectors.
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-500/10">
-      {/* 🧩 1. Industrial Background Branding (Layered Depth) */}
+      {/* Industrial Background Branding (Layered Depth) */}
       <div
         className="pointer-events-none absolute -right-24 -bottom-24 opacity-[0.03]"
         aria-hidden="true"
@@ -37,16 +36,16 @@ export default function Footer() {
         <Zap size={450} fill="currentColor" className="text-[#0F172A]" />
       </div>
 
-      {/* 📐 Subtle Grid Pattern: สร้างอารมณ์พิมพ์เขียว (Blueprint) */}
+      {/* Blueprint Grid Pattern: Visualizing precision and engineering standards */}
       <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] bg-center opacity-[0.2]" />
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* 🏢 Top Tier: Target Audience Acknowledgement */}
+        {/* Target Audience Segment Recognition */}
         <div className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { label: "SME", icon: Zap },
             { label: "เจ้าของกิจการ", icon: ShieldCheck },
-            { label: "บริษัท & หจก.", icon: Building2 },
+            { label: "บริษัท และ หจก.", icon: Building2 },
             { label: "โรงงานอุตสาหกรรม", icon: Factory },
           ].map((item, i) => (
             <div
@@ -62,7 +61,7 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* 🏛️ Column 1: Brand Authority Profile */}
+          {/* Column 1: Brand Authority Profile */}
           <div className="space-y-8 lg:col-span-4">
             <Link
               href="/"
@@ -86,7 +85,7 @@ export default function Footer() {
               ผู้นำการวางสถาปัตยกรรมดิจิทัลสำหรับ{" "}
               <span className="text-slate-900">เจ้าของกิจการ</span> และ
               <span className="text-slate-900"> โรงงานอุตสาหกรรม</span>
-              เราสร้างเว็บไซต์ที่เน้นความเร็วและความปลอดภัยระดับสูงสุด
+              ที่เน้นความนิ่งของระบบและความปลอดภัยระดับสูงสุด
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
@@ -100,7 +99,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 🛠️ Column 2: Solutions Navigation */}
+          {/* Column 2: Solutions Navigation */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#0F172A] uppercase italic">
               Solutions
@@ -123,7 +122,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 📚 Column 3: Corporate Resources */}
+          {/* Column 3: Corporate Resources */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#0F172A] uppercase italic">
               Resources
@@ -158,7 +157,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* 📞 Column 4: Strategic Consultation */}
+          {/* Column 4: Strategic Consultation */}
           <div className="space-y-8 lg:col-span-4">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#0F172A] uppercase italic">
               Get Started
@@ -184,7 +183,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 📜 Bottom Compliance & Copyright Layer */}
+        {/* Bottom Compliance & Copyright Layer */}
         <div className="mt-28 flex flex-col items-center justify-between gap-8 border-t border-slate-100 pt-12 md:flex-row">
           <div className="flex flex-col gap-3">
             <p className="font-anuphan text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">

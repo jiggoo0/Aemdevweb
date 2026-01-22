@@ -7,6 +7,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
+// Data configuration for trusted partnerships
 const clients = [
   { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
   { name: "Industrial Solutions", logo: "/images/showcase/project-01.webp" },
@@ -16,36 +17,38 @@ const clients = [
   { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
 ]
 
+// Strategic Impact Statistics
 const stats = [
   {
-    label: "ดูแลธุรกิจมาแล้ว",
+    label: "ธุรกิจที่ได้รับความไว้วางใจ",
     value: "50+",
     icon: Users,
-    description: "ช่วย SME และสตาร์ทอัพไทยให้เติบโตบนโลกออนไลน์",
+    description: "ยกระดับสถาปัตยกรรมดิจิทัลให้กับ SME และสตาร์ทอัพไทย",
   },
   {
-    label: "กลุ่มโรงงานอุตสาหกรรม",
+    label: "ภาคอุตสาหกรรมและโรงงาน",
     value: "12+",
     icon: Factory,
-    description: "วางระบบและดูแลเว็บไซต์ให้โรงงานระดับประเทศ",
+    description: "วางรากฐานระบบเว็บไซต์ที่มีความเสถียรสูงสุดสำหรับโรงงานผลิต",
   },
   {
-    label: "คะแนนความเร็วเว็บ",
+    label: "ดัชนีประสิทธิภาพเว็บไซต์",
     value: "99/100",
     icon: Zap,
-    description: "คะแนนเฉลี่ย Google PageSpeed ที่ผมทำให้ทุกโปรเจกต์",
+    description: "ค่าเฉลี่ย Google PageSpeed Score ที่ผมทำให้ทุกโปรเจกต์",
   },
 ]
 
 const HomeClientSections = () => {
   return (
     <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
+      {/* Infrastructure Layer: Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Infinite Logo Slider (CSS Animation Optimized) */}
+        {/* Infinite Logo Slider: CSS Animation Optimized for TBT/CLS */}
         <div className="mb-32">
           <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
@@ -53,7 +56,7 @@ const HomeClientSections = () => {
 
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
-              {/* ✅ [OPTIMIZED]: ทำการ Map วนลูป โดยใช้ Image Sizes ที่เล็กลงสำหรับมือถือเพื่อลด Payload */}
+              {/* Loop replication for seamless animation with optimized image payload */}
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -64,9 +67,9 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    // ✅ [FIXED]: ปรับ sizes ให้ลดขนาดรูปบนมือถือเหลือเพียง 80-100px ช่วยลด LCP
+                    // Optimized sizes to reduce mobile LCP and unnecessary bandwidth
                     sizes="(max-width: 480px) 100px, (max-width: 768px) 120px, 160px"
-                    // ✅ [FIXED]: ใส่ priority เฉพาะรูปแรกๆ ที่แสดงผลบนหน้าจอทันทีเพื่อลดค่า LCP
+                    // Priority rendering for the first visible set of items
                     priority={i < 4}
                   />
                 </div>
@@ -75,7 +78,7 @@ const HomeClientSections = () => {
           </div>
         </div>
 
-        {/* Impact Stats Grid (One-time Animation) */}
+        {/* Impact Statistics Grid: Industrial Value Presentation */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
@@ -105,7 +108,7 @@ const HomeClientSections = () => {
           ))}
         </div>
 
-        {/* Final Hook Visual */}
+        {/* Strategic Close: Solo-Specialist Authority Hook */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,9 +116,9 @@ const HomeClientSections = () => {
           className="shadow-3xl mt-28 rounded-[3rem] bg-slate-950 p-12 text-center md:p-24"
         >
           <h2 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-6xl">
-            ตั้งแต่ SME จนถึงโรงงาน <br />
+            จากธุรกิจ SME สู่ระบบโรงงาน <br />
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
-              ผมเปลี่ยน "ความเร็ว" ให้เป็น "ยอดขาย"
+              ผมเปลี่ยนดัชนีความเร็ว ให้เป็นผลกำไรทางธุรกิจ
             </span>
           </h2>
         </motion.div>

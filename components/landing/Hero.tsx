@@ -10,20 +10,21 @@ import { ArrowRight, Zap, ShieldCheck, Star } from "lucide-react"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * 🏗️ Hero Section — "ความประทับใจแรกที่เปลี่ยนเป็นยอดขาย"
- * Optimized for LCP (Largest Contentful Paint)
+ * Hero Section - Strategic First Impression Architecture
+ * Optimized for Largest Contentful Paint (LCP) and visual authority.
+ * Adheres to AEMDevWeb Industrial Grade Standards.
  */
 const Hero = () => {
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden bg-white pt-32 lg:pt-48">
-      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
+      {/* Background Layer: Industrial Grid Pattern */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] [mask-image:linear-gradient(180deg,white,transparent)] bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
-          {/* 🏷️ Badge */}
+          {/* Identity Badge: Positioning as Specialist */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,34 +37,35 @@ const Hero = () => {
             </span>
           </motion.div>
 
-          {/* 📣 พาดหัวหลัก (Main Headline) */}
+          {/* Main Headline: Professional and Result-Oriented Architecture */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-prompt mb-8 max-w-5xl text-5xl leading-[1.1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl"
           >
-            ทำเว็บให้เนี๊ยบ <br className="hidden md:block" />
+            สถาปัตยกรรมเว็บที่ประณีต <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
-              ปิดการขายให้ไว
+              เพื่อการปิดยอดขายที่รวดเร็ว
             </span>
           </motion.h1>
 
-          {/* 📝 พาดหัวรอง (Sub-headline) */}
+          {/* Sub-headline: Solo-Specialist Value Proposition */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-anuphan mb-12 max-w-2xl text-lg leading-relaxed font-bold text-slate-500 md:text-xl"
           >
-            ผมช่วยยกระดับธุรกิจ SME และโรงงานของคุณด้วยเว็บไซต์ที่โหลดไว
-            ใช้งานง่าย และคุ้มค่าเงินที่สุด งานเนี๊ยบ ไม่ทิ้งงาน 100% โดย{" "}
+            ผมช่วยยกระดับธุรกิจ SME
+            และโรงงานของคุณด้วยรากฐานเว็บไซต์ที่เน้นความเร็ว ความเสถียร
+            และความคุ้มค่าของการลงทุนสูงสุด งานเสร็จจริง รับผิดชอบโดยตรงโดย
             <span className="font-black text-slate-950 italic">
-              นายเอ็มซ่ามากส์
+              Specialist Alongkorl
             </span>
           </motion.p>
 
-          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons) */}
+          {/* Strategic CTAs: High-Conversion Lead Capture */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -71,11 +73,11 @@ const Hero = () => {
             className="flex flex-col items-center gap-6 sm:flex-row"
           >
             <Link
-              href={siteConfig.links?.line || "#"}
+              href={siteConfig.contact?.facebook || "#"}
               target="_blank"
               className="group relative flex items-center gap-3 rounded-full bg-slate-950 px-10 py-5 text-base font-black tracking-wider text-white shadow-2xl transition-all hover:scale-105 active:scale-95"
             >
-              {siteConfig.cta?.main || "ทักมาคุยกับผม"}
+              {siteConfig.cta?.main || "ปรึกษาโปรเจกต์กับผม"}
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
 
@@ -83,11 +85,11 @@ const Hero = () => {
               href="/services"
               className="font-prompt flex items-center gap-2 text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
             >
-              {siteConfig.cta?.pricing || "ดูราคาแต่ละแพ็กเกจ"}
+              {siteConfig.cta?.pricing || "ตรวจสอบแพ็กเกจราคา"}
             </Link>
           </motion.div>
 
-          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators) */}
+          {/* Trust Indicators: Technical and Authority Proofs */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -101,7 +103,7 @@ const Hero = () => {
                 ))}
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                ลูกค้าพึงพอใจ 100%
+                Expert Authority Proof
               </span>
             </div>
 
@@ -113,7 +115,7 @@ const Hero = () => {
                 </span>
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                เปิดไวไม่ต้องรอนาน
+                Performance Optimized
               </span>
             </div>
 
@@ -125,14 +127,14 @@ const Hero = () => {
                 </span>
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                ระบบเสถียรและปลอดภัย
+                Security and Stability
               </span>
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* 🖼️ รูปภาพผลงาน (Decorative Image) */}
+      {/* Showcase Image: High-Resolution Proof of Work */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -142,12 +144,11 @@ const Hero = () => {
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
             src="/images/showcase/aemdevweb-hero.webp"
-            alt="ผลงานการออกแบบเว็บไซต์โดย นายเอ็มซ่ามากส์"
+            alt="Website Showcase by AEMDEVWEB"
             fill
-            priority // ✅ บังคับโหลดทันที
-            quality={90} // ✅ เพิ่มคุณภาพรูปภาพ (ปรับได้ระหว่าง 75-90)
+            priority
+            quality={90}
             className="object-cover transition-transform duration-700 hover:scale-105"
-            // ✅ [OPTIMIZED]: กำหนดค่าให้ละเอียดขึ้นเพื่อให้ Next.js เจนภาพขนาดเล็กลงสำหรับมือถือ
             sizes="(max-width: 640px) 95vw, (max-width: 1024px) 90vw, 1280px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />

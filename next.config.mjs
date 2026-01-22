@@ -1,9 +1,11 @@
 /** @format */
 import createMDX from "@next/mdx"
 
-/** * 🏗️ Next.js Configuration — AEMDEVWEB Professional v2026
- * Focus: High-Performance Image Serving & Termux Compatibility
+/**
+ * Next.js Configuration - AEMDEVWEB Professional v2026
+ * Focus: High-Performance Image Serving, Termux Compatibility, and Build Efficiency
  */
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -11,12 +13,12 @@ const nextConfig = {
   compress: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  /* 🖼️ Image Optimization Infrastructure */
+  /* Image Optimization Infrastructure */
   images: {
     formats: ["image/avif", "image/webp"],
-    // ✅ เพิ่มการรองรับอุปกรณ์หน้าจอกว้างและ Mobile High DPI
+    // Support for wide screens and Mobile High DPI
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    // ✅ เพิ่มขนาด 128px และ 256px เพื่อให้รูปโลโก้และไอคอนบนมือถือโหลดได้ไวที่สุด
+    // Specific sizes for logos and mobile icons to ensure fastest LCP
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     remotePatterns: [
       { protocol: "https", hostname: "lin.ee" },
@@ -25,11 +27,12 @@ const nextConfig = {
     ],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  /* 🧪 Experimental & Build Performance Features */
+  /* Experimental & Build Performance Features */
   experimental: {
-    // 🦀 [IMPORTANT]: ปิด mdxRs เพื่อให้สามารถ Build บน Termux ได้โดยไม่ติดปัญหา Rust Compiler
+    // Disable mdxRs to ensure compatibility with Termux environments (prevents Rust Compiler issues)
     mdxRs: false,
     optimizePackageImports: [
       "lucide-react",
@@ -37,7 +40,15 @@ const nextConfig = {
       "sonner",
       "@radix-ui/react-dialog",
       "@radix-ui/react-tabs",
+      "@radix-ui/react-dropdown-menu",
     ],
+    // External packages that should not be bundled by the server
+    serverComponentsExternalPackages: ["@libsql/client"],
+  },
+
+  /* Compiler Options */
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
 }
 

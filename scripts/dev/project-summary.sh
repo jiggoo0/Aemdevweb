@@ -1,20 +1,18 @@
 #!/bin/bash
 
 # ==============================================================================
-# 🚀 www.aemdevweb.com: Full Context & Code Analysis Script (Enhanced)
-# ==============================================================================
-# Description: Compiles architectural structure and critical source code into
-# a single markdown file for AI context or technical audits.
-# Domain: https://www.unlink-th.com
+# PROJECT: aemdevweb.com - Full Context & Code Analysis Script
+# DESCRIPTION: Compiles architectural structure and critical source code.
+# VERSION: 2.0.0 (2026-01-22)
 # ==============================================================================
 
-# ⚙️ CONFIGURATION
+# CONFIGURATION
 OUTPUT_FILE="aemdevweb-summary-with-code.md"
 REPORT_FILE="pre-deploy-report.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
 PROJECT_URL="https://aemdevweb.com"
 
-# Comprehensive Whitelist for Next.js 15 Enterprise Structure
+# Next.js 15 Enterprise Directory Whitelist
 WHITELIST_DIRS=(
   "app"
   "actions"
@@ -33,26 +31,20 @@ WHITELIST_DIRS=(
   "config"
 )
 
-# Critical files for AI context analysis (Included SupabaseSQL.md)
+# Critical files for AI context analysis
 SCAN_FILES=(
   "config/ai-context.core.md"
-  "config/ai-context.marketing.md"
-    "config/ai-context.seo.md"
-      "config/ai-context.core.md"
-        "config/ai-context.tech.md"
+  "config/ai-system-role.md"
+  "config/ai-context.dna.md"
   "$REPORT_FILE"
   "app/globals.css"
   "app/layout.tsx"
   "app/(main)/page.tsx"
+  "app/middleware.ts"
+  "app/instrumentation.ts"
   "components/landing/HomeClientSections.tsx"
   "app/(marketing)/[template]/[category]/[slug]/page.tsx"
-  "app/(marketing)/[template]/[category]/page.tsx"
-  "app/(marketing)/[template]/page.tsx"
-  "app/(main)/services/[slug]/page.tsx"
   "app/(main)/blog/[slug]/page.tsx"
-  "app/(main)/case-studies/page.tsx"
-  "app/(main)/case-studies/[slug]/page.tsx"
-  "mdx-components.tsx"
   "constants/site-config.ts"
   "constants/services-data.ts"
   "constants/navigation.ts"
@@ -63,54 +55,48 @@ SCAN_FILES=(
   "components.json"
   "lib/blog.ts"
   "lib/template.ts"
-  "lib/case-studies.ts"
   ".env"
 )
 
-# ✅ 1. INITIALIZATION
+# INITIALIZATION
 rm -f "$OUTPUT_FILE"
-echo "🚀 Initiating Full Context Scan for $PROJECT_DOMAIN..."
+echo "[INFO] Initiating Full Context Scan for $PROJECT_DOMAIN..."
 
 {
-  echo "# 📑 Project Context Summary (Full Scan)"
+  echo "# Project Context Summary (Full Scan)"
   echo ""
-  echo "<!--"
-  echo "  Domain: $PROJECT_DOMAIN"
-  echo "  Canonical: $PROJECT_URL"
-  echo "  Generated: $(date '+%Y-%m-%d %H:%M:%S')"
-  echo "  Type: Full Context & Code Analysis"
-  echo "-->"
   echo ""
-  echo "_Generated on: **$(date '+%Y-%m-%d %H:%M:%S')**_"
-  echo "> **Project:** $PROJECT_DOMAIN"
-  echo "> **URL:** $PROJECT_URL"
-  echo "> **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus"
+  echo ""
+  echo "Generated on: $(date '+%Y-%m-%d %H:%M:%S')"
+  echo "Project: $PROJECT_DOMAIN"
+  echo "URL: $PROJECT_URL"
+  echo "Status: Production-Ready Analysis | Full System Context"
   echo ""
 
   # --- 1. PROJECT HEALTH STATUS ---
-  echo "## 🔴 1. Project Health & Deployment Readiness"
+  echo "## 1. Project Health and Deployment Readiness"
   if [ -f "$REPORT_FILE" ]; then
-    if grep -q "### ✅ READY FOR DEPLOY" "$REPORT_FILE"; then
-      echo "✅ **READY FOR DEPLOY:** The project meets all production standards."
+    if grep -q "### READY FOR DEPLOY" "$REPORT_FILE"; then
+      echo "STATUS: READY FOR DEPLOY (Project meets production standards)"
     else
-      echo "❌ **FIX REQUIRED:** Issues detected. Refer to the Issue Highlight section."
+      echo "STATUS: FIX REQUIRED (Check issue highlights)"
     fi
     echo ""
 
-    if grep -q "### 📊 Route Statistics" "$REPORT_FILE"; then
-      echo "### 📍 Production Route Map"
+    if grep -q "### Route Statistics" "$REPORT_FILE"; then
+      echo "### Production Route Map"
       echo '```text'
-      sed -n '/### 📊 Route Statistics/,/---/p' "$REPORT_FILE" | \
+      sed -n '/### Route Statistics/,/---/p' "$REPORT_FILE" | \
         grep -v "###" | grep -v -- "---" | sed '/^$/d'
       echo '```'
     fi
   else
-    echo "⚠️ *Warning: \`$REPORT_FILE\` not found. Run \`pre-deploy-check.sh\` for health metrics.*"
+    echo "WARNING: $REPORT_FILE not found. Run pre-deploy-check.sh for metrics."
   fi
   echo ""
 
   # --- 2. FILE TYPE DISTRIBUTION ---
-  echo "## 📊 2. File Statistics by Extension"
+  echo "## 2. File Statistics by Extension"
   echo '```text'
   find "${WHITELIST_DIRS[@]}" -type f 2>/dev/null \
     | sed 's/.*\.//' | sort | uniq -c | sort -nr
@@ -118,31 +104,22 @@ echo "🚀 Initiating Full Context Scan for $PROJECT_DOMAIN..."
   echo ""
 
   # --- 3. ARCHITECTURAL TREE ---
-  echo "## 📁 3. Directory Structure (Architecture Tree)"
+  echo "## 3. Directory Structure (Architecture Tree)"
   echo '```text'
   for dir in "${WHITELIST_DIRS[@]}"; do
     if [ -d "$dir" ]; then
-      echo "📂 $dir/"
-      find "$dir" -maxdepth 5 -not -path '*/.*' | while read -r path; do
-        depth=$(temp="${path//[^\/]/}"; echo "${#temp}")
-        indent=$(printf '%*s' $((depth * 2)) "")
-        name=$(basename "$path")
-        if [ -d "$path" ]; then
-          [[ "$path" != "$dir" ]] && echo "${indent}📂 $name/"
-        else
-          echo "${indent}📄 $name"
-        fi
-      done
+      echo "dir: $dir/"
+      find "$dir" -maxdepth 4 -not -path '*/.*' | sed -e 's/[^-][^\/]*\//  |/g' -e 's/|  /   /g'
     fi
   done
   echo '```'
   echo ""
 
   # --- 4. SOURCE CODE & TECHNICAL CONTEXT ---
-  echo "## 📄 4. Critical Code Analysis & Environment"
+  echo "## 4. Critical Code Analysis and Environment"
   for file in "${SCAN_FILES[@]}"; do
     if [ -f "$file" ]; then
-      echo "#### 🔍 Path: \`$file\`"
+      echo "### File: $file"
 
       ext="${file##*.}"
       lang="text"
@@ -155,11 +132,10 @@ echo "🚀 Initiating Full Context Scan for $PROJECT_DOMAIN..."
         sql) lang="sql" ;;
       esac
 
-      [[ "$file" == *"SupabaseSQL.md"* ]] && lang="sql"
-
       echo '```'"$lang"
       if [[ "$file" == *".env"* ]]; then
-        sed 's/=.*/= "********"/' "$file"
+        # Securely mask sensitive data
+        sed 's/=\(.*\)/= "REDACTED"/' "$file"
       elif [ "$file" = "package.json" ] && command -v jq >/dev/null 2>&1; then
         jq '{name, version, scripts, dependencies, devDependencies}' package.json
       else
@@ -171,12 +147,12 @@ echo "🚀 Initiating Full Context Scan for $PROJECT_DOMAIN..."
     fi
   done
 
-  echo "## 📝 Summary"
+  echo "## Summary"
   echo "Architecture scan and context compilation completed successfully."
-  echo "Focus maintained on Privacy, Security, and AI-readiness."
+  echo "Focus: Privacy, Security, and AI-readiness."
   echo ""
-  echo "_Report generated by $PROJECT_DOMAIN Internal Automation._"
+  echo "Report generated by $PROJECT_DOMAIN Internal Automation."
 
 } > "$OUTPUT_FILE"
 
-echo "✅ Full Scan Complete! Report saved to → $OUTPUT_FILE"
+echo "[SUCCESS] Full Scan Complete! Report saved to -> $OUTPUT_FILE"

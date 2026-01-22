@@ -3,20 +3,23 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-22 15:37:14
+  Generated: 2026-01-22 20:02:14
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-22 15:37:14**_
+_Generated on: **2026-01-22 20:02:14**_
+
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
+
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-```text
+
+````text
 ```text
 Route (app)
 ┌ ○ /
@@ -55,8 +58,9 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-```
-```
+````
+
+````
 
 ## 📊 2. File Statistics by Extension
 ```text
@@ -71,9 +75,10 @@ Route (app)
       1 svg
       1 ico
       1 css
-```
+````
 
 ## 📁 3. Directory Structure (Architecture Tree)
+
 ```text
 📂 app/
   📂 (main)/
@@ -249,7 +254,9 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
+
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -342,9 +349,11 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
+
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -478,9 +487,11 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
+
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -600,9 +611,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -695,9 +708,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
+
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -802,25 +817,39 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
+
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-```markdown
+
+````markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-22 09:42:16
+
+Generated at: 2026-01-22 16:04:20
 Branch: main
 
 ## 🔐 1. Environment Check
+
 ✅ Status: .env file exists and verified.
-## 🛠️  2. Auto-Fix Procedure
+
+## 🛠️ 2. Auto-Fix Procedure
+
 ✅ Status: Auto-fix completed or no issues found.
+
 ## 🧹 3. Code Linting (ESLint)
+
 ✅ Status: Linting passed.
+
 ## ⌨️ 4. Type Safety Check
+
 ✅ Status: TypeScript verified.
-## 🏗️  5. Production Build Test
+
+## 🏗️ 5. Production Build Test
+
 ✅ Status: Build successfully optimized.
+
 ### 📊 Route Statistics & Bundle Size
+
 ```text
 Route (app)
 ┌ ○ /
@@ -861,14 +890,18 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-
 ```
+````
 
 ---
+
 ## 🏆 Summary Result
+
 ### ✅ READY FOR DEPLOY
+
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-```
+
+````
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -1015,12 +1048,19 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   .animate-infinite-scroll {
     animation: infinite-scroll 25s linear infinite;
+
+    /* ✅ Performance Optimization: Force GPU Acceleration */
+    /* ช่วยลดภาระ CPU Main Thread โดยเฉพาะบนมือถือ */
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
-```
+````
+
 ---
 
 #### 🔍 Path: `app/layout.tsx`
+
 ```typescript
 /** @format */
 
@@ -1038,7 +1078,7 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 // 🧩 Shared Components
-import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Import Component ใหม่
+import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Delayed Loading Component
 
 /* -------------------------------------------------------------------------- */
 /* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
@@ -1048,16 +1088,18 @@ const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
-  preload: true, // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
+  // ✅ เปลี่ยนเป็น optional เพื่อป้องกัน Layout Shift (CLS) บนมือถือเน็ตช้า
+  display: "optional",
+  preload: true,
 })
 
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
-  display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
-  preload: true, // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
+  // ✅ เปลี่ยนเป็น optional เพื่อให้ Browser ตัดสินใจไม่แสดงผลหากโหลดไม่ทัน (ลด FOUT)
+  display: "optional",
+  preload: true,
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -1075,7 +1117,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "scroll-smooth focus:scroll-auto",
         fontPrompt.variable,
         fontAnuphan.variable,
-        "thai-font-smoothing"
+        "thai-font-smoothing" // Utility class ใน globals.css
       )}
       suppressHydrationWarning
     >
@@ -1093,10 +1135,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           showSpinner={false}
           easing="ease-in-out"
           speed={300}
+          shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
         {/* 💬 Facebook Customer Chat: Trusted Interaction Layer (Delayed Load) */}
-        {/* ✅ แทนที่ Script เดิมด้วย Component ที่โหลดแบบ Lazy */}
+        {/* ✅ โหลดแบบ Lazy เพื่อไม่ให้ Block Main Thread ตอนเริ่มหน้าเว็บ */}
         <FacebookChat />
 
         {/* 🌍 App Content Container */}
@@ -1126,9 +1169,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1272,9 +1317,11 @@ export default function HomePage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
+
 ```typescript
 /** @format */
 
@@ -1282,7 +1329,7 @@ export default function HomePage() {
 
 import React from "react"
 import Image from "next/image"
-import { motion } from "framer-motion" // ✅ เก็บไว้ใช้เฉพาะตอน Fade-in การ์ด (ไม่ใช้กับ Loop)
+import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
 const clients = [
@@ -1329,9 +1376,9 @@ const HomeClientSections = () => {
             Trusted by Forward-Thinking Businesses
           </p>
 
-          {/* ✅ [OPTIMIZED]: ใช้ CSS Animation แทน Framer Motion เพื่อลด CPU Usage บนมือถือ */}
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
+              {/* ✅ [OPTIMIZED]: ทำการ Map วนลูป โดยใช้ Image Sizes ที่เล็กลงสำหรับมือถือเพื่อลด Payload */}
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -1342,8 +1389,10 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 120px, 160px"
-                    loading="lazy"
+                    // ✅ [FIXED]: ปรับ sizes ให้ลดขนาดรูปบนมือถือเหลือเพียง 80-100px ช่วยลด LCP
+                    sizes="(max-width: 480px) 100px, (max-width: 768px) 120px, 160px"
+                    // ✅ [FIXED]: ใส่ priority เฉพาะรูปแรกๆ ที่แสดงผลบนหน้าจอทันทีเพื่อลดค่า LCP
+                    priority={i < 4}
                   />
                 </div>
               ))}
@@ -1402,9 +1451,11 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1600,9 +1651,11 @@ export default async function TemplateDetailPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1712,9 +1765,11 @@ export default async function TemplateCategoryPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1901,9 +1956,11 @@ export default async function TemplateMainPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2177,9 +2234,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2463,9 +2522,11 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2603,9 +2664,11 @@ export default async function CaseStudiesPage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2830,9 +2893,11 @@ export default async function CaseStudyDetailPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
+
 ```typescript
 /** @format */
 
@@ -3033,9 +3098,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
 
@@ -3197,9 +3264,11 @@ export function constructMetadata({
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
+
 ```typescript
 /** @format */
 
@@ -3426,9 +3495,11 @@ export const services: ServiceItem[] = [
   },
 ]
 ```
+
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
+
 ```typescript
 /** @format */
 
@@ -3606,9 +3677,11 @@ export const siteKeywords: string[] = [
   "ที่ปรึกษาด้าน Performance Website",
 ]
 ```
+
 ---
 
 #### 🔍 Path: `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -3659,9 +3732,11 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
+
 ---
 
 #### 🔍 Path: `package.json`
+
 ```json
 {
   "name": "aemdevweb.com",
@@ -3711,11 +3786,14 @@ export const siteKeywords: string[] = [
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
     "@next/bundle-analyzer": "^16.1.3",
+    "@next/eslint-plugin-next": "^16.1.4",
     "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
     "autoprefixer": "^10.4.23",
     "eslint": "^9.18.0",
     "eslint-config-next": "16.1.3",
@@ -3729,9 +3807,11 @@ export const siteKeywords: string[] = [
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `types/index.ts`
+
 ```typescript
 /** @format */
 
@@ -3961,9 +4041,11 @@ export interface TestimonialItem {
   image?: string
 }
 ```
+
 ---
 
 #### 🔍 Path: `next.config.mjs`
+
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
@@ -4011,9 +4093,11 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
+
 ---
 
 #### 🔍 Path: `components.json`
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -4038,9 +4122,11 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/blog.ts`
+
 ```typescript
 /** @format */
 
@@ -4121,9 +4207,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/template.ts`
+
 ```typescript
 /** @format */
 
@@ -4294,9 +4382,11 @@ export async function getTemplatesByServiceCategory(
   })
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
+
 ```typescript
 /** @format */
 
@@ -4434,14 +4524,19 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
+
 ---
 
 #### 🔍 Path: `.env`
+
 ```text
+
 ```
+
 ---
 
 ## 📝 Summary
+
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

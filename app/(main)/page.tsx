@@ -9,7 +9,7 @@ import { services } from "@/constants/services-data"
 import { JsonLd } from "@/components/seo/JsonLd"
 import Hero from "@/components/landing/Hero"
 
-// Dynamic Components Optimization
+// Dynamic Components Optimization: Prioritizing LCP and TTI
 const HomeClientSections = dynamic(
   () => import("@/components/landing/HomeClientSections"),
   {
@@ -19,6 +19,7 @@ const HomeClientSections = dynamic(
     ),
   }
 )
+
 const ValueProp = dynamic(() => import("@/components/landing/ValueProp"))
 const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
 const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
@@ -33,7 +34,7 @@ export const metadata: Metadata = constructMetadata({
 })
 
 export default function HomePage() {
-  // กรองเฉพาะบริการที่ต้องการโชว์หน้าแรก
+  // Filter featured services for landing page display
   const featuredServices = services.filter((s) =>
     ["sme-speed-launch", "corporate-trust", "industrial-catalog"].includes(s.id)
   )
@@ -52,28 +53,29 @@ export default function HomePage() {
 
       <Hero />
 
-      {/* Social Proof & Stats */}
+      {/* Social Proof and Performance Statistics */}
       <Suspense
         fallback={<div className="h-96 w-full animate-pulse bg-slate-50" />}
       >
         <HomeClientSections />
       </Suspense>
 
-      {/* Value Proposition */}
+      {/* Brand Value Propositions */}
       <section className="relative overflow-hidden py-24 lg:py-32">
         <ValueProp />
       </section>
 
-      {/* Services Grid */}
+      {/* Professional Service Grid */}
       <section className="relative bg-slate-50/80 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 space-y-4 text-center lg:text-left">
             <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
-              บริการ <span className="text-emerald-500">ที่ผมเตรียมไว้ให้</span>
+              โซลูชัน{" "}
+              <span className="text-emerald-500">ที่ออกแบบมาเพื่อธุรกิจ</span>
             </h2>
             <p className="font-anuphan max-w-2xl text-lg leading-relaxed font-bold text-slate-500">
-              โซลูชันเว็บไซต์ที่ออกแบบมาเพื่อ SME และโรงงานอุตสาหกรรมโดยเฉพาะ
-              เน้นความเร็ว ความปลอดภัย และการปิดการขาย
+              ยกระดับรากฐานดิจิทัลสำหรับ SME และโรงงานอุตสาหกรรมโดยเฉพาะ
+              เน้นความเสถียร ความปลอดภัย และประสิทธิภาพการปิดการขาย
             </p>
           </div>
 
@@ -82,7 +84,7 @@ export default function HomePage() {
               <ServiceCard
                 key={service.id}
                 title={service.title}
-                price={service.priceValue} // ส่งเป็นตัวเลขตาม Interface
+                price={service.priceValue}
                 slug={service.slug}
                 features={service.features}
                 isPopular={service.highlight}
@@ -93,46 +95,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Workflow */}
+      {/* Implementation Workflow */}
       <WorkProcess />
 
-      {/* Blog/Insights */}
+      {/* Insights and Strategic Content */}
       <section className="relative py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
-                เทคนิค{" "}
-                <span className="text-emerald-500">จากประสบการณ์จริง</span>
+                กลยุทธ์{" "}
+                <span className="text-emerald-500">จากประสบการณ์ตรง</span>
               </h2>
               <p className="font-anuphan mt-4 text-lg font-bold text-slate-500">
-                อัปเดตกลยุทธ์ทำเว็บและ SEO ยุค 2026
+                อัปเดตเทคนิคการทำเว็บไซต์และ Technical SEO มาตรฐานปี 2026
               </p>
             </div>
             <button className="text-sm font-bold text-emerald-600 hover:underline">
-              ดูบทความทั้งหมด →
+              ดูบทความทั้งหมด
             </button>
           </div>
 
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-            {/* แนะนำให้ Map ข้อมูล Blog จากไฟล์ constants หรือ lib ในอนาคต */}
+            {/* Blog content mapping placeholder */}
             <BlogCard
               slug="seo-for-sme-2026"
-              title="วิธีดันอันดับ Google 2026 สำหรับธุรกิจ SME"
-              excerpt="แค่มีเว็บยังไม่พอ ทำยังไงให้ลูกค้าค้นหาธุรกิจของคุณเจอเป็นเจ้าแรก..."
+              title="วิธีเพิ่มความได้เปรียบทางการแข่งขันด้วย SEO 2026"
+              excerpt="เจาะลึกโครงสร้างเว็บไซต์ที่ช่วยให้ Google ค้นหาธุรกิจของคุณเจอเป็นเจ้าแรกในยุค AI Search..."
               date="2026-01-20"
               thumbnail="/images/blog/placeholder.webp"
             />
-            {/* ... รายการ Blog อื่นๆ */}
           </div>
         </div>
       </section>
 
       <CTASection />
 
+      {/* Industrial Grade Footer Credits */}
       <footer className="py-12 text-center opacity-40">
         <p className="font-prompt text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          © {new Date().getFullYear()} {siteConfig.companyName} — Built with
+          © {new Date().getFullYear()} {siteConfig.companyName} - Built with
           Next.js 16
         </p>
       </footer>

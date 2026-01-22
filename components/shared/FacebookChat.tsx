@@ -40,7 +40,7 @@ export function FacebookChat() {
     <>
       <div id="fb-root" />
       <div id="fb-customer-chat" className="fb-customerchat" />
-      
+
       {/* Script จะเริ่มโหลดเมื่อ isLoaded = true เท่านั้น */}
       <Script
         id="facebook-chat"

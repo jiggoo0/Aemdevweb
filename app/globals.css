@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* 🏢 Brand Identity & Core Colors (Shadcn v4 compatible) */
+  /* Brand Identity & Core Colors (Shadcn v4 compatible) */
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(222.2 84% 4.9%);
 
@@ -15,31 +15,31 @@
   --color-accent: hsl(210 40% 96.1%);
   --color-accent-foreground: hsl(222.2 47.4% 11.2%);
 
-  /* 🟢 Specialist Emerald Logic (Brand DNA) */
+  /* Specialist Emerald Logic (Brand DNA) */
   --color-success: hsl(158 64% 52%);
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
 
-  /* 🌑 Accessibility Safe Colors (แก้ปัญหา Contrast บน Mobile) */
-  --color-slate-muted: #64748b; /* ✅ เทียบเท่า Slate-500 เพื่อผ่านเกณฑ์ AA/AAA */
+  /* Accessibility Safe Colors: Optimized for mobile contrast */
+  --color-slate-muted: #64748b; /* Equivalent to Slate-500 for AA/AAA compliance */
 
   --color-destructive: hsl(0 84.2% 60.2%);
 
-  /* 🎨 UI Elements & Variables */
+  /* UI Elements & Variables */
   --color-border: hsl(214.3 31.8% 91.4%);
   --color-input: hsl(214.3 31.8% 91.4%);
   --color-ring: hsl(222.2 84% 4.9%);
 
-  /* 📐 Industrial Geometry */
+  /* Industrial Geometry */
   --radius-lg: 0.75rem;
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
 
-  /* 🖋️ Typography Bridge */
+  /* Typography Bridge */
   --font-prompt: var(--font-prompt);
   --font-anuphan: var(--font-anuphan);
 
-  /* 🎞️ Industrial Micro-Interactions */
+  /* Industrial Micro-Interactions */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -62,12 +62,12 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: ความเสถียรและมาตรฐานพื้นฐาน                                    */
+/* Base Layer: Stability and Framework Standards                              */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    /* ✅ [FIXED]: ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 */
+    /* Direct CSS Variable usage to prevent Build Errors in Tailwind v4 */
     border-color: var(--color-border);
     outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
@@ -98,11 +98,11 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer: เครื่องมือปรับจูน Performance & Accessibility             */
+/* Utilities Layer: Performance & Accessibility Tuning                        */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
-  /* ✅ [FIX]: ยูทิลิตี้สำหรับข้อความที่ต้องการ Contrast สูงเพื่อผ่านเกณฑ์ Lighthouse */
+  /* High contrast utility for Lighthouse compliance */
   .text-muted-safe {
     color: var(--color-slate-muted);
   }
@@ -111,24 +111,24 @@
     text-wrap: balance;
   }
 
-  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) */
+  /* Prevent Thai Flash of Unstyled Text (FOUT) */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* มิติความลึกสไตล์ Industrial */
+  /* Industrial depth shadow */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 
-  /* กราเดียนต์แบรนด์ */
+  /* Brand gradient */
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }
 
-  /* ✅ [NEW]: Infinite Scroll Animation (CPU Optimized) */
+  /* Infinite Scroll Animation (CPU Optimized) */
   @keyframes infinite-scroll {
     from {
       transform: translateX(0);
@@ -140,9 +140,8 @@
 
   .animate-infinite-scroll {
     animation: infinite-scroll 25s linear infinite;
-    
-    /* ✅ Performance Optimization: Force GPU Acceleration */
-    /* ช่วยลดภาระ CPU Main Thread โดยเฉพาะบนมือถือ */
+
+    /* Performance Optimization: Force GPU Acceleration to reduce Main Thread load */
     will-change: transform;
     transform: translateZ(0);
   }

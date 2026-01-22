@@ -8,22 +8,21 @@ import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Zap, ArrowRight } from "lucide-react"
 
-// 📂 Logic & Config Architecture
 import { mainNav } from "@/constants/navigation"
 import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 
 /**
- * 🏗️ Navbar Specialist Edition (v2026)
- * มาพร้อมระบบ Glassmorphism และ Active Link Detection ระดับพรีเมียม
- * ออกแบบมาเพื่อสร้าง Perceived Performance และความน่าเชื่อถือให้แบรนด์
+ * Navbar Infrastructure - Specialist Edition (v2026)
+ * Implements Glassmorphism and Active Link Detection System.
+ * Optimized for Perceived Performance and Brand Authority.
  */
 const Navbar = () => {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // 🛡️ [FIXED]: ป้องกัน Hydration Error (ป้องกันความต่างของ HTML ระหว่าง Server และ Client)
+  // Hydration Safety: Prevents DOM mismatch between Server and Client rendering
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -35,12 +34,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // 🔒 ระบบ Auto-close เมื่อมีการนำทาง (Navigation)
+  // Navigation Guard: Automatically closes mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
-  // ถ้ายังไม่ Mount ให้เรนเดอร์ Navbar เปล่าเพื่อรักษา Layout นิ่งๆ ไว้ (กัน Layout Shift)
+  // Prevent Layout Shift during hydration
   if (!isMounted) return <div className="h-20 w-full bg-transparent" />
 
   return (
@@ -53,7 +52,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* 🏷️ Identity Hub: แบรนด์ AEMDEVWEB */}
+        {/* Brand Identity: AEMDEVWEB Logo and Logic */}
         <Link
           href="/"
           className="group font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
@@ -70,7 +69,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* 🧭 Desktop Menu: High-Scanning Layout */}
+        {/* Primary Navigation: Desktop High-Scanning Layout */}
         <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
@@ -87,7 +86,7 @@ const Navbar = () => {
               >
                 {item.name}
 
-                {/* 🚀 Active Indicator (Glow Effect) */}
+                {/* Visual State: Active Link Indicator with Glow Effect */}
                 {isActive && (
                   <motion.div
                     layoutId="nav-glow"
@@ -96,7 +95,7 @@ const Navbar = () => {
                   />
                 )}
 
-                {/* Feature Badges */}
+                {/* Contextual Feature Badges */}
                 {item.badge && (
                   <span className="absolute -top-3 -right-8 flex h-4 items-center rounded-full bg-emerald-500 px-2 text-[7px] font-black tracking-[0.1em] text-white uppercase shadow-lg">
                     {item.badge}
@@ -106,26 +105,27 @@ const Navbar = () => {
             )
           })}
 
-          {/* 🚀 Conversion Hook: Start Project */}
+          {/* Conversion Focus: Strategic Consultation CTA */}
           <Link
             href="/contact"
             className="group font-prompt flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
           >
-            คุยโปรเจกต์
+            ปรึกษาโปรเจกต์
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
 
-        {/* 📱 Mobile Menu Trigger */}
+        {/* Mobile Interaction Trigger */}
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle Menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* 🌑 Mobile Navigation Overlay (Framer Motion Optimized) */}
+      {/* Mobile Navigation Interface (Framer Motion Optimized) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
