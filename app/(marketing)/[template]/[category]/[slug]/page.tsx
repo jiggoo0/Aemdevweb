@@ -4,9 +4,13 @@ import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
-// 📦 Specialist Data Logic
+// 🛠️ Icons & UI Essentials
+import { ShieldCheck, Bell } from "lucide-react"
+
+// 📦 Specialist Logic & Data Hub
 import { getAllTemplates, getTemplateBySlug } from "@/lib/template"
 import { useMDXComponents } from "@/mdx-components"
+import { siteConfig } from "@/constants/site-config"
 
 // 🚀 Sales Engine Components
 import WorkProcess from "@/components/sales-engine/WorkProcess"
@@ -20,10 +24,13 @@ import { DevicePreview } from "@/components/template/shared/DevicePreview"
 import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
 import LineStickyButton from "@/components/shared/LineStickyButton"
 import { JsonLd } from "@/components/seo/JsonLd"
-import { siteConfig } from "@/constants/site-config"
+
+interface TemplatePageProps {
+  params: Promise<{ category: string; slug: string }>
+}
 
 /**
- * 🛠️ 1. generateStaticParams — "สร้างหน้าล่วงหน้าเพื่อความไวระดับ Specialist"
+ * 🛠️ 1. Static Generation
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
@@ -35,52 +42,62 @@ export async function generateStaticParams() {
 }
 
 /**
- * 🚀 2. Main Detail Page Component (v2026)
+ * 🔍 2. Metadata Strategy
+ */
+export async function generateMetadata({ params }: TemplatePageProps) {
+  const { slug } = await params
+  const data = await getTemplateBySlug(slug)
+  if (!data) return { title: "Template Not Found" }
+
+  return {
+    title: `${data.name} | Premium Web Architecture by ${siteConfig.expert}`,
+    description: data.description,
+    alternates: {
+      canonical: `${siteConfig.url}/templates/${data.category.toLowerCase()}/${slug}`,
+    },
+  }
+}
+
+/**
+ * 🚀 3. Main Detail Page Component
  */
 export default async function TemplateDetailPage({
   params,
-}: {
-  params: Promise<{ category: string; slug: string }>
-}) {
-  // ✅ Next.js 16 มาตรฐาน Specialist ต้อง await params
+}: TemplatePageProps) {
   const { category, slug } = await params
   const data = await getTemplateBySlug(slug)
 
-  // 🛡️ Guard Clause: ตรวจสอบความถูกต้องของ URL และหมวดหมู่
   if (!data || data.category.toLowerCase() !== category.toLowerCase()) {
     notFound()
   }
 
-  /**
-   * 🧪 mdxComponents Registration
-   * ลงทะเบียนคอมโพเนนต์เพื่อให้คุณแทรกตัวเลขสถิติหรือขั้นตอนการทำงาน
-   * ลงในเนื้อหา MDX ได้โดยตรงครับ
-   */
   const mdxComponents = {
     ...useMDXComponents({}),
     TemplatePricingCard,
     WorkProcess,
     ImpactStats,
     SpeedDemon,
-    // Specialist Sales Hook: กล่องเน้นย้ำความคุ้มค่า
+    ShieldCheck,
+    Bell,
     SalesHook: ({ children }: { children: React.ReactNode }) => (
-      <div className="my-10 rounded-[2rem] border border-emerald-500/20 bg-emerald-500/5 p-8 shadow-xl backdrop-blur-sm">
-        <div className="mb-4 flex items-center gap-2">
-          <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-          <span className="text-[10px] font-black tracking-[0.2em] text-emerald-500 uppercase">
-            Specialist Recommendation
-          </span>
-        </div>
-        <div className="font-anuphan leading-relaxed text-slate-300">
-          {children}
+      <div className="group relative my-12 overflow-hidden rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/[0.03] p-8 transition-all hover:bg-emerald-500/[0.05] md:p-12">
+        <div className="relative z-10 space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-500 uppercase italic">
+              Specialist Strategy
+            </span>
+          </div>
+          <div className="font-anuphan text-lg leading-relaxed font-medium text-slate-300 md:text-xl">
+            {children}
+          </div>
         </div>
       </div>
     ),
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ถึงรายละเอียดสินค้าชิ้นนี้ (Product Schema) */}
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Product"
         data={{
@@ -91,49 +108,43 @@ export default async function TemplateDetailPage({
             "@type": "Offer",
             price: data.salePrice || data.price,
             priceCurrency: "THB",
-            availability: "https://schema.org/InStock",
-          },
-          brand: {
-            "@type": "Brand",
-            name: siteConfig.shortName,
           },
         }}
       />
 
+      {/* 🌌 Background Layer */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+
       <TemplateNavbar />
 
       <main className="relative z-10 flex-1">
-        {/* 🎭 Hero Section: เปิดตัวอย่างยิ่งใหญ่สไตล์พรีเมียม */}
         <TemplateHero
-          title={data.name}
+          title={data.name.toUpperCase()}
           subtitle={data.description}
           image={data.image}
           category={data.category}
           themeColor={data.themeColor || "emerald"}
         />
 
-        <div className="container mx-auto px-4 py-24">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-            {/* ✍️ Content Area: ส่วนเนื้อหารีวิวและรายละเอียด */}
-            <article className="lg:col-span-8">
-              <div className="prose prose-invert prose-emerald font-anuphan prose-headings:font-prompt prose-p:text-slate-400 mb-32 max-w-none leading-relaxed">
+        {/* 🛠️ [LAYOUT FIXED]: จำกัดความกว้างสูงสุดและจัดการ Grid ให้สมดุล */}
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+            {/* 📝 Content Area (8/12) */}
+            <article className="space-y-20 overflow-hidden lg:col-span-8">
+              <div className="prose prose-invert prose-emerald prose-headings:font-prompt prose-p:font-anuphan prose-p:text-lg prose-p:leading-relaxed prose-li:font-anuphan prose-li:text-lg max-w-full">
                 <MDXRemote source={data.content} components={mdxComponents} />
               </div>
 
-              {/* 📱 Interactive Device Preview: แสดงผลงานจริงในกรอบอุปกรณ์ */}
-              <section id="preview" className="scroll-mt-32">
-                <div className="mb-10 border-l-4 border-emerald-500 pl-6">
-                  <h3 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic">
-                    Live Experience
+              {/* Live Preview Interface */}
+              <section id="preview" className="scroll-mt-32 space-y-10">
+                <div className="border-l-[6px] border-emerald-500 pl-6">
+                  <h3 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
+                    Live Preview
                   </h3>
-                  <p className="font-anuphan mt-2 text-slate-500">
-                    สัมผัสประสบการณ์ความไวและ UI
-                    ที่ออกแบบมาเพื่อการปิดการขายจริง
-                  </p>
                 </div>
                 <Suspense
                   fallback={
-                    <div className="h-[600px] w-full animate-pulse rounded-[3rem] bg-white/5" />
+                    <div className="h-[500px] w-full animate-pulse rounded-[2.5rem] bg-white/5" />
                   }
                 >
                   <DevicePreview desktopSrc={data.image} title={data.name} />
@@ -141,24 +152,29 @@ export default async function TemplateDetailPage({
               </section>
             </article>
 
-            {/* 🛒 Sales Sidebar: กล่องราคาที่เลื่อนตามหน้าจอ (Sticky) */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-28 space-y-8">
-                <TemplatePricingCard
-                  title={data.name}
-                  price={data.price}
-                  salePrice={data.salePrice}
-                  features={data.features || []}
-                  themeColor={data.themeColor}
-                />
+            {/* 💰 Sidebar (4/12) - ปรับ Sticky Behavior ให้ไม่ยืดล้น */}
+            <aside className="h-fit space-y-8 lg:sticky lg:top-28 lg:col-span-4">
+              <TemplatePricingCard
+                title={data.name}
+                price={data.price}
+                salePrice={data.salePrice}
+                features={data.features || []}
+                themeColor={data.themeColor}
+              />
 
-                {/* Specialist Trust Note */}
-                <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 text-center">
-                  <p className="font-anuphan text-xs font-bold text-slate-500">
-                    *เทมเพลตนี้ได้รับการปรับจูน Technical SEO <br />
-                    โดย นายเอ็มซ่ามากส์ เรียบร้อยแล้ว 100%
-                  </p>
+              {/* Trust Infrastructure Card */}
+              <div className="rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-8 text-center backdrop-blur-md">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
+                    <ShieldCheck size={20} />
+                  </div>
                 </div>
+                <p className="font-anuphan text-sm leading-relaxed font-bold text-slate-400 italic">
+                  สถาปัตยกรรมนี้ผ่านการ Audit โดย{" "}
+                  <span className="text-white">{siteConfig.expert}</span>
+                  <br />
+                  Performance Specialist Standard
+                </p>
               </div>
             </aside>
           </div>
@@ -167,10 +183,9 @@ export default async function TemplateDetailPage({
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-500 uppercase">
-          AEMDEVWEB Template Engine v2026 — Designed for Conversion
+      <footer className="mt-24 border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          Managed by {siteConfig.expert} v2026 — Expert Authority
         </p>
       </footer>
     </div>

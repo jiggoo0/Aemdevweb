@@ -12,9 +12,10 @@
     "rating": 5.0
   },
   "tech": {
-    "framework": "สถาปัตยกรรมความเร็วสูง (App Router)",
+    "framework": "Next.js 16 (App Router)",
     "speedScore": 98,
-    "seoReady": true
+    "seoReady": true,
+    "architecture": "Server-Side Infrastructure"
   },
   "features": [
     "ระบบจัดการสต็อกสินค้าอัจฉริยะ (Full Inventory)",

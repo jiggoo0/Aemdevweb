@@ -6,7 +6,13 @@ import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowUpRight, ShieldCheck, Zap, ImageOff } from "lucide-react"
+import {
+  ArrowUpRight,
+  ShieldCheck,
+  Zap,
+  ImageOff,
+  BarChart3,
+} from "lucide-react"
 
 interface CaseStudyCardProps {
   title: string
@@ -14,14 +20,14 @@ interface CaseStudyCardProps {
   image?: string
   slug: string
   industry: string
-  result?: string
+  result?: string // เช่น "Performance 100", "LCP 1.2s"
   index?: number
 }
 
 /**
- * 🏗️ CaseStudyCard — "หน้าด่านโชว์ผลงานความสำเร็จ"
- * ผมออกแบบมาให้ดูพรีเมียม เพื่อให้ลูกค้า SME และโรงงานเห็นภาพว่า
- * งานที่ผมทำให้จะช่วยยกระดับธุรกิจของเขาได้จริงครับ
+ * 🏗️ CaseStudyCard — "High-Performance Showcase"
+ * เน้นการโชว์ผลงานพร้อมตัวเลขความสำเร็จ เพื่อดึงดูดลูกค้าที่ต้องการคุณภาพระดับพรีเมียม
+ * รองรับการทำงานร่วมกับ Next.js Image และ Framer Motion
  */
 const CaseStudyCard = ({
   title,
@@ -29,10 +35,10 @@ const CaseStudyCard = ({
   image,
   slug,
   industry,
-  result = "เน้นความไวระดับพรีเมียม",
+  result = "Performance 100",
   index = 0,
 }: CaseStudyCardProps) => {
-  // 🛡️ [FIXED]: Image Safety Check — ป้องกันแอป Crash เมื่อรูปภาพมีปัญหา
+  // 🛡️ Image Safety Check
   const imageSrc =
     image && image.trim() !== "" ? image : "/images/showcase/placeholder.webp"
 
@@ -42,73 +48,84 @@ const CaseStudyCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="group relative h-[480px] overflow-hidden rounded-[3rem] bg-slate-950 shadow-2xl transition-all duration-500 hover:-translate-y-3 hover:shadow-emerald-500/10"
+      className="group relative h-[520px] overflow-hidden rounded-[2.5rem] bg-slate-950 shadow-2xl transition-all duration-500 hover:-translate-y-3"
     >
-      {/* 🖼️ ส่วนแสดงภาพพื้นหลัง (Background Image Layer) */}
+      {/* 🖼️ Background Layer with Overlay */}
       <div className="absolute inset-0 z-0">
         {imageSrc ? (
           <Image
             src={imageSrc}
-            alt={title || "ผลงานโดย นายเอ็มซ่ามากส์"}
+            alt={title}
             fill
-            className="object-cover opacity-60 transition-all duration-700 group-hover:scale-110 group-hover:opacity-30"
+            className="object-cover opacity-50 grayscale-[50%] transition-all duration-700 group-hover:scale-110 group-hover:opacity-30 group-hover:grayscale-0"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={index < 3}
+            priority={index < 2}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-slate-900">
             <ImageOff className="text-slate-700" size={48} />
           </div>
         )}
-        {/* Cinematic Gradient: ช่วยให้ตัวหนังสืออ่านง่ายขึ้น */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent" />
+        {/* Cinematic Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 to-transparent" />
       </div>
 
-      {/* 🏷️ ส่วนป้ายบอกสถานะ (Status Badges) */}
-      <div className="absolute top-8 left-8 z-20 flex flex-wrap gap-3">
-        <div className="flex items-center gap-2 rounded-full border border-white/5 bg-white/10 px-4 py-2 shadow-xl ring-1 ring-white/20 backdrop-blur-md">
-          <ShieldCheck size={14} className="text-emerald-400" />
-          <span className="font-prompt text-[10px] font-black tracking-widest text-white uppercase">
+      {/* 🏷️ Top Badges (Industry & Result) */}
+      <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
+        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md">
+          <ShieldCheck size={12} className="text-emerald-400" />
+          <span className="text-[10px] font-bold tracking-widest text-white uppercase">
             {industry}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 rounded-full border border-emerald-500/10 bg-emerald-500/20 px-4 py-2 shadow-xl ring-1 ring-emerald-500/30 backdrop-blur-md">
-          <Zap size={14} className="fill-emerald-400 text-emerald-400" />
-          <span className="font-prompt text-[10px] font-black tracking-widest text-emerald-400 uppercase">
+        <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1.5 ring-1 ring-emerald-500/30 backdrop-blur-md">
+          <BarChart3 size={12} className="text-emerald-400" />
+          <span className="text-[10px] font-bold tracking-widest text-emerald-400 uppercase">
             {result}
           </span>
         </div>
       </div>
 
-      {/* 📝 พื้นที่เนื้อหาหลัก (Content Area) */}
-      <div className="absolute inset-x-0 bottom-0 z-20 p-8 md:p-10 lg:p-12">
-        <div className="flex flex-col gap-5">
-          <h3 className="font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors duration-500 group-hover:text-emerald-400 md:text-4xl">
-            {title}
-          </h3>
-          <p className="font-anuphan line-clamp-2 text-[15px] leading-relaxed font-bold text-slate-300 transition-colors group-hover:text-white">
-            {description}
-          </p>
+      {/* 📝 Content Area */}
+      <div className="absolute inset-x-0 bottom-0 z-20 p-8 md:p-10">
+        <div className="flex flex-col gap-4">
+          <div className="space-y-2">
+            <h3 className="text-3xl font-black tracking-tighter text-white uppercase italic transition-colors duration-500 group-hover:text-emerald-400 md:text-4xl">
+              {title}
+            </h3>
+            <p className="line-clamp-2 text-sm leading-relaxed text-slate-400 transition-colors group-hover:text-slate-200">
+              {description}
+            </p>
+          </div>
 
-          <div className="mt-4 border-t border-white/10 pt-8">
+          <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-6">
             <Link
               href={`/case-studies/${slug}`}
-              className="font-prompt group/btn inline-flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-white uppercase transition-all duration-300 hover:gap-5 hover:text-emerald-400"
+              className="group/link inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all hover:text-emerald-400"
             >
-              ดูเบื้องหลังความสำเร็จ
+              Case Study
               <ArrowUpRight
-                size={18}
-                className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+                size={16}
+                className="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
               />
             </Link>
+
+            {/* Micro Interaction: Speed Indicator */}
+            <div className="flex items-center gap-1 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+              <Zap size={14} className="fill-emerald-500 text-emerald-500" />
+              <span className="text-[10px] font-black tracking-tighter text-emerald-500 uppercase">
+                Fast Launch
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 🌑 แสงฟุ้งมรกต (Interaction Glow) */}
+      {/* 🌑 Emerald Glow Effect on Hover */}
       <div
-        className="absolute -inset-1 z-10 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
+        className="absolute -inset-1 z-10 bg-gradient-to-tr from-emerald-500/10 to-blue-500/5 opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100"
         aria-hidden="true"
       />
     </motion.div>

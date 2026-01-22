@@ -41,11 +41,11 @@ export interface SiteConfig {
   url: string
   ogImage: string
   email: string
-  
+
   // 🛠️ Updated Keywords Structure: รองรับการทำ Metadata แบบเจาะจง
   keywords: {
-    list: string[]      // สำหรับ Metadata Array
-    all: string         // สำหรับ Legacy String
+    list: string[] // สำหรับ Metadata Array
+    all: string // สำหรับ Legacy String
     core: string[]
     tech: string[]
     brand: string[]
@@ -59,8 +59,9 @@ export interface SiteConfig {
     github?: string
     messenger?: string
   }
-  
-  contact: {            // ✅ Semantic Contact สำหรับ SEO และเครื่องมือติดต่อ
+
+  contact: {
+    // ✅ Semantic Contact สำหรับ SEO และเครื่องมือติดต่อ
     email: string
     lineId: string
     facebook?: string
@@ -74,7 +75,8 @@ export interface SiteConfig {
     pricing: string
   }
 
-  standards: {          // ✅ Technical Standards ประจำปี 2026
+  standards: {
+    // ✅ Technical Standards ประจำปี 2026
     performance: number
     lcp: number
     security: string

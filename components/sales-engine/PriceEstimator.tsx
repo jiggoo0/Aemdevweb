@@ -3,54 +3,52 @@
 "use client"
 
 import React, { useState, useMemo } from "react"
-import { CheckCircle2, Plus, MessageCircle, Zap } from "lucide-react"
+import {
+  CheckCircle2,
+  MessageCircle,
+  Zap,
+  Calculator,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
+import { services } from "@/constants/services-data"
 
-// 📊 ข้อมูลสำหรับการประเมิน (เน้นภาษาที่คนทำธุรกิจเข้าใจง่าย)
-const BASE_PACKAGES = [
-  {
-    id: "starter",
-    name: "เว็บหน้าเดียว (One-Page)",
-    price: 5900,
-    description: "เน้นแนะนำตัว หรือปิดการขายสินค้าเดียว",
-  },
-  {
-    id: "sme",
-    name: "เว็บ SME / ร้านค้า",
-    price: 12900,
-    description: "มาตรฐานธุรกิจ เพิ่มยอดขายด้วยความเร็ว",
-  },
-  {
-    id: "corporate",
-    name: "เว็บบริษัท / หจก.",
-    price: 29000,
-    description: "เน้นความน่าเชื่อถือและภาพลักษณ์องค์กร",
-  },
-  {
-    id: "industrial",
-    name: "เว็บโรงงาน / อุตสาหกรรม",
-    price: 55000,
-    description: "ระบบรองรับข้อมูลหนักและเสถียรสูงสุด",
-  },
-]
+// 📊 [LOGIC]: กรองแพ็กเกจหลักจากฐานข้อมูล Services
+const BASE_PACKAGES = services
+  .filter((s) =>
+    ["Starter", "SME", "Corporate", "Industrial"].includes(s.category)
+  )
+  .map((s) => ({
+    id: s.id,
+    name: s.title.split(":")[0], // ตัดชื่อสั้นๆ ก่อนเครื่องหมาย :
+    price: s.priceValue,
+    description: s.description,
+  }))
 
+// ➕ [LOGIC]: ส่วนเสริมสำหรับการทำ Upselling
 const ADD_ONS = [
-  { id: "seo", name: "ชุดปรับจูน SEO ดันอันดับ Google", price: 4900 },
-  { id: "lang", name: "ระบบรองรับ 2 ภาษา (ไทย-อังกฤษ)", price: 5000 },
-  { id: "blog", name: "ระบบบทความ / แชร์เทคนิคการตลาด", price: 4500 },
+  {
+    id: "seo-audit",
+    name: "Technical SEO Audit (ปรับโครงสร้างเว็บเดิม)",
+    price: 4900,
+  },
+  { id: "multi-lang", name: "ระบบ 2 ภาษา (ไทย-อังกฤษ)", price: 7500 },
+  {
+    id: "blog-system",
+    name: "ระบบบทความ MDX (เพิ่มความน่าเชื่อถือ)",
+    price: 5000,
+  },
+  { id: "maintenance", name: "บริการดูแลระบบ & Security 1 ปี", price: 8900 },
 ]
 
 /**
- * 🏗️ PriceEstimator — ระบบประเมินงบประมาณเบื้องต้น
- * ผมสร้างเครื่องมือนี้มาเพื่อให้คุณวางแผนงบประมาณได้ง่ายๆ
- * โปร่งใส ไม่ต้องรอสอบถามราคาให้เสียเวลาครับ
+ * 🏗️ PriceEstimator — ระบบประเมินงบประมาณอัจฉริยะ (AEM 2026 Edition)
+ * [FIXED]: ลบ Unused Variable 'Plus' ออกเพื่อให้ผ่านการ Linting
  */
 const PriceEstimator = () => {
-  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[1]) // ค่าเริ่มต้นเป็น SME
+  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[1]) // Default: SME
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
 
-  // 🧬 คำนวณราคารวมแบบ Real-time
   const totalPrice = useMemo(() => {
     const addOnsTotal = ADD_ONS.filter((a) =>
       selectedAddOns.includes(a.id)
@@ -64,17 +62,47 @@ const PriceEstimator = () => {
     )
   }
 
+  // 🛠️ [STRATEGY]: สร้าง Dynamic Message สำหรับปิดการขายผ่าน LINE
+  const generateLineMessage = () => {
+    const addonNames = selectedAddOns
+      .map((id) => ADD_ONS.find((a) => a.id === id)?.name)
+      .join(", ")
+    
+    const text = `สวัสดีครับคุณเอ็ม ผมสนใจทำเว็บไซต์แบบประเมินราคาเองครับ\n\n📌 แพ็กเกจหลัก: ${selectedBase.name}\n➕ ส่วนเสริม: ${addonNames || "ไม่มี"}\n💰 งบประมาณประเมิน: ฿${totalPrice.toLocaleString()}\n\nช่วยให้คำปรึกษาเพิ่มเติมหน่อยครับ`
+    
+    return `${siteConfig.links.line}?text=${encodeURIComponent(text)}`
+  }
+
   return (
-    <section className="bg-white py-12">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-5xl">
-          <div className="grid gap-12 lg:grid-cols-5">
-            {/* 1️⃣ ส่วนเลือกบริการ (Selection Area) */}
-            <div className="space-y-10 lg:col-span-3">
-              {/* เลือกแพ็กเกจหลัก */}
-              <div className="space-y-4">
-                <h3 className="font-prompt text-xs font-black tracking-widest text-slate-400 uppercase">
-                  1. เลือกรูปแบบเว็บไซต์ที่เหมาะกับคุณ
+    <section className="bg-slate-50 py-24 selection:bg-emerald-500/10">
+      <div className="container mx-auto px-6">
+        <div className="mx-auto max-w-6xl">
+          
+          {/* Header Specialist Branding */}
+          <div className="mb-16 text-center">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-[10px] font-black tracking-widest text-emerald-700 uppercase">
+              <Calculator size={14} /> Price Estimator Specialist
+            </div>
+            <h2 className="font-prompt mb-4 text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
+              ประเมินงบประมาณโปรเจกต์
+            </h2>
+            <p className="font-anuphan text-lg font-bold text-slate-500">
+              โปร่งใส ชัดเจน เลือกฟีเจอร์ที่ต้องการเพื่อรับราคาประเมินเบื้องต้นได้ทันที
+            </p>
+          </div>
+
+          <div className="grid gap-12 lg:grid-cols-12 items-start">
+            
+            {/* 1️⃣ Selection Architecture */}
+            <div className="space-y-12 lg:col-span-7">
+              
+              {/* Step 1: Base Selection */}
+              <div className="space-y-6">
+                <h3 className="font-prompt flex items-center gap-4 text-xl font-black text-slate-900 uppercase italic">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-sm font-black text-white italic">
+                    01
+                  </span>
+                  เลือกรูปแบบเว็บไซต์พื้นฐาน
                 </h3>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {BASE_PACKAGES.map((pkg) => (
@@ -82,16 +110,19 @@ const PriceEstimator = () => {
                       key={pkg.id}
                       onClick={() => setSelectedBase(pkg)}
                       className={cn(
-                        "flex flex-col items-start rounded-2xl border-2 p-5 text-left transition-all active:scale-95",
+                        "group relative flex flex-col items-start rounded-[2rem] border-2 p-8 text-left transition-all duration-300",
                         selectedBase.id === pkg.id
-                          ? "border-emerald-500 bg-emerald-50/30"
-                          : "border-slate-100 hover:border-slate-200"
+                          ? "border-emerald-500 bg-white shadow-2xl shadow-emerald-500/10"
+                          : "border-transparent bg-white/50 hover:border-slate-200"
                       )}
                     >
-                      <div className="font-prompt mb-1 font-black text-slate-900 uppercase italic">
+                      <div className={cn(
+                        "font-prompt mb-2 text-lg font-black uppercase italic transition-colors",
+                        selectedBase.id === pkg.id ? "text-emerald-600" : "text-slate-900"
+                      )}>
                         {pkg.name}
                       </div>
-                      <div className="font-anuphan text-xs text-slate-500">
+                      <div className="font-anuphan text-xs font-bold leading-relaxed text-slate-400">
                         {pkg.description}
                       </div>
                     </button>
@@ -99,34 +130,38 @@ const PriceEstimator = () => {
                 </div>
               </div>
 
-              {/* เลือกบริการเสริม */}
-              <div className="space-y-4">
-                <h3 className="font-prompt text-xs font-black tracking-widest text-slate-400 uppercase">
-                  2. เลือกส่วนเสริมที่ต้องการ (เลือกได้หลายรายการ)
+              {/* Step 2: Add-ons Selection */}
+              <div className="space-y-6">
+                <h3 className="font-prompt flex items-center gap-4 text-xl font-black text-slate-900 uppercase italic">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-sm font-black text-white italic">
+                    02
+                  </span>
+                  เพิ่มประสิทธิภาพ (Add-ons)
                 </h3>
-                <div className="space-y-3">
+                <div className="grid gap-3">
                   {ADD_ONS.map((addon) => (
                     <button
                       key={addon.id}
                       onClick={() => toggleAddOn(addon.id)}
                       className={cn(
-                        "flex w-full items-center justify-between rounded-2xl border px-6 py-4 transition-all active:scale-[0.99]",
+                        "flex w-full items-center justify-between rounded-2xl border-2 px-6 py-5 transition-all",
                         selectedAddOns.includes(addon.id)
-                          ? "border-emerald-500 bg-emerald-50/30"
-                          : "border-slate-100 hover:bg-slate-50"
+                          ? "border-emerald-500 bg-emerald-50/50"
+                          : "border-white bg-white hover:border-slate-100"
                       )}
                     >
-                      <div className="flex items-center gap-3">
-                        {selectedAddOns.includes(addon.id) ? (
-                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
-                        ) : (
-                          <Plus className="h-5 w-5 text-slate-300" />
-                        )}
+                      <div className="flex items-center gap-4">
+                        <div className={cn(
+                          "flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all",
+                          selectedAddOns.includes(addon.id) ? "border-emerald-500 bg-emerald-500" : "border-slate-200"
+                        )}>
+                          {selectedAddOns.includes(addon.id) && <CheckCircle2 className="h-4 w-4 text-white" />}
+                        </div>
                         <span className="font-anuphan text-sm font-bold text-slate-700">
                           {addon.name}
                         </span>
                       </div>
-                      <span className="font-prompt text-sm font-bold text-slate-400">
+                      <span className="font-prompt font-black text-emerald-600">
                         + ฿{addon.price.toLocaleString()}
                       </span>
                     </button>
@@ -135,74 +170,66 @@ const PriceEstimator = () => {
               </div>
             </div>
 
-            {/* 2️⃣ ส่วนสรุปงบประมาณ (Summary Area) */}
-            <div className="lg:col-span-2">
-              <div className="sticky top-32 overflow-hidden rounded-[2.5rem] bg-slate-950 p-8 text-white shadow-2xl md:p-10">
-                <div className="mb-8 border-b border-white/5 pb-8">
-                  <h3 className="font-prompt mb-2 text-lg font-bold tracking-tight text-emerald-400 uppercase italic">
-                    สรุปงบประมาณเบื้องต้น
-                  </h3>
-                  <div className="font-anuphan text-[10px] tracking-widest text-slate-500 uppercase">
-                    Project Estimate v.2026
+            {/* 2️⃣ Summary Specialist Card */}
+            <div className="lg:col-span-5 lg:sticky lg:top-24">
+              <div className="overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white shadow-3xl">
+                <div className="mb-8 flex items-start justify-between">
+                  <div>
+                    <h3 className="font-prompt mb-1 text-2xl font-black text-emerald-400 uppercase italic">
+                      Price Summary
+                    </h3>
+                    <p className="font-prompt text-[9px] font-black tracking-[0.4em] text-slate-500 uppercase">
+                      Official Estimation v.2026
+                    </p>
                   </div>
+                  <Zap className="fill-amber-400 text-amber-400 animate-pulse" size={28} />
                 </div>
 
-                <div className="mb-12 space-y-4">
-                  <div className="font-anuphan flex justify-between text-sm font-bold">
-                    <span className="text-slate-400">
-                      แพ็กเกจ: {selectedBase.name}
-                    </span>
-                    <span>฿{selectedBase.price.toLocaleString()}</span>
+                {/* Items List */}
+                <div className="mb-10 space-y-5 border-t border-white/10 pt-8">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-anuphan font-bold text-slate-400">Package: {selectedBase.name}</span>
+                    <span className="font-prompt font-black">฿{selectedBase.price.toLocaleString()}</span>
                   </div>
                   {selectedAddOns.map((id) => {
                     const addon = ADD_ONS.find((a) => a.id === id)
                     return (
-                      <div
-                        key={id}
-                        className="font-anuphan flex justify-between text-xs"
-                      >
-                        <span className="text-slate-500">+ {addon?.name}</span>
-                        <span>฿{addon?.price.toLocaleString()}</span>
+                      <div key={id} className="flex items-center justify-between text-xs">
+                        <span className="font-anuphan font-bold text-slate-500">+ {addon?.name}</span>
+                        <span className="font-prompt font-black text-emerald-400">฿{addon?.price.toLocaleString()}</span>
                       </div>
                     )
                   })}
+                </div>
 
-                  {/* สรุปราคาสุทธิ */}
-                  <div className="mt-6 flex items-baseline justify-between border-t border-white/5 pt-6">
-                    <span className="font-prompt text-sm font-black tracking-widest text-emerald-400 uppercase">
-                      รวมทั้งสิ้น
-                    </span>
-                    <div className="text-right">
-                      <div className="font-prompt text-5xl font-black tracking-tighter text-white">
-                        ฿{totalPrice.toLocaleString()}
-                      </div>
-                      <div className="text-[10px] tracking-widest text-slate-500 uppercase">
-                        ราคาประเมินเบื้องต้น
-                      </div>
-                    </div>
+                {/* Grand Total */}
+                <div className="mb-12 text-right">
+                  <div className="font-prompt mb-1 text-[10px] font-black tracking-widest text-slate-500 uppercase italic">
+                    Estimated Investment
+                  </div>
+                  <div className="font-prompt text-6xl font-black tracking-tighter text-white">
+                    <span className="mr-3 text-2xl font-normal text-slate-500">฿</span>
+                    {totalPrice.toLocaleString()}
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <a
-                    href={`${siteConfig.links.line}?text=${encodeURIComponent(`สวัสดีครับนายเอ็ม สนใจทำเว็บแพ็กเกจ ${selectedBase.name} เสริมด้วย ${selectedAddOns.length > 0 ? selectedAddOns.map((id) => ADD_ONS.find((a) => a.id === id)?.name).join(", ") : "ไม่มี"} งบประมาณประเมิน ฿${totalPrice.toLocaleString()} ครับ`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-prompt flex w-full items-center justify-center gap-3 rounded-2xl bg-emerald-500 py-5 text-base font-black text-slate-950 shadow-xl transition-all hover:scale-[1.02] active:scale-[0.95]"
-                  >
-                    <MessageCircle className="h-5 w-5 fill-slate-950" />
-                    ส่งสเปกนี้ให้ผมช่วยดูต่อ
-                  </a>
+                <a
+                  href={generateLineMessage()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex w-full items-center justify-center gap-4 rounded-2xl bg-emerald-500 py-6 font-prompt text-lg font-black text-slate-900 shadow-2xl shadow-emerald-500/20 transition-all hover:-translate-y-1 hover:bg-white"
+                >
+                  <MessageCircle size={24} fill="currentColor" />
+                  ส่งสเปกนี้ให้นายเอ็ม
+                </a>
 
-                  <div className="flex items-center justify-center gap-2 text-center opacity-40">
-                    <Zap className="h-3 w-3 text-emerald-400" />
-                    <span className="text-[9px] font-black tracking-widest uppercase">
-                      คำนวณราคาตามจริง 2026
-                    </span>
-                  </div>
-                </div>
+                <p className="font-anuphan mt-8 text-center text-[10px] font-bold leading-relaxed tracking-tighter text-slate-500 uppercase">
+                  * ราคาประเมินนี้รวมภาษีแล้ว และอาจมีการปรับเปลี่ยน <br />
+                  ตามขอบเขตงานจริงที่ตกลงกัน (Final Scope)
+                </p>
               </div>
             </div>
+
           </div>
         </div>
       </div>

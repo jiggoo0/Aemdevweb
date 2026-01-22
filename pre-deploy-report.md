@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-21 23:06:22
+Generated at: 2026-01-22 06:55:13
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -18,7 +18,11 @@ Route (app)
 ┌ ○ /
 ├ ○ /_not-found
 ├ ƒ /[template]
-├ ƒ /[template]/[category]
+├ ● /[template]/[category]
+│ ├ /templates/booking
+│ ├ /templates/e-commerce
+│ ├ /templates/landing-page
+│ └ /templates/service
 ├ ● /[template]/[category]/[slug]
 │ ├ /templates/booking/hotel-resort
 │ ├ /templates/e-commerce/shop-master-pro

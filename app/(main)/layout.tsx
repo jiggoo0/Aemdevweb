@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react"
-// 🛠️ ปรับการนำเข้าคอมโพเนนต์ให้เป็นระบบ และตรงตามมาตรฐานโปรเจกต์ (Specialist Path)
 import Navbar from "@/components/shared/Navbar"
 import Footer from "@/components/shared/Footer"
 import LineStickyButton from "@/components/shared/LineStickyButton"
@@ -12,66 +11,69 @@ interface MainLayoutProps {
 }
 
 /**
- * 🏗️ MainLayout — โครงสร้างหลักสำหรับหน้าบริการและเนื้อหา (v2026)
- * ออกแบบมาให้ดูสะอาดตา แต่แฝงไปด้วยรายละเอียดที่สะท้อนถึงความเนี๊ยบ
- * เพื่อให้ลูกค้า SME และโรงงานที่เข้ามาอ่าน รู้สึกถึงความเป็นมืออาชีพครับ
+ * 🏗️ MainLayout — The Foundation of AEMDEVWEB 2026
+ * สถาปัตยกรรมหลักที่รวมเรื่อง Design, SEO และ UX เข้าด้วยกัน
  */
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div
       className={cn(
         "relative flex min-h-screen flex-col bg-white antialiased",
-        "selection:bg-emerald-500/20 selection:text-emerald-900", // ✅ ตรงตาม Brand Color ที่กำหนด
-        "thai-font-smoothing" // ✅ ใช้ Utility สำหรับจูนฟอนต์ไทยที่เราสร้างไว้ใน globals.css
+        "selection:bg-emerald-500/20 selection:text-emerald-900",
+        "font-anuphan" // บังคับใช้ฟอนต์หลักที่อ่านง่ายสำหรับเนื้อหาภาษาไทย
       )}
     >
-      {/* 🌌 ส่วนตกแต่งพื้นหลัง: ผมใช้ลายตารางจางๆ เพื่อให้ความรู้สึกถึง "งานระบบ" ที่แม่นยำ */}
+      {/* 🌌 Background Infrastructure (Layer -20) */}
       <div
         className="pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* 🟢 แสงฟุ้งมรกต (Emerald Glow): เพิ่มมิติให้เว็บดูพรีเมียมสไตล์ Specialist */}
-        <div className="absolute -top-[10%] left-1/2 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-emerald-500/5 blur-[120px]" />
+        {/* 🟢 Strategic Glow: จุดนำสายตาให้เนื้อหาตรงกลางเด่นขึ้น */}
+        <div className="absolute -top-[5%] left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-emerald-500/[0.03] blur-[100px]" />
 
-        {/* 📐 ลายตาราง (Engineering Grid): สะท้อนถึงความละเอียดรอบคอบในงานสร้าง */}
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-[0.02]" />
+        {/* 📐 Professional Grid: ลายตารางวิศวกรรมสื่อถึงความแม่นยำ */}
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-[0.015]" />
 
-        {/* 🌑 พื้นผิวนอยซ์ (Subtle Noise): เพิ่มความพรีเมียมให้พื้นหลังดูมีมิติมากขึ้น */}
-        <div
-          className="absolute inset-0 opacity-[0.012] contrast-150 grayscale filter"
-          style={{ filter: "url(#noiseFilter)" }}
-        />
+        {/* 🌑 High-End Texture: ตัวสร้าง Noise เพื่อลดความ "แบน" ของสีพื้นหลัง */}
+        <div className="absolute inset-0 opacity-[0.01] mix-blend-overlay">
+          <svg className="h-full w-full">
+            <filter id="noise">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.8"
+                numOctaves="4"
+                stitchTiles="stitch"
+              />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noise)" />
+          </svg>
+        </div>
       </div>
 
-      {/* 🧭 แถบนำทาง: ใช้ง่ายทั้งบนคอมและมือถือตามมาตรฐาน UX */}
+      {/* 🧭 Navigation System */}
       <Navbar />
 
-      {/* 📦 พื้นที่เนื้อหาหลัก: ส่วนที่จะแสดงข้อมูลบริการ, ผลงาน หรือบทความ */}
+      {/* 📦 Content Lifecycle: เพิ่ม Padding Top เพื่อหลบ Navbar และลื่นไหลด้วย CSS Transition */}
       <main
         id="main-content"
-        className="relative z-10 flex-1 pt-20 transition-all duration-700 ease-in-out"
+        className="relative z-10 flex-1 pt-16 transition-opacity duration-500 ease-in-out md:pt-20"
       >
         {children}
       </main>
 
-      {/* ⚫ ส่วนท้ายเว็บ: รวบรวมข้อมูลติดต่อและเมนูสำคัญทั้งหมด */}
+      {/* ⚫ Information Infrastructure */}
       <Footer />
 
-      {/* 📱 ปุ่มไลน์ (Sticky Button): เพื่อให้ลูกค้าทักหาผมได้ทันทีที่สงสัย (Call to Action) */}
+      {/* 📱 Conversion Point: ทัก Line ได้จากทุกหน้า */}
       <LineStickyButton />
 
-      {/* 🎨 ระบบฟิลเตอร์พิเศษ: ตัวสร้าง Effect Noise สำหรับพื้นหลัง */}
-      <svg className="invisible absolute h-0 w-0" aria-hidden="true">
-        <filter id="noiseFilter">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.6"
-            numOctaves="3"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-      </svg>
+      {/* 🛠️ Accessibility: ข้ามไปยังเนื้อหาหลักสำหรับ Screen Reader */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-emerald-500 focus:p-4 focus:text-white"
+      >
+        Skip to content
+      </a>
     </div>
   )
 }

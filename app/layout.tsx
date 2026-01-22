@@ -2,12 +2,12 @@
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import Script from "next/script" // 📦 เพิ่ม Script Component
+import Script from "next/script"
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-import { constructMetadata } from "@/constants/site-config"
+import { constructMetadata, siteConfig } from "@/constants/site-config"
 import { viewport as defaultViewport } from "./viewport"
 
 // 📂 Local Assets & Fonts
@@ -15,16 +15,14 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 /* -------------------------------------------------------------------------- */
-/* 🅰️ Font Setup: Industrial Typography Specialist v2026                      */
+/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering                         */
 /* -------------------------------------------------------------------------- */
 
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 })
 
 const fontAnuphan = Anuphan({
@@ -32,20 +30,10 @@ const fontAnuphan = Anuphan({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 })
-
-/* -------------------------------------------------------------------------- */
-/* 🧬 SEO & Performance Config                                                */
-/* -------------------------------------------------------------------------- */
 
 export const metadata: Metadata = constructMetadata()
 export const viewport: Viewport = defaultViewport
-
-/* -------------------------------------------------------------------------- */
-/* 🏗️ Root Layout Infrastructure                                              */
-/* -------------------------------------------------------------------------- */
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -56,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="th"
       className={cn(
-        "scroll-smooth",
+        "scroll-smooth focus:scroll-auto", // เพิ่มการรองรับ Accessibility
         fontPrompt.variable,
         fontAnuphan.variable,
         "thai-font-smoothing"
@@ -67,31 +55,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
           "selection:bg-emerald-500/20 selection:text-emerald-900",
-          "transition-colors duration-300"
+          "overflow-x-hidden" // ป้องกัน Layout เลื่อนแนวนอนบนมือถือ
         )}
       >
-        {/* 🚀 1. Top Loading Bar: Emerald-500 Brand Primary */}
+        {/* 🚀 Top Loading Bar: Brand Primary (Emerald-500) */}
         <NextTopLoader
           color="#10B981"
-          initialPosition={0.08}
-          crawlSpeed={200}
           height={3}
-          crawl={true}
           showSpinner={false}
-          easing="ease"
-          speed={200}
-          shadow="0 0 10px #10B981,0 0 5px #10B981"
+          easing="ease-in-out"
+          speed={300}
         />
 
-        {/* 💬 2. Facebook Customer Chat (Messenger) */}
-        {/* จำเป็นต้องมี div id="fb-root" และ div id="fb-customer-chat" */}
+        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer */}
         <div id="fb-root" />
         <div id="fb-customer-chat" className="fb-customerchat" />
-
         <Script id="facebook-chat" strategy="lazyOnload">
           {`
             var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571");
+            chatbox.setAttribute("page_id", "914706508399571"); // Verified ID
             chatbox.setAttribute("attribution", "biz_inbox");
 
             window.fbAsyncInit = function() {
@@ -111,20 +93,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `}
         </Script>
 
-        {/* 📊 3. Google Analytics (Placeholder) - ใส่ Measurement ID เมื่อพร้อม */}
-        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script> 
-        */}
-
-        {/* 🌍 4. App Content Infrastructure */}
+        {/* 🌍 App Content Container */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
+
+        {/* ⚙️ SEO: JSON-LD for Local Business / Specialist */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: siteConfig.name,
+              image: siteConfig.ogImage,
+              url: siteConfig.url,
+              email: siteConfig.email,
+              description: siteConfig.description,
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "TH",
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   )

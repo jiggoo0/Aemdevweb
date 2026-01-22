@@ -10,134 +10,134 @@ import {
   Users,
   Building2,
   Factory,
+  CheckCircle2,
 } from "lucide-react"
 
-// 📂 Data & Components Architecture
 import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
-import TrustBadge from "@/components/shared/TrustBadge"
 import CTASection from "@/components/landing/CTASection"
 
 /**
- * 🚀 Metadata — Specialist Keyword Strategy 2026
- * ปรับปรุงให้ครอบคลุมทั้ง Brand Search และ Intent Search ของกลุ่ม SME/Industrial
+ * 🚀 Metadata Strategy: เน้นการแก้ Pain Point ของลูกค้า
  */
 export const metadata: Metadata = {
-  title: `รู้จัก นายเอ็มซ่ามากส์ | คนทำเว็บที่เข้าใจเจ้าของธุรกิจและโรงงานจริง`,
+  title: `รู้จัก ${siteConfig.expert} | ที่ปรึกษาเว็บไซต์ Next.js และ Technical SEO`,
   description:
-    "ผมชื่อเอ็มครับ เป็นคนทำเว็บที่เน้นผลลัพธ์ธุรกิจ ไม่ขายฝัน งานเนี๊ยบ โหลดไว ไม่ทิ้งงาน 100% สำหรับ SME เจ้าของกิจการ บริษัท และโรงงานอุตสาหกรรมทั่วไทย",
-  keywords: [
-    // 🏷️ Brand & Identity
-    "นายเอ็มซ่ามากส์",
-    "AEMDEVWEB",
-    "เอ็มซ่ามากส์",
-
-    // 🏗️ Service Intent (กลุ่ม SME & บริษัท)
-    "รับทำเว็บไซต์ SME",
-    "รับทำเว็บไซต์บริษัท",
-    "จ้างทำเว็บไซต์ หจก",
-    "ทำเว็บ Sale Page ปิดการขาย",
-    "รับพัฒนาเว็บไซต์ Corporate",
-
-    // 🏭 Industrial Intent (กลุ่มโรงงาน)
-    "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
-    "ทำเว็บแคตตาล็อกสินค้าอุตสาหกรรม",
-    "Industrial Web Design Thailand",
-
-    // ⚡ Performance & Trust (Pain Point Search)
-    "รับทำเว็บไซต์โหลดไวที่สุด 2026",
-    "คนทำเว็บไม่ทิ้งงาน",
-    "Technical SEO Specialist ภาษาไทย",
-    "รับแก้เว็บไซต์ช้า",
-  ],
+    "ผมชื่อเอ็มครับ ผมทำเว็บไซต์ที่เน้นผลลัพธ์ทางธุรกิจ ไม่ทิ้งงาน 100% ออกแบบโครงสร้างเพื่อ SME และโรงงานอุตสาหกรรมโดยเฉพาะ ด้วยมาตรฐาน Performance 100/100",
   alternates: { canonical: `${siteConfig.url}/about` },
 }
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* 🔎 JSON-LD Structured Data */}
+    <main className="relative min-h-screen bg-white pb-24 antialiased">
       <JsonLd
         type="AboutPage"
         data={{
-          name: "รู้จัก นายเอ็มซ่ามากส์ - ผู้เชี่ยวชาญเว็บไซต์ SME & Industrial",
-          description:
-            "เบื้องหลังการสร้างเว็บไซต์ประสิทธิภาพสูงสำหรับเจ้าของกิจการและโรงงาน",
+          name: `รู้จัก ${siteConfig.expert} - AEMDEVWEB`,
+          description: siteConfig.description,
+          mainEntity: {
+            "@type": "Person",
+            name: siteConfig.expert,
+            jobTitle: siteConfig.role,
+            url: siteConfig.url,
+          },
         }}
       />
 
-      {/* 🔝 1. Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
-        <div className="container mx-auto px-4">
+      {/* 🔝 1. Hero Section: สร้างความน่าเชื่อถือทันทีที่เห็น */}
+      <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
+        {/* Background Grid Accent */}
+        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(black,transparent_70%)] bg-center opacity-[0.02]" />
+
+        <div className="container mx-auto px-6">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-1.5 text-emerald-600">
+            <div className="animate-in fade-in slide-in-from-bottom-2 mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-1.5 text-emerald-600 duration-700">
               <ShieldCheck className="h-4 w-4" />
               <span className="font-prompt text-[10px] font-black tracking-[0.3em] uppercase">
-                Direct Expert • No Middleman
+                Direct Specialist • Expert Results
               </span>
             </div>
-            <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-slate-900 md:text-7xl lg:text-8xl">
-              ผมชื่อ <span className="text-emerald-500 italic">เอ็ม.</span>
+            <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-9xl">
+              ผมชื่อ <span className="text-emerald-500">เอ็ม.</span>
             </h1>
-            <p className="font-anuphan mx-auto max-w-3xl text-lg leading-relaxed font-semibold text-slate-600 md:text-xl">
-              ผมไม่ใช่บริษัท ไม่ใช่เอเจนซี่ แต่ผมคือ "คนทำงาน"{" "}
-              <br className="hidden md:block" />
-              ที่เข้าใจว่าคนทำธุรกิจต้องการอะไรจากเว็บไซต์
+            <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+              ผมไม่ใช่เอเจนซี่ที่เน้นปริมาณ <br className="hidden md:block" />
+              แต่ผมคือ{" "}
+              <span className="text-slate-900 underline decoration-emerald-500 underline-offset-8">
+                คนทำงาน
+              </span>{" "}
+              ที่เน้นความสำเร็จของธุรกิจคุณ
             </p>
           </div>
         </div>
       </section>
 
-      {/* 🛡️ 2. Mindset Section */}
-      <section className="border-y border-slate-100 bg-slate-50/50 py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-            <div className="group relative aspect-square overflow-hidden rounded-[3rem] shadow-2xl">
+      {/* 🛡️ 2. Mindset & Reliability Section */}
+      <section className="bg-slate-50/80 py-24 lg:py-32">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
+            <div className="group relative aspect-square overflow-hidden rounded-[3.5rem] bg-slate-200 shadow-2xl">
               <Image
                 src="/images/showcase/aemdevweb-hero.webp"
-                alt="การทำงานของนายเอ็มซ่ามากส์"
+                alt="Working Process by AEMDEVWEB"
                 fill
                 priority
-                className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
             </div>
-            <div className="space-y-10">
-              <h2 className="font-prompt text-3xl font-black tracking-tight text-slate-900 md:text-5xl">
-                ผมทำเว็บให้{" "}
-                <span className="text-emerald-500">ใช้งานได้จริง</span> <br />
-                ไม่ใช่แค่ดูสวยไปวันๆ
-              </h2>
-              <div className="font-anuphan space-y-6 text-lg text-slate-600">
-                <p>
-                  ผมเห็นเจ้าของธุรกิจเจอปัญหาเดิมๆ ซ้ำแล้วซ้ำเล่า:{" "}
-                  <b>
-                    จ้างทำเว็บแล้วทิ้งงาน, คุยภาษาเทคนิคจนงง,
-                    หรือได้เว็บที่โหลดช้าจนลูกค้าหนี
-                  </b>
-                </p>
-                <p>
-                  ผมเลยตั้งใจทำ <b>นายเอ็มซ่ามากส์</b> ขึ้นมาเพื่อจบปัญหาพวกนี้
-                  ผมคุยภาษาเดียวกับคุณ เน้นความไว และเน้นความเนี๊ยบของงาน
-                  เพราะผมรู้ว่าทุกวินาทีที่เว็บคุณช้า คือโอกาสที่เงินจะหายไป
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-6 pt-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-emerald-500 shadow-sm">
-                    <Target className="h-5 w-5" />
-                  </div>
-                  <span className="font-prompt text-[10px] font-black tracking-widest text-slate-900 uppercase">
-                    เน้นยอดขาย
-                  </span>
+
+            <div className="space-y-12">
+              <div className="space-y-6">
+                <h2 className="font-prompt text-4xl font-black tracking-tight text-slate-900 uppercase italic md:text-6xl">
+                  เน้นผลลัพธ์ <br />
+                  <span className="text-emerald-500">ไม่ใช่แค่ความสวย</span>
+                </h2>
+                <div className="font-anuphan space-y-6 text-lg leading-relaxed font-medium text-slate-600">
+                  <p>
+                    ประสบการณ์ที่ผ่านมาทำให้ผมรู้ว่า
+                    เจ้าของกิจการไม่ได้ต้องการแค่เว็บที่ "ดูสวย"
+                    แต่คุณต้องการเว็บที่{" "}
+                    <span className="font-bold text-slate-900">
+                      โหลดไว ลูกค้าทัก และติดอันดับ Google
+                    </span>
+                  </p>
+                  <p>
+                    ผมดูแลโปรเจกต์ด้วยตัวเองทุกขั้นตอน ตั้งแต่วางโครงสร้าง
+                    Technical SEO ไปจนถึงการเขียน Code ที่สะอาดที่สุด
+                    เพื่อให้เว็บคุณทำงานได้เสถียร 24 ชม.
+                    โดยไม่ต้องกังวลเรื่องระบบล่มหรือคนทำเว็บทิ้งงาน
+                  </p>
                 </div>
-                <div className="flex items-center gap-3 text-emerald-500">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-sm">
-                    <Zap className="h-5 w-5" />
+              </div>
+
+              {/* USP Icons */}
+              <div className="grid grid-cols-2 gap-8 border-t border-slate-200 pt-10">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-lg">
+                    <Zap size={24} fill="currentColor" />
                   </div>
-                  <span className="font-prompt text-[10px] font-black tracking-widest text-slate-900 uppercase">
-                    เน้นความไว
-                  </span>
+                  <div>
+                    <h4 className="font-prompt text-sm font-black tracking-widest text-slate-900 uppercase">
+                      Performance
+                    </h4>
+                    <p className="text-xs text-slate-500">
+                      โหลดไวระดับ 100/100
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-lg">
+                    <Target size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-prompt text-sm font-black tracking-widest text-slate-900 uppercase">
+                      Conversion
+                    </h4>
+                    <p className="text-xs text-slate-500">
+                      ออกแบบเพื่อปิดการขาย
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -145,41 +145,44 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 🏗️ 3. Client Focus */}
+      {/* 🏭 3. Specialist Focus: SME & Industrial */}
       <section className="py-24 lg:py-40">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-prompt mb-16 text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
-            ผมถนัดช่วย <span className="text-emerald-500">คนกลุ่มนี้</span>
-          </h2>
-          <div className="grid gap-8 md:grid-cols-3">
+        <div className="container mx-auto px-6 text-center">
+          <div className="mb-20 space-y-4">
+            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+              กลุ่มธุรกิจที่ผม{" "}
+              <span className="text-emerald-500">เชี่ยวชาญ</span>
+            </h2>
+          </div>
+          <div className="grid gap-10 md:grid-cols-3">
             {[
               {
                 icon: Users,
-                title: "เจ้าของกิจการ SME",
-                desc: "คนที่อยากมีหน้าเว็บปิดการขายดีๆ เอาไว้รับแรงยิง Ads ให้คุ้มค่าเงินทุกบาท",
+                title: "SME & Startups",
+                desc: "เน้นความไวในการเปิดตัว (Speed Launch) และการทำ Sale Page เพื่อปิดการขายจากโฆษณา",
               },
               {
                 icon: Building2,
-                title: "บริษัท & หจก.",
-                desc: "คนที่ต้องการความน่าเชื่อถือ มีหน้าโปรไฟล์บริษัทที่ดูแพงและเป็นมืออาชีพ",
+                title: "Corporate & B2B",
+                desc: "เน้นภาพลักษณ์ความน่าเชื่อถือระดับสากล และระบบหลังบ้านที่จัดการข้อมูลได้ง่าย",
               },
               {
                 icon: Factory,
-                title: "เจ้าของโรงงาน",
-                desc: "คนที่อยากจัดระเบียบข้อมูลสินค้าหนักๆ ให้ดูง่าย และต้องการความปลอดภัยสูงสุด",
+                title: "Industrial & Factory",
+                desc: "เน้นระบบ E-Catalog สินค้าอุตสาหกรรมที่โหลดหนักแค่ไหนก็ยังทำงานได้ลื่นไหล",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="group rounded-[2.5rem] border border-slate-100 bg-white p-10 transition-all hover:border-emerald-500/30 hover:shadow-xl"
+                className="group rounded-[3rem] border border-slate-100 bg-white p-10 transition-all duration-500 hover:border-emerald-500/20 hover:shadow-2xl"
               >
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-[1.2rem] bg-slate-50 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
-                  <item.icon className="h-8 w-8" />
+                <div className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-all duration-500 group-hover:bg-emerald-500 group-hover:text-white">
+                  <item.icon size={32} />
                 </div>
                 <h3 className="font-prompt mb-4 text-xl font-black text-slate-900 uppercase">
                   {item.title}
                 </h3>
-                <p className="font-anuphan leading-relaxed text-slate-500">
+                <p className="font-anuphan leading-relaxed font-medium text-slate-500">
                   {item.desc}
                 </p>
               </div>
@@ -188,31 +191,42 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 🏆 4. Personal Guarantee */}
-      <section className="pb-32">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-5xl rounded-[3rem] bg-slate-950 p-12 text-center shadow-2xl lg:p-20">
-            <h2 className="font-prompt mb-6 text-2xl font-black tracking-tighter text-emerald-400 uppercase italic md:text-4xl">
-              จ้างผม... สบายใจกว่าจ้างบริษัท
+      {/* 🏁 4. Final Hook & Guarantee */}
+      <section className="px-6 pb-32">
+        <div className="shadow-3xl relative mx-auto max-w-5xl overflow-hidden rounded-[3.5rem] bg-slate-950 p-12 text-center md:p-24">
+          <div className="absolute top-0 right-0 p-10 opacity-10">
+            <ShieldCheck size={200} className="text-emerald-500" />
+          </div>
+          <div className="relative z-10 space-y-8">
+            <h2 className="font-prompt text-3xl leading-tight font-black tracking-tighter text-emerald-400 uppercase italic md:text-5xl">
+              จ้างผม... <br className="md:hidden" /> สบายใจกว่าจ้างบริษัท
             </h2>
-            <p className="font-anuphan mb-12 text-slate-400">
-              คุยตรงกับผมคนเดียว งานเดินไว
-              ไม่ต้องรอผ่านเซลล์หรือแอดมินหลายขั้นตอน
-            </p>
-            <div className="flex justify-center">
-              <TrustBadge variant="grid" />
+            <div className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
+              ผมคุยตรง งานจบไว ไม่ผ่านเซลล์ ไม่ต้องรอคิวพนักงาน
+              คุณจะได้ความเนี๊ยบระดับ Specialist ในราคาที่คุ้มค่า
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 pt-4">
+              {["ไม่ทิ้งงาน 100%", "คุยภาษาธุรกิจ", "ดูแลหลังการขาย"].map(
+                (text, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-2 text-sm font-bold text-white/80"
+                  >
+                    <CheckCircle2 size={16} className="text-emerald-500" />
+                    {text}
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 🏁 5. CTA Section */}
       <CTASection />
 
-      {/* 📍 Footer Hook */}
-      <footer className="mt-20 text-center opacity-30 select-none">
+      <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build & Care by นายเอ็มซ่ามากส์ v2026
+          Build with Integrity by {siteConfig.expert} v2026
         </p>
       </footer>
     </main>

@@ -22,7 +22,7 @@
 
   --color-destructive: hsl(0 84.2% 60.2%);
 
-  /* 🎨 UI Elements */
+  /* 🎨 UI Elements & Variables */
   --color-border: hsl(214.3 31.8% 91.4%);
   --color-input: hsl(214.3 31.8% 91.4%);
   --color-ring: hsl(222.2 84% 4.9%);
@@ -32,7 +32,7 @@
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
 
-  /* 🖋️ Typography Bridge (Connecting with Next/Font) */
+  /* 🖋️ Typography Bridge */
   --font-prompt: var(--font-prompt);
   --font-anuphan: var(--font-anuphan);
 
@@ -59,20 +59,29 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: Industrial SME Foundation                      */
+/* 🏭 Base Layer: แก้ไขปัญหา Build Error และวางโครงสร้างพื้นฐาน              */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    /* ✅ [FIXED]: หลีกเลี่ยง @apply border-border 
+       ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 
+    */
+    border-color: var(--color-border);
+    outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
 
   body {
     /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
-    @apply bg-background text-foreground font-anuphan selection:bg-success/20 selection:text-primary antialiased;
+    @apply bg-background text-foreground font-anuphan antialiased;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+
+    /* การเลือกข้อความ (Selection) ตามแบรนด์ */
+    &::selection {
+      @apply bg-success/20 text-primary;
+    }
   }
 
   /* Typography Strategy for Industrial Authority */
@@ -82,18 +91,16 @@
   h4,
   h5,
   h6 {
-    /* ใช้ฟอนต์ Prompt เพื่อความมั่นคงและดูเป็นมืออาชีพ */
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
-  /* เน้นหัวข้อหลักให้มีความดุดันตามสไตล์ Industrial Italic ที่คุณวางไว้ */
   .heading-heavy {
     @apply font-prompt font-black tracking-tighter uppercase italic;
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer                                            */
+/* 🚀 Utilities Layer: เครื่องมือช่วยสร้าง UI ให้เร็วและนิ่ง                       */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
@@ -101,15 +108,20 @@
     text-wrap: balance;
   }
 
-  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) ในบาง Browser */
+  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* เพิ่มมิติความลึกให้กับ Card แบบ Industrial */
+  /* มิติความลึกสไตล์ Industrial (เน้นความคมและสะอาด) */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
+  }
+
+  /* กราเดียนต์แบรนด์สำหรับเน้นหัวข้อสำคัญ */
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }
 }

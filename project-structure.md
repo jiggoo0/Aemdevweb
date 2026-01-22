@@ -5,8 +5,8 @@ url: "https://www.aemdevweb.com"
 author: "AEMDevWeb Automation"
 projectType: "Web Application"
 environment: "pre-deploy"
-buildId: "4c3c10c"
-generatedAt: "2026-01-21T15:54:29Z"
+buildId: "a8a4e66"
+generatedAt: "2026-01-22T00:17:22Z"
 contentType: "technical-documentation"
 tags:
   - project-structure
@@ -17,11 +17,11 @@ tags:
 ---
 
 # 📁 Project Structure Report
-_Generated: **2026-01-21T15:54:29Z**_
+_Generated: **2026-01-22T00:17:22Z**_
 
 > **Site:** https://www.aemdevweb.com  
 > **Environment:** pre-deploy  
-> **Build ID:** 4c3c10c
+> **Build ID:** a8a4e66
 
 ## 🌳 Folder Structure
 
@@ -101,6 +101,7 @@ _Generated: **2026-01-21T15:54:29Z**_
     📄 TrustBadge.tsx
   📂 template
     📂 marketplace
+      📄 TemplateCard.tsx
       📄 TemplateFilter.tsx
       📄 TemplateGrid.tsx
       📄 TemplateHero.tsx
@@ -288,33 +289,69 @@ _Generated: **2026-01-21T15:54:29Z**_
 import type { MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
+import React from "react"
+
+// 🛠️ Icons Registry (Lucide React)
 import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
   Zap,
   ShieldCheck,
+  Smartphone,
+  Bell,
+  Settings,
+  Globe,
+  Layout,
+  Database,
+  ShoppingBag,
+  PackageCheck,
+  BarChart3,
+  Target,
+  MousePointerClick,
+  MapPin,
+  CalendarCheck,
+  Star,
+  ClipboardList,
 } from "lucide-react"
 
-// 🧩 Specialist Components Integration
-/**
- * ✅ [FIXED] นำเข้า ImpactStats เพื่อลงทะเบียนเข้ากับระบบ MDX
- * ป้องกัน Error: Expected component ImpactStats to be defined
- */
+// 🧩 Specialist Logic Components Integration
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
+import WorkProcess from "@/components/sales-engine/WorkProcess"
 
 /**
  * 🏗️ MDX Components Specialist Edition v2026
- * ออกแบบมาเพื่อยกระดับ Content Marketing สำหรับ SME และโรงงาน
+ * ลงทะเบียนคอมโพเนนต์และไอคอนมาตรฐานเพื่อให้เรียกใช้ใน .mdx ได้ทันทีโดยไม่เกิด ReferenceError
  */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
 
-    // 🔗 1. Core Logic Components
-    ImpactStats, // ✅ ลงทะเบียนที่นี่เพื่อให้เรียกใช้ <ImpactStats /> ในไฟล์ .mdx ได้ทันที
+    // 🔗 1. Core Logic & Icons Registry
+    ImpactStats,
+    SpeedDemon,
+    WorkProcess,
+    Zap,
+    ShieldCheck,
+    Smartphone,
+    Bell,
+    Settings,
+    Globe,
+    Layout,
+    Database,
+    Sparkles,
+    ShoppingBag,
+    PackageCheck,
+    BarChart3,
+    Target,
+    MousePointerClick,
+    MapPin,
+    CalendarCheck,
+    Star,
+    ClipboardList,
 
-    // 🖼️ 2. Optimized Luminous Image (Industrial Standard)
+    // 🖼️ 2. Optimized Specialist Image (Industrial Standard)
     img: (props) => (
       <span className="group relative my-16 block w-full overflow-hidden rounded-[2.5rem] border border-slate-200 bg-slate-50 shadow-2xl">
         <span className="relative block aspect-video w-full overflow-hidden">
@@ -334,7 +371,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </span>
     ),
 
-    // 🔗 3. Smart Logic Links
+    // 🔗 3. Technical Logic Links
     a: ({ href, children }) => {
       const isInternal = href?.startsWith("/") || href?.startsWith("#")
       const baseClass =
@@ -360,7 +397,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
 
-    // 📣 4. Trust Quote / Expert Insights
+    // 📣 4. Expert Insights Block
     blockquote: ({ children }) => (
       <div className="group relative my-12 overflow-hidden rounded-r-[2.5rem] border-l-4 border-emerald-500 bg-emerald-500/[0.03] p-8 text-slate-600 md:p-10">
         <div className="pointer-events-none absolute -top-4 -right-4 opacity-5 transition-opacity group-hover:opacity-10">
@@ -372,7 +409,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // 🚀 5. Marketing Specialist Blocks
+    // 🚀 5. Specialist Marketing Blocks
     CallToAction: ({
       title,
       url,
@@ -389,7 +426,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </h3>
         <Link
           href={url}
-          className="relative z-10 inline-flex items-center justify-center rounded-full bg-[#0F172A] px-12 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:scale-105 hover:bg-emerald-500 active:scale-95"
+          className="relative z-10 inline-flex items-center justify-center rounded-full bg-slate-950 px-12 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:scale-105 hover:bg-emerald-600 active:scale-95"
         >
           {label} <ArrowRight className="ml-3 h-4 w-4" />
         </Link>
@@ -412,20 +449,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // ✒️ 6. Typography System (Light Mode Optimized for Readability)
+    // ✒️ 6. Industrial Typography System
     h1: ({ children }) => (
-      <h1 className="font-prompt mt-24 mb-10 text-5xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-7xl">
+      <h1 className="font-prompt mt-24 mb-10 text-5xl leading-none font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-prompt mt-20 mb-8 flex items-center gap-4 border-b border-slate-100 pb-6 text-4xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-5xl">
+      <h2 className="font-prompt mt-20 mb-8 flex items-center gap-4 border-b border-slate-100 pb-6 text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-5xl">
         <div className="h-10 w-2 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-prompt mt-14 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase md:text-4xl">
+      <h3 className="font-prompt mt-14 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase italic md:text-4xl">
         {children}
       </h3>
     ),
@@ -443,11 +480,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </span>
       </li>
     ),
-
-    // Export Icons & Components for Inline Usage
-    Zap,
-    ShieldCheck,
-    Sparkles,
   }
 }
 ```
@@ -469,7 +501,11 @@ Route (app)
 ┌ ○ /
 ├ ○ /_not-found
 ├ ƒ /[template]
-├ ƒ /[template]/[category]
+├ ● /[template]/[category]
+│ ├ /templates/booking
+│ ├ /templates/e-commerce
+│ ├ /templates/landing-page
+│ └ /templates/service
 ├ ● /[template]/[category]/[slug]
 │ ├ /templates/booking/hotel-resort
 │ ├ /templates/e-commerce/shop-master-pro

@@ -3,20 +3,23 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-21 22:56:06
+  Generated: 2026-01-21 23:13:46
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-21 22:56:06**_
+_Generated on: **2026-01-21 23:13:46**_
+
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
+
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-```text
+
+````text
 ```text
 Route (app)
 ┌ ○ /
@@ -51,8 +54,9 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-```
-```
+````
+
+````
 
 ## 📊 2. File Statistics by Extension
 ```text
@@ -67,9 +71,10 @@ Route (app)
       1 svg
       1 ico
       1 css
-```
+````
 
 ## 📁 3. Directory Structure (Architecture Tree)
+
 ```text
 📂 app/
   📂 (main)/
@@ -243,7 +248,9 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
+
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -336,9 +343,11 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
+
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -472,9 +481,11 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
+
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -594,9 +605,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -689,9 +702,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
+
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -796,25 +811,39 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
+
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-```markdown
+
+````markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-21 22:47:51
+
+Generated at: 2026-01-21 23:06:22
 Branch: main
 
 ## 🔐 1. Environment Check
+
 ✅ Status: .env file exists and verified.
-## 🛠️  2. Auto-Fix Procedure
+
+## 🛠️ 2. Auto-Fix Procedure
+
 ✅ Status: Auto-fix completed or no issues found.
+
 ## 🧹 3. Code Linting (ESLint)
+
 ✅ Status: Linting passed.
+
 ## ⌨️ 4. Type Safety Check
+
 ✅ Status: TypeScript verified.
-## 🏗️  5. Production Build Test
+
+## 🏗️ 5. Production Build Test
+
 ✅ Status: Build successfully optimized.
+
 ### 📊 Route Statistics & Bundle Size
+
 ```text
 Route (app)
 ┌ ○ /
@@ -851,14 +880,18 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-
 ```
+````
 
 ---
+
 ## 🏆 Summary Result
+
 ### ✅ READY FOR DEPLOY
+
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-```
+
+````
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -978,10 +1011,12 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 }
-```
+````
+
 ---
 
 #### 🔍 Path: `app/layout.tsx`
+
 ```typescript
 /** @format */
 
@@ -1105,7 +1140,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             gtag('js', new Date());
             gtag('config', 'G-XXXXXXXXXX');
           `}
-        </Script> 
+        </Script>
         */}
 
         {/* 🌍 4. App Content Infrastructure */}
@@ -1115,9 +1150,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1292,9 +1329,11 @@ export default function HomePage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
+
 ```typescript
 /** @format */
 
@@ -1463,9 +1502,11 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1646,9 +1687,11 @@ export default async function TemplateDetailPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1819,9 +1862,11 @@ export default async function TemplateCategoryPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1982,9 +2027,11 @@ export default async function TemplateMainPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2239,9 +2286,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2510,9 +2559,11 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2631,9 +2682,11 @@ export default async function CaseStudiesPage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2845,9 +2898,11 @@ export default async function CaseStudyDetailPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
+
 ```typescript
 /** @format */
 
@@ -3017,9 +3072,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
 
@@ -3036,13 +3093,13 @@ export const siteConfig = {
   // 🆔 Brand Identity
   name: "AEMDEVWEB",
   nameTH: "เอ็ม-เดฟ-เว็บ",
-  shortName: "AEM", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Header/Footer
-  companyName: "AEMDEVWEB Co., Ltd.", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน metadata.ts/Footer
+  shortName: "AEM",
+  companyName: "AEMDEVWEB Co., Ltd.",
   expert: "นายเอ็มซ่ามากส์ (Alongkorl)",
   role: "ที่ปรึกษา Technical SEO และผู้พัฒนาเว็บไซต์ Next.js สำหรับ SME",
 
   // 🎯 USP & Positioning
-  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน page.tsx
+  title: "AEMDEVWEB 2026: รับทำเว็บไซต์ Next.js & SEO สายแรง",
   slogan: "Speed Launch & High Performance",
   description:
     "บริการรับทำเว็บไซต์ Next.js โหลดเร็วอันดับ 1 และรับวางโครงสร้าง Technical SEO รองรับ Google AI Search (SGE) สำหรับ SME โดยเฉพาะ",
@@ -3050,7 +3107,7 @@ export const siteConfig = {
   // 🌐 URLs & Contact Infrastructure
   url: "https://www.aemdevweb.com",
   ogImage: "https://www.aemdevweb.com/og-image.png",
-  email: "me@aemdevweb.com", // ✅ [FIXED]: เพิ่มเพื่อแก้ Error ใน Contact/Footer
+  email: "me@aemdevweb.com",
 
   // 🖱️ CTA Settings (สำหรับไฟล์ Hero/CTASection)
   cta: {
@@ -3064,7 +3121,8 @@ export const siteConfig = {
     line: "https://line.me/ti/p/@aemdevweb",
     lineId: "@aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin:
+      "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
   // ℹ️ ข้อมูลการติดต่อ (New Structure)
@@ -3072,7 +3130,8 @@ export const siteConfig = {
     email: "me@aemdevweb.com",
     lineId: "@aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    linkedin:
+      "https://www.linkedin.com/in/alongkorl-aemdevweb?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 
   // 📊 The 2026 Standard (Technical Guarantees)
@@ -3097,8 +3156,18 @@ export const siteConfig = {
     ],
     // สำหรับ Legacy metadata.ts (String)
     all: "รับทำ SEO SME, จ้างทำเว็บไซต์ราคาประหยัด, บริษัทรับทำ SEO สายขาว, รับทำเว็บไซต์ Next.js, SME Speed Launch, AEMDEVWEB, นายเอ็มซ่ามากส์",
-    core: ["รับทำ SEO SME", "จ้างทำเว็บไซต์ราคาประหยัด", "บริษัทรับทำ SEO สายขาว", "รับทำเว็บไซต์ Next.js"],
-    tech: ["SME Speed Launch", "บริการวางระบบ SEO Technical", "Web Performance Optimization", "Google AI Search Optimization"],
+    core: [
+      "รับทำ SEO SME",
+      "จ้างทำเว็บไซต์ราคาประหยัด",
+      "บริษัทรับทำ SEO สายขาว",
+      "รับทำเว็บไซต์ Next.js",
+    ],
+    tech: [
+      "SME Speed Launch",
+      "บริการวางระบบ SEO Technical",
+      "Web Performance Optimization",
+      "Google AI Search Optimization",
+    ],
     brand: ["AEMDEVWEB", "เอ็มเดฟเว็บ", "นายเอ็มซ่ามากส์"],
   },
 }
@@ -3124,13 +3193,13 @@ export function constructMetadata({
   return {
     title: {
       default: `${title} | ${siteConfig.slogan}`,
-      template: `%s | ${siteConfig.shortName}`, // ✅ [FIXED]: ใช้ shortName เป็น template ตามมาตรฐานเดิม
+      template: `%s | ${siteConfig.shortName}`,
     },
     description,
     authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
     creator: siteConfig.expert,
     publisher: siteConfig.companyName,
-    keywords: siteConfig.keywords.list, // ✅ [FIXED]: ส่งค่าเป็น Array เท่านั้น ป้องกัน TS Error
+    keywords: siteConfig.keywords.list,
     openGraph: {
       type: "website",
       locale: "th_TH",
@@ -3162,16 +3231,18 @@ export function constructMetadata({
         follow: false,
       },
     }),
-    // 🔌 Connect Facebook Page ID: 914706508399571
+    // 🔌 Connect Facebook Page ID: 914706508399571 (Verified from Screenshot)
     other: {
       "fb:pages": "914706508399571",
     },
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
+
 ```typescript
 /** @format */
 
@@ -3416,9 +3487,11 @@ export const getServicesByCategory = (categorySlug: string): ServiceItem[] => {
   return services.filter((s) => s.category === target)
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
+
 ```typescript
 /** @format */
 
@@ -3597,9 +3670,11 @@ export const siteKeywords: string[] = [
   "คนทำเว็บไม่ทิ้งงาน",
 ]
 ```
+
 ---
 
 #### 🔍 Path: `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -3650,9 +3725,11 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
+
 ---
 
 #### 🔍 Path: `package.json`
+
 ```json
 {
   "name": "aemdevweb.com",
@@ -3720,9 +3797,11 @@ export const siteKeywords: string[] = [
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `types/index.ts`
+
 ```typescript
 /** @format */
 
@@ -3730,6 +3809,7 @@ export const siteKeywords: string[] = [
  * 🧬 Core System Types – AEMDEVWEB (v.2026)
  * ศูนย์รวม Interface และ Types สำหรับระบบสถาปัตยกรรมเว็บไซต์
  * ออกแบบมาเพื่อความเสถียรของระบบ (Type Safety) และรองรับการทำ SEO Specialist
+ * Update: รองรับโครงสร้าง Keywords แบบ Complex Object และ Facebook ID
  */
 
 /* -------------------------------------------------------------------------- */
@@ -3756,20 +3836,56 @@ export interface FooterNavigation {
 export interface SiteConfig {
   name: string
   shortName: string
+  nameTH: string
   companyName: string
+  title: string
+  slogan: string
+  expert: string
+  role: string
   description: string
   url: string
   ogImage: string
-  keywords: string[]
+  email: string
+
+  // 🛠️ Updated Keywords Structure: รองรับการทำ Metadata แบบเจาะจง
+  keywords: {
+    list: string[] // สำหรับ Metadata Array
+    all: string // สำหรับ Legacy String
+    core: string[]
+    tech: string[]
+    brand: string[]
+  }
+
   links: {
     line: string
-    github?: string
+    lineId: string
     facebook?: string
+    linkedin?: string
+    github?: string
     messenger?: string
   }
+
+  contact: {
+    // ✅ Semantic Contact สำหรับ SEO และเครื่องมือติดต่อ
+    email: string
+    lineId: string
+    facebook?: string
+    linkedin?: string
+    phone?: string
+  }
+
   cta: {
     main: string
     secondary: string
+    pricing: string
+  }
+
+  standards: {
+    // ✅ Technical Standards ประจำปี 2026
+    performance: number
+    lcp: number
+    security: string
+    aiReadiness: string
   }
 }
 
@@ -3915,9 +4031,11 @@ export interface TestimonialItem {
   image?: string
 }
 ```
+
 ---
 
 #### 🔍 Path: `next.config.mjs`
+
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
@@ -3958,9 +4076,11 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
+
 ---
 
 #### 🔍 Path: `components.json`
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -3985,9 +4105,11 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/blog.ts`
+
 ```typescript
 /** @format */
 
@@ -4068,9 +4190,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/template.ts`
+
 ```typescript
 /** @format */
 
@@ -4214,9 +4338,11 @@ export async function getTemplatesByServiceCategory(
   })
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
+
 ```typescript
 /** @format */
 
@@ -4347,14 +4473,19 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
+
 ---
 
 #### 🔍 Path: `.env`
+
 ```text
+
 ```
+
 ---
 
 ## 📝 Summary
+
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

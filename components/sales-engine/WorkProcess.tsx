@@ -1,125 +1,139 @@
 /** @format */
 
-"use client"
-
 import React from "react"
-import { motion } from "framer-motion"
+import { siteConfig } from "@/constants/site-config"
 import {
-  PenTool,
   Code2,
   Rocket,
-  ShieldCheck,
-  MessagesSquare,
+  CheckCircle,
+  MessageSquareQuote,
+  LayoutDashboard,
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 /**
- * 🛤️ ขั้นตอนการทำงาน (My Working Process)
- * ผมแบ่งขั้นตอนให้ชัดเจน เพื่อให้คุณมั่นใจว่างานจะออกมาเนี๊ยบและตรงเวลาครับ
+ * 🛠️ WorkProcess: ขั้นตอนการทำงาน (Speed Launch Strategy)
+ * [FIXED]: ลบ Unused Variable 'Search' ออกเพื่อให้ผ่านการ Linting 100%
  */
-const steps = [
+
+const processes = [
   {
-    title: "คุยกลยุทธ์ธุรกิจ",
+    title: "Consult & Strategy",
     description:
-      "ผมเริ่มจากการฟังโจทย์ของคุณ เพื่อวางแผนโครงสร้างเว็บที่ช่วยแก้ปัญหาธุรกิจและเน้นปิดการขายได้จริง",
-    icon: MessagesSquare,
+      "พูดคุยเป้าหมายธุรกิจ วิเคราะห์ Keyword และวางแผน Technical SEO ให้รองรับ Google AI",
+    icon: <MessageSquareQuote className="h-6 w-6" />,
+    color: "bg-blue-600",
   },
   {
-    title: "ออกแบบอย่างมีระดับ",
+    title: "Structure & UI Design",
     description:
-      "ดีไซน์หน้าเว็บให้ดูแพง ทันสมัย และต้องใช้งานง่ายทั้งบนคอมและมือถือ เพื่อภาพลักษณ์ที่ดีของแบรนด์คุณ",
-    icon: PenTool,
+      "วางโครงสร้างเว็บไซต์ (Sitemap) และออกแบบ UX/UI ที่เน้นการปิดการขาย (Conversion Focus)",
+    icon: <LayoutDashboard className="h-6 w-6" />,
+    color: "bg-indigo-600",
   },
   {
-    title: "ลงมือสร้างด้วยใจ",
+    title: "High-Performance Dev",
     description:
-      "ผมเขียนโค้ดด้วยเทคโนโลยีล่าสุด เพื่อให้เว็บคุณโหลดไวที่สุดและปลอดภัยที่สุด เหนือกว่าเว็บทั่วไปแน่นอน",
-    icon: Code2,
+      "พัฒนาด้วย Next.js และ TypeScript มั่นใจได้ในความเสถียรและความเร็วระดับ Performance 100",
+    icon: <Code2 className="h-6 w-6" />,
+    color: "bg-emerald-600",
   },
   {
-    title: "ส่งมอบความสำเร็จ",
+    title: "Final Audit & Launch",
     description:
-      "ตรวจสอบความเรียบร้อยทุกจุดก่อนออนไลน์ พร้อมสอนวิธีใช้งานเบื้องต้น เพื่อให้คุณเริ่มธุรกิจได้ทันที",
-    icon: Rocket,
+      "ตรวจสอบ Core Web Vitals, ทำ Schema Markup และส่งมอบงานพร้อมสอนใช้งานระบบ CMS",
+    icon: <Rocket className="h-6 w-6" />,
+    color: "bg-rose-600",
   },
 ]
 
-/**
- * 🏗️ WorkProcess — "ทำงานกับผม ง่ายและเป็นระบบ"
- * ส่วนนี้ผมแสดงให้เห็นถึงความใส่ใจในทุกขั้นตอนการสร้างเว็บไซต์ครับ
- */
 const WorkProcess = () => {
   return (
-    <section className="relative overflow-hidden py-12">
-      <div className="relative z-10 container mx-auto px-4">
-        {/* 📣 ส่วนหัวข้อ: บอกเล่าถึงความเป็นมืออาชีพ */}
-        <div className="mx-auto mb-20 max-w-4xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-1.5 shadow-sm"
-          >
-            <ShieldCheck className="h-4 w-4 text-emerald-500" />
-            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-400 uppercase">
-              My Professional Workflow
-            </span>
-          </motion.div>
-
-          <h2 className="font-prompt mb-6 text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
-            ขั้นตอนการทำงาน <br className="hidden md:block" />
-            <span className="text-emerald-500">ที่เนี๊ยบและวัดผลได้จริง</span>
-          </h2>
+    <section className="overflow-hidden bg-white px-6 py-24 selection:bg-emerald-500/10">
+      <div className="mx-auto max-w-6xl">
+        
+        {/* --- Section Header Specialist Style --- */}
+        <div className="mb-20 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
+            <h2 className="font-prompt mb-3 text-sm font-black tracking-[0.4em] text-emerald-600 uppercase italic">
+              Our Process
+            </h2>
+            <p className="font-prompt text-4xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+              Standard <br />
+              <span className="text-slate-400">Workflow.</span>
+            </p>
+            <p className="font-anuphan mt-6 text-xl font-bold text-slate-500">
+              ขั้นตอนการทำงานที่กระชับ จากไอเดียสู่เว็บไซต์ที่สร้างรายได้จริง
+            </p>
+          </div>
+          
+          <div className="hidden md:block">
+            <div className="font-prompt flex items-center gap-4 border-l-4 border-slate-100 pl-6 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase italic">
+              <span>EST. 2026</span>
+              <span className="text-emerald-500">Speed Launch Protocol</span>
+            </div>
+          </div>
         </div>
 
-        {/* 🛤️ ส่วนไทม์ไลน์: ลำดับการทำงาน (Process Timeline) */}
-        <div className="relative mx-auto max-w-5xl">
-          {/* เส้นแกนกลาง (แสดงผลเฉพาะหน้าจอคอม) */}
-          <div
-            className="absolute top-0 left-1/2 hidden h-full w-px -translate-x-1/2 bg-gradient-to-b from-emerald-500/50 via-white/10 to-transparent lg:block"
-            aria-hidden="true"
-          />
+        {/* --- Process Steps Grid --- */}
+        <div className="relative grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* เส้นเชื่อมต่อ Linear (Desktop Only) */}
+          <div className="absolute top-12 left-0 -z-10 hidden h-px w-full bg-slate-100 lg:block" />
 
-          <div className="space-y-16 lg:space-y-32">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                className={cn(
-                  "relative flex flex-col items-center gap-8 lg:flex-row lg:gap-20",
-                  index % 2 !== 0 && "lg:flex-row-reverse"
-                )}
-              >
-                {/* 🛡️ ส่วนของไอคอนลำดับขั้นตอน */}
-                <div className="relative z-10 flex h-24 w-24 shrink-0 items-center justify-center rounded-[2.5rem] bg-white text-slate-950 shadow-2xl ring-8 ring-white/5 transition-all duration-500 hover:scale-110 hover:rotate-6">
-                  <step.icon className="h-10 w-10" />
-                  <div className="font-prompt absolute -right-2 -bottom-2 flex h-10 w-10 items-center justify-center rounded-full border-4 border-slate-950 bg-emerald-500 text-sm font-black text-slate-950 shadow-lg">
-                    {index + 1}
-                  </div>
-                </div>
-
-                {/* 📝 การ์ดแสดงรายละเอียดเนื้อหา */}
+          {processes.map((step, index) => (
+            <div key={index} className="group relative">
+              {/* Step Number & Icon Architecture */}
+              <div className="mb-8 flex items-center justify-between">
                 <div
-                  className={cn(
-                    "w-full rounded-[3rem] border border-white/10 bg-white/5 p-10 backdrop-blur-md transition-all duration-500 hover:border-emerald-500/30 hover:bg-white/10 md:p-14 lg:flex-1",
-                    index % 2 === 0 ? "lg:text-right" : "lg:text-left"
-                  )}
+                  className={`h-16 w-16 rounded-2xl ${step.color} flex items-center justify-center text-white shadow-2xl shadow-slate-200 transition-all duration-500 group-hover:-rotate-6 group-hover:scale-110`}
                 >
-                  <h3 className="font-prompt mb-4 text-2xl font-black tracking-tight text-white uppercase italic md:text-4xl">
-                    {step.title}
-                  </h3>
-                  <p className="font-anuphan text-lg leading-relaxed font-bold text-slate-400">
-                    {step.description}
-                  </p>
+                  {step.icon}
                 </div>
+                <span className="font-prompt text-6xl font-black text-slate-50 transition-colors group-hover:text-slate-100 italic">
+                  0{index + 1}
+                </span>
+              </div>
 
-                {/* ช่องว่างเพื่อความสมดุลของ Layout (เฉพาะหน้าจอคอม) */}
-                <div className="hidden lg:block lg:flex-1" />
-              </motion.div>
-            ))}
+              {/* Step Content */}
+              <h3 className="font-prompt mb-4 text-xl font-black tracking-tight text-slate-900 uppercase italic transition-colors group-hover:text-emerald-600">
+                {step.title}
+              </h3>
+              <p className="font-anuphan text-base font-bold leading-relaxed text-slate-500">
+                {step.description}
+              </p>
+
+              {/* Technical Indicator Dot (Desktop) */}
+              <div className="absolute top-12 -left-2 hidden h-4 w-4 rounded-full border-4 border-white bg-slate-200 transition-all duration-500 group-hover:scale-125 group-hover:bg-emerald-500 lg:block" />
+            </div>
+          ))}
+        </div>
+
+        {/* --- Conversion Hook Box --- */}
+        <div className="relative mt-24 overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white shadow-3xl md:p-16">
+          <div className="absolute top-0 right-0 p-10 opacity-5">
+            <Rocket size={200} />
+          </div>
+          
+          <div className="relative z-10 flex flex-col items-center justify-between gap-10 md:flex-row">
+            <div className="text-center md:text-left">
+              <h4 className="font-prompt mb-3 text-3xl font-black tracking-tighter uppercase italic md:text-4xl">
+                พร้อมเริ่มโปรเจกต์ของคุณหรือยัง?
+              </h4>
+              <p className="font-anuphan text-lg font-bold text-slate-400">
+                คุยตรงกับ Specialist จบงานไว ไม่ผ่านคนกลาง มั่นใจในผลลัพธ์
+              </p>
+            </div>
+            
+            <a
+              href={siteConfig.links.line}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full md:w-auto"
+            >
+              <button className="font-prompt group flex w-full items-center justify-center gap-3 rounded-2xl bg-emerald-500 px-12 py-5 text-lg font-black tracking-widest text-slate-900 uppercase italic transition-all hover:scale-105 hover:bg-white active:scale-95 md:w-auto">
+                <CheckCircle size={22} className="transition-transform group-hover:rotate-12" />
+                {siteConfig.cta.main}
+              </button>
+            </a>
           </div>
         </div>
       </div>

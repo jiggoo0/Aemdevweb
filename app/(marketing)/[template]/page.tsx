@@ -20,62 +20,62 @@ import LineStickyButton from "@/components/shared/LineStickyButton"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🎨 Page Interface
+ * 🎨 Shared Constants
+ * ป้องกัน ReferenceError โดยนิยามตัวแปรไว้นอก Component scope
+ */
+const MARKETPLACE_DESCRIPTION =
+  "รวบรวมเทมเพลตเว็บไซต์ประสิทธิภาพสูงที่จูน Performance ระดับ 100/100 เพื่อสร้างความได้เปรียบในการแข่งขันให้ธุรกิจ SME และโรงงานไทย"
+
+/**
+ * 🎨 Page Interface: มาตรฐาน Next.js 16 (Async Context)
  */
 interface TemplateMainPageProps {
-  params: Promise<{
-    template: string // ค่านี้จะเป็น 'templates' ตามโครงสร้างโฟลเดอร์
-  }>
-  searchParams: Promise<{
-    q?: string
-    cat?: string
-  }>
+  params: Promise<{ template: string }>
+  searchParams: Promise<{ q?: string; cat?: string }>
 }
 
 /**
- * 🛠️ 1. generateStaticParams — "Zero-404 Strategy"
+ * 🛠️ Static Generation Strategy: เพิ่มความเร็วในการเข้าถึงหน้าหลัก
  */
 export async function generateStaticParams() {
   return [{ template: "templates" }]
 }
 
 /**
- * 🔍 2. generateMetadata (Technical SEO Specialist)
+ * 🔍 Metadata Strategy: เน้นความน่าเชื่อถือระดับผู้เชี่ยวชาญ
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Premium Website Templates | สถาปัตยกรรมเว็บไซต์ Specialist | ${siteConfig.shortName}`,
-    description:
-      "รวมเทมเพลตเว็บไซต์คุณภาพสูงที่ผมจูนความเร็วระดับ Specialist มาให้แล้ว เพื่อสร้างความได้เปรียบให้ธุรกิจ SME และโรงงานอุตสาหกรรม",
-    alternates: {
-      canonical: `${siteConfig.url}/templates`,
-    },
+    title: `Premium Templates Marketplace | สถาปัตยกรรมเว็บไซต์ 2026 | ${siteConfig.shortName}`,
+    description: MARKETPLACE_DESCRIPTION,
+    alternates: { canonical: `${siteConfig.url}/templates` },
   }
 }
 
 /**
- * 🚀 3. Main Marketplace Page Component (v2026)
+ * 🚀 Template Marketplace Hub
  */
 export default async function TemplateMainPage({
   params,
   searchParams,
 }: TemplateMainPageProps) {
-  // ✅ ดึงค่าแบบ Async ตามมาตรฐาน Next.js 16
+  // ✅ Next.js 16 Async Pattern (Await params as per framework requirements)
   const { template } = await params
   const { q: query, cat: selectedCat } = await searchParams
 
-  // 🛡️ Guard Clause: ตรวจสอบ URL พื้นฐาน (ต้องเป็น /templates เท่านั้น)
-  if (template !== "templates") {
-    return notFound()
-  }
+  // 🛡️ Guard Clause: ตรวจสอบ Path Integrity
+  if (template !== "templates") notFound()
 
+  // ดึงข้อมูล Template ทั้งหมดผ่าน Specialist Logic
   const allTemplates = await getAllTemplates()
 
-  // 🔍 Filtering Logic: ระบบคัดกรองอัจฉริยะ
+  // 🔍 Advanced Multi-Layer Filtering
   const filteredTemplates = allTemplates.filter((tpl) => {
-    const matchesSearch = query
-      ? tpl.name.toLowerCase().includes(query.toLowerCase()) ||
-        tpl.description?.toLowerCase().includes(query.toLowerCase())
+    const searchStr = query?.toLowerCase() || ""
+    const matchesSearch = searchStr
+      ? tpl.name.toLowerCase().includes(searchStr) ||
+        tpl.description?.toLowerCase().includes(searchStr) ||
+        tpl.category.toLowerCase().includes(searchStr)
       : true
 
     const matchesCategory =
@@ -88,57 +88,84 @@ export default async function TemplateMainPage({
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ว่าหน้านี้คือศูนย์รวมสินค้า (ItemPage Schema) */}
+      {/* 🔎 JSON-LD Search Engine Optimization */}
       <JsonLd
         type="CollectionPage"
         data={{
-          name: "Premium Website Templates Marketplace",
-          description: "คัดสรรเทมเพลตเว็บไซต์ที่เน้น Conversion และ Speed",
+          name: "Premium Web Architecture Marketplace",
+          description: MARKETPLACE_DESCRIPTION,
           url: `${siteConfig.url}/templates`,
         }}
       />
 
+      {/* 🌌 Background Infrastructure (High-End Industrial Atmosphere) */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
+      </div>
+
       <TemplateNavbar />
 
-      <main className="flex-1">
-        {/* 🎭 Hero Layer: ดุดัน สุขุม สไตล์พรีเมียม */}
+      <main className="relative z-10 flex-1 pb-24">
+        {/* 🎭 Hero Component: Visual Impact Layer */}
         <TemplateHero
           title="WEBSITE MARKETPLACE"
           subtitle="เลือกสถาปัตยกรรมที่ใช่ เพื่อสร้างความได้เปรียบที่เหนือกว่าให้ธุรกิจคุณ"
           themeColor="emerald"
         />
 
-        <div className="container mx-auto px-4 py-12">
-          {/* 🔍 Search & Filter Layer: ยกระดับประสบการณ์การค้นหา */}
-          <div className="mb-16 flex flex-col items-center justify-between gap-8 md:flex-row">
-            <TemplateSearch placeholder="ค้นหาสถาปัตยกรรมที่ต้องการ..." />
-            <TemplateFilter activeCategory={selectedCat || "all"} />
+        <div className="container mx-auto px-6">
+          {/* 🔍 Discovery Hub: Search & Category Logic */}
+          <div className="relative z-20 -mt-10 mb-16 lg:-mt-14">
+            <div className="shadow-3xl flex flex-col items-center justify-between gap-6 rounded-[2.5rem] border border-white/5 bg-slate-900/50 p-6 backdrop-blur-xl md:p-10 lg:flex-row">
+              <TemplateSearch
+                placeholder="ค้นหาชื่อเทมเพลต หรือ ประเภทธุรกิจ..."
+                className="w-full lg:max-w-md"
+              />
+              <TemplateFilter activeCategory={selectedCat || "all"} />
+            </div>
           </div>
 
-          {/* 🏗️ Template Grid Section */}
-          <section className="min-h-[600px]">
-            <div className="mb-10 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="h-8 w-1 bg-emerald-500" />
-                <h2 className="font-prompt text-2xl font-black text-white uppercase italic md:text-3xl">
-                  {query ? `ค้นหา: "${query}"` : "All Premium Templates"}
-                </h2>
+          {/* 🏗️ Results Layer */}
+          <section className="min-h-[600px] space-y-12">
+            {/* Results Status Bar */}
+            <div className="flex flex-col justify-between gap-4 border-b border-white/5 pb-8 md:flex-row md:items-end">
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <div className="h-6 w-1.5 rounded-full bg-emerald-500" />
+                  <h2 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic">
+                    {query ? `Results: "${query}"` : "Premium Architectures"}
+                  </h2>
+                </div>
+                <p className="font-anuphan text-sm font-bold text-slate-500">
+                  High-Performance Standard 2026
+                </p>
               </div>
-              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1 text-xs font-black tracking-widest text-emerald-500 uppercase">
-                {filteredTemplates.length} Items Found
-              </span>
+
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5">
+                <span className="text-[10px] font-black tracking-[0.2em] text-emerald-500 uppercase">
+                  {filteredTemplates.length} Solutions Available
+                </span>
+              </div>
             </div>
 
-            {/* ระบบ Grid สำหรับแสดงผลการ์ดเทมเพลต */}
+            {/* Template Rendering Engine */}
             <TemplateGrid initialTemplates={filteredTemplates} />
 
-            {/* Empty State กรณีค้นหาไม่เจอ */}
+            {/* Empty State Visualization */}
             {filteredTemplates.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-32 text-center">
-                <p className="font-anuphan text-lg text-slate-500">
-                  ไม่พบเทมเพลตที่ตรงกับเงื่อนไขของคุณ <br />
-                  ลองค้นหาด้วยคำอื่น หรือทักมาให้ผมช่วยแนะนำได้ครับ
-                </p>
+              <div className="animate-in fade-in zoom-in flex flex-col items-center justify-center space-y-6 py-40 text-center duration-500">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/5 bg-slate-900 text-3xl font-black text-slate-700 italic">
+                  ?
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-prompt text-xl font-black text-white italic">
+                    ไม่พบสถาปัตยกรรมที่ตรงเงื่อนไข
+                  </h3>
+                  <p className="font-anuphan mx-auto max-w-sm text-slate-500">
+                    ลองปรับเปลี่ยนคำค้นหา หรือทักมาคุยกับผมโดยตรง
+                    เพื่อออกแบบโครงสร้างใหม่ให้ธุรกิจคุณครับ
+                  </p>
+                </div>
               </div>
             )}
           </section>
@@ -147,10 +174,9 @@ export default async function TemplateMainPage({
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.4em] text-slate-500 uppercase">
-          AEMDEVWEB Marketplace System v2026 — Expert Dev Only
+      <footer className="border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          Managed by {siteConfig.expert} v2026 — Advanced Infrastructure
         </p>
       </footer>
     </div>

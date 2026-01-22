@@ -1,36 +1,126 @@
 ---
 title: "Shop Master Pro"
-description: "ย้ายร้านค้าของคุณมาอยู่ในบ้านตัวเอง ปิดการขายไวขึ้น 3 เท่า ด้วยระบบ E-Commerce ที่จูนมาเพื่อยอดขายโดยเฉพาะ"
+description: "ยกระดับระบบค้าขายออนไลน์ด้วยสถาปัตยกรรมความเร็วสูง ปรับแต่งมาเพื่อเพิ่มอัตราการปิดการขายโดยเฉพาะ"
 category: "E-Commerce"
 themeColor: "emerald"
 ---
 
-<SalesHook
-  badge="SME Best Seller 2026"
-  title="หยุดเสียค่าธรรมเนียมให้แพลตฟอร์ม... แล้วมาเอาเงินคืนเข้ากระเป๋าตัวเอง!"
-  description="สร้างระบบขายของออนไลน์ที่เป็นกรรมสิทธิ์ของคุณ 100% ด้วยสถาปัตยกรรมความเร็วสูง ครบทั้งระบบสต็อก แจ้งเตือน และการชำระเงินที่ง่ายจนลูกค้าปฏิเสธไม่ได้"
-/>
+import {
+  ShoppingBag,
+  ShieldCheck,
+  Zap,
+  Bell,
+  Layout,
+  PackageCheck,
+  BarChart3,
+} from "lucide-react"
 
-## ยกระดับการขายออนไลน์ด้วยสถาปัตยกรรมความเร็วสูง
+{/* Specialist Sales Hook */}
 
-- **Zero Commission Strategy:** ขายเท่าไหร่รับกำไรเต็ม 100% ไม่ต้องแบ่งเปอร์เซ็นต์ให้ Marketplace
-- **Smart Inventory Specialist:** ระบบจัดการสต็อกสินค้าที่แม่นยำ แจ้งเตือนทันทีเมื่อสินค้าใกล้หมด ให้ธุรกิจคุณไหลลื่นไม่มีสะดุด
-- **Instant Line Command:** ออเดอร์เข้าปุ๊บ แจ้งเตือนเข้า Line ของคุณและทีมงานทันที ปิดงานไว ยอดโอนมาเร็ว
-- **High-Speed Checkout:** ขั้นตอนการสั่งซื้อที่สั้นและลื่นไหลที่สุด ลดอัตราการทิ้งตะกร้าสินค้าด้วยเทคโนโลยีการโหลดในพริบตา
+<SalesHook>
+  ย้ายฐานการค้าของคุณมายังแพลตฟอร์มที่เป็นกรรมสิทธิ์ 100%
+  ด้วยสถาปัตยกรรมความเร็วสูงปี 2026 ที่ออกแบบมาเพื่อ **Conversion**
+  และการคืนกำไรสูงสุดให้กับธุรกิจ
+  ลดการพึ่งพาแพลตฟอร์มตัวกลางและตัดภาระค่าธรรมเนียมส่วนต่างที่ไม่จำเป็น
+</SalesHook>
 
-<FeatureList
-  items={[
-    "ระบบตะกร้าสินค้าอัจฉริยะ ทำงานแทนพนักงานขาย 24 ชั่วโมง",
-    "ระบบแจ้งโอนและแนบหลักฐานที่ตรวจสอบง่ายที่สุด",
-    "หน้าแสดงผลสินค้าที่ออกแบบมาเพื่อกระตุ้นยอดโอน (Conversion Focus)",
-    "โครงสร้าง Google Specialist รองรับการทำโฆษณา Shopping Ads เต็มรูปแบบ",
-  ]}
-/>
+## สถาปัตยกรรมเพื่อการขยายตัวของธุรกิจออนไลน์
 
-<CallToAction
-  title="พร้อมเปลี่ยน 'ผู้เยี่ยมชม' ให้เป็น 'ยอดโอน' หรือยัง?"
-  url="https://lin.ee/SVMBEJ8"
-  label="ทักไลน์คุยกับ นายเอ็มซ่ามากส์"
-/>
+<div className="my-12 grid gap-8 md:grid-cols-2">
+  <div className="flex gap-4">
+    <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
+      <ShieldCheck size={24} />
+    </div>
+    <div>
+      <h3 className="font-prompt text-lg font-black text-slate-900 uppercase italic tracking-tighter">Zero Commission Strategy</h3>
+      <p className="font-anuphan font-bold text-slate-500">รับผลกำไรจากการขายเต็ม 100% โดยไม่มีการหักค่าธรรมเนียมส่วนต่างหรือเปอร์เซ็นต์การขาย</p>
+    </div>
+  </div>
+
+<div className="flex gap-4">
+  <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
+    <PackageCheck size={24} />
+  </div>
+  <div>
+    <h3 className="font-prompt text-lg font-black tracking-tighter text-slate-900 uppercase italic">
+      Smart Inventory Specialist
+    </h3>
+    <p className="font-anuphan font-bold text-slate-500">
+      ระบบจัดการสต็อกที่แม่นยำ
+      พร้อมระบบแจ้งเตือนเชิงรุกเพื่อให้ธุรกิจดำเนินไปอย่างต่อเนื่อง
+    </p>
+  </div>
+</div>
+
+<div className="flex gap-4">
+  <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
+    <Bell size={24} />
+  </div>
+  <div>
+    <h3 className="font-prompt text-lg font-black tracking-tighter text-slate-900 uppercase italic">
+      Instant Line Notification
+    </h3>
+    <p className="font-anuphan font-bold text-slate-500">
+      รายงานคำสั่งซื้อใหม่เข้าสู่ระบบ Line ของทีมงานทันที
+      เพื่อความรวดเร็วในการจัดส่งและบริการ
+    </p>
+  </div>
+</div>
+
+  <div className="flex gap-4">
+    <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 shadow-sm">
+      <Zap size={24} />
+    </div>
+    <div>
+      <h3 className="font-prompt text-lg font-black text-slate-900 uppercase italic tracking-tighter">High-Speed Checkout</h3>
+      <p className="font-anuphan font-bold text-slate-500">ลดอัตราการละทิ้งตะกร้าสินค้าด้วยระบบการชำระเงินที่สั้นและรวดเร็วที่สุดในมาตรฐานปี 2026</p>
+    </div>
+  </div>
+</div>
+
+## ข้อมูลเชิงเทคนิคและประสิทธิภาพระบบ
+
+<ImpactStats />
+
+<div className="my-10 grid gap-6 md:grid-cols-2">
+  <div className="rounded-[2.5rem] border border-slate-100 bg-white p-10 shadow-sm transition-all hover:border-emerald-200">
+    <div className="mb-6 flex items-center gap-3">
+      <ShoppingBag className="text-emerald-600" size={20} />
+      <h3 className="font-prompt text-xl font-black tracking-tighter text-slate-950 uppercase italic">
+        System Features
+      </h3>
+    </div>
+    <ul className="font-anuphan space-y-4 font-bold text-slate-500">
+      <li className="flex items-center gap-2 underline decoration-emerald-500/10 underline-offset-8">
+        ระบบตะกร้าสินค้าอัจฉริยะแบบ Server-Side
+      </li>
+      <li className="flex items-center gap-2 underline decoration-emerald-500/10 underline-offset-8">
+        อินเตอร์เฟซแจ้งโอนและแนบหลักฐานความปลอดภัยสูง
+      </li>
+      <li className="flex items-center gap-2 underline decoration-emerald-500/10 underline-offset-8">
+        โครงสร้างรองรับ Google Shopping Ads และ SEO
+      </li>
+      <li className="flex items-center gap-2 underline decoration-emerald-500/10 underline-offset-8">
+        ระบบหลังบ้าน Dashboard วิเคราะห์ยอดขายรายวัน
+      </li>
+    </ul>
+  </div>
+
+  <div className="flex flex-col justify-center rounded-[2.5rem] border border-emerald-100 bg-emerald-50/20 p-10 text-center">
+    <div className="mb-4 flex justify-center text-emerald-600">
+      <BarChart3 size={40} className="animate-pulse" />
+    </div>
+    <h3 className="font-prompt mb-6 text-xl font-black text-emerald-600 uppercase italic">
+      Conversion Score
+    </h3>
+    <SpeedDemon score={100} />
+  </div>
+</div>
+
+<WorkProcess />
+
+## บทสรุปสำหรับผู้ประกอบการ
+
+เปลี่ยนร้านค้าของคุณให้เป็นเครื่องจักรผลิตรายได้อัตโนมัติที่ทำงานแม่นยำตลอด 24 ชั่วโมง พร้อมรองรับการเติบโตอย่างยั่งยืน
 
 <TemplatePricingCard />

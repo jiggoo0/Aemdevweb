@@ -12,9 +12,10 @@
     "rating": 5.0
   },
   "tech": {
-    "framework": "สถาปัตยกรรมความเร็วสูง (App Router)",
+    "framework": "Next.js 16 (App Router)",
     "speedScore": 99,
-    "seoReady": true
+    "seoReady": true,
+    "architecture": "Server-Side Rendering"
   },
   "features": [
     "ระบบจองห้องพักอัจฉริยะ (Booking Engine)",

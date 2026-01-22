@@ -16,17 +16,16 @@ import { cn } from "@/lib/utils"
 /**
  * 🏗️ Navbar Specialist Edition (v2026)
  * มาพร้อมระบบ Glassmorphism และ Active Link Detection ระดับพรีเมียม
- * แก้ไขปัญหา Hydration Mismatch และปรับจูนการดึงข้อมูลอัตลักษณ์แบรนด์
+ * ออกแบบมาเพื่อสร้าง Perceived Performance และความน่าเชื่อถือให้แบรนด์
  */
 const Navbar = () => {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  // 🛡️ [FIXED]: ป้องกัน Hydration Error (SSR vs Client Mismatch)
+  // 🛡️ [FIXED]: ป้องกัน Hydration Error (ป้องกันความต่างของ HTML ระหว่าง Server และ Client)
   const [isMounted, setIsMounted] = useState(false)
 
-  // 🧬 ตรวจจับความลึกของการ Scroll (Sticky Glass Effect)
   useEffect(() => {
     setIsMounted(true)
     const handleScroll = () => {
@@ -36,41 +35,43 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // 🔒 ระบบ Auto-close เมื่อตรวจพบการเปลี่ยนหน้า
+  // 🔒 ระบบ Auto-close เมื่อมีการนำทาง (Navigation)
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
+
+  // ถ้ายังไม่ Mount ให้เรนเดอร์ Navbar เปล่าเพื่อรักษา Layout นิ่งๆ ไว้ (กัน Layout Shift)
+  if (!isMounted) return <div className="h-20 w-full bg-transparent" />
 
   return (
     <nav
       className={cn(
         "fixed top-0 z-[100] w-full antialiased transition-all duration-500",
         isScrolled
-          ? "border-b border-slate-200/50 bg-white/80 py-3 shadow-sm backdrop-blur-xl"
-          : "bg-transparent py-6"
+          ? "border-b border-slate-200/50 bg-white/80 py-4 shadow-sm backdrop-blur-xl"
+          : "bg-transparent py-8"
       )}
     >
-      <div className="container mx-auto flex items-center justify-between px-4">
-        {/* 🏷️ Identity Hub: แบรนด์นายเอ็มซ่ามากส์ */}
+      <div className="container mx-auto flex items-center justify-between px-6">
+        {/* 🏷️ Identity Hub: แบรนด์ AEMDEVWEB */}
         <Link
           href="/"
-          className="group font-prompt flex items-center gap-2 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
+          className="group font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-600">
-            <Zap className="h-5 w-5 fill-emerald-400 text-emerald-400" />
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-600">
+            <Zap className="h-6 w-6 fill-emerald-400 text-emerald-400" />
           </div>
           <span className="flex items-center uppercase">
-            {/* ✅ [FIXED]: ใช้ siteConfig.name แทน shortName ตามที่อัปเดตใน site-config.ts */}
             {siteConfig.name}
-            <span className="ml-1 text-emerald-500">DEV</span>
-            <span className="ml-2 hidden text-[8px] font-black tracking-[0.4em] text-slate-400 uppercase opacity-60 md:block">
-              Specialist 2026
+            <span className="ml-1 text-emerald-500 italic">DEV</span>
+            <span className="ml-3 hidden text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase opacity-60 md:block">
+              v.2026
             </span>
           </span>
         </Link>
 
         {/* 🧭 Desktop Menu: High-Scanning Layout */}
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
 
@@ -86,18 +87,18 @@ const Navbar = () => {
               >
                 {item.name}
 
-                {/* 🚀 Active Indicator: เรนเดอร์เฉพาะเมื่อเป็น Client แล้วเพื่อกัน Hydration Error */}
-                {isMounted && isActive && (
+                {/* 🚀 Active Indicator (Glow Effect) */}
+                {isActive && (
                   <motion.div
                     layoutId="nav-glow"
-                    className="absolute -bottom-2 left-0 h-0.5 w-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"
+                    className="absolute -bottom-2.5 left-0 h-0.5 w-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
 
                 {/* Feature Badges */}
                 {item.badge && (
-                  <span className="absolute -top-2 -right-7 flex h-4 items-center rounded-full bg-emerald-500 px-1.5 text-[7px] font-black tracking-tighter text-white uppercase shadow-sm">
+                  <span className="absolute -top-3 -right-8 flex h-4 items-center rounded-full bg-emerald-500 px-2 text-[7px] font-black tracking-[0.1em] text-white uppercase shadow-lg">
                     {item.badge}
                   </span>
                 )}
@@ -108,10 +109,10 @@ const Navbar = () => {
           {/* 🚀 Conversion Hook: Start Project */}
           <Link
             href="/contact"
-            className="group font-prompt flex items-center gap-3 rounded-2xl bg-slate-950 px-8 py-4 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
+            className="group font-prompt flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
           >
-            คุยงานโปรเจกต์
-            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+            คุยโปรเจกต์
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
 
@@ -119,48 +120,47 @@ const Navbar = () => {
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Menu"
         >
-          {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* 🌑 Mobile Navigation Overlay */}
+      {/* 🌑 Mobile Navigation Overlay (Framer Motion Optimized) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full overflow-hidden border-b border-slate-100 bg-white shadow-2xl lg:hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="shadow-3xl absolute top-full left-0 w-full overflow-hidden border-b border-slate-100 bg-white/95 backdrop-blur-2xl lg:hidden"
           >
-            <div className="flex flex-col gap-6 p-8">
+            <div className="flex flex-col gap-8 p-10">
               {mainNav?.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "font-prompt flex items-center justify-between text-2xl font-black tracking-widest uppercase transition-all",
+                    "font-prompt flex items-center justify-between text-3xl font-black tracking-tighter uppercase italic transition-all",
                     pathname === item.href
                       ? "text-emerald-500"
-                      : "text-slate-900"
+                      : "text-slate-950"
                   )}
                 >
                   {item.name}
                   {item.badge && (
-                    <span className="rounded-full bg-emerald-500 px-3 py-1 text-[10px] font-black text-white uppercase shadow-md">
+                    <span className="rounded-full bg-emerald-500 px-4 py-1 text-[10px] font-black text-white uppercase shadow-md">
                       {item.badge}
                     </span>
                   )}
                 </Link>
               ))}
-              <div className="h-px w-full bg-slate-100" />
+              <div className="h-[2px] w-full bg-slate-50" />
               <Link
                 href="/contact"
-                className="font-prompt flex w-full items-center justify-center gap-4 rounded-3xl bg-emerald-500 py-5 text-sm font-black tracking-[0.2em] text-slate-950 uppercase shadow-xl shadow-emerald-500/30 transition-transform active:scale-95"
+                className="font-prompt flex w-full items-center justify-center gap-4 rounded-3xl bg-slate-950 py-6 text-sm font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:bg-emerald-500 active:scale-95"
               >
-                ปรึกษา {siteConfig.expert}
-                <ArrowRight className="h-5 w-5" />
+                เริ่มโปรเจกต์กับ {siteConfig.expert}
+                <ArrowRight className="h-6 w-6" />
               </Link>
             </div>
           </motion.div>

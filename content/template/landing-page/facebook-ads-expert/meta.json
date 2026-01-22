@@ -12,9 +12,10 @@
     "rating": 4.8
   },
   "tech": {
-    "framework": "สถาปัตยกรรมความเร็วสูง (App Router)",
+    "framework": "Next.js 16 (App Router)",
     "speedScore": 99,
-    "seoReady": true
+    "seoReady": true,
+    "architecture": "High-Conversion Architecture"
   },
   "features": [
     "โครงสร้างเน้นปิดการขาย (High-Conversion Layout)",

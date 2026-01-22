@@ -1,166 +1,107 @@
 /** @format */
 
 import React from "react"
-import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-// 📦 Specialist Logic & Data
+// 📦 Specialist Logic & Data Hub
 import { getAllTemplates } from "@/lib/template"
 import { siteConfig } from "@/constants/site-config"
 
-// 🧩 Specialist Components (Marketplace Layer)
+// 🧩 Specialist UI Components
 import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
 import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
-import { TemplateGrid } from "@/components/template/marketplace/TemplateGrid"
-import { TemplateFilter } from "@/components/template/marketplace/TemplateFilter"
-import { TemplateSearch } from "@/components/template/marketplace/TemplateSearch"
-
-// ✅ UI Shared Components
+import TemplateCard from "@/components/template/marketplace/TemplateCard"
 import LineStickyButton from "@/components/shared/LineStickyButton"
-import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🎨 CategoryPage Interface (Next.js 16 Specialist)
+ * 🎨 Props Interface: รองรับ Async Params
  */
 interface CategoryPageProps {
-  params: Promise<{
-    template: string // หน้าคงที่ เช่น 'templates'
-    category: string // หมวดหมู่ เช่น 'booking', 'e-commerce'
-  }>
-  searchParams: Promise<{
-    q?: string // คำค้นหาภายในหมวดหมู่
-  }>
+  params: Promise<{ template: string; category: string }>
 }
 
 /**
- * 🛠️ 1. generateStaticParams
- * กวาดหาหมวดหมู่ทั้งหมดเพื่อสร้างหน้า Static ล่วงหน้า เพิ่มประสิทธิภาพความเร็วสูงสุด
+ * 🛠️ 1. Static Paths Generation (SSG Optimization)
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
-
-  // สร้างรายการหมวดหมู่ที่ไม่ซ้ำกัน (Unique Categories)
-  const categories = Array.from(
-    new Set(templates.map((t) => t.category.toLowerCase()))
-  )
-
-  return categories.map((cat) => ({
-    template: "templates",
-    category: cat,
-  }))
+  
+  // ✅ [FIXED]: เพิ่มการตรวจสอบข้อมูลก่อน map เพื่อป้องกัน undefined error ตอน Build
+  return templates
+    .filter(t => t.category) 
+    .map((t) => ({
+      template: "templates",
+      category: t.category.toLowerCase(),
+    }))
 }
 
 /**
- * 🔍 2. generateMetadata (Technical SEO Specialist)
+ * 🔍 2. Metadata Strategy
  */
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps) {
   const { category } = await params
-  const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
+  if (!category) return { title: "Category Not Found" }
+
+  const title = category.charAt(0).toUpperCase() + category.slice(1)
 
   return {
-    title: `${categoryName} Templates | สถาปัตยกรรมความเร็วสูง | ${siteConfig.shortName}`,
-    description: `เลือกชมโครงสร้างเว็บไซต์หมวด ${categoryName} ที่ผ่านการจูนความเร็วและ SEO ระดับ Specialist โดย นายเอ็มซ่ามากส์`,
-    alternates: {
-      canonical: `${siteConfig.url}/templates/${category}`,
-    },
+    title: `${title} Templates | Premium Architecture by ${siteConfig.expert}`,
+    description: `รวมเทมเพลตเว็บไซต์หมวดหมู่ ${title} ที่เน้น PageSpeed และ Conversion สูงสุด`,
   }
 }
 
 /**
- * 🚀 3. Main Category Page Component
+ * 🚀 3. Category Listing Component
  */
-export default async function TemplateCategoryPage({
-  params,
-  searchParams,
-}: CategoryPageProps) {
-  // ดึงค่า Params และ SearchParams แบบ Async ตามมาตรฐาน Next.js 16
-  const { category: categorySlug, template } = await params
-  const { q: query } = await searchParams
-
-  // 🛡️ Guard Clause: ตรวจสอบ URL Prefix (ต้องเป็น /templates/...)
-  if (template !== "templates") {
-    return notFound()
-  }
-
+export default async function TemplateCategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params
   const allTemplates = await getAllTemplates()
 
-  // 🛡️ Guard Clause: ตรวจสอบว่ามีหมวดหมู่นี้ในระบบจริงหรือไม่
-  const categoryExists = allTemplates.some(
-    (t) => t.category.toLowerCase() === categorySlug.toLowerCase()
+  // 🛡️ [GUARD]: กรองเทมเพลตที่ตรงกับหมวดหมู่ และป้องกันกรณี category เป็น undefined
+  const filteredTemplates = allTemplates.filter(
+    (t) => t.category && t.category.toLowerCase() === category?.toLowerCase()
   )
 
-  if (!categoryExists) {
-    return notFound()
+  if (filteredTemplates.length === 0) {
+    notFound()
   }
 
-  // 🔍 Filtering Logic: คัดกรองตามหมวดหมู่และคำค้นหา
-  const filteredTemplates = allTemplates.filter((tpl) => {
-    const isInCategory =
-      tpl.category.toLowerCase() === categorySlug.toLowerCase()
-    const matchesSearch = query
-      ? tpl.name.toLowerCase().includes(query.toLowerCase()) ||
-        tpl.description?.toLowerCase().includes(query.toLowerCase())
-      : true
-
-    return isInCategory && matchesSearch
-  })
+  const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ถึงหมวดหมู่เทมเพลตนี้ */}
-      <JsonLd
-        type="CollectionPage"
-        data={{
-          name: `หมวดหมู่เทมเพลต ${categorySlug} | ${siteConfig.shortName}`,
-          description: `รวมเทมเพลตเว็บไซต์หมวด ${categorySlug} ที่เน้นความไวและ SEO`,
-          url: `${siteConfig.url}/templates/${categorySlug}`,
-        }}
-      />
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
+      
+      {/* 🌌 Background Infrastructure */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
       <TemplateNavbar />
 
-      <main className="flex-1">
-        {/* 🎭 Hero Layer: ดุดันสไตล์ Industrial Minimalism */}
+      <main className="relative z-10 flex-1">
         <TemplateHero
-          title={categorySlug.replace("-", " ").toUpperCase()}
-          subtitle={`รวมสถาปัตยกรรมเว็บไซต์หมวด ${categorySlug} ที่ผมออกแบบมาเพื่อปิดการขายให้ SME โดยเฉพาะ`}
-          category={categorySlug}
+          title={categoryName.toUpperCase()}
+          subtitle={`คัดสรรสถาปัตยกรรมเว็บไซต์ในหมวด ${categoryName} เพื่อผลลัพธ์ทางธุรกิจที่ดีที่สุด`}
+          image="/images/og-image.png" // หรือใช้ภาพประจำหมวดหมู่
+          category="Marketplace"
           themeColor="emerald"
         />
 
-        <div className="container mx-auto px-4 py-12">
-          {/* 🔍 Search & Filter Layer: ระบบคัดกรองแบบ Real-time */}
-          <div className="mb-16 flex flex-col items-center justify-between gap-8 md:flex-row">
-            <TemplateSearch
-              placeholder={`ค้นหาเทมเพลตในหมวด ${categorySlug}...`}
-            />
-            <TemplateFilter activeCategory={categorySlug} />
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {filteredTemplates.map((template) => (
+              <TemplateCard 
+                key={template.slug} 
+                template={template} 
+              />
+            ))}
           </div>
-
-          {/* 🏗️ Result Grid Section */}
-          <section className="min-h-[400px]">
-            <div className="mb-8 border-l-4 border-emerald-500 pl-6">
-              <h2 className="font-prompt text-2xl font-black text-white uppercase italic md:text-3xl">
-                {query
-                  ? `ผลการค้นหา: "${query}"`
-                  : `${categorySlug} Specialist Selection`}
-              </h2>
-            </div>
-
-            {/* Grid System: แสดงผลรายการเทมเพลตที่คัดกรองแล้ว */}
-            <TemplateGrid initialTemplates={filteredTemplates} />
-          </section>
         </div>
       </main>
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-500 uppercase">
-          AEMDEVWEB Industry Standard v2026 — Secure & Fast
+      <footer className="mt-24 border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          High-End Solution by {siteConfig.expert} v2026
         </p>
       </footer>
     </div>
