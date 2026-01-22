@@ -6,12 +6,7 @@ import { siteConfig } from "@/constants/site-config"
 /**
  * 🤖 robots.ts — Specialist Search Crawler Control (2026 Edition)
  * ศูนย์ควบคุมสิทธิ์การเก็บข้อมูลของ Search Engine Bots สำหรับธุรกิจ SME & Industrial
- * * * Strategy:
- * - Content Accessibility: เปิดให้ Google/Bing เข้าถึง Conversion Pages (Services/Templates)
- * - AI Data Governance: ป้องกัน LLM Bots จากการดึง AI Context (Technical IP)
- * - SEO Efficiency: จัดการ Crawl Path ให้กระชับเพื่อคะแนน Indexing ที่ดีขึ้น
  */
-
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = siteConfig.url
 
@@ -25,39 +20,38 @@ export default function robots(): MetadataRoute.Robots {
           "/",
           "/about",
           "/services/",
-          "/case-studies/",
+          "/case-studies/", // รองรับ SEO Slugs ใหม่ที่คุณปรับปรุง
           "/blog/",
           "/contact",
           "/careers",
-          // อนุญาตให้เข้าถึงรูปภาพใน showcase และ templates สำหรับ Google Images
+          // อนุญาตให้เข้าถึงรูปภาพเพื่อผลทาง Image SEO
           "/images/showcase/",
           "/images/templates/",
         ],
 
         // 🚫 DISALLOW: Technical & Private Infrastructure
         disallow: [
-          "/api/", // Next.js API Routes
-          "/admin/", // Management Dashboard
-          "/_next/", // Internal System Files
-          "/private/", // Internal Documents
-          "/config/", // AI Context & Tech Config (Technical IP Protection)
+          "/api/",      // Next.js API Routes
+          "/_next/",    // Internal System Files
+          "/config/",   // [CRITICAL]: ป้องกัน AI Context & Tech Config
+          "/content/",  // ป้องกันการดึงไฟล์ MDX โดยตรง
+          "/lib/",      // Technical Logic Protection
           "/download/", // Restricted Client Files
-          "/*.json$", // Metadata & Schema Source Files
-          "/not-found", // 404 Page indexing
+          "/*.json$",   // Metadata & Schema Source Files
+          "/not-found", // ป้องกันการ Index หน้า 404
         ],
       },
       {
         /**
-         * 🤖 AI & LLM Protection
-         * ป้องกันการดึงข้อมูล AI Context และโครงสร้าง Tech Stack
-         * ไปใช้ในการ Train Model โดยไม่ได้รับอนุญาต (Technical IP Protection)
+         * 🛡️ AI & LLM Protection (Data Governance)
+         * ป้องกัน LLM Bots จากการดึง Technical IP ไปใช้โดยไม่ได้รับอนุญาต
          */
         userAgent: ["GPTBot", "CCBot", "ClaudeBot", "PerplexityBot"],
         disallow: ["/config/", "/lib/", "/content/template/"],
       },
     ],
 
-    // 🔗 Sitemap Linkage
+    // 🔗 เชื่อมต่อกับ Dynamic Sitemap ที่เราเพิ่งปรับปรุง
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

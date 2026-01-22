@@ -9,15 +9,15 @@ import matter from "gray-matter"
  * กำหนดโครงสร้างข้อมูลให้ชัดเจนตามมาตรฐาน Brand Guardian Specialist
  */
 export interface CaseStudyFrontmatter {
-  title: string // หัวข้อผลงาน
-  description: string // คำอธิบายสั้นๆ สำหรับการ์ด
-  excerpt: string // บทคัดย่อสำหรับ SEO Meta
-  date: string // วันที่เผยแพร่ (YYYY-MM-DD)
-  author: string // ผู้เขียน/ผู้รับผิดชอบ
-  thumbnail: string // รูปหน้าปก (แนะนำ .webp)
-  service: string // ชื่อบริการที่เกี่ยวข้อง (e.g., SME Website)
-  category?: string // หมวดหมู่ธุรกิจ (e.g., Industrial, SME)
-  result?: string // ผลลัพธ์ที่จับต้องได้ (e.g., Speed 100/100)
+  title: string      // หัวข้อผลงาน (ควรมี Keyword)
+  description: string // คำอธิบายสำหรับการ์ด
+  excerpt: string     // บทคัดย่อสำหรับ SEO Meta
+  date: string        // วันที่ (YYYY-MM-DD)
+  author: string      // ผู้รับผิดชอบ
+  thumbnail: string   // รูปหน้าปก .webp
+  service: string     // ชื่อบริการ (e.g., Industrial E-Catalog)
+  category?: string   // หมวดหมู่ธุรกิจ (e.g., Manufacturing)
+  result?: string     // ผลลัพธ์ (e.g., PageSpeed 100)
 }
 
 export interface CaseStudy {
@@ -27,17 +27,15 @@ export interface CaseStudy {
 }
 
 /**
- * 🛠️ Configuration
- * ปรับ Path ให้ตรงตาม Content Directory ในโปรเจกต์ (content/case-studies)
+ * 🛠️ Configuration: Path ไปยังคลังข้อมูลผลงาน
  */
 const CASE_STUDIES_PATH = path.join(process.cwd(), "content/case-studies")
 
 /**
  * 📂 ดึงรายชื่อ Slug ทั้งหมด (Get All Slugs)
- * @returns string[] รายชื่อไฟล์โดยตัดนามสกุลออก
+ * รองรับการเปลี่ยนชื่อไฟล์จากรูปแบบเดิม (case-studies-1) เป็นรูปแบบ SEO (sme-performance)
  */
 export function getCaseStudySlugs(): string[] {
-  // 🛡️ Safety Check: ตรวจสอบความมีอยู่ของโฟลเดอร์
   if (!fs.existsSync(CASE_STUDIES_PATH)) {
     console.warn("⚠️ [Case Studies] Directory not found:", CASE_STUDIES_PATH)
     return []
@@ -46,7 +44,7 @@ export function getCaseStudySlugs(): string[] {
   try {
     return fs
       .readdirSync(CASE_STUDIES_PATH)
-      .filter((file) => /\.mdx?$/.test(file)) // รองรับทั้ง .md และ .mdx
+      .filter((file) => /\.mdx?$/.test(file)) // รองรับ .md และ .mdx
       .map((file) => file.replace(/\.mdx?$/, ""))
   } catch (error) {
     console.error("❌ [Case Studies] Error reading directory:", error)
@@ -56,15 +54,13 @@ export function getCaseStudySlugs(): string[] {
 
 /**
  * 📄 ดึงข้อมูลผลงานรายชิ้น (Single Case Study)
- * @param slug - ชื่อไฟล์ที่เป็น ID ของผลงาน
+ * [FIXED]: เพิ่มระบบตรวจสอบเพื่อรองรับ Dynamic Routes ใน Next.js 16
  */
 export async function getCaseStudyBySlug(
   slug: string
 ): Promise<CaseStudy | null> {
-  // 🛡️ [FIXED] Guard Clause: ป้องกัน slug เป็น undefined หรือไม่ใช่ string
-  // ป้องกัน Error: Cannot read properties of undefined (reading 'replace')
+  // 🛡️ Guard Clause: ป้องกัน slug เป็นค่าว่างหรือรูปแบบไม่ถูกต้อง
   if (!slug || typeof slug !== "string") {
-    console.warn("⚠️ [Case Studies] Invalid or undefined slug provided")
     return null
   }
 
@@ -73,11 +69,13 @@ export async function getCaseStudyBySlug(
     const filePath = path.join(CASE_STUDIES_PATH, `${realSlug}.mdx`)
 
     if (!fs.existsSync(filePath)) {
-      console.error(`❌ [Case Studies] File not found: ${filePath}`)
-      return null
+      // 🕵️ หากไม่พบไฟล์ ให้ลองหาไฟล์นามสกุล .md สำรอง
+      const mdFilePath = path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
+      if (!fs.existsSync(mdFilePath)) return null
     }
 
-    const fileContent = fs.readFileSync(filePath, "utf8")
+    const targetPath = fs.existsSync(filePath) ? filePath : path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
+    const fileContent = fs.readFileSync(targetPath, "utf8")
     const { data, content } = matter(fileContent)
 
     return {
@@ -92,8 +90,8 @@ export async function getCaseStudyBySlug(
 }
 
 /**
- * 🗂️ ดึงข้อมูล Case Studies ทั้งหมดและจัดเรียง (Archive List)
- * คัดเฉพาะ Metadata มาใช้เพื่อประสิทธิภาพความเร็วสูงสุด (Next.js Optimization)
+ * 🗂️ ดึงข้อมูล Case Studies ทั้งหมด (Archive List)
+ * ปรับจูนเพื่อประสิทธิภาพความเร็วสูงสุดในหน้า Listing
  */
 export async function getAllCaseStudies(): Promise<
   Omit<CaseStudy, "content">[]
@@ -104,7 +102,12 @@ export async function getAllCaseStudies(): Promise<
     .map((slug) => {
       try {
         const filePath = path.join(CASE_STUDIES_PATH, `${slug}.mdx`)
-        const fileContent = fs.readFileSync(filePath, "utf8")
+        // เช็คกรณีเป็นไฟล์ .md
+        const actualPath = fs.existsSync(filePath) ? filePath : path.join(CASE_STUDIES_PATH, `${slug}.md`)
+        
+        if (!fs.existsSync(actualPath)) return null
+
+        const fileContent = fs.readFileSync(actualPath, "utf8")
         const { data } = matter(fileContent)
 
         return {
@@ -117,7 +120,7 @@ export async function getAllCaseStudies(): Promise<
       }
     })
     .filter((item): item is Omit<CaseStudy, "content"> => item !== null)
-    // เรียงลำดับจากวันที่ล่าสุด (Fresh First) เพื่อความซ่าและทันสมัย
+    // 📅 Sort: Fresh First (เรียงตามวันที่ล่าสุดเสมอ)
     .sort(
       (a, b) =>
         new Date(b.frontmatter.date).getTime() -

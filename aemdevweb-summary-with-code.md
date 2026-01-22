@@ -3,29 +3,30 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-21 23:13:46
+  Generated: 2026-01-22 07:17:57
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-21 23:13:46**_
-
+_Generated on: **2026-01-22 07:17:57**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
-
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-
-````text
+```text
 ```text
 Route (app)
 ┌ ○ /
 ├ ○ /_not-found
 ├ ƒ /[template]
-├ ƒ /[template]/[category]
+├ ● /[template]/[category]
+│ ├ /templates/booking
+│ ├ /templates/e-commerce
+│ ├ /templates/landing-page
+│ └ /templates/service
 ├ ● /[template]/[category]/[slug]
 │ ├ /templates/booking/hotel-resort
 │ ├ /templates/e-commerce/shop-master-pro
@@ -54,13 +55,12 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-````
-
-````
+```
+```
 
 ## 📊 2. File Statistics by Extension
 ```text
-     57 tsx
+     58 tsx
      12 ts
      12 mdx
      10 webp
@@ -71,10 +71,9 @@ Route (app)
       1 svg
       1 ico
       1 css
-````
+```
 
 ## 📁 3. Directory Structure (Architecture Tree)
-
 ```text
 📂 app/
   📂 (main)/
@@ -138,6 +137,7 @@ Route (app)
       📄 TemplateFilter.tsx
       📄 TemplateSearch.tsx
       📄 TemplateHero.tsx
+      📄 TemplateCard.tsx
     📂 shared/
       📄 DevicePreview.tsx
       📄 TemplateFeatures.tsx
@@ -248,9 +248,7 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
-
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -343,11 +341,9 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
-
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -481,11 +477,9 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
-
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -605,11 +599,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -702,11 +694,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
-
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -811,45 +801,35 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
-
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-
-````markdown
+```markdown
 # 🚀 Pre-deploy Inspection Report
-
-Generated at: 2026-01-21 23:06:22
+Generated at: 2026-01-22 06:55:13
 Branch: main
 
 ## 🔐 1. Environment Check
-
 ✅ Status: .env file exists and verified.
-
-## 🛠️ 2. Auto-Fix Procedure
-
+## 🛠️  2. Auto-Fix Procedure
 ✅ Status: Auto-fix completed or no issues found.
-
 ## 🧹 3. Code Linting (ESLint)
-
 ✅ Status: Linting passed.
-
 ## ⌨️ 4. Type Safety Check
-
 ✅ Status: TypeScript verified.
-
-## 🏗️ 5. Production Build Test
-
+## 🏗️  5. Production Build Test
 ✅ Status: Build successfully optimized.
-
 ### 📊 Route Statistics & Bundle Size
-
 ```text
 Route (app)
 ┌ ○ /
 ├ ○ /_not-found
 ├ ƒ /[template]
-├ ƒ /[template]/[category]
+├ ● /[template]/[category]
+│ ├ /templates/booking
+│ ├ /templates/e-commerce
+│ ├ /templates/landing-page
+│ └ /templates/service
 ├ ● /[template]/[category]/[slug]
 │ ├ /templates/booking/hotel-resort
 │ ├ /templates/e-commerce/shop-master-pro
@@ -880,18 +860,14 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
+
 ```
-````
 
 ---
-
 ## 🏆 Summary Result
-
 ### ✅ READY FOR DEPLOY
-
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-
-````
+```
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -920,7 +896,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   --color-destructive: hsl(0 84.2% 60.2%);
 
-  /* 🎨 UI Elements */
+  /* 🎨 UI Elements & Variables */
   --color-border: hsl(214.3 31.8% 91.4%);
   --color-input: hsl(214.3 31.8% 91.4%);
   --color-ring: hsl(222.2 84% 4.9%);
@@ -930,7 +906,7 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
 
-  /* 🖋️ Typography Bridge (Connecting with Next/Font) */
+  /* 🖋️ Typography Bridge */
   --font-prompt: var(--font-prompt);
   --font-anuphan: var(--font-anuphan);
 
@@ -957,20 +933,29 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: Industrial SME Foundation                      */
+/* 🏭 Base Layer: แก้ไขปัญหา Build Error และวางโครงสร้างพื้นฐาน              */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    /* ✅ [FIXED]: หลีกเลี่ยง @apply border-border 
+       ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 
+    */
+    border-color: var(--color-border);
+    outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
 
   body {
     /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
-    @apply bg-background text-foreground font-anuphan selection:bg-success/20 selection:text-primary antialiased;
+    @apply bg-background text-foreground font-anuphan antialiased;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
+
+    /* การเลือกข้อความ (Selection) ตามแบรนด์ */
+    &::selection {
+      @apply bg-success/20 text-primary;
+    }
   }
 
   /* Typography Strategy for Industrial Authority */
@@ -980,18 +965,16 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   h4,
   h5,
   h6 {
-    /* ใช้ฟอนต์ Prompt เพื่อความมั่นคงและดูเป็นมืออาชีพ */
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
-  /* เน้นหัวข้อหลักให้มีความดุดันตามสไตล์ Industrial Italic ที่คุณวางไว้ */
   .heading-heavy {
     @apply font-prompt font-black tracking-tighter uppercase italic;
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer                                            */
+/* 🚀 Utilities Layer: เครื่องมือช่วยสร้าง UI ให้เร็วและนิ่ง                       */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
@@ -999,35 +982,38 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     text-wrap: balance;
   }
 
-  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) ในบาง Browser */
+  /* ✅ แก้อาการ Flash ของตัวอักษรไทย (FOUT) */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* เพิ่มมิติความลึกให้กับ Card แบบ Industrial */
+  /* มิติความลึกสไตล์ Industrial (เน้นความคมและสะอาด) */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
-}
-````
 
+  /* กราเดียนต์แบรนด์สำหรับเน้นหัวข้อสำคัญ */
+  .text-gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
+  }
+}
+```
 ---
 
 #### 🔍 Path: `app/layout.tsx`
-
 ```typescript
 /** @format */
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import Script from "next/script" // 📦 เพิ่ม Script Component
+import Script from "next/script"
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
 import { cn } from "@/lib/utils"
-import { constructMetadata } from "@/constants/site-config"
+import { constructMetadata, siteConfig } from "@/constants/site-config"
 import { viewport as defaultViewport } from "./viewport"
 
 // 📂 Local Assets & Fonts
@@ -1035,16 +1021,14 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 /* -------------------------------------------------------------------------- */
-/* 🅰️ Font Setup: Industrial Typography Specialist v2026                      */
+/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering                         */
 /* -------------------------------------------------------------------------- */
 
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 })
 
 const fontAnuphan = Anuphan({
@@ -1052,20 +1036,10 @@ const fontAnuphan = Anuphan({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 })
-
-/* -------------------------------------------------------------------------- */
-/* 🧬 SEO & Performance Config                                                */
-/* -------------------------------------------------------------------------- */
 
 export const metadata: Metadata = constructMetadata()
 export const viewport: Viewport = defaultViewport
-
-/* -------------------------------------------------------------------------- */
-/* 🏗️ Root Layout Infrastructure                                              */
-/* -------------------------------------------------------------------------- */
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -1076,7 +1050,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="th"
       className={cn(
-        "scroll-smooth",
+        "scroll-smooth focus:scroll-auto", // เพิ่มการรองรับ Accessibility
         fontPrompt.variable,
         fontAnuphan.variable,
         "thai-font-smoothing"
@@ -1087,31 +1061,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
           "selection:bg-emerald-500/20 selection:text-emerald-900",
-          "transition-colors duration-300"
+          "overflow-x-hidden" // ป้องกัน Layout เลื่อนแนวนอนบนมือถือ
         )}
       >
-        {/* 🚀 1. Top Loading Bar: Emerald-500 Brand Primary */}
+        {/* 🚀 Top Loading Bar: Brand Primary (Emerald-500) */}
         <NextTopLoader
           color="#10B981"
-          initialPosition={0.08}
-          crawlSpeed={200}
           height={3}
-          crawl={true}
           showSpinner={false}
-          easing="ease"
-          speed={200}
-          shadow="0 0 10px #10B981,0 0 5px #10B981"
+          easing="ease-in-out"
+          speed={300}
         />
 
-        {/* 💬 2. Facebook Customer Chat (Messenger) */}
-        {/* จำเป็นต้องมี div id="fb-root" และ div id="fb-customer-chat" */}
+        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer */}
         <div id="fb-root" />
         <div id="fb-customer-chat" className="fb-customerchat" />
-
         <Script id="facebook-chat" strategy="lazyOnload">
           {`
             var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571");
+            chatbox.setAttribute("page_id", "914706508399571"); // Verified ID
             chatbox.setAttribute("attribution", "biz_inbox");
 
             window.fbAsyncInit = function() {
@@ -1131,30 +1099,36 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `}
         </Script>
 
-        {/* 📊 3. Google Analytics (Placeholder) - ใส่ Measurement ID เมื่อพร้อม */}
-        {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
-          `}
-        </Script>
-        */}
-
-        {/* 🌍 4. App Content Infrastructure */}
+        {/* 🌍 App Content Container */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
+
+        {/* ⚙️ SEO: JSON-LD for Local Business / Specialist */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: siteConfig.name,
+              image: siteConfig.ogImage,
+              url: siteConfig.url,
+              email: siteConfig.email,
+              description: siteConfig.description,
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "TH",
+              },
+            }),
+          }}
+        />
       </body>
     </html>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1162,26 +1136,21 @@ import React, { Suspense } from "react"
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// 📂 ข้อมูลตัวตนและโครงสร้างระบบ
-import { siteConfig, constructMetadata } from "@/constants/site-config" // ✅ นำเข้า Metadata Helper
+import { siteConfig, constructMetadata } from "@/constants/site-config"
 import { services } from "@/constants/services-data"
 import { JsonLd } from "@/components/seo/JsonLd"
-
-// 🧩 ส่วนประกอบหน้าเว็บที่เน้นความเร็ว (LCP Optimized)
 import Hero from "@/components/landing/Hero"
 
-/**
- * 🚀 ระบบโหลดคอมโพเนนต์แบบอัจฉริยะ (Dynamic Loading)
- * ช่วยรักษาคะแนนประสิทธิภาพ (Performance) ให้เขียวสดใสเสมอ
- */
+// Dynamic Components Optimization
 const HomeClientSections = dynamic(
   () => import("@/components/landing/HomeClientSections"),
   {
     ssr: true,
-    loading: () => <div className="h-40 w-full animate-pulse bg-slate-50" />,
+    loading: () => (
+      <div className="h-[500px] w-full animate-pulse bg-slate-50" />
+    ),
   }
 )
-
 const ValueProp = dynamic(() => import("@/components/landing/ValueProp"))
 const ServiceCard = dynamic(() => import("@/components/shared/ServiceCard"))
 const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
@@ -1190,67 +1159,53 @@ const WorkProcess = dynamic(
 )
 const CTASection = dynamic(() => import("@/components/landing/CTASection"))
 
-/**
- * 🎯 [FIXED] การตั้งค่า SEO รายหน้า (Metadata)
- * เรียกใช้ฟังก์ชัน constructMetadata เพื่อให้รูป OG Image และ Twitter Card แสดงผลถูกต้อง
- */
 export const metadata: Metadata = constructMetadata({
   title: siteConfig.title,
   description: siteConfig.description,
-  // 💡 ไม่ต้องใส่ image เพราะระบบจะดึงค่ามาตรฐานจาก site-config มาให้โดยอัตโนมัติ
 })
 
-/**
- * 🧬 HomePage — "เปลี่ยนเว็บให้เป็นพนักงานขายที่เก่งที่สุด"
- */
 export default function HomePage() {
-  // 🎯 ดึงข้อมูลบริการเฉพาะกลุ่ม (SME & Industrial) ตามกลยุทธ์แบรนด์
+  // กรองเฉพาะบริการที่ต้องการโชว์หน้าแรก
   const featuredServices = services.filter((s) =>
-    ["sme-speed-launch", "corporate-pro", "industrial-enterprise"].includes(
-      s.id
-    )
+    ["sme-speed-launch", "corporate-trust", "industrial-catalog"].includes(s.id)
   )
 
   return (
     <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/20">
-      {/* 🔎 บอก Google Search AI ว่าเว็บนี้คือใครและทำอะไร (Structured Data) */}
       <JsonLd
         type="WebSite"
         data={{
           name: siteConfig.name,
           url: siteConfig.url,
           description: siteConfig.description,
-          author: { "@type": "Person", name: "นายเอ็มซ่ามากส์" },
+          author: { "@type": "Person", name: siteConfig.expert },
         }}
       />
 
-      {/* 1️⃣ ส่วนหัวหน้าเว็บ (Hero): ความประทับใจแรกพร้อม LCP Optimization */}
       <Hero />
 
-      {/* 2️⃣ ความไว้วางใจ (Social Proof): โลโก้ลูกค้าและสถิติผลงาน */}
-      <section className="relative border-y border-slate-50 bg-white">
-        <Suspense
-          fallback={<div className="h-40 w-full animate-pulse bg-slate-50" />}
-        >
-          <HomeClientSections />
-        </Suspense>
-      </section>
+      {/* Social Proof & Stats */}
+      <Suspense
+        fallback={<div className="h-96 w-full animate-pulse bg-slate-50" />}
+      >
+        <HomeClientSections />
+      </Suspense>
 
-      {/* 3️⃣ จุดขาย (Value Prop): ขยี้ Pain Point และเสนอทางออกสไตล์ Specialist */}
-      <section className="relative py-24 lg:py-32">
+      {/* Value Proposition */}
+      <section className="relative overflow-hidden py-24 lg:py-32">
         <ValueProp />
       </section>
 
-      {/* 🛠️ 4️⃣ แพ็กเกจบริการ (Services): เน้นความคุ้มค่าระดับอุตสาหกรรม */}
-      <section className="relative bg-slate-50/50 py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 text-center lg:text-left">
-            <h2 className="font-prompt text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
+      {/* Services Grid */}
+      <section className="relative bg-slate-50/80 py-24 lg:py-32">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 space-y-4 text-center lg:text-left">
+            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
               บริการ <span className="text-emerald-500">ที่ผมเตรียมไว้ให้</span>
             </h2>
-            <p className="font-anuphan mt-4 max-w-2xl text-lg font-bold text-slate-500">
-              ไม่ว่าคุณจะเป็นเจ้าของกิจการ SME หรือเจ้าของโรงงาน
-              ผมมีโซลูชันที่ช่วยให้ธุรกิจของคุณดูดีและหาเงินได้จริง
+            <p className="font-anuphan max-w-2xl text-lg leading-relaxed font-bold text-slate-500">
+              โซลูชันเว็บไซต์ที่ออกแบบมาเพื่อ SME และโรงงานอุตสาหกรรมโดยเฉพาะ
+              เน้นความเร็ว ความปลอดภัย และการปิดการขาย
             </p>
           </div>
 
@@ -1259,9 +1214,9 @@ export default function HomePage() {
               <ServiceCard
                 key={service.id}
                 title={service.title}
-                price={service.priceValue}
+                price={service.priceValue} // ส่งเป็นตัวเลขตาม Interface
                 slug={service.slug}
-                features={service.features.slice(0, 3)}
+                features={service.features}
                 isPopular={service.highlight}
                 themeColor={service.themeColor}
               />
@@ -1270,25 +1225,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5️⃣ ขั้นตอนการทำงาน (Workflow): การทำงานที่นิ่งและโปร่งใส */}
-      <section className="relative bg-slate-950 py-24 lg:py-32">
-        <WorkProcess />
-      </section>
+      {/* Workflow */}
+      <WorkProcess />
 
-      {/* 📚 6️⃣ บทความน่ารู้ (Blog): สร้างความน่าเชื่อถือด้วย Expert Content */}
-      <section className="relative py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-16">
-            <h2 className="font-prompt text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
-              เทคนิค <span className="text-emerald-500">จากประสบการณ์จริง</span>
-            </h2>
-            <p className="font-anuphan mt-4 text-lg font-bold text-slate-500">
-              กลยุทธ์ทำเว็บและดันอันดับ Google
-              ที่ผมสรุปมาให้เจ้าของธุรกิจโดยเฉพาะ
-            </p>
+      {/* Blog/Insights */}
+      <section className="relative py-24 lg:py-32">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+                เทคนิค{" "}
+                <span className="text-emerald-500">จากประสบการณ์จริง</span>
+              </h2>
+              <p className="font-anuphan mt-4 text-lg font-bold text-slate-500">
+                อัปเดตกลยุทธ์ทำเว็บและ SEO ยุค 2026
+              </p>
+            </div>
+            <button className="text-sm font-bold text-emerald-600 hover:underline">
+              ดูบทความทั้งหมด →
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+            {/* แนะนำให้ Map ข้อมูล Blog จากไฟล์ constants หรือ lib ในอนาคต */}
             <BlogCard
               slug="seo-for-sme-2026"
               title="วิธีดันอันดับ Google 2026 สำหรับธุรกิจ SME"
@@ -1296,44 +1255,26 @@ export default function HomePage() {
               date="2026-01-20"
               thumbnail="/images/blog/placeholder.webp"
             />
-            <BlogCard
-              slug="facebook-ads-vs-website"
-              title="ยิงแอด FB หรือทำเว็บดี? แบบไหนปิดการขายไวกว่ากัน"
-              excerpt="เจาะลึกจากเคสจริงที่ผมดูแลลูกค้ามา กว่าจะรู้ตัวเงินก็หายไปเยอะแล้ว..."
-              date="2026-01-18"
-              thumbnail="/images/blog/placeholder.webp"
-            />
-            <BlogCard
-              slug="unlink-th-case-study"
-              title="เบื้องหลังความสำเร็จของเว็บ Unlink TH"
-              excerpt="จากเว็บโหลดช้าสู่เว็บที่ปิดการขายได้ทุกวัน เขาทำกันยังไง?"
-              date="2026-01-15"
-              thumbnail="/images/showcase/unlink-th.webp"
-            />
+            {/* ... รายการ Blog อื่นๆ */}
           </div>
         </div>
       </section>
 
-      {/* 7️⃣ ส่วนปิดการขาย (CTA): เปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้า */}
-      <section className="relative py-24 lg:py-40">
-        <CTASection />
-      </section>
+      <CTASection />
 
-      {/* 📍 ส่วนท้ายสุด (Specialist Branding) */}
-      <footer className="container mx-auto px-4 pb-12 text-center opacity-30 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Managed & Build by นายเอ็มซ่ามากส์ v2026 — Next.js 16 High-Performance
+      <footer className="py-12 text-center opacity-40">
+        <p className="font-prompt text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">
+          © {new Date().getFullYear()} {siteConfig.companyName} — Built with
+          Next.js 16
         </p>
       </footer>
     </main>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
-
 ```typescript
 /** @format */
 
@@ -1344,10 +1285,6 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
-/**
- * 🤝 รายชื่อลูกค้าที่ไว้ใจผม (Client Portfolio)
- * แนะนำ: ใช้รูป .webp ขนาดเล็กเพื่อให้เว็บโหลดไวที่สุดตามมาตรฐาน Specialist
- */
 const clients = [
   { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
   { name: "Industrial Solutions", logo: "/images/showcase/project-01.webp" },
@@ -1357,10 +1294,6 @@ const clients = [
   { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
 ]
 
-/**
- * 📊 สถิติที่ผมสร้างให้ลูกค้า (Impact Stats)
- * ผมเน้นตัวเลขที่เจ้าของธุรกิจให้ความสำคัญ: การเติบโต, ความน่าเชื่อถือ และความเร็ว
- */
 const stats = [
   {
     label: "ดูแลธุรกิจมาแล้ว",
@@ -1382,118 +1315,91 @@ const stats = [
   },
 ]
 
-/**
- * 🧬 HomeClientSections — ส่วนแสดงความน่าเชื่อถือ (Trust & Authority)
- */
 const HomeClientSections = () => {
   return (
-    <section className="relative overflow-hidden bg-slate-50 py-24 antialiased lg:py-32">
-      {/* 📐 พื้นหลังลายตาราง (Industrial Grid Pattern): สะท้อนความเนี๊ยบของงานระบบ */}
+    <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4">
-        {/* --- 🤝 ส่วนที่ 1: โลโก้ลูกค้า (Infinite Auto-Slider) --- */}
-        <div className="mb-32 text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic"
-          >
+      <div className="relative z-10 container mx-auto px-6">
+        {/* Infinite Logo Slider */}
+        <div className="mb-32">
+          <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
             Trusted by Forward-Thinking Businesses
-          </motion.p>
+          </p>
 
-          {/* ระบบสไลด์โลโก้: เน้นความลื่นไหลและไม่กินทรัพยากรเครื่องตามมาตรฐาน LCP */}
-          <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_15%,white_85%,transparent)] py-10">
+          <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <motion.div
-              animate={{ x: [0, -1920] }}
+              animate={{ x: [0, -1000] }}
               transition={{
-                duration: 40,
+                duration: 25,
                 repeat: Infinity,
                 ease: "linear",
               }}
-              className="flex shrink-0 items-center gap-16 md:gap-24"
+              className="flex shrink-0 items-center gap-20 pr-20"
             >
-              {[...Array(4)].map((_, groupIndex) => (
-                <React.Fragment key={groupIndex}>
-                  {clients.map((client, i) => (
-                    <div
-                      key={`${groupIndex}-${i}`}
-                      className="relative h-10 w-32 shrink-0 opacity-40 grayscale transition-all duration-500 hover:opacity-100 hover:grayscale-0 md:h-12 md:w-40"
-                    >
-                      <Image
-                        src={client.logo}
-                        alt={client.name}
-                        fill
-                        sizes="(max-width: 768px) 128px, 160px"
-                        className="object-contain"
-                        priority={groupIndex === 0} // ✅ โหลดรูปกลุ่มแรกทันทีเพื่อประสิทธิภาพ
-                      />
-                    </div>
-                  ))}
-                </React.Fragment> // ✅ แก้ไขลบตัวแปรส่วนเกินออกเรียบร้อย
+              {[...clients, ...clients, ...clients].map((client, i) => (
+                <div
+                  key={i}
+                  className="relative h-12 w-40 shrink-0 opacity-40 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                >
+                  <Image
+                    src={client.logo}
+                    alt={client.name}
+                    fill
+                    className="object-contain"
+                    sizes="160px"
+                  />
+                </div>
               ))}
             </motion.div>
           </div>
         </div>
 
-        {/* --- 📊 ส่วนที่ 2: สถิติผลงาน (Impact Stats) --- */}
+        {/* Impact Stats Grid */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: index * 0.15,
-                duration: 0.6,
-                ease: "easeOut",
-              }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="group relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-10 transition-all duration-500 hover:-translate-y-3 hover:border-emerald-500/30 hover:shadow-2xl"
+              className="group rounded-[2.5rem] border border-slate-200 bg-white p-10 transition-all duration-500 hover:-translate-y-2 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/5"
             >
-              {/* Icon Container: เปลี่ยนสีเป็น Emerald เมื่อ Hover ตาม Brand DNA */}
-              <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all duration-500 group-hover:rotate-[10deg] group-hover:bg-emerald-500 group-hover:text-white">
+              <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-colors duration-300 group-hover:bg-emerald-500 group-hover:text-white">
                 <stat.icon className="h-7 w-7" />
               </div>
-
-              {/* ตัวเลขสถิติ: ใช้ Font Prompt เพื่อความหนักแน่น */}
-              <div className="mb-3 flex items-baseline gap-2">
-                <span className="font-prompt text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+              <div className="mb-2 flex items-baseline gap-2">
+                <span className="font-prompt text-5xl font-black tracking-tighter text-slate-900 italic md:text-6xl">
                   {stat.value}
                 </span>
-                <CheckCircle2 className="h-6 w-6 animate-pulse text-emerald-500" />
+                <CheckCircle2 className="h-6 w-6 text-emerald-500" />
               </div>
-
-              <h3 className="font-prompt text-[11px] font-black tracking-[0.25em] text-slate-500 uppercase italic">
+              <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-500 uppercase italic">
                 {stat.label}
               </h3>
-              <p className="font-anuphan mt-4 text-sm leading-relaxed font-bold text-slate-400 transition-colors group-hover:text-slate-500">
+              <p className="font-anuphan mt-4 text-sm font-bold text-slate-400">
                 {stat.description}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* --- 💡 ส่วนที่ 3: ข้อความปิดท้าย (Final Hook) --- */}
+        {/* Final Hook Visual */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-28 rounded-[3.5rem] bg-slate-950 p-12 text-center shadow-2xl md:p-24"
+          className="shadow-3xl mt-28 rounded-[3rem] bg-slate-950 p-12 text-center md:p-24"
         >
-          <div className="mx-auto max-w-4xl">
-            <h2 className="font-prompt text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-5xl lg:text-6xl">
-              ตั้งแต่ธุรกิจ SME จนถึงโรงงานอุตสาหกรรม{" "}
-              <br className="hidden md:block" />
-              <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
-                ผมเปลี่ยน "ความเร็ว" ให้เป็น "ยอดขาย"
-              </span>
-            </h2>
-          </div>
+          <h2 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-6xl">
+            ตั้งแต่ SME จนถึงโรงงาน <br />
+            <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
+              ผมเปลี่ยน "ความเร็ว" ให้เป็น "ยอดขาย"
+            </span>
+          </h2>
         </motion.div>
       </div>
     </section>
@@ -1502,11 +1408,9 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1514,9 +1418,13 @@ import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
-// 📦 Specialist Data Logic
+// 🛠️ Icons & UI Essentials
+import { ShieldCheck, Bell } from "lucide-react"
+
+// 📦 Specialist Logic & Data Hub
 import { getAllTemplates, getTemplateBySlug } from "@/lib/template"
 import { useMDXComponents } from "@/mdx-components"
+import { siteConfig } from "@/constants/site-config"
 
 // 🚀 Sales Engine Components
 import WorkProcess from "@/components/sales-engine/WorkProcess"
@@ -1530,10 +1438,13 @@ import { DevicePreview } from "@/components/template/shared/DevicePreview"
 import { TemplatePricingCard } from "@/components/template/shared/TemplatePricingCard"
 import LineStickyButton from "@/components/shared/LineStickyButton"
 import { JsonLd } from "@/components/seo/JsonLd"
-import { siteConfig } from "@/constants/site-config"
+
+interface TemplatePageProps {
+  params: Promise<{ category: string; slug: string }>
+}
 
 /**
- * 🛠️ 1. generateStaticParams — "สร้างหน้าล่วงหน้าเพื่อความไวระดับ Specialist"
+ * 🛠️ 1. Static Generation
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
@@ -1545,52 +1456,62 @@ export async function generateStaticParams() {
 }
 
 /**
- * 🚀 2. Main Detail Page Component (v2026)
+ * 🔍 2. Metadata Strategy
+ */
+export async function generateMetadata({ params }: TemplatePageProps) {
+  const { slug } = await params
+  const data = await getTemplateBySlug(slug)
+  if (!data) return { title: "Template Not Found" }
+
+  return {
+    title: `${data.name} | Premium Web Architecture by ${siteConfig.expert}`,
+    description: data.description,
+    alternates: {
+      canonical: `${siteConfig.url}/templates/${data.category.toLowerCase()}/${slug}`,
+    },
+  }
+}
+
+/**
+ * 🚀 3. Main Detail Page Component
  */
 export default async function TemplateDetailPage({
   params,
-}: {
-  params: Promise<{ category: string; slug: string }>
-}) {
-  // ✅ Next.js 16 มาตรฐาน Specialist ต้อง await params
+}: TemplatePageProps) {
   const { category, slug } = await params
   const data = await getTemplateBySlug(slug)
 
-  // 🛡️ Guard Clause: ตรวจสอบความถูกต้องของ URL และหมวดหมู่
   if (!data || data.category.toLowerCase() !== category.toLowerCase()) {
     notFound()
   }
 
-  /**
-   * 🧪 mdxComponents Registration
-   * ลงทะเบียนคอมโพเนนต์เพื่อให้คุณแทรกตัวเลขสถิติหรือขั้นตอนการทำงาน
-   * ลงในเนื้อหา MDX ได้โดยตรงครับ
-   */
   const mdxComponents = {
     ...useMDXComponents({}),
     TemplatePricingCard,
     WorkProcess,
     ImpactStats,
     SpeedDemon,
-    // Specialist Sales Hook: กล่องเน้นย้ำความคุ้มค่า
+    ShieldCheck,
+    Bell,
     SalesHook: ({ children }: { children: React.ReactNode }) => (
-      <div className="my-10 rounded-[2rem] border border-emerald-500/20 bg-emerald-500/5 p-8 shadow-xl backdrop-blur-sm">
-        <div className="mb-4 flex items-center gap-2">
-          <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-          <span className="text-[10px] font-black tracking-[0.2em] text-emerald-500 uppercase">
-            Specialist Recommendation
-          </span>
-        </div>
-        <div className="font-anuphan leading-relaxed text-slate-300">
-          {children}
+      <div className="group relative my-12 overflow-hidden rounded-[2.5rem] border border-emerald-500/20 bg-emerald-500/[0.03] p-8 transition-all hover:bg-emerald-500/[0.05] md:p-12">
+        <div className="relative z-10 space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-500 uppercase italic">
+              Specialist Strategy
+            </span>
+          </div>
+          <div className="font-anuphan text-lg leading-relaxed font-medium text-slate-300 md:text-xl">
+            {children}
+          </div>
         </div>
       </div>
     ),
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ถึงรายละเอียดสินค้าชิ้นนี้ (Product Schema) */}
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Product"
         data={{
@@ -1601,49 +1522,43 @@ export default async function TemplateDetailPage({
             "@type": "Offer",
             price: data.salePrice || data.price,
             priceCurrency: "THB",
-            availability: "https://schema.org/InStock",
-          },
-          brand: {
-            "@type": "Brand",
-            name: siteConfig.shortName,
           },
         }}
       />
 
+      {/* 🌌 Background Layer */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+
       <TemplateNavbar />
 
       <main className="relative z-10 flex-1">
-        {/* 🎭 Hero Section: เปิดตัวอย่างยิ่งใหญ่สไตล์พรีเมียม */}
         <TemplateHero
-          title={data.name}
+          title={data.name.toUpperCase()}
           subtitle={data.description}
           image={data.image}
           category={data.category}
           themeColor={data.themeColor || "emerald"}
         />
 
-        <div className="container mx-auto px-4 py-24">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
-            {/* ✍️ Content Area: ส่วนเนื้อหารีวิวและรายละเอียด */}
-            <article className="lg:col-span-8">
-              <div className="prose prose-invert prose-emerald font-anuphan prose-headings:font-prompt prose-p:text-slate-400 mb-32 max-w-none leading-relaxed">
+        {/* 🛠️ [LAYOUT FIXED]: จำกัดความกว้างสูงสุดและจัดการ Grid ให้สมดุล */}
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12">
+            {/* 📝 Content Area (8/12) */}
+            <article className="space-y-20 overflow-hidden lg:col-span-8">
+              <div className="prose prose-invert prose-emerald prose-headings:font-prompt prose-p:font-anuphan prose-p:text-lg prose-p:leading-relaxed prose-li:font-anuphan prose-li:text-lg max-w-full">
                 <MDXRemote source={data.content} components={mdxComponents} />
               </div>
 
-              {/* 📱 Interactive Device Preview: แสดงผลงานจริงในกรอบอุปกรณ์ */}
-              <section id="preview" className="scroll-mt-32">
-                <div className="mb-10 border-l-4 border-emerald-500 pl-6">
-                  <h3 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic">
-                    Live Experience
+              {/* Live Preview Interface */}
+              <section id="preview" className="scroll-mt-32 space-y-10">
+                <div className="border-l-[6px] border-emerald-500 pl-6">
+                  <h3 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
+                    Live Preview
                   </h3>
-                  <p className="font-anuphan mt-2 text-slate-500">
-                    สัมผัสประสบการณ์ความไวและ UI
-                    ที่ออกแบบมาเพื่อการปิดการขายจริง
-                  </p>
                 </div>
                 <Suspense
                   fallback={
-                    <div className="h-[600px] w-full animate-pulse rounded-[3rem] bg-white/5" />
+                    <div className="h-[500px] w-full animate-pulse rounded-[2.5rem] bg-white/5" />
                   }
                 >
                   <DevicePreview desktopSrc={data.image} title={data.name} />
@@ -1651,24 +1566,29 @@ export default async function TemplateDetailPage({
               </section>
             </article>
 
-            {/* 🛒 Sales Sidebar: กล่องราคาที่เลื่อนตามหน้าจอ (Sticky) */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-28 space-y-8">
-                <TemplatePricingCard
-                  title={data.name}
-                  price={data.price}
-                  salePrice={data.salePrice}
-                  features={data.features || []}
-                  themeColor={data.themeColor}
-                />
+            {/* 💰 Sidebar (4/12) - ปรับ Sticky Behavior ให้ไม่ยืดล้น */}
+            <aside className="h-fit space-y-8 lg:sticky lg:top-28 lg:col-span-4">
+              <TemplatePricingCard
+                title={data.name}
+                price={data.price}
+                salePrice={data.salePrice}
+                features={data.features || []}
+                themeColor={data.themeColor}
+              />
 
-                {/* Specialist Trust Note */}
-                <div className="rounded-3xl border border-white/5 bg-white/[0.02] p-6 text-center">
-                  <p className="font-anuphan text-xs font-bold text-slate-500">
-                    *เทมเพลตนี้ได้รับการปรับจูน Technical SEO <br />
-                    โดย นายเอ็มซ่ามากส์ เรียบร้อยแล้ว 100%
-                  </p>
+              {/* Trust Infrastructure Card */}
+              <div className="rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-8 text-center backdrop-blur-md">
+                <div className="mb-4 flex justify-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-500">
+                    <ShieldCheck size={20} />
+                  </div>
                 </div>
+                <p className="font-anuphan text-sm leading-relaxed font-bold text-slate-400 italic">
+                  สถาปัตยกรรมนี้ผ่านการ Audit โดย{" "}
+                  <span className="text-white">{siteConfig.expert}</span>
+                  <br />
+                  Performance Specialist Standard
+                </p>
               </div>
             </aside>
           </div>
@@ -1677,196 +1597,132 @@ export default async function TemplateDetailPage({
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-500 uppercase">
-          AEMDEVWEB Template Engine v2026 — Designed for Conversion
+      <footer className="mt-24 border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          Managed by {siteConfig.expert} v2026 — Expert Authority
         </p>
       </footer>
     </div>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
-
 ```typescript
 /** @format */
 
 import React from "react"
-import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-// 📦 Specialist Logic & Data
+// 📦 Specialist Logic & Data Hub
 import { getAllTemplates } from "@/lib/template"
 import { siteConfig } from "@/constants/site-config"
 
-// 🧩 Specialist Components (Marketplace Layer)
+// 🧩 Specialist UI Components
 import { TemplateNavbar } from "@/components/template/shared/TemplateNavbar"
 import { TemplateHero } from "@/components/template/marketplace/TemplateHero"
-import { TemplateGrid } from "@/components/template/marketplace/TemplateGrid"
-import { TemplateFilter } from "@/components/template/marketplace/TemplateFilter"
-import { TemplateSearch } from "@/components/template/marketplace/TemplateSearch"
-
-// ✅ UI Shared Components
+import TemplateCard from "@/components/template/marketplace/TemplateCard"
 import LineStickyButton from "@/components/shared/LineStickyButton"
-import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🎨 CategoryPage Interface (Next.js 16 Specialist)
+ * 🎨 Props Interface: รองรับ Async Params
  */
 interface CategoryPageProps {
-  params: Promise<{
-    template: string // หน้าคงที่ เช่น 'templates'
-    category: string // หมวดหมู่ เช่น 'booking', 'e-commerce'
-  }>
-  searchParams: Promise<{
-    q?: string // คำค้นหาภายในหมวดหมู่
-  }>
+  params: Promise<{ template: string; category: string }>
 }
 
 /**
- * 🛠️ 1. generateStaticParams
- * กวาดหาหมวดหมู่ทั้งหมดเพื่อสร้างหน้า Static ล่วงหน้า เพิ่มประสิทธิภาพความเร็วสูงสุด
+ * 🛠️ 1. Static Paths Generation (SSG Optimization)
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
-
-  // สร้างรายการหมวดหมู่ที่ไม่ซ้ำกัน (Unique Categories)
-  const categories = Array.from(
-    new Set(templates.map((t) => t.category.toLowerCase()))
-  )
-
-  return categories.map((cat) => ({
-    template: "templates",
-    category: cat,
-  }))
+  
+  // ✅ [FIXED]: เพิ่มการตรวจสอบข้อมูลก่อน map เพื่อป้องกัน undefined error ตอน Build
+  return templates
+    .filter(t => t.category) 
+    .map((t) => ({
+      template: "templates",
+      category: t.category.toLowerCase(),
+    }))
 }
 
 /**
- * 🔍 2. generateMetadata (Technical SEO Specialist)
+ * 🔍 2. Metadata Strategy
  */
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps) {
   const { category } = await params
-  const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
+  if (!category) return { title: "Category Not Found" }
+
+  const title = category.charAt(0).toUpperCase() + category.slice(1)
 
   return {
-    title: `${categoryName} Templates | สถาปัตยกรรมความเร็วสูง | ${siteConfig.shortName}`,
-    description: `เลือกชมโครงสร้างเว็บไซต์หมวด ${categoryName} ที่ผ่านการจูนความเร็วและ SEO ระดับ Specialist โดย นายเอ็มซ่ามากส์`,
-    alternates: {
-      canonical: `${siteConfig.url}/templates/${category}`,
-    },
+    title: `${title} Templates | Premium Architecture by ${siteConfig.expert}`,
+    description: `รวมเทมเพลตเว็บไซต์หมวดหมู่ ${title} ที่เน้น PageSpeed และ Conversion สูงสุด`,
   }
 }
 
 /**
- * 🚀 3. Main Category Page Component
+ * 🚀 3. Category Listing Component
  */
-export default async function TemplateCategoryPage({
-  params,
-  searchParams,
-}: CategoryPageProps) {
-  // ดึงค่า Params และ SearchParams แบบ Async ตามมาตรฐาน Next.js 16
-  const { category: categorySlug, template } = await params
-  const { q: query } = await searchParams
-
-  // 🛡️ Guard Clause: ตรวจสอบ URL Prefix (ต้องเป็น /templates/...)
-  if (template !== "templates") {
-    return notFound()
-  }
-
+export default async function TemplateCategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params
   const allTemplates = await getAllTemplates()
 
-  // 🛡️ Guard Clause: ตรวจสอบว่ามีหมวดหมู่นี้ในระบบจริงหรือไม่
-  const categoryExists = allTemplates.some(
-    (t) => t.category.toLowerCase() === categorySlug.toLowerCase()
+  // 🛡️ [GUARD]: กรองเทมเพลตที่ตรงกับหมวดหมู่ และป้องกันกรณี category เป็น undefined
+  const filteredTemplates = allTemplates.filter(
+    (t) => t.category && t.category.toLowerCase() === category?.toLowerCase()
   )
 
-  if (!categoryExists) {
-    return notFound()
+  if (filteredTemplates.length === 0) {
+    notFound()
   }
 
-  // 🔍 Filtering Logic: คัดกรองตามหมวดหมู่และคำค้นหา
-  const filteredTemplates = allTemplates.filter((tpl) => {
-    const isInCategory =
-      tpl.category.toLowerCase() === categorySlug.toLowerCase()
-    const matchesSearch = query
-      ? tpl.name.toLowerCase().includes(query.toLowerCase()) ||
-        tpl.description?.toLowerCase().includes(query.toLowerCase())
-      : true
-
-    return isInCategory && matchesSearch
-  })
+  const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ถึงหมวดหมู่เทมเพลตนี้ */}
-      <JsonLd
-        type="CollectionPage"
-        data={{
-          name: `หมวดหมู่เทมเพลต ${categorySlug} | ${siteConfig.shortName}`,
-          description: `รวมเทมเพลตเว็บไซต์หมวด ${categorySlug} ที่เน้นความไวและ SEO`,
-          url: `${siteConfig.url}/templates/${categorySlug}`,
-        }}
-      />
+    <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
+      
+      {/* 🌌 Background Infrastructure */}
+      <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
       <TemplateNavbar />
 
-      <main className="flex-1">
-        {/* 🎭 Hero Layer: ดุดันสไตล์ Industrial Minimalism */}
+      <main className="relative z-10 flex-1">
         <TemplateHero
-          title={categorySlug.replace("-", " ").toUpperCase()}
-          subtitle={`รวมสถาปัตยกรรมเว็บไซต์หมวด ${categorySlug} ที่ผมออกแบบมาเพื่อปิดการขายให้ SME โดยเฉพาะ`}
-          category={categorySlug}
+          title={categoryName.toUpperCase()}
+          subtitle={`คัดสรรสถาปัตยกรรมเว็บไซต์ในหมวด ${categoryName} เพื่อผลลัพธ์ทางธุรกิจที่ดีที่สุด`}
+          image="/images/og-image.png" // หรือใช้ภาพประจำหมวดหมู่
+          category="Marketplace"
           themeColor="emerald"
         />
 
-        <div className="container mx-auto px-4 py-12">
-          {/* 🔍 Search & Filter Layer: ระบบคัดกรองแบบ Real-time */}
-          <div className="mb-16 flex flex-col items-center justify-between gap-8 md:flex-row">
-            <TemplateSearch
-              placeholder={`ค้นหาเทมเพลตในหมวด ${categorySlug}...`}
-            />
-            <TemplateFilter activeCategory={categorySlug} />
+        <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {filteredTemplates.map((template) => (
+              <TemplateCard 
+                key={template.slug} 
+                template={template} 
+              />
+            ))}
           </div>
-
-          {/* 🏗️ Result Grid Section */}
-          <section className="min-h-[400px]">
-            <div className="mb-8 border-l-4 border-emerald-500 pl-6">
-              <h2 className="font-prompt text-2xl font-black text-white uppercase italic md:text-3xl">
-                {query
-                  ? `ผลการค้นหา: "${query}"`
-                  : `${categorySlug} Specialist Selection`}
-              </h2>
-            </div>
-
-            {/* Grid System: แสดงผลรายการเทมเพลตที่คัดกรองแล้ว */}
-            <TemplateGrid initialTemplates={filteredTemplates} />
-          </section>
         </div>
       </main>
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-500 uppercase">
-          AEMDEVWEB Industry Standard v2026 — Secure & Fast
+      <footer className="mt-24 border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          High-End Solution by {siteConfig.expert} v2026
         </p>
       </footer>
     </div>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1890,62 +1746,62 @@ import LineStickyButton from "@/components/shared/LineStickyButton"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🎨 Page Interface
+ * 🎨 Shared Constants
+ * ป้องกัน ReferenceError โดยนิยามตัวแปรไว้นอก Component scope
+ */
+const MARKETPLACE_DESCRIPTION =
+  "รวบรวมเทมเพลตเว็บไซต์ประสิทธิภาพสูงที่จูน Performance ระดับ 100/100 เพื่อสร้างความได้เปรียบในการแข่งขันให้ธุรกิจ SME และโรงงานไทย"
+
+/**
+ * 🎨 Page Interface: มาตรฐาน Next.js 16 (Async Context)
  */
 interface TemplateMainPageProps {
-  params: Promise<{
-    template: string // ค่านี้จะเป็น 'templates' ตามโครงสร้างโฟลเดอร์
-  }>
-  searchParams: Promise<{
-    q?: string
-    cat?: string
-  }>
+  params: Promise<{ template: string }>
+  searchParams: Promise<{ q?: string; cat?: string }>
 }
 
 /**
- * 🛠️ 1. generateStaticParams — "Zero-404 Strategy"
+ * 🛠️ Static Generation Strategy: เพิ่มความเร็วในการเข้าถึงหน้าหลัก
  */
 export async function generateStaticParams() {
   return [{ template: "templates" }]
 }
 
 /**
- * 🔍 2. generateMetadata (Technical SEO Specialist)
+ * 🔍 Metadata Strategy: เน้นความน่าเชื่อถือระดับผู้เชี่ยวชาญ
  */
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: `Premium Website Templates | สถาปัตยกรรมเว็บไซต์ Specialist | ${siteConfig.shortName}`,
-    description:
-      "รวมเทมเพลตเว็บไซต์คุณภาพสูงที่ผมจูนความเร็วระดับ Specialist มาให้แล้ว เพื่อสร้างความได้เปรียบให้ธุรกิจ SME และโรงงานอุตสาหกรรม",
-    alternates: {
-      canonical: `${siteConfig.url}/templates`,
-    },
+    title: `Premium Templates Marketplace | สถาปัตยกรรมเว็บไซต์ 2026 | ${siteConfig.shortName}`,
+    description: MARKETPLACE_DESCRIPTION,
+    alternates: { canonical: `${siteConfig.url}/templates` },
   }
 }
 
 /**
- * 🚀 3. Main Marketplace Page Component (v2026)
+ * 🚀 Template Marketplace Hub
  */
 export default async function TemplateMainPage({
   params,
   searchParams,
 }: TemplateMainPageProps) {
-  // ✅ ดึงค่าแบบ Async ตามมาตรฐาน Next.js 16
+  // ✅ Next.js 16 Async Pattern (Await params as per framework requirements)
   const { template } = await params
   const { q: query, cat: selectedCat } = await searchParams
 
-  // 🛡️ Guard Clause: ตรวจสอบ URL พื้นฐาน (ต้องเป็น /templates เท่านั้น)
-  if (template !== "templates") {
-    return notFound()
-  }
+  // 🛡️ Guard Clause: ตรวจสอบ Path Integrity
+  if (template !== "templates") notFound()
 
+  // ดึงข้อมูล Template ทั้งหมดผ่าน Specialist Logic
   const allTemplates = await getAllTemplates()
 
-  // 🔍 Filtering Logic: ระบบคัดกรองอัจฉริยะ
+  // 🔍 Advanced Multi-Layer Filtering
   const filteredTemplates = allTemplates.filter((tpl) => {
-    const matchesSearch = query
-      ? tpl.name.toLowerCase().includes(query.toLowerCase()) ||
-        tpl.description?.toLowerCase().includes(query.toLowerCase())
+    const searchStr = query?.toLowerCase() || ""
+    const matchesSearch = searchStr
+      ? tpl.name.toLowerCase().includes(searchStr) ||
+        tpl.description?.toLowerCase().includes(searchStr) ||
+        tpl.category.toLowerCase().includes(searchStr)
       : true
 
     const matchesCategory =
@@ -1958,57 +1814,84 @@ export default async function TemplateMainPage({
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ว่าหน้านี้คือศูนย์รวมสินค้า (ItemPage Schema) */}
+      {/* 🔎 JSON-LD Search Engine Optimization */}
       <JsonLd
         type="CollectionPage"
         data={{
-          name: "Premium Website Templates Marketplace",
-          description: "คัดสรรเทมเพลตเว็บไซต์ที่เน้น Conversion และ Speed",
+          name: "Premium Web Architecture Marketplace",
+          description: MARKETPLACE_DESCRIPTION,
           url: `${siteConfig.url}/templates`,
         }}
       />
 
+      {/* 🌌 Background Infrastructure (High-End Industrial Atmosphere) */}
+      <div className="pointer-events-none fixed inset-0 z-0 opacity-[0.03]">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
+      </div>
+
       <TemplateNavbar />
 
-      <main className="flex-1">
-        {/* 🎭 Hero Layer: ดุดัน สุขุม สไตล์พรีเมียม */}
+      <main className="relative z-10 flex-1 pb-24">
+        {/* 🎭 Hero Component: Visual Impact Layer */}
         <TemplateHero
           title="WEBSITE MARKETPLACE"
           subtitle="เลือกสถาปัตยกรรมที่ใช่ เพื่อสร้างความได้เปรียบที่เหนือกว่าให้ธุรกิจคุณ"
           themeColor="emerald"
         />
 
-        <div className="container mx-auto px-4 py-12">
-          {/* 🔍 Search & Filter Layer: ยกระดับประสบการณ์การค้นหา */}
-          <div className="mb-16 flex flex-col items-center justify-between gap-8 md:flex-row">
-            <TemplateSearch placeholder="ค้นหาสถาปัตยกรรมที่ต้องการ..." />
-            <TemplateFilter activeCategory={selectedCat || "all"} />
+        <div className="container mx-auto px-6">
+          {/* 🔍 Discovery Hub: Search & Category Logic */}
+          <div className="relative z-20 -mt-10 mb-16 lg:-mt-14">
+            <div className="shadow-3xl flex flex-col items-center justify-between gap-6 rounded-[2.5rem] border border-white/5 bg-slate-900/50 p-6 backdrop-blur-xl md:p-10 lg:flex-row">
+              <TemplateSearch
+                placeholder="ค้นหาชื่อเทมเพลต หรือ ประเภทธุรกิจ..."
+                className="w-full lg:max-w-md"
+              />
+              <TemplateFilter activeCategory={selectedCat || "all"} />
+            </div>
           </div>
 
-          {/* 🏗️ Template Grid Section */}
-          <section className="min-h-[600px]">
-            <div className="mb-10 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="h-8 w-1 bg-emerald-500" />
-                <h2 className="font-prompt text-2xl font-black text-white uppercase italic md:text-3xl">
-                  {query ? `ค้นหา: "${query}"` : "All Premium Templates"}
-                </h2>
+          {/* 🏗️ Results Layer */}
+          <section className="min-h-[600px] space-y-12">
+            {/* Results Status Bar */}
+            <div className="flex flex-col justify-between gap-4 border-b border-white/5 pb-8 md:flex-row md:items-end">
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <div className="h-6 w-1.5 rounded-full bg-emerald-500" />
+                  <h2 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic">
+                    {query ? `Results: "${query}"` : "Premium Architectures"}
+                  </h2>
+                </div>
+                <p className="font-anuphan text-sm font-bold text-slate-500">
+                  High-Performance Standard 2026
+                </p>
               </div>
-              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1 text-xs font-black tracking-widest text-emerald-500 uppercase">
-                {filteredTemplates.length} Items Found
-              </span>
+
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-4 py-1.5">
+                <span className="text-[10px] font-black tracking-[0.2em] text-emerald-500 uppercase">
+                  {filteredTemplates.length} Solutions Available
+                </span>
+              </div>
             </div>
 
-            {/* ระบบ Grid สำหรับแสดงผลการ์ดเทมเพลต */}
+            {/* Template Rendering Engine */}
             <TemplateGrid initialTemplates={filteredTemplates} />
 
-            {/* Empty State กรณีค้นหาไม่เจอ */}
+            {/* Empty State Visualization */}
             {filteredTemplates.length === 0 && (
-              <div className="flex flex-col items-center justify-center py-32 text-center">
-                <p className="font-anuphan text-lg text-slate-500">
-                  ไม่พบเทมเพลตที่ตรงกับเงื่อนไขของคุณ <br />
-                  ลองค้นหาด้วยคำอื่น หรือทักมาให้ผมช่วยแนะนำได้ครับ
-                </p>
+              <div className="animate-in fade-in zoom-in flex flex-col items-center justify-center space-y-6 py-40 text-center duration-500">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/5 bg-slate-900 text-3xl font-black text-slate-700 italic">
+                  ?
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-prompt text-xl font-black text-white italic">
+                    ไม่พบสถาปัตยกรรมที่ตรงเงื่อนไข
+                  </h3>
+                  <p className="font-anuphan mx-auto max-w-sm text-slate-500">
+                    ลองปรับเปลี่ยนคำค้นหา หรือทักมาคุยกับผมโดยตรง
+                    เพื่อออกแบบโครงสร้างใหม่ให้ธุรกิจคุณครับ
+                  </p>
+                </div>
               </div>
             )}
           </section>
@@ -2017,21 +1900,18 @@ export default async function TemplateMainPage({
 
       <LineStickyButton />
 
-      {/* 📍 Specialist Footer Note */}
-      <footer className="py-12 text-center opacity-20 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.4em] text-slate-500 uppercase">
-          AEMDEVWEB Marketplace System v2026 — Expert Dev Only
+      <footer className="border-t border-white/5 bg-slate-950 py-12 text-center opacity-30">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-500 uppercase italic">
+          Managed by {siteConfig.expert} v2026 — Advanced Infrastructure
         </p>
       </footer>
     </div>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2045,6 +1925,8 @@ import {
   ChevronRight,
   Zap,
   LayoutTemplate,
+  ShieldCheck,
+  BarChart3,
 } from "lucide-react"
 
 // 📂 Data & Logic Architecture
@@ -2063,8 +1945,7 @@ interface ServicePageProps {
 }
 
 /**
- * 🚀 Generate Metadata (Next.js 16 Async)
- * ดึงข้อมูลตาม Slug เพื่อทำ Dynamic SEO ให้ Google ค้นหาเจอง่ายขึ้น
+ * 🚀 Dynamic Metadata Strategy
  */
 export async function generateMetadata({
   params,
@@ -2072,40 +1953,34 @@ export async function generateMetadata({
   const { slug } = await params
   const service = services.find((s) => s.slug === slug)
 
-  if (!service) return { title: `ไม่พบข้อมูลบริการ | ${siteConfig.shortName}` }
+  if (!service) return { title: `Service Not Found | ${siteConfig.shortName}` }
 
   return {
-    title: `${service.title} | ${siteConfig.shortName} Specialist`,
+    title: `${service.title} | Specialist Web Solution by ${siteConfig.expert}`,
     description: service.description,
     alternates: { canonical: `${siteConfig.url}/services/${slug}` },
     openGraph: {
       title: service.title,
       description: service.description,
-      images: [
-        {
-          url: (service as any).image || siteConfig.ogImage,
-        },
-      ],
+      images: [{ url: (service as any).image || siteConfig.ogImage }],
     },
   }
 }
 
 /**
- * 🧬 Service Detail Page — "เจาะลึกบริการที่เน้นผลลัพธ์ธุรกิจ"
+ * 🧬 ServiceDetailPage — High-Conversion Landing Page
  */
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
-  // ✅ Next.js 15/16 ต้อง await params
   const { slug } = await params
   const service = services.find((s) => s.slug === slug)
 
   if (!service) notFound()
 
-  // 🔗 ดึงเทมเพลตที่แนะนำสำหรับหมวดหมู่นี้ (ถ้ามี)
+  // ดึงเทมเพลตที่แนะนำสำหรับกลุ่มนี้
   const relatedTemplates = await getTemplatesByServiceCategory(service.category)
 
   return (
-    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/30">
-      {/* 🔎 บอก Google Search AI ถึงรายละเอียดบริการนี้ (Structured Data) */}
+    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Service"
         data={{
@@ -2113,7 +1988,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           description: service.description,
           provider: {
             "@type": "Person",
-            name: "นายเอ็มซ่ามากส์",
+            name: siteConfig.expert,
             url: siteConfig.url,
           },
           offers: {
@@ -2124,44 +1999,56 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }}
       />
 
-      {/* 🔝 1. แถบนำทาง (Breadcrumb Light) */}
-      <nav className="relative z-10 container mx-auto px-4 pt-32 lg:pt-40">
+      {/* 🌌 Background Decoration */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+
+      {/* 🔝 Navigation & Breadcrumb */}
+      <nav className="relative z-10 container mx-auto px-6 pt-32 lg:pt-40">
         <Link
           href="/services"
-          className="group inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
+          className="group inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all hover:text-emerald-500"
         >
-          <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />
-          ย้อนกลับไปดูบริการทั้งหมด
+          <ArrowLeft
+            size={14}
+            className="transition-transform group-hover:-translate-x-1"
+          />
+          Back to all services
         </Link>
       </nav>
 
-      {/* 🏆 2. ส่วนหัวเนื้อหา (Hero Service Section) */}
-      <section className="relative overflow-hidden py-12 lg:py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-            {/* ฝั่งเนื้อหา: Identity & Value */}
-            <div className="order-2 lg:order-1">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-1.5 text-[10px] font-black tracking-widest text-emerald-600 uppercase shadow-sm">
-                <Zap className="h-3.5 w-3.5" />
-                Specialist Service v2026
+      {/* 🏆 Hero Content Section */}
+      <section className="relative py-12 lg:py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
+            {/* Left: Content & Identity */}
+            <div className="space-y-10">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-2 text-[10px] font-black tracking-widest text-emerald-600 uppercase italic">
+                <Zap size={14} fill="currentColor" />
+                Performance Specialist v2026
               </div>
 
-              <h1 className="font-prompt mb-8 text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl">
+              <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
                 {service.title.split(" ")[0]} <br />
-                <span className="text-emerald-500 underline decoration-emerald-500/20 underline-offset-8">
+                <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-[12px]">
                   {service.title.split(" ").slice(1).join(" ")}
                 </span>
               </h1>
 
-              <p className="font-anuphan mb-10 max-w-xl text-xl leading-relaxed font-bold text-slate-500">
+              <p className="font-anuphan max-w-xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
                 {service.description}
               </p>
 
-              <div className="mb-12 space-y-5">
+              <div className="space-y-5 pt-4">
                 {service.features?.map((feature, idx) => (
-                  <div key={idx} className="group flex items-center gap-4">
-                    <CheckCircle2 className="h-6 w-6 shrink-0 text-emerald-500 transition-transform group-hover:scale-110" />
-                    <span className="font-anuphan text-lg font-bold text-slate-900">
+                  <div
+                    key={idx}
+                    className="group flex items-center gap-4 border-l-4 border-slate-50 pl-6 transition-all hover:border-emerald-500"
+                  >
+                    <CheckCircle2
+                      size={24}
+                      className="shrink-0 text-emerald-500"
+                    />
+                    <span className="font-anuphan text-lg leading-none font-bold text-slate-900">
                       {feature}
                     </span>
                   </div>
@@ -2169,58 +2056,70 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </div>
             </div>
 
-            {/* ฝั่งปิดการขาย: Pricing & Lead Generation */}
-            <div className="group relative order-1 lg:order-2">
-              <div className="relative z-10 rounded-[3.5rem] border border-white/5 bg-slate-950 p-10 text-white shadow-2xl transition-all duration-500 group-hover:shadow-emerald-500/10 lg:p-16">
-                <div className="font-prompt mb-8 text-xs font-black tracking-[0.3em] text-emerald-400 uppercase">
-                  งบประมาณเริ่มต้นโดยประมาณ
+            {/* Right: Pricing & Conversion Engine */}
+            <div className="relative">
+              <div className="shadow-3xl relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white md:p-20">
+                <div className="pointer-events-none absolute top-0 right-0 p-10 opacity-5">
+                  <ShieldCheck size={300} className="text-emerald-500" />
                 </div>
-                <div className="font-prompt mb-6 text-6xl font-black tracking-tighter italic md:text-7xl lg:text-8xl">
-                  ฿{service.priceValue?.toLocaleString() || "Custom"}
+
+                <div className="relative z-10">
+                  <div className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase italic">
+                    Estimated Budget Starting At
+                  </div>
+                  <div className="font-prompt mb-8 text-7xl font-black tracking-tighter italic md:text-9xl">
+                    <span className="mr-2 text-3xl font-normal text-slate-600">
+                      ฿
+                    </span>
+                    {service.priceValue?.toLocaleString() || "Custom"}
+                  </div>
+                  <p className="font-anuphan mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
+                    สร้างด้วยสถาปัตยกรรมประสิทธิภาพสูง <br />
+                    พร้อมระบบจัดการข้อมูลมาตรฐานปี 2026
+                  </p>
+
+                  <LineLeadForm
+                    variant="button"
+                    label="จองคิวเริ่มโปรเจกต์กับผม"
+                    className="h-20 w-full rounded-2xl bg-emerald-500 text-xl font-black text-slate-950 shadow-xl shadow-emerald-500/10 hover:bg-white"
+                  />
                 </div>
-                <p className="font-anuphan mb-12 leading-relaxed font-bold text-slate-400 italic opacity-70">
-                  *วางโครงสร้างด้วยมาตรฐาน <br />
-                  Next.js 16 High-Performance Specialist
-                </p>
-                <LineLeadForm
-                  variant="button"
-                  label="ทักมาคุยรายละเอียดโปรเจกต์"
-                  className="w-full py-8 text-lg"
-                />
               </div>
-              {/* Decorative Background Card */}
-              <div className="absolute -right-4 -bottom-4 -z-10 h-full w-full rounded-[3.5rem] border border-slate-100 bg-slate-50/50 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
+              <div className="absolute -inset-4 -z-10 rounded-[4.5rem] bg-slate-50" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 📊 3. สถิติที่พิสูจน์ได้ (Social Proof) */}
+      {/* 📊 Proof of Success */}
       <div className="border-y border-slate-50 bg-white">
         <ImpactStats />
       </div>
 
-      {/* 🧩 4. ส่วนแนะนำเทมเพลต (Contextual Suggestions) */}
+      {/* 🧩 Contextual Suggestions (Marketplace) */}
       {relatedTemplates && relatedTemplates.length > 0 && (
-        <section className="bg-slate-50/50 py-24 lg:py-40">
-          <div className="container mx-auto px-4">
-            <div className="mb-20 flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-              <div className="max-w-2xl border-l-8 border-emerald-500 pl-10">
-                <div className="font-prompt mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase">
+        <section className="overflow-hidden bg-slate-50/50 py-24 lg:py-40">
+          <div className="container mx-auto px-6">
+            <div className="mb-20 flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
+              <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
+                <div className="font-prompt mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
                   <LayoutTemplate size={16} />
                   Structure Suggestions
                 </div>
-                <h2 className="font-prompt text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
-                  เทมเพลตที่เหมาะสำหรับ <br />
-                  <span className="text-emerald-500">{service.title}</span>
+                <h2 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
+                  เทมเพลตที่แนะนำ <br />
+                  <span className="text-emerald-500">สำหรับคุณ</span>
                 </h2>
               </div>
               <Link
                 href="/templates"
-                className="group font-prompt flex items-center gap-3 text-xs font-black tracking-widest text-slate-400 uppercase transition-all hover:text-slate-900"
+                className="group font-prompt flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
               >
-                ดูเทมเพลตทั้งหมด{" "}
-                <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
+                Explore Marketplace
+                <ChevronRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-2"
+                />
               </Link>
             </div>
 
@@ -2229,68 +2128,66 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </section>
       )}
 
-      {/* 🛡️ 5. ส่วนปิดท้าย: คุยตรงกับคนทำงาน (Personal Authority) */}
-      <section className="overflow-hidden bg-white py-24 lg:py-40">
-        <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl rounded-[4rem] border border-slate-100 bg-white p-12 shadow-sm transition-all duration-500 hover:shadow-2xl md:p-24">
-            <h2 className="font-prompt mb-12 text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
-              ทำไมต้องเลือกทำกับ <br className="hidden md:block" />
-              <span className="text-emerald-500 underline decoration-emerald-500/20 underline-offset-8">
+      {/* 🛡️ Final Specialist Authority */}
+      <section className="overflow-hidden py-24 lg:py-40">
+        <div className="container mx-auto px-6">
+          <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center md:p-24">
+            <div className="absolute -top-10 -left-10 opacity-5">
+              <BarChart3 size={200} className="text-emerald-500" />
+            </div>
+            <h2 className="font-prompt mb-10 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
+              ทำไมต้องเลือกทำกับ <br />
+              <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-8">
                 นายเอ็มซ่ามากส์?
               </span>
             </h2>
 
-            <div className="font-anuphan max-w-none text-xl leading-relaxed font-bold text-slate-500">
+            <div className="font-anuphan mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               <p>
-                งานของผมไม่ใช่แค่ "รับจ้างทำเว็บ"
-                แต่คือการเป็นพาร์ทเนอร์เชิงเทคนิค
-                ผมจูนความเร็วให้ถึงขีดสุดและวางรากฐาน SEO
-                ให้ธุรกิจคุณหาเงินได้จริง
-                <span className="text-slate-950">
+                ผมไม่ได้แค่ "รับจ้างทำเว็บ" แต่ผมคือที่ปรึกษาเชิงเทคนิค
+                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางโครงสร้าง SEO
+                ให้ธุรกิจของคุณทำเงินได้ในระยะยาว
+                <span className="text-slate-900">
                   {" "}
-                  ดูแลเองทุกขั้นตอน ไม่ผ่านเซลล์ คุยง่าย จบไว 100% ครับ{" "}
+                  ดูแลเอง 100% งานจบไว ไม่ทิ้งงานแน่นอนครับ
                 </span>
               </p>
             </div>
 
-            <div className="group mt-16 rounded-[3rem] border border-slate-50 bg-slate-50/50 p-10 text-center transition-all duration-500 hover:bg-white hover:shadow-xl">
-              <h3 className="font-prompt mb-8 text-2xl font-black text-slate-900 uppercase italic">
-                พร้อมเริ่มโปรเจกต์หรือยังครับ?
-              </h3>
-              <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
-                <LineLeadForm
-                  variant="button"
-                  label="ทักมาปรึกษาผมฟรี"
-                  className="w-full min-w-[260px] sm:w-auto"
+            <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
+              <LineLeadForm
+                variant="button"
+                label="ทักมาคุยรายละเอียดฟรี"
+                className="h-20 px-12 text-xl"
+              />
+              <Link
+                href="/case-studies"
+                className="group font-prompt flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
+              >
+                Success Stories
+                <ChevronRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-2"
                 />
-                <Link
-                  href="/case-studies"
-                  className="group font-prompt flex items-center gap-2 text-xs font-black tracking-widest text-slate-400 uppercase transition-colors hover:text-slate-900"
-                >
-                  ดูเคสความสำเร็จที่ผ่านมา{" "}
-                  <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-                </Link>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 📍 Specialist Footer Branding */}
-      <footer className="container mx-auto px-4 pb-12 text-center opacity-40 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Specialist Service Managed by นายเอ็มซ่ามากส์ v2026
+      {/* 📍 Footer Hook */}
+      <footer className="py-12 text-center opacity-30 select-none">
+        <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
+          High-End Solution by {siteConfig.expert} v2026
         </p>
       </footer>
     </main>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2299,61 +2196,72 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-
-/**
- * ✅ [FIXED]: ใช้ next-mdx-remote เพื่อรองรับสถาปัตยกรรม Server Components
- * มั่นใจได้ว่าโหลดไวและเป็นมิตรกับ SEO สำหรับ SME และโรงงาน
- */
 import { MDXRemote } from "next-mdx-remote/rsc"
 
+// 🛠️ Icons Essentials
 import {
   ArrowLeft,
   Calendar,
   Share2,
   Sparkles,
   MessageCircle,
+  ShieldCheck,
 } from "lucide-react"
 
-// 📂 ข้อมูลตัวตนและระบบจัดการบทความ
+// 📦 Specialist Data & Config
 import { getAllPosts, getPostBySlug } from "@/lib/blog"
 import { siteConfig } from "@/constants/site-config"
 import { useMDXComponents } from "@/mdx-components"
-
-// 🧩 ส่วนประกอบหน้าเว็บ (Specialist UI)
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🛠️ MDX Components Mapping — "ปรับแต่งการแสดงผลภายในบทความ"
+ * 🎨 Enhanced MDX Components Mapping
+ * ปรับจูนให้หน้าอ่านบทความมีความ "พรีเมียม" และแก้ปัญหา TypeScript Error
  */
 const mdxComponents = {
   ...useMDXComponents({}),
-  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => {
-    const safeSrc =
-      typeof props.src === "string" ? props.src : "/images/og-image.png"
-    return (
-      <span className="relative my-12 block aspect-video w-full overflow-hidden rounded-[2.5rem] border border-slate-100 shadow-2xl">
+  img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    <figure className="my-16 space-y-4 text-center">
+      <div className="relative aspect-video w-full overflow-hidden rounded-[3rem] border border-slate-100 shadow-2xl">
         <Image
-          src={safeSrc}
+          // ✅ [FIXED]: ทำการ Cast Type เป็น string เพื่อป้องกัน TS2322 (Type 'Blob' mismatch)
+          src={(props.src as string) || "/images/og-image.png"}
           fill
           className="object-cover"
-          alt={props.alt || "AEMDEVWEB Specialist Insight"}
+          alt={props.alt || "AEMDEVWEB Insight"}
           loading="lazy"
-          sizes="(max-width: 1200px) 100vw, 1200px"
         />
-      </span>
-    )
-  },
+      </div>
+      {props.alt && (
+        <figcaption className="font-anuphan text-sm font-bold text-slate-400 italic">
+          {props.alt}
+        </figcaption>
+      )}
+    </figure>
+  ),
   h2: (props: any) => (
     <h2
-      className="font-prompt mt-20 mb-10 text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl"
+      className="font-prompt mt-24 mb-10 border-l-8 border-emerald-500 pl-6 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic"
+      {...props}
+    />
+  ),
+  h3: (props: any) => (
+    <h3
+      className="font-prompt mt-16 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase italic"
       {...props}
     />
   ),
   p: (props: any) => (
     <p
-      className="font-anuphan mb-8 text-xl leading-relaxed font-bold text-slate-500"
+      className="font-anuphan mb-10 text-xl leading-[1.8] font-medium text-slate-600"
+      {...props}
+    />
+  ),
+  li: (props: any) => (
+    <li
+      className="font-anuphan mb-4 list-inside list-disc text-xl font-medium text-slate-600 marker:text-emerald-500"
       {...props}
     />
   ),
@@ -2366,18 +2274,21 @@ const mdxComponents = {
     description: string
     url?: string
   }) => (
-    <div className="my-20 rounded-[3rem] border border-emerald-500/20 bg-emerald-50/5 p-12 text-center shadow-2xl shadow-emerald-500/5 lg:p-20">
-      <h3 className="font-prompt mb-6 text-3xl font-black text-slate-900 uppercase italic">
+    <div className="my-24 rounded-[3.5rem] border-2 border-dashed border-emerald-500/30 bg-emerald-50/10 p-12 text-center shadow-2xl shadow-emerald-500/5 transition-transform duration-500 hover:scale-[1.01] md:p-20">
+      <Badge className="mb-6 bg-emerald-500 font-black text-slate-950 italic">
+        SPECIALIST OFFER
+      </Badge>
+      <h3 className="font-prompt mb-6 text-3xl leading-tight font-black text-slate-900 uppercase italic md:text-5xl">
         {title}
       </h3>
-      <p className="font-anuphan mb-10 text-lg font-bold text-slate-500">
+      <p className="font-anuphan mx-auto mb-10 max-w-2xl text-lg font-bold text-slate-500 md:text-xl">
         {description}
       </p>
       <Button
         asChild
-        className="font-prompt h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase transition-all hover:bg-emerald-500 hover:text-slate-950"
+        className="font-prompt h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-emerald-500 hover:text-slate-950"
       >
-        <Link href={url || "/contact"}>ทักคุยกับ นายเอ็มซ่ามากส์</Link>
+        <Link href={url || "/contact"}>ปรึกษานายเอ็มโดยตรง</Link>
       </Button>
     </div>
   ),
@@ -2388,7 +2299,7 @@ interface Props {
 }
 
 /**
- * ⚙️ SSG Engine — "สร้างหน้าล่วงหน้าเพื่อความเร็วที่เหนือกว่า"
+ * 🛠️ Static Generation Logic
  */
 export async function generateStaticParams() {
   const posts = await getAllPosts()
@@ -2396,16 +2307,14 @@ export async function generateStaticParams() {
 }
 
 /**
- * 🔍 SEO Specialist Metadata
+ * 🔍 Metadata Specialist Strategy
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-
   if (!post) return { title: `ไม่พบบทความ | ${siteConfig.shortName}` }
-
   return {
-    title: `${post.title} | ${siteConfig.shortName}`,
+    title: `${post.title} | Knowledge Hub`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
@@ -2413,18 +2322,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       url: `${siteConfig.url}/blog/${slug}`,
       images: [{ url: post.thumbnail || siteConfig.ogImage }],
-      authors: ["นายเอ็มซ่ามากส์"],
+      authors: [siteConfig.expert],
     },
   }
 }
 
 /**
- * 📄 BlogPostPage
+ * 🚀 Blog Post Main Engine
  */
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-
   if (!post) return notFound()
 
   const formattedDate = new Date(post.date).toLocaleDateString("th-TH", {
@@ -2444,50 +2352,51 @@ export default async function BlogPostPage({ params }: Props) {
           datePublished: post.date,
           author: {
             "@type": "Person",
-            name: "นายเอ็มซ่ามากส์",
+            name: siteConfig.expert,
             url: siteConfig.url,
           },
         }}
       />
 
-      <div className="container mx-auto max-w-4xl px-4">
+      {/* 🌌 Subtle Background Infrastructure */}
+      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+
+      <div className="container mx-auto max-w-4xl px-6">
         <nav className="mb-16">
           <Link
             href="/blog"
             className="group inline-flex items-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all hover:text-emerald-500"
           >
             <ArrowLeft className="mr-3 h-4 w-4 transition-transform group-hover:-translate-x-2" />
-            ย้อนกลับไปคลังบทความ
+            Back to Library
           </Link>
         </nav>
 
-        <header className="mb-20">
-          <div className="mb-10 flex flex-wrap items-center gap-4">
+        <header className="mb-20 space-y-10">
+          <div className="flex flex-wrap items-center gap-4">
             {(post.tags || []).map((tag) => (
               <Badge
                 key={tag}
-                variant="outline"
-                className="rounded-full border-slate-200 px-5 py-1.5 text-[10px] font-black tracking-widest text-slate-500 uppercase"
+                className="rounded-full border-slate-200 bg-slate-50 px-5 py-1.5 text-[10px] font-black tracking-widest text-slate-500 uppercase"
               >
                 {tag}
               </Badge>
             ))}
-            <div className="flex items-center gap-4 text-[10px] font-black tracking-widest text-slate-300 uppercase italic">
-              <Calendar className="h-3.5 w-3.5 text-emerald-500" />{" "}
-              {formattedDate}
+            <div className="flex items-center gap-4 text-[10px] font-black text-slate-300 uppercase italic">
+              <Calendar className="h-4 w-4 text-emerald-500" /> {formattedDate}
             </div>
           </div>
 
-          <h1 className="font-prompt mb-10 text-4xl leading-[1.05] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl">
+          <h1 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
             {post.title}
           </h1>
 
-          <p className="font-anuphan text-2xl leading-relaxed font-bold text-slate-500/80 italic">
+          <p className="font-anuphan border-l-4 border-slate-100 pl-6 text-2xl leading-relaxed font-bold text-slate-400 italic">
             {post.excerpt}
           </p>
         </header>
 
-        <div className="relative mb-24 aspect-[21/9] w-full overflow-hidden rounded-[3.5rem] border border-slate-100 shadow-2xl">
+        <div className="relative mb-24 aspect-[21/10] w-full overflow-hidden rounded-[4rem] shadow-2xl shadow-slate-200/50">
           <Image
             src={post.thumbnail || "/images/og-image.png"}
             alt={post.title}
@@ -2497,60 +2406,63 @@ export default async function BlogPostPage({ params }: Props) {
           />
         </div>
 
-        {/* ✍️ เนื้อหาบทความประมวลผลผ่าน MDX (Server Side) */}
-        <div className="prose prose-slate prose-lg md:prose-2xl font-anuphan max-w-none leading-[1.8] text-slate-600">
+        {/* ✍️ Core Content Area (MDX) */}
+        <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-p:font-anuphan prose-p:leading-[1.9] prose-strong:text-slate-950 prose-a:text-emerald-600 max-w-none">
           <MDXRemote source={post.content} components={mdxComponents} />
         </div>
 
-        <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3rem] border border-slate-100 bg-slate-50/50 p-12 shadow-sm md:flex-row">
-          <div className="flex items-center gap-6">
-            <div className="relative h-20 w-20 overflow-hidden rounded-[1.5rem] bg-slate-950 shadow-lg">
-              <div className="font-prompt flex h-full w-full items-center justify-center text-3xl font-black text-emerald-500 italic">
-                M
-              </div>
+        {/* 👤 Author Section */}
+        <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3.5rem] border border-slate-100 bg-slate-50/80 p-12 md:flex-row">
+          <div className="flex items-center gap-8">
+            <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-xl">
+              <span className="font-prompt text-4xl font-black text-emerald-500 italic">
+                {siteConfig.expert.charAt(0)}
+              </span>
             </div>
-            <div>
-              <div className="font-prompt text-xl font-black tracking-tight text-slate-900 uppercase italic">
-                นายเอ็มซ่ามากส์
+            <div className="space-y-1">
+              <div className="font-prompt text-2xl leading-none font-black text-slate-900 uppercase italic">
+                {siteConfig.expert}
               </div>
-              <div className="font-anuphan mt-1 text-[11px] font-black tracking-[0.25em] text-emerald-600 uppercase">
-                Technical SEO & Specialist Dev
+              <div className="font-anuphan text-xs font-black tracking-[0.2em] text-emerald-600 uppercase">
+                Technical SEO Specialist
               </div>
             </div>
           </div>
-
           <Button
             variant="outline"
-            className="font-prompt h-14 gap-3 rounded-2xl border-slate-200 px-10 text-xs font-black tracking-widest uppercase shadow-md transition-all hover:bg-emerald-500 hover:text-white"
+            className="h-14 rounded-2xl border-slate-200 px-8 text-[10px] font-black tracking-widest uppercase transition-all hover:bg-slate-900 hover:text-white"
           >
-            <Share2 className="h-4 w-4" /> แชร์ต่อเพื่อเป็นความรู้
+            <Share2 className="mr-2 h-4 w-4" /> Share this Insight
           </Button>
         </div>
 
-        <div className="mt-24 overflow-hidden rounded-[4rem] bg-slate-950 p-16 text-center text-white shadow-2xl lg:p-24">
-          <Sparkles className="mx-auto mb-10 h-14 w-14 animate-pulse text-emerald-500" />
-          <h3 className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter uppercase italic md:text-6xl lg:text-7xl">
-            พร้อมอัปเกรด <br />
+        {/* 🎯 High-Conversion CTA Section */}
+        <div className="relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white shadow-3xl md:p-24">
+          <div className="absolute top-0 right-0 p-12 opacity-5">
+            <ShieldCheck size={250} />
+          </div>
+          <Sparkles className="mx-auto mb-10 h-16 w-16 animate-pulse text-emerald-500" />
+          <h3 className="font-prompt mb-8 text-5xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
+            Ready to <br />{" "}
             <span className="text-emerald-500 underline decoration-emerald-500/30 underline-offset-8">
-              รายได้
+              Scale
             </span>{" "}
-            หรือยัง?
+            up?
           </h3>
-          <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl leading-relaxed font-medium text-slate-400">
-            ถ้าบทความนี้ทำให้คุณเห็นทางออก ทักมาปรึกษาผมได้โดยตรงครับ
-            ผมช่วยจูนระบบให้ SME และโรงงานอุตสาหกรรมมานับไม่ถ้วน
+          <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
+            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้ 
+            ทักมาคุยรายละเอียดโปรเจกต์กับผมโดยตรงได้ทันทีครับ
           </p>
           <Button
             asChild
-            size="lg"
-            className="h-20 rounded-[2rem] bg-emerald-500 px-16 text-slate-950 shadow-xl transition-all hover:scale-105 hover:bg-white active:scale-95"
+            className="h-20 transform rounded-[2.5rem] bg-emerald-500 px-16 text-slate-950 shadow-2xl shadow-emerald-500/20 transition-all hover:scale-105 hover:bg-white active:scale-95"
           >
             <Link
               href="/contact"
               className="font-prompt text-lg font-black tracking-widest uppercase italic"
             >
-              <MessageCircle className="mr-4 h-6 w-6 fill-current" /> ทักคุยกับ
-              นายเอ็มซ่ามากส์
+              <MessageCircle className="mr-3 h-6 w-6 fill-current" /> Let's Talk
+              Project
             </Link>
           </Button>
         </div>
@@ -2559,11 +2471,9 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2577,14 +2487,29 @@ import { siteConfig } from "@/constants/site-config"
 // 🧩 ส่วนประกอบหน้าเว็บ (Specialist Components)
 import { JsonLd } from "@/components/seo/JsonLd"
 import CaseStudyCard from "@/components/shared/CaseStudyCard"
+import CTASection from "@/components/landing/CTASection"
 
 /**
- * 🚀 Metadata — "บทพิสูจน์งานจริงจากประสบการณ์ตรง"
+ * 🛠️ [FIXED]: กำหนด Interface เพื่อรองรับข้อมูลจาก MDX Frontmatter
+ * ป้องกัน Error: Property 'industry' does not exist on type 'CaseStudyFrontmatter'
+ */
+interface CaseStudyFrontmatter {
+  title: string
+  description?: string
+  excerpt?: string
+  thumbnail: string
+  industry?: string // ✅ เพิ่มเพื่อแก้ปัญหา TS2339
+  result?: string
+  date?: string
+}
+
+/**
+ * 🚀 Metadata — "พิสูจน์ด้วยผลลัพธ์ งานที่เนี๊ยบคืออาวุธของธุรกิจ"
  */
 export const metadata: Metadata = {
-  title: `ผลงานและความสำเร็จ | ${siteConfig.shortName} Portfolio`,
+  title: `Success Stories | ${siteConfig.shortName} Portfolio 2026`,
   description:
-    "รวมเคสจริงที่พิสูจน์แล้วว่างานที่เนี๊ยบและโหลดไว ช่วยเปลี่ยนธุรกิจ SME และโรงงานให้มียอดขายเพิ่มขึ้นได้จริง โดย นายเอ็มซ่ามากส์",
+    "รวมเคสจริงที่พิสูจน์แล้วว่าเว็บไซต์ประสิทธิภาพสูง ช่วยเปลี่ยนธุรกิจ SME และโรงงานให้มียอดขายเพิ่มขึ้นได้จริง โดย นายเอ็มซ่ามากส์",
   alternates: { canonical: `${siteConfig.url}/case-studies` },
 }
 
@@ -2594,99 +2519,98 @@ export const metadata: Metadata = {
 export default async function CaseStudiesPage() {
   /**
    * ⚡ ดึงข้อมูลผลงานทั้งหมดจากโฟลเดอร์ content/case-studies
-   * เรียงลำดับตามความสดใหม่เพื่อให้ลูกค้าเห็นงานล่าสุดก่อนครับ
    */
   const cases = await getAllCaseStudies()
 
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* 🔎 บอก Google Search AI ว่าหน้านี้รวมผลงานความสำเร็จไว้ */}
+      {/* 🔎 Enhanced SEO Context */}
       <JsonLd
         type="WebPage"
         data={{
           name: `Success Stories & Portfolio | ${siteConfig.shortName}`,
-          description:
-            "Explore real-world results of high-performance web solutions.",
+          description: metadata.description,
           publisher: {
             "@type": "Person",
-            name: "นายเอ็มซ่ามากส์",
+            name: siteConfig.expert,
             image: siteConfig.ogImage,
           },
         }}
       />
 
-      {/* 🔝 1. ส่วนหัวหน้าเว็บ (Hero Section) */}
-      <section className="relative overflow-hidden bg-slate-50/30 pt-32 pb-20 lg:pt-48 lg:pb-32">
-        {/* เลเยอร์ตกแต่งพื้นหลังให้ดูมีมิติ */}
-        <div
-          className="pointer-events-none absolute top-0 right-0 -z-10 h-full w-1/3 bg-white [mask-image:linear-gradient(to_left,white,transparent)]"
-          aria-hidden="true"
-        />
+      {/* 🌌 Background Infrastructure */}
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]" aria-hidden="true" />
 
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="max-w-4xl border-l-4 border-emerald-500 pl-8">
-            <h1 className="font-prompt text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl">
+      {/* 🔝 1. Hero Section: ความมั่นใจในระดับ Specialist */}
+      <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
+        <div className="relative z-10 container mx-auto px-6">
+          <div className="max-w-4xl border-l-8 border-emerald-500 pl-8 md:pl-12">
+            <div className="animate-in fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-1.5 text-emerald-600 duration-700">
+              <span className="font-prompt text-[10px] font-black tracking-[0.4em] uppercase italic">
+                Proven Results • High Performance
+              </span>
+            </div>
+            <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl lg:text-9xl">
               Success <br />
               <span className="text-emerald-500">Stories.</span>
             </h1>
-            <p className="font-anuphan mt-8 max-w-2xl text-xl leading-relaxed font-bold text-slate-500">
-              นี่คือหลักฐานที่ยืนยันว่า "ความเร็ว" และ "งานที่เนี๊ยบ"
-              ช่วยให้ธุรกิจ SME และโรงงานมียอดขายเพิ่มขึ้นได้จริง
-              ทุกโปรเจกต์ผมตั้งใจปั้นให้เป็นอาวุธทำเงินของลูกค้าครับ
+            <p className="font-anuphan mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+              "ความเร็ว" และ "งานที่เนี๊ยบ" ไม่ใช่แค่คำโฆษณา
+              แต่นี่คือหลักฐานจริงที่เปลี่ยนยอดขายให้ SME
+              และโรงงานอุตสาหกรรมมาแล้วนับไม่ถ้วน
             </p>
           </div>
         </div>
       </section>
 
-      {/* 🏗️ 2. ส่วนรายการผลงาน (Result Grid) */}
-      <section className="container mx-auto px-4 py-20">
+      {/* 🏗️ 2. Result Grid: การจัดวางที่เน้นความพรีเมียม */}
+      <section className="container mx-auto px-6 py-20">
         {cases.length > 0 ? (
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {cases.map((item, idx) => (
-              <CaseStudyCard
-                key={item.slug}
-                index={idx}
-                slug={item.slug}
-                title={item.frontmatter.title}
-                description={
-                  item.frontmatter.description || item.frontmatter.excerpt
-                }
-                image={item.frontmatter.thumbnail}
-                industry={item.frontmatter.category || "ธุรกิจทั่วไป"}
-                result={item.frontmatter.result || "งานเนี๊ยบ 100%"}
-              />
-            ))}
+          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            {cases.map((item, idx) => {
+              // 🧪 Type Casting เพื่อความปลอดภัยในขณะเรนเดอร์
+              const fm = item.frontmatter as CaseStudyFrontmatter
+              
+              return (
+                <CaseStudyCard
+                  key={item.slug}
+                  index={idx}
+                  slug={item.slug}
+                  title={fm.title}
+                  description={fm.excerpt || fm.description || ""}
+                  image={fm.thumbnail}
+                  industry={fm.industry || "General Business"}
+                  result={fm.result || "Score 100/100"}
+                />
+              )
+            })}
           </div>
         ) : (
-          /* กรณีที่ยังไม่มีข้อมูลผลงานในระบบ */
-          <div className="flex flex-col items-center justify-center py-48 text-center">
-            <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-full border border-slate-100 bg-slate-50">
-              <span className="font-prompt text-4xl font-black text-slate-300 italic">
-                ?
-              </span>
+          <div className="flex flex-col items-center justify-center rounded-[4rem] border-2 border-dashed border-slate-100 py-48 text-center">
+            <div className="mb-8 flex h-24 w-24 items-center justify-center rounded-[2rem] bg-slate-50 text-slate-200">
+              <span className="font-prompt text-5xl font-black italic">?</span>
             </div>
             <h2 className="font-prompt text-2xl font-black tracking-[0.2em] text-slate-400 uppercase italic">
-              กำลังรวบรวมผลงานใหม่ๆ มาลงเพิ่มครับ...
+              กำลังวิเคราะห์ข้อมูลผลงานใหม่ๆ...
             </h2>
           </div>
         )}
       </section>
 
-      {/* 📍 ส่วนท้ายหน้า (Specialist Footer Hook) */}
-      <footer className="mt-20 text-center opacity-40 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build & Proof by นายเอ็มซ่ามากส์ v2026
+      <CTASection />
+
+      <footer className="mt-20 border-t border-slate-50 py-12 text-center">
+        <p className="font-prompt text-[10px] font-black tracking-[0.5em] text-slate-300 uppercase italic">
+          Build & Proven by {siteConfig.expert} v2026
         </p>
       </footer>
     </main>
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2898,44 +2822,78 @@ export default async function CaseStudyDetailPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
-
 ```typescript
 /** @format */
 
 import type { MDXComponents } from "mdx/types"
 import Image from "next/image"
 import Link from "next/link"
+import React from "react"
+
+// 🛠️ Icons Registry (Lucide React)
 import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
   Zap,
   ShieldCheck,
+  Smartphone,
+  Bell,
+  Settings,
+  Globe,
+  Layout,
+  Database,
+  ShoppingBag,
+  PackageCheck,
+  BarChart3,
+  Target,
+  MousePointerClick,
+  MapPin,
+  CalendarCheck,
+  Star,
+  ClipboardList,
 } from "lucide-react"
 
-// 🧩 Specialist Components Integration
-/**
- * ✅ [FIXED] นำเข้า ImpactStats เพื่อลงทะเบียนเข้ากับระบบ MDX
- * ป้องกัน Error: Expected component ImpactStats to be defined
- */
+// 🧩 Specialist Logic Components Integration
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
+import WorkProcess from "@/components/sales-engine/WorkProcess"
 
 /**
  * 🏗️ MDX Components Specialist Edition v2026
- * ออกแบบมาเพื่อยกระดับ Content Marketing สำหรับ SME และโรงงาน
+ * ลงทะเบียนคอมโพเนนต์และไอคอนมาตรฐานเพื่อให้เรียกใช้ใน .mdx ได้ทันทีโดยไม่เกิด ReferenceError
  */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
 
-    // 🔗 1. Core Logic Components
-    ImpactStats, // ✅ ลงทะเบียนที่นี่เพื่อให้เรียกใช้ <ImpactStats /> ในไฟล์ .mdx ได้ทันที
+    // 🔗 1. Core Logic & Icons Registry
+    ImpactStats,
+    SpeedDemon,
+    WorkProcess,
+    Zap,
+    ShieldCheck,
+    Smartphone,
+    Bell,
+    Settings,
+    Globe,
+    Layout,
+    Database,
+    Sparkles,
+    ShoppingBag,
+    PackageCheck,
+    BarChart3,
+    Target,
+    MousePointerClick,
+    MapPin,
+    CalendarCheck,
+    Star,
+    ClipboardList,
 
-    // 🖼️ 2. Optimized Luminous Image (Industrial Standard)
+    // 🖼️ 2. Optimized Specialist Image (Industrial Standard)
     img: (props) => (
       <span className="group relative my-16 block w-full overflow-hidden rounded-[2.5rem] border border-slate-200 bg-slate-50 shadow-2xl">
         <span className="relative block aspect-video w-full overflow-hidden">
@@ -2955,7 +2913,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </span>
     ),
 
-    // 🔗 3. Smart Logic Links
+    // 🔗 3. Technical Logic Links
     a: ({ href, children }) => {
       const isInternal = href?.startsWith("/") || href?.startsWith("#")
       const baseClass =
@@ -2981,7 +2939,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
 
-    // 📣 4. Trust Quote / Expert Insights
+    // 📣 4. Expert Insights Block
     blockquote: ({ children }) => (
       <div className="group relative my-12 overflow-hidden rounded-r-[2.5rem] border-l-4 border-emerald-500 bg-emerald-500/[0.03] p-8 text-slate-600 md:p-10">
         <div className="pointer-events-none absolute -top-4 -right-4 opacity-5 transition-opacity group-hover:opacity-10">
@@ -2993,7 +2951,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // 🚀 5. Marketing Specialist Blocks
+    // 🚀 5. Specialist Marketing Blocks
     CallToAction: ({
       title,
       url,
@@ -3010,7 +2968,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </h3>
         <Link
           href={url}
-          className="relative z-10 inline-flex items-center justify-center rounded-full bg-[#0F172A] px-12 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:scale-105 hover:bg-emerald-500 active:scale-95"
+          className="relative z-10 inline-flex items-center justify-center rounded-full bg-slate-950 px-12 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:scale-105 hover:bg-emerald-600 active:scale-95"
         >
           {label} <ArrowRight className="ml-3 h-4 w-4" />
         </Link>
@@ -3033,20 +2991,20 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // ✒️ 6. Typography System (Light Mode Optimized for Readability)
+    // ✒️ 6. Industrial Typography System
     h1: ({ children }) => (
-      <h1 className="font-prompt mt-24 mb-10 text-5xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-7xl">
+      <h1 className="font-prompt mt-24 mb-10 text-5xl leading-none font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="font-prompt mt-20 mb-8 flex items-center gap-4 border-b border-slate-100 pb-6 text-4xl font-black tracking-tighter text-[#0F172A] uppercase italic md:text-5xl">
+      <h2 className="font-prompt mt-20 mb-8 flex items-center gap-4 border-b border-slate-100 pb-6 text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-5xl">
         <div className="h-10 w-2 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="font-prompt mt-14 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase md:text-4xl">
+      <h3 className="font-prompt mt-14 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase italic md:text-4xl">
         {children}
       </h3>
     ),
@@ -3064,19 +3022,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </span>
       </li>
     ),
-
-    // Export Icons & Components for Inline Usage
-    Zap,
-    ShieldCheck,
-    Sparkles,
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
@@ -3238,18 +3189,24 @@ export function constructMetadata({
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
-
 ```typescript
 /** @format */
 
+import {
+  Layout,
+  Store,
+  Building2,
+  Factory,
+  Settings2,
+  TrendingUp,
+} from "lucide-react"
+
 /**
- * 🏢 ข้อมูลบริการ — AEMDEVWEB (Specialist Edition 2026)
- * ปรับปรุง Keyword ให้สอดคล้องกับกลุ่ม SME, บริษัท และโรงงานอุตสาหกรรม
- * Path: src/constants/services-data.ts
+ * 🏢 ข้อมูลบริการ — AEMDEVWEB (Professional Edition 2026)
+ * [FIXED]: ลบ Unused Icons เพื่อแก้ปัญหา ESLint และปรับจูน Type ให้สมบูรณ์
  */
 
 /* -------------------------------------------------------------------------- */
@@ -3277,13 +3234,13 @@ export interface ServiceItem {
   title: string
   description: string
   price: string
-  priceValue: number // ใช้สำหรับ Sort หรือคำนวณ
+  priceValue: number
   features: string[]
   promotion?: string
   slug: string
   themeColor: ThemeColor
   category: ServiceCategory
-  highlight?: boolean // สำหรับแสดงป้าย Best Seller
+  highlight?: boolean
 }
 
 export interface CategoryInfo {
@@ -3291,7 +3248,7 @@ export interface CategoryInfo {
   name: string
   themeColor: ThemeColor
   description: string
-  icon?: string // เผื่อใส่ Icon Component ในอนาคต
+  icon: React.ElementType // ✅ ระบุ Type ของ Lucide Icon ให้ชัดเจนขึ้น
 }
 
 /* -------------------------------------------------------------------------- */
@@ -3304,42 +3261,48 @@ export const categoriesData: CategoryInfo[] = [
     name: "Sale Page (หน้าเดียว)",
     themeColor: "slate",
     description:
-      "เปลี่ยนคลิกเป็นยอดขาย! เว็บหน้าเดียว เน้นปิดการขายไว เหมาะสำหรับยิง Ads",
+      "เปลี่ยนคลิกเป็นยอดขายด้วย Landing Page ประสิทธิภาพสูง เน้นปิดการขายไว เหมาะสำหรับแคมเปญโฆษณา",
+    icon: Layout,
   },
   {
     slug: "sme",
     name: "เว็บไซต์ SME (ยอดนิยม)",
     themeColor: "emerald",
     description:
-      "ยกระดับธุรกิจให้ดูโปรฯ เพิ่มความน่าเชื่อถือ และปิดการขายได้จริง บน Google",
+      "ยกระดับธุรกิจให้มีความน่าเชื่อถือระดับมืออาชีพ พร้อมโครงสร้างที่ออกแบบมาเพื่อปิดการขายบน Google",
+    icon: Store,
   },
   {
     slug: "corporate",
     name: "เว็บไซต์บริษัท & องค์กร",
     themeColor: "blue",
     description:
-      "ภาพลักษณ์ระดับสากล สร้างความมั่นใจให้คู่ค้า รองรับมาตรฐาน B2B เต็มรูปแบบ",
+      "สร้างความเชื่อมั่นให้คู่ค้าด้วยภาพลักษณ์ระดับสากล รองรับมาตรฐานธุรกิจ B2B เต็มรูปแบบ",
+    icon: Building2,
   },
   {
     slug: "industrial",
     name: "เว็บไซต์โรงงาน & E-Catalog",
     themeColor: "indigo",
     description:
-      "ระบบจัดการสินค้าอุตสาหกรรม รองรับ SKU หลักหมื่น ค้นหาง่าย โหลดไว ไม่หน่วง",
+      "ระบบจัดการแคตตาล็อกสินค้าอุตสาหกรรม รองรับข้อมูลจำนวนมาก ค้นหาง่าย และประสิทธิภาพสูงสุด",
+    icon: Factory,
   },
   {
     slug: "seo-technical",
     name: "รับแก้เว็บช้า & Technical SEO",
     themeColor: "amber",
     description:
-      "แก้ปัญหาเว็บอืด ปรับโครงสร้างหลังบ้านให้ Google รัก ดันคะแนน Performance เต็ม 100",
+      "ปรับปรุงโครงสร้างรหัสหลังบ้านเพื่อคะแนน Performance เต็ม 100 และประสิทธิภาพการจัดอันดับที่ดีขึ้น",
+    icon: Settings2,
   },
   {
     slug: "seo-organic",
     name: "รับทำ SEO ดันอันดับระยะยาว",
     themeColor: "rose",
     description:
-      "สร้างลูกค้าฟรีจาก Google ลดต้นทุนค่าโฆษณา ด้วยกลยุทธ์ Keyword ทำเงิน",
+      "สร้างฐานลูกค้าออร์แกนิกจาก Google ลดต้นทุนค่าโฆษณาในระยะยาวด้วยกลยุทธ์ Content ทำเงิน",
+    icon: TrendingUp,
   },
 ]
 
@@ -3350,166 +3313,132 @@ export const categoriesData: CategoryInfo[] = [
 export const services: ServiceItem[] = [
   {
     id: "starter-one-page",
-    title: "Sale Page: ปิดการขายไว (High Conversion)",
+    title: "Sale Page: High Conversion Strategy",
     slug: "starter-one-page",
     category: "Starter",
     description:
-      "Landing Page หน้าเดียวจบ ออกแบบมาเพื่อรับแรงยิง Ads โดยเฉพาะ โหลดไวใน 1 วินาที ลูกค้าไม่หนี ปิดการขายง่าย",
+      "Landing Page หน้าเดียวจบ ออกแบบตามหลักจิตวิทยาการขาย รองรับ Traffic ปริมาณมาก โหลดไวภายใน 1 วินาที",
     price: "เริ่มต้น 5,900.-",
     priceValue: 5900,
     features: [
-      "⚡ Ultra Fast Loading: โหลดไวระดับวินาที (รองรับ Traffic สูง)",
-      "📱 100% Mobile Responsive: แสดงผลสวยงามทุกหน้าจอ",
-      "💬 Conversion Focus: ปุ่ม Call-to-Action (LINE/โทร) กดง่ายที่สุด",
-      "🔒 Free SSL: แถมฟรีใบรับรองความปลอดภัย (https)",
+      "Ultra Fast Loading: ความเร็วสูงพิเศษเพื่อลดอัตราการออกก่อนซื้อ",
+      "Mobile Responsive: แสดงผลสมบูรณ์แบบบนสมาร์ทโฟนทุกรุ่น",
+      "Conversion Focus Layout: วางตำแหน่งปุ่มติดต่อให้กดง่ายที่สุด",
+      "Security SSL: ติดตั้งใบรับรองความปลอดภัยตามมาตรฐานสากล",
     ],
     themeColor: "slate",
   },
   {
     id: "sme-speed-launch",
-    title: "SME Pro: เว็บธุรกิจครบวงจร (Best Seller 🔥)",
+    title: "SME Pro: Integrated Business Solution",
     slug: "sme-speed-launch",
     category: "SME",
     description:
-      "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ครบเครื่องทั้งดีไซน์และฟังก์ชัน วางโครงสร้าง SEO ตั้งแต่วันแรก",
+      "เว็บไซต์มาตรฐานธุรกิจระดับพรีเมียม 5-8 หน้า ครบครันด้วยฟังก์ชันที่จำเป็นและโครงสร้าง Technical SEO",
     price: "เริ่มต้น 12,900.-",
     priceValue: 12900,
     highlight: true,
     features: [
-      "🚀 Performance 100/100: ความเร็วสูงพิเศษ (LCP < 1.5s)",
-      "🎨 Custom Design: ออกแบบ UX/UI เฉพาะธุรกิจคุณ (ไม่ใช้ Template โหล)",
-      "🤖 AI Search Ready: รองรับโครงสร้าง SEO ยุคใหม่ (Google SGE)",
-      "📝 Easy CMS: ระบบหลังบ้านจัดการง่าย (พร้อมสอนใช้งานฟรี)",
+      "Performance 100/100: การันตีคะแนนความเร็วในระดับสูงสุด",
+      "Custom UI Design: ออกแบบเฉพาะตัวตนแบรนด์ ไม่ใช้เทมเพลตสำเร็จรูป",
+      "AI Search Optimization: โครงสร้างรองรับ Google SGE ยุคใหม่",
+      "Intuitive CMS: ระบบจัดการเนื้อหาที่ใช้งานง่ายสำหรับเจ้าของธุรกิจ",
     ],
     themeColor: "emerald",
   },
   {
     id: "corporate-trust",
-    title: "Corporate Identity: เว็บไซต์องค์กรชั้นนำ",
+    title: "Corporate Identity: Enterprise Standard",
     slug: "corporate-trust",
     category: "Corporate",
     description:
-      "สร้างความเชื่อมั่นสูงสุดให้คู่ค้าและนักลงทุน ด้วยเว็บไซต์ภาพลักษณ์องค์กรที่ดูทันสมัย มั่นคง และปลอดภัย",
+      "เว็บไซต์องค์กรชั้นนำ เน้นความมั่นคง ปลอดภัย และภาพลักษณ์ที่ส่งเสริมความเชื่อมั่นต่อนักลงทุนและคู่ค้า",
     price: "เริ่มต้น 25,900.-",
     priceValue: 25900,
     features: [
-      "🛡️ Enterprise Grade Security: ระบบความปลอดภัยขั้นสูง",
-      "🌍 Multi-Language: รองรับระบบ 2 ภาษา (ไทย/อังกฤษ)",
-      "📊 Investor Relations: รองรับหน้าข่าวสาร/กิจกรรม/นักลงทุน",
-      "🔧 Maintenance: บริการดูแลและอัปเดตระบบฟรี 1 ปี",
+      "Enterprise Grade Security: ป้องกันข้อมูลและระบบด้วยความปลอดภัยขั้นสูง",
+      "Multi-Language Architecture: รองรับระบบหลายภาษาอย่างสมบูรณ์",
+      "Corporate Relations Area: พื้นที่เฉพาะสำหรับแจ้งข่าวสารและกิจกรรมองค์กร",
+      "Yearly Maintenance: บริการดูแลทางเทคนิคและอัปเดตระบบต่อเนื่อง",
     ],
     themeColor: "blue",
   },
   {
     id: "industrial-catalog",
-    title: "Industrial E-Catalog: โรงงานอุตสาหกรรม",
+    title: "Industrial E-Catalog: Database Optimized",
     slug: "industrial-catalog",
     category: "Industrial",
     description:
-      "โชว์สินค้าโรงงานนับพันรายการได้ลื่นไหล ไม่หน่วง ค้นหาง่ายด้วยระบบ Filter รองรับสเปกสินค้าละเอียด (Datasheet)",
+      "ระบบแสดงผลสินค้าอุตสาหกรรมขนาดใหญ่ ค้นหาสเปกสินค้าได้ละเอียด พร้อมระบบขอใบเสนอราคาอัตโนมัติ",
     price: "เริ่มต้น 39,900.-",
     priceValue: 39900,
     features: [
-      "📦 Massive Inventory: รองรับสินค้าได้มากกว่า 10,000+ รายการ",
-      "🔍 Advanced Filter: ระบบกรองสินค้าอัจฉริยะ (ค้นหาปุ๊บเจอ ปั๊บ)",
-      "📥 Auto RFQ: ระบบขอใบเสนอราคาอัตโนมัติ ส่งเข้าอีเมลฝ่ายขาย",
-      "⚡ Heavy Database Optimization: โครงสร้างฐานข้อมูลโหลดหนักแค่ไหนก็ไหว",
+      "Massive Inventory Support: รองรับรายการสินค้าได้มากกว่า 10,000 รายการ",
+      "Smart Advanced Filter: ระบบกรองสินค้าเชิงลึก ค้นหาสเปกได้รวดเร็ว",
+      "RFQ Workflow: ระบบขอใบเสนอราคาอัตโนมัติส่งตรงถึงฝ่ายขาย",
+      "Technical Database Scalability: โครงสร้างฐานข้อมูลยืดหยุ่นสูง",
     ],
     themeColor: "indigo",
   },
   {
     id: "seo-technical-audit",
-    title: "Technical SEO Audit: ปรับจูนเว็บให้แรง",
+    title: "Technical SEO Audit & Infrastructure",
     slug: "seo-technical",
     category: "SEO_Technical",
     description:
-      "บริการกู้เว็บพัง แก้ปัญหาเว็บช้า Google ไม่เก็บข้อมูล ด้วยการปรับปรุงโครงสร้าง Code ระดับลึก (Core Web Vitals)",
+      "วิเคราะห์และแก้ไขปัญหาเชิงเทคนิคที่ขัดขวางการจัดอันดับ ปรับจูน Core Web Vitals ให้ได้ค่าสีเขียว",
     price: "เริ่มต้น 4,900.-",
     priceValue: 4900,
     features: [
-      "🛠️ Schema Markup Fix: แก้ไขโค้ดให้ Google เข้าใจธุรกิจลึกถึงโครงสร้าง",
-      "⚡ Score Booster: ปรับจูน Core Web Vitals (การันตีคะแนนเขียว 90+)",
-      "📈 Google Tools Setup: ติดตั้ง Search Console & Analytics ถูกวิธี",
-      "🗺️ Sitemap & Robots: สร้างแผนผังเว็บไซต์ฉบับสมบูรณ์",
+      "Schema Markup Deployment: ติดตั้งโค้ดระบุประเภทธุรกิจให้ Search Engine",
+      "Core Web Vitals Optimization: ปรับแต่งคะแนนความเร็วให้ผ่านเกณฑ์สูงสุด",
+      "Advanced Google Tools: ตั้งค่า Search Console และ Analytics ขั้นสูง",
+      "Indexing Architecture: แก้ไขปัญหาเว็บไม่ขึ้นบนหน้าค้นหา",
     ],
-    promotion: "🔥 ส่วนลด 50% เมื่อทำพร้อมสั่งทำเว็บไซต์ใหม่",
+    promotion: "ส่วนลด 50% เมื่อใช้บริการควบคู่กับการทำเว็บไซต์ใหม่",
     themeColor: "amber",
   },
   {
     id: "seo-organic-growth",
-    title: "SEO Monthly Growth: ปั้นเว็บติดหน้าแรก",
+    title: "SEO Monthly Organic Strategy",
     slug: "seo-organic",
     category: "SEO_Organic",
     description:
-      "บริการดูแลอันดับรายเดือน (Monthly Service) เน้น Keyword ที่สร้างยอดขายจริง ไม่เน้น Traffic ขยะ",
+      "บริการดูแลอันดับรายเดือน เน้น Keyword เชิงธุรกิจที่มีผลต่อยอดขายจริง เพื่อการเติบโตอย่างยั่งยืน",
     price: "เริ่มต้น 8,900.- / เดือน",
     priceValue: 8900,
     features: [
-      "🎯 Money Keywords: วิเคราะห์คำค้นหาที่ทำเงินจริงให้ธุรกิจ",
-      "✍️ High Quality Content: เขียนบทความ SEO คุณภาพสูง (รองรับ AI Search)",
-      "🔧 On-Page Optimization: ปรับปรุงโครงสร้างหน้าเว็บต่อเนื่องทุกเดือน",
-      "📊 Transparent Report: รายงานผลอันดับและสถิติอย่างโปร่งใส",
+      "Money Keyword Analysis: วิเคราะห์คำค้นหาที่สร้าง Conversion จริง",
+      "Authority Content: ผลิตบทความเชิงลึกที่สร้างความน่าเชื่อถือให้เว็บไซต์",
+      "Continuous On-Page: ปรับปรุงหน้าเว็บตามแนวโน้มอัลกอริทึมทุกเดือน",
+      "KPI & Data Report: รายงานผลลัพธ์ด้วยข้อมูลสถิติที่โปร่งใส",
     ],
-    promotion: "📝 สัญญาขั้นต่ำ 3 เดือน (เพื่อให้เห็นผลลัพธ์ที่ชัดเจน)",
+    promotion: "สัญญาบริการขั้นต่ำ 3 เดือน เพื่อประสิทธิผลของอันดับ",
     themeColor: "rose",
   },
 ]
-
-/* -------------------------------------------------------------------------- */
-/* ✅ Helper Functions (ฟังก์ชันช่วยดึงข้อมูล)                                   */
-/* -------------------------------------------------------------------------- */
-
-export const getCategoryInfo = (slug: string): CategoryInfo | null => {
-  return categoriesData.find((cat) => cat.slug === slug.toLowerCase()) || null
-}
-
-export const getServiceBySlug = (slug: string): ServiceItem | null => {
-  return services.find((service) => service.slug === slug.toLowerCase()) || null
-}
-
-export const getServicesByCategory = (categorySlug: string): ServiceItem[] => {
-  // Mapping slug จาก URL ให้ตรงกับ Enum Category
-  const categoryMap: Record<string, ServiceCategory | ServiceCategory[]> = {
-    starter: "Starter",
-    sme: "SME",
-    corporate: "Corporate",
-    industrial: "Industrial",
-    "seo-technical": "SEO_Technical",
-    "seo-organic": "SEO_Organic",
-  }
-
-  const target = categoryMap[categorySlug.toLowerCase()]
-  if (!target) return []
-
-  if (Array.isArray(target)) {
-    return services.filter((s) => target.includes(s.category))
-  }
-  return services.filter((s) => s.category === target)
-}
 ```
-
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
-
 ```typescript
 /** @format */
 
 /**
- * 🧭 ระบบนำทาง (Navigation) — AEMDEVWEB v2026
- * ออกแบบมาเพื่อเจ้าของธุรกิจ SME บริษัท และโรงงานอุตสาหกรรม
- * เน้นความชัดเจน เข้าถึงง่าย และแสดงผลลัพธ์ที่จับต้องได้
+ * 🧭 ระบบนำทาง (Navigation) — AEMDEVWEB Professional Edition
+ * ออกแบบมาเพื่อกลุ่ม SME, บริษัท และโรงงานอุตสาหกรรม
+ * เน้นความน่าเชื่อถือ (Authority) และโครงสร้างที่ชัดเจน
  */
 
 /* -------------------------------------------------------------------------- */
-/* 🧩 Types Definition                                                        */
+/* 🧩 Types Definition (Strict Mode)                                          */
 /* -------------------------------------------------------------------------- */
 
 export interface NavItem {
   name: string
   href: string
   description?: string
-  badge?: "New" | "Hot" | "Sale" | "Special" | string
+  badge?: "New" | "Hot" | "Sale" | "Special" | "Beta" | string
   external?: boolean
   disabled?: boolean
 }
@@ -3536,33 +3465,33 @@ export const navigation: NavigationConfig = {
     {
       name: "หน้าแรก",
       href: "/",
-      description: "เริ่มต้นสร้างตัวตนธุรกิจที่เน้นความไวและยอดขาย",
+      description: "เริ่มต้นสร้างสถาปัตยกรรมดิจิทัลที่เน้นความไวและยอดขาย",
     },
     {
-      name: "บริการ & ราคา",
+      name: "บริการและราคา",
       href: "/services",
-      description: "เช็คราคาแพ็กเกจทำเว็บ SME, บริษัท และโรงงาน",
+      description: "ตรวจสอบแพ็กเกจการพัฒนาสำหรับ SME และโรงงานอุตสาหกรรม",
     },
     {
-      name: "เว็บสำเร็จรูป",
+      name: "สถาปัตยกรรมเว็บ",
       href: "/templates",
       badge: "New",
-      description: "เทมเพลตเว็บโหลดไว ราคาประหยัด เริ่มต้นงานได้ทันที",
+      description: "โครงสร้างเว็บไซต์สำเร็จรูปมาตรฐานความเร็วสูง",
     },
     {
-      name: "ผลงานจริง",
+      name: "กรณีศึกษา",
       href: "/case-studies",
-      description: "ดูตัวอย่างเว็บลูกค้าและผลลัพธ์ทางธุรกิจ",
+      description: "บทพิสูจน์ความสำเร็จและผลลัพธ์ทางธุรกิจจากลูกค้าจริง",
     },
     {
-      name: "บทความ",
+      name: "คลังความรู้",
       href: "/blog",
-      description: "ความรู้เรื่อง SEO และการตลาดออนไลน์ฉบับเจ้าของกิจการ",
+      description: "กลยุทธ์ Technical SEO และ Digital Business สำหรับผู้บริหาร",
     },
     {
-      name: "ติดต่อผม",
+      name: "ปรึกษาโปรเจกต์",
       href: "/contact",
-      description: "ช่องทางติดต่อ นายเอ็มซ่ามากส์ (LINE/Tel)",
+      description: "ช่องทางติดต่อผู้เชี่ยวชาญโดยตรง (Direct Access)",
     },
   ],
 
@@ -3570,44 +3499,44 @@ export const navigation: NavigationConfig = {
   footer: {
     services: [
       {
-        name: "Sale Page (ปิดการขาย)",
+        name: "Sale Page Strategy",
         href: "/services/starter-one-page",
         badge: "Hot",
-        description: "เว็บหน้าเดียวโหลดไว รองรับคนยิงแอด",
+        description: "เน้นการปิดการขายด้วยโครงสร้าง High-Conversion",
       },
       {
-        name: "เว็บไซต์ SME & ธุรกิจ",
+        name: "SME & Business Pro",
         href: "/services/sme-speed-launch",
-        description: "สร้างความน่าเชื่อถือ ปิดการขายได้ 24 ชม.",
+        description: "ยกระดับความเชื่อถือด้วยเว็บไซต์มาตรฐานสากล",
       },
       {
-        name: "เว็บโรงงาน (E-Catalog)",
+        name: "Industrial E-Catalog",
         href: "/services/industrial-catalog",
-        description: "ระบบโชว์สินค้าโรงงาน รองรับ SKU หลักหมื่น",
+        description: "ระบบจัดการข้อมูลสินค้าอุตสาหกรรมขนาดใหญ่",
       },
       {
-        name: "รับแก้เว็บช้า (Technical SEO)",
+        name: "Technical SEO Optimization",
         href: "/services/seo-technical",
-        description: "จูนหลังบ้านให้ Google รัก ดันคะแนนเต็ม 100",
+        description: "ปรับจูนโครงสร้างรหัสหลังบ้านเพื่อประสิทธิภาพสูงสุด",
       },
     ],
 
     company: [
       {
-        name: "รู้จัก นายเอ็มซ่ามากส์",
+        name: "เกี่ยวกับ AEMDEVWEB",
         href: "/about",
       },
       {
-        name: "รีวิวผลงาน (Showcase)",
+        name: "ผลงานและความสำเร็จ",
         href: "/case-studies",
       },
       {
-        name: "เบื้องหลังเคส Unlink-TH",
-        href: "/blog/unlink-th-case-study", // แก้ไขให้ตรงกับไฟล์ content/blog
+        name: "Case Analysis: Unlink-TH",
+        href: "/blog/unlink-th-case-study",
         badge: "Special",
       },
       {
-        name: "ร่วมงานกับ AEMDEVWEB",
+        name: "ร่วมงานกับเรา",
         href: "/careers",
         disabled: true,
       },
@@ -3615,16 +3544,16 @@ export const navigation: NavigationConfig = {
 
     support: [
       {
-        name: "ทักไลน์ปรึกษาด่วน",
+        name: "LINE Official Account",
         href: "https://lin.ee/SVMBEJ8",
         external: true,
       },
       {
-        name: "ประเมินราคาโปรเจกต์",
+        name: "เครื่องมือประเมินงบประมาณ",
         href: "/services#pricing",
       },
       {
-        name: "แจ้งปัญหาการใช้งาน",
+        name: "ศูนย์ช่วยเหลือและติดต่อ",
         href: "/contact",
       },
     ],
@@ -3635,7 +3564,7 @@ export const navigation: NavigationConfig = {
         href: "/privacy",
       },
       {
-        name: "ข้อกำหนดและเงื่อนไข",
+        name: "ข้อกำหนดและเงื่อนไขการใช้บริการ",
         href: "/terms",
       },
     ],
@@ -3655,26 +3584,23 @@ export const {
 } = navigation.footer
 
 /* -------------------------------------------------------------------------- */
-/* 📈 SEO Strategic Keywords (Updated 2026)                                    */
+/* 📈 SEO Authority Keywords (Optimized for 2026)                              */
 /* -------------------------------------------------------------------------- */
 
 export const siteKeywords: string[] = [
-  "นายเอ็มซ่ามากส์",
   "AEMDEVWEB",
-  "รับทำเว็บไซต์ SME",
-  "รับทำเว็บไซต์โรงงาน",
-  "ทำเว็บ Sale Page",
-  "รับทำ SEO สายขาว",
-  "แก้ไขเว็บไซต์ช้า",
-  "Technical SEO Specialist",
-  "คนทำเว็บไม่ทิ้งงาน",
+  "Technical SEO Specialist Thailand",
+  "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
+  "รับทำเว็บไซต์ SME คุณภาพสูง",
+  "คนทำเว็บ Next.js 16",
+  "สถาปัตยกรรมเว็บไซต์ความเร็วสูง",
+  "เว็บ E-Catalog โรงงาน",
+  "ที่ปรึกษาด้าน Performance Website",
 ]
 ```
-
 ---
 
 #### 🔍 Path: `tsconfig.json`
-
 ```json
 {
   "compilerOptions": {
@@ -3725,11 +3651,9 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
-
 ---
 
 #### 🔍 Path: `package.json`
-
 ```json
 {
   "name": "aemdevweb.com",
@@ -3797,11 +3721,9 @@ export const siteKeywords: string[] = [
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `types/index.ts`
-
 ```typescript
 /** @format */
 
@@ -4031,11 +3953,9 @@ export interface TestimonialItem {
   image?: string
 }
 ```
-
 ---
 
 #### 🔍 Path: `next.config.mjs`
-
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
@@ -4076,11 +3996,9 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
-
 ---
 
 #### 🔍 Path: `components.json`
-
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -4105,11 +4023,9 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/blog.ts`
-
 ```typescript
 /** @format */
 
@@ -4190,11 +4106,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/template.ts`
-
 ```typescript
 /** @format */
 
@@ -4229,58 +4143,74 @@ const TEMPLATE_CONTENT_PATH = path.join(process.cwd(), "content/template")
 
 /**
  * 🛠️ 1. getAllTemplates
- * กวาดหาเทมเพลตทั้งหมดจากโฟลเดอร์ content/template
+ * กวาดหาเทมเพลตทั้งหมดพร้อมระบบตรวจสอบความถูกต้องของข้อมูล (Validation)
  */
 export async function getAllTemplates(): Promise<TemplateMeta[]> {
   if (!fs.existsSync(TEMPLATE_CONTENT_PATH)) {
-    console.warn("⚠️ Template content path not found.")
+    console.warn("⚠️ [Specialist Warning]: Template content path not found.")
     return []
   }
 
   const allTemplates: TemplateMeta[] = []
 
-  const categories = fs
-    .readdirSync(TEMPLATE_CONTENT_PATH)
-    .filter((f) =>
-      fs.statSync(path.join(TEMPLATE_CONTENT_PATH, f)).isDirectory()
-    )
+  try {
+    const categories = fs
+      .readdirSync(TEMPLATE_CONTENT_PATH)
+      .filter((f) =>
+        fs.statSync(path.join(TEMPLATE_CONTENT_PATH, f)).isDirectory()
+      )
 
-  for (const category of categories) {
-    const categoryPath = path.join(TEMPLATE_CONTENT_PATH, category)
-    const slugs = fs
-      .readdirSync(categoryPath)
-      .filter((f) => fs.statSync(path.join(categoryPath, f)).isDirectory())
+    for (const category of categories) {
+      const categoryPath = path.join(TEMPLATE_CONTENT_PATH, category)
+      const slugs = fs
+        .readdirSync(categoryPath)
+        .filter((f) => fs.statSync(path.join(categoryPath, f)).isDirectory())
 
-    for (const slug of slugs) {
-      const metaPath = path.join(categoryPath, slug, "meta.json")
+      for (const slug of slugs) {
+        const metaPath = path.join(categoryPath, slug, "meta.json")
 
-      if (fs.existsSync(metaPath)) {
-        try {
-          const fileContent = fs.readFileSync(metaPath, "utf8")
-          const metaData = JSON.parse(fileContent)
+        if (fs.existsSync(metaPath)) {
+          try {
+            const fileContent = fs.readFileSync(metaPath, "utf8")
+            const metaData = JSON.parse(fileContent)
 
-          allTemplates.push({
-            ...metaData,
-            slug: slug.toLowerCase(),
-            category: category.toLowerCase(),
-          })
-        } catch (error) {
-          console.error(`❌ Error parsing meta.json for ${slug}:`, error)
+            // ✅ [FIXED]: ป้องกัน Build Error โดยตรวจสอบว่ามี category และ slug ก่อนเรียก toLowerCase()
+            const safeCategory = (metaData.category || category || "uncategorized").toLowerCase()
+            const safeSlug = (metaData.slug || slug || "untitled").toLowerCase()
+
+            allTemplates.push({
+              ...metaData,
+              id: metaData.id || `temp-${safeSlug}`, // Fallback ID
+              slug: safeSlug,
+              category: safeCategory,
+              name: metaData.name || "Untitled Template",
+              image: metaData.image || "/images/og-image.png",
+              description: metaData.description || "",
+              price: metaData.price || 0,
+            })
+          } catch (error) {
+            console.error(`❌ Error parsing meta.json for ${slug}:`, error)
+          }
         }
       }
     }
+  } catch (globalError) {
+    console.error("❌ Global File System Error:", globalError)
   }
 
+  // จัดเรียงตามความนิยม
   return allTemplates.sort((a, b) => (b.isPopular ? 1 : -1))
 }
 
 /**
  * 🔍 2. getTemplateBySlug
- * ดึงข้อมูลเชิงลึกรายเทมเพลตพร้อมเนื้อหา MDX
+ * ดึงข้อมูลเชิงลึกพร้อม Safe Path Resolve
  */
 export async function getTemplateBySlug(
   slug: string
 ): Promise<TemplateData | null> {
+  if (!slug) return null
+  
   const templates = await getAllTemplates()
   const meta = templates.find((t) => t.slug === slug.toLowerCase())
 
@@ -4300,7 +4230,7 @@ export async function getTemplateBySlug(
   try {
     const fileContent = fs.readFileSync(mdxPath, "utf8")
     const { content } = matter(fileContent)
-    return { ...meta, content }
+    return { ...meta, content: content || "" }
   } catch (error) {
     console.error(`❌ Error reading MDX for ${slug}:`, error)
     return { ...meta, content: "" }
@@ -4309,40 +4239,43 @@ export async function getTemplateBySlug(
 
 /**
  * 🏷️ 3. getAllCategories
- * สรุปรายชื่อหมวดหมู่ทั้งหมดที่มีอยู่จริงในระบบไฟล์
+ * รวมรายชื่อหมวดหมู่แบบ Unique พร้อม Safe Mapping
  */
 export async function getAllCategories(): Promise<string[]> {
   const templates = await getAllTemplates()
-  return Array.from(new Set(templates.map((t) => t.category.toLowerCase())))
+  // ✅ กรองเฉพาะตัวที่มีค่าจริงก่อนประมวลผล
+  return Array.from(new Set(
+    templates
+      .map((t) => t.category ? t.category.toLowerCase() : "")
+      .filter((cat) => cat !== "")
+  ))
 }
 
 /**
- * 🔗 4. getTemplatesByServiceCategory (SPECIALIST ADDITION)
- * ดึงเทมเพลตที่สอดคล้องกับหมวดหมู่ของบริการ เพื่อระบบแนะนำที่แม่นยำ
+ * 🔗 4. getTemplatesByServiceCategory
  */
 export async function getTemplatesByServiceCategory(
   serviceCategory: string
 ): Promise<TemplateMeta[]> {
+  if (!serviceCategory) return []
+  
   const allTemplates = await getAllTemplates()
-
   const searchCat = serviceCategory.toLowerCase()
 
-  // 🎯 กรองเทมเพลตที่หมวดหมู่ตรงกัน หรือมี Tag ที่เกี่ยวข้องกับหมวดหมู่บริการนั้นๆ
   return allTemplates.filter((template) => {
-    const templateCat = template.category.toLowerCase()
+    // ✅ Safe Access สำหรับหมวดหมู่และแท็ก
+    const templateCat = (template.category || "").toLowerCase()
     const hasMatchingTag = template.tags?.some(
-      (tag) => tag.toLowerCase() === searchCat
+      (tag) => tag && tag.toLowerCase() === searchCat
     )
 
     return templateCat === searchCat || hasMatchingTag
   })
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
-
 ```typescript
 /** @format */
 
@@ -4473,19 +4406,14 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
-
 ---
 
 #### 🔍 Path: `.env`
-
 ```text
-
 ```
-
 ---
 
 ## 📝 Summary
-
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

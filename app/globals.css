@@ -20,6 +20,9 @@
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
 
+  /* 🌑 Accessibility Safe Colors (แก้ปัญหา Contrast บน Mobile) */
+  --color-slate-muted: #64748b; /* ✅ เทียบเท่า Slate-500 เพื่อผ่านเกณฑ์ AA/AAA */
+
   --color-destructive: hsl(0 84.2% 60.2%);
 
   /* 🎨 UI Elements & Variables */
@@ -41,56 +44,36 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: แก้ไขปัญหา Build Error และวางโครงสร้างพื้นฐาน              */
+/* 🏭 Base Layer: ความเสถียรและมาตรฐานพื้นฐาน                                    */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    /* ✅ [FIXED]: หลีกเลี่ยง @apply border-border 
-       ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 
-    */
+    /* ✅ [FIXED]: ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 */
     border-color: var(--color-border);
     outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
 
   body {
-    /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
     @apply bg-background text-foreground font-anuphan antialiased;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1;
 
-    /* การเลือกข้อความ (Selection) ตามแบรนด์ */
     &::selection {
       @apply bg-success/20 text-primary;
     }
   }
 
-  /* Typography Strategy for Industrial Authority */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -100,10 +83,15 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer: เครื่องมือช่วยสร้าง UI ให้เร็วและนิ่ง                       */
+/* 🚀 Utilities Layer: เครื่องมือปรับจูน Performance & Accessibility             */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
+  /* ✅ [FIX]: ยูทิลิตี้สำหรับข้อความที่ต้องการ Contrast สูงเพื่อผ่านเกณฑ์ Lighthouse */
+  .text-muted-safe {
+    color: var(--color-slate-muted);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -115,12 +103,12 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* มิติความลึกสไตล์ Industrial (เน้นความคมและสะอาด) */
+  /* มิติความลึกสไตล์ Industrial */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 
-  /* กราเดียนต์แบรนด์สำหรับเน้นหัวข้อสำคัญ */
+  /* กราเดียนต์แบรนด์ */
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }

@@ -15,21 +15,23 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 /* -------------------------------------------------------------------------- */
-/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering                         */
+/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
 /* -------------------------------------------------------------------------- */
 
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap",
+  display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
+  preload: true,   // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
 })
 
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
-  display: "swap",
+  display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
+  preload: true,   // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -44,7 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="th"
       className={cn(
-        "scroll-smooth focus:scroll-auto", // เพิ่มการรองรับ Accessibility
+        "scroll-smooth focus:scroll-auto",
         fontPrompt.variable,
         fontAnuphan.variable,
         "thai-font-smoothing"
@@ -55,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
           "selection:bg-emerald-500/20 selection:text-emerald-900",
-          "overflow-x-hidden" // ป้องกัน Layout เลื่อนแนวนอนบนมือถือ
+          "overflow-x-hidden"
         )}
       >
         {/* 🚀 Top Loading Bar: Brand Primary (Emerald-500) */}
@@ -73,7 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Script id="facebook-chat" strategy="lazyOnload">
           {`
             var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571"); // Verified ID
+            chatbox.setAttribute("page_id", "914706508399571"); 
             chatbox.setAttribute("attribution", "biz_inbox");
 
             window.fbAsyncInit = function() {

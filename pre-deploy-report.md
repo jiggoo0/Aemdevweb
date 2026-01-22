@@ -1,5 +1,5 @@
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-22 06:55:13
+Generated at: 2026-01-22 08:33:29
 Branch: main
 
 ## 🔐 1. Environment Check
@@ -38,9 +38,9 @@ Route (app)
 ├ ○ /careers
 ├ ○ /case-studies
 ├ ● /case-studies/[slug]
-│ ├ /case-studies/case-studies-1
-│ ├ /case-studies/case-studies-2
-│ └ /case-studies/case-studies-3
+│ ├ /case-studies/industrial-catalog-rfq-optimization
+│ ├ /case-studies/sme-web-performance-growth
+│ └ /case-studies/unlink-reputation-management-success
 ├ ○ /contact
 ├ ○ /privacy
 ├ ○ /robots.txt

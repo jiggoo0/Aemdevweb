@@ -5,8 +5,8 @@ url: "https://www.aemdevweb.com"
 author: "AEMDevWeb Automation"
 projectType: "Web Application"
 environment: "pre-deploy"
-buildId: "a8a4e66"
-generatedAt: "2026-01-22T00:17:22Z"
+buildId: "c81e56e"
+generatedAt: "2026-01-22T01:39:25Z"
 contentType: "technical-documentation"
 tags:
   - project-structure
@@ -17,11 +17,11 @@ tags:
 ---
 
 # 📁 Project Structure Report
-_Generated: **2026-01-22T00:17:22Z**_
+_Generated: **2026-01-22T01:39:25Z**_
 
 > **Site:** https://www.aemdevweb.com  
 > **Environment:** pre-deploy  
-> **Build ID:** a8a4e66
+> **Build ID:** c81e56e
 
 ## 🌳 Folder Structure
 
@@ -144,9 +144,9 @@ _Generated: **2026-01-22T00:17:22Z**_
     📄 seo-for-sme-2026.mdx
     📄 unlink-th-case-study.mdx
   📂 case-studies
-    📄 case-studies-1.mdx
-    📄 case-studies-2.mdx
-    📄 case-studies-3.mdx
+    📄 industrial-catalog-rfq-optimization.mdx
+    📄 sme-web-performance-growth.mdx
+    📄 unlink-reputation-management-success.mdx
   📂 template
     📂 booking
       📂 hotel-resort
@@ -521,9 +521,9 @@ Route (app)
 ├ ○ /careers
 ├ ○ /case-studies
 ├ ● /case-studies/[slug]
-│ ├ /case-studies/case-studies-1
-│ ├ /case-studies/case-studies-2
-│ └ /case-studies/case-studies-3
+│ ├ /case-studies/industrial-catalog-rfq-optimization
+│ ├ /case-studies/sme-web-performance-growth
+│ └ /case-studies/unlink-reputation-management-success
 ├ ○ /contact
 ├ ○ /privacy
 ├ ○ /robots.txt

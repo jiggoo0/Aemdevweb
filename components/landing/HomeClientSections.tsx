@@ -47,7 +47,8 @@ const HomeClientSections = () => {
       <div className="relative z-10 container mx-auto px-6">
         {/* Infinite Logo Slider */}
         <div className="mb-32">
-          <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+          {/* ✅ [FIX]: ปรับ Contrast ให้ผ่านเกณฑ์ Accessibility (400 -> 500) */}
+          <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
           </p>
 
@@ -71,7 +72,9 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    sizes="160px"
+                    // ✅ [FIX]: Optimize LCP โดยการลดขนาดภาพที่ request บน mobile และใช้ Lazy Load
+                    sizes="(max-width: 768px) 120px, 160px"
+                    loading="lazy"
                   />
                 </div>
               ))}
@@ -99,10 +102,11 @@ const HomeClientSections = () => {
                 </span>
                 <CheckCircle2 className="h-6 w-6 text-emerald-500" />
               </div>
-              <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-500 uppercase italic">
+              {/* ✅ [FIX]: ปรับ Contrast ให้อ่านง่ายขึ้น (slate-500 -> 600) */}
+              <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-600 uppercase italic">
                 {stat.label}
               </h3>
-              <p className="font-anuphan mt-4 text-sm font-bold text-slate-400">
+              <p className="font-anuphan mt-4 text-sm font-bold text-slate-500">
                 {stat.description}
               </p>
             </motion.div>

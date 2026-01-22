@@ -10,18 +10,13 @@ import { getAllTemplates } from "@/lib/template"
 /**
  * 🗺️ Dynamic sitemap.ts — 2026 Specialist Edition
  * ออกแบบมาเพื่อนำทาง Search Engine ไปยังจุดยุทธศาสตร์ของธุรกิจ
- * * Strategy:
- * 1. Static Routes: หน้าหลักและหน้าความน่าเชื่อถือ (Priority 1.0 - 0.7)
- * 2. Service Routes: หน้าสร้างรายได้หลัก (Priority 0.9)
- * 3. Case Studies: บทพิสูจน์ผลงาน (Priority 0.8)
- * 4. Templates: ตลาดขายสถาปัตยกรรมเว็บไซต์ (Priority 0.8)
- * 5. Blog: ดึง Traffic จากเนื้อหาความรู้ (Priority 0.6)
+ *
  */
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url
+  const baseUrl = siteConfig.url //
 
   // 1. หน้าพื้นฐานของเว็บไซต์ (Static Routes)
+  // Priority 1.0 สำหรับหน้าแรก และ 0.7 สำหรับหน้าข้อมูลทั่วไป
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -40,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // 2. หน้าบริการรายชิ้น (Revenue Layer)
+  // Priority 0.9: หน้าสร้างรายได้หลักจากบริการต่างๆ
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
@@ -48,10 +44,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // 3. หน้าผลงานความสำเร็จ (Social Proof Layer)
+  // [SEO]: ระบบจะกวาดหาชื่อไฟล์ใหม่ที่คุณเปลี่ยน (e.g., sme-web-performance) โดยอัตโนมัติ
   const caseStudies = await getAllCaseStudies()
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${baseUrl}/case-studies/${study.slug}`,
-    lastModified: new Date(),
+    lastModified: study.frontmatter.date ? new Date(study.frontmatter.date) : new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
   }))
@@ -67,6 +64,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // 5. หน้าบทความคลังความรู้ (Knowledge Hub)
+  // Priority 0.6: เน้นดึง Traffic จากการค้นหาข้อมูลความรู้
   const posts = await getAllPosts()
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

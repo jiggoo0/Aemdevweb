@@ -5,37 +5,30 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * 🧬 Global Metadata Configuration — Specialist Edition
- * Optimized for SME, Corporate, and Industrial Search Performance.
- * * * * Objectives:
- * 1. Brand Integrity: ใช้ MetadataBase เพื่อให้ Social Share ลิงก์รูปภาพถูกต้องเสมอ
- * 2. Search AI Ready: ปรับแต่ง Robots Meta Tags ให้สอดคล้องกับพฤติกรรม AI Crawlers 2026
- * 3. Canonical Excellence: ป้องกันปัญหาหน้าซ้ำ (SEO Duplicate Content)
+ * ออกแบบมาเพื่อประสิทธิภาพสูงสุดบน Google Search และ AI Crawlers สำหรับกลุ่ม B2B/SME
  */
 
 export const defaultMetadata: Metadata = {
-  // 🔗 Base Configuration
+  // 🔗 1. Base Infrastructure
   metadataBase: new URL(siteConfig.url),
 
-  // 🏷️ Title Configuration
+  // 🏷️ 2. Title Architecture
   title: {
-    // ✅ [FIXED]: ใช้ siteConfig.title ที่เราเพิ่มกลับเข้าไป
     default: siteConfig.title,
-    // ✅ [FIXED]: ใช้ siteConfig.shortName เพื่อแก้ TS2339
     template: `%s | ${siteConfig.shortName}`,
   },
 
-  // 📝 Primary Metadata
+  // 📝 3. Primary Metadata
   description: siteConfig.description,
-  // ✅ [FIXED]: keywords ต้องเป็น string[] หรือ string เท่านั้น (ใช้ .list จาก config ใหม่)
   keywords: siteConfig.keywords.list,
   category: "technology",
 
-  // 👤 Attribution
-  authors: [{ name: siteConfig.expert, url: siteConfig.links.linkedin }],
-  creator: siteConfig.companyName,
+  // 👤 4. Attribution & Authority
+  authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
+  creator: siteConfig.expert,
   publisher: siteConfig.companyName,
 
-  // 🗺️ Search Indexing & Canonical
+  // 🗺️ 5. Canonical & Localization Excellence
   alternates: {
     canonical: "/",
     languages: {
@@ -44,13 +37,12 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  // 🌐 Open Graph (Facebook, LinkedIn, etc.)
+  // 🌐 6. Open Graph (Social Meta)
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    // ✅ [FIXED]: ใช้ siteConfig.title
     title: siteConfig.title,
     description: siteConfig.description,
     images: [
@@ -58,21 +50,21 @@ export const defaultMetadata: Metadata = {
         url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} - Expert Web Development for SME`,
+        alt: `${siteConfig.name} - ${siteConfig.slogan}`,
       },
     ],
   },
 
-  // 🐦 Twitter / X
+  // 🐦 7. Twitter / X Cards
   twitter: {
     card: "summary_large_image",
-    // ✅ [FIXED]: ใช้ siteConfig.title
     title: siteConfig.title,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
+    creator: siteConfig.expert,
   },
 
-  // 🖼️ Favicons & PWA Icons
+  // 🖼️ 8. Comprehensive Icon Infrastructure (Favicons & PWA)
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -92,7 +84,7 @@ export const defaultMetadata: Metadata = {
     ],
   },
 
-  // 🤖 Crawler & AI Control
+  // 🤖 9. Crawler & AI Control
   robots: {
     index: true,
     follow: true,
@@ -106,16 +98,16 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  // 🔍 Verification Tools
+  // 🔍 10. Search Console Verification
   verification: {
-    google: "your-google-verification-id", // แทนที่ด้วย ID จริงจาก Search Console
+    // ✅ อัปเดตรหัสยืนยันตัวตนเรียบร้อยแล้ว
+    google: "google14e6cc676e76f49d",
   },
 
-  // 📱 Mobile App Linkage (Optional)
+  // 📱 11. Mobile Experience (Apple Web App)
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    // ✅ [FIXED]: ใช้ siteConfig.shortName
     title: siteConfig.shortName,
   },
 }
