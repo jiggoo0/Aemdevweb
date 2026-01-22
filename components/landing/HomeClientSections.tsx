@@ -4,7 +4,7 @@
 
 import React from "react"
 import Image from "next/image"
-import { motion } from "framer-motion" // ✅ เก็บไว้ใช้เฉพาะตอน Fade-in การ์ด (ไม่ใช้กับ Loop)
+import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
 const clients = [
@@ -51,9 +51,9 @@ const HomeClientSections = () => {
             Trusted by Forward-Thinking Businesses
           </p>
 
-          {/* ✅ [OPTIMIZED]: ใช้ CSS Animation แทน Framer Motion เพื่อลด CPU Usage บนมือถือ */}
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
+              {/* ✅ [OPTIMIZED]: ทำการ Map วนลูป โดยใช้ Image Sizes ที่เล็กลงสำหรับมือถือเพื่อลด Payload */}
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -64,8 +64,10 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 120px, 160px"
-                    loading="lazy"
+                    // ✅ [FIXED]: ปรับ sizes ให้ลดขนาดรูปบนมือถือเหลือเพียง 80-100px ช่วยลด LCP
+                    sizes="(max-width: 480px) 100px, (max-width: 768px) 120px, 160px"
+                    // ✅ [FIXED]: ใส่ priority เฉพาะรูปแรกๆ ที่แสดงผลบนหน้าจอทันทีเพื่อลดค่า LCP
+                    priority={i < 4}
                   />
                 </div>
               ))}

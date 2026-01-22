@@ -14,7 +14,7 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 // 🧩 Shared Components
-import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Import Component ใหม่
+import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Delayed Loading Component
 
 /* -------------------------------------------------------------------------- */
 /* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
@@ -24,16 +24,18 @@ const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
-  preload: true, // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
+  // ✅ เปลี่ยนเป็น optional เพื่อป้องกัน Layout Shift (CLS) บนมือถือเน็ตช้า
+  display: "optional", 
+  preload: true,
 })
 
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
-  display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
-  preload: true, // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
+  // ✅ เปลี่ยนเป็น optional เพื่อให้ Browser ตัดสินใจไม่แสดงผลหากโหลดไม่ทัน (ลด FOUT)
+  display: "optional", 
+  preload: true,
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -51,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "scroll-smooth focus:scroll-auto",
         fontPrompt.variable,
         fontAnuphan.variable,
-        "thai-font-smoothing"
+        "thai-font-smoothing" // Utility class ใน globals.css
       )}
       suppressHydrationWarning
     >
@@ -69,10 +71,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           showSpinner={false}
           easing="ease-in-out"
           speed={300}
+          shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
         {/* 💬 Facebook Customer Chat: Trusted Interaction Layer (Delayed Load) */}
-        {/* ✅ แทนที่ Script เดิมด้วย Component ที่โหลดแบบ Lazy */}
+        {/* ✅ โหลดแบบ Lazy เพื่อไม่ให้ Block Main Thread ตอนเริ่มหน้าเว็บ */}
         <FacebookChat />
 
         {/* 🌍 App Content Container */}

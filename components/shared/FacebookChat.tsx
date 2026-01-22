@@ -8,23 +8,29 @@ import Script from "next/script"
 export function FacebookChat() {
   const [isLoaded, setIsLoaded] = useState(false)
 
-  // ✅ Logic: โหลดหลังจากเลื่อนหน้าจอ หรือผ่านไป 5 วินาที (แก้ปัญหา PageSpeed มือถือ)
+  // ✅ Logic: โหลดหลังจากเลื่อนหน้าจอ หรือผ่านไป 4 วินาที (แก้ปัญหา PageSpeed มือถือ TBT สูง)
   useEffect(() => {
-    const handleScroll = () => setIsLoaded(true)
-    const handleInteraction = () => setIsLoaded(true)
+    // ฟังก์ชันเริ่มโหลดและล้าง Event Listeners ทันทีเพื่อลด Memory Usage
+    const handleInteraction = () => {
+      setIsLoaded(true)
+    }
 
-    // ตั้งเวลาเผื่อกรณีคนไม่เลื่อนจอ
-    const timer = setTimeout(() => setIsLoaded(true), 5000)
+    // 1. ตั้งเวลาอัตโนมัติ 4 วินาที (เผื่อคนเปิดทิ้งไว้เฉยๆ)
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 4000)
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    // 2. ดักจับ Interaction (Scroll, Mouse, Touch)
+    window.addEventListener("scroll", handleInteraction, { passive: true })
     window.addEventListener("mousemove", handleInteraction, { passive: true })
     window.addEventListener("touchstart", handleInteraction, { passive: true })
 
+    // Cleanup Function
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      clearTimeout(timer)
+      window.removeEventListener("scroll", handleInteraction)
       window.removeEventListener("mousemove", handleInteraction)
       window.removeEventListener("touchstart", handleInteraction)
-      clearTimeout(timer)
     }
   }, [])
 
@@ -34,6 +40,8 @@ export function FacebookChat() {
     <>
       <div id="fb-root" />
       <div id="fb-customer-chat" className="fb-customerchat" />
+      
+      {/* Script จะเริ่มโหลดเมื่อ isLoaded = true เท่านั้น */}
       <Script
         id="facebook-chat"
         strategy="lazyOnload"
@@ -47,7 +55,10 @@ export function FacebookChat() {
           // @ts-ignore
           window.fbAsyncInit = function () {
             // @ts-ignore
-            FB.init({ xfbml: true, version: "v18.0" })
+            FB.init({
+              xfbml: true,
+              version: "v18.0",
+            })
           }
         }}
       />

@@ -11,19 +11,19 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * 🏗️ Hero Section — "ความประทับใจแรกที่เปลี่ยนเป็นยอดขาย"
- * ปรับปรุงการสื่อสารให้เป็นภาษาคนทำงาน (Human-Centric) และตัดการระบุเวอร์ชัน V. ออก
+ * Optimized for LCP (Largest Contentful Paint)
  */
 const Hero = () => {
   return (
     <section className="relative min-h-[90vh] w-full overflow-hidden bg-white pt-32 lg:pt-48">
-      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern): สะท้อนงานระบบที่แม่นยำ */}
+      {/* 🧩 พื้นหลังลายตาราง (Industrial Grid Pattern) */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] [mask-image:linear-gradient(180deg,white,transparent)] bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4">
         <div className="flex flex-col items-center text-center">
-          {/* 🏷️ Badge: ตอกย้ำมาตรฐานสากล (ตัดการระบุเลขเวอร์ชัน V. เพื่อความเป็นมืออาชีพ) */}
+          {/* 🏷️ Badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -36,7 +36,7 @@ const Hero = () => {
             </span>
           </motion.div>
 
-          {/* 📣 พาดหัวหลัก (Main Headline): ดุดันและคมชัดด้วย Font Prompt */}
+          {/* 📣 พาดหัวหลัก (Main Headline) */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -49,7 +49,7 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* 📝 พาดหัวรอง (Sub-headline): อ่านง่าย สบายตาด้วย Font Anuphan */}
+          {/* 📝 พาดหัวรอง (Sub-headline) */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,7 +63,7 @@ const Hero = () => {
             </span>
           </motion.p>
 
-          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons): เน้นความชัดเจนในการติดต่อ */}
+          {/* 🚀 ปุ่มดำเนินการ (CTA Buttons) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,7 +87,7 @@ const Hero = () => {
             </Link>
           </motion.div>
 
-          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators): พิสูจน์ด้วยสถิติ */}
+          {/* 🏆 ตัวบ่งชี้ความมั่นใจ (Trust Indicators) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -132,7 +132,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* 🖼️ รูปภาพผลงาน (Decorative Image): บังคับโหลดทันทีเพื่อความไวสูงสุด */}
+      {/* 🖼️ รูปภาพผลงาน (Decorative Image) */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -144,10 +144,11 @@ const Hero = () => {
             src="/images/showcase/aemdevweb-hero.webp"
             alt="ผลงานการออกแบบเว็บไซต์โดย นายเอ็มซ่ามากส์"
             fill
-            priority // ✅ สำคัญ: บังคับโหลดทันทีเพื่อแก้ปัญหา LCP
+            priority // ✅ บังคับโหลดทันที
+            quality={90} // ✅ เพิ่มคุณภาพรูปภาพ (ปรับได้ระหว่าง 75-90)
             className="object-cover transition-transform duration-700 hover:scale-105"
-            // ✅ ปรับขนาดรูปตามหน้าจอจริง เพื่อประหยัด Data ลูกค้า
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px"
+            // ✅ [OPTIMIZED]: กำหนดค่าให้ละเอียดขึ้นเพื่อให้ Next.js เจนภาพขนาดเล็กลงสำหรับมือถือ
+            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 90vw, 1280px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
         </div>

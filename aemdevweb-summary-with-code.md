@@ -3,23 +3,20 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-22 08:40:04
+  Generated: 2026-01-22 15:37:14
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-22 08:40:04**_
-
+_Generated on: **2026-01-22 15:37:14**_
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
-
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-
-````text
+```text
 ```text
 Route (app)
 ┌ ○ /
@@ -58,13 +55,12 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-````
-
-````
+```
+```
 
 ## 📊 2. File Statistics by Extension
 ```text
-     58 tsx
+     59 tsx
      12 ts
      12 mdx
      10 webp
@@ -75,10 +71,9 @@ Route (app)
       1 svg
       1 ico
       1 css
-````
+```
 
 ## 📁 3. Directory Structure (Architecture Tree)
-
 ```text
 📂 app/
   📂 (main)/
@@ -151,6 +146,7 @@ Route (app)
   📂 shared/
     📄 LineStickyButton.tsx
     📄 TrustBadge.tsx
+    📄 FacebookChat.tsx
     📄 BlogCard.tsx
     📄 ServiceCard.tsx
     📄 Footer.tsx
@@ -253,9 +249,7 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
-
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -348,11 +342,9 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
-
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -486,11 +478,9 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
-
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -610,11 +600,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
-
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -707,11 +695,9 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
-
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
-
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -816,39 +802,25 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
-
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-
-````markdown
+```markdown
 # 🚀 Pre-deploy Inspection Report
-
-Generated at: 2026-01-22 08:33:29
+Generated at: 2026-01-22 09:42:16
 Branch: main
 
 ## 🔐 1. Environment Check
-
 ✅ Status: .env file exists and verified.
-
-## 🛠️ 2. Auto-Fix Procedure
-
+## 🛠️  2. Auto-Fix Procedure
 ✅ Status: Auto-fix completed or no issues found.
-
 ## 🧹 3. Code Linting (ESLint)
-
 ✅ Status: Linting passed.
-
 ## ⌨️ 4. Type Safety Check
-
 ✅ Status: TypeScript verified.
-
-## 🏗️ 5. Production Build Test
-
+## 🏗️  5. Production Build Test
 ✅ Status: Build successfully optimized.
-
 ### 📊 Route Statistics & Bundle Size
-
 ```text
 Route (app)
 ┌ ○ /
@@ -889,18 +861,14 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
+
 ```
-````
 
 ---
-
 ## 🏆 Summary Result
-
 ### ✅ READY FOR DEPLOY
-
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-
-````
+```
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -951,12 +919,20 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
 
@@ -973,14 +949,21 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 
   body {
     @apply bg-background text-foreground font-anuphan antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
 
     &::selection {
       @apply bg-success/20 text-primary;
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -1019,19 +1002,30 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }
-}
-````
 
+  /* ✅ [NEW]: Infinite Scroll Animation (CPU Optimized) */
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-infinite-scroll {
+    animation: infinite-scroll 25s linear infinite;
+  }
+}
+```
 ---
 
 #### 🔍 Path: `app/layout.tsx`
-
 ```typescript
 /** @format */
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import Script from "next/script"
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
@@ -1043,6 +1037,9 @@ import { viewport as defaultViewport } from "./viewport"
 import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
+// 🧩 Shared Components
+import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Import Component ใหม่
+
 /* -------------------------------------------------------------------------- */
 /* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
 /* -------------------------------------------------------------------------- */
@@ -1052,7 +1049,7 @@ const fontPrompt = Prompt({
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
   display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
-  preload: true,   // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
+  preload: true, // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
 })
 
 const fontAnuphan = Anuphan({
@@ -1060,7 +1057,7 @@ const fontAnuphan = Anuphan({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
-  preload: true,   // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
+  preload: true, // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -1098,31 +1095,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           speed={300}
         />
 
-        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer */}
-        <div id="fb-root" />
-        <div id="fb-customer-chat" className="fb-customerchat" />
-        <Script id="facebook-chat" strategy="lazyOnload">
-          {`
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571");
-            chatbox.setAttribute("attribution", "biz_inbox");
-
-            window.fbAsyncInit = function() {
-              FB.init({
-                xfbml            : true,
-                version          : 'v18.0'
-              });
-            };
-
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-          `}
-        </Script>
+        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer (Delayed Load) */}
+        {/* ✅ แทนที่ Script เดิมด้วย Component ที่โหลดแบบ Lazy */}
+        <FacebookChat />
 
         {/* 🌍 App Content Container */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
@@ -1151,11 +1126,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1299,11 +1272,9 @@ export default function HomePage() {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
-
 ```typescript
 /** @format */
 
@@ -1311,7 +1282,7 @@ export default function HomePage() {
 
 import React from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion" // ✅ เก็บไว้ใช้เฉพาะตอน Fade-in การ์ด (ไม่ใช้กับ Loop)
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
 const clients = [
@@ -1352,23 +1323,15 @@ const HomeClientSections = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Infinite Logo Slider */}
+        {/* Infinite Logo Slider (CSS Animation Optimized) */}
         <div className="mb-32">
-          {/* ✅ [FIX]: ปรับ Contrast ให้ผ่านเกณฑ์ Accessibility (400 -> 500) */}
           <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
           </p>
 
+          {/* ✅ [OPTIMIZED]: ใช้ CSS Animation แทน Framer Motion เพื่อลด CPU Usage บนมือถือ */}
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
-            <motion.div
-              animate={{ x: [0, -1000] }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="flex shrink-0 items-center gap-20 pr-20"
-            >
+            <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -1379,17 +1342,16 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    // ✅ [FIX]: Optimize LCP โดยการลดขนาดภาพที่ request บน mobile และใช้ Lazy Load
                     sizes="(max-width: 768px) 120px, 160px"
                     loading="lazy"
                   />
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Impact Stats Grid */}
+        {/* Impact Stats Grid (One-time Animation) */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
@@ -1409,7 +1371,6 @@ const HomeClientSections = () => {
                 </span>
                 <CheckCircle2 className="h-6 w-6 text-emerald-500" />
               </div>
-              {/* ✅ [FIX]: ปรับ Contrast ให้อ่านง่ายขึ้น (slate-500 -> 600) */}
               <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-600 uppercase italic">
                 {stat.label}
               </h3>
@@ -1441,11 +1402,9 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1641,11 +1600,9 @@ export default async function TemplateDetailPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1677,7 +1634,7 @@ export async function generateStaticParams() {
 
   // ✅ [FIXED]: เพิ่มการตรวจสอบข้อมูลก่อน map เพื่อป้องกัน undefined error ตอน Build
   return templates
-    .filter(t => t.category)
+    .filter((t) => t.category)
     .map((t) => ({
       template: "templates",
       category: t.category.toLowerCase(),
@@ -1702,7 +1659,9 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 /**
  * 🚀 3. Category Listing Component
  */
-export default async function TemplateCategoryPage({ params }: CategoryPageProps) {
+export default async function TemplateCategoryPage({
+  params,
+}: CategoryPageProps) {
   const { category } = await params
   const allTemplates = await getAllTemplates()
 
@@ -1719,7 +1678,6 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
-
       {/* 🌌 Background Infrastructure */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
@@ -1737,10 +1695,7 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
         <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredTemplates.map((template) => (
-              <TemplateCard
-                key={template.slug}
-                template={template}
-              />
+              <TemplateCard key={template.slug} template={template} />
             ))}
           </div>
         </div>
@@ -1757,11 +1712,9 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -1948,11 +1901,9 @@ export default async function TemplateMainPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2226,11 +2177,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2480,7 +2429,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* 🎯 High-Conversion CTA Section */}
-        <div className="relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white shadow-3xl md:p-24">
+        <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white md:p-24">
           <div className="absolute top-0 right-0 p-12 opacity-5">
             <ShieldCheck size={250} />
           </div>
@@ -2514,11 +2463,9 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2584,7 +2531,10 @@ export default async function CaseStudiesPage() {
       />
 
       {/* 🌌 Background Infrastructure */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]" aria-hidden="true" />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       {/* 🔝 1. Hero Section: ความมั่นใจในระดับ Specialist */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
@@ -2653,11 +2603,9 @@ export default async function CaseStudiesPage() {
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
-
 ```typescript
 /** @format */
 
@@ -2678,10 +2626,10 @@ import {
   Cpu,
   CheckCircle2,
   CheckCircle, // ✅ เพิ่ม
-  Settings,    // ✅ เพิ่ม
-  Factory,     // ✅ เพิ่ม (สำหรับ Industrial Case)
+  Settings, // ✅ เพิ่ม
+  Factory, // ✅ เพิ่ม (สำหรับ Industrial Case)
   LayoutDashboard, // ✅ เพิ่ม
-  Clock,       // ✅ เพิ่ม
+  Clock, // ✅ เพิ่ม
   Lock,
   Zap,
   BarChart3,
@@ -2831,7 +2779,8 @@ export default async function CaseStudyDetailPage({
               <div className="flex items-center gap-3">
                 <Tag className="h-5 w-5 text-emerald-500" />
                 <span className="font-anuphan text-xs font-bold tracking-widest text-slate-500 uppercase">
-                  {caseStudy.frontmatter.service || caseStudy.frontmatter.category}
+                  {caseStudy.frontmatter.service ||
+                    caseStudy.frontmatter.category}
                 </span>
               </div>
             </div>
@@ -2841,7 +2790,7 @@ export default async function CaseStudyDetailPage({
 
       {/* 🖼️ 2. Featured Image */}
       <div className="container mx-auto mb-24 px-6">
-        <div className="relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50 shadow-3xl">
+        <div className="shadow-3xl relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50">
           <Image
             src={caseStudy.frontmatter.thumbnail}
             alt={caseStudy.frontmatter.title}
@@ -2881,11 +2830,9 @@ export default async function CaseStudyDetailPage({
   )
 }
 ```
-
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
-
 ```typescript
 /** @format */
 
@@ -3086,11 +3033,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
-
 ```typescript
 /** @format */
 
@@ -3252,11 +3197,9 @@ export function constructMetadata({
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
-
 ```typescript
 /** @format */
 
@@ -3483,11 +3426,9 @@ export const services: ServiceItem[] = [
   },
 ]
 ```
-
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
-
 ```typescript
 /** @format */
 
@@ -3665,11 +3606,9 @@ export const siteKeywords: string[] = [
   "ที่ปรึกษาด้าน Performance Website",
 ]
 ```
-
 ---
 
 #### 🔍 Path: `tsconfig.json`
-
 ```json
 {
   "compilerOptions": {
@@ -3720,11 +3659,9 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
-
 ---
 
 #### 🔍 Path: `package.json`
-
 ```json
 {
   "name": "aemdevweb.com",
@@ -3792,11 +3729,9 @@ export const siteKeywords: string[] = [
   }
 }
 ```
-
 ---
 
 #### 🔍 Path: `types/index.ts`
-
 ```typescript
 /** @format */
 
@@ -4026,11 +3961,9 @@ export interface TestimonialItem {
   image?: string
 }
 ```
-
 ---
 
 #### 🔍 Path: `next.config.mjs`
-
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
@@ -4078,11 +4011,9 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
-
 ---
 
 #### 🔍 Path: `components.json`
-
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -4107,11 +4038,9 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/blog.ts`
-
 ```typescript
 /** @format */
 
@@ -4192,11 +4121,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/template.ts`
-
 ```typescript
 /** @format */
 
@@ -4367,11 +4294,9 @@ export async function getTemplatesByServiceCategory(
   })
 }
 ```
-
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
-
 ```typescript
 /** @format */
 
@@ -4509,19 +4434,14 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
-
 ---
 
 #### 🔍 Path: `.env`
-
 ```text
-
 ```
-
 ---
 
 ## 📝 Summary
-
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 
