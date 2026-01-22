@@ -3,7 +3,7 @@ import createMDX from "@next/mdx"
 
 /**
  * Next.js Configuration - AEMDEVWEB Professional v2026
- * Focus: High-Performance Image Serving, Termux Compatibility, and Build Efficiency
+ * Focus: High-Performance Image Serving, Termux Compatibility, and Next.js 16 Migration
  */
 
 /** @type {import('next').NextConfig} */
@@ -12,6 +12,9 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+
+  /* Moved to root in Next.js 16: Packages that should not be bundled by the server */
+  serverExternalPackages: ["@libsql/client"],
 
   /* Image Optimization Infrastructure */
   images: {
@@ -32,7 +35,7 @@ const nextConfig = {
 
   /* Experimental & Build Performance Features */
   experimental: {
-    // Disable mdxRs to ensure compatibility with Termux environments (prevents Rust Compiler issues)
+    // Required for Termux compatibility to prevent Rust Compiler issues
     mdxRs: false,
     optimizePackageImports: [
       "lucide-react",
@@ -42,8 +45,6 @@ const nextConfig = {
       "@radix-ui/react-tabs",
       "@radix-ui/react-dropdown-menu",
     ],
-    // External packages that should not be bundled by the server
-    serverComponentsExternalPackages: ["@libsql/client"],
   },
 
   /* Compiler Options */

@@ -15,8 +15,8 @@ import { cn } from "@/lib/utils"
 
 /**
  * Navbar Infrastructure - Specialist Edition (v2026)
- * Implements Glassmorphism and Verified Logo Integration.
- * Optimized for Largest Contentful Paint (LCP) and Brand Authority.
+ * Refined Brand Identity Layer: Removed dark background frame.
+ * Optimized for Largest Contentful Paint (LCP) and visual clarity.
  */
 const Navbar = () => {
   const pathname = usePathname()
@@ -49,23 +49,23 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Brand Identity: logo-circuit.webp Implementation */}
+        {/* Brand Identity: logo-circuit.png - Transparent Frame Implementation */}
         <Link
           href="/"
           className="group font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
         >
-          <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-slate-950 shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-600">
-            {/* High-Performance Brand Asset Loading
-                Using priority and verified path: /images/logo-circuit.webp
-            */}
+          {/* REMOVED: bg-slate-950, shadow-xl, group-hover:bg-emerald-600
+              ADJUSTED: Scale and transition for clean branding.
+          */}
+          <div className="relative flex h-11 w-11 items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
             <Image
-              src="/images/logo-circuit.webp"
+              src="/images/logo-circuit.png"
               alt={`${siteConfig.name} - Technical SEO by ${siteConfig.expert}`}
               width={44}
               height={44}
               priority
               quality={100}
-              className="object-contain p-2"
+              className="object-contain" // REMOVED: p-2 to allow full-size rendering
             />
           </div>
           <span className="flex items-center uppercase">

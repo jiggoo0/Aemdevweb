@@ -3,7 +3,8 @@
 # ==============================================================================
 # PROJECT: aemdevweb.com - Full Context & Code Analysis Script
 # DESCRIPTION: Compiles architectural structure and critical source code.
-# VERSION: 2.0.0 (2026-01-22)
+# VERSION: 2.1.0 (2026-01-23)
+# IDENTITY: Alongkorl (นายเอ็มซ่ามากส์)
 # ==============================================================================
 
 # CONFIGURATION
@@ -12,7 +13,7 @@ REPORT_FILE="pre-deploy-report.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
 PROJECT_URL="https://aemdevweb.com"
 
-# Next.js 15 Enterprise Directory Whitelist
+# Next.js 16 Enterprise Directory Whitelist
 WHITELIST_DIRS=(
   "app"
   "actions"
@@ -31,7 +32,7 @@ WHITELIST_DIRS=(
   "config"
 )
 
-# Critical files for AI context analysis
+# Critical files for AI context analysis (Including Proxy and Instrumentation)
 SCAN_FILES=(
   "config/ai-context.core.md"
   "config/ai-system-role.md"
@@ -39,9 +40,9 @@ SCAN_FILES=(
   "$REPORT_FILE"
   "app/globals.css"
   "app/layout.tsx"
-  "app/(main)/page.tsx"
-  "app/middleware.ts"
   "app/instrumentation.ts"
+  "proxy.ts"
+  "app/(main)/page.tsx"
   "components/landing/HomeClientSections.tsx"
   "app/(marketing)/[template]/[category]/[slug]/page.tsx"
   "app/(main)/blog/[slug]/page.tsx"
@@ -54,6 +55,7 @@ SCAN_FILES=(
   "next.config.mjs"
   "components.json"
   "lib/blog.ts"
+  "lib/case-studies.ts"
   "lib/template.ts"
   ".env"
 )
@@ -63,48 +65,57 @@ rm -f "$OUTPUT_FILE"
 echo "[INFO] Initiating Full Context Scan for $PROJECT_DOMAIN..."
 
 {
-  echo "# Project Context Summary (Full Scan)"
-  echo ""
-  echo ""
-  echo ""
-  echo "Generated on: $(date '+%Y-%m-%d %H:%M:%S')"
-  echo "Project: $PROJECT_DOMAIN"
-  echo "URL: $PROJECT_URL"
-  echo "Status: Production-Ready Analysis | Full System Context"
-  echo ""
+  # YAML FRONT MATTER FOR AI INDEXING
+  cat <<EOF
+---
+project: "$PROJECT_DOMAIN"
+url: "$PROJECT_URL"
+generatedAt: "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+status: "production-analysis"
+type: "technical-context"
+identity: "Alongkorl Yomkerd"
+---
 
-  # --- 1. PROJECT HEALTH STATUS ---
+# Project Context Summary (Full Scan)
+
+Generated on: $(date '+%Y-%m-%d %H:%M:%S')
+Project: $PROJECT_DOMAIN
+URL: $PROJECT_URL
+Status: Production-Ready Analysis | Full System Context | Next.js 16
+
+EOF
+
+  # 1. PROJECT HEALTH STATUS
   echo "## 1. Project Health and Deployment Readiness"
   if [ -f "$REPORT_FILE" ]; then
-    if grep -q "### READY FOR DEPLOY" "$REPORT_FILE"; then
-      echo "STATUS: READY FOR DEPLOY (Project meets production standards)"
+    if grep -qi "READY FOR DEPLOY" "$REPORT_FILE"; then
+      echo "Verdict: READY FOR DEPLOY (Project meets production standards)"
     else
-      echo "STATUS: FIX REQUIRED (Check issue highlights)"
+      echo "Verdict: FIX REQUIRED (Check issue highlights)"
     fi
     echo ""
 
-    if grep -q "### Route Statistics" "$REPORT_FILE"; then
+    if grep -q "###.*Route" "$REPORT_FILE"; then
       echo "### Production Route Map"
       echo '```text'
-      sed -n '/### Route Statistics/,/---/p' "$REPORT_FILE" | \
-        grep -v "###" | grep -v -- "---" | sed '/^$/d'
+      sed -n '/###.*Route/,/---/p' "$REPORT_FILE" | grep -vE "###|---" | sed '/^$/d'
       echo '```'
     fi
   else
-    echo "WARNING: $REPORT_FILE not found. Run pre-deploy-check.sh for metrics."
+    echo "Warning: $REPORT_FILE not found. Run pre-deploy-check.sh for metrics."
   fi
   echo ""
 
-  # --- 2. FILE TYPE DISTRIBUTION ---
+  # 2. FILE TYPE DISTRIBUTION
   echo "## 2. File Statistics by Extension"
   echo '```text'
-  find "${WHITELIST_DIRS[@]}" -type f 2>/dev/null \
-    | sed 's/.*\.//' | sort | uniq -c | sort -nr
+  find "${WHITELIST_DIRS[@]}" -type f 2>/dev/null | sed 's/.*\.//' | sort | uniq -c | sort -nr
   echo '```'
   echo ""
 
-  # --- 3. ARCHITECTURAL TREE ---
+  # 3. ARCHITECTURAL TREE
   echo "## 3. Directory Structure (Architecture Tree)"
+  
   echo '```text'
   for dir in "${WHITELIST_DIRS[@]}"; do
     if [ -d "$dir" ]; then
@@ -115,7 +126,7 @@ echo "[INFO] Initiating Full Context Scan for $PROJECT_DOMAIN..."
   echo '```'
   echo ""
 
-  # --- 4. SOURCE CODE & TECHNICAL CONTEXT ---
+  # 4. SOURCE CODE & TECHNICAL CONTEXT
   echo "## 4. Critical Code Analysis and Environment"
   for file in "${SCAN_FILES[@]}"; do
     if [ -f "$file" ]; then
@@ -129,12 +140,10 @@ echo "[INFO] Initiating Full Context Scan for $PROJECT_DOMAIN..."
         json) lang="json" ;;
         md) lang="markdown" ;;
         css) lang="css" ;;
-        sql) lang="sql" ;;
       esac
 
       echo '```'"$lang"
       if [[ "$file" == *".env"* ]]; then
-        # Securely mask sensitive data
         sed 's/=\(.*\)/= "REDACTED"/' "$file"
       elif [ "$file" = "package.json" ] && command -v jq >/dev/null 2>&1; then
         jq '{name, version, scripts, dependencies, devDependencies}' package.json

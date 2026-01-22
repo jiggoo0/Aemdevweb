@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils"
 
 /**
  * Footer Industrial Specialist Identity (v2026)
+ * Refined Brand Identity Layer: Removed dark background frame from logo.
  * Engineered for trust acquisition among SME owners and industrial sectors.
- * Color Palette: Slate-950 (#020617) & Emerald-500 (#10B981)
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -45,9 +45,9 @@ export default function Footer() {
         <div className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { label: "SME", icon: Zap },
-            { label: "เจ้าของกิจการ", icon: ShieldCheck },
-            { label: "บริษัท และ หจก.", icon: Building2 },
-            { label: "โรงงานอุตสาหกรรม", icon: Factory },
+            { label: "Business Owner", icon: ShieldCheck },
+            { label: "Enterprise", icon: Building2 },
+            { label: "Industrial Factory", icon: Factory },
           ].map((item, i) => (
             <div
               key={i}
@@ -62,18 +62,20 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* Column 1: Brand Authority Profile with Verified Logo */}
+          {/* Column 1: Brand Authority Profile with Verified PNG Logo 
+              REMOVED: bg-[#020617], shadow-2xl, shadow-emerald-500/10, group-hover:bg-emerald-600
+          */}
           <div className="space-y-8 lg:col-span-4">
             <Link
               href="/"
               className="group flex items-center gap-4 select-none"
             >
-              <div className="flex size-14 items-center justify-center rounded-[1.25rem] bg-[#020617] shadow-2xl shadow-emerald-500/10 transition-all duration-500 group-hover:rotate-6 group-hover:bg-emerald-600">
+              <div className="flex size-14 items-center justify-center rounded-[1.25rem] transition-all duration-500 group-hover:rotate-6">
                 <Image
-                  src="/images/logo-circuit.webp"
-                  alt={siteConfig.name}
-                  width={32}
-                  height={32}
+                  src="/images/logo-circuit.png"
+                  alt={`${siteConfig.name} identity by ${siteConfig.expert}`}
+                  width={48} // Adjusted for visual balance in transparent mode
+                  height={48}
                   className="object-contain"
                 />
               </div>
@@ -89,14 +91,14 @@ export default function Footer() {
             </Link>
 
             <p className="font-anuphan max-w-sm text-base leading-relaxed font-bold text-slate-500">
-              ผู้นำการวางสถาปัตยกรรมดิจิทัลสำหรับ{" "}
-              <span className="text-[#020617]">เจ้าของกิจการ</span> และ
-              <span className="text-[#020617]"> โรงงานอุตสาหกรรม</span>
-              ที่เน้นความนิ่งของระบบและความปลอดภัยระดับสูงสุด
+              Leading digital architecture provider for{" "}
+              <span className="text-[#020617]">SME Owners</span> and
+              <span className="text-[#020617]"> Industrial Factories</span>
+              focusing on stability and highest security standards.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-2">
-              <div className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-4 py-2.5 text-[9px] font-black tracking-[0.2em] text-slate-400 uppercase shadow-sm transition-colors hover:border-slate-200">
+              <div className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-4 py-2.5 text-[9px] font-black tracking-[0.2em] text-slate-400 uppercase shadow-sm">
                 <HardHat size={12} className="text-emerald-500" /> Industrial Standard
               </div>
             </div>

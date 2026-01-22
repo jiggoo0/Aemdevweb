@@ -7,7 +7,7 @@
 # ==============================================================================
 
 # CONFIGURATION
-OUTPUT_FILE="aemdevweb-tree.md"
+OUTPUT_FILE="tree-projects.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
 PROJECT_URL="https://www.aemdevweb.com"
 
@@ -39,7 +39,7 @@ ROOT_FILES=(
   "components.json"
   "tsconfig.json"
   "postcss.config.mjs"
-  "middleware.ts"
+  "proxy.ts"
 )
 
 # Ignore non-essential patterns
