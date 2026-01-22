@@ -42,7 +42,8 @@ const CaseStudyCard = ({
   index = 0,
 }: CaseStudyCardProps) => {
   // 🛡️ Safe Image Path
-  const imageSrc = image && image.trim() !== "" ? image : "/images/showcase/placeholder.webp"
+  const imageSrc =
+    image && image.trim() !== "" ? image : "/images/showcase/placeholder.webp"
 
   return (
     <motion.div
@@ -97,7 +98,7 @@ const CaseStudyCard = ({
             <h3 className="font-prompt text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors duration-500 group-hover:text-emerald-400 md:text-4xl">
               {title}
             </h3>
-            <p className="font-anuphan line-clamp-2 text-lg font-medium leading-relaxed text-slate-400 transition-colors group-hover:text-slate-200">
+            <p className="font-anuphan line-clamp-2 text-lg leading-relaxed font-medium text-slate-400 transition-colors group-hover:text-slate-200">
               {description}
             </p>
           </div>

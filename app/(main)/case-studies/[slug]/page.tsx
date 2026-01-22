@@ -17,10 +17,10 @@ import {
   Cpu,
   CheckCircle2,
   CheckCircle, // ✅ เพิ่ม
-  Settings,    // ✅ เพิ่ม
-  Factory,     // ✅ เพิ่ม (สำหรับ Industrial Case)
+  Settings, // ✅ เพิ่ม
+  Factory, // ✅ เพิ่ม (สำหรับ Industrial Case)
   LayoutDashboard, // ✅ เพิ่ม
-  Clock,       // ✅ เพิ่ม
+  Clock, // ✅ เพิ่ม
   Lock,
   Zap,
   BarChart3,
@@ -170,7 +170,8 @@ export default async function CaseStudyDetailPage({
               <div className="flex items-center gap-3">
                 <Tag className="h-5 w-5 text-emerald-500" />
                 <span className="font-anuphan text-xs font-bold tracking-widest text-slate-500 uppercase">
-                  {caseStudy.frontmatter.service || caseStudy.frontmatter.category}
+                  {caseStudy.frontmatter.service ||
+                    caseStudy.frontmatter.category}
                 </span>
               </div>
             </div>
@@ -180,7 +181,7 @@ export default async function CaseStudyDetailPage({
 
       {/* 🖼️ 2. Featured Image */}
       <div className="container mx-auto mb-24 px-6">
-        <div className="relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50 shadow-3xl">
+        <div className="shadow-3xl relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50">
           <Image
             src={caseStudy.frontmatter.thumbnail}
             alt={caseStudy.frontmatter.title}

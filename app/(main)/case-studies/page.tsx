@@ -62,7 +62,10 @@ export default async function CaseStudiesPage() {
       />
 
       {/* 🌌 Background Infrastructure */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]" aria-hidden="true" />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       {/* 🔝 1. Hero Section: ความมั่นใจในระดับ Specialist */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
@@ -93,7 +96,7 @@ export default async function CaseStudiesPage() {
             {cases.map((item, idx) => {
               // 🧪 Type Casting เพื่อความปลอดภัยในขณะเรนเดอร์
               const fm = item.frontmatter as CaseStudyFrontmatter
-              
+
               return (
                 <CaseStudyCard
                   key={item.slug}

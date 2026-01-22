@@ -4,7 +4,7 @@
 
 import React from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion } from "framer-motion" // ✅ เก็บไว้ใช้เฉพาะตอน Fade-in การ์ด (ไม่ใช้กับ Loop)
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
 const clients = [
@@ -45,23 +45,15 @@ const HomeClientSections = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Infinite Logo Slider */}
+        {/* Infinite Logo Slider (CSS Animation Optimized) */}
         <div className="mb-32">
-          {/* ✅ [FIX]: ปรับ Contrast ให้ผ่านเกณฑ์ Accessibility (400 -> 500) */}
           <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
           </p>
 
+          {/* ✅ [OPTIMIZED]: ใช้ CSS Animation แทน Framer Motion เพื่อลด CPU Usage บนมือถือ */}
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
-            <motion.div
-              animate={{ x: [0, -1000] }}
-              transition={{
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="flex shrink-0 items-center gap-20 pr-20"
-            >
+            <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -72,17 +64,16 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    // ✅ [FIX]: Optimize LCP โดยการลดขนาดภาพที่ request บน mobile และใช้ Lazy Load
                     sizes="(max-width: 768px) 120px, 160px"
                     loading="lazy"
                   />
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Impact Stats Grid */}
+        {/* Impact Stats Grid (One-time Animation) */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
@@ -102,7 +93,6 @@ const HomeClientSections = () => {
                 </span>
                 <CheckCircle2 className="h-6 w-6 text-emerald-500" />
               </div>
-              {/* ✅ [FIX]: ปรับ Contrast ให้อ่านง่ายขึ้น (slate-500 -> 600) */}
               <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-600 uppercase italic">
                 {stat.label}
               </h3>

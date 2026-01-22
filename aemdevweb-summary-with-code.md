@@ -3,20 +3,23 @@
 <!--
   Domain: www.aemdevweb.com
   Canonical: https://aemdevweb.com
-  Generated: 2026-01-22 07:17:57
+  Generated: 2026-01-22 08:40:04
   Type: Full Context & Code Analysis
 -->
 
-_Generated on: **2026-01-22 07:17:57**_
+_Generated on: **2026-01-22 08:40:04**_
+
 > **Project:** www.aemdevweb.com
 > **URL:** https://aemdevweb.com
 > **Status:** Production-Ready Analysis | Full System Context | De-indexing Focus
 
 ## 🔴 1. Project Health & Deployment Readiness
+
 ✅ **READY FOR DEPLOY:** The project meets all production standards.
 
 ### 📍 Production Route Map
-```text
+
+````text
 ```text
 Route (app)
 ┌ ○ /
@@ -42,9 +45,9 @@ Route (app)
 ├ ○ /careers
 ├ ○ /case-studies
 ├ ● /case-studies/[slug]
-│ ├ /case-studies/case-studies-1
-│ ├ /case-studies/case-studies-2
-│ └ /case-studies/case-studies-3
+│ ├ /case-studies/industrial-catalog-rfq-optimization
+│ ├ /case-studies/sme-web-performance-growth
+│ └ /case-studies/unlink-reputation-management-success
 ├ ○ /contact
 ├ ○ /privacy
 ├ ○ /robots.txt
@@ -55,8 +58,9 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-```
-```
+````
+
+````
 
 ## 📊 2. File Statistics by Extension
 ```text
@@ -71,9 +75,10 @@ Route (app)
       1 svg
       1 ico
       1 css
-```
+````
 
 ## 📁 3. Directory Structure (Architecture Tree)
+
 ```text
 📂 app/
   📂 (main)/
@@ -237,9 +242,9 @@ Route (app)
         📄 index.mdx
         📄 meta.json
   📂 case-studies/
-    📄 case-studies-3.mdx
-    📄 case-studies-2.mdx
-    📄 case-studies-1.mdx
+    📄 sme-web-performance-growth.mdx
+    📄 unlink-reputation-management-success.mdx
+    📄 industrial-catalog-rfq-optimization.mdx
 📂 config/
   📄 ai-context.core.md
   📄 ai-context.marketing.md
@@ -248,7 +253,9 @@ Route (app)
 ```
 
 ## 📄 4. Critical Code Analysis & Environment
+
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -341,9 +348,11 @@ Route (app)
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.marketing.md`
+
 ```markdown
 ---
 contextType: "AI Marketing Context"
@@ -477,9 +486,11 @@ lastUpdated: "2026-01-21"
 
 **End of Marketing Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.seo.md`
+
 ```markdown
 contextType: "AI SEO Context"
 contextLevel: "seo"
@@ -599,9 +610,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 
 **End of SEO Context**
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.core.md`
+
 ```markdown
 🧠 AI CORE CONTEXT — AEMDevWeb (The 2026 Masterfile)
 ⚠️ SYSTEM DIRECTIVE: เอกสารนี้คือ "Source of Truth" เพียงหนึ่งเดียว ห้าม AI คิดเองเออเองนอกเหนือจากข้อเท็จจริงในนี้
@@ -694,9 +707,11 @@ Google ยุคใหม่ให้ค่ากับ **Experience, Expertise,
 - เปลี่ยน Visitor ให้เป็น Client
   — End of Core Context —
 ```
+
 ---
 
 #### 🔍 Path: `config/ai-context.tech.md`
+
 ```markdown
 ---
 contextType: "AI Tech Context"
@@ -801,25 +816,39 @@ _ส่วนนี้ใช้ควบคุมคุณภาพโค้ด 
 
 **End of Technical Context**
 ```
+
 ---
 
 #### 🔍 Path: `pre-deploy-report.md`
-```markdown
+
+````markdown
 # 🚀 Pre-deploy Inspection Report
-Generated at: 2026-01-22 06:55:13
+
+Generated at: 2026-01-22 08:33:29
 Branch: main
 
 ## 🔐 1. Environment Check
+
 ✅ Status: .env file exists and verified.
-## 🛠️  2. Auto-Fix Procedure
+
+## 🛠️ 2. Auto-Fix Procedure
+
 ✅ Status: Auto-fix completed or no issues found.
+
 ## 🧹 3. Code Linting (ESLint)
+
 ✅ Status: Linting passed.
+
 ## ⌨️ 4. Type Safety Check
+
 ✅ Status: TypeScript verified.
-## 🏗️  5. Production Build Test
+
+## 🏗️ 5. Production Build Test
+
 ✅ Status: Build successfully optimized.
+
 ### 📊 Route Statistics & Bundle Size
+
 ```text
 Route (app)
 ┌ ○ /
@@ -845,9 +874,9 @@ Route (app)
 ├ ○ /careers
 ├ ○ /case-studies
 ├ ● /case-studies/[slug]
-│ ├ /case-studies/case-studies-1
-│ ├ /case-studies/case-studies-2
-│ └ /case-studies/case-studies-3
+│ ├ /case-studies/industrial-catalog-rfq-optimization
+│ ├ /case-studies/sme-web-performance-growth
+│ └ /case-studies/unlink-reputation-management-success
 ├ ○ /contact
 ├ ○ /privacy
 ├ ○ /robots.txt
@@ -860,14 +889,18 @@ Route (app)
 ○  (Static)   prerendered as static content
 ●  (SSG)      prerendered as static HTML (uses generateStaticParams)
 ƒ  (Dynamic)  server-rendered on demand
-
 ```
+````
 
 ---
+
 ## 🏆 Summary Result
+
 ### ✅ READY FOR DEPLOY
+
 All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended.
-```
+
+````
 ---
 
 #### 🔍 Path: `app/globals.css`
@@ -894,6 +927,9 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
 
+  /* 🌑 Accessibility Safe Colors (แก้ปัญหา Contrast บน Mobile) */
+  --color-slate-muted: #64748b; /* ✅ เทียบเท่า Slate-500 เพื่อผ่านเกณฑ์ AA/AAA */
+
   --color-destructive: hsl(0 84.2% 60.2%);
 
   /* 🎨 UI Elements & Variables */
@@ -915,56 +951,36 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏭 Base Layer: แก้ไขปัญหา Build Error และวางโครงสร้างพื้นฐาน              */
+/* 🏭 Base Layer: ความเสถียรและมาตรฐานพื้นฐาน                                    */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    /* ✅ [FIXED]: หลีกเลี่ยง @apply border-border 
-       ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 
-    */
+    /* ✅ [FIXED]: ใช้ CSS Variable โดยตรงเพื่อป้องกัน Build Error ใน Tailwind v4 */
     border-color: var(--color-border);
     outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
 
   body {
-    /* ใช้ฟอนต์ Anuphan เป็นหลักเพื่อความอ่านง่ายสไตล์ Humanist */
     @apply bg-background text-foreground font-anuphan antialiased;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
+    font-feature-settings: "rlig" 1, "calt" 1;
 
-    /* การเลือกข้อความ (Selection) ตามแบรนด์ */
     &::selection {
       @apply bg-success/20 text-primary;
     }
   }
 
-  /* Typography Strategy for Industrial Authority */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -974,10 +990,15 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🚀 Utilities Layer: เครื่องมือช่วยสร้าง UI ให้เร็วและนิ่ง                       */
+/* 🚀 Utilities Layer: เครื่องมือปรับจูน Performance & Accessibility             */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
+  /* ✅ [FIX]: ยูทิลิตี้สำหรับข้อความที่ต้องการ Contrast สูงเพื่อผ่านเกณฑ์ Lighthouse */
+  .text-muted-safe {
+    color: var(--color-slate-muted);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -989,20 +1010,22 @@ All protocols verified: Lint passed, Types safe, and Build successful. Deploymen
     text-rendering: optimizeLegibility;
   }
 
-  /* มิติความลึกสไตล์ Industrial (เน้นความคมและสะอาด) */
+  /* มิติความลึกสไตล์ Industrial */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 
-  /* กราเดียนต์แบรนด์สำหรับเน้นหัวข้อสำคัญ */
+  /* กราเดียนต์แบรนด์ */
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }
 }
-```
+````
+
 ---
 
 #### 🔍 Path: `app/layout.tsx`
+
 ```typescript
 /** @format */
 
@@ -1021,21 +1044,23 @@ import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
 /* -------------------------------------------------------------------------- */
-/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering                         */
+/* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
 /* -------------------------------------------------------------------------- */
 
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap",
+  display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
+  preload: true,   // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
 })
 
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
-  display: "swap",
+  display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
+  preload: true,   // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -1050,7 +1075,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="th"
       className={cn(
-        "scroll-smooth focus:scroll-auto", // เพิ่มการรองรับ Accessibility
+        "scroll-smooth focus:scroll-auto",
         fontPrompt.variable,
         fontAnuphan.variable,
         "thai-font-smoothing"
@@ -1061,7 +1086,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
           "selection:bg-emerald-500/20 selection:text-emerald-900",
-          "overflow-x-hidden" // ป้องกัน Layout เลื่อนแนวนอนบนมือถือ
+          "overflow-x-hidden"
         )}
       >
         {/* 🚀 Top Loading Bar: Brand Primary (Emerald-500) */}
@@ -1079,7 +1104,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Script id="facebook-chat" strategy="lazyOnload">
           {`
             var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571"); // Verified ID
+            chatbox.setAttribute("page_id", "914706508399571");
             chatbox.setAttribute("attribution", "biz_inbox");
 
             window.fbAsyncInit = function() {
@@ -1126,9 +1151,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1272,9 +1299,11 @@ export default function HomePage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `components/landing/HomeClientSections.tsx`
+
 ```typescript
 /** @format */
 
@@ -1325,7 +1354,8 @@ const HomeClientSections = () => {
       <div className="relative z-10 container mx-auto px-6">
         {/* Infinite Logo Slider */}
         <div className="mb-32">
-          <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+          {/* ✅ [FIX]: ปรับ Contrast ให้ผ่านเกณฑ์ Accessibility (400 -> 500) */}
+          <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
           </p>
 
@@ -1349,7 +1379,9 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    sizes="160px"
+                    // ✅ [FIX]: Optimize LCP โดยการลดขนาดภาพที่ request บน mobile และใช้ Lazy Load
+                    sizes="(max-width: 768px) 120px, 160px"
+                    loading="lazy"
                   />
                 </div>
               ))}
@@ -1377,10 +1409,11 @@ const HomeClientSections = () => {
                 </span>
                 <CheckCircle2 className="h-6 w-6 text-emerald-500" />
               </div>
-              <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-500 uppercase italic">
+              {/* ✅ [FIX]: ปรับ Contrast ให้อ่านง่ายขึ้น (slate-500 -> 600) */}
+              <h3 className="font-prompt text-[11px] font-black tracking-[0.2em] text-slate-600 uppercase italic">
                 {stat.label}
               </h3>
-              <p className="font-anuphan mt-4 text-sm font-bold text-slate-400">
+              <p className="font-anuphan mt-4 text-sm font-bold text-slate-500">
                 {stat.description}
               </p>
             </motion.div>
@@ -1408,9 +1441,11 @@ const HomeClientSections = () => {
 
 export default HomeClientSections
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1606,9 +1641,11 @@ export default async function TemplateDetailPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/[category]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1637,10 +1674,10 @@ interface CategoryPageProps {
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
-  
+
   // ✅ [FIXED]: เพิ่มการตรวจสอบข้อมูลก่อน map เพื่อป้องกัน undefined error ตอน Build
   return templates
-    .filter(t => t.category) 
+    .filter(t => t.category)
     .map((t) => ({
       template: "templates",
       category: t.category.toLowerCase(),
@@ -1682,7 +1719,7 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
-      
+
       {/* 🌌 Background Infrastructure */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
@@ -1700,9 +1737,9 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
         <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredTemplates.map((template) => (
-              <TemplateCard 
-                key={template.slug} 
-                template={template} 
+              <TemplateCard
+                key={template.slug}
+                template={template}
               />
             ))}
           </div>
@@ -1720,9 +1757,11 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(marketing)/[template]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -1909,9 +1948,11 @@ export default async function TemplateMainPage({
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/services/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2185,9 +2226,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/blog/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2450,7 +2493,7 @@ export default async function BlogPostPage({ params }: Props) {
             up?
           </h3>
           <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
-            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้ 
+            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้
             ทักมาคุยรายละเอียดโปรเจกต์กับผมโดยตรงได้ทันทีครับ
           </p>
           <Button
@@ -2471,9 +2514,11 @@ export default async function BlogPostPage({ params }: Props) {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2570,7 +2615,7 @@ export default async function CaseStudiesPage() {
             {cases.map((item, idx) => {
               // 🧪 Type Casting เพื่อความปลอดภัยในขณะเรนเดอร์
               const fm = item.frontmatter as CaseStudyFrontmatter
-              
+
               return (
                 <CaseStudyCard
                   key={item.slug}
@@ -2608,9 +2653,11 @@ export default async function CaseStudiesPage() {
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `app/(main)/case-studies/[slug]/page.tsx`
+
 ```typescript
 /** @format */
 
@@ -2630,6 +2677,11 @@ import {
   Fingerprint,
   Cpu,
   CheckCircle2,
+  CheckCircle, // ✅ เพิ่ม
+  Settings,    // ✅ เพิ่ม
+  Factory,     // ✅ เพิ่ม (สำหรับ Industrial Case)
+  LayoutDashboard, // ✅ เพิ่ม
+  Clock,       // ✅ เพิ่ม
   Lock,
   Zap,
   BarChart3,
@@ -2638,7 +2690,7 @@ import {
   AlertTriangle,
 } from "lucide-react"
 
-// 📦 MDX Engine: มาตรฐาน Next.js 15/16 pnpm
+// 📦 MDX Engine
 import { MDXRemote } from "next-mdx-remote/rsc"
 
 // 📂 Logic & Config Architecture
@@ -2650,7 +2702,7 @@ import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 import CTASection from "@/components/landing/CTASection"
 
-// ⚡ Sales Engine Components (สำหรับเรียกใช้ภายในเนื้อหา MDX)
+// ⚡ Sales Engine Components
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
@@ -2687,7 +2739,12 @@ export async function generateMetadata({
     openGraph: {
       title: caseStudy.frontmatter.title,
       description: caseStudy.frontmatter.excerpt,
+      type: "article",
+      url: `${siteConfig.url}/case-studies/${slug}`,
       images: [{ url: caseStudy.frontmatter.thumbnail || siteConfig.ogImage }],
+    },
+    alternates: {
+      canonical: `${siteConfig.url}/case-studies/${slug}`,
     },
   }
 }
@@ -2699,24 +2756,29 @@ export async function generateMetadata({
 export default async function CaseStudyDetailPage({
   params,
 }: CaseStudyPageProps) {
-  // มาตรฐาน Next.js 16 ต้อง await params
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
   if (!caseStudy) notFound()
 
   /**
-   * ✅ [FIXED]: ลงทะเบียนคอมโพเนนต์ทั้งหมดที่ใช้ใน MDX
-   * ป้องกัน Error: Expected component X to be defined
+   * ✅ [FIXED]: ลงทะเบียนคอมโพเนนต์ทั้งหมดที่เรียกใช้ในไฟล์ .mdx
+   * แก้ไข Error: Expected component X to be defined
    */
   const mdxComponents = {
     ...useMDXComponents({}),
-    // 📊 Sales Engine
+    // 📊 Custom Components
     ImpactStats,
     SpeedDemon,
     WorkProcess,
     LineLeadForm,
-    // 💎 Icons (ส่งผ่านเข้าไปให้ MDX เรียกใช้ได้)
+    CallToAction: CTASection, // ลงทะเบียนเผื่อเรียกใช้ในชื่ออื่น
+    // 💎 Lucide Icons (Mapping ทุกตัวที่ใช้ใน MDX Content)
+    CheckCircle,
+    Settings,
+    Factory,
+    LayoutDashboard,
+    Clock,
     ShieldCheck,
     TrendingUp,
     Fingerprint,
@@ -2732,7 +2794,6 @@ export default async function CaseStudyDetailPage({
 
   return (
     <article className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* 🚀 Structured Data for SEO */}
       <JsonLd
         type="Article"
         data={{
@@ -2744,34 +2805,33 @@ export default async function CaseStudyDetailPage({
         }}
       />
 
-      {/* 🔝 Header Section */}
+      {/* 🔝 1. Header Section */}
       <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <Link
             href="/case-studies"
-            className="group mb-8 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
+            className="group mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
           >
-            <ArrowLeft className="h-3 w-3 transition-transform group-hover:-translate-x-1" />{" "}
-            ย้อนกลับไปดูผลงานทั้งหมด
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-2" />{" "}
+            Back to Success Stories
           </Link>
 
-          <div className="max-w-4xl">
-            <h1 className="font-prompt mb-8 text-4xl leading-tight font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl lg:text-7xl">
+          <div className="max-w-4xl border-l-8 border-emerald-500 pl-8 md:pl-12">
+            <h1 className="font-prompt mb-10 text-4xl leading-[0.95] font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl lg:text-8xl">
               {caseStudy.frontmatter.title}
             </h1>
 
-            <div className="flex flex-wrap gap-8 border-y border-slate-100 py-8">
-              <div className="flex items-center gap-2.5">
-                <Calendar className="h-4 w-4 text-emerald-500" />
-                <span className="font-anuphan text-[11px] font-bold tracking-widest text-slate-500 uppercase">
+            <div className="flex flex-wrap gap-10 border-y border-slate-100 py-10">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-5 w-5 text-emerald-500" />
+                <span className="font-anuphan text-xs font-bold tracking-widest text-slate-500 uppercase">
                   {caseStudy.frontmatter.date}
                 </span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Tag className="h-4 w-4 text-emerald-500" />
-                <span className="font-anuphan text-[11px] font-bold tracking-widest text-slate-500 uppercase">
-                  {caseStudy.frontmatter.service ||
-                    caseStudy.frontmatter.category}
+              <div className="flex items-center gap-3">
+                <Tag className="h-5 w-5 text-emerald-500" />
+                <span className="font-anuphan text-xs font-bold tracking-widest text-slate-500 uppercase">
+                  {caseStudy.frontmatter.service || caseStudy.frontmatter.category}
                 </span>
               </div>
             </div>
@@ -2779,9 +2839,9 @@ export default async function CaseStudyDetailPage({
         </div>
       </header>
 
-      {/* 🖼️ Featured Image */}
-      <div className="container mx-auto mb-20 px-4">
-        <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
+      {/* 🖼️ 2. Featured Image */}
+      <div className="container mx-auto mb-24 px-6">
+        <div className="relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50 shadow-3xl">
           <Image
             src={caseStudy.frontmatter.thumbnail}
             alt={caseStudy.frontmatter.title}
@@ -2793,38 +2853,39 @@ export default async function CaseStudyDetailPage({
         </div>
       </div>
 
-      {/* 📝 MDX Content Content */}
-      <main className="container mx-auto px-4">
-        <div className="prose prose-slate prose-lg prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-900 prose-headings:uppercase prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-24 max-w-4xl">
+      {/* 📝 3. Core Content (MDX) */}
+      <main className="container mx-auto px-6">
+        <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-950 prose-headings:uppercase prose-headings:italic prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-32 max-w-4xl">
           <MDXRemote source={caseStudy.content} components={mdxComponents} />
         </div>
       </main>
 
-      {/* 📈 Results & Impact Section */}
-      <div className="border-y border-slate-50 bg-white py-12">
-        <div className="container mx-auto px-4">
+      {/* 📈 4. Result Hook */}
+      <div className="border-y border-slate-50 bg-slate-50/50 py-24">
+        <div className="container mx-auto px-6">
           <ImpactStats />
         </div>
       </div>
 
-      {/* 🚀 CTA Section */}
+      {/* 🚀 5. CTA Section */}
       <div className="mt-32">
         <CTASection />
       </div>
 
-      {/* 🏛️ Footer Branding */}
-      <footer className="mt-20 text-center opacity-40 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build & Proof by {siteConfig.expert} v2026 — Case Analysis
+      <footer className="mt-24 text-center opacity-30 select-none">
+        <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
+          High-Security Standards by {siteConfig.expert} v2026
         </p>
       </footer>
     </article>
   )
 }
 ```
+
 ---
 
 #### 🔍 Path: `mdx-components.tsx`
+
 ```typescript
 /** @format */
 
@@ -3025,9 +3086,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/site-config.ts`
+
 ```typescript
 /** @format */
 
@@ -3189,9 +3252,11 @@ export function constructMetadata({
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `constants/services-data.ts`
+
 ```typescript
 /** @format */
 
@@ -3418,9 +3483,11 @@ export const services: ServiceItem[] = [
   },
 ]
 ```
+
 ---
 
 #### 🔍 Path: `constants/navigation.ts`
+
 ```typescript
 /** @format */
 
@@ -3598,9 +3665,11 @@ export const siteKeywords: string[] = [
   "ที่ปรึกษาด้าน Performance Website",
 ]
 ```
+
 ---
 
 #### 🔍 Path: `tsconfig.json`
+
 ```json
 {
   "compilerOptions": {
@@ -3651,9 +3720,11 @@ export const siteKeywords: string[] = [
   "exclude": ["node_modules"]
 }
 ```
+
 ---
 
 #### 🔍 Path: `package.json`
+
 ```json
 {
   "name": "aemdevweb.com",
@@ -3721,9 +3792,11 @@ export const siteKeywords: string[] = [
   }
 }
 ```
+
 ---
 
 #### 🔍 Path: `types/index.ts`
+
 ```typescript
 /** @format */
 
@@ -3953,13 +4026,18 @@ export interface TestimonialItem {
   image?: string
 }
 ```
+
 ---
 
 #### 🔍 Path: `next.config.mjs`
+
 ```javascript
 /** @format */
 import createMDX from "@next/mdx"
 
+/** * 🏗️ Next.js Configuration — AEMDEVWEB Professional v2026
+ * Focus: High-Performance Image Serving & Termux Compatibility
+ */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -3967,10 +4045,13 @@ const nextConfig = {
   compress: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
+  /* 🖼️ Image Optimization Infrastructure */
   images: {
     formats: ["image/avif", "image/webp"],
+    // ✅ เพิ่มการรองรับอุปกรณ์หน้าจอกว้างและ Mobile High DPI
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96],
+    // ✅ เพิ่มขนาด 128px และ 256px เพื่อให้รูปโลโก้และไอคอนบนมือถือโหลดได้ไวที่สุด
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
     remotePatterns: [
       { protocol: "https", hostname: "lin.ee" },
       { protocol: "https", hostname: "**.supabase.co" },
@@ -3980,8 +4061,9 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
   },
 
+  /* 🧪 Experimental & Build Performance Features */
   experimental: {
-    // 🦀 ต้องปิด mdxRs เพราะบน Termux ยังไม่รองรับ Rust-based compiler
+    // 🦀 [IMPORTANT]: ปิด mdxRs เพื่อให้สามารถ Build บน Termux ได้โดยไม่ติดปัญหา Rust Compiler
     mdxRs: false,
     optimizePackageImports: [
       "lucide-react",
@@ -3996,9 +4078,11 @@ const nextConfig = {
 const withMDX = createMDX({})
 export default withMDX(nextConfig)
 ```
+
 ---
 
 #### 🔍 Path: `components.json`
+
 ```json
 {
   "$schema": "https://ui.shadcn.com/schema.json",
@@ -4023,9 +4107,11 @@ export default withMDX(nextConfig)
   "registries": {}
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/blog.ts`
+
 ```typescript
 /** @format */
 
@@ -4106,9 +4192,11 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   } as Post
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/template.ts`
+
 ```typescript
 /** @format */
 
@@ -4175,7 +4263,11 @@ export async function getAllTemplates(): Promise<TemplateMeta[]> {
             const metaData = JSON.parse(fileContent)
 
             // ✅ [FIXED]: ป้องกัน Build Error โดยตรวจสอบว่ามี category และ slug ก่อนเรียก toLowerCase()
-            const safeCategory = (metaData.category || category || "uncategorized").toLowerCase()
+            const safeCategory = (
+              metaData.category ||
+              category ||
+              "uncategorized"
+            ).toLowerCase()
             const safeSlug = (metaData.slug || slug || "untitled").toLowerCase()
 
             allTemplates.push({
@@ -4210,7 +4302,7 @@ export async function getTemplateBySlug(
   slug: string
 ): Promise<TemplateData | null> {
   if (!slug) return null
-  
+
   const templates = await getAllTemplates()
   const meta = templates.find((t) => t.slug === slug.toLowerCase())
 
@@ -4244,11 +4336,13 @@ export async function getTemplateBySlug(
 export async function getAllCategories(): Promise<string[]> {
   const templates = await getAllTemplates()
   // ✅ กรองเฉพาะตัวที่มีค่าจริงก่อนประมวลผล
-  return Array.from(new Set(
-    templates
-      .map((t) => t.category ? t.category.toLowerCase() : "")
-      .filter((cat) => cat !== "")
-  ))
+  return Array.from(
+    new Set(
+      templates
+        .map((t) => (t.category ? t.category.toLowerCase() : ""))
+        .filter((cat) => cat !== "")
+    )
+  )
 }
 
 /**
@@ -4258,7 +4352,7 @@ export async function getTemplatesByServiceCategory(
   serviceCategory: string
 ): Promise<TemplateMeta[]> {
   if (!serviceCategory) return []
-  
+
   const allTemplates = await getAllTemplates()
   const searchCat = serviceCategory.toLowerCase()
 
@@ -4273,9 +4367,11 @@ export async function getTemplatesByServiceCategory(
   })
 }
 ```
+
 ---
 
 #### 🔍 Path: `lib/case-studies.ts`
+
 ```typescript
 /** @format */
 
@@ -4288,15 +4384,15 @@ import matter from "gray-matter"
  * กำหนดโครงสร้างข้อมูลให้ชัดเจนตามมาตรฐาน Brand Guardian Specialist
  */
 export interface CaseStudyFrontmatter {
-  title: string // หัวข้อผลงาน
-  description: string // คำอธิบายสั้นๆ สำหรับการ์ด
+  title: string // หัวข้อผลงาน (ควรมี Keyword)
+  description: string // คำอธิบายสำหรับการ์ด
   excerpt: string // บทคัดย่อสำหรับ SEO Meta
-  date: string // วันที่เผยแพร่ (YYYY-MM-DD)
-  author: string // ผู้เขียน/ผู้รับผิดชอบ
-  thumbnail: string // รูปหน้าปก (แนะนำ .webp)
-  service: string // ชื่อบริการที่เกี่ยวข้อง (e.g., SME Website)
-  category?: string // หมวดหมู่ธุรกิจ (e.g., Industrial, SME)
-  result?: string // ผลลัพธ์ที่จับต้องได้ (e.g., Speed 100/100)
+  date: string // วันที่ (YYYY-MM-DD)
+  author: string // ผู้รับผิดชอบ
+  thumbnail: string // รูปหน้าปก .webp
+  service: string // ชื่อบริการ (e.g., Industrial E-Catalog)
+  category?: string // หมวดหมู่ธุรกิจ (e.g., Manufacturing)
+  result?: string // ผลลัพธ์ (e.g., PageSpeed 100)
 }
 
 export interface CaseStudy {
@@ -4306,17 +4402,15 @@ export interface CaseStudy {
 }
 
 /**
- * 🛠️ Configuration
- * ปรับ Path ให้ตรงตาม Content Directory ในโปรเจกต์ (content/case-studies)
+ * 🛠️ Configuration: Path ไปยังคลังข้อมูลผลงาน
  */
 const CASE_STUDIES_PATH = path.join(process.cwd(), "content/case-studies")
 
 /**
  * 📂 ดึงรายชื่อ Slug ทั้งหมด (Get All Slugs)
- * @returns string[] รายชื่อไฟล์โดยตัดนามสกุลออก
+ * รองรับการเปลี่ยนชื่อไฟล์จากรูปแบบเดิม (case-studies-1) เป็นรูปแบบ SEO (sme-performance)
  */
 export function getCaseStudySlugs(): string[] {
-  // 🛡️ Safety Check: ตรวจสอบความมีอยู่ของโฟลเดอร์
   if (!fs.existsSync(CASE_STUDIES_PATH)) {
     console.warn("⚠️ [Case Studies] Directory not found:", CASE_STUDIES_PATH)
     return []
@@ -4325,7 +4419,7 @@ export function getCaseStudySlugs(): string[] {
   try {
     return fs
       .readdirSync(CASE_STUDIES_PATH)
-      .filter((file) => /\.mdx?$/.test(file)) // รองรับทั้ง .md และ .mdx
+      .filter((file) => /\.mdx?$/.test(file)) // รองรับ .md และ .mdx
       .map((file) => file.replace(/\.mdx?$/, ""))
   } catch (error) {
     console.error("❌ [Case Studies] Error reading directory:", error)
@@ -4335,15 +4429,13 @@ export function getCaseStudySlugs(): string[] {
 
 /**
  * 📄 ดึงข้อมูลผลงานรายชิ้น (Single Case Study)
- * @param slug - ชื่อไฟล์ที่เป็น ID ของผลงาน
+ * [FIXED]: เพิ่มระบบตรวจสอบเพื่อรองรับ Dynamic Routes ใน Next.js 16
  */
 export async function getCaseStudyBySlug(
   slug: string
 ): Promise<CaseStudy | null> {
-  // 🛡️ [FIXED] Guard Clause: ป้องกัน slug เป็น undefined หรือไม่ใช่ string
-  // ป้องกัน Error: Cannot read properties of undefined (reading 'replace')
+  // 🛡️ Guard Clause: ป้องกัน slug เป็นค่าว่างหรือรูปแบบไม่ถูกต้อง
   if (!slug || typeof slug !== "string") {
-    console.warn("⚠️ [Case Studies] Invalid or undefined slug provided")
     return null
   }
 
@@ -4352,11 +4444,15 @@ export async function getCaseStudyBySlug(
     const filePath = path.join(CASE_STUDIES_PATH, `${realSlug}.mdx`)
 
     if (!fs.existsSync(filePath)) {
-      console.error(`❌ [Case Studies] File not found: ${filePath}`)
-      return null
+      // 🕵️ หากไม่พบไฟล์ ให้ลองหาไฟล์นามสกุล .md สำรอง
+      const mdFilePath = path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
+      if (!fs.existsSync(mdFilePath)) return null
     }
 
-    const fileContent = fs.readFileSync(filePath, "utf8")
+    const targetPath = fs.existsSync(filePath)
+      ? filePath
+      : path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
+    const fileContent = fs.readFileSync(targetPath, "utf8")
     const { data, content } = matter(fileContent)
 
     return {
@@ -4371,8 +4467,8 @@ export async function getCaseStudyBySlug(
 }
 
 /**
- * 🗂️ ดึงข้อมูล Case Studies ทั้งหมดและจัดเรียง (Archive List)
- * คัดเฉพาะ Metadata มาใช้เพื่อประสิทธิภาพความเร็วสูงสุด (Next.js Optimization)
+ * 🗂️ ดึงข้อมูล Case Studies ทั้งหมด (Archive List)
+ * ปรับจูนเพื่อประสิทธิภาพความเร็วสูงสุดในหน้า Listing
  */
 export async function getAllCaseStudies(): Promise<
   Omit<CaseStudy, "content">[]
@@ -4383,7 +4479,14 @@ export async function getAllCaseStudies(): Promise<
     .map((slug) => {
       try {
         const filePath = path.join(CASE_STUDIES_PATH, `${slug}.mdx`)
-        const fileContent = fs.readFileSync(filePath, "utf8")
+        // เช็คกรณีเป็นไฟล์ .md
+        const actualPath = fs.existsSync(filePath)
+          ? filePath
+          : path.join(CASE_STUDIES_PATH, `${slug}.md`)
+
+        if (!fs.existsSync(actualPath)) return null
+
+        const fileContent = fs.readFileSync(actualPath, "utf8")
         const { data } = matter(fileContent)
 
         return {
@@ -4396,7 +4499,7 @@ export async function getAllCaseStudies(): Promise<
       }
     })
     .filter((item): item is Omit<CaseStudy, "content"> => item !== null)
-    // เรียงลำดับจากวันที่ล่าสุด (Fresh First) เพื่อความซ่าและทันสมัย
+    // 📅 Sort: Fresh First (เรียงตามวันที่ล่าสุดเสมอ)
     .sort(
       (a, b) =>
         new Date(b.frontmatter.date).getTime() -
@@ -4406,14 +4509,19 @@ export async function getAllCaseStudies(): Promise<
   return caseStudies
 }
 ```
+
 ---
 
 #### 🔍 Path: `.env`
+
 ```text
+
 ```
+
 ---
 
 ## 📝 Summary
+
 Architecture scan and context compilation completed successfully.
 Focus maintained on Privacy, Security, and AI-readiness.
 

@@ -44,12 +44,20 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 }
 
@@ -66,14 +74,21 @@
 
   body {
     @apply bg-background text-foreground font-anuphan antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
 
     &::selection {
       @apply bg-success/20 text-primary;
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-prompt text-primary font-bold tracking-tight;
   }
 
@@ -111,5 +126,19 @@
   /* กราเดียนต์แบรนด์ */
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
+  }
+
+  /* ✅ [NEW]: Infinite Scroll Animation (CPU Optimized) */
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-infinite-scroll {
+    animation: infinite-scroll 25s linear infinite;
   }
 }

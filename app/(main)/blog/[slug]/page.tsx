@@ -246,7 +246,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* 🎯 High-Conversion CTA Section */}
-        <div className="relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white shadow-3xl md:p-24">
+        <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white md:p-24">
           <div className="absolute top-0 right-0 p-12 opacity-5">
             <ShieldCheck size={250} />
           </div>
@@ -259,7 +259,7 @@ export default async function BlogPostPage({ params }: Props) {
             up?
           </h3>
           <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
-            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้ 
+            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้
             ทักมาคุยรายละเอียดโปรเจกต์กับผมโดยตรงได้ทันทีครับ
           </p>
           <Button

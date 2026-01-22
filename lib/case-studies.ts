@@ -9,15 +9,15 @@ import matter from "gray-matter"
  * กำหนดโครงสร้างข้อมูลให้ชัดเจนตามมาตรฐาน Brand Guardian Specialist
  */
 export interface CaseStudyFrontmatter {
-  title: string      // หัวข้อผลงาน (ควรมี Keyword)
+  title: string // หัวข้อผลงาน (ควรมี Keyword)
   description: string // คำอธิบายสำหรับการ์ด
-  excerpt: string     // บทคัดย่อสำหรับ SEO Meta
-  date: string        // วันที่ (YYYY-MM-DD)
-  author: string      // ผู้รับผิดชอบ
-  thumbnail: string   // รูปหน้าปก .webp
-  service: string     // ชื่อบริการ (e.g., Industrial E-Catalog)
-  category?: string   // หมวดหมู่ธุรกิจ (e.g., Manufacturing)
-  result?: string     // ผลลัพธ์ (e.g., PageSpeed 100)
+  excerpt: string // บทคัดย่อสำหรับ SEO Meta
+  date: string // วันที่ (YYYY-MM-DD)
+  author: string // ผู้รับผิดชอบ
+  thumbnail: string // รูปหน้าปก .webp
+  service: string // ชื่อบริการ (e.g., Industrial E-Catalog)
+  category?: string // หมวดหมู่ธุรกิจ (e.g., Manufacturing)
+  result?: string // ผลลัพธ์ (e.g., PageSpeed 100)
 }
 
 export interface CaseStudy {
@@ -74,7 +74,9 @@ export async function getCaseStudyBySlug(
       if (!fs.existsSync(mdFilePath)) return null
     }
 
-    const targetPath = fs.existsSync(filePath) ? filePath : path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
+    const targetPath = fs.existsSync(filePath)
+      ? filePath
+      : path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
     const fileContent = fs.readFileSync(targetPath, "utf8")
     const { data, content } = matter(fileContent)
 
@@ -103,8 +105,10 @@ export async function getAllCaseStudies(): Promise<
       try {
         const filePath = path.join(CASE_STUDIES_PATH, `${slug}.mdx`)
         // เช็คกรณีเป็นไฟล์ .md
-        const actualPath = fs.existsSync(filePath) ? filePath : path.join(CASE_STUDIES_PATH, `${slug}.md`)
-        
+        const actualPath = fs.existsSync(filePath)
+          ? filePath
+          : path.join(CASE_STUDIES_PATH, `${slug}.md`)
+
         if (!fs.existsSync(actualPath)) return null
 
         const fileContent = fs.readFileSync(actualPath, "utf8")

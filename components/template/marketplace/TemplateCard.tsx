@@ -17,10 +17,20 @@ interface TemplateCardProps {
  * 🏗️ TemplateCard — การ์ดนำเสนอเทมเพลตสไตล์ Industrial Specialist
  */
 export default function TemplateCard({ template }: TemplateCardProps) {
-  const { name, slug, category, price, salePrice, isPopular, image, themeColor } = template
+  const {
+    name,
+    slug,
+    category,
+    price,
+    salePrice,
+    isPopular,
+    image,
+    themeColor,
+  } = template
 
   // จัดการชุดสีตาม themeColor ที่ระบุมา
-  const accentColor = themeColor === "blue" ? "text-blue-500" : "text-emerald-500"
+  const accentColor =
+    themeColor === "blue" ? "text-blue-500" : "text-emerald-500"
   const bgAccent = themeColor === "blue" ? "bg-blue-500" : "bg-emerald-500"
 
   return (
@@ -49,7 +59,12 @@ export default function TemplateCard({ template }: TemplateCardProps) {
       {/* ✍️ Content Details */}
       <div className="flex flex-1 flex-col p-8">
         <div className="mb-4 flex items-center justify-between">
-          <span className={cn("font-prompt text-[10px] font-black tracking-[0.3em] uppercase italic", accentColor)}>
+          <span
+            className={cn(
+              "font-prompt text-[10px] font-black tracking-[0.3em] uppercase italic",
+              accentColor
+            )}
+          >
             {category}
           </span>
           <div className="flex items-center gap-2 text-white/20">
@@ -57,7 +72,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           </div>
         </div>
 
-        <h3 className="font-prompt mb-4 text-2xl font-black tracking-tighter text-white uppercase italic leading-none transition-colors group-hover:text-emerald-400">
+        <h3 className="font-prompt mb-4 text-2xl leading-none font-black tracking-tighter text-white uppercase italic transition-colors group-hover:text-emerald-400">
           {name}
         </h3>
 
@@ -65,7 +80,9 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           <div className="flex flex-col">
             {salePrice ? (
               <>
-                <span className="text-[10px] text-slate-500 line-through">฿{price.toLocaleString()}</span>
+                <span className="text-[10px] text-slate-500 line-through">
+                  ฿{price.toLocaleString()}
+                </span>
                 <span className="font-prompt text-xl font-black text-white italic">
                   ฿{salePrice.toLocaleString()}
                 </span>
@@ -77,7 +94,12 @@ export default function TemplateCard({ template }: TemplateCardProps) {
             )}
           </div>
 
-          <div className={cn("flex h-10 w-10 items-center justify-center rounded-xl text-slate-950 transition-all group-hover:scale-110 group-hover:rotate-12", bgAccent)}>
+          <div
+            className={cn(
+              "flex h-10 w-10 items-center justify-center rounded-xl text-slate-950 transition-all group-hover:scale-110 group-hover:rotate-12",
+              bgAccent
+            )}
+          >
             <ArrowRight size={18} />
           </div>
         </div>

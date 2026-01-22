@@ -48,7 +48,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const caseStudies = await getAllCaseStudies()
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${baseUrl}/case-studies/${study.slug}`,
-    lastModified: study.frontmatter.date ? new Date(study.frontmatter.date) : new Date(),
+    lastModified: study.frontmatter.date
+      ? new Date(study.frontmatter.date)
+      : new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
   }))

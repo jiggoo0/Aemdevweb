@@ -25,10 +25,10 @@ interface CategoryPageProps {
  */
 export async function generateStaticParams() {
   const templates = await getAllTemplates()
-  
+
   // ✅ [FIXED]: เพิ่มการตรวจสอบข้อมูลก่อน map เพื่อป้องกัน undefined error ตอน Build
   return templates
-    .filter(t => t.category) 
+    .filter((t) => t.category)
     .map((t) => ({
       template: "templates",
       category: t.category.toLowerCase(),
@@ -53,7 +53,9 @@ export async function generateMetadata({ params }: CategoryPageProps) {
 /**
  * 🚀 3. Category Listing Component
  */
-export default async function TemplateCategoryPage({ params }: CategoryPageProps) {
+export default async function TemplateCategoryPage({
+  params,
+}: CategoryPageProps) {
   const { category } = await params
   const allTemplates = await getAllTemplates()
 
@@ -70,7 +72,6 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
 
   return (
     <div className="flex min-h-screen flex-col bg-slate-950 text-slate-50 antialiased selection:bg-emerald-500/20">
-      
       {/* 🌌 Background Infrastructure */}
       <div className="pointer-events-none fixed inset-0 z-0 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
@@ -88,10 +89,7 @@ export default async function TemplateCategoryPage({ params }: CategoryPageProps
         <div className="mx-auto w-full max-w-7xl px-6 py-24 md:px-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredTemplates.map((template) => (
-              <TemplateCard 
-                key={template.slug} 
-                template={template} 
-              />
+              <TemplateCard key={template.slug} template={template} />
             ))}
           </div>
         </div>

@@ -3,12 +3,7 @@
 "use client"
 
 import React, { useState, useMemo } from "react"
-import {
-  CheckCircle2,
-  MessageCircle,
-  Zap,
-  Calculator,
-} from "lucide-react"
+import { CheckCircle2, MessageCircle, Zap, Calculator } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
 import { services } from "@/constants/services-data"
@@ -67,9 +62,9 @@ const PriceEstimator = () => {
     const addonNames = selectedAddOns
       .map((id) => ADD_ONS.find((a) => a.id === id)?.name)
       .join(", ")
-    
+
     const text = `สวัสดีครับคุณเอ็ม ผมสนใจทำเว็บไซต์แบบประเมินราคาเองครับ\n\n📌 แพ็กเกจหลัก: ${selectedBase.name}\n➕ ส่วนเสริม: ${addonNames || "ไม่มี"}\n💰 งบประมาณประเมิน: ฿${totalPrice.toLocaleString()}\n\nช่วยให้คำปรึกษาเพิ่มเติมหน่อยครับ`
-    
+
     return `${siteConfig.links.line}?text=${encodeURIComponent(text)}`
   }
 
@@ -77,7 +72,6 @@ const PriceEstimator = () => {
     <section className="bg-slate-50 py-24 selection:bg-emerald-500/10">
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-6xl">
-          
           {/* Header Specialist Branding */}
           <div className="mb-16 text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-[10px] font-black tracking-widest text-emerald-700 uppercase">
@@ -87,15 +81,14 @@ const PriceEstimator = () => {
               ประเมินงบประมาณโปรเจกต์
             </h2>
             <p className="font-anuphan text-lg font-bold text-slate-500">
-              โปร่งใส ชัดเจน เลือกฟีเจอร์ที่ต้องการเพื่อรับราคาประเมินเบื้องต้นได้ทันที
+              โปร่งใส ชัดเจน
+              เลือกฟีเจอร์ที่ต้องการเพื่อรับราคาประเมินเบื้องต้นได้ทันที
             </p>
           </div>
 
-          <div className="grid gap-12 lg:grid-cols-12 items-start">
-            
+          <div className="grid items-start gap-12 lg:grid-cols-12">
             {/* 1️⃣ Selection Architecture */}
             <div className="space-y-12 lg:col-span-7">
-              
               {/* Step 1: Base Selection */}
               <div className="space-y-6">
                 <h3 className="font-prompt flex items-center gap-4 text-xl font-black text-slate-900 uppercase italic">
@@ -116,13 +109,17 @@ const PriceEstimator = () => {
                           : "border-transparent bg-white/50 hover:border-slate-200"
                       )}
                     >
-                      <div className={cn(
-                        "font-prompt mb-2 text-lg font-black uppercase italic transition-colors",
-                        selectedBase.id === pkg.id ? "text-emerald-600" : "text-slate-900"
-                      )}>
+                      <div
+                        className={cn(
+                          "font-prompt mb-2 text-lg font-black uppercase italic transition-colors",
+                          selectedBase.id === pkg.id
+                            ? "text-emerald-600"
+                            : "text-slate-900"
+                        )}
+                      >
                         {pkg.name}
                       </div>
-                      <div className="font-anuphan text-xs font-bold leading-relaxed text-slate-400">
+                      <div className="font-anuphan text-xs leading-relaxed font-bold text-slate-400">
                         {pkg.description}
                       </div>
                     </button>
@@ -151,11 +148,17 @@ const PriceEstimator = () => {
                       )}
                     >
                       <div className="flex items-center gap-4">
-                        <div className={cn(
-                          "flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all",
-                          selectedAddOns.includes(addon.id) ? "border-emerald-500 bg-emerald-500" : "border-slate-200"
-                        )}>
-                          {selectedAddOns.includes(addon.id) && <CheckCircle2 className="h-4 w-4 text-white" />}
+                        <div
+                          className={cn(
+                            "flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all",
+                            selectedAddOns.includes(addon.id)
+                              ? "border-emerald-500 bg-emerald-500"
+                              : "border-slate-200"
+                          )}
+                        >
+                          {selectedAddOns.includes(addon.id) && (
+                            <CheckCircle2 className="h-4 w-4 text-white" />
+                          )}
                         </div>
                         <span className="font-anuphan text-sm font-bold text-slate-700">
                           {addon.name}
@@ -171,8 +174,8 @@ const PriceEstimator = () => {
             </div>
 
             {/* 2️⃣ Summary Specialist Card */}
-            <div className="lg:col-span-5 lg:sticky lg:top-24">
-              <div className="overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white shadow-3xl">
+            <div className="lg:sticky lg:top-24 lg:col-span-5">
+              <div className="shadow-3xl overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white">
                 <div className="mb-8 flex items-start justify-between">
                   <div>
                     <h3 className="font-prompt mb-1 text-2xl font-black text-emerald-400 uppercase italic">
@@ -182,21 +185,35 @@ const PriceEstimator = () => {
                       Official Estimation v.2026
                     </p>
                   </div>
-                  <Zap className="fill-amber-400 text-amber-400 animate-pulse" size={28} />
+                  <Zap
+                    className="animate-pulse fill-amber-400 text-amber-400"
+                    size={28}
+                  />
                 </div>
 
                 {/* Items List */}
                 <div className="mb-10 space-y-5 border-t border-white/10 pt-8">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="font-anuphan font-bold text-slate-400">Package: {selectedBase.name}</span>
-                    <span className="font-prompt font-black">฿{selectedBase.price.toLocaleString()}</span>
+                    <span className="font-anuphan font-bold text-slate-400">
+                      Package: {selectedBase.name}
+                    </span>
+                    <span className="font-prompt font-black">
+                      ฿{selectedBase.price.toLocaleString()}
+                    </span>
                   </div>
                   {selectedAddOns.map((id) => {
                     const addon = ADD_ONS.find((a) => a.id === id)
                     return (
-                      <div key={id} className="flex items-center justify-between text-xs">
-                        <span className="font-anuphan font-bold text-slate-500">+ {addon?.name}</span>
-                        <span className="font-prompt font-black text-emerald-400">฿{addon?.price.toLocaleString()}</span>
+                      <div
+                        key={id}
+                        className="flex items-center justify-between text-xs"
+                      >
+                        <span className="font-anuphan font-bold text-slate-500">
+                          + {addon?.name}
+                        </span>
+                        <span className="font-prompt font-black text-emerald-400">
+                          ฿{addon?.price.toLocaleString()}
+                        </span>
                       </div>
                     )
                   })}
@@ -208,7 +225,9 @@ const PriceEstimator = () => {
                     Estimated Investment
                   </div>
                   <div className="font-prompt text-6xl font-black tracking-tighter text-white">
-                    <span className="mr-3 text-2xl font-normal text-slate-500">฿</span>
+                    <span className="mr-3 text-2xl font-normal text-slate-500">
+                      ฿
+                    </span>
                     {totalPrice.toLocaleString()}
                   </div>
                 </div>
@@ -217,19 +236,18 @@ const PriceEstimator = () => {
                   href={generateLineMessage()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex w-full items-center justify-center gap-4 rounded-2xl bg-emerald-500 py-6 font-prompt text-lg font-black text-slate-900 shadow-2xl shadow-emerald-500/20 transition-all hover:-translate-y-1 hover:bg-white"
+                  className="group font-prompt flex w-full items-center justify-center gap-4 rounded-2xl bg-emerald-500 py-6 text-lg font-black text-slate-900 shadow-2xl shadow-emerald-500/20 transition-all hover:-translate-y-1 hover:bg-white"
                 >
                   <MessageCircle size={24} fill="currentColor" />
                   ส่งสเปกนี้ให้นายเอ็ม
                 </a>
 
-                <p className="font-anuphan mt-8 text-center text-[10px] font-bold leading-relaxed tracking-tighter text-slate-500 uppercase">
+                <p className="font-anuphan mt-8 text-center text-[10px] leading-relaxed font-bold tracking-tighter text-slate-500 uppercase">
                   * ราคาประเมินนี้รวมภาษีแล้ว และอาจมีการปรับเปลี่ยน <br />
                   ตามขอบเขตงานจริงที่ตกลงกัน (Final Scope)
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </div>

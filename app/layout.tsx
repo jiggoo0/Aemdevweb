@@ -2,7 +2,6 @@
 
 import React from "react"
 import type { Metadata, Viewport } from "next"
-import Script from "next/script"
 import NextTopLoader from "nextjs-toploader"
 
 // 📂 Logic & Config
@@ -14,6 +13,9 @@ import { viewport as defaultViewport } from "./viewport"
 import "./globals.css"
 import { Prompt, Anuphan } from "next/font/google"
 
+// 🧩 Shared Components
+import { FacebookChat } from "@/components/shared/FacebookChat" // ✅ Import Component ใหม่
+
 /* -------------------------------------------------------------------------- */
 /* 🅰️ Font Setup: Optimized for Thai/Latin Rendering (v2026 Strategy)         */
 /* -------------------------------------------------------------------------- */
@@ -23,7 +25,7 @@ const fontPrompt = Prompt({
   weight: ["400", "600", "700", "800", "900"],
   variable: "--font-prompt",
   display: "swap", // ✅ ลดปัญหา "Text remains invisible during webfont load"
-  preload: true,   // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
+  preload: true, // ✅ ให้เบราว์เซอร์ดาวน์โหลดล่วงหน้าทันที
 })
 
 const fontAnuphan = Anuphan({
@@ -31,7 +33,7 @@ const fontAnuphan = Anuphan({
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap", // ✅ ช่วยเรื่อง PageSpeed Performance (LCP/CLS)
-  preload: true,   // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
+  preload: true, // ✅ เพิ่มความเร็วในการเรนเดอร์เนื้อหาหลัก
 })
 
 export const metadata: Metadata = constructMetadata()
@@ -69,31 +71,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           speed={300}
         />
 
-        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer */}
-        <div id="fb-root" />
-        <div id="fb-customer-chat" className="fb-customerchat" />
-        <Script id="facebook-chat" strategy="lazyOnload">
-          {`
-            var chatbox = document.getElementById('fb-customer-chat');
-            chatbox.setAttribute("page_id", "914706508399571"); 
-            chatbox.setAttribute("attribution", "biz_inbox");
-
-            window.fbAsyncInit = function() {
-              FB.init({
-                xfbml            : true,
-                version          : 'v18.0'
-              });
-            };
-
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-          `}
-        </Script>
+        {/* 💬 Facebook Customer Chat: Trusted Interaction Layer (Delayed Load) */}
+        {/* ✅ แทนที่ Script เดิมด้วย Component ที่โหลดแบบ Lazy */}
+        <FacebookChat />
 
         {/* 🌍 App Content Container */}
         <div className="relative flex min-h-screen flex-col">{children}</div>

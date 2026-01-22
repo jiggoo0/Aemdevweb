@@ -31,13 +31,13 @@ export default function robots(): MetadataRoute.Robots {
 
         // 🚫 DISALLOW: Technical & Private Infrastructure
         disallow: [
-          "/api/",      // Next.js API Routes
-          "/_next/",    // Internal System Files
-          "/config/",   // [CRITICAL]: ป้องกัน AI Context & Tech Config
-          "/content/",  // ป้องกันการดึงไฟล์ MDX โดยตรง
-          "/lib/",      // Technical Logic Protection
+          "/api/", // Next.js API Routes
+          "/_next/", // Internal System Files
+          "/config/", // [CRITICAL]: ป้องกัน AI Context & Tech Config
+          "/content/", // ป้องกันการดึงไฟล์ MDX โดยตรง
+          "/lib/", // Technical Logic Protection
           "/download/", // Restricted Client Files
-          "/*.json$",   // Metadata & Schema Source Files
+          "/*.json$", // Metadata & Schema Source Files
           "/not-found", // ป้องกันการ Index หน้า 404
         ],
       },

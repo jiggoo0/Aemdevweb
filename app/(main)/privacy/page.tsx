@@ -36,12 +36,15 @@ export default function PrivacyPage() {
       />
 
       {/* 🌌 Background Decoration */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" aria-hidden="true" />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       {/* 🔝 1. Hero Header Section */}
       <section className="relative overflow-hidden pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="relative z-10 container mx-auto px-6 text-center">
-          <div className="mb-10 inline-flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/10 transition-transform hover:scale-105 duration-500">
+          <div className="mb-10 inline-flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/10 transition-transform duration-500 hover:scale-105">
             <ShieldCheck className="h-10 w-10" />
           </div>
           <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl lg:text-9xl">
@@ -92,7 +95,9 @@ export default function PrivacyPage() {
                   สิทธิในการจัดการข้อมูล
                 </h2>
                 <p className="font-anuphan text-xl leading-relaxed font-bold text-slate-500">
-                  หากคุณต้องการตรวจสอบ แก้ไข หรือขอลบข้อมูลส่วนตัวออกจากระบบของผม ทักมาบอกผมได้ทุกเมื่อทาง LINE ID:{" "}
+                  หากคุณต้องการตรวจสอบ แก้ไข
+                  หรือขอลบข้อมูลส่วนตัวออกจากระบบของผม ทักมาบอกผมได้ทุกเมื่อทาง
+                  LINE ID:{" "}
                   <span className="text-emerald-600 underline underline-offset-8">
                     {siteConfig.links?.lineId || "N/A"}
                   </span>{" "}

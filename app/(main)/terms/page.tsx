@@ -46,12 +46,15 @@ export default function TermsPage() {
       />
 
       {/* 🌌 Background Decoration (Subtle Grid) */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       {/* 🔝 1. Hero Header Section */}
       <section className="relative overflow-hidden pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="relative z-10 container mx-auto px-6 text-center">
-          <div className="mb-10 inline-flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/10 transition-transform hover:rotate-6 duration-500">
+          <div className="mb-10 inline-flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/10 transition-transform duration-500 hover:rotate-6">
             <Scale className="h-10 w-10" />
           </div>
           <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl lg:text-9xl">

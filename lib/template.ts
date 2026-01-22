@@ -63,7 +63,11 @@ export async function getAllTemplates(): Promise<TemplateMeta[]> {
             const metaData = JSON.parse(fileContent)
 
             // ✅ [FIXED]: ป้องกัน Build Error โดยตรวจสอบว่ามี category และ slug ก่อนเรียก toLowerCase()
-            const safeCategory = (metaData.category || category || "uncategorized").toLowerCase()
+            const safeCategory = (
+              metaData.category ||
+              category ||
+              "uncategorized"
+            ).toLowerCase()
             const safeSlug = (metaData.slug || slug || "untitled").toLowerCase()
 
             allTemplates.push({
@@ -98,7 +102,7 @@ export async function getTemplateBySlug(
   slug: string
 ): Promise<TemplateData | null> {
   if (!slug) return null
-  
+
   const templates = await getAllTemplates()
   const meta = templates.find((t) => t.slug === slug.toLowerCase())
 
@@ -132,11 +136,13 @@ export async function getTemplateBySlug(
 export async function getAllCategories(): Promise<string[]> {
   const templates = await getAllTemplates()
   // ✅ กรองเฉพาะตัวที่มีค่าจริงก่อนประมวลผล
-  return Array.from(new Set(
-    templates
-      .map((t) => t.category ? t.category.toLowerCase() : "")
-      .filter((cat) => cat !== "")
-  ))
+  return Array.from(
+    new Set(
+      templates
+        .map((t) => (t.category ? t.category.toLowerCase() : ""))
+        .filter((cat) => cat !== "")
+    )
+  )
 }
 
 /**
@@ -146,7 +152,7 @@ export async function getTemplatesByServiceCategory(
   serviceCategory: string
 ): Promise<TemplateMeta[]> {
   if (!serviceCategory) return []
-  
+
   const allTemplates = await getAllTemplates()
   const searchCat = serviceCategory.toLowerCase()
 
