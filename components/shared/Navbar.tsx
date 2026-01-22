@@ -3,10 +3,11 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Zap, ArrowRight } from "lucide-react"
+import { Menu, X, ArrowRight } from "lucide-react"
 
 import { mainNav } from "@/constants/navigation"
 import { siteConfig } from "@/constants/site-config"
@@ -14,15 +15,13 @@ import { cn } from "@/lib/utils"
 
 /**
  * Navbar Infrastructure - Specialist Edition (v2026)
- * Implements Glassmorphism and Active Link Detection System.
- * Optimized for Perceived Performance and Brand Authority.
+ * Implements Glassmorphism and Verified Logo Integration.
+ * Optimized for Largest Contentful Paint (LCP) and Brand Authority.
  */
 const Navbar = () => {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  // Hydration Safety: Prevents DOM mismatch between Server and Client rendering
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -34,12 +33,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Navigation Guard: Automatically closes mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
-  // Prevent Layout Shift during hydration
   if (!isMounted) return <div className="h-20 w-full bg-transparent" />
 
   return (
@@ -52,13 +49,24 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Brand Identity: AEMDEVWEB Logo and Logic */}
+        {/* Brand Identity: logo-circuit.webp Implementation */}
         <Link
           href="/"
           className="group font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
         >
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-600">
-            <Zap className="h-6 w-6 fill-emerald-400 text-emerald-400" />
+          <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-slate-950 shadow-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-600">
+            {/* High-Performance Brand Asset Loading
+                Using priority and verified path: /images/logo-circuit.webp
+            */}
+            <Image
+              src="/images/logo-circuit.webp"
+              alt={`${siteConfig.name} - Technical SEO by ${siteConfig.expert}`}
+              width={44}
+              height={44}
+              priority
+              quality={100}
+              className="object-contain p-2"
+            />
           </div>
           <span className="flex items-center uppercase">
             {siteConfig.name}
@@ -73,7 +81,6 @@ const Navbar = () => {
         <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
-
             return (
               <Link
                 key={item.href}
@@ -85,8 +92,6 @@ const Navbar = () => {
                 )}
               >
                 {item.name}
-
-                {/* Visual State: Active Link Indicator with Glow Effect */}
                 {isActive && (
                   <motion.div
                     layoutId="nav-glow"
@@ -94,8 +99,6 @@ const Navbar = () => {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-
-                {/* Contextual Feature Badges */}
                 {item.badge && (
                   <span className="absolute -top-3 -right-8 flex h-4 items-center rounded-full bg-emerald-500 px-2 text-[7px] font-black tracking-[0.1em] text-white uppercase shadow-lg">
                     {item.badge}
@@ -105,17 +108,15 @@ const Navbar = () => {
             )
           })}
 
-          {/* Conversion Focus: Strategic Consultation CTA */}
           <Link
             href="/contact"
             className="group font-prompt flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
           >
-            ปรึกษาโปรเจกต์
+            {siteConfig.cta.main}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
 
-        {/* Mobile Interaction Trigger */}
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -125,7 +126,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Navigation Interface (Framer Motion Optimized) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

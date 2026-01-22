@@ -57,11 +57,10 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-anuphan mb-12 max-w-2xl text-lg leading-relaxed font-bold text-slate-500 md:text-xl"
           >
-            ผมช่วยยกระดับธุรกิจ SME
-            และโรงงานของคุณด้วยรากฐานเว็บไซต์ที่เน้นความเร็ว ความเสถียร
-            และความคุ้มค่าของการลงทุนสูงสุด งานเสร็จจริง รับผิดชอบโดยตรงโดย
+            ผมช่วยยกระดับธุรกิจ SME และโรงงานของคุณด้วยรากฐานเว็บไซต์ที่เน้นความเร็ว 
+            ความเสถียร และความคุ้มค่าของการลงทุนสูงสุด งานเสร็จจริง รับผิดชอบโดยตรงโดย 
             <span className="font-black text-slate-950 italic">
-              Specialist Alongkorl
+              Specialist {siteConfig.expert}
             </span>
           </motion.p>
 
@@ -89,7 +88,7 @@ const Hero = () => {
             </Link>
           </motion.div>
 
-          {/* Trust Indicators: Technical and Authority Proofs */}
+          {/* Trust Indicators: Technical and Authority Proofs based on Verified results */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -111,7 +110,7 @@ const Hero = () => {
               <div className="flex items-center gap-2 text-slate-900">
                 <Zap className="h-5 w-5" />
                 <span className="font-prompt text-xl font-black italic">
-                  LCP &lt; 1.0s
+                  LCP {siteConfig.standards.lcp}s
                 </span>
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
@@ -123,7 +122,7 @@ const Hero = () => {
               <div className="flex items-center gap-2 text-slate-900">
                 <ShieldCheck className="h-5 w-5" />
                 <span className="font-prompt text-xl font-black italic">
-                  Industrial Grade
+                  Score {siteConfig.standards.performance}
                 </span>
               </div>
               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">

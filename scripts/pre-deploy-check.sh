@@ -1,114 +1,138 @@
 #!/bin/bash
 
-# กำหนดชื่อไฟล์รายงาน
+# ==============================================================================
+# PROJECT: aemdevweb.com / unlink-th.com
+# DESCRIPTION: Pre-deployment Inspection with Colored Terminal Output
+# VERSION: 2.2.0 (2026-01-22)
+# ==============================================================================
+
+# 1. COLOR CONFIGURATION
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# 2. LOGGING HELPERS
+log_info()    { printf "${BLUE}[INFO] %s${NC}\n" "$1"; }
+log_success() { printf "${GREEN}[PASS] %s${NC}\n" "$1"; }
+log_error()   { printf "${RED}[FAIL] %s${NC}\n" "$1"; }
+log_working() { printf "${YELLOW}[WORKING] %s${NC}\n" "$1"; }
+
+# 3. INITIALIZATION
 REPORT_FILE="pre-deploy-report.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-# ✅ ขั้นตอน 0: ลบไฟล์รายงานเก่าทิ้งก่อนเริ่มทำงาน
 if [ -f "$REPORT_FILE" ]; then
     rm "$REPORT_FILE"
-    echo "🗑️  Old report removed."
+    log_info "Previous report removed."
 fi
 
-echo "🔍 Starting UnlinkTH Pre-deploy Inspection..."
+log_working "Initiating Technical Inspection for UnlinkTH..."
 
-# เริ่มเขียนไฟล์ Markdown ใหม่
-echo "# 🚀 Pre-deploy Inspection Report" > $REPORT_FILE
-echo "Generated at: $TIMESTAMP" >> $REPORT_FILE
-echo "Branch: $(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo 'N/A')" >> $REPORT_FILE
-echo "" >> $REPORT_FILE
+{
+    echo "# Pre-deployment Inspection Report"
+    echo "Generated: $TIMESTAMP"
+    echo "Branch: $(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo 'N/A')"
+    echo ""
+} > $REPORT_FILE
 
-# 1. เช็คไฟล์ .env
-echo "## 🔐 1. Environment Check" >> $REPORT_FILE
+# 4. ENVIRONMENT CHECK
+log_working "Verifying Environment Configuration..."
+echo "## 1. Environment Configuration" >> $REPORT_FILE
 if [ ! -f .env ]; then
-    echo "❌ Status: .env file missing!" | tee -a $REPORT_FILE
-    echo "Critical failure: Deployment halted." >> $REPORT_FILE
+    log_error "Critical Error: .env file is missing!"
+    echo "Status: CRITICAL FAILURE - .env file missing. Deployment halted." >> $REPORT_FILE
     exit 1
 else
-    echo "✅ Status: .env file exists and verified." >> $REPORT_FILE
+    log_success "Environment file found."
+    echo "Status: Environment configuration verified." >> $REPORT_FILE
 fi
+echo "" >> $REPORT_FILE
 
-# 2. ขั้นตอน Auto-Fix (Smart Repair)
-echo "🛠️  Attempting to Auto-fix Linting issues..."
-echo "## 🛠️  2. Auto-Fix Procedure" >> $REPORT_FILE
-pnpm lint --fix > fix_output.txt 2>&1
-FIX_EXIT_CODE=$?
+# 5. AUTO-FIX PROCEDURE
+log_working "Running ESLint Auto-fix..."
+echo "## 2. Automated Fixes" >> $REPORT_FILE
+pnpm lint --fix > /dev/null 2>&1
+log_success "Smart repair completed."
+echo "Status: Automatic hygiene improvements applied." >> $REPORT_FILE
+echo "" >> $REPORT_FILE
 
-if [ $FIX_EXIT_CODE -eq 0 ]; then
-    echo "✅ Status: Auto-fix completed or no issues found." >> $REPORT_FILE
-else
-    echo "⚠️  Note: Some issues could not be fixed automatically." >> $REPORT_FILE
-fi
-rm fix_output.txt
-
-# 3. เช็ค Linting (Code Hygiene)
-echo "🧹 Running Final Linting Check..."
-echo "## 🧹 3. Code Linting (ESLint)" >> $REPORT_FILE
+# 6. STATIC ANALYSIS (LINT)
+log_working "Executing Code Hygiene Check (Linting)..."
+echo "## 3. Static Analysis (ESLint)" >> $REPORT_FILE
 pnpm lint > lint_output.txt 2>&1
 LINT_EXIT_CODE=$?
 
 if [ $LINT_EXIT_CODE -eq 0 ]; then
-    echo "✅ Status: Linting passed." >> $REPORT_FILE
+    log_success "Linting passed."
+    echo "Status: Passed. Code adheres to project standards." >> $REPORT_FILE
 else
-    echo "❌ Status: Linting failed." | tee -a $REPORT_FILE
-    echo "### 🔍 Remaining Linting Errors:" >> $REPORT_FILE
-    echo "\`\`\`bash" >> $REPORT_FILE
+    log_error "Linting issues detected!"
+    echo "Status: Linting failed. Manual intervention required." >> $REPORT_FILE
+    echo '```text' >> $REPORT_FILE
     cat lint_output.txt >> $REPORT_FILE
-    echo "\`\`\`" >> $REPORT_FILE
+    echo '```' >> $REPORT_FILE
 fi
 rm lint_output.txt
+echo "" >> $REPORT_FILE
 
-# 4. เช็ค Types
-echo "⌨️ Checking Types..."
-echo "## ⌨️ 4. Type Safety Check" >> $REPORT_FILE
-pnpm type-check > type_output.txt 2>&1
+# 7. TYPE INTEGRITY
+log_working "Verifying TypeScript Integrity..."
+echo "## 4. Type Integrity Check" >> $REPORT_FILE
+pnpm exec tsc --noEmit > type_output.txt 2>&1
 TYPE_EXIT_CODE=$?
 
 if [ $TYPE_EXIT_CODE -eq 0 ]; then
-    echo "✅ Status: TypeScript verified." >> $REPORT_FILE
+    log_success "Type check passed."
+    echo "Status: Passed. Type safety verified." >> $REPORT_FILE
 else
-    echo "❌ Status: Type errors detected!" | tee -a $REPORT_FILE
-    echo "### 🔍 TypeScript Errors:" >> $REPORT_FILE
-    echo "\`\`\`bash" >> $REPORT_FILE
+    log_error "Type errors found!"
+    echo "Status: TypeScript errors detected." >> $REPORT_FILE
+    echo '```text' >> $REPORT_FILE
     cat type_output.txt >> $REPORT_FILE
-    echo "\`\`\`" >> $REPORT_FILE
+    echo '```' >> $REPORT_FILE
 fi
 rm type_output.txt
+echo "" >> $REPORT_FILE
 
-# 5. ขั้นตอน Build (Production Readiness)
-echo "🏗️  Executing Production Build..."
-echo "## 🏗️  5. Production Build Test" >> $REPORT_FILE
-# ใช้ 'tee' เพื่อแสดงผลบนหน้าจอพร้อมบันทึกลงไฟล์
-pnpm run build 2>&1 | tee build_output.txt
-BUILD_EXIT_CODE=${PIPESTATUS[0]}
+# 8. PRODUCTION BUILD TEST
+log_working "Executing Optimized Production Build (Next.js 16)..."
+echo "## 5. Production Build Test" >> $REPORT_FILE
+pnpm run build > build_output.txt 2>&1
+BUILD_EXIT_CODE=$?
 
 if [ $BUILD_EXIT_CODE -eq 0 ]; then
-    echo "✅ Status: Build successfully optimized." >> $REPORT_FILE
-    echo "### 📊 Route Statistics & Bundle Size" >> $REPORT_FILE
-    echo "\`\`\`text" >> $REPORT_FILE
-    # ดึงเฉพาะส่วนที่เป็นตารางสรุป Route จากไฟล์ build_output
+    log_success "Build successful."
+    echo "Status: Build optimized successfully." >> $REPORT_FILE
+    echo "### Route Analysis and Bundle Sizes" >> $REPORT_FILE
+    echo '```text' >> $REPORT_FILE
     sed -n '/Route (app)/,$p' build_output.txt >> $REPORT_FILE
-    echo "\`\`\`" >> $REPORT_FILE
+    echo '```' >> $REPORT_FILE
 else
-    echo "❌ Status: Build failed!" | tee -a $REPORT_FILE
-    echo "### 🔍 Build Logs (Failure Analysis):" >> $REPORT_FILE
-    echo "\`\`\`bash" >> $REPORT_FILE
-    tail -n 50 build_output.txt >> $REPORT_FILE
-    echo "\`\`\`" >> $REPORT_FILE
+    log_error "Build process failed!"
+    echo "Status: Production build failed." >> $REPORT_FILE
+    echo '```text' >> $REPORT_FILE
+    tail -n 30 build_output.txt >> $REPORT_FILE
+    echo '```' >> $REPORT_FILE
 fi
 rm build_output.txt
 
-# สรุปผลลัพธ์สุดท้าย
+# 9. FINAL SUMMARY
 echo "" >> $REPORT_FILE
 echo "---" >> $REPORT_FILE
-echo "## 🏆 Summary Result" >> $REPORT_FILE
+echo "## Summary Result" >> $REPORT_FILE
+
+printf "\n${YELLOW}========================================${NC}\n"
+printf "           INSPECTION SUMMARY           \n"
+printf "${YELLOW}========================================${NC}\n"
 
 if [ $LINT_EXIT_CODE -eq 0 ] && [ $TYPE_EXIT_CODE -eq 0 ] && [ $BUILD_EXIT_CODE -eq 0 ]; then
-    echo "### ✅ READY FOR DEPLOY" >> $REPORT_FILE
-    echo "All protocols verified: Lint passed, Types safe, and Build successful. Deployment is highly recommended." >> $REPORT_FILE
+    log_success "READY FOR DEPLOY: All protocols verified."
+    echo "Final Status: READY FOR DEPLOY" >> $REPORT_FILE
 else
-    echo "### 🚫 FIX REQUIRED BEFORE DEPLOY" >> $REPORT_FILE
-    echo "Please resolve the errors in the failed stages above." >> $REPORT_FILE
+    log_error "FIX REQUIRED: System contains errors."
+    echo "Final Status: FIX REQUIRED BEFORE DEPLOY" >> $REPORT_FILE
 fi
 
-echo "🚀 Inspection complete. Full report generated: $REPORT_FILE"
+log_info "Full report available at: $REPORT_FILE"

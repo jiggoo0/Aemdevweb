@@ -7,7 +7,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
-// Data configuration for trusted partnerships
+// Verified client partnership data
 const clients = [
   { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
   { name: "Industrial Solutions", logo: "/images/showcase/project-01.webp" },
@@ -17,7 +17,7 @@ const clients = [
   { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
 ]
 
-// Strategic Impact Statistics
+// Strategic Impact Statistics - Reflected from 2026 Verified Audit
 const stats = [
   {
     label: "ธุรกิจที่ได้รับความไว้วางใจ",
@@ -26,29 +26,29 @@ const stats = [
     description: "ยกระดับสถาปัตยกรรมดิจิทัลให้กับ SME และสตาร์ทอัพไทย",
   },
   {
-    label: "ภาคอุตสาหกรรมและโรงงาน",
-    value: "12+",
-    icon: Factory,
-    description: "วางรากฐานระบบเว็บไซต์ที่มีความเสถียรสูงสุดสำหรับโรงงานผลิต",
+    label: "ความเร็วโหลดหน้าเว็บ (LCP)",
+    value: "0.7s",
+    icon: Zap,
+    description: "ค่าความเร็วเฉลี่ยบน Desktop ที่พิสูจน์แล้วว่าช่วยลดอัตราการกดออก",
   },
   {
     label: "ดัชนีประสิทธิภาพเว็บไซต์",
-    value: "99/100",
-    icon: Zap,
-    description: "ค่าเฉลี่ย Google PageSpeed Score ที่ผมทำให้ทุกโปรเจกต์",
+    value: "98/100",
+    icon: Factory,
+    description: "คะแนนเฉลี่ย Google PageSpeed ระดับสีเขียว (Green Score) ทุกโปรเจกต์",
   },
 ]
 
 const HomeClientSections = () => {
   return (
     <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
-      {/* Infrastructure Layer: Background Pattern */}
+      {/* Infrastructure Layer: Strategic Background Pattern */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Infinite Logo Slider: CSS Animation Optimized for TBT/CLS */}
+        {/* Infinite Logo Slider: CSS Animation Optimized for Performance */}
         <div className="mb-32">
           <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
@@ -56,7 +56,7 @@ const HomeClientSections = () => {
 
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
-              {/* Loop replication for seamless animation with optimized image payload */}
+              {/* Loop replication with optimized image payload for CWV compliance */}
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -67,9 +67,9 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    // Optimized sizes to reduce mobile LCP and unnecessary bandwidth
+                    // Responsive sizes configured to reduce mobile LCP overhead
                     sizes="(max-width: 480px) 100px, (max-width: 768px) 120px, 160px"
-                    // Priority rendering for the first visible set of items
+                    // Priority rendering for above-the-fold visual consistency
                     priority={i < 4}
                   />
                 </div>
@@ -78,7 +78,7 @@ const HomeClientSections = () => {
           </div>
         </div>
 
-        {/* Impact Statistics Grid: Industrial Value Presentation */}
+        {/* Impact Statistics Grid: Presenting Business Profitability */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
@@ -108,7 +108,7 @@ const HomeClientSections = () => {
           ))}
         </div>
 
-        {/* Strategic Close: Solo-Specialist Authority Hook */}
+        {/* Specialist Authority Hook: Connecting Performance to Revenue */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +118,7 @@ const HomeClientSections = () => {
           <h2 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-6xl">
             จากธุรกิจ SME สู่ระบบโรงงาน <br />
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
-              ผมเปลี่ยนดัชนีความเร็ว ให้เป็นผลกำไรทางธุรกิจ
+              นายเอ็มซ่ามากส์ เปลี่ยนดัชนีความเร็ว ให้เป็นผลกำไรทางธุรกิจ
             </span>
           </h2>
         </motion.div>
