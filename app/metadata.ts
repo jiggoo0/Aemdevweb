@@ -4,31 +4,31 @@ import type { Metadata } from "next"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * 🧬 Global Metadata Configuration — Specialist Edition
+ * การตั้งค่าข้อมูลส่วนหัวเว็บไซต์หลัก — Specialist Edition
  * ออกแบบมาเพื่อประสิทธิภาพสูงสุดบน Google Search และ AI Crawlers สำหรับกลุ่ม B2B/SME
  */
 
 export const defaultMetadata: Metadata = {
-  // 🔗 1. Base Infrastructure
+  // 1. โครงสร้างพื้นฐานหลัก (Base Infrastructure)
   metadataBase: new URL(siteConfig.url),
 
-  // 🏷️ 2. Title Architecture
+  // 2. โครงสร้างการจัดวางชื่อหัวข้อ (Title Structure)
   title: {
     default: siteConfig.title,
     template: `%s | ${siteConfig.shortName}`,
   },
 
-  // 📝 3. Primary Metadata
+  // 3. ข้อมูลคำอธิบายและคำค้นหาหลัก (Primary Metadata)
   description: siteConfig.description,
   keywords: siteConfig.keywords.list,
   category: "technology",
 
-  // 👤 4. Attribution & Authority
-  authors: [{ name: siteConfig.expert, url: siteConfig.contact.linkedin }],
+  // 4. ข้อมูลการระบุตัวตนและความน่าเชื่อถือ (Attribution & Authority)
+  authors: [{ name: siteConfig.expert, url: siteConfig.links.linkedin }],
   creator: siteConfig.expert,
   publisher: siteConfig.companyName,
 
-  // 🗺️ 5. Canonical & Localization Excellence
+  // 5. ระบบการระบุพิกัดและภาษา (Canonical & Localization)
   alternates: {
     canonical: "/",
     languages: {
@@ -37,7 +37,7 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  // 🌐 6. Open Graph (Social Meta)
+  // 6. การแสดงผลบนสื่อสังคมออนไลน์ (Open Graph)
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -55,7 +55,7 @@ export const defaultMetadata: Metadata = {
     ],
   },
 
-  // 🐦 7. Twitter / X Cards
+  // 7. การแสดงผลบนแพลตฟอร์ม X / Twitter
   twitter: {
     card: "summary_large_image",
     title: siteConfig.title,
@@ -64,7 +64,7 @@ export const defaultMetadata: Metadata = {
     creator: siteConfig.expert,
   },
 
-  // 🖼️ 8. Comprehensive Icon Infrastructure (Favicons & PWA)
+  // 8. ระบบไอคอนและรูปภาพสัญลักษณ์ (Comprehensive Icon Infrastructure)
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -84,11 +84,10 @@ export const defaultMetadata: Metadata = {
     ],
   },
 
-  // 🤖 9. Crawler & AI Control
+  // 9. การควบคุมระบบจัดเก็บข้อมูลและ AI (Crawler & AI Control)
   robots: {
     index: true,
     follow: true,
-    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -98,13 +97,12 @@ export const defaultMetadata: Metadata = {
     },
   },
 
-  // 🔍 10. Search Console Verification
+  // 10. การยืนยันตัวตนกับเครื่องมือค้นหา (Search Console Verification)
   verification: {
-    // ✅ อัปเดตรหัสยืนยันตัวตนเรียบร้อยแล้ว
     google: "google14e6cc676e76f49d",
   },
 
-  // 📱 11. Mobile Experience (Apple Web App)
+  // 11. การตั้งค่าสำหรับการใช้งานบนมือถือ (Mobile Web App)
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",

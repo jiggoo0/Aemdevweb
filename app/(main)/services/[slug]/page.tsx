@@ -14,12 +14,12 @@ import {
   BarChart3,
 } from "lucide-react"
 
-// 📂 Data & Logic Architecture
+// ส่วนจัดการข้อมูลและโครงสร้างระบบ
 import { services } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
 import { getTemplatesByServiceCategory } from "@/lib/template"
 
-// 🧩 Specialist Components
+// ส่วนประกอบคอมโพเนนต์เฉพาะทาง
 import { JsonLd } from "@/components/seo/JsonLd"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
@@ -30,7 +30,7 @@ interface ServicePageProps {
 }
 
 /**
- * 🚀 Dynamic Metadata Strategy
+ * กลยุทธ์การจัดการข้อมูลส่วนหัว (Metadata Strategy)
  */
 export async function generateMetadata({
   params,
@@ -38,10 +38,10 @@ export async function generateMetadata({
   const { slug } = await params
   const service = services.find((s) => s.slug === slug)
 
-  if (!service) return { title: `Service Not Found | ${siteConfig.shortName}` }
+  if (!service) return { title: `ไม่พบข้อมูลบริการ | ${siteConfig.shortName}` }
 
   return {
-    title: `${service.title} | Specialist Web Solution by ${siteConfig.expert}`,
+    title: `${service.title} | ระบบงานเว็บเฉพาะทางโดย ${siteConfig.expert}`,
     description: service.description,
     alternates: { canonical: `${siteConfig.url}/services/${slug}` },
     openGraph: {
@@ -53,7 +53,7 @@ export async function generateMetadata({
 }
 
 /**
- * 🧬 ServiceDetailPage — High-Conversion Landing Page
+ * หน้าแสดงรายละเอียดบริการ — ออกแบบมาเพื่อเน้นการปิดการขายและประสิทธิภาพสูงสุด
  */
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params
@@ -61,7 +61,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   if (!service) notFound()
 
-  // ดึงเทมเพลตที่แนะนำสำหรับกลุ่มนี้
+  // ดึงรายการเทมเพลตที่แนะนำสำหรับกลุ่มธุรกิจนี้
   const relatedTemplates = await getTemplatesByServiceCategory(service.category)
 
   return (
@@ -84,10 +84,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }}
       />
 
-      {/* 🌌 Background Decoration */}
+      {/* ส่วนตกแต่งพื้นหลังเชิงเทคนิค */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
-      {/* 🔝 Navigation & Breadcrumb */}
+      {/* การนำทางและ Breadcrumb */}
       <nav className="relative z-10 container mx-auto px-6 pt-32 lg:pt-40">
         <Link
           href="/services"
@@ -101,11 +101,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </Link>
       </nav>
 
-      {/* 🏆 Hero Content Section */}
+      {/* ส่วนเนื้อหาหลัก (Hero Section) */}
       <section className="relative py-12 lg:py-24">
         <div className="container mx-auto px-6">
           <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
-            {/* Left: Content & Identity */}
+            {/* ฝั่งซ้าย: ข้อมูลและจุดเด่นของบริการ */}
             <div className="space-y-10">
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-2 text-[10px] font-black tracking-widest text-emerald-600 uppercase italic">
                 <Zap size={14} fill="currentColor" />
@@ -141,7 +141,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </div>
             </div>
 
-            {/* Right: Pricing & Conversion Engine */}
+            {/* ฝั่งขวา: การแสดงราคาและส่วนติดต่อ Lead Generation */}
             <div className="relative">
               <div className="shadow-3xl relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white md:p-20">
                 <div className="pointer-events-none absolute top-0 right-0 p-10 opacity-5">
@@ -159,14 +159,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     {service.priceValue?.toLocaleString() || "Custom"}
                   </div>
                   <p className="font-anuphan mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
-                    สร้างด้วยสถาปัตยกรรมประสิทธิภาพสูง <br />
+                    สร้างด้วยโครงสร้างระบบประสิทธิภาพสูง <br />
                     พร้อมระบบจัดการข้อมูลมาตรฐานปี 2026
                   </p>
 
                   <LineLeadForm
                     variant="button"
                     label="จองคิวเริ่มโปรเจกต์กับผม"
-                    className="h-20 w-full rounded-2xl bg-emerald-500 text-xl font-black text-slate-950 shadow-xl shadow-emerald-500/10 hover:bg-white"
+                    className="h-20 w-full rounded-2xl bg-emerald-500 text-xl font-black text-slate-950 shadow-xl shadow-emerald-500/10 transition-colors hover:bg-white"
                   />
                 </div>
               </div>
@@ -176,12 +176,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* 📊 Proof of Success */}
+      {/* ส่วนแสดงสถิติความสำเร็จ */}
       <div className="border-y border-slate-50 bg-white">
         <ImpactStats />
       </div>
 
-      {/* 🧩 Contextual Suggestions (Marketplace) */}
+      {/* ส่วนแนะนำเทมเพลตที่เกี่ยวข้อง (Marketplace Integration) */}
       {relatedTemplates && relatedTemplates.length > 0 && (
         <section className="overflow-hidden bg-slate-50/50 py-24 lg:py-40">
           <div className="container mx-auto px-6">
@@ -213,10 +213,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </section>
       )}
 
-      {/* 🛡️ Final Specialist Authority */}
+      {/* ส่วนตอกย้ำความเชื่อมั่น (Authority Section) */}
       <section className="overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto px-6">
-          <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center md:p-24">
+          <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center shadow-2xl shadow-slate-200/50 md:p-24">
             <div className="absolute -top-10 -left-10 opacity-5">
               <BarChart3 size={200} className="text-emerald-500" />
             </div>
@@ -229,12 +229,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
             <div className="font-anuphan mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               <p>
-                ผมไม่ได้แค่ "รับจ้างทำเว็บ" แต่ผมคือที่ปรึกษาเชิงเทคนิค
-                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางโครงสร้าง SEO
+                ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมคือที่ปรึกษาเชิงเทคนิค
+                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางโครงสร้างระบบการค้นหา
                 ให้ธุรกิจของคุณทำเงินได้ในระยะยาว
                 <span className="text-slate-900">
                   {" "}
-                  ดูแลเอง 100% งานจบไว ไม่ทิ้งงานแน่นอนครับ
+                  ดูแลเองทุกขั้นตอน งานจบไว รับผิดชอบเต็มร้อยแน่นอนครับ
                 </span>
               </p>
             </div>
@@ -260,10 +260,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* 📍 Footer Hook */}
+      {/* ส่วนท้ายข้อมูลระบบ */}
       <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-End Solution by {siteConfig.expert} v2026
+          High-End Systems by {siteConfig.expert} v2026
         </p>
       </footer>
     </main>

@@ -1,13 +1,13 @@
 /** @format */
 
 /**
- * Navigation System Configuration - AEMDEVWEB Professional Edition
- * Focus: Business Growth, Trustworthiness, and User-Centric Structure.
- * Adjusted for non-technical stakeholders (SME & Industrial Owners).
+ * ระบบจัดการการนำทาง - AEMDEVWEB Professional Edition
+ * มุ่งเน้น: การเติบโตของธุรกิจ, ความน่าเชื่อถือ และโครงสร้างที่ใช้งานง่าย
+ * ปรับจูนสำหรับกลุ่มเจ้าของธุรกิจ SME และกลุ่มอุตสาหกรรม
  */
 
 /* -------------------------------------------------------------------------- */
-/* Type Definitions (Strict Mode)                                             */
+/* นิยามประเภทข้อมูล (Strict Mode)                                              */
 /* -------------------------------------------------------------------------- */
 
 export interface NavItem {
@@ -32,11 +32,11 @@ export interface NavigationConfig {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Navigation Configuration Repository                                        */
+/* คลังข้อมูลการนำทาง (Navigation Repository)                                    */
 /* -------------------------------------------------------------------------- */
 
 export const navigation: NavigationConfig = {
-  /* -------------------------- Main Navbar Menu ---------------------------- */
+  /* -------------------------- เมนูแถบนำทางหลัก ---------------------------- */
   main: [
     {
       name: "หน้าแรก",
@@ -72,7 +72,7 @@ export const navigation: NavigationConfig = {
     },
   ],
 
-  /* --------------------------- Footer Menu Area --------------------------- */
+  /* --------------------------- ส่วนเมนูท้ายหน้า --------------------------- */
   footer: {
     services: [
       {
@@ -92,9 +92,9 @@ export const navigation: NavigationConfig = {
         description: "ระบบจัดการสินค้าอุตสาหกรรมที่ค้นหาง่ายและครบถ้วน",
       },
       {
-        name: "Technical SEO Solution",
+        name: "Technical SEO System",
         href: "/services/seo-technical",
-        description: "ปรับโครงสร้างหลังบ้านให้ Google หาคุณเจอได้ง่ายขึ้น",
+        description: "ปรับโครงสร้างหลังบ้านให้ระบบค้นหาเจอคุณได้ง่ายขึ้น",
       },
     ],
 
@@ -149,7 +149,7 @@ export const navigation: NavigationConfig = {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Helpers Export                                                             */
+/* การส่งออกข้อมูลสำหรับใช้งาน (Helpers Export)                                 */
 /* -------------------------------------------------------------------------- */
 
 export const mainNav = navigation.main
@@ -161,7 +161,7 @@ export const {
 } = navigation.footer
 
 /* -------------------------------------------------------------------------- */
-/* Optimized Keywords for 2026 Strategy                                       */
+/* ชุดคำค้นหาที่ผ่านการปรับแต่งสำหรับกลยุทธ์ปี 2026                              */
 /* -------------------------------------------------------------------------- */
 
 export const siteKeywords: string[] = [
@@ -169,7 +169,7 @@ export const siteKeywords: string[] = [
   "Technical SEO Specialist Thailand",
   "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
   "รับทำเว็บไซต์ SME คุณภาพสูง",
-  "สถาปัตยกรรมเว็บไซต์ความเร็วสูง",
+  "โครงสร้างเว็บไซต์ความเร็วสูง",
   "เว็บ E-Catalog โรงงาน",
   "ที่ปรึกษาด้านการเพิ่มประสิทธิภาพเว็บไซต์",
 ]

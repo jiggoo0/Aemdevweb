@@ -1,6 +1,6 @@
 /** @format */
 
-import { NextResponse } from 'next/server'
+import { NextResponse } from "next/server"
 
 /**
  * Proxy Infrastructure - Next.js 16 Enterprise Standard
@@ -17,33 +17,33 @@ export function proxy() {
    * Header: X-Frame-Options
    * Requirement: Prevent Clickjacking attacks by disallowing frame embedding.
    */
-  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set("X-Frame-Options", "DENY")
 
   /**
    * Header: X-Content-Type-Options
    * Requirement: Enforce strict MIME checking to prevent drive-by downloads.
    */
-  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set("X-Content-Type-Options", "nosniff")
 
   /**
    * Header: Referrer-Policy
    * Requirement: Control information leakage in cross-origin requests.
    */
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin")
 
   /**
    * Header: X-XSS-Protection
    * Requirement: Legacy browser protection (Defense in depth strategy).
    */
-  response.headers.set('X-XSS-Protection', '1; mode=block')
-  
+  response.headers.set("X-XSS-Protection", "1; mode=block")
+
   /**
    * Header: Permissions-Policy
    * Requirement: Strict hardware access restriction to reduce attack surface.
    */
   response.headers.set(
-    'Permissions-Policy',
-    'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=(), interest-cohort=()"
   )
 
   return response
@@ -56,6 +56,6 @@ export const config = {
    * Optimized for Crawl Budget and Edge execution.
    */
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp)$).*)',
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|webp)$).*)",
   ],
 }

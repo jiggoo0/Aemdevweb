@@ -1,5 +1,5 @@
 # Pre-deployment Inspection Report
-Generated: 2026-01-23 00:53:38
+Generated: 2026-01-25 21:31:39
 Branch: main
 
 ## 1. Environment Configuration
@@ -35,10 +35,10 @@ Route (app)
 ├ ○ /about
 ├ ○ /blog
 ├ ● /blog/[slug]
+│ ├ /blog/seo-google-love-technical-guide
 │ ├ /blog/5-points-killing-sales
 │ ├ /blog/copywriting-secrets
-│ ├ /blog/facebook-ads-vs-website
-│ └ [+2 more paths]
+│ └ [+3 more paths]
 ├ ○ /careers
 ├ ○ /case-studies
 ├ ● /case-studies/[slug]

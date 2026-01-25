@@ -7,48 +7,51 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { CheckCircle2, Users, Factory, Zap } from "lucide-react"
 
-// Verified client partnership data
+// รายชื่อแบรนด์ที่ไว้วางใจในการวางระบบเว็บไซต์
 const clients = [
   { name: "Unlink TH", logo: "/images/showcase/unlink-th1.webp" },
-  { name: "Industrial Solutions", logo: "/images/showcase/project-01.webp" },
+  { name: "Industrial System", logo: "/images/showcase/project-01.webp" },
   { name: "SME Thailand", logo: "/images/showcase/aemdevweb-hero.webp" },
   { name: "Factory Pro", logo: "/images/showcase/project-01.webp" },
   { name: "Digital Partner", logo: "/images/showcase/unlink-th1.webp" },
   { name: "Tech Export", logo: "/images/showcase/aemdevweb-hero.webp" },
 ]
 
-// Strategic Impact Statistics - Reflected from 2026 Verified Audit
+// ดัชนีประสิทธิภาพจากการตรวจสอบระบบในปี 2026
 const stats = [
   {
     label: "ธุรกิจที่ได้รับความไว้วางใจ",
     value: "50+",
     icon: Users,
-    description: "ยกระดับสถาปัตยกรรมดิจิทัลให้กับ SME และสตาร์ทอัพไทย",
+    description:
+      "ยกระดับโครงสร้างดิจิทัลให้กับ SME และกลุ่มธุรกิจไทยอย่างยั่งยืน",
   },
   {
-    label: "ความเร็วโหลดหน้าเว็บ (LCP)",
+    label: "ความเร็วการโหลดข้อมูล (LCP)",
     value: "0.7s",
     icon: Zap,
-    description: "ค่าความเร็วเฉลี่ยบน Desktop ที่พิสูจน์แล้วว่าช่วยลดอัตราการกดออก",
+    description:
+      "ความเร็วเฉลี่ยบน Desktop ที่ช่วยลดอัตราการออกจากเว็บไซต์ของผู้ใช้งาน",
   },
   {
-    label: "ดัชนีประสิทธิภาพเว็บไซต์",
+    label: "ดัชนีประสิทธิภาพภาพรวม",
     value: "98/100",
     icon: Factory,
-    description: "คะแนนเฉลี่ย Google PageSpeed ระดับสีเขียว (Green Score) ทุกโปรเจกต์",
+    description:
+      "คะแนนเฉลี่ย Google PageSpeed ระดับสีเขียวในทุกโครงการที่ส่งมอบ",
   },
 ]
 
 const HomeClientSections = () => {
   return (
     <section className="relative overflow-hidden bg-slate-50 py-24 lg:py-32">
-      {/* Infrastructure Layer: Strategic Background Pattern */}
+      {/* ส่วนประกอบพื้นหลัง: ลายตารางเชิงเทคนิคเพื่อความเป็นมืออาชีพ */}
       <div className="absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-fixed bg-center" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Infinite Logo Slider: CSS Animation Optimized for Performance */}
+        {/* ระบบเลื่อนโลโก้ต่อเนื่อง: ปรับจูนเพื่อประสิทธิภาพการโหลดสูงสุด */}
         <div className="mb-32">
           <p className="font-prompt mb-12 text-center text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase italic">
             Trusted by Forward-Thinking Businesses
@@ -56,7 +59,7 @@ const HomeClientSections = () => {
 
           <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
             <div className="animate-infinite-scroll flex w-max items-center gap-20 pr-20">
-              {/* Loop replication with optimized image payload for CWV compliance */}
+              {/* การทำซ้ำข้อมูลเพื่อความต่อเนื่องของแอนิเมชัน */}
               {[...clients, ...clients, ...clients].map((client, i) => (
                 <div
                   key={i}
@@ -67,9 +70,7 @@ const HomeClientSections = () => {
                     alt={client.name}
                     fill
                     className="object-contain"
-                    // Responsive sizes configured to reduce mobile LCP overhead
                     sizes="(max-width: 480px) 100px, (max-width: 768px) 120px, 160px"
-                    // Priority rendering for above-the-fold visual consistency
                     priority={i < 4}
                   />
                 </div>
@@ -78,7 +79,7 @@ const HomeClientSections = () => {
           </div>
         </div>
 
-        {/* Impact Statistics Grid: Presenting Business Profitability */}
+        {/* ส่วนแสดงดัชนีประสิทธิภาพ: เชื่อมโยงความเร็วเข้ากับผลกำไรธุรกิจ */}
         <div className="grid gap-8 md:grid-cols-3">
           {stats.map((stat, index) => (
             <motion.div
@@ -108,15 +109,15 @@ const HomeClientSections = () => {
           ))}
         </div>
 
-        {/* Specialist Authority Hook: Connecting Performance to Revenue */}
+        {/* ส่วนท้ายของกลุ่มข้อมูล: การตอกย้ำความเชี่ยวชาญเฉพาะทาง */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="shadow-3xl mt-28 rounded-[3rem] bg-slate-950 p-12 text-center md:p-24"
+          className="mt-28 rounded-[3rem] bg-slate-950 p-12 text-center shadow-2xl shadow-slate-900/20 md:p-24"
         >
           <h2 className="font-prompt text-4xl leading-[1.1] font-black tracking-tighter text-white uppercase italic md:text-6xl">
-            จากธุรกิจ SME สู่ระบบโรงงาน <br />
+            จากกลุ่มธุรกิจ SME สู่ระบบโรงงาน <br />
             <span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
               นายเอ็มซ่ามากส์ เปลี่ยนดัชนีความเร็ว ให้เป็นผลกำไรทางธุรกิจ
             </span>

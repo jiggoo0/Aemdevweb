@@ -1,23 +1,16 @@
 /** @format */
 
-/**
- * 🧬 Core System Types – AEMDEVWEB (v.2026)
- * ศูนย์รวม Interface และ Types สำหรับระบบสถาปัตยกรรมเว็บไซต์
- * ออกแบบมาเพื่อความเสถียรของระบบ (Type Safety) และรองรับการทำ SEO Specialist
- * Update: รองรับโครงสร้าง Keywords แบบ Complex Object และ Facebook ID
- */
-
 /* -------------------------------------------------------------------------- */
-/* 🌐 SITE & NAVIGATION                                                       */
+/* 1. ข้อมูลเว็บไซต์และการนำทาง (Site & Navigation)                                     */
 /* -------------------------------------------------------------------------- */
 
 export interface NavItem {
-  name: string // ชื่อที่แสดงผล
-  href: string // ลิงก์ปลายทาง
-  title?: string // รองรับกรณีใช้ title แทน name
+  name: string
+  href: string
+  title?: string
   disabled?: boolean
   external?: boolean
-  badge?: "New" | "Hot" | "Sale" | "Special" | string
+  badge?: string // เช่น "New", "Hot"
   description?: string
 }
 
@@ -41,16 +34,13 @@ export interface SiteConfig {
   url: string
   ogImage: string
   email: string
-
-  // 🛠️ Updated Keywords Structure: รองรับการทำ Metadata แบบเจาะจง
   keywords: {
-    list: string[] // สำหรับ Metadata Array
-    all: string // สำหรับ Legacy String
+    list: string[]
+    all: string
     core: string[]
     tech: string[]
     brand: string[]
   }
-
   links: {
     line: string
     lineId: string
@@ -58,25 +48,21 @@ export interface SiteConfig {
     linkedin?: string
     github?: string
     messenger?: string
+    personal: string
   }
-
   contact: {
-    // ✅ Semantic Contact สำหรับ SEO และเครื่องมือติดต่อ
     email: string
     lineId: string
     facebook?: string
     linkedin?: string
     phone?: string
   }
-
   cta: {
     main: string
     secondary: string
     pricing: string
   }
-
   standards: {
-    // ✅ Technical Standards ประจำปี 2026
     performance: number
     lcp: number
     security: string
@@ -85,28 +71,29 @@ export interface SiteConfig {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 📄 BLOG & CONTENT (MDX Engine)                                             */
+/* 2. ระบบจัดการเนื้อหาและบทความ (Blog & Content)                                     */
 /* -------------------------------------------------------------------------- */
 
-export interface BlogMetadata {
+export interface BlogFrontmatter {
   title: string
   description: string
   date: string
   category: string
-  coverImage: string
+  thumbnail: string // พิกัดรูปภาพปกบทความ
   author: string
   excerpt?: string
-  readingTime?: string
   tags?: string[]
 }
 
-export interface BlogPost extends BlogMetadata {
+export interface BlogPost {
+  id: string
   slug: string
-  content?: string | unknown
+  frontmatter: BlogFrontmatter
+  content: string // รองรับ MDX Source
 }
 
 /* -------------------------------------------------------------------------- */
-/* 💼 SERVICES & SOLUTIONS                                                   */
+/* 3. การจัดการบริการและระบบงาน (Services)                                          */
 /* -------------------------------------------------------------------------- */
 
 export type ServiceIconName =
@@ -123,20 +110,17 @@ export interface ServiceItem {
   title: string
   slug: string
   description: string
-  longDescription?: string
+  priceValue: number // สำหรับระบบคำนวณราคา
+  priceDisplay?: string // สำหรับการแสดงผลหน้าเว็บ
+  category: "Starter" | "SME" | "Corporate" | "Industrial" | string
   icon: ServiceIconName
   features: string[]
-  priceDisplay?: string
-  priceRange?: string
-  badge?: string
-  mockups?: {
-    desktop: string
-    mobile: string
-  }
+  highlight?: boolean
+  themeColor?: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏆 CASE STUDIES & SHOWCASE                                                */
+/* 4. ข้อมูลผลงานและตัวอย่างความสำเร็จ (Case Studies)                                 */
 /* -------------------------------------------------------------------------- */
 
 export interface ShowcaseStats {
@@ -144,77 +128,58 @@ export interface ShowcaseStats {
   value: string
 }
 
-export interface CaseStudyItem {
-  id: string
-  slug: string
+export interface CaseStudyFrontmatter {
   title: string
   client: string
   industry: string
   category: string
-  description: string
+  excerpt: string
   thumbnail: string
-  results: ShowcaseStats[]
-  keyFeatures?: string[]
-  clientQuote?: {
-    text: string
-    author: string
-    role?: string
-  }
+  date: string
+  results: string[] | ShowcaseStats[]
+  keyFeatures: string[]
+  service?: string
+  isFeatured?: boolean
+}
+
+export interface CaseStudyItem {
+  id: string
+  slug: string
+  frontmatter: CaseStudyFrontmatter
+  content: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🎨 TEMPLATE ENGINE                                                        */
+/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Engine)                                       */
 /* -------------------------------------------------------------------------- */
-
-export type TemplateCategory =
-  | "SalePage"
-  | "Corporate"
-  | "ECommerce"
-  | "Service"
-  | "Industrial"
-  | string
 
 export interface TemplateItem {
   id: string
   slug: string
   title: string
   description: string
-  category: TemplateCategory
+  category: string
   image: string
   features: string[]
-  demoUrl?: string
-  price?: number
+  price: number
   salePrice?: number
   isPopular?: boolean
   isNew?: boolean
-  themeColor?: string
-  salesData?: {
-    soldCount: number
-    rating: number
-  }
-  mockups?: {
-    desktop?: string
-    mobile?: string
-  }
+  demoUrl?: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 📩 LEAD & CONVERSION                                                      */
+/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Social Proof)                       */
 /* -------------------------------------------------------------------------- */
 
 export interface LeadFormSubmission {
   name: string
   lineId: string
   businessType: string
-  budget: string
-  message?: string
-  source?: string
+  budget?: string
+  requirement: string
   timestamp: string
 }
-
-/* -------------------------------------------------------------------------- */
-/* ⭐ SOCIAL PROOF                                                           */
-/* -------------------------------------------------------------------------- */
 
 export interface TestimonialItem {
   id: string | number

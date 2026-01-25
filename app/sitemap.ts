@@ -8,15 +8,15 @@ import { getAllCaseStudies } from "@/lib/case-studies"
 import { getAllTemplates } from "@/lib/template"
 
 /**
- * 🗺️ Dynamic sitemap.ts — 2026 Specialist Edition
- * ออกแบบมาเพื่อนำทาง Search Engine ไปยังจุดยุทธศาสตร์ของธุรกิจ
- *
+ * แผนผังเว็บไซต์แบบพลวัต (Dynamic sitemap.ts)
+ * ออกแบบมาเพื่อนำทางระบบการค้นหาไปยังพิกัดยุทธศาสตร์ของธุรกิจ
+ * รองรับมาตรฐาน Next.js 16 และชุดข้อมูลแบบ Nested Frontmatter
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = siteConfig.url //
+  const baseUrl = siteConfig.url
 
   // 1. หน้าพื้นฐานของเว็บไซต์ (Static Routes)
-  // Priority 1.0 สำหรับหน้าแรก และ 0.7 สำหรับหน้าข้อมูลทั่วไป
+  // กำหนดลำดับความสำคัญสูงสุดสำหรับหน้าแรก และระดับรองสำหรับหน้าข้อมูลทั่วไป
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -34,8 +34,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === "" ? 1.0 : 0.7,
   }))
 
-  // 2. หน้าบริการรายชิ้น (Revenue Layer)
-  // Priority 0.9: หน้าสร้างรายได้หลักจากบริการต่างๆ
+  // 2. หน้าบริการเฉพาะทาง (Service Layer)
+  // กำหนดลำดับความสำคัญระดับสูงสำหรับหน้าสร้างรายได้หลัก
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
@@ -43,8 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.9,
   }))
 
-  // 3. หน้าผลงานความสำเร็จ (Social Proof Layer)
-  // [SEO]: ระบบจะกวาดหาชื่อไฟล์ใหม่ที่คุณเปลี่ยน (e.g., sme-web-performance) โดยอัตโนมัติ
+  // 3. หน้าผลงานและความสำเร็จ (Case Study Layer)
+  // ระบบจะกวาดหาข้อมูลจากพิกัดผลงานโดยอัตโนมัติ
   const caseStudies = await getAllCaseStudies()
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
     url: `${baseUrl}/case-studies/${study.slug}`,
@@ -55,8 +55,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // 4. หน้าเทมเพลตใน Marketplace (Market Conversion Layer)
-  // ✅ [FIXED]: Mapping URL ให้ตรงกับโครงสร้าง /templates/[category]/[slug]
+  // 4. หน้าเทมเพลตในระบบงาน Marketplace
+  // ตรวจสอบพิกัด URL ให้สอดคล้องกับโครงสร้างระบบการจัดหมวดหมู่
   const templates = await getAllTemplates()
   const templateRoutes: MetadataRoute.Sitemap = templates.map((tpl) => ({
     url: `${baseUrl}/templates/${tpl.category.toLowerCase()}/${tpl.slug.toLowerCase()}`,
@@ -66,16 +66,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // 5. หน้าบทความคลังความรู้ (Knowledge Hub)
-  // Priority 0.6: เน้นดึง Traffic จากการค้นหาข้อมูลความรู้
+  // แก้ไขพิกัดการดึงวันที่ให้ตรงตามโครงสร้างระบบข้อมูลใหม่
   const posts = await getAllPosts()
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.date ? new Date(post.date) : new Date(),
+    lastModified: post.frontmatter.date 
+      ? new Date(post.frontmatter.date) 
+      : new Date(),
     changeFrequency: "monthly",
     priority: 0.6,
   }))
 
-  // 🚀 รวบรวมทุกเส้นทางเข้าด้วยกัน
+  // รวบรวมพิกัดเส้นทางทั้งหมดเข้าด้วยกัน
   const allRoutes = [
     ...staticRoutes,
     ...serviceRoutes,
@@ -84,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogRoutes,
   ]
 
-  // คัดกรอง URL ที่อาจซ้ำซ้อนเพื่อความคลีนของไฟล์ XML
+  // ตรวจสอบความซ้ำซ้อนของข้อมูลเพื่อความถูกต้องของไฟล์ XML ท้ายที่สุด
   return allRoutes.filter(
     (route, index, self) => index === self.findIndex((r) => r.url === route.url)
   )

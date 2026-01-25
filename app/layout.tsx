@@ -1,3 +1,5 @@
+/** @format */
+
 import React from "react"
 import type { Metadata, Viewport } from "next"
 import NextTopLoader from "nextjs-toploader"
@@ -10,21 +12,24 @@ import { FacebookChat } from "@/components/shared/FacebookChat"
 
 import "./globals.css"
 
-// Font Configuration: Optimized for Thai/Latin Rendering
-// Using 'optional' display strategy to prioritize LCP and prevent CLS
+/* * การตั้งค่าฟอนต์: เน้นความอ่านง่ายและสบายตา (Friendly Typography)
+ * Prompt: ใช้สำหรับส่วนหัว (Headings) เพื่อความชัดเจน
+ * Anuphan: ใช้สำหรับเนื้อหาหลัก (Body) เพื่อความทันสมัยและอ่านง่าย
+ */
+
 const fontPrompt = Prompt({
   subsets: ["thai", "latin"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "600", "700"],
   variable: "--font-prompt",
-  display: "optional",
+  display: "swap", // ใช้ swap เพื่อให้ข้อความแสดงทันที ลดอาการ CLS
   preload: true,
 })
 
 const fontAnuphan = Anuphan({
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
   variable: "--font-anuphan",
-  display: "optional",
+  display: "swap",
   preload: true,
 })
 
@@ -43,34 +48,36 @@ export default function RootLayout({ children }: RootLayoutProps) {
         "scroll-smooth focus:scroll-auto",
         fontPrompt.variable,
         fontAnuphan.variable,
-        "thai-font-smoothing"
+        "antialiased"
       )}
       suppressHydrationWarning
     >
       <body
         className={cn(
-          "font-anuphan min-h-screen bg-white text-slate-900 antialiased",
-          "selection:bg-emerald-500/20 selection:text-emerald-900",
-          "overflow-x-hidden"
+          "font-anuphan min-h-screen bg-white text-slate-800",
+          "selection:bg-emerald-100 selection:text-emerald-900",
+          "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* Navigation Progress Bar */}
+        {/* แถบแสดงสถานะการโหลด: ใช้สี Emerald เพื่อความผ่อนคลายและเป็นมิตร */}
         <NextTopLoader
           color="#10B981"
           height={3}
           showSpinner={false}
           easing="ease-in-out"
           speed={300}
-          shadow="0 0 10px #10B981,0 0 5px #10B981"
+          shadow="0 0 10px #10B981, 0 0 5px #10B981"
         />
 
-        {/* Third-party Integrations (Lazy Loaded) */}
+        {/* ระบบสนทนาอัตโนมัติ (เชื่อมต่อลูกค้า) */}
         <FacebookChat />
 
-        {/* Main Application Container */}
-        <div className="relative flex min-h-screen flex-col">{children}</div>
+        {/* โครงสร้างเนื้อหาหลัก */}
+        <div className="relative flex min-h-screen flex-col">
+          <main className="flex-1">{children}</main>
+        </div>
 
-        {/* Structured Data: Professional Service Schema */}
+        {/* ข้อมูลโครงสร้างชุดคำสั่ง (Structured Data) เพื่อเสริมความน่าเชื่อถือในสายตา AI */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -78,10 +85,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
               name: siteConfig.name,
+              alternateName: siteConfig.nameTH,
               image: siteConfig.ogImage,
               url: siteConfig.url,
               email: siteConfig.email,
               description: siteConfig.description,
+              founder: {
+                "@type": "Person",
+                name: siteConfig.expert,
+              },
+              areaServed: "TH",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "TH",

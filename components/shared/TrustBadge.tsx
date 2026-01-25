@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import { ShieldCheck, Zap, Search, BarChart3 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-// 🛡️ ข้อมูล Trust Badges ที่เน้นจุดแข็งของแบรนด์นายเอ็มซ่ามากส์
+// ข้อมูลกลุ่มสัญลักษณ์ความเชื่อมั่นที่เน้นจุดแข็งของระบบงาน
 const trustItems = [
   {
     icon: Zap,
@@ -45,9 +45,9 @@ interface TrustBadgeProps {
 }
 
 /**
- * 🏗️ TrustBadge Specialist Edition (v2026)
- * [FIXED]: เปลี่ยนเป็น Default Export เพื่อรองรับระบบนำเข้าของหน้า Contact และหน้าอื่นๆ
- * ปรับปรุง Visual Hierarchy ให้ดูพรีเมียมและเน้นความน่าเชื่อถือระดับอุตสาหกรรม
+ * TrustBadge - ส่วนแสดงเครื่องหมายรับรองความเชื่อมั่น
+ * ออกแบบมาเพื่อยกระดับความน่าเชื่อถือของแบรนด์ในระดับงานอุตสาหกรรม
+ * รองรับการแสดงผลทั้งแบบแถวแนวนอนและแบบตาราง (Grid)
  */
 const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
   return (
@@ -67,7 +67,7 @@ const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
           transition={{ delay: index * 0.1 }}
           className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white/50 p-3 pr-6 backdrop-blur-sm transition-all duration-500 hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/5"
         >
-          {/* 🧩 Icon Box: Interactive Effect */}
+          {/* ส่วนบรรจุไอคอนพร้อมเอฟเฟกต์ตอบสนองการใช้งาน */}
           <div
             className={cn(
               "flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:bg-[#0F172A] group-hover:text-white",
@@ -78,7 +78,7 @@ const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
             <item.icon className="h-5 w-5" />
           </div>
 
-          {/* 📄 Label Area: Sharp Typography */}
+          {/* ส่วนแสดงข้อความที่เน้นความชัดเจนของข้อมูล */}
           <div className="flex flex-col">
             <span className="font-prompt text-[11px] font-black tracking-wider text-[#0F172A] uppercase">
               {item.label}
@@ -90,14 +90,14 @@ const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
         </motion.div>
       ))}
 
-      {/* 🚀 Specialist Indicator (Floating Label) */}
+      {/* เส้นแบ่งเขตข้อมูลเชิงโครงสร้างระบบ */}
       <div
         className="mx-4 hidden h-10 w-px bg-slate-100 lg:block"
         aria-hidden="true"
       />
 
       <div className="flex items-center gap-4">
-        {/* User Avatars Placeholder (Industrial Partners) */}
+        {/* ส่วนแสดงสัญลักษณ์ผู้ใช้งานกลุ่มเป้าหมาย (Industrial Partners) */}
         <div className="flex -space-x-3">
           {[1, 2, 3].map((i) => (
             <div
@@ -111,7 +111,7 @@ const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
 
         <div className="flex flex-col">
           <span className="font-prompt text-[10px] font-black tracking-tighter text-emerald-500 uppercase italic">
-            Trusted by SME & Factories
+            Trusted by SME and Factories
           </span>
           <span className="font-anuphan text-[8px] font-bold tracking-widest text-slate-400 uppercase">
             Verified Specialist V. 2026
@@ -122,8 +122,4 @@ const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
   )
 }
 
-/**
- * ✅ หัวใจสำคัญ: ต้องใช้ Default Export เพื่อให้ตรงตามคำสั่งเรียกใช้ใน Page อื่นๆ
- * และป้องกันปัญหา Element type is invalid (undefined)
- */
 export default TrustBadge

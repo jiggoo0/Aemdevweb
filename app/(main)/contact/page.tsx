@@ -11,23 +11,24 @@ import {
   Zap,
 } from "lucide-react"
 
+// ข้อมูลตัวตนและรากฐานระบบ
 import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 import TrustBadge from "@/components/shared/TrustBadge"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
 /**
- * 🚀 Metadata — เน้นความเชื่อใจและการเข้าถึงผู้เชี่ยวชาญโดยตรง
+ * ข้อมูลส่วนหัว: เน้นความเชื่อใจและการเข้าถึงผู้เชี่ยวชาญโดยตรง
  */
 export const metadata: Metadata = {
-  title: `ติดต่อ ${siteConfig.expert} | ปรึกษาโปรเจกต์ Next.js & Technical SEO`,
+  title: `ติดต่อ ${siteConfig.expert} | ปรึกษาโปรเจกต์ Next.js และระบบงาน Technical SEO`,
   description:
-    "ทักมาคุยกับผมได้โดยตรงครับ ไม่ว่าจะเป็นเจ้าของกิจการหรือโรงงาน ผมพร้อมช่วยวางแผนสร้างเว็บไซต์ที่เน้นความเร็วและยอดขายจริง",
+    "ทักมาคุยกับพี่ได้โดยตรงครับ ไม่ว่าจะเป็นเจ้าของกิจการหรือกลุ่มอุตสาหกรรม พี่พร้อมช่วยวางแผนสร้างระบบเว็บไซต์ที่เน้นความเร็วและยอดขายจริง",
   alternates: { canonical: `${siteConfig.url}/contact` },
 }
 
 /**
- * 🧬 Contact Page — "Direct Access to the Specialist"
+ * หน้าติดต่อสอบถาม: การเข้าถึงผู้เชี่ยวชาญโดยตรงเพื่อผลลัพธ์ที่ดีที่สุด
  */
 export default async function ContactPage() {
   return (
@@ -37,15 +38,15 @@ export default async function ContactPage() {
         data={{
           name: `ติดต่อ ${siteConfig.expert} - AEMDEVWEB`,
           description:
-            "ช่องทางการติดต่อเพื่อปรึกษาการทำเว็บไซต์และ SEO สำหรับ SME และโรงงาน",
+            "ช่องทางการติดต่อเพื่อปรึกษาการทำเว็บไซต์และระบบงาน SEO สำหรับ SME และกลุ่มอุตสาหกรรม",
           url: `${siteConfig.url}/contact`,
         }}
       />
 
-      {/* 🌌 Background Infrastructure (Subtle Grid) */}
+      {/* ส่วนประกอบพื้นหลังเชิงเทคนิค */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]" />
 
-      {/* 🔝 1. Hero Header Section */}
+      {/* 1. ส่วนหัวเว็บไซต์: การสร้างตัวตนและความน่าเชื่อถือ */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl space-y-6 border-l-8 border-emerald-500 pl-8 md:pl-12">
@@ -60,29 +61,25 @@ export default async function ContactPage() {
               <span className="text-emerald-500">กับผม.</span>
             </h1>
             <p className="max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              จบปัญหาเรื่องคุยกับคนทำเว็บไม่รู้เรื่อง{" "}
-              <br className="hidden md:block" />
-              ทักมาปรึกษาผมได้โดยตรง เราจะวางโครงสร้างเว็บที่{" "}
-              <span className="text-slate-900 underline decoration-emerald-500/30 underline-offset-8">
-                ใช้งานได้จริง
-              </span>{" "}
-              และโตไปพร้อมกับธุรกิจคุณ
+              จบปัญหาเรื่องคุยกับคนทำเว็บไม่รู้เรื่อง ทักมาปรึกษาพี่ได้โดยตรง
+              เราจะวางโครงสร้างระบบที่ใช้งานได้จริง
+              และเติบโตไปพร้อมกับธุรกิจของน้องครับ
             </p>
           </div>
         </div>
       </section>
 
-      {/* 🏗️ 2. Main Interaction Area */}
+      {/* 2. พื้นที่การโต้ตอบหลัก */}
       <section className="container mx-auto px-6 py-20">
         <div className="grid gap-16 lg:grid-cols-12 lg:items-start">
-          {/* 📥 Left Side: High-Conversion Lead Form */}
-          <div className="shadow-3xl relative overflow-hidden rounded-[3.5rem] border border-slate-100 bg-white p-8 shadow-slate-200/40 md:p-16 lg:col-span-7">
+          {/* ฝั่งซ้าย: แบบฟอร์มติดต่อกลับประสิทธิภาพสูง */}
+          <div className="relative overflow-hidden rounded-[3.5rem] border border-slate-100 bg-white p-8 shadow-2xl shadow-slate-200/40 md:p-16 lg:col-span-7">
             <div className="pointer-events-none absolute top-0 right-0 p-8 opacity-[0.03]">
               <Zap size={200} className="text-emerald-500" />
             </div>
             <div className="relative z-10">
               <h2 className="font-prompt mb-10 text-3xl font-black tracking-tighter text-slate-900 uppercase italic">
-                ทิ้งข้อมูลให้ผม{" "}
+                ทิ้งข้อมูลให้พี่{" "}
                 <span className="text-emerald-500">ติดต่อกลับ</span>
               </h2>
 
@@ -97,10 +94,10 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* 📍 Right Side: Connection Hub */}
+          {/* ฝั่งขวา: ศูนย์รวมการเชื่อมต่อช่องทางต่างๆ */}
           <div className="space-y-12 lg:col-span-5 lg:pt-12">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-              {/* Email Card */}
+              {/* ข้อมูลอีเมล */}
               <div className="group rounded-[2.5rem] border border-slate-50 bg-slate-50/50 p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-white hover:shadow-2xl">
                 <div className="mb-4 flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-sm transition-colors group-hover:bg-emerald-500 group-hover:text-white">
@@ -115,7 +112,7 @@ export default async function ContactPage() {
                 </p>
               </div>
 
-              {/* Line Card */}
+              {/* ข้อมูล LINE */}
               <div className="group rounded-[2.5rem] border border-slate-50 bg-slate-50/50 p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-white hover:shadow-2xl">
                 <div className="mb-4 flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-sm transition-colors group-hover:bg-emerald-500 group-hover:text-white">
@@ -131,7 +128,7 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            {/* Business Operations Info */}
+            {/* ข้อมูลการดำเนินงานของธุรกิจ */}
             <div className="space-y-10 rounded-[3rem] border border-slate-100 bg-white p-10 shadow-sm">
               <div className="flex gap-6">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 font-black text-emerald-500 italic">
@@ -142,11 +139,11 @@ export default async function ContactPage() {
                     Service Area
                   </h3>
                   <p className="text-xl leading-none font-black text-slate-900">
-                    กรุงเทพมหานคร & ทั่วประเทศไทย
+                    กรุงเทพมหานคร และทั่วประเทศไทย
                   </p>
                   <p className="mt-3 text-sm leading-relaxed font-bold text-slate-400 italic">
-                    ทำงานแบบ High-Efficiency Online 100% งานเดินไว
-                    ไม่ต้องเสียเวลานัดหมายหลายรอบ
+                    ทำงานรูปแบบออนไลน์เต็มประสิทธิภาพ งานดำเนินได้รวดเร็ว
+                    โดยไม่ต้องเสียเวลานัดหมายหลายขั้นตอน
                   </p>
                 </div>
               </div>
@@ -169,7 +166,7 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* 🏁 Footer Hook */}
+      {/* ส่วนท้ายข้อมูลระบบ */}
       <footer className="mt-20 border-t border-slate-50 py-12 text-center">
         <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-300 uppercase italic">
           Reliability Build by {siteConfig.expert} v2026 — Bangkok Hub

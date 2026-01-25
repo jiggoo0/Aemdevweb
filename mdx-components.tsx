@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 
-// 🛠️ Icons Registry (Lucide React)
+// ชุดคำสั่งไอคอนมาตรฐานสำหรับการระบุพิกัดงานเทคนิค
 import {
   ArrowRight,
   Sparkles,
@@ -29,20 +29,21 @@ import {
   ClipboardList,
 } from "lucide-react"
 
-// 🧩 Specialist Logic Components Integration
+// การเชื่อมต่อคอมโพเนนต์จัดการระบบงานและข้อมูลสถิติ
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
 
 /**
- * 🏗️ MDX Components Specialist Edition v2026
- * ลงทะเบียนคอมโพเนนต์และไอคอนมาตรฐานเพื่อให้เรียกใช้ใน .mdx ได้ทันทีโดยไม่เกิด ReferenceError
+ * ระบบจัดการคอมโพเนนต์สำหรับเนื้อหา (MDX Components)
+ * ลงทะเบียนคอมโพเนนต์และไอคอนเพื่อให้เรียกใช้ในไฟล์เนื้อหาได้ทันที
+ * ออกแบบมาเพื่อลดขั้นตอนการเขียนโค้ดซ้ำซ้อนและรักษามาตรฐานการแสดงผลเชิงระบบ
  */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
 
-    // 🔗 1. Core Logic & Icons Registry
+    // 1. การลงทะเบียนคอมโพเนนต์และไอคอนประจำระบบงาน (Registry)
     ImpactStats,
     SpeedDemon,
     WorkProcess,
@@ -65,13 +66,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Star,
     ClipboardList,
 
-    // 🖼️ 2. Optimized Specialist Image (Industrial Standard)
+    // 2. ระบบจัดการรูปภาพประสิทธิภาพสูง: เน้นความรวดเร็วและความสวยงามเชิงอุตสาหกรรม
     img: (props) => (
       <span className="group relative my-16 block w-full overflow-hidden rounded-[2.5rem] border border-slate-200 bg-slate-50 shadow-2xl">
         <span className="relative block aspect-video w-full overflow-hidden">
           <Image
-            src={props.src || ""}
-            alt={props.alt || "AEM DEV WEB Specialist Image"}
+            src={props.src || "/images/og-image.png"}
+            alt={props.alt || "AEMDEVWEB Specialist Image"}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 1200px"
@@ -85,7 +86,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </span>
     ),
 
-    // 🔗 3. Technical Logic Links
+    // 3. ระบบจัดการลิงก์: แยกพิกัดลิงก์ภายในและลิงก์ภายนอกเพื่อความปลอดภัย
     a: ({ href, children }) => {
       const isInternal = href?.startsWith("/") || href?.startsWith("#")
       const baseClass =
@@ -111,10 +112,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
 
-    // 📣 4. Expert Insights Block
+    // 4. ส่วนแสดงมุมมองจากผู้เชี่ยวชาญ (Expert Insights)
     blockquote: ({ children }) => (
       <div className="group relative my-12 overflow-hidden rounded-r-[2.5rem] border-l-4 border-emerald-500 bg-emerald-500/[0.03] p-8 text-slate-600 md:p-10">
-        <div className="pointer-events-none absolute -top-4 -right-4 opacity-5 transition-opacity group-hover:opacity-10">
+        <div className="pointer-events-none absolute -top-4 -right-4 opacity-5 transition-opacity group-hover:opacity-10" aria-hidden="true">
           <Zap className="h-24 w-24 text-emerald-500" />
         </div>
         <div className="font-anuphan relative z-10 text-xl leading-relaxed font-medium italic">
@@ -123,18 +124,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // 🚀 5. Specialist Marketing Blocks
+    // 5. ส่วนจัดการการปิดการขาย (Conversion Blocks)
     CallToAction: ({
       title,
       url,
-      label = "เริ่มโปรเจกต์ของคุณ",
+      label = "เริ่มโครงการของคุณ",
     }: {
       title: string
       url: string
       label?: string
     }) => (
       <div className="relative my-16 overflow-hidden rounded-[3rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-10 text-center md:p-16">
-        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-40" />
+        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-40" aria-hidden="true" />
         <h3 className="font-prompt relative z-10 mb-8 text-3xl font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl">
           {title}
         </h3>
@@ -163,7 +164,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
-    // ✒️ 6. Industrial Typography System
+    // 6. ระบบจัดการตัวอักษร: เน้นรากฐานดิจิทัลที่อ่านง่ายและชัดเจน
     h1: ({ children }) => (
       <h1 className="font-prompt mt-24 mb-10 text-5xl leading-none font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl">
         {children}
@@ -181,15 +182,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h3>
     ),
     p: ({ children }) => (
-      <p className="font-anuphan mb-8 text-xl leading-[1.9] font-medium text-slate-600">
+      <p className="font-anuphan mb-8 text-xl leading-[1.9] font-bold text-slate-600">
         {children}
       </p>
     ),
     ul: ({ children }) => <ul className="mb-10 ml-2 space-y-6">{children}</ul>,
     li: ({ children }) => (
       <li className="flex items-start gap-4">
-        <div className="mt-3 h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-        <span className="font-anuphan text-xl font-medium text-slate-600">
+        <div className="mt-3 h-2 w-2 shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+        <span className="font-anuphan text-xl font-bold text-slate-600">
           {children}
         </span>
       </li>

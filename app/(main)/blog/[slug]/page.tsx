@@ -7,17 +7,16 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
-// 🛠️ Icons Essentials
+// ชุดไอคอนมาตรฐานสำหรับงานเทคนิคระดับ Specialist
 import {
   ArrowLeft,
   Calendar,
   Share2,
   Sparkles,
-  MessageCircle,
   ShieldCheck,
 } from "lucide-react"
 
-// 📦 Specialist Data & Config
+// ข้อมูลและการตั้งค่าระบบงานหลัก
 import { getAllPosts, getPostBySlug } from "@/lib/blog"
 import { siteConfig } from "@/constants/site-config"
 import { useMDXComponents } from "@/mdx-components"
@@ -26,8 +25,8 @@ import { Badge } from "@/components/ui/badge"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * 🎨 Enhanced MDX Components Mapping
- * ปรับจูนให้หน้าอ่านบทความมีความ "พรีเมียม" และแก้ปัญหา TypeScript Error
+ * ส่วนประกอบเฉพาะสำหรับเนื้อหาบทความ (Custom MDX Components)
+ * ปรับจูนเพื่อให้หน้าบทความรักษามาตรฐานการแสดงผลและความสวยงามเชิงระบบ
  */
 const mdxComponents = {
   ...useMDXComponents({}),
@@ -35,11 +34,10 @@ const mdxComponents = {
     <figure className="my-16 space-y-4 text-center">
       <div className="relative aspect-video w-full overflow-hidden rounded-[3rem] border border-slate-100 shadow-2xl">
         <Image
-          // ✅ [FIXED]: ทำการ Cast Type เป็น string เพื่อป้องกัน TS2322 (Type 'Blob' mismatch)
           src={(props.src as string) || "/images/og-image.png"}
           fill
           className="object-cover"
-          alt={props.alt || "AEMDEVWEB Insight"}
+          alt={props.alt || "รูปภาพประกอบเนื้อหาบทความ"}
           loading="lazy"
         />
       </div>
@@ -84,7 +82,7 @@ const mdxComponents = {
     url?: string
   }) => (
     <div className="my-24 rounded-[3.5rem] border-2 border-dashed border-emerald-500/30 bg-emerald-50/10 p-12 text-center shadow-2xl shadow-emerald-500/5 transition-transform duration-500 hover:scale-[1.01] md:p-20">
-      <Badge className="mb-6 bg-emerald-500 font-black text-slate-950 italic">
+      <Badge className="mb-6 border-none bg-emerald-500 font-black text-slate-950 italic">
         SPECIALIST OFFER
       </Badge>
       <h3 className="font-prompt mb-6 text-3xl leading-tight font-black text-slate-900 uppercase italic md:text-5xl">
@@ -97,7 +95,7 @@ const mdxComponents = {
         asChild
         className="font-prompt h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-emerald-500 hover:text-slate-950"
       >
-        <Link href={url || "/contact"}>ปรึกษานายเอ็มโดยตรง</Link>
+        <Link href={url || "/contact"}>ปรึกษาผู้เชี่ยวชาญโดยตรง</Link>
       </Button>
     </div>
   ),
@@ -108,7 +106,7 @@ interface Props {
 }
 
 /**
- * 🛠️ Static Generation Logic
+ * ระบบจัดการพิกัดคงที่สำหรับการสร้างหน้าเว็บล่วงหน้า (Static Params)
  */
 export async function generateStaticParams() {
   const posts = await getAllPosts()
@@ -116,49 +114,56 @@ export async function generateStaticParams() {
 }
 
 /**
- * 🔍 Metadata Specialist Strategy
+ * แผนงานจัดการข้อมูลส่วนหัวเพื่อระบบค้นหา (SEO Metadata)
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
   if (!post) return { title: `ไม่พบบทความ | ${siteConfig.shortName}` }
+  
+  const fm = post.frontmatter
   return {
-    title: `${post.title} | Knowledge Hub`,
-    description: post.excerpt,
+    title: `${fm.title} | Knowledge Hub`,
+    description: fm.excerpt || fm.description,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: fm.title,
+      description: fm.excerpt || fm.description,
       type: "article",
       url: `${siteConfig.url}/blog/${slug}`,
-      images: [{ url: post.thumbnail || siteConfig.ogImage }],
+      images: [{ url: fm.thumbnail || siteConfig.ogImage }],
       authors: [siteConfig.expert],
     },
   }
 }
 
 /**
- * 🚀 Blog Post Main Engine
+ * ระบบประมวลผลข้อมูลบทความ (Main Page Engine)
  */
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
   if (!post) return notFound()
 
-  const formattedDate = new Date(post.date).toLocaleDateString("th-TH", {
+  const fm = post.frontmatter
+  const formattedDate = new Date(fm.date).toLocaleDateString("th-TH", {
     year: "numeric",
     month: "long",
     day: "numeric",
   })
+
+  // ระบบรักษาความปลอดภัยข้อมูลรูปภาพและพิกัดการแสดงผล
+  const safeTitle = fm.title && fm.title.trim() !== "" ? fm.title : "รูปภาพบทความ"
+  const safeImage = fm.thumbnail && fm.thumbnail.trim() !== "" ? fm.thumbnail : "/images/og-image.png"
 
   return (
     <article className="relative min-h-screen bg-white pt-32 pb-24 antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Article"
         data={{
-          headline: post.title,
-          description: post.excerpt,
-          image: post.thumbnail,
-          datePublished: post.date,
+          headline: safeTitle,
+          description: fm.excerpt || fm.description,
+          image: safeImage,
+          datePublished: fm.date,
           author: {
             "@type": "Person",
             name: siteConfig.expert,
@@ -167,8 +172,8 @@ export default async function BlogPostPage({ params }: Props) {
         }}
       />
 
-      {/* 🌌 Subtle Background Infrastructure */}
-      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+      {/* ชั้นเลเยอร์พื้นหลังเชิงระบบ */}
+      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" aria-hidden="true" />
 
       <div className="container mx-auto max-w-4xl px-6">
         <nav className="mb-16">
@@ -183,7 +188,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         <header className="mb-20 space-y-10">
           <div className="flex flex-wrap items-center gap-4">
-            {(post.tags || []).map((tag) => (
+            {(fm.tags || []).map((tag) => (
               <Badge
                 key={tag}
                 className="rounded-full border-slate-200 bg-slate-50 px-5 py-1.5 text-[10px] font-black tracking-widest text-slate-500 uppercase"
@@ -197,30 +202,30 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <h1 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
-            {post.title}
+            {fm.title}
           </h1>
 
           <p className="font-anuphan border-l-4 border-slate-100 pl-6 text-2xl leading-relaxed font-bold text-slate-400 italic">
-            {post.excerpt}
+            {fm.excerpt || fm.description}
           </p>
         </header>
 
         <div className="relative mb-24 aspect-[21/10] w-full overflow-hidden rounded-[4rem] shadow-2xl shadow-slate-200/50">
           <Image
-            src={post.thumbnail || "/images/og-image.png"}
-            alt={post.title}
+            src={safeImage}
+            alt={safeTitle}
             fill
             className="object-cover"
             priority
           />
         </div>
 
-        {/* ✍️ Core Content Area (MDX) */}
+        {/* ส่วนประมวลผลเนื้อหาจากระบบงานจัดการข้อมูลบทความ */}
         <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-p:font-anuphan prose-p:leading-[1.9] prose-strong:text-slate-950 prose-a:text-emerald-600 max-w-none">
-          <MDXRemote source={post.content} components={mdxComponents} />
+          <MDXRemote source={String(post.content)} components={mdxComponents} />
         </div>
 
-        {/* 👤 Author Section */}
+        {/* ชั้นข้อมูลผู้จัดทำระบบงานบทความ */}
         <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3.5rem] border border-slate-100 bg-slate-50/80 p-12 md:flex-row">
           <div className="flex items-center gap-8">
             <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-xl">
@@ -233,7 +238,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {siteConfig.expert}
               </div>
               <div className="font-anuphan text-xs font-black tracking-[0.2em] text-emerald-600 uppercase">
-                Technical SEO Specialist
+                Technical Expert
               </div>
             </div>
           </div>
@@ -245,9 +250,9 @@ export default async function BlogPostPage({ params }: Props) {
           </Button>
         </div>
 
-        {/* 🎯 High-Conversion CTA Section */}
+        {/* ส่วนปิดการขายและสร้างความเชื่อมั่นเชิงระบบ */}
         <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white md:p-24">
-          <div className="absolute top-0 right-0 p-12 opacity-5">
+          <div className="absolute top-0 right-0 p-12 opacity-5" aria-hidden="true">
             <ShieldCheck size={250} />
           </div>
           <Sparkles className="mx-auto mb-10 h-16 w-16 animate-pulse text-emerald-500" />
@@ -259,8 +264,8 @@ export default async function BlogPostPage({ params }: Props) {
             up?
           </h3>
           <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
-            หากคุณต้องการระบบที่ "นิ่ง" และ "แรง" แบบสถาปัตยกรรมชิ้นนี้
-            ทักมาคุยรายละเอียดโปรเจกต์กับผมโดยตรงได้ทันทีครับ
+            หากน้องต้องการระบบงานที่นิ่งและแรงแบบรากฐานดิจิทัลชิ้นนี้ 
+            ทักมาคุยรายละเอียดโครงการกับพี่โดยตรงได้ทันทีครับ
           </p>
           <Button
             asChild
@@ -270,8 +275,7 @@ export default async function BlogPostPage({ params }: Props) {
               href="/contact"
               className="font-prompt text-lg font-black tracking-widest uppercase italic"
             >
-              <MessageCircle className="mr-3 h-6 w-6 fill-current" /> Let's Talk
-              Project
+              Let's Talk Project
             </Link>
           </Button>
         </div>

@@ -6,7 +6,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 
-// 📂 Icon & UI Assets
+// ข้อมูลไอคอนและส่วนประกอบการแสดงผล
 import {
   ArrowLeft,
   Calendar,
@@ -16,11 +16,11 @@ import {
   Fingerprint,
   Cpu,
   CheckCircle2,
-  CheckCircle, // ✅ เพิ่ม
-  Settings, // ✅ เพิ่ม
-  Factory, // ✅ เพิ่ม (สำหรับ Industrial Case)
-  LayoutDashboard, // ✅ เพิ่ม
-  Clock, // ✅ เพิ่ม
+  CheckCircle,
+  Settings,
+  Factory,
+  LayoutDashboard,
+  Clock,
   Lock,
   Zap,
   BarChart3,
@@ -29,26 +29,26 @@ import {
   AlertTriangle,
 } from "lucide-react"
 
-// 📦 MDX Engine
+// ระบบจัดการเนื้อหา MDX
 import { MDXRemote } from "next-mdx-remote/rsc"
 
-// 📂 Logic & Config Architecture
+// ชุดข้อมูลและโครงสร้างระบบหลัก
 import { getCaseStudyBySlug, getCaseStudySlugs } from "@/lib/case-studies"
 import { useMDXComponents } from "@/mdx-components"
 import { siteConfig } from "@/constants/site-config"
 
-// 🧩 Specialist Components
+// ส่วนประกอบคอมโพเนนต์เฉพาะทาง
 import { JsonLd } from "@/components/seo/JsonLd"
 import CTASection from "@/components/landing/CTASection"
 
-// ⚡ Sales Engine Components
+// ส่วนประกอบระบบงานเพื่อการปิดการขาย
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
 /* -------------------------------------------------------------------------- */
-/* 🧩 Types & Interfaces                                                       */
+/* นิยามประเภทข้อมูล (Type Definitions)                                         */
 /* -------------------------------------------------------------------------- */
 
 interface CaseStudyPageProps {
@@ -56,7 +56,7 @@ interface CaseStudyPageProps {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🧬 Server Side Logic                                                       */
+/* ระบบจัดการข้อมูลฝั่งเซิร์ฟเวอร์ (Server Side Logic)                             */
 /* -------------------------------------------------------------------------- */
 
 export async function generateStaticParams() {
@@ -89,7 +89,7 @@ export async function generateMetadata({
 }
 
 /* -------------------------------------------------------------------------- */
-/* 🏗️ Case Study Detail Page                                                  */
+/* หน้าแสดงรายละเอียดผลงาน (Case Study Detail Page)                             */
 /* -------------------------------------------------------------------------- */
 
 export default async function CaseStudyDetailPage({
@@ -101,18 +101,18 @@ export default async function CaseStudyDetailPage({
   if (!caseStudy) notFound()
 
   /**
-   * ✅ [FIXED]: ลงทะเบียนคอมโพเนนต์ทั้งหมดที่เรียกใช้ในไฟล์ .mdx
-   * แก้ไข Error: Expected component X to be defined
+   * การลงทะเบียนคอมโพเนนต์สำหรับใช้งานในเนื้อหา MDX
+   * ป้องกันปัญหาคอมโพเนนต์ไม่ถูกนิยาม (ReferenceError) ในขณะเรนเดอร์
    */
   const mdxComponents = {
     ...useMDXComponents({}),
-    // 📊 Custom Components
+    // คอมโพเนนต์จัดการระบบงาน
     ImpactStats,
     SpeedDemon,
     WorkProcess,
     LineLeadForm,
-    CallToAction: CTASection, // ลงทะเบียนเผื่อเรียกใช้ในชื่ออื่น
-    // 💎 Lucide Icons (Mapping ทุกตัวที่ใช้ใน MDX Content)
+    CallToAction: CTASection,
+    // ชุดไอคอนสำหรับการแสดงผลในเนื้อหา
     CheckCircle,
     Settings,
     Factory,
@@ -144,14 +144,14 @@ export default async function CaseStudyDetailPage({
         }}
       />
 
-      {/* 🔝 1. Header Section */}
+      {/* 1. ส่วนหัวของหน้าและข้อมูลเบื้องต้น */}
       <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="container mx-auto px-6">
           <Link
             href="/case-studies"
             className="group mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
           >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-2" />{" "}
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-2" />
             Back to Success Stories
           </Link>
 
@@ -179,9 +179,9 @@ export default async function CaseStudyDetailPage({
         </div>
       </header>
 
-      {/* 🖼️ 2. Featured Image */}
+      {/* 2. ส่วนแสดงรูปภาพหลักของโครงการ */}
       <div className="container mx-auto mb-24 px-6">
-        <div className="shadow-3xl relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50">
+        <div className="relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
             src={caseStudy.frontmatter.thumbnail}
             alt={caseStudy.frontmatter.title}
@@ -193,28 +193,29 @@ export default async function CaseStudyDetailPage({
         </div>
       </div>
 
-      {/* 📝 3. Core Content (MDX) */}
+      {/* 3. ส่วนเนื้อหาหลักเชิงเทคนิค (MDX Content) */}
       <main className="container mx-auto px-6">
         <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-950 prose-headings:uppercase prose-headings:italic prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-32 max-w-4xl">
           <MDXRemote source={caseStudy.content} components={mdxComponents} />
         </div>
       </main>
 
-      {/* 📈 4. Result Hook */}
+      {/* 4. ส่วนสรุปผลลัพธ์และความสำเร็จ */}
       <div className="border-y border-slate-50 bg-slate-50/50 py-24">
         <div className="container mx-auto px-6">
           <ImpactStats />
         </div>
       </div>
 
-      {/* 🚀 5. CTA Section */}
+      {/* 5. ส่วนกระตุ้นการตัดสินใจ (CTA) */}
       <div className="mt-32">
         <CTASection />
       </div>
 
+      {/* ส่วนท้ายข้อมูลระบบ */}
       <footer className="mt-24 text-center opacity-30 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-Security Standards by {siteConfig.expert} v2026
+          High-Security Methods by {siteConfig.expert} v2026
         </p>
       </footer>
     </article>

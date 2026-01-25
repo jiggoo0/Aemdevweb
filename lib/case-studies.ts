@@ -3,133 +3,134 @@
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { CaseStudyItem } from "@/types"
+
+/* -------------------------------------------------------------------------- */
+/* การกำหนดพิกัดและเส้นทางระบบ (System Path Configuration)                           */
+/* -------------------------------------------------------------------------- */
+
+const CASE_STUDIES_DIR = path.join(process.cwd(), "content/case-studies")
+
+/* -------------------------------------------------------------------------- */
+/* ชุดคำสั่งจัดการข้อมูลหลัก (Core Management Functions)                           */
+/* -------------------------------------------------------------------------- */
 
 /**
- * 🧬 Case Study Interfaces
- * กำหนดโครงสร้างข้อมูลให้ชัดเจนตามมาตรฐาน Brand Guardian Specialist
- */
-export interface CaseStudyFrontmatter {
-  title: string // หัวข้อผลงาน (ควรมี Keyword)
-  description: string // คำอธิบายสำหรับการ์ด
-  excerpt: string // บทคัดย่อสำหรับ SEO Meta
-  date: string // วันที่ (YYYY-MM-DD)
-  author: string // ผู้รับผิดชอบ
-  thumbnail: string // รูปหน้าปก .webp
-  service: string // ชื่อบริการ (e.g., Industrial E-Catalog)
-  category?: string // หมวดหมู่ธุรกิจ (e.g., Manufacturing)
-  result?: string // ผลลัพธ์ (e.g., PageSpeed 100)
-}
-
-export interface CaseStudy {
-  slug: string
-  frontmatter: CaseStudyFrontmatter
-  content: string
-}
-
-/**
- * 🛠️ Configuration: Path ไปยังคลังข้อมูลผลงาน
- */
-const CASE_STUDIES_PATH = path.join(process.cwd(), "content/case-studies")
-
-/**
- * 📂 ดึงรายชื่อ Slug ทั้งหมด (Get All Slugs)
- * รองรับการเปลี่ยนชื่อไฟล์จากรูปแบบเดิม (case-studies-1) เป็นรูปแบบ SEO (sme-performance)
+ * ดึงรายการ Slug ทั้งหมดจากระบบไฟล์
+ * วัตถุประสงค์: ใช้สำหรับฟังก์ชัน generateStaticParams ในหน้ารายละเอียดเพื่อทำ Static Site
  */
 export function getCaseStudySlugs(): string[] {
-  if (!fs.existsSync(CASE_STUDIES_PATH)) {
-    console.warn("⚠️ [Case Studies] Directory not found:", CASE_STUDIES_PATH)
-    return []
-  }
-
-  try {
-    return fs
-      .readdirSync(CASE_STUDIES_PATH)
-      .filter((file) => /\.mdx?$/.test(file)) // รองรับ .md และ .mdx
-      .map((file) => file.replace(/\.mdx?$/, ""))
-  } catch (error) {
-    console.error("❌ [Case Studies] Error reading directory:", error)
-    return []
-  }
+  if (!fs.existsSync(CASE_STUDIES_DIR)) return []
+  return fs
+    .readdirSync(CASE_STUDIES_DIR)
+    .filter((file) => /\.mdx?$/.test(file))
+    .map((file) => file.replace(/\.mdx?$/, ""))
 }
 
 /**
- * 📄 ดึงข้อมูลผลงานรายชิ้น (Single Case Study)
- * [FIXED]: เพิ่มระบบตรวจสอบเพื่อรองรับ Dynamic Routes ใน Next.js 16
+ * ดึงข้อมูลผลงานทั้งหมดพร้อมจัดเรียงลำดับ
+ * วัตถุประสงค์: ใช้แสดงในหน้าสารบัญผลงาน และส่งข้อมูลไปยังคอมโพเนนต์ Card
+ */
+export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
+  if (!fs.existsSync(CASE_STUDIES_DIR)) return []
+
+  const files = fs.readdirSync(CASE_STUDIES_DIR)
+
+  const allCases = files
+    .filter((file) => /\.mdx?$/.test(file))
+    .map((file) => {
+      const filePath = path.join(CASE_STUDIES_DIR, file)
+      const fileContent = fs.readFileSync(filePath, "utf8")
+      const { data, content } = matter(fileContent)
+      const slug = file.replace(/\.mdx?$/, "")
+
+      // จัดกลุ่มข้อมูลเข้า frontmatter ให้ตรงตามนิยามโครงสร้างระบบ (Type Definition)
+      return {
+        id: slug,
+        slug: slug,
+        frontmatter: {
+          title: data.title || "Untitled Project",
+          client: data.client || "",
+          industry: data.industry || data.category || "General",
+          category: data.category || "",
+          excerpt: data.description || data.excerpt || "",
+          thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
+          date: data.date || "",
+          results: data.results || [],
+          keyFeatures: data.keyFeatures || [],
+          service: data.service || "",
+          isFeatured: data.isFeatured || false,
+        },
+        content: content,
+      } as CaseStudyItem
+    })
+    // จัดลำดับข้อมูลโดยใช้วันที่ล่าสุดขึ้นก่อนเสมอ
+    .sort((a, b) => {
+      const dateA = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0
+      const dateB = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0
+      return dateB - dateA
+    })
+
+  return allCases
+}
+
+/**
+ * ดึงข้อมูลผลงานล่าสุดตามจำนวนที่ต้องการ
+ * วัตถุประสงค์: แสดงผลงานเด่นในหน้าหลัก (Home Page)
+ */
+export async function getLatestCaseStudies(
+  limit: number = 3
+): Promise<CaseStudyItem[]> {
+  const allCases = await getAllCaseStudies()
+  return allCases.slice(0, limit)
+}
+
+/**
+ * ดึงข้อมูลผลงานรายชิ้นแบบเจาะจงด้วยชื่อ Slug
+ * วัตถุประสงค์: สำหรับหน้ารายละเอียดผลงาน และการทำ SEO Metadata รายหน้า
  */
 export async function getCaseStudyBySlug(
   slug: string
-): Promise<CaseStudy | null> {
-  // 🛡️ Guard Clause: ป้องกัน slug เป็นค่าว่างหรือรูปแบบไม่ถูกต้อง
-  if (!slug || typeof slug !== "string") {
-    return null
-  }
+): Promise<CaseStudyItem | null> {
+  if (!slug) return null
+
+  const realSlug = slug.replace(/\.mdx?$/, "")
+  const mdxPath = path.join(CASE_STUDIES_DIR, `${realSlug}.mdx`)
+  const mdPath = path.join(CASE_STUDIES_DIR, `${realSlug}.md`)
+
+  // ตรวจสอบพิกัดไฟล์ทั้งนามสกุล .mdx และ .md
+  const actualPath = fs.existsSync(mdxPath)
+    ? mdxPath
+    : fs.existsSync(mdPath)
+      ? mdPath
+      : null
+
+  if (!actualPath) return null
 
   try {
-    const realSlug = slug.replace(/\.mdx?$/, "")
-    const filePath = path.join(CASE_STUDIES_PATH, `${realSlug}.mdx`)
-
-    if (!fs.existsSync(filePath)) {
-      // 🕵️ หากไม่พบไฟล์ ให้ลองหาไฟล์นามสกุล .md สำรอง
-      const mdFilePath = path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
-      if (!fs.existsSync(mdFilePath)) return null
-    }
-
-    const targetPath = fs.existsSync(filePath)
-      ? filePath
-      : path.join(CASE_STUDIES_PATH, `${realSlug}.md`)
-    const fileContent = fs.readFileSync(targetPath, "utf8")
+    const fileContent = fs.readFileSync(actualPath, "utf8")
     const { data, content } = matter(fileContent)
 
     return {
+      id: realSlug,
       slug: realSlug,
-      frontmatter: data as CaseStudyFrontmatter,
+      frontmatter: {
+        title: data.title || "Untitled Project",
+        client: data.client || "",
+        industry: data.industry || data.category || "General",
+        category: data.category || "",
+        excerpt: data.description || data.excerpt || "",
+        thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
+        date: data.date || "",
+        results: data.results || [],
+        keyFeatures: data.keyFeatures || [],
+        service: data.service || "",
+        isFeatured: data.isFeatured || false,
+      },
       content: content,
-    }
+    } as CaseStudyItem
   } catch (error) {
-    console.error(`❌ [Case Studies] Error processing slug "${slug}":`, error)
+    console.error(`Error loading case study data for: ${realSlug}`, error)
     return null
   }
-}
-
-/**
- * 🗂️ ดึงข้อมูล Case Studies ทั้งหมด (Archive List)
- * ปรับจูนเพื่อประสิทธิภาพความเร็วสูงสุดในหน้า Listing
- */
-export async function getAllCaseStudies(): Promise<
-  Omit<CaseStudy, "content">[]
-> {
-  const slugs = getCaseStudySlugs()
-
-  const caseStudies = slugs
-    .map((slug) => {
-      try {
-        const filePath = path.join(CASE_STUDIES_PATH, `${slug}.mdx`)
-        // เช็คกรณีเป็นไฟล์ .md
-        const actualPath = fs.existsSync(filePath)
-          ? filePath
-          : path.join(CASE_STUDIES_PATH, `${slug}.md`)
-
-        if (!fs.existsSync(actualPath)) return null
-
-        const fileContent = fs.readFileSync(actualPath, "utf8")
-        const { data } = matter(fileContent)
-
-        return {
-          slug,
-          frontmatter: data as CaseStudyFrontmatter,
-        }
-      } catch (error) {
-        console.error(`❌ [Case Studies] Error loading ${slug}:`, error)
-        return null
-      }
-    })
-    .filter((item): item is Omit<CaseStudy, "content"> => item !== null)
-    // 📅 Sort: Fresh First (เรียงตามวันที่ล่าสุดเสมอ)
-    .sort(
-      (a, b) =>
-        new Date(b.frontmatter.date).getTime() -
-        new Date(a.frontmatter.date).getTime()
-    )
-
-  return caseStudies
 }

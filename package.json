@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "type-check": "tsc --noEmit",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build --webpack"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

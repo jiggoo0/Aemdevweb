@@ -8,23 +8,23 @@ import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
 import { services } from "@/constants/services-data"
 
-// 📊 [LOGIC]: กรองแพ็กเกจหลักจากฐานข้อมูล Services
+// ข้อมูลแพ็กเกจหลักที่ดึงมาจากฐานข้อมูลบริการ (Services Database)
 const BASE_PACKAGES = services
   .filter((s) =>
     ["Starter", "SME", "Corporate", "Industrial"].includes(s.category)
   )
   .map((s) => ({
     id: s.id,
-    name: s.title.split(":")[0], // ตัดชื่อสั้นๆ ก่อนเครื่องหมาย :
+    name: s.title.split(":")[0],
     price: s.priceValue,
     description: s.description,
   }))
 
-// ➕ [LOGIC]: ส่วนเสริมสำหรับการทำ Upselling
+// รายการส่วนเสริมสำหรับการเพิ่มขีดความสามารถ (Add-ons)
 const ADD_ONS = [
   {
     id: "seo-audit",
-    name: "Technical SEO Audit (ปรับโครงสร้างเว็บเดิม)",
+    name: "Technical SEO Audit (ปรับโครงสร้างระบบการค้นหา)",
     price: 4900,
   },
   { id: "multi-lang", name: "ระบบ 2 ภาษา (ไทย-อังกฤษ)", price: 7500 },
@@ -33,15 +33,19 @@ const ADD_ONS = [
     name: "ระบบบทความ MDX (เพิ่มความน่าเชื่อถือ)",
     price: 5000,
   },
-  { id: "maintenance", name: "บริการดูแลระบบ & Security 1 ปี", price: 8900 },
+  {
+    id: "maintenance",
+    name: "บริการดูแลระบบและระบบความปลอดภัย 1 ปี",
+    price: 8900,
+  },
 ]
 
 /**
- * 🏗️ PriceEstimator — ระบบประเมินงบประมาณอัจฉริยะ (AEM 2026 Edition)
- * [FIXED]: ลบ Unused Variable 'Plus' ออกเพื่อให้ผ่านการ Linting
+ * PriceEstimator - ระบบประเมินงบประมาณเบื้องต้น (AEM 2026 Edition)
+ * จัดการตรรกะการคำนวณและเตรียมข้อมูลเพื่อส่งต่อไปยังช่องทางติดต่อ
  */
 const PriceEstimator = () => {
-  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[1]) // Default: SME
+  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[1]) // ตั้งต้นที่ SME
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
 
   const totalPrice = useMemo(() => {
@@ -57,13 +61,13 @@ const PriceEstimator = () => {
     )
   }
 
-  // 🛠️ [STRATEGY]: สร้าง Dynamic Message สำหรับปิดการขายผ่าน LINE
+  // ระบบสร้างข้อความอัตโนมัติสำหรับปิดการขายผ่านช่องทาง LINE
   const generateLineMessage = () => {
     const addonNames = selectedAddOns
       .map((id) => ADD_ONS.find((a) => a.id === id)?.name)
       .join(", ")
 
-    const text = `สวัสดีครับคุณเอ็ม ผมสนใจทำเว็บไซต์แบบประเมินราคาเองครับ\n\n📌 แพ็กเกจหลัก: ${selectedBase.name}\n➕ ส่วนเสริม: ${addonNames || "ไม่มี"}\n💰 งบประมาณประเมิน: ฿${totalPrice.toLocaleString()}\n\nช่วยให้คำปรึกษาเพิ่มเติมหน่อยครับ`
+    const text = `สวัสดีครับคุณเอ็ม ผมสนใจทำเว็บไซต์แบบประเมินราคาเองครับ\n\nพิกัดแพ็กเกจ: ${selectedBase.name}\nส่วนเสริม: ${addonNames || "ไม่มี"}\nงบประมาณประเมิน: ฿${totalPrice.toLocaleString()}\n\nช่วยให้คำปรึกษาเพิ่มเติมหน่อยครับ`
 
     return `${siteConfig.links.line}?text=${encodeURIComponent(text)}`
   }
@@ -72,7 +76,7 @@ const PriceEstimator = () => {
     <section className="bg-slate-50 py-24 selection:bg-emerald-500/10">
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-6xl">
-          {/* Header Specialist Branding */}
+          {/* ส่วนหัวแสดงเป้าหมายของระบบงาน */}
           <div className="mb-16 text-center">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-1.5 text-[10px] font-black tracking-widest text-emerald-700 uppercase">
               <Calculator size={14} /> Price Estimator Specialist
@@ -87,9 +91,9 @@ const PriceEstimator = () => {
           </div>
 
           <div className="grid items-start gap-12 lg:grid-cols-12">
-            {/* 1️⃣ Selection Architecture */}
+            {/* 1. โครงสร้างส่วนการเลือก (Selection Structure) */}
             <div className="space-y-12 lg:col-span-7">
-              {/* Step 1: Base Selection */}
+              {/* ขั้นตอนที่ 1: เลือกแพ็กเกจหลัก */}
               <div className="space-y-6">
                 <h3 className="font-prompt flex items-center gap-4 text-xl font-black text-slate-900 uppercase italic">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-sm font-black text-white italic">
@@ -127,13 +131,13 @@ const PriceEstimator = () => {
                 </div>
               </div>
 
-              {/* Step 2: Add-ons Selection */}
+              {/* ขั้นตอนที่ 2: เลือกส่วนเสริม */}
               <div className="space-y-6">
                 <h3 className="font-prompt flex items-center gap-4 text-xl font-black text-slate-900 uppercase italic">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-sm font-black text-white italic">
                     02
                   </span>
-                  เพิ่มประสิทธิภาพ (Add-ons)
+                  เพิ่มประสิทธิภาพงาน (Add-ons)
                 </h3>
                 <div className="grid gap-3">
                   {ADD_ONS.map((addon) => (
@@ -173,7 +177,7 @@ const PriceEstimator = () => {
               </div>
             </div>
 
-            {/* 2️⃣ Summary Specialist Card */}
+            {/* 2. ส่วนสรุปข้อมูลสำหรับผู้เชี่ยวชาญ (Summary Card) */}
             <div className="lg:sticky lg:top-24 lg:col-span-5">
               <div className="shadow-3xl overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white">
                 <div className="mb-8 flex items-start justify-between">
@@ -191,7 +195,7 @@ const PriceEstimator = () => {
                   />
                 </div>
 
-                {/* Items List */}
+                {/* รายการที่เลือก */}
                 <div className="mb-10 space-y-5 border-t border-white/10 pt-8">
                   <div className="flex items-center justify-between text-sm">
                     <span className="font-anuphan font-bold text-slate-400">
@@ -219,7 +223,7 @@ const PriceEstimator = () => {
                   })}
                 </div>
 
-                {/* Grand Total */}
+                {/* ราคาสุทธิประเมิน */}
                 <div className="mb-12 text-right">
                   <div className="font-prompt mb-1 text-[10px] font-black tracking-widest text-slate-500 uppercase italic">
                     Estimated Investment
@@ -239,7 +243,7 @@ const PriceEstimator = () => {
                   className="group font-prompt flex w-full items-center justify-center gap-4 rounded-2xl bg-emerald-500 py-6 text-lg font-black text-slate-900 shadow-2xl shadow-emerald-500/20 transition-all hover:-translate-y-1 hover:bg-white"
                 >
                   <MessageCircle size={24} fill="currentColor" />
-                  ส่งสเปกนี้ให้นายเอ็ม
+                  ส่งข้อมูลชุดนี้ให้นายเอ็ม
                 </a>
 
                 <p className="font-anuphan mt-8 text-center text-[10px] leading-relaxed font-bold tracking-tighter text-slate-500 uppercase">

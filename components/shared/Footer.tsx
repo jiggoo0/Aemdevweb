@@ -20,16 +20,16 @@ import { footerServicesNav, footerCompanyNav } from "@/constants/navigation"
 import { cn } from "@/lib/utils"
 
 /**
- * Footer Industrial Specialist Identity (v2026)
- * Refined Brand Identity Layer: Removed dark background frame from logo.
- * Engineered for trust acquisition among SME owners and industrial sectors.
+ * Footer - เอกลักษณ์ผู้เชี่ยวชาญงานระบบท้ายหน้าเว็บ (v2026)
+ * ปรับปรุงชั้นข้อมูลแบรนด์: ลบกรอบพื้นหลังมืดออกจากโลโก้เพื่อความโปร่งใส
+ * ออกแบบมาเพื่อสร้างความเชื่อมั่นให้กับเจ้าของธุรกิจ SME และกลุ่มอุตสาหกรรม
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-500/10">
-      {/* Industrial Background Branding using Specialist Zap Logo */}
+      {/* การตกแต่งพื้นหลังโดยใช้สัญลักษณ์ประจำตัวผู้เชี่ยวชาญ */}
       <div
         className="pointer-events-none absolute -right-24 -bottom-24 opacity-[0.03]"
         aria-hidden="true"
@@ -37,11 +37,14 @@ export default function Footer() {
         <Zap size={450} fill="currentColor" className="text-[#020617]" />
       </div>
 
-      {/* Blueprint Grid Pattern: Visualizing precision and engineering standards */}
-      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] bg-center opacity-[0.2]" />
+      {/* ลายตารางรากฐานระบบ: สื่อถึงความแม่นยำและมาตรฐานงานออกแบบ */}
+      <div
+        className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] bg-center opacity-[0.2]"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* Target Audience Segment Recognition */}
+        {/* ส่วนแสดงกลุ่มเป้าหมายที่ระบบรองรับ */}
         <div className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { label: "SME", icon: Zap },
@@ -62,9 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* Column 1: Brand Authority Profile with Verified PNG Logo 
-              REMOVED: bg-[#020617], shadow-2xl, shadow-emerald-500/10, group-hover:bg-emerald-600
-          */}
+          {/* ส่วนข้อมูลแบรนด์และโลโก้ผู้เชี่ยวชาญ */}
           <div className="space-y-8 lg:col-span-4">
             <Link
               href="/"
@@ -73,8 +74,8 @@ export default function Footer() {
               <div className="flex size-14 items-center justify-center rounded-[1.25rem] transition-all duration-500 group-hover:rotate-6">
                 <Image
                   src="/images/logo-circuit.png"
-                  alt={`${siteConfig.name} identity by ${siteConfig.expert}`}
-                  width={48} // Adjusted for visual balance in transparent mode
+                  alt={`ข้อมูลประจำตัวของ ${siteConfig.name} โดย ${siteConfig.expert}`}
+                  width={48}
                   height={48}
                   className="object-contain"
                 />
@@ -91,23 +92,24 @@ export default function Footer() {
             </Link>
 
             <p className="font-anuphan max-w-sm text-base leading-relaxed font-bold text-slate-500">
-              Leading digital architecture provider for{" "}
-              <span className="text-[#020617]">SME Owners</span> and
-              <span className="text-[#020617]"> Industrial Factories</span>
-              focusing on stability and highest security standards.
+              ผู้นำด้านการวางโครงสร้างระบบดิจิทัลสำหรับ{" "}
+              <span className="text-[#020617]">เจ้าของธุรกิจ SME</span> และ
+              <span className="text-[#020617]"> โรงงานอุตสาหกรรม</span>
+              เน้นความเสถียรและมาตรฐานความปลอดภัยสูงสุด
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="wrap flex gap-3 pt-2">
               <div className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-4 py-2.5 text-[9px] font-black tracking-[0.2em] text-slate-400 uppercase shadow-sm">
-                <HardHat size={12} className="text-emerald-500" /> Industrial Standard
+                <HardHat size={12} className="text-emerald-500" /> Industrial
+                Standard
               </div>
             </div>
           </div>
 
-          {/* Column 2: Solutions Navigation */}
+          {/* ส่วนรายการระบบงานที่ให้บริการ */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
-              Solutions
+              Services
             </h4>
             <ul className="space-y-5">
               {footerServicesNav?.map((service) => (
@@ -127,7 +129,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Corporate Resources */}
+          {/* ส่วนข้อมูลทรัพยากรของบริษัท */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Resources
@@ -151,7 +153,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Strategic Consultation */}
+          {/* ส่วนช่องทางการติดต่อและขอคำปรึกษา */}
           <div className="space-y-8 lg:col-span-4">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Consultation
@@ -177,11 +179,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Compliance & Copyright Layer */}
+        {/* ชั้นข้อมูลลิขสิทธิ์และข้อกำหนดทางกฎหมาย */}
         <div className="mt-28 flex flex-col items-center justify-between gap-8 border-t border-slate-100 pt-12 md:flex-row">
           <div className="flex flex-col gap-3">
             <p className="font-anuphan text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">
-              © {currentYear} {siteConfig.companyName}. Engineered by {siteConfig.expert}.
+              © {currentYear} {siteConfig.companyName}. ออกแบบและพัฒนาโดย{" "}
+              {siteConfig.expert}.
             </p>
           </div>
           <div className="flex items-center gap-10">

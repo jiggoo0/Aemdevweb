@@ -10,13 +10,13 @@ import {
 } from "lucide-react"
 
 /**
- * Service Configuration Repository - AEMDEVWEB (2026 Edition)
- * Centralized definition for business services, categories, and pricing tiers.
- * Path: constants/services-data.ts
+ * คลังข้อมูลการตั้งค่าบริการ - AEMDEVWEB (2026 Edition)
+ * รวบรวมนิยามของบริการ หมวดหมู่ และระดับราคาเพื่อใช้แสดงผลทั้งระบบ
+ * ตำแหน่งไฟล์: constants/services-data.ts
  */
 
 /* -------------------------------------------------------------------------- */
-/* Type Definitions (Strict Mode)                                             */
+/* นิยามประเภทข้อมูล (Strict Mode)                                              */
 /* -------------------------------------------------------------------------- */
 
 export type ServiceCategory =
@@ -58,7 +58,7 @@ export interface CategoryInfo {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Category Metadata - Optimized for SME & Industrial Logic                   */
+/* ข้อมูลหมวดหมู่ - ปรับจูนตามตรรกะธุรกิจ SME และกลุ่มอุตสาหกรรม                   */
 /* -------------------------------------------------------------------------- */
 
 export const categoriesData: CategoryInfo[] = [
@@ -98,7 +98,7 @@ export const categoriesData: CategoryInfo[] = [
     name: "ปรับแต่ง Technical SEO",
     themeColor: "amber",
     description:
-      "แก้ไขโครงสร้างหลังบ้านเพื่อให้ Google ค้นหาและจัดอันดับเว็บไซต์ได้ง่ายขึ้น",
+      "แก้ไขโครงสร้างหลังบ้านเพื่อให้ระบบค้นหาเจอและจัดอันดับได้ง่ายขึ้น",
     icon: Settings2,
   },
   {
@@ -112,7 +112,7 @@ export const categoriesData: CategoryInfo[] = [
 ]
 
 /* -------------------------------------------------------------------------- */
-/* Service Definitions - Performance & Business Focused                       */
+/* รายละเอียดบริการ - มุ่งเน้นประสิทธิภาพและผลลัพธ์ทางธุรกิจ                      */
 /* -------------------------------------------------------------------------- */
 
 export const services: ServiceItem[] = [
@@ -122,7 +122,7 @@ export const services: ServiceItem[] = [
     slug: "starter-one-page",
     category: "Starter",
     description:
-      "หน้าขายของที่ออกแบบตามหลักจิตวิทยาการขาย โหลดไวใน 1 วินาทีเพื่อไม่ให้พลาดทุกโอกาส",
+      "หน้าขายของที่ออกแบบตามหลักจิตวิทยาการขาย โหลดไวใน 1 วินาทีเพื่อไม่ให้พลาดโอกาส",
     price: "เริ่มต้น 5,900.-",
     priceValue: 5900,
     features: [
@@ -139,14 +139,14 @@ export const services: ServiceItem[] = [
     slug: "sme-speed-launch",
     category: "SME",
     description:
-      "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ที่ดีไซน์และโครงสร้างถูกออกแบบมาเพื่อ Google โดยเฉพาะ",
+      "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ที่โครงสร้างถูกออกแบบมาเพื่อ Google โดยเฉพาะ",
     price: "เริ่มต้น 12,900.-",
     priceValue: 12900,
     highlight: true,
     features: [
       "PageSpeed 100/100: การันตีคะแนนความเร็วในระดับสูงสุด",
       "Unique UI Design: งานดีไซน์เฉพาะตัว ไม่ใช้เทมเพลตซ้ำใคร",
-      "Search Engine Ready: โครงสร้างรองรับ Google AI ยุคใหม่",
+      "Search Engine Ready: โครงสร้างรองรับระบบค้นหาในปัจจุบัน",
       "Easy CMS: ระบบจัดการหลังบ้านที่เจ้าของธุรกิจใช้งานเองได้ทันที",
     ],
     themeColor: "emerald",
@@ -157,7 +157,7 @@ export const services: ServiceItem[] = [
     slug: "corporate-trust",
     category: "Corporate",
     description:
-      "สร้างความเชื่อมั่นให้คู่ค้าด้วยระบบที่นิ่งและปลอดภัย รองรับการขยายตัวของธุรกิจองค์กร",
+      "สร้างความเชื่อมั่นให้คู่ค้าด้วยระบบที่นิ่งและปลอดภัย รองรับการขยายตัวขององค์กร",
     price: "เริ่มต้น 25,900.-",
     priceValue: 25900,
     features: [
@@ -174,33 +174,33 @@ export const services: ServiceItem[] = [
     slug: "industrial-catalog",
     category: "Industrial",
     description:
-      "เปลี่ยนคลังสินค้าให้เป็นระบบออนไลน์ ค้นหาสเปกได้ละเอียด และขอใบเสนอราคาได้รวดเร็ว",
+      "เปลี่ยนคลังสินค้าให้เป็นออนไลน์ ค้นหาสเปกได้ละเอียด และขอใบเสนอราคาได้รวดเร็ว",
     price: "เริ่มต้น 39,900.-",
     priceValue: 39900,
     features: [
       "Massive Item Support: รองรับสินค้าได้มากกว่า 10,000 รายการ",
       "Technical Filters: ระบบกรองสินค้าเชิงลึกตามคุณสมบัติเฉพาะ",
       "RFQ System: ระบบขอใบเสนอราคาอัตโนมัติส่งตรงถึงฝ่ายขาย",
-      "Scalable Infrastructure: รากฐานระบบที่รองรับการใช้งานหนัก",
+      "Scalable Foundation: รากฐานระบบที่รองรับการใช้งานหนัก",
     ],
     themeColor: "indigo",
   },
   {
     id: "seo-technical-audit",
-    title: "Technical SEO Infrastructure & Audit",
+    title: "Technical SEO System & Audit",
     slug: "seo-technical",
     category: "SEO_Technical",
     description:
-      "ตรวจสุขภาพและแก้ไข 'จุดบอด' หลังบ้านที่ขัดขวางไม่ให้เว็บของคุณติดอันดับแรก",
+      "ตรวจสุขภาพและแก้ไขจุดบอดหลังบ้านที่ขัดขวางไม่ให้เว็บของคุณติดอันดับแรก",
     price: "เริ่มต้น 4,900.-",
     priceValue: 4900,
     features: [
-      "Schema Markup: ติดตั้งโค้ดระบุประเภทธุรกิจให้บอทอ่านง่าย",
-      "Core Web Vitals Fix: ปรับจูนความเร็วให้ผ่านเกณฑ์เขียวทุกตัว",
+      "Schema Markup: ติดตั้งชุดคำสั่งระบุประเภทธุรกิจให้ระบบอ่านง่าย",
+      "Core Web Vitals Fix: ปรับจูนความเร็วให้ผ่านเกณฑ์ระดับสูงสุด",
       "Index Optimization: แก้ปัญหาหน้าเว็บไม่ปรากฏบนผลการค้นหา",
-      "Tracking Setup: ตั้งค่า Search Console และ GA4 แบบมืออาชีพ",
+      "Tracking Setup: ตั้งค่าการติดตามข้อมูลเชิงลึกแบบมืออาชีพ",
     ],
-    promotion: "ส่วนลดพิเศษ 50% เมื่อทำพร้อมการจ้างทำเว็บไซต์ใหม่",
+    promotion: "ส่วนลดพิเศษ 50% เมื่อทำพร้อมการจ้างพัฒนาเว็บไซต์ใหม่",
     themeColor: "amber",
   },
   {
@@ -209,13 +209,13 @@ export const services: ServiceItem[] = [
     slug: "seo-organic",
     category: "SEO_Organic",
     description:
-      "สร้างฐานลูกค้าจาก Google โดยไม่ต้องพึ่งพาค่าโฆษณาเพียงอย่างเดียวด้วยคีย์เวิร์ดที่ทำเงิน",
+      "สร้างฐานลูกค้าจาก Google โดยไม่ต้องพึ่งพาค่าโฆษณาด้วยคีย์เวิร์ดที่ทำเงิน",
     price: "เริ่มต้น 8,900.- / เดือน",
     priceValue: 8900,
     features: [
       "Commercial Keyword Focus: คัดเลือกคำที่สร้างยอดขายได้จริง",
-      "Authority Content: ผลิตคอนเทนต์คุณภาพเพื่อสร้างความน่าเชื่อถือ",
-      "Continuous Optimization: ปรับจูนหน้าเว็บตามอัลกอริทึมทุกเดือน",
+      "Authority Content: ผลิตเนื้อหาคุณภาพเพื่อสร้างความน่าเชื่อถือ",
+      "Continuous Optimization: ปรับจูนหน้าเว็บตามกลไกการค้นหาทุกเดือน",
       "Performance Report: รายงานสถิติและอันดับที่วัดผลได้ชัดเจน",
     ],
     promotion: "แนะนำทำต่อเนื่องอย่างน้อย 3 เดือน เพื่อผลลัพธ์ที่ยั่งยืน",

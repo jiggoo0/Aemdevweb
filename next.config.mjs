@@ -2,8 +2,8 @@
 import createMDX from "@next/mdx"
 
 /**
- * Next.js Configuration - AEMDEVWEB Professional v2026
- * Focus: High-Performance Image Serving, Termux Compatibility, and Next.js 16 Migration
+ * การตั้งค่า Next.js - AEMDEVWEB Professional v2026
+ * มุ่งเน้น: การส่งรูปภาพประสิทธิภาพสูง, การทำงานร่วมกับสภาพแวดล้อมจำกัด และ Next.js 16
  */
 
 /** @type {import('next').NextConfig} */
@@ -13,16 +13,18 @@ const nextConfig = {
   compress: true,
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 
-  /* Moved to root in Next.js 16: Packages that should not be bundled by the server */
+  /* ย้ายมาอยู่ระดับบนใน Next.js 16: แพ็กเกจที่ระบบไม่ควรนำไปมัดรวมในฝั่งเซิร์ฟเวอร์ */
   serverExternalPackages: ["@libsql/client"],
 
-  /* Image Optimization Infrastructure */
+  /* รากฐานระบบการจัดการรูปภาพ */
   images: {
     formats: ["image/avif", "image/webp"],
-    // Support for wide screens and Mobile High DPI
+    // รองรับหน้าจอขนาดกว้างและอุปกรณ์ความละเอียดสูง
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    // Specific sizes for logos and mobile icons to ensure fastest LCP
+    // กำหนดขนาดรูปภาพย่อยเพื่อให้ค่า LCP ออกมาดีที่สุด
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    // แก้ไขปัญหาการเรียกใช้คุณภาพรูปภาพที่ 100%
+    qualities: [75, 100],
     remotePatterns: [
       { protocol: "https", hostname: "lin.ee" },
       { protocol: "https", hostname: "**.supabase.co" },
@@ -33,9 +35,9 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
-  /* Experimental & Build Performance Features */
+  /* ฟีเจอร์สำหรับการทดลองและเร่งความเร็วในการประกอบไฟล์ */
   experimental: {
-    // Required for Termux compatibility to prevent Rust Compiler issues
+    // ปิดการใช้ Rust Compiler ใน MDX เพื่อความเสถียรบนสภาพแวดล้อมเฉพาะทาง
     mdxRs: false,
     optimizePackageImports: [
       "lucide-react",
@@ -47,9 +49,11 @@ const nextConfig = {
     ],
   },
 
-  /* Compiler Options */
+  /* ตัวช่วยประมวลผลสำหรับการปรับจูนหน้าเว็บ */
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+    // ลบการแสดงผลข้อความตรวจสอบ (Console) ในหน้าใช้งานจริง ยกเว้นการแจ้งเตือนปัญหา
+    removeConsole:
+      process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
 }
 

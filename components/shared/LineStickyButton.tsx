@@ -8,19 +8,19 @@ import { MessageCircle, X } from "lucide-react"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * 🏗️ LineStickyButton Specialist Edition (v2026)
- * ระบบปุ่มติดต่อด่วน (Floating Conversion Tool) สำหรับกลุ่มลูกค้า SME และโรงงาน
+ * LineStickyButton - ระบบปุ่มติดต่อด่วน (Floating Conversion Tool)
+ * พัฒนามาเพื่อเพิ่มโอกาสการเข้าถึงพิกัดการสื่อสารสำหรับกลุ่มลูกค้า SME และโรงงานอุตสาหกรรม
  */
 const LineStickyButton = () => {
   const [isOpen, setIsOpen] = useState(true)
 
-  // 🧬 ข้อความทักทายระดับพรีเมียม (Conversion Copywriting)
+  // ข้อความทักทายที่เน้นการเปิดบทสนทนา (Conversion Copywriting)
   const greetingText =
-    "สวัสดีครับ! สนใจทำเว็บกับนายเอ็มซ่ามากส์ สอบถามประเมินราคาหรือปรึกษาแผนธุรกิจได้ทันทีครับ"
+    "สวัสดีครับ สนใจทำเว็บไซต์สอบถามประเมินราคาหรือปรึกษาแผนงานกับพี่ได้ทันทีครับ"
 
   return (
     <div className="pointer-events-none fixed right-6 bottom-6 z-[999] flex flex-col items-end gap-5">
-      {/* 🗨️ Auto-Greeting Box */}
+      {/* กล่องข้อความทักทายอัตโนมัติ (Greeting Bubble) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -29,7 +29,7 @@ const LineStickyButton = () => {
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             className="pointer-events-auto relative mr-2 max-w-[250px] rounded-[2rem] border border-slate-100 bg-white p-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] md:max-w-[300px]"
           >
-            {/* ❌ Close Interaction */}
+            {/* ชุดคำสั่งปิดการแสดงผลข้อความ */}
             <button
               onClick={() => setIsOpen(false)}
               className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-[#0F172A] text-white shadow-xl transition-all hover:scale-110 hover:bg-rose-500 active:scale-90"
@@ -38,7 +38,7 @@ const LineStickyButton = () => {
               <X className="h-4 w-4" />
             </button>
 
-            {/* 📄 Content Layer */}
+            {/* ส่วนแสดงเนื้อหา (Content Layer) */}
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
@@ -51,13 +51,13 @@ const LineStickyButton = () => {
               </p>
             </div>
 
-            {/* Speech Bubble Notch */}
+            {/* ส่วนตกแต่งหางฟองคำพูด (Speech Bubble Notch) */}
             <div className="absolute right-10 -bottom-2 h-4 w-4 rotate-45 border-r border-b border-slate-100 bg-white" />
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* 🟢 Main Interaction Button: LINE Ecosystem Connect */}
+      {/* ปุ่มโต้ตอบหลัก: การเชื่อมต่อเข้าสู่ระบบ LINE */}
       <motion.a
         href={siteConfig.links?.line || "#"}
         target="_blank"

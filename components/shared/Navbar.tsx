@@ -14,9 +14,9 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 
 /**
- * Navbar Infrastructure - Specialist Edition (v2026)
- * Refined Brand Identity Layer: Removed dark background frame.
- * Optimized for Largest Contentful Paint (LCP) and visual clarity.
+ * โครงสร้างระบบแถบนำทาง - Specialist Edition (v2026)
+ * ปรับปรุงชั้นข้อมูลแบรนด์: ลบกรอบพื้นหลังสีเข้มเพื่อความโปร่งใสและดูสะอาดตา
+ * ออกแบบมาเพื่อประสิทธิภาพการแสดงผลรูปภาพ (LCP) และความชัดเจนของการใช้งาน
  */
 const Navbar = () => {
   const pathname = usePathname()
@@ -24,15 +24,17 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
+  // ตรวจสอบสถานะการติดตั้งคอมโพเนนต์เพื่อป้องกันปัญหา Hydration
   useEffect(() => {
     setIsMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // ปิดเมนูมือถืออัตโนมัติเมื่อมีการเปลี่ยนหน้า
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
@@ -41,6 +43,8 @@ const Navbar = () => {
 
   return (
     <nav
+      role="navigation"
+      aria-label="เมนูหลัก"
       className={cn(
         "fixed top-0 z-[100] w-full antialiased transition-all duration-500",
         isScrolled
@@ -49,23 +53,20 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* Brand Identity: logo-circuit.png - Transparent Frame Implementation */}
+        {/* ส่วนแสดงสัญลักษณ์แบรนด์: logo-circuit.png */}
         <Link
           href="/"
           className="group font-prompt flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
         >
-          {/* REMOVED: bg-slate-950, shadow-xl, group-hover:bg-emerald-600
-              ADJUSTED: Scale and transition for clean branding.
-          */}
           <div className="relative flex h-11 w-11 items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
             <Image
               src="/images/logo-circuit.png"
-              alt={`${siteConfig.name} - Technical SEO by ${siteConfig.expert}`}
+              alt={`ระบบงานของ ${siteConfig.name} โดยผู้เชี่ยวชาญ ${siteConfig.expert}`}
               width={44}
               height={44}
               priority
               quality={100}
-              className="object-contain" // REMOVED: p-2 to allow full-size rendering
+              className="object-contain"
             />
           </div>
           <span className="flex items-center uppercase">
@@ -77,7 +78,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Primary Navigation: Desktop High-Scanning Layout */}
+        {/* ระบบนำทางหลักสำหรับหน้าจอขนาดใหญ่ */}
         <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
@@ -117,15 +118,18 @@ const Navbar = () => {
           </Link>
         </div>
 
+        {/* ปุ่มควบคุมเมนูสำหรับหน้าจอขนาดเล็ก */}
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle Menu"
+          aria-expanded={isMobileMenuOpen}
+          aria-label="สลับการแสดงผลเมนู"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* ชั้นข้อมูลการแสดงผลเมนูบนมือถือ */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
