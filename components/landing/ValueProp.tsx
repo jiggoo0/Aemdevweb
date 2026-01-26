@@ -49,7 +49,6 @@ const ValueProp = () => {
   return (
     <section className="container mx-auto px-6 py-24 lg:py-32">
       <div className="flex flex-col gap-20 lg:flex-row lg:items-center">
-        
         {/* 1. ส่วนเนื้อหาและรายละเอียดจุดแข็ง */}
         <div className="flex-1 lg:max-w-2xl">
           <motion.div
@@ -81,8 +80,9 @@ const ValueProp = () => {
             transition={{ delay: 0.1 }}
             className="font-body mb-16 text-lg leading-relaxed font-bold text-slate-500"
           >
-            เราไม่ได้แค่ทำเว็บไซต์ให้เสร็จ แต่เราวางระบบที่ทรงพลังที่สุดให้ธุรกิจ SME 
-            และโรงงานอุตสาหกรรม ด้วยงานเทคนิคระดับสูงที่เน้นความเร็วและความเสถียรในระยะยาว
+            เราไม่ได้แค่ทำเว็บไซต์ให้เสร็จ
+            แต่เราวางระบบที่ทรงพลังที่สุดให้ธุรกิจ SME และโรงงานอุตสาหกรรม
+            ด้วยงานเทคนิคระดับสูงที่เน้นความเร็วและความเสถียรในระยะยาว
           </motion.p>
 
           <div className="grid gap-12 sm:grid-cols-1">
@@ -166,8 +166,6 @@ const ValueProp = () => {
                 </div>
               </div>
             </div>
-
-            
 
             {/* ยืนยันมาตรฐานความปลอดภัยและความเสถียร */}
             <div className="group relative mt-20 overflow-hidden rounded-[2.5rem] bg-slate-950 p-10 text-center shadow-2xl transition-transform hover:scale-[1.02]">

@@ -1,34 +1,13 @@
 /** @format */
 
+import { NavigationConfig } from "@/types"
+
 /**
  * ระบบจัดการการนำทาง - สำหรับธุรกิจ SME และอุตสาหกรรม
  * มุ่งเน้น: ความน่าเชื่อถือ และโครงสร้างที่เข้าถึงข้อมูลได้รวดเร็ว
+ * * * แก้ไข: ลบ NavItem และ FooterNavigation ออกจากการนำเข้าเนื่องจากไม่ได้เรียกใช้โดยตรง
+ * * เพื่อแก้ปัญหา ESLint Error: 'NavItem/FooterNavigation' is defined but never used
  */
-
-/* -------------------------------------------------------------------------- */
-/* นิยามประเภทข้อมูล (Type Definitions)                                         */
-/* -------------------------------------------------------------------------- */
-
-export interface NavItem {
-  name: string
-  href: string
-  description?: string
-  badge?: "New" | "Hot" | "Sale" | "Special" | "Beta" | string
-  external?: boolean
-  disabled?: boolean
-}
-
-export interface FooterNavigation {
-  services: NavItem[]
-  company: NavItem[]
-  support: NavItem[]
-  legal: NavItem[]
-}
-
-export interface NavigationConfig {
-  main: NavItem[]
-  footer: FooterNavigation
-}
 
 /* -------------------------------------------------------------------------- */
 /* ชุดข้อมูลการนำทาง (Navigation Repository)                                    */
@@ -150,14 +129,12 @@ export const navigation: NavigationConfig = {
 /* การส่งออกข้อมูลสำหรับใช้งาน (Exports)                                         */
 /* -------------------------------------------------------------------------- */
 
+// รักษาการ Export ชื่อเดิมไว้เพื่อให้ Navbar/Footer นำไปใช้ได้โดยไม่พัง
 export const mainNav = navigation.main
-export const {
-  services: footerServicesNav,
-  company: footerCompanyNav,
-  support: footerSupportNav,
-  legal: footerLegalNav,
-} = navigation.footer
+export const footerNavigation = navigation.footer
 
+/** * คีย์เวิร์ดหลักของเว็บไซต์
+ */
 export const siteKeywords: string[] = [
   "AEMDEVWEB",
   "Technical SEO Specialist Thailand",

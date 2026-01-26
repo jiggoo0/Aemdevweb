@@ -18,7 +18,7 @@ interface ServiceCardProps {
   className?: string
   index?: number
   // เพิ่มพิกัดนี้เพื่อรองรับค่าสีที่ส่งมาจากหน้า app/(main)/services/page.tsx
-  themeColor?: string 
+  themeColor?: string
 }
 
 /**

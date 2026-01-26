@@ -1,122 +1,68 @@
 /** @format */
 
-"use client"
+import React from "react"
+import { FacebookAdsData } from "./schema"
+import { BarChart3, Target, ArrowUpRight, CheckCircle2 } from "lucide-react"
 
-import React, { useState, useEffect } from "react"
-import Image from "next/image"
-import { FacebookAdsData } from "./data"
-// [FIXED]: ตัด Users และ Menu ออกเนื่องจากไม่ได้ถูกเรียกใช้งานใน Component
-import { CheckCircle2, TrendingUp, Target } from "lucide-react"
-import { cn } from "@/lib/utils"
+interface FacebookAdsTemplateProps {
+  data: FacebookAdsData
+}
 
-export const FacebookAdsTemplate = ({ data }: { data: FacebookAdsData }) => {
-  const { navbar, expert, stats, services, cta } = data
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+/**
+ * Facebook Ads Expert Template
+ * โครงสร้างเน้นการโชว์ผลลัพธ์ (Impact) และความน่าเชื่อถือ
+ */
+export const FacebookAdsTemplate: React.FC<FacebookAdsTemplateProps> = ({
+  data,
+}) => {
+  // ดึงข้อมูลส่วน Visual Content มาใช้งาน
+  const { hero, stats, services, strategy } = data
 
   return (
-    <div className="thai-font-smoothing w-full bg-white font-sans text-blue-950">
-      {/* NAVBAR */}
-      <nav
-        className={cn(
-          "fixed top-0 z-[100] w-full transition-all duration-300",
-          isScrolled
-            ? "bg-white/90 py-4 shadow-sm backdrop-blur-md"
-            : "bg-transparent py-6"
-        )}
-      >
-        <div className="container mx-auto flex items-center justify-between px-6">
-          <div className="text-xl font-black tracking-tight text-blue-600">
-            {navbar.logo}
-          </div>
-          <div className="flex items-center gap-6">
-            <button className="hidden text-sm font-bold text-slate-600 transition-colors hover:text-blue-600 lg:block">
-              ผลลัพธ์ที่ผ่านมา
-            </button>
-            <button className="rounded-full bg-blue-600 px-6 py-2.5 text-xs font-black tracking-widest text-white uppercase shadow-lg shadow-blue-200 transition hover:bg-blue-700">
-              {navbar.cta}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* HERO & PROFILE */}
-      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-20 md:pt-48 md:pb-32">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col items-center gap-12 lg:flex-row lg:gap-24">
-            <div className="order-2 lg:order-1 lg:w-3/5">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-[10px] font-black tracking-widest text-blue-600 uppercase">
-                <Target size={12} /> ยิงโฆษณาแบบมืออาชีพ
-              </div>
-              <h1 className="font-prompt text-5xl leading-[1.1] font-black md:text-7xl lg:text-8xl">
-                {expert.name}
-              </h1>
-              <p className="mt-4 text-xl font-bold text-blue-600 md:text-2xl">
-                {expert.title}
-              </p>
-              <p className="mt-8 text-lg leading-relaxed text-slate-500 md:text-xl lg:max-w-xl">
-                {expert.bio}
-              </p>
-              <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
-                {stats.map((stat, i) => (
-                  <div
-                    key={i}
-                    className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
-                  >
-                    <p className="text-3xl font-black text-blue-600">
-                      {stat.value}
-                      {stat.suffix}
-                    </p>
-                    <p className="mt-1 text-[10px] font-bold tracking-widest text-slate-400 uppercase">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+    <div className="fb-ads-template bg-slate-950 text-left font-sans text-slate-300 selection:bg-emerald-500/30">
+      {/* 1. Hero Section: ส่วนพาดหัวหลัก */}
+      <section className="relative overflow-hidden pt-32 pb-20">
+        <div className="relative z-10 container mx-auto px-6">
+          <div className="max-w-4xl space-y-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
+              <span className="text-[10px] font-black tracking-widest text-emerald-400 uppercase">
+                Data-Driven Marketing
+              </span>
             </div>
-            <div className="order-1 lg:order-2 lg:w-2/5">
-              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-[3rem] border-8 border-white shadow-2xl lg:max-w-none">
-                <Image
-                  src={expert.image}
-                  alt={expert.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
+            <h1 className="font-prompt text-5xl leading-[1.1] font-black tracking-tighter text-white md:text-8xl">
+              {hero.title}
+            </h1>
+            <p className="max-w-2xl text-xl leading-relaxed font-light text-slate-400">
+              {hero.description}
+            </p>
+            <div className="flex items-center gap-6">
+              <button className="bg-emerald-500 px-10 py-5 text-[11px] font-black tracking-widest text-slate-950 uppercase shadow-[0_0_30px_rgba(16,185,129,0.2)] transition-all hover:scale-105 hover:bg-emerald-400">
+                {hero.cta}
+              </button>
             </div>
           </div>
         </div>
+        {/* แสงฟุ้งตกแต่งพื้นหลัง */}
+        <div className="absolute top-0 right-0 h-full w-1/2 translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/5 blur-[120px]" />
       </section>
 
-      {/* SERVICES SECTION */}
-      <section className="bg-white py-24 md:py-32">
+      {/* 2. Impact Stats: ส่วนโชว์ตัวเลขความสำเร็จ */}
+      <section className="border-y border-slate-900 bg-slate-950/50 py-20">
         <div className="container mx-auto px-6">
-          <div className="mb-16 max-w-2xl">
-            <h2 className="font-prompt text-4xl leading-tight font-black text-blue-950 md:text-6xl">
-              {services.heading}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {services.items.map((item, i) => (
+          <div className="grid gap-12 md:grid-cols-3">
+            {stats.map((stat, i) => (
               <div
                 key={i}
-                className="group relative rounded-3xl border border-slate-100 bg-slate-50 p-10 transition-all hover:bg-white hover:shadow-2xl"
+                className="group space-y-2 border-l border-slate-800 pl-8 transition-colors hover:border-emerald-500"
               >
-                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200 transition-transform group-hover:scale-110">
-                  <TrendingUp size={24} />
-                </div>
-                <h3 className="text-2xl font-black text-blue-950">
-                  {item.title}
-                </h3>
-                <p className="mt-4 font-bold text-blue-600">{item.desc}</p>
-                <p className="mt-4 text-sm leading-relaxed text-slate-500">
-                  {item.detail}
+                <span className="text-[10px] font-bold tracking-widest text-slate-500 uppercase transition-colors group-hover:text-emerald-500/50">
+                  {stat.label}
+                </span>
+                <p className="font-prompt text-5xl font-black text-white">
+                  {stat.value}
+                </p>
+                <p className="text-xs tracking-wide text-emerald-500/80 uppercase">
+                  {stat.subValue}
                 </p>
               </div>
             ))}
@@ -124,31 +70,77 @@ export const FacebookAdsTemplate = ({ data }: { data: FacebookAdsData }) => {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="bg-blue-600 py-24 text-center text-white md:py-32">
+      {/* 3. Strategy Steps: ส่วนอธิบายขั้นตอนการทำงาน */}
+      <section className="bg-slate-950 py-24 lg:py-32">
         <div className="container mx-auto px-6">
-          <h2 className="font-prompt mx-auto max-w-3xl text-4xl leading-tight font-black md:text-6xl">
-            {cta.title}
-          </h2>
-          <p className="mt-6 text-lg opacity-90 md:text-xl">{cta.subtitle}</p>
-          <button className="mt-12 inline-flex h-20 min-w-[300px] items-center justify-center rounded-full bg-white px-12 text-sm font-black tracking-widest text-blue-600 uppercase shadow-xl transition-all hover:scale-105 active:scale-95">
-            {cta.buttonText}
-          </button>
-          <div className="mt-10 flex items-center justify-center gap-8 opacity-60">
-            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase">
-              <CheckCircle2 size={14} /> วิเคราะห์แผนฟรี
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase">
-              <CheckCircle2 size={14} /> ไม่มีข้อผูกมัด
-            </div>
+          <header className="mb-20">
+            <h2 className="font-prompt text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
+              Our Working Method
+            </h2>
+          </header>
+          <div className="grid gap-8 md:grid-cols-3">
+            {strategy.map((item, i) => (
+              <div
+                key={i}
+                className="group rounded-3xl border border-slate-800 bg-slate-900/50 p-10 transition-all hover:border-emerald-500/50"
+              >
+                <span className="text-4xl font-black text-slate-800 transition-colors group-hover:text-emerald-500/20">
+                  {item.step}
+                </span>
+                <h3 className="font-prompt mt-6 mb-4 text-xl font-black text-white">
+                  {item.title}
+                </h3>
+                <p className="text-sm leading-relaxed font-light text-slate-500">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-white py-12 text-center text-[10px] font-bold tracking-[0.3em] text-slate-400 uppercase">
-        © 2026 {navbar.logo} . powered by aemdevweb technical engine
-      </footer>
+      {/* 4. Services: ส่วนรายละเอียดบริการหลัก */}
+      <section className="bg-slate-900/30 py-24">
+        <div className="container mx-auto px-6">
+          <div className="grid gap-12 lg:grid-cols-2">
+            {services.map((service, i) => (
+              <div
+                key={i}
+                className="group flex flex-col justify-between rounded-[3rem] border border-slate-800 bg-slate-950 p-12 transition-all hover:border-emerald-500/30 hover:bg-slate-900"
+              >
+                <div>
+                  <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-500 transition-colors group-hover:bg-emerald-500 group-hover:text-white">
+                    {i === 0 ? <BarChart3 size={28} /> : <Target size={28} />}
+                  </div>
+                  <h3 className="font-prompt mb-6 text-3xl font-black text-white">
+                    {service.title}
+                  </h3>
+                  <p className="mb-10 text-lg font-light text-slate-400">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-4">
+                    {service.features.map((feat, j) => (
+                      <li
+                        key={j}
+                        className="flex items-center gap-4 text-sm text-slate-500"
+                      >
+                        <CheckCircle2
+                          size={16}
+                          className="shrink-0 text-emerald-500"
+                        />
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button className="mt-12 flex items-center gap-3 text-[10px] font-black tracking-widest text-emerald-500 uppercase transition-all group-hover:gap-5">
+                  Request Detail <ArrowUpRight size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

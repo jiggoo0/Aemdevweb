@@ -66,7 +66,8 @@ export const LineLeadForm = ({
     const message = `สวัสดีครับคุณเอ็ม ผมชื่อ ${data.name} ทำธุรกิจ ${data.businessType} สนใจเรื่อง: ${data.requirement} (งบประมาณ: ${data.budget || "ยังไม่ได้ระบุ"})`
 
     // ดึงพิกัด ID จากค่าคอนฟิกที่ล็อคไว้
-    const lineId = siteConfig.contact?.lineId || siteConfig.links?.lineId || "@aemdevweb"
+    const lineId =
+      siteConfig.contact?.lineId || siteConfig.links?.lineId || "@aemdevweb"
     const lineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`
 
     setIsPending(false)
@@ -147,7 +148,9 @@ export const LineLeadForm = ({
                     className="font-body w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
                   >
                     <option value="">เลือกกลุ่มธุรกิจของคุณ</option>
-                    <option value="SME / ร้านค้าออนไลน์">SME / ร้านค้าออนไลน์</option>
+                    <option value="SME / ร้านค้าออนไลน์">
+                      SME / ร้านค้าออนไลน์
+                    </option>
                     <option value="โรงงานอุตสาหกรรม">โรงงานอุตสาหกรรม</option>
                     <option value="บริษัท / หจก.">บริษัท / หจก.</option>
                     <option value="กลุ่มงานบริการ">กลุ่มงานบริการ</option>
@@ -185,7 +188,9 @@ export const LineLeadForm = ({
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    <span className="font-heading uppercase italic">{label}</span>
+                    <span className="font-heading uppercase italic">
+                      {label}
+                    </span>
                   </>
                 )}
               </button>

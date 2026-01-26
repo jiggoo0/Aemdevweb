@@ -24,7 +24,6 @@ const Hero = () => {
 
       <div className="relative z-10 container mx-auto px-6">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:items-center">
-          
           {/* 2. ส่วนเนื้อหาและคำเชิญชวน (Left Content Section) */}
           <div className="lg:col-span-7">
             <motion.div
@@ -47,7 +46,10 @@ const Hero = () => {
               className="font-heading mb-6 text-5xl leading-[1.05] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-8xl"
             >
               โครงสร้างเว็บ <br />
-              <span className="bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">ที่แม่นยำ</span> <br />
+              <span className="bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
+                ที่แม่นยำ
+              </span>{" "}
+              <br />
               เพื่อผลกำไรจริง
             </motion.h1>
 
@@ -57,8 +59,12 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="font-body mb-10 max-w-xl text-lg leading-relaxed font-bold text-slate-500 md:text-xl"
             >
-              ยกระดับธุรกิจ SME และกลุ่มอุตสาหกรรมด้วยรากฐานที่เน้นความเร็วสูงสุด 
-              วางระบบโดย <span className="text-slate-950 underline decoration-emerald-500/30 underline-offset-4">{siteConfig.expert.name}</span> เพื่อเพิ่มโอกาสการเข้าถึงและอัตราการปิดยอดขายอย่างยั่งยืน
+              ยกระดับธุรกิจ SME
+              และกลุ่มอุตสาหกรรมด้วยรากฐานที่เน้นความเร็วสูงสุด วางระบบโดย{" "}
+              <span className="text-slate-950 underline decoration-emerald-500/30 underline-offset-4">
+                {siteConfig.expert.name}
+              </span>{" "}
+              เพื่อเพิ่มโอกาสการเข้าถึงและอัตราการปิดยอดขายอย่างยั่งยืน
             </motion.p>
 
             <motion.div
@@ -95,7 +101,7 @@ const Hero = () => {
                   <Zap className="h-6 w-6 text-emerald-500" />
                 </div>
                 <div>
-                  <div className="font-heading text-lg font-black leading-none italic text-slate-900">
+                  <div className="font-heading text-lg leading-none font-black text-slate-900 italic">
                     LCP {siteConfig.standards.lcp}s
                   </div>
                   <div className="text-[9px] font-black tracking-widest text-slate-400 uppercase">
@@ -109,7 +115,7 @@ const Hero = () => {
                   <ShieldCheck className="h-6 w-6 text-emerald-500" />
                 </div>
                 <div>
-                  <div className="font-heading text-lg font-black leading-none italic text-slate-900">
+                  <div className="font-heading text-lg leading-none font-black text-slate-900 italic">
                     Score {siteConfig.standards.performance}
                   </div>
                   <div className="text-[9px] font-black tracking-widest text-slate-400 uppercase">
@@ -139,7 +145,7 @@ const Hero = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-slate-950/10 to-transparent" />
             </div>
-            
+
             {/* ป้ายคะแนนลอยตัว (Floating Badge) */}
             <div className="absolute -right-4 -bottom-4 hidden rounded-3xl bg-white p-6 shadow-2xl md:block lg:-right-8">
               <div className="flex items-center gap-3">
@@ -157,7 +163,6 @@ const Hero = () => {
               </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

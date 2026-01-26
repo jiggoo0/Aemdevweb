@@ -14,13 +14,14 @@ import {
   BarChart3,
 } from "lucide-react"
 
-// ส่วนจัดการข้อมูลและโครงสร้างระบบ
+// ข้อมูลและคอนฟิกหลัก
 import { services, categoriesData } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
-import { getAllTemplates } from "@/lib/template"
+import { getAllTemplatesMetadata } from "@/lib/template"
 import { TemplateMetadata } from "@/types/template"
+import { ServiceItem } from "@/types"
 
-// ส่วนประกอบคอมโพเนนต์เฉพาะทาง
+// คอมโพเนนต์เฉพาะทาง
 import { JsonLd } from "@/components/seo/JsonLd"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
@@ -31,55 +32,64 @@ interface ServicePageProps {
 }
 
 /**
- * กลยุทธ์การจัดการข้อมูลส่วนหัว (Metadata Strategy)
- * ดึงพิกัดข้อมูลมาสร้างชุดคำสั่ง SEO รายหน้าโดยอัตโนมัติ
+ * Metadata Engine: วางพิกัดข้อมูล SEO รายหน้า
  */
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params
-  const service = services.find((s) => s.slug === slug)
+  const service = services.find((s) => s.slug === slug) as
+    | ServiceItem
+    | undefined
 
   if (!service) {
     return { title: `ไม่พบข้อมูลบริการ | ${siteConfig.project.shortName}` }
   }
 
+  // [FIXED]: ล้าง Warning บรรทัด 49:33 โดยการเช็ค Property แบบปลอดภัย
+  // และใช้ Fallback เป็นรูป OG หลักของโปรเจกต์
+  const imageUrl =
+    service && "image" in service
+      ? (service as { image: string }).image
+      : siteConfig.project.ogImage
+
   return {
-    title: `${service.title} | ระบบงานเว็บเฉพาะทางโดย ${siteConfig.expert.name}`,
+    title: `${service.title} | ระบบงานเว็บโดย ${siteConfig.expert.name}`,
     description: service.description,
     alternates: { canonical: `${siteConfig.project.url}/services/${slug}` },
     openGraph: {
       title: service.title,
       description: service.description,
-      images: [{ url: (service as any).image || siteConfig.project.ogImage }],
+      images: [{ url: imageUrl }],
     },
   }
 }
 
 /**
- * หน้าแสดงรายละเอียดบริการ — ออกแบบมาเพื่อเน้นการปิดการขายและประสิทธิภาพสูงสุด
+ * ServiceDetailPage - เจาะลึกรายบริการเพื่อปิดการขายด้วยพิกัดข้อมูลเทคนิค
  */
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params
 
-  // 1. ค้นหาข้อมูลบริการหลักจากพิกัด Slug
-  const service = services.find((s) => s.slug === slug)
+  // 1. ค้นหาพิกัดข้อมูลบริการหลัก
+  const service = services.find((s) => s.slug === slug) as
+    | ServiceItem
+    | undefined
   if (!service) notFound()
 
-  // 2. ดึงข้อมูลหมวดหมู่เพื่อใช้แสดง Icon และธีมสี (Mapping Logic)
+  // 2. ดึงข้อมูลหมวดหมู่เพื่อใช้แสดง Icon หรือชุดสี (Category Mapping)
   const categoryInfo = categoriesData.find(
     (c) => c.slug === service.category.toLowerCase().replace("_", "-")
   )
 
-  // 3. ดึงข้อมูลเทมเพลตและกรองรายการที่เกี่ยวข้องตามพิกัดหมวดหมู่
-  const allTemplates = await getAllTemplates()
-  const relatedTemplates = allTemplates.filter(
-    (t: TemplateMetadata) =>
-      (t.category as string) === (service.category as string)
-  )
+  // 3. กรองเทมเพลตที่เกี่ยวข้อง
+  const allTemplates = getAllTemplatesMetadata()
+  const relatedTemplates = allTemplates.filter((t: TemplateMetadata) => {
+    return String(t.category) === String(service.category)
+  })
 
   return (
-    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+    <main className="relative min-h-screen bg-white pb-24 text-left antialiased selection:bg-emerald-500/20">
       <JsonLd
         type="Service"
         data={{
@@ -98,8 +108,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }}
       />
 
-      {/* พิกัดกราฟิกพื้นหลังเพื่อสร้างมิติงานระบบ */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       <nav className="relative z-10 container mx-auto px-6 pt-32 lg:pt-40">
         <Link
@@ -114,7 +126,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </Link>
       </nav>
 
-      {/* Hero Section: พิกัดข้อมูลหลักของบริการ */}
       <section className="relative py-12 lg:py-24">
         <div className="container mx-auto px-6">
           <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
@@ -141,7 +152,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 {service.description}
               </p>
 
-              <div className="space-y-5 pt-4">
+              <div className="space-y-5 pt-4 text-left">
                 {service.features?.map((feature, idx) => (
                   <div
                     key={idx}
@@ -159,25 +170,24 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </div>
             </div>
 
-            {/* พิกัดกล่องราคาและช่องทางติดต่อ */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white shadow-2xl md:p-20">
+              <div className="relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-left text-white shadow-2xl md:p-20">
                 <div className="pointer-events-none absolute top-0 right-0 p-10 opacity-5">
                   <ShieldCheck size={300} className="text-emerald-500" />
                 </div>
 
                 <div className="relative z-10">
-                  <div className="font-heading mb-10 text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase italic">
+                  <div className="font-heading mb-10 text-left text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase italic">
                     Estimated Budget Starting At
                   </div>
-                  <div className="font-heading mb-8 text-7xl font-black tracking-tighter italic md:text-9xl">
-                    <span className="mr-2 text-3xl font-normal text-slate-600">
+                  <div className="font-heading mb-8 text-left text-7xl font-black tracking-tighter italic md:text-9xl">
+                    <span className="mr-2 text-3xl font-normal text-slate-600 italic">
                       ฿
                     </span>
                     {service.priceValue?.toLocaleString() || "Custom"}
                   </div>
                   <p className="font-body mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
-                    วางโครงสร้างระบบประสิทธิภาพสูง <br />
+                    วางระบบเว็บที่เน้นผลลัพธ์เชิงตัวเลข <br />
                     พร้อมจัดการข้อมูลมาตรฐานปี 2026
                   </p>
 
@@ -198,11 +208,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         <ImpactStats />
       </div>
 
-      {/* พิกัดรายการเทมเพลตที่เกี่ยวข้องกับบริการ */}
       {relatedTemplates.length > 0 && (
         <section className="overflow-hidden bg-slate-50/50 py-24 lg:py-40">
           <div className="container mx-auto px-6">
-            <div className="mb-20 flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
+            <div className="mb-20 flex flex-col items-start justify-between gap-10 text-left md:flex-row md:items-end">
               <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
                 <div className="font-heading mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
                   <LayoutTemplate size={16} />
@@ -230,7 +239,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </section>
       )}
 
-      {/* ส่วนพิกัดความน่าเชื่อถือและ CTA ท้ายหน้า */}
       <section className="overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto px-6">
           <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center shadow-2xl shadow-slate-200/50 md:p-24">
@@ -243,24 +251,18 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 {siteConfig.expert.name}?
               </span>
             </h2>
-
             <div className="font-body mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               <p>
-                ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมคือที่ปรึกษาเชิงพิกัดข้อมูล
-                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางระบบการค้นหา
-                ให้ธุรกิจของคุณทำเงินได้ในระยะยาว
-                <span className="text-slate-900">
-                  {" "}
-                  ดูแลเองทุกขั้นตอน งานจบไว รับผิดชอบเต็มร้อยแน่นอนครับ
-                </span>
+                ผมไม่ได้แค่รับทำเว็บ แต่ผมวางระบบเชิงพิกัดข้อมูล
+                เพื่อให้ธุรกิจของคุณทำงานได้อย่างเต็มประสิทธิภาพ
+                ดูแลเองทุกขั้นตอน งานจบไว รับผิดชอบเต็มร้อยครับ
               </p>
             </div>
-
             <div className="flex flex-col items-center justify-center gap-8 sm:flex-row">
               <LineLeadForm
                 variant="button"
                 label="ทักมาคุยรายละเอียดฟรี"
-                className="h-20 px-12 text-xl"
+                className="h-20 px-12 text-xl font-black"
               />
               <Link
                 href="/case-studies"

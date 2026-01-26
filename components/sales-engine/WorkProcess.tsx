@@ -109,7 +109,7 @@ const WorkProcess = () => {
         </div>
 
         {/* ส่วนท้ายเพื่อกระตุ้นการติดต่อ: การรับประกันโดยผู้เชี่ยวชาญ */}
-        <div className="relative mt-24 overflow-hidden rounded-[3rem] bg-slate-950 p-10 text-white shadow-3xl md:p-16">
+        <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[3rem] bg-slate-950 p-10 text-white md:p-16">
           <div
             className="absolute top-0 right-0 p-10 opacity-5"
             aria-hidden="true"

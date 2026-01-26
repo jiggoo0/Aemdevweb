@@ -1,23 +1,22 @@
 /** @format */
 
-import React from "react"
+import type { ReactNode } from "react"
 
 interface MarketingLayoutProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 /**
  * Marketing Layout (Clean Wrapper Mode)
- * ถอด Navbar, Footer และปุ่มติดต่อออก เพื่อให้หน้าลูก (Children)
- * จัดการส่วนประกอบเหล่านี้เองได้อิสระ หรือใช้ในหน้า Landing Page เฉพาะกิจ
+ *
+ * - ไม่มี Navbar / Footer / Floating Button
+ * - เหมาะกับ Landing Page, Campaign Page, หรือ Page เฉพาะกิจ
+ * - ให้ child pages คุม layout ได้ 100%
  */
 export default function MarketingLayout({ children }: MarketingLayoutProps) {
   return (
     <div className="relative flex min-h-screen flex-col bg-white">
-      {/* พื้นที่เนื้อหาหลัก: 
-        ถอด Navbar/Footer/LineButton ออกแล้ว 
-        เพื่อให้ children จัดการเลย์เอาต์ภายในเองได้ 100% 
-      */}
+      {/* Main Content Area */}
       <main className="flex-1 transition-all duration-500">{children}</main>
     </div>
   )

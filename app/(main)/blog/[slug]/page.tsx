@@ -22,6 +22,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { JsonLd } from "@/components/seo/JsonLd"
 
+/* -------------------------------------------------------------------------- */
+/* การจัดการพิกัดคอมโพเนนต์ MDX (ล้าง Warnings และจัดระเบียบ Layout)              */
+/* -------------------------------------------------------------------------- */
+
 const mdxComponents = {
   ...useMDXComponents({}),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
@@ -36,21 +40,21 @@ const mdxComponents = {
         />
       </div>
       {props.alt && (
-        <figcaption className="font-anuphan text-sm font-bold text-slate-400 italic">
+        <figcaption className="font-body text-sm font-bold text-slate-400 italic">
           {props.alt}
         </figcaption>
       )}
     </figure>
   ),
-  h2: (props: any) => (
+  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="font-prompt mt-24 mb-10 border-l-8 border-emerald-500 pl-6 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic"
+      className="font-heading mt-24 mb-10 border-l-8 border-emerald-500 pl-6 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-5xl"
       {...props}
     />
   ),
-  p: (props: any) => (
+  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className="font-anuphan mb-10 text-xl leading-[1.8] font-medium text-slate-600"
+      className="font-body mb-10 text-xl leading-[1.8] font-medium text-slate-600"
       {...props}
     />
   ),
@@ -67,15 +71,15 @@ const mdxComponents = {
       <Badge className="mb-6 border-none bg-emerald-500 font-black text-slate-950 italic">
         SPECIALIST OFFER
       </Badge>
-      <h3 className="font-prompt mb-6 text-3xl leading-tight font-black text-slate-900 uppercase italic md:text-5xl">
+      <h3 className="font-heading mb-6 text-3xl leading-tight font-black text-slate-900 uppercase italic md:text-5xl">
         {title}
       </h3>
-      <p className="font-anuphan mx-auto mb-10 max-w-2xl text-lg font-bold text-slate-500 md:text-xl">
+      <p className="font-body mx-auto mb-10 max-w-2xl text-lg font-bold text-slate-500 md:text-xl">
         {description}
       </p>
       <Button
         asChild
-        className="font-prompt h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-emerald-500 hover:text-slate-950"
+        className="font-heading h-16 rounded-2xl bg-slate-950 px-12 font-black tracking-widest text-white uppercase shadow-xl transition-all hover:bg-emerald-500 hover:text-slate-950"
       >
         <Link href={url || "/contact"}>ปรึกษาผู้เชี่ยวชาญโดยตรง</Link>
       </Button>
@@ -93,8 +97,7 @@ export async function generateStaticParams() {
 }
 
 /**
- * แก้ไขจุดที่ 1: Metadata Engine
- * ปรับพิกัดตัวแปรเข้ากลุ่ม project และแก้ปัญหา authors Type Mismatch
+ * Metadata Engine: จัดพิกัด SEO ให้สัมพันธ์กับ Knowledge Hub
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -110,13 +113,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: fm.excerpt || fm.description,
       type: "article",
       url: `${siteConfig.project.url}/blog/${slug}`,
-      images: [{ url: fm.thumbnail || siteConfig.project.ogImage }],
-      // แก้ไข: ต้องส่งเป็น String Array เท่านั้น ห้ามส่ง Object
+      images: [{ url: (fm.thumbnail as string) || siteConfig.project.ogImage }],
       authors: [siteConfig.expert.name],
     },
   }
 }
 
+/**
+ * BlogPostPage: ส่วนแสดงผลบทความเชิงลึก (Deep Content)
+ */
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
@@ -128,18 +133,17 @@ export default async function BlogPostPage({ params }: Props) {
     month: "long",
     day: "numeric",
   })
-  const safeImage = fm.thumbnail || "/images/og-image.png"
+  const safeImage = (fm.thumbnail as string) || "/images/og-image.png"
 
   return (
     <article className="relative min-h-screen bg-white pt-32 pb-24 antialiased selection:bg-emerald-500/20">
-      {/* แก้ไขจุดที่ 2: Article Schema (JSON-LD) */}
       <JsonLd
         type="Article"
         data={{
-          headline: fm.title,
-          description: fm.excerpt || fm.description,
+          headline: fm.title as string,
+          description: (fm.excerpt || fm.description) as string,
           image: safeImage,
-          datePublished: fm.date,
+          datePublished: fm.date as string,
           author: {
             "@type": "Person",
             name: siteConfig.expert.name,
@@ -148,13 +152,14 @@ export default async function BlogPostPage({ params }: Props) {
         }}
       />
 
+      {/* กราฟิกตารางพิกัด (Structure Grid) */}
       <div
         className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
         aria-hidden="true"
       />
 
       <div className="container mx-auto max-w-4xl px-6">
-        <nav className="mb-16">
+        <nav className="mb-16 text-left">
           <Link
             href="/blog"
             className="group inline-flex items-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all hover:text-emerald-500"
@@ -164,9 +169,9 @@ export default async function BlogPostPage({ params }: Props) {
           </Link>
         </nav>
 
-        <header className="mb-20 space-y-10">
+        <header className="mb-20 space-y-10 text-left">
           <div className="flex flex-wrap items-center gap-4">
-            {(fm.tags || []).map((tag) => (
+            {((fm.tags as string[]) || []).map((tag) => (
               <Badge
                 key={tag}
                 className="rounded-full border-slate-200 bg-slate-50 px-5 py-1.5 text-[10px] font-black tracking-widest text-slate-500 uppercase"
@@ -178,41 +183,41 @@ export default async function BlogPostPage({ params }: Props) {
               <Calendar className="h-4 w-4 text-emerald-500" /> {formattedDate}
             </div>
           </div>
-          <h1 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
-            {fm.title}
+          <h1 className="font-heading text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
+            {fm.title as string}
           </h1>
-          <p className="font-anuphan border-l-4 border-slate-100 pl-6 text-2xl leading-relaxed font-bold text-slate-400 italic">
-            {fm.excerpt || fm.description}
+          <p className="font-body border-l-4 border-slate-100 pl-6 text-2xl leading-relaxed font-bold text-slate-400 italic">
+            {(fm.excerpt || fm.description) as string}
           </p>
         </header>
 
         <div className="relative mb-24 aspect-[21/10] w-full overflow-hidden rounded-[4rem] shadow-2xl shadow-slate-200/50">
           <Image
             src={safeImage}
-            alt={fm.title}
+            alt={fm.title as string}
             fill
             className="object-cover"
             priority
           />
         </div>
 
-        <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-p:font-anuphan prose-p:leading-[1.9] prose-strong:text-slate-950 prose-a:text-emerald-600 max-w-none">
+        <div className="prose prose-slate prose-xl prose-headings:font-heading prose-p:font-body prose-p:leading-[1.9] prose-strong:text-slate-950 prose-a:text-emerald-600 max-w-none">
           <MDXRemote source={String(post.content)} components={mdxComponents} />
         </div>
 
-        {/* แก้ไขจุดที่ 3: ส่วนแสดงข้อมูลผู้จัดทำในท้ายบทความ */}
+        {/* ส่วนแสดงข้อมูล Expert ท้ายบทความ */}
         <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3.5rem] border border-slate-100 bg-slate-50/80 p-12 md:flex-row">
           <div className="flex items-center gap-8">
             <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-xl">
-              <span className="font-prompt text-4xl font-black text-emerald-500 italic">
+              <span className="font-heading text-4xl font-black text-emerald-500 italic">
                 {siteConfig.expert.name.charAt(0)}
               </span>
             </div>
-            <div className="space-y-1">
-              <div className="font-prompt text-2xl leading-none font-black text-slate-900 uppercase italic">
+            <div className="space-y-1 text-left">
+              <div className="font-heading text-2xl leading-none font-black text-slate-900 uppercase italic">
                 {siteConfig.expert.name}
               </div>
-              <div className="font-anuphan text-xs font-black tracking-[0.2em] text-emerald-600 uppercase">
+              <div className="font-body text-xs font-black tracking-[0.2em] text-emerald-600 uppercase">
                 {siteConfig.expert.role}
               </div>
             </div>
@@ -225,6 +230,7 @@ export default async function BlogPostPage({ params }: Props) {
           </Button>
         </div>
 
+        {/* Closing CTA Section */}
         <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white md:p-24">
           <div
             className="absolute top-0 right-0 p-12 opacity-5"
@@ -233,16 +239,16 @@ export default async function BlogPostPage({ params }: Props) {
             <ShieldCheck size={250} />
           </div>
           <Sparkles className="mx-auto mb-10 h-16 w-16 animate-pulse text-emerald-500" />
-          <h3 className="font-prompt mb-8 text-5xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
+          <h2 className="font-heading mb-8 text-5xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
             Ready to <br />{" "}
             <span className="text-emerald-500 underline decoration-emerald-500/30 underline-offset-8">
               Scale
             </span>{" "}
             up?
-          </h3>
-          <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
-            หากต้องการจัดการระบบงานให้ได้มาตรฐานความเร็วและพิกัด SEO
-            ที่แม่นยำแบบนี้ สามารถติดต่อเพื่อสรุปรายละเอียดโครงการได้ทันที
+          </h2>
+          <p className="font-body mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
+            หากต้องการจัดการระบบงานให้ได้มาตรฐานความเร็วและพิกัด SEO ที่แม่นยำ
+            สามารถติดต่อเพื่อสรุปรายละเอียดโครงการได้ทันที
           </p>
           <Button
             asChild
@@ -250,7 +256,7 @@ export default async function BlogPostPage({ params }: Props) {
           >
             <Link
               href="/contact"
-              className="font-prompt text-lg font-black tracking-widest uppercase italic"
+              className="font-heading text-lg font-black tracking-widest uppercase italic"
             >
               Let's Talk Project
             </Link>

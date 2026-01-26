@@ -6,6 +6,7 @@ import { siteConfig } from "@/constants/site-config"
 /**
  * ระบบจัดการข้อมูลส่วนหัวเว็บไซต์ (Metadata Engine)
  * จัดการพิกัด SEO และ Social Share ให้ตรงตามโครงสร้างข้อมูล
+ * * Update: รองรับการดึงข้อมูลจากโครงสร้าง SiteConfig ที่มีความสมดุลล่าสุด
  */
 export function constructMetadata({
   title = siteConfig.project.title,
@@ -22,12 +23,12 @@ export function constructMetadata({
   canonical?: string
   noIndex?: boolean
 } = {}): Metadata {
-  
-  // ปรับพิกัดชื่อหน้าเพื่อป้องกันข้อความซ้อนทับกันเกินความจำเป็น
-  // หากเป็นหน้าแรกจะใช้ Title | Slogan หากเป็นหน้าย่อยจะใช้ Title | ShortName
+  // 1. จัดพิกัดชื่อหน้า (Dynamic Title Strategy)
+  // หากเป็นหน้าแรก: Title | Slogan
+  // หากเป็นหน้าย่อย: Title | ShortName (ผ่าน template ของ Next.js)
   const isHomePage = title === siteConfig.project.title
-  const displayTitle = isHomePage 
-    ? `${title} | ${siteConfig.project.slogan}` 
+  const displayTitle = isHomePage
+    ? `${title} | ${siteConfig.project.slogan}`
     : title
 
   return {
@@ -38,7 +39,7 @@ export function constructMetadata({
     description,
     keywords: siteConfig.keywords.all,
 
-    // กำหนดตัวตนผู้จัดทำในระดับโครงสร้างหลัก
+    // 2. กำหนดตัวตนผู้จัดทำ (Entity Attribution)
     authors: [
       {
         name: siteConfig.expert.name,
@@ -47,9 +48,11 @@ export function constructMetadata({
     ],
     creator: siteConfig.expert.name,
 
-    // ล็อคพิกัด URL พื้นฐานเพื่อป้องกันปัญหา Link และรูปภาพ OG ไม่แสดงผล
+    // 3. พิกัด URL พื้นฐาน (Base URL)
+    // จำเป็นมากสำหรับพิกัดรูปภาพ OG และ Canonical URL
     metadataBase: new URL(siteConfig.project.url),
 
+    // 4. โครงสร้างการแสดงผลบน Social Media (Open Graph)
     openGraph: {
       title: displayTitle,
       description,
@@ -67,20 +70,24 @@ export function constructMetadata({
       ],
     },
 
+    // 5. พิกัดการแสดงผลบน X/Twitter
     twitter: {
       card: "summary_large_image",
       title: displayTitle,
       description,
       images: [image],
-      creator: siteConfig.links.lineId, // ดึงพิกัดจากระบบจัดการลิงก์โดยตรง
+      // ดึงพิกัดจากระบบจัดการการติดต่อโดยตรง
+      creator: siteConfig.contact.lineId,
     },
 
+    // 6. พิกัดไอคอนระบบ (App Icons)
     icons: {
       icon: icons,
       shortcut: icons,
       apple: "/apple-touch-icon.png",
     },
 
+    // 7. พิกัดการเข้าถึงของ Crawler (Robot Control)
     robots: {
       index: !noIndex,
       follow: !noIndex,
@@ -93,6 +100,7 @@ export function constructMetadata({
       },
     },
 
+    // 8. พิกัดลิงก์ถาวร (Canonical Reference)
     alternates: {
       canonical,
     },

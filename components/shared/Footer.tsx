@@ -14,8 +14,9 @@ import {
 } from "lucide-react"
 
 import { siteConfig } from "@/constants/site-config"
-import { footerServicesNav, footerCompanyNav } from "@/constants/navigation"
+import { navigation } from "@/constants/navigation" // แก้ไข: นำเข้าผ่าน Object navigation หลัก
 import { cn } from "@/lib/utils"
+import { NavItem } from "@/types" // แก้ไข: นำเข้า Type มาใช้กำกับพิกัดข้อมูล
 
 /**
  * Footer - ส่วนท้ายของระบบเว็บไซต์
@@ -24,8 +25,11 @@ import { cn } from "@/lib/utils"
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
+  // ดึงพิกัดข้อมูลนำทางส่วนท้ายออกมาใช้งาน
+  const { footer } = navigation
+
   return (
-    <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-100">
+    <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 text-left antialiased selection:bg-emerald-100">
       {/* 1. เลเยอร์ตกแต่งพิกัดพื้นหลัง (Background Ornaments) */}
       <div
         className="pointer-events-none absolute -right-24 -bottom-24 opacity-[0.03]"
@@ -61,7 +65,7 @@ export default function Footer() {
         </div>
 
         {/* 3. พิกัดข้อมูลหลัก (Main Footer Grid) */}
-        <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
+        <div className="grid gap-16 text-left lg:grid-cols-12 lg:gap-12">
           {/* ส่วนตัวตนของโครงการ */}
           <div className="space-y-8 lg:col-span-4">
             <Link
@@ -100,13 +104,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* รายการพิกัดบริการ */}
+          {/* รายการพิกัดบริการ - แก้พิกัด Error TS7006 ด้วยการใส่ : NavItem */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-heading border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Services
             </h4>
             <ul className="space-y-5">
-              {footerServicesNav?.map((service) => (
+              {footer.services?.map((service: NavItem) => (
                 <li key={service.href}>
                   <Link
                     href={service.href}
@@ -123,13 +127,13 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ข้อมูลบริษัท/ผู้ให้บริการ */}
+          {/* ข้อมูลบริษัท/ผู้ให้บริการ - แก้พิกัด Error TS7006 ด้วยการใส่ : NavItem */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-heading border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Company
             </h4>
             <ul className="space-y-5">
-              {footerCompanyNav?.map((item) => (
+              {footer.company?.map((item: NavItem) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -180,18 +184,15 @@ export default function Footer() {
             {siteConfig.expert.name}.
           </p>
           <div className="flex items-center gap-10">
-            <Link
-              href="/privacy"
-              className="font-heading text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="font-heading text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
-            >
-              Terms
-            </Link>
+            {footer.legal?.map((item: NavItem) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="font-heading text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

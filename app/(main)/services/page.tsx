@@ -21,8 +21,7 @@ import PriceEstimator from "@/components/sales-engine/PriceEstimator"
 import CTASection from "@/components/landing/CTASection"
 
 /**
- * แก้ไขจุดที่ 1: Metadata Engine
- * ดึงพิกัดจาก siteConfig.project.shortName และ siteConfig.project.url
+ * Metadata Engine - ดึงพิกัดจากระบบ Config กลาง
  */
 export const metadata: Metadata = {
   title: `แพ็กเกจทำเว็บและราคา | ${siteConfig.project.shortName} Specialist System`,
@@ -32,14 +31,12 @@ export const metadata: Metadata = {
 }
 
 /**
- * ศูนย์รวมบริการหลัก — ระบบงานประสิทธิภาพสูงเพื่อธุรกิจ
+ * ServicesPage - ศูนย์รวมบริการหลักเพื่อธุรกิจ
  */
 export default async function ServicesPage() {
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* แก้ไขจุดที่ 2: JSON-LD 
-          เปลี่ยนพิกัดชื่อผู้เชี่ยวชาญและ URL ของหน้าบริการ
-      */}
+      {/* 1. JSON-LD: ประกาศรายการบริการให้ Search AI เข้าใจโครงสร้าง */}
       <JsonLd
         type="ProfessionalService"
         data={{
@@ -62,10 +59,12 @@ export default async function ServicesPage() {
         }}
       />
 
-      {/* ส่วนประกอบพื้นหลัง */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
-      {/* ส่วนหัวเว็บไซต์ (Hero) */}
+      {/* 2. Hero Section */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="relative z-10 container mx-auto px-6">
           <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
@@ -81,7 +80,7 @@ export default async function ServicesPage() {
               <span className="text-emerald-500">Expertise.</span>
             </h1>
 
-            <p className="font-anuphan mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+            <p className="mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมสร้างเครื่องมือทำเงินที่จูนมาเพื่อ
               SME และโรงงานไทยโดยเฉพาะ
             </p>
@@ -89,7 +88,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* รายการแพ็กเกจ (Service Grid) */}
+      {/* 3. รายการแพ็กเกจ (Service Grid) */}
       <section className="relative z-10 bg-slate-50/50 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex items-center gap-4">
@@ -117,7 +116,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* ระบบประเมินงบประมาณ (Estimator) */}
+      {/* 4. ระบบประเมินงบประมาณ (Price Estimator) */}
       <section className="relative overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto mb-20 px-6 text-center">
           <div className="mb-6 flex justify-center">
@@ -136,9 +135,12 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* การรับประกันคุณภาพงาน (Trust Section) */}
+      {/* 5. Trust Section */}
       <section className="relative overflow-hidden bg-slate-950 py-24 text-white lg:py-40">
-        <div className="pointer-events-none absolute top-0 right-0 p-20 opacity-[0.03]">
+        <div
+          className="pointer-events-none absolute top-0 right-0 p-20 opacity-[0.03]"
+          aria-hidden="true"
+        >
           <ShieldCheck size={400} />
         </div>
         <div className="relative z-10 container mx-auto px-6">
@@ -159,7 +161,7 @@ export default async function ServicesPage() {
                 ].map((item, idx) => (
                   <li
                     key={idx}
-                    className="font-anuphan flex items-start gap-5 text-xl font-bold text-slate-300"
+                    className="flex items-start gap-5 text-xl font-bold text-slate-300"
                   >
                     <CheckCircle2 className="mt-1.5 h-6 w-6 shrink-0 text-emerald-500" />
                     {item}
@@ -173,9 +175,6 @@ export default async function ServicesPage() {
 
       <CTASection />
 
-      {/* แก้ไขจุดที่ 3: Footer
-          ใช้ siteConfig.expert.name เพื่อป้องกัน Error ReactNode
-      */}
       <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
           High-End Service Engine by {siteConfig.expert.name} v2026

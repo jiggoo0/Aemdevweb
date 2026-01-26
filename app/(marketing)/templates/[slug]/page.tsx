@@ -1,82 +1,83 @@
 /** @format */
 
+import React from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { getTemplateComponent } from "@/lib/template-registry"
-import { getTemplateData, getAllTemplates } from "@/lib/template"
+import { getAllTemplates } from "@/lib/template"
+import { templateRegistry } from "../_registry"
 
-/**
- * กำหนดประเภทข้อมูลตามมาตรฐาน Next.js 15
- * params ต้องถูกจัดการแบบ Promise เพื่อรองรับการทำ Async Request
- */
-interface TemplatePageProps {
-  params: Promise<{
-    slug: string
-  }>
+interface PageProps {
+  params: Promise<{ slug: string }>
 }
 
 /**
- * 1. ระบบจัดการข้อมูลชุดคำอธิบาย (Metadata)
- * ดึงข้อมูลจากไฟล์ data.ts ของแต่ละเทมเพลตมาทำ SEO โดยเฉพาะ
+ * 1. ฟังก์ชันสร้าง Metadata (SEO Strategy)
  */
 export async function generateMetadata({
   params,
-}: TemplatePageProps): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const data = await getTemplateData(slug)
+  const templateEntry = templateRegistry[slug]
 
-  // กรณีไม่พบข้อมูล ป้องกันระบบพังด้วยการส่งค่าพื้นฐานกลับไป
-  if (!data || !data.hero) {
-    return { title: "ไม่พบพิกัดเทมเพลต | AEMDEVWEB" }
-  }
+  if (!templateEntry) return { title: "ไม่พบข้อมูล" }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data = templateEntry.data as any
 
   return {
-    title: `${data.hero.title} - ตัวอย่างพิกัดหน้าเว็บ | AEMDEVWEB`,
-    description: data.hero.subtitle || data.hero.description,
+    title: `${data.seo?.title || "Template"} | AEMDEVWEB`,
+    description: data.seo?.description,
     openGraph: {
-      title: data.hero.title,
-      description: data.hero.subtitle || data.hero.description,
-      images: [`/images/templates/${slug}.webp`],
-      type: "website",
+      title: data.seo?.title,
+      description: data.seo?.description,
+      images: [data.seo?.ogImage || "/og-image.png"],
     },
   }
 }
 
 /**
- * 2. การทำระบบเตรียมข้อมูลล่วงหน้า (Static Site Generation)
- * ลงทะเบียน Slug ทั้งหมดที่มีในระบบ เพื่อให้ค่า LCP ต่ำกว่า 1 วินาที
+ * 2. หน้าแสดงผลพรีวิวงานจริง (Clean View)
  */
-export async function generateStaticParams() {
-  const templates = await getAllTemplates()
-  return templates.map((template) => ({
-    slug: template.id,
-  }))
-}
-
-/**
- * 3. ส่วนแสดงผลหลัก (Page Component)
- */
-export default async function TemplatePage({ params }: TemplatePageProps) {
-  // คลายค่า slug ออกจาก Promise
+export default async function TemplateDetailPage({ params }: PageProps) {
   const { slug } = await params
+  const templateEntry = templateRegistry[slug]
 
-  // ดึงข้อมูลและชุดแสดงผลจาก Registry
-  const data = await getTemplateData(slug)
-  const SelectedTemplate = getTemplateComponent(slug)
+  if (!templateEntry) notFound()
 
-  /**
-   * จุดเช็คความชัวร์ (ทักตรงๆ):
-   * หากชื่อโฟลเดอร์ใน _components ไม่ตรงกับ id ในไฟล์ทะเบียน หน้าจะขาวทันที
-   * ผมจึงดักด้วย notFound() เพื่อให้ระบบวิ่งไปหน้า 404 แทนการปล่อยให้ Error
-   */
-  if (!data || !SelectedTemplate) {
-    notFound()
-  }
+  const LiveComponent = templateEntry.component
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const liveData = templateEntry.data as any
 
   return (
-    <main className="thai-font-smoothing min-h-screen bg-white">
-      {/* ส่งก้อนข้อมูลเข้าสู่คอมโพเนนต์เทมเพลตที่เลือก */}
-      <SelectedTemplate data={data} />
-    </main>
+    <div className="min-h-screen bg-white selection:bg-emerald-500/20">
+      <main className="relative">
+        <div className="pointer-events-none absolute inset-x-0 top-10 z-[60] flex justify-center px-6">
+          <div className="flex items-center gap-3 rounded-full bg-slate-950/90 px-4 py-2 text-[10px] font-black tracking-[0.2em] text-white uppercase shadow-2xl ring-1 ring-white/10 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            </span>
+            Live Content: {liveData.seo?.title?.split("|")[0] || "System Ready"}
+          </div>
+        </div>
+
+        <section className="relative z-10 bg-white">
+          <div className="flex items-center justify-center border-b border-slate-100 bg-slate-50/50 py-4">
+            <span className="font-heading text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase italic">
+              Live Layout Preview v2026
+            </span>
+          </div>
+
+          <div className="template-live-render min-h-screen">
+            <LiveComponent data={liveData} />
+          </div>
+        </section>
+      </main>
+    </div>
   )
+}
+
+export async function generateStaticParams() {
+  const templates = getAllTemplates()
+  return templates.map((slug) => ({ slug }))
 }

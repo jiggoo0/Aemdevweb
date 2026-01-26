@@ -13,9 +13,11 @@ export default tseslint.config({
     parser: tseslint.parser,
     parserOptions: {
       ecmaFeatures: { jsx: true },
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
   },
-  // 2. Ignores
+  // 2. พิกัดยกเว้น (Ignores)
   ignores: [
     ".next/**",
     "node_modules/**",
@@ -23,23 +25,41 @@ export default tseslint.config({
     "public/**",
     "**/*.d.ts",
     "eslint.config.mjs",
+    "next.config.mjs",
   ],
-  // 3. Plugins
+  // 3. ปลั๊กอินเสริม
   plugins: {
     "@next/next": nextPlugin,
     "@typescript-eslint": tseslint.plugin,
   },
-  // 4. Rules
+  // 4. พิกัดกฎควบคุม (Rules Configuration)
   rules: {
     ...js.configs.recommended.rules,
-    ...tseslint.configs.recommended[1].rules, // ดึงกฎแนะนำของ TS
+    ...tseslint.configs.recommended[0]?.rules, // ปรับการดึงค่า Config ให้ปลอดภัยขึ้น
     ...nextPlugin.configs.recommended.rules,
     ...nextPlugin.configs["core-web-vitals"].rules,
 
+    // ปิดการบังคับ Import React (สำหรับ Next.js 13+ App Router)
     "react/react-in-jsx-scope": "off",
+
+    // จัดการพิกัดตัวแปรที่ไม่ได้ใช้งาน (เปลี่ยนจาก off เป็น warn เพื่อความสะอาด)
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+
+    // อนุญาตให้ใช้ any ได้ในจุดที่จำเป็น (Specialist Flexibility)
+    "@typescript-eslint/no-explicit-any": "warn",
+
+    // แจ้งเตือนเมื่อใช้ <img> แทน <Image> ของ Next.js เพื่อรักษาคะแนน LCP
+    "@next/next/no-img-element": "error",
+
+    // ปิดกฎที่ซ้ำซ้อนกับ TS Compiler
     "no-undef": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-explicit-any": "off",
-    "@next/next/no-img-element": "warn",
+    "no-unused-vars": "off",
   },
 })

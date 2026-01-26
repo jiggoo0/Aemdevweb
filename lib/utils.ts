@@ -4,8 +4,8 @@ import { twMerge } from "tailwind-merge"
 
 /*
  * cn (Class Name Merger)
- * ฟังก์ชันสำหรับจัดการชื่อคลาสของ Tailwind 
- * ช่วยแก้ปัญหาเรื่องคลาสที่ซ้อนทับกันหรือขัดกันเอง 
+ * ฟังก์ชันสำหรับจัดการชื่อคลาสของ Tailwind
+ * ช่วยแก้ปัญหาเรื่องคลาสที่ซ้อนทับกันหรือขัดกันเอง
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))

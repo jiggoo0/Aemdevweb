@@ -15,9 +15,9 @@ import { Toaster } from "@/components/ui/sonner"
 
 import "@/app/globals.css"
 
-/*
+/**
  * พิกัดฟอนต์สำหรับหัวข้อ: IBM Plex Sans Thai
- * เน้นความมั่นคงและเป็นทางการของระบบงาน
+ * เน้นความมั่นคงและเป็นทางการของระบบงานวิศวกรรมซอฟต์แวร์
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -26,9 +26,9 @@ const fontHeading = IBM_Plex_Sans_Thai({
   display: "swap",
 })
 
-/*
+/**
  * พิกัดฟอนต์สำหรับเนื้อหา: Anuphan
- * เน้นการอ่านข้อมูลบนหน้าจอที่ไหลลื่น
+ * เน้นการอ่านข้อมูลบนหน้าจอที่ไหลลื่นและทันสมัย
  */
 const fontBody = Anuphan({
   subsets: ["thai", "latin"],
@@ -37,8 +37,8 @@ const fontBody = Anuphan({
   display: "swap",
 })
 
-/*
- * การประกาศพิกัด SEO ประจำเว็บไซต์
+/**
+ * การประกาศพิกัด SEO ประจำเว็บไซต์ (Construct Metadata)
  */
 export const metadata: Metadata = constructMetadata({
   title: siteConfig.project.title,
@@ -48,6 +48,10 @@ export const metadata: Metadata = constructMetadata({
 
 export const viewport: Viewport = defaultViewport
 
+/**
+ * Root Layout - โครงสร้างหลักของอาณาจักร AEMDEVWEB
+ * จัดการพิกัดฟอนต์, ระบบแจ้งเตือน และโครงสร้างข้อมูลระดับ Global
+ */
 export default function RootLayout({
   children,
 }: {
@@ -65,21 +69,31 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* วางพิกัดโครงสร้างข้อมูลเพื่อให้ Search AI เข้าใจความสัมพันธ์ของแบรนด์ */}
+        {/* ฉีดโครงสร้างข้อมูล WebSite เพื่อให้ Search AI เข้าใจความสัมพันธ์ของแบรนด์และผู้สร้าง */}
         <JsonLd
           type="WebSite"
           data={{
             name: siteConfig.project.name,
             alternateName: siteConfig.project.nameTH,
             url: siteConfig.project.url,
+            // ระบุพิกัดเจ้าของระบบเพื่อสร้าง Trust ในหน้า Google
             publisher: {
               "@type": "Organization",
-              name: siteConfig.company.name,
-              logo: siteConfig.project.ogImage,
+              name: siteConfig.company.fullName,
+              logo: {
+                "@type": "ImageObject",
+                url: `${siteConfig.project.url}/images/logo-circuit.png`,
+              },
               sameAs: [
                 siteConfig.contact.facebook,
-                siteConfig.contact.linkedin
-              ].filter(Boolean)
+                siteConfig.contact.linkedin,
+              ].filter(Boolean),
+            },
+            // เพิ่มระบบค้นหาภายใน (Sitelinks Searchbox)
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${siteConfig.project.url}/blog?q={search_term_string}`,
+              "query-input": "required name=search_term_string",
             },
           }}
         />
@@ -91,21 +105,22 @@ export default function RootLayout({
           "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* แถบแจ้งสถานะการโหลดพิกัดสีเขียวมรกต */}
+        {/* แถบสถานะการโหลดพิกัดสีเขียวมรกต (Emerald-500) */}
         <NextTopLoader
           color="#10B981"
           height={3}
           showSpinner={false}
           easing="ease-in-out"
           speed={300}
+          shadow="0 0 10px #10B981,0 0 5px #10B981"
         />
 
         <div className="relative flex min-h-screen flex-col">
-          {/* ส่วนเนื้อหาหลักที่รองรับการเรนเดอร์ระบบงานทั้งหมด */}
+          {/* ส่วนเนื้อหาหลักที่รองรับการเรนเดอร์ Landing Page และระบบงานทั้งหมด */}
           <main className="flex-1">{children}</main>
         </div>
 
-        {/* ระบบแจ้งเตือนผลลัพธ์ผ่านอินเทอร์เฟซ */}
+        {/* ระบบแจ้งเตือนผลลัพธ์ผ่านอินเทอร์เฟซ (Sonner) */}
         <Toaster richColors closeButton position="top-center" />
       </body>
     </html>

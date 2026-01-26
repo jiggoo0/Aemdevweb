@@ -86,7 +86,7 @@ const PriceEstimator = () => {
               ประเมินงบประมาณระบบงาน
             </h2>
             <p className="font-body text-lg font-bold text-slate-500">
-              ชัดเจน โปร่งใส 
+              ชัดเจน โปร่งใส
               เลือกส่วนประกอบที่ต้องการเพื่อรับราคาประเมินเบื้องต้นได้ทันที
             </p>
           </div>
@@ -188,7 +188,7 @@ const PriceEstimator = () => {
                       Official Estimation v.2026
                     </p>
                   </div>
-                  <Zap className="text-amber-400 fill-amber-400" size={28} />
+                  <Zap className="fill-amber-400 text-amber-400" size={28} />
                 </div>
 
                 <div className="mb-10 space-y-5 border-t border-white/10 pt-8">
@@ -203,7 +203,10 @@ const PriceEstimator = () => {
                   {selectedAddOns.map((id) => {
                     const addon = ADD_ONS.find((a) => a.id === id)
                     return (
-                      <div key={id} className="flex items-center justify-between text-xs">
+                      <div
+                        key={id}
+                        className="flex items-center justify-between text-xs"
+                      >
                         <span className="font-body font-bold text-slate-500">
                           + {addon?.name}
                         </span>
@@ -220,7 +223,9 @@ const PriceEstimator = () => {
                     Estimated Investment
                   </div>
                   <div className="font-heading text-6xl font-black tracking-tighter text-white">
-                    <span className="mr-3 text-2xl font-normal text-slate-500">฿</span>
+                    <span className="mr-3 text-2xl font-normal text-slate-500">
+                      ฿
+                    </span>
                     {totalPrice.toLocaleString()}
                   </div>
                 </div>

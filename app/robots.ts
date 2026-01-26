@@ -5,18 +5,17 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * ระบบควบคุมการเก็บข้อมูลของโปรแกรมค้นหา (Search Engine Crawler Control)
- * จัดการพิกัดการเข้าถึงข้อมูลเพื่อให้บอทเก็บข้อมูลเฉพาะส่วนที่ต้องการปิดเผย
+ * จัดการพิกัดการเข้าถึงข้อมูลเพื่อให้บอทเก็บข้อมูลเฉพาะส่วนที่ต้องการเปิดเผย
  */
 export default function robots(): MetadataRoute.Robots {
-  // พิกัด URL หลักของเว็บไซต์
   const baseUrl = siteConfig.project.url
 
   return {
     rules: [
       {
         userAgent: "*",
-
-        // ส่วนที่อนุญาตให้เก็บข้อมูลเพื่อประโยชน์ด้านการค้นหา (SEO)
+        // 1. ส่วนที่อนุญาตให้เก็บข้อมูลเพื่อประโยชน์ด้านการค้นหา (SEO)
+        // เปิดทางให้บอทเข้าถึงส่วนงานบริการและเทมเพลตใหม่ๆ ได้เต็มที่
         allow: [
           "/",
           "/about",
@@ -24,39 +23,46 @@ export default function robots(): MetadataRoute.Robots {
           "/case-studies/",
           "/blog/",
           "/contact",
-          "/careers",
+          "/templates/", // เพิ่มพิกัดเทมเพลตเพื่อรองรับการค้นหา "รับทำ Landing Page"
           "/images/showcase/",
           "/images/templates/",
         ],
 
-        // ส่วนที่ห้ามเข้าถึงเพื่อความปลอดภัยและป้องกันการดึงข้อมูลดิบ
+        // 2. ส่วนที่ห้ามเข้าถึงเพื่อความปลอดภัยและป้องกันการรั่วไหลของตรรกะระบบ
         disallow: [
-          "/api/", // ระบบเชื่อมต่อหลังบ้าน
-          "/_next/", // ไฟล์ระบบของ Next.js
-          "/config/", // พิกัดไฟล์ตั้งค่าความปลอดภัย
-          "/content/", // ป้องกันบอทเข้าไปอ่านไฟล์ MDX โดยตรง
-          "/lib/", // ส่วนจัดการตรรกะระบบ
+          "/api/",
+          "/_next/",
+          "/config/",
+          "/content/",
+          "/lib/",
+          "/types/", // เพิ่มพิกัดป้องกันบอทอ่านโครงสร้าง Type ของเรา
           "/download/",
-          "/*.json$", // ป้องกันการเก็บข้อมูลโครงสร้างไฟล์
+          "/*.json$",
           "/not-found",
         ],
       },
       {
         /**
-         * การจัดการสิทธิ์สำหรับ AI Crawler (2026 Standard)
-         * ป้องกันการนำข้อมูลโครงสร้างเชิงลึกไปใช้งานโดยไม่ได้รับอนุญาต
+         * 3. การจัดการสิทธิ์สำหรับ AI Crawler (2026 Standard)
+         * ป้องกันบอทนำโครงสร้าง Technical SEO และเคสงานเฉพาะทางไปเทรนโมเดล
          */
-        userAgent: ["GPTBot", "CCBot", "ClaudeBot", "PerplexityBot"],
+        userAgent: [
+          "GPTBot",
+          "CCBot",
+          "ClaudeBot",
+          "PerplexityBot",
+          "Applebot-Extended",
+        ],
         disallow: [
-          "/config/", 
-          "/lib/", 
-          "/content/template/",
-          "/case-studies/*" // ป้องกันการนำเคสงานไปใช้เทรน AI โดยไม่ได้รับอนุญาต
+          "/config/",
+          "/lib/",
+          "/content/",
+          "/case-studies/", // ล็อคพิกัดงานผลงานความลับ
+          "/templates/*/_assets/", // กัน AI ดูด Asset เฉพาะทางของเทมเพลต
         ],
       },
     ],
-
-    // ระบุตำแหน่งไฟล์แผนผังเว็บไซต์เพื่อนำทางบอท
+    // ระบุแผนผังเว็บไซต์เพื่อให้ Index หน้า Landing Page ใหม่ได้ไวขึ้น
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

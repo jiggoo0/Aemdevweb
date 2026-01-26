@@ -14,8 +14,8 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 
 /**
- * แถบนำทางหลัก (Navbar)
- * ออกแบบมาเพื่อความรวดเร็วในการเข้าถึงข้อมูลและรักษาคะแนนการประมวลผลหน้าเว็บ
+ * Navbar - ระบบนำทางหลักพิกัดความเร็วสูง
+ * ออกแบบโครงสร้างมาเพื่อการนำทางที่ลื่นไหลและรองรับการทำ SEO Entity Linking
  */
 const Navbar = () => {
   const pathname = usePathname()
@@ -23,6 +23,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
+  // 1. จัดการพิกัดการตรวจจับการเลื่อนหน้าจอ (Scroll Detection)
   useEffect(() => {
     setIsMounted(true)
     const handleScroll = () => {
@@ -32,17 +33,19 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // 2. ปิดเมนูมือถืออัตโนมัติเมื่อมีการเปลี่ยนเส้นทาง (Route Change)
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
-  // ป้องกันอาการ Hydration Mismatch สำหรับ Client Component
-  if (!isMounted) return <div className="h-20 w-full bg-transparent" />
+  // ป้องกันอาการ Hydration Mismatch (ทักตรงๆ: จุดนี้สำคัญมากสำหรับ Next.js Client Component)
+  if (!isMounted)
+    return <div className="h-20 w-full bg-transparent" aria-hidden="true" />
 
   return (
     <nav
       role="navigation"
-      aria-label="เมนูหลัก"
+      aria-label="เมนูนำทางหลัก"
       className={cn(
         "fixed top-0 z-[100] w-full antialiased transition-all duration-500",
         isScrolled
@@ -51,7 +54,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* 1. ส่วนแสดงสัญลักษณ์โครงการ (Brand Identity) */}
+        {/* 3. ส่วนอัตลักษณ์แบรนด์ (Brand Identity) */}
         <Link
           href="/"
           className="group flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
@@ -75,7 +78,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* 2. เมนูนำทางสำหรับจอคอมพิวเตอร์ (Desktop Navigation) */}
+        {/* 4. รายการเมนูสำหรับคอมพิวเตอร์ (Desktop Menu) */}
         <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
@@ -90,6 +93,7 @@ const Navbar = () => {
                 )}
               >
                 {item.name}
+                {/* พิกัดเส้นใต้เรืองแสงแสดงสถานะปัจจุบัน (Active Indicator) */}
                 {isActive && (
                   <motion.div
                     layoutId="nav-glow"
@@ -97,6 +101,7 @@ const Navbar = () => {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
+                {/* พิกัดป้ายแจ้งเตือน (Badge) */}
                 {item.badge && (
                   <span className="absolute -top-3 -right-8 flex h-4 items-center rounded-full bg-emerald-500 px-2 text-[7px] font-black tracking-[0.1em] text-white uppercase shadow-lg">
                     {item.badge}
@@ -106,6 +111,7 @@ const Navbar = () => {
             )
           })}
 
+          {/* ปุ่ม CTA หลักดึงข้อมูลจาก siteConfig */}
           <Link
             href="/contact"
             className="group font-heading flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
@@ -115,17 +121,18 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* 3. ส่วนควบคุมสำหรับมือถือ (Mobile Toggle) */}
+        {/* 5. ปุ่มเปิดเมนูสำหรับอุปกรณ์เคลื่อนที่ (Mobile Toggle) */}
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
+          aria-label={isMobileMenuOpen ? "ปิดเมนู" : "เปิดเมนู"}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* 4. เมนูนำทางสำหรับมือถือ (Mobile Overlay) */}
+      {/* 6. แผงเมนูสำหรับมือถือ (Mobile Navigation Overlay) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div

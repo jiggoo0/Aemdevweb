@@ -48,7 +48,7 @@ const stats = [
 
 /**
  * ระบบคำนวณตัวเลขวิ่ง (Counter Engine)
- * พัฒนาด้วย requestAnimationFrame เพื่อความลื่นไหลระดับ 60fps 
+ * พัฒนาด้วย requestAnimationFrame เพื่อความลื่นไหลระดับ 60fps
  * โดยจะเริ่มทำงานเมื่อเลื่อนมาถึงพิกัดการแสดงผลเท่านั้น
  */
 const Counter = ({
@@ -98,7 +98,7 @@ const Counter = ({
  */
 export const ImpactStats = () => {
   return (
-    <section className="relative overflow-hidden bg-white py-20 lg:py-32 selection:bg-emerald-100">
+    <section className="relative overflow-hidden bg-white py-20 selection:bg-emerald-100 lg:py-32">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 lg:gap-12">
           {stats.map((stat, index) => (

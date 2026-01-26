@@ -1,55 +1,37 @@
 /** @format */
 
-/**
- * นิยามข้อมูลหมวดหมู่ธุรกิจ (Template Categories)
- * จำกัดค่าเพื่อให้รองรับการทำ Filter และป้องกันการสะกดผิด
- */
+// 1. กำหนดหมวดหมู่ธุรกิจ (เพิ่มกลุ่ม Web Rental และ Car Rental เพื่อรองรับโปรเจกต์ใหม่)
 export type TemplateCategory =
   | "hotel"
   | "service"
   | "marketing"
   | "ecommerce"
-  | "all"
+  | "business"
+  | "platform" // สำหรับ Web Rental Platform
+  | "rental" // สำหรับธุรกิจเช่ารถ หรือเช่าอุปกรณ์
 
-/**
- * ข้อมูลพื้นฐานของเทมเพลต (Template Metadata)
- * ใช้สำหรับแสดงผลในการ์ด (Card) และการทำระบบค้นหาในหน้า Marketplace
- */
+// 2. ข้อมูลพื้นฐานสำหรับแสดงผลในหน้ารายการ (Marketplace Card)
 export interface TemplateMetadata {
-  /** ไอดีอ้างอิง (ID) ต้องตรงกับชื่อโฟลเดอร์ใน _components และ slug ใน URL */
-  id: string
-
-  /** ชื่อของเทมเพลตธุรกิจที่แสดงให้ลูกค้าเห็น */
-  name: string
-
-  /** หมวดหมู่ของธุรกิจเพื่อใช้ในการจัดกลุ่ม */
+  id: string // Slug สำหรับเข้าถึงหน้าเทมเพลต (เช่น 'shop-master-pro')
+  name: string // ชื่อเทมเพลตที่โชว์ให้ลูกค้าเห็น
   category: TemplateCategory
-
-  /** ที่อยู่รูปภาพตัวอย่าง (Thumbnail) แนะนำขนาดสัดส่วน 4:3 */
-  thumbnail: string
-
-  /** คำอธิบายสั้นๆ เกี่ยวกับจุดเด่นของโครงสร้างนี้ */
-  description: string
-
-  /** รายการคุณสมบัติเด่น (เลือกใส่ได้) เช่น 'Fast Load', 'SEO Ready' */
-  features?: string[]
-
-  /** สถานะของเทมเพลต เช่น 'new', 'popular' */
-  badge?: string
+  thumbnail: string // พิกัดรูปภาพตัวอย่าง
+  description: string // คำอธิบายสั้นๆ เพื่อปิดการขาย
+  pricePrefix?: string // เช่น 'เริ่มต้น'
+  priceValue?: string // เช่น '590'
+  isNew?: boolean // ป้ายกำกับสินค้าใหม่
 }
 
-/**
- * ข้อมูลเชิงลึกภายในเทมเพลต (Template Data Structure)
- * ใช้สำหรับส่งข้อมูล (Props) เข้าไปที่ Component ของแต่ละเทมเพลตโดยเฉพาะ
- */
-export interface TemplateDataStructure {
-  hero: {
-    title: string
-    subtitle?: string
-    description?: string
-    cta?: string
-    bgImage?: string
+// 3. ข้อมูลเนื้อหาเชิงลึก (สำหรับหน้า Preview หรือ Detail)
+export interface TemplateContent {
+  title: string
+  description: string
+  body: string
+  // พิกัดคะแนนประสิทธิภาพ (จุดขายหลักที่ชนะ Wix)
+  performance: {
+    lcp: string // Largest Contentful Paint (ความเร็ว)
+    seo: string // คะแนน SEO
+    stability: string // Core Web Vitals
   }
-  // ข้อมูลส่วนอื่นๆ สามารถขยายต่อได้ตามความซับซ้อนของแต่ละธุรกิจ
-  [key: string]: any
+  features?: string[] // จุดเด่นที่ลูกค้าจะได้รับ
 }

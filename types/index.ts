@@ -21,8 +21,14 @@ export interface FooterNavigation {
   legal: NavItem[]
 }
 
-/** * โครงสร้างการตั้งค่าระบบหลัก 
- * ปรับปรุงเพื่อรองรับการแสดงผลเชิงธุรกิจและพิกัดงานเทคนิค
+export interface NavigationConfig {
+  main: NavItem[]
+  footer: FooterNavigation
+}
+
+/**
+ * SiteConfig - โครงสร้างการตั้งค่าระบบหลัก
+ * ควบคุมพิกัดข้อมูล SEO มาตรฐานงาน และ Business Impact จากศูนย์กลาง
  */
 export interface SiteConfig {
   company: {
@@ -45,13 +51,11 @@ export interface SiteConfig {
     name: string
     role: string
   }
-  /** ข้อมูลสถิติเพื่อสร้างความน่าเชื่อถือ */
   stats: {
     label: string
     value: string
     suffix: string
   }[]
-  /** ผลกระทบเชิงธุรกิจที่ระบบงานมอบให้ลูกค้า */
   businessImpact: {
     speed: string
     seo: string
@@ -62,9 +66,8 @@ export interface SiteConfig {
     all: string
     core: string[]
     tech: string[]
-    brand: string[] // เพิ่มพิกัดนี้เพื่อรองรับข้อมูลใน site-config.ts
+    brand: string[]
   }
-  /** พิกัดการเชื่อมต่อภายนอก (ชุดเดิมสำหรับรองรับโค้ดเก่า) */
   links: {
     line: string
     lineId: string
@@ -72,7 +75,6 @@ export interface SiteConfig {
     linkedin?: string
     personal: string
   }
-  /** รวมพิกัดการติดต่อสื่อสารทั้งหมดไว้ที่เดียว */
   contact: {
     email: string
     line: string
@@ -129,6 +131,9 @@ export type ServiceIconName =
   | "Zap"
   | "Layout"
   | "TrendingUp"
+  | "BarChart3"
+  | "CheckCircle2"
+  | "LayoutTemplate"
 
 export interface ServiceItem {
   id: string
@@ -138,7 +143,9 @@ export interface ServiceItem {
   priceValue: number
   priceDisplay?: string
   category: "Starter" | "SME" | "Corporate" | "Industrial" | string
-  icon: ServiceIconName
+  // [FIXED]: ล้าง Warning TS143:28 โดยใช้ Union Type ของชื่อไอคอนร่วมกับ string
+  // เพื่อให้ระบบยังคงความยืดหยุ่นแต่ไม่ติดปัญหา any
+  icon?: ServiceIconName | (string & {})
   features: string[]
   highlight?: boolean
   themeColor?: string
@@ -153,12 +160,16 @@ export interface ShowcaseStats {
   value: string
 }
 
+/**
+ * CaseStudyFrontmatter - พิกัดข้อมูลเคสความสำเร็จ
+ */
 export interface CaseStudyFrontmatter {
   title: string
   client: string
   industry: string
   category: string
   excerpt: string
+  description?: string
   thumbnail: string
   date: string
   results: (string | ShowcaseStats)[]
@@ -175,7 +186,7 @@ export interface CaseStudyItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Engine)                                 */
+/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Marketplace)                           */
 /* -------------------------------------------------------------------------- */
 
 export interface TemplateItem {
@@ -194,7 +205,7 @@ export interface TemplateItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Social Proof)                  */
+/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Testimonials)                  */
 /* -------------------------------------------------------------------------- */
 
 export interface LeadFormSubmission {

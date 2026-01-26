@@ -9,12 +9,14 @@ import { getAllTemplates } from "@/lib/template"
 
 /**
  * ระบบสร้างแผนผังเว็บไซต์แบบอัตโนมัติ (Dynamic Sitemap)
- * จัดการลำดับความสำคัญและพิกัดข้อมูลเพื่อให้โปรแกรมค้นหาเข้าถึงเนื้อหาได้แม่นยำ
+ * จัดการลำดับความสำคัญ (Priority) และพิกัดข้อมูลเพื่อให้โปรแกรมค้นหา Index ได้แม่นยำที่สุด
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // จัดการพิกัด URL พื้นฐานให้สะอาด ป้องกันปัญหาเครื่องหมาย / ซ้อนกัน
+  // จัดการพิกัด URL พื้นฐานให้สะอาด ป้องกันปัญหาเครื่องหมาย / ซ้อนกันที่รอยต่อ
   const rawBaseUrl = siteConfig.project.url
-  const baseUrl = rawBaseUrl.endsWith("/") ? rawBaseUrl.slice(0, -1) : rawBaseUrl
+  const baseUrl = rawBaseUrl.endsWith("/")
+    ? rawBaseUrl.slice(0, -1)
+    : rawBaseUrl
 
   // 1. เส้นทางหน้าหลักและหน้าทั่วไป (Static Routes)
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -35,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // 2. เส้นทางหน้าบริการรายธุรกิจ (Service Pages)
+  // ให้ค่า Priority สูง (0.9) เพื่อช่วยเรื่อง SEO "รับทำ Landing Page" รายหมวดธุรกิจ
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
@@ -45,8 +48,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 3. เส้นทางหน้าผลงาน (Case Studies)
   const caseStudies = await getAllCaseStudies()
   const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => {
-    // ตรวจสอบความถูกต้องของพิกัดวันที่เพื่อป้องกันระบบพัง
-    const studyDate = study.frontmatter.date ? new Date(study.frontmatter.date) : new Date()
+    const studyDate = study.frontmatter.date
+      ? new Date(study.frontmatter.date)
+      : new Date()
     const validDate = isNaN(studyDate.getTime()) ? new Date() : studyDate
 
     return {
@@ -58,9 +62,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // 4. เส้นทางหน้าเทมเพลต (Templates)
+  // พิกัดข้อมูล tpl จาก getAllTemplates() คืออาเรย์ของ Slug โดยตรง
   const templates = await getAllTemplates()
   const templateRoutes: MetadataRoute.Sitemap = templates.map((tpl) => ({
-    url: `${baseUrl}/templates/${tpl.id}`,
+    url: `${baseUrl}/templates/${tpl}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.8,
@@ -69,7 +74,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 5. เส้นทางหน้าบทความ (Blog Posts)
   const posts = await getAllPosts()
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => {
-    const postDate = post.frontmatter.date ? new Date(post.frontmatter.date) : new Date()
+    const postDate = post.frontmatter.date
+      ? new Date(post.frontmatter.date)
+      : new Date()
     const validDate = isNaN(postDate.getTime()) ? new Date() : postDate
 
     return {
@@ -80,7 +87,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   })
 
-  // รวมพิกัดข้อมูลทั้งหมดและคัดกรองตัวซ้ำ
+  // รวมพิกัดเส้นทางทั้งหมดเข้าด้วยกัน
   const allRoutes = [
     ...staticRoutes,
     ...serviceRoutes,
@@ -89,6 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogRoutes,
   ]
 
+  // กรอง URL ที่ซ้ำออก (ถ้ามี) เพื่อส่งออกข้อมูลที่สะอาดที่สุดให้บอท
   return allRoutes.filter(
     (route, index, self) => index === self.findIndex((r) => r.url === route.url)
   )

@@ -52,7 +52,7 @@ export interface CategoryInfo {
 }
 
 /* -------------------------------------------------------------------------- */
-/* ข้อมูลหมวดหมู่ - เน้นกลุ่ม SME และโรงงาน                                        */
+/* ข้อมูลหมวดหมู่ - เน้นกลุ่ม SME และอุตสาหกรรม                                     */
 /* -------------------------------------------------------------------------- */
 
 export const categoriesData: CategoryInfo[] = [
@@ -67,35 +67,40 @@ export const categoriesData: CategoryInfo[] = [
     slug: "sme",
     name: "เว็บไซต์ธุรกิจ SME",
     themeColor: "emerald",
-    description: "ยกระดับความน่าเชื่อถือด้วยเว็บไซต์มาตรฐานสากล พร้อมระบบ Technical SEO",
+    description:
+      "ยกระดับความน่าเชื่อถือด้วยเว็บไซต์มาตรฐานสากล พร้อมระบบ Technical SEO",
     icon: Store,
   },
   {
     slug: "corporate",
     name: "เว็บไซต์องค์กร (Corporate)",
     themeColor: "blue",
-    description: "เน้นภาพลักษณ์ระดับ B2B ความปลอดภัยสูง และความเสถียรของระบบในระยะยาว",
+    description:
+      "เน้นภาพลักษณ์ระดับ B2B ความปลอดภัยสูง และความเสถียรของระบบในระยะยาว",
     icon: Building2,
   },
   {
     slug: "industrial",
     name: "ระบบแคตตาล็อกโรงงาน",
     themeColor: "indigo",
-    description: "จัดการข้อมูลสินค้าอุตสาหกรรมจำนวนมาก ค้นหาง่าย และรองรับการทำใบเสนอราคา",
+    description:
+      "จัดการข้อมูลสินค้าอุตสาหกรรมจำนวนมาก ค้นหาง่าย และรองรับการทำใบเสนอราคา",
     icon: Factory,
   },
   {
     slug: "seo-technical",
     name: "ปรับแต่ง Technical SEO",
     themeColor: "amber",
-    description: "แก้ไขโครงสร้างหลังบ้านเพื่อให้ระบบค้นหาเจอและจัดอันดับได้ง่ายขึ้น",
+    description:
+      "แก้ไขโครงสร้างหลังบ้านเพื่อให้ระบบค้นหาเจอและจัดอันดับได้ง่ายขึ้น",
     icon: Settings2,
   },
   {
     slug: "seo-organic",
     name: "วางกลยุทธ์ SEO รายเดือน",
     themeColor: "rose",
-    description: "เพิ่มยอดเข้าชมจากธรรมชาติด้วยคีย์เวิร์ดที่สร้างรายได้จริงให้กับธุรกิจ",
+    description:
+      "เพิ่มยอดเข้าชมจากธรรมชาติด้วยคีย์เวิร์ดที่สร้างรายได้จริงให้กับธุรกิจ",
     icon: TrendingUp,
   },
 ]
@@ -110,7 +115,8 @@ export const services: ServiceItem[] = [
     title: "Sale Page: เน้นการปิดการขาย (High Conversion)",
     slug: "starter-one-page",
     category: "Starter",
-    description: "หน้าขายของที่ออกแบบตามหลักจิตวิทยาการขาย โหลดไวใน 1 วินาทีเพื่อไม่ให้พลาดโอกาส",
+    description:
+      "หน้าขายของที่ออกแบบตามหลักจิตวิทยาการขาย โหลดไวใน 1 วินาทีเพื่อไม่ให้พลาดโอกาส",
     price: "เริ่มต้น 5,900.-",
     priceValue: 5900,
     features: [
@@ -126,7 +132,8 @@ export const services: ServiceItem[] = [
     title: "SME Pro: เว็บไซต์ธุรกิจครบวงจร",
     slug: "sme-speed-launch",
     category: "SME",
-    description: "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ที่โครงสร้างถูกออกแบบมาเพื่อ Google โดยเฉพาะ",
+    description:
+      "เว็บไซต์มาตรฐานธุรกิจ 5-8 หน้า ที่โครงสร้างถูกออกแบบมาเพื่อ Google โดยเฉพาะ",
     price: "เริ่มต้น 12,900.-",
     priceValue: 12900,
     highlight: true,
@@ -143,7 +150,8 @@ export const services: ServiceItem[] = [
     title: "Corporate Identity: เว็บไซต์องค์กรมาตรฐานสากล",
     slug: "corporate-trust",
     category: "Corporate",
-    description: "สร้างความเชื่อมั่นให้คู่ค้าด้วยระบบที่นิ่งและปลอดภัย รองรับการขยายตัวขององค์กร",
+    description:
+      "สร้างความเชื่อมั่นให้คู่ค้าด้วยระบบที่นิ่งและปลอดภัย รองรับการขยายตัวขององค์กร",
     price: "เริ่มต้น 25,900.-",
     priceValue: 25900,
     features: [
@@ -159,7 +167,8 @@ export const services: ServiceItem[] = [
     title: "Industrial E-Catalog: ระบบจัดการสินค้าอุตสาหกรรม",
     slug: "industrial-catalog",
     category: "Industrial",
-    description: "เปลี่ยนคลังสินค้าให้เป็นออนไลน์ ค้นหาสเปกได้ละเอียด และขอใบเสนอราคาได้รวดเร็ว",
+    description:
+      "เปลี่ยนคลังสินค้าให้เป็นออนไลน์ ค้นหาสเปกได้ละเอียด และขอใบเสนอราคาได้รวดเร็ว",
     price: "เริ่มต้น 39,900.-",
     priceValue: 39900,
     features: [
@@ -175,7 +184,8 @@ export const services: ServiceItem[] = [
     title: "Technical SEO System & Audit",
     slug: "seo-technical",
     category: "SEO_Technical",
-    description: "ตรวจสุขภาพและแก้ไขจุดบอดหลังบ้านที่ขัดขวางไม่ให้เว็บของคุณติดอันดับแรก",
+    description:
+      "ตรวจสุขภาพและแก้ไขจุดบอดหลังบ้านที่ขัดขวางไม่ให้เว็บของคุณติดอันดับแรก",
     price: "เริ่มต้น 4,900.-",
     priceValue: 4900,
     features: [
@@ -192,7 +202,8 @@ export const services: ServiceItem[] = [
     title: "Monthly SEO: วางกลยุทธ์เติบโตระยะยาว",
     slug: "seo-organic",
     category: "SEO_Organic",
-    description: "สร้างฐานลูกค้าจาก Google โดยไม่ต้องพึ่งพาค่าโฆษณาด้วยคีย์เวิร์ดที่ทำเงิน",
+    description:
+      "สร้างฐานลูกค้าจาก Google โดยไม่ต้องพึ่งพาค่าโฆษณาด้วยคีย์เวิร์ดที่ทำเงิน",
     price: "เริ่มต้น 8,900.- / เดือน",
     priceValue: 8900,
     features: [
