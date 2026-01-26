@@ -15,15 +15,16 @@ import {
 } from "lucide-react"
 
 // ส่วนจัดการข้อมูลและโครงสร้างระบบ
-import { services } from "@/constants/services-data"
+import { services, categoriesData } from "@/constants/services-data"
 import { siteConfig } from "@/constants/site-config"
-import { getTemplatesByServiceCategory } from "@/lib/template"
+import { getAllTemplates } from "@/lib/template"
+import { TemplateMetadata } from "@/types/template"
 
 // ส่วนประกอบคอมโพเนนต์เฉพาะทาง
 import { JsonLd } from "@/components/seo/JsonLd"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
-import { TemplateGrid } from "@/components/template/marketplace/TemplateGrid"
+import { TemplateGrid } from "@/components/marketplace/template/TemplateGrid"
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>
@@ -38,16 +39,18 @@ export async function generateMetadata({
   const { slug } = await params
   const service = services.find((s) => s.slug === slug)
 
-  if (!service) return { title: `ไม่พบข้อมูลบริการ | ${siteConfig.shortName}` }
+  if (!service) {
+    return { title: `ไม่พบข้อมูลบริการ | ${siteConfig.project.shortName}` }
+  }
 
   return {
-    title: `${service.title} | ระบบงานเว็บเฉพาะทางโดย ${siteConfig.expert}`,
+    title: `${service.title} | ระบบงานเว็บเฉพาะทางโดย ${siteConfig.expert.name}`,
     description: service.description,
-    alternates: { canonical: `${siteConfig.url}/services/${slug}` },
+    alternates: { canonical: `${siteConfig.project.url}/services/${slug}` },
     openGraph: {
       title: service.title,
       description: service.description,
-      images: [{ url: (service as any).image || siteConfig.ogImage }],
+      images: [{ url: (service as any).image || siteConfig.project.ogImage }],
     },
   }
 }
@@ -57,12 +60,22 @@ export async function generateMetadata({
  */
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params
-  const service = services.find((s) => s.slug === slug)
 
+  // 1. ค้นหาข้อมูลบริการหลัก
+  const service = services.find((s) => s.slug === slug)
   if (!service) notFound()
 
-  // ดึงรายการเทมเพลตที่แนะนำสำหรับกลุ่มธุรกิจนี้
-  const relatedTemplates = await getTemplatesByServiceCategory(service.category)
+  // 2. ดึงข้อมูลหมวดหมู่เพื่อใช้แสดง Icon หรือสี (Mapping Logic)
+  const categoryInfo = categoriesData.find(
+    (c) => c.slug === service.category.toLowerCase().replace("_", "-")
+  )
+
+  // 3. ดึงข้อมูลเทมเพลตทั้งหมดและกรองรายการที่เกี่ยวข้อง
+  const allTemplates = await getAllTemplates()
+  const relatedTemplates = allTemplates.filter(
+    (t: TemplateMetadata) =>
+      (t.category as string) === (service.category as string)
+  )
 
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
@@ -73,8 +86,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           description: service.description,
           provider: {
             "@type": "Person",
-            name: siteConfig.expert,
-            url: siteConfig.url,
+            name: siteConfig.expert.name,
+            url: siteConfig.project.url,
           },
           offers: {
             "@type": "Offer",
@@ -84,10 +97,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }}
       />
 
-      {/* ส่วนตกแต่งพื้นหลังเชิงเทคนิค */}
+      {/* พื้นหลังกราฟิกตารางพิกัด */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
-      {/* การนำทางและ Breadcrumb */}
       <nav className="relative z-10 container mx-auto px-6 pt-32 lg:pt-40">
         <Link
           href="/services"
@@ -101,25 +113,29 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </Link>
       </nav>
 
-      {/* ส่วนเนื้อหาหลัก (Hero Section) */}
       <section className="relative py-12 lg:py-24">
         <div className="container mx-auto px-6">
           <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
-            {/* ฝั่งซ้าย: ข้อมูลและจุดเด่นของบริการ */}
             <div className="space-y-10">
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-2 text-[10px] font-black tracking-widest text-emerald-600 uppercase italic">
-                <Zap size={14} fill="currentColor" />
-                Performance Specialist v2026
+                {categoryInfo?.icon ? (
+                  <categoryInfo.icon size={14} />
+                ) : (
+                  <Zap size={14} fill="currentColor" />
+                )}
+                {categoryInfo?.name || "Performance Specialist"}
               </div>
 
               <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
-                {service.title.split(" ")[0]} <br />
+                {service.title.split(":")[0]} <br />
                 <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-[12px]">
-                  {service.title.split(" ").slice(1).join(" ")}
+                  {service.title.includes(":")
+                    ? service.title.split(":")[1]
+                    : service.title.split(" ").slice(1).join(" ")}
                 </span>
               </h1>
 
-              <p className="font-anuphan max-w-xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+              <p className="max-w-xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
                 {service.description}
               </p>
 
@@ -133,7 +149,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       size={24}
                       className="shrink-0 text-emerald-500"
                     />
-                    <span className="font-anuphan text-lg leading-none font-bold text-slate-900">
+                    <span className="text-lg leading-none font-bold text-slate-900">
                       {feature}
                     </span>
                   </div>
@@ -141,9 +157,8 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </div>
             </div>
 
-            {/* ฝั่งขวา: การแสดงราคาและส่วนติดต่อ Lead Generation */}
             <div className="relative">
-              <div className="shadow-3xl relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white md:p-20">
+              <div className="relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white shadow-2xl md:p-20">
                 <div className="pointer-events-none absolute top-0 right-0 p-10 opacity-5">
                   <ShieldCheck size={300} className="text-emerald-500" />
                 </div>
@@ -158,9 +173,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                     </span>
                     {service.priceValue?.toLocaleString() || "Custom"}
                   </div>
-                  <p className="font-anuphan mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
-                    สร้างด้วยโครงสร้างระบบประสิทธิภาพสูง <br />
-                    พร้อมระบบจัดการข้อมูลมาตรฐานปี 2026
+                  <p className="mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
+                    วางโครงสร้างระบบประสิทธิภาพสูง <br />
+                    พร้อมจัดการข้อมูลมาตรฐานปี 2026
                   </p>
 
                   <LineLeadForm
@@ -176,13 +191,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* ส่วนแสดงสถิติความสำเร็จ */}
       <div className="border-y border-slate-50 bg-white">
         <ImpactStats />
       </div>
 
-      {/* ส่วนแนะนำเทมเพลตที่เกี่ยวข้อง (Marketplace Integration) */}
-      {relatedTemplates && relatedTemplates.length > 0 && (
+      {relatedTemplates.length > 0 && (
         <section className="overflow-hidden bg-slate-50/50 py-24 lg:py-40">
           <div className="container mx-auto px-6">
             <div className="mb-20 flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
@@ -208,12 +221,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </Link>
             </div>
 
-            <TemplateGrid initialTemplates={relatedTemplates} />
+            {/* [FIXED]: ลบ activeCategory ออกตามโครงสร้างคอมโพเนนต์ใหม่ */}
+            <TemplateGrid templates={relatedTemplates} />
           </div>
         </section>
       )}
 
-      {/* ส่วนตอกย้ำความเชื่อมั่น (Authority Section) */}
       <section className="overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto px-6">
           <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center shadow-2xl shadow-slate-200/50 md:p-24">
@@ -223,11 +236,11 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             <h2 className="font-prompt mb-10 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
               ทำไมต้องเลือกทำกับ <br />
               <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-8">
-                นายเอ็มซ่ามากส์?
+                {siteConfig.expert.name}?
               </span>
             </h2>
 
-            <div className="font-anuphan mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+            <div className="mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               <p>
                 ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมคือที่ปรึกษาเชิงเทคนิค
                 ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางโครงสร้างระบบการค้นหา
@@ -260,10 +273,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </div>
       </section>
 
-      {/* ส่วนท้ายข้อมูลระบบ */}
       <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-End Systems by {siteConfig.expert} v2026
+          High-End Systems by {siteConfig.expert.name} v2026
         </p>
       </footer>
     </main>

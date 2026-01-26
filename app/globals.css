@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Identity & Core Colors (Shadcn v4 compatible) */
+  /* อัตลักษณ์ของแบรนด์และระบบสีพื้นฐาน (รองรับ Shadcn v4) */
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(222.2 84% 4.9%);
 
@@ -15,31 +15,31 @@
   --color-accent: hsl(210 40% 96.1%);
   --color-accent-foreground: hsl(222.2 47.4% 11.2%);
 
-  /* Specialist Emerald Logic (Brand DNA) */
+  /* ระบบสีเขียวมรกต (เอกลักษณ์ของ AEMDEVWEB) */
   --color-success: hsl(158 64% 52%);
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
 
-  /* Accessibility Safe Colors: Optimized for mobile contrast */
-  --color-slate-muted: #64748b; /* Equivalent to Slate-500 for AA/AAA compliance */
+  /* สีสำหรับการอ่านที่ผ่านเกณฑ์มาตรฐานการมองเห็น (Contrast) */
+  --color-slate-muted: #64748b;
 
   --color-destructive: hsl(0 84.2% 60.2%);
 
-  /* UI Elements & Variables */
+  /* ส่วนประกอบของระบบจัดการหน้าจอ */
   --color-border: hsl(214.3 31.8% 91.4%);
   --color-input: hsl(214.3 31.8% 91.4%);
   --color-ring: hsl(222.2 84% 4.9%);
 
-  /* Industrial Geometry */
+  /* การจัดการความโค้งมนของขอบงาน */
   --radius-lg: 0.75rem;
   --radius-md: calc(0.75rem - 2px);
   --radius-sm: calc(0.75rem - 4px);
 
-  /* Typography Bridge */
+  /* การเชื่อมโยงระบบตัวอักษร */
   --font-prompt: var(--font-prompt);
   --font-anuphan: var(--font-anuphan);
 
-  /* Industrial Micro-Interactions */
+  /* ระบบการเคลื่อนไหวพื้นฐาน */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -62,12 +62,12 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Base Layer: Stability and Framework Standards                              */
+/* ส่วนการตั้งค่าพื้นฐาน (Base Layer)                                          */
 /* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    /* Direct CSS Variable usage to prevent Build Errors in Tailwind v4 */
+    /* ใช้ตัวแปรโดยตรงเพื่อลดความผิดพลาดในการประมวลผลของ Tailwind v4 */
     border-color: var(--color-border);
     outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
@@ -98,11 +98,11 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/* Utilities Layer: Performance & Accessibility Tuning                        */
+/* ส่วนการจัดการประสิทธิภาพและการใช้งาน (Utilities Layer)                        */
 /* -------------------------------------------------------------------------- */
 
 @layer utilities {
-  /* High contrast utility for Lighthouse compliance */
+  /* การคุมระดับสีตัวหนังสือให้ผ่านเกณฑ์ Lighthouse */
   .text-muted-safe {
     color: var(--color-slate-muted);
   }
@@ -111,24 +111,24 @@
     text-wrap: balance;
   }
 
-  /* Prevent Thai Flash of Unstyled Text (FOUT) */
+  /* ป้องกันการแสดงผลตัวอักษรไทยที่ผิดเพี้ยน */
   .thai-font-smoothing {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* Industrial depth shadow */
+  /* ระบบเงาที่เน้นความนุ่มนวลและดูเป็นระเบียบ */
   .industrial-shadow {
     box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
   }
 
-  /* Brand gradient */
+  /* การไล่ระดับสีของแบรนด์ */
   .text-gradient-emerald {
     @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
   }
 
-  /* Infinite Scroll Animation (CPU Optimized) */
+  /* ระบบเลื่อนข้อมูลอัตโนมัติ (ประมวลผลผ่าน GPU) */
   @keyframes infinite-scroll {
     from {
       transform: translateX(0);
@@ -141,7 +141,7 @@
   .animate-infinite-scroll {
     animation: infinite-scroll 25s linear infinite;
 
-    /* Performance Optimization: Force GPU Acceleration to reduce Main Thread load */
+    /* บังคับการประมวลผลผ่านชิปกราฟิกเพื่อลดภาระการทำงานหลักของเครื่อง */
     will-change: transform;
     transform: translateZ(0);
   }

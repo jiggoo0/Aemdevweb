@@ -2,7 +2,9 @@
 
 import React from "react"
 import type { Metadata } from "next"
+// แก้ไขจุดเสี่ยง: นำเข้า Link เพื่อใช้งานในส่วนท้ายของหน้า
 import Link from "next/link"
+
 import {
   Users,
   Target,
@@ -18,27 +20,27 @@ import { siteConfig } from "@/constants/site-config"
 import { Button } from "@/components/ui/button"
 
 /**
- * ข้อมูลส่วนหัว: เน้นการดึงดูดบุคลากรเฉพาะทางที่มีเป้าหมายร่วมกัน
+ * ข้อมูลส่วนหัว: ปรับการดึง shortName มาที่ระดับ project
+ * เพื่อแก้ปัญหา Error TS2339
  */
 export const metadata: Metadata = {
-  title: `ร่วมงานกับทีมเฉพาะทาง | ${siteConfig.shortName}`,
+  title: `ร่วมงานกับทีมเฉพาะทาง | ${siteConfig.project.shortName}`,
   description:
-    "ร่วมเป็นส่วนหนึ่งในการขับเคลื่อนธุรกิจ SME และกลุ่มอุตสาหกรรมด้วยเทคโนโลยี Next.js และการทำอันดับระบบค้นหาระดับสูง",
+    "ร่วมเป็นส่วนหนึ่งในการขับเคลื่อนธุรกิจ SME และกลุ่มอุตสาหกรรมด้วยเทคนิค Next.js และการวางลำดับข้อมูลที่แม่นยำ",
 }
 
 export default function CareersPage() {
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* ส่วนประกอบพื้นหลังเชิงเทคนิค */}
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
-      {/* 1. ส่วนหัวของหน้า (Hero Section): เน้นความเป็นมืออาชีพ */}
+      {/* 1. ส่วนหัวของหน้า (Hero Section) */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl">
             <div className="animate-in fade-in slide-in-from-bottom-2 mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-2 text-emerald-600 duration-700">
               <Users size={16} />
-              <span className="font-prompt text-[10px] font-black tracking-[0.4em] uppercase italic">
+              <span className="font-prompt text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
                 Collaboration & Talent Hub
               </span>
             </div>
@@ -50,15 +52,15 @@ export default function CareersPage() {
 
             <p className="font-anuphan max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               เราไม่ได้มองหาแค่ทีมงาน
-              แต่เรามองหาพาร์ทเนอร์ที่มีความใส่ใจในคุณภาพ
-              เพื่อช่วยให้กลุ่มธุรกิจ SME และโรงงานไทย
-              นำหน้าคู่แข่งด้วยเทคโนโลยีล่าสุดในปัจจุบัน
+              แต่เรามองหาพาร์ทเนอร์ที่มีความใส่ใจในรายละเอียด
+              เพื่อช่วยให้กลุ่มธุรกิจ SME
+              นำหน้าคู่แข่งด้วยระบบที่เสถียรที่สุดในปัจจุบัน
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. ส่วนค่านิยมหลัก (Core Values): กฎเหล็กของคนทำงานเทคนิค */}
+      {/* 2. ส่วนค่านิยมหลัก (Core Values) */}
       <section className="bg-slate-50/80 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16">
@@ -70,7 +72,7 @@ export default function CareersPage() {
             <ValueCard
               icon={<Target size={28} className="text-emerald-500" />}
               title="Precision Code"
-              description="เราเชื่อในความแม่นยำ ทุกบรรทัดต้องมีที่มา และทุกพิกเซลต้องตอบโจทย์ผู้ใช้งานจริง"
+              description="เราเชื่อในความแม่นยำ ทุกบรรทัดต้องมีที่มา และทุกจุดต้องตอบโจทย์ผู้ใช้งานจริง"
             />
             <ValueCard
               icon={
@@ -81,18 +83,18 @@ export default function CareersPage() {
                 />
               }
               title="Ultra Speed"
-              description="ความเร็วคือมาตรฐานสูงสุดของเรา ระบบที่เราสร้างต้องมีคะแนนประสิทธิภาพเต็มร้อยเท่านั้น"
+              description="ความเร็วคือมาตรฐานสูงสุด ระบบที่เราสร้างต้องมีคะแนนประสิทธิภาพที่ยอดเยี่ยมเท่านั้น"
             />
             <ValueCard
               icon={<ShieldCheck size={28} className="text-emerald-500" />}
               title="Endless Trust"
-              description="ความซื่อสัตย์ต่อลูกค้าคือหัวใจ เราส่งมอบงานที่ยอดเยี่ยมที่สุด ไม่ใช่แค่เสร็จตามกำหนด"
+              description="ความซื่อสัตย์คือหัวใจ เราส่งมอบงานที่ยอดเยี่ยมที่สุดเพื่อให้ธุรกิจเติบโตได้จริง"
             />
           </div>
         </div>
       </section>
 
-      {/* 3. ส่วนสถานะการรับสมัครและกลุ่มผู้สนใจในอนาคต */}
+      {/* 3. ส่วนสถานะการรับสมัคร */}
       <section className="px-6 py-32">
         <div className="container mx-auto">
           <div className="shadow-3xl relative mx-auto max-w-5xl overflow-hidden rounded-[4rem] bg-slate-950 p-12 text-center md:p-24">
@@ -110,22 +112,25 @@ export default function CareersPage() {
                   Currently <span className="text-emerald-500">Not Hiring</span>
                 </h2>
                 <p className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400">
-                  ขณะนี้ นายเอ็มซ่ามากส์ ยังไม่มีการเปิดรับสมัครทีมงานประจำ
-                  แต่พี่มีความยินดีอย่างยิ่งที่จะได้ทำความรู้จักกับ
-                  <b>Designer, Developer หรือ SEO Specialist</b>
+                  ขณะนี้ยังไม่มีการเปิดรับสมัครทีมงานประจำ
+                  แต่ผมยินดีอย่างยิ่งที่จะได้ทำความรู้จักกับผู้เชี่ยวชาญด้าน
+                  <b>Design, Development หรือ SEO</b>
                   เพื่อร่วมโครงการพิเศษในอนาคตครับ
                 </p>
               </div>
 
               <div className="flex flex-col items-center justify-center gap-8 pt-6 sm:flex-row">
+                {/* แก้ไขจุดพิกัด Email: ชี้ไปที่ company.email */}
                 <Button
                   className="h-16 rounded-2xl bg-emerald-500 px-12 text-slate-950 transition-colors hover:bg-white"
                   asChild
                 >
-                  <a href={`mailto:${siteConfig.email}`}>
+                  <a href={`mailto:${siteConfig.company.email}`}>
                     <Mail className="mr-3 h-5 w-5" /> Drop your Profile
                   </a>
                 </Button>
+
+                {/* แก้ไขจุดเสี่ยง: เรียกใช้ Link Component ที่นำเข้าอย่างถูกต้อง */}
                 <Link
                   href="/contact"
                   className="group font-prompt flex items-center gap-3 text-xs font-black tracking-[0.3em] text-white uppercase transition-all hover:text-emerald-400"
@@ -142,9 +147,6 @@ export default function CareersPage() {
   )
 }
 
-/**
- * ส่วนประกอบย่อย: บัตรข้อมูลค่านิยม
- */
 function ValueCard({
   icon,
   title,

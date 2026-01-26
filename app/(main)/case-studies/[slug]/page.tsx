@@ -6,7 +6,6 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 
-// ข้อมูลไอคอนและส่วนประกอบการแสดงผล
 import {
   ArrowLeft,
   Calendar,
@@ -29,68 +28,58 @@ import {
   AlertTriangle,
 } from "lucide-react"
 
-// ระบบจัดการเนื้อหา MDX
 import { MDXRemote } from "next-mdx-remote/rsc"
-
-// ชุดข้อมูลและโครงสร้างระบบหลัก
 import { getCaseStudyBySlug, getCaseStudySlugs } from "@/lib/case-studies"
 import { useMDXComponents } from "@/mdx-components"
 import { siteConfig } from "@/constants/site-config"
 
-// ส่วนประกอบคอมโพเนนต์เฉพาะทาง
 import { JsonLd } from "@/components/seo/JsonLd"
 import CTASection from "@/components/landing/CTASection"
-
-// ส่วนประกอบระบบงานเพื่อการปิดการขาย
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
 import WorkProcess from "@/components/sales-engine/WorkProcess"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
-/* -------------------------------------------------------------------------- */
-/* นิยามประเภทข้อมูล (Type Definitions)                                         */
-/* -------------------------------------------------------------------------- */
-
 interface CaseStudyPageProps {
   params: Promise<{ slug: string }>
 }
-
-/* -------------------------------------------------------------------------- */
-/* ระบบจัดการข้อมูลฝั่งเซิร์ฟเวอร์ (Server Side Logic)                             */
-/* -------------------------------------------------------------------------- */
 
 export async function generateStaticParams() {
   const slugs = getCaseStudySlugs()
   return slugs.map((slug) => ({ slug }))
 }
 
+/**
+ * แก้ไขจุดที่ 1: Metadata Engine
+ * ปรับการเรียกพิกัดจาก siteConfig.name เป็น siteConfig.project.name
+ * และแก้ปัญหาเรื่อง URL ของรูปภาพ OG
+ */
 export async function generateMetadata({
   params,
 }: CaseStudyPageProps): Promise<Metadata> {
   const { slug } = await params
   const caseStudy = await getCaseStudyBySlug(slug)
 
-  if (!caseStudy) return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.name}` }
+  if (!caseStudy)
+    return { title: `ไม่พบข้อมูลผลงาน | ${siteConfig.project.name}` }
 
   return {
-    title: `${caseStudy.frontmatter.title} | ${siteConfig.name}`,
+    title: `${caseStudy.frontmatter.title} | ${siteConfig.project.name}`,
     description: caseStudy.frontmatter.excerpt,
     openGraph: {
       title: caseStudy.frontmatter.title,
       description: caseStudy.frontmatter.excerpt,
       type: "article",
-      url: `${siteConfig.url}/case-studies/${slug}`,
-      images: [{ url: caseStudy.frontmatter.thumbnail || siteConfig.ogImage }],
+      url: `${siteConfig.project.url}/case-studies/${slug}`,
+      images: [
+        { url: caseStudy.frontmatter.thumbnail || siteConfig.project.ogImage },
+      ],
     },
     alternates: {
-      canonical: `${siteConfig.url}/case-studies/${slug}`,
+      canonical: `${siteConfig.project.url}/case-studies/${slug}`,
     },
   }
 }
-
-/* -------------------------------------------------------------------------- */
-/* หน้าแสดงรายละเอียดผลงาน (Case Study Detail Page)                             */
-/* -------------------------------------------------------------------------- */
 
 export default async function CaseStudyDetailPage({
   params,
@@ -100,19 +89,13 @@ export default async function CaseStudyDetailPage({
 
   if (!caseStudy) notFound()
 
-  /**
-   * การลงทะเบียนคอมโพเนนต์สำหรับใช้งานในเนื้อหา MDX
-   * ป้องกันปัญหาคอมโพเนนต์ไม่ถูกนิยาม (ReferenceError) ในขณะเรนเดอร์
-   */
   const mdxComponents = {
     ...useMDXComponents({}),
-    // คอมโพเนนต์จัดการระบบงาน
     ImpactStats,
     SpeedDemon,
     WorkProcess,
     LineLeadForm,
     CallToAction: CTASection,
-    // ชุดไอคอนสำหรับการแสดงผลในเนื้อหา
     CheckCircle,
     Settings,
     Factory,
@@ -133,6 +116,9 @@ export default async function CaseStudyDetailPage({
 
   return (
     <article className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* แก้ไขจุดที่ 2: JSON-LD 
+          เปลี่ยนจาก siteConfig.expert เป็น siteConfig.expert.name
+      */}
       <JsonLd
         type="Article"
         data={{
@@ -140,11 +126,14 @@ export default async function CaseStudyDetailPage({
           description: caseStudy.frontmatter.excerpt,
           image: caseStudy.frontmatter.thumbnail,
           datePublished: caseStudy.frontmatter.date,
-          author: { "@type": "Person", name: siteConfig.expert },
+          author: {
+            "@type": "Person",
+            name: siteConfig.expert.name,
+            url: siteConfig.project.url,
+          },
         }}
       />
 
-      {/* 1. ส่วนหัวของหน้าและข้อมูลเบื้องต้น */}
       <header className="relative pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="container mx-auto px-6">
           <Link
@@ -179,7 +168,6 @@ export default async function CaseStudyDetailPage({
         </div>
       </header>
 
-      {/* 2. ส่วนแสดงรูปภาพหลักของโครงการ */}
       <div className="container mx-auto mb-24 px-6">
         <div className="relative aspect-[21/10] w-full overflow-hidden rounded-[4rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
@@ -193,29 +181,28 @@ export default async function CaseStudyDetailPage({
         </div>
       </div>
 
-      {/* 3. ส่วนเนื้อหาหลักเชิงเทคนิค (MDX Content) */}
       <main className="container mx-auto px-6">
         <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-slate-950 prose-headings:uppercase prose-headings:italic prose-p:font-anuphan prose-p:text-xl prose-p:leading-relaxed mx-auto mb-32 max-w-4xl">
           <MDXRemote source={caseStudy.content} components={mdxComponents} />
         </div>
       </main>
 
-      {/* 4. ส่วนสรุปผลลัพธ์และความสำเร็จ */}
       <div className="border-y border-slate-50 bg-slate-50/50 py-24">
         <div className="container mx-auto px-6">
           <ImpactStats />
         </div>
       </div>
 
-      {/* 5. ส่วนกระตุ้นการตัดสินใจ (CTA) */}
       <div className="mt-32">
         <CTASection />
       </div>
 
-      {/* ส่วนท้ายข้อมูลระบบ */}
+      {/* แก้ไขจุดที่ 3: Footer
+          ใช้ siteConfig.expert.name เพื่อป้องกัน Error ReactNode
+      */}
       <footer className="mt-24 text-center opacity-30 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-Security Methods by {siteConfig.expert} v2026
+          High-Security Methods by {siteConfig.expert.name} v2026
         </p>
       </footer>
     </article>

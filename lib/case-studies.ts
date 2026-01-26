@@ -66,8 +66,12 @@ export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
     })
     // จัดลำดับข้อมูลโดยใช้วันที่ล่าสุดขึ้นก่อนเสมอ
     .sort((a, b) => {
-      const dateA = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0
-      const dateB = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0
+      const dateA = a.frontmatter.date
+        ? new Date(a.frontmatter.date).getTime()
+        : 0
+      const dateB = b.frontmatter.date
+        ? new Date(b.frontmatter.date).getTime()
+        : 0
       return dateB - dateA
     })
 

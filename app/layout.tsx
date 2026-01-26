@@ -1,46 +1,56 @@
 /** @format */
 
 import React from "react"
-import type { Metadata, Viewport } from "next"
+import { Metadata, Viewport } from "next"
 import NextTopLoader from "nextjs-toploader"
 import { Prompt, Anuphan } from "next/font/google"
 
 import { cn } from "@/lib/utils"
-import { constructMetadata, siteConfig } from "@/constants/site-config"
+import { siteConfig } from "@/constants/site-config"
+import { constructMetadata } from "@/app/metadata"
 import { viewport as defaultViewport } from "./viewport"
+
+import { JsonLd } from "@/components/seo/JsonLd"
+import { Toaster } from "@/components/ui/sonner"
 import { FacebookChat } from "@/components/shared/FacebookChat"
 
-import "./globals.css"
+import "@/app/globals.css"
 
-/* * การตั้งค่าฟอนต์: เน้นความอ่านง่ายและสบายตา (Friendly Typography)
- * Prompt: ใช้สำหรับส่วนหัว (Headings) เพื่อความชัดเจน
- * Anuphan: ใช้สำหรับเนื้อหาหลัก (Body) เพื่อความทันสมัยและอ่านง่าย
+/**
+ * จัดการชุดฟอนต์: ล็อคความนิ่งของหน้าจอด้วย display: "swap"
+ * เน้นน้ำหนักที่ใช้งานจริงตั้งแต่บางสุดจนถึงหนาพิเศษ
  */
-
 const fontPrompt = Prompt({
-  subsets: ["thai", "latin"],
-  weight: ["400", "600", "700"],
+  subsets: ["latin", "thai"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-prompt",
-  display: "swap", // ใช้ swap เพื่อให้ข้อความแสดงทันที ลดอาการ CLS
-  preload: true,
+  display: "swap",
 })
 
 const fontAnuphan = Anuphan({
-  subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600"],
+  subsets: ["latin", "thai"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-anuphan",
   display: "swap",
-  preload: true,
 })
 
-export const metadata: Metadata = constructMetadata()
+/**
+ * ระบบจัดการส่วนหัว (Metadata Engine):
+ * ดึงข้อมูลผ่านโครงสร้าง Nested (project.*) เพื่อป้องกัน Error Property Missing
+ */
+export const metadata: Metadata = constructMetadata({
+  title: siteConfig.project.title,
+  description: siteConfig.project.description,
+  image: siteConfig.project.ogImage,
+})
+
 export const viewport: Viewport = defaultViewport
 
-interface RootLayoutProps {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
+}) {
   return (
     <html
       lang="th"
@@ -52,6 +62,22 @@ export default function RootLayout({ children }: RootLayoutProps) {
       )}
       suppressHydrationWarning
     >
+      <head>
+        {/* ระบบข้อมูลโครงสร้างเพื่อให้ AI และ Search Engine จัดลำดับได้แม่นยำ */}
+        <JsonLd
+          type="WebSite"
+          data={{
+            name: siteConfig.project.name,
+            alternateName: siteConfig.project.nameTH,
+            url: siteConfig.project.url,
+            publisher: {
+              "@type": "Organization",
+              name: siteConfig.company.name,
+              logo: siteConfig.project.ogImage,
+            },
+          }}
+        />
+      </head>
       <body
         className={cn(
           "font-anuphan min-h-screen bg-white text-slate-800",
@@ -59,49 +85,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* แถบแสดงสถานะการโหลด: ใช้สี Emerald เพื่อความผ่อนคลายและเป็นมิตร */}
+        {/* แถบสถานะการโหลดด้านบน: ใช้สีเขียว Emerald ของแบรนด์ */}
         <NextTopLoader
           color="#10B981"
           height={3}
           showSpinner={false}
           easing="ease-in-out"
           speed={300}
-          shadow="0 0 10px #10B981, 0 0 5px #10B981"
         />
 
-        {/* ระบบสนทนาอัตโนมัติ (เชื่อมต่อลูกค้า) */}
+        {/* ระบบสนทนาผ่าน Facebook */}
         <FacebookChat />
 
-        {/* โครงสร้างเนื้อหาหลัก */}
+        {/* พื้นที่แสดงผลเนื้อหาทั้งหมด */}
         <div className="relative flex min-h-screen flex-col">
           <main className="flex-1">{children}</main>
         </div>
 
-        {/* ข้อมูลโครงสร้างชุดคำสั่ง (Structured Data) เพื่อเสริมความน่าเชื่อถือในสายตา AI */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: siteConfig.name,
-              alternateName: siteConfig.nameTH,
-              image: siteConfig.ogImage,
-              url: siteConfig.url,
-              email: siteConfig.email,
-              description: siteConfig.description,
-              founder: {
-                "@type": "Person",
-                name: siteConfig.expert,
-              },
-              areaServed: "TH",
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "TH",
-              },
-            }),
-          }}
-        />
+        {/* ระบบแจ้งเตือนข้อมูล (Toast) */}
+        <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
   )

@@ -1,12 +1,13 @@
 /** @format */
 
+import "server-only" // ล็อกพิกัดให้ทำงานเฉพาะฝั่งเซิร์ฟเวอร์เท่านั้น
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { BlogPost } from "@/types"
 
 /* -------------------------------------------------------------------------- */
-/* การกำหนดค่าพิกัดระบบไฟล์ (System Path Configuration)                            */
+/* การกำหนดพิกัดพิกัดระบบไฟล์ (System Path Configuration)                            */
 /* -------------------------------------------------------------------------- */
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog")
@@ -17,9 +18,10 @@ const BLOG_DIR = path.join(process.cwd(), "content/blog")
 
 /**
  * ดึงข้อมูลบทความทั้งหมดพร้อมจัดกลุ่มข้อมูลส่วนหัว
- * ออกแบบมาเพื่อให้สอดคล้องกับโครงสร้างระบบข้อมูลระดับสากล
+ * ออกแบบมาเพื่อประสิทธิภาพสูงสุดในขั้นตอนการประกอบไฟล์ (Build Time)
  */
 export async function getAllPosts(): Promise<BlogPost[]> {
+  // ตรวจสอบความมีอยู่ของพิกัดข้อมูลเพื่อป้องกันระบบหยุดทำงาน
   if (!fs.existsSync(BLOG_DIR)) return []
 
   const files = fs.readdirSync(BLOG_DIR)
@@ -32,11 +34,11 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       const { data, content } = matter(fileContent)
       const slug = file.replace(/\.mdx?$/, "")
 
-      // จัดวางพิกัดรูปภาพสำรองเพื่อความปลอดภัยของระบบงาน
+      // จัดวางพิกัดรูปภาพสำรองเพื่อความปลอดภัยของระบบงานแสดงผล
       const rawImage = data.thumbnail || data.coverImage || ""
-      const safeImage = rawImage.trim() !== "" ? rawImage : "/images/og-image.png"
+      const safeImage =
+        rawImage.trim() !== "" ? rawImage : "/images/og-image.png"
 
-      // ส่งกลับข้อมูลในรูปแบบโครงสร้างระบบที่ซ้อนกัน (Nested Structure)
       return {
         id: slug,
         slug: slug,
@@ -53,10 +55,14 @@ export async function getAllPosts(): Promise<BlogPost[]> {
         content: content,
       } as BlogPost
     })
-    // จัดลำดับบทความโดยใช้วันที่ล่าสุดเป็นตัวตั้ง
+    // จัดลำดับบทความโดยใช้วันที่ล่าสุดเป็นตัวตั้ง เพื่อความสดใหม่ของเนื้อหา
     .sort((a, b) => {
-      const dateA = a.frontmatter.date ? new Date(a.frontmatter.date).getTime() : 0
-      const dateB = b.frontmatter.date ? new Date(b.frontmatter.date).getTime() : 0
+      const dateA = a.frontmatter.date
+        ? new Date(a.frontmatter.date).getTime()
+        : 0
+      const dateB = b.frontmatter.date
+        ? new Date(b.frontmatter.date).getTime()
+        : 0
       return dateB - dateA
     })
 
@@ -64,7 +70,8 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 /**
- * ดึงข้อมูลบทความล่าสุดตามพิกัดจำนวนที่กำหนด
+ * ดึงข้อมูลบทความล่าสุดตามจำนวนที่ต้องการ
+ * ใช้สำหรับการแสดงผลในส่วนแนะนำบทความหน้าแรก
  */
 export async function getLatestBlogs(limit: number = 3): Promise<BlogPost[]> {
   const allPosts = await getAllPosts()
@@ -73,7 +80,7 @@ export async function getLatestBlogs(limit: number = 3): Promise<BlogPost[]> {
 
 /**
  * ดึงข้อมูลบทความรายชิ้นผ่านชื่อ Slug
- * รองรับการตรวจสอบพิกัดไฟล์ทั้งนามสกุล .mdx และ .md
+ * รองรับการตรวจสอบพิกัดไฟล์ทั้งนามสกุล .mdx และ .md เพื่อความยืดหยุ่น
  */
 export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!slug) return null

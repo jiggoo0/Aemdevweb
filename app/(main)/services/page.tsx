@@ -10,21 +10,25 @@ import {
   CheckCircle2,
 } from "lucide-react"
 
+// ข้อมูลและคอนฟิกหลัก
 import { siteConfig } from "@/constants/site-config"
 import { services } from "@/constants/services-data"
+
+// คอมโพเนนต์พื้นฐานและ SEO
 import { JsonLd } from "@/components/seo/JsonLd"
 import ServiceCard from "@/components/shared/ServiceCard"
 import PriceEstimator from "@/components/sales-engine/PriceEstimator"
 import CTASection from "@/components/landing/CTASection"
 
 /**
- * กลยุทธ์ชุดข้อมูลส่วนหัว: เน้นเป้าหมายทางธุรกิจสำหรับ SME และโรงงาน
+ * แก้ไขจุดที่ 1: Metadata Engine
+ * ดึงพิกัดจาก siteConfig.project.shortName และ siteConfig.project.url
  */
 export const metadata: Metadata = {
-  title: `แพ็กเกจทำเว็บและราคา | ${siteConfig.shortName} Specialist System`,
+  title: `แพ็กเกจทำเว็บและราคา | ${siteConfig.project.shortName} Specialist System`,
   description:
-    "ระบบเว็บไซต์ที่ออกแบบมาเพื่อเปลี่ยนธุรกิจ SME และโรงงานสู่ระบบดิจิทัลที่โหลดไวที่สุด 2026 เริ่มต้นสร้างเครื่องจักรผลิตเงินให้ธุรกิจของคุณวันนี้",
-  alternates: { canonical: `${siteConfig.url}/services` },
+    "ระบบเว็บไซต์ที่ออกแบบมาเพื่อเปลี่ยนธุรกิจ SME และโรงงานสู่ระบบดิจิทัลที่โหลดไวที่สุด เริ่มต้นสร้างเครื่องมือทำเงินให้ธุรกิจของคุณวันนี้",
+  alternates: { canonical: `${siteConfig.project.url}/services` },
 }
 
 /**
@@ -33,13 +37,15 @@ export const metadata: Metadata = {
 export default async function ServicesPage() {
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* การจัดวางข้อมูลชุดคำสั่งเพื่อเสริมพลังด้าน SEO */}
+      {/* แก้ไขจุดที่ 2: JSON-LD 
+          เปลี่ยนพิกัดชื่อผู้เชี่ยวชาญและ URL ของหน้าบริการ
+      */}
       <JsonLd
         type="ProfessionalService"
         data={{
-          name: `บริการจาก ${siteConfig.expert} (AEMDEVWEB)`,
-          description: metadata.description,
-          url: `${siteConfig.url}/services`,
+          name: `บริการจาก ${siteConfig.expert.name} (AEMDEVWEB)`,
+          description: metadata.description as string,
+          url: `${siteConfig.project.url}/services`,
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "บริการทำเว็บไซต์ Next.js และระบบงาน Technical SEO",
@@ -56,10 +62,10 @@ export default async function ServicesPage() {
         }}
       />
 
-      {/* ส่วนประกอบพื้นหลังเชิงเทคนิค */}
+      {/* ส่วนประกอบพื้นหลัง */}
       <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
-      {/* 1. ส่วนหัวเว็บไซต์: การประกาศจุดยืนของผู้เชี่ยวชาญ */}
+      {/* ส่วนหัวเว็บไซต์ (Hero) */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="relative z-10 container mx-auto px-6">
           <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
@@ -76,18 +82,14 @@ export default async function ServicesPage() {
             </h1>
 
             <p className="font-anuphan mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมสร้าง{" "}
-              <span className="text-slate-900 underline decoration-emerald-500/30 underline-offset-8">
-                เครื่องจักรผลิตเงิน
-              </span>{" "}
-              ที่จูนมาเพื่อ SME และโรงงานไทยโดยเฉพาะ
-              เน้นความเร็วสูงสุดและรากฐานการค้นหาที่ยั่งยืน
+              ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมสร้างเครื่องมือทำเงินที่จูนมาเพื่อ
+              SME และโรงงานไทยโดยเฉพาะ
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. รายการแพ็กเกจระดับมืออาชีพ */}
+      {/* รายการแพ็กเกจ (Service Grid) */}
       <section className="relative z-10 bg-slate-50/50 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 flex items-center gap-4">
@@ -115,7 +117,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* 3. ระบบประเมินงบประมาณอัตโนมัติ */}
+      {/* ระบบประเมินงบประมาณ (Estimator) */}
       <section className="relative overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto mb-20 px-6 text-center">
           <div className="mb-6 flex justify-center">
@@ -126,10 +128,6 @@ export default async function ServicesPage() {
           <h2 className="font-prompt text-4xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
             Budget <span className="text-emerald-500">Estimator</span>
           </h2>
-          <p className="font-anuphan mx-auto mt-8 max-w-2xl text-lg font-bold text-slate-400">
-            วางแผนงบประมาณที่คุ้มค่าที่สุดสำหรับธุรกิจของคุณ โปร่งใส ตรงไปตรงมา
-            และได้รับงานคุณภาพระดับผู้เชี่ยวชาญแน่นอนครับ
-          </p>
         </div>
         <div className="container mx-auto px-6">
           <div className="mx-auto max-w-6xl rounded-[4rem] border border-slate-100 bg-white p-2 shadow-2xl shadow-slate-200/50 md:p-8">
@@ -138,7 +136,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      {/* 4. การรับประกันคุณภาพงานในระดับ Specialist */}
+      {/* การรับประกันคุณภาพงาน (Trust Section) */}
       <section className="relative overflow-hidden bg-slate-950 py-24 text-white lg:py-40">
         <div className="pointer-events-none absolute top-0 right-0 p-20 opacity-[0.03]">
           <ShieldCheck size={400} />
@@ -154,10 +152,10 @@ export default async function ServicesPage() {
               </h2>
               <ul className="space-y-8">
                 {[
-                  "Next.js 16 Framework: โครงสร้างระบบที่โหลดไวที่สุดในยุคนี้",
-                  "Performance Goal 100/100: มาตรฐานความเร็วที่ลูกค้าคุณจะประทับใจ",
-                  "B2B & Industrial Expert: เข้าใจการจัดวางข้อมูลสินค้าอุตสาหกรรมหนัก",
-                  "Direct Access Support: คุยกับผมโดยตรง งานจบไว รับผิดชอบงานเต็มร้อย",
+                  "Next.js 16 Framework: โครงสร้างระบบที่โหลดไวที่สุด",
+                  "Performance Goal 100/100: มาตรฐานความเร็วระดับสูงสุด",
+                  "B2B & Industrial Expert: เข้าใจหน้างานกลุ่มอุตสาหกรรม",
+                  "Direct Access Support: คุยตรงกับคนทำ งานจบไว",
                 ].map((item, idx) => (
                   <li
                     key={idx}
@@ -169,36 +167,18 @@ export default async function ServicesPage() {
                 ))}
               </ul>
             </div>
-
-            <div className="grid gap-6">
-              <div className="rounded-[2.5rem] bg-white p-10 shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                <div className="font-prompt mb-3 text-xs font-black tracking-[0.3em] text-emerald-600 uppercase italic">
-                  SME Strategy
-                </div>
-                <p className="font-anuphan text-lg leading-relaxed font-bold text-slate-600">
-                  เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยโครงสร้างที่เน้นเป้าหมาย
-                  (Conversion Focus) ที่จูนมาเพื่อการโฆษณาโดยเฉพาะ
-                </p>
-              </div>
-              <div className="rounded-[2.5rem] border border-white/10 bg-white/5 p-10 backdrop-blur-md transition-all duration-500 hover:-translate-y-2">
-                <div className="font-prompt mb-3 text-xs font-black tracking-[0.3em] text-emerald-400 uppercase italic">
-                  Industrial Grade
-                </div>
-                <p className="font-anuphan text-lg leading-relaxed font-bold text-slate-300">
-                  จัดการข้อมูลมหาศาลด้วยระบบรายการสินค้าออนไลน์ที่นิ่ง เสถียร
-                  และปลอดภัย เหมาะสำหรับโรงงานที่ต้องการยกระดับสู่สากล
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       <CTASection />
 
+      {/* แก้ไขจุดที่ 3: Footer
+          ใช้ siteConfig.expert.name เพื่อป้องกัน Error ReactNode
+      */}
       <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-End Service Engine by {siteConfig.expert} v2026
+          High-End Service Engine by {siteConfig.expert.name} v2026
         </p>
       </footer>
     </main>

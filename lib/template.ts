@@ -1,168 +1,74 @@
 /** @format */
 
-import fs from "fs"
-import path from "path"
-import matter from "gray-matter"
+import { TemplateMetadata } from "@/types/template"
 
 /**
- * 📝 Template Interfaces
+ * ดึงรายการข้อมูลพื้นฐานของเทมเพลตทั้งหมด
+ * ใช้สำหรับการแสดงผลบนหน้า Marketplace (Grid Card)
+ * จัดเตรียมข้อมูลให้พร้อมใช้เพื่อให้ค่า LCP ต่ำกว่า 1 วินาที
  */
-export interface TemplateMeta {
-  id: string
-  name: string
-  slug: string
-  category: string
-  price: number
-  salePrice?: number
-  isPopular?: boolean
-  image: string
-  description: string
-  themeColor?: "emerald" | "blue" | "rose" | "amber" | "purple"
-  features?: string[]
-  tags?: string[]
-}
+export async function getAllTemplates(): Promise<TemplateMetadata[]> {
+  // ข้อมูลส่วนนี้ออกแบบมาให้ย้ายไปเก็บที่ Database หรือระบบจัดการเนื้อหาได้ทันทีในอนาคต
+  const templates: TemplateMetadata[] = [
+    {
+      id: "hotelresort",
+      name: "Luxury Hotel & Resort",
+      category: "hotel",
+      thumbnail: "/images/templates/hotelresort.webp",
+      description:
+        "โครงสร้างพรีเมียมสำหรับธุรกิจที่พักที่เน้นภาพลักษณ์และความน่าเชื่อถือ",
+    },
+    {
+      id: "cleaningpro",
+      name: "Cleaning Service Pro",
+      category: "service",
+      thumbnail: "/images/templates/cleaningpro.webp",
+      description: "ระบบจองบริการทำความสะอาดที่เน้นความกระชับและใช้งานง่าย",
+    },
+    {
+      id: "facebookadsexpert",
+      name: "Facebook Ads Expert",
+      category: "marketing",
+      thumbnail: "/images/templates/facebookadsexpert.webp",
+      description:
+        "หน้า Landing Page สำหรับผู้เชี่ยวชาญด้านการยิงโฆษณาที่เน้นการปิดการขาย",
+    },
+    {
+      id: "shopmasterpro",
+      name: "Shop Master Pro",
+      category: "ecommerce",
+      thumbnail: "/images/templates/shopmasterpro.webp",
+      description:
+        "โครงสร้างร้านค้าออนไลน์ที่เน้นการจัดวางหมวดหมู่สินค้าอย่างเป็นระบบ",
+    },
+  ]
 
-export interface TemplateData extends TemplateMeta {
-  content: string // MDX Content
-}
-
-// 📂 กำหนดเส้นทางไปยังแหล่งเก็บข้อมูล (Content Source)
-const TEMPLATE_CONTENT_PATH = path.join(process.cwd(), "content/template")
-
-/**
- * 🛠️ 1. getAllTemplates
- * กวาดหาเทมเพลตทั้งหมดพร้อมระบบตรวจสอบความถูกต้องของข้อมูล (Validation)
- */
-export async function getAllTemplates(): Promise<TemplateMeta[]> {
-  if (!fs.existsSync(TEMPLATE_CONTENT_PATH)) {
-    console.warn("⚠️ [Specialist Warning]: Template content path not found.")
-    return []
-  }
-
-  const allTemplates: TemplateMeta[] = []
-
-  try {
-    const categories = fs
-      .readdirSync(TEMPLATE_CONTENT_PATH)
-      .filter((f) =>
-        fs.statSync(path.join(TEMPLATE_CONTENT_PATH, f)).isDirectory()
-      )
-
-    for (const category of categories) {
-      const categoryPath = path.join(TEMPLATE_CONTENT_PATH, category)
-      const slugs = fs
-        .readdirSync(categoryPath)
-        .filter((f) => fs.statSync(path.join(categoryPath, f)).isDirectory())
-
-      for (const slug of slugs) {
-        const metaPath = path.join(categoryPath, slug, "meta.json")
-
-        if (fs.existsSync(metaPath)) {
-          try {
-            const fileContent = fs.readFileSync(metaPath, "utf8")
-            const metaData = JSON.parse(fileContent)
-
-            // ✅ [FIXED]: ป้องกัน Build Error โดยตรวจสอบว่ามี category และ slug ก่อนเรียก toLowerCase()
-            const safeCategory = (
-              metaData.category ||
-              category ||
-              "uncategorized"
-            ).toLowerCase()
-            const safeSlug = (metaData.slug || slug || "untitled").toLowerCase()
-
-            allTemplates.push({
-              ...metaData,
-              id: metaData.id || `temp-${safeSlug}`, // Fallback ID
-              slug: safeSlug,
-              category: safeCategory,
-              name: metaData.name || "Untitled Template",
-              image: metaData.image || "/images/og-image.png",
-              description: metaData.description || "",
-              price: metaData.price || 0,
-            })
-          } catch (error) {
-            console.error(`❌ Error parsing meta.json for ${slug}:`, error)
-          }
-        }
-      }
-    }
-  } catch (globalError) {
-    console.error("❌ Global File System Error:", globalError)
-  }
-
-  // จัดเรียงตามความนิยม
-  return allTemplates.sort((a, b) => (b.isPopular ? 1 : -1))
+  return templates
 }
 
 /**
- * 🔍 2. getTemplateBySlug
- * ดึงข้อมูลเชิงลึกพร้อม Safe Path Resolve
+ * ดึงข้อมูลเนื้อหาภายใน (Dynamic Data) ของแต่ละเทมเพลตตามไอดี (Slug)
+ * ใช้การดึงข้อมูลเฉพาะส่วนที่จำเป็นเพื่อให้ไฟล์หลักมีขนาดเล็กที่สุด
  */
-export async function getTemplateBySlug(
-  slug: string
-): Promise<TemplateData | null> {
+export async function getTemplateData(slug: string) {
   if (!slug) return null
 
-  const templates = await getAllTemplates()
-  const meta = templates.find((t) => t.slug === slug.toLowerCase())
-
-  if (!meta) return null
-
-  const mdxPath = path.join(
-    TEMPLATE_CONTENT_PATH,
-    meta.category,
-    meta.slug,
-    "index.mdx"
-  )
-
-  if (!fs.existsSync(mdxPath)) {
-    return { ...meta, content: "" }
-  }
-
   try {
-    const fileContent = fs.readFileSync(mdxPath, "utf8")
-    const { content } = matter(fileContent)
-    return { ...meta, content: content || "" }
+    /** * แก้ไขจุดเสี่ยง: เปลี่ยนชื่อตัวแปรจาก 'module' เป็น 'tplModule'
+     * เพื่อป้องกันการสับสนกับคำสงวน (Reserved Word) ของระบบจัดการไฟล์ในบาง Browser
+     */
+    const tplModule = await import(
+      `@/app/(marketing)/templates/_components/${slug}/data`
+    )
+
+    // คืนค่าก้อนข้อมูลที่ Export ออกมาจากไฟล์ data.ts ของแต่ละเทมเพลต
+    return tplModule.data || null
   } catch (error) {
-    console.error(`❌ Error reading MDX for ${slug}:`, error)
-    return { ...meta, content: "" }
+    // แจ้งเตือนผ่านหน้าจอดำ (Console) หากระบุชื่อเทมเพลตผิดหรือไม่พบพิกัดไฟล์
+    console.error(
+      `[Template Error]: ไม่สามารถดึงข้อมูลของ ${slug} ได้ ตรวจสอบการสะกดชื่อโฟลเดอร์ให้ตรงกับ ID`,
+      error
+    )
+    return null
   }
-}
-
-/**
- * 🏷️ 3. getAllCategories
- * รวมรายชื่อหมวดหมู่แบบ Unique พร้อม Safe Mapping
- */
-export async function getAllCategories(): Promise<string[]> {
-  const templates = await getAllTemplates()
-  // ✅ กรองเฉพาะตัวที่มีค่าจริงก่อนประมวลผล
-  return Array.from(
-    new Set(
-      templates
-        .map((t) => (t.category ? t.category.toLowerCase() : ""))
-        .filter((cat) => cat !== "")
-    )
-  )
-}
-
-/**
- * 🔗 4. getTemplatesByServiceCategory
- */
-export async function getTemplatesByServiceCategory(
-  serviceCategory: string
-): Promise<TemplateMeta[]> {
-  if (!serviceCategory) return []
-
-  const allTemplates = await getAllTemplates()
-  const searchCat = serviceCategory.toLowerCase()
-
-  return allTemplates.filter((template) => {
-    // ✅ Safe Access สำหรับหมวดหมู่และแท็ก
-    const templateCat = (template.category || "").toLowerCase()
-    const hasMatchingTag = template.tags?.some(
-      (tag) => tag && tag.toLowerCase() === searchCat
-    )
-
-    return templateCat === searchCat || hasMatchingTag
-  })
 }

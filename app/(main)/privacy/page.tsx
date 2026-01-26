@@ -9,13 +9,13 @@ import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * ข้อมูลส่วนหัว: เน้นความโปร่งใสและจรรยาบรรณในงานเทคนิค
+ * ข้อมูลส่วนหัว: ปรับพิกัดจาก siteConfig.shortName เป็น siteConfig.project.shortName
  */
 export const metadata: Metadata = {
-  title: `นโยบายความเป็นส่วนตัว | ${siteConfig.shortName}`,
+  title: `นโยบายความเป็นส่วนตัว | ${siteConfig.project.shortName}`,
   description:
-    "มาตรฐานการรักษาความลับทางการค้าและการจัดการข้อมูลลูกค้า เพื่อความโปร่งใสและปลอดภัยสูงสุด โดย นายเอ็มซ่ามากส์",
-  alternates: { canonical: `${siteConfig.url}/privacy` },
+    "มาตรฐานการรักษาความลับและการจัดการข้อมูลลูกค้า เพื่อความโปร่งใสและปลอดภัยสูงสุด",
+  alternates: { canonical: `${siteConfig.project.url}/privacy` },
 }
 
 export default function PrivacyPage() {
@@ -23,26 +23,27 @@ export default function PrivacyPage() {
 
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* แก้ไขจุดที่ 1: ปรับพิกัดข้อมูลใน JsonLd ให้ถูกต้องตาม Interface ใหม่ */}
       <JsonLd
         type="WebPage"
         data={{
-          name: `Privacy Policy | ${siteConfig.shortName}`,
+          name: `Privacy Policy | ${siteConfig.project.shortName}`,
           description:
             "Professional data protection and privacy standards for SME and Industrial clients.",
           publisher: {
             "@type": "Person",
-            name: siteConfig.expert,
+            name: siteConfig.expert.name,
           },
+          url: `${siteConfig.project.url}/privacy`,
         }}
       />
 
-      {/* ส่วนตกแต่งพื้นหลังเชิงเทคนิค */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
         aria-hidden="true"
       />
 
-      {/* 1. ส่วนหัวของหน้า (Hero Header Section) */}
+      {/* 1. ส่วนหัวของหน้า (Hero Header) */}
       <section className="relative overflow-hidden pt-32 pb-16 lg:pt-48 lg:pb-24">
         <div className="relative z-10 container mx-auto px-6 text-center">
           <div className="mb-10 inline-flex h-20 w-20 items-center justify-center rounded-[2.5rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/10 transition-transform duration-500 hover:scale-105">
@@ -61,7 +62,7 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* 2. รายละเอียดนโยบายแบบตารางข้อมูล (Policy Sections Grid) */}
+      {/* 2. รายละเอียดนโยบายแบบตารางข้อมูล */}
       <section className="container mx-auto px-6 py-20">
         <div className="mx-auto max-w-4xl space-y-8">
           <PolicyCard
@@ -73,16 +74,16 @@ export default function PrivacyPage() {
           <PolicyCard
             icon={<Lock />}
             title="2. ระบบความปลอดภัยระดับผู้เชี่ยวชาญ"
-            content="ผมใช้เทคนิคการพัฒนาที่ทันสมัยและปลอดภัยสูงสุด (Next.js 16 + Encrypted Communication) เพื่อป้องกันการเข้าถึงข้อมูลโดยไม่ได้รับอนุญาต น้องมั่นใจได้ว่าความลับทางธุรกิจจะถูกเก็บรักษาไว้อย่างดีเยี่ยมในโครงสร้างระบบของพี่ครับ"
+            content="ผมใช้เทคนิคการพัฒนาที่ทันสมัยและปลอดภัยสูงสุด (Next.js 16) เพื่อป้องกันการเข้าถึงข้อมูลโดยไม่ได้รับอนุญาต น้องมั่นใจได้ว่าความลับทางธุรกิจจะถูกเก็บรักษาไว้อย่างดีเยี่ยมในโครงสร้างระบบของพี่ครับ"
           />
 
           <PolicyCard
             icon={<Eye />}
             title="3. จรรยาบรรณการรักษาความลับ"
-            content="ผมไม่มีนโยบายขายหรือส่งต่อข้อมูลลูกค้าให้กับบุคคลอื่น ข้อมูลของน้องคือความลับทางการค้า และพี่จะรักษาไว้อย่างเข้มงวดเสมือนเป็นข้อมูลของพี่เอง เพื่อสร้างความเชื่อใจในการร่วมงานกันระยะยาวครับ"
+            content="ผมไม่มีนโยบายส่งต่อข้อมูลลูกค้าให้กับบุคคลอื่น ข้อมูลของน้องคือความลับทางการค้า และพี่จะรักษาไว้อย่างเข้มงวดเสมือนเป็นข้อมูลของพี่เอง เพื่อสร้างความเชื่อใจในการร่วมงานกันระยะยาวครับ"
           />
 
-          {/* ส่วนการจัดการสิทธิ์ข้อมูล (Special Action Card) */}
+          {/* ส่วนการจัดการสิทธิ์ข้อมูล (Action Card) */}
           <div className="group relative overflow-hidden rounded-[3.5rem] border-2 border-emerald-500/10 bg-emerald-50/30 p-10 transition-all duration-500 hover:border-emerald-500/30 md:p-20">
             <div className="absolute -top-10 -right-10 opacity-5 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-12">
               <Zap size={240} className="text-emerald-500" />
@@ -109,10 +110,10 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* 🏁 ส่วนท้ายข้อมูลระบบ (Footer Hook) */}
+      {/* 🏁 แก้ไขจุดที่ 2: เปลี่ยนจาก siteConfig.expert เป็น siteConfig.expert.name */}
       <footer className="mt-20 border-t border-slate-50 py-12 text-center">
         <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-300 uppercase italic">
-          High-Security Standards by {siteConfig.expert} v2026
+          High-Security Standards by {siteConfig.expert.name} v2026
         </p>
       </footer>
     </main>
@@ -135,9 +136,9 @@ function PolicyCard({
     <div className="group relative rounded-[3rem] border border-slate-100 bg-white p-10 transition-all duration-500 hover:border-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/5 md:p-16">
       <div className="flex flex-col items-start gap-8 md:flex-row">
         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-slate-950 group-hover:text-emerald-500">
-          {React.cloneElement(icon as React.ReactElement<any>, {
+          {React.cloneElement(icon, {
             className: "h-7 w-7",
-          })}
+          } as any)}
         </div>
         <div className="space-y-6">
           <h2 className="font-prompt text-2xl leading-none font-black tracking-tighter text-slate-900 uppercase italic">

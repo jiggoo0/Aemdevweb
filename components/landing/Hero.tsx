@@ -49,7 +49,7 @@ const Hero = () => {
             </span>
           </motion.h1>
 
-          {/* หัวข้อรอง: การประกาศศักยภาพของผู้เชี่ยวชาญ */}
+          {/* หัวข้อรอง: แก้ไขพิกัดการเรียกชื่อผู้เชี่ยวชาญ */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -58,13 +58,13 @@ const Hero = () => {
           >
             ยกระดับธุรกิจ SME
             และโรงงานอุตสาหกรรมด้วยรากฐานเว็บไซต์ที่เน้นความเร็วสูงสุด
-            และความคุ้มค่าของการลงทุนโดยตรงโดย
+            และความคุ้มค่าของการลงทุนโดยตรงโดย{" "}
             <span className="font-black text-slate-950 italic">
-              {siteConfig.expert}
+              {siteConfig.expert.name}
             </span>
           </motion.p>
 
-          {/* ส่วนการติดต่อ: รากฐานระบบการรับข้อมูลลูกค้า */}
+          {/* ส่วนการติดต่อ: ดึงพิกัดจากกลุ่มข้อมูล contact และ cta */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ const Hero = () => {
             </Link>
           </motion.div>
 
-          {/* หลักฐานความเชี่ยวชาญ: ข้อมูลสถิติที่ตรวจสอบได้จริง */}
+          {/* ข้อมูลมาตรฐานเทคนิค (Stats Proof) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -133,7 +133,7 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* ส่วนแสดงภาพผลงาน: ใช้พิกัดภาพที่ผ่านการตรวจสอบความเหมาะสม */}
+      {/* ส่วนแสดงภาพผลงานหลัก */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ const Hero = () => {
         <div className="relative mx-auto aspect-[720/1059] w-full max-w-[600px] overflow-hidden rounded-[3rem] border border-slate-200 bg-slate-50 shadow-2xl">
           <Image
             src="/images/hero/aemdevweb-hero.webp"
-            alt={`ระบบงานเว็บคุณภาพสูงโดย ${siteConfig.expert}`}
+            alt={`ระบบงานเว็บคุณภาพสูงโดย ${siteConfig.expert.name}`}
             fill
             priority
             quality={100}

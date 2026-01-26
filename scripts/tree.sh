@@ -1,48 +1,81 @@
 #!/bin/bash
 
 # ==============================================================================
-# PROJECT: www.aemdevweb.com
-# DESCRIPTION: Professional Project Structure & Business Report Generator
-# VERSION: 2.4.0 (2026-01-25)
+# PROJECT: www.aemdevweb.com (Business Domain)
+# DESCRIPTION: Project Structure & Service-Oriented Technical Report
+# VERSION: 2.5.0 (2026-01-26)
 # ==============================================================================
 
-OUTPUT_FILE="tree-projects.md"
+OUTPUT_FILE="www-aemdevweb-structure.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
 PROJECT_URL="https://www.aemdevweb.com"
 
-# Company & Project Metadata
+# Company & Brand
 COMPANY_NAME="AEMDEVWEB Co., Ltd."
 PROJECT_NAME="AEMDEVWEB"
 PROJECT_SHORT="AEM"
-PROJECT_NAME_TH="เอ็ม-เดฟ-เว็บ"
-TITLE="รับทำเว็บไซต์ Landing Page เน้นปิดการขาย - AEMDEVWEB (นายเอ็มซ่ามากส์)"
-SLOGAN="เว็บโหลดไว อันดับพุ่ง ยอดขายมาจริง"
+PROJECT_NAME_TH="เออีเอ็ม เดฟ เว็บ"
+
+# Page Title (Commercial, Soft-sell)
+TITLE="บริการออกแบบและวางโครงสร้างเว็บไซต์สำหรับธุรกิจ SME | AEMDEVWEB"
+SLOGAN="โครงสร้างชัด โหลดไว พร้อมรองรับการเติบโตของธุรกิจ"
+
+# Brand Authority (Person = Supporting Role)
+FOUNDER="Alongkorl Yomkerd"
 EXPERT="นายเอ็มซ่ามากส์"
-ROLE="Technical SEO Consultant & Next.js Structure Specialist"
-DESCRIPTION="บริการวางโครงสร้างระบบ Landing Page สำหรับ SME ที่เน้นประสิทธิภาพความเร็วสูงสุด วางพิกัดงานเทคนิค SEO ตั้งแต่เลเยอร์แรกโดย นายเอ็มซ่ามากส์ เพื่อเพิ่มโอกาสการเข้าถึงและอัตราการปิดยอดขาย การันตี LCP 0.6s พร้อมการดูแลชุดระบบระยะยาว"
+ROLE="Web Structure & Technical SEO"
+
+# Description (Service + Process + Outcome)
+DESCRIPTION="AEMDEVWEB ให้บริการออกแบบและวางโครงสร้างเว็บไซต์สำหรับธุรกิจ SME โดยเน้นความเร็ว ความเสถียร และการจัดวางข้อมูลที่เหมาะสมกับการค้นหา เพื่อให้เว็บไซต์พร้อมใช้งานและรองรับการเติบโตของธุรกิจในระยะยาว"
+
+# Open Graph & Contact
 OG_IMAGE="https://www.aemdevweb.com/og-image.png"
 EMAIL="me@aemdevweb.com"
 
-KEYWORDS_CORE=("Technical SEO Optimization" "Organic Search Strategy" "Conversion Rate Optimization")
-KEYWORDS_TECH=("Next.js" "React" "Tailwind CSS" "TypeScript" "System Structure")
-KEYWORDS_BRAND=("AEMDEVWEB" "นายเอ็มซ่ามากส์" "Alongkorl Yomkerd" "Unlink-th Provider")
+# Keywords (แยก intent ชัด)
+KEYWORDS_CORE=(
+  "บริการทำเว็บไซต์สำหรับธุรกิจ"
+  "Landing Page SME"
+  "Technical SEO"
+  "โครงสร้างเว็บไซต์"
+  "Organic Search"
+)
 
+KEYWORDS_TECH=(
+  "Next.js"
+  "React"
+  "Tailwind CSS"
+  "TypeScript"
+  "Web Structure"
+  "Performance Optimization"
+)
+
+KEYWORDS_BRAND=(
+  "AEMDEVWEB"
+  "นายเอ็มซ่ามากส์"
+  "Alongkorl Yomkerd"
+  "Unlink-th"
+)
+
+# Links
 LINKS_LINE="https://lin.ee/6lgJox0"
 LINKS_LINE_ID="@127cnthn"
 LINKS_FACEBOOK="https://facebook.com/aemdevweb"
 LINKS_LINKEDIN="https://www.linkedin.com/in/alongkorl-aemdevweb"
 LINKS_PERSONAL="https://me.aemdevweb.com"
 
-CTA_MAIN="Consult Project"
-CTA_SECONDARY="View All Services"
-CTA_PRICING="Check Pricing Plans"
+# CTA (SME-friendly)
+CTA_MAIN="ปรึกษาแนวทางโปรเจกต์"
+CTA_SECONDARY="ดูแนวทางการทำงาน"
+CTA_PRICING="ดูแพ็กเกจบริการ"
 
-STANDARDS_PERFORMANCE=100
-STANDARDS_LCP=0.6
-STANDARDS_SECURITY="Enterprise-Grade SSL (HSTS Enabled)"
-STANDARDS_AI="Advanced Schema Markup & JSON-LD Injection"
+# Technical Standards (Avoid hard guarantees)
+STANDARDS_PERFORMANCE="Optimized for Core Web Vitals"
+STANDARDS_LCP="Target under 1s (Depending on scope)"
+STANDARDS_SECURITY="HTTPS & Security Headers"
+STANDARDS_AI="Structured Data & JSON-LD Ready"
 
-# Next.js 15 Enterprise Directory Whitelist
+# Directory Scope (Business Project)
 WHITELIST_DIRS=(
   "app"
   "actions"
@@ -58,10 +91,9 @@ WHITELIST_DIRS=(
   "styles"
   "services"
   "config"
-  "viewport"
 )
 
-# Root-level configuration files (Validated)
+# Root-level configuration files
 ROOT_FILES=(
   "eslint.config.mjs"
   "mdx-components.tsx"
@@ -70,26 +102,26 @@ ROOT_FILES=(
   "components.json"
   "tsconfig.json"
   "postcss.config.mjs"
-  "proxy.ts"
 )
 
 IGNORE_PATTERN="node_modules|\.git|\.next|\.DS_Store|__pycache__|\.env"
 
-# REMOVE OLD FILE
+# INIT
 rm -f "$OUTPUT_FILE"
-echo "[INFO] Generating professional report for $PROJECT_DOMAIN..."
+echo "[INFO] Generating business report for $PROJECT_DOMAIN..."
 
 {
-  # --- YAML Metadata ---
+  # --- YAML METADATA ---
   echo "---"
   echo "domain: $PROJECT_DOMAIN"
   echo "canonical: $PROJECT_URL"
   echo "generated: $(date '+%Y-%m-%d %H:%M:%S')"
+  echo "company:"
+  echo "  name: $COMPANY_NAME"
   echo "project:"
   echo "  name: $PROJECT_NAME"
   echo "  shortName: $PROJECT_SHORT"
   echo "  nameTH: $PROJECT_NAME_TH"
-  echo "  companyName: $COMPANY_NAME"
   echo "  title: $TITLE"
   echo "  slogan: $SLOGAN"
   echo "  expert: $EXPERT"
@@ -120,39 +152,36 @@ echo "[INFO] Generating professional report for $PROJECT_DOMAIN..."
   echo "---"
   echo ""
 
-  # --- Report Header ---
-  echo "# Project Structure & Business Report"
+  # --- HEADER ---
+  echo "# Project Structure & Service Report"
   echo ""
-  echo "Designed for SMEs and various business sectors including service businesses, tourism, export, corporates, partnerships, and industrial factories."
+  echo "This document outlines the structure, standards, and service-oriented setup of www.aemdevweb.com."
   echo ""
 
-  # --- 1. Project Summary Table ---
-  echo "## 1. Project Summary"
+  # --- 1. Project Summary ---
+  echo "## 1. Project Overview"
   echo "| Field | Value |"
-  echo "|-------|-------|"
-  echo "| Company Name | $COMPANY_NAME |"
-  echo "| Project Name | $PROJECT_NAME ($PROJECT_SHORT) |"
-  echo "| Thai Name | $PROJECT_NAME_TH |"
+  echo "|------|-------|"
+  echo "| Company | $COMPANY_NAME |"
+  echo "| Project | $PROJECT_NAME ($PROJECT_SHORT) |"
   echo "| Expert | $EXPERT |"
   echo "| Role | $ROLE |"
-  echo "| Slogan | $SLOGAN |"
-  echo "| URL | $PROJECT_URL |"
-  echo "| Email | $EMAIL |"
+  echo "| Website | $PROJECT_URL |"
+  echo "| Contact | $EMAIL |"
   echo ""
 
-  # --- 2. Technical Standards Table ---
+  # --- 2. Technical Standards ---
   echo "## 2. Technical Standards"
-  echo "| Metric | Value |"
-  echo "|--------|-------|"
-  echo "| Performance | $STANDARDS_PERFORMANCE% |"
-  echo "| LCP | ${STANDARDS_LCP}s |"
+  echo "| Area | Description |"
+  echo "|------|-------------|"
+  echo "| Performance | $STANDARDS_PERFORMANCE |"
+  echo "| LCP | $STANDARDS_LCP |"
   echo "| Security | $STANDARDS_SECURITY |"
-  echo "| AI Readiness | $STANDARDS_AI |"
+  echo "| Structured Data | $STANDARDS_AI |"
   echo ""
 
-  # --- 3. Root Configuration Files ---
+  # --- 3. Root Files ---
   echo "## 3. Root Configuration Files"
-  echo "The following system files are detected at the project root."
   echo ""
   for file in "${ROOT_FILES[@]}"; do
     if [ -f "$file" ]; then
@@ -165,35 +194,29 @@ echo "[INFO] Generating professional report for $PROJECT_DOMAIN..."
 
   # --- 4. Directory Structure ---
   echo "## 4. Directory Structure"
-  echo "Hierarchical view of core business logic and UI components."
   echo ""
   for dir in "${WHITELIST_DIRS[@]}"; do
     if [ -d "$dir" ]; then
       echo "### Folder: $dir"
       echo '```text'
-      find "$dir" -maxdepth 5 -not -path '*/.*' | grep -vE "$IGNORE_PATTERN" | sed -e 's/[^-][^\/]*\//  |/g' -e 's/|  /   /g'
+      find "$dir" -maxdepth 5 -not -path '*/.*' \
+        | grep -vE "$IGNORE_PATTERN" \
+        | sed -e 's/[^-][^\/]*\//  |/g' -e 's/|  /   /g'
       echo '```'
       echo ""
     fi
   done
 
-  # --- 5. Call-to-Action Section ---
-  echo "## 5. Call-to-Action"
-  echo "- **Main:** $CTA_MAIN"
-  echo "- **Secondary:** $CTA_SECONDARY"
-  echo "- **Pricing:** $CTA_PRICING"
-  echo ""
-
-  # --- 6. Links Section ---
-  echo "## 6. Contact & Links"
-  echo "- Line: [$LINKS_LINE_ID]($LINKS_LINE)"
-  echo "- Facebook: [$LINKS_FACEBOOK]($LINKS_FACEBOOK)"
-  echo "- LinkedIn: [$LINKS_LINKEDIN]($LINKS_LINKEDIN)"
-  echo "- Personal: [$LINKS_PERSONAL]($LINKS_PERSONAL)"
+  # --- 5. CTA ---
+  echo "## 5. Call to Action"
+  echo "- $CTA_MAIN"
+  echo "- $CTA_SECONDARY"
+  echo "- $CTA_PRICING"
   echo ""
 
   echo "---"
-  echo "Report generated by $PROJECT_DOMAIN Internal Automation."
+  echo ". Format code in ให้ถูกต้อง
+การเขียนโค้ดมาตรฐานมีประสิทธิภาพ NexTjs React Report generated by $PROJECT_DOMAIN internal tooling."
 } > "$OUTPUT_FILE"
 
-echo "[SUCCESS] Professional report saved to -> $OUTPUT_FILE"
+echo "[SUCCESS] Business report saved -> $OUTPUT_FILE"

@@ -18,33 +18,36 @@ import { JsonLd } from "@/components/seo/JsonLd"
 import CTASection from "@/components/landing/CTASection"
 
 /**
- * กลยุทธ์ข้อมูลส่วนหัว: เน้นการส่งมอบงานที่มีประสิทธิภาพสูงและครอบคลุมกลุ่มธุรกิจสากล
+ * กลยุทธ์ข้อมูลส่วนหัว: ปรับการดึงข้อมูลจากโครงสร้าง Nested Object ใหม่
  */
 export const metadata: Metadata = {
-  title: `รู้จัก ${siteConfig.expert} | ผู้เชี่ยวชาญระบบ Next.js และงานเทคนิคด้านการค้นหา`,
-  description:
-    "ผมชื่อเอ็มครับ ผมพัฒนาเว็บไซต์ที่เน้นผลลัพธ์ทางธุรกิจและความรับผิดชอบสูงสุด ออกแบบโครงสร้างระบบเพื่อ SME และกลุ่มธุรกิจบริการ ธุรกิจท่องเที่ยว ส่งออก จนถึงกลุ่มบริษัทและโรงงานอุตสาหกรรมโดยเฉพาะ ด้วยมาตรฐานความเร็วของเว็บไซต์ระดับสากลนิยมปัจจุบัน",
-  alternates: { canonical: `${siteConfig.url}/about` },
+  title: `รู้จัก ${siteConfig.expert.name} | ผู้เชี่ยวชาญระบบ Next.js และงานเทคนิคด้านการค้นหา`,
+  description: siteConfig.project.description,
+  alternates: { canonical: `${siteConfig.project.url}/about` },
 }
 
 export default function AboutPage() {
   return (
     <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* แก้ไขจุดที่ 1: เปลี่ยน type เป็น WebPage เพื่อให้ผ่าน Type Check 
+         และระบุประเภทเจาะจงในก้อนข้อมูล data แทน
+      */}
       <JsonLd
-        type="AboutPage"
+        type="WebPage"
         data={{
-          name: `รู้จัก ${siteConfig.expert} - AEMDEVWEB`,
-          description: siteConfig.description,
+          "@type": "AboutPage",
+          name: `รู้จัก ${siteConfig.expert.name} - ${siteConfig.project.name}`,
+          description: siteConfig.project.description,
           mainEntity: {
             "@type": "Person",
-            name: siteConfig.expert,
-            jobTitle: siteConfig.role,
-            url: siteConfig.url,
+            name: siteConfig.expert.name,
+            jobTitle: siteConfig.expert.role,
+            url: siteConfig.project.url,
           },
         }}
       />
 
-      {/* 1. ส่วนหัวเว็บไซต์: การสร้างตัวตนและความน่าเชื่อถือในระดับ Specialist */}
+      {/* 1. ส่วนหัวเว็บไซต์: การสร้างตัวตนและความน่าเชื่อถือ */}
       <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
         <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(black,transparent_70%)] bg-center opacity-[0.02]" />
 
@@ -57,7 +60,10 @@ export default function AboutPage() {
               </span>
             </div>
             <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-9xl">
-              ผมชื่อ <span className="text-emerald-500">เอ็ม.</span>
+              ผมชื่อ{" "}
+              <span className="text-emerald-500">
+                {siteConfig.expert.name.split(" ")[0]}.
+              </span>
             </h1>
             <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               ผมคือ{" "}
@@ -70,14 +76,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2. ส่วนแนวคิดและการบริหารจัดการโครงการเพื่อผลลัพธ์ทางธุรกิจ */}
+      {/* 2. ส่วนแนวคิดและการบริหารจัดการโครงการ */}
       <section className="bg-slate-50/80 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
             <div className="group relative aspect-square overflow-hidden rounded-[3.5rem] bg-slate-200 shadow-2xl">
               <Image
-                src="/images/showcase/aemdevweb-hero.webp"
-                alt="ระบบการทำงานโดย AEMDEVWEB"
+                src={siteConfig.project.ogImage}
+                alt={`ระบบการทำงานโดย ${siteConfig.project.name}`}
                 fill
                 priority
                 className="object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
@@ -105,7 +111,6 @@ export default function AboutPage() {
                     ผมควบคุมการพัฒนาด้วยตัวเองทุกขั้นตอน
                     ตั้งแต่การจัดวางโครงสร้างระบบ
                     ไปจนถึงการเขียนชุดคำสั่งที่สะอาดและจัดการได้ง่าย
-                    เพื่อให้ธุรกิจของคุณดำเนินไปได้อย่างต่อเนื่องและมีความน่าเชื่อถือในระดับสูง
                   </p>
                 </div>
               </div>
@@ -133,7 +138,7 @@ export default function AboutPage() {
                       Conversion
                     </h4>
                     <p className="text-xs text-slate-500">
-                      มุ่งเน้นเป้าหมายทางธุรกิจ
+                      มุ่งเน้นเป้าหมายธุรกิจ
                     </p>
                   </div>
                 </div>
@@ -143,7 +148,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. ความเชี่ยวชาญเฉพาะทางในกลุ่มธุรกิจบริการ ท่องเที่ยว และส่งออก */}
+      {/* 3. กลุ่มธุรกิจที่รองรับ */}
       <section className="py-24 lg:py-40">
         <div className="container mx-auto px-6 text-center">
           <div className="mb-20 space-y-4">
@@ -157,17 +162,17 @@ export default function AboutPage() {
               {
                 icon: Users,
                 title: "SME & Service",
-                desc: "เน้นความรวดเร็วในการเปิดตัวและการทำระบบจองหรือแสดงข้อมูลที่ปิดการขายได้ทันที",
+                desc: "เน้นความรวดเร็วในการเปิดตัวและการทำระบบที่ปิดการขายได้ทันที",
               },
               {
                 icon: Globe,
                 title: "Tourism & Export",
-                desc: "เน้นภาพลักษณ์ความน่าเชื่อถือระดับสากล รองรับหลายภาษา และระบบที่เสถียรทั่วโลก",
+                desc: "เน้นความน่าเชื่อถือระดับสากล รองรับหลายภาษา และระบบที่เสถียรทั่วโลก",
               },
               {
                 icon: Factory,
                 title: "Industrial & Factory",
-                desc: "เน้นระบบรายการสินค้าเชิงอุตสาหกรรมที่รองรับข้อมูลจำนวนมากและมีความมั่นคงสูง",
+                desc: "เน้นระบบรายการสินค้าที่รองรับข้อมูลจำนวนมากและมีความมั่นคงสูง",
               },
             ].map((item, idx) => (
               <div
@@ -189,7 +194,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. ส่วนสรุปและการรับประกันงานเทคนิคโดย Specialist */}
+      {/* 4. ส่วนท้ายและการรับประกันงาน */}
       <section className="px-6 pb-32">
         <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[3.5rem] bg-slate-950 p-12 text-center shadow-2xl md:p-24">
           <div className="absolute top-0 right-0 p-10 opacity-10">
@@ -197,11 +202,11 @@ export default function AboutPage() {
           </div>
           <div className="relative z-10 space-y-8">
             <h2 className="font-prompt text-3xl leading-tight font-black tracking-tighter text-emerald-400 uppercase italic md:text-5xl">
-              ทำงานร่วมกับผม <br className="md:hidden" /> มั่นใจในคุณภาพสูงสุด
+              ทำงานร่วมกับผม มั่นใจในคุณภาพสูงสุด
             </h2>
             <div className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
               ผมสื่อสารข้อมูลทางเทคนิคให้เข้าใจง่าย ดำเนินงานตรงตามกำหนดการ
-              คุณจะได้รับการดูแลจากผู้เชี่ยวชาญโดยตรงเพื่อความคุ้มค่าสูงสุดของโครงการ
+              เพื่อให้โครงการของคุณคุ้มค่าสูงสุด
             </div>
             <div className="flex flex-wrap justify-center gap-6 pt-4">
               {[
@@ -226,7 +231,7 @@ export default function AboutPage() {
 
       <footer className="py-12 text-center opacity-30 select-none">
         <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build with Integrity by {siteConfig.expert} v2026
+          Build with Integrity by {siteConfig.expert.name} v2026
         </p>
       </footer>
     </main>

@@ -19,17 +19,12 @@ import { siteConfig } from "@/constants/site-config"
 import { footerServicesNav, footerCompanyNav } from "@/constants/navigation"
 import { cn } from "@/lib/utils"
 
-/**
- * Footer - เอกลักษณ์ผู้เชี่ยวชาญงานระบบท้ายหน้าเว็บ (v2026)
- * ปรับปรุงชั้นข้อมูลแบรนด์: ลบกรอบพื้นหลังมืดออกจากโลโก้เพื่อความโปร่งใส
- * ออกแบบมาเพื่อสร้างความเชื่อมั่นให้กับเจ้าของธุรกิจ SME และกลุ่มอุตสาหกรรม
- */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-500/10">
-      {/* การตกแต่งพื้นหลังโดยใช้สัญลักษณ์ประจำตัวผู้เชี่ยวชาญ */}
+      {/* ส่วนตกแต่งพื้นหลังระดับลึก */}
       <div
         className="pointer-events-none absolute -right-24 -bottom-24 opacity-[0.03]"
         aria-hidden="true"
@@ -37,17 +32,16 @@ export default function Footer() {
         <Zap size={450} fill="currentColor" className="text-[#020617]" />
       </div>
 
-      {/* ลายตารางรากฐานระบบ: สื่อถึงความแม่นยำและมาตรฐานงานออกแบบ */}
       <div
         className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(ellipse_at_center,white,transparent)] bg-center opacity-[0.2]"
         aria-hidden="true"
       />
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* ส่วนแสดงกลุ่มเป้าหมายที่ระบบรองรับ */}
+        {/* ส่วนแสดงกลุ่มธุรกิจที่รองรับ */}
         <div className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
-            { label: "SME", icon: Zap },
+            { label: "SME Business", icon: Zap },
             { label: "Business Owner", icon: ShieldCheck },
             { label: "Enterprise", icon: Building2 },
             { label: "Industrial Factory", icon: Factory },
@@ -65,7 +59,7 @@ export default function Footer() {
         </div>
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* ส่วนข้อมูลแบรนด์และโลโก้ผู้เชี่ยวชาญ */}
+          {/* ส่วนข้อมูลเจ้าของเว็บไซต์: แก้ไขจุดเรียกชื่อย่อโครงการ */}
           <div className="space-y-8 lg:col-span-4">
             <Link
               href="/"
@@ -74,7 +68,7 @@ export default function Footer() {
               <div className="flex size-14 items-center justify-center rounded-[1.25rem] transition-all duration-500 group-hover:rotate-6">
                 <Image
                   src="/images/logo-circuit.png"
-                  alt={`ข้อมูลประจำตัวของ ${siteConfig.name} โดย ${siteConfig.expert}`}
+                  alt={`ข้อมูลโดย ${siteConfig.expert.name}`}
                   width={48}
                   height={48}
                   className="object-contain"
@@ -82,20 +76,17 @@ export default function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="font-prompt text-3xl leading-none font-black tracking-tighter text-[#020617] uppercase italic">
-                  {siteConfig.shortName || "AEM"}
+                  {siteConfig.project.shortName}
                   <span className="text-emerald-500">DEV</span>
                 </span>
                 <span className="font-prompt mt-1.5 text-[9px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
-                  Industrial Specialist
+                  Industrial Area Specialist
                 </span>
               </div>
             </Link>
 
             <p className="font-anuphan max-w-sm text-base leading-relaxed font-bold text-slate-500">
-              ผู้นำด้านการวางโครงสร้างระบบดิจิทัลสำหรับ{" "}
-              <span className="text-[#020617]">เจ้าของธุรกิจ SME</span> และ
-              <span className="text-[#020617]"> โรงงานอุตสาหกรรม</span>
-              เน้นความเสถียรและมาตรฐานความปลอดภัยสูงสุด
+              {siteConfig.project.description}
             </p>
 
             <div className="wrap flex gap-3 pt-2">
@@ -106,7 +97,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ส่วนรายการระบบงานที่ให้บริการ */}
+          {/* ส่วนรายการบริการ */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Services
@@ -129,10 +120,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ส่วนข้อมูลทรัพยากรของบริษัท */}
+          {/* ส่วนข้อมูลบริษัท */}
           <div className="space-y-8 lg:col-span-2">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
-              Resources
+              Company
             </h4>
             <ul className="space-y-5">
               {footerCompanyNav?.map((item) => (
@@ -153,10 +144,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ส่วนช่องทางการติดต่อและขอคำปรึกษา */}
+          {/* ช่องทางการติดต่อ: แก้ไขจุดเรียก Email */}
           <div className="space-y-8 lg:col-span-4">
             <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
-              Consultation
+              Contact
             </h4>
             <div className="space-y-6 rounded-[2.5rem] border border-slate-100 bg-slate-50/30 p-8 transition-colors hover:bg-slate-50">
               <div className="flex items-center gap-5">
@@ -165,13 +156,13 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
-                    Direct Access
+                    Email Support
                   </span>
                   <a
-                    href={`mailto:${siteConfig.email}`}
+                    href={`mailto:${siteConfig.company.email}`}
                     className="font-prompt text-lg font-black text-[#020617] transition-colors hover:text-emerald-500"
                   >
-                    {siteConfig.email}
+                    {siteConfig.company.email}
                   </a>
                 </div>
               </div>
@@ -179,14 +170,12 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ชั้นข้อมูลลิขสิทธิ์และข้อกำหนดทางกฎหมาย */}
+        {/* ส่วนท้าย: แก้ไขชื่อบริษัทและชื่อผู้เชี่ยวชาญ */}
         <div className="mt-28 flex flex-col items-center justify-between gap-8 border-t border-slate-100 pt-12 md:flex-row">
-          <div className="flex flex-col gap-3">
-            <p className="font-anuphan text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">
-              © {currentYear} {siteConfig.companyName}. ออกแบบและพัฒนาโดย{" "}
-              {siteConfig.expert}.
-            </p>
-          </div>
+          <p className="font-anuphan text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">
+            © {currentYear} {siteConfig.company.fullName}. จัดการโดย{" "}
+            {siteConfig.expert.name}.
+          </p>
           <div className="flex items-center gap-10">
             <Link
               href="/privacy"

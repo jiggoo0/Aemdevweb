@@ -11,8 +11,8 @@ interface MainLayoutProps {
 }
 
 /**
- * MainLayout - รากฐานระบบหลักของ AEMDEVWEB 2026
- * รวบรวมระบบการออกแบบ ระบบงานค้นหา และโครงสร้างการใช้งานสำหรับผู้ใช้
+ * โครงสร้างหลักของหน้าเว็บไซต์ (Marketing Layout)
+ * จัดการส่วนประกอบคงที่และเลเยอร์พื้นหลังทั้งหมด
  */
 export default function MainLayout({ children }: MainLayoutProps) {
   return (
@@ -23,18 +23,20 @@ export default function MainLayout({ children }: MainLayoutProps) {
         "font-anuphan"
       )}
     >
-      {/* ชั้นข้อมูลรากฐาน: ส่วนตกแต่งพื้นหลังระดับลึก (-z-20) */}
+      {/* 1. เลเยอร์ตกแต่งพื้นหลัง (Background Layers)
+          ล็อคค่า -z-20 และ pointer-events-none เพื่อไม่ให้รบกวนการคลิกปุ่มต่างๆ
+      */}
       <div
         className="pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* แสงส่องสว่างเชิงกลยุทธ์: เน้นจุดสนใจมาที่เนื้อหาหลักตรงกลางหน้าเว็บ */}
+        {/* จุดกระจายแสง (Glow Effect) */}
         <div className="absolute -top-[5%] left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-emerald-500/[0.03] blur-[100px]" />
 
-        {/* ลายตารางระดับงานเทคนิค: สร้างความรู้สึกถึงความแม่นยำและประณีต */}
+        {/* ลายตารางพื้นหลัง (Grid System) */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-repeat opacity-[0.015]" />
 
-        {/* พื้นผิวระดับพรีเมียม: ใช้ระบบจัดการสัญญาณรบกวนเพื่อป้องกันพื้นหลังดูเรียบจนเกินไป */}
+        {/* แผ่นกรองพื้นผิว (Noise Filter) เพื่อลดความเรียบของสีพื้น */}
         <div className="absolute inset-0 opacity-[0.01] mix-blend-overlay">
           <svg className="h-full w-full">
             <filter id="noise">
@@ -50,10 +52,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </div>
       </div>
 
-      {/* ระบบนำทางหลัก */}
+      {/* 2. ส่วนนำทางหลัก (Main Navigation) */}
       <Navbar />
 
-      {/* วงจรการแสดงผลเนื้อหา: จัดการระยะห่างสำหรับแถบหัวหน้าเว็บที่คงที่และการเปลี่ยนผ่านที่นุ่มนวล */}
+      {/* 3. พื้นที่เนื้อหา (Main Content)
+          เว้นระยะห่างจากด้านบน (pt-16) เพื่อรองรับ Navbar ที่ถูกล็อคตำแหน่งไว้
+      */}
       <main
         id="main-content"
         className="relative z-10 flex-1 pt-16 transition-opacity duration-500 ease-in-out md:pt-20"
@@ -61,18 +65,16 @@ export default function MainLayout({ children }: MainLayoutProps) {
         {children}
       </main>
 
-      {/* รากฐานข้อมูลส่วนท้ายหน้า */}
+      {/* 4. ส่วนท้ายและปุ่มติดต่อสื่อสาร (Footer & Widgets) */}
       <Footer />
-
-      {/* ปุ่มติดต่อด่วน: เพิ่มโอกาสการเข้าถึงพิกัดการสื่อสารได้จากทุกหน้า */}
       <LineStickyButton />
 
-      {/* ระบบช่วยเหลือผู้พิการ: ลิงก์ข้ามไปยังเนื้อหาหลักสำหรับตัวอ่านหน้าจอ */}
+      {/* 5. ระบบเข้าถึงด่วน (Accessibility Skip Link) */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-emerald-500 focus:p-4 focus:text-white"
       >
-        Skip to content
+        ข้ามไปยังเนื้อหาหลัก
       </a>
     </div>
   )

@@ -1,7 +1,7 @@
 /** @format */
 
 /* -------------------------------------------------------------------------- */
-/* 1. ข้อมูลเว็บไซต์และการนำทาง (Site & Navigation)                                     */
+/* 1. ข้อมูลเว็บไซต์และการนำทาง (Site & Navigation)                             */
 /* -------------------------------------------------------------------------- */
 
 export interface NavItem {
@@ -22,18 +22,26 @@ export interface FooterNavigation {
 }
 
 export interface SiteConfig {
-  name: string
-  shortName: string
-  nameTH: string
-  companyName: string
-  title: string
-  slogan: string
-  expert: string
-  role: string
-  description: string
-  url: string
-  ogImage: string
-  email: string
+  company: {
+    name: string
+    fullName: string
+    email: string
+    address?: string
+  }
+  project: {
+    name: string
+    shortName: string
+    nameTH: string
+    title: string
+    slogan: string
+    description: string
+    url: string
+    ogImage: string
+  }
+  expert: {
+    name: string
+    role: string
+  }
   keywords: {
     list: string[]
     all: string
@@ -50,6 +58,7 @@ export interface SiteConfig {
     messenger?: string
     personal: string
   }
+  /** จัดกลุ่มข้อมูลสำหรับการติดต่อโดยเฉพาะ เพื่อลด Error ในฟอร์มและส่วนท้ายเว็บ */
   contact: {
     email: string
     lineId: string
@@ -71,7 +80,7 @@ export interface SiteConfig {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. ระบบจัดการเนื้อหาและบทความ (Blog & Content)                                     */
+/* 2. ระบบจัดการเนื้อหาและบทความ (Blog & Content)                              */
 /* -------------------------------------------------------------------------- */
 
 export interface BlogFrontmatter {
@@ -79,7 +88,7 @@ export interface BlogFrontmatter {
   description: string
   date: string
   category: string
-  thumbnail: string // พิกัดรูปภาพปกบทความ
+  thumbnail: string
   author: string
   excerpt?: string
   tags?: string[]
@@ -89,11 +98,11 @@ export interface BlogPost {
   id: string
   slug: string
   frontmatter: BlogFrontmatter
-  content: string // รองรับ MDX Source
+  content: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 3. การจัดการบริการและระบบงาน (Services)                                          */
+/* 3. การจัดการบริการและระบบงาน (Services)                                     */
 /* -------------------------------------------------------------------------- */
 
 export type ServiceIconName =
@@ -110,8 +119,8 @@ export interface ServiceItem {
   title: string
   slug: string
   description: string
-  priceValue: number // สำหรับระบบคำนวณราคา
-  priceDisplay?: string // สำหรับการแสดงผลหน้าเว็บ
+  priceValue: number
+  priceDisplay?: string
   category: "Starter" | "SME" | "Corporate" | "Industrial" | string
   icon: ServiceIconName
   features: string[]
@@ -120,7 +129,7 @@ export interface ServiceItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. ข้อมูลผลงานและตัวอย่างความสำเร็จ (Case Studies)                                 */
+/* 4. ข้อมูลผลงานและตัวอย่างความสำเร็จ (Case Studies)                            */
 /* -------------------------------------------------------------------------- */
 
 export interface ShowcaseStats {
@@ -136,7 +145,10 @@ export interface CaseStudyFrontmatter {
   excerpt: string
   thumbnail: string
   date: string
-  results: string[] | ShowcaseStats[]
+  /** * แก้ไขจุดเสี่ยง: รองรับทั้งข้อความธรรมดา (String)
+   * และก้อนข้อมูลสถิติ (Object) เพื่อความยืดหยุ่นในการทำ SEO
+   */
+  results: (string | ShowcaseStats)[]
   keyFeatures: string[]
   service?: string
   isFeatured?: boolean
@@ -150,7 +162,7 @@ export interface CaseStudyItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Engine)                                       */
+/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Engine)                                 */
 /* -------------------------------------------------------------------------- */
 
 export interface TemplateItem {
@@ -169,7 +181,7 @@ export interface TemplateItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Social Proof)                       */
+/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Social Proof)                  */
 /* -------------------------------------------------------------------------- */
 
 export interface LeadFormSubmission {

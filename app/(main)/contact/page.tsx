@@ -18,13 +18,13 @@ import TrustBadge from "@/components/shared/TrustBadge"
 import { LineLeadForm } from "@/components/sales-engine/LineLeadForm"
 
 /**
- * ข้อมูลส่วนหัว: เน้นความเชื่อใจและการเข้าถึงผู้เชี่ยวชาญโดยตรง
+ * ข้อมูลส่วนหัว: ปรับพิกัดการเรียกชื่อและ URL ให้ตรงตามกลุ่มข้อมูลใหม่
  */
 export const metadata: Metadata = {
-  title: `ติดต่อ ${siteConfig.expert} | ปรึกษาโปรเจกต์ Next.js และระบบงาน Technical SEO`,
+  title: `ติดต่อ ${siteConfig.expert.name} | ปรึกษาโปรเจกต์ Next.js และการวางลำดับข้อมูล SEO`,
   description:
-    "ทักมาคุยกับพี่ได้โดยตรงครับ ไม่ว่าจะเป็นเจ้าของกิจการหรือกลุ่มอุตสาหกรรม พี่พร้อมช่วยวางแผนสร้างระบบเว็บไซต์ที่เน้นความเร็วและยอดขายจริง",
-  alternates: { canonical: `${siteConfig.url}/contact` },
+    "ทักมาคุยกับผมได้โดยตรงครับ ไม่ว่าจะเป็นเจ้าของกิจการหรือกลุ่มอุตสาหกรรม ผมพร้อมช่วยวางแผนสร้างระบบเว็บไซต์ที่เน้นความเร็วและยอดขายจริง",
+  alternates: { canonical: `${siteConfig.project.url}/contact` },
 }
 
 /**
@@ -33,17 +33,20 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   return (
     <main className="font-anuphan relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
+      {/* แก้ไขจุดที่ 1: เปลี่ยน type เป็น "WebPage" เพื่อให้ผ่าน Type Check 
+          แล้วระบุประเภทจริงผ่าน @type ภายใน data แทน */}
       <JsonLd
-        type="ContactPage"
+        type="WebPage"
         data={{
-          name: `ติดต่อ ${siteConfig.expert} - AEMDEVWEB`,
+          "@type": "ContactPage",
+          name: `ติดต่อ ${siteConfig.expert.name} - ${siteConfig.project.name}`,
           description:
             "ช่องทางการติดต่อเพื่อปรึกษาการทำเว็บไซต์และระบบงาน SEO สำหรับ SME และกลุ่มอุตสาหกรรม",
-          url: `${siteConfig.url}/contact`,
+          url: `${siteConfig.project.url}/contact`,
         }}
       />
 
-      {/* ส่วนประกอบพื้นหลังเชิงเทคนิค */}
+      {/* ส่วนประกอบพื้นหลัง */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.02]" />
 
       {/* 1. ส่วนหัวเว็บไซต์: การสร้างตัวตนและความน่าเชื่อถือ */}
@@ -61,9 +64,9 @@ export default async function ContactPage() {
               <span className="text-emerald-500">กับผม.</span>
             </h1>
             <p className="max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              จบปัญหาเรื่องคุยกับคนทำเว็บไม่รู้เรื่อง ทักมาปรึกษาพี่ได้โดยตรง
+              จบปัญหาเรื่องคุยกับคนทำเว็บไม่รู้เรื่อง ทักมาปรึกษาผมได้โดยตรง
               เราจะวางโครงสร้างระบบที่ใช้งานได้จริง
-              และเติบโตไปพร้อมกับธุรกิจของน้องครับ
+              และเติบโตไปพร้อมกับธุรกิจของท่านครับ
             </p>
           </div>
         </div>
@@ -79,7 +82,7 @@ export default async function ContactPage() {
             </div>
             <div className="relative z-10">
               <h2 className="font-prompt mb-10 text-3xl font-black tracking-tighter text-slate-900 uppercase italic">
-                ทิ้งข้อมูลให้พี่{" "}
+                ทิ้งข้อมูลให้ผม{" "}
                 <span className="text-emerald-500">ติดต่อกลับ</span>
               </h2>
 
@@ -97,7 +100,7 @@ export default async function ContactPage() {
           {/* ฝั่งขวา: ศูนย์รวมการเชื่อมต่อช่องทางต่างๆ */}
           <div className="space-y-12 lg:col-span-5 lg:pt-12">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-              {/* ข้อมูลอีเมล */}
+              {/* แก้ไขจุดที่ 2: ดึงอีเมลจากระดับ company */}
               <div className="group rounded-[2.5rem] border border-slate-50 bg-slate-50/50 p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-white hover:shadow-2xl">
                 <div className="mb-4 flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-sm transition-colors group-hover:bg-emerald-500 group-hover:text-white">
@@ -108,7 +111,7 @@ export default async function ContactPage() {
                   </h3>
                 </div>
                 <p className="text-xl font-black text-slate-900">
-                  {siteConfig.email}
+                  {siteConfig.company.email}
                 </p>
               </div>
 
@@ -128,7 +131,7 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            {/* ข้อมูลการดำเนินงานของธุรกิจ */}
+            {/* ข้อมูลการดำเนินงาน */}
             <div className="space-y-10 rounded-[3rem] border border-slate-100 bg-white p-10 shadow-sm">
               <div className="flex gap-6">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 font-black text-emerald-500 italic">
@@ -166,10 +169,10 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ส่วนท้ายข้อมูลระบบ */}
+      {/* แก้ไขจุดที่ 3: แสดงชื่อผู้เชี่ยวชาญผ่าน property .name */}
       <footer className="mt-20 border-t border-slate-50 py-12 text-center">
         <p className="font-prompt text-[9px] font-black tracking-[0.6em] text-slate-300 uppercase italic">
-          Reliability Build by {siteConfig.expert} v2026 — Bangkok Hub
+          Reliability Build by {siteConfig.expert.name} v2026 — Bangkok Hub
         </p>
       </footer>
     </main>

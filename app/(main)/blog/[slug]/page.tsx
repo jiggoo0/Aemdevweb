@@ -7,7 +7,6 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 
-// ชุดไอคอนมาตรฐานสำหรับงานเทคนิคระดับ Specialist
 import {
   ArrowLeft,
   Calendar,
@@ -16,7 +15,6 @@ import {
   ShieldCheck,
 } from "lucide-react"
 
-// ข้อมูลและการตั้งค่าระบบงานหลัก
 import { getAllPosts, getPostBySlug } from "@/lib/blog"
 import { siteConfig } from "@/constants/site-config"
 import { useMDXComponents } from "@/mdx-components"
@@ -24,10 +22,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { JsonLd } from "@/components/seo/JsonLd"
 
-/**
- * ส่วนประกอบเฉพาะสำหรับเนื้อหาบทความ (Custom MDX Components)
- * ปรับจูนเพื่อให้หน้าบทความรักษามาตรฐานการแสดงผลและความสวยงามเชิงระบบ
- */
 const mdxComponents = {
   ...useMDXComponents({}),
   img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
@@ -54,21 +48,9 @@ const mdxComponents = {
       {...props}
     />
   ),
-  h3: (props: any) => (
-    <h3
-      className="font-prompt mt-16 mb-6 text-2xl font-black tracking-tight text-slate-800 uppercase italic"
-      {...props}
-    />
-  ),
   p: (props: any) => (
     <p
       className="font-anuphan mb-10 text-xl leading-[1.8] font-medium text-slate-600"
-      {...props}
-    />
-  ),
-  li: (props: any) => (
-    <li
-      className="font-anuphan mb-4 list-inside list-disc text-xl font-medium text-slate-600 marker:text-emerald-500"
       {...props}
     />
   ),
@@ -105,22 +87,20 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-/**
- * ระบบจัดการพิกัดคงที่สำหรับการสร้างหน้าเว็บล่วงหน้า (Static Params)
- */
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts.map((post) => ({ slug: post.slug }))
 }
 
 /**
- * แผนงานจัดการข้อมูลส่วนหัวเพื่อระบบค้นหา (SEO Metadata)
+ * แก้ไขจุดที่ 1: Metadata Engine
+ * ปรับพิกัดตัวแปรเข้ากลุ่ม project และแก้ปัญหา authors Type Mismatch
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-  if (!post) return { title: `ไม่พบบทความ | ${siteConfig.shortName}` }
-  
+  if (!post) return { title: `ไม่พบบทความ | ${siteConfig.project.shortName}` }
+
   const fm = post.frontmatter
   return {
     title: `${fm.title} | Knowledge Hub`,
@@ -129,16 +109,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: fm.title,
       description: fm.excerpt || fm.description,
       type: "article",
-      url: `${siteConfig.url}/blog/${slug}`,
-      images: [{ url: fm.thumbnail || siteConfig.ogImage }],
-      authors: [siteConfig.expert],
+      url: `${siteConfig.project.url}/blog/${slug}`,
+      images: [{ url: fm.thumbnail || siteConfig.project.ogImage }],
+      // แก้ไข: ต้องส่งเป็น String Array เท่านั้น ห้ามส่ง Object
+      authors: [siteConfig.expert.name],
     },
   }
 }
 
-/**
- * ระบบประมวลผลข้อมูลบทความ (Main Page Engine)
- */
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
@@ -150,30 +128,30 @@ export default async function BlogPostPage({ params }: Props) {
     month: "long",
     day: "numeric",
   })
-
-  // ระบบรักษาความปลอดภัยข้อมูลรูปภาพและพิกัดการแสดงผล
-  const safeTitle = fm.title && fm.title.trim() !== "" ? fm.title : "รูปภาพบทความ"
-  const safeImage = fm.thumbnail && fm.thumbnail.trim() !== "" ? fm.thumbnail : "/images/og-image.png"
+  const safeImage = fm.thumbnail || "/images/og-image.png"
 
   return (
     <article className="relative min-h-screen bg-white pt-32 pb-24 antialiased selection:bg-emerald-500/20">
+      {/* แก้ไขจุดที่ 2: Article Schema (JSON-LD) */}
       <JsonLd
         type="Article"
         data={{
-          headline: safeTitle,
+          headline: fm.title,
           description: fm.excerpt || fm.description,
           image: safeImage,
           datePublished: fm.date,
           author: {
             "@type": "Person",
-            name: siteConfig.expert,
-            url: siteConfig.url,
+            name: siteConfig.expert.name,
+            url: siteConfig.project.url,
           },
         }}
       />
 
-      {/* ชั้นเลเยอร์พื้นหลังเชิงระบบ */}
-      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" aria-hidden="true" />
+      <div
+        className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
+        aria-hidden="true"
+      />
 
       <div className="container mx-auto max-w-4xl px-6">
         <nav className="mb-16">
@@ -200,11 +178,9 @@ export default async function BlogPostPage({ params }: Props) {
               <Calendar className="h-4 w-4 text-emerald-500" /> {formattedDate}
             </div>
           </div>
-
           <h1 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
             {fm.title}
           </h1>
-
           <p className="font-anuphan border-l-4 border-slate-100 pl-6 text-2xl leading-relaxed font-bold text-slate-400 italic">
             {fm.excerpt || fm.description}
           </p>
@@ -213,32 +189,31 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="relative mb-24 aspect-[21/10] w-full overflow-hidden rounded-[4rem] shadow-2xl shadow-slate-200/50">
           <Image
             src={safeImage}
-            alt={safeTitle}
+            alt={fm.title}
             fill
             className="object-cover"
             priority
           />
         </div>
 
-        {/* ส่วนประมวลผลเนื้อหาจากระบบงานจัดการข้อมูลบทความ */}
         <div className="prose prose-slate prose-xl prose-headings:font-prompt prose-p:font-anuphan prose-p:leading-[1.9] prose-strong:text-slate-950 prose-a:text-emerald-600 max-w-none">
           <MDXRemote source={String(post.content)} components={mdxComponents} />
         </div>
 
-        {/* ชั้นข้อมูลผู้จัดทำระบบงานบทความ */}
+        {/* แก้ไขจุดที่ 3: ส่วนแสดงข้อมูลผู้จัดทำในท้ายบทความ */}
         <div className="mt-32 flex flex-col items-center justify-between gap-10 rounded-[3.5rem] border border-slate-100 bg-slate-50/80 p-12 md:flex-row">
           <div className="flex items-center gap-8">
             <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-[2rem] bg-slate-950 shadow-xl">
               <span className="font-prompt text-4xl font-black text-emerald-500 italic">
-                {siteConfig.expert.charAt(0)}
+                {siteConfig.expert.name.charAt(0)}
               </span>
             </div>
             <div className="space-y-1">
               <div className="font-prompt text-2xl leading-none font-black text-slate-900 uppercase italic">
-                {siteConfig.expert}
+                {siteConfig.expert.name}
               </div>
               <div className="font-anuphan text-xs font-black tracking-[0.2em] text-emerald-600 uppercase">
-                Technical Expert
+                {siteConfig.expert.role}
               </div>
             </div>
           </div>
@@ -250,9 +225,11 @@ export default async function BlogPostPage({ params }: Props) {
           </Button>
         </div>
 
-        {/* ส่วนปิดการขายและสร้างความเชื่อมั่นเชิงระบบ */}
         <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[4.5rem] bg-slate-950 p-12 text-center text-white md:p-24">
-          <div className="absolute top-0 right-0 p-12 opacity-5" aria-hidden="true">
+          <div
+            className="absolute top-0 right-0 p-12 opacity-5"
+            aria-hidden="true"
+          >
             <ShieldCheck size={250} />
           </div>
           <Sparkles className="mx-auto mb-10 h-16 w-16 animate-pulse text-emerald-500" />
@@ -264,8 +241,8 @@ export default async function BlogPostPage({ params }: Props) {
             up?
           </h3>
           <p className="font-anuphan mx-auto mb-12 max-w-2xl text-xl font-medium text-slate-400">
-            หากน้องต้องการระบบงานที่นิ่งและแรงแบบรากฐานดิจิทัลชิ้นนี้ 
-            ทักมาคุยรายละเอียดโครงการกับพี่โดยตรงได้ทันทีครับ
+            หากต้องการจัดการระบบงานให้ได้มาตรฐานความเร็วและพิกัด SEO
+            ที่แม่นยำแบบนี้ สามารถติดต่อเพื่อสรุปรายละเอียดโครงการได้ทันที
           </p>
           <Button
             asChild
