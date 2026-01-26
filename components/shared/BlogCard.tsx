@@ -5,12 +5,11 @@ import Link from "next/link"
 import Image from "next/image"
 import { Calendar, ChevronRight } from "lucide-react"
 
-// ส่วนจัดการตรรกะและโครงสร้างระบบ
 import { cn } from "@/lib/utils"
 
 /**
- * BlogCard - หน้าด่านความรู้สู่กลุ่มธุรกิจ SME และโรงงาน
- * ออกแบบมาเพื่อสะท้อนความประณีตและการใส่ใจในเนื้อหาเชิงเทคนิค
+ * BlogCard - แหล่งรวบรวมเทคนิคและพิกัดงานสำหรับกลุ่มธุรกิจ SME และโรงงาน
+ * ออกแบบมาเพื่อสะท้อนความประณีตและการจัดการเนื้อหาเชิงระบบ
  */
 
 interface BlogCardProps {
@@ -32,20 +31,20 @@ export default function BlogCard({
   tags = [],
   className,
 }: BlogCardProps) {
-  // การจัดการข้อความประกอบภาพเพื่อคะแนนการค้นหาที่ดีที่สุด
+  // จัดการชื่อรูปภาพเพื่อรองรับระบบค้นหาและบอทเก็บข้อมูล
   const imageAlt =
     title && title.trim() !== ""
       ? title
-      : "เทคนิคการพัฒนาเว็บไซต์โดย นายเอ็มซ่ามากส์"
+      : "เทคนิคการจัดการระบบงานโดย นายเอ็มซ่ามากส์"
 
-  // การแสดงผลวันที่รูปแบบไทยเพื่อให้กลุ่มเป้าหมายอ่านข้อมูลได้ง่าย
+  // ปรับพิกัดวันที่ให้เป็นรูปแบบที่อ่านง่ายสำหรับกลุ่มธุรกิจไทย
   const formattedDate = date
     ? new Date(date).toLocaleDateString("th-TH", {
         year: "numeric",
         month: "long",
         day: "numeric",
       })
-    : "เร็วๆ นี้"
+    : "เตรียมข้อมูล"
 
   return (
     <Link
@@ -56,7 +55,7 @@ export default function BlogCard({
         className
       )}
     >
-      {/* ชั้นเลเยอร์แสดงรูปภาพปก: ปรับแต่งการโหลดตามมาตรฐาน Next.js 16 */}
+      {/* ส่วนแสดงภาพปก: ล็อคพิกัดการโหลดภาพเพื่อความรวดเร็วตามมาตรฐานปี 2026 */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
         <Image
           src={thumbnail || "/images/blog/placeholder.webp"}
@@ -66,24 +65,24 @@ export default function BlogCard({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        {/* ระบบการไล่ระดับสีเพื่อเพิ่มมิติความพรีเมียมให้ภาพปก */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        {/* ชั้นกรองแสงเพิ่มมิติความประณีตให้พิกัดภาพ */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-        {/* ส่วนแสดงป้ายกำกับหมวดหมู่บทความ */}
+        {/* ป้ายระบุหมวดหมู่พิกัดงาน */}
         {tags.length > 0 && (
           <div className="absolute top-6 left-6 z-10">
-            <span className="rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[9px] font-black tracking-[0.25em] text-white uppercase shadow-xl backdrop-blur-md">
+            <span className="font-heading rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[9px] font-black tracking-[0.25em] text-white uppercase shadow-xl backdrop-blur-md">
               {tags[0]}
             </span>
           </div>
         )}
       </div>
 
-      {/* ชั้นเลเยอร์รายละเอียดเนื้อหาและตัวอักษร */}
+      {/* ส่วนข้อมูลเนื้อหาและตัวอักษร */}
       <div className="flex flex-1 flex-col p-8 lg:p-10">
-        {/* ส่วนแสดงบันทึกข้อมูลทางเทคนิค */}
+        {/* บันทึกพิกัดเวลาและประเภทเนื้อหา */}
         <div className="mb-6 flex items-center gap-4">
-          <div className="flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-emerald-600 uppercase italic">
+          <div className="font-heading flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-emerald-600 uppercase italic">
             <Calendar size={12} className="text-emerald-500" />
             {formattedDate}
           </div>
@@ -91,27 +90,27 @@ export default function BlogCard({
             className="h-1 w-1 rounded-full bg-slate-200"
             aria-hidden="true"
           />
-          <span className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase italic">
+          <span className="font-heading text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase italic">
             Specialist Perspectives
           </span>
         </div>
 
-        {/* หัวข้อบทความ: เน้นการสื่อสารที่ชัดเจนและมีพลัง */}
-        <h3 className="font-prompt mb-5 line-clamp-2 text-2xl leading-[1.15] font-black tracking-tighter text-slate-900 uppercase italic transition-colors duration-300 group-hover:text-emerald-500">
-          {title || "กำลังประมวลผลข้อมูล..."}
+        {/* หัวข้อบทความ: ใช้ font-heading เพื่อความหนักแน่น */}
+        <h3 className="font-heading mb-5 line-clamp-2 text-2xl leading-[1.15] font-black tracking-tighter text-slate-950 uppercase italic transition-colors duration-300 group-hover:text-emerald-500">
+          {title || "กำลังเตรียมพิกัดข้อมูล..."}
         </h3>
 
-        {/* เนื้อหาเกริ่นนำเพื่อดึงดูดกลุ่มเจ้าของกิจการและโรงงาน */}
-        <p className="font-anuphan mb-10 line-clamp-3 flex-1 text-[15px] leading-relaxed font-bold text-slate-500 transition-colors group-hover:text-slate-600">
+        {/* เนื้อหาเกริ่นนำ: ใช้ font-body เพื่อให้อ่านพิกัดข้อมูลได้ไหลลื่น */}
+        <p className="font-body mb-10 line-clamp-3 flex-1 text-[15px] leading-relaxed font-bold text-slate-500 transition-colors group-hover:text-slate-600">
           {excerpt ||
-            "พี่เตรียมข้อมูลเชิงเทคนิคที่จะช่วยให้โครงการของน้องเติบโตด้วยเทคโนโลยีรุ่นล่าสุดและการจัดการระบบงานที่ถูกต้องไว้ให้แล้วครับ"}
+            "เตรียมพิกัดข้อมูลเชิงเทคนิคที่จะช่วยให้ระบบงานของน้องเติบโตด้วยการจัดการที่ถูกต้องไว้ให้แล้วครับ"}
         </p>
 
-        {/* ส่วนท้ายเพื่อกระตุ้นการเข้าถึงเนื้อหาตัวเต็ม */}
+        {/* ส่วนท้ายเพื่อดึงดูดการเข้าถึงเนื้อหาฉบับเต็ม */}
         <div className="mt-auto flex items-center justify-between border-t border-slate-50 pt-8">
           <div className="flex items-center gap-2">
-            <span className="font-prompt text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all duration-300 group-hover:tracking-[0.5em] group-hover:text-slate-950">
-              อ่านเนื้อหาเต็มๆ
+            <span className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all duration-300 group-hover:tracking-[0.5em] group-hover:text-slate-950">
+              ตรวจสอบเนื้อหา
             </span>
           </div>
 

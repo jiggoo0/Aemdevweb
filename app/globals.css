@@ -2,146 +2,52 @@
 @import "tailwindcss";
 
 @theme {
-  /* อัตลักษณ์ของแบรนด์และระบบสีพื้นฐาน (รองรับ Shadcn v4) */
+  /* ระบบสีคงเอกลักษณ์ของแบรนด์ */
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(222.2 84% 4.9%);
-
   --color-primary: hsl(222.2 47.4% 11.2%);
-  --color-primary-foreground: hsl(210 40% 98%);
-
-  --color-secondary: hsl(210 40% 96.1%);
-  --color-secondary-foreground: hsl(222.2 47.4% 11.2%);
-
-  --color-accent: hsl(210 40% 96.1%);
-  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
-
-  /* ระบบสีเขียวมรกต (เอกลักษณ์ของ AEMDEVWEB) */
   --color-success: hsl(158 64% 52%);
   --color-emerald-500: #10b981;
   --color-emerald-400: #34d399;
-
-  /* สีสำหรับการอ่านที่ผ่านเกณฑ์มาตรฐานการมองเห็น (Contrast) */
   --color-slate-muted: #64748b;
-
-  --color-destructive: hsl(0 84.2% 60.2%);
-
-  /* ส่วนประกอบของระบบจัดการหน้าจอ */
   --color-border: hsl(214.3 31.8% 91.4%);
-  --color-input: hsl(214.3 31.8% 91.4%);
-  --color-ring: hsl(222.2 84% 4.9%);
 
-  /* การจัดการความโค้งมนของขอบงาน */
-  --radius-lg: 0.75rem;
-  --radius-md: calc(0.75rem - 2px);
-  --radius-sm: calc(0.75rem - 4px);
+  /* ปรับปรุงตัวแปรฟอนต์: IBM Plex Sans Thai + Anuphan */
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
 
-  /* การเชื่อมโยงระบบตัวอักษร */
-  --font-prompt: var(--font-prompt);
-  --font-anuphan: var(--font-anuphan);
-
-  /* ระบบการเคลื่อนไหวพื้นฐาน */
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
 }
-
-/* -------------------------------------------------------------------------- */
-/* ส่วนการตั้งค่าพื้นฐาน (Base Layer)                                          */
-/* -------------------------------------------------------------------------- */
 
 @layer base {
   * {
-    /* ใช้ตัวแปรโดยตรงเพื่อลดความผิดพลาดในการประมวลผลของ Tailwind v4 */
     border-color: var(--color-border);
-    outline-color: color-mix(in srgb, var(--color-ring) 50%, transparent);
   }
 
   body {
-    @apply bg-background text-foreground font-anuphan antialiased;
-    font-feature-settings:
-      "rlig" 1,
-      "calt" 1;
-
-    &::selection {
-      @apply bg-success/20 text-primary;
-    }
+    /* ใช้ Anuphan เป็นฟอนต์พื้นฐานสำหรับเนื้อหา */
+    @apply bg-background text-foreground font-body antialiased;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-prompt text-primary font-bold tracking-tight;
+  h1, h2, h3, h4, h5, h6 {
+    /* ใช้ IBM Plex Sans Thai สำหรับส่วนหัวและหัวข้อสำคัญ */
+    @apply font-heading text-primary font-bold tracking-tight;
   }
 
   .heading-heavy {
-    @apply font-prompt font-black tracking-tighter uppercase italic;
+    @apply font-heading font-black tracking-tighter uppercase italic;
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* ส่วนการจัดการประสิทธิภาพและการใช้งาน (Utilities Layer)                        */
-/* -------------------------------------------------------------------------- */
-
 @layer utilities {
-  /* การคุมระดับสีตัวหนังสือให้ผ่านเกณฑ์ Lighthouse */
   .text-muted-safe {
     color: var(--color-slate-muted);
   }
 
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* ป้องกันการแสดงผลตัวอักษรไทยที่ผิดเพี้ยน */
-  .thai-font-smoothing {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-
-  /* ระบบเงาที่เน้นความนุ่มนวลและดูเป็นระเบียบ */
-  .industrial-shadow {
-    box-shadow: 0 10px 30px -10px rgba(2, 6, 23, 0.1);
-  }
-
-  /* การไล่ระดับสีของแบรนด์ */
-  .text-gradient-emerald {
-    @apply bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent;
-  }
-
-  /* ระบบเลื่อนข้อมูลอัตโนมัติ (ประมวลผลผ่าน GPU) */
-  @keyframes infinite-scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-
+  /* ระบบเลื่อนข้อมูลต่อเนื่อง: บังคับใช้ GPU เพื่อลดภาระ Main Thread */
   .animate-infinite-scroll {
     animation: infinite-scroll 25s linear infinite;
-
-    /* บังคับการประมวลผลผ่านชิปกราฟิกเพื่อลดภาระการทำงานหลักของเครื่อง */
     will-change: transform;
     transform: translateZ(0);
   }

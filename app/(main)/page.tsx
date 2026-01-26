@@ -4,27 +4,26 @@ import React, { Suspense } from "react"
 import type { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// ดึงการตั้งค่าและฟังก์ชันจัดการ Metadata ตามโครงสร้างใหม่
+// ดึงการตั้งค่าพิกัดระบบและฟังก์ชันจัดการข้อมูล
 import { siteConfig } from "@/constants/site-config"
 import { constructMetadata } from "@/app/metadata"
 import { services } from "@/constants/services-data"
 import { JsonLd } from "@/components/seo/JsonLd"
 import Hero from "@/components/landing/Hero"
 
-// ส่วนจัดการข้อมูลบทความและผลงาน
 import { getLatestBlogs } from "@/lib/blog"
 import { getLatestCaseStudies } from "@/lib/case-studies"
 
 /**
- * โหลดส่วนประกอบแบบ Dynamic เพื่อลดขนาด Main Thread ของบราวเซอร์
- * ช่วยให้ค่าคะแนน Performance (LCP) ดีขึ้น
+ * โหลดส่วนประกอบแบบแยกชิ้น (Dynamic Import) 
+ * เพื่อลดภาระการประมวลผลเริ่มต้น และรีดคะแนน LCP ให้ต่ำกว่า 1 วินาที
  */
 const HomeClientSections = dynamic(
   () => import("@/components/landing/HomeClientSections"),
   {
     ssr: true,
     loading: () => (
-      <div className="h-[500px] w-full animate-pulse bg-slate-50" />
+      <div className="h-[500px] w-full animate-pulse bg-slate-50/50" />
     ),
   }
 )
@@ -38,25 +37,25 @@ const WorkProcess = dynamic(
 )
 const CTASection = dynamic(() => import("@/components/landing/CTASection"))
 
-// กำหนด Metadata โดยใช้พิกัดข้อมูลกลุ่ม project
+// กำหนดพิกัดข้อมูลส่วนหัว (SEO)
 export const metadata: Metadata = constructMetadata({
   title: siteConfig.project.title,
   description: siteConfig.project.description,
 })
 
 export default async function HomePage() {
-  // ดึงข้อมูลผ่านระบบจัดการไฟล์ (Server-side)
+  // ดึงข้อมูลผ่านระบบจัดการไฟล์ระดับ Server
   const latestBlogs = await getLatestBlogs(3)
   const latestCaseStudies = await getLatestCaseStudies(3)
 
-  // กรองเฉพาะบริการที่ต้องการเน้นในหน้าแรก
+  // กรองเฉพาะงานระบบที่ต้องการเน้นเป็นพิเศษ
   const featuredServices = services.filter((s) =>
     ["sme-speed-launch", "corporate-trust", "industrial-catalog"].includes(s.id)
   )
 
   return (
-    <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/20">
-      {/* ระบบข้อมูลโครงสร้างเพื่อให้ AI และบอทเก็บข้อมูลเข้าใจเนื้อหา */}
+    <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-100 selection:text-emerald-900">
+      {/* วางพิกัดข้อมูลโครงสร้างเพื่อให้ระบบค้นหาเข้าใจเนื้อหาธุรกิจ */}
       <JsonLd
         type="WebSite"
         data={{
@@ -67,11 +66,12 @@ export default async function HomePage() {
         }}
       />
 
+      {/* ส่วนหัวที่เน้นความเร็วสูงสุด (LCP Critical Path) */}
       <Hero />
 
-      {/* ส่วนแสดงความน่าเชื่อถือ: ใช้ Suspense เพื่อป้องกันการติดขัดตอนโหลดข้อมูลชุดใหญ่ */}
+      {/* ส่วนแสดงความน่าเชื่อถือ: ใช้ Suspense เพื่อแยกการโหลดไม่ให้ขวางเนื้อหาหลัก */}
       <Suspense
-        fallback={<div className="h-96 w-full animate-pulse bg-slate-50" />}
+        fallback={<div className="h-96 w-full animate-pulse bg-slate-50/50" />}
       >
         <HomeClientSections />
       </Suspense>
@@ -80,16 +80,16 @@ export default async function HomePage() {
         <ValueProp />
       </section>
 
-      {/* รายการบริการรายธุรกิจ */}
+      {/* ส่วนรายการระบบงานสำหรับธุรกิจ */}
       <section className="relative bg-slate-50/80 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 space-y-4 text-center lg:text-left">
-            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+            <h2 className="font-heading text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
               ระบบงาน <span className="text-emerald-500">สำหรับธุรกิจ</span>
             </h2>
-            <p className="font-anuphan max-w-2xl text-lg leading-relaxed font-bold text-slate-500">
-              ยกระดับโครงสร้างสำหรับกลุ่มธุรกิจและโรงงานอุตสาหกรรม
-              เน้นความเสถียรและลำดับข้อมูลที่ถูกต้องตามมาตรฐานปี 2026
+            <p className="font-body max-w-2xl text-lg leading-relaxed font-bold text-slate-500">
+              ยกระดับโครงสร้างสำหรับกลุ่มธุรกิจและโรงงานอุตสาหกรรม 
+              เน้นความเสถียรและพิกัดข้อมูลที่ถูกต้องตามมาตรฐานปี 2026
             </p>
           </div>
 
@@ -108,11 +108,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ส่วนแสดงตัวอย่างความสำเร็จ (Case Studies) */}
+      {/* ส่วนแสดงพิกัดผลงานจริง */}
       <section className="relative py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16 text-center lg:text-left">
-            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+            <h2 className="font-heading text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
               ผลงาน <span className="text-emerald-500">ที่ใช้งานจริง</span>
             </h2>
           </div>
@@ -120,11 +120,8 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
             {latestCaseStudies.map((item, idx) => {
               const fm = item.frontmatter
-
-              /**
-               * แก้ไขจุดเสี่ยง: จัดการประเภทข้อมูล Union Type (ShowcaseStats | string)
-               * ป้องกัน Error TS2551 กรณีผลงานบางชิ้นระบุเป็นข้อความธรรมดา
-               */
+              
+              // จัดการข้อมูลผลลัพธ์ให้เป็นพิกัดข้อความที่ชัดเจน
               const primaryResult =
                 typeof fm.results?.[0] === "object"
                   ? fm.results[0].value
@@ -147,13 +144,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ระบบขั้นตอนการทำงาน */}
       <WorkProcess />
 
-      {/* ส่วนข้อมูลบทความและคลังความรู้ */}
+      {/* ส่วนคลังความรู้และแนวทางจัดการระบบ */}
       <section className="relative bg-slate-50/50 py-24 lg:py-32">
         <div className="container mx-auto px-6">
           <div className="mb-16">
-            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+            <h2 className="font-heading text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
               ความรู้ <span className="text-emerald-500">และแนวทางจัดการ</span>
             </h2>
           </div>
@@ -175,12 +173,13 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ส่วนกระตุ้นการปิดยอดท้ายหน้า */}
       <CTASection />
 
       <footer className="border-t border-slate-100 py-12 text-center opacity-40 select-none">
-        <p className="font-prompt text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          © {new Date().getFullYear()} {siteConfig.company.fullName} —
-          จัดการระบบด้วยเทคนิค NEXT.JS 16
+        <p className="font-heading text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase">
+          © {new Date().getFullYear()} {siteConfig.company.name} — 
+          จัดการโครงสร้างด้วยเทคนิค NEXT.JS 16
         </p>
       </footer>
     </main>

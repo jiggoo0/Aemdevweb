@@ -14,8 +14,8 @@ import { siteConfig } from "@/constants/site-config"
 import { cn } from "@/lib/utils"
 
 /**
- * ระบบแถบนำทางหลัก (Navbar)
- * ปรับปรุงการเข้าถึงข้อมูลผ่าน siteConfig.project และ siteConfig.expert.name
+ * แถบนำทางหลัก (Navbar)
+ * ออกแบบมาเพื่อความรวดเร็วในการเข้าถึงข้อมูลและรักษาคะแนนการประมวลผลหน้าเว็บ
  */
 const Navbar = () => {
   const pathname = usePathname()
@@ -36,6 +36,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(false)
   }, [pathname])
 
+  // ป้องกันอาการ Hydration Mismatch สำหรับ Client Component
   if (!isMounted) return <div className="h-20 w-full bg-transparent" />
 
   return (
@@ -50,7 +51,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
-        {/* ส่วนแสดงสัญลักษณ์ (Logo): แก้ไขพิกัด shortName และ expert.name */}
+        {/* 1. ส่วนแสดงสัญลักษณ์โครงการ (Brand Identity) */}
         <Link
           href="/"
           className="group flex items-center gap-3 text-2xl font-black tracking-tighter text-slate-950 italic select-none"
@@ -58,14 +59,14 @@ const Navbar = () => {
           <div className="relative flex h-11 w-11 items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
             <Image
               src="/images/logo-circuit.png"
-              alt={`AEMDEVWEB โดย ${siteConfig.expert.name}`}
+              alt={`พิกัดข้อมูลโดย ${siteConfig.expert.name}`}
               width={44}
               height={44}
               priority
               className="object-contain"
             />
           </div>
-          <span className="font-prompt flex items-center uppercase">
+          <span className="font-heading flex items-center uppercase">
             {siteConfig.project.shortName}
             <span className="ml-1 text-emerald-500 italic">DEV</span>
             <span className="ml-3 hidden text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase opacity-60 md:block">
@@ -74,7 +75,7 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* เมนูนำทางสำหรับ Desktop */}
+        {/* 2. เมนูนำทางสำหรับจอคอมพิวเตอร์ (Desktop Navigation) */}
         <div className="hidden items-center gap-10 lg:flex">
           {mainNav?.map((item) => {
             const isActive = pathname === item.href
@@ -83,7 +84,7 @@ const Navbar = () => {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "font-prompt relative text-[11px] font-black tracking-[0.3em] uppercase transition-all hover:text-emerald-500",
+                  "font-heading relative text-[11px] font-black tracking-[0.3em] uppercase transition-all hover:text-emerald-500",
                   isActive ? "text-emerald-500" : "text-slate-500",
                   item.disabled && "pointer-events-none opacity-50"
                 )}
@@ -107,14 +108,14 @@ const Navbar = () => {
 
           <Link
             href="/contact"
-            className="group font-prompt flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
+            className="group font-heading flex items-center gap-4 rounded-2xl bg-slate-950 px-10 py-4.5 text-[10px] font-black tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/30 active:scale-95"
           >
             {siteConfig.cta.main}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1.5" />
           </Link>
         </div>
 
-        {/* ปุ่มควบคุม Mobile Menu */}
+        {/* 3. ส่วนควบคุมสำหรับมือถือ (Mobile Toggle) */}
         <button
           className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-900 transition-all active:scale-90 lg:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -124,7 +125,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* เมนูสำหรับหน้าจอมือถือ */}
+      {/* 4. เมนูนำทางสำหรับมือถือ (Mobile Overlay) */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -139,7 +140,7 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "font-prompt flex items-center justify-between text-3xl font-black tracking-tighter uppercase italic transition-all",
+                    "font-heading flex items-center justify-between text-3xl font-black tracking-tighter uppercase italic transition-all",
                     pathname === item.href
                       ? "text-emerald-500"
                       : "text-slate-950"
@@ -156,7 +157,7 @@ const Navbar = () => {
               <div className="h-[2px] w-full bg-slate-50" />
               <Link
                 href="/contact"
-                className="font-prompt flex w-full items-center justify-center gap-4 rounded-3xl bg-slate-950 py-6 text-sm font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:bg-emerald-500 active:scale-95"
+                className="font-heading flex w-full items-center justify-center gap-4 rounded-3xl bg-slate-950 py-6 text-sm font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:bg-emerald-500 active:scale-95"
               >
                 {siteConfig.cta.main}
                 <ArrowRight className="h-6 w-6" />

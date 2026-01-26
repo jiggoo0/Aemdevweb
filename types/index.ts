@@ -10,7 +10,7 @@ export interface NavItem {
   title?: string
   disabled?: boolean
   external?: boolean
-  badge?: string // เช่น "New", "Hot"
+  badge?: string
   description?: string
 }
 
@@ -21,6 +21,9 @@ export interface FooterNavigation {
   legal: NavItem[]
 }
 
+/** * โครงสร้างการตั้งค่าระบบหลัก 
+ * ปรับปรุงเพื่อรองรับการแสดงผลเชิงธุรกิจและพิกัดงานเทคนิค
+ */
 export interface SiteConfig {
   company: {
     name: string
@@ -42,28 +45,41 @@ export interface SiteConfig {
     name: string
     role: string
   }
+  /** ข้อมูลสถิติเพื่อสร้างความน่าเชื่อถือ */
+  stats: {
+    label: string
+    value: string
+    suffix: string
+  }[]
+  /** ผลกระทบเชิงธุรกิจที่ระบบงานมอบให้ลูกค้า */
+  businessImpact: {
+    speed: string
+    seo: string
+    conversion: string
+  }
   keywords: {
     list: string[]
     all: string
     core: string[]
     tech: string[]
-    brand: string[]
+    brand: string[] // เพิ่มพิกัดนี้เพื่อรองรับข้อมูลใน site-config.ts
   }
+  /** พิกัดการเชื่อมต่อภายนอก (ชุดเดิมสำหรับรองรับโค้ดเก่า) */
   links: {
     line: string
     lineId: string
     facebook?: string
     linkedin?: string
-    github?: string
-    messenger?: string
     personal: string
   }
-  /** จัดกลุ่มข้อมูลสำหรับการติดต่อโดยเฉพาะ เพื่อลด Error ในฟอร์มและส่วนท้ายเว็บ */
+  /** รวมพิกัดการติดต่อสื่อสารทั้งหมดไว้ที่เดียว */
   contact: {
     email: string
+    line: string
     lineId: string
     facebook?: string
     linkedin?: string
+    personal?: string
     phone?: string
   }
   cta: {
@@ -145,9 +161,6 @@ export interface CaseStudyFrontmatter {
   excerpt: string
   thumbnail: string
   date: string
-  /** * แก้ไขจุดเสี่ยง: รองรับทั้งข้อความธรรมดา (String)
-   * และก้อนข้อมูลสถิติ (Object) เพื่อความยืดหยุ่นในการทำ SEO
-   */
   results: (string | ShowcaseStats)[]
   keyFeatures: string[]
   service?: string

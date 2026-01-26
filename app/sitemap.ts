@@ -12,8 +12,9 @@ import { getAllTemplates } from "@/lib/template"
  * จัดการลำดับความสำคัญและพิกัดข้อมูลเพื่อให้โปรแกรมค้นหาเข้าถึงเนื้อหาได้แม่นยำ
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // ดึง URL พื้นฐานจากพิกัดข้อมูลกลุ่ม project
-  const baseUrl = siteConfig.project.url
+  // จัดการพิกัด URL พื้นฐานให้สะอาด ป้องกันปัญหาเครื่องหมาย / ซ้อนกัน
+  const rawBaseUrl = siteConfig.project.url
+  const baseUrl = rawBaseUrl.endsWith("/") ? rawBaseUrl.slice(0, -1) : rawBaseUrl
 
   // 1. เส้นทางหน้าหลักและหน้าทั่วไป (Static Routes)
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -38,22 +39,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: 0.9, // เน้นความสำคัญสูงเพราะเป็นหน้าปิดการขาย
+    priority: 0.9,
   }))
 
   // 3. เส้นทางหน้าผลงาน (Case Studies)
   const caseStudies = await getAllCaseStudies()
-  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => ({
-    url: `${baseUrl}/case-studies/${study.slug}`,
-    lastModified: study.frontmatter.date
-      ? new Date(study.frontmatter.date)
-      : new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }))
+  const caseStudyRoutes: MetadataRoute.Sitemap = caseStudies.map((study) => {
+    // ตรวจสอบความถูกต้องของพิกัดวันที่เพื่อป้องกันระบบพัง
+    const studyDate = study.frontmatter.date ? new Date(study.frontmatter.date) : new Date()
+    const validDate = isNaN(studyDate.getTime()) ? new Date() : studyDate
+
+    return {
+      url: `${baseUrl}/case-studies/${study.slug}`,
+      lastModified: validDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }
+  })
 
   // 4. เส้นทางหน้าเทมเพลต (Templates)
-  // ใช้ tpl.id เพื่อให้ตรงกับพิกัดระบบจัดการข้อมูลชุดใหม่
   const templates = await getAllTemplates()
   const templateRoutes: MetadataRoute.Sitemap = templates.map((tpl) => ({
     url: `${baseUrl}/templates/${tpl.id}`,
@@ -64,16 +68,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 5. เส้นทางหน้าบทความ (Blog Posts)
   const posts = await getAllPosts()
-  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: post.frontmatter.date
-      ? new Date(post.frontmatter.date)
-      : new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }))
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => {
+    const postDate = post.frontmatter.date ? new Date(post.frontmatter.date) : new Date()
+    const validDate = isNaN(postDate.getTime()) ? new Date() : postDate
 
-  // รวมพิกัดข้อมูลทั้งหมดเข้าเป็นชุดเดียว
+    return {
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: validDate,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }
+  })
+
+  // รวมพิกัดข้อมูลทั้งหมดและคัดกรองตัวซ้ำ
   const allRoutes = [
     ...staticRoutes,
     ...serviceRoutes,
@@ -82,7 +89,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogRoutes,
   ]
 
-  // กรองพิกัดที่ซ้ำกันออกเพื่อป้องกันปัญหาด้านการจัดลำดับข้อมูล
   return allRoutes.filter(
     (route, index, self) => index === self.findIndex((r) => r.url === route.url)
   )

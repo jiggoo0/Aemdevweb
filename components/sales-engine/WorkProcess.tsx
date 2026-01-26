@@ -1,5 +1,7 @@
 /** @format */
 
+"use client"
+
 import React from "react"
 import { siteConfig } from "@/constants/site-config"
 import {
@@ -48,25 +50,25 @@ const processes = [
 
 const WorkProcess = () => {
   return (
-    <section className="overflow-hidden bg-white px-6 py-24 selection:bg-emerald-500/10">
+    <section className="overflow-hidden bg-white px-6 py-24 selection:bg-emerald-100">
       <div className="mx-auto max-w-6xl">
         {/* ส่วนหัวของเนื้อหา: การประกาศมาตรฐานการทำงาน */}
         <div className="mb-20 flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
-            <h2 className="font-prompt mb-3 text-sm font-black tracking-[0.4em] text-emerald-600 uppercase italic">
+            <h2 className="font-heading mb-3 text-sm font-black tracking-[0.4em] text-emerald-600 uppercase italic">
               Our Process
             </h2>
-            <p className="font-prompt text-4xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
+            <p className="font-heading text-4xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
               Standard <br />
               <span className="text-slate-400">Workflow.</span>
             </p>
-            <p className="font-anuphan mt-6 text-xl font-bold text-slate-500">
+            <p className="font-body mt-6 text-xl font-bold text-slate-500">
               ขั้นตอนการทำงานที่กระชับ จากไอเดียสู่ระบบงานที่สร้างรายได้จริง
             </p>
           </div>
 
           <div className="hidden md:block">
-            <div className="font-prompt flex items-center gap-4 border-l-4 border-slate-100 pl-6 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase italic">
+            <div className="font-heading flex items-center gap-4 border-l-4 border-slate-100 pl-6 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase italic">
               <span>EST. 2026</span>
               <span className="text-emerald-500">Speed Launch Protocol</span>
             </div>
@@ -80,27 +82,24 @@ const WorkProcess = () => {
 
           {processes.map((step, index) => (
             <div key={index} className="group relative">
-              {/* การจัดการลำดับที่และไอคอนคอมโพเนนต์ */}
               <div className="mb-8 flex items-center justify-between">
                 <div
                   className={`h-16 w-16 rounded-2xl ${step.color} flex items-center justify-center text-white shadow-2xl shadow-slate-200 transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6`}
                 >
                   {step.icon}
                 </div>
-                <span className="font-prompt text-6xl font-black text-slate-50 italic transition-colors group-hover:text-slate-100">
+                <span className="font-heading text-6xl font-black text-slate-50 italic transition-colors group-hover:text-slate-100">
                   0{index + 1}
                 </span>
               </div>
 
-              {/* ข้อมูลเนื้อหาในแต่ละลำดับ */}
-              <h3 className="font-prompt mb-4 text-xl font-black tracking-tight text-slate-900 uppercase italic transition-colors group-hover:text-emerald-600">
+              <h3 className="font-heading mb-4 text-xl font-black tracking-tight text-slate-900 uppercase italic transition-colors group-hover:text-emerald-600">
                 {step.title}
               </h3>
-              <p className="font-anuphan text-base leading-relaxed font-bold text-slate-500">
+              <p className="font-body text-base leading-relaxed font-bold text-slate-500">
                 {step.description}
               </p>
 
-              {/* พิกัดจุดระบุตำแหน่งทางเทคนิค */}
               <div
                 className="absolute top-12 -left-2 hidden h-4 w-4 rounded-full border-4 border-white bg-slate-200 transition-all duration-500 group-hover:scale-125 group-hover:bg-emerald-500 lg:block"
                 aria-hidden="true"
@@ -110,7 +109,7 @@ const WorkProcess = () => {
         </div>
 
         {/* ส่วนท้ายเพื่อกระตุ้นการติดต่อ: การรับประกันโดยผู้เชี่ยวชาญ */}
-        <div className="shadow-3xl relative mt-24 overflow-hidden rounded-[3rem] bg-slate-900 p-10 text-white md:p-16">
+        <div className="relative mt-24 overflow-hidden rounded-[3rem] bg-slate-950 p-10 text-white shadow-3xl md:p-16">
           <div
             className="absolute top-0 right-0 p-10 opacity-5"
             aria-hidden="true"
@@ -120,10 +119,10 @@ const WorkProcess = () => {
 
           <div className="relative z-10 flex flex-col items-center justify-between gap-10 md:flex-row">
             <div className="text-center md:text-left">
-              <h4 className="font-prompt mb-3 text-3xl font-black tracking-tighter uppercase italic md:text-4xl">
+              <h4 className="font-heading mb-3 text-3xl font-black tracking-tighter uppercase italic md:text-4xl">
                 พร้อมเริ่มโครงการของคุณหรือยัง?
               </h4>
-              <p className="font-anuphan text-lg font-bold text-slate-400">
+              <p className="font-body text-lg font-bold text-slate-400">
                 คุยตรงกับผู้เชี่ยวชาญ จบงานไว ไม่ผ่านคนกลาง มั่นใจในผลลัพธ์
               </p>
             </div>
@@ -134,7 +133,7 @@ const WorkProcess = () => {
               rel="noreferrer"
               className="w-full md:w-auto"
             >
-              <button className="font-prompt group flex w-full items-center justify-center gap-3 rounded-2xl bg-emerald-500 px-12 py-5 text-lg font-black tracking-widest text-slate-900 uppercase italic transition-all hover:scale-105 hover:bg-white active:scale-95">
+              <button className="font-heading group flex w-full items-center justify-center gap-3 rounded-2xl bg-emerald-500 px-12 py-5 text-lg font-black tracking-widest text-slate-950 uppercase italic transition-all hover:scale-105 hover:bg-white active:scale-95">
                 <CheckCircle
                   size={22}
                   className="transition-transform group-hover:rotate-12"

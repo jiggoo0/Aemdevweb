@@ -11,7 +11,7 @@ interface MainLayoutProps {
 }
 
 /**
- * โครงสร้างหลักของหน้าเว็บไซต์ (Marketing Layout)
+ * โครงสร้างหลักของหน้าเว็บไซต์ (Main Layout)
  * จัดการส่วนประกอบคงที่และเลเยอร์พื้นหลังทั้งหมด
  */
 export default function MainLayout({ children }: MainLayoutProps) {
@@ -19,12 +19,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
     <div
       className={cn(
         "relative flex min-h-screen flex-col bg-white antialiased",
-        "selection:bg-emerald-500/20 selection:text-emerald-900",
-        "font-anuphan"
+        "selection:bg-emerald-100 selection:text-emerald-900",
+        "font-body"
       )}
     >
       {/* 1. เลเยอร์ตกแต่งพื้นหลัง (Background Layers)
-          ล็อคค่า -z-20 และ pointer-events-none เพื่อไม่ให้รบกวนการคลิกปุ่มต่างๆ
+          ล็อคค่า -z-20 และ pointer-events-none เพื่อไม่ให้รบกวนการคลิกปุ่ม
       */}
       <div
         className="pointer-events-none fixed inset-0 -z-20 overflow-hidden select-none"
@@ -56,7 +56,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <Navbar />
 
       {/* 3. พื้นที่เนื้อหา (Main Content)
-          เว้นระยะห่างจากด้านบน (pt-16) เพื่อรองรับ Navbar ที่ถูกล็อคตำแหน่งไว้
+          ปรับระยะ pt ให้สัมพันธ์กับความสูงของ Navbar
       */}
       <main
         id="main-content"
@@ -72,7 +72,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* 5. ระบบเข้าถึงด่วน (Accessibility Skip Link) */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-emerald-500 focus:p-4 focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:bg-emerald-500 focus:p-4 focus:text-white font-heading font-bold"
       >
         ข้ามไปยังเนื้อหาหลัก
       </a>

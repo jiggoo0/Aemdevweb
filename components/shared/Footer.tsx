@@ -1,10 +1,8 @@
 /** @format */
 
-"use client"
-
 import React from "react"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
 import {
   Mail,
   ShieldCheck,
@@ -19,12 +17,16 @@ import { siteConfig } from "@/constants/site-config"
 import { footerServicesNav, footerCompanyNav } from "@/constants/navigation"
 import { cn } from "@/lib/utils"
 
+/**
+ * Footer - ส่วนท้ายของระบบเว็บไซต์
+ * ออกแบบมาเพื่อรวบรวมพิกัดการนำทางและตอกย้ำความเชื่อมั่นของแบรนด์ AEMDEVWEB
+ */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-500/10">
-      {/* ส่วนตกแต่งพื้นหลังระดับลึก */}
+    <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12 antialiased selection:bg-emerald-100">
+      {/* 1. เลเยอร์ตกแต่งพิกัดพื้นหลัง (Background Ornaments) */}
       <div
         className="pointer-events-none absolute -right-24 -bottom-24 opacity-[0.03]"
         aria-hidden="true"
@@ -38,7 +40,7 @@ export default function Footer() {
       />
 
       <div className="relative z-10 container mx-auto px-6">
-        {/* ส่วนแสดงกลุ่มธุรกิจที่รองรับ */}
+        {/* 2. ส่วนแสดงกลุ่มธุรกิจที่ระบบรองรับ (Industry Support) */}
         <div className="mb-20 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { label: "SME Business", icon: Zap },
@@ -51,15 +53,16 @@ export default function Footer() {
               className="group flex items-center gap-4 rounded-2xl border border-slate-50 bg-slate-50/50 p-5 transition-all hover:bg-white hover:shadow-xl hover:shadow-slate-200/50"
             >
               <item.icon className="h-5 w-5 text-emerald-500 transition-transform group-hover:scale-110" />
-              <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-[#020617] uppercase italic">
+              <span className="font-heading text-[10px] font-black tracking-[0.3em] text-[#020617] uppercase italic">
                 {item.label}
               </span>
             </div>
           ))}
         </div>
 
+        {/* 3. พิกัดข้อมูลหลัก (Main Footer Grid) */}
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
-          {/* ส่วนข้อมูลเจ้าของเว็บไซต์: แก้ไขจุดเรียกชื่อย่อโครงการ */}
+          {/* ส่วนตัวตนของโครงการ */}
           <div className="space-y-8 lg:col-span-4">
             <Link
               href="/"
@@ -68,24 +71,24 @@ export default function Footer() {
               <div className="flex size-14 items-center justify-center rounded-[1.25rem] transition-all duration-500 group-hover:rotate-6">
                 <Image
                   src="/images/logo-circuit.png"
-                  alt={`ข้อมูลโดย ${siteConfig.expert.name}`}
+                  alt={`พิกัดข้อมูลโดย ${siteConfig.expert.name}`}
                   width={48}
                   height={48}
                   className="object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-prompt text-3xl leading-none font-black tracking-tighter text-[#020617] uppercase italic">
+                <span className="font-heading text-3xl leading-none font-black tracking-tighter text-[#020617] uppercase italic">
                   {siteConfig.project.shortName}
                   <span className="text-emerald-500">DEV</span>
                 </span>
-                <span className="font-prompt mt-1.5 text-[9px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+                <span className="font-heading mt-1.5 text-[9px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
                   Industrial Area Specialist
                 </span>
               </div>
             </Link>
 
-            <p className="font-anuphan max-w-sm text-base leading-relaxed font-bold text-slate-500">
+            <p className="font-body max-w-sm text-base leading-relaxed font-bold text-slate-500">
               {siteConfig.project.description}
             </p>
 
@@ -97,9 +100,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ส่วนรายการบริการ */}
+          {/* รายการพิกัดบริการ */}
           <div className="space-y-8 lg:col-span-2">
-            <h4 className="font-prompt border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
+            <h4 className="font-heading border-l-4 border-emerald-500 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Services
             </h4>
             <ul className="space-y-5">
@@ -107,7 +110,7 @@ export default function Footer() {
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="group font-anuphan flex items-center gap-2 text-sm font-bold text-slate-500 transition-all hover:translate-x-1 hover:text-emerald-600"
+                    className="group font-body flex items-center gap-2 text-sm font-bold text-slate-500 transition-all hover:translate-x-1 hover:text-emerald-600"
                   >
                     {service.name}
                     <ArrowUpRight
@@ -120,9 +123,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ส่วนข้อมูลบริษัท */}
+          {/* ข้อมูลบริษัท/ผู้ให้บริการ */}
           <div className="space-y-8 lg:col-span-2">
-            <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
+            <h4 className="font-heading border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Company
             </h4>
             <ul className="space-y-5">
@@ -131,7 +134,7 @@ export default function Footer() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "font-anuphan text-sm font-bold transition-all",
+                      "font-body text-sm font-bold transition-all",
                       item.disabled
                         ? "pointer-events-none text-slate-300"
                         : "text-slate-500 hover:translate-x-1 hover:text-[#020617]"
@@ -144,9 +147,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ช่องทางการติดต่อ: แก้ไขจุดเรียก Email */}
+          {/* พิกัดการติดต่อสื่อสาร */}
           <div className="space-y-8 lg:col-span-4">
-            <h4 className="font-prompt border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
+            <h4 className="font-heading border-l-4 border-slate-200 pl-4 text-[11px] font-black tracking-[0.4em] text-[#020617] uppercase italic">
               Contact
             </h4>
             <div className="space-y-6 rounded-[2.5rem] border border-slate-100 bg-slate-50/30 p-8 transition-colors hover:bg-slate-50">
@@ -155,12 +158,12 @@ export default function Footer() {
                   <Mail size={24} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+                  <span className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
                     Email Support
                   </span>
                   <a
                     href={`mailto:${siteConfig.company.email}`}
-                    className="font-prompt text-lg font-black text-[#020617] transition-colors hover:text-emerald-500"
+                    className="font-heading text-lg font-black text-[#020617] transition-colors hover:text-emerald-500"
                   >
                     {siteConfig.company.email}
                   </a>
@@ -170,22 +173,22 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ส่วนท้าย: แก้ไขชื่อบริษัทและชื่อผู้เชี่ยวชาญ */}
+        {/* 4. ส่วนพิกัดกฎหมายและลิขสิทธิ์ (Bottom Bar) */}
         <div className="mt-28 flex flex-col items-center justify-between gap-8 border-t border-slate-100 pt-12 md:flex-row">
-          <p className="font-anuphan text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">
+          <p className="font-body text-center text-[10px] font-black tracking-[0.25em] text-slate-400 uppercase italic md:text-left">
             © {currentYear} {siteConfig.company.fullName}. จัดการโดย{" "}
             {siteConfig.expert.name}.
           </p>
           <div className="flex items-center gap-10">
             <Link
               href="/privacy"
-              className="font-prompt text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
+              className="font-heading text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="font-prompt text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
+              className="font-heading text-[11px] font-black tracking-[0.5em] text-slate-400 uppercase italic transition-all hover:text-emerald-600"
             >
               Terms
             </Link>

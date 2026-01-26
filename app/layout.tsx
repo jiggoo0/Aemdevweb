@@ -3,7 +3,7 @@
 import React from "react"
 import { Metadata, Viewport } from "next"
 import NextTopLoader from "nextjs-toploader"
-import { Prompt, Anuphan } from "next/font/google"
+import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
@@ -12,31 +12,33 @@ import { viewport as defaultViewport } from "./viewport"
 
 import { JsonLd } from "@/components/seo/JsonLd"
 import { Toaster } from "@/components/ui/sonner"
-import { FacebookChat } from "@/components/shared/FacebookChat"
 
 import "@/app/globals.css"
 
-/**
- * จัดการชุดฟอนต์: ล็อคความนิ่งของหน้าจอด้วย display: "swap"
- * เน้นน้ำหนักที่ใช้งานจริงตั้งแต่บางสุดจนถึงหนาพิเศษ
+/*
+ * พิกัดฟอนต์สำหรับหัวข้อ: IBM Plex Sans Thai
+ * เน้นความมั่นคงและเป็นทางการของระบบงาน
  */
-const fontPrompt = Prompt({
-  subsets: ["latin", "thai"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-prompt",
+const fontHeading = IBM_Plex_Sans_Thai({
+  subsets: ["thai", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-heading",
   display: "swap",
 })
 
-const fontAnuphan = Anuphan({
-  subsets: ["latin", "thai"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-anuphan",
+/*
+ * พิกัดฟอนต์สำหรับเนื้อหา: Anuphan
+ * เน้นการอ่านข้อมูลบนหน้าจอที่ไหลลื่น
+ */
+const fontBody = Anuphan({
+  subsets: ["thai", "latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-body",
   display: "swap",
 })
 
-/**
- * ระบบจัดการส่วนหัว (Metadata Engine):
- * ดึงข้อมูลผ่านโครงสร้าง Nested (project.*) เพื่อป้องกัน Error Property Missing
+/*
+ * การประกาศพิกัด SEO ประจำเว็บไซต์
  */
 export const metadata: Metadata = constructMetadata({
   title: siteConfig.project.title,
@@ -56,14 +58,14 @@ export default function RootLayout({
       lang="th"
       className={cn(
         "scroll-smooth focus:scroll-auto",
-        fontPrompt.variable,
-        fontAnuphan.variable,
+        fontHeading.variable,
+        fontBody.variable,
         "antialiased"
       )}
       suppressHydrationWarning
     >
       <head>
-        {/* ระบบข้อมูลโครงสร้างเพื่อให้ AI และ Search Engine จัดลำดับได้แม่นยำ */}
+        {/* วางพิกัดโครงสร้างข้อมูลเพื่อให้ Search AI เข้าใจความสัมพันธ์ของแบรนด์ */}
         <JsonLd
           type="WebSite"
           data={{
@@ -74,18 +76,22 @@ export default function RootLayout({
               "@type": "Organization",
               name: siteConfig.company.name,
               logo: siteConfig.project.ogImage,
+              sameAs: [
+                siteConfig.contact.facebook,
+                siteConfig.contact.linkedin
+              ].filter(Boolean)
             },
           }}
         />
       </head>
       <body
         className={cn(
-          "font-anuphan min-h-screen bg-white text-slate-800",
+          "font-body min-h-screen bg-white text-slate-800",
           "selection:bg-emerald-100 selection:text-emerald-900",
           "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* แถบสถานะการโหลดด้านบน: ใช้สีเขียว Emerald ของแบรนด์ */}
+        {/* แถบแจ้งสถานะการโหลดพิกัดสีเขียวมรกต */}
         <NextTopLoader
           color="#10B981"
           height={3}
@@ -94,15 +100,12 @@ export default function RootLayout({
           speed={300}
         />
 
-        {/* ระบบสนทนาผ่าน Facebook */}
-        <FacebookChat />
-
-        {/* พื้นที่แสดงผลเนื้อหาทั้งหมด */}
         <div className="relative flex min-h-screen flex-col">
+          {/* ส่วนเนื้อหาหลักที่รองรับการเรนเดอร์ระบบงานทั้งหมด */}
           <main className="flex-1">{children}</main>
         </div>
 
-        {/* ระบบแจ้งเตือนข้อมูล (Toast) */}
+        {/* ระบบแจ้งเตือนผลลัพธ์ผ่านอินเทอร์เฟซ */}
         <Toaster richColors closeButton position="top-center" />
       </body>
     </html>

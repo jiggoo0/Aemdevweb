@@ -17,13 +17,13 @@ import {
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
 
-// เกณฑ์การตรวจสอบข้อมูลสำหรับการคัดกรองกลุ่มเป้าหมาย
+// กำหนดเกณฑ์การตรวจสอบข้อมูลพิกัดงาน
 const formSchema = z.object({
   name: z.string().min(2, "ขอชื่อเล่นหรือชื่อบริษัทเพื่อความสะดวกในการคุยครับ"),
-  businessType: z.string().min(1, "เลือกประเภทธุรกิจให้พี่นิดนึงครับ"),
+  businessType: z.string().min(1, "เลือกประเภทธุรกิจให้ผมหน่อยครับ"),
   requirement: z
     .string()
-    .min(5, "บอกสิ่งที่ต้องการคร่าวๆ เพื่อให้พี่เตรียมข้อมูลรอคุยครับ"),
+    .min(5, "บอกพิกัดงานที่ต้องการคร่าวๆ เพื่อให้ผมเตรียมข้อมูลรอคุยครับ"),
   budget: z.string().optional(),
 })
 
@@ -36,8 +36,8 @@ interface LineLeadFormProps {
 }
 
 /**
- * LineLeadForm - ระบบรับข้อมูลลูกค้าเบื้องต้นเพื่อเชื่อมต่อกับ LINE Official Account
- * ออกแบบมาเพื่อเพิ่มอัตราการปิดการขายสำหรับธุรกิจ SME และกลุ่มอุตสาหกรรม
+ * LineLeadForm - ระบบรับพิกัดข้อมูลเพื่อเชื่อมต่อกับ LINE Official Account
+ * ออกแบบมาเพื่อเพิ่มอัตราการปิดยอดขายสำหรับ SME และกลุ่มโรงงาน
  */
 export const LineLeadForm = ({
   variant = "inline",
@@ -59,20 +59,20 @@ export const LineLeadForm = ({
   const onSubmit = async (data: FormData) => {
     setIsPending(true)
 
-    // จำลองระยะเวลาการประมวลผลเพื่อสร้างประสบการณ์การใช้งานที่ดี
+    // จำลองการประมวลผลระบบงาน
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    // สร้างข้อความสำหรับการนำไปใช้คุยต่อในแอปพลิเคชัน LINE
-    const message = `สวัสดีครับคุณเอ็ม ผมชื่อ ${data.name} ทำธุรกิจ ${data.businessType} สนใจเรื่อง: ${data.requirement} (งบประมาณเบื้องต้น: ${data.budget || "ยังไม่ได้ระบุ"})`
+    // วางพิกัดชุดข้อความเพื่อส่งเข้า LINE
+    const message = `สวัสดีครับคุณเอ็ม ผมชื่อ ${data.name} ทำธุรกิจ ${data.businessType} สนใจเรื่อง: ${data.requirement} (งบประมาณ: ${data.budget || "ยังไม่ได้ระบุ"})`
 
-    // การระบุพิกัด ID สำหรับการส่งข้อความ
-    const lineId = siteConfig.contact?.lineId || "@aemdevweb"
+    // ดึงพิกัด ID จากค่าคอนฟิกที่ล็อคไว้
+    const lineId = siteConfig.contact?.lineId || siteConfig.links?.lineId || "@aemdevweb"
     const lineUrl = `https://line.me/R/oaMessage/${lineId}/?${encodeURIComponent(message)}`
 
     setIsPending(false)
     setIsSuccess(true)
 
-    // เชื่อมต่อไปยังหน้าแอปพลิเคชัน LINE
+    // นำพิกัดงานไปเปิดในแอปพลิเคชัน LINE
     window.open(lineUrl, "_blank")
 
     setTimeout(() => {
@@ -81,9 +81,9 @@ export const LineLeadForm = ({
     }, 3000)
   }
 
-  // รูปแบบการแสดงผล: รูปแบบปุ่มติดต่อด่วน
+  // รูปแบบปุ่มติดต่อด่วน
   if (variant === "button") {
-    const lineHref = siteConfig.links?.line || "https://line.me/ti/p/@aemdevweb"
+    const lineHref = siteConfig.links?.line || "#"
 
     return (
       <a
@@ -96,18 +96,18 @@ export const LineLeadForm = ({
         )}
       >
         <MessageCircle className="h-6 w-6 fill-slate-950" />
-        {label}
+        <span className="font-heading uppercase italic">{label}</span>
         <Sparkles className="h-5 w-5 animate-pulse text-white" />
       </a>
     )
   }
 
-  // รูปแบบการแสดงผล: รูปแบบแบบฟอร์มเต็มระบบ
   return (
     <div className={cn("relative mx-auto w-full", className)}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         className="overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white p-8 shadow-2xl md:p-12"
       >
         <AnimatePresence mode="wait">
@@ -119,60 +119,56 @@ export const LineLeadForm = ({
               exit={{ opacity: 0, scale: 0.95 }}
             >
               <div className="text-center">
-                <h3 className="font-prompt text-2xl font-black text-slate-900">
-                  บอกโปรเจกต์ของคุณ
+                <h3 className="font-heading text-2xl font-black text-slate-900 uppercase italic">
+                  ระบุพิกัดโปรเจกต์ของคุณ
                 </h3>
-                <p className="font-anuphan mt-2 text-sm font-bold text-slate-400">
-                  ส่งข้อมูลเบื้องต้น แล้วคุยกับพี่ต่อทาง LINE ได้เลยครับ
+                <p className="font-body mt-2 text-sm font-bold text-slate-400">
+                  ส่งพิกัดงานเบื้องต้น แล้วคุยกับผมต่อทาง LINE ได้เลยครับ
                 </p>
               </div>
 
               <div className="space-y-4">
-                {/* ส่วนกรอกชื่อ */}
                 <div>
                   <input
                     {...register("name")}
                     placeholder="ชื่อของคุณ หรือ ชื่อบริษัท"
-                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                    className="font-body w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
                   />
                   {errors.name && (
-                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                    <p className="font-body mt-1 ml-4 text-xs text-rose-500">
                       {errors.name.message}
                     </p>
                   )}
                 </div>
 
-                {/* ส่วนเลือกประเภทธุรกิจ */}
                 <div>
                   <select
                     {...register("businessType")}
-                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                    className="font-body w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
                   >
-                    <option value="">เลือกประเภทธุรกิจของคุณ</option>
-                    <option value="SME / ร้านค้าออนไลน์">
-                      SME / ร้านค้าออนไลน์
-                    </option>
+                    <option value="">เลือกกลุ่มธุรกิจของคุณ</option>
+                    <option value="SME / ร้านค้าออนไลน์">SME / ร้านค้าออนไลน์</option>
                     <option value="โรงงานอุตสาหกรรม">โรงงานอุตสาหกรรม</option>
                     <option value="บริษัท / หจก.">บริษัท / หจก.</option>
+                    <option value="กลุ่มงานบริการ">กลุ่มงานบริการ</option>
                     <option value="อื่นๆ">อื่นๆ</option>
                   </select>
                   {errors.businessType && (
-                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                    <p className="font-body mt-1 ml-4 text-xs text-rose-500">
                       {errors.businessType.message}
                     </p>
                   )}
                 </div>
 
-                {/* ส่วนระบุความต้องการ */}
                 <div>
                   <textarea
                     {...register("requirement")}
-                    placeholder="เล่าให้พี่ฟังคร่าวๆ ว่าอยากได้เว็บแบบไหนครับ? (เช่น เว็บโรงงาน 2 ภาษา, เซลล์เพจยิงแอด)"
+                    placeholder="เล่าพิกัดงานคร่าวๆ (เช่น เว็บโรงงาน 2 ภาษา, ระบบแคตตาล็อกสินค้า)"
                     rows={3}
-                    className="font-anuphan w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
+                    className="font-body w-full rounded-2xl border border-slate-100 bg-slate-50 px-6 py-4 text-sm font-bold transition-all outline-none focus:border-emerald-500/50 focus:bg-white"
                   />
                   {errors.requirement && (
-                    <p className="mt-1 ml-4 text-xs text-rose-500">
+                    <p className="font-body mt-1 ml-4 text-xs text-rose-500">
                       {errors.requirement.message}
                     </p>
                   )}
@@ -189,7 +185,7 @@ export const LineLeadForm = ({
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    {label}
+                    <span className="font-heading uppercase italic">{label}</span>
                   </>
                 )}
               </button>
@@ -204,11 +200,11 @@ export const LineLeadForm = ({
               <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100">
                 <CheckCircle2 className="h-10 w-10 text-emerald-500" />
               </div>
-              <h3 className="font-prompt text-2xl font-black text-slate-900">
-                เรียบร้อยครับ!
+              <h3 className="font-heading text-2xl font-black text-slate-900 uppercase italic">
+                บันทึกพิกัดงานเรียบร้อย
               </h3>
-              <p className="font-anuphan mt-2 font-bold text-slate-500">
-                พี่ได้รับข้อมูลแล้ว กำลังพาคุณไปคุยต่อที่ LINE นะครับ...
+              <p className="font-body mt-2 font-bold text-slate-500">
+                ผมได้รับข้อมูลแล้ว ระบบกำลังพาคุณไปคุยต่อที่ LINE...
               </p>
             </motion.div>
           )}

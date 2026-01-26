@@ -32,6 +32,7 @@ interface ServicePageProps {
 
 /**
  * กลยุทธ์การจัดการข้อมูลส่วนหัว (Metadata Strategy)
+ * ดึงพิกัดข้อมูลมาสร้างชุดคำสั่ง SEO รายหน้าโดยอัตโนมัติ
  */
 export async function generateMetadata({
   params,
@@ -61,16 +62,16 @@ export async function generateMetadata({
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params
 
-  // 1. ค้นหาข้อมูลบริการหลัก
+  // 1. ค้นหาข้อมูลบริการหลักจากพิกัด Slug
   const service = services.find((s) => s.slug === slug)
   if (!service) notFound()
 
-  // 2. ดึงข้อมูลหมวดหมู่เพื่อใช้แสดง Icon หรือสี (Mapping Logic)
+  // 2. ดึงข้อมูลหมวดหมู่เพื่อใช้แสดง Icon และธีมสี (Mapping Logic)
   const categoryInfo = categoriesData.find(
     (c) => c.slug === service.category.toLowerCase().replace("_", "-")
   )
 
-  // 3. ดึงข้อมูลเทมเพลตทั้งหมดและกรองรายการที่เกี่ยวข้อง
+  // 3. ดึงข้อมูลเทมเพลตและกรองรายการที่เกี่ยวข้องตามพิกัดหมวดหมู่
   const allTemplates = await getAllTemplates()
   const relatedTemplates = allTemplates.filter(
     (t: TemplateMetadata) =>
@@ -97,7 +98,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         }}
       />
 
-      {/* พื้นหลังกราฟิกตารางพิกัด */}
+      {/* พิกัดกราฟิกพื้นหลังเพื่อสร้างมิติงานระบบ */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]" />
 
       <nav className="relative z-10 container mx-auto px-6 pt-32 lg:pt-40">
@@ -113,6 +114,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         </Link>
       </nav>
 
+      {/* Hero Section: พิกัดข้อมูลหลักของบริการ */}
       <section className="relative py-12 lg:py-24">
         <div className="container mx-auto px-6">
           <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
@@ -126,7 +128,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 {categoryInfo?.name || "Performance Specialist"}
               </div>
 
-              <h1 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
+              <h1 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
                 {service.title.split(":")[0]} <br />
                 <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-[12px]">
                   {service.title.includes(":")
@@ -135,7 +137,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </span>
               </h1>
 
-              <p className="max-w-xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+              <p className="font-body max-w-xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
                 {service.description}
               </p>
 
@@ -149,7 +151,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       size={24}
                       className="shrink-0 text-emerald-500"
                     />
-                    <span className="text-lg leading-none font-bold text-slate-900">
+                    <span className="font-body text-lg leading-none font-bold text-slate-900">
                       {feature}
                     </span>
                   </div>
@@ -157,6 +159,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </div>
             </div>
 
+            {/* พิกัดกล่องราคาและช่องทางติดต่อ */}
             <div className="relative">
               <div className="relative overflow-hidden rounded-[4rem] bg-slate-950 p-10 text-white shadow-2xl md:p-20">
                 <div className="pointer-events-none absolute top-0 right-0 p-10 opacity-5">
@@ -164,16 +167,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </div>
 
                 <div className="relative z-10">
-                  <div className="font-prompt mb-10 text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase italic">
+                  <div className="font-heading mb-10 text-[10px] font-black tracking-[0.4em] text-emerald-500 uppercase italic">
                     Estimated Budget Starting At
                   </div>
-                  <div className="font-prompt mb-8 text-7xl font-black tracking-tighter italic md:text-9xl">
+                  <div className="font-heading mb-8 text-7xl font-black tracking-tighter italic md:text-9xl">
                     <span className="mr-2 text-3xl font-normal text-slate-600">
                       ฿
                     </span>
                     {service.priceValue?.toLocaleString() || "Custom"}
                   </div>
-                  <p className="mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
+                  <p className="font-body mb-12 border-l-2 border-white/10 pl-6 leading-relaxed font-bold text-slate-400">
                     วางโครงสร้างระบบประสิทธิภาพสูง <br />
                     พร้อมจัดการข้อมูลมาตรฐานปี 2026
                   </p>
@@ -195,23 +198,24 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         <ImpactStats />
       </div>
 
+      {/* พิกัดรายการเทมเพลตที่เกี่ยวข้องกับบริการ */}
       {relatedTemplates.length > 0 && (
         <section className="overflow-hidden bg-slate-50/50 py-24 lg:py-40">
           <div className="container mx-auto px-6">
             <div className="mb-20 flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
               <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
-                <div className="font-prompt mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
+                <div className="font-heading mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
                   <LayoutTemplate size={16} />
                   Structure Suggestions
                 </div>
-                <h2 className="font-prompt text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
+                <h2 className="font-heading text-5xl leading-[1] font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
                   เทมเพลตที่แนะนำ <br />
                   <span className="text-emerald-500">สำหรับคุณ</span>
                 </h2>
               </div>
               <Link
                 href="/templates"
-                className="group font-prompt flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
+                className="group font-heading flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
               >
                 Explore Marketplace
                 <ChevronRight
@@ -221,29 +225,29 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               </Link>
             </div>
 
-            {/* [FIXED]: ลบ activeCategory ออกตามโครงสร้างคอมโพเนนต์ใหม่ */}
             <TemplateGrid templates={relatedTemplates} />
           </div>
         </section>
       )}
 
+      {/* ส่วนพิกัดความน่าเชื่อถือและ CTA ท้ายหน้า */}
       <section className="overflow-hidden py-24 lg:py-40">
         <div className="container mx-auto px-6">
           <div className="relative mx-auto max-w-5xl rounded-[4rem] bg-slate-50 p-12 text-center shadow-2xl shadow-slate-200/50 md:p-24">
             <div className="absolute -top-10 -left-10 opacity-5">
               <BarChart3 size={200} className="text-emerald-500" />
             </div>
-            <h2 className="font-prompt mb-10 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
+            <h2 className="font-heading mb-10 text-4xl leading-none font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl">
               ทำไมต้องเลือกทำกับ <br />
               <span className="text-emerald-500 underline decoration-emerald-500/10 underline-offset-8">
                 {siteConfig.expert.name}?
               </span>
             </h2>
 
-            <div className="mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+            <div className="font-body mx-auto mb-16 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               <p>
-                ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมคือที่ปรึกษาเชิงเทคนิค
-                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางโครงสร้างระบบการค้นหา
+                ผมไม่ได้แค่รับจ้างทำเว็บ แต่ผมคือที่ปรึกษาเชิงพิกัดข้อมูล
+                ผมเปลี่ยนความเร็วให้เป็นยอดขาย และวางระบบการค้นหา
                 ให้ธุรกิจของคุณทำเงินได้ในระยะยาว
                 <span className="text-slate-900">
                   {" "}
@@ -260,7 +264,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               />
               <Link
                 href="/case-studies"
-                className="group font-prompt flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
+                className="group font-heading flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase transition-all hover:text-slate-950"
               >
                 Success Stories
                 <ChevronRight
@@ -274,7 +278,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       </section>
 
       <footer className="py-12 text-center opacity-30 select-none">
-        <p className="font-prompt text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
+        <p className="font-heading text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
           High-End Systems by {siteConfig.expert.name} v2026
         </p>
       </footer>

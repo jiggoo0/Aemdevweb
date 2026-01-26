@@ -14,52 +14,53 @@ import {
 } from "lucide-react"
 
 /**
- * ข้อมูลความแตกต่างที่มอบให้ลูกค้า (Value Props)
- * เน้นผลลัพธ์เชิงประจักษ์: ความเร็ว, อันดับบนระบบค้นหา และยอดขาย
+ * ข้อมูลจุดแข็งของระบบงาน (Value Props)
+ * มุ่งเน้นไปที่ความไว การค้นหา และการเปลี่ยนผู้ชมเป็นลูกค้า
  */
 const advantages = [
   {
     icon: Clock3,
-    title: "เร็วแบบสั่งได้",
+    title: "ความไวระดับสูงสุด",
     description:
-      "ระบบงานของพี่โหลดเสร็จในพริบตา ไม่ต้องรอจนลูกค้าหนี ช่วยเพิ่มโอกาสให้คนทักหาคุณมากขึ้น",
-    detail: "ความไวระดับ LCP น้อยกว่า 1.0 วินาที",
+      "ระบบงานโหลดเสร็จทันทีโดยไม่ต้องรอ ลดโอกาสที่ลูกค้าจะปิดหน้าเว็บทิ้งเพราะความอืด",
+    detail: "LCP ต่ำกว่า 1.0 วินาทีตามมาตรฐานปี 2026",
   },
   {
     icon: Search,
-    title: "ระบบค้นหาเจอได้ง่าย",
+    title: "โครงสร้างรองรับการค้นหา",
     description:
-      "พี่วางโครงสร้างระบบให้ระบบค้นหาและ AI ยุคใหม่เข้าใจธุรกิจคุณทันที ไม่ต้องรอนานกว่าจะติดอันดับ",
-    detail: "รองรับเทคโนโลยี Search AI 2026",
+      "วางระบบพิกัดข้อมูลให้ระบบค้นหาและ AI เข้าใจเนื้อหาธุรกิจได้แม่นยำตั้งแต่เลเยอร์แรก",
+    detail: "เน้นการทำอันดับแบบ Organic โดยตรง",
   },
   {
     icon: LayoutTemplate,
-    title: "ออกแบบเพื่อปิดการขาย",
+    title: "เน้นผลลัพธ์การปิดยอด",
     description:
-      "พี่ไม่ได้แค่จัดวางให้สวย แต่เน้นให้ลูกค้าตัดสินใจทัก LINE หรือโทรหาคุณให้ง่ายที่สุด",
-    detail: "เน้นการเปลี่ยนผู้เข้าชมเป็นยอดขายจริง",
+      "จัดวางองค์ประกอบให้ผู้ใช้งานตัดสินใจติดต่อสอบถามได้ง่ายที่สุด ผ่านช่องทางที่คุณกำหนด",
+    detail: "Conversion Rate Focused Design",
   },
 ]
 
 /**
- * ValueProp - ส่วนแสดงความคุ้มค่าและประสิทธิภาพที่เหนือกว่า
- * ใช้เพื่อเปรียบเทียบระบบงานของ AEM กับเว็บไซต์ทั่วไปในตลาด
+ * ValueProp - ส่วนแสดงข้อเปรียบเทียบและคุณภาพงานเทคนิค
+ * ออกแบบตามแนวทาง Industrial Minimalism ของ AEMDEVWEB
  */
 const ValueProp = () => {
   return (
-    <div className="container mx-auto px-4">
-      <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
-        {/* 1. ฝั่งเนื้อหา: การอธิบายคุณภาพและมาตรฐานงานเทคนิค */}
-        <div className="flex-1 lg:max-w-xl">
+    <section className="container mx-auto px-6 py-24 lg:py-32">
+      <div className="flex flex-col gap-20 lg:flex-row lg:items-center">
+        
+        {/* 1. ส่วนเนื้อหาและรายละเอียดจุดแข็ง */}
+        <div className="flex-1 lg:max-w-2xl">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5"
+            className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-1.5"
           >
-            <Zap className="h-4 w-4 text-emerald-500" />
-            <span className="font-prompt text-[10px] font-black tracking-[0.3em] text-emerald-500 uppercase">
-              The Edge of Excellence
+            <Zap className="h-4 w-4 text-emerald-600" />
+            <span className="font-heading text-[10px] font-black tracking-[0.3em] text-emerald-700 uppercase">
+              Technical Excellence
             </span>
           </motion.div>
 
@@ -67,12 +68,10 @@ const ValueProp = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-prompt mb-8 text-4xl leading-none font-black tracking-tighter text-slate-950 uppercase italic md:text-6xl"
+            className="font-heading mb-8 text-4xl leading-[1.1] font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl"
           >
-            เหนือกว่าด้วย <br />
-            <span className="text-emerald-500 underline decoration-emerald-500/20 underline-offset-8">
-              งานที่ประณีตกว่าใคร
-            </span>
+            สร้างความต่างที่ <br />
+            <span className="text-gradient-emerald">วัดผลได้จริง</span>
           </motion.h2>
 
           <motion.p
@@ -80,14 +79,13 @@ const ValueProp = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-anuphan mb-12 text-lg leading-relaxed font-bold text-slate-500"
+            className="font-body mb-16 text-lg leading-relaxed font-bold text-slate-500"
           >
-            พี่ไม่ได้แค่รับทำเว็บไซต์ไปวันๆ
-            แต่สร้างหน้าร้านออนไลน์ที่ทรงพลังที่สุด ให้กับการดำเนินธุรกิจ SME
-            และโรงงาน ด้วยงานคุณภาพสูงที่ตั้งใจทำให้ทุกโปรเจกต์ครับ
+            เราไม่ได้แค่ทำเว็บไซต์ให้เสร็จ แต่เราวางระบบที่ทรงพลังที่สุดให้ธุรกิจ SME 
+            และโรงงานอุตสาหกรรม ด้วยงานเทคนิคระดับสูงที่เน้นความเร็วและความเสถียรในระยะยาว
           </motion.p>
 
-          <div className="space-y-10">
+          <div className="grid gap-12 sm:grid-cols-1">
             {advantages.map((item, i) => (
               <motion.div
                 key={i}
@@ -97,17 +95,17 @@ const ValueProp = () => {
                 transition={{ delay: i * 0.1 }}
                 className="group flex items-start gap-6"
               >
-                <div className="mt-1 flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-emerald-500/30 group-hover:shadow-2xl">
-                  <item.icon className="h-7 w-7 text-slate-900 transition-colors group-hover:text-emerald-500" />
+                <div className="mt-1 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-emerald-500/20 group-hover:shadow-xl group-hover:shadow-emerald-500/5">
+                  <item.icon className="h-8 w-8 text-slate-900 transition-colors group-hover:text-emerald-500" />
                 </div>
                 <div>
-                  <h3 className="font-prompt mb-1 text-xl font-black text-slate-950 uppercase italic">
+                  <h3 className="font-heading mb-2 text-xl font-black text-slate-950 uppercase italic">
                     {item.title}
                   </h3>
-                  <p className="font-anuphan text-sm leading-snug font-bold text-slate-500">
+                  <p className="font-body text-sm leading-relaxed font-bold text-slate-500">
                     {item.description}
                   </p>
-                  <div className="mt-2 text-[10px] font-black tracking-widest text-emerald-500/80 uppercase">
+                  <div className="mt-3 text-[10px] font-black tracking-[0.15em] text-emerald-600 uppercase">
                     {item.detail}
                   </div>
                 </div>
@@ -116,39 +114,39 @@ const ValueProp = () => {
           </div>
         </div>
 
-        {/* 2. ฝั่งกราฟิก: ระบบเปรียบเทียบประสิทธิภาพการทำงาน (Performance Analytics) */}
+        {/* 2. ส่วนแสดงกราฟเปรียบเทียบประสิทธิภาพ */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative flex-1"
+          className="relative flex-1 lg:pl-10"
         >
-          <div className="relative z-10 overflow-hidden rounded-[3.5rem] border border-slate-200 bg-white p-10 shadow-2xl md:p-16">
+          <div className="relative z-10 overflow-hidden rounded-[3.5rem] border border-slate-200 bg-white p-12 shadow-2xl md:p-16">
             <div
-              className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"
+              className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.03]"
               aria-hidden="true"
             />
 
-            <div className="mb-12 flex items-center justify-between border-b border-slate-50 pb-6">
-              <div className="font-prompt text-2xl font-black tracking-tighter text-slate-900 uppercase italic">
-                System Performance
+            <div className="mb-12 flex items-center justify-between border-b border-slate-100 pb-8">
+              <div className="font-heading text-2xl font-black tracking-tighter text-slate-900 uppercase italic">
+                Performance Check
               </div>
-              <BarChart3 className="h-6 w-6 text-slate-300" />
+              <BarChart3 className="h-6 w-6 text-slate-400" />
             </div>
 
-            {/* การแสดงผลกราฟเปรียบเทียบคะแนนความเร็ว */}
-            <div className="space-y-10">
+            {/* กราฟเปรียบเทียบ: AEM Engine vs General Web */}
+            <div className="space-y-12">
               <div className="space-y-4">
                 <div className="flex justify-between text-[11px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  <span className="text-slate-950">AEMDEVWEB Engine v2026</span>
+                  <span className="text-slate-950">AEM Engine v2026</span>
                   <span className="text-emerald-500">99.8%</span>
                 </div>
-                <div className="h-4 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-0.5">
+                <div className="h-5 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-1">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "99.8%" }}
-                    transition={{ duration: 1.8, ease: "circOut" }}
-                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.4)]"
+                    transition={{ duration: 1.5, ease: "circOut" }}
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3)]"
                   />
                 </div>
               </div>
@@ -158,34 +156,37 @@ const ValueProp = () => {
                   <span>เว็บสำเร็จรูปทั่วไป</span>
                   <span>42.3%</span>
                 </div>
-                <div className="h-4 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-0.5">
+                <div className="h-5 w-full overflow-hidden rounded-full border border-slate-100 bg-slate-50 p-1">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "42.3%" }}
-                    transition={{ duration: 1.2, ease: "circOut" }}
+                    transition={{ duration: 1, ease: "circOut" }}
                     className="h-full rounded-full bg-slate-200"
                   />
                 </div>
               </div>
             </div>
 
-            {/* ส่วนยืนยันมาตรฐานความเชื่อมั่น */}
-            <div className="group relative mt-16 overflow-hidden rounded-[2.5rem] bg-slate-950 p-8 text-center shadow-2xl">
-              <div className="absolute inset-0 bg-emerald-500/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <ShieldCheck className="relative z-10 mx-auto mb-4 h-10 w-10 text-emerald-400" />
-              <div className="font-prompt relative z-10 text-lg font-black tracking-widest text-white uppercase italic">
-                Verified Technical Specialist
+            
+
+            {/* ยืนยันมาตรฐานความปลอดภัยและความเสถียร */}
+            <div className="group relative mt-20 overflow-hidden rounded-[2.5rem] bg-slate-950 p-10 text-center shadow-2xl transition-transform hover:scale-[1.02]">
+              <div className="absolute inset-0 bg-emerald-500/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <ShieldCheck className="relative z-10 mx-auto mb-6 h-12 w-12 text-emerald-400" />
+              <div className="font-heading relative z-10 text-xl font-black tracking-widest text-white uppercase italic">
+                Technical Mastery
               </div>
-              <div className="relative z-10 mt-2 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase">
+              <div className="font-heading relative z-10 mt-3 text-[10px] font-black tracking-[0.4em] text-slate-500 uppercase">
                 มาตรฐานงานระดับพรีเมียม 100%
               </div>
             </div>
           </div>
 
-          <div className="absolute -right-6 -bottom-6 -z-10 h-full w-full rounded-[3.5rem] border border-slate-100 bg-slate-50/50 transition-transform group-hover:translate-x-2" />
+          {/* เงาตกแต่งด้านหลัง */}
+          <div className="absolute -right-8 -bottom-8 -z-10 h-full w-full rounded-[3.5rem] border border-slate-100 bg-slate-50/50" />
         </motion.div>
       </div>
-    </div>
+    </section>
   )
 }
 

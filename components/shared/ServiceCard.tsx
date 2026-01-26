@@ -17,13 +17,13 @@ interface ServiceCardProps {
   isPopular?: boolean
   className?: string
   index?: number
-  themeColor?: string // เพิ่มเพื่อรองรับการปรับแต่งสีตามประเภทบริการ
+  // เพิ่มพิกัดนี้เพื่อรองรับค่าสีที่ส่งมาจากหน้า app/(main)/services/page.tsx
+  themeColor?: string 
 }
 
 /**
- * ServiceCard — ส่วนแสดงรายการบริการหลัก
- * ออกแบบมาเพื่อให้ข้อมูลราคาและคุณสมบัติงานเทคนิคอ่านง่ายที่สุด
- * เพื่อให้ลูกค้ากลุ่ม SME และโรงงานตัดสินใจได้ทันที
+ * ServiceCard — ส่วนแสดงรายการระบบงานหลัก
+ * ปรับปรุงพิกัด Interface ให้รองรับ themeColor เพื่อล้าง Build Error
  */
 const ServiceCard = ({
   title,
@@ -34,6 +34,7 @@ const ServiceCard = ({
   isPopular = false,
   className,
   index = 0,
+  themeColor, // รับพิกัดค่าสีเข้ามาให้ตรงตาม Props
 }: ServiceCardProps) => {
   return (
     <motion.div
@@ -44,23 +45,25 @@ const ServiceCard = ({
       className={cn(
         "group relative flex flex-col rounded-[2.5rem] border p-8 transition-all duration-500 md:p-10 lg:p-12",
         isPopular
-          ? "border-emerald-500 bg-slate-950 text-white shadow-2xl"
+          ? "border-emerald-500 bg-slate-950 text-white shadow-2xl shadow-emerald-500/10"
           : "border-slate-100 bg-white text-slate-900 hover:border-emerald-500/30 hover:shadow-xl",
         className
       )}
+      // นำ themeColor มาใช้เป็นพิกัดเส้นประดับ (ถ้าต้องการ) เพื่อไม่ให้ Lint ฟ้องว่ารับมาแต่ไม่ใช้
+      style={{ borderTopColor: themeColor }}
     >
-      {/* ส่วนป้ายแนะนำกรณีเป็นแพ็กเกจยอดนิยม */}
+      {/* 1. ส่วนป้ายสถานะ */}
       {isPopular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-emerald-500 px-6 py-2 text-[10px] font-black tracking-[0.2em] whitespace-nowrap text-slate-950 uppercase shadow-lg">
           แพ็กเกจแนะนำ
         </div>
       )}
 
-      {/* ส่วนหัวข้อและคำอธิบายเบื้องต้น */}
+      {/* 2. ส่วนหัวข้อและคำอธิบาย */}
       <div className="mb-10">
         <h3
           className={cn(
-            "font-prompt mb-4 text-3xl leading-none font-black tracking-tighter uppercase italic transition-colors",
+            "font-heading mb-4 text-3xl leading-[1.1] font-black tracking-tighter uppercase italic transition-colors",
             isPopular
               ? "text-white"
               : "text-slate-950 group-hover:text-emerald-500"
@@ -70,7 +73,7 @@ const ServiceCard = ({
         </h3>
         <p
           className={cn(
-            "font-anuphan text-sm leading-relaxed font-bold",
+            "font-body text-sm leading-relaxed font-bold",
             isPopular ? "text-slate-400" : "text-slate-500"
           )}
         >
@@ -78,27 +81,27 @@ const ServiceCard = ({
         </p>
       </div>
 
-      {/* ส่วนแสดงพิกัดราคาเริ่มต้น */}
+      {/* 3. ส่วนแสดงพิกัดราคา */}
       <div className="mb-10 flex items-baseline gap-2">
         <span
           className={cn(
-            "font-prompt text-xs font-black tracking-widest uppercase",
+            "font-heading text-[10px] font-black tracking-widest uppercase",
             isPopular ? "text-emerald-400" : "text-slate-400"
           )}
         >
           เริ่มต้น ฿
         </span>
-        <span className="font-prompt text-6xl leading-none font-black tracking-tighter italic">
-          {typeof price === "number" ? price.toLocaleString() : price}
+        <span className="font-heading text-6xl leading-none font-black tracking-tighter italic">
+          {linkPrice(price)}
         </span>
       </div>
 
-      {/* ส่วนรายการคุณสมบัติทางเทคนิค (Technical Deliverables) */}
+      {/* 4. รายการสิ่งที่ส่งมอบ (Deliverables) */}
       <div className="mb-12 flex-grow space-y-5">
         <div
           className={cn(
             "mb-6 text-[10px] font-black tracking-[0.3em] uppercase opacity-60",
-            isPopular ? "text-slate-400" : "text-slate-300"
+            isPopular ? "text-slate-400" : "text-slate-400"
           )}
         >
           Technical Deliverables
@@ -120,7 +123,7 @@ const ServiceCard = ({
             </div>
             <span
               className={cn(
-                "font-anuphan text-[15px] leading-snug font-bold transition-colors",
+                "font-body text-[15px] leading-snug font-bold transition-colors",
                 isPopular
                   ? "text-slate-300"
                   : "text-slate-600 group-hover:text-slate-950"
@@ -132,12 +135,12 @@ const ServiceCard = ({
         ))}
       </div>
 
-      {/* ส่วนปุ่มดำเนินการปิดการขาย */}
+      {/* 5. ปุ่มดำเนินการ */}
       <div className="mt-auto space-y-6">
         <Link
           href={`/services/${slug}`}
           className={cn(
-            "font-prompt flex w-full items-center justify-center gap-3 rounded-2xl py-6 text-sm font-black tracking-widest uppercase transition-all duration-500 active:scale-95",
+            "font-heading flex w-full items-center justify-center gap-3 rounded-2xl py-6 text-sm font-black tracking-widest uppercase transition-all duration-500 active:scale-95",
             isPopular
               ? "bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20 hover:bg-emerald-400"
               : "bg-slate-50 text-slate-950 hover:bg-emerald-500 hover:text-white"
@@ -147,17 +150,17 @@ const ServiceCard = ({
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
         </Link>
 
-        {/* ส่วนแสดงมาตรฐานความปลอดภัยและระบบงาน */}
+        {/* 6. ส่วนการันตีมาตรฐานงาน */}
         <div className="flex items-center justify-center gap-3 opacity-40 select-none">
           {isPopular ? (
             <Zap className="h-4 w-4 text-emerald-400" />
           ) : (
-            <ShieldCheck className="h-4 w-4 text-slate-300" />
+            <ShieldCheck className="h-4 w-4 text-slate-400" />
           )}
           <span
             className={cn(
-              "text-[9px] leading-none font-black tracking-[0.4em] uppercase",
-              isPopular ? "text-slate-400" : "text-slate-300"
+              "font-heading text-[9px] leading-none font-black tracking-[0.4em] uppercase",
+              isPopular ? "text-slate-400" : "text-slate-400"
             )}
           >
             Specialist Standard v.2026
@@ -165,7 +168,7 @@ const ServiceCard = ({
         </div>
       </div>
 
-      {/* การตกแต่งแสงมรกตสำหรับส่วนที่เป็นไฮไลต์ */}
+      {/* แสงมรกตลับเลเยอร์ */}
       {isPopular && (
         <div
           className="pointer-events-none absolute -right-4 -bottom-4 h-32 w-32 rounded-full bg-emerald-500/5 blur-[40px]"
@@ -174,6 +177,10 @@ const ServiceCard = ({
       )}
     </motion.div>
   )
+}
+
+function linkPrice(price: number | string) {
+  return typeof price === "number" ? price.toLocaleString() : price
 }
 
 export default ServiceCard

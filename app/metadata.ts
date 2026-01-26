@@ -5,7 +5,7 @@ import { siteConfig } from "@/constants/site-config"
 
 /**
  * ระบบจัดการข้อมูลส่วนหัวเว็บไซต์ (Metadata Engine)
- * จัดการพิกัด SEO และ Social Share ให้ตรงตามโครงสร้างข้อมูลใหม่
+ * จัดการพิกัด SEO และ Social Share ให้ตรงตามโครงสร้างข้อมูล
  */
 export function constructMetadata({
   title = siteConfig.project.title,
@@ -22,17 +22,23 @@ export function constructMetadata({
   canonical?: string
   noIndex?: boolean
 } = {}): Metadata {
-  const fullTitle = `${title} | ${siteConfig.project.slogan}`
+  
+  // ปรับพิกัดชื่อหน้าเพื่อป้องกันข้อความซ้อนทับกันเกินความจำเป็น
+  // หากเป็นหน้าแรกจะใช้ Title | Slogan หากเป็นหน้าย่อยจะใช้ Title | ShortName
+  const isHomePage = title === siteConfig.project.title
+  const displayTitle = isHomePage 
+    ? `${title} | ${siteConfig.project.slogan}` 
+    : title
 
   return {
     title: {
-      default: fullTitle,
+      default: displayTitle,
       template: `%s | ${siteConfig.project.shortName}`,
     },
     description,
     keywords: siteConfig.keywords.all,
 
-    // 1. Root Level Authors: กำหนดตัวตนผู้จัดทำในระดับโครงสร้างหลัก
+    // กำหนดตัวตนผู้จัดทำในระดับโครงสร้างหลัก
     authors: [
       {
         name: siteConfig.expert.name,
@@ -41,11 +47,11 @@ export function constructMetadata({
     ],
     creator: siteConfig.expert.name,
 
-    // กำหนด URL พื้นฐานเพื่อให้ระบบคำนวณ Path รูปภาพและ Link ต่างๆ ได้แม่นยำ
+    // ล็อคพิกัด URL พื้นฐานเพื่อป้องกันปัญหา Link และรูปภาพ OG ไม่แสดงผล
     metadataBase: new URL(siteConfig.project.url),
 
     openGraph: {
-      title: fullTitle,
+      title: displayTitle,
       description,
       siteName: siteConfig.project.name,
       locale: "th_TH",
@@ -56,19 +62,17 @@ export function constructMetadata({
           url: image,
           width: 1200,
           height: 630,
-          alt: fullTitle,
+          alt: displayTitle,
         },
       ],
-      // [FIXED]: ลบ authors ออกจากส่วนนี้เมื่อเป็น type: "website"
-      // เพื่อป้องกัน Error TS2353 (Property 'authors' does not exist in type 'OpenGraphWebsite')
     },
 
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title: displayTitle,
       description,
       images: [image],
-      creator: "@aemdevweb",
+      creator: siteConfig.links.lineId, // ดึงพิกัดจากระบบจัดการลิงก์โดยตรง
     },
 
     icons: {

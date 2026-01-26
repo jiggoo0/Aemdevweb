@@ -8,8 +8,8 @@ import { Zap, TrendingUp, Users, Globe } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 /**
- * ข้อมูลสถิติเพื่อสร้างความเชื่อมั่น (Core Metrics)
- * ชุดข้อมูลนี้ถูกเลือกเพื่อยืนยันประสิทธิภาพของระบบงานที่ส่งมอบให้ลูกค้า
+ * ข้อมูลพิกัดสถิติเพื่อยืนยันความเชื่อมั่น (Core Metrics)
+ * ชุดข้อมูลนี้เน้นผลลัพธ์ที่จับต้องได้จริงในเชิงธุรกิจและการทำงานของระบบ
  */
 const stats = [
   {
@@ -17,38 +17,39 @@ const stats = [
     value: 99,
     suffix: "/100",
     icon: Zap,
-    description: "เน้นความไวระดับสูงสุด",
+    description: "เน้นความไวในการเข้าถึงระดับสูงสุด",
     color: "text-emerald-500",
   },
   {
-    label: "โอกาสปิดการขาย",
+    label: "โอกาสปิดยอดขาย",
     value: 300,
     suffix: "%",
     icon: TrendingUp,
-    description: "อัตราการเปลี่ยนเป็นยอดขายที่ดีขึ้น",
+    description: "อัตราการเปลี่ยนผู้ชมเป็นลูกค้าที่เพิ่มขึ้น",
     color: "text-blue-500",
   },
   {
-    label: "ธุรกิจที่ดูแล",
+    label: "กลุ่มธุรกิจที่ดูแล",
     value: 50,
     suffix: "+",
     icon: Users,
-    description: "กลุ่ม SME และโรงงานทั่วไทย",
+    description: "ดูแลระบบให้ SME และกลุ่มโรงงานทั่วไทย",
     color: "text-slate-900",
   },
   {
-    label: "เทคโนโลยีปี 2026",
+    label: "มาตรฐานปี 2026",
     value: 2026,
     suffix: "",
     icon: Globe,
-    description: "รากฐานดิจิทัลที่ทันสมัยที่สุด",
+    description: "วางระบบด้วยเทคโนโลยีที่เสถียรที่สุด",
     color: "text-indigo-500",
   },
 ]
 
 /**
  * ระบบคำนวณตัวเลขวิ่ง (Counter Engine)
- * พัฒนาด้วย requestAnimationFrame เพื่อความลื่นไหลระดับ 60fps
+ * พัฒนาด้วย requestAnimationFrame เพื่อความลื่นไหลระดับ 60fps 
+ * โดยจะเริ่มทำงานเมื่อเลื่อนมาถึงพิกัดการแสดงผลเท่านั้น
  */
 const Counter = ({
   value,
@@ -72,7 +73,6 @@ const Counter = ({
           (timestamp - startTime) / (duration * 1000),
           1
         )
-        // ใช้หลักการ Linear Interpolation แบบง่ายในการคำนวณค่า
         const currentCount = Math.floor(progress * value)
 
         setCount(currentCount)
@@ -93,13 +93,13 @@ const Counter = ({
 }
 
 /**
- * ImpactStats - ส่วนแสดงผลลัพธ์และความสำเร็จเชิงตัวเลข
- * ออกแบบมาเพื่อสร้างความมั่นใจให้กับกลุ่มเจ้าของธุรกิจและโรงงานอุตสาหกรรม
+ * ImpactStats - ส่วนแสดงผลลัพธ์และความสำเร็จเชิงพิกัดตัวเลข
+ * ออกแบบมาเพื่อสร้างความมั่นใจให้กับเจ้าของธุรกิจที่เน้นความประณีตของงานระบบ
  */
 export const ImpactStats = () => {
   return (
-    <section className="relative overflow-hidden bg-white py-20 lg:py-32">
-      <div className="container mx-auto px-4">
+    <section className="relative overflow-hidden bg-white py-20 lg:py-32 selection:bg-emerald-100">
+      <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 lg:gap-12">
           {stats.map((stat, index) => (
             <motion.div
@@ -110,19 +110,19 @@ export const ImpactStats = () => {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="group relative flex flex-col items-center text-center"
             >
-              {/* ส่วนบรรจุไอคอน: ออกแบบด้วยแนวทางความแม่นยำระดับ Specialist */}
+              {/* เลเยอร์บรรจุไอคอน: จัดลำดับความเด่นด้วยระบบเงาและสี */}
               <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-[1.5rem] bg-slate-50 text-slate-900 transition-all duration-500 group-hover:scale-110 group-hover:bg-slate-950 group-hover:text-emerald-400 group-hover:shadow-2xl group-hover:shadow-emerald-500/20">
                 <stat.icon className="h-10 w-10 transition-transform duration-500 group-hover:rotate-12" />
               </div>
 
-              {/* ส่วนแสดงตัวเลขที่มีการเคลื่อนไหว */}
+              {/* การแสดงตัวเลขที่มีการเคลื่อนไหว: ใช้ font-heading */}
               <div className="mb-2 flex items-baseline justify-center">
-                <h3 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 italic md:text-5xl lg:text-6xl">
+                <h3 className="font-heading text-4xl font-black tracking-tighter text-slate-900 italic md:text-5xl lg:text-6xl">
                   <Counter value={stat.value} />
                 </h3>
                 <span
                   className={cn(
-                    "font-prompt ml-1 text-xl font-black italic",
+                    "font-heading ml-1 text-xl font-black italic",
                     stat.color
                   )}
                 >
@@ -130,15 +130,15 @@ export const ImpactStats = () => {
                 </span>
               </div>
 
-              {/* หัวข้อและคำอธิบายข้อมูล */}
-              <div className="font-prompt text-[11px] font-black tracking-[0.3em] text-slate-500 uppercase">
+              {/* พิกัดหัวข้อและคำอธิบาย: ใช้ font-heading และ font-body */}
+              <div className="font-heading text-[11px] font-black tracking-[0.3em] text-slate-500 uppercase">
                 {stat.label}
               </div>
-              <p className="font-anuphan mt-3 max-w-[150px] text-sm font-bold text-slate-400">
+              <p className="font-body mt-3 max-w-[150px] text-sm font-bold text-slate-400">
                 {stat.description}
               </p>
 
-              {/* เส้นแบ่งเขตข้อมูลเชิงโครงสร้าง (เฉพาะหน้าจอขนาดใหญ่) */}
+              {/* เส้นแบ่งพิกัดข้อมูลเชิงระบบ (เฉพาะหน้าจอคอมพิวเตอร์) */}
               {index < stats.length - 1 && (
                 <div
                   className="absolute top-1/2 -right-6 hidden h-16 w-[1px] -translate-y-1/2 bg-slate-100 opacity-50 lg:block"
