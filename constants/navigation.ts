@@ -3,91 +3,85 @@
 import { NavigationConfig } from "@/types"
 
 /**
- * ระบบจัดการการนำทาง - สำหรับธุรกิจ SME และอุตสาหกรรม
- * มุ่งเน้น: ความน่าเชื่อถือ และโครงสร้างที่เข้าถึงข้อมูลได้รวดเร็ว
- * * * แก้ไข: ลบ NavItem และ FooterNavigation ออกจากการนำเข้าเนื่องจากไม่ได้เรียกใช้โดยตรง
- * * เพื่อแก้ปัญหา ESLint Error: 'NavItem/FooterNavigation' is defined but never used
+ * ระบบจัดการพิกัดการนำทาง (Navigation Structure)
+ * ยุทธศาสตร์: เข้าถึงข้อมูลง่าย สื่อสารตรงประเด็น และช่วยให้ลูกค้าตัดสินใจได้รวดเร็ว
+ * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
-
-/* -------------------------------------------------------------------------- */
-/* ชุดข้อมูลการนำทาง (Navigation Repository)                                    */
-/* -------------------------------------------------------------------------- */
-
 export const navigation: NavigationConfig = {
-  /* -------------------------- เมนูแถบนำทางหลัก ---------------------------- */
+  /* -------------------------- เมนูหลักประจำ Navbar ---------------------------- */
   main: [
     {
       name: "หน้าแรก",
       href: "/",
-      description: "เน้นความไวและเพิ่มโอกาสปิดการขาย",
+      description: "จุดเริ่มต้นการยกระดับธุรกิจของคุณ",
     },
     {
       name: "บริการและราคา",
       href: "/services",
-      description: "แพ็กเกจที่เหมาะกับธุรกิจ SME และโรงงานอุตสาหกรรม",
+      description: "ทางเลือกที่ตอบโจทย์สำหรับ SME และกลุ่มธุรกิจ",
     },
     {
-      name: "เทมเพลตเว็บไซต์",
+      name: "คลังเทมเพลต",
       href: "/templates",
       badge: "New",
-      description: "จัดวางข้อมูลที่ถูกต้องและประมวลผลรวดเร็ว",
+      description: "ชุดโครงสร้างเว็บไซต์สำเร็จรูปที่พร้อมใช้งานทันที",
     },
     {
-      name: "ผลงานของเรา",
+      name: "ผลงานที่ผ่านมา",
       href: "/case-studies",
-      description: "ตัวอย่างธุรกิจที่ใช้งานจริง",
+      description: "บทพิสูจน์ผลลัพธ์จากธุรกิจที่ใช้งานจริง",
     },
     {
-      name: "ความรู้ธุรกิจ",
+      name: "บทความน่ารู้",
       href: "/blog",
-      description: "เทคนิคการจัดการระบบเพื่อให้ลูกค้าหาคุณเจอได้ง่ายขึ้น",
+      description: "เทคนิคการทำเว็บและ Organic Search ที่จับต้องได้",
     },
     {
       name: "ปรึกษาโปรเจกต์",
       href: "/contact",
-      description: "พูดคุยกับผู้เชี่ยวชาญโดยตรงเพื่อวางแผนงาน",
+      description: "พูดคุยรายละเอียดเพื่อวางแผนงานร่วมกัน",
     },
   ],
 
-  /* --------------------------- ส่วนเมนูท้ายหน้า --------------------------- */
+  /* --------------------------- ส่วนเมนูท้ายหน้า (Footer) --------------------------- */
   footer: {
     services: [
       {
-        name: "Sale Page Strategy",
+        name: "Sale Page เน้นปิดการขาย",
         href: "/services/starter-one-page",
         badge: "Hot",
-        description: "เน้นปิดการขายไวด้วยการเข้าถึงข้อมูลที่รวดเร็ว",
+        description: "เน้นความเร็วและการแสดงข้อมูลที่สำคัญที่สุด",
       },
       {
-        name: "SME & Business Pro",
+        name: "SME & Corporate Pro",
         href: "/services/sme-speed-launch",
-        description: "ยกระดับความน่าเชื่อถือด้วยมาตรฐานสากล",
+        description: "ยกระดับภาพลักษณ์ธุรกิจด้วยมาตรฐานสากล",
       },
       {
         name: "Industrial E-Catalog",
         href: "/services/industrial-catalog",
-        description: "ระบบจัดการรายการสินค้าที่ค้นหาง่ายและครบถ้วน",
+        description: "ระบบจัดการรายการสินค้าให้ค้นหาง่ายและเป็นระเบียบ",
       },
       {
-        name: "Technical SEO System",
+        name: "Technical SEO Tuning",
         href: "/services/seo-technical",
-        description: "ปรับจูนให้ระบบค้นหาเจอธุรกิจของคุณได้แม่นยำ",
+        description: "ปรับโครงสร้างเว็บไซต์ให้ระบบค้นหาเจอได้แม่นยำขึ้น",
       },
     ],
 
     company: [
       {
-        name: "เกี่ยวกับ AEMDEVWEB",
+        name: "รู้จัก AEMDEVWEB",
         href: "/about",
       },
       {
-        name: "ผลงานและความสำเร็จ",
+        name: "ความสำเร็จของลูกค้า",
         href: "/case-studies",
       },
       {
         name: "กรณีศึกษา Unlink-TH",
         href: "/blog/unlink-th-case-study",
-        badge: "Special",
+        badge: "Focus",
       },
       {
         name: "ร่วมงานกับเรา",
@@ -98,16 +92,16 @@ export const navigation: NavigationConfig = {
 
     support: [
       {
-        name: "LINE Official Account",
+        name: "คุยผ่าน LINE OA",
         href: "https://lin.ee/6lgJox0",
         external: true,
       },
       {
-        name: "ประเมินงบประมาณ",
+        name: "ประเมินค่าใช้จ่าย",
         href: "/services#pricing",
       },
       {
-        name: "ติดต่อสอบถาม",
+        name: "ติดต่อสอบถามด่วน",
         href: "/contact",
       },
     ],
@@ -118,7 +112,7 @@ export const navigation: NavigationConfig = {
         href: "/privacy",
       },
       {
-        name: "เงื่อนไขการใช้บริการ",
+        name: "ข้อตกลงการใช้บริการ",
         href: "/terms",
       },
     ],
@@ -126,20 +120,22 @@ export const navigation: NavigationConfig = {
 }
 
 /* -------------------------------------------------------------------------- */
-/* การส่งออกข้อมูลสำหรับใช้งาน (Exports)                                         */
+/* พิกัดการส่งออกข้อมูล (Direct Exports)                                         */
 /* -------------------------------------------------------------------------- */
 
-// รักษาการ Export ชื่อเดิมไว้เพื่อให้ Navbar/Footer นำไปใช้ได้โดยไม่พัง
 export const mainNav = navigation.main
 export const footerNavigation = navigation.footer
 
-/** * คีย์เวิร์ดหลักของเว็บไซต์
+/** * คีย์เวิร์ดสำคัญสำหรับการทำ Organic Search (Strategic Keywords)
  */
 export const siteKeywords: string[] = [
   "AEMDEVWEB",
-  "Technical SEO Specialist Thailand",
-  "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
-  "รับทำเว็บไซต์ SME คุณภาพสูง",
-  "เว็บ E-Catalog โรงงาน",
-  "ที่ปรึกษาด้านการเพิ่มประสิทธิภาพเว็บไซต์",
+  "นายเอ็มซ่ามากส์",
+  "Alongkorl Yomkerd",
+  "Unlink-th",
+  "บริการทำเว็บไซต์สำหรับธุรกิจ",
+  "Landing Page SME",
+  "technical SEO",
+  "โครงสร้างเว็บไซต์",
+  "Organic Search",
 ]

@@ -3,98 +3,160 @@
 import { TemplateMetadata, TemplateContent } from "@/types/template"
 
 /**
- * 1. คลังข้อมูลหลัก (Metadata)
- * เน้นข้อมูลที่ใช้ในการตัดสินใจเลือกในหน้า Marketplace
+ * 1. คลังข้อมูลหลัก (Metadata Registry)
+ * เก็บพิกัดข้อมูลพื้นฐานสำหรับแสดงผลในหน้าคลังโครงสร้าง (Marketplace)
+ * เน้นการใช้คีย์เวิร์ดที่รองรับ Organic Search เพื่อให้ธุรกิจ SME ค้นหาได้ง่าย
  */
 const TEMPLATE_METADATA: TemplateMetadata[] = [
   {
-    id: "hotel-resort",
-    name: "Hotel & Resort Premium",
-    category: "hotel",
-    thumbnail: "/images/templates/hotelresort.webp",
+    id: "web-rental-001",
+    slug: "webrental",
+    name: "Business Web Rental",
+    category: "platform",
+    thumbnail: "/images/templates/webrental.webp",
     description:
-      "โครงสร้างเน้นการโชว์ภาพบรรยากาศขนาดใหญ่ โดยไม่เสียคะแนนความเร็ว พร้อมระบบจองที่ใช้งานง่าย",
+      "ทางเลือกสำหรับธุรกิจที่อยากมีหน้าบ้านดิจิทัลแบบรายเดือน เริ่มต้นได้ทันทีโดยไม่ต้องแบกรับค่าใช้จ่ายก้อนใหญ่",
+    pricePrefix: "เริ่มต้น",
+    priceValue: "590",
+    isNew: true,
   },
   {
-    id: "cleaning-pro",
-    name: "Cleaning Service Pro",
-    category: "service",
-    thumbnail: "/images/templates/cleaningpro.webp",
-    description:
-      "ระบบจัดวางเนื้อหาที่เน้นการสร้างความมั่นใจ (Trust Flow) และกระตุ้นการติดต่อใน 3 คลิก",
-  },
-  {
-    id: "facebook-ads-expert",
-    name: "Facebook Ads Specialist",
-    category: "marketing",
-    thumbnail: "/images/templates/facebookadsexpert.webp",
-    description:
-      "การจัดวางข้อมูลสถิติที่เน้นความโดดเด่น สื่อถึงความเป็นมืออาชีพและการวัดผลที่แม่นยำ",
-  },
-  {
-    id: "shop-master-pro",
+    id: "shop-master-001",
+    slug: "shop-master-pro",
     name: "Shop Master Pro",
     category: "ecommerce",
     thumbnail: "/images/templates/shopmasterpro.webp",
     description:
-      "โครงสร้างการแสดงผลสินค้าที่รีดความเร็วในการโหลด แม้จะมีจำนวนสินค้ามากก็ตาม",
+      "ระบบจัดวางรายการสินค้าที่ถูกออกแบบมาเพื่อความคล่องตัว จัดการข้อมูลจำนวนมากได้อย่างเป็นระเบียบ",
+    priceValue: "25,000",
+    isNew: false,
+  },
+  {
+    id: "hotel-resort-001",
+    slug: "hotel-resort",
+    name: "Hotel & Resort Premium",
+    category: "hotel",
+    thumbnail: "/images/templates/hotelresort.webp",
+    description:
+      "เน้นการถ่ายทอดบรรยากาศธุรกิจด้วยงานภาพที่คมชัด โดยยังคงความรวดเร็วในการโหลดข้อมูลระดับมาตรฐานสากล",
+    priceValue: "35,000",
+    isNew: false,
+  },
+  {
+    id: "cleaning-pro-001",
+    slug: "cleaning-pro",
+    name: "Cleaning Service Pro",
+    category: "service",
+    thumbnail: "/images/templates/cleaningpro.webp",
+    description:
+      "โครงสร้างการนำเสนอที่เน้นความน่าเชื่อถือ และช่วยให้ลูกค้าติดต่อรับบริการได้ง่ายและรวดเร็ว",
+    priceValue: "15,000",
+    isNew: false,
+  },
+  {
+    id: "fb-ads-001",
+    slug: "facebook-ads-expert",
+    name: "Facebook Ads Specialist",
+    category: "marketing",
+    thumbnail: "/images/templates/facebookadsexpert.webp",
+    description:
+      "การจัดลำดับข้อมูลที่ช่วยเน้นตัวเลขผลลัพธ์ให้โดดเด่น สื่อถึงความเป็นมืออาชีพในการทำงานเชิงรุก",
+    priceValue: "12,900",
+    isNew: false,
   },
 ]
 
 /**
- * 2. ข้อมูลเชิงลึกสำหรับส่วนพรีวิว (Content Map)
- * เน้นบทวิเคราะห์เชิงเทคนิค (Technical Report) เพื่อยืนยันคุณภาพงาน
+ * 2. ข้อมูลเชิงลึก (Technical Content Registry)
+ * รายละเอียดสำหรับการทำ Pre-selling ในหน้า Detail และการันตีประสิทธิภาพงานระบบ
  */
 const TEMPLATE_CONTENT_MAP: Record<string, TemplateContent> = {
+  webrental: {
+    title: "Web Rental Platform Structure",
+    description:
+      "การจัดพิกัดระบบเช่าเว็บไซต์รายเดือนที่เน้นความคุ้มค่าและพร้อมใช้งานทันที",
+    body: "ใช้โครงสร้างที่เบาและยืดหยุ่น เพื่อให้เจ้าของธุรกิจสามารถจัดการเนื้อหาได้เองโดยไม่ต้องมีพื้นฐานเชิงเทคนิคที่ซับซ้อน",
+    performance: { lcp: "< 0.5s", seo: "100/100", stability: "Excellent" },
+    features: [
+      "ระบบจัดการหลังบ้านง่าย",
+      "รองรับมือถือ 100%",
+      "ติดตั้งไวใน 24 ชม.",
+    ],
+  },
+  "shop-master-pro": {
+    title: "E-Commerce Structure",
+    description:
+      "การจัดการข้อมูลสินค้าให้ดูสะอาดตาและเข้าถึงพิกัดที่ต้องการได้ทันที",
+    body: "วางรากฐานการแสดงผลที่เสถียร ลดการขยับของหน้าจอขณะโหลด เพื่อให้ลูกค้าใช้งานได้อย่างต่อเนื่องไม่มีสะดุด",
+    performance: { lcp: "< 0.9s", seo: "100/100", stability: "Verified" },
+    features: ["ระบบตะกร้าสินค้า", "จัดการสต็อกง่าย", "รองรับการชำระเงิน"],
+  },
   "hotel-resort": {
     title: "Hotel & Resort Structure",
     description:
-      "การวางโครงสร้างเพื่อเปลี่ยนผู้เข้าชมให้เป็นผู้เข้าพัก ด้วยการเล่าเรื่องผ่านภาพและข้อมูลที่ครบถ้วน",
-    body: "ใช้เทคนิคการโหลดภาพแบบ Priority เฉพาะจุดสำคัญเพื่อลดค่า LCP ให้ต่ำกว่า 0.8 วินาที และการจัดการ Font ที่ไม่ทำให้หน้าเว็บกระตุกขณะโหลด",
+      "การจัดลำดับภาพและเนื้อหาเพื่อเปลี่ยนผู้เข้าชมให้เป็นผู้เข้าพัก",
+    body: "ใช้เทคนิคการจัดการรูปภาพเฉพาะจุดสำคัญเพื่อไม่ให้เป็นภาระต่อระบบ และการคุมระนาบตัวอักษรให้อ่านง่ายในทุกหน้าจอ",
     performance: { lcp: "< 0.8s", seo: "100/100", stability: "Verified" },
+    features: [
+      "แสดงห้องพักแบบ Gallery",
+      "ปุ่มจองห้องพักเด่น",
+      "รองรับหลายภาษา",
+    ],
   },
   "cleaning-pro": {
-    title: "Cleaning Service Structure",
-    description:
-      "การออกแบบเส้นทางการตัดสินใจที่เน้นความน่าเชื่อถือและการจองบริการที่รวดเร็ว",
-    body: "เน้นการวางจุดติดต่อ (CTA) แบบกระจายตัวตามพฤติกรรมการอ่าน และการลดรหัสส่วนเกินในส่วนของแบบฟอร์มเพื่อความลื่นไหลสูงสุด",
+    title: "Service Business Structure",
+    description: "เส้นทางการนำเสนอที่เน้นความโปร่งใสและการติดต่อที่รวดเร็ว",
+    body: "เน้นการจัดวางปุ่มติดต่อตามพฤติกรรมการใช้งานจริง พร้อมการเคลียร์โค้ดส่วนเกินเพื่อให้การเข้าถึงข้อมูลลื่นไหลที่สุด",
     performance: { lcp: "< 0.6s", seo: "100/100", stability: "Stable" },
+    features: ["ตารางจองคิวบริการ", "รีวิวจากลูกค้าจริง", "แผนที่ตั้งบริษัท"],
   },
   "facebook-ads-expert": {
     title: "Marketing Expert Structure",
     description:
-      "วิเคราะห์การจัดวางข้อมูลสถิติและการดึงดูดกลุ่มเป้าหมายเชิงธุรกิจ",
-    body: "ใช้โครงสร้างสีแบบ High-Contrast เพื่อเน้นตัวเลขสถิติให้โดดเด่น และการจัดการระบบ Asset ที่เบาหวิวเพื่อการเข้าถึงจากมือถือได้ทันที",
+      "เน้นการแสดงผลข้อมูลสถิติที่ชัดเจนเพื่อสร้างความมั่นใจให้กลุ่มลูกค้าธุรกิจ",
+    body: "ใช้โครงสร้างที่ส่งเสริมให้ตัวเลขสำคัญดูเด่นชัด และการจัดการไฟล์ที่เบาเป็นพิเศษเพื่อให้เปิดใช้งานจากมือถือได้ทันที",
     performance: { lcp: "< 0.7s", seo: "100/100", stability: "Excellent" },
-  },
-  "shop-master-pro": {
-    title: "E-Commerce Structure",
-    description: "การจัดระเบียบข้อมูลสินค้าจำนวนมากให้แสดงผลได้ไวและค้นหาง่าย",
-    body: "จัดการโครงสร้าง Grid System ที่มีความเสถียรสูง ลดค่า CLS ให้เป็นศูนย์ เพื่อไม่ให้เลย์เอาต์ขยับขณะลูกค้ากำลังเลือกดูสินค้า",
-    performance: { lcp: "< 0.9s", seo: "100/100", stability: "Verified" },
+    features: [
+      "เน้นปุ่มทักแชท / Line",
+      "แสดงผลลัพธ์ Case Study",
+      "โหลดไวประหยัดงบโฆษณา",
+    ],
   },
 }
 
 /**
- * ดึงรายการ ID ทั้งหมด (Static Params)
+ * 3. พิกัดฟังก์ชันสำหรับดึงข้อมูลไปใช้งานในระบบ
  */
+
+/** ดึงรายชื่อ Slug ทั้งหมดสำหรับระบบ Static Generation */
 export function getAllTemplates(): string[] {
-  return TEMPLATE_METADATA.map((t) => t.id)
+  return TEMPLATE_METADATA.map((t) => t.slug)
 }
 
-/**
- * ดึงข้อมูลสรุปทั้งหมด (Catalog Grid)
- */
+/** ดึง Metadata ทั้งหมดสำหรับแสดงผลในหน้าคลังโครงสร้าง (Catalog) */
 export function getAllTemplatesMetadata(): TemplateMetadata[] {
-  return TEMPLATE_METADATA
+  return [...TEMPLATE_METADATA]
 }
 
-/**
- * ดึงข้อมูลวิเคราะห์รายธุรกิจ (Technical Details)
- */
+/** ดึงเนื้อหาเชิงลึกตามพิกัด Slug */
 export async function getTemplateDataBySlug(
   slug: string
 ): Promise<TemplateContent | null> {
-  // รองรับการทำงานแบบ Async เพื่อเตรียมพร้อมสำหรับการขยายฐานข้อมูลในอนาคต
-  return TEMPLATE_CONTENT_MAP[slug] || null
+  const data = TEMPLATE_CONTENT_MAP[slug]
+  return data ? { ...data } : null
+}
+
+/**
+ * ดึงรายการแนะนำ (Featured Units)
+ * กลยุทธ์: ดึง Web Rental ขึ้นพิกัดแรก ตามด้วยตัวอื่นๆ อีก 3 รายการ
+ */
+export function getTemplatesMetadata(): TemplateMetadata[] {
+  const promoSlug = "webrental"
+  const promoItem = TEMPLATE_METADATA.find((t) => t.slug === promoSlug)
+  const others = TEMPLATE_METADATA.filter((t) => t.slug !== promoSlug).slice(
+    0,
+    3
+  )
+
+  return promoItem ? [promoItem, ...others] : TEMPLATE_METADATA.slice(0, 4)
 }

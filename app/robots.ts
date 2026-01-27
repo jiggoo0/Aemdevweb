@@ -4,8 +4,10 @@ import { MetadataRoute } from "next"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * ระบบควบคุมการเก็บข้อมูลของโปรแกรมค้นหา (Search Engine Crawler Control)
- * จัดการพิกัดการเข้าถึงข้อมูลเพื่อให้บอทเก็บข้อมูลเฉพาะส่วนที่ต้องการเปิดเผย
+ * ระบบควบคุมการเก็บข้อมูลของระบบค้นหา (Search Engine Crawler Control)
+ * จัดการพิกัดการเข้าถึงข้อมูลเพื่อให้บอทเก็บข้อมูลเฉพาะส่วนที่ต้องการสื่อสารต่อสาธารณะ
+ * Identity: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
+ * Project: AEMDEVWEB - Landing Page SME & technical SEO
  */
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = siteConfig.project.url
@@ -14,8 +16,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        // 1. ส่วนที่อนุญาตให้เก็บข้อมูลเพื่อประโยชน์ด้านการค้นหา (SEO)
-        // เปิดทางให้บอทเข้าถึงส่วนงานบริการและเทมเพลตใหม่ๆ ได้เต็มที่
+        /**
+         * 1. ส่วนที่อนุญาตให้เข้าถึง (Allowed Paths)
+         * เปิดทางให้บอทเก็บข้อมูลหน้าบริการและคลังเทมเพลตเพื่อรองรับ Organic Search
+         */
         allow: [
           "/",
           "/about",
@@ -23,19 +27,22 @@ export default function robots(): MetadataRoute.Robots {
           "/case-studies/",
           "/blog/",
           "/contact",
-          "/templates/", // เพิ่มพิกัดเทมเพลตเพื่อรองรับการค้นหา "รับทำ Landing Page"
+          "/templates/", // พิกัดหลักสำหรับงานรับทำ Landing Page
           "/images/showcase/",
           "/images/templates/",
         ],
 
-        // 2. ส่วนที่ห้ามเข้าถึงเพื่อความปลอดภัยและป้องกันการรั่วไหลของตรรกะระบบ
+        /**
+         * 2. ส่วนที่ห้ามเข้าถึง (Disallowed Paths)
+         * ป้องกันบอทเข้าถึงไฟล์ระบบและตรรกะหลังบ้านเพื่อความปลอดภัยของโครงการ
+         */
         disallow: [
           "/api/",
           "/_next/",
           "/config/",
           "/content/",
           "/lib/",
-          "/types/", // เพิ่มพิกัดป้องกันบอทอ่านโครงสร้าง Type ของเรา
+          "/types/", // ป้องกันการเข้าถึงโครงสร้างประเภทข้อมูล
           "/download/",
           "/*.json$",
           "/not-found",
@@ -44,7 +51,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         /**
          * 3. การจัดการสิทธิ์สำหรับ AI Crawler (2026 Standard)
-         * ป้องกันบอทนำโครงสร้าง Technical SEO และเคสงานเฉพาะทางไปเทรนโมเดล
+         * ป้องกันบอทนำพิกัดงาน technical SEO และเคสผลงานเฉพาะทางไปประมวลผลต่อโดยไม่ได้รับอนุญาต
          */
         userAgent: [
           "GPTBot",
@@ -57,12 +64,15 @@ export default function robots(): MetadataRoute.Robots {
           "/config/",
           "/lib/",
           "/content/",
-          "/case-studies/", // ล็อคพิกัดงานผลงานความลับ
-          "/templates/*/_assets/", // กัน AI ดูด Asset เฉพาะทางของเทมเพลต
+          "/case-studies/", // ล็อกพิกัดผลงานที่เป็นความลับของลูกค้า
+          "/templates/*/_assets/", // กัน AI เข้าถึงทรัพยากรเฉพาะทางของเทมเพลต
         ],
       },
     ],
-    // ระบุแผนผังเว็บไซต์เพื่อให้ Index หน้า Landing Page ใหม่ได้ไวขึ้น
+    /**
+     * ระบุตำแหน่งแผนผังเว็บไซต์ (Sitemap)
+     * เพื่อให้ Google ค้นพบหน้า Landing Page ใหม่ๆ ได้รวดเร็วและครบถ้วน
+     */
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

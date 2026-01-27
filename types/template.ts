@@ -1,37 +1,59 @@
 /** @format */
 
-// 1. กำหนดหมวดหมู่ธุรกิจ (เพิ่มกลุ่ม Web Rental และ Car Rental เพื่อรองรับโปรเจกต์ใหม่)
+/**
+ * 1. หมวดหมู่กลุ่มธุรกิจ (Template Categories)
+ * รองรับทั้งกลุ่มบริการมาตรฐาน และโปรเจกต์งานระบบในกลุ่ม Platform / Rental
+ */
 export type TemplateCategory =
   | "hotel"
   | "service"
   | "marketing"
   | "ecommerce"
   | "business"
-  | "platform" // สำหรับ Web Rental Platform
+  | "platform" // สำหรับระบบ Web Rental Platform
   | "rental" // สำหรับธุรกิจเช่ารถ หรือเช่าอุปกรณ์
 
-// 2. ข้อมูลพื้นฐานสำหรับแสดงผลในหน้ารายการ (Marketplace Card)
-export interface TemplateMetadata {
-  id: string // Slug สำหรับเข้าถึงหน้าเทมเพลต (เช่น 'shop-master-pro')
-  name: string // ชื่อเทมเพลตที่โชว์ให้ลูกค้าเห็น
-  category: TemplateCategory
-  thumbnail: string // พิกัดรูปภาพตัวอย่าง
-  description: string // คำอธิบายสั้นๆ เพื่อปิดการขาย
-  pricePrefix?: string // เช่น 'เริ่มต้น'
-  priceValue?: string // เช่น '590'
-  isNew?: boolean // ป้ายกำกับสินค้าใหม่
+/**
+ * 2. ข้อมูลพิกัด SEO (SEO Contract)
+ * แยกออกมาเพื่อใช้ยืนยันพิกัดข้อมูลในหน้าพรีวิวเทมเพลต ป้องกัน Error TS18046
+ */
+export interface SEOContract {
+  seo: {
+    title: string
+    description: string
+    keywords: string[]
+    ogImage: string
+  }
 }
 
-// 3. ข้อมูลเนื้อหาเชิงลึก (สำหรับหน้า Preview หรือ Detail)
+/**
+ * 3. ข้อมูลพื้นฐานสำหรับแสดงผล (Marketplace Card)
+ */
+export interface TemplateMetadata {
+  id: string // ID อ้างอิงภายในระบบ
+  slug: string // พิกัด URL สำหรับเข้าถึงหน้าเทมเพลต
+  name: string // ชื่อเทมเพลตที่แสดงบนหน้าเว็บ
+  category: TemplateCategory
+  thumbnail: string // พิกัดที่เก็บรูปภาพตัวอย่าง
+  description: string // รายละเอียดสรุปสั้นๆ เพื่อดึงดูดความสนใจ
+  pricePrefix?: string // ข้อความนำหน้าตัวเลขราคา เช่น 'เริ่มต้น'
+  priceValue?: string // มูลค่าระบบงาน เช่น '590'
+  isNew?: boolean // ป้ายกำกับสำหรับงานที่เพิ่งเปิดตัว
+}
+
+/**
+ * 4. ข้อมูลเนื้อหาเชิงลึก (Template Content)
+ * เน้นการแสดงผลประสิทธิภาพที่เหนือกว่ามาตรฐานทั่วไป
+ */
 export interface TemplateContent {
   title: string
   description: string
   body: string
-  // พิกัดคะแนนประสิทธิภาพ (จุดขายหลักที่ชนะ Wix)
+  // ตัวเลขชี้วัดประสิทธิภาพ (จุดขายสำคัญที่ลูกค้าจะได้รับ)
   performance: {
-    lcp: string // Largest Contentful Paint (ความเร็ว)
-    seo: string // คะแนน SEO
-    stability: string // Core Web Vitals
+    lcp: string // ความเร็วในการโหลดข้อมูลหลัก (Largest Contentful Paint)
+    seo: string // ระดับการปรับแต่งเพื่อการค้นหา
+    stability: string // ความเสถียรของโครงสร้างหน้าเว็บ
   }
-  features?: string[] // จุดเด่นที่ลูกค้าจะได้รับ
+  features?: string[] // รายการสิทธิประโยชน์หรือฟีเจอร์เด่น
 }

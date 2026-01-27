@@ -1,239 +1,163 @@
 /** @format */
 
 import React from "react"
-import { Metadata } from "next"
-import Image from "next/image"
-import {
-  ShieldCheck,
-  Zap,
-  Target,
-  Users,
-  Globe,
-  Factory,
-  CheckCircle2,
-} from "lucide-react"
-
+import type { Metadata } from "next"
+import Link from "next/link"
 import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
-import CTASection from "@/components/landing/CTASection"
+import LineLeadForm from "@/components/sales-engine/LineLeadForm"
+import { ShieldCheck, Target, Sparkles, Globe, ArrowRight } from "lucide-react"
 
 /**
- * กลยุทธ์ข้อมูลส่วนหัว: ปรับการดึงข้อมูลจากโครงสร้าง Nested Object ใหม่
+ * Metadata: วางพิกัดตัวตนบนโลกออนไลน์
+ * เน้นความชัดเจนในบทบาทที่ปรึกษาและผู้ดูแลระบบเทคนิค
  */
 export const metadata: Metadata = {
-  title: `รู้จัก ${siteConfig.expert.name} | ผู้เชี่ยวชาญระบบ Next.js และงานเทคนิคด้านการค้นหา`,
-  description: siteConfig.project.description,
+  title: `รู้จัก ${siteConfig.expert.name} | ที่ปรึกษาระบบเว็บและ Technical SEO`,
+  description:
+    "เบื้องหลังการวางระบบเว็บไซต์ที่เน้นความเร็วและการทำอันดับบน Google พร้อมแผนงานที่วัดผลได้จริง",
   alternates: { canonical: `${siteConfig.project.url}/about` },
 }
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/20">
-      {/* แก้ไขจุดที่ 1: เปลี่ยน type เป็น WebPage เพื่อให้ผ่าน Type Check 
-         และระบุประเภทเจาะจงในก้อนข้อมูล data แทน
-      */}
+    <main className="relative min-h-screen bg-white pb-24 antialiased selection:bg-emerald-500/10">
       <JsonLd
-        type="WebPage"
+        type="AboutPage"
         data={{
-          "@type": "AboutPage",
-          name: `รู้จัก ${siteConfig.expert.name} - ${siteConfig.project.name}`,
-          description: siteConfig.project.description,
-          mainEntity: {
-            "@type": "Person",
-            name: siteConfig.expert.name,
-            jobTitle: siteConfig.expert.role,
-            url: siteConfig.project.url,
-          },
+          name: `รู้จัก ${siteConfig.expert.name}`,
+          description: "Professional freelance marketing and web planner.",
+          image: siteConfig.project.ogImage,
         }}
       />
 
-      {/* 1. ส่วนหัวเว็บไซต์: การสร้างตัวตนและความน่าเชื่อถือ */}
-      <section className="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
-        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] [mask-image:radial-gradient(black,transparent_70%)] bg-center opacity-[0.02]" />
-
+      {/* Hero Layer: สุขุม เรียบง่าย แต่ทรงพลัง */}
+      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-24 lg:pt-48 lg:pb-40">
         <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="animate-in fade-in slide-in-from-bottom-2 mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-50 px-4 py-1.5 text-emerald-600 duration-700">
-              <ShieldCheck className="h-4 w-4" />
-              <span className="font-prompt text-[10px] font-black tracking-[0.3em] uppercase">
-                Direct Specialist • Expert Results
-              </span>
+          <div className="max-w-4xl space-y-8">
+            <div className="inline-flex items-center gap-3 rounded-full bg-white px-5 py-2 text-[10px] font-black tracking-[0.3em] text-emerald-600 uppercase italic shadow-sm ring-1 ring-slate-200">
+              <Sparkles size={14} />
+              Professional Freelance Partner
             </div>
-            <h1 className="font-prompt mb-8 text-5xl font-black tracking-tighter text-slate-900 uppercase italic md:text-7xl lg:text-9xl">
-              ผมชื่อ{" "}
-              <span className="text-emerald-500">
-                {siteConfig.expert.name.split(" ")[0]}.
-              </span>
+            <h1 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter text-slate-950 md:text-8xl">
+              Building <br />
+              <span className="text-emerald-600 italic">Growth Engine.</span>
             </h1>
-            <p className="font-anuphan mx-auto max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              ผมคือ{" "}
-              <span className="text-slate-900 underline decoration-emerald-500 underline-offset-8">
-                คนทำงาน
-              </span>{" "}
-              ที่มุ่งเน้นการส่งมอบระบบงานที่ใช้งานได้จริงและยั่งยืน
+            <p className="font-body max-w-2xl text-xl leading-relaxed font-bold text-slate-600 md:text-2xl">
+              ผมไม่ได้แค่รับทำเว็บไซต์
+              แต่ผมทำหน้าที่เป็นพาร์ทเนอร์ที่ช่วยวางระบบ
+              เพื่อให้ธุรกิจของคุณเดินหน้าต่อได้อย่างมีทิศทาง
+              ด้วยมาตรฐานงานระดับสากล
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. ส่วนแนวคิดและการบริหารจัดการโครงการ */}
-      <section className="bg-slate-50/80 py-24 lg:py-32">
+      {/* Core Values: พิกัดจุดแข็งที่วัดผลได้จริง */}
+      <section className="py-24 lg:py-40">
         <div className="container mx-auto px-6">
-          <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
-            <div className="group relative aspect-square overflow-hidden rounded-[3.5rem] bg-slate-200 shadow-2xl">
-              <Image
-                src={siteConfig.project.ogImage}
-                alt={`ระบบการทำงานโดย ${siteConfig.project.name}`}
-                fill
-                priority
-                className="object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
-            </div>
+          <div className="grid gap-16 md:grid-cols-2 lg:grid-cols-3">
+            <AboutFeature
+              icon={<ShieldCheck size={36} strokeWidth={1.5} />}
+              title="Work Standard"
+              description="ทุกขั้นตอนถูกจัดการอย่างมีระเบียบ ตั้งแต่การเขียนโค้ดจนถึงการส่งมอบงาน มั่นใจได้ในความเสถียรและความปลอดภัยของข้อมูล"
+            />
 
-            <div className="space-y-12">
-              <div className="space-y-6">
-                <h2 className="font-prompt text-4xl font-black tracking-tight text-slate-900 uppercase italic md:text-6xl">
-                  เน้นผลลัพธ์ <br />
-                  <span className="text-emerald-500">มาตรฐานสากล</span>
-                </h2>
-                <div className="font-anuphan space-y-6 text-lg leading-relaxed font-medium text-slate-600">
-                  <p>
-                    เป้าหมายหลักของผมคือการทำให้เจ้าของกิจการได้รับระบบที่มีประสิทธิภาพสูง
-                    ไม่ใช่เพียงแค่หน้าเว็บที่ดูสวยงาม แต่ต้องเป็นระบบที่
-                    <span className="font-bold text-slate-900">
-                      {" "}
-                      โหลดไว ตอบโจทย์ผู้ใช้งานสากล
-                      และรองรับมาตรฐานการค้นหาล่าสุด
-                    </span>
-                  </p>
-                  <p>
-                    ผมควบคุมการพัฒนาด้วยตัวเองทุกขั้นตอน
-                    ตั้งแต่การจัดวางโครงสร้างระบบ
-                    ไปจนถึงการเขียนชุดคำสั่งที่สะอาดและจัดการได้ง่าย
-                  </p>
-                </div>
-              </div>
+            <AboutFeature
+              icon={<Target size={36} strokeWidth={1.5} />}
+              title="Business Impact"
+              description="เป้าหมายสำคัญคือการเปลี่ยนผู้เข้าชมให้เป็นรายได้ ทุกพิกัดการจัดวางถูกคิดมาเพื่อตอบโจทย์พฤติกรรมลูกค้ากลุ่มเป้าหมาย"
+            />
 
-              <div className="grid grid-cols-2 gap-8 border-t border-slate-200 pt-10">
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-lg">
-                    <Zap size={24} fill="currentColor" />
-                  </div>
-                  <div>
-                    <h4 className="font-prompt text-sm font-black tracking-widest text-slate-900 uppercase">
-                      Performance
-                    </h4>
-                    <p className="text-xs text-slate-500">
-                      ความเร็วระดับสูงสุด
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow-lg">
-                    <Target size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-prompt text-sm font-black tracking-widest text-slate-900 uppercase">
-                      Conversion
-                    </h4>
-                    <p className="text-xs text-slate-500">
-                      มุ่งเน้นเป้าหมายธุรกิจ
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <AboutFeature
+              icon={<Globe size={36} strokeWidth={1.5} />}
+              title="Technical Logic"
+              description="วางรากฐานให้ Google เข้าใจธุรกิจของคุณได้ง่ายขึ้น ด้วยโครงสร้างข้อมูลที่ถูกต้องและประสิทธิภาพความเร็วที่เหนือกว่าทั่วไป"
+            />
           </div>
         </div>
       </section>
 
-      {/* 3. กลุ่มธุรกิจที่รองรับ */}
-      <section className="py-24 lg:py-40">
-        <div className="container mx-auto px-6 text-center">
-          <div className="mb-20 space-y-4">
-            <h2 className="font-prompt text-4xl font-black tracking-tighter text-slate-900 uppercase italic md:text-6xl">
-              กลุ่มธุรกิจที่ผม{" "}
-              <span className="text-emerald-500">พร้อมดูแล</span>
-            </h2>
-          </div>
-          <div className="grid gap-10 md:grid-cols-3">
-            {[
-              {
-                icon: Users,
-                title: "SME & Service",
-                desc: "เน้นความรวดเร็วในการเปิดตัวและการทำระบบที่ปิดการขายได้ทันที",
-              },
-              {
-                icon: Globe,
-                title: "Tourism & Export",
-                desc: "เน้นความน่าเชื่อถือระดับสากล รองรับหลายภาษา และระบบที่เสถียรทั่วโลก",
-              },
-              {
-                icon: Factory,
-                title: "Industrial & Factory",
-                desc: "เน้นระบบรายการสินค้าที่รองรับข้อมูลจำนวนมากและมีความมั่นคงสูง",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="group rounded-[3rem] border border-slate-100 bg-white p-10 transition-all duration-500 hover:border-emerald-500/20 hover:shadow-2xl"
-              >
-                <div className="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-all duration-500 group-hover:bg-emerald-500 group-hover:text-white">
-                  <item.icon size={32} />
-                </div>
-                <h3 className="font-prompt mb-4 text-xl font-black text-slate-900 uppercase">
-                  {item.title}
-                </h3>
-                <p className="font-anuphan leading-relaxed font-medium text-slate-500">
-                  {item.desc}
+      {/* Closing Section: ส่วนสร้างความเชื่อมั่นและช่องทางติดต่อ */}
+      <section className="container mx-auto px-6">
+        <div className="rounded-[3.5rem] bg-slate-950 p-12 text-white shadow-2xl shadow-slate-200 md:p-24">
+          <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
+            <div className="flex-1 space-y-8">
+              <div className="inline-flex items-center gap-3 text-[11px] font-black tracking-[0.2em] text-emerald-400 uppercase italic">
+                <span className="h-px w-8 bg-emerald-500" />
+                Your Success is my mission
+              </div>
+              <h2 className="font-heading text-4xl leading-tight font-black tracking-tighter italic md:text-6xl">
+                คุยยุทธศาสตร์ธุรกิจ <br /> กับผมโดยตรง
+              </h2>
+              <p className="font-body text-lg leading-relaxed font-medium text-slate-400 md:max-w-xl md:text-xl">
+                หากคุณกำลังมองหาพาร์ทเนอร์ที่พร้อมจะลงรายละเอียดงานอย่างจริงจัง
+                และเข้าใจเป้าหมายของธุรกิจอย่างแท้จริง
+                ผมพร้อมร่วมวางแผนไปกับคุณครับ
+              </p>
+
+              <div className="flex flex-wrap gap-6 pt-4">
+                <LineLeadForm
+                  variant="button"
+                  label="คุยรายละเอียดงาน"
+                  className="h-16 px-12 text-lg font-black tracking-widest italic"
+                />
+                <Link
+                  href="/case-studies"
+                  className="group inline-flex items-center gap-3 text-sm font-black tracking-widest text-white uppercase transition-colors hover:text-emerald-400"
+                >
+                  ดูผลงานที่ผ่านมา
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform group-hover:translate-x-2"
+                  />
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2.5rem] border border-white/5 bg-slate-900">
+              {/* พิกัดพื้นที่รูปถ่าย: อลงกรณ์ ยมเกิด */}
+              <div className="m-4 flex h-full w-full flex-col items-center justify-center rounded-[2rem] border-4 border-dashed border-slate-800 p-12 text-center text-slate-700 italic">
+                <p className="font-heading text-lg font-black tracking-widest uppercase opacity-30">
+                  Expert Identity
+                </p>
+                <p className="mt-2 text-xs font-bold opacity-20">
+                  Recommended: High-resolution profile photo
                 </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. ส่วนท้ายและการรับประกันงาน */}
-      <section className="px-6 pb-32">
-        <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[3.5rem] bg-slate-950 p-12 text-center shadow-2xl md:p-24">
-          <div className="absolute top-0 right-0 p-10 opacity-10">
-            <ShieldCheck size={200} className="text-emerald-500" />
-          </div>
-          <div className="relative z-10 space-y-8">
-            <h2 className="font-prompt text-3xl leading-tight font-black tracking-tighter text-emerald-400 uppercase italic md:text-5xl">
-              ทำงานร่วมกับผม มั่นใจในคุณภาพสูงสุด
-            </h2>
-            <div className="font-anuphan mx-auto max-w-2xl text-lg leading-relaxed font-medium text-slate-400 md:text-xl">
-              ผมสื่อสารข้อมูลทางเทคนิคให้เข้าใจง่าย ดำเนินงานตรงตามกำหนดการ
-              เพื่อให้โครงการของคุณคุ้มค่าสูงสุด
-            </div>
-            <div className="flex flex-wrap justify-center gap-6 pt-4">
-              {[
-                "รับผิดชอบงานเต็มร้อย",
-                "เข้าใจบริบทธุรกิจ",
-                "ดูแลหลังการส่งมอบ",
-              ].map((text, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-2 text-sm font-bold text-white/80"
-                >
-                  <CheckCircle2 size={16} className="text-emerald-500" />
-                  {text}
-                </div>
-              ))}
             </div>
           </div>
         </div>
       </section>
-
-      <CTASection />
-
-      <footer className="py-12 text-center opacity-30 select-none">
-        <p className="font-prompt text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase">
-          Build with Integrity by {siteConfig.expert.name} v2026
-        </p>
-      </footer>
     </main>
+  )
+}
+
+/**
+ * AboutFeature Component: ส่วนแสดงจุดเด่นรายด้าน
+ */
+function AboutFeature({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode
+  title: string
+  description: string
+}) {
+  return (
+    <div className="group space-y-6 text-left transition-all">
+      <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-emerald-600 transition-all duration-500 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white">
+        {icon}
+      </div>
+      <div className="space-y-4">
+        <h3 className="font-heading text-2xl font-black tracking-tight text-slate-950 uppercase italic transition-colors group-hover:text-emerald-600">
+          {title}
+        </h3>
+        <p className="font-body text-base leading-relaxed font-medium text-slate-500">
+          {description}
+        </p>
+      </div>
+    </div>
   )
 }

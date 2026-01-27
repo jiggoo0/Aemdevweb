@@ -1,125 +1,65 @@
 /** @format */
 
-"use client"
-
 import React from "react"
-import { motion } from "framer-motion"
-import { ShieldCheck, Zap, Search, BarChart3 } from "lucide-react"
-import { cn } from "@/lib/utils"
-
-// ข้อมูลกลุ่มสัญลักษณ์ความเชื่อมั่นที่เน้นจุดแข็งของระบบงาน
-const trustItems = [
-  {
-    icon: Zap,
-    label: "Next.js 16",
-    subLabel: "Latest Stack",
-    color: "text-emerald-500",
-    bg: "bg-emerald-500/5",
-  },
-  {
-    icon: Search,
-    label: "SEO Expert",
-    subLabel: "AI-Ready",
-    color: "text-blue-500",
-    bg: "bg-blue-500/5",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Secure Code",
-    subLabel: "Industrial",
-    color: "text-indigo-500",
-    bg: "bg-indigo-500/5",
-  },
-  {
-    icon: BarChart3,
-    label: "Score 100",
-    subLabel: "PageSpeed",
-    color: "text-orange-500",
-    bg: "bg-orange-500/5",
-  },
-]
-
-interface TrustBadgeProps {
-  variant?: "horizontal" | "grid"
-  className?: string
-}
+import { ShieldCheck, Zap, BarChart3, Globe2 } from "lucide-react"
 
 /**
- * TrustBadge - ส่วนแสดงเครื่องหมายรับรองความเชื่อมั่น
- * ออกแบบมาเพื่อยกระดับความน่าเชื่อถือของแบรนด์ในระดับงานอุตสาหกรรม
- * รองรับการแสดงผลทั้งแบบแถวแนวนอนและแบบตาราง (Grid)
+ * TrustBadge - Professional Standards Edition
+ * พิกัด: ส่วนแสดงเครื่องหมายยืนยันความน่าเชื่อถือ เพื่อสร้างความมั่นใจก่อนปิดการขาย
+ * ยุทธศาสตร์: เน้น "ผลลัพธ์" ที่เจ้าของธุรกิจต้องการเห็นจริง
  */
-const TrustBadge = ({ variant = "horizontal", className }: TrustBadgeProps) => {
+export default function TrustBadge() {
+  const standards = [
+    {
+      icon: <ShieldCheck size={20} />,
+      label: "System Safety",
+      value: "Standard Grade",
+    },
+    {
+      icon: <Zap size={20} />,
+      label: "User Experience",
+      value: "High Speed Score",
+    },
+    {
+      icon: <BarChart3 size={20} />,
+      label: "Market Visibility",
+      value: "SEO Friendly",
+    },
+    {
+      icon: <Globe2 size={20} />,
+      label: "Modern Systems",
+      value: "Latest Standard",
+    },
+  ]
+
   return (
-    <div
-      className={cn(
-        "flex flex-wrap items-center justify-center gap-4 md:gap-8",
-        variant === "grid" ? "grid grid-cols-2 md:grid-cols-4" : "",
-        className
-      )}
-    >
-      {trustItems.map((item, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 }}
-          className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white/50 p-3 pr-6 backdrop-blur-sm transition-all duration-500 hover:border-emerald-500/20 hover:shadow-xl hover:shadow-emerald-500/5"
-        >
-          {/* ส่วนบรรจุไอคอนพร้อมเอฟเฟกต์ตอบสนองการใช้งาน */}
-          <div
-            className={cn(
-              "flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:bg-[#0F172A] group-hover:text-white",
-              item.bg,
-              item.color
-            )}
-          >
-            <item.icon className="h-5 w-5" />
-          </div>
-
-          {/* ส่วนแสดงข้อความที่เน้นความชัดเจนของข้อมูล */}
-          <div className="flex flex-col">
-            <span className="font-prompt text-[11px] font-black tracking-wider text-[#0F172A] uppercase">
-              {item.label}
-            </span>
-            <span className="font-anuphan text-[9px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-              {item.subLabel}
-            </span>
-          </div>
-        </motion.div>
-      ))}
-
-      {/* เส้นแบ่งเขตข้อมูลเชิงโครงสร้างระบบ */}
-      <div
-        className="mx-4 hidden h-10 w-px bg-slate-100 lg:block"
-        aria-hidden="true"
-      />
-
-      <div className="flex items-center gap-4">
-        {/* ส่วนแสดงสัญลักษณ์ผู้ใช้งานกลุ่มเป้าหมาย (Industrial Partners) */}
-        <div className="flex -space-x-3">
-          {[1, 2, 3].map((i) => (
+    <div className="w-full border-y border-slate-100 bg-white py-16">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:gap-16">
+          {standards.map((item, idx) => (
             <div
-              key={i}
-              className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white bg-slate-100 shadow-sm"
+              key={idx}
+              className="group flex flex-col items-center justify-center gap-5 text-center md:flex-row md:items-start md:text-left"
             >
-              <div className="h-full w-full animate-pulse rounded-full bg-slate-200" />
+              {/* พิกัดไอคอน: ปรับให้ดูภูมิฐานและเป็นมิตรด้วยมนสัมผัส (Soft Radius) */}
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-all duration-500 group-hover:bg-emerald-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-emerald-500/20">
+                {item.icon}
+              </div>
+
+              <div className="space-y-1.5">
+                {/* ฉลากกำกับ: ใช้ Font ตัวเล็กเน้นความเรียบหรู */}
+                <div className="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase italic">
+                  {item.label}
+                </div>
+                {/* ค่าที่แสดงผล: เน้นความชัดเจนและตรงไปตรงมา */}
+                <div className="text-lg font-black tracking-tight text-slate-900 italic transition-colors group-hover:text-emerald-600 md:text-xl">
+                  {item.value}
+                </div>
+              </div>
             </div>
           ))}
-        </div>
-
-        <div className="flex flex-col">
-          <span className="font-prompt text-[10px] font-black tracking-tighter text-emerald-500 uppercase italic">
-            Trusted by SME and Factories
-          </span>
-          <span className="font-anuphan text-[8px] font-bold tracking-widest text-slate-400 uppercase">
-            Verified Specialist V. 2026
-          </span>
         </div>
       </div>
     </div>
   )
 }
-
-export default TrustBadge

@@ -7,7 +7,6 @@ import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
-import { constructMetadata } from "@/app/metadata"
 import { viewport as defaultViewport } from "./viewport"
 
 import { JsonLd } from "@/components/seo/JsonLd"
@@ -16,8 +15,8 @@ import { Toaster } from "@/components/ui/sonner"
 import "@/app/globals.css"
 
 /**
- * พิกัดฟอนต์สำหรับหัวข้อ: IBM Plex Sans Thai
- * เน้นความมั่นคงและเป็นทางการของระบบงานวิศวกรรมซอฟต์แวร์
+ * พิกัดฟอนต์หัวข้อ: IBM Plex Sans Thai
+ * ให้ความรู้สึกที่ยั่งยืนและเป็นระเบียบ เข้าถึงกลุ่มเจ้าของธุรกิจได้ดี
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -27,8 +26,8 @@ const fontHeading = IBM_Plex_Sans_Thai({
 })
 
 /**
- * พิกัดฟอนต์สำหรับเนื้อหา: Anuphan
- * เน้นการอ่านข้อมูลบนหน้าจอที่ไหลลื่นและทันสมัย
+ * พิกัดฟอนต์เนื้อหา: Anuphan
+ * เน้นการอ่านที่สบายตาบนหน้าจอ ทันสมัย และดูเป็นมิตรต่อผู้ใช้งาน
  */
 const fontBody = Anuphan({
   subsets: ["thai", "latin"],
@@ -38,20 +37,61 @@ const fontBody = Anuphan({
 })
 
 /**
- * การประกาศพิกัด SEO ประจำเว็บไซต์ (Construct Metadata)
+ * จัดการพิกัด SEO ประจำเว็บไซต์ (Metadata)
+ * วางรากฐานเพื่อรองรับการเติบโตผ่าน Organic Search
  */
-export const metadata: Metadata = constructMetadata({
-  title: siteConfig.project.title,
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.project.title,
+    template: `%s | ${siteConfig.project.name}`,
+  },
   description: siteConfig.project.description,
-  image: siteConfig.project.ogImage,
-})
+  metadataBase: new URL(siteConfig.project.url),
+  keywords: siteConfig.keywords.list,
+  authors: [{ name: "อลงกรณ์ ยมเกิด", url: "https://me.aemdevweb.com" }],
+  creator: "นายเอ็มซ่ามากส์",
+  openGraph: {
+    title: siteConfig.project.title,
+    description: siteConfig.project.description,
+    url: siteConfig.project.url,
+    siteName: siteConfig.project.name,
+    images: [
+      {
+        url: siteConfig.project.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.project.title,
+      },
+    ],
+    locale: "th_TH",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.project.title,
+    description: siteConfig.project.description,
+    images: [siteConfig.project.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+}
 
 export const viewport: Viewport = defaultViewport
 
-/**
- * Root Layout - โครงสร้างหลักของอาณาจักร AEMDEVWEB
- * จัดการพิกัดฟอนต์, ระบบแจ้งเตือน และโครงสร้างข้อมูลระดับ Global
- */
 export default function RootLayout({
   children,
 }: {
@@ -69,27 +109,22 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* ฉีดโครงสร้างข้อมูล WebSite เพื่อให้ Search AI เข้าใจความสัมพันธ์ของแบรนด์และผู้สร้าง */}
+        {/* ฉีดข้อมูลโครงสร้างเพื่อให้ระบบค้นหาเข้าใจบริบทของธุรกิจและตัวตนผู้ดูแลระบบ */}
         <JsonLd
           type="WebSite"
           data={{
             name: siteConfig.project.name,
             alternateName: siteConfig.project.nameTH,
             url: siteConfig.project.url,
-            // ระบุพิกัดเจ้าของระบบเพื่อสร้าง Trust ในหน้า Google
             publisher: {
-              "@type": "Organization",
-              name: siteConfig.company.fullName,
-              logo: {
-                "@type": "ImageObject",
-                url: `${siteConfig.project.url}/images/logo-circuit.png`,
-              },
+              "@type": "Person",
+              name: "อลงกรณ์ ยมเกิด",
+              url: siteConfig.project.url,
               sameAs: [
-                siteConfig.contact.facebook,
-                siteConfig.contact.linkedin,
+                siteConfig.contact?.facebook,
+                siteConfig.contact?.linkedin,
               ].filter(Boolean),
             },
-            // เพิ่มระบบค้นหาภายใน (Sitelinks Searchbox)
             potentialAction: {
               "@type": "SearchAction",
               target: `${siteConfig.project.url}/blog?q={search_term_string}`,
@@ -100,27 +135,23 @@ export default function RootLayout({
       </head>
       <body
         className={cn(
-          "font-body min-h-screen bg-white text-slate-800",
-          "selection:bg-emerald-100 selection:text-emerald-900",
+          "font-body min-h-screen bg-white text-slate-900",
+          "selection:bg-emerald-500/10 selection:text-emerald-900",
           "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* แถบสถานะการโหลดพิกัดสีเขียวมรกต (Emerald-500) */}
+        {/* แถบสถานะการโหลดสีเขียวมรกต เพื่อความภูมิฐานตามสไตล์ Professional Freelance */}
         <NextTopLoader
-          color="#10B981"
-          height={3}
+          color="#059669"
+          height={2}
           showSpinner={false}
-          easing="ease-in-out"
-          speed={300}
-          shadow="0 0 10px #10B981,0 0 5px #10B981"
+          easing="ease"
+          speed={400}
         />
 
-        <div className="relative flex min-h-screen flex-col">
-          {/* ส่วนเนื้อหาหลักที่รองรับการเรนเดอร์ Landing Page และระบบงานทั้งหมด */}
-          <main className="flex-1">{children}</main>
-        </div>
+        <div className="relative flex min-h-screen flex-col">{children}</div>
 
-        {/* ระบบแจ้งเตือนผลลัพธ์ผ่านอินเทอร์เฟซ (Sonner) */}
+        {/* ระบบแจ้งเตือนผลลัพธ์ที่ใช้งานง่ายและไม่รบกวนสายตา */}
         <Toaster richColors closeButton position="top-center" />
       </body>
     </html>

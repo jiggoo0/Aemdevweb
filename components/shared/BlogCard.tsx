@@ -3,125 +3,76 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, ChevronRight } from "lucide-react"
-
-import { cn } from "@/lib/utils"
+import { Calendar, ArrowRight } from "lucide-react"
+import { getBlogPostsMetadata } from "@/lib/blog"
 
 /**
- * BlogCard - แหล่งรวบรวมเทคนิคและพิกัดงานสำหรับกลุ่มธุรกิจ SME และโรงงาน
- * ออกแบบมาเพื่อสะท้อนความประณีตและการจัดการเนื้อหาเชิงระบบ
+ * BlogCard: ระบบจัดแสดงพิกัดคลังความรู้เชิงธุรกิจ
+ * แนวทาง: นำเสนอเนื้อหาที่ช่วยสนับสนุน Organic Search และสร้างความเชื่อถือแก่ SME
+ * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
+export default function BlogCard() {
+  const posts = getBlogPostsMetadata()
 
-interface BlogCardProps {
-  slug: string
-  title: string
-  excerpt: string
-  date: string
-  thumbnail: string
-  tags?: string[]
-  className?: string
-}
-
-export default function BlogCard({
-  slug,
-  title,
-  excerpt,
-  date,
-  thumbnail,
-  tags = [],
-  className,
-}: BlogCardProps) {
-  // จัดการชื่อรูปภาพเพื่อรองรับระบบค้นหาและบอทเก็บข้อมูล
-  const imageAlt =
-    title && title.trim() !== ""
-      ? title
-      : "เทคนิคการจัดการระบบงานโดย นายเอ็มซ่ามากส์"
-
-  // ปรับพิกัดวันที่ให้เป็นรูปแบบที่อ่านง่ายสำหรับกลุ่มธุรกิจไทย
-  const formattedDate = date
-    ? new Date(date).toLocaleDateString("th-TH", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : "เตรียมข้อมูล"
+  if (!posts || posts.length === 0) return null
 
   return (
-    <Link
-      href={`/blog/${slug}`}
-      className={cn(
-        "group flex flex-col overflow-hidden rounded-[2.5rem] border border-slate-100 bg-white transition-all duration-500",
-        "hover:-translate-y-2 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/5",
-        className
-      )}
-    >
-      {/* ส่วนแสดงภาพปก: ล็อคพิกัดการโหลดภาพเพื่อความรวดเร็วตามมาตรฐานปี 2026 */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
-        <Image
-          src={thumbnail || "/images/blog/placeholder.webp"}
-          alt={imageAlt}
-          fill
-          className="object-cover transition-transform duration-1000 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-
-        {/* ชั้นกรองแสงเพิ่มมิติความประณีตให้พิกัดภาพ */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-        {/* ป้ายระบุหมวดหมู่พิกัดงาน */}
-        {tags.length > 0 && (
-          <div className="absolute top-6 left-6 z-10">
-            <span className="font-heading rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-[9px] font-black tracking-[0.25em] text-white uppercase shadow-xl backdrop-blur-md">
-              {tags[0]}
-            </span>
-          </div>
-        )}
-      </div>
-
-      {/* ส่วนข้อมูลเนื้อหาและตัวอักษร */}
-      <div className="flex flex-1 flex-col p-8 lg:p-10">
-        {/* บันทึกพิกัดเวลาและประเภทเนื้อหา */}
-        <div className="mb-6 flex items-center gap-4">
-          <div className="font-heading flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-emerald-600 uppercase italic">
-            <Calendar size={12} className="text-emerald-500" />
-            {formattedDate}
-          </div>
-          <div
-            className="h-1 w-1 rounded-full bg-slate-200"
-            aria-hidden="true"
-          />
-          <span className="font-heading text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase italic">
-            Specialist Perspectives
-          </span>
-        </div>
-
-        {/* หัวข้อบทความ: ใช้ font-heading เพื่อความหนักแน่น */}
-        <h3 className="font-heading mb-5 line-clamp-2 text-2xl leading-[1.15] font-black tracking-tighter text-slate-950 uppercase italic transition-colors duration-300 group-hover:text-emerald-500">
-          {title || "กำลังเตรียมพิกัดข้อมูล..."}
-        </h3>
-
-        {/* เนื้อหาเกริ่นนำ: ใช้ font-body เพื่อให้อ่านพิกัดข้อมูลได้ไหลลื่น */}
-        <p className="font-body mb-10 line-clamp-3 flex-1 text-[15px] leading-relaxed font-bold text-slate-500 transition-colors group-hover:text-slate-600">
-          {excerpt ||
-            "เตรียมพิกัดข้อมูลเชิงเทคนิคที่จะช่วยให้ระบบงานของน้องเติบโตด้วยการจัดการที่ถูกต้องไว้ให้แล้วครับ"}
-        </p>
-
-        {/* ส่วนท้ายเพื่อดึงดูดการเข้าถึงเนื้อหาฉบับเต็ม */}
-        <div className="mt-auto flex items-center justify-between border-t border-slate-50 pt-8">
-          <div className="flex items-center gap-2">
-            <span className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase transition-all duration-300 group-hover:tracking-[0.5em] group-hover:text-slate-950">
-              ตรวจสอบเนื้อหา
-            </span>
-          </div>
-
-          <div className="flex size-11 items-center justify-center rounded-2xl bg-slate-50 text-slate-950 shadow-inner transition-all duration-500 group-hover:rotate-[12deg] group-hover:bg-slate-950 group-hover:text-white group-hover:shadow-xl group-hover:shadow-slate-900/20">
-            <ChevronRight
-              size={20}
-              className="transition-transform duration-300 group-hover:translate-x-0.5"
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {posts.map((post) => (
+        <article
+          key={post.slug}
+          className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-slate-100 bg-white transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/5"
+        >
+          {/* 1. Visual Layer: พิกัดภาพหน้าปกบทความ (LCP Optimized) */}
+          <Link
+            href={`/blog/${post.slug}`}
+            className="relative aspect-video w-full overflow-hidden bg-slate-100"
+          >
+            <Image
+              src={post.thumbnail || "/images/blog/placeholder.webp"}
+              // ระบุพิกัดข้อความ Alt เพื่อรองรับการทำ technical SEO
+              alt={post.title || "บทความความรู้จาก AEMDEVWEB"}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
+            <div className="absolute top-4 left-4">
+              <span className="rounded-full bg-white/90 px-4 py-1.5 text-[9px] font-black tracking-widest text-slate-950 uppercase italic shadow-sm backdrop-blur-md">
+                {post.category || "Insight"}
+              </span>
+            </div>
+          </Link>
+
+          {/* 2. Content Layer: ส่วนข้อมูลเนื้อหาและหัวข้อ */}
+          <div className="flex flex-1 flex-col p-8">
+            <div className="mb-4 flex items-center gap-3 text-[10px] font-bold tracking-widest text-slate-400 uppercase italic">
+              <Calendar size={12} className="text-emerald-500" />
+              {post.date}
+            </div>
+
+            <Link href={`/blog/${post.slug}`} className="flex-1">
+              <h3 className="mb-4 text-xl leading-tight font-black tracking-tighter text-slate-950 uppercase italic transition-colors group-hover:text-emerald-600">
+                {post.title || "กำลังจัดเตรียมพิกัดหัวข้อ"}
+              </h3>
+              <p className="font-body mb-6 line-clamp-2 text-sm leading-relaxed font-medium text-slate-500">
+                {post.description ||
+                  "อ่านพิกัดเนื้อหาเชิงลึกเพื่อการเติบโตของธุรกิจได้ที่นี่"}
+              </p>
+            </Link>
+
+            {/* 3. Footer Layer: ปุ่มนำทางไปยังพิกัดเนื้อหาฉบับเต็ม */}
+            <div className="mt-auto border-t border-slate-50 pt-6">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="inline-flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-slate-950 uppercase italic transition-all hover:gap-4 hover:text-emerald-600"
+              >
+                อ่านพิกัดเนื้อหาฉบับเต็ม
+                <ArrowRight size={14} />
+              </Link>
+            </div>
           </div>
-        </div>
-      </div>
-    </Link>
+        </article>
+      ))}
+    </div>
   )
 }

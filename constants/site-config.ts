@@ -4,77 +4,81 @@ import { SiteConfig } from "@/types"
 
 /**
  * ศูนย์กลางการตั้งค่าเว็บไซต์ (Central Site Configuration)
- * ควบคุมพิกัดข้อมูล SEO, Branding และช่องทางการติดต่อทั้งหมดของ AEMDEVWEB
+ * ควบคุมพิกัดข้อมูลภาพลักษณ์ และระบบการติดต่อทั้งหมดของ AEMDEVWEB
+ * ผู้ดูแลระบบ: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
+ * แนวทาง: เน้นภาษาที่เป็นกันเอง เข้าใจง่าย และแสดงผลลัพธ์ที่ชัดเจน
  */
 export const siteConfig: SiteConfig = {
-  // 1. ข้อมูลนิติบุคคลและหน่วยงาน (Corporate Identity)
+  // 1. ข้อมูลภาพลักษณ์องค์กร (Professional Identity)
   company: {
     name: "AEMDEVWEB",
     fullName: "AEMDEVWEB Co., Ltd.",
     email: "me@aemdevweb.com",
-    address: "Technical SEO Lab, Thailand",
+    address: "Bangkok, Thailand",
   },
 
-  // 2. ข้อมูลโครงการและพิกัดตัวตนเว็บไซต์ (Search Engine Optimization)
+  // 2. พิกัดตัวตนบนโลกออนไลน์ (Digital Presence & Content Strategy)
   project: {
     name: "AEMDEVWEB",
     shortName: "AEM",
     nameTH: "เอ็ม-เดฟ-เว็บ",
-    // SEO Strategy: ใช้ "รับทำ Landing Page" นำหน้าเพื่อดึง Traffic และตามด้วย "วางโครงสร้าง" เพื่อสร้างระดับแบรนด์
-    title:
-      "รับทำ Landing Page วางโครงสร้างความเร็วสูงเพื่อเพิ่มยอดขายสำหรับ SME",
-    slogan: "โครงสร้างชัด โหลดไว มาตรฐาน Technical SEO ระดับสากล",
+    // ยุทธศาสตร์: เน้นผลงาน Landing Page SME และความเร็วที่เป็นจุดขายหลัก
+    title: "บริการทำเว็บไซต์สำหรับธุรกิจ และ Landing Page SME คุณภาพสูง",
+    slogan: "โครงสร้างชัด โหลดไว พร้อมรองรับการเติบโตของคุณ",
     description:
-      "บริการรับทำ Landing Page และวางระบบโครงสร้างเว็บไซต์สำหรับ SME และกลุ่มโรงงานที่เน้นความเร็วสูงสุด (LCP < 0.8s) วางพิกัดงานเทคนิคโดย นายเอ็มซ่ามากส์ เพื่อเพิ่มประสิทธิภาพการปิดการขายและอันดับบน Google",
+      "บริการออกแบบและวางโครงสร้างเว็บไซต์สำหรับธุรกิจ โดยเฉพาะกลุ่ม SME และ B2B ที่เน้นความเร็วเป็นพิเศษ (LCP < 0.8s) พัฒนาโดย นายเอ็มซ่ามากส์ เพื่อช่วยให้ธุรกิจเดินหน้าได้อย่างต่อเนื่อง พร้อมรองรับการทำ technical SEO เพื่อติดอันดับบนหน้าแรกของ Google ผ่านระบบ Organic Search",
     url: "https://www.aemdevweb.com",
     ogImage: "https://www.aemdevweb.com/og-image.png",
   },
 
-  // 3. ข้อมูลผู้เชี่ยวชาญ (Specialist Identity)
+  // 3. ข้อมูลผู้เชี่ยวชาญ (Specialist Profile)
   expert: {
     name: "นายเอ็มซ่ามากส์",
-    role: "Technical SEO Specialist & Lead Solution Architect",
+    realName: "อลงกรณ์ ยมเกิด",
+    role: "Digital Marketing Strategy & Lead Web Consultant",
   },
 
-  // 4. ข้อมูลสถิติยืนยันผลงาน (Performance Statistics)
+  // 4. สถิติที่พิสูจน์ผลลัพธ์ได้จริง (Proven Results)
   stats: [
-    { label: "ธุรกิจที่ไว้วางใจระบบ", value: "50+", suffix: "Project" },
-    { label: "ความเร็วเฉลี่ย (LCP)", value: "< 0.8", suffix: "วินาที" },
-    { label: "คะแนนประสิทธิภาพภาพรวม", value: "95-100", suffix: "Score" },
+    { label: "ธุรกิจที่ไว้วางใจ", value: "50+", suffix: "โครงการ" },
+    { label: "ความเร็วเฉลี่ยในการเปิดเว็บ", value: "< 0.8", suffix: "วินาที" },
+    { label: "คะแนนประสิทธิภาพระบบ", value: "95-100", suffix: "คะแนน" },
   ],
 
-  // 5. ผลกระทบเชิงธุรกิจ (Business Value Proposition)
+  // 5. คุณค่าที่ส่งมอบให้ธุรกิจ (Business Value Proposition)
   businessImpact: {
-    speed: "ลดอัตราการสูญเสียลูกค้า (Bounce Rate) ด้วยความเร็วระดับวินาที",
-    seo: "โครงสร้างข้อมูลที่โปรแกรมค้นหาและ AI เข้าใจตัวตนธุรกิจได้แม่นยำ",
+    speed: "ลดโอกาสการเสียลูกค้าด้วยความเร็วที่เหนือกว่ามาตรฐานทั่วไป",
+    seo: "วางโครงสร้างเว็บไซต์ให้ Google และ AI เข้าใจธุรกิจของคุณได้ชัดเจนที่สุด",
     conversion:
-      "เปลี่ยนผู้เข้าชมเป็นรายชื่อผู้ติดต่อด้วยกลยุทธ์ Information Hierarchy",
+      "เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยลำดับการนำเสนอที่เป็นระบบและน่าเชื่อถือ",
   },
 
-  // 6. พิกัดคำค้นหา (Keywords & Search Entities)
+  // 6. พิกัดคำที่ลูกค้าใช้ค้นหา (Search Intent Keywords)
   keywords: {
     list: [
-      "รับทำ Landing Page",
-      "รับทำเว็บไซต์โรงงานอุตสาหกรรม",
-      "วางโครงสร้าง Sales Page",
-      "Technical SEO Consultant",
+      "บริการทำเว็บไซต์สำหรับธุรกิจ",
+      "Landing Page SME",
+      "technical SEO",
+      "โครงสร้างเว็บไซต์",
+      "Organic Search",
     ],
-    all: "รับทำ Landing Page, รับทำเว็บไซต์, Technical SEO, Next.js, นายเอ็มซ่ามากส์, AEMDEVWEB",
+    all: "รับทำ Landing Page, รับทำเว็บไซต์, การตลาดออนไลน์, Next.js, นายเอ็มซ่ามากส์, อลงกรณ์ ยมเกิด, AEMDEVWEB, Unlink-th",
     core: [
       "Performance Optimization",
-      "Organic Search Visibility",
-      "User Experience Engineering",
+      "Search Visibility",
+      "User Experience Strategy",
     ],
     tech: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
     brand: [
       "AEMDEVWEB",
-      "อลงกรณ์ ยมเกิด",
       "นายเอ็มซ่ามากส์",
+      "อลงกรณ์ ยมเกิด",
       "Alongkorl Yomkerd",
+      "Unlink-th",
     ],
   },
 
-  // 7. พิกัดเชื่อมต่อโซเชียล (Social Integration - Legacy Support)
+  // 7. ช่องทางเชื่อมต่อโซเชียล (Social Integration)
   links: {
     line: "https://lin.ee/6lgJox0",
     lineId: "@127cnthn",
@@ -83,7 +87,7 @@ export const siteConfig: SiteConfig = {
     personal: "https://me.aemdevweb.com",
   },
 
-  // 8. ระบบจัดการข้อมูลการติดต่อ (Primary Communication)
+  // 8. พิกัดการติดต่อสื่อสาร (Contact Hub)
   contact: {
     email: "me@aemdevweb.com",
     line: "https://lin.ee/6lgJox0",
@@ -94,18 +98,18 @@ export const siteConfig: SiteConfig = {
     phone: "0xx-xxx-xxxx",
   },
 
-  // 9. ข้อความเชิญชวน (Calls to Action)
+  // 9. ข้อความนำทางเพื่อปิดการขาย (Conversion Drivers)
   cta: {
-    main: "วิเคราะห์โครงสร้างโปรเจกต์",
-    secondary: "ชมผลงานทางเทคนิค",
-    pricing: "แพ็กเกจบริการ",
+    main: "ประเมินโครงการของคุณ",
+    secondary: "เปิดชมผลงานตัวอย่าง",
+    pricing: "เลือกรูปแบบที่เหมาะสม",
   },
 
-  // 10. มาตรฐานงานระบบที่ส่งมอบ (Engineering Standards)
+  // 10. มาตรฐานงานที่ส่งมอบ (Service Standards)
   standards: {
     performance: 98,
     lcp: 0.8,
-    security: "Enterprise-grade SSL & Data Privacy Layer",
-    aiReadiness: "Advanced Schema Markup for Search AI 2026",
+    security: "ระบบรักษาความปลอดภัยข้อมูลระดับมาตรฐานสากล",
+    aiReadiness: "รองรับการประมวลผลของ Search AI และ Organic Search ปี 2026",
   },
 }

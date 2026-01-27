@@ -50,6 +50,7 @@ export interface SiteConfig {
   expert: {
     name: string
     role: string
+    realName: string // พิกัดข้อมูลสำหรับแสดงชื่อจริงของผู้ดูแลระบบ
   }
   stats: {
     label: string
@@ -143,8 +144,7 @@ export interface ServiceItem {
   priceValue: number
   priceDisplay?: string
   category: "Starter" | "SME" | "Corporate" | "Industrial" | string
-  // [FIXED]: ล้าง Warning TS143:28 โดยใช้ Union Type ของชื่อไอคอนร่วมกับ string
-  // เพื่อให้ระบบยังคงความยืดหยุ่นแต่ไม่ติดปัญหา any
+  // พิกัดสำหรับจัดการไอคอน: รองรับชื่อมาตรฐานและค่า string ทั่วไป
   icon?: ServiceIconName | (string & {})
   features: string[]
   highlight?: boolean
@@ -160,9 +160,6 @@ export interface ShowcaseStats {
   value: string
 }
 
-/**
- * CaseStudyFrontmatter - พิกัดข้อมูลเคสความสำเร็จ
- */
 export interface CaseStudyFrontmatter {
   title: string
   client: string
@@ -188,6 +185,19 @@ export interface CaseStudyItem {
 /* -------------------------------------------------------------------------- */
 /* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Marketplace)                           */
 /* -------------------------------------------------------------------------- */
+
+/**
+ * SEOContract - พิกัดสัญญาข้อมูลสำหรับการจัดการ Technical SEO
+ * ช่วยให้ระบบตรวจสอบความถูกต้องของข้อมูลในระนาบพรีวิวได้แม่นยำ
+ */
+export interface SEOContract {
+  seo: {
+    title: string
+    description: string
+    keywords: string[]
+    ogImage: string
+  }
+}
 
 export interface TemplateItem {
   id: string

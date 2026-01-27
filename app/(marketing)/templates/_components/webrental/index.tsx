@@ -10,32 +10,26 @@ import { RentalPricing } from "./_parts/RentalPricing"
 import { RentalFooter } from "./_parts/RentalFooter"
 
 /**
- * Web Rental Platform Template
- * หน้าขายบริการเช่าเว็บไซต์สำเร็จรูป เน้นความคุ้มค่าและประสิทธิภาพ
+ * WebRentalTemplate - งานระบบเช่าเว็บไซต์รายเดือน
+ * จัดการพิกัด Layout ให้รองรับเมนูแบบ Fixed และแก้ปัญหาการกดเมนูไม่ได้
  */
 export const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({
   data,
 }) => {
   return (
-    <div className="web-rental-template bg-white text-left font-sans text-slate-900 selection:bg-indigo-100">
-      {/* ส่วนนำทางหลัก */}
+    <div className="web-rental-template font-anuphan relative z-0 bg-white text-left selection:bg-indigo-100">
+      {/* 1. วางพิกัดเมนูนำทาง (Fixed) */}
       <RentalNavbar data={data.navigation} />
 
-      <main>
-        {/* ส่วนพาดหัวและราคาเริ่มต้น */}
+      {/* 2. เนื้อหาหลัก: ใส่ pt-24 เพื่อไม่ให้ Navbar ไปทับพิกัดการคลิกของ Hero */}
+      <main className="relative pt-24 lg:pt-32">
         <RentalHero data={data.hero} />
-
-        {/* ส่วนจุดเด่นที่เหนือกว่า Wix/LnwPro */}
         <RentalFeatures data={data.features} />
-
-        {/* ส่วนโชว์เทมเพลตในระบบ */}
         <RentalShowcase data={data.showcase} />
-
-        {/* ส่วนตารางราคาเช่ารายเดือน */}
         <RentalPricing data={data.pricing} />
       </main>
 
-      {/* ส่วนท้ายและข้อมูลติดต่อ */}
+      {/* 3. ส่วนท้ายระบบงาน */}
       <RentalFooter data={data.footer} />
     </div>
   )

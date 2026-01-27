@@ -10,25 +10,27 @@ interface TemplateFilterProps {
   /** พิกัดหมวดหมู่ที่กำลังแสดงผล (Current State) */
   activeCategory: TemplateCategory | string
 
-  /** * [FIXED]: ตัดชื่อ 'arg' ออก เหลือเพียงพิกัด Type อย่างเดียว
-   * เพื่อจัดการ Error no-unused-vars 14:22 ให้หายขาด 100%
+  /** * พิกัดฟังก์ชันสำหรับเปลี่ยนหมวดหมู่ข้อมูล
+   * จัดการล้างตัวแปรที่ไม่ได้ใช้งานเพื่อให้โค้ดสะอาดตามมาตรฐาน
    */
-  onCategoryChange: (category: TemplateCategory | string) => void
+  onCategoryChange: (value: string) => void
 }
 
-/** * นิยามพิกัดหมวดหมู่ที่ระบบรองรับ
- * ออกแบบมาเพื่อกลุ่มธุรกิจ SME และโรงงานอุตสาหกรรมโดยเฉพาะ
+/** * สารบบหมวดหมู่ที่ระบบงานรองรับ
+ * คัดเลือกกลุ่มธุรกิจ SME และโรงงานอุตสาหกรรมที่เป็นกลุ่มเป้าหมายหลักของ นายเอ็มซ่ามากส์
  */
 const categories = [
-  { label: "ทั้งหมด", value: "all" },
-  { label: "โรงแรม & รีสอร์ท", value: "hotel" },
-  { label: "งานบริการ", value: "service" },
-  { label: "การตลาด", value: "marketing" },
-  { label: "อีคอมเมิร์ซ", value: "ecommerce" },
+  { label: "ALL STRUCTURES", value: "all" },
+  { label: "HOTEL & RESORT", value: "hotel" },
+  { label: "SERVICE BUSINESS", value: "service" },
+  { label: "MARKETING ENGINE", value: "marketing" },
+  { label: "E-COMMERCE", value: "ecommerce" },
 ]
 
 /**
- * TemplateFilter - ระบบควบคุมพิกัดการคัดกรอง (Filter Navigation)
+ * TemplateFilter - ระบบควบคุมพิกัดการคัดกรองงานระบบ
+ * แนวทาง: เน้นความเรียบง่าย เข้าถึงพิกัดข้อมูลได้ไว และเป็นมิตรต่อผู้ใช้งาน
+ * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
 export const TemplateFilter: React.FC<TemplateFilterProps> = ({
   activeCategory,
@@ -36,8 +38,8 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
 }) => {
   return (
     <nav
-      aria-label="ตัวกรองประเภทธุรกิจ"
-      className="flex flex-wrap items-center justify-center gap-2 py-12 md:gap-4"
+      aria-label="ตัวกรองประเภทธุรกิจสำหรับ SME"
+      className="flex flex-wrap items-center justify-center gap-3 py-12 md:gap-4"
     >
       {categories.map((cat) => {
         const isActive = activeCategory === cat.value
@@ -46,22 +48,23 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
           <button
             key={cat.value}
             onClick={() => onCategoryChange(cat.value)}
-            // จัดการพิกัดการเข้าถึงเพื่อคะแนน Accessibility
-            aria-current={isActive ? "page" : undefined}
+            // เพิ่มความกริบด้านการเข้าถึงด้วยพิกัด ARIA labels
+            aria-pressed={isActive}
             className={cn(
-              "font-heading relative overflow-hidden rounded-full px-8 py-3 text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-500",
+              "relative overflow-hidden rounded-full px-8 py-4 text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-500",
+              "ring-offset-2 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none",
               isActive
-                ? "bg-slate-950 text-white shadow-2xl ring-2 shadow-slate-200 ring-slate-950 ring-offset-2"
+                ? "bg-slate-950 text-white shadow-xl ring-2 shadow-slate-200 ring-slate-950"
                 : "border border-slate-100 bg-white text-slate-400 hover:border-emerald-500/30 hover:bg-slate-50 hover:text-slate-950 active:scale-95"
             )}
           >
-            {/* 1. เลเยอร์ข้อความ (Typography Layer) */}
-            <span className="relative z-10">{cat.label}</span>
+            {/* เลเยอร์ข้อความพิกัดหมวดหมู่ */}
+            <span className="relative z-10 italic">{cat.label}</span>
 
-            {/* 2. เอฟเฟกต์แสงเงาเมื่อ Active (Infrastructure Glow) */}
+            {/* พิกัดเอฟเฟกต์แสงจางๆ เมื่อถูกเลือกใช้งาน */}
             {isActive && (
               <div
-                className="absolute inset-0 z-0 bg-gradient-to-tr from-emerald-500/10 to-transparent"
+                className="absolute inset-0 z-0 bg-gradient-to-tr from-emerald-500/20 to-transparent opacity-50"
                 aria-hidden="true"
               />
             )}

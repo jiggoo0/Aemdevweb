@@ -1,11 +1,12 @@
 /** @format */
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * 🔲 Card: Luminous Glass Edition
- * ยกระดับการจัดกลุ่มคอนเทนต์ด้วยระบบแสง Aurora และพื้นผิวกระจก
- * ปรับปรุง: ใช้ Glass-card style แทน solid background เพื่อความสว่างพรีเมียม
+ * Card: Luminous Glass Edition
+ * พิกัด: ยกระดับการจัดกลุ่มคอนเทนต์ด้วยระบบแสง Aurora และพื้นผิวกระจก
+ * ยุทธศาสตร์: ใช้ Glass-card style เพื่อสร้างมิติความพรีเมียมและความโปร่งสบาย (Breathability)
  */
 
 const Card = React.forwardRef<
@@ -15,8 +16,8 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "glass-card relative overflow-hidden transition-all duration-500",
-      "hover:border-aurora-cyan/30 hover:shadow-luminous",
+      "relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500",
+      "hover:border-aurora-cyan/30 hover:shadow-aurora-glow hover:bg-white/10",
       className
     )}
     {...props}
@@ -43,7 +44,7 @@ const CardTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "font-prompt group-hover:text-aurora-cyan text-2xl leading-none font-black tracking-tighter text-white uppercase transition-colors md:text-3xl",
+      "font-prompt group-hover:text-aurora-cyan text-2xl font-black tracking-tighter text-white uppercase transition-colors md:text-3xl",
       className
     )}
     {...props}
@@ -85,7 +86,7 @@ const CardFooter = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "mt-4 flex items-center border-t border-white/5 p-8 pt-0 md:p-10",
+      "flex items-center border-t border-white/5 p-8 md:p-10",
       className
     )}
     {...props}

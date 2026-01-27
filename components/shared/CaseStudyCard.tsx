@@ -1,140 +1,88 @@
 /** @format */
 
-"use client"
-
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { motion } from "framer-motion"
-import {
-  ArrowUpRight,
-  ShieldCheck,
-  Zap,
-  ImageOff,
-  BarChart3,
-} from "lucide-react"
+import { ArrowRight, BarChart3 } from "lucide-react"
 
 /**
- * CaseStudyCardProps: ปรับปรุงพิกัดประเภทข้อมูล
- * แก้ไข: ให้ description เป็น optional (?) หรือยอมรับค่าว่าง เพื่อป้องกัน Error TS2769
+ * CaseStudyCard - ส่วนจัดแสดงพิกัดผลงานจริง
+ * แนวทางการวางพิกัด: ดันตัวเลขผลลัพธ์ (Result) ให้โดดเด่นเพื่อสร้างแรงดึงดูดแก่กลุ่ม SME
+ * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
-interface CaseStudyCardProps {
-  title: string
-  description?: string // <--- ปรับเป็น optional เพื่อความยืดหยุ่นของระบบพิกัดข้อมูล
-  image?: string
+export const CaseStudyCard = ({
+  slug,
+  title,
+  description,
+  image,
+  industry,
+  result,
+}: {
   slug: string
+  title: string
+  description: string
+  image: string
   industry: string
   result?: string
-  index?: number
-}
-
-const CaseStudyCard = ({
-  title,
-  description = "", // <--- ใส่ Default Value เพื่อป้องกันพิกัดข้อมูลว่างเปล่า
-  image,
-  slug,
-  industry,
-  result = "Performance 100",
-  index = 0,
-}: CaseStudyCardProps) => {
-  // การจัดการพิกัดรูปภาพสำรองเพื่อป้องกันความผิดพลาดขณะเรนเดอร์ระบบ
-  const imageSrc =
-    image && image.trim() !== "" ? image : "/images/showcase/placeholder.webp"
-
-  const safeAlt =
-    title && title.trim() !== ""
-      ? title
-      : `ผลงานในกลุ่ม ${industry || "ธุรกิจทั่วไป"}`
-
+}) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="group relative h-[520px] overflow-hidden rounded-[3rem] bg-slate-950 shadow-2xl transition-all duration-500 hover:-translate-y-3"
-    >
-      {/* 1. เลเยอร์รูปภาพปก: จัดพิกัดการโหลดด้วย priority สำหรับใบแรกๆ ของรายการ */}
-      <div className="absolute inset-0 z-0">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={safeAlt}
-            fill
-            className="object-cover opacity-60 grayscale-[40%] transition-all duration-700 group-hover:scale-110 group-hover:opacity-40 group-hover:grayscale-0"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={index < 2} // รีดความเร็วรูปภาพแรก (LCP Optimization)
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-slate-900">
-            <ImageOff className="text-slate-700" size={48} />
-          </div>
-        )}
-
-        {/* การไล่ระดับสีเชิงระบบเพื่อความคมชัด (Readability Layer) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/40 to-transparent" />
-      </div>
-
-      {/* 2. ส่วนพิกัดข้อมูลสถานะ (Badges) */}
-      <div className="absolute top-8 left-8 z-20 flex flex-wrap gap-3">
-        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md">
-          <ShieldCheck size={12} className="text-emerald-400" />
-          <span className="font-heading text-[10px] font-black tracking-[0.2em] text-white uppercase italic">
+    <div className="group relative flex flex-col overflow-hidden rounded-[2.5rem] border border-white/5 bg-slate-900 transition-all duration-500 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/10">
+      {/* 1. พิกัดภาพหน้าปกผลงาน (Visual Evidence) */}
+      <Link
+        href={`/case-studies/${slug}`}
+        className="relative aspect-[4/3] w-full overflow-hidden"
+      >
+        <Image
+          src={image || "/images/showcase/placeholder.webp"}
+          alt={title}
+          fill
+          className="object-cover opacity-60 transition-all duration-1000 group-hover:scale-105 group-hover:opacity-100"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
+        {/* ป้ายระบุกลุ่มธุรกิจ (Industry Tag) */}
+        <div className="absolute top-6 left-6">
+          <span className="font-heading rounded-full bg-emerald-500/90 px-4 py-1.5 text-[9px] font-black tracking-widest text-white uppercase italic backdrop-blur-md">
             {industry}
           </span>
         </div>
+      </Link>
 
-        <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 ring-1 ring-emerald-500/30 backdrop-blur-md">
-          <BarChart3 size={12} className="text-emerald-400" />
-          <span className="font-heading text-[10px] font-black tracking-[0.2em] text-emerald-400 uppercase italic">
-            {result}
-          </span>
-        </div>
-      </div>
+      {/* 2. พิกัดข้อมูลและผลลัพธ์ (Impact Content) */}
+      <div className="flex flex-1 flex-col p-10">
+        <h3 className="font-heading mb-4 text-2xl leading-tight font-black tracking-tighter text-white uppercase italic transition-colors group-hover:text-emerald-400">
+          {title}
+        </h3>
+        <p className="font-body mb-8 line-clamp-2 text-sm leading-relaxed font-medium text-slate-400">
+          {description}
+        </p>
 
-      {/* 3. ส่วนพิกัดเนื้อหา (Typography) */}
-      <div className="absolute inset-x-0 bottom-0 z-20 p-8 md:p-12">
-        <div className="flex flex-col gap-5">
-          <div className="space-y-3 text-left">
-            <h3 className="font-heading text-3xl leading-[1.1] font-black tracking-tighter text-white uppercase italic transition-colors duration-500 group-hover:text-emerald-400 md:text-4xl">
-              {title || "รายละเอียดโครงการ"}
-            </h3>
-            <p className="font-body line-clamp-2 text-lg leading-relaxed font-bold text-slate-400 transition-colors group-hover:text-slate-200">
-              {description}
-            </p>
-          </div>
-
-          {/* ปุ่ม CTA และพิกัดงานเทคนิคที่ยืนยันความเร็ว */}
-          <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-8">
-            <Link
-              href={`/case-studies/${slug}`}
-              className="group/link inline-flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-white uppercase transition-all hover:text-emerald-400"
-            >
-              ตรวจสอบผลงาน
-              <ArrowUpRight
-                size={18}
-                className="transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1"
-              />
-            </Link>
-
-            <div className="flex items-center gap-2 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-              <Zap size={16} className="fill-emerald-500 text-emerald-500" />
-              <span className="font-heading text-[10px] font-black tracking-widest text-emerald-500 uppercase italic">
-                Performance Optimized
+        <div className="mt-auto flex items-center justify-between border-t border-white/5 pt-8">
+          {/* พิกัดแสดงตัวเลขความสำเร็จ (Performance Metrics) */}
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2 text-emerald-500/50">
+              <BarChart3 size={14} />
+              <span className="text-[9px] font-black tracking-widest uppercase italic">
+                Result Impact
               </span>
             </div>
+            <span className="font-heading text-2xl font-black text-emerald-500 italic">
+              {result || "100%"}
+            </span>
           </div>
+
+          {/* ปุ่มนำทางไปดูพิกัดงานฉบับเต็ม */}
+          <Link
+            href={`/case-studies/${slug}`}
+            className="group/btn flex h-14 w-14 items-center justify-center rounded-2xl bg-white/5 text-white transition-all hover:bg-emerald-600 hover:text-slate-950 active:scale-95"
+            aria-label={`อ่านรายละเอียดงาน ${title}`}
+          >
+            <ArrowRight
+              size={22}
+              className="transition-transform group-hover/btn:translate-x-1"
+            />
+          </Link>
         </div>
       </div>
-
-      {/* Industrial Glow Effect: เพิ่มมิติพรีเมียมเมื่อ Hover */}
-      <div
-        className="absolute -inset-2 z-10 bg-gradient-to-tr from-emerald-500/10 to-transparent opacity-0 blur-3xl transition-opacity duration-1000 group-hover:opacity-100"
-        aria-hidden="true"
-      />
-    </motion.div>
+    </div>
   )
 }
-
-export default CaseStudyCard

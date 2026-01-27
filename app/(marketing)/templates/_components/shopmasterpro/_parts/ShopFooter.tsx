@@ -4,7 +4,7 @@ import React from "react"
 import { Phone, MessageCircle, Mail } from "lucide-react"
 
 /* -------------------------------------------------------------------------- */
-/* นิยามพิกัดข้อมูล (Type Definitions) เพื่อล้าง Warning: no-explicit-any          */
+/* นิยามพิกัดข้อมูล (Type Definitions)                                           */
 /* -------------------------------------------------------------------------- */
 
 interface ShopFooterProps {
@@ -22,19 +22,19 @@ interface ShopFooterProps {
 
 /**
  * ShopFooter - ส่วนท้ายของระบบ ShopMasterPro
- * ปรับปรุงพิกัด Type และระบบ Font ให้เป็นมาตรฐาน Specialist 2026
+ * ปรับปรุงพิกัดข้อมูลและระบบฟอนต์ให้เป็นมาตรฐานปี 2026
  */
 export const ShopFooter = ({ data, logo }: ShopFooterProps) => (
   <footer className="border-t border-slate-900 bg-slate-950 py-32 text-left text-slate-500">
     <div className="container mx-auto grid gap-20 px-6 lg:grid-cols-4">
-      {/* 1. ส่วนแบรนด์และพิกัดการชำระเงิน */}
+      {/* 1. ส่วนแบรนด์และพิกัดการชำระเงิน: เน้นความชัดเจนและน่าเชื่อถือ */}
       <div className="space-y-10 lg:col-span-2">
         <div className="font-heading text-3xl font-black tracking-tighter text-white uppercase italic">
           {logo}
           <span className="text-orange-600">.</span>
         </div>
 
-        <p className="font-body max-w-md text-base leading-loose font-bold">
+        <p className="font-body max-w-md text-base leading-loose font-bold text-slate-400">
           {data.description}
         </p>
 
@@ -50,7 +50,7 @@ export const ShopFooter = ({ data, logo }: ShopFooterProps) => (
         </div>
       </div>
 
-      {/* 2. ส่วนศูนย์บริการติดต่อ (Contact Center) */}
+      {/* 2. ส่วนศูนย์บริการติดต่อ (Contact Center): พิกัดการเชื่อมต่อลูกค้า */}
       <div className="space-y-10">
         <h4 className="font-heading text-[10px] font-black tracking-[0.3em] text-white uppercase italic">
           Contact Center
@@ -73,10 +73,10 @@ export const ShopFooter = ({ data, logo }: ShopFooterProps) => (
       </div>
     </div>
 
-    {/* พิกัดลิขสิทธิ์ระบบท้ายหน้า */}
+    {/* พิกัดลิขสิทธิ์ระบบท้ายหน้า: ระบุตัวตนผู้ดูแลระบบ */}
     <div className="container mx-auto mt-24 border-t border-white/5 px-6 pt-12 text-center md:text-left">
-      <p className="font-heading text-[10px] font-black tracking-[0.6em] text-slate-700 uppercase italic">
-        Architecture by AEMDEVWEB v2026
+      <p className="font-heading text-[9px] font-black tracking-[0.6em] text-slate-700 uppercase italic">
+        System Design by AEMDEVWEB v2026
       </p>
     </div>
   </footer>

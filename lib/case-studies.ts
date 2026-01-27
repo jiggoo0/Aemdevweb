@@ -29,7 +29,7 @@ export function getCaseStudySlugs(): string[] {
 
 /**
  * ดึงข้อมูลผลงานทั้งหมดพร้อมจัดเรียงลำดับ
- * วัตถุประสงค์: ใช้แสดงในหน้าสารบัญผลงาน และส่งข้อมูลไปยังคอมโพเนนต์ Card
+ * [FIX]: เปลี่ยนชื่อให้เป็นมาตรฐานเดียวกับที่หน้า Page และ Home เรียกใช้
  */
 export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
   if (!fs.existsSync(CASE_STUDIES_DIR)) return []
@@ -79,8 +79,13 @@ export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
 }
 
 /**
+ * [ALIAS]: สร้างฟังก์ชันสำรองเพื่อรองรับการเรียกใช้แบบเดิมในหน้าแรก (Home)
+ * ป้องกัน Error: getCaseStudiesMetadata is not a function
+ */
+export const getCaseStudiesMetadata = getAllCaseStudies
+
+/**
  * ดึงข้อมูลผลงานล่าสุดตามจำนวนที่ต้องการ
- * วัตถุประสงค์: แสดงผลงานเด่นในหน้าหลัก (Home Page)
  */
 export async function getLatestCaseStudies(
   limit: number = 3
@@ -91,7 +96,6 @@ export async function getLatestCaseStudies(
 
 /**
  * ดึงข้อมูลผลงานรายชิ้นแบบเจาะจงด้วยชื่อ Slug
- * วัตถุประสงค์: สำหรับหน้ารายละเอียดผลงาน และการทำ SEO Metadata รายหน้า
  */
 export async function getCaseStudyBySlug(
   slug: string
@@ -102,7 +106,6 @@ export async function getCaseStudyBySlug(
   const mdxPath = path.join(CASE_STUDIES_DIR, `${realSlug}.mdx`)
   const mdPath = path.join(CASE_STUDIES_DIR, `${realSlug}.md`)
 
-  // ตรวจสอบพิกัดไฟล์ทั้งนามสกุล .mdx และ .md
   const actualPath = fs.existsSync(mdxPath)
     ? mdxPath
     : fs.existsSync(mdPath)

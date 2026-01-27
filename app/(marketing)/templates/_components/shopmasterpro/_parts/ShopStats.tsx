@@ -1,13 +1,14 @@
 /** @format */
+
 import React from "react"
 import { Truck, ShieldCheck, CreditCard, LucideIcon } from "lucide-react"
 
 /* -------------------------------------------------------------------------- */
-/* นิยามพิกัดข้อมูล (Type Definitions) - ปรับปรุงให้ยืดหยุ่นขึ้นเพื่อแก้ Error TS2322 */
+/* นิยามพิกัดข้อมูล (Type Definitions)                                           */
 /* -------------------------------------------------------------------------- */
 
 interface ShopStatItem {
-  icon?: string // [FIXED]: ใส่ ? เพื่อให้เป็นทางเลือก ป้องกัน Error หากข้อมูลต้นทางไม่มี icon
+  icon?: string // กำหนดเป็นทางเลือกเพื่อป้องกันปัญหาหากข้อมูลต้นทางส่งมาไม่ครบ
   title: string
   desc: string
 }
@@ -17,11 +18,14 @@ interface ShopStatsProps {
 }
 
 /**
- * ShopStats - ส่วนแสดงข้อมูลความน่าเชื่อถือ (Trust Signals)
- * จัดการพิกัด Icon Mapping โดยมีระบบ Fallback กรณีไม่มีข้อมูล icon ส่งมา
+ * ShopStats - ส่วนแสดงข้อมูลการรับประกันและบริการ (Trust Signals)
+ * ระบบจัดการไอคอนแบบมีแผนสำรอง (Fallback) เพื่อความต่อเนื่องของการแสดงผล
  */
 export const ShopStats = ({ data }: ShopStatsProps) => {
-  // พิกัดการ Map ชื่อสตริงเข้ากับ Component ของ Lucide
+  /**
+   * พิกัดการดึงไอคอน:
+   * ตรวจสอบจากชื่อสตริงที่ส่งมา หากไม่พบจะสลับไปใช้ไอคอนตามลำดับพิกัดแทน
+   */
   const getIcon = (name?: string, index?: number) => {
     const icons: Record<string, LucideIcon> = {
       Truck,
@@ -29,11 +33,12 @@ export const ShopStats = ({ data }: ShopStatsProps) => {
       CreditCard,
     }
 
-    // หากระบุชื่อไอคอนมาให้ใช้ตามชื่อ หากไม่มีให้ถอยไปใช้ลำดับ Index (Fallback Logic)
-    if (name && icons[name])
+    // ตรวจสอบพิกัดชื่อไอคอนในระบบ
+    if (name && icons[name]) {
       return React.createElement(icons[name], { size: 24 })
+    }
 
-    // พิกัดสำรองตามลำดับ (Index-based Fallback)
+    // พิกัดสำรองในกรณีที่ข้อมูลไม่ระบุชื่อไอคอน
     const fallbackIcons = [Truck, ShieldCheck, CreditCard]
     const FallbackIcon = fallbackIcons[index ?? 0] || ShieldCheck
     return <FallbackIcon size={24} />
@@ -48,15 +53,16 @@ export const ShopStats = ({ data }: ShopStatsProps) => {
               key={`${item.title}-${i}`}
               className="group flex items-center gap-6"
             >
+              {/* พิกัดแสดงผลไอคอน: เน้นการโต้ตอบที่นุ่มนวลเมื่อผู้ใช้งานชี้เมาส์ */}
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-orange-600 transition-all duration-300 group-hover:bg-orange-600 group-hover:text-white">
                 {getIcon(item.icon, i)}
               </div>
 
-              <div>
+              <div className="space-y-1">
                 <h4 className="font-heading text-sm font-black tracking-tight text-slate-950 uppercase italic">
                   {item.title}
                 </h4>
-                <p className="font-body mt-1 text-xs font-bold text-slate-500">
+                <p className="font-body text-xs font-bold text-slate-500">
                   {item.desc}
                 </p>
               </div>

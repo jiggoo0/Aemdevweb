@@ -1,186 +1,133 @@
 /** @format */
 
-"use client"
-
 import React from "react"
-import { motion } from "framer-motion"
-import { Check, ArrowRight, Zap, ShieldCheck } from "lucide-react"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
+import {
+  ArrowRight,
+  CheckCircle2,
+  Rocket,
+  ShieldCheck,
+  Code2,
+  Gauge,
+  Zap,
+  Layout,
+  TrendingUp,
+} from "lucide-react"
+
+import { ServiceItem, ServiceCategory } from "@/constants/services-data"
+
+/**
+ * [HELPER]: ส่วนจัดการไอคอนตามหมวดหมู่ระบบงาน
+ * แยก Logic ออกมาเพื่อให้คอมโพเนนต์หลักสะอาดและไล่โค้ดง่ายขึ้น
+ */
+const ServiceIcon = ({
+  category,
+  className,
+}: {
+  category: ServiceCategory | string
+  className?: string
+}) => {
+  const icons: Record<string, React.ReactNode> = {
+    Starter: <Layout className={className} />,
+    SME: <Rocket className={className} />,
+    Corporate: <ShieldCheck className={className} />,
+    Industrial: <Code2 className={className} />,
+    SEO_Technical: <Gauge className={className} />,
+    SEO_Organic: <TrendingUp className={className} />,
+  }
+  return icons[category] || <Zap className={className} />
+}
 
 interface ServiceCardProps {
-  title: string
-  description?: string
-  price: number | string
-  slug: string
-  features: string[]
-  isPopular?: boolean
-  className?: string
-  index?: number
-  // เพิ่มพิกัดนี้เพื่อรองรับค่าสีที่ส่งมาจากหน้า app/(main)/services/page.tsx
-  themeColor?: string
+  service: ServiceItem
 }
 
 /**
- * ServiceCard — ส่วนแสดงรายการระบบงานหลัก
- * ปรับปรุงพิกัด Interface ให้รองรับ themeColor เพื่อล้าง Build Error
+ * ServiceCard: ส่วนแสดงรายละเอียดพิกัดบริการรายหมวดหมู่
+ * แนวทาง: เน้นความสะอาดตาและการจัดวางลำดับข้อมูลที่ช่วยให้ตัดสินใจง่าย
+ * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
-const ServiceCard = ({
-  title,
-  description = "ระบบงานระดับ Specialist โดย นายเอ็มซ่ามากส์",
-  price,
-  slug,
-  features,
-  isPopular = false,
-  className,
-  index = 0,
-  themeColor, // รับพิกัดค่าสีเข้ามาให้ตรงตาม Props
-}: ServiceCardProps) => {
+export default function ServiceCard({ service }: ServiceCardProps) {
+  // ระบบป้องกันความผิดพลาดกรณีข้อมูลไม่ครบ
+  if (!service) return null
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className={cn(
-        "group relative flex flex-col rounded-[2.5rem] border p-8 transition-all duration-500 md:p-10 lg:p-12",
-        isPopular
-          ? "border-emerald-500 bg-slate-950 text-white shadow-2xl shadow-emerald-500/10"
-          : "border-slate-100 bg-white text-slate-900 hover:border-emerald-500/30 hover:shadow-xl",
-        className
-      )}
-      // นำ themeColor มาใช้เป็นพิกัดเส้นประดับ (ถ้าต้องการ) เพื่อไม่ให้ Lint ฟ้องว่ารับมาแต่ไม่ใช้
-      style={{ borderTopColor: themeColor }}
-    >
-      {/* 1. ส่วนป้ายสถานะ */}
-      {isPopular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-emerald-500 px-6 py-2 text-[10px] font-black tracking-[0.2em] whitespace-nowrap text-slate-950 uppercase shadow-lg">
-          แพ็กเกจแนะนำ
+    <div className="group relative flex h-full flex-col rounded-[2.5rem] border border-slate-100 bg-white p-8 transition-all duration-500 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-900/5 lg:p-10">
+      {/* HEADER: พิกัดไอคอนและฉลากกลุ่มงานที่เน้น (Focus Area) */}
+      <div className="mb-10 flex items-start justify-between">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-emerald-600 transition-all duration-500 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white">
+          <ServiceIcon category={service.category} className="h-8 w-8" />
         </div>
-      )}
-
-      {/* 2. ส่วนหัวข้อและคำอธิบาย */}
-      <div className="mb-10">
-        <h3
-          className={cn(
-            "font-heading mb-4 text-3xl leading-[1.1] font-black tracking-tighter uppercase italic transition-colors",
-            isPopular
-              ? "text-white"
-              : "text-slate-950 group-hover:text-emerald-500"
-          )}
-        >
-          {title}
-        </h3>
-        <p
-          className={cn(
-            "font-body text-sm leading-relaxed font-bold",
-            isPopular ? "text-slate-400" : "text-slate-500"
-          )}
-        >
-          {description}
-        </p>
+        <div className="text-right">
+          <p className="font-heading text-[10px] leading-none font-black tracking-[0.2em] text-slate-300 uppercase italic">
+            Focus Area
+          </p>
+          <p className="font-heading mt-2 text-xs leading-none font-black tracking-widest text-slate-900 uppercase italic">
+            {service.category}
+          </p>
+        </div>
       </div>
 
-      {/* 3. ส่วนแสดงพิกัดราคา */}
-      <div className="mb-10 flex items-baseline gap-2">
-        <span
-          className={cn(
-            "font-heading text-[10px] font-black tracking-widest uppercase",
-            isPopular ? "text-emerald-400" : "text-slate-400"
-          )}
-        >
-          เริ่มต้น ฿
-        </span>
-        <span className="font-heading text-6xl leading-none font-black tracking-tighter italic">
-          {linkPrice(price)}
-        </span>
-      </div>
-
-      {/* 4. รายการสิ่งที่ส่งมอบ (Deliverables) */}
-      <div className="mb-12 flex-grow space-y-5">
-        <div
-          className={cn(
-            "mb-6 text-[10px] font-black tracking-[0.3em] uppercase opacity-60",
-            isPopular ? "text-slate-400" : "text-slate-400"
-          )}
-        >
-          Technical Deliverables
+      {/* BODY: รายละเอียดพิกัดบริการและโครงสร้างงาน */}
+      <div className="flex-1">
+        <div className="mb-8 space-y-4">
+          <h3 className="font-heading line-clamp-1 text-2xl leading-tight font-black text-slate-950 italic transition-colors group-hover:text-emerald-600">
+            {service.title}
+          </h3>
+          <p className="font-body line-clamp-3 text-sm leading-relaxed font-bold text-slate-500">
+            {service.description}
+          </p>
         </div>
-        {features?.map((feature, i) => (
-          <div key={i} className="group/item flex items-start gap-4">
-            <div
-              className={cn(
-                "mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-lg transition-all duration-300 group-hover/item:scale-110",
-                isPopular ? "bg-emerald-500/20" : "bg-emerald-50"
-              )}
-            >
-              <Check
-                className={cn(
-                  "h-3 w-3",
-                  isPopular ? "text-emerald-500" : "text-emerald-600"
-                )}
+
+        {/* FEATURES: รายการขอบเขตงานระบบ (ล็อกพิกัด 4 รายการเพื่อความสมดุล) */}
+        <div className="mb-12 space-y-4">
+          {service.features?.slice(0, 4).map((feature, idx) => (
+            <div key={idx} className="flex items-start gap-3 text-slate-600">
+              <CheckCircle2
+                size={16}
+                className="mt-0.5 shrink-0 text-emerald-500"
               />
+              <span className="font-body line-clamp-1 text-sm leading-snug font-bold">
+                {feature}
+              </span>
             </div>
-            <span
-              className={cn(
-                "font-body text-[15px] leading-snug font-bold transition-colors",
-                isPopular
-                  ? "text-slate-300"
-                  : "text-slate-600 group-hover:text-slate-950"
-              )}
-            >
-              {feature}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* 5. ปุ่มดำเนินการ */}
-      <div className="mt-auto space-y-6">
-        <Link
-          href={`/services/${slug}`}
-          className={cn(
-            "font-heading flex w-full items-center justify-center gap-3 rounded-2xl py-6 text-sm font-black tracking-widest uppercase transition-all duration-500 active:scale-95",
-            isPopular
-              ? "bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/20 hover:bg-emerald-400"
-              : "bg-slate-50 text-slate-950 hover:bg-emerald-500 hover:text-white"
-          )}
-        >
-          ดูรายละเอียดบริการ
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
-        </Link>
-
-        {/* 6. ส่วนการันตีมาตรฐานงาน */}
-        <div className="flex items-center justify-center gap-3 opacity-40 select-none">
-          {isPopular ? (
-            <Zap className="h-4 w-4 text-emerald-400" />
-          ) : (
-            <ShieldCheck className="h-4 w-4 text-slate-400" />
-          )}
-          <span
-            className={cn(
-              "font-heading text-[9px] leading-none font-black tracking-[0.4em] uppercase",
-              isPopular ? "text-slate-400" : "text-slate-400"
-            )}
-          >
-            Specialist Standard v.2026
+      {/* FOOTER: พิกัดราคาและปุ่มเจาะลึกแผนงาน */}
+      <div className="mt-auto border-t border-slate-50 pt-8">
+        <div className="mb-8 flex items-baseline gap-2">
+          <span className="font-heading text-[10px] font-black tracking-widest text-slate-400 uppercase italic">
+            Starting at
+          </span>
+          <span className="font-heading text-3xl font-black text-slate-950 italic">
+            ฿{service.priceValue?.toLocaleString() ?? "0"}
           </span>
         </div>
+
+        <Link
+          href={`/services/${service.slug}`}
+          className="group/btn flex items-center justify-between rounded-2xl bg-slate-50 px-8 py-5 shadow-sm transition-all hover:bg-slate-950 hover:text-white"
+        >
+          <span className="font-heading text-[11px] font-black tracking-[0.15em] uppercase italic">
+            Explore Plan
+          </span>
+          <ArrowRight
+            size={18}
+            className="text-emerald-500 transition-transform duration-500 group-hover/btn:translate-x-2 group-hover/btn:text-white"
+          />
+        </Link>
       </div>
 
-      {/* แสงมรกตลับเลเยอร์ */}
-      {isPopular && (
-        <div
-          className="pointer-events-none absolute -right-4 -bottom-4 h-32 w-32 rounded-full bg-emerald-500/5 blur-[40px]"
-          aria-hidden="true"
-        />
+      {/* HIGHLIGHT BADGE: ป้ายแนะนำสำหรับพิกัดงานยอดนิยม */}
+      {service.highlight && (
+        <div className="absolute top-0 right-10 -translate-y-1/2">
+          <span className="font-heading rounded-full bg-emerald-600 px-5 py-2 text-[10px] font-black tracking-[0.2em] text-white uppercase italic shadow-xl shadow-emerald-600/20">
+            Recommended
+          </span>
+        </div>
       )}
-    </motion.div>
+    </div>
   )
 }
-
-function linkPrice(price: number | string) {
-  return typeof price === "number" ? price.toLocaleString() : price
-}
-
-export default ServiceCard
