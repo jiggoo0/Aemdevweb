@@ -5,7 +5,7 @@
 import React, { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { TemplateMetadata } from "@/types/template"
-// นำเข้าพิกัดตัวการ์ดแสดงผลตามระบบที่วางไว้
+// นำเข้าส่วนประกอบการ์ดและตัวกรองตามระบบที่วางไว้
 import TemplateCard from "./TemplateCard"
 import { TemplateFilter } from "./TemplateFilter"
 import { SearchX } from "lucide-react"
@@ -15,16 +15,16 @@ interface TemplateGridProps {
 }
 
 /**
- * TemplateGrid - พิกัดควบคุมระบบตารางโครงสร้างเว็บไซต์
- * แนวทางการจัดการ: บริหารจัดการการแสดงผลและการคัดกรองพิกัดข้อมูลให้เป็นระเบียบที่สุด
- * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
+ * TemplateGrid - ส่วนจัดการตารางแสดงผลแบบเว็บไซต์
+ * แนวคิด: บริหารจัดการการแสดงผลและการเลือกหมวดหมู่ให้ใช้งานง่ายและเร็วที่สุด
+ * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
   const [activeCategory, setActiveCategory] = useState<string>("all")
 
   /**
-   * ระบบคัดกรองพิกัดข้อมูล (Filtering Engine)
-   * ปรับจูนด้วย useMemo เพื่อลดการประมวลผลซ้ำซ้อน ช่วยให้ระบบทำงานได้รวดเร็ว
+   * ระบบคัดกรองข้อมูล (Filtering Engine)
+   * ใช้ useMemo เพื่อป้องกันการประมวลผลซ้ำ ช่วยให้เว็บทำงานได้ไวระดับปีศาจ
    */
   const filteredTemplates = useMemo(() => {
     if (!templates) return []
@@ -34,17 +34,17 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
 
   return (
     <div className="space-y-16">
-      {/* [LAYER 1] - CONTROL: พิกัดควบคุมการเลือกหมวดหมู่ธุรกิจ */}
+      {/* ส่วนควบคุม: เลือกหมวดหมู่ธุรกิจที่ต้องการ */}
       <TemplateFilter
         activeCategory={activeCategory}
         onCategoryChange={setActiveCategory}
       />
 
-      {/* [LAYER 2] - DISPLAY: พิกัดจัดแสดงระบบงานจริง */}
+      {/* ส่วนแสดงผล: รายการเว็บไซต์ที่ผ่านการคัดกรอง */}
       <AnimatePresence mode="wait">
         {filteredTemplates.length > 0 ? (
           <motion.div
-            key={activeCategory} // รีเซ็ตท่าทางอนิเมชั่นเมื่อมีการเปลี่ยนพิกัดข้อมูล
+            key={activeCategory} // เล่นอนิเมชั่นใหม่ทุกครั้งที่เปลี่ยนหมวดหมู่
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -59,7 +59,7 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
             ))}
           </motion.div>
         ) : (
-          /* [LAYER 3] - EMPTY STATE: พิกัดแจ้งเตือนเมื่อยังไม่มีข้อมูลระบบงานในหมวดนั้น */
+          /* กรณีไม่พบข้อมูล: แสดงสถานะแจ้งเตือนที่ดูเป็นมืออาชีพ */
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -71,18 +71,18 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
 
             <div className="mt-12 space-y-4">
               <h3 className="font-heading text-3xl font-black tracking-tighter text-slate-900 uppercase italic">
-                No Structures <span className="text-emerald-500">Found.</span>
+                No Results <span className="text-emerald-500">Found.</span>
               </h3>
               <p className="font-body mx-auto max-w-sm text-lg font-bold text-slate-400">
-                หมวดหมู่ธุรกิจนี้กำลังอยู่ระหว่างการตรวจสอบระบบงานที่ได้มาตรฐาน
+                เรากำลังเตรียมระบบสำหรับหมวดหมู่นี้อยู่ครับ
                 <br />
                 <span className="text-sm font-medium">
-                  ลองเปลี่ยนพิกัดการคัดกรองหรือเลือกดูประเภทอื่นก่อนครับ
+                  ลองเลือกดูหมวดอื่น หรือกดรีเซ็ตตัวกรองก่อนได้ครับ
                 </span>
               </p>
             </div>
 
-            {/* ระบบคืนค่าสถานะพิกัดข้อมูล (Reset Filter) */}
+            {/* ปุ่มรีเซ็ต: คืนค่าการค้นหาทั้งหมด */}
             <button
               onClick={() => setActiveCategory("all")}
               className="font-heading mt-12 inline-flex items-center gap-4 rounded-full bg-slate-950 px-12 py-5 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:bg-emerald-600 active:scale-95"

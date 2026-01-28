@@ -1,65 +1,68 @@
 /** @format */
 
 import React from "react"
-import { ShieldCheck, Zap, BarChart3, Globe2 } from "lucide-react"
+import { ShieldCheck, Zap, BarChart3, Cpu } from "lucide-react"
 
 /**
- * TrustBadge - Professional Standards Edition
- * พิกัด: ส่วนแสดงเครื่องหมายยืนยันความน่าเชื่อถือ เพื่อสร้างความมั่นใจก่อนปิดการขาย
- * ยุทธศาสตร์: เน้น "ผลลัพธ์" ที่เจ้าของธุรกิจต้องการเห็นจริง
+ * TrustBadge - มาตรฐานความเชื่อมั่นปี 2026
+ * แนวคิด: ยืนยันจุดแข็งเรื่องประสิทธิภาพและ SEO เพื่อสร้างความมั่นใจให้ลูกค้า
+ * ตัวตน: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function TrustBadge() {
   const standards = [
     {
-      icon: <ShieldCheck size={20} />,
-      label: "System Safety",
-      value: "Standard Grade",
+      icon: <Zap size={22} />,
+      label: "Loading Performance",
+      value: "LCP < 0.8s Speed",
     },
     {
-      icon: <Zap size={20} />,
-      label: "User Experience",
-      value: "High Speed Score",
+      icon: <ShieldCheck size={22} />,
+      label: "Infrastructure",
+      value: "Next.js 16 Ready",
     },
     {
-      icon: <BarChart3 size={20} />,
-      label: "Market Visibility",
-      value: "SEO Friendly",
+      icon: <BarChart3 size={22} />,
+      label: "Visibility",
+      value: "AI Search Ready",
     },
     {
-      icon: <Globe2 size={20} />,
-      label: "Modern Systems",
-      value: "Latest Standard",
+      icon: <Cpu size={22} />,
+      label: "Performance Score",
+      value: "95-100 Google Grade",
     },
   ]
 
   return (
-    <div className="w-full border-y border-slate-100 bg-white py-16">
+    <section className="w-full border-y border-slate-50 bg-white py-16 lg:py-20">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:gap-16">
+        {/* รายการมาตรฐานการทำงาน (Grid) */}
+        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-4 lg:gap-16">
           {standards.map((item, idx) => (
             <div
               key={idx}
-              className="group flex flex-col items-center justify-center gap-5 text-center md:flex-row md:items-start md:text-left"
+              className="group flex flex-col items-center justify-center gap-6 text-center md:flex-row md:items-start md:text-left"
             >
-              {/* พิกัดไอคอน: ปรับให้ดูภูมิฐานและเป็นมิตรด้วยมนสัมผัส (Soft Radius) */}
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-all duration-500 group-hover:bg-emerald-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-emerald-500/20">
+              {/* ส่วนแสดงไอคอน: เน้นความคมชัดและการตอบสนองที่ลื่นไหล */}
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.5rem] bg-slate-50 text-slate-400 transition-all duration-500 group-hover:scale-110 group-hover:bg-slate-950 group-hover:text-emerald-500 group-hover:shadow-2xl group-hover:shadow-slate-950/20">
                 {item.icon}
               </div>
 
-              <div className="space-y-1.5">
-                {/* ฉลากกำกับ: ใช้ Font ตัวเล็กเน้นความเรียบหรู */}
-                <div className="text-[10px] font-black tracking-[0.3em] text-slate-300 uppercase italic">
+              <div className="space-y-2">
+                {/* ข้อมูลกำกับ: เน้นความทันสมัยสไตล์เทคนิคัล */}
+                <div className="text-[10px] font-black tracking-[0.4em] text-slate-300 uppercase italic">
                   {item.label}
                 </div>
-                {/* ค่าที่แสดงผล: เน้นความชัดเจนและตรงไปตรงมา */}
-                <div className="text-lg font-black tracking-tight text-slate-900 italic transition-colors group-hover:text-emerald-600 md:text-xl">
+                {/* แสดงผลลัพธ์ที่พิสูจน์ได้จริง */}
+                <div className="text-xl font-black tracking-tighter text-slate-900 italic transition-colors group-hover:text-emerald-600 lg:text-2xl">
                   {item.value}
                 </div>
+                {/* เส้นตกแต่งที่จะกางออกเมื่อนำเมาส์มาวาง */}
+                <div className="h-[2px] w-0 bg-emerald-500 transition-all duration-500 group-hover:w-full md:hidden lg:block" />
               </div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

@@ -15,8 +15,9 @@ import { Toaster } from "@/components/ui/sonner"
 import "@/app/globals.css"
 
 /**
- * พิกัดฟอนต์หัวข้อ: IBM Plex Sans Thai
- * ให้ความรู้สึกที่ยั่งยืนและเป็นระเบียบ เข้าถึงกลุ่มเจ้าของธุรกิจได้ดี
+ * [FONT STRATEGY 2026]
+ * IBM Plex Sans Thai: สำหรับหัวข้อ (Heading) ให้ความรู้สึกเป็นมืออาชีพที่เชื่อถือได้
+ * Anuphan: สำหรับเนื้อหา (Body) อ่านง่าย สบายตา และดูทันสมัย
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -25,10 +26,6 @@ const fontHeading = IBM_Plex_Sans_Thai({
   display: "swap",
 })
 
-/**
- * พิกัดฟอนต์เนื้อหา: Anuphan
- * เน้นการอ่านที่สบายตาบนหน้าจอ ทันสมัย และดูเป็นมิตรต่อผู้ใช้งาน
- */
 const fontBody = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600"],
@@ -37,8 +34,8 @@ const fontBody = Anuphan({
 })
 
 /**
- * จัดการพิกัด SEO ประจำเว็บไซต์ (Metadata)
- * วางรากฐานเพื่อรองรับการเติบโตผ่าน Organic Search
+ * [SEO & AI STRATEGY]
+ * ตั้งค่าข้อมูลเพื่อให้ระบบค้นหาและ AI เข้าใจตัวตนของ AEMDEVWEB ได้ทันที
  */
 export const metadata: Metadata = {
   title: {
@@ -48,8 +45,15 @@ export const metadata: Metadata = {
   description: siteConfig.project.description,
   metadataBase: new URL(siteConfig.project.url),
   keywords: siteConfig.keywords.list,
-  authors: [{ name: "อลงกรณ์ ยมเกิด", url: "https://me.aemdevweb.com" }],
-  creator: "นายเอ็มซ่ามากส์",
+  authors: [
+    { name: siteConfig.expert.realName, url: siteConfig.links.personal },
+  ],
+  creator: siteConfig.expert.name,
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: siteConfig.project.title,
     description: siteConfig.project.description,
@@ -83,20 +87,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
 }
 
 export const viewport: Viewport = defaultViewport
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="th"
@@ -109,7 +108,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* ฉีดข้อมูลโครงสร้างเพื่อให้ระบบค้นหาเข้าใจบริบทของธุรกิจและตัวตนผู้ดูแลระบบ */}
+        {/* [SCHEMA] ใส่ข้อมูลธุรกิจเพื่อให้ Google จัดอันดับได้แม่นยำที่สุด */}
         <JsonLd
           type="WebSite"
           data={{
@@ -118,11 +117,13 @@ export default function RootLayout({
             url: siteConfig.project.url,
             publisher: {
               "@type": "Person",
-              name: "อลงกรณ์ ยมเกิด",
-              url: siteConfig.project.url,
+              name: siteConfig.expert.realName,
+              jobTitle: siteConfig.expert.role,
+              url: siteConfig.links.personal,
               sameAs: [
-                siteConfig.contact?.facebook,
-                siteConfig.contact?.linkedin,
+                siteConfig.links.facebook,
+                siteConfig.links.linkedin,
+                siteConfig.links.tiktok,
               ].filter(Boolean),
             },
             potentialAction: {
@@ -140,19 +141,22 @@ export default function RootLayout({
           "overflow-x-hidden leading-relaxed"
         )}
       >
-        {/* แถบสถานะการโหลดสีเขียวมรกต เพื่อความภูมิฐานตามสไตล์ Professional Freelance */}
+        {/* แถบสถานะการโหลด: สีเขียว Emerald สื่อถึงความซิ่งและความพร้อมให้บริการ */}
         <NextTopLoader
-          color="#059669"
-          height={2}
+          color="#10b981"
+          height={3}
           showSpinner={false}
           easing="ease"
-          speed={400}
+          speed={300}
+          shadow="0 0 10px #10b981,0 0 5px #10b981"
+          zIndex={1600}
         />
 
+        {/* ส่วนประกอบของเนื้อหาหลัก */}
         <div className="relative flex min-h-screen flex-col">{children}</div>
 
-        {/* ระบบแจ้งเตือนผลลัพธ์ที่ใช้งานง่ายและไม่รบกวนสายตา */}
-        <Toaster richColors closeButton position="top-center" />
+        {/* ระบบแจ้งเตือน (Sonner): ดีไซน์เรียบง่าย ใช้งานสะดวก */}
+        <Toaster richColors closeButton position="top-center" expand={false} />
       </body>
     </html>
   )

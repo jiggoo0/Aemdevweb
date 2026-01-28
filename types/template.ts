@@ -1,59 +1,83 @@
 /** @format */
 
-/**
- * 1. หมวดหมู่กลุ่มธุรกิจ (Template Categories)
- * รองรับทั้งกลุ่มบริการมาตรฐาน และโปรเจกต์งานระบบในกลุ่ม Platform / Rental
- */
+/* -------------------------------------------------------------------------- */
+/* 1. พิกัดหมวดหมู่ธุรกิจ (Template Category)                                   */
+/* -------------------------------------------------------------------------- */
+
 export type TemplateCategory =
   | "hotel"
+  | "Hotel"
   | "service"
+  | "Service"
   | "marketing"
+  | "Marketing"
   | "ecommerce"
+  | "Ecommerce"
   | "business"
-  | "platform" // สำหรับระบบ Web Rental Platform
-  | "rental" // สำหรับธุรกิจเช่ารถ หรือเช่าอุปกรณ์
+  | "Business"
+  | "platform"
+  | "Platform"
+  | "rental"
+  | "Rental"
+  | "digital"
+  | "Digital"
+  | "readymade"
+  | "ReadyMade"
 
-/**
- * 2. ข้อมูลพิกัด SEO (SEO Contract)
- * แยกออกมาเพื่อใช้ยืนยันพิกัดข้อมูลในหน้าพรีวิวเทมเพลต ป้องกัน Error TS18046
- */
+/* -------------------------------------------------------------------------- */
+/* 2. สัญญาข้อมูล SEO (SEO Contract)                                          */
+/* -------------------------------------------------------------------------- */
+
 export interface SEOContract {
-  seo: {
-    title: string
-    description: string
-    keywords: string[]
-    ogImage: string
-  }
+  title: string
+  description: string
+  keywords?: string[]
+  ogImage?: string
+  canonical?: string
+  /**
+   * [FIX]: เปลี่ยนจาก any เป็น unknown เพื่อความปลอดภัยของระบบงาน
+   */
+  structuredData?: Record<string, unknown>
 }
 
-/**
- * 3. ข้อมูลพื้นฐานสำหรับแสดงผล (Marketplace Card)
- */
+/* -------------------------------------------------------------------------- */
+/* 3. พิกัดข้อมูลพื้นฐาน (Template Metadata)                                    */
+/* -------------------------------------------------------------------------- */
+
 export interface TemplateMetadata {
-  id: string // ID อ้างอิงภายในระบบ
-  slug: string // พิกัด URL สำหรับเข้าถึงหน้าเทมเพลต
-  name: string // ชื่อเทมเพลตที่แสดงบนหน้าเว็บ
+  id: string
+  slug: string
+  name: string
   category: TemplateCategory
-  thumbnail: string // พิกัดที่เก็บรูปภาพตัวอย่าง
-  description: string // รายละเอียดสรุปสั้นๆ เพื่อดึงดูดความสนใจ
-  pricePrefix?: string // ข้อความนำหน้าตัวเลขราคา เช่น 'เริ่มต้น'
-  priceValue?: string // มูลค่าระบบงาน เช่น '590'
-  isNew?: boolean // ป้ายกำกับสำหรับงานที่เพิ่งเปิดตัว
+  thumbnail: string
+  description?: string
+  pricePrefix?: string
+  priceValue?: string
+  isNew?: boolean
 }
 
-/**
- * 4. ข้อมูลเนื้อหาเชิงลึก (Template Content)
- * เน้นการแสดงผลประสิทธิภาพที่เหนือกว่ามาตรฐานทั่วไป
- */
+/* -------------------------------------------------------------------------- */
+/* 4. พิกัดเนื้อหาเชิงลึก (Template Content)                                     */
+/* -------------------------------------------------------------------------- */
+
 export interface TemplateContent {
   title: string
   description: string
   body: string
-  // ตัวเลขชี้วัดประสิทธิภาพ (จุดขายสำคัญที่ลูกค้าจะได้รับ)
   performance: {
-    lcp: string // ความเร็วในการโหลดข้อมูลหลัก (Largest Contentful Paint)
-    seo: string // ระดับการปรับแต่งเพื่อการค้นหา
-    stability: string // ความเสถียรของโครงสร้างหน้าเว็บ
+    lcp: string
+    seo: string
+    stability: string
   }
-  features?: string[] // รายการสิทธิประโยชน์หรือฟีเจอร์เด่น
+  features?: string[]
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. สัญญาข้อมูลรวม (Template Master Data)                                    */
+/* -------------------------------------------------------------------------- */
+
+export interface TemplateMasterData {
+  seo: SEOContract
+  metadata: TemplateMetadata
+  content: TemplateContent
 }

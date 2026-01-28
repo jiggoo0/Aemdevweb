@@ -1,36 +1,11 @@
 /** @format */
 
 /* -------------------------------------------------------------------------- */
-/* 1. ข้อมูลเว็บไซต์และการนำทาง (Site & Navigation)                             */
+/* 1. พิกัดตัวตนและข้อมูลเว็บไซต์ (Site Identity Configuration)                   */
 /* -------------------------------------------------------------------------- */
 
-export interface NavItem {
-  name: string
-  href: string
-  title?: string
-  disabled?: boolean
-  external?: boolean
-  badge?: string
-  description?: string
-}
-
-export interface FooterNavigation {
-  services: NavItem[]
-  company: NavItem[]
-  support: NavItem[]
-  legal: NavItem[]
-}
-
-export interface NavigationConfig {
-  main: NavItem[]
-  footer: FooterNavigation
-}
-
-/**
- * SiteConfig - โครงสร้างการตั้งค่าระบบหลัก
- * ควบคุมพิกัดข้อมูล SEO มาตรฐานงาน และ Business Impact จากศูนย์กลาง
- */
 export interface SiteConfig {
+  // ข้อมูลภาพลักษณ์องค์กร (แก้พิกัด Error ใน Footer และ site-config.ts)
   company: {
     name: string
     fullName: string
@@ -50,18 +25,10 @@ export interface SiteConfig {
   expert: {
     name: string
     role: string
-    realName: string // พิกัดข้อมูลสำหรับแสดงชื่อจริงของผู้ดูแลระบบ
+    realName: string
   }
-  stats: {
-    label: string
-    value: string
-    suffix: string
-  }[]
-  businessImpact: {
-    speed: string
-    seo: string
-    conversion: string
-  }
+  stats: { label: string; value: string; suffix: string }[]
+  businessImpact: { speed: string; seo: string; conversion: string }
   keywords: {
     list: string[]
     all: string
@@ -74,6 +41,7 @@ export interface SiteConfig {
     lineId: string
     facebook?: string
     linkedin?: string
+    tiktok?: string
     personal: string
   }
   contact: {
@@ -82,48 +50,24 @@ export interface SiteConfig {
     lineId: string
     facebook?: string
     linkedin?: string
-    personal?: string
+    tiktok?: string
+    personal?: string // เพิ่มพิกัดนี้เพื่อรองรับ site-config.ts
     phone?: string
   }
-  cta: {
-    main: string
-    secondary: string
-    pricing: string
-  }
+  cta: { main: string; secondary: string; pricing: string }
   standards: {
     performance: number
     lcp: number
     security: string
-    aiReadiness: string
+    guarantee: string
   }
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. ระบบจัดการเนื้อหาและบทความ (Blog & Content)                              */
+/* 2. พิกัดระบบงานและบริการ (Services & Icons)                                 */
 /* -------------------------------------------------------------------------- */
 
-export interface BlogFrontmatter {
-  title: string
-  description: string
-  date: string
-  category: string
-  thumbnail: string
-  author: string
-  excerpt?: string
-  tags?: string[]
-}
-
-export interface BlogPost {
-  id: string
-  slug: string
-  frontmatter: BlogFrontmatter
-  content: string
-}
-
-/* -------------------------------------------------------------------------- */
-/* 3. การจัดการบริการและระบบงาน (Services)                                     */
-/* -------------------------------------------------------------------------- */
-
+// [FIX]: ส่งออก ServiceIconName เพื่อให้ไฟล์เรียกใช้งานได้จากทั่วโปรเจกต์
 export type ServiceIconName =
   | "Rocket"
   | "ShieldCheck"
@@ -135,104 +79,121 @@ export type ServiceIconName =
   | "BarChart3"
   | "CheckCircle2"
   | "LayoutTemplate"
+  | "Clock"
+  | "Wallet"
+  | "Building2"
+  | "MapPin"
+  | "Coffee"
+  | "Heart"
+  | "UserCircle"
 
 export interface ServiceItem {
   id: string
   title: string
   slug: string
-  description: string
+  description: string // พิกัดรายละเอียดงาน
+  thumbnail: string // พิกัดภาพประกอบ (ใช้แทน image)
   priceValue: number
   priceDisplay?: string
-  category: "Starter" | "SME" | "Corporate" | "Industrial" | string
-  // พิกัดสำหรับจัดการไอคอน: รองรับชื่อมาตรฐานและค่า string ทั่วไป
-  icon?: ServiceIconName | (string & {})
+  renewalPrice?: string
+  category: string
+  iconName: ServiceIconName
   features: string[]
   highlight?: boolean
   themeColor?: string
+  promotion?: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. ข้อมูลผลงานและตัวอย่างความสำเร็จ (Case Studies)                            */
+/* 3. พิกัดบทความและคลังความรู้ (Blog & Knowledge Base)                        */
 /* -------------------------------------------------------------------------- */
 
-export interface ShowcaseStats {
-  label: string
-  value: string
-}
-
-export interface CaseStudyFrontmatter {
+export interface BlogFrontmatter {
   title: string
-  client: string
-  industry: string
-  category: string
-  excerpt: string
-  description?: string
-  thumbnail: string
+  description: string
   date: string
-  results: (string | ShowcaseStats)[]
-  keyFeatures: string[]
-  service?: string
-  isFeatured?: boolean
+  category: string
+  thumbnail: string
+  author: string
+  readingTime?: string
+  excerpt?: string
+  tags?: string[]
 }
+
+/**
+ * แก้พิกัด Error TS2339: ดึง Property สำคัญออกมาไว้ระดับ Root
+ * เพื่อให้ระบบจัดลำดับ (Sort) และหน้า Card ดึงข้อมูลไปโชว์ได้ทันที
+ */
+export interface BlogPost {
+  id: string
+  slug: string
+  title: string
+  description: string
+  date: string
+  category: string
+  thumbnail: string
+  author: string
+  readingTime?: string
+  frontmatter: BlogFrontmatter // รองรับการเรียกแบบซ้อนเพื่อความปลอดภัยของข้อมูล
+  content: string
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. พิกัดผลงานความสำเร็จ (Case Studies)                                      */
+/* -------------------------------------------------------------------------- */
 
 export interface CaseStudyItem {
   id: string
   slug: string
-  frontmatter: CaseStudyFrontmatter
+  // [FIX]: หน้า Page เรียกใช้ผ่านพิกัด frontmatter ต้องหุ้มข้อมูลให้ตรงกัน
+  frontmatter: {
+    title: string
+    client: string
+    industry: string
+    category: string
+    excerpt: string
+    thumbnail: string
+    date: string
+    results: (string | { label: string; value: string })[]
+    keyFeatures: string[]
+    service?: string
+    isFeatured?: boolean
+  }
   content: string
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. ระบบจัดการรูปแบบเว็บไซต์ (Template Marketplace)                           */
+/* 5. พิกัดคลังเทมเพลต (Marketplace Templates)                                */
 /* -------------------------------------------------------------------------- */
 
-/**
- * SEOContract - พิกัดสัญญาข้อมูลสำหรับการจัดการ Technical SEO
- * ช่วยให้ระบบตรวจสอบความถูกต้องของข้อมูลในระนาบพรีวิวได้แม่นยำ
- */
-export interface SEOContract {
-  seo: {
-    title: string
-    description: string
-    keywords: string[]
-    ogImage: string
-  }
-}
+export type TemplateCategory =
+  | "hotel"
+  | "Hotel"
+  | "service"
+  | "Service"
+  | "marketing"
+  | "Marketing"
+  | "ecommerce"
+  | "Ecommerce"
+  | "business"
+  | "Business"
+  | "platform"
+  | "Platform"
+  | "rental"
+  | "Rental"
+  | "digital"
+  | "Digital"
+  | "readymade"
+  | "ReadyMade"
 
-export interface TemplateItem {
+export interface TemplateMetadata {
   id: string
   slug: string
-  title: string
-  description: string
-  category: string
-  image: string
-  features: string[]
-  price: number
-  salePrice?: number
-  isPopular?: boolean
-  isNew?: boolean
-  demoUrl?: string
-}
-
-/* -------------------------------------------------------------------------- */
-/* 6. การจัดการเป้าหมายและข้อมูลผู้ติดต่อ (Leads & Testimonials)                  */
-/* -------------------------------------------------------------------------- */
-
-export interface LeadFormSubmission {
   name: string
-  lineId: string
-  businessType: string
-  budget?: string
-  requirement: string
-  timestamp: string
-}
-
-export interface TestimonialItem {
-  id: string | number
-  content: string
-  author: string
-  role: string
-  company?: string
-  rating: number
-  image?: string
+  category: TemplateCategory
+  thumbnail: string
+  description: string
+  pricePrefix?: string
+  priceValue?: string
+  isNew?: boolean
 }

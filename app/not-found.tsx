@@ -1,86 +1,90 @@
 /** @format */
 
+import React from "react"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { FileSearch, ArrowRight, Home, LayoutGrid } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 /**
- * หน้าแสดงผลเมื่อไม่พบข้อมูล (v2026 Specialist Edition)
- * วัตถุประสงค์: รักษาผู้ใช้งานให้อยู่ในระบบ และนำทางไปยังส่วนงานสำคัญที่สร้างรายได้
- * แนวคิด: สื่อสารอย่างเป็นมิตรแต่ยังคงความเนี้ยบในมาตรฐานงานเทคนิค
+ * NotFound: ส่วนจัดการเมื่อพิกัดข้อมูลสูญหาย (v2026 Specialist Edition)
+ * กลยุทธ์: นำทางลูกค้ากลับเข้าสู่ส่วนงานที่สร้างรายได้ (Home / Services)
+ * โทน: เรียบง่าย ตรงไปตรงมา ไม่ใช้ศัพท์เทคนิคที่ซับซ้อนเกินไป
  */
 export default function NotFound() {
   return (
-    <main className="animate-in fade-in zoom-in-95 relative flex min-h-[85vh] flex-col items-center justify-center px-6 text-center duration-700">
-      {/* ส่วนตกแต่งพื้นหลัง: ใช้ลายตารางแบบจางเพื่อให้ดูเป็นงานเทคนิคที่สะอาดตา */}
-      <div className="absolute inset-0 -z-10 [mask-image:radial-gradient(black,transparent_70%)] opacity-[0.03]">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center" />
+    <main className="animate-in fade-in relative flex min-h-[90vh] flex-col items-center justify-center px-6 py-20 text-center duration-700">
+      {/* [LAYER 0] - Technical Background: ลายตารางพิกัดเชิงเทคนิค */}
+      <div className="absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] opacity-[0.04]">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[size:40px_40px] bg-center" />
       </div>
 
-      {/* ส่วนแสดงสัญลักษณ์: การจัดวางที่เน้นความแตกต่างและจดจำง่าย */}
-      <div className="group relative mb-8 flex h-28 w-28 items-center justify-center rounded-[2rem] bg-slate-50 transition-all duration-500 hover:rotate-12 hover:bg-emerald-50">
+      {/* [LAYER 1] - Visual Icon: สัญลักษณ์การค้นหาที่ไม่พบข้อมูล */}
+      <div className="group relative mb-12 flex h-32 w-32 items-center justify-center rounded-[2.5rem] bg-slate-50 transition-all duration-500 hover:scale-105 hover:bg-emerald-50">
         <FileSearch
-          className="h-14 w-14 text-slate-300 transition-colors duration-500 group-hover:text-emerald-500"
-          strokeWidth={1.2}
+          className="h-16 w-16 text-slate-200 transition-colors duration-500 group-hover:text-emerald-500"
+          strokeWidth={1}
         />
-        <div className="absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-[10px] font-black text-white italic">
+        <div className="absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-[12px] font-black text-white italic shadow-xl">
           404
         </div>
       </div>
 
-      {/* ส่วนเนื้อหาหลัก: สื่อสารอย่างตรงไปตรงมาและเป็นมิตร */}
-      <div className="max-w-2xl space-y-4">
-        <h1 className="font-prompt text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-6xl">
-          ไม่พบหน้า <span className="text-emerald-500">ที่คุณต้องการ</span>
+      {/* [LAYER 2] - Primary Messaging: ข้อความแจ้งพิกัดหลงทาง */}
+      <div className="max-w-2xl space-y-6">
+        <h1 className="font-heading text-5xl font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl">
+          ไม่พบหน้า <br />
+          <span className="text-emerald-500">ที่คุณต้องการ.</span>
         </h1>
-        <p className="font-anuphan mx-auto max-w-[500px] text-lg leading-relaxed font-bold text-slate-500">
-          ลิงก์ที่คุณเรียกใช้อาจไม่ถูกต้อง หรือข้อมูลถูกย้ายไปยังตำแหน่งใหม่
-          ลองเริ่มใหม่อีกครั้งจากตัวเลือกด้านล่างนี้ครับ
+        <p className="font-body mx-auto max-w-[520px] text-lg leading-relaxed font-bold text-slate-500 md:text-xl">
+          พิกัดที่คุณเรียกใช้อาจมีการเปลี่ยนแปลง หรือข้อมูลถูกย้ายตำแหน่งใหม่
+          ลองเริ่มค้นหาแผนงานที่ใช่สำหรับธุรกิจของคุณจากตัวเลือกด้านล่างครับ
         </p>
       </div>
 
-      {/* ส่วนการนำทางเชิงกลยุทธ์: ปุ่มกดที่เน้นความชัดเจนและเพิ่มโอกาสการติดต่อ */}
-      <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+      {/* [LAYER 3] - Strategic Navigation: ปุ่มนำทางกลับเข้าสู่ระบบงานหลัก */}
+      <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row">
         <Button
           asChild
-          size="lg"
-          className="h-14 bg-slate-950 px-10 text-white transition-colors hover:bg-emerald-600"
+          className="h-16 rounded-2xl bg-slate-950 px-10 text-[11px] font-black tracking-[0.2em] text-white uppercase italic shadow-2xl shadow-slate-900/10 transition-all hover:bg-emerald-600 active:scale-95"
         >
-          <Link href="/">
-            <Home className="mr-3 h-5 w-5" />
-            กลับไปหน้าหลัก
+          <Link href="/" className="flex items-center gap-3">
+            <Home size={18} />
+            กลับไปหน้าแรก
           </Link>
         </Button>
 
         <Button
           asChild
           variant="outline"
-          size="lg"
-          className="h-14 border-slate-200 px-10 transition-colors hover:bg-slate-50"
+          className="h-16 rounded-2xl border-slate-100 bg-white px-10 text-[11px] font-black tracking-[0.2em] text-slate-950 uppercase italic transition-all hover:border-slate-200 hover:bg-slate-50 active:scale-95"
         >
-          <Link href="/services">
-            <LayoutGrid className="mr-3 h-5 w-5" />
+          <Link href="/services" className="flex items-center gap-3">
+            <LayoutGrid size={18} />
             ดูแพ็กเกจบริการ
           </Link>
         </Button>
       </div>
 
-      {/* ลิงก์รอง: นำเสนอผลงานเพื่อสร้างความเชื่อถือ (Social Proof) */}
-      <Link
-        href="/case-studies"
-        className="group font-prompt mt-12 inline-flex items-center gap-2 text-[11px] font-black tracking-[0.3em] text-slate-400 uppercase transition-colors hover:text-emerald-500"
-      >
-        ดูผลงานที่ผ่านมาของเรา
-        <ArrowRight
-          size={14}
-          className="transition-transform group-hover:translate-x-1"
-        />
-      </Link>
+      {/* [LAYER 4] - Secondary Action: เชื่อมต่อผลงานเพื่อความน่าเชื่อถือ */}
+      <div className="mt-16 border-t border-slate-100 pt-16">
+        <Link
+          href="/case-studies"
+          className="group flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
+        >
+          สำรวจผลงานที่ผ่านมาของเรา
+          <ArrowRight
+            size={14}
+            className="transition-transform group-hover:translate-x-2"
+          />
+        </Link>
+      </div>
 
-      {/* ป้ายระบุสถานะระบบ: สำหรับมาตรฐานงานระดับมืออาชีพ */}
-      <p className="font-prompt mt-20 text-[9px] font-black tracking-[0.5em] text-slate-300 uppercase">
-        System Status: Operational | Managed by AEMDEVWEB
-      </p>
+      {/* Infrastructure Branding Footer */}
+      <div className="mt-24 opacity-20 select-none">
+        <p className="text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase italic">
+          System Infrastructure Model • AEMDEVWEB 2026
+        </p>
+      </div>
     </main>
   )
 }

@@ -3,113 +3,84 @@
 import { SiteConfig } from "@/types"
 
 /**
- * ศูนย์กลางการตั้งค่าเว็บไซต์ (Central Site Configuration)
- * ควบคุมพิกัดข้อมูลภาพลักษณ์ และระบบการติดต่อทั้งหมดของ AEMDEVWEB
- * ผู้ดูแลระบบ: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
- * แนวทาง: เน้นภาษาที่เป็นกันเอง เข้าใจง่าย และแสดงผลลัพธ์ที่ชัดเจน
+ * AEMDEVWEB Site Configuration (Core System)
+ * ศูนย์กลางการตั้งค่าระบบงานและตัวตนของแบรนด์
  */
 export const siteConfig: SiteConfig = {
-  // 1. ข้อมูลภาพลักษณ์องค์กร (Professional Identity)
   company: {
     name: "AEMDEVWEB",
-    fullName: "AEMDEVWEB Co., Ltd.",
+    fullName: "บริษัท เอ็มเดฟเว็บ จำกัด",
     email: "me@aemdevweb.com",
-    address: "Bangkok, Thailand",
+    address: "กรุงเทพมหานคร, ประเทศไทย",
   },
-
-  // 2. พิกัดตัวตนบนโลกออนไลน์ (Digital Presence & Content Strategy)
   project: {
-    name: "AEMDEVWEB",
+    name: "AEMDEVWEB | นายเอ็มซ่ามากส์ SEO",
     shortName: "AEM",
     nameTH: "เอ็ม-เดฟ-เว็บ",
-    // ยุทธศาสตร์: เน้นผลงาน Landing Page SME และความเร็วที่เป็นจุดขายหลัก
-    title: "บริการทำเว็บไซต์สำหรับธุรกิจ และ Landing Page SME คุณภาพสูง",
-    slogan: "โครงสร้างชัด โหลดไว พร้อมรองรับการเติบโตของคุณ",
+    title:
+      "AEMDEVWEB | รับทำเว็บไซต์ SEO ครบวงจร เริ่มต้น 1,990.- โดย นายเอ็มซ่ามากส์",
+    slogan:
+      "เว็บไว ไฟแรง! ระบบพร้อมใช้งานใน 1 ชม. วางโครงสร้างให้แรงตั้งแต่ออกตัว",
     description:
-      "บริการออกแบบและวางโครงสร้างเว็บไซต์สำหรับธุรกิจ โดยเฉพาะกลุ่ม SME และ B2B ที่เน้นความเร็วเป็นพิเศษ (LCP < 0.8s) พัฒนาโดย นายเอ็มซ่ามากส์ เพื่อช่วยให้ธุรกิจเดินหน้าได้อย่างต่อเนื่อง พร้อมรองรับการทำ technical SEO เพื่อติดอันดับบนหน้าแรกของ Google ผ่านระบบ Organic Search",
+      "บริการรับทำเว็บไซต์ SEO ครบวงจร เริ่มต้นเพียง 1,990 บาท พัฒนาด้วย Next.js โหลดเร็วระดับปีศาจ (LCP < 0.8s) โครงสร้างแม่นยำ เหมาะสำหรับธุรกิจที่ต้องการยอดขายจริง",
     url: "https://www.aemdevweb.com",
-    ogImage: "https://www.aemdevweb.com/og-image.png",
+    ogImage: "https://www.aemdevweb.com/og-image-seo-2026.png",
   },
-
-  // 3. ข้อมูลผู้เชี่ยวชาญ (Specialist Profile)
   expert: {
     name: "นายเอ็มซ่ามากส์",
     realName: "อลงกรณ์ ยมเกิด",
-    role: "Digital Marketing Strategy & Lead Web Consultant",
+    role: "ผู้เชี่ยวชาญด้านการวางระบบเว็บและ SEO (เน้นงานไว วิ่งหน้าแรก)",
   },
-
-  // 4. สถิติที่พิสูจน์ผลลัพธ์ได้จริง (Proven Results)
   stats: [
-    { label: "ธุรกิจที่ไว้วางใจ", value: "50+", suffix: "โครงการ" },
-    { label: "ความเร็วเฉลี่ยในการเปิดเว็บ", value: "< 0.8", suffix: "วินาที" },
-    { label: "คะแนนประสิทธิภาพระบบ", value: "95-100", suffix: "คะแนน" },
+    { label: "ติดตั้งระบบไวใน", value: "60", suffix: "นาที" },
+    { label: "ความเร็วโหลด (LCP)", value: "< 0.8", suffix: "วินาที" },
+    { label: "คะแนน Google", value: "100", suffix: "คะแนนเต็ม" },
   ],
-
-  // 5. คุณค่าที่ส่งมอบให้ธุรกิจ (Business Value Proposition)
   businessImpact: {
-    speed: "ลดโอกาสการเสียลูกค้าด้วยความเร็วที่เหนือกว่ามาตรฐานทั่วไป",
-    seo: "วางโครงสร้างเว็บไซต์ให้ Google และ AI เข้าใจธุรกิจของคุณได้ชัดเจนที่สุด",
+    speed: "ออนไลน์ทันใจ: เลือกแบบที่ใช่ ระบบหลังบ้านพร้อมใช้งานทันที",
+    seo: "โครงสร้างแห่งอนาคต: วางระบบเว็บให้ถูกหลักการค้นหาของ Google ปี 2026",
     conversion:
-      "เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยลำดับการนำเสนอที่เป็นระบบและน่าเชื่อถือ",
+      "เน้นยอดขาย: ออกแบบปุ่มติดต่อให้ลูกค้ากดสะดวกและปิดการขายง่ายที่สุด",
   },
-
-  // 6. พิกัดคำที่ลูกค้าใช้ค้นหา (Search Intent Keywords)
   keywords: {
     list: [
-      "บริการทำเว็บไซต์สำหรับธุรกิจ",
-      "Landing Page SME",
-      "technical SEO",
-      "โครงสร้างเว็บไซต์",
-      "Organic Search",
+      "เว็บไซต์สำเร็จรูป",
+      "รับทำเว็บไซต์ด่วน",
+      "ทำเว็บ SEO ครบวงจร",
+      "จ้างทำเว็บราคาถูก",
     ],
-    all: "รับทำ Landing Page, รับทำเว็บไซต์, การตลาดออนไลน์, Next.js, นายเอ็มซ่ามากส์, อลงกรณ์ ยมเกิด, AEMDEVWEB, Unlink-th",
-    core: [
-      "Performance Optimization",
-      "Search Visibility",
-      "User Experience Strategy",
-    ],
-    tech: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
-    brand: [
-      "AEMDEVWEB",
-      "นายเอ็มซ่ามากส์",
-      "อลงกรณ์ ยมเกิด",
-      "Alongkorl Yomkerd",
-      "Unlink-th",
-    ],
+    all: "เว็บไซต์สำเร็จรูป, นายเอ็มซ่ามากส์, AEMDEVWEB, รับทำ SalePage, ทำเว็บติดหน้าแรก",
+    core: ["บริการทำเว็บด่วน", "รับทำ SEO คุณภาพสูง", "วางระบบเว็บเพื่อยอดขาย"],
+    tech: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript"],
+    brand: ["AEMDEVWEB", "นายเอ็มซ่ามากส์ SEO", "Alongkorl Yomkerd"],
   },
-
-  // 7. ช่องทางเชื่อมต่อโซเชียล (Social Integration)
   links: {
     line: "https://lin.ee/6lgJox0",
     lineId: "@127cnthn",
     facebook: "https://facebook.com/aemdevweb",
     linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb",
     personal: "https://me.aemdevweb.com",
+    tiktok: "https://tiktok.com/@aemdevweb",
   },
-
-  // 8. พิกัดการติดต่อสื่อสาร (Contact Hub)
   contact: {
     email: "me@aemdevweb.com",
     line: "https://lin.ee/6lgJox0",
     lineId: "@127cnthn",
     facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb",
-    personal: "https://me.aemdevweb.com",
+    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb", // แก้พิกัด Error
+    tiktok: "https://tiktok.com/@aemdevweb", // แก้พิกัด Error
+    personal: "https://me.aemdevweb.com", // แก้พิกัด Error
     phone: "0xx-xxx-xxxx",
   },
-
-  // 9. ข้อความนำทางเพื่อปิดการขาย (Conversion Drivers)
   cta: {
-    main: "ประเมินโครงการของคุณ",
-    secondary: "เปิดชมผลงานตัวอย่าง",
-    pricing: "เลือกรูปแบบที่เหมาะสม",
+    main: "เลือกแบบเว็บพร้อมใช้",
+    secondary: "ปรึกษาฟรี (ทักเลย)",
+    pricing: "ดูราคาโปรโมชั่น",
   },
-
-  // 10. มาตรฐานงานที่ส่งมอบ (Service Standards)
   standards: {
-    performance: 98,
+    performance: 100,
     lcp: 0.8,
-    security: "ระบบรักษาความปลอดภัยข้อมูลระดับมาตรฐานสากล",
-    aiReadiness: "รองรับการประมวลผลของ Search AI และ Organic Search ปี 2026",
+    security: "ระบบความปลอดภัยมาตรฐานสากล",
+    guarantee: "ดูแลโดย นายเอ็มซ่ามากส์ ตัวจริง (การันตีโครงสร้าง SEO 100%)",
   },
 }

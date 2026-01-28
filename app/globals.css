@@ -3,87 +3,130 @@
 @import "tailwindcss";
 
 @theme {
-  /* เชื่อมโยงพิกัดฟอนต์หลัก */
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
+  /* [FONTS]: เชื่อมโยงฟอนต์หลักที่ทำให้อ่านง่ายและดูเป็นมืออาชีพ */
+  --font-heading: var(--font-heading), "IBM Plex Sans Thai", sans-serif;
+  --font-body: var(--font-body), "Anuphan", sans-serif;
 
-  /* [REFINED]: พิกัดชุดสีใหม่เพื่อแก้ปัญหาความจืด */
-  /* สีหลัก: Emerald ที่มีความลึก (Deep Emerald) */
-  --color-primary: oklch(62% 0.17 165);
-  --color-primary-dark: oklch(45% 0.14 165);
+  /* [COLORS]: ระบบสี OKLCH ที่ให้ความนวลตาและดูแพงแบบปี 2026 */
+  --color-primary: oklch(65% 0.18 160); /* Emerald Za-Maks (สีเขียวซิ่ง) */
+  --color-primary-dark: oklch(45% 0.14 160);
+  --color-accent: oklch(55% 0.18 265); /* Indigo Premium (สีน้ำเงินพรีเมียม) */
 
-  /* สีเสริม: Deep Indigo เพื่อเพิ่มมิติความพรีเมียม (ช่วยให้ Emerald เด่นขึ้น) */
-  --color-accent-indigo: oklch(55% 0.18 265);
-
-  /* พิกัดสีพื้นผิว (Surface Levels): ช่วยให้เว็บมีระนาบ ไม่แบนราบ */
   --color-background: oklch(100% 0 0);
-  --color-surface-subtle: oklch(
-    98% 0.01 235
-  ); /* สีเทาจางมากสำหรับแบ่ง Section */
+  --color-foreground: oklch(20% 0.02 240); /* Deep Slate (เทาเข้ม) */
+
+  --color-surface-subtle: oklch(98% 0.01 240);
   --color-surface-card: oklch(100% 0 0);
+  --color-border: oklch(94% 0.01 240);
 
-  --color-foreground: oklch(25% 0.02 235);
-  --color-border: oklch(93% 0.01 235);
+  /* [EFFECTS]: ระบบเงาและมิติที่ช่วยให้เว็บดูมีเลเยอร์ */
+  --shadow-aurora: 0 0 30px oklch(65% 0.18 160 / 0.12);
+  --shadow-feature: 0 20px 50px -12px oklch(20% 0.02 240 / 0.06);
+  --shadow-inner-glow: inset 0 1px 1px oklch(100% 0 0 / 0.1);
 
-  /* [GLOW SYSTEM]: เพิ่มระบบแสงฟุ้งให้ดูซ่าแบบ Technical */
-  --shadow-aurora: 0 0 25px oklch(62% 0.17 165 / 0.15);
-  --shadow-feature: 0 10px 40px -10px oklch(25% 0.02 235 / 0.08);
-
+  --radius-2xl: 1.5rem;
   --radius-3xl: 2.5rem;
+  --radius-4xl: 4rem;
+
+  /* [ANIMATION]: การเคลื่อนไหวที่ลื่นไหล ไม่กระตุก */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
 }
 
 @layer base {
+  *,
+  ::after,
+  ::before {
+    @apply border-border outline-primary/20;
+  }
+
   html {
-    @apply scroll-smooth;
+    @apply selection:bg-primary/10 selection:text-primary-dark scroll-smooth;
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    /* เพิ่ม Grain Texture จางๆ ทั่วทั้งหน้าเว็บเพื่อให้ดูแพงและมี Texture */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/1999/xlink'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px;
-    background-repeat: repeat;
+    /* [TEXTURE]: เพิ่ม Grain จางๆ เพื่อความพรีเมียมของพื้นผิวหน้าเว็บ */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     background-attachment: fixed;
-    /* ปรับ opacity ของ grain ผ่านการซ้อน layer */
     position: relative;
   }
 
-  body::before {
-    content: "";
-    @apply bg-background/95 pointer-events-none absolute inset-0 -z-20;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading tracking-tighter;
   }
 }
 
 @layer components {
-  .container {
-    @apply mx-auto max-w-7xl px-6;
+  /* คอนเทนเนอร์หลักในสไตล์นายเอ็มซ่ามากส์ */
+  .container-za {
+    @apply mx-auto max-w-7xl px-6 lg:px-8;
   }
 
-  /* [UTILITY]: พิกัดแบ่งส่วนเนื้อหา (Section Divider) */
-  .section-alt {
-    @apply bg-surface-subtle border-border border-y;
-  }
-
-  /* [UTILITY]: การ์ดแบบมีมิติ (Depth Card) */
-  .depth-card {
-    @apply border-border bg-surface-card shadow-feature hover:shadow-aurora rounded-3xl border transition-all duration-500 hover:-translate-y-1;
-  }
-
-  /* [ANIMATION]: พิกัดข้อความไล่สี (Gradient Text) */
+  /* การไล่เฉดสีตัวอักษรให้ดูซิ่ง */
   .text-gradient {
-    @apply via-primary to-accent-indigo bg-gradient-to-br from-slate-950 bg-clip-text text-transparent;
+    @apply via-primary to-accent bg-gradient-to-br from-slate-900 bg-clip-text text-transparent;
+  }
+
+  /* การ์ดแบบโปร่งใส (Glassmorphism) */
+  .glass-card {
+    @apply border-border shadow-feature bg-white/70 ring-1 ring-white/20 backdrop-blur-xl;
+  }
+
+  /* ปุ่มกดสไตล์ Za-Maks: เท่ ดุดัน และชัดเจน */
+  .btn-za {
+    @apply font-heading hover:bg-primary relative overflow-hidden rounded-2xl bg-slate-950 px-8 py-4 text-xs font-black tracking-widest text-white uppercase italic transition-all active:scale-95;
+  }
+
+  /* การ์ดที่มีมิติความลึกและการตอบสนอง */
+  .depth-card {
+    @apply border-border bg-surface-card shadow-feature hover:shadow-aurora rounded-3xl border transition-all duration-500 hover:-translate-y-2;
   }
 }
 
 @layer utilities {
-  /* จัดการพิกัด Scrollbar ให้เป็นมิตรต่อผู้ใช้งาน */
+  /* แสงวิ่งผ่านสำหรับตอนโหลดข้อมูล */
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* แถบเลื่อน (Scrollbar) ที่สะอาดตา ไม่รบกวนดีไซน์ */
   ::-webkit-scrollbar {
-    width: 5px;
+    @apply w-1.5;
   }
   ::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply hover:bg-primary/50 rounded-full bg-slate-200 transition-colors;
+    @apply hover:bg-primary/40 rounded-full bg-slate-200 transition-colors;
+  }
+
+  /* การจัดการขอบจางสำหรับภาพประกอบ */
+  .mask-radial {
+    mask-image: radial-gradient(circle, black 50%, transparent 100%);
   }
 }

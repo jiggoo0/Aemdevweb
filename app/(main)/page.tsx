@@ -1,50 +1,82 @@
 /** @format */
 
-import React from "react"
+import React, { Suspense } from "react"
 import { Metadata } from "next"
+import dynamic from "next/dynamic"
 
-// คอมโพเนนต์เลเยอร์หลัก (Layer Components)
+// [CRITICAL PATH]: โหลดทันทีเพื่อให้หน้าเว็บแสดงผลไวที่สุด (Above the Fold)
 import Hero from "@/components/shared/Hero"
-import ServiceCard from "@/components/shared/ServiceCard"
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard"
-import BlogCard from "@/components/shared/BlogCard"
-import TrustBadge from "@/components/shared/TrustBadge"
-import TemplateListSection from "@/components/shared/TemplateListSection"
-
-// ระบบงานและข้อมูลโครงสร้าง (Infrastructure & Data)
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
+import { ServiceCard } from "@/components/shared/ServiceCard"
 import { JsonLd } from "@/components/seo/JsonLd"
+import SectionSkeleton from "@/components/shared/SectionSkeleton"
+
+// [DYNAMIC LAYERS]: โหลดเมื่อจำเป็น (Lazy Loading) เพื่อลดขนาดไฟล์เริ่มต้น
+// ช่วยให้เว็บโหลดไวขึ้นบนมือถือ และรองรับพฤติกรรมการเลื่อนดูข้อมูล
+const WorkProcess = dynamic(
+  () =>
+    import("@/components/sales-engine/WorkProcess").then(
+      (mod) => mod.WorkProcess
+    ),
+  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> }
+)
+
+const PriceEstimator = dynamic(
+  () => import("@/components/sales-engine/PriceEstimator"), // Default Export
+  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> }
+)
+
+const CaseStudyCard = dynamic(() =>
+  import("@/components/shared/CaseStudyCard").then((mod) => mod.CaseStudyCard)
+)
+
+const TemplateListSection = dynamic(
+  () => import("@/components/shared/TemplateListSection"),
+  { ssr: true, loading: () => <SectionSkeleton /> }
+)
+
+const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
+
+// ดึงข้อมูลจากระบบ
 import { siteConfig } from "@/constants/site-config"
-import { services } from "@/constants/services-data"
+import { servicesData } from "@/constants/services-data"
 import { getAllCaseStudies } from "@/lib/case-studies"
+import { getBlogPostsMetadata } from "@/lib/blog"
 
 /**
- * Metadata: กำหนดพิกัด SEO เพื่อสร้างความชัดเจนและแรงดึงดูดบน Search Engine
- * เน้นการใช้ข้อมูลจาก siteConfig เพื่อความเป็นระเบียบของระบบงาน
+ * [SEO STRATEGY]: ข้อมูล Metadata สำหรับปี 2026
+ * เน้นคำที่ดึงดูดใจและตรงกลุ่มเป้าหมาย (Search Intent)
  */
 export const metadata: Metadata = {
-  title: `${siteConfig.project.title} | ${siteConfig.project.slogan}`,
+  title: `${siteConfig.project.title} | เว็บไซต์สำเร็จรูปและงานระบบคุณภาพสูง`,
   description: siteConfig.project.description,
   alternates: { canonical: siteConfig.project.url },
+  openGraph: {
+    title: siteConfig.project.title,
+    description: siteConfig.project.description,
+    url: siteConfig.project.url,
+    images: [{ url: siteConfig.project.ogImage }],
+    type: "website",
+  },
 }
 
-/**
- * HomePage: หน้าแรกของระบบ AEMDEVWEB
- * ออกแบบโครงสร้างให้รองรับการทำ Organic Search และเน้นความเป็นมิตรต่อผู้ใช้งาน
- */
 export default async function HomePage() {
   /**
-   * [STRATEGY] การจัดวางลำดับหน้าเว็บ:
-   * 1. ดึง 4 บริการหลักเพื่อแสดงขอบเขตงานที่ชัดเจนแก่ SME
-   * 2. ดึง 3 ผลงานจริงมาพิสูจน์มาตรฐานงานผ่านตัวเลขและผลลัพธ์
+   * [SERVER DATA]: ดึงข้อมูลเตรียมไว้ที่ฝั่ง Server
+   * เพื่อความเร็วในการส่งข้อมูลไปหน้าบ้าน (Zero Client-Side Fetch)
    */
-  const featuredServices = services.slice(0, 4)
-  const allCaseStudies = await getAllCaseStudies()
-  const featuredCases = allCaseStudies.slice(0, 3)
+  const [allCaseStudies, latestPosts] = await Promise.all([
+    getAllCaseStudies(),
+    getBlogPostsMetadata(),
+  ])
+
+  const featuredServices = (servicesData || []).slice(0, 4)
+  const featuredCases = (allCaseStudies || []).slice(0, 2)
+  const featuredPosts = (latestPosts || []).slice(0, 4)
 
   return (
     <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/10">
-      {/* 1. SEO Structured Data: วางพิกัดข้อมูลให้ระบบค้นหาเข้าใจบทบาทของเว็บไซต์ */}
+      {/* 1. Structured Data: บอก Google ว่าเราคือตัวจริงเรื่อง Web Service */}
       <JsonLd
         type="WebSite"
         data={{
@@ -54,104 +86,109 @@ export default async function HomePage() {
         }}
       />
 
-      {/* [LAYER 1] - HERO: First Impression ที่เน้นความโปร่งใสและดูเป็นมืออาชีพ */}
+      {/* [LAYER 1]: Hero Section - ส่วนต้อนรับที่เน้นความเร็วและความเชื่อมั่น */}
       <Hero />
 
-      {/* [LAYER 2] - TRUST & IMPACT: ยืนยันความเชื่อมั่นผ่านตัวเลขและสถิติงานระบบ */}
-      <div className="relative z-10">
-        <TrustBadge />
-        <div className="border-b border-slate-50 bg-white py-2">
-          <ImpactStats />
-        </div>
+      {/* [LAYER 2]: ตัวเลขยืนยัน - สถิติความสำเร็จที่จับต้องได้ */}
+      <div className="relative z-10 border-b border-slate-50 bg-white">
+        <ImpactStats />
       </div>
 
-      {/* [LAYER 3] - SERVICES: หมวดหมู่โครงสร้างเว็บที่ออกแบบมาเพื่อธุรกิจ SME */}
-      <section
-        id="services"
-        className="relative overflow-hidden py-24 lg:py-40"
-      >
+      {/* [LAYER 3]: บริการหลัก - ทางเลือกที่ใช่สำหรับธุรกิจคุณ */}
+      <section id="services" className="relative py-24 lg:py-40">
         <div className="container mx-auto px-6">
-          <div className="mb-20 max-w-3xl border-l-8 border-emerald-500 pl-8">
-            <h2 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
-              Our <span className="text-emerald-500">Services.</span>
+          <div className="mb-20 max-w-3xl border-l-8 border-emerald-500 pl-8 md:pl-16">
+            <h2 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
+              Main <br />
+              <span className="text-emerald-500">Services.</span>
             </h2>
-            <p className="font-anuphan mt-8 text-lg leading-relaxed font-bold text-slate-500 md:text-xl">
-              วางระบบเว็บที่ตอบโจทย์คนทำงานจริง
-              <br className="hidden md:block" />
-              ช่วยธุรกิจเดินหน้าได้อย่างต่อเนื่องผ่านพิกัดงานที่ชัดเจนและแม่นยำ
+            <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+              เลือกแพ็กเกจที่เหมาะกับคุณ
+              พร้อมออนไลน์ด้วยระบบที่ออกแบบมาเพื่อการขาย รองรับมาตรฐานใหม่ปี
+              2026
             </p>
           </div>
 
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {featuredServices.map((service) => (
-              <ServiceCard key={service.id} service={service} />
+              <ServiceCard key={service.id} data={service} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* [LAYER 4] - CASE STUDIES: พิสูจน์ด้วยผลลัพธ์การทำงานจริง */}
-      <section id="cases" className="bg-slate-950 py-24 text-white lg:py-40">
-        <div className="container mx-auto px-6">
-          <div className="mb-20">
-            <div className="max-w-2xl border-l-8 border-emerald-500 pl-8">
-              <h2 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl">
-                Success <span className="text-emerald-500">Stories.</span>
+      {/* [DYNAMIC ZONE]: ส่วนที่เน้นการทำงานลื่นไหล (Lazy Loading) */}
+      <Suspense fallback={<SectionSkeleton />}>
+        {/* [LAYER 4]: ขั้นตอนการทำงาน - ชัดเจน ตรงไปตรงมา */}
+        <section className="bg-slate-50 py-12 lg:py-24">
+          <div className="container mx-auto px-6">
+            <WorkProcess />
+          </div>
+        </section>
+
+        {/* [LAYER 5]: ประเมินงบประมาณ - โปร่งใส ไม่มีซ่อนเร้น */}
+        <PriceEstimator />
+
+        {/* [LAYER 6]: ผลงานที่ผ่านมา - พิสูจน์ด้วยผลลัพธ์จริงบน Google */}
+        <section id="cases" className="bg-slate-950 py-24 text-white lg:py-40">
+          <div className="container mx-auto px-6">
+            <div className="mb-20 max-w-2xl border-l-8 border-emerald-500 pl-8 md:pl-16">
+              <h2 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl">
+                Success <br />
+                <span className="text-emerald-500">Stories.</span>
               </h2>
-              <p className="font-anuphan mt-8 text-lg leading-relaxed font-bold text-slate-300 md:text-xl">
-                เปลี่ยนโจทย์ที่ซับซ้อนให้เป็นผลงานความสำเร็จที่จับต้องได้จริง
+              <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-300 md:text-2xl">
+                ตัวอย่างธุรกิจที่เติบโตจริงจากการวางระบบเว็บที่ถูกต้อง
               </p>
             </div>
+            <div className="grid gap-12 md:grid-cols-2">
+              {featuredCases.map((item) => (
+                <CaseStudyCard
+                  key={item.slug}
+                  slug={item.slug}
+                  title={item.frontmatter.title}
+                  description={item.frontmatter.excerpt}
+                  image={item.frontmatter.thumbnail}
+                  industry={item.frontmatter.industry}
+                  result={
+                    typeof item.frontmatter.results?.[0] === "string"
+                      ? item.frontmatter.results[0]
+                      : item.frontmatter.results?.[0]?.value ||
+                        "Success Optimized"
+                  }
+                />
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-            {featuredCases.map((item) => (
-              <CaseStudyCard
-                key={item.slug}
-                // [FIXED]: ลบ index={idx} ออกเพื่อให้ตรงกับโครงสร้าง Component ที่ปรับปรุงใหม่
-                slug={item.slug}
-                title={item.frontmatter.title}
-                description={item.frontmatter.excerpt}
-                image={item.frontmatter.thumbnail}
-                industry={item.frontmatter.industry}
-                result={
-                  typeof item.frontmatter.results?.[0] === "string"
-                    ? item.frontmatter.results[0]
-                    : item.frontmatter.results?.[0]?.value
-                }
-              />
-            ))}
+        {/* [LAYER 7]: แบบเว็บไซต์ - เลือกดีไซน์ที่ชอบแล้วเริ่มเลย */}
+        <section id="templates" className="bg-white py-24 lg:py-40">
+          <div className="container mx-auto px-6">
+            <TemplateListSection />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* [LAYER 5] - TEMPLATES: คลังโครงสร้างงานระบบที่พร้อมสำหรับการเติบโต */}
-      <section id="templates" className="bg-white py-24 lg:py-40">
-        <div className="container mx-auto px-6">
-          <TemplateListSection />
-        </div>
-      </section>
-
-      {/* [LAYER 6] - KNOWLEDGE: ศูนย์รวมความรู้เพื่อการปรับตัวของธุรกิจ */}
-      <section
-        id="blog"
-        className="border-t border-slate-100 bg-slate-50 py-24 lg:py-40"
-      >
-        <div className="container mx-auto px-6">
-          <div className="mb-20 flex flex-col items-center justify-center text-center">
-            <h2 className="font-prompt text-5xl leading-[0.9] font-black tracking-tighter text-slate-900 uppercase italic md:text-8xl">
-              Knowledge <span className="text-emerald-500">Hub.</span>
-            </h2>
-            <p className="font-anuphan mt-8 max-w-xl text-lg leading-relaxed font-bold text-slate-500">
-              อัปเดตแนวคิดการทำเว็บที่ใช้งานได้จริง
-              เพื่อให้อยู่เหนือคู่แข่งในทุกจังหวะของธุรกิจ
-            </p>
+        {/* [LAYER 8]: คลังความรู้ - เทคนิคและอัปเดตใหม่ๆ */}
+        <section
+          id="blog"
+          className="border-t border-slate-100 bg-slate-50 py-24 lg:py-40"
+        >
+          <div className="container mx-auto px-6">
+            <div className="mb-20 text-center">
+              <h2 className="font-heading text-5xl font-black uppercase italic md:text-8xl">
+                Knowledge <span className="text-emerald-500">Hub.</span>
+              </h2>
+              <p className="font-body mt-4 font-bold tracking-widest text-slate-400 uppercase italic">
+                เจาะลึกเทคนิคทำเว็บและการตลาดออนไลน์
+              </p>
+            </div>
+            <BlogCard posts={featuredPosts} />
           </div>
-          <BlogCard />
-        </div>
-      </section>
+        </section>
+      </Suspense>
 
-      {/* พิกัดพื้นหลังลายตาราง (Infrastructure Grid) เพื่อมิติเชิงเทคนิค */}
+      {/* พื้นหลังลายตาราง (Grid): เพิ่มความเนี้ยบแบบ Minimal */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
         aria-hidden="true"

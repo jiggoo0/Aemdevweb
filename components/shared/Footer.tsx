@@ -3,85 +3,95 @@
 import React from "react"
 import Link from "next/link"
 import { siteConfig } from "@/constants/site-config"
-import { Mail, MessageCircle, MapPin, ArrowUpRight } from "lucide-react"
+import {
+  Mail,
+  MessageCircle,
+  MapPin,
+  ArrowUpRight,
+  Zap,
+  ShieldCheck,
+} from "lucide-react"
 
 /**
- * Footer: พิกัดฐานข้อมูลและการติดต่อท้ายระบบงาน
- * แนวทาง: แยกส่วนการจัดวางให้ดูสะอาดตา จัดกลุ่มข้อมูลให้เข้าถึงง่ายสไตล์ Professional Freelance
- * [FIXED]: ปรับปรุงพิกัดเส้นทางให้ตรงตามโครงสร้างไฟล์ปัจจุบัน และเพิ่มจุดท้าย Logo เพื่อความกริบ
- * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
+ * Footer: ส่วนแสดงข้อมูลติดต่อและเมนูท้ายหน้าเว็บ
+ * แนวคิด: ตอกย้ำความเชื่อมั่นด้วยมาตรฐานงานเนี้ยบและที่ตั้งที่ชัดเจน
+ * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  // สารบบพิกัดการนำทางที่สอดคล้องกับ Directory Tree ล่าสุด
+  // รายการเมนูนำทาง (อัปเดตตามรูปแบบบริการปี 2026)
   const footerNavigation = {
-    system: [
-      { name: "บริการของเรา", href: "/services" },
-      { name: "คลังโครงสร้าง", href: "/templates" },
-      { name: "ถอดรหัสผลงาน", href: "/case-studies" },
-      { name: "คลังความรู้", href: "/blog" },
+    services: [
+      { name: "แพ็กเกจเช่าเว็บไซต์", href: "/services" },
+      { name: "เทมเพลตพร้อมใช้งาน", href: "/templates" },
+      { name: "รวมผลงานที่สำเร็จจริง", href: "/case-studies" },
+      { name: "บทความ SEO & AI", href: "/blog" },
     ],
-    support: [
-      { name: "เกี่ยวกับเรา", href: "/about" },
+    about: [
+      { name: "รู้จักนายเอ็มซ่ามากส์", href: "/about" },
       { name: "นโยบายความเป็นส่วนตัว", href: "/privacy" },
-      { name: "ข้อตกลงการใช้งาน", href: "/terms" },
+      { name: "ข้อตกลงการใช้บริการ", href: "/terms" },
     ],
   }
 
   return (
-    <footer className="relative border-t border-slate-100 bg-white pt-24 pb-12">
-      <div className="container mx-auto px-6">
+    <footer className="relative overflow-hidden border-t border-slate-50 bg-white pt-24 pb-12">
+      {/* ตกแต่งพื้นหลัง: แสง Aurora จาง ๆ เพื่อความสวยงามแบบพรีเมียม */}
+      <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-emerald-500/5 blur-[100px]" />
+
+      <div className="relative z-10 container mx-auto px-6">
         <div className="grid gap-16 lg:grid-cols-12">
-          {/* 1. Branding & Identity: พิกัดตัวตนและแนวคิดของแบรนด์ AEMDEVWEB */}
+          {/* ส่วนที่ 1 - โลโก้และเป้าหมายของแบรนด์ */}
           <div className="lg:col-span-5">
-            <Link
-              href="/"
-              className="inline-block transition-opacity hover:opacity-80"
-            >
-              <span className="font-heading text-2xl font-black tracking-tighter text-slate-950 uppercase italic">
+            <Link href="/" className="group inline-flex items-center gap-1">
+              <span className="font-heading text-3xl font-black tracking-tighter text-slate-950 uppercase italic">
                 {siteConfig.project.name}
-                <span className="text-emerald-500">.</span>
+                <span className="text-emerald-500 group-hover:animate-pulse">
+                  .
+                </span>
               </span>
             </Link>
+
             <p className="font-body mt-8 max-w-sm text-lg leading-relaxed font-bold text-slate-500">
-              วางพิกัดงานระบบเว็บไซต์ที่ตอบโจทย์คนทำงานจริง
-              เปลี่ยนหน้าบ้านดิจิทัลให้เป็นเครื่องจักรที่ช่วยสร้างผลลัพธ์อย่างแม่นยำ
+              สร้างระบบเว็บไซต์สเปกปีศาจที่ตอบโจทย์ธุรกิจไทย
+              เปลี่ยนหน้าเว็บให้เป็นเครื่องจักรทำกำไรที่โหลดไวที่สุด
             </p>
 
-            {/* พิกัดช่องทางติดต่อด่วน: เน้นการเชื่อมต่อที่รวดเร็วและเป็นมิตร */}
-            <div className="mt-10 flex flex-wrap items-center gap-6">
+            {/* ช่องทางติดต่อด่วน: เน้น LINE เป็นหลักเพื่อให้ลูกค้าทักง่าย */}
+            <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
               <a
-                href={siteConfig.contact.line}
+                href={siteConfig.links.line}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-2 text-[10px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
+                className="group flex items-center gap-3 rounded-2xl bg-slate-950 px-6 py-3 text-[11px] font-black tracking-widest text-white uppercase italic transition-all hover:bg-emerald-600 hover:text-white"
               >
-                <MessageCircle size={16} />
-                LINE Official
+                <MessageCircle size={18} fill="currentColor" />
+                คุยงานผ่าน LINE
                 <ArrowUpRight
-                  size={12}
-                  className="opacity-0 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100"
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
               </a>
+
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="group flex items-center gap-2 text-[10px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
+                className="flex items-center gap-3 text-[11px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-slate-950"
               >
-                <Mail size={16} />
-                Email Support
+                <Mail size={18} />
+                {siteConfig.contact.email}
               </a>
             </div>
           </div>
 
-          {/* 2. Navigation Links: พิกัดการนำทางภายในโครงสร้างเว็บ (Fixed Routes 2026) */}
+          {/* ส่วนที่ 2 - เมนูบริการและข้อมูลบริษัท */}
           <div className="grid grid-cols-2 gap-8 lg:col-span-4">
             <div>
               <h4 className="font-heading mb-8 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase italic">
-                Our System
+                Our Services
               </h4>
               <ul className="space-y-4">
-                {footerNavigation.system.map((item) => (
+                {footerNavigation.services.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -95,10 +105,10 @@ export default function Footer() {
             </div>
             <div>
               <h4 className="font-heading mb-8 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase italic">
-                Support
+                Company
               </h4>
               <ul className="space-y-4">
-                {footerNavigation.support.map((item) => (
+                {footerNavigation.about.map((item) => (
                   <li key={item.name}>
                     <Link
                       href={item.href}
@@ -112,36 +122,50 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 3. Base Location: พิกัดฐานการทำงานจริง (Mai Ngam, Tak) */}
+          {/* ส่วนที่ 3 - สถานที่ตั้ง (ไม้งาม จ.ตาก) */}
           <div className="lg:col-span-3">
             <h4 className="font-heading mb-8 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase italic">
-              Base Location
+              Our Location
             </h4>
             <div className="flex items-start gap-4">
-              <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-slate-400">
+              <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-50 text-emerald-600">
                 <MapPin size={20} />
               </div>
               <address className="font-body text-sm leading-relaxed font-bold text-slate-500 not-italic">
-                Mai Ngam, Tak, Thailand <br />
-                พิกัดการทำงานแบบ Remote-First <br />
-                เพื่อความเร็วในการส่งมอบระบบงาน
+                <span className="text-slate-900">ไม้งาม จ.ตาก, ประเทศไทย</span>{" "}
+                <br />
+                เราทำงานระบบออนไลน์ 100% <br />
+                เพื่อความรวดเร็วในการส่งมอบงานให้ลูกค้าทั่วประเทศ
               </address>
+            </div>
+
+            {/* ตราสัญลักษณ์รับรองความเนี้ยบ */}
+            <div className="mt-8 flex items-center gap-3 text-emerald-600/50">
+              <ShieldCheck size={16} />
+              <span className="text-[9px] font-black tracking-widest uppercase italic">
+                Verified Expert 2026
+              </span>
             </div>
           </div>
         </div>
 
-        {/* 4. Bottom Bar: พิกัดลิขสิทธิ์และมาตรฐานงานพัฒนาระบบ */}
-        <div className="mt-24 flex flex-col items-center justify-between gap-8 border-t border-slate-50 pt-12 md:flex-row">
+        {/* ส่วนที่ 4 - ลิขสิทธิ์และสเปกเครื่องยนต์หลังบ้าน */}
+        <div className="mt-24 flex flex-col items-center justify-between gap-8 border-t border-slate-100 pt-12 md:flex-row">
           <p className="font-heading text-[10px] font-black tracking-[0.2em] text-slate-300 uppercase italic">
-            © {currentYear} {siteConfig.project.name}. Developed by
-            นายเอ็มซ่ามากส์.
+            © {currentYear} {siteConfig.project.name}.{" "}
+            <br className="md:hidden" />
+            ดูแลงานระบบโดย นายเอ็มซ่ามากส์
           </p>
+
           <div className="flex items-center gap-8">
-            <span className="font-heading text-[9px] font-black tracking-widest text-slate-300 uppercase italic">
-              Next.js 15 Ready
-            </span>
-            <span className="font-heading text-[9px] font-black tracking-widest text-emerald-500/40 uppercase italic">
-              Technical SEO Optimized
+            <div className="flex items-center gap-2">
+              <Zap size={12} className="text-emerald-500" />
+              <span className="font-heading text-[9px] font-black tracking-widest text-slate-300 uppercase italic">
+                Next.js 16 & AI Ready
+              </span>
+            </div>
+            <span className="font-heading text-[9px] font-black tracking-widest text-emerald-500 uppercase italic">
+              SEO Optimized
             </span>
           </div>
         </div>

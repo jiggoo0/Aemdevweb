@@ -5,15 +5,15 @@ import Navbar from "@/components/shared/Navbar"
 import Footer from "@/components/shared/Footer"
 
 /**
- * [FIXED]: นำเข้าคอมโพเนนต์แบบ Default Import (ไม่มีปีกกา)
- * เพื่อป้องกันพิกัดข้อมูลผิดพลาด (undefined) ทำให้ระบบเรียกใช้งานได้แม่นยำ 100%
+ * [COMPONENTS]: ดึงส่วนประกอบหน้าเว็บหลัก
+ * เน้นการโหลดที่รวดเร็วและไม่หน่วงเครื่องผู้ใช้งาน เพื่อผลลัพธ์ความเร็วระดับปีศาจ
  */
 import LineStickyButton from "@/components/shared/LineStickyButton"
 
 /**
- * MainLayout - ระบบพื้นฐานสำหรับกลุ่มหน้าเนื้อหาหลัก
- * ครอบคลุมพิกัดหน้า: เกี่ยวกับเรา, บริการ, บทความ และผลงาน
- * แนวทาง: เน้นการเข้าถึงข้อมูลที่ลื่นไหล และมีจุดเชื่อมต่อถึงที่ปรึกษาได้ทุกเวลา
+ * MainLayout - โครงสร้างพื้นฐานสำหรับกลุ่มหน้าบริการหลัก
+ * ครอบคลุม: หน้าเกี่ยวกับเรา, บริการ, บทความ และผลงาน
+ * ปรัชญา: เรียบง่าย โหลดไว และใช้งานง่ายที่สุดในสไตล์นายเอ็มซ่ามากส์
  */
 export default function MainLayout({
   children,
@@ -21,17 +21,42 @@ export default function MainLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-white selection:bg-emerald-500/10">
-      {/* [LAYER 1] - ส่วนนำทาง (Navbar): พิกัดการเข้าถึงเมนูหลักของระบบงาน */}
+    <div className="relative flex min-h-screen flex-col bg-white antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
+      {/* ปุ่มลัด (Skip to Content): 
+          ช่วยให้ผู้ใช้งานข้ามไปยังเนื้อหาหลักได้ทันที เพิ่มคะแนน Accessibility ให้เต็มร้อย
+      */}
+      <a
+        href="#main-content"
+        className="focus:font-heading sr-only focus:not-sr-only focus:fixed focus:top-6 focus:left-6 focus:z-[1000] focus:rounded-2xl focus:bg-slate-950 focus:px-8 focus:py-4 focus:text-xs focus:font-black focus:tracking-widest focus:text-emerald-500 focus:uppercase focus:italic focus:shadow-2xl"
+      >
+        ข้ามไปที่เนื้อหาหลัก
+      </a>
+
+      {/* เมนูหลัก (Navbar):
+          ออกแบบให้ลูกค้าหาข้อมูลและบริการที่ต้องการได้ไวที่สุด ไม่ซับซ้อน
+      */}
       <Navbar />
 
-      {/* [LAYER 2] - พื้นที่เนื้อหา (Main Content): พิกัดแสดงผลข้อมูลตามที่ผู้ใช้งานเลือกชม */}
-      <main className="flex-1 focus:outline-none">{children}</main>
+      {/* พื้นที่เนื้อหาหลัก (Main Content):
+          โครงสร้างรองรับการเปลี่ยนหน้าแบบลื่นไหล ตามมาตรฐานเว็บปี 2026
+      */}
+      <main
+        id="main-content"
+        className="flex-1 transition-all duration-500 outline-none"
+      >
+        {children}
+      </main>
 
-      {/* [LAYER 3] - จุดติดต่อด่วน (Quick Contact): ปุ่ม LINE สำหรับการปรึกษาโครงการ */}
-      <LineStickyButton />
+      {/* ปุ่มติดต่อด่วน (Quick Contact):
+          ปุ่ม LINE ติดหนึบมุมหน้าจอ เพื่อให้ลูกค้าทักปรึกษาได้ทันทีที่ต้องการ
+      */}
+      <div className="fixed right-8 bottom-8 z-[99] md:right-12 md:bottom-12">
+        <LineStickyButton />
+      </div>
 
-      {/* [LAYER 4] - ส่วนท้าย (Footer): พิกัดรวบรวมข้อมูลธุรกิจและลิงก์ที่จำเป็น */}
+      {/* ส่วนท้าย (Footer):
+          สรุปช่องทางติดต่อและลิงก์สำคัญทั้งหมดของ AEMDEVWEB
+      */}
       <Footer />
     </div>
   )

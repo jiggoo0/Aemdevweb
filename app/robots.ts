@@ -4,37 +4,43 @@ import { MetadataRoute } from "next"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * ระบบควบคุมการเก็บข้อมูลของระบบค้นหา (Search Engine Crawler Control)
- * จัดการพิกัดการเข้าถึงข้อมูลเพื่อให้บอทเก็บข้อมูลเฉพาะส่วนที่ต้องการสื่อสารต่อสาธารณะ
- * Identity: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
- * Project: AEMDEVWEB - Landing Page SME & technical SEO
+ * ระบบควบคุมการเก็บข้อมูลของ Google และบอทต่างๆ
+ * แนวทางปี 2026: เน้นเปิดทางให้ Google Search เจอหน้าเว็บง่ายๆ แต่จำกัดสิทธิ์ AI ไม่ให้ดึงข้อมูลสำคัญ
+ * ดูแลโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = siteConfig.project.url
+  const rawBaseUrl = siteConfig.project.url
+
+  // จัดการที่อยู่ URL ให้สะอาด ไม่มีเครื่องหมาย / ต่อท้าย
+  const baseUrl = rawBaseUrl.endsWith("/")
+    ? rawBaseUrl.slice(0, -1)
+    : rawBaseUrl
 
   return {
     rules: [
       {
         userAgent: "*",
         /**
-         * 1. ส่วนที่อนุญาตให้เข้าถึง (Allowed Paths)
-         * เปิดทางให้บอทเก็บข้อมูลหน้าบริการและคลังเทมเพลตเพื่อรองรับ Organic Search
+         * 1. ส่วนที่อนุญาต (Allowed Paths)
+         * เปิดทางให้บอทเก็บข้อมูลหน้าหลัก, บริการ และหน้ารวมแบบเว็บไซต์ เพื่อดันอันดับ SEO
          */
         allow: [
           "/",
           "/about",
-          "/services/",
-          "/case-studies/",
-          "/blog/",
+          "/services",
+          "/case-studies",
+          "/blog",
           "/contact",
-          "/templates/", // พิกัดหลักสำหรับงานรับทำ Landing Page
-          "/images/showcase/",
-          "/images/templates/",
+          "/templates",
+          "/privacy",
+          "/terms",
+          "/images/showcase",
+          "/images/templates",
         ],
 
         /**
-         * 2. ส่วนที่ห้ามเข้าถึง (Disallowed Paths)
-         * ป้องกันบอทเข้าถึงไฟล์ระบบและตรรกะหลังบ้านเพื่อความปลอดภัยของโครงการ
+         * 2. ส่วนที่จำกัดการเข้าถึง (Disallowed Paths)
+         * ป้องกันบอทเข้าถึงไฟล์ระบบ, ส่วนประกอบของโค้ด และข้อมูลหลังบ้าน
          */
         disallow: [
           "/api/",
@@ -42,7 +48,7 @@ export default function robots(): MetadataRoute.Robots {
           "/config/",
           "/content/",
           "/lib/",
-          "/types/", // ป้องกันการเข้าถึงโครงสร้างประเภทข้อมูล
+          "/types/",
           "/download/",
           "/*.json$",
           "/not-found",
@@ -50,8 +56,8 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         /**
-         * 3. การจัดการสิทธิ์สำหรับ AI Crawler (2026 Standard)
-         * ป้องกันบอทนำพิกัดงาน technical SEO และเคสผลงานเฉพาะทางไปประมวลผลต่อโดยไม่ได้รับอนุญาต
+         * 3. AI & LLM Protection (มาตรฐานปี 2026)
+         * ป้องกัน AI นำผลงานหรือข้อมูลเทคนิคที่เป็นความลับของลูกค้าไปประมวลผลต่อ
          */
         userAgent: [
           "GPTBot",
@@ -64,14 +70,13 @@ export default function robots(): MetadataRoute.Robots {
           "/config/",
           "/lib/",
           "/content/",
-          "/case-studies/", // ล็อกพิกัดผลงานที่เป็นความลับของลูกค้า
-          "/templates/*/_assets/", // กัน AI เข้าถึงทรัพยากรเฉพาะทางของเทมเพลต
+          "/case-studies/", // ล็อกข้อมูลผลงานแบบละเอียดเพื่อความเป็นส่วนตัวของลูกค้า
+          "/templates/*/_parts/", // ป้องกันการเข้าถึงชิ้นส่วนประกอบภายในเทมเพลต
         ],
       },
     ],
     /**
-     * ระบุตำแหน่งแผนผังเว็บไซต์ (Sitemap)
-     * เพื่อให้ Google ค้นพบหน้า Landing Page ใหม่ๆ ได้รวดเร็วและครบถ้วน
+     * แจ้งตำแหน่ง Sitemap เพื่อให้บอทเจอหน้า Landing Page ใหม่ๆ ได้ภายใน 24 ชม.
      */
     sitemap: `${baseUrl}/sitemap.xml`,
   }

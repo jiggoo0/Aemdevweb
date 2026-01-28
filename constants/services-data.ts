@@ -1,25 +1,15 @@
 /** @format */
 
-import {
-  Layout,
-  Store,
-  Building2,
-  Factory,
-  Settings2,
-  TrendingUp,
-} from "lucide-react"
+import { ServiceIconName } from "@/types"
 
 /* -------------------------------------------------------------------------- */
-/* นิยามประเภทข้อมูล (Data Schema)                                              */
+/* 1. นิยามรูปแบบข้อมูล (Data Schema)                                              */
 /* -------------------------------------------------------------------------- */
 
 export type ServiceCategory =
-  | "Starter"
-  | "SME"
-  | "Corporate"
-  | "Industrial"
-  | "SEO_Technical"
-  | "SEO_Organic"
+  | "ReadyMade" // เว็บสำเร็จรูป
+  | "Business" // ธุรกิจรายย่อยและเฉพาะทาง
+  | "Digital" // บริการระบบงานต่อเนื่อง
 
 export type ThemeColor =
   | "slate"
@@ -28,19 +18,24 @@ export type ThemeColor =
   | "indigo"
   | "amber"
   | "rose"
+  | "orange"
+  | "violet"
 
 export interface ServiceItem {
   id: string
   title: string
+  slug: string
   description: string
-  price: string
-  priceValue: number
+  thumbnail: string // พิกัดภาพตัวอย่างบริการ
+  price: string // สำหรับแสดงผล เช่น "1,990.-"
+  priceValue: number // สำหรับคำนวณ
+  renewalPrice?: string
   features: string[]
   promotion?: string
-  slug: string
   themeColor: ThemeColor
   category: ServiceCategory
   highlight?: boolean
+  iconName: ServiceIconName
 }
 
 export interface CategoryInfo {
@@ -48,173 +43,235 @@ export interface CategoryInfo {
   name: string
   themeColor: ThemeColor
   description: string
-  icon: React.ElementType
+  iconName: ServiceIconName
 }
 
 /* -------------------------------------------------------------------------- */
-/* ข้อมูลหมวดหมู่ - เน้นแก้ปัญหาให้ SME และกลุ่มธุรกิจอุตสาหกรรม                          */
+/* 2. หมวดหมู่บริการ - จัดกลุ่มตามพิกัดงาน 2026                                   */
 /* -------------------------------------------------------------------------- */
 
 export const categoriesData: CategoryInfo[] = [
   {
-    slug: "starter",
-    name: "Sale Page เน้นปิดการขาย",
-    themeColor: "slate",
-    description:
-      "เปลี่ยนผู้เข้าชมเป็นรายชื่อติดต่อ ด้วยหน้าเว็บที่โหลดไวและใช้งานง่ายที่สุด",
-    icon: Layout,
+    slug: "ready-made",
+    name: "Web Ready: เว็บสำเร็จรูป",
+    themeColor: "orange",
+    description: "เลือกแบบที่ใช่ ลงข้อมูลพร้อมขาย ออนไลน์ได้ภายใน 24 ชม.",
+    iconName: "Zap",
   },
   {
-    slug: "sme",
-    name: "เว็บไซต์ธุรกิจ SME",
-    themeColor: "emerald",
-    description:
-      "สร้างภาพลักษณ์ที่น่าเชื่อถือด้วยเว็บไซต์มาตรฐานสากล พร้อมรองรับการทำ Organic Search",
-    icon: Store,
-  },
-  {
-    slug: "corporate",
-    name: "เว็บไซต์องค์กร (Corporate)",
+    slug: "business-niche",
+    name: "Business & Niche: ธุรกิจเฉพาะทาง",
     themeColor: "blue",
-    description:
-      "เน้นความน่าเชื่อถือระดับสากล ความปลอดภัยของข้อมูล และความลื่นไหลของระบบในระยะยาว",
-    icon: Building2,
+    description: "เน้นระบบงานที่ตอบโจทย์ SME และบริการในพื้นที่",
+    iconName: "Building2",
   },
   {
-    slug: "industrial",
-    name: "ระบบแคตตาล็อกสินค้าโรงงาน",
-    themeColor: "indigo",
-    description:
-      "จัดการสินค้าจำนวนมากให้ค้นหาง่าย พร้อมระบบรองรับการขอใบเสนอราคาที่รวดเร็ว",
-    icon: Factory,
-  },
-  {
-    slug: "seo-technical",
-    name: "ปรับแต่งโครงสร้าง SEO",
-    themeColor: "amber",
-    description:
-      "แก้ไขจุดบอดหลังบ้านเพื่อให้ระบบค้นหาเจอธุรกิจของคุณได้แม่นยำและรวดเร็ว",
-    icon: Settings2,
-  },
-  {
-    slug: "seo-organic",
-    name: "กลยุทธ์ Organic Search",
-    themeColor: "rose",
-    description:
-      "เพิ่มจำนวนผู้เข้าชมจากกลุ่มเป้าหมายจริง ด้วยเนื้อหาที่ตอบโจทย์การค้นหาบน Google",
-    icon: TrendingUp,
+    slug: "digital-recurring",
+    name: "Digital & Service: บริการต่อเนื่อง",
+    themeColor: "violet",
+    description: "การวางระบบ SEO และการดูแลพิกัดเว็บระยะยาว",
+    iconName: "TrendingUp",
   },
 ]
 
 /* -------------------------------------------------------------------------- */
-/* รายละเอียดบริการ - เน้นการส่งมอบผลลัพธ์ที่ช่วยให้ธุรกิจเติบโต                          */
+/* 3. รายละเอียด 10 บริการหลัก (AEMDEVWEB Core Services)                          */
 /* -------------------------------------------------------------------------- */
 
-export const services: ServiceItem[] = [
+export const servicesData: ServiceItem[] = [
+  // --- [กลุ่มที่ 1]: เว็บไซต์สำเร็จรูป (Ready-Made) ---
   {
-    id: "starter-one-page",
-    title: "Sale Page: ออกแบบเพื่อปิดการขาย",
-    slug: "starter-one-page",
-    category: "Starter",
+    id: "svc-salepage",
+    title: "1-Hour SalePage Pro",
+    slug: "salepage_single",
+    category: "ReadyMade",
+    themeColor: "orange",
     description:
-      "หน้าเว็บหน้าเดียวที่จัดเรียงข้อมูลตามพฤติกรรมลูกค้า โหลดไวในเสี้ยววินาทีเพื่อรักษาโอกาสในการขาย",
-    price: "เริ่มต้น 5,900.-",
-    priceValue: 5900,
+      "Landing Page หน้าเดียว วางพิกัดมาเพื่อสายยิงแอดโดยเฉพาะ โหลดไวหยุดลูกค้าได้ทันที",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "1,990.-",
+    priceValue: 1990,
+    renewalPrice: "990.- / ปี",
     features: [
-      "Ultra Fast Loading: ความเร็วระดับสูงเพื่อรักษาความสนใจของผู้เข้าชม",
-      "Mobile Optimized: ใช้งานลื่นไหลบนมือถือทุกรุ่นที่เป็นพิกัดหลักของลูกค้า",
-      "Direct Action Buttons: วางตำแหน่งปุ่มติดต่อให้ชัดเจนและกดง่ายที่สุด",
-      "Standard Security: ระบบป้องกันความปลอดภัยตามเกณฑ์มาตรฐานสากล",
+      "ระบบโหลดไวระดับปีศาจ ลูกค้าไม่กดหนี",
+      "วางปุ่มทักไลน์ในพิกัดที่กดง่ายที่สุด",
+      "รองรับการฝังพิกัด Facebook/TikTok Pixel",
+      "ใช้ชื่อโดเมนระบบได้ทันทีไม่ต้องรอ",
     ],
-    themeColor: "slate",
-  },
-  {
-    id: "sme-speed-launch",
-    title: "SME Pro: เว็บไซต์มาตรฐานธุรกิจครบวงจร",
-    slug: "sme-speed-launch",
-    category: "SME",
-    description:
-      "เว็บไซต์ 5-8 หน้า ที่จัดระเบียบเนื้อหาให้เป็นมืออาชีพ วางโครงสร้างชัดเจนเพื่อให้ Google เข้าใจธุรกิจของคุณ",
-    price: "เริ่มต้น 12,900.-",
-    priceValue: 12900,
     highlight: true,
-    features: [
-      "PageSpeed Excellence: การันตีความเร็วในการแสดงผลทุกหน้าย่อย",
-      "Custom UI Design: ดีไซน์ที่สะท้อนตัวตนแบรนด์ ไม่ใช้เทมเพลตซ้ำตลาดทั่วไป",
-      "Search Engine Ready: โครงสร้างหลังบ้านพร้อมสำหรับการไต่อันดับ Organic Search",
-      "Easy Management: ระบบจัดการเนื้อหาที่เจ้าของธุรกิจดูแลเองได้ทันที",
-    ],
-    themeColor: "emerald",
+    iconName: "Zap",
   },
   {
-    id: "corporate-trust",
-    title: "Corporate Identity: เว็บไซต์ภาพลักษณ์องค์กร",
-    slug: "corporate-trust",
-    category: "Corporate",
-    description:
-      "สร้างความเชื่อมั่นให้คู่ค้าและนักลงทุนด้วยระบบที่ยั่งยืน ปลอดภัย และสะท้อนความเป็นมืออาชีพ",
-    price: "เริ่มต้น 25,900.-",
-    priceValue: 25900,
-    features: [
-      "Advanced Data Protection: มาตรฐานความปลอดภัยข้อมูลในระดับสูง",
-      "Multi-Language Support: รองรับการขยายฐานธุรกิจสู่ระดับสากล",
-      "Brand Authority: วางพิกัดข้อมูลสำคัญขององค์กรให้โดดเด่นและโปร่งใส",
-      "System Maintenance: บริการตรวจสอบประสิทธิภาพระบบอย่างต่อเนื่องรายปี",
-    ],
+    id: "svc-express",
+    title: "Express Web (เว็บนามบัตร)",
+    slug: "corporate_lite",
+    category: "ReadyMade",
     themeColor: "blue",
+    description:
+      "วางพิกัดข้อมูลธุรกิจแบบหน้าเดียว ครบถ้วน เนี้ยบ และดูน่าเชื่อถือ",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "2,900.-",
+    priceValue: 2900,
+    renewalPrice: "1,500.- / ปี",
+    features: [
+      "มีพิกัดข้อมูลครบทั้ง บริการ และส่วนติดต่อ",
+      "ออนไลน์ระบบได้ภายใน 24 ชม. หลังส่งงาน",
+      "วางโครงสร้างพื้นฐานรองรับงาน SEO",
+    ],
+    promotion: "ฟรีพิกัดโดเมน .com ในปีแรก",
+    iconName: "Clock",
   },
   {
-    id: "industrial-catalog",
-    title: "Industrial E-Catalog: ระบบจัดการสินค้าอุตสาหกรรม",
-    slug: "industrial-catalog",
-    category: "Industrial",
+    id: "svc-budget",
+    title: "Budget Saver (เว็บเริ่มต้น)",
+    slug: "starter_landing",
+    category: "ReadyMade",
+    themeColor: "slate",
     description:
-      "เปลี่ยนเล่มแคตตาล็อกเป็นระบบออนไลน์ ค้นหาสเปกสินค้าได้ละเอียด พร้อมระบบขอใบเสนอราคาที่รวดเร็ว",
-    price: "เริ่มต้น 39,900.-",
-    priceValue: 39900,
+      "พิกัดราคาประหยัดสำหรับผู้เริ่มต้น ลงข้อมูลพื้นฐานครบพร้อมใช้งาน",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "990.-",
+    priceValue: 990,
+    renewalPrice: "590.- / ปี",
     features: [
-      "High Capacity Support: รองรับฐานข้อมูลสินค้าจำนวนมากได้อย่างลื่นไหล",
-      "Advanced Filtering: ระบบกรองสินค้าตามคุณสมบัติเทคนิคที่แม่นยำ",
-      "Fast RFQ System: ระบบขอใบเสนอราคาเบื้องต้นส่งตรงถึงฝ่ายขายทันที",
-      "Scalable Structure: รากฐานระบบที่รองรับการเพิ่มรายการสินค้าในอนาคต",
+      "ราคาเข้าถึงง่ายที่สุดสำหรับร้านเล็กๆ",
+      "เลือกพิกัดเทมเพลตมาตรฐานแล้วลงงานได้เลย",
+      "ใช้งานผ่านชื่อโดเมนของระบบ",
     ],
+    iconName: "Wallet",
+  },
+
+  // --- [กลุ่มที่ 2]: เว็บไซต์ธุรกิจ & เฉพาะทาง (Business & Niche) ---
+  {
+    id: "svc-biz-pro",
+    title: "Biz Fast Track (SME Pro)",
+    slug: "corporate_pro",
+    category: "Business",
     themeColor: "indigo",
-  },
-  {
-    id: "seo-technical-audit",
-    title: "Technical SEO Tuning: ปรับโครงสร้างหลังบ้าน",
-    slug: "seo-technical",
-    category: "SEO_Technical",
     description:
-      "ตรวจสอบและปรับจูนพิกัดหลังบ้านเพื่อให้ระบบค้นหาจัดลำดับหน้าเว็บของคุณได้อย่างถูกต้อง",
-    price: "เริ่มต้น 4,900.-",
+      "วางระบบเว็บธุรกิจ 3-5 หน้า เพิ่มพิกัดความน่าเชื่อถือและรองรับข้อมูลจำนวนมาก",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "4,900.-",
     priceValue: 4900,
+    renewalPrice: "2,500.- / ปี",
     features: [
-      "Schema Markup: ระบุประเภทธุรกิจให้โปรแกรมค้นหาเข้าใจได้ลึกที่สุด",
-      "Core Web Vitals Tuning: ปรับจูนความเร็วหน้าเว็บให้ผ่านเกณฑ์คะแนนเต็ม",
-      "Index Management: แก้ไขปัญหาหน้าเว็บไม่ปรากฏบนผลการค้นหา",
-      "Analytics Integration: เชื่อมต่อระบบติดตามสถิติเพื่อการวัดผลที่แม่นยำ",
+      "พิกัดหน้า Home, About, Service, Portfolio, Contact",
+      "วางระบบบทความเพื่อดึงพิกัดลูกค้าจาก Google",
+      "ระบบงานรองรับการขยายตัวได้ดี",
     ],
-    promotion: "รับส่วนลด 50% เมื่อใช้บริการร่วมกับการพัฒนาโครงสร้างเว็บใหม่",
-    themeColor: "amber",
+    highlight: true,
+    iconName: "Building2",
   },
   {
-    id: "seo-organic-growth",
-    title: "Organic Growth: วางแผนการเติบโตระยะยาว",
-    slug: "seo-organic",
-    category: "SEO_Organic",
+    id: "svc-local",
+    title: "Local Biz (ธุรกิจท้องถิ่น)",
+    slug: "local_service",
+    category: "Business",
+    themeColor: "emerald",
     description:
-      "สร้างช่องทางรับลูกค้าจาก Google ในระยะยาวด้วยคำค้นหาที่เปลี่ยนเป็นยอดขายได้จริง",
-    price: "เริ่มต้น 8,900.- / เดือน",
-    priceValue: 8900,
+      "เน้นงาน Local SEO สำหรับธุรกิจที่มีหน้าร้าน คลินิก หรืออู่ซ่อมรถ",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "3,900.-",
+    priceValue: 3900,
+    renewalPrice: "1,500.- / ปี",
     features: [
-      "Search Intent Keywords: คัดเลือกคำค้นหาที่ตรงใจกลุ่มเป้าหมายที่สุด",
-      "High Quality Content: พัฒนาเนื้อหาที่เป็นประโยชน์เพื่อสร้าง Authority",
-      "Continuous Optimization: ปรับแต่งหน้าเว็บให้สอดคล้องกับระบบค้นหาเสมอ",
-      "Performance Reporting: รายงานผลสถิติและอันดับที่วัดผลได้ชัดเจน",
+      "วางคีย์เวิร์ดเน้นพื้นที่เพื่อให้คนในพื้นที่ค้นหาเจอ",
+      "ปุ่มโทรและพิกัดแผนที่ชัดเจนที่สุด",
+      "รองรับการใช้งานผ่านมือถือแบบกริบๆ",
     ],
-    promotion:
-      "แนะนำการดูแลต่อเนื่องอย่างน้อย 3 เดือน เพื่อผลลัพธ์ที่ชัดเจนที่สุด",
+    iconName: "MapPin",
+  },
+  {
+    id: "svc-cafe",
+    title: "Cafe & Menu (ร้านอาหาร)",
+    slug: "restaurant_cafe",
+    category: "Business",
+    themeColor: "amber",
+    description: "ระบบโชว์เมนูออนไลน์ที่เจ้าของร้านจัดการพิกัดราคาได้เอง",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "3,500.-",
+    priceValue: 3500,
+    renewalPrice: "1,500.- / ปี",
+    features: [
+      "แก้พิกัดราคาและเมนูได้เองผ่านระบบจัดการง่ายๆ",
+      "เน้นภาพลักษณ์เมนูให้น่าสนใจ",
+      "พร้อมพิกัด QR Code สำหรับตั้งที่ร้าน",
+    ],
+    iconName: "Coffee",
+  },
+  {
+    id: "svc-event",
+    title: "Event & Magic (อีเวนต์/สายมู)",
+    slug: "event_magic",
+    category: "Business",
     themeColor: "rose",
+    description:
+      "ระบบการ์ดเชิญงานแต่ง หรือพิกัดจองคิวออนไลน์ พร้อมตัวนับเวลาถอยหลัง",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "1,500.-",
+    priceValue: 1500,
+    features: [
+      "มีพิกัดธีมงานแต่งและงานมงคลให้เลือก",
+      "ระบบตอบรับและฟอร์มเก็บพิกัดข้อมูลลูกค้า",
+      "ตั้งพิกัดนับถอยหลังสู่วันสำคัญได้",
+    ],
+    promotion: "จบงานแล้วต่ออายุพิกัดละ 500.- ต่อปี",
+    iconName: "Heart",
+  },
+
+  // --- [กลุ่มที่ 3]: บริการ Digital & Recurring (Digital) ---
+  {
+    id: "svc-profile",
+    title: "My Profile (นามบัตรดิจิทัล)",
+    slug: "personal_bio",
+    category: "Digital",
+    themeColor: "violet",
+    description:
+      "หน้าเว็บรวมลิงก์ (Link-in-bio) พรีเมียม สร้างตัวตนให้น่าพึ่งพา",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "990.- / ปี",
+    priceValue: 990,
+    features: [
+      "รวมพิกัดโซเชียลทั้งหมดไว้ในลิงก์เดียว",
+      "ดีไซน์เนี้ยบ สร้างพิกัดความน่าเชื่อถือส่วนบุคคล",
+      "ช่วยให้ชื่อของคุณถูกค้นหาเจอในพิกัด Google",
+    ],
+    iconName: "UserCircle",
+  },
+  {
+    id: "svc-seo",
+    title: "SEO Ranking (รายเดือน)",
+    slug: "seo_agency",
+    category: "Digital",
+    themeColor: "emerald",
+    description:
+      "วางระบบดันอันดับหน้าแรก ปรับโครงสร้างเว็บให้กริบตามมาตรฐาน 2026",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "12,900.- / เดือน",
+    priceValue: 12900,
+    features: [
+      "ตรวจสอบพิกัดโครงสร้างระบบงานอย่างละเอียด",
+      "วางแผนเนื้อหาคุณภาพพิกัดละ 4 บทต่อเดือน",
+      "สร้างความน่าเชื่อถือจากภายนอกเข้าสู่พิกัดเว็บ",
+    ],
+    promotion: "วางระบบขั้นต่ำ 3 เดือน เพื่อพิกัดผลลัพธ์ที่ชัดเจน",
+    iconName: "TrendingUp",
+  },
+  {
+    id: "svc-maintenance",
+    title: "Web Care (ดูแล/ซ่อม)",
+    slug: "maintenance_page",
+    category: "Digital",
+    themeColor: "slate",
+    description: "รับจัดการพิกัดเว็บพัง แก้ระบบล่ม หรือกำจัดสิ่งแปลกปลอม",
+    thumbnail: "/images/templates/project-01.webp",
+    price: "เริ่มต้น 2,500.-",
+    priceValue: 2500,
+    features: [
+      "จัดการพิกัดฉุกเฉิน กู้คืนระบบงานด่วน",
+      "ย้ายพิกัดโฮสต์มายังระบบที่ซิ่งกว่าเดิม",
+      "ตรวจสอบพิกัดความปลอดภัยของระบบงาน",
+    ],
+    iconName: "ShieldCheck",
   },
 ]

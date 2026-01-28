@@ -1,117 +1,100 @@
 /** @format */
-
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 import { BlogPost } from "@/types"
 
-const BLOG_DIRECTORY = path.join(process.cwd(), "content/blog")
+const postsDirectory = path.join(process.cwd(), "content/blog")
 
 /**
- * [HELPER]: ดึงรายชื่อไฟล์ทั้งหมดจากคลังบทความ
+ * นิยามพิกัดข้อมูลส่วนหัวของบทความ (Frontmatter)
+ * วางระบบเพื่อล้าง Warning เรื่องการใช้ any
  */
-function getBlogFiles() {
-  if (!fs.existsSync(BLOG_DIRECTORY)) {
-    console.warn("ไม่พบพิกัดโฟลเดอร์บทความที่:", BLOG_DIRECTORY)
-    return []
-  }
-  return fs.readdirSync(BLOG_DIRECTORY).filter((file) => file.endsWith(".mdx"))
+interface BlogFrontmatter {
+  title: string
+  date: string | Date
+  description: string
+  thumbnail: string
+  category: string
+  author: string
+  readingTime: string
+  [key: string]: unknown // รองรับพิกัดข้อมูลเสริมอื่นๆ แบบ Type-safe
 }
 
 /**
- * [STRATEGY] getAllPosts:
- * ดึงข้อมูลบทความทั้งหมดพร้อมเนื้อหา (Content)
- * เพื่อใช้ในระบบ Sitemap และการทำ Index ข้อมูลเชิงลึก
+ * พิกัดดึงข้อมูลบทความทั้งหมด
+ * วางโครงสร้างเพื่อนำไปใช้ในหน้า Blog Main และระบบค้นหา
  */
-export async function getAllPosts(): Promise<BlogPost[]> {
-  const mdxFiles = getBlogFiles()
+export async function getBlogPostsMetadata(): Promise<BlogPost[]> {
+  if (!fs.existsSync(postsDirectory)) return []
+  const fileNames = fs.readdirSync(postsDirectory)
 
-  const posts = mdxFiles.map((fileName) => {
-    const slug = fileName.replace(".mdx", "")
-    const fullPath = path.join(BLOG_DIRECTORY, fileName)
-    const fileContents = fs.readFileSync(fullPath, "utf8")
-    const { data, content } = matter(fileContents)
+  const allPostsData = fileNames
+    .filter((fileName) => fileName.endsWith(".mdx"))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, "")
+      const fullPath = path.join(postsDirectory, fileName)
+      const fileContents = fs.readFileSync(fullPath, "utf8")
 
-    return {
-      slug,
-      frontmatter: {
-        title: data.title || "Untitled Post",
-        description:
-          data.description || "อ่านรายละเอียดเนื้อหาเพิ่มเติมได้ที่นี่",
-        date: data.date || "2026-01-01",
-        category: data.category || "General",
-        thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
-        author: data.author || "AEMDEVWEB",
-      },
-      content,
-    } as BlogPost
-  })
+      // แกะพิกัดข้อมูลดิบจากไฟล์ MDX
+      const { data, content } = matter(fileContents)
+      const frontmatter = data as BlogFrontmatter
 
-  // จัดพิกัดวันที่: เรียงจากบทความใหม่ล่าสุดขึ้นก่อน
-  return posts.sort(
-    (a, b) =>
-      new Date(b.frontmatter.date).getTime() -
-      new Date(a.frontmatter.date).getTime()
-  )
+      return {
+        id: slug,
+        slug,
+        title: frontmatter.title,
+        date: String(frontmatter.date),
+        description: frontmatter.description,
+        thumbnail: frontmatter.thumbnail,
+        category: frontmatter.category,
+        author: frontmatter.author,
+        readingTime: frontmatter.readingTime,
+        frontmatter: frontmatter, // วางพิกัดข้อมูลดิบที่ผ่านการระบุ Type แล้ว
+        content,
+      } as BlogPost
+    })
+
+  // เรียงพิกัดบทความตามวันที่ (ใหม่ไปเก่า)
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 /**
- * getBlogPostsMetadata:
- * ดึงเฉพาะก้อนข้อมูล Metadata มาประกอบร่างเป็นรายการบทความ (Blog List)
- * เน้น Performance เพราะไม่ต้องดึงเนื้อหา Content ทั้งหมดมาประมวลผล
- */
-export function getBlogPostsMetadata() {
-  const mdxFiles = getBlogFiles()
-
-  const posts = mdxFiles.map((fileName) => {
-    const slug = fileName.replace(".mdx", "")
-    const fullPath = path.join(BLOG_DIRECTORY, fileName)
-    const fileContents = fs.readFileSync(fullPath, "utf8")
-    const { data } = matter(fileContents)
-
-    return {
-      slug,
-      title: data.title || "Untitled Post",
-      description:
-        data.description || "อ่านรายละเอียดเนื้อหาเพิ่มเติมได้ที่นี่",
-      date: data.date || "2026-01-01",
-      category: data.category || "General",
-      thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
-      author: data.author || "AEMDEVWEB",
-    }
-  })
-
-  return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  )
-}
-
-/**
- * getBlogPostBySlug:
- * ดึงข้อมูลดิบและ Metadata ของบทความรายตัวตามพิกัด Slug
+ * พิกัดดึงบทความรายชิ้นตาม Slug
+ * ใช้สำหรับหน้า [slug]/page.tsx เจาะลึกเนื้อหา
  */
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPost | null> {
-  const fullPath = path.join(BLOG_DIRECTORY, `${slug}.mdx`)
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`)
+  if (!fs.existsSync(fullPath)) return null
 
-  if (!fs.existsSync(fullPath)) {
+  try {
+    const fileContents = fs.readFileSync(fullPath, "utf8")
+    const { data, content } = matter(fileContents)
+    const frontmatter = data as BlogFrontmatter
+
+    return {
+      id: slug,
+      slug,
+      title: frontmatter.title,
+      date: String(frontmatter.date),
+      description: frontmatter.description,
+      thumbnail: frontmatter.thumbnail,
+      category: frontmatter.category,
+      author: frontmatter.author,
+      readingTime: frontmatter.readingTime,
+      frontmatter: frontmatter,
+      content,
+    } as BlogPost
+  } catch (error) {
+    // กรณีพิกัดไฟล์มีปัญหา ให้ส่งค่าว่างกลับไปป้องกันระบบล่ม
+    console.error("Error reading blog post:", error)
     return null
   }
-
-  const fileContents = fs.readFileSync(fullPath, "utf8")
-  const { data, content } = matter(fileContents)
-
-  return {
-    slug,
-    frontmatter: {
-      title: data.title || "Untitled Post",
-      description: data.description || "",
-      date: data.date || "2026-01-01",
-      category: data.category || "General",
-      thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
-      author: data.author || "AEMDEVWEB",
-    },
-    content,
-  } as BlogPost
 }
+
+/**
+ * พิกัดรวมสำหรับระบบ sitemap.ts และการทำ Static Params
+ */
+export const getAllPosts = getBlogPostsMetadata

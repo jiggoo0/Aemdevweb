@@ -1,89 +1,205 @@
 /** @format */
 
 import React from "react"
-import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { services } from "@/constants/services-data"
-import { siteConfig } from "@/constants/site-config"
+import { notFound } from "next/navigation"
+import Link from "next/link"
+import { ChevronLeft, CheckCircle2, Zap, Target, BarChart3 } from "lucide-react"
 
-interface ServicePageProps {
+// ดึงก้อนข้อมูลและพิกัดสัญญาข้อมูล
+import { servicesData } from "@/constants/services-data"
+import { JsonLd } from "@/components/seo/JsonLd"
+import { ServiceItem } from "@/types"
+
+/**
+ * นิยามพิกัดรายละเอียดงาน
+ */
+interface ServiceFeature {
+  name: string
+  desc?: string
+}
+
+interface Props {
   params: Promise<{ slug: string }>
 }
 
 /**
- * Metadata Engine: วางพิกัด SEO รายหน้าบริการ
- * ช่วยให้ Google Index ข้อมูลบริการธุรกิจ SME ได้แม่นยำ
+ * Metadata Engine: จัดการพิกัด SEO รายบริการ
+ * ปรับเรียกใช้ thumbnail แทน image เพื่อความกริบของระบบงาน
  */
-export async function generateMetadata({
-  params,
-}: ServicePageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const service = services.find((s) => s.slug === slug)
+  const service = (servicesData as ServiceItem[]).find((s) => s.slug === slug)
 
-  if (!service) return {}
+  if (!service) return { title: "ไม่พบข้อมูลบริการ" }
 
   return {
-    title: `${service.title} | ${siteConfig.project.shortName}`,
+    title: `${service.title} | บริการจาก นายเอ็มซ่ามากส์`,
     description: service.description,
+    openGraph: {
+      title: service.title,
+      description: service.description,
+      images: [service.thumbnail || "/og-image.png"],
+      type: "article",
+    },
   }
 }
 
 /**
- * ServiceDetailPage - พิกัดเจาะลึกรายละเอียดบริการรายหมวดหมู่
- * แนวทาง: จัดการระนาบข้อมูลให้ลื่นไหล รองรับพฤติกรรมการอ่านของกลุ่มธุรกิจ
- * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
+ * ServiceDetailPage - หน้าเจาะลึกพิกัดงานระบบ
+ * เน้นภาษาคนทำงานจริง เข้าใจง่าย ไม่ลิเก
  */
-export default async function ServiceDetailPage({ params }: ServicePageProps) {
-  // [FIXED]: แกะพิกัดข้อมูลจาก Promise ด้วย await ก่อนนำไปใช้งาน
+export default async function ServiceDetailPage({ params }: Props) {
   const { slug } = await params
+  const service = (servicesData as ServiceItem[]).find((s) => s.slug === slug)
 
-  // ค้นหาพิกัดข้อมูลบริการจากสารบบกลาง
-  const service = services.find((s) => s.slug === slug)
-
-  // หากไม่พบพิกัด slug ในระบบ ให้ถอยไปหน้า 404 ทันที
-  if (!service) {
-    notFound()
-  }
+  if (!service) notFound()
 
   return (
-    <main className="min-h-screen bg-white pt-32 pb-24">
-      <div className="container mx-auto px-6">
-        {/* พิกัดเนื้อหาและรายละเอียดบริการ */}
-        <section className="max-w-4xl space-y-12 text-left">
-          <div className="space-y-6">
-            <div className="font-heading inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-[10px] font-black tracking-widest text-emerald-600 uppercase italic">
-              Service Registry v2026
-            </div>
+    <main className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10">
+      {/* วางพิกัดข้อมูลให้ AI และระบบค้นหาเก็บรายละเอียดได้แม่นยำ */}
+      <JsonLd
+        type="Service"
+        data={{
+          name: service.title,
+          description: service.description,
+          provider: {
+            "@type": "Person",
+            name: "นายเอ็มซ่ามากส์",
+          },
+        }}
+      />
 
-            <h1 className="font-heading text-5xl leading-tight font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl">
+      {/* Hero Section: พาดหัวเน้นความแรงและพิกัดงานที่ชัดเจน */}
+      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-20 lg:pt-48 lg:pb-32">
+        <div
+          className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-[0.03]"
+          aria-hidden="true"
+        />
+
+        <div className="container mx-auto px-6">
+          <Link
+            href="/services"
+            className="group mb-12 inline-flex items-center gap-3 text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
+          >
+            <ChevronLeft
+              size={14}
+              className="transition-transform group-hover:-translate-x-2"
+            />
+            ย้อนกลับไปดูรายการบริการทั้งหมด
+          </Link>
+
+          <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
+            <h1 className="font-heading text-4xl leading-[1] font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl lg:text-9xl">
               {service.title}
             </h1>
-
-            <p className="font-body text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
+            <p className="font-body mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               {service.description}
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="h-px w-full bg-slate-100" />
-
-          {/* พิกัดโครงสร้างเนื้อหาเชิงลึก (รายละเอียดงานระบบ) */}
-          <div className="font-body prose prose-slate prose-lg max-w-none font-medium text-slate-600">
-            {/* ส่วนเรนเดอร์เนื้อหาจาก Content Layer หรือ Markdown */}
+      {/* Content Section: รายละเอียดระบบงานและสิ่งที่ลูกค้าจะได้รับ */}
+      <section className="container mx-auto px-6 pt-24 lg:pt-40">
+        <div className="grid grid-cols-1 gap-20 lg:grid-cols-12">
+          <div className="space-y-16 lg:col-span-7">
             <div className="space-y-8">
-              {service.features?.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <span className="font-heading mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-950 text-[10px] font-black text-white">
-                    0{index + 1}
-                  </span>
-                  <span className="text-lg font-bold text-slate-900">
-                    {feature}
-                  </span>
-                </div>
-              ))}
+              <h2 className="font-heading text-3xl font-black tracking-tighter text-slate-950 uppercase italic md:text-5xl">
+                พิกัด <span className="text-emerald-500">การวางระบบงาน.</span>
+              </h2>
+              <div className="font-body space-y-6 text-lg leading-relaxed text-slate-600">
+                <p>
+                  {service.description ||
+                    "เรากำลังเตรียมข้อมูลพิกัดงานส่วนนี้ให้คุณ..."}
+                </p>
+              </div>
+            </div>
+
+            {/* รายการรายการงาน (Features) แบบ Type-Safe */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {service.features?.map(
+                (feature: string | ServiceFeature, i: number) => (
+                  <div
+                    key={`feat-${i}`}
+                    className="flex items-start gap-4 rounded-3xl border border-slate-100 bg-slate-50 p-6"
+                  >
+                    <CheckCircle2
+                      size={20}
+                      className="mt-1 shrink-0 text-emerald-500"
+                    />
+                    <div>
+                      <h4 className="font-heading text-sm font-black text-slate-950 uppercase italic">
+                        {typeof feature === "string" ? feature : feature.name}
+                      </h4>
+                      {typeof feature !== "string" && feature.desc && (
+                        <p className="font-body mt-1 text-xs font-bold text-slate-500">
+                          {feature.desc}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
-        </section>
-      </div>
+
+          {/* Sidebar สำหรับปิดพิกัดการขาย */}
+          <aside className="lg:col-span-5">
+            <div className="shadow-3xl sticky top-32 space-y-8 rounded-[3rem] bg-slate-950 p-10 text-white shadow-slate-900/20 md:p-16">
+              <div className="space-y-2">
+                <p className="font-heading text-[10px] font-black tracking-[0.4em] text-emerald-400 uppercase italic">
+                  Budget Projection
+                </p>
+                <h3 className="font-heading text-4xl font-black italic md:text-6xl">
+                  {service.priceDisplay || "สอบถามพิกัดราคา"}
+                </h3>
+              </div>
+
+              <div className="space-y-6 border-y border-white/10 py-10">
+                <div className="flex items-center gap-4">
+                  <Zap size={20} className="text-emerald-500" />
+                  <p className="font-body text-sm font-bold">
+                    วางระบบไว ออนไลน์ได้ทันใจแน่นอน
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Target size={20} className="text-emerald-500" />
+                  <p className="font-body text-sm font-bold">
+                    ปรับแต่งโครงสร้างให้ตรงโจทย์ธุรกิจจริง
+                  </p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <BarChart3 size={20} className="text-emerald-500" />
+                  <p className="font-body text-sm font-bold">
+                    วัดผลงานได้จริงด้วยมาตรฐานสากล
+                  </p>
+                </div>
+              </div>
+
+              <button className="group font-heading w-full rounded-2xl bg-emerald-500 py-6 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase italic transition-all hover:bg-white active:scale-95">
+                เริ่มวางระบบกับนายเอ็ม
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      {/* ท้ายพิกัดหน้าเว็บ */}
+      <footer className="mt-40 border-t border-slate-100 py-20 text-center opacity-30 select-none">
+        <p className="font-heading text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase italic">
+          Professional Service Protocol • AEMDEVWEB 2026
+        </p>
+      </footer>
     </main>
   )
+}
+
+/**
+ * แจ้งพิกัดรายการงานทั้งหมดเพื่อทำ SSG
+ */
+export async function generateStaticParams() {
+  return servicesData.map((service) => ({
+    slug: service.slug,
+  }))
 }

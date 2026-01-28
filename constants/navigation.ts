@@ -1,87 +1,108 @@
 /** @format */
 
-import { NavigationConfig } from "@/types"
+import { siteConfig } from "./site-config"
 
 /**
- * ระบบจัดการพิกัดการนำทาง (Navigation Structure)
- * ยุทธศาสตร์: เข้าถึงข้อมูลง่าย สื่อสารตรงประเด็น และช่วยให้ลูกค้าตัดสินใจได้รวดเร็ว
- * Identity: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
+ * [TYPE DEFINITIONS]: กำหนดรูปแบบข้อมูลเมนูนำทาง
+ */
+export interface NavItem {
+  name: string
+  href: string
+  description?: string
+  badge?: string
+  external?: boolean
+  disabled?: boolean
+}
+
+export interface NavigationConfig {
+  main: NavItem[]
+  footer: {
+    services: NavItem[]
+    company: NavItem[]
+    support: NavItem[]
+    legal: NavItem[]
+  }
+}
+
+/**
+ * Navigation Strategy: เน้นความรวดเร็วและเข้าถึงข้อมูลได้ทันที
+ * ดูแลโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export const navigation: NavigationConfig = {
-  /* -------------------------- เมนูหลักประจำ Navbar ---------------------------- */
+  /* -------------------------- เมนูหลัก (Navbar) ---------------------------- */
   main: [
     {
       name: "หน้าแรก",
       href: "/",
-      description: "จุดเริ่มต้นการยกระดับธุรกิจของคุณ",
+      description: "จุดเริ่มต้นการยกระดับธุรกิจด้วยเว็บไซต์มาตรฐานใหม่",
     },
     {
-      name: "บริการและราคา",
+      name: "บริการ",
       href: "/services",
-      description: "ทางเลือกที่ตอบโจทย์สำหรับ SME และกลุ่มธุรกิจ",
+      description: "เลือกแพ็กเกจทำเว็บไซต์ที่ตอบโจทย์ธุรกิจ SME",
     },
     {
-      name: "คลังเทมเพลต",
+      name: "เทมเพลต",
       href: "/templates",
-      badge: "New",
-      description: "ชุดโครงสร้างเว็บไซต์สำเร็จรูปที่พร้อมใช้งานทันที",
+      badge: "Ready",
+      description: "เลือกแบบเว็บไซต์สวยๆ ที่พร้อมใช้งานได้ทันที",
     },
     {
-      name: "ผลงานที่ผ่านมา",
+      name: "ผลงาน",
       href: "/case-studies",
-      description: "บทพิสูจน์ผลลัพธ์จากธุรกิจที่ใช้งานจริง",
+      description: "ดูตัวอย่างธุรกิจที่ประสบความสำเร็จจากการทำเว็บกับเรา",
     },
     {
-      name: "บทความน่ารู้",
+      name: "บทความ",
       href: "/blog",
-      description: "เทคนิคการทำเว็บและ Organic Search ที่จับต้องได้",
+      description: "อัปเดตความรู้ SEO และเทคนิคการตลาดออนไลน์ปี 2026",
     },
     {
-      name: "ปรึกษาโปรเจกต์",
+      name: "ติดต่อเรา",
       href: "/contact",
-      description: "พูดคุยรายละเอียดเพื่อวางแผนงานร่วมกัน",
+      description: "คุยรายละเอียดโปรเจกต์กับนายเอ็มซ่ามากส์โดยตรง",
     },
   ],
 
-  /* --------------------------- ส่วนเมนูท้ายหน้า (Footer) --------------------------- */
+  /* --------------------------- เมนูท้ายเว็บ (Footer) --------------------------- */
   footer: {
     services: [
       {
-        name: "Sale Page เน้นปิดการขาย",
-        href: "/services/starter-one-page",
+        name: "เว็บหน้าเดียว (SalePage)",
+        href: "/services/starter-landing",
         badge: "Hot",
-        description: "เน้นความเร็วและการแสดงข้อมูลที่สำคัญที่สุด",
+        description: "เน้นปิดการขาย ยิงแอดแม่น โหลดไว",
       },
       {
-        name: "SME & Corporate Pro",
-        href: "/services/sme-speed-launch",
-        description: "ยกระดับภาพลักษณ์ธุรกิจด้วยมาตรฐานสากล",
+        name: "เว็บธุรกิจ SME มาตรฐาน",
+        href: "/services/sme-business",
+        description: "สร้างความน่าเชื่อถือ พร้อมรองรับ SEO เต็มรูปแบบ",
       },
       {
-        name: "Industrial E-Catalog",
-        href: "/services/industrial-catalog",
-        description: "ระบบจัดการรายการสินค้าให้ค้นหาง่ายและเป็นระเบียบ",
+        name: "เว็บแคตตาล็อกโรงงาน",
+        href: "/services/catalog-industrial",
+        description: "ระบบโชว์สินค้าโรงงาน ค้นหาง่าย รองรับสินค้าเยอะ",
       },
       {
-        name: "Technical SEO Tuning",
-        href: "/services/seo-technical",
-        description: "ปรับโครงสร้างเว็บไซต์ให้ระบบค้นหาเจอได้แม่นยำขึ้น",
+        name: "บริการ SEO รายเดือน",
+        href: "/services/seo-agency",
+        description: "ดันอันดับเว็บไซต์ให้ติดหน้าแรก Google อย่างยั่งยืน",
       },
     ],
 
     company: [
       {
-        name: "รู้จัก AEMDEVWEB",
+        name: "รู้จักนายเอ็มซ่ามากส์",
         href: "/about",
       },
       {
-        name: "ความสำเร็จของลูกค้า",
+        name: "ตัวอย่างผลงานจริง",
         href: "/case-studies",
       },
       {
         name: "กรณีศึกษา Unlink-TH",
         href: "/blog/unlink-th-case-study",
-        badge: "Focus",
+        badge: "Top",
       },
       {
         name: "ร่วมงานกับเรา",
@@ -92,16 +113,16 @@ export const navigation: NavigationConfig = {
 
     support: [
       {
-        name: "คุยผ่าน LINE OA",
-        href: "https://lin.ee/6lgJox0",
+        name: "คุยผ่าน LINE (ตอบไว)",
+        href: siteConfig.contact.line || "https://lin.ee/6lgJox0",
         external: true,
       },
       {
-        name: "ประเมินค่าใช้จ่าย",
-        href: "/services#pricing",
+        name: "ประเมินราคาเบื้องต้น",
+        href: "/services#pricing-estimator",
       },
       {
-        name: "ติดต่อสอบถามด่วน",
+        name: "แจ้งปัญหาการใช้งาน",
         href: "/contact",
       },
     ],
@@ -120,22 +141,22 @@ export const navigation: NavigationConfig = {
 }
 
 /* -------------------------------------------------------------------------- */
-/* พิกัดการส่งออกข้อมูล (Direct Exports)                                         */
+/* การส่งออกข้อมูล (Exports)                                                    */
 /* -------------------------------------------------------------------------- */
 
 export const mainNav = navigation.main
 export const footerNavigation = navigation.footer
 
-/** * คีย์เวิร์ดสำคัญสำหรับการทำ Organic Search (Strategic Keywords)
+/** * [SEO KEYWORDS]: คำค้นหาหลักสำหรับระบบ (Keywords 2026)
+ * ปรับให้ตรงกับกลุ่มเป้าหมายที่ต้องการ "ทำเว็บด่วน" และ "ติดหน้าแรก"
  */
 export const siteKeywords: string[] = [
   "AEMDEVWEB",
   "นายเอ็มซ่ามากส์",
-  "Alongkorl Yomkerd",
-  "Unlink-th",
-  "บริการทำเว็บไซต์สำหรับธุรกิจ",
+  "รับทำเว็บไซต์ด่วน",
+  "เว็บไซต์สำเร็จรูป",
+  "รับทำ SEO สายขาว",
   "Landing Page SME",
-  "technical SEO",
-  "โครงสร้างเว็บไซต์",
-  "Organic Search",
+  "ทำเว็บติดหน้าแรก Google",
+  "สอน SEO 2026",
 ]

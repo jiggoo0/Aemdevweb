@@ -4,9 +4,9 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Card: Luminous Glass Edition
- * พิกัด: ยกระดับการจัดกลุ่มคอนเทนต์ด้วยระบบแสง Aurora และพื้นผิวกระจก
- * ยุทธศาสตร์: ใช้ Glass-card style เพื่อสร้างมิติความพรีเมียมและความโปร่งสบาย (Breathability)
+ * Card: Glass Edition
+ * ดีไซน์: ยกระดับกลุ่มเนื้อหาด้วยพื้นผิวกระจกและแสงเงาที่ดูมีมิติ
+ * แนวคิด: ใช้สไตล์กระจกโปร่งแสงเพื่อให้หน้าเว็บดูโปร่ง สบายตา และดูพรีเมียม
  */
 
 const Card = React.forwardRef<
@@ -17,7 +17,7 @@ const Card = React.forwardRef<
     ref={ref}
     className={cn(
       "relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-500",
-      "hover:border-aurora-cyan/30 hover:shadow-aurora-glow hover:bg-white/10",
+      "hover:shadow-aurora hover:border-emerald-500/30 hover:bg-white/10",
       className
     )}
     {...props}
@@ -44,7 +44,7 @@ const CardTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "font-prompt group-hover:text-aurora-cyan text-2xl font-black tracking-tighter text-white uppercase transition-colors md:text-3xl",
+      "font-heading text-2xl font-black tracking-tighter text-white uppercase transition-colors group-hover:text-emerald-400 md:text-3xl",
       className
     )}
     {...props}
@@ -59,7 +59,7 @@ const CardDescription = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "font-anuphan text-sm font-medium text-slate-400 opacity-80 md:text-base",
+      "font-body text-sm font-medium text-slate-400 opacity-80 md:text-base",
       className
     )}
     {...props}
@@ -73,7 +73,7 @@ const CardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("font-anuphan p-8 pt-0 text-slate-300 md:p-10", className)}
+    className={cn("font-body p-8 pt-0 text-slate-300 md:p-10", className)}
     {...props}
   />
 ))

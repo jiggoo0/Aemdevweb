@@ -3,9 +3,9 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * 📝 Textarea: Luminous Glass Edition
- * ยกระดับกล่องพิมพ์ข้อความด้วยพื้นผิวกระจกพรีเมียมและแสง Aurora
- * ออกแบบมาให้อ่านง่ายและดูสะอาดตา (Weightless Design)
+ * Textarea: Glass Edition
+ * ดีไซน์: ยกระดับกล่องพิมพ์ข้อความด้วยพื้นผิวกระจกพรีเมียมและแสงเงาที่นุ่มนวล
+ * เป้าหมาย: ออกแบบมาให้อ่านง่าย สบายตา และใช้งานสะดวกในทุกอุปกรณ์
  */
 const Textarea = React.forwardRef<
   HTMLTextAreaElement,
@@ -14,14 +14,14 @@ const Textarea = React.forwardRef<
   return (
     <textarea
       className={cn(
-        // Base Style: Glassmorphism Surface
+        // รูปแบบพื้นฐาน: กระจกโปร่งแสง (Glassmorphism)
         "flex min-h-[120px] w-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-base transition-all duration-500",
-        "font-anuphan resize-none text-white placeholder:font-medium placeholder:text-slate-500",
+        "font-body resize-none text-white placeholder:font-medium placeholder:text-slate-500",
 
-        // Focus State: Aurora Electric Glow
-        "focus-visible:border-aurora-cyan/50 focus-visible:shadow-aurora-glow focus-visible:bg-white/10 focus-visible:ring-0 focus-visible:outline-none",
+        // สถานะตอนใช้งาน (Focus): แสงสีเขียว Emerald นุ่มนวล
+        "focus-visible:shadow-aurora focus-visible:border-emerald-500/50 focus-visible:bg-white/10 focus-visible:ring-0 focus-visible:outline-none",
 
-        // Disabled & States
+        // สถานะปิดการใช้งาน และขนาดหน้าจอต่าง ๆ
         "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm lg:text-base",
 
         className
