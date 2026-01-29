@@ -4,7 +4,12 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
+    /** * [DNA-STRICT-MODE]: เปิดระบบตรวจสอบเข้มงวดเพื่อกำจัดพิกัด 'any' 
+     * ช่วยให้ผ่านเกณฑ์การตรวจสอบระดับ 7
+     */
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -21,16 +26,16 @@
     ],
     "baseUrl": ".",
     "paths": {
-      /* 🚀 Global Shortcut */
+      /* Global Shortcut */
       "@/*": ["*"],
-      /* 📂 Feature Folders */
+      /* Feature Folders */
       "@/app/*": ["app/*"],
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
       "@/types/*": ["types/*"],
       "@/hooks/*": ["hooks/*"],
       "@/constants/*": ["constants/*"],
-      /* 🛠️ Specialized Path: เข้าถึง Shared Services Components ได้ทันที */
+      /* Specialized Path: พิกัดเข้าถึง Shared Services Components */
       "@/services-components/*": ["app/(main)/services/components/*"]
     }
   },

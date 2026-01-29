@@ -38,21 +38,37 @@ export const eventMagicData: EventMagicData = {
   gallery: {
     title: "Visual Narrative: ช่วงเวลาที่ นายเอ็มซ่ามากส์ คัดสรร",
     images: [
-      { url: "/images/templates/project-01.webp", alt: "Special Moment by AEM 1" },
-      { url: "/images/templates/project-01.webp", alt: "Special Moment by AEM 2" },
-      { url: "/images/templates/project-01.webp", alt: "Special Moment by AEM 3" },
+      {
+        url: "/images/templates/project-01.webp",
+        alt: "Special Moment by AEM 1",
+      },
+      {
+        url: "/images/templates/project-01.webp",
+        alt: "Special Moment by AEM 2",
+      },
+      {
+        url: "/images/templates/project-01.webp",
+        alt: "Special Moment by AEM 3",
+      },
     ],
   },
   details: {
     title: "Timeline Protocol: ลำดับพิกัดกำหนดการ",
     items: [
       { time: "18:00", activity: "เริ่มการลงทะเบียนและรับบรรณาการที่ระลึก" },
-      { time: "19:00", activity: "พิธีเปิดอย่างเป็นทางการและกล่าวต้อนรับโดย นายเอ็มซ่ามากส์" },
-      { time: "20:00", activity: "ช่วงเวลาสังสรรค์พร้อมการแสดงดนตรีสดที่เนี้ยบที่สุด" },
+      {
+        time: "19:00",
+        activity: "พิธีเปิดอย่างเป็นทางการและกล่าวต้อนรับโดย นายเอ็มซ่ามากส์",
+      },
+      {
+        time: "20:00",
+        activity: "ช่วงเวลาสังสรรค์พร้อมการแสดงดนตรีสดที่เนี้ยบที่สุด",
+      },
     ],
   },
   footer: {
-    thankYouMessage: "ขอขอบพระคุณที่ร่วมเป็นส่วนหนึ่งในพิกัดความทรงจำของ นายเอ็มซ่ามากส์",
+    thankYouMessage:
+      "ขอขอบพระคุณที่ร่วมเป็นส่วนหนึ่งในพิกัดความทรงจำของ นายเอ็มซ่ามากส์",
     contactLine: "@aemdevweb",
   },
 }

@@ -35,9 +35,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${study.frontmatter.title} | Case Study Analysis`,
     description: study.frontmatter.excerpt,
-    openGraph: { 
+    openGraph: {
       images: [study.frontmatter.thumbnail || "/og-image.png"],
-      type: "article"
+      type: "article",
     },
   }
 }
@@ -93,7 +93,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             กลับสู่คลังผลลัพธ์เชิงกลยุทธ์
           </Link>
           <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
-            <h1 className="font-heading text-5xl font-black leading-tight tracking-tighter text-slate-950 uppercase italic md:text-8xl">
+            <h1 className="font-heading text-5xl leading-tight font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
               {study.frontmatter.title}
             </h1>
           </div>

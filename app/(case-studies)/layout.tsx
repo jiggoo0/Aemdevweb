@@ -32,7 +32,7 @@ export default function CaseStudiesLayout({
       />
 
       {/* 2. ATMOSPHERIC ENGINE: ระบบชั้นบรรยากาศเชิงทัศนียภาพ (Visual Layers) */}
-      
+
       {/* โครงสร้างระนาบเชิงระบบ (Systematic Grid Overlay) */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"

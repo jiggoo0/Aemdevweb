@@ -11,7 +11,8 @@ import { SeoAgencyData } from "./schema"
 export const seoAgencyData: SeoAgencyData = {
   // [1. SEO STRATEGY]: พิกัดตัวตนบน Google Search
   seo: {
-    title: "บริการวางระบบ SEO โดย นายเอ็มซ่ามากส์ | วางโครงสร้างเว็บให้ติดหน้าแรก | AEMDEVWEB",
+    title:
+      "บริการวางระบบ SEO โดย นายเอ็มซ่ามากส์ | วางโครงสร้างเว็บให้ติดหน้าแรก | AEMDEVWEB",
     description:
       "พาพิกัดธุรกิจของคุณไปให้สุดบนหน้าแรก Google โดย นายเอ็มซ่ามากส์ ด้วยเว็บไซต์ที่โหลดไวระดับวินาทีและโครงสร้าง Technical SEO ที่บอทเลือกจัดอันดับให้ดีกว่าคู่แข่ง",
     keywords: [

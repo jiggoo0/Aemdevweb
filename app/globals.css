@@ -1,150 +1,80 @@
-/** @format */
+/* @format */
+/* พิกัดข้อมูล: app/globals.css */
+/* หน้าที่: ศูนย์กลางการควบคุมสไตล์และโครงสร้างระบบ (Main Style Node) */
+/* มาตรฐาน: Tailwind 4.0 | Next.js 16 | Ultra-Deep Level 7 */
+/* ควบคุมโดย: นายเอ็มซ่ามากส์ */
+
 @import "tailwindcss";
 
+/* [1. PLUGINS CONFIGURATION]: ติดตั้งระบบเสริมความสามารถ */
+@plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+
 @theme {
-  /* [FONTS]: มาตรฐานความชัดเจนเพื่อการเข้าถึงข้อมูลระดับสูงสุด */
-  --font-heading: "IBM Plex Sans Thai", sans-serif;
-  --font-body: "Anuphan", sans-serif;
+  /* [2. COLOR SYSTEM]: พิกัดสี OKLCH ประจำแบรนด์ AEMDEVWEB */
+  --color-brand-primary: oklch(0.7 0.2 160);
+  --color-brand-depth: oklch(0.25 0.02 260);
+  --color-brand-accent: oklch(0.7 0.1 260);
+  --color-brand-surface: oklch(0.98 0.01 260);
+  
+  /* [3. TYPOGRAPHY SYSTEM]: เชื่อมโยงพิกัดฟอนต์จาก Root Layout */
+  --font-heading: var(--font-heading), "IBM Plex Sans Thai", sans-serif;
+  --font-body: var(--font-body), "Anuphan", sans-serif;
 
-  /* [OKLCH COLOR SYSTEM]: ระบบสีที่แม่นยำและนวลตาที่สุดเพื่อประสบการณ์ผู้ใช้งาน */
-  --color-primary: oklch(
-    65% 0.18 160
-  ); /* Emerald Performance (สีประจำแบรนด์) */
-  --color-primary-dark: oklch(45% 0.14 160);
-  --color-accent: oklch(
-    55% 0.18 265
-  ); /* Indigo Premium (สีเน้นความเชี่ยวชาญ) */
-
-  --color-slate-950: oklch(15% 0.02 240);
-  --color-slate-500: oklch(55% 0.02 240);
-  --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(20% 0.02 240);
-
-  --color-surface-subtle: oklch(98% 0.01 240);
-  --color-border: oklch(94% 0.01 240);
-
-  /* [DEPTH & LAYERING]: ระบบเงาแบบ Multi-Layer เพื่อสร้างมิติของข้อมูล */
-  --shadow-aurora: 0 0 40px oklch(65% 0.18 160 / 0.15);
-  --shadow-node: 0 30px 60px -12px oklch(15% 0.02 240 / 0.08);
-  --shadow-feature: 0 20px 50px -12px oklch(20% 0.02 240 / 0.06);
-  --shadow-inner-glow: inset 0 1px 1px oklch(100% 0 0 / 0.1);
-
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2.5rem;
-  --radius-4xl: 4rem;
-
-  /* [PHYSICS]: การเคลื่อนไหวที่มีความนุ่มนวลและทรงพลัง */
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  /* [4. DIMENSION & EFFECTS]: มิติความลึกและระยะขอบ */
+  --radius-za: 2.5rem;
+  --shadow-depth: 0 20px 50px -12px oklch(0 0 0 / 0.15);
+  
+  /* [5. ANIMATION]: กำหนดพิกัดความเคลื่อนไหวเชิงระบบ */
+  --animate-float: float 3s ease-in-out infinite;
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0) rotate(0);
-    }
-    50% {
-      transform: translateY(-12px) rotate(1deg);
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      transform: translateX(-100%) skewX(-15deg);
-    }
-    100% {
-      transform: translateX(200%) skewX(-15deg);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 }
 
-@layer base {
-  *,
-  ::after,
-  ::before {
-    @apply border-border outline-primary/20;
-  }
-
-  html {
-    @apply selection:bg-primary/10 selection:text-primary-dark scroll-smooth;
-  }
-
-  body {
-    @apply font-body bg-white text-slate-950 antialiased;
-    /* [TEXTURE]: ลายเส้นโครงสร้างระบบจางๆ เพื่อเพิ่มมิติและความประณีตของพื้นผิว */
-    background-image:
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E"),
-      radial-gradient(oklch(98% 0.01 240) 1px, transparent 0);
-    background-size:
-      auto,
-      40px 40px;
-    background-attachment: fixed;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-heading tracking-tighter;
-  }
-}
-
-@layer components {
-  /* คอนเทนเนอร์หลักที่เน้นความสมดุลและความชัดเจน */
-  .container-za {
-    @apply mx-auto max-w-7xl px-6 lg:px-8;
-  }
-
-  /* การไล่เฉดสีตัวอักษรเพื่อสร้างจุดดึงดูดสายตา */
-  .text-gradient {
-    @apply via-primary to-accent bg-gradient-to-br from-slate-950 bg-clip-text text-transparent;
-  }
-
-  /* Glassmorphism สำหรับองค์ประกอบที่ต้องการความทันสมัยระดับพรีเมียม */
-  .glass-card {
-    @apply shadow-feature border border-white/20 bg-white/70 ring-1 ring-black/[0.03] backdrop-blur-2xl;
-  }
-
-  /* ปุ่มกดที่ตอบสนองฉับไว (High-Response) และสง่างาม */
-  .btn-za {
-    @apply font-heading hover:bg-primary hover:shadow-aurora relative overflow-hidden rounded-2xl bg-slate-950 px-10 py-5 text-[11px] font-black tracking-[0.3em] text-white uppercase italic transition-all duration-500 active:scale-95;
-  }
-
-  /* การ์ดที่มีมิติความลึกและการตอบสนองต่อการโต้ตอบของผู้ใช้งาน */
-  .depth-card {
-    @apply border-border shadow-feature hover:shadow-node rounded-3xl border bg-white transition-all duration-500 hover:-translate-y-2;
-  }
-}
+/* [6. DARK MODE STRATEGY]: กำหนดพิกัดการทำงานของโหมดมืดผ่านคลาส .dark */
+@variant dark (&:where(.dark, .dark *));
 
 @layer utilities {
-  /* ระบบ Shimmer สำหรับการแสดงสถานะโหลดข้อมูลที่มีความลื่นไหล */
-  .animate-shimmer {
-    animation: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  /* [7. PROSE SYSTEM]: ปรับจูนพิกัดเนื้อหาบทความตาม DNA นายเอ็มซ่ามากส์ */
+  .prose-mzaa {
+    @apply prose max-w-none font-body;
+    --tw-prose-body: oklch(0.45 0.02 260);
+    --tw-prose-headings: oklch(0.2 0.02 260);
+    --tw-prose-links: oklch(0.65 0.2 160);
+    --tw-prose-bold: oklch(0.2 0.02 260);
+    --tw-prose-quotes: oklch(0.4 0.05 260);
+    
+    /* สไตล์ลิ้งค์แบบ Technical Specialist */
+    a {
+      @apply no-underline transition-all duration-300 border-b border-transparent hover:border-[oklch(0.7_0.2_160)];
+      &:hover {
+        @apply text-[oklch(0.5_0.2_160)];
+      }
+    }
   }
 
-  /* แถบเลื่อน (Scrollbar) ที่มีความเรียบง่าย ไม่รบกวนสมาธิในการเข้าถึงข้อมูล */
-  ::-webkit-scrollbar {
-    @apply w-1.5;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply hover:bg-primary/40 rounded-full bg-slate-200 transition-colors;
+  /* [8. CORE COMPONENTS]: พิกัดจัดวางพื้นที่หลัก */
+  .container-za {
+    @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-12;
   }
 
-  /* การจัดการความนุ่มนวลของขอบเขตภาพลักษณ์ */
-  .mask-radial {
-    mask-image: radial-gradient(circle, black 50%, transparent 100%);
+  .btn-za {
+    @apply inline-flex items-center justify-center rounded-2xl px-8 py-4 
+           font-heading text-sm font-black tracking-widest uppercase italic 
+           transition-all duration-300 active:scale-95;
   }
 
-  /* ระบบการเลื่อนข้อมูลโดยคงความสะอาดตาของหน้าจอ */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* พิกัดการ์ดระดับ 7: เน้นมิติและพิกัดแสง */
+  .depth-card {
+    @apply rounded-[var(--radius-za)] border border-[oklch(0.9_0.02_260)] bg-white p-8 
+           shadow-[var(--shadow-depth)] transition-all duration-500;
+    
+    &:hover {
+      @apply -translate-y-2 border-[oklch(0.7_0.2_160_/_0.3)] 
+             shadow-[0_40px_80px_-15px_oklch(0_0_0_/_0.2)];
+    }
   }
 }

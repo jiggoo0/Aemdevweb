@@ -1,68 +1,41 @@
 /** @format */
 
 import { MetadataRoute } from "next"
-// [FIX]: Removed unused import to clear ESLint warning
-// import { siteConfig } from "@/constants/site-config"
+import { siteConfig } from "@/constants/site-config"
 
 /**
  * AEMDEVWEB | Search Engine Intelligence Control 2026
  * -------------------------------------------------------------------------
- * ยุทธศาสตร์: "Full Render Visibility" & "Strategic AI Protection"
- * วางระบบและควบคุมพิกัดโดย: นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด)
- * เป้าหมาย: ล้างพิกัด Error จาก Rich Results Test และรักษาความปลอดภัยข้อมูล Node สำคัญ
+ * ยุทธศาสตร์: "Maximum Visibility" - เปิดโครงสร้างระบบให้บอทเข้าถึงพิกัดข้อมูล 100%
+ * วางระบบและควบคุมพิกัดโดย: นายเอ็มซ่ามากส์
  */
 export default function robots(): MetadataRoute.Robots {
-  // ล็อกฐานข้อมูล Domain ให้แม่นยำ ป้องกันการหลุดพิกัด
-  const baseUrl = "https://www.aemdevweb.com"
+  const baseUrl = siteConfig.project.url
 
   return {
     rules: [
       {
-        /** * [GENERAL SEARCH BOTS]: เปิดทางให้บอทคุณภาพเข้ามาเก็บพิกัดความแรง 
-         * มุ่งเน้นการทำดัชนีข้อมูลที่สมบูรณ์ (Crawlability)
+        /** * [OPEN ACCESS PROTOCOL]: อนุญาตให้บอทสากล (Google, Bing, DuckDuckGo) 
+         * เข้าเก็บข้อมูลเพื่อสร้างพิกัดความน่าเชื่อถือ (Entity Authority)
          */
         userAgent: "*",
-        allow: [
-          "/",
-          "/_next/static/", // เปิดพิกัดให้บอทโหลด JS/CSS เพื่อใช้เรนเดอร์ Interface ให้เนี้ยบ
-          "/_next/image",  // เปิดพิกัดให้บอทเข้าถึงรูปภาพที่ นายเอ็มซ่ามากส์ จูนสปีดไว้
-          "/api/og",       // พิกัดภาพ Open Graph สำหรับการแชร์โซเชียลที่แม่นยำ
-        ],
+        allow: ["/"],
         disallow: [
-          "/api/",         // ปิดพิกัดระบบหลังบ้าน
-          "/config/",      // ปิดพิกัดโครงสร้างการตั้งค่า
-          "/lib/",         // ปิดพิกัด Library ภายใน
-          "/types/",       // ปิดพิกัดนิยาม Type ทั้งหมด
-          "/actions/",     // ปิดพิกัด Server Actions
-          "/_not-found",   // ไม่ต้อง Index หน้า Error
-          "/*?*",          // [STRATEGIC]: ปิดพิกัด Parameter เพื่อป้องกัน Duplicate Content
+          "/api/",       // ป้องกันบอทเข้าถึงระบบรับส่งข้อมูลหลังบ้านโดยตรง
+          "/admin/",     // พิกัดระบบควบคุมสารสนเทศภายใน
+          "/_not-found", // ป้องกันหน้า Error จากการถูกบันทึกในระบบค้นหา
+          "/private/",   // พิกัดข้อมูลจำเพาะที่ไม่ต้องการเปิดเผยสู่สาธารณะ
         ],
       },
       {
-        /** * [AI SCRAPER CONTROL]: บล็อกพิกัดบอทสายดูดข้อมูล 
-         * ปกป้องทรัพย์สินทางปัญญาของ นายเอ็มซ่ามากส์ จากการถูกนำไปเทรน AI โดยไร้ทราฟฟิก
+        /** * [AI DATA PROTECTION]: ป้องกันบอทดูดข้อมูลเพื่อไปประมวลผล AI (Scraping)
+         * ในพิกัดที่อาจส่งผลกระทบต่อลิขสิทธิ์เนื้อหาเทคนิค
          */
-        userAgent: [
-          "GPTBot",
-          "CCBot",
-          "ChatGPT-User",
-          "ClaudeBot",
-          "PerplexityBot",
-          "Applebot-Extended",
-          "Omgilibot",
-          "FacebookBot",
-          "Bytespider", // บอทจาก ByteDance (TikTok)
-          "ImagesiftBot",
-        ],
-        disallow: [
-          "/case-studies/", // ปกป้องพิกัดความสำเร็จที่เป็นความลับธุรกิจ
-          "/content/",      // ปิดพิกัด Raw Markdown Data
-          "/config/",
-          "/_next/data/",   // บล็อกพิกัดข้อมูล JSON ของ Next.js
-        ],
-      },
+        userAgent: ["GPTBot", "CCBot"],
+        disallow: ["/private/"], // อนุญาตให้เก็บหน้าทั่วไป แต่ปิดกั้นพิกัดสำคัญ
+      }
     ],
-    /** แจ้งพิกัดแผนผังเว็บไซต์เพื่อให้บอทวิ่งงานได้ไวขึ้น */
+    /** แจ้งพิกัดแผนผังเว็บไซต์ (Sitemap) เพื่อให้บอทประมวลผลข้อมูลได้รวดเร็วที่สุด */
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

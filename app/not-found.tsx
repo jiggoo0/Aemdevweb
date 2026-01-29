@@ -7,19 +7,20 @@ import { Button } from "@/components/ui/button"
 
 /**
  * NotFound: ส่วนจัดการเมื่อพิกัดข้อมูลสูญหาย (v2026 Specialist Edition)
- * กลยุทธ์: นำทางลูกค้ากลับเข้าสู่ส่วนงานที่สร้างรายได้ (Home / Services)
- * โทน: เรียบง่าย ตรงไปตรงมา ไม่ใช้ศัพท์เทคนิคที่ซับซ้อนเกินไป
+ * กลยุทธ์: นำทางลูกค้ากลับเข้าสู่ส่วนงานหลักของระบบ (Home / Services)
+ * โทน: เรียบง่าย ตรงไปตรงมา อธิบายแบบคนทำงานจริง
  */
 export default function NotFound() {
   return (
     <main className="animate-in fade-in relative flex min-h-[90vh] flex-col items-center justify-center px-6 py-20 text-center duration-700">
-      {/* [LAYER 0] - Technical Background: ลายตารางพิกัดเชิงเทคนิค */}
+      
+      {/* [LAYER 0] - Technical Background: ลายตารางพิกัดโครงสร้างระบบ */}
       <div className="absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] opacity-[0.04]">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[size:40px_40px] bg-center" />
       </div>
 
-      {/* [LAYER 1] - Visual Icon: สัญลักษณ์การค้นหาที่ไม่พบข้อมูล */}
-      <div className="group relative mb-12 flex h-32 w-32 items-center justify-center rounded-[2.5rem] bg-slate-50 transition-all duration-500 hover:scale-105 hover:bg-emerald-50">
+      {/* [LAYER 1] - Visual Icon: สัญลักษณ์พิกัดข้อมูลที่ไม่พบในระบบ */}
+      <div className="group relative mb-12 flex h-32 w-32 items-center justify-center rounded-[2.5rem] bg-slate-50 transition-all duration-500 hover:scale-105 hover:bg-emerald-50 shadow-inner">
         <FileSearch
           className="h-16 w-16 text-slate-200 transition-colors duration-500 group-hover:text-emerald-500"
           strokeWidth={1}
@@ -36,7 +37,7 @@ export default function NotFound() {
           <span className="text-emerald-500">ที่คุณต้องการ.</span>
         </h1>
         <p className="font-body mx-auto max-w-[520px] text-lg leading-relaxed font-bold text-slate-500 md:text-xl">
-          พิกัดที่คุณเรียกใช้อาจมีการเปลี่ยนแปลง หรือข้อมูลถูกย้ายตำแหน่งใหม่
+          พิกัดที่คุณเรียกใช้อาจมีการเปลี่ยนแปลง หรือข้อมูลถูกย้ายตำแหน่งใหม่ 
           ลองเริ่มค้นหาแผนงานที่ใช่สำหรับธุรกิจของคุณจากตัวเลือกด้านล่างครับ
         </p>
       </div>
@@ -45,7 +46,7 @@ export default function NotFound() {
       <div className="mt-16 flex flex-col items-center gap-5 sm:flex-row">
         <Button
           asChild
-          className="h-16 rounded-2xl bg-slate-950 px-10 text-[11px] font-black tracking-[0.2em] text-white uppercase italic shadow-2xl shadow-slate-900/10 transition-all hover:bg-emerald-600 active:scale-95"
+          className="h-16 rounded-2xl bg-slate-950 px-10 text-[11px] font-black tracking-[0.2em] text-white uppercase italic shadow-2xl transition-all hover:bg-emerald-600 active:scale-95"
         >
           <Link href="/" className="flex items-center gap-3">
             <Home size={18} />
@@ -60,18 +61,18 @@ export default function NotFound() {
         >
           <Link href="/services" className="flex items-center gap-3">
             <LayoutGrid size={18} />
-            ดูแพ็กเกจบริการ
+            ดูรายการบริการ
           </Link>
         </Button>
       </div>
 
-      {/* [LAYER 4] - Secondary Action: เชื่อมต่อผลงานเพื่อความน่าเชื่อถือ */}
+      {/* [LAYER 4] - Secondary Action: เชื่อมต่อผลงานเพื่อความน่าเชื่อถือ (Trust Node) */}
       <div className="mt-16 border-t border-slate-100 pt-16">
         <Link
           href="/case-studies"
           className="group flex items-center gap-3 text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
         >
-          สำรวจผลงานที่ผ่านมาของเรา
+          สำรวจผลลัพธ์ที่ผ่านมาของเรา
           <ArrowRight
             size={14}
             className="transition-transform group-hover:translate-x-2"

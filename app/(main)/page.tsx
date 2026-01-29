@@ -4,14 +4,14 @@ import React, { Suspense } from "react"
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// [CRITICAL PATH]: โหลดทันทีเพื่อประสิทธิภาพการแสดงผลสูงสุด (Above the Fold)
+// [CRITICAL PATH PROTOCOL]: โหลดทันทีเพื่อความเร็วระดับ 0.8 วินาที (Above the Fold)
 import Hero from "@/components/shared/Hero"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { JsonLd } from "@/components/seo/JsonLd"
 import SectionSkeleton from "@/components/shared/SectionSkeleton"
 
-// [DYNAMIC LAYERS]: โหลดเมื่อมีการเรียกใช้งานเพื่อลดขนาดไฟล์เริ่มต้น (Performance Optimized)
+// [DYNAMIC NODES]: โหลดข้อมูลเมื่อจำเป็นเพื่อรักษาพิกัดประสิทธิภาพระบบ
 const WorkProcess = dynamic(
   () =>
     import("@/components/sales-engine/WorkProcess").then(
@@ -36,18 +36,18 @@ const TemplateListSection = dynamic(
 
 const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
 
-// เชื่อมโยงข้อมูลระบบ
+// เชื่อมโยงพิกัดข้อมูลระบบส่วนกลาง
 import { siteConfig } from "@/constants/site-config"
 import { servicesData } from "@/constants/services-data"
 import { getAllCaseStudies } from "@/lib/case-studies"
 import { getBlogPostsMetadata } from "@/lib/blog"
 
 /**
- * [SEO STRATEGY]: ข้อมูล Metadata สำหรับปี 2026
- * มุ่งเน้นความน่าเชื่อถือและประสิทธิภาพเชิงเทคนิคระดับสากล
+ * [STRATEGIC METADATA]: การกำหนดชุดข้อมูลเพื่อพิกัดความเชื่อถือ 2026
+ * ยุทธศาสตร์: ครองพิกัด Technical Search Authority
  */
 export const metadata: Metadata = {
-  title: `${siteConfig.project.title} | โซลูชันพัฒนาเว็บไซต์และ Technical SEO ประสิทธิภาพสูง`,
+  title: `${siteConfig.project.title} | ระบบพัฒนาเว็บไซต์และพิกัดบริการ SEO ประสิทธิภาพสูง`,
   description: siteConfig.project.description,
   alternates: { canonical: siteConfig.project.url },
   openGraph: {
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   /**
-   * [SERVER DATA]: ดึงข้อมูลจากฝั่ง Server
-   * เพื่อความรวดเร็วและรองรับมาตรฐานการค้นหา 100 เปอร์เซ็นต์
+   * [SERVER SIDE LOGIC]: ดึงข้อมูลจากพิกัดไฟล์ระบบฝั่ง Server พร้อมกัน
+   * เพื่อความฉับไวและรองรับบอทการค้นหาได้สมบูรณ์ 100%
    */
   const [allCaseStudies, latestPosts] = await Promise.all([
     getAllCaseStudies(),
@@ -75,7 +75,7 @@ export default async function HomePage() {
 
   return (
     <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/10">
-      {/* Structured Data: ข้อมูลระบุตัวตนธุรกิจมาตรฐานสากล */}
+      {/* [SCHEMA DATA]: ข้อมูลยืนยันพิกัดธุรกิจต่อระบบ AI Search สากล */}
       <JsonLd
         type="WebSite"
         data={{
@@ -85,26 +85,25 @@ export default async function HomePage() {
         }}
       />
 
-      {/* Hero Section: ส่วนนำเสนอความรวดเร็วและเสถียรภาพ */}
+      {/* Hero Section: พิกัดนำเสนอความเร็วและเสถียรภาพสูงสุด */}
       <Hero />
 
-      {/* สถิติความสำเร็จ: บทพิสูจน์ผลลัพธ์เชิงตัวเลขที่ชัดเจน */}
+      {/* Impact Nodes: ข้อมูลยืนยันผลลัพธ์ที่จับต้องได้จริงเชิงระบบ */}
       <div className="relative z-10 border-b border-slate-50 bg-white">
         <ImpactStats />
       </div>
 
-      {/* บริการหลัก: โซลูชันที่ออกแบบมาเพื่อการเติบโตของธุรกิจอย่างยั่งยืน */}
+      {/* Main Services: พิกัดแผนงานบริการเพื่อการเติบโตทางธุรกิจ */}
       <section id="services" className="relative py-24 lg:py-40">
-        <div className="container mx-auto px-6">
+        <div className="container-za">
           <div className="mb-20 max-w-3xl border-l-8 border-emerald-500 pl-8 md:pl-16">
             <h2 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
-              Main <br />
+              Core <br />
               <span className="text-emerald-500">Services.</span>
             </h2>
             <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              เลือกรูปแบบเว็บไซต์ที่ตอบโจทย์ความต้องการทางธุรกิจ
-              พร้อมออนไลน์ด้วยระบบที่เน้นอัตรา Conversion ภายใต้มาตรฐานสากลปี
-              2026
+              เลือกพิกัดเว็บไซต์ที่ตอบโจทย์ความต้องการเชิงพาณิชย์
+              พร้อมออนไลน์ด้วยโครงสร้างระบบที่เน้นมาตรฐานสากลปี 2026
             </p>
           </div>
 
@@ -116,28 +115,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ส่วนการจัดการระบบที่ลื่นไหล (Lazy Loading Zone) */}
+      {/* ระบบโหลดข้อมูลแบบนุ่มนวล (Smooth Loading Protocol) */}
       <Suspense fallback={<SectionSkeleton />}>
-        {/* กระบวนการทำงาน: ชัดเจน แม่นยำ และเป็นระบบ */}
-        <section className="bg-slate-50 py-12 lg:py-24">
-          <div className="container mx-auto px-6">
+        {/* Work Protocol: ขั้นตอนการจัดการระบบที่แม่นยำ */}
+        <section className="bg-slate-50 py-12 lg:py-24 shadow-inner">
+          <div className="container-za">
             <WorkProcess />
           </div>
         </section>
 
-        {/* ประเมินงบประมาณ: ความโปร่งใสเพื่อการตัดสินใจที่แม่นยำ */}
+        {/* Estimation Node: ระบบประเมินงบประมาณเพื่อความโปร่งใส */}
         <PriceEstimator />
 
-        {/* ผลงานที่ผ่านมา: กรณีศึกษาความสำเร็จจากการยกระดับระบบเว็บไซต์ประสิทธิภาพสูง */}
-        <section id="cases" className="bg-slate-950 py-24 text-white lg:py-40">
-          <div className="container mx-auto px-6">
+        {/* Success Protocol: กรณีศึกษาผลลัพธ์จริงจากการวางโครงสร้างระบบ */}
+        <section id="cases" className="bg-slate-950 py-24 text-white lg:py-40 shadow-node">
+          <div className="container-za">
             <div className="mb-20 max-w-2xl border-l-8 border-emerald-500 pl-8 md:pl-16">
               <h2 className="font-heading text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl">
                 Success <br />
-                <span className="text-emerald-500">Stories.</span>
+                <span className="text-emerald-500">Protocol.</span>
               </h2>
               <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-300 md:text-2xl">
-                บทพิสูจน์ธุรกิจที่เติบโตจริงจากการวางรากฐานโครงสร้างเว็บไซต์ที่เปี่ยมประสิทธิภาพ
+                บทพิสูจน์ธุรกิจที่เติบโตจากการวางรากฐานพิกัดข้อมูลที่เปี่ยมประสิทธิภาพ
               </p>
             </div>
             <div className="grid gap-12 md:grid-cols-2">
@@ -161,25 +160,25 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* รูปแบบเว็บไซต์: คัดเลือกดีไซน์พรีเมียมเพื่อการเริ่มต้นธุรกิจในทันที */}
+        {/* Base Models: พิกัดรูปแบบระบบสำเร็จรูปพร้อมใช้งาน */}
         <section id="templates" className="bg-white py-24 lg:py-40">
-          <div className="container mx-auto px-6">
+          <div className="container-za">
             <TemplateListSection />
           </div>
         </section>
 
-        {/* คลังข้อมูลเชิงลึก: กลยุทธ์และเทคโนโลยีเพื่อก้าวทันโลกดิจิทัล */}
+        {/* Insights Hub: คลังข้อมูลระดับรหัสและเทคโนโลยีปี 2026 */}
         <section
           id="blog"
           className="border-t border-slate-100 bg-slate-50 py-24 lg:py-40"
         >
-          <div className="container mx-auto px-6">
+          <div className="container-za">
             <div className="mb-20 text-center">
               <h2 className="font-heading text-5xl font-black uppercase italic md:text-8xl">
-                Knowledge <span className="text-emerald-500">Hub.</span>
+                Insights <span className="text-emerald-500">Hub.</span>
               </h2>
               <p className="font-body mt-4 font-bold tracking-widest text-slate-400 uppercase italic">
-                เจาะลึกเทคโนโลยีเว็บไซต์และกลยุทธ์การเพิ่มขีดความสามารถทางการแข่งขัน
+                เจาะลึกพิกัดเทคโนโลยีและกลยุทธ์การเพิ่มขีดความสามารถเชิงรหัส
               </p>
             </div>
             <BlogCard posts={featuredPosts} />
@@ -187,7 +186,7 @@ export default async function HomePage() {
         </section>
       </Suspense>
 
-      {/* ลายเส้นโครงสร้างเชิงระบบ: เพิ่มความละเอียดและความเนี้ยบแบบ Minimalist */}
+      {/* พิกัดลายเส้นโครงสร้าง: มิติความละเอียดระดับรหัสระดับ 7 */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
         aria-hidden="true"

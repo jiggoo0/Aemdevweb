@@ -1,38 +1,43 @@
-/** @format */
+// @format
+// พิกัดข้อมูล: app/layout.tsx
+// หน้าที่: พิกัดควบคุมโครงสร้างพื้นฐานและระบบรากของเว็บไซต์ (Root Layout)
+// มาตรฐาน: Next.js 16 | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
+// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
 
-import React from "react"
-import { Metadata, Viewport } from "next"
-import NextTopLoader from "nextjs-toploader"
-import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google"
+import React from "react";
+import { Metadata, Viewport } from "next";
+import NextTopLoader from "nextjs-toploader";
+import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google";
 
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { Toaster } from "@/components/ui/sonner"
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Toaster } from "@/components/ui/sonner";
 
-import "@/app/globals.css"
+import "@/app/globals.css";
 
 /**
- * [FONT SYSTEM 2026]
- * IBM Plex Sans Thai: สำหรับ Heading (ความมั่นคง/มาตรฐาน)
- * Anuphan: สำหรับ Body (ความชัดเจน/ร่วมสมัย)
+ * [DNA FONT SYSTEM 2026]
+ * IBM Plex Sans Thai: สำหรับส่วนหัวพิกัดข้อมูล (ความมั่นคงและมาตรฐานสากล)
+ * Anuphan: สำหรับเนื้อหาหลักของระบบงาน (ความชัดเจนและร่วมสมัย)
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-heading",
   display: "swap",
-})
+});
 
 const fontBody = Anuphan({
   subsets: ["thai", "latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-body",
   display: "swap",
-})
+});
 
 /**
- * [SEARCH ENGINE OPTIMIZATION]: Metadata Configuration
+ * [SEARCH ENGINE PERFORMANCE]: การกำหนดพิกัดชุดข้อมูล Metadata
+ * เน้นความแม่นยำของพิกัดตัวตนแบรนด์บนระบบการค้นหายุคใหม่
  */
 export const metadata: Metadata = {
   title: {
@@ -83,19 +88,23 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-}
+};
 
+/**
+ * Viewport Configuration: กำหนดสีพื้นฐานของแถบสถานะ (Status Bar)
+ * ปรับปรุงพิกัดสีเป็น OKLCH ตามมาตรฐานระบบปี 2026
+ */
 export const viewport: Viewport = {
-  themeColor: "#10b981",
+  themeColor: "oklch(0.7 0.2 160)",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html
@@ -108,23 +117,21 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* [SCHEMA MARKUP]: Unified Entity Bridge 2026 */}
+        {/* [ENTITY CONNECTIVITY]: การยืนยันพิกัดตัวตนเพื่อความน่าเชื่อถือระดับสูง */}
         <JsonLd
           type="Organization"
           data={{
             "@id": `${siteConfig.project.url}/#organization`,
             name: siteConfig.company.name,
             url: siteConfig.project.url,
-            // [Consolidated Logo]: ใช้ Logo หลักเพื่อสร้างภาพจำ Entity เดียวกัน
-            logo: "https://www.aemdevweb.com/images/logo-circuit.png",
+            logo: `${siteConfig.project.url}/images/logo-circuit.png`,
             founder: {
               "@type": "Person",
-              // [Critical Bridge]: เชื่อมโยง Founder ไปยัง @id ของหน้า Portfolio
-              "@id": "https://me.aemdevweb.com/#person",
+              "@id": `${siteConfig.links.personal}/#person`,
               name: siteConfig.expert.realName,
               jobTitle: siteConfig.expert.role,
               description: siteConfig.expert.bio,
-              url: "https://me.aemdevweb.com",
+              url: siteConfig.links.personal,
             },
             contactPoint: {
               "@type": "ContactPoint",
@@ -133,8 +140,6 @@ export default function RootLayout({
               areaServed: "TH",
               availableLanguage: ["Thai", "English"],
             },
-            // [Social Signals]: รวมทุกลิงก์เพื่อยืนยัน Authority ข้ามแพลตฟอร์ม
-            // กรองค่าที่เป็น undefined ออกเพื่อให้ Schema สะอาด
             sameAs: [
               siteConfig.links.facebook,
               siteConfig.links.linkedin,
@@ -146,16 +151,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-body min-h-screen bg-white text-slate-900 selection:bg-emerald-500/10 selection:text-emerald-900">
-        {/* Progress Bar: Emerald Brand Identity */}
-        <NextTopLoader color="#10b981" showSpinner={false} height={3} />
+      <body className="font-body min-h-screen bg-[oklch(1_0_0)] text-[oklch(0.2_0.02_260)] selection:bg-[oklch(0.7_0.2_160_/_0.1)] selection:text-[oklch(0.4_0.15_160)]">
+        {/* ระบบแถบสถานะประมวลผล: Emerald Depth Identity */}
+        <NextTopLoader color="oklch(0.7 0.2 160)" showSpinner={false} height={3} />
 
+        {/* พิกัดแสดงผลเนื้อหาระบบงานหลัก */}
         <main className="relative flex min-h-screen flex-col overflow-x-hidden">
           {children}
         </main>
 
+        {/* ระบบแจ้งเตือนส่วนหน้าจอ (Global Notification Node) */}
         <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
-  )
+  );
 }

@@ -70,7 +70,8 @@ export default async function CaseStudiesPage() {
 
             <p className="font-body mt-12 max-w-3xl text-xl leading-relaxed font-bold text-slate-400 md:text-3xl">
               "ขับเคลื่อนผลลัพธ์ผ่านดัชนีชี้วัดเชิงกลยุทธ์" <br />
-              ถอดรหัสการเพิ่มสมรรถนะธุรกิจ SME สู่การเป็นผู้นำตลาดในระนาบดิจิทัล <br className="hidden md:block" />
+              ถอดรหัสการเพิ่มสมรรถนะธุรกิจ SME สู่การเป็นผู้นำตลาดในระนาบดิจิทัล{" "}
+              <br className="hidden md:block" />
               เปลี่ยนโครงสร้างเว็บไซต์ให้เป็นสินทรัพย์ดิจิทัลที่สร้างมูลค่าเพิ่มอย่างยั่งยืน
             </p>
           </div>

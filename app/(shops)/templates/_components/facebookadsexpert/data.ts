@@ -11,7 +11,8 @@ import { FacebookAdsData } from "./schema"
 export const facebookAdsData: FacebookAdsData = {
   // 1. กลยุทธ์การจัดการข้อมูล SEO (SEO Strategy)
   seo: {
-    title: "Facebook Ads Expert โดย นายเอ็มซ่ามากส์ | จูนยอดขายให้พุ่งด้วยข้อมูลจริง | AEMDEVWEB",
+    title:
+      "Facebook Ads Expert โดย นายเอ็มซ่ามากส์ | จูนยอดขายให้พุ่งด้วยข้อมูลจริง | AEMDEVWEB",
     description:
       "เปลี่ยนงบโฆษณาให้เป็นกำไรโดย นายเอ็มซ่ามากส์ ด้วยการวางระบบติดตามผลขั้นสูงและแผนงานสมรรถนะสูงบนสถาปัตยกรรม Next.js 16",
     keywords: [

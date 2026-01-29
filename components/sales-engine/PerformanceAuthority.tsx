@@ -94,10 +94,11 @@ export const PerformanceAuthority = ({
               </span>
             </div>
             <h3 className="font-heading text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-5xl">
-              {label}<span className="text-emerald-500">.</span>
+              {label}
+              <span className="text-emerald-500">.</span>
             </h3>
             <p className="font-body text-lg font-bold text-slate-500">
-              ระบบที่ผ่านการคำนวณและปรับแต่งมาเพื่อประสิทธิภาพการประมวลผลสูงสุด 
+              ระบบที่ผ่านการคำนวณและปรับแต่งมาเพื่อประสิทธิภาพการประมวลผลสูงสุด
               ลดอัตราการสูญเสียโอกาสทางธุรกิจจากความล่าช้าของโครงสร้างพื้นฐานเดิม
             </p>
           </div>
@@ -118,7 +119,13 @@ export const PerformanceAuthority = ({
 /**
  * SpecItem - ส่วนประกอบย่อยสำหรับระบุคุณสมบัติทางเทคนิค
  */
-const SpecItem = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
+const SpecItem = ({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode
+  label: string
+}) => (
   <div className="flex items-center gap-3 border-l-2 border-slate-100 pl-4 transition-colors hover:border-emerald-500">
     <div className="text-emerald-500">{icon}</div>
     <span className="font-heading text-[10px] font-black tracking-widest text-slate-400 uppercase italic group-hover:text-slate-950">

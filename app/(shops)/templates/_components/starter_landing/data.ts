@@ -11,7 +11,8 @@ import { StarterLandingData } from "./schema"
 export const starterLandingData: StarterLandingData = {
   // [1. SEO STRATEGY]: พิกัดตัวตนเพื่อการทำอันดับและดึงดูดสายยิงแอด
   seo: {
-    title: "Landing Page สายยิงแอด โดย นายเอ็มซ่ามากส์ | ซิ่งแรง ปิดการขายกริบ | AEMDEVWEB",
+    title:
+      "Landing Page สายยิงแอด โดย นายเอ็มซ่ามากส์ | ซิ่งแรง ปิดการขายกริบ | AEMDEVWEB",
     description:
       "วางระบบหน้าเดียวโดย นายเอ็มซ่ามากส์ เพื่อสายยิงแอดโดยเฉพาะ โหลดไวหยุดลูกค้าได้ทันที พิกัดราคา 1,990.- ออนไลน์งานได้ใน 24 ชม. มาตรฐานปี 2026",
     keywords: [

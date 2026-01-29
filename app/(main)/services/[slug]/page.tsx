@@ -16,7 +16,7 @@ import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 import { ServiceItem } from "@/types"
 
-// การเรียกใช้ข้อมูลรูปแบบระบบที่เกี่ยวข้อง
+// การเรียกใช้พิกัดระบบงานที่เกี่ยวข้อง
 import { getTemplatesBySlugs } from "@/lib/template"
 import TemplateCard from "@/components/marketplace/template/TemplateCard"
 
@@ -53,7 +53,7 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   if (!service) notFound()
 
-  // การจัดเตรียมรูปแบบระบบ (Templates) ที่สัมพันธ์กับแผนงานหลัก
+  // การจัดเตรียมระบบงานพร้อมใช้ (Templates) ที่สัมพันธ์กับแผนงานบริการ
   const recommendedTemplates = getTemplatesBySlugs(
     service.relatedTemplateSlugs || []
   )
@@ -86,7 +86,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         aria-hidden="true"
       />
 
-      {/* [HERO SECTION]: ส่วนนำเสนอหัวข้อและรายละเอียดแผนงานหลัก */}
+      {/* [HERO SECTION]: ส่วนนำเสนอหัวข้อและรายละเอียดแผนงานบริการ */}
       <section className="relative overflow-hidden border-b border-slate-50 bg-slate-50/50 pt-32 pb-24 lg:pt-48 lg:pb-40">
         <div className="container mx-auto px-6">
           <Link
@@ -183,7 +183,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         </div>
       </section>
 
-      {/* [RECOMMENDED ASSETS]: โซลูชันสำเร็จรูปที่พัฒนามาเพื่อประสิทธิภาพสูงสุด */}
+      {/* [RECOMMENDED ASSETS]: ระบบงานพร้อมใช้ที่พัฒนามาเพื่อประสิทธิภาพสูงสุด */}
       {recommendedTemplates.length > 0 && (
         <section className="mt-32 border-t border-slate-100 pt-32 lg:mt-56 lg:pt-48">
           <div className="container mx-auto px-6">
@@ -192,7 +192,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 Ready <span className="text-emerald-500">Assets.</span>
               </h2>
               <p className="font-body text-xl font-bold text-slate-500 md:text-2xl">
-                โซลูชันรูปแบบระบบที่พัฒนาและทดสอบมาเพื่อประสิทธิภาพสูงสุดร่วมกับแผนงานนี้
+                โครงสร้างระบบงานพร้อมใช้ที่พัฒนาและทดสอบมาเพื่อประสิทธิภาพสูงสุดร่วมกับแผนงานนี้
               </p>
             </div>
 

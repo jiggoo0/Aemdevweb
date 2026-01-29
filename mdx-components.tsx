@@ -71,7 +71,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Cpu,
 
     // [GROUP 3] - Typography and Specialist Visual Elements
-    
+
     h1: ({ children }) => (
       <h1 className="font-heading mt-24 mb-10 text-5xl leading-[1.1] font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl lg:text-8xl">
         {children}
@@ -140,7 +140,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         )
       }
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={baseClass}>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={baseClass}
+        >
           {children}
         </a>
       )
@@ -168,13 +173,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       label?: string
     }) => (
       <div className="relative my-20 overflow-hidden rounded-[4rem] bg-slate-950 p-12 text-center md:p-24">
-        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-10" aria-hidden="true" />
+        <div
+          className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-10"
+          aria-hidden="true"
+        />
         <h3 className="font-heading relative z-10 mb-12 text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
           {title}
         </h3>
         <Link
           href={url}
-          className="relative z-10 inline-flex items-center justify-center gap-4 rounded-2xl bg-emerald-500 px-12 py-6 text-sm font-black tracking-[0.2em] text-slate-950 uppercase italic transition-all hover:bg-white active:scale-95 shadow-[0_0_30px_rgba(16,185,129,0.3)]"
+          className="relative z-10 inline-flex items-center justify-center gap-4 rounded-2xl bg-emerald-500 px-12 py-6 text-sm font-black tracking-[0.2em] text-slate-950 uppercase italic shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all hover:bg-white active:scale-95"
         >
           {label} <ArrowRight size={20} strokeWidth={3} />
         </Link>

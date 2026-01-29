@@ -1,34 +1,37 @@
-/** @format */
+// @format
+// พิกัดข้อมูล: constants/navigation.ts
+// หน้าที่: กำหนดพิกัดทางเดินข้อมูล (Routing) และระบบเมนูสำหรับ www.aemdevweb.com
+// ควบคุมมาตรฐานระดับ 7 โดย: นายเอ็มซ่ามากส์
 
-import { siteConfig } from "./site-config"
+import { siteConfig } from "./site-config";
 
 /**
  * [TYPE DEFINITIONS]
- * โครงสร้างข้อมูลสำหรับระบบเมนูนำทาง
+ * โครงสร้างข้อมูลสำหรับระบบเมนูนำทาง (Navigation Structure)
+ * ปรับปรุงเพื่อรองรับมาตรฐาน Next.js 16 App Router
  */
 export interface NavItem {
-  name: string
-  href: string
-  description?: string
-  badge?: string
-  external?: boolean
-  disabled?: boolean
+  name: string;
+  href: string;
+  description?: string;
+  badge?: string;
+  external?: boolean;
+  disabled?: boolean;
 }
 
 export interface NavigationConfig {
-  main: NavItem[]
+  main: NavItem[];
   footer: {
-    services: NavItem[]
-    company: NavItem[]
-    support: NavItem[]
-    legal: NavItem[]
-  }
+    services: NavItem[];
+    company: NavItem[];
+    support: NavItem[];
+    legal: NavItem[];
+  };
 }
 
 /**
- * Navigation Strategy 2026: "Direct & Conversion-Focused"
- * ออกแบบเส้นทางผู้ใช้งานเพื่อให้เข้าถึงโซลูชันและข้อมูลสำคัญได้อย่างรวดเร็ว
- * เน้นการลดขั้นตอนการเข้าถึงข้อมูลเพื่อประสิทธิภาพสูงสุด
+ * Navigation Strategy 2026: "Authority & Conversion"
+ * วางพิกัดเส้นทางผู้ใช้งานเพื่อส่งพลัง SEO และเพิ่มโอกาสการปิดการขาย
  */
 export const navigation: NavigationConfig = {
   /* -------------------------- เมนูหลัก (Main Navbar) ---------------------------- */
@@ -36,28 +39,28 @@ export const navigation: NavigationConfig = {
     {
       name: "หน้าแรก",
       href: "/",
-      description: "ภาพรวมระบบและจุดเด่นของบริการเพื่อการเติบโตของธุรกิจ",
+      description: "ภาพรวมโครงสร้างระบบและจุดเด่นของบริการเพื่อการเติบโต",
     },
     {
       name: "บริการ",
       href: "/services",
-      description: "รายละเอียดแผนการลงทุนและสเปกการทำงานระดับพรีเมียม",
+      description: "รายละเอียดแผนการลงทุนและสเปกการทำงานระดับสากล",
+    },
+    {
+      name: "Technical SEO",
+      href: "/seo",
+      badge: "Pro",
+      description: "ปรับโครงสร้างระบบเว็บให้ Google รักและดันอันดับหน้าแรก",
     },
     {
       name: "เทมเพลต",
       href: "/templates",
-      badge: "New",
-      description: "คลังรูปแบบเว็บไซต์ที่ผ่านการเพิ่มประสิทธิภาพพร้อมใช้งาน",
+      description: "คลังโครงสร้างเว็บไซต์ที่ผ่านการเพิ่มประสิทธิภาพพร้อมใช้งาน",
     },
     {
       name: "ผลงาน",
       href: "/case-studies",
       description: "กรณีศึกษาความสำเร็จและตัวอย่างเว็บไซต์มาตรฐานสากล",
-    },
-    {
-      name: "บทความ",
-      href: "/blog",
-      description: "คลังความรู้ด้านกลยุทธ์ SEO และเทคโนโลยีเว็บไซต์ยุคใหม่",
     },
     {
       name: "ติดต่อเรา",
@@ -76,14 +79,15 @@ export const navigation: NavigationConfig = {
         description: "เน้นอัตรา Conversion และความเร็วในการโหลดที่เป็นเลิศ",
       },
       {
-        name: "Corporate Growth Solution",
-        href: "/services/corporate_pro",
-        description: "ยกระดับความน่าเชื่อถือและภาพลักษณ์องค์กรระดับสากล",
+        name: "Technical SEO Audit",
+        href: "/seo/technical-audit",
+        description: "เอกซเรย์โครงสร้างระบบเพื่อหาจุดบกพร่องด้านเทคนิค",
       },
       {
-        name: "Local SEO Strategy",
-        href: "/services/local_service",
-        description: "เข้าถึงกลุ่มเป้าหมายในพื้นที่อย่างแม่นยำผ่านแผนที่",
+        name: "Web Speed Optimization",
+        href: "/seo/speed-optimization",
+        badge: "Hot",
+        description: "จูนความเร็วหน้าเว็บให้โหลดไวระดับสูงสุด LCP < 0.8s",
       },
       {
         name: "Ranking Performance Care",
@@ -102,31 +106,25 @@ export const navigation: NavigationConfig = {
         href: "/case-studies",
       },
       {
-        name: "กรณีศึกษาความสำเร็จ Unlink-TH",
+        name: "กรณีศึกษา Unlink-TH",
         href: "/case-studies/unlink-reputation-management-success",
         badge: "Case Study",
-      },
-      {
-        name: "ร่วมงานกับเรา",
-        href: "#careers",
-        disabled: true,
       },
     ],
 
     support: [
       {
-        name: "ปรึกษาผ่านช่องทาง LINE",
+        name: "ปรึกษาผ่าน LINE",
         href: siteConfig.links.line || "https://lin.ee/6lgJox0",
         external: true,
       },
       {
-        name: "รายละเอียดราคาและข้อเสนอ",
+        name: "รายละเอียดราคา",
         href: "/services#pricing",
       },
       {
-        name: "ศูนย์การสนับสนุนทางเทคนิค",
-        href: siteConfig.links.line,
-        external: true,
+        name: "บทความและเทคนิค",
+        href: "/blog",
       },
     ],
 
@@ -136,32 +134,27 @@ export const navigation: NavigationConfig = {
         href: "/privacy",
       },
       {
-        name: "เงื่อนไขและข้อตกลงการใช้บริการ",
+        name: "เงื่อนไขการใช้บริการ",
         href: "/terms",
       },
     ],
   },
-}
+};
 
-/* -------------------------------------------------------------------------- */
-/* Exports & Keywords Strategy                                                */
-/* -------------------------------------------------------------------------- */
-
-export const mainNav = navigation.main
-export const footerNavigation = navigation.footer
+export const mainNav = navigation.main;
+export const footerNavigation = navigation.footer;
 
 /**
  * [SEO KEYWORDS 2026]
- * ชุดคำค้นหาหลักที่เน้นกลุ่มเป้าหมายคุณภาพสูง
- * มุ่งเน้นการดึงดูดลูกค้าที่ให้ความสำคัญกับมาตรฐานและผลลัพธ์เชิงธุรกิจ
+ * พิกัดคำค้นหาหลักสำหรับใช้ใน Metadata และระบบค้นหา
  */
 export const siteKeywords: string[] = [
   "AEMDEVWEB",
-  "บริการพัฒนาเว็บไซต์ SEO",
+  "บริการวางระบบเว็บไซต์",
   "ออกแบบเว็บไซต์ธุรกิจระดับพรีเมียม",
-  "ระบบเว็บไซต์ Next.js ประสิทธิภาพสูง",
+  "Next.js High-Performance Website",
   "High-Performance Sale Page",
-  "กลยุทธ์ Technical SEO",
-  "รูปแบบเว็บไซต์มาตรฐานสากล",
+  "Technical SEO Specialist",
+  "โครงสร้างระบบเว็บระดับสากล",
   "นายเอ็มซ่ามากส์",
-]
+];

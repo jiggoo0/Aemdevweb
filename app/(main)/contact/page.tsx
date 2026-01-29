@@ -25,19 +25,20 @@ export default function ContactPage() {
         type="ContactPage"
         data={{
           "@id": `${baseUrl}/contact/#webpage`,
-          "name": "ติดต่อสอบถามบริการพัฒนาเว็บไซต์และ SEO | AEMDEVWEB",
-          "description": "ปรึกษาแผนงานระบบและกลยุทธ์ SEO กับผู้เชี่ยวชาญโดยตรงเพื่อความเหนือระดับของธุรกิจ",
-          "url": `${baseUrl}/contact`,
+          name: "ติดต่อสอบถามบริการพัฒนาเว็บไซต์และ SEO | AEMDEVWEB",
+          description:
+            "ปรึกษาแผนงานระบบและกลยุทธ์ SEO กับผู้เชี่ยวชาญโดยตรงเพื่อความเหนือระดับของธุรกิจ",
+          url: `${baseUrl}/contact`,
           // เชื่อมโยงว่าหน้านี้เป็นส่วนหนึ่งของ Organization
-          "about": { "@id": `${baseUrl}/#organization` },
+          about: { "@id": `${baseUrl}/#organization` },
           // ระบุตัวตนผู้ดูแลหลัก (Entity Bridge)
-          "mainEntity": { "@id": "https://me.aemdevweb.com/#person" },
-          "contactPoint": {
+          mainEntity: { "@id": "https://me.aemdevweb.com/#person" },
+          contactPoint: {
             "@type": "ContactPoint",
-            "contactType": "technical support",
-            "email": siteConfig.company.email,
-            "url": siteConfig.links.line,
-            "availableLanguage": ["Thai", "English"]
+            contactType: "technical support",
+            email: siteConfig.company.email,
+            url: siteConfig.links.line,
+            availableLanguage: ["Thai", "English"],
           },
         }}
       />
@@ -73,7 +74,8 @@ export default function ContactPage() {
 
             <p className="font-body max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               "AEMDEVWEB: รวดเร็ว แม่นยำ และเปี่ยมประสิทธิภาพ" <br />
-              เริ่มต้นปรึกษาแผนงานระบบกับ **{siteConfig.expert.name}** เพื่อผลลัพธ์ทางธุรกิจที่วัดผลได้จริง
+              เริ่มต้นปรึกษาแผนงานระบบกับ **{siteConfig.expert.name}**
+              เพื่อผลลัพธ์ทางธุรกิจที่วัดผลได้จริง
             </p>
           </motion.div>
         </div>

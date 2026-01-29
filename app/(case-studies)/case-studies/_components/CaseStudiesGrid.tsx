@@ -18,7 +18,6 @@ interface CaseStudiesGridProps {
  * มาตรฐาน: รองรับ Framer Motion 12 และการจัดการข้อมูลที่แม่นยำ (Type Safety)
  */
 export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
-  
   // [STRATEGIC VARIANTS]: การกำหนดค่าพารามิเตอร์สำหรับการเคลื่อนไหวเชิงระบบ
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

@@ -34,28 +34,28 @@ export default function AboutPage() {
         data={{
           // [จุดแก้ไขสำคัญ]: ใช้ @id เดียวกับในหน้า Portfolio เพื่อรวมพลัง Authority
           "@id": "https://me.aemdevweb.com/#person",
-          "name": siteConfig.expert.realName,
-          "alternateName": [
+          name: siteConfig.expert.realName,
+          alternateName: [
             siteConfig.expert.name,
             "Alongkorl Yomkerd",
-            "นายเอ็มซ่ามากส์"
+            "นายเอ็มซ่ามากส์",
           ],
-          "jobTitle": siteConfig.expert.role,
-          "url": siteConfig.links.personal,
-          "image": `${siteConfig.project.url}/og-image.png`,
+          jobTitle: siteConfig.expert.role,
+          url: siteConfig.links.personal,
+          image: `${siteConfig.project.url}/og-image.png`,
           // [Connectivity]: รวม Social Profiles ทั้งหมดให้สอดคล้องกับไฟล์ Config ใหม่
-          "sameAs": [
+          sameAs: [
             siteConfig.links.facebook,
             siteConfig.links.linkedin,
             siteConfig.links.tiktok,
             siteConfig.links.x,
             siteConfig.links.github,
-            siteConfig.links.line
+            siteConfig.links.line,
           ].filter(Boolean),
-          "worksFor": {
-            "@id": `${siteConfig.project.url}/#organization`
+          worksFor: {
+            "@id": `${siteConfig.project.url}/#organization`,
           },
-          "description": siteConfig.expert.bio
+          description: siteConfig.expert.bio,
         }}
       />
 
@@ -83,12 +83,16 @@ export default function AboutPage() {
 
               <div className="max-w-2xl border-l-8 border-emerald-500 pl-8 md:pl-12">
                 <p className="font-body text-2xl leading-relaxed font-black text-slate-900 md:text-3xl">
-                  "เราสร้างระบบเพื่อให้ธุรกิจของคุณ ขับเคลื่อนไปข้างหน้าด้วยประสิทธิภาพสูงสุด"
+                  "เราสร้างระบบเพื่อให้ธุรกิจของคุณ
+                  ขับเคลื่อนไปข้างหน้าด้วยประสิทธิภาพสูงสุด"
                 </p>
                 <p className="font-body mt-6 text-lg leading-relaxed font-bold text-slate-500">
-                  ผมคือ **{siteConfig.expert.name}** ({siteConfig.expert.realName})
-                  ผู้วางรากฐานและสถาปัตยกรรมระบบของ AEMDEVWEB 
-                  ความมุ่งมั่นของผมคือการเปลี่ยนเว็บไซต์ทั่วไปให้เป็น **Strategic Digital Asset** ที่มีความเร็ว ความปลอดภัย และรองรับกลยุทธ์การค้นหาภายใต้มาตรฐานสากลปี 2026
+                  ผมคือ **{siteConfig.expert.name}** (
+                  {siteConfig.expert.realName})
+                  ผู้วางรากฐานและสถาปัตยกรรมระบบของ AEMDEVWEB
+                  ความมุ่งมั่นของผมคือการเปลี่ยนเว็บไซต์ทั่วไปให้เป็น
+                  **Strategic Digital Asset** ที่มีความเร็ว ความปลอดภัย
+                  และรองรับกลยุทธ์การค้นหาภายใต้มาตรฐานสากลปี 2026
                 </p>
               </div>
             </div>

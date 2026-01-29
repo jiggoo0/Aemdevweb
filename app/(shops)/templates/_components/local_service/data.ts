@@ -72,7 +72,8 @@ export const localServiceData: LocalServiceData = {
   // 5. ระบบการติดต่อและประสานงานโครงการ (Communication Hub)
   contact: {
     title: "เริ่มต้นปรึกษาพิกัดงานกับนายเอ็มซ่ามากส์",
-    address: "เลขที่ 123 ถนนเพชรเกษม กรุงเทพมหานคร (ครอบคลุมพื้นที่โดยรอบ วางระบบโดย AEMDEVWEB)",
+    address:
+      "เลขที่ 123 ถนนเพชรเกษม กรุงเทพมหานคร (ครอบคลุมพื้นที่โดยรอบ วางระบบโดย AEMDEVWEB)",
     phone: "08x-xxx-xxxx",
     email: "technical-support@aemdevweb.com",
     mapUrl: "https://maps.google.com",

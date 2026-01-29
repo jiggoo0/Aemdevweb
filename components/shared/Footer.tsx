@@ -23,15 +23,15 @@ import { footerNavigation } from "@/constants/navigation"
 /**
  * Footer Component - ศูนย์บัญชาการข้อมูลส่วนท้าย (System Terminal)
  * -------------------------------------------------------------------------
- * DNA: Professional & Sharp - ตรวจสอบความถูกต้องตาม SEO Report 2026
- * ยุทธศาสตร์: การเชื่อมโยงโครงสร้างข้อมูล (Link Equity) ให้สอดคล้องกับ Sitemap
+ * DNA: Professional & Sharp - ตรวจสอบความถูกต้องตามแผนงาน SEO 2026
+ * ยุทธศาสตร์: โครงสร้างการเชื่อมโยงข้อมูล (Link Equity) ให้กริบตามระบบงาน
  */
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12">
-      {/* เอฟเฟกต์รัศมีแสงเพื่อสร้างมิติความเหนือระดับ */}
+      {/* เอฟเฟกต์รัศมีแสงเพื่อสร้างมิติพิกัดงานระดับสูง */}
       <div
         className="pointer-events-none absolute -bottom-48 -left-48 h-[500px] w-[500px] rounded-full bg-emerald-500/5 blur-[120px]"
         aria-hidden="true"
@@ -53,7 +53,7 @@ export default function Footer() {
             <p className="font-body mt-8 max-w-sm text-lg leading-relaxed font-bold text-slate-500">
               {siteConfig.project.slogan} <br />
               <span className="text-slate-400">
-                ยกระดับขีดความสามารถทางการแข่งขันด้วยระบบเว็บไซต์ประสิทธิภาพสูง
+                ยกระดับขีดความสามารถทางการแข่งขันด้วยโครงสร้างระบบประสิทธิภาพสูง
               </span>
             </p>
 
@@ -74,13 +74,13 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* [02]: STRATEGIC NAVIGATION - การเชื่อมโยงเส้นทางตามโครงสร้าง Sitemap */}
+          {/* [02]: CORE LINKS - โครงสร้างการเชื่อมโยงตามแผนงาน Sitemap */}
           <div className="grid grid-cols-2 gap-10 lg:col-span-5 xl:col-span-4">
-            {/* บริการหลักที่ผ่านการตรวจสอบ SEO mapping */}
+            {/* แผนงานบริการที่ผ่านการตรวจสอบ SEO mapping */}
             <div className="space-y-8">
               <h4 className="font-heading flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-slate-950 uppercase italic">
                 <Cpu size={14} className="text-emerald-600" />
-                Solutions
+                Systems
               </h4>
               <ul className="space-y-5">
                 {footerNavigation.services.map((item) => (
@@ -102,7 +102,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* ข้อมูลองค์กรและการติดต่อ */}
+            {/* ข้อมูลองค์กรและการติดต่อพิกัดงาน */}
             <div className="space-y-8">
               <h4 className="font-heading flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-slate-950 uppercase italic">
                 <Globe size={14} className="text-emerald-600" />
@@ -123,7 +123,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* [03]: OPERATION HUB - รายงานสถานะความพร้อมของระบบ (Verified 2026) */}
+          {/* [03]: OPERATION HUB - รายงานสถานะความพร้อม (Verified 2026) */}
           <div className="lg:col-span-3">
             <h4 className="font-heading mb-8 flex items-center gap-3 text-[11px] font-black tracking-[0.4em] text-slate-950 uppercase italic">
               <Activity size={14} className="text-emerald-600" />
@@ -162,7 +162,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* BOTTOM BAR: TECHNOLOGY SPEC - การยืนยันประสิทธิภาพเชิงเทคนิคตาม Report */}
+        {/* BOTTOM BAR: TECHNOLOGY SPEC - การยืนยันประสิทธิภาพเชิงเทคนิค */}
         <div className="mt-24 flex flex-col items-center justify-between gap-10 border-t border-slate-100 pt-12 md:flex-row">
           <div className="flex flex-col items-center gap-2 md:items-start">
             <p className="font-heading text-[10px] font-black tracking-[0.2em] text-slate-300 uppercase italic">

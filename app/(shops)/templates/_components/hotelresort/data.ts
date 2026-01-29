@@ -97,6 +97,6 @@ export const hotelResortData: HotelData = {
       line: "@GRANDRESORT",
       email: "reservation@grandresort.com",
     },
-    mapsUrl: "https://maps.google.com", 
+    mapsUrl: "https://maps.google.com",
   },
 }

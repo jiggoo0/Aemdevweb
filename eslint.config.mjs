@@ -7,7 +7,6 @@ const require = createRequire(import.meta.url)
 const nextPlugin = require("@next/eslint-plugin-next")
 
 export default tseslint.config(
-  // 1. พิกัดยกเว้น (Ignores): ระบุตำแหน่งที่ไม่ต้องการให้ระบบตรวจสอบ
   {
     ignores: [
       ".next/**",
@@ -20,7 +19,6 @@ export default tseslint.config(
       "postcss.config.mjs",
     ],
   },
-  // 2. พิกัดตั้งค่าพื้นฐานและปลั๊กอิน
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -36,15 +34,14 @@ export default tseslint.config(
         sourceType: "module",
       },
     },
-    // 3. พิกัดกฎควบคุม (Rules Configuration)
     rules: {
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
 
-      // ปิดการบังคับ Import React สำหรับระบบงาน Next.js ยุคใหม่
+      // ปิดการบังคับ Import React เพราะใช้ Next.js 13+ App Router
       "react/react-in-jsx-scope": "off",
 
-      // วางพิกัดตัวแปรที่ไม่ได้ใช้งานให้แจ้งเตือนเป็น Warning เพื่อความกริบของโค้ด
+      // คุมเข้มตัวแปรที่ไม่ได้ใช้งาน ต้องมี Prefix ขีดล่างเท่านั้นถึงจะผ่าน
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -54,17 +51,17 @@ export default tseslint.config(
         },
       ],
 
-      // เปิดพิกัดความยืดหยุ่นให้ Specialist สามารถใช้ any ได้ในจุดที่จำเป็น
+      // บังคับเตือนเมื่อใช้ any เพื่อรักษาคุณภาพของไฟล์ในโฟลเดอร์ types และ lib
       "@typescript-eslint/no-explicit-any": "warn",
 
-      // บังคับใช้ระบบจัดการรูปภาพของ Next.js เพื่อรักษาพิกัดความเร็วหน้าเว็บ
+      // ป้องกันการใช้ <img> ทั่วไป เพื่อบังคับใช้ระบบจัดการรูปภาพของ Next.js ที่ตั้งค่าไว้
       "@next/next/no-img-element": "error",
 
-      // ปรับจูนกฎที่ซ้ำซ้อนกับระบบตรวจสอบของ TypeScript
+      // ลดความซ้ำซ้อนกับตัวตรวจสอบของ TypeScript
       "no-undef": "off",
       "no-unused-vars": "off",
 
-      // ห้ามวางพิกัดคอมเมนต์ที่มี Emoji หรือคำต้องห้ามในระบบงาน
+      // ปิดการแจ้งเตือนคอมเมนต์ Warning เพื่อไม่ให้กวนสายตาขณะทำงาน
       "no-warning-comments": "off",
     },
   }

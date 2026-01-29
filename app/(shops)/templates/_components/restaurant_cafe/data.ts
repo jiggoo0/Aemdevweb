@@ -86,7 +86,8 @@ export const restaurantCafeData: RestaurantCafeData = {
   // [5. CONTACT NODE]: พิกัดตำแหน่งที่ตั้งและการติดต่อ
   contact: {
     title: "แวะมาเช็คพิกัดความอร่อยได้เลย",
-    address: "99/1 ถนนสุขุมวิท แขวงคลองเตย กรุงเทพมหานคร (วางระบบโดย นายเอ็มซ่ามากส์)",
+    address:
+      "99/1 ถนนสุขุมวิท แขวงคลองเตย กรุงเทพมหานคร (วางระบบโดย นายเอ็มซ่ามากส์)",
     hours: "พิกัดเวลาให้บริการทุกวัน: 08:00 - 18:00 น.",
     phone: "08x-xxx-xxxx",
     mapUrl: "https://maps.google.com",
