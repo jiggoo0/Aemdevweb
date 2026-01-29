@@ -44,6 +44,9 @@ export interface SiteConfig {
     linkedin?: string
     tiktok?: string
     personal: string
+    // [FIX]: Added missing properties to match usage in site-config
+    x?: string
+    github?: string
   }
   contact: {
     email: string

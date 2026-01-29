@@ -3,46 +3,48 @@
 # ==============================================================================
 # PROJECT: aemdevweb.com - Professional Full Context & Code Analysis
 # DESCRIPTION: Compiles architectural structure, critical source code, and business metadata.
-# VERSION: 2.5.0 (2026-01-25)
-# IDENTITY: Alongkorl (นายเอ็มซ่ามากส์)
+# VERSION: 2.6.0 (Updated: 2026-01-29)
+# IDENTITY: Alongkorl Yomkerd (นายเอ็มซ่ามากส์)
 # ==============================================================================
 
 OUTPUT_FILE="aemdevweb-summary-with-code.md"
 REPORT_FILE="pre-deploy-report.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
-PROJECT_URL="https://aemdevweb.com"
+PROJECT_URL="https://www.aemdevweb.com"
 
-# Company & Project Metadata
-COMPANY_NAME="AEMDEVWEB Co., Ltd."
-PROJECT_NAME="AEMDEVWEB"
-PROJECT_SHORT="AEM"
-PROJECT_NAME_TH="เอ็ม-เดฟ-เว็บ"
-TITLE="รับทำเว็บไซต์ Landing Page เน้นปิดการขาย - AEMDEVWEB (นายเอ็มซ่ามากส์)"
-SLOGAN="เว็บโหลดไว อันดับพุ่ง ยอดขายมาจริง"
-EXPERT="นายเอ็มซ่ามากส์"
-ROLE="Technical SEO Consultant & Next.js Structure Specialist"
-DESCRIPTION="บริการวางโครงสร้างระบบ Landing Page สำหรับ SME ที่เน้นประสิทธิภาพความเร็วสูงสุด วางพิกัดงานเทคนิค SEO ตั้งแต่เลเยอร์แรกโดย นายเอ็มซ่ามากส์ เพื่อเพิ่มโอกาสการเข้าถึงและอัตราการปิดยอดขาย การันตี LCP 0.6s พร้อมการดูแลชุดระบบระยะยาว"
-OG_IMAGE="https://www.aemdevweb.com/og-image.png"
+# --- [CORE METADATA]: พิกัดตัวตนแบรนด์ ---
+COMPANY_NAME="AEMDEVWEB"
+PROJECT_NAME="AEM Professional Web Infrastructure"
+PROJECT_SHORT="AEMDEVWEB"
+PROJECT_NAME_TH="ระบบโครงสร้างเว็บไซต์และ Technical SEO ประสิทธิภาพสูง"
+TITLE="AEMDEVWEB | บริการวางระบบเว็บไซต์และ Technical SEO โดย นายเอ็มซ่ามากส์"
+SLOGAN="เปลี่ยนพิกัดคนดูให้เป็นกำไร ด้วยระบบที่ซิ่งและเนี้ยบที่สุดในระดับวินาที"
+EXPERT="Alongkorl Yomkerd (นายเอ็มซ่ามากส์)"
+ROLE="Technical SEO Specialist & Web Infrastructure Lead"
+DESCRIPTION="ผู้นำด้านการพัฒนาสถาปัตยกรรมเว็บไซต์ด้วย Next.js 16 มุ่งเน้นความเร็วระดับเป็นเลิศ (LCP < 0.8 วินาที) วางโครงสร้างระบบเพื่อรองรับ Search Algorithm 2026"
+OG_IMAGE="https://www.aemdevweb.com/og-image-seo-2026.png"
 EMAIL="me@aemdevweb.com"
 
-KEYWORDS_CORE=("Technical SEO Optimization" "Organic Search Strategy" "Conversion Rate Optimization")
-KEYWORDS_TECH=("Next.js" "React" "Tailwind CSS" "TypeScript" "System Structure")
-KEYWORDS_BRAND=("AEMDEVWEB" "นายเอ็มซ่ามากส์" "Alongkorl Yomkerd" "Unlink-th Provider")
+# --- [STRATEGIC KEYWORDS] ---
+KEYWORDS_CORE=("เว็บไซต์สำเร็จรูป" "ทำเซลเพจ" "เว็บ SME" "รับทำเว็บไซต์")
+KEYWORDS_TECH=("Next.js 16" "Tailwind CSS 4" "Technical SEO" "Web Performance")
+KEYWORDS_BRAND=("นายเอ็มซ่ามากส์" "AEMDEVWEB" "เอ็มเดฟเว็บ" "นาย อลงกรณ์ ยมเกิด")
 
+# --- [CONTACT & CONNECTIVITY] ---
 LINKS_LINE="https://lin.ee/6lgJox0"
 LINKS_LINE_ID="@127cnthn"
 LINKS_FACEBOOK="https://facebook.com/aemdevweb"
 LINKS_LINKEDIN="https://www.linkedin.com/in/alongkorl-aemdevweb"
 LINKS_PERSONAL="https://me.aemdevweb.com"
 
-CTA_MAIN="Consult Project"
-CTA_SECONDARY="View All Services"
-CTA_PRICING="Check Pricing Plans"
-
-STANDARDS_PERFORMANCE=100
-STANDARDS_LCP=0.6
-STANDARDS_SECURITY="Enterprise-Grade SSL (HSTS Enabled)"
-STANDARDS_AI="Advanced Schema Markup & JSON-LD Injection"
+# --- [CONVERSION & STANDARDS] ---
+CTA_MAIN="ปรึกษาพิกัดงานกับนายเอ็ม"
+CTA_SECONDARY="ดูแคตตาล็อกระบบหน้าเว็บ"
+CTA_PRICING="เริ่มต้นพิกัด 1,990.-"
+STANDARDS_PERFORMANCE="100"
+STANDARDS_LCP="0.8"
+STANDARDS_SECURITY="Enterprise Grade (SSL/HSTS)"
+STANDARDS_AI="High (JSON-LD Knowledge Graph Ready)"
 
 # Next.js Enterprise Directories
 WHITELIST_DIRS=(
@@ -59,18 +61,20 @@ SCAN_FILES=(
   "$REPORT_FILE"
   "app/globals.css"
   "app/layout.tsx"
-  "app/instrumentation.ts"
   "proxy.ts"
+  "app/robots.ts"
+  "app/sitemap.ts"
+  "types/index.ts"
+  "types/template.ts"
   "app/(main)/page.tsx"
-  "components/landing/HomeClientSections.tsx"
-  "app/(marketing)/[template]/[category]/[slug]/page.tsx"
+  "app/(shops)/templates/[slug]/page.tsx"
+  "app/(shops)/templates/_registry.tsx"
   "app/(main)/blog/[slug]/page.tsx"
   "constants/site-config.ts"
   "constants/services-data.ts"
   "constants/navigation.ts"
   "tsconfig.json"
   "package.json"
-  "types/index.ts"
   "next.config.mjs"
   "components.json"
   "lib/blog.ts"
@@ -86,7 +90,7 @@ rm -f "$OUTPUT_FILE"
 echo "[INFO] Generating Professional Full Context Report for $PROJECT_DOMAIN..."
 
 {
-  # --- YAML Metadata ---
+  # --- YAML Metadata (For AI & Automation ingestion) ---
   echo "---"
   echo "domain: $PROJECT_DOMAIN"
   echo "canonical: $PROJECT_URL"
@@ -130,64 +134,60 @@ echo "[INFO] Generating Professional Full Context Report for $PROJECT_DOMAIN..."
   echo ""
 
   # --- Report Header ---
-  echo "# Project Context & Code Analysis"
+  echo "# Project Context & Code Analysis: AEMDEVWEB"
   echo ""
-  echo "Designed for SMEs, service businesses, tourism, export, corporates, partnerships, and industrial factories."
+  echo "พิกัดวิเคราะห์ระบบงานออกแบบเพื่อ: SME, ธุรกิจบริการ, การท่องเที่ยว, ส่งออก, และโรงงานอุตสาหกรรม"
   echo ""
 
   # --- 1. Project Summary Table ---
-  echo "## 1. Project Summary"
+  echo "## 1. Project Summary (พิกัดภาพรวม)"
   echo "| Field | Value |"
   echo "|-------|-------|"
-  echo "| Company Name | $COMPANY_NAME |"
-  echo "| Project Name | $PROJECT_NAME ($PROJECT_SHORT) |"
-  echo "| Thai Name | $PROJECT_NAME_TH |"
+  echo "| Brand | $COMPANY_NAME |"
+  echo "| Project | $PROJECT_NAME ($PROJECT_SHORT) |"
   echo "| Expert | $EXPERT |"
   echo "| Role | $ROLE |"
   echo "| Slogan | $SLOGAN |"
   echo "| URL | $PROJECT_URL |"
-  echo "| Email | $EMAIL |"
   echo ""
 
   # --- 2. Technical Standards Table ---
-  echo "## 2. Technical Standards"
+  echo "## 2. Technical Standards (พิกัดสมรรถนะ)"
   echo "| Metric | Value |"
   echo "|--------|-------|"
-  echo "| Performance | $STANDARDS_PERFORMANCE% |"
-  echo "| LCP | ${STANDARDS_LCP}s |"
-  echo "| Security | $STANDARDS_SECURITY |"
-  echo "| AI Readiness | $STANDARDS_AI |"
+  echo "| Performance Score | $STANDARDS_PERFORMANCE/100 |"
+  echo "| LCP Goal | ${STANDARDS_LCP}s |"
+  echo "| Security Standard | $STANDARDS_SECURITY |"
+  echo "| AI Infrastructure | $STANDARDS_AI |"
   echo ""
 
   # --- 3. Project Health ---
-  echo "## 3. Project Health and Deployment Readiness"
+  echo "## 3. Project Health & Deployment Readiness"
   if [ -f "$REPORT_FILE" ]; then
     if grep -qi "READY FOR DEPLOY" "$REPORT_FILE"; then
-      echo "Verdict: ✅ READY FOR DEPLOY (Project meets production standards)"
+      echo "Verdict: ✅ **READY FOR DEPLOY** (ผ่านการตรวจสอบพิกัดมาตรฐานโปรดักชัน)"
     else
-      echo "Verdict: ⚠️ FIX REQUIRED (Check issue highlights)"
+      echo "Verdict: ⚠️ **FIX REQUIRED** (ตรวจพบจุดที่ต้องจูนสมรรถนะเพิ่มเติม)"
     fi
     echo ""
     if grep -q "###.*Route" "$REPORT_FILE"; then
-      echo "### Production Route Map"
+      echo "### Production Route Map (พิกัดเส้นทางระบบ)"
       echo '```text'
       sed -n '/###.*Route/,/---/p' "$REPORT_FILE" | grep -vE "###|---" | sed '/^$/d'
       echo '```'
     fi
-  else
-    echo "⚠️ Warning: $REPORT_FILE not found. Run pre-deploy-check.sh for metrics."
   fi
   echo ""
 
-  # --- 4. File Type Distribution ---
-  echo "## 4. File Statistics by Extension"
+  # --- 4. File Statistics ---
+  echo "## 4. File Statistics (พิกัดจำนวนไฟล์)"
   echo '```text'
   find "${WHITELIST_DIRS[@]}" -type f 2>/dev/null | sed 's/.*\.//' | sort | uniq -c | sort -nr
   echo '```'
   echo ""
 
   # --- 5. Directory Structure ---
-  echo "## 5. Directory Structure (Architecture Tree)"
+  echo "## 5. Directory Structure (พิกัดสถาปัตยกรรม)"
   for dir in "${WHITELIST_DIRS[@]}"; do
     if [ -d "$dir" ]; then
       echo "### Folder: $dir"
@@ -199,7 +199,7 @@ echo "[INFO] Generating Professional Full Context Report for $PROJECT_DOMAIN..."
   done
 
   # --- 6. Critical Code Files ---
-  echo "## 6. Critical Code Analysis"
+  echo "## 6. Critical Code Analysis (พิกัดชุดคำสั่งยุทธศาสตร์)"
   for file in "${SCAN_FILES[@]}"; do
     if [ -f "$file" ]; then
       echo "### File: $file"
@@ -214,7 +214,8 @@ echo "[INFO] Generating Professional Full Context Report for $PROJECT_DOMAIN..."
       esac
       echo '```'"$lang"
       if [[ "$file" == *".env"* ]]; then
-        sed 's/=.*/= "REDACTED"/' "$file"
+        # ปิดพิกัดความลับในรายงาน
+        sed 's/=.*/= "REDACTED_BY_AEM_SPECIALIST"/' "$file"
       elif [ "$file" = "package.json" ] && command -v jq >/dev/null 2>&1; then
         jq '{name, version, scripts, dependencies, devDependencies}' package.json
       else
@@ -226,24 +227,24 @@ echo "[INFO] Generating Professional Full Context Report for $PROJECT_DOMAIN..."
     fi
   done
 
-  # --- 7. CTA Section ---
-  echo "## 7. Call-to-Action"
+  # --- 7. Call-to-Action ---
+  echo "## 7. Call-to-Action (พิกัดปิดการขาย)"
   echo "- **Main:** $CTA_MAIN"
   echo "- **Secondary:** $CTA_SECONDARY"
   echo "- **Pricing:** $CTA_PRICING"
   echo ""
 
   # --- 8. Links Section ---
-  echo "## 8. Contact & Links"
-  echo "- Line: [$LINKS_LINE_ID]($LINKS_LINE)"
-  echo "- Facebook: [$LINKS_FACEBOOK]($LINKS_FACEBOOK)"
-  echo "- LinkedIn: [$LINKS_LINKEDIN]($LINKS_LINKEDIN)"
-  echo "- Personal: [$LINKS_PERSONAL]($LINKS_PERSONAL)"
+  echo "## 8. Contact & Connectivity"
+  echo "- **Line:** [$LINKS_LINE_ID]($LINKS_LINE)"
+  echo "- **Facebook:** [AEMDEVWEB]($LINKS_FACEBOOK)"
+  echo "- **LinkedIn:** [Alongkorl]($LINKS_LINKEDIN)"
+  echo "- **Personal Node:** [me.aemdevweb.com]($LINKS_PERSONAL)"
   echo ""
 
   echo "---"
-  echo "Report generated by $PROJECT_DOMAIN Internal Automation."
+  echo "Report generated by $PROJECT_DOMAIN Internal Automation Engine."
 
 } > "$OUTPUT_FILE"
 
-echo "[SUCCESS] Professional Full Context Report saved to -> $OUTPUT_FILE"
+echo "[SUCCESS] พิกัดรายงาน Full Context ถูกบันทึกไว้ที่ -> $OUTPUT_FILE"

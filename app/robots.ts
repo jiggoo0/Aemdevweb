@@ -1,22 +1,26 @@
 /** @format */
 
 import { MetadataRoute } from "next"
-import { siteConfig } from "@/constants/site-config"
+// [FIX]: Removed unused import to clear ESLint warning
+// import { siteConfig } from "@/constants/site-config"
 
 /**
  * AEMDEVWEB | Search Engine Intelligence Control 2026
  * -------------------------------------------------------------------------
  * ยุทธศาสตร์: "Full Render Visibility" & "Strategic AI Protection"
- * วางระบบและควบคุมพิกัดโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
+ * วางระบบและควบคุมพิกัดโดย: นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด)
  * เป้าหมาย: ล้างพิกัด Error จาก Rich Results Test และรักษาความปลอดภัยข้อมูล Node สำคัญ
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = siteConfig.project.url.replace(/\/$/, "")
+  // ล็อกฐานข้อมูล Domain ให้แม่นยำ ป้องกันการหลุดพิกัด
+  const baseUrl = "https://www.aemdevweb.com"
 
   return {
     rules: [
       {
-        /** [GENERAL SEARCH BOTS]: เปิดทางให้บอทคุณภาพเข้ามาเก็บพิกัดความแรง */
+        /** * [GENERAL SEARCH BOTS]: เปิดทางให้บอทคุณภาพเข้ามาเก็บพิกัดความแรง 
+         * มุ่งเน้นการทำดัชนีข้อมูลที่สมบูรณ์ (Crawlability)
+         */
         userAgent: "*",
         allow: [
           "/",

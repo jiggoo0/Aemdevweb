@@ -14,8 +14,8 @@ import "@/app/globals.css"
 
 /**
  * [FONT SYSTEM 2026]
- * IBM Plex Sans Thai: ส่วนหัวข้อ (สร้างภาพลักษณ์ที่มั่นคงและมีมาตรฐาน)
- * Anuphan: ส่วนเนื้อหา (เน้นการเข้าถึงข้อมูลที่ชัดเจนและร่วมสมัย)
+ * IBM Plex Sans Thai: สำหรับ Heading (ความมั่นคง/มาตรฐาน)
+ * Anuphan: สำหรับ Body (ความชัดเจน/ร่วมสมัย)
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -32,7 +32,7 @@ const fontBody = Anuphan({
 })
 
 /**
- * [SEARCH ENGINE OPTIMIZATION]: การตั้งค่าข้อมูลหลักของเว็บไซต์
+ * [SEARCH ENGINE OPTIMIZATION]: Metadata Configuration
  */
 export const metadata: Metadata = {
   title: {
@@ -72,7 +72,6 @@ export const metadata: Metadata = {
     description: siteConfig.project.description,
     images: [siteConfig.project.ogImage],
   },
-  // ตั้งค่าระบบดึงข้อมูลเพื่อให้แสดงภาพลักษณ์ที่ดีที่สุดบนแพลตฟอร์มการค้นหา
   robots: {
     index: true,
     follow: true,
@@ -109,20 +108,23 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* [SCHEMA MARKUP]: การระบุความสัมพันธ์ของข้อมูลเพื่อให้ระบบการค้นหาเข้าใจตัวตนของธุรกิจอย่างแม่นยำ */}
+        {/* [SCHEMA MARKUP]: Unified Entity Bridge 2026 */}
         <JsonLd
           type="Organization"
           data={{
             "@id": `${siteConfig.project.url}/#organization`,
             name: siteConfig.company.name,
             url: siteConfig.project.url,
-            logo: `${siteConfig.project.url}${siteConfig.project.logo}`,
+            // [Consolidated Logo]: ใช้ Logo หลักเพื่อสร้างภาพจำ Entity เดียวกัน
+            logo: "https://www.aemdevweb.com/images/logo-circuit.png",
             founder: {
               "@type": "Person",
-              "@id": `${siteConfig.links.personal}/#person`,
+              // [Critical Bridge]: เชื่อมโยง Founder ไปยัง @id ของหน้า Portfolio
+              "@id": "https://me.aemdevweb.com/#person",
               name: siteConfig.expert.realName,
               jobTitle: siteConfig.expert.role,
               description: siteConfig.expert.bio,
+              url: "https://me.aemdevweb.com",
             },
             contactPoint: {
               "@type": "ContactPoint",
@@ -131,17 +133,21 @@ export default function RootLayout({
               areaServed: "TH",
               availableLanguage: ["Thai", "English"],
             },
+            // [Social Signals]: รวมทุกลิงก์เพื่อยืนยัน Authority ข้ามแพลตฟอร์ม
+            // กรองค่าที่เป็น undefined ออกเพื่อให้ Schema สะอาด
             sameAs: [
               siteConfig.links.facebook,
               siteConfig.links.linkedin,
               siteConfig.links.tiktok,
               siteConfig.links.line,
-            ].filter(Boolean),
+              siteConfig.links.x,
+              siteConfig.links.github,
+            ].filter((link): link is string => !!link),
           }}
         />
       </head>
       <body className="font-body min-h-screen bg-white text-slate-900 selection:bg-emerald-500/10 selection:text-emerald-900">
-        {/* แถบสถานะการโหลด: ใช้สีประจำอัตลักษณ์เพื่อความต่อเนื่องของประสบการณ์ผู้ใช้งาน */}
+        {/* Progress Bar: Emerald Brand Identity */}
         <NextTopLoader color="#10b981" showSpinner={false} height={3} />
 
         <main className="relative flex min-h-screen flex-col overflow-x-hidden">

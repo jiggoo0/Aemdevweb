@@ -12,37 +12,42 @@ import { JsonLd } from "@/components/seo/JsonLd"
 /**
  * ContactPage - ส่วนงานติดต่อและประสานงานโครงการ (The Strategic Contact Hub)
  * -------------------------------------------------------------------------
- * ยุทธศาสตร์: การสร้างจุดเชื่อมต่อที่ไร้รอยต่อเพื่อการเริ่มต้นโครงการที่แม่นยำ
- * มาตรฐาน: AEMDEVWEB Strategic Service
+ * ยุทธศาสตร์: การสร้างจุดเชื่อมต่อที่ไร้รอยต่อ (Seamless Connectivity)
+ * ปรับปรุง: เชื่อมโยง JSON-LD เข้ากับ Organization และ Person Entity หลัก
  */
 export default function ContactPage() {
+  const baseUrl = "https://www.aemdevweb.com"
+
   return (
     <main className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10">
-      {/* 1. SEO INFRASTRUCTURE: การระบุโครงสร้างข้อมูลเพื่อความน่าเชื่อถือระดับสากล */}
+      {/* 1. SEO INFRASTRUCTURE: เชื่อมโยงหน้าติดต่อเข้ากับ Entity หลัก */}
       <JsonLd
         type="ContactPage"
         data={{
-          "@id": `${siteConfig.project.url}/contact/#webpage`,
-          name: "ติดต่อสอบถามบริการพัฒนาเว็บไซต์และ SEO | AEMDEVWEB",
-          description:
-            "ปรึกษาแผนงานระบบและกลยุทธ์ SEO กับผู้เชี่ยวชาญโดยตรงเพื่อความเหนือระดับของธุรกิจ",
-          url: `${siteConfig.project.url}/contact`,
-          contactPoint: {
+          "@id": `${baseUrl}/contact/#webpage`,
+          "name": "ติดต่อสอบถามบริการพัฒนาเว็บไซต์และ SEO | AEMDEVWEB",
+          "description": "ปรึกษาแผนงานระบบและกลยุทธ์ SEO กับผู้เชี่ยวชาญโดยตรงเพื่อความเหนือระดับของธุรกิจ",
+          "url": `${baseUrl}/contact`,
+          // เชื่อมโยงว่าหน้านี้เป็นส่วนหนึ่งของ Organization
+          "about": { "@id": `${baseUrl}/#organization` },
+          // ระบุตัวตนผู้ดูแลหลัก (Entity Bridge)
+          "mainEntity": { "@id": "https://me.aemdevweb.com/#person" },
+          "contactPoint": {
             "@type": "ContactPoint",
-            contactType: "technical support",
-            email: siteConfig.company.email,
-            url: siteConfig.links.line,
+            "contactType": "technical support",
+            "email": siteConfig.company.email,
+            "url": siteConfig.links.line,
+            "availableLanguage": ["Thai", "English"]
           },
         }}
       />
 
-      {/* รายละเอียดพื้นหลัง: ลายเส้นโครงสร้างเชิงระบบเพื่อความประณีต */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"
         aria-hidden="true"
       />
 
-      {/* 2. HERO SECTION: ส่วนนำเสนอความพร้อมในการให้บริการ */}
+      {/* 2. HERO SECTION */}
       <section className="relative overflow-hidden bg-slate-50/50 pt-32 pb-20 lg:pt-48 lg:pb-40">
         <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-emerald-500/5 blur-[120px]" />
 
@@ -58,7 +63,7 @@ export default function ContactPage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
-              Strategic Connection Active
+              Strategic Connection Active: Alongkorl
             </div>
 
             <h1 className="font-heading text-6xl leading-[0.9] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl lg:text-9xl">
@@ -68,13 +73,13 @@ export default function ContactPage() {
 
             <p className="font-body max-w-2xl text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
               "AEMDEVWEB: รวดเร็ว แม่นยำ และเปี่ยมประสิทธิภาพ" <br />
-              เริ่มต้นปรึกษาแผนงานระบบกับผู้เชี่ยวชาญเพื่อผลลัพธ์ทางธุรกิจที่วัดผลได้จริง
+              เริ่มต้นปรึกษาแผนงานระบบกับ **{siteConfig.expert.name}** เพื่อผลลัพธ์ทางธุรกิจที่วัดผลได้จริง
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 3. CONTACT NODES: ช่องทางการติดต่อสื่อสารหลัก */}
+      {/* 3. CONTACT NODES */}
       <section className="relative z-10 -mt-20">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
@@ -100,7 +105,7 @@ export default function ContactPage() {
                     </span>
                   </h3>
                   <p className="font-body max-w-xl text-xl font-bold text-slate-400">
-                    ช่องทางที่รวดเร็วที่สุดสำหรับการจองกำหนดการปรึกษาแผนงาน
+                    ช่องทางที่รวดเร็วที่สุดสำหรับการจองกำหนดการปรึกษาแผนงานโดยตรง
                   </p>
                 </div>
 
