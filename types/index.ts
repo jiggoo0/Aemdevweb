@@ -5,7 +5,6 @@
 /* -------------------------------------------------------------------------- */
 
 export interface SiteConfig {
-  // ข้อมูลภาพลักษณ์องค์กร (แก้พิกัด Error ใน Footer และ site-config.ts)
   company: {
     name: string
     fullName: string
@@ -21,11 +20,13 @@ export interface SiteConfig {
     description: string
     url: string
     ogImage: string
+    logo: string
   }
   expert: {
     name: string
     role: string
     realName: string
+    bio: string
   }
   stats: { label: string; value: string; suffix: string }[]
   businessImpact: { speed: string; seo: string; conversion: string }
@@ -46,12 +47,12 @@ export interface SiteConfig {
   }
   contact: {
     email: string
-    line: string
-    lineId: string
+    line?: string
+    lineId?: string
     facebook?: string
     linkedin?: string
     tiktok?: string
-    personal?: string // เพิ่มพิกัดนี้เพื่อรองรับ site-config.ts
+    personal?: string
     phone?: string
   }
   cta: { main: string; secondary: string; pricing: string }
@@ -67,7 +68,18 @@ export interface SiteConfig {
 /* 2. พิกัดระบบงานและบริการ (Services & Icons)                                 */
 /* -------------------------------------------------------------------------- */
 
-// [FIX]: ส่งออก ServiceIconName เพื่อให้ไฟล์เรียกใช้งานได้จากทั่วโปรเจกต์
+export type ServiceCategory = "ReadyMade" | "Business" | "Digital"
+
+export type ThemeColor =
+  | "slate"
+  | "emerald"
+  | "blue"
+  | "indigo"
+  | "amber"
+  | "rose"
+  | "orange"
+  | "violet"
+
 export type ServiceIconName =
   | "Rocket"
   | "ShieldCheck"
@@ -91,17 +103,21 @@ export interface ServiceItem {
   id: string
   title: string
   slug: string
-  description: string // พิกัดรายละเอียดงาน
-  thumbnail: string // พิกัดภาพประกอบ (ใช้แทน image)
+  description: string
+  thumbnail: string
   priceValue: number
+  price?: string | number
   priceDisplay?: string
   renewalPrice?: string
-  category: string
+  category: ServiceCategory
   iconName: ServiceIconName
   features: string[]
   highlight?: boolean
-  themeColor?: string
+  themeColor?: ThemeColor
   promotion?: string
+  /** * [จูนเพิ่ม]: พิกัด Slug ของเทมเพลตที่เกี่ยวข้อง เพื่อดึงมาโชว์ในหน้าบริการ
+   */
+  relatedTemplateSlugs?: string[]
 }
 
 /* -------------------------------------------------------------------------- */
@@ -120,10 +136,6 @@ export interface BlogFrontmatter {
   tags?: string[]
 }
 
-/**
- * แก้พิกัด Error TS2339: ดึง Property สำคัญออกมาไว้ระดับ Root
- * เพื่อให้ระบบจัดลำดับ (Sort) และหน้า Card ดึงข้อมูลไปโชว์ได้ทันที
- */
 export interface BlogPost {
   id: string
   slug: string
@@ -134,7 +146,7 @@ export interface BlogPost {
   thumbnail: string
   author: string
   readingTime?: string
-  frontmatter: BlogFrontmatter // รองรับการเรียกแบบซ้อนเพื่อความปลอดภัยของข้อมูล
+  frontmatter: BlogFrontmatter
   content: string
 }
 
@@ -142,10 +154,14 @@ export interface BlogPost {
 /* 4. พิกัดผลงานความสำเร็จ (Case Studies)                                      */
 /* -------------------------------------------------------------------------- */
 
+export interface CaseStudyResult {
+  label: string
+  value: string
+}
+
 export interface CaseStudyItem {
   id: string
   slug: string
-  // [FIX]: หน้า Page เรียกใช้ผ่านพิกัด frontmatter ต้องหุ้มข้อมูลให้ตรงกัน
   frontmatter: {
     title: string
     client: string
@@ -154,7 +170,7 @@ export interface CaseStudyItem {
     excerpt: string
     thumbnail: string
     date: string
-    results: (string | { label: string; value: string })[]
+    results: (string | CaseStudyResult)[]
     keyFeatures: string[]
     service?: string
     isFeatured?: boolean
@@ -163,27 +179,20 @@ export interface CaseStudyItem {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. พิกัดคลังเทมเพลต (Marketplace Templates)                                */
+/* 5. พิกัดคลังชุดระบบ (Marketplace Templates)                                */
 /* -------------------------------------------------------------------------- */
 
+/** * [จูนใหม่]: ใช้ PascalCase เพื่อให้ตรงกับมาตรฐานข้อมูลระบบ
+ */
 export type TemplateCategory =
-  | "hotel"
   | "Hotel"
-  | "service"
   | "Service"
-  | "marketing"
   | "Marketing"
-  | "ecommerce"
   | "Ecommerce"
-  | "business"
   | "Business"
-  | "platform"
   | "Platform"
-  | "rental"
   | "Rental"
-  | "digital"
   | "Digital"
-  | "readymade"
   | "ReadyMade"
 
 export interface TemplateMetadata {
@@ -194,6 +203,11 @@ export interface TemplateMetadata {
   thumbnail: string
   description: string
   pricePrefix?: string
-  priceValue?: string
+  /** priceValue: พิกัดราคาเพียวสำหรับงานระบบคำนวณ (Number) */
+  priceValue: number
+  /** priceLabel: พิกัดราคาสำหรับโชว์หน้าเว็บ (เช่น "1,990") */
+  priceLabel: string
   isNew?: boolean
+  /** isFeatured: พิกัดเลือกขึ้นหน้าแรก */
+  isFeatured?: boolean
 }

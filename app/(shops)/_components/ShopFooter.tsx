@@ -1,72 +1,115 @@
 /** @format */
 
+"use client"
+
 import React from "react"
-import { ShieldCheck, Zap, MessageCircle } from "lucide-react"
+import { motion } from "framer-motion"
+import { ShieldCheck, Zap, MessageCircle, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
+import { siteConfig } from "@/constants/site-config"
 
 /**
- * ShopFooter - ส่วนท้ายหน้าร้าน Shops.
- * แนวคิด: ยืนยันมาตรฐานความเนี้ยบและความโปร่งใสในสไตล์ Specialist
- * โดย: นายเอ็มซ่ามากส์ (AEM Engine 2026)
+ * ShopFooter - ส่วนฐานรากของระบบโซลูชันเชิงพาณิชย์ (The Strategic Foundation)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: "Strategic Trust & Performance Support"
+ * เน้นการตอกย้ำมาตรฐานการบริหารจัดการโครงการและการเข้าถึงผู้เชี่ยวชาญในทันที
  */
 export const ShopFooter = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-slate-50 bg-slate-50/50 py-20 lg:py-32">
-      {/* ลายตารางจางๆ เบื้องหลัง เพื่อโชว์ความเนี้ยบของงานระบบ */}
+    <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12">
+      {/* [LAYER 1]: รายละเอียดโครงสร้างเชิงระบบพร้อมรัศมีแสงนวลตา */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.02]"
+        className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(circle_at_center,black,transparent)] opacity-[0.03]"
         style={{
           backgroundImage: "url('/grid.svg')",
-          backgroundSize: "40px 40px",
+          backgroundSize: "50px 50px",
         }}
         aria-hidden="true"
       />
 
       <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center gap-12 text-center">
-          {/* [ส่วนที่ 1]: การยืนยันมาตรฐาน (Trust Badge) */}
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-white text-emerald-500 shadow-2xl ring-1 shadow-emerald-500/10 ring-slate-100 transition-transform hover:scale-110">
-              <ShieldCheck size={32} strokeWidth={1.5} />
+        <div className="flex flex-col items-center text-center">
+          {/* [LAYER 2]: ส่วนยืนยันมาตรฐานความเชื่อมั่น (Authority Protocol) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-16 space-y-8"
+          >
+            <div className="relative mx-auto flex h-20 w-20 items-center justify-center">
+              <div className="absolute inset-0 animate-pulse rounded-[2rem] bg-emerald-500/10 blur-xl" />
+              <div className="relative flex h-full w-full items-center justify-center rounded-[1.8rem] bg-slate-950 text-emerald-400 shadow-2xl ring-1 ring-white/10">
+                <ShieldCheck size={36} strokeWidth={1.2} />
+              </div>
             </div>
-            <div className="space-y-3">
-              <h3 className="font-heading text-3xl font-black tracking-tighter text-slate-950 uppercase italic">
-                นายเอ็มซ่ามากส์ Shops<span className="text-emerald-500">.</span>
+
+            <div className="space-y-4">
+              <h3 className="font-heading text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-5xl">
+                AEM Strategic<span className="text-emerald-500">.</span> Logic
               </h3>
-              <p className="font-body mx-auto max-w-md text-base leading-relaxed font-bold text-slate-500">
-                เครื่องจักรทำเงินในรูปแบบเว็บไซต์สำเร็จรูปที่เนี้ยบและซิ่งที่สุด
-                ออนไลน์ธุรกิจของคุณให้แซงคู่แข่งใน 24 ชั่วโมงครับ
+              <p className="font-body mx-auto max-w-xl text-lg leading-relaxed font-bold text-slate-500">
+                รูปแบบเว็บไซต์สำเร็จรูปที่ผ่านการเพิ่มประสิทธิภาพความเร็วเพื่อ{" "}
+                <br className="hidden md:block" />
+                <span className="text-slate-950 underline decoration-emerald-500/30 decoration-4 underline-offset-8">
+                  ยกระดับอัตราการเปลี่ยนผ่านกลุ่มเป้าหมายเชิงธุรกิจ
+                </span>{" "}
+                ภายใต้มาตรฐานระบบปี 2026
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          {/* [ส่วนที่ 2]: ลิงก์ด่วนและการติดต่อ (Quick Connect) */}
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* [LAYER 3]: จุดปฏิสัมพันธ์หลักและการเชื่อมต่อข้อมูล (Interaction Nodes) */}
+          <div className="flex flex-wrap justify-center gap-5">
             <Link
-              href="https://line.me/ti/p/@aemdevweb"
-              className="group flex items-center gap-3 rounded-2xl bg-slate-950 px-6 py-4 text-white transition-all active:scale-95"
+              href={siteConfig.links.line}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-3 rounded-2xl bg-emerald-600 px-8 py-5 text-white shadow-xl shadow-emerald-500/10 transition-all hover:bg-slate-950 active:scale-95"
             >
-              <MessageCircle size={18} className="text-emerald-500" />
-              <span className="font-heading text-[10px] font-black tracking-widest uppercase italic">
-                คุยงานกับนายเอ็ม
+              <MessageCircle size={20} fill="currentColor" />
+              <span className="font-heading text-[11px] font-black tracking-[0.2em] uppercase italic">
+                CONSULT WITH SPECIALIST
               </span>
+              <ArrowUpRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </Link>
-            <div className="flex items-center gap-3 rounded-2xl bg-white px-6 py-4 text-slate-950 shadow-sm ring-1 ring-slate-100">
-              <Zap size={18} className="text-emerald-500" />
-              <span className="font-heading text-[10px] font-black tracking-widest uppercase italic">
-                AEM Engine v2026
+
+            <div className="flex items-center gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 px-8 py-5 text-slate-950 shadow-sm">
+              <div className="relative flex h-2 w-2">
+                <div className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <div className="relative h-2 w-2 rounded-full bg-emerald-500" />
+              </div>
+              <span className="font-heading text-[11px] font-black tracking-[0.2em] uppercase italic">
+                Operational Status: Verified 2026
               </span>
             </div>
           </div>
 
-          {/* [ส่วนที่ 3]: ลิขสิทธิ์และมาตรฐานงาน (Copyright) */}
-          <div className="w-full max-w-4xl border-t border-slate-200 pt-12 opacity-40">
-            <p className="font-heading text-[9px] font-black tracking-[0.5em] text-slate-400 uppercase italic">
-              © {currentYear} AEMDEVWEB • Specialist Site Engine • No Robot
-              Language Inside
-            </p>
+          {/* [LAYER 4]: รายละเอียดลิขสิทธิ์และการยืนยันมาตรฐานทางเทคนิค */}
+          <div className="mt-24 w-full border-t border-slate-100 pt-16">
+            <div className="flex flex-col items-center justify-between gap-8 transition-opacity duration-500 md:flex-row md:opacity-40 md:hover:opacity-100">
+              <p className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+                © {currentYear} {siteConfig.company.name} • Strategic Solution
+                Engine
+              </p>
+
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <Zap size={14} className="text-emerald-500" />
+                  <span className="font-heading text-[10px] font-black tracking-widest text-slate-950 uppercase italic">
+                    Performance Optimized
+                  </span>
+                </div>
+                <div className="hidden h-4 w-px bg-slate-200 md:block" />
+                <span className="font-heading text-[10px] font-black tracking-widest text-slate-300 uppercase italic">
+                  Architected by {siteConfig.expert.name}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

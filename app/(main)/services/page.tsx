@@ -1,194 +1,235 @@
 /** @format */
 
-import React from "react"
-import { Metadata } from "next"
-import { Layout, Search, Clock, Zap, Target, Star } from "lucide-react"
+"use client"
 
-// ข้อมูลการตั้งค่าและส่วนประกอบหลัก
+import React from "react"
+import { motion, Variants } from "framer-motion"
+import { Search, Clock, Zap, ShieldCheck, ArrowRight } from "lucide-react"
+
 import { siteConfig } from "@/constants/site-config"
 import { servicesData } from "@/constants/services-data"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * Metadata Engine: ปรับจูน SEO ให้หน้าบริการถูกค้นพบได้ง่าย
- */
-export const metadata: Metadata = {
-  title: `บริการรับทำเว็บไซต์และ SEO ครบวงจร | นายเอ็มซ่ามากส์ ${siteConfig.project.shortName}`,
-  description:
-    "รวมบริการสร้างตัวตนบนโลกออนไลน์ที่ได้ผลจริง ตั้งแต่เว็บไซต์เช่ารายเดือน เว็บสำเร็จรูป ไปจนถึง Landing Page สำหรับ SME ที่เน้นความเร็วระดับปีศาจและติดหน้าแรก Google",
-  alternates: { canonical: `${siteConfig.project.url}/services` },
-}
-
-/**
- * ServicesPage - หน้ารวมบริการของนายเอ็มซ่ามากส์
- * แนวทาง: เน้นความชัดเจน เข้าใจง่าย และแสดงผลลัพธ์ที่จับต้องได้
- * ดูแลโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * ServicesPage - ศูนย์รวมโซลูชันแผนงานระบบ AEMDEVWEB
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การนำเสนอสินทรัพย์ดิจิทัลเชิงกลยุทธ์ (Strategic Service Inventory)
  */
 export default function ServicesPage() {
+  // การกำหนดค่าการเคลื่อนไหวเพื่อความต่อเนื่องเชิงระบบ
+  const fadeInUp: Variants = {
+    initial: { opacity: 0, y: 30 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut" as const,
+      },
+    },
+  }
+
+  const staggerContainer: Variants = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
   return (
-    <main className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10">
-      {/* 1. ข้อมูลโครงสร้าง: บอก AI ให้เข้าใจบริบทบริการของเรา */}
+    <motion.main
+      initial="initial"
+      animate="animate"
+      className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10"
+    >
+      {/* [1. SERVICE SCHEMA]: การระบุโครงสร้างข้อมูลเพื่อรองรับมาตรฐาน Google Knowledge Graph */}
       <JsonLd
-        type="Service"
+        type="Graph"
         data={{
-          serviceType: "Web Development and SEO",
-          provider: {
-            "@type": "Person",
-            name: "Alongkorl Yomkerd",
-            url: siteConfig.project.url,
-          },
-          areaServed: "Thailand",
-          description: metadata.description as string,
+          "@graph": [
+            {
+              "@type": "Service",
+              name: "Web Infrastructure & Technical SEO",
+              provider: { "@id": `${siteConfig.links.personal}/#person` },
+              areaServed: "TH",
+              hasOfferCatalog: {
+                "@type": "OfferCatalog",
+                name: "AEM Strategic Solutions",
+                itemListElement: servicesData.map((s, i) => ({
+                  "@type": "ListItem",
+                  position: i + 1,
+                  item: {
+                    "@type": "Offer",
+                    name: s.title,
+                    price: s.priceValue,
+                    priceCurrency: "THB",
+                  },
+                })),
+              },
+            },
+          ],
         }}
       />
 
-      {/* Hero Section: ส่วนพาดหัวที่เน้นตัวตนและความเป็นมืออาชีพ */}
-      <section className="relative overflow-hidden bg-slate-50 pt-32 pb-20 lg:pt-48 lg:pb-32">
-        <div
-          className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.03]"
-          aria-hidden="true"
-        />
+      {/* รายละเอียดพื้นหลัง: ลายเส้นโครงสร้างเชิงระบบเพื่อความประณีต */}
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"
+        aria-hidden="true"
+      />
+
+      {/* [2. HERO SECTION]: ส่วนนำเสนอระดับประสิทธิภาพของระบบ */}
+      <section className="relative overflow-hidden border-b border-slate-50 bg-slate-50/50 pt-32 pb-24 lg:pt-48 lg:pb-40">
+        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-emerald-500/5 blur-[120px]" />
 
         <div className="container mx-auto px-6">
-          <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
-            <div className="mb-8 flex items-center gap-3">
-              <Target size={18} className="text-emerald-600" />
-              <span className="font-heading text-[10px] font-black tracking-[0.4em] text-emerald-600 uppercase italic">
-                Business Growth Infrastructure
+          <div className="max-w-5xl">
+            <motion.div
+              variants={fadeInUp}
+              className="mb-10 flex items-center gap-4"
+            >
+              <div className="h-px w-12 bg-emerald-500" />
+              <span className="font-heading text-[10px] font-black tracking-[0.5em] text-emerald-600 uppercase italic">
+                Strategic System Solutions
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="font-heading text-5xl leading-[1] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl lg:text-9xl">
-              Za-Maks <br />
-              <span className="text-emerald-500">Services.</span>
+            <h1 className="font-heading text-7xl leading-[0.85] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl lg:text-[11rem]">
+              Service <br />
+              <span className="text-emerald-500">
+                Inventory<span className="text-slate-950">.</span>
+              </span>
             </h1>
 
-            <p className="font-body mt-10 max-w-2xl text-xl leading-relaxed font-bold text-slate-600 md:text-2xl">
-              เราเตรียมระบบเว็บไซต์ที่สมบูรณ์แบบสำหรับธุรกิจคุณ
-              เน้นความเร็วที่หยุดลูกค้าได้จริง โครงสร้างที่แม่นยำ
-              และการหาลูกค้าให้คุณอย่างเป็นธรรมชาติ
-            </p>
+            <motion.p
+              variants={fadeInUp}
+              className="font-body mt-12 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-3xl md:leading-tight"
+            >
+              เลือกโซลูชันที่ตอบโจทย์ความต้องการทางธุรกิจของคุณ
+              ทุกระบบถูกปรับแต่งเพื่อประสิทธิภาพและความเร็วระดับสูงสุด
+            </motion.p>
           </div>
         </div>
       </section>
 
-      {/* Main Services Section: รายการบริการหลัก */}
-      <section className="relative z-10 -mt-12 py-12 lg:py-24">
+      {/* [3. MAIN CATALOG]: รายการแผนงานระบบ (Staggered Grid) */}
+      <section className="relative z-10 -mt-24">
         <div className="container mx-auto px-6">
-          <div className="mb-16 flex items-center gap-4">
-            <div className="h-px flex-1 bg-slate-100" />
-            <span className="font-heading text-[10px] font-black tracking-[0.3em] text-slate-400 uppercase italic">
-              Our Core Packages
-            </span>
-            <div className="h-px flex-1 bg-slate-100" />
-          </div>
-
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {/* แสดงรายการบริการจากฐานข้อมูล */}
-            {servicesData.map((service, index) => (
-              <ServiceCard
-                key={`service-item-${index}`}
-                data={service}
-                className="transition-all duration-500 hover:-translate-y-2"
-              />
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {servicesData.map((service) => (
+              <motion.div key={service.id} variants={fadeInUp}>
+                <ServiceCard
+                  data={service}
+                  className="bg-white/80 backdrop-blur-xl transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.15)]"
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Why Us Section: ตอกย้ำมาตรฐานความเนี้ยบของ AEMDEVWEB */}
-      <section className="py-24 lg:py-40">
+      {/* [4. THE STANDARD]: ความเชี่ยวชาญเบื้องหลังความสำเร็จ */}
+      <section className="py-32 lg:py-56">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2">
-            <div className="space-y-12">
-              <h2 className="font-heading text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-6xl">
-                ทำไมต้องใช้ <br />
-                <span className="text-emerald-500">ระบบงานของเรา?</span>
-              </h2>
+          <div className="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
+            <div className="space-y-20">
+              <div className="space-y-6">
+                <h2 className="font-heading text-6xl font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
+                  Built for <span className="text-emerald-500">Scale.</span>
+                </h2>
+              </div>
 
-              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
                 {[
                   {
                     icon: <Zap />,
-                    title: "ความเร็วระดับปีศาจ",
-                    desc: "หน้าเว็บโหลดไว ไม่เสียโอกาสการขายแม้แต่วินาทีเดียว",
+                    title: "LCP < 0.8s",
+                    desc: "การแสดงผลที่รวดเร็วระดับสูงสุด",
                   },
                   {
                     icon: <Search />,
-                    title: "โครงสร้าง SEO แม่นยำ",
-                    desc: "วางระบบข้อมูลให้ Google รักและจัดอันดับได้ง่าย",
+                    title: "Strategic SEO",
+                    desc: "วางโครงสร้าง Schema ที่แม่นยำ",
                   },
                   {
-                    icon: <Layout />,
-                    title: "ดีไซน์ปิดการขาย",
-                    desc: "ออกแบบมาเพื่อ SME โดยเฉพาะ เน้นปุ่มกดง่ายและดูน่าเชื่อถือ",
+                    icon: <ShieldCheck />,
+                    title: "Stability First",
+                    desc: "เสถียรภาพระบบที่เชื่อถือได้",
                   },
                   {
                     icon: <Clock />,
-                    title: "ดูแลจริงใจไม่ทิ้งงาน",
-                    desc: "พร้อมช่วยเหลือและปรับจูนระบบให้ซิ่งตลอดอายุการใช้งาน",
+                    title: "Rapid Implementation",
+                    desc: "พร้อมดำเนินการภายใน 24-48 ชม.",
                   },
                 ].map((item, i) => (
-                  <div key={`feature-${i}`} className="space-y-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-emerald-600 shadow-sm ring-1 ring-slate-100">
-                      {item.icon}
+                  <motion.div
+                    key={i}
+                    whileHover={{ x: 10 }}
+                    className="group space-y-4 border-l-2 border-slate-100 pl-6 transition-colors hover:border-emerald-500"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 text-emerald-600 transition-all group-hover:bg-slate-950 group-hover:text-emerald-400">
+                      {React.isValidElement(item.icon)
+                        ? React.cloneElement(
+                            item.icon as React.ReactElement<{ size?: number }>,
+                            { size: 24 }
+                          )
+                        : item.icon}
                     </div>
-                    <h3 className="font-heading text-lg font-black text-slate-950 uppercase italic">
+                    <h3 className="font-heading text-lg font-black tracking-tight text-slate-950 uppercase italic">
                       {item.title}
                     </h3>
-                    <p className="font-body text-sm leading-relaxed font-bold text-slate-500">
+                    <p className="font-body text-sm font-bold text-slate-400 group-hover:text-slate-600">
                       {item.desc}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* ส่วนความเชื่อมั่น (Testimonial/Philosophy) */}
-            <div className="relative aspect-square overflow-hidden rounded-[3rem] bg-slate-50 p-12 lg:p-20">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent" />
-              <div className="relative space-y-8">
-                <div className="rounded-[2rem] bg-white p-8 shadow-2xl shadow-slate-900/5 md:p-12">
-                  <div className="mb-6 flex gap-1 text-emerald-500">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} size={16} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="font-heading mb-4 text-[10px] font-black tracking-[0.3em] text-emerald-500 uppercase italic">
-                    Core Philosophy
-                  </p>
-                  <blockquote className="font-body text-2xl leading-tight font-black text-slate-950 italic">
-                    &quot;เราไม่ได้แค่ทำเว็บไซต์
-                    แต่เราสร้างเครื่องจักรหาลูกค้าที่ทำงานแทนคุณบนโลกออนไลน์ตลอด
-                    24 ชั่วโมง&quot;
-                  </blockquote>
-                  <div className="mt-8 flex items-center gap-4 border-t border-slate-50 pt-8">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 text-[10px] font-black text-white italic shadow-sm ring-4 ring-white">
-                      AEM
-                    </div>
-                    <div>
-                      <p className="font-body text-sm font-black text-slate-950">
-                        นายเอ็มซ่ามากส์
-                      </p>
-                      <p className="font-body text-[10px] font-bold tracking-widest text-slate-400 uppercase">
-                        Technical Web Architect
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* [5. STRATEGIC QUOTE] */}
+            <div className="relative">
+              <motion.div
+                whileHover={{ rotate: -2, scale: 1.02 }}
+                className="relative rounded-[4rem] bg-slate-950 p-12 text-white shadow-2xl shadow-slate-900/40 md:p-20"
+              >
+                <blockquote className="font-body text-4xl leading-[1] font-black italic md:text-6xl">
+                  "ผมสร้าง{" "}
+                  <span className="text-emerald-400">Digital Assets</span>{" "}
+                  ที่จะสร้างมูลค่าเพิ่มให้ธุรกิจของคุณอย่างยั่งยืน"
+                </blockquote>
+              </motion.div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ข้อความปิดท้ายระบบ */}
-      <footer className="py-20 text-center opacity-30 select-none">
-        <p className="font-heading text-[10px] font-black tracking-[0.5em] text-slate-400 uppercase italic">
-          High-Performance Solution • AEMDEVWEB 2026
-        </p>
-      </footer>
-    </main>
+      {/* [6. FINAL STRATEGIC CTA] */}
+      <section className="container mx-auto px-6">
+        <div className="rounded-[3rem] bg-emerald-600 p-12 text-center text-slate-950 shadow-2xl shadow-emerald-500/20 md:p-24">
+          <h2 className="font-heading mb-10 text-4xl leading-none font-black uppercase italic md:text-6xl lg:text-7xl">
+            Ready to Accelerate?
+          </h2>
+          <a
+            href={siteConfig.links.line}
+            className="group inline-flex items-center gap-4 rounded-2xl bg-slate-950 px-12 py-7 text-white transition-all hover:bg-white hover:text-slate-950 active:scale-95"
+          >
+            <span className="font-heading text-lg font-black tracking-widest uppercase italic">
+              ปรึกษาแผนงานระบบกับผู้เชี่ยวชาญ
+            </span>
+            <ArrowRight
+              size={24}
+              className="transition-transform group-hover:translate-x-2"
+            />
+          </a>
+        </div>
+      </section>
+    </motion.main>
   )
 }

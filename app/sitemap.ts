@@ -9,17 +9,17 @@ import { getAllTemplates } from "@/lib/template"
 import { BlogPost, CaseStudyItem } from "@/types"
 
 /**
- * [Dynamic Sitemap System]
- * ระบบวางแผนผังเว็บไซต์อัตโนมัติ เพื่อให้ระบบค้นหาเข้าถึงพิกัดข้อมูลได้กริบที่สุด
- * วางระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * AEMDEVWEB | Search Engine Indexing Protocol 2026
+ * -------------------------------------------------------------------------
+ * ระบบแผนผังเว็บไซต์อัตโนมัติ (Dynamic Sitemap) พิกัดแม่นยำสูงสุด
+ * กลยุทธ์: ดัน Priority หน้าเชิงพาณิชย์ (Templates/Services) เพื่อเร่งยอด Index
+ * วางระบบและจูนโครงสร้างโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const rawBaseUrl = siteConfig.project.url
-  const baseUrl = rawBaseUrl.endsWith("/")
-    ? rawBaseUrl.slice(0, -1)
-    : rawBaseUrl
+  const baseUrl = siteConfig.project.url.replace(/\/$/, "")
+  const now = new Date()
 
-  // 1. พิกัดหน้าหลักและหน้าทั่วไป (Static Routes)
+  // 1. Static Routes (พิกัดหลักของระบบ Priority: 0.8 - 1.0)
   const staticRoutes: MetadataRoute.Sitemap = [
     "",
     "/about",
@@ -32,77 +32,66 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: route === "" ? "daily" : "weekly",
+    lastModified: now,
+    changeFrequency: route === "" ? "daily" : "monthly",
     priority: route === "" ? 1.0 : 0.8,
   }))
 
-  // 2. พิกัดหน้าบริการ (Service Pages)
+  // 2. Service Pages (พิกัดยุทธศาสตร์การขาย Priority: 0.9)
   const serviceRoutes: MetadataRoute.Sitemap = (servicesData || []).map(
     (service) => ({
       url: `${baseUrl}/services/${service.slug}`,
-      lastModified: new Date(),
+      lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     })
   )
 
-  // 3. พิกัดหน้าผลงานจริง (Case Studies)
-  const caseStudies = await getAllCaseStudies()
-  const caseStudyRoutes: MetadataRoute.Sitemap = (caseStudies || []).map(
-    (study: CaseStudyItem) => {
-      const studyDate = study.frontmatter.date
-        ? new Date(study.frontmatter.date)
-        : new Date()
+  /** * [PERFORMANCE ENGINE]: ดึงข้อมูล MDX จากคลังระบบพร้อมกัน 
+   * จูนสมรรถนะโดย นายเอ็มซ่ามากส์ เพื่อความซิ่งในระนาบ Server
+   */
+  const [caseStudies, posts, templates] = await Promise.all([
+    getAllCaseStudies(),
+    getAllPosts(),
+    getAllTemplates(),
+  ])
 
-      return {
-        url: `${baseUrl}/case-studies/${study.slug}`,
-        lastModified: isNaN(studyDate.getTime()) ? new Date() : studyDate,
-        changeFrequency: "monthly",
-        priority: 0.8,
-      }
-    }
-  )
-
-  // 4. พิกัดหน้าแบบระบบงานพร้อมใช้ (Templates)
-  const templates = await getAllTemplates()
+  // 3. Template Routes (พิกัดสินค้าสมรรถนะสูง Priority: 0.9)
   const templateRoutes: MetadataRoute.Sitemap = (templates || []).map(
     (slug: string) => ({
       url: `${baseUrl}/templates/${slug}`,
-      lastModified: new Date(),
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    })
+  )
+
+  // 4. Case Studies (พิกัดยืนยันความสำเร็จ Priority: 0.8)
+  const caseStudyRoutes: MetadataRoute.Sitemap = (caseStudies || []).map(
+    (study: CaseStudyItem) => ({
+      url: `${baseUrl}/case-studies/${study.slug}`,
+      lastModified: new Date(study.frontmatter.date || now),
       changeFrequency: "monthly",
       priority: 0.8,
     })
   )
 
-  // 5. พิกัดหน้าบทความและเทคนิค (Blog Posts)
-  const posts = await getAllPosts()
+  // 5. Blog Posts (พิกัดคลังความรู้เชิงระบบ Priority: 0.7)
   const blogRoutes: MetadataRoute.Sitemap = (posts || []).map(
-    (post: BlogPost) => {
-      const postDate = post.frontmatter.date
-        ? new Date(post.frontmatter.date)
-        : new Date()
-
-      return {
-        url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: isNaN(postDate.getTime()) ? new Date() : postDate,
-        changeFrequency: "monthly",
-        priority: 0.7,
-      }
-    }
+    (post: BlogPost) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.frontmatter.date || now),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    })
   )
 
-  // รวบรวมพิกัดลิงก์ทั้งหมด
-  const allRoutes = [
+  /** รวมพิกัดข้อมูลทั้งหมดเพื่อส่งออกเป็นสารบัญดิจิทัลมาตรฐานสากล */
+  return [
     ...staticRoutes,
     ...serviceRoutes,
+    ...templateRoutes, // ดันหน้า Templates ขึ้นมาก่อนหน้า Case Studies เพื่อผลทางธุรกิจ
     ...caseStudyRoutes,
-    ...templateRoutes,
     ...blogRoutes,
   ]
-
-  // [Safety Filter]: กรองพิกัดเพื่อให้แน่ใจว่าไม่มีลิงก์ซ้ำกันก่อนส่งให้ Google
-  return allRoutes.filter(
-    (route, index, self) => index === self.findIndex((r) => r.url === route.url)
-  )
 }

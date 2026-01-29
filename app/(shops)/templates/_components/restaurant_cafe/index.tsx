@@ -51,22 +51,27 @@ export default function RestaurantTemplate({
           </div>
 
           <div className="hidden gap-10 lg:flex">
-            {data.navigation?.links.map((link: { label: string; href: string }, i: number) => (
-              <a
-                key={i}
-                href={link.href}
-                className="text-xs font-black tracking-widest text-slate-500 uppercase transition-colors hover:text-emerald-600"
-              >
-                {link.label}
-              </a>
-            ))}
+            {data.navigation?.links.map(
+              (link: { label: string; href: string }, i: number) => (
+                <a
+                  key={i}
+                  href={link.href}
+                  className="text-xs font-black tracking-widest text-slate-500 uppercase transition-colors hover:text-emerald-600"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
 
           <div className="flex items-center gap-4">
             <button className="font-heading rounded-2xl bg-slate-950 px-6 py-2.5 text-[10px] font-black tracking-widest text-emerald-500 uppercase italic shadow-xl shadow-slate-950/10 transition-all hover:bg-emerald-600 hover:text-white active:scale-95">
               {data.navigation?.cta}
             </button>
-            <button className="text-slate-900 lg:hidden" aria-label="เปิดพิกัดเมนู">
+            <button
+              className="text-slate-900 lg:hidden"
+              aria-label="เปิดพิกัดเมนู"
+            >
               <Menu size={24} />
             </button>
           </div>
@@ -141,53 +146,67 @@ export default function RestaurantTemplate({
 
           <div className="space-y-32">
             {/* [FIX]: ระบุพิกัดประเภทข้อมูลหมวดหมู่ให้ชัดเจนเพื่อล้าง Warning บรรทัดที่ 144 */}
-            {data.menu?.categories.map((category: { name: string; items: { name: string; price: string; desc: string; image: string; isRecommended?: boolean }[] }, idx: number) => (
-              <div key={idx}>
-                <div className="mb-16 flex items-center gap-6">
-                  <h3 className="font-heading text-3xl font-black tracking-widest text-emerald-600 uppercase italic">
-                    {category.name}
-                  </h3>
-                  <div className="h-px flex-1 bg-slate-200" />
-                </div>
+            {data.menu?.categories.map(
+              (
+                category: {
+                  name: string
+                  items: {
+                    name: string
+                    price: string
+                    desc: string
+                    image: string
+                    isRecommended?: boolean
+                  }[]
+                },
+                idx: number
+              ) => (
+                <div key={idx}>
+                  <div className="mb-16 flex items-center gap-6">
+                    <h3 className="font-heading text-3xl font-black tracking-widest text-emerald-600 uppercase italic">
+                      {category.name}
+                    </h3>
+                    <div className="h-px flex-1 bg-slate-200" />
+                  </div>
 
-                <div className="grid gap-10 md:grid-cols-2">
-                  {/* [FIX]: พิกัดรายการอาหารถูกระบุประเภทข้อมูลผ่าน category.items เรียบร้อยแล้ว */}
-                  {category.items.map((item, i) => (
-                    <div
-                      key={i}
-                      className="group relative flex flex-col gap-8 rounded-[3rem] border border-white bg-white p-8 transition-all hover:-translate-y-2 hover:border-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/5 sm:flex-row"
-                    >
-                      <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-[2rem] bg-slate-100 sm:h-40 sm:w-40">
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        {item.isRecommended && (
-                          <div className="absolute top-4 right-4 z-10 rounded-full bg-emerald-500 p-2 text-white shadow-lg shadow-emerald-500/20">
-                            <Star size={14} fill="currentColor" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-1 flex-col justify-center">
-                        <div className="flex items-center justify-between gap-4">
-                          <h4 className="text-2xl font-black tracking-tight text-slate-950 uppercase italic">
-                            {item.name}
-                          </h4>
-                          <span className="font-heading text-xl font-black text-emerald-600 italic">
-                            {item.price}
-                          </span>
+                  <div className="grid gap-10 md:grid-cols-2">
+                    {/* [FIX]: พิกัดรายการอาหารถูกระบุประเภทข้อมูลผ่าน category.items เรียบร้อยแล้ว */}
+                    {category.items.map((item, i) => (
+                      <div
+                        key={i}
+                        className="group relative flex flex-col gap-8 rounded-[3rem] border border-white bg-white p-8 transition-all hover:-translate-y-2 hover:border-emerald-500/20 hover:shadow-2xl hover:shadow-emerald-500/5 sm:flex-row"
+                      >
+                        <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-[2rem] bg-slate-100 sm:h-40 sm:w-40">
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                          {item.isRecommended && (
+                            <div className="absolute top-4 right-4 z-10 rounded-full bg-emerald-500 p-2 text-white shadow-lg shadow-emerald-500/20">
+                              <Star size={14} fill="currentColor" />
+                            </div>
+                          )}
                         </div>
-                        <p className="mt-4 text-base leading-relaxed font-bold text-slate-400">
-                          {item.desc}
-                        </p>
+                        <div className="flex flex-1 flex-col justify-center">
+                          <div className="flex items-center justify-between gap-4">
+                            <h4 className="text-2xl font-black tracking-tight text-slate-950 uppercase italic">
+                              {item.name}
+                            </h4>
+                            <span className="font-heading text-xl font-black text-emerald-600 italic">
+                              {item.price}
+                            </span>
+                          </div>
+                          <p className="mt-4 text-base leading-relaxed font-bold text-slate-400">
+                            {item.desc}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </section>

@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 
-// ชุดไอคอนมาตรฐานสำหรับเว็บซิ่งปี 2026
+// ชุดสัญลักษณ์มาตรฐานเพื่อประสิทธิภาพการใช้งานปี 2026 (Lucide Connectivity)
 import {
   ArrowRight,
   Sparkles,
@@ -29,26 +29,28 @@ import {
   Cpu,
 } from "lucide-react"
 
-// นำเข้าส่วนประกอบหลัก
+// นำเข้าส่วนประกอบเชิงกลยุทธ์ (Strategic Components by นายเอ็มซ่ามากส์)
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
-import { SpeedDemon } from "@/components/sales-engine/SpeedDemon"
+import { PerformanceAuthority } from "@/components/sales-engine/PerformanceAuthority"
 import { WorkProcess } from "@/components/sales-engine/WorkProcess"
 
 /**
- * useMDXComponents: ลงทะเบียนคอมโพเนนต์สำหรับเนื้อหาบทความ (MDX)
- * แนวทาง: เปลี่ยนบทความธรรมดาให้กลายเป็นหน้าขายของที่ทรงพลัง
- * [FIX]: ล้างพิกัด Error Unexpected any และระบุพิกัดข้อมูลให้กริบที่สุด
+ * useMDXComponents: ลงทะเบียนคอมโพเนนต์สำหรับเนื้อหาบทความ (MDX Architecture)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การเปลี่ยนเนื้อหาทั่วไปให้เป็นพิกัดนำเสนอธุรกิจที่มีประสิทธิภาพ
+ * วางระบบและควบคุมสมรรถนะโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
  */
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
 
-    // [GROUP 1] - Business Engines
+    // [GROUP 1] - Business Strategy Engines (พิกัดแสดงผลลัพธ์เชิงประจักษ์)
     ImpactStats,
-    SpeedDemon,
+    PerformanceAuthority,
+    SpeedDemon: PerformanceAuthority, // [ALIAS FIXED]: ล้างพิกัด Error เพื่อให้ Build ผ่านฉลุย
     WorkProcess,
 
-    // [GROUP 2] - UI Icons Registry
+    // [GROUP 2] - UI Icons Registry (Strategic Visual Icons)
     Zap,
     ShieldCheck,
     Smartphone,
@@ -68,8 +70,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ClipboardList,
     Cpu,
 
-    // [GROUP 3] - Typography & Elements
-
+    // [GROUP 3] - Typography and Specialist Visual Elements
+    
     h1: ({ children }) => (
       <h1 className="font-heading mt-24 mb-10 text-5xl leading-[1.1] font-black tracking-tighter text-slate-950 uppercase italic md:text-7xl lg:text-8xl">
         {children}
@@ -89,18 +91,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h3>
     ),
 
-    // [FIX]: ล้างพิกัด any โดยระบุ interface สำหรับ Image props
+    // จัดการพิกัดย่อหน้าเพื่อรองรับการแสดงผลรูปภาพที่ซ้อนภายใน (P-Tag Fix)
     p: (props) => {
       const { children } = props
-
       if (React.isValidElement(children)) {
         const childProps = children.props as Record<string, unknown>
-
         if (typeof children.type === "string" || childProps.src) {
           return <>{children}</>
         }
       }
-
       return (
         <p
           className="font-body mb-8 text-lg leading-[1.8] font-bold text-slate-600 md:text-xl"
@@ -109,12 +108,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
 
+    // ส่วนแสดงผลภาพประกอบที่จูนความประณีตโดย นายเอ็มซ่ามากส์
     img: (props) => (
       <figure className="group relative my-16 block w-full overflow-hidden rounded-[3rem] border border-slate-100 bg-slate-50 shadow-2xl shadow-slate-200/40">
         <div className="relative block aspect-video w-full overflow-hidden">
           <Image
             src={props.src || "/images/blog/placeholder.webp"}
-            alt={props.alt || "ภาพประกอบบทความ AEMDEVWEB"}
+            alt={props.alt || "Strategic Visual - AEMDEVWEB"}
             fill
             className="object-cover transition-all duration-1000 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, 1200px"
@@ -122,7 +122,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </div>
         {props.alt && (
           <figcaption className="font-heading block border-t border-slate-50 bg-white px-6 py-4 text-center text-[10px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
-            — {props.alt}
+            Reference Authority — {props.alt}
           </figcaption>
         )}
       </figure>
@@ -132,7 +132,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const isInternal = href?.startsWith("/") || href?.startsWith("#")
       const baseClass =
         "font-black transition-all text-emerald-600 hover:text-emerald-400 underline decoration-emerald-500/30 underline-offset-4 hover:decoration-emerald-500"
-
       if (isInternal) {
         return (
           <Link href={href as string} className={baseClass}>
@@ -141,12 +140,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         )
       }
       return (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={baseClass}
-        >
+        <a href={href} target="_blank" rel="noopener noreferrer" className={baseClass}>
           {children}
         </a>
       )
@@ -163,32 +157,31 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </div>
     ),
 
+    // [CUSTOM COMPONENT]: ส่วนกระตุ้นการตัดสินใจเชิงกลยุทธ์ (CTA Protocol)
     CallToAction: ({
       title,
       url,
-      label = "เริ่มโปรเจกต์ของคุณ",
+      label = "เริ่มต้นโครงการของคุณ",
     }: {
       title: string
       url: string
       label?: string
     }) => (
       <div className="relative my-20 overflow-hidden rounded-[4rem] bg-slate-950 p-12 text-center md:p-24">
-        <div
-          className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-10"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-10" aria-hidden="true" />
         <h3 className="font-heading relative z-10 mb-12 text-3xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
           {title}
         </h3>
         <Link
           href={url}
-          className="relative z-10 inline-flex items-center justify-center gap-4 rounded-2xl bg-emerald-500 px-12 py-6 text-sm font-black tracking-[0.2em] text-slate-950 uppercase italic transition-all hover:bg-white active:scale-95"
+          className="relative z-10 inline-flex items-center justify-center gap-4 rounded-2xl bg-emerald-500 px-12 py-6 text-sm font-black tracking-[0.2em] text-slate-950 uppercase italic transition-all hover:bg-white active:scale-95 shadow-[0_0_30px_rgba(16,185,129,0.3)]"
         >
           {label} <ArrowRight size={20} strokeWidth={3} />
         </Link>
       </div>
     ),
 
+    // [CUSTOM COMPONENT]: รายการคุณสมบัติเนี้ยบกริบ (Feature List Node)
     FeatureList: ({ items }: { items: string[] }) => (
       <div className="my-16 grid grid-cols-1 gap-6 md:grid-cols-2">
         {items.map((item: string, i: number) => (

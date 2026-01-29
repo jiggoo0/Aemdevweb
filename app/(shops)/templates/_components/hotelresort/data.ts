@@ -1,51 +1,57 @@
 /** @format */
 import { HotelData } from "./schema"
 
+/**
+ * hotelResortData - โครงสร้างสถาปัตยกรรมดิจิทัลสำหรับธุรกิจโรงแรมและที่พักระดับพรีเมียม
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การสร้างประสบการณ์การเข้าพักเริ่มต้นที่หน้าเว็บด้วยสมรรถนะระดับสูงสุด
+ * ออกแบบและวางระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ */
 export const hotelResortData: HotelData = {
-  // --- 1. ข้อมูล SEO เชิงเทคนิค (เน้นชื่อแบรนด์และคีย์เวิร์ดตลาดโรงแรม) ---
+  // 1. กลยุทธ์การจัดการข้อมูล SEO (Technical SEO Strategy)
   seo: {
     title:
-      "เทมเพลตสำเร็จรูป พร้อมใช้งาน Hotel & Resort | โครงสร้างเว็บโรงแรมโหลดไว โดย AEMDEVWEB",
+      "Strategic Hotel & Resort Interface โดย นายเอ็มซ่ามากส์ | สถาปัตยกรรมระดับพรีเมียม | AEMDEVWEB",
     description:
-      "เทมเพลตสำเร็จรูป พร้อมใช้งาน สำหรับธุรกิจที่พักที่ต้องการผลลัพธ์ Technical SEO สูงสุด ออกแบบโครงสร้างโดย นายเอ็มซ่ามากส์ เพื่อให้เว็บของคุณโหลดไวและติดอันดับการค้นหาได้จริง",
+      "โซลูชันเว็บไซต์โรงแรมโดย นายเอ็มซ่ามากส์ สำหรับธุรกิจที่ต้องการดัชนีชี้วัด Technical SEO ระดับสูงสุด เพื่อเพิ่มประสิทธิภาพความเร็วการเข้าถึงและลำดับการค้นหาอย่างยั่งยืนในปี 2026",
     keywords: [
-      "เทมเพลตสำเร็จรูป พร้อมใช้งาน",
-      "รับทำเว็บโรงแรม",
-      "AEMDEVWEB",
       "นายเอ็มซ่ามากส์",
-      "เว็บรีสอร์ทโหลดไว",
-      "Hotel Website Structure",
+      "Hospitality Digital Solution",
+      "Enterprise Hotel Website",
+      "Next.js 16 Specialist",
+      "เอ็มเดฟเว็บ",
+      "Direct Booking Architecture",
     ],
     ogImage: "/images/templates/hotel-og.webp",
   },
 
-  // --- 2. ส่วนนำทางและระบบจอง ---
+  // 2. ระบบการนำทางและจุดปฏิสัมพันธ์เชิงกลยุทธ์ (Navigation & Interaction)
   navigation: {
-    logo: "GRAND.RESORT",
+    logo: "AEM.GRAND-RESORT",
     links: [
-      { label: "ห้องพักและราคา", href: "#rooms" },
-      { label: "สิ่งอำนวยความสะดวก", href: "#amenities" },
-      { label: "ติดต่อและแผนที่", href: "#location" },
+      { label: "ห้องพักและข้อเสนอ", href: "#rooms" },
+      { label: "มาตรฐานการบริการ", href: "#amenities" },
+      { label: "พิกัดที่ตั้งและติดต่อ", href: "#location" },
     ],
-    bookingCta: "ตรวจสอบห้องว่างและจอง",
+    bookingCta: "เช็คห้องว่างกับนายเอ็มซ่ามากส์",
   },
 
-  // --- 3. ส่วนหัว (Hero) - เน้นความพรีเมียมและความเร็ว ---
+  // 3. ส่วนนำเสนอคุณค่าหลัก (Strategic Hero Node)
   hero: {
-    title: "สัมผัสประสบการณ์การพักผ่อนที่เหนือระดับ",
+    title: "ยกระดับสุนทรียภาพแห่งการพักผ่อนสู่ระนาบดิจิทัล",
     description:
-      "นี่คือเทมเพลตสำเร็จรูป พร้อมใช้งาน ที่ไม่ได้มีดีแค่ความสวยงาม แต่ผ่านการรีดประสิทธิภาพความเร็วในระดับสูงสุด เพื่อให้ลูกค้าของคุณเข้าถึงข้อมูลที่พักได้ทันทีโดยไม่ต้องรอ",
+      "นี่คือโซลูชันที่ นายเอ็มซ่ามากส์ ออกแบบเพื่อสะท้อนอัตลักษณ์ความเหนือระดับ ผ่านสถาปัตยกรรมที่จูนความเร็วการตอบสนองสูงสุด (LCP Optimized) เพื่อให้ลูกค้าของคุณใช้งานได้ไร้รอยต่อ",
     bgImage: "/images/templates/hotelresort/hotel-hero.webp",
   },
 
-  // --- 4. ข้อมูลสถิติเพื่อสร้างความเชื่อมั่น (Trust Indicators) ---
+  // 4. รายงานดัชนีความเชื่อมั่น (Performance & Trust Protocols)
   stats: [
-    { label: "คะแนนรีวิวความพึงพอใจ", value: "4.9/5.0" },
-    { label: "ระยะทางจากสนามบิน", value: "15 นาที" },
-    { label: "การบริการระดับพรีเมียม", value: "24 ชั่วโมง" },
+    { label: "Satisfaction Index", value: "4.9/5.0" },
+    { label: "Airport Connectivity", value: "15 นาที" },
+    { label: "Support โดยนายเอ็ม", value: "24 ชั่วโมง" },
   ],
 
-  // --- 5. รายการห้องพัก (Rooms & Suites) ---
+  // 5. รายการห้องพักและโซลูชันการพักผ่อน (Rooms & Suites)
   rooms: [
     {
       id: "1",
@@ -53,9 +59,9 @@ export const hotelResortData: HotelData = {
       price: "3,500.-",
       image: "/images/templates/hotelresort/placeholder.webp",
       features: [
-        "ฟรีอาหารเช้านานาชาติ",
-        "ระเบียงชมวิวทะเลส่วนตัว",
-        "อ่างอาบน้ำขนาดใหญ่",
+        "ฟรีอาหารเช้านานาชาติพรีเมียม",
+        "ทัศนียภาพมหาสมุทรพิกัดพาโนรามา",
+        "สิ่งอำนวยความสะดวกเนี้ยบระดับมาตรฐานสากล",
       ],
     },
     {
@@ -64,25 +70,25 @@ export const hotelResortData: HotelData = {
       price: "7,900.-",
       image: "/images/templates/hotelresort/placeholder.webp",
       features: [
-        "สระว่ายน้ำส่วนตัวระบบเกลือ",
-        "มินิบาร์พรีเมียม",
-        "บริการ Butler ส่วนตัว 24 ชม.",
+        "สระว่ายน้ำส่วนตัวพิกัดวิวหลักล้าน",
+        "มินิบาร์พรีเมียมที่นายเอ็มคัดสรร",
+        "Personal Butler Service พร้อมดูแลตลอด 24 ชม.",
       ],
     },
   ],
 
-  // --- 6. สิ่งอำนวยความสะดวก (Amenities) ---
+  // 6. มาตรฐานสิ่งอำนวยความสะดวก (Operational Excellence)
   amenities: {
-    title: "สิ่งอำนวยความสะดวกระดับ 5 ดาว",
+    title: "สิ่งอำนวยความสะดวกระดับ 5 ดาว วางระบบโดย นายเอ็มซ่ามากส์",
     items: [
-      { iconName: "Waves", label: "สระว่ายน้ำกลางแจ้ง" },
-      { iconName: "Coffee", label: "เลานจ์และคาเฟ่" },
-      { iconName: "Utensils", label: "ห้องอาหารพรีเมียม" },
-      { iconName: "Wifi", label: "High-speed Wi-Fi" },
+      { iconName: "Waves", label: "Pool & Wellness Center" },
+      { iconName: "Coffee", label: "Executive Lounge" },
+      { iconName: "Utensils", label: "Fine Dining Experience" },
+      { iconName: "Wifi", label: "High-Speed Connectivity" },
     ],
   },
 
-  // --- 7. ข้อมูลติดต่อและตำแหน่งที่ตั้ง (Footer) ---
+  // 7. ส่วนยืนยันมาตรฐานการดำเนินงาน (Strategic Footer)
   footer: {
     address:
       "เลขที่ 888 ถนนเลียบชายหาด ตำบลหนองปรือ อำเภอบางละมุง จังหวัดชลบุรี 20150",
@@ -91,6 +97,6 @@ export const hotelResortData: HotelData = {
       line: "@GRANDRESORT",
       email: "reservation@grandresort.com",
     },
-    mapsUrl: "https://maps.google.com", // แนะนำให้ใช้ลิงก์แชร์จาก Google Maps จริง
+    mapsUrl: "https://maps.google.com", 
   },
 }

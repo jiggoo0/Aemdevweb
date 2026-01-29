@@ -4,90 +4,109 @@
 
 import React, { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { TemplateMetadata } from "@/types/template"
-// นำเข้าส่วนประกอบการ์ดและตัวกรองตามระบบที่วางไว้
+import { TemplateMetadata, TemplateCategory } from "@/types/template"
 import TemplateCard from "./TemplateCard"
 import { TemplateFilter } from "./TemplateFilter"
-import { SearchX } from "lucide-react"
+import { SearchX, RefreshCcw } from "lucide-react"
 
 interface TemplateGridProps {
   templates: TemplateMetadata[]
 }
 
 /**
- * TemplateGrid - ส่วนจัดการตารางแสดงผลแบบเว็บไซต์
- * แนวคิด: บริหารจัดการการแสดงผลและการเลือกหมวดหมู่ให้ใช้งานง่ายและเร็วที่สุด
- * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * TemplateGrid - ระบบบริหารจัดการรายการโซลูชันเชิงโครงสร้าง (Strategic Asset Grid)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: ความแม่นยำในการจัดการข้อมูลด้วย useMemo และความลื่นไหลระดับสูงสุด
+ * มาตรฐาน: การเพิ่มประสิทธิภาพสมรรถนะเพื่อการตอบสนองที่ฉับไว (High-Response)
  */
 export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
-  const [activeCategory, setActiveCategory] = useState<string>("all")
+  const [activeCategory, setActiveCategory] = useState<
+    TemplateCategory | "all"
+  >("all")
 
-  /**
-   * ระบบคัดกรองข้อมูล (Filtering Engine)
-   * ใช้ useMemo เพื่อป้องกันการประมวลผลซ้ำ ช่วยให้เว็บทำงานได้ไวระดับปีศาจ
-   */
+  // [STRATEGIC FILTERING]: ระบบคัดกรองข้อมูลเพื่อลดภาระการประมวลผล (Computational Efficiency)
   const filteredTemplates = useMemo(() => {
     if (!templates) return []
     if (activeCategory === "all") return templates
     return templates.filter((template) => template.category === activeCategory)
   }, [activeCategory, templates])
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
   return (
-    <div className="space-y-16">
-      {/* ส่วนควบคุม: เลือกหมวดหมู่ธุรกิจที่ต้องการ */}
+    <div className="space-y-12 lg:space-y-20">
       <TemplateFilter
         activeCategory={activeCategory}
-        onCategoryChange={setActiveCategory}
+        onCategoryChange={(cat) =>
+          setActiveCategory(cat as TemplateCategory | "all")
+        }
       />
 
-      {/* ส่วนแสดงผล: รายการเว็บไซต์ที่ผ่านการคัดกรอง */}
       <AnimatePresence mode="wait">
         {filteredTemplates.length > 0 ? (
           <motion.div
-            key={activeCategory} // เล่นอนิเมชั่นใหม่ทุกครั้งที่เปลี่ยนหมวดหมู่
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3"
+            key={activeCategory}
+            variants={container}
+            initial="hidden"
+            animate="show"
+            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+            className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
           >
-            {filteredTemplates.map((template) => (
-              <TemplateCard
-                key={template.id || template.slug}
-                template={template}
-              />
+            {filteredTemplates.map((template, idx) => (
+              <motion.div
+                key={template.slug}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <TemplateCard template={template} priority={idx < 3} />
+              </motion.div>
             ))}
           </motion.div>
         ) : (
-          /* กรณีไม่พบข้อมูล: แสดงสถานะแจ้งเตือนที่ดูเป็นมืออาชีพ */
+          /* ส่วนแสดงผลกรณีไม่พบข้อมูลในหมวดหมู่ที่เลือก (Empty State Strategy) */
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center justify-center rounded-[4rem] border-2 border-dashed border-slate-100 bg-slate-50/50 py-32 text-center"
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="flex flex-col items-center justify-center rounded-[4rem] border-2 border-dashed border-slate-100 bg-slate-50/40 py-32 text-center"
           >
-            <div className="flex h-28 w-28 items-center justify-center rounded-[2.5rem] bg-white text-slate-300 shadow-sm ring-1 ring-slate-100">
-              <SearchX size={48} strokeWidth={1} />
+            <div className="relative mb-10">
+              <div className="absolute inset-0 animate-ping rounded-full bg-emerald-500/10" />
+              <div className="relative flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-white text-slate-200 shadow-xl ring-1 ring-slate-100">
+                <SearchX size={40} strokeWidth={1} />
+              </div>
             </div>
 
-            <div className="mt-12 space-y-4">
-              <h3 className="font-heading text-3xl font-black tracking-tighter text-slate-900 uppercase italic">
-                No Results <span className="text-emerald-500">Found.</span>
+            <div className="space-y-4 px-6">
+              <h3 className="font-heading text-4xl font-black tracking-tighter text-slate-950 uppercase italic">
+                System <span className="text-emerald-500">Standby.</span>
               </h3>
               <p className="font-body mx-auto max-w-sm text-lg font-bold text-slate-400">
-                เรากำลังเตรียมระบบสำหรับหมวดหมู่นี้อยู่ครับ
-                <br />
-                <span className="text-sm font-medium">
-                  ลองเลือกดูหมวดอื่น หรือกดรีเซ็ตตัวกรองก่อนได้ครับ
-                </span>
+                ขณะนี้กำลังจัดเตรียมโซลูชันเพิ่มเติมในหมวดหมู่นี้ <br />
+                ท่านสามารถรับชมโซลูชันอื่นเพื่อตรวจสอบประสิทธิภาพระบบเบื้องต้น
               </p>
             </div>
 
-            {/* ปุ่มรีเซ็ต: คืนค่าการค้นหาทั้งหมด */}
             <button
               onClick={() => setActiveCategory("all")}
-              className="font-heading mt-12 inline-flex items-center gap-4 rounded-full bg-slate-950 px-12 py-5 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-2xl transition-all hover:bg-emerald-600 active:scale-95"
+              className="group font-heading mt-12 inline-flex items-center gap-3 rounded-2xl bg-slate-950 px-10 py-5 text-[10px] font-black tracking-[0.3em] text-white uppercase italic shadow-2xl transition-all hover:bg-emerald-600 active:scale-95"
             >
-              Reset All Filters
+              <RefreshCcw
+                size={14}
+                className="transition-transform group-hover:rotate-180"
+              />
+              Reset Strategic Filter
             </button>
           </motion.div>
         )}

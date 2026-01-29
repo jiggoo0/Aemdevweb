@@ -5,21 +5,17 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { templateRegistry } from "../_registry"
 import { siteConfig } from "@/constants/site-config"
-
-// ข้อมูลข้อตกลง SEO สำหรับการแสดงผลพิกัดหน้าบ้าน
 import { SEOContract } from "../_contracts/seo"
+import { JsonLd } from "@/components/seo/JsonLd"
 
-/**
- * [Type Definitions]: กำหนดรูปแบบข้อมูลสำหรับ Component
- */
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
 /**
- * [METADATA ENGINE]: วางพิกัดการค้นหาและรูปภาพแชร์ (OG Image)
- * แนวคิด: ดึงข้อมูลจากส่วนจัดการ SEO เพื่อให้ Google และ AI เข้าใจข้อมูลหน้าตัวอย่างนี้ได้กริบที่สุด
- * วางระบบโดย: นายเอ็มซ่ามากส์ (Specialist ผู้วางระบบ)
+ * [METADATA STRATEGY]: ระบบการจัดการข้อมูล SEO รายโครงการ
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การสร้างความน่าเชื่อถือผ่านโครงสร้างข้อมูลที่แม่นยำ (Semantic SEO)
  */
 export async function generateMetadata({
   params,
@@ -27,120 +23,117 @@ export async function generateMetadata({
   const { slug } = await params
   const templateEntry = templateRegistry[slug]
 
-  if (!templateEntry) {
-    return { title: `404 | ไม่พบข้อมูลพิกัดชุดเว็บ` }
-  }
+  if (!templateEntry) return { title: "404 | Configuration Not Found" }
 
-  /**
-   * [FIX]: ล้างพิกัด Error TS2352 โดยบีบ Type ผ่าน unknown
-   */
   const data = templateEntry.data as unknown as SEOContract
-  const title = `ตัวอย่างเว็บ: ${data.seo?.title || templateEntry.metadata.name} | ${siteConfig.project.shortName} Shops.`
-  const description =
-    data.seo?.description || templateEntry.metadata.description
+  const title = `${data.seo?.title || templateEntry.metadata.name} | Strategic Configuration - ${siteConfig.project.shortName}`
 
   return {
     title,
-    description,
-    keywords: data.seo?.keywords,
+    description: data.seo?.description || templateEntry.metadata.description,
     openGraph: {
       title,
-      description,
+      description: data.seo?.description || templateEntry.metadata.description,
       url: `${siteConfig.project.url}/templates/${slug}`,
-      images: [
-        {
-          url: data.seo?.ogImage || siteConfig.project.ogImage,
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
+      images: [{ url: data.seo?.ogImage || siteConfig.project.ogImage }],
       type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [data.seo?.ogImage || siteConfig.project.ogImage],
     },
   }
 }
 
 /**
- * [TEMPLATE DETAIL PAGE]: หน้าแสดงผลเว็บไซต์ตัวอย่าง (Live Preview)
- * แนวคิด: แสดงผลหน้าเว็บจริงแบบรวดเร็วที่สุดเพื่อโชว์ความแรงของระบบงานปี 2026
- * ตัวตน: นายเอ็มซ่ามากส์ (Instant Deployment Specialist)
+ * [SYSTEM CONFIGURATION PREVIEW]: การแสดงผลอินเทอร์เฟซและโครงสร้างระบบจริง
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การแสดงสมรรถนะของโครงสร้างระบบพื้นฐาน AEM 2026 ในรูปแบบ Real-time
  */
 export default async function TemplateDetailPage({ params }: PageProps) {
   const { slug } = await params
   const templateEntry = templateRegistry[slug]
 
-  // [FALLBACK]: หากไม่พบแบบที่เลือกในพิกัดระบบ ให้ไปหน้า 404 ทันทีครับ
   if (!templateEntry) notFound()
 
-  /**
-   * [CORE RENDERER]: ดึงส่วนแสดงผลจากทะเบียนชุดเว็บ
-   * [FIX]: บีบพิกัดข้อมูลให้ตรงตามสัญญาเพื่อให้ระบบทำงานได้กริบ 100%
-   */
   const LiveComponent = templateEntry.component
   const liveData = templateEntry.data
 
   return (
-    <div className="relative min-h-screen bg-white selection:bg-emerald-500/10 selection:text-emerald-900">
-      {/* [เลเยอร์ 1] - ส่วนแจ้งสถานะหน้าพรีวิว
-          โชว์ความโปรด้วยสถานะ Live เพื่อให้ลูกค้ารู้ว่านี่คือ "ของจริง" ที่ซิ่งได้จริง
-      */}
-      <div className="pointer-events-none fixed inset-x-0 top-16 z-[999] flex justify-center px-6 md:top-20">
-        <div className="shadow-3xl flex items-center gap-4 rounded-[1.25rem] bg-slate-950/90 px-6 py-3 ring-1 ring-white/10 backdrop-blur-xl">
-          <div className="relative flex h-2.5 w-2.5">
-            <div className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <div className="relative h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.9)]" />
+    <div className="relative min-h-screen bg-white selection:bg-emerald-500/20">
+      <JsonLd
+        type="Product"
+        data={{
+          name: templateEntry.metadata.name,
+          image: templateEntry.metadata.thumbnail,
+          description: templateEntry.metadata.description,
+          brand: { "@type": "Brand", name: siteConfig.company.name },
+          offers: {
+            "@type": "Offer",
+            price: templateEntry.metadata.priceValue.toString(),
+            priceCurrency: "THB",
+          },
+        }}
+      />
+
+      {/* [LAYER 1]: Floating Interface Hub (Specialist HUD) */}
+      <div className="pointer-events-none fixed inset-x-0 top-6 z-[1000] flex justify-center px-6 md:top-10">
+        <div className="flex items-center gap-4 rounded-3xl bg-slate-950/90 p-1.5 pr-2 pl-5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] ring-1 ring-white/10 backdrop-blur-2xl">
+          <div className="flex items-center gap-3">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="font-heading text-[10px] font-black tracking-[0.2em] text-white uppercase italic">
+              System Live Preview
+            </span>
           </div>
-          <span className="font-heading text-[10px] font-black tracking-[0.2em] text-white uppercase italic">
-            Live Website Preview
-          </span>
-          <div className="h-4 w-px bg-white/10" />
-          <span className="font-heading text-[9px] font-black tracking-widest text-slate-400 uppercase italic">
-            ID: {templateEntry.metadata.id}
-          </span>
+
+          <div className="h-6 w-px bg-white/10" />
+
+          <div className="hidden items-center gap-2 md:flex">
+            <span className="font-heading text-[9px] font-black tracking-widest text-slate-400 uppercase italic">
+              Config Ref: {templateEntry.metadata.id}
+            </span>
+          </div>
+
+          <a
+            href={siteConfig.links.line}
+            target="_blank"
+            className="pointer-events-auto flex items-center gap-2 rounded-2xl bg-emerald-500 px-5 py-2.5 text-[9px] font-black tracking-widest text-slate-950 uppercase italic transition-all hover:bg-white active:scale-95"
+          >
+            CONSULT STRATEGY
+          </a>
         </div>
       </div>
 
-      {/* [เลเยอร์ 2] - แถบแจ้งสเปกพิกัดเบื้องหลัง
-          ตอกย้ำมาตรฐานความแรงของระบบงานสไตล์ AEM Engine 2026
-      */}
-      <header className="pointer-events-none relative z-10 flex h-14 items-center justify-center border-b border-slate-50 bg-slate-50/30 backdrop-blur-sm">
-        <div className="flex items-center gap-6">
-          <div className="hidden h-[1px] w-12 bg-slate-200 md:block" />
-          <p className="font-heading text-[9px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
-            AEM v2026 • Build: {slug} • Next-Gen Speed Enabled
-          </p>
-          <div className="hidden h-[1px] w-12 bg-slate-200 md:block" />
-        </div>
-      </header>
+      {/* [LAYER 2]: Tech Specification Banner */}
+      <div className="pointer-events-none relative z-10 flex h-10 items-center justify-between border-b border-slate-100 bg-slate-50/50 px-6 backdrop-blur-sm">
+        <p className="font-heading text-[8px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+          Infrastructure Standard v2026.1
+        </p>
+        <p className="font-heading text-[8px] font-black tracking-[0.4em] text-slate-400 uppercase italic">
+          High-Efficiency Performance Verified
+        </p>
+      </div>
 
-      {/* [เลเยอร์ 3] - พื้นที่แสดงพิกัดเว็บไซต์จริง
-          แสดงผลคอมโพเนนต์แบบไหลลื่นตามชุดข้อมูลที่ดึงมาจากพิกัดทะเบียน
-      */}
-      <main className="relative z-0 min-h-screen">
+      {/* [LAYER 3]: Strategic Infrastructure (Live Component Deployment) */}
+      <main className="relative z-0 min-h-screen pt-0">
         <LiveComponent data={liveData} />
       </main>
 
-      {/* [เลเยอร์ 4] - ส่วนท้ายยืนยันมาตรฐานพิกัดงานเนี้ยบ */}
-      <footer className="pointer-events-none fixed bottom-8 left-0 w-full text-center opacity-40 select-none">
-        <p className="font-heading text-[8px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          High-Performance System by {siteConfig.expert.name} • 2026 Edition
-        </p>
+      {/* [LAYER 4]: Minimal Specialist Signature */}
+      <footer className="pointer-events-none fixed bottom-6 left-6 z-50 opacity-40">
+        <div className="flex flex-col items-start gap-1">
+          <p className="font-heading text-[7px] font-black tracking-[0.6em] text-slate-950 uppercase italic">
+            Architected by: {siteConfig.expert.name}
+          </p>
+          <div className="h-[1px] w-12 bg-slate-950" />
+        </div>
       </footer>
     </div>
   )
 }
 
 /**
- * [DYNAMIC STRATEGY]: เตรียมพิกัดหน้าเว็บล่วงหน้าเพื่อให้โหลดได้ไวระดับปีศาจ
- * เมื่อลูกค้าคลิกมาจากหน้ารวม Shops ระบบจะแสดงผลได้ทันทีโดยไม่ต้องรอพิกัดเครื่องให้เสียเวลาครับ
+ * [SSG PROTOCOL]: การจัดเตรียมเส้นทางข้อมูลล่วงหน้า 100%
  */
 export async function generateStaticParams() {
-  const slugs = Object.keys(templateRegistry)
-  return slugs.map((slug) => ({ slug }))
+  return Object.keys(templateRegistry).map((slug) => ({ slug }))
 }

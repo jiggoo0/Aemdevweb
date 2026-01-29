@@ -1,9 +1,12 @@
 /** @format */
 
+"use client"
+
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, BarChart3, ExternalLink } from "lucide-react"
+import { motion } from "framer-motion"
+import { ArrowRight, ExternalLink, Sparkles } from "lucide-react"
 
 interface CaseStudyCardProps {
   slug: string
@@ -12,13 +15,14 @@ interface CaseStudyCardProps {
   image: string
   industry: string
   result?: string
+  index?: number
 }
 
 /**
- * CaseStudyCard - ส่วนแสดงผลงานที่เน้นผลลัพธ์ทางธุรกิจ
- * แนวคิด: โชว์หลักฐานความสำเร็จด้วยภาพและตัวเลขที่ชัดเจน
- * มาตรฐาน: ปรับจูนความเบาเพื่อให้หน้าเว็บโหลดไวที่สุด (Performance Optimized)
- * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * CaseStudyCard - ส่วนนำเสนอผลลัพธ์ความสำเร็จ (Strategic Success Node)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การสร้างความเชื่อมั่นผ่านกรณีศึกษาที่ประสบความสำเร็จจริง
+ * มาตรฐาน: ความเร็วการโต้ตอบระดับสูงและการแสดงผลที่แม่นยำ
  */
 export const CaseStudyCard = ({
   slug,
@@ -27,81 +31,90 @@ export const CaseStudyCard = ({
   image,
   industry,
   result,
+  index = 0,
 }: CaseStudyCardProps) => {
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-[2.5rem] border border-white/5 bg-slate-900 transition-all duration-500 hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/10">
-      {/* ส่วนแสดงภาพตัวอย่างผลงาน:
-          ใช้สัดส่วน 4:3 เพื่อความสวยงามและสบายตาในทุกอุปกรณ์
-      */}
+    <motion.article
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{
+        delay: index * 0.1,
+        duration: 0.5,
+        ease: "easeOut",
+      }}
+      className="group flex flex-col overflow-hidden rounded-[3rem] border border-white/5 bg-slate-950 p-3 transition-all duration-700 hover:border-emerald-500/40 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.2)]"
+    >
+      {/* 1. VISUAL PORTAL: ส่วนแสดงภาพผลงานที่โดดเด่น */}
       <Link
         href={`/case-studies/${slug}`}
-        className="relative aspect-[4/3] w-full overflow-hidden bg-slate-800"
-        aria-label={`ดูรายละเอียดผลงานโปรเจกต์ ${title}`}
+        className="relative aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] bg-slate-900"
       >
         <Image
           src={image || "/images/showcase/placeholder.webp"}
-          alt={`ผลงานเว็บไซต์ ${title}`}
+          alt={`AEMDEVWEB Business Case: ${title}`}
           fill
-          className="object-cover opacity-60 transition-all duration-1000 group-hover:scale-110 group-hover:opacity-100"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          loading="lazy"
+          className="object-cover opacity-50 transition-all duration-[1.5s] ease-out group-hover:scale-110 group-hover:opacity-100"
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
 
-        {/* Industry Tag: ระบุประเภทธุรกิจแบบโปร่งแสงดูพรีเมียม */}
         <div className="absolute top-6 left-6 z-10">
-          <div className="flex items-center gap-2 rounded-full bg-slate-950/40 px-4 py-1.5 text-[10px] font-black tracking-widest text-emerald-400 uppercase italic ring-1 ring-white/10 backdrop-blur-xl">
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+          <div className="flex items-center gap-2 rounded-full bg-slate-950/60 px-5 py-2 text-[9px] font-black tracking-[0.2em] text-emerald-400 uppercase italic ring-1 ring-white/10 backdrop-blur-xl">
+            <Sparkles size={10} className="animate-pulse" />
             {industry}
           </div>
         </div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </Link>
 
-      {/* ส่วนข้อมูลเนื้อหาและผลลัพธ์ */}
+      {/* 2. DATA HUB: ข้อมูลเชิงกลยุทธ์และผลลัพธ์ทางธุรกิจ */}
       <div className="flex flex-1 flex-col p-8 lg:p-10">
-        <div className="mb-4 flex items-start justify-between gap-4">
-          <Link href={`/case-studies/${slug}`}>
-            <h3 className="font-heading text-2xl leading-tight font-black tracking-tighter text-white uppercase italic transition-colors group-hover:text-emerald-400">
+        <header className="mb-6 flex items-start justify-between gap-6">
+          <Link href={`/case-studies/${slug}`} className="flex-1">
+            <h3 className="font-heading text-3xl leading-[0.95] font-black tracking-tighter text-white uppercase italic transition-colors group-hover:text-emerald-400">
               {title}
             </h3>
           </Link>
-          <div className="rounded-lg bg-white/5 p-2 text-slate-600 transition-colors group-hover:text-emerald-500">
-            <ExternalLink size={16} />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/5 text-slate-500 transition-all group-hover:rotate-12 group-hover:bg-emerald-500 group-hover:text-slate-950">
+            <ExternalLink size={18} strokeWidth={2.5} />
           </div>
-        </div>
+        </header>
 
-        <p className="font-body mb-8 line-clamp-2 text-sm leading-relaxed font-bold text-slate-400">
+        <p className="font-body mb-10 line-clamp-2 text-base leading-relaxed font-bold text-slate-400 transition-colors group-hover:text-slate-300">
           {description}
         </p>
 
-        {/* ตัวเลขผลลัพธ์ที่วัดผลได้จริง (Business Metrics) */}
-        <div className="mt-auto flex items-end justify-between border-t border-white/5 pt-8">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-slate-500">
-              <BarChart3 size={14} className="text-emerald-500/50" />
-              <span className="text-[9px] font-black tracking-[0.2em] uppercase italic">
-                Project Result
+        <div className="mt-auto flex items-end justify-between border-t border-white/5 pt-10">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="h-1 w-6 rounded-full bg-emerald-500/30" />
+              <span className="font-heading text-[10px] font-black tracking-[0.3em] text-slate-500 uppercase italic">
+                Strategic Growth
               </span>
             </div>
-            <div className="font-heading text-3xl font-black tracking-tighter text-emerald-500 italic">
-              {result || "100% Active"}
+            <div className="font-heading text-4xl font-black tracking-tighter text-emerald-500 italic md:text-5xl">
+              {result || "Performance Optimized"}
             </div>
           </div>
 
-          {/* ปุ่มทางเข้าชมรายละเอียดโปรเจกต์ */}
           <Link
             href={`/case-studies/${slug}`}
-            className="group/btn relative flex h-14 w-14 items-center justify-center overflow-hidden rounded-2xl bg-white/5 text-white transition-all hover:bg-emerald-600 hover:text-slate-950 active:scale-95"
+            className="group/btn relative flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 text-white transition-all hover:bg-emerald-500 hover:text-slate-950 active:scale-90"
+            aria-label={`Explore ${title} business case`}
           >
             <ArrowRight
-              size={22}
+              size={24}
+              strokeWidth={3}
               className="relative z-10 transition-transform group-hover/btn:translate-x-1"
             />
+            <div className="absolute inset-0 z-0 bg-emerald-500 opacity-0 blur-xl transition-opacity group-hover/btn:opacity-30" />
           </Link>
         </div>
       </div>
 
-      {/* แถบสีสถานะงานเมื่อนำเมาส์มาวาง */}
-      <div className="absolute bottom-0 left-0 h-[3px] w-0 bg-emerald-500 transition-all duration-700 group-hover:w-full" />
-    </article>
+      {/* เส้นเน้นความเร็วระดับเสถียรสูงสุด */}
+      <div className="absolute bottom-0 left-0 h-1 w-0 bg-emerald-500 transition-all duration-1000 ease-in-out group-hover:w-full" />
+    </motion.article>
   )
 }

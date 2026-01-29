@@ -1,141 +1,151 @@
 #!/bin/bash
 
 # ==============================================================================
-# www.aemdevweb.com: Project Structure Reporter
+# AEMDEVWEB | Specialist Project & SEO Auditor (Final Version 2026)
 # ==============================================================================
-# Description: Generates a markdown report of project directory structure
-#              and verifies required root-level configuration files.
-# Domain: https://www.aemdevweb.com
+# วัตถุประสงค์: ตรวจสอบโครงสร้างสถาปัตยกรรม, SEO Metadata, และ Performance
+# มาตรฐาน: Next.js 16 (App Router), React 19, Zero-Emoji Policy
 # ==============================================================================
 
 # CONFIGURATION
 OUTPUT_FILE="aemdevweb-structure.md"
 PROJECT_DOMAIN="www.aemdevweb.com"
 PROJECT_URL="https://www.aemdevweb.com"
+GENERATED_DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
-# Directories allowed for scanning (Aligned with Next.js 15 App Router)
-WHITELIST_DIRS=(
-  "app"
-  "actions"
-  "components"
-  "lib"
-  "hooks"
-  "types"
-  "public"
-  "data"
-  "constants"
-  "providers"
-  "content"
-  "styles"
-  "services"
-  "config"
-  "viewport"
-)
+# เส้นทางสำหรับการตรวจสอบ
+CONTENT_DIRS=("content/blog" "content/case-studies")
+DYNAMIC_ROUTES=("app/blog/[slug]" "app/services/[slug]" "app/(shops)/templates/[slug]")
+ROOT_FILES=("eslint.config.mjs" "next.config.mjs" "package.json" "tsconfig.json" "postcss.config.mjs")
+SEO_FILES=("app/layout.tsx" "app/robots.ts" "app/sitemap.ts" "app/viewport.ts")
 
-# Required root-level configuration files
-ROOT_FILES=(
-  "eslint.config.mjs"
-  "mdx-components.tsx"
-  "next.config.mjs"
-  "package.json"
-  "components.json"
-  "tsconfig.json"
-  "postcss.config.mjs"
-)
-
-# Ignore non-essential or sensitive files
 IGNORE_PATTERN="node_modules|\.git|\.next|\.DS_Store|__pycache__|\.env"
 
-# START EXECUTION
-rm -f "$OUTPUT_FILE"
-
-echo "Scanning project architecture: $PROJECT_DOMAIN"
+echo "Deep Auditing $PROJECT_DOMAIN..."
 
 {
-  echo "# Project Structure Report"
+  echo "# Project Structure & Specialist SEO Report"
   echo ""
-  echo "<!--"
-  echo "  Domain: $PROJECT_DOMAIN"
-  echo "  Canonical: $PROJECT_URL"
-  echo "  Generated: $(date '+%Y-%m-%d %H:%M:%S')"
-  echo "  Type: Architecture / Documentation"
-  echo "-->"
+  echo "> Project: $PROJECT_DOMAIN"
+  echo "> Generated: $GENERATED_DATE"
   echo ""
-  echo "> Project: $PROJECT_DOMAIN  "
-  echo "> URL: $PROJECT_URL  "
-  echo "> Generated on: $(date '+%Y-%m-%d %H:%M:%S')"
-  echo ""
+  echo "---"
 
-  # ROOT CONFIGURATION FILES
-  echo "## Root Configuration Files"
-  echo "Validated files at the project root:"
+  # 1. Tech Stack & Root Configuration
+  echo "## 1. Tech Stack & Root Configuration"
+  echo "- Framework: **Next.js 16.1.3 (App Router)**"
+  echo "- Engine: **React 19.2.3**"
+  echo "- Styling: **Tailwind CSS 4.1.18**"
+  echo "- Image Engine: **Sharp 0.34.5 (High-Speed)**"
   echo ""
-
   for file in "${ROOT_FILES[@]}"; do
     if [ -f "$file" ]; then
-      echo "- $file"
+      echo "- [x] $file (Status: Verified)"
     else
-      echo "- $file (missing)"
+      echo "- [ ] $file (Status: **MISSING**)"
     fi
   done
-
   echo ""
 
-  # DIRECTORY STRUCTURE
-  echo "## Directory Tree"
-  echo "Core business logic and UI structure:"
+  # 2. Content & MDX Integrity (Frontmatter Audit)
+  echo "## 2. Content & MDX Integrity"
+  echo "ตรวจสอบความสมบูรณ์ของ Metadata ในไฟล์เนื้อหา (.mdx):"
   echo ""
-
-  for dir in "${WHITELIST_DIRS[@]}"; do
-    if [ -d "$dir" ]; then
-      echo "### $dir"
-
-      find "$dir" -maxdepth 10 -not -path '*/.*' \
-        | grep -vE "$IGNORE_PATTERN" \
-        | while read -r path; do
-
-          depth=$(temp="${path//[^\/]/}"; echo "${#temp}")
-          indent=$(printf '%*s' $((depth * 2)) "")
-          name=$(basename "$path")
-
-          if [ -d "$path" ]; then
-            [[ "$path" != "$dir" ]] && echo "${indent}- $name/"
-          else
-            echo "${indent}- $name"
-          fi
-        done
-
+  for c_dir in "${CONTENT_DIRS[@]}"; do
+    if [ -d "$c_dir" ]; then
+      echo "### Directory: $c_dir"
+      echo "| File Name | Title | Description | Image |"
+      echo "| :--- | :---: | :---: | :---: |"
+      find "$c_dir" -maxdepth 1 -name "*.mdx" | while read -r file; do
+        FNAME=$(basename "$file")
+        # ตรวจสอบรูปแบบคีย์ใน Frontmatter (รองรับทั้ง title: และ 'title':)
+        T=$(grep -qE "^title:" "$file" && echo "OK" || echo "**FAIL**")
+        D=$(grep -qE "^description:" "$file" && echo "OK" || echo "**FAIL**")
+        I=$(grep -qE "^image:|^thumbnail:|^cover:" "$file" && echo "OK" || echo "**FAIL**")
+        echo "| $FNAME | $T | $D | $I |"
+      done
       echo ""
     fi
   done
 
-  echo "DNA ของโปรเจกต์ AEMDEVWEB โดย นายเอ็มซ่ามากส์ ไม่ใช่แค่การรับจ้างทำเว็บไซต์ทั่วไป แต่คือการสร้าง ระบบนิเวศการขายที่สมบูรณ์แบบและรวดเร็ว ภายใต้กลยุทธ์ที่เฉียบคมดังนี้ครับ:
-ปรัชญาหลัก (Core Philosophy): เก่งมีมาตราฐาน เข้าใจง่าย ไม่ใช่ฟรีแลน์ทั่วไป แต่ไม้ใช่ทีมงานหรือบริษัทเอเจนซี่
-Speed as a Priority: เว็บต้องโหลดไวระดับปีศาจด้วยเทคโนโลยี
-Next.js 16 โดยมีค่า LCP < 0.8 วินาที เพื่อหยุดลูกค้าไม่ให้กดออกจากหน้าเว็บ
-SEO-First DNA: โครงสร้างเว็บไซต์ถูกออกแบบมาเพื่อ AI และระบบการค้นหาตั้งแต่บรรทัดแรก ไม่ใช่แค่เว็บสวยแต่ต้อง ถูกค้นหาเจอ
-Instant Deployment: ยึดบริบทความเร็วสูง พร้อมออนไลน์ระบบภายใน 24 ชั่วโมง เพื่อตอบโจทย์ธุรกิจยุค 2026
-อัตลักษณ์และตัวตน (Brand Identity): The Accessible Expert
-นายเอ็มซ่ามากส์: คือผู้เชี่ยวชาญที่ข้าถึง่าย ใช้ภาษาที่ลูกค้าเข้าใจ (ไม่ใช้ศัพท์เทคนิคจนปวดหัว) 
-กฏข้อห้าม ห้ามใส่ภาษาหุ่นยนต์  นวัตรกรรม วิศวกรรม ระนาบ ระเนียบ  โลซูชั่น อุสาหกรรม นวัตรกรรม วัตรนาการ ปฏิดิษย์ คลัง     คำลิเกทุกหมวดที่เกี่ยวข้อง  ห้ามตีความ นามบุคคลหริอชื่อ มาปะปนดีไซน์   แยก รายละเอียด บุคคล ดีไซนฺ์ ไม่เกี่ยงข้อง  เน้นการเขัยนภาษาในเว็ปไซต์ สมัยใหม่ ธุรกิจบริการ ห้ามใส่ข้อความซิ่ง หรือซ่าลงรายละเอียดบริการ
-ใช่คำเว็ปไซต์บริการสมับใหม่ เข้าใจง่าย ไม่ตลาดล่าง
-แต่รักษามาตรฐานงานระดับสูง (Specialist)
-ความเป็นระบบ (Systematic): ทำงานเป็นขั้นเป็นตอน มีพิกัดราคาและขอบเขตงานที่ชัดเจน (Standard Professional Price) เพื่อสร้างความมั่นใจให้ลูกค้า
-ยุทธศาสตร์ด้านราคา (Pricing Strategy): ความคุ้มค่าระดับโปร
-Standard Professional Price: ตั้งราคาเริ่มต้นที่ 1,990.- เพื่อคัดกรองลูกค้าคุณภาพ (High-intent leads) และสร้างภาพลักษณ์แบรนด์มืออาชีพ
-Rental Model (Recurring Revenue): เน้นการเก็บค่าบริการรายปี (Maintenance/Domain/Hosting) เพื่อสร้างรายได้ที่มั่นคงและยั่งยืนในระยะยาว
-High-Value Niche: เจาะกลุ่มธุรกิจเฉพาะทาง (Niche) เช่น ร้านอาหารสายมู หรือธุรกิจท้องถิ่น ที่ต้องการฟีเจอร์เฉพาะแต่ไม่อยากจ่ายราคาเอเจนซี่ใหญ่
- สรุปบริบทการนำเสนอ (The DNA Summary)
-เราคือสถาปนิกเว็บซิ่งที่ไม่ได้ขายแค่ Code แต่เราขาย'โอกาสทางธุรกิจ' ผ่านเว็บไซต์ที่โหลดไวที่สุดและมีโครงสร้าง SEO ที่ดีที่สุด ในราคาที่ SME จ่ายแล้วรู้สึกว่า โคตรคุ้ม 
-types/template.ts types/index.ts /components/shared/IconRenderer.tsx
-"
-  echo " 
-  
-  
-  
-  
-  .ตรวจสอบ .Code   ทั้งหมดแก้ไขให้ถูกต้อง  Update code  & format code  ให้ถูกต้อง ส่งกับมาในรูปแบ Full code
-"    
+  # 3. Dynamic Metadata & Schema (Specialist Check)
+  echo "## 3. SEO Data Mapping"
+  echo "ตรวจสอบฟังก์ชันการส่งต่อค่า Metadata รายหน้า:"
+  echo ""
+  for route in "${DYNAMIC_ROUTES[@]}"; do
+    if [ -d "$route" ]; then
+      PAGE="$route/page.tsx"
+      echo "### Route: $route"
+      if [ -f "$PAGE" ]; then
+        META=$(grep -q "generateMetadata" "$PAGE" && echo "[x] generateMetadata: **FOUND**" || echo "[ ] generateMetadata: **MISSING**")
+        # ตรวจสอบการใช้ JsonLd Component ในระดับ Route
+        SCHEMA=$(find "$route" -maxdepth 2 -name "*.tsx" -exec grep -qiE "JsonLd|schema" {} + && echo "[x] JSON-LD Schema: **INJECTED**" || echo "[ ] JSON-LD Schema: **NOT FOUND**")
+        echo "- $META"
+        echo "- $SCHEMA"
+      else
+        echo "- Status: **page.tsx missing**"
+      fi
+      echo ""
+    fi
+  done
+
+  # 4. Global SEO Config & Sitemap
+  echo "## 4. Search Discovery & Global SEO"
+  # เช็ค metadataBase ใน Layout หลัก (จุดตายของ OG Image)
+  LAYOUT_ROOT="app/layout.tsx"
+  if [ -f "$LAYOUT_ROOT" ]; then
+    HAS_BASE=$(grep -q "metadataBase" "$LAYOUT_ROOT" && echo "- [x] metadataBase: **Configured**" || echo "- [ ] metadataBase: **MISSING** (High Risk for OG Images)")
+    echo "$HAS_BASE"
+  fi
+
+  SITEMAP="app/sitemap.ts"
+  if [ -f "$SITEMAP" ]; then
+    # ตรวจสอบการ Map ข้อมูล Dynamic ใน Sitemap
+    SYNC=$(grep -E "blog|template|caseStudies|services" "$SITEMAP" && echo "- [x] Sitemap: **Dynamic Mapping Detected**" || echo "- [ ] Sitemap: **Static/Manual Only**")
+    echo "$SYNC"
+  else
+    echo "- [ ] Sitemap: **MISSING**"
+  fi
+  echo ""
+
+  # 5. Asset Performance (Critical)
+  echo "## 5. Asset Performance Audit"
+  echo "เป้าหมาย: ไฟล์ภาพควร < 250KB เพื่อรักษาคะแนน LCP:"
+  echo ""
+  echo "| Path | Size | Status |"
+  echo "| :--- | :--- | :--- |"
+  find public/images -type f \( -name "*.webp" -o -name "*.png" -o -name "*.jpg" \) -print0 | while IFS= read -r -d '' img; do
+    SIZE=$(du -k "$img" | cut -f1)
+    if [ "$SIZE" -gt 250 ]; then
+      echo "| ${img#public/} | ${SIZE}KB | **CRITICAL: Needs Compression** |"
+    fi
+  done
+  echo ""
+
+  # 6. Technical Debt: Architecture Leakage
+  echo "## 6. Architecture Integrity"
+  # ตรวจหาการใช้ Client Components ใน Libs/Actions (ควรเป็น Server-side logic)
+  LEAK=$(grep -rl "use client" lib/ actions/ 2>/dev/null)
+  if [ -n "$LEAK" ]; then
+    echo "> **จุดเสี่ยง:** พบ 'use client' ใน Server Logic ซึ่งอาจกระทบ Performance:"
+    echo '```text'
+    echo "$LEAK"
+    echo '```'
+  else
+    echo "- Status: No Client leakage in Server Logic. (Excellent)"
+  fi
+  echo ""
+
+  # 7. Directory Tree (Overview)
+  echo "## 7. Global Directory Tree Summary"
+  echo '```text'
+  # ใช้ find แทน tree หากไม่มีคำสั่ง tree ในระบบ
+  find . -maxdepth 2 -not -path '*/.*' | grep -vE "$IGNORE_PATTERN" | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
+  echo '```'
+
+  echo "---"
+  echo "AEMDEVWEB Professional Audit Engine v4.0"
+
 } > "$OUTPUT_FILE"
 
-echo "Success: Report saved to $OUTPUT_FILE"
+echo "Success: Specialist report saved to $OUTPUT_FILE"

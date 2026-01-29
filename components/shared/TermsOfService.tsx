@@ -12,14 +12,14 @@ import {
   Clock,
   Copyright,
   Server,
+  ArrowRight,
+  MessageCircle,
 } from "lucide-react"
-// [FIX]: ลบพิกัด cn ออกเนื่องจากไม่ได้ใช้งานตามที่ระบบแจ้ง Warning
 import { siteConfig } from "@/constants/site-config"
 
-/* -------------------------------------------------------------------------- */
-/* ข้อมูลข้อตกลงและเงื่อนไข (Terms Data Structure)                               */
-/* -------------------------------------------------------------------------- */
-
+/**
+ * [TYPE DEFINITIONS]
+ */
 interface TermSection {
   id: string
   title: string
@@ -27,25 +27,28 @@ interface TermSection {
   content: React.ReactNode
 }
 
+/**
+ * ข้อมูลข้อตกลงและเงื่อนไข (Strategic Terms Data)
+ */
 const TERMS_DATA: TermSection[] = [
   {
     id: "definitions",
     title: "1. นิยามและขอบเขตการใช้งาน",
     icon: FileText,
     content: (
-      <div className="space-y-2">
+      <div className="space-y-3">
         <p>
-          <strong>"ผู้ให้บริการ"</strong> หมายถึง {siteConfig.company.fullName}{" "}
-          (AEMDEVWEB) หรือ นายเอ็มซ่ามากส์
+          <strong>ผู้ให้บริการ</strong> หมายถึง {siteConfig.company.fullName}{" "}
+          (AEMDEVWEB)
         </p>
         <p>
-          <strong>"ผู้ใช้บริการ"</strong> หมายถึง
-          บุคคลหรือนิติบุคคลที่ตกลงจ้างวางระบบเว็บไซต์หรือเช่าใช้พิกัดระบบ
+          <strong>ผู้ใช้บริการ</strong> หมายถึง
+          บุคคลหรือนิติบุคคลที่ตกลงจ้างงานพัฒนาระบบเว็บไซต์หรือใช้บริการระบบ
         </p>
         <p>
-          <strong>"เว็บไซต์สำเร็จรูป"</strong> หมายถึง
-          บริการที่ผู้ให้บริการจัดเตรียมพิกัดมาตรฐานไว้แล้ว
-          โดยผู้ใช้บริการไม่สามารถขอแก้ไขโครงสร้างหลักได้
+          <strong>เว็บไซต์สำเร็จรูป</strong> หมายถึง
+          บริการที่ผู้ให้บริการจัดเตรียมรูปแบบมาตรฐานไว้ให้
+          โดยเน้นประสิทธิภาพการใช้งานที่ผู้ใช้บริการไม่สามารถแก้ไขโครงสร้างหลักได้เอง
         </p>
       </div>
     ),
@@ -55,22 +58,22 @@ const TERMS_DATA: TermSection[] = [
     title: "2. ขอบเขตการให้บริการ (Service Scope)",
     icon: Scale,
     content: (
-      <div className="space-y-3">
+      <div className="space-y-4">
         <p>
-          2.1 <strong>บริการเว็บไซต์สำเร็จรูป:</strong>{" "}
-          ผู้ให้บริการจะดำเนินการติดตั้งระบบตามพิกัดที่ลูกค้าเลือก
-          และลงข้อมูลระบบงานตามที่ได้รับมอบหมายภายใน 24-48
-          ชั่วโมงหลังจากได้รับพิกัดข้อมูลครบถ้วน
+          2.1 <strong>บริการติดตั้ง:</strong>{" "}
+          ดำเนินการตั้งค่าระบบตามรูปแบบที่ลูกค้าเลือก
+          และจัดเตรียมข้อมูลเบื้องต้นภายใน 24 ถึง 48
+          ชั่วโมงหลังจากได้รับข้อมูลครบถ้วน
         </p>
         <p>
-          2.2 <strong>ข้อจำกัดการแก้ไข:</strong> สำหรับพิกัดราคาเริ่มต้น
-          ผู้ใช้บริการสามารถแก้ไขข้อมูลได้ตามจำนวนที่กำหนด
-          แต่ไม่สามารถขอให้เขียนโค้ดเพิ่มหรือปรับโครงสร้างระบบงานเองได้
+          2.2 <strong>ข้อจำกัดการปรับปรุง:</strong> สำหรับแพ็กเกจเริ่มต้น
+          สามารถแก้ไขข้อมูลได้ตามจำนวนที่ระบุในสัญญา
+          แต่ไม่รวมการเขียนโปรแกรมเพิ่มเติมหรือปรับเปลี่ยนโครงสร้างตรรกะของระบบหลัก
         </p>
         <p>
-          2.3 <strong>การส่งมอบงาน:</strong> ถือว่าสิ้นสุดพิกัดการติดตั้ง
-          เมื่อระบบออนไลน์และเข้าถึงได้จริง
-          และการแก้ไขหลังจากนั้นอาจมีค่าใช้จ่ายตามขอบเขตงานที่เพิ่มขึ้น
+          2.3 <strong>การส่งมอบงาน:</strong>{" "}
+          ถือว่าการส่งมอบเสร็จสิ้นเมื่อระบบออนไลน์และเข้าถึงได้จริง
+          การร้องขอแก้ไขเพิ่มเติมหลังจากนี้อาจมีค่าใช้จ่ายตามขอบเขตงานจริง
         </p>
       </div>
     ),
@@ -80,20 +83,21 @@ const TERMS_DATA: TermSection[] = [
     title: "3. การชำระเงินและต่ออายุ (Payment & Renewal)",
     icon: CreditCard,
     content: (
-      <div className="space-y-3">
+      <div className="space-y-4">
         <p>
-          3.1 <strong>ค่าบริการติดตั้ง:</strong>{" "}
-          เป็นการชำระครั้งเดียวเพื่อวางระบบงาน ไม่สามารถขอคืนเงินได้
-          หากผู้ให้บริการได้เริ่มพิกัดงานไปแล้ว
+          3.1 <strong>ค่าธรรมเนียมการเริ่มต้น:</strong>{" "}
+          เป็นการชำระเพื่อเริ่มแผนงานระบบ
+          ไม่สามารถขอคืนเงินได้เมื่อผู้ให้บริการเริ่มกระบวนการตั้งค่าระบบแล้ว
         </p>
         <p>
           3.2 <strong>ค่าบริการรายปี:</strong>{" "}
-          พิกัดเช่าใช้ระบบจำเป็นต้องชำระค่าบริการรายปี เพื่อครอบคลุมค่า Server,
-          ชื่อโดเมน และการดูแลระบบพื้นฐาน
+          การใช้บริการระบบจำเป็นต้องมีการชำระค่าบริการรายปี เพื่อครอบคลุมค่าดูแล
+          Server ระบบความปลอดภัย SSL และการบำรุงรักษาพื้นฐาน
         </p>
         <p>
-          3.3 <strong>การระงับบริการ:</strong> หากผู้ใช้บริการค้างชำระเกิน 7 วัน
-          ระบบจะระงับการแสดงผลชั่วคราว และพิกัดข้อมูลอาจถูกลบถาวรหากเกิน 30 วัน
+          3.3 <strong>การระงับบริการ:</strong> หากมียอดค้างชำระเกิน 7 วัน
+          ระบบจะระงับการแสดงผลชั่วคราว
+          และข้อมูลจะถูกนำออกจากระบบถาวรหากเกินกำหนด 30 วัน
         </p>
       </div>
     ),
@@ -103,16 +107,17 @@ const TERMS_DATA: TermSection[] = [
     title: "4. ลิขสิทธิ์และความเป็นเจ้าของ",
     icon: Copyright,
     content: (
-      <div className="space-y-3">
+      <div className="space-y-4">
         <p>
-          4.1 <strong>ข้อมูลลูกค้า:</strong> พิกัดรูปภาพ, โลโก้,
-          และเนื้อหาที่ผู้ใช้บริการส่งมา
-          ถือเป็นลิขสิทธิ์ของผู้ใช้บริการแต่เพียงผู้เดียว
+          4.1 <strong>ข้อมูลของผู้ใช้บริการ:</strong> เนื้อหา รูปภาพ
+          และเครื่องหมายการค้าที่ท่านจัดส่งมา
+          ถือเป็นลิขสิทธิ์ของท่านแต่เพียงผู้เดียว
         </p>
         <p>
-          4.2 <strong>ซอร์สโค้ด:</strong> โค้ดต้นฉบับ, ระบบหลังบ้าน,
-          และโครงสร้างระบบงาน ถือเป็นทรัพย์สินทางปัญญาของ{" "}
-          {siteConfig.company.name} ผู้ใช้บริการได้รับสิทธิ์ในการเช่าใช้เท่านั้น
+          4.2 <strong>โครงสร้างระบบหลัก:</strong>{" "}
+          รหัสต้นฉบับและระบบบริหารจัดการถือเป็นทรัพย์สินทางปัญญาของ{" "}
+          {siteConfig.company.name}{" "}
+          โดยผู้ใช้บริการได้รับสิทธิ์ในการใช้งานตามระยะเวลาที่กำหนดเท่านั้น
         </p>
       </div>
     ),
@@ -122,17 +127,20 @@ const TERMS_DATA: TermSection[] = [
     title: "5. ข้อจำกัดความรับผิดชอบ",
     icon: AlertTriangle,
     content: (
-      <div className="space-y-3">
-        <div className="text-slate-600">
-          ผู้ให้บริการจะไม่รับผิดชอบต่อความเสียหายที่เกิดจาก:
-          <ul className="mt-4 list-inside list-disc space-y-2 pl-2">
-            <li>การหยุดทำงานของ Server จากผู้ให้บริการภายนอก</li>
-            <li>
-              เหตุสุดวิสัยหรือการถูกโจมตีทางไซเบอร์ที่อยู่นอกเหนือการควบคุม
-            </li>
-            <li>ยอดขายหรือกำไรทางธุรกิจ (เราวางระบบงาน ไม่ได้การันตียอดขาย)</li>
-          </ul>
-        </div>
+      <div className="space-y-4">
+        <p>
+          ผู้ให้บริการขอสงวนสิทธิ์ในการรับผิดชอบต่อความเสียหายในกรณีต่อไปนี้:
+        </p>
+        <ul className="list-inside list-disc space-y-2 pl-4">
+          <li>การหยุดทำงานของระบบ Cloud จากผู้ให้บริการภายนอก</li>
+          <li>
+            เหตุสุดวิสัยหรือการคุกคามทางไซเบอร์ที่อยู่เหนือการควบคุมของระบบพื้นฐาน
+          </li>
+          <li>
+            ผลลัพธ์ทางธุรกิจหรือผลกำไร (เราดูแลมาตรฐานระบบ
+            แต่ไม่ได้การันตียอดขายเชิงธุรกิจ)
+          </li>
+        </ul>
       </div>
     ),
   },
@@ -142,105 +150,112 @@ const TERMS_DATA: TermSection[] = [
     icon: Server,
     content: (
       <p>
-        ผู้ใช้บริการสามารถยกเลิกพิกัดบริการได้ตลอดเวลาโดยแจ้งล่วงหน้า 30 วัน
-        โดยผู้ให้บริการขอสงวนสิทธิ์ในการไม่คืนค่าบริการรายปีในส่วนที่เหลือ
+        ผู้ใช้บริการสามารถแจ้งความประสงค์ยกเลิกการรับบริการได้ตลอดเวลาโดยแจ้งล่วงหน้า
+        30 วัน
+        ทั้งนี้ผู้ให้บริการขอสงวนสิทธิ์ในการไม่คืนค่าบริการในส่วนที่เหลือของรอบปีนั้นๆ
       </p>
     ),
   },
 ]
 
-/* -------------------------------------------------------------------------- */
-/* Component Implementation                                                   */
-/* -------------------------------------------------------------------------- */
-
 const TermsOfService = () => {
-  const lastUpdated = "27 มกราคม 2026"
+  const lastUpdated = "29 มกราคม 2026"
 
   return (
-    <section className="bg-slate-50 py-20 antialiased" id="terms-of-service">
+    <section className="relative py-20 antialiased" id="terms-of-service">
       <div className="container mx-auto px-6">
         <div className="mx-auto max-w-4xl">
           {/* Header Section */}
-          <div className="mb-12 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-slate-200 px-4 py-1.5 text-[11px] font-bold tracking-widest text-slate-600 uppercase">
-              <ShieldCheck size={14} className="text-emerald-600" />
-              Legal Documents
+          <div className="mb-20 text-center">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2 text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase italic shadow-sm">
+              <ShieldCheck size={14} className="text-emerald-500" />
+              Standard Legal Framework
             </div>
-            <h1 className="font-heading mb-6 text-3xl font-black text-slate-900 italic md:text-5xl">
-              เงื่อนไขและ
-              <span className="text-emerald-600"> ข้อตกลงการใช้บริการ</span>
+            <h1 className="font-heading mb-8 text-4xl font-black tracking-tighter text-slate-950 uppercase italic md:text-6xl">
+              Terms and <span className="text-emerald-500">Conditions.</span>
             </h1>
-            <p className="font-body text-lg font-medium text-slate-500">
-              เพื่อให้การวางระบบงานร่วมกันเป็นมืออาชีพ
-              โปรดทำความเข้าใจรายละเอียดข้อตกลงเบื้องต้นครับ
+            <p className="font-body mx-auto max-w-2xl text-lg leading-relaxed font-bold text-slate-500">
+              เพื่อให้การร่วมงานเป็นไปอย่างมืออาชีพและชัดเจนที่สุด
+              <br className="hidden md:block" />
+              โปรดศึกษาข้อตกลงและเงื่อนไขการใช้บริการของ AEMDEVWEB
             </p>
-            <div className="mt-6 flex items-center justify-center gap-2 text-xs font-bold text-slate-400">
-              <Clock size={14} />
-              อัปเดตล่าสุด: {lastUpdated}
+            <div className="mt-8 flex items-center justify-center gap-2 text-[10px] font-black tracking-widest text-slate-400 uppercase italic">
+              <Clock size={12} />
+              Last Updated: {lastUpdated}
             </div>
           </div>
 
-          {/* Agreement Card */}
-          <div className="overflow-hidden rounded-[3rem] border border-slate-100 bg-white shadow-2xl shadow-slate-200/50">
-            {/* Intro Box */}
-            <div className="bg-slate-950 p-8 text-white md:p-12">
-              <h3 className="mb-4 text-xl font-black text-emerald-400 uppercase italic">
-                สรุปพิกัดงานจากนายเอ็ม
-              </h3>
-              <p className="font-body text-sm leading-relaxed text-slate-300">
-                &quot;เราเน้นพิกัดการทำงานที่{" "}
-                <strong>รวดเร็ว โปร่งใส และชัดเจน</strong>{" "}
-                เพื่อให้ท่านมั่นใจว่าจะได้รับระบบงานที่มีคุณภาพในเวลาที่กำหนด
-                โดยเน้นระบบสำเร็จรูปเพื่อให้คุ้มค่ากับงบประมาณที่สุดครับ&quot;
+          {/* Main Agreement Card */}
+          <div className="overflow-hidden rounded-[3.5rem] border border-slate-100 bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)]">
+            {/* Value Statement Box */}
+            <div className="bg-slate-950 p-10 text-white md:p-16">
+              <div className="mb-6 flex items-center gap-3 text-emerald-400">
+                <div className="h-px w-8 bg-emerald-500/50" />
+                <span className="font-heading text-xs font-black tracking-widest uppercase italic">
+                  Service Commitment
+                </span>
+              </div>
+              <p className="font-body text-xl leading-tight font-black italic md:text-3xl">
+                เรามุ่งเน้นการส่งมอบงานที่
+                <span className="text-emerald-400 underline decoration-white/20 underline-offset-8">
+                  รวดเร็วและโปร่งใส
+                </span>
+                เพื่อให้ธุรกิจของคุณได้รับระบบงานที่มีคุณภาพสูงสุด
               </p>
             </div>
 
             {/* Content Sections */}
-            <div className="divide-y divide-slate-100">
+            <div className="divide-y divide-slate-50">
               {TERMS_DATA.map((term) => (
                 <div
                   key={term.id}
-                  className="p-8 transition-colors hover:bg-slate-50/50 md:p-12"
+                  className="group p-10 transition-all duration-500 hover:bg-slate-50/50 md:p-14"
                 >
-                  <div className="mb-6 flex items-center gap-5">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 shadow-sm">
-                      <term.icon size={24} strokeWidth={1.5} />
+                  <div className="mb-8 flex items-center gap-6">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 ring-1 ring-slate-100 transition-all duration-500 group-hover:bg-emerald-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-emerald-500/20">
+                      <term.icon size={26} strokeWidth={1.5} />
                     </div>
-                    <h3 className="font-heading text-xl font-black text-slate-950 uppercase italic">
+                    <h3 className="font-heading text-2xl font-black tracking-tight text-slate-950 uppercase italic">
                       {term.title}
                     </h3>
                   </div>
-                  <div className="font-body pl-0 text-base leading-loose text-slate-600 md:pl-[4.25rem]">
+                  <div className="font-body pl-0 text-base leading-loose font-bold text-slate-600 md:pl-20">
                     {term.content}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Footer Contact */}
-            <div className="bg-slate-50 p-8 text-center md:p-12">
-              <p className="mb-8 text-sm font-bold text-slate-500">
-                หากมีข้อสงสัยเกี่ยวกับพิกัดเงื่อนไข สามารถสอบถามได้ตลอดครับ
-              </p>
+            {/* Footer Contact Section */}
+            <div className="bg-slate-50 p-10 text-center md:p-20">
+              <div className="mb-10 space-y-2">
+                <p className="font-body text-lg font-black text-slate-950">
+                  ต้องการสอบถามรายละเอียดเพิ่มเติมเกี่ยวกับเงื่อนไขบริการ
+                </p>
+                <p className="font-body text-sm font-bold text-slate-400">
+                  ยินดีให้คำปรึกษาเพื่อให้เกิดความเข้าใจที่ตรงกันอย่างสมบูรณ์ครับ
+                </p>
+              </div>
+
               <a
-                href={siteConfig.contact.line}
+                href={siteConfig.links.line}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center gap-3 rounded-2xl bg-emerald-600 px-10 py-4 text-sm font-black text-white shadow-xl shadow-emerald-600/20 transition-all hover:scale-105 hover:bg-slate-950 active:scale-95"
+                className="group inline-flex items-center gap-4 rounded-2xl bg-[#00B900] px-10 py-6 text-[11px] font-black tracking-[0.3em] text-white uppercase italic shadow-xl shadow-emerald-500/20 transition-all hover:bg-slate-950 active:scale-95"
               >
-                ทักหานายเอ็มโดยตรง
-                <Server
+                <MessageCircle size={18} fill="currentColor" />
+                ปรึกษาผู้เชี่ยวชาญผ่าน LINE
+                <ArrowRight
                   size={18}
-                  className="transition-transform group-hover:rotate-12"
+                  className="transition-transform group-hover:translate-x-1"
                 />
               </a>
             </div>
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="font-heading text-[10px] font-black tracking-widest text-slate-300 uppercase italic">
-              &copy; {new Date().getFullYear()} {siteConfig.company.fullName} •
-              Standard Protocol 2026
+          <div className="mt-16 text-center">
+            <p className="font-heading text-[9px] font-black tracking-[0.5em] text-slate-300 uppercase italic">
+              AEMDEVWEB SYSTEM FRAMEWORK 2026
             </p>
           </div>
         </div>

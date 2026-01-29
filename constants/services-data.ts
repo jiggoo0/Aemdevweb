@@ -1,42 +1,13 @@
 /** @format */
 
-import { ServiceIconName } from "@/types"
+import { ServiceIconName, ServiceItem, ThemeColor } from "@/types"
 
-/* -------------------------------------------------------------------------- */
-/* 1. นิยามรูปแบบข้อมูล (Data Schema)                                              */
-/* -------------------------------------------------------------------------- */
-
-export type ServiceCategory =
-  | "ReadyMade" // เว็บสำเร็จรูป
-  | "Business" // ธุรกิจรายย่อยและเฉพาะทาง
-  | "Digital" // บริการระบบงานต่อเนื่อง
-
-export type ThemeColor =
-  | "slate"
-  | "emerald"
-  | "blue"
-  | "indigo"
-  | "amber"
-  | "rose"
-  | "orange"
-  | "violet"
-
-export interface ServiceItem {
-  id: string
-  title: string
-  slug: string
-  description: string
-  thumbnail: string // พิกัดภาพตัวอย่างบริการ
-  price: string // สำหรับแสดงผล เช่น "1,990.-"
-  priceValue: number // สำหรับคำนวณ
-  renewalPrice?: string
-  features: string[]
-  promotion?: string
-  themeColor: ThemeColor
-  category: ServiceCategory
-  highlight?: boolean
-  iconName: ServiceIconName
-}
+/**
+ * AEMDEVWEB | คลังข้อมูลระบบงานและบริการ (Strategic Service Node 2026)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: High-Performance Infrastructure & Specialist Growth
+ * วางระบบและควบคุมสมรรถนะโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
+ */
 
 export interface CategoryInfo {
   slug: string
@@ -46,232 +17,188 @@ export interface CategoryInfo {
   iconName: ServiceIconName
 }
 
-/* -------------------------------------------------------------------------- */
-/* 2. หมวดหมู่บริการ - จัดกลุ่มตามพิกัดงาน 2026                                   */
-/* -------------------------------------------------------------------------- */
-
+/* 1. หมวดหมู่ระบบงาน (Strategic Category Mapping) */
 export const categoriesData: CategoryInfo[] = [
   {
     slug: "ready-made",
-    name: "Web Ready: เว็บสำเร็จรูป",
+    name: "Strategic Ready-to-Use",
     themeColor: "orange",
-    description: "เลือกแบบที่ใช่ ลงข้อมูลพร้อมขาย ออนไลน์ได้ภายใน 24 ชม.",
+    description:
+      "พิกัดเว็บสำเร็จรูปที่ นายเอ็มซ่ามากส์ จูนมาเพื่อความรวดเร็วและผลลัพธ์สูงสุด",
     iconName: "Zap",
   },
   {
     slug: "business-niche",
-    name: "Business & Niche: ธุรกิจเฉพาะทาง",
+    name: "Enterprise & Niche Solutions",
     themeColor: "blue",
-    description: "เน้นระบบงานที่ตอบโจทย์ SME และบริการในพื้นที่",
+    description: "สถาปัตยกรรมเว็บไซต์ที่ตอบโจทย์โครงสร้างธุรกิจเฉพาะทางอย่างแม่นยำ",
     iconName: "Building2",
   },
   {
     slug: "digital-recurring",
-    name: "Digital & Service: บริการต่อเนื่อง",
+    name: "Performance & Growth Care",
     themeColor: "violet",
-    description: "การวางระบบ SEO และการดูแลพิกัดเว็บระยะยาว",
-    iconName: "TrendingUp",
+    description:
+      "การจัดการเสถียรภาพพิกัดระบบและผลักดันอันดับ Google อย่างยั่งยืน",
+    iconName: "ShieldCheck",
   },
 ]
 
-/* -------------------------------------------------------------------------- */
-/* 3. รายละเอียด 10 บริการหลัก (AEMDEVWEB Core Services)                          */
-/* -------------------------------------------------------------------------- */
-
+/* 2. รายละเอียดบริการหลัก (Core Professional Services by Nai Aem) */
 export const servicesData: ServiceItem[] = [
-  // --- [กลุ่มที่ 1]: เว็บไซต์สำเร็จรูป (Ready-Made) ---
+  // --- [หมวดที่ 1]: Strategic Ready-to-Use ---
   {
     id: "svc-salepage",
-    title: "1-Hour SalePage Pro",
+    title: "High-Performance Sale Page",
     slug: "salepage_single",
     category: "ReadyMade",
     themeColor: "orange",
     description:
-      "Landing Page หน้าเดียว วางพิกัดมาเพื่อสายยิงแอดโดยเฉพาะ โหลดไวหยุดลูกค้าได้ทันที",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "1,990.-",
+      "หน้าขายของพิกัดแรงที่ นายเอ็มซ่ามากส์ จูนมาเพื่อกระตุ้นการตัดสินใจซื้อในทันที",
+    thumbnail: "/images/templates/webrental.webp",
+    price: "1,990",
     priceValue: 1990,
-    renewalPrice: "990.- / ปี",
+    renewalPrice: "990 ต่อปี",
     features: [
-      "ระบบโหลดไวระดับปีศาจ ลูกค้าไม่กดหนี",
-      "วางปุ่มทักไลน์ในพิกัดที่กดง่ายที่สุด",
-      "รองรับการฝังพิกัด Facebook/TikTok Pixel",
-      "ใช้ชื่อโดเมนระบบได้ทันทีไม่ต้องรอ",
+      "ระบบโหลดไวเป็นพิเศษ LCP ต่ำกว่า 0.8 วินาที จูนโดยนายเอ็ม",
+      "การจัดวาง Interface เชิงจิตวิทยาเพื่อพิกัดยอดขายสูงสุด",
+      "ติดตั้งพิกัดติดตามผล (Pixel/CAPI) และวิเคราะห์ข้อมูลครบวงจร",
+      "ระบบจัดการเนื้อหาอัจฉริยะที่ นายเอ็มซ่ามากส์ วางโครงสร้างไว้ให้",
     ],
     highlight: true,
     iconName: "Zap",
+    relatedTemplateSlugs: ["salepage_single", "facebookadsexpert", "webrental"],
   },
   {
     id: "svc-express",
-    title: "Express Web (เว็บนามบัตร)",
+    title: "Business Identity Page",
     slug: "corporate_lite",
     category: "ReadyMade",
     themeColor: "blue",
     description:
-      "วางพิกัดข้อมูลธุรกิจแบบหน้าเดียว ครบถ้วน เนี้ยบ และดูน่าเชื่อถือ",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "2,900.-",
+      "สะท้อนความเนี้ยบขององค์กรผ่านหน้าเว็บที่ นายเอ็มซ่ามากส์ ออกแบบมาอย่างประณีต",
+    thumbnail: "/images/templates/cleaningpro.webp",
+    price: "2,900",
     priceValue: 2900,
-    renewalPrice: "1,500.- / ปี",
+    renewalPrice: "1,500 ต่อปี",
     features: [
-      "มีพิกัดข้อมูลครบทั้ง บริการ และส่วนติดต่อ",
-      "ออนไลน์ระบบได้ภายใน 24 ชม. หลังส่งงาน",
-      "วางโครงสร้างพื้นฐานรองรับงาน SEO",
+      "รวบรวมพิกัดบริการและภาพลักษณ์แบรนด์อย่างเป็นระบบ",
+      "Responsive Connectivity สมบูรณ์แบบทุกพิกัดหน้าจอ",
+      "โครงสร้างที่รองรับมาตรฐานการค้นหาของ Google ระดับสากล",
     ],
-    promotion: "ฟรีพิกัดโดเมน .com ในปีแรก",
+    promotion: "สิทธิพิเศษโดเมนเนมระดับสากลจูนโดย AEMDEVWEB",
     iconName: "Clock",
+    relatedTemplateSlugs: ["corporate_lite", "starter_landing", "personal_bio"],
   },
   {
-    id: "svc-budget",
-    title: "Budget Saver (เว็บเริ่มต้น)",
+    id: "svc-starter",
+    title: "Starter Business Hub",
     slug: "starter_landing",
     category: "ReadyMade",
     themeColor: "slate",
     description:
-      "พิกัดราคาประหยัดสำหรับผู้เริ่มต้น ลงข้อมูลพื้นฐานครบพร้อมใช้งาน",
+      "จุดเริ่มต้นความสำเร็จในงบประมาณที่เนี้ยบและคุ้มค่าที่สุดสไตล์นายเอ็ม",
     thumbnail: "/images/templates/project-01.webp",
-    price: "990.-",
+    price: "990",
     priceValue: 990,
-    renewalPrice: "590.- / ปี",
+    renewalPrice: "590 ต่อปี",
     features: [
-      "ราคาเข้าถึงง่ายที่สุดสำหรับร้านเล็กๆ",
-      "เลือกพิกัดเทมเพลตมาตรฐานแล้วลงงานได้เลย",
-      "ใช้งานผ่านชื่อโดเมนของระบบ",
+      "โซลูชันที่คุ้มค่าสำหรับการเปิดพิกัดธุรกิจใหม่",
+      "จัดวางข้อมูลพื้นฐานครบถ้วนพร้อมออนไลน์ใน 24 ชม.",
+      "เสถียรภาพการเข้าใช้งานผ่านระบบโครงสร้างความเร็วสูง",
     ],
     iconName: "Wallet",
+    relatedTemplateSlugs: [
+      "starter_landing",
+      "salepage_single",
+      "maintenance_page",
+    ],
   },
 
-  // --- [กลุ่มที่ 2]: เว็บไซต์ธุรกิจ & เฉพาะทาง (Business & Niche) ---
+  // --- [หมวดที่ 2]: Enterprise & Niche Solutions ---
   {
     id: "svc-biz-pro",
-    title: "Biz Fast Track (SME Pro)",
+    title: "Enterprise Scalability Pack",
     slug: "corporate_pro",
     category: "Business",
     themeColor: "indigo",
     description:
-      "วางระบบเว็บธุรกิจ 3-5 หน้า เพิ่มพิกัดความน่าเชื่อถือและรองรับข้อมูลจำนวนมาก",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "4,900.-",
+      "สถาปัตยกรรมที่ นายเอ็มซ่ามากส์ วางระบบเพื่อรองรับการขยายตัวและข้อมูลมหาศาล",
+    thumbnail: "/images/templates/shopmasterpro.webp",
+    price: "4,900",
     priceValue: 4900,
-    renewalPrice: "2,500.- / ปี",
+    renewalPrice: "2,500 ต่อปี",
     features: [
-      "พิกัดหน้า Home, About, Service, Portfolio, Contact",
-      "วางระบบบทความเพื่อดึงพิกัดลูกค้าจาก Google",
-      "ระบบงานรองรับการขยายตัวได้ดี",
+      "การจัดลำดับเนื้อหาและหมวดหมู่บริการที่เนี้ยบและชัดเจน",
+      "วางระบบเพื่อให้เกิดแรงดึงดูดลูกค้าแบบ Organic Authority",
+      "โครงสร้างที่ยืดหยุ่นต่อการเพิ่มพิกัดฟังก์ชันในอนาคต",
     ],
     highlight: true,
     iconName: "Building2",
+    relatedTemplateSlugs: ["corporate_pro", "shopmasterpro", "hotelresort"],
   },
   {
-    id: "svc-local",
-    title: "Local Biz (ธุรกิจท้องถิ่น)",
-    slug: "local_service",
+    id: "svc-hotel",
+    title: "Hospitality Showcase Solutions",
+    slug: "hotelresort",
     category: "Business",
-    themeColor: "emerald",
+    themeColor: "blue",
     description:
-      "เน้นงาน Local SEO สำหรับธุรกิจที่มีหน้าร้าน คลินิก หรืออู่ซ่อมรถ",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "3,900.-",
-    priceValue: 3900,
-    renewalPrice: "1,500.- / ปี",
+      "ยกระดับที่พักด้วยดีไซน์ที่เน้นการจองพิกัดตรงอย่างมีประสิทธิภาพโดยนายเอ็ม",
+    thumbnail: "/images/templates/hotelresort/hotelresort.webp",
+    price: "5,900",
+    priceValue: 5900,
+    renewalPrice: "2,500 ต่อปี",
     features: [
-      "วางคีย์เวิร์ดเน้นพื้นที่เพื่อให้คนในพื้นที่ค้นหาเจอ",
-      "ปุ่มโทรและพิกัดแผนที่ชัดเจนที่สุด",
-      "รองรับการใช้งานผ่านมือถือแบบกริบๆ",
+      "ระบบนำเสนอรายละเอียดพิกัดห้องพักแบบ High-Definition",
+      "แบบฟอร์มรับข้อมูลจองที่ นายเอ็มซ่ามากส์ จูนมาเพื่อความง่าย",
+      "ภาพลักษณ์พรีเมียมที่สร้างความได้เปรียบทางการแข่งขัน",
     ],
-    iconName: "MapPin",
-  },
-  {
-    id: "svc-cafe",
-    title: "Cafe & Menu (ร้านอาหาร)",
-    slug: "restaurant_cafe",
-    category: "Business",
-    themeColor: "amber",
-    description: "ระบบโชว์เมนูออนไลน์ที่เจ้าของร้านจัดการพิกัดราคาได้เอง",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "3,500.-",
-    priceValue: 3500,
-    renewalPrice: "1,500.- / ปี",
-    features: [
-      "แก้พิกัดราคาและเมนูได้เองผ่านระบบจัดการง่ายๆ",
-      "เน้นภาพลักษณ์เมนูให้น่าสนใจ",
-      "พร้อมพิกัด QR Code สำหรับตั้งที่ร้าน",
-    ],
-    iconName: "Coffee",
-  },
-  {
-    id: "svc-event",
-    title: "Event & Magic (อีเวนต์/สายมู)",
-    slug: "event_magic",
-    category: "Business",
-    themeColor: "rose",
-    description:
-      "ระบบการ์ดเชิญงานแต่ง หรือพิกัดจองคิวออนไลน์ พร้อมตัวนับเวลาถอยหลัง",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "1,500.-",
-    priceValue: 1500,
-    features: [
-      "มีพิกัดธีมงานแต่งและงานมงคลให้เลือก",
-      "ระบบตอบรับและฟอร์มเก็บพิกัดข้อมูลลูกค้า",
-      "ตั้งพิกัดนับถอยหลังสู่วันสำคัญได้",
-    ],
-    promotion: "จบงานแล้วต่ออายุพิกัดละ 500.- ต่อปี",
-    iconName: "Heart",
+    iconName: "LayoutTemplate",
+    relatedTemplateSlugs: ["hotelresort", "corporate_pro", "restaurant_cafe"],
   },
 
-  // --- [กลุ่มที่ 3]: บริการ Digital & Recurring (Digital) ---
+  // --- [หมวดที่ 3]: Performance & Growth Care ---
   {
-    id: "svc-profile",
-    title: "My Profile (นามบัตรดิจิทัล)",
-    slug: "personal_bio",
-    category: "Digital",
-    themeColor: "violet",
-    description:
-      "หน้าเว็บรวมลิงก์ (Link-in-bio) พรีเมียม สร้างตัวตนให้น่าพึ่งพา",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "990.- / ปี",
-    priceValue: 990,
-    features: [
-      "รวมพิกัดโซเชียลทั้งหมดไว้ในลิงก์เดียว",
-      "ดีไซน์เนี้ยบ สร้างพิกัดความน่าเชื่อถือส่วนบุคคล",
-      "ช่วยให้ชื่อของคุณถูกค้นหาเจอในพิกัด Google",
-    ],
-    iconName: "UserCircle",
-  },
-  {
-    id: "svc-seo",
-    title: "SEO Ranking (รายเดือน)",
+    id: "svc-seo-agency",
+    title: "SEO Ranking Performance",
     slug: "seo_agency",
     category: "Digital",
     themeColor: "emerald",
-    description:
-      "วางระบบดันอันดับหน้าแรก ปรับโครงสร้างเว็บให้กริบตามมาตรฐาน 2026",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "12,900.- / เดือน",
+    description: "ปฏิบัติการดันพิกัดธุรกิจสู่หน้าแรก Google โดย นายเอ็มซ่ามากส์",
+    thumbnail: "/images/blog/seo-google-love.webp",
+    price: "12,900 ต่อเดือน",
     priceValue: 12900,
     features: [
-      "ตรวจสอบพิกัดโครงสร้างระบบงานอย่างละเอียด",
-      "วางแผนเนื้อหาคุณภาพพิกัดละ 4 บทต่อเดือน",
-      "สร้างความน่าเชื่อถือจากภายนอกเข้าสู่พิกัดเว็บ",
+      "วิเคราะห์และตรวจสอบพิกัดระบบรายเดือนโดย Specialist",
+      "กลยุทธ์การสร้าง Content คุณภาพเพื่อดึงดูดกลุ่มเป้าหมาย",
+      "สร้าง Authority ผ่านการเชื่อมโยงข้อมูลมาตรฐานสากล",
     ],
-    promotion: "วางระบบขั้นต่ำ 3 เดือน เพื่อพิกัดผลลัพธ์ที่ชัดเจน",
+    promotion: "จูนระบบต่อเนื่องเพื่อผลลัพธ์ที่ยั่งยืนที่สุด",
     iconName: "TrendingUp",
+    relatedTemplateSlugs: ["seo_agency", "corporate_pro", "local_service"],
   },
   {
     id: "svc-maintenance",
-    title: "Web Care (ดูแล/ซ่อม)",
+    title: "System Stability & Security",
     slug: "maintenance_page",
     category: "Digital",
     themeColor: "slate",
-    description: "รับจัดการพิกัดเว็บพัง แก้ระบบล่ม หรือกำจัดสิ่งแปลกปลอม",
-    thumbnail: "/images/templates/project-01.webp",
-    price: "เริ่มต้น 2,500.-",
+    description:
+      "การดูแลเสถียรภาพโดย นายเอ็มซ่ามากส์ เพื่อความปลอดภัยสูงสุดของระบบงาน",
+    thumbnail: "/images/showcase/service.webp",
+    price: "เริ่มต้น 2,500",
     priceValue: 2500,
     features: [
-      "จัดการพิกัดฉุกเฉิน กู้คืนระบบงานด่วน",
-      "ย้ายพิกัดโฮสต์มายังระบบที่ซิ่งกว่าเดิม",
-      "ตรวจสอบพิกัดความปลอดภัยของระบบงาน",
+      "ระบบสำรองและกู้คืนพิกัดข้อมูลฉุกเฉินระดับมืออาชีพ",
+      "ย้ายพิกัดข้อมูลไปยัง Infrastructure ที่เสถียรและซิ่งกว่าเดิม",
+      "ตรวจสอบและปิดจุดเสี่ยงด้านความปลอดภัยโดยนายเอ็ม",
     ],
     iconName: "ShieldCheck",
+    relatedTemplateSlugs: [
+      "maintenance_page",
+      "starter_landing",
+      "personal_bio",
+    ],
   },
 ]

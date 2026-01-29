@@ -3,32 +3,32 @@
 "use client"
 
 import React from "react"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { TemplateCategory } from "@/types/template"
 
 interface TemplateFilterProps {
-  /** หมวดหมู่ที่กำลังแสดงผลอยู่ตอนนี้ */
-  activeCategory: TemplateCategory | string
-
-  /** ฟังก์ชันสำหรับเปลี่ยนกลุ่มข้อมูลที่ต้องการดู */
-  onCategoryChange: (value: string) => void
+  activeCategory: TemplateCategory | "all"
+  onCategoryChange: (value: TemplateCategory | "all") => void
 }
 
-/** * รายการหมวดหมู่ธุรกิจที่ระบบรองรับ
- * เน้นกลุ่มธุรกิจ SME และกลุ่มที่ต้องการทำยอดขายออนไลน์โดยเฉพาะ
+/** * [STRATEGIC DATA]: รายการหมวดหมู่โซลูชันมาตรฐานสากล
+ * ออกแบบมาเพื่อให้สอดคล้องกับโครงสร้าง TemplateCategory ในระบบหลัก
  */
-const categories = [
-  { label: "ALL STRUCTURES", value: "all" },
-  { label: "HOTEL & RESORT", value: "hotel" },
-  { label: "SERVICE BUSINESS", value: "service" },
-  { label: "MARKETING ENGINE", value: "marketing" },
-  { label: "E-COMMERCE", value: "ecommerce" },
+const categories: { label: string; value: TemplateCategory | "all" }[] = [
+  { label: "ALL SOLUTIONS", value: "all" },
+  { label: "READY MADE", value: "ReadyMade" },
+  { label: "BUSINESS STRATEGY", value: "Business" },
+  { label: "HOTEL & RESORT", value: "Hotel" },
+  { label: "SERVICE SOLUTIONS", value: "Service" },
+  { label: "ENTERPRISE ASSETS", value: "Digital" },
 ]
 
 /**
- * TemplateFilter - ระบบเลือกประเภทเว็บไซต์
- * แนวคิด: เน้นความเรียบง่าย กดง่าย และเปลี่ยนข้อมูลได้ทันที
- * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * TemplateFilter - ระบบเลือกหมวดหมู่โซลูชัน (Strategic Navigation Interface)
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: การจัดกลุ่มข้อมูลเพื่อให้เข้าถึงโซลูชันที่ต้องการได้อย่างแม่นยำ
+ * มาตรฐาน: High-Response Interaction และความสมดุลเชิงสถาปัตยกรรม
  */
 export const TemplateFilter: React.FC<TemplateFilterProps> = ({
   activeCategory,
@@ -36,8 +36,8 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
 }) => {
   return (
     <nav
-      aria-label="ตัวเลือกประเภทธุรกิจสำหรับ SME"
-      className="flex flex-wrap items-center justify-center gap-3 py-12 md:gap-4"
+      aria-label="ตัวเลือกประเภทโซลูชันธุรกิจ"
+      className="relative flex flex-wrap items-center justify-center gap-2 py-10 md:gap-4 lg:py-16"
     >
       {categories.map((cat) => {
         const isActive = activeCategory === cat.value
@@ -46,29 +46,42 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
           <button
             key={cat.value}
             onClick={() => onCategoryChange(cat.value)}
-            // เพิ่มความเนี้ยบด้าน Accessibility ให้ระบบอ่านหน้าจอเข้าใจ
-            aria-pressed={isActive}
             className={cn(
-              "relative overflow-hidden rounded-full px-8 py-4 text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-500",
-              "ring-offset-2 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none",
-              isActive
-                ? "scale-105 bg-slate-950 text-white shadow-xl ring-2 shadow-slate-200 ring-slate-950"
-                : "border border-slate-100 bg-white text-slate-400 hover:border-emerald-500/30 hover:bg-slate-50 hover:text-slate-950 active:scale-95"
+              "group relative flex h-11 items-center justify-center overflow-hidden rounded-2xl px-6 transition-all duration-300 md:h-12 md:px-8",
+              "focus:ring-2 focus:ring-emerald-500/20 focus:outline-none",
+              isActive ? "text-white" : "text-slate-400 hover:text-slate-950"
             )}
           >
-            {/* ข้อความชื่อหมวดหมู่ */}
-            <span className="relative z-10 italic">{cat.label}</span>
-
-            {/* เอฟเฟกต์แสงจางๆ ด้านหลังเมื่อปุ่มถูกเลือก */}
+            {/* [INTERACTIVE LAYER]: ตัวระบุสถานะปัจจุบัน (Shared Layout ID) */}
             {isActive && (
-              <div
-                className="absolute inset-0 z-0 bg-gradient-to-tr from-emerald-500/20 to-transparent opacity-50"
-                aria-hidden="true"
+              <motion.div
+                layoutId="active-pill"
+                className="absolute inset-0 z-0 bg-slate-950 shadow-lg shadow-slate-900/10"
+                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
               />
+            )}
+
+            {/* Label Node: ตัวอักษรแสดงหมวดหมู่ที่เน้นความหนักแน่นและทันสมัย */}
+            <span className="font-heading relative z-10 text-[9px] font-black tracking-[0.3em] uppercase italic transition-colors md:text-[10px]">
+              {cat.label}
+            </span>
+
+            {/* Visual Indicator: จุดนำสายตาเพื่อสร้างประสบการณ์การใช้งานที่ลื่นไหล */}
+            {!isActive && (
+              <span className="absolute bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
             )}
           </button>
         )
       })}
+
+      {/* Decorative Infrastructure: องค์ประกอบเสริมเพื่อสร้างความสมดุลเชิงระนาบ */}
+      <div className="absolute -bottom-2 hidden items-center gap-3 opacity-10 md:flex">
+        <div className="h-px w-12 bg-slate-900" />
+        <span className="font-heading text-[7px] font-black tracking-[0.6em] text-slate-900 uppercase italic">
+          Strategic Selector
+        </span>
+        <div className="h-px w-12 bg-slate-900" />
+      </div>
     </nav>
   )
 }

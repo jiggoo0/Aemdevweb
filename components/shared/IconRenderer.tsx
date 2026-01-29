@@ -4,7 +4,7 @@
 
 import React from "react"
 import {
-  // [COMMON ICONS]: รายการไอคอนที่วางพิกัดไว้ใช้งานบ่อย
+  // [COMMON ICONS]: รายการไอคอนมาตรฐานสำหรับการใช้งานร่วมกับแผนงานระบบ
   Zap,
   Clock,
   Wallet,
@@ -23,18 +23,17 @@ import {
   CheckCircle2,
   LayoutTemplate,
   CircleHelp,
-  // [TYPES]: พิกัดข้อมูลเพื่อให้ระบบแม่นยำ
+  // [TYPES]: โครงสร้างข้อมูลเพื่อความแม่นยำของระบบ
   type LucideProps,
   type LucideIcon,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-// ตรวจสอบพิกัดไฟล์ types ให้มี ServiceIconName รองรับชื่อไอคอนเหล่านี้
 import { ServiceIconName } from "@/types"
 
 /**
- * [ICON REGISTRY]: การผูกชื่อ (String) เข้ากับตัวไอคอนจริง
- * แผนงานนี้ช่วยให้ระบบส่งเพียงชื่อไอคอนมาจากหลังบ้าน เพื่อลดภาระการโหลดหน้าเว็บ
+ * [ICON REGISTRY]: การผูกค่าชื่อไอคอน (String) เข้ากับ Component จริง
+ * แนวทางนี้ช่วยเพิ่มประสิทธิภาพในการดึงข้อมูลจากหลังบ้านเพื่อแสดงผลทันที
  */
 const ICON_MAP: Record<string, LucideIcon> = {
   Zap,
@@ -57,18 +56,18 @@ const ICON_MAP: Record<string, LucideIcon> = {
 }
 
 interface IconRendererProps extends LucideProps {
-  /** ชื่อพิกัดไอคอนที่ดึงมาจากข้อมูลระบบงาน */
+  /** ชื่อไอคอนที่ระบุตามที่ลงทะเบียนไว้ในระบบ */
   name?: ServiceIconName | string
-  /** คลาสสำหรับจัดการพิกัดสไตล์ด้วย Tailwind */
+  /** คลาสสำหรับจัดการสไตล์ด้วย Tailwind CSS */
   className?: string
-  /** ขนาดพิกัดของไอคอน (ค่าเริ่มต้น 24px) */
+  /** ขนาดของไอคอน (ค่าเริ่มต้น 24px) */
   size?: number
 }
 
 /**
- * IconRenderer - ระบบแสดงผลไอคอนอัตโนมัติจากชื่อ
- * ออกแบบมาเพื่อการวางระบบที่รวดเร็ว (Instant Render) และเนี้ยบตามมาตรฐานปี 2026
- * วางโครงสร้างโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * IconRenderer - ระบบแสดงผลไอคอนอัตโนมัติ (Strategic Icon Engine)
+ * -------------------------------------------------------------------------
+ * บริหารจัดการข้อมูลโดย: AEMDEVWEB (นายเอ็มซ่ามากส์)
  */
 export default function IconRenderer({
   name,
@@ -76,10 +75,10 @@ export default function IconRenderer({
   size = 24,
   ...props
 }: IconRendererProps) {
-  // 1. ตรวจสอบพิกัดชื่อ: ค้นหาไอคอนในโครงสร้างทะเบียนที่มีอยู่
+  // 1. ค้นหาไอคอนจากทะเบียนที่ลงทะเบียนไว้
   const IconComponent = name ? ICON_MAP[name] : null
 
-  // 2. พิกัดสำรอง: แสดงเครื่องหมายคำถามแบบจางๆ เมื่อหาพิกัดไอคอนไม่เจอ
+  // 2. ระบบสำรอง: กรณีไม่พบชื่อไอคอนในทะเบียน จะแสดงไอคอนช่วยเหลือแบบจาง
   if (!IconComponent) {
     return (
       <CircleHelp
@@ -90,7 +89,7 @@ export default function IconRenderer({
     )
   }
 
-  // 3. วางระบบแสดงผล: ส่งไอคอนออกไปพร้อมพิกัดการตอบสนองที่ลื่นไหล
+  // 3. แสดงผลไอคอนพร้อมระบบการเปลี่ยนผ่านที่ลื่นไหล
   return (
     <IconComponent
       size={size}

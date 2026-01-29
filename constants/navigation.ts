@@ -3,7 +3,8 @@
 import { siteConfig } from "./site-config"
 
 /**
- * [TYPE DEFINITIONS]: กำหนดรูปแบบข้อมูลเมนูนำทาง
+ * [TYPE DEFINITIONS]
+ * โครงสร้างข้อมูลสำหรับระบบเมนูนำทาง
  */
 export interface NavItem {
   name: string
@@ -25,42 +26,43 @@ export interface NavigationConfig {
 }
 
 /**
- * Navigation Strategy: เน้นความรวดเร็วและเข้าถึงข้อมูลได้ทันที
- * ดูแลโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * Navigation Strategy 2026: "Direct & Conversion-Focused"
+ * ออกแบบเส้นทางผู้ใช้งานเพื่อให้เข้าถึงโซลูชันและข้อมูลสำคัญได้อย่างรวดเร็ว
+ * เน้นการลดขั้นตอนการเข้าถึงข้อมูลเพื่อประสิทธิภาพสูงสุด
  */
 export const navigation: NavigationConfig = {
-  /* -------------------------- เมนูหลัก (Navbar) ---------------------------- */
+  /* -------------------------- เมนูหลัก (Main Navbar) ---------------------------- */
   main: [
     {
       name: "หน้าแรก",
       href: "/",
-      description: "จุดเริ่มต้นการยกระดับธุรกิจด้วยเว็บไซต์มาตรฐานใหม่",
+      description: "ภาพรวมระบบและจุดเด่นของบริการเพื่อการเติบโตของธุรกิจ",
     },
     {
       name: "บริการ",
       href: "/services",
-      description: "เลือกแพ็กเกจทำเว็บไซต์ที่ตอบโจทย์ธุรกิจ SME",
+      description: "รายละเอียดแผนการลงทุนและสเปกการทำงานระดับพรีเมียม",
     },
     {
       name: "เทมเพลต",
       href: "/templates",
-      badge: "Ready",
-      description: "เลือกแบบเว็บไซต์สวยๆ ที่พร้อมใช้งานได้ทันที",
+      badge: "New",
+      description: "คลังรูปแบบเว็บไซต์ที่ผ่านการเพิ่มประสิทธิภาพพร้อมใช้งาน",
     },
     {
       name: "ผลงาน",
       href: "/case-studies",
-      description: "ดูตัวอย่างธุรกิจที่ประสบความสำเร็จจากการทำเว็บกับเรา",
+      description: "กรณีศึกษาความสำเร็จและตัวอย่างเว็บไซต์มาตรฐานสากล",
     },
     {
       name: "บทความ",
       href: "/blog",
-      description: "อัปเดตความรู้ SEO และเทคนิคการตลาดออนไลน์ปี 2026",
+      description: "คลังความรู้ด้านกลยุทธ์ SEO และเทคโนโลยีเว็บไซต์ยุคใหม่",
     },
     {
       name: "ติดต่อเรา",
       href: "/contact",
-      description: "คุยรายละเอียดโปรเจกต์กับนายเอ็มซ่ามากส์โดยตรง",
+      description: "ช่องทางการติดต่อเพื่อปรึกษาผู้เชี่ยวชาญโดยตรง",
     },
   ],
 
@@ -68,62 +70,63 @@ export const navigation: NavigationConfig = {
   footer: {
     services: [
       {
-        name: "เว็บหน้าเดียว (SalePage)",
-        href: "/services/starter-landing",
-        badge: "Hot",
-        description: "เน้นปิดการขาย ยิงแอดแม่น โหลดไว",
+        name: "High-Performance Sale Page",
+        href: "/services/salepage_single",
+        badge: "Popular",
+        description: "เน้นอัตรา Conversion และความเร็วในการโหลดที่เป็นเลิศ",
       },
       {
-        name: "เว็บธุรกิจ SME มาตรฐาน",
-        href: "/services/sme-business",
-        description: "สร้างความน่าเชื่อถือ พร้อมรองรับ SEO เต็มรูปแบบ",
+        name: "Corporate Growth Solution",
+        href: "/services/corporate_pro",
+        description: "ยกระดับความน่าเชื่อถือและภาพลักษณ์องค์กรระดับสากล",
       },
       {
-        name: "เว็บแคตตาล็อกโรงงาน",
-        href: "/services/catalog-industrial",
-        description: "ระบบโชว์สินค้าโรงงาน ค้นหาง่าย รองรับสินค้าเยอะ",
+        name: "Local SEO Strategy",
+        href: "/services/local_service",
+        description: "เข้าถึงกลุ่มเป้าหมายในพื้นที่อย่างแม่นยำผ่านแผนที่",
       },
       {
-        name: "บริการ SEO รายเดือน",
-        href: "/services/seo-agency",
-        description: "ดันอันดับเว็บไซต์ให้ติดหน้าแรก Google อย่างยั่งยืน",
+        name: "Ranking Performance Care",
+        href: "/services/seo_agency",
+        description: "การจัดการอันดับและเสถียรภาพของระบบในระยะยาว",
       },
     ],
 
     company: [
       {
-        name: "รู้จักนายเอ็มซ่ามากส์",
+        name: "เกี่ยวกับ AEMDEVWEB",
         href: "/about",
       },
       {
-        name: "ตัวอย่างผลงานจริง",
+        name: "พอร์ตโฟลิโอและผลงาน",
         href: "/case-studies",
       },
       {
-        name: "กรณีศึกษา Unlink-TH",
-        href: "/blog/unlink-th-case-study",
-        badge: "Top",
+        name: "กรณีศึกษาความสำเร็จ Unlink-TH",
+        href: "/case-studies/unlink-reputation-management-success",
+        badge: "Case Study",
       },
       {
         name: "ร่วมงานกับเรา",
-        href: "/careers",
+        href: "#careers",
         disabled: true,
       },
     ],
 
     support: [
       {
-        name: "คุยผ่าน LINE (ตอบไว)",
-        href: siteConfig.contact.line || "https://lin.ee/6lgJox0",
+        name: "ปรึกษาผ่านช่องทาง LINE",
+        href: siteConfig.links.line || "https://lin.ee/6lgJox0",
         external: true,
       },
       {
-        name: "ประเมินราคาเบื้องต้น",
-        href: "/services#pricing-estimator",
+        name: "รายละเอียดราคาและข้อเสนอ",
+        href: "/services#pricing",
       },
       {
-        name: "แจ้งปัญหาการใช้งาน",
-        href: "/contact",
+        name: "ศูนย์การสนับสนุนทางเทคนิค",
+        href: siteConfig.links.line,
+        external: true,
       },
     ],
 
@@ -133,7 +136,7 @@ export const navigation: NavigationConfig = {
         href: "/privacy",
       },
       {
-        name: "ข้อตกลงการใช้บริการ",
+        name: "เงื่อนไขและข้อตกลงการใช้บริการ",
         href: "/terms",
       },
     ],
@@ -141,22 +144,24 @@ export const navigation: NavigationConfig = {
 }
 
 /* -------------------------------------------------------------------------- */
-/* การส่งออกข้อมูล (Exports)                                                    */
+/* Exports & Keywords Strategy                                                */
 /* -------------------------------------------------------------------------- */
 
 export const mainNav = navigation.main
 export const footerNavigation = navigation.footer
 
-/** * [SEO KEYWORDS]: คำค้นหาหลักสำหรับระบบ (Keywords 2026)
- * ปรับให้ตรงกับกลุ่มเป้าหมายที่ต้องการ "ทำเว็บด่วน" และ "ติดหน้าแรก"
+/**
+ * [SEO KEYWORDS 2026]
+ * ชุดคำค้นหาหลักที่เน้นกลุ่มเป้าหมายคุณภาพสูง
+ * มุ่งเน้นการดึงดูดลูกค้าที่ให้ความสำคัญกับมาตรฐานและผลลัพธ์เชิงธุรกิจ
  */
 export const siteKeywords: string[] = [
   "AEMDEVWEB",
+  "บริการพัฒนาเว็บไซต์ SEO",
+  "ออกแบบเว็บไซต์ธุรกิจระดับพรีเมียม",
+  "ระบบเว็บไซต์ Next.js ประสิทธิภาพสูง",
+  "High-Performance Sale Page",
+  "กลยุทธ์ Technical SEO",
+  "รูปแบบเว็บไซต์มาตรฐานสากล",
   "นายเอ็มซ่ามากส์",
-  "รับทำเว็บไซต์ด่วน",
-  "เว็บไซต์สำเร็จรูป",
-  "รับทำ SEO สายขาว",
-  "Landing Page SME",
-  "ทำเว็บติดหน้าแรก Google",
-  "สอน SEO 2026",
 ]

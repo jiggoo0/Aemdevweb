@@ -4,15 +4,14 @@ import React, { Suspense } from "react"
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 
-// [CRITICAL PATH]: โหลดทันทีเพื่อให้หน้าเว็บแสดงผลไวที่สุด (Above the Fold)
+// [CRITICAL PATH]: โหลดทันทีเพื่อประสิทธิภาพการแสดงผลสูงสุด (Above the Fold)
 import Hero from "@/components/shared/Hero"
 import { ImpactStats } from "@/components/sales-engine/ImpactStats"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { JsonLd } from "@/components/seo/JsonLd"
 import SectionSkeleton from "@/components/shared/SectionSkeleton"
 
-// [DYNAMIC LAYERS]: โหลดเมื่อจำเป็น (Lazy Loading) เพื่อลดขนาดไฟล์เริ่มต้น
-// ช่วยให้เว็บโหลดไวขึ้นบนมือถือ และรองรับพฤติกรรมการเลื่อนดูข้อมูล
+// [DYNAMIC LAYERS]: โหลดเมื่อมีการเรียกใช้งานเพื่อลดขนาดไฟล์เริ่มต้น (Performance Optimized)
 const WorkProcess = dynamic(
   () =>
     import("@/components/sales-engine/WorkProcess").then(
@@ -22,7 +21,7 @@ const WorkProcess = dynamic(
 )
 
 const PriceEstimator = dynamic(
-  () => import("@/components/sales-engine/PriceEstimator"), // Default Export
+  () => import("@/components/sales-engine/PriceEstimator"),
   { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> }
 )
 
@@ -37,7 +36,7 @@ const TemplateListSection = dynamic(
 
 const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
 
-// ดึงข้อมูลจากระบบ
+// เชื่อมโยงข้อมูลระบบ
 import { siteConfig } from "@/constants/site-config"
 import { servicesData } from "@/constants/services-data"
 import { getAllCaseStudies } from "@/lib/case-studies"
@@ -45,10 +44,10 @@ import { getBlogPostsMetadata } from "@/lib/blog"
 
 /**
  * [SEO STRATEGY]: ข้อมูล Metadata สำหรับปี 2026
- * เน้นคำที่ดึงดูดใจและตรงกลุ่มเป้าหมาย (Search Intent)
+ * มุ่งเน้นความน่าเชื่อถือและประสิทธิภาพเชิงเทคนิคระดับสากล
  */
 export const metadata: Metadata = {
-  title: `${siteConfig.project.title} | เว็บไซต์สำเร็จรูปและงานระบบคุณภาพสูง`,
+  title: `${siteConfig.project.title} | โซลูชันพัฒนาเว็บไซต์และ Technical SEO ประสิทธิภาพสูง`,
   description: siteConfig.project.description,
   alternates: { canonical: siteConfig.project.url },
   openGraph: {
@@ -62,8 +61,8 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   /**
-   * [SERVER DATA]: ดึงข้อมูลเตรียมไว้ที่ฝั่ง Server
-   * เพื่อความเร็วในการส่งข้อมูลไปหน้าบ้าน (Zero Client-Side Fetch)
+   * [SERVER DATA]: ดึงข้อมูลจากฝั่ง Server
+   * เพื่อความรวดเร็วและรองรับมาตรฐานการค้นหา 100 เปอร์เซ็นต์
    */
   const [allCaseStudies, latestPosts] = await Promise.all([
     getAllCaseStudies(),
@@ -76,7 +75,7 @@ export default async function HomePage() {
 
   return (
     <main className="relative min-h-screen bg-white antialiased selection:bg-emerald-500/10">
-      {/* 1. Structured Data: บอก Google ว่าเราคือตัวจริงเรื่อง Web Service */}
+      {/* Structured Data: ข้อมูลระบุตัวตนธุรกิจมาตรฐานสากล */}
       <JsonLd
         type="WebSite"
         data={{
@@ -86,15 +85,15 @@ export default async function HomePage() {
         }}
       />
 
-      {/* [LAYER 1]: Hero Section - ส่วนต้อนรับที่เน้นความเร็วและความเชื่อมั่น */}
+      {/* Hero Section: ส่วนนำเสนอความรวดเร็วและเสถียรภาพ */}
       <Hero />
 
-      {/* [LAYER 2]: ตัวเลขยืนยัน - สถิติความสำเร็จที่จับต้องได้ */}
+      {/* สถิติความสำเร็จ: บทพิสูจน์ผลลัพธ์เชิงตัวเลขที่ชัดเจน */}
       <div className="relative z-10 border-b border-slate-50 bg-white">
         <ImpactStats />
       </div>
 
-      {/* [LAYER 3]: บริการหลัก - ทางเลือกที่ใช่สำหรับธุรกิจคุณ */}
+      {/* บริการหลัก: โซลูชันที่ออกแบบมาเพื่อการเติบโตของธุรกิจอย่างยั่งยืน */}
       <section id="services" className="relative py-24 lg:py-40">
         <div className="container mx-auto px-6">
           <div className="mb-20 max-w-3xl border-l-8 border-emerald-500 pl-8 md:pl-16">
@@ -103,8 +102,8 @@ export default async function HomePage() {
               <span className="text-emerald-500">Services.</span>
             </h2>
             <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-500 md:text-2xl">
-              เลือกแพ็กเกจที่เหมาะกับคุณ
-              พร้อมออนไลน์ด้วยระบบที่ออกแบบมาเพื่อการขาย รองรับมาตรฐานใหม่ปี
+              เลือกรูปแบบเว็บไซต์ที่ตอบโจทย์ความต้องการทางธุรกิจ
+              พร้อมออนไลน์ด้วยระบบที่เน้นอัตรา Conversion ภายใต้มาตรฐานสากลปี
               2026
             </p>
           </div>
@@ -117,19 +116,19 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* [DYNAMIC ZONE]: ส่วนที่เน้นการทำงานลื่นไหล (Lazy Loading) */}
+      {/* ส่วนการจัดการระบบที่ลื่นไหล (Lazy Loading Zone) */}
       <Suspense fallback={<SectionSkeleton />}>
-        {/* [LAYER 4]: ขั้นตอนการทำงาน - ชัดเจน ตรงไปตรงมา */}
+        {/* กระบวนการทำงาน: ชัดเจน แม่นยำ และเป็นระบบ */}
         <section className="bg-slate-50 py-12 lg:py-24">
           <div className="container mx-auto px-6">
             <WorkProcess />
           </div>
         </section>
 
-        {/* [LAYER 5]: ประเมินงบประมาณ - โปร่งใส ไม่มีซ่อนเร้น */}
+        {/* ประเมินงบประมาณ: ความโปร่งใสเพื่อการตัดสินใจที่แม่นยำ */}
         <PriceEstimator />
 
-        {/* [LAYER 6]: ผลงานที่ผ่านมา - พิสูจน์ด้วยผลลัพธ์จริงบน Google */}
+        {/* ผลงานที่ผ่านมา: กรณีศึกษาความสำเร็จจากการยกระดับระบบเว็บไซต์ประสิทธิภาพสูง */}
         <section id="cases" className="bg-slate-950 py-24 text-white lg:py-40">
           <div className="container mx-auto px-6">
             <div className="mb-20 max-w-2xl border-l-8 border-emerald-500 pl-8 md:pl-16">
@@ -138,7 +137,7 @@ export default async function HomePage() {
                 <span className="text-emerald-500">Stories.</span>
               </h2>
               <p className="font-body mt-8 text-xl leading-relaxed font-bold text-slate-300 md:text-2xl">
-                ตัวอย่างธุรกิจที่เติบโตจริงจากการวางระบบเว็บที่ถูกต้อง
+                บทพิสูจน์ธุรกิจที่เติบโตจริงจากการวางรากฐานโครงสร้างเว็บไซต์ที่เปี่ยมประสิทธิภาพ
               </p>
             </div>
             <div className="grid gap-12 md:grid-cols-2">
@@ -154,7 +153,7 @@ export default async function HomePage() {
                     typeof item.frontmatter.results?.[0] === "string"
                       ? item.frontmatter.results[0]
                       : item.frontmatter.results?.[0]?.value ||
-                        "Success Optimized"
+                        "Performance Optimized"
                   }
                 />
               ))}
@@ -162,14 +161,14 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* [LAYER 7]: แบบเว็บไซต์ - เลือกดีไซน์ที่ชอบแล้วเริ่มเลย */}
+        {/* รูปแบบเว็บไซต์: คัดเลือกดีไซน์พรีเมียมเพื่อการเริ่มต้นธุรกิจในทันที */}
         <section id="templates" className="bg-white py-24 lg:py-40">
           <div className="container mx-auto px-6">
             <TemplateListSection />
           </div>
         </section>
 
-        {/* [LAYER 8]: คลังความรู้ - เทคนิคและอัปเดตใหม่ๆ */}
+        {/* คลังข้อมูลเชิงลึก: กลยุทธ์และเทคโนโลยีเพื่อก้าวทันโลกดิจิทัล */}
         <section
           id="blog"
           className="border-t border-slate-100 bg-slate-50 py-24 lg:py-40"
@@ -180,7 +179,7 @@ export default async function HomePage() {
                 Knowledge <span className="text-emerald-500">Hub.</span>
               </h2>
               <p className="font-body mt-4 font-bold tracking-widest text-slate-400 uppercase italic">
-                เจาะลึกเทคนิคทำเว็บและการตลาดออนไลน์
+                เจาะลึกเทคโนโลยีเว็บไซต์และกลยุทธ์การเพิ่มขีดความสามารถทางการแข่งขัน
               </p>
             </div>
             <BlogCard posts={featuredPosts} />
@@ -188,7 +187,7 @@ export default async function HomePage() {
         </section>
       </Suspense>
 
-      {/* พื้นหลังลายตาราง (Grid): เพิ่มความเนี้ยบแบบ Minimal */}
+      {/* ลายเส้นโครงสร้างเชิงระบบ: เพิ่มความละเอียดและความเนี้ยบแบบ Minimalist */}
       <div
         className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
         aria-hidden="true"

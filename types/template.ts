@@ -1,31 +1,22 @@
 /** @format */
 
 /* -------------------------------------------------------------------------- */
-/* 1. พิกัดหมวดหมู่ธุรกิจ (Template Category)                                   */
+/* 1. พิกัดหมวดหมู่ระบบงาน (Template Category)                                   */
 /* -------------------------------------------------------------------------- */
 
 export type TemplateCategory =
-  | "hotel"
-  | "Hotel"
-  | "service"
-  | "Service"
-  | "marketing"
-  | "Marketing"
-  | "ecommerce"
-  | "Ecommerce"
-  | "business"
-  | "Business"
-  | "platform"
-  | "Platform"
-  | "rental"
-  | "Rental"
-  | "digital"
   | "Digital"
-  | "readymade"
   | "ReadyMade"
+  | "Business"
+  | "Hotel"
+  | "Service"
+  | "Marketing"
+  | "Ecommerce"
+  | "Platform"
+  | "Rental"
 
 /* -------------------------------------------------------------------------- */
-/* 2. สัญญาข้อมูล SEO (SEO Contract)                                          */
+/* 2. สัญญาข้อมูลการค้นหา (SEO Contract)                                          */
 /* -------------------------------------------------------------------------- */
 
 export interface SEOContract {
@@ -35,7 +26,7 @@ export interface SEOContract {
   ogImage?: string
   canonical?: string
   /**
-   * [FIX]: เปลี่ยนจาก any เป็น unknown เพื่อความปลอดภัยของระบบงาน
+   * ข้อมูลโครงสร้างเพื่อการค้นหาผ่านระบบ AI Search
    */
   structuredData?: Record<string, unknown>
 }
@@ -52,8 +43,19 @@ export interface TemplateMetadata {
   thumbnail: string
   description?: string
   pricePrefix?: string
-  priceValue?: string
+  /**
+   * priceValue: พิกัดราคาตัวเลขสำหรับแผนงานจัดการคำนวณ (Number)
+   */
+  priceValue: number
+  /**
+   * priceLabel: พิกัดราคาสำหรับแสดงผลหน้าเว็บ (เช่น "1,990")
+   */
+  priceLabel: string
   isNew?: boolean
+  /**
+   * isFeatured: พิกัดสำหรับคัดเลือกหน่วยงานขึ้นหน้าแรก
+   */
+  isFeatured?: boolean
 }
 
 /* -------------------------------------------------------------------------- */
@@ -73,7 +75,7 @@ export interface TemplateContent {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. สัญญาข้อมูลรวม (Template Master Data)                                    */
+/* 5. สัญญาข้อมูลรวมระบบ (Template Master Data)                                 */
 /* -------------------------------------------------------------------------- */
 
 export interface TemplateMasterData {

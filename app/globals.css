@@ -1,26 +1,31 @@
 /** @format */
-
 @import "tailwindcss";
 
 @theme {
-  /* [FONTS]: เชื่อมโยงฟอนต์หลักที่ทำให้อ่านง่ายและดูเป็นมืออาชีพ */
-  --font-heading: var(--font-heading), "IBM Plex Sans Thai", sans-serif;
-  --font-body: var(--font-body), "Anuphan", sans-serif;
+  /* [FONTS]: มาตรฐานความชัดเจนเพื่อการเข้าถึงข้อมูลระดับสูงสุด */
+  --font-heading: "IBM Plex Sans Thai", sans-serif;
+  --font-body: "Anuphan", sans-serif;
 
-  /* [COLORS]: ระบบสี OKLCH ที่ให้ความนวลตาและดูแพงแบบปี 2026 */
-  --color-primary: oklch(65% 0.18 160); /* Emerald Za-Maks (สีเขียวซิ่ง) */
+  /* [OKLCH COLOR SYSTEM]: ระบบสีที่แม่นยำและนวลตาที่สุดเพื่อประสบการณ์ผู้ใช้งาน */
+  --color-primary: oklch(
+    65% 0.18 160
+  ); /* Emerald Performance (สีประจำแบรนด์) */
   --color-primary-dark: oklch(45% 0.14 160);
-  --color-accent: oklch(55% 0.18 265); /* Indigo Premium (สีน้ำเงินพรีเมียม) */
+  --color-accent: oklch(
+    55% 0.18 265
+  ); /* Indigo Premium (สีเน้นความเชี่ยวชาญ) */
 
+  --color-slate-950: oklch(15% 0.02 240);
+  --color-slate-500: oklch(55% 0.02 240);
   --color-background: oklch(100% 0 0);
-  --color-foreground: oklch(20% 0.02 240); /* Deep Slate (เทาเข้ม) */
+  --color-foreground: oklch(20% 0.02 240);
 
   --color-surface-subtle: oklch(98% 0.01 240);
-  --color-surface-card: oklch(100% 0 0);
   --color-border: oklch(94% 0.01 240);
 
-  /* [EFFECTS]: ระบบเงาและมิติที่ช่วยให้เว็บดูมีเลเยอร์ */
-  --shadow-aurora: 0 0 30px oklch(65% 0.18 160 / 0.12);
+  /* [DEPTH & LAYERING]: ระบบเงาแบบ Multi-Layer เพื่อสร้างมิติของข้อมูล */
+  --shadow-aurora: 0 0 40px oklch(65% 0.18 160 / 0.15);
+  --shadow-node: 0 30px 60px -12px oklch(15% 0.02 240 / 0.08);
   --shadow-feature: 0 20px 50px -12px oklch(20% 0.02 240 / 0.06);
   --shadow-inner-glow: inset 0 1px 1px oklch(100% 0 0 / 0.1);
 
@@ -28,26 +33,26 @@
   --radius-3xl: 2.5rem;
   --radius-4xl: 4rem;
 
-  /* [ANIMATION]: การเคลื่อนไหวที่ลื่นไหล ไม่กระตุก */
+  /* [PHYSICS]: การเคลื่อนไหวที่มีความนุ่มนวลและทรงพลัง */
   --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-shimmer: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 
   @keyframes float {
     0%,
     100% {
-      transform: translateY(0);
+      transform: translateY(0) rotate(0);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-12px) rotate(1deg);
     }
   }
 
   @keyframes shimmer {
     0% {
-      transform: translateX(-100%);
+      transform: translateX(-100%) skewX(-15deg);
     }
     100% {
-      transform: translateX(100%);
+      transform: translateX(200%) skewX(-15deg);
     }
   }
 }
@@ -64,11 +69,15 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
-    /* [TEXTURE]: เพิ่ม Grain จางๆ เพื่อความพรีเมียมของพื้นผิวหน้าเว็บ */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    @apply font-body bg-white text-slate-950 antialiased;
+    /* [TEXTURE]: ลายเส้นโครงสร้างระบบจางๆ เพื่อเพิ่มมิติและความประณีตของพื้นผิว */
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E"),
+      radial-gradient(oklch(98% 0.01 240) 1px, transparent 0);
+    background-size:
+      auto,
+      40px 40px;
     background-attachment: fixed;
-    position: relative;
   }
 
   h1,
@@ -82,39 +91,39 @@
 }
 
 @layer components {
-  /* คอนเทนเนอร์หลักในสไตล์นายเอ็มซ่ามากส์ */
+  /* คอนเทนเนอร์หลักที่เน้นความสมดุลและความชัดเจน */
   .container-za {
     @apply mx-auto max-w-7xl px-6 lg:px-8;
   }
 
-  /* การไล่เฉดสีตัวอักษรให้ดูซิ่ง */
+  /* การไล่เฉดสีตัวอักษรเพื่อสร้างจุดดึงดูดสายตา */
   .text-gradient {
-    @apply via-primary to-accent bg-gradient-to-br from-slate-900 bg-clip-text text-transparent;
+    @apply via-primary to-accent bg-gradient-to-br from-slate-950 bg-clip-text text-transparent;
   }
 
-  /* การ์ดแบบโปร่งใส (Glassmorphism) */
+  /* Glassmorphism สำหรับองค์ประกอบที่ต้องการความทันสมัยระดับพรีเมียม */
   .glass-card {
-    @apply border-border shadow-feature bg-white/70 ring-1 ring-white/20 backdrop-blur-xl;
+    @apply shadow-feature border border-white/20 bg-white/70 ring-1 ring-black/[0.03] backdrop-blur-2xl;
   }
 
-  /* ปุ่มกดสไตล์ Za-Maks: เท่ ดุดัน และชัดเจน */
+  /* ปุ่มกดที่ตอบสนองฉับไว (High-Response) และสง่างาม */
   .btn-za {
-    @apply font-heading hover:bg-primary relative overflow-hidden rounded-2xl bg-slate-950 px-8 py-4 text-xs font-black tracking-widest text-white uppercase italic transition-all active:scale-95;
+    @apply font-heading hover:bg-primary hover:shadow-aurora relative overflow-hidden rounded-2xl bg-slate-950 px-10 py-5 text-[11px] font-black tracking-[0.3em] text-white uppercase italic transition-all duration-500 active:scale-95;
   }
 
-  /* การ์ดที่มีมิติความลึกและการตอบสนอง */
+  /* การ์ดที่มีมิติความลึกและการตอบสนองต่อการโต้ตอบของผู้ใช้งาน */
   .depth-card {
-    @apply border-border bg-surface-card shadow-feature hover:shadow-aurora rounded-3xl border transition-all duration-500 hover:-translate-y-2;
+    @apply border-border shadow-feature hover:shadow-node rounded-3xl border bg-white transition-all duration-500 hover:-translate-y-2;
   }
 }
 
 @layer utilities {
-  /* แสงวิ่งผ่านสำหรับตอนโหลดข้อมูล */
+  /* ระบบ Shimmer สำหรับการแสดงสถานะโหลดข้อมูลที่มีความลื่นไหล */
   .animate-shimmer {
-    animation: shimmer 2s linear infinite;
+    animation: shimmer 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
-  /* แถบเลื่อน (Scrollbar) ที่สะอาดตา ไม่รบกวนดีไซน์ */
+  /* แถบเลื่อน (Scrollbar) ที่มีความเรียบง่าย ไม่รบกวนสมาธิในการเข้าถึงข้อมูล */
   ::-webkit-scrollbar {
     @apply w-1.5;
   }
@@ -125,8 +134,17 @@
     @apply hover:bg-primary/40 rounded-full bg-slate-200 transition-colors;
   }
 
-  /* การจัดการขอบจางสำหรับภาพประกอบ */
+  /* การจัดการความนุ่มนวลของขอบเขตภาพลักษณ์ */
   .mask-radial {
     mask-image: radial-gradient(circle, black 50%, transparent 100%);
+  }
+
+  /* ระบบการเลื่อนข้อมูลโดยคงความสะอาดตาของหน้าจอ */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

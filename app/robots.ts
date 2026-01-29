@@ -4,80 +4,61 @@ import { MetadataRoute } from "next"
 import { siteConfig } from "@/constants/site-config"
 
 /**
- * ระบบควบคุมการเก็บข้อมูลของ Google และบอทต่างๆ
- * แนวทางปี 2026: เน้นเปิดทางให้ Google Search เจอหน้าเว็บง่ายๆ แต่จำกัดสิทธิ์ AI ไม่ให้ดึงข้อมูลสำคัญ
- * ดูแลโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * AEMDEVWEB | Search Engine Intelligence Control 2026
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: "Full Render Visibility" & "Strategic AI Protection"
+ * วางระบบและควบคุมพิกัดโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
+ * เป้าหมาย: ล้างพิกัด Error จาก Rich Results Test และรักษาความปลอดภัยข้อมูล Node สำคัญ
  */
 export default function robots(): MetadataRoute.Robots {
-  const rawBaseUrl = siteConfig.project.url
-
-  // จัดการที่อยู่ URL ให้สะอาด ไม่มีเครื่องหมาย / ต่อท้าย
-  const baseUrl = rawBaseUrl.endsWith("/")
-    ? rawBaseUrl.slice(0, -1)
-    : rawBaseUrl
+  const baseUrl = siteConfig.project.url.replace(/\/$/, "")
 
   return {
     rules: [
       {
+        /** [GENERAL SEARCH BOTS]: เปิดทางให้บอทคุณภาพเข้ามาเก็บพิกัดความแรง */
         userAgent: "*",
-        /**
-         * 1. ส่วนที่อนุญาต (Allowed Paths)
-         * เปิดทางให้บอทเก็บข้อมูลหน้าหลัก, บริการ และหน้ารวมแบบเว็บไซต์ เพื่อดันอันดับ SEO
-         */
         allow: [
           "/",
-          "/about",
-          "/services",
-          "/case-studies",
-          "/blog",
-          "/contact",
-          "/templates",
-          "/privacy",
-          "/terms",
-          "/images/showcase",
-          "/images/templates",
+          "/_next/static/", // เปิดพิกัดให้บอทโหลด JS/CSS เพื่อใช้เรนเดอร์ Interface ให้เนี้ยบ
+          "/_next/image",  // เปิดพิกัดให้บอทเข้าถึงรูปภาพที่ นายเอ็มซ่ามากส์ จูนสปีดไว้
+          "/api/og",       // พิกัดภาพ Open Graph สำหรับการแชร์โซเชียลที่แม่นยำ
         ],
-
-        /**
-         * 2. ส่วนที่จำกัดการเข้าถึง (Disallowed Paths)
-         * ป้องกันบอทเข้าถึงไฟล์ระบบ, ส่วนประกอบของโค้ด และข้อมูลหลังบ้าน
-         */
         disallow: [
-          "/api/",
-          "/_next/",
-          "/config/",
-          "/content/",
-          "/lib/",
-          "/types/",
-          "/download/",
-          "/*.json$",
-          "/not-found",
+          "/api/",         // ปิดพิกัดระบบหลังบ้าน
+          "/config/",      // ปิดพิกัดโครงสร้างการตั้งค่า
+          "/lib/",         // ปิดพิกัด Library ภายใน
+          "/types/",       // ปิดพิกัดนิยาม Type ทั้งหมด
+          "/actions/",     // ปิดพิกัด Server Actions
+          "/_not-found",   // ไม่ต้อง Index หน้า Error
+          "/*?*",          // [STRATEGIC]: ปิดพิกัด Parameter เพื่อป้องกัน Duplicate Content
         ],
       },
       {
-        /**
-         * 3. AI & LLM Protection (มาตรฐานปี 2026)
-         * ป้องกัน AI นำผลงานหรือข้อมูลเทคนิคที่เป็นความลับของลูกค้าไปประมวลผลต่อ
+        /** * [AI SCRAPER CONTROL]: บล็อกพิกัดบอทสายดูดข้อมูล 
+         * ปกป้องทรัพย์สินทางปัญญาของ นายเอ็มซ่ามากส์ จากการถูกนำไปเทรน AI โดยไร้ทราฟฟิก
          */
         userAgent: [
           "GPTBot",
           "CCBot",
+          "ChatGPT-User",
           "ClaudeBot",
           "PerplexityBot",
           "Applebot-Extended",
+          "Omgilibot",
+          "FacebookBot",
+          "Bytespider", // บอทจาก ByteDance (TikTok)
+          "ImagesiftBot",
         ],
         disallow: [
+          "/case-studies/", // ปกป้องพิกัดความสำเร็จที่เป็นความลับธุรกิจ
+          "/content/",      // ปิดพิกัด Raw Markdown Data
           "/config/",
-          "/lib/",
-          "/content/",
-          "/case-studies/", // ล็อกข้อมูลผลงานแบบละเอียดเพื่อความเป็นส่วนตัวของลูกค้า
-          "/templates/*/_parts/", // ป้องกันการเข้าถึงชิ้นส่วนประกอบภายในเทมเพลต
+          "/_next/data/",   // บล็อกพิกัดข้อมูล JSON ของ Next.js
         ],
       },
     ],
-    /**
-     * แจ้งตำแหน่ง Sitemap เพื่อให้บอทเจอหน้า Landing Page ใหม่ๆ ได้ภายใน 24 ชม.
-     */
+    /** แจ้งพิกัดแผนผังเว็บไซต์เพื่อให้บอทวิ่งงานได้ไวขึ้น */
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }

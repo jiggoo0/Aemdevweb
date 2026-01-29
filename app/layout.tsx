@@ -7,17 +7,15 @@ import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google"
 
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/constants/site-config"
-import { viewport as defaultViewport } from "./viewport"
-
 import { JsonLd } from "@/components/seo/JsonLd"
 import { Toaster } from "@/components/ui/sonner"
 
 import "@/app/globals.css"
 
 /**
- * [FONT STRATEGY 2026]
- * IBM Plex Sans Thai: สำหรับหัวข้อ (Heading) ให้ความรู้สึกเป็นมืออาชีพที่เชื่อถือได้
- * Anuphan: สำหรับเนื้อหา (Body) อ่านง่าย สบายตา และดูทันสมัย
+ * [FONT SYSTEM 2026]
+ * IBM Plex Sans Thai: ส่วนหัวข้อ (สร้างภาพลักษณ์ที่มั่นคงและมีมาตรฐาน)
+ * Anuphan: ส่วนเนื้อหา (เน้นการเข้าถึงข้อมูลที่ชัดเจนและร่วมสมัย)
  */
 const fontHeading = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
@@ -34,8 +32,7 @@ const fontBody = Anuphan({
 })
 
 /**
- * [SEO & AI STRATEGY]
- * ตั้งค่าข้อมูลเพื่อให้ระบบค้นหาและ AI เข้าใจตัวตนของ AEMDEVWEB ได้ทันที
+ * [SEARCH ENGINE OPTIMIZATION]: การตั้งค่าข้อมูลหลักของเว็บไซต์
  */
 export const metadata: Metadata = {
   title: {
@@ -44,16 +41,15 @@ export const metadata: Metadata = {
   },
   description: siteConfig.project.description,
   metadataBase: new URL(siteConfig.project.url),
-  keywords: siteConfig.keywords.list,
+  alternates: {
+    canonical: "./",
+  },
+  keywords: siteConfig.keywords.all,
   authors: [
     { name: siteConfig.expert.realName, url: siteConfig.links.personal },
   ],
   creator: siteConfig.expert.name,
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-touch-icon.png",
-  },
+  publisher: siteConfig.company.name,
   openGraph: {
     title: siteConfig.project.title,
     description: siteConfig.project.description,
@@ -76,6 +72,7 @@ export const metadata: Metadata = {
     description: siteConfig.project.description,
     images: [siteConfig.project.ogImage],
   },
+  // ตั้งค่าระบบดึงข้อมูลเพื่อให้แสดงภาพลักษณ์ที่ดีที่สุดบนแพลตฟอร์มการค้นหา
   robots: {
     index: true,
     follow: true,
@@ -89,74 +86,69 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = defaultViewport
-
-interface RootLayoutProps {
-  children: React.ReactNode
+export const viewport: Viewport = {
+  themeColor: "#10b981",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html
       lang="th"
       className={cn(
-        "scroll-smooth focus:scroll-auto",
+        "scroll-smooth antialiased",
         fontHeading.variable,
-        fontBody.variable,
-        "antialiased"
+        fontBody.variable
       )}
       suppressHydrationWarning
     >
       <head>
-        {/* [SCHEMA] ใส่ข้อมูลธุรกิจเพื่อให้ Google จัดอันดับได้แม่นยำที่สุด */}
+        {/* [SCHEMA MARKUP]: การระบุความสัมพันธ์ของข้อมูลเพื่อให้ระบบการค้นหาเข้าใจตัวตนของธุรกิจอย่างแม่นยำ */}
         <JsonLd
-          type="WebSite"
+          type="Organization"
           data={{
-            name: siteConfig.project.name,
-            alternateName: siteConfig.project.nameTH,
+            "@id": `${siteConfig.project.url}/#organization`,
+            name: siteConfig.company.name,
             url: siteConfig.project.url,
-            publisher: {
+            logo: `${siteConfig.project.url}${siteConfig.project.logo}`,
+            founder: {
               "@type": "Person",
+              "@id": `${siteConfig.links.personal}/#person`,
               name: siteConfig.expert.realName,
               jobTitle: siteConfig.expert.role,
-              url: siteConfig.links.personal,
-              sameAs: [
-                siteConfig.links.facebook,
-                siteConfig.links.linkedin,
-                siteConfig.links.tiktok,
-              ].filter(Boolean),
+              description: siteConfig.expert.bio,
             },
-            potentialAction: {
-              "@type": "SearchAction",
-              target: `${siteConfig.project.url}/blog?q={search_term_string}`,
-              "query-input": "required name=search_term_string",
+            contactPoint: {
+              "@type": "ContactPoint",
+              email: siteConfig.company.email,
+              contactType: "customer service",
+              areaServed: "TH",
+              availableLanguage: ["Thai", "English"],
             },
+            sameAs: [
+              siteConfig.links.facebook,
+              siteConfig.links.linkedin,
+              siteConfig.links.tiktok,
+              siteConfig.links.line,
+            ].filter(Boolean),
           }}
         />
       </head>
-      <body
-        className={cn(
-          "font-body min-h-screen bg-white text-slate-900",
-          "selection:bg-emerald-500/10 selection:text-emerald-900",
-          "overflow-x-hidden leading-relaxed"
-        )}
-      >
-        {/* แถบสถานะการโหลด: สีเขียว Emerald สื่อถึงความซิ่งและความพร้อมให้บริการ */}
-        <NextTopLoader
-          color="#10b981"
-          height={3}
-          showSpinner={false}
-          easing="ease"
-          speed={300}
-          shadow="0 0 10px #10b981,0 0 5px #10b981"
-          zIndex={1600}
-        />
+      <body className="font-body min-h-screen bg-white text-slate-900 selection:bg-emerald-500/10 selection:text-emerald-900">
+        {/* แถบสถานะการโหลด: ใช้สีประจำอัตลักษณ์เพื่อความต่อเนื่องของประสบการณ์ผู้ใช้งาน */}
+        <NextTopLoader color="#10b981" showSpinner={false} height={3} />
 
-        {/* ส่วนประกอบของเนื้อหาหลัก */}
-        <div className="relative flex min-h-screen flex-col">{children}</div>
+        <main className="relative flex min-h-screen flex-col overflow-x-hidden">
+          {children}
+        </main>
 
-        {/* ระบบแจ้งเตือน (Sonner): ดีไซน์เรียบง่าย ใช้งานสะดวก */}
-        <Toaster richColors closeButton position="top-center" expand={false} />
+        <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
   )

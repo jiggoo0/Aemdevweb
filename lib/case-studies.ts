@@ -1,42 +1,32 @@
 /** @format */
-
+import "server-only" // ยันต์กันผี: ล็อกพิกัดให้รันเฉพาะฝั่ง Server เพื่อความปลอดภัยสูงสุด
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
+import { cache } from "react"
 import { CaseStudyItem } from "@/types"
 
-/* -------------------------------------------------------------------------- */
-/* 1. พิกัดเส้นทางระบบ (System Path)                                           */
-/* -------------------------------------------------------------------------- */
+/**
+ * AEMDEVWEB | Case Study Retrieval System 2026
+ * -------------------------------------------------------------------------
+ * ระบบประมวลผลพิกัดความสำเร็จและกรณีศึกษาเชิงยุทธศาสตร์
+ * วางโครงสร้างและจูนสมรรถนะโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
+ */
 
 const CASE_STUDIES_DIR = path.join(process.cwd(), "content/case-studies")
 
-/* -------------------------------------------------------------------------- */
-/* 2. ฟังก์ชันจัดการพิกัดข้อมูลผลงาน (Core Functions)                              */
-/* -------------------------------------------------------------------------- */
-
 /**
- * ดึงรายการ Slug ทั้งหมด
- * ใช้สำหรับทำ Static Site Generation (SSG) ให้หน้าเว็บออนไลน์ได้ไวระดับปีศาจ
+ * [OPTIMIZED]: พิกัดดึงข้อมูลความสำเร็จทั้งหมด
+ * ใช้ cache เพื่อทำ Request Memoization ตามมาตรฐาน Specialist ปี 2026
+ * ดึงข้อมูล Node ความสำเร็จจากโครงสร้าง Infrastructure หลังบ้าน
  */
-export function getCaseStudySlugs(): string[] {
-  if (!fs.existsSync(CASE_STUDIES_DIR)) return []
-  return fs
-    .readdirSync(CASE_STUDIES_DIR)
-    .filter((file) => /\.mdx?$/.test(file))
-    .map((file) => file.replace(/\.mdx?$/, ""))
-}
-
-/**
- * ดึงพิกัดผลงานทั้งหมดพร้อมจัดเรียงลำดับ
- * [FIX]: มั่นใจว่าเลเยอร์ frontmatter ตรงตามพิกัดที่ระบบ Type ต้องการ
- */
-export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
+export const getAllCaseStudies = cache(async (): Promise<CaseStudyItem[]> => {
+  // ตรวจสอบพิกัดไดเรกทอรีเพื่อป้องกันระบบสะดุด
   if (!fs.existsSync(CASE_STUDIES_DIR)) return []
 
   const files = fs.readdirSync(CASE_STUDIES_DIR)
 
-  const allCases = files
+  return files
     .filter((file) => /\.mdx?$/.test(file))
     .map((file) => {
       const filePath = path.join(CASE_STUDIES_DIR, file)
@@ -44,91 +34,67 @@ export async function getAllCaseStudies(): Promise<CaseStudyItem[]> {
       const { data, content } = matter(fileContent)
       const slug = file.replace(/\.mdx?$/, "")
 
-      // จัดวางพิกัดข้อมูลให้กริบและปลอดภัย (Type-Safe Mapping)
       return {
         id: slug,
-        slug: slug,
+        slug,
         frontmatter: {
-          title: data.title || "Untitled Project",
-          client: data.client || "",
-          industry: data.industry || data.category || "General Business",
-          category: data.category || "",
-          excerpt: data.description || data.excerpt || "",
-          thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
+          title: data.title || "Untitled Strategic Project",
+          client: data.client || "Secret Client",
+          industry: data.industry || data.category || "General Strategic Industry",
+          category: data.category || "Specialist Solution",
+          excerpt: data.excerpt || data.description || "ข้อมูลพิกัดความสำเร็จอยู่ระหว่างการสรุปผล...",
+          thumbnail: data.thumbnail || "/images/showcase/placeholder.webp",
           date: data.date || "2026-01-01",
-          results: data.results || [],
+          results: Array.isArray(data.results) ? data.results : [],
           keyFeatures: data.keyFeatures || [],
-          service: data.service || "",
+          service: data.service || "Technical SEO & Web Infrastructure",
           isFeatured: data.isFeatured || false,
         },
-        content: content,
+        content,
       } as CaseStudyItem
     })
-    // เรียงพิกัดวันที่ล่าสุดขึ้นก่อน (เปรียบเทียบ String โดยตรงเพื่อความแรง)
-    .sort((a, b) => (a.frontmatter.date < b.frontmatter.date ? 1 : -1))
-
-  return allCases
-}
-
-/**
- * [ALIAS]: ฟังก์ชันชื่อสำรองเพื่อป้องกันพิกัด Error ในหน้าแรก
- */
-export const getCaseStudiesMetadata = getAllCaseStudies
+    .sort(
+      (a, b) =>
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+    )
+})
 
 /**
- * ดึงพิกัดผลงานล่าสุดตามจำนวนที่ระบุ
+ * getCaseStudyBySlug - เจาะพิกัดข้อมูล Node ความสำเร็จรายชิ้น
+ * วางระบบโดย นายเอ็มซ่ามากส์ เพื่อการเข้าถึงข้อมูลที่แม่นยำและรวดเร็ว
  */
-export async function getLatestCaseStudies(
-  limit: number = 3
-): Promise<CaseStudyItem[]> {
-  const allCases = await getAllCaseStudies()
-  return allCases.slice(0, limit)
-}
+export const getCaseStudyBySlug = cache(
+  async (slug: string): Promise<CaseStudyItem | null> => {
+    try {
+      const mdxPath = path.join(CASE_STUDIES_DIR, `${slug}.mdx`)
+      const mdPath = path.join(CASE_STUDIES_DIR, `${slug}.md`)
+      
+      // ตรวจสอบพิกัดไฟล์จริง (MDX/MD Support)
+      const actualPath = fs.existsSync(mdxPath)
+        ? mdxPath
+        : fs.existsSync(mdPath)
+          ? mdPath
+          : null
 
-/**
- * ดึงข้อมูลผลงานรายชิ้นแบบระบุพิกัด Slug
- */
-export async function getCaseStudyBySlug(
-  slug: string
-): Promise<CaseStudyItem | null> {
-  if (!slug) return null
+      if (!actualPath) return null
 
-  const realSlug = slug.replace(/\.mdx?$/, "")
-  const mdxPath = path.join(CASE_STUDIES_DIR, `${realSlug}.mdx`)
-  const mdPath = path.join(CASE_STUDIES_DIR, `${realSlug}.md`)
+      const fileContent = fs.readFileSync(actualPath, "utf8")
+      const { data, content } = matter(fileContent)
 
-  const actualPath = fs.existsSync(mdxPath)
-    ? mdxPath
-    : fs.existsSync(mdPath)
-      ? mdPath
-      : null
-
-  if (!actualPath) return null
-
-  try {
-    const fileContent = fs.readFileSync(actualPath, "utf8")
-    const { data, content } = matter(fileContent)
-
-    return {
-      id: realSlug,
-      slug: realSlug,
-      frontmatter: {
-        title: data.title || "Untitled Project",
-        client: data.client || "",
-        industry: data.industry || data.category || "General Business",
-        category: data.category || "",
-        excerpt: data.description || data.excerpt || "",
-        thumbnail: data.thumbnail || "/images/blog/placeholder.webp",
-        date: data.date || "2026-01-01",
-        results: Array.isArray(data.results) ? data.results : [],
-        keyFeatures: data.keyFeatures || [],
-        service: data.service || "",
-        isFeatured: data.isFeatured || false,
-      },
-      content: content,
-    } as CaseStudyItem
-  } catch (error) {
-    console.error(`พิกัด Error ในการโหลดไฟล์: ${realSlug}`, error)
-    return null
+      return {
+        id: slug,
+        slug,
+        frontmatter: {
+          ...data,
+          results: Array.isArray(data.results) ? data.results : [],
+        },
+        content,
+      } as unknown as CaseStudyItem
+    } catch (_error) {
+      // พิกัดจัดการข้อผิดพลาดโดย นายเอ็มซ่ามากส์: คืนค่า null เพื่อให้ UI จัดการผ่าน notFound() อย่างมืออาชีพ
+      console.error(`[AEM-SYSTEM]: พิกัดกรณีศึกษา ${slug} เกิดข้อผิดพลาดเชิงโครงสร้าง`)
+      return null
+    }
   }
-}
+)
