@@ -63,10 +63,13 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   if (!service) notFound()
 
-  // ดึงพิกัดเทมเพลตที่เชื่อมโยง (Related Templates)
-  const recommendedTemplates = getTemplatesBySlugs(
-    service.relatedTemplateSlugs || []
-  )
+  /**
+   * [FIXED]: แก้ไข Error TS2345 (Readonly string[] is not assignable to mutable string[])
+   * โดยการใช้ Spread Operator เพื่อกระจายพิกัดข้อมูลสร้าง Array ชุดใหม่
+   */
+  const recommendedTemplates = getTemplatesBySlugs([
+    ...(service.relatedTemplateSlugs || []),
+  ])
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">

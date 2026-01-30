@@ -1,0 +1,22 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/_global-error/page": "/_global-error",
+  "/favicon.ico/route": "/favicon.ico",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/(case-studies)/case-studies/[slug]/page": "/case-studies/[slug]",
+  "/(case-studies)/case-studies/page": "/case-studies",
+  "/(main)/about/page": "/about",
+  "/(main)/blog/[slug]/page": "/blog/[slug]",
+  "/(main)/blog/page": "/blog",
+  "/(main)/contact/page": "/contact",
+  "/(main)/page": "/",
+  "/(main)/privacy/page": "/privacy",
+  "/(main)/services/[slug]/page": "/services/[slug]",
+  "/(main)/services/page": "/services",
+  "/(main)/terms/page": "/terms",
+  "/(seo)/seo/[slug]/page": "/seo/[slug]",
+  "/(seo)/seo/page": "/seo",
+  "/(shops)/templates/[slug]/page": "/templates/[slug]",
+  "/(shops)/templates/page": "/templates"
+}

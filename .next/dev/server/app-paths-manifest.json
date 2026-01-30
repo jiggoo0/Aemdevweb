@@ -1,0 +1,4 @@
+{
+  "/(seo)/seo/page": "app/(seo)/seo/page.js",
+  "/(main)/page": "app/(main)/page.js"
+}

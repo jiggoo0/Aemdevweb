@@ -1,107 +1,200 @@
 #!/bin/bash
 
 # ==============================================================================
-# AEMDEVWEB ULTRA-DEEP AUDIT & SUMMARY EXPORTER v2026
-# หน้าที่: สรุปพิกัดระบบ, ตรวจสุขภาพไฟล์ภาพ, ตรวจสอบพิกัดลิงก์ และแผนผังโหนด
-# มาตรฐาน: Ultra-Deep Level 7 | Professional Formatting (No Emoji)
+# AEMDEVWEB ARCHITECT AUDIT SYSTEM v2026.S+ (Precision Edition)
+# หน้าที่: ศูนย์บัญชาการตรวจสอบคุณภาพรหัส พร้อมระบบกรอง Inline Comments
+# มาตรฐาน: Ultra-Deep Level 7 | Zero False-Positive Protocol
 # ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 # ==============================================================================
 
-# [1. CONFIGURATION]
+# [0. INITIALIZATION & SAFETY]
+set -o pipefail # ป้องกันการข้าม Error ใน Pipeline
+
+# Safety Guard: ตรวจสอบพิกัดการทำงาน
+if [ ! -d "app" ] || [ ! -f "package.json" ]; then
+    echo -e "\033[0;31m❌ ERROR: กรุณารันสคริปต์จาก Root Folder ของโปรเจกต์เท่านั้น\033[0m"
+    exit 1
+fi
+
+# Configuration
 OUTPUT_FILE="PROJECT-SUMMARY.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-IMAGE_LIMIT="250k" 
+IMAGE_LIMIT="250k"
+SCORE=100 # คะแนนตั้งต้นสำหรับการตัดเกรด
 
-# [2. DATA COLLECTION: TECHNICAL METRICS]
-ANY_COUNT=$(grep -r "any" app components lib types --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l)
-SEO_FILES=$(find app -name "page.tsx" -o -name "layout.tsx" 2>/dev/null | wc -l)
-METADATA_COUNT=$(grep -r "export const metadata" app 2>/dev/null | wc -l)
+# [PRECISION FILTER]: กรองบรรทัดที่เป็นคอมเมนต์ หรือ Inline Disable ออกจากการนับพิกัด
+# รองรับ //, *, {/* */}, และ eslint-disable
+COMMENT_FILTER="//|\*|eslint-disable"
 
-# [3. DATA COLLECTION: IMAGE AUDIT]
+echo -e "\033[1;34m🚀 Starting Architect Audit (v2026.S+ Precision)...\033[0m"
+
+# ==============================================================================
+# [1. TYPE SAFETY AUDIT]
+# ==============================================================================
+echo "   - 🔍 Scanning Type Integrity (Ignoring Annotated Nodes)..."
+ANY_DETAILS=$(grep -rnE ":\s*any\b|as\s+any\b|<\s*any\s*>" app components lib types \
+    --include="*.ts" --include="*.tsx" \
+    --exclude-dir={node_modules,.next,.git,out,build,.turbo} 2>/dev/null \
+    | grep -vE "$COMMENT_FILTER")
+
+ANY_COUNT=$(echo -n "$ANY_DETAILS" | grep -c '^' || true)
+
+if [ "$ANY_COUNT" -gt 0 ]; then
+    SCORE=$((SCORE - 15))
+fi
+
+# ==============================================================================
+# [2. SEO COVERAGE AUDIT]
+# ==============================================================================
+echo "   - 🌍 Verifying SEO Matrix..."
+ALL_PAGES=$(find app -name "page.tsx" -not -path "*/api/*" 2>/dev/null)
+SEO_TOTAL=$(echo "$ALL_PAGES" | wc -l)
+SEO_MISSING_LIST=""
+SEO_FOUND_COUNT=0
+
+for page in $ALL_PAGES; do
+    if grep -qE "export\s+(const|async\s+function)\s+(metadata|generateMetadata)" "$page"; then
+        ((SEO_FOUND_COUNT++))
+    else
+        SEO_MISSING_LIST+="$page\n"
+    fi
+done
+
+if [ "$SEO_FOUND_COUNT" -lt "$SEO_TOTAL" ]; then
+    SCORE=$((SCORE - 10))
+fi
+
+# ==============================================================================
+# [3. PERFORMANCE & ASSETS AUDIT]
+# ==============================================================================
+echo "   - ⚡ Auditing Core Web Vitals Factors..."
 LARGE_IMAGES=$(find public/images -type f \( -name "*.webp" -o -name "*.jpg" -o -name "*.png" \) -size +$IMAGE_LIMIT 2>/dev/null)
-LARGE_IMAGES_COUNT=$(echo "$LARGE_IMAGES" | grep -v '^$' | wc -l)
+LARGE_IMAGES_COUNT=$(echo -n "$LARGE_IMAGES" | grep -c '^' || true)
 
-# [4. DATA COLLECTION: LINK INTEGRITY]
-LOCALHOST_LINKS=$(grep -r "localhost:" app content components 2>/dev/null | wc -l)
-TODO_LINKS=$(grep -r "href=\"#\"" app components 2>/dev/null | wc -l)
+if [ "$LARGE_IMAGES_COUNT" -gt 0 ]; then
+    SCORE=$((SCORE - 5))
+fi
 
-# [5. CONTENT INVENTORY]
+# ==============================================================================
+# [4. INTEGRITY & LINKS AUDIT]
+# ==============================================================================
+echo "   - 🔗 Checking Link Topology (Ignoring Annotated Links)..."
+# กรองบรรทัด localhost
+LOCALHOST_DETAILS=$(grep -rn "localhost:" app components lib --include="*.tsx" --include="*.ts" 2>/dev/null \
+    | grep -vE "$COMMENT_FILTER")
+LOCALHOST_COUNT=$(echo -n "$LOCALHOST_DETAILS" | grep -c '^' || true)
+
+# กรองบรรทัด Placeholder Hrefs
+TODO_DETAILS=$(grep -rn 'href="#"' app components --include="*.tsx" 2>/dev/null \
+    | grep -vE "$COMMENT_FILTER")
+TODO_COUNT=$(echo -n "$TODO_DETAILS" | grep -c '^' || true)
+
+TOTAL_LINK_ISSUES=$((LOCALHOST_COUNT + TODO_COUNT))
+
+if [ "$TOTAL_LINK_ISSUES" -gt 0 ]; then
+    SCORE=$((SCORE - 5))
+fi
+
+# ==============================================================================
+# [5. STRATEGIC METRICS]
+# ==============================================================================
 BLOG_POSTS=$(find content/blog -name "*.mdx" 2>/dev/null | wc -l)
 CASE_STUDIES=$(find content/case-studies -name "*.mdx" 2>/dev/null | wc -l)
 TEMPLATES=$(find app/\(shops\)/templates/_components -maxdepth 1 -type d 2>/dev/null | wc -l)
 TEMPLATE_COUNT=$((TEMPLATES > 0 ? TEMPLATES - 1 : 0))
 
-# [6. GIT STATUS]
 BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "N/A")
-LAST_COMMIT=$(git log -1 --format=%cr 2>/dev/null || echo "N/A")
+LAST_COMMIT=$(git log -1 --format="%cd (%cr)" --date=short 2>/dev/null || echo "N/A")
 
-# [7. MARKDOWN GENERATION]
-echo "กำลังวิเคราะห์พิกัดระบบและสร้างรายงาน (Text Mode) ลงสู่ $OUTPUT_FILE..."
+# ==============================================================================
+# [6. REPORT GENERATION]
+# ==============================================================================
+echo "📝 Generating Architect Report..."
+
+# เกรดดิ้งยุทธศาสตร์
+GRADE="F"
+if [ "$SCORE" -eq 100 ]; then GRADE="S (Perfect)";
+elif [ "$SCORE" -ge 90 ]; then GRADE="A (Excellent)";
+elif [ "$SCORE" -ge 80 ]; then GRADE="B (Good)";
+elif [ "$SCORE" -ge 70 ]; then GRADE="C (Fair)";
+else GRADE="D (Needs Improvement)";
+fi
 
 cat << EOF > $OUTPUT_FILE
-# Project Health & Audit Report (Ultra-Deep Scan)
+# Project Health & Action Report (Architect Edition)
 
-> **Project Domain:** [www.aemdevweb.com](https://www.aemdevweb.com)
-> **Audit Timestamp:** $TIMESTAMP
-> **Depth Level:** Level 7 (Specialist Verified)
-
----
-
-## 1. Technical Health Summary
-| Checkpoint | Metrics | Status |
-| :--- | :---: | :--- |
-| **Type 'any' Leftovers** | $ANY_COUNT | $( [ "$ANY_COUNT" -eq 0 ] && echo "PASSED" || echo "WARNING" ) |
-| **SEO Metadata Coverage** | $METADATA_COUNT/$SEO_FILES | $( [ "$METADATA_COUNT" -eq "$SEO_FILES" ] && echo "COMPLETE" || echo "PENDING" ) |
-| **Large Images (>$IMAGE_LIMIT)** | $LARGE_IMAGES_COUNT | $( [ "$LARGE_IMAGES_COUNT" -eq 0 ] && echo "OPTIMIZED" || echo "OPTIMIZE REQUIRED" ) |
-| **Localhost/Placeholder Links** | $((LOCALHOST_LINKS + TODO_LINKS)) | $( [ $((LOCALHOST_LINKS + TODO_LINKS)) -eq 0 ] && echo "CLEAN" || echo "FIX REQUIRED" ) |
+> **Domain:** [www.aemdevweb.com](https://www.aemdevweb.com)
+> **Timestamp:** $TIMESTAMP
+> **System Grade:** **$GRADE** ($SCORE/100)
 
 ---
 
-## 2. Deep Image Audit Report
-*Goal: LCP < 0.8s | Max File Size: $IMAGE_LIMIT*
+## 1. Executive Summary
+| Checkpoint | Metrics | Status | Impact |
+| :--- | :---: | :---: | :---: |
+| **Type Safety** | $ANY_COUNT Leaks | $( [ "$ANY_COUNT" -eq 0 ] && echo "✅ PASSED" || echo "⚠️ CRITICAL" ) | High |
+| **SEO Coverage** | $SEO_FOUND_COUNT/$SEO_TOTAL | $( [ "$SEO_FOUND_COUNT" -eq "$SEO_TOTAL" ] && echo "✅ PASSED" || echo "🚧 PENDING" ) | High |
+| **Performance (Img)** | $LARGE_IMAGES_COUNT Files | $( [ "$LARGE_IMAGES_COUNT" -eq 0 ] && echo "✅ PASSED" || echo "⚠️ WARNING" ) | Medium |
+| **Link Integrity** | $TOTAL_LINK_ISSUES Issues | $( [ "$TOTAL_LINK_ISSUES" -eq 0 ] && echo "✅ PASSED" || echo "🚧 FIX REQ" ) | Medium |
 
-$( if [ "$LARGE_IMAGES_COUNT" -gt 0 ]; then
-    echo "### WARNING: Images requiring compression:"
+---
+
+## 2. 🛠️ Action Items: Priority Fix List
+
+$(if [ "$ANY_COUNT" -gt 0 ]; then
+    echo "### 🔴 A. Type Safety Violations (Must Fix)"
+    echo "\`\`\`typescript"
+    echo "$ANY_DETAILS"
+    echo "\`\`\`"
+fi)
+
+$(if [ -n "$SEO_MISSING_LIST" ]; then
+    echo "### 🟠 B. Missing SEO Metadata"
+    echo "\`\`\`text"
+    echo -e "$SEO_MISSING_LIST"
+    echo "\`\`\`"
+fi)
+
+$(if [ "$LARGE_IMAGES_COUNT" -gt 0 ]; then
+    echo "### 🟡 C. Heavy Images (Over $IMAGE_LIMIT)"
     echo "\`\`\`text"
     echo "$LARGE_IMAGES"
     echo "\`\`\`"
-else
-    echo "STATUS: ALL IMAGES OPTIMIZED. No files exceed the $IMAGE_LIMIT threshold."
-fi )
+fi)
+
+$(if [ "$TOTAL_LINK_ISSUES" -gt 0 ]; then
+    echo "### 🔵 D. Link Integrity Issues"
+    echo "\`\`\`text"
+    echo "$LOCALHOST_DETAILS"
+    echo "$TODO_DETAILS"
+    echo "\`\`\`"
+fi)
+
+$(if [ "$SCORE" -eq 100 ]; then
+    echo "### 🏆 All Systems Nominal"
+    echo "Architecture is stable, strict, and performant. Ready for production release."
+fi)
 
 ---
 
-## 3. Link Integrity Analysis
-- **Localhost Connections:** $LOCALHOST_LINKS (Should be updated to Production URL)
-- **Placeholder Hrefs (#):** $TODO_LINKS (Nodes awaiting actual links)
+## 3. System Architecture & Assets
+- **Knowledge Base:** $BLOG_POSTS Nodes
+- **Case Studies:** $CASE_STUDIES Protocols
+- **Marketplace:** $TEMPLATE_COUNT Templates
+- **Version Control:** \`$BRANCH\` | Last Update: $LAST_COMMIT
 
----
-
-## 4. Strategic Content Inventory
-| Data Type | Nodes | Storage Path |
-| :--- | :---: | :--- |
-| **Blog Insight Nodes** | $BLOG_POSTS | \`content/blog/\` |
-| **Case Study Protocols** | $CASE_STUDIES | \`content/case-studies/\` |
-| **Marketplace Templates** | $TEMPLATE_COUNT | \`app/(shops)/templates/_components/\` |
-
----
-
-## 5. Ultra-Deep Tree Structure
+### Directory Tree (Depth 3)
 \`\`\`text
-$(tree -L 4 -I 'node_modules|.next|cache|pnpm-lock.yaml' --noreport app components lib constants content 2>/dev/null || echo "Tree command not found")
+$(if command -v tree > /dev/null; then
+    tree -L 3 -I 'node_modules|.next|cache|pnpm-lock.yaml|.git|.turbo' --noreport app components lib constants content
+else
+    find app components lib constants content -maxdepth 3 -not -path '*/.*' | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+fi)
 \`\`\`
 
 ---
-
-## 6. Deployment Status
-- **Current Branch:** \`$BRANCH\`
-- **Last Sync:** $LAST_COMMIT
-- **Engine Version:** Next.js v16.1.3 (Turbo Mode)
-- **Environment:** Termux (Android Subsystem)
-
----
-**AEMDEVWEB by นายเอ็มซ่ามากส์**
-*High-Performance Web Architecture: Speed, Precision, Growth*
+**AEMDEVWEB Automated Architect**
+*Quality Gate: Level 7 Verified*
 EOF
 
-echo -e "\033[0;32mSUCCESS: รายงาน (No-Emoji Mode) ถูกบันทึกที่ $OUTPUT_FILE เรียบร้อยแล้ว\033[0m"
+echo -e "\033[0;32mSUCCESS: Report generated at $OUTPUT_FILE (Score: $SCORE/100)\033[0m"

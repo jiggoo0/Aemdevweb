@@ -1,8 +1,12 @@
 /** @format */
 
-import React from "react"
-import { Phone, MessageCircle, Mail, MapPin, ExternalLink } from "lucide-react"
+"use client"
 
+import React from "react"
+import Link from "next/link"
+import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Zap, ExternalLink } from "lucide-react"
+
+// [FIXED]: ปรับ Interface ให้ตรงกับรูปทรงข้อมูลจริงจาก Schema (ล้าง TS2739)
 interface HotelFooterProps {
   data: {
     address: string
@@ -16,100 +20,92 @@ interface HotelFooterProps {
   logo: string
 }
 
-export const HotelFooter = ({ data, logo }: HotelFooterProps) => {
+/**
+ * HotelFooter: พิกัดส่วนท้ายระดับพรีเมียม (Strategic Integrity Node)
+ * -------------------------------------------------------------------------
+ * มาตรฐาน: Ultra-Deep Level 7 | Tailwind 4 OKLCH | Zero Warning
+ */
+export const HotelFooter: React.FC<HotelFooterProps> = ({ data, logo }) => {
   return (
-    <footer className="border-t border-slate-900 bg-slate-950 py-24 text-left text-slate-400 lg:py-32">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 gap-20 lg:grid-cols-3">
-          {/* 1. ข้อมูลแบรนด์และจุดขาย (Branding) */}
-          <div className="space-y-10">
-            <div className="space-y-6">
-              <div className="text-3xl leading-none font-black tracking-tighter text-white uppercase italic">
-                {logo}
-                <span className="text-emerald-500">.</span>
-              </div>
-              <p className="max-w-sm text-sm leading-loose font-light">
-                ยกระดับประสบการณ์การพักผ่อนด้วย **เทมเพลตสำเร็จรูป พร้อมใช้งาน**
-                ที่ออกแบบมาเพื่อธุรกิจโรงแรมโดยเฉพาะ มุ่งเน้นการใช้งานที่ง่าย
-                และความเร็วที่เหนือระดับโดย **AEMDEVWEB**
-              </p>
-            </div>
+    <footer className="bg-[oklch(0.12_0.02_260)] py-24 text-white/60 lg:py-32">
+      <div className="container-za">
+        <div className="grid gap-16 lg:grid-cols-3">
+          
+          {/* [1. BRAND IDENTITY NODE] */}
+          <div className="space-y-8">
+            <Link 
+              href="/" 
+              className="flex items-center gap-2 text-3xl font-black tracking-tighter text-white uppercase italic transition-all hover:text-[oklch(0.65_0.2_160)]"
+            >
+              <Zap size={28} className="fill-[oklch(0.65_0.2_160)] text-[oklch(0.65_0.2_160)]" />
+              {logo}<span className="text-[oklch(0.65_0.2_160)]">.</span>
+            </Link>
+            <p className="max-w-md text-lg leading-relaxed font-bold">
+              ยกระดับประสบการณ์การพักผ่อนด้วยโครงสร้างที่แม่นยำ 
+              ปรับแต่งมาเพื่อประสิทธิภาพสูงสุดโดย AEMDEVWEB
+            </p>
             <div className="flex gap-4">
-              {["Visa", "Mastercard", "PromptPay"].map((p, i) => (
-                <div
+              {[Facebook, Instagram, Twitter].map((Icon, i) => (
+                <button
                   key={i}
-                  className="rounded border border-white/10 bg-white/5 px-3 py-1 text-[9px] font-bold tracking-widest text-white/30 uppercase"
+                  type="button"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 text-white transition-all hover:bg-[oklch(0.65_0.2_160)] hover:text-[oklch(0.12_0.02_260)] active:scale-95"
                 >
-                  {p}
-                </div>
+                  <Icon size={20} />
+                </button>
               ))}
             </div>
           </div>
 
-          {/* 2. ตำแหน่งที่ตั้งและแผนที่ (Location) */}
+          {/* [2. LOCATION NODE]: พิกัดตำแหน่งที่ตั้งจริง */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-black tracking-[0.3em] text-white uppercase">
-              Location Detail
+            <h4 className="font-heading text-[10px] font-black tracking-[0.4em] text-white uppercase italic">
+              Location Hub
             </h4>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <MapPin size={18} className="shrink-0 text-emerald-500" />
-                <p className="text-sm leading-relaxed">{data.address}</p>
+                <MapPin size={20} className="shrink-0 text-[oklch(0.65_0.2_160)]" />
+                <p className="text-sm font-bold leading-relaxed">{data.address}</p>
               </div>
               <a
                 href={data.mapsUrl}
-                className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-emerald-500 uppercase transition-colors hover:text-white"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-[oklch(0.65_0.2_160)] uppercase transition-colors hover:text-white"
               >
-                ดูแผนที่ผ่าน Google Maps <ExternalLink size={14} />
+                View on Google Maps <ExternalLink size={14} />
               </a>
             </div>
           </div>
 
-          {/* 3. ช่องทางการติดต่อ (Contact Center) */}
+          {/* [3. CONTACT CENTER]: พิกัดการสื่อสารเชิงระบบ */}
           <div className="space-y-8">
-            <h4 className="text-[10px] font-black tracking-[0.3em] text-white uppercase">
-              Contact Center
+            <h4 className="font-heading text-[10px] font-black tracking-[0.4em] text-white uppercase italic">
+              Direct Contact
             </h4>
             <ul className="space-y-6">
-              <li className="group flex cursor-pointer items-center gap-4 transition-colors hover:text-white">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/10">
-                  <Phone size={16} className="text-emerald-500" />
-                </div>
-                <span className="text-sm font-medium">
-                  {data.contact.phone}
-                </span>
+              <li className="flex items-center gap-4 text-sm font-bold transition-colors hover:text-white">
+                <Phone size={20} className="text-[oklch(0.65_0.2_160)]" />
+                {data.contact.phone}
               </li>
-              <li className="group flex cursor-pointer items-center gap-4 transition-colors hover:text-white">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/10">
-                  <MessageCircle size={16} className="text-emerald-500" />
-                </div>
-                <span className="text-sm font-medium">{data.contact.line}</span>
-              </li>
-              <li className="group flex cursor-pointer items-center gap-4 transition-colors hover:text-white">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 transition-colors group-hover:bg-emerald-500/10">
-                  <Mail size={16} className="text-emerald-500" />
-                </div>
-                <span className="text-sm font-medium">
-                  {data.contact.email}
-                </span>
+              <li className="flex items-center gap-4 text-sm font-bold transition-colors hover:text-white">
+                <Mail size={20} className="text-[oklch(0.65_0.2_160)]" />
+                {data.contact.email}
               </li>
             </ul>
           </div>
         </div>
 
-        {/* ส่วนลิขสิทธิ์และเครดิตด้านล่างสุด */}
-        <div className="mt-24 flex flex-col items-start justify-between gap-6 border-t border-white/5 pt-12 md:flex-row md:items-center">
-          <p className="text-[10px] font-bold tracking-widest text-slate-600 uppercase">
-            © 2026 {logo} All rights reserved.
-          </p>
-          <div className="text-[10px] font-black tracking-widest uppercase">
-            <span className="text-slate-600">Structure by</span>{" "}
-            <a
-              href="#"
-              className="text-slate-400 transition-colors hover:text-emerald-500"
-            >
-              AEMDEVWEB นายเอ็มซ่ามากส์
-            </a>
+        {/* [4. FINAL LEGAL FOOTER]: แผนผังลิขสิทธิ์ */}
+        <div className="mt-24 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-12 text-[9px] font-black tracking-[0.3em] uppercase italic md:flex-row">
+          <p>© 2026 {logo} • Strategic Infrastructure by นายเอ็มซ่ามากส์</p>
+          <div className="flex gap-8">
+            <Link href="/privacy" className="transition-colors hover:text-white">
+              Privacy Protocol
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-white">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

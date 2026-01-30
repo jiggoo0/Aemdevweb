@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(seo)/layout,_N_T_/(seo)/seo/layout,_N_T_/(seo)/seo/[slug]/layout,_N_T_/(seo)/seo/[slug]/page,_N_T_/seo/core-web-vitals-speed"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNlbyk/seo/$d$slug/__PAGE__",
+    "/!KHNlbyk/seo/$d$slug",
+    "/!KHNlbyk/seo",
+    "/!KHNlbyk",
+    "/_index",
+    "/_head"
+  ]
+}

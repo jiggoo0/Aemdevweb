@@ -1,22 +1,14 @@
 /** @format */
 
-/**
- * AEMDEVWEB | High-Performance Type System 2026
- * -------------------------------------------------------------------------
- * พิกัดข้อมูล: types/index.ts
- * หน้าที่: กำหนดรากฐาน Type สำหรับระบบงาน Web System & Technical SEO
- * มาตรฐาน: Ultra-Deep Level 7 | Type-Safe Architecture
- * ควบคุมโดย: นายเอ็มซ่ามากส์
- */
+// พิกัดข้อมูล: types/index.ts
+// หน้าที่: รากฐาน Type สำหรับระบบงาน Web System & Technical SEO
+// มาตรฐาน: Ultra-Deep Level 7 | Type-Safe Barrel File
+// ควบคุมโดย: นายเอ็มซ่ามากส์
 
 /* -------------------------------------------------------------------------- */
 /* 0. Foundational & SEO Utility Types                                        */
 /* -------------------------------------------------------------------------- */
 
-/**
- * [STRATEGIC]: โครงสร้างข้อมูล JSON-LD สำหรับฉีดเข้าสู่ระบบ Knowledge Graph
- * เปลี่ยนจาก any เป็น unknown เพื่อความเสถียรสูงสุด
- */
 export interface JsonLdData extends Record<string, unknown> {
   "@context"?: string;
   "@type"?: string;
@@ -29,64 +21,68 @@ export interface JsonLdData extends Record<string, unknown> {
 /* -------------------------------------------------------------------------- */
 
 export interface SiteConfig {
-  company: {
-    name: string;
-    fullName: string;
-    email: string;
-    address?: string;
+  readonly company: {
+    readonly name: string;
+    readonly fullName: string;
+    readonly email: string;
+    readonly address?: string;
   };
-  project: {
-    name: string;
-    shortName: string;
-    nameTH: string;
-    title: string;
-    slogan: string;
-    description: string;
-    url: string;
-    ogImage: string;
-    logo: string;
+  readonly project: {
+    readonly name: string;
+    readonly shortName: string;
+    readonly nameTH: string;
+    readonly title: string;
+    readonly slogan: string;
+    readonly description: string;
+    readonly url: string;
+    readonly ogImage: string;
+    readonly logo: string;
   };
-  expert: {
-    name: string;
-    role: string;
-    realName: string;
-    bio: string;
+  readonly expert: {
+    readonly name: string;
+    readonly role: string;
+    readonly realName: string;
+    readonly bio: string;
   };
-  stats: { label: string; value: string; suffix: string }[];
-  businessImpact: { speed: string; seo: string; conversion: string };
-  keywords: {
-    list: string[];
-    all: string;
-    core: string[];
-    tech: string[];
-    brand: string[];
+  readonly stats: readonly { label: string; value: string; suffix: string }[];
+  readonly businessImpact: { 
+    readonly speed: string; 
+    readonly seo: string; 
+    readonly conversion: string; 
   };
-  links: {
-    line: string;
-    lineId: string;
-    facebook?: string;
-    linkedin?: string;
-    tiktok?: string;
-    personal: string;
-    x?: string;
-    github?: string;
+  readonly keywords: {
+    readonly list: readonly string[];
+    readonly all: string;
+    readonly core: readonly string[];
+    readonly tech: readonly string[];
+    readonly brand: readonly string[];
   };
-  contact: {
-    email: string;
-    line?: string;
-    lineId?: string;
-    facebook?: string;
-    linkedin?: string;
-    tiktok?: string;
-    personal?: string;
-    phone?: string;
+  readonly links: {
+    readonly line: string;
+    readonly lineId: string;
+    readonly facebook?: string;
+    readonly linkedin?: string;
+    readonly tiktok?: string;
+    readonly personal: string;
+    readonly x?: string;
+    readonly github?: string;
   };
-  cta: { main: string; secondary: string; pricing: string };
-  standards: {
-    performance: number;
-    lcp: number;
-    security: string;
-    guarantee: string;
+  readonly contact: {
+    readonly email: string;
+    readonly line?: string;
+    readonly lineId?: string;
+    readonly facebook?: string;
+    readonly linkedin?: string;
+    readonly tiktok?: string;
+    readonly personal?: string;
+    readonly phone?: string;
+  };
+  readonly cta: { readonly main: string; readonly secondary: string; readonly pricing: string };
+  readonly standards: {
+    readonly performance: number;
+    readonly lcp: number;
+    readonly security: string;
+    readonly guarantee: string;
   };
 }
 
@@ -99,7 +95,7 @@ export type ServiceCategory = "ReadyMade" | "Business" | "Digital";
 export type ThemeColor =
   | "slate"
   | "emerald"
-  | "brand" // เพิ่มพิกัดสีหลักของแบรนด์
+  | "brand"
   | "blue"
   | "indigo"
   | "amber"
@@ -108,75 +104,58 @@ export type ThemeColor =
   | "violet";
 
 export type ServiceIconName =
-  | "Rocket"
-  | "ShieldCheck"
-  | "Code2"
-  | "Gauge"
-  | "Zap"
-  | "Layout"
-  | "TrendingUp"
-  | "BarChart3"
-  | "CheckCircle2"
-  | "LayoutTemplate"
-  | "Clock"
-  | "Wallet"
-  | "Building2"
-  | "MapPin"
-  | "Coffee"
-  | "Heart"
+  | "Rocket" | "ShieldCheck" | "Code2" | "Gauge" | "Zap" | "Layout"
+  | "TrendingUp" | "BarChart3" | "CheckCircle2" | "LayoutTemplate"
+  | "Clock" | "Wallet" | "Building2" | "MapPin" | "Coffee" | "Heart"
   | "UserCircle";
 
 export interface ServiceItem {
-  id: string;
-  title: string;
-  slug: string;
-  description: string;
-  thumbnail: string;
-  /** priceValue: พิกัดราคาเพียวสำหรับงานระบบ Schema Offer (Number) */
-  priceValue: number;
-  price?: string | number;
-  priceDisplay?: string;
-  renewalPrice?: string;
-  category: ServiceCategory;
-  iconName: ServiceIconName;
-  features: string[];
-  highlight?: boolean;
-  themeColor?: ThemeColor;
-  promotion?: string;
-  /** relatedTemplateSlugs: พิกัดเชื่อมโยงเทมเพลตที่แนะนำในหน้าบริการ */
-  relatedTemplateSlugs?: string[];
+  readonly id: string;
+  readonly title: string;
+  readonly slug: string;
+  readonly description: string;
+  readonly thumbnail: string;
+  readonly priceValue: number;
+  readonly price?: string | number;
+  readonly priceDisplay?: string;
+  readonly renewalPrice?: string;
+  readonly category: ServiceCategory;
+  readonly iconName: ServiceIconName;
+  readonly features: readonly string[];
+  readonly highlight?: boolean;
+  readonly themeColor?: ThemeColor;
+  readonly promotion?: string;
+  readonly relatedTemplateSlugs?: readonly string[];
 }
 
 /* -------------------------------------------------------------------------- */
 /* 3. พิกัดบทความและคลังความรู้ (Blog & Knowledge Base)                        */
 /* -------------------------------------------------------------------------- */
 
-
-
 export interface BlogFrontmatter {
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  thumbnail: string;
-  author: string;
-  readingTime?: string;
-  excerpt?: string;
-  tags?: string[];
+  readonly title: string;
+  readonly description: string;
+  readonly date: string;
+  readonly category: string;
+  readonly thumbnail: string;
+  readonly author: string;
+  readonly readingTime?: string;
+  readonly excerpt?: string;
+  readonly tags?: readonly string[];
 }
 
 export interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  thumbnail: string;
-  author: string;
-  readingTime?: string;
-  frontmatter: BlogFrontmatter;
-  content: string;
+  readonly id: string;
+  readonly slug: string;
+  readonly title: string;
+  readonly description: string;
+  readonly date: string;
+  readonly category: string;
+  readonly thumbnail: string;
+  readonly author: string;
+  readonly readingTime?: string;
+  readonly frontmatter: BlogFrontmatter;
+  readonly content: string;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -184,56 +163,29 @@ export interface BlogPost {
 /* -------------------------------------------------------------------------- */
 
 export interface CaseStudyResult {
-  label: string;
-  value: string;
+  readonly label: string;
+  readonly value: string;
 }
 
 export interface CaseStudyItem {
-  id: string;
-  slug: string;
-  frontmatter: {
-    title: string;
-    client: string;
-    industry: string;
-    category: string;
-    excerpt: string;
-    thumbnail: string;
-    date: string;
-    results: (string | CaseStudyResult)[];
-    keyFeatures: string[];
-    service?: string;
-    isFeatured?: boolean;
+  readonly id: string;
+  readonly slug: string;
+  readonly frontmatter: {
+    readonly title: string;
+    readonly client: string;
+    readonly industry: string;
+    readonly category: string;
+    readonly excerpt: string;
+    readonly thumbnail: string;
+    readonly date: string;
+    readonly results: readonly (string | CaseStudyResult)[];
+    readonly keyFeatures: readonly string[];
+    readonly service?: string;
+    readonly isFeatured?: boolean;
   };
-  content: string;
+  readonly content: string;
 }
 
-/* -------------------------------------------------------------------------- */
-/* 5. พิกัดคลังชุดระบบ (Marketplace Templates)                                */
-/* -------------------------------------------------------------------------- */
-
-export type TemplateCategory =
-  | "Hotel"
-  | "Service"
-  | "Marketing"
-  | "Ecommerce"
-  | "Business"
-  | "Platform"
-  | "Rental"
-  | "Digital"
-  | "ReadyMade";
-
-export interface TemplateMetadata {
-  id: string;
-  slug: string;
-  name: string;
-  category: TemplateCategory;
-  thumbnail: string;
-  description: string;
-  pricePrefix?: string;
-  /** priceValue: สำหรับระบบคํานวณและ Schema.org */
-  priceValue: number;
-  /** priceLabel: สำหรับการแสดงผล UI (เช่น "1,990") */
-  priceLabel: string;
-  isNew?: boolean;
-  isFeatured?: boolean;
-}
+// Re-export สัญญาข้อมูลจากไฟล์ย่อยเพื่อทำหน้าที่เป็น Master Barrel
+export * from "./template";
+export * from "./seo";

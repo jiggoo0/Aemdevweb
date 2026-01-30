@@ -1,5 +1,7 @@
 /** @format */
 
+"use client"
+
 import React from "react"
 import Image from "next/image"
 import { CleaningServiceData } from "./schema"
@@ -18,7 +20,8 @@ import {
 /**
  * CleaningProTemplate - วางระบบเว็บไซต์บริการทำความสะอาดรุ่นโปร
  * แนวคิด: เน้นความสะอาดที่สั่งได้จริง เข้าถึงง่าย และโหลดไวระดับปีศาจ
- * [FIX]: เปลี่ยนพิกัดการส่งออกเป็น Export Default เพื่อล้าง Error ใน Registry
+ * [FIXED]: เปลี่ยนพิกัดการส่งออกเป็น Export Default เพื่อล้าง Error ใน Registry
+ * [FIXED]: เปลี่ยนพิกัด Link '#' เป็น Button เพื่อรักษา Link Integrity
  */
 const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
   data,
@@ -265,12 +268,19 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
           <div className="flex flex-col items-center justify-between gap-6 border-t border-slate-900 pt-10 text-[9px] font-black tracking-[0.3em] uppercase italic md:flex-row">
             <p>© 2026 {footer.companyName} • วางระบบโดย AEM Engine</p>
             <div className="flex gap-8">
-              <a href="#" className="transition-colors hover:text-white">
+              {/* [FIXED]: เปลี่ยนจาก <a> เป็น <button> เพื่อหยุดการ Refresh หน้า (Link Integrity) */}
+              <button
+                type="button"
+                className="cursor-pointer transition-colors hover:text-white"
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="transition-colors hover:text-white">
+              </button>
+              <button
+                type="button"
+                className="cursor-pointer transition-colors hover:text-white"
+              >
                 Terms of Service
-              </a>
+              </button>
             </div>
           </div>
         </div>
