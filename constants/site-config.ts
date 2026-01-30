@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
   // 3. Authority Expert (การยืนยันตัวตนระดับสูง - Strategic E-E-A-T)
   expert: {
     name: "นายเอ็มซ่ามากส์",
-    realName: "นายอลงกรณ์ ยมเกิด",
+    realName: "นาย อลงกรณ์ ยมเกิด", //มีเว้นวรรค 
     role: "Technical SEO Consultant & Web Infrastructure Lead",
     bio: "ที่ปรึกษาการวางรากฐานระบบดิจิทัลด้วย Next.js และการวางระบบ Technical SEO มาตรฐานสากล มุ่งเน้นความเสถียรสูงสุดและการเก็บพิกัดข้อมูลที่แม่นยำ",
   },
@@ -60,6 +60,7 @@ export const siteConfig: SiteConfig = {
       "รับทำเว็บไซต์ SEO",
       "เว็บไซต์สำเร็จรูป 2026",
       "High-Performance Sale Page",
+      "นาย อลงกรณ์ ยมเกิด",
       "นายเอ็มซ่ามากส์",
     ],
     all: "เว็บไซต์สำเร็จรูป, นายเอ็มซ่ามากส์, AEMDEVWEB, บริการทำ Sale Page, ระบบเว็บติดหน้าแรก, Next.js 16, Tailwind CSS 4, นายอลงกรณ์ ยมเกิด, เอ็มเดฟเว็บ",
