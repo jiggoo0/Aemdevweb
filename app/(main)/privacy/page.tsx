@@ -14,43 +14,39 @@ import {
   ArrowRight,
 } from "lucide-react"
 
-// ข้อมูลตัวตนและโครงสร้างระบบ
+// พิกัดข้อมูลตัวตนและโครงสร้างระบบ
 import { siteConfig } from "@/constants/site-config"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * PrivacyPage - มาตรฐานการคุ้มครองข้อมูลส่วนบุคคล 2026
+ * PrivacyPage: มาตรฐานการคุ้มครองข้อมูลส่วนบุคคล 2026
  * -------------------------------------------------------------------------
- * ยุทธศาสตร์: Strategic Trust Framework
- * มาตรฐาน: การคุ้มครองข้อมูลตามหลักสากลเพื่อความมั่นคงทางธุรกิจ
+ * ยุทธศาสตร์: Strategic Trust Framework (ความโปร่งใสระดับ Specialist)
+ * มาตรฐาน: Tailwind 4 OKLCH | Ultra-Deep Level 7
+ * ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function PrivacyPage() {
-  const lastUpdated = "29 มกราคม 2026"
+  const lastUpdated = "31 มกราคม 2026"
 
-  // การกำหนดค่าการเคลื่อนไหวเพื่อความต่อเนื่องเชิงระบบ
+  // พิกัดการเคลื่อนไหวเชิงระบบ (Motion Protocol)
   const fadeIn: Variants = {
     initial: { opacity: 0, y: 20 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut" as const,
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   }
 
   const staggerContainer: Variants = {
     animate: {
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   }
 
   return (
-    <main className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10">
-      {/* 1. SCHEMA: การระบุโครงสร้างข้อมูลเพื่อความโปร่งใสต่อระบบการค้นหาและ AI */}
+    <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
+      {/* 1. SCHEMA: ยืนยันพิกัดความโปร่งใสต่อระบบ AI Search */}
       <JsonLd
         type="WebPage"
         data={{
@@ -58,27 +54,22 @@ export default function PrivacyPage() {
           description:
             "Professional data protection and privacy standards for strategic business projects.",
           publisher: {
-            "@type": "Person",
-            "@id": `${siteConfig.links.personal}/#person`,
-            name: siteConfig.expert.realName,
+            "@id": "https://me.aemdevweb.com/#person",
           },
-          dateModified: "2026-01-29",
+          dateModified: "2026-01-31",
         }}
       />
 
-      {/* รายละเอียดพื้นหลัง: ลายเส้นโครงสร้างเชิงระบบเพื่อความประณีต */}
-      <div
-        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.02]"
-        aria-hidden="true"
-      />
+      {/* Technical Grid Layer */}
+      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] opacity-[0.03] dark:invert" />
 
-      {/* 2. Hero Header: การประกาศพันธสัญญาด้านความเป็นส่วนตัว */}
+      {/* 2. HERO HEADER: พิกัดการประกาศพันธสัญญา (Strategic Header) */}
       <section className="relative overflow-hidden pt-32 pb-16 lg:pt-48 lg:pb-32">
-        <div className="container mx-auto px-6 text-center">
+        <div className="container-za text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="mx-auto mb-12 flex h-24 w-24 items-center justify-center rounded-[3rem] bg-slate-950 text-emerald-500 shadow-2xl shadow-emerald-500/20"
+            className="bg-brand-depth text-brand-primary shadow-node dark:bg-brand-primary dark:text-brand-depth mx-auto mb-12 flex h-24 w-24 items-center justify-center rounded-[3rem]"
           >
             <ShieldCheck size={48} strokeWidth={1.5} />
           </motion.div>
@@ -87,65 +78,67 @@ export default function PrivacyPage() {
             variants={fadeIn}
             initial="initial"
             animate="animate"
-            className="font-heading text-6xl leading-[0.9] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl lg:text-9xl"
+            className="font-heading text-brand-depth text-6xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl lg:text-[9rem] dark:text-white"
           >
             Privacy <br />
-            <span className="text-emerald-500">Policy.</span>
+            <span className="text-brand-primary">Policy.</span>
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="mt-12 inline-flex items-center gap-3 rounded-full border border-slate-100 bg-white px-8 py-3 shadow-sm"
+            className="mt-12 inline-flex items-center gap-3 rounded-full border border-[oklch(0.9_0.02_260)] bg-white px-8 py-3 shadow-sm dark:border-white/5 dark:bg-white/5"
           >
-            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
-            <p className="font-body text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase italic">
+            <div className="bg-brand-primary h-2 w-2 animate-ping rounded-full" />
+            <p className="font-body text-[10px] font-black tracking-[0.2em] text-[oklch(0.5_0.02_260)] uppercase italic">
               System Audit Status:{" "}
-              <span className="text-slate-950">Verified {lastUpdated}</span>
+              <span className="text-brand-depth dark:text-white">
+                Verified {lastUpdated}
+              </span>
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* 3. Policy Matrix: รายละเอียดการจัดการข้อมูลที่โปร่งใส */}
-      <section className="container mx-auto px-6 py-20">
+      {/* 3. POLICY MATRIX: พิกัดการจัดการข้อมูลเชิงระบบ */}
+      <section className="container-za py-20">
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="mx-auto max-w-4xl space-y-10"
+          className="mx-auto max-w-4xl space-y-8"
         >
           <PolicyCard
             icon={FileText}
             title="01. Data Governance"
-            content="เราให้ความสำคัญกับข้อมูลโครงการของท่านเป็นอันดับหนึ่ง ข้อมูลพื้นฐาน อาทิ ชื่อ รายละเอียดการติดต่อ หรือข้อมูลความต้องการทางธุรกิจ จะถูกนำมาใช้เพื่อการวิเคราะห์และพัฒนาระบบให้บรรลุวัตถุประสงค์สูงสุดเท่านั้น โดยปราศจากนโยบายการเปิดเผยข้อมูลก่อนได้รับอนุญาตเป็นลายลักษณ์อักษร"
+            content="เราให้ความสำคัญกับข้อมูลโครงการของท่านเป็นอันดับหนึ่ง ข้อมูลพื้นฐานจะถูกนำมาใช้เพื่อการวิเคราะห์และพัฒนาระบบให้บรรลุวัตถุประสงค์สูงสุดเท่านั้น โดยปราศจากนโยบายการเปิดเผยข้อมูลก่อนได้รับอนุญาตเป็นลายลักษณ์อักษร"
           />
 
           <PolicyCard
             icon={Lock}
             title="02. Security Infrastructure"
-            content="ระบบที่ส่งมอบพัฒนาบนโครงสร้าง Next.js 16 พร้อมการรักษาความปลอดภัยระดับ Code-Level ข้อมูลสำคัญและชุดคำสั่ง API จะถูกจัดเก็บและป้องกันด้วยมาตรฐานการเข้ารหัสที่ทันสมัยที่สุด เพื่อความปลอดภัยของทรัพย์สินดิจิทัลในระยะยาว"
+            content="ระบบที่ส่งมอบพัฒนาบนโครงสร้าง Next.js 16 พร้อมการรักษาความปลอดภัยระดับ Code-Level ข้อมูลสำคัญจะถูกจัดเก็บด้วยมาตรฐานการเข้ารหัสที่ทันสมัยที่สุด เพื่อความปลอดภัยของสินทรัพย์ดิจิทัล"
           />
 
           <PolicyCard
             icon={Eye}
             title="03. Confidentiality"
-            content="ความลับทางการค้าและกลยุทธ์การดำเนินงานคือหัวใจของธุรกิจ เรามีมาตรการรักษาความลับอย่างเข้มงวด ข้อมูลโครงการของท่านจะไม่ถูกส่งต่อ นำไปใช้ซ้ำ หรือจำหน่ายให้แก่บุคคลภายนอกโดยเด็ดขาด (Zero Third-Party Data Sharing Policy)"
+            content="ความลับทางการค้าคือหัวใจของธุรกิจ เรามีมาตรการรักษาความลับอย่างเข้มงวด ข้อมูลโครงการของท่านจะไม่ถูกส่งต่อ นำไปใช้ซ้ำ หรือจำหน่ายให้แก่บุคคลภายนอกโดยเด็ดขาด (Zero Third-Party Data Sharing Policy)"
           />
 
-          {/* 4. Action Node: การบริหารจัดการสิทธิ์ในข้อมูล */}
+          {/* 4. ACTION NODE: พิกัดบริหารจัดการสิทธิ์ (Impact Node) */}
           <motion.div
             variants={fadeIn}
-            className="group relative overflow-hidden rounded-[4rem] border border-emerald-500/20 bg-slate-950 p-12 transition-all duration-700 hover:border-emerald-500/40 md:p-24"
+            className="group bg-brand-depth shadow-node relative overflow-hidden rounded-[4rem] p-12 md:p-24 dark:bg-[oklch(0.2_0.02_260)]"
           >
             <div className="absolute -top-12 -right-12 opacity-10 transition-transform duration-1000 group-hover:scale-125 group-hover:rotate-12">
-              <Zap size={300} className="text-emerald-500" />
+              <Zap size={300} className="text-brand-primary" />
             </div>
 
             <div className="relative z-10 space-y-10">
-              <div className="flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-emerald-500 text-slate-950 shadow-xl shadow-emerald-500/30">
+              <div className="bg-brand-primary text-brand-depth shadow-aurora flex h-16 w-16 items-center justify-center rounded-[1.5rem]">
                 <UserCheck size={32} />
               </div>
 
@@ -153,17 +146,16 @@ export default function PrivacyPage() {
                 <h2 className="font-heading text-4xl leading-none font-black tracking-tighter text-white uppercase italic md:text-6xl">
                   Data Rights <br /> Management.
                 </h2>
-                <p className="font-body max-w-2xl text-xl leading-relaxed font-bold text-slate-400">
-                  ท่านมีสิทธิ์โดยสมบูรณ์ในการบริหารจัดการข้อมูลส่วนบุคคล
-                  ทั้งการตรวจสอบ การแก้ไข หรือการร้องขอให้ลบข้อมูลออกจากระบบ
-                  โดยสามารถประสานงานผ่านช่องทางการสื่อสารอย่างเป็นทางการได้ทันที
+                <p className="font-body max-w-2xl text-xl font-bold text-[oklch(0.8_0.02_260)]">
+                  ท่านมีสิทธิ์โดยสมบูรณ์ในการบริหารจัดการข้อมูลส่วนบุคคล ทั้งการตรวจสอบ การแก้ไข หรือการร้องขอให้ลบข้อมูลออกจากระบบผ่านช่องทางหลักได้ทันที
                 </p>
               </div>
 
               <a
                 href={siteConfig.links.line}
                 target="_blank"
-                className="inline-flex items-center gap-4 rounded-2xl bg-white px-10 py-6 text-[11px] font-black tracking-[0.3em] text-slate-950 uppercase italic transition-all hover:bg-emerald-500 hover:text-white active:scale-95"
+                rel="noopener noreferrer"
+                className="group text-brand-depth hover:bg-brand-primary inline-flex items-center gap-4 rounded-2xl bg-white px-10 py-6 text-[11px] font-black tracking-[0.3em] uppercase italic transition-all hover:text-white active:scale-95 shadow-2xl"
               >
                 REQUEST DATA ACCESS <ArrowRight size={18} />
               </a>
@@ -172,10 +164,10 @@ export default function PrivacyPage() {
         </motion.div>
       </section>
 
-      {/* ส่วนท้ายหน้า: ข้อมูลมาตรฐานระบบ */}
-      <footer className="mt-32 border-t border-slate-50 py-20 text-center opacity-30 select-none">
-        <p className="font-heading text-[10px] font-black tracking-[0.6em] text-slate-400 uppercase italic">
-          Strategic Data Integrity Standard • 2026
+      {/* Branding Footer Node */}
+      <footer className="mt-32 py-20 text-center opacity-30 select-none">
+        <p className="font-heading text-brand-depth text-[10px] font-black tracking-[0.6em] uppercase italic dark:text-white">
+          Strategic Data Integrity Standard • AEMDEVWEB 2026
         </p>
       </footer>
     </main>
@@ -183,7 +175,7 @@ export default function PrivacyPage() {
 }
 
 /**
- * PolicyCard Component
+ * [SUB-COMPONENT]: PolicyCard
  */
 function PolicyCard({
   icon: Icon,
@@ -200,17 +192,17 @@ function PolicyCard({
         initial: { opacity: 0, x: -20 },
         animate: { opacity: 1, x: 0 },
       }}
-      className="group relative rounded-[3.5rem] border border-slate-100 bg-white p-10 transition-all duration-500 hover:border-emerald-500/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] md:p-20"
+      className="depth-card group hover:border-brand-primary/40 p-10 md:p-20"
     >
       <div className="flex flex-col items-start gap-10 md:flex-row">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.5rem] bg-slate-50 text-slate-400 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-slate-950 group-hover:text-emerald-500">
+        <div className="group-hover:bg-brand-depth group-hover:text-brand-primary flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.5rem] bg-[oklch(0.98_0.01_260)] text-[oklch(0.5_0.02_260)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 dark:bg-white/5">
           <Icon size={32} strokeWidth={1.5} />
         </div>
         <div className="space-y-6">
-          <h2 className="font-heading text-3xl leading-none font-black tracking-tighter text-slate-950 uppercase italic">
+          <h2 className="font-heading text-brand-depth text-3xl font-black tracking-tighter uppercase italic dark:text-white">
             {title}
           </h2>
-          <p className="font-body text-lg leading-relaxed font-bold text-slate-500 transition-colors group-hover:text-slate-600">
+          <p className="font-body text-lg font-bold text-[oklch(0.45_0.02_260)] dark:text-[oklch(0.7_0.02_260)]">
             {content}
           </p>
         </div>

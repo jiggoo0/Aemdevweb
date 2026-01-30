@@ -1,37 +1,36 @@
 // @format
 // พิกัดข้อมูล: constants/navigation.ts
 // หน้าที่: กำหนดพิกัดทางเดินข้อมูล (Routing) และระบบเมนูสำหรับ www.aemdevweb.com
-// ควบคุมมาตรฐานระดับ 7 โดย: นายเอ็มซ่ามากส์
+// มาตรฐาน: Next.js 16 | Ultra-Deep Level 7 | Strategic Authority 2026
+// ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import { siteConfig } from "./site-config";
+import { siteConfig } from "./site-config"
 
 /**
  * [TYPE DEFINITIONS]
- * โครงสร้างข้อมูลสำหรับระบบเมนูนำทาง (Navigation Structure)
- * ปรับปรุงเพื่อรองรับมาตรฐาน Next.js 16 App Router
  */
 export interface NavItem {
-  name: string;
-  href: string;
-  description?: string;
-  badge?: string;
-  external?: boolean;
-  disabled?: boolean;
+  readonly name: string
+  readonly href: string
+  readonly description?: string
+  readonly badge?: string
+  readonly external?: boolean
+  readonly disabled?: boolean
 }
 
 export interface NavigationConfig {
-  main: NavItem[];
-  footer: {
-    services: NavItem[];
-    company: NavItem[];
-    support: NavItem[];
-    legal: NavItem[];
-  };
+  readonly main: readonly NavItem[]
+  readonly footer: {
+    readonly services: readonly NavItem[]
+    readonly company: readonly NavItem[]
+    readonly support: readonly NavItem[]
+    readonly legal: readonly NavItem[]
+  }
 }
 
 /**
  * Navigation Strategy 2026: "Authority & Conversion"
- * วางพิกัดเส้นทางผู้ใช้งานเพื่อส่งพลัง SEO และเพิ่มโอกาสการปิดการขาย
+ * ยุทธศาสตร์: เชื่อมโยง Blog เข้าสู่แกนกลางเพื่อส่งพลังให้พิกัด SEO
  */
 export const navigation: NavigationConfig = {
   /* -------------------------- เมนูหลัก (Main Navbar) ---------------------------- */
@@ -51,6 +50,12 @@ export const navigation: NavigationConfig = {
       href: "/seo",
       badge: "Pro",
       description: "ปรับโครงสร้างระบบเว็บให้ Google รักและดันอันดับหน้าแรก",
+    },
+    {
+      name: "บล็อก",
+      href: "/blog",
+      badge: "New",
+      description: "คลังข้อมูลเทคนิคและกลยุทธ์การทำเว็บไซต์ระดับ Specialist",
     },
     {
       name: "เทมเพลต",
@@ -76,23 +81,19 @@ export const navigation: NavigationConfig = {
         name: "High-Performance Sale Page",
         href: "/services/salepage_single",
         badge: "Popular",
-        description: "เน้นอัตรา Conversion และความเร็วในการโหลดที่เป็นเลิศ",
       },
       {
         name: "Technical SEO Audit",
-        href: "/seo/technical-audit",
-        description: "เอกซเรย์โครงสร้างระบบเพื่อหาจุดบกพร่องด้านเทคนิค",
+        href: "/seo/technical-structure-audit",
       },
       {
         name: "Web Speed Optimization",
-        href: "/seo/speed-optimization",
+        href: "/seo/core-web-vitals-speed",
         badge: "Hot",
-        description: "จูนความเร็วหน้าเว็บให้โหลดไวระดับสูงสุด LCP < 0.8s",
       },
       {
-        name: "Ranking Performance Care",
-        href: "/services/seo_agency",
-        description: "การจัดการอันดับและเสถียรภาพของระบบในระยะยาว",
+        name: "Ecommerce Conversion",
+        href: "/seo/ecommerce-conversion-seo",
       },
     ],
 
@@ -115,16 +116,16 @@ export const navigation: NavigationConfig = {
     support: [
       {
         name: "ปรึกษาผ่าน LINE",
-        href: siteConfig.links.line || "https://lin.ee/6lgJox0",
+        href: siteConfig.links.line,
         external: true,
-      },
-      {
-        name: "รายละเอียดราคา",
-        href: "/services#pricing",
       },
       {
         name: "บทความและเทคนิค",
         href: "/blog",
+      },
+      {
+        name: "รายละเอียดราคา",
+        href: "/services#pricing",
       },
     ],
 
@@ -139,22 +140,18 @@ export const navigation: NavigationConfig = {
       },
     ],
   },
-};
+}
 
-export const mainNav = navigation.main;
-export const footerNavigation = navigation.footer;
+export const mainNav = navigation.main
+export const footerNavigation = navigation.footer
 
 /**
  * [SEO KEYWORDS 2026]
- * พิกัดคำค้นหาหลักสำหรับใช้ใน Metadata และระบบค้นหา
  */
-export const siteKeywords: string[] = [
-  "AEMDEVWEB",
-  "บริการวางระบบเว็บไซต์",
-  "ออกแบบเว็บไซต์ธุรกิจระดับพรีเมียม",
-  "Next.js High-Performance Website",
-  "High-Performance Sale Page",
-  "Technical SEO Specialist",
-  "โครงสร้างระบบเว็บระดับสากล",
+export const siteKeywords: readonly string[] = [
+  ...siteConfig.keywords.list,
+  "บล็อกสอนทำเว็บ 2026",
+  "Technical SEO Specialist Thailand",
+  "Next.js 16 Web Development",
   "นายเอ็มซ่ามากส์",
-];
+]

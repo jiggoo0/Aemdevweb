@@ -3,109 +3,108 @@
 import { FacebookAdsData } from "./schema"
 
 /**
- * facebookAdsData - โครงสร้างสถาปัตยกรรมดิจิทัลสำหรับผู้เชี่ยวชาญด้านการบริหารจัดการโฆษณา
+ * facebookAdsData - สถาปัตยกรรมข้อมูลฉบับสมบูรณ์โดย นายเอ็มซ่ามากส์
  * -------------------------------------------------------------------------
- * ยุทธศาสตร์: การเปลี่ยนอินเทอร์เฟซให้เป็นเครื่องมือบริหารจัดการยอดขายสมรรถนะสูงตลอด 24 ชม.
- * ออกแบบและวางระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * จุดประสงค์: เพื่อให้หน้าเว็บดึงข้อมูลไปแสดงผลครบทุก Section (Stats, Strategy, Footer)
+ * มาตรฐานความเร็ว: LCP < 0.8s | Technical SEO Ready
  */
 export const facebookAdsData: FacebookAdsData = {
-  // 1. กลยุทธ์การจัดการข้อมูล SEO (SEO Strategy)
+  // 1. [SEO] พิกัดการดึงดูด Bot และการแสดงผลบน Social Media
   seo: {
-    title:
-      "Facebook Ads Expert โดย นายเอ็มซ่ามากส์ | จูนยอดขายให้พุ่งด้วยข้อมูลจริง | AEMDEVWEB",
+    title: "Facebook Ads Expert | จูนยอดขายโดย นายเอ็มซ่ามากส์ AEMDEVWEB",
     description:
-      "เปลี่ยนงบโฆษณาให้เป็นกำไรโดย นายเอ็มซ่ามากส์ ด้วยการวางระบบติดตามผลขั้นสูงและแผนงานสมรรถนะสูงบนสถาปัตยกรรม Next.js 16",
+      "หยุดงบไหลทิ้ง! เปลี่ยนหน้าเว็บเป็นเครื่องจักรผลิตยอดขายด้วยระบบ Conversion API ขั้นสูง โดยผู้เชี่ยวชาญ นายเอ็มซ่ามากส์",
     keywords: [
       "นายเอ็มซ่ามากส์",
-      "ยิงแอด Facebook",
-      "เพิ่มยอดขายออนไลน์",
-      "Conversion API Specialist",
-      "เอ็มเดฟเว็บ",
+      "Facebook Ads Specialist",
+      "ยิงแอดแม่นๆ",
+      "AEMDEVWEB",
+      "Technical SEO Thailand",
     ],
-    ogImage: "/images/templates/facebookadsexpert/facebookadsexpert-og.webp",
+    ogImage: "/images/templates/facebookadsexpert/og-fb-expert.webp",
   },
 
-  // 2. ระบบการนำทางเชิงกลยุทธ์ (Strategic Navigation)
+  // 2. [Navigation] พิกัดแถบนำทาง
   navigation: {
-    logo: "นายเอ็ม Ads Specialist",
-    cta: "เริ่มแผนงานกับนายเอ็มซ่ามากส์",
+    logo: "AEM ADS EXPERT",
+    cta: "วิเคราะห์แผนงานฟรี",
   },
 
-  // 3. ส่วนนำเสนอคุณค่าหลัก (Strategic Hero Node)
+  // 3. [Hero] พิกัดหยุดนิ้วลูกค้า (First Impression)
   hero: {
-    badge: "Result-Oriented Marketing 2026 by AEM",
-    title: "ยกระดับสมรรถนะยอดขายด้วย",
-    highlight: "แผนงานพิกัดโปร โดยนายเอ็ม", // [RESOLVED]: การจัดการโครงสร้างเพื่อล้างข้อผิดพลาด TS2741
+    badge: "High-Performance Marketing 2026",
+    title: "เปลี่ยนทุกคลิกให้เป็น",
+    highlight: "ผลกำไรที่วัดผลได้",
     description:
-      "นายเอ็มซ่ามากส์จะช่วยคุณหยุดงบโฆษณาที่ไหลทิ้ง เปลี่ยนมาใช้ข้อมูลจริงนำทางเพื่อกำไรที่ยั่งยืน ด้วยการระบุกลุ่มเป้าหมายที่แม่นยำและระบบงานที่โหลดไวระดับวินาที",
-    cta: "รับบทวิเคราะห์แผนงานจากนายเอ็ม",
+      "นายเอ็มซ่ามากส์ นำเสนอระบบหน้าเว็บยิงแอดที่จูนโครงสร้างมาเพื่อลดค่า CPC และเพิ่ม ROAS ด้วยสถาปัตยกรรม Next.js ที่เร็วที่สุดในไทย",
+    cta: "จองคิวจูนพิกัดยอดขาย",
   },
 
-  // 4. ดัชนีความเหนือระดับของระบบ (Strategic Highlights)
-  highlights: {
-    items: [
-      {
-        icon: "Zap",
-        title: "Load Speed 0.8s",
-        desc: "สถาปัตยกรรมหน้าเว็บที่จูนโดย นายเอ็มซ่ามากส์ เพื่อรักษาลูกค้าไม่ให้กดออกจากหน้าขายของของคุณ",
-      },
-      {
-        icon: "Target",
-        title: "Advanced Conversion API",
-        desc: "ติดตั้งพิกัดการติดตามผลขั้นสูง เพื่อให้คุณรู้ทันทีว่ายอดขายมาจากโฆษณาตัวไหนโดยระบบของนายเอ็ม",
-      },
-      {
-        icon: "MessageSquare",
-        title: "Direct Response UI",
-        desc: "การจัดวางองค์ประกอบพิกัดปุ่มทักโดย นายเอ็มซ่ามากส์ เพื่อขีดความสามารถในการปิดการขายสูงสุด",
-      },
-    ],
-  },
-
-  // 5. รายงานดัชนีชี้วัดความสำเร็จ (Performance Metrics)
+  // 4. [Stats] พิกัดพิสูจน์ความน่าเชื่อถือ (Social Proof)
   stats: [
     {
       label: "Average ROAS",
       value: "8.5x",
-      subValue: "วิเคราะห์โดยนายเอ็ม จากกลุ่มสินค้าสุขภาพ (Health & Wellness)",
+      subValue: "สถิติเฉลี่ยจากพอร์ตลูกค้าสาย E-commerce ปี 2025",
     },
     {
-      label: "Managed Budget",
+      label: "Ad Spend Managed",
       value: "50M+",
-      subValue: "นายเอ็มซ่ามากส์ดูแลบัญชีธุรกิจรวมกว่า 100 ราย",
+      subValue: "งบประมาณที่นายเอ็มซ่ามากส์ดูแลและบริหารจัดการจริง",
     },
     {
-      label: "Generated Revenue",
-      value: "250M+",
-      subValue: "สรุปยอดรวมความสำเร็จภายในระยะเวลาเพียง 1 ปี",
+      label: "Conversion Rate",
+      value: "+120%",
+      subValue: "อัตราการปิดการขายที่เพิ่มขึ้นหลังใช้ระบบ AEM Engine",
     },
   ],
 
-  // 6. โปรโตคอลการดำเนินงาน (Operational Strategy)
+  // 5. [Highlights] พิกัดขยี้จุดแข็ง (Selling Points)
+  highlights: {
+    items: [
+      {
+        icon: "Zap",
+        title: "Speed Dominance",
+        desc: "โหลดหน้าขายของใน 0.4-0.8 วินาที ลูกค้าไม่ทันเปลี่ยนใจ คะแนนคุณภาพโฆษณาพุ่งสูงสุด",
+      },
+      {
+        icon: "Target",
+        title: "Precision Tracking",
+        desc: "วางระบบ Conversion API และ Server-Side Tracking โดยนายเอ็ม เพื่อการเก็บข้อมูลที่แม่นยำ 100%",
+      },
+      {
+        icon: "TrendingUp",
+        title: "Scale-Ready Structure",
+        desc: "โครงสร้างเว็บที่ออกแบบมาเพื่อรองรับ Traffic มหาศาล ยิ่งอัดงบยิงแอด เว็บยิ่งเสถียร",
+      },
+    ],
+  },
+
+  // 6. [Strategy] พิกัดโปรโตคอล (Work Process)
   strategy: [
     {
       step: "01",
-      title: "Check พิกัดข้อมูลเดิม",
-      desc: "นายเอ็มซ่ามากส์จะช่วยค้นหาจุดบกพร่องที่ทำให้งบรั่วไหลจากโครงสร้างแคมเปญเก่าของคุณ",
+      title: "Auditing & Zeroing",
+      desc: "นายเอ็มซ่ามากส์ตรวจสอบพิกัดงบประมาณที่รั่วไหล และจูนโครงสร้างแคมเปญใหม่จากฐานราก",
     },
     {
       step: "02",
-      title: "วางเส้นทางลูกค้าใหม่",
-      desc: "ออกแบบลำดับประสบการณ์โดยนายเอ็ม ตั้งแต่การสร้างการรับรู้จนถึงการตัดสินใจซื้อซ้ำ",
+      title: "System Deployment",
+      desc: "ติดตั้งหน้า Landing Page สมรรถนะสูง พร้อมระบบ Tracking ขั้นสูงที่เป็นความลับของ AEM",
     },
     {
       step: "03",
-      title: "Scaling ผลกำไร",
-      desc: "เพิ่มงบในส่วนที่ทำกำไรและขยายฐานลูกค้าใหม่ด้วยพิกัดกลุ่มเป้าหมายที่ นายเอ็มซ่ามากส์ คัดสรร",
+      title: "Optimization Loop",
+      desc: "วิเคราะห์ข้อมูลแบบ Real-time เพื่อปรับแต่งกลุ่มเป้าหมายและ Scaling กำไรให้ธุรกิจของคุณ",
     },
   ],
 
-  // 7. ส่วนยืนยันมาตรฐานการดำเนินงาน (Strategic Footer)
+  // 7. [Footer] พิกัดปิดการขาย (Final CTA)
   footer: {
-    companyName: "นายเอ็มซ่ามากส์ x AEMDEVWEB",
-    contactLine: "@aemdev",
+    companyName: "AEMDEVWEB | โดย นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)",
+    contactLine: "@127cnthn",
     phone: "0xx-xxx-xxxx",
-    copy: "High-Performance Ads System • Created by นายเอ็มซ่ามากส์",
-    link: "https://line.me/ti/p/@aemdev",
+    copy: "© 2026 AEMDEVWEB - High Performance Ad-Systems. All Rights Reserved.",
+    link: "https://line.me/ti/p/@127cnthn",
   },
 }

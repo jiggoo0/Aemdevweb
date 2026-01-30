@@ -12,29 +12,25 @@ import { ServiceCard } from "@/components/shared/ServiceCard"
 import { JsonLd } from "@/components/seo/JsonLd"
 
 /**
- * ServicesPage - ศูนย์รวมโซลูชันแผนงานระบบ AEMDEVWEB
+ * ServicesPage: ศูนย์รวมโซลูชันแผนงานระบบ (Strategic Service Inventory)
  * -------------------------------------------------------------------------
- * ยุทธศาสตร์: การนำเสนอสินทรัพย์ดิจิทัลเชิงกลยุทธ์ (Strategic Service Inventory)
+ * มาตรฐาน: Ultra-Deep Level 7 | Tailwind 4 OKLCH | Zero Warning
+ * ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function ServicesPage() {
-  // การกำหนดค่าการเคลื่อนไหวเพื่อความต่อเนื่องเชิงระบบ
+  // พิกัดการเคลื่อนไหวเชิงระบบ (Motion Protocol)
   const fadeInUp: Variants = {
     initial: { opacity: 0, y: 30 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut" as const,
-      },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
   }
 
   const staggerContainer: Variants = {
     animate: {
-      transition: {
-        staggerChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   }
 
@@ -42,17 +38,18 @@ export default function ServicesPage() {
     <motion.main
       initial="initial"
       animate="animate"
-      className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10"
+      className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]"
     >
-      {/* [1. SERVICE SCHEMA]: การระบุโครงสร้างข้อมูลเพื่อรองรับมาตรฐาน Google Knowledge Graph */}
+      {/* [1. SERVICE SCHEMA]: การระบุโครงสร้างข้อมูลเพื่อชิงพิกัด Rich Snippets */}
       <JsonLd
         type="Graph"
         data={{
           "@graph": [
             {
               "@type": "Service",
+              "@id": `${siteConfig.project.url}/services/#service`,
               name: "Web Infrastructure & Technical SEO",
-              provider: { "@id": `${siteConfig.links.personal}/#person` },
+              provider: { "@id": "https://me.aemdevweb.com/#person" },
               areaServed: "TH",
               hasOfferCatalog: {
                 "@type": "OfferCatalog",
@@ -73,41 +70,37 @@ export default function ServicesPage() {
         }}
       />
 
-      {/* รายละเอียดพื้นหลัง: ลายเส้นโครงสร้างเชิงระบบเพื่อความประณีต */}
-      <div
-        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-fixed bg-center opacity-[0.03]"
-        aria-hidden="true"
-      />
+      {/* Background Technical Grid Layer */}
+      <div className="absolute inset-0 -z-10 bg-[url('/grid.svg')] opacity-[0.03] dark:invert" />
 
-      {/* [2. HERO SECTION]: ส่วนนำเสนอระดับประสิทธิภาพของระบบ */}
-      <section className="relative overflow-hidden border-b border-slate-50 bg-slate-50/50 pt-32 pb-24 lg:pt-48 lg:pb-40">
-        <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-emerald-500/5 blur-[120px]" />
-
-        <div className="container mx-auto px-6">
+      {/* [2. HERO SECTION]: พิกัดนำเสนอระดับประสิทธิภาพ */}
+      <section className="relative overflow-hidden border-b border-[oklch(0.95_0.02_260)] bg-[oklch(0.98_0.01_260)] pt-32 pb-24 lg:pt-48 lg:pb-40 dark:border-white/5 dark:bg-[oklch(0.15_0.02_260)]">
+        <div className="container-za">
           <div className="max-w-5xl">
             <motion.div
               variants={fadeInUp}
               className="mb-10 flex items-center gap-4"
             >
-              <div className="h-px w-12 bg-emerald-500" />
-              <span className="font-heading text-[10px] font-black tracking-[0.5em] text-emerald-600 uppercase italic">
+              <div className="bg-brand-primary h-px w-12" />
+              <span className="font-heading text-brand-primary text-[10px] font-black tracking-[0.5em] uppercase italic">
                 Strategic System Solutions
               </span>
             </motion.div>
 
-            <h1 className="font-heading text-7xl leading-[0.85] font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl lg:text-[11rem]">
+            <h1 className="font-heading text-brand-depth text-7xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-[10rem] dark:text-white">
               Service <br />
-              <span className="text-emerald-500">
-                Inventory<span className="text-slate-950">.</span>
+              <span className="text-brand-primary">
+                Inventory
+                <span className="text-brand-depth dark:text-white">.</span>
               </span>
             </h1>
 
             <motion.p
               variants={fadeInUp}
-              className="font-body mt-12 max-w-3xl text-xl leading-relaxed font-bold text-slate-500 md:text-3xl md:leading-tight"
+              className="font-body mt-12 max-w-3xl text-xl leading-relaxed font-bold text-[oklch(0.45_0.02_260)] md:text-3xl dark:text-[oklch(0.7_0.02_260)]"
             >
-              เลือกโซลูชันที่ตอบโจทย์ความต้องการทางธุรกิจของคุณ
-              ทุกระบบถูกปรับแต่งเพื่อประสิทธิภาพและความเร็วระดับสูงสุด
+              เลือกโหนดบริการที่ตอบโจทย์ความต้องการทางธุรกิจของคุณ
+              ทุกพิกัดรหัสถูกปรับแต่งเพื่อสมรรถนะและความเร็วระดับสูงสุด
             </motion.p>
           </div>
         </div>
@@ -115,7 +108,7 @@ export default function ServicesPage() {
 
       {/* [3. MAIN CATALOG]: รายการแผนงานระบบ (Staggered Grid) */}
       <section className="relative z-10 -mt-24">
-        <div className="container mx-auto px-6">
+        <div className="container-za">
           <motion.div
             variants={staggerContainer}
             initial="initial"
@@ -127,7 +120,7 @@ export default function ServicesPage() {
               <motion.div key={service.id} variants={fadeInUp}>
                 <ServiceCard
                   data={service}
-                  className="bg-white/80 backdrop-blur-xl transition-all duration-500 hover:-translate-y-4 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.15)]"
+                  className="bg-white/90 backdrop-blur-xl dark:bg-white/5"
                 />
               </motion.div>
             ))}
@@ -137,14 +130,12 @@ export default function ServicesPage() {
 
       {/* [4. THE STANDARD]: ความเชี่ยวชาญเบื้องหลังความสำเร็จ */}
       <section className="py-32 lg:py-56">
-        <div className="container mx-auto px-6">
+        <div className="container-za">
           <div className="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
             <div className="space-y-20">
-              <div className="space-y-6">
-                <h2 className="font-heading text-6xl font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
-                  Built for <span className="text-emerald-500">Scale.</span>
-                </h2>
-              </div>
+              <h2 className="font-heading text-brand-depth text-6xl font-black tracking-tighter uppercase italic md:text-8xl dark:text-white">
+                Built for <span className="text-brand-primary">Scale.</span>
+              </h2>
 
               <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
                 {[
@@ -165,27 +156,26 @@ export default function ServicesPage() {
                   },
                   {
                     icon: <Clock />,
-                    title: "Rapid Implementation",
-                    desc: "พร้อมดำเนินการภายใน 24-48 ชม.",
+                    title: "Rapid Deploy",
+                    desc: "พร้อมดำเนินการภายใน 48 ชม.",
                   },
                 ].map((item, i) => (
                   <motion.div
                     key={i}
                     whileHover={{ x: 10 }}
-                    className="group space-y-4 border-l-2 border-slate-100 pl-6 transition-colors hover:border-emerald-500"
+                    className="group space-y-4 border-l-2 border-[oklch(0.9_0.02_260)] pl-6 transition-colors hover:border-brand-primary dark:border-white/10"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-50 text-emerald-600 transition-all group-hover:bg-slate-950 group-hover:text-emerald-400">
-                      {React.isValidElement(item.icon)
-                        ? React.cloneElement(
-                            item.icon as React.ReactElement<{ size?: number }>,
-                            { size: 24 }
-                          )
-                        : item.icon}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[oklch(0.98_0.01_260)] text-brand-primary transition-all group-hover:bg-brand-depth group-hover:text-brand-primary dark:bg-white/5">
+                      {/* [FIXED]: Assert type as React.ReactElement<{ size?: number }> to prevent ESLint 'no-explicit-any' warning */}
+                      {React.cloneElement(
+                        item.icon as React.ReactElement<{ size?: number }>,
+                        { size: 24 }
+                      )}
                     </div>
-                    <h3 className="font-heading text-lg font-black tracking-tight text-slate-950 uppercase italic">
+                    <h3 className="font-heading text-brand-depth text-lg font-black tracking-tight uppercase italic dark:text-white">
                       {item.title}
                     </h3>
-                    <p className="font-body text-sm font-bold text-slate-400 group-hover:text-slate-600">
+                    <p className="font-body text-sm font-bold text-[oklch(0.5_0.02_260)]">
                       {item.desc}
                     </p>
                   </motion.div>
@@ -197,11 +187,11 @@ export default function ServicesPage() {
             <div className="relative">
               <motion.div
                 whileHover={{ rotate: -2, scale: 1.02 }}
-                className="relative rounded-[4rem] bg-slate-950 p-12 text-white shadow-2xl shadow-slate-900/40 md:p-20"
+                className="depth-card bg-brand-depth relative p-12 text-white md:p-20 dark:bg-[oklch(0.2_0.02_260)]"
               >
                 <blockquote className="font-body text-4xl leading-[1] font-black italic md:text-6xl">
                   "ผมสร้าง{" "}
-                  <span className="text-emerald-400">Digital Assets</span>{" "}
+                  <span className="text-brand-primary">Digital Assets</span>{" "}
                   ที่จะสร้างมูลค่าเพิ่มให้ธุรกิจของคุณอย่างยั่งยืน"
                 </blockquote>
               </motion.div>
@@ -210,18 +200,20 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* [6. FINAL STRATEGIC CTA] */}
-      <section className="container mx-auto px-6">
-        <div className="rounded-[3rem] bg-emerald-600 p-12 text-center text-slate-950 shadow-2xl shadow-emerald-500/20 md:p-24">
-          <h2 className="font-heading mb-10 text-4xl leading-none font-black uppercase italic md:text-6xl lg:text-7xl">
-            Ready to Accelerate?
+      {/* [6. FINAL CTA NODE] */}
+      <section className="container-za">
+        <div className="bg-brand-primary text-brand-depth shadow-aurora rounded-[4rem] p-12 text-center md:p-24">
+          <h2 className="font-heading mb-10 text-4xl leading-none font-black uppercase italic md:text-6xl lg:text-8xl">
+            Ready to <br /> Accelerate?
           </h2>
           <a
             href={siteConfig.links.line}
-            className="group inline-flex items-center gap-4 rounded-2xl bg-slate-950 px-12 py-7 text-white transition-all hover:bg-white hover:text-slate-950 active:scale-95"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group bg-brand-depth hover:text-brand-depth inline-flex items-center gap-4 rounded-3xl px-12 py-7 text-white shadow-2xl transition-all hover:bg-white active:scale-95"
           >
             <span className="font-heading text-lg font-black tracking-widest uppercase italic">
-              ปรึกษาแผนงานระบบกับผู้เชี่ยวชาญ
+              START PROJECT NOW
             </span>
             <ArrowRight
               size={24}

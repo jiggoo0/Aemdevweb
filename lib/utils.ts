@@ -4,9 +4,9 @@
 // มาตรฐาน: Ultra-Deep Level 7 | Tailwind 4 Compatible
 // ควบคุมระบบโดย: นายเอ็มซ่ามากส์
 
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { siteConfig } from "@/constants/site-config";
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+import { siteConfig } from "@/constants/site-config"
 
 /**
  * [UTILITY: cn]
@@ -14,7 +14,7 @@ import { siteConfig } from "@/constants/site-config";
  * ยุทธศาสตร์: ลดขนาดรหัส HTML และเพิ่มประสิทธิภาพการเรนเดอร์
  */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
 /**
@@ -22,14 +22,14 @@ export function cn(...inputs: ClassValue[]) {
  * หน้าที่: แปลงพิกัดเวลาเป็นภาษาไทยมาตรฐาน
  */
 export function formatThaiDate(date: string | Date): string {
-  const targetDate = new Date(date);
-  if (isNaN(targetDate.getTime())) return "ไม่ระบุพิกัดเวลา";
+  const targetDate = new Date(date)
+  if (isNaN(targetDate.getTime())) return "ไม่ระบุพิกัดเวลา"
 
   return targetDate.toLocaleDateString("th-TH", {
     year: "numeric",
     month: "long",
     day: "numeric",
-  });
+  })
 }
 
 /**
@@ -38,7 +38,7 @@ export function formatThaiDate(date: string | Date): string {
  * สำคัญ: ใช้เพื่อกำจัดจุดเสี่ยงเรื่อง Broken Link ในระบบการค้นหา
  */
 export function absoluteUrl(path: string) {
-  return `${siteConfig.project.url}${path.startsWith("/") ? path : `/${path}`}`;
+  return `${siteConfig.project.url}${path.startsWith("/") ? path : `/${path}`}`
 }
 
 /**
@@ -51,10 +51,10 @@ export function slugify(text: string) {
     .toString()
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-")     // เปลี่ยนช่องว่างเป็นขีด
-    .replace(/&/g, "-and-")   // เปลี่ยน & เป็น and
+    .replace(/\s+/g, "-") // เปลี่ยนช่องว่างเป็นขีด
+    .replace(/&/g, "-and-") // เปลี่ยน & เป็น and
     .replace(/[^\u0E00-\u0E7F\w-]+/g, "") // ลบอักขระพิเศษยกเว้นภาษาไทยและอักษรปกติ
-    .replace(/--+/g, "-");    // ลบขีดซ้ำ
+    .replace(/--+/g, "-") // ลบขีดซ้ำ
 }
 
 /**
@@ -66,5 +66,5 @@ export function formatCurrency(value: number): string {
     style: "currency",
     currency: "THB",
     minimumFractionDigits: 0,
-  }).format(value);
+  }).format(value)
 }

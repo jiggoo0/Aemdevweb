@@ -4,7 +4,7 @@
 
 import React from "react"
 import {
-  // [COMMON ICONS]: รายการไอคอนมาตรฐานสำหรับการใช้งานร่วมกับแผนงานระบบ
+  // [DNA ICONS]: ทะเบียนไอคอนหลักเพื่อการแสดงผลสมรรถนะระบบ AEMDEVWEB
   Zap,
   Clock,
   Wallet,
@@ -23,7 +23,11 @@ import {
   CheckCircle2,
   LayoutTemplate,
   CircleHelp,
-  // [TYPES]: โครงสร้างข้อมูลเพื่อความแม่นยำของระบบ
+  ArrowUpRight,
+  AlertCircle, // สำหรับพิกัดวิเคราะห์จุดเสี่ยง (Risk Analysis)
+  MessageSquare, // สำหรับระบบติดต่อสื่อสาร (Fast Response)
+  Facebook, // สำหรับพิกัดเชื่อมโยงโซเชียลมีเดีย
+  // [TYPES]: โครงสร้างข้อมูลเพื่อความแม่นยำระดับ 7
   type LucideProps,
   type LucideIcon,
 } from "lucide-react"
@@ -32,8 +36,8 @@ import { cn } from "@/lib/utils"
 import { ServiceIconName } from "@/types"
 
 /**
- * [ICON REGISTRY]: การผูกค่าชื่อไอคอน (String) เข้ากับ Component จริง
- * แนวทางนี้ช่วยเพิ่มประสิทธิภาพในการดึงข้อมูลจากหลังบ้านเพื่อแสดงผลทันที
+ * [ICON MAP REGISTRY]: ระบบจับคู่ชื่อพิกัดข้อมูลเข้ากับคอมโพเนนต์ไอคอนจริง
+ * เพิ่มประสิทธิภาพการ Render โดยการทำ Static Mapping
  */
 const ICON_MAP: Record<string, LucideIcon> = {
   Zap,
@@ -53,21 +57,25 @@ const ICON_MAP: Record<string, LucideIcon> = {
   BarChart3,
   CheckCircle2,
   LayoutTemplate,
+  ArrowUpRight,
+  AlertCircle,
+  MessageSquare,
+  Facebook,
 }
 
 interface IconRendererProps extends LucideProps {
-  /** ชื่อไอคอนที่ระบุตามที่ลงทะเบียนไว้ในระบบ */
+  /** name: ชื่อพิกัดไอคอนที่ลงทะเบียนไว้ในทะเบียนกลาง (Strict Type) */
   name?: ServiceIconName | string
-  /** คลาสสำหรับจัดการสไตล์ด้วย Tailwind CSS */
+  /** className: คลาสสำหรับจัดการสไตล์ด้วย Tailwind CSS 4 (OKLCH) */
   className?: string
-  /** ขนาดของไอคอน (ค่าเริ่มต้น 24px) */
+  /** size: ขนาดพิกัดของไอคอน (Default: 24px) */
   size?: number
 }
 
 /**
- * IconRenderer - ระบบแสดงผลไอคอนอัตโนมัติ (Strategic Icon Engine)
+ * IconRenderer: ระบบจัดการการแสดงผลไอคอนอัตโนมัติ (Strategic Icon Engine)
  * -------------------------------------------------------------------------
- * บริหารจัดการข้อมูลโดย: AEMDEVWEB (นายเอ็มซ่ามากส์)
+ * ควบคุมมาตรฐานความปลอดภัยและประสิทธิภาพสูงสุดโดย: นายเอ็มซ่ามากส์
  */
 export default function IconRenderer({
   name,
@@ -75,25 +83,31 @@ export default function IconRenderer({
   size = 24,
   ...props
 }: IconRendererProps) {
-  // 1. ค้นหาไอคอนจากทะเบียนที่ลงทะเบียนไว้
+  // 1. ตรวจสอบพิกัดคอมโพเนนต์ไอคอนจากทะเบียน
   const IconComponent = name ? ICON_MAP[name] : null
 
-  // 2. ระบบสำรอง: กรณีไม่พบชื่อไอคอนในทะเบียน จะแสดงไอคอนช่วยเหลือแบบจาง
+  // 2. Fallback Protocol: กรณีไม่พบพิกัดไอคอน จะแสดงสถานะแจ้งเตือนแบบจางพร้อม Animation
   if (!IconComponent) {
     return (
       <CircleHelp
         size={size}
-        className={cn("animate-pulse text-slate-300 opacity-40", className)}
+        className={cn(
+          "animate-pulse text-[oklch(0.9_0.02_260)] opacity-40 transition-opacity",
+          className
+        )}
         {...props}
       />
     )
   }
 
-  // 3. แสดงผลไอคอนพร้อมระบบการเปลี่ยนผ่านที่ลื่นไหล
+  // 3. Render Node: แสดงผลไอคอนพร้อมระบบการเปลี่ยนผ่านที่สมบูรณ์ (Fluid Transition)
   return (
     <IconComponent
       size={size}
-      className={cn("transition-all duration-300 ease-in-out", className)}
+      className={cn(
+        "shrink-0 transition-all duration-300 ease-in-out",
+        className
+      )}
       {...props}
     />
   )

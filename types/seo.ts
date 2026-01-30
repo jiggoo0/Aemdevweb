@@ -2,82 +2,85 @@
 // พิกัดข้อมูล: types/seo.ts
 // หน้าที่: กำหนดโครงสร้างข้อมูล (Type Definition) สำหรับระบบ Technical SEO
 // ควบคุมมาตรฐานโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
-// ระดับความลึก: Ultra-Deep Level 7 (Strict Typing)
+// ระดับความลึก: Ultra-Deep Level 7 (Strict Typing & Immutable)
 
 /**
  * SeoBenefit: พิกัดข้อมูลผลลัพธ์ที่ได้รับจากการปรับจูนระบบ
  */
 export interface SeoBenefit {
-  title: string;
-  desc: string;
+  readonly title: string
+  readonly desc: string
 }
 
 /**
- * SeoFaq: ชุดข้อมูลคำถามที่พบบ่อยเพื่อสนับสนุนการตัดสินใจ
+ * SeoFaq: ชุดข้อมูลคำถามที่พบบ่อยเพื่อสนับสนุนการตัดสินใจ (Support FAQ Schema)
  */
 export interface SeoFaq {
-  question: string;
-  answer: string;
+  readonly question: string
+  readonly answer: string
 }
 
 /**
  * SeoPackagePrice: พิกัดงบประมาณและเงื่อนไขการให้บริการ
+ * ออกแบบมารองรับ Offer Schema ของ Google Search
  */
 export interface SeoPackagePrice {
-  /** price: พิกัดข้อมูลตัวเลขสำหรับใช้ในระบบคำนวณและ Schema Markup */
-  price: number;
-  /** label: ข้อความแสดงราคา เช่น "15,900" */
-  label: string;
+  /** price: พิกัดข้อมูลตัวเลขสำหรับใช้ในระบบคำนวณ (e.g., 15900) */
+  readonly price: number
+  /** label: ข้อความแสดงราคาที่ผ่านการ Format แล้ว (e.g., "15,900") */
+  readonly label: string
+  /** currency: หน่วยเงินที่ใช้ (Default: "THB") */
+  readonly currency: "THB" | "USD"
   /** suffix: หน่วยเรียกงบประมาณ เช่น "/ ครั้ง", "/ เดือน" */
-  suffix?: string;
+  readonly suffix?: string
   /** isPopular: พิกัดคัดเลือกบริการเด่นเพื่อนำขึ้นแสดงผลในส่วนแนะนำ */
-  isPopular?: boolean;
+  readonly isPopular?: boolean
 }
 
 /**
  * SeoAddOn: รายการระบบเสริมเพื่อเพิ่มขีดความสามารถเฉพาะจุด
  */
 export interface SeoAddOn {
-  title: string;
-  price: string;
-  description: string;
+  readonly title: string
+  readonly price: string
+  readonly description: string
 }
 
 /**
- * SeoServiceItem: โครงสร้างหลักของข้อมูลบริการ SEO
- * ทุกฟิลด์ถูกระบุประเภทชัดเจนเพื่อกำจัดจุด Warning 'any' ในระบบ Scan
+ * SeoServiceItem: โครงสร้างหลักของข้อมูลบริการ SEO (Core Logic Node)
+ * ปรับปรุงโดยใช้ Readonly เพื่อป้องกันการกลายพันธุ์ของข้อมูล (Data Mutation)
  */
 export interface SeoServiceItem {
-  /** id: รหัสอ้างอิงภายในพิกัดระบบงาน */
-  id: string;
-  /** * slug: พิกัด URL และกุญแจหลักสำหรับเรียกพิกัดรูปภาพอัตโนมัติ
-   * พิกัดภาพอ้างอิง: /images/seo/${slug}.webp 
-   */
-  slug: string;
-  title: string;
-  subtitle: string;
+  /** id: รหัสอ้างอิงภายในพิกัดระบบงาน (Unique ID) */
+  readonly id: string
+  /** slug: พิกัด URL และกุญแจหลักสำหรับเรียกพิกัดรูปภาพอัตโนมัติ */
+  readonly slug: string
+  readonly title: string
+  readonly subtitle: string
   /** description: คำโปรยสำหรับแสดงผลในการ์ดพิกัดบริการ */
-  description: string;
-  /** iconName: ชื่อพิกัดไอคอนที่ลงทะเบียนไว้ในระบบ IconRenderer */
-  iconName: string;
+  readonly description: string
+  /** iconName: ชื่อพิกัดไอคอนที่ลงทะเบียนไว้ใน IconRenderer */
+  readonly iconName: string
   /** painPoints: รายการจุดเสี่ยงที่ระบบจะเข้าไปจัดการแก้ไข */
-  painPoints: string[];
+  readonly painPoints: readonly string[]
   /** features: ขอบเขตการทำงานระดับเทคนิคที่ลูกค้าจะได้รับ */
-  features: string[];
+  readonly features: readonly string[]
   /** benefits: ผลลัพธ์เชิงบวกที่มีต่อพิกัดการเติบโตของธุรกิจ */
-  benefits: SeoBenefit[];
+  readonly benefits: readonly SeoBenefit[]
   /** pricing: พิกัดงบประมาณและสถานะความนิยม */
-  pricing: SeoPackagePrice;
+  readonly pricing: SeoPackagePrice
   /** addOns: รายการระบบเพิ่มเติม (Optional) */
-  addOns?: SeoAddOn[];
+  readonly addOns?: readonly SeoAddOn[]
   /** faq: ข้อมูลตอบโต้ข้อสงสัยในพิกัดบริการ */
-  faq: SeoFaq[];
+  readonly faq: readonly SeoFaq[]
 }
 
 /**
  * SeoServiceCardProps: รูปแบบการรับส่งข้อมูลสำหรับคอมโพเนนต์การ์ดแสดงผล
  */
 export interface SeoServiceCardProps {
-  data: SeoServiceItem;
-  className?: string;
+  data: SeoServiceItem
+  className?: string
+  /** priority: กำหนดให้ Fetch รูปภาพเป็นลำดับแรก (LCP Optimization) */
+  priority?: boolean
 }

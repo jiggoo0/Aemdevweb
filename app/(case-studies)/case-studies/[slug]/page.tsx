@@ -8,16 +8,18 @@ import Link from "next/link"
 import { compileMDX } from "next-mdx-remote/rsc"
 import { ChevronLeft, BarChart3 } from "lucide-react"
 
+// ระบบดึงพิกัดข้อมูลและประมวลผลเนื้อหาเชิงกลยุทธ์
 import { getCaseStudyBySlug, getAllCaseStudies } from "@/lib/case-studies"
 import { useMDXComponents } from "@/mdx-components"
 import { JsonLd } from "@/components/seo/JsonLd"
+import { siteConfig } from "@/constants/site-config"
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
 /**
- * [STRATEGIC SSG PROTOCOL]: การจัดเตรียมเส้นทางข้อมูลล่วงหน้าเพื่อประสิทธิภาพการตอบสนองสูงสุด
+ * [STRATEGIC SSG PROTOCOL]: การจัดเตรียมเส้นทางข้อมูลล่วงหน้า (Pre-rendering)
  */
 export async function generateStaticParams() {
   const studies = await getAllCaseStudies()
@@ -32,12 +34,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const study = await getCaseStudyBySlug(slug)
   if (!study) return { title: "Strategic Insights | Content Not Found" }
 
+  const ogImage = study.frontmatter.thumbnail || siteConfig.project.ogImage
+
   return {
     title: `${study.frontmatter.title} | Case Study Analysis`,
     description: study.frontmatter.excerpt,
+    alternates: { canonical: `/case-studies/${slug}` },
     openGraph: {
-      images: [study.frontmatter.thumbnail || "/og-image.png"],
+      title: study.frontmatter.title,
+      description: study.frontmatter.excerpt,
+      images: [{ url: ogImage }],
       type: "article",
+      section: "Case Study",
+      publishedTime: study.frontmatter.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [ogImage],
     },
   }
 }
@@ -48,7 +61,7 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   if (!study) notFound()
 
-  // การประมวลผลเนื้อหา MDX สำหรับการแสดงผลผ่าน Server-side Component
+  // การประมวลผลเนื้อหา MDX (Server-side Compiled)
   const { content } = await compileMDX({
     source: study.content,
     components: useMDXComponents({}),
@@ -57,7 +70,6 @@ export default async function CaseStudyDetailPage({ params }: Props) {
 
   /**
    * [DATA HELPER]: การจัดการดึงดัชนีชี้วัดหลัก (Primary Impact Metric)
-   * เพื่อความแม่นยำในการแสดงผลข้อมูลตามระนาบโครงสร้างระบบ
    */
   const getPrimaryResult = () => {
     const res = study.frontmatter.results?.[0]
@@ -66,8 +78,8 @@ export default async function CaseStudyDetailPage({ params }: Props) {
   }
 
   return (
-    <main className="relative min-h-screen bg-white pb-32 antialiased selection:bg-emerald-500/10">
-      {/* 1. SCHEMA: การจัดการโครงสร้างข้อมูลให้สอดคล้องกับมาตรฐานระบบบทความเชิงลึก */}
+    <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
+      {/* 1. SCHEMA: การจัดการโครงสร้างข้อมูลยืนยันความสำเร็จ (E-E-A-T) */}
       <JsonLd
         type="Article"
         data={{
@@ -75,16 +87,29 @@ export default async function CaseStudyDetailPage({ params }: Props) {
           image: study.frontmatter.thumbnail,
           datePublished: study.frontmatter.date,
           description: study.frontmatter.excerpt,
-          authorName: "AEMDEVWEB Specialist",
+          author: {
+            "@type": "Person",
+            name: siteConfig.expert.name, // เชื่อมโยงกับพิกัดผู้เชี่ยวชาญโดยตรง
+            url: siteConfig.links.personal,
+          },
+          publisher: {
+            "@type": "Organization",
+            name: siteConfig.company.name,
+            logo: { "@type": "ImageObject", url: siteConfig.project.logo },
+          },
+          about: {
+            "@type": "Service",
+            name: study.frontmatter.service,
+          },
         }}
       />
 
-      {/* [LAYER 1]: HERO SECTION - หัวข้อบันทึกผลลัพธ์เชิงกลยุทธ์ */}
-      <section className="bg-slate-50/50 pt-32 pb-24 lg:pt-48">
-        <div className="container mx-auto px-6">
+      {/* [LAYER 1]: HERO SECTION - พิกัดนำเสนอหัวข้อบันทึกผลลัพธ์เชิงกลยุทธ์ */}
+      <section className="bg-[oklch(0.98_0.01_260)] pt-32 pb-24 lg:pt-48 dark:bg-[oklch(0.15_0.02_260)]">
+        <div className="container-za">
           <Link
             href="/case-studies"
-            className="group mb-12 inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-emerald-600"
+            className="group hover:text-brand-primary mb-12 inline-flex items-center gap-2 text-[10px] font-black tracking-widest text-[oklch(0.6_0.02_260)] uppercase italic transition-colors dark:text-[oklch(0.7_0.02_260)]"
           >
             <ChevronLeft
               size={14}
@@ -92,30 +117,37 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             />
             กลับสู่คลังผลลัพธ์เชิงกลยุทธ์
           </Link>
-          <div className="max-w-5xl border-l-8 border-emerald-500 pl-8 md:pl-16">
-            <h1 className="font-heading text-5xl leading-tight font-black tracking-tighter text-slate-950 uppercase italic md:text-8xl">
+          <div className="border-brand-primary max-w-5xl border-l-8 pl-8 md:pl-16">
+            <h1 className="font-heading text-5xl leading-tight font-black tracking-tighter text-[oklch(0.2_0.02_260)] uppercase italic md:text-8xl dark:text-white">
               {study.frontmatter.title}
             </h1>
+            <p className="font-body mt-6 text-lg font-bold text-[oklch(0.45_0.02_260)] md:text-xl dark:text-[oklch(0.8_0.02_260)]">
+              Service Protocol:{" "}
+              <span className="text-brand-primary">
+                {study.frontmatter.service}
+              </span>
+            </p>
           </div>
         </div>
       </section>
 
-      {/* [LAYER 2]: CONTENT BODY - บันทึกการวิเคราะห์และดัชนีชี้วัดความสำเร็จ */}
-      <article className="container mx-auto px-6">
-        <div className="relative -mt-20 mb-24 aspect-video overflow-hidden rounded-[3.5rem] border-8 border-white bg-slate-100 shadow-2xl shadow-slate-900/10 md:-mt-32">
+      {/* [LAYER 2]: CONTENT BODY - พิกัดบันทึกการวิเคราะห์และดัชนีชี้วัด */}
+      <article className="container-za">
+        {/* Visual Node: ภาพประกอบหลัก */}
+        <div className="shadow-node relative -mt-20 mb-24 aspect-video overflow-hidden rounded-[3.5rem] border-8 border-white bg-[oklch(0.95_0.02_260)] md:-mt-32 dark:border-[oklch(0.12_0.02_260)]">
           <Image
             src={study.frontmatter.thumbnail}
             alt={study.frontmatter.title}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 hover:scale-105"
             priority
           />
         </div>
 
         <div className="mx-auto max-w-4xl">
-          {/* ส่วนแสดงดัชนีชี้วัดความสำเร็จหลัก (Strategic Impact Metric) */}
-          <div className="mb-24 rounded-[3rem] bg-slate-950 p-12 text-white shadow-2xl shadow-emerald-500/10">
-            <div className="mb-6 flex items-center gap-4 text-emerald-500">
+          {/* Strategic Impact Metric: กล่องแสดงผลลัพธ์หลัก */}
+          <div className="mb-24 rounded-[3rem] bg-[oklch(0.2_0.02_260)] p-12 text-white shadow-2xl dark:bg-[oklch(0.25_0.02_260)]">
+            <div className="text-brand-primary mb-6 flex items-center gap-4">
               <BarChart3 size={32} />
               <span className="font-heading text-xs font-black tracking-widest uppercase italic">
                 Strategic Impact Metric
@@ -126,14 +158,12 @@ export default async function CaseStudyDetailPage({ params }: Props) {
             </p>
           </div>
 
-          {/* ส่วนเนื้อหาหลักที่ผ่านการประมวลผล MDX */}
-          <div className="prose prose-slate prose-mzaa prose-headings:font-heading prose-headings:italic prose-headings:uppercase prose-headings:tracking-tighter prose-strong:text-emerald-600 prose-p:font-body prose-p:text-slate-600 prose-p:text-lg max-w-none">
-            {content}
-          </div>
+          {/* Main Prose Content: เนื้อหา MDX มาตรฐาน prose-aem */}
+          <div className="prose-aem prose-lg max-w-none">{content}</div>
 
-          {/* ส่วนปิดท้ายบันทึกความสำเร็จ */}
-          <div className="mt-32 border-t border-slate-100 pt-12 text-center">
-            <p className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-300 uppercase italic">
+          {/* Footer Node: ส่วนปิดท้ายบันทึก */}
+          <div className="mt-32 border-t border-[oklch(0.95_0.02_260)] pt-12 text-center dark:border-[oklch(0.2_0.02_260)]">
+            <p className="font-heading text-[10px] font-black tracking-[0.4em] text-[oklch(0.7_0.02_260)] uppercase italic">
               Verified Case Insight • AEMDEVWEB 2026
             </p>
           </div>

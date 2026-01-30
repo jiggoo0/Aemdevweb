@@ -12,41 +12,41 @@ export const getTechnicalAuditSchema = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${siteConfig.project.url}/seo/${technicalAuditData.slug}/#service`,
-    "name": technicalAuditData.title,
-    "description": technicalAuditData.description,
-    "provider": {
+    name: technicalAuditData.title,
+    description: technicalAuditData.description,
+    provider: {
       "@type": "Organization",
       "@id": `${siteConfig.project.url}/#organization`,
-      "name": siteConfig.company.name,
-      "url": siteConfig.project.url,
-      "logo": siteConfig.project.logo
+      name: siteConfig.company.name,
+      url: siteConfig.project.url,
+      logo: siteConfig.project.logo,
     },
-    "serviceType": "Technical SEO Infrastructure Audit",
-    "areaServed": {
+    serviceType: "Technical SEO Infrastructure Audit",
+    areaServed: {
       "@type": "Country",
-      "name": "Thailand"
+      name: "Thailand",
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "price": technicalAuditData.pricing.price,
-      "priceCurrency": "THB",
-      "availability": "https://schema.org/InStock",
-      "seller": {
+      price: technicalAuditData.pricing.price,
+      priceCurrency: "THB",
+      availability: "https://schema.org/InStock",
+      seller: {
         "@type": "Person",
-        "name": siteConfig.expert.realName
-      }
+        name: siteConfig.expert.realName,
+      },
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Technical SEO Services Catalog",
-      "itemListElement": technicalAuditData.features.map((feature, index) => ({
+      name: "Technical SEO Services Catalog",
+      itemListElement: technicalAuditData.features.map((feature, index) => ({
         "@type": "Offer",
-        "itemOffered": {
+        itemOffered: {
           "@type": "Service",
-          "name": feature
+          name: feature,
         },
-        "position": index + 1
-      }))
-    }
+        position: index + 1,
+      })),
+    },
   }
 }

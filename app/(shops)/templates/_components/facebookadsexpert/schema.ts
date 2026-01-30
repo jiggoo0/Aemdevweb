@@ -3,57 +3,56 @@
 import { SEOContract } from "../../_contracts/seo"
 
 /**
- * FacebookAdsData - โครงสร้างพิกัดข้อมูลสำหรับระบบหน้าเว็บสายยิงแอด
- * แนวคิด: เน้นการหยุดนิ้วลูกค้าและเปลี่ยนคนดูให้เป็นพิกัดยอดขายทันที
- * มาตรฐาน: Next.js 16 & Performance First
+ * FacebookAdsData - พิมพ์เขียวพิกัดข้อมูล (The Architecture Blueprint)
+ * -------------------------------------------------------------------------
+ * ออกแบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ * วัตถุประสงค์: ควบคุมพิกัดข้อมูลให้แม่นยำ 100% ป้องกันระบบ Error (Type Safety)
  */
 export interface FacebookAdsData extends SEOContract {
-  /** ส่วนแถบนำทาง (Navigation): พิกัดข้อมูลที่ใช้บนเมนูหน้าเว็บ */
+  /** 1. พิกัดนำทาง (Navigation) */
   navigation: {
     logo: string
     cta: string
   }
 
-  /** ส่วนหัวของระบบงาน (Hero): พิกัดแรกในการหยุดลูกค้า */
+  /** 2. พิกัดหัวใจสำคัญ (Hero Node) - จุดหยุดนิ้วลูกค้า */
   hero: {
     badge: string
     title: string
-    /** [FIX]: เพิ่มพิกัด highlight เพื่อล้าง Error TS2339 */
-    highlight: string
+    highlight: string // [KEY]: พิกัดคำเน้นสี emerald
     description: string
-    /** ปุ่มดำเนินการในพิกัด Hero */
-    cta: string
+    cta: string // [KEY]: พิกัดข้อความบนปุ่มหลัก
   }
 
-  /** [FIX]: เพิ่มก้อน highlights เพื่อรองรับลูปการแสดงผลในหน้าเว็บจริง */
+  /** 3. พิกัดดัชนีชี้วัด (Stats) - ขยี้ตัวเลขพิสูจน์ผลลัพธ์ */
+  stats: {
+    label: string // เช่น "Average ROAS"
+    value: string // เช่น "8.5x"
+    subValue: string // เช่น "วิเคราะห์จากพอร์ตจริง"
+  }[]
+
+  /** 4. พิกัดรายการจุดเด่น (Highlights) - ขยี้จุดแข็งระบบ */
   highlights: {
     items: {
-      icon: string
+      icon: string // ชื่อ Icon จาก Lucide-react (ส่งเป็น String ไป Map)
       title: string
       desc: string
     }[]
   }
 
-  /** ส่วนแสดงพิกัดผลลัพธ์ (Stats): ขยี้ตัวเลขที่พิสูจน์ความแม่นยำของแผนงาน */
-  stats: {
-    label: string
-    value: string
-    subValue: string
-  }[]
-
-  /** แผนการทำงาน (Strategy): ลำดับพิกัดงานที่ทำให้ลูกค้ามั่นใจ */
+  /** 5. พิกัดโปรโตคอลการทำงาน (Strategy) - ลำดับขั้นตอนขั้นสูง */
   strategy: {
-    step: string
+    step: string // เช่น "01", "02"
     title: string
     desc: string
   }[]
 
-  /** พิกัดข้อมูลการติดต่อ (Footer) */
+  /** 6. พิกัดข้อมูลการติดต่อ (Strategic Footer) */
   footer?: {
     companyName: string
-    contactLine: string
+    contactLine: string // พิกัด ID Line หรือ Link ติดต่อ
     phone?: string
     copy: string
-    link: string
+    link: string // URL สำหรับกดแล้วเด้งไปที่ปิดการขาย
   }
 }

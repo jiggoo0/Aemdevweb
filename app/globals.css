@@ -1,80 +1,99 @@
 /* @format */
 /* พิกัดข้อมูล: app/globals.css */
-/* หน้าที่: ศูนย์กลางการควบคุมสไตล์และโครงสร้างระบบ (Main Style Node) */
+/* หน้าที่: ศูนย์กลางการควบคุมสไตล์และโครงสร้างระบบ (Master Style Node) */
 /* มาตรฐาน: Tailwind 4.0 | Next.js 16 | Ultra-Deep Level 7 */
-/* ควบคุมโดย: นายเอ็มซ่ามากส์ */
+/* ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB) */
 
 @import "tailwindcss";
 
-/* [1. PLUGINS CONFIGURATION]: ติดตั้งระบบเสริมความสามารถ */
+/* [1. PLUGINS]: เสริมขีดความสามารถด้าน Typography และ Animation */
 @plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
 @theme {
-  /* [2. COLOR SYSTEM]: พิกัดสี OKLCH ประจำแบรนด์ AEMDEVWEB */
-  --color-brand-primary: oklch(0.7 0.2 160);
-  --color-brand-depth: oklch(0.25 0.02 260);
-  --color-brand-accent: oklch(0.7 0.1 260);
-  --color-brand-surface: oklch(0.98 0.01 260);
-  
-  /* [3. TYPOGRAPHY SYSTEM]: เชื่อมโยงพิกัดฟอนต์จาก Root Layout */
+  /* [2. COLOR DNA]: พิกัดสี OKLCH ประจำแบรนด์ (High Precision) */
+  --color-brand-primary: oklch(0.7 0.2 160); /* Emerald Specialist */
+  --color-brand-depth: oklch(0.25 0.02 260); /* Deep Slate Authority */
+  --color-brand-accent: oklch(0.7 0.1 260); /* Indigo Insight */
+  --color-brand-surface: oklch(0.98 0.01 260); /* Soft Gray Node */
+
+  /* [3. TYPOGRAPHY]: ผูกพิกัดฟอนต์จาก Root Layout */
   --font-heading: var(--font-heading), "IBM Plex Sans Thai", sans-serif;
   --font-body: var(--font-body), "Anuphan", sans-serif;
 
-  /* [4. DIMENSION & EFFECTS]: มิติความลึกและระยะขอบ */
+  /* [4. DESIGN TOKENS]: มิติความโค้งและเงาระดับ 7 */
   --radius-za: 2.5rem;
-  --shadow-depth: 0 20px 50px -12px oklch(0 0 0 / 0.15);
-  
-  /* [5. ANIMATION]: กำหนดพิกัดความเคลื่อนไหวเชิงระบบ */
+  --shadow-node: 0 20px 50px -12px oklch(0 0 0 / 0.15);
+  --shadow-aurora: 0 0 30px oklch(0.7 0.2 160 / 0.2);
+
+  /* [5. DYNAMIC EFFECTS]: พิกัดความเคลื่อนไหวเชิงระบบ */
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 3s ease-in-out infinite;
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }
 
-/* [6. DARK MODE STRATEGY]: กำหนดพิกัดการทำงานของโหมดมืดผ่านคลาส .dark */
+/* [6. DARK MODE STRATEGY] */
 @variant dark (&:where(.dark, .dark *));
 
+@layer base {
+  /* [7. ROOT SETTINGS]: กำหนดพิกัดสีพื้นฐานของระบบ */
+  :root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.2 0.02 260);
+  }
+
+  .dark {
+    --background: oklch(0.12 0.02 260);
+    --foreground: oklch(0.98 0.01 260);
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors duration-500;
+  }
+}
+
 @layer utilities {
-  /* [7. PROSE SYSTEM]: ปรับจูนพิกัดเนื้อหาบทความตาม DNA นายเอ็มซ่ามากส์ */
-  .prose-mzaa {
-    @apply prose max-w-none font-body;
-    --tw-prose-body: oklch(0.45 0.02 260);
+  /* [8. PROSE SYSTEM]: ปรับจูนพิกัดเนื้อหาบทความ (Specialist Tone) */
+  .prose-aem {
+    @apply prose font-body max-w-none text-[oklch(0.45_0.02_260)] dark:text-[oklch(0.8_0.02_260)];
     --tw-prose-headings: oklch(0.2 0.02 260);
     --tw-prose-links: oklch(0.65 0.2 160);
     --tw-prose-bold: oklch(0.2 0.02 260);
-    --tw-prose-quotes: oklch(0.4 0.05 260);
-    
-    /* สไตล์ลิ้งค์แบบ Technical Specialist */
+
+    .dark & {
+      --tw-prose-headings: oklch(0.95 0.01 260);
+      --tw-prose-bold: oklch(1 0 0);
+    }
+
     a {
-      @apply no-underline transition-all duration-300 border-b border-transparent hover:border-[oklch(0.7_0.2_160)];
-      &:hover {
-        @apply text-[oklch(0.5_0.2_160)];
-      }
+      @apply hover:border-brand-primary border-b border-transparent no-underline transition-all duration-300;
     }
   }
 
-  /* [8. CORE COMPONENTS]: พิกัดจัดวางพื้นที่หลัก */
+  /* [9. CORE UI NODES]: พิกัดจัดวางพื้นที่สำคัญ */
   .container-za {
     @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-12;
   }
 
   .btn-za {
-    @apply inline-flex items-center justify-center rounded-2xl px-8 py-4 
-           font-heading text-sm font-black tracking-widest uppercase italic 
-           transition-all duration-300 active:scale-95;
+    @apply font-heading inline-flex items-center justify-center rounded-2xl px-8 py-4 text-sm font-black tracking-widest uppercase italic transition-all duration-300 active:scale-95 disabled:opacity-50;
   }
 
-  /* พิกัดการ์ดระดับ 7: เน้นมิติและพิกัดแสง */
+  /* Card Architecture: มิติแสงและเงาเชิงวิศวกรรม */
   .depth-card {
-    @apply rounded-[var(--radius-za)] border border-[oklch(0.9_0.02_260)] bg-white p-8 
-           shadow-[var(--shadow-depth)] transition-all duration-500;
-    
+    @apply rounded-[var(--radius-za)] border border-[oklch(0.9_0.02_260)] bg-white p-8 shadow-[var(--shadow-node)] transition-all duration-500 dark:border-[oklch(0.2_0.02_260)] dark:bg-[oklch(0.15_0.02_260)];
+
     &:hover {
-      @apply -translate-y-2 border-[oklch(0.7_0.2_160_/_0.3)] 
-             shadow-[0_40px_80px_-15px_oklch(0_0_0_/_0.2)];
+      @apply border-brand-primary/30 -translate-y-2 shadow-[0_40px_80px_-15px_oklch(0_0_0_/_0.2)];
     }
   }
 }

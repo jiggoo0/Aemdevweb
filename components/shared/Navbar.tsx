@@ -1,107 +1,114 @@
-// @format
-// พิกัดข้อมูล: components/shared/Navbar.tsx
-// หน้าที่: แถบนำทางพิกัดหลักของระบบงาน (The Navigation Interface)
-// มาตรฐาน: Next.js 16 | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
+/** @format */
 
-"use client";
+"use client"
 
-import * as React from "react";
-import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Terminal } from "lucide-react";
+import * as React from "react"
+import { useState, useEffect, useCallback } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, ArrowUpRight, BookOpen } from "lucide-react"
 
-import { Button } from "@/components/ui/button";
-import { mainNav } from "@/constants/navigation";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button"
+import { mainNav } from "@/constants/navigation"
+import { cn } from "@/lib/utils"
 
+/**
+ * Navbar: เครื่องยนต์นำทางยุทธศาสตร์ (Strategic Navigation Engine)
+ * -------------------------------------------------------------------------
+ * มาตรฐาน: Ultra-Deep Level 7 | Tailwind 4 OKLCH | Zero Warning
+ * ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+ */
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
-  // ระบบตรวจจับการเลื่อนหน้าจอเพื่อปรับเปลี่ยนสถานะแถบนำทาง
+  // [SCROLL PROTOCOL]: ตรวจสอบการเลื่อนหน้าจอเพื่อปรับเปลี่ยนสภาพผิว (Surface)
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
-  // ฟังก์ชันจัดการการปิดเมนูและคืนค่าพิกัดการเลื่อนหน้าจอ
-  const closeMenu = useCallback(() => {
-    setIsMobileMenuOpen(false);
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = "auto";
-    }
-  }, []);
-
-  // ฟังก์ชันสลับสถานะเมนูสำหรับอุปกรณ์เคลื่อนที่
+  // [MENU CONTROL]: ระบบจัดการสถานะเมนู Mobile พร้อมการล็อก Scroll
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => {
-      const newState = !prev;
+      const newState = !prev
       if (typeof document !== "undefined") {
-        document.body.style.overflow = newState ? "hidden" : "auto";
+        document.body.style.overflow = newState ? "hidden" : "auto"
       }
-      return newState;
-    });
-  }, []);
+      return newState
+    })
+  }, [])
+
+  const closeMenu = useCallback(() => {
+    setIsMobileMenuOpen(false)
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = "auto"
+    }
+  }, [])
 
   useEffect(() => {
-    closeMenu();
-  }, [pathname, closeMenu]);
+    closeMenu()
+  }, [pathname, closeMenu])
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 z-[100] w-full transition-all duration-500 ease-in-out",
+        "fixed top-0 left-0 z-[100] w-full transition-all duration-500",
         isScrolled
-          ? "border-b border-[oklch(0.9_0.02_260)] bg-[oklch(1_0_0_/_0.95)] py-4 shadow-sm backdrop-blur-xl"
+          ? "border-b border-[oklch(0.9_0.02_260)] bg-[oklch(1_0_0_/_0.8)] py-4 backdrop-blur-xl dark:border-white/5 dark:bg-[oklch(0.12_0.02_260_/_0.8)]"
           : "bg-transparent py-8"
       )}
     >
       <div className="container-za">
         <nav className="flex items-center justify-between">
-          {/* [1. BRAND IDENTITY]: อัตลักษณ์ความเชี่ยวชาญของแบรนด์ */}
+          
+          {/* [BRAND IDENTITY]: พิกัดอัตลักษณ์แบรนด์ */}
           <Link
             href="/"
-            className="group flex items-center gap-1.5 text-2xl font-black tracking-tighter text-[oklch(0.2_0.02_260)] uppercase italic"
+            className="group flex items-center gap-2 text-2xl font-black tracking-tighter text-brand-depth uppercase italic dark:text-white"
           >
-            <span className="transition-all duration-300 group-hover:text-[oklch(0.6_0.15_160)]">
-              AEM
+            <span className="group-hover:text-brand-primary transition-all duration-300">
+              AEM<span className="text-brand-primary">DEV</span>WEB
             </span>
-            <span className="text-[oklch(0.6_0.15_160)]">DEV</span>
-            <span className="transition-all duration-300 group-hover:text-[oklch(0.6_0.15_160)]">
-              WEB
-            </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[oklch(0.6_0.15_160)] group-hover:animate-pulse" />
+            <div className="bg-brand-primary h-2 w-2 rounded-full group-hover:animate-ping" />
           </Link>
 
-          {/* [2. DESKTOP NAVIGATION]: ระบบเมนูสำหรับหน้าจอขนาดใหญ่ */}
-          <div className="hidden items-center gap-8 lg:flex">
-            <ul className="flex items-center gap-4">
+          {/* [DESKTOP NAVIGATION]: พิกัดการนำทางสำหรับจอภาพขนาดใหญ่ */}
+          <div className="hidden items-center gap-10 lg:flex">
+            <ul className="flex items-center gap-2">
               {mainNav.map((item) => {
+                // [ACTIVE STATE LOGIC]: ตรวจสอบพิกัด URL ปัจจุบัน
                 const isActive =
                   item.href === "/"
                     ? pathname === "/"
-                    : pathname.startsWith(item.href);
+                    : pathname.startsWith(item.href)
+
                 return (
-                  <li key={item.name}>
+                  <li key={item.name} className="relative">
                     <Link
                       href={item.href}
                       className={cn(
-                        "relative rounded-xl px-4 py-2 text-[10px] font-black tracking-[0.3em] uppercase italic transition-all",
+                        "relative flex items-center gap-2 rounded-xl px-4 py-2 text-[10px] font-black tracking-[0.25em] uppercase italic transition-all duration-300",
                         isActive
-                          ? "text-[oklch(0.2_0.02_260)]"
-                          : "text-[oklch(0.5_0.02_260)] hover:text-[oklch(0.6_0.15_160)]"
+                          ? "text-brand-primary"
+                          : "hover:text-brand-primary text-[oklch(0.4_0.02_260)] dark:text-[oklch(0.7_0.02_260)]"
                       )}
                     >
                       {item.name}
+                      {item.badge && (
+                        <span className="bg-brand-primary rounded-full px-1.5 py-0.5 text-[7px] font-black text-white">
+                          {item.badge}
+                        </span>
+                      )}
+
+                      {/* [MOTION PILL]: แอนิเมชันระบุตำแหน่งที่กำลังเข้าถึง */}
                       {isActive && (
                         <motion.span
                           layoutId="nav-pill"
-                          className="absolute inset-0 -z-10 rounded-xl bg-[oklch(0.95_0.02_260)]"
+                          className="absolute inset-0 -z-10 rounded-xl bg-[oklch(0.65_0.2_160_/_0.08)]"
                           transition={{
                             type: "spring",
                             bounce: 0.2,
@@ -111,39 +118,53 @@ export default function Navbar() {
                       )}
                     </Link>
                   </li>
-                );
+                )
               })}
             </ul>
 
-            <div className="h-4 w-px bg-[oklch(0.9_0.02_260)]" />
+            <div className="h-5 w-px bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.3_0.02_260)]" />
 
             <Button
               asChild
-              className={cn(
-                "h-11 rounded-2xl px-8 text-[11px] font-black tracking-widest uppercase italic transition-all active:scale-95",
-                "bg-[oklch(0.2_0.02_260)] text-white shadow-xl shadow-[oklch(0.2_0.02_260_/_0.1)]",
-                "hover:-translate-y-0.5 hover:bg-[oklch(0.6_0.15_160)] hover:shadow-[oklch(0.6_0.15_160_/_0.3)]"
-              )}
+              className="btn-za bg-brand-depth h-11 text-white shadow-node hover:bg-brand-primary dark:bg-brand-surface dark:text-brand-depth"
             >
               <Link href="/contact" className="flex items-center gap-3">
-                START PROJECT
-                <ArrowUpRight size={14} strokeWidth={3} />
+                START PROJECT <ArrowUpRight size={14} strokeWidth={3} />
               </Link>
             </Button>
           </div>
 
-          {/* [3. MOBILE TOGGLE]: ปุ่มควบคุมสำหรับอุปกรณ์เคลื่อนที่ */}
+          {/* [MOBILE TOGGLE] */}
           <button
-            aria-label="Toggle Menu"
-            className="relative z-[110] flex h-11 w-11 items-center justify-center rounded-2xl bg-[oklch(0.2_0.02_260)] text-white transition-all active:scale-90 lg:hidden"
             onClick={toggleMobileMenu}
+            className="bg-brand-depth flex h-11 w-11 items-center justify-center rounded-2xl text-white active:scale-90 dark:bg-brand-surface dark:text-brand-depth lg:hidden"
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            <AnimatePresence mode="wait">
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <X size={20} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Menu size={20} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </nav>
       </div>
 
-      {/* [4. MOBILE OVERLAY]: พิกัดการนำทางสำหรับอุปกรณ์เคลื่อนที่ */}
+      {/* [MOBILE OVERLAY]: ระบบแสดงผลเมนูสำหรับอุปกรณ์พกพา */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -152,52 +173,52 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeMenu}
-              className="fixed inset-0 z-[104] bg-[oklch(0.1_0.02_260_/_0.2)] backdrop-blur-sm lg:hidden"
+              className="bg-brand-depth/20 fixed inset-0 z-[104] backdrop-blur-md lg:hidden"
             />
-
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="fixed inset-x-0 top-0 z-[105] flex flex-col bg-white p-6 pt-32 shadow-2xl lg:hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              className="dark:bg-brand-depth fixed inset-y-0 right-0 z-[105] flex w-[85%] flex-col bg-white p-8 pt-32 shadow-2xl lg:hidden"
             >
-              <div className="mb-12 flex items-center gap-3">
-                <Terminal size={16} className="text-[oklch(0.6_0.15_160)]" />
+              <div className="border-brand-primary mb-12 flex items-center gap-3 border-l-4 pl-4">
+                <BookOpen size={18} className="text-brand-primary" />
                 <span className="text-[10px] font-black tracking-[0.4em] text-[oklch(0.5_0.02_260)] uppercase italic">
-                  Navigation Point
+                  Explore Nodes
                 </span>
               </div>
 
-              <ul className="flex flex-col gap-4">
-                {mainNav.map((item) => (
-                  <li key={item.name}>
+              <ul className="flex flex-col gap-2">
+                {mainNav.map((item, i) => (
+                  <motion.li
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex items-center justify-between rounded-3xl p-6 text-4xl font-black tracking-tighter uppercase italic transition-all",
-                        pathname === item.href
-                          ? "bg-[oklch(0.96_0.04_160)] text-[oklch(0.6_0.15_160)]"
-                          : "text-[oklch(0.2_0.02_260)] hover:bg-[oklch(0.98_0.01_260)]"
+                        "flex items-center justify-between rounded-2xl p-6 text-3xl font-black tracking-tighter uppercase italic transition-all",
+                        pathname.startsWith(item.href) &&
+                          (item.href !== "/" || pathname === "/")
+                          ? "bg-brand-primary/10 text-brand-primary"
+                          : "text-brand-depth dark:text-white"
                       )}
                     >
                       {item.name}
-                      <ArrowUpRight
-                        size={28}
-                        className={pathname === item.href ? "opacity-100" : "opacity-20"}
-                      />
+                      <ArrowUpRight size={24} className="opacity-20" />
                     </Link>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
-              <div className="mt-12 pb-6">
+              <div className="mt-auto pb-10">
                 <Button
                   asChild
-                  className="h-20 w-full rounded-[2.5rem] bg-[oklch(0.2_0.02_260)] text-xl font-black tracking-widest text-white uppercase italic shadow-2xl transition-all active:scale-95"
+                  className="bg-brand-primary h-20 w-full rounded-3xl text-xl font-black uppercase italic shadow-aurora"
                 >
-                  <Link href="/contact" className="flex items-center justify-center gap-4">
-                    START PROJECT <ArrowUpRight size={24} strokeWidth={3} />
-                  </Link>
+                  <Link href="/contact">HIRE SPECIALIST</Link>
                 </Button>
               </div>
             </motion.div>
@@ -205,5 +226,5 @@ export default function Navbar() {
         )}
       </AnimatePresence>
     </header>
-  );
+  )
 }

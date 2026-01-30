@@ -3,7 +3,7 @@
 // หน้าที่: กำหนดค่าพื้นฐานของระบบและพิกัดข้อมูลตัวตน (Core Config Node)
 // ควบคุมมาตรฐานระดับ 7 โดย: นายเอ็มซ่ามากส์
 
-import { SiteConfig } from "@/types";
+import { SiteConfig } from "@/types"
 
 export const siteConfig: SiteConfig = {
   // 1. Corporate Identity (อัตลักษณ์การทำงานที่ชัดเจน)
@@ -20,10 +20,13 @@ export const siteConfig: SiteConfig = {
     shortName: "AEM",
     nameTH: "เอ็มเดฟเว็บ",
     title: "AEMDEVWEB | วางระบบเว็บไซต์และ Technical SEO โดย นายเอ็มซ่ามากส์",
-    slogan: "High-Performance System: รากฐานระบบที่เปี่ยมสมรรถนะ พร้อมขับเคลื่อนธุรกิจใน 24 ชม.",
-    description: "ผู้เชี่ยวชาญการวางรากฐานระบบเว็บไซต์ด้วย Next.js 16 มุ่งเน้นความเร็วระดับสูงสุด LCP ต่ำกว่า 0.8 วินาที เพื่อการจัดอันดับและยอดขายที่ยั่งยืนภายใต้การดูแลของ นายเอ็มซ่ามากส์",
+    slogan:
+      "High-Performance System: รากฐานระบบที่เปี่ยมสมรรถนะ พร้อมขับเคลื่อนธุรกิจใน 24 ชม.",
+    description:
+      "ผู้เชี่ยวชาญการวางรากฐานระบบเว็บไซต์ด้วย Next.js 16 มุ่งเน้นความเร็วระดับสูงสุด LCP ต่ำกว่า 0.8 วินาที เพื่อการจัดอันดับและยอดขายที่ยั่งยืนภายใต้การดูแลของ นายเอ็มซ่ามากส์",
     url: "https://www.aemdevweb.com",
     logo: "/images/logo-circuit.png",
+    // พิกัดภาพ Open Graph: ตรวจสอบความมีอยู่ของไฟล์ใน public/og-image-seo-2026.png
     ogImage: "https://www.aemdevweb.com/og-image-seo-2026.png",
   },
 
@@ -44,9 +47,11 @@ export const siteConfig: SiteConfig = {
 
   // 5. Strategic Value (คุณค่าที่ส่งมอบให้พาร์ทเนอร์ธุรกิจ)
   businessImpact: {
-    speed: "Operational Velocity: เลือกระบบที่ตอบโจทย์ พร้อมจัดการข้อมูลหลังบ้านได้ทันทีโดย นายเอ็มซ่ามากส์",
+    speed:
+      "Operational Velocity: เลือกระบบที่ตอบโจทย์ พร้อมจัดการข้อมูลหลังบ้านได้ทันทีโดย นายเอ็มซ่ามากส์",
     seo: "Data Connectivity: วางพิกัดโครงสร้างระบบให้สอดคล้องกับการค้นหาและระบบ AI ในปี 2026",
-    conversion: "Conversion Strategy: ออกแบบจุดตอบโจทย์ลูกค้า เพื่อเพิ่มโอกาสการปิดการขายสูงสุด",
+    conversion:
+      "Conversion Strategy: ออกแบบจุดตอบโจทย์ลูกค้า เพื่อเพิ่มโอกาสการปิดการขายสูงสุด",
   },
 
   // 6. Strategic Keywords (พิกัดคำค้นหาสำคัญ)
@@ -79,24 +84,25 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/aemdevweb",
   },
 
-  // 8. Final Contact Protocol (พิกัดการติดต่อสื่อสาร)
+  // 8. Final Contact Protocol
   contact: {
     email: "me@aemdevweb.com",
     phone: "0xx-xxx-xxxx",
   },
 
-  // 9. Call-To-Action Nodes (จุดกระตุ้นการตอบสนอง)
+  // 9. Call-To-Action Nodes
   cta: {
     main: "เลือกรูปแบบระบบงานที่ นายเอ็มซ่ามากส์ คัดสรร",
     secondary: "ปรึกษาแผนงานโครงการฟรี",
     pricing: "ตรวจสอบรายละเอียดและระดับการลงทุน",
   },
 
-  // 10. Quality Assurance Standards (การรับรองความเนี้ยบของระบบ)
+  // 10. Quality Assurance Standards
   standards: {
     performance: 100,
     lcp: 0.8,
     security: "SSL Standard v26",
-    guarantee: "ควบคุมคุณภาพโดย นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด) พร้อมดูแลระบบให้สมบูรณ์แบบ 100%",
+    guarantee:
+      "ควบคุมคุณภาพโดย นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด) พร้อมดูแลระบบให้สมบูรณ์แบบ 100%",
   },
-};
+}

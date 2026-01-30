@@ -10,19 +10,18 @@ import { CaseStudyItem } from "@/types"
  * AEMDEVWEB | ระบบจัดการกรณีศึกษาความสำเร็จ 2026
  * -------------------------------------------------------------------------
  * วางโครงสร้างระบบและจูนสมรรถนะโดย: นายเอ็มซ่ามากส์ (อลงกรณ์ ยมเกิด)
- * มาตรฐาน: Technical SEO & Entity Authority
  */
 
 const CASE_STUDIES_DIR = path.join(process.cwd(), "content/case-studies")
 
 /**
- * [OPTIMIZED]: พิกัดดึงข้อมูลความสำเร็จทั้งหมด
- * ใช้ระบบ cache เพื่อทำ Request Memoization ให้การโหลดพิกัดข้อมูลวาร์ปที่สุด
+ * getAllCaseStudies: พิกัดดึงข้อมูลความสำเร็จทั้งหมดแบบ Dynamic
+ * -------------------------------------------------------------------------
+ * ใช้ระบบ cache เพื่อทำ Request Memoization สำหรับสมรรถนะระดับ 7
  */
 export const getAllCaseStudies = cache(async (): Promise<CaseStudyItem[]> => {
-  // ตรวจสอบพิกัดไดเรกทอรีเพื่อป้องกันระบบสะดุด
   if (!fs.existsSync(CASE_STUDIES_DIR)) {
-    console.warn("[AEM-WARN]: ไม่พบพิกัดโฟลเดอร์ content/case-studies")
+    console.warn("[AEM-WARN]: Registry Point Missing -> content/case-studies")
     return []
   }
 
@@ -37,6 +36,7 @@ export const getAllCaseStudies = cache(async (): Promise<CaseStudyItem[]> => {
         const { data, content } = matter(fileContent)
         const slug = file.replace(/\.mdx?$/, "")
 
+        // มาตรฐานพิกัดข้อมูลกรณีศึกษา (Entity Structure)
         return {
           id: slug,
           slug,
@@ -46,7 +46,9 @@ export const getAllCaseStudies = cache(async (): Promise<CaseStudyItem[]> => {
             industry: data.industry || data.category || "General Industry",
             category: data.category || "Specialist System",
             excerpt:
-              data.excerpt || data.description || "อยู่ระหว่างการสรุปผล...",
+              data.excerpt ||
+              data.description ||
+              "อยู่ระหว่างการสรุปผลเชิงเทคนิค...",
             thumbnail: data.thumbnail || "/images/showcase/placeholder.webp",
             date: data.date || "2026-01-01",
             results: Array.isArray(data.results) ? data.results : [],
@@ -58,36 +60,30 @@ export const getAllCaseStudies = cache(async (): Promise<CaseStudyItem[]> => {
         } as CaseStudyItem
       })
 
-    // เรียงพิกัดตามลำดับเวลา (Strategic Timeline Sorting)
+    // Strategic Timeline Sorting: เรียงตามความสดใหม่ของข้อมูล
     return allData.sort(
       (a, b) =>
         new Date(b.frontmatter.date).getTime() -
         new Date(a.frontmatter.date).getTime()
     )
   } catch (error) {
-    console.error(
-      "[AEM-ERROR]: พิกัดการดึงข้อมูลความสำเร็จเกิดข้อผิดพลาด:",
-      error
-    )
+    console.error("[AEM-ERROR]: พิกัดการดึงกรณีศึกษาล้มเหลว:", error)
     return []
   }
 })
 
 /**
- * getCaseStudyBySlug - เจาะพิกัดข้อมูลความสำเร็จรายชิ้น
+ * getCaseStudyBySlug: เจาะพิกัดข้อมูลความสำเร็จรายโปรเจกต์
  */
 export const getCaseStudyBySlug = cache(
   async (slug: string): Promise<CaseStudyItem | null> => {
     try {
-      const mdxPath = path.join(CASE_STUDIES_DIR, `${slug}.mdx`)
-      const mdPath = path.join(CASE_STUDIES_DIR, `${slug}.md`)
+      const paths = [
+        path.join(CASE_STUDIES_DIR, `${slug}.mdx`),
+        path.join(CASE_STUDIES_DIR, `${slug}.md`),
+      ]
 
-      const actualPath = fs.existsSync(mdxPath)
-        ? mdxPath
-        : fs.existsSync(mdPath)
-          ? mdPath
-          : null
-
+      const actualPath = paths.find((p) => fs.existsSync(p))
       if (!actualPath) return null
 
       const fileContent = fs.readFileSync(actualPath, "utf8")
@@ -103,10 +99,7 @@ export const getCaseStudyBySlug = cache(
         content,
       } as unknown as CaseStudyItem
     } catch (error) {
-      console.error(
-        `[AEM-ERROR]: พิกัดกรณีศึกษา ${slug} มีปัญหาเชิงโครงสร้าง:`,
-        error
-      )
+      console.error(`[AEM-ERROR]: โครงสร้างไฟล์ ${slug} ผิดปกติ:`, error)
       return null
     }
   }

@@ -12,41 +12,43 @@ export const getEcommerceSeoSchema = () => {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${siteConfig.project.url}/seo/${ecommerceConversionData.slug}/#service`,
-    "name": ecommerceConversionData.title,
-    "description": ecommerceConversionData.description,
-    "provider": {
+    name: ecommerceConversionData.title,
+    description: ecommerceConversionData.description,
+    provider: {
       "@type": "Organization",
       "@id": `${siteConfig.project.url}/#organization`,
-      "name": siteConfig.company.name,
-      "url": siteConfig.project.url,
-      "logo": siteConfig.project.logo
+      name: siteConfig.company.name,
+      url: siteConfig.project.url,
+      logo: siteConfig.project.logo,
     },
-    "serviceType": "Technical E-commerce SEO Optimization",
-    "areaServed": {
+    serviceType: "Technical E-commerce SEO Optimization",
+    areaServed: {
       "@type": "Country",
-      "name": "Thailand"
+      name: "Thailand",
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "price": ecommerceConversionData.pricing.price,
-      "priceCurrency": "THB",
-      "availability": "https://schema.org/InStock",
-      "seller": {
+      price: ecommerceConversionData.pricing.price,
+      priceCurrency: "THB",
+      availability: "https://schema.org/InStock",
+      seller: {
         "@type": "Person",
-        "name": siteConfig.expert.realName
-      }
+        name: siteConfig.expert.realName,
+      },
     },
-    "hasOfferCatalog": {
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "E-commerce Optimization Catalog",
-      "itemListElement": ecommerceConversionData.features.map((feature, index) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": feature
-        },
-        "position": index + 1
-      }))
-    }
+      name: "E-commerce Optimization Catalog",
+      itemListElement: ecommerceConversionData.features.map(
+        (feature, index) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: feature,
+          },
+          position: index + 1,
+        })
+      ),
+    },
   }
 }

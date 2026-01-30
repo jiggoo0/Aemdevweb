@@ -1,7 +1,7 @@
 # Project Health & Audit Report (Ultra-Deep Scan)
 
 > รายงานสถานะโปรเจกต์: www.aemdevweb.com
-> วันที่ตรวจสอบ: 2026-01-30 04:32:09
+> วันที่ตรวจสอบ: 2026-01-31 00:19:19
 > พิกัดความลึกที่ตรวจสอบ: ระดับ 7
 
 ---
@@ -39,81 +39,7 @@ AEMDEVWEB คือพาร์ทเนอร์ทางเทคโนโล�
 ---
 
 ## 3. รายงานสรุปก่อนขึ้นระบบ (Pre-deploy)
-พิกัดไฟล์: `pre-deploy-report.md`
-
----
-# Pre-deployment Inspection Report
-Generated: 2026-01-30 04:23:37
-Branch: main
-
-## 1. Environment Configuration
-Status: Environment configuration verified.
-
-## 2. Automated Fixes
-Status: Automatic hygiene improvements applied.
-
-## 3. Static Analysis (ESLint)
-Status: Passed. Code adheres to project standards.
-
-## 4. Type Integrity Check
-Status: Passed. Type safety verified.
-
-## 5. Production Build Test
-Status: Build optimized successfully.
-### Route Analysis and Bundle Sizes
-```text
-Route (app)
-┌ ○ /
-├ ○ /_not-found
-├ ○ /about
-├ ○ /blog
-├ ● /blog/[slug]
-│ ├ /blog/technical-structure-audit
-│ ├ /blog/ecommerce-conversion-seo
-│ ├ /blog/core-web-vitals-speed
-│ └ [+8 more paths]
-├ ○ /case-studies
-├ ● /case-studies/[slug]
-│ ├ /case-studies/industrial-catalog-rfq-optimization
-│ ├ /case-studies/sme-web-performance-growth
-│ └ /case-studies/unlink-reputation-management-success
-├ ○ /contact
-├ ○ /privacy
-├ ○ /robots.txt
-├ ○ /seo
-├ ● /seo/[slug]
-│ ├ /seo/technical-structure-audit
-│ ├ /seo/core-web-vitals-speed
-│ ├ /seo/entity-local-authority
-│ └ [+2 more paths]
-├ ○ /services
-├ ● /services/[slug]
-│ ├ /services/salepage_single
-│ ├ /services/corporate_lite
-│ ├ /services/corporate_pro
-│ └ /services/seo_agency
-├ ○ /sitemap.xml
-├ ○ /templates
-├ ● /templates/[slug]
-│ ├ /templates/salepage_single
-│ ├ /templates/facebookadsexpert
-│ ├ /templates/starter_landing
-│ └ [+12 more paths]
-└ ○ /terms
-
-
-ƒ Proxy (Middleware)
-
-○  (Static)  prerendered as static content
-●  (SSG)     prerendered as static HTML (uses generateStaticParams)
-
-```
-
----
-## Summary Result
-Final Status: READY FOR DEPLOY
-
----
+สถานะ: ไม่พบไฟล์รายงานก่อนขึ้นระบบ
 
 ## 4. แผนผังพิกัดระบบ Type หลัก
 ### พิกัด: types/index.ts
@@ -325,6 +251,7 @@ Final Status: READY FOR DEPLOY
 │   │   ├── SpeedDemon.tsx*
 │   │   └── WorkProcess.tsx*
 │   ├── seo/
+│   │   ├── AuditReport.tsx
 │   │   └── JsonLd.tsx*
 │   ├── shared/
 │   │   ├── BlogCard.tsx*
@@ -405,8 +332,8 @@ Final Status: READY FOR DEPLOY
 │   │   ├── seo/
 │   │   │   ├── 5-points-killing-sales.webp
 │   │   │   ├── advanced-schema-markup.webp
-│   │   │   ├── advanced-schema-markup.webp (2)
 │   │   │   ├── core-web-vitals-speed.webp
+│   │   │   ├── ecommerce-conversion-seo.webp
 │   │   │   ├── ecommerce-seo.webp
 │   │   │   ├── seo-google-love-technical-guide.webp
 │   │   │   ├── seo.webp
@@ -455,6 +382,7 @@ Final Status: READY FOR DEPLOY
 │   ├── favicon-16x16.png*
 │   ├── favicon-32x32.png*
 │   ├── grid.svg*
+│   ├── image-seo-2026.png
 │   └── og-image.png
 ├── scripts/
 │   ├── dev/
@@ -473,7 +401,6 @@ Final Status: READY FOR DEPLOY
 ├── README.md*
 ├── a.sh*
 ├── aemdevweb-audit-report.md
-├── aemdevweb-summary-with-code.md
 ├── components.json*
 ├── eslint.config.mjs*
 ├── extract-types.sh*
@@ -484,7 +411,6 @@ Final Status: READY FOR DEPLOY
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml*
 ├── postcss.config.mjs*
-├── pre-deploy-report.md
 ├── proxy.ts
 ├── tsconfig.json*
 └── tsconfig.tsbuildinfo

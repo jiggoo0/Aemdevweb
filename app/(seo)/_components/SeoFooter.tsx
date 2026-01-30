@@ -6,109 +6,113 @@ import { siteConfig } from "@/constants/site-config"
 import IconRenderer from "@/components/shared/IconRenderer"
 
 /**
- * SeoFooter: ส่วนท้ายของระบบหมวด SEO
- * ออกแบบมาเพื่อเน้นการสร้าง Authority และการเชื่อมโยงพิกัดข้อมูลภายใน (Internal Link)
+ * SeoFooter: พิกัดยืนยันความน่าเชื่อถือและการเชื่อมโยงข้อมูล (Internal Link Hub)
  */
 export default function SeoFooter() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-slate-100 bg-white py-16">
+    <footer className="border-t border-[oklch(0.95_0.02_260)] bg-white py-16 dark:bg-[oklch(0.12_0.02_260)]">
       <div className="container-za">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* 1. ข้อมูลแบรนด์และพิกัดระบบงาน */}
+          {/* 1. Brand Authority Node */}
           <div className="space-y-6">
-            <h3 className="font-heading text-xl font-black uppercase italic text-slate-900">
+            <h3 className="font-heading text-xl font-black text-[oklch(0.2_0.02_260)] uppercase italic dark:text-white">
               {siteConfig.company.name}
             </h3>
-            <p className="font-body text-sm font-bold leading-relaxed text-slate-500">
+            <p className="text-sm leading-relaxed font-bold text-[oklch(0.45_0.02_260)]">
               {siteConfig.project.description}
             </p>
-            <div className="inline-flex items-center gap-2 rounded-lg bg-slate-50 px-3 py-2 text-[10px] font-black text-slate-600 uppercase italic">
-              <IconRenderer name="ShieldCheck" size={14} className="text-emerald-500" />
-              Quality Controlled by {siteConfig.expert.name}
+            <div className="inline-flex items-center gap-2 rounded-lg bg-[oklch(0.98_0.01_260)] px-3 py-2 text-[10px] font-black text-[oklch(0.3_0.02_260)] uppercase italic dark:bg-[oklch(0.18_0.02_260)] dark:text-[oklch(0.8_0.02_260)]">
+              <IconRenderer
+                name="ShieldCheck"
+                size={14}
+                className="text-[oklch(0.65_0.2_160)]"
+              />
+              Verified by {siteConfig.expert.name}
             </div>
           </div>
 
-          {/* 2. พิกัดลิงก์บริการ SEO เชิงเทคนิค */}
+          {/* 2. SEO internal Linking System */}
           <div className="space-y-6">
-            <h4 className="font-heading text-sm font-black tracking-[0.2em] text-emerald-500 uppercase italic">
-              SEO Services
+            <h4 className="text-sm font-black tracking-[0.2em] text-[oklch(0.65_0.2_160)] uppercase italic">
+              Service Infrastructure
             </h4>
-            <ul className="space-y-3 text-sm font-bold text-slate-600">
+            <ul className="space-y-3 text-sm font-bold text-[oklch(0.3_0.02_260)] dark:text-[oklch(0.8_0.02_260)]">
+              {[
+                "technical-structure-audit",
+                "core-web-vitals-speed",
+                "advanced-schema-markup",
+              ].map((slug) => (
+                <li key={slug}>
+                  <Link
+                    href={`/seo/${slug}`}
+                    className="transition-colors hover:text-[oklch(0.65_0.2_160)]"
+                  >
+                    {slug
+                      .split("-")
+                      .map(
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                      )
+                      .join(" ")}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* 3. Global Connectivity Protocol */}
+          <div className="space-y-6">
+            <h4 className="text-sm font-black tracking-[0.2em] text-[oklch(0.65_0.2_160)] uppercase italic">
+              Connect Point
+            </h4>
+            <ul className="space-y-3 text-sm font-bold text-[oklch(0.3_0.02_260)] dark:text-[oklch(0.8_0.02_260)]">
               <li>
-                <Link href="/seo/technical-structure-audit" className="transition-colors hover:text-emerald-500">
-                  Technical Audit
-                </Link>
+                <a
+                  href={siteConfig.links.line}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-2 hover:text-[oklch(0.65_0.2_160)]"
+                >
+                  <IconRenderer name="MessageSquare" size={16} /> LINE Official
+                </a>
               </li>
               <li>
-                <Link href="/seo/core-web-vitals-speed" className="transition-colors hover:text-emerald-500">
-                  Speed Optimization
-                </Link>
-              </li>
-              <li>
-                <Link href="/seo/advanced-schema-markup" className="transition-colors hover:text-emerald-500">
-                  Schema Markup
-                </Link>
+                <a
+                  href={siteConfig.links.facebook}
+                  target="_blank"
+                  rel="noopener"
+                  className="flex items-center gap-2 hover:text-[oklch(0.65_0.2_160)]"
+                >
+                  <IconRenderer name="Facebook" size={16} /> Facebook Page
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* 3. พิกัดการติดต่อสื่อสาร (Protocol) */}
+          {/* 4. Expert Insight Node (E-E-A-T) */}
           <div className="space-y-6">
-            <h4 className="font-heading text-sm font-black tracking-[0.2em] text-emerald-500 uppercase italic">
-              Connect
+            <h4 className="text-sm font-black tracking-[0.2em] text-[oklch(0.65_0.2_160)] uppercase italic">
+              Strategic Insight
             </h4>
-            <ul className="space-y-3 text-sm font-bold text-slate-600">
-              <li>
-                <a 
-                  href={siteConfig.links.line} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 transition-colors hover:text-emerald-500"
-                >
-                  <IconRenderer name="MessageSquare" size={16} />
-                  LINE Official
-                </a>
-              </li>
-              <li>
-                <a 
-                  href={siteConfig.links.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 transition-colors hover:text-emerald-500"
-                >
-                  <IconRenderer name="Facebook" size={16} />
-                  Facebook Page
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* 4. การยืนยันตัวตน (Authority Node) */}
-          <div className="space-y-6">
-            <h4 className="font-heading text-sm font-black tracking-[0.2em] text-emerald-500 uppercase italic">
-              Expertise
-            </h4>
-            <p className="font-body text-sm font-bold leading-relaxed text-slate-500">
-              วิเคราะห์และปรับจูนระบบโดยทีมงานมืออาชีพ เน้นผลลัพธ์เชิงเทคนิคเพื่อการจัดอันดับที่ยั่งยืน
+            <p className="text-sm leading-relaxed font-bold text-[oklch(0.45_0.02_260)]">
+              {siteConfig.expert.bio}
             </p>
           </div>
         </div>
 
-        <hr className="my-12 border-slate-100" />
+        <hr className="my-12 border-[oklch(0.95_0.02_260)] dark:border-[oklch(0.3_0.02_260)]" />
 
-        {/* ส่วนลิขสิทธิ์และนโยบายพิกัดข้อมูล */}
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <p className="font-body text-[10px] font-black tracking-widest text-slate-400 uppercase italic">
-            © {currentYear} {siteConfig.company.name}. All Rights Reserved.
+        <div className="flex flex-col items-center justify-between gap-6 text-[10px] font-black tracking-widest text-[oklch(0.6_0.02_260)] uppercase italic md:flex-row">
+          <p>
+            © {currentYear} {siteConfig.company.name}. All Nodes Synchronized.
           </p>
           <div className="flex gap-8">
-            <Link href="/privacy" className="text-[10px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-emerald-500">
-              Privacy Policy
+            <Link href="/privacy" className="hover:text-[oklch(0.65_0.2_160)]">
+              Privacy
             </Link>
-            <Link href="/terms" className="text-[10px] font-black tracking-widest text-slate-400 uppercase italic transition-colors hover:text-emerald-500">
-              Terms of Service
+            <Link href="/terms" className="hover:text-[oklch(0.65_0.2_160)]">
+              Terms
             </Link>
           </div>
         </div>

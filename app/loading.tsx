@@ -5,95 +5,96 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 /**
  * Loading: ระบบจัดการหน้าจอระหว่างรอข้อมูล (Specialist Edition 2026)
- * แนวทาง: ใช้การไล่ระดับความเข้มของสีเพื่อระบุลำดับความสำคัญของเนื้อหา
- * เทคนิค: เน้นความเรียบง่าย ไม่แฟนซี เพื่อความรวดเร็วในการแสดงผลครั้งแรก
+ * -------------------------------------------------------------------------
+ * ยุทธศาสตร์: ลดค่า CLS (Cumulative Layout Shift) โดยการจองพิกัดพื้นที่ล่วงหน้า
+ * มาตรฐาน: Tailwind 4 OKLCH | Ultra-Deep Level 7
  */
 export default function Loading() {
   return (
-    <div className="container mx-auto animate-pulse space-y-24 px-6 py-16 opacity-80 transition-opacity duration-1000">
-      {/* 1. Hero Section Skeleton: จำลองส่วนพาดหัวและแผนงานหลัก */}
-      <section className="flex flex-col gap-10 pt-12 md:flex-row md:items-center">
-        <div className="flex-1 space-y-8 text-left">
-          <div className="space-y-4">
-            {/* ป้ายระบุพิกัดงาน (Badge Placeholder) */}
-            <Skeleton className="h-6 w-40 rounded-full bg-slate-100" />
+    <div className="container-za animate-pulse space-y-24 py-20 opacity-90 transition-opacity duration-700">
+      {/* [1. HERO SECTION SKELETON]: จำลองพิกัดนำเสนอสูงสุด */}
+      <section className="flex flex-col gap-12 pt-16 lg:flex-row lg:items-center">
+        <div className="flex-1 space-y-10">
+          <div className="space-y-6">
+            {/* Badge Node Placeholder */}
+            <Skeleton className="h-6 w-44 rounded-full bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.2_0.02_260)]" />
 
-            {/* หัวข้อแบรนด์หรือบริการ (Heading Placeholder) */}
-            <div className="space-y-3">
-              <Skeleton className="h-16 w-full max-w-xl rounded-2xl bg-slate-200" />
-              <Skeleton className="h-16 w-3/4 rounded-2xl bg-slate-200" />
+            {/* Heading Node Placeholder */}
+            <div className="space-y-4">
+              <Skeleton className="h-16 w-full max-w-2xl rounded-3xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
+              <Skeleton className="h-16 w-2/3 rounded-3xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
             </div>
           </div>
 
-          {/* รายละเอียดแผนงาน (Description Placeholder) */}
-          <div className="space-y-2">
-            <Skeleton className="h-5 w-full max-w-lg rounded-md bg-slate-100" />
-            <Skeleton className="h-5 w-2/3 rounded-md bg-slate-100" />
+          {/* Strategic Description Placeholder */}
+          <div className="space-y-3">
+            <Skeleton className="h-5 w-full max-w-xl rounded-lg bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.18_0.02_260)]" />
+            <Skeleton className="h-5 w-4/5 rounded-lg bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.18_0.02_260)]" />
           </div>
 
-          {/* ปุ่มดำเนินการ (Action Buttons Placeholder) */}
-          <div className="flex items-center gap-4 pt-4">
-            <Skeleton className="h-14 w-48 rounded-2xl bg-emerald-100/50" />
-            <Skeleton className="h-14 w-40 rounded-2xl bg-slate-100" />
+          {/* Action Call Placeholder */}
+          <div className="flex flex-wrap items-center gap-5 pt-6">
+            <Skeleton className="h-16 w-56 rounded-2xl bg-[oklch(0.65_0.2_160_/_0.15)]" />
+            <Skeleton className="h-16 w-44 rounded-2xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.2_0.02_260)]" />
           </div>
         </div>
 
-        {/* ส่วนภาพกราฟิกหรือเครื่องยนต์ (Visual Side Placeholder) */}
-        <div className="hidden flex-1 justify-end md:flex">
-          <Skeleton className="h-[450px] w-full max-w-sm rounded-[3rem] bg-slate-50 shadow-sm" />
+        {/* Visual Engine Placeholder */}
+        <div className="hidden flex-1 justify-end lg:flex">
+          <Skeleton className="h-[520px] w-full max-w-md rounded-[4rem] bg-[oklch(0.98_0.01_260)] shadow-2xl dark:bg-[oklch(0.15_0.02_260)]" />
         </div>
       </section>
 
-      {/* 2. Services Grid Skeleton: จำลองชุดข้อมูลแพ็กเกจเช่าเว็บไซต์ */}
-      <section className="space-y-12">
-        <div className="max-w-xl space-y-4">
-          <Skeleton className="h-10 w-64 rounded-xl bg-slate-200" />
-          <Skeleton className="h-5 w-full rounded-md bg-slate-100" />
+      {/* [2. SERVICES GRID SKELETON]: จำลองพิกัดชุดข้อมูลบริการ */}
+      <section className="space-y-14">
+        <div className="max-w-2xl space-y-5">
+          <Skeleton className="h-12 w-80 rounded-2xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
+          <Skeleton className="h-5 w-full rounded-xl bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.18_0.02_260)]" />
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {[...Array(3)].map((_, i) => (
             <div
-              key={`loading-card-${i}`}
-              className="flex flex-col gap-8 rounded-[2.5rem] border border-slate-50 bg-white p-10 shadow-sm"
+              key={`loading-node-${i}`}
+              className="flex flex-col gap-10 rounded-[3rem] border border-[oklch(0.95_0.02_260)] bg-white p-10 dark:border-[oklch(0.25_0.02_260)] dark:bg-[oklch(0.15_0.02_260)]"
             >
-              {/* พิกัดไอคอน */}
-              <Skeleton className="h-16 w-16 rounded-2xl bg-slate-100" />
+              {/* Icon Node */}
+              <Skeleton className="h-20 w-20 rounded-[1.5rem] bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.2_0.02_260)]" />
 
-              <div className="space-y-4">
-                <Skeleton className="h-8 w-2/3 rounded-lg bg-slate-200" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full rounded bg-slate-50" />
-                  <Skeleton className="h-4 w-5/6 rounded bg-slate-50" />
-                  <Skeleton className="h-4 w-4/6 rounded bg-slate-50" />
+              <div className="space-y-6">
+                <Skeleton className="h-10 w-3/4 rounded-xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
+                <div className="space-y-3">
+                  <Skeleton className="h-4 w-full rounded-md bg-[oklch(0.98_0.005_260)] dark:bg-[oklch(0.18_0.02_260)]" />
+                  <Skeleton className="h-4 w-5/6 rounded-md bg-[oklch(0.98_0.005_260)] dark:bg-[oklch(0.18_0.02_260)]" />
+                  <Skeleton className="h-4 w-4/6 rounded-md bg-[oklch(0.98_0.005_260)] dark:bg-[oklch(0.18_0.02_260)]" />
                 </div>
               </div>
 
-              {/* ราคาเริ่มต้น */}
-              <div className="mt-auto pt-6">
-                <Skeleton className="h-10 w-32 rounded-xl bg-slate-100" />
+              {/* Pricing Node */}
+              <div className="mt-auto border-t border-[oklch(0.98_0.005_260)] pt-8 dark:border-[oklch(0.2_0.02_260)]">
+                <Skeleton className="h-12 w-40 rounded-2xl bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.2_0.02_260)]" />
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 3. Performance Stats Skeleton: จำลองส่วนแสดงความแรงของระบบงาน */}
-      <section className="rounded-[4rem] border border-slate-50 bg-slate-50/50 p-12 md:p-20">
-        <div className="flex flex-col items-center gap-12">
-          <div className="space-y-4 text-center">
-            <Skeleton className="mx-auto h-4 w-32 rounded-full bg-slate-200" />
-            <Skeleton className="mx-auto h-12 w-full max-w-md rounded-2xl bg-slate-200" />
+      {/* [3. PERFORMANCE STATS SKELETON]: จำลองส่วน Authority Metrics */}
+      <section className="rounded-[5rem] border border-[oklch(0.95_0.02_260)] bg-[oklch(0.99_0.005_260)] p-12 md:p-24 dark:border-[oklch(0.2_0.02_260)] dark:bg-[oklch(0.14_0.01_260)]">
+        <div className="flex flex-col items-center gap-16">
+          <div className="space-y-5 text-center">
+            <Skeleton className="mx-auto h-5 w-44 rounded-full bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
+            <Skeleton className="mx-auto h-16 w-full max-w-xl rounded-3xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
           </div>
 
-          <div className="grid w-full grid-cols-2 gap-8 md:grid-cols-4 lg:gap-16">
+          <div className="grid w-full grid-cols-2 gap-10 md:grid-cols-4 lg:gap-20">
             {[...Array(4)].map((_, i) => (
               <div
-                key={`stat-loading-${i}`}
-                className="flex flex-col items-center gap-4"
+                key={`stat-node-${i}`}
+                className="flex flex-col items-center gap-5"
               >
-                <Skeleton className="h-12 w-24 rounded-2xl bg-slate-200" />
-                <Skeleton className="h-3 w-20 rounded-full bg-slate-100" />
+                <Skeleton className="h-16 w-32 rounded-3xl bg-[oklch(0.9_0.02_260)] dark:bg-[oklch(0.25_0.02_260)]" />
+                <Skeleton className="h-4 w-24 rounded-full bg-[oklch(0.96_0.02_260)] dark:bg-[oklch(0.2_0.02_260)]" />
               </div>
             ))}
           </div>

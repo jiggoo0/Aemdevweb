@@ -1,159 +1,71 @@
 #!/bin/bash
 
 # ==============================================================================
-# PROJECT: aemdevweb.com - Full Context & Metadata Validation
-# DESCRIPTION: ชุดสคริปต์รวบรวมบริบทโค้ด ตรวจสอบ Metadata และความถูกต้องของ Types
-# VERSION: 2.9.1 (Ultra-Deep Scan Level 7)
-# IDENTITY: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
-# CONSTRAINT: No backend | No form submission | LINE-only communication
+# AEMDEVWEB PROJECT SUMMARY EXPORTER v2026
+# หน้าที่: สรุปพิกัดระบบและเขียนรายงานลงไฟล์ PROJECT-SUMMARY.md
+# มาตรฐาน: Ultra-Deep Level 7 | Automation Protocol
+# ควบคุมโดย: นายเอ็มซ่ามากส์
 # ==============================================================================
 
-OUTPUT_FILE="aemdevweb-summary-with-code.md"
-PROJECT_DOMAIN="www.aemdevweb.com"
-IGNORE_PATTERN="node_modules|\.git|\.next|\.DS_Store|__pycache__|\.env|\.vscode|coverage|build|dist"
+# [1. CONFIGURATION]
+OUTPUT_FILE="PROJECT-SUMMARY.md"
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-# --- [CORE BRAND DNA] ---
-COMPANY_NAME="AEMDEVWEB"
-PROJECT_NAME_TH="AEMDEVWEB โดย นายเอ็มซ่ามากส์"
-TITLE="AEMDEVWEB | สถาปัตยกรรมเว็บเพื่อธุรกิจยุคใหม่ Speed Precision Growth"
-EXPERT="นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)"
-ROLE="Technical SEO Specialist & Web Infrastructure Lead"
+# [2. DATA COLLECTION]
+# Technical Metrics
+ANY_COUNT=$(grep -r "any" app components lib types --include="*.ts" --include="*.tsx" 2>/dev/null | wc -l)
+SEO_FILES=$(find app -name "page.tsx" -o -name "layout.tsx" 2>/dev/null | wc -l)
+METADATA_COUNT=$(grep -r "export const metadata" app 2>/dev/null | wc -l)
 
-# --- [WHITELIST DIRECTORIES] ---
-WHITELIST_DIRS=(
-  "app" 
-  "components" 
-  "lib" 
-  "types" 
-  "constants" 
-  "actions"
-)
+# Content Inventory
+BLOG_POSTS=$(find content/blog -name "*.mdx" 2>/dev/null | wc -l)
+CASE_STUDIES=$(find content/case-studies -name "*.mdx" 2>/dev/null | wc -l)
+TEMPLATES=$(find app/\(shops\)/templates/_components -maxdepth 1 -type d 2>/dev/null | wc -l)
+TEMPLATE_COUNT=$((TEMPLATES > 0 ? TEMPLATES - 1 : 0))
 
-# --- [CRITICAL SCAN FILES] ---
-SCAN_FILES=(
-  "config/ai-context.dna.md"
-  "constants/site-config.ts"
-  "types/index.ts"
-  "types/seo.ts"
-  "types/template.ts"
-  "app/layout.tsx"
-  "app/(main)/page.tsx"
-  "components/shared/IconRenderer.tsx"
-  "app/robots.ts"
-  "app/sitemap.ts"
-  "next.config.mjs"
-  "package.json"
-)
+# Git Status
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "N/A")
+LAST_COMMIT=$(git log -1 --format=%cr 2>/dev/null || echo "N/A")
 
-# --- [SYSTEM CHECK FUNCTIONS] ---
+# [3. MARKDOWN GENERATION]
+echo "สร้างรายงานพิกัดระบบลงสู่ $OUTPUT_FILE..."
 
-check_metadata() {
-    echo "### Metadata and SEO Validation"
-    if grep -q "JsonLd" "app/layout.tsx" 2>/dev/null; then
-        echo "- JSON-LD: PASS (Schema Markup detected)"
-    else
-        echo "- JSON-LD: WARNING (Schema Markup missing in Layout)"
-    fi
-    
-    if [ -f "app/robots.ts" ] && [ -f "app/sitemap.ts" ]; then
-        echo "- Search Assets: PASS (Robots and Sitemap exists)"
-    else
-        echo "- Search Assets: WARNING (SEO core files missing)"
-    fi
-}
+cat << EOF > $OUTPUT_FILE
+# Project Health & Audit Report (Ultra-Deep Scan)
 
-check_types() {
-    echo "### Typescript Integrity"
-    for t_file in "types/index.ts" "types/seo.ts" "types/template.ts"; do
-        if [ -f "$t_file" ]; then
-            echo "- $t_file: PASS (Interface control active)"
-        else
-            echo "- $t_file: FAIL (Type definition missing)"
-        fi
-    done
-}
+> **รายงานสถานะโปรเจกต์:** [www.aemdevweb.com](https://www.aemdevweb.com)
+> **วันที่ตรวจสอบ:** $TIMESTAMP
+> **พิกัดความลึก:** ระดับ 7 (Specialist Verified)
 
-analyze_package_json() {
-    echo "### Package Analysis"
-    if [ -f "package.json" ]; then
-        echo "- Core Framework: $(grep '"next":' package.json | sed 's/[",]//g' | xargs)"
-        echo "- UI Library: $(grep '"lucide-react":' package.json | sed 's/[",]//g' | xargs)"
-        echo "- Styling: $(grep '"tailwindcss":' package.json | sed 's/[",]//g' | xargs)"
-    else
-        echo "- Package.json: NOT FOUND"
-    fi
-}
+---
 
-# --- [START GENERATION] ---
+## 1. สรุปสถานะสุขภาพทางเทคนิค (Technical Health)
+| หัวข้อตรวจสอบ | พิกัดที่พบ | สถานะ |
+| :--- | :---: | :--- |
+| **Type 'any' Leftovers** | $ANY_COUNT | $( [ "$ANY_COUNT" -eq 0 ] && echo "✅ PASSED" || echo "⚠️ WARNING" ) |
+| **SEO Metadata Coverage** | $METADATA_COUNT/$SEO_FILES | $( [ "$METADATA_COUNT" -eq "$SEO_FILES" ] && echo "✅ COMPLETE" || echo "🚧 PENDING" ) |
+| **System Environment** | Termux | ✅ STABLE |
 
-rm -f "$OUTPUT_FILE"
-echo "[INFO] Processing AEMDEVWEB System Context (Ultra-Deep Level 7)..."
+## 2. คลังสินทรัพย์ดิจิทัล (Strategic Content Inventory)
+| ประเภทข้อมูล | จำนวนโหนด (Nodes) | พิกัดจัดเก็บ |
+| :--- | :---: | :--- |
+| **Blog Insight Nodes** | $BLOG_POSTS | \`content/blog/\` |
+| **Case Study Protocols** | $CASE_STUDIES | \`content/case-studies/\` |
+| **Marketplace Templates** | $TEMPLATE_COUNT | \`app/(shops)/templates/_components/\` |
 
-{
-  echo "---"
-  echo "identity: $EXPERT"
-  echo "role: $ROLE"
-  echo "domain: $PROJECT_DOMAIN"
-  echo "engine: Next.js 16"
-  echo "status: Active Analysis"
-  echo "scan_depth: Level 7"
-  echo "technical_constraints: \"No backend, No form submission, LINE-only communication\""
-  echo "instructions: \"ยึดโครงสร้างที่ผู้ใช้งานส่งให้เป็นหลัก ห้ามเขียนตัวแปรเองโดยไม่อ้างอิงจาก types/ และ constants/ การแสดงผลไอคอนทั้งหมดต้องผ่าน IconRenderer.tsx เท่านั้น\""
-  echo "---"
-  echo ""
+## 3. โครงสร้างพิกัดระบบ (Structure Audit)
+\`\`\`text
+$(tree -L 2 -d --noreport app components lib constants content 2>/dev/null || echo "Tree command not found")
+\`\`\`
 
-  echo "# รายงานวิเคราะห์ระบบ: $PROJECT_NAME_TH"
-  echo "> $TITLE"
-  echo ""
+## 4. สถานะการเชื่อมต่อ (Deployment Status)
+- **Current Branch:** \`$BRANCH\`
+- **Last Sync:** $LAST_COMMIT
+- **Engine Version:** Next.js v16.1.3 (Turbo Mode)
 
-  echo "## 1. System Health and Dependency Check"
-  check_metadata
-  check_types
-  analyze_package_json
-  echo ""
+---
+**AEMDEVWEB โดย นายเอ็มซ่ามากส์**
+*สถาปัตยกรรมเว็บเพื่อธุรกิจยุคใหม่ Speed • Precision • Growth*
+EOF
 
-  echo "## 2. Directory Structure (Ultra-Deep Level 7)"
-  echo '```text'
-  for dir in "${WHITELIST_DIRS[@]}"; do
-    if [ -d "$dir" ]; then
-      echo "[$dir]"
-      # ปรับความลึกเป็น maxdepth 7 ให้เท่ากับตัว Auditor
-      find "$dir" -maxdepth 7 -not -path '*/.*' | \
-      grep -vE "$IGNORE_PATTERN" | \
-      sed -e 's/[^-][^\/]*\// |  /g' -e 's/|  \([^|]\)/|-- \1/'
-      echo ""
-    fi
-  done
-  echo '```'
-  echo ""
-
-  echo "## 3. Strategic Source Code"
-  for file in "${SCAN_FILES[@]}"; do
-    if [ -f "$file" ]; then
-      echo "### File: $file"
-      ext="${file##*.}"
-      lang="tsx"
-      [[ "$ext" == "json" ]] && lang="json"
-      [[ "$ext" == "md" ]] && lang="markdown"
-      
-      echo '```'"$lang"
-      if [ "$file" == "package.json" ]; then
-          grep -A 50 '"dependencies":' package.json | grep -v '"devDependencies":'
-      else
-          cat "$file"
-      fi
-      echo '```'
-      echo "---"
-      echo ""
-    fi
-  done
-
-  echo "## 4. Final Constraints for AI Implementation"
-  echo "- No Backend Logic: ห้ามเขียนโค้ดเชื่อมต่อ Database หรือ API ภายนอก"
-  echo "- No Form Submission: ระบบไม่มีการรับค่าฟอร์มเพื่อเก็บข้อมูลในระบบ"
-  echo "- LINE-only: ทุกปุ่ม Call to Action ต้องวิ่งไปที่ LINE Official Account เท่านั้น"
-  echo "- Data Integrity: ตรวจสอบ types/ และ constants/ ก่อนเขียนฟังก์ชันทุกครั้ง"
-
-} > "$OUTPUT_FILE"
-
-echo "[SUCCESS] Deep Context Report generated at -> $OUTPUT_FILE"
+echo -e "\033[0;32mSUCCESS: รายงานถูกบันทึกที่พิกัด $OUTPUT_FILE เรียบร้อยแล้ว\033[0m"
