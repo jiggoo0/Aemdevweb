@@ -1,8 +1,8 @@
-/** @format */
+// @format
 // พิกัดข้อมูล: app/layout.tsx
 // หน้าที่: พิกัดควบคุมโครงสร้างพื้นฐานและระบบรากของเว็บไซต์ (Root Layout)
 // มาตรฐาน: Next.js 16 | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
 
 import React from "react";
 import { Metadata, Viewport } from "next";
@@ -37,16 +37,15 @@ const fontBody = Anuphan({
 
 /**
  * [SEARCH ENGINE PERFORMANCE]: การกำหนดพิกัดชุดข้อมูล Metadata
- * ยุทธศาสตร์: บังคับใช้ Absolute URL เพื่อแก้ปัญหาพิกัดภาพ (OG Image) ไม่ขึ้นในหน้าย่อย
+ * เน้นความแม่นยำของพิกัดตัวตนแบรนด์บนระบบการค้นหายุคใหม่
  */
 export const metadata: Metadata = {
-  // [CONFIRMED]: รากฐาน URL หลักสำหรับทุกพิกัดในระบบ
-  metadataBase: new URL(siteConfig.project.url),
   title: {
     default: siteConfig.project.title,
     template: `%s | ${siteConfig.project.name}`,
   },
   description: siteConfig.project.description,
+  metadataBase: new URL(siteConfig.project.url),
   alternates: {
     canonical: "./",
   },
@@ -63,7 +62,6 @@ export const metadata: Metadata = {
     siteName: siteConfig.project.name,
     images: [
       {
-        // [FORCE]: ใช้ค่าพิกัด Full URL จาก siteConfig เพื่อความแม่นยำสูงสุด
         url: siteConfig.project.ogImage,
         width: 1200,
         height: 630,
@@ -77,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.project.title,
     description: siteConfig.project.description,
-    images: [siteConfig.project.ogImage], // [FORCE]: Absolute Image Path
+    images: [siteConfig.project.ogImage],
   },
   robots: {
     index: true,
@@ -93,7 +91,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * [VIEWPORT CONFIGURATION]: ปรับปรุงพิกัดสีแถบสถานะเป็น OKLCH มาตรฐาน 2026
+ * Viewport Configuration: กำหนดสีพื้นฐานของแถบสถานะ (Status Bar)
+ * ปรับปรุงพิกัดสีเป็น OKLCH ตามมาตรฐานระบบปี 2026
  */
 export const viewport: Viewport = {
   themeColor: "oklch(0.7 0.2 160)",
@@ -118,7 +117,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* [ENTITY CONNECTIVITY]: ยืนยันพิกัดตัวตนเพื่อ E-E-A-T Authority */}
+        {/* [ENTITY CONNECTIVITY]: การยืนยันพิกัดตัวตนเพื่อความน่าเชื่อถือระดับสูง */}
         <JsonLd
           type="Organization"
           data={{
@@ -153,19 +152,19 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body min-h-screen bg-[oklch(1_0_0)] text-[oklch(0.2_0.02_260)] selection:bg-[oklch(0.7_0.2_160_/_0.1)] selection:text-[oklch(0.4_0.15_160)]">
-        {/* [UX ENGINE]: ระบบแถบสถานะประมวลผล Emerald Depth */}
+        {/* ระบบแถบสถานะประมวลผล: Emerald Depth Identity */}
         <NextTopLoader
           color="oklch(0.7 0.2 160)"
           showSpinner={false}
           height={3}
         />
 
-        {/* [MAIN CONTENT NODE] */}
+        {/* พิกัดแสดงผลเนื้อหาระบบงานหลัก */}
         <main className="relative flex min-h-screen flex-col overflow-x-hidden">
           {children}
         </main>
 
-        {/* [NOTIFICATION HUB] */}
+        {/* ระบบแจ้งเตือนส่วนหน้าจอ (Global Notification Node) */}
         <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
