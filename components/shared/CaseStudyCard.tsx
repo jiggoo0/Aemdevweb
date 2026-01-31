@@ -1,21 +1,21 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { ArrowRight, ExternalLink, Sparkles } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, ExternalLink, Sparkles } from "lucide-react";
 
 interface CaseStudyCardProps {
-  slug: string
-  title: string
-  description: string
-  image: string
-  industry: string
-  result?: string
-  index?: number
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  industry: string;
+  result?: string;
+  index?: number;
 }
 
 /**
@@ -116,5 +116,5 @@ export const CaseStudyCard = ({
       {/* เส้นเน้นความเร็วระดับเสถียรสูงสุด */}
       <div className="absolute bottom-0 left-0 h-1 w-0 bg-emerald-500 transition-all duration-1000 ease-in-out group-hover:w-full" />
     </motion.article>
-  )
-}
+  );
+};

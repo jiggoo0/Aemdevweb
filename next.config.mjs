@@ -5,9 +5,9 @@
 // มาตรฐาน: Ultra-Deep Level 7 | Specialist Optimization
 // ควบคุมสมรรถนะโดย: นายเอ็มซ่ามากส์
 
-import nextMDX from "@next/mdx"
-import remarkGfm from "remark-gfm"
-import remarkFrontmatter from "remark-frontmatter"
+import nextMDX from "@next/mdx";
+import remarkGfm from "remark-gfm";
+import remarkFrontmatter from "remark-frontmatter";
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -15,7 +15,7 @@ const withMDX = nextMDX({
     remarkPlugins: [remarkGfm, remarkFrontmatter],
     rehypePlugins: [],
   },
-})
+});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -36,7 +36,7 @@ const nextConfig = {
       config.watchOptions = {
         poll: 1000, // ตรวจจับการเปลี่ยนแปลงทุก 1 วินาที
         aggregateTimeout: 300,
-      }
+      };
     }
 
     // [CACHE LOGIC]: จัดการหน่วยความจำให้เหมาะสมกับทรัพยากรจำกัด
@@ -45,10 +45,10 @@ const nextConfig = {
         type: "filesystem",
         allowCollectingMemory: true,
         compression: "gzip", // บีบอัด cache เพื่อประหยัดพื้นที่ storage ใน Termux
-      }
+      };
     }
 
-    return config
+    return config;
   },
 
   // [IMAGE PROTOCOL]: ปรับจูนพิกัดภาพเพื่อลดภาระ CPU (Sharp Optimization)
@@ -66,6 +66,6 @@ const nextConfig = {
     mdxRs: true, // ใช้ Rust-based compiler สำหรับ MDX เพื่อความรวดเร็ว
     scrollRestoration: true,
   },
-}
+};
 
-export default withMDX(nextConfig)
+export default withMDX(nextConfig);

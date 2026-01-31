@@ -1,18 +1,18 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React, { useState, useMemo, useEffect } from "react"
+import React, { useState, useMemo, useEffect } from "react";
 import {
   CheckCircle2,
   MessageCircle,
   Zap,
   Calculator,
   ArrowRight,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/constants/site-config"
-import { servicesData } from "@/constants/services-data"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/constants/site-config";
+import { servicesData } from "@/constants/services-data";
 
 /* -------------------------------------------------------------------------- */
 /* 1. เตรียมข้อมูลแพ็กเกจเช่าเว็บ (Package Setup)                                  */
@@ -27,7 +27,7 @@ const BASE_PACKAGES = (servicesData || [])
     // ค่าติดตั้งเริ่มต้น (ปรับให้สอดคล้องกับ DNA ของนายเอ็ม)
     setupPrice: s.priceValue > 5000 ? 3000 : 1500,
     description: s.description,
-  }))
+  }));
 
 /* -------------------------------------------------------------------------- */
 /* 2. รายการบริการเสริมเพื่อความแรง (Add-ons)                                     */
@@ -49,7 +49,7 @@ const ADD_ONS = [
     name: "บริการเตรียมข้อมูลและลงเนื้อหาให้พร้อมขาย",
     price: 3500,
   },
-]
+];
 
 /**
  * PriceEstimator - ระบบคำนวณงบประมาณเช่าเว็บไซต์
@@ -57,39 +57,39 @@ const ADD_ONS = [
  * โดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 const PriceEstimator = () => {
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
 
   // กำหนดค่าเริ่มต้นเป็นแพ็กเกจแรก
-  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[0] || null)
-  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([])
+  const [selectedBase, setSelectedBase] = useState(BASE_PACKAGES[0] || null);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   // คำนวณยอดรวม
   const totalSetupPrice = useMemo(() => {
-    if (!selectedBase) return 0
+    if (!selectedBase) return 0;
     const addOnsTotal = ADD_ONS.filter((a) =>
-      selectedAddOns.includes(a.id)
-    ).reduce((sum, a) => sum + a.price, 0)
-    return selectedBase.setupPrice + addOnsTotal
-  }, [selectedBase, selectedAddOns])
+      selectedAddOns.includes(a.id),
+    ).reduce((sum, a) => sum + a.price, 0);
+    return selectedBase.setupPrice + addOnsTotal;
+  }, [selectedBase, selectedAddOns]);
 
-  const monthlyRental = selectedBase?.monthlyPrice || 0
+  const monthlyRental = selectedBase?.monthlyPrice || 0;
 
   const toggleAddOn = (id: string) => {
     setSelectedAddOns((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    )
-  }
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
+    );
+  };
 
   // สร้างข้อความทัก LINE
   const generateLineMessage = () => {
-    if (!selectedBase) return "#"
+    if (!selectedBase) return "#";
     const addonNames = selectedAddOns
       .map((id) => ADD_ONS.find((a) => a.id === id)?.name)
-      .join(", ")
+      .join(", ");
 
     const text = `สวัสดีครับนายเอ็ม สนใจเช่าเว็บครับ\n\n🚀 แพ็กเกจ: ${
       selectedBase.name
@@ -97,12 +97,12 @@ const PriceEstimator = () => {
       addonNames || "ไม่มี"
     }\n✅ ยอดจ่ายงวดแรก: ฿${(
       totalSetupPrice + monthlyRental
-    ).toLocaleString()}\n\nแนะนำขั้นตอนหน่อยครับ!`
+    ).toLocaleString()}\n\nแนะนำขั้นตอนหน่อยครับ!`;
 
-    return `${siteConfig.contact.line}?text=${encodeURIComponent(text)}`
-  }
+    return `${siteConfig.contact.line}?text=${encodeURIComponent(text)}`;
+  };
 
-  if (!mounted || !selectedBase) return null
+  if (!mounted || !selectedBase) return null;
 
   return (
     <section
@@ -143,7 +143,7 @@ const PriceEstimator = () => {
                         "group relative flex flex-col items-start rounded-[2.5rem] border-2 p-8 text-left transition-all duration-500",
                         selectedBase.id === pkg.id
                           ? "border-emerald-500 bg-white shadow-2xl shadow-emerald-500/10"
-                          : "border-white bg-white/50 hover:border-slate-200"
+                          : "border-white bg-white/50 hover:border-slate-200",
                       )}
                     >
                       <div
@@ -151,7 +151,7 @@ const PriceEstimator = () => {
                           "mb-2 text-xl font-black uppercase italic transition-colors",
                           selectedBase.id === pkg.id
                             ? "text-emerald-600"
-                            : "text-slate-900"
+                            : "text-slate-900",
                         )}
                       >
                         {pkg.name}
@@ -189,7 +189,7 @@ const PriceEstimator = () => {
                         "flex w-full items-center justify-between rounded-[1.5rem] border-2 px-8 py-6 transition-all duration-300",
                         selectedAddOns.includes(addon.id)
                           ? "border-emerald-500 bg-emerald-50/30 shadow-lg"
-                          : "border-white bg-white hover:border-slate-100"
+                          : "border-white bg-white hover:border-slate-100",
                       )}
                     >
                       <div className="flex items-center gap-5">
@@ -198,7 +198,7 @@ const PriceEstimator = () => {
                             "flex h-6 w-6 items-center justify-center rounded-full border-2 transition-all",
                             selectedAddOns.includes(addon.id)
                               ? "border-emerald-500 bg-emerald-500"
-                              : "border-slate-200"
+                              : "border-slate-200",
                           )}
                         >
                           {selectedAddOns.includes(addon.id) && (
@@ -302,7 +302,7 @@ const PriceEstimator = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PriceEstimator
+export default PriceEstimator;

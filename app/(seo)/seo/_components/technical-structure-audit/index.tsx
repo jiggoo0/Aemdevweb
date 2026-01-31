@@ -2,13 +2,13 @@
 // พิกัดข้อมูล: app/(seo)/seo/_components/technical-structure-audit/index.tsx
 // หน้าที่: แสดงผลรายละเอียดชุดระบบงาน Technical Audit
 
-import React from "react"
-import IconRenderer from "@/components/shared/IconRenderer"
-import { siteConfig } from "@/constants/site-config"
-import { SeoServiceItem } from "@/types/seo"
+import React from "react";
+import IconRenderer from "@/components/shared/IconRenderer";
+import { siteConfig } from "@/constants/site-config";
+import { SeoServiceItem } from "@/types/seo";
 
 interface Props {
-  data: SeoServiceItem
+  data: SeoServiceItem;
 }
 
 export default function TechnicalAudit({ data }: Props) {
@@ -69,5 +69,5 @@ export default function TechnicalAudit({ data }: Props) {
         </div>
       </section>
     </div>
-  )
+  );
 }

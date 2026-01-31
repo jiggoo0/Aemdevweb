@@ -1,20 +1,20 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { ArrowRight, Eye, Layers, Zap } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight, Eye, Layers, Zap } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { TemplateMetadata } from "@/types/template"
+import { cn } from "@/lib/utils";
+import { TemplateMetadata } from "@/types/template";
 
 interface TemplateCardProps {
-  template: TemplateMetadata
-  className?: string
-  priority?: boolean
+  template: TemplateMetadata;
+  className?: string;
+  priority?: boolean;
 }
 
 /**
@@ -27,7 +27,7 @@ export default function TemplateCard({
   className,
   priority = false,
 }: TemplateCardProps) {
-  if (!template?.slug) return null
+  if (!template?.slug) return null;
 
   return (
     <motion.div
@@ -38,7 +38,7 @@ export default function TemplateCard({
       className={cn(
         "group relative flex flex-col rounded-[3rem] border border-slate-100 bg-white p-5 transition-all duration-500",
         "hover:border-emerald-500/30 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)]",
-        className
+        className,
       )}
     >
       {/* Visual Portal: พื้นที่แสดงผลตัวอย่างระบบ */}
@@ -143,5 +143,5 @@ export default function TemplateCard({
       {/* Signature Interaction Line */}
       <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-[1.2s] ease-in-out group-hover:w-full" />
     </motion.div>
-  )
+  );
 }

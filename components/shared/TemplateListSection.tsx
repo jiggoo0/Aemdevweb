@@ -1,14 +1,14 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import { motion, Variants } from "framer-motion"
-import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import { motion, Variants } from "framer-motion";
+import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react";
 
-import { getAllTemplatesMetadata } from "@/lib/template"
-import TemplateCard from "@/components/marketplace/template/TemplateCard"
+import { getAllTemplatesMetadata } from "@/lib/template";
+import TemplateCard from "@/components/marketplace/template/TemplateCard";
 
 /**
  * TemplateListSection - ส่วนแสดงผลรูปแบบระบบและพอร์ตโฟลิโอ (The Solution Showcase)
@@ -16,8 +16,8 @@ import TemplateCard from "@/components/marketplace/template/TemplateCard"
  * ยุทธศาสตร์: การนำเสนอสินทรัพย์ดิจิทัลที่ผ่านการเพิ่มประสิทธิภาพระดับสูงสุด
  */
 export default function TemplateListSection() {
-  const templates = getAllTemplatesMetadata()
-  const displayTemplates = (templates || []).slice(0, 4)
+  const templates = getAllTemplatesMetadata();
+  const displayTemplates = (templates || []).slice(0, 4);
 
   // การตั้งค่าการเคลื่อนไหวเชิงระบบที่มีระเบียบและลื่นไหล
   const containerVariants: Variants = {
@@ -26,7 +26,7 @@ export default function TemplateListSection() {
       opacity: 1,
       transition: { staggerChildren: 0.15 },
     },
-  }
+  };
 
   const itemVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
@@ -38,7 +38,7 @@ export default function TemplateListSection() {
         ease: "easeOut" as const,
       },
     },
-  }
+  };
 
   return (
     <section className="relative w-full overflow-hidden py-24 antialiased lg:py-40">
@@ -151,5 +151,5 @@ export default function TemplateListSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react"
-import { ArrowRight, Zap } from "lucide-react"
+import React from "react";
+import { ArrowRight, Zap } from "lucide-react";
 
 /**
  * RentalHeroProps - กำหนดโครงสร้างข้อมูลสำหรับส่วนหัวหน้าเว็บ
@@ -9,13 +9,13 @@ import { ArrowRight, Zap } from "lucide-react"
  */
 interface RentalHeroProps {
   data: {
-    badge: string
-    title: string
-    highlight: string
-    description: string
-    priceLabel: string
-    priceValue: string
-  }
+    badge: string;
+    title: string;
+    highlight: string;
+    description: string;
+    priceLabel: string;
+    priceValue: string;
+  };
 }
 
 /**
@@ -100,5 +100,5 @@ export const RentalHero = ({ data }: RentalHeroProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

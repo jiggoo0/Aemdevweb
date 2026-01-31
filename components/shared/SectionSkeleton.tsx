@@ -1,10 +1,10 @@
 /** @format */
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface SectionSkeletonProps {
-  className?: string
-  hasHeader?: boolean
+  className?: string;
+  hasHeader?: boolean;
 }
 
 /**
@@ -47,5 +47,5 @@ export default function SectionSkeleton({
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,11 +1,11 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import Link from "next/link"
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
-import LineLeadForm from "@/components/sales-engine/LineLeadForm"
+import React from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import LineLeadForm from "@/components/sales-engine/LineLeadForm";
 import {
   Zap,
   Terminal,
@@ -13,7 +13,7 @@ import {
   Cpu,
   ArrowRight,
   Fingerprint,
-} from "lucide-react"
+} from "lucide-react";
 
 /**
  * [STRATEGIC METADATA]: การกำหนดพิกัดชุดข้อมูลตัวตน
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: `เกี่ยวกับ ${siteConfig.expert.name} | Technical System Specialist`,
   description: `เบื้องหลังการวางโครงสร้างระบบประสิทธิภาพสูงของ AEMDEVWEB โดย ${siteConfig.expert.realName} ผู้เชี่ยวชาญด้านสถาปัตยกรรมเว็บไซต์และกลยุทธ์ SEO เชิงเทคนิค`,
   alternates: { canonical: `${siteConfig.project.url}/about` },
-}
+};
 
 export default function AboutPage() {
   return (
@@ -195,7 +195,7 @@ export default function AboutPage() {
         </p>
       </footer>
     </main>
-  )
+  );
 }
 
 /**
@@ -206,9 +206,9 @@ function AboutFeature({
   title,
   description,
 }: {
-  icon: React.ReactNode
-  title: string
-  description: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
 }) {
   return (
     <div className="depth-card group hover:border-brand-primary/40 p-12">
@@ -224,5 +224,5 @@ function AboutFeature({
         </p>
       </div>
     </div>
-  )
+  );
 }

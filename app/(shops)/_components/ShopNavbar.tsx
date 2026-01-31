@@ -1,13 +1,13 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Zap, ShoppingBag, Menu, X, ArrowRight } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { siteConfig } from "@/constants/site-config"
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Zap, ShoppingBag, Menu, X, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/constants/site-config";
 
 /**
  * ShopNavbar - ส่วนนำทางระบบโครงสร้างโซลูชัน (Strategic Navigation Hub)
@@ -16,21 +16,21 @@ import { siteConfig } from "@/constants/site-config"
  * มาตรฐาน: Strategic Interface Design และ High-Response Performance
  */
 export const ShopNavbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // [STRATEGIC ENGINE]: ระบบตรวจจับการเคลื่อนไหวเพื่อปรับคุณสมบัติการแสดงผล
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const menuItems = [
     { name: "Solutions", href: "/templates#themes" },
     { name: "Services", href: "/services" },
     { name: "Insights", href: "/blog" },
-  ]
+  ];
 
   return (
     <nav
@@ -38,7 +38,7 @@ export const ShopNavbar = () => {
         "fixed top-0 z-[100] w-full transition-all duration-700 ease-in-out",
         isScrolled
           ? "h-20 border-b border-slate-100 bg-white/80 shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur-2xl"
-          : "h-24 bg-transparent"
+          : "h-24 bg-transparent",
       )}
     >
       <div className="container mx-auto flex h-full items-center justify-between px-6">
@@ -153,5 +153,5 @@ export const ShopNavbar = () => {
         )}
       </AnimatePresence>
     </nav>
-  )
-}
+  );
+};

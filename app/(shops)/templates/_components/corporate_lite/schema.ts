@@ -1,6 +1,6 @@
 /** @format */
 
-import { SEOContract } from "../../_contracts/seo"
+import { SEOContract } from "../../_contracts/seo";
 
 /**
  * CorporateLiteData - โครงสร้างข้อมูลสำหรับแบบเว็บไซต์ธุรกิจรุ่นเริ่มต้น
@@ -10,43 +10,43 @@ import { SEOContract } from "../../_contracts/seo"
 export interface CorporateLiteData extends SEOContract {
   /** ส่วนแถบเมนูและการนำทาง */
   navigation: {
-    logo: string
-    links: { label: string; href: string }[]
+    logo: string;
+    links: { label: string; href: string }[];
     /** ปุ่มสำคัญเพื่อให้ลูกค้าติดต่อได้ทันที */
-    cta?: string
-  }
+    cta?: string;
+  };
 
   /** ส่วนหัวเว็บไซต์ (Hero) ที่ใช้ดึงดูดความสนใจ */
   hero: {
-    title: string
+    title: string;
     /** ข้อความเน้นย้ำสั้นๆ */
-    highlight: string
-    description: string
-    image: string
-  }
+    highlight: string;
+    description: string;
+    image: string;
+  };
 
   /** รายการบริการของธุรกิจ */
   services: {
-    title: string
+    title: string;
     /** รายละเอียดของงานแต่ละด้าน */
     items: {
-      title: string
-      desc: string
+      title: string;
+      desc: string;
       /** ชื่อไอคอนจาก lucide-react */
-      icon: string
-    }[]
-  }
+      icon: string;
+    }[];
+  };
 
   /** ส่วนข้อมูลการติดต่อ */
   contact: {
-    title: string
-    email: string
-    phone: string
-    address: string
+    title: string;
+    email: string;
+    phone: string;
+    address: string;
     /** ลิงก์โซเชียลพื้นฐาน */
     socials?: {
-      line?: string
-      facebook?: string
-    }
-  }
+      line?: string;
+      facebook?: string;
+    };
+  };
 }

@@ -1,9 +1,9 @@
 /** @format */
 
-import React from "react"
-import { Settings, MessageCircle, ArrowLeft, Zap } from "lucide-react"
-import Link from "next/link"
-import { MaintenanceData } from "./schema"
+import React from "react";
+import { Settings, MessageCircle, ArrowLeft, Zap } from "lucide-react";
+import Link from "next/link";
+import { MaintenanceData } from "./schema";
 
 /**
  * MaintenanceTemplate - หน้าแจ้งสถานะการปรับปรุงระบบ
@@ -13,10 +13,10 @@ import { MaintenanceData } from "./schema"
 export default function MaintenanceTemplate({
   data,
 }: {
-  data: MaintenanceData
+  data: MaintenanceData;
 }) {
   // [Safety Check]: ตรวจสอบข้อมูลก่อนแสดงผลเพื่อป้องกันหน้าจอค้าง
-  if (!data?.hero) return null
+  if (!data?.hero) return null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
@@ -85,5 +85,5 @@ export default function MaintenanceTemplate({
         </div>
       </footer>
     </div>
-  )
+  );
 }

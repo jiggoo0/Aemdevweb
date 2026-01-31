@@ -1,8 +1,8 @@
 /** @format */
 
-import React from "react"
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
+import React from "react";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * Case Studies Layout - โครงสร้างพื้นฐานส่วนงานผลงาน (Strategic Infrastructure Wrapper)
@@ -13,7 +13,7 @@ import { JsonLd } from "@/components/seo/JsonLd"
 export default function CaseStudiesLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="relative min-h-screen w-full bg-white selection:bg-emerald-500/10">
@@ -51,5 +51,5 @@ export default function CaseStudiesLayout({
       {/* 4. LAYOUT EQUILIBRIUM: การจัดการสมดุลพื้นที่เพื่อรองรับส่วนท้ายหน้า (Footer Adaptation) */}
       <div className="h-20 w-full bg-transparent md:h-32" aria-hidden="true" />
     </div>
-  )
+  );
 }

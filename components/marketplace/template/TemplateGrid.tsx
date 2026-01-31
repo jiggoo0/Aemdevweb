@@ -1,16 +1,16 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React, { useState, useMemo } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { TemplateMetadata, TemplateCategory } from "@/types/template"
-import TemplateCard from "./TemplateCard"
-import { TemplateFilter } from "./TemplateFilter"
-import { SearchX, RefreshCcw } from "lucide-react"
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { TemplateMetadata, TemplateCategory } from "@/types/template";
+import TemplateCard from "./TemplateCard";
+import { TemplateFilter } from "./TemplateFilter";
+import { SearchX, RefreshCcw } from "lucide-react";
 
 interface TemplateGridProps {
-  templates: TemplateMetadata[]
+  templates: TemplateMetadata[];
 }
 
 /**
@@ -22,14 +22,14 @@ interface TemplateGridProps {
 export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
   const [activeCategory, setActiveCategory] = useState<
     TemplateCategory | "all"
-  >("all")
+  >("all");
 
   // [STRATEGIC FILTERING]: ระบบคัดกรองข้อมูลเพื่อลดภาระการประมวลผล (Computational Efficiency)
   const filteredTemplates = useMemo(() => {
-    if (!templates) return []
-    if (activeCategory === "all") return templates
-    return templates.filter((template) => template.category === activeCategory)
-  }, [activeCategory, templates])
+    if (!templates) return [];
+    if (activeCategory === "all") return templates;
+    return templates.filter((template) => template.category === activeCategory);
+  }, [activeCategory, templates]);
 
   const container = {
     hidden: { opacity: 0 },
@@ -40,7 +40,7 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   return (
     <div className="space-y-12 lg:space-y-20">
@@ -112,5 +112,5 @@ export const TemplateGrid: React.FC<TemplateGridProps> = ({ templates }) => {
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
 /** @format */
 
-import { PersonalBioData } from "./schema"
+import { PersonalBioData } from "./schema";
 
 /**
  * personalBioData - ข้อมูลพิกัดหน้าประวัติส่วนตัวดิจิทัล (Personal Bio Edition)
@@ -67,4 +67,4 @@ export const personalBioData: PersonalBioData = {
     text: "จองพิกัดจ้างงานโปรเจกต์ใหม่กับนายเอ็ม",
     href: "https://line.me/ti/p/@127cnthn",
   },
-}
+};

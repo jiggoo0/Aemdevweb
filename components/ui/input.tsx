@@ -1,6 +1,6 @@
 /** @format */
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * ⌨️ Input: Luminous Glass Edition
@@ -24,14 +24,14 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
           // Disabled & Mobile
           "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm lg:text-base",
 
-          className
+          className,
         )}
         ref={ref}
         {...props}
       />
-    )
-  }
-)
-Input.displayName = "Input"
+    );
+  },
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };

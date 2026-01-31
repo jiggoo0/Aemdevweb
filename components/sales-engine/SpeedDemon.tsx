@@ -1,10 +1,10 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { Zap, Timer, Gauge, ShieldCheck } from "lucide-react"
+import React from "react";
+import { motion } from "framer-motion";
+import { Zap, Timer, Gauge, ShieldCheck } from "lucide-react";
 
 /**
  * PerformanceAuthority - ระบบตรวจสอบและยืนยันประสิทธิภาพขั้นสูง (Verification Hub)
@@ -34,7 +34,7 @@ export const PerformanceAuthority = () => {
       desc: "ระบบการจัดการความปลอดภัยและข้อมูลขั้นสูง",
       color: "text-indigo-500",
     },
-  ]
+  ];
 
   return (
     <motion.div
@@ -130,5 +130,5 @@ export const PerformanceAuthority = () => {
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};

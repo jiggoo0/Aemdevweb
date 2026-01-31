@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 import {
   // [DNA ICONS]: ทะเบียนไอคอนหลักเพื่อการแสดงผลสมรรถนะระบบ AEMDEVWEB
   Zap,
@@ -30,10 +30,10 @@ import {
   // [TYPES]: โครงสร้างข้อมูลเพื่อความแม่นยำระดับ 7
   type LucideProps,
   type LucideIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { ServiceIconName } from "@/types"
+import { cn } from "@/lib/utils";
+import { ServiceIconName } from "@/types";
 
 /**
  * [ICON MAP REGISTRY]: ระบบจับคู่ชื่อพิกัดข้อมูลเข้ากับคอมโพเนนต์ไอคอนจริง
@@ -61,15 +61,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
   AlertCircle,
   MessageSquare,
   Facebook,
-}
+};
 
 interface IconRendererProps extends LucideProps {
   /** name: ชื่อพิกัดไอคอนที่ลงทะเบียนไว้ในทะเบียนกลาง (Strict Type) */
-  name?: ServiceIconName | string
+  name?: ServiceIconName | string;
   /** className: คลาสสำหรับจัดการสไตล์ด้วย Tailwind CSS 4 (OKLCH) */
-  className?: string
+  className?: string;
   /** size: ขนาดพิกัดของไอคอน (Default: 24px) */
-  size?: number
+  size?: number;
 }
 
 /**
@@ -84,7 +84,7 @@ export default function IconRenderer({
   ...props
 }: IconRendererProps) {
   // 1. ตรวจสอบพิกัดคอมโพเนนต์ไอคอนจากทะเบียน
-  const IconComponent = name ? ICON_MAP[name] : null
+  const IconComponent = name ? ICON_MAP[name] : null;
 
   // 2. Fallback Protocol: กรณีไม่พบพิกัดไอคอน จะแสดงสถานะแจ้งเตือนแบบจางพร้อม Animation
   if (!IconComponent) {
@@ -93,11 +93,11 @@ export default function IconRenderer({
         size={size}
         className={cn(
           "animate-pulse text-[oklch(0.9_0.02_260)] opacity-40 transition-opacity",
-          className
+          className,
         )}
         {...props}
       />
-    )
+    );
   }
 
   // 3. Render Node: แสดงผลไอคอนพร้อมระบบการเปลี่ยนผ่านที่สมบูรณ์ (Fluid Transition)
@@ -106,9 +106,9 @@ export default function IconRenderer({
       size={size}
       className={cn(
         "shrink-0 transition-all duration-300 ease-in-out",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  );
 }

@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react"
+import React from "react";
 import {
   Calendar,
   MapPin,
@@ -12,8 +12,8 @@ import {
   Menu,
   Zap,
   type LucideIcon, // [FIX]: นำเข้า Type เพื่อล้างพิกัด any
-} from "lucide-react"
-import { EventMagicData } from "./schema"
+} from "lucide-react";
+import { EventMagicData } from "./schema";
 // [FIX]: ลบการนำเข้า cn ออกเนื่องจากไม่ได้ใช้งานจริงในไฟล์นี้ เพื่อล้างพิกัด Warning
 
 /**
@@ -23,7 +23,7 @@ import { EventMagicData } from "./schema"
  */
 export default function EventMagicTemplate({ data }: { data: EventMagicData }) {
   // ตรวจสอบความเรียบร้อยของพิกัดข้อมูลก่อนเริ่มงาน
-  if (!data?.hero) return null
+  if (!data?.hero) return null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
@@ -152,7 +152,7 @@ export default function EventMagicTemplate({ data }: { data: EventMagicData }) {
                     </h3>
                   </div>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -189,7 +189,7 @@ export default function EventMagicTemplate({ data }: { data: EventMagicData }) {
         </p>
       </footer>
     </div>
-  )
+  );
 }
 
 /**
@@ -206,5 +206,5 @@ function InfoBadge({ icon: Icon, label }: { icon: LucideIcon; label: string }) {
         {label}
       </span>
     </div>
-  )
+  );
 }

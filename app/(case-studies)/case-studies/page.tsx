@@ -1,13 +1,13 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import { BarChart3, Target, Zap } from "lucide-react"
+import React from "react";
+import type { Metadata } from "next";
+import { BarChart3, Target, Zap } from "lucide-react";
 
-import { siteConfig } from "@/constants/site-config"
-import { getAllCaseStudies } from "@/lib/case-studies"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard"
+import { siteConfig } from "@/constants/site-config";
+import { getAllCaseStudies } from "@/lib/case-studies";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
 
 /**
  * [SEO STRATEGY]: การสร้างความเชื่อมั่นผ่านดัชนีชี้วัดความสำเร็จ (Strategic Trust)
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "เจาะลึกเบื้องหลังการวางโครงสร้างระบบเว็บไซต์เชิงกลยุทธ์ที่ช่วยเพิ่มขีดความสามารถทางการแข่งขันให้ธุรกิจ SME ด้วยเทคโนโลยี Next.js 16",
   alternates: { canonical: `${siteConfig.project.url}/case-studies` },
-}
+};
 
 /**
  * CaseStudiesPage - บันทึกผลลัพธ์เชิงกลยุทธ์ (Strategic Case Repository)
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
  */
 export default async function CaseStudiesPage() {
   // [STRATEGIC DATA ENGINE]: ดึงข้อมูลผลลัพธ์โครงการผ่านระบบ Server-side
-  const cases = await getAllCaseStudies()
+  const cases = await getAllCaseStudies();
 
   return (
     <main className="relative min-h-screen w-full bg-slate-950 pb-32 antialiased selection:bg-emerald-500/20">
@@ -124,11 +124,11 @@ export default async function CaseStudiesPage() {
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
             {cases.map((item, index) => {
               // การจัดสรรข้อมูลผลลัพธ์ให้ถูกต้องตามโครงสร้างส่วนประกอบ Card
-              const rawResult = item.frontmatter.results?.[0]
+              const rawResult = item.frontmatter.results?.[0];
               const displayResult =
                 typeof rawResult === "string"
                   ? rawResult
-                  : rawResult?.value || ""
+                  : rawResult?.value || "";
 
               return (
                 <CaseStudyCard
@@ -141,7 +141,7 @@ export default async function CaseStudiesPage() {
                   industry={item.frontmatter.industry}
                   result={displayResult}
                 />
-              )
+              );
             })}
           </div>
         ) : (
@@ -160,5 +160,5 @@ export default async function CaseStudiesPage() {
         </p>
       </footer>
     </main>
-  )
+  );
 }

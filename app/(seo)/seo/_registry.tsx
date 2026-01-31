@@ -4,16 +4,16 @@
 // มาตรฐาน: Next.js 16 | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
 // ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import dynamic from "next/dynamic"
-import { ComponentType } from "react"
-import { SeoServiceItem } from "@/types/seo"
+import dynamic from "next/dynamic";
+import { ComponentType } from "react";
+import { SeoServiceItem } from "@/types/seo";
 
 /**
  * [INTERFACE]: รูปแบบ Props สำหรับคอมโพเนนต์ลูกในพิกัด SEO
  * หน้าที่: บังคับใช้ Strict Typing เพื่อความเสถียรของโหนดข้อมูล
  */
 interface SeoComponentProps {
-  data: SeoServiceItem
+  data: SeoServiceItem;
 }
 
 /**
@@ -22,16 +22,20 @@ interface SeoComponentProps {
  * เพื่อลดขนาด Bundle Size และเพิ่มความเร็วการแสดงผลครั้งแรก
  */
 const TechnicalAudit = dynamic(
-  () => import("./_components/technical-structure-audit")
-)
-const SpeedVitals = dynamic(() => import("./_components/core-web-vitals-speed"))
-const EntityAuth = dynamic(() => import("./_components/entity-local-authority"))
+  () => import("./_components/technical-structure-audit"),
+);
+const SpeedVitals = dynamic(
+  () => import("./_components/core-web-vitals-speed"),
+);
+const EntityAuth = dynamic(
+  () => import("./_components/entity-local-authority"),
+);
 const AdvancedSchema = dynamic(
-  () => import("./_components/advanced-schema-markup")
-)
+  () => import("./_components/advanced-schema-markup"),
+);
 const EcommerceSeo = dynamic(
-  () => import("./_components/ecommerce-conversion-seo")
-)
+  () => import("./_components/ecommerce-conversion-seo"),
+);
 
 /**
  * [FALLBACK COMPONENT]: ระบบแสดงผลกรณีพิกัดเชื่อมต่อขัดข้อง
@@ -51,7 +55,7 @@ const NotFoundComponent = ({ data }: SeoComponentProps) => (
       </span>
     </p>
   </div>
-)
+);
 
 /**
  * [REGISTRY MAPPING]: ทะเบียนพิกัดบริการหลัก (Central Dispatcher)
@@ -66,19 +70,19 @@ export const SE_SERVICE_REGISTRY: Record<
   "entity-local-authority": EntityAuth,
   "advanced-schema-markup": AdvancedSchema,
   "ecommerce-conversion-seo": EcommerceSeo,
-}
+};
 
 /**
  * getSeoComponent: ฟังก์ชันสำหรับดึงพิกัดคอมโพเนนต์ตาม Slug
  * @param slug - กุญแจหลักจาก URL เพื่อใช้ค้นหาในทะเบียน
  */
 export function getSeoComponent(slug: string) {
-  const component = SE_SERVICE_REGISTRY[slug]
+  const component = SE_SERVICE_REGISTRY[slug];
 
   if (!component) {
-    console.error(`[AEM-REGISTRY]: Missing mapping for slug -> ${slug}`)
-    return NotFoundComponent
+    console.error(`[AEM-REGISTRY]: Missing mapping for slug -> ${slug}`);
+    return NotFoundComponent;
   }
 
-  return component
+  return component;
 }

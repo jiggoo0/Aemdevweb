@@ -1,11 +1,11 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
-import { CleaningServiceData } from "./schema"
-import { cn } from "@/lib/utils"
+import React from "react";
+import Image from "next/image";
+import { CleaningServiceData } from "./schema";
+import { cn } from "@/lib/utils";
 import {
   CheckCircle2,
   Clock,
@@ -15,7 +15,7 @@ import {
   Menu,
   ShieldCheck,
   Zap,
-} from "lucide-react"
+} from "lucide-react";
 
 /**
  * CleaningProTemplate - วางระบบเว็บไซต์บริการทำความสะอาดรุ่นโปร
@@ -26,7 +26,7 @@ import {
 const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
   data,
 }) => {
-  const { navigation, hero, highlights, services, trustPoints, footer } = data
+  const { navigation, hero, highlights, services, trustPoints, footer } = data;
 
   return (
     <div className="cleaning-pro-template bg-white text-left font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900">
@@ -160,7 +160,7 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
                   "relative flex flex-col rounded-[3.5rem] border p-12 transition-all duration-500",
                   service.isPopular
                     ? "shadow-3xl scale-105 border-slate-950 bg-slate-950 text-white"
-                    : "border-slate-100 bg-white hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5"
+                    : "border-slate-100 bg-white hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5",
                 )}
               >
                 {service.isPopular && (
@@ -177,7 +177,7 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
                   <span
                     className={cn(
                       "text-4xl font-black italic",
-                      service.isPopular ? "text-blue-400" : "text-blue-600"
+                      service.isPopular ? "text-blue-400" : "text-blue-600",
                     )}
                   >
                     {service.price}
@@ -194,7 +194,7 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
                         size={18}
                         className={cn(
                           "shrink-0",
-                          service.isPopular ? "text-blue-400" : "text-blue-500"
+                          service.isPopular ? "text-blue-400" : "text-blue-500",
                         )}
                       />
                       {feat}
@@ -207,7 +207,7 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
                     "w-full rounded-2xl py-5 text-[10px] font-black tracking-[0.3em] uppercase transition-all active:scale-95",
                     service.isPopular
                       ? "bg-white text-slate-950 shadow-xl hover:bg-blue-50"
-                      : "bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-blue-600 hover:text-white",
                   )}
                 >
                   เลือกพิกัดงานนี้
@@ -286,8 +286,8 @@ const CleaningProTemplate: React.FC<{ data: CleaningServiceData }> = ({
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
 // ส่งออกพิกัดหลักเพื่อให้ระบบ Registry ดึงไปใช้ได้แบบ Dynamic 100%
-export default CleaningProTemplate
+export default CleaningProTemplate;

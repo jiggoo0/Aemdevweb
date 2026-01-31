@@ -1,30 +1,23 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import {
-  ChevronLeft,
-  Calendar,
-  User,
-  Tag,
-  Heart,
-  Share2,
-} from "lucide-react"
+import React from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft, Calendar, User, Tag, Heart, Share2 } from "lucide-react";
 
 // ระบบดึงพิกัดข้อมูลและประมวลผลเนื้อหาเชิงกลยุทธ์ (AEM Engine)
-import { getBlogPostBySlug, getBlogPostsMetadata } from "@/lib/blog"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { siteConfig } from "@/constants/site-config"
+import { getBlogPostBySlug, getBlogPostsMetadata } from "@/lib/blog";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/constants/site-config";
 
 // ระบบจัดการส่วนประกอบ MDX ระดับพิกัดความลึก 7
-import { useMDXComponents } from "@/mdx-components"
-import { compileMDX } from "next-mdx-remote/rsc"
+import { useMDXComponents } from "@/mdx-components";
+import { compileMDX } from "next-mdx-remote/rsc";
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 /**
@@ -33,11 +26,11 @@ interface PageProps {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params
-  const post = await getBlogPostBySlug(slug)
-  if (!post) return { title: "Insight Node | Not Found" }
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
+  if (!post) return { title: "Insight Node | Not Found" };
 
-  const ogImage = post.frontmatter.thumbnail || siteConfig.project.ogImage
+  const ogImage = post.frontmatter.thumbnail || siteConfig.project.ogImage;
 
   return {
     title: `${post.frontmatter.title} | ${post.frontmatter.category}`,
@@ -57,7 +50,7 @@ export async function generateMetadata({
       description: post.frontmatter.description,
       images: [ogImage],
     },
-  }
+  };
 }
 
 /**
@@ -65,17 +58,17 @@ export async function generateMetadata({
  * ควบคุมมาตรฐานโดย: นายเอ็มซ่ามากส์
  */
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params
-  const post = await getBlogPostBySlug(slug)
+  const { slug } = await params;
+  const post = await getBlogPostBySlug(slug);
 
-  if (!post) notFound()
+  if (!post) notFound();
 
   // ประมวลผลพิกัด MDX (Server-side Compiled)
   const { content } = await compileMDX({
     source: post.content,
     components: useMDXComponents({}),
     options: { parseFrontmatter: true },
-  })
+  });
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -188,13 +181,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </article>
     </main>
-  )
+  );
 }
 
 /**
  * 3. STATIC PATH ENGINE: การเตรียมพิกัดล่วงหน้า (SSG)
  */
 export async function generateStaticParams() {
-  const posts = await getBlogPostsMetadata()
-  return posts.map((post) => ({ slug: post.slug }))
+  const posts = await getBlogPostsMetadata();
+  return posts.map((post) => ({ slug: post.slug }));
 }

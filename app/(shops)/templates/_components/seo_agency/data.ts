@@ -1,6 +1,6 @@
 /** @format */
 
-import { SeoAgencyData } from "./schema"
+import { SeoAgencyData } from "./schema";
 
 export const seoAgencyData: SeoAgencyData = {
   seo: {
@@ -68,4 +68,4 @@ export const seoAgencyData: SeoAgencyData = {
     buttonText: "เริ่มลงทุนในระบบงานกับนายเอ็มซ่ามากส์",
     subText: "*โซลูชันที่ออกแบบมาเพื่อการเติบโตแบบยั่งยืน ไม่ใช่แค่ชั่วคราว",
   },
-}
+};

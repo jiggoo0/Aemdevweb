@@ -1,8 +1,8 @@
 /** @format */
 
-import React from "react"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
+import React from "react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions)                                           */
@@ -10,11 +10,11 @@ import { ArrowRight } from "lucide-react"
 
 interface ShopHeroProps {
   data: {
-    title: string
-    description: string
-    cta: string
-    image: string
-  }
+    title: string;
+    description: string;
+    cta: string;
+    image: string;
+  };
 }
 
 /**
@@ -68,4 +68,4 @@ export const ShopHero = ({ data }: ShopHeroProps) => (
       </div>
     </div>
   </section>
-)
+);

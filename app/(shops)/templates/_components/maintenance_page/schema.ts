@@ -1,6 +1,6 @@
 /** @format */
 
-import { SEOContract } from "../../_contracts/seo"
+import { SEOContract } from "../../_contracts/seo";
 
 /**
  * MaintenanceData - โครงสร้างข้อมูลสำหรับหน้าแจ้งปรับปรุงระบบ
@@ -11,28 +11,28 @@ export interface MaintenanceData extends SEOContract {
   /** ส่วนหัวข้อและข้อความแจ้ง: เน้นการสื่อสารแบบเป็นกันเองและจริงใจ */
   hero: {
     /** หัวข้อใหญ่ที่ต้องการสื่อสาร (เช่น 'กำลังจูนเครื่องใหม่') */
-    title: string
+    title: string;
     /** คำสั้นๆ ที่ต้องการเน้นให้เด่นเป็นพิเศษ */
-    highlight: string
+    highlight: string;
     /** รายละเอียดสาเหตุหรือคำอธิบายที่ทำให้ลูกค้าอุ่นใจ */
-    description: string
-  }
+    description: string;
+  };
 
   /** ส่วนช่องทางติดต่อ: เพื่อให้ลูกค้ายังสามารถทักหาคุณได้เสมอ */
   contact: {
     /** ข้อความนำ (เช่น 'มีเรื่องด่วนคุยกับนายเอ็มได้เลย') */
-    label: string
+    label: string;
     /** ข้อความบนปุ่มหรือลิงก์ติดต่อ */
-    linkText: string
+    linkText: string;
     /** ลิงก์ปลายทางไปยัง LINE หรือช่องทางที่สะดวก */
-    href: string
-  }
+    href: string;
+  };
 
   /** ส่วนความคืบหน้า (ใส่หรือไม่ก็ได้): โชว์ความเป็นมืออาชีพด้วยสถานะการทำงาน */
   status?: {
     /** ตัวเลขความคืบหน้า 0-100 */
-    progress: number
+    progress: number;
     /** ข้อความอธิบายสถานะปัจจุบัน (เช่น 'ใกล้จะซิ่งได้แล้วครับ') */
-    statusText: string
-  }
+    statusText: string;
+  };
 }

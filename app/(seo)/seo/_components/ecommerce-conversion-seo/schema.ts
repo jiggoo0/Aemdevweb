@@ -1,7 +1,7 @@
 /** @format */
 
-import { siteConfig } from "@/constants/site-config"
-import { ecommerceConversionData } from "./data"
+import { siteConfig } from "@/constants/site-config";
+import { ecommerceConversionData } from "./data";
 
 /**
  * E-commerce Conversion SEO Schema Setup 2026
@@ -47,8 +47,8 @@ export const getEcommerceSeoSchema = () => {
             name: feature,
           },
           position: index + 1,
-        })
+        }),
       ),
     },
-  }
-}
+  };
+};

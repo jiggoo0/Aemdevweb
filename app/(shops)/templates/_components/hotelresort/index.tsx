@@ -1,12 +1,12 @@
 /** @format */
 
-import React from "react"
-import { HotelData } from "./schema"
-import { HotelNavbar } from "./_parts/HotelNavbar"
-import { HotelHero } from "./_parts/HotelHero"
-import { HotelStats } from "./_parts/HotelStats"
-import { HotelRooms } from "./_parts/HotelRooms"
-import { HotelFooter } from "./_parts/HotelFooter"
+import React from "react";
+import { HotelData } from "./schema";
+import { HotelNavbar } from "./_parts/HotelNavbar";
+import { HotelHero } from "./_parts/HotelHero";
+import { HotelStats } from "./_parts/HotelStats";
+import { HotelRooms } from "./_parts/HotelRooms";
+import { HotelFooter } from "./_parts/HotelFooter";
 
 /**
  * HotelResortTemplate: ระบบพิกัดหน้าเว็บสำหรับโรงแรมและที่พัก
@@ -31,15 +31,12 @@ const HotelResortTemplate: React.FC<{ data: HotelData }> = ({ data }) => {
       <HotelRooms data={data.rooms} />
 
       {/* ส่วนท้าย: รวบรวมช่องทางการติดต่อและพิกัดแผนที่ */}
-      <HotelFooter 
-        data={data.footer} 
-        logo={data.navigation.logo} 
-      />
+      <HotelFooter data={data.footer} logo={data.navigation.logo} />
     </div>
-  )
-}
+  );
+};
 
-/** * [CRITICAL EXPORT]: ต้องส่งออกเป็น Default 
- * เพื่อให้ Registry เรียกใช้ .then((m) => m.default) ได้อย่างสมบูรณ์ 
+/** * [CRITICAL EXPORT]: ต้องส่งออกเป็น Default
+ * เพื่อให้ Registry เรียกใช้ .then((m) => m.default) ได้อย่างสมบูรณ์
  */
-export default HotelResortTemplate
+export default HotelResortTemplate;

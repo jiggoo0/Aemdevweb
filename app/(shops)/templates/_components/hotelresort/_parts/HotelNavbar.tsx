@@ -1,30 +1,30 @@
 /** @format */
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { Menu, X, CalendarDays } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React, { useState, useEffect } from "react";
+import { Menu, X, CalendarDays } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface HotelNavbarProps {
   data: {
-    logo: string
-    links: { label: string; href: string }[]
-    bookingCta: string
-  }
+    logo: string;
+    links: { label: string; href: string }[];
+    bookingCta: string;
+  };
 }
 
 export const HotelNavbar = ({ data }: HotelNavbarProps) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // ตรวจสอบการเลื่อนหน้าจอเพื่อเปลี่ยนสถานะพื้นหลัง
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
@@ -32,7 +32,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
         "fixed top-0 z-40 w-full text-left transition-all duration-500",
         isScrolled
           ? "h-20 border-b border-slate-100 bg-white/90 backdrop-blur-xl"
-          : "h-24 bg-transparent"
+          : "h-24 bg-transparent",
       )}
     >
       <div className="container mx-auto flex h-full items-center justify-between px-6">
@@ -41,7 +41,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
           <span
             className={cn(
               "font-prompt text-2xl font-black tracking-tighter uppercase italic transition-colors duration-300",
-              isScrolled ? "text-slate-950" : "text-white"
+              isScrolled ? "text-slate-950" : "text-white",
             )}
           >
             {data.logo}
@@ -57,7 +57,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
               href={link.href}
               className={cn(
                 "text-[10px] font-black tracking-[0.3em] uppercase transition-all hover:text-emerald-500",
-                isScrolled ? "text-slate-500" : "text-white/80"
+                isScrolled ? "text-slate-500" : "text-white/80",
               )}
             >
               {link.label}
@@ -72,7 +72,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
               "hidden items-center gap-3 rounded-full px-8 py-3 text-[10px] font-black tracking-widest uppercase transition-all md:flex",
               isScrolled
                 ? "bg-emerald-500 text-white shadow-lg shadow-emerald-200 hover:bg-emerald-600"
-                : "bg-white text-slate-950 hover:bg-emerald-500 hover:text-white"
+                : "bg-white text-slate-950 hover:bg-emerald-500 hover:text-white",
             )}
           >
             <CalendarDays size={16} />
@@ -83,7 +83,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
           <button
             className={cn(
               "p-2 lg:hidden",
-              isScrolled ? "text-slate-950" : "text-white"
+              isScrolled ? "text-slate-950" : "text-white",
             )}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -96,7 +96,7 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
       <div
         className={cn(
           "fixed inset-0 top-0 z-[-1] bg-slate-950 transition-all duration-500 lg:hidden",
-          isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0"
+          isMobileMenuOpen ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
         <div className="flex h-full flex-col items-center justify-center space-y-12">
@@ -116,5 +116,5 @@ export const HotelNavbar = ({ data }: HotelNavbarProps) => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};

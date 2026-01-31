@@ -1,24 +1,24 @@
 /** @format */
 
-import React from "react"
-import Link from "next/link"
-import { ShoppingBag, Search, Menu } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import { ShoppingBag, Search, Menu } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions)                                           */
 /* -------------------------------------------------------------------------- */
 
 interface NavLink {
-  label: string
-  href: string
+  label: string;
+  href: string;
 }
 
 interface ShopNavbarProps {
   data: {
-    logo: string
-    cartCount?: number
-    links: NavLink[]
-  }
+    logo: string;
+    cartCount?: number;
+    links: NavLink[];
+  };
 }
 
 /**
@@ -95,5 +95,5 @@ export const ShopNavbar = ({ data }: ShopNavbarProps) => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};

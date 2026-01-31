@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react"
+import React from "react";
 
 /**
  * ShopsLayout - โครงสร้างส่วนแสดงผลกลุ่มผลิตภัณฑ์ (Marketplace Interface)
@@ -11,7 +11,7 @@ import React from "react"
 export default function ShopsLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <div className="relative min-h-screen bg-white font-sans antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
@@ -37,5 +37,5 @@ export default function ShopsLayout({
         aria-hidden="true"
       />
     </div>
-  )
+  );
 }

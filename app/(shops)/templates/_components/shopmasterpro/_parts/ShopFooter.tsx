@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react"
-import { Phone, MessageCircle, Mail } from "lucide-react"
+import React from "react";
+import { Phone, MessageCircle, Mail } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions)                                           */
@@ -9,15 +9,15 @@ import { Phone, MessageCircle, Mail } from "lucide-react"
 
 interface ShopFooterProps {
   data: {
-    description: string
-    payments: string[]
+    description: string;
+    payments: string[];
     contact: {
-      phone: string
-      line: string
-      email: string
-    }
-  }
-  logo: string
+      phone: string;
+      line: string;
+      email: string;
+    };
+  };
+  logo: string;
 }
 
 /**
@@ -80,4 +80,4 @@ export const ShopFooter = ({ data, logo }: ShopFooterProps) => (
       </p>
     </div>
   </footer>
-)
+);

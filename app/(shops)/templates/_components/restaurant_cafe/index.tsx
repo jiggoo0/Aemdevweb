@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import {
   Utensils,
   Clock,
@@ -15,8 +15,8 @@ import {
   Menu,
   Zap,
   type LucideIcon,
-} from "lucide-react"
-import { RestaurantCafeData } from "./schema"
+} from "lucide-react";
+import { RestaurantCafeData } from "./schema";
 
 /**
  * [Restaurant & Cafe Template]: พิกัดระบบหน้าเว็บสำหรับร้านอาหารและคาเฟ่รุ่นพรีเมียม
@@ -26,7 +26,7 @@ import { RestaurantCafeData } from "./schema"
 export default function RestaurantTemplate({
   data,
 }: {
-  data: RestaurantCafeData
+  data: RestaurantCafeData;
 }) {
   // [Safety Shield]: ส่วนป้องกันพิกัดหน้าขาวหากพิกัดข้อมูลวิ่งมาไม่ครบ
   if (!data || !data.hero) {
@@ -37,7 +37,7 @@ export default function RestaurantTemplate({
           Brewing your experience...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -60,7 +60,7 @@ export default function RestaurantTemplate({
                 >
                   {link.label}
                 </a>
-              )
+              ),
             )}
           </div>
 
@@ -149,16 +149,16 @@ export default function RestaurantTemplate({
             {data.menu?.categories.map(
               (
                 category: {
-                  name: string
+                  name: string;
                   items: {
-                    name: string
-                    price: string
-                    desc: string
-                    image: string
-                    isRecommended?: boolean
-                  }[]
+                    name: string;
+                    price: string;
+                    desc: string;
+                    image: string;
+                    isRecommended?: boolean;
+                  }[];
                 },
-                idx: number
+                idx: number,
               ) => (
                 <div key={idx}>
                   <div className="mb-16 flex items-center gap-6">
@@ -205,7 +205,7 @@ export default function RestaurantTemplate({
                     ))}
                   </div>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -262,7 +262,7 @@ export default function RestaurantTemplate({
         </p>
       </footer>
     </div>
-  )
+  );
 }
 
 /**
@@ -273,9 +273,9 @@ function ContactInfo({
   label,
   value,
 }: {
-  icon: LucideIcon
-  label: string
-  value: string
+  icon: LucideIcon;
+  label: string;
+  value: string;
 }) {
   return (
     <div className="group flex items-start gap-6">
@@ -291,5 +291,5 @@ function ContactInfo({
         </p>
       </div>
     </div>
-  )
+  );
 }

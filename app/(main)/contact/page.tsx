@@ -1,8 +1,8 @@
 /** @format */
 
-import { Metadata } from "next"
-import { siteConfig } from "@/constants/site-config"
-import ContactClient from "./ContactClient"
+import { Metadata } from "next";
+import { siteConfig } from "@/constants/site-config";
+import ContactClient from "./ContactClient";
 
 /**
  * [STRATEGIC METADATA]: การจัดการโครงสร้างข้อมูลเพื่อชิงพิกัด Search Results
@@ -10,7 +10,8 @@ import ContactClient from "./ContactClient"
  */
 export const metadata: Metadata = {
   title: `Contact Us | ${siteConfig.project.name}`,
-  description: "ติดต่อเราเพื่อรับคำปรึกษาด้านการพัฒนาเว็บไซต์และกลยุทธ์ SEO ระดับสูง พร้อมวางแผนระบบงานดิจิทัล",
+  description:
+    "ติดต่อเราเพื่อรับคำปรึกษาด้านการพัฒนาเว็บไซต์และกลยุทธ์ SEO ระดับสูง พร้อมวางแผนระบบงานดิจิทัล",
   alternates: { canonical: `${siteConfig.project.url}/contact` },
   openGraph: {
     title: `Contact Us | ${siteConfig.project.name}`,
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
     url: `${siteConfig.project.url}/contact`,
     images: [{ url: siteConfig.project.ogImage }],
   },
-}
+};
 
 export default function Page() {
-  return <ContactClient />
+  return <ContactClient />;
 }

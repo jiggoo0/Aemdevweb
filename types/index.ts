@@ -45,10 +45,10 @@ export interface SiteConfig {
     readonly bio: string;
   };
   readonly stats: readonly { label: string; value: string; suffix: string }[];
-  readonly businessImpact: { 
-    readonly speed: string; 
-    readonly seo: string; 
-    readonly conversion: string; 
+  readonly businessImpact: {
+    readonly speed: string;
+    readonly seo: string;
+    readonly conversion: string;
   };
   readonly keywords: {
     readonly list: readonly string[];
@@ -77,7 +77,11 @@ export interface SiteConfig {
     readonly personal?: string;
     readonly phone?: string;
   };
-  readonly cta: { readonly main: string; readonly secondary: string; readonly pricing: string };
+  readonly cta: {
+    readonly main: string;
+    readonly secondary: string;
+    readonly pricing: string;
+  };
   readonly standards: {
     readonly performance: number;
     readonly lcp: number;
@@ -104,9 +108,22 @@ export type ThemeColor =
   | "violet";
 
 export type ServiceIconName =
-  | "Rocket" | "ShieldCheck" | "Code2" | "Gauge" | "Zap" | "Layout"
-  | "TrendingUp" | "BarChart3" | "CheckCircle2" | "LayoutTemplate"
-  | "Clock" | "Wallet" | "Building2" | "MapPin" | "Coffee" | "Heart"
+  | "Rocket"
+  | "ShieldCheck"
+  | "Code2"
+  | "Gauge"
+  | "Zap"
+  | "Layout"
+  | "TrendingUp"
+  | "BarChart3"
+  | "CheckCircle2"
+  | "LayoutTemplate"
+  | "Clock"
+  | "Wallet"
+  | "Building2"
+  | "MapPin"
+  | "Coffee"
+  | "Heart"
   | "UserCircle";
 
 export interface ServiceItem {

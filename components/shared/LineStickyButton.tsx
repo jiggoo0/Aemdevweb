@@ -1,12 +1,12 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { MessageCircle, ArrowRight, Zap, Sparkles } from "lucide-react"
-import { siteConfig } from "@/constants/site-config"
-import { cn } from "@/lib/utils"
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MessageCircle, ArrowRight, Zap, Sparkles } from "lucide-react";
+import { siteConfig } from "@/constants/site-config";
+import { cn } from "@/lib/utils";
 
 /**
  * LineStickyButton - ช่องทางติดต่อผู้เชี่ยวชาญโดยตรง (The Strategic Access)
@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
  * ยุทธศาสตร์: "Zero-Friction Conversion" เข้าถึงโซลูชันได้รวดเร็วที่สุด
  */
 const LineStickyButton = () => {
-  const lineLink = siteConfig?.links?.line || "https://lin.ee/6lgJox0"
+  const lineLink = siteConfig?.links?.line || "https://lin.ee/6lgJox0";
 
   return (
     <div className="group fixed right-6 bottom-6 z-[90] flex flex-col items-end gap-4 md:right-12 md:bottom-12">
@@ -58,7 +58,7 @@ const LineStickyButton = () => {
         whileTap={{ scale: 0.95 }}
         className={cn(
           "relative flex h-20 items-center gap-5 overflow-hidden rounded-[2rem] bg-slate-950 px-10 text-white shadow-2xl transition-all duration-500",
-          "hover:bg-emerald-600 hover:shadow-emerald-500/30"
+          "hover:bg-emerald-600 hover:shadow-emerald-500/30",
         )}
       >
         {/* สัญลักษณ์การโต้ตอบ */}
@@ -111,7 +111,7 @@ const LineStickyButton = () => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LineStickyButton
+export default LineStickyButton;

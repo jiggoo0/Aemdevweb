@@ -1,16 +1,16 @@
 /** @format */
-"use client"
+"use client";
 
-import * as React from "react"
-import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X, Sparkles } from "lucide-react"
+import * as React from "react";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { X, Sparkles } from "lucide-react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-const Modal = DialogPrimitive.Root
-const ModalTrigger = DialogPrimitive.Trigger
-const ModalPortal = DialogPrimitive.Portal
-const ModalClose = DialogPrimitive.Close
+const Modal = DialogPrimitive.Root;
+const ModalTrigger = DialogPrimitive.Trigger;
+const ModalPortal = DialogPrimitive.Portal;
+const ModalClose = DialogPrimitive.Close;
 
 /**
  * ModalOverlay: Midnight Ambient
@@ -26,12 +26,12 @@ const ModalOverlay = React.forwardRef<
       "fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md",
       "data-[state=open]:animate-in data-[state=closed]:animate-out",
       "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
+      className,
     )}
     {...props}
   />
-))
-ModalOverlay.displayName = "ModalOverlay"
+));
+ModalOverlay.displayName = "ModalOverlay";
 
 /**
  * ModalContent: Glass Edition
@@ -53,7 +53,7 @@ const ModalContent = React.forwardRef<
         "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
         "data-[state=closed]:slide-out-to-left-1/2 data-[state=open]:slide-in-from-left-1/2",
         "data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-top-[48%]",
-        className
+        className,
       )}
       {...props}
     >
@@ -68,8 +68,8 @@ const ModalContent = React.forwardRef<
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </ModalPortal>
-))
-ModalContent.displayName = "ModalContent"
+));
+ModalContent.displayName = "ModalContent";
 
 const ModalHeader = ({
   className,
@@ -78,12 +78,12 @@ const ModalHeader = ({
   <div
     className={cn(
       "flex flex-col space-y-3 text-center sm:text-left",
-      className
+      className,
     )}
     {...props}
   />
-)
-ModalHeader.displayName = "ModalHeader"
+);
+ModalHeader.displayName = "ModalHeader";
 
 const ModalFooter = ({
   className,
@@ -92,12 +92,12 @@ const ModalFooter = ({
   <div
     className={cn(
       "mt-6 flex flex-col-reverse sm:flex-row sm:justify-end sm:gap-4",
-      className
+      className,
     )}
     {...props}
   />
-)
-ModalFooter.displayName = "ModalFooter"
+);
+ModalFooter.displayName = "ModalFooter";
 
 /**
  * ModalTitle: ชัดเจนและภูมิฐาน
@@ -111,14 +111,14 @@ const ModalTitle = React.forwardRef<
     ref={ref}
     className={cn(
       "font-heading flex items-center gap-3 text-2xl font-black tracking-tighter text-white uppercase italic md:text-3xl",
-      className
+      className,
     )}
   >
     <Sparkles className="h-6 w-6 animate-pulse text-emerald-400" />
     <span {...props} />
   </DialogPrimitive.Title>
-))
-ModalTitle.displayName = "ModalTitle"
+));
+ModalTitle.displayName = "ModalTitle";
 
 /**
  * ModalDescription: อ่านง่ายและเป็นมิตร
@@ -132,12 +132,12 @@ const ModalDescription = React.forwardRef<
     ref={ref}
     className={cn(
       "font-body text-base leading-relaxed font-medium text-slate-400",
-      className
+      className,
     )}
     {...props}
   />
-))
-ModalDescription.displayName = "ModalDescription"
+));
+ModalDescription.displayName = "ModalDescription";
 
 export {
   Modal,
@@ -150,4 +150,4 @@ export {
   ModalFooter,
   ModalTitle,
   ModalDescription,
-}
+};

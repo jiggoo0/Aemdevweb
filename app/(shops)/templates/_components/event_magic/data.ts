@@ -1,6 +1,6 @@
 /** @format */
 
-import { EventMagicData } from "./schema"
+import { EventMagicData } from "./schema";
 
 /**
  * eventMagicData - ข้อมูลโครงสร้างระบบเว็บไซต์เพื่อวาระพิเศษ (Strategic Celebration Edition)
@@ -71,4 +71,4 @@ export const eventMagicData: EventMagicData = {
       "ขอขอบพระคุณที่ร่วมเป็นส่วนหนึ่งในพิกัดความทรงจำของ นายเอ็มซ่ามากส์",
     contactLine: "@aemdevweb",
   },
-}
+};

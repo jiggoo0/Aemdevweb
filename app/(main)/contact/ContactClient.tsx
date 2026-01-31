@@ -1,13 +1,13 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { MessageCircle, Mail, MapPin, ArrowRight, Clock } from "lucide-react"
+import React from "react";
+import { motion } from "framer-motion";
+import { MessageCircle, Mail, MapPin, ArrowRight, Clock } from "lucide-react";
 
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * ContactClient: ส่วนแสดงผลยุทธศาสตร์ (Strategic View Node)
@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/seo/JsonLd"
  * ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function ContactClient() {
-  const baseUrl = "https://www.aemdevweb.com"
+  const baseUrl = "https://www.aemdevweb.com";
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -100,7 +100,8 @@ export default function ContactClient() {
                     </span>
                   </h3>
                   <p className="font-body max-w-xl text-xl font-bold text-[oklch(0.8_0.02_260)]">
-                    ช่องทางสื่อสารหลักเพื่อจองกำหนดการปรึกษาแผนงานเชิงเทคนิคและ SEO
+                    ช่องทางสื่อสารหลักเพื่อจองกำหนดการปรึกษาแผนงานเชิงเทคนิคและ
+                    SEO
                   </p>
                 </div>
 
@@ -171,5 +172,5 @@ export default function ContactClient() {
         </p>
       </footer>
     </main>
-  )
+  );
 }

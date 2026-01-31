@@ -1,23 +1,32 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Zap, ExternalLink } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Mail,
+  Phone,
+  MapPin,
+  Zap,
+  ExternalLink,
+} from "lucide-react";
 
 // [FIXED]: ปรับ Interface ให้ตรงกับรูปทรงข้อมูลจริงจาก Schema (ล้าง TS2739)
 interface HotelFooterProps {
   data: {
-    address: string
+    address: string;
     contact: {
-      phone: string
-      line: string
-      email: string
-    }
-    mapsUrl: string
-  }
-  logo: string
+      phone: string;
+      line: string;
+      email: string;
+    };
+    mapsUrl: string;
+  };
+  logo: string;
 }
 
 /**
@@ -30,18 +39,21 @@ export const HotelFooter: React.FC<HotelFooterProps> = ({ data, logo }) => {
     <footer className="bg-[oklch(0.12_0.02_260)] py-24 text-white/60 lg:py-32">
       <div className="container-za">
         <div className="grid gap-16 lg:grid-cols-3">
-          
           {/* [1. BRAND IDENTITY NODE] */}
           <div className="space-y-8">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="flex items-center gap-2 text-3xl font-black tracking-tighter text-white uppercase italic transition-all hover:text-[oklch(0.65_0.2_160)]"
             >
-              <Zap size={28} className="fill-[oklch(0.65_0.2_160)] text-[oklch(0.65_0.2_160)]" />
-              {logo}<span className="text-[oklch(0.65_0.2_160)]">.</span>
+              <Zap
+                size={28}
+                className="fill-[oklch(0.65_0.2_160)] text-[oklch(0.65_0.2_160)]"
+              />
+              {logo}
+              <span className="text-[oklch(0.65_0.2_160)]">.</span>
             </Link>
             <p className="max-w-md text-lg leading-relaxed font-bold">
-              ยกระดับประสบการณ์การพักผ่อนด้วยโครงสร้างที่แม่นยำ 
+              ยกระดับประสบการณ์การพักผ่อนด้วยโครงสร้างที่แม่นยำ
               ปรับแต่งมาเพื่อประสิทธิภาพสูงสุดโดย AEMDEVWEB
             </p>
             <div className="flex gap-4">
@@ -64,8 +76,13 @@ export const HotelFooter: React.FC<HotelFooterProps> = ({ data, logo }) => {
             </h4>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <MapPin size={20} className="shrink-0 text-[oklch(0.65_0.2_160)]" />
-                <p className="text-sm font-bold leading-relaxed">{data.address}</p>
+                <MapPin
+                  size={20}
+                  className="shrink-0 text-[oklch(0.65_0.2_160)]"
+                />
+                <p className="text-sm font-bold leading-relaxed">
+                  {data.address}
+                </p>
               </div>
               <a
                 href={data.mapsUrl}
@@ -100,7 +117,10 @@ export const HotelFooter: React.FC<HotelFooterProps> = ({ data, logo }) => {
         <div className="mt-24 flex flex-col items-center justify-between gap-6 border-t border-white/5 pt-12 text-[9px] font-black tracking-[0.3em] uppercase italic md:flex-row">
           <p>© 2026 {logo} • Strategic Infrastructure by นายเอ็มซ่ามากส์</p>
           <div className="flex gap-8">
-            <Link href="/privacy" className="transition-colors hover:text-white">
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-white"
+            >
               Privacy Protocol
             </Link>
             <Link href="/terms" className="transition-colors hover:text-white">
@@ -110,5 +130,5 @@ export const HotelFooter: React.FC<HotelFooterProps> = ({ data, logo }) => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};

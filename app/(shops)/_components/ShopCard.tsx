@@ -1,23 +1,23 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { ArrowRight, Zap, ShieldCheck } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight, Zap, ShieldCheck } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ShopCardProps {
-  id: string
-  name: string
-  category: string
-  image: string
-  slug: string
-  priceLabel?: string
-  isNew?: boolean
-  className?: string
+  id: string;
+  name: string;
+  category: string;
+  image: string;
+  slug: string;
+  priceLabel?: string;
+  isNew?: boolean;
+  className?: string;
 }
 
 /**
@@ -44,7 +44,7 @@ export const ShopCard = ({
       viewport={{ once: true }}
       className={cn(
         "group relative flex flex-col rounded-[3rem] border border-slate-100 bg-white p-5 transition-all duration-500 hover:border-emerald-500/30 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.15)]",
-        className
+        className,
       )}
     >
       {/* [LAYER 1]: VISUAL ASSET - ส่วนแสดงผลตัวอย่างระบบพร้อมการเพิ่มประสิทธิภาพการแสดงผล */}
@@ -138,5 +138,5 @@ export const ShopCard = ({
       {/* Performance Visualizer: แถบแสดงผลประสิทธิภาพความเร็วเชิงสัญลักษณ์ */}
       <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-1000 ease-in-out group-hover:w-full" />
     </motion.div>
-  )
-}
+  );
+};

@@ -1,19 +1,25 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, Variants } from "framer-motion"
-import { Users, TrendingUp, ShieldCheck, Globe, LucideIcon } from "lucide-react"
+import React from "react";
+import { motion, Variants } from "framer-motion";
+import {
+  Users,
+  TrendingUp,
+  ShieldCheck,
+  Globe,
+  LucideIcon,
+} from "lucide-react";
 
 /**
  * [TYPE DEFINITIONS]
  */
 interface StatItem {
-  label: string
-  value: string
-  desc: string
-  icon: LucideIcon
+  label: string;
+  value: string;
+  desc: string;
+  icon: LucideIcon;
 }
 
 /**
@@ -47,7 +53,7 @@ export const ImpactStats = () => {
       desc: "ความเชี่ยวชาญที่ครอบคลุมกลุ่มธุรกิจหลักอย่างแม่นยำ",
       icon: Globe,
     },
-  ]
+  ];
 
   /** * Animation Variants:
    * การตั้งค่าการเคลื่อนไหวเพื่อเพิ่มความน่าสนใจให้กับข้อมูล
@@ -61,7 +67,7 @@ export const ImpactStats = () => {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
@@ -73,7 +79,7 @@ export const ImpactStats = () => {
         ease: "easeOut" as const,
       },
     },
-  }
+  };
 
   return (
     <section className="relative w-full overflow-hidden bg-white py-16 antialiased lg:py-32">
@@ -127,5 +133,5 @@ export const ImpactStats = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};

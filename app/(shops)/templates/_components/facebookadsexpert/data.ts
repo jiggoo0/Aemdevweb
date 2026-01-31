@@ -1,6 +1,6 @@
 /** @format */
 
-import { FacebookAdsData } from "./schema"
+import { FacebookAdsData } from "./schema";
 
 /**
  * facebookAdsData - สถาปัตยกรรมข้อมูลฉบับสมบูรณ์โดย นายเอ็มซ่ามากส์
@@ -107,4 +107,4 @@ export const facebookAdsData: FacebookAdsData = {
     copy: "© 2026 AEMDEVWEB - High Performance Ad-Systems. All Rights Reserved.",
     link: "https://line.me/ti/p/@127cnthn",
   },
-}
+};

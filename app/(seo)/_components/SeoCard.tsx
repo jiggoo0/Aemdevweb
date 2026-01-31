@@ -1,14 +1,14 @@
 /** @format */
 
-import React from "react"
-import Link from "next/link" // [PATCHED]: นำเข้าพิกัด Link เพื่อแก้ปัญหา ReferenceError
-import { cn } from "@/lib/utils"
-import IconRenderer from "@/components/shared/IconRenderer"
-import { SeoServiceItem } from "@/types/seo"
+import React from "react";
+import Link from "next/link"; // [PATCHED]: นำเข้าพิกัด Link เพื่อแก้ปัญหา ReferenceError
+import { cn } from "@/lib/utils";
+import IconRenderer from "@/components/shared/IconRenderer";
+import { SeoServiceItem } from "@/types/seo";
 
 interface SeoCardProps {
-  data: SeoServiceItem
-  className?: string
+  data: SeoServiceItem;
+  className?: string;
 }
 
 /**
@@ -17,17 +17,17 @@ interface SeoCardProps {
  */
 export function SeoCard({ data, className }: SeoCardProps) {
   const { slug, title, subtitle, description, iconName, pricing, features } =
-    data
+    data;
 
   // จำกัดพิกัดจุดเด่นเพียง 3 ข้อ เพื่อรักษาความสม่ำเสมอของโครงสร้างระบบ
-  const highlightFeatures = features ? features.slice(0, 3) : []
+  const highlightFeatures = features ? features.slice(0, 3) : [];
 
   return (
     <Link
       href={`/seo/${slug}`}
       className={cn(
         "group hover:shadow-node relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[oklch(0.95_0.02_260)] bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[oklch(0.65_0.2_160)]/30 dark:border-[oklch(0.2_0.02_260)] dark:bg-[oklch(0.15_0.02_260)]",
-        className
+        className,
       )}
     >
       {/* [BADGE]: ยืนยันพิกัดบริการที่แนะนำ */}
@@ -96,5 +96,5 @@ export function SeoCard({ data, className }: SeoCardProps) {
         </div>
       </div>
     </Link>
-  )
+  );
 }

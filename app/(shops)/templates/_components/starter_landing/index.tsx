@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 import {
   Zap,
   Search,
@@ -11,8 +11,8 @@ import {
   Star,
   Menu,
   type LucideIcon,
-} from "lucide-react"
-import { StarterLandingData } from "./schema"
+} from "lucide-react";
+import { StarterLandingData } from "./schema";
 // [FIX]: ลบการนำเข้า cn ออกเนื่องจากไม่ได้ใช้งานจริงในไฟล์นี้ เพื่อล้างพิกัด Warning
 
 /**
@@ -23,7 +23,7 @@ const IconMap: Record<string, LucideIcon> = {
   Zap,
   Search,
   Smartphone,
-}
+};
 
 /**
  * [Starter Landing Template]: ชุดพิกัดระบบหน้าเว็บรุ่นเริ่มต้นมาตรฐานสูง
@@ -33,7 +33,7 @@ const IconMap: Record<string, LucideIcon> = {
 export default function StarterLandingTemplate({
   data,
 }: {
-  data: StarterLandingData
+  data: StarterLandingData;
 }) {
   // [Safety Shield]: ส่วนป้องกันหน้าขาวหากพิกัดข้อมูลวิ่งมาไม่ทัน
   if (!data || !data.hero) {
@@ -44,7 +44,7 @@ export default function StarterLandingTemplate({
           Syncing Starter Data...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -117,9 +117,9 @@ export default function StarterLandingTemplate({
             {data.highlights.items.map(
               (
                 item: { icon: string; title: string; desc: string },
-                i: number
+                i: number,
               ) => {
-                const Icon = IconMap[item.icon] || Zap
+                const Icon = IconMap[item.icon] || Zap;
                 return (
                   <div
                     key={i}
@@ -135,8 +135,8 @@ export default function StarterLandingTemplate({
                       {item.desc}
                     </p>
                   </div>
-                )
-              }
+                );
+              },
             )}
           </div>
         </div>
@@ -163,5 +163,5 @@ export default function StarterLandingTemplate({
         </div>
       </footer>
     </div>
-  )
+  );
 }

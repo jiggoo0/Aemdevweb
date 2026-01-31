@@ -1,6 +1,6 @@
 /** @format */
 
-import { RestaurantCafeData } from "./schema"
+import { RestaurantCafeData } from "./schema";
 
 /**
  * restaurantCafeData - ข้อมูลพิกัดระบบเว็บร้านอาหารและคาเฟ่ (Taste & Tales Edition)
@@ -97,4 +97,4 @@ export const restaurantCafeData: RestaurantCafeData = {
       instagram: "taste.cafe.vibes",
     },
   },
-}
+};

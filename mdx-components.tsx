@@ -1,9 +1,9 @@
 /** @format */
 
-import type { MDXComponents } from "mdx/types"
-import Image from "next/image"
-import Link from "next/link"
-import React from "react"
+import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 // ชุดสัญลักษณ์มาตรฐานเพื่อประสิทธิภาพการใช้งานปี 2026 (Lucide Connectivity)
 import {
@@ -27,12 +27,12 @@ import {
   Star,
   ClipboardList,
   Cpu,
-} from "lucide-react"
+} from "lucide-react";
 
 // นำเข้าส่วนประกอบเชิงกลยุทธ์ (Strategic Components by นายเอ็มซ่ามากส์)
-import { ImpactStats } from "@/components/sales-engine/ImpactStats"
-import { PerformanceAuthority } from "@/components/sales-engine/PerformanceAuthority"
-import { WorkProcess } from "@/components/sales-engine/WorkProcess"
+import { ImpactStats } from "@/components/sales-engine/ImpactStats";
+import { PerformanceAuthority } from "@/components/sales-engine/PerformanceAuthority";
+import { WorkProcess } from "@/components/sales-engine/WorkProcess";
 
 /**
  * useMDXComponents: ลงทะเบียนคอมโพเนนต์สำหรับเนื้อหาบทความ (MDX Architecture)
@@ -93,11 +93,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // จัดการพิกัดย่อหน้าเพื่อรองรับการแสดงผลรูปภาพที่ซ้อนภายใน (P-Tag Fix)
     p: (props) => {
-      const { children } = props
+      const { children } = props;
       if (React.isValidElement(children)) {
-        const childProps = children.props as Record<string, unknown>
+        const childProps = children.props as Record<string, unknown>;
         if (typeof children.type === "string" || childProps.src) {
-          return <>{children}</>
+          return <>{children}</>;
         }
       }
       return (
@@ -105,7 +105,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           className="font-body mb-8 text-lg leading-[1.8] font-bold text-slate-600 md:text-xl"
           {...props}
         />
-      )
+      );
     },
 
     // ส่วนแสดงผลภาพประกอบที่จูนความประณีตโดย นายเอ็มซ่ามากส์
@@ -129,15 +129,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
 
     a: ({ href, children }) => {
-      const isInternal = href?.startsWith("/") || href?.startsWith("#")
+      const isInternal = href?.startsWith("/") || href?.startsWith("#");
       const baseClass =
-        "font-black transition-all text-emerald-600 hover:text-emerald-400 underline decoration-emerald-500/30 underline-offset-4 hover:decoration-emerald-500"
+        "font-black transition-all text-emerald-600 hover:text-emerald-400 underline decoration-emerald-500/30 underline-offset-4 hover:decoration-emerald-500";
       if (isInternal) {
         return (
           <Link href={href as string} className={baseClass}>
             {children}
           </Link>
-        )
+        );
       }
       return (
         <a
@@ -148,7 +148,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         >
           {children}
         </a>
-      )
+      );
     },
 
     blockquote: ({ children }) => (
@@ -168,9 +168,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       url,
       label = "เริ่มต้นโครงการของคุณ",
     }: {
-      title: string
-      url: string
-      label?: string
+      title: string;
+      url: string;
+      label?: string;
     }) => (
       <div className="relative my-20 overflow-hidden rounded-[4rem] bg-slate-950 p-12 text-center md:p-24">
         <div
@@ -217,5 +217,5 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </span>
       </li>
     ),
-  }
+  };
 }

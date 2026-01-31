@@ -1,17 +1,17 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 
 /**
  * ShowcaseTemplate - ข้อมูลพื้นฐานของระบบงานตัวอย่าง
  */
 interface ShowcaseTemplate {
-  name: string
-  image: string
-  category: string
+  name: string;
+  image: string;
+  category: string;
 }
 
 /**
@@ -19,10 +19,10 @@ interface ShowcaseTemplate {
  */
 interface RentalShowcaseProps {
   data: {
-    title: string
-    description: string
-    templates: ShowcaseTemplate[]
-  }
+    title: string;
+    description: string;
+    templates: ShowcaseTemplate[];
+  };
 }
 
 /**
@@ -85,5 +85,5 @@ export const RentalShowcase = ({ data }: RentalShowcaseProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

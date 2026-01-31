@@ -1,21 +1,21 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import Link from "next/link"
-import { ArrowRight, Menu, X, Zap } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight, Menu, X, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * RentalNavbarProps - กำหนดข้อมูลที่จำเป็นสำหรับแถบเมนู
  */
 interface RentalNavbarProps {
   data: {
-    logo: string
-    cta: string
-    links: { label: string; href: string }[]
-  }
+    logo: string;
+    cta: string;
+    links: { label: string; href: string }[];
+  };
 }
 
 /**
@@ -24,18 +24,18 @@ interface RentalNavbarProps {
  * โดย: นายเอ็มซ่ามากส์ (Specialist & Web Architect)
  */
 export const RentalNavbar = ({ data }: RentalNavbarProps) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // ระบบตรวจจับการเลื่อนหน้าจอเพื่อปรับการแสดงผลแถบเมนู (Scroll Engine)
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // ปิดเมนูบนมือถือเมื่อมีการคลิกนำทาง
-  const closeMenu = () => setIsMobileMenuOpen(false)
+  const closeMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <nav
@@ -43,7 +43,7 @@ export const RentalNavbar = ({ data }: RentalNavbarProps) => {
         "fixed top-0 left-0 z-50 w-full transition-all duration-500 ease-in-out",
         isScrolled
           ? "h-20 border-b border-white/5 bg-slate-950/80 backdrop-blur-xl"
-          : "h-28 bg-transparent"
+          : "h-28 bg-transparent",
       )}
     >
       <div className="container mx-auto flex h-full items-center justify-between px-6 lg:px-12">
@@ -103,7 +103,7 @@ export const RentalNavbar = ({ data }: RentalNavbarProps) => {
           "fixed inset-0 z-40 flex flex-col items-center justify-center bg-slate-950 transition-all duration-700 ease-in-out lg:hidden",
           isMobileMenuOpen
             ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0"
+            : "-translate-y-full opacity-0",
         )}
       >
         {/* ลายตารางพื้นหลังจางๆ เพื่อเพิ่มความเนี้ยบ */}
@@ -131,5 +131,5 @@ export const RentalNavbar = ({ data }: RentalNavbarProps) => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};

@@ -1,11 +1,11 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { Zap, Rocket, ShieldCheck, Gauge, ArrowRight } from "lucide-react"
-import { siteConfig } from "@/constants/site-config"
+import React from "react";
+import { motion } from "framer-motion";
+import { Zap, Rocket, ShieldCheck, Gauge, ArrowRight } from "lucide-react";
+import { siteConfig } from "@/constants/site-config";
 
 /**
  * ShopPromotion - ส่วนผลักดันอัตราการเปลี่ยนผ่านกลุ่มเป้าหมาย (The Conversion Accelerator)
@@ -150,5 +150,5 @@ export const ShopPromotion = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};

@@ -1,15 +1,15 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
-import { TemplateCategory } from "@/types/template"
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { TemplateCategory } from "@/types/template";
 
 interface TemplateFilterProps {
-  activeCategory: TemplateCategory | "all"
-  onCategoryChange: (value: TemplateCategory | "all") => void
+  activeCategory: TemplateCategory | "all";
+  onCategoryChange: (value: TemplateCategory | "all") => void;
 }
 
 /** * [STRATEGIC DATA]: รายการหมวดหมู่โซลูชันมาตรฐานสากล
@@ -22,7 +22,7 @@ const categories: { label: string; value: TemplateCategory | "all" }[] = [
   { label: "HOTEL & RESORT", value: "Hotel" },
   { label: "SERVICE SOLUTIONS", value: "Service" },
   { label: "ENTERPRISE ASSETS", value: "Digital" },
-]
+];
 
 /**
  * TemplateFilter - ระบบเลือกหมวดหมู่โซลูชัน (Strategic Navigation Interface)
@@ -40,7 +40,7 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
       className="relative flex flex-wrap items-center justify-center gap-2 py-10 md:gap-4 lg:py-16"
     >
       {categories.map((cat) => {
-        const isActive = activeCategory === cat.value
+        const isActive = activeCategory === cat.value;
 
         return (
           <button
@@ -49,7 +49,7 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
             className={cn(
               "group relative flex h-11 items-center justify-center overflow-hidden rounded-2xl px-6 transition-all duration-300 md:h-12 md:px-8",
               "focus:ring-2 focus:ring-emerald-500/20 focus:outline-none",
-              isActive ? "text-white" : "text-slate-400 hover:text-slate-950"
+              isActive ? "text-white" : "text-slate-400 hover:text-slate-950",
             )}
           >
             {/* [INTERACTIVE LAYER]: ตัวระบุสถานะปัจจุบัน (Shared Layout ID) */}
@@ -71,7 +71,7 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
               <span className="absolute bottom-1.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-emerald-500 opacity-0 transition-opacity group-hover:opacity-100" />
             )}
           </button>
-        )
+        );
       })}
 
       {/* Decorative Infrastructure: องค์ประกอบเสริมเพื่อสร้างความสมดุลเชิงระนาบ */}
@@ -83,5 +83,5 @@ export const TemplateFilter: React.FC<TemplateFilterProps> = ({
         <div className="h-px w-12 bg-slate-900" />
       </div>
     </nav>
-  )
-}
+  );
+};

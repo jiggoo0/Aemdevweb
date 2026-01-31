@@ -1,15 +1,15 @@
 /** @format */
 
-import React from "react"
-import Link from "next/link"
-import { siteConfig } from "@/constants/site-config"
-import IconRenderer from "@/components/shared/IconRenderer"
+import React from "react";
+import Link from "next/link";
+import { siteConfig } from "@/constants/site-config";
+import IconRenderer from "@/components/shared/IconRenderer";
 
 /**
  * SeoFooter: พิกัดยืนยันความน่าเชื่อถือและการเชื่อมโยงข้อมูล (Internal Link Hub)
  */
 export default function SeoFooter() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t border-[oklch(0.95_0.02_260)] bg-white py-16 dark:bg-[oklch(0.12_0.02_260)]">
@@ -52,7 +52,7 @@ export default function SeoFooter() {
                     {slug
                       .split("-")
                       .map(
-                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        (word) => word.charAt(0).toUpperCase() + word.slice(1),
                       )
                       .join(" ")}
                   </Link>
@@ -118,5 +118,5 @@ export default function SeoFooter() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

@@ -1,46 +1,46 @@
 /** @format */
 
-import React, { Suspense } from "react"
-import { Metadata } from "next"
-import dynamic from "next/dynamic"
+import React, { Suspense } from "react";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 // [CRITICAL PATH]: โหลดทันทีเพื่อสมรรถนะ LCP สูงสุด (Above the Fold)
-import Hero from "@/components/shared/Hero"
-import { ImpactStats } from "@/components/sales-engine/ImpactStats"
-import { ServiceCard } from "@/components/shared/ServiceCard"
-import { JsonLd } from "@/components/seo/JsonLd"
-import SectionSkeleton from "@/components/shared/SectionSkeleton"
+import Hero from "@/components/shared/Hero";
+import { ImpactStats } from "@/components/sales-engine/ImpactStats";
+import { ServiceCard } from "@/components/shared/ServiceCard";
+import { JsonLd } from "@/components/seo/JsonLd";
+import SectionSkeleton from "@/components/shared/SectionSkeleton";
 
 // [DYNAMIC NODES]: Code Splitting เพื่อลดขนาด Bundle ข้อมูลเริ่มต้น
 const WorkProcess = dynamic(
   () =>
     import("@/components/sales-engine/WorkProcess").then(
-      (mod) => mod.WorkProcess
+      (mod) => mod.WorkProcess,
     ),
-  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> }
-)
+  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> },
+);
 
 const PriceEstimator = dynamic(
   () => import("@/components/sales-engine/PriceEstimator"),
-  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> }
-)
+  { ssr: true, loading: () => <SectionSkeleton hasHeader={false} /> },
+);
 
 const CaseStudyCard = dynamic(() =>
-  import("@/components/shared/CaseStudyCard").then((mod) => mod.CaseStudyCard)
-)
+  import("@/components/shared/CaseStudyCard").then((mod) => mod.CaseStudyCard),
+);
 
 const TemplateListSection = dynamic(
   () => import("@/components/shared/TemplateListSection"),
-  { ssr: true, loading: () => <SectionSkeleton /> }
-)
+  { ssr: true, loading: () => <SectionSkeleton /> },
+);
 
-const BlogCard = dynamic(() => import("@/components/shared/BlogCard"))
+const BlogCard = dynamic(() => import("@/components/shared/BlogCard"));
 
 // เชื่อมโยงพิกัดข้อมูล Master Data
-import { siteConfig } from "@/constants/site-config"
-import { servicesData } from "@/constants/services-data"
-import { getAllCaseStudies } from "@/lib/case-studies"
-import { getBlogPostsMetadata } from "@/lib/blog"
+import { siteConfig } from "@/constants/site-config";
+import { servicesData } from "@/constants/services-data";
+import { getAllCaseStudies } from "@/lib/case-studies";
+import { getBlogPostsMetadata } from "@/lib/blog";
 
 /**
  * [STRATEGIC METADATA]: พิกัดตัวตนเพื่อการครองอันดับปี 2026
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: siteConfig.company.name,
   },
-}
+};
 
 export default async function HomePage() {
   /**
@@ -67,11 +67,11 @@ export default async function HomePage() {
   const [allCaseStudies, latestPosts] = await Promise.all([
     getAllCaseStudies(),
     getBlogPostsMetadata(),
-  ])
+  ]);
 
-  const featuredServices = (servicesData || []).slice(0, 4)
-  const featuredCases = (allCaseStudies || []).slice(0, 2)
-  const featuredPosts = (latestPosts || []).slice(0, 4)
+  const featuredServices = (servicesData || []).slice(0, 4);
+  const featuredCases = (allCaseStudies || []).slice(0, 2);
+  const featuredPosts = (latestPosts || []).slice(0, 4);
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -208,5 +208,5 @@ export default async function HomePage() {
         aria-hidden="true"
       />
     </main>
-  )
+  );
 }

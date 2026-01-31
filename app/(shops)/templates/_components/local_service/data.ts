@@ -1,6 +1,6 @@
 /** @format */
 
-import { LocalServiceData } from "./schema"
+import { LocalServiceData } from "./schema";
 
 /**
  * localServiceData - โครงสร้างสถาปัตยกรรมดิจิทัลสำหรับธุรกิจบริการนอกสถานที่
@@ -82,4 +82,4 @@ export const localServiceData: LocalServiceData = {
       facebook: "aemdevweb.official",
     },
   },
-}
+};

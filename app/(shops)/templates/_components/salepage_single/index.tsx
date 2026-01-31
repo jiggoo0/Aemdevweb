@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 import {
   Zap,
   ShieldCheck,
@@ -12,8 +12,8 @@ import {
   Star,
   Menu,
   type LucideIcon, // [FIX]: นำเข้าประเภทข้อมูลเพื่อล้างพิกัด any
-} from "lucide-react"
-import { SalePageData } from "./schema"
+} from "lucide-react";
+import { SalePageData } from "./schema";
 
 /** * IconMap - ตัวช่วยแปลงชื่อไอคอนจากพิกัดข้อมูลให้เป็นคอมโพเนนต์จริง
  * [FIX]: ระบุประเภทข้อมูล LucideIcon แทนการใช้ any เพื่อความกริบของระบบงาน
@@ -22,7 +22,7 @@ const IconMap: Record<string, LucideIcon> = {
   Zap,
   ShieldCheck,
   MessageSquare,
-}
+};
 
 /**
  * [Sale Page Template]: ระบบปิดการขายหน้าเดียวสเปกแรง
@@ -39,7 +39,7 @@ export default function SalePageTemplate({ data }: { data: SalePageData }) {
           Powering up Sale System...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -127,9 +127,9 @@ export default function SalePageTemplate({ data }: { data: SalePageData }) {
             {data.benefits?.items?.map(
               (
                 item: { icon: string; title: string; desc: string },
-                idx: number
+                idx: number,
               ) => {
-                const Icon = IconMap[item.icon] || Zap
+                const Icon = IconMap[item.icon] || Zap;
                 return (
                   <div
                     key={idx}
@@ -145,8 +145,8 @@ export default function SalePageTemplate({ data }: { data: SalePageData }) {
                       {item.desc}
                     </p>
                   </div>
-                )
-              }
+                );
+              },
             )}
           </div>
         </div>
@@ -180,5 +180,5 @@ export default function SalePageTemplate({ data }: { data: SalePageData }) {
         </p>
       </footer>
     </div>
-  )
+  );
 }

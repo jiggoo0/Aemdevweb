@@ -2,13 +2,13 @@
 // พิกัดข้อมูล: app/(seo)/seo/_components/ecommerce-conversion-seo/index.tsx
 // หน้าที่: แสดงผลรายละเอียดชุดระบบงาน Ecommerce Conversion
 
-import React from "react"
-import IconRenderer from "@/components/shared/IconRenderer"
-import { siteConfig } from "@/constants/site-config"
-import { SeoServiceItem } from "@/types/seo"
+import React from "react";
+import IconRenderer from "@/components/shared/IconRenderer";
+import { siteConfig } from "@/constants/site-config";
+import { SeoServiceItem } from "@/types/seo";
 
 interface Props {
-  data: SeoServiceItem
+  data: SeoServiceItem;
 }
 
 export default function EcommerceConversionSeo({ data }: Props) {
@@ -115,5 +115,5 @@ export default function EcommerceConversionSeo({ data }: Props) {
         </div>
       </section>
     </div>
-  )
+  );
 }

@@ -1,9 +1,9 @@
 /** @format */
 
-import React from "react"
-import Link from "next/link"
-import { FileSearch, ArrowRight, Home, LayoutGrid } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import React from "react";
+import Link from "next/link";
+import { FileSearch, ArrowRight, Home, LayoutGrid } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 /**
  * NotFound: ส่วนจัดการเมื่อพิกัดข้อมูลสูญหาย (Specialist Edition 2026)
@@ -88,5 +88,5 @@ export default function NotFound() {
         </p>
       </div>
     </main>
-  )
+  );
 }

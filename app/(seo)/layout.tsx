@@ -1,9 +1,9 @@
 /** @format */
 
-import React from "react"
+import React from "react";
 // [แก้ไขพิกัด]: นำเครื่องหมาย { } ออกเพื่อให้ตรงกับ export default ของคอมโพเนนต์ต้นทาง
-import SeoNavbar from "./_components/SeoNavbar"
-import SeoFooter from "./_components/SeoFooter"
+import SeoNavbar from "./_components/SeoNavbar";
+import SeoFooter from "./_components/SeoFooter";
 
 /**
  * SeoLayout: พิกัดควบคุมโครงสร้างพื้นฐานสำหรับหมวดบริการ SEO
@@ -21,5 +21,5 @@ export default function SeoLayout({ children }: { children: React.ReactNode }) {
       {/* ส่วนท้ายของระบบงาน */}
       <SeoFooter />
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
 /** @format */
-import js from "@eslint/js"
-import tseslint from "typescript-eslint"
-import { createRequire } from "node:module"
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import { createRequire } from "node:module";
 
-const require = createRequire(import.meta.url)
-const nextPlugin = require("@next/eslint-plugin-next")
+const require = createRequire(import.meta.url);
+const nextPlugin = require("@next/eslint-plugin-next");
 
 export default tseslint.config(
   {
@@ -64,5 +64,5 @@ export default tseslint.config(
       // ปิดการแจ้งเตือนคอมเมนต์ Warning เพื่อไม่ให้กวนสายตาขณะทำงาน
       "no-warning-comments": "off",
     },
-  }
-)
+  },
+);

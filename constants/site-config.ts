@@ -1,12 +1,13 @@
-// @format
+/** @format */
 // พิกัดข้อมูล: constants/site-config.ts
 // หน้าที่: กำหนดค่าพื้นฐานของระบบและพิกัดข้อมูลตัวตน (Core Config Node)
-// ควบคุมมาตรฐานระดับ 7 โดย: นายเอ็มซ่ามากส์
+// มาตรฐาน: Ultra-Deep Level 7 | Specialist Optimization 2026
+// ควบคุมสมรรถนะโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import { SiteConfig } from "@/types"
+import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  // 1. Corporate Identity (อัตลักษณ์การทำงานที่ชัดเจน)
+  // [1. CORPORATE IDENTITY]: อัตลักษณ์การทำงานและการยืนยันตัวตน
   company: {
     name: "AEMDEVWEB",
     fullName: "เอ็มเดฟเว็บ (AEMDEVWEB) โดย นายเอ็มซ่ามากส์",
@@ -14,7 +15,7 @@ export const siteConfig: SiteConfig = {
     address: "กรุงเทพมหานคร, ประเทศไทย (Strategic Online Support)",
   },
 
-  // 2. Project & SEO Metadata (การตั้งค่าพิกัดบนระบบการค้นหาสูงสุด)
+  // [2. PROJECT & SEO METADATA]: พิกัดข้อมูลสำหรับการจัดอันดับสูงสุด
   project: {
     name: "AEMDEVWEB | Professional Technical SEO Specialist",
     shortName: "AEM",
@@ -26,26 +27,26 @@ export const siteConfig: SiteConfig = {
       "ผู้เชี่ยวชาญการวางรากฐานระบบเว็บไซต์ด้วย Next.js 16 มุ่งเน้นความเร็วระดับสูงสุด LCP ต่ำกว่า 0.8 วินาที เพื่อการจัดอันดับและยอดขายที่ยั่งยืนภายใต้การดูแลของ นายเอ็มซ่ามากส์",
     url: "https://www.aemdevweb.com",
     logo: "/images/logo-circuit.png",
-    // พิกัดภาพ Open Graph: ตรวจสอบความมีอยู่ของไฟล์ใน public/og-image-seo-2026.png
+    // พิกัดภาพ Open Graph สำหรับการแชร์ลง Social Media
     ogImage: "https://www.aemdevweb.com/og-image-seo-2026.png",
   },
 
-  // 3. Authority Expert (การยืนยันตัวตนระดับสูง - Strategic E-E-A-T)
+  // [3. AUTHORITY EXPERT]: การยืนยันตัวตนระดับสูง (E-E-A-T Strategy)
   expert: {
     name: "นายเอ็มซ่ามากส์",
-    realName: "นาย อลงกรณ์ ยมเกิด", //มีเว้นวรรค 
+    realName: "นาย อลงกรณ์ ยมเกิด", // Specialist Verified Name
     role: "Technical SEO Consultant & Web Infrastructure Lead",
-    bio: "ที่ปรึกษาการวางรากฐานระบบดิจิทัลด้วย Next.js และการวางระบบ Technical SEO มาตรฐานสากล มุ่งเน้นความเสถียรสูงสุดและการเก็บพิกัดข้อมูลที่แม่นยำ",
+    bio: "ที่ปรึกษาการวางรากฐานระบบดิจิทัลด้วย Next.js และการวางระบบ Technical SEO มาตรฐานสากล มุ่งเน้นความเสถียรสูงสุดและการเก็บพิกัดข้อมูลที่แม่นยำที่สุด",
   },
 
-  // 4. Performance Benchmarks (ตัวเลขชี้วัดการทำงานจริง)
+  // [4. PERFORMANCE BENCHMARKS]: ตัวเลขชี้วัดสมรรถนะระบบจริง
   stats: [
     { label: "ระยะเวลาส่งมอบระบบ", value: "60", suffix: "นาที" },
     { label: "ความเร็ว LCP Optimized", value: "< 0.8", suffix: "วินาที" },
     { label: "Web Vitals Score", value: "100", suffix: "คะแนนเต็ม" },
   ],
 
-  // 5. Strategic Value (คุณค่าที่ส่งมอบให้พาร์ทเนอร์ธุรกิจ)
+  // [5. STRATEGIC VALUE]: คุณค่าเชิงยุทธศาสตร์ที่ส่งมอบให้ธุรกิจ
   businessImpact: {
     speed:
       "Operational Velocity: เลือกระบบที่ตอบโจทย์ พร้อมจัดการข้อมูลหลังบ้านได้ทันทีโดย นายเอ็มซ่ามากส์",
@@ -54,7 +55,7 @@ export const siteConfig: SiteConfig = {
       "Conversion Strategy: ออกแบบจุดตอบโจทย์ลูกค้า เพื่อเพิ่มโอกาสการปิดการขายสูงสุด",
   },
 
-  // 6. Strategic Keywords (พิกัดคำค้นหาสำคัญ)
+  // [6. STRATEGIC KEYWORDS]: พิกัดคำค้นหาสำคัญเพื่อการทำอันดับ
   keywords: {
     list: [
       "รับทำเว็บไซต์ SEO",
@@ -70,10 +71,14 @@ export const siteConfig: SiteConfig = {
       "วางระบบเว็บไซต์เชิงพาณิชย์",
     ],
     tech: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript"],
-    brand: ["AEMDEVWEB", "นายเอ็มซ่ามากส์ SEO", "Alongkorl Yomkerd Specialist"],
+    brand: [
+      "AEMDEVWEB",
+      "นายเอ็มซ่ามากส์ SEO",
+      "Alongkorl Yomkerd Specialist",
+    ],
   },
 
-  // 7. Connectivity Hub (พิกัดการเชื่อมโยงข้อมูลแบรนด์)
+  // [7. CONNECTIVITY HUB]: พิกัดการเชื่อมโยงข้อมูลแบรนด์ (LINE-Only Policy)
   links: {
     line: "https://lin.ee/6lgJox0",
     lineId: "@127cnthn",
@@ -85,20 +90,20 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/aemdevweb",
   },
 
-  // 8. Final Contact Protocol
+  // [8. CONTACT PROTOCOL]: ช่องทางสื่อสารทางการ
   contact: {
     email: "me@aemdevweb.com",
     phone: "0xx-xxx-xxxx",
   },
 
-  // 9. Call-To-Action Nodes
+  // [9. CALL-TO-ACTION NODES]: จุดกระตุ้นการตัดสินใจ
   cta: {
     main: "เลือกรูปแบบระบบงานที่ นายเอ็มซ่ามากส์ คัดสรร",
     secondary: "ปรึกษาแผนงานโครงการฟรี",
     pricing: "ตรวจสอบรายละเอียดและระดับการลงทุน",
   },
 
-  // 10. Quality Assurance Standards
+  // [10. QUALITY ASSURANCE]: มาตรฐานการควบคุมคุณภาพระดับสูงสุด
   standards: {
     performance: 100,
     lcp: 0.8,
@@ -106,4 +111,4 @@ export const siteConfig: SiteConfig = {
     guarantee:
       "ควบคุมคุณภาพโดย นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด) พร้อมดูแลระบบให้สมบูรณ์แบบ 100%",
   },
-}
+};

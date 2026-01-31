@@ -1,6 +1,6 @@
 /** @format */
 
-import { ShopMasterData } from "./schema"
+import { ShopMasterData } from "./schema";
 
 /**
  * shopMasterData: ข้อมูลพิกัดหลักสำหรับเทมเพลต ShopMasterPro
@@ -124,4 +124,4 @@ export const shopMasterData: ShopMasterData = {
     },
     payments: ["Visa", "Mastercard", "PromptPay", "Rabbit LINE Pay"],
   },
-}
+};

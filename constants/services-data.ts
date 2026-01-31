@@ -1,19 +1,21 @@
-// @format
+/** @format */
 // พิกัดข้อมูล: constants/services-data.ts
 // หน้าที่: คลังข้อมูลระบบงานและบริการ (Strategic Service Node 2026)
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
+// มาตรฐาน: Ultra-Deep Level 7 | Specialist Optimization 
+// นโยบาย: No backend • No form submission • LINE-only communication
+// ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import { ServiceIconName, ServiceItem, ThemeColor } from "@/types"
+import { ServiceIconName, ServiceItem, ThemeColor } from "@/types";
 
 export interface CategoryInfo {
-  readonly slug: string
-  readonly name: string
-  readonly themeColor: ThemeColor
-  readonly description: string
-  readonly iconName: ServiceIconName
+  readonly slug: string;
+  readonly name: string;
+  readonly themeColor: ThemeColor;
+  readonly description: string;
+  readonly iconName: ServiceIconName;
 }
 
-/* 1. [STRATEGIC CATEGORY MAPPING] */
+/* [1. STRATEGIC CATEGORY MAPPING]: การแบ่งหมวดหมู่เชิงยุทธศาสตร์ */
 export const categoriesData: readonly CategoryInfo[] = [
   {
     slug: "ready-made",
@@ -38,9 +40,9 @@ export const categoriesData: readonly CategoryInfo[] = [
       "การจัดการเสถียรภาพพิกัดระบบและผลักดันอันดับ Google อย่างยั่งยืน",
     iconName: "ShieldCheck",
   },
-]
+];
 
-/* 2. [CORE PROFESSIONAL SERVICES] */
+/* [2. CORE PROFESSIONAL SERVICES]: บริการหลักระดับ Specialist */
 export const servicesData: readonly ServiceItem[] = [
   {
     id: "svc-salepage",
@@ -58,7 +60,7 @@ export const servicesData: readonly ServiceItem[] = [
       "ระบบโหลดไวเป็นพิเศษ LCP ต่ำกว่า 0.8 วินาที จูนโดยนายเอ็ม",
       "การจัดวาง Interface เชิงจิตวิทยาเพื่อพิกัดยอดขายสูงสุด",
       "ติดตั้งพิกัดติดตามผล (Pixel/CAPI) ครบวงจร",
-      "ระบบจัดการเนื้อหาอัจฉริยะมาตรฐาน AEMDEVWEB",
+      "โครงสร้างน้ำหนักเบาเพื่อประสิทธิภาพสูงสุดมาตรฐาน AEMDEVWEB",
     ],
     highlight: true,
     iconName: "Zap",
@@ -126,4 +128,4 @@ export const servicesData: readonly ServiceItem[] = [
     iconName: "TrendingUp",
     relatedTemplateSlugs: ["seo_agency", "corporate_pro", "local_service"],
   },
-]
+];

@@ -1,6 +1,6 @@
 /** @format */
 
-import { WebRentalData } from "./schema"
+import { WebRentalData } from "./schema";
 
 /**
  * webRentalData - ข้อมูลพิกัดระบบเช่าเว็บไซต์รายเดือน (Managed Infrastructure)
@@ -169,4 +169,4 @@ export const webRentalData: WebRentalData = {
     tagline: "มาตรฐานงานเช่าเว็บไซต์ระดับ Specialist โดย นายเอ็มซ่ามากส์",
     contact: { phone: "09X-XXX-XXXX", line: "@127cnthn" },
   },
-}
+};

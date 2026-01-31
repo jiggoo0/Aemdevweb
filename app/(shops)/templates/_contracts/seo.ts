@@ -10,37 +10,37 @@ export interface SEOContract {
     /** * หัวข้อหน้าเว็บ (Title)
      * พิกัดที่แนะนำ: 50-60 ตัวอักษร เพื่อให้แสดงผลบนหน้าแรกได้ครบถ้วน
      */
-    title: string
+    title: string;
 
     /** * คำอธิบายเนื้อหา (Description)
      * พิกัดที่แนะนำ: 150-160 ตัวอักษร เพื่อดึงพิกัดการคลิก (CTR)
      */
-    description: string
+    description: string;
 
     /** * ชุดคำค้นหา (Keywords)
      * วางพิกัดคำสำคัญที่เกี่ยวข้องกับกลุ่มธุรกิจลูกค้า
      */
-    keywords?: string[]
+    keywords?: string[];
 
     /** * รูปภาพสำหรับการแชร์ (Open Graph Image)
      * พิกัดที่แนะนำ: 1200x630 px เพื่อความเนี้ยบของภาพบนโซเชียล
      */
-    ogImage?: string
+    ogImage?: string;
 
     /** * ลิงก์มาตรฐาน (Canonical URL)
      * ป้องกันพิกัดเนื้อหาซ้ำซ้อนเพื่อให้ระบบค้นหาจัดลำดับได้แม่นยำ
      */
-    canonical?: string
+    canonical?: string;
 
     /** * ข้อมูลโครงสร้างระบบ (Structured Data)
      * [FIX]: เปลี่ยนจาก any เป็น unknown เพื่อล้างพิกัด Warning และเพิ่มความปลอดภัย
      */
-    structuredData?: Record<string, unknown>
-  }
+    structuredData?: Record<string, unknown>;
+  };
 
   /**
    * รองรับพิกัดข้อมูลอื่นๆ ที่อาจจะมีเพิ่มเข้ามาในแต่ละเทมเพลต
    * เพื่อป้องกันพิกัด Error ตอนทำการ Cast ข้อมูลในหน้าแสดงผล
    */
-  [key: string]: unknown
+  [key: string]: unknown;
 }

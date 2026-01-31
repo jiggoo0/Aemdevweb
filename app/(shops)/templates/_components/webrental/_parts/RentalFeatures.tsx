@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react"
+import React from "react";
 import {
   Zap,
   Search,
@@ -10,15 +10,15 @@ import {
   PenTool,
   ShieldCheck,
   LucideIcon,
-} from "lucide-react"
+} from "lucide-react";
 
 /**
  * FeatureItem - รูปแบบข้อมูลจุดเด่นแต่ละข้อ
  */
 interface FeatureItem {
-  icon: string
-  title: string
-  desc: string
+  icon: string;
+  title: string;
+  desc: string;
 }
 
 /**
@@ -26,9 +26,9 @@ interface FeatureItem {
  */
 interface RentalFeaturesProps {
   data: {
-    title: string
-    list: FeatureItem[]
-  }
+    title: string;
+    list: FeatureItem[];
+  };
 }
 
 /**
@@ -50,10 +50,10 @@ export const RentalFeatures = ({ data }: RentalFeaturesProps) => {
       Lock,
       PenTool,
       ShieldCheck,
-    }
-    const Icon = icons[name] || Zap
-    return <Icon size={28} strokeWidth={1.5} />
-  }
+    };
+    const Icon = icons[name] || Zap;
+    return <Icon size={28} strokeWidth={1.5} />;
+  };
 
   return (
     <section
@@ -110,5 +110,5 @@ export const RentalFeatures = ({ data }: RentalFeaturesProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

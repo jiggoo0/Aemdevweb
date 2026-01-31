@@ -1,12 +1,12 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { ShieldCheck, Zap, MessageCircle, ArrowUpRight } from "lucide-react"
-import Link from "next/link"
-import { siteConfig } from "@/constants/site-config"
+import React from "react";
+import { motion } from "framer-motion";
+import { ShieldCheck, Zap, MessageCircle, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { siteConfig } from "@/constants/site-config";
 
 /**
  * ShopFooter - ส่วนฐานรากของระบบโซลูชันเชิงพาณิชย์ (The Strategic Foundation)
@@ -15,7 +15,7 @@ import { siteConfig } from "@/constants/site-config"
  * เน้นการตอกย้ำมาตรฐานการบริหารจัดการโครงการและการเข้าถึงผู้เชี่ยวชาญในทันที
  */
 export const ShopFooter = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12">
@@ -114,5 +114,5 @@ export const ShopFooter = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};

@@ -1,6 +1,6 @@
 /** @format */
 
-import { MaintenanceData } from "./schema"
+import { MaintenanceData } from "./schema";
 
 /**
  * maintenanceData - ข้อมูลสำหรับหน้าแจ้งปรับปรุงระบบ (The Maintenance Node)
@@ -44,4 +44,4 @@ export const maintenanceData: MaintenanceData = {
     progress: 85,
     statusText: "นายเอ็มกำลังตรวจสอบความเรียบร้อยในขั้นตอนสุดท้าย",
   },
-}
+};

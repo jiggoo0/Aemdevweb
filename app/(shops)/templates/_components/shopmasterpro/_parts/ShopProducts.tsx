@@ -1,23 +1,23 @@
 /** @format */
 
-import React from "react"
-import Image from "next/image"
-import { ChevronRight } from "lucide-react"
+import React from "react";
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions) เพื่อความแม่นยำของระบบงาน                    */
 /* -------------------------------------------------------------------------- */
 
 interface ProductItem {
-  name: string
-  image: string
-  price: string
-  originalPrice?: string
-  tag?: string
+  name: string;
+  image: string;
+  price: string;
+  originalPrice?: string;
+  tag?: string;
 }
 
 interface ShopProductsProps {
-  data: ProductItem[]
+  data: ProductItem[];
 }
 
 /**
@@ -91,4 +91,4 @@ export const ShopProducts = ({ data }: ShopProductsProps) => (
       </div>
     </div>
   </section>
-)
+);

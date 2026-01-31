@@ -1,6 +1,6 @@
 /** @format */
 
-import { TemplateMetadata, TemplateContent } from "@/types/template"
+import { TemplateMetadata, TemplateContent } from "@/types/template";
 
 /**
  * AEMDEVWEB | คลังสถาปัตยกรรมชุดระบบหน้าเว็บ (Strategic Library 2026)
@@ -11,22 +11,9 @@ import { TemplateMetadata, TemplateContent } from "@/types/template"
 
 /**
  * 1. TEMPLATE_METADATA - รายการดัชนีพิกัดชุดระบบหลัก
+ * ปรับปรุงราคาและคำอธิบายเพื่อดึงดูดทั้งมือใหม่ (ซื้อง่าย) และมือเก่า (มั่นใจในระบบ)
  */
 const TEMPLATE_METADATA: TemplateMetadata[] = [
-  {
-    id: "WEB-RENT-01",
-    slug: "webrental",
-    name: "Managed Business Infrastructure",
-    category: "Digital",
-    thumbnail: "/images/templates/webrental/webrental.webp",
-    description:
-      "โซลูชันบริหารงบประมาณอัจฉริยะสำหรับ SME ยุคใหม่ ด้วยระบบเช่าสมรรถนะสูงที่จูนโดย นายเอ็มซ่ามากส์",
-    pricePrefix: "เริ่มต้นรายเดือน",
-    priceValue: 1990,
-    priceLabel: "1,990",
-    isNew: true,
-    isFeatured: true,
-  },
   {
     id: "SALE-SINGLE-01",
     slug: "salepage_single",
@@ -34,7 +21,21 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "ReadyMade",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "พิกัดปิดการขายที่รวดเร็วที่สุด ด้วย Sales Interface ที่จูนสปีดมาเพื่อแคมเปญโฆษณาพิกัดแรงโดย นายเอ็มซ่ามากส์",
+      "หน้าขายของปิดการขาย โหลดไว 0.4 วินาที จูนสปีดมาเพื่อหยุดนิ้วสไลด์และเพิ่ม ROI สูงสุดโดย นายเอ็มซ่ามากส์",
+    priceValue: 2500,
+    priceLabel: "2,500",
+    isNew: true,
+    isFeatured: true,
+  },
+  {
+    id: "WEB-RENT-01",
+    slug: "webrental",
+    name: "Managed Business Infrastructure",
+    category: "Digital",
+    thumbnail: "/images/templates/webrental/webrental.webp",
+    description:
+      "เช่าเว็บไซต์พรีเมียมพร้อมคนดูแล ไม่ต้องลงทุนก้อนใหญ่ ฟรีโฮสติ้งและ Support ตลอด 24 ชม. สไตล์ นายเอ็มซ่ามากส์",
+    pricePrefix: "เริ่มต้นรายเดือน",
     priceValue: 1990,
     priceLabel: "1,990",
     isNew: true,
@@ -47,9 +48,9 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "สถาปัตยกรรมองค์กรระดับพรีเมียม วางระบบโครงสร้างข้อมูลโดย นายเอ็มซ่ามากส์ เพื่อภาพลักษณ์ระดับสากล",
-    priceValue: 45000,
-    priceLabel: "45,000",
+      "สถาปัตยกรรมเว็บไซต์องค์กรขนาดใหญ่ เน้นความปลอดภัยสูง รองรับระบบ Database และหลายภาษาโดย นายเอ็มซ่ามากส์",
+    priceValue: 59000,
+    priceLabel: "59,000",
     isNew: true,
     isFeatured: true,
   },
@@ -60,9 +61,9 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/shopmasterpro/shopmasterpro.webp",
     description:
-      "ระบบร้านค้าที่เน้น Operational Excellence จัดการสต็อกและพิกัดการขายได้ไร้รอยต่อสไตล์ นายเอ็มซ่ามากส์",
-    priceValue: 25000,
-    priceLabel: "25,000",
+      "ระบบร้านค้าออนไลน์เต็มรูปแบบ จัดการสต็อกและพิกัดการขายได้ไร้รอยต่อ จูนระบบโดย นายเอ็มซ่ามากส์",
+    priceValue: 29000,
+    priceLabel: "29,000",
     isNew: false,
     isFeatured: true,
   },
@@ -73,33 +74,9 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/hotelresort/hotelresort.webp",
     description:
-      "สะท้อนสุนทรียภาพแห่งที่พักระดับพรีเมียม ผ่านระบบจองพิกัดตรงที่ นายเอ็มซ่ามากส์ วางระบบไว้อย่างเนี้ยบ",
+      "ระบบจองที่พักตรง ลดค่า GP OTA (อโกด้า) รับเงินเต็มๆ พร้อมระบบตัดบัตรเครดิตที่เนี้ยบที่สุด",
     priceValue: 35000,
     priceLabel: "35,000",
-    isNew: false,
-  },
-  {
-    id: "SEO-AG-01",
-    slug: "seo_agency",
-    name: "Search Authority Engine",
-    category: "Digital",
-    thumbnail: "/images/templates/project-01.webp",
-    description:
-      "ศูนย์บัญชาการดันอันดับ Google โดย นายเอ็มซ่ามากส์ ที่เน้นดัชนีชี้วัดเชิงสถิติและ Technical SEO ขั้นสูง",
-    priceValue: 19900,
-    priceLabel: "19,900",
-    isNew: true,
-  },
-  {
-    id: "CLN-PRO-01",
-    slug: "cleaningpro",
-    name: "Operational Service Platform",
-    category: "Business",
-    thumbnail: "/images/templates/cleaningpro/cleaningpro.webp",
-    description:
-      "ระบบงานบริการที่เน้นพิกัดความแม่นยำและการจัดการตารางเวลาที่เนี้ยบที่สุดโดย นายเอ็มซ่ามากส์",
-    priceValue: 15000,
-    priceLabel: "15,000",
     isNew: false,
   },
   {
@@ -109,9 +86,21 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "ReadyMade",
     thumbnail: "/images/templates/facebookadsexpert/facebookadsexpert.webp",
     description:
-      "เปลี่ยนทราฟฟิกให้เป็นกำไรโดย นายเอ็มซ่ามากส์ ด้วยโครงสร้าง LCP Optimized และเสถียรภาพสูงสุดขณะยิงแอด",
+      "Landing Page ขั้นเทพ ออกแบบโครงสร้างตามจิตวิทยาการขาย (Custom UI) เพื่อลดค่าแอดโดย นายเอ็มซ่ามากส์",
     priceValue: 12900,
     priceLabel: "12,900",
+    isNew: false,
+  },
+  {
+    id: "CLN-PRO-01",
+    slug: "cleaningpro",
+    name: "Operational Service Platform",
+    category: "Business",
+    thumbnail: "/images/templates/cleaningpro/cleaningpro.webp",
+    description:
+      "ระบบงานบริการ นัดหมาย และจัดการตารางเวลาที่แม่นยำ เหมาะสำหรับคลินิก สปา และงานบริการทุกรูปแบบ",
+    priceValue: 15000,
+    priceLabel: "15,000",
     isNew: false,
   },
   {
@@ -121,7 +110,7 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "สร้างความเชื่อมั่นให้ SME ด้วยหน้าเว็บที่จูนความเร็วและรองรับมาตรฐาน SEO 2026 โดย นายเอ็มซ่ามากส์",
+      "สร้างความเชื่อมั่นให้บริษัทด้วยหน้าเว็บมาตรฐานสากล จูนความเร็วและรองรับ SEO โดย นายเอ็มซ่ามากส์",
     priceValue: 9900,
     priceLabel: "9,900",
     isNew: false,
@@ -133,7 +122,7 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "ReadyMade",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "จุดเริ่มต้นพิกัดธุรกิจออนไลน์ที่ซิ่งและเนี้ยบสไตล์ นายเอ็มซ่ามากส์ ในงบประมาณที่คุ้มค่าที่สุด",
+      "มินิเว็บไซต์หน้าเดียวสำหรับเริ่มต้นธุรกิจ รวบรวมข้อมูลครบจบในที่เดียวในงบประมาณที่คุ้มค่าที่สุด",
     priceValue: 1990,
     priceLabel: "1,990",
     isNew: true,
@@ -145,21 +134,9 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "นำเสนอพิกัดความอร่อยผ่าน Interface ที่ นายเอ็มซ่ามากส์ จูนมาเพื่อกระตุ้นพิกัดความต้องการลูกค้า",
+      "นำเสนอเมนูและบรรยากาศร้านอาหารผ่านภาพลักษณ์ Visual-First เพื่อกระตุ้นความต้องการลูกค้า",
     priceValue: 15900,
     priceLabel: "15,900",
-    isNew: false,
-  },
-  {
-    id: "EVT-MAG-01",
-    slug: "event_magic",
-    name: "Specialized Event Protocol",
-    category: "Business",
-    thumbnail: "/images/templates/project-01.webp",
-    description:
-      "บันทึกพิกัดความทรงจำสำคัญ ผ่านสถาปัตยกรรมเว็บที่ นายเอ็มซ่ามากส์ ออกแบบมาให้ประณีตที่สุด",
-    priceValue: 12000,
-    priceLabel: "12,000",
     isNew: false,
   },
   {
@@ -169,9 +146,9 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Digital",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "รวมพิกัดตัวตนดิจิทัลของคุณไว้ในลิงก์เดียวที่เนี้ยบและโหลดไวระดับวินาที (0.4s) โดย นายเอ็มซ่ามากส์",
-    priceValue: 1990,
-    priceLabel: "1,990",
+      "นามบัตรดิจิทัลพรีเมียม รวมทุกโซเชียลไว้ในลิงก์เดียว โหลดไว 0.4s ยกระดับ Personal Brand ของคุณ",
+    priceValue: 1290,
+    priceLabel: "1,290",
     isNew: false,
   },
   {
@@ -181,7 +158,7 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Business",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "เพิ่มโอกาสให้ธุรกิจท้องถิ่นด้วยระบบพิกัด Local SEO ที่แม่นยำ จูนระบบงานโดย นายเอ็มซ่ามากส์",
+      "เพิ่มโอกาสให้ธุรกิจท้องถิ่นด้วยระบบ Local SEO ปักหมุดแม่นยำ ให้คนในพื้นที่ค้นหาเจอเป็นเจ้าแรก",
     priceValue: 8900,
     priceLabel: "8,900",
     isNew: false,
@@ -193,66 +170,66 @@ const TEMPLATE_METADATA: TemplateMetadata[] = [
     category: "Digital",
     thumbnail: "/images/templates/project-01.webp",
     description:
-      "แจ้งพิกัดการปรับปรุงระบบโดย นายเอ็มซ่ามากส์ เพื่อการกลับมาออนไลน์ที่ซิ่งและแรงกว่าเดิม",
+      "หน้าปิดปรับปรุงระบบที่ยังเก็บ Lead ลูกค้าได้ ดีไซน์สวยโปรไฟล์เนี้ยบมาตรฐาน นายเอ็มซ่ามากส์",
     priceValue: 990,
     priceLabel: "990",
     isNew: false,
   },
-]
+];
 
 /**
  * 2. TEMPLATE_CONTENT_MAP - ข้อมูลสมรรถนะเชิงลึก (Strategic Content Node)
  */
 const TEMPLATE_CONTENT_MAP: Record<string, TemplateContent> = {
   webrental: {
-    title: "สถาปัตยกรรมเว็บเช่าเพื่อธุรกิจยุค 2026",
+    title: "Managed Web Infrastructure (Web Rental)",
     description:
-      "ยกระดับธุรกิจสู่พิกัดออนไลน์ภายใน 24 ชม. ด้วย Managed Infrastructure โดย นายเอ็มซ่ามากส์",
-    body: "สัมผัสประสบการณ์การจัดการที่เน้นความเร็วและความเสถียรสูงสุด จูนระบบมาเพื่อรองรับการเติบโตของ SME ในพิกัดที่เนี้ยบที่สุด",
+      "เว็บไซต์เช่าพร้อมการดูแลระดับ VIP โดย นายเอ็มซ่ามากส์ ไม่ต้องกังวลเรื่องระบบล่มหรือโฮสติ้ง",
+    body: "โซลูชันที่ช่วยให้ SME มีเว็บไซต์คุณภาพสูงในราคาที่จับต้องได้ จ่ายรายเดือนเบาๆ แต่ได้ประสิทธิภาพเครื่องยนต์ระดับ Enterprise",
     performance: {
       lcp: "< 0.5 วินาที",
       seo: "Technical SEO 100%",
-      stability: "Managed Excellence",
+      stability: "24/7 Managed Excellence",
     },
     features: [
-      "ระบบจัดการข้อมูล CMS พิกัดแรง",
-      "Responsive Connectivity ทุกหน้าจอ",
-      "การสนับสนุนระดับ Specialist โดย นายเอ็มซ่ามากส์",
+      "ระบบจัดการเนื้อหา (CMS) ที่ใช้งานง่ายที่สุด",
+      "ฟรีค่าธรรมเนียม Hosting & SSL ตลอดอายุสัญญา",
+      "อัปเดตระบบความปลอดภัยอัตโนมัติโดย นายเอ็มซ่ามากส์",
     ],
   },
   salepage_single: {
-    title: "Sale Page พิกัดแรงเพื่อยอดขายระดับสูงสุด",
+    title: "Conversion Sales Engine (Sale Page 0.4s)",
     description:
-      "หยุดการสูญเสียลูกค้าด้วยความเร็วการตอบสนองระดับวินาที (0.4s) โดย นายเอ็มซ่ามากส์",
-    body: "โครงสร้าง Conversion Sales Engine ที่จูนมาตามหลักจิตวิทยาการขาย พร้อมรองรับทราฟฟิกมหาศาลจากการยิงแอดพิกัดแรง",
+      "อาวุธหนักสำหรับสายยิงแอดที่ต้องการผลลัพธ์ทันที จูนสปีดโดย นายเอ็มซ่ามากส์",
+    body: "เพราะทุกวินาทีที่ช้าคือยอดขายที่หายไป โครงสร้างนี้จึงถูกจูนให้โหลดไวที่สุดในไทย เพื่อเปลี่ยนผู้ชมให้เป็นผู้ซื้อในทันที",
     performance: {
       lcp: "< 0.4 วินาที",
-      seo: "Sales Velocity 100",
-      stability: "High Concurrency Support",
+      seo: "Sales Velocity Optimized",
+      stability: "High Traffic Ready",
     },
     features: [
-      "Strategic CTA Placement",
-      "Seamless Lead Generation",
-      "ระบบงานเนี้ยบมาตรฐาน นายเอ็มซ่ามากส์",
+      "รองรับการติด Facebook Pixel & TikTok Events",
+      "โครงสร้าง UX/UI ที่ผ่านการทดสอบมาเพื่อการปิดการขาย",
+      "จูนสปีดระดับสูงสุด (Google PageSpeed Green Score)",
     ],
   },
-  maintenance_page: {
-    title: "ระบบแจ้งสถานะการเพิ่มสมรรถนะชั่วคราว",
+  corporate_pro: {
+    title: "Enterprise Digital Architecture (ระบบองค์กร)",
     description:
-      "สื่อสารความน่าเชื่อถือโดย นายเอ็มซ่ามากส์ ระหว่างการยกระดับสถาปัตยกรรมระบบงาน",
-    body: "พื้นที่สำหรับแจ้งพิกัดความเคลื่อนไหว เพื่อการกลับมาออนไลน์ที่เนี้ยบและซิ่งกว่าเดิมในมาตรฐานปี 2026",
+      "สะท้อนความน่าเชื่อถือระดับสากล ผ่านสถาปัตยกรรมเว็บที่เนี้ยบที่สุด",
+    body: "ยกระดับภาพลักษณ์ธุรกิจสู่ระดับสากลด้วยเว็บไซต์ที่เน้นความมั่นคง ปลอดภัย และการใช้งานที่ลื่นไหลสำหรับพาร์ทเนอร์และลูกค้าของคุณ",
     performance: {
-      lcp: "< 0.3 วินาที",
-      seo: "Robots-Friendly Structure",
-      stability: "Lightweight Infrastructure",
+      lcp: "< 0.8 วินาที",
+      seo: "Authority Structure",
+      stability: "Bank-Grade Security",
     },
     features: [
-      "Strategic Countdown Protocol",
-      "Emergency Support Hub โดย นายเอ็มซ่ามากส์",
-      "คงอัตลักษณ์แบรนด์พิกัดชัดเจน",
+      "รองรับระบบหลายภาษา (Multi-language Support)",
+      "สถาปัตยกรรมที่รองรับการขยายตัว (Scalable Structure)",
+      "ระบบรักษาความปลอดภัยข้อมูลขั้นสูง",
     ],
   },
-}
+};
 
 /**
  * 3. ระบบจัดการข้อมูล (Data Handlers)
@@ -260,30 +237,30 @@ const TEMPLATE_CONTENT_MAP: Record<string, TemplateContent> = {
  */
 
 export function getAllTemplates(): string[] {
-  return TEMPLATE_METADATA.map((t) => t.slug)
+  return TEMPLATE_METADATA.map((t) => t.slug);
 }
 
 export function getAllTemplatesMetadata(): TemplateMetadata[] {
-  return [...TEMPLATE_METADATA]
+  return [...TEMPLATE_METADATA];
 }
 
 export async function getTemplateDataBySlug(
-  slug: string
+  slug: string,
 ): Promise<TemplateContent | null> {
-  const data = TEMPLATE_CONTENT_MAP[slug]
-  return data ? { ...data } : null
+  const data = TEMPLATE_CONTENT_MAP[slug];
+  return data ? { ...data } : null;
 }
 
 export function getTemplatesBySlugs(slugs: string[]): TemplateMetadata[] {
-  if (!slugs || slugs.length === 0) return []
-  return TEMPLATE_METADATA.filter((template) => slugs.includes(template.slug))
+  if (!slugs || slugs.length === 0) return [];
+  return TEMPLATE_METADATA.filter((template) => slugs.includes(template.slug));
 }
 
 export function getTemplatesMetadata(): TemplateMetadata[] {
-  const featured = TEMPLATE_METADATA.filter((t) => t.isFeatured)
+  const featured = TEMPLATE_METADATA.filter((t) => t.isFeatured);
   if (featured.length < 4) {
-    const others = TEMPLATE_METADATA.filter((t) => !t.isFeatured)
-    return [...featured, ...others].slice(0, 4)
+    const others = TEMPLATE_METADATA.filter((t) => !t.isFeatured);
+    return [...featured, ...others].slice(0, 4);
   }
-  return featured.slice(0, 4)
+  return featured.slice(0, 4);
 }

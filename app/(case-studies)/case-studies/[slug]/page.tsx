@@ -1,40 +1,40 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
-import { compileMDX } from "next-mdx-remote/rsc"
-import { ChevronLeft, BarChart3 } from "lucide-react"
+import React from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { compileMDX } from "next-mdx-remote/rsc";
+import { ChevronLeft, BarChart3 } from "lucide-react";
 
 // ระบบดึงพิกัดข้อมูลและประมวลผลเนื้อหาเชิงกลยุทธ์
-import { getCaseStudyBySlug, getAllCaseStudies } from "@/lib/case-studies"
-import { useMDXComponents } from "@/mdx-components"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { siteConfig } from "@/constants/site-config"
+import { getCaseStudyBySlug, getAllCaseStudies } from "@/lib/case-studies";
+import { useMDXComponents } from "@/mdx-components";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/constants/site-config";
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 /**
  * [STRATEGIC SSG PROTOCOL]: การจัดเตรียมเส้นทางข้อมูลล่วงหน้า (Pre-rendering)
  */
 export async function generateStaticParams() {
-  const studies = await getAllCaseStudies()
-  return studies.map((s) => ({ slug: s.slug }))
+  const studies = await getAllCaseStudies();
+  return studies.map((s) => ({ slug: s.slug }));
 }
 
 /**
  * [SEO METADATA]: การกำหนดข้อมูลอัตลักษณ์รายโครงการเพื่อความน่าเชื่อถือ
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const study = await getCaseStudyBySlug(slug)
-  if (!study) return { title: "Strategic Insights | Content Not Found" }
+  const { slug } = await params;
+  const study = await getCaseStudyBySlug(slug);
+  if (!study) return { title: "Strategic Insights | Content Not Found" };
 
-  const ogImage = study.frontmatter.thumbnail || siteConfig.project.ogImage
+  const ogImage = study.frontmatter.thumbnail || siteConfig.project.ogImage;
 
   return {
     title: `${study.frontmatter.title} | Case Study Analysis`,
@@ -52,30 +52,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       images: [ogImage],
     },
-  }
+  };
 }
 
 export default async function CaseStudyDetailPage({ params }: Props) {
-  const { slug } = await params
-  const study = await getCaseStudyBySlug(slug)
+  const { slug } = await params;
+  const study = await getCaseStudyBySlug(slug);
 
-  if (!study) notFound()
+  if (!study) notFound();
 
   // การประมวลผลเนื้อหา MDX (Server-side Compiled)
   const { content } = await compileMDX({
     source: study.content,
     components: useMDXComponents({}),
     options: { parseFrontmatter: true },
-  })
+  });
 
   /**
    * [DATA HELPER]: การจัดการดึงดัชนีชี้วัดหลัก (Primary Impact Metric)
    */
   const getPrimaryResult = () => {
-    const res = study.frontmatter.results?.[0]
-    if (!res) return "Optimization Protocol Success"
-    return typeof res === "string" ? res : res.value
-  }
+    const res = study.frontmatter.results?.[0];
+    if (!res) return "Optimization Protocol Success";
+    return typeof res === "string" ? res : res.value;
+  };
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -170,5 +170,5 @@ export default async function CaseStudyDetailPage({ params }: Props) {
         </div>
       </article>
     </main>
-  )
+  );
 }

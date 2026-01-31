@@ -1,6 +1,6 @@
 /** @format */
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions) เพื่อล้าง Warning: no-explicit-any          */
@@ -8,10 +8,10 @@ import Image from "next/image"
 
 interface HotelHeroProps {
   data: {
-    bgImage: string
-    title: string
-    description: string
-  }
+    bgImage: string;
+    title: string;
+    description: string;
+  };
 }
 
 /**
@@ -59,4 +59,4 @@ export const HotelHero = ({ data }: HotelHeroProps) => (
       </div>
     </div>
   </section>
-)
+);

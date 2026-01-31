@@ -1,5 +1,5 @@
 /** @format */
-import { CleaningServiceData } from "./schema"
+import { CleaningServiceData } from "./schema";
 
 /**
  * cleaningProData - ข้อมูลโครงสร้างระบบบริการทำความสะอาดมาตรฐานสูง
@@ -102,4 +102,4 @@ export const cleaningProData: CleaningServiceData = {
       address: "เลขที่ 123 อาคารสำนักงาน ถนนสุขุมวิท กรุงเทพมหานคร",
     },
   },
-}
+};

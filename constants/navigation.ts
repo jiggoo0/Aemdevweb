@@ -1,86 +1,88 @@
-// @format
+/** @format */
 // พิกัดข้อมูล: constants/navigation.ts
 // หน้าที่: กำหนดพิกัดทางเดินข้อมูล (Routing) และระบบเมนูสำหรับ www.aemdevweb.com
-// มาตรฐาน: Next.js 16 | Ultra-Deep Level 7 | Strategic Authority 2026
+// มาตรฐาน: Next.js 16 | Ultra-Deep Level 7 | Specialist Optimization 2026
+// นโยบาย: No backend • No form submission • LINE-only communication
 // ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import { siteConfig } from "./site-config"
+import { siteConfig } from "./site-config";
 
 /**
  * [TYPE DEFINITIONS]
  */
 export interface NavItem {
-  readonly name: string
-  readonly href: string
-  readonly description?: string
-  readonly badge?: string
-  readonly external?: boolean
-  readonly disabled?: boolean
+  readonly name: string;
+  readonly href: string;
+  readonly description?: string;
+  readonly badge?: string;
+  readonly external?: boolean;
+  readonly disabled?: boolean;
 }
 
 export interface NavigationConfig {
-  readonly main: readonly NavItem[]
+  readonly main: readonly NavItem[];
   readonly footer: {
-    readonly services: readonly NavItem[]
-    readonly company: readonly NavItem[]
-    readonly support: readonly NavItem[]
-    readonly legal: readonly NavItem[]
-  }
+    readonly services: readonly NavItem[];
+    readonly company: readonly NavItem[];
+    readonly support: readonly NavItem[];
+    readonly legal: readonly NavItem[];
+    readonly areas: readonly NavItem[];
+  };
 }
 
 /**
- * Navigation Strategy 2026: "Authority & Conversion"
- * ยุทธศาสตร์: เชื่อมโยง Blog เข้าสู่แกนกลางเพื่อส่งพลังให้พิกัด SEO
+ * Navigation Strategy 2026: "Authority & Local Dominance"
+ * ยุทธศาสตร์: กระจายพิกัดจากศูนย์กลาง (Core) สู่พิกัดความสำเร็จรายพื้นที่ (Success Pins)
  */
 export const navigation: NavigationConfig = {
-  /* -------------------------- เมนูหลัก (Main Navbar) ---------------------------- */
+  /* [MAIN NAVIGATION HUB] */
   main: [
     {
-      name: "หน้าแรก",
+      name: "ศูนย์กลางระบบ",
       href: "/",
-      description: "ภาพรวมโครงสร้างระบบและจุดเด่นของบริการเพื่อการเติบโต",
+      description: "ภาพรวมโครงสร้างระบบและพิกัดยุทธศาสตร์เพื่อการเติบโตของธุรกิจ",
     },
     {
-      name: "บริการ",
+      name: "บริการหลัก",
       href: "/services",
-      description: "รายละเอียดแผนการลงทุนและสเปกการทำงานระดับสากล",
+      description: "รายละเอียดแผนการลงทุนและสเปกการทำงานระดับ Specialist",
+    },
+    {
+      name: "ปักหมุดสำเร็จได้ทุกพิกัด",
+      href: "/areas",
+      badge: "Local",
+      description: "Local SEO Strategy พิสูจน์ความสำเร็จจริงในพิกัดพื้นที่เป้าหมาย",
     },
     {
       name: "Technical SEO",
       href: "/seo",
       badge: "Pro",
-      description: "ปรับโครงสร้างระบบเว็บให้ Google รักและดันอันดับหน้าแรก",
+      description: "ปรับโครงสร้างระบบเว็บเชิงลึกเพื่อให้ Google และ AI เชื่อมั่น",
     },
     {
-      name: "บล็อก",
+      name: "คลังความรู้",
       href: "/blog",
-      badge: "New",
-      description: "คลังข้อมูลเทคนิคและกลยุทธ์การทำเว็บไซต์ระดับ Specialist",
+      description: "ข้อมูลเทคนิคและกลยุทธ์การบริหารจัดการระบบโดย Specialist",
     },
     {
       name: "เทมเพลต",
       href: "/templates",
-      description: "คลังโครงสร้างเว็บไซต์ที่ผ่านการเพิ่มประสิทธิภาพพร้อมใช้งาน",
+      description: "โครงสร้างเว็บไซต์สำเร็จรูปที่ผ่านการจูนสมรรถนะพร้อมใช้งาน",
     },
     {
-      name: "ผลงาน",
+      name: "กรณีศึกษา",
       href: "/case-studies",
-      description: "กรณีศึกษาความสำเร็จและตัวอย่างเว็บไซต์มาตรฐานสากล",
-    },
-    {
-      name: "ติดต่อเรา",
-      href: "/contact",
-      description: "ช่องทางการติดต่อเพื่อปรึกษาผู้เชี่ยวชาญโดยตรง",
+      description: "พิกัดยืนยันความสำเร็จและผลลัพธ์เชิงประจักษ์จากโครงการจริง",
     },
   ],
 
-  /* --------------------------- เมนูท้ายเว็บ (Footer) --------------------------- */
+  /* [FOOTER CONNECTIVITY NODES] */
   footer: {
     services: [
       {
-        name: "High-Performance Sale Page",
+        name: "Conversion Sales Engine",
         href: "/services/salepage_single",
-        badge: "Popular",
+        badge: "Hot",
       },
       {
         name: "Technical SEO Audit",
@@ -89,11 +91,28 @@ export const navigation: NavigationConfig = {
       {
         name: "Web Speed Optimization",
         href: "/seo/core-web-vitals-speed",
-        badge: "Hot",
       },
       {
-        name: "Ecommerce Conversion",
-        href: "/seo/ecommerce-conversion-seo",
+        name: "Managed Web Infrastructure",
+        href: "/services/webrental",
+      },
+    ],
+
+    areas: [
+      {
+        name: "ปักหมุดสำเร็จ จ.ตาก",
+        href: "/areas/tak",
+        description: "ยึดพิกัดการค้นหาแม่สอดและเขตเศรษฐกิจพิเศษ",
+      },
+      {
+        name: "ปักหมุดสำเร็จ จ.กำแพงเพชร",
+        href: "/areas/kamphaeng-phet",
+        description: "ดันพิกัดธุรกิจ SME และบริการท้องถิ่นขึ้นหน้าแรก",
+      },
+      {
+        name: "พิกัดความสำเร็จทั้งหมด",
+        href: "/areas",
+        badge: "View All",
       },
     ],
 
@@ -103,29 +122,29 @@ export const navigation: NavigationConfig = {
         href: "/about",
       },
       {
-        name: "พอร์ตโฟลิโอและผลงาน",
+        name: "พิสูจน์ผลงานจริง",
         href: "/case-studies",
       },
       {
-        name: "กรณีศึกษา Unlink-TH",
-        href: "/case-studies/unlink-reputation-management-success",
-        badge: "Case Study",
+        name: "ปรึกษา นายเอ็มซ่ามากส์",
+        href: "/contact",
       },
     ],
 
     support: [
       {
-        name: "ปรึกษาผ่าน LINE",
+        name: "ติดต่อผ่าน LINE (Official)",
         href: siteConfig.links.line,
         external: true,
       },
       {
-        name: "บทความและเทคนิค",
+        name: "เทคนิคการจูนระบบ",
         href: "/blog",
       },
       {
-        name: "รายละเอียดราคา",
-        href: "/services#pricing",
+        name: "Status: All Nodes Active",
+        href: "#",
+        disabled: true,
       },
     ],
 
@@ -140,18 +159,22 @@ export const navigation: NavigationConfig = {
       },
     ],
   },
-}
+};
 
-export const mainNav = navigation.main
-export const footerNavigation = navigation.footer
+export const mainNav = navigation.main;
+export const footerNavigation = navigation.footer;
 
 /**
- * [SEO KEYWORDS 2026]
+ * [STRATEGIC KEYWORDS 2026]
+ * พิกัดคำค้นหาสำคัญเพื่อการดักจับบอทในพิกัดยุทธศาสตร์
  */
 export const siteKeywords: readonly string[] = [
   ...siteConfig.keywords.list,
-  "บล็อกสอนทำเว็บ 2026",
+  "ปักหมุดสำเร็จได้ทุกพิกัด",
+  "รับทำ SEO รายพื้นที่",
+  "ทำเว็บไซต์ จ.ตาก โดยนายเอ็ม",
+  "ทำเว็บไซต์ จ.กำแพงเพชร โดยนายเอ็ม",
   "Technical SEO Specialist Thailand",
-  "Next.js 16 Web Development",
+  "นาย อลงกรณ์ ยมเกิด",
   "นายเอ็มซ่ามากส์",
-]
+];

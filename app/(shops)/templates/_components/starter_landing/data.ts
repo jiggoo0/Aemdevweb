@@ -1,6 +1,6 @@
 /** @format */
 
-import { StarterLandingData } from "./schema"
+import { StarterLandingData } from "./schema";
 
 /**
  * starterLandingData - ข้อมูลพิกัดหน้าเว็บรุ่นสายยิงแอด (1,990.-)
@@ -81,4 +81,4 @@ export const starterLandingData: StarterLandingData = {
     copy: "© 2026 AEMDEVWEB System • วางระบบและดูแลโดย นายเอ็มซ่ามากส์",
     link: "https://line.me/ti/p/@127cnthn",
   },
-}
+};

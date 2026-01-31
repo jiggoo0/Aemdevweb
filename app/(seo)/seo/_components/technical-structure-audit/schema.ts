@@ -1,7 +1,7 @@
 /** @format */
 
-import { siteConfig } from "@/constants/site-config"
-import { technicalAuditData } from "./data"
+import { siteConfig } from "@/constants/site-config";
+import { technicalAuditData } from "./data";
 
 /**
  * Technical Audit Schema Setup 2026
@@ -48,5 +48,5 @@ export const getTechnicalAuditSchema = () => {
         position: index + 1,
       })),
     },
-  }
-}
+  };
+};

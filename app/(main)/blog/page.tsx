@@ -1,16 +1,16 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import { Zap, Heart, Sparkles, Activity } from "lucide-react"
+import React from "react";
+import type { Metadata } from "next";
+import { Zap, Heart, Sparkles, Activity } from "lucide-react";
 
 // ระบบจัดการพิกัดข้อมูลและ Config หลักของแบรนด์
-import { getBlogPostsMetadata } from "@/lib/blog"
-import { siteConfig } from "@/constants/site-config"
+import { getBlogPostsMetadata } from "@/lib/blog";
+import { siteConfig } from "@/constants/site-config";
 
 // ส่วนประกอบ UI และ SEO ระดับ Specialist
-import BlogCard from "@/components/shared/BlogCard"
-import { JsonLd } from "@/components/seo/JsonLd"
+import BlogCard from "@/components/shared/BlogCard";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * [STRATEGIC SEO PROTOCOL]: พิกัดความน่าเชื่อถือระดับสากล
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     "เจาะลึกกลยุทธ์การวางโครงสร้างระบบประสิทธิภาพสูง เทคนิคการทำ SEO เชิงเทคนิค 2026 และกระบวนการเปลี่ยน Digital Asset ให้เป็นผลกำไรจริง",
   alternates: { canonical: `${siteConfig.project.url}/blog` },
-}
+};
 
 /**
  * BlogPage: ศูนย์กลางพิกัดข้อมูลเชิงกลยุทธ์ (Insight Hub)
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
  */
 export default async function BlogPage() {
   // ดึงพิกัดข้อมูลผ่านเครื่องยนต์ Server-side เพื่อค่า LCP < 0.8s
-  const posts = await getBlogPostsMetadata()
+  const posts = await getBlogPostsMetadata();
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -138,5 +138,5 @@ export default async function BlogPage() {
         </div>
       </footer>
     </main>
-  )
+  );
 }

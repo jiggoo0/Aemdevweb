@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Search,
   PenTool,
@@ -11,18 +11,18 @@ import {
   Rocket,
   ArrowRight,
   LucideIcon,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * [TYPE DEFINITIONS]
  */
 interface ProcessStep {
-  title: string
-  desc: string
-  icon: LucideIcon
-  color: string
-  hoverColor: string
+  title: string;
+  desc: string;
+  icon: LucideIcon;
+  color: string;
+  hoverColor: string;
 }
 
 /**
@@ -60,7 +60,7 @@ export const WorkProcess = () => {
       color: "text-orange-600 bg-orange-50",
       hoverColor: "bg-orange-600",
     },
-  ]
+  ];
 
   return (
     <section className="relative my-24 w-full px-6 antialiased lg:my-40">
@@ -93,7 +93,7 @@ export const WorkProcess = () => {
               <div
                 className={cn(
                   "flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:bg-slate-950 group-hover:text-emerald-400",
-                  step.color
+                  step.color,
                 )}
               >
                 <step.icon size={28} strokeWidth={1.5} />
@@ -126,7 +126,7 @@ export const WorkProcess = () => {
             <div
               className={cn(
                 "absolute bottom-0 left-0 h-2 w-0 transition-all duration-700 ease-out group-hover:w-full",
-                step.hoverColor
+                step.hoverColor,
               )}
             />
           </motion.li>
@@ -144,5 +144,5 @@ export const WorkProcess = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

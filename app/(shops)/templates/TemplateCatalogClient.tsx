@@ -1,20 +1,20 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { Gauge, SearchCode, Rocket, PackageSearch, Star } from "lucide-react"
+import React from "react";
+import { motion } from "framer-motion";
+import { Gauge, SearchCode, Rocket, PackageSearch, Star } from "lucide-react";
 
-import { templateRegistry } from "./_registry"
-import { ShopNavbar } from "../_components/ShopNavbar"
-import { ShopFooter } from "../_components/ShopFooter"
-import { ShopCard } from "../_components/ShopCard"
+import { templateRegistry } from "./_registry";
+import { ShopNavbar } from "../_components/ShopNavbar";
+import { ShopFooter } from "../_components/ShopFooter";
+import { ShopCard } from "../_components/ShopCard";
 
-import { getAllTemplatesMetadata } from "@/lib/template"
-import { TemplateGrid } from "@/components/marketplace/template/TemplateGrid"
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
+import { getAllTemplatesMetadata } from "@/lib/template";
+import { TemplateGrid } from "@/components/marketplace/template/TemplateGrid";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * TemplateCatalogClient: ศูนย์รวมโซลูชันระบบเว็บไซต์สำเร็จรูป (Strategic Assets Hub)
@@ -24,13 +24,13 @@ import { JsonLd } from "@/components/seo/JsonLd"
  */
 export default function TemplateCatalogClient() {
   // การคัดเลือกโซลูชันประสิทธิภาพสูงเพื่อแสดงผลในส่วนแนะนำ (Featured Nodes)
-  const featuredSlugs = ["starter_landing", "shopmasterpro", "webrental"]
+  const featuredSlugs = ["starter_landing", "shopmasterpro", "webrental"];
 
   const featuredUnits = featuredSlugs
     .map((slug) => templateRegistry[slug]?.metadata)
-    .filter((unit): unit is NonNullable<typeof unit> => !!unit)
+    .filter((unit): unit is NonNullable<typeof unit> => !!unit);
 
-  const allThemes = getAllTemplatesMetadata()
+  const allThemes = getAllTemplatesMetadata();
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased selection:bg-emerald-500/10 dark:bg-[oklch(0.12_0.02_260)]">
@@ -70,7 +70,8 @@ export default function TemplateCatalogClient() {
               </div>
 
               <h1 className="font-heading text-brand-depth text-7xl leading-[0.8] font-black tracking-tighter uppercase italic md:text-9xl lg:text-[12rem] dark:text-white">
-                Catalog<span className="text-brand-primary animate-pulse">.</span>
+                Catalog
+                <span className="text-brand-primary animate-pulse">.</span>
               </h1>
 
               <div className="grid grid-cols-1 gap-16 border-t border-slate-200 pt-12 md:grid-cols-2 dark:border-white/5">
@@ -117,7 +118,10 @@ export default function TemplateCatalogClient() {
           <div className="container-za">
             <div className="mb-20 space-y-6 text-center md:text-left">
               <div className="border-brand-primary/20 bg-brand-primary/10 inline-flex items-center gap-2 rounded-full px-4 py-2 border">
-                <Star size={14} className="text-brand-primary fill-brand-primary" />
+                <Star
+                  size={14}
+                  className="text-brand-primary fill-brand-primary"
+                />
                 <span className="font-heading text-brand-primary text-[10px] font-black tracking-[0.3em] uppercase italic">
                   Strategic Selection
                 </span>
@@ -158,7 +162,8 @@ export default function TemplateCatalogClient() {
               <div className="max-w-2xl space-y-6">
                 <div className="bg-brand-depth h-1.5 w-16 rounded-full dark:bg-brand-primary" />
                 <h2 className="font-heading text-brand-depth text-5xl font-black tracking-tighter uppercase italic md:text-7xl dark:text-white">
-                  Strategic <span className="text-brand-primary">Inventory.</span>
+                  Strategic{" "}
+                  <span className="text-brand-primary">Inventory.</span>
                 </h2>
               </div>
               <div className="font-heading bg-brand-depth flex items-center gap-5 rounded-[2rem] px-8 py-5 text-white shadow-2xl dark:bg-white/5">
@@ -176,5 +181,5 @@ export default function TemplateCatalogClient() {
 
       <ShopFooter />
     </div>
-  )
+  );
 }

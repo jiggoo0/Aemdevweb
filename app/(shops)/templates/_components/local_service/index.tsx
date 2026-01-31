@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import {
   Wrench,
   ShieldCheck,
@@ -17,8 +17,8 @@ import {
   Zap,
   CheckCircle2,
   type LucideIcon, // [FIX]: นำเข้า Type เพื่อล้างพิกัด any
-} from "lucide-react"
-import { LocalServiceData } from "./schema"
+} from "lucide-react";
+import { LocalServiceData } from "./schema";
 
 /** * IconMap - วางพิกัดไอคอนจากพิกัดข้อมูลให้เป็นคอมโพเนนต์จริง
  * [FIX]: ระบุประเภทข้อมูล LucideIcon แทนการใช้ any เพื่อความกริบของระบบงาน
@@ -27,7 +27,7 @@ const IconMap: Record<string, LucideIcon> = {
   Wrench: Wrench,
   ShieldCheck: ShieldCheck,
   Clock: Clock,
-}
+};
 
 /**
  * [Local Service Template]: พิกัดระบบหน้าเว็บสำหรับธุรกิจและบริการท้องถิ่น
@@ -37,7 +37,7 @@ const IconMap: Record<string, LucideIcon> = {
 export default function LocalServiceTemplate({
   data,
 }: {
-  data: LocalServiceData
+  data: LocalServiceData;
 }) {
   // [Safety Shield]: ส่วนป้องกันระบบหน้าขาวหากพิกัดข้อมูลวิ่งมาไม่ครบ
   if (!data || !data.hero) {
@@ -48,7 +48,7 @@ export default function LocalServiceTemplate({
           Optimizing Local Service Data...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -157,9 +157,9 @@ export default function LocalServiceTemplate({
             {data.services?.items.map(
               (
                 item: { icon: string; title: string; desc: string },
-                idx: number
+                idx: number,
               ) => {
-                const Icon = IconMap[item.icon] || Wrench
+                const Icon = IconMap[item.icon] || Wrench;
                 return (
                   <div
                     key={idx}
@@ -175,8 +175,8 @@ export default function LocalServiceTemplate({
                       {item.desc}
                     </p>
                   </div>
-                )
-              }
+                );
+              },
             )}
           </div>
         </div>
@@ -240,5 +240,5 @@ export default function LocalServiceTemplate({
         </p>
       </footer>
     </div>
-  )
+  );
 }

@@ -1,22 +1,22 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { ArrowRight, ShieldCheck, Zap, MessageSquare } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { siteConfig } from "@/constants/site-config"
-import { cn } from "@/lib/utils"
+import React from "react";
+import { ArrowRight, ShieldCheck, Zap, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { siteConfig } from "@/constants/site-config";
+import { cn } from "@/lib/utils";
 
 /**
  * [TYPE DEFINITIONS]: กำหนดรูปแบบข้อมูลสำหรับระบบรับข้อมูล
  */
 interface LineLeadFormProps {
-  variant?: "button" | "form"
-  label?: string
-  className?: string
+  variant?: "button" | "form";
+  label?: string;
+  className?: string;
 }
 
 /**
@@ -32,9 +32,9 @@ export default function LineLeadForm({
 }: LineLeadFormProps) {
   const handleLineRedirect = () => {
     if (siteConfig.links.line) {
-      window.open(siteConfig.links.line, "_blank", "noopener,noreferrer")
+      window.open(siteConfig.links.line, "_blank", "noopener,noreferrer");
     }
-  }
+  };
 
   /**
    * [MODE 1]: รูปแบบปุ่มกด (Inline Strategy)
@@ -46,7 +46,7 @@ export default function LineLeadForm({
         onClick={handleLineRedirect}
         className={cn(
           "group h-14 rounded-2xl bg-emerald-600 px-8 text-[11px] font-black tracking-[0.3em] text-white uppercase italic shadow-2xl shadow-emerald-900/10 transition-all hover:bg-slate-950 active:scale-95",
-          className
+          className,
         )}
       >
         <MessageSquare size={16} className="mr-3" />
@@ -56,7 +56,7 @@ export default function LineLeadForm({
           className="ml-3 transition-transform group-hover:translate-x-1"
         />
       </Button>
-    )
+    );
   }
 
   /**
@@ -67,7 +67,7 @@ export default function LineLeadForm({
     <section
       className={cn(
         "relative overflow-hidden rounded-[3rem] border border-slate-100 bg-white p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] md:p-16 lg:p-20",
-        className
+        className,
       )}
     >
       {/* ลายเส้นโครงสร้างเชิงระบบจางๆ เพื่อเพิ่มมิติความประณีต */}
@@ -161,5 +161,5 @@ export default function LineLeadForm({
         </div>
       </div>
     </section>
-  )
+  );
 }

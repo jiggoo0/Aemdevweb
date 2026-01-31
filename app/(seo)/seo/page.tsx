@@ -4,16 +4,16 @@
 // มาตรฐาน: Next.js 16 (App Router) | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
 // ควบคุมระบบโดย: นายเอ็มซ่ามากส์
 
-import React from "react"
-import { Metadata } from "next"
+import React from "react";
+import { Metadata } from "next";
 
 // [DATA SOURCE]: คลังข้อมูลบริการและคอนฟิกระบบ
-import { seoServicesData } from "@/constants/seo-services"
-import { siteConfig } from "@/constants/site-config"
+import { seoServicesData } from "@/constants/seo-services";
+import { siteConfig } from "@/constants/site-config";
 
 // [COMPONENTS]: ระบบการ์ดบริการและรายงานการตรวจสอบระดับลึก
-import { SeoCard } from "../_components/SeoCard"
-import AuditReport from "@/components/seo/AuditReport"
+import { SeoCard } from "../_components/SeoCard";
+import AuditReport from "@/components/seo/AuditReport";
 
 /**
  * Metadata: กำหนดพิกัดข้อมูล SEO สำหรับหน้าหลักหมวดงานเทคนิค
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${siteConfig.project.url}/seo`,
   },
-}
+};
 
 /**
  * SeoListingPage: พิกัดแสดงผลระบบงาน SEO และรายงานสมรรถนะ (Technical Hub)
@@ -94,5 +94,5 @@ export default function SeoListingPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

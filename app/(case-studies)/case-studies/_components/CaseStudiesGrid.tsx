@@ -1,14 +1,14 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, Variants } from "framer-motion"
-import { CaseStudyCard } from "@/components/shared/CaseStudyCard"
-import { CaseStudyItem } from "@/types"
+import React from "react";
+import { motion, Variants } from "framer-motion";
+import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
+import { CaseStudyItem } from "@/types";
 
 interface CaseStudiesGridProps {
-  caseStudies: CaseStudyItem[]
+  caseStudies: CaseStudyItem[];
 }
 
 /**
@@ -28,7 +28,7 @@ export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants: Variants = {
     hidden: { y: 30, opacity: 0 },
@@ -41,7 +41,7 @@ export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
         damping: 20,
       },
     },
-  }
+  };
 
   // กรณีฐานข้อมูลโครงการอยู่ในสถานะรอการอัปเดต (Empty State Strategy)
   if (!caseStudies || caseStudies.length === 0) {
@@ -51,7 +51,7 @@ export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
           --- System Standby: Data Synchronization ---
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -64,11 +64,11 @@ export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
     >
       {caseStudies.map((study, idx) => {
         // [DATA INTEGRITY GUARD]: การประมวลผลข้อมูลผลลัพธ์ให้สอดคล้องกับระนาบการแสดงผล
-        const rawResult = study.frontmatter.results?.[0]
+        const rawResult = study.frontmatter.results?.[0];
         const displayResult =
           typeof rawResult === "object" && rawResult !== null
             ? rawResult.value
-            : rawResult || "Strategic Success"
+            : rawResult || "Strategic Success";
 
         return (
           <motion.div key={study.slug} variants={itemVariants}>
@@ -83,8 +83,8 @@ export default function CaseStudiesGrid({ caseStudies }: CaseStudiesGridProps) {
               result={String(displayResult)}
             />
           </motion.div>
-        )
+        );
       })}
     </motion.div>
-  )
+  );
 }

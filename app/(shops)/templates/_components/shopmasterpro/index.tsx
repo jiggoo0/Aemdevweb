@@ -1,12 +1,12 @@
 /** @format */
 
-import React from "react"
-import { ShopMasterData } from "./schema"
-import { ShopNavbar } from "./_parts/ShopNavbar"
-import { ShopHero } from "./_parts/ShopHero"
-import { ShopStats } from "./_parts/ShopStats"
-import { ShopProducts } from "./_parts/ShopProducts"
-import { ShopFooter } from "./_parts/ShopFooter"
+import React from "react";
+import { ShopMasterData } from "./schema";
+import { ShopNavbar } from "./_parts/ShopNavbar";
+import { ShopHero } from "./_parts/ShopHero";
+import { ShopStats } from "./_parts/ShopStats";
+import { ShopProducts } from "./_parts/ShopProducts";
+import { ShopFooter } from "./_parts/ShopFooter";
 
 /**
  * ShopMasterTemplate - วางโครงสร้างหลักของหน้าคลังสินค้า
@@ -29,8 +29,8 @@ const ShopMasterTemplate: React.FC<{ data: ShopMasterData }> = ({ data }) => {
       {/* 3. ส่วนท้ายระบบ: รวบรวมข้อมูลติดต่อและพิกัดธุรกิจสำหรับกลุ่ม SME */}
       <ShopFooter data={data.footer} logo={data.navigation.logo} />
     </div>
-  )
-}
+  );
+};
 
 // ส่งออกพิกัดหลักเพื่อให้ระบบ Registry ดึงไปใช้ได้ทันที
-export default ShopMasterTemplate
+export default ShopMasterTemplate;

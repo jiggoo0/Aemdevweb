@@ -12,6 +12,6 @@ const config = {
     // 🛠️ Auto-prefixer for cross-browser compatibility
     autoprefixer: {},
   },
-}
+};
 
-export default config
+export default config;

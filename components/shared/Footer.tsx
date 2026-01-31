@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
+import React from "react";
+import Link from "next/link";
 import {
   Mail,
   MessageCircle,
@@ -15,10 +15,10 @@ import {
   Activity,
   Wifi,
   Clock,
-} from "lucide-react"
+} from "lucide-react";
 
-import { siteConfig } from "@/constants/site-config"
-import { footerNavigation } from "@/constants/navigation"
+import { siteConfig } from "@/constants/site-config";
+import { footerNavigation } from "@/constants/navigation";
 
 /**
  * Footer Component - ศูนย์บัญชาการข้อมูลส่วนท้าย (System Terminal)
@@ -27,7 +27,7 @@ import { footerNavigation } from "@/constants/navigation"
  * ยุทธศาสตร์: โครงสร้างการเชื่อมโยงข้อมูล (Link Equity) ให้กริบตามระบบงาน
  */
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative overflow-hidden border-t border-slate-100 bg-white pt-24 pb-12">
@@ -193,5 +193,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

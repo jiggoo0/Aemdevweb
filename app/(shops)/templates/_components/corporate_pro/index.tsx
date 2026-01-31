@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import {
   Target,
   Zap,
@@ -14,9 +14,9 @@ import {
   CheckCircle2,
   Menu,
   type LucideIcon, // [FIX]: นำเข้าพิกัดประเภทข้อมูลเพื่อล้าง any
-} from "lucide-react"
+} from "lucide-react";
 // [FIX]: เปลี่ยนพิกัดนำเข้าให้ถูกต้องตามพิกัดของรุ่นโปร เพื่อล้าง Error TS2305
-import { CorporateProData } from "./schema"
+import { CorporateProData } from "./schema";
 
 /** * IconMap - วางพิกัดไอคอนจากพิกัดข้อมูลให้เป็นคอมโพเนนต์จริง
  * [FIX]: ระบุประเภทข้อมูล LucideIcon แทนการใช้ any เพื่อความกริบของระบบงาน
@@ -26,7 +26,7 @@ const IconMap: Record<string, LucideIcon> = {
   Zap,
   Search,
   Lock,
-}
+};
 
 /**
  * CorporateProTemplate - พิกัดระบบหน้าเว็บธุรกิจรุ่นท็อปสเปกแรง
@@ -36,10 +36,10 @@ const IconMap: Record<string, LucideIcon> = {
 export default function CorporateProTemplate({
   data,
 }: {
-  data: CorporateProData
+  data: CorporateProData;
 }) {
   // [Safety Check]: ตรวจสอบพิกัดข้อมูลก่อนเริ่มทำงาน
-  if (!data?.hero) return null
+  if (!data?.hero) return null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
@@ -61,7 +61,7 @@ export default function CorporateProTemplate({
                 >
                   {link.label}
                 </a>
-              )
+              ),
             )}
           </div>
 
@@ -122,7 +122,7 @@ export default function CorporateProTemplate({
               {data.stats.map(
                 (
                   stat: { value: string; suffix: string; label: string },
-                  i: number
+                  i: number,
                 ) => (
                   <div
                     key={i}
@@ -139,7 +139,7 @@ export default function CorporateProTemplate({
                       </span>
                     </div>
                   </div>
-                )
+                ),
               )}
             </div>
           </div>
@@ -162,9 +162,9 @@ export default function CorporateProTemplate({
             {data.services.items.map(
               (
                 item: { icon: string; title: string; desc: string },
-                i: number
+                i: number,
               ) => {
-                const Icon = IconMap[item.icon] || Zap
+                const Icon = IconMap[item.icon] || Zap;
                 return (
                   <div
                     key={i}
@@ -180,8 +180,8 @@ export default function CorporateProTemplate({
                       {item.desc}
                     </p>
                   </div>
-                )
-              }
+                );
+              },
             )}
           </div>
         </div>
@@ -206,7 +206,7 @@ export default function CorporateProTemplate({
             {data.showcase.items.map(
               (
                 item: { image: string; title: string; category: string },
-                i: number
+                i: number,
               ) => (
                 <div
                   key={i}
@@ -229,7 +229,7 @@ export default function CorporateProTemplate({
                     </h3>
                   </div>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -271,5 +271,5 @@ export default function CorporateProTemplate({
         </p>
       </footer>
     </div>
-  )
+  );
 }

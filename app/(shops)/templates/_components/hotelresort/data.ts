@@ -1,5 +1,5 @@
 /** @format */
-import { HotelData } from "./schema"
+import { HotelData } from "./schema";
 
 /**
  * hotelResortData - โครงสร้างสถาปัตยกรรมดิจิทัลสำหรับธุรกิจโรงแรมและที่พักระดับพรีเมียม
@@ -99,4 +99,4 @@ export const hotelResortData: HotelData = {
     },
     mapsUrl: "https://maps.google.com",
   },
-}
+};

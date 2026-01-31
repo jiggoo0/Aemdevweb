@@ -1,13 +1,16 @@
 # 📑 Project Types & Interfaces Summary (V3)
+
 _สร้างเมื่อ: Sat Jan 31 03:49:04 +07 2026_
 
 > **Note:** สแกนครอบคลุมทั้งแบบ Internal และ Exported (ยกเว้น node_modules) เพื่อความครบถ้วนครับพี่เอ็ม
 
 ## 📊 สถิติเบื้องต้น
+
 - **Total Interfaces:** 93 รายการ
 - **Total Type Aliases:** 39 รายการ
 
 ## 🏗️ All Interfaces (Internal & Exported)
+
 ```typescript
 app/(main)/blog/[slug]/page.tsx -> PageProps {
 app/(main)/services/[slug]/page.tsx -> Props {
@@ -105,6 +108,7 @@ types/seo.ts -> SeoServiceCardProps {
 ```
 
 ## 🏷️ All Type Aliases (Internal & Exported)
+
 ```typescript
 app/(main)/about/page.tsx:import type { Metadata } from "next"
 app/(main)/blog/[slug]/page.tsx:import type { Metadata } from "next"

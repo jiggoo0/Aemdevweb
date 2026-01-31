@@ -1,15 +1,15 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, Variants } from "framer-motion"
-import { Search, Clock, Zap, ShieldCheck, ArrowRight } from "lucide-react"
+import React from "react";
+import { motion, Variants } from "framer-motion";
+import { Search, Clock, Zap, ShieldCheck, ArrowRight } from "lucide-react";
 
-import { siteConfig } from "@/constants/site-config"
-import { servicesData } from "@/constants/services-data"
-import { ServiceCard } from "@/components/shared/ServiceCard"
-import { JsonLd } from "@/components/seo/JsonLd"
+import { siteConfig } from "@/constants/site-config";
+import { servicesData } from "@/constants/services-data";
+import { ServiceCard } from "@/components/shared/ServiceCard";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * ServicesClient: ศูนย์รวมโซลูชันแผนงานระบบ (Strategic Service Inventory)
@@ -26,13 +26,13 @@ export default function ServicesClient() {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   const staggerContainer: Variants = {
     animate: {
       transition: { staggerChildren: 0.1 },
     },
-  }
+  };
 
   return (
     <motion.main
@@ -169,7 +169,7 @@ export default function ServicesClient() {
                       {/* [FIXED]: Assert type as React.ReactElement<{ size?: number }> to prevent ESLint 'no-explicit-any' warning */}
                       {React.cloneElement(
                         item.icon as React.ReactElement<{ size?: number }>,
-                        { size: 24 }
+                        { size: 24 },
                       )}
                     </div>
                     <h3 className="font-heading text-brand-depth text-lg font-black tracking-tight uppercase italic dark:text-white">
@@ -223,5 +223,5 @@ export default function ServicesClient() {
         </div>
       </section>
     </motion.main>
-  )
+  );
 }

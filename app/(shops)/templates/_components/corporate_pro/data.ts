@@ -1,6 +1,6 @@
 /** @format */
 
-import { CorporateProData } from "./schema"
+import { CorporateProData } from "./schema";
 
 /**
  * corporateProData - ข้อมูลโครงสร้างระบบธุรกิจรุ่นพรีเมียม (Corporate Pro Strategic Edition)
@@ -93,4 +93,4 @@ export const corporateProData: CorporateProData = {
       },
     ],
   },
-}
+};

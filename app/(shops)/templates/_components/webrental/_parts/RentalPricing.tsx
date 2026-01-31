@@ -1,18 +1,18 @@
 /** @format */
 
-import React from "react"
-import { Check, Star } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React from "react";
+import { Check, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 /**
  * PricingTier - รูปแบบข้อมูลสำหรับแพ็กเกจราคา
  */
 interface PricingTier {
-  name: string
-  price: string
-  features: string[]
-  buttonText: string
-  isPopular?: boolean
+  name: string;
+  price: string;
+  features: string[];
+  buttonText: string;
+  isPopular?: boolean;
 }
 
 /**
@@ -20,9 +20,9 @@ interface PricingTier {
  */
 interface RentalPricingProps {
   data: {
-    title: string
-    tiers: PricingTier[]
-  }
+    title: string;
+    tiers: PricingTier[];
+  };
 }
 
 /**
@@ -64,7 +64,7 @@ export const RentalPricing = ({ data }: RentalPricingProps) => {
                 "group relative flex flex-col rounded-[3rem] border p-10 transition-all duration-500",
                 tier.isPopular
                   ? "shadow-3xl z-10 scale-105 border-emerald-500 bg-white shadow-emerald-500/10"
-                  : "border-slate-200 bg-white/80 backdrop-blur-sm hover:border-slate-300 hover:bg-white"
+                  : "border-slate-200 bg-white/80 backdrop-blur-sm hover:border-slate-300 hover:bg-white",
               )}
             >
               {/* ป้ายกำกับสำหรับแผนที่แนะนำเป็นพิเศษ */}
@@ -112,7 +112,7 @@ export const RentalPricing = ({ data }: RentalPricingProps) => {
                   "font-heading w-full rounded-2xl py-6 text-[11px] font-black tracking-[0.3em] uppercase italic transition-all duration-300 active:scale-95",
                   tier.isPopular
                     ? "bg-emerald-600 text-white shadow-2xl shadow-emerald-600/20 hover:bg-slate-950"
-                    : "bg-slate-950 text-white hover:bg-emerald-600"
+                    : "bg-slate-950 text-white hover:bg-emerald-600",
                 )}
               >
                 {tier.buttonText}
@@ -130,5 +130,5 @@ export const RentalPricing = ({ data }: RentalPricingProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

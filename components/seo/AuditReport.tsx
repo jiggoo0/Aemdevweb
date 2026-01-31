@@ -1,18 +1,18 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { cn } from "@/lib/utils"
-import IconRenderer from "@/components/shared/IconRenderer"
+import React from "react";
+import { cn } from "@/lib/utils";
+import IconRenderer from "@/components/shared/IconRenderer";
 // [PATCHED]: นำเข้าพิกัดคอนฟิกเพื่อแก้ไข ReferenceError: siteConfig is not defined
-import { siteConfig } from "@/constants/site-config"
+import { siteConfig } from "@/constants/site-config";
 
 interface AuditMetric {
-  label: string
-  value: string | number
-  status: "PASSED" | "WARNING" | "CRITICAL"
-  description: string
+  label: string;
+  value: string | number;
+  status: "PASSED" | "WARNING" | "CRITICAL";
+  description: string;
 }
 
 const MOCK_AUDIT_DATA: AuditMetric[] = [
@@ -40,7 +40,7 @@ const MOCK_AUDIT_DATA: AuditMetric[] = [
     status: "PASSED",
     description: "ความเร็วในการแสดงผลเนื้อหาหลัก (Target < 0.8s)",
   },
-]
+];
 
 export default function AuditReport() {
   return (
@@ -92,7 +92,7 @@ export default function AuditReport() {
                   metric.status === "WARNING" &&
                     "bg-[oklch(0.95_0.05_50)] text-[oklch(0.4_0.1_50)]",
                   metric.status === "CRITICAL" &&
-                    "bg-[oklch(0.95_0.05_20)] text-[oklch(0.4_0.15_20)]"
+                    "bg-[oklch(0.95_0.05_20)] text-[oklch(0.4_0.15_20)]",
                 )}
               >
                 {metric.status}
@@ -125,5 +125,5 @@ export default function AuditReport() {
         </button>
       </div>
     </div>
-  )
+  );
 }

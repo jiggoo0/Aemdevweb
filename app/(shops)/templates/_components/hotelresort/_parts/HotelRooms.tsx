@@ -1,21 +1,21 @@
 /** @format */
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions) เพื่อล้าง Warning: no-explicit-any          */
 /* -------------------------------------------------------------------------- */
 
 interface RoomItem {
-  id: string | number
-  name: string
-  image: string
-  price: string
-  features: string[]
+  id: string | number;
+  name: string;
+  image: string;
+  price: string;
+  features: string[];
 }
 
 interface HotelRoomsProps {
-  data: RoomItem[]
+  data: RoomItem[];
 }
 
 /**
@@ -74,4 +74,4 @@ export const HotelRooms = ({ data }: HotelRoomsProps) => (
       </div>
     </div>
   </section>
-)
+);

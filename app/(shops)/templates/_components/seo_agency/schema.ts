@@ -1,6 +1,6 @@
 /** @format */
 
-import { SEOContract } from "../../_contracts/seo"
+import { SEOContract } from "../../_contracts/seo";
 
 /**
  * SeoAgencyData - โครงสร้างข้อมูลสำหรับหน้าบริการรับทำ SEO รุ่นใหม่
@@ -11,49 +11,49 @@ export interface SeoAgencyData extends SEOContract {
   /** ส่วนเมนูและปุ่มนำทาง: ออกแบบให้ลูกค้าหาจุดเริ่มต้นได้ง่ายที่สุด */
   navigation: {
     /** ชื่อแบรนด์หรือโลโก้ทีมงาน */
-    logo: string
+    logo: string;
     /** ปุ่มดำเนินการหลัก (เช่น 'เช็กสเปกเว็บฟรี' หรือ 'คุยแผนงาน') */
-    cta: string
-  }
+    cta: string;
+  };
 
   /** ส่วนหัวเว็บไซต์ (Hero): พื้นที่หยุดสายตาด้วยคำสัญญาเรื่องผลลัพธ์ */
   hero: {
     /** ข้อความกำกับขนาดเล็กเพื่อสร้างความเชื่อใจ */
-    badge: string
-    title: string
+    badge: string;
+    title: string;
     /** คำสำคัญที่ต้องการเน้นให้เด่น (เช่น 'แซงหน้าแรก') */
-    highlight: string
-    description: string
-  }
+    highlight: string;
+    description: string;
+  };
 
   /** ส่วนตัวเลขผลลัพธ์ (Stats): โชว์ความเทพผ่านสถิติที่จับต้องได้จริง */
   stats: {
     /** หัวข้อสถิติ (เช่น 'อันดับเพิ่มขึ้น') */
-    label: string
+    label: string;
     /** ตัวเลขสถิติ */
-    value: string
+    value: string;
     /** หน่วยต่อท้าย (เช่น '%', 'เท่า', 'K+') */
-    suffix: string
-  }[]
+    suffix: string;
+  }[];
 
   /** รายการบริการ: อธิบายแผนการทำงานที่ทำให้ลูกค้าเข้าใจทันทีว่าเราทำอะไรบ้าง */
   services: {
-    title: string
+    title: string;
     /** รายละเอียดงานแต่ละส่วน */
     items: {
-      title: string
-      desc: string
+      title: string;
+      desc: string;
       /** ชื่อไอคอนจากชุด Lucide React */
-      icon: string
-    }[]
-  }
+      icon: string;
+    }[];
+  };
 
   /** ส่วนปิดการขาย (CTA): กระตุ้นความอยากเปลี่ยนธุรกิจให้ซิ่งกว่าเดิม */
   cta: {
-    title: string
+    title: string;
     /** ข้อความบนปุ่มที่ดูเป็นมิตรและเร้าใจ */
-    buttonText: string
+    buttonText: string;
     /** ข้อความเสริมใต้ปุ่ม (เช่น 'ไม่มีค่าใช้จ่ายแฝง') */
-    subText?: string
-  }
+    subText?: string;
+  };
 }

@@ -1,6 +1,6 @@
 /** @format */
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 /**
  * Textarea: Glass Edition
@@ -24,13 +24,13 @@ const Textarea = React.forwardRef<
         // สถานะปิดการใช้งาน และขนาดหน้าจอต่าง ๆ
         "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm lg:text-base",
 
-        className
+        className,
       )}
       ref={ref}
       {...props}
     />
-  )
-})
-Textarea.displayName = "Textarea"
+  );
+});
+Textarea.displayName = "Textarea";
 
-export { Textarea }
+export { Textarea };

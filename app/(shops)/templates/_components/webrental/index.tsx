@@ -1,17 +1,17 @@
 /** @format */
 
-import React from "react"
-import Image from "next/image"
-import { WebRentalData } from "./schema"
-import { cn } from "@/lib/utils"
-import { CheckCircle2, Phone, MessageCircle, ShieldAlert } from "lucide-react"
+import React from "react";
+import Image from "next/image";
+import { WebRentalData } from "./schema";
+import { cn } from "@/lib/utils";
+import { CheckCircle2, Phone, MessageCircle, ShieldAlert } from "lucide-react";
 
 interface PricingTier {
-  name: string
-  price: string
-  isPopular?: boolean
-  features: string[]
-  buttonText: string
+  name: string;
+  price: string;
+  isPopular?: boolean;
+  features: string[];
+  buttonText: string;
 }
 
 /**
@@ -19,9 +19,9 @@ interface PricingTier {
  * [FIX]: ระบุพิกัดราคา 0 บาท และล้างพิกัด any ในระบบงาน
  */
 const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
-  if (!data) return null
+  if (!data) return null;
 
-  const { navigation, hero, painPoints, pricing, footer } = data
+  const { navigation, hero, painPoints, pricing, footer } = data;
 
   return (
     <div className="web-rental-template bg-white text-left font-sans text-slate-900 selection:bg-emerald-100 selection:text-emerald-900">
@@ -40,7 +40,7 @@ const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
                 >
                   {link.label}
                 </a>
-              )
+              ),
             )}
             <button className="rounded-xl bg-emerald-600 px-8 py-3 text-[10px] font-black tracking-widest text-white uppercase">
               {navigation.cta}
@@ -110,7 +110,7 @@ const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
                     {item.desc}
                   </p>
                 </div>
-              )
+              ),
             )}
           </div>
         </div>
@@ -129,7 +129,7 @@ const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
                   "relative flex flex-col rounded-[3.5rem] border p-12 text-left transition-all",
                   tier.isPopular
                     ? "scale-105 border-slate-950 bg-slate-950 text-white shadow-2xl"
-                    : "border-slate-100"
+                    : "border-slate-100",
                 )}
               >
                 <h3 className="mb-6 text-2xl font-black uppercase italic">
@@ -159,7 +159,7 @@ const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
                     "w-full rounded-2xl py-5 text-[10px] font-black tracking-[0.3em] uppercase transition-all",
                     tier.isPopular
                       ? "bg-emerald-500 text-slate-950"
-                      : "bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-emerald-600 hover:text-white",
                   )}
                 >
                   {tier.buttonText}
@@ -191,7 +191,7 @@ const WebRentalTemplate: React.FC<{ data: WebRentalData }> = ({ data }) => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default WebRentalTemplate
+export default WebRentalTemplate;

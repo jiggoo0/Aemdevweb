@@ -1,6 +1,6 @@
 /** @format */
 
-import { SEOContract } from "../../_contracts/seo"
+import { SEOContract } from "../../_contracts/seo";
 
 /**
  * PersonalBioData - โครงสร้างข้อมูลสำหรับหน้าประวัติส่วนตัว (Digital Bio)
@@ -11,38 +11,38 @@ export interface PersonalBioData extends SEOContract {
   /** ส่วนข้อมูลเจ้าของโปรไฟล์: หัวใจหลักที่ทำให้คนรู้จักคุณ */
   profile: {
     /** ชื่อ-นามสกุล หรือชื่อในวงการ */
-    name: string
+    name: string;
     /** ตำแหน่งหรือนิยามตัวเอง (เช่น Full-stack Developer) */
-    role: string
+    role: string;
     /** ที่อยู่รูปภาพโปรไฟล์ (แนะนำเป็นไฟล์ .webp เพื่อความซิ่ง) */
-    avatar: string
+    avatar: string;
     /** ข้อความแนะนำตัวสั้นๆ ที่อ่านแล้วต้องอยากคุยต่อ */
-    bio: string
-  }
+    bio: string;
+  };
 
   /** ส่วนช่องทางติดต่อออนไลน์: รวมลิงก์สำคัญทั้งหมดไว้ในจุดเดียว */
   socials: {
     /** ชื่อแพลตฟอร์ม (เช่น Facebook, Line, TikTok) */
-    platform: string
+    platform: string;
     /** ข้อความที่ต้องการโชว์บนปุ่ม */
-    label: string
+    label: string;
     /** ลิงก์ปลายทาง */
-    href: string
+    href: string;
     /** ชื่อไอคอนจากชุด Lucide React */
-    icon: string
-  }[]
+    icon: string;
+  }[];
 
   /** ส่วนสถิติหรือความสำเร็จ: โชว์ผลงานผ่านตัวเลขที่จับต้องได้ */
   stats: {
-    label: string
-    value: string
-  }[]
+    label: string;
+    value: string;
+  }[];
 
   /** ส่วนปุ่มดำเนินการหลัก (CTA): จุดปิดการขายที่สำคัญที่สุดในหน้า */
   cta: {
     /** ข้อความบนปุ่ม (เช่น 'จ้างงานผมเลย') */
-    text: string
+    text: string;
     /** ลิงก์ไปยังฟอร์มหรือช่องทางแชทส่วนตัว */
-    href: string
-  }
+    href: string;
+  };
 }

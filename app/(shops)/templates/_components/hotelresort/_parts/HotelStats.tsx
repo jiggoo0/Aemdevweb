@@ -1,13 +1,13 @@
 /** @format */
 
-import React from "react"
-import { Star, MapPin, LayoutGrid, ShieldCheck } from "lucide-react"
+import React from "react";
+import { Star, MapPin, LayoutGrid, ShieldCheck } from "lucide-react";
 
 interface HotelStatsProps {
   data: {
-    label: string
-    value: string
-  }[]
+    label: string;
+    value: string;
+  }[];
 }
 
 export const HotelStats = ({ data }: HotelStatsProps) => {
@@ -15,15 +15,15 @@ export const HotelStats = ({ data }: HotelStatsProps) => {
   const getIcon = (index: number) => {
     switch (index) {
       case 0:
-        return <Star className="text-emerald-500" size={24} />
+        return <Star className="text-emerald-500" size={24} />;
       case 1:
-        return <MapPin className="text-emerald-500" size={24} />
+        return <MapPin className="text-emerald-500" size={24} />;
       case 2:
-        return <LayoutGrid className="text-emerald-500" size={24} />
+        return <LayoutGrid className="text-emerald-500" size={24} />;
       default:
-        return <ShieldCheck className="text-emerald-500" size={24} />
+        return <ShieldCheck className="text-emerald-500" size={24} />;
     }
-  }
+  };
 
   return (
     <section className="relative z-20 -mt-16 pb-20 lg:-mt-20">
@@ -68,5 +68,5 @@ export const HotelStats = ({ data }: HotelStatsProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

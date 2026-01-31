@@ -1,6 +1,6 @@
 /** @format */
-import { siteConfig } from "@/constants/site-config"
-import { entityLocalAuthorityData } from "./data"
+import { siteConfig } from "@/constants/site-config";
+import { entityLocalAuthorityData } from "./data";
 
 export const getEntityLocalSchema = () => {
   return {
@@ -25,5 +25,5 @@ export const getEntityLocalSchema = () => {
       availability: "https://schema.org/InStock",
       seller: { "@type": "Person", name: siteConfig.expert.name },
     },
-  }
-}
+  };
+};

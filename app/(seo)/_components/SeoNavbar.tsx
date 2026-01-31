@@ -1,9 +1,9 @@
 /** @format */
 
-import React from "react"
-import Link from "next/link"
-import { siteConfig } from "@/constants/site-config"
-import IconRenderer from "@/components/shared/IconRenderer"
+import React from "react";
+import Link from "next/link";
+import { siteConfig } from "@/constants/site-config";
+import IconRenderer from "@/components/shared/IconRenderer";
 
 /**
  * SeoNavbar: พิกัดควบคุมส่วนนำทางหลักสำหรับหมวดงาน SEO
@@ -53,5 +53,5 @@ export default function SeoNavbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

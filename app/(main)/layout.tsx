@@ -1,22 +1,28 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import Navbar from "@/components/shared/Navbar"
-import Footer from "@/components/shared/Footer"
-import LineStickyButton from "@/components/shared/LineStickyButton"
+import React from "react";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
+import LineStickyButton from "@/components/shared/LineStickyButton";
 
-export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
+export default function MainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
 
   return (
     <div className="selection:bg-brand-primary/20 selection:text-brand-depth relative flex min-h-screen flex-col bg-white antialiased transition-colors duration-300 dark:bg-[oklch(0.12_0.02_260)]">
-      
       {/* [SKIP TO CONTENT PROTOCOL] */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[1000] focus:rounded-xl focus:bg-brand-primary focus:p-4 focus:text-[10px] focus:font-black focus:text-brand-depth focus:uppercase focus:italic">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[1000] focus:rounded-xl focus:bg-brand-primary focus:p-4 focus:text-[10px] focus:font-black focus:text-brand-depth focus:uppercase focus:italic"
+      >
         ข้ามไปยังเนื้อหาหลัก
       </a>
 
@@ -45,7 +51,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <Footer />
 
       {/* Strategic Background Grid */}
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-[size:60px_60px] opacity-[0.02] dark:invert" aria-hidden="true" />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-[size:60px_60px] opacity-[0.02] dark:invert"
+        aria-hidden="true"
+      />
     </div>
-  )
+  );
 }

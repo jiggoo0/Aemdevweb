@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, Variants } from "framer-motion"
+import React from "react";
+import { motion, Variants } from "framer-motion";
 import {
   ShieldCheck,
   Lock,
@@ -12,11 +12,11 @@ import {
   UserCheck,
   Zap,
   ArrowRight,
-} from "lucide-react"
+} from "lucide-react";
 
 // พิกัดข้อมูลตัวตนและโครงสร้างระบบ
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * PrivacyClient: มาตรฐานการคุ้มครองข้อมูลส่วนบุคคล 2026
@@ -26,7 +26,7 @@ import { JsonLd } from "@/components/seo/JsonLd"
  * ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
  */
 export default function PrivacyClient() {
-  const lastUpdated = "31 มกราคม 2026"
+  const lastUpdated = "31 มกราคม 2026";
 
   // พิกัดการเคลื่อนไหวเชิงระบบ (Motion Protocol)
   const fadeIn: Variants = {
@@ -36,13 +36,13 @@ export default function PrivacyClient() {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   const staggerContainer: Variants = {
     animate: {
       transition: { staggerChildren: 0.1 },
     },
-  }
+  };
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -147,7 +147,9 @@ export default function PrivacyClient() {
                   Data Rights <br /> Management.
                 </h2>
                 <p className="font-body max-w-2xl text-xl font-bold text-[oklch(0.8_0.02_260)]">
-                  ท่านมีสิทธิ์โดยสมบูรณ์ในการบริหารจัดการข้อมูลส่วนบุคคล ทั้งการตรวจสอบ การแก้ไข หรือการร้องขอให้ลบข้อมูลออกจากระบบผ่านช่องทางหลักได้ทันที
+                  ท่านมีสิทธิ์โดยสมบูรณ์ในการบริหารจัดการข้อมูลส่วนบุคคล
+                  ทั้งการตรวจสอบ การแก้ไข
+                  หรือการร้องขอให้ลบข้อมูลออกจากระบบผ่านช่องทางหลักได้ทันที
                 </p>
               </div>
 
@@ -171,7 +173,7 @@ export default function PrivacyClient() {
         </p>
       </footer>
     </main>
-  )
+  );
 }
 
 /**
@@ -182,9 +184,9 @@ function PolicyCard({
   title,
   content,
 }: {
-  icon: React.ElementType
-  title: string
-  content: string
+  icon: React.ElementType;
+  title: string;
+  content: string;
 }) {
   return (
     <motion.div
@@ -208,5 +210,5 @@ function PolicyCard({
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

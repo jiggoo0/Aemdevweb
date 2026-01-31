@@ -1,51 +1,53 @@
-// @format
+/** @format */
 // พิกัดข้อมูล: app/(seo)/seo/[slug]/page.tsx
 // หน้าที่: ส่วนควบคุมการแสดงผลบริการ SEO เชิงเทคนิครายพิกัด (Individual Service Page)
-// มาตรฐาน: Next.js 16 (App Router) | Ultra-Deep Level 7 (Strict Typing)
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
+// มาตรฐาน: Next.js 16 (App Router) | Ultra-Deep Level 7 | Zero Warning
+// นโยบาย: No backend • No form submission • LINE-only communication
+// ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import React from "react"
-import { notFound } from "next/navigation"
-import { Metadata } from "next"
+import React from "react";
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-// [DATA SOURCE]: อ้างอิงพิกัดข้อมูลจาก Master Data และระบบตัวจัดการส่วนแสดงผล
-import { seoServicesData } from "@/constants/seo-services"
-import { getSeoComponent } from "../_registry"
-import { siteConfig } from "@/constants/site-config"
+// [RESOURCES]: นำเข้าพิกัดข้อมูล ยุทธศาสตร์ และคอมโพเนนต์แกนหลัก
+import { getAllSeoSlugs, getSeoServiceBySlug, getServiceSchema } from "@/lib/seo";
+import { getSeoComponent } from "../_registry";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
  * [INTERFACE]: กำหนดรูปแบบพิกัดข้อมูลสำหรับ Page Props
- * มาตรฐาน Next.js 15/16: params ต้องเป็น Promise
+ * มาตรฐาน Next.js 15/16: params ต้องประมวลผลเป็น Promise
  */
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 /**
  * 1. [STATIC GENERATION PROTOCOL]
- * เตรียมหน้าเว็บล่วงหน้าเพื่อความเร็ว LCP < 0.8s
+ * เตรียมหน้าเว็บล่วงหน้า (SSG) เพื่อความเร็ว LCP ต่ำกว่า 0.8 วินาที
  */
 export async function generateStaticParams() {
-  return seoServicesData.map((service) => ({
-    slug: service.slug,
-  }))
+  const slugs = getAllSeoSlugs();
+  return slugs.map((slug) => ({
+    slug: slug,
+  }));
 }
 
 /**
  * 2. [DYNAMIC METADATA SYSTEM]
- * ปรับแต่งพิกัด SEO Metadata รายหน้าแบบ Absolute URL
+ * ปรับแต่งพิกัด SEO Metadata รายหน้าเพื่อการทำอันดับสูงสุด
  */
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params
-  const service = seoServicesData.find((item) => item.slug === slug)
+  const { slug } = await params;
+  const service = getSeoServiceBySlug(slug);
 
-  if (!service) return { title: "Service Not Found" }
+  if (!service) return { title: "Service Not Found" };
 
-  const pageUrl = `${siteConfig.project.url}/seo/${slug}`
-  // พิกัดรูปภาพอ้างอิง: /public/images/seo/${slug}.webp
-  const imageUrl = `${siteConfig.project.url}/images/seo/${slug}.webp`
+  const pageUrl = `${siteConfig.project.url}/seo/${slug}`;
+  const imageUrl = `${siteConfig.project.url}/images/seo/${slug}.webp`;
 
   return {
     title: `${service.title} | ${siteConfig.project.nameTH}`,
@@ -64,81 +66,51 @@ export async function generateMetadata({
       description: service.description,
       images: [imageUrl],
     },
-  }
+  };
 }
 
 /**
  * 3. [SYSTEM PAGE RENDERER]
- * Render Node หลักสำหรับบริการ Technical SEO
+ * Render Node หลักสำหรับบริการ Technical SEO รายพิกัด
  */
 export default async function SeoServicePage({ params }: PageProps) {
-  const { slug } = await params
-  const serviceData = seoServicesData.find((item) => item.slug === slug)
+  const { slug } = await params;
+  const serviceData = getSeoServiceBySlug(slug);
 
-  if (!serviceData) notFound()
+  // กรณีไม่พบพิกัดบริการในฐานข้อมูล Immutable
+  if (!serviceData) notFound();
 
-  const ServiceComponent = getSeoComponent(slug)
+  // ดึงคอมโพเนนต์การแสดงผลตามพิกัด Slug จาก Registry
+  const ServiceComponent = getSeoComponent(slug);
 
   /**
-   * [JSON-LD ENTITY DATA]: รหัสโครงสร้างเพื่อยืนยันพิกัดบริการและคำถามที่พบบ่อย
-   * ผสานรวม Service Schema และ FAQPage Schema เข้าด้วยกัน
+   * [STRATEGIC JSON-LD]: รหัสโครงสร้างเพื่อยืนยันพิกัดบริการและ FAQ
+   * สื่อสารโดยตรงกับระบบ AI และบอทการค้นหา
    */
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: serviceData.title,
-    description: serviceData.description,
-    provider: {
-      "@type": "Person",
-      name: siteConfig.expert.name,
-      url: siteConfig.project.url,
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Technical SEO Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: serviceData.title,
-          },
-          price: serviceData.pricing.price,
-          priceCurrency: serviceData.pricing.currency,
-        },
-      ],
-    },
-  }
-
+  const serviceSchema = getServiceSchema(serviceData);
+  
   const faqSchema = serviceData.faq && {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: serviceData.faq.map((item) => ({
+    "mainEntity": serviceData.faq.map((item) => ({
       "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
+      "name": item.question,
+      "acceptedAnswer": {
         "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  }
+        "text": item.answer,
+      }
+    }))
+  };
 
   return (
     <>
-      {/* 1. Component Rendering Node */}
-      <ServiceComponent data={serviceData} />
+      {/* [SCHEMA INJECTION]: ยืนยันตัวตนระดับโครงสร้าง */}
+      <JsonLd type="Service" data={serviceSchema} />
+      {faqSchema && <JsonLd type="Graph" data={faqSchema} />}
 
-      {/* 2. Structured Data Injections (Entity Confirmation) */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      {/* [VIEWPORT RENDER]: แสดงผลส่วนหน้าเว็บ */}
+      <main className="min-h-screen">
+        <ServiceComponent data={serviceData} />
+      </main>
     </>
-  )
+  );
 }

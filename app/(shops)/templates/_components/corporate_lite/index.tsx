@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import {
   Users,
   Settings,
@@ -16,8 +16,8 @@ import {
   Zap,
   Menu,
   type LucideIcon, // [FIX]: นำเข้าพิกัดประเภทข้อมูลเพื่อล้าง any
-} from "lucide-react"
-import { CorporateLiteData } from "./schema"
+} from "lucide-react";
+import { CorporateLiteData } from "./schema";
 // [FIX]: ลบการนำเข้า cn ออกเนื่องจากไม่ได้ใช้งานจริงเพื่อล้าง Warning
 
 /** * IconMap - ตัวแปลงชื่อไอคอนจากฐานข้อมูลเป็นคอมโพเนนต์จริง
@@ -27,7 +27,7 @@ const IconMap: Record<string, LucideIcon> = {
   Users: Users,
   Settings: Settings,
   TrendingUp: TrendingUp,
-}
+};
 
 /**
  * CorporateLiteTemplate - แผนงานเว็บไซต์ธุรกิจรุ่นเริ่มต้น (Starter Pro)
@@ -37,10 +37,10 @@ const IconMap: Record<string, LucideIcon> = {
 export default function CorporateLiteTemplate({
   data,
 }: {
-  data: CorporateLiteData
+  data: CorporateLiteData;
 }) {
   // [Safety Check]: ตรวจสอบความเรียบร้อยของพิกัดข้อมูลก่อนเรนเดอร์
-  if (!data?.hero) return null
+  if (!data?.hero) return null;
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 antialiased selection:bg-emerald-500/10 selection:text-emerald-900">
@@ -62,7 +62,7 @@ export default function CorporateLiteTemplate({
                 >
                   {link.label}
                 </a>
-              )
+              ),
             )}
             <button className="rounded-xl bg-slate-950 px-8 py-3 text-[10px] font-black tracking-[0.2em] text-emerald-500 uppercase italic shadow-xl shadow-slate-950/20 transition-all hover:bg-emerald-600 hover:text-white active:scale-95">
               {data.navigation.cta || "Get Started"}
@@ -154,9 +154,9 @@ export default function CorporateLiteTemplate({
             {data.services.items.map(
               (
                 item: { icon: string; title: string; desc: string },
-                i: number
+                i: number,
               ) => {
-                const Icon = IconMap[item.icon] || Settings
+                const Icon = IconMap[item.icon] || Settings;
                 return (
                   <div
                     key={i}
@@ -175,8 +175,8 @@ export default function CorporateLiteTemplate({
                     {/* เส้นตกแต่งที่แสดงผลเมื่อ Hover */}
                     <div className="mt-8 h-1 w-0 bg-emerald-500 transition-all duration-500 group-hover:w-full" />
                   </div>
-                )
-              }
+                );
+              },
             )}
           </div>
         </div>
@@ -229,7 +229,7 @@ export default function CorporateLiteTemplate({
         </p>
       </footer>
     </div>
-  )
+  );
 }
 
 /**
@@ -241,9 +241,9 @@ function ContactInfo({
   label,
   value,
 }: {
-  icon: LucideIcon
-  label: string
-  value: string
+  icon: LucideIcon;
+  label: string;
+  value: string;
 }) {
   return (
     <div className="space-y-3">
@@ -255,5 +255,5 @@ function ContactInfo({
         {value}
       </p>
     </div>
-  )
+  );
 }

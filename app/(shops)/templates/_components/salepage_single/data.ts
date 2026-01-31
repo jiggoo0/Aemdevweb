@@ -1,6 +1,6 @@
 /** @format */
 
-import { SalePageData } from "./schema"
+import { SalePageData } from "./schema";
 
 /**
  * salePageData - ข้อมูลพิกัดระบบหน้าขายสินค้าแบบหน้าเดียว (Sale Page Pro Edition)
@@ -69,4 +69,4 @@ export const salePageData: SalePageData = {
     buttonText: "เริ่มปั้นยอดขายกับนายเอ็มซ่ามากส์",
     subText: "*สิทธิ์พิเศษ: รับคำปรึกษาพิกัดแผนงานปิดการขายโดยนายเอ็มฟรีวันนี้",
   },
-}
+};

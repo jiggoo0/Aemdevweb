@@ -1,19 +1,19 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react"
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle2, Sparkles, Zap } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { ServiceItem } from "@/types"
-import IconRenderer from "@/components/shared/IconRenderer"
+import { cn } from "@/lib/utils";
+import { ServiceItem } from "@/types";
+import IconRenderer from "@/components/shared/IconRenderer";
 
 interface ServiceCardProps {
-  data: ServiceItem
-  className?: string
+  data: ServiceItem;
+  className?: string;
 }
 
 /**
@@ -22,7 +22,7 @@ interface ServiceCardProps {
  * แนวคิด: การตอบสนองที่ฉับไวเพื่อสร้างประสบการณ์ที่น่าเชื่อถือในทุกสัมผัส
  */
 export const ServiceCard = ({ data, className }: ServiceCardProps) => {
-  if (!data) return null
+  if (!data) return null;
 
   // ระบบจัดการโทนสีเชิงกลยุทธ์ (Strategic Theme Mapping)
   const themeMap: Record<string, string> = {
@@ -40,13 +40,13 @@ export const ServiceCard = ({ data, className }: ServiceCardProps) => {
       "text-slate-500 bg-slate-50 border-slate-100 group-hover:bg-slate-900 group-hover:text-white",
     violet:
       "text-violet-500 bg-violet-50 border-violet-100 group-hover:bg-violet-600 group-hover:text-white",
-  }
+  };
 
   // ตรวจสอบความถูกต้องของพิกัดสีเพื่อเสถียรภาพสูงสุดของระบบ
   const currentTheme =
     data.themeColor && themeMap[data.themeColor as keyof typeof themeMap]
       ? themeMap[data.themeColor as keyof typeof themeMap]
-      : themeMap.emerald
+      : themeMap.emerald;
 
   return (
     <motion.article
@@ -61,7 +61,7 @@ export const ServiceCard = ({ data, className }: ServiceCardProps) => {
         "group relative flex h-full flex-col overflow-hidden rounded-[3rem]",
         "border border-slate-100 bg-white p-8 transition-all duration-500 lg:p-12",
         "hover:border-emerald-500/20 hover:shadow-[0_40px_80px_-20px_rgba(16,185,129,0.1)]",
-        className
+        className,
       )}
     >
       {/* 1. ส่วนหัว: สัญลักษณ์และรหัสอ้างอิงระบบ */}
@@ -70,7 +70,7 @@ export const ServiceCard = ({ data, className }: ServiceCardProps) => {
           className={cn(
             "flex h-20 w-20 items-center justify-center rounded-[1.8rem] transition-all duration-700",
             "shadow-sm group-hover:scale-110 group-hover:rotate-12",
-            currentTheme
+            currentTheme,
           )}
         >
           <IconRenderer name={data.iconName} size={36} strokeWidth={1.5} />
@@ -155,5 +155,5 @@ export const ServiceCard = ({ data, className }: ServiceCardProps) => {
         </Link>
       </footer>
     </motion.article>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
+import React from "react";
+import Image from "next/image";
 import {
   MessageCircle,
   Facebook,
@@ -12,9 +12,9 @@ import {
   Zap,
   Star,
   type LucideIcon, // [FIX]: นำเข้าประเภทข้อมูลเพื่อล้างพิกัด any
-} from "lucide-react"
-import Link from "next/link"
-import { PersonalBioData } from "./schema"
+} from "lucide-react";
+import Link from "next/link";
+import { PersonalBioData } from "./schema";
 
 /** * IconMap - ตัวช่วยแปลงชื่อไอคอนจากพิกัดข้อมูลให้เป็นคอมโพเนนต์จริง
  * [FIX]: ระบุประเภทข้อมูล LucideIcon แทนการใช้ any เพื่อความกริบของระบบงาน
@@ -23,7 +23,7 @@ const IconMap: Record<string, LucideIcon> = {
   MessageCircle: MessageCircle,
   Facebook: Facebook,
   Github: Github,
-}
+};
 
 /**
  * [Personal Bio Template]: ชุดพิกัดหน้าเว็บสำหรับโปรไฟล์ส่วนตัวและพอร์ตโฟลิโอ
@@ -33,7 +33,7 @@ const IconMap: Record<string, LucideIcon> = {
 export default function PersonalBioTemplate({
   data,
 }: {
-  data: PersonalBioData
+  data: PersonalBioData;
 }) {
   // [Safety Shield]: ตรวจสอบความเรียบร้อยของพิกัดข้อมูลก่อนเริ่มแสดงผล
   if (!data || !data.profile) {
@@ -44,7 +44,7 @@ export default function PersonalBioTemplate({
           Loading Profile Data...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -106,7 +106,7 @@ export default function PersonalBioTemplate({
                   {stat.label}
                 </p>
               </div>
-            )
+            ),
           )}
         </div>
 
@@ -118,9 +118,9 @@ export default function PersonalBioTemplate({
           {data.socials.map(
             (
               social: { icon: string; href: string; label: string },
-              i: number
+              i: number,
             ) => {
-              const Icon = IconMap[social.icon] || ExternalLink
+              const Icon = IconMap[social.icon] || ExternalLink;
               return (
                 <Link
                   key={i}
@@ -140,8 +140,8 @@ export default function PersonalBioTemplate({
                     className="mr-2 text-slate-200 transition-colors group-hover:text-emerald-500"
                   />
                 </Link>
-              )
-            }
+              );
+            },
           )}
         </div>
 
@@ -167,5 +167,5 @@ export default function PersonalBioTemplate({
         </p>
       </footer>
     </div>
-  )
+  );
 }

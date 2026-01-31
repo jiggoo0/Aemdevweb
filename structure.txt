@@ -1,0 +1,284 @@
+.
+├── .env
+├── .gitignore
+├── Dev.md
+├── README.md
+├── a.sh
+├── app
+│   ├── (case-studies)
+│   │   ├── case-studies
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   ├── _components
+│   │   │   │   └── CaseStudiesGrid.tsx
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (main)
+│   │   ├── about
+│   │   │   └── page.tsx
+│   │   ├── areas
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── contact
+│   │   │   ├── ContactClient.tsx
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── privacy
+│   │   │   ├── PrivacyClient.tsx
+│   │   │   └── page.tsx
+│   │   ├── services
+│   │   │   ├── ServicesClient.tsx
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── terms
+│   │       └── page.tsx
+│   ├── (seo)
+│   │   ├── _components
+│   │   │   ├── SeoCard.tsx
+│   │   │   ├── SeoFooter.tsx
+│   │   │   └── SeoNavbar.tsx
+│   │   ├── layout.tsx
+│   │   └── seo
+│   │       ├── [slug]
+│   │       │   └── page.tsx
+│   │       ├── _components
+│   │       │   ├── advanced-schema-markup
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── core-web-vitals-speed
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── ecommerce-conversion-seo
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── entity-local-authority
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   └── technical-structure-audit
+│   │       │       ├── data.ts
+│   │       │       ├── index.tsx
+│   │       │       └── schema.ts
+│   │       ├── _registry.tsx
+│   │       └── page.tsx
+│   ├── (shops)
+│   │   ├── _components
+│   │   │   ├── ShopCard.tsx
+│   │   │   ├── ShopFooter.tsx
+│   │   │   ├── ShopNavbar.tsx
+│   │   │   └── ShopPromotion.tsx
+│   │   ├── layout.tsx
+│   │   └── templates
+│   │       ├── TemplateCatalogClient.tsx
+│   │       ├── [slug]
+│   │       │   └── page.tsx
+│   │       ├── _components
+│   │       │   ├── cleaningpro
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── corporate_lite
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── corporate_pro
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── event_magic
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── facebookadsexpert
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── hotelresort
+│   │       │   │   ├── _parts
+│   │       │   │   │   ├── HotelFooter.tsx
+│   │       │   │   │   ├── HotelHero.tsx
+│   │       │   │   │   ├── HotelNavbar.tsx
+│   │       │   │   │   ├── HotelRooms.tsx
+│   │       │   │   │   └── HotelStats.tsx
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── local_service
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── maintenance_page
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── personal_bio
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── restaurant_cafe
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── salepage_single
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── seo_agency
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── shopmasterpro
+│   │       │   │   ├── _parts
+│   │       │   │   │   ├── ShopFooter.tsx
+│   │       │   │   │   ├── ShopHero.tsx
+│   │       │   │   │   ├── ShopNavbar.tsx
+│   │       │   │   │   ├── ShopProducts.tsx
+│   │       │   │   │   └── ShopStats.tsx
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   ├── starter_landing
+│   │       │   │   ├── data.ts
+│   │       │   │   ├── index.tsx
+│   │       │   │   └── schema.ts
+│   │       │   └── webrental
+│   │       │       ├── _parts
+│   │       │       │   ├── RentalFeatures.tsx
+│   │       │       │   ├── RentalFooter.tsx
+│   │       │       │   ├── RentalHero.tsx
+│   │       │       │   ├── RentalNavbar.tsx
+│   │       │       │   ├── RentalPricing.tsx
+│   │       │       │   └── RentalShowcase.tsx
+│   │       │       ├── data.ts
+│   │       │       ├── index.tsx
+│   │       │       └── schema.ts
+│   │       ├── _contracts
+│   │       │   └── seo.ts
+│   │       ├── _registry.tsx
+│   │       └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── not-found.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── viewport.ts
+├── components
+│   ├── marketplace
+│   │   ├── shared
+│   │   └── template
+│   │       ├── TemplateCard.tsx
+│   │       ├── TemplateFilter.tsx
+│   │       └── TemplateGrid.tsx
+│   ├── sales-engine
+│   │   ├── ImpactStats.tsx
+│   │   ├── LineLeadForm.tsx
+│   │   ├── PerformanceAuthority.tsx
+│   │   ├── PriceEstimator.tsx
+│   │   ├── SpeedDemon.tsx
+│   │   └── WorkProcess.tsx
+│   ├── seo
+│   │   ├── AuditReport.tsx
+│   │   └── JsonLd.tsx
+│   ├── shared
+│   │   ├── BlogCard.tsx
+│   │   ├── CaseStudyCard.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── IconRenderer.tsx
+│   │   ├── LineStickyButton.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── SectionSkeleton.tsx
+│   │   ├── ServiceCard.tsx
+│   │   ├── TemplateListSection.tsx
+│   │   ├── TermsOfService.tsx
+│   │   └── TrustBadge.tsx
+│   └── ui
+│       ├── badge.tsx
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── form.tsx
+│       ├── input.tsx
+│       ├── label.tsx
+│       ├── modal.tsx
+│       ├── skeleton.tsx
+│       ├── sonner.tsx
+│       └── textarea.tsx
+├── components.json
+├── config
+│   ├── AI-CONTEXT.DNA.md
+│   ├── ai-context.core.md
+│   └── ai-system-role.md
+├── constants
+│   ├── area-nodes.ts
+│   ├── navigation.ts
+│   ├── seo-services.ts
+│   ├── services-data.ts
+│   └── site-config.ts
+├── content
+│   ├── blog
+│   │   ├── 5-points-killing-sales.mdx
+│   │   ├── advanced-schema-markup.mdx
+│   │   ├── copywriting-secrets.mdx
+│   │   ├── core-web-vitals-speed.mdx
+│   │   ├── ecommerce-conversion-seo.mdx
+│   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── seo-for-sme-2026.mdx
+│   │   ├── seo-google-love-technical-guide.mdx
+│   │   ├── starting-business-low-budget-website.mdx
+│   │   ├── technical-structure-audit.mdx
+│   │   └── unlink-th-case-study.mdx
+│   └── case-studies
+│       ├── industrial-catalog-rfq-optimization.mdx
+│       ├── sme-web-performance-growth.mdx
+│       └── unlink-reputation-management-success.mdx
+├── eslint.config.mjs
+├── extract-types.sh
+├── lib
+│   ├── blog.ts
+│   ├── case-studies.ts
+│   ├── seo.ts
+│   ├── template.ts
+│   ├── utils
+│   │   └── format.ts
+│   └── utils.ts
+├── mdx-components.tsx
+├── next-env.d.ts
+├── next.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── project-types-summary.md
+├── proxy.ts
+├── scripts
+│   ├── 55tree.sh
+│   ├── 55tree2.sh
+│   ├── dev
+│   │   ├── clean-project.sh
+│   │   ├── pre-deploy-check.sh
+│   │   ├── project-summary.sh
+│   │   ├── project-summary1.sh
+│   │   └── tree-projects.sh
+│   └── generate-report.sh
+├── structure.txt
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+└── types
+    ├── index.ts
+    ├── seo.ts
+    └── template.ts
+
+
+.นำการประมวลผลด้านบนทั้งหมด Update code  & format code  ให้ถูกต้อง ส่งกับมาในรูปแบ Full code 

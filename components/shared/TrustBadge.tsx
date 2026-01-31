@@ -1,10 +1,10 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion, Variants } from "framer-motion"
-import { ShieldCheck, Zap, BarChart3, Cpu, Sparkles } from "lucide-react"
+import React from "react";
+import { motion, Variants } from "framer-motion";
+import { ShieldCheck, Zap, BarChart3, Cpu, Sparkles } from "lucide-react";
 
 /**
  * TrustBadge - ระบบยืนยันมาตรฐานคุณภาพ (The Authority Hub)
@@ -37,7 +37,7 @@ export default function TrustBadge() {
       value: "95-100 Performance",
       desc: "ผลลัพธ์คะแนนระดับสูงสุด",
     },
-  ]
+  ];
 
   /** * Animation Variants:
    * การจัดจังหวะแสดงผลข้อมูลเพื่อความลื่นไหลและดูเป็นมืออาชีพ
@@ -48,7 +48,7 @@ export default function TrustBadge() {
       opacity: 1,
       transition: { staggerChildren: 0.15 },
     },
-  }
+  };
 
   const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
@@ -60,7 +60,7 @@ export default function TrustBadge() {
         ease: "easeOut" as const,
       },
     },
-  }
+  };
 
   return (
     <section className="relative w-full overflow-hidden border-y border-slate-50 bg-white py-20 lg:py-24">
@@ -122,5 +122,5 @@ export default function TrustBadge() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

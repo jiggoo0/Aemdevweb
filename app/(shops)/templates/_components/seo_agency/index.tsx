@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 import {
   Code,
   FileText,
@@ -13,8 +13,8 @@ import {
   Search,
   TrendingUp,
   type LucideIcon,
-} from "lucide-react"
-import { SeoAgencyData } from "./schema"
+} from "lucide-react";
+import { SeoAgencyData } from "./schema";
 
 /** * IconMap - กำจัด 'any' ด้วยการระบุประเภท LucideIcon
  * เคลียร์พิกัด WARNING จากผลการ Audit
@@ -24,7 +24,7 @@ const IconMap: Record<string, LucideIcon> = {
   FileText,
   Zap,
   Globe,
-}
+};
 
 export default function SeoAgencyTemplate({ data }: { data: SeoAgencyData }) {
   // [Safety Shield]: ส่วนป้องกันหน้าขาว
@@ -36,7 +36,7 @@ export default function SeoAgencyTemplate({ data }: { data: SeoAgencyData }) {
           Syncing Technology DNA...
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -112,7 +112,7 @@ export default function SeoAgencyTemplate({ data }: { data: SeoAgencyData }) {
           </div>
           <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
             {data.services.items.map((item, i) => {
-              const Icon = IconMap[item.icon] || Zap
+              const Icon = IconMap[item.icon] || Zap;
               return (
                 <div
                   key={i}
@@ -128,7 +128,7 @@ export default function SeoAgencyTemplate({ data }: { data: SeoAgencyData }) {
                     {item.desc}
                   </p>
                 </div>
-              )
+              );
             })}
           </div>
         </div>
@@ -165,5 +165,5 @@ export default function SeoAgencyTemplate({ data }: { data: SeoAgencyData }) {
         </p>
       </footer>
     </div>
-  )
+  );
 }

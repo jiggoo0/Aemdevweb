@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react"
-import { Phone, MessageCircle } from "lucide-react" // [FIX]: ลบ Zap ที่ไม่ได้ใช้งานออก
+import React from "react";
+import { Phone, MessageCircle } from "lucide-react"; // [FIX]: ลบ Zap ที่ไม่ได้ใช้งานออก
 
 /**
  * RentalFooterProps - กำหนดพิกัดรูปแบบข้อมูลสำหรับส่วนท้ายระบบงาน
@@ -9,13 +9,13 @@ import { Phone, MessageCircle } from "lucide-react" // [FIX]: ลบ Zap ที�
  */
 interface RentalFooterProps {
   data: {
-    brand: string
-    tagline: string
+    brand: string;
+    tagline: string;
     contact: {
-      phone: string
-      line: string
-    }
-  }
+      phone: string;
+      line: string;
+    };
+  };
 }
 
 /**
@@ -24,7 +24,7 @@ interface RentalFooterProps {
  * วางระบบโดย: นายเอ็มซ่ามากส์ (Alongkorl Yomkerd)
  */
 export const RentalFooter = ({ data }: RentalFooterProps) => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="relative border-t border-white/5 bg-slate-950 py-20 text-slate-400 lg:py-32">
@@ -107,5 +107,5 @@ export const RentalFooter = ({ data }: RentalFooterProps) => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};

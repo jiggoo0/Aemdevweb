@@ -1,6 +1,6 @@
 /** @format */
-import { siteConfig } from "@/constants/site-config"
-import { coreWebVitalsSpeedData } from "./data"
+import { siteConfig } from "@/constants/site-config";
+import { coreWebVitalsSpeedData } from "./data";
 
 export const getCoreWebVitalsSchema = () => {
   return {
@@ -23,5 +23,5 @@ export const getCoreWebVitalsSchema = () => {
       availability: "https://schema.org/InStock",
       seller: { "@type": "Person", name: siteConfig.expert.name },
     },
-  }
-}
+  };
+};

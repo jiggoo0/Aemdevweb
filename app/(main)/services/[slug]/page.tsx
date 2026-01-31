@@ -1,27 +1,27 @@
 /** @format */
 
-import React from "react"
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Link from "next/link"
+import React from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import {
   ChevronLeft,
   CheckCircle2,
   ArrowRight,
   ShieldCheck,
-} from "lucide-react"
+} from "lucide-react";
 
-import { servicesData } from "@/constants/services-data"
-import { siteConfig } from "@/constants/site-config"
-import { JsonLd } from "@/components/seo/JsonLd"
-import { ServiceItem } from "@/types"
+import { servicesData } from "@/constants/services-data";
+import { siteConfig } from "@/constants/site-config";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { ServiceItem } from "@/types";
 
 // การดึงพิกัดเทมเพลตที่จูนมาเพื่อแผนงานนี้โดยเฉพาะ
-import { getTemplatesBySlugs } from "@/lib/template"
-import TemplateCard from "@/components/marketplace/template/TemplateCard"
+import { getTemplatesBySlugs } from "@/lib/template";
+import TemplateCard from "@/components/marketplace/template/TemplateCard";
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 /**
@@ -30,16 +30,16 @@ interface Props {
 export async function generateStaticParams() {
   return servicesData.map((service) => ({
     slug: service.slug,
-  }))
+  }));
 }
 
 /**
  * [SEO METADATA]: กำหนดอัตลักษณ์บริการเชิงเทคนิค
  */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  const service = servicesData.find((s) => s.slug === slug)
-  if (!service) return { title: "Service Protocol | Not Found" }
+  const { slug } = await params;
+  const service = servicesData.find((s) => s.slug === slug);
+  if (!service) return { title: "Service Protocol | Not Found" };
 
   return {
     title: `${service.title} | ${siteConfig.project.name}`,
@@ -52,16 +52,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${siteConfig.project.url}/services/${slug}`,
       images: [{ url: service.thumbnail || siteConfig.project.ogImage }],
     },
-  }
+  };
 }
 
 export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params
+  const { slug } = await params;
   const service = (servicesData as readonly ServiceItem[]).find(
-    (s) => s.slug === slug
-  )
+    (s) => s.slug === slug,
+  );
 
-  if (!service) notFound()
+  if (!service) notFound();
 
   /**
    * [FIXED]: แก้ไข Error TS2345 (Readonly string[] is not assignable to mutable string[])
@@ -69,7 +69,7 @@ export default async function ServiceDetailPage({ params }: Props) {
    */
   const recommendedTemplates = getTemplatesBySlugs([
     ...(service.relatedTemplateSlugs || []),
-  ])
+  ]);
 
   return (
     <main className="relative min-h-screen bg-[oklch(1_0_0)] pb-32 antialiased dark:bg-[oklch(0.12_0.02_260)]">
@@ -219,5 +219,5 @@ export default async function ServiceDetailPage({ params }: Props) {
         </section>
       )}
     </main>
-  )
+  );
 }

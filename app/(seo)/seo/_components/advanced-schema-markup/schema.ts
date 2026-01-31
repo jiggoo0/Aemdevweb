@@ -1,6 +1,6 @@
 /** @format */
-import { siteConfig } from "@/constants/site-config"
-import { advancedSchemaData } from "./data"
+import { siteConfig } from "@/constants/site-config";
+import { advancedSchemaData } from "./data";
 
 export const getAdvancedSchemaMarkup = () => {
   return {
@@ -25,5 +25,5 @@ export const getAdvancedSchemaMarkup = () => {
       availability: "https://schema.org/InStock",
       seller: { "@type": "Person", name: siteConfig.expert.name },
     },
-  }
-}
+  };
+};

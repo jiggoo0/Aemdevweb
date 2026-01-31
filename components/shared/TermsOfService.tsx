@@ -1,8 +1,8 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 import {
   ShieldCheck,
   Scale,
@@ -14,17 +14,17 @@ import {
   Server,
   ArrowRight,
   MessageCircle,
-} from "lucide-react"
-import { siteConfig } from "@/constants/site-config"
+} from "lucide-react";
+import { siteConfig } from "@/constants/site-config";
 
 /**
  * [TYPE DEFINITIONS]
  */
 interface TermSection {
-  id: string
-  title: string
-  icon: React.ElementType
-  content: React.ReactNode
+  id: string;
+  title: string;
+  icon: React.ElementType;
+  content: React.ReactNode;
 }
 
 /**
@@ -156,10 +156,10 @@ const TERMS_DATA: TermSection[] = [
       </p>
     ),
   },
-]
+];
 
 const TermsOfService = () => {
-  const lastUpdated = "29 มกราคม 2026"
+  const lastUpdated = "29 มกราคม 2026";
 
   return (
     <section className="relative py-20 antialiased" id="terms-of-service">
@@ -261,7 +261,7 @@ const TermsOfService = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default TermsOfService
+export default TermsOfService;

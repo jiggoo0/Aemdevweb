@@ -1,6 +1,6 @@
 /** @format */
 
-import type { Viewport } from "next"
+import type { Viewport } from "next";
 
 /**
  * การตั้งค่าหน้าจอหลัก (Global Viewport Configuration)
@@ -47,4 +47,4 @@ export const viewport: Viewport = {
    * เพื่อความลื่นไหลในการส่งข้อมูล Lead มายัง นายเอ็มซ่ามากส์
    */
   interactiveWidget: "resizes-visual",
-}
+};

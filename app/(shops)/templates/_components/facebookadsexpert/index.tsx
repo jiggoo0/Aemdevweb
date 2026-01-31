@@ -50,7 +50,6 @@ export default function FacebookAdsExpertTemplate({
 
   return (
     <div className="bg-[oklch(1_0_0)] font-sans text-brand-depth antialiased selection:bg-brand-primary/10 dark:bg-[oklch(0.12_0.02_260)] dark:text-white">
-      
       {/* 1. NAVIGATION NODE: พิกัดนำทางยุทธศาสตร์ */}
       <nav className="fixed top-0 z-50 w-full border-b border-[oklch(0.95_0.02_260)] bg-white/80 backdrop-blur-xl dark:border-white/5 dark:bg-[oklch(0.12_0.02_260)]/80">
         <div className="container-za flex h-20 items-center justify-between">
@@ -65,7 +64,10 @@ export default function FacebookAdsExpertTemplate({
             >
               {data.navigation?.cta}
             </a>
-            <button className="text-brand-depth dark:text-white md:hidden" aria-label="Menu">
+            <button
+              className="text-brand-depth dark:text-white md:hidden"
+              aria-label="Menu"
+            >
               <Menu size={24} />
             </button>
           </div>
@@ -94,7 +96,10 @@ export default function FacebookAdsExpertTemplate({
           <div className="mt-16 flex justify-center">
             <button className="group font-heading flex h-20 items-center gap-6 rounded-3xl bg-brand-primary px-12 text-sm font-black tracking-[0.2em] text-brand-depth uppercase italic shadow-aurora transition-all hover:scale-105 active:scale-95">
               {data.hero.cta}
-              <ArrowRight size={22} className="transition-transform group-hover:translate-x-2" />
+              <ArrowRight
+                size={22}
+                className="transition-transform group-hover:translate-x-2"
+              />
             </button>
           </div>
         </div>
@@ -197,15 +202,18 @@ export default function FacebookAdsExpertTemplate({
             >
               {/* [FIXED]: ใช้ 'navigation.cta' หรือ Default String แทน 'footer.cta' ที่ไม่มีอยู่จริง */}
               {data.navigation?.cta || "GET STARTED"}
-              <ArrowRight size={22} className="transition-transform group-hover:translate-x-2" />
+              <ArrowRight
+                size={22}
+                className="transition-transform group-hover:translate-x-2"
+              />
             </a>
           </div>
           <p className="mt-24 text-[10px] font-black tracking-[0.5em] opacity-30 uppercase italic">
-            Developed by {data.footer?.companyName || data.navigation?.logo} • Specialist Protocol 2026
+            Developed by {data.footer?.companyName || data.navigation?.logo} •
+            Specialist Protocol 2026
           </p>
         </div>
       </footer>
-
     </div>
   );
 }

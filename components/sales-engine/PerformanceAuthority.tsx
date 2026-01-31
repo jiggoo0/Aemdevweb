@@ -1,15 +1,15 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { Gauge, Zap, Activity, ShieldCheck } from "lucide-react"
+import React from "react";
+import { motion } from "framer-motion";
+import { Gauge, Zap, Activity, ShieldCheck } from "lucide-react";
 
 interface PerformanceProps {
-  score?: number
-  label?: string
-  metric?: string
+  score?: number;
+  label?: string;
+  metric?: string;
 }
 
 /**
@@ -113,8 +113,8 @@ export const PerformanceAuthority = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 /**
  * SpecItem - ส่วนประกอบย่อยสำหรับระบุคุณสมบัติทางเทคนิค
@@ -123,8 +123,8 @@ const SpecItem = ({
   icon,
   label,
 }: {
-  icon: React.ReactNode
-  label: string
+  icon: React.ReactNode;
+  label: string;
 }) => (
   <div className="flex items-center gap-3 border-l-2 border-slate-100 pl-4 transition-colors hover:border-emerald-500">
     <div className="text-emerald-500">{icon}</div>
@@ -132,4 +132,4 @@ const SpecItem = ({
       {label}
     </span>
   </div>
-)
+);

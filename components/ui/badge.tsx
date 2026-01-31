@@ -1,10 +1,10 @@
 /** @format */
 
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 /**
  * badgeVariants - กำหนดรูปแบบการแสดงผลของป้ายกำกับ
@@ -35,14 +35,14 @@ const badgeVariants = cva(
     defaultVariants: {
       variant: "default",
     },
-  }
-)
+  },
+);
 
 export interface BadgeProps
   extends
     React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof badgeVariants> {
-  asChild?: boolean
+  asChild?: boolean;
 }
 
 /**
@@ -50,7 +50,7 @@ export interface BadgeProps
  * สื่อสารข้อมูลสั้นๆ ให้ดูโดดเด่นและเป็นระเบียบในสไตล์ Specialist
  */
 function Badge({ className, variant, asChild = false, ...props }: BadgeProps) {
-  const Comp = asChild ? Slot : "span"
+  const Comp = asChild ? Slot : "span";
 
   return (
     <Comp
@@ -58,7 +58,7 @@ function Badge({ className, variant, asChild = false, ...props }: BadgeProps) {
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Badge, badgeVariants }
+export { Badge, badgeVariants };

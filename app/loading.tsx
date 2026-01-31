@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react"
-import { Skeleton } from "@/components/ui/skeleton"
+import React from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Loading: ระบบจัดการหน้าจอระหว่างรอข้อมูล (Specialist Edition 2026)
@@ -101,5 +101,5 @@ export default function Loading() {
         </div>
       </section>
     </div>
-  )
+  );
 }

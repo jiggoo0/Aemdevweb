@@ -1,6 +1,6 @@
 /** @format */
 
-import { CorporateLiteData } from "./schema"
+import { CorporateLiteData } from "./schema";
 
 /**
  * corporateLiteData - ข้อมูลโครงสร้างระบบธุรกิจรุ่นมาตรฐาน (Starter Strategic Edition)
@@ -72,4 +72,4 @@ export const corporateLiteData: CorporateLiteData = {
       facebook: "https://facebook.com/aemdevweb",
     },
   },
-}
+};

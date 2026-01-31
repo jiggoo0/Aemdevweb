@@ -1,16 +1,16 @@
 /** @format */
 
-"use client"
+"use client";
 
-import React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, Variants } from "framer-motion"
-import { Calendar, ArrowRight, BookOpen, Clock, Zap } from "lucide-react"
-import { BlogPost } from "@/types"
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, Variants } from "framer-motion";
+import { Calendar, ArrowRight, BookOpen, Clock, Zap } from "lucide-react";
+import { BlogPost } from "@/types";
 
 interface BlogCardProps {
-  posts: BlogPost[]
+  posts: BlogPost[];
 }
 
 /**
@@ -26,7 +26,7 @@ export default function BlogCard({ posts }: BlogCardProps) {
       opacity: 1,
       transition: { staggerChildren: 0.1 },
     },
-  }
+  };
 
   const item: Variants = {
     hidden: { y: 20, opacity: 0 },
@@ -38,7 +38,7 @@ export default function BlogCard({ posts }: BlogCardProps) {
         ease: "easeOut" as const,
       },
     },
-  }
+  };
 
   // กรณีไม่มีข้อมูลบทความ
   if (!posts || posts.length === 0) {
@@ -63,7 +63,7 @@ export default function BlogCard({ posts }: BlogCardProps) {
           เพื่อสร้างมูลค่าเพิ่มให้แก่แผนงานธุรกิจของคุณ
         </p>
       </div>
-    )
+    );
   }
 
   return (
@@ -151,5 +151,5 @@ export default function BlogCard({ posts }: BlogCardProps) {
         </motion.article>
       ))}
     </motion.div>
-  )
+  );
 }

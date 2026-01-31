@@ -1,15 +1,15 @@
 /** @format */
 
-import React from "react"
-import { Metadata } from "next"
-import { notFound } from "next/navigation"
-import { templateRegistry } from "../_registry"
-import { siteConfig } from "@/constants/site-config"
-import { SEOContract } from "../_contracts/seo"
-import { JsonLd } from "@/components/seo/JsonLd"
+import React from "react";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { templateRegistry } from "../_registry";
+import { siteConfig } from "@/constants/site-config";
+import { SEOContract } from "../_contracts/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 interface PageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 /**
@@ -20,13 +20,13 @@ interface PageProps {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params
-  const templateEntry = templateRegistry[slug]
+  const { slug } = await params;
+  const templateEntry = templateRegistry[slug];
 
-  if (!templateEntry) return { title: "404 | Configuration Not Found" }
+  if (!templateEntry) return { title: "404 | Configuration Not Found" };
 
-  const data = templateEntry.data as unknown as SEOContract
-  const title = `${data.seo?.title || templateEntry.metadata.name} | Strategic Configuration - ${siteConfig.project.shortName}`
+  const data = templateEntry.data as unknown as SEOContract;
+  const title = `${data.seo?.title || templateEntry.metadata.name} | Strategic Configuration - ${siteConfig.project.shortName}`;
 
   return {
     title,
@@ -38,7 +38,7 @@ export async function generateMetadata({
       images: [{ url: data.seo?.ogImage || siteConfig.project.ogImage }],
       type: "website",
     },
-  }
+  };
 }
 
 /**
@@ -47,13 +47,13 @@ export async function generateMetadata({
  * ยุทธศาสตร์: การแสดงสมรรถนะของโครงสร้างระบบพื้นฐาน AEM 2026 ในรูปแบบ Real-time
  */
 export default async function TemplateDetailPage({ params }: PageProps) {
-  const { slug } = await params
-  const templateEntry = templateRegistry[slug]
+  const { slug } = await params;
+  const templateEntry = templateRegistry[slug];
 
-  if (!templateEntry) notFound()
+  if (!templateEntry) notFound();
 
-  const LiveComponent = templateEntry.component
-  const liveData = templateEntry.data
+  const LiveComponent = templateEntry.component;
+  const liveData = templateEntry.data;
 
   return (
     <div className="relative min-h-screen bg-white selection:bg-emerald-500/20">
@@ -128,12 +128,12 @@ export default async function TemplateDetailPage({ params }: PageProps) {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
 /**
  * [SSG PROTOCOL]: การจัดเตรียมเส้นทางข้อมูลล่วงหน้า 100%
  */
 export async function generateStaticParams() {
-  return Object.keys(templateRegistry).map((slug) => ({ slug }))
+  return Object.keys(templateRegistry).map((slug) => ({ slug }));
 }

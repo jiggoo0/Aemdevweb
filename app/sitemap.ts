@@ -1,20 +1,21 @@
-// @format
+/** @format */
 // พิกัดข้อมูล: app/sitemap.ts
 // หน้าที่: ระบบสร้างแผนผังเว็บไซต์แบบ Dynamic (Sitemap Engine)
 // มาตรฐาน: Next.js 16 | Ultra-Deep Level 7 | Search Engine Standards 2026
 // ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
 
-import { MetadataRoute } from "next"
-import { seoServicesData } from "@/constants/seo-services"
-import { getAllCaseStudies } from "@/lib/case-studies"
-import { getBlogPostsMetadata } from "@/lib/blog"
-import { siteConfig } from "@/constants/site-config"
+import { MetadataRoute } from "next";
+import { areaNodes } from "@/constants/area-nodes";
+import { seoServicesData } from "@/constants/seo-services";
+import { getAllCaseStudies } from "@/lib/case-studies";
+import { getBlogPostsMetadata } from "@/lib/blog";
+import { siteConfig } from "@/constants/site-config";
 
 /**
  * absoluteUrl: ฟังก์ชันสร้าง URL เต็มรูปแบบเพื่อป้องกันพิกัดข้อมูลคลาดเคลื่อน
  * ตรวจสอบพิกัด Domain จาก siteConfig โดยตรง
  */
-const absoluteUrl = (path: string) => `${siteConfig.project.url}${path}`
+const absoluteUrl = (path: string) => `${siteConfig.project.url}${path}`;
 
 /**
  * [SITEMAP GENERATOR PROTOCOL]
@@ -27,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
     "",
     "/services",
+    "/areas",
     "/seo",
     "/case-studies",
     "/blog",
@@ -39,36 +41,51 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: route === "" ? 1.0 : 0.8,
-  }))
+  }));
 
-  // [2. DYNAMIC SEO NODES]: บริการ Technical SEO เฉพาะทาง
+  // [2. DYNAMIC AREA NODES]: พิกัดความสำเร็จรายพื้นที่ (Local SEO)
+  // ยุทธศาสตร์: ดันหน้าจังหวัดให้ Google เก็บข้อมูลถถี่ที่สุดเพื่อยึดพื้นที่
+  const areaRoutes = areaNodes.map((area) => ({
+    url: absoluteUrl(`/areas/${area.slug}`),
+    lastModified: new Date(),
+    changeFrequency: "daily" as const, // ตั้งค่าเป็นรายวันเพื่อความสดใหม่ของพิกัด
+    priority: 0.9,
+  }));
+
+  // [3. DYNAMIC SEO NODES]: บริการ Technical SEO เฉพาะทาง
   const seoRoutes = seoServicesData.map((service) => ({
     url: absoluteUrl(`/seo/${service.slug}`),
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: 0.9, // พิกัดความสำคัญสูงสุดเพื่อชิงพื้นที่การค้นหา
-  }))
+    priority: 0.9,
+  }));
 
-  // [3. CASE STUDIES NODES]: พิกัดยืนยันผลลัพธ์เชิงประจักษ์
-  const allCaseStudies = await getAllCaseStudies()
+  // [4. CASE STUDIES NODES]: พิกัดยืนยันผลลัพธ์เชิงประจักษ์
+  const allCaseStudies = await getAllCaseStudies();
   const caseStudyRoutes = allCaseStudies.map((item) => ({
     url: absoluteUrl(`/case-studies/${item.slug}`),
     lastModified: new Date(item.frontmatter.date || new Date()),
     changeFrequency: "monthly" as const,
     priority: 0.7,
-  }))
+  }));
 
-  // [4. BLOG NODES]: พิกัดคลังความรู้เชิงเทคนิค
-  const allPosts = await getBlogPostsMetadata()
+  // [5. BLOG NODES]: พิกัดคลังความรู้เชิงเทคนิค
+  const allPosts = await getBlogPostsMetadata();
   const blogRoutes = allPosts.map((post) => ({
     url: absoluteUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.date || new Date()),
     changeFrequency: "weekly" as const,
     priority: 0.6,
-  }))
+  }));
 
   /** * [CONSOLIDATION]: รวมพิกัดข้อมูลทั้งหมดเพื่อส่งมอบให้บอท AI
    * ผลลัพธ์: โครงสร้าง XML ที่สมบูรณ์แบบระดับ Specialist
    */
-  return [...staticRoutes, ...seoRoutes, ...caseStudyRoutes, ...blogRoutes]
+  return [
+    ...staticRoutes,
+    ...areaRoutes,
+    ...seoRoutes,
+    ...caseStudyRoutes,
+    ...blogRoutes,
+  ];
 }

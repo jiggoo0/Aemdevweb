@@ -1,20 +1,20 @@
 /** @format */
 
-import React from "react"
-import { Truck, ShieldCheck, CreditCard, LucideIcon } from "lucide-react"
+import React from "react";
+import { Truck, ShieldCheck, CreditCard, LucideIcon } from "lucide-react";
 
 /* -------------------------------------------------------------------------- */
 /* นิยามพิกัดข้อมูล (Type Definitions)                                           */
 /* -------------------------------------------------------------------------- */
 
 interface ShopStatItem {
-  icon?: string // กำหนดเป็นทางเลือกเพื่อป้องกันปัญหาหากข้อมูลต้นทางส่งมาไม่ครบ
-  title: string
-  desc: string
+  icon?: string; // กำหนดเป็นทางเลือกเพื่อป้องกันปัญหาหากข้อมูลต้นทางส่งมาไม่ครบ
+  title: string;
+  desc: string;
 }
 
 interface ShopStatsProps {
-  data: ShopStatItem[]
+  data: ShopStatItem[];
 }
 
 /**
@@ -31,18 +31,18 @@ export const ShopStats = ({ data }: ShopStatsProps) => {
       Truck,
       ShieldCheck,
       CreditCard,
-    }
+    };
 
     // ตรวจสอบพิกัดชื่อไอคอนในระบบ
     if (name && icons[name]) {
-      return React.createElement(icons[name], { size: 24 })
+      return React.createElement(icons[name], { size: 24 });
     }
 
     // พิกัดสำรองในกรณีที่ข้อมูลไม่ระบุชื่อไอคอน
-    const fallbackIcons = [Truck, ShieldCheck, CreditCard]
-    const FallbackIcon = fallbackIcons[index ?? 0] || ShieldCheck
-    return <FallbackIcon size={24} />
-  }
+    const fallbackIcons = [Truck, ShieldCheck, CreditCard];
+    const FallbackIcon = fallbackIcons[index ?? 0] || ShieldCheck;
+    return <FallbackIcon size={24} />;
+  };
 
   return (
     <section className="border-y border-slate-100 bg-white py-12">
@@ -71,5 +71,5 @@ export const ShopStats = ({ data }: ShopStatsProps) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
