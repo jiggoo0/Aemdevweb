@@ -13,10 +13,10 @@ import {
   ArrowRight,
   CheckCircle,
   Zap,
-  PlayCircle,
   Cpu,
   MapPin,
-} from "lucide-react"; // [FIXED]: ลบ Terminal ออกเนื่องจากไม่ได้ถูกใช้งานใน Component นี้
+  Trophy,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/constants/site-config";
 
@@ -74,18 +74,18 @@ export default function Hero() {
               นายเอ็มซ่ามากส์ เพื่อยอดขายที่โตขึ้นจริง
             </p>
 
-            {/* [CTA NODE]: ปุ่มนำทางเชิงยุทธศาสตร์ */}
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+            {/* [CTA NODE]: ปุ่มนำทางเชิงยุทธศาสตร์ - เพิ่มปุ่มกรณีศึกษาเข้ากลุ่มหลัก */}
+            <div className="flex flex-wrap gap-4">
               <Button
                 asChild
-                className="group h-20 rounded-3xl bg-[oklch(0.2_0.02_260)] px-10 text-lg font-black tracking-widest text-white uppercase italic shadow-2xl transition-all hover:bg-[oklch(0.65_0.2_160)] active:scale-95 dark:bg-white dark:text-slate-950"
+                className="group h-16 rounded-2xl bg-[oklch(0.2_0.02_260)] px-8 text-base font-black tracking-widest text-white uppercase italic shadow-2xl transition-all hover:bg-[oklch(0.65_0.2_160)] active:scale-95 dark:bg-white dark:text-slate-950"
               >
-                <Link href="/services" className="flex items-center gap-4">
+                <Link href="/services" className="flex items-center gap-3">
                   ดูบริการทั้งหมด
                   <ArrowRight
-                    size={22}
+                    size={20}
                     strokeWidth={3}
-                    className="transition-transform group-hover:translate-x-2"
+                    className="transition-transform group-hover:translate-x-1"
                   />
                 </Link>
               </Button>
@@ -93,26 +93,25 @@ export default function Hero() {
               <Button
                 asChild
                 variant="outline"
-                className="group h-20 rounded-3xl border-2 border-[oklch(0.65_0.2_160)] px-10 text-lg font-black tracking-widest text-[oklch(0.2_0.02_260)] uppercase italic transition-all hover:bg-[oklch(0.65_0.2_160_/_0.1)] active:scale-95 dark:text-white"
+                className="group h-16 rounded-2xl border-2 border-[oklch(0.65_0.2_160)] px-8 text-base font-black tracking-widest text-[oklch(0.2_0.02_260)] uppercase italic transition-all hover:bg-[oklch(0.65_0.2_160_/_0.1)] active:scale-95 dark:text-white"
               >
-                <Link href="/areas" className="flex items-center gap-4">
-                  <MapPin size={22} className="text-[oklch(0.65_0.2_160)]" />
-                  ปักหมุดสำเร็จได้ทุกพิกัด
+                <Link href="/case-studies" className="flex items-center gap-3">
+                  <Trophy size={20} className="text-[oklch(0.65_0.2_160)]" />
+                  พิสูจน์ผลงานจริง
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                variant="ghost"
+                className="group h-16 rounded-2xl px-8 text-base font-black tracking-widest text-[oklch(0.4_0.02_260)] uppercase italic transition-all hover:text-[oklch(0.65_0.2_160)] active:scale-95 dark:text-[oklch(0.8_0.01_260)]"
+              >
+                <Link href="/areas" className="flex items-center gap-3">
+                  <MapPin size={20} />
+                  ปักหมุดรายพื้นที่
                 </Link>
               </Button>
             </div>
-
-            {/* [SUB CTA]: สร้าง Trust ผ่านผลงานจริง */}
-            <Link
-              href="/case-studies"
-              className="group inline-flex items-center gap-4 px-2 py-4 text-xs font-black tracking-widest text-[oklch(0.5_0.02_260)] uppercase italic transition-all hover:text-[oklch(0.2_0.02_260)] dark:hover:text-white"
-            >
-              <PlayCircle
-                size={20}
-                className="text-[oklch(0.65_0.2_160)] transition-transform group-hover:scale-110"
-              />
-              ดูเคสธุรกิจที่สำเร็จมาแล้วจริงๆ
-            </Link>
 
             {/* Performance Metrics: ยืนยันสมรรถนะระดับสูง */}
             <div className="flex flex-wrap items-center gap-8 border-t border-[oklch(0.9_0.02_260_/_0.3)] pt-8">
