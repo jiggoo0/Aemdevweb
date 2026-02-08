@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.2 (STABILIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.3 (OPTIMIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,7 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
   description:
-    "รับทำเว็บไซต์และ SEO สายพันธุ์ใหม่ เน้นผลลัพธ์ทางธุรกิจ เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยดีไซน์เชิงกลยุทธ์และเทคโนโลยีความเร็วสูงจาก AEMDEVWEB",
+    "AEMDEVWEB | รับทำเว็บไซต์และ SEO เน้นยอดขาย ติดหน้าแรก Google ด้วย NextJS มาตรฐานสากล",
 
   // [02. HERO_REGISTRY]: ศูนย์กลางควบคุมเนื้อหาหน้าแรก
   hero: {
@@ -29,24 +29,34 @@ export const SITE_CONFIG: SiteConfig = {
     antiConnotation: "Avoid Robot-speak, No Over-complicated Jargon, Human-to-Human Focus",
   },
 
-  // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Optimized for Thai Trends)
+  // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Strategic Keyword Clusters)
   keywords: [
+    // --- Commercial Intent (เน้นปิดการขาย) ---
     "รับทำเว็บไซต์",
     "รับออกแบบเว็บไซต์",
-    "รับทำเว็บไซต์ กำแพงเพชร", // HQ Core Keyword
-    "ทำเว็บติดหน้าแรก Google",
-    "รับทำเว็บไซต์ Next.js",
-    "รับทำเว็บขายของออนไลน์",
-    "นายเอ็มซ่ามากส์", // [FIXED]: Added missing comma
     "จ้างทำเว็บไซต์ บริษัท",
+    "รับทำ Salepage", // [ADDED]: High Conversion Keyword
+    "รับทำเว็บขายของออนไลน์", 
+
+    // --- Technical & Performance (เน้นกลุ่มลูกค้าพรีเมียม) ---
+    "รับทำเว็บไซต์ Next.js",
     "ทำเว็บไซต์ SEO",
+    "ทำเว็บโหลดเร็ว", // [ADDED]: Technical Benefit
+    "ทำเว็บ E-commerce", // [ADDED]: Specific Niche
+
+    // --- Local & Branding (ยึดพื้นที่และตัวตน) ---
+    "รับทำเว็บไซต์ กำแพงเพชร",
+    "ทำเว็บติดหน้าแรก Google",
+    "นาย อลงกรณ์ ยมเกิด",
+    "นายเอ็มซ่ามากส์",
+    "AEMDEVWEB",
   ],
 
   // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
   project: {
     title: "Premium Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.0.2", // Updated for Schema Stability
+    version: "17.0.3", // Incremented for SEO Patch
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -54,7 +64,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT Standard)
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
-    legalName: "Alongkorl Yomkert",
+    legalName: "Alongkorn Yomkerd", // [CORRECTED]: Standard Transliteration
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
     jobTitle: "Technical SEO Specialist",
@@ -65,12 +75,11 @@ export const SITE_CONFIG: SiteConfig = {
   },
 
   // [07. CONTACT & ACCESS]: ช่องทางการติดต่อ
-  // [RECTIFIED]: เพิ่ม streetAddress เพื่อแก้ปัญหา Warning ใน Google Search Console
   contact: {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
     displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
-    streetAddress: "ตำบลในเมือง",
+    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร", // [REFINED]: Full format for Maps
     address: "จังหวัดกำแพงเพชร ประเทศไทย",
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
@@ -96,7 +105,6 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์ระบบ
   verification: {
-    // [FIXED]: ใส่รหัสยืนยันจากลิงก์ Search Console ที่คุณส่งมาให้เรียบร้อยแล้ว
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },
 } as const;

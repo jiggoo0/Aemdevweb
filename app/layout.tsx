@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.brandName,
     images: [
       {
-        url: "/images/og-main.webp", // ตรวจสอบว่ามีไฟล์นี้ใน public/images หรือไม่
+        url: "/images/og-main.png", // ตรวจสอบว่ามีไฟล์นี้ใน public/images หรือไม่
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.brandName,
