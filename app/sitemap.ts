@@ -10,6 +10,10 @@ import { AREA_NODES } from "@/constants/area-nodes";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
+/**
+ * @function sitemap
+ * @description สร้างสารบัญเว็บไซต์แบบ Dynamic เพื่อให้ Search Engine จัดลำดับข้อมูลได้อย่างแม่นยำ
+ */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.siteUrl.endsWith("/")
     ? SITE_CONFIG.siteUrl.slice(0, -1)
@@ -29,16 +33,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /**
    * 02. CORE_NAVIGATION: หน้าหลักรากฐานระบบ
    */
-  const coreRoutes = ["/services", "/areas", "/blog", "/case-studies", "/about"].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
+  const coreRoutes = ["/services", "/areas", "/blog", "/case-studies", "/about"].map(
+    (route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })
+  );
 
   /**
    * 03. MONEY_PAGES: บริการและพื้นที่ยุทธศาสตร์
-   * [STRATEGY]: ความสำคัญสูงเพื่อกระตุ้น Conversion
+   * [STRATEGY]: ความสำคัญสูงเพื่อกระตุ้น Conversion และ Local SEO
    */
   const serviceNodes = MASTER_REGISTRY.map((service) => ({
     url: `${baseUrl}/services/${service.templateSlug}`,
@@ -56,6 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * 04. AUTHORITY_CONTENT: บทความและเคสความสำเร็จ
+   * ดึงข้อมูลแบบ Asynchronous พร้อมกันเพื่อประสิทธิภาพสูงสุด
    */
   const [blogs, cases] = await Promise.all([
     getAllPosts().catch(() => []),
@@ -86,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.1,
   }));
 
-  // รวบรวมข้อมูลทั้งหมดและส่งออก
+  // รวบรวมข้อมูลทั้งหมดและส่งออกเป็น Flat Array
   return [
     homeNode,
     ...coreRoutes,

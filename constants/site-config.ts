@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.1 (STABILIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.2 (STABILIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -31,21 +31,22 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Optimized for Thai Trends)
   keywords: [
-    "รับทำเว็บไซต์", // Mass Keyword
-    "รับออกแบบเว็บไซต์", // Secondary Mass Keyword
-    "รับทำเว็บไซต์ กำแพงเพชร", // Local SEO
-    "ทำเว็บติดหน้าแรก Google", // Search Intent
-    "รับทำเว็บไซต์ Next.js", // Niche Tech Stack
-    "รับทำเว็บขายของออนไลน์", // E-commerce Focus
-    "จ้างทำเว็บไซต์ บริษัท", // Corporate Trust
-    "ทำเว็บไซต์ SEO", // Marketing Focus
+    "รับทำเว็บไซต์",
+    "รับออกแบบเว็บไซต์",
+    "รับทำเว็บไซต์ กำแพงเพชร", // HQ Core Keyword
+    "ทำเว็บติดหน้าแรก Google",
+    "รับทำเว็บไซต์ Next.js",
+    "รับทำเว็บขายของออนไลน์",
+    "นายเอ็มซ่ามากส์", // [FIXED]: Added missing comma
+    "จ้างทำเว็บไซต์ บริษัท",
+    "ทำเว็บไซต์ SEO",
   ],
 
   // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
   project: {
     title: "Premium Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "16.3.0",
+    version: "17.0.2", // Updated for Schema Stability
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -55,21 +56,21 @@ export const SITE_CONFIG: SiteConfig = {
     displayName: "นายเอ็มซ่ามากส์",
     legalName: "Alongkorl Yomkert",
     legalNameThai: "อลงกรณ์ ยมเกิด",
-    // สำหรับแสดงผลบนหน้าเว็บ (Human Readable)
     role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
-    // สำหรับ Schema.org (Bot Optimized)
     jobTitle: "Technical SEO Specialist",
     signature: "นายเอ็มซ่ามากส์",
     avatar: "/images/avatar.webp",
-    email: "contact@aemdevweb.com",
+    email: "me@aemdevweb.com",
     bioUrl: "/about",
   },
 
   // [07. CONTACT & ACCESS]: ช่องทางการติดต่อ
+  // [RECTIFIED]: เพิ่ม streetAddress เพื่อแก้ปัญหา Warning ใน Google Search Console
   contact: {
-    email: "contact@aemdevweb.com",
+    email: "me@aemdevweb.com",
     phone: "099-032-2175",
     displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
+    streetAddress: "ตำบลในเมือง",
     address: "จังหวัดกำแพงเพชร ประเทศไทย",
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
@@ -86,24 +87,18 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Local SEO Focus)
   business: {
-    // [STRATEGY]: ระบุ "จังหวัด" ชัดเจนเพื่อเป็นฐานทัพหลัก (HQ Node) สำหรับ Local SEO
     location: "Kamphaeng Phet",
-
-    // [STRATEGY]: ระบุ Scope กว้างระดับประเทศ เพื่อไม่ให้ Google จำกัดการแสดงผลแค่ในจังหวัด
     region: "Thailand",
-
-    // [STRATEGY]: ใช้คำศัพท์ Technical เพื่อดึงดูดลูกค้าเกรด Premium
     industry: "Web Infrastructure & Technical SEO",
-
     roiFocus: true,
     established: "2026",
   },
 
   // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์ระบบ
   verification: {
-    google: "google-site-verification-id", // อย่าลืมใส่ค่าจริงเมื่อได้จาก GSC
+    // [FIXED]: ใส่รหัสยืนยันจากลิงก์ Search Console ที่คุณส่งมาให้เรียบร้อยแล้ว
+    google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },
 } as const;
 
-/* TYPE EXPORT */
 export type GlobalConfig = typeof SITE_CONFIG;

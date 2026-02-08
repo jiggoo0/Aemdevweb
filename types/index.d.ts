@@ -73,6 +73,8 @@ export interface SiteConfig {
     readonly email: string;
     readonly phone: string;
     readonly displayPhone?: string;
+    /** [ADDED]: เพิ่มฟิลด์ที่อยู่แบบละเอียดเพื่อรองรับ Schema Markup (Fix TS2353) */
+    readonly streetAddress: string;
     readonly address: string;
     readonly postalCode: string;
     readonly workHours: string;

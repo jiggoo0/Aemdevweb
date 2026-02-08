@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: SEO_SCHEMA_PROTOCOL v16.3 (EEAT_OPTIMIZED)
+ * [SYSTEM CORE]: SEO_SCHEMA_PROTOCOL v17.0.2 (EEAT_STABILIZED)
  * [MANDATE]: JSON-LD Automation | Specialist Authority | Search Engine Readiness
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -17,7 +17,6 @@ export const absoluteUrl = (path: string): string => {
 
 /**
  * [PUBLIC]: Person Schema (EEAT CORE)
- * สร้างตัวตนผู้เชี่ยวชาญเพื่อให้ Bot จับคู่กับความเชี่ยวชาญระดับสากล
  */
 export function generatePersonSchema() {
   return {
@@ -27,24 +26,22 @@ export function generatePersonSchema() {
     name: SITE_CONFIG.expert.legalName,
     alternateName: SITE_CONFIG.expert.displayName,
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
-    // [STRATEGY]: ระบุ JobTitle เป็นภาษาอังกฤษเพื่อให้ Bot จัดหมวดหมู่ได้ทันที
     jobTitle: "Technical SEO Specialist & Web Infrastructure Strategist",
     description: SITE_CONFIG.expert.role,
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     sameAs: [
       SITE_CONFIG.links.facebook,
       SITE_CONFIG.links.github,
-      // ใส่ Social อื่นๆ ถ้ามีเพื่อให้ Bot ตรวจสอบประวัติการทำงาน (Trust)
     ],
     worksFor: {
-      "@type": "Organization",
-      name: SITE_CONFIG.brandName,
+      "@id": absoluteUrl("/#organization"), // Link ไปยังองค์กร
     },
   };
 }
 
 /**
  * [PUBLIC]: Organization Schema
+ * [RECTIFIED]: เพิ่ม streetAddress เพื่อแก้ปัญหาใน Google Search Console
  */
 export function generateOrganizationSchema() {
   return {
@@ -55,17 +52,18 @@ export function generateOrganizationSchema() {
     url: SITE_CONFIG.siteUrl,
     logo: absoluteUrl("/images/logo.webp"),
     description: SITE_CONFIG.description,
-    founder: { "@id": absoluteUrl("/#expert") }, // เชื่อมโยงไปยัง Person Schema
+    founder: { "@id": absoluteUrl("/#expert") },
     address: {
       "@type": "PostalAddress",
-      addressLocality: SITE_CONFIG.contact.address,
-      postalCode: SITE_CONFIG.contact.postalCode,
-      addressCountry: "TH",
+      "streetAddress": "จังหวัดกำแพงเพชร", // [FIX]: แนะนำให้อัปเดตข้อมูลจริงใน SITE_CONFIG
+      "addressLocality": SITE_CONFIG.contact.address,
+      "postalCode": SITE_CONFIG.contact.postalCode,
+      "addressCountry": "TH",
     },
     contactPoint: {
       "@type": "ContactPoint",
-      contactType: "customer service",
-      url: SITE_CONFIG.links.line,
+      "contactType": "customer service",
+      "url": SITE_CONFIG.links.line,
     },
     sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github],
   };
@@ -78,16 +76,17 @@ export function generateServiceSchema(service: TemplateMasterData) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": absoluteUrl(`/services/${service.templateSlug}/#service`),
     name: service.title,
-    serviceType: "Technical SEO & Web Development", // ระบุประเภทหลักให้ชัดเจน
+    serviceType: "Technical SEO & Web Development",
     provider: { "@id": absoluteUrl("/#organization") },
     description: service.description,
     offers: {
       "@type": "Offer",
-      price: service.priceValue,
-      priceCurrency: service.currency || "THB",
-      availability: "https://schema.org/InStock",
-      url: absoluteUrl(`/services/${service.templateSlug}`),
+      "price": service.priceValue || 0,
+      "priceCurrency": service.currency || "THB",
+      "availability": "https://schema.org/InStock",
+      "url": absoluteUrl(`/services/${service.templateSlug}`),
     },
   };
 }
@@ -99,25 +98,28 @@ export function generateLocalBusinessSchema(area: AreaNode) {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": absoluteUrl(`/areas/${area.slug}/#localbusiness`),
     name: `${area.province} Web Infrastructure Specialist - ${SITE_CONFIG.brandName}`,
     description: area.seoDescription || area.description,
     url: absoluteUrl(`/areas/${area.slug}`),
     image: absoluteUrl(area.heroImage || "/images/og-default.webp"),
     address: {
       "@type": "PostalAddress",
-      addressRegion: area.province,
-      addressCountry: "TH",
+      "streetAddress": area.province, // ใส่ชื่อจังหวัดเป็นที่อยู่เริ่มต้น
+      "addressRegion": area.province,
+      "postalCode": SITE_CONFIG.contact.postalCode,
+      "addressCountry": "TH",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "16.4828",
-      longitude: "99.5227",
+      "latitude": "16.4828", // กำแพงเพชรเป็นจุดศูนย์กลาง Default
+      "longitude": "99.5227",
     },
     areaServed: {
       "@type": "City",
-      name: area.province,
+      "name": area.province,
     },
-    founder: { "@id": absoluteUrl("/#expert") }, // ยืนยันว่าใครเป็นผู้ดูแลพื้นที่นี้
+    founder: { "@id": absoluteUrl("/#expert") },
   };
 }
 
@@ -128,11 +130,11 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: absoluteUrl(item.item),
+      "position": index + 1,
+      "name": item.name,
+      "item": absoluteUrl(item.item),
     })),
   };
 }
