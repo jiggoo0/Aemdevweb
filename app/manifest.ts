@@ -1,5 +1,5 @@
 /**
- * [ROOT INFRASTRUCTURE]: PWA_MANIFEST_SYSTEM v17.0.1 (STABILIZED)
+ * [ROOT INFRASTRUCTURE]: PWA_MANIFEST_SYSTEM v17.0.2 (STABILIZED)
  * [STRATEGY]: App-Like Experience | Specialist Branding | Asset Resiliency
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,12 +10,12 @@ import { SITE_CONFIG } from "@/constants/site-config";
 /**
  * @function manifest
  * @description เปลี่ยนเว็บไซต์ให้เป็น Progressive Web App (PWA)
- * เพื่อให้ผู้ใช้สามารถติดตั้ง (Add to Home Screen) และเข้าถึงระบบได้เหมือนแอปพลิเคชันพื้นฐาน
+ * รองรับการติดตั้งบนหน้าจอโฮม (Add to Home Screen) พร้อมไอคอนที่ถูกต้องตามมาตรฐาน Android/iOS
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
     /* 1. IDENTITY ARCHITECTURE */
-    name: `${SITE_CONFIG.brandName} | Specialist Hub`,
+    name: `${SITE_CONFIG.brandName} | Web Infrastructure Specialist`,
     short_name: SITE_CONFIG.brandName,
     description: SITE_CONFIG.description,
     start_url: "/",
@@ -23,18 +23,18 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
 
     /* 2. DISPLAY PHYSICS: การแสดงผลบนอุปกรณ์ */
-    display: "standalone", // แสดงผลเต็มหน้าจอเหมือนแอปจริง
+    display: "standalone", 
     orientation: "portrait",
     categories: ["business", "productivity", "developer tools"],
 
-    /* 3. CHROMA SYNC: ปรับสีให้ตรงกับระบบ Dark Theme (globals.css)
-       - background_color: #050505 (สีพื้นหลังหลัก)
-       - theme_color: #22c55e (สีเขียว Brand Primary)
+    /* 3. CHROMA SYNC: ปรับสีให้ตรงกับ Brand Identity
+       - background_color: #050505 (Midnight Aura)
+       - theme_color: #050505 (เพื่อความกลมกลืนกับ Status Bar)
     */
     background_color: "#050505",
-    theme_color: "#22c55e",
+    theme_color: "#050505",
 
-    /* 4. ASSET REGISTRY: ทะเบียนไอคอน (ตรวจสอบไฟล์ใน /public/images/ จริง) */
+    /* 4. ASSET REGISTRY: ทะเบียนไอคอน (อ้างอิงไฟล์จาก /public/ โดยตรง) */
     icons: [
       {
         src: "/favicon.ico",
@@ -42,25 +42,19 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/x-icon",
       },
       {
-        src: "/images/icon-192.png",
+        src: "/icon-192.png", // [CORRECTED]: ดึงจาก root ของ public ตามโครงสร้างจริง
         sizes: "192x192",
         type: "image/png",
-        purpose: "maskable", // รองรับ Adaptive Icons (วงกลม/สี่เหลี่ยม)
+        purpose: "maskable", // รองรับการปรับรูปร่างไอคอนบน Android
       },
       {
-        src: "/images/icon-512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable",
-      },
-      {
-        src: "/images/icon-192.png",
+        src: "/android-chrome-192x192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/images/icon-512.png",
+        src: "/android-chrome-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",

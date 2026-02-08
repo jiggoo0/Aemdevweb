@@ -1,2 +1,147 @@
-The program tree is not installed. Install it by executing:
- pkg install tree
+.
+├── .env
+├── .gitignore
+├── .prettierrc
+├── AEMDEVWEB-STRUCTURE.txt
+├── DEV.md
+├── README.md
+├── a.sh
+├── app
+│   ├── (routes)
+│   │   ├── areas
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── case-studies
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── test-mdx
+│   │       ├── content.mdx
+│   │       └── page.tsx
+│   ├── about
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── manifest.ts
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   ├── privacy
+│   │   └── page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   ├── status
+│   │   └── page.tsx
+│   └── terms
+│       └── page.tsx
+├── color.html
+├── components
+│   ├── features
+│   │   ├── areas
+│   │   │   └── AreaCard.tsx
+│   │   ├── blog
+│   │   │   └── BlogCard.tsx
+│   │   ├── case-studies
+│   │   │   └── CaseStudyCard.tsx
+│   │   ├── landing
+│   │   │   ├── Hero.tsx
+│   │   │   ├── PricingSection.tsx
+│   │   │   └── WorkProcess.tsx
+│   │   └── services
+│   │       ├── ServiceCard.tsx
+│   │       └── ServiceListingHub.tsx
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   └── TopLoader.tsx
+│   ├── seo
+│   │   └── JsonLd.tsx
+│   ├── shared
+│   │   ├── ConversionCTA.tsx
+│   │   ├── ImpactStats.tsx
+│   │   ├── LineStickyButton.tsx
+│   │   └── TrustBadge.tsx
+│   ├── templates
+│   │   ├── bio
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── catalog
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── corporate
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── local
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── salepage
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   └── sections
+│   │       ├── DynamicFAQ.tsx
+│   │       ├── FeatureGrid.tsx
+│   │       ├── HeroEngine.tsx
+│   │       └── LayoutEngine.tsx
+│   └── ui
+│       ├── IconRenderer.tsx
+│       ├── SkeletonCard.tsx
+│       ├── button.tsx
+│       ├── skeleton.tsx
+│       └── sonner.tsx
+├── components.json
+├── config
+│   ├── 00-SYSTEM-MANDATE.md
+│   └── _01-SYSTEM-PROMPT-EXTENSION.md
+├── constants
+│   ├── area-nodes.ts
+│   ├── master-registry.ts
+│   ├── navigation.ts
+│   └── site-config.ts
+├── content
+│   ├── blog
+│   │   ├── 5-points-killing-sales.mdx
+│   │   ├── advanced-schema-markup.mdx
+│   │   ├── copywriting-secrets.mdx
+│   │   ├── core-web-vitals-speed.mdx
+│   │   ├── ecommerce-conversion-seo.mdx
+│   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── seo-for-sme-2026.mdx
+│   │   ├── seo-google-love-technical-guide.mdx
+│   │   ├── starting-business-low-budget-website.mdx
+│   │   └── technical-structure-audit.mdx
+│   └── case-studies
+│       ├── industrial-catalog-rfq-optimization.mdx
+│       ├── sme-web-performance-growth.mdx
+│       └── unlink-reputation-management-success.mdx
+├── eslint.config.mjs
+├── hooks
+├── knip.json
+├── lib
+│   ├── cms.ts
+│   ├── schema.ts
+│   ├── seo.ts
+│   └── utils.ts
+├── mdx-components.tsx
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── structure.txt
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+└── types
+    ├── index.d.ts
+    └── mdx.d.ts

@@ -44,7 +44,6 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_CONFIG.brandName}`,
   },
   description: SITE_CONFIG.description,
-  // [FIXED]: Spread operator (...) แปลง Readonly Array เป็น Mutable Array เพื่อแก้ TypeScript Error
   keywords: [...SITE_CONFIG.keywords],
   authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.siteUrl }],
   creator: SITE_CONFIG.brandName,
@@ -52,6 +51,19 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "./",
   },
+  
+  /* [NEW]: การจัดการไอคอนระบบ (App Icons) */
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -61,7 +73,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.brandName,
     images: [
       {
-        url: "/images/og-main.webp",
+        url: "/images/og-main.webp", // ตรวจสอบว่ามีไฟล์นี้ใน public/images หรือไม่
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.brandName,
@@ -109,7 +121,7 @@ export default function RootLayout({
       <body
         className={cn(
           "font-thai selection:bg-brand-primary/20 selection:text-brand-primary min-h-screen overflow-x-hidden bg-[#050505] text-slate-200",
-          // [TYPOGRAPHY SYSTEM]: ใช้ Font Sans สำหรับ Headings และตัวเลข เพื่อความทันสมัย
+          /* [TYPOGRAPHY SYSTEM]: จัดความสำคัญของฟอนต์ */
           "[&_p]:font-thai [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_span.font-mono]:font-sans",
         )}
       >
@@ -118,7 +130,7 @@ export default function RootLayout({
           className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
           aria-hidden="true"
         >
-          {/* Noise Texture: เพิ่ม Texture ให้พื้นหลังไม่ดูแบนเกินไป */}
+          {/* Noise Texture */}
           <div
             className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
             style={{
@@ -126,10 +138,10 @@ export default function RootLayout({
             }}
           />
 
-          {/* Grid System: เส้นตารางจางๆ แบบ Technical */}
+          {/* Grid System */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-[size:32px_32px]" />
 
-          {/* Ambient Aura: แสงฟุ้งกระจายสร้างบรรยากาศ */}
+          {/* Ambient Aura */}
           <div className="animate-pulse-slow bg-brand-primary/5 absolute -top-[20%] -left-[20%] h-[600px] w-[600px] rounded-full mix-blend-screen blur-[120px]" />
           <div className="absolute -right-[10%] -bottom-[10%] h-[500px] w-[500px] rounded-full bg-blue-600/5 mix-blend-screen blur-[100px]" />
         </div>
