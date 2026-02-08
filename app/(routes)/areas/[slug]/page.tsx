@@ -28,9 +28,7 @@ export async function generateStaticParams() {
 }
 
 /* [B] SEO METADATA ENGINE */
-export async function generateMetadata({
-  params,
-}: PageProps<{ slug: string }>): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
   const { slug } = await params;
   const area = AREA_NODES.find((a) => a.slug === slug);
 
@@ -50,9 +48,7 @@ export async function generateMetadata({
  * @description หน้าเจาะลึกพื้นที่ให้บริการที่ปรับเปลี่ยน Template ตามความเหมาะสมของธุรกิจในพื้นที่นั้น
  * ใช้ Adapter Pattern เพื่อแปลงข้อมูลจาก AreaNode เป็น TemplateMasterData สำหรับ Template ที่แตกต่างกัน
  */
-export default async function AreaDetailPage({
-  params,
-}: PageProps<{ slug: string }>) {
+export default async function AreaDetailPage({ params }: PageProps<{ slug: string }>) {
   const { slug } = await params;
   const area = AREA_NODES.find((a) => a.slug === slug);
 
@@ -67,7 +63,7 @@ export default async function AreaDetailPage({
    */
   const transformToMasterData = (
     baseArea: AreaNode,
-    category: TemplateMasterData["category"]
+    category: TemplateMasterData["category"],
   ): TemplateMasterData => {
     return {
       id: baseArea.slug,
@@ -136,18 +132,16 @@ export default async function AreaDetailPage({
     <div className="bg-surface-main relative min-h-screen overflow-hidden">
       {/* [VISUAL INFRASTRUCTURE]: เลเยอร์บรรยากาศเพื่อยกระดับความพรีเมียม */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 select-none opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
         aria-hidden="true"
       >
-        <div className="ambient-aura absolute left-1/2 top-0 h-[800px] w-full -translate-x-1/2 opacity-[0.12] blur-[100px]" />
+        <div className="ambient-aura absolute top-0 left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[0.12] blur-[100px]" />
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
 
       <JsonLd data={localSchema} />
 
-      <main className="animate-in fade-in relative z-10 duration-1000">
-        {renderTemplate()}
-      </main>
+      <main className="animate-in fade-in relative z-10 duration-1000">{renderTemplate()}</main>
     </div>
   );
 }

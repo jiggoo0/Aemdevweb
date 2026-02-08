@@ -33,9 +33,7 @@ export async function generateStaticParams() {
 }
 
 /* [B] SEO AUTHORITY PROTOCOL */
-export async function generateMetadata({
-  params,
-}: PageProps<{ slug: string }>): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -61,9 +59,7 @@ export async function generateMetadata({
  * @component BlogDetailPage
  * @description หน้าแสดงผลบทความเจาะลึกที่ใช้ระบบ Dynamic MDX เพื่อประสิทธิภาพสูงสุด
  */
-export default async function BlogDetailPage({
-  params,
-}: PageProps<{ slug: string }>) {
+export default async function BlogDetailPage({ params }: PageProps<{ slug: string }>) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -79,13 +75,13 @@ export default async function BlogDetailPage({
       ssr: true, // SEO Requirement: Server-Side Rendering Mandatory
       loading: () => (
         <div className="flex h-96 w-full flex-col items-center justify-center space-y-4">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-primary border-t-transparent shadow-[0_0_20px_var(--color-brand-primary)]" />
-          <p className="font-mono text-xs font-black uppercase tracking-[0.2em] text-gray-500 opacity-50">
+          <div className="border-brand-primary h-10 w-10 animate-spin rounded-full border-4 border-t-transparent shadow-[0_0_20px_var(--color-brand-primary)]" />
+          <p className="font-mono text-xs font-black tracking-[0.2em] text-gray-500 uppercase opacity-50">
             Decrypting_Knowledge_Node...
           </p>
         </div>
       ),
-    }
+    },
   );
 
   const articleSchema = {
@@ -113,10 +109,10 @@ export default async function BlogDetailPage({
     <LayoutEngine>
       <JsonLd data={articleSchema} />
 
-      <main className="bg-surface-main relative min-h-screen overflow-hidden pb-24 pt-32 md:pb-32 md:pt-48">
+      <main className="bg-surface-main relative min-h-screen overflow-hidden pt-32 pb-24 md:pt-48 md:pb-32">
         {/* ATMOSPHERIC ENGINE: เลเยอร์บรรยากาศเบื้องหลัง */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 select-none opacity-[0.05]"
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
           aria-hidden="true"
         >
           <div className="ambient-aura absolute -top-[10%] left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
@@ -128,24 +124,24 @@ export default async function BlogDetailPage({
             {/* [NODE 01]: STRATEGIC HEADER */}
             <header className="mb-16 md:mb-24">
               <div className="mb-8 flex flex-wrap items-center gap-4 md:mb-10 md:gap-6">
-                <div className="inline-flex items-center gap-3 rounded-full border border-brand-primary/20 bg-brand-primary/10 px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.3em] uppercase text-brand-primary md:px-5 md:py-2">
+                <div className="border-brand-primary/20 bg-brand-primary/10 text-brand-primary inline-flex items-center gap-3 rounded-full border px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.3em] uppercase md:px-5 md:py-2">
                   <IconRenderer name="Calendar" size={14} />
                   <span>PUBLISHED_{post.date}</span>
                 </div>
-                <div className="hidden font-mono text-[10px] font-black tracking-[0.3em] uppercase text-gray-500 opacity-40 md:block">
+                <div className="hidden font-mono text-[10px] font-black tracking-[0.3em] text-gray-500 uppercase opacity-40 md:block">
                   Node.Ref_{slug.toUpperCase().replace(/-/g, "_")}
                 </div>
               </div>
 
-              <h1 className="mb-8 text-balance text-4xl font-black italic leading-[1] tracking-tighter text-white uppercase md:mb-12 md:text-6xl lg:text-7xl">
+              <h1 className="mb-8 text-4xl leading-[1] font-black tracking-tighter text-balance text-white uppercase italic md:mb-12 md:text-6xl lg:text-7xl">
                 {post.title}
               </h1>
 
-              <div className="relative overflow-hidden rounded-[2rem] border-l-[6px] border-brand-primary bg-white/5 p-8 shadow-2xl backdrop-blur-sm md:rounded-[2.5rem] md:border-l-[10px] md:p-12">
-                <p className="relative z-10 text-xl font-medium italic leading-relaxed text-gray-300 opacity-90 md:text-2xl">
+              <div className="border-brand-primary relative overflow-hidden rounded-[2rem] border-l-[6px] bg-white/5 p-8 shadow-2xl backdrop-blur-sm md:rounded-[2.5rem] md:border-l-[10px] md:p-12">
+                <p className="relative z-10 text-xl leading-relaxed font-medium text-gray-300 italic opacity-90 md:text-2xl">
                   “{post.excerpt || post.description}”
                 </p>
-                <div className="absolute -bottom-10 -right-10 text-white opacity-[0.03]">
+                <div className="absolute -right-10 -bottom-10 text-white opacity-[0.03]">
                   <IconRenderer name="Quote" size={180} />
                 </div>
               </div>
@@ -154,7 +150,7 @@ export default async function BlogDetailPage({
             {/* [NODE 02]: MDX CONTENT BODY (Prose Engine) */}
             <div
               className={cn(
-                "prose prose-invert max-w-none md:prose-lg lg:prose-xl",
+                "prose prose-invert md:prose-lg lg:prose-xl max-w-none",
                 // Headings
                 "prose-headings:font-sans prose-headings:font-black prose-headings:italic prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-white",
                 "prose-h2:mt-16 prose-h2:text-3xl md:prose-h2:text-4xl",
@@ -171,7 +167,7 @@ export default async function BlogDetailPage({
                 "prose-hr:my-16 prose-hr:border-white/10",
                 // Code Blocks
                 "prose-code:rounded-lg prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:text-brand-primary",
-                "prose-pre:rounded-[2rem] prose-pre:bg-[#0A0A0A] prose-pre:p-6 prose-pre:border prose-pre:border-white/5"
+                "prose-pre:rounded-[2rem] prose-pre:bg-[#0A0A0A] prose-pre:p-6 prose-pre:border prose-pre:border-white/5",
               )}
             >
               <MDXContent components={CUSTOM_MDX_COMPONENTS} />
@@ -182,11 +178,12 @@ export default async function BlogDetailPage({
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-8 backdrop-blur-xl md:rounded-[3rem] md:p-16">
                 <div className="relative z-10 flex flex-col items-center justify-between gap-10 lg:flex-row lg:gap-16">
                   <div className="space-y-4 text-center lg:text-left">
-                    <h3 className="text-3xl font-black italic tracking-tighter text-white uppercase md:text-5xl">
+                    <h3 className="text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
                       Ready to Build <br /> Your Strategy?
                     </h3>
-                    <p className="max-w-md text-base font-medium italic leading-relaxed text-gray-400 opacity-80 md:text-lg">
-                      เปลี่ยนระบบที่ซับซ้อนให้เป็นเครื่องจักรทำเงินที่ทรงพลัง <br className="hidden md:block" />
+                    <p className="max-w-md text-base leading-relaxed font-medium text-gray-400 italic opacity-80 md:text-lg">
+                      เปลี่ยนระบบที่ซับซ้อนให้เป็นเครื่องจักรทำเงินที่ทรงพลัง{" "}
+                      <br className="hidden md:block" />
                       ทักมาวางระบบหลังบ้านกับผมได้โดยตรงครับ
                     </p>
                   </div>
@@ -194,7 +191,7 @@ export default async function BlogDetailPage({
                   <div className="flex-shrink-0">
                     <Button
                       asChild
-                      className="group relative h-16 w-full overflow-hidden rounded-[2rem] bg-brand-primary px-10 text-black shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,197,94,0.5)] active:scale-95 sm:w-auto md:h-20 md:px-14"
+                      className="group bg-brand-primary relative h-16 w-full overflow-hidden rounded-[2rem] px-10 text-black shadow-[0_0_20px_rgba(34,197,94,0.3)] transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(34,197,94,0.5)] active:scale-95 sm:w-auto md:h-20 md:px-14"
                     >
                       <Link href={SITE_CONFIG.links.line} target="_blank">
                         <span className="relative z-10 flex items-center gap-4">
@@ -208,14 +205,14 @@ export default async function BlogDetailPage({
                     </Button>
                   </div>
                 </div>
-                
+
                 {/* Decoration Aura */}
-                <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 bg-brand-primary/20 opacity-20 blur-[100px]" />
+                <div className="bg-brand-primary/20 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 opacity-20 blur-[100px]" />
               </div>
 
               {/* Specialist Signature */}
               <div className="mt-16 text-center md:mt-20">
-                <div className="inline-flex items-center gap-6 font-mono text-[10px] font-black tracking-[0.5em] uppercase text-gray-600 opacity-40">
+                <div className="inline-flex items-center gap-6 font-mono text-[10px] font-black tracking-[0.5em] text-gray-600 uppercase opacity-40">
                   <div className="h-px w-12 bg-gray-700" />
                   Core.Performance_v17.0
                   <div className="h-px w-12 bg-gray-700" />

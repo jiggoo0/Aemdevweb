@@ -35,10 +35,7 @@ export const SERVICE_SOLUTIONS = [
  * [STRATEGY]: รวม Service Solutions เข้ากับลิงก์บริษัทและกฎหมาย
  */
 export const FOOTER_MAP = {
-  services: [
-    ...SERVICE_SOLUTIONS,
-    { label: "ดูบริการทั้งหมด", href: "/services" },
-  ],
+  services: [...SERVICE_SOLUTIONS, { label: "ดูบริการทั้งหมด", href: "/services" }],
   company: [
     { label: "เกี่ยวกับเรา", href: "/about" },
     { label: "พื้นที่บริการ", href: "/areas" },

@@ -31,9 +31,7 @@ export async function generateStaticParams() {
 }
 
 /* [B] SEO AUTHORITY PROTOCOL */
-export async function generateMetadata({
-  params,
-}: PageProps<{ slug: string }>): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
   const { slug } = await params;
   const item = await getCaseStudyBySlug(slug);
 
@@ -55,9 +53,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function CaseStudyDetailPage({
-  params,
-}: PageProps<{ slug: string }>) {
+export default async function CaseStudyDetailPage({ params }: PageProps<{ slug: string }>) {
   const { slug } = await params;
   const item = await getCaseStudyBySlug(slug);
 
@@ -73,13 +69,13 @@ export default async function CaseStudyDetailPage({
       ssr: true,
       loading: () => (
         <div className="flex h-96 w-full flex-col items-center justify-center space-y-4">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-brand-primary border-t-transparent shadow-[0_0_20px_var(--color-brand-primary)]" />
-          <p className="font-mono text-xs font-black uppercase tracking-[0.2em] text-gray-500 opacity-50">
+          <div className="border-brand-primary h-10 w-10 animate-spin rounded-full border-4 border-t-transparent shadow-[0_0_20px_var(--color-brand-primary)]" />
+          <p className="font-mono text-xs font-black tracking-[0.2em] text-gray-500 uppercase opacity-50">
             Deciphering_Evidence...
           </p>
         </div>
       ),
-    }
+    },
   );
 
   const caseSchema = {
@@ -87,9 +83,7 @@ export default async function CaseStudyDetailPage({
     "@type": "TechArticle",
     headline: item.title,
     description: item.excerpt || item.description,
-    image: item.thumbnail
-      ? `${SITE_CONFIG.siteUrl}${item.thumbnail}`
-      : undefined,
+    image: item.thumbnail ? `${SITE_CONFIG.siteUrl}${item.thumbnail}` : undefined,
     datePublished: item.date,
     author: { "@type": "Person", name: SITE_CONFIG.expert.displayName },
     publisher: {
@@ -106,10 +100,10 @@ export default async function CaseStudyDetailPage({
     <LayoutEngine>
       <JsonLd data={caseSchema} />
 
-      <main className="bg-surface-main relative min-h-screen overflow-hidden pb-24 pt-32 md:pb-32 md:pt-48">
+      <main className="bg-surface-main relative min-h-screen overflow-hidden pt-32 pb-24 md:pt-48 md:pb-32">
         {/* ATMOSPHERIC ENGINE */}
         <div
-          className="pointer-events-none absolute inset-0 z-0 select-none opacity-[0.05]"
+          className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
           aria-hidden="true"
         >
           <div className="ambient-aura absolute -top-[10%] left-1/2 h-[600px] w-full -translate-x-1/2 opacity-[0.08] blur-[120px]" />
@@ -121,24 +115,24 @@ export default async function CaseStudyDetailPage({
             {/* [NODE 01]: STRATEGIC HEADER */}
             <header className="mb-16 space-y-8 md:mb-24 md:space-y-10">
               <div className="flex flex-wrap items-center justify-between gap-6">
-                <div className="inline-flex items-center gap-3 rounded-full border border-brand-primary/20 bg-brand-primary/10 px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.3em] uppercase text-brand-primary md:px-5 md:py-2">
+                <div className="border-brand-primary/20 bg-brand-primary/10 text-brand-primary inline-flex items-center gap-3 rounded-full border px-4 py-1.5 font-mono text-[10px] font-black tracking-[0.3em] uppercase md:px-5 md:py-2">
                   <IconRenderer name="CheckCircle2" size={14} />
                   <span>Success_Evidence_v17</span>
                 </div>
-                <time className="font-mono text-[10px] font-bold tracking-widest uppercase text-gray-500 opacity-60">
+                <time className="font-mono text-[10px] font-bold tracking-widest text-gray-500 uppercase opacity-60">
                   REF_DATE: {item.date}
                 </time>
               </div>
 
-              <h1 className="text-balance text-4xl font-black italic leading-[0.95] tracking-tighter text-white uppercase md:text-6xl lg:text-8xl">
+              <h1 className="text-4xl leading-[0.95] font-black tracking-tighter text-balance text-white uppercase italic md:text-6xl lg:text-8xl">
                 {item.title}
               </h1>
 
-              <div className="relative overflow-hidden rounded-[2rem] border-l-[8px] border-brand-primary bg-white/5 p-8 shadow-2xl backdrop-blur-sm md:rounded-[2.5rem] md:border-l-[12px] md:p-14">
-                <p className="relative z-10 text-xl font-medium italic leading-relaxed text-gray-300 opacity-90 md:text-3xl">
+              <div className="border-brand-primary relative overflow-hidden rounded-[2rem] border-l-[8px] bg-white/5 p-8 shadow-2xl backdrop-blur-sm md:rounded-[2.5rem] md:border-l-[12px] md:p-14">
+                <p className="relative z-10 text-xl leading-relaxed font-medium text-gray-300 italic opacity-90 md:text-3xl">
                   “{item.excerpt || item.description}”
                 </p>
-                <div className="absolute -bottom-10 -right-10 text-white opacity-[0.03]">
+                <div className="absolute -right-10 -bottom-10 text-white opacity-[0.03]">
                   <IconRenderer name="TrendingUp" size={200} />
                 </div>
               </div>
@@ -147,7 +141,7 @@ export default async function CaseStudyDetailPage({
             {/* [NODE 02]: MDX CONTENT BODY */}
             <div
               className={cn(
-                "prose prose-invert max-w-none md:prose-lg lg:prose-xl",
+                "prose prose-invert md:prose-lg lg:prose-xl max-w-none",
                 // Headings
                 "prose-headings:font-sans prose-headings:font-black prose-headings:italic prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-white",
                 "prose-h2:mt-16 prose-h2:text-3xl md:prose-h2:text-4xl",
@@ -162,7 +156,7 @@ export default async function CaseStudyDetailPage({
                 "prose-hr:my-16 prose-hr:border-white/10",
                 // Code Blocks
                 "prose-code:rounded-lg prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:text-brand-primary",
-                "prose-pre:rounded-[2rem] prose-pre:bg-[#0A0A0A] prose-pre:p-6 prose-pre:border prose-pre:border-white/5"
+                "prose-pre:rounded-[2rem] prose-pre:bg-[#0A0A0A] prose-pre:p-6 prose-pre:border prose-pre:border-white/5",
               )}
             >
               <MDXContent components={CUSTOM_MDX_COMPONENTS} />
@@ -173,7 +167,7 @@ export default async function CaseStudyDetailPage({
               <div className="group relative overflow-hidden rounded-[3rem] bg-white text-black shadow-2xl transition-all duration-700 hover:scale-[1.01] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)]">
                 <div className="relative z-10 flex flex-col items-center justify-between gap-10 p-10 md:flex-row md:p-20">
                   <div className="max-w-xl space-y-4 text-center md:text-left">
-                    <h2 className="text-4xl font-black italic leading-none tracking-tighter uppercase md:text-6xl">
+                    <h2 className="text-4xl leading-none font-black tracking-tighter uppercase italic md:text-6xl">
                       Ready to Scale <br /> Your Growth?
                     </h2>
                     <p className="text-lg font-medium italic opacity-70">
@@ -185,7 +179,7 @@ export default async function CaseStudyDetailPage({
                     <Button
                       asChild
                       size="lg"
-                      className="h-20 rounded-[2rem] bg-black px-10 text-white shadow-xl transition-all duration-500 hover:scale-105 hover:bg-brand-primary hover:text-black hover:shadow-2xl active:scale-95"
+                      className="hover:bg-brand-primary h-20 rounded-[2rem] bg-black px-10 text-white shadow-xl transition-all duration-500 hover:scale-105 hover:text-black hover:shadow-2xl active:scale-95"
                     >
                       <Link href={SITE_CONFIG.links.line} target="_blank">
                         <span className="flex items-center gap-4">
@@ -200,7 +194,7 @@ export default async function CaseStudyDetailPage({
                 </div>
 
                 {/* Decoration */}
-                <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full bg-brand-primary opacity-20 blur-[80px] transition-opacity duration-700 group-hover:opacity-40" />
+                <div className="bg-brand-primary absolute -right-24 -bottom-24 h-64 w-64 rounded-full opacity-20 blur-[80px] transition-opacity duration-700 group-hover:opacity-40" />
               </div>
             </footer>
           </div>

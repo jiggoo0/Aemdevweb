@@ -29,10 +29,7 @@ export function generatePersonSchema() {
     jobTitle: "Technical SEO Specialist & Web Infrastructure Strategist",
     description: SITE_CONFIG.expert.role,
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
-    sameAs: [
-      SITE_CONFIG.links.facebook,
-      SITE_CONFIG.links.github,
-    ],
+    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github],
     worksFor: {
       "@id": absoluteUrl("/#organization"), // Link ไปยังองค์กร
     },
@@ -55,15 +52,15 @@ export function generateOrganizationSchema() {
     founder: { "@id": absoluteUrl("/#expert") },
     address: {
       "@type": "PostalAddress",
-      "streetAddress": "จังหวัดกำแพงเพชร", // [FIX]: แนะนำให้อัปเดตข้อมูลจริงใน SITE_CONFIG
-      "addressLocality": SITE_CONFIG.contact.address,
-      "postalCode": SITE_CONFIG.contact.postalCode,
-      "addressCountry": "TH",
+      streetAddress: "จังหวัดกำแพงเพชร", // [FIX]: แนะนำให้อัปเดตข้อมูลจริงใน SITE_CONFIG
+      addressLocality: SITE_CONFIG.contact.address,
+      postalCode: SITE_CONFIG.contact.postalCode,
+      addressCountry: "TH",
     },
     contactPoint: {
       "@type": "ContactPoint",
-      "contactType": "customer service",
-      "url": SITE_CONFIG.links.line,
+      contactType: "customer service",
+      url: SITE_CONFIG.links.line,
     },
     sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github],
   };
@@ -83,10 +80,10 @@ export function generateServiceSchema(service: TemplateMasterData) {
     description: service.description,
     offers: {
       "@type": "Offer",
-      "price": service.priceValue || 0,
-      "priceCurrency": service.currency || "THB",
-      "availability": "https://schema.org/InStock",
-      "url": absoluteUrl(`/services/${service.templateSlug}`),
+      price: service.priceValue || 0,
+      priceCurrency: service.currency || "THB",
+      availability: "https://schema.org/InStock",
+      url: absoluteUrl(`/services/${service.templateSlug}`),
     },
   };
 }
@@ -105,19 +102,19 @@ export function generateLocalBusinessSchema(area: AreaNode) {
     image: absoluteUrl(area.heroImage || "/images/og-default.webp"),
     address: {
       "@type": "PostalAddress",
-      "streetAddress": area.province, // ใส่ชื่อจังหวัดเป็นที่อยู่เริ่มต้น
-      "addressRegion": area.province,
-      "postalCode": SITE_CONFIG.contact.postalCode,
-      "addressCountry": "TH",
+      streetAddress: area.province, // ใส่ชื่อจังหวัดเป็นที่อยู่เริ่มต้น
+      addressRegion: area.province,
+      postalCode: SITE_CONFIG.contact.postalCode,
+      addressCountry: "TH",
     },
     geo: {
       "@type": "GeoCoordinates",
-      "latitude": "16.4828", // กำแพงเพชรเป็นจุดศูนย์กลาง Default
-      "longitude": "99.5227",
+      latitude: "16.4828", // กำแพงเพชรเป็นจุดศูนย์กลาง Default
+      longitude: "99.5227",
     },
     areaServed: {
       "@type": "City",
-      "name": area.province,
+      name: area.province,
     },
     founder: { "@id": absoluteUrl("/#expert") },
   };
@@ -130,11 +127,11 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
+    itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      "item": absoluteUrl(item.item),
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.item),
     })),
   };
 }

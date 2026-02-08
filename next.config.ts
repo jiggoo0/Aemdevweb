@@ -27,19 +27,19 @@ const nextConfig: NextConfig = {
   // [REACT CORE]: Stability Settings
   reactStrictMode: true,
 
-  // [NOTE]: React Compiler ถูกปิดเป็น Default อยู่แล้วในเวอร์ชั่นนี้ 
+  // [NOTE]: React Compiler ถูกปิดเป็น Default อยู่แล้วในเวอร์ชั่นนี้
   // การประกาศใน experimental จะทำให้เกิด Config Error จึงลบออกเพื่อความเสถียร
-  
+
   experimental: {
     scrollRestoration: true,
-    
+
     // [RESOURCE CONTROL]: ปรับจูนให้เข้ากับขีดจำกัดของ CPU บน Android (Zero-Freeze)
     workerThreads: false,
     cpus: 1,
-    
+
     // [OPTIMIZATION]: ลด Bundle Size โดยเลือก Import เฉพาะส่วนที่ใช้
     optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/react-slot"],
-    
+
     // [COMPILER]: ใช้ JS Compiler แทน Rust เพื่อความเสถียรบนระบบไฟล์ Termux
     mdxRs: false,
   },
@@ -53,7 +53,7 @@ const nextConfig: NextConfig = {
   images: {
     // [FIX]: อนุญาตให้ประมวลผลความคมชัดที่ 75 (Default) และ 90 (High-Fidelity)
     qualities: [75, 90],
-    
+
     // [FORMATS]: รองรับ Next-Gen Formats
     formats: ["image/avif", "image/webp"],
 

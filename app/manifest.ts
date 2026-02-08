@@ -23,7 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
 
     /* 2. DISPLAY PHYSICS: การแสดงผลบนอุปกรณ์ */
-    display: "standalone", 
+    display: "standalone",
     orientation: "portrait",
     categories: ["business", "productivity", "developer tools"],
 

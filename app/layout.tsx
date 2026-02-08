@@ -26,14 +26,16 @@ const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  adjustFontFallback: true, // เพิ่มเพื่อความเสถียรของ Layout ฝั่งภาษาอังกฤษ
   preload: true,
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
   weight: ["300", "400", "500", "600", "700"],
-  subsets: ["thai", "latin"],
+  subsets: ["thai"], // [OPTIMIZED]: โหลดเฉพาะ Subset ไทยเพื่อลดขนาดไฟล์
   variable: "--font-thai",
-  display: "swap",
+  display: "swap", // [OPTIMIZED]: แสดงผลข้อความทันที
+  adjustFontFallback: true, // [OPTIMIZED]: ป้องกัน Layout กระตุก (CLS)
   preload: true,
 });
 
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "./",
   },
-  
+
   /* [NEW]: การจัดการไอคอนระบบ (App Icons) */
   icons: {
     icon: [
@@ -59,9 +61,7 @@ export const metadata: Metadata = {
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
     shortcut: "/favicon.ico",
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 
   openGraph: {

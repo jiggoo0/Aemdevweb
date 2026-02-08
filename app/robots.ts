@@ -28,7 +28,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: [
         "/",
         "/_next/static/images/", // อนุญาตให้ดึงรูปภาพ Static โดยตรง
-        "/_next/image*",          // [CRITICAL]: ปลดล็อกระบบ Image Optimization ของ Next.js
+        "/_next/image*", // [CRITICAL]: ปลดล็อกระบบ Image Optimization ของ Next.js
       ],
 
       /**
@@ -36,11 +36,11 @@ export default function robots(): MetadataRoute.Robots {
        * บล็อกเฉพาะเส้นทางที่ไม่ต้องการให้ปรากฏบนผลการค้นหา (SERP)
        */
       disallow: [
-        "/api/",      // ป้องกันการกวาดข้อมูล API Endpoints หลังบ้าน
-        "/admin/",    // ป้องกันหน้าจัดการระบบในอนาคต
-        "/status",    // ป้องกันหน้าตรวจสอบสถานะระบบ
-        "/test-mdx",  // ป้องกันหน้า Sandbox สำหรับทดสอบ MDX
-        "/*?tag=*",   // บล็อกเฉพาะ Query Filter เพื่อลด Duplicate Content
+        "/api/", // ป้องกันการกวาดข้อมูล API Endpoints หลังบ้าน
+        "/admin/", // ป้องกันหน้าจัดการระบบในอนาคต
+        "/status", // ป้องกันหน้าตรวจสอบสถานะระบบ
+        "/test-mdx", // ป้องกันหน้า Sandbox สำหรับทดสอบ MDX
+        "/*?tag=*", // บล็อกเฉพาะ Query Filter เพื่อลด Duplicate Content
         "/*?category=*",
       ],
     },

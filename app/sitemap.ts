@@ -33,14 +33,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /**
    * 02. CORE_NAVIGATION: หน้าหลักรากฐานระบบ
    */
-  const coreRoutes = ["/services", "/areas", "/blog", "/case-studies", "/about"].map(
-    (route) => ({
-      url: `${baseUrl}${route}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })
-  );
+  const coreRoutes = ["/services", "/areas", "/blog", "/case-studies", "/about"].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
 
   /**
    * 03. MONEY_PAGES: บริการและพื้นที่ยุทธศาสตร์

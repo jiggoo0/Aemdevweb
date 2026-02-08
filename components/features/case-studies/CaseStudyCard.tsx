@@ -36,8 +36,7 @@ interface CaseStudyCardProps {
  */
 const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
   // Logic: เลือกคำอธิบายที่มีข้อมูล (Excerpt -> Description -> Default)
-  const description =
-    data.excerpt || data.description || "เจาะลึกกลยุทธ์เบื้องหลังความสำเร็จ...";
+  const description = data.excerpt || data.description || "เจาะลึกกลยุทธ์เบื้องหลังความสำเร็จ...";
 
   return (
     <Link
@@ -47,8 +46,8 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
         // Base Style (Midnight Aura)
         "border-white/10 bg-[#050505] backdrop-blur-sm",
         // Hover State
-        "hover:-translate-y-2 hover:border-brand-primary/50 hover:bg-white/[0.02] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8)]",
-        className
+        "hover:border-brand-primary/50 hover:-translate-y-2 hover:bg-white/[0.02] hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.8)]",
+        className,
       )}
       // [PHYSICS]: ใช้ index เพื่อสร้าง Stagger Animation (ลดภาระ JS โดยใช้ CSS Variable)
       style={{ animationDelay: `${index * 100}ms` }}
@@ -75,9 +74,9 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
             <span className="text-6xl font-black tracking-tighter text-white drop-shadow-2xl md:text-7xl">
               {data.impactValue}
             </span>
-            <div className="mt-2 flex items-center gap-2 rounded-full bg-brand-primary px-4 py-1.5 text-black shadow-[0_0_20px_var(--color-brand-primary)]">
+            <div className="bg-brand-primary mt-2 flex items-center gap-2 rounded-full px-4 py-1.5 text-black shadow-[0_0_20px_var(--color-brand-primary)]">
               <IconRenderer name="TrendingUp" size={12} strokeWidth={3} />
-              <span className="text-[9px] font-black uppercase tracking-widest">
+              <span className="text-[9px] font-black tracking-widest uppercase">
                 {data.impactLabel || "Success Rate"}
               </span>
             </div>
@@ -85,10 +84,10 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
         )}
 
         {/* Category Badge */}
-        <div className="absolute left-6 top-6 z-20">
+        <div className="absolute top-6 left-6 z-20">
           <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/60 px-4 py-2 backdrop-blur-md">
-            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-primary shadow-[0_0_10px_var(--color-brand-primary)]" />
-            <span className="text-[8px] font-black uppercase tracking-[0.2em] text-white/90">
+            <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_10px_var(--color-brand-primary)]" />
+            <span className="text-[8px] font-black tracking-[0.2em] text-white/90 uppercase">
               {data.category}
             </span>
           </div>
@@ -98,10 +97,10 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
       {/* 02. NARRATIVE NODE */}
       <div className="flex flex-grow flex-col justify-between p-8">
         <div className="space-y-4">
-          <h3 className="text-2xl font-black uppercase tracking-tight text-white transition-colors duration-500 group-hover:text-brand-primary md:text-3xl">
+          <h3 className="group-hover:text-brand-primary text-2xl font-black tracking-tight text-white uppercase transition-colors duration-500 md:text-3xl">
             {data.title}
           </h3>
-          <p className="line-clamp-2 text-sm font-medium italic leading-relaxed text-gray-400">
+          <p className="line-clamp-2 text-sm leading-relaxed font-medium text-gray-400 italic">
             “{description}”
           </p>
         </div>
@@ -109,14 +108,14 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
         {/* 03. ACTION INTERFACE */}
         <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
           <div className="group/btn flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:border-brand-primary group-hover/btn:bg-brand-primary group-hover/btn:text-black group-hover/btn:shadow-[0_0_15px_rgba(34,197,94,0.4)]">
+            <div className="group-hover/btn:border-brand-primary group-hover/btn:bg-brand-primary flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:text-black group-hover/btn:shadow-[0_0_15px_rgba(34,197,94,0.4)]">
               <IconRenderer name="ArrowUpRight" size={20} />
             </div>
             <div className="flex flex-col">
-              <span className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-gray-600 transition-colors group-hover/btn:text-brand-primary">
+              <span className="group-hover/btn:text-brand-primary font-mono text-[8px] font-bold tracking-[0.2em] text-gray-600 uppercase transition-colors">
                 Explore
               </span>
-              <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 transition-colors group-hover/btn:text-white">
+              <span className="text-[10px] font-black tracking-widest text-gray-400 uppercase transition-colors group-hover/btn:text-white">
                 Read_Case
               </span>
             </div>
@@ -125,7 +124,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
           <IconRenderer
             name="ShieldCheck"
             size={20}
-            className="text-white/10 transition-colors duration-500 group-hover:text-brand-primary/20"
+            className="group-hover:text-brand-primary/20 text-white/10 transition-colors duration-500"
           />
         </div>
       </div>
