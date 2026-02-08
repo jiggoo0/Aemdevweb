@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: AREA_NODES_DATA v17.0.2 (NATIONWIDE_EXPANSION)
- * [STRATEGY]: Strategic Geolocation | High-Value Keywords | Deep Immutability
+ * [SYSTEM CORE]: AREA_NODES_DATA v17.0.4 (BRANDING_INTEGRATED)
+ * [STRATEGY]: Strategic Geolocation | Brand Authority Injection | Deep Immutability
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,7 +12,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "bangkok",
     province: "กรุงเทพมหานคร",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ กรุงเทพ | ออกแบบเว็บไซต์องค์กรและวางแผน SEO ครบวงจร",
+    title: "AEMDEVWEB รับทำเว็บไซต์ กรุงเทพฯ | ออกแบบเว็บไซต์องค์กรและวางแผน SEO ครบวงจร",
     description:
       "ช่วยให้ธุรกิจใน กทม. เติบโตได้จริง ด้วยเว็บไซต์ที่โหลดไว สวยงาม และติดหน้าแรก Google",
     longDescription:
@@ -21,7 +21,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ กรุงเทพ", "บริษัททำ SEO กทม", "จ้างทำเว็บไซต์มืออาชีพ"],
     heroImage: "/images/areas/bangkok-node.webp",
     priority: 100,
-    seoTitle: "รับทำเว็บไซต์ กรุงเทพ | ออกแบบเว็บไซต์ SEO คุณภาพสูงเพื่อธุรกิจองค์กร",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ กรุงเทพ ออกแบบเว็บไซต์ SEO คุณภาพสูงเพื่อธุรกิจองค์กร",
     seoDescription:
       "ยกระดับธุรกิจในกรุงเทพฯ ด้วยเว็บไซต์ที่เน้นยอดขายและการติดอันดับบน Google ด้วยมาตรฐานสากลปี 2026",
   },
@@ -29,7 +29,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "chiang-mai",
     province: "เชียงใหม่",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บธุรกิจท่องเที่ยวและคาเฟ่ สไตล์ล้านนาโมเดิร์น",
+    title: "AEMDEVWEB รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บธุรกิจท่องเที่ยวและคาเฟ่ สไตล์ล้านนาโมเดิร์น",
     description:
       "ดึงดูดนักท่องเที่ยวและ Digital Nomad ทั่วโลกด้วยเว็บไซต์ที่สวยงามและรองรับหลายภาษา",
     longDescription:
@@ -38,7 +38,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ เชียงใหม่", "ออกแบบเว็บโรงแรม เชียงใหม่", "ทำ SEO เชียงใหม่"],
     heroImage: "/images/areas/chiang-mai-node.webp",
     priority: 99,
-    seoTitle: "รับทำเว็บไซต์ เชียงใหม่ | บริการออกแบบเว็บธุรกิจและท่องเที่ยวครบวงจร",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ เชียงใหม่ บริการออกแบบเว็บธุรกิจและท่องเที่ยวครบวงจร",
     seoDescription:
       "ยกระดับธุรกิจในเชียงใหม่ให้ก้าวไกลระดับโลก ด้วยเว็บไซต์คุณภาพสูงที่ออกแบบมาเพื่อนักท่องเที่ยวโดยเฉพาะ",
   },
@@ -46,7 +46,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "chon-buri",
     province: "ชลบุรี",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ ชลบุรี | รองรับธุรกิจ EEC และโรงงานอุตสาหกรรมด้วยมาตรฐานสากล",
+    title: "AEMDEVWEB รับทำเว็บไซต์ ชลบุรี | รองรับธุรกิจ EEC และโรงงานอุตสาหกรรมด้วยมาตรฐานสากล",
     description:
       "เว็บไซต์สำหรับธุรกิจในพัทยาและนิคมอุตสาหกรรม เน้นความน่าเชื่อถือและระบบหลังบ้านที่แข็งแกร่ง",
     longDescription:
@@ -55,7 +55,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ ชลบุรี", "ทำเว็บโรงงาน ชลบุรี", "รับทำเว็บไซต์ พัทยา"],
     heroImage: "/images/areas/chon-buri-node.webp",
     priority: 98,
-    seoTitle: "รับทำเว็บไซต์ ชลบุรี | ออกแบบเว็บธุรกิจและโรงงานอุตสาหกรรม EEC",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ชลบุรี ออกแบบเว็บธุรกิจและโรงงานอุตสาหกรรม EEC",
     seoDescription:
       "สร้างความเชื่อมั่นให้คู่ค้าต่างชาติ ด้วยเว็บไซต์มาตรฐานโรงงานและธุรกิจในชลบุรี-พัทยา",
   },
@@ -63,7 +63,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "phuket",
     province: "ภูเก็ต",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ ภูเก็ต | เจาะกลุ่มนักท่องเที่ยวไฮเอนด์ด้วยดีไซน์ระดับ Luxury",
+    title: "AEMDEVWEB รับทำเว็บไซต์ ภูเก็ต | เจาะกลุ่มนักท่องเที่ยวไฮเอนด์ด้วยดีไซน์ระดับ Luxury",
     description: "เว็บไซต์โรงแรม รีสอร์ท และอสังหาฯ ในภูเก็ต ที่สวยงามและโหลดไวบนมือถือ",
     longDescription:
       "ภูเก็ตคือไข่มุกอันดามันที่ต้อนรับคนทั้งโลก เว็บไซต์ของคุณคือหน้าด่านแรก เราเน้นดีไซน์ที่หรูหรา (Luxury) ภาพคมชัด และระบบจองที่ง่าย เพื่อเปลี่ยนผู้ชมให้กลายเป็นแขกคนพิเศษของคุณ",
@@ -71,7 +71,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ ภูเก็ต", "ออกแบบเว็บโรงแรม ภูเก็ต", "ทำเว็บอสังหา ภูเก็ต"],
     heroImage: "/images/areas/phuket-node.webp",
     priority: 97,
-    seoTitle: "รับทำเว็บไซต์ ภูเก็ต | บริการทำเว็บโรงแรมและอสังหาฯ ระดับพรีเมียม",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ภูเก็ต บริการทำเว็บโรงแรมและอสังหาฯ ระดับพรีเมียม",
     seoDescription:
       "ดึงดูดลูกค้าเกรดพรีเมียมทั่วโลก ด้วยเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจในภูเก็ตโดยเฉพาะ",
   },
@@ -81,7 +81,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "nakhon-sawan",
     province: "นครสวรรค์",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ นครสวรรค์ | ยกระดับร้านค้าและธุรกิจในพื้นที่สู่ระบบออนไลน์เต็มตัว",
+    title: "AEMDEVWEB รับทำเว็บไซต์ นครสวรรค์ | ยกระดับร้านค้าและธุรกิจในพื้นที่สู่ระบบออนไลน์เต็มตัว",
     description: "สร้างความน่าเชื่อถือให้ร้านค้าในนครสวรรค์ ด้วยเว็บไซต์ที่ดูดีและใช้งานง่าย",
     longDescription:
       "เราช่วยให้ร้านค้าและธุรกิจในนครสวรรค์มีหน้าร้านบนโลกออนไลน์ที่ได้มาตรฐาน ช่วยให้คู่ค้าและลูกค้ามั่นใจในธุรกิจของคุณมากขึ้น พร้อมระบบจัดการข้อมูลที่ทำให้การทำธุรกิจเป็นเรื่องง่ายกว่าเดิม",
@@ -89,7 +89,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ นครสวรรค์", "ทำเว็บธุรกิจ นครสวรรค์", "บริการ SEO นครสวรรค์"],
     heroImage: "/images/areas/nakhon-sawan-node.webp",
     priority: 96,
-    seoTitle: "รับทำเว็บไซต์ นครสวรรค์ | พัฒนาเว็บไซต์เพื่อการค้าและความเชื่อมั่นทางธุรกิจ",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ นครสวรรค์ พัฒนาเว็บไซต์เพื่อการค้าและความเชื่อมั่นทางธุรกิจ",
     seoDescription:
       "สร้างตัวตนออนไลน์ให้ธุรกิจในนครสวรรค์โดดเด่นกว่าใคร ด้วยทีมงานทำเว็บและ SEO มืออาชีพ",
   },
@@ -97,7 +97,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "tak",
     province: "ตาก",
     templateSlug: "salepage",
-    title: "รับทำเว็บไซต์ ตาก | ออกแบบ Sale Page ช่วยขายของ สำหรับธุรกิจในแม่สอดและเขตชายแดน",
+    title: "AEMDEVWEB รับทำเว็บไซต์ ตาก | ออกแบบ Sale Page ช่วยขายของ สำหรับธุรกิจในแม่สอดและเขตชายแดน",
     description: "เน้นปิดการขายด้วยหน้าเว็บเดียวที่ข้อมูลครบ พร้อมปุ่มทักแชทสอบถามได้ทันที",
     longDescription:
       "สำหรับร้านค้าในตากและแม่สอด เราเน้นทำเว็บไซต์ที่ช่วยขายของได้จริง ด้วยระบบ Sale Page ที่ออกแบบมาให้อ่านง่าย จบงานไว รองรับการยิงโฆษณาและเชื่อมต่อกับ Line OA ให้ลูกค้าทักหาคุณได้สะดวกที่สุด",
@@ -105,7 +105,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำ Sale Page ตาก", "ออกแบบเว็บขายสินค้า แม่สอด", "ทำเว็บไซต์ร้านค้า ตาก"],
     heroImage: "/images/areas/tak-node.webp",
     priority: 95,
-    seoTitle: "รับทำหน้าปิดการขาย ตาก | รับทำเว็บไซต์ขายสินค้าออนไลน์ในแม่สอด",
+    seoTitle: "AEMDEVWEB | รับทำหน้าปิดการขาย ตาก รับทำเว็บไซต์ขายสินค้าออนไลน์ในแม่สอด",
     seoDescription:
       "เพิ่มยอดขายให้ธุรกิจในจังหวัดตากด้วยระบบ Sale Page ที่ใช้งานง่าย และช่วยให้ลูกค้าตัดสินใจซื้อได้จริง",
   },
@@ -115,7 +115,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "kamphaeng-phet",
     province: "กำแพงเพชร",
     templateSlug: "local",
-    title: "รับทำเว็บไซต์ กำแพงเพชร | ช่วยให้คนในพื้นที่หาธุรกิจของคุณเจอง่ายๆ บน Google",
+    title: "AEMDEVWEB รับทำเว็บไซต์ กำแพงเพชร | ช่วยให้คนในพื้นที่หาธุรกิจของคุณเจอง่ายๆ บน Google",
     description: "เน้นทำให้ร้านค้าในกำแพงเพชรติดอันดับการค้นหาและแสดงผลบนแผนที่ (Google Maps)",
     longDescription:
       "ช่วยให้คนกำแพงเพชรหาธุรกิจของคุณเจอได้ทันทีผ่านมือถือ เราเน้นวางโครงสร้างให้ร้านค้าท้องถิ่นปรากฏบนหน้าแรกของการค้นหา พร้อมระบบติดต่อกลับที่รวดเร็ว ช่วยเพิ่มโอกาสให้ลูกค้าแวะมาที่ร้านมากขึ้น",
@@ -123,7 +123,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ กำแพงเพชร", "ทำ SEO กำแพงเพชร", "จ้างทำเว็บร้านค้ากำแพงเพชร"],
     heroImage: "/images/areas/kamphaeng-phet-node.webp",
     priority: 90,
-    seoTitle: "รับทำเว็บไซต์ กำแพงเพชร | บริการทำ SEO ท้องถิ่นให้ธุรกิจติดหน้าแรก",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ กำแพงเพชร บริการทำ SEO ท้องถิ่นให้ธุรกิจติดหน้าแรก",
     seoDescription:
       "รับออกแบบเว็บไซต์ร้านค้าในกำแพงเพชร เน้นความสวยงาม ใช้งานง่าย และหาเจอบนหน้า Google",
   },
@@ -131,7 +131,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "phichit",
     province: "พิจิตร",
     templateSlug: "local",
-    title: "รับทำเว็บไซต์ พิจิตร | สร้างหน้าร้านออนไลน์ให้ธุรกิจบริการ ดูดีและน่าเชื่อถือ",
+    title: "AEMDEVWEB รับทำเว็บไซต์ พิจิตร | สร้างหน้าร้านออนไลน์ให้ธุรกิจบริการ ดูดีและน่าเชื่อถือ",
     description: "เว็บไซต์ใช้งานง่าย ข้อมูลครบ และเน้นให้ลูกค้าในพิจิตรติดต่อสอบถามได้สะดวก",
     longDescription:
       "เราออกแบบเว็บไซต์ที่ช่วยให้ธุรกิจในพิจิตรดูเป็นมืออาชีพมากขึ้น จัดวางข้อมูลและปุ่มติดต่อให้ชัดเจน เพื่อให้ลูกค้าที่ค้นหาเจอสามารถโทรหาหรือทักแชทถามข้อมูลกับคุณได้ทันทีในคลิกเดียว",
@@ -139,7 +139,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ พิจิตร", "ออกแบบเว็บไซต์บริการ พิจิตร", "ทำ SEO พิจิตร"],
     heroImage: "/images/areas/phichit-node.webp",
     priority: 85,
-    seoTitle: "รับทำเว็บไซต์ พิจิตร | ออกแบบเว็บไซต์ที่รองรับมือถือและเน้นการติดต่อ",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ พิจิตร ออกแบบเว็บไซต์ที่รองรับมือถือและเน้นการติดต่อ",
     seoDescription:
       "ยกระดับร้านค้าในจังหวัดพิจิตรให้มีมาตรฐาน ด้วยเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจในพื้นที่โดยเฉพาะ",
   },
@@ -147,7 +147,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     slug: "sukhothai",
     province: "สุโขทัย",
     templateSlug: "corporate",
-    title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ที่พักและท่องเที่ยว เพื่อรองรับลูกค้าจากทั่วโลก",
+    title: "AEMDEVWEB รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ที่พักและท่องเที่ยว เพื่อรองรับลูกค้าจากทั่วโลก",
     description:
       "เน้นดีไซน์สวยงาม ภาพลักษณ์ดูดี และให้ข้อมูลการเดินทางที่ครบถ้วนสำหรับนักท่องเที่ยว",
     longDescription:
@@ -156,7 +156,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     keywords: ["รับทำเว็บไซต์ สุโขทัย", "ทำเว็บโรงแรม สุโขทัย", "ออกแบบเว็บไซต์ท่องเที่ยว"],
     heroImage: "/images/areas/sukhothai-node.webp",
     priority: 80,
-    seoTitle: "รับทำเว็บไซต์ สุโขทัย | บริการออกแบบเว็บไซต์ธุรกิจท่องเที่ยวและรีสอร์ท",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ สุโขทัย บริการออกแบบเว็บไซต์ธุรกิจท่องเที่ยวและรีสอร์ท",
     seoDescription:
       "สร้างความประทับใจให้ลูกค้าด้วยเว็บไซต์ท่องเที่ยวสุโขทัยที่สวยงาม ใช้งานง่าย และข้อมูลครบถ้วน",
   },
@@ -165,7 +165,6 @@ export const AREA_NODES: readonly AreaNode[] = [
 /**
  * [HELPER]: Get Featured Areas
  * เลือกข้อมูลพื้นที่ที่ต้องการแสดงผล โดยเรียงตามลำดับความสำคัญ (Priority)
- * [UPDATE]: ขยายเป็น 6 อันดับแรก เพื่อโชว์ความครอบคลุม (Nationwide) มากขึ้น
  */
 export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.priority).slice(0, 6);
 

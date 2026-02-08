@@ -45,7 +45,6 @@
 │   │   └── page.tsx
 │   └── terms
 │       └── page.tsx
-├── color.html
 ├── components
 │   ├── features
 │   │   ├── areas
@@ -101,7 +100,7 @@
 │       └── sonner.tsx
 ├── components.json
 ├── config
-│   ├── 00-SYSTEM-MANDATE.md
+│   ├── _00-SYSTEM-MANDATE.md
 │   └── _01-SYSTEM-PROMPT-EXTENSION.md
 ├── constants
 │   ├── area-nodes.ts
@@ -130,7 +129,6 @@
 ├── lib
 │   ├── cms.ts
 │   ├── schema.ts
-│   ├── seo.ts
 │   └── utils.ts
 ├── mdx-components.tsx
 ├── next-env.d.ts
@@ -151,10 +149,12 @@
 │   └── images
 │       ├── areas
 │       │   ├── bangkok-node.webp
+│       │   ├── chiang-mai-node.webp
+│       │   ├── chon-buri-node.webp
 │       │   ├── kamphaeng-phet-node.webp
 │       │   ├── nakhon-sawan-node.webp
-│       │   ├── nakhon-sawan-node.webp (2)
 │       │   ├── phichit-node.webp
+│       │   ├── phuket-node.webp
 │       │   ├── preview.webp
 │       │   ├── sukhothai-node.webp
 │       │   └── tak-node.webp
@@ -175,7 +175,11 @@
 │       │   ├── preview.webp
 │       │   └── unlink-reputation.webp
 │       ├── expert
+│       ├── hero
+│       │   └── main-hero.webp
 │       ├── icon-192.png
+│       ├── og-default.webp
+│       ├── og-main.png
 │       ├── seo
 │       │   ├── advanced-schema-markup.webp
 │       │   ├── core-web-vitals-speed.webp
@@ -216,7 +220,6 @@
 │       │   └── webrental
 │       │       └── og.webp
 │       └── ui
-├── structure.txt
 ├── tsconfig.json
 ├── tsconfig.tsbuildinfo
 └── types
