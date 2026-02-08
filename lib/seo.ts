@@ -1,107 +1,146 @@
-/** @format */
-// พิกัดข้อมูล: lib/seo.ts
-// หน้าที่: ศูนย์กลางจัดการพิกัดข้อมูล SEO และการสร้าง Entity Authority
-// มาตรฐาน: Next.js 16 | Ultra-Deep Level 7 | Specialist Logic
-// นโยบาย: No backend • No form submission • LINE-only communication
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
-
-import { seoServicesData } from "@/constants/seo-services";
-import { siteConfig } from "@/constants/site-config";
-import { SeoServiceItem } from "@/types/seo";
-
 /**
- * [DATA RETRIEVAL]: ค้นหาข้อมูลบริการ SEO ผ่านพิกัด Slug
- * หน้าที่: ดึงข้อมูล Service Item พร้อมการันตีความถูกต้องของประเภทข้อมูล (Strict Typing)
+ * [SYSTEM CORE]: SEO_GENERATOR_ENGINE v17.0.2 (STABILIZED)
+ * [STRATEGY]: Automated JSON-LD Injection | Schema Graphing | Type-Safe Logic
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
-export function getSeoServiceBySlug(slug: string): SeoServiceItem | undefined {
-  if (!slug) return undefined;
-  return seoServicesData.find((service) => service.slug === slug);
+
+import { SITE_CONFIG } from "@/constants/site-config";
+import type { AreaNode, TemplateMasterData } from "@/types";
+
+// --- TYPES ---
+interface BreadcrumbItem {
+  readonly name: string;
+  readonly item: string;
 }
 
 /**
- * [PATH GENERATOR]: ดึงรายการพิกัด Slug ทั้งหมด
- * หน้าที่: สนับสนุนระบบ generateStaticParams เพื่อทำ Static Site Generation (SSG)
+ * [GENERATOR]: PERSON_SCHEMA (สำหรับหน้า About / Bio)
+ * สร้างข้อมูลโครงสร้างระบุตัวตนผู้เชี่ยวชาญ (Expert Authority)
  */
-export function getAllSeoSlugs(): string[] {
-  return seoServicesData.map((service) => service.slug);
-}
-
-/**
- * [SCHEMA GENERATOR]: ระบบสร้างพิกัดข้อมูลโครงสร้าง (Structured Data)
- * ยุทธศาสตร์: สร้างความเชื่อมโยงระหว่าง "บุคคล" และ "องค์กร" (Entity Linking)
- */
-
-// 1. Organization Schema: ยืนยันตัวตนแบรนด์ AEMDEVWEB
-export function getOrganizationSchema() {
+export function generatePersonSchema() {
   return {
-    name: siteConfig.company.name,
-    url: siteConfig.project.url,
-    logo: `${siteConfig.project.url}${siteConfig.project.logo}`,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Bangkok",
-      addressCountry: "TH",
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: SITE_CONFIG.expert.displayName,
+    alternateName: SITE_CONFIG.expert.legalNameThai,
+    jobTitle: SITE_CONFIG.expert.jobTitle,
+    description: `ผู้เชี่ยวชาญด้าน Technical SEO และ Web Architecture ประสบการณ์กว่า 10 ปี ผู้อยู่เบื้องหลังความสำเร็จของธุรกิจ SME ไทยด้วยกลยุทธ์ ${SITE_CONFIG.brandName}`,
+    image: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.expert.avatar}`,
+    url: `${SITE_CONFIG.siteUrl}/about`,
+    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github, SITE_CONFIG.links.line],
+    worksFor: {
+      "@type": "Organization",
+      name: SITE_CONFIG.brandName,
+      url: SITE_CONFIG.siteUrl,
     },
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer support",
-      url: siteConfig.links.line,
+    alumniOf: {
+      "@type": "Organization",
+      name: "Computer Engineering", // สามารถปรับเป็นสถาบันจริงได้
     },
-    sameAs: [
-      siteConfig.links.facebook,
-      siteConfig.links.linkedin,
-      siteConfig.links.github,
-      siteConfig.links.x,
+    knowsAbout: [
+      "Technical SEO",
+      "Web Architecture",
+      "Next.js Development",
+      "Conversion Rate Optimization",
+      "Digital Strategy",
     ],
   };
 }
 
-// 2. Person Schema: ยืนยันตัวตนผู้เชี่ยวชาญ (นายเอ็มซ่ามากส์)
-export function getPersonSchema() {
+/**
+ * [GENERATOR]: BREADCRUMB_SCHEMA (สำหรับทุกหน้าย่อย)
+ * สร้างเส้นทางนำทางเพื่อให้ Google เข้าใจโครงสร้างเว็บไซต์
+ */
+export function generateBreadcrumbSchema(items: readonly BreadcrumbItem[]) {
   return {
-    name: siteConfig.expert.name,
-    alternateName: siteConfig.expert.realName,
-    jobTitle: siteConfig.expert.role,
-    url: siteConfig.links.personal,
-    description: siteConfig.expert.bio,
-    sameAs: [siteConfig.links.linkedin, siteConfig.links.github],
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.item,
+    })),
   };
 }
 
-// 3. Service Schema: แปลงข้อมูลบริการเป็น Schema.org Service
-export function getServiceSchema(service: SeoServiceItem) {
+/**
+ * [GENERATOR]: SERVICE_SCHEMA (สำหรับหน้า Service Detail)
+ * สร้างข้อมูลบริการระดับ Professional Service
+ */
+export function generateServiceSchema(data: TemplateMasterData) {
   return {
-    name: service.title,
-    description: service.description,
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: data.title,
+    name: `${data.title} | ${SITE_CONFIG.brandName}`,
+    description: data.description,
     provider: {
       "@type": "Organization",
-      name: siteConfig.company.name,
+      name: SITE_CONFIG.brandName,
+      url: SITE_CONFIG.siteUrl,
+      logo: `${SITE_CONFIG.siteUrl}/images/logo.webp`,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Thailand",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Service Features",
+      itemListElement: (data.coreFeatures || []).map((feature, index) => ({
+        "@type": "Offer",
+        position: index + 1,
+        itemOffered: {
+          "@type": "Service",
+          name: feature.title,
+          description: feature.description,
+        },
+      })),
     },
     offers: {
       "@type": "Offer",
-      price: service.pricing.price,
-      priceCurrency: service.pricing.currency,
+      price: (data.priceValue || 0).toString(),
+      priceCurrency: data.currency || "THB",
+      availability: "https://schema.org/InStock",
+      url: `${SITE_CONFIG.siteUrl}/services/${data.templateSlug}`,
     },
   };
 }
 
 /**
- * [ASSET MAPPING]: จัดการพิกัดรูปภาพประกอบบริการ
+ * [GENERATOR]: LOCAL_BUSINESS_SCHEMA (สำหรับหน้า Area Detail)
+ * สร้างข้อมูลธุรกิจท้องถิ่นเพื่อดันอันดับ Local SEO
  */
-export function getSeoImagePath(slug: string): string {
-  return `/images/seo/${slug}.webp`;
-}
-
-/**
- * [VALIDATOR]: ตรวจสอบสถานะพิกัดบริการในฐานข้อมูล Immutable
- */
-export function isSeoServiceExist(slug: string): boolean {
-  return seoServicesData.some((service) => service.slug === slug);
-}
-
-/**
- * [FILTER]: คัดกรองรายการบริการยุทธศาสตร์ (Popular Nodes)
- */
-export function getPopularSeoServices(): SeoServiceItem[] {
-  return seoServicesData.filter((service) => service.pricing.isPopular);
+export function generateLocalBusinessSchema(data: AreaNode) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: `${SITE_CONFIG.brandName} - พื้นที่ให้บริการ ${data.province}`,
+    description: data.seoDescription || data.description,
+    image: `${SITE_CONFIG.siteUrl}${data.heroImage || "/images/og-default.webp"}`,
+    url: `${SITE_CONFIG.siteUrl}/areas/${data.slug}`,
+    telephone: SITE_CONFIG.contact.phone,
+    priceRange: "฿฿",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: data.province,
+      addressRegion: "Thailand",
+      addressCountry: "TH",
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: data.province,
+      },
+      ...(data.districts || []).map((district) => ({
+        "@type": "City",
+        name: district,
+      })),
+    ],
+    brand: {
+      "@type": "Brand",
+      name: SITE_CONFIG.brandName,
+    },
+  };
 }

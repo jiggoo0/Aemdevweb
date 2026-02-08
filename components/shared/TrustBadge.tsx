@@ -1,126 +1,116 @@
-/** @format */
+/**
+ * [SHARED COMPONENT]: TRUST_BADGE_SYSTEM v17.0.2 (KINETIC_CHIPS)
+ * [STRATEGY]: Modular Chips | Kinetic Glow | Semantic Reliability
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
 
 "use client";
 
-import React from "react";
-import { motion, Variants } from "framer-motion";
-import { ShieldCheck, Zap, BarChart3, Cpu, Sparkles } from "lucide-react";
+import React, { memo } from "react";
+import { motion, type Variants } from "framer-motion";
+import { cn } from "@/lib/utils";
+import IconRenderer from "@/components/ui/IconRenderer";
+import type { IconName } from "@/components/ui/IconRenderer"; // ใช้ Type จาก Registry โดยตรงเพื่อความแม่นยำ
 
-/**
- * TrustBadge - ระบบยืนยันมาตรฐานคุณภาพ (The Authority Hub)
- * -------------------------------------------------------------------------
- * ยุทธศาสตร์: การสร้างความเชื่อมั่นผ่านตัวชี้วัดประสิทธิภาพระดับสากล
- */
-export default function TrustBadge() {
-  const standards = [
-    {
-      icon: <Zap size={24} />,
-      label: "Loading Performance",
-      value: "LCP < 0.8s Target",
-      desc: "ความเร็วการโหลดระดับเป็นเลิศ",
-    },
-    {
-      icon: <Cpu size={24} />,
-      label: "System Structure",
-      value: "Next.js 16.1 Native",
-      desc: "โครงสร้างระบบที่ทันสมัยที่สุด",
-    },
-    {
-      icon: <BarChart3 size={24} />,
-      label: "Search Visibility",
-      value: "AI Search Ready",
-      desc: "รองรับระบบการค้นหายุคใหม่",
-    },
-    {
-      icon: <ShieldCheck size={24} />,
-      label: "Quality Standard",
-      value: "95-100 Performance",
-      desc: "ผลลัพธ์คะแนนระดับสูงสุด",
-    },
-  ];
+interface TrustNode {
+  readonly label: string;
+  readonly icon: IconName;
+  readonly status: "active" | "standby";
+}
 
-  /** * Animation Variants:
-   * การจัดจังหวะแสดงผลข้อมูลเพื่อความลื่นไหลและดูเป็นมืออาชีพ
-   */
+const TRUST_NODES: readonly TrustNode[] = [
+  { label: "High-Speed Protocol", icon: "Zap", status: "active" },
+  { label: "SEO Architecture", icon: "SearchCheck", status: "active" },
+  { label: "Bank-Grade Security", icon: "ShieldCheck", status: "active" },
+  { label: "Responsive Geometry", icon: "Layers", status: "active" },
+  { label: "Next.js Core", icon: "Cpu", status: "active" },
+];
+
+const TrustBadge = () => {
+  // [PHYSICS]: Animation Variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    show: {
-      y: 0,
+    visible: {
       opacity: 1,
       transition: {
-        duration: 0.5,
-        ease: "easeOut" as const,
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
       },
     },
   };
 
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9, filter: "blur(4px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { type: "spring", stiffness: 100, damping: 15 },
+    },
+  };
+
   return (
-    <section className="relative w-full overflow-hidden border-y border-slate-50 bg-white py-20 lg:py-24">
-      {/* พื้นหลังลายเส้นตารางเชิงระบบจางๆ เพื่อเพิ่มมิติความประณีต */}
-      <div
-        className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-[0.02]"
-        aria-hidden="true"
-      />
+    <div className="flex w-full flex-col items-center justify-center py-10">
+      {/* 01. STATUS HEADER: เส้นนำสายตา Kinetic Line */}
+      <motion.div
+        initial={{ opacity: 0, width: "0%" }}
+        whileInView={{ opacity: 1, width: "100%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, delay: 0.2, ease: "circOut" }}
+        className="mb-8 flex max-w-xs items-center justify-center gap-4 opacity-60"
+      >
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <span className="font-mono text-[9px] font-black tracking-[0.4em] whitespace-nowrap text-white/40 uppercase">
+          Trusted_Infrastructure
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      </motion.div>
 
-      <div className="relative z-10 container mx-auto px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 md:grid-cols-4"
-        >
-          {standards.map((item, idx) => (
-            <motion.div
-              key={idx}
-              variants={itemVariants}
-              className="group flex flex-col items-center gap-6 text-center md:items-start md:text-left"
-            >
-              {/* ส่วนแสดงไอคอนมาตรฐานคุณภาพ */}
-              <div className="relative">
-                <div className="flex h-20 w-20 items-center justify-center rounded-[2rem] bg-slate-50 text-slate-400 transition-all duration-700 group-hover:scale-110 group-hover:rotate-[10deg] group-hover:bg-slate-950 group-hover:text-emerald-500 group-hover:shadow-[0_20px_50px_-15px_rgba(16,185,129,0.3)]">
-                  {item.icon}
-                  <Sparkles
-                    className="absolute -top-1 -right-1 text-emerald-500 opacity-0 transition-opacity group-hover:opacity-100"
-                    size={16}
-                  />
-                </div>
-                {/* ลำดับการตรวจสอบมาตรฐาน */}
-                <span className="font-heading absolute -right-2 -bottom-2 text-[8px] font-black tracking-widest text-slate-200 uppercase group-hover:text-emerald-500/40">
-                  Standard_{idx + 1}
-                </span>
-              </div>
+      {/* 02. MODULE GRID: การแสดงผลแบบชิป */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="flex flex-wrap justify-center gap-3 md:gap-4"
+      >
+        {TRUST_NODES.map((node) => (
+          <motion.div
+            key={node.label}
+            variants={itemVariants}
+            whileHover={{ scale: 1.05, y: -2 }}
+            className={cn(
+              "group relative flex cursor-default items-center gap-3 overflow-hidden rounded-full",
+              "border border-white/5 bg-white/[0.03] px-5 py-2.5 backdrop-blur-md",
+              "hover:border-brand-primary/40 transition-all duration-300 hover:bg-white/[0.08] hover:shadow-[0_0_20px_-5px_rgba(34,197,94,0.15)]",
+            )}
+          >
+            {/* Active Indicator Dot */}
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-75"></span>
+              <span className="bg-brand-primary/50 group-hover:bg-brand-primary relative inline-flex h-1.5 w-1.5 rounded-full transition-colors duration-300"></span>
+            </span>
 
-              <div className="space-y-3">
-                <div className="font-heading text-[10px] font-black tracking-[0.4em] text-slate-300 uppercase italic">
-                  {item.label}
-                </div>
+            {/* Icon & Label */}
+            <div className="flex items-center gap-2.5">
+              <IconRenderer
+                name={node.icon}
+                size={14}
+                className="group-hover:text-brand-primary text-gray-500 transition-colors duration-300"
+              />
+              <span className="font-mono text-[10px] font-bold tracking-wider text-gray-400 uppercase transition-colors duration-300 group-hover:text-white">
+                {node.label}
+              </span>
+            </div>
 
-                <div className="font-heading text-2xl font-black tracking-tighter text-slate-950 italic transition-colors group-hover:text-emerald-600 lg:text-3xl">
-                  {item.value}
-                </div>
-
-                <p className="font-body text-[11px] font-bold tracking-wide text-slate-400 opacity-0 transition-all duration-500 group-hover:translate-x-1 group-hover:opacity-100">
-                  {item.desc}
-                </p>
-
-                {/* เส้นบ่งบอกประสิทธิภาพที่ตอบสนองตามการโต้ตอบ */}
-                <div className="relative h-[2px] w-12 overflow-hidden bg-slate-100">
-                  <div className="absolute inset-0 w-0 bg-emerald-500 transition-all duration-700 ease-in-out group-hover:w-full" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+            {/* Shine Effect on Hover */}
+            <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+          </motion.div>
+        ))}
+      </motion.div>
+    </div>
   );
-}
+};
+
+export default memo(TrustBadge);

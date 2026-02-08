@@ -1,31 +1,65 @@
-// @format
-// พิกัดข้อมูล: lib/utils.ts
-// หน้าที่: รวมชุดเครื่องมือประมวลผลกลาง (Core Utility Engine)
-// มาตรฐาน: Ultra-Deep Level 7 | Tailwind 4 Compatible
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
+/**
+ * [SYSTEM CORE]: GENERAL_UTILITIES v16.2.1 (STABILIZED)
+ * [PLAN]: Performance-First Helpers | Thai Language Support | SEO Readiness
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
 
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { siteConfig } from "@/constants/site-config";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 /**
- * [UTILITY: cn]
- * หน้าที่: ผสานคลาส Tailwind และจัดการพิกัดสี OKLCH ไม่ให้ทับซ้อนกัน
- * ยุทธศาสตร์: ลดขนาดรหัส HTML และเพิ่มประสิทธิภาพการเรนเดอร์
+ * [UTILITY]: Class Merger (cn)
+ * จัดการการรวม Tailwind Classes และแก้ไขปัญหา Style Conflict
  */
-export function cn(...inputs: ClassValue[]) {
+export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
 /**
- * [UTILITY: formatThaiDate]
- * หน้าที่: แปลงพิกัดเวลาเป็นภาษาไทยมาตรฐาน
+ * [UTILITY]: Currency Formatter
+ * แสดงผลราคา (รองรับหลักเกณฑ์ EEAT สำหรับหน้า Pricing)
  */
-export function formatThaiDate(date: string | Date): string {
-  const targetDate = new Date(date);
-  if (isNaN(targetDate.getTime())) return "ไม่ระบุพิกัดเวลา";
+export function formatCurrency(
+  value: number,
+  currency: string = "THB",
+  locale: string = "th-TH",
+): string {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(value);
+}
 
-  return targetDate.toLocaleDateString("th-TH", {
+/**
+ * [UTILITY]: Thai-Ready Slugify
+ * สร้าง URL Slug รองรับภาษาไทย (SEO Authority Friendly)
+ */
+export function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // ช่องว่างเป็น -
+    .replace(/[^\u0E00-\u0E7Fa-z0-9-]/g, "") // อนุญาตเฉพาะ อักษรไทย, a-z, 0-9 และ -
+    .replace(/-+/g, "-") // ลดทอน -- ที่ซ้ำซ้อน
+    .replace(/^-+|-+$/g, ""); // ลบ - หัวท้าย
+}
+
+/**
+ * [UTILITY]: Date Formatter
+ * ปรับรูปแบบวันที่ (Specialist Peer-to-Peer Tone)
+ */
+export function formatDate(date: string | Date, locale: string = "th-TH"): string {
+  if (!date) return "";
+  const d = typeof date === "string" ? new Date(date) : date;
+
+  // ตรวจสอบความถูกต้องของ Date Object
+  if (isNaN(d.getTime())) return "";
+
+  return d.toLocaleDateString(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -33,38 +67,42 @@ export function formatThaiDate(date: string | Date): string {
 }
 
 /**
- * [UTILITY: absoluteUrl]
- * หน้าที่: สร้างพิกัด URL แบบเต็ม (Canonical URL) สำหรับ Metadata และ SEO
- * สำคัญ: ใช้เพื่อกำจัดจุดเสี่ยงเรื่อง Broken Link ในระบบการค้นหา
+ * [UTILITY]: Advanced Reading Time
+ * คำนวณเวลาอ่าน (รองรับความหนาแน่นอักขระภาษาไทย)
  */
-export function absoluteUrl(path: string) {
-  return `${siteConfig.project.url}${path.startsWith("/") ? path : `/${path}`}`;
-}
+export function getReadingTime(content: string): string {
+  if (!content) return "0 นาที";
 
-/**
- * [UTILITY: slugify]
- * หน้าที่: ฟอกข้อความให้กลายเป็นพิกัด URL (Slug) ที่สะอาด
- * มาตรฐาน: รองรับภาษาไทยและภาษาอังกฤษเพื่อระบบบทความระดับสากล
- */
-export function slugify(text: string) {
-  return text
-    .toString()
-    .toLowerCase()
+  const wordsPerMinute = 200;
+
+  // Clean content: ลบ HTML tags ออกก่อนคำนวณ
+  const cleanContent = content.replace(/<\/?[^>]+(>|$)/g, "");
+
+  // ภาษาไทย: ใช้ค่าเฉลี่ย 4 ตัวอักษรต่อ 1 คำ
+  const thaiCharCount = cleanContent.replace(/[^\u0E00-\u0E7F]/g, "").length;
+  // ภาษาอังกฤษ: แยกด้วยช่องว่างตามปกติ
+  const englishWordCount = cleanContent
+    .replace(/[\u0E00-\u0E7F]/g, " ")
     .trim()
-    .replace(/\s+/g, "-") // เปลี่ยนช่องว่างเป็นขีด
-    .replace(/&/g, "-and-") // เปลี่ยน & เป็น and
-    .replace(/[^\u0E00-\u0E7F\w-]+/g, "") // ลบอักขระพิเศษยกเว้นภาษาไทยและอักษรปกติ
-    .replace(/--+/g, "-"); // ลบขีดซ้ำ
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  const totalWords = thaiCharCount / 4 + englishWordCount;
+  const minutes = Math.ceil(totalWords / wordsPerMinute);
+
+  return `${minutes} นาที`;
 }
 
 /**
- * [UTILITY: formatCurrency]
- * หน้าที่: จัดการพิกัดงบประมาณในระบบ Sale Page
+ * [UTILITY]: Full URL Generator
+ * สร้าง Absolute URL ที่ปลอดภัยสำหรับ Meta Tag / OG Image
  */
-export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat("th-TH", {
-    style: "currency",
-    currency: "THB",
-    minimumFractionDigits: 0,
-  }).format(value);
+export function absoluteUrl(path: string): string {
+  const baseUrl = SITE_CONFIG.siteUrl?.replace(/\/$/, "") || "";
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+
+  // ป้องกันกรณี path เป็น root อยู่แล้ว
+  if (path === "/" || !path) return baseUrl;
+
+  return `${baseUrl}${cleanPath}`;
 }

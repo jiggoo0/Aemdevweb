@@ -1,81 +1,78 @@
-// @format
-// พิกัดข้อมูล: app/layout.tsx
-// หน้าที่: พิกัดควบคุมโครงสร้างพื้นฐานและระบบรากของเว็บไซต์ (Root Layout)
-// มาตรฐาน: Next.js 16 | Tailwind 4 (OKLCH) | Ultra-Deep Level 7
-// ควบคุมระบบโดย: นายเอ็มซ่ามากส์
+/**
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.0.2 (FINAL_STABILIZED)
+ * [STRATEGY]: Zero-Jitter Font Loading | SEO Authority Protocol | Interaction Safety
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
 
-import React from "react";
-import { Metadata, Viewport } from "next";
-import NextTopLoader from "nextjs-toploader";
-import { IBM_Plex_Sans_Thai, Anuphan } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 
+// --- Infrastructure & Constants ---
+import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-import { siteConfig } from "@/constants/site-config";
-import { JsonLd } from "@/components/seo/JsonLd";
+
+// --- Layout & Global UI ---
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import TopLoader from "@/components/layout/TopLoader";
+import LineStickyButton from "@/components/shared/LineStickyButton";
 import { Toaster } from "@/components/ui/sonner";
 
-import "@/app/globals.css";
+// --- Styles ---
+import "./globals.css";
 
-/**
- * [DNA FONT SYSTEM 2026]
- * IBM Plex Sans Thai: สำหรับส่วนหัวพิกัดข้อมูล (ความมั่นคงและมาตรฐานสากล)
- * Anuphan: สำหรับเนื้อหาหลักของระบบงาน (ความชัดเจนและร่วมสมัย)
- */
-const fontHeading = IBM_Plex_Sans_Thai({
-  subsets: ["thai", "latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-heading",
+/* [A] FONT ORCHESTRATION */
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
   display: "swap",
+  preload: true,
 });
 
-const fontBody = Anuphan({
+const fontThai = IBM_Plex_Sans_Thai({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["thai", "latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-body",
+  variable: "--font-thai",
   display: "swap",
+  preload: true,
 });
 
-/**
- * [SEARCH ENGINE PERFORMANCE]: การกำหนดพิกัดชุดข้อมูล Metadata
- * เน้นความแม่นยำของพิกัดตัวตนแบรนด์บนระบบการค้นหายุคใหม่
- */
+/* [B] SEO & METADATA PROTOCOL */
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.project.title,
-    template: `%s | ${siteConfig.project.name}`,
+    default: SITE_CONFIG.project.title,
+    template: `%s | ${SITE_CONFIG.brandName}`,
   },
-  description: siteConfig.project.description,
-  metadataBase: new URL(siteConfig.project.url),
+  description: SITE_CONFIG.description,
+  // [FIXED]: Spread operator (...) แปลง Readonly Array เป็น Mutable Array เพื่อแก้ TypeScript Error
+  keywords: [...SITE_CONFIG.keywords],
+  authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.siteUrl }],
+  creator: SITE_CONFIG.brandName,
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
   alternates: {
     canonical: "./",
   },
-  keywords: siteConfig.keywords.all,
-  authors: [
-    { name: siteConfig.expert.realName, url: siteConfig.links.personal },
-  ],
-  creator: siteConfig.expert.name,
-  publisher: siteConfig.company.name,
   openGraph: {
-    title: siteConfig.project.title,
-    description: siteConfig.project.description,
-    url: siteConfig.project.url,
-    siteName: siteConfig.project.name,
+    type: "website",
+    locale: "th_TH",
+    url: SITE_CONFIG.siteUrl,
+    title: SITE_CONFIG.project.title,
+    description: SITE_CONFIG.description,
+    siteName: SITE_CONFIG.brandName,
     images: [
       {
-        url: siteConfig.project.ogImage,
+        url: "/images/og-main.webp",
         width: 1200,
         height: 630,
-        alt: siteConfig.project.title,
+        alt: SITE_CONFIG.brandName,
       },
     ],
-    locale: "th_TH",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.project.title,
-    description: siteConfig.project.description,
-    images: [siteConfig.project.ogImage],
+    title: SITE_CONFIG.project.title,
+    description: SITE_CONFIG.description,
+    images: ["/images/og-main.webp"],
   },
   robots: {
     index: true,
@@ -90,82 +87,79 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Viewport Configuration: กำหนดสีพื้นฐานของแถบสถานะ (Status Bar)
- * ปรับปรุงพิกัดสีเป็น OKLCH ตามมาตรฐานระบบปี 2026
- */
 export const viewport: Viewport = {
-  themeColor: "oklch(0.7 0.2 160)",
+  themeColor: "#050505",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html
       lang="th"
-      className={cn(
-        "scroll-smooth antialiased",
-        fontHeading.variable,
-        fontBody.variable,
-      )}
       suppressHydrationWarning
+      className={cn("scroll-smooth antialiased", fontSans.variable, fontThai.variable)}
     >
-      <head>
-        {/* [ENTITY CONNECTIVITY]: การยืนยันพิกัดตัวตนเพื่อความน่าเชื่อถือระดับสูง */}
-        <JsonLd
-          type="Organization"
-          data={{
-            "@id": `${siteConfig.project.url}/#organization`,
-            name: siteConfig.company.name,
-            url: siteConfig.project.url,
-            logo: `${siteConfig.project.url}/images/logo-circuit.png`,
-            founder: {
-              "@type": "Person",
-              "@id": `${siteConfig.links.personal}/#person`,
-              name: siteConfig.expert.realName,
-              jobTitle: siteConfig.expert.role,
-              description: siteConfig.expert.bio,
-              url: siteConfig.links.personal,
-            },
-            contactPoint: {
-              "@type": "ContactPoint",
-              email: siteConfig.company.email,
-              contactType: "customer service",
-              areaServed: "TH",
-              availableLanguage: ["Thai", "English"],
-            },
-            sameAs: [
-              siteConfig.links.facebook,
-              siteConfig.links.linkedin,
-              siteConfig.links.tiktok,
-              siteConfig.links.line,
-              siteConfig.links.x,
-              siteConfig.links.github,
-            ].filter((link): link is string => !!link),
-          }}
-        />
-      </head>
-      <body className="font-body min-h-screen bg-[oklch(1_0_0)] text-[oklch(0.2_0.02_260)] selection:bg-[oklch(0.7_0.2_160_/_0.1)] selection:text-[oklch(0.4_0.15_160)]">
-        {/* ระบบแถบสถานะประมวลผล: Emerald Depth Identity */}
-        <NextTopLoader
-          color="oklch(0.7 0.2 160)"
-          showSpinner={false}
-          height={3}
-        />
+      <body
+        className={cn(
+          "font-thai selection:bg-brand-primary/20 selection:text-brand-primary min-h-screen overflow-x-hidden bg-[#050505] text-slate-200",
+          // [TYPOGRAPHY SYSTEM]: ใช้ Font Sans สำหรับ Headings และตัวเลข เพื่อความทันสมัย
+          "[&_p]:font-thai [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_span.font-mono]:font-sans",
+        )}
+      >
+        {/* --- [1] ATMOSPHERIC INFRASTRUCTURE --- */}
+        <div
+          className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
+          aria-hidden="true"
+        >
+          {/* Noise Texture: เพิ่ม Texture ให้พื้นหลังไม่ดูแบนเกินไป */}
+          <div
+            className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
+            }}
+          />
 
-        {/* พิกัดแสดงผลเนื้อหาระบบงานหลัก */}
-        <main className="relative flex min-h-screen flex-col overflow-x-hidden">
-          {children}
-        </main>
+          {/* Grid System: เส้นตารางจางๆ แบบ Technical */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-[size:32px_32px]" />
 
-        {/* ระบบแจ้งเตือนส่วนหน้าจอ (Global Notification Node) */}
-        <Toaster richColors closeButton position="top-center" />
+          {/* Ambient Aura: แสงฟุ้งกระจายสร้างบรรยากาศ */}
+          <div className="animate-pulse-slow bg-brand-primary/5 absolute -top-[20%] -left-[20%] h-[600px] w-[600px] rounded-full mix-blend-screen blur-[120px]" />
+          <div className="absolute -right-[10%] -bottom-[10%] h-[500px] w-[500px] rounded-full bg-blue-600/5 mix-blend-screen blur-[100px]" />
+        </div>
+
+        {/* --- [2] ORCHESTRATION LAYER --- */}
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <TopLoader color="#22c55e" showSpinner={false} height={2} />
+
+          <Navbar />
+
+          <main id="main-content" className="flex flex-grow flex-col">
+            {children}
+          </main>
+
+          <Footer />
+        </div>
+
+        {/* --- [3] GLOBAL NODES (Overlays) --- */}
+        <div className="pointer-events-none fixed right-0 bottom-0 z-[60] flex flex-col items-end gap-4 p-4 md:p-6">
+          <div className="pointer-events-auto">
+            <LineStickyButton />
+          </div>
+          <Toaster
+            position="bottom-right"
+            theme="dark"
+            richColors
+            closeButton
+            className="font-sans"
+          />
+        </div>
       </body>
     </html>
   );

@@ -1,114 +1,109 @@
-/** @format */
-// พิกัดข้อมูล: constants/site-config.ts
-// หน้าที่: กำหนดค่าพื้นฐานของระบบและพิกัดข้อมูลตัวตน (Core Config Node)
-// มาตรฐาน: Ultra-Deep Level 7 | Specialist Optimization 2026
-// ควบคุมสมรรถนะโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB)
+/**
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.1 (STABILIZED)
+ * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
 
-import { SiteConfig } from "@/types";
+import type { SiteConfig } from "@/types";
 
-export const siteConfig: SiteConfig = {
-  // [1. CORPORATE IDENTITY]: อัตลักษณ์การทำงานและการยืนยันตัวตน
-  company: {
-    name: "AEMDEVWEB",
-    fullName: "เอ็มเดฟเว็บ (AEMDEVWEB) โดย นายเอ็มซ่ามากส์",
-    email: "me@aemdevweb.com",
-    address: "กรุงเทพมหานคร, ประเทศไทย (Strategic Online Support)",
-  },
+export const SITE_CONFIG: SiteConfig = {
+  // [01. BRAND IDENTITY]: ข้อมูลระบุตัวตนพื้นฐาน
+  brandName: "AEMDEVWEB",
+  siteUrl: "https://aemdevweb.com",
+  description:
+    "รับทำเว็บไซต์และ SEO สายพันธุ์ใหม่ เน้นผลลัพธ์ทางธุรกิจ เปลี่ยนผู้เข้าชมให้เป็นลูกค้าด้วยดีไซน์เชิงกลยุทธ์และเทคโนโลยีความเร็วสูงจาก AEMDEVWEB",
 
-  // [2. PROJECT & SEO METADATA]: พิกัดข้อมูลสำหรับการจัดอันดับสูงสุด
-  project: {
-    name: "AEMDEVWEB | Professional Technical SEO Specialist",
-    shortName: "AEM",
-    nameTH: "เอ็มเดฟเว็บ",
-    title: "AEMDEVWEB | วางระบบเว็บไซต์และ Technical SEO โดย นายเอ็มซ่ามากส์",
-    slogan:
-      "High-Performance System: รากฐานระบบที่เปี่ยมสมรรถนะ พร้อมขับเคลื่อนธุรกิจใน 24 ชม.",
+  // [02. HERO_REGISTRY]: ศูนย์กลางควบคุมเนื้อหาหน้าแรก
+  hero: {
+    title: "AEMDEVWEB: Strategic Web Design for High-Conversion",
     description:
-      "ผู้เชี่ยวชาญการวางรากฐานระบบเว็บไซต์ด้วย Next.js 16 มุ่งเน้นความเร็วระดับสูงสุด LCP ต่ำกว่า 0.8 วินาที เพื่อการจัดอันดับและยอดขายที่ยั่งยืนภายใต้การดูแลของ นายเอ็มซ่ามากส์",
-    url: "https://www.aemdevweb.com",
-    logo: "/images/logo-circuit.png",
-    // พิกัดภาพ Open Graph สำหรับการแชร์ลง Social Media
-    ogImage: "https://www.aemdevweb.com/og-image-seo-2026.png",
+      "AEMDEVWEB ไม่ได้ทำแค่เว็บที่สวยงาม แต่เราวางโครงสร้างระบบให้เสถียร โหลดไวระดับเสี้ยววินาที เพื่อเปลี่ยนทุกการเข้าชมให้กลายเป็นยอดขายจริงสำหรับธุรกิจคุณ",
+    primaryAction: "ปรึกษาวางแผนระบบฟรี",
+    secondaryAction: "ดูบริการทั้งหมด",
   },
 
-  // [3. AUTHORITY EXPERT]: การยืนยันตัวตนระดับสูง (E-E-A-T Strategy)
-  expert: {
-    name: "นายเอ็มซ่ามากส์",
-    realName: "นาย อลงกรณ์ ยมเกิด", // Specialist Verified Name
-    role: "Technical SEO Consultant & Web Infrastructure Lead",
-    bio: "ที่ปรึกษาการวางรากฐานระบบดิจิทัลด้วย Next.js และการวางระบบ Technical SEO มาตรฐานสากล มุ่งเน้นความเสถียรสูงสุดและการเก็บพิกัดข้อมูลที่แม่นยำที่สุด",
+  // [03. PERSONA ANCHOR]: โทนและการสื่อสาร (Humanized Specialist)
+  persona: {
+    tone: "Professional Partner, Expert Authoritative, Trustworthy",
+    communicationStyle: "Result-oriented, Friendly Expert, Direct & Clear",
+    antiConnotation: "Avoid Robot-speak, No Over-complicated Jargon, Human-to-Human Focus",
   },
 
-  // [4. PERFORMANCE BENCHMARKS]: ตัวเลขชี้วัดสมรรถนะระบบจริง
-  stats: [
-    { label: "ระยะเวลาส่งมอบระบบ", value: "60", suffix: "นาที" },
-    { label: "ความเร็ว LCP Optimized", value: "< 0.8", suffix: "วินาที" },
-    { label: "Web Vitals Score", value: "100", suffix: "คะแนนเต็ม" },
+  // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Optimized for Thai Trends)
+  keywords: [
+    "รับทำเว็บไซต์", // Mass Keyword
+    "รับออกแบบเว็บไซต์", // Secondary Mass Keyword
+    "รับทำเว็บไซต์ กำแพงเพชร", // Local SEO
+    "ทำเว็บติดหน้าแรก Google", // Search Intent
+    "รับทำเว็บไซต์ Next.js", // Niche Tech Stack
+    "รับทำเว็บขายของออนไลน์", // E-commerce Focus
+    "จ้างทำเว็บไซต์ บริษัท", // Corporate Trust
+    "ทำเว็บไซต์ SEO", // Marketing Focus
   ],
 
-  // [5. STRATEGIC VALUE]: คุณค่าเชิงยุทธศาสตร์ที่ส่งมอบให้ธุรกิจ
-  businessImpact: {
-    speed:
-      "Operational Velocity: เลือกระบบที่ตอบโจทย์ พร้อมจัดการข้อมูลหลังบ้านได้ทันทีโดย นายเอ็มซ่ามากส์",
-    seo: "Data Connectivity: วางพิกัดโครงสร้างระบบให้สอดคล้องกับการค้นหาและระบบ AI ในปี 2026",
-    conversion:
-      "Conversion Strategy: ออกแบบจุดตอบโจทย์ลูกค้า เพื่อเพิ่มโอกาสการปิดการขายสูงสุด",
+  // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
+  project: {
+    title: "Premium Web Design & SEO Expert Hub",
+    shortTitle: "AEMDEVWEB",
+    version: "16.3.0",
+    framework: "Next.js 16.1 (Latest Stable)",
+    uiStack: "Tailwind CSS + React 19",
   },
 
-  // [6. STRATEGIC KEYWORDS]: พิกัดคำค้นหาสำคัญเพื่อการทำอันดับ
-  keywords: {
-    list: [
-      "รับทำเว็บไซต์ SEO",
-      "เว็บไซต์สำเร็จรูป 2026",
-      "High-Performance Sale Page",
-      "นาย อลงกรณ์ ยมเกิด",
-      "นายเอ็มซ่ามากส์",
-    ],
-    all: "เว็บไซต์สำเร็จรูป, นายเอ็มซ่ามากส์, AEMDEVWEB, บริการทำ Sale Page, ระบบเว็บติดหน้าแรก, Next.js 16, Tailwind CSS 4, นายอลงกรณ์ ยมเกิด, เอ็มเดฟเว็บ",
-    core: [
-      "บริการพัฒนาเว็บไซต์ด่วน โดย นายเอ็มซ่ามากส์",
-      "Technical SEO คุณภาพสูง",
-      "วางระบบเว็บไซต์เชิงพาณิชย์",
-    ],
-    tech: ["Next.js 16", "React 19", "Tailwind CSS 4", "TypeScript"],
-    brand: [
-      "AEMDEVWEB",
-      "นายเอ็มซ่ามากส์ SEO",
-      "Alongkorl Yomkerd Specialist",
-    ],
+  // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT Standard)
+  expert: {
+    displayName: "นายเอ็มซ่ามากส์",
+    legalName: "Alongkorl Yomkert",
+    legalNameThai: "อลงกรณ์ ยมเกิด",
+    // สำหรับแสดงผลบนหน้าเว็บ (Human Readable)
+    role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
+    // สำหรับ Schema.org (Bot Optimized)
+    jobTitle: "Technical SEO Specialist",
+    signature: "นายเอ็มซ่ามากส์",
+    avatar: "/images/avatar.webp",
+    email: "contact@aemdevweb.com",
+    bioUrl: "/about",
   },
 
-  // [7. CONNECTIVITY HUB]: พิกัดการเชื่อมโยงข้อมูลแบรนด์ (LINE-Only Policy)
-  links: {
-    line: "https://lin.ee/6lgJox0",
-    lineId: "@127cnthn",
-    facebook: "https://facebook.com/aemdevweb",
-    linkedin: "https://www.linkedin.com/in/alongkorl-aemdevweb",
-    personal: "https://me.aemdevweb.com",
-    tiktok: "https://tiktok.com/@aemdevweb",
-    x: "https://x.com/xemwep91696",
-    github: "https://github.com/aemdevweb",
-  },
-
-  // [8. CONTACT PROTOCOL]: ช่องทางสื่อสารทางการ
+  // [07. CONTACT & ACCESS]: ช่องทางการติดต่อ
   contact: {
-    email: "me@aemdevweb.com",
-    phone: "0xx-xxx-xxxx",
+    email: "contact@aemdevweb.com",
+    phone: "099-032-2175",
+    displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
+    address: "จังหวัดกำแพงเพชร ประเทศไทย",
+    postalCode: "62000",
+    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
   },
 
-  // [9. CALL-TO-ACTION NODES]: จุดกระตุ้นการตัดสินใจ
-  cta: {
-    main: "เลือกรูปแบบระบบงานที่ นายเอ็มซ่ามากส์ คัดสรร",
-    secondary: "ปรึกษาแผนงานโครงการฟรี",
-    pricing: "ตรวจสอบรายละเอียดและระดับการลงทุน",
+  // [08. STRATEGIC LINKS]: ลิงก์ช่องทางโซเชียล
+  links: {
+    line: "https://lin.ee/kVRNkIy",
+    lineId: "@127cnhtn",
+    messenger: "https://m.me/aemdevweb",
+    facebook: "https://facebook.com/aemdevweb",
+    github: "https://github.com/private",
   },
 
-  // [10. QUALITY ASSURANCE]: มาตรฐานการควบคุมคุณภาพระดับสูงสุด
-  standards: {
-    performance: 100,
-    lcp: 0.8,
-    security: "SSL Standard v26",
-    guarantee:
-      "ควบคุมคุณภาพโดย นายเอ็มซ่ามากส์ (นายอลงกรณ์ ยมเกิด) พร้อมดูแลระบบให้สมบูรณ์แบบ 100%",
+  // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Local SEO Focus)
+  business: {
+    // [STRATEGY]: ระบุ "จังหวัด" ชัดเจนเพื่อเป็นฐานทัพหลัก (HQ Node) สำหรับ Local SEO
+    location: "Kamphaeng Phet",
+
+    // [STRATEGY]: ระบุ Scope กว้างระดับประเทศ เพื่อไม่ให้ Google จำกัดการแสดงผลแค่ในจังหวัด
+    region: "Thailand",
+
+    // [STRATEGY]: ใช้คำศัพท์ Technical เพื่อดึงดูดลูกค้าเกรด Premium
+    industry: "Web Infrastructure & Technical SEO",
+
+    roiFocus: true,
+    established: "2026",
   },
-};
+
+  // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์ระบบ
+  verification: {
+    google: "google-site-verification-id", // อย่าลืมใส่ค่าจริงเมื่อได้จาก GSC
+  },
+} as const;
+
+/* TYPE EXPORT */
+export type GlobalConfig = typeof SITE_CONFIG;

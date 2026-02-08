@@ -1,0 +1,477 @@
+
+├── app
+│   ├── (routes)
+│   │   ├── areas
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── case-studies
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── test-mdx
+│   │       ├── content.mdx
+│   │       └── page.tsx
+│   ├── about
+│   │   └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── manifest.ts
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   ├── privacy
+│   │   └── page.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   ├── status
+│   │   └── page.tsx
+│   └── terms
+│       └── page.tsx
+├── color.html
+├── components
+│   ├── features
+│   │   ├── areas
+│   │   │   └── AreaCard.tsx
+│   │   ├── blog
+│   │   │   └── BlogCard.tsx
+│   │   ├── case-studies
+│   │   │   └── CaseStudyCard.tsx
+│   │   ├── landing
+│   │   │   ├── Hero.tsx
+│   │   │   ├── PricingSection.tsx
+│   │   │   └── WorkProcess.tsx
+│   │   └── services
+│   │       ├── ServiceCard.tsx
+│   │       └── ServiceListingHub.tsx
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   └── TopLoader.tsx
+│   ├── seo
+│   │   └── JsonLd.tsx
+│   ├── shared
+│   │   ├── ConversionCTA.tsx
+│   │   ├── CurrentYear.tsx
+│   │   ├── ImpactStats.tsx
+│   │   ├── LineStickyButton.tsx
+│   │   └── TrustBadge.tsx
+│   ├── templates
+│   │   ├── bio
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── catalog
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── corporate
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── local
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── salepage
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   └── sections
+│   │       ├── DynamicFAQ.tsx
+│   │       ├── FeatureGrid.tsx
+│   │       ├── HeroEngine.tsx
+│   │       ├── LayoutEngine.tsx
+│   │       └── SectionRenderer.tsx
+│   └── ui
+│       ├── IconRenderer.tsx
+│       ├── SkeletonCard.tsx
+│       ├── button.tsx
+│       ├── skeleton.tsx
+│       └── sonner.tsx
+├── components.json
+├── config
+│   ├── 00-SYSTEM-MANDATE.md
+│   └── _01-SYSTEM-PROMPT-EXTENSION.md
+├── constants
+│   ├── area-nodes.ts
+│   ├── index.ts
+│   ├── master-registry.ts
+│   ├── navigation.ts
+│   └── site-config.ts
+├── content
+│   ├── blog
+│   │   ├── 5-points-killing-sales.mdx
+│   │   ├── advanced-schema-markup.mdx
+│   │   ├── copywriting-secrets.mdx
+│   │   ├── core-web-vitals-speed.mdx
+│   │   ├── ecommerce-conversion-seo.mdx
+│   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── seo-for-sme-2026.mdx
+│   │   ├── seo-google-love-technical-guide.mdx
+│   │   ├── starting-business-low-budget-website.mdx
+│   │   └── technical-structure-audit.mdx
+│   └── case-studies
+│       ├── industrial-catalog-rfq-optimization.mdx
+│       ├── sme-web-performance-growth.mdx
+│       └── unlink-reputation-management-success.mdx
+├── eslint.config.mjs
+├── hooks
+├── knip.json
+├── lib
+│   ├── cms.ts
+│   ├── schema.ts
+│   ├── seo.ts
+│   └── utils.ts
+├── mdx-components.tsx
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── structure.txt
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+├── types
+│   ├── index.d.ts
+│   └── mdx.d.ts
+└── unused_assets_backup
+    ├── android-chrome-512x512.png
+    ├── apple-touch-icon.png
+    ├── favicon-16x16.png
+    ├── favicon-32x32.png
+    ├── grid.svg
+    ├── images
+    │   ├── areas
+    │   │   ├── bangkok.webp
+    │   │   ├── chiang-mai.webp
+    │   │   └── phuket.webp
+    │   ├── case-studies
+    │   │   └── sme-growth.webp
+    │   ├── expert
+    │   │   └── m-avatar.webp
+    │   ├── showcase
+    │   │   └── Unlink-th-mobile94.webp
+    │   └── ui
+    │       └── grid.svg
+    ├── logo.svg
+    ├── og-image-seo-2026.png
+    ├── og-image.png
+    └── textures
+        └── noise.svg
+
+➜  aemdevweb git:(main) ✗ pch
+
+> aemdevweb.com@7.2.98 lint /data/data/com.termux/files/home/DEVSTORE/aemdevweb
+> eslint .
+
+
+> aemdevweb.com@7.2.98 type-check /data/data/com.termux/files/home/DEVSTORE/aemdevweb
+> tsc --noEmit
+
+➜  aemdevweb git:(main) ✗ pb
+
+> aemdevweb.com@7.2.98 build /data/data/com.termux/files/home/DEVSTORE/aemdevweb
+> next build --webpack
+
+  Skipping creating a lockfile at /data/data/com.termux/files/home/DEVSTORE/aemdevweb/.next/lock because we're using WASM bindings
+▲ Next.js 16.1.6 (webpack)
+- Environments: .env
+- Experiments (use with caution):
+  ⨯ mdxRs
+  · optimizePackageImports
+  ✓ scrollRestoration
+
+  Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+✓ Compiled successfully in 81s
+✓ Finished TypeScript in 27.7s
+✓ Collecting page data using 1 worker in 4.4s
+✓ Generating static pages using 1 worker (40/40) in 8.2s
+  Finalizing page optimization  .  Collecting buil✓ Collecting build traces in 48s
+✓ Finalizing page optimization in 48s
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /about
+├ ○ /areas
+├ ● /areas/[slug]
+│ ├ /areas/bangkok
+│ ├ /areas/nakhon-sawan
+│ ├ /areas/tak
+│ └ [+3 more paths]
+├ ○ /blog
+├ ● /blog/[slug]
+│ ├ /blog/seo-for-sme-2026
+│ ├ /blog/technical-structure-audit
+│ ├ /blog/5-points-killing-sales
+│ └ [+7 more paths]
+├ ○ /case-studies
+├ ● /case-studies/[slug]
+│ ├ /case-studies/unlink-reputation-management-success
+│ ├ /case-studies/industrial-catalog-rfq-optimization
+│ └ /case-studies/sme-web-performance-growth
+├ ○ /manifest.webmanifest
+├ ○ /privacy
+├ ○ /robots.txt
+├ ○ /services
+├ ● /services/[slug]
+│ ├ /services/salepage
+│ ├ /services/corporate
+│ ├ /services/catalog
+│ └ [+2 more paths]
+├ ○ /sitemap.xml
+├ ○ /status
+├ ○ /terms
+└ ○ /test-mdx
+
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+
+➜  aemdevweb git:(main) ✗ pnpm knip
+
+> aemdevweb.com@7.2.98 knip /data/data/com.termux/files/home/DEVSTORE/aemdevweb
+> knip --cache --no-exit-code
+
+Unused files (3)
+components/shared/CurrentYear.tsx
+components/templates/sections/SectionRenderer.tsx
+constants/index.ts
+Unused dependencies (7)
+@hookform/resolvers  package.json:23:6
+@img/sharp-wasm32    package.json:24:6
+next-mdx-remote      package.json:35:6
+react-hook-form      package.json:40:6
+sharp                package.json:43:6
+tailwindcss-animate  package.json:46:6
+zod                  package.json:47:6
+Unused devDependencies (2)
+eslint-plugin-tailwindcss  package.json:58:6
+tailwindcss                package.json:64:6
+Unlisted dependencies (4)
+mdx/types        …utes)/blog/[slug]/page.tsx:12:36
+mdx/types        …se-studies/[slug]/page.tsx:12:36
+mdx/types        mdx-components.tsx:11:36
+postcss-load-c…  postcss.config.mjs:1:2
+Unused exports (20)
+buttonVariants               …/ui/button.tsx:79:18
+FEATURED_AREAS               …area-nodes.ts:114:14
+getAreaBySlug                …area-nodes.ts:120:14
+FEATURED_SERVICES            …r-registry.ts:215:14
+SERVICE_SOLUTIONS            …/navigation.ts:24:14
+CONVERSION_ACTIO…            …/navigation.ts:55:14
+NAV_ITEMS                    …/navigation.ts:71:14
+CORE_NODES                   …/navigation.ts:72:14
+SYSTEM_NODES                 …/navigation.ts:73:14
+MAIN_NAVIGATION              …/navigation.ts:74:14
+FOOTER_NAVIGATION            …/navigation.ts:75:14
+absoluteUrl                  lib/schema.ts:10:14
+generateServiceS…  function  lib/schema.ts:77:17
+generateLocalBus…  function  lib/schema.ts:98:17
+generateBreadcru…  function  lib/schema.ts:127:17
+formatCurrency     function  lib/utils.ts:23:17
+slugify            function  lib/utils.ts:40:17
+formatDate         function  lib/utils.ts:55:17
+getReadingTime     function  lib/utils.ts:73:17
+absoluteUrl        function  lib/utils.ts:100:17
+Unused exported types (6)
+FAQItem    interface  …ctions/DynamicFAQ.tsx:19:18
+FeatureI…  interface  …tions/FeatureGrid.tsx:15:18
+ButtonPr…  interface  …ponents/ui/button.tsx:60:18
+NavItem    type       …nstants/navigation.ts:78:13
+ServiceI…  type       …nstants/navigation.ts:79:13
+GlobalCo…  type       …tants/site-config.ts:109:13
+Duplicate exports (2)
+MAIN_NAV|NAV_ITEMS|CORE_NODES|SYS…  …navigation.ts
+FOOTER_MAP|FOOTER_NAVIGATION        …navigation.ts
+➜  aemdevweb git:(main) ✗ tttt
+➜  aemdevweb git:(main) ✗
+
+
+__
+
+{
+  "name": "aemdevweb.com",
+  "version": "7.2.98",
+  "private": true,
+  "author": "AEMDEVWEB (Technical Infrastructure Specialist)",
+  "description": "High-Performance Web Infrastructure & Technical SEO Specialist Hub",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "WATCHPACK_POLLING=true next dev --webpack",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "fix": "pnpm format && pnpm lint --fix",
+    "build": "next build --webpack",
+    "start": "next start",
+    "knip": "knip --cache --no-exit-code",
+    "clean": "rm -rf .next node_modules pnpm-lock.yaml && pnpm install"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^4.0.0",
+    "@img/sharp-wasm32": "^0.34.5",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "16.1.6",
+    "@radix-ui/react-slot": "^1.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.4.1",
+    "gray-matter": "^4.0.3",
+    "lucide-react": "^0.474.0",
+    "next": "16.1.6",
+    "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.4.4",
+    "nextjs-toploader": "^3.7.15",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-hook-form": "^7.54.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "sharp": "^0.34.5",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@next/eslint-plugin-next": "16.1.6",
+    "@tailwindcss/postcss": "^4.0.3",
+    "@types/node": "22.13.1",
+    "@types/react": "19.0.8",
+    "@types/react-dom": "19.0.3",
+    "autoprefixer": "^10.4.20",
+    "eslint": "9.19.0",
+    "eslint-plugin-tailwindcss": "^3.18.2",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "knip": "^5.43.6",
+    "postcss": "^8.5.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "tailwindcss": "^4.0.3",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.54.0"
+  },
+  "pnpm": {
+    "shamefully-hoist": true,
+    "overrides": {
+      "react": "19.0.0",
+      "react-dom": "19.0.0"
+    }
+  }
+}
+
+____
+
+/**
+ * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v16.3 (HARDENED_VIVID)
+ * [DNA MANDATE]: Zero-Jitter | Termux Optimized | Vivid Image Optimization | ARM Stability
+ * [STRATEGY]: "Atomic Transpilation" & "High-Fidelity Image Support"
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
+
+import nextMDX from "@next/mdx";
+import type { NextConfig } from "next";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+
+// --- 1. MDX ENGINE CONFIGURATION ---
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [remarkGfm, remarkFrontmatter],
+    rehypePlugins: [],
+  },
+});
+
+// --- 2. MAIN INFRASTRUCTURE CONFIG ---
+const nextConfig: NextConfig = {
+  // [ROUTING]: รองรับ Page Extensions สำหรับระบบ Hybrid (TSX + MDX)
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
+  reactStrictMode: true,
+  reactCompiler: false, // ปิดเพื่อความเสถียรสูงสุดบน ARM/Termux Environment
+
+  // [CRITICAL]: ป้องกัน React Development Properties Mismatch ใน Next.js 16
+  transpilePackages: ["next-mdx-remote", "lucide-react"],
+
+  experimental: {
+    scrollRestoration: true,
+    // [RESOURCE CONTROL]: ปรับจูนให้เข้ากับขีดจำกัดของ CPU บน Android (Zero-Freeze)
+    workerThreads: false,
+    cpus: 1,
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+    mdxRs: false, // ใช้ JS Compiler แทน Rust เพื่อความเสถียรบนระบบไฟล์ Termux
+  },
+
+  /**
+   * [IMAGE_OPTIMIZATION_HUB]: ระบบจัดการรูปภาพ
+   * [RECTIFIED]: แก้ไข Error "unconfigured qualities" เพื่อรองรับ Quality 90
+   */
+  images: {
+    // [FIX]: อนุญาตให้ประมวลผลความคมชัดที่ 75 (Default) และ 90 (High-Fidelity)
+    qualities: [75, 90],
+
+    // หากรันบน Termux แล้วติดปัญหา Sharp (libvips)
+    // ให้เปลี่ยน unoptimized เป็น true (ภาพจะไม่ถูกบีบอัดแต่รันได้แน่นอน)
+    unoptimized: false,
+
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+
+  /**
+   * [WEBPACK_ENGINE]: ปรับแต่งให้รองรับ Android File System
+   */
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        poll: 1000, // ใช้ระบบ Polling เพื่อความแม่นยำในการตรวจจับไฟล์บน Termux
+        aggregateTimeout: 300,
+        ignored: ["**/node_modules/**", "**/.next/**"],
+      };
+    }
+    return config;
+  },
+};
+
+export default withMDX(nextConfig);
+
+
+
+___
+
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "next": {
+    "entry": [
+      "next.config.ts",
+      "app/**/*.{ts,tsx}",
+      "components/templates/**/Index.tsx",
+      "lib/cms.ts"
+    ]
+  },
+  "project": ["**/*.{ts,tsx}"]
+}
+
+
+__

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "next": {
+    "entry": [
+      "next.config.ts",
+      "app/**/*.{ts,tsx}",
+      "components/templates/**/Index.tsx",
+      "lib/cms.ts"
+    ]
+  },
+  "project": ["**/*.{ts,tsx}"]
+}

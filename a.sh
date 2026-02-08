@@ -1,18 +1,48 @@
 #!/bin/bash
-# 🚀 AEMDEVWEB Final Sanity Check
 
-echo "🔍 Checking for uppercase folders in content/template..."
-# ค้นหาโฟลเดอร์ที่มีตัวพิมพ์ใหญ่ใน content/template
-uppercase_dirs=$(find content/template -maxdepth 2 -name "*[A-Z]*")
+echo "🚀 Starting System Consolidation..."
 
-if [ -z "$uppercase_dirs" ]; then
-    echo "✅ ทุกโฟลเดอร์เป็นตัวพิมพ์เล็ก (Lower Case) เรียบร้อย สบายใจได้ครับพี่!"
-else
-    echo "⚠️ พบโฟลเดอร์ที่มีตัวพิมพ์ใหญ่ (อาจทำให้เกิด 404):"
-    echo "$uppercase_dirs"
-    echo "💡 แนะนำให้เปลี่ยนเป็นตัวพิมพ์เล็กทั้งหมดครับ"
+# 1. จัดระเบียบ Components & Modules
+echo "📦 Merging Modules into Components..."
+mkdir -p components/templates
+mkdir -p components/sections
+
+# ย้าย Blueprint และ Layout Engine ไปไว้ที่ sections
+mv modules/_core/* components/sections/
+# ย้าย Template Items ไปไว้ที่ templates
+mv modules/items/* components/templates/
+
+# 2. จัดระเบียบ App Router (Flattening)
+echo "📂 Flattening App Structure..."
+# ย้ายไฟล์จาก Group ออกมาที่ Root ของ app/
+cp -r app/\(main\)/* app/
+cp -r app/\(areas\)/areas app/
+cp -r app/\(shops\)/templates app/shops
+
+# ลบ Route Groups เดิม
+rm -rf app/\(main\)
+rm -rf app/\(areas\)
+rm -rf app/\(shops\)
+
+# 3. จัดการโครงสร้าง Types & Lib
+echo "🧬 Refactoring Types and Libs..."
+# รวม Types (ใช้ไฟล์ index.d.ts ที่ผมส่งให้ก่อนหน้า)
+# หมายเหตุ: คุณต้องเอาเนื้อหาที่ผม gen ให้ก่อนหน้านี้ใส่ใน types/index.ts
+
+# สร้างไฟล์รวมศูนย์สำหรับข้อมูล (CMS Logic)
+touch lib/cms.ts
+
+# 4. ลบไฟล์ที่ไม่ได้ใช้งาน (Cleaning)
+echo "🧹 Cleaning up legacy files..."
+rm -rf modules
+rm -f tsconfig.tsbuildinfo
+rm -f AEMDEVWEB-STRUCTURE.txt
+rm -f config/AEMDEVWEB-STRUCTURE.txt
+
+# 5. ย้าย Registry ไปไว้ที่ Constants เพื่อความง่ายในการ Config
+if [ -f "components/templates/registry.tsx" ]; then
+    mv components/templates/registry.tsx constants/template-registry.tsx
 fi
 
-# ตรวจสอบการมีอยู่ของไฟล์สำคัญ
-echo "📄 Checking essential files..."
-[ -f "content/template/booking/hotel-resort/meta.json" ] && echo "✅ meta.json found" || echo "❌ meta.json missing in booking"
+echo "✅ Consolidation Complete!"
+echo "Next Step: Update imports in page.tsx files to reflect new paths."

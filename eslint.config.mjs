@@ -1,13 +1,19 @@
-/** @format */
+/**
+ * [SYSTEM CONFIG]: ESLINT_STABILIZER v16.4.4 (FLAT_CONFIG_OPTIMIZED)
+ * [STRATEGY]: Zero-Any Policy | Unused Asset Excision | Next.js Optimized
+ */
+
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
 const nextPlugin = require("@next/eslint-plugin-next");
+const unusedImports = require("eslint-plugin-unused-imports");
 
 export default tseslint.config(
   {
+    // [IGNORE ENGINE]
     ignores: [
       ".next/**",
       "node_modules/**",
@@ -17,6 +23,7 @@ export default tseslint.config(
       "eslint.config.mjs",
       "next.config.mjs",
       "postcss.config.mjs",
+      "tailwind.config.ts",
     ],
   },
   js.configs.recommended,
@@ -25,6 +32,7 @@ export default tseslint.config(
     files: ["**/*.{ts,tsx,js,jsx}"],
     plugins: {
       "@next/next": nextPlugin,
+      "unused-imports": unusedImports,
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -35,34 +43,32 @@ export default tseslint.config(
       },
     },
     rules: {
+      // --- [SECTION: NEXT.JS CORE] ---
+      // ดึงกฎมาเฉพาะที่จำเป็นเพื่อเลี่ยง Error "Could not find rule"
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
-
-      // ปิดการบังคับ Import React เพราะใช้ Next.js 13+ App Router
+      "@next/next/no-img-element": "error",
       "react/react-in-jsx-scope": "off",
 
-      // คุมเข้มตัวแปรที่ไม่ได้ใช้งาน ต้องมี Prefix ขีดล่างเท่านั้นถึงจะผ่าน
-      "@typescript-eslint/no-unused-vars": [
+      // --- [SECTION: UNUSED ASSETS CLEANUP] ---
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
         "warn",
         {
-          argsIgnorePattern: "^_",
+          vars: "all",
           varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
         },
       ],
 
-      // บังคับเตือนเมื่อใช้ any เพื่อรักษาคุณภาพของไฟล์ในโฟลเดอร์ types และ lib
-      "@typescript-eslint/no-explicit-any": "warn",
-
-      // ป้องกันการใช้ <img> ทั่วไป เพื่อบังคับใช้ระบบจัดการรูปภาพของ Next.js ที่ตั้งค่าไว้
-      "@next/next/no-img-element": "error",
-
-      // ลดความซ้ำซ้อนกับตัวตรวจสอบของ TypeScript
-      "no-undef": "off",
-      "no-unused-vars": "off",
-
-      // ปิดการแจ้งเตือนคอมเมนต์ Warning เพื่อไม่ให้กวนสายตาขณะทำงาน
-      "no-warning-comments": "off",
+      // --- [SECTION: CODE QUALITY & ZERO-ANY] ---
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/consistent-type-imports": "error",
+      "no-var": "error",
+      "prefer-const": "error",
     },
   },
 );

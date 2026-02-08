@@ -4,49 +4,30 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    /** * [DNA-STRICT-MODE]: เปิดระบบตรวจสอบเข้มงวดเพื่อกำจัดพิกัด 'any'
-     * ช่วยให้ผ่านเกณฑ์การตรวจสอบระดับ 7
-     */
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "esModuleInterop": true,
+    "incremental": true,
     "module": "esnext",
+    "esModuleInterop": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "plugins": [
       {
         "name": "next"
       }
-    ],
-    "baseUrl": ".",
-    "paths": {
-      /* Global Shortcut */
-      "@/*": ["*"],
-      /* Feature Folders */
-      "@/app/*": ["app/*"],
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/types/*": ["types/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/constants/*": ["constants/*"],
-      /* Specialized Path: พิกัดเข้าถึง Shared Services Components */
-      "@/services-components/*": ["app/(main)/services/components/*"]
-    }
+    ]
   },
   "include": [
     "next-env.d.ts",
+    ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    "constants/**/*.ts",
-    "config/**/*.ts",
-    "content/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

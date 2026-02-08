@@ -1,35 +1,69 @@
-/* @format */
-/* พิกัดข้อมูล: app/globals.css */
-/* หน้าที่: ศูนย์กลางการควบคุมสไตล์และโครงสร้างระบบ (Master Style Node) */
-/* มาตรฐาน: Tailwind 4.0 | Next.js 16 | Ultra-Deep Level 7 */
-/* ควบคุมโดย: นายเอ็มซ่ามากส์ (AEMDEVWEB) */
-
 @import "tailwindcss";
-
-/* [1. PLUGINS]: เสริมขีดความสามารถด้าน Typography และ Animation */
-@plugin "@tailwindcss/typography";
 @plugin "tailwindcss-animate";
 
+/**
+ * [CORE STYLESHEET]: AEM-SYSTEM-v17.0 (MIDNIGHT_AURA)
+ * [STRATEGY]: Dark-First Architecture | OKLCH Spectrum | GPU-Accelerated Layers
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
+
 @theme {
-  /* [2. COLOR DNA]: พิกัดสี OKLCH ประจำแบรนด์ (High Precision) */
-  --color-brand-primary: oklch(0.7 0.2 160); /* Emerald Specialist */
-  --color-brand-depth: oklch(0.25 0.02 260); /* Deep Slate Authority */
-  --color-brand-accent: oklch(0.7 0.1 260); /* Indigo Insight */
-  --color-brand-surface: oklch(0.98 0.01 260); /* Soft Gray Node */
+  /* --- 01. TYPOGRAPHY SYSTEM --- */
+  --font-thai: var(--font-thai), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* [3. TYPOGRAPHY]: ผูกพิกัดฟอนต์จาก Root Layout */
-  --font-heading: var(--font-heading), "IBM Plex Sans Thai", sans-serif;
-  --font-body: var(--font-body), "Anuphan", sans-serif;
+  /* --- 02. COLOR PALETTE (Dark Mode Native - OKLCH) --- */
+  /* Brand: Neon Green ที่แม่นยำทางสายตา */
+  --color-brand-primary: oklch(0.72 0.18 150);
+  --color-brand-glow: oklch(0.72 0.18 150 / 0.15);
 
-  /* [4. DESIGN TOKENS]: มิติความโค้งและเงาระดับ 7 */
-  --radius-za: 2.5rem;
-  --shadow-node: 0 20px 50px -12px oklch(0 0 0 / 0.15);
-  --shadow-aurora: 0 0 30px oklch(0.7 0.2 160 / 0.2);
+  /* Surfaces: Deep Midnight Black */
+  --color-surface-main: #050505; /* พื้นหลังหลัก (Pure Black with hint) */
+  --color-surface-offset: #0a0a0a; /* พื้นหลังรอง */
+  --color-surface-card: #0f0f0f; /* การ์ดลอยตัว */
+  --color-surface-muted: #1a1a1a; /* พื้นที่ลดความสำคัญ */
 
-  /* [5. DYNAMIC EFFECTS]: พิกัดความเคลื่อนไหวเชิงระบบ */
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 3s ease-in-out infinite;
+  /* Text: High Contrast & Legibility */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a1a1aa; /* Zinc-400 equivalent */
+  --color-text-muted: #52525b; /* Zinc-600 equivalent */
 
+  /* Borders: Micro-Interactions */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: rgba(255, 255, 255, 0.15);
+
+  /* --- 03. ANIMATION PHYSICS --- */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.1;
+    }
+  }
   @keyframes float {
     0%,
     100% {
@@ -39,61 +73,134 @@
       transform: translateY(-10px);
     }
   }
-}
-
-/* [6. DARK MODE STRATEGY] */
-@variant dark (&:where(.dark, .dark *));
-
-@layer base {
-  /* [7. ROOT SETTINGS]: กำหนดพิกัดสีพื้นฐานของระบบ */
-  :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.2 0.02 260);
+  @keyframes shimmer {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
   }
 
-  .dark {
-    --background: oklch(0.12 0.02 260);
-    --foreground: oklch(0.98 0.01 260);
+  /* --- 04. SPATIAL SYSTEM --- */
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2.5rem;
+
+  --container-max-w: 85rem;
+}
+
+/* --- 05. BASE LAYER RESET --- */
+@layer base {
+  *,
+  ::after,
+  ::before {
+    @apply border-border transition-colors duration-200;
+    box-sizing: border-box;
+  }
+
+  /* Core Body Settings */
+  html {
+    @apply scroll-smooth;
   }
 
   body {
-    @apply bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors duration-500;
+    @apply text-text-primary font-thai selection:bg-brand-primary/30 selection:text-brand-primary bg-[#050505] antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Headings: บังคับใช้ฟอนต์อังกฤษเพื่อความ Modern & Professional */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans tracking-tight text-white;
+  }
+
+  /* Smooth Scrollbar for Chrome/Safari/Edge */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
+/* --- 06. UTILITY LAYER (Specialist Tools) --- */
 @layer utilities {
-  /* [8. PROSE SYSTEM]: ปรับจูนพิกัดเนื้อหาบทความ (Specialist Tone) */
-  .prose-aem {
-    @apply prose font-body max-w-none text-[oklch(0.45_0.02_260)] dark:text-[oklch(0.8_0.02_260)];
-    --tw-prose-headings: oklch(0.2 0.02 260);
-    --tw-prose-links: oklch(0.65 0.2 160);
-    --tw-prose-bold: oklch(0.2 0.02 260);
-
-    .dark & {
-      --tw-prose-headings: oklch(0.95 0.01 260);
-      --tw-prose-bold: oklch(1 0 0);
-    }
-
-    a {
-      @apply hover:border-brand-primary border-b border-transparent no-underline transition-all duration-300;
-    }
+  /* Container Setup */
+  .container {
+    @apply mx-auto w-full max-w-[var(--container-max-w)] px-4 md:px-6;
   }
 
-  /* [9. CORE UI NODES]: พิกัดจัดวางพื้นที่สำคัญ */
-  .container-za {
-    @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-12;
+  /* Gradient Text */
+  .text-gradient {
+    @apply bg-gradient-to-b from-white via-white to-white/60 bg-clip-text text-transparent;
   }
 
-  .btn-za {
-    @apply font-heading inline-flex items-center justify-center rounded-2xl px-8 py-4 text-sm font-black tracking-widest uppercase italic transition-all duration-300 active:scale-95 disabled:opacity-50;
+  /* High-Performance Glass Effect */
+  .glass-morphism {
+    @apply border border-white/[0.08] bg-white/[0.03] shadow-2xl backdrop-blur-xl;
   }
 
-  /* Card Architecture: มิติแสงและเงาเชิงวิศวกรรม */
-  .depth-card {
-    @apply rounded-[var(--radius-za)] border border-[oklch(0.9_0.02_260)] bg-white p-8 shadow-[var(--shadow-node)] transition-all duration-500 dark:border-[oklch(0.2_0.02_260)] dark:bg-[oklch(0.15_0.02_260)];
+  /* Grid Background (Cyberpunk Style) */
+  .bg-infrastructure-grid {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
 
-    &:hover {
-      @apply border-brand-primary/30 -translate-y-2 shadow-[0_40px_80px_-15px_oklch(0_0_0_/_0.2)];
-    }
+  /* Ambient Aura Elements */
+  .ambient-aura {
+    @apply pointer-events-none fixed z-0 rounded-full mix-blend-screen blur-[100px];
+    will-change: transform, opacity;
+  }
+
+  /* Glow Effects */
+  .shadow-glow {
+    box-shadow: 0 0 30px -5px var(--color-brand-glow);
+  }
+
+  .shadow-pro {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .shadow-pro-lg {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .shadow-pro-2xl {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Text Balance for Headlines */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* GPU Acceleration Helper */
+  .gpu-layer {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
   }
 }
