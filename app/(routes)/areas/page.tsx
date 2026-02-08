@@ -1,11 +1,12 @@
 /**
- * [ROUTE PAGE]: LOCAL_HUB_SYSTEM v17.0.1 (PURE_ORCHESTRATION)
- * [STRATEGY]: Direct Component Mapping | Geographic Authority | High-Fidelity UI
+ * [ROUTE PAGE]: LOCAL_HUB_SYSTEM v17.0.3 (SCHEMA_ENHANCED)
+ * [STRATEGY]: Direct Component Mapping | Geographic Authority | Breadcrumb Injection
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 // --- 1. Core Components & Data ---
 import AreaCard from "@/components/features/areas/AreaCard";
@@ -13,9 +14,15 @@ import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
-/* [A] SEO AUTHORITY PROTOCOL */
+// --- 2. SEO Protocol ---
+import JsonLd from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema } from "@/lib/schema";
+
+/**
+ * [A] SEO AUTHORITY PROTOCOL
+ * [STRATEGY]: Dynamic Keyword Injection & Regional Relevance
+ */
 export const metadata: Metadata = {
   title: `พื้นที่ให้บริการและแผนงานรายจังหวัด | ${SITE_CONFIG.brandName}`,
   description:
@@ -25,13 +32,23 @@ export const metadata: Metadata = {
     "รับทำเว็บไซต์รายจังหวัด",
     "SEO ท้องถิ่น",
     "Local SEO Thailand",
+    "รับทำเว็บไซต์ทั่วประเทศ",
     ...AREA_NODES.map((area) => `รับทำเว็บไซต์ ${area.province}`),
   ],
 };
 
 export default function AreasPage() {
+  // [SEO LOGIC]: สร้าง Breadcrumb Schema เพื่อบอก Google ว่าหน้านี้อยู่ตรงไหนของเว็บไซต์
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
+    { name: "พื้นที่ให้บริการ", item: `${SITE_CONFIG.siteUrl}/areas` },
+  ]);
+
   return (
     <main className="bg-surface-main relative min-h-screen overflow-hidden pt-32 pb-24 md:pt-48 md:pb-32">
+      {/* 00. SEARCH ENGINE INTELLIGENCE: Inject Schema */}
+      <JsonLd data={breadcrumbSchema} />
+
       {/* 01. ATMOSPHERIC INFRASTRUCTURE: เลเยอร์บรรยากาศเพื่อสร้างมิติ */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
@@ -42,7 +59,7 @@ export default function AreasPage() {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* 02. STRATEGIC HEADER: พาดหัวแบบกำหนดเอง */}
+        {/* 02. STRATEGIC HEADER: พาดหัวเน้น Identity Authority */}
         <header className="mb-24 max-w-5xl space-y-10 md:mb-32">
           <div className="border-brand-primary/20 bg-brand-primary/10 text-brand-primary inline-flex items-center gap-4 rounded-full border px-5 py-2 font-mono text-[10px] font-black tracking-[0.4em] uppercase">
             <IconRenderer name="Globe" size={14} />
@@ -60,20 +77,21 @@ export default function AreasPage() {
               <span className="text-brand-primary font-black not-italic">
                 "ความได้เปรียบทางธุรกิจ"
               </span>{" "}
-              ที่จับต้องได้จริงครับ
+              ที่จับต้องได้จริงทั่วไทยครับ
             </p>
           </div>
         </header>
 
-        {/* 03. AREA CARD GRID: การเรนเดอร์โหนดพื้นที่โดยตรง (Direct Mapping) */}
+        {/* 03. AREA CARD GRID: ทำงานร่วมกับ AreaCard (v17.0.3) 
+            เพื่อจัดการ LCP ผ่าน index อย่างแม่นยำ */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
           {AREA_NODES.map((node, index) => (
             <AreaCard key={node.slug} data={node} index={index} />
           ))}
         </div>
 
-        {/* 04. FALLBACK & SUPPORT NODE */}
-        <div className="mt-32 border-t border-white/5 pt-20 text-center">
+        {/* 04. FALLBACK & NATIONWIDE SUPPORT */}
+        <section className="mt-32 border-t border-white/5 pt-20 text-center">
           <div className="mx-auto max-w-3xl space-y-10">
             <h3 className="text-3xl font-black tracking-tighter text-white uppercase italic md:text-5xl">
               Beyond_The_List.
@@ -100,7 +118,7 @@ export default function AreasPage() {
               </Button>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );

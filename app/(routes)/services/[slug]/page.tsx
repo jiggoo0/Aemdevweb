@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.0.2 (STABILIZED)
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.0.4 (FINAL_CLEAN)
  * [STRATEGY]: Outcome-Driven Architecture | Adapter Pattern | SEO Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -15,7 +15,8 @@ import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
-import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/seo";
+// Import จาก lib/schema ตามโครงสร้างไฟล์ล่าสุด
+import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schema";
 
 // --- 3. Templates ---
 import CorporateTemplate from "@/components/templates/corporate/Index";
@@ -60,9 +61,11 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
 
   if (!service) notFound();
 
-  // [SEO SCHEMAS]: ยืนยันตัวตนบริการในสายตา Google
+  // [SEO SCHEMAS]: เรียกใช้ Function จาก lib/schema ตัวใหม่
   const serviceSchema = generateServiceSchema(service);
+  
   const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
     { name: "บริการทั้งหมด", item: `${SITE_CONFIG.siteUrl}/services` },
     { name: service.title, item: `${SITE_CONFIG.siteUrl}/services/${slug}` },
   ]);
@@ -91,7 +94,6 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
 
   /**
    * [ORCHESTRATION]: เลือก Template ที่เหมาะสมกับโมเดลธุรกิจ
-   * ส่ง Data เข้าไปตรงๆ ได้เลยเพราะเราแก้ Type ใน Template ให้รองรับ TemplateMasterData แล้ว
    */
   const renderTemplate = () => {
     switch (service.templateSlug) {
@@ -108,18 +110,18 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
         return <BioTemplate data={service} />;
 
       case "local":
-        // LocalTemplate ยังต้องการ AreaNode อยู่ จึงต้องใช้ Adapter
+        // LocalTemplate ต้องการ AreaNode จึงต้องผ่าน Adapter
         return <LocalTemplate data={adaptToAreaNode(service)} />;
 
       default:
-        // Fallback เป็น Corporate หากไม่ตรงเงื่อนไข
+        // Fallback
         return <CorporateTemplate data={service} />;
     }
   };
 
   return (
     <div className="bg-surface-main relative min-h-screen overflow-hidden">
-      {/* [ATMOSPHERIC INFRASTRUCTURE]: สร้างมิติทางสายตาด้วยระบบแสง Aura */}
+      {/* [ATMOSPHERIC INFRASTRUCTURE] */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
         aria-hidden="true"
@@ -128,6 +130,7 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
 
+      {/* SEO Injection */}
       <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
 

@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.0.2 (STABILIZED)
- * [STRATEGY]: Local Authority Engine | Dynamic Template Orchestration | Adapter Pattern
+ * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.0.6 (FINAL_CLEAN)
+ * [STRATEGY]: Local Authority Engine | Dynamic Template Orchestration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -15,7 +15,8 @@ import type { AreaNode, TemplateMasterData, PageProps } from "@/types";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
-import { generateLocalBusinessSchema } from "@/lib/seo";
+// Import จาก lib/schema ตามโครงสร้างไฟล์ล่าสุด
+import { generateLocalBusinessSchema } from "@/lib/schema";
 
 // --- 3. Specialist Templates ---
 import LocalTemplate from "@/components/templates/local/Index";
@@ -38,15 +39,69 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
     title: area.seoTitle || `${area.title} | ${SITE_CONFIG.brandName}`,
     description: area.seoDescription || area.description,
     alternates: { canonical: `${SITE_CONFIG.siteUrl}/areas/${slug}` },
-    // [FIX]: Spread Readonly Array to Mutable Array for Next.js Metadata Type Compatibility
+    openGraph: {
+      title: area.seoTitle,
+      description: area.seoDescription,
+      images: [{ url: area.heroImage || "/images/og-default.webp" }],
+      locale: "th_TH",
+      type: "website",
+    },
+    // Spread Readonly Array -> Mutable Array for Next.js Metadata
     keywords: [...(area.keywords || [])],
   };
 }
 
 /**
+ * [ADAPTER UTILITY]: แปลงข้อมูลจาก AreaNode -> TemplateMasterData
+ * ใช้ Logic นี้เพื่อ Inject ความเป็น "Nationwide Service" เข้าไปในเนื้อหา
+ */
+const adaptAreaToMasterData = (
+  baseArea: AreaNode,
+  category: TemplateMasterData["category"]
+): TemplateMasterData => {
+  return {
+    id: baseArea.slug,
+    title: baseArea.title,
+    description: baseArea.description,
+    priceValue: 0,
+    price: "ประเมินตามจริง",
+    currency: "THB",
+    unit: "โปรเจกต์",
+    category: category,
+    templateSlug: baseArea.templateSlug,
+    priority: baseArea.priority,
+    image: baseArea.heroImage,
+    // [LOGIC]: ผสม Keywords เข้ากับจุดเด่นพื้นที่และการบริการทั่วประเทศ
+    benefits: [
+      ...baseArea.keywords,
+      `บริการมาตรฐาน AEMDEVWEB ครอบคลุมพื้นที่ ${baseArea.province}`,
+      `รองรับเขต ${baseArea.districts.slice(0, 3).join(", ")} และพื้นที่ใกล้เคียง`,
+      "ทีมงาน Technical SEO ดูแลระบบหลังบ้าน 100%",
+    ],
+    coreFeatures: baseArea.keywords.map((kw, idx) => ({
+      title: kw,
+      description:
+        idx === 0
+          ? `โซลูชัน ${kw} ที่ปรับจูนมาเพื่อธุรกิจใน ${baseArea.province} โดยเฉพาะ`
+          : `ยกระดับขีดความสามารถการแข่งขันด้วยเทคโนโลยี Next.js`,
+      icon: idx % 2 === 0 ? "MapPin" : "Zap",
+    })),
+    faqs: [
+      {
+        question: `อยู่ ${baseArea.province} ใช้บริการ AEMDEVWEB ได้ไหม?`,
+        answer: `ได้แน่นอนครับ เราให้บริการทั่วประเทศ (Nationwide Service) ด้วยระบบการทำงานแบบ Remote Professional พร้อมประชุมผ่าน Zoom/Google Meet ได้ทันทีครับ`,
+      },
+      {
+        question: `ราคาทำเว็บไซต์สำหรับธุรกิจใน ${baseArea.province} เริ่มต้นเท่าไหร่?`,
+        answer: `เราประเมินราคาตามสเกลงานจริงเพื่อให้คุ้มค่าที่สุดสำหรับธุรกิจของคุณ เริ่มต้นวางแผนระบบให้ฟรีครับ`,
+      },
+    ],
+  };
+};
+
+/**
  * @component AreaDetailPage
- * @description หน้าเจาะลึกพื้นที่ให้บริการที่ปรับเปลี่ยน Template ตามความเหมาะสมของธุรกิจในพื้นที่นั้น
- * ใช้ Adapter Pattern เพื่อแปลงข้อมูลจาก AreaNode เป็น TemplateMasterData สำหรับ Template ที่แตกต่างกัน
+ * @description หน้า Landing Page รายจังหวัด (Dynamic Route)
  */
 export default async function AreaDetailPage({ params }: PageProps<{ slug: string }>) {
   const { slug } = await params;
@@ -54,75 +109,26 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
 
   if (!area) notFound();
 
-  // [SCHEMA]: สร้าง Local Business Schema เพื่อเพิ่มความน่าเชื่อถือในสายตา Google
+  // [SCHEMA]: สร้าง Local Business Schema โดยดึง Logic จาก lib/schema.ts
   const localSchema = generateLocalBusinessSchema(area);
 
   /**
-   * [ADAPTER ENGINE]: แปลงข้อมูลจาก AreaNode -> TemplateMasterData
-   * สำหรับ Corporate และ SalePage Template ที่ต้องการโครงสร้างข้อมูลแบบ Enterprise
-   */
-  const transformToMasterData = (
-    baseArea: AreaNode,
-    category: TemplateMasterData["category"],
-  ): TemplateMasterData => {
-    return {
-      id: baseArea.slug,
-      title: baseArea.title,
-      description: baseArea.description,
-      priceValue: 0, // Dynamic Pricing or Consult Base
-      price: "ประเมินตามจริง",
-      currency: "THB",
-      unit: "โปรเจกต์",
-      category: category,
-      templateSlug: baseArea.templateSlug,
-      priority: baseArea.priority,
-      image: baseArea.heroImage,
-      benefits: [
-        ...baseArea.keywords,
-        `รองรับลูกค้าในพื้นที่ ${baseArea.province} และ ${baseArea.districts.slice(0, 2).join(", ")}`,
-        "ระบบเว็บไซต์ความเร็วสูง (High-Performance)",
-      ],
-      coreFeatures: baseArea.keywords.map((kw, idx) => ({
-        title: kw,
-        description:
-          idx === 0
-            ? `บริการ ${kw} ที่ออกแบบมาเพื่อคน ${baseArea.province} โดยเฉพาะ`
-            : `ยกระดับมาตรฐานธุรกิจด้วยระบบ ${kw} ระดับมืออาชีพ`,
-        icon: idx % 2 === 0 ? "MapPin" : "Zap",
-      })),
-      faqs: [
-        {
-          question: `บริการทำเว็บไซต์ใน ${baseArea.province} ราคาเริ่มต้นเท่าไหร่?`,
-          answer: `สำหรับพื้นที่ ${baseArea.province} ทางเรามีแพ็กเกจเริ่มต้นที่คุ้มค่า โดยประเมินจากฟังก์ชันที่ธุรกิจคุณต้องใช้จริง เพื่อให้ได้ผลลัพธ์ที่ดีที่สุดครับ`,
-        },
-        {
-          question: `ทีมงานดูแลครอบคลุมถึงอำเภอไหนบ้างใน ${baseArea.province}?`,
-          answer: `เราให้บริการครอบคลุมทั้ง ${baseArea.districts.join(", ")} และพื้นที่ใกล้เคียงครับ สามารถนัด Online Meeting เพื่อคุยรายละเอียดได้ทันที`,
-        },
-      ],
-    };
-  };
-
-  /**
-   * [RENDER ORCHESTRATOR]: เลือก Template และ Inject Data ที่ผ่านการแปลงแล้ว
+   * [RENDER ORCHESTRATOR]: เลือก Template ตาม Strategy ของแต่ละพื้นที่
    */
   const renderTemplate = () => {
     switch (area.templateSlug) {
       case "corporate": {
-        // Corporate Template ต้องการ TemplateMasterData
-        const corporateData = transformToMasterData(area, "business");
+        const corporateData = adaptAreaToMasterData(area, "business");
         return <CorporateTemplate data={corporateData} />;
       }
 
       case "salepage": {
-        // SalePage Template ต้องการ TemplateMasterData
-        const salePageData = transformToMasterData(area, "landing");
+        const salePageData = adaptAreaToMasterData(area, "landing");
         return <SalePageTemplate data={salePageData} />;
       }
 
       case "local":
       default: {
-        // Local Template ออกแบบมาเพื่อรับ AreaNode โดยตรง (Best Fit)
         return <LocalTemplate data={area} />;
       }
     }
@@ -130,7 +136,7 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
 
   return (
     <div className="bg-surface-main relative min-h-screen overflow-hidden">
-      {/* [VISUAL INFRASTRUCTURE]: เลเยอร์บรรยากาศเพื่อยกระดับความพรีเมียม */}
+      {/* [VISUAL INFRASTRUCTURE] */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
         aria-hidden="true"
@@ -139,9 +145,13 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
 
+      {/* SEO Injection */}
       <JsonLd data={localSchema} />
 
-      <main className="animate-in fade-in relative z-10 duration-1000">{renderTemplate()}</main>
+      {/* Content Injection */}
+      <main className="animate-in fade-in relative z-10 duration-1000">
+        {renderTemplate()}
+      </main>
     </div>
   );
 }

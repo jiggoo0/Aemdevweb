@@ -1,12 +1,13 @@
 /**
- * [SYSTEM CORE]: AREA_NODES_DATA v17.0.1 (STABILIZED)
- * [STRATEGY]: Local SEO & Geographic Authority | Deep Immutability
+ * [SYSTEM CORE]: AREA_NODES_DATA v17.0.2 (NATIONWIDE_EXPANSION)
+ * [STRATEGY]: Strategic Geolocation | High-Value Keywords | Deep Immutability
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { AreaNode } from "@/types";
 
 export const AREA_NODES: readonly AreaNode[] = [
+  // --- [TIER 1]: Strategic Economic Hubs (หัวเมืองเศรษฐกิจหลัก) ---
   {
     slug: "bangkok",
     province: "กรุงเทพมหานคร",
@@ -25,6 +26,56 @@ export const AREA_NODES: readonly AreaNode[] = [
       "ยกระดับธุรกิจในกรุงเทพฯ ด้วยเว็บไซต์ที่เน้นยอดขายและการติดอันดับบน Google ด้วยมาตรฐานสากลปี 2026",
   },
   {
+    slug: "chiang-mai",
+    province: "เชียงใหม่",
+    templateSlug: "corporate",
+    title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บธุรกิจท่องเที่ยวและคาเฟ่ สไตล์ล้านนาโมเดิร์น",
+    description: "ดึงดูดนักท่องเที่ยวและ Digital Nomad ทั่วโลกด้วยเว็บไซต์ที่สวยงามและรองรับหลายภาษา",
+    longDescription:
+      "เชียงใหม่คือเมืองหลวงแห่ง Digital Nomad เราเข้าใจดีว่าธุรกิจที่นี่ต้องการภาพลักษณ์ที่ผสมผสานวัฒนธรรมเข้ากับความทันสมัย เราพร้อมสร้างเว็บไซต์ที่สะท้อนตัวตนแบรนด์ของคุณให้โดดเด่นบนเวทีโลก",
+    districts: ["เมืองเชียงใหม่", "นิมมานเหมินท์", "หางดง", "แม่ริม"],
+    keywords: ["รับทำเว็บไซต์ เชียงใหม่", "ออกแบบเว็บโรงแรม เชียงใหม่", "ทำ SEO เชียงใหม่"],
+    heroImage: "/images/areas/chiang-mai-node.webp",
+    priority: 99,
+    seoTitle: "รับทำเว็บไซต์ เชียงใหม่ | บริการออกแบบเว็บธุรกิจและท่องเที่ยวครบวงจร",
+    seoDescription:
+      "ยกระดับธุรกิจในเชียงใหม่ให้ก้าวไกลระดับโลก ด้วยเว็บไซต์คุณภาพสูงที่ออกแบบมาเพื่อนักท่องเที่ยวโดยเฉพาะ",
+  },
+  {
+    slug: "chon-buri",
+    province: "ชลบุรี",
+    templateSlug: "corporate",
+    title: "รับทำเว็บไซต์ ชลบุรี | รองรับธุรกิจ EEC และโรงงานอุตสาหกรรมด้วยมาตรฐานสากล",
+    description: "เว็บไซต์สำหรับธุรกิจในพัทยาและนิคมอุตสาหกรรม เน้นความน่าเชื่อถือและระบบหลังบ้านที่แข็งแกร่ง",
+    longDescription:
+      "พื้นที่ชลบุรีและพัทยาคือศูนย์กลางเศรษฐกิจภาคตะวันออก เว็บไซต์ของคุณต้องรองรับการเติบโตของ EEC เราเชี่ยวชาญการทำเว็บโรงงาน ธุรกิจขนส่ง และอสังหาริมทรัพย์ ที่ต้องการความเป๊ะทั้งดีไซน์และระบบ",
+    districts: ["เมืองชลบุรี", "บางละมุง (พัทยา)", "ศรีราชา", "แหลมฉบัง"],
+    keywords: ["รับทำเว็บไซต์ ชลบุรี", "ทำเว็บโรงงาน ชลบุรี", "รับทำเว็บไซต์ พัทยา"],
+    heroImage: "/images/areas/chon-buri-node.webp",
+    priority: 98,
+    seoTitle: "รับทำเว็บไซต์ ชลบุรี | ออกแบบเว็บธุรกิจและโรงงานอุตสาหกรรม EEC",
+    seoDescription:
+      "สร้างความเชื่อมั่นให้คู่ค้าต่างชาติ ด้วยเว็บไซต์มาตรฐานโรงงานและธุรกิจในชลบุรี-พัทยา",
+  },
+  {
+    slug: "phuket",
+    province: "ภูเก็ต",
+    templateSlug: "corporate",
+    title: "รับทำเว็บไซต์ ภูเก็ต | เจาะกลุ่มนักท่องเที่ยวไฮเอนด์ด้วยดีไซน์ระดับ Luxury",
+    description: "เว็บไซต์โรงแรม รีสอร์ท และอสังหาฯ ในภูเก็ต ที่สวยงามและโหลดไวบนมือถือ",
+    longDescription:
+      "ภูเก็ตคือไข่มุกอันดามันที่ต้อนรับคนทั้งโลก เว็บไซต์ของคุณคือหน้าด่านแรก เราเน้นดีไซน์ที่หรูหรา (Luxury) ภาพคมชัด และระบบจองที่ง่าย เพื่อเปลี่ยนผู้ชมให้กลายเป็นแขกคนพิเศษของคุณ",
+    districts: ["เมืองภูเก็ต", "กะทู้ (ป่าตอง)", "ถลาง"],
+    keywords: ["รับทำเว็บไซต์ ภูเก็ต", "ออกแบบเว็บโรงแรม ภูเก็ต", "ทำเว็บอสังหา ภูเก็ต"],
+    heroImage: "/images/areas/phuket-node.webp",
+    priority: 97,
+    seoTitle: "รับทำเว็บไซต์ ภูเก็ต | บริการทำเว็บโรงแรมและอสังหาฯ ระดับพรีเมียม",
+    seoDescription:
+      "ดึงดูดลูกค้าเกรดพรีเมียมทั่วโลก ด้วยเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจในภูเก็ตโดยเฉพาะ",
+  },
+
+  // --- [TIER 2]: Regional Leaders (หัวเมืองภูมิภาค) ---
+  {
     slug: "nakhon-sawan",
     province: "นครสวรรค์",
     templateSlug: "corporate",
@@ -35,7 +86,7 @@ export const AREA_NODES: readonly AreaNode[] = [
     districts: ["เมืองนครสวรรค์", "ลาดยาว", "ตาคลี", "ชุมแสง"],
     keywords: ["รับทำเว็บไซต์ นครสวรรค์", "ทำเว็บธุรกิจ นครสวรรค์", "บริการ SEO นครสวรรค์"],
     heroImage: "/images/areas/nakhon-sawan-node.webp",
-    priority: 98,
+    priority: 96,
     seoTitle: "รับทำเว็บไซต์ นครสวรรค์ | พัฒนาเว็บไซต์เพื่อการค้าและความเชื่อมั่นทางธุรกิจ",
     seoDescription:
       "สร้างตัวตนออนไลน์ให้ธุรกิจในนครสวรรค์โดดเด่นกว่าใคร ด้วยทีมงานทำเว็บและ SEO มืออาชีพ",
@@ -56,6 +107,8 @@ export const AREA_NODES: readonly AreaNode[] = [
     seoDescription:
       "เพิ่มยอดขายให้ธุรกิจในจังหวัดตากด้วยระบบ Sale Page ที่ใช้งานง่าย และช่วยให้ลูกค้าตัดสินใจซื้อได้จริง",
   },
+
+  // --- [TIER 3]: Local Stronghold (ฐานที่มั่นหลัก) ---
   {
     slug: "kamphaeng-phet",
     province: "กำแพงเพชร",
@@ -110,8 +163,9 @@ export const AREA_NODES: readonly AreaNode[] = [
 /**
  * [HELPER]: Get Featured Areas
  * เลือกข้อมูลพื้นที่ที่ต้องการแสดงผล โดยเรียงตามลำดับความสำคัญ (Priority)
+ * [UPDATE]: ขยายเป็น 6 อันดับแรก เพื่อโชว์ความครอบคลุม (Nationwide) มากขึ้น
  */
-export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.priority).slice(0, 4);
+export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.priority).slice(0, 6);
 
 /**
  * [HELPER]: Get Area by Slug

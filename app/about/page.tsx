@@ -1,5 +1,5 @@
 /**
- * [CORE PAGE]: ABOUT_US v17.0.2 (SPECIALIST_AUTHORITY_OPTIMIZED)
+ * [CORE PAGE]: ABOUT_US v17.0.3 (SCHEMA_MIGRATED)
  * [STRATEGY]: Identity Authority | Strategic Trust | Partner-Centric Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -12,7 +12,9 @@ import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import { SITE_CONFIG } from "@/constants/site-config";
-import { generatePersonSchema, generateBreadcrumbSchema } from "@/lib/seo";
+
+// [UPDATED]: Migrated from seo.ts to schema.ts (Centralized Engine)
+import { generatePersonSchema, generateBreadcrumbSchema } from "@/lib/schema";
 
 /* 2. Shared Components: หลักฐานแห่งความสำเร็จและความใส่ใจ */
 import TrustBadge from "@/components/shared/TrustBadge";

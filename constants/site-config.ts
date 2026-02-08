@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.3 (OPTIMIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.4 (NATIONWIDE_OPTIMIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -31,21 +31,21 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Strategic Keyword Clusters)
   keywords: [
-    // --- Commercial Intent (เน้นปิดการขาย) ---
+    // --- Commercial Intent (เน้นปิดการขายระดับประเทศ) ---
     "รับทำเว็บไซต์",
     "รับออกแบบเว็บไซต์",
     "จ้างทำเว็บไซต์ บริษัท",
-    "รับทำ Salepage", // [ADDED]: High Conversion Keyword
+    "รับทำ Salepage",
     "รับทำเว็บขายของออนไลน์", 
 
     // --- Technical & Performance (เน้นกลุ่มลูกค้าพรีเมียม) ---
     "รับทำเว็บไซต์ Next.js",
     "ทำเว็บไซต์ SEO",
-    "ทำเว็บโหลดเร็ว", // [ADDED]: Technical Benefit
-    "ทำเว็บ E-commerce", // [ADDED]: Specific Niche
+    "ทำเว็บโหลดเร็ว",
+    "ทำเว็บ E-commerce",
 
     // --- Local & Branding (ยึดพื้นที่และตัวตน) ---
-    "รับทำเว็บไซต์ กำแพงเพชร",
+    "รับทำเว็บไซต์ กำแพงเพชร", // ยังคงไว้เพื่อยึดฐานที่มั่นเดิม
     "ทำเว็บติดหน้าแรก Google",
     "นาย อลงกรณ์ ยมเกิด",
     "นายเอ็มซ่ามากส์",
@@ -56,7 +56,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "Premium Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.0.3", // Incremented for SEO Patch
+    version: "17.0.4", // Incremented for Expanded Focus Update
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -64,7 +64,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT Standard)
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
-    legalName: "Alongkorn Yomkerd", // [CORRECTED]: Standard Transliteration
+    legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
     jobTitle: "Technical SEO Specialist",
@@ -79,8 +79,10 @@ export const SITE_CONFIG: SiteConfig = {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
     displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
-    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร", // [REFINED]: Full format for Maps
-    address: "จังหวัดกำแพงเพชร ประเทศไทย",
+    // [RETAINED]: คงไว้เพื่อ Google Search Console Verification (EEAT)
+    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร", 
+    // [EXPANDED]: ปรับข้อความแสดงผลให้กว้างขึ้น
+    address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)", 
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
   },
@@ -94,10 +96,10 @@ export const SITE_CONFIG: SiteConfig = {
     github: "https://github.com/private",
   },
 
-  // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Local SEO Focus)
+  // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Expanded Focus)
   business: {
-    location: "Kamphaeng Phet",
-    region: "Thailand",
+    location: "Thailand", // [CHANGED]: จาก Kamphaeng Phet เป็น Thailand
+    region: "ASEAN",      // [CHANGED]: ขยายขอบเขตภูมิภาค
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",
