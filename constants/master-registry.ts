@@ -1,5 +1,5 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.0.1 (STABILIZED)
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.0.3 (FINAL_VERIFIED)
  * [STRATEGY]: Unified Visual Preview | Single Source of Truth | SEO Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -206,12 +206,13 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     ],
     priority: 15,
   },
-];
+] as const;
 
 /**
  * @const FEATURED_SERVICES
  * @description รายการบริการยอดนิยม (Featured/Popular)
+ * กรองและเรียงลำดับตาม Priority เพื่อนำไปแสดงผลใน Landing Page
  */
-export const FEATURED_SERVICES: readonly TemplateMasterData[] = [...MASTER_REGISTRY]
+export const FEATURED_SERVICES = [...MASTER_REGISTRY]
   .filter((svc) => svc.isFeatured || svc.isPopular)
   .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));

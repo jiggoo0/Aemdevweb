@@ -1,5 +1,5 @@
 /**
- * [FEATURE COMPONENT]: SERVICE_LISTING_HUB v17.0.2 (STABILIZED)
+ * [FEATURE COMPONENT]: SERVICE_LISTING_HUB v17.0.3 (TYPE_PERFECT)
  * [STRATEGY]: Strategic Grid Alignment | Empty Node Grace | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -12,14 +12,14 @@ import React, { useMemo, memo } from "react";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import ServiceCard from "./ServiceCard";
 import IconRenderer from "@/components/ui/IconRenderer";
-import type { ServiceData, ServiceCategory } from "@/types"; // ✅ Import จาก Global Types เพื่อความถูกต้อง
+import type { ServiceData, ServiceCategory } from "@/types";
 
 // --- 2. Utilities & Types ---
 import { cn } from "@/lib/utils";
 
 interface ServiceListingHubProps {
   readonly limit?: number;
-  readonly category?: ServiceCategory | string; // รองรับทั้ง Type และ String
+  readonly category?: ServiceCategory | string;
   readonly className?: string;
   readonly showEmptyState?: boolean;
 }
@@ -36,13 +36,12 @@ const ServiceListingHub = ({
 }: ServiceListingHubProps) => {
   /**
    * [DATA PROCESSING]: คัดเลือกและเรียงลำดับข้อมูลตาม Priority
-   * เพื่อให้มั่นใจว่าบริการที่สำคัญที่สุดจะปรากฏแก่สายตาลูกค้าก่อนเสมอ
    */
   const services = useMemo(() => {
-    // ใช้ Fallback [] กรณี MASTER_REGISTRY ยังไม่ถูกโหลด
-    const registry = MASTER_REGISTRY || [];
+    // Defensive Check: ป้องกัน undefined registry
+    const registry = Array.isArray(MASTER_REGISTRY) ? MASTER_REGISTRY : [];
 
-    // แปลง category เป็น string เพื่อการเปรียบเทียบที่ปลอดภัย
+    // Normalize Category string
     const targetCategory = typeof category === "string" ? category : undefined;
 
     return (
@@ -54,7 +53,7 @@ const ServiceListingHub = ({
     );
   }, [category, limit]);
 
-  /* 01. กรณีระบบกำลังจัดเตรียมข้อมูล (Empty Node State - v17 Design) */
+  /* 01. Empty State (v17 Design) */
   if (services.length === 0 && showEmptyState) {
     return (
       <div className="hover:border-brand-primary/20 flex flex-col items-center justify-center rounded-[2.5rem] border border-dashed border-white/10 bg-[#050505]/50 p-16 text-center backdrop-blur-md transition-all duration-500 md:p-24">
@@ -74,21 +73,19 @@ const ServiceListingHub = ({
     );
   }
 
-  /* 02. ระบบการจัดวาง Grid แบบ Specialist */
+  /* 02. Grid Layout */
   return (
     <div
-      className={cn(
-        // Grid System: ปรับระยะห่างให้ดูโปร่ง (Breathable Space)
-        "grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10",
-        className,
-      )}
+      className={cn("grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-10", className)}
     >
       {services.map((service, index) => (
         <ServiceCard
-          // ใช้ id เป็น key หลัก ถ้าไม่มีให้ใช้ title หรือ index (Fallback)
-          key={service.id || service.title || index}
-          data={service as ServiceData} // Type Assertion เพื่อความชัวร์
-          index={index} // ส่ง Index เพื่อให้ ServiceCard ทำ Staggered Animation
+          // Use unique ID or fallback
+          key={service.id || service.templateSlug || index}
+          // Type Assertion here is safe because MASTER_REGISTRY items conform to ServiceData
+          data={service as ServiceData}
+          index={index}
+          isPopular={service.isPopular}
         />
       ))}
     </div>

@@ -36,7 +36,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         "group relative flex min-h-[480px] flex-col overflow-hidden rounded-[2.5rem] transition-all duration-500 ease-out",
         "border border-white/10 bg-[#050505]",
         "hover:border-brand-primary/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)]",
-        className
+        className,
       )}
     >
       {/* 01. ATMOSPHERIC IMAGE LAYER */}
@@ -48,9 +48,9 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             fill
             className="object-cover opacity-60 transition-transform duration-[1.2s] group-hover:scale-110 group-hover:opacity-40"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // [AUDIT FIX]: ลดจาก index < 4 เหลือ index < 2 เพื่อแก้ปัญหา Over-preloading 
+            // [AUDIT FIX]: ลดจาก index < 4 เหลือ index < 2 เพื่อแก้ปัญหา Over-preloading
             // โหลดเฉพาะรูปที่อยู่ในหน้าจอแรก (Above the fold) จริงๆ เท่านั้น
-            priority={index < 2} 
+            priority={index < 2}
           />
 
           {/* Neural Scrim: ไล่เฉดสีเพื่อให้เนื้อหาคมชัด */}
@@ -90,7 +90,8 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           </div>
 
           <p className="line-clamp-2 text-sm leading-relaxed font-medium text-gray-400 italic">
-            {data.description || `ยกระดับธุรกิจใน ${displayTitle} ด้วยเว็บไซต์มาตรฐานสากลและกลยุทธ์ SEO`}
+            {data.description ||
+              `ยกระดับธุรกิจใน ${displayTitle} ด้วยเว็บไซต์มาตรฐานสากลและกลยุทธ์ SEO`}
           </p>
 
           {/* District Micro-tags */}

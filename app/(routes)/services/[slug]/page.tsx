@@ -63,7 +63,7 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
 
   // [SEO SCHEMAS]: เรียกใช้ Function จาก lib/schema ตัวใหม่
   const serviceSchema = generateServiceSchema(service);
-  
+
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
     { name: "บริการทั้งหมด", item: `${SITE_CONFIG.siteUrl}/services` },

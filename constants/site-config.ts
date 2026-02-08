@@ -36,7 +36,7 @@ export const SITE_CONFIG: SiteConfig = {
     "รับออกแบบเว็บไซต์",
     "จ้างทำเว็บไซต์ บริษัท",
     "รับทำ Salepage",
-    "รับทำเว็บขายของออนไลน์", 
+    "รับทำเว็บขายของออนไลน์",
 
     // --- Technical & Performance (เน้นกลุ่มลูกค้าพรีเมียม) ---
     "รับทำเว็บไซต์ Next.js",
@@ -80,9 +80,9 @@ export const SITE_CONFIG: SiteConfig = {
     phone: "099-032-2175",
     displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
     // [RETAINED]: คงไว้เพื่อ Google Search Console Verification (EEAT)
-    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร", 
+    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     // [EXPANDED]: ปรับข้อความแสดงผลให้กว้างขึ้น
-    address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)", 
+    address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)",
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
   },
@@ -99,7 +99,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Expanded Focus)
   business: {
     location: "Thailand", // [CHANGED]: จาก Kamphaeng Phet เป็น Thailand
-    region: "ASEAN",      // [CHANGED]: ขยายขอบเขตภูมิภาค
+    region: "ASEAN", // [CHANGED]: ขยายขอบเขตภูมิภาค
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",

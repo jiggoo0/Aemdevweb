@@ -27,10 +27,7 @@ export function generatePersonSchema() {
     "@type": "Person",
     "@id": absoluteUrl("/#expert"),
     name: SITE_CONFIG.expert.legalName,
-    alternateName: [
-      SITE_CONFIG.expert.legalNameThai,
-      SITE_CONFIG.expert.displayName,
-    ],
+    alternateName: [SITE_CONFIG.expert.legalNameThai, SITE_CONFIG.expert.displayName],
     givenName: SITE_CONFIG.expert.legalNameThai,
     familyName: "Yomkerd",
     jobTitle: SITE_CONFIG.expert.jobTitle,
@@ -38,11 +35,7 @@ export function generatePersonSchema() {
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     email: SITE_CONFIG.contact.email,
-    sameAs: [
-      SITE_CONFIG.links.facebook,
-      SITE_CONFIG.links.github,
-      SITE_CONFIG.links.line,
-    ],
+    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github, SITE_CONFIG.links.line],
     worksFor: { "@id": absoluteUrl("/#organization") },
     knowsAbout: [
       "Technical SEO",
@@ -67,10 +60,10 @@ export function generateOrganizationSchema() {
     logo: absoluteUrl("/images/logo.webp"),
     description: SITE_CONFIG.description,
     email: SITE_CONFIG.contact.email,
-    
+
     founder: { "@id": absoluteUrl("/#expert") },
     employee: [{ "@id": absoluteUrl("/#expert") }],
-    
+
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress,
@@ -81,9 +74,9 @@ export function generateOrganizationSchema() {
     },
 
     areaServed: [
-      { "@type": "Country", "name": "Thailand", "alternateName": "TH" },
-      { "@type": "AdministrativeArea", "name": "Bangkok", "alternateName": "กรุงเทพมหานคร" },
-      { "@type": "AdministrativeArea", "name": "Chiang Mai", "alternateName": "เชียงใหม่" }
+      { "@type": "Country", name: "Thailand", alternateName: "TH" },
+      { "@type": "AdministrativeArea", name: "Bangkok", alternateName: "กรุงเทพมหานคร" },
+      { "@type": "AdministrativeArea", name: "Chiang Mai", alternateName: "เชียงใหม่" },
     ],
 
     contactPoint: {
@@ -92,7 +85,7 @@ export function generateOrganizationSchema() {
       telephone: SITE_CONFIG.contact.phone,
       url: SITE_CONFIG.links.line,
       areaServed: "TH",
-      availableLanguage: ["Thai", "English"]
+      availableLanguage: ["Thai", "English"],
     },
     sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github],
   };
@@ -142,7 +135,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "16.4828", 
+      latitude: "16.4828",
       longitude: "99.5227",
     },
     areaServed: {

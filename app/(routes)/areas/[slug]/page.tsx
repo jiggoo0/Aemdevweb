@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
  */
 const adaptAreaToMasterData = (
   baseArea: AreaNode,
-  category: TemplateMasterData["category"]
+  category: TemplateMasterData["category"],
 ): TemplateMasterData => {
   return {
     id: baseArea.slug,
@@ -149,9 +149,7 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
       <JsonLd data={localSchema} />
 
       {/* Content Injection */}
-      <main className="animate-in fade-in relative z-10 duration-1000">
-        {renderTemplate()}
-      </main>
+      <main className="animate-in fade-in relative z-10 duration-1000">{renderTemplate()}</main>
     </div>
   );
 }
