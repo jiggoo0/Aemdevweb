@@ -1,246 +1,193 @@
 /**
- * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v17.3.9 (HYBRID_STABILIZED)
- * [STRATEGY]: Symmetric Balance | Multi-Theme Orchestration | Neural Physics
+ * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v17.4.6 (STABILIZED)
+ * [STRATEGY]: Symmetric Balance | Information Hierarchy | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
-
-// --- 1. Infrastructure & UI ---
+import { motion } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
+import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-// --- Data Structure ---
+// --- Types Protocol ---
 interface PricingPlan {
   readonly id: string;
   readonly name: string;
-  readonly description: string;
-  readonly price: string;
-  readonly unit?: string;
+  readonly price: number | string;
+  readonly unit: string;
   readonly features: readonly string[];
-  readonly highlight: boolean;
   readonly cta: string;
+  readonly highlight: boolean;
+  readonly href: string;
 }
 
-const PRICING_PLANS: readonly PricingPlan[] = [
-  {
-    id: "plan-standard",
-    name: "Standard Foundation",
-    description: "วางรากฐานเว็บไซต์ให้มั่นคง ดูเป็นมืออาชีพ เพื่อเริ่มต้นสร้างความเชื่อมั่นบนโลกออนไลน์",
-    price: "15,900",
-    unit: "/ Project",
-    features: [
-      "ระบบ Next.js ความเร็วสูง (Gen 2026)",
-      "Performance Score 95-100 คะแนน",
-      "Responsive Design ทุกหน้าจอ 100%",
-      "วางโครงสร้าง Technical SEO พื้นฐาน",
-      "เชื่อมต่อ Line OA / Facebook Chat",
-    ],
-    highlight: false,
-    cta: "เริ่มวางรากฐานธุรกิจ",
-  },
-  {
-    id: "plan-growth",
-    name: "Strategic Growth",
-    description: "แผนงานเชิงกลยุทธ์เพื่อขยายตลาด ดึงดูดลูกค้าใหม่ และเพิ่มโอกาสการขายอย่างยั่งยืน",
-    price: "29,500",
-    unit: "/ Project",
-    features: [
-      "ทุกความสามารถของแพ็กเกจ Standard",
-      "ระบบ MDX CMS จัดการบทความ SEO",
-      "เน้นทำอันดับ Keyword เชิงพาณิชย์",
-      "ติดตั้ง Analytics ติดตาม Conversion",
-      "สิทธิ์ปรึกษาแผนงานกับ Specialist",
-    ],
-    highlight: true,
-    cta: "ยกระดับธุรกิจให้เติบโต",
-  },
-  {
-    id: "plan-enterprise",
-    name: "Enterprise Custom",
-    description: "ระบบพิเศษที่ออกแบบเฉพาะทาง ตอบโจทย์เป้าหมายธุรกิจที่ซับซ้อนและสเกลใหญ่",
-    price: "Custom",
-    unit: "",
-    features: [
-      "สถาปัตยกรรมระบบออกแบบเฉพาะ (Tailored)",
-      "เชื่อมต่อ API และจัดการ Database",
-      "วางกลยุทธ์ SEO ระดับประเทศ/สากล",
-      "ความปลอดภัยระดับ Enterprise Security",
-      "ทีม Support ดูแลระบบแบบ Priority 24/7",
-    ],
-    highlight: false,
-    cta: "คุยแผนงานพิเศษ",
-  },
-] as const;
-
 const PricingSection = () => {
-  /* [PHYSICS]: Neural Flow Configuration */
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-  };
+  // [DATA_ENGINE]: Source of Truth Integration
+  const displayPlans = useMemo<readonly PricingPlan[]>(() => {
+    const foundationData = MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-CP-03");
+    const growthData = MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-SEO-07");
 
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: "spring", stiffness: 50, damping: 20 },
-    },
-  };
+    const plans: PricingPlan[] = [];
+
+    // 1. Module: Standard Foundation
+    if (foundationData) {
+      plans.push({
+        id: "foundation",
+        name: "Standard Foundation",
+        price: foundationData.priceValue,
+        unit: "/ Project",
+        features: foundationData.benefits.slice(0, 4),
+        cta: "เริ่มวางรากฐานธุรกิจ",
+        highlight: false,
+        href: `/services/${foundationData.templateSlug}`,
+      });
+    }
+
+    // 2. Module: Strategic Growth (Focal Point)
+    if (growthData) {
+      plans.push({
+        id: "growth",
+        name: "Strategic Growth",
+        price: growthData.priceValue,
+        unit: `/ ${growthData.unit}`,
+        features: [...growthData.benefits.slice(0, 3), "Specialist Consultation (Priority)"],
+        cta: "ยกระดับธุรกิจให้เติบโต",
+        highlight: true,
+        href: `/services/${growthData.templateSlug}`,
+      });
+    }
+
+    // 3. Module: Enterprise Custom
+    plans.push({
+      id: "enterprise",
+      name: "Enterprise Custom",
+      price: "Custom",
+      unit: "Tailored Architecture",
+      features: [
+        "Infrastructure Scaling Strategy",
+        "API & Advanced DB Integration",
+        "National SEO Dominance",
+        "Dedicated Support Node",
+      ],
+      cta: "คุยแผนงานพิเศษ",
+      highlight: false,
+      href: SITE_CONFIG.links.line,
+    });
+
+    return plans;
+  }, []);
 
   return (
-    <section id="pricing" className="relative w-full overflow-hidden bg-surface-main transition-colors duration-500">
-      {/* 01. VALUE PROPOSITION: Header */}
-      <div className="mb-20 max-w-4xl md:mb-28">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="border-brand-primary/30 bg-brand-primary/5 mb-8 inline-flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-md"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
-          </span>
-          <span className="text-brand-primary font-mono text-[10px] font-bold tracking-[0.3em] uppercase">
-            Investment_Logic.v2
-          </span>
-        </motion.div>
-
-        <h2 className="text-text-primary text-5xl font-black tracking-tighter text-balance uppercase md:text-7xl lg:text-8xl">
-          Value-Driven <br />
-          <span className="from-brand-primary bg-gradient-to-r to-emerald-500 bg-clip-text text-transparent">
-            Investment.
-          </span>
-        </h2>
-
-        <div className="border-brand-primary/50 mt-8 border-l-4 pl-6 md:pl-8">
-          <p className="text-text-secondary max-w-2xl text-lg leading-relaxed font-medium md:text-2xl">
-            งบประมาณที่โปร่งใส คือ{" "}
-            <span className="decoration-brand-primary text-text-primary underline decoration-2 underline-offset-4">
-              ความจริงใจ
-            </span>{" "}
-            ที่เราพร้อมเปลี่ยนทุกการลงทุนให้เป็นระบบทำเงินที่วัดผลได้จริง
+    <section id="pricing" className="overflow-hidden py-32 md:py-48 lg:py-56">
+      <div className="container mx-auto px-4">
+        {/* --- 01. HEADER: Macro-Typography --- */}
+        <header className="mb-24 max-w-5xl">
+          <div className="bg-brand-primary mb-8 h-2 w-24 rounded-full" />
+          <h2 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-9xl">
+            Value-Driven <br />
+            <span className="text-brand-primary">Investment.</span>
+          </h2>
+          <p className="text-text-secondary border-brand-primary mt-12 max-w-3xl border-l-[6px] pl-10 text-xl font-medium italic opacity-80 md:text-3xl">
+            “งบประมาณที่โปร่งใส คือความจริงใจที่เราเปลี่ยนเป็นการทำเงินที่วัดผลได้จริง”
           </p>
-        </div>
-      </div>
+        </header>
 
-      {/* 02. PRICING GRID: Cards */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center"
-      >
-        {PRICING_PLANS.map((plan) => (
-          <motion.div
-            key={plan.id}
-            variants={cardVariants}
-            className={cn(
-              "group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border p-8 transition-all duration-500 md:p-10",
-              /* [HYBRID THEME]: ปรับจูนพื้นหลังและการ์ดตามโหมด */
-              plan.highlight
-                ? "border-brand-primary bg-brand-primary/[0.03] z-10 shadow-glow lg:scale-110 lg:py-12"
-                : "border-border bg-surface-card hover:border-brand-primary/30 hover:bg-surface-offset/50",
-            )}
-          >
-            {/* Dynamic Glow Overlay */}
-            {plan.highlight && (
-              <div className="bg-brand-primary/10 absolute -top-20 -right-20 h-40 w-40 rounded-full blur-[80px] opacity-[var(--ambient-opacity)]" />
-            )}
-
-            <div>
-              {/* Header Node */}
-              <div className="mb-8 flex items-start justify-between">
-                <div>
-                  <h3 className={cn(
-                    "text-2xl font-black tracking-tight uppercase md:text-3xl",
-                    "text-text-primary"
-                  )}>
-                    {plan.name}
-                  </h3>
-                  {plan.highlight && (
-                    <span className="bg-brand-primary mt-2 inline-block rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wider text-surface-main uppercase">
-                      Recommended
+        {/* --- 02. PRICING GRID --- */}
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:items-center lg:gap-12">
+          {displayPlans.map((plan, i) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ delay: i * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -12 }}
+              className={cn(
+                "bg-surface-card border-border relative flex flex-col rounded-[4rem] border p-12 transition-all duration-700",
+                plan.highlight
+                  ? "border-brand-primary shadow-glow ring-brand-primary/20 bg-surface-card/80 z-20 ring-1 backdrop-blur-3xl lg:scale-[1.05] lg:py-20"
+                  : "hover:border-brand-primary/30 shadow-pro-sm",
+              )}
+            >
+              {/* Specialist Choice Badge */}
+              {plan.highlight && (
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+                  <div className="bg-brand-primary text-surface-main shadow-glow flex items-center gap-3 rounded-full px-8 py-2.5">
+                    <IconRenderer name="Zap" size={14} className="fill-current" />
+                    <span className="text-[11px] font-black tracking-widest uppercase">
+                      Recommended_Path
                     </span>
-                  )}
+                  </div>
                 </div>
-                <IconRenderer
-                  name={plan.highlight ? "Zap" : "Layers"}
-                  className={cn("h-6 w-6 transition-colors duration-500", plan.highlight ? "text-brand-primary" : "text-text-muted")}
-                />
-              </div>
+              )}
 
-              {/* Price Node */}
-              <div className="border-border mb-8 border-b pb-8">
-                <div className="flex items-baseline gap-1">
-                  <span className={cn(
-                    "text-4xl font-black tracking-tighter md:text-5xl",
-                    plan.highlight ? "text-brand-primary" : "text-text-primary"
-                  )}>
-                    {plan.price !== "Custom" ? `฿${plan.price}` : plan.price}
+              {/* Plan Header */}
+              <div className="border-border mb-10 border-b pb-10">
+                <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-40">
+                  Plan_Node.0{i + 1}
+                </span>
+                <h3 className="text-text-primary mt-4 text-3xl font-black tracking-tighter uppercase italic">
+                  {plan.name}
+                </h3>
+
+                <div className="mt-8 flex flex-col gap-1">
+                  <div className="flex items-baseline gap-2">
+                    {typeof plan.price === "number" && (
+                      <span className="text-brand-primary text-sm font-black opacity-60">฿</span>
+                    )}
+                    <span className="text-text-primary text-6xl font-black tracking-tighter tabular-nums md:text-7xl">
+                      {typeof plan.price === "number"
+                        ? plan.price.toLocaleString("th-TH")
+                        : plan.price}
+                    </span>
+                  </div>
+                  <span className="text-text-muted font-mono text-[9px] font-bold tracking-[0.3em] uppercase opacity-50">
+                    {plan.unit}
                   </span>
-                  {plan.unit && (
-                    <span className="text-text-muted font-mono text-xs font-medium">{plan.unit}</span>
-                  )}
                 </div>
-                <p className="text-text-secondary mt-4 text-sm leading-relaxed">{plan.description}</p>
               </div>
 
-              {/* Features List */}
-              <ul className="mb-10 space-y-4">
+              {/* Feature Matrix */}
+              <ul className="mb-14 flex-grow space-y-6">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <div className={cn(
-                      "mt-0.5 rounded-full p-0.5",
-                      plan.highlight ? "text-brand-primary" : "text-text-muted"
-                    )}>
-                      <IconRenderer name="Check" size={14} strokeWidth={3} />
+                  <li key={idx} className="flex items-start gap-5">
+                    <div
+                      className={cn(
+                        "mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-xl border",
+                        plan.highlight
+                          ? "bg-brand-primary border-brand-primary text-surface-main shadow-glow"
+                          : "bg-surface-offset border-border text-brand-primary",
+                      )}
+                    >
+                      <IconRenderer name="Check" size={12} strokeWidth={4} />
                     </div>
-                    <span className="text-text-secondary text-sm font-medium">{feature}</span>
+                    <span className="text-text-secondary group-hover:text-text-primary text-base leading-snug font-bold italic opacity-90 transition-colors">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
-            </div>
 
-            {/* CTA Interaction Hub */}
-            <Link
-              href={SITE_CONFIG.links.line}
-              className={cn(
-                "group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-xs font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]",
-                plan.highlight
-                  ? "bg-brand-primary text-surface-main hover:shadow-glow shadow-lg"
-                  : "bg-text-primary text-surface-main hover:bg-brand-primary hover:text-surface-main shadow-md",
-              )}
-            >
-              <span className="relative z-10">{plan.cta}</span>
-              <IconRenderer
-                name="ArrowRight"
-                size={14}
-                className="relative z-10 transition-transform group-hover/btn:translate-x-1"
-              />
-              <div className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover/btn:translate-x-full" />
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* 03. SYSTEM FOOTNOTE */}
-      <div className="mt-16 text-center md:mt-24">
-        <p className="text-text-muted text-[10px] font-bold tracking-widest uppercase">
-          * ราคาทั้งหมดเป็นราคาเริ่มต้นและยังไม่รวม VAT 7% • ดูแลความปลอดภัยฟรี 1 ปีเต็ม
-        </p>
+              {/* Interaction Node */}
+              <Link
+                href={plan.href}
+                className={cn(
+                  "flex h-20 w-full items-center justify-center rounded-[2rem] text-[12px] font-black tracking-[0.3em] uppercase transition-all duration-500",
+                  plan.highlight
+                    ? "bg-brand-primary text-surface-main shadow-glow hover:scale-[1.02] active:scale-[0.98]"
+                    : "bg-surface-offset text-text-primary border-border hover:border-brand-primary hover:text-brand-primary hover:shadow-glow-sm border",
+                )}
+              >
+                {plan.cta}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -21,12 +21,9 @@
 │   │   │   │   └── page.tsx
 │   │   │   └── page.tsx
 │   │   ├── layout.tsx
-│   │   ├── services
-│   │   │   ├── [slug]
-│   │   │   │   └── page.tsx
-│   │   │   └── page.tsx
-│   │   └── test-mdx
-│   │       ├── content.mdx
+│   │   └── services
+│   │       ├── [slug]
+│   │       │   └── page.tsx
 │   │       └── page.tsx
 │   ├── about
 │   │   └── page.tsx
@@ -65,6 +62,8 @@
 │   │   ├── Navbar.tsx
 │   │   ├── PageTransition.tsx
 │   │   └── TopLoader.tsx
+│   ├── providers
+│   │   └── theme-provider.tsx
 │   ├── seo
 │   │   └── JsonLd.tsx
 │   ├── shared
@@ -82,20 +81,28 @@
 │   │   ├── corporate
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   ├── local
+│   │   ├── hotelresort
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
+│   │   ├── local_service
+│   │   │   ├── Schema.ts
+│   │   │   └── index.tsx
 │   │   ├── salepage
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   └── sections
-│   │       ├── DynamicFAQ.tsx
-│   │       ├── FeatureGrid.tsx
-│   │       ├── HeroEngine.tsx
-│   │       └── LayoutEngine.tsx
+│   │   ├── sections
+│   │   │   ├── DynamicFAQ.tsx
+│   │   │   ├── FeatureGrid.tsx
+│   │   │   ├── HeroEngine.tsx
+│   │   │   └── LayoutEngine.tsx
+│   │   └── seo_agency
+│   │       ├── Schema.ts
+│   │       └── index.tsx
 │   └── ui
+│       ├── AmbientBackground.tsx
 │       ├── IconRenderer.tsx
 │       ├── SkeletonCard.tsx
+│       ├── ThemeToggle.tsx
 │       ├── button.tsx
 │       ├── skeleton-grid.tsx
 │       ├── skeleton.tsx
@@ -113,17 +120,18 @@
 │   ├── blog
 │   │   ├── 5-points-killing-sales.mdx
 │   │   ├── advanced-schema-markup.mdx
+│   │   ├── case-study-unlink-th.mdx
 │   │   ├── copywriting-secrets.mdx
 │   │   ├── core-web-vitals-speed.mdx
 │   │   ├── ecommerce-conversion-seo.mdx
 │   │   ├── facebook-ads-vs-website.mdx
-│   │   ├── seo-for-sme-2026.mdx
-│   │   ├── seo-google-love-technical-guide.mdx
-│   │   ├── starting-business-low-budget-website.mdx
-│   │   └── technical-structure-audit.mdx
+│   │   ├── lower-north-digital-transformation.mdx
+│   │   ├── seo-2026-strategy.mdx
+│   │   ├── technical-audit-protocol.mdx
+│   │   └── technical-seo-guide.mdx
 │   └── case-studies
-│       ├── industrial-catalog-rfq-optimization.mdx
-│       ├── sme-web-performance-growth.mdx
+│       ├── case-study-industrial-catalog.mdx
+│       ├── case-study-industrial-catalog.mdx (2)
 │       └── unlink-reputation-management-success.mdx
 ├── eslint.config.mjs
 ├── hooks
@@ -131,6 +139,7 @@
 ├── lib
 │   ├── cms.ts
 │   ├── schema.ts
+│   ├── seo-utils.ts
 │   └── utils.ts
 ├── mdx-components.tsx
 ├── next-env.d.ts
@@ -143,7 +152,6 @@
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
 │   ├── apple-touch-icon.png
-│   ├── favicon-16x16.png
 │   ├── favicon-32x32.png
 │   ├── favicon.ico
 │   ├── grid-pattern.svg
@@ -161,7 +169,8 @@
 │       │   ├── phuket-node.webp
 │       │   ├── preview.webp
 │       │   ├── sukhothai-node.webp
-│       │   └── tak-node.webp
+│       │   ├── tak-node.webp
+│       │   └── uttaradit-node.webp
 │       ├── avatar.webp
 │       ├── blog
 │       │   ├── advanced-schema-markup.webp
@@ -170,13 +179,11 @@
 │       │   ├── default-thumb.webp
 │       │   ├── ecommerce-seo.webp
 │       │   ├── facebook-ads-vs-website.webp
-│       │   ├── project-01.webp
 │       │   ├── seo-google-love.webp
 │       │   └── technical-audit-visual.webp
 │       ├── case-studies
 │       │   ├── industrial-catalog.webp
 │       │   ├── industrial-ui-preview.webp
-│       │   ├── industrial-ui-preview.webp (2)
 │       │   ├── preview.webp
 │       │   └── unlink-reputation.webp
 │       ├── expert
@@ -191,14 +198,18 @@
 │       │   ├── ecommerce-seo.webp
 │       │   └── seo.webp
 │       ├── service
-│       │   └── preview.webp
+│       │   ├── catalog-node.webp
+│       │   ├── corporate-node.webp
+│       │   ├── hotel-resort-node.webp
+│       │   ├── local-node.webp
+│       │   ├── personal-node.webp
+│       │   ├── salepage-node.webp
+│       │   └── seo-agency-node.webp
 │       ├── shared
 │       │   ├── placeholder.webp
 │       │   └── preview.webp
 │       ├── showcase
-│       │   ├── industrial-ui-preview.webp
-│       │   ├── project-01.webp
-│       │   └── unlink-th.webp
+│       │   └── industrial-ui-preview.webp
 │       ├── templates
 │       │   ├── corporate-pro
 │       │   │   └── og.webp
@@ -226,8 +237,10 @@
 │       │   └── webrental
 │       │       └── og.webp
 │       └── ui
+├── structure.txt
 ├── tsconfig.json
 ├── tsconfig.tsbuildinfo
 └── types
     ├── index.d.ts
-    └── mdx.d.ts
+    ├── mdx.d.ts
+    └── template-props.ts

@@ -1,86 +1,78 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.3.9 (HYBRID_STABILIZED)
- * [STRATEGY]: Information Architecture | Theme-Aware Physics | Deterministic Stability
+ * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.5.3 (SYNCHRONIZED)
+ * [STRATEGY]: Atomic Data Mapping | Performance Optimized | Vivid UI Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
+"use client";
+
 import React, { memo } from "react";
 import Link from "next/link";
-
-// --- 1. Infrastructure & Data ---
 import { SITE_CONFIG } from "@/constants/site-config";
 import { FOOTER_MAP } from "@/constants/navigation";
-
-// --- 2. UI Components ---
-import IconRenderer from "@/components/ui/IconRenderer";
+import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 
 const Footer = () => {
-  /* [DETERMINISTIC FIX]: ล็อคค่าปีให้ตรงกับ Server-side เพื่อค่า CLS: 0 */
-  const currentYear = SITE_CONFIG.business.established.split('-')[0] || "2026";
+  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 เพื่อป้องกัน Hydration Mismatch ในฝั่ง Client
+  const currentYear = 2026;
 
   return (
-    <footer className="relative overflow-hidden border-t border-border bg-surface-main pt-24 pb-12 transition-colors duration-700">
-      
-      {/* 01. ATMOSPHERIC INFRASTRUCTURE: เลเยอร์บรรยากาศแบบ Dynamic */}
-      <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-        
-        {/* GPU-Accelerated Auras: ปรับตามตัวแปร --ambient-opacity ของระบบ */}
-        <div className="ambient-aura absolute -bottom-24 -left-24 h-[500px] w-[500px] opacity-[var(--ambient-opacity)]" />
-        <div className="absolute -top-24 -right-24 h-[400px] w-[400px] rounded-full bg-blue-600/5 blur-[100px] opacity-[var(--ambient-opacity)]" />
+    <footer className="border-border bg-surface-main relative overflow-hidden border-t pt-24 pb-12 transition-colors duration-700">
+      {/* --- 01. INFRASTRUCTURE LAYER (Visual Atmosphere) --- */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
+        <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
-
-      
+      <div
+        className="ambient-aura absolute -bottom-48 -left-48 h-[600px] w-[600px] opacity-20 blur-[120px]"
+        style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
+      />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* [NODE GRID]: 4-Column Architecture */}
-        <div className="mb-20 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          
-          {/* Node 01: Brand Identity & Intelligence */}
+        <div className="mb-24 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+          {/* Node 01: Brand Identity & Values */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <Link href="/" className="group inline-flex items-center gap-4">
-                {/* Logo Box: ใช้สี Inverted เพื่อความคมชัดสูงสุดในทุกธีม */}
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-text-primary text-surface-main shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
-                  <IconRenderer name="Cpu" size={24} strokeWidth={2.5} className="text-surface-main" />
+              <Link href="/" className="group inline-flex items-center gap-4 outline-none">
+                <div className="bg-text-primary flex h-14 w-14 items-center justify-center rounded-2xl shadow-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-[15deg]">
+                  <IconRenderer name="Cpu" size={28} className="text-surface-main" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-text-primary font-sans text-xl leading-none font-black tracking-tighter uppercase">
+                  <span className="text-text-primary text-2xl leading-none font-black tracking-tighter uppercase italic">
                     {SITE_CONFIG.brandName}
                   </span>
-                  <span className="text-brand-primary font-mono text-[8px] font-black tracking-[0.3em] uppercase">
-                    Specialist.Node_v{SITE_CONFIG.project.version}
+                  <span className="text-brand-primary mt-1 font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+                    Specialist_Infrastructure
                   </span>
                 </div>
               </Link>
-              <p className="text-text-secondary max-w-xs text-sm leading-relaxed font-medium italic">
+              <p className="text-text-secondary max-w-[280px] text-sm leading-relaxed font-medium italic opacity-80">
                 “{SITE_CONFIG.description}”
               </p>
             </div>
 
-            {/* Social Interconnects Protocol */}
+            {/* Social Matrix */}
             <div className="flex items-center gap-3">
               {[
                 { name: "Facebook", href: SITE_CONFIG.links.facebook, icon: "Facebook" },
-                { name: "Github", href: SITE_CONFIG.links.github, icon: "Github" },
                 { name: "Line OA", href: SITE_CONFIG.links.line, icon: "MessageCircle" },
+                { name: "Github", href: SITE_CONFIG.links.github, icon: "Github" },
               ].map((social) => (
                 <Link
                   key={social.name}
                   href={social.href}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-border bg-surface-card text-text-secondary hover:border-brand-primary hover:bg-brand-primary/10 hover:text-brand-primary flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:shadow-glow"
+                  className="border-border bg-surface-card text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-glow flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300"
+                  aria-label={social.name}
                 >
-                  <IconRenderer name={social.icon} size={18} />
+                  <IconRenderer name={social.icon as IconName} size={18} />
                 </Link>
               ))}
             </div>
           </div>
 
           {/* Node 02: Strategic Solutions */}
-          <div className="space-y-8">
-            <h3 className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+          <div className="space-y-10">
+            <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
               Strategic_Solutions
             </h3>
             <ul className="space-y-4">
@@ -88,10 +80,12 @@ const Footer = () => {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-2 text-sm font-bold text-text-secondary transition-all duration-300 hover:text-text-primary"
+                    className="group text-text-secondary hover:text-brand-primary flex items-center gap-3 text-sm font-bold transition-all duration-300"
                   >
-                    <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:w-2 group-hover:opacity-100" />
-                    {item.label}
+                    <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:scale-150 group-hover:opacity-100" />
+                    <span className="transition-transform group-hover:translate-x-1">
+                      {item.label}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -99,8 +93,8 @@ const Footer = () => {
           </div>
 
           {/* Node 03: Corporate Nexus */}
-          <div className="space-y-8">
-            <h3 className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+          <div className="space-y-10">
+            <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
               Corporate_Nexus
             </h3>
             <ul className="space-y-4">
@@ -108,10 +102,12 @@ const Footer = () => {
                 <li key={item.label}>
                   <Link
                     href={item.href}
-                    className="group flex items-center gap-2 text-sm font-bold text-text-secondary transition-all duration-300 hover:text-text-primary"
+                    className="group text-text-secondary hover:text-brand-primary flex items-center gap-3 text-sm font-bold transition-all duration-300"
                   >
-                    <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:w-2 group-hover:opacity-100" />
-                    {item.label}
+                    <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:scale-150 group-hover:opacity-100" />
+                    <span className="transition-transform group-hover:translate-x-1">
+                      {item.label}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -119,33 +115,35 @@ const Footer = () => {
           </div>
 
           {/* Node 04: Coordination Center */}
-          <div className="space-y-8">
-            <h3 className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+          <div className="space-y-10">
+            <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
               Coordination_Center
             </h3>
-            <div className="space-y-6">
-              <a
-                href={`mailto:${SITE_CONFIG.contact.email}`}
-                className="group -ml-2 flex items-start gap-4 rounded-xl p-2 transition-colors hover:bg-surface-offset"
-              >
-                <div className="border-border bg-surface-card text-brand-primary group-hover:bg-brand-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-500 group-hover:text-surface-main group-hover:shadow-glow">
-                  <IconRenderer name="Mail" size={18} />
-                </div>
-                <div className="space-y-1">
-                  <p className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase">Email_Protocol</p>
-                  <p className="text-text-primary group-hover:text-brand-primary text-sm font-black tracking-tight transition-colors">
-                    {SITE_CONFIG.contact.email}
-                  </p>
+            <div className="space-y-7">
+              <a href={`mailto:${SITE_CONFIG.contact.email}`} className="group block">
+                <div className="flex items-start gap-4">
+                  <div className="border-border bg-surface-card text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all duration-500">
+                    <IconRenderer name="Mail" size={18} />
+                  </div>
+                  <div>
+                    <p className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase opacity-60">
+                      Primary_Email
+                    </p>
+                    <p className="text-text-primary group-hover:text-brand-primary font-bold transition-colors">
+                      {SITE_CONFIG.contact.email}
+                    </p>
+                  </div>
                 </div>
               </a>
-
-              <div className="group -ml-2 flex items-start gap-4 p-2">
-                <div className="border-border bg-surface-card text-brand-primary group-hover:bg-brand-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border transition-all duration-500 group-hover:text-surface-main group-hover:shadow-glow">
+              <div className="flex items-start gap-4">
+                <div className="border-border bg-surface-card text-brand-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border">
                   <IconRenderer name="MapPin" size={18} />
                 </div>
-                <div className="space-y-1">
-                  <p className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase">Base_Location</p>
-                  <address className="text-text-secondary text-sm leading-relaxed font-medium not-italic">
+                <div>
+                  <p className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase opacity-60">
+                    Base_Deployment
+                  </p>
+                  <address className="text-text-secondary text-xs leading-relaxed font-medium not-italic">
                     {SITE_CONFIG.contact.address} <br />
                     {SITE_CONFIG.contact.postalCode}
                   </address>
@@ -155,19 +153,27 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* [LEGAL & SYSTEM STATUS] */}
-        <div className="border-border flex flex-col items-center justify-between gap-8 border-t pt-12 md:flex-row">
-          <div className="flex flex-col items-center gap-6 md:items-start lg:flex-row lg:gap-12">
+        {/* --- 02. SYSTEM STATUS & LEGAL INFRASTRUCTURE --- */}
+        <div className="border-border flex flex-col items-center justify-between gap-10 border-t pt-12 md:flex-row">
+          <div className="flex flex-col items-center gap-6 md:items-start lg:flex-row lg:gap-16">
             <div className="text-center md:text-left">
-              <p className="text-text-muted mb-2 font-mono text-[9px] font-black tracking-widest uppercase">
-                System_Status: Online // Node_v{SITE_CONFIG.project.version}
-              </p>
-              <p className="text-text-secondary text-[10px] font-bold tracking-widest uppercase">
-                &copy; {currentYear} {SITE_CONFIG.brandName}. All Rights Reserved.
+              <div className="mb-2 flex items-center justify-center gap-3 md:justify-start">
+                <div className="relative h-2 w-2">
+                  <div className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-40" />
+                  <div className="relative h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+                </div>
+                <p className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase">
+                  System_Status: <span className="text-emerald-500">Online</span> // v
+                  {SITE_CONFIG.project.version}
+                </p>
+              </div>
+              <p className="text-text-secondary text-[10px] font-bold tracking-widest uppercase opacity-60">
+                &copy; {currentYear} {SITE_CONFIG.brandName}. Engineered for Excellence.
               </p>
             </div>
 
-            <div className="flex items-center gap-6">
+            {/* Legal & Utility Matrix */}
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               {FOOTER_MAP.legal.map((item) => (
                 <Link
                   key={item.label}
@@ -180,21 +186,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* ACTIVE PULSE SIGNATURE */}
-          <a
-            href={SITE_CONFIG.links.line}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-border bg-surface-card hover:border-brand-primary/30 flex items-center gap-4 rounded-full border px-6 py-2 transition-all hover:bg-surface-offset hover:shadow-glow"
-          >
-            <div className="relative h-2 w-2">
-              <div className="bg-brand-primary absolute inset-0 animate-ping rounded-full opacity-50" />
-              <div className="bg-brand-primary relative h-2 w-2 rounded-full shadow-glow" />
-            </div>
-            <span className="text-text-primary font-mono text-[9px] font-black tracking-[0.3em] uppercase">
-              Engineered by {SITE_CONFIG.expert.displayName}
+          {/* Expert Signature */}
+          <div className="border-border bg-surface-card hover:border-brand-primary/40 hover:shadow-glow flex items-center gap-4 rounded-2xl border px-6 py-2.5 transition-all duration-500">
+            <IconRenderer name="ShieldCheck" size={16} className="text-brand-primary" />
+            <span className="text-text-primary font-mono text-[10px] font-black tracking-widest uppercase">
+              DECODED BY {SITE_CONFIG.expert.displayName}
             </span>
-          </a>
+          </div>
         </div>
       </div>
     </footer>

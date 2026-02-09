@@ -1,5 +1,3 @@
-// types/mdx.d.ts
-
 declare module "*.mdx" {
   import type { ComponentType, ReactNode } from "react";
 
@@ -9,5 +7,6 @@ declare module "*.mdx" {
 
 declare module "mdx/types" {
   import type { ComponentType, ReactNode } from "react";
+  // Extending definition to allow strictly typed MDX components
   export type MDXComponents = Record<string, ComponentType<{ children?: ReactNode }> | string>;
 }

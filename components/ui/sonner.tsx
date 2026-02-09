@@ -1,5 +1,5 @@
 /**
- * [SYSTEM MODULE]: SPECIALIST_NOTIFICATION_SYSTEM v17.3.9 (HYBRID_STABILIZED)
+ * [SYSTEM MODULE]: SPECIALIST_NOTIFICATION_SYSTEM v17.4.5 (HYBRID_STABILIZED)
  * [STRATEGY]: Semantic Perceptual Integrity | Theme-Aware Depth | Fluid Feedback
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -30,7 +30,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           toast: cn(
             "group toast group-[.toaster]:bg-surface-card/90 group-[.toaster]:text-text-primary",
             "group-[.toaster]:border-border group-[.toaster]:backdrop-blur-xl group-[.toaster]:rounded-[1.5rem]",
-            "group-[.toaster]:p-6 group-[.toaster]:shadow-glow transition-all duration-500"
+            "group-[.toaster]:p-6 group-[.toaster]:shadow-glow transition-all duration-500",
           ),
 
           /* 02. TYPOGRAPHY HIERARCHY: ลำดับขั้นข้อมูลระดับ Specialist */
@@ -52,8 +52,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             "group-[.toast]:text-brand-primary group-[.toast]:border-brand-primary/20 group-[.toaster]:bg-brand-primary/10",
           warning:
             "group-[.toast]:text-yellow-500 group-[.toast]:border-yellow-500/20 group-[.toaster]:bg-yellow-500/10",
-          info: 
-            "group-[.toast]:text-blue-500 group-[.toast]:border-blue-500/20 group-[.toaster]:bg-blue-500/10",
+          info: "group-[.toast]:text-blue-500 group-[.toast]:border-blue-500/20 group-[.toaster]:bg-blue-500/10",
         },
       }}
       {...props}

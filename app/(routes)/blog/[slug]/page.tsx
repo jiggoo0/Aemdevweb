@@ -1,198 +1,140 @@
 /**
- * [ROUTE PAGE]: BLOG_DETAIL_RENDERER v17.3.10 (STABILIZED)
- * [STRATEGY]: Dynamic MDX Binding | Multi-Theme Typography | Specialist Authority
+ * [ROUTE PAGE]: BLOG_DETAIL_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [STRATEGY]: Narrative Authority | MDX Remote Rendering | SEO Graph Injection
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
-import dynamic from "next/dynamic";
-import { notFound } from "next/navigation";
-import Link from "next/link";
 import type { Metadata } from "next";
-import type { MDXComponents } from "mdx/types";
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
-// --- 1. Infrastructure & SEO ---
-// [FIXED]: ปรับ Path ของ LayoutEngine ให้ตรงกับตำแหน่งจริงในระบบ
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import JsonLd from "@/components/seo/JsonLd";
+// --- 1. Infrastructure & CMS ---
 import { getPostBySlug, getAllPosts } from "@/lib/cms";
 import { SITE_CONFIG } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
+import { constructMetadata } from "@/lib/seo-utils";
+import { useMDXComponents } from "@/mdx-components";
 import type { PageProps } from "@/types";
 
-// --- 2. UI Components & Logic ---
+// --- 2. SEO Protocols ---
+import JsonLd from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
+
+// --- 3. UI Components ---
+import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
-import { Button } from "@/components/ui/button";
-import { CUSTOM_MDX_COMPONENTS } from "@/mdx-components";
 
-/* [A] STATIC PARAMS ENGINE: SSG Pre-rendering */
+/**
+ * [A] STATIC GENERATION ENGINE
+ * สร้าง Static Paths ล่วงหน้าเพื่อความเร็วในการโหลดระดับมิลลิวินาที
+ */
 export async function generateStaticParams() {
-  const posts = await getAllPosts().catch(() => []);
-  return posts.map((post) => ({ slug: post.slug }));
-}
-
-/* [B] SEO AUTHORITY PROTOCOL: Article Intelligence */
-export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
-  const { slug } = await params;
-  const post = await getPostBySlug(slug);
-
-  if (!post) return { title: "404 Not Found" };
-
-  return {
-    title: `${post.title} | ${SITE_CONFIG.brandName}`,
-    description: post.excerpt || post.description,
-    openGraph: {
-      title: post.title,
-      description: post.excerpt || post.description,
-      type: "article",
-      publishedTime: post.date,
-      images: [post.thumbnail || "/images/og-default.webp"],
-      authors: [SITE_CONFIG.expert.displayName],
-    },
-    keywords: [...(post.tags || [])],
-  };
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 /**
- * @component BlogDetailPage
- * @description หน้าแสดงผลบทความเจาะลึกที่ใช้ระบบ Dynamic MDX เพื่อประสิทธิภาพสูงสุด
+ * [B] SEO METADATA ENGINE
  */
-export default async function BlogDetailPage({ params }: PageProps<{ slug: string }>) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) return { title: "Article Not Found" };
+
+  return constructMetadata({
+    title: post.title,
+    description: post.description,
+    path: `/blog/${slug}`,
+    image: post.thumbnail,
+    keywords: post.tags,
+  });
+}
+
+export default async function BlogDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) notFound();
 
-  /**
-   * [DYNAMIC IMPORT]: ถอดรหัสเนื้อหา MDX พร้อมระบบ Skeleton แบบ Specialist
-   * ปรับจูนเพื่อรองรับ Next.js 16 Dynamic Routing
-   */
-  const MDXContent = dynamic<{ components: MDXComponents }>(
-    () => import(`@/content/blog/${slug}.mdx`),
-    {
-      ssr: true,
-      loading: () => (
-        <div className="flex h-96 w-full flex-col items-center justify-center space-y-6">
-          <div className="border-brand-primary h-12 w-12 animate-spin rounded-full border-4 border-t-transparent shadow-glow" />
-          <p className="text-text-muted font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-50">
-            Decrypting_Knowledge_Node.v{SITE_CONFIG.project.version}
-          </p>
-        </div>
-      ),
-    },
-  );
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    datePublished: post.date,
-    author: { "@type": "Person", name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.siteUrl },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.brandName,
-      logo: { "@type": "ImageObject", url: `${SITE_CONFIG.siteUrl}/images/logo.webp` },
-    },
-  };
+  // สร้าง Schema Graph สำหรับบทความ (NewsArticle + Breadcrumb)
+  const fullSchema = generateSchemaGraph([
+    generateBreadcrumbSchema([
+      { name: "หน้าแรก", item: "/" },
+      { name: "บทความทั้งหมด", item: "/blog" },
+      { name: post.title, item: `/blog/${slug}` },
+    ]),
+  ]);
 
   return (
-    <LayoutEngine spacing="none">
-      <JsonLd data={articleSchema} />
+    <LayoutEngine spacing="medium">
+      <JsonLd data={fullSchema} />
 
-      <main className="bg-surface-main relative min-h-screen overflow-hidden pt-32 pb-24 transition-colors duration-500 md:pt-48 md:pb-32">
-        
-        {/* 01. ATMOSPHERIC PHYSICS: เลเยอร์บรรยากาศเบื้องหลัง */}
-        <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-          <div className="ambient-aura absolute -top-[10%] left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[120px]" />
-          <div className="bg-infrastructure-grid absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_60%)] opacity-[0.05]" />
+      <article className="container mx-auto px-4 md:px-6">
+        {/* --- 01. HEADER: ข้อมูลระบุตัวตนบทความ --- */}
+        <header className="mx-auto mb-16 max-w-4xl space-y-10 pt-32 text-center md:pt-40">
+          <div className="text-brand-primary flex items-center justify-center gap-4 font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+            <span className="border-brand-primary/20 bg-brand-primary/5 rounded-full border px-5 py-2 backdrop-blur-md">
+              {post.category}
+            </span>
+            <span className="opacity-50">{post.date}</span>
+          </div>
+
+          <h1 className="text-text-primary text-5xl leading-[1] font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl">
+            {post.title}
+          </h1>
+
+          <div className="flex items-center justify-center gap-8 pt-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-brand-primary/10 border-brand-primary/20 shadow-glow-sm relative h-12 w-12 overflow-hidden rounded-full border">
+                <Image src="/images/avatar.webp" alt={post.author} fill className="object-cover" />
+              </div>
+              <span className="text-text-primary text-base font-bold italic">{post.author}</span>
+            </div>
+            <div className="text-text-muted flex items-center gap-2.5 text-xs font-bold tracking-widest uppercase opacity-60">
+              <IconRenderer name="Clock" size={14} />
+              <span>{post.readingTime}</span>
+            </div>
+          </div>
+        </header>
+
+        {/* --- 02. VISUAL: ภาพหน้าปกเชิงยุทธศาสตร์ --- */}
+        <div className="shadow-glow-lg border-border bg-surface-card relative mx-auto mb-20 aspect-video max-w-6xl overflow-hidden rounded-[3.5rem] border">
+          <Image
+            src={post.thumbnail}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority // สำคัญสำหรับการทำคะแนน LCP
+          />
         </div>
 
-        <article className="relative z-10 container mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-4xl">
-            
-            {/* [NODE 01]: STRATEGIC HEADER */}
-            <header className="mb-16 md:mb-24">
-              <div className="mb-8 flex flex-wrap items-center gap-4 md:mb-10 md:gap-6">
-                <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-3 rounded-full border px-5 py-2 font-mono text-[10px] font-black tracking-[0.3em] uppercase backdrop-blur-md">
-                  <IconRenderer name="Calendar" size={14} />
-                  <span>PUBLISHED_{post.date}</span>
-                </div>
-                <div className="text-text-muted hidden font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-40 md:block">
-                  Node.Ref_{slug.toUpperCase().replace(/-/g, "_")}
-                </div>
-              </div>
-
-              <h1 className="text-text-primary mb-8 text-5xl leading-[1] font-black tracking-tighter text-balance text-text-primary uppercase italic md:mb-12 md:text-7xl">
-                {post.title}
-              </h1>
-
-              <div className="border-brand-primary relative overflow-hidden rounded-[2.5rem] border-l-[12px] bg-surface-card p-10 shadow-glow backdrop-blur-sm md:p-14">
-                <p className="text-text-primary relative z-10 text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
-                  “{post.excerpt || post.description}”
-                </p>
-                <div className="text-text-primary absolute -right-10 -bottom-10 opacity-[0.03]">
-                  <IconRenderer name="Quote" size={180} />
-                </div>
-              </div>
-            </header>
-
-            {/* [NODE 02]: MDX CONTENT BODY (Specialist Typography Engine) */}
-            <div
-              className={cn(
-                "prose prose-neutral dark:prose-invert max-w-none transition-colors duration-500",
-                "prose-headings:text-text-primary prose-headings:font-sans prose-headings:font-black prose-headings:italic prose-headings:uppercase prose-headings:tracking-tight",
-                "prose-h2:mt-16 prose-h2:text-4xl md:prose-h2:text-5xl prose-h2:border-b prose-h2:border-border prose-h2:pb-4",
-                "prose-p:text-text-secondary prose-p:font-medium prose-p:leading-[1.9] prose-p:opacity-90 md:prose-p:text-xl",
-                "prose-strong:text-brand-primary prose-strong:font-black",
-                "prose-img:rounded-[2.5rem] prose-img:border prose-img:border-border prose-img:shadow-glow prose-img:bg-surface-offset",
-                "prose-pre:rounded-[2.5rem] prose-pre:bg-surface-card prose-pre:p-8 prose-pre:border prose-pre:border-border",
-              )}
-            >
-              <MDXContent components={CUSTOM_MDX_COMPONENTS} />
-            </div>
-
-            {/* [NODE 03]: CONVERSION FOOTER (Inverted High-Contrast) */}
-            <footer className="mt-24 border-t border-border pt-20 md:mt-32">
-              <div className="group bg-text-primary text-surface-main relative overflow-hidden rounded-[3rem] shadow-glow transition-all duration-700 hover:scale-[1.01]">
-                <div className="relative z-10 flex flex-col items-center justify-between gap-10 p-10 md:p-20 lg:flex-row">
-                  <div className="space-y-4 text-center lg:text-left">
-                    <h2 className="text-4xl font-black tracking-tighter uppercase italic md:text-6xl">Ready to Build <br /> Your Strategy?</h2>
-                    <p className="max-w-md text-lg font-medium italic opacity-80">
-                      เปลี่ยนระบบที่ซับซ้อนให้เป็นเครื่องจักรทำเงินที่ทรงพลัง <br className="hidden md:block" />
-                      ทักมาวางระบบหลังบ้านกับผมได้โดยตรงครับ
-                    </p>
-                  </div>
-
-                  <div className="flex-shrink-0">
-                    <Button
-                      asChild
-                      className="bg-surface-main text-text-primary hover:bg-brand-primary hover:text-surface-main h-20 rounded-[2rem] px-14 shadow-xl transition-all duration-500 hover:scale-105"
-                    >
-                      <Link href={SITE_CONFIG.links.line} target="_blank">
-                        <span className="flex items-center gap-4">
-                          <IconRenderer name="MessageCircle" size={24} />
-                          <span className="font-mono text-[11px] font-black tracking-[0.3em] uppercase">ปรึกษาแผนงานฟรี</span>
-                        </span>
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                {/* Decoration Aura: Hybrid Physics */}
-                <div className="bg-brand-primary/20 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 opacity-20 blur-[100px]" />
-              </div>
-
-              {/* Specialist Signature */}
-              <div className="mt-16 text-center md:mt-24">
-                <div className="inline-flex items-center gap-6 font-mono text-[10px] font-black tracking-[0.5em] text-text-muted uppercase opacity-40">
-                  <div className="h-px w-12 bg-border" />
-                  Engineered_Insights.v{SITE_CONFIG.project.version}
-                  <div className="h-px w-12 bg-border" />
-                </div>
-              </div>
-            </footer>
+        {/* --- 03. CONTENT: ขุมพลัง MDX Remote --- */}
+        <div className="mx-auto max-w-4xl">
+          <div className="prose prose-invert prose-brand lg:prose-xl max-w-none">
+            <MDXRemote source={post.content || ""} components={useMDXComponents({})} />
           </div>
-        </article>
-      </main>
+        </div>
+
+        {/* --- 04. FOOTER: บทสรุปและการปิดท้าย --- */}
+        <footer className="border-border mt-32 border-t pt-20 text-center">
+          <div className="mx-auto max-w-3xl space-y-12">
+            <p className="text-text-secondary text-2xl leading-relaxed font-medium italic opacity-80 md:text-3xl">
+              “{post.description}”
+            </p>
+
+            <div className="flex flex-col items-center justify-center gap-6 pt-10">
+              <div className="bg-brand-primary shadow-glow h-1.5 w-24 rounded-full" />
+              <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
+                AEMDEVWEB_NODE_CORE // v{SITE_CONFIG.project.version}
+              </span>
+            </div>
+          </div>
+        </footer>
+      </article>
     </LayoutEngine>
   );
 }

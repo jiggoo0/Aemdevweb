@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.2.1 (FINAL_STABILIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.1 (STABILIZED_FINAL)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,94 +10,88 @@ export const SITE_CONFIG: SiteConfig = {
   // [01. BRAND IDENTITY]: ข้อมูลระบุตัวตนพื้นฐาน
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
-  description:
-    "AEMDEVWEB | รับทำเว็บไซต์และ SEO เน้นยอดขาย ติดหน้าแรก Google ด้วย NextJS มาตรฐานสากล",
+  description: "AEMDEVWEB | Web Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับหน้าแรก Google อย่างมีประสิทธิภาพและยั่งยืน",
 
   // [02. HERO_REGISTRY]: ศูนย์กลางควบคุมเนื้อหาหน้าแรก
   hero: {
-    title: "AEMDEVWEB: Strategic Web Design for High-Conversion",
-    description:
-      "AEMDEVWEB ไม่ได้ทำแค่เว็บที่สวยงาม แต่เราวางโครงสร้างระบบให้เสถียร โหลดไวระดับเสี้ยววินาที เพื่อเปลี่ยนทุกการเข้าชมให้กลายเป็นยอดขายจริงสำหรับธุรกิจคุณ",
+    title: "AEMDEVWEB HYPER PERFORMANCE ARCHITECTURE",
+    // [FIXED]: เพิ่มเครื่องหมาย : และแก้ไขตัวสะกดเป็น description
+    description: "Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับ Google อย่างมีประสิทธิภาพธุรกิจคุณ By นายเอ็มซ่ามากส์",
     primaryAction: "ปรึกษาวางแผนระบบฟรี",
     secondaryAction: "ดูบริการทั้งหมด",
   },
 
-  // [03. PERSONA ANCHOR]: โทนและการสื่อสาร (Humanized Specialist)
+  // [03. PERSONA ANCHOR]: โทนและการสื่อสาร
   persona: {
-    tone: "Professional Partner, Expert Authoritative, Trustworthy",
-    communicationStyle: "Result-oriented, Friendly Expert, Direct & Clear",
-    antiConnotation:
-      "Avoid Robot-speak, No Over-complicated Jargon, Human-to-Human Focus",
+    tone: "Strategic Partner, Expert Authority, Business-Centric",
+    communicationStyle: "Result-oriented, Friendly Specialist, Clear & Honest",
+    antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising without Logic",
   },
 
-  // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Strategic Keyword Clusters)
+  // [SYSTEM: PROTECTED_DATA_START]
+  // [04. SEO AUTHORITY]: ชุดคำค้นหาเชิงยุทธศาสตร์ (High Intent Keywords 2026)
   keywords: [
-    // --- Commercial Intent (เน้นปิดการขายระดับประเทศ) ---
     "รับทำเว็บไซต์",
-    "รับออกแบบเว็บไซต์",
-    "จ้างทำเว็บไซต์ บริษัท",
-    "รับทำ Salepage",
-    "รับทำเว็บขายของออนไลน์",
-
-    // --- Technical & Performance (เน้นกลุ่มลูกค้าพรีเมียม) ---
+    "รับทำ SEO สายขาว",
+    "รับออกแบบเว็บไซต์ บริษัท",
+    "รับทำ Sale Page ยิงแอด",
+    "จ้างทำเว็บไซต์ ติดหน้าแรก Google",
+    "รับทำเว็บ E-commerce",
     "รับทำเว็บไซต์ Next.js",
-    "ทำเว็บไซต์ SEO",
-    "ทำเว็บโหลดเร็ว",
-    "ทำเว็บ E-commerce",
-
-    // --- Local & Branding (ยึดพื้นที่และตัวตน) ---
-    "รับทำเว็บไซต์ กำแพงเพชร", // ยังคงไว้เพื่อยึดฐานที่มั่นเดิม
-    "ทำเว็บติดหน้าแรก Google",
-    "นาย อลงกรณ์ ยมเกิด",
-    "นายเอ็มซ่ามากส์",
+    "ที่ปรึกษา SEO",
     "AEMDEVWEB",
+    "นายเอ็มซ่ามากส์", 
+    "นาย อลงกรณ์ ยมเกิด", 
+    "Technical SEO Specialist Thailand",
   ],
+  // [SYSTEM: PROTECTED_DATA_END]
 
   // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
   project: {
     title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.2.1", // [UPDATED]: Synced with Typo Fix
+    version: "17.5.1",
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
 
-  // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT Standard)
+  // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT) และ Google Identity
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
-    legalName: "Alongkorn Yomkerd", // [FIXED]: Corrected typo from Alongkorl
+    legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
-    role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
-    jobTitle: "Technical SEO Specialist",
+    role: "Technical SEO Specialist",
+    jobTitle: "Technical SEO Specialist & Web Architect",
     signature: "นายเอ็มซ่ามากส์",
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/about",
+    googleMerchantId: "8653147979146207424",
   },
 
-  // [07. CONTACT & ACCESS]: ช่องทางการติดต่อ
+  // [07. CONTACT & ACCESS]: ช่องทางการเข้าถึงแบบ Official
   contact: {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
-    displayPhone: "ทักแชทผ่าน Line Account เพื่อการตอบกลับที่รวดเร็วที่สุดครับ",
-    // [RETAINED]: คงไว้เพื่อ Google Search Console Verification (EEAT)
-    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
-    // [EXPANDED]: ปรับข้อความแสดงผลให้กว้างขึ้น
+    displayPhone: "099 032 2175 (สายด่วนปรึกษาช่างเอ็ม)",
     address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)",
+    streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     postalCode: "62000",
-    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (พร้อมให้คำปรึกษาแผนงาน)",
+    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (ตอบแชทไวตลอดวัน)",
   },
 
-  // [08. STRATEGIC LINKS]: ลิงก์ช่องทางโซเชียล
+  // [08. STRATEGIC LINKS]: โหนดเชื่อมโยงเครือข่ายดิจิทัล
   links: {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
     messenger: "https://m.me/aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
-    github: "https://github.com/private",
+    github: "https://github.com/aemdevweb",
+    googleMaps: "https://maps.google.com",
+    googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
-  // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Expanded Focus)
+  // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ
   business: {
     location: "Thailand",
     region: "ASEAN",
@@ -106,7 +100,7 @@ export const SITE_CONFIG: SiteConfig = {
     established: "2026",
   },
 
-  // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์ระบบ
+  // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },

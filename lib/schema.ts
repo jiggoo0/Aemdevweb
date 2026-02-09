@@ -1,38 +1,22 @@
 /**
- * [SEO UTILITY]: SCHEMA_ENGINE v17.2.5 (STABILIZED_AUTHORITY)
- * [STRATEGY]: Linked Data Orchestration | Entity Resolution | EEAT Compliance
+ * [SEO UTILITY]: SCHEMA_ENGINE v17.4.7 (GOOGLE_IDENTITY_READY)
+ * [STRATEGY]: Graph-Based Entity Resolution | Local Search Dominance | Linked Data
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import { SITE_CONFIG } from "@/constants/site-config"; //
-import type { AreaNode, TemplateMasterData } from "@/types"; //
+import { SITE_CONFIG } from "@/constants/site-config";
+import { absoluteUrl } from "@/lib/utils";
+import type { AreaNode, TemplateMasterData } from "@/types";
 
-// --- [01. UTILITY INFRASTRUCTURE] ---
-
-/**
- * @function absoluteUrl
- * @description จัดการ URL ให้เป็น Absolute Path 100% เพื่อป้องกันปัญหา URL Discovery ใน Search Console
- */
-export const absoluteUrl = (path: string): string => {
-  const root = SITE_CONFIG.siteUrl.endsWith("/")
-    ? SITE_CONFIG.siteUrl.slice(0, -1)
-    : SITE_CONFIG.siteUrl;
-  const cleanPath = path.startsWith("/") ? path : `/${path}`;
-  return `${root}${cleanPath}`;
-};
-
-// --- [02. CORE ENTITY GENERATORS] ---
+// --- [01. CORE ENTITIES: THE FOUNDATION] ---
 
 /**
- * @function generateOrganizationSchema
- * @description [STABILIZED]: สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization)
- * ทำหน้าที่เป็นศูนย์กลางอำนาจของ Domain ในระดับสากล
- * (ใช้แทน generateBusinessSchema เพื่อความสอดคล้องกับระบบ Routing)
+ * @description สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization / ProfessionalService)
+ * [UPDATE]: เชื่อมโยง Google Merchant ID และ Google Maps Public Link เพื่อพลัง Authority
  */
 export function generateOrganizationSchema() {
   return {
-    "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService", // ระบุประเภทธุรกิจให้ชัดเจนเพื่อ Google Local Algorithm
     "@id": absoluteUrl("/#organization"),
     name: SITE_CONFIG.brandName,
     url: SITE_CONFIG.siteUrl,
@@ -40,14 +24,16 @@ export function generateOrganizationSchema() {
       "@type": "ImageObject",
       url: absoluteUrl("/icon-192.png"),
       width: "192",
-      height: "192"
+      height: "192",
     },
-    description: SITE_CONFIG.description,
-    founder: { "@id": absoluteUrl("/#expert") },
+    // [STRATEGY]: การระบุ Identifier ช่วยให้ Google เชื่อมโยงเว็บไซต์กับ Google Business Profile
+    identifier: SITE_CONFIG.expert.googleMerchantId,
+    priceRange: "$$$",
+    image: absoluteUrl("/images/og-main.png"),
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress,
-      addressLocality: "Kamphaeng Phet",
+      addressLocality: SITE_CONFIG.business.location,
       postalCode: SITE_CONFIG.contact.postalCode,
       addressCountry: "TH",
     },
@@ -57,110 +43,97 @@ export function generateOrganizationSchema() {
       contactType: "customer service",
       availableLanguage: ["Thai", "English"],
     },
+    // [UPDATE]: รวม Google Maps Link เข้ากับ Social Profiles เพื่อสร้าง Web of Trust
     sameAs: [
+      SITE_CONFIG.links.googleMaps,
       SITE_CONFIG.links.facebook,
-      SITE_CONFIG.links.line
+      SITE_CONFIG.links.line,
+      SITE_CONFIG.links.github,
     ].filter(Boolean) as string[],
   };
 }
 
 /**
- * @function generatePersonSchema
- * @description สร้าง Expert Node (Person) เพื่อระบุตัวตน Alongkorn Yomkerd 
- * และเชื่อมโยงความสัมพันธ์กับแบรนด์ (WorksFor) เพื่อคะแนน EEAT
+ * @description สร้าง Expert Node (Person) เพื่อยืนยันตัวตนผู้เชี่ยวชาญ (EEAT Alignment)
  */
 export function generatePersonSchema() {
   return {
-    "@context": "https://schema.org",
     "@type": "Person",
     "@id": absoluteUrl("/#expert"),
     name: SITE_CONFIG.expert.legalName,
-    givenName: "Alongkorn",
-    familyName: "Yomkerd",
-    alternateName: [
-      SITE_CONFIG.expert.legalNameThai,
-      SITE_CONFIG.expert.displayName,
-      "นายเอ็มซ่ามากส์"
-    ],
+    alternateName: SITE_CONFIG.expert.displayName,
     jobTitle: SITE_CONFIG.expert.jobTitle,
-    description: SITE_CONFIG.expert.role,
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     worksFor: { "@id": absoluteUrl("/#organization") },
     knowsAbout: [
       "Technical SEO",
       "Next.js Development",
-      "Web Performance Optimization",
-      "Software Architecture"
+      "Web Architecture",
+      "Core Web Vitals",
+      "Conversion Rate Optimization",
     ],
   };
 }
 
-// --- [03. TARGETED CONTENT GENERATORS] ---
+// --- [02. DYNAMIC GENERATORS: TARGETED CONTENT] ---
 
 /**
- * @function generateServiceSchema
  * @description สร้างโครงสร้างข้อมูลสำหรับหน้าบริการ (Service & Offer)
  */
 export function generateServiceSchema(data: TemplateMasterData) {
   return {
-    "@context": "https://schema.org",
     "@type": "Service",
     "@id": absoluteUrl(`/services/${data.templateSlug}/#service`),
-    serviceType: "Technical SEO & Web Development",
     name: data.title,
     description: data.description,
     provider: { "@id": absoluteUrl("/#organization") },
+    areaServed: "TH",
     offers: {
       "@type": "Offer",
-      price: (data.priceValue || 0).toString(),
+      price: data.priceValue.toString(),
       priceCurrency: data.currency || "THB",
-      availability: "https://schema.org/InStock",
       url: absoluteUrl(`/services/${data.templateSlug}`),
+      availability: "https://schema.org/InStock",
     },
   };
 }
 
 /**
- * @function generateLocalBusinessSchema
- * @description สร้าง Local Business Node สำหรับ Area Pages 
- * เพื่อช่วยดึงอันดับใน Google Maps และพื้นที่เฉพาะจุด
+ * @description สร้าง Local Business Node สำหรับ Area Pages เพื่อดึงอันดับใน Local Search
  */
 export function generateLocalBusinessSchema(data: AreaNode) {
   return {
-    "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "@id": absoluteUrl(`/areas/${data.slug}/#localbusiness`),
     name: `${SITE_CONFIG.brandName} ${data.province}`,
     description: data.seoDescription || data.description,
-    image: absoluteUrl(data.heroImage),
+    image: absoluteUrl(data.heroImage || `/images/areas/${data.slug}-node.webp`),
     url: absoluteUrl(`/areas/${data.slug}`),
     telephone: SITE_CONFIG.contact.phone,
-    priceRange: "฿฿-฿฿฿",
+    priceRange: "$$$",
     address: {
       "@type": "PostalAddress",
-      streetAddress: `ให้บริการในพื้นที่ ${data.province}`,
       addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: data.coordinates?.lat.toString() || "16.4828",
-      longitude: data.coordinates?.lng.toString() || "99.5227",
-    },
+    // [CRITICAL]: เชื่อมโยงสาขาย่อยกลับไปยังองค์กรหลัก (Central Authority)
     parentOrganization: { "@id": absoluteUrl("/#organization") },
+    areaServed: {
+      "@type": "City",
+      name: data.province,
+    },
   };
 }
 
 /**
- * @function generateBreadcrumbSchema
- * @description สร้าง Breadcrumb List เพื่อช่วยให้ Crawler เข้าใจโครงสร้างลำดับชั้น
+ * @description Breadcrumb List เพื่อช่วยให้ Crawler เข้าใจลำดับชั้นและแสดง Rich Snippets
  */
 export function generateBreadcrumbSchema(items: readonly { name: string; item: string }[]) {
   return {
-    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": absoluteUrl("/#breadcrumb"),
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -170,5 +143,19 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
   };
 }
 
-// [ALIAS FIX]: รักษาระดับการเข้าถึงสำหรับ Layout ที่ต้องการชื่อฟังก์ชันแบบเจาะจง
+// --- [03. MASTER ORCHESTRATOR] ---
+
+/**
+ * @function generateSchemaGraph
+ * @description รวบรวม Schema ทั้งหมดเข้าด้วยกันภายใต้ Graph เดียว
+ * [STRATEGY]: การใช้ @graph ทำให้ Google เข้าใจความสัมพันธ์ของข้อมูลทั้งหมดในครั้งเดียว
+ */
+export function generateSchemaGraph(schemas: readonly object[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [generateOrganizationSchema(), generatePersonSchema(), ...schemas],
+  };
+}
+
+// ALIASES
 export const generateBusinessSchema = generateOrganizationSchema;

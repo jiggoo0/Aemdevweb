@@ -81,21 +81,30 @@
 │   │   ├── corporate
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   ├── local
+│   │   ├── hotelresort
+│   │   │   ├── Index.tsx
+│   │   │   └── Schema.ts
+│   │   ├── local_service
 │   │   │   ├── Schema.ts
 │   │   │   └── index.tsx
 │   │   ├── salepage
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   └── sections
-│   │       ├── DynamicFAQ.tsx
-│   │       ├── FeatureGrid.tsx
-│   │       ├── HeroEngine.tsx
-│   │       └── LayoutEngine.tsx
+│   │   ├── sections
+│   │   │   ├── DynamicFAQ.tsx
+│   │   │   ├── FeatureGrid.tsx
+│   │   │   ├── HeroEngine.tsx
+│   │   │   └── LayoutEngine.tsx
+│   │   └── seo_agency
+│   │       ├── Schema.ts
+│   │       └── index.tsx
 │   └── ui
+│       ├── AmbientBackground.tsx
+│       ├── Callout.tsx
 │       ├── IconRenderer.tsx
 │       ├── SkeletonCard.tsx
 │       ├── ThemeToggle.tsx
+│       ├── accordion.tsx
 │       ├── button.tsx
 │       ├── skeleton-grid.tsx
 │       ├── skeleton.tsx
@@ -123,26 +132,8 @@
 │   │   ├── technical-audit-protocol.mdx
 │   │   └── technical-seo-guide.mdx
 │   └── case-studies
-│       ├── case-study-industrial-catalog.mdx
-│       ├── case-study-industrial-catalog.mdx (2)
+│       ├── case-study-industrial-catalog.mdxx
 │       └── unlink-reputation-management-success.mdx
-├── eslint.config.mjs
-├── hooks
-├── knip.json
-├── lib
-│   ├── cms.ts
-│   ├── schema.ts
-│   └── utils.ts
-├── mdx-components.tsx
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── pnpm-lock.yaml
-├── pnpm-workspace.yaml
-├── postcss.config.mjs
-├── structure.txt
-├── tsconfig.json
-├── tsconfig.tsbuildinfo
-└── types
     ├── index.d.ts
-    └── mdx.d.ts
+    ├── mdx.d.ts
+    └── template-props.ts

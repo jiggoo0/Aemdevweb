@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: AREA_CARD_NODE v17.2.9 (STABILIZED_HYDRATION)
- * [STRATEGY]: Vivid Visual Presence | Deterministic Quality | Neural Interaction
+ * [FEATURE COMPONENT]: AREA_CARD_NODE v17.5.0 (STABILIZED_FINAL)
+ * [STRATEGY]: Compact Authority | Symmetrical Aspect Ratio | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -21,114 +21,109 @@ interface AreaCardProps {
 
 /**
  * @component AreaCard
- * @description โหนดแสดงผลพื้นที่ให้บริการ ออกแบบมาเพื่อสร้าง Local Authority ระดับพรีเมียม
- * [STABILIZED]: บังคับค่า Quality ให้ตรงกันเพื่อป้องกัน Hydration Mismatch
+ * @description โหนดแสดงพื้นที่ให้บริการที่ปรับจูนสัดส่วนใหม่เพื่อความสมมาตรทางสายตา (Visual Symmetry)
  */
 const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
-  // Defensive Check: จัดการข้อมูลกึ่งโครงสร้างให้ปลอดภัย
   const districts = Array.isArray(data.districts) ? [...data.districts] : [];
-  const displayTitle = data.name || data.province;
+  const displayTitle = data.province || "พื้นที่ให้บริการ";
 
   return (
     <Link
       href={`/areas/${data.slug}`}
       className={cn(
-        "group relative flex min-h-[480px] flex-col overflow-hidden rounded-[2.5rem] transition-all duration-500 ease-out",
-        "border border-white/10 bg-[#050505]",
-        "hover:border-brand-primary/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)]",
+        "group relative flex min-h-[480px] flex-col overflow-hidden rounded-[3rem] transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "border-border bg-surface-card shadow-pro-sm border",
+        "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
         className
       )}
     >
-      {/* 01. ATMOSPHERIC IMAGE LAYER (GPU Accelerated) */}
-      <div className="absolute inset-0 z-0 overflow-hidden select-none">
+      {/* --- LAYER 01: ATMOSPHERIC VISUAL ENGINE --- */}
+      <div className="absolute inset-0 z-0 overflow-hidden select-none" aria-hidden="true">
         <div className="relative h-full w-full">
           <Image
-            src={data.heroImage || `/images/areas/${data.slug}.webp`}
-            alt={`รับทำเว็บไซต์ ${displayTitle} และ Technical SEO คุณภาพสูง`}
+            src={data.heroImage || `/images/areas/${data.slug}-node.webp`}
+            alt={`ผู้เชี่ยวชาญรับทำเว็บไซต์ ${displayTitle}`}
             fill
-            className="object-cover opacity-60 transition-transform duration-[1.2s] group-hover:scale-110 group-hover:opacity-40"
+            className="object-cover opacity-50 transition-transform duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-25"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // [LCP FIX]: โหลดเฉพาะ 2 ใบแรกที่เป็น Priority
-            priority={index < 2}
-            // [HYDRATION FIX]: บังคับค่าให้ตรงกับ next.config.ts เพื่อป้องกัน Error
+            priority={index < 4}
             quality={85}
           />
-
-          {/* Neural Scrim: ปรับ Contrast เพื่อ Legibility */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/90 to-black/20" />
-
-          {/* Infrastructure Grid Texture */}
-          <div className="absolute inset-0 z-20 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
+          {/* ปรับ Gradient ให้ลึกขึ้นเพื่อความอ่านง่ายของ Text */}
+          <div className="from-surface-main via-surface-main/90 absolute inset-0 z-10 bg-gradient-to-t to-transparent" />
+          <div className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.04] mix-blend-overlay" />
         </div>
       </div>
 
-      {/* 02. CONTENT ARCHITECTURE */}
-      <div className="relative z-20 flex h-full flex-col justify-between p-8">
-        {/* Top: Marker Identity */}
+      {/* --- LAYER 02: CONTENT ARCHITECTURE --- */}
+      <div className="relative z-30 flex h-full flex-col justify-between p-8 md:p-10">
+        {/* TOP: Identity Node */}
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-4">
-            <div className="text-brand-primary group-hover:bg-brand-primary flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 group-hover:rotate-12 group-hover:text-black group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]">
-              <IconRenderer name="MapPin" size={20} />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-brand-primary/80 font-mono text-[9px] font-black tracking-[0.2em] uppercase">
-                LOC_{(index + 1).toString().padStart(3, "0")}
-              </span>
-              <span className="font-mono text-[8px] font-bold tracking-widest text-white/40 uppercase">
-                Node_Identified
-              </span>
-            </div>
+          <div className="bg-surface-offset/80 text-brand-primary border-border group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-xl border backdrop-blur-xl transition-all duration-500 group-hover:rotate-[12deg]">
+            <IconRenderer name="MapPin" size={20} strokeWidth={2.5} />
+          </div>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className="text-brand-primary font-mono text-[8px] font-black tracking-[0.4em] uppercase">
+              NODE_{data.slug.slice(0, 3).toUpperCase()}
+            </span>
+            <div className="bg-brand-primary shadow-glow h-1 w-1 animate-pulse rounded-full" />
           </div>
         </div>
 
-        {/* Bottom: Strategic Narrative */}
+        {/* BOTTOM: Narrative Hub */}
         <div className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="group-hover:text-brand-primary text-4xl font-black tracking-tighter text-white uppercase transition-colors duration-300 md:text-5xl">
-              {displayTitle}
-            </h3>
-            <div className="bg-brand-primary h-1 w-12 rounded-full transition-all duration-500 group-hover:w-full" />
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <h3 className="text-text-primary group-hover:text-brand-primary text-3xl leading-tight font-black tracking-tighter uppercase italic transition-colors duration-500 md:text-4xl">
+                {displayTitle}
+              </h3>
+              <p className="text-text-muted font-mono text-[8px] font-bold tracking-[0.3em] uppercase opacity-60">
+                Service_Deployment_Zone
+              </p>
+            </div>
+            {/* Visual Indicator: Progress Line */}
+            <div className="bg-brand-primary/20 h-1 w-12 overflow-hidden rounded-full transition-all duration-700 group-hover:w-full">
+              <div className="bg-brand-primary h-full w-full" />
+            </div>
           </div>
 
-          <p className="line-clamp-2 text-sm leading-relaxed font-medium text-gray-400 italic">
-            {data.description || `ยกระดับธุรกิจใน ${displayTitle} ด้วยเว็บไซต์มาตรฐานสากล`}
+          <p className="text-text-secondary line-clamp-2 text-sm leading-relaxed font-medium italic opacity-85">
+            “วิศวกรรมโครงสร้างเว็บไซต์เพื่อสร้าง Authority สูงสุดในพื้นที่ {displayTitle}”
           </p>
 
-          {/* District Micro-tags */}
+          {/* District Tags: ระบบจัดลำดับพื้นที่อัจฉริยะ */}
           {districts.length > 0 && (
-            <div className="flex flex-wrap gap-2 pt-2">
-              {districts.slice(0, 3).map((district) => (
+            <div className="flex flex-wrap gap-2 pt-1">
+              {districts.slice(0, 2).map((district) => (
                 <span
                   key={district}
-                  className="group-hover:border-brand-primary/30 group-hover:bg-brand-primary/10 group-hover:text-brand-primary rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[9px] font-bold tracking-wider text-gray-300 uppercase transition-colors"
+                  className="bg-brand-primary/5 border-brand-primary/10 text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main rounded-lg border px-3 py-1 text-[8px] font-black tracking-widest uppercase transition-all duration-300"
                 >
                   {district}
                 </span>
               ))}
-              {districts.length > 3 && (
-                <span className="text-brand-primary flex items-center px-2 font-mono text-[9px] font-bold tracking-widest uppercase">
-                  +{districts.length - 3}
+              {districts.length > 2 && (
+                <span className="text-text-muted flex items-center font-mono text-[8px] font-bold tracking-widest uppercase opacity-40">
+                  +{districts.length - 2} LOCATIONS
                 </span>
               )}
             </div>
           )}
 
-          {/* Interaction Gateway */}
-          <div className="flex items-center justify-between border-t border-white/10 pt-4">
-            <span className="group-hover:text-brand-primary font-mono text-[9px] font-bold tracking-[0.3em] text-white/50 uppercase transition-colors">
-              Access_Authority
+          {/* Interaction Hub */}
+          <div className="border-border flex items-center justify-between border-t pt-6">
+            <span className="text-text-muted font-mono text-[8px] font-black tracking-[0.3em] uppercase opacity-40">
+              Analyze Area Connectivity
             </span>
-            <IconRenderer
-              name="ArrowRight"
-              size={16}
-              className="group-hover:text-brand-primary text-white/50 transition-all duration-300 group-hover:translate-x-2"
-            />
+            <div className="text-text-primary group-hover:text-brand-primary flex items-center gap-2 transition-all group-hover:translate-x-1">
+              <IconRenderer name="ArrowRight" size={16} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Atmospheric Hover Glow */}
-      <div className="bg-brand-primary/15 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 rounded-full opacity-0 mix-blend-screen blur-[80px] transition-opacity duration-700 group-hover:opacity-100" />
+      {/* GPU Accelerated Glow: เสริมมิติเมื่อ Hover */}
+      <div className="bg-brand-primary/20 pointer-events-none absolute -right-20 -bottom-20 h-48 w-48 rounded-full opacity-0 mix-blend-screen blur-[100px] transition-opacity duration-1000 group-hover:opacity-100" />
     </Link>
   );
 };

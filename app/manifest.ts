@@ -7,11 +7,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/constants/site-config";
 
-/**
- * @function manifest
- * @description เปลี่ยนเว็บไซต์ให้เป็น Progressive Web App (PWA)
- * รองรับการติดตั้งบนหน้าจอโฮม (Add to Home Screen) พร้อมไอคอนที่ถูกต้องตามมาตรฐาน Android/iOS
- */
 export default function manifest(): MetadataRoute.Manifest {
   return {
     /* 1. IDENTITY ARCHITECTURE */
@@ -22,19 +17,16 @@ export default function manifest(): MetadataRoute.Manifest {
     id: "aemdevweb-specialist-node",
     scope: "/",
 
-    /* 2. DISPLAY PHYSICS: การแสดงผลบนอุปกรณ์ */
+    /* 2. DISPLAY PHYSICS */
     display: "standalone",
     orientation: "portrait",
     categories: ["business", "productivity", "developer tools"],
 
-    /* 3. CHROMA SYNC: ปรับสีให้ตรงกับ Brand Identity
-       - background_color: #050505 (Midnight Aura)
-       - theme_color: #050505 (เพื่อความกลมกลืนกับ Status Bar)
-    */
+    /* 3. CHROMA SYNC */
     background_color: "#050505",
     theme_color: "#050505",
 
-    /* 4. ASSET REGISTRY: ทะเบียนไอคอน (อ้างอิงไฟล์จาก /public/ โดยตรง) */
+    /* 4. ASSET REGISTRY */
     icons: [
       {
         src: "/favicon.ico",
@@ -42,10 +34,10 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/x-icon",
       },
       {
-        src: "/icon-192.png", // [CORRECTED]: ดึงจาก root ของ public ตามโครงสร้างจริง
+        src: "/icon-192.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "maskable", // รองรับการปรับรูปร่างไอคอนบน Android
+        purpose: "maskable",
       },
       {
         src: "/android-chrome-192x192.png",

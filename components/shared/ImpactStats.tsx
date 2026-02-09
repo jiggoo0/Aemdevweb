@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: IMPACT_STATS_SYSTEM v17.3.9 (HYBRID_STABILIZED)
- * [STRATEGY]: Direct DOM Manipulation | Neural Physics | Multi-Theme Orchestration
+ * [FEATURE COMPONENT]: IMPACT_STATS_SYSTEM v17.4.6 (STABILIZED_FINAL)
+ * [STRATEGY]: Balanced Grid Architecture | Neural Physics | High-Performance Counters
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,7 +12,7 @@ import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
 
-// --- 1. Infrastructure: นิยามข้อมูลแบบ Deterministic ---
+// --- 1. Infrastructure: Metric Definition ---
 interface MetricItem {
   readonly id: string;
   readonly label: string;
@@ -29,7 +29,6 @@ const SYSTEM_METRICS: readonly MetricItem[] = [
     id: "PERF_CORE",
     label: "Performance Score",
     value: 99,
-    decimals: 0,
     unit: "/100",
     icon: "Zap",
     description: "Lighthouse Speed Index",
@@ -38,7 +37,6 @@ const SYSTEM_METRICS: readonly MetricItem[] = [
     id: "ROI_VELOCITY",
     label: "Conversion Growth",
     value: 300,
-    decimals: 0,
     unit: "%",
     icon: "TrendingUp",
     prefix: "+",
@@ -57,14 +55,13 @@ const SYSTEM_METRICS: readonly MetricItem[] = [
     id: "PRT_NETWORK",
     label: "Active Partners",
     value: 150,
-    decimals: 0,
     unit: "+",
     icon: "Users",
     description: "Trusting Businesses",
   },
 ];
 
-// --- 2. Core Engine: ตัวนับเลขประสิทธิภาพสูง (Direct DOM Mapping) ---
+// --- 2. Core Engine: High-Performance Counter ---
 const Counter = ({
   value,
   decimals = 0,
@@ -75,13 +72,12 @@ const Counter = ({
   prefix?: string;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const springValue = useSpring(0, {
-    stiffness: 60,
-    damping: 25,
+    stiffness: 45, // ปรับให้นุ่มนวลขึ้นเพื่อความหรูหรา
+    damping: 20,
     mass: 1,
-    restDelta: 0.001,
   });
 
   useEffect(() => {
@@ -90,77 +86,82 @@ const Counter = ({
 
   useMotionValueEvent(springValue, "change", (latest) => {
     if (ref.current) {
-      const formatted = latest.toLocaleString("en-US", {
+      ref.current.textContent = `${prefix}${latest.toLocaleString("en-US", {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
-      });
-      ref.current.textContent = `${prefix}${formatted}`;
+      })}`;
     }
   });
 
   return <span ref={ref} className="tracking-tighter tabular-nums" />;
 };
 
-// --- 3. UI Node: Metric Card Architecture ---
+// --- 3. UI Node: Balanced Metric Card ---
 const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
+        hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
         visible: {
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          transition: { duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] },
+          transition: { duration: 0.8, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] },
         },
       }}
       className={cn(
-        "group relative overflow-hidden rounded-[1.5rem] border p-6 transition-all duration-500",
-        /* [HYBRID THEME]: Mapping ไปยัง Semantic Tokens */
-        "border-border bg-surface-card shadow-sm",
-        "hover:border-brand-primary/30 hover:bg-surface-offset/50 hover:shadow-glow"
+        "group relative flex min-h-[280px] flex-col overflow-hidden rounded-[2.5rem] border p-10 transition-all duration-700",
+        "border-border bg-surface-card/40 shadow-pro-sm backdrop-blur-2xl",
+        "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:shadow-glow-sm hover:-translate-y-3",
       )}
     >
-      {/* Infrastructure Grid Overlay: ปรับตามธีมอัตโนมัติ */}
-      <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.03]" />
+      {/* 01. AMBIENT GRID TEXTURE */}
+      <div className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay" />
 
-      {/* Header Hub: Icon & Identity */}
-      <div className="relative mb-6 flex items-start justify-between">
-        <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary flex h-10 w-10 items-center justify-center rounded-xl border border-border transition-all duration-500 group-hover:rotate-6 group-hover:text-surface-main">
-          <IconRenderer name={stat.icon} size={20} strokeWidth={2} />
+      {/* 02. IDENTITY CLUSTER */}
+      <div className="relative z-10 mb-auto flex items-start justify-between">
+        <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary border-border group-hover:text-surface-main group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:rotate-[8deg]">
+          <IconRenderer name={stat.icon} size={24} strokeWidth={2.5} />
         </div>
-        <span className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase transition-colors group-hover:text-brand-primary/50">
-          {stat.id}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
+            METRIC_0{index + 1}
+          </span>
+          <div className="bg-brand-primary shadow-glow h-1 w-1 animate-pulse rounded-full" />
+        </div>
       </div>
 
-      {/* Logic Node: Numeric Visualization */}
-      <div className="relative z-10">
-        <div className="flex items-baseline gap-1">
-          <h3 className="text-text-primary font-mono text-4xl font-black tracking-tighter italic md:text-5xl">
-            <Counter value={stat.value} decimals={stat.decimals} prefix={stat.prefix} />
-          </h3>
-          <span className="text-brand-primary text-sm font-black">{stat.unit}</span>
+      {/* 03. DATA VISUALIZATION */}
+      <div className="relative z-10 mt-8 space-y-6">
+        <div className="space-y-1">
+          <div className="flex items-baseline gap-2">
+            <h3 className="text-text-primary font-mono text-5xl font-black tracking-tighter italic md:text-6xl">
+              <Counter value={stat.value} decimals={stat.decimals} prefix={stat.prefix} />
+            </h3>
+            <span className="text-brand-primary text-lg font-black tracking-widest uppercase opacity-80">
+              {stat.unit}
+            </span>
+          </div>
+          <p className="text-text-primary group-hover:text-brand-primary text-sm font-black tracking-[0.15em] uppercase italic transition-colors">
+            {stat.label}
+          </p>
         </div>
-        <p className="text-text-secondary mt-2 text-xs font-bold tracking-widest uppercase transition-colors group-hover:text-text-primary">
-          {stat.label}
-        </p>
-        
-        {/* Animated Underline */}
-        <div className="bg-border group-hover:bg-brand-primary/30 mt-2 h-px w-8 transition-all duration-500 group-hover:w-full" />
-        
-        <p className="text-text-muted mt-2 font-mono text-[9px] tracking-tight uppercase">
-          {stat.description}
-        </p>
+
+        <div className="space-y-3">
+          <div className="bg-border group-hover:bg-brand-primary/30 h-px w-full transition-all duration-700" />
+          <p className="text-text-muted font-mono text-[9px] leading-relaxed tracking-widest uppercase opacity-60">
+            {stat.description}
+          </p>
+        </div>
       </div>
 
-      {/* Neural Progress Line: GPU Accelerated */}
-      <div className="bg-border absolute bottom-0 left-0 h-[2px] w-full opacity-30">
+      {/* 04. NEURAL SIGNAL (GPU Accelerated) */}
+      <div className="bg-border/10 absolute bottom-0 left-0 h-1 w-full">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "100%" }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5, delay: 0.2 + index * 0.1, ease: "circOut" }}
+          transition={{ duration: 2.5, delay: 0.4 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="from-brand-primary/0 via-brand-primary to-brand-primary h-full bg-gradient-to-r"
         />
       </div>
@@ -171,12 +172,12 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
 // --- 4. Main Orchestrator ---
 const ImpactStats = () => {
   return (
-    <div className="w-full">
+    <div className="mx-auto w-full max-w-7xl">
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        viewport={{ once: true, margin: "-100px" }}
+        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
       >
         {SYSTEM_METRICS.map((stat, index) => (
           <MetricCard key={stat.id} stat={stat} index={index} />

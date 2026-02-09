@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: PRIVACY_POLICY v17.3.10 (STABILIZED)
+ * [ROUTE PAGE]: PRIVACY_POLICY v17.4.5 (STABILIZED)
  * [PLAN]: Data Integrity | Multi-Theme Resilience | PDPA Alignment
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -8,7 +8,6 @@ import React from "react";
 import type { Metadata } from "next";
 
 // --- 1. System Infrastructure & Layout Components ---
-// [FIXED]: ปรับ Path ให้ตรงตามโครงสร้าง File Tree จริง (ย้ายไปที่ sections)
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/features/landing/Hero";
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -19,42 +18,40 @@ import IconRenderer from "@/components/ui/IconRenderer";
  */
 export const metadata: Metadata = {
   title: `นโยบายความเป็นส่วนตัวและความปลอดภัยของข้อมูล | ${SITE_CONFIG.brandName}`,
-  description: "เราให้ความสำคัญกับการรักษาความลับและมาตรฐานความปลอดภัยของข้อมูลคุณอย่างสูงสุด เพื่อความโปร่งใสระดับ Specialist ครับ",
+  description:
+    "เราให้ความสำคัญกับการรักษาความลับและมาตรฐานความปลอดภัยของข้อมูลคุณอย่างสูงสุด เพื่อความโปร่งใสระดับ Specialist ครับ",
   alternates: { canonical: `${SITE_CONFIG.siteUrl}/privacy` },
 };
 
 /**
  * @page PrivacyPage
- * @description หน้าที่ระบุพันธสัญญาในการดูแลข้อมูลของพาร์ทเนอร์ 
- * [STABILIZED]: รองรับการสลับโหมด Dark/Light และปรับจูนระบบ Typography
+ * @description หน้าที่ระบุพันธสัญญาในการดูแลข้อมูลของพาร์ทเนอร์
  */
 export default function PrivacyPage() {
-  // [DETERMINISTIC]: ล็อควันที่อัปเดตตามเวลาปัจจุบันของระบบ (Synced: 2026-02-09)
   const lastUpdated = "9 กุมภาพันธ์ 2569";
 
   return (
     <LayoutEngine spacing="none">
-      {/* 01. HERO LAYER: [RESOLVED]: ใช้ subtitle prop ที่ได้รับการอัปเดต Interface แล้ว */}
+      {/* 01. HERO LAYER */}
       <HeroEngine
         title="ข้อมูลของคุณคือหัวใจสำคัญ ของการเป็นพาร์ทเนอร์ครับ"
         subtitle="ความไว้ใจคือรากฐานของการทำงานร่วมกัน เราจึงวางระบบจัดการข้อมูลที่ปลอดภัยและได้มาตรฐาน เพื่อให้พาร์ทเนอร์ทุกท่านมั่นใจว่าข้อมูลจะได้รับการดูแลอย่างดีที่สุด"
-        primaryActionText="ปรึกษาการวางระบบความปลอดภัย"
+        primaryActionLabel="ปรึกษาการวางระบบความปลอดภัย"
       />
 
-      {/* 02. ATMOSPHERIC DECOR: เลเยอร์บรรยากาศ */}
+      {/* 02. ATMOSPHERIC DECOR */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
         <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-        <div className="ambient-aura absolute bottom-1/4 right-0 h-[600px] w-[600px] opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
+        <div className="ambient-aura absolute right-0 bottom-1/4 h-[600px] w-[600px] opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
       </div>
 
-      {/* 03. CONTENT LAYER: รายละเอียดการดูแลข้อมูล */}
+      {/* 03. CONTENT LAYER */}
       <section className="relative z-10 container mx-auto px-4 py-24 transition-colors duration-500">
         <div className="mx-auto max-w-3xl space-y-20">
-          
           {/* Diagnostic Header */}
           <div className="border-border flex flex-col gap-4 border-b pb-8 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-brand-primary h-2 w-2 animate-ping rounded-full shadow-glow" />
+              <div className="bg-brand-primary shadow-glow h-2 w-2 animate-ping rounded-full" />
               <span className="text-text-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase">
                 Privacy_Protocol.v{SITE_CONFIG.project.version}
               </span>
@@ -65,88 +62,102 @@ export default function PrivacyPage() {
           </div>
 
           {/* Section 01: Data Collection Logic */}
-          <article className="space-y-6 group">
+          <article className="group space-y-6">
             <div className="flex items-center gap-4">
-              <span className="text-brand-primary font-mono text-lg font-black opacity-40 group-hover:opacity-100 transition-opacity">01.</span>
+              <span className="text-brand-primary font-mono text-lg font-black opacity-40 transition-opacity group-hover:opacity-100">
+                01.
+              </span>
               <h2 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
                 ขอบเขตการเก็บข้อมูล
               </h2>
             </div>
-            <p className="text-text-secondary leading-relaxed font-medium md:text-lg italic">
-              เพื่อให้การวางแผนระบบเป็นไปอย่างแม่นยำ เราจะขอจัดเก็บเฉพาะข้อมูลที่จำเป็นต่อการทำงานร่วมกันเท่านั้นครับ 
-              เช่น ข้อมูลติดต่อและเป้าหมายทางธุรกิจ โดยข้อมูลเหล่านี้จะถูกนำไปใช้เพื่อออกแบบเว็บไซต์ให้ตอบโจทย์ธุรกิจของคุณมากที่สุดครับ
+            <p className="text-text-secondary leading-relaxed font-medium italic md:text-lg">
+              เพื่อให้การวางแผนระบบเป็นไปอย่างแม่นยำ
+              เราจะขอจัดเก็บเฉพาะข้อมูลที่จำเป็นต่อการทำงานร่วมกันเท่านั้นครับ เช่น
+              ข้อมูลติดต่อและเป้าหมายทางธุรกิจ
+              โดยข้อมูลเหล่านี้จะถูกนำไปใช้เพื่อออกแบบเว็บไซต์ให้ตอบโจทย์ธุรกิจของคุณมากที่สุดครับ
             </p>
           </article>
 
           {/* Section 02: Data Usage Standards */}
-          <article className="space-y-6 group">
+          <article className="group space-y-6">
             <div className="flex items-center gap-4">
-              <span className="text-brand-primary font-mono text-lg font-black opacity-40 group-hover:opacity-100 transition-opacity">02.</span>
+              <span className="text-brand-primary font-mono text-lg font-black opacity-40 transition-opacity group-hover:opacity-100">
+                02.
+              </span>
               <h2 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
                 มาตรฐานการใช้งานข้อมูล
               </h2>
             </div>
-            <p className="text-text-secondary leading-relaxed font-medium md:text-lg italic">
-              ข้อมูลของคุณจะถูกใช้เพื่อเพิ่มประสิทธิภาพให้กับงานที่เราดูแลเท่านั้น เรายึดมั่นในความซื่อสัตย์: 
-              <span className="text-text-primary font-black"> เราไม่มีนโยบายการนำข้อมูลของคุณไปขาย หรือส่งต่อให้คนอื่น </span> 
+            <p className="text-text-secondary leading-relaxed font-medium italic md:text-lg">
+              ข้อมูลของคุณจะถูกใช้เพื่อเพิ่มประสิทธิภาพให้กับงานที่เราดูแลเท่านั้น
+              เรายึดมั่นในความซื่อสัตย์:
+              <span className="text-text-primary font-black">
+                {" "}
+                เราไม่มีนโยบายการนำข้อมูลของคุณไปขาย หรือส่งต่อให้คนอื่น{" "}
+              </span>
               เพื่อผลประโยชน์ทางการค้าอย่างเด็ดขาดครับ
             </p>
           </article>
 
           {/* Section 03: Security Infrastructure */}
-          <article className="space-y-8 group">
+          <article className="group space-y-8">
             <div className="flex items-center gap-4">
-              <span className="text-brand-primary font-mono text-lg font-black opacity-40 group-hover:opacity-100 transition-opacity">03.</span>
+              <span className="text-brand-primary font-mono text-lg font-black opacity-40 transition-opacity group-hover:opacity-100">
+                03.
+              </span>
               <h2 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
                 ระบบความปลอดภัย
               </h2>
             </div>
             <div className="space-y-6">
-              <p className="text-text-secondary leading-relaxed font-medium md:text-lg italic">
-                เราใช้เทคโนโลยีเข้ารหัส (Encryption) และระบบรักษาความปลอดภัยของเซิร์ฟเวอร์ที่ทันสมัย 
-                เพื่อป้องกันไม่ให้ข้อมูลรั่วไหล ข้อมูลแผนธุรกิจของคุณจะถูกรักษาเป็นความลับอย่างเข้มงวดตลอดเวลาครับ
+              <p className="text-text-secondary leading-relaxed font-medium italic md:text-lg">
+                เราใช้เทคโนโลยีเข้ารหัส (Encryption) และระบบรักษาความปลอดภัยของเซิร์ฟเวอร์ที่ทันสมัย
+                เพื่อป้องกันไม่ให้ข้อมูลรั่วไหล
+                ข้อมูลแผนธุรกิจของคุณจะถูกรักษาเป็นความลับอย่างเข้มงวดตลอดเวลาครับ
               </p>
 
-              
-              
-              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-primary rounded-[2rem] border-l-[12px] p-8 md:p-12 transition-all duration-500 hover:bg-surface-offset">
-                <div className="flex items-center gap-3 mb-4">
-                    <IconRenderer name="Lock" size={20} className="text-brand-primary" />
-                    <span className="text-brand-primary font-black tracking-widest uppercase text-xs">
-                        Security_Mandate:
-                    </span>
+              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-primary hover:bg-surface-offset rounded-[2rem] border-l-[12px] p-8 transition-all duration-500 md:p-12">
+                <div className="mb-4 flex items-center gap-3">
+                  <IconRenderer name="Lock" size={20} className="text-brand-primary" />
+                  <span className="text-brand-primary text-xs font-black tracking-widest uppercase">
+                    Security_Mandate:
+                  </span>
                 </div>
-                <p className="text-sm md:text-lg leading-relaxed font-medium italic">
-                    "เพราะความลับของคุณคือหัวใจของธุรกิจ ข้อมูลทุกอย่างที่ได้รับ จะถูกดูแลด้วยมาตรฐานความปลอดภัย
-                    ที่ผมให้ความสำคัญเป็นอันดับหนึ่งเสมอครับ"
+                <p className="text-sm leading-relaxed font-medium italic md:text-lg">
+                  "เพราะความลับของคุณคือหัวใจของธุรกิจ ข้อมูลทุกอย่างที่ได้รับ
+                  จะถูกดูแลด้วยมาตรฐานความปลอดภัย ที่ผมให้ความสำคัญเป็นอันดับหนึ่งเสมอครับ"
                 </p>
               </blockquote>
             </div>
           </article>
 
           {/* Section 04: PDPA Rights */}
-          <article className="space-y-6 group">
+          <article className="group space-y-6">
             <div className="flex items-center gap-4">
-              <span className="text-brand-primary font-mono text-lg font-black opacity-40 group-hover:opacity-100 transition-opacity">04.</span>
+              <span className="text-brand-primary font-mono text-lg font-black opacity-40 transition-opacity group-hover:opacity-100">
+                04.
+              </span>
               <h2 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
                 สิทธิ์ในการจัดการข้อมูล
               </h2>
             </div>
-            <p className="text-text-secondary leading-relaxed font-medium md:text-lg italic">
-              คุณคือเจ้าของข้อมูลและมีสิทธิ์เต็มที่ครับ ไม่ว่าจะเป็นการขอเข้าดู แก้ไข หรือลบข้อมูลออกจากระบบ 
-              คุณสามารถแจ้งความประสงค์ได้ทุกเมื่อ ทีมงานของเราพร้อมดำเนินการให้ทันทีโดยไม่มีเงื่อนไขครับ
+            <p className="text-text-secondary leading-relaxed font-medium italic md:text-lg">
+              คุณคือเจ้าของข้อมูลและมีสิทธิ์เต็มที่ครับ ไม่ว่าจะเป็นการขอเข้าดู แก้ไข
+              หรือลบข้อมูลออกจากระบบ คุณสามารถแจ้งความประสงค์ได้ทุกเมื่อ
+              ทีมงานของเราพร้อมดำเนินการให้ทันทีโดยไม่มีเงื่อนไขครับ
             </p>
           </article>
 
           {/* Section 05: Coordination Node */}
           <div className="border-border border-t pt-16">
-            <div className="bg-text-primary text-surface-main group relative overflow-hidden rounded-[3rem] p-10 shadow-glow transition-all duration-500 hover:scale-[1.01] md:p-14">
+            <div className="bg-text-primary text-surface-main group shadow-glow relative overflow-hidden rounded-[3rem] p-10 transition-all duration-500 hover:scale-[1.01] md:p-14">
               <div className="relative z-10 space-y-6">
                 <h3 className="text-2xl font-black tracking-tight uppercase italic md:text-3xl">
                   สอบถามเรื่องความปลอดภัย
                 </h3>
-                <p className="text-base leading-relaxed font-medium opacity-80 italic">
-                  หากคุณมีข้อสงสัยเรื่องการเก็บข้อมูล ทักแชทมาคุยกับผมผ่าน Line OA ได้เลยนะครับ 
+                <p className="text-base leading-relaxed font-medium italic opacity-80">
+                  หากคุณมีข้อสงสัยเรื่องการเก็บข้อมูล ทักแชทมาคุยกับผมผ่าน Line OA ได้เลยนะครับ
                   ผมยินดีให้คำอธิบายและดูแลเรื่องนี้ให้คุณอย่างเต็มที่ครับ
                 </p>
               </div>

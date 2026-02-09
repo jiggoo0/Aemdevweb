@@ -1,102 +1,125 @@
 /**
- * [SYSTEM LIB]: CMS_ENGINE v16.4.5 (PROD_READY)
- * [STRATEGY]: Zero-Any Policy | Strict Type Guarding | Memoized Extraction
+ * [SYSTEM LIB]: CMS_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [STRATEGY]: Type-Safe Collections | Generic Document Adapter | Recursive Integrity
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { cache } from "react";
-import type { BlogPost, CaseStudy } from "@/types";
+import type { BlogPost, CaseStudy, BaseContent } from "@/types";
 
-const CONTENT_PATH = path.join(process.cwd(), "content");
-const BLOG_PATH = path.join(CONTENT_PATH, "blog");
-const CASE_STUDIES_PATH = path.join(CONTENT_PATH, "case-studies");
+// --- [01. INFRASTRUCTURE CONFIG] ---
+
+const CONTENT_ROOT = path.join(process.cwd(), "content");
+const DIRECTORIES = {
+  blog: path.join(CONTENT_ROOT, "blog"),
+  caseStudies: path.join(CONTENT_ROOT, "case-studies"),
+} as const;
 
 /**
- * @function getSafeData
- * @description แปลงข้อมูล unknown จาก gray-matter ให้เป็น BlogPost & CaseStudy ที่ปลอดภัย
+ * [UTILITY]: Internal Data Sanitizer
+ * แปลงข้อมูลดิบจาก Frontmatter ให้เป็น Type ที่ปลอดภัยตามมาตรฐานระบบ
  */
-const getSafeData = (data: Record<string, unknown>, slug: string): BlogPost & CaseStudy => {
-  const s = (val: unknown, fallback: string) => (typeof val === "string" ? val : fallback);
-  const a = (val: unknown) => (Array.isArray(val) ? val : []);
+const sanitizeFrontmatter = (
+  data: Record<string, unknown>,
+  slug: string,
+): Record<string, unknown> => {
+  const str = (val: unknown, fallback: string) => (typeof val === "string" ? val : fallback);
+  const arr = (val: unknown) => (Array.isArray(val) ? val : []);
 
-  const title = s(data.title, "Untitled Node");
-  const description = s(data.description, "");
+  // Base Logic สำหรับทุก Content Node
+  const base: BaseContent = {
+    slug,
+    title: str(data.title, "Untitled Node"),
+    description: str(data.description, ""),
+    excerpt: str(data.excerpt, str(data.description, "")),
+    date: str(data.date, new Date().toISOString().split("T")[0]),
+    thumbnail: str(data.thumbnail, "/images/shared/placeholder.webp"),
+    tags: Object.freeze(arr(data.tags) as string[]),
+    author: "นายเอ็มซ่ามากส์", // [MANDATE]: Locked by system policy
+    ogImage: str(data.ogImage, str(data.thumbnail, "")),
+    keywords: Object.freeze(arr(data.keywords) as string[]),
+  };
 
   return {
-    slug,
-    title,
-    description,
-    excerpt: s(data.excerpt, description),
-    date: s(data.date, new Date().toISOString().split("T")[0]),
-    thumbnail: s(data.thumbnail, "/images/shared/placeholder.webp"),
-    tags: Object.freeze(a(data.tags) as string[]),
-    author: s(data.author, "นายเอ็มซ่ามากส์"), //ห้ามแก้ไข
-    category: s(data.category, "General"),
-    readingTime: s(data.readingTime, "5 min"),
-    client: s(data.client, "Confidential Partner"),
-    industry: s(data.industry, "General"),
-    results: Object.freeze(a(data.results) as string[]),
-    technicalStack: Object.freeze(a(data.technicalStack) as string[]),
-    content: "",
-  } as BlogPost & CaseStudy;
+    ...base,
+    // Blog Specific
+    category: str(data.category, "General"),
+    readingTime: str(data.readingTime, "5 min"),
+    // Case Study Specific
+    client: str(data.client, "Confidential Partner"),
+    industry: str(data.industry, "Industrial"),
+    results: Object.freeze(arr(data.results) as string[]),
+    technicalStack: Object.freeze(arr(data.technicalStack) as string[]),
+  };
 };
 
-// --- [BLOG ENGINE] ---
+// --- [02. CORE ENGINE: GENERIC FETCHERS] ---
 
-export const getAllPosts = cache(async (): Promise<readonly BlogPost[]> => {
-  if (!fs.existsSync(BLOG_PATH)) return [];
-  const files = fs.readdirSync(BLOG_PATH);
+/**
+ * @function fetchCollection
+ * @description ดึงข้อมูลทั้งหมดจาก Directory ที่กำหนด พร้อมระบบ Sort ตามวันที่
+ * [FIX]: Added Generic Constraint <T extends BaseContent> to ensure date existence
+ */
+async function fetchCollection<T extends BaseContent>(dirPath: string): Promise<readonly T[]> {
+  if (!fs.existsSync(dirPath)) return [];
 
-  const posts = files
+  const files = fs.readdirSync(dirPath);
+
+  const collection = files
     .filter((file) => file.endsWith(".mdx"))
-    .map((file): BlogPost => {
-      const { data } = matter(fs.readFileSync(path.join(BLOG_PATH, file), "utf8"));
-      return getSafeData(data as Record<string, unknown>, file.replace(".mdx", ""));
+    .map((file) => {
+      const fullPath = path.join(dirPath, file);
+      const fileContent = fs.readFileSync(fullPath, "utf8");
+      const { data } = matter(fileContent);
+
+      return sanitizeFrontmatter(
+        data as Record<string, unknown>,
+        file.replace(".mdx", ""),
+      ) as unknown as T;
     })
+    // [FIX]: Removed 'any' type casting, leveraging Generic Constraint
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  return Object.freeze(posts);
-});
+  return Object.freeze(collection);
+}
 
-export const getPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
+/**
+ * @function fetchDocument
+ * @description ดึงข้อมูลไฟล์เดี่ยวพร้อมเนื้อหา (Content)
+ */
+async function fetchDocument<T>(dirPath: string, slug: string): Promise<T | null> {
   try {
-    const filePath = path.join(BLOG_PATH, `${slug}.mdx`);
+    const filePath = path.join(dirPath, `${slug}.mdx`);
     if (!fs.existsSync(filePath)) return null;
 
-    const { data, content } = matter(fs.readFileSync(filePath, "utf8"));
-    return { ...getSafeData(data as Record<string, unknown>, slug), content };
-  } catch {
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const { data, content } = matter(fileContent);
+
+    return {
+      ...sanitizeFrontmatter(data as Record<string, unknown>, slug),
+      content,
+    } as unknown as T;
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.error(`[CMS_ERROR]: Failed to fetch document ${slug}`, error);
+    }
     return null;
   }
-});
+}
 
-// --- [CASE STUDY ENGINE] ---
+// --- [03. PUBLIC API: MEMOIZED EXPORTS] ---
 
-export const getAllCaseStudies = cache(async (): Promise<readonly CaseStudy[]> => {
-  if (!fs.existsSync(CASE_STUDIES_PATH)) return [];
-  const files = fs.readdirSync(CASE_STUDIES_PATH);
+// Blog API
+export const getAllPosts = cache(() => fetchCollection<BlogPost>(DIRECTORIES.blog));
+export const getPostBySlug = cache((slug: string) =>
+  fetchDocument<BlogPost>(DIRECTORIES.blog, slug),
+);
 
-  const cases = files
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file): CaseStudy => {
-      const { data } = matter(fs.readFileSync(path.join(CASE_STUDIES_PATH, file), "utf8"));
-      return getSafeData(data as Record<string, unknown>, file.replace(".mdx", ""));
-    })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return Object.freeze(cases);
-});
-
-export const getCaseStudyBySlug = cache(async (slug: string): Promise<CaseStudy | null> => {
-  try {
-    const filePath = path.join(CASE_STUDIES_PATH, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) return null;
-
-    const { data, content } = matter(fs.readFileSync(filePath, "utf8"));
-    return { ...getSafeData(data as Record<string, unknown>, slug), content };
-  } catch {
-    return null;
-  }
-});
+// Case Study API
+export const getAllCaseStudies = cache(() => fetchCollection<CaseStudy>(DIRECTORIES.caseStudies));
+export const getCaseStudyBySlug = cache((slug: string) =>
+  fetchDocument<CaseStudy>(DIRECTORIES.caseStudies, slug),
+);

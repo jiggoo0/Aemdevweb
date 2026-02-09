@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.3.11 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.4.5 (STABILIZED_FINAL)
  * [STRATEGY]: Visual Impact | Theme-Aware Contrast | Zero-Any Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -33,7 +33,6 @@ interface SalePageTemplateProps {
 /**
  * @component SalePageTemplate
  * @description เทมเพลตสำหรับหน้าเว็บปิดการขาย (Landing Page)
- * [FIXED]: กำจัด 'any' เพื่อให้ผ่านระบบตรวจสอบความปลอดภัย (Lint-Passed)
  */
 function SalePageTemplate({ data }: SalePageTemplateProps) {
   const schema = generateSalePageSchema(data);
@@ -42,36 +41,41 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY */}
+      {/* 01. HERO GATEWAY: [RESOLVED]: ปรับใช้ Flat Props ให้ตรงกับ HeroEngine Interface */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
-        primaryActionText="เริ่มวางแผน Sale Page ทันที"
-        secondaryActionText="ดูตัวอย่างระบบ"
+        primaryActionLabel="เริ่มวางแผน Sale Page ทันที"
+        primaryHref="/contact"
+        secondaryActionLabel="ดูตัวอย่างระบบ"
+        secondaryHref="#demo"
       />
 
       {/* 02. VISUAL SHOWCASE: Browser Simulation */}
-      <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32 transition-colors duration-500">
+      <section
+        id="demo"
+        className="relative z-30 container mx-auto -mt-16 px-4 transition-colors duration-500 md:-mt-24 lg:-mt-32"
+      >
         <div className="group relative mx-auto max-w-5xl">
           <div className="bg-brand-primary/20 absolute -inset-1 opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-[var(--ambient-opacity,0.5)]" />
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface-card shadow-2xl md:rounded-[3rem]">
+          <div className="border-border bg-surface-card relative overflow-hidden rounded-[2rem] border shadow-2xl md:rounded-[3rem]">
             {/* Specialist Browser UI */}
-            <div className="flex items-center gap-2 border-b border-border bg-surface-offset px-6 py-4 backdrop-blur-md">
+            <div className="border-border bg-surface-offset flex items-center gap-2 border-b px-6 py-4 backdrop-blur-md">
               <div className="flex gap-1.5">
                 <div className="h-3 w-3 rounded-full bg-red-500/50" />
                 <div className="h-3 w-3 rounded-full bg-yellow-500/50" />
                 <div className="h-3 w-3 rounded-full bg-green-500/50" />
               </div>
-              <div className="mx-auto flex w-1/2 items-center justify-center rounded-full bg-surface-main/50 py-1 border border-border">
-                <div className="mr-2 h-2 w-2 animate-pulse rounded-full bg-brand-primary shadow-glow" />
-                <span className="text-text-muted text-[9px] font-black uppercase tracking-[0.2em] md:text-[10px]">
+              <div className="bg-surface-main/50 border-border mx-auto flex w-1/2 items-center justify-center rounded-full border py-1">
+                <div className="bg-brand-primary shadow-glow mr-2 h-2 w-2 animate-pulse rounded-full" />
+                <span className="text-text-muted text-[9px] font-black tracking-[0.2em] uppercase md:text-[10px]">
                   {data.id} // Secure_Node.v17
                 </span>
               </div>
             </div>
 
-            <div className="relative aspect-[16/10] w-full bg-surface-offset">
+            <div className="bg-surface-offset relative aspect-[16/10] w-full">
               <Image
                 src={data.image || "/images/service/preview.webp"}
                 alt={`ตัวอย่างหน้าเว็บปิดการขาย: ${data.title}`}
@@ -80,8 +84,8 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
                 className="object-cover object-top transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
-              <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05] pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent opacity-60" />
+              <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.05]" />
+              <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
             </div>
           </div>
         </div>
@@ -101,7 +105,7 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
               </h3>
             </div>
             <ImpactStats />
-            <div className="h-px w-full max-w-xs bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="via-border h-px w-full max-w-xs bg-gradient-to-r from-transparent to-transparent" />
             <TrustBadge />
           </div>
         </div>
@@ -114,31 +118,39 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
         items={(data.benefits || []).map((benefit, index) => ({
           title: benefit,
           description: "Optimized for maximum conversion in Specialist infrastructure.",
-          icon: (index % 2 === 0 ? "Target" : "Zap") as IconName,
-          category: "Key Advantage",
+          icon: index % 2 === 0 ? "Target" : "Zap",
+          technicalDetail: "Key Advantage",
         }))}
         columns={3}
       />
 
       {/* 05. TECHNICAL CAPABILITIES: Deep Dive Section */}
-      <section className="border-y border-border bg-surface-offset/50 py-24">
+      <section className="border-border bg-surface-offset/50 border-y py-24">
         <div className="container mx-auto px-4">
-          <div className="mb-16 text-center space-y-4">
-            <h3 className="text-text-primary text-3xl font-black md:text-5xl uppercase italic tracking-tighter">Technical Capabilities</h3>
-            <p className="text-text-secondary font-medium italic">ขุมพลังเบื้องหลังความสำเร็จของ Sale Page</p>
+          <div className="mb-16 space-y-4 text-center">
+            <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
+              Technical Capabilities
+            </h3>
+            <p className="text-text-secondary font-medium italic">
+              ขุมพลังเบื้องหลังความสำเร็จของ Sale Page
+            </p>
           </div>
           <div className="grid gap-8 md:grid-cols-3">
             {(data.coreFeatures || []).map((feature, idx) => (
               <div
                 key={idx}
-                className="group relative rounded-3xl border border-border bg-surface-card p-8 transition-all duration-500 hover:border-brand-primary/30 hover:bg-surface-offset hover:shadow-glow"
+                className="group border-border bg-surface-card hover:border-brand-primary/30 hover:bg-surface-offset hover:shadow-glow relative rounded-3xl border p-8 transition-all duration-500"
               >
-                <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all group-hover:rotate-6 group-hover:text-surface-main">
-                  {/* [RESOLVED]: เปลี่ยนจาก 'as any' เป็น 'as IconName' เพื่อความปลอดภัยสูงสุด */}
+                <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all group-hover:rotate-6">
+                  {/* [RESOLVED]: Type-Safe Icon Rendering */}
                   <IconRenderer name={feature.icon as IconName} size={24} />
                 </div>
-                <h4 className="text-text-primary mb-3 text-xl font-black uppercase tracking-tight italic">{feature.title}</h4>
-                <p className="text-text-secondary text-sm leading-relaxed font-medium italic opacity-80">{feature.description}</p>
+                <h4 className="text-text-primary mb-3 text-xl font-black tracking-tight uppercase italic">
+                  {feature.title}
+                </h4>
+                <p className="text-text-secondary text-sm leading-relaxed font-medium italic opacity-80">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>

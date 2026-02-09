@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.3.10 (STABILIZED)
- * [STRATEGY]: Local Authority Engine | Deterministic Static Audit | Adapter Pattern
+ * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [STRATEGY]: Local Authority Engine | Linked Data Graph | Deterministic Rendering
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -8,23 +8,27 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// --- 1. Infrastructure & Data ---
+// --- 1. Infrastructure & Core Data ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
-import type { AreaNode, TemplateMasterData, PageProps, ServiceCategory } from "@/types";
+import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
+import { constructMetadata } from "@/lib/seo-utils";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
-import { generateLocalBusinessSchema } from "@/lib/schema";
+import {
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+  generateSchemaGraph,
+} from "@/lib/schema";
 
-// --- 3. Specialist Templates & Engine ---
-// [FIXED]: แก้ไข Case-Sensitivity (index ตัวเล็ก) และ Path ให้ตรงกับ File Tree จริง
-import LocalTemplate from "@/components/templates/local/index"; 
+// --- 3. Specialist Templates & Layout Engine ---
+import LocalTemplate from "@/components/templates/local_service/index";
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 
-/* [A] STATIC GENERATION PROTOCOL (SSG) */
+/* [A] STATIC GENERATION ENGINE (SSG) */
 export async function generateStaticParams() {
   return AREA_NODES.map((area) => ({
     slug: area.slug,
@@ -38,115 +42,125 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
 
   if (!area) return { title: "404 Not Found" };
 
-  return {
-    title: area.seoTitle || `${area.title} | ${SITE_CONFIG.brandName}`,
+  return constructMetadata({
+    title: area.seoTitle || area.title,
     description: area.seoDescription || area.description,
-    alternates: { canonical: `${SITE_CONFIG.siteUrl}/areas/${slug}` },
-    openGraph: {
-      title: area.seoTitle,
-      description: area.seoDescription,
-      images: [{ url: area.heroImage || "/images/og-default.webp", alt: area.title }],
-      locale: "th_TH",
-      type: "website",
-    },
-    keywords: [...(area.keywords || [])],
-  };
+    path: `/areas/${slug}`,
+    image: area.heroImage,
+    keywords: area.keywords,
+  });
 }
 
 /**
- * [ADAPTER UTILITY]: แปลงข้อมูล AreaNode -> TemplateMasterData
- * [RESOLVED]: เพิ่ม Property 'keywords' เพื่อให้ผ่านเงื่อนไขของ TemplateMasterData
+ * [DETERMINISTIC ADAPTER]: แปลงข้อมูล AreaNode ให้รองรับโครงสร้าง TemplateMasterData
+ * [FIX]: Removed 'any' type and ensured proper data mapping with all required fields
  */
-const adaptAreaToMasterData = (
-  baseArea: AreaNode,
-  category: ServiceCategory,
-): TemplateMasterData => {
+const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
+  // สร้างชุดคำถาม FAQ อัตโนมัติจาก Keyword
+  const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw: string) => ({
+    question: `บริการ ${kw} ในจังหวัด ${area.province} มีจุดเด่นอย่างไร?`,
+    answer: `เราเน้นการทำ ${kw} ที่ออกแบบมาเพื่อพฤติกรรมลูกค้าใน ${area.province} โดยเฉพาะ พร้อมโครงสร้าง Technical SEO ที่ช่วยให้ธุรกิจของคุณแซงหน้าคู่แข่งในพื้นที่ได้ทันทีครับ`,
+  }));
+
+  // สร้าง Core Features จำลองสำหรับ Template ที่ต้องใช้
+  const generatedFeatures = [
+    {
+      title: "Local SEO Optimized",
+      description: `ปรับแต่งโครงสร้างให้ติดอันดับการค้นหาใน ${area.province}`,
+      icon: "MapPin",
+    },
+    { title: "High Performance", description: "โหลดไว รองรับพฤติกรรมลูกค้าในพื้นที่", icon: "Zap" },
+    {
+      title: "Conversion Ready",
+      description: "ออกแบบมาเพื่อปิดการขายลูกค้าท้องถิ่นโดยเฉพาะ",
+      icon: "Target",
+    },
+  ];
+
   return {
-    id: `NODE-${baseArea.slug.toUpperCase()}`,
-    title: baseArea.title,
-    description: baseArea.description,
-    priceValue: 0,
+    id: `NODE-${area.slug.toUpperCase()}`,
+    templateSlug: area.templateSlug || "local",
+    title: area.title,
+    description: area.description,
+    image: area.heroImage, // Map heroImage to image
     price: "ประเมินตามพื้นที่",
+    priceValue: 0,
     currency: "THB",
     unit: "โปรเจกต์",
-    category: category,
-    templateSlug: baseArea.templateSlug,
-    priority: baseArea.priority,
-    image: baseArea.heroImage,
-    // [FIXED]: ส่งผ่าน Keywords จาก AreaNode ไปยัง Template
-    keywords: baseArea.keywords || [], 
+    faqs: generatedFaqs,
+    coreFeatures: generatedFeatures, // Required by templates
     benefits: [
-      ...(baseArea.keywords || []),
-      `บริการมาตรฐาน Specialist ครอบคลุมพื้นที่ ${baseArea.province}`,
-      `วิเคราะห์เจาะจงเขต ${baseArea.districts.slice(0, 3).join(", ")}`,
-      "Technical SEO Optimized สำหรับตลาดท้องถิ่น 100%",
+      ...(area.keywords || []),
+      `มาตรฐานวิศวกรรมจาก Specialist ในพื้นที่ ${area.province}`,
+      "Technical SEO Optimized 100%",
     ],
-    coreFeatures: (baseArea.keywords || []).map((kw, idx) => ({
-      title: kw,
-      description: idx === 0 
-        ? `ยุทธศาสตร์ ${kw} ที่ออกแบบมาเพื่อธุรกิจใน ${baseArea.province}` 
-        : `ขับเคลื่อนด้วยเทคโนโลยี Next.js 16 (Specialist Infrastructure)`,
-      icon: idx % 2 === 0 ? "MapPin" : "Zap",
-    })),
-    faqs: [
-      {
-        question: `ธุรกิจใน ${baseArea.province} สามารถเริ่มงานกับ AEMDEVWEB ได้อย่างไร?`,
-        answer: `คุณสามารถติดต่อปรึกษาผ่านช่องทางออนไลน์ได้ทันทีครับ เรามีระบบ Remote Onboarding ที่ช่วยให้การวางแผนงานใน ${baseArea.province} เป็นไปอย่างรวดเร็วและแม่นยำครับ`,
-      },
-    ],
+    theme: { primary: "#2563eb", secondary: "#1e40af" }, // Default theme for mapped data
+
+    // [FIX]: Added missing properties to satisfy TemplateMasterData interface
+    category: "business",
+    priority: 99,
+    keywords: area.keywords || [],
+    isFeatured: false,
+    isPopular: false,
   };
 };
 
 /**
  * @component AreaDetailPage
- * @description หน้า Landing Page รายจังหวัดแบบ Dynamic Route (Deterministic Hub)
+ * @description หน้าแสดงข้อมูลรายจังหวัดที่เน้นความน่าเชื่อถือและการทำอันดับ Local Search 2026
  */
 export default async function AreaDetailPage({ params }: PageProps<{ slug: string }>) {
   const { slug } = await params;
-  
-  // 1. Fetch Area Data จาก Registry
+
+  // 1. Data Retrieval
   const area = AREA_NODES.find((a) => a.slug === slug);
   if (!area) notFound();
 
-  // 2. [DETERMINISTIC INTEGRITY]: ดึงข้อมูลปีแบบปลอดภัย
-  const AUDIT_STAMP = SITE_CONFIG.business.established?.split('-')[0] || "2026"; 
+  // 2. [SEO]: Unified Schema Graph
+  const breadcrumbData = [
+    { name: "หน้าแรก", item: "/" },
+    { name: "พื้นที่ให้บริการ", item: "/areas" },
+    { name: area.province, item: `/areas/${slug}` },
+  ];
 
-  // 3. Prepare Schema Graph
-  const localSchema = generateLocalBusinessSchema(area);
+  const fullSchema = generateSchemaGraph([
+    generateBreadcrumbSchema(breadcrumbData),
+    generateLocalBusinessSchema(area),
+  ]);
+
+  const AUDIT_STAMP = SITE_CONFIG.project.version;
 
   /**
-   * [RENDER ORCHESTRATOR]: เลือก Template ตามกลยุทธ์พื้นที่ (Adaptive UI)
+   * [TEMPLATE SWITCHER]: เลือกเรนเดอร์ UI ตามยุทธศาสตร์ของพื้นที่
    */
   const renderTemplate = () => {
+    const templateData = adaptAreaToTemplateData(area);
+
     switch (area.templateSlug) {
       case "corporate":
-        return <CorporateTemplate data={adaptAreaToMasterData(area, "business")} />;
+        // [FIX]: Passed typed data
+        return <CorporateTemplate data={templateData} />;
       case "salepage":
-        return <SalePageTemplate data={adaptAreaToMasterData(area, "landing")} />;
+        // [FIX]: Passed typed data
+        return <SalePageTemplate data={templateData} />;
       case "local":
       default:
-        // LocalTemplate รับ AreaNode โดยตรง (ไม่ต้องผ่าน Adapter)
         return <LocalTemplate data={area} />;
     }
   };
 
   return (
     <LayoutEngine spacing="none">
-      <JsonLd data={localSchema} />
+      <JsonLd data={fullSchema} />
 
-      {/* Atmospheric Physics Overlay */}
-      <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-        <div className="ambient-aura absolute top-0 left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[100px]" />
-        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-      </div>
-
-      {/* Content Injection Hub */}
-      <main className="relative z-10 animate-in fade-in slide-in-from-bottom-2 duration-1000">
+      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
+        {/* Node Ref Badge */}
         <div className="flex justify-center pt-24 pb-4">
-          <span className="text-text-muted font-mono text-[9px] font-black uppercase tracking-[0.4em] opacity-40">
-            Node_Sync_Ref: {AUDIT_STAMP} // Specialist_Stable
+          <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
+            Area_Node_Sync: v{AUDIT_STAMP} // Specialist_Stable
           </span>
         </div>
+
         {renderTemplate()}
       </main>
     </LayoutEngine>

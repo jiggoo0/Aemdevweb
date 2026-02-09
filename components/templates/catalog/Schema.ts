@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.3.9 (STABILIZED)
+ * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.4.5 (STABILIZED)
  * [STRATEGY]: Knowledge Graph Linking | ItemList Collection | Type-Safe Registry
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -7,71 +7,66 @@
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { TemplateMasterData, CatalogItem, ServiceFeature } from "@/types";
 
-/**
- * @function generateCatalogSchema
- * สร้างชุดข้อมูล JSON-LD แบบ Graph เพื่อยืนยันโครงสร้าง "Collection" 
- * [STABILIZED]: เชื่อมโยง ItemList เข้ากับสถาปัตยกรรม WebPage อย่างเป็นระบบ
- */
 export function generateCatalogSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
   const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
-  
-  // [DATA MAPPING]: ระบบตรวจจับความหลากหลายของ Data Source
+
+  // [DATA MAPPING]: รองรับทั้ง items (Catalog) และ coreFeatures (Fallback)
   const catalogItems = data.items || data.coreFeatures || [];
 
   return {
     "@context": "https://schema.org",
     "@graph": [
-      // --- NODE 1: COLLECTION PAGE (The Archive Authority) ---
+      // NODE 1: COLLECTION PAGE
       {
         "@type": "CollectionPage",
         "@id": `${canonicalUrl}/#webpage`,
-        "url": canonicalUrl,
-        "name": `${data.title} | ${SITE_CONFIG.brandName}`,
-        "description": data.description,
-        "image": {
+        url: canonicalUrl,
+        name: `${data.title} | ${SITE_CONFIG.brandName}`,
+        description: data.description,
+        image: {
           "@type": "ImageObject",
-          "url": `${siteUrl}${data.image || "/images/og-default.webp"}`,
+          url: `${siteUrl}${data.image || "/images/og-default.webp"}`,
         },
-        "isPartOf": { "@id": `${siteUrl}/#website` },
-        "breadcrumb": { "@id": `${canonicalUrl}/#breadcrumb` },
-        "mainEntity": { "@id": `${canonicalUrl}/#itemlist` },
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        breadcrumb: { "@id": `${canonicalUrl}/#breadcrumb` },
+        mainEntity: { "@id": `${canonicalUrl}/#itemlist` },
       },
 
-      // --- NODE 2: ITEM LIST (Structured Collection Data) ---
+      // NODE 2: ITEM LIST
       {
         "@type": "ItemList",
         "@id": `${canonicalUrl}/#itemlist`,
-        "numberOfItems": catalogItems.length,
-        "itemListElement": catalogItems.map((item, index) => {
-          const itemName = "name" in item 
-            ? (item as CatalogItem).name 
-            : (item as ServiceFeature).title;
+        numberOfItems: catalogItems.length,
+        itemListElement: catalogItems.map((item, index) => {
+          // ตรวจสอบว่า item เป็น CatalogItem หรือ ServiceFeature
+          const itemName =
+            "name" in item ? (item as CatalogItem).name : (item as ServiceFeature).title;
 
           return {
             "@type": "ListItem",
-            "position": index + 1,
-            "item": {
+            position: index + 1,
+            item: {
               "@type": "Service",
-              "name": itemName,
-              "description": item.description,
-              "url": canonicalUrl,
-              "provider": { "@id": `${siteUrl}/#organization` },
+              name: itemName,
+              description: item.description,
+              url: canonicalUrl,
+              provider: { "@id": `${siteUrl}/#organization` },
             },
           };
         }),
       },
 
-      // --- NODE 3: BREADCRUMB LIST ---
+      // NODE 3: BREADCRUMB
       {
         "@type": "BreadcrumbList",
         "@id": `${canonicalUrl}/#breadcrumb`,
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": siteUrl },
-          { "@type": "ListItem", "position": 2, "name": "บริการทั้งหมด", "item": `${siteUrl}/services` },
-          { "@type": "ListItem", "position": 3, "name": data.title, "item": canonicalUrl },
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "หน้าแรก", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "บริการทั้งหมด", item: `${siteUrl}/services` },
+          { "@type": "ListItem", position: 3, name: data.title, item: canonicalUrl },
         ],
-      }
+      },
     ],
   };
 }

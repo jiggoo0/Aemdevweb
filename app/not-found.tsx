@@ -1,5 +1,5 @@
 /**
- * [SYSTEM MODULE]: NOT_FOUND_UI v17.3.9 (HYBRID_STABILIZED)
+ * [SYSTEM MODULE]: NOT_FOUND_UI v17.4.5 (HYBRID_STABILIZED)
  * [STRATEGY]: Technical Resilience | Aesthetic Recovery | Multi-Theme Orchestration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -15,16 +15,13 @@ import { cn } from "@/lib/utils";
  * [STABILIZED]: ปรับจูนระบบแสงเงาและ Contrast ให้สอดคล้องกับโหมด Dark/Light
  */
 export default function NotFound() {
-  // [DETERMINISTIC]: ใช้พิกัดเวลาจากระบบเพื่อสร้าง Trace ID ที่เสถียร
-  const traceDate = new URLSearchParams().get("t") || new Date().toISOString().split("T")[0];
+  // [DETERMINISTIC]: ใช้ค่าวันปัจจุบันเพื่อสร้าง Trace ID ที่เสถียร (สำหรับการแสดงผล)
+  const traceDate = new Date().toISOString().split("T")[0];
 
   return (
     <div className="bg-surface-main selection:bg-brand-primary/20 relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-6 transition-colors duration-500">
-      
       {/* 01. ATMOSPHERIC INFRASTRUCTURE: เลเยอร์พื้นหลัง */}
       <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" aria-hidden="true" />
-
-      
 
       {/* Ambient Aura: ปรับตามตัวแปร --ambient-opacity ของระบบ */}
       <div
@@ -32,23 +29,24 @@ export default function NotFound() {
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-[-5%] left-[-5%] h-[400px] w-[400px] rounded-full bg-blue-600/5 mix-blend-screen blur-[100px] opacity-[var(--ambient-opacity)]"
+        className="absolute bottom-[-5%] left-[-5%] h-[400px] w-[400px] rounded-full bg-blue-600/5 opacity-[var(--ambient-opacity)] mix-blend-screen blur-[100px]"
         aria-hidden="true"
       />
 
       {/* 02. ERROR DIAGNOSTIC DISPLAY: ส่วนประมวลผลความผิดพลาด */}
       <div className="relative z-10 flex max-w-2xl flex-col items-center text-center">
-        
         {/* Error Code Anchor: ใช้สีที่ปรับตามธีมเพื่อความนุ่มนวล */}
         <div className="relative mb-16 flex items-center justify-center">
-          <span className="text-border text-[12rem] leading-none font-black tracking-tighter select-none opacity-30 md:text-[16rem]">
+          <span className="text-border text-[12rem] leading-none font-black tracking-tighter opacity-30 select-none md:text-[16rem]">
             404
           </span>
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className={cn(
-               "bg-surface-card border-border shadow-glow group flex h-24 w-24 items-center justify-center rounded-[2.5rem] border backdrop-blur-xl transition-all duration-700 hover:rotate-12"
-            )}>
+            <div
+              className={cn(
+                "bg-surface-card border-border shadow-glow group flex h-24 w-24 items-center justify-center rounded-[2.5rem] border backdrop-blur-xl transition-all duration-700 hover:rotate-12",
+              )}
+            >
               <IconRenderer
                 name="SearchX"
                 size={48}
@@ -65,8 +63,8 @@ export default function NotFound() {
             Route <br /> <span className="text-brand-primary">Not_Found.</span>
           </h1>
           <p className="text-text-secondary border-brand-primary/50 mx-auto max-w-lg border-l-4 pl-8 text-left text-lg leading-relaxed font-medium italic">
-            ขออภัยครับ ดูเหมือนพิกัดข้อมูลที่คุณเรียกใช้งานจะไม่มีอยู่ในระบบ 
-            <span className="text-text-primary font-black block mt-2">
+            ขออภัยครับ ดูเหมือนพิกัดข้อมูลที่คุณเรียกใช้งานจะไม่มีอยู่ในระบบ
+            <span className="text-text-primary mt-2 block font-black">
               // แนะนำให้คุณกลับไปตั้งหลักที่หน้าแรก หรือปรึกษาทีมงานได้ทันทีครับ
             </span>
           </p>

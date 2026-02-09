@@ -1,17 +1,15 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.3.1 (STABILIZED_FINAL)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.0 (FIXED)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { ReactNode, ComponentType, CSSProperties } from "react";
 
-// --- [01. UTILITY INFRASTRUCTURE] ---
+// =========================================
+// [01] UTILITY & NEXT.JS 15 ADAPTERS
+// =========================================
 
-/**
- * [STABILIZED]: Standardized Props for Next.js 15/16+ Pages
- * รองรับการใช้งานแบบ Async Params ตามมาตรฐานใหม่
- */
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -22,27 +20,21 @@ export interface LayoutProps<T = Record<string, string>> {
   readonly params: Promise<T>;
 }
 
-/**
- * [ENHANCED]: Base Component Props
- * รองรับการส่งผ่าน Style และ ClassName สำหรับ UI Components ทุกตัว
- */
 export interface BaseComponentProps {
   readonly children?: ReactNode;
   readonly className?: string;
   readonly style?: CSSProperties;
 }
 
-/**
- * [FIXED]: UI Skeleton Interface
- * แก้ปัญหา Error TS2322 (Property 'style' does not exist on type 'IntrinsicAttributes...')
- */
 export interface SkeletonCardProps extends BaseComponentProps {
   readonly aspectRatio?: "portrait" | "video" | "square";
 }
 
 export type IconName = string;
 
-// --- [02. NAVIGATION & SITE CONFIG] ---
+// =========================================
+// [02] SITE CONFIGURATION & IDENTITY
+// =========================================
 
 export interface NavItem {
   readonly label: string;
@@ -87,6 +79,8 @@ export interface SiteConfig {
     readonly email: string;
     readonly bioUrl: string;
     readonly bio?: string;
+    // [FIXED]: Added support for Knowledge Graph ID
+    readonly googleMerchantId?: string;
   };
   readonly contact: {
     readonly email: string;
@@ -106,6 +100,9 @@ export interface SiteConfig {
     readonly github: string;
     readonly twitter?: string;
     readonly youtube?: string;
+    // [FIXED]: Added support for Local SEO Links
+    readonly googleMaps?: string;
+    readonly googleReview?: string;
   };
   readonly business: {
     readonly location: string;
@@ -119,7 +116,9 @@ export interface SiteConfig {
   };
 }
 
-// --- [03. DATA REGISTRY & SERVICES] ---
+// =========================================
+// [03] DATA REGISTRY & SERVICES
+// =========================================
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal";
 
@@ -158,41 +157,36 @@ export interface ThemeConfig {
   readonly gradient?: string;
 }
 
-/**
- * [RESOLVED]: Template Data Engine
- * รองรับ Property 'keywords' เพื่อแก้ปัญหา Error TS2353 ใน master-registry.ts
- */
 export interface TemplateMasterData {
   readonly id: string;
   readonly title: string;
   readonly description: string;
   readonly image?: string;
+  readonly templateSlug: string;
+  readonly category: ServiceCategory;
   readonly priceValue: number;
   readonly price: string;
   readonly currency: string;
   readonly unit: string;
-  readonly category: ServiceCategory;
-  readonly templateSlug: string;
   readonly priority: number;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
   readonly theme?: ThemeConfig;
-  
-  // Data Clusters
   readonly benefits: readonly string[];
   readonly coreFeatures: readonly ServiceFeature[];
   readonly faqs: readonly ServiceFaq[];
-  readonly keywords: readonly string[]; 
-
-  // UI Specific
+  readonly keywords: readonly string[];
   readonly clientTrust?: string;
   readonly items?: readonly CatalogItem[];
   readonly expertise?: readonly ExpertiseItem[];
 }
 
+// Alias for backwards compatibility
 export type ServiceData = TemplateMasterData;
 
-// --- [04. CONTENT & MDX SCHEMAS] ---
+// =========================================
+// [04] CONTENT MODELS (MDX)
+// =========================================
 
 export interface SEOMetadata {
   readonly title: string;
@@ -229,7 +223,9 @@ export interface CaseStudy extends BaseContent {
   readonly afterImage?: string;
 }
 
-// --- [05. LOCAL SEO & AREA NODES] ---
+// =========================================
+// [05] GEO & AREA NODES
+// =========================================
 
 export interface AreaNode {
   readonly slug: string;

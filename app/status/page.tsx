@@ -1,25 +1,25 @@
 /**
- * [ROUTE PAGE]: SYSTEM_STATUS_TERMINAL v17.3.10 (STABILIZED)
+ * [ROUTE PAGE]: SYSTEM_STATUS_TERMINAL v17.4.5 (STABILIZED)
  * [STRATEGY]: Kinetic Grid Architecture | Multi-Theme Logic | Node Matrix
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
 import type { Metadata } from "next";
-import * as motion from "framer-motion/client";
+import * as motion from "framer-motion/client"; // [NOTE]: Next.js 14/15 Server Component Compatible
 
 // --- Infrastructure ---
-// [FIXED]: ปรับ Path ให้ตรงตามโครงสร้างไฟล์จริงของคุณ (กู้คืนจาก TS2307 Error)
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
 
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
-import type { IconName } from "@/types";
+import type { IconName } from "@/components/ui/IconRenderer";
 
 export const metadata: Metadata = {
   title: `System_Integrity_Report | ${SITE_CONFIG.brandName}`,
-  description: "Advanced diagnostic report for multi-node architecture in v17.3.10 environment.",
+  description: "Advanced diagnostic report for multi-node architecture in v17.4.5 environment.",
+  alternates: { canonical: `${SITE_CONFIG.siteUrl}/status` },
 };
 
 // --- [TYPES]: นิยามพิกัดข้อมูล Node Matrix ---
@@ -34,12 +34,60 @@ interface StatusNode {
 }
 
 const ARCHITECTURE_NODES: readonly StatusNode[] = [
-  { id: "NODE_01", label: "Core_Render_Engine", latency: "14ms", load: "12%", status: "OPTIMIZED", health: 100, icon: "Cpu" },
-  { id: "NODE_02", label: "Dynamic_CMS_Protocol", latency: "28ms", load: "08%", status: "STABLE", health: 100, icon: "Database" },
-  { id: "NODE_03", label: "SEO_Authority_Nodes", latency: "N/A", load: "LOW", status: "INDEXING", health: 99.9, icon: "Search" },
-  { id: "NODE_04", label: "Global_Edge_CDN", latency: "08ms", load: "15%", status: "FAST_PATH", health: 100, icon: "Globe" },
-  { id: "NODE_05", label: "Security_Firewall_v17", latency: "02ms", load: "04%", status: "LOCKED", health: 100, icon: "ShieldCheck" },
-  { id: "NODE_06", label: "Asset_Cloud_Distro", latency: "42ms", load: "22%", status: "OPERATIONAL", health: 100, icon: "Layers" },
+  {
+    id: "NODE_01",
+    label: "Core_Render_Engine",
+    latency: "14ms",
+    load: "12%",
+    status: "OPTIMIZED",
+    health: 100,
+    icon: "Cpu",
+  },
+  {
+    id: "NODE_02",
+    label: "Dynamic_CMS_Protocol",
+    latency: "28ms",
+    load: "08%",
+    status: "STABLE",
+    health: 100,
+    icon: "Database",
+  },
+  {
+    id: "NODE_03",
+    label: "SEO_Authority_Nodes",
+    latency: "N/A",
+    load: "LOW",
+    status: "INDEXING",
+    health: 99.9,
+    icon: "Search",
+  },
+  {
+    id: "NODE_04",
+    label: "Global_Edge_CDN",
+    latency: "08ms",
+    load: "15%",
+    status: "FAST_PATH",
+    health: 100,
+    icon: "Globe",
+  },
+  {
+    id: "NODE_05",
+    label: "Security_Firewall_v17",
+    latency: "02ms",
+    load: "04%",
+    status: "LOCKED",
+    health: 100,
+    icon: "ShieldCheck",
+  },
+  {
+    id: "NODE_06",
+    label: "Asset_Cloud_Distro",
+    latency: "42ms",
+    load: "22%",
+    status: "OPERATIONAL",
+    health: 100,
+    icon: "Layers",
+  },
 ];
 
 /**
@@ -52,22 +100,21 @@ export default function StatusPage() {
   return (
     <LayoutEngine spacing="none">
       {/* 01. TERMINAL HEADER: Kinetic Visual Infrastructure */}
-      <section className="relative overflow-hidden border-b border-border pt-32 pb-16 transition-colors duration-500 md:pt-48 md:pb-24">
-        
+      <section className="border-border relative overflow-hidden border-b pt-32 pb-16 transition-colors duration-500 md:pt-48 md:pb-24">
         {/* Atmospheric Engine: ปรับค่า Opacity ให้เหมาะสมกับทุกธีม */}
         <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-            <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-            <div className="ambient-aura absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
+          <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
+          <div className="ambient-aura absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:items-end">
             <div className="max-w-4xl space-y-8">
               <div className="flex items-center gap-4">
-                <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-sm shadow-glow">
+                <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary shadow-glow flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-sm">
                   <span className="relative flex h-2 w-2">
                     <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-                    <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
+                    <span className="bg-brand-primary shadow-glow relative inline-flex h-2 w-2 rounded-full"></span>
                   </span>
                   <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
                     Diagnostic_Mode_v{SITE_CONFIG.project.version}
@@ -79,7 +126,8 @@ export default function StatusPage() {
               </div>
 
               <h1 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic sm:text-7xl md:text-8xl lg:text-9xl">
-                System <br className="hidden sm:block" /> <span className="text-brand-primary">Integrity.</span>
+                System <br className="hidden sm:block" />{" "}
+                <span className="text-brand-primary">Integrity.</span>
               </h1>
             </div>
 
@@ -91,13 +139,18 @@ export default function StatusPage() {
                     Master_System_Uptime
                   </span>
                   <p className="text-brand-primary font-mono text-4xl leading-none font-black italic">
-                    99.99<span className="text-text-muted ml-1 text-sm font-bold not-italic">%</span>
+                    99.99
+                    <span className="text-text-muted ml-1 text-sm font-bold not-italic">%</span>
                   </p>
                 </div>
-                <IconRenderer name="Activity" size={32} className="text-brand-primary animate-pulse opacity-40" />
+                <IconRenderer
+                  name="Activity"
+                  size={32}
+                  className="text-brand-primary animate-pulse opacity-40"
+                />
               </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-offset border border-border">
-                <div className="bg-brand-primary h-full w-[99.99%] shadow-glow" />
+              <div className="bg-surface-offset border-border h-1.5 w-full overflow-hidden rounded-full border">
+                <div className="bg-brand-primary shadow-glow h-full w-[99.99%]" />
               </div>
             </div>
           </div>
@@ -125,14 +178,14 @@ export default function StatusPage() {
                 transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
                 className={cn(
-                  "group relative overflow-hidden rounded-[2.5rem] border border-border bg-surface-card p-8 transition-all duration-700 ease-out",
-                  "hover:border-brand-primary/40 hover:-translate-y-2 hover:bg-surface-offset hover:shadow-glow",
-                  "will-change-transform" 
+                  "group border-border bg-surface-card relative overflow-hidden rounded-[2.5rem] border p-8 transition-all duration-700 ease-out",
+                  "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-glow hover:-translate-y-2",
+                  "will-change-transform",
                 )}
               >
                 {/* Node Identity Interface */}
                 <div className="mb-14 flex items-start justify-between">
-                  <div className="text-brand-primary border-border bg-surface-offset group-hover:border-brand-primary/30 group-hover:bg-brand-primary/10 rounded-2xl border p-4 transition-all duration-500 group-hover:rotate-6 group-hover:shadow-glow">
+                  <div className="text-brand-primary border-border bg-surface-offset group-hover:border-brand-primary/30 group-hover:bg-brand-primary/10 group-hover:shadow-glow rounded-2xl border p-4 transition-all duration-500 group-hover:rotate-6">
                     <IconRenderer name={node.icon} size={24} />
                   </div>
                   <div className="space-y-1 text-right">
@@ -142,7 +195,7 @@ export default function StatusPage() {
                     <div className="flex items-center justify-end gap-2">
                       <div className="border-border bg-surface-offset h-1 w-12 overflow-hidden rounded-full border">
                         <div
-                          className="bg-brand-primary h-full shadow-glow"
+                          className="bg-brand-primary shadow-glow h-full"
                           style={{ width: `${node.health}%` }}
                         />
                       </div>
@@ -184,7 +237,9 @@ export default function StatusPage() {
                     <span className="text-text-muted text-[9px] font-black tracking-[0.2em] uppercase opacity-40">
                       Load_Factor
                     </span>
-                    <p className="text-text-primary font-mono text-base font-black italic">{node.load}</p>
+                    <p className="text-text-primary font-mono text-base font-black italic">
+                      {node.load}
+                    </p>
                   </div>
                 </div>
 

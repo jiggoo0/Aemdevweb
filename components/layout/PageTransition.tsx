@@ -1,5 +1,5 @@
 /**
- * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.3.9 (STABILIZED_FLOW)
+ * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.4.6 (STABILIZED)
  * [STRATEGY]: Neural Transition | Frame-rate Stability | Theme Persistence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -18,40 +18,40 @@ interface PageTransitionProps {
 
 /**
  * @component PageTransition
- * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Dynamic 
- * ออกแบบมาเพื่อลดค่า Interaction to Next Paint (INP)
+ * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Seamless
+ * เพื่อยกระดับ UX ให้เทียบเท่าระดับสากล
  */
 const PageTransition = ({ children, className }: PageTransitionProps) => {
   const pathname = usePathname();
 
   return (
-    /* [STRATEGY]: mode="wait" เพื่อให้หน้าเก่า Exit เสร็จสมบูรณ์ก่อนหน้าใหม่จะ Enter */
+    /* [STRATEGY]: mode="wait" ล็อคให้หน้าเก่า Exit จนจบก่อน เพื่อป้องกัน Layout Shift */
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
-        /* [PERFORMANCE]: เริ่มที่ 0.01 เพื่อบังคับให้ Browser สร้าง Layer ล่วงหน้า 
-           โดยไม่เสียเวลาคำนวณ Paint จาก 0 จริงๆ 
+        /* [PERFORMANCE]: เริ่มที่ 0.01 แทน 0 เพื่อหลีกเลี่ยง Bug ของ Browser 
+           ในการคำนวณ Layer ในบางสภาวะ 
         */
-        initial={{ opacity: 0.01, y: 12 }} 
+        initial={{ opacity: 0.01, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
-        /* [NEURAL_PHYSICS]: ค่า Ease ที่ผ่านการคำนวณเพื่อความรู้สึก Snappy */
-        transition={{ 
-          duration: 0.4, 
-          ease: [0.22, 1, 0.36, 1],
-          opacity: { duration: 0.3 } // ให้ Opacity มาเร็วกว่าการขยับเล็กน้อย
+        /* [NEURAL_PHYSICS]: จังหวะการเคลื่อนไหวที่นุ่มนวลแต่ฉับไว */
+        transition={{
+          duration: 0.4,
+          ease: [0.22, 1, 0.36, 1], // Power4 Out Curve
+          opacity: { duration: 0.3 },
         }}
         className={cn(
           "flex w-full flex-grow flex-col",
-          /* [GPU_ACCELERATION]: ผลักภาระไปที่ GPU เพื่อรักษา 60FPS */
+          /* [GPU_ACCELERATION]: ผลักภาระงานวาดไปที่การ์ดจอ เพื่อรักษา 60FPS ตลอดการเปลี่ยนหน้า */
           "will-change-[transform,opacity]",
-          className
+          className,
         )}
       >
         {children}
       </motion.div>
     </AnimatePresence>
   );
-}
+};
 
 export default memo(PageTransition);

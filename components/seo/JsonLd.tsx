@@ -1,6 +1,6 @@
 /**
- * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v17.2.3 (SECURITY_STABILIZED)
- * [STRATEGY]: Structured Data Authority | XSS Defense | Memoized Injection
+ * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v17.4.5 (STABILIZED_FINAL)
+ * [STRATEGY]: Structured Data Authority | XSS Defense | SSR Integrity
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -13,27 +13,25 @@ import React, { memo } from "react";
  */
 interface JsonLdProps {
   /**
-   * ข้อมูล Schema ในรูปแบบ Object หรือ Array ที่ผ่านการประมวลผลจาก @/lib/schema.ts
-   * [TYPE]: การใช้ unknown เพื่อให้มั่นใจว่าข้อมูลผ่านกระบวนการ Type-checking
+   * ข้อมูล Schema ที่ผ่านการประมวลผลจาก @/lib/schema.ts
+   * รองรับทั้งรูปแบบ Object เดี่ยว และ Array Graph
    */
   readonly data?: Record<string, unknown> | readonly Record<string, unknown>[];
 }
 
 /**
  * @component JsonLd
- * @description หน่วยประมวลผลข้อมูลโครงสร้าง (JSON-LD) 
- * ทำหน้าที่ฉีด Metadata เข้าสู่ระบบ Search Engine เพื่อสร้าง Authority
+ * @description หน่วยฉีดข้อมูลโครงสร้าง (JSON-LD) เข้าสู่ DOM
+ * เพื่อสร้าง "Digital Identity" ให้กับ Search Engine Bots (Google/Bing)
  */
 const JsonLd = ({ data }: JsonLdProps) => {
-  /* [A] SAFETY GUARD: ป้องกันการเรนเดอร์สคริปต์หากไม่มีข้อมูล */
+  /* [A] SAFETY GUARD: ป้องกันการเรนเดอร์หากข้อมูลไม่สมบูรณ์ */
   if (!data) return null;
 
-  const isValidObject = !Array.isArray(data) && Object.keys(data).length > 0;
-  const isValidArray = Array.isArray(data) && data.length > 0;
+  // ตรวจสอบว่ามีข้อมูลจริงๆ หรือไม่ (ป้องกัน empty object/array)
+  const hasContent = Array.isArray(data) ? data.length > 0 : Object.keys(data).length > 0;
 
-  if (!isValidObject && !isValidArray) {
-    return null;
-  }
+  if (!hasContent) return null;
 
   return (
     <script
@@ -41,8 +39,9 @@ const JsonLd = ({ data }: JsonLdProps) => {
       dangerouslySetInnerHTML={{
         /**
          * [B] SECURITY PROTOCOL: Unicode Escaping (XSS Defense)
-         * - แทนที่เครื่องหมาย < ด้วย Unicode เพื่อป้องกันการทำ Malicious Script Injection
-         * - การใช้ dangerouslySetInnerHTML เป็นวิธีมาตรฐานสำหรับ JSON-LD ใน Next.js 16
+         * - แทนที่เครื่องหมาย < ด้วย Unicode (\u003c) เพื่อป้องกัน Malicious Script Injection
+         * - การใช้ dangerouslySetInnerHTML เป็นวิธีที่ Next.js แนะนำสำหรับ JSON-LD
+         * - ข้อมูลจะถูก Inject ตั้งแต่ Server Side (SSR/SSG) เพื่อให้ Bot อ่านได้ทันที
          */
         __html: JSON.stringify(data).replace(/</g, "\\u003c"),
       }}
@@ -52,7 +51,7 @@ const JsonLd = ({ data }: JsonLdProps) => {
 
 /**
  * @optimization React.memo
- * ป้องกันการประมวลผลซ้ำ (Unnecessary Re-renders) เนื่องจากข้อมูล SEO มักจะ Static
- * ช่วยรักษาประสิทธิภาพของ Main Thread ให้มีความเสถียรสูงสุด
+ * ข้อมูล SEO มักจะ Static ตามรอบการ Build หรือเปลี่ยนไม่บ่อย
+ * การใช้ memo ช่วยลดภาระของ Main Thread ในช่วง Hydration ได้อย่างมีนัยสำคัญ
  */
 export default memo(JsonLd);

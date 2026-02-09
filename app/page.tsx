@@ -1,168 +1,175 @@
 /**
- * [CORE PAGE]: HOMEPAGE v17.3.9 (HYBRID_THEME_STABILIZED)
- * [STRATEGY]: Multi-Theme Orchestration | GPU-Accelerated Depth | Deterministic Build
+ * [CORE PAGE]: HOMEPAGE v17.4.7 (STABILIZED_SYNC)
+ * [STRATEGY]: Symmetrical Rhythm | High-Mass Balance | Conversion Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
 
-// --- 1. DATA & INFRASTRUCTURE ---
-import { SITE_CONFIG } from "@/constants/site-config";
+// --- 1. Infrastructure & CMS Engine ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
-import { cn } from "@/lib/utils";
-import { generateOrganizationSchema, generatePersonSchema } from "@/lib/schema";
+import { generateOrganizationSchema } from "@/lib/schema";
+import { constructMetadata } from "@/lib/seo-utils";
+import { SITE_CONFIG } from "@/constants/site-config";
 
-// --- 2. FEATURE MODULES ---
+// --- 2. Feature & Section Engines ---
+import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import Hero from "@/components/features/landing/Hero";
 import WorkProcess from "@/components/features/landing/WorkProcess";
 import PricingSection from "@/components/features/landing/PricingSection";
 
-// --- 3. COMPONENT NODES ---
+// --- 3. Component Nodes ---
 import BlogCard from "@/components/features/blog/BlogCard";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import AreaCard from "@/components/features/areas/AreaCard";
+import ServiceCard from "@/components/features/services/ServiceCard";
 import TrustBadge from "@/components/shared/TrustBadge";
 import ImpactStats from "@/components/shared/ImpactStats";
 import JsonLd from "@/components/seo/JsonLd";
-import IconRenderer from "@/components/ui/IconRenderer";
-import { Button } from "@/components/ui/button";
-import ServiceCard from "@/components/features/services/ServiceCard";
 
-/* [SEO_DNA]: Metadata เชิงยุทธศาสตร์ */
-export const metadata: Metadata = {
-  title: `รับทำเว็บไซต์และ SEO เชิงยุทธศาสตร์ | ${SITE_CONFIG.brandName}`,
+// --- 4. Types ---
+import type { AreaNode, TemplateMasterData, BlogPost, CaseStudy } from "@/types";
+
+/* [A] SEO AUTHORITY PROTOCOL: ปรับแต่ง Metadata เพื่อการจัดอันดับระดับสูง */
+export const metadata = constructMetadata({
+  title: "รับทำเว็บไซต์และ SEO เชิงยุทธศาสตร์ | Web Infrastructure Specialist",
   description: SITE_CONFIG.description,
-  keywords: [...SITE_CONFIG.keywords],
-};
+  path: "/",
+  image: "/images/og-main.png",
+});
 
 export default async function HomePage() {
-  /* [DATA_FETCHING]: Parallel Fetching เพื่อลดค่า TTI */
-  const [casesData, postsData] = await Promise.all([
-    getAllCaseStudies().catch(() => []),
-    getAllPosts().catch(() => []),
+  // 01. PARALLEL DATA FETCHING: ดึงข้อมูลแบบคู่ขนานเพื่อลดค่า TTFB
+  const [cases, posts] = await Promise.all([
+    getAllCaseStudies().catch(() => [] as CaseStudy[]),
+    getAllPosts().catch(() => [] as BlogPost[]),
   ]);
 
-  const recentCases = (casesData || []).slice(0, 2);
-  const recentPosts = (postsData || []).slice(0, 3);
-  const featuredAreas = AREA_NODES.filter((node) => node.priority >= 95).slice(0, 4);
-  const featuredServices = [...MASTER_REGISTRY]
-    .sort((a, b) => (a.priority || 99) - (b.priority || 99))
-    .slice(0, 3);
-
-  const combinedSchema = [generateOrganizationSchema(), generatePersonSchema()];
+  // Strategic Data Slicing: เลือกเฉพาะโหนดสำคัญมาแสดงผล
+  const recentCases = cases.slice(0, 2);
+  const recentPosts = posts.slice(0, 3);
+  const featuredAreas = AREA_NODES.filter((n: AreaNode) => (n.priority ?? 0) >= 95).slice(0, 4);
+  const featuredServices = MASTER_REGISTRY.slice(0, 3);
 
   return (
-    <main className="bg-surface-main text-text-primary relative flex min-h-screen flex-col overflow-x-hidden transition-colors duration-500">
-      <JsonLd data={combinedSchema} />
+    <LayoutEngine spacing="none">
+      {/* ฝังโครงสร้างข้อมูลเพื่อ EEAT (Experience, Expertise, Authoritativeness, Trust) */}
+      <JsonLd data={generateOrganizationSchema()} />
 
-      {/* SECTION 01: HERO GATEWAY (LCP CRITICAL) */}
-      <section id="hero" className="relative z-30 pt-20 pb-12 lg:pt-28">
-        <Hero />
-      </section>
+      {/* --- SECTION 01: HERO GATEWAY --- */}
+      <Hero />
 
-      {/* SECTION 02: AUTHORITY HUB (GPU-Accelerated Depth) */}
-      <section className="relative z-40 -mt-20 px-4 sm:px-6 lg:px-8">
+      {/* --- SECTION 02: AUTHORITY HUB (Trust & Metrics) --- 
+          Balanced Weight: การวาง Badge และ Stats เพื่อสร้าง "ฐานความเชื่อมั่น" ทันทีหลัง Hero
+      */}
+      <section className="relative z-30 -mt-24 px-4 md:-mt-48 lg:-mt-56">
         <div className="mx-auto max-w-7xl">
-          <div className={cn(
-            "relative p-8 md:p-12 lg:p-16 overflow-hidden rounded-[2.5rem] border border-border bg-surface-card/80 shadow-2xl backdrop-blur-xl",
-            "hover:border-brand-primary/20 transition-all duration-700 hover:shadow-glow"
-          )}>
-            <div className="bg-infrastructure-grid absolute inset-0 -z-10 opacity-[0.05]" />
-            <div className="flex flex-col items-center gap-10 md:gap-16">
+          <div className="bg-surface-card/40 border-border shadow-pro-xl relative overflow-hidden rounded-[4rem] border p-12 backdrop-blur-3xl md:p-24">
+            {/* Subtle Infrastructure Pattern */}
+            <div className="bg-infrastructure-grid absolute inset-0 -z-10 opacity-[0.05]" aria-hidden="true" />
+            <div className="flex flex-col items-center gap-24">
               <TrustBadge />
-              <div className="relative w-full max-w-4xl opacity-50">
-                <div className="h-px w-full bg-gradient-to-r from-transparent via-border to-transparent" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border bg-surface-main px-4 py-1 backdrop-blur-md">
-                  <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">System_Metrics.Live</span>
-                </div>
-              </div>
+              <div className="via-border/50 h-px w-full max-w-5xl bg-gradient-to-r from-transparent to-transparent" aria-hidden="true" />
               <ImpactStats />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 03: PROCESS ROADMAP */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto">
-          <WorkProcess />
-        </div>
+      {/* --- SECTION 03: PROCESS ROADMAP --- */}
+      <section className="py-32 md:py-56 lg:py-64">
+        <WorkProcess />
       </section>
 
-      {/* SECTION 04: SERVICE BLUEPRINT */}
-      <section id="services" className="relative overflow-hidden bg-surface-main py-24 md:py-32">
-        <div className="from-brand-primary/5 absolute top-0 left-0 h-full w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] via-transparent to-transparent opacity-[var(--ambient-opacity)]" />
-        <div className="relative z-10 container mx-auto">
-          <header className="mb-20 flex flex-col justify-between gap-10 border-b border-border pb-12 lg:flex-row lg:items-end">
-            <div className="space-y-6">
-              <div className="border-brand-primary/20 bg-brand-primary/10 text-brand-primary inline-flex items-center gap-3 rounded-full border px-4 py-1.5">
-                <span className="font-mono text-[10px] font-bold tracking-widest uppercase">Node_v{SITE_CONFIG.project.version}</span>
-              </div>
-              <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl">Strategic <br /><span className="bg-gradient-to-r from-text-primary to-text-secondary bg-clip-text text-transparent">Services.</span></h2>
-            </div>
-            <div className="border-brand-primary max-w-md border-l-4 pl-8 text-text-secondary text-lg font-medium italic">"เราไม่ได้แค่ทำเว็บ แต่เราออกแบบเครื่องจักรทางธุรกิจที่ทำงานแทนคุณ 24 ชั่วโมง"</div>
+      {/* --- SECTION 04: CORE SOLUTIONS --- 
+          Card Mass: การ์ดขนาดกลาง ใช้ Gap ที่กว้างขึ้น (gap-16) เพื่อสร้างความรู้สึกพรีเมียมและอ่านง่าย
+      */}
+      <section id="services" className="bg-surface-offset/20 py-32 md:py-48">
+        <div className="container mx-auto px-4">
+          <header className="mb-24 space-y-8">
+            <h2 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-9xl">
+              Core <br /> <span className="text-brand-primary">Solutions.</span>
+            </h2>
+            <div className="bg-brand-primary h-2 w-32 rounded-full" />
           </header>
-          <div className="grid gap-8 md:grid-cols-3">
-            {featuredServices.map((service, index) => <ServiceCard key={service.id || index} data={service} index={index} />)}
+
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-16">
+            {featuredServices.map((service: TemplateMasterData, i: number) => (
+              <ServiceCard key={service.id || i} data={service} index={i} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 05: PRICING & INVESTMENT */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto"><PricingSection /></div>
-      </section>
-
-      {/* SECTION 06: SUCCESS EVIDENCE */}
-      <section id="success" className="border-y border-border bg-surface-offset/50 py-24 md:py-32">
-        <div className="container mx-auto">
-          <div className="mb-16 flex flex-wrap items-end justify-between gap-8">
-            <div className="space-y-4">
-              <span className="text-brand-primary font-mono text-xs font-bold tracking-[0.3em] uppercase">Portfolio_Archive</span>
-              <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">Success Evidence</h2>
-            </div>
-            <Button asChild variant="outline" className="hover:bg-brand-primary h-12 rounded-full border-border bg-surface-card px-8 text-xs font-bold tracking-widest text-text-primary uppercase hover:text-surface-main">
-              <Link href="/case-studies" className="flex items-center gap-3">ดูผลงานทั้งหมด <IconRenderer name="ArrowRight" size={16} /></Link>
-            </Button>
+      {/* --- SECTION 05: SUCCESS EVIDENCE (Case Studies) --- 
+          High Mass Strategy: เน้นการ์ดขนาดใหญ่พิเศษเพื่อโชว์ผลลัพธ์ ROI ให้กระแทกตาที่สุด
+      */}
+      <section id="success" className="py-32 md:py-56">
+        <div className="container mx-auto px-4">
+          <div className="border-border mb-24 flex flex-col justify-between gap-12 border-b pb-12 md:flex-row md:items-end">
+            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-8xl">
+              Case <br /> Audits.
+            </h2>
+            <Link
+              href="/case-studies"
+              className="group text-brand-primary flex items-center gap-4 font-mono text-xs font-black tracking-widest uppercase transition-all"
+            >
+              <span>Explore_All_Successful_Nodes</span>
+              <div className="bg-brand-primary h-px w-12 transition-all group-hover:w-24" />
+            </Link>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
-            {recentCases.map((item, index) => <CaseStudyCard key={item.slug} data={item} index={index} />)}
+
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
+            {recentCases.map((item: CaseStudy, i: number) => (
+              <CaseStudyCard key={item.slug || i} data={item} index={i} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 07: KNOWLEDGE HUB */}
-      <section id="knowledge" className="py-24 md:py-32">
-        <div className="container mx-auto">
-          <header className="mb-16 space-y-4">
-            <span className="text-brand-primary font-mono text-xs font-bold tracking-[0.3em] uppercase">Intelligence.Archive</span>
-            <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">Knowledge Hub</h2>
+      {/* --- SECTION 06: PRICING & INVESTMENT --- */}
+      <section className="bg-surface-main relative overflow-hidden py-32 md:py-48">
+        <div className="bg-brand-primary/5 absolute top-0 left-0 h-full w-full skew-y-3 transform" aria-hidden="true" />
+        <PricingSection />
+      </section>
+
+      {/* --- SECTION 07: KNOWLEDGE HUB (Insights) --- */}
+      <section id="knowledge" className="py-32 md:py-56">
+        <div className="container mx-auto px-4">
+          <header className="mb-24">
+            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-8xl">
+              Insights.
+            </h2>
           </header>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {recentPosts.map((post, index) => <BlogCard key={post.slug} data={post} index={index} />)}
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-3 lg:gap-12">
+            {recentPosts.map((post: BlogPost, i: number) => (
+              <BlogCard key={post.slug || i} post={post} index={i} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 08: LOCAL NODES */}
-      <section id="areas" className="border-t border-border bg-surface-offset py-20">
-        <div className="container mx-auto">
-          <div className="mb-12 flex items-center justify-between opacity-70">
-            <div className="flex items-center gap-4">
-              <IconRenderer name="MapPin" size={24} className="text-brand-primary" />
-              <h3 className="text-text-primary text-xl font-bold tracking-widest uppercase">Nationwide Coverage</h3>
-            </div>
-            <Link href="/areas" className="text-brand-primary font-mono text-xs uppercase hover:underline">View All Areas →</Link>
+      {/* --- SECTION 08: GEOGRAPHIC EXPANSION --- 
+          Node Grid Strategy: การ์ดขนาดจิ๋ว (Nodes) จัดวางแบบตารางกระชับ เพื่อโชว์ความครอบคลุมของระบบเครือข่าย
+      */}
+      <section className="border-border border-t py-32 md:py-48">
+        <div className="container mx-auto px-4">
+          <div className="mb-20 flex items-center gap-6">
+            <div className="bg-brand-primary shadow-glow h-12 w-1.5" />
+            <h3 className="text-text-primary text-2xl font-black tracking-widest uppercase italic">
+              Geographic_Expansion
+            </h3>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredAreas.map((area, index) => <AreaCard key={area.slug} data={area} index={index} />)}
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8 lg:gap-10">
+            {featuredAreas.map((area: AreaNode, i: number) => (
+              <AreaCard key={area.slug || i} data={area} index={i} />
+            ))}
           </div>
         </div>
       </section>
-    </main>
+    </LayoutEngine>
   );
 }

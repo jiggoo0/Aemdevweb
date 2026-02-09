@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.2.9 (STABILIZED_PATCH)
+ * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.3.0 (STABILIZED_PATCH)
  * [DNA MANDATE]: Zero-Jitter | Termux Optimized | Vivid Image Optimization | ARM Stability
  * [STRATEGY]: "Atomic Transpilation" & "High-Fidelity Image Support"
  * [MAINTAINER]: AEMDEVWEB Specialist Team
@@ -39,8 +39,8 @@ const nextConfig: NextConfig = {
    * [IMAGE_OPTIMIZATION_HUB]: ระบบจัดการรูปภาพ
    */
   images: {
-    // [FIXED]: เพิ่ม 85 เพื่อรองรับภาพ Hero และป้องกัน Build Error ใน Next.js 16+
-    qualities: [75, 85, 90],
+    // [FIXED]: เพิ่ม 80 เพื่อรองรับ Local Nodes Assets และป้องกัน Build Error ตามแจ้งเตือน
+    qualities: [75, 80, 85, 90],
 
     // [FORMATS]: รองรับ Next-Gen Formats เพื่อคะแนน LCP ที่ดีที่สุด
     formats: ["image/avif", "image/webp"],
@@ -58,12 +58,12 @@ const nextConfig: NextConfig = {
   },
 
   /**
-   * [WEBPACK_ENGINE]: ปรับแต่งให้รองรับ Android File System
+   * [WEBPACK_ENGINE]: ปรับแต่งให้รองรับ Android File System (Termux Compatibility)
    */
   webpack: (config, { dev }) => {
     if (dev) {
       config.watchOptions = {
-        poll: 1000, 
+        poll: 1000,
         aggregateTimeout: 300,
         ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
       };

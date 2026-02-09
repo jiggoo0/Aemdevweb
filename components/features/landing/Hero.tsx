@@ -1,187 +1,154 @@
-"use client";
-
 /**
- * [FEATURE COMPONENT]: HERO_SYSTEM_ORCHESTRATOR v17.3.11 (STABILIZED_FINAL)
- * [STRATEGY]: Zero-Latency Paint | Theme-Aware Interface | LCP_MAX_OPTIMIZED
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.5.1 (VISIBILITY_PATCH)
+ * [STRATEGY]: Kinetic Typography | High-Contrast Interaction | Asymmetric Layout
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import React, { memo, useEffect, useState } from "react";
-import Image from "next/image";
+"use client";
+
+import React, { memo } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
-
-// --- Infrastructure & Data ---
-import { SITE_CONFIG } from "@/constants/site-config";
+import { motion, type Transition } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-// --- UI Components ---
+import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/button";
 
-/**
- * [FIXED]: เพิ่ม subtitle เพื่อแก้ Error TS2322 ในหน้า About, Privacy, Terms และ Templates ต่างๆ
- */
-export interface HeroProps {
+interface HeroProps {
   readonly title?: React.ReactNode;
-  readonly subtitle?: string | React.ReactNode; // รองรับ subtitle จาก Page ต่างๆ
-  readonly description?: string;               // รองรับ description จาก SITE_CONFIG
-  readonly primaryActionText?: string;
-  readonly primaryActionLink?: string;
-  readonly secondaryActionText?: string;
-  readonly secondaryActionLink?: string;
+  readonly subtitle?: string;
+  readonly primaryActionLabel?: string;
+  readonly primaryHref?: string;
+  readonly secondaryActionLabel?: string;
+  readonly secondaryHref?: string;
   readonly className?: string;
 }
 
 const Hero = ({
   title = SITE_CONFIG.hero.title,
-  subtitle, 
-  description = SITE_CONFIG.hero.description,
-  primaryActionText = SITE_CONFIG.hero.primaryAction,
-  primaryActionLink = SITE_CONFIG.links.line,
-  secondaryActionText = SITE_CONFIG.hero.secondaryAction,
-  secondaryActionLink = "#services",
+  subtitle = SITE_CONFIG.hero.description,
+  primaryActionLabel = SITE_CONFIG.hero.primaryAction,
+  primaryHref = SITE_CONFIG.links.line,
+  secondaryActionLabel = SITE_CONFIG.hero.secondaryAction,
+  secondaryHref = "/services",
   className,
 }: HeroProps) => {
   
-  // [DETERMINISTIC FIX]: ป้องกัน Hydration Error
-  const [hasMounted, setHasMounted] = useState(false);
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  // [LOGIC]: เลือกใช้เนื้อหาจาก subtitle ก่อน ถ้าไม่มีให้ใช้ description
-  const displayDescription = subtitle || description;
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.1 },
-    },
+  // [PHYSICS]: Smooth Neural Ease สำหรับการเคลื่อนไหวที่นิ่งและทรงพลัง
+  const entryTransition: Transition = {
+    duration: 1.2,
+    ease: [0.16, 1, 0.3, 1],
   };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(8px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
-  const currentYear = SITE_CONFIG.business.established?.split('-')[0] || "2026";
 
   return (
     <section
       className={cn(
-        "relative flex min-h-[100vh] w-full flex-col items-center justify-center overflow-hidden bg-surface-main px-4 pt-32 pb-20 text-center sm:px-6 lg:px-8 transition-colors duration-500",
-        className,
+        "relative flex min-h-[90vh] flex-col justify-center overflow-hidden pt-28 pb-20 md:pt-32 md:pb-32",
+        className
       )}
     >
-      {/* 00. ATMOSPHERIC ENGINE */}
-      <div className="pointer-events-none absolute inset-0 -z-20 select-none" aria-hidden="true">
-        <div className="bg-brand-primary/20 absolute top-[-10%] left-1/2 h-[600px] w-[90%] -translate-x-1/2 rounded-full opacity-[var(--ambient-opacity,0.3)] mix-blend-screen blur-[140px]" />
-        <div className="bg-infrastructure-grid absolute inset-0 opacity-[var(--ambient-opacity,0.1)]" />
+      {/* --- 01. INFRASTRUCTURE LAYER --- */}
+      <div className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.04]" aria-hidden="true" />
+      
+      {/* Neural Orb: แสงฟุ้งเพื่อสร้างมิติความลึก */}
+      <div className="bg-brand-primary/10 pointer-events-none absolute top-[10%] -right-[10%] z-0 h-[500px] w-[500px] rounded-full blur-[120px] md:h-[800px] md:w-[800px]" />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
+        
+        {/* --- 02. SYSTEM STATUS BADGE --- */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={entryTransition}
+          className="border-brand-primary/20 bg-brand-primary/5 mb-8 inline-flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md md:mb-12"
+        >
+          <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
+          <span className="text-brand-primary/90 font-mono text-[9px] font-black tracking-[0.3em] uppercase md:text-[10px]">
+            System_Active: v{SITE_CONFIG.project.version}
+          </span>
+        </motion.div>
+
+        {/* --- 03. MAIN NARRATIVE HUB --- */}
+        <div className="max-w-6xl space-y-10 md:space-y-12">
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={entryTransition}
+            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-7xl lg:text-8xl xl:text-[7.5rem]"
+          >
+            {typeof title === "string" && title.startsWith("AEMDEVWEB") ? (
+              <>
+                <span className="text-brand-primary mr-4 block md:inline-block">AEMDEVWEB</span>
+                {title.replace("AEMDEVWEB", "")}
+              </>
+            ) : (
+              title
+            )}
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ ...entryTransition, delay: 0.2 }}
+            className="border-brand-primary border-l-[4px] pl-6 md:border-l-[6px] md:pl-10"
+          >
+            <p className="text-text-secondary max-w-3xl text-lg leading-relaxed font-medium italic opacity-90 md:text-2xl lg:text-3xl">
+              “{subtitle}”
+            </p>
+          </motion.div>
+        </div>
+
+        {/* --- 04. INTERACTION GATEWAY: ปรับจูนปุ่ม Secondary ให้ชัดเจนขึ้น --- */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...entryTransition, delay: 0.4 }}
+          className="mt-16 flex flex-col items-start gap-6 md:mt-20 md:flex-row md:items-center md:gap-8"
+        >
+          {/* Primary CTA (Main Focus) */}
+          <Button
+            asChild
+            size="lg"
+            className="group shadow-pro-lg relative h-16 w-full overflow-hidden rounded-xl px-10 md:h-20 md:w-auto md:rounded-2xl md:px-12"
+          >
+            <Link href={primaryHref} target="_blank" rel="noopener noreferrer">
+              <div className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-0" />
+              <IconRenderer
+                name="MessageCircle"
+                size={24}
+                className="relative z-10 mr-3 transition-transform group-hover:scale-110 md:mr-4"
+              />
+              <span className="relative z-10 text-xs font-black tracking-[0.2em] uppercase md:tracking-[0.3em]">
+                {primaryActionLabel}
+              </span>
+            </Link>
+          </Button>
+
+          {/* [FIXED]: Secondary CTA - ปรับจาก Ghost เป็น Outline + Background เพื่อลดความใส */}
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className={cn(
+              "group h-16 w-full justify-start rounded-xl px-8 transition-all md:h-20 md:w-auto md:justify-center md:rounded-2xl",
+              "border-border bg-surface-card/50 text-text-secondary hover:border-brand-primary/50 hover:bg-surface-card hover:text-text-primary shadow-sm"
+            )}
+          >
+            <Link href={secondaryHref} className="flex items-center gap-3">
+              <span className="text-xs font-black tracking-[0.2em] uppercase">
+                {secondaryActionLabel}
+              </span>
+              <IconRenderer
+                name="ArrowRight"
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
+          </Button>
+        </motion.div>
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 mx-auto max-w-6xl space-y-10"
-      >
-        {/* 01. STATUS INDICATOR */}
-        <motion.div variants={itemVariants} className="flex justify-center">
-          <div className="group border-brand-primary/20 bg-brand-primary/5 hover:border-brand-primary/40 hover:bg-brand-primary/10 relative inline-flex items-center gap-3 overflow-hidden rounded-full border px-5 py-2 backdrop-blur-md transition-all duration-500">
-            <span className="relative flex h-2 w-2">
-              <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-              <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
-            </span>
-            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase">
-              System_Online.v{SITE_CONFIG.project.version}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* 02. CORE NARRATIVE */}
-        <motion.div variants={itemVariants} className="space-y-8">
-          <h1 className="mx-auto max-w-5xl text-5xl leading-[0.95] font-black tracking-tighter text-balance text-text-primary uppercase italic sm:text-6xl md:text-7xl lg:text-[6.5rem]">
-            <span className="bg-gradient-to-b from-text-primary via-text-primary to-text-primary/50 bg-clip-text text-transparent">
-              {title}
-            </span>
-          </h1>
-
-          <div className="mx-auto max-w-3xl">
-            {/* [RESOLVED]: แสดงผลได้ทั้งจาก subtitle และ description */}
-            <div className="text-text-secondary text-lg leading-relaxed font-medium text-balance opacity-90 md:text-xl lg:text-2xl">
-              {displayDescription}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 03. INTERFACE ACTIONS */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col items-center justify-center gap-4 pt-6 sm:flex-row sm:gap-6"
-        >
-          <Button
-            asChild
-            className="group hover:bg-brand-primary relative h-16 w-full rounded-full bg-text-primary px-10 text-sm font-black tracking-widest text-surface-main shadow-2xl transition-all duration-500 hover:scale-[1.03] active:scale-95 sm:w-auto"
-          >
-            <Link href={primaryActionLink} target={primaryActionLink.startsWith('http') ? "_blank" : "_self"}>
-              <span className="relative z-10 flex items-center gap-3 uppercase">
-                {primaryActionText}
-                <IconRenderer name="ArrowRight" size={18} className="transition-transform duration-500 group-hover:translate-x-1" />
-              </span>
-            </Link>
-          </Button>
-
-          <Button
-            asChild
-            variant="outline"
-            className="group h-16 w-full rounded-full border-border bg-surface-card px-10 text-sm font-black tracking-widest text-text-primary backdrop-blur-sm transition-all duration-500 hover:border-text-primary/30 hover:bg-surface-offset active:scale-95 sm:w-auto"
-          >
-            <Link href={secondaryActionLink}>
-              <span className="flex items-center gap-3 uppercase">
-                <IconRenderer name="Layers" size={18} className="text-brand-primary opacity-70 transition-opacity group-hover:opacity-100" />
-                {secondaryActionText}
-              </span>
-            </Link>
-          </Button>
-        </motion.div>
-
-        {/* 04. HERO VISUALIZER */}
-        <motion.div variants={itemVariants} className="relative mt-16 flex w-full justify-center px-4">
-          <div className="relative aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-2xl border border-border bg-surface-card shadow-2xl lg:aspect-[21/9]">
-            <div className="bg-surface-offset absolute inset-0 z-0 animate-pulse" />
-            <Image
-              src="/images/hero/main-hero.webp"
-              alt={`${SITE_CONFIG.brandName} Strategic Interface Showcase`}
-              fill
-              priority
-              quality={90}
-              className="object-cover object-top opacity-80 transition-transform duration-1000 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1280px"
-            />
-            <div className="absolute inset-0 z-10 bg-gradient-to-t from-surface-main via-transparent to-transparent opacity-60" />
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* 05. DECORATIVE FOOTER */}
-      {hasMounted && (
-        <div className="absolute bottom-0 left-0 hidden w-full justify-between px-12 pb-12 lg:flex">
-          <div className="flex items-center gap-4 opacity-40">
-            <div className="bg-border h-px w-12" />
-            <span className="text-text-primary font-mono text-[9px] font-bold tracking-[0.4em] uppercase">Scroll_To_Explore</span>
-          </div>
-          <div className="text-text-primary font-mono text-[9px] font-bold tracking-[0.4em] uppercase opacity-40">
-            {SITE_CONFIG.brandName} &copy; {currentYear}
-          </div>
-        </div>
-      )}
+      <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" aria-hidden="true" />
     </section>
   );
 };

@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: SERVICES_HUB_SYSTEM v17.3.11 (STABILIZED_FINAL)
- * [STRATEGY]: Professional Service Registry | Multi-Theme Logic | Zero-Any Architecture
+ * [ROUTE PAGE]: SERVICES_HUB_SYSTEM v17.6.0 (PROCESS_INTEGRATED)
+ * [STRATEGY]: Conversion Architecture | Anchor-Link Ready | Specialist Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -10,49 +10,38 @@ import type { Metadata } from "next";
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
+import WorkProcess from "@/components/features/landing/WorkProcess"; // [ADD]: Import WorkProcess
 import SkeletonCard from "@/components/ui/SkeletonCard";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { constructMetadata } from "@/lib/seo-utils";
 
 // --- 2. Constants & Config ---
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-// [RESOLVED]: Import IconName เพื่อกำจัด 'any' บรรทัดที่ 111
-import type { IconName } from "@/types";
+import type { IconName } from "@/components/ui/IconRenderer";
 
 /* [A] SEO AUTHORITY PROTOCOL */
-export const metadata: Metadata = {
-  title: `Service Solutions & Strategic Architecture | ${SITE_CONFIG.brandName}`,
+export const metadata: Metadata = constructMetadata({
+  title: "บริการทำเว็บไซต์ & โซลูชันธุรกิจ | Services",
   description:
-    "เลือกรูปแบบเว็บไซต์ที่ตอบโจทย์ธุรกิจคุณที่สุด ตั้งแต่ Sales Page ไปจนถึง Corporate Web เพื่อสร้างความได้เปรียบและเพิ่มกำไรในปี 2026",
-  alternates: { canonical: `${SITE_CONFIG.siteUrl}/services` },
-  openGraph: {
-    title: `โซลูชันเว็บไซต์ที่เน้นผลลัพธ์ทางธุรกิจ | ${SITE_CONFIG.brandName}`,
-    description: "เปลี่ยนเว็บไซต์ของคุณให้เป็นเครื่องมือทำเงินที่มีประสิทธิภาพ ด้วยมาตรฐานจากผู้เชี่ยวชาญ",
-    images: ["/images/og-services.webp"],
-  },
-};
+    "เลือกรูปแบบเว็บไซต์ที่ตอบโจทย์ธุรกิจคุณที่สุด ตั้งแต่ Sales Page ไปจนถึง Corporate Web เพื่อสร้างความได้เปรียบและเพิ่มกำไรในปี 2026 ด้วย Next.js",
+  path: "/services",
+  image: "/images/og-services.webp",
+});
 
 /**
  * @page ServicesPage
- * @description หน้าศูนย์รวมโซลูชันธุรกิจที่ออกแบบมาเพื่อเปลี่ยนผู้เข้าชมให้กลายเป็นยอดขาย
+ * @description ศูนย์รวมโซลูชันที่ออกแบบมาเพื่อเปลี่ยนผู้เข้าชมให้กลายเป็นยอดโอนเงิน
  */
 export default function ServicesPage() {
   return (
     <LayoutEngine spacing="none">
-      <main className="relative min-h-screen overflow-hidden pt-32 pb-24 md:pt-48 md:pb-32 transition-colors duration-500">
-        
-        {/* 01. ATMOSPHERIC INFRASTRUCTURE */}
-        <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-          <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-          <div className="ambient-aura absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
-        </div>
-
+      <main className="relative min-h-screen pt-32 pb-24 transition-colors duration-500 md:pt-48 md:pb-32">
         <div className="relative z-10 container mx-auto px-4 md:px-6">
-          
-          {/* 02. STRATEGIC HEADER */}
-          <header className="mb-24 max-w-4xl space-y-10 md:mb-32">
-            <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-5 py-2 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">
-              <IconRenderer name="Layers" size={14} />
+          {/* 01. STRATEGIC HEADER */}
+          <header className="mb-24 max-w-6xl space-y-10 md:mb-32">
+            <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-6 py-2.5 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">
+              <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
               <span>System_Service_Solutions_v{SITE_CONFIG.project.version}</span>
             </div>
 
@@ -61,59 +50,73 @@ export default function ServicesPage() {
             </h1>
 
             <div className="border-brand-primary border-l-4 pl-8 md:pl-14">
-              <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-medium italic opacity-90 md:text-2xl">
+              <p className="text-text-secondary max-w-4xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
                 เราไม่ได้แค่รับทำเว็บไซต์ แต่เราตั้งใจสร้าง{" "}
-                <span className="text-text-primary font-black not-italic">"พนักงานขายที่เก่งที่สุด"</span>{" "}
-                ที่ทำงานแทนคุณได้อย่างแม่นยำ และช่วยเปลี่ยนผู้เข้าชมให้เป็นยอดขายได้ตลอด 24 ชั่วโมงครับ
+                <span className="text-text-primary decoration-brand-primary font-black not-italic underline decoration-4 underline-offset-8">
+                  "พนักงานขายที่เก่งที่สุด"
+                </span>{" "}
+                ที่ทำงานแทนคุณได้อย่างแม่นยำตลอด 24 ชั่วโมงครับ
               </p>
             </div>
           </header>
 
-          
-
-          {/* 03. HUB COMPONENT: รายการบริการเชิงกลยุทธ์ */}
+          {/* 02. HUB COMPONENT: Service Nodes */}
           <section id="service-nodes" className="min-h-[600px]">
             <Suspense fallback={<ServiceGridSkeleton />}>
               <ServiceListingHub className="gap-8 md:gap-14" />
             </Suspense>
           </section>
 
-          {/* 04. QA LAYER: Trust Infrastructure */}
-          <div className="mt-32 border-t border-border pt-20 md:mt-48">
+          {/* --- [ANCHOR POINT]: 03. WORK PROCESS INFRASTRUCTURE --- */}
+          {/* [FIX]: กำหนด ID เพื่อให้ลิงก์ #process จาก Footer ทำงานได้ถูกต้อง */}
+          <section id="process" className="mt-32 scroll-mt-32 md:mt-48">
+            <div className="mb-16 space-y-6">
+              <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+                Our <span className="text-brand-primary">Specialist Process.</span>
+              </h2>
+              <p className="text-text-secondary max-w-2xl text-lg font-medium opacity-80">
+                ขั้นตอนการทำงานที่ออกแบบมาเพื่อความแม่นยำ ลดความผิดพลาด
+                และส่งมอบผลลัพธ์ที่ดีที่สุดให้ธุรกิจคุณ
+              </p>
+            </div>
+            <WorkProcess />
+          </section>
+
+          {/* 04. TRUST INFRASTRUCTURE */}
+          <div className="border-border mt-32 border-t pt-24 md:mt-48">
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
               {[
                 {
                   title: "Scalable Infrastructure",
-                  desc: "เราวางโครงสร้างเว็บให้ยืดหยุ่น รองรับการเพิ่มข้อมูลและขยายขีดความสามารถของธุรกิจได้ทันทีในอนาคต",
+                  desc: "วางโครงสร้างระบบให้ยืดหยุ่น รองรับการเพิ่มข้อมูลและขยายขีดความสามารถของธุรกิจได้ทันทีในอนาคต",
                   icon: "Server",
                 },
                 {
                   title: "Conversion-Led SEO",
-                  desc: "วางระบบหลังบ้านให้ Google หาเว็บคุณเจอได้ง่าย พร้อมปรับจูนเนื้อหาให้น่าเชื่อถือจนลูกค้าอยากโอนเงิน",
+                  desc: "ระบบหลังบ้านที่ Google รัก พร้อมปรับจูนเนื้อหาให้น่าเชื่อถือจนลูกค้าอยากเปลี่ยนเป็นยอดโอนเงิน",
                   icon: "TrendingUp",
                 },
                 {
                   title: "Military-Grade Stability",
-                  desc: "เว็บไซต์โหลดไวระดับเสี้ยววินาทีเพื่อให้ลูกค้าไม่ต้องรอ พร้อมระบบรักษาความปลอดภัยที่ได้มาตรฐานสากล",
+                  desc: "เว็บไซต์โหลดไวระดับเสี้ยววินาทีเพื่อให้ลูกค้าไม่ต้องรอ พร้อมระบบความปลอดภัยระดับมาตรฐานสากล",
                   icon: "ShieldCheck",
                 },
               ].map((feature, i) => (
                 <div
                   key={i}
                   className={cn(
-                    "group relative overflow-hidden rounded-[2.5rem] border border-border bg-surface-card p-8 md:p-12 transition-all duration-700",
-                    "hover:border-brand-primary/30 hover:-translate-y-2 hover:shadow-glow will-change-transform",
+                    "group border-border bg-surface-card relative overflow-hidden rounded-[3.5rem] border p-10 transition-all duration-700 md:p-14",
+                    "hover:border-brand-primary/40 hover:shadow-pro-lg will-change-transform hover:-translate-y-2",
                   )}
                 >
-                  {/* Icon Interface: [RESOLVED] เปลี่ยนจาก 'as any' เป็น 'as IconName' */}
-                  <div className="text-brand-primary group-hover:bg-brand-primary mb-8 flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-surface-offset transition-all duration-500 group-hover:rotate-6 group-hover:text-surface-main group-hover:shadow-glow">
-                    <IconRenderer name={feature.icon as IconName} size={32} />
+                  <div className="text-brand-primary group-hover:bg-brand-primary border-border bg-surface-offset group-hover:text-surface-main group-hover:shadow-glow mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] border transition-all duration-500 group-hover:rotate-6">
+                    <IconRenderer name={feature.icon as IconName} size={36} />
                   </div>
-                  <div className="space-y-4">
-                    <h3 className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter uppercase italic transition-colors">
+                  <div className="space-y-6">
+                    <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-text-secondary text-base leading-relaxed font-medium italic opacity-80 md:text-lg">
+                    <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-85">
                       {feature.desc}
                     </p>
                   </div>
@@ -127,12 +130,9 @@ export default function ServicesPage() {
   );
 }
 
-/**
- * [SKELETON]: UX Stability Node
- */
 function ServiceGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
       {[...Array(3)].map((_, i) => (
         <SkeletonCard key={i} aspectRatio="portrait" className="rounded-[3.5rem]" />
       ))}
