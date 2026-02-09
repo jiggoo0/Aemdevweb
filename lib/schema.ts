@@ -1,14 +1,17 @@
 /**
- * [SYSTEM CORE]: SEO_SCHEMA_ENGINE v17.1.2 (STABILIZED)
- * [STRATEGY]: Entity Resolution | Anti-Duplication Logic | Zero-Runtime Error
+ * [SEO UTILITY]: SCHEMA_ENGINE v17.2.5 (STABILIZED_AUTHORITY)
+ * [STRATEGY]: Linked Data Orchestration | Entity Resolution | EEAT Compliance
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import { SITE_CONFIG } from "@/constants/site-config";
-import type { AreaNode, TemplateMasterData } from "@/types";
+import { SITE_CONFIG } from "@/constants/site-config"; //
+import type { AreaNode, TemplateMasterData } from "@/types"; //
+
+// --- [01. UTILITY INFRASTRUCTURE] ---
 
 /**
- * [HELPER]: จัดการ URL ให้เป็น Absolute Path เสมอ
+ * @function absoluteUrl
+ * @description จัดการ URL ให้เป็น Absolute Path 100% เพื่อป้องกันปัญหา URL Discovery ใน Search Console
  */
 export const absoluteUrl = (path: string): string => {
   const root = SITE_CONFIG.siteUrl.endsWith("/")
@@ -18,48 +21,13 @@ export const absoluteUrl = (path: string): string => {
   return `${root}${cleanPath}`;
 };
 
-/**
- * [GENERATOR]: PERSON_SCHEMA (Expert Node)
- * [FIX]: แยก Given/Family Name เป็นภาษาอังกฤษเพื่อป้องกันชื่อไทย-อังกฤษแสดงซ้ำซ้อน
- */
-export function generatePersonSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "@id": absoluteUrl("/#expert"),
-    // ใช้ชื่อภาษาอังกฤษเป็นหลักสำหรับ Global Metadata
-    name: SITE_CONFIG.expert.legalName, 
-    givenName: "Alongkorn", 
-    familyName: "Yomkerd", 
-    // ใส่ชื่อภาษาไทยและฉายาไว้ใน alternateName เพื่อให้ Google เข้าใจความเชื่อมโยงโดยไม่แสดงชื่อซ้ำ
-    alternateName: [
-      SITE_CONFIG.expert.legalNameThai, 
-      SITE_CONFIG.expert.displayName,
-      "นายเอ็มซ่ามากส์"
-    ],
-    jobTitle: SITE_CONFIG.expert.jobTitle,
-    description: SITE_CONFIG.expert.role,
-    image: absoluteUrl(SITE_CONFIG.expert.avatar),
-    url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
-    email: SITE_CONFIG.contact.email,
-    sameAs: [
-      SITE_CONFIG.links.facebook,
-      SITE_CONFIG.links.github,
-      SITE_CONFIG.links.line
-    ].filter(Boolean) as string[],
-    worksFor: { "@id": absoluteUrl("/#organization") },
-    knowsAbout: [
-      "Technical SEO",
-      "Next.js Development",
-      "Web Performance Optimization",
-      "Software Architecture",
-      "Digital Strategy",
-    ],
-  };
-}
+// --- [02. CORE ENTITY GENERATORS] ---
 
 /**
- * [GENERATOR]: ORGANIZATION_SCHEMA (Brand Authority)
+ * @function generateOrganizationSchema
+ * @description [STABILIZED]: สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization)
+ * ทำหน้าที่เป็นศูนย์กลางอำนาจของ Domain ในระดับสากล
+ * (ใช้แทน generateBusinessSchema เพื่อความสอดคล้องกับระบบ Routing)
  */
 export function generateOrganizationSchema() {
   return {
@@ -68,43 +36,71 @@ export function generateOrganizationSchema() {
     "@id": absoluteUrl("/#organization"),
     name: SITE_CONFIG.brandName,
     url: SITE_CONFIG.siteUrl,
-    logo: absoluteUrl("/images/logo.webp"),
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/icon-192.png"),
+      width: "192",
+      height: "192"
+    },
     description: SITE_CONFIG.description,
-    email: SITE_CONFIG.contact.email,
-
     founder: { "@id": absoluteUrl("/#expert") },
-    employee: [{ "@id": absoluteUrl("/#expert") }],
-
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress,
-      addressLocality: "เมืองกำแพงเพชร",
-      addressRegion: "กำแพงเพชร",
+      addressLocality: "Kamphaeng Phet",
       postalCode: SITE_CONFIG.contact.postalCode,
       addressCountry: "TH",
     },
-
-    areaServed: [
-      { "@type": "Country", name: "Thailand", alternateName: "TH" },
-    ],
-
     contactPoint: {
       "@type": "ContactPoint",
-      contactType: "customer service",
       telephone: SITE_CONFIG.contact.phone,
-      url: SITE_CONFIG.links.line,
-      areaServed: "TH",
+      contactType: "customer service",
       availableLanguage: ["Thai", "English"],
     },
     sameAs: [
-      SITE_CONFIG.links.facebook, 
-      SITE_CONFIG.links.github
+      SITE_CONFIG.links.facebook,
+      SITE_CONFIG.links.line
     ].filter(Boolean) as string[],
   };
 }
 
 /**
- * [GENERATOR]: SERVICE_SCHEMA
+ * @function generatePersonSchema
+ * @description สร้าง Expert Node (Person) เพื่อระบุตัวตน Alongkorn Yomkerd 
+ * และเชื่อมโยงความสัมพันธ์กับแบรนด์ (WorksFor) เพื่อคะแนน EEAT
+ */
+export function generatePersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": absoluteUrl("/#expert"),
+    name: SITE_CONFIG.expert.legalName,
+    givenName: "Alongkorn",
+    familyName: "Yomkerd",
+    alternateName: [
+      SITE_CONFIG.expert.legalNameThai,
+      SITE_CONFIG.expert.displayName,
+      "นายเอ็มซ่ามากส์"
+    ],
+    jobTitle: SITE_CONFIG.expert.jobTitle,
+    description: SITE_CONFIG.expert.role,
+    image: absoluteUrl(SITE_CONFIG.expert.avatar),
+    url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
+    worksFor: { "@id": absoluteUrl("/#organization") },
+    knowsAbout: [
+      "Technical SEO",
+      "Next.js Development",
+      "Web Performance Optimization",
+      "Software Architecture"
+    ],
+  };
+}
+
+// --- [03. TARGETED CONTENT GENERATORS] ---
+
+/**
+ * @function generateServiceSchema
+ * @description สร้างโครงสร้างข้อมูลสำหรับหน้าบริการ (Service & Offer)
  */
 export function generateServiceSchema(data: TemplateMasterData) {
   return {
@@ -114,7 +110,6 @@ export function generateServiceSchema(data: TemplateMasterData) {
     serviceType: "Technical SEO & Web Development",
     name: data.title,
     description: data.description,
-    image: absoluteUrl(data.image || "/images/og-default.webp"),
     provider: { "@id": absoluteUrl("/#organization") },
     offers: {
       "@type": "Offer",
@@ -127,7 +122,9 @@ export function generateServiceSchema(data: TemplateMasterData) {
 }
 
 /**
- * [GENERATOR]: LOCAL_BUSINESS_SCHEMA
+ * @function generateLocalBusinessSchema
+ * @description สร้าง Local Business Node สำหรับ Area Pages 
+ * เพื่อช่วยดึงอันดับใน Google Maps และพื้นที่เฉพาะจุด
  */
 export function generateLocalBusinessSchema(data: AreaNode) {
   return {
@@ -136,13 +133,13 @@ export function generateLocalBusinessSchema(data: AreaNode) {
     "@id": absoluteUrl(`/areas/${data.slug}/#localbusiness`),
     name: `${SITE_CONFIG.brandName} ${data.province}`,
     description: data.seoDescription || data.description,
-    image: absoluteUrl(data.heroImage || "/images/og-default.webp"),
+    image: absoluteUrl(data.heroImage),
     url: absoluteUrl(`/areas/${data.slug}`),
     telephone: SITE_CONFIG.contact.phone,
     priceRange: "฿฿-฿฿฿",
     address: {
       "@type": "PostalAddress",
-      streetAddress: `ให้บริการพื้นที่ ${data.province}`,
+      streetAddress: `ให้บริการในพื้นที่ ${data.province}`,
       addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
@@ -152,17 +149,13 @@ export function generateLocalBusinessSchema(data: AreaNode) {
       latitude: data.coordinates?.lat.toString() || "16.4828",
       longitude: data.coordinates?.lng.toString() || "99.5227",
     },
-    areaServed: {
-      "@type": "City",
-      name: data.province,
-    },
     parentOrganization: { "@id": absoluteUrl("/#organization") },
-    founder: { "@id": absoluteUrl("/#expert") },
   };
 }
 
 /**
- * [GENERATOR]: BREADCRUMB_SCHEMA
+ * @function generateBreadcrumbSchema
+ * @description สร้าง Breadcrumb List เพื่อช่วยให้ Crawler เข้าใจโครงสร้างลำดับชั้น
  */
 export function generateBreadcrumbSchema(items: readonly { name: string; item: string }[]) {
   return {
@@ -176,3 +169,6 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
     })),
   };
 }
+
+// [ALIAS FIX]: รักษาระดับการเข้าถึงสำหรับ Layout ที่ต้องการชื่อฟังก์ชันแบบเจาะจง
+export const generateBusinessSchema = generateOrganizationSchema;

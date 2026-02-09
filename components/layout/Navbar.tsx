@@ -1,10 +1,10 @@
+"use client";
+
 /**
- * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.0.2 (SMART_ISLAND)
+ * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.2.3 (CLS_STABILIZED)
  * [STRATEGY]: Intelligent Scroll Physics | Zero-Friction Navigation | Specialist Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
-
-"use client";
 
 import React, { useState, useEffect, memo } from "react";
 import Link from "next/link";
@@ -12,20 +12,25 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- Infrastructure & Data ---
-import { SITE_CONFIG } from "@/constants/site-config";
-import { MAIN_NAV } from "@/constants/navigation";
-import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from "@/constants/site-config"; //
+import { MAIN_NAV } from "@/constants/navigation"; //
+import { cn } from "@/lib/utils"; //
 
 // --- UI Components ---
-import IconRenderer from "@/components/ui/IconRenderer";
+import IconRenderer from "@/components/ui/IconRenderer"; //
 import { Button } from "@/components/ui/button";
 
+/**
+ * [STABILIZED]: Navbar Component
+ * ปรับจูนการทำงานร่วมกับระบบ Next.js 16 และ React 19 อย่างสมบูรณ์
+ */
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // 01. PERFORMANCE SCROLL OBSERVER (Optimized with RAF)
+  /* 01. PERFORMANCE SCROLL OBSERVER (Optimized with RAF)
+     [STRATEGY]: ลดภาระการคำนวณของ Browser เพื่อป้องกันอาการกระตุกขณะเลื่อนหน้าจอ */
   useEffect(() => {
     let ticking = false;
 
@@ -43,20 +48,20 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 02. ROUTE GUARD: Close mobile menu on route change
+  /* 02. ROUTE GUARD: ปิดเมนูอัตโนมัติเมื่อมีการเปลี่ยนหน้า */
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // 03. SCROLL LOCK: Prevent body scroll when menu is open
+  /* 03. SCROLL LOCK PROTOCOL
+     [MANDATE]: ป้องกันการเลื่อนหน้าเว็บซ้อนกันเมื่อเปิด Mobile Menu */
   useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
     if (isMobileMenuOpen) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = originalStyle;
     };
   }, [isMobileMenuOpen]);
 
@@ -71,6 +76,7 @@ const Navbar = () => {
         <nav
           className={cn(
             "transition-all duration-700 ease-[0.16,1,0.3,1]",
+            /* [GLASSMORPHISM]: การใช้พื้นหลังโปร่งแสงและ Blur เพื่อสร้างมิติ (Atmospheric Depth) */
             isScrolled
               ? "w-[92%] max-w-6xl rounded-[2rem] border border-white/10 bg-[#050505]/80 shadow-2xl backdrop-blur-xl"
               : "w-full border-b border-white/5 bg-[#050505]/50 backdrop-blur-sm",
@@ -79,10 +85,11 @@ const Navbar = () => {
           <div
             className={cn(
               "relative flex items-center justify-between px-4 py-3 md:px-6 md:py-4",
+              /* [CLS SHIELD]: จองพื้นที่ความสูงที่แน่นอนเพื่อป้องกันเลย์เอาต์กระโดด */
               isScrolled ? "min-h-[70px]" : "min-h-[80px]",
             )}
           >
-            {/* [NODE A]: BRAND IDENTITY */}
+            {/* [NODE A]: BRAND IDENTITY (Single Source of Truth) */}
             <Link href="/" className="group flex items-center gap-4">
               <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
                 <IconRenderer name="Cpu" size={20} strokeWidth={2.5} />
@@ -97,7 +104,8 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* [NODE B]: DESKTOP NAVIGATION HUB */}
+            {/* [NODE B]: DESKTOP NAVIGATION HUB
+               [USER EXPERIENCE]: จัดลำดับความสำคัญของเมนูผ่านการแสดงผลที่ชัดเจน */}
             <div className="hidden items-center gap-1 rounded-2xl border border-white/5 bg-white/5 p-1 backdrop-blur-md lg:flex">
               {MAIN_NAV.map((item) => {
                 const isActive = pathname === item.href;
@@ -118,7 +126,8 @@ const Navbar = () => {
               })}
             </div>
 
-            {/* [NODE C]: CONVERSION POINT */}
+            {/* [NODE C]: CONVERSION POINT
+               [STRATEGY]: ทุกจุดสัมผัสต้องนำไปสู่โอกาสในการปิดการขาย */}
             <div className="flex items-center gap-4">
               <Button
                 asChild
@@ -142,17 +151,18 @@ const Navbar = () => {
         </nav>
       </header>
 
-      {/* [NODE D]: MOBILE OVERLAY INTERFACE */}
+      {/* [NODE D]: MOBILE OVERLAY INTERFACE
+         [ANIMATION]: ใช้ Framer Motion เพื่อสร้างความลื่นไหลระดับสัญชาตญาณ */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[90] flex flex-col bg-[#050505] lg:hidden"
           >
-            {/* Background Atmosphere */}
+            {/* Background Atmosphere Layer */}
             <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]" />
               <div className="bg-brand-primary/10 absolute right-0 -bottom-[20%] h-[500px] w-[500px] rounded-full blur-[120px]" />
@@ -207,7 +217,7 @@ const Navbar = () => {
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center justify-center gap-2 text-xs font-medium text-gray-500">
                     <div className="h-px w-8 bg-gray-800" />
-                    <span>System Navigation</span>
+                    <span className="font-mono tracking-widest uppercase">System Navigation</span>
                     <div className="h-px w-8 bg-gray-800" />
                   </div>
                   <Button
@@ -228,4 +238,4 @@ const Navbar = () => {
   );
 };
 
-export default memo(Navbar);
+export default memo(Navbar); //

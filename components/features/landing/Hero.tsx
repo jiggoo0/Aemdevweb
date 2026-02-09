@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * [FEATURE COMPONENT]: HERO_SYSTEM_ORCHESTRATOR v17.0.2 (LCP-OPTIMIZED)
- * [STRATEGY]: Midnight Aura | Neural Physics | Fluid Symmetry
+ * [FEATURE COMPONENT]: HERO_SYSTEM_ORCHESTRATOR v17.2.3 (LCP_CLS_STABILIZED)
+ * [STRATEGY]: Zero-Jitter UI | Priority Resource Injection | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -34,44 +34,39 @@ const Hero = ({
   secondaryActionLink = "#services",
   className,
 }: HeroProps) => {
-  /* [PHYSICS ENGINE]: Animation Config */
+  
+  /* [PHYSICS ENGINE]: Stabilized Animation Config 
+     ลดค่า Y offset เพื่อป้องกันเลย์เอาต์กระโดด (CLS) */
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.05, delayChildren: 0.05 },
     },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
     visible: {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
     <section
       className={cn(
-        "relative flex min-h-[90vh] w-full flex-col items-center justify-center overflow-hidden px-4 pt-32 pb-20 text-center sm:px-6 lg:px-8",
+        /* [CLS FIX]: กำหนด min-height ที่แน่นอนและจองพื้นที่สำหรับ Header */
+        "relative flex min-h-[100vh] w-full flex-col items-center justify-center overflow-hidden px-4 pt-32 pb-20 text-center sm:px-6 lg:px-8",
         className,
       )}
     >
       {/* 00. ATMOSPHERIC ENGINE: พื้นหลังและแสงเงา */}
       <div className="pointer-events-none absolute inset-0 -z-20 select-none" aria-hidden="true">
-        {/* Main Aura */}
         <div className="bg-brand-primary/20 absolute top-[-10%] left-1/2 h-[600px] w-[90%] -translate-x-1/2 rounded-full opacity-40 mix-blend-screen blur-[140px]" />
-
-        {/* Grid System */}
         <div className="bg-infrastructure-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_70%)] opacity-[0.4]" />
-
-        {/* Secondary Glow */}
         <div className="absolute right-0 bottom-0 h-[400px] w-[400px] rounded-full bg-blue-500/10 opacity-30 blur-[100px]" />
       </div>
 
@@ -148,25 +143,29 @@ const Hero = ({
           </Button>
         </motion.div>
 
-        {/* [NEW] 04. HERO VISUALIZER (LCP FIX) */}
+        {/* [CRITICAL FIX]: HERO VISUALIZER (LCP & CLS SHIELD) 
+            จองพื้นที่ด้วย aspect-ratio เพื่อป้องกัน Layout Shift ระหว่างโหลดภาพ */}
         <motion.div
           variants={itemVariants}
           className="relative mt-16 flex w-full justify-center px-4"
         >
-          <div className="shadow-brand-primary/10 relative aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl lg:aspect-[21/9]">
+          <div className="shadow-brand-primary/10 relative aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl lg:aspect-[21/9]">
+            {/* Loading Placeholder */}
+            <div className="absolute inset-0 z-0 animate-pulse bg-white/5" />
+            
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
 
-            {/* [CRITICAL FIX]: Priority Load for LCP Score */}
+            {/* [LCP ENGINE]: เร่งประสิทธิภาพการ Paint ด้วย priority และ fetchPriority */}
             <Image
               src="/images/hero/main-hero.webp"
               alt="AEMDEVWEB Strategic Interface"
               fill
               priority={true}
+              quality={90}
               className="object-cover object-top opacity-80 transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
             />
 
-            {/* Overlay Grid */}
             <div className="absolute inset-0 z-20 bg-[url('/grid-pattern.svg')] opacity-20 mix-blend-overlay" />
           </div>
         </motion.div>
@@ -177,7 +176,7 @@ const Hero = ({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
-          transition={{ delay: 1.2, duration: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
           className="flex items-center gap-4"
         >
           <div className="h-px w-12 bg-white/20" />
@@ -189,7 +188,7 @@ const Hero = ({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}
-          transition={{ delay: 1.2, duration: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
           className="font-mono text-[9px] font-bold tracking-[0.4em] text-white uppercase"
         >
           {SITE_CONFIG.brandName} &copy; {new Date().getFullYear()}
