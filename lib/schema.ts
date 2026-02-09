@@ -1,5 +1,5 @@
 /**
- * [SEO UTILITY]: SCHEMA_ENGINE v17.4.7 (GOOGLE_IDENTITY_READY)
+ * [SEO UTILITY]: SCHEMA_ENGINE v17.5.3 (STABILIZED)
  * [STRATEGY]: Graph-Based Entity Resolution | Local Search Dominance | Linked Data
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -12,9 +12,27 @@ import type { AreaNode, TemplateMasterData } from "@/types";
 
 /**
  * @description สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization / ProfessionalService)
- * [UPDATE]: เชื่อมโยง Google Merchant ID และ Google Maps Public Link เพื่อพลัง Authority
+ * [UPDATE]: เชื่อมโยง Google Merchant ID, Store Code และ Business Profile ID
  */
 export function generateOrganizationSchema() {
+  const identifiers = [
+    {
+      "@type": "PropertyValue",
+      propertyID: "google_merchant_id",
+      value: SITE_CONFIG.expert.googleMerchantId,
+    },
+    {
+      "@type": "PropertyValue",
+      propertyID: "google_store_code",
+      value: SITE_CONFIG.business.ids?.storeCode,
+    },
+    {
+      "@type": "PropertyValue",
+      propertyID: "google_business_profile_id",
+      value: SITE_CONFIG.business.ids?.businessProfileId,
+    },
+  ].filter((item) => item.value); // [SAFETY]: กรองเฉพาะตัวที่มีค่าจริงเท่านั้น
+
   return {
     "@type": "ProfessionalService", // ระบุประเภทธุรกิจให้ชัดเจนเพื่อ Google Local Algorithm
     "@id": absoluteUrl("/#organization"),
@@ -26,9 +44,10 @@ export function generateOrganizationSchema() {
       width: "192",
       height: "192",
     },
-    // [STRATEGY]: การระบุ Identifier ช่วยให้ Google เชื่อมโยงเว็บไซต์กับ Google Business Profile
-    identifier: SITE_CONFIG.expert.googleMerchantId,
-    priceRange: "$$$",
+    // [STRATEGY]: ใช้ PropertyValue เพื่อระบุ ID หลายประเภทพร้อมกัน (Cross-Platform Validation)
+    identifier: identifiers,
+    // [OPTIMIZATION]: ปรับ Price Range เป็นเงินบาทเพื่อให้ Google เข้าใจบริบท Local
+    priceRange: "฿฿ - ฿฿฿",
     image: absoluteUrl("/images/og-main.png"),
     address: {
       "@type": "PostalAddress",
@@ -41,6 +60,7 @@ export function generateOrganizationSchema() {
       "@type": "ContactPoint",
       telephone: SITE_CONFIG.contact.phone,
       contactType: "customer service",
+      areaServed: "TH",
       availableLanguage: ["Thai", "English"],
     },
     // [UPDATE]: รวม Google Maps Link เข้ากับ Social Profiles เพื่อสร้าง Web of Trust
@@ -108,10 +128,13 @@ export function generateLocalBusinessSchema(data: AreaNode) {
     "@id": absoluteUrl(`/areas/${data.slug}/#localbusiness`),
     name: `${SITE_CONFIG.brandName} ${data.province}`,
     description: data.seoDescription || data.description,
-    image: absoluteUrl(data.heroImage || `/images/areas/${data.slug}-node.webp`),
+    image: absoluteUrl(
+      data.heroImage || `/images/areas/${data.slug}-node.webp`
+    ),
     url: absoluteUrl(`/areas/${data.slug}`),
     telephone: SITE_CONFIG.contact.phone,
-    priceRange: "$$$",
+    // [OPTIMIZATION]: Consistency กับ Organization หลัก
+    priceRange: "฿฿ - ฿฿฿",
     address: {
       "@type": "PostalAddress",
       addressLocality: data.province,
@@ -130,7 +153,9 @@ export function generateLocalBusinessSchema(data: AreaNode) {
 /**
  * @description Breadcrumb List เพื่อช่วยให้ Crawler เข้าใจลำดับชั้นและแสดง Rich Snippets
  */
-export function generateBreadcrumbSchema(items: readonly { name: string; item: string }[]) {
+export function generateBreadcrumbSchema(
+  items: readonly { name: string; item: string }[]
+) {
   return {
     "@type": "BreadcrumbList",
     "@id": absoluteUrl("/#breadcrumb"),
@@ -153,7 +178,11 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
 export function generateSchemaGraph(schemas: readonly object[]) {
   return {
     "@context": "https://schema.org",
-    "@graph": [generateOrganizationSchema(), generatePersonSchema(), ...schemas],
+    "@graph": [
+      generateOrganizationSchema(),
+      generatePersonSchema(),
+      ...schemas,
+    ],
   };
 }
 

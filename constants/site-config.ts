@@ -1,6 +1,7 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.1 (STABILIZED_FINAL)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.2 (AUTHENTICATED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
+ * [UPDATE]: ผสานข้อมูล Google Business Profile IDs เพื่อการยืนยันตัวตนระดับสูง
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -10,13 +11,14 @@ export const SITE_CONFIG: SiteConfig = {
   // [01. BRAND IDENTITY]: ข้อมูลระบุตัวตนพื้นฐาน
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
-  description: "AEMDEVWEB | Web Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับหน้าแรก Google อย่างมีประสิทธิภาพและยั่งยืน",
+  description:
+    "AEMDEVWEB | Web Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับหน้าแรก Google อย่างมีประสิทธิภาพและยั่งยืน",
 
   // [02. HERO_REGISTRY]: ศูนย์กลางควบคุมเนื้อหาหน้าแรก
   hero: {
     title: "AEMDEVWEB HYPER PERFORMANCE ARCHITECTURE",
-    // [FIXED]: เพิ่มเครื่องหมาย : และแก้ไขตัวสะกดเป็น description
-    description: "Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับ Google อย่างมีประสิทธิภาพธุรกิจคุณ By นายเอ็มซ่ามากส์",
+    description:
+      "Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับ Google อย่างมีประสิทธิภาพธุรกิจคุณ By นายเอ็มซ่ามากส์",
     primaryAction: "ปรึกษาวางแผนระบบฟรี",
     secondaryAction: "ดูบริการทั้งหมด",
   },
@@ -40,8 +42,8 @@ export const SITE_CONFIG: SiteConfig = {
     "รับทำเว็บไซต์ Next.js",
     "ที่ปรึกษา SEO",
     "AEMDEVWEB",
-    "นายเอ็มซ่ามากส์", 
-    "นาย อลงกรณ์ ยมเกิด", 
+    "นายเอ็มซ่ามากส์",
+    "นาย อลงกรณ์ ยมเกิด",
     "Technical SEO Specialist Thailand",
   ],
   // [SYSTEM: PROTECTED_DATA_END]
@@ -50,7 +52,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.5.1",
+    version: "17.5.2",
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -66,6 +68,7 @@ export const SITE_CONFIG: SiteConfig = {
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/about",
+    // [VERIFIED]: รหัส Business Manager (om-8653...)
     googleMerchantId: "8653147979146207424",
   },
 
@@ -87,17 +90,24 @@ export const SITE_CONFIG: SiteConfig = {
     messenger: "https://m.me/aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
     github: "https://github.com/aemdevweb",
-    googleMaps: "https://maps.google.com",
+    // [UPDATE]: ลิงก์แผนที่จริง
+    googleMaps: "https://share.google/MMWnXPv3evv4Qd8aC",
+    // [TODO]: รอการอัปเดต Place ID จริงแทนที่ ChIJ... เพื่อให้ลิงก์รีวิวทำงานสมบูรณ์
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
-  // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ
+  // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ & IDs
   business: {
     location: "Thailand",
     region: "ASEAN",
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",
+    // [NEW]: ชุดรหัสยืนยันตัวตนจาก Google Business Profile Setting
+    ids: {
+      businessProfileId: "17539943195708104348", // รหัสโปรไฟล์หลัก
+      storeCode: "01162024004001766449",       // รหัสร้านค้า (ใช้สำหรับ Google Ads/Merchant)
+    },
   },
 
   // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์

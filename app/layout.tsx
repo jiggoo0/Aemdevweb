@@ -1,7 +1,6 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.0 (STABILIZED_FINAL)
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.2 (STABILIZED_FINAL)
  * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | High-Fidelity UX
- * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { Metadata, Viewport } from "next";
@@ -22,8 +21,7 @@ import { Toaster } from "@/components/ui/sonner";
 // --- 3. Styles ---
 import "./globals.css";
 
-/* [A] FONT ORCHESTRATION: โหลดแบบ Swap เพื่อรักษาค่า CLS: 0 และความคมชัดระดับ Retina */
-
+// [FONTS CONFIGURATION - KEEP AS IS]
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -37,7 +35,7 @@ const fontThai = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
   variable: "--font-thai",
   display: "swap",
-  adjustFontFallback: false, // ปิดเพื่อใช้ Metrics ของ IBM โดยตรง
+  adjustFontFallback: false,
 });
 
 const fontMono = JetBrains_Mono({
@@ -47,7 +45,7 @@ const fontMono = JetBrains_Mono({
   weight: ["400", "700"],
 });
 
-/* [B] SEO PROTOCOL: ระบบ Metadata เชิงยุทธศาสตร์ระดับ Specialist */
+// [METADATA]
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.project.title,
@@ -72,12 +70,13 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
+      "max-snippet": -1, // [UPDATE]: ให้ Google ตัดสินใจความยาว Snippet เอง
     },
   },
   verification: { google: SITE_CONFIG.verification.google },
 };
 
-/* [C] VIEWPORT & CHROMA SYNC: ปรับจูนสี Browser UI ตามสถานะธีม */
+// [VIEWPORT]
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -86,6 +85,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true, // [ACCESSIBILITY]: ต้องยอมให้ User ขยายหน้าจอได้
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -106,7 +106,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "selection:bg-brand-primary/20 selection:text-brand-primary"
         )}
       >
-        {/* --- 01. GLOBAL AMBIENT LAYER: หน่วยสร้างบรรยากาศทางวิศวกรรม --- */}
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.15]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
@@ -117,19 +116,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           aria-hidden="true"
         />
 
-        {/* --- 02. CORE APPLICATION NODES --- */}
         <ThemeProvider
           attribute="data-theme"
           defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange
         >
-          {/* ระบบแถบโหลดด้านบน: ประมวลผลล่วงหน้าเพื่อลดค่า Perceived Latency */}
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
-
+          
           <div className="relative z-10 flex min-h-screen flex-col">
-            {/* Accessibility: Skip to Content สำหรับผู้ใช้งานที่ใช้ Keyboard/Screen Reader */}
-            <a href="#main-content" className="sr-only focus:not-sr-only">Skip to content</a>
+             {/* Accessibility Link */}
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground">
+              Skip to content
+            </a>
             
             <Navbar />
             <main id="main-content" className="relative flex flex-grow flex-col">
@@ -138,7 +137,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </div>
 
-          {/* --- 03. GLOBAL OVERLAYS: เลเยอร์โต้ตอบระดับสูง --- */}
           <div className="pointer-events-none fixed right-0 bottom-0 z-[60] flex flex-col items-end gap-4 p-4 md:p-6">
             <div className="pointer-events-auto">
               <LineStickyButton />

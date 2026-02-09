@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.0 (FIXED)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.2 (AUTHENTICATED)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -79,7 +79,6 @@ export interface SiteConfig {
     readonly email: string;
     readonly bioUrl: string;
     readonly bio?: string;
-    // [FIXED]: Added support for Knowledge Graph ID
     readonly googleMerchantId?: string;
   };
   readonly contact: {
@@ -100,7 +99,6 @@ export interface SiteConfig {
     readonly github: string;
     readonly twitter?: string;
     readonly youtube?: string;
-    // [FIXED]: Added support for Local SEO Links
     readonly googleMaps?: string;
     readonly googleReview?: string;
   };
@@ -110,6 +108,11 @@ export interface SiteConfig {
     readonly industry: string;
     readonly roiFocus: boolean;
     readonly established: string;
+    // [UPDATE]: Added support for Google Business Profile Verification
+    readonly ids?: {
+      readonly businessProfileId: string;
+      readonly storeCode: string;
+    };
   };
   readonly verification: {
     readonly google: string;
