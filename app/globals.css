@@ -1,9 +1,9 @@
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
+@plugin "tailwindcss-animate"; /* [FIX]: ใน v4 ต้องใช้ @plugin แทน @import */
 
 /**
- * [CORE STYLESHEET]: AEM-SYSTEM-v17.5.0 (V4_OPTIMIZED)
- * [STRATEGY]: Dynamic Variables | GPU Acceleration | Typography Stack
+ * [CORE STYLESHEET]: AEM-SYSTEM-v17.5.5 (IDENTITY_LOCKED)
+ * [STRATEGY]: GPU Acceleration | Typography Fidelity | PSI Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -16,7 +16,6 @@
     --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
     /* [COLOR PALETTE - OKLCH SYSTEM] */
-    /* มาตรฐานสีที่ให้ความสว่างคงที่ในทุกมิติสี */
     --color-brand-primary: oklch(0.72 0.18 150);
     --color-brand-secondary: oklch(0.6 0.15 150);
     --color-brand-glow-base: oklch(0.72 0.18 150 / 0.15);
@@ -39,19 +38,15 @@
     --ambient-opacity: 0.1;
   }
 
-  /* [LIGHT MODE OVERRIDE] */
   :root[data-theme="light"] {
     --color-surface-main: #ffffff;
     --color-surface-offset: #f8fafc;
     --color-surface-card: #ffffff;
-
     --color-text-primary: #0f172a;
     --color-text-secondary: #475569;
     --color-text-muted: #94a3b8;
     --color-text-inverted: #ffffff;
-
     --color-border: rgba(15, 23, 42, 0.08);
-
     --shadow-glow-color: rgba(0, 0, 0, 0.05);
     --ambient-opacity: 0.03;
   }
@@ -59,7 +54,6 @@
 
 /* --- 02. TAILWIND CONFIGURATION LAYER (v4) --- */
 @theme {
-  /* Mapping System Variables */
   --font-thai: var(--font-thai);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
@@ -79,12 +73,10 @@
 
   --color-border: var(--color-border);
 
-  /* High-Fidelity Shadows */
   --shadow-glow: 0 0 20px -5px var(--shadow-glow-color);
   --shadow-pro-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-pro-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
-  /* GPU-Driven Animations */
   --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-shimmer: shimmer 2.5s linear infinite;
@@ -115,25 +107,33 @@
 
   html {
     @apply scroll-smooth;
-    scrollbar-gutter: stable; /* ป้องกัน Layout Shift ขณะโหลด Scrollbar */
+    scrollbar-gutter: stable; 
   }
 
   body {
     @apply text-text-primary bg-surface-main overflow-x-hidden;
     font-family: var(--font-thai);
     line-height: 1.6;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum", "pnum";
     min-height: 100vh;
+    font-display: swap; 
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
     font-family: var(--font-sans);
     @apply text-text-primary font-bold tracking-tight;
     line-height: 1.2;
-    content-visibility: auto; /* เพิ่มความเร็วในการ Render เนื้อหาที่ยังไม่ถึงจุดมองเห็น */
+    content-visibility: visible !important; 
+    text-wrap: balance; 
   }
 
-  /* Specialist Scrollbar Design */
+  h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    @apply text-text-primary font-bold tracking-tight;
+    line-height: 1.2;
+    content-visibility: auto;
+  }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--color-surface-main); }
   ::-webkit-scrollbar-thumb {
@@ -149,7 +149,13 @@
     @apply mx-auto w-full max-w-[85rem] px-4 md:px-6;
   }
 
-  /* GPU-Accelerated Interactions */
+  .aspect-pro-hero {
+    aspect-ratio: 16 / 9;
+    @media (max-width: 768px) {
+      aspect-ratio: 4 / 5;
+    }
+  }
+
   .hover-lift {
     @apply transition-transform duration-500 will-change-transform;
     &:hover { transform: translate3d(0, -4px, 0); }
@@ -160,7 +166,6 @@
     transform: translate3d(0, 0, 0);
   }
 
-  /* Infrastructure Visual Logic */
   .bg-infrastructure-grid {
     background-size: 40px 40px;
     background-image:

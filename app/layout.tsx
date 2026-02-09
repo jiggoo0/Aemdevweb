@@ -1,10 +1,12 @@
 /**
  * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.5 (STABILIZED)
- * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | High-Fidelity UX
+ * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | RUM Monitoring
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { Metadata, Viewport } from "next";
 import { Inter, IBM_Plex_Sans_Thai, JetBrains_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 // --- 1. Infrastructure & Providers ---
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -21,7 +23,7 @@ import { Toaster } from "@/components/ui/sonner";
 // --- 3. Styles ---
 import "./globals.css";
 
-/* [A] FONT ORCHESTRATION: รองรับภาษาไทย-อังกฤษแบบลื่นไหล */
+/* [A] FONT ORCHESTRATION: โหลดแบบ Swap เพื่อรักษาค่า CLS: 0 และความคมชัดระดับ Retina */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -43,7 +45,7 @@ const fontMono = JetBrains_Mono({
   weight: ["400", "700"],
 });
 
-/* [B] SEO PROTOCOL: Global Configuration */
+/* [B] SEO PROTOCOL: ระบบ Metadata เชิงยุทธศาสตร์ระดับ Specialist */
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.project.title,
@@ -74,7 +76,7 @@ export const metadata: Metadata = {
   verification: { google: SITE_CONFIG.verification.google },
 };
 
-/* [C] CHROMA SYNC: ควบคุมสี UI ตามโหมดของผู้ใช้ */
+/* [C] CHROMA SYNC: ควบคุมสี Browser UI ตามสถานะธีม */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -117,10 +119,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem={false}
           disableTransitionOnChange
         >
-          {/* ระบบแถบโหลดเสมือน: ลด Perceived Latency ระหว่าง Route Transition */}
+          {/* ระบบแถบโหลดเสมือน: ลด Perceived Latency ระหว่างการเปลี่ยนหน้า */}
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
           
           <div className="relative z-10 flex min-h-screen flex-col">
+            {/* Accessibility: Skip to Content สำหรับผู้ใช้งานที่ใช้ Keyboard/Screen Reader */}
             <a 
               href="#main-content" 
               className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:p-4 focus:bg-brand-primary focus:text-white focus:rounded-xl"
@@ -150,6 +153,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               }}
             />
           </div>
+
+          {/* [ANALYTICS NODE]: ตรวจเช็คค่า LCP/CLS จากผู้ใช้งานจริง (RUM) */}
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
