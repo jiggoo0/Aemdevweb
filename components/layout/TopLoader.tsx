@@ -1,6 +1,6 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_TOP_LOADER v17.0.2 (KINETIC_FEEDBACK)
- * [STRATEGY]: Route Transition Physics | Zero-Latency Perception | Brand Continuity
+ * [SYSTEM COMPONENT]: SYSTEM_TOP_LOADER v17.3.9 (HYBRID_STABILIZED)
+ * [STRATEGY]: Route Transition Physics | Theme-Aware Glow | Zero-Latency Perception
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -19,22 +19,27 @@ interface TopLoaderProps {
 
 /**
  * @component TopLoader
- * @description ระบบแถบสถานะการโหลดด้านบน (NProgress) เพื่อสร้าง Feedback ทางสายตาเมื่อมีการเปลี่ยน Route
- * ปรับจูน Physics ให้รู้สึกรวดเร็วและตอบสนองทันที (Zero-Latency Feel)
+ * @description ระบบแถบสถานะการโหลด (NProgress) ที่เชื่อมโยงกับ Design System
+ * [STABILIZED]: รองรับการสลับโหมด Dark/Light ผ่าน CSS Variables
  */
 const TopLoader = ({
-  color = "#22c55e", // Brand Primary (Neon Green) ตาม Design System
-  showSpinner = false, // Minimalist Mode: ซ่อน Spinner เพื่อลด Visual Noise
+  /* [FIX]: เปลี่ยนจาก #22c55e เป็นการอ้างอิง Variable จาก globals.css */
+  color = "var(--color-brand-primary)", 
+  showSpinner = false,
   height = 2,
   shadow = true,
   zIndex = 9999,
 }: TopLoaderProps) => {
-  // [LOGIC]: Dynamic Shadow Generation
-  // สร้าง Effect แสงฟุ้ง (Glow) เพื่อให้ดูเหมือนพลังงานกำลังวิ่ง
+  
+  /**
+   * [LOGIC]: Dynamic Shadow Generation
+   * ใช้ค่าจาก CSS Variable เพื่อให้แสง Glow เปลี่ยนตามสถานะของธีม
+   */
   const getShadow = () => {
     if (shadow === false) return "none";
     if (typeof shadow === "string") return shadow;
-    return `0 0 12px ${color}, 0 0 5px ${color}`;
+    // ใช้ CSS variable ใน shadow เพื่อความต่อเนื่องของ UI
+    return `0 0 10px var(--color-brand-primary), 0 0 5px var(--color-brand-primary)`;
   };
 
   return (
@@ -45,8 +50,9 @@ const TopLoader = ({
       height={height}
       crawl={true}
       showSpinner={showSpinner}
-      easing="cubic-bezier(0.16, 1, 0.3, 1)" // Custom Curve: เร็วตอนต้น ชะลอตอนปลาย
-      speed={200}
+      /* [PHYSICS]: Curve แบบ Specialist - พุ่งตัวเร็วและชะลออย่างนุ่มนวลตอนใกล้จบ */
+      easing="cubic-bezier(0.16, 1, 0.3, 1)" 
+      speed={250}
       shadow={getShadow()}
       zIndex={zIndex}
       showAtBottom={false}

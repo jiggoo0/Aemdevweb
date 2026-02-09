@@ -1,6 +1,6 @@
 /**
- * [SHARED COMPONENT]: LINE_STICKY_BUTTON v17.0.2 (INTEGRATED)
- * [STRATEGY]: Partnership Integration | Persistent Conversion | Neural Physics
+ * [SHARED COMPONENT]: LINE_STICKY_BUTTON v17.3.9 (HYBRID_STABILIZED)
+ * [STRATEGY]: Partnership Integration | Theme-Aware Tooltips | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,25 +12,33 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
 
+/**
+ * @component LineStickyButton
+ * @description ปุ่ม Line ติดต่อด่วนแบบลอยตัว (Floating Action Button) 
+ * [STABILIZED]: รองรับระบบ Multi-Theme และปรับปรุงระบบ Visual Feedback
+ */
 const LineStickyButton = () => {
   return (
-    // [LAYOUT NOTE]: ใช้ relative เพื่อให้ Tooltips อ้างอิงตำแหน่งจากปุ่มนี้
-    // ตำแหน่ง Fixed จะถูกจัดการโดย RootLayout เพื่อให้เรียง Layer กับ Toaster ได้ถูกต้อง
     <div className="group relative flex items-center justify-end">
-      {/* 01. CONTEXTUAL STATUS: ระบบแจ้งสถานะ Specialist (Slide Up on Hover) */}
-      <div className="pointer-events-none absolute right-0 bottom-full mb-4 w-max origin-bottom translate-y-2 scale-95 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-        <div className="border-brand-primary/20 flex items-center gap-3 rounded-2xl border bg-[#050505]/90 px-4 py-2 shadow-xl backdrop-blur-md">
+      
+      {/* 01. CONTEXTUAL STATUS: ระบบแจ้งสถานะ Specialist */}
+      <div className="pointer-events-none absolute right-0 bottom-full mb-4 w-max origin-bottom translate-y-2 scale-95 opacity-0 transition-all duration-500 ease-[0.16,1,0.3,1] group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
+        <div className={cn(
+          "flex items-center gap-3 rounded-2xl border px-4 py-2 shadow-2xl backdrop-blur-md",
+          /* [HYBRID]: ปรับจูนพื้นหลัง Tooltip ตามธีมปัจจุบัน */
+          "border-border bg-surface-card/90"
+        )}>
           <span className="relative flex h-2 w-2">
             <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-[0_0_8px_var(--color-brand-primary)]"></span>
+            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
           </span>
-          <p className="font-mono text-[9px] font-black tracking-[0.3em] text-white uppercase">
+          <p className="text-text-primary font-mono text-[9px] font-black tracking-[0.3em] uppercase">
             Specialist_Online
           </p>
         </div>
       </div>
 
-      {/* 02. PRIMARY ACTION NODE: ปุ่ม Line พร้อมฟิสิกส์แอนิเมชัน */}
+      {/* 02. PRIMARY ACTION NODE: ปุ่ม Line */}
       <Link
         href={SITE_CONFIG.links.line}
         target="_blank"
@@ -43,7 +51,7 @@ const LineStickyButton = () => {
         )}
         aria-label="Connect with Specialist via Line"
       >
-        {/* Ambient Pulse: คลื่นความถี่จางๆ สื่อถึงความพร้อมในการให้บริการ */}
+        {/* Ambient Pulse: คลื่นความถี่จางๆ */}
         <span className="absolute inset-0 animate-ping rounded-[1.5rem] bg-[#06C755] opacity-20 duration-1000" />
 
         <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
@@ -52,11 +60,15 @@ const LineStickyButton = () => {
 
         {/* 03. CTA LABEL (Slide Left on Hover) */}
         <div className="pointer-events-none absolute right-full mr-4 hidden items-center md:flex">
-          <span className="translate-x-4 rounded-xl bg-white px-4 py-2 text-[10px] font-black tracking-[0.2em] whitespace-nowrap text-black uppercase opacity-0 shadow-lg transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
+          <span className={cn(
+            "translate-x-4 rounded-xl px-5 py-2.5 text-[10px] font-black tracking-[0.2em] whitespace-nowrap uppercase shadow-xl transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
+            /* [CONTRAST]: ใช้สี Inverted เพื่อให้ป้ายข้อความลอยเด่นในทุกธีม */
+            "bg-text-primary text-surface-main"
+          )}>
             ปรึกษาโปรเจกต์ฟรี
           </span>
           {/* Connector Line */}
-          <div className="h-px w-4 scale-x-0 bg-white/20 transition-all duration-500 group-hover:scale-x-100" />
+          <div className="bg-border h-px w-4 scale-x-0 transition-all duration-500 group-hover:scale-x-100 opacity-50" />
         </div>
       </Link>
     </div>

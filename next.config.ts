@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.0.1 (STABILIZED_PATCH)
+ * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.2.9 (STABILIZED_PATCH)
  * [DNA MANDATE]: Zero-Jitter | Termux Optimized | Vivid Image Optimization | ARM Stability
  * [STRATEGY]: "Atomic Transpilation" & "High-Fidelity Image Support"
  * [MAINTAINER]: AEMDEVWEB Specialist Team
@@ -21,40 +21,28 @@ const withMDX = nextMDX({
 
 // --- 2. MAIN INFRASTRUCTURE CONFIG ---
 const nextConfig: NextConfig = {
-  // [ROUTING]: รองรับ Page Extensions สำหรับระบบ Hybrid (TSX + MDX)
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-
-  // [REACT CORE]: Stability Settings
   reactStrictMode: true,
-
-  // [NOTE]: React Compiler ถูกปิดเป็น Default อยู่แล้วในเวอร์ชั่นนี้
-  // การประกาศใน experimental จะทำให้เกิด Config Error จึงลบออกเพื่อความเสถียร
 
   experimental: {
     scrollRestoration: true,
-
     // [RESOURCE CONTROL]: ปรับจูนให้เข้ากับขีดจำกัดของ CPU บน Android (Zero-Freeze)
     workerThreads: false,
     cpus: 1,
-
-    // [OPTIMIZATION]: ลด Bundle Size โดยเลือก Import เฉพาะส่วนที่ใช้
     optimizePackageImports: ["lucide-react", "framer-motion", "@radix-ui/react-slot"],
-
-    // [COMPILER]: ใช้ JS Compiler แทน Rust เพื่อความเสถียรบนระบบไฟล์ Termux
     mdxRs: false,
   },
 
-  // [TRANSPILATION]: ป้องกัน React Development Properties Mismatch ใน Next.js 16+
   transpilePackages: ["next-mdx-remote", "lucide-react"],
 
   /**
    * [IMAGE_OPTIMIZATION_HUB]: ระบบจัดการรูปภาพ
    */
   images: {
-    // [FIX]: อนุญาตให้ประมวลผลความคมชัดที่ 75 (Default) และ 90 (High-Fidelity)
-    qualities: [75, 90],
+    // [FIXED]: เพิ่ม 85 เพื่อรองรับภาพ Hero และป้องกัน Build Error ใน Next.js 16+
+    qualities: [75, 85, 90],
 
-    // [FORMATS]: รองรับ Next-Gen Formats
+    // [FORMATS]: รองรับ Next-Gen Formats เพื่อคะแนน LCP ที่ดีที่สุด
     formats: ["image/avif", "image/webp"],
 
     // หากรันบน Termux แล้วติดปัญหา Sharp (libvips)
@@ -73,10 +61,9 @@ const nextConfig: NextConfig = {
    * [WEBPACK_ENGINE]: ปรับแต่งให้รองรับ Android File System
    */
   webpack: (config, { dev }) => {
-    // Termux/Android File System Polling Strategy
     if (dev) {
       config.watchOptions = {
-        poll: 1000, // ใช้ระบบ Polling เพื่อความแม่นยำในการตรวจจับไฟล์บน Termux
+        poll: 1000, 
         aggregateTimeout: 300,
         ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
       };
@@ -85,5 +72,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Export Configuration with MDX Wrapper
 export default withMDX(nextConfig);

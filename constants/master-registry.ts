@@ -1,13 +1,14 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.2.0 (THEME_STABILIZED)
- * [STRATEGY]: Psychological Pricing | Pain Point Resolution | Color Psychology
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.3.11 (STABILIZED_FINAL)
+ * [STRATEGY]: Psychological Pricing | Pain Point Resolution | Brand Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { TemplateMasterData } from "@/types";
 
 /**
- * @description คลังข้อมูลบริการหลักที่เชื่อมโยงรูปภาพพรีวิวและการตั้งค่าธีมสี (Theme Configuration)
+ * @description คลังข้อมูลบริการหลักที่ผ่านการ Audit เพื่อความเสถียรของแบรนด์และการทำอันดับ SEO
+ * [RESOLVED]: เพิ่ม Property 'keywords' ครบทุก Node เพื่อแก้ไข Error TS2741
  */
 export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   // --- [01. SALEPAGE: ระบบหน้าเว็บปิดการขาย (HERO PRODUCT)] ---
@@ -23,9 +24,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "เริ่มต้น",
     category: "landing",
     templateSlug: "salepage",
-    // [THEME]: Action Red (กระตุ้นการตัดสินใจ/ความเร่งด่วน)
     theme: {
-      primary: "#ef4444", // Red-500
+      primary: "#ef4444", // Action Red
       secondary: "#b91c1c",
     },
     benefits: [
@@ -56,6 +56,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
         answer: "ได้ทันทีครับ เราติดตั้ง Facebook Pixel และ TikTok Pixel ให้พร้อมใช้งาน",
       },
     ],
+    // [FIXED]: เพิ่ม Keywords ครบถ้วน
+    keywords: ["รับทำ Sale Page", "ทำเซลเพจหน้าเดียว", "ทำหน้าขายของออนไลน์", "ออกแบบ Sale Page ราคาถูก"],
     priority: 1,
     isPopular: true,
   },
@@ -73,9 +75,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "โปรเจกต์",
     category: "business",
     templateSlug: "corporate",
-    // [THEME]: Trust Blue (ความมั่นคง/น่าเชื่อถือ/เป็นทางการ)
     theme: {
-      primary: "#3b82f6", // Blue-500
+      primary: "#3b82f6", // Trust Blue
       secondary: "#1e40af",
     },
     clientTrust: "มาตรฐานที่บริษัทชั้นนำเลือกใช้",
@@ -107,6 +108,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
         answer: "เราดูแลความปลอดภัยเว็บไซต์และ Backup ข้อมูลให้ฟรีตลอด 1 ปีเต็มครับ",
       },
     ],
+    keywords: ["รับทำเว็บไซต์บริษัท", "ออกแบบเว็บไซต์ Corporate", "จ้างทำเว็บธุรกิจ", "Technical SEO Business"],
     priority: 2,
     isFeatured: true,
   },
@@ -124,9 +126,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "เริ่มต้น",
     category: "ecommerce",
     templateSlug: "catalog",
-    // [THEME]: Creative Purple (ความพรีเมียม/ความคิดสร้างสรรค์)
     theme: {
-      primary: "#a855f7", // Purple-500
+      primary: "#a855f7", // Creative Purple
       secondary: "#7e22ce",
     },
     benefits: [
@@ -154,10 +155,10 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     faqs: [
       {
         question: "ลงสินค้าให้ด้วยไหม?",
-        answer:
-          "เราลงข้อมูลเบื้องต้นให้ 20 รายการ พร้อมสอนวิธีลงสินค้าเพิ่มเองแบบจับมือทำครับ",
+        answer: "เราลงข้อมูลเบื้องต้นให้ 20 รายการ พร้อมสอนวิธีลงสินค้าเพิ่มเองแบบจับมือทำครับ",
       },
     ],
+    keywords: ["ทำเว็บแค็ตตาล็อก", "E-Catalog ออนไลน์", "ระบบโชว์สินค้า", "ทำเว็บแสดงสินค้าออนไลน์"],
     priority: 3,
   },
 
@@ -174,9 +175,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "พื้นที่",
     category: "business",
     templateSlug: "local",
-    // [THEME]: Visible Amber (ความโดดเด่น/การมองเห็น/เป็นมิตร)
     theme: {
-      primary: "#f59e0b", // Amber-500
+      primary: "#f59e0b", // Amber
       secondary: "#b45309",
     },
     benefits: [
@@ -199,10 +199,10 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     faqs: [
       {
         question: "นานไหมกว่าจะเห็นผล?",
-        answer:
-          "โดยปกติจะเริ่มเห็นยอดการค้นหาและโทรเข้าเพิ่มขึ้นภายใน 30-60 วันครับ",
+        answer: "โดยปกติจะเริ่มเห็นยอดการค้นหาและโทรเข้าเพิ่มขึ้นภายใน 30-60 วันครับ",
       },
     ],
+    keywords: ["รับทำ Local SEO", "ปักหมุด Google Maps", "ทำ SEO ท้องถิ่น", "โปรโมทร้านค้าใกล้ฉัน"],
     priority: 4,
   },
 
@@ -219,9 +219,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "โปรเจกต์",
     category: "personal",
     templateSlug: "bio",
-    // [THEME]: Personal Cyan (ทันสมัย/Digital/Clean)
     theme: {
-      primary: "#06b6d4", // Cyan-500
+      primary: "#06b6d4", // Cyan
       secondary: "#0e7490",
     },
     benefits: [
@@ -244,10 +243,10 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     faqs: [
       {
         question: "เหมาะกับใครบ้าง?",
-        answer:
-          "เหมาะกับฟรีแลนซ์, ช่างภาพ, ดีไซเนอร์ หรือผู้บริหารที่ต้องการสร้างภาพลักษณ์ครับ",
+        answer: "เหมาะกับฟรีแลนซ์, ช่างภาพ, ดีไซเนอร์ หรือผู้บริหารที่ต้องการสร้างภาพลักษณ์ครับ",
       },
     ],
+    keywords: ["ทำเว็บ Portfolio", "สร้าง Bio Link", "รับทำเว็บส่วนตัว", "Portfolio ออนไลน์"],
     priority: 5,
   },
 ] as const;
@@ -255,7 +254,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
 /**
  * @const FEATURED_SERVICES
  * @description รายการบริการยอดนิยม (Featured/Popular)
- * กรองและเรียงลำดับตาม Priority เพื่อนำไปแสดงผลใน Landing Page
  */
 export const FEATURED_SERVICES = [...MASTER_REGISTRY]
   .filter((svc) => svc.isFeatured || svc.isPopular)

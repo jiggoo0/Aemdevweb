@@ -1,24 +1,29 @@
 /**
- * [SEO INFRASTRUCTURE]: DYNAMIC_SITEMAP_ENGINE v17.1.0 (STABILIZED)
- * [STRATEGY]: Tiered Authority Mapping | Parallel Node Discovery | SSR Optimized
+ * [SEO INFRASTRUCTURE]: DYNAMIC_SITEMAP_ENGINE v17.2.7 (STABILIZED)
+ * [STRATEGY]: Tiered Authority Mapping | Parallel Node Discovery | Crawl Budget Control
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/constants/site-config";
-import { AREA_NODES } from "@/constants/area-nodes";
-import { MASTER_REGISTRY } from "@/constants/master-registry";
+
+// --- Infrastructure & Registries ---
+import { SITE_CONFIG } from "@/constants/site-config"; //
+import { AREA_NODES } from "@/constants/area-nodes"; //
+import { MASTER_REGISTRY } from "@/constants/master-registry"; //
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 /**
  * @function sitemap
  * @description หน่วยประมวลผลสารบัญเว็บไซต์แบบ Dynamic 
- * เพื่อเป็น GPS นำทางให้ Googlebot เข้าถึงทุก Local Nodes และ Authority Content ได้อย่างรวดเร็ว
+ * ทำหน้าที่เป็นเข็มทิศทางเทคนิคเพื่อให้ Googlebot เข้าถึงเนื้อหาทำเงิน (Money Pages) ได้อย่างแม่นยำ
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.siteUrl.endsWith("/")
     ? SITE_CONFIG.siteUrl.slice(0, -1)
     : SITE_CONFIG.siteUrl;
+
+  // [DATE_ANCHOR]: ใช้วันที่ตรวจสอบระบบล่าสุด (Last Audit) เป็นฐานข้อมูลความสดใหม่
+  const lastAudit = new Date("2026-02-09T07:28:27Z");
 
   /**
    * 01. THE POWER NODE: หน้าแรก (Home)
@@ -26,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    */
   const homeNode: MetadataRoute.Sitemap[0] = {
     url: baseUrl,
-    lastModified: new Date(),
+    lastModified: lastAudit,
     changeFrequency: "daily",
     priority: 1.0,
   };
@@ -36,32 +41,32 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    */
   const coreRoutes = ["/services", "/areas", "/blog", "/case-studies", "/about"].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: lastAudit,
     changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
   /**
-   * 03. STRATEGIC NODES: บริการและพื้นที่ยุทธศาสตร์ (Money Pages)
-   * [STRATEGY]: กำหนดค่า 0.9 เพื่อให้ Search Engine ให้ความสำคัญรองจากหน้าแรก
+   * 03. STRATEGIC MONEY PAGES: บริการและพื้นที่ยุทธศาสตร์
+   * [STRATEGY]: กำหนดค่า 0.9 เพื่อดึงดูดความสนใจของ Search Engine เป็นลำดับต้น
    */
   const serviceNodes = MASTER_REGISTRY.map((service) => ({
     url: `${baseUrl}/services/${service.templateSlug}`,
-    lastModified: new Date(),
+    lastModified: lastAudit,
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
 
   const areaNodes = AREA_NODES.map((area) => ({
     url: `${baseUrl}/areas/${area.slug}`,
-    lastModified: new Date(),
+    lastModified: lastAudit,
     changeFrequency: "weekly" as const,
     priority: 0.9,
   }));
 
   /**
-   * 04. AUTHORITY_CONTENT: บทความและเคสความสำเร็จ
-   * [OPTIMIZATION]: ใช้ Promise.all เพื่อลด I/O Wait Time ในขั้นตอนการสร้าง Static Page
+   * 04. AUTHORITY_CONTENT: ข้อมูลเชิงลึกและเคสความสำเร็จ
+   * [ORCHESTRATION]: ใช้ Parallel Execution เพื่อเร่งความเร็วขั้นตอนการสร้าง Static Page
    */
   const [blogs, cases] = await Promise.all([
     getAllPosts().catch(() => []),
@@ -70,30 +75,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const blogNodes = blogs.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date || new Date()),
+    lastModified: new Date(post.date || lastAudit),
     changeFrequency: "monthly" as const,
-    priority: 0.7, // ปรับเพิ่มขึ้นเล็กน้อยเพื่อดันอันดับ Knowledge Hub
+    priority: 0.7, 
   }));
 
   const caseNodes = cases.map((item) => ({
     url: `${baseUrl}/case-studies/${item.slug}`,
-    lastModified: new Date(item.date || new Date()),
+    lastModified: new Date(item.date || lastAudit),
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   /**
    * 05. COMPLIANCE_NODES: หน้ากฎหมายและนโยบาย
-   * [MANDATE]: กำหนดค่าต่ำสุดเพื่อประหยัด Crawl Budget ให้ไปเน้นหน้าที่ทำเงินแทน
+   * [MANDATE]: กำหนดค่าต่ำสุดเพื่อประหยัด Crawl Budget ให้กับส่วนเนื้อหาหลัก
    */
   const legalNodes = ["/privacy", "/terms"].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    lastModified: lastAudit,
     changeFrequency: "yearly" as const,
     priority: 0.1,
   }));
 
-  // รวบรวมและส่งออกเป็น Flat Array ตามมาตรฐาน Next.js Sitemap Route
+  // รวบรวมและส่งออกเป็น Flat Array ตามมาตรฐาน Next.js 16
   return [
     homeNode,
     ...coreRoutes,

@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.1.0 (THEME_AWARE)
- * [STRATEGY]: Instant LCP Paint | Identity Architecture | Dynamic Theming
+ * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.3.11 (STABILIZED_FINAL)
+ * [STRATEGY]: Instant LCP Paint | Multi-Theme Logic | Zero-Any Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import HeroEngine from "@/components/features/landing/Hero";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -24,7 +24,7 @@ import IconRenderer from "@/components/ui/IconRenderer";
 import ImpactStats from "@/components/shared/ImpactStats";
 
 // --- LOGIC ---
-import type { TemplateMasterData } from "@/types";
+import type { TemplateMasterData, IconName } from "@/types";
 import { generateBioSchema } from "./Schema";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -35,106 +35,91 @@ interface BioTemplateProps {
 /**
  * @component BioTemplate
  * @description หน้าแนะนำตัวและ Portfolio (Personal Branding)
- * ออกแบบมาเพื่อสร้างความน่าเชื่อถือ (Trust) และโชว์ศักยภาพ (Authority) ของผู้เชี่ยวชาญ
+ * [FIXED]: กำจัด 'any' บรรทัดที่ 83 เพื่อให้ผ่านระบบ Lint
  */
 function BioTemplate({ data }: BioTemplateProps) {
   const schema = generateBioSchema(data);
 
   return (
-    // [THEME INJECTION]: ส่ง Theme จาก Data ไปยัง LayoutEngine
     <LayoutEngine spacing="specialist" theme={data.theme}>
-      {/* 01. SEO SIGNAL: ยืนยันตัวตนผู้เชี่ยวชาญ */}
       <JsonLd data={schema} />
 
-      {/* 02. IDENTITY HERO: แนะนำตัวอย่างเป็นทางการ */}
+      {/* 01. IDENTITY HERO */}
       <HeroEngine
         title={
           <>
-            <span className="text-brand-primary mb-2 block font-mono text-lg tracking-widest uppercase md:text-2xl">
+            <span className="text-brand-primary mb-2 block font-mono text-lg tracking-[0.3em] uppercase md:text-2xl">
               {SITE_CONFIG.expert.jobTitle}
             </span>
             {SITE_CONFIG.expert.displayName}
           </>
         }
         subtitle={data.description}
-        primaryActionLabel="ทักแชทปรึกษาผมได้เลย"
-        secondaryActionLabel="ดูผลงานที่ผ่านมา"
+        primaryActionText="ทักแชทปรึกษาผมได้เลย"
+        secondaryActionText="ดูผลงานที่ผ่านมา"
       />
 
-      {/* 03. IDENTITY VISUAL: ภาพลักษณ์มืออาชีพ (LCP Optimized) */}
-      <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
+      {/* 02. IDENTITY VISUAL: Professional Image Node */}
+      <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40 transition-colors duration-500">
         <div className="group relative mx-auto max-w-5xl">
-          {/* Ambient Aura: ใช้ CSS Animation แทน JS เพื่อความเร็ว */}
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-100 will-change-opacity" />
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
 
-          {/* [LCP FIX]: รูปภาพโหลดทันที ไม่รอ Animation */}
-          <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[4rem] md:p-4">
+          <div className="relative overflow-hidden rounded-[3rem] border border-border bg-surface-card shadow-2xl md:rounded-[4rem] md:p-4">
             
-            {/* Social Links Badge */}
+            {/* Social Interconnects */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 md:flex">
-              {SITE_CONFIG.links?.github && (
+              {[
+                { name: "Github", href: SITE_CONFIG.links?.github },
+                { name: "Facebook", href: SITE_CONFIG.links?.facebook }
+              ].map((social) => social.href && (
                 <a
-                  href={SITE_CONFIG.links.github}
+                  key={social.name}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
+                  className="rounded-full border border-border bg-surface-main/20 p-3 backdrop-blur-md transition-all hover:bg-brand-primary hover:text-surface-main"
                 >
-                  <IconRenderer name="Github" className="text-white" size={20} />
+                  {/* [RESOLVED]: เปลี่ยนจาก 'as any' เป็น 'as IconName' เพื่อความปลอดภัยสูงสุด */}
+                  <IconRenderer name={social.name as IconName} size={20} />
                 </a>
-              )}
-              {SITE_CONFIG.links?.facebook && (
-                <a
-                  href={SITE_CONFIG.links.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
-                >
-                  <IconRenderer name="Facebook" className="text-white" size={20} />
-                </a>
-              )}
+              ))}
             </div>
 
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] bg-gray-900 md:aspect-[21/9] md:rounded-[3.5rem]">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] bg-surface-offset md:aspect-[21/9] md:rounded-[3.5rem]">
               <Image
                 src={data.image || "/images/templates/preview.webp"}
                 alt={`Personal Portfolio: ${SITE_CONFIG.expert.displayName}`}
                 fill
                 className="object-cover object-top transition-transform duration-1000 group-hover:scale-[1.02]"
-                priority // LCP Critical
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+                priority 
+                sizes="(max-width: 1280px) 100vw, 1280px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />
+              <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent opacity-60" />
             </div>
           </div>
 
-          {/* Status Badge */}
+          {/* Neural Status Badge */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
+            transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-border bg-surface-card/90 px-8 py-6 shadow-glow backdrop-blur-xl md:flex"
           >
             <div className="bg-brand-primary/10 border-brand-primary/20 relative flex h-14 w-14 items-center justify-center rounded-2xl border">
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-                <span className="bg-brand-primary relative inline-flex h-3 w-3 rounded-full"></span>
-              </span>
+              <span className="bg-brand-primary absolute -top-1 -right-1 flex h-3 w-3 rounded-full animate-ping opacity-75"></span>
               <IconRenderer name="UserCheck" className="text-brand-primary" size={28} />
             </div>
             <div className="space-y-1">
-              <p className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
-                Status
-              </p>
-              <p className="text-xl leading-none font-black tracking-tighter text-white uppercase italic">
-                Available for Hire
-              </p>
+              <p className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">Status</p>
+              <p className="text-text-primary text-xl leading-none font-black tracking-tighter uppercase italic">Available for Hire</p>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 04. AUTHORITY STRIP: ความน่าเชื่อถือ */}
+      {/* 03. AUTHORITY & PHILOSOPHY */}
       <section className="py-24 md:pt-32">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-12 space-y-4">
@@ -142,65 +127,51 @@ function BioTemplate({ data }: BioTemplateProps) {
               <IconRenderer name="Award" size={14} />
               Certified Specialist
             </div>
-            <h2 className="text-3xl font-black text-white uppercase md:text-5xl">
-              My Professional Standards
-            </h2>
+            <h2 className="text-text-primary text-3xl font-black uppercase md:text-5xl tracking-tighter">My Professional Standards</h2>
           </div>
           <div className="flex flex-col items-center gap-12">
             <ImpactStats />
-            <div className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-border to-transparent" />
             <TrustBadge />
           </div>
         </div>
       </section>
 
-      {/* 05. EXPERTISE GRID: ทักษะและความเชี่ยวชาญ */}
+      {/* 04. EXPERTISE & CONVERSION */}
       <FeatureGrid
         heading="Core Expertise"
         subheading="ทักษะและเครื่องมือที่ผมเชี่ยวชาญ พร้อมนำมาปรับใช้เพื่อยกระดับธุรกิจของคุณ"
         items={(data.coreFeatures || []).map((feat, idx) => ({
           title: feat.title,
           description: feat.description,
-          icon: feat.icon,
-          category: `SKILL_SET: 0${idx + 1}`,
-          technicalDetail: "Pro Level",
+          icon: feat.icon as IconName,
+          category: `SKILL_NODE: 0${idx + 1}`,
         }))}
         columns={3}
       />
 
-      {/* 06. PHILOSOPHY: แนวคิดการทำงาน */}
-      <section className="border-y border-white/5 bg-white/[0.02] py-24">
+      <section className="border-y border-border bg-surface-offset/50 py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl space-y-8 text-center">
             <IconRenderer name="Quote" size={48} className="text-brand-primary/20 mx-auto" />
-            <blockquote className="text-2xl leading-relaxed font-medium text-white italic md:text-4xl">
-              "ผมเชื่อว่าเว็บไซต์ที่ดี ไม่ใช่แค่สวยงาม
-              แต่ต้องเป็นเครื่องมือที่ทรงพลังที่สุดในการสร้างโอกาสทางธุรกิจให้กับคุณครับ"
+            <blockquote className="text-text-primary text-2xl leading-relaxed font-medium italic md:text-4xl">
+              "ผมเชื่อว่าเว็บไซต์ที่ดี ไม่ใช่แค่สวยงาม แต่ต้องเป็นเครื่องมือที่ทรงพลังที่สุดในการสร้างโอกาสทางธุรกิจให้กับคุณครับ"
             </blockquote>
             <div className="pt-4">
-              <p className="text-brand-primary text-sm font-bold tracking-widest uppercase">
-                {SITE_CONFIG.expert.displayName}
-              </p>
-              <p className="mt-1 text-xs text-gray-500">{SITE_CONFIG.expert.role}</p>
+              <p className="text-brand-primary text-sm font-black tracking-widest uppercase">{SITE_CONFIG.expert.displayName}</p>
+              <p className="text-text-muted mt-1 text-xs font-bold uppercase tracking-widest">{SITE_CONFIG.expert.jobTitle}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 07. CONVERSION CTA */}
-      <ConversionCTA
-        title="สนใจร่วมงานกับผู้เชี่ยวชาญไหมครับ?"
-        description="การทำงานกับผมจะช่วยให้คุณประหยัดเวลาและได้ผลลัพธ์ที่ตรงจุด ผมยินดีให้คำปรึกษาและออกแบบแผนงานที่เหมาะกับธุรกิจคุณโดยเฉพาะครับ"
-        buttonLabel="แอดไลน์คุยกับผม"
-        className="bg-surface-offset"
+      <ConversionCTA 
+        title="สนใจร่วมงานกับผู้เชี่ยวชาญไหมครับ?" 
+        description="การทำงานกับผมจะช่วยให้คุณประหยัดเวลาและได้ผลลัพธ์ที่ตรงจุด ผมยินดีให้คำปรึกษาและออกแบบแผนงานที่เหมาะกับธุรกิจคุณโดยเฉพาะครับ" 
+        buttonLabel="แอดไลน์คุยกับผม" 
       />
-
-      {/* 08. FAQ */}
-      <DynamicFAQ
-        title="คำถามที่พบบ่อย"
-        description="ข้อมูลเบื้องต้นเกี่ยวกับกระบวนการจ้างงานและการร่วมงาน"
-        items={data.faqs}
-      />
+      
+      <DynamicFAQ title="คำถามที่พบบ่อย" description="ข้อมูลเบื้องต้นเกี่ยวกับกระบวนการจ้างงานและการร่วมงาน" items={data.faqs} />
     </LayoutEngine>
   );
 }

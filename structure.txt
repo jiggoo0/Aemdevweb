@@ -21,12 +21,9 @@
 │   │   │   │   └── page.tsx
 │   │   │   └── page.tsx
 │   │   ├── layout.tsx
-│   │   ├── services
-│   │   │   ├── [slug]
-│   │   │   │   └── page.tsx
-│   │   │   └── page.tsx
-│   │   └── test-mdx
-│   │       ├── content.mdx
+│   │   └── services
+│   │       ├── [slug]
+│   │       │   └── page.tsx
 │   │       └── page.tsx
 │   ├── about
 │   │   └── page.tsx
@@ -65,6 +62,8 @@
 │   │   ├── Navbar.tsx
 │   │   ├── PageTransition.tsx
 │   │   └── TopLoader.tsx
+│   ├── providers
+│   │   └── theme-provider.tsx
 │   ├── seo
 │   │   └── JsonLd.tsx
 │   ├── shared
@@ -83,8 +82,8 @@
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
 │   │   ├── local
-│   │   │   ├── Index.tsx
-│   │   │   └── Schema.ts
+│   │   │   ├── Schema.ts
+│   │   │   └── index.tsx
 │   │   ├── salepage
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
@@ -96,6 +95,7 @@
 │   └── ui
 │       ├── IconRenderer.tsx
 │       ├── SkeletonCard.tsx
+│       ├── ThemeToggle.tsx
 │       ├── button.tsx
 │       ├── skeleton-grid.tsx
 │       ├── skeleton.tsx
@@ -118,6 +118,7 @@
 │   │   ├── core-web-vitals-speed.mdx
 │   │   ├── ecommerce-conversion-seo.mdx
 │   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── lower-north-digital-transformation.mdx
 │   │   ├── seo-2026-strategy.mdx
 │   │   ├── technical-audit-protocol.mdx
 │   │   └── technical-seo-guide.mdx

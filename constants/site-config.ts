@@ -55,7 +55,7 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
   project: {
-    title: "Premium Web Design & SEO Expert Hub",
+    title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
     version: "17.2.1", // [UPDATED]: Synced with Typo Fix
     framework: "Next.js 16.1 (Latest Stable)",

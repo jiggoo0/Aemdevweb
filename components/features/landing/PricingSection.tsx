@@ -1,21 +1,18 @@
 /**
- * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v17.0.2 (MIDNIGHT_EDITION)
- * [STRATEGY]: Symmetric Balance | High-Contrast Conversion | Neural Physics
+ * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v17.3.9 (HYBRID_STABILIZED)
+ * [STRATEGY]: Symmetric Balance | Multi-Theme Orchestration | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-// 1. System/Library
 import React, { memo } from "react";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 
-// 2. Constants & Utilities
+// --- 1. Infrastructure & UI ---
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-
-// 3. UI Components
 import IconRenderer from "@/components/ui/IconRenderer";
 
 // --- Data Structure ---
@@ -34,8 +31,7 @@ const PRICING_PLANS: readonly PricingPlan[] = [
   {
     id: "plan-standard",
     name: "Standard Foundation",
-    description:
-      "วางรากฐานเว็บไซต์ให้มั่นคง ดูเป็นมืออาชีพ เพื่อเริ่มต้นสร้างความเชื่อมั่นบนโลกออนไลน์",
+    description: "วางรากฐานเว็บไซต์ให้มั่นคง ดูเป็นมืออาชีพ เพื่อเริ่มต้นสร้างความเชื่อมั่นบนโลกออนไลน์",
     price: "15,900",
     unit: "/ Project",
     features: [
@@ -83,15 +79,12 @@ const PRICING_PLANS: readonly PricingPlan[] = [
 ] as const;
 
 const PricingSection = () => {
-  // [PHYSICS]: ตั้งค่าแอนิเมชัน (Neural Flow)
+  /* [PHYSICS]: Neural Flow Configuration */
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   };
 
@@ -101,16 +94,12 @@ const PricingSection = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 50,
-        damping: 20,
-      },
+      transition: { type: "spring", stiffness: 50, damping: 20 },
     },
   };
 
   return (
-    <section id="pricing" className="relative w-full overflow-hidden">
+    <section id="pricing" className="relative w-full overflow-hidden bg-surface-main transition-colors duration-500">
       {/* 01. VALUE PROPOSITION: Header */}
       <div className="mb-20 max-w-4xl md:mb-28">
         <motion.div
@@ -121,24 +110,24 @@ const PricingSection = () => {
         >
           <span className="relative flex h-2 w-2">
             <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full"></span>
+            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
           </span>
           <span className="text-brand-primary font-mono text-[10px] font-bold tracking-[0.3em] uppercase">
             Investment_Logic.v2
           </span>
         </motion.div>
 
-        <h2 className="text-5xl font-black tracking-tighter text-balance text-white uppercase md:text-7xl lg:text-8xl">
+        <h2 className="text-text-primary text-5xl font-black tracking-tighter text-balance uppercase md:text-7xl lg:text-8xl">
           Value-Driven <br />
-          <span className="from-brand-primary bg-gradient-to-r to-emerald-400 bg-clip-text text-transparent">
+          <span className="from-brand-primary bg-gradient-to-r to-emerald-500 bg-clip-text text-transparent">
             Investment.
           </span>
         </h2>
 
         <div className="border-brand-primary/50 mt-8 border-l-4 pl-6 md:pl-8">
-          <p className="max-w-2xl text-lg leading-relaxed font-medium text-gray-400 md:text-2xl">
+          <p className="text-text-secondary max-w-2xl text-lg leading-relaxed font-medium md:text-2xl">
             งบประมาณที่โปร่งใส คือ{" "}
-            <span className="decoration-brand-primary text-white underline decoration-2 underline-offset-4">
+            <span className="decoration-brand-primary text-text-primary underline decoration-2 underline-offset-4">
               ความจริงใจ
             </span>{" "}
             ที่เราพร้อมเปลี่ยนทุกการลงทุนให้เป็นระบบทำเงินที่วัดผลได้จริง
@@ -160,99 +149,96 @@ const PricingSection = () => {
             variants={cardVariants}
             className={cn(
               "group relative flex flex-col justify-between overflow-hidden rounded-[2rem] border p-8 transition-all duration-500 md:p-10",
+              /* [HYBRID THEME]: ปรับจูนพื้นหลังและการ์ดตามโหมด */
               plan.highlight
-                ? "border-brand-primary bg-brand-primary/[0.03] z-10 shadow-[0_0_50px_-12px_rgba(34,197,94,0.15)] lg:scale-110 lg:py-12"
-                : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04]",
+                ? "border-brand-primary bg-brand-primary/[0.03] z-10 shadow-glow lg:scale-110 lg:py-12"
+                : "border-border bg-surface-card hover:border-brand-primary/30 hover:bg-surface-offset/50",
             )}
           >
-            {/* Background Glow for Highlight */}
+            {/* Dynamic Glow Overlay */}
             {plan.highlight && (
-              <div className="bg-brand-primary/20 absolute -top-20 -right-20 h-40 w-40 rounded-full blur-[80px]" />
+              <div className="bg-brand-primary/10 absolute -top-20 -right-20 h-40 w-40 rounded-full blur-[80px] opacity-[var(--ambient-opacity)]" />
             )}
 
             <div>
-              {/* Header */}
+              {/* Header Node */}
               <div className="mb-8 flex items-start justify-between">
                 <div>
-                  <h3
-                    className={cn(
-                      "text-2xl font-black tracking-tight uppercase md:text-3xl",
-                      plan.highlight ? "text-white" : "text-gray-200",
-                    )}
-                  >
+                  <h3 className={cn(
+                    "text-2xl font-black tracking-tight uppercase md:text-3xl",
+                    "text-text-primary"
+                  )}>
                     {plan.name}
                   </h3>
                   {plan.highlight && (
-                    <span className="bg-brand-primary mt-2 inline-block rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wider text-black uppercase">
+                    <span className="bg-brand-primary mt-2 inline-block rounded-md px-2 py-0.5 text-[10px] font-bold tracking-wider text-surface-main uppercase">
                       Recommended
                     </span>
                   )}
                 </div>
                 <IconRenderer
                   name={plan.highlight ? "Zap" : "Layers"}
-                  className={cn("h-6 w-6", plan.highlight ? "text-brand-primary" : "text-gray-600")}
+                  className={cn("h-6 w-6 transition-colors duration-500", plan.highlight ? "text-brand-primary" : "text-text-muted")}
                 />
               </div>
 
-              {/* Price */}
-              <div className="mb-8 border-b border-white/5 pb-8">
+              {/* Price Node */}
+              <div className="border-border mb-8 border-b pb-8">
                 <div className="flex items-baseline gap-1">
-                  <span
-                    className={cn(
-                      "text-4xl font-black tracking-tighter md:text-5xl",
-                      plan.highlight ? "text-brand-primary" : "text-white",
-                    )}
-                  >
+                  <span className={cn(
+                    "text-4xl font-black tracking-tighter md:text-5xl",
+                    plan.highlight ? "text-brand-primary" : "text-text-primary"
+                  )}>
                     {plan.price !== "Custom" ? `฿${plan.price}` : plan.price}
                   </span>
                   {plan.unit && (
-                    <span className="font-mono text-xs font-medium text-gray-500">{plan.unit}</span>
+                    <span className="text-text-muted font-mono text-xs font-medium">{plan.unit}</span>
                   )}
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-gray-400">{plan.description}</p>
+                <p className="text-text-secondary mt-4 text-sm leading-relaxed">{plan.description}</p>
               </div>
 
-              {/* Features */}
+              {/* Features List */}
               <ul className="mb-10 space-y-4">
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <IconRenderer
-                      name="Check"
-                      className={cn(
-                        "mt-0.5 h-4 w-4 shrink-0",
-                        plan.highlight ? "text-brand-primary" : "text-gray-600",
-                      )}
-                    />
-                    <span className="text-sm font-medium text-gray-300">{feature}</span>
+                    <div className={cn(
+                      "mt-0.5 rounded-full p-0.5",
+                      plan.highlight ? "text-brand-primary" : "text-text-muted"
+                    )}>
+                      <IconRenderer name="Check" size={14} strokeWidth={3} />
+                    </div>
+                    <span className="text-text-secondary text-sm font-medium">{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Interaction Hub */}
             <Link
               href={SITE_CONFIG.links.line}
               className={cn(
                 "group/btn relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl py-4 text-xs font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98]",
                 plan.highlight
-                  ? "bg-brand-primary hover:bg-brand-primary/90 hover:shadow-brand-primary/20 text-black shadow-lg"
-                  : "bg-white text-black hover:bg-gray-200",
+                  ? "bg-brand-primary text-surface-main hover:shadow-glow shadow-lg"
+                  : "bg-text-primary text-surface-main hover:bg-brand-primary hover:text-surface-main shadow-md",
               )}
             >
-              <span>{plan.cta}</span>
+              <span className="relative z-10">{plan.cta}</span>
               <IconRenderer
                 name="ArrowRight"
                 size={14}
-                className="transition-transform group-hover/btn:translate-x-1"
+                className="relative z-10 transition-transform group-hover/btn:translate-x-1"
               />
+              <div className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 group-hover/btn:translate-x-full" />
             </Link>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* 03. FOOTER NOTE */}
+      {/* 03. SYSTEM FOOTNOTE */}
       <div className="mt-16 text-center md:mt-24">
-        <p className="text-xs font-medium text-gray-500">
+        <p className="text-text-muted text-[10px] font-bold tracking-widest uppercase">
           * ราคาทั้งหมดเป็นราคาเริ่มต้นและยังไม่รวม VAT 7% • ดูแลความปลอดภัยฟรี 1 ปีเต็ม
         </p>
       </div>

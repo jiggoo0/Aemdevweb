@@ -1,8 +1,10 @@
 /**
- * [FEATURE COMPONENT]: AREA_CARD_NODE v17.0.3 (PERFORMANCE_OPTIMIZED)
- * [STRATEGY]: Vivid Visual Presence | Audit-Friendly LCP | Neural Interaction
+ * [FEATURE COMPONENT]: AREA_CARD_NODE v17.2.9 (STABILIZED_HYDRATION)
+ * [STRATEGY]: Vivid Visual Presence | Deterministic Quality | Neural Interaction
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
+
+"use client";
 
 import React, { memo } from "react";
 import Link from "next/link";
@@ -20,13 +22,11 @@ interface AreaCardProps {
 /**
  * @component AreaCard
  * @description โหนดแสดงผลพื้นที่ให้บริการ ออกแบบมาเพื่อสร้าง Local Authority ระดับพรีเมียม
- * [RECTIFIED]: ปรับปรุงการโหลดรูปภาพตามผล Audit เพื่อลดภาระ Network
+ * [STABILIZED]: บังคับค่า Quality ให้ตรงกันเพื่อป้องกัน Hydration Mismatch
  */
 const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
-  // Defensive Check: จัดการ districts ให้ปลอดภัยจากการเป็น undefined หรือ readonly
+  // Defensive Check: จัดการข้อมูลกึ่งโครงสร้างให้ปลอดภัย
   const districts = Array.isArray(data.districts) ? [...data.districts] : [];
-
-  // Fallback Logic: ลำดับความสำคัญของชื่อที่จะแสดงผล
   const displayTitle = data.name || data.province;
 
   return (
@@ -36,10 +36,10 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         "group relative flex min-h-[480px] flex-col overflow-hidden rounded-[2.5rem] transition-all duration-500 ease-out",
         "border border-white/10 bg-[#050505]",
         "hover:border-brand-primary/50 hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)]",
-        className,
+        className
       )}
     >
-      {/* 01. ATMOSPHERIC IMAGE LAYER */}
+      {/* 01. ATMOSPHERIC IMAGE LAYER (GPU Accelerated) */}
       <div className="absolute inset-0 z-0 overflow-hidden select-none">
         <div className="relative h-full w-full">
           <Image
@@ -48,22 +48,23 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             fill
             className="object-cover opacity-60 transition-transform duration-[1.2s] group-hover:scale-110 group-hover:opacity-40"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            // [AUDIT FIX]: ลดจาก index < 4 เหลือ index < 2 เพื่อแก้ปัญหา Over-preloading
-            // โหลดเฉพาะรูปที่อยู่ในหน้าจอแรก (Above the fold) จริงๆ เท่านั้น
+            // [LCP FIX]: โหลดเฉพาะ 2 ใบแรกที่เป็น Priority
             priority={index < 2}
+            // [HYDRATION FIX]: บังคับค่าให้ตรงกับ next.config.ts เพื่อป้องกัน Error
+            quality={85}
           />
 
-          {/* Neural Scrim: ไล่เฉดสีเพื่อให้เนื้อหาคมชัด */}
+          {/* Neural Scrim: ปรับ Contrast เพื่อ Legibility */}
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-black via-black/90 to-black/20" />
 
-          {/* Grid Texture Overlay */}
+          {/* Infrastructure Grid Texture */}
           <div className="absolute inset-0 z-20 bg-[url('/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
         </div>
       </div>
 
       {/* 02. CONTENT ARCHITECTURE */}
       <div className="relative z-20 flex h-full flex-col justify-between p-8">
-        {/* Top Section: Marker Identity */}
+        {/* Top: Marker Identity */}
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
             <div className="text-brand-primary group-hover:bg-brand-primary flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 group-hover:rotate-12 group-hover:text-black group-hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]">
@@ -80,7 +81,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           </div>
         </div>
 
-        {/* Bottom Section: Narrative & Metadata */}
+        {/* Bottom: Strategic Narrative */}
         <div className="space-y-6">
           <div className="space-y-2">
             <h3 className="group-hover:text-brand-primary text-4xl font-black tracking-tighter text-white uppercase transition-colors duration-300 md:text-5xl">
@@ -90,8 +91,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           </div>
 
           <p className="line-clamp-2 text-sm leading-relaxed font-medium text-gray-400 italic">
-            {data.description ||
-              `ยกระดับธุรกิจใน ${displayTitle} ด้วยเว็บไซต์มาตรฐานสากลและกลยุทธ์ SEO`}
+            {data.description || `ยกระดับธุรกิจใน ${displayTitle} ด้วยเว็บไซต์มาตรฐานสากล`}
           </p>
 
           {/* District Micro-tags */}
@@ -113,7 +113,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             </div>
           )}
 
-          {/* Interaction Trigger */}
+          {/* Interaction Gateway */}
           <div className="flex items-center justify-between border-t border-white/10 pt-4">
             <span className="group-hover:text-brand-primary font-mono text-[9px] font-bold tracking-[0.3em] text-white/50 uppercase transition-colors">
               Access_Authority

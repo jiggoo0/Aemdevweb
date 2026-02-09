@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: CORPORATE_ORCHESTRATOR v17.0.2 (LINT_FIXED)
+ * [TEMPLATE COMPONENT]: CORPORATE_ORCHESTRATOR v17.3.10 (STABILIZED)
  * [STRATEGY]: Organizational Authority | Enterprise Visualization | High-Fidelity Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,9 +10,9 @@ import React, { memo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-// --- INFRASTRUCTURE ---
+// --- INFRASTRUCTURE (FIXED: ปรับ Path ให้ตรงตามตำแหน่งจริงใน /sections) ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import HeroEngine from "@/components/features/landing/Hero";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -40,63 +40,65 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
   const schema = generateCorporateSchema(data);
 
   return (
-    <LayoutEngine spacing="specialist">
+    <LayoutEngine spacing="specialist" theme={data.theme}>
       {/* 01. SEO SIGNAL: ยืนยันตัวตนระดับองค์กร */}
       <JsonLd data={schema} />
 
-      {/* 02. HERO GATEWAY: วิสัยทัศน์ดิจิทัล */}
+      {/* 02. HERO GATEWAY: วิสัยทัศน์ดิจิทัล [RESOLVED]: ปรับใช้ Prop ให้ตรงกับ HeroProps Interface */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
-        primaryActionLabel="ทักแชทปรึกษาแผนงาน Enterprise"
-        secondaryActionLabel="ดูมาตรฐาน Security"
+        primaryActionText="ทักแชทปรึกษาแผนงาน Enterprise"
+        secondaryActionText="ดูมาตรฐาน Security"
       />
 
       {/* 03. VISUAL ARCHITECTURE: โครงสร้างระบบ (LCP Optimized) */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
         <div className="group relative mx-auto max-w-7xl">
-          {/* Ambient Light: CSS Animation */}
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-40 blur-[100px] transition-opacity duration-1000 group-hover:opacity-60 will-change-opacity" />
+          {/* Ambient Light Physics */}
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)] will-change-opacity" />
 
-          {/* [LCP FIX]: รูปภาพโหลดทันที */}
-          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[4rem] md:p-4">
-            {/* Security Badge Overlay */}
+          {/* [LCP]: High-Fidelity Interface Container */}
+          <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-surface-main shadow-2xl md:rounded-[4rem] md:p-4">
+            
+            {/* Security Status Indicator */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border border-green-500/20 bg-green-950/30 px-4 py-1.5 backdrop-blur-md md:flex">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
               <span className="text-[10px] font-bold tracking-widest text-green-500 uppercase">
                 System Secure
               </span>
             </div>
 
-            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[2rem] bg-gray-900 md:rounded-[3rem]">
+            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[2rem] bg-surface-offset md:rounded-[3rem]">
               <Image
                 src={data.image || "/images/templates/preview.webp"}
-                alt={`โครงสร้างระบบเว็บไซต์องค์กร: ${data.title}`}
+                alt={`Enterprise System Architecture: ${data.title}`}
                 fill
                 className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-50" />
+              <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05] pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface-main via-transparent to-transparent opacity-60" />
             </div>
           </div>
 
-          {/* Enterprise Status Badge: Animation แยก */}
+          {/* Enterprise Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="absolute -bottom-8 left-8 z-20 hidden items-center gap-4 rounded-[2rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
+            transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute -bottom-8 left-8 z-20 hidden items-center gap-4 rounded-[2rem] border border-border bg-surface-card/90 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
           >
             <div className="bg-brand-primary/10 border-brand-primary/20 flex h-12 w-12 items-center justify-center rounded-xl border">
               <IconRenderer name="ShieldCheck" className="text-brand-primary" size={24} />
             </div>
             <div>
-              <span className="block text-[10px] font-black tracking-[0.3em] text-gray-500 uppercase">
+              <span className="text-text-muted block text-[10px] font-black tracking-[0.3em] uppercase opacity-60">
                 Enterprise Grade
               </span>
-              <span className="text-xl font-black tracking-tighter text-white uppercase italic">
+              <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
                 High Availability
               </span>
             </div>
@@ -109,16 +111,16 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-16 text-center">
             <header className="space-y-4">
-              <span className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase">
+              <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-bold tracking-widest uppercase">
                 <IconRenderer name="Database" size={14} />
                 Infrastructure Reliability
-              </span>
-              <h2 className="text-3xl font-black text-white uppercase md:text-5xl">
+              </div>
+              <h2 className="text-text-primary text-3xl font-black uppercase md:text-5xl tracking-tighter">
                 {data.clientTrust || "Trusted by Leading Organizations"}
               </h2>
             </header>
             <ImpactStats />
-            <div className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-border to-transparent" />
             <TrustBadge />
           </div>
         </div>
@@ -128,28 +130,26 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
       <FeatureGrid
         heading="Enterprise Solutions"
         subheading="โครงสร้างระบบที่ถูกออกแบบมาเพื่อรองรับการขยายตัว (Scalability) และความปลอดภัย (Security) สูงสุด"
-        // [FIX]: ลบ idx ออกเนื่องจากไม่ได้ใช้งาน (Fix unused-vars warning)
         items={(data.coreFeatures || []).map((feat) => ({
           title: feat.title,
           description: feat.description,
           icon: feat.icon,
           category: "System Module",
-          technicalDetail: "SLA 99.9% Guarantee",
         }))}
         columns={2}
       />
 
-      {/* 06. SECURITY LAYER: ความปลอดภัยข้อมูล */}
-      <article className="border-y border-white/5 bg-white/[0.02] py-24">
+      {/* 06. SECURITY LAYER: ความปลอดภัยข้อมูล (PDPA Ready) */}
+      <article className="border-y border-border bg-surface-offset/30 py-24">
         <div className="container mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
               <header>
-                <h3 className="text-3xl font-bold text-white uppercase md:text-4xl">
+                <h3 className="text-text-primary text-3xl font-black uppercase md:text-4xl tracking-tight italic">
                   Data Security & Compliance
                 </h3>
               </header>
-              <p className="text-lg leading-relaxed text-gray-400">
+              <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-90">
                 เราให้ความสำคัญสูงสุดกับการปกป้องข้อมูลองค์กร ด้วยมาตรฐานความปลอดภัยระดับสากล
                 และการปฏิบัติตามกฎหมาย PDPA อย่างเคร่งครัด
               </p>
@@ -160,7 +160,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
                   "DDoS Protection Layer",
                   "Automated Daily Backups",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-300">
+                  <li key={i} className="flex items-center gap-3 text-text-secondary font-bold italic">
                     <IconRenderer name="CheckCircle" className="text-brand-primary" size={18} />
                     {item}
                   </li>
@@ -170,13 +170,14 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
 
             {/* Visual Representation of Security */}
             <div className="relative mx-auto aspect-square w-full max-w-md lg:ml-auto">
-              <div className="bg-brand-primary/5 absolute inset-0 rounded-full blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
-              <div className="relative flex h-full w-full items-center justify-center rounded-3xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm">
-                <IconRenderer name="Shield" size={120} className="text-brand-primary/20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-brand-primary font-mono text-xs font-bold tracking-widest animate-pulse">
-                    SECURE::ENCRYPTED
+              <div className="bg-brand-primary/10 absolute inset-0 rounded-full blur-3xl animate-pulse" />
+              <div className="relative flex h-full w-full items-center justify-center rounded-3xl border border-border bg-surface-card/40 p-8 backdrop-blur-sm shadow-glow">
+                <IconRenderer name="Shield" size={120} className="text-brand-primary opacity-20" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                  <span className="text-brand-primary font-mono text-[10px] font-black tracking-widest animate-pulse uppercase">
+                    Secure_Node_Active
                   </span>
+                  <div className="bg-brand-primary h-1 w-20 rounded-full opacity-30" />
                 </div>
               </div>
             </div>
@@ -184,17 +185,17 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </article>
 
-      {/* 07. CALL TO ACTION */}
+      {/* 07. CALL TO ACTION: Enterprise Decision Point */}
       <ConversionCTA
         title="พร้อมยกระดับโครงสร้างดิจิทัลขององค์กรหรือยังครับ?"
         description="ทีมผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและออกแบบระบบที่ตอบโจทย์วิสัยทัศน์ขององค์กรคุณอย่างตรงจุด"
         buttonLabel="นัดปรึกษาแผนงาน Enterprise"
       />
 
-      {/* 08. FAQ */}
+      {/* 08. FAQ: SLA & Support Protocols */}
       <DynamicFAQ
         title="คำถามที่พบบ่อยสำหรับองค์กร"
-        description="ข้อมูลด้านมาตรฐาน SLA และการซัพพอร์ต"
+        description="ข้อมูลด้านมาตรฐาน SLA และการซัพพอร์ตระดับ Specialist"
         items={data.faqs}
       />
     </LayoutEngine>

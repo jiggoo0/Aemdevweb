@@ -1,6 +1,6 @@
 /**
- * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.0.2 (PERFORMANCE_TUNED)
- * [STRATEGY]: Intelligence Module Grid | Optical Balance | GPU Accelerated
+ * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.3.9 (HYBRID_STABILIZED)
+ * [STRATEGY]: Intelligence Module Grid | Theme-Aware Depth | GPU Accelerated
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -10,6 +10,7 @@ import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 /* --- 1. Infrastructure & Types --- */
 export interface FeatureItem {
@@ -22,7 +23,6 @@ export interface FeatureItem {
 
 interface FeatureGridProps {
   readonly items: readonly FeatureItem[];
-  // [OPTIMIZATION]: รองรับ ReactNode เพื่อให้ใส่ HTML/Components ย่อยได้
   readonly heading?: string | React.ReactNode;
   readonly subheading?: string | React.ReactNode;
   readonly columns?: 2 | 3 | 4;
@@ -31,8 +31,8 @@ interface FeatureGridProps {
 
 /**
  * @component FeatureGrid
- * @description หน่วยประมวลผลโหนดข้อมูล (Grid System) ที่จูนมาเพื่อสร้าง Authority ให้กับเนื้อหา
- * เน้นการแสดงผลแบบ Card ที่มีมิติ (Depth) และ Interaction ที่ตอบสนองต่อผู้ใช้
+ * @description หน่วยประมวลผลโหนดข้อมูล (Grid System) ที่จูนมาเพื่อสร้าง Authority
+ * [STABILIZED]: รองรับการสลับโหมด Dark/Light และปรับปรุงระบบ Visual Depth
  */
 const FeatureGrid = ({
   items,
@@ -41,7 +41,8 @@ const FeatureGrid = ({
   columns = 3,
   className,
 }: FeatureGridProps) => {
-  // [GRID LOGIC]: Adaptive Grid Configuration (Mobile First)
+  
+  // Adaptive Grid Configuration
   const gridCols = {
     2: "grid-cols-1 md:grid-cols-2",
     3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
@@ -49,32 +50,29 @@ const FeatureGrid = ({
   }[columns];
 
   return (
-    <section className={cn("bg-surface-main relative overflow-hidden py-24 md:py-32", className)}>
+    <section className={cn("bg-surface-main relative overflow-hidden py-24 md:py-32 transition-colors duration-500", className)}>
       {/* 01. AMBIENT PHYSICS: ระบบเลเยอร์บรรยากาศ */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 select-none"
-        aria-hidden="true"
-      >
+      <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
         <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-        <div className="ambient-aura absolute top-0 right-1/4 h-[600px] w-[600px] opacity-20 blur-[120px] will-change-transform" />
+        <div className="ambient-aura absolute top-0 right-1/4 h-[600px] w-[600px] opacity-[var(--ambient-opacity)]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* 02. SECTION NARRATIVE: การสื่อสารวิสัยทัศน์ */}
-        <header className="mb-20 max-w-4xl space-y-6 md:mb-32 md:space-y-8">
-          <div className="border-brand-primary/20 bg-brand-primary/10 text-brand-primary inline-flex items-center gap-4 rounded-full border px-5 py-2 font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+        {/* 02. SECTION NARRATIVE: การสื่อสารวิสัยทัศน์ Specialist */}
+        <header className="mb-20 max-w-4xl space-y-8 md:mb-32">
+          <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-5 py-2 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">
             <div className="relative flex h-2 w-2">
               <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-40"></span>
-              <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-[0_0_8px_var(--color-brand-primary)]"></span>
+              <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-glow"></span>
             </div>
-            Core_Architecture.v17
+            Core_Architecture.v{SITE_CONFIG.project.version}
           </div>
 
-          <h2 className="text-4xl leading-[0.9] font-black tracking-tighter text-white uppercase italic md:text-7xl lg:text-8xl">
+          <h2 className="text-text-primary text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl">
             {heading}
           </h2>
           <div className="border-brand-primary border-l-4 pl-6 md:pl-10">
-            <p className="max-w-2xl text-lg leading-relaxed font-medium text-gray-400 italic opacity-80 md:text-2xl">
+            <p className="text-text-secondary max-w-2xl text-lg leading-relaxed font-medium italic opacity-90 md:text-2xl">
               {typeof subheading === 'string' ? `“${subheading}”` : subheading}
             </p>
           </div>
@@ -87,32 +85,22 @@ const FeatureGrid = ({
               key={`${feature.title}-${index}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               viewport={{ once: true, margin: "-50px" }}
               className={cn(
-                "group relative flex h-full flex-col rounded-[2.5rem] p-8 transition-all duration-500 md:p-10",
-                "border border-white/5 bg-[#0A0A0A] shadow-lg",
-                "hover:border-brand-primary/40 hover:-translate-y-2 hover:bg-white/[0.02] hover:shadow-2xl",
-                "will-change-transform" // [PERFORMANCE]: Hint browser for smoother animation
+                "group relative flex h-full flex-col rounded-[2.5rem] p-8 md:p-10 transition-all duration-500",
+                "border border-border bg-surface-card shadow-lg hover:shadow-glow hover:bg-surface-offset",
+                "hover:border-brand-primary/40 hover:-translate-y-2 will-change-transform"
               )}
             >
               {/* Node Identifier */}
-              <div className="group-hover:text-brand-primary/40 absolute top-8 right-8 font-mono text-[10px] font-black tracking-[0.4em] text-gray-700 transition-colors">
+              <div className="text-text-muted group-hover:text-brand-primary/40 absolute top-8 right-8 font-mono text-[10px] font-black tracking-[0.4em] transition-colors">
                 NODE_0{index + 1}
               </div>
 
-              {/* Icon Logic */}
-              <div className="text-brand-primary group-hover:bg-brand-primary relative mb-8 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-white/5 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:text-black group-hover:shadow-[0_0_30px_rgba(34,197,94,0.4)]">
-                <IconRenderer
-                  name={feature.icon}
-                  size={28}
-                  strokeWidth={2}
-                  className="relative z-10"
-                />
+              {/* Icon Interface: Tactile Physics */}
+              <div className="text-brand-primary group-hover:bg-brand-primary relative mb-8 flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl bg-surface-offset border border-border transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:text-surface-main group-hover:shadow-glow">
+                <IconRenderer name={feature.icon} size={28} strokeWidth={2} className="relative z-10" />
               </div>
 
               {/* Information Hub */}
@@ -123,20 +111,20 @@ const FeatureGrid = ({
                       // {feature.category}
                     </span>
                   )}
-                  <h3 className="group-hover:text-brand-primary text-2xl font-black tracking-tighter text-white uppercase italic transition-colors">
+                  <h3 className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter uppercase italic transition-colors">
                     {feature.title}
                   </h3>
                 </div>
 
-                <p className="text-base leading-relaxed font-medium text-gray-400 italic opacity-70 transition-opacity group-hover:opacity-100">
+                <p className="text-text-secondary text-base leading-relaxed font-medium italic transition-opacity group-hover:text-text-primary">
                   {feature.description}
                 </p>
 
                 {/* Technical Spec Signal */}
                 {feature.technicalDetail && (
-                  <div className="mt-auto flex items-center gap-4 border-t border-white/5 pt-6">
-                    <div className="bg-brand-primary h-1.5 w-1.5 rounded-full transition-all group-hover:shadow-[0_0_10px_var(--color-brand-primary)]" />
-                    <span className="font-mono text-[9px] font-black tracking-[0.3em] text-gray-600 uppercase transition-colors group-hover:text-white">
+                  <div className="border-border mt-auto flex items-center gap-4 border-t pt-6">
+                    <div className="bg-brand-primary h-1.5 w-1.5 rounded-full transition-all group-hover:shadow-glow" />
+                    <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.3em] uppercase transition-colors group-hover:text-text-primary">
                       Spec: {feature.technicalDetail}
                     </span>
                   </div>
@@ -144,7 +132,7 @@ const FeatureGrid = ({
               </div>
 
               {/* Subtle Aura Focus */}
-              <div className="bg-brand-primary/20 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-100" />
+              <div className="bg-brand-primary/10 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-100" />
             </motion.div>
           ))}
         </div>

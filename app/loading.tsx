@@ -1,77 +1,89 @@
 /**
- * [SYSTEM MODULE]: GLOBAL_LOADING_UI v17.0.1 (PERFORMANCE_TUNED)
- * [STRATEGY]: Zero-Layout Shift | GPU Acceleration | Neural Feedback
+ * [SYSTEM MODULE]: GLOBAL_LOADING_UI v17.3.9 (HYBRID_THEME_STABILIZED)
+ * [STRATEGY]: Zero-Layout Shift | Theme-Aware Physics | TBT_OPTIMIZED
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import React from "react";
-import IconRenderer from "@/components/ui/IconRenderer";
+"use client";
 
-export default function Loading() {
+import React, { memo } from "react";
+import IconRenderer from "@/components/ui/IconRenderer";
+import { SITE_CONFIG } from "@/constants/site-config";
+import { cn } from "@/lib/utils";
+
+/**
+ * @component Loading
+ * @description หน้าจอเริ่มต้นระบบที่ถูกปรับจูนให้มี Overhead ต่ำที่สุด
+ * [STABILIZED]: รองรับระบบ Multi-Theme และใช้ GPU Acceleration เต็มรูปแบบ
+ */
+function Loading() {
+  // [DETERMINISTIC]: ดึงปีจาก Config เพื่อความเสถียรของ SSR
+  const currentYear = SITE_CONFIG.business.established.split('-')[0] || "2026";
+
   return (
     <div
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-[#050505]"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden bg-surface-main transition-colors duration-700"
       role="status"
       aria-live="polite"
       aria-label="System Initializing..."
     >
-      {/* 01. DECORATIVE BACKGROUND INFRASTRUCTURE */}
-      <div className="absolute inset-0 z-0 opacity-20 select-none pointer-events-none">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+      {/* 01. ATMOSPHERIC INFRASTRUCTURE: พื้นผิวทางวิศวกรรมแบบ Dynamic */}
+      <div className="pointer-events-none absolute inset-0 z-0 select-none opacity-40" aria-hidden="true">
+        {/* Infrastructure Grid ที่ปรับตามตัวแปร Border ของธีม */}
+        <div className="bg-infrastructure-grid absolute inset-0" />
         
-        {/* Radial Gradient for depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,#22c55e08,transparent)]" />
+        {/* Ambient Pulse: ใช้ค่าออปาซิตี้ตามความสว่างของธีม */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,var(--color-brand-primary),transparent)] opacity-[var(--ambient-opacity)]" />
       </div>
 
-      {/* 02. SPECIALIST LOADER HUB */}
+      {/* 02. SPECIALIST LOADER HUB: ศูนย์กลางการประมวลผลทางสายตา */}
       <div className="relative z-10 flex flex-col items-center gap-y-12">
-        {/* Brand Engine Core */}
-        <div className="relative group">
-          {/* Outer Ring Pulse */}
-          <div className="absolute inset-0 -m-4 rounded-full border border-brand-primary/10 opacity-0 animate-[ping_3s_cubic-bezier(0,0,0.2,1)_infinite]" />
-          
-          {/* Inner Glow */}
-          <div className="absolute inset-0 bg-brand-primary/20 blur-xl rounded-full animate-pulse" />
+        <div className="relative">
+          {/* Inner Glow Overlay */}
+          <div className="bg-brand-primary/20 absolute inset-0 animate-pulse rounded-full blur-2xl" />
 
-          {/* Icon Container */}
-          <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_0_30px_-10px_rgba(34,197,94,0.3)]">
+          {/* Icon Container: บังคับใช้ GPU layer เพื่อลดค่า Total Blocking Time (TBT) */}
+          <div className={cn(
+            "relative flex h-24 w-24 items-center justify-center rounded-3xl border border-border bg-surface-card",
+            "shadow-glow backdrop-blur-md will-change-transform"
+          )}>
             <IconRenderer
               name="Cpu"
               size={40}
-              className="text-brand-primary animate-[spin_10s_linear_infinite]"
+              className="text-brand-primary animate-[spin_8s_linear_infinite]"
               strokeWidth={1.5}
             />
-            
-            {/* Status Dot */}
-            <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-brand-primary shadow-[0_0_10px_var(--color-brand-primary)] animate-pulse" />
+            {/* Neural Heartbeat Dot */}
+            <div className="bg-brand-primary absolute right-2 top-2 h-2 w-2 animate-pulse rounded-full shadow-glow" />
           </div>
         </div>
 
-        {/* 03. STATUS INTELLIGENCE */}
+        {/* 03. STATUS INTELLIGENCE: ข้อมูลสถานะการเริ่มต้นระบบ */}
         <div className="flex flex-col items-center space-y-6 text-center">
-          <div className="space-y-2">
-            <h3 className="text-white text-sm font-black tracking-[0.3em] uppercase animate-pulse">
+          <div className="space-y-3">
+            <h3 className="text-text-primary text-sm font-black uppercase tracking-[0.4em] animate-pulse">
               System_Initializing
             </h3>
-            <p className="text-gray-500 text-[10px] font-mono tracking-[0.2em] uppercase">
-              Optimizing Route Architecture...
+            <p className="text-text-muted font-mono text-[10px] font-bold uppercase tracking-[0.2em]">
+              Optimizing v{SITE_CONFIG.project.version} Infrastructure...
             </p>
           </div>
 
-          {/* Digital Progress Bar */}
-          <div className="h-0.5 w-48 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full bg-brand-primary w-1/2 animate-[shimmer_1.5s_infinite] shadow-[0_0_10px_var(--color-brand-primary)]" />
+          {/* Digital Progress Bar: ระบบ Shimmer แบบ Hybrid */}
+          <div className="bg-surface-offset h-0.5 w-48 overflow-hidden rounded-full">
+            <div className="bg-brand-primary h-full w-1/2 animate-[shimmer_1.5s_infinite] shadow-glow" />
           </div>
         </div>
       </div>
 
-      {/* 04. FOOTER METADATA */}
+      {/* 04. FOOTER METADATA: อัตลักษณ์ความปลอดภัย */}
       <div className="absolute bottom-12 left-0 w-full text-center">
-        <p className="text-white/20 font-mono text-[9px] tracking-[0.4em] uppercase">
-          AEMDEVWEB &copy; Secure Connection
+        <p className="text-text-muted/30 font-mono text-[9px] font-bold uppercase tracking-[0.4em]">
+          {SITE_CONFIG.brandName} &copy; {currentYear} // Secure_Node_v17
         </p>
       </div>
     </div>
   );
 }
+
+export default memo(Loading);

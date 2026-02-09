@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.1.2 (FINAL_CLEAN)
- * [STRATEGY]: Outcome-Driven Architecture | SSG Optimization | Strict Typing
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.3.10 (STABILIZED)
+ * [STRATEGY]: Outcome-Driven Architecture | Multi-Theme Logic | SSG Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -9,15 +9,17 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // --- 1. Infrastructure & Data ---
-// [FIX]: Import จาก constants ตามโครงสร้างไฟล์จริง
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps } from "@/types";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
+import { generateBreadcrumbSchema } from "@/lib/schema";
 
-// --- 3. Templates (The Strategies) ---
+// --- 3. Templates (The Strategic Nodes) ---
+// [FIXED]: ปรับ Path ของ LayoutEngine ให้ตรงกับตำแหน่งจริงในโฟลเดอร์ sections
+import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import CatalogTemplate from "@/components/templates/catalog/Index";
@@ -32,16 +34,10 @@ export async function generateStaticParams() {
 
 /* [B] SEO METADATA ENGINE */
 export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
-  // [NEXT.js 15]: Await params before access
-  const { slug } = await params;
+  const { slug } = await params; // Next.js 16 Async API
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === slug);
 
-  if (!service) {
-    return {
-      title: "Service Not Found",
-      description: "ขออภัย ไม่พบข้อมูลบริการที่คุณต้องการ",
-    };
-  }
+  if (!service) return { title: "Service Not Found" };
 
   return {
     title: `${service.title} | ${SITE_CONFIG.brandName}`,
@@ -51,88 +47,72 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
       title: service.title,
       description: service.description,
       images: [service.image || "/images/og-default.webp"],
+      type: "website",
     },
+    keywords: [...(service.keywords || [])],
   };
 }
 
 /**
  * @component ServiceDetailPage
- * @description หน้าแสดงรายละเอียดบริการที่ "ฉลาดเลือก" Template ตามประเภทข้อมูล (Strategy Pattern)
+ * @description หน้าแสดงรายละเอียดบริการที่ "ฉลาดเลือก" Template ตามยุทธศาสตร์การนำเสนอ
  */
 export default async function ServiceDetailPage({ params }: PageProps<{ slug: string }>) {
-  // [NEXT.js 15]: Await params
   const { slug } = await params;
 
-  // 1. Fetch Data
+  // 1. Fetch Data (O(1) Memory Lookup)
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === slug);
-
-  // 2. 404 Guard
   if (!service) notFound();
 
-  // 3. Prepare SEO Schema (Simple Breadcrumb)
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_CONFIG.siteUrl },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Services",
-        item: `${SITE_CONFIG.siteUrl}/services`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: service.title,
-        item: `${SITE_CONFIG.siteUrl}/services/${slug}`,
-      },
-    ],
-  };
+  // 2. [SEO]: สร้าง Breadcrumb Graph เพื่อยืนยันสถาปัตยกรรมข้อมูล
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
+    { name: "บริการทั้งหมด", item: `${SITE_CONFIG.siteUrl}/services` },
+    { name: service.title, item: `${SITE_CONFIG.siteUrl}/services/${slug}` },
+  ]);
+
+  // 3. [DETERMINISTIC STAMP]: ป้องกันปัญหา Hydration Mismatch
+  const AUDIT_STAMP = SITE_CONFIG.project.version;
 
   /**
-   * [TEMPLATE SWITCHER]: หัวใจสำคัญของการเลือก UI
+   * [TEMPLATE SWITCHER]: Strategy Pattern Implementation
+   * เลือกเรนเดอร์ UI ตามประเภทของบริการที่กำหนดไว้ใน Registry
    */
   const renderTemplate = () => {
-    // ใช้ category หรือ templateSlug ในการตัดสินใจเลือก Template
-    switch (service.templateSlug) {
-      case "corporate":
-        return <CorporateTemplate data={service} />;
+    const templateMap = {
+      corporate: <CorporateTemplate data={service} />,
+      salepage: <SalePageTemplate data={service} />,
+      catalog: <CatalogTemplate data={service} />,
+      bio: <BioTemplate data={service} />,
+    };
 
-      case "salepage":
-        return <SalePageTemplate data={service} />;
-
-      case "catalog":
-        return <CatalogTemplate data={service} />;
-
-      case "bio":
-        return <BioTemplate data={service} />;
-
-      default:
-        // Fallback Strategy: ใช้ Corporate Template เป็นค่าเริ่มต้น
-        return <CorporateTemplate data={service} />;
-    }
+    return templateMap[service.templateSlug as keyof typeof templateMap] || 
+           <CorporateTemplate data={service} />;
   };
 
   return (
-    <div className="bg-surface-main relative min-h-screen overflow-hidden">
-      
-
-      {/* [ATMOSPHERIC INFRASTRUCTURE] */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
-        aria-hidden="true"
-      >
-        <div className="ambient-aura absolute top-0 left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[0.12] blur-[100px]" />
-        <div className="bg-infrastructure-grid absolute inset-0" />
-      </div>
-
-      {/* SEO Injection */}
+    <LayoutEngine spacing="none">
       <JsonLd data={breadcrumbSchema} />
 
-      <main className="animate-in fade-in slide-in-from-bottom-4 relative z-10 duration-700">
+      {/* 01. ATMOSPHERIC INFRASTRUCTURE: เลเยอร์บรรยากาศแบบ Hybrid */}
+      <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
+        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
+        {/* [v17.3.10]: เพิ่ม Default Fallback สำหรับ Ambient Opacity */}
+        <div className="ambient-aura absolute top-0 left-1/2 h-[800px] w-full -translate-x-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[100px]" />
+      </div>
+
+      {/* 02. CONTENT HUB: ศูนย์กลางการเรนเดอร์ยุทธศาสตร์ */}
+      <main className="relative z-10 animate-in fade-in slide-in-from-bottom-2 duration-1000">
+        <div className="flex justify-center pt-24 pb-4">
+          <span className="text-text-muted font-mono text-[9px] font-black uppercase tracking-[0.4em] opacity-40">
+            Node_Deployment: v{AUDIT_STAMP} // Specialist_Stable
+          </span>
+        </div>
+        
+        {/*  */}
+        
         {renderTemplate()}
       </main>
-    </div>
+    </LayoutEngine>
   );
 }

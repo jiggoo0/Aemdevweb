@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.2.0 (ENHANCED_SCALABILITY)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.3.1 (STABILIZED_FINAL)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -9,7 +9,8 @@ import type { ReactNode, ComponentType, CSSProperties } from "react";
 // --- [01. UTILITY INFRASTRUCTURE] ---
 
 /**
- * [STABILIZED]: Standardized Props for Next.js 15+ Pages
+ * [STABILIZED]: Standardized Props for Next.js 15/16+ Pages
+ * รองรับการใช้งานแบบ Async Params ตามมาตรฐานใหม่
  */
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
@@ -21,20 +22,22 @@ export interface LayoutProps<T = Record<string, string>> {
   readonly params: Promise<T>;
 }
 
+/**
+ * [ENHANCED]: Base Component Props
+ * รองรับการส่งผ่าน Style และ ClassName สำหรับ UI Components ทุกตัว
+ */
 export interface BaseComponentProps {
   readonly children?: ReactNode;
   readonly className?: string;
-  readonly style?: CSSProperties; // เพิ่ม style prop เผื่อกรณีจำเป็น
+  readonly style?: CSSProperties;
 }
 
-// [ENHANCED]: Action Link Definition
-// ใช้สำหรับปุ่มหรือลิงก์ทั้งหมดในระบบ เพื่อความเป็นระเบียบ
-export interface ActionLink {
-  readonly label: string;
-  readonly href: string;
-  readonly type?: "primary" | "secondary" | "outline" | "ghost";
-  readonly isExternal?: boolean;
-  readonly icon?: IconName;
+/**
+ * [FIXED]: UI Skeleton Interface
+ * แก้ปัญหา Error TS2322 (Property 'style' does not exist on type 'IntrinsicAttributes...')
+ */
+export interface SkeletonCardProps extends BaseComponentProps {
+  readonly aspectRatio?: "portrait" | "video" | "square";
 }
 
 export type IconName = string;
@@ -47,7 +50,7 @@ export interface NavItem {
   readonly icon?: IconName;
   readonly description?: string;
   readonly active?: boolean;
-  readonly children?: readonly NavItem[]; // รองรับ Nested Menu ในอนาคต
+  readonly children?: readonly NavItem[];
 }
 
 export interface SiteConfig {
@@ -93,7 +96,7 @@ export interface SiteConfig {
     readonly address: string;
     readonly postalCode: string;
     readonly workHours: string;
-    readonly mapUrl?: string; // เพิ่มลิงก์ Google Maps
+    readonly mapUrl?: string;
   };
   readonly links: {
     readonly line: string;
@@ -102,7 +105,7 @@ export interface SiteConfig {
     readonly facebook: string;
     readonly github: string;
     readonly twitter?: string;
-    readonly youtube?: string; // เผื่อมีช่อง YouTube
+    readonly youtube?: string;
   };
   readonly business: {
     readonly location: string;
@@ -125,15 +128,15 @@ export interface CatalogItem {
   readonly description: string;
   readonly icon: IconName;
   readonly title?: string;
-  readonly price?: string; // เผื่อใส่ราคาสินค้าย่อย
-  readonly image?: string; // เผื่อมีรูปสินค้า
+  readonly price?: string;
+  readonly image?: string;
 }
 
 export interface ExpertiseItem {
   readonly title: string;
   readonly description: string;
   readonly icon: IconName;
-  readonly level?: number; // 1-100 สำหรับ Skill Bar
+  readonly level?: number;
 }
 
 export interface ServiceFeature {
@@ -147,18 +150,18 @@ export interface ServiceFaq {
   readonly answer: string;
 }
 
-/**
- * [ENHANCED]: Theme Configuration
- * รองรับการตั้งค่าสีที่ละเอียดขึ้น รวมถึง Gradient
- */
 export interface ThemeConfig {
-  readonly primary: string;    // สีหลัก (Brand Primary)
-  readonly secondary?: string; // สีรอง
-  readonly background?: string; // สีพื้นหลัง
-  readonly accent?: string;    // สีเน้น (เช่น Badge, Highlight)
-  readonly gradient?: string;  // CSS Gradient String
+  readonly primary: string;
+  readonly secondary?: string;
+  readonly background?: string;
+  readonly accent?: string;
+  readonly gradient?: string;
 }
 
+/**
+ * [RESOLVED]: Template Data Engine
+ * รองรับ Property 'keywords' เพื่อแก้ปัญหา Error TS2353 ใน master-registry.ts
+ */
 export interface TemplateMasterData {
   readonly id: string;
   readonly title: string;
@@ -173,16 +176,15 @@ export interface TemplateMasterData {
   readonly priority: number;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
-
-  // [THEME]: ใช้ Interface ใหม่ที่ยืดหยุ่นขึ้น
   readonly theme?: ThemeConfig;
-
-  // Arrays
+  
+  // Data Clusters
   readonly benefits: readonly string[];
   readonly coreFeatures: readonly ServiceFeature[];
   readonly faqs: readonly ServiceFaq[];
+  readonly keywords: readonly string[]; 
 
-  // Optional/Specific Fields
+  // UI Specific
   readonly clientTrust?: string;
   readonly items?: readonly CatalogItem[];
   readonly expertise?: readonly ExpertiseItem[];
@@ -192,15 +194,11 @@ export type ServiceData = TemplateMasterData;
 
 // --- [04. CONTENT & MDX SCHEMAS] ---
 
-/**
- * [ENHANCED]: SEO Specific Metadata
- * แยกออกมาเพื่อให้ Reuse ได้ง่าย
- */
 export interface SEOMetadata {
   readonly title: string;
   readonly description: string;
   readonly ogImage?: string;
-  readonly noIndex?: boolean; // กรณีไม่อยากให้ Index
+  readonly noIndex?: boolean;
   readonly keywords?: readonly string[];
 }
 
@@ -218,7 +216,7 @@ export interface BaseContent extends SEOMetadata {
 export interface BlogPost extends BaseContent {
   readonly category: string;
   readonly readingTime?: string;
-  readonly relatedPosts?: readonly string[]; // Slug ของบทความที่เกี่ยวข้อง
+  readonly relatedPosts?: readonly string[];
 }
 
 export interface CaseStudy extends BaseContent {
@@ -227,8 +225,8 @@ export interface CaseStudy extends BaseContent {
   readonly category: string;
   readonly results: readonly string[];
   readonly technicalStack: readonly string[];
-  readonly beforeImage?: string; // รูปเปรียบเทียบ Before
-  readonly afterImage?: string;  // รูปเปรียบเทียบ After
+  readonly beforeImage?: string;
+  readonly afterImage?: string;
 }
 
 // --- [05. LOCAL SEO & AREA NODES] ---
@@ -243,14 +241,10 @@ export interface AreaNode {
   readonly seoDescription: string;
   readonly priority: number;
   readonly templateSlug: "corporate" | "salepage" | "local" | string;
-  
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
-  
   readonly heroImage: string;
   readonly longDescription?: string;
-  
-  // [NEW]: Latitude/Longitude สำหรับ Schema Map
   readonly coordinates?: {
     readonly lat: number;
     readonly lng: number;
