@@ -12,7 +12,7 @@ import type { AreaNode, TemplateMasterData } from "@/types";
 
 /**
  * @description สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization)
- * [UPDATE]: เชื่อมโยง Founder และปรับปรุงที่ตั้งเพื่อผลลัพธ์ Local Search 
+ * [STRATEGY]: ผูกโยง IDs ทั้งหมดเพื่อทำ Cross-Platform Verification
  */
 export function generateOrganizationSchema() {
   const identifiers = [
@@ -47,15 +47,15 @@ export function generateOrganizationSchema() {
     image: absoluteUrl("/images/og-main.png"),
     priceRange: "฿฿ - ฿฿฿",
 
-    // [EEAT_LINKING]: ยืนยันตัวตนเจ้าของธุรกิจ (ทำให้ชื่อ อลงกรณ์ ยมเกิด ปรากฏในโหนดบริษัท)
+    // [EEAT_SIGNALS]: ระบุความสัมพันธ์ระดับโครงสร้าง (Authority Flow)
     founder: { "@id": absoluteUrl("/#expert") },
     member: { "@id": absoluteUrl("/#expert") },
     employee: { "@id": absoluteUrl("/#expert") },
     
-    // [STRATEGY]: Cross-Platform Verification IDs
+    // [IDS]: ชุดรหัสยืนยันตัวตนระดับสูง
     identifier: identifiers,
 
-    // [LOCAL_SEO_FIX]: ปรับแต่งที่ตั้งให้แม่นยำ (Target: Kamphaeng Phet Hub)
+    // [LOCAL_SEO]: ระบุที่ตั้งในระดับอำเภอ/จังหวัด เพื่อดึงอันดับ Local Search
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress, 
@@ -84,13 +84,13 @@ export function generateOrganizationSchema() {
 
 /**
  * @description สร้าง Expert Node (Person) - นายอลงกรณ์ ยมเกิด (นายเอ็มซ่ามากส์)
- * [UPDATE]: ใส่ทั้งชื่อไทย-อังกฤษ และฉายา เพื่อเจาะจงตัวตน (Entity Locking)
+ * [STRATEGY]: ล็อกตัวตนด้วยชื่อจริง 2 ภาษา และเชื่อมโยงกลับไปยังแบรนด์
  */
 export function generatePersonSchema() {
   return {
     "@type": "Person",
     "@id": absoluteUrl("/#expert"),
-    // [NAME_STRATEGY]: แสดงชื่อจริงทั้ง 2 ภาษา เพื่อให้ Google AI เชื่อมโยงได้แม่นยำ
+    // [NAME_LOCK]: ระบุชื่อจริงพร้อมภาษาอังกฤษและฉายา เพื่อความชัดเจนของ Entity
     name: `${SITE_CONFIG.expert.legalNameThai} (${SITE_CONFIG.expert.legalName})`,
     alternateName: SITE_CONFIG.expert.displayName, // นายเอ็มซ่ามากส์
     givenName: "อลงกรณ์",
@@ -99,18 +99,17 @@ export function generatePersonSchema() {
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     
-    // [REVERSE_LINK]: ยืนยันความสัมพันธ์กับองค์กร
+    // [BI-DIRECTIONAL_LINK]: ยืนยันว่าบุคคลนี้สังกัดองค์กรนี้
     worksFor: { "@id": absoluteUrl("/#organization") },
     
-    // [EEAT_SIGNALS]: ความเชี่ยวชาญเฉพาะทาง
+    // [EEAT_NODES]: ทักษะที่ Google ยอมรับในสายงาน
     knowsAbout: [
       "Technical SEO",
       "Next.js Development",
       "Web Architecture",
       "Core Web Vitals",
-      "Google Business Profile Strategy",
+      "Google Business Profile Optimization",
     ],
-    // [IDENTIFICATION]: ลิงก์โซเชียลส่วนตัวเพื่อสร้าง Web of Trust
     sameAs: [
       SITE_CONFIG.links.facebook,
       SITE_CONFIG.links.github,
@@ -118,7 +117,7 @@ export function generatePersonSchema() {
   };
 }
 
-// --- [02. DYNAMIC GENERATORS: TARGETED CONTENT] ---
+// --- [02. DYNAMIC GENERATORS] ---
 
 export function generateServiceSchema(data: TemplateMasterData) {
   return {
@@ -179,7 +178,8 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
 
 /**
  * @function generateSchemaGraph
- * @description รวบรวม Schema ทั้งหมดภายใต้ Graph เดียวเพื่อให้ Bot เข้าใจความสัมพันธ์ทั้งหมดในครั้งเดียว
+ * @description รวบรวม Schema ทั้งหมดเข้าด้วยกันภายใต้ Graph เดียว
+ * [CRITICAL]: ช่วยให้ Google AI เข้าใจความสัมพันธ์ทั้งหมดในครั้งเดียว
  */
 export function generateSchemaGraph(schemas: readonly object[]) {
   return {

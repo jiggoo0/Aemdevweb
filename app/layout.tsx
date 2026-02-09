@@ -1,5 +1,5 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.2 (STABILIZED_FINAL)
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | High-Fidelity UX
  */
 
@@ -21,13 +21,12 @@ import { Toaster } from "@/components/ui/sonner";
 // --- 3. Styles ---
 import "./globals.css";
 
-// [FONTS CONFIGURATION - KEEP AS IS]
+/* [A] FONT ORCHESTRATION: รองรับภาษาไทย-อังกฤษแบบลื่นไหล */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
-  adjustFontFallback: true,
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
@@ -35,7 +34,6 @@ const fontThai = IBM_Plex_Sans_Thai({
   subsets: ["thai", "latin"],
   variable: "--font-thai",
   display: "swap",
-  adjustFontFallback: false,
 });
 
 const fontMono = JetBrains_Mono({
@@ -45,7 +43,7 @@ const fontMono = JetBrains_Mono({
   weight: ["400", "700"],
 });
 
-// [METADATA]
+/* [B] SEO PROTOCOL: Global Configuration */
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.project.title,
@@ -70,13 +68,13 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-snippet": -1, // [UPDATE]: ให้ Google ตัดสินใจความยาว Snippet เอง
+      "max-snippet": -1,
     },
   },
   verification: { google: SITE_CONFIG.verification.google },
 };
 
-// [VIEWPORT]
+/* [C] CHROMA SYNC: ควบคุมสี UI ตามโหมดของผู้ใช้ */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -85,7 +83,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  userScalable: true, // [ACCESSIBILITY]: ต้องยอมให้ User ขยายหน้าจอได้
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -106,15 +103,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "selection:bg-brand-primary/20 selection:text-brand-primary"
         )}
       >
+        {/* --- GLOBAL AMBIENT LAYERS --- */}
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.15]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
           aria-hidden="true"
         />
-        <div
-          className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
-          aria-hidden="true"
-        />
+        <div className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03]" aria-hidden="true" />
 
         <ThemeProvider
           attribute="data-theme"
@@ -122,21 +117,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem={false}
           disableTransitionOnChange
         >
+          {/* ระบบแถบโหลดเสมือน: ลด Perceived Latency ระหว่าง Route Transition */}
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
           
           <div className="relative z-10 flex min-h-screen flex-col">
-             {/* Accessibility Link */}
-            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background focus:text-foreground">
-              Skip to content
+            <a 
+              href="#main-content" 
+              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:p-4 focus:bg-brand-primary focus:text-white focus:rounded-xl"
+            >
+              ข้ามไปที่เนื้อหาหลัก
             </a>
             
             <Navbar />
-            <main id="main-content" className="relative flex flex-grow flex-col">
+            <main id="main-content" className="relative flex flex-grow flex-col outline-none" tabIndex={-1}>
               {children}
             </main>
             <Footer />
           </div>
 
+          {/* --- GLOBAL OVERLAYS --- */}
           <div className="pointer-events-none fixed right-0 bottom-0 z-[60] flex flex-col items-end gap-4 p-4 md:p-6">
             <div className="pointer-events-auto">
               <LineStickyButton />

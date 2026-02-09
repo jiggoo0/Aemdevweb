@@ -1,5 +1,5 @@
 /**
- * [CORE PAGE]: HOMEPAGE v17.4.7 (STABILIZED_SYNC)
+ * [CORE PAGE]: HOMEPAGE v17.5.5 (IDENTITY_LOCKED)
  * [STRATEGY]: Symmetrical Rhythm | High-Mass Balance | Conversion Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,7 @@ import Link from "next/link";
 import { AREA_NODES } from "@/constants/area-nodes";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
-import { generateOrganizationSchema } from "@/lib/schema";
+import { generateSchemaGraph } from "@/lib/schema"; 
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -33,7 +33,7 @@ import JsonLd from "@/components/seo/JsonLd";
 // --- 4. Types ---
 import type { AreaNode, TemplateMasterData, BlogPost, CaseStudy } from "@/types";
 
-/* [A] SEO AUTHORITY PROTOCOL: ปรับแต่ง Metadata เพื่อการจัดอันดับระดับสูง */
+/* [A] SEO AUTHORITY PROTOCOL: Metadata เชิงยุทธศาสตร์ */
 export const metadata = constructMetadata({
   title: "รับทำเว็บไซต์และ SEO เชิงยุทธศาสตร์ | Web Infrastructure Specialist",
   description: SITE_CONFIG.description,
@@ -42,13 +42,13 @@ export const metadata = constructMetadata({
 });
 
 export default async function HomePage() {
-  // 01. PARALLEL DATA FETCHING: ดึงข้อมูลแบบคู่ขนานเพื่อลดค่า TTFB
+  // 01. PARALLEL DATA FETCHING: ดึงข้อมูลแบบคู่ขนานเพื่อลด Latency
   const [cases, posts] = await Promise.all([
     getAllCaseStudies().catch(() => [] as CaseStudy[]),
     getAllPosts().catch(() => [] as BlogPost[]),
   ]);
 
-  // Strategic Data Slicing: เลือกเฉพาะโหนดสำคัญมาแสดงผล
+  // Strategic Data Slicing: กัดกรองโหนดสำคัญตาม Priority
   const recentCases = cases.slice(0, 2);
   const recentPosts = posts.slice(0, 3);
   const featuredAreas = AREA_NODES.filter((n: AreaNode) => (n.priority ?? 0) >= 95).slice(0, 4);
@@ -56,19 +56,16 @@ export default async function HomePage() {
 
   return (
     <LayoutEngine spacing="none">
-      {/* ฝังโครงสร้างข้อมูลเพื่อ EEAT (Experience, Expertise, Authoritativeness, Trust) */}
-      <JsonLd data={generateOrganizationSchema()} />
+      {/* [SEO_GRAPH_INJECTION]: เชื่อมโยงตัวตน อลงกรณ์ ยมเกิด เข้ากับแบรนด์โดยตรง */}
+      <JsonLd data={generateSchemaGraph([])} />
 
       {/* --- SECTION 01: HERO GATEWAY --- */}
       <Hero />
 
-      {/* --- SECTION 02: AUTHORITY HUB (Trust & Metrics) --- 
-          Balanced Weight: การวาง Badge และ Stats เพื่อสร้าง "ฐานความเชื่อมั่น" ทันทีหลัง Hero
-      */}
+      {/* --- SECTION 02: AUTHORITY HUB (Trust & Metrics) --- */}
       <section className="relative z-30 -mt-24 px-4 md:-mt-48 lg:-mt-56">
         <div className="mx-auto max-w-7xl">
           <div className="bg-surface-card/40 border-border shadow-pro-xl relative overflow-hidden rounded-[4rem] border p-12 backdrop-blur-3xl md:p-24">
-            {/* Subtle Infrastructure Pattern */}
             <div className="bg-infrastructure-grid absolute inset-0 -z-10 opacity-[0.05]" aria-hidden="true" />
             <div className="flex flex-col items-center gap-24">
               <TrustBadge />
@@ -84,9 +81,7 @@ export default async function HomePage() {
         <WorkProcess />
       </section>
 
-      {/* --- SECTION 04: CORE SOLUTIONS --- 
-          Card Mass: การ์ดขนาดกลาง ใช้ Gap ที่กว้างขึ้น (gap-16) เพื่อสร้างความรู้สึกพรีเมียมและอ่านง่าย
-      */}
+      {/* --- SECTION 04: CORE SOLUTIONS --- */}
       <section id="services" className="bg-surface-offset/20 py-32 md:py-48">
         <div className="container mx-auto px-4">
           <header className="mb-24 space-y-8">
@@ -104,9 +99,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 05: SUCCESS EVIDENCE (Case Studies) --- 
-          High Mass Strategy: เน้นการ์ดขนาดใหญ่พิเศษเพื่อโชว์ผลลัพธ์ ROI ให้กระแทกตาที่สุด
-      */}
+      {/* --- SECTION 05: SUCCESS EVIDENCE (Case Studies) --- */}
       <section id="success" className="py-32 md:py-56">
         <div className="container mx-auto px-4">
           <div className="border-border mb-24 flex flex-col justify-between gap-12 border-b pb-12 md:flex-row md:items-end">
@@ -152,9 +145,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 08: GEOGRAPHIC EXPANSION --- 
-          Node Grid Strategy: การ์ดขนาดจิ๋ว (Nodes) จัดวางแบบตารางกระชับ เพื่อโชว์ความครอบคลุมของระบบเครือข่าย
-      */}
+      {/* --- SECTION 08: GEOGRAPHIC EXPANSION --- */}
       <section className="border-border border-t py-32 md:py-48">
         <div className="container mx-auto px-4">
           <div className="mb-20 flex items-center gap-6">

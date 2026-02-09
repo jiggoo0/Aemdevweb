@@ -1,7 +1,6 @@
 /**
- * [ROOT INFRASTRUCTURE]: PWA_MANIFEST_SYSTEM v17.0.2 (STABILIZED)
+ * [ROOT INFRASTRUCTURE]: PWA_MANIFEST_SYSTEM v17.5.5 (STABILIZED)
  * [STRATEGY]: App-Like Experience | Specialist Branding | Asset Resiliency
- * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { MetadataRoute } from "next";
@@ -22,7 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait",
     categories: ["business", "productivity", "developer tools"],
 
-    /* 3. CHROMA SYNC */
+    /* 3. CHROMA SYNC (Dark Mode Focus) */
     background_color: "#050505",
     theme_color: "#050505",
 
