@@ -1,10 +1,10 @@
+"use client";
+
 /**
  * [FEATURE COMPONENT]: HERO_SYSTEM_ORCHESTRATOR v17.0.2 (LCP-OPTIMIZED)
  * [STRATEGY]: Midnight Aura | Neural Physics | Fluid Symmetry
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
-
-"use client";
 
 import React, { memo } from "react";
 import Image from "next/image";
@@ -149,7 +149,6 @@ const Hero = ({
         </motion.div>
 
         {/* [NEW] 04. HERO VISUALIZER (LCP FIX) */}
-        {/* เพิ่มส่วนแสดงรูปภาพเพื่อแก้ปัญหา LCP และสร้างความน่าเชื่อถือ */}
         <motion.div
           variants={itemVariants}
           className="relative mt-16 flex w-full justify-center px-4"
@@ -157,11 +156,12 @@ const Hero = ({
           <div className="shadow-brand-primary/10 relative aspect-[16/9] w-full max-w-5xl overflow-hidden rounded-2xl border border-white/10 shadow-2xl lg:aspect-[21/9]">
             <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
 
+            {/* [CRITICAL FIX]: Priority Load for LCP Score */}
             <Image
-              src="/images/hero/main-hero.webp" // [CRITICAL]: ใช้รูปจริงที่มีอยู่ในระบบ
+              src="/images/hero/main-hero.webp"
               alt="AEMDEVWEB Strategic Interface"
               fill
-              priority // [LCP FIX]: บังคับโหลดทันที
+              priority={true}
               className="object-cover object-top opacity-80 transition-transform duration-700 hover:scale-105"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
             />

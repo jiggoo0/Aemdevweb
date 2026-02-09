@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v16.7 (SHOWCASE_SPEC)
+ * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.0.1 (LCP_TUNED)
  * [STRATEGY]: Strategic Registry | Atmospheric Depth | High-Trust Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -37,7 +37,9 @@ interface CatalogTemplateProps {
  */
 const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
   const schema = generateCatalogSchema(data);
-  const catalogItems = data.items || [];
+  
+  // [DATA MAPPING]: ใช้ coreFeatures เป็นรายการสินค้าหลัก (ตามโครงสร้าง Registry)
+  const catalogItems = data.coreFeatures || [];
 
   return (
     <LayoutEngine spacing="specialist">
@@ -52,19 +54,15 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
         secondaryActionLabel="ดูรายการทั้งหมด"
       />
 
-      {/* 03. VISUAL SHOWCASE: ตัวอย่างการแสดงผลแบบ Grid/List */}
+      {/* 03. VISUAL SHOWCASE: ตัวอย่างการแสดงผล (LCP Optimized) */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-48">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="group relative mx-auto max-w-7xl"
-        >
-          {/* Neural Glow Physics */}
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-all duration-1000 group-hover:opacity-100" />
+        <div className="group relative mx-auto max-w-7xl">
+          {/* Neural Glow Physics: CSS Animation */}
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-all duration-1000 group-hover:opacity-100 will-change-opacity" />
 
+          {/* [LCP FIX]: รูปภาพโหลดทันที ไม่รอ JS Animation */}
           <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[4rem] md:p-4">
+            
             {/* Status Bar Simulation */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border border-white/10 bg-black/40 px-4 py-1.5 backdrop-blur-md md:flex">
               <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full" />
@@ -80,13 +78,20 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
                 fill
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />
             </div>
           </div>
 
-          {/* Collection Count Badge */}
-          <div className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex">
+          {/* Collection Count Badge: Animation แยกต่างหาก */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
+          >
             <div className="bg-brand-primary/10 border-brand-primary/20 flex h-14 w-14 items-center justify-center rounded-2xl border">
               <IconRenderer name="Layers" className="text-brand-primary" size={28} />
             </div>
@@ -95,11 +100,11 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
                 Total_Items
               </p>
               <p className="text-xl leading-none font-black tracking-tighter text-white uppercase italic">
-                {catalogItems.length > 0 ? `${catalogItems.length} Units` : "Ready to Update"}
+                {catalogItems.length > 0 ? `${catalogItems.length} Units` : "System Ready"}
               </p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* 04. RELIABILITY STRIP: ความน่าเชื่อถือของระบบจัดการข้อมูล */}
@@ -122,8 +127,9 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
       <FeatureGrid
         heading="Strategic Solution Catalog"
         subheading="รวบรวมรายการบริการที่คัดสรรมาเพื่อตอบโจทย์ธุรกิจของคุณโดยเฉพาะครับ"
+        // [DATA MAPPING]: Map ข้อมูลจาก coreFeatures เข้า Grid
         items={catalogItems.map((item, idx) => ({
-          title: item.name,
+          title: item.title, // ใช้ title ตาม Registry
           description: item.description,
           icon: item.icon,
           category: `CATALOG_ID: 0${idx + 1}`,

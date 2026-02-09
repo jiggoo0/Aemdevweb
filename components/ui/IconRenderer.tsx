@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.0.2 (CENTRALIZED_REGISTRY)
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.1.0 (FULL_REGISTRY)
  * [STRATEGY]: Static Icon Mapping | Zero-Runtime Error | Tree-Shaking Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -16,21 +16,29 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
+  CheckCircle, // [ADDED]: ใช้ใน Corporate Template
   CheckCircle2,
   AlertTriangle,
   Search,
   SearchX,
   MoreHorizontal,
+  Plus,
+  Minus,
+  Info,
+  HelpCircle,
 
   // 2. Navigation & Contact
   Home,
   MapPin,
+  Map, // [ADDED]: ใช้ใน Local Template
+  Navigation, // [ADDED]: ใช้ใน Local Template
   Calendar,
   Clock,
   Phone,
   Mail,
   Share2,
   ExternalLink,
+  Link,
 
   // 3. Features & Services
   Cpu,
@@ -55,9 +63,15 @@ import {
   Users,
   Building2,
   ShoppingBag,
+  ShoppingCart,
   Lock,
+  Unlock,
   Gauge,
   Smartphone,
+  Layout,
+  Monitor,
+  Laptop,
+  Image as ImageIcon, // Alias to avoid conflict with Next/Image
 
   // 4. Social & Media
   MessageCircle, // Used for LINE
@@ -66,6 +80,7 @@ import {
   Youtube,
   Twitter,
   Instagram,
+  Linkedin,
 
   // 5. Specialist Elements
   User,
@@ -74,6 +89,8 @@ import {
   Quote,
   Lightbulb,
   Award,
+  Star,
+  ThumbsUp,
   type LucideProps,
 } from "lucide-react";
 
@@ -92,21 +109,29 @@ export const ICON_MAP = {
   ArrowRight,
   ArrowUpRight,
   Check,
+  CheckCircle,
   CheckCircle2,
   AlertTriangle,
   Search,
   SearchX,
   MoreHorizontal,
+  Plus,
+  Minus,
+  Info,
+  HelpCircle,
 
   // Navigation
   Home,
   MapPin,
+  Map,
+  Navigation,
   Calendar,
   Clock,
   Phone,
   Mail,
   Share2,
   ExternalLink,
+  Link,
 
   // Tech & Services
   Cpu,
@@ -131,9 +156,15 @@ export const ICON_MAP = {
   Users,
   Building2,
   ShoppingBag,
+  ShoppingCart,
   Lock,
+  Unlock,
   Gauge,
   Smartphone,
+  Layout,
+  Monitor,
+  Laptop,
+  Image: ImageIcon, // Use 'Image' key but map to ImageIcon component
 
   // Social
   MessageCircle,
@@ -142,6 +173,7 @@ export const ICON_MAP = {
   Youtube,
   Twitter,
   Instagram,
+  Linkedin,
 
   // Specialist
   User,
@@ -150,12 +182,14 @@ export const ICON_MAP = {
   Quote,
   Lightbulb,
   Award,
+  Star,
+  ThumbsUp,
 } as const;
 
 export type IconName = keyof typeof ICON_MAP;
 
 interface IconRendererProps extends Omit<LucideProps, "ref"> {
-  readonly name: IconName | string; // Allow string for dynamic data but prefer strict type
+  readonly name: IconName | string; // Allow string for dynamic data
   readonly size?: number;
   readonly className?: string;
   readonly strokeWidth?: number;
@@ -175,7 +209,8 @@ const IconRenderer = ({
   title,
   ...props
 }: IconRendererProps) => {
-  // [LOGIC]: Direct Lookup (O(1)) เร็วกว่า useMemo สำหรับกรณีนี้
+  // [LOGIC]: Direct Lookup (O(1))
+  // Cast name as IconName to satisfy TypeScript, fallback handles invalid keys
   const IconComponent = ICON_MAP[name as IconName];
 
   // [FALLBACK]: กรณีหา Icon ไม่เจอ ให้แสดง AlertTriangle แทนที่จะ Crash
@@ -186,7 +221,7 @@ const IconRenderer = ({
     return (
       <AlertTriangle
         size={size}
-        className={cn("text-yellow-500", className)}
+        className={cn("text-yellow-500/50", className)} // ลดความเด่นของ Fallback ลงเล็กน้อย
         strokeWidth={strokeWidth}
         {...props}
       />

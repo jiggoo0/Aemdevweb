@@ -1,5 +1,5 @@
 /**
- * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.0.0 (CLEAN_CORE)
+ * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.1.0 (CLEAN_CORE)
  * [STRATEGY]: Single Source of Truth | Conversion-Driven | Anti-Shops Logic
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -35,7 +35,10 @@ export const SERVICE_SOLUTIONS = [
  * [STRATEGY]: รวม Service Solutions เข้ากับลิงก์บริษัทและกฎหมาย
  */
 export const FOOTER_MAP = {
-  services: [...SERVICE_SOLUTIONS, { label: "ดูบริการทั้งหมด", href: "/services" }],
+  services: [
+    ...SERVICE_SOLUTIONS,
+    { label: "ดูบริการทั้งหมด", href: "/services" },
+  ],
   company: [
     { label: "เกี่ยวกับเรา", href: "/about" },
     { label: "พื้นที่บริการ", href: "/areas" },
@@ -53,7 +56,7 @@ export const FOOTER_MAP = {
 
 /**
  * 04. CONVERSION_ACTIONS: ปุ่มดำเนินการสำคัญ (CTAs)
- * [NOTE]: ใช้สำหรับปุ่มที่ต้องการกระตุ้นการตัดสินใจ
+ * [NOTE]: ใช้สำหรับปุ่มที่ต้องการกระตุ้นการตัดสินใจ (Conversion Focus)
  */
 export const CONVERSION_ACTIONS = {
   primary: {
@@ -68,6 +71,6 @@ export const CONVERSION_ACTIONS = {
   },
 } as const;
 
-/* TYPE DEFINITIONS: สำหรับใช้ใน Component */
+/* TYPE DEFINITIONS: สำหรับใช้ใน Component (Derived Types) */
 export type NavItem = (typeof MAIN_NAV)[number];
 export type ServiceItem = (typeof SERVICE_SOLUTIONS)[number];

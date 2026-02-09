@@ -1,25 +1,40 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.0.2 (STABILIZED)
- * [MANDATE]: Zero-Any Policy | Deep Immutability | Type-Safe Routes
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.2.0 (ENHANCED_SCALABILITY)
+ * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import type { ReactNode, ComponentType } from "react";
+import type { ReactNode, ComponentType, CSSProperties } from "react";
 
 // --- [01. UTILITY INFRASTRUCTURE] ---
 
 /**
- * [STABILIZED]: สำหรับจัดการ Dynamic Route Params ใน Next.js 15/16
- * รองรับการทำงานแบบ Asynchronous Params ตามมาตรฐานใหม่
+ * [STABILIZED]: Standardized Props for Next.js 15+ Pages
  */
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+export interface LayoutProps<T = Record<string, string>> {
+  readonly children: ReactNode;
+  readonly params: Promise<T>;
+}
+
 export interface BaseComponentProps {
   readonly children?: ReactNode;
   readonly className?: string;
+  readonly style?: CSSProperties; // เพิ่ม style prop เผื่อกรณีจำเป็น
+}
+
+// [ENHANCED]: Action Link Definition
+// ใช้สำหรับปุ่มหรือลิงก์ทั้งหมดในระบบ เพื่อความเป็นระเบียบ
+export interface ActionLink {
+  readonly label: string;
+  readonly href: string;
+  readonly type?: "primary" | "secondary" | "outline" | "ghost";
+  readonly isExternal?: boolean;
+  readonly icon?: IconName;
 }
 
 export type IconName = string;
@@ -31,6 +46,8 @@ export interface NavItem {
   readonly href: string;
   readonly icon?: IconName;
   readonly description?: string;
+  readonly active?: boolean;
+  readonly children?: readonly NavItem[]; // รองรับ Nested Menu ในอนาคต
 }
 
 export interface SiteConfig {
@@ -48,7 +65,6 @@ export interface SiteConfig {
     readonly communicationStyle: string;
     readonly antiConnotation: string;
   };
-  // [FIXED]: ระบุเป็น readonly string[] เพื่อแก้ปัญหา Type Mismatch กับ Metadata
   readonly keywords: readonly string[];
   readonly project: {
     readonly title: string;
@@ -62,22 +78,22 @@ export interface SiteConfig {
     readonly legalName: string;
     readonly legalNameThai: string;
     readonly role: string;
-    /** [ADDED]: ตำแหน่งงานสากลสำหรับ Google Knowledge Graph (EEAT Standard) */
     readonly jobTitle: string;
     readonly signature: string;
     readonly avatar: string;
     readonly email: string;
     readonly bioUrl: string;
+    readonly bio?: string;
   };
   readonly contact: {
     readonly email: string;
     readonly phone: string;
     readonly displayPhone?: string;
-    /** [ADDED]: เพิ่มฟิลด์ที่อยู่แบบละเอียดเพื่อรองรับ Schema Markup (Fix TS2353) */
     readonly streetAddress: string;
     readonly address: string;
     readonly postalCode: string;
     readonly workHours: string;
+    readonly mapUrl?: string; // เพิ่มลิงก์ Google Maps
   };
   readonly links: {
     readonly line: string;
@@ -86,6 +102,7 @@ export interface SiteConfig {
     readonly facebook: string;
     readonly github: string;
     readonly twitter?: string;
+    readonly youtube?: string; // เผื่อมีช่อง YouTube
   };
   readonly business: {
     readonly location: string;
@@ -107,12 +124,16 @@ export interface CatalogItem {
   readonly name: string;
   readonly description: string;
   readonly icon: IconName;
+  readonly title?: string;
+  readonly price?: string; // เผื่อใส่ราคาสินค้าย่อย
+  readonly image?: string; // เผื่อมีรูปสินค้า
 }
 
 export interface ExpertiseItem {
   readonly title: string;
   readonly description: string;
   readonly icon: IconName;
+  readonly level?: number; // 1-100 สำหรับ Skill Bar
 }
 
 export interface ServiceFeature {
@@ -127,9 +148,17 @@ export interface ServiceFaq {
 }
 
 /**
- * @interface TemplateMasterData
- * [STABILIZED]: รวมทุก Property สำหรับการเรนเดอร์ในระดับ Enterprise
+ * [ENHANCED]: Theme Configuration
+ * รองรับการตั้งค่าสีที่ละเอียดขึ้น รวมถึง Gradient
  */
+export interface ThemeConfig {
+  readonly primary: string;    // สีหลัก (Brand Primary)
+  readonly secondary?: string; // สีรอง
+  readonly background?: string; // สีพื้นหลัง
+  readonly accent?: string;    // สีเน้น (เช่น Badge, Highlight)
+  readonly gradient?: string;  // CSS Gradient String
+}
+
 export interface TemplateMasterData {
   readonly id: string;
   readonly title: string;
@@ -145,29 +174,39 @@ export interface TemplateMasterData {
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
 
-  // [FIXED]: ระบุ Type ให้ชัดเจนและเป็น Readonly Array
+  // [THEME]: ใช้ Interface ใหม่ที่ยืดหยุ่นขึ้น
+  readonly theme?: ThemeConfig;
+
+  // Arrays
   readonly benefits: readonly string[];
   readonly coreFeatures: readonly ServiceFeature[];
   readonly faqs: readonly ServiceFaq[];
 
+  // Optional/Specific Fields
   readonly clientTrust?: string;
   readonly items?: readonly CatalogItem[];
   readonly expertise?: readonly ExpertiseItem[];
 }
 
-// Alias สำหรับใช้ใน Component ที่อาจจะใช้ชื่อ ServiceData
 export type ServiceData = TemplateMasterData;
 
 // --- [04. CONTENT & MDX SCHEMAS] ---
 
 /**
- * [CORE_SCHEMA]: หัวใจของการทำ Content SEO
+ * [ENHANCED]: SEO Specific Metadata
+ * แยกออกมาเพื่อให้ Reuse ได้ง่าย
  */
-export interface BaseContent {
-  readonly slug: string;
+export interface SEOMetadata {
   readonly title: string;
-  readonly description: string; // Meta description
-  readonly excerpt: string; // Short summary for UI
+  readonly description: string;
+  readonly ogImage?: string;
+  readonly noIndex?: boolean; // กรณีไม่อยากให้ Index
+  readonly keywords?: readonly string[];
+}
+
+export interface BaseContent extends SEOMetadata {
+  readonly slug: string;
+  readonly excerpt: string;
   readonly date: string;
   readonly thumbnail: string;
   readonly tags: readonly string[];
@@ -179,6 +218,7 @@ export interface BaseContent {
 export interface BlogPost extends BaseContent {
   readonly category: string;
   readonly readingTime?: string;
+  readonly relatedPosts?: readonly string[]; // Slug ของบทความที่เกี่ยวข้อง
 }
 
 export interface CaseStudy extends BaseContent {
@@ -187,6 +227,8 @@ export interface CaseStudy extends BaseContent {
   readonly category: string;
   readonly results: readonly string[];
   readonly technicalStack: readonly string[];
+  readonly beforeImage?: string; // รูปเปรียบเทียบ Before
+  readonly afterImage?: string;  // รูปเปรียบเทียบ After
 }
 
 // --- [05. LOCAL SEO & AREA NODES] ---
@@ -194,7 +236,6 @@ export interface CaseStudy extends BaseContent {
 export interface AreaNode {
   readonly slug: string;
   readonly province: string;
-  // [FIXED]: เพิ่ม Optional Name เพื่อให้ Component เก่า (AreaCard) ใช้งานได้โดยไม่ Error
   readonly name?: string;
   readonly title: string;
   readonly description: string;
@@ -202,8 +243,16 @@ export interface AreaNode {
   readonly seoDescription: string;
   readonly priority: number;
   readonly templateSlug: "corporate" | "salepage" | "local" | string;
+  
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
+  
   readonly heroImage: string;
   readonly longDescription?: string;
+  
+  // [NEW]: Latitude/Longitude สำหรับ Schema Map
+  readonly coordinates?: {
+    readonly lat: number;
+    readonly lng: number;
+  };
 }

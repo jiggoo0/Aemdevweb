@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v16.7 (PERSONAL_BRANDING)
- * [STRATEGY]: Identity Architecture | Personal Authority | High-Fidelity Flow
+ * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.1.0 (THEME_AWARE)
+ * [STRATEGY]: Instant LCP Paint | Identity Architecture | Dynamic Theming
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -41,7 +41,8 @@ function BioTemplate({ data }: BioTemplateProps) {
   const schema = generateBioSchema(data);
 
   return (
-    <LayoutEngine spacing="specialist">
+    // [THEME INJECTION]: ส่ง Theme จาก Data ไปยัง LayoutEngine
+    <LayoutEngine spacing="specialist" theme={data.theme}>
       {/* 01. SEO SIGNAL: ยืนยันตัวตนผู้เชี่ยวชาญ */}
       <JsonLd data={schema} />
 
@@ -60,37 +61,37 @@ function BioTemplate({ data }: BioTemplateProps) {
         secondaryActionLabel="ดูผลงานที่ผ่านมา"
       />
 
-      {/* 03. IDENTITY VISUAL: ภาพลักษณ์มืออาชีพ */}
+      {/* 03. IDENTITY VISUAL: ภาพลักษณ์มืออาชีพ (LCP Optimized) */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: 50 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="group relative mx-auto max-w-5xl"
-        >
-          {/* Ambient Aura */}
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-100" />
+        <div className="group relative mx-auto max-w-5xl">
+          {/* Ambient Aura: ใช้ CSS Animation แทน JS เพื่อความเร็ว */}
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-100 will-change-opacity" />
 
+          {/* [LCP FIX]: รูปภาพโหลดทันที ไม่รอ Animation */}
           <div className="relative overflow-hidden rounded-[3rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[4rem] md:p-4">
+            
             {/* Social Links Badge */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 md:flex">
-              <a
-                href={SITE_CONFIG.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
-              >
-                <IconRenderer name="Github" className="text-white" size={20} />
-              </a>
-              <a
-                href={SITE_CONFIG.links.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
-              >
-                <IconRenderer name="Facebook" className="text-white" size={20} />
-              </a>
+              {SITE_CONFIG.links?.github && (
+                <a
+                  href={SITE_CONFIG.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
+                >
+                  <IconRenderer name="Github" className="text-white" size={20} />
+                </a>
+              )}
+              {SITE_CONFIG.links?.facebook && (
+                <a
+                  href={SITE_CONFIG.links.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-white/10 bg-white/5 p-3 transition-colors hover:bg-white/10"
+                >
+                  <IconRenderer name="Facebook" className="text-white" size={20} />
+                </a>
+              )}
             </div>
 
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] bg-gray-900 md:aspect-[21/9] md:rounded-[3.5rem]">
@@ -99,14 +100,21 @@ function BioTemplate({ data }: BioTemplateProps) {
                 alt={`Personal Portfolio: ${SITE_CONFIG.expert.displayName}`}
                 fill
                 className="object-cover object-top transition-transform duration-1000 group-hover:scale-[1.02]"
-                priority
+                priority // LCP Critical
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />
             </div>
           </div>
 
-          {/* Status Badge: Available for Work */}
-          <div className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex">
+          {/* Status Badge */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
+          >
             <div className="bg-brand-primary/10 border-brand-primary/20 relative flex h-14 w-14 items-center justify-center rounded-2xl border">
               <span className="absolute -top-1 -right-1 flex h-3 w-3">
                 <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
@@ -122,8 +130,8 @@ function BioTemplate({ data }: BioTemplateProps) {
                 Available for Hire
               </p>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* 04. AUTHORITY STRIP: ความน่าเชื่อถือ */}
@@ -160,7 +168,7 @@ function BioTemplate({ data }: BioTemplateProps) {
         columns={3}
       />
 
-      {/* 06. PHILOSOPHY: แนวคิดการทำงาน (New Section) */}
+      {/* 06. PHILOSOPHY: แนวคิดการทำงาน */}
       <section className="border-y border-white/5 bg-white/[0.02] py-24">
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-4xl space-y-8 text-center">

@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v16.7 (CONVERSION_OPTIMIZED)
+ * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.0.1 (LCP_TUNED)
  * [STRATEGY]: Visual Impact | Trust Signals | Seamless Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -8,7 +8,6 @@
 
 import React, { memo } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
@@ -53,16 +52,11 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
 
       {/* 03. VISUAL SHOWCASE: โชว์ภาพลักษณ์ความมืออาชีพ */}
       <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="group relative mx-auto max-w-5xl"
-        >
-          {/* Ambient Glow */}
-          <div className="bg-brand-primary/20 absolute -inset-1 opacity-50 blur-2xl transition-opacity duration-500 group-hover:opacity-75" />
+        <div className="group relative mx-auto max-w-5xl">
+          {/* Ambient Glow: CSS Animation */}
+          <div className="bg-brand-primary/20 absolute -inset-1 opacity-50 blur-2xl transition-opacity duration-500 group-hover:opacity-75 will-change-opacity" />
 
+          {/* [LCP FIX]: รูปภาพโหลดทันที */}
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[3rem]">
             {/* Browser Header Simulation */}
             <div className="flex items-center gap-2 border-b border-white/5 bg-white/5 px-6 py-4 backdrop-blur-md">
@@ -94,7 +88,7 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-60" />
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* 04. AUTHORITY & STATS: ยืนยันผลลัพธ์ */}
@@ -121,10 +115,11 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
       <FeatureGrid
         heading="สิ่งที่คุณจะได้รับจากระบบนี้"
         subheading="ไม่ใช่แค่หน้าเว็บธรรมดา แต่คือเครื่องมือทางการตลาดที่ออกแบบมาเพื่อปิดการขายโดยเฉพาะ"
+        // [DATA MAPPING]: แปลง benefits เป็น Feature Item
         items={(data.benefits || []).map((benefit, index) => ({
           title: benefit,
-          description: "Optimized for maximum conversion and user engagement.",
-          icon: index % 2 === 0 ? "Target" : "Zap",
+          description: "Optimized for maximum conversion.",
+          icon: index % 2 === 0 ? "Target" : "Zap", // Fallback Icon
           category: "Key Advantage",
           technicalDetail: "High-Performance Logic",
         }))}

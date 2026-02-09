@@ -1,6 +1,6 @@
 /**
- * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.0.1 (STABILIZED)
- * [STRATEGY]: Intelligence Module Grid | Optical Balance | Performance First
+ * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.0.2 (PERFORMANCE_TUNED)
+ * [STRATEGY]: Intelligence Module Grid | Optical Balance | GPU Accelerated
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -22,8 +22,9 @@ export interface FeatureItem {
 
 interface FeatureGridProps {
   readonly items: readonly FeatureItem[];
-  readonly heading?: string;
-  readonly subheading?: string;
+  // [OPTIMIZATION]: รองรับ ReactNode เพื่อให้ใส่ HTML/Components ย่อยได้
+  readonly heading?: string | React.ReactNode;
+  readonly subheading?: string | React.ReactNode;
   readonly columns?: 2 | 3 | 4;
   readonly className?: string;
 }
@@ -40,22 +41,22 @@ const FeatureGrid = ({
   columns = 3,
   className,
 }: FeatureGridProps) => {
-  // [GRID LOGIC]: Adaptive Grid Configuration
+  // [GRID LOGIC]: Adaptive Grid Configuration (Mobile First)
   const gridCols = {
-    2: "md:grid-cols-2",
-    3: "md:grid-cols-2 lg:grid-cols-3",
-    4: "md:grid-cols-2 lg:grid-cols-4",
+    2: "grid-cols-1 md:grid-cols-2",
+    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   return (
     <section className={cn("bg-surface-main relative overflow-hidden py-24 md:py-32", className)}>
       {/* 01. AMBIENT PHYSICS: ระบบเลเยอร์บรรยากาศ */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
+        className="pointer-events-none absolute inset-0 z-0 select-none"
         aria-hidden="true"
       >
-        <div className="bg-infrastructure-grid absolute inset-0" />
-        <div className="ambient-aura absolute top-0 right-1/4 h-[600px] w-[600px] opacity-20 blur-[120px]" />
+        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
+        <div className="ambient-aura absolute top-0 right-1/4 h-[600px] w-[600px] opacity-20 blur-[120px] will-change-transform" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
@@ -74,7 +75,7 @@ const FeatureGrid = ({
           </h2>
           <div className="border-brand-primary border-l-4 pl-6 md:pl-10">
             <p className="max-w-2xl text-lg leading-relaxed font-medium text-gray-400 italic opacity-80 md:text-2xl">
-              “{subheading}”
+              {typeof subheading === 'string' ? `“${subheading}”` : subheading}
             </p>
           </div>
         </header>
@@ -91,11 +92,12 @@ const FeatureGrid = ({
                 delay: index * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               className={cn(
-                "group relative flex h-full flex-col rounded-[2.5rem] p-8 transition-all duration-700 md:p-10",
+                "group relative flex h-full flex-col rounded-[2.5rem] p-8 transition-all duration-500 md:p-10",
                 "border border-white/5 bg-[#0A0A0A] shadow-lg",
                 "hover:border-brand-primary/40 hover:-translate-y-2 hover:bg-white/[0.02] hover:shadow-2xl",
+                "will-change-transform" // [PERFORMANCE]: Hint browser for smoother animation
               )}
             >
               {/* Node Identifier */}
@@ -127,7 +129,7 @@ const FeatureGrid = ({
                 </div>
 
                 <p className="text-base leading-relaxed font-medium text-gray-400 italic opacity-70 transition-opacity group-hover:opacity-100">
-                  “{feature.description}”
+                  {feature.description}
                 </p>
 
                 {/* Technical Spec Signal */}

@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: CORPORATE_ORCHESTRATOR v16.7 (ENTERPRISE_GRADE)
+ * [TEMPLATE COMPONENT]: CORPORATE_ORCHESTRATOR v17.0.2 (LINT_FIXED)
  * [STRATEGY]: Organizational Authority | Enterprise Visualization | High-Fidelity Flow
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -52,18 +52,13 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         secondaryActionLabel="ดูมาตรฐาน Security"
       />
 
-      {/* 03. VISUAL ARCHITECTURE: โครงสร้างระบบที่แข็งแกร่ง */}
+      {/* 03. VISUAL ARCHITECTURE: โครงสร้างระบบ (LCP Optimized) */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          viewport={{ once: true }}
-          className="group relative mx-auto max-w-7xl"
-        >
-          {/* Ambient Light */}
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-40 blur-[100px] transition-opacity duration-1000 group-hover:opacity-60" />
+        <div className="group relative mx-auto max-w-7xl">
+          {/* Ambient Light: CSS Animation */}
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-40 blur-[100px] transition-opacity duration-1000 group-hover:opacity-60 will-change-opacity" />
 
+          {/* [LCP FIX]: รูปภาพโหลดทันที */}
           <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[4rem] md:p-4">
             {/* Security Badge Overlay */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border border-green-500/20 bg-green-950/30 px-4 py-1.5 backdrop-blur-md md:flex">
@@ -86,8 +81,14 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
             </div>
           </div>
 
-          {/* Enterprise Status Badge */}
-          <div className="absolute -bottom-8 left-8 z-20 hidden items-center gap-4 rounded-[2rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex">
+          {/* Enterprise Status Badge: Animation แยก */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="absolute -bottom-8 left-8 z-20 hidden items-center gap-4 rounded-[2rem] border border-white/10 bg-black/80 px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
+          >
             <div className="bg-brand-primary/10 border-brand-primary/20 flex h-12 w-12 items-center justify-center rounded-xl border">
               <IconRenderer name="ShieldCheck" className="text-brand-primary" size={24} />
             </div>
@@ -99,8 +100,8 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
                 High Availability
               </span>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* 04. CORPORATE TRUST: ความน่าเชื่อถือระดับสากล */}
@@ -127,23 +128,27 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
       <FeatureGrid
         heading="Enterprise Solutions"
         subheading="โครงสร้างระบบที่ถูกออกแบบมาเพื่อรองรับการขยายตัว (Scalability) และความปลอดภัย (Security) สูงสุด"
-        items={(data.coreFeatures || []).map((feat, idx) => ({
-          ...feat,
-          icon: idx % 2 === 0 ? "Server" : "Lock",
+        // [FIX]: ลบ idx ออกเนื่องจากไม่ได้ใช้งาน (Fix unused-vars warning)
+        items={(data.coreFeatures || []).map((feat) => ({
+          title: feat.title,
+          description: feat.description,
+          icon: feat.icon,
           category: "System Module",
           technicalDetail: "SLA 99.9% Guarantee",
         }))}
         columns={2}
       />
 
-      {/* 06. SECURITY LAYER: ความปลอดภัยข้อมูล (New Section) */}
-      <section className="border-y border-white/5 bg-white/[0.02] py-24">
+      {/* 06. SECURITY LAYER: ความปลอดภัยข้อมูล */}
+      <article className="border-y border-white/5 bg-white/[0.02] py-24">
         <div className="container mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
-              <h3 className="text-3xl font-bold text-white uppercase md:text-4xl">
-                Data Security & Compliance
-              </h3>
+              <header>
+                <h3 className="text-3xl font-bold text-white uppercase md:text-4xl">
+                  Data Security & Compliance
+                </h3>
+              </header>
               <p className="text-lg leading-relaxed text-gray-400">
                 เราให้ความสำคัญสูงสุดกับการปกป้องข้อมูลองค์กร ด้วยมาตรฐานความปลอดภัยระดับสากล
                 และการปฏิบัติตามกฎหมาย PDPA อย่างเคร่งครัด
@@ -162,12 +167,14 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
                 ))}
               </ul>
             </div>
+
+            {/* Visual Representation of Security */}
             <div className="relative mx-auto aspect-square w-full max-w-md lg:ml-auto">
-              <div className="bg-brand-primary/5 animate-pulse-slow absolute inset-0 rounded-full blur-3xl" />
+              <div className="bg-brand-primary/5 absolute inset-0 rounded-full blur-3xl animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]" />
               <div className="relative flex h-full w-full items-center justify-center rounded-3xl border border-white/10 bg-black/40 p-8 backdrop-blur-sm">
                 <IconRenderer name="Shield" size={120} className="text-brand-primary/20" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-brand-primary font-mono text-xs font-bold tracking-widest">
+                  <span className="text-brand-primary font-mono text-xs font-bold tracking-widest animate-pulse">
                     SECURE::ENCRYPTED
                   </span>
                 </div>
@@ -175,7 +182,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
             </div>
           </div>
         </div>
-      </section>
+      </article>
 
       {/* 07. CALL TO ACTION */}
       <ConversionCTA

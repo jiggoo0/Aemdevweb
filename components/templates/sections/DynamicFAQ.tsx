@@ -1,5 +1,5 @@
 /**
- * [SECTION COMPONENT]: DYNAMIC_FAQ_ENGINE v17.0.1 (STABILIZED)
+ * [SECTION COMPONENT]: DYNAMIC_FAQ_ENGINE v17.0.2 (ACCESSIBILITY_TUNED)
  * [STRATEGY]: Intelligence Knowledge Base | SEO Authority | Fluid Motion
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -39,9 +39,10 @@ const DynamicFAQ = ({
   description = "รวบรวมข้อมูลเชิงลึกและคำชี้แจงด้านสถาปัตยกรรมระบบเพื่อให้คุณเริ่มแผนงานได้อย่างมั่นใจ",
   className,
 }: DynamicFAQProps) => {
+  // [STATE]: ใช้ index เพื่อเปิดทีละอัน (Exclusive Accordion)
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // [A] SEO ARCHITECTURE: การเตรียม Payload สำหรับ Google Search Console
+  // [A] SEO ARCHITECTURE: เตรียม Schema
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -65,7 +66,7 @@ const DynamicFAQ = ({
         aria-hidden="true"
       >
         <div className="bg-infrastructure-grid absolute inset-0" />
-        <div className="ambient-aura absolute right-0 bottom-0 h-[500px] w-[500px] opacity-[0.15] blur-[120px]" />
+        <div className="ambient-aura absolute right-0 bottom-0 h-[500px] w-[500px] opacity-[0.15] blur-[120px] will-change-transform" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
@@ -86,10 +87,12 @@ const DynamicFAQ = ({
           </div>
         </header>
 
-        {/* 03. ACCORDION REGISTRY: ระบบโหนดคำถามที่ตอบสนองอย่างลื่นไหล */}
+        {/* 03. ACCORDION REGISTRY: ระบบโหนดคำถาม */}
         <div className="max-w-5xl space-y-4 md:space-y-6">
           {items.map((item, index) => {
             const isActive = activeIndex === index;
+            const contentId = `faq-content-${index}`;
+            const headerId = `faq-header-${index}`;
 
             return (
               <div
@@ -102,9 +105,11 @@ const DynamicFAQ = ({
                 )}
               >
                 <button
-                  onClick={() => setActiveIndex(isActive ? null : index)}
-                  className="flex w-full items-start justify-between p-6 text-left md:items-center md:p-10"
+                  id={headerId}
+                  aria-controls={contentId}
                   aria-expanded={isActive}
+                  onClick={() => setActiveIndex(isActive ? null : index)}
+                  className="flex w-full items-start justify-between p-6 text-left md:items-center md:p-10 cursor-pointer"
                 >
                   <div className="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
                     <span
@@ -140,6 +145,9 @@ const DynamicFAQ = ({
                 <AnimatePresence>
                   {isActive && (
                     <motion.div
+                      id={contentId}
+                      role="region"
+                      aria-labelledby={headerId}
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}

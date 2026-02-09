@@ -30,9 +30,6 @@ import ImpactStats from "@/components/shared/ImpactStats";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/button";
-
-// [ADDED]: Import ServiceCard เพื่อป้องกัน Error ใน Service Section
-// (ตรวจสอบ Path ให้ตรงกับที่คุณเก็บไฟล์ ServiceCard.tsx)
 import ServiceCard from "@/components/features/services/ServiceCard";
 
 export const metadata: Metadata = {
@@ -42,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  // [DATA FETCHING]: Parallel Request Pattern
+  // [DATA FETCHING]: Parallel Request Pattern for Performance
   const [casesData, postsData] = await Promise.all([
     getAllCaseStudies().catch(() => []),
     getAllPosts().catch(() => []),
@@ -54,7 +51,7 @@ export default async function HomePage() {
   // กรองเฉพาะพื้นที่ Priority สูง (Score 95+)
   const featuredAreas = AREA_NODES.filter((node) => node.priority >= 95).slice(0, 4);
 
-  // ดึง 3 บริการแรกตามลำดับความสำคัญ (1=สำคัญสุด)
+  // ดึง 3 บริการแรกตามลำดับความสำคัญ
   const featuredServices = [...MASTER_REGISTRY]
     .sort((a, b) => (a.priority || 99) - (b.priority || 99))
     .slice(0, 3);
@@ -108,7 +105,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 04: SERVICE BLUEPRINT (Direct Mapping) */}
+      {/* SECTION 04: SERVICE BLUEPRINT */}
       <section id="services" className="relative overflow-hidden bg-[#050505] py-24 md:py-32">
         <div className="from-brand-primary/5 absolute top-0 left-0 h-full w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] via-transparent to-transparent opacity-40" />
 
@@ -138,7 +135,6 @@ export default async function HomePage() {
 
           <div className="grid gap-8 md:grid-cols-3">
             {featuredServices.map((service, index) => (
-              // [UPDATED]: ใช้ ServiceCard แทน Link ธรรมดา เพื่อให้ได้ Design ที่สวยงามและ Interactive
               <ServiceCard
                 key={service.id || index}
                 data={service}
@@ -239,7 +235,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 08: LOCAL NODES (Nationwide Strategy) */}
+      {/* SECTION 08: LOCAL NODES */}
       <section id="areas" className="border-t border-white/5 bg-[#050505] py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mb-12 flex items-center justify-between opacity-70">

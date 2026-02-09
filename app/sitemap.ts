@@ -1,6 +1,6 @@
 /**
- * [SEO INFRASTRUCTURE]: DYNAMIC_SITEMAP_ENGINE v17.0.2 (REFINED)
- * [STRATEGY]: Home-Centric Weighting | Single Source of Truth | SSR Optimized
+ * [SEO INFRASTRUCTURE]: DYNAMIC_SITEMAP_ENGINE v17.1.0 (STABILIZED)
+ * [STRATEGY]: Tiered Authority Mapping | Parallel Node Discovery | SSR Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,7 +12,8 @@ import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 /**
  * @function sitemap
- * @description สร้างสารบัญเว็บไซต์แบบ Dynamic เพื่อให้ Search Engine จัดลำดับข้อมูลได้อย่างแม่นยำ
+ * @description หน่วยประมวลผลสารบัญเว็บไซต์แบบ Dynamic 
+ * เพื่อเป็น GPS นำทางให้ Googlebot เข้าถึงทุก Local Nodes และ Authority Content ได้อย่างรวดเร็ว
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.siteUrl.endsWith("/")
@@ -21,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * 01. THE POWER NODE: หน้าแรก (Home)
-   * [MANDATE]: กำหนดค่าสูงสุด (1.0) และความถี่การเข้าสำรวจรายวัน (Daily)
+   * [MANDATE]: ศูนย์กลางอำนาจของเว็บไซต์ กำหนด Priority สูงสุดเสมอ
    */
   const homeNode: MetadataRoute.Sitemap[0] = {
     url: baseUrl,
@@ -41,8 +42,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   /**
-   * 03. MONEY_PAGES: บริการและพื้นที่ยุทธศาสตร์
-   * [STRATEGY]: ความสำคัญสูงเพื่อกระตุ้น Conversion และ Local SEO
+   * 03. STRATEGIC NODES: บริการและพื้นที่ยุทธศาสตร์ (Money Pages)
+   * [STRATEGY]: กำหนดค่า 0.9 เพื่อให้ Search Engine ให้ความสำคัญรองจากหน้าแรก
    */
   const serviceNodes = MASTER_REGISTRY.map((service) => ({
     url: `${baseUrl}/services/${service.templateSlug}`,
@@ -60,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * 04. AUTHORITY_CONTENT: บทความและเคสความสำเร็จ
-   * ดึงข้อมูลแบบ Asynchronous พร้อมกันเพื่อประสิทธิภาพสูงสุด
+   * [OPTIMIZATION]: ใช้ Promise.all เพื่อลด I/O Wait Time ในขั้นตอนการสร้าง Static Page
    */
   const [blogs, cases] = await Promise.all([
     getAllPosts().catch(() => []),
@@ -71,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date || new Date()),
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.7, // ปรับเพิ่มขึ้นเล็กน้อยเพื่อดันอันดับ Knowledge Hub
   }));
 
   const caseNodes = cases.map((item) => ({
@@ -82,7 +83,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   /**
-   * 05. COMPLIANCE_NODES: หน้ากฎหมาย
+   * 05. COMPLIANCE_NODES: หน้ากฎหมายและนโยบาย
+   * [MANDATE]: กำหนดค่าต่ำสุดเพื่อประหยัด Crawl Budget ให้ไปเน้นหน้าที่ทำเงินแทน
    */
   const legalNodes = ["/privacy", "/terms"].map((route) => ({
     url: `${baseUrl}${route}`,
@@ -91,7 +93,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.1,
   }));
 
-  // รวบรวมข้อมูลทั้งหมดและส่งออกเป็น Flat Array
+  // รวบรวมและส่งออกเป็น Flat Array ตามมาตรฐาน Next.js Sitemap Route
   return [
     homeNode,
     ...coreRoutes,

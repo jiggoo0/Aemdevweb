@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.0.4 (NATIONWIDE_OPTIMIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.2.1 (FINAL_STABILIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -26,7 +26,8 @@ export const SITE_CONFIG: SiteConfig = {
   persona: {
     tone: "Professional Partner, Expert Authoritative, Trustworthy",
     communicationStyle: "Result-oriented, Friendly Expert, Direct & Clear",
-    antiConnotation: "Avoid Robot-speak, No Over-complicated Jargon, Human-to-Human Focus",
+    antiConnotation:
+      "Avoid Robot-speak, No Over-complicated Jargon, Human-to-Human Focus",
   },
 
   // [04. SEO AUTHORITY]: ชุดคำค้นหาสำคัญเพื่อการทำอันดับ (Strategic Keyword Clusters)
@@ -56,7 +57,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "Premium Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.0.4", // Incremented for Expanded Focus Update
+    version: "17.2.1", // [UPDATED]: Synced with Typo Fix
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -64,7 +65,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT Standard)
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
-    legalName: "Alongkorn Yomkerd",
+    legalName: "Alongkorn Yomkerd", // [FIXED]: Corrected typo from Alongkorl
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "ผู้เชี่ยวชาญด้านเทคนิคและผู้วางกลยุทธ์ SEO (Technical SEO Specialist)",
     jobTitle: "Technical SEO Specialist",
@@ -98,8 +99,8 @@ export const SITE_CONFIG: SiteConfig = {
 
   // [09. BUSINESS METRICS]: ข้อมูลพื้นที่บริการ (Expanded Focus)
   business: {
-    location: "Thailand", // [CHANGED]: จาก Kamphaeng Phet เป็น Thailand
-    region: "ASEAN", // [CHANGED]: ขยายขอบเขตภูมิภาค
+    location: "Thailand",
+    region: "ASEAN",
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",

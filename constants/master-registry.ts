@@ -1,21 +1,21 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.0.3 (FINAL_VERIFIED)
- * [STRATEGY]: Unified Visual Preview | Single Source of Truth | SEO Optimized
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.2.0 (THEME_STABILIZED)
+ * [STRATEGY]: Psychological Pricing | Pain Point Resolution | Color Psychology
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { TemplateMasterData } from "@/types";
 
 /**
- * @description คลังข้อมูลบริการหลักที่เชื่อมโยงรูปภาพพรีวิวสำหรับการแสดงผล Technical Modules
+ * @description คลังข้อมูลบริการหลักที่เชื่อมโยงรูปภาพพรีวิวและการตั้งค่าธีมสี (Theme Configuration)
  */
 export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
-  // --- [01. SALEPAGE: ระบบหน้าเว็บปิดการขาย] ---
+  // --- [01. SALEPAGE: ระบบหน้าเว็บปิดการขาย (HERO PRODUCT)] ---
   {
     id: "AEM-SVC-SP-01",
-    title: "Sale Page หน้าเว็บที่เน้นปิดการขายโดยเฉพาะ",
+    title: "Sale Page ปิดการขายอัตโนมัติ (Single Page)",
     description:
-      "เปลี่ยนคนดูให้เป็นลูกค้าด้วยหน้าเว็บที่เน้นให้ข้อมูลครบถ้วน จบในหน้าเดียว และช่วยให้ลูกค้าตัดสินใจซื้อง่ายขึ้น",
+      "เปลี่ยนคนดูให้เป็นยอดโอน ด้วยหน้าเว็บหน้าเดียวที่ออกแบบมาเพื่อ 'ขายของ' โดยเฉพาะ รองรับการยิงแอด 100%",
     image: "/images/service/preview.webp",
     price: "2,900",
     currency: "THB",
@@ -23,43 +23,49 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "เริ่มต้น",
     category: "landing",
     templateSlug: "salepage",
+    // [THEME]: Action Red (กระตุ้นการตัดสินใจ/ความเร่งด่วน)
+    theme: {
+      primary: "#ef4444", // Red-500
+      secondary: "#b91c1c",
+    },
     benefits: [
-      "หน้าเว็บโหลดไวทันใจ ไม่ปล่อยให้ลูกค้าหลุดเพราะรอโหลดนาน",
-      "วางระบบเก็บข้อมูล (Pixel & Tracking) สำหรับยิงโฆษณาได้แม่นยำ",
-      "จัดวางข้อมูลให้ลื่นไหล กระตุ้นความอยากซื้อได้ดีกว่าเว็บทั่วไป",
+      "โหลดไวใน 1 วินาที ลูกค้าไม่หนี ยอดขายไม่ตก",
+      "ติดตั้ง Pixel/Conversion API แม่นยำ ยิงแอดได้คุ้มค่าทุกบาท",
+      "ออกแบบปุ่มสั่งซื้อ (CTA) ในจุดที่ลูกค้ากดง่ายที่สุด",
     ],
     coreFeatures: [
       {
-        title: "Direct Response Design",
-        description: "ออกแบบมาเพื่อนำสายตาไปสู่การกดสั่งซื้อ",
+        title: "Conversion Focus",
+        description: "ดีไซน์ที่ตัดสิ่งรบกวนออก เหลือแค่สิ่งที่ทำให้ลูกค้า 'อยากซื้อ'",
         icon: "Target",
       },
       {
-        title: "Mobile First",
-        description: "เปิดดูผ่านมือถือได้สวยงามและลื่นไหล 100%",
+        title: "Mobile Speed",
+        description: "ปรับจูนให้เร็วสุดบนมือถือ เพราะลูกค้า 90% ซื้อผ่านมือถือ",
         icon: "Smartphone",
       },
       {
-        title: "Fast Checkout",
-        description: "ปุ่มทักแชทหรือปุ่มสั่งซื้อโดดเด่น กดง่ายทันที",
-        icon: "Zap",
+        title: "One-Click Chat",
+        description: "ปุ่มทัก Line/Messenger ลอยตามนิ้ว กดปุ๊บเด้งแชทปั๊บ",
+        icon: "MessageCircle",
       },
     ],
     faqs: [
       {
-        question: "ใช้เวลานานแค่ไหนถึงจะใช้งานได้?",
-        answer: "โดยปกติจะใช้เวลาประมาณ 3-5 วันทำการ หน้า Sale Page ก็พร้อมเปิดรับออเดอร์แล้วครับ",
+        question: "ทำเสร็จแล้วยิงแอดได้เลยไหม?",
+        answer: "ได้ทันทีครับ เราติดตั้ง Facebook Pixel และ TikTok Pixel ให้พร้อมใช้งาน",
       },
     ],
     priority: 1,
     isPopular: true,
   },
 
-  // --- [02. CORPORATE: ระบบเว็บไซต์องค์กร] ---
+  // --- [02. CORPORATE: ระบบเว็บไซต์องค์กร (TRUST BUILDER)] ---
   {
     id: "AEM-SVC-CP-03",
-    title: "Website Corporate เว็บไซต์บริษัทที่เน้นความน่าเชื่อถือ",
-    description: "สร้างความประทับใจแรกเห็นให้ธุรกิจของคุณ ด้วยเว็บไซต์มาตรฐานสากลที่ดูเป็นมืออาชีพ",
+    title: "Corporate Website เว็บไซต์บริษัทสร้างความน่าเชื่อถือ",
+    description:
+      "ยกระดับธุรกิจของคุณให้ดูเป็นมืออาชีพในสายตาลูกค้าและคู่ค้า ด้วยดีไซน์ที่ทันสมัยและระบบที่เสถียร",
     image: "/images/service/preview.webp",
     price: "9,900",
     currency: "THB",
@@ -67,38 +73,50 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "โปรเจกต์",
     category: "business",
     templateSlug: "corporate",
-    clientTrust: "ได้รับความไว้วางใจจากธุรกิจและองค์กรระดับมืออาชีพ",
+    // [THEME]: Trust Blue (ความมั่นคง/น่าเชื่อถือ/เป็นทางการ)
+    theme: {
+      primary: "#3b82f6", // Blue-500
+      secondary: "#1e40af",
+    },
+    clientTrust: "มาตรฐานที่บริษัทชั้นนำเลือกใช้",
     benefits: [
-      "ทำให้ภาพลักษณ์บริษัทดูน่าเชื่อถือและดูเป็นมืออาชีพในสายตาคู่ค้า",
-      "วางรากฐานระบบให้คนหาธุรกิจคุณเจอใน Google ได้ง่ายในระยะยาว",
+      "สร้าง First Impression ที่ดีเยี่ยม ลูกค้าเห็นแล้วเชื่อมั่นทันที",
+      "รองรับ SEO ระยะยาว ให้ลูกค้าค้นหาเจอชื่อบริษัทคุณเป็นอันดับแรก",
+      "ระบบหลังบ้านจัดการง่าย เพิ่มข่าวสารหรือผลงานได้เองตลอด 24 ชม.",
     ],
     coreFeatures: [
       {
-        title: "Brand Identity",
-        description: "งานดีไซน์ที่สะท้อนเอกลักษณ์และความน่าเชื่อถือของธุรกิจคุณ",
-        icon: "Shield",
+        title: "Premium Identity",
+        description: "ออกแบบตาม CI แบรนด์ ไม่ซ้ำใคร ดูแพงและเป็นทางการ",
+        icon: "ShieldCheck",
       },
       {
-        title: "SEO Infrastructure",
-        description: "เตรียมระบบหลังบ้านให้พร้อมสำหรับการติดหน้าแรก Google",
+        title: "Google Ready",
+        description: "วางโครงสร้าง SEO ถูกต้องตามหลัก Google 2026",
         icon: "Search",
+      },
+      {
+        title: "Multi-Language",
+        description: "รองรับการขยายระบบเป็น 2 ภาษา (ไทย/อังกฤษ) ในอนาคต",
+        icon: "Globe",
       },
     ],
     faqs: [
       {
-        question: "หลังจากทำเว็บเสร็จแล้ว มีคนดูแลไหม?",
-        answer: "มีครับ เราดูแลเรื่องความเสถียรของระบบและคอยซัพพอร์ตช่วยเหลือคุณตลอดครับ",
+        question: "มีการดูแลหลังการขายไหม?",
+        answer: "เราดูแลความปลอดภัยเว็บไซต์และ Backup ข้อมูลให้ฟรีตลอด 1 ปีเต็มครับ",
       },
     ],
-    priority: 3,
+    priority: 2,
     isFeatured: true,
   },
 
-  // --- [03. CATALOG: ระบบจัดการข้อมูลและแค็ตตาล็อก] ---
+  // --- [03. CATALOG: ระบบแค็ตตาล็อกออนไลน์ (PRODUCT SHOWCASE)] ---
   {
     id: "AEM-SVC-EC-05",
-    title: "Digital Catalog ระบบโชว์สินค้าและแค็ตตาล็อกออนไลน์",
-    description: "จัดระเบียบสินค้าให้เป็นหมวดหมู่ ค้นหาง่าย และโชว์สินค้าของคุณให้น่าสนใจกว่าเดิม",
+    title: "E-Catalog เว็บแค็ตตาล็อกสินค้าออนไลน์",
+    description:
+      "เลิกส่งไฟล์ PDF ให้ลูกค้า! เปลี่ยนมาใช้เว็บแค็ตตาล็อกที่ค้นหาง่าย อัปเดตสต็อกได้เอง ดูได้ทุกที่",
     image: "/images/service/preview.webp",
     price: "15,900",
     currency: "THB",
@@ -106,37 +124,49 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "เริ่มต้น",
     category: "ecommerce",
     templateSlug: "catalog",
+    // [THEME]: Creative Purple (ความพรีเมียม/ความคิดสร้างสรรค์)
+    theme: {
+      primary: "#a855f7", // Purple-500
+      secondary: "#7e22ce",
+    },
     benefits: [
-      "ช่วยให้ลูกค้าเลือกดูสินค้าได้สะดวก แยกหมวดหมู่ชัดเจน ค้นหาอะไรก็เจอ",
-      "คุณสามารถเพิ่มรูปภาพและใส่รายละเอียดสินค้าได้เอง ไม่จำกัดจำนวน",
+      "ลูกค้าค้นหาสินค้าเจอง่าย แบ่งหมวดหมู่ชัดเจน ไม่ต้องไถหาในแชท",
+      "ลดงานแอดมิน ลูกค้าดูรายละเอียดและสเปคสินค้าได้เองครบถ้วน",
+      "แชร์ลิงก์สินค้าแต่ละตัวให้ลูกค้าได้ทันที ดูเป็นมืออาชีพกว่าส่งรูป",
     ],
     coreFeatures: [
       {
-        title: "Smart Gallery",
-        description: "โชว์ภาพสินค้าได้สวยงาม ชัดเจน และโหลดไว",
-        icon: "Image",
+        title: "Smart Search",
+        description: "ระบบค้นหาสินค้าที่แม่นยำ พิมพ์ชื่อปุ๊บเจอปั๊บ",
+        icon: "Search",
       },
       {
-        title: "Data Management",
-        description: "ระบบจัดการสินค้าที่ใช้งานง่าย คุณก็อัปเดตเองได้",
+        title: "Unlimited Products",
+        description: "รองรับสินค้าได้ไม่จำกัด เพิ่มลดรายการได้เองง่ายๆ",
         icon: "Database",
+      },
+      {
+        title: "Inquiry Button",
+        description: "ปุ่ม 'ขอใบเสนอราคา' หรือ 'สอบถาม' ติดทุกหน้าสินค้า",
+        icon: "FileText",
       },
     ],
     faqs: [
       {
-        question: "ถ้ามีสินค้าเยอะมาก ระบบจะรองรับไหวไหม?",
+        question: "ลงสินค้าให้ด้วยไหม?",
         answer:
-          "ไหวแน่นอนครับ ระบบถูกออกแบบมาให้จัดการข้อมูลจำนวนมากได้สบาย ๆ โดยไม่มีค่าบริการรายเดือนเพิ่มครับ",
+          "เราลงข้อมูลเบื้องต้นให้ 20 รายการ พร้อมสอนวิธีลงสินค้าเพิ่มเองแบบจับมือทำครับ",
       },
     ],
-    priority: 6,
+    priority: 3,
   },
 
-  // --- [04. LOCAL: ความเชี่ยวชาญเฉพาะพื้นที่] ---
+  // --- [04. LOCAL: บริการปักหมุดและ SEO ท้องถิ่น (LOCAL DOMINANCE)] ---
   {
     id: "AEM-SVC-LS-10",
-    title: "Local SEO Service ระบบดึงลูกค้าในพื้นที่ (ปักหมุดธุรกิจ)",
-    description: "ทำให้ลูกค้าในละแวกใกล้เคียงหาธุรกิจคุณเจอเป็นเจ้าแรกบน Google Maps",
+    title: "Local SEO & Google Maps (ปักหมุดธุรกิจ)",
+    description:
+      "ดักจับลูกค้าในพื้นที่! ทำให้ร้านคุณขึ้นเป็นอันดับ 1 เมื่อคนแถวนั้นค้นหา",
     image: "/images/service/preview.webp",
     price: "6,900",
     currency: "THB",
@@ -144,37 +174,44 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "พื้นที่",
     category: "business",
     templateSlug: "local",
+    // [THEME]: Visible Amber (ความโดดเด่น/การมองเห็น/เป็นมิตร)
+    theme: {
+      primary: "#f59e0b", // Amber-500
+      secondary: "#b45309",
+    },
     benefits: [
-      "ดึงดูดลูกค้าที่อยู่ใกล้คุณ ซึ่งพร้อมจะเข้ามาใช้บริการได้ทันที",
-      "เพิ่มโอกาสให้คนตัดสินใจเลือกคุณด้วยรีวิวและพิกัดที่ถูกต้อง",
+      "ลูกค้าหาร้านเจอ ขับรถมาถูก เพิ่มยอดขายหน้าร้านจริง",
+      "แซงคู่แข่งในพื้นที่เดียวกัน ด้วยเทคนิคการปรับแต่งหมุด Google Maps",
+      "เพิ่มความน่าเชื่อถือด้วยรีวิวและการให้ข้อมูลที่ถูกต้องครบถ้วน",
     ],
     coreFeatures: [
       {
-        title: "Area Targeting",
-        description: "ใช้คำค้นหาที่คนในพื้นที่นิยมใช้จริง ๆ เพื่อให้คุณติดอันดับ",
+        title: "Map Optimization",
+        description: "ปรับแต่งหมุดธุรกิจให้ Google ดันขึ้นอันดับแรกๆ",
         icon: "MapPin",
       },
       {
-        title: "Google My Business",
-        description: "ดูแลและปรับแต่งข้อมูลธุรกิจบนแผนที่ให้โดดเด่น",
-        icon: "Map",
+        title: "Keyword Targeting",
+        description: "วิเคราะห์คำค้นหาที่คนแถวนั้นใช้จริง เพื่อดึงลูกค้าตรงกลุ่ม",
+        icon: "Crosshair",
       },
     ],
     faqs: [
       {
-        question: "ทำแล้วจะช่วยให้ยอดขายเพิ่มขึ้นจริงไหม?",
+        question: "นานไหมกว่าจะเห็นผล?",
         answer:
-          "ช่วยได้มากครับ เพราะเราทำให้คนที่กำลังต้องการบริการในพื้นที่นั้น ๆ มองเห็นคุณเป็นลำดับแรก",
+          "โดยปกติจะเริ่มเห็นยอดการค้นหาและโทรเข้าเพิ่มขึ้นภายใน 30-60 วันครับ",
       },
     ],
-    priority: 10,
+    priority: 4,
   },
 
-  // --- [05. BIO: ประวัติและความเชี่ยวชาญส่วนบุคคล] ---
+  // --- [05. PERSONAL: เว็บส่วนตัว/Portfolio (PROFESSIONAL BRANDING)] ---
   {
     id: "AEM-SVC-PB-14",
-    title: "Personal Portfolio เว็บโปรไฟล์และรวบรวมผลงาน",
-    description: "สร้างตัวตนให้น่าเชื่อถือ และรวบรวมผลงานของคุณไว้ในที่เดียวแบบมืออาชีพ",
+    title: "Personal Portfolio เว็บโปรไฟล์ส่วนตัว",
+    description:
+      "สร้าง Personal Branding ให้ปัง! รวบรวมผลงานและช่องทางติดต่อไว้ในที่เดียว",
     image: "/images/service/preview.webp",
     price: "4,900",
     currency: "THB",
@@ -182,29 +219,36 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     unit: "โปรเจกต์",
     category: "personal",
     templateSlug: "bio",
+    // [THEME]: Personal Cyan (ทันสมัย/Digital/Clean)
+    theme: {
+      primary: "#06b6d4", // Cyan-500
+      secondary: "#0e7490",
+    },
     benefits: [
-      "สร้างความประทับใจให้ผู้ว่าจ้างหรือพาร์ทเนอร์ตั้งแต่ครั้งแรกที่เห็น",
-      "รวมช่องทางติดต่อและผลงานทุกอย่างไว้ในลิงก์เดียว แชร์ง่ายและดูดี",
+      "ดูเป็นมืออาชีพกว่าการส่งไฟล์ PDF หรือลิงก์ Google Drive",
+      "แชร์ง่าย ได้ใจความ จบในลิงก์เดียว (Bio Link)",
+      "ปรับแต่งดีไซน์ให้สะท้อนตัวตนของคุณได้เต็มที่",
     ],
     coreFeatures: [
       {
-        title: "Minimalist Design",
-        description: "เน้นดีไซน์ที่ดูสะอาดตาแต่ทรงพลัง โชว์ตัวตนของคุณได้ชัดเจน",
-        icon: "User",
+        title: "Modern Portfolio",
+        description: "แกลเลอรี่โชว์ผลงานที่สวยงาม จัดวางอย่างมีศิลปะ",
+        icon: "Layout",
       },
       {
-        title: "Link in Bio",
-        description: "ปุ่มรวมลิงก์โซเชียลและช่องทางติดต่อครบจบในที่เดียว",
-        icon: "Link",
+        title: "Contact Hub",
+        description: "รวมปุ่ม Social, Email, Line ไว้ให้ติดต่อคุณง่ายที่สุด",
+        icon: "Share2",
       },
     ],
     faqs: [
       {
-        question: "ถ้ามีผลงานใหม่ อยากเพิ่มเองทำได้ไหม?",
-        answer: "ทำได้ง่ายมากครับ เรามีระบบหลังบ้านที่คุณสามารถอัปเดตข้อมูลเองได้ตลอดเวลา",
+        question: "เหมาะกับใครบ้าง?",
+        answer:
+          "เหมาะกับฟรีแลนซ์, ช่างภาพ, ดีไซเนอร์ หรือผู้บริหารที่ต้องการสร้างภาพลักษณ์ครับ",
       },
     ],
-    priority: 15,
+    priority: 5,
   },
 ] as const;
 

@@ -1,5 +1,5 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.0.2 (FINAL_STABILIZED)
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.2.0 (FINAL_STABILIZED)
  * [STRATEGY]: Zero-Jitter Font Loading | SEO Authority Protocol | Interaction Safety
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -26,16 +26,16 @@ const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  adjustFontFallback: true, // เพิ่มเพื่อความเสถียรของ Layout ฝั่งภาษาอังกฤษ
+  adjustFontFallback: true,
   preload: true,
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
   weight: ["300", "400", "500", "600", "700"],
-  subsets: ["thai"], // [OPTIMIZED]: โหลดเฉพาะ Subset ไทยเพื่อลดขนาดไฟล์
+  subsets: ["thai"],
   variable: "--font-thai",
-  display: "swap", // [OPTIMIZED]: แสดงผลข้อความทันที
-  adjustFontFallback: true, // [OPTIMIZED]: ป้องกัน Layout กระตุก (CLS)
+  display: "swap",
+  adjustFontFallback: true,
   preload: true,
 });
 
@@ -53,8 +53,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "./",
   },
-
-  /* [NEW]: การจัดการไอคอนระบบ (App Icons) */
   icons: {
     icon: [
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
@@ -63,7 +61,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -73,7 +70,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.brandName,
     images: [
       {
-        url: "/images/og-main.png", // ตรวจสอบว่ามีไฟล์นี้ใน public/images หรือไม่
+        url: "/images/og-main.png",
         width: 1200,
         height: 630,
         alt: SITE_CONFIG.brandName,
@@ -120,8 +117,10 @@ export default function RootLayout({
     >
       <body
         className={cn(
-          "font-thai selection:bg-brand-primary/20 selection:text-brand-primary min-h-screen overflow-x-hidden bg-[#050505] text-slate-200",
-          /* [TYPOGRAPHY SYSTEM]: จัดความสำคัญของฟอนต์ */
+          // Base Styles
+          "min-h-screen overflow-x-hidden bg-[#050505] text-slate-200",
+          "font-thai selection:bg-brand-primary/20 selection:text-brand-primary",
+          /* [TYPOGRAPHY SYSTEM]: จัดความสำคัญของฟอนต์ (English Headings, Thai Body) */
           "[&_p]:font-thai [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_span.font-mono]:font-sans",
         )}
       >

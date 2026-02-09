@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.0.4 (FINAL_CLEAN)
- * [STRATEGY]: Outcome-Driven Architecture | Adapter Pattern | SEO Authority
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.1.2 (FINAL_CLEAN)
+ * [STRATEGY]: Outcome-Driven Architecture | SSG Optimization | Strict Typing
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -9,23 +9,21 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // --- 1. Infrastructure & Data ---
+// [FIX]: Import จาก constants ตามโครงสร้างไฟล์จริง
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
-import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
+import type { PageProps } from "@/types";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
-// Import จาก lib/schema ตามโครงสร้างไฟล์ล่าสุด
-import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schema";
 
-// --- 3. Templates ---
+// --- 3. Templates (The Strategies) ---
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import CatalogTemplate from "@/components/templates/catalog/Index";
-import LocalTemplate from "@/components/templates/local/Index";
 import BioTemplate from "@/components/templates/bio/Index";
 
-/* [A] STATIC GENERATION ENGINE */
+/* [A] STATIC GENERATION ENGINE (SSG) */
 export async function generateStaticParams() {
   return MASTER_REGISTRY.map((service) => ({
     slug: service.templateSlug,
@@ -34,14 +32,20 @@ export async function generateStaticParams() {
 
 /* [B] SEO METADATA ENGINE */
 export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
+  // [NEXT.js 15]: Await params before access
   const { slug } = await params;
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === slug);
 
-  if (!service) return { title: "404 Not Found" };
+  if (!service) {
+    return {
+      title: "Service Not Found",
+      description: "ขออภัย ไม่พบข้อมูลบริการที่คุณต้องการ",
+    };
+  }
 
   return {
-    title: `${service.title} | แผนงานเว็บไซต์เชิงกลยุทธ์ | ${SITE_CONFIG.brandName}`,
-    description: `ยกระดับธุรกิจของคุณด้วย ${service.title}: ${service.description} วางระบบโครงสร้างให้แข็งแกร่งและติดอันดับการค้นหาในปี 2026`,
+    title: `${service.title} | ${SITE_CONFIG.brandName}`,
+    description: service.description,
     alternates: { canonical: `${SITE_CONFIG.siteUrl}/services/${slug}` },
     openGraph: {
       title: service.title,
@@ -53,49 +57,44 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
 
 /**
  * @component ServiceDetailPage
- * @description หน้าแสดงรายละเอียดบริการที่ปรับเปลี่ยน Template ตามความเหมาะสมของประเภทโซลูชัน
+ * @description หน้าแสดงรายละเอียดบริการที่ "ฉลาดเลือก" Template ตามประเภทข้อมูล (Strategy Pattern)
  */
 export default async function ServiceDetailPage({ params }: PageProps<{ slug: string }>) {
+  // [NEXT.js 15]: Await params
   const { slug } = await params;
+
+  // 1. Fetch Data
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === slug);
 
+  // 2. 404 Guard
   if (!service) notFound();
 
-  // [SEO SCHEMAS]: เรียกใช้ Function จาก lib/schema ตัวใหม่
-  const serviceSchema = generateServiceSchema(service);
-
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
-    { name: "บริการทั้งหมด", item: `${SITE_CONFIG.siteUrl}/services` },
-    { name: service.title, item: `${SITE_CONFIG.siteUrl}/services/${slug}` },
-  ]);
-
-  /**
-   * [ADAPTER]: แปลง TemplateMasterData -> AreaNode
-   * สำหรับกรณีใช้ LocalTemplate กับข้อมูลบริการทั่วไป
-   */
-  const adaptToAreaNode = (data: TemplateMasterData): AreaNode => {
-    return {
-      slug: data.templateSlug,
-      province: "ทั่วประเทศ (Nationwide)",
-      title: data.title,
-      description: data.description,
-      seoTitle: data.title,
-      seoDescription: data.description,
-      priority: data.priority,
-      templateSlug: "local",
-      districts: ["รองรับทุกพื้นที่", "Google Maps Optimized"],
-      keywords: data.benefits,
-      heroImage: data.image || "/images/templates/preview.webp",
-      longDescription:
-        "บริการนี้ออกแบบมาเพื่อธุรกิจที่ต้องการเจาะกลุ่มลูกค้าในพื้นที่เฉพาะเจาะจง (Local SEO) เพื่อเพิ่มยอดขายและสร้างฐานลูกค้าที่มั่นคง",
-    };
+  // 3. Prepare SEO Schema (Simple Breadcrumb)
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_CONFIG.siteUrl },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: `${SITE_CONFIG.siteUrl}/services`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: `${SITE_CONFIG.siteUrl}/services/${slug}`,
+      },
+    ],
   };
 
   /**
-   * [ORCHESTRATION]: เลือก Template ที่เหมาะสมกับโมเดลธุรกิจ
+   * [TEMPLATE SWITCHER]: หัวใจสำคัญของการเลือก UI
    */
   const renderTemplate = () => {
+    // ใช้ category หรือ templateSlug ในการตัดสินใจเลือก Template
     switch (service.templateSlug) {
       case "corporate":
         return <CorporateTemplate data={service} />;
@@ -109,18 +108,16 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
       case "bio":
         return <BioTemplate data={service} />;
 
-      case "local":
-        // LocalTemplate ต้องการ AreaNode จึงต้องผ่าน Adapter
-        return <LocalTemplate data={adaptToAreaNode(service)} />;
-
       default:
-        // Fallback
+        // Fallback Strategy: ใช้ Corporate Template เป็นค่าเริ่มต้น
         return <CorporateTemplate data={service} />;
     }
   };
 
   return (
     <div className="bg-surface-main relative min-h-screen overflow-hidden">
+      
+
       {/* [ATMOSPHERIC INFRASTRUCTURE] */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
@@ -131,7 +128,6 @@ export default async function ServiceDetailPage({ params }: PageProps<{ slug: st
       </div>
 
       {/* SEO Injection */}
-      <JsonLd data={serviceSchema} />
       <JsonLd data={breadcrumbSchema} />
 
       <main className="animate-in fade-in slide-in-from-bottom-4 relative z-10 duration-700">

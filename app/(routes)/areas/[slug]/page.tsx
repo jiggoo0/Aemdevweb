@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.0.6 (FINAL_CLEAN)
- * [STRATEGY]: Local Authority Engine | Dynamic Template Orchestration
+ * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.1.0 (FINAL_STABILIZED)
+ * [STRATEGY]: Local Authority Engine | Dynamic Template Orchestration | Adapter Pattern
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -9,23 +9,26 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 // --- 1. Infrastructure & Data ---
-import { AREA_NODES } from "@/constants/area-nodes";
+// [DATA SOURCE]: ตรวจสอบ Path ให้ตรงกับที่เก็บไฟล์จริง (เช่น @/data/area-nodes)
+import { AREA_NODES } from "@/constants/area-nodes"; 
 import { SITE_CONFIG } from "@/constants/site-config";
-import type { AreaNode, TemplateMasterData, PageProps } from "@/types";
+import type { AreaNode, TemplateMasterData, PageProps, ServiceCategory } from "@/types";
 
 // --- 2. SEO & Schema Protocols ---
 import JsonLd from "@/components/seo/JsonLd";
-// Import จาก lib/schema ตามโครงสร้างไฟล์ล่าสุด
-import { generateLocalBusinessSchema } from "@/lib/schema";
+// Import Function สร้าง Schema สำหรับ Local Business
+import { generateLocalBusinessSchema } from "@/components/templates/local/Schema";
 
 // --- 3. Specialist Templates ---
 import LocalTemplate from "@/components/templates/local/Index";
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 
-/* [A] STATIC GENERATION PROTOCOL */
+/* [A] STATIC GENERATION PROTOCOL (SSG) */
 export async function generateStaticParams() {
-  return AREA_NODES.map((area) => ({ slug: area.slug }));
+  return AREA_NODES.map((area) => ({
+    slug: area.slug,
+  }));
 }
 
 /* [B] SEO METADATA ENGINE */
@@ -42,11 +45,16 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
     openGraph: {
       title: area.seoTitle,
       description: area.seoDescription,
-      images: [{ url: area.heroImage || "/images/og-default.webp" }],
+      images: [
+        {
+          url: area.heroImage || "/images/og-default.webp",
+          alt: area.title,
+        },
+      ],
       locale: "th_TH",
       type: "website",
     },
-    // Spread Readonly Array -> Mutable Array for Next.js Metadata
+    // [FIX]: Spread Readonly Array -> Mutable Array for Next.js Metadata Type
     keywords: [...(area.keywords || [])],
   };
 }
@@ -54,13 +62,14 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
 /**
  * [ADAPTER UTILITY]: แปลงข้อมูลจาก AreaNode -> TemplateMasterData
  * ใช้ Logic นี้เพื่อ Inject ความเป็น "Nationwide Service" เข้าไปในเนื้อหา
+ * เพื่อให้สามารถนำข้อมูลจังหวัดไปแสดงผลใน Template แบบ Corporate หรือ SalePage ได้
  */
 const adaptAreaToMasterData = (
   baseArea: AreaNode,
-  category: TemplateMasterData["category"],
+  category: ServiceCategory,
 ): TemplateMasterData => {
   return {
-    id: baseArea.slug,
+    id: `AREA-${baseArea.slug.toUpperCase()}`,
     title: baseArea.title,
     description: baseArea.description,
     priceValue: 0,
@@ -71,21 +80,26 @@ const adaptAreaToMasterData = (
     templateSlug: baseArea.templateSlug,
     priority: baseArea.priority,
     image: baseArea.heroImage,
-    // [LOGIC]: ผสม Keywords เข้ากับจุดเด่นพื้นที่และการบริการทั่วประเทศ
+    
+    // [LOGIC]: ผสม Keywords เข้ากับจุดเด่นพื้นที่
     benefits: [
       ...baseArea.keywords,
       `บริการมาตรฐาน AEMDEVWEB ครอบคลุมพื้นที่ ${baseArea.province}`,
       `รองรับเขต ${baseArea.districts.slice(0, 3).join(", ")} และพื้นที่ใกล้เคียง`,
       "ทีมงาน Technical SEO ดูแลระบบหลังบ้าน 100%",
     ],
+
+    // [LOGIC]: สร้าง Features จาก Keywords
     coreFeatures: baseArea.keywords.map((kw, idx) => ({
       title: kw,
       description:
         idx === 0
           ? `โซลูชัน ${kw} ที่ปรับจูนมาเพื่อธุรกิจใน ${baseArea.province} โดยเฉพาะ`
           : `ยกระดับขีดความสามารถการแข่งขันด้วยเทคโนโลยี Next.js`,
-      icon: idx % 2 === 0 ? "MapPin" : "Zap",
+      icon: idx % 2 === 0 ? "MapPin" : "Zap", // สลับไอคอนเพื่อความสวยงาม
     })),
+
+    // [LOGIC]: สร้าง FAQ เฉพาะพื้นที่
     faqs: [
       {
         question: `อยู่ ${baseArea.province} ใช้บริการ AEMDEVWEB ได้ไหม?`,
@@ -104,12 +118,16 @@ const adaptAreaToMasterData = (
  * @description หน้า Landing Page รายจังหวัด (Dynamic Route)
  */
 export default async function AreaDetailPage({ params }: PageProps<{ slug: string }>) {
+  // [NEXT.js 15]: Await params
   const { slug } = await params;
+  
+  // 1. Fetch Area Data
   const area = AREA_NODES.find((a) => a.slug === slug);
 
+  // 2. 404 Guard
   if (!area) notFound();
 
-  // [SCHEMA]: สร้าง Local Business Schema โดยดึง Logic จาก lib/schema.ts
+  // 3. Prepare Schema
   const localSchema = generateLocalBusinessSchema(area);
 
   /**
@@ -118,17 +136,20 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
   const renderTemplate = () => {
     switch (area.templateSlug) {
       case "corporate": {
+        // แปลงข้อมูลจังหวัด เป็นข้อมูลองค์กร แล้วใช้ Corporate Template
         const corporateData = adaptAreaToMasterData(area, "business");
         return <CorporateTemplate data={corporateData} />;
       }
 
       case "salepage": {
+        // แปลงข้อมูลจังหวัด เป็นข้อมูล SalePage แล้วใช้ SalePage Template
         const salePageData = adaptAreaToMasterData(area, "landing");
         return <SalePageTemplate data={salePageData} />;
       }
 
       case "local":
       default: {
+        // ใช้ Local Template โดยตรง (ออกแบบมาเพื่อรับ AreaNode อยู่แล้ว)
         return <LocalTemplate data={area} />;
       }
     }
@@ -136,7 +157,9 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
 
   return (
     <div className="bg-surface-main relative min-h-screen overflow-hidden">
-      {/* [VISUAL INFRASTRUCTURE] */}
+      
+
+      {/* [ATMOSPHERIC INFRASTRUCTURE] */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.05] select-none"
         aria-hidden="true"
@@ -149,7 +172,9 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
       <JsonLd data={localSchema} />
 
       {/* Content Injection */}
-      <main className="animate-in fade-in relative z-10 duration-1000">{renderTemplate()}</main>
+      <main className="animate-in fade-in relative z-10 duration-1000">
+        {renderTemplate()}
+      </main>
     </div>
   );
 }

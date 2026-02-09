@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v16.7 (GEO_SPECIFIC)
+ * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.0.1 (SEO_TUNED)
  * [STRATEGY]: Geographic Personalization | Visual Authority | Local SEO Excellence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -8,7 +8,6 @@
 
 import React, { memo } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
@@ -39,6 +38,12 @@ interface LocalTemplateProps {
 function LocalTemplate({ data }: LocalTemplateProps) {
   const schema = generateLocalBusinessSchema(data);
 
+  // [LOGIC]: เตรียมคำถาม FAQ ล่วงหน้าเพื่อความเสถียร
+  const localFaqs = (data.keywords || []).slice(0, 5).map((kw) => ({
+    question: `บริการ ${kw} ราคาเริ่มต้นเท่าไหร่?`,
+    answer: `สำหรับบริการ ${kw} ในพื้นที่${data.province} ทางเรามีแพ็กเกจที่ยืดหยุ่น เริ่มต้นเพียงหลักพัน พร้อมระบบที่รองรับการเติบโตในอนาคตครับ`,
+  }));
+
   return (
     <LayoutEngine spacing="specialist">
       {/* 01. LOCAL SEO SIGNAL: บอก Google ว่าเราคือตัวจริงในพื้นที่นี้ */}
@@ -47,10 +52,11 @@ function LocalTemplate({ data }: LocalTemplateProps) {
       {/* 02. HERO SECTION: ทักทายลูกค้าด้วยความเข้าใจในบริบทท้องถิ่น */}
       <HeroEngine
         title={
-          <>
+          // [SEO]: ใช้ Semantic HTML ที่ชัดเจน
+          <span className="block">
             บริการทำเว็บไซต์และ SEO <br className="hidden md:block" />
-            <span className="text-brand-primary">จังหวัด{data.province}</span>
-          </>
+            <strong className="text-brand-primary">จังหวัด{data.province}</strong>
+          </span>
         }
         subtitle={data.longDescription || data.description}
         primaryActionLabel={`ปรึกษาแผนงานใน ${data.province}`}
@@ -59,16 +65,11 @@ function LocalTemplate({ data }: LocalTemplateProps) {
 
       {/* 03. VISUAL AUTHORITY: ภาพลักษณ์ที่เข้าถึงง่ายแต่เป็นมืออาชีพ */}
       <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98, y: 40 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="group relative mx-auto max-w-6xl"
-        >
-          {/* Ambient Glow */}
-          <div className="bg-brand-primary/20 absolute -inset-4 rounded-[3rem] opacity-40 blur-3xl transition-opacity duration-700 group-hover:opacity-60" />
+        <div className="group relative mx-auto max-w-6xl">
+          {/* Ambient Glow: CSS Animation */}
+          <div className="bg-brand-primary/20 absolute -inset-4 rounded-[3rem] opacity-40 blur-3xl transition-opacity duration-700 group-hover:opacity-60 will-change-opacity" />
 
+          {/* [LCP FIX]: รูปภาพโหลดทันที */}
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0A0A0A] shadow-2xl md:rounded-[3rem] md:p-2">
             <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem]">
               <Image
@@ -82,7 +83,7 @@ function LocalTemplate({ data }: LocalTemplateProps) {
               {/* Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-80" />
 
-              {/* Location Badge */}
+              {/* Location Badge: Absolute Position ไม่กระทบ LCP */}
               <div className="absolute bottom-6 left-6 flex items-center gap-3 md:bottom-10 md:left-10">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/10 backdrop-blur-md">
                   <IconRenderer name="MapPin" className="text-brand-primary" size={24} />
@@ -91,14 +92,14 @@ function LocalTemplate({ data }: LocalTemplateProps) {
                   <span className="text-brand-primary block text-[10px] font-bold tracking-widest uppercase">
                     Service Area
                   </span>
-                  <span className="text-xl font-black tracking-tighter text-white uppercase">
+                  <h2 className="text-xl font-black tracking-tighter text-white uppercase m-0">
                     {data.province}
-                  </span>
+                  </h2>
                 </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* 04. LOCAL TRUST: ยืนยันมาตรฐานเดียวกันทั่วประเทศ */}
@@ -187,10 +188,7 @@ function LocalTemplate({ data }: LocalTemplateProps) {
       <DynamicFAQ
         title={`คำถามที่พบบ่อยสำหรับลูกค้า ${data.province}`}
         description="ข้อมูลสำคัญที่คุณควรรู้ก่อนเริ่มงาน"
-        items={(data.keywords || []).map((kw) => ({
-          question: `บริการ ${kw} ราคาเริ่มต้นเท่าไหร่?`,
-          answer: `สำหรับบริการ ${kw} ในพื้นที่${data.province} ทางเรามีแพ็กเกจที่ยืดหยุ่น เริ่มต้นเพียงหลักพัน พร้อมระบบที่รองรับการเติบโตในอนาคตครับ`,
-        }))}
+        items={localFaqs}
       />
     </LayoutEngine>
   );

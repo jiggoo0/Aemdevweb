@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: SEO_SCHEMA_ENGINE v17.0.6 (NATIONWIDE_STABILIZED)
- * [STRATEGY]: JSON-LD Automation | Nationwide Authority | Reference ID Logic
+ * [SYSTEM CORE]: SEO_SCHEMA_ENGINE v17.1.2 (STABILIZED)
+ * [STRATEGY]: Entity Resolution | Anti-Duplication Logic | Zero-Runtime Error
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -8,7 +8,7 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import type { AreaNode, TemplateMasterData } from "@/types";
 
 /**
- * [HELPER]: จัดการ URL ให้เป็น Absolute Path
+ * [HELPER]: จัดการ URL ให้เป็น Absolute Path เสมอ
  */
 export const absoluteUrl = (path: string): string => {
   const root = SITE_CONFIG.siteUrl.endsWith("/")
@@ -20,22 +20,33 @@ export const absoluteUrl = (path: string): string => {
 
 /**
  * [GENERATOR]: PERSON_SCHEMA (Expert Node)
+ * [FIX]: แยก Given/Family Name เป็นภาษาอังกฤษเพื่อป้องกันชื่อไทย-อังกฤษแสดงซ้ำซ้อน
  */
 export function generatePersonSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": absoluteUrl("/#expert"),
-    name: SITE_CONFIG.expert.legalName,
-    alternateName: [SITE_CONFIG.expert.legalNameThai, SITE_CONFIG.expert.displayName],
-    givenName: SITE_CONFIG.expert.legalNameThai,
-    familyName: "Yomkerd",
+    // ใช้ชื่อภาษาอังกฤษเป็นหลักสำหรับ Global Metadata
+    name: SITE_CONFIG.expert.legalName, 
+    givenName: "Alongkorn", 
+    familyName: "Yomkerd", 
+    // ใส่ชื่อภาษาไทยและฉายาไว้ใน alternateName เพื่อให้ Google เข้าใจความเชื่อมโยงโดยไม่แสดงชื่อซ้ำ
+    alternateName: [
+      SITE_CONFIG.expert.legalNameThai, 
+      SITE_CONFIG.expert.displayName,
+      "นายเอ็มซ่ามากส์"
+    ],
     jobTitle: SITE_CONFIG.expert.jobTitle,
     description: SITE_CONFIG.expert.role,
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     email: SITE_CONFIG.contact.email,
-    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github, SITE_CONFIG.links.line],
+    sameAs: [
+      SITE_CONFIG.links.facebook,
+      SITE_CONFIG.links.github,
+      SITE_CONFIG.links.line
+    ].filter(Boolean) as string[],
     worksFor: { "@id": absoluteUrl("/#organization") },
     knowsAbout: [
       "Technical SEO",
@@ -67,16 +78,14 @@ export function generateOrganizationSchema() {
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress,
-      addressLocality: "จังหวัดกำแพงเพชร",
-      addressRegion: "ภาคเหนือ",
+      addressLocality: "เมืองกำแพงเพชร",
+      addressRegion: "กำแพงเพชร",
       postalCode: SITE_CONFIG.contact.postalCode,
       addressCountry: "TH",
     },
 
     areaServed: [
       { "@type": "Country", name: "Thailand", alternateName: "TH" },
-      { "@type": "AdministrativeArea", name: "Bangkok", alternateName: "กรุงเทพมหานคร" },
-      { "@type": "AdministrativeArea", name: "Chiang Mai", alternateName: "เชียงใหม่" },
     ],
 
     contactPoint: {
@@ -87,7 +96,10 @@ export function generateOrganizationSchema() {
       areaServed: "TH",
       availableLanguage: ["Thai", "English"],
     },
-    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github],
+    sameAs: [
+      SITE_CONFIG.links.facebook, 
+      SITE_CONFIG.links.github
+    ].filter(Boolean) as string[],
   };
 }
 
@@ -102,6 +114,7 @@ export function generateServiceSchema(data: TemplateMasterData) {
     serviceType: "Technical SEO & Web Development",
     name: data.title,
     description: data.description,
+    image: absoluteUrl(data.image || "/images/og-default.webp"),
     provider: { "@id": absoluteUrl("/#organization") },
     offers: {
       "@type": "Offer",
@@ -129,14 +142,15 @@ export function generateLocalBusinessSchema(data: AreaNode) {
     priceRange: "฿฿-฿฿฿",
     address: {
       "@type": "PostalAddress",
-      streetAddress: data.province,
+      streetAddress: `ให้บริการพื้นที่ ${data.province}`,
+      addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "16.4828",
-      longitude: "99.5227",
+      latitude: data.coordinates?.lat.toString() || "16.4828",
+      longitude: data.coordinates?.lng.toString() || "99.5227",
     },
     areaServed: {
       "@type": "City",

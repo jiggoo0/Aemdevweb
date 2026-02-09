@@ -2,19 +2,20 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE STYLESHEET]: AEM-SYSTEM-v17.0 (MIDNIGHT_AURA)
- * [STRATEGY]: Dark-First Architecture | OKLCH Spectrum | GPU-Accelerated Layers
+ * [CORE STYLESHEET]: AEM-SYSTEM-v17.2 (THEME_VARIANTS_ADDED)
+ * [STRATEGY]: Dark-First Architecture | OKLCH Spectrum | Scoped Theming
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 @theme {
   /* --- 01. TYPOGRAPHY SYSTEM --- */
+  /* รับค่าจาก next/font variable ที่ประกาศใน layout.tsx */
   --font-thai: var(--font-thai), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* --- 02. COLOR PALETTE (Dark Mode Native - OKLCH) --- */
-  /* Brand: Neon Green ที่แม่นยำทางสายตา */
-  --color-brand-primary: oklch(0.72 0.18 150);
+  /* --- 02. COLOR PALETTE (Base: AEM Signature Green) --- */
+  /* Default: Neon Green (Tech / Growth / Stability) */
+  --color-brand-primary: oklch(0.72 0.18 150); 
   --color-brand-glow: oklch(0.72 0.18 150 / 0.15);
 
   /* Surfaces: Deep Midnight Black */
@@ -25,8 +26,8 @@
 
   /* Text: High Contrast & Legibility */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #a1a1aa; /* Zinc-400 equivalent */
-  --color-text-muted: #52525b; /* Zinc-600 equivalent */
+  --color-text-secondary: #a1a1aa; /* Zinc-400 */
+  --color-text-muted: #52525b; /* Zinc-600 */
 
   /* Borders: Micro-Interactions */
   --color-border: rgba(255, 255, 255, 0.1);
@@ -37,49 +38,28 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-shimmer: shimmer 2s linear infinite; 
 
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
   @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 0.4;
-    }
-    50% {
-      opacity: 0.1;
-    }
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.1; }
   }
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
+  /* [PERFORMANCE]: Use TranslateX instead of background-position */
   @keyframes shimmer {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: -200% 0;
-    }
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 
   /* --- 04. SPATIAL SYSTEM --- */
@@ -93,9 +73,7 @@
 
 /* --- 05. BASE LAYER RESET --- */
 @layer base {
-  *,
-  ::after,
-  ::before {
+  *, ::after, ::before {
     @apply border-border transition-colors duration-200;
     box-sizing: border-box;
   }
@@ -111,29 +89,24 @@
   }
 
   /* Headings: บังคับใช้ฟอนต์อังกฤษเพื่อความ Modern & Professional */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h1, h2, h3, h4, h5, h6 {
     @apply font-sans tracking-tight text-white;
   }
 
-  /* Smooth Scrollbar for Chrome/Safari/Edge */
+  /* [CUSTOM SCROLLBAR]: Midnight Theme Integration */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: #050505; 
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--color-brand-primary); 
   }
 }
 
@@ -175,32 +148,52 @@
   }
 
   .shadow-pro {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   .shadow-pro-lg {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 10px 40px -10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 10px 40px -10px rgba(0, 0, 0, 0.5);
   }
 
-  .shadow-pro-2xl {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 25px 50px -12px rgba(0, 0, 0, 0.6);
-  }
-
-  /* Text Balance for Headlines */
   .text-balance {
     text-wrap: balance;
   }
 
-  /* GPU Acceleration Helper */
-  .gpu-layer {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    will-change: transform;
+  /* * --- 07. TEMPLATE THEME VARIANTS (Scoped Overrides) --- 
+   * [USAGE]: ใส่ Class เหล่านี้ที่ LayoutEngine หรือ Div หุ้ม
+   * เพื่อเปลี่ยนอารมณ์ของหน้าเว็บโดยไม่ต้องแก้โค้ด Logic
+   */
+
+  /* [CORPORATE]: Trust, Stability, Professional (Deep Blue) */
+  .theme-corporate {
+    --color-brand-primary: oklch(0.60 0.18 250); /* Royal Blue */
+    --color-brand-glow: oklch(0.60 0.18 250 / 0.2);
+    --color-surface-main: #020408; /* Tinted Blue Black */
+  }
+
+  /* [SALEPAGE]: Urgency, Action, Conversion (Vibrant Red/Orange) */
+  .theme-salepage {
+    --color-brand-primary: oklch(0.63 0.22 29); /* Energetic Red */
+    --color-brand-glow: oklch(0.63 0.22 29 / 0.25);
+    /* High contrast for action */
+  }
+
+  /* [CATALOG]: Creativity, Product Focus, Premium (Violet/Purple) */
+  .theme-catalog {
+    --color-brand-primary: oklch(0.65 0.22 290); /* Electric Purple */
+    --color-brand-glow: oklch(0.65 0.22 290 / 0.2);
+  }
+
+  /* [LOCAL]: Friendly, Accessibility, Visibility (Amber/Gold) */
+  .theme-local {
+    --color-brand-primary: oklch(0.75 0.18 85); /* Amber Gold */
+    --color-brand-glow: oklch(0.75 0.18 85 / 0.2);
+    /* Warmer tone for local business */
+  }
+
+  /* [BIO]: Modern, Personal, Sleek (Cyan/Teal) */
+  .theme-bio {
+    --color-brand-primary: oklch(0.70 0.16 190); /* Cyan Teal */
+    --color-brand-glow: oklch(0.70 0.16 190 / 0.2);
   }
 }

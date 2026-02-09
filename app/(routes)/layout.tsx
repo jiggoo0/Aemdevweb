@@ -1,44 +1,34 @@
 /**
- * [ROUTE GROUP INFRASTRUCTURE]: BUSINESS_ROUTES_LAYOUT v17.0.2 (STABILIZED)
- * [STRATEGY]: Seamless Page Transitions | Full-Width Architecture | ROI Anchor
+ * [ROUTE GROUP INFRASTRUCTURE]: BUSINESS_ROUTES_LAYOUT v17.1.0 (SERVER-SIDE-OPTIMIZED)
+ * [STRATEGY]: Server Component Base | Client Transition Island | Metadata Capable
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-"use client";
-
 import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { usePathname } from "next/navigation";
-
-// --- Shared Components ---
+import PageTransition from "@/components/layout/PageTransition"; // Import ตัวที่แยกไว้
 import ConversionCTA from "@/components/shared/ConversionCTA";
 
-/**
- * @component RoutesLayout
- * @description โครงสร้างหลักสำหรับหน้า Services, Blog, และ Case Studies
- * เน้นการเปลี่ยนหน้าแบบ Smooth Transition และปิดท้ายด้วย Global CTA
- */
-export default function RoutesLayout({ children }: { readonly children: React.ReactNode }) {
-  const pathname = usePathname();
+// [ADDED]: ตอนนี้สามารถใส่ Metadata รวมของ Group นี้ได้แล้ว (ถ้าต้องการ)
+/*
+export const metadata = {
+  title: 'บริการและโซลูชัน | AEMDEVWEB',
+  description: 'รวมบริการรับทำเว็บไซต์และ SEO ครบวงจร',
+}
+*/
 
+export default function RoutesLayout({
+  children,
+}: {
+  readonly children: React.ReactNode;
+}) {
   return (
     <div className="bg-surface-main relative flex min-h-screen flex-col overflow-x-hidden">
-      {/* 01. TRANSITION ENGINE: จัดการจังหวะการเคลื่อนไหวเมื่อเปลี่ยนหน้า */}
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex w-full flex-grow flex-col"
-        >
-          {/* Content Hub: ปล่อยให้ Page Component ควบคุม Container/Padding เอง */}
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      {/* 01. CONTENT ORCHESTRATOR: ส่งต่อหน้าที่ Animation ให้ Client Component */}
+      <PageTransition>
+        {children}
+      </PageTransition>
 
-      {/* 02. STRATEGIC FOOTER CTA: วางด่านปิดการขายไว้ทุกหน้าย่อย (Global Anchor) */}
+      {/* 02. STRATEGIC FOOTER CTA: แยกออกมาอยู่นิ่งๆ ไม่ต้อง Re-render ตาม Route */}
       <section className="bg-surface-main relative z-10 border-t border-white/5 py-24">
         {/* Background Atmosphere */}
         <div
