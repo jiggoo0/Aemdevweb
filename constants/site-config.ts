@@ -1,7 +1,7 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.2 (AUTHENTICATED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.4 (EEAT_STABILIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
- * [UPDATE]: ผสานข้อมูล Google Business Profile IDs เพื่อการยืนยันตัวตนระดับสูง
+ * [UPDATE]: แก้ไข Locality เป็น "กำแพงเพชร" เพื่อผลลัพธ์ Local SEO ที่ถูกต้อง
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -52,7 +52,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.5.2",
+    version: "17.5.4",
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -77,7 +77,7 @@ export const SITE_CONFIG: SiteConfig = {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
     displayPhone: "099 032 2175 (สายด่วนปรึกษาช่างเอ็ม)",
-    address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)",
+    address: "กำแพงเพชร, ประเทศไทย (ให้บริการทั่วประเทศ)",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (ตอบแชทไวตลอดวัน)",
@@ -90,23 +90,21 @@ export const SITE_CONFIG: SiteConfig = {
     messenger: "https://m.me/aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
     github: "https://github.com/aemdevweb",
-    // [UPDATE]: ลิงก์แผนที่จริง
     googleMaps: "https://share.google/MMWnXPv3evv4Qd8aC",
-    // [TODO]: รอการอัปเดต Place ID จริงแทนที่ ChIJ... เพื่อให้ลิงก์รีวิวทำงานสมบูรณ์
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
   // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ & IDs
   business: {
-    location: "Thailand",
-    region: "ASEAN",
+    // [FIXED]: เปลี่ยนจาก Thailand เป็นชื่อจังหวัด เพื่อให้ Schema AddressLocality ทำงานถูกต้อง
+    location: "กำแพงเพชร", 
+    region: "Northern Thailand (ภาคเหนือ)",
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",
-    // [NEW]: ชุดรหัสยืนยันตัวตนจาก Google Business Profile Setting
     ids: {
-      businessProfileId: "17539943195708104348", // รหัสโปรไฟล์หลัก
-      storeCode: "01162024004001766449",       // รหัสร้านค้า (ใช้สำหรับ Google Ads/Merchant)
+      businessProfileId: "17539943195708104348",
+      storeCode: "01162024004001766449",
     },
   },
 

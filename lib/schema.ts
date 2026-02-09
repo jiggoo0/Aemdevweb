@@ -1,6 +1,6 @@
 /**
- * [SEO UTILITY]: SCHEMA_ENGINE v17.5.3 (STABILIZED)
- * [STRATEGY]: Graph-Based Entity Resolution | Local Search Dominance | Linked Data
+ * [SEO UTILITY]: SCHEMA_ENGINE v17.5.5 (IDENTITY_LOCKED)
+ * [STRATEGY]: High-Fidelity Identity Mapping | EEAT Dominance | Entity Linking
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -11,8 +11,8 @@ import type { AreaNode, TemplateMasterData } from "@/types";
 // --- [01. CORE ENTITIES: THE FOUNDATION] ---
 
 /**
- * @description สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization / ProfessionalService)
- * [UPDATE]: เชื่อมโยง Google Merchant ID, Store Code และ Business Profile ID
+ * @description สร้างข้อมูลโครงสร้างระดับแบรนด์ (Organization)
+ * [UPDATE]: เชื่อมโยง Founder และปรับปรุงที่ตั้งเพื่อผลลัพธ์ Local Search 
  */
 export function generateOrganizationSchema() {
   const identifiers = [
@@ -31,10 +31,10 @@ export function generateOrganizationSchema() {
       propertyID: "google_business_profile_id",
       value: SITE_CONFIG.business.ids?.businessProfileId,
     },
-  ].filter((item) => item.value); // [SAFETY]: กรองเฉพาะตัวที่มีค่าจริงเท่านั้น
+  ].filter((item) => item.value);
 
   return {
-    "@type": "ProfessionalService", // ระบุประเภทธุรกิจให้ชัดเจนเพื่อ Google Local Algorithm
+    "@type": "ProfessionalService",
     "@id": absoluteUrl("/#organization"),
     name: SITE_CONFIG.brandName,
     url: SITE_CONFIG.siteUrl,
@@ -44,18 +44,27 @@ export function generateOrganizationSchema() {
       width: "192",
       height: "192",
     },
-    // [STRATEGY]: ใช้ PropertyValue เพื่อระบุ ID หลายประเภทพร้อมกัน (Cross-Platform Validation)
-    identifier: identifiers,
-    // [OPTIMIZATION]: ปรับ Price Range เป็นเงินบาทเพื่อให้ Google เข้าใจบริบท Local
-    priceRange: "฿฿ - ฿฿฿",
     image: absoluteUrl("/images/og-main.png"),
+    priceRange: "฿฿ - ฿฿฿",
+
+    // [EEAT_LINKING]: ยืนยันตัวตนเจ้าของธุรกิจ (ทำให้ชื่อ อลงกรณ์ ยมเกิด ปรากฏในโหนดบริษัท)
+    founder: { "@id": absoluteUrl("/#expert") },
+    member: { "@id": absoluteUrl("/#expert") },
+    employee: { "@id": absoluteUrl("/#expert") },
+    
+    // [STRATEGY]: Cross-Platform Verification IDs
+    identifier: identifiers,
+
+    // [LOCAL_SEO_FIX]: ปรับแต่งที่ตั้งให้แม่นยำ (Target: Kamphaeng Phet Hub)
     address: {
       "@type": "PostalAddress",
-      streetAddress: SITE_CONFIG.contact.streetAddress,
-      addressLocality: SITE_CONFIG.business.location,
+      streetAddress: SITE_CONFIG.contact.streetAddress, 
+      addressLocality: "อำเภอเมืองกำแพงเพชร", 
+      addressRegion: SITE_CONFIG.business.location, 
       postalCode: SITE_CONFIG.contact.postalCode,
       addressCountry: "TH",
     },
+    
     contactPoint: {
       "@type": "ContactPoint",
       telephone: SITE_CONFIG.contact.phone,
@@ -63,7 +72,7 @@ export function generateOrganizationSchema() {
       areaServed: "TH",
       availableLanguage: ["Thai", "English"],
     },
-    // [UPDATE]: รวม Google Maps Link เข้ากับ Social Profiles เพื่อสร้าง Web of Trust
+
     sameAs: [
       SITE_CONFIG.links.googleMaps,
       SITE_CONFIG.links.facebook,
@@ -74,33 +83,43 @@ export function generateOrganizationSchema() {
 }
 
 /**
- * @description สร้าง Expert Node (Person) เพื่อยืนยันตัวตนผู้เชี่ยวชาญ (EEAT Alignment)
+ * @description สร้าง Expert Node (Person) - นายอลงกรณ์ ยมเกิด (นายเอ็มซ่ามากส์)
+ * [UPDATE]: ใส่ทั้งชื่อไทย-อังกฤษ และฉายา เพื่อเจาะจงตัวตน (Entity Locking)
  */
 export function generatePersonSchema() {
   return {
     "@type": "Person",
     "@id": absoluteUrl("/#expert"),
-    name: SITE_CONFIG.expert.legalName,
-    alternateName: SITE_CONFIG.expert.displayName,
+    // [NAME_STRATEGY]: แสดงชื่อจริงทั้ง 2 ภาษา เพื่อให้ Google AI เชื่อมโยงได้แม่นยำ
+    name: `${SITE_CONFIG.expert.legalNameThai} (${SITE_CONFIG.expert.legalName})`,
+    alternateName: SITE_CONFIG.expert.displayName, // นายเอ็มซ่ามากส์
+    givenName: "อลงกรณ์",
+    familyName: "ยมเกิด",
     jobTitle: SITE_CONFIG.expert.jobTitle,
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
+    
+    // [REVERSE_LINK]: ยืนยันความสัมพันธ์กับองค์กร
     worksFor: { "@id": absoluteUrl("/#organization") },
+    
+    // [EEAT_SIGNALS]: ความเชี่ยวชาญเฉพาะทาง
     knowsAbout: [
       "Technical SEO",
       "Next.js Development",
       "Web Architecture",
       "Core Web Vitals",
-      "Conversion Rate Optimization",
+      "Google Business Profile Strategy",
     ],
+    // [IDENTIFICATION]: ลิงก์โซเชียลส่วนตัวเพื่อสร้าง Web of Trust
+    sameAs: [
+      SITE_CONFIG.links.facebook,
+      SITE_CONFIG.links.github,
+    ].filter(Boolean) as string[],
   };
 }
 
 // --- [02. DYNAMIC GENERATORS: TARGETED CONTENT] ---
 
-/**
- * @description สร้างโครงสร้างข้อมูลสำหรับหน้าบริการ (Service & Offer)
- */
 export function generateServiceSchema(data: TemplateMasterData) {
   return {
     "@type": "Service",
@@ -119,21 +138,15 @@ export function generateServiceSchema(data: TemplateMasterData) {
   };
 }
 
-/**
- * @description สร้าง Local Business Node สำหรับ Area Pages เพื่อดึงอันดับใน Local Search
- */
 export function generateLocalBusinessSchema(data: AreaNode) {
   return {
     "@type": "ProfessionalService",
     "@id": absoluteUrl(`/areas/${data.slug}/#localbusiness`),
     name: `${SITE_CONFIG.brandName} ${data.province}`,
     description: data.seoDescription || data.description,
-    image: absoluteUrl(
-      data.heroImage || `/images/areas/${data.slug}-node.webp`
-    ),
+    image: absoluteUrl(data.heroImage || `/images/areas/${data.slug}-node.webp`),
     url: absoluteUrl(`/areas/${data.slug}`),
     telephone: SITE_CONFIG.contact.phone,
-    // [OPTIMIZATION]: Consistency กับ Organization หลัก
     priceRange: "฿฿ - ฿฿฿",
     address: {
       "@type": "PostalAddress",
@@ -141,7 +154,6 @@ export function generateLocalBusinessSchema(data: AreaNode) {
       addressRegion: data.province,
       addressCountry: "TH",
     },
-    // [CRITICAL]: เชื่อมโยงสาขาย่อยกลับไปยังองค์กรหลัก (Central Authority)
     parentOrganization: { "@id": absoluteUrl("/#organization") },
     areaServed: {
       "@type": "City",
@@ -150,12 +162,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
   };
 }
 
-/**
- * @description Breadcrumb List เพื่อช่วยให้ Crawler เข้าใจลำดับชั้นและแสดง Rich Snippets
- */
-export function generateBreadcrumbSchema(
-  items: readonly { name: string; item: string }[]
-) {
+export function generateBreadcrumbSchema(items: readonly { name: string; item: string }[]) {
   return {
     "@type": "BreadcrumbList",
     "@id": absoluteUrl("/#breadcrumb"),
@@ -172,8 +179,7 @@ export function generateBreadcrumbSchema(
 
 /**
  * @function generateSchemaGraph
- * @description รวบรวม Schema ทั้งหมดเข้าด้วยกันภายใต้ Graph เดียว
- * [STRATEGY]: การใช้ @graph ทำให้ Google เข้าใจความสัมพันธ์ของข้อมูลทั้งหมดในครั้งเดียว
+ * @description รวบรวม Schema ทั้งหมดภายใต้ Graph เดียวเพื่อให้ Bot เข้าใจความสัมพันธ์ทั้งหมดในครั้งเดียว
  */
 export function generateSchemaGraph(schemas: readonly object[]) {
   return {
