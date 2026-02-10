@@ -1,12 +1,12 @@
 /**
- * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.5.5 (PSI_OPTIMIZED)
  * [STRATEGY]: Geographic Personalization | Multi-Theme Logic | Local SEO Excellence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import Image from "next/image";
 
 // --- 1. Infrastructure & UI ---
@@ -30,26 +30,21 @@ interface LocalTemplateProps {
   readonly data: AreaNode;
 }
 
-/**
- * @component LocalTemplate
- * @description เทมเพลตหน้า Landing Page สำหรับพื้นที่ให้บริการ (Area Specific)
- */
 const LocalTemplate = ({ data }: LocalTemplateProps) => {
   // [SEO]: สร้างชุดข้อมูลโครงสร้าง (JSON-LD)
-  const schema = generateLocalBusinessSchema(data);
+  const schema = useMemo(() => generateLocalBusinessSchema(data), [data]);
 
-  // [LOGIC]: เตรียมคำถาม FAQ รายพื้นที่ (Local Context Injection)
-  const localFaqs = (data.keywords || []).slice(0, 5).map((kw) => ({
+  // [LOGIC]: เตรียมคำถาม FAQ รายพื้นที่ (Memoized เพื่อลด INP)
+  const localFaqs = useMemo(() => (data.keywords || []).slice(0, 5).map((kw) => ({
     question: `บริการ ${kw} ในพื้นที่ ${data.province} ราคาเริ่มต้นเท่าไหร่?`,
     answer: `สำหรับบริการ ${kw} ทางเรามีแพ็กเกจที่ยืดหยุ่น เริ่มต้นในราคาที่คุ้มค่าสำหรับธุรกิจใน${data.province} พร้อมระบบที่รองรับการขยายตัวในอนาคตครับ`,
-  }));
+  })), [data.keywords, data.province]);
 
   return (
-    // [FIX]: Removed invalid 'theme="system"' prop. LayoutEngine handles defaults internally.
     <LayoutEngine spacing="none">
       <JsonLd data={schema} />
 
-      {/* 01. HERO SECTION: [RESOLVED]: ปรับใช้ Flat Props ให้ตรงกับ HeroEngine Interface */}
+      {/* 01. HERO SECTION: LCP Element หลัก (ปรับปรุงความเร็วการโหลด) */}
       <HeroEngine
         title={
           <span className="block">
@@ -67,7 +62,7 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
       {/* 02. VISUAL AUTHORITY: โชว์เคสภาพลักษณ์รายพื้นที่ */}
       <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32">
         <div className="group relative mx-auto max-w-6xl">
-          <div className="bg-brand-primary/20 absolute -inset-4 rounded-[3rem] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
+          <div className="bg-brand-primary/20 absolute -inset-4 rounded-[3rem] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-40" />
 
           <div className="border-border bg-surface-card relative overflow-hidden rounded-[2rem] border shadow-2xl md:rounded-[3rem] md:p-2">
             <div className="bg-surface-offset relative aspect-[21/9] w-full overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem]">
@@ -75,13 +70,13 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
                 src={data.heroImage || "/images/templates/preview.webp"}
                 alt={`ผู้เชี่ยวชาญการทำเว็บไซต์และ SEO ในจังหวัด ${data.province}`}
                 fill
-                priority
-                className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
+                // [LCP OPTIMIZATION]: ถอด priority ออกเพื่อให้เบราว์เซอร์ให้ความสำคัญกับ Text Hero ก่อน (กู้คะแนน LCP)
+                loading="eager" 
+                className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02] transform-gpu"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
               <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-80" />
 
-              {/* Location Indicator Node */}
               <div className="absolute bottom-6 left-6 flex items-center gap-3 md:bottom-10 md:left-10">
                 <div className="border-border bg-surface-card/40 flex h-12 w-12 items-center justify-center rounded-xl border backdrop-blur-md">
                   <IconRenderer name="MapPin" className="text-brand-primary" size={24} />
@@ -102,23 +97,21 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
 
       {/* 03. LOCAL TRUST HUB: ยืนยันความน่าเชื่อถือระดับพื้นที่ */}
       <section className="py-24 md:py-32">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center gap-12 text-center">
-            <div className="space-y-4">
-              <h3 className="text-brand-primary text-[10px] font-black tracking-[0.5em] uppercase">
-                National Standard, Local Care
-              </h3>
-              <h2 className="text-text-primary text-4xl leading-none font-black uppercase italic md:text-6xl">
-                มาตรฐานสากล <br />
-                <span className="from-text-secondary to-text-primary bg-gradient-to-r bg-clip-text text-transparent">
-                  เพื่อธุรกิจใน {data.province}
-                </span>
-              </h2>
-            </div>
-            <ImpactStats />
-            <div className="via-border h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
-            <TrustBadge />
+        <div className="container mx-auto px-4 text-center">
+          <div className="space-y-4 mb-12">
+            <h3 className="text-brand-primary text-[10px] font-black tracking-[0.5em] uppercase">
+              National Standard, Local Care
+            </h3>
+            <h2 className="text-text-primary text-4xl leading-none font-black uppercase italic md:text-6xl">
+              มาตรฐานสากล <br />
+              <span className="from-text-secondary to-text-primary bg-gradient-to-r bg-clip-text text-transparent">
+                เพื่อธุรกิจใน {data.province}
+              </span>
+            </h2>
           </div>
+          <ImpactStats />
+          <div className="via-border h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent mx-auto my-12" />
+          <TrustBadge />
         </div>
       </section>
 
@@ -135,14 +128,11 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
             {(data.districts || []).map((district, idx) => (
               <span
                 key={idx}
-                className="hover:border-brand-primary/50 hover:text-brand-primary border-border bg-surface-card text-text-secondary hover:shadow-glow inline-flex items-center rounded-full border px-6 py-2 text-sm font-bold transition-all"
+                className="hover:border-brand-primary/50 hover:text-brand-primary border-border bg-surface-card text-text-secondary hover:shadow-glow inline-flex items-center rounded-full border px-6 py-2 text-sm font-bold transition-all transform-gpu"
               >
                 {district}
               </span>
             ))}
-            <span className="border-border text-text-muted inline-flex items-center rounded-full border border-dashed px-6 py-2 text-sm italic opacity-60">
-              และพื้นที่ใกล้เคียง
-            </span>
           </div>
         </div>
       </section>

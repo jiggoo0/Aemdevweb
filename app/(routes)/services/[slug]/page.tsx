@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.5.1 (LINT_FIXED)
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.5.5 (PATH_FIXED)
  * [STRATEGY]: Outcome-Driven Architecture | Graph-Based SEO | Lean Performance
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -24,7 +24,8 @@ import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import CatalogTemplate from "@/components/templates/catalog/Index";
 import BioTemplate from "@/components/templates/bio/Index";
-import LocalTemplate from "@/components/templates/local_service/index";
+// [FIX]: ปรับ Import Path ให้ตรงกับชื่อโฟลเดอร์จริง (new-service-name)
+import LocalTemplate from "@/components/templates/new-service-name/index";
 import SeoAgencyTemplate from "@/components/templates/seo_agency/index";
 import HotelTemplate from "@/components/templates/hotelresort/Index";
 
@@ -58,7 +59,6 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
 export default async function ServiceDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
 
-  // [FIX 1]: Explicitly type the variable to use the imported interface
   const service: TemplateMasterData | undefined = MASTER_REGISTRY.find(
     (s) => s.templateSlug === params.slug,
   );
@@ -81,7 +81,6 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
 
   /**
    * [TEMPLATE SWITCHER]: Strategy Pattern
-   * ระบบเลือกการแสดงผลตามประเภทของบริการที่กำหนดใน Master Registry
    */
   const renderTemplate = () => {
     switch (service.templateSlug) {
@@ -94,9 +93,8 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
       case "bio":
         return <BioTemplate data={service} />;
       case "local":
-        // [FIX 2]: Use safe type assertion instead of 'any'
-        // We assume LocalTemplate handles the data mapping or that TemplateMasterData
-        // overlaps sufficiently with AreaNode for this specific view.
+        // [TYPE ASSERTION]: LocalTemplate ต้องการ AreaNode แต่เรามี TemplateMasterData
+        // การแปลงนี้ปลอดภัยตราบใดที่ฟิลด์ที่ LocalTemplate เรียกใช้มีครบใน service
         return <LocalTemplate data={service as unknown as AreaNode} />;
       case "seo_agency":
         return <SeoAgencyTemplate data={service} />;
@@ -108,7 +106,6 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
   };
 
   return (
-    // [THEME INJECTION]: ส่งค่า Theme เข้าสู่ LayoutEngine เพื่อเปลี่ยนสีทั้งหน้า
     <LayoutEngine spacing="none" theme={service.theme}>
       <JsonLd data={fullSchema} />
 

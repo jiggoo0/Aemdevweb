@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.5.5 (PATH_FIXED)
  * [STRATEGY]: Local Authority Engine | Linked Data Graph | Deterministic Rendering
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -23,7 +23,8 @@ import {
 } from "@/lib/schema";
 
 // --- 3. Specialist Templates & Layout Engine ---
-import LocalTemplate from "@/components/templates/local_service/index";
+// [FIX]: ปรับ Import Path ให้ตรงกับชื่อโฟลเดอร์จริง (new-service-name)
+import LocalTemplate from "@/components/templates/new-service-name/index";
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
@@ -36,16 +37,16 @@ export async function generateStaticParams() {
 }
 
 /* [B] SEO METADATA ENGINE */
-export async function generateMetadata({ params }: PageProps<{ slug: string }>): Promise<Metadata> {
-  const { slug } = await params;
-  const area = AREA_NODES.find((a) => a.slug === slug);
+export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
+  const params = await props.params;
+  const area = AREA_NODES.find((a) => a.slug === params.slug);
 
   if (!area) return { title: "404 Not Found" };
 
   return constructMetadata({
     title: area.seoTitle || area.title,
     description: area.seoDescription || area.description,
-    path: `/areas/${slug}`,
+    path: `/areas/${params.slug}`,
     image: area.heroImage,
     keywords: area.keywords,
   });
@@ -53,16 +54,13 @@ export async function generateMetadata({ params }: PageProps<{ slug: string }>):
 
 /**
  * [DETERMINISTIC ADAPTER]: แปลงข้อมูล AreaNode ให้รองรับโครงสร้าง TemplateMasterData
- * [FIX]: Removed 'any' type and ensured proper data mapping with all required fields
  */
 const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
-  // สร้างชุดคำถาม FAQ อัตโนมัติจาก Keyword
   const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw: string) => ({
     question: `บริการ ${kw} ในจังหวัด ${area.province} มีจุดเด่นอย่างไร?`,
     answer: `เราเน้นการทำ ${kw} ที่ออกแบบมาเพื่อพฤติกรรมลูกค้าใน ${area.province} โดยเฉพาะ พร้อมโครงสร้าง Technical SEO ที่ช่วยให้ธุรกิจของคุณแซงหน้าคู่แข่งในพื้นที่ได้ทันทีครับ`,
   }));
 
-  // สร้าง Core Features จำลองสำหรับ Template ที่ต้องใช้
   const generatedFeatures = [
     {
       title: "Local SEO Optimized",
@@ -82,21 +80,19 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
     templateSlug: area.templateSlug || "local",
     title: area.title,
     description: area.description,
-    image: area.heroImage, // Map heroImage to image
+    image: area.heroImage,
     price: "ประเมินตามพื้นที่",
     priceValue: 0,
     currency: "THB",
     unit: "โปรเจกต์",
     faqs: generatedFaqs,
-    coreFeatures: generatedFeatures, // Required by templates
+    coreFeatures: generatedFeatures,
     benefits: [
       ...(area.keywords || []),
       `มาตรฐานวิศวกรรมจาก Specialist ในพื้นที่ ${area.province}`,
       "Technical SEO Optimized 100%",
     ],
-    theme: { primary: "#2563eb", secondary: "#1e40af" }, // Default theme for mapped data
-
-    // [FIX]: Added missing properties to satisfy TemplateMasterData interface
+    theme: { primary: "#2563eb", secondary: "#1e40af" },
     category: "business",
     priority: 99,
     keywords: area.keywords || [],
@@ -109,18 +105,18 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
  * @component AreaDetailPage
  * @description หน้าแสดงข้อมูลรายจังหวัดที่เน้นความน่าเชื่อถือและการทำอันดับ Local Search 2026
  */
-export default async function AreaDetailPage({ params }: PageProps<{ slug: string }>) {
-  const { slug } = await params;
+export default async function AreaDetailPage(props: PageProps<{ slug: string }>) {
+  const params = await props.params;
 
   // 1. Data Retrieval
-  const area = AREA_NODES.find((a) => a.slug === slug);
+  const area = AREA_NODES.find((a) => a.slug === params.slug);
   if (!area) notFound();
 
   // 2. [SEO]: Unified Schema Graph
   const breadcrumbData = [
     { name: "หน้าแรก", item: "/" },
     { name: "พื้นที่ให้บริการ", item: "/areas" },
-    { name: area.province, item: `/areas/${slug}` },
+    { name: area.province, item: `/areas/${params.slug}` },
   ];
 
   const fullSchema = generateSchemaGraph([
@@ -134,17 +130,17 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
    * [TEMPLATE SWITCHER]: เลือกเรนเดอร์ UI ตามยุทธศาสตร์ของพื้นที่
    */
   const renderTemplate = () => {
+    // Adapter สำหรับ Template อื่นๆ ที่ไม่ใช่ Local
     const templateData = adaptAreaToTemplateData(area);
 
     switch (area.templateSlug) {
       case "corporate":
-        // [FIX]: Passed typed data
         return <CorporateTemplate data={templateData} />;
       case "salepage":
-        // [FIX]: Passed typed data
         return <SalePageTemplate data={templateData} />;
       case "local":
       default:
+        // LocalTemplate รองรับ AreaNode โดยตรง
         return <LocalTemplate data={area} />;
     }
   };
@@ -154,7 +150,6 @@ export default async function AreaDetailPage({ params }: PageProps<{ slug: strin
       <JsonLd data={fullSchema} />
 
       <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
-        {/* Node Ref Badge */}
         <div className="flex justify-center pt-24 pb-4">
           <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
             Area_Node_Sync: v{AUDIT_STAMP} // Specialist_Stable

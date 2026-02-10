@@ -1,7 +1,11 @@
 .
-├── .env
+├── .env.local
 ├── .gitignore
 ├── .prettierrc
+├── .vercel
+│   ├── README.txt
+│   └── project.json
+├── 00-SYSTEM-MANDATE.md
 ├── AEMDEVWEB-STRUCTURE.txt
 ├── DEV.md
 ├── README.md
@@ -84,7 +88,7 @@
 │   │   ├── hotelresort
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   ├── local_service
+│   │   ├── new-service-name
 │   │   │   ├── Schema.ts
 │   │   │   └── index.tsx
 │   │   ├── salepage
@@ -100,17 +104,19 @@
 │   │       └── index.tsx
 │   └── ui
 │       ├── AmbientBackground.tsx
+│       ├── Callout.tsx
 │       ├── IconRenderer.tsx
 │       ├── SkeletonCard.tsx
 │       ├── ThemeToggle.tsx
+│       ├── accordion.tsx
 │       ├── button.tsx
 │       ├── skeleton-grid.tsx
 │       ├── skeleton.tsx
 │       └── sonner.tsx
 ├── components.json
 ├── config
-│   ├── 00-SYSTEM-MANDATE.md
-│   └── 01-SYSTEM-PROMPT-EXTENSION.md
+│   ├── ..00-SYSTEM-MANDATE.md
+│   └── ..01-SYSTEM-PROMPT-EXTENSION.md
 ├── constants
 │   ├── area-nodes.ts
 │   ├── master-registry.ts
@@ -131,7 +137,6 @@
 │   │   └── technical-seo-guide.mdx
 │   └── case-studies
 │       ├── case-study-industrial-catalog.mdx
-│       ├── case-study-industrial-catalog.mdx (2)
 │       └── unlink-reputation-management-success.mdx
 ├── eslint.config.mjs
 ├── hooks
@@ -240,7 +245,8 @@
 ├── structure.txt
 ├── tsconfig.json
 ├── tsconfig.tsbuildinfo
-└── types
-    ├── index.d.ts
-    ├── mdx.d.ts
-    └── template-props.ts
+├── types
+│   ├── index.d.ts
+│   ├── mdx.d.ts
+│   └── template-props.ts
+└── vercel.json

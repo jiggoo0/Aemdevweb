@@ -84,7 +84,7 @@
 │   │   ├── hotelresort
 │   │   │   ├── Index.tsx
 │   │   │   └── Schema.ts
-│   │   ├── local_service
+│   │   ├── new_service_name
 │   │   │   ├── Schema.ts
 │   │   │   └── index.tsx
 │   │   ├── salepage

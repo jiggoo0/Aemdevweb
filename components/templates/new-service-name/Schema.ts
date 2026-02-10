@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.4.5 (STABILIZED_FINAL)
- * [STRATEGY]: Service Area Business (SAB) | Geo-Targeting | Entity Graphing
+ * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.5.5 (STABILIZED_FINAL)
+ * [STRATEGY]: Service Area Business (SAB) | Entity Graphing | FAQ Snippet Integration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -10,6 +10,17 @@ import type { AreaNode } from "@/types";
 export function generateLocalBusinessSchema(data: AreaNode) {
   const pageUrl = `${SITE_CONFIG.siteUrl}/areas/${data.slug}`;
   const provinceName = data.province;
+
+  // [LOGIC]: สร้าง FAQ Schema อัตโนมัติจาก Keywords เพื่อเพิ่ม CTR บน Google Search
+  // [FIX]: ลบตัวแปร 'index' ที่ไม่ได้ใช้ออกเพื่อแก้คำเตือน unused-vars
+  const faqList = (data.keywords || []).slice(0, 3).map((kw) => ({
+    "@type": "Question",
+    name: `บริการ ${kw} ในพื้นที่ ${provinceName} ราคาเริ่มต้นเท่าไหร่?`,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: `สำหรับบริการ ${kw} ใน${provinceName} ทาง AEMDEVWEB มีแพ็กเกจที่ยืดหยุ่น เริ่มต้นในราคาที่คุ้มค่า พร้อมระบบรองรับการขยายตัวในอนาคตครับ`,
+    },
+  }));
 
   return {
     "@context": "https://schema.org",
@@ -38,7 +49,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
       {
         "@type": "Service",
         "@id": `${pageUrl}/#service`,
-        serviceType: "Technical SEO & Web Development",
+        serviceType: "Technical SEO & Web Infrastructure Specialist",
         name: `รับทำเว็บไซต์และ SEO ${provinceName}`,
         provider: { "@id": `${SITE_CONFIG.siteUrl}/#organization` },
         description: data.description,
@@ -57,6 +68,12 @@ export function generateLocalBusinessSchema(data: AreaNode) {
             name: `${district}, ${provinceName}`,
           })),
         ],
+      },
+      // [NEW]: FAQPage Schema เพื่อดึงดูดสายตาบนหน้าผลการค้นหา (Rich Results)
+      {
+        "@type": "FAQPage",
+        "@id": `${pageUrl}/#faq`,
+        mainEntity: faqList,
       },
     ],
   };

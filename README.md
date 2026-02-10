@@ -1437,7 +1437,7 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │   │   ├── [3.4K 2026-02-09 19:43]  hotelresort
 │   │   │   ├── [7.0K 2026-02-09 22:08]  Index.tsx
 │   │   │   └── [1.9K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-09 19:32]  local_service
+│   │   ├── [3.4K 2026-02-09 19:32]  new_service_name
 │   │   │   ├── [2.1K 2026-02-09 22:08]  Schema.ts
 │   │   │   └── [9.8K 2026-02-09 22:08]  index.tsx
 │   │   ├── [3.4K 2026-02-07 19:20]  salepage
@@ -1515,7 +1515,7 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │       │   ├── [3.4K 2026-02-07 03:19]  event-magic
 │       │   ├── [3.4K 2026-02-07 03:19]  facebook-ads-expert
 │       │   ├── [3.4K 2026-02-07 03:19]  hotel-resort
-│       │   ├── [3.4K 2026-02-07 03:20]  local-service
+│       │   ├── [3.4K 2026-02-07 03:20]  new-service-name
 │       │   ├── [3.4K 2026-02-07 03:20]  personal-bio
 │       │   ├── [3.4K 2026-02-07 03:20]  restaurant-cafe
 │       │   ├── [3.4K 2026-02-07 03:20]  salepage-single

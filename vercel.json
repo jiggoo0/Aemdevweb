@@ -12,6 +12,36 @@
   },
   "redirects": [
     {
+      "source": "/services/corporate_lite",
+      "destination": "/services/corporate",
+      "permanent": true
+    },
+    {
+      "source": "/services/corporate_pro",
+      "destination": "/services/corporate",
+      "permanent": true
+    },
+    {
+      "source": "/templates/event_magic",
+      "destination": "/services/corporate",
+      "permanent": true
+    },
+    {
+      "source": "/templates/booking/hotel-resort-node",
+      "destination": "/services/hotel-resort",
+      "permanent": true
+    },
+    {
+      "source": "/templates/local_service",
+      "destination": "/services/new-service-name",
+      "permanent": true
+    },
+    {
+      "source": "/templates/new_service_name",
+      "destination": "/services/new-service-name",
+      "permanent": true
+    },
+    {
       "source": "/seo/core-web-vitals-speed",
       "destination": "/blog/core-web-vitals-speed",
       "permanent": true
