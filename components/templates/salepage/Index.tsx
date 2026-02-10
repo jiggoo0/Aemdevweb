@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.5.5 (STABILIZED)
  * [STRATEGY]: Visual Impact | Theme-Aware Contrast | Zero-Any Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,7 @@ import Image from "next/image";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero";
+import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: Use Shared HeroEngine
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -41,7 +41,7 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY: [RESOLVED]: ปรับใช้ Flat Props ให้ตรงกับ HeroEngine Interface */}
+      {/* 01. HERO GATEWAY */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}

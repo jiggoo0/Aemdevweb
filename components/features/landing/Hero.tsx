@@ -33,7 +33,6 @@ const Hero = ({
   secondaryHref = "/services",
   className,
 }: HeroProps) => {
-  
   // [PHYSICS]: Neural Ease พร้อมระยะเคลื่อนไหวที่สั้นลงเพื่อความนิ่ง (CLS Fix)
   const entryTransition: Transition = {
     duration: 0.8, // ลดเวลาลงเพื่อให้ LCP แสดงผลไวขึ้น
@@ -45,17 +44,19 @@ const Hero = ({
       className={cn(
         "relative flex min-h-[85vh] flex-col justify-center overflow-hidden pt-28 pb-20 md:pt-32 md:pb-32",
         "content-visibility-visible will-change-contents", // [PERFORMANCE]: บังคับ Rendering ทันที
-        className
+        className,
       )}
     >
       {/* --- 01. INFRASTRUCTURE LAYER (Optimized) --- */}
-      <div className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.04] contain-strict" aria-hidden="true" />
-      
+      <div
+        className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.04] contain-strict"
+        aria-hidden="true"
+      />
+
       {/* Neural Orb: ใช้ GPU ในการ Render แสงฟุ้ง */}
-      <div className="bg-brand-primary/10 pointer-events-none absolute top-[10%] -right-[10%] z-0 h-[500px] w-[500px] rounded-full blur-[120px] md:h-[800px] md:w-[800px] transform-gpu" />
+      <div className="bg-brand-primary/10 pointer-events-none absolute top-[10%] -right-[10%] z-0 h-[500px] w-[500px] transform-gpu rounded-full blur-[120px] md:h-[800px] md:w-[800px]" />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        
         {/* --- 02. SYSTEM STATUS BADGE --- */}
         <motion.div
           initial={{ opacity: 0, x: -10 }} // ลดระยะจาก -20 เหลือ -10
@@ -75,7 +76,7 @@ const Hero = ({
             initial={{ opacity: 0, y: 15 }} // [CLS FIX]: ลดระยะกระโดดจาก 40 เหลือ 15
             animate={{ opacity: 1, y: 0 }}
             transition={entryTransition}
-            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-7xl lg:text-8xl xl:text-[7.5rem] will-change-transform"
+            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic will-change-transform md:text-7xl lg:text-8xl xl:text-[7.5rem]"
           >
             {typeof title === "string" && title.startsWith("AEMDEVWEB") ? (
               <>
@@ -109,7 +110,7 @@ const Hero = ({
           <Button
             asChild
             size="lg"
-            className="group shadow-pro-lg relative h-16 w-full overflow-hidden rounded-xl px-10 md:h-20 md:w-auto md:rounded-2xl md:px-12 transform-gpu"
+            className="group shadow-pro-lg relative h-16 w-full transform-gpu overflow-hidden rounded-xl px-10 md:h-20 md:w-auto md:rounded-2xl md:px-12"
           >
             <Link href={primaryHref} target="_blank" rel="noopener noreferrer">
               <div className="absolute inset-0 -translate-x-full bg-white/10 transition-transform duration-500 group-hover:translate-x-0" />
@@ -130,7 +131,7 @@ const Hero = ({
             variant="outline"
             className={cn(
               "group h-16 w-full justify-start rounded-xl px-8 transition-all md:h-20 md:w-auto md:justify-center md:rounded-2xl",
-              "border-border bg-surface-card/50 text-text-secondary hover:border-brand-primary/50 hover:bg-surface-card hover:text-text-primary shadow-sm"
+              "border-border bg-surface-card/50 text-text-secondary hover:border-brand-primary/50 hover:bg-surface-card hover:text-text-primary shadow-sm",
             )}
           >
             <Link href={secondaryHref} className="flex items-center gap-3">
@@ -147,7 +148,10 @@ const Hero = ({
         </motion.div>
       </div>
 
-      <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" aria-hidden="true" />
+      <div
+        className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent"
+        aria-hidden="true"
+      />
     </section>
   );
 };

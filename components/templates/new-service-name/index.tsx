@@ -35,10 +35,14 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
   const schema = useMemo(() => generateLocalBusinessSchema(data), [data]);
 
   // [LOGIC]: เตรียมคำถาม FAQ รายพื้นที่ (Memoized เพื่อลด INP)
-  const localFaqs = useMemo(() => (data.keywords || []).slice(0, 5).map((kw) => ({
-    question: `บริการ ${kw} ในพื้นที่ ${data.province} ราคาเริ่มต้นเท่าไหร่?`,
-    answer: `สำหรับบริการ ${kw} ทางเรามีแพ็กเกจที่ยืดหยุ่น เริ่มต้นในราคาที่คุ้มค่าสำหรับธุรกิจใน${data.province} พร้อมระบบที่รองรับการขยายตัวในอนาคตครับ`,
-  })), [data.keywords, data.province]);
+  const localFaqs = useMemo(
+    () =>
+      (data.keywords || []).slice(0, 5).map((kw) => ({
+        question: `บริการ ${kw} ในพื้นที่ ${data.province} ราคาเริ่มต้นเท่าไหร่?`,
+        answer: `สำหรับบริการ ${kw} ทางเรามีแพ็กเกจที่ยืดหยุ่น เริ่มต้นในราคาที่คุ้มค่าสำหรับธุรกิจใน${data.province} พร้อมระบบที่รองรับการขยายตัวในอนาคตครับ`,
+      })),
+    [data.keywords, data.province],
+  );
 
   return (
     <LayoutEngine spacing="none">
@@ -70,9 +74,9 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
                 src={data.heroImage || "/images/templates/preview.webp"}
                 alt={`ผู้เชี่ยวชาญการทำเว็บไซต์และ SEO ในจังหวัด ${data.province}`}
                 fill
-                // [LCP OPTIMIZATION]: ถอด priority ออกเพื่อให้เบราว์เซอร์ให้ความสำคัญกับ Text Hero ก่อน (กู้คะแนน LCP)
-                loading="eager" 
-                className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02] transform-gpu"
+                // [LCP OPTIMIZATION]: ถอด priority ออกเพื่อให้เบราว์เซอร์ให้ความสำคัญกับ Text Hero ก่อน
+                loading="eager"
+                className="transform-gpu object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
               <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-80" />
@@ -98,7 +102,7 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
       {/* 03. LOCAL TRUST HUB: ยืนยันความน่าเชื่อถือระดับพื้นที่ */}
       <section className="py-24 md:py-32">
         <div className="container mx-auto px-4 text-center">
-          <div className="space-y-4 mb-12">
+          <div className="mb-12 space-y-4">
             <h3 className="text-brand-primary text-[10px] font-black tracking-[0.5em] uppercase">
               National Standard, Local Care
             </h3>
@@ -110,7 +114,7 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
             </h2>
           </div>
           <ImpactStats />
-          <div className="via-border h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent mx-auto my-12" />
+          <div className="via-border mx-auto my-12 h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
           <TrustBadge />
         </div>
       </section>
@@ -128,7 +132,7 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
             {(data.districts || []).map((district, idx) => (
               <span
                 key={idx}
-                className="hover:border-brand-primary/50 hover:text-brand-primary border-border bg-surface-card text-text-secondary hover:shadow-glow inline-flex items-center rounded-full border px-6 py-2 text-sm font-bold transition-all transform-gpu"
+                className="hover:border-brand-primary/50 hover:text-brand-primary border-border bg-surface-card text-text-secondary hover:shadow-glow inline-flex transform-gpu items-center rounded-full border px-6 py-2 text-sm font-bold transition-all"
               >
                 {district}
               </span>

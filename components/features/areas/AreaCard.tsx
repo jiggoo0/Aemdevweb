@@ -34,7 +34,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         "group relative flex min-h-[480px] flex-col overflow-hidden rounded-[3rem] transition-all duration-700 ease-[0.16,1,0.3,1]",
         "border-border bg-surface-card shadow-pro-sm border",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
-        className
+        className,
       )}
     >
       {/* --- LAYER 01: ATMOSPHERIC VISUAL ENGINE --- */}

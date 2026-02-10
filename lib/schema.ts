@@ -28,12 +28,12 @@ export function generateOrganizationSchema(): Record<string, unknown> {
     image: absoluteUrl("/images/og-main.png"),
     priceRange: "฿฿ - ฿฿฿",
     foundingDate: SITE_CONFIG.business.established,
-    
+
     // [EEAT SIGNALS]
     founder: { "@id": absoluteUrl("/#expert") },
     member: { "@id": absoluteUrl("/#expert") },
     employee: { "@id": absoluteUrl("/#expert") },
-    
+
     // [IDENTITY MAPPING]
     identifier: [
       {
@@ -147,7 +147,9 @@ export function generateLocalBusinessSchema(data: AreaNode): Record<string, unkn
   return schema;
 }
 
-export function generateBreadcrumbSchema(items: readonly { name: string; item: string }[]): Record<string, unknown> {
+export function generateBreadcrumbSchema(
+  items: readonly { name: string; item: string }[],
+): Record<string, unknown> {
   return {
     "@type": "BreadcrumbList",
     "@id": absoluteUrl("/#breadcrumb"),
@@ -167,10 +169,6 @@ export function generateBreadcrumbSchema(items: readonly { name: string; item: s
 export function generateSchemaGraph(schemas: readonly object[]): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      generateOrganizationSchema(),
-      generatePersonSchema(),
-      ...schemas,
-    ],
+    "@graph": [generateOrganizationSchema(), generatePersonSchema(), ...schemas],
   };
 }

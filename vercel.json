@@ -28,7 +28,7 @@
     },
     {
       "source": "/templates/booking/hotel-resort-node",
-      "destination": "/services/hotel-resort",
+      "destination": "/services/hotelresort",
       "permanent": true
     },
     {
@@ -41,6 +41,18 @@
       "destination": "/services/new-service-name",
       "permanent": true
     },
+    /* --- [STRATEGIC REDIRECTS: BLOG CONSOLIDATION] --- */
+    {
+      "source": "/blog/technical-seo-guide",
+      "destination": "/blog/seo-2026-strategy",
+      "permanent": true
+    },
+    {
+      "source": "/seo/technical-seo-guide",
+      "destination": "/blog/seo-2026-strategy",
+      "permanent": true
+    },
+    /* --- [SEO LEGACY PATHS] --- */
     {
       "source": "/seo/core-web-vitals-speed",
       "destination": "/blog/core-web-vitals-speed",
@@ -75,9 +87,18 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        }
       ]
     }
   ]

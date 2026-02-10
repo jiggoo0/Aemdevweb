@@ -1,6 +1,6 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.5.0 (SYSTEM_STATUS_INTEGRATED)
- * [STRATEGY]: Intelligent Scroll Physics | Status Monitoring UI | Specialist Authority
+ * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.5.6 (UX_PATCHED)
+ * [STRATEGY]: Optimized Hit Area | Pointer Event Flow | Mobile Responsive
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -26,6 +26,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  // [LOGIC]: ประมวลผล Scroll Event
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -41,8 +42,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // [UI]: ปิด Mobile Menu เมื่อเปลี่ยนหน้า
   useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
+  // [UX]: ป้องกันการ Scroll พื้นหลังเมื่อ Mobile Menu เปิดอยู่
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
   }, [isMobileMenuOpen]);
@@ -51,13 +54,15 @@ const Navbar = () => {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[100] flex justify-center transition-all duration-700 ease-[0.16,1,0.3,1]",
+          // [FIX 1]: เพิ่ม pointer-events-none เพื่อไม่ให้ Container ที่มองไม่เห็นไปบังการกด
+          "pointer-events-none fixed inset-x-0 top-0 z-[100] flex justify-center transition-all duration-700 ease-[0.16,1,0.3,1]",
           isScrolled ? "pt-6 md:pt-8" : "pt-0",
         )}
       >
         <nav
           className={cn(
-            "transition-all duration-1000 ease-[0.16,1,0.3,1]",
+            // [FIX 2]: คืนค่า pointer-events-auto ให้ตัวบาร์เมนู เพื่อให้กดได้
+            "pointer-events-auto transition-all duration-1000 ease-[0.16,1,0.3,1]",
             isScrolled
               ? "border-border/50 bg-surface-main/80 shadow-pro-xl w-[96%] max-w-7xl rounded-[2.5rem] border backdrop-blur-2xl"
               : "border-border/10 bg-surface-main/30 w-full border-b backdrop-blur-sm",
@@ -70,7 +75,7 @@ const Navbar = () => {
             )}
           >
             {/* --- NODE A: BRAND IDENTITY --- */}
-            <Link href="/" className="group flex items-center gap-5 outline-none">
+            <Link href="/" className="group flex items-center gap-5 outline-none select-none">
               <div className="bg-text-primary text-surface-main relative flex h-11 w-11 items-center justify-center rounded-[1rem] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
                 <IconRenderer
                   name="Cpu"
@@ -89,7 +94,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* --- NODE B: DESKTOP NAVIGATION (Dynamic Modules) --- */}
+            {/* --- NODE B: DESKTOP NAVIGATION --- */}
             <div className="border-border/40 bg-surface-offset/40 hidden items-center gap-1 rounded-2xl border p-1.5 backdrop-blur-md lg:flex">
               {MAIN_NAV.map((item) => {
                 const isActive = pathname === item.href;
@@ -142,12 +147,23 @@ const Navbar = () => {
                 </Link>
               </Button>
 
+              {/* [FIX 3]: Mobile Menu Trigger - ปรับขนาดและ Z-Index */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50 flex h-11 w-11 items-center justify-center rounded-2xl border transition-all active:scale-90 lg:hidden"
+                className={cn(
+                    "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50",
+                    "relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
+                    "h-12 w-12", // ขยาย Hit Area จาก 11 เป็น 12 (48px)
+                    "active:scale-95", // ลดการเด้งให้น้อยลงเพื่อให้รู้สึก Firm ขึ้น
+                    "cursor-pointer select-none touch-manipulation" // เพิ่ม UX สำหรับ Touch Screen
+                )}
                 aria-label="Toggle Menu"
               >
-                <IconRenderer name={isMobileMenuOpen ? "X" : "Menu"} size={22} />
+                <IconRenderer 
+                    name={isMobileMenuOpen ? "X" : "Menu"} 
+                    size={24} // ขยายไอคอนเล็กน้อยเพื่อให้สมดุลกับปุ่ม
+                    className="pointer-events-none" // ป้องกันไอคอนรับ Event แทนปุ่ม
+                />
               </button>
             </div>
           </div>

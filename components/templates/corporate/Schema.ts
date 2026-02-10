@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.4.5 (GRAPH_ENTERPRISE)
+ * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.5.5 (GRAPH_ENTERPRISE)
  * [STRATEGY]: Knowledge Graph Architecture | Multi-Entity Linking | Service Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,6 +10,7 @@ import type { TemplateMasterData } from "@/types";
 export function generateCorporateSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
   const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
+  // [FIX]: Ensure data.priceValue exists before toString
   const cleanPrice = (data.priceValue || 0).toString();
 
   const IDS = {
@@ -23,7 +24,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      // NODE 1: ORGANIZATION
       {
         "@type": "Organization",
         "@id": IDS.ORG,
@@ -49,8 +49,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
           SITE_CONFIG.links.line,
         ].filter(Boolean),
       },
-
-      // NODE 2: SERVICE
       {
         "@type": "Service",
         "@id": IDS.SERVICE,
@@ -82,8 +80,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
           seller: { "@id": IDS.ORG },
         },
       },
-
-      // NODE 3: FAQ PAGE
       {
         "@type": "FAQPage",
         "@id": IDS.FAQ,
@@ -96,8 +92,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
           },
         })),
       },
-
-      // NODE 4: WEB PAGE
       {
         "@type": "WebPage",
         "@id": IDS.WEBPAGE,
@@ -109,8 +103,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
         breadcrumb: { "@id": IDS.BREADCRUMB },
         mainEntity: { "@id": IDS.SERVICE },
       },
-
-      // NODE 5: BREADCRUMB
       {
         "@type": "BreadcrumbList",
         "@id": IDS.BREADCRUMB,

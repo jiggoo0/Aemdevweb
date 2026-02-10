@@ -6,12 +6,13 @@
 
 import React from "react";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 // --- 1. Infrastructure & CMS Engine ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
-import { generateSchemaGraph } from "@/lib/schema"; 
+import { generateSchemaGraph } from "@/lib/schema";
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -34,7 +35,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import type { AreaNode, TemplateMasterData, BlogPost, CaseStudy } from "@/types";
 
 /* [A] SEO AUTHORITY PROTOCOL: Metadata เชิงยุทธศาสตร์ */
-export const metadata = constructMetadata({
+export const metadata: Metadata = constructMetadata({
   title: "รับทำเว็บไซต์และ SEO เชิงยุทธศาสตร์ | Web Infrastructure Specialist",
   description: SITE_CONFIG.description,
   path: "/",
@@ -43,14 +44,16 @@ export const metadata = constructMetadata({
 
 export default async function HomePage() {
   // 01. PARALLEL DATA FETCHING: ดึงข้อมูลแบบคู่ขนานเพื่อลด Latency
+  // ใช้ catch เพื่อป้องกันหน้าเว็บพังหาก CMS มีปัญหา (Fault Tolerance)
   const [cases, posts] = await Promise.all([
     getAllCaseStudies().catch(() => [] as CaseStudy[]),
     getAllPosts().catch(() => [] as BlogPost[]),
   ]);
 
-  // Strategic Data Slicing: กัดกรองโหนดสำคัญตาม Priority
+  // Strategic Data Slicing: คัดกรองโหนดสำคัญตาม Priority
   const recentCases = cases.slice(0, 2);
   const recentPosts = posts.slice(0, 3);
+  // เลือกเฉพาะ Area ที่ Priority >= 95 และจำกัดจำนวน 4 ใบ
   const featuredAreas = AREA_NODES.filter((n: AreaNode) => (n.priority ?? 0) >= 95).slice(0, 4);
   const featuredServices = MASTER_REGISTRY.slice(0, 3);
 
@@ -66,10 +69,16 @@ export default async function HomePage() {
       <section className="relative z-30 -mt-24 px-4 md:-mt-48 lg:-mt-56">
         <div className="mx-auto max-w-7xl">
           <div className="bg-surface-card/40 border-border shadow-pro-xl relative overflow-hidden rounded-[4rem] border p-12 backdrop-blur-3xl md:p-24">
-            <div className="bg-infrastructure-grid absolute inset-0 -z-10 opacity-[0.05]" aria-hidden="true" />
+            <div
+              className="bg-infrastructure-grid absolute inset-0 -z-10 opacity-[0.05]"
+              aria-hidden="true"
+            />
             <div className="flex flex-col items-center gap-24">
               <TrustBadge />
-              <div className="via-border/50 h-px w-full max-w-5xl bg-gradient-to-r from-transparent to-transparent" aria-hidden="true" />
+              <div
+                className="via-border/50 h-px w-full max-w-5xl bg-gradient-to-r from-transparent to-transparent"
+                aria-hidden="true"
+              />
               <ImpactStats />
             </div>
           </div>
@@ -125,7 +134,10 @@ export default async function HomePage() {
 
       {/* --- SECTION 06: PRICING & INVESTMENT --- */}
       <section className="bg-surface-main relative overflow-hidden py-32 md:py-48">
-        <div className="bg-brand-primary/5 absolute top-0 left-0 h-full w-full skew-y-3 transform" aria-hidden="true" />
+        <div
+          className="bg-brand-primary/5 absolute top-0 left-0 h-full w-full skew-y-3 transform"
+          aria-hidden="true"
+        />
         <PricingSection />
       </section>
 

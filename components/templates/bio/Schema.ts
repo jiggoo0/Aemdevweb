@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: BIO_DATA_STRUCTURE v17.4.5 (STABILIZED)
+ * [TEMPLATE SCHEMA]: BIO_DATA_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Knowledge Graph Linking | Entity Resolution | Semantic Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,7 +10,10 @@ import type { TemplateMasterData } from "@/types";
 export function generateBioSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
   const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
+  // [FIX]: Ensure array exists before mapping
   const expertiseList = (data.coreFeatures || []).map((feat) => feat.title);
+  // [FIX]: Ensure priceValue is number before toString
+  const price = (data.priceValue || 0).toString();
 
   return {
     "@context": "https://schema.org",
@@ -46,7 +49,7 @@ export function generateBioSchema(data: TemplateMasterData) {
         provider: { "@id": `${siteUrl}/#person` },
         offers: {
           "@type": "Offer",
-          price: (data.priceValue || 0).toString(),
+          price: price,
           priceCurrency: data.currency || "THB",
           availability: "https://schema.org/InStock",
           seller: { "@id": `${siteUrl}/#person` },

@@ -190,7 +190,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
     image: "/images/service/local-node.webp",
     // [FIXED]: แมปตรงกับโฟลเดอร์คอมโพเนนต์ใหม่ และ Redirect ใน vercel.json
-    templateSlug: "new-service-name", 
+    templateSlug: "new-service-name",
     category: "business",
     price: "6,900",
     priceValue: 6900,
@@ -285,8 +285,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   {
     id: "AEM-SVC-PB-14",
     title: "Professional Bio & Portfolio",
-    description:
-      "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว",
+    description: "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว",
     image: "/images/service/personal-node.webp",
     templateSlug: "bio",
     category: "personal",

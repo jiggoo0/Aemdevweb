@@ -18,8 +18,8 @@ interface LayoutEngineProps {
   readonly theme?: {
     readonly primary?: string;
     readonly secondary?: string;
-    readonly background?: string; 
-    readonly gradient?: string; 
+    readonly background?: string;
+    readonly gradient?: string;
   };
 }
 
@@ -83,9 +83,10 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
       <footer className="relative z-10 container mx-auto mt-auto px-6 py-12">
         <div className="border-border/10 flex flex-col items-center justify-between gap-6 border-t pt-8 md:flex-row">
           <div className="flex items-center gap-4">
-            <div className="bg-[var(--color-brand-primary)] shadow-[0_0_10px_var(--color-brand-primary)] h-1.5 w-1.5 animate-pulse rounded-full" />
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_10px_var(--color-brand-primary)]" />
             <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
-              Engineered_Node v{SITE_CONFIG.project.version} // {SITE_CONFIG.business.status || "Stable"}
+              Engineered_Node v{SITE_CONFIG.project.version} //{" "}
+              {SITE_CONFIG.business.status || "Stable"}
             </span>
           </div>
           <div className="text-text-muted hidden items-center gap-8 font-mono text-[8px] font-bold tracking-[0.3em] uppercase opacity-20 md:flex">

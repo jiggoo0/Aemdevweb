@@ -22,7 +22,7 @@ export function cn(...inputs: ClassValue[]): string {
  */
 export function absoluteUrl(path: string): string {
   if (!path) return SITE_CONFIG.siteUrl;
-  
+
   // หากเป็น External URL อยู่แล้ว ให้ส่งกลับทันที
   if (path.startsWith("http")) return path;
 
@@ -105,7 +105,7 @@ export function getReadingTime(content: string): string {
     .split(/\s+/)
     .filter(Boolean).length;
 
-  const totalWords = (thaiCharCount / 4) + englishWordCount;
+  const totalWords = thaiCharCount / 4 + englishWordCount;
   const minutes = Math.ceil(totalWords / wordsPerMinute);
 
   return `${minutes || 1} นาที`;

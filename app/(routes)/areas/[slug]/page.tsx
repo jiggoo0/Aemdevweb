@@ -77,7 +77,11 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
     unit: "โปรเจกต์",
     faqs: generatedFaqs,
     coreFeatures: [
-      { title: "Local SEO Optimized", description: `เจาะจงพื้นที่ ${area.province}`, icon: "MapPin" },
+      {
+        title: "Local SEO Optimized",
+        description: `เจาะจงพื้นที่ ${area.province}`,
+        icon: "MapPin",
+      },
       { title: "High Performance", description: "โหลดไวตามมาตรฐาน Web Vitals", icon: "Zap" },
       { title: "Conversion Ready", description: "ปิดการขายลูกค้าท้องถิ่น", icon: "Target" },
     ],

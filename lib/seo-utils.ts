@@ -39,9 +39,7 @@ export function constructMetadata({
     },
     description,
     keywords: [...keywords, ...SITE_CONFIG.keywords],
-    authors: [
-      { name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl },
-    ],
+    authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
     creator: SITE_CONFIG.expert.legalName,
     metadataBase: new URL(SITE_CONFIG.siteUrl),
     alternates: {

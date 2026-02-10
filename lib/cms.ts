@@ -28,11 +28,10 @@ const DIRECTORIES = {
  */
 const sanitizeFrontmatter = (
   data: Record<string, unknown>,
-  slug: string
+  slug: string,
 ): Record<string, unknown> => {
   // Helper functions เพื่อลดความซ้ำซ้อน
-  const str = (val: unknown, fallback: string) =>
-    typeof val === "string" ? val : fallback;
+  const str = (val: unknown, fallback: string) => (typeof val === "string" ? val : fallback);
   const arr = (val: unknown) => (Array.isArray(val) ? val : []);
 
   // 1. สร้าง Base Object ที่ทุก Content ต้องมี
@@ -71,9 +70,7 @@ const sanitizeFrontmatter = (
  * @description ดึงข้อมูลทั้งหมดจาก Directory ที่กำหนด พร้อมระบบ Sort ตามวันที่
  * [CONSTRAINT]: T ต้องเป็น Type ที่ extends BaseContent เพื่อให้มั่นใจว่ามี date และ slug
  */
-async function fetchCollection<T extends BaseContent>(
-  dirPath: string
-): Promise<readonly T[]> {
+async function fetchCollection<T extends BaseContent>(dirPath: string): Promise<readonly T[]> {
   // 1. Safety Check: ถ้าไม่มี Folder ให้ return ว่าง (ป้องกัน Crash)
   if (!fs.existsSync(dirPath)) return [];
 
@@ -89,7 +86,7 @@ async function fetchCollection<T extends BaseContent>(
 
       return sanitizeFrontmatter(
         data as Record<string, unknown>,
-        file.replace(".mdx", "")
+        file.replace(".mdx", ""),
       ) as unknown as T;
     })
     // [LOGIC]: เรียงลำดับจากใหม่ไปเก่า (Descending)
@@ -104,11 +101,11 @@ async function fetchCollection<T extends BaseContent>(
  */
 async function fetchDocument<T extends BaseContent>(
   dirPath: string,
-  slug: string
+  slug: string,
 ): Promise<(T & { content: string }) | null> {
   try {
     const filePath = path.join(dirPath, `${slug}.mdx`);
-    
+
     // Safety Check: ถ้าหาไฟล์ไม่เจอ
     if (!fs.existsSync(filePath)) return null;
 
@@ -117,10 +114,7 @@ async function fetchDocument<T extends BaseContent>(
 
     // ผสาน Frontmatter เข้ากับ Content Body
     return {
-      ...(sanitizeFrontmatter(
-        data as Record<string, unknown>,
-        slug
-      ) as unknown as T),
+      ...(sanitizeFrontmatter(data as Record<string, unknown>, slug) as unknown as T),
       content,
     };
   } catch (error) {
@@ -136,17 +130,13 @@ async function fetchDocument<T extends BaseContent>(
 // ใช้ React Cache เพื่อป้องกันการอ่านไฟล์ซ้ำซ้อนใน Request เดียวกัน
 
 // Blog API
-export const getAllPosts = cache(() => 
-  fetchCollection<BlogPost>(DIRECTORIES.blog)
-);
+export const getAllPosts = cache(() => fetchCollection<BlogPost>(DIRECTORIES.blog));
 export const getPostBySlug = cache((slug: string) =>
-  fetchDocument<BlogPost>(DIRECTORIES.blog, slug)
+  fetchDocument<BlogPost>(DIRECTORIES.blog, slug),
 );
 
 // Case Study API
-export const getAllCaseStudies = cache(() =>
-  fetchCollection<CaseStudy>(DIRECTORIES.caseStudies)
-);
+export const getAllCaseStudies = cache(() => fetchCollection<CaseStudy>(DIRECTORIES.caseStudies));
 export const getCaseStudyBySlug = cache((slug: string) =>
-  fetchDocument<CaseStudy>(DIRECTORIES.caseStudies, slug)
+  fetchDocument<CaseStudy>(DIRECTORIES.caseStudies, slug),
 );

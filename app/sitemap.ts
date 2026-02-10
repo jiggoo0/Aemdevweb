@@ -12,7 +12,7 @@ import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.siteUrl.replace(/\/$/, "");
-  
+
   // ใช้วันที่ปัจจุบันเป็น Last Modified หลักสำหรับ Static Routes
   const lastAudit = new Date();
 

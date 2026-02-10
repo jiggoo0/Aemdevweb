@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: HOTEL_RESORT_STRUCTURE v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE SCHEMA]: HOTEL_RESORT_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: LodgingBusiness Entity | Geo-Data Integration | Trust Graph
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -41,7 +41,6 @@ export function generateHotelSchema(data: TemplateMasterData) {
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Hospitality Web Solutions",
-          // [FIX]: Changed unused 'idx' to '_' to satisfy Linter
           itemListElement: (data.coreFeatures || []).map((feat, _) => ({
             "@type": "Offer",
             itemOffered: {

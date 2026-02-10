@@ -1,7 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.5.6 (FIXED)
  * [STRATEGY]: Instant LCP Paint | Multi-Theme Logic | Zero-Any Architecture
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [FIX]: Reverted HeroEngine import to support 'align' prop
  */
 
 "use client";
@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+// [CORRECTION]: ใช้ HeroEngine จาก sections ซึ่งรองรับ prop 'align'
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
@@ -24,7 +25,7 @@ import IconRenderer from "@/components/ui/IconRenderer";
 import ImpactStats from "@/components/shared/ImpactStats";
 
 // --- LOGIC ---
-import type { TemplateMasterData, IconName } from "@/types";
+import type { TemplateMasterData } from "@/types";
 import { generateBioSchema } from "./Schema";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -32,10 +33,6 @@ interface BioTemplateProps {
   readonly data: TemplateMasterData;
 }
 
-/**
- * @component BioTemplate
- * @description หน้าแนะนำตัวและ Portfolio (Personal Branding)
- */
 function BioTemplate({ data }: BioTemplateProps) {
   const schema = generateBioSchema(data);
 
@@ -43,31 +40,30 @@ function BioTemplate({ data }: BioTemplateProps) {
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. IDENTITY HERO: [RESOLVED]: ปรับใช้ Flat Props ให้ตรงกับ HeroEngine Interface */}
+      {/* 01. IDENTITY HERO */}
       <HeroEngine
         title={
-          <>
+          <span className="block">
             <span className="text-brand-primary mb-2 block font-mono text-lg tracking-[0.3em] uppercase md:text-2xl">
               {SITE_CONFIG.expert.jobTitle}
             </span>
             {SITE_CONFIG.expert.displayName}
-          </>
+          </span>
         }
         subtitle={data.description}
         primaryActionLabel="ทักแชทปรึกษาผมได้เลย"
         primaryHref={SITE_CONFIG.links.line}
         secondaryActionLabel="ดูผลงานที่ผ่านมา"
         secondaryHref="#portfolio"
-        align="left"
+        align="left" // [NOTE]: ตอนนี้สามารถใช้ align ได้แล้ว
       />
 
-      {/* 02. IDENTITY VISUAL: Professional Image Node */}
+      {/* 02. IDENTITY VISUAL */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 transition-colors duration-500 md:-mt-40">
         <div className="group relative mx-auto max-w-5xl">
           <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
 
           <div className="border-border bg-surface-card relative overflow-hidden rounded-[3rem] border shadow-2xl md:rounded-[4rem] md:p-4">
-            {/* Social Interconnects */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 md:flex">
               {[
                 { name: "Github", href: SITE_CONFIG.links?.github },
@@ -82,7 +78,7 @@ function BioTemplate({ data }: BioTemplateProps) {
                       rel="noopener noreferrer"
                       className="border-border bg-surface-main/20 hover:bg-brand-primary hover:text-surface-main rounded-full border p-3 backdrop-blur-md transition-all"
                     >
-                      <IconRenderer name={social.name as IconName} size={20} />
+                      <IconRenderer name={social.name} size={20} />
                     </a>
                   ),
               )}
@@ -102,7 +98,6 @@ function BioTemplate({ data }: BioTemplateProps) {
             </div>
           </div>
 
-          {/* Neural Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -154,7 +149,7 @@ function BioTemplate({ data }: BioTemplateProps) {
           items={(data.coreFeatures || []).map((feat, idx) => ({
             title: feat.title,
             description: feat.description,
-            icon: feat.icon as IconName,
+            icon: feat.icon,
             technicalDetail: `SKILL_NODE: 0${idx + 1}`,
           }))}
           columns={3}

@@ -19,9 +19,7 @@ export default function JsonLd({ data }: JsonLdProps) {
   /* [A] SAFETY GUARD */
   if (!data) return null;
 
-  const hasContent = Array.isArray(data) 
-    ? data.length > 0 
-    : Object.keys(data).length > 0;
+  const hasContent = Array.isArray(data) ? data.length > 0 : Object.keys(data).length > 0;
 
   if (!hasContent) return null;
 

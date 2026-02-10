@@ -109,7 +109,7 @@ export interface SiteConfig {
     readonly roiFocus: boolean;
     readonly established: string;
     // [UPDATE]: เพิ่ม field status เพื่อรองรับการแสดงผลใน LayoutEngine
-    readonly status?: string; 
+    readonly status?: string;
     readonly ids?: {
       readonly businessProfileId: string;
       readonly storeCode: string;

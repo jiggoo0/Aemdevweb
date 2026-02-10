@@ -1,18 +1,29 @@
+/**
+ * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.5.5 (STABILIZED)
+ * [STRATEGY]: Outcome-Driven Architecture | Config-Led Defaults | Neural Physics
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
+
 "use client";
 
 import React, { memo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+// --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/features/landing/Hero";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
+
+// --- 2. Shared Component Nodes ---
 import TrustBadge from "@/components/shared/TrustBadge";
 import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 import ImpactStats from "@/components/shared/ImpactStats";
+
+// --- 3. Logic & Types ---
 import type { TemplateMasterData } from "@/types";
 import { generateCorporateSchema } from "./Schema";
 
@@ -21,13 +32,14 @@ interface CorporateTemplateProps {
 }
 
 function CorporateTemplate({ data }: CorporateTemplateProps) {
+  // [SEO]: สร้างชุดข้อมูลโครงสร้าง (JSON-LD)
   const schema = generateCorporateSchema(data);
 
   return (
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* [FIX]: Updated Props to match HeroEngine interface */}
+      {/* 01. HERO GATEWAY: ส่วนหัวหลักของ Enterprise Page */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
@@ -37,7 +49,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         secondaryHref="#security"
       />
 
-      {/* ... (ส่วนอื่นๆ ของ Code คงเดิม) ... */}
+      {/* 02. VISUAL AUTHORITY: โชว์เคสระบบองค์กร */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
         <div className="group relative mx-auto max-w-7xl">
           <div className="bg-brand-primary/10 will-change-opacity absolute -inset-10 rounded-[4rem] opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
@@ -61,6 +73,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
               <div className="from-surface-main absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
             </div>
           </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -83,6 +96,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </section>
 
+      {/* 03. TRUST INDICATORS: สัญลักษณ์ความเชื่อมั่น */}
       <section className="py-24 md:pt-32">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-16 text-center">
@@ -102,6 +116,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </section>
 
+      {/* 04. CORE FEATURES: โซลูชันหลัก */}
       <FeatureGrid
         heading="Enterprise Solutions"
         subheading="โครงสร้างระบบที่ถูกออกแบบมาเพื่อรองรับการขยายตัว (Scalability) และความปลอดภัย (Security) สูงสุด"
@@ -114,6 +129,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         columns={2}
       />
 
+      {/* 05. SECURITY MODULE: มาตรฐานความปลอดภัย */}
       <article id="security" className="border-border bg-surface-offset/30 border-y py-24">
         <div className="container mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -160,6 +176,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </article>
 
+      {/* 06. CONVERSION & FAQ */}
       <ConversionCTA
         title="พร้อมยกระดับโครงสร้างดิจิทัลขององค์กรหรือยังครับ?"
         description="ทีมผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและออกแบบระบบที่ตอบโจทย์วิสัยทัศน์ขององค์กรคุณอย่างตรงจุด"

@@ -37,7 +37,8 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     id: "02",
     title: "High-Performance Build",
     thTitle: "พัฒนาระบบพลังสูง",
-    description: "พัฒนาด้วย Next.js เน้นความเร็วระดับเสี้ยววินาที เพื่อการใช้งานที่ลื่นไหลระดับสากล",
+    description:
+      "พัฒนาด้วย Next.js เน้นความเร็วระดับเสี้ยววินาที เพื่อการใช้งานที่ลื่นไหลระดับสากล",
     icon: "Cpu",
     metric: "Speed_Core_100",
   },
@@ -96,7 +97,10 @@ const WorkProcess = () => {
       {/* --- 02. PROCESS NODES: Signal Flow Grid --- */}
       <div className="relative grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
         {/* Signal Flow Connector (Desktop Only) */}
-        <div className="from-brand-primary/20 via-brand-primary/40 to-brand-primary/20 absolute top-20 left-0 hidden h-px w-full bg-gradient-to-r lg:block" aria-hidden="true" />
+        <div
+          className="from-brand-primary/20 via-brand-primary/40 to-brand-primary/20 absolute top-20 left-0 hidden h-px w-full bg-gradient-to-r lg:block"
+          aria-hidden="true"
+        />
 
         {PROCESS_STEPS.map((step, index) => (
           <motion.div
@@ -110,7 +114,7 @@ const WorkProcess = () => {
             <div
               className={cn(
                 "border-border bg-surface-card/60 hover:border-brand-primary/40 relative z-10 flex h-full flex-col overflow-hidden rounded-[2.5rem] border p-10 backdrop-blur-xl transition-all duration-700",
-                "hover:shadow-glow hover:-translate-y-4"
+                "hover:shadow-glow hover:-translate-y-4",
               )}
             >
               {/* Step ID Background (Ambient) */}

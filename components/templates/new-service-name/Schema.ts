@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.5.5 (STABILIZED_FINAL)
+ * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Service Area Business (SAB) | Entity Graphing | FAQ Snippet Integration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,8 +11,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
   const pageUrl = `${SITE_CONFIG.siteUrl}/areas/${data.slug}`;
   const provinceName = data.province;
 
-  // [LOGIC]: สร้าง FAQ Schema อัตโนมัติจาก Keywords เพื่อเพิ่ม CTR บน Google Search
-  // [FIX]: ลบตัวแปร 'index' ที่ไม่ได้ใช้ออกเพื่อแก้คำเตือน unused-vars
+  // [LOGIC]: สร้าง FAQ Schema อัตโนมัติจาก Keywords
   const faqList = (data.keywords || []).slice(0, 3).map((kw) => ({
     "@type": "Question",
     name: `บริการ ${kw} ในพื้นที่ ${provinceName} ราคาเริ่มต้นเท่าไหร่?`,
@@ -69,7 +68,6 @@ export function generateLocalBusinessSchema(data: AreaNode) {
           })),
         ],
       },
-      // [NEW]: FAQPage Schema เพื่อดึงดูดสายตาบนหน้าผลการค้นหา (Rich Results)
       {
         "@type": "FAQPage",
         "@id": `${pageUrl}/#faq`,

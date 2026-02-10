@@ -96,13 +96,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "scroll-smooth antialiased",
         fontSans.variable,
         fontThai.variable,
-        fontMono.variable
+        fontMono.variable,
       )}
     >
       <body
         className={cn(
           "bg-surface-main text-text-primary font-thai min-h-screen overflow-x-hidden",
-          "selection:bg-brand-primary/20 selection:text-brand-primary"
+          "selection:bg-brand-primary/20 selection:text-brand-primary",
         )}
       >
         {/* --- GLOBAL AMBIENT LAYERS --- */}
@@ -111,7 +111,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
           aria-hidden="true"
         />
-        <div className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03]" aria-hidden="true" />
+        <div
+          className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
+          aria-hidden="true"
+        />
 
         <ThemeProvider
           attribute="data-theme"
@@ -121,18 +124,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           {/* ระบบแถบโหลดเสมือน: ลด Perceived Latency ระหว่างการเปลี่ยนหน้า */}
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
-          
+
           <div className="relative z-10 flex min-h-screen flex-col">
-            {/* Accessibility: Skip to Content สำหรับผู้ใช้งานที่ใช้ Keyboard/Screen Reader */}
-            <a 
-              href="#main-content" 
-              className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:p-4 focus:bg-brand-primary focus:text-white focus:rounded-xl"
+            {/* Accessibility: Skip to Content */}
+            <a
+              href="#main-content"
+              className="focus:bg-brand-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:p-4 focus:text-white"
             >
               ข้ามไปที่เนื้อหาหลัก
             </a>
-            
+
             <Navbar />
-            <main id="main-content" className="relative flex flex-grow flex-col outline-none" tabIndex={-1}>
+            <main
+              id="main-content"
+              className="relative flex flex-grow flex-col outline-none"
+              tabIndex={-1}
+            >
               {children}
             </main>
             <Footer />
@@ -149,7 +156,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               richColors
               closeButton
               toastOptions={{
-                className: "rounded-2xl border border-border bg-surface-card text-text-primary shadow-pro-lg",
+                className:
+                  "rounded-2xl border border-border bg-surface-card text-text-primary shadow-pro-lg",
               }}
             />
           </div>

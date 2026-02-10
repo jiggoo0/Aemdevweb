@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: SALE_PAGE_STRUCTURE v17.4.5 (GRAPH_CONVERSION)
+ * [TEMPLATE SCHEMA]: SALE_PAGE_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Multi-Rich Snippet (Product + FAQ) | Graph Architecture | Strict Typing
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,6 +10,7 @@ import type { TemplateMasterData } from "@/types";
 export function generateSalePageSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
   const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
+  // [FIX]: Ensure priceValue is number
   const cleanPrice = (data.priceValue || 0).toString();
 
   // [SYSTEM]: Centralized ID Management

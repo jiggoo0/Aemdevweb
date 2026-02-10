@@ -20,9 +20,8 @@ function AmbientBackground({
   color,
   opacity,
 }: AmbientBackgroundProps) {
-  
   /**
-   * [PERFORMANCE]: ใช้ CSS Variables เพื่อลดการ Re-paint 
+   * [PERFORMANCE]: ใช้ CSS Variables เพื่อลดการ Re-paint
    * การเปลี่ยนสีผ่าน Variable จะลื่นกว่าการเปลี่ยนผ่าน Inline Style ตรงๆ
    */
   const auraStyle = {
@@ -42,10 +41,10 @@ function AmbientBackground({
     >
       {/* 01. TECHNICAL GRID: ตารางโครงสร้างระดับสถาปัตยกรรม */}
       <div
-        className="absolute inset-0 bg-infrastructure-grid transition-opacity duration-1000"
-        style={{ 
+        className="bg-infrastructure-grid absolute inset-0 transition-opacity duration-1000"
+        style={{
           opacity: gridOpacity,
-          maskImage: "radial-gradient(circle at center, black, transparent 80%)" // [ADD]: ให้ตารางจางหายไปตามขอบ
+          maskImage: "radial-gradient(circle at center, black, transparent 80%)", // [ADD]: ให้ตารางจางหายไปตามขอบ
         }}
       />
 
@@ -55,8 +54,9 @@ function AmbientBackground({
         className={cn(
           "absolute -top-[20%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
           "bg-[var(--aura-color)] opacity-[var(--aura-opacity)]",
-          "blur-[100px] md:blur-[150px] mix-blend-soft-light",
-          "animate-aura-float transform-gpu will-change-transform transition-colors duration-1000"
+          // [FIX]: ลด Blur บนมือถือเพื่อลดภาระ GPU (Mobile: 60px, Desktop: 150px)
+          "mix-blend-soft-light blur-[60px] md:blur-[150px]",
+          "animate-aura-float transform-gpu transition-colors duration-1000 will-change-transform",
         )}
       />
 
@@ -65,13 +65,14 @@ function AmbientBackground({
         className={cn(
           "absolute -right-[10%] -bottom-[10%] h-[50vw] w-[50vw] rounded-full",
           "bg-[var(--aura-color)] opacity-[calc(var(--aura-opacity)*0.7)]",
-          "blur-[80px] md:blur-[120px] mix-blend-plus-lighter",
-          "animate-pulse-slow transform-gpu will-change-transform transition-colors duration-1000"
+          // [FIX]: ลด Blur บนมือถือเพื่อลดภาระ GPU
+          "mix-blend-plus-lighter blur-[50px] md:blur-[120px]",
+          "animate-pulse-slow transform-gpu transition-colors duration-1000 will-change-transform",
         )}
       />
 
       {/* 03. DEPTH LAYER: สร้างความลึกแบบ Specialist */}
-      <div className="absolute inset-0 bg-surface-main/20 backdrop-blur-[2px]" />
+      <div className="bg-surface-main/20 absolute inset-0 backdrop-blur-[1px]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-surface-main)_100%)] opacity-60" />
     </div>
   );

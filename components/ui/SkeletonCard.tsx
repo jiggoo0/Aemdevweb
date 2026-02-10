@@ -18,12 +18,7 @@ interface SkeletonCardProps {
   readonly aspectRatio?: "video" | "portrait" | "square" | "hero";
 }
 
-const SkeletonCard = ({ 
-  className, 
-  style, 
-  aspectRatio = "video" 
-}: SkeletonCardProps) => {
-  
+const SkeletonCard = ({ className, style, aspectRatio = "video" }: SkeletonCardProps) => {
   // [MAPPING]: ผูกโยงกับ Utility ใน globals.css เพื่อรักษาอัตราส่วนที่แน่นอน (CLS Mitigation)
   const ratioMap = {
     video: "aspect-[16/10]",
@@ -37,16 +32,16 @@ const SkeletonCard = ({
       style={style}
       className={cn(
         "border-border bg-surface-card/40 shadow-pro-sm space-y-8 rounded-[3rem] border p-9 md:p-11",
-        "transition-all duration-500 transform-gpu will-change-transform", // [PERFORMANCE]: ใช้ GPU ช่วยประมวลผล
+        "transform-gpu transition-all duration-500 will-change-transform", // [PERFORMANCE]: ใช้ GPU ช่วยประมวลผล
         className,
       )}
     >
       {/* --- 01. IMAGE_PROJECTION (LCP/CLS Target) --- */}
-      <Skeleton 
+      <Skeleton
         className={cn(
-          "w-full rounded-[2.5rem] opacity-50 bg-brand-glow/10", // ใช้ OKLCH Glow base
-          ratioMap[aspectRatio]
-        )} 
+          "bg-brand-glow/10 w-full rounded-[2.5rem] opacity-50", // ใช้ OKLCH Glow base
+          ratioMap[aspectRatio],
+        )}
       />
 
       <div className="space-y-5">

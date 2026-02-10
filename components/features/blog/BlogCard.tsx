@@ -33,13 +33,16 @@ const BlogCard = ({ post, index, className }: BlogCardProps) => {
         "group relative flex h-full flex-col overflow-hidden rounded-[3rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-sm hover:-translate-y-3",
-        className
+        className,
       )}
     >
       {/* --- 01. IMAGE ENGINE: หน่วยประมวลผลทัศนียภาพ --- */}
       <div className="bg-surface-offset border-border relative aspect-[16/10] w-full overflow-hidden border-b">
         {/* Subtle Tech Grid Texture Layer */}
-        <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-10 opacity-[0.03]" aria-hidden="true" />
+        <div
+          className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-10 opacity-[0.03]"
+          aria-hidden="true"
+        />
 
         <Image
           src={imageSource}

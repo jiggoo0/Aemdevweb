@@ -92,21 +92,24 @@ export default function AboutPage() {
 
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
-            
             {/* 2.1 Specialist Visual Interface */}
             <div className="relative mx-auto h-[400px] w-full max-w-[400px] md:h-[500px] md:max-w-[500px]">
               <div className="bg-surface-card border-border shadow-pro-xl relative flex h-full w-full items-center justify-center overflow-hidden rounded-[3rem] border backdrop-blur-3xl">
-                <div className="from-transparent via-surface-main/20 to-surface-main/80 flex h-full w-full flex-col items-center justify-center gap-6 bg-gradient-to-b">
+                <div className="via-surface-main/20 to-surface-main/80 flex h-full w-full flex-col items-center justify-center gap-6 bg-gradient-to-b from-transparent">
                   <div className="relative z-10 flex flex-col items-center">
-                    <IconRenderer name="UserCircle2" size={140} className="text-brand-primary/80 drop-shadow-2xl" />
+                    <IconRenderer
+                      name="UserCircle2"
+                      size={140}
+                      className="text-brand-primary/80 drop-shadow-2xl"
+                    />
                   </div>
 
                   {/* Trust Identity Badge */}
                   <div className="bg-surface-card/90 border-border shadow-pro-lg absolute right-6 bottom-6 left-6 rounded-2xl border p-6 backdrop-blur-xl">
                     <div className="mb-2 flex items-center gap-2">
                       <span className="relative flex h-2 w-2">
-                        <span className="bg-green-400 absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-                        <span className="bg-green-500 relative inline-flex h-2 w-2 rounded-full"></span>
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
                       </span>
                       <p className="text-brand-primary font-mono text-[9px] font-black tracking-[0.3em] uppercase">
                         Verified.Specialist
@@ -128,7 +131,9 @@ export default function AboutPage() {
               <div className="space-y-4">
                 <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-3 rounded-full border px-4 py-1.5">
                   <IconRenderer name="Fingerprint" size={16} />
-                  <span className="font-mono text-[10px] font-black tracking-[0.3em] uppercase">Technical_DNA</span>
+                  <span className="font-mono text-[10px] font-black tracking-[0.3em] uppercase">
+                    Technical_DNA
+                  </span>
                 </div>
                 <h2 className="text-text-primary text-5xl leading-tight font-black tracking-tighter uppercase italic md:text-6xl">
                   Technical Mastery <br />
@@ -140,24 +145,41 @@ export default function AboutPage() {
 
               <div className="text-text-secondary space-y-6 text-lg leading-relaxed font-medium md:text-xl">
                 <p>
-                  สวัสดีครับ ผม <span className="text-text-primary font-bold">"{SITE_CONFIG.expert.legalNameThai}"</span> ผู้ก่อตั้ง {SITE_CONFIG.brandName}
+                  สวัสดีครับ ผม{" "}
+                  <span className="text-text-primary font-bold">
+                    "{SITE_CONFIG.expert.legalNameThai}"
+                  </span>{" "}
+                  ผู้ก่อตั้ง {SITE_CONFIG.brandName}
                 </p>
                 <p>
-                  ผมเชื่อว่าในโลกดิจิทัลปี 2026 เว็บไซต์ที่ <span className="text-red-400 font-bold">"สวยแต่ขายไม่ได้"</span> คือการลงทุนที่สูญเปล่า เว็บไซต์ที่ดีต้องเป็นสินทรัพย์ที่ดึงดูดลูกค้าและปิดการขายได้ด้วยตัวเอง
+                  ผมเชื่อว่าในโลกดิจิทัลปี 2026 เว็บไซต์ที่{" "}
+                  <span className="font-bold text-red-400">"สวยแต่ขายไม่ได้"</span>{" "}
+                  คือการลงทุนที่สูญเปล่า
+                  เว็บไซต์ที่ดีต้องเป็นสินทรัพย์ที่ดึงดูดลูกค้าและปิดการขายได้ด้วยตัวเอง
                 </p>
                 <p className="border-brand-primary/50 text-text-primary/80 border-l-4 pl-4 italic">
-                  "ผมใช้หลักวิศวกรรมซอฟต์แวร์ที่แม่นยำ ผสานกับยุทธศาสตร์ Technical SEO เพื่อสร้างเครื่องจักรทำเงินที่ทำงานแทนคุณตลอด 24 ชั่วโมงครับ"
+                  "ผมใช้หลักวิศวกรรมซอฟต์แวร์ที่แม่นยำ ผสานกับยุทธศาสตร์ Technical SEO
+                  เพื่อสร้างเครื่องจักรทำเงินที่ทำงานแทนคุณตลอด 24 ชั่วโมงครับ"
                 </p>
               </div>
 
               {/* Specialist Meta Tags */}
               <div className="flex flex-wrap gap-3 pt-4">
-                {["Next.js_Expert", "Technical_SEO", "ROI_Focused", "Clean_Architecture"].map((tag) => (
-                  <div key={tag} className="border-border bg-surface-card hover:border-brand-primary/50 text-text-muted hover:text-text-primary hover:shadow-pro-sm group flex cursor-default items-center gap-2 rounded-lg border px-4 py-2 transition-all">
-                    <IconRenderer name="Hash" size={12} className="text-brand-primary opacity-50 group-hover:opacity-100" />
-                    <span className="text-[10px] font-bold tracking-wider uppercase">{tag}</span>
-                  </div>
-                ))}
+                {["Next.js_Expert", "Technical_SEO", "ROI_Focused", "Clean_Architecture"].map(
+                  (tag) => (
+                    <div
+                      key={tag}
+                      className="border-border bg-surface-card hover:border-brand-primary/50 text-text-muted hover:text-text-primary hover:shadow-pro-sm group flex cursor-default items-center gap-2 rounded-lg border px-4 py-2 transition-all"
+                    >
+                      <IconRenderer
+                        name="Hash"
+                        size={12}
+                        className="text-brand-primary opacity-50 group-hover:opacity-100"
+                      />
+                      <span className="text-[10px] font-bold tracking-wider uppercase">{tag}</span>
+                    </div>
+                  ),
+                )}
               </div>
             </div>
           </div>

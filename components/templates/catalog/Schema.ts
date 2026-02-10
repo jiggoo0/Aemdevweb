@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.4.5 (STABILIZED)
+ * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Knowledge Graph Linking | ItemList Collection | Type-Safe Registry
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -39,7 +39,7 @@ export function generateCatalogSchema(data: TemplateMasterData) {
         "@id": `${canonicalUrl}/#itemlist`,
         numberOfItems: catalogItems.length,
         itemListElement: catalogItems.map((item, index) => {
-          // ตรวจสอบว่า item เป็น CatalogItem หรือ ServiceFeature
+          // Type Guard เพื่อเช็คว่า item มี property อะไรบ้าง
           const itemName =
             "name" in item ? (item as CatalogItem).name : (item as ServiceFeature).title;
 

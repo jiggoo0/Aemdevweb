@@ -34,7 +34,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
         "group relative flex h-full flex-col overflow-hidden rounded-[3rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-3",
-        className
+        className,
       )}
       /* Staggered Animation: ใช้ CSS Variable เพื่อคุมจังหวะการแสดงผล */
       style={{ animationDelay: `${index * 150}ms` } as React.CSSProperties}
@@ -42,7 +42,10 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
       {/* --- 01. VISUAL AUTHORITY ENGINE: ส่วนแสดงภาพลักษณ์ความสำเร็จ --- */}
       <div className="bg-surface-offset border-border relative aspect-[16/10] overflow-hidden border-b">
         {/* Subtle Tech Grid Texture */}
-        <div className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.03]" aria-hidden="true" />
+        <div
+          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.03]"
+          aria-hidden="true"
+        />
 
         <Image
           src={data.thumbnail}
@@ -65,7 +68,9 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
           </span>
           <div className="bg-brand-primary text-surface-main shadow-glow mt-4 flex items-center gap-2 rounded-full px-6 py-2">
             <IconRenderer name="TrendingUp" size={14} strokeWidth={3} />
-            <span className="text-[10px] font-black tracking-[0.2em] uppercase">Verified_Success</span>
+            <span className="text-[10px] font-black tracking-[0.2em] uppercase">
+              Verified_Success
+            </span>
           </div>
         </div>
       </div>
@@ -112,7 +117,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
           <IconRenderer
             name="ShieldCheck"
             size={22}
-            className="text-text-muted group-hover:text-brand-primary opacity-20 transition-all duration-500 group-hover:opacity-70 group-hover:scale-110"
+            className="text-text-muted group-hover:text-brand-primary opacity-20 transition-all duration-500 group-hover:scale-110 group-hover:opacity-70"
           />
         </div>
       </div>

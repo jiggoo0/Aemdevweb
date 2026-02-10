@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.5.5 (STABILIZED)
  * [STRATEGY]: Experience-First Design | Visual Immersion | Conversion Focus
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,7 +10,7 @@ import React, { memo } from "react";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine"; // [AUDIT]: Updated Import to Standard
+import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: ใช้ Shared HeroEngine
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 
 // --- 2. Shared Component Nodes ---
@@ -39,7 +39,7 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
     <LayoutEngine spacing="none" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. AMBIENT HERO: [RESOLVED]: Updated to Flat Props */}
+      {/* 01. AMBIENT HERO: ใช้ HeroEngine เพื่อความเร็วในการโหลด */}
       <HeroEngine
         title={
           <span className="block">
@@ -79,7 +79,10 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
         <FeatureGrid
           heading="ระบบที่ออกแบบมาเพื่อโรงแรม"
           subheading="เปลี่ยนหน้าเว็บให้เป็นพนักงานต้อนรับที่ทำงานอย่างไร้ที่ติ ตลอด 24 ชั่วโมง"
-          items={data.coreFeatures || []}
+          items={(data.coreFeatures || []).map((f) => ({
+            ...f,
+            technicalDetail: "Hotel System Module",
+          }))}
           columns={3}
         />
       </section>

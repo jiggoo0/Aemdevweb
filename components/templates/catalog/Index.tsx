@@ -1,7 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.4.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.5.6 (FIXED)
  * [STRATEGY]: Strategic Registry | Multi-Theme Depth | LCP Performance
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [FIX]: Reverted HeroEngine import to support 'align' prop
  */
 
 "use client";
@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+// [CORRECTION]: ใช้ HeroEngine จาก sections ซึ่งรองรับ prop 'align'
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
@@ -30,10 +31,6 @@ interface CatalogTemplateProps {
   readonly data: TemplateMasterData;
 }
 
-/**
- * @component CatalogTemplate
- * @description หน้าสำหรับรวบรวมรายการโซลูชันแบบ Catalog View
- */
 const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
   const schema = generateCatalogSchema(data);
   const catalogItems = data.coreFeatures || [];
@@ -42,7 +39,7 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY: [RESOLVED]: ปรับใช้ Flat Props ให้ตรงกับ HeroEngine Interface */}
+      {/* 01. HERO GATEWAY */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
@@ -50,17 +47,15 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
         primaryHref="/contact"
         secondaryActionLabel="ดูรายการทั้งหมด"
         secondaryHref="#catalog-grid"
-        align="center"
+        align="center" // [NOTE]: ตอนนี้สามารถใช้ align ได้แล้ว
       />
 
-      {/* 02. VISUAL SHOWCASE: Browser Simulation Interface */}
+      {/* 02. VISUAL SHOWCASE */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 transition-colors duration-500 md:-mt-48">
         <div className="group relative mx-auto max-w-7xl">
-          {/* Neural Glow */}
           <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-all duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
 
           <div className="border-border bg-surface-card relative overflow-hidden rounded-[3rem] border shadow-2xl md:rounded-[4rem] md:p-4">
-            {/* Status Bar Indicator */}
             <div className="border-border bg-surface-main/40 absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md md:flex">
               <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
               <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase">
@@ -68,7 +63,6 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
               </span>
             </div>
 
-            {/* [LCP]: Optimized Main Preview */}
             <div className="bg-surface-offset relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] md:aspect-[21/9] md:rounded-[3.5rem]">
               <Image
                 src={data.image || "/images/templates/preview.webp"}
@@ -83,7 +77,6 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
             </div>
           </div>
 
-          {/* Collection Metadata Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +115,7 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
         </div>
       </section>
 
-      {/* 04. CATALOG GRID: รายการเชิงยุทธศาสตร์ */}
+      {/* 04. CATALOG GRID */}
       <div id="catalog-grid">
         <FeatureGrid
           heading="Strategic Solution Catalog"
@@ -137,7 +130,6 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
         />
       </div>
 
-      {/* 05. CONVERSION HUB & FAQ */}
       <ConversionCTA
         title="ยังไม่แน่ใจว่าจะเลือกโซลูชันไหนดีใช่ไหมครับ?"
         description="ผมพร้อมช่วยวิเคราะห์และคัดเลือกแพ็กเกจที่คุ้มค่าและตรงกับเป้าหมายทางธุรกิจของคุณที่สุด ทักมาคุยกันก่อนได้เลยครับ"

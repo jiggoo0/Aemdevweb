@@ -29,7 +29,17 @@ else
 fi
 echo -e "\n---\n" >> $OUTPUT_FILE
 
-# 3. Core Types Definition
+# 3. AI Prompt Extension Injection 
+if [ -f "config/01-SYSTEM-PROMPT-EXTENSION.md" ]; then
+    echo "## SYSTEM PROMPT EXTENSION" >> $OUTPUT_FILE
+    cat "config/01-SYSTEM-PROMPT-EXTENSION.md" >> $OUTPUT_FILE
+else
+    echo "> [WARNING] SYSTEM PROMPT EXTENSION MISSING" >> $OUTPUT_FILE
+fi
+echo -e "\n---\n" >> $OUTPUT_FILE
+
+
+# 4. Core Types Definition
 echo "## TECHNICAL DATA SCHEMAS (TYPES)" >> $OUTPUT_FILE
 if [ -d "types" ]; then
     for file in types/*.ts; do
@@ -43,7 +53,7 @@ if [ -d "types" ]; then
 fi
 echo -e "\n---\n" >> $OUTPUT_FILE
 
-# 4. Constants & Configuration Registry
+# 5. Constants & Configuration Registry
 echo "## CONSTANTS REGISTRY" >> $OUTPUT_FILE
 if [ -d "constants" ]; then
     for file in constants/*.ts; do
@@ -57,7 +67,7 @@ if [ -d "constants" ]; then
 fi
 echo -e "\n---\n" >> $OUTPUT_FILE
 
-# 5. Infrastructure Tree
+# 6. Infrastructure Tree
 echo "## DIRECTORY INFRASTRUCTURE" >> $OUTPUT_FILE
 echo '```text' >> $OUTPUT_FILE
 tree -L 10 -h -D --timefmt "%Y-%m-%d %H:%M" \

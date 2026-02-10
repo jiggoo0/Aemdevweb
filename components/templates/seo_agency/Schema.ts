@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: SEO_AGENCY_STRUCTURE v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE SCHEMA]: SEO_AGENCY_STRUCTURE v17.5.5 (STABILIZED)
  * [STRATEGY]: Service Entity Graphing | EEAT Validation | Knowledge Node
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -13,6 +13,8 @@ import type { TemplateMasterData } from "@/types";
  */
 export function generateSeoAgencySchema(data: TemplateMasterData) {
   const pageUrl = `${SITE_CONFIG.siteUrl}/services/${data.templateSlug}`;
+  // [FIX]: Ensure priceValue is number before toString
+  const price = (data.priceValue || 0).toString();
 
   return {
     "@context": "https://schema.org",
@@ -34,7 +36,7 @@ export function generateSeoAgencySchema(data: TemplateMasterData) {
         description: data.description,
         offers: {
           "@type": "Offer",
-          price: data.priceValue.toString(),
+          price: price,
           priceCurrency: data.currency || "THB",
           availability: "https://schema.org/InStock",
           url: pageUrl,
@@ -42,7 +44,6 @@ export function generateSeoAgencySchema(data: TemplateMasterData) {
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "SEO Specialist Services",
-          // [FIX]: Changed unused 'idx' to '_' to satisfy Linter
           itemListElement: (data.coreFeatures || []).map((feat, _) => ({
             "@type": "Offer",
             itemOffered: {

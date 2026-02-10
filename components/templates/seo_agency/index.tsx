@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.4.5 (STABILIZED_FINAL)
+ * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.5.5 (STABILIZED)
  * [STRATEGY]: Technical Dominance | Semantic Excellence | Conversion-Led Content
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,7 +10,7 @@ import React, { memo } from "react";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: Use Shared HeroEngine
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 
 // --- 2. Shared Component Nodes ---
@@ -36,7 +36,6 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
       <JsonLd data={schema} />
 
       {/* 01. HERO GATEWAY: เน้นหัวข้อที่ Google รัก */}
-      {/* [RESOLVED]: Updated to Flat Props for Type Safety */}
       <HeroEngine
         title={
           <span className="block">

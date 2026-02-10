@@ -1,5 +1,5 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.5.3 (SYNCHRONIZED)
+ * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.5.5 (SYNCHRONIZED)
  * [STRATEGY]: Atomic Data Mapping | Performance Optimized | Vivid UI Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -13,12 +13,12 @@ import { FOOTER_MAP } from "@/constants/navigation";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 
 const Footer = () => {
-  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 เพื่อป้องกัน Hydration Mismatch ในฝั่ง Client
+  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 ตาม Mandate ระบบ
   const currentYear = 2026;
 
   return (
     <footer className="border-border bg-surface-main relative overflow-hidden border-t pt-24 pb-12 transition-colors duration-700">
-      {/* --- 01. INFRASTRUCTURE LAYER (Visual Atmosphere) --- */}
+      {/* --- 01. INFRASTRUCTURE LAYER (Atmospheric Grid) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
@@ -29,7 +29,7 @@ const Footer = () => {
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="mb-24 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-          {/* Node 01: Brand Identity & Values */}
+          {/* Node 01: Brand Identity & Mission */}
           <div className="space-y-8">
             <div className="space-y-6">
               <Link href="/" className="group inline-flex items-center gap-4 outline-none">
@@ -114,7 +114,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Node 04: Coordination Center */}
+          {/* Node 04: Coordination Center (EEAT Signals) */}
           <div className="space-y-10">
             <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
               Coordination_Center
@@ -172,7 +172,7 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Legal & Utility Matrix */}
+            {/* Legal Matrix */}
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               {FOOTER_MAP.legal.map((item) => (
                 <Link

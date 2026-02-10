@@ -46,7 +46,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
         "group relative flex h-full flex-col overflow-hidden rounded-[3rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-3",
-        className
+        className,
       )}
     >
       {/* --- 01. BADGE SYSTEM: ป้ายสถานะวิศวกรรมยอดนิยม --- */}
@@ -62,7 +62,10 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
       {/* --- 02. VISUAL INFRASTRUCTURE: หน่วยประมวลผลทัศนียภาพ --- */}
       <div className="bg-surface-offset border-border relative aspect-[16/10] w-full overflow-hidden border-b">
         {/* Subtle Tech Grid Texture Layer */}
-        <div className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.03]" aria-hidden="true" />
+        <div
+          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.03]"
+          aria-hidden="true"
+        />
 
         {data.image ? (
           <Image
@@ -106,7 +109,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
         <ul className="mb-10 space-y-4">
           {displayFeatures.map((feature, idx) => (
             <li key={idx} className="flex items-center gap-4">
-              <div className="bg-brand-primary/10 text-brand-primary border-brand-primary/20 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-surface-main">
+              <div className="bg-brand-primary/10 text-brand-primary border-brand-primary/20 group-hover:bg-brand-primary group-hover:text-surface-main flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border transition-colors duration-300">
                 <IconRenderer name="Check" size={12} strokeWidth={4} />
               </div>
               <span className="text-text-secondary group-hover:text-text-primary text-sm font-bold transition-colors">
