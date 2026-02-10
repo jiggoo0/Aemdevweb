@@ -1,5 +1,5 @@
 /**
- * [SEO UTILITY]: METADATA_CORE v17.5.5
+ * [SEO UTILITY]: METADATA_CORE v17.5.6 (STRICT_TYPED)
  * [RESPONSIBILITY]: Handle Next.js Metadata API Only
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -20,7 +20,6 @@ export interface MetadataParams {
 /**
  * [METADATA CONSTRUCTOR]
  * ฟังก์ชันนี้ใช้สำหรับ generateMetadata() ใน page.tsx เท่านั้น
- * ไม่มีความเกี่ยวข้องกับ JSON-LD Schema
  */
 export function constructMetadata({
   title,
@@ -81,7 +80,6 @@ export function constructMetadata({
         "max-snippet": -1,
       },
     },
-    // [ICONS]: เพิ่มความสมบูรณ์ให้ PWA
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",

@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.5.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.5.6 (STABILIZED)
  * [STRATEGY]: Experience-First Design | Visual Immersion | Conversion Focus
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,7 +10,8 @@ import React, { memo } from "react";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: ใช้ Shared HeroEngine
+// [FIX]: Use Shared HeroEngine
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 
 // --- 2. Shared Component Nodes ---
@@ -28,10 +29,6 @@ interface HotelTemplateProps {
   readonly data: TemplateMasterData;
 }
 
-/**
- * @component HotelTemplate
- * @description เทมเพลตที่ออกแบบมาเพื่อธุรกิจโรงแรมที่ต้องการความหรูหราและการจองที่รวดเร็ว
- */
 const HotelTemplate = ({ data }: HotelTemplateProps) => {
   const schema = generateHotelSchema(data);
 
@@ -39,7 +36,7 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
     <LayoutEngine spacing="none" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. AMBIENT HERO: ใช้ HeroEngine เพื่อความเร็วในการโหลด */}
+      {/* 01. AMBIENT HERO */}
       <HeroEngine
         title={
           <span className="block">
@@ -53,9 +50,10 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
         secondaryActionLabel="ชมตัวอย่างดีไซน์"
         secondaryHref="#design-showcase"
         className="relative overflow-hidden"
+        align="center" // [STYLE]: Hotel looks best centered
       />
 
-      {/* 02. LUXURY METRICS: สร้างความเชื่อมั่นผ่านตัวเลขมาตรฐานสากล */}
+      {/* 02. LUXURY METRICS */}
       <section className="relative z-30 container mx-auto -mt-24 px-4">
         <div className="bg-surface-card border-border shadow-pro-lg rounded-[3rem] border p-12 backdrop-blur-2xl md:p-20">
           <div className="flex flex-col items-center gap-16">
@@ -74,7 +72,7 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
         </div>
       </section>
 
-      {/* 03. AMENITIES & TECH: ฟีเจอร์ที่โรงแรมต้องมี */}
+      {/* 03. AMENITIES & TECH */}
       <section className="py-24 md:py-32">
         <FeatureGrid
           heading="ระบบที่ออกแบบมาเพื่อโรงแรม"
@@ -87,7 +85,7 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
         />
       </section>
 
-      {/* 04. EXPERIENCE SHOWCASE: การเล่าเรื่องผ่านผลลัพธ์ */}
+      {/* 04. EXPERIENCE SHOWCASE */}
       <section id="design-showcase" className="bg-surface-offset/50 border-border border-y py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">

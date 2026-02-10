@@ -1,12 +1,11 @@
 /**
- * [SEO ENGINE]: JSON_LD_GENERATOR v17.5.5
+ * [SEO ENGINE]: JSON_LD_GENERATOR v17.5.7 (FIXED_MISSING_EXPORT)
  * [RESPONSIBILITY]: Handle Google Structured Data (JSON-LD) Only
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
-// [TYPE SAFETY]: ใช้ import type เพื่อลด Bundle Size และแก้ Unused Imports
 import type { AreaNode, TemplateMasterData } from "@/types";
 
 // =========================================
@@ -28,26 +27,7 @@ export function generateOrganizationSchema(): Record<string, unknown> {
     image: absoluteUrl("/images/og-main.png"),
     priceRange: "฿฿ - ฿฿฿",
     foundingDate: SITE_CONFIG.business.established,
-
-    // [EEAT SIGNALS]
     founder: { "@id": absoluteUrl("/#expert") },
-    member: { "@id": absoluteUrl("/#expert") },
-    employee: { "@id": absoluteUrl("/#expert") },
-
-    // [IDENTITY MAPPING]
-    identifier: [
-      {
-        "@type": "PropertyValue",
-        propertyID: "google_merchant_id",
-        value: SITE_CONFIG.expert.googleMerchantId,
-      },
-      {
-        "@type": "PropertyValue",
-        propertyID: "google_business_profile_id",
-        value: SITE_CONFIG.business.ids?.businessProfileId,
-      },
-    ].filter((item) => item.value),
-
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.contact.streetAddress,
@@ -63,16 +43,12 @@ export function generateOrganizationSchema(): Record<string, unknown> {
       areaServed: "TH",
       availableLanguage: ["Thai", "English"],
     },
-    areaServed: {
-      "@type": "Country",
-      name: "Thailand",
-    },
     sameAs: [
       SITE_CONFIG.links.googleMaps,
       SITE_CONFIG.links.facebook,
       SITE_CONFIG.links.line,
       SITE_CONFIG.links.github,
-    ].filter(Boolean) as string[],
+    ].filter(Boolean),
   };
 }
 
@@ -86,8 +62,7 @@ export function generatePersonSchema(): Record<string, unknown> {
     image: absoluteUrl(SITE_CONFIG.expert.avatar),
     url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
     worksFor: { "@id": absoluteUrl("/#organization") },
-    knowsAbout: ["Technical SEO", "Web Architecture", "Next.js"],
-    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github].filter(Boolean) as string[],
+    sameAs: [SITE_CONFIG.links.facebook, SITE_CONFIG.links.github].filter(Boolean),
   };
 }
 
@@ -105,7 +80,7 @@ export function generateServiceSchema(data: TemplateMasterData): Record<string, 
     areaServed: "TH",
     offers: {
       "@type": "Offer",
-      price: data.priceValue.toString(),
+      price: data.priceValue?.toString() || "0",
       priceCurrency: data.currency || "THB",
       url: absoluteUrl(`/services/${data.templateSlug}`),
       availability: "https://schema.org/InStock",
@@ -135,7 +110,6 @@ export function generateLocalBusinessSchema(data: AreaNode): Record<string, unkn
     },
   };
 
-  // [GEO-INJECTION]: เพิ่มพิกัดถ้ามีข้อมูล
   if (data.coordinates) {
     schema.geo = {
       "@type": "GeoCoordinates",
@@ -147,6 +121,7 @@ export function generateLocalBusinessSchema(data: AreaNode): Record<string, unkn
   return schema;
 }
 
+// [FIX]: นำฟังก์ชันนี้กลับมา เพื่อให้หน้า Page ต่างๆ เรียกใช้ได้
 export function generateBreadcrumbSchema(
   items: readonly { name: string; item: string }[],
 ): Record<string, unknown> {

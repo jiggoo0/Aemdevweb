@@ -1,5 +1,5 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.2 (IDENTITY_LOCKED)
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.3 (CLEANED)
  * [STRATEGY]: Color Psychology | Business Alignment | PSI Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -189,7 +189,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     description:
       "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
     image: "/images/service/local-node.webp",
-    // [FIXED]: แมปตรงกับโฟลเดอร์คอมโพเนนต์ใหม่ และ Redirect ใน vercel.json
     templateSlug: "new-service-name",
     category: "business",
     price: "6,900",
@@ -373,11 +372,3 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     isFeatured: true,
   },
 ] as const;
-
-/**
- * @const FEATURED_SERVICES
- * @description คัดกรองบริการแนะนำ (Highlight) โดยเรียงตาม Priority
- */
-export const FEATURED_SERVICES = [...MASTER_REGISTRY]
-  .filter((svc) => svc.isFeatured || svc.isPopular)
-  .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));

@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: AREA_NODES_DATA v17.6.1 (STRATEGIC_LOCATIONS)
+ * [SYSTEM CORE]: AREA_NODES_DATA v17.6.2 (CLEANED)
  * [AI-MANDATE]: DO NOT ALTER 'templateSlug' VALUES OR SCHEMA STRUCTURE.
  * [STRATEGY]: Economic Hubs | Local Dominance | Business Intelligence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
@@ -315,13 +315,3 @@ export const AREA_NODES: readonly AreaNode[] = [
     coordinates: { lat: 17.6256, lng: 100.0993 },
   },
 ] as const;
-
-/**
- * [HELPER]: Get Featured Areas
- */
-export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.priority).slice(0, 6);
-
-/**
- * [HELPER]: Get Area by Slug
- */
-export const getAreaBySlug = (slug: string) => AREA_NODES.find((area) => area.slug === slug);

@@ -1,5 +1,5 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.5.5 (PSI_OPTIMIZED)
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.5.6 (LCP_PATCHED)
  * [STRATEGY]: Kinetic Typography | GPU Acceleration | Layout Stability
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -8,6 +8,7 @@
 
 import React, { memo } from "react";
 import Link from "next/link";
+import Image from "next/image"; // [ADD]: Import Image Component
 import { motion, type Transition } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -48,10 +49,18 @@ const Hero = ({
       )}
     >
       {/* --- 01. INFRASTRUCTURE LAYER (Optimized) --- */}
-      <div
-        className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.04] contain-strict"
-        aria-hidden="true"
-      />
+      {/* [FIX LCP]: ใช้ Image Component พร้อม Priority แทน div background */}
+      <div className="absolute inset-0 z-0 opacity-[0.15]">
+        <Image
+          src="/grid-pattern.svg"
+          alt="Infrastructure Grid"
+          fill
+          priority={true} // ⭐ บังคับโหลดทันทีแก้ LCP
+          quality={75}
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+      </div>
 
       {/* Neural Orb: ใช้ GPU ในการ Render แสงฟุ้ง */}
       <div className="bg-brand-primary/10 pointer-events-none absolute top-[10%] -right-[10%] z-0 h-[500px] w-[500px] transform-gpu rounded-full blur-[120px] md:h-[800px] md:w-[800px]" />

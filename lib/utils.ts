@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GENERAL_UTILITIES v17.5.5 (STABILIZED)
+ * [SYSTEM CORE]: GENERAL_UTILITIES v17.5.6 (STABILIZED)
  * [PLAN]: Performance-First Helpers | Thai Language Support | SEO Readiness
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -22,7 +22,6 @@ export function cn(...inputs: ClassValue[]): string {
  */
 export function absoluteUrl(path: string): string {
   if (!path) return SITE_CONFIG.siteUrl;
-
   // หากเป็น External URL อยู่แล้ว ให้ส่งกลับทันที
   if (path.startsWith("http")) return path;
 
@@ -30,7 +29,6 @@ export function absoluteUrl(path: string): string {
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
   if (path === "/") return baseUrl;
-
   return `${baseUrl}${cleanPath}`;
 }
 
@@ -39,16 +37,19 @@ export function absoluteUrl(path: string): string {
  * แสดงผลราคาแบบมาตรฐานสากล (รองรับหลักเกณฑ์ EEAT สำหรับหน้า Pricing)
  */
 export function formatCurrency(
-  value: number,
+  value: number | string,
   currency: string = "THB",
   locale: string = "th-TH",
 ): string {
+  const numValue = typeof value === "string" ? parseFloat(value) : value;
+  if (isNaN(numValue)) return "N/A";
+
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: currency,
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(value);
+  }).format(numValue);
 }
 
 /**
@@ -71,7 +72,7 @@ export function slugify(text: string): string {
  * [UTILITY]: Date Formatter
  * ปรับรูปแบบวันที่ให้เป็นภาษาไทยแบบอ่านง่าย
  */
-export function formatDate(date: string | Date, locale: string = "th-TH"): string {
+export function formatDate(date: string | Date | undefined, locale: string = "th-TH"): string {
   if (!date) return "";
   const d = typeof date === "string" ? new Date(date) : date;
   if (isNaN(d.getTime())) return "";
@@ -86,19 +87,13 @@ export function formatDate(date: string | Date, locale: string = "th-TH"): strin
 /**
  * [UTILITY]: Advanced Reading Time
  * คำนวณเวลาอ่านบทความ (รองรับภาษาไทย)
- * สูตร: (จำนวนคำไทย / 4 + จำนวนคำอังกฤษ) / 200 คำต่อนาที
  */
 export function getReadingTime(content: string): string {
-  if (!content) return "1 นาที"; // Minimum reading time
+  if (!content) return "1 นาที";
 
   const wordsPerMinute = 200;
-  // ลบ HTML Tags ออกก่อนนับคำ
-  const cleanContent = content.replace(/<\/?[^>]+(>|$)/g, "");
-
-  // ภาษาไทย: ใช้วิธีนับตัวอักษรแล้วหารเฉลี่ย
+  const cleanContent = content.replace(/<\/?[^>]+(>|$)/g, ""); // ลบ HTML Tags
   const thaiCharCount = cleanContent.replace(/[^\u0E00-\u0E7F]/g, "").length;
-
-  // ภาษาอังกฤษ: นับตามช่องว่าง
   const englishWordCount = cleanContent
     .replace(/[\u0E00-\u0E7F]/g, " ")
     .trim()

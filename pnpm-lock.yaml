@@ -130,6 +130,9 @@ importers:
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
+      postcss-load-config:
+        specifier: ^6.0.1
+        version: 6.0.1(jiti@2.6.1)(postcss@8.5.6)(tsx@4.21.0)(yaml@2.8.2)
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -3731,6 +3734,13 @@ packages:
       }
     engines: { node: ">= 12.0.0" }
 
+  lilconfig@3.1.3:
+    resolution:
+      {
+        integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==,
+      }
+    engines: { node: ">=14" }
+
   locate-path@6.0.0:
     resolution:
       {
@@ -4590,6 +4600,27 @@ packages:
       {
         integrity: sha512-awqoNOSOl4Blu4E4Hzp7jL0g8WKEhCwO+s7C2ibtIW3CAJMwspgoTXd4vnHd21UmhdrsI44Pn8FFSuA8QKrzvg==,
       }
+
+  postcss-load-config@6.0.1:
+    resolution:
+      {
+        integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==,
+      }
+    engines: { node: ">= 18" }
+    peerDependencies:
+      jiti: ">=1.21.0"
+      postcss: ">=8.0.9"
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      jiti:
+        optional: true
+      postcss:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
 
   postcss-value-parser@4.2.0:
     resolution:
@@ -7668,6 +7699,8 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.30.2
       lightningcss-win32-x64-msvc: 1.30.2
 
+  lilconfig@3.1.3: {}
+
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
@@ -8419,6 +8452,15 @@ snapshots:
   pip-requirements-js@1.0.2:
     dependencies:
       ohm-js: 17.3.0
+
+  postcss-load-config@6.0.1(jiti@2.6.1)(postcss@8.5.6)(tsx@4.21.0)(yaml@2.8.2):
+    dependencies:
+      lilconfig: 3.1.3
+    optionalDependencies:
+      jiti: 2.6.1
+      postcss: 8.5.6
+      tsx: 4.21.0
+      yaml: 2.8.2
 
   postcss-value-parser@4.2.0: {}
 

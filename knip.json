@@ -1,5 +1,14 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
+  "ignoreDependencies": [
+    "sharp",
+    "@img/sharp-wasm32",
+    "tailwindcss",
+    "tailwindcss-animate",
+    "vercel",
+    "@swc/helpers",
+    "eslint-plugin-tailwindcss"
+  ],
   "next": {
     "entry": [
       "next.config.ts",

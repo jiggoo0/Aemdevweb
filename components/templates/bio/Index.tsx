@@ -1,7 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.5.6 (FIXED)
+ * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.5.7 (STABILIZED)
  * [STRATEGY]: Instant LCP Paint | Multi-Theme Logic | Zero-Any Architecture
- * [FIX]: Reverted HeroEngine import to support 'align' prop
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
@@ -12,8 +12,7 @@ import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-// [CORRECTION]: ใช้ HeroEngine จาก sections ซึ่งรองรับ prop 'align'
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import HeroEngine from "@/components/templates/sections/HeroEngine"; // Uses Shared Engine
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -55,7 +54,7 @@ function BioTemplate({ data }: BioTemplateProps) {
         primaryHref={SITE_CONFIG.links.line}
         secondaryActionLabel="ดูผลงานที่ผ่านมา"
         secondaryHref="#portfolio"
-        align="left" // [NOTE]: ตอนนี้สามารถใช้ align ได้แล้ว
+        align="left"
       />
 
       {/* 02. IDENTITY VISUAL */}

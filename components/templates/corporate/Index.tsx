@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.5.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.5.6 (STABILIZED)
  * [STRATEGY]: Outcome-Driven Architecture | Config-Led Defaults | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -12,7 +12,8 @@ import { motion } from "framer-motion";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero";
+// [FIX]: Use Shared HeroEngine
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -32,14 +33,13 @@ interface CorporateTemplateProps {
 }
 
 function CorporateTemplate({ data }: CorporateTemplateProps) {
-  // [SEO]: สร้างชุดข้อมูลโครงสร้าง (JSON-LD)
   const schema = generateCorporateSchema(data);
 
   return (
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY: ส่วนหัวหลักของ Enterprise Page */}
+      {/* 01. HERO GATEWAY */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
@@ -47,9 +47,10 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         primaryHref="/contact"
         secondaryActionLabel="ดูมาตรฐาน Security"
         secondaryHref="#security"
+        align="left"
       />
 
-      {/* 02. VISUAL AUTHORITY: โชว์เคสระบบองค์กร */}
+      {/* 02. VISUAL AUTHORITY */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
         <div className="group relative mx-auto max-w-7xl">
           <div className="bg-brand-primary/10 will-change-opacity absolute -inset-10 rounded-[4rem] opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
@@ -67,7 +68,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
                 fill
                 className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
-                priority
+                priority // [LCP OPTIMIZATION]
               />
               <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.05]" />
               <div className="from-surface-main absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
@@ -96,7 +97,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </section>
 
-      {/* 03. TRUST INDICATORS: สัญลักษณ์ความเชื่อมั่น */}
+      {/* 03. TRUST INDICATORS */}
       <section className="py-24 md:pt-32">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-16 text-center">
@@ -116,7 +117,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         </div>
       </section>
 
-      {/* 04. CORE FEATURES: โซลูชันหลัก */}
+      {/* 04. CORE FEATURES */}
       <FeatureGrid
         heading="Enterprise Solutions"
         subheading="โครงสร้างระบบที่ถูกออกแบบมาเพื่อรองรับการขยายตัว (Scalability) และความปลอดภัย (Security) สูงสุด"
@@ -129,7 +130,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
         columns={2}
       />
 
-      {/* 05. SECURITY MODULE: มาตรฐานความปลอดภัย */}
+      {/* 05. SECURITY MODULE */}
       <article id="security" className="border-border bg-surface-offset/30 border-y py-24">
         <div className="container mx-auto px-4">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">

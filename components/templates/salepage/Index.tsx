@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.5.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.5.6 (STABILIZED)
  * [STRATEGY]: Visual Impact | Theme-Aware Contrast | Zero-Any Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,8 @@ import Image from "next/image";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: Use Shared HeroEngine
+// [FIX]: Use Shared HeroEngine
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -49,6 +50,7 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
         primaryHref="/contact"
         secondaryActionLabel="ดูตัวอย่างระบบ"
         secondaryHref="#demo"
+        align="center" // [STYLE]: Sale Page เน้น Center เพื่อความโดดเด่น
       />
 
       {/* 02. VISUAL SHOWCASE: Browser Simulation */}
@@ -80,7 +82,7 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
                 src={data.image || "/images/service/preview.webp"}
                 alt={`ตัวอย่างหน้าเว็บปิดการขาย: ${data.title}`}
                 fill
-                priority
+                priority // [LCP FIX]: รูปนี้คือพระเอก ต้องโหลดทันที
                 className="object-cover object-top transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
@@ -142,7 +144,6 @@ function SalePageTemplate({ data }: SalePageTemplateProps) {
                 className="group border-border bg-surface-card hover:border-brand-primary/30 hover:bg-surface-offset hover:shadow-glow relative rounded-3xl border p-8 transition-all duration-500"
               >
                 <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-all group-hover:rotate-6">
-                  {/* [RESOLVED]: Type-Safe Icon Rendering */}
                   <IconRenderer name={feature.icon as IconName} size={24} />
                 </div>
                 <h4 className="text-text-primary mb-3 text-xl font-black tracking-tight uppercase italic">

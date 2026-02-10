@@ -1,7 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.5.6 (FIXED)
+ * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.5.7 (STABILIZED)
  * [STRATEGY]: Strategic Registry | Multi-Theme Depth | LCP Performance
- * [FIX]: Reverted HeroEngine import to support 'align' prop
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-// [CORRECTION]: ใช้ HeroEngine จาก sections ซึ่งรองรับ prop 'align'
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
@@ -47,7 +46,7 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
         primaryHref="/contact"
         secondaryActionLabel="ดูรายการทั้งหมด"
         secondaryHref="#catalog-grid"
-        align="center" // [NOTE]: ตอนนี้สามารถใช้ align ได้แล้ว
+        align="center"
       />
 
       {/* 02. VISUAL SHOWCASE */}

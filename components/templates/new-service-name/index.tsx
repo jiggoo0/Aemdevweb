@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.5.5 (PSI_OPTIMIZED)
+ * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.5.7 (LCP_FIXED)
  * [STRATEGY]: Geographic Personalization | Multi-Theme Logic | Local SEO Excellence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,7 @@ import Image from "next/image";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero";
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
@@ -48,7 +48,7 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
     <LayoutEngine spacing="none">
       <JsonLd data={schema} />
 
-      {/* 01. HERO SECTION: LCP Element หลัก (ปรับปรุงความเร็วการโหลด) */}
+      {/* 01. HERO SECTION: Text LCP Element (ปรับปรุงความเร็วการโหลด) */}
       <HeroEngine
         title={
           <span className="block">
@@ -61,6 +61,8 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
         primaryHref="/contact"
         secondaryActionLabel="ดูผลงานที่ผ่านมา"
         secondaryHref="/case-studies"
+        align="left"
+        showIndicator={true}
       />
 
       {/* 02. VISUAL AUTHORITY: โชว์เคสภาพลักษณ์รายพื้นที่ */}
@@ -74,8 +76,9 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
                 src={data.heroImage || "/images/templates/preview.webp"}
                 alt={`ผู้เชี่ยวชาญการทำเว็บไซต์และ SEO ในจังหวัด ${data.province}`}
                 fill
-                // [LCP OPTIMIZATION]: ถอด priority ออกเพื่อให้เบราว์เซอร์ให้ความสำคัญกับ Text Hero ก่อน
-                loading="eager"
+                // [LCP OPTIMIZATION]: ใช้ priority=true เพื่อ Preload รูปภาพนี้ทันที
+                // เพราะเป็นภาพใหญ่ที่ User เห็นเป็นอันดับแรก (Above the fold)
+                priority={true}
                 className="transform-gpu object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />

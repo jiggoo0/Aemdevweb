@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.5.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.5.6 (STABILIZED)
  * [STRATEGY]: Technical Dominance | Semantic Excellence | Conversion-Led Content
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -10,7 +10,8 @@ import React, { memo } from "react";
 
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: Use Shared HeroEngine
+// [FIX]: Use Shared HeroEngine
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 
 // --- 2. Shared Component Nodes ---
@@ -48,6 +49,7 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
         primaryHref="/audit"
         secondaryActionLabel="ดูแผนงาน SEO"
         secondaryHref="#roadmap"
+        align="left"
       />
 
       {/* 02. STRATEGIC METRICS: ยืนยันผลลัพธ์ด้วยตัวเลข */}

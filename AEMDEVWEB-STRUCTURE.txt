@@ -5,10 +5,8 @@
 ├── .vercel
 │   ├── README.txt
 │   └── project.json
-├── 00-SYSTEM-MANDATE.md
 ├── AEMDEVWEB-STRUCTURE.txt
 ├── DEV.md
-├── Dev.html
 ├── README.md
 ├── a.sh
 ├── app
@@ -116,7 +114,7 @@
 │       └── sonner.tsx
 ├── components.json
 ├── config
-│   ├── ..00-SYSTEM-MANDATE.md
+│   ├── ...00-SYSTEM-MANDATE.md
 │   └── ..01-SYSTEM-PROMPT-EXTENSION.md
 ├── constants
 │   ├── area-nodes.ts
@@ -134,8 +132,7 @@
 │   │   ├── facebook-ads-vs-website.mdx
 │   │   ├── lower-north-digital-transformation.mdx
 │   │   ├── seo-2026-strategy.mdx
-│   │   ├── technical-audit-protocol.mdx
-│   │   └── technical-seo-guide.mdx
+│   │   └── technical-audit-protocol.mdx
 │   └── case-studies
 │       ├── case-study-industrial-catalog.mdx
 │       └── unlink-reputation-management-success.mdx
@@ -157,8 +154,6 @@
 ├── public
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
-│   ├── apple-touch-icon.png
-│   ├── favicon-32x32.png
 │   ├── favicon.ico
 │   ├── grid-pattern.svg
 │   ├── icon-192.png
@@ -189,12 +184,9 @@
 │       │   └── technical-audit-visual.webp
 │       ├── case-studies
 │       │   ├── industrial-catalog.webp
-│       │   ├── industrial-ui-preview.webp
 │       │   ├── preview.webp
 │       │   └── unlink-reputation.webp
 │       ├── expert
-│       ├── hero
-│       │   └── main-hero.webp
 │       ├── icon-192.png
 │       ├── og-default.webp
 │       ├── og-main.png
@@ -214,8 +206,6 @@
 │       ├── shared
 │       │   ├── placeholder.webp
 │       │   └── preview.webp
-│       ├── showcase
-│       │   └── industrial-ui-preview.webp
 │       ├── templates
 │       │   ├── corporate-pro
 │       │   │   └── og.webp
