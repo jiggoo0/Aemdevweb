@@ -1,6 +1,6 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.1 (REFACTORED_FINAL)
- * [STRATEGY]: Color Psychology | Business Alignment | Visual Hierarchy
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.2 (IDENTITY_LOCKED)
+ * [STRATEGY]: Color Psychology | Business Alignment | PSI Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -21,25 +21,19 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/seo-agency-node.webp",
     templateSlug: "seo_agency",
     category: "business",
-
-    // Commercial Specs
     price: "19,500",
     priceValue: 19500,
     currency: "THB",
     unit: "รายเดือน",
-
-    // Theme: Growth & Technology (Emerald / Dark Mode)
     theme: {
       primary: "#10b981",
       secondary: "#064e3b",
       background: "bg-slate-950",
       gradient: "from-emerald-500/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Technical Audit: ตรวจสุขภาพเว็บและแก้ไขจุดบอดทางเทคนิคครบวงจร",
-      "Keyword Strategy: วางแผนคำค้นหาที่เน้นยอดขาย (Commercial Intent) ไม่ใช่แค่ยอดวิว",
+      "Keyword Strategy: วางแผนคำค้นหาที่เน้นยอดขาย (Commercial Intent)",
       "Organic Growth: สร้างฐานลูกค้าที่เข้ามาเองตามธรรมชาติอย่างยั่งยืน",
     ],
     coreFeatures: [
@@ -87,22 +81,16 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/salepage-node.webp",
     templateSlug: "salepage",
     category: "landing",
-
-    // Commercial Specs
     price: "3,500",
     priceValue: 3500,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Urgency & Conversion (Rose Red / Clean White)
     theme: {
       primary: "#ef4444",
       secondary: "#7f1d1d",
       background: "bg-white",
       gradient: "from-rose-50 to-white",
     },
-
-    // Content Data
     benefits: [
       "Performance: โหลดเร็วทันใจ ลดโอกาสลูกค้ากดปิดหนี (Bounce Rate)",
       "Ad-Ready: โครงสร้างพร้อมสำหรับการติด Pixel และ Conversion API",
@@ -131,11 +119,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
         answer:
           "เพราะเราใช้โครงสร้างมาตรฐานเดียวกับบริษัทใหญ่ แต่ตัดทอนฟีเจอร์ที่ไม่จำเป็นออก เพื่อให้คุณได้ราคาที่คุ้มค่าที่สุดครับ",
       },
-      {
-        question: "เหมาะกับใคร?",
-        answer:
-          "เหมาะกับธุรกิจที่เน้นยิงโฆษณา หรือต้องการหน้าเว็บที่ส่งลิงก์แล้วปิดการขายได้เลยครับ",
-      },
     ],
     keywords: ["รับทำ Sale Page", "Landing Page ยิงแอด", "เว็บหน้าเดียว", "หน้าปิดการขาย"],
     priority: 1,
@@ -153,22 +136,16 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/corporate-node.webp",
     templateSlug: "corporate",
     category: "business",
-
-    // Commercial Specs
     price: "9,900",
     priceValue: 9900,
     currency: "THB",
     unit: "โปรเจกต์",
-
-    // Theme: Trust & Stability (Royal Blue / Professional Light)
     theme: {
       primary: "#2563eb",
       secondary: "#1e3a8a",
       background: "bg-slate-50",
       gradient: "from-blue-500/5 to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Professional Look: ออกแบบตามอัตลักษณ์แบรนด์ (CI) สร้างภาพจำที่ดี",
       "SEO Structure: วางโครงสร้างพื้นฐานให้ค้นหาเจอใน Google ได้ง่าย",
@@ -204,36 +181,81 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [03. E-CATALOG]: ความทันสมัยและการจัดการ (Modern & Logic)
+  // [03. LOCAL EXPERTISE]: ยกระดับธุรกิจรายพื้นที่ (Geographic Authority)
+  // ===========================================================================
+  {
+    id: "AEM-SVC-LS-10",
+    title: "Local Authority Engine",
+    description:
+      "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
+    image: "/images/service/local-node.webp",
+    // [FIXED]: แมปตรงกับโฟลเดอร์คอมโพเนนต์ใหม่ และ Redirect ใน vercel.json
+    templateSlug: "new-service-name", 
+    category: "business",
+    price: "6,900",
+    priceValue: 6900,
+    currency: "THB",
+    unit: "พื้นที่",
+    theme: {
+      primary: "#f59e0b",
+      secondary: "#78350f",
+      background: "bg-white",
+      gradient: "from-amber-50 to-transparent",
+    },
+    benefits: [
+      "Local Dominance: ติดอันดับต้นๆ เมื่อมีการค้นหาบริการในพื้นที่ของคุณ",
+      "Trust & Entity: สร้างความน่าเชื่อถือด้วยข้อมูลพิกัดที่ชัดเจน",
+      "Conversion Optimized: เปลี่ยนผู้เข้าชมในพื้นที่ให้เป็นลูกค้าตัวจริง",
+    ],
+    coreFeatures: [
+      {
+        title: "Map & Geo SEO",
+        description: "ปรับจูนโครงสร้าง Schema LocalBusiness ให้ Google เข้าใจพิกัดร้าน",
+        icon: "MapPin",
+      },
+      {
+        title: "Localized Content",
+        description: "วางกลยุทธ์เนื้อหาที่เจาะจงพฤติกรรมคนในพื้นที่นั้นๆ",
+        icon: "Search",
+      },
+    ],
+    faqs: [
+      {
+        question: "ทำไมต้องแยกเป็นรายพื้นที่?",
+        answer:
+          "การทำเจาะจงพื้นที่ช่วยให้ Google จัดอันดับคุณได้ง่ายขึ้น และลูกค้าจะรู้สึกใกล้ชิดมากกว่าครับ",
+      },
+    ],
+    keywords: ["รับปักหมุด", "Local SEO", "Google Maps ร้านค้า", "ทำเว็บรายจังหวัด"],
+    priority: 3,
+    isFeatured: true,
+  },
+
+  // ===========================================================================
+  // [04. E-CATALOG]: ความทันสมัยและการจัดการ (Modern & Logic)
   // ===========================================================================
   {
     id: "AEM-SVC-EC-05",
     title: "Smart E-Catalog System",
     description:
-      "เปลี่ยนแค็ตตาล็อกเล่มหนาหรือไฟล์ PDF เป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าค้นหาเจอทันที",
+      "เปลี่ยนแค็ตตาล็อกเล่มหนาเป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าค้นหาเจอทันที",
     image: "/images/service/catalog-node.webp",
     templateSlug: "catalog",
     category: "ecommerce",
-
-    // Commercial Specs
     price: "16,900",
     priceValue: 16900,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Innovation & Database (Violet / Modern Zinc)
     theme: {
       primary: "#8b5cf6",
       secondary: "#4c1d95",
       background: "bg-zinc-50",
       gradient: "from-violet-500/5 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
-      "Smart Search: ระบบค้นหาและตัวกรองสินค้า ช่วยให้ลูกค้าเจอสิ่งที่ต้องการไวขึ้น",
+      "Smart Search: ระบบค้นหาและตัวกรองสินค้าที่แม่นยำ",
       "Unlimited Data: รองรับสินค้าจำนวนมาก จัดหมวดหมู่ได้เป็นระเบียบ",
-      "Lead Generation: ปุ่มขอใบเสนอราคาอัตโนมัติ ช่วยเก็บรายชื่อลูกค้า",
+      "Lead Generation: ปุ่มขอใบเสนอราคาอัตโนมัติ เพื่อปิดการขาย",
     ],
     coreFeatures: [
       {
@@ -243,78 +265,17 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Filter System",
-        description: "ค้นหาจาก หมวดหมู่, ราคา, หรือคุณสมบัติ ได้ละเอียด",
+        description: "ค้นหาจาก หมวดหมู่ หรือราคา ได้ละเอียด",
         icon: "Filter",
-      },
-      {
-        title: "Inquiry Flow",
-        description: "เชื่อมต่อกับ Line/Email เพื่อปิดการขายได้รวดเร็ว",
-        icon: "MessageSquare",
       },
     ],
     faqs: [
       {
         question: "ลงสินค้าเองยากไหม?",
-        answer:
-          "ไม่ยากครับ เราออกแบบระบบมาให้ใช้งานง่ายเหมือนโพสต์ Facebook พร้อมมีคู่มือสอนการใช้งาน",
+        answer: "ไม่ยากครับ เรามีระบบจัดการที่ง่ายเหมือนการเล่นโซเชียลมีเดียทั่วไป",
       },
     ],
     keywords: ["เว็บแค็ตตาล็อก", "ระบบสินค้าออนไลน์", "E-Catalog", "โปรแกรมสต็อกสินค้า"],
-    priority: 3,
-  },
-
-  // ===========================================================================
-  // [04. LOCAL SEO]: พลังงานและการเข้าถึง (Energy & Friendly)
-  // ===========================================================================
-  {
-    id: "AEM-SVC-LS-10",
-    title: "Local SEO & Business Profile",
-    description:
-      "ทำให้ลูกค้าในพื้นที่ค้นหาร้านคุณเจอก่อนใคร เพิ่มโอกาสลูกค้า Walk-in ด้วยการปรับแต่งหมุดธุรกิจให้สมบูรณ์",
-    image: "/images/service/local-node.webp",
-    templateSlug: "local",
-    category: "business",
-
-    // Commercial Specs
-    price: "6,900",
-    priceValue: 6900,
-    currency: "THB",
-    unit: "พื้นที่",
-
-    // Theme: Local Visibility (Amber / Warm Light)
-    theme: {
-      primary: "#f59e0b",
-      secondary: "#78350f",
-      background: "bg-white",
-      gradient: "from-amber-50 to-transparent",
-    },
-
-    // Content Data
-    benefits: [
-      "Visibility: เพิ่มโอกาสการมองเห็นเมื่อมีการค้นหาในละแวกใกล้เคียง",
-      "Trust: สร้างความน่าเชื่อถือด้วยข้อมูลที่ครบถ้วนและรีวิวที่จัดการอย่างดี",
-      "Navigation: ลูกค้าเดินทางมาถูกร้าน ไม่หลงทาง ด้วยหมุดที่แม่นยำ",
-    ],
-    coreFeatures: [
-      {
-        title: "Map Optimization",
-        description: "ปรับแต่งข้อมูล Google Business Profile ให้ถูกต้องและน่าสนใจ",
-        icon: "MapPin",
-      },
-      {
-        title: "Keyword Focus",
-        description: "ใส่คำค้นหาที่คนท้องถิ่นใช้จริง เพื่อดักจับลูกค้า",
-        icon: "Search",
-      },
-    ],
-    faqs: [
-      {
-        question: "ทำแล้วยอดขายจะเพิ่มทันทีเลยไหม?",
-        answer:
-          "การมีตัวตนที่ชัดเจนจะเพิ่ม 'โอกาส' ให้ลูกค้าตัดสินใจง่ายขึ้นและเดินทางมาสะดวกขึ้นครับ",
-      },
-    ],
-    keywords: ["รับปักหมุด", "Local SEO", "Google Maps ร้านค้า", "โปรโมทร้านอาหาร"],
     priority: 4,
   },
 
@@ -323,32 +284,25 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   // ===========================================================================
   {
     id: "AEM-SVC-PB-14",
-    title: "Professional Portfolio & Bio Link",
+    title: "Professional Bio & Portfolio",
     description:
-      "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว (One-Link Solution)",
+      "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว",
     image: "/images/service/personal-node.webp",
     templateSlug: "bio",
     category: "personal",
-
-    // Commercial Specs
     price: "4,900",
     priceValue: 4900,
     currency: "THB",
     unit: "โปรเจกต์",
-
-    // Theme: Digital Identity (Cyan / Dark Mode)
     theme: {
       primary: "#06b6d4",
       secondary: "#164e63",
       background: "bg-zinc-950",
       gradient: "from-cyan-500/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
-      "Centralized: รวม Facebook, Line, TikTok และผลงานไว้ที่เดียว",
-      "Professional: ดูดีกว่าการส่งไฟล์ทั่วไป สร้างความประทับใจแรกพบ",
-      "Customizable: ปรับแต่งธีมให้เข้ากับบุคลิกหรือสายงานของคุณ",
+      "Centralized: รวมทุก Social Media และผลงานไว้ที่เดียว",
+      "Professional: สร้างความประทับใจแรกด้วยดีไซน์ระดับ Specialist",
     ],
     coreFeatures: [
       {
@@ -358,15 +312,14 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Smart Contact",
-        description: "ปุ่มติดต่อที่ออกแบบให้กดง่าย ส่งลูกค้าไปยังช่องทางหลักทันที",
+        description: "ปุ่มติดต่อที่ออกแบบให้กดง่ายที่สุด",
         icon: "Link",
       },
     ],
     faqs: [
       {
         question: "เอาไปใช้ทำอะไรได้บ้าง?",
-        answer:
-          "ใช้เป็นลิงก์แนะนำตัว (Bio Link) ใน Social Media หรือใช้แนบสมัครงาน/เสนองานลูกค้าครับ",
+        answer: "ใช้เป็น Bio Link ในโปรไฟล์ หรือใช้แนบสมัครงานและเสนองานลูกค้าครับ",
       },
     ],
     keywords: ["ทำเว็บพอร์ตโฟลิโอ", "Bio Link", "เว็บส่วนตัว", "Digital Name Card"],
@@ -380,30 +333,23 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     id: "AEM-SVC-HR-08",
     title: "Hotel & Resort Website",
     description:
-      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (User Experience) ภาพสวย โหลดไว กระตุ้นให้อยากจองห้องพัก",
+      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (UX) ภาพสวย โหลดไว กระตุ้นให้อยากจองห้องพัก",
     image: "/images/service/hotel-resort-node.webp",
     templateSlug: "hotelresort",
     category: "business",
-
-    // Commercial Specs
     price: "16,900",
     priceValue: 16900,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Premium & Experience (Gold / Deep Black)
     theme: {
       primary: "#c5a358",
       secondary: "#1a1a1a",
       background: "bg-[#0a0a0a]",
       gradient: "from-[#c5a358]/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Visual Impact: นำเสนอภาพบรรยากาศที่พักได้เต็มอารมณ์ แต่ยังโหลดเร็ว",
-      "Direct Booking: เพิ่มช่องทางจองตรง ลดค่าคอมมิชชั่นจากแพลตฟอร์มอื่น",
-      "International: รองรับระบบ 2 ภาษา (ไทย/อังกฤษ) เพื่อลูกค้าต่างชาติ",
+      "Direct Booking: เพิ่มช่องทางจองตรง ลดค่าคอมมิชชั่น",
     ],
     coreFeatures: [
       {
@@ -413,19 +359,14 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Room Showcase",
-        description: "หน้ารายละเอียดห้องพักที่ชัดเจน ครบถ้วน ตัดสินใจง่าย",
+        description: "หน้ารายละเอียดห้องพักที่ชัดเจน ตัดสินใจง่าย",
         icon: "Home",
-      },
-      {
-        title: "Call-to-Action",
-        description: "ปุ่มจองและช่องทางติดต่อที่เด่นชัดทุกหน้า",
-        icon: "MousePointer",
       },
     ],
     faqs: [
       {
         question: "มีระบบจองให้ไหม?",
-        answer: "เราสามารถเชื่อมต่อกับระบบจองที่คุณมีอยู่ หรือทำปุ่มจองผ่าน Line/Email ให้ได้ครับ",
+        answer: "เราสามารถเชื่อมต่อกับระบบจองที่คุณมีอยู่เดิมได้ทันทีครับ",
       },
     ],
     keywords: ["ทำเว็บโรงแรม", "เว็บไซต์รีสอร์ท", "ออกแบบเว็บที่พัก", "Hotel Web Design"],
@@ -439,5 +380,5 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
  * @description คัดกรองบริการแนะนำ (Highlight) โดยเรียงตาม Priority
  */
 export const FEATURED_SERVICES = [...MASTER_REGISTRY]
-  .filter((svc: TemplateMasterData) => svc.isFeatured || svc.isPopular)
+  .filter((svc) => svc.isFeatured || svc.isPopular)
   .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
