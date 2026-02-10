@@ -44,10 +44,10 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
-    
+
     // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
-    qualities: [75, 85, 90], 
-    
+    qualities: [75, 85, 90],
+
     minimumCacheTTL: 86400,
     unoptimized: false,
     remotePatterns: [{ protocol: "https", hostname: "**" }],
@@ -70,7 +70,7 @@ const nextConfig: NextConfig = {
     if (!isServer) {
       config.optimization.usedExports = true;
     }
-    
+
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,

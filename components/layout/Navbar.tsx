@@ -151,18 +151,18 @@ const Navbar = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={cn(
-                    "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50",
-                    "relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
-                    "h-12 w-12", // ขยาย Hit Area จาก 11 เป็น 12 (48px)
-                    "active:scale-95", // ลดการเด้งให้น้อยลงเพื่อให้รู้สึก Firm ขึ้น
-                    "cursor-pointer select-none touch-manipulation" // เพิ่ม UX สำหรับ Touch Screen
+                  "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50",
+                  "relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
+                  "h-12 w-12", // ขยาย Hit Area จาก 11 เป็น 12 (48px)
+                  "active:scale-95", // ลดการเด้งให้น้อยลงเพื่อให้รู้สึก Firm ขึ้น
+                  "cursor-pointer touch-manipulation select-none", // เพิ่ม UX สำหรับ Touch Screen
                 )}
                 aria-label="Toggle Menu"
               >
-                <IconRenderer 
-                    name={isMobileMenuOpen ? "X" : "Menu"} 
-                    size={24} // ขยายไอคอนเล็กน้อยเพื่อให้สมดุลกับปุ่ม
-                    className="pointer-events-none" // ป้องกันไอคอนรับ Event แทนปุ่ม
+                <IconRenderer
+                  name={isMobileMenuOpen ? "X" : "Menu"}
+                  size={24} // ขยายไอคอนเล็กน้อยเพื่อให้สมดุลกับปุ่ม
+                  className="pointer-events-none" // ป้องกันไอคอนรับ Event แทนปุ่ม
                 />
               </button>
             </div>

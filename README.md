@@ -15,7 +15,9 @@ last_audit: 2026-02-10 23:14:38
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
+
 ### MODULE: index.d.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.5 (AUTHENTICATED)
@@ -268,9 +270,10 @@ export interface AreaNode {
     readonly lng: number;
   };
 }
-
 ```
+
 ### MODULE: mdx.d.ts
+
 ```typescript
 declare module "*.mdx" {
   import type { ComponentType, ReactNode } from "react";
@@ -284,9 +287,10 @@ declare module "mdx/types" {
   // Extending definition to allow strictly typed MDX components
   export type MDXComponents = Record<string, ComponentType<{ children?: ReactNode }> | string>;
 }
-
 ```
+
 ### MODULE: template-props.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.5.0 (TYPE_SAFE)
@@ -395,13 +399,14 @@ export interface BioTemplateProps extends BaseTemplateProps {
  * [ADAPTER TYPE]: Data Source Validation Helper
  */
 export type TemplateDataSource = "service" | "area" | "custom";
-
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
+
 ### CONFIG: area-nodes.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: AREA_NODES_DATA v17.6.1 (STRATEGIC_LOCATIONS)
@@ -730,9 +735,10 @@ export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.prio
  * [HELPER]: Get Area by Slug
  */
 export const getAreaBySlug = (slug: string) => AREA_NODES.find((area) => area.slug === slug);
-
 ```
+
 ### CONFIG: master-registry.ts
+
 ```typescript
 /**
  * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.2 (IDENTITY_LOCKED)
@@ -1117,9 +1123,10 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
 export const FEATURED_SERVICES = [...MASTER_REGISTRY]
   .filter((svc) => svc.isFeatured || svc.isPopular)
   .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
-
 ```
+
 ### CONFIG: navigation.ts
+
 ```typescript
 /**
  * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.5.3 (UTILITY_EXPANDED)
@@ -1174,9 +1181,10 @@ export const FOOTER_MAP = {
 /* TYPE DEFINITIONS */
 export type NavItem = (typeof MAIN_NAV)[number];
 export type ServiceItem = (typeof SERVICE_SOLUTIONS)[number];
-
 ```
+
 ### CONFIG: site-config.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.5 (EEAT_STABILIZED)
@@ -1292,12 +1300,12 @@ export const SITE_CONFIG: SiteConfig = {
 } as const;
 
 export type GlobalConfig = typeof SITE_CONFIG;
-
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
+
 ```text
 [3.4K 2026-02-10 23:14]  .
 ├── [9.5K 2026-02-10 20:48]  AEMDEVWEB-STRUCTURE.txt
@@ -1487,11 +1495,12 @@ export type GlobalConfig = typeof SITE_CONFIG;
 69 directories, 115 files
 ```
 
-/**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
- * [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
- * [MAINTAINER]: AEMDEVWEB Specialist Team
- */
+/\*\*
+
+- [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
+- [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
+- [MAINTAINER]: AEMDEVWEB Specialist Team
+  \*/
 
 import nextMDX from "@next/mdx";
 import type { NextConfig } from "next";
@@ -1501,22 +1510,22 @@ import remarkGfm from "remark-gfm";
 const isVercel = process.env.VERCEL === "1";
 
 const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm, remarkFrontmatter],
-    rehypePlugins: [],
-  },
+extension: /\.mdx?$/,
+options: {
+remarkPlugins: [remarkGfm, remarkFrontmatter],
+rehypePlugins: [],
+},
 });
 
 const nextConfig: NextConfig = {
-  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-  reactStrictMode: true,
-  compress: true,
+pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+reactStrictMode: true,
+compress: true,
 
-  experimental: {
-    scrollRestoration: true,
-    workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
-    cpus: isVercel ? undefined : 1,
+experimental: {
+scrollRestoration: true,
+workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
+cpus: isVercel ? undefined : 1,
 
     optimizePackageImports: [
       "lucide-react",
@@ -1525,41 +1534,43 @@ const nextConfig: NextConfig = {
       "tailwindcss-animate",
     ],
     mdxRs: isVercel,
-  },
 
-  transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
+},
 
-  images: {
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    formats: ["image/avif", "image/webp"],
-    
+transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
+
+images: {
+deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+formats: ["image/avif", "image/webp"],
+
     // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
-    qualities: [75, 85, 90], 
-    
+    qualities: [75, 85, 90],
+
     minimumCacheTTL: 86400,
     unoptimized: false,
     remotePatterns: [{ protocol: "https", hostname: "**" }],
-  },
 
-  async headers() {
-    return [
-      {
-        source: "/_next/static/(.*)",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-    ];
-  },
+},
 
-  webpack: (config, { dev, isServer }) => {
-    if (!isVercel) {
-      config.cache = false;
-    }
+async headers() {
+return [
+{
+source: "/\_next/static/(.\*)",
+headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+},
+];
+},
+
+webpack: (config, { dev, isServer }) => {
+if (!isVercel) {
+config.cache = false;
+}
 
     if (!isServer) {
       config.optimization.usedExports = true;
     }
-    
+
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,
@@ -1569,279 +1580,280 @@ const nextConfig: NextConfig = {
     }
 
     return config;
-  },
+
+},
 };
 
 export default withMDX(nextConfig);
 
 {
-  "version": 2,
-  "framework": "nextjs",
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm build",
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "images": {
-    "sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048],
-    "minimumCacheTTL": 86400,
-    "formats": ["image/avif", "image/webp"]
-  },
-  "redirects": [
-    {
-      "source": "/services/corporate_lite",
-      "destination": "/services/corporate",
-      "permanent": true
-    },
-    {
-      "source": "/services/corporate_pro",
-      "destination": "/services/corporate",
-      "permanent": true
-    },
-    {
-      "source": "/templates/event_magic",
-      "destination": "/services/corporate",
-      "permanent": true
-    },
-    {
-      "source": "/templates/booking/hotel-resort-node",
-      "destination": "/services/hotelresort",
-      "permanent": true
-    },
-    {
-      "source": "/templates/local_service",
-      "destination": "/services/new-service-name",
-      "permanent": true
-    },
-    {
-      "source": "/templates/new_service_name",
-      "destination": "/services/new-service-name",
-      "permanent": true
-    },
-    /* --- [STRATEGIC REDIRECTS: BLOG CONSOLIDATION] --- */
-    {
-      "source": "/blog/technical-seo-guide",
-      "destination": "/blog/seo-2026-strategy",
-      "permanent": true
-    },
-    {
-      "source": "/seo/technical-seo-guide",
-      "destination": "/blog/seo-2026-strategy",
-      "permanent": true
-    },
-    /* --- [SEO LEGACY PATHS] --- */
-    {
-      "source": "/seo/core-web-vitals-speed",
-      "destination": "/blog/core-web-vitals-speed",
-      "permanent": true
-    },
-    {
-      "source": "/seo/advanced-schema-markup",
-      "destination": "/blog/advanced-schema-markup",
-      "permanent": true
-    },
-    {
-      "source": "/seo/(.*)",
-      "destination": "/blog/$1",
-      "permanent": true
-    },
-    {
-      "source": "/old-service-path",
-      "destination": "/services",
-      "permanent": true
-    }
-  ],
-  "headers": [
-    {
-      "source": "/_next/static/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
-        }
-      ]
-    }
-  ]
+"version": 2,
+"framework": "nextjs",
+"installCommand": "pnpm install",
+"buildCommand": "pnpm build",
+"cleanUrls": true,
+"trailingSlash": false,
+"images": {
+"sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048],
+"minimumCacheTTL": 86400,
+"formats": ["image/avif", "image/webp"]
+},
+"redirects": [
+{
+"source": "/services/corporate*lite",
+"destination": "/services/corporate",
+"permanent": true
+},
+{
+"source": "/services/corporate_pro",
+"destination": "/services/corporate",
+"permanent": true
+},
+{
+"source": "/templates/event_magic",
+"destination": "/services/corporate",
+"permanent": true
+},
+{
+"source": "/templates/booking/hotel-resort-node",
+"destination": "/services/hotelresort",
+"permanent": true
+},
+{
+"source": "/templates/local_service",
+"destination": "/services/new-service-name",
+"permanent": true
+},
+{
+"source": "/templates/new_service_name",
+"destination": "/services/new-service-name",
+"permanent": true
+},
+/* --- [STRATEGIC REDIRECTS: BLOG CONSOLIDATION] --- _/
+{
+"source": "/blog/technical-seo-guide",
+"destination": "/blog/seo-2026-strategy",
+"permanent": true
+},
+{
+"source": "/seo/technical-seo-guide",
+"destination": "/blog/seo-2026-strategy",
+"permanent": true
+},
+/_ --- [SEO LEGACY PATHS] --- _/
+{
+"source": "/seo/core-web-vitals-speed",
+"destination": "/blog/core-web-vitals-speed",
+"permanent": true
+},
+{
+"source": "/seo/advanced-schema-markup",
+"destination": "/blog/advanced-schema-markup",
+"permanent": true
+},
+{
+"source": "/seo/(._)",
+"destination": "/blog/$1",
+"permanent": true
+},
+{
+"source": "/old-service-path",
+"destination": "/services",
+"permanent": true
+}
+],
+"headers": [
+{
+"source": "/\_next/static/(.\_)",
+"headers": [
+{
+"key": "Cache-Control",
+"value": "public, max-age=31536000, immutable"
+}
+]
+},
+{
+"source": "/(.\*)",
+"headers": [
+{
+"key": "X-Content-Type-Options",
+"value": "nosniff"
+},
+{
+"key": "X-Frame-Options",
+"value": "DENY"
+},
+{
+"key": "Strict-Transport-Security",
+"value": "max-age=31536000; includeSubDomains; preload"
+}
+]
+}
+]
 }
 
-___
+---
 
 {
-  "name": "aemdevweb.com",
-  "version": "7.2.99",
-  "private": true,
-  "author": "AEMDEVWEB (Technical Infrastructure Specialist)",
-  "description": "High-Performance Web Infrastructure & Technical SEO Specialist Hub",
-  "engines": {
-    "node": ">=22.0.0",
-    "pnpm": ">=10.0.0"
-  },
-  "scripts": {
-    "dev": "WATCHPACK_POLLING=true next dev --webpack",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "fix": "pnpm format && pnpm lint --fix",
-    "build": "next build --webpack",
-    "start": "next start",
-    "knip": "knip --cache --no-exit-code",
-    "clean": "rm -rf .next node_modules pnpm-lock.yaml && pnpm install"
-  },
-  "dependencies": {
-    "@img/sharp-wasm32": "^0.34.5",
-    "@mdx-js/loader": "^3.1.1",
-    "@mdx-js/react": "^3.1.1",
-    "@next/mdx": "16.1.6",
-    "@radix-ui/react-accordion": "^1.2.12",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@vercel/speed-insights": "^1.3.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.34.0",
-    "gray-matter": "^4.0.3",
-    "lucide-react": "^0.474.0",
-    "next": "16.1.6",
-    "next-mdx-remote": "^5.0.0",
-    "next-themes": "^0.4.6",
-    "nextjs-toploader": "^3.9.17",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "remark-frontmatter": "^5.0.0",
-    "remark-gfm": "^4.0.1",
-    "remark-unwrap-images": "^5.0.0",
-    "sharp": "^0.34.5",
-    "sonner": "^1.7.4",
-    "tailwind-merge": "^3.4.0",
-    "tailwindcss-animate": "^1.0.7"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@next/eslint-plugin-next": "16.1.6",
-    "@swc/helpers": "^0.5.18",
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/mdx": "^2.0.13",
-    "@types/node": "22.13.1",
-    "@types/react": "19.0.8",
-    "@types/react-dom": "19.0.3",
-    "autoprefixer": "^10.4.24",
-    "eslint": "9.19.0",
-    "eslint-plugin-tailwindcss": "^3.18.2",
-    "eslint-plugin-unused-imports": "^4.4.1",
-    "knip": "^5.83.1",
-    "postcss": "^8.5.6",
-    "prettier": "^3.8.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0",
-    "vercel": "^50.13.2"
-  },
-  "pnpm": {
-    "shamefully-hoist": true,
-    "overrides": {
-      "react": "19.0.0",
-      "react-dom": "19.0.0",
-      "eslint-plugin-tailwindcss>tailwindcss": "$tailwindcss"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "unrs-resolver"
-    ]
-  }
+"name": "aemdevweb.com",
+"version": "7.2.99",
+"private": true,
+"author": "AEMDEVWEB (Technical Infrastructure Specialist)",
+"description": "High-Performance Web Infrastructure & Technical SEO Specialist Hub",
+"engines": {
+"node": ">=22.0.0",
+"pnpm": ">=10.0.0"
+},
+"scripts": {
+"dev": "WATCHPACK_POLLING=true next dev --webpack",
+"type-check": "tsc --noEmit",
+"lint": "eslint .",
+"format": "prettier --write .",
+"fix": "pnpm format && pnpm lint --fix",
+"build": "next build --webpack",
+"start": "next start",
+"knip": "knip --cache --no-exit-code",
+"clean": "rm -rf .next node_modules pnpm-lock.yaml && pnpm install"
+},
+"dependencies": {
+"@img/sharp-wasm32": "^0.34.5",
+"@mdx-js/loader": "^3.1.1",
+"@mdx-js/react": "^3.1.1",
+"@next/mdx": "16.1.6",
+"@radix-ui/react-accordion": "^1.2.12",
+"@radix-ui/react-slot": "^1.2.4",
+"@vercel/speed-insights": "^1.3.1",
+"class-variance-authority": "^0.7.1",
+"clsx": "^2.1.1",
+"framer-motion": "^12.34.0",
+"gray-matter": "^4.0.3",
+"lucide-react": "^0.474.0",
+"next": "16.1.6",
+"next-mdx-remote": "^5.0.0",
+"next-themes": "^0.4.6",
+"nextjs-toploader": "^3.9.17",
+"react": "19.0.0",
+"react-dom": "19.0.0",
+"remark-frontmatter": "^5.0.0",
+"remark-gfm": "^4.0.1",
+"remark-unwrap-images": "^5.0.0",
+"sharp": "^0.34.5",
+"sonner": "^1.7.4",
+"tailwind-merge": "^3.4.0",
+"tailwindcss-animate": "^1.0.7"
+},
+"devDependencies": {
+"@eslint/js": "^9.39.2",
+"@next/eslint-plugin-next": "16.1.6",
+"@swc/helpers": "^0.5.18",
+"@tailwindcss/postcss": "^4.1.18",
+"@types/mdx": "^2.0.13",
+"@types/node": "22.13.1",
+"@types/react": "19.0.8",
+"@types/react-dom": "19.0.3",
+"autoprefixer": "^10.4.24",
+"eslint": "9.19.0",
+"eslint-plugin-tailwindcss": "^3.18.2",
+"eslint-plugin-unused-imports": "^4.4.1",
+"knip": "^5.83.1",
+"postcss": "^8.5.6",
+"prettier": "^3.8.1",
+"prettier-plugin-tailwindcss": "^0.7.2",
+"tailwindcss": "^4.1.18",
+"typescript": "^5.9.3",
+"typescript-eslint": "^8.54.0",
+"vercel": "^50.13.2"
+},
+"pnpm": {
+"shamefully-hoist": true,
+"overrides": {
+"react": "19.0.0",
+"react-dom": "19.0.0",
+"eslint-plugin-tailwindcss>tailwindcss": "$tailwindcss"
+},
+"onlyBuiltDependencies": [
+"esbuild",
+"sharp",
+"unrs-resolver"
+]
 }
-___
-{
-  "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./*"]
-    },
-    "baseUrl": "."
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "types/**/*.d.ts",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
 }
 
-
-___
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "style": "new-york",
-  "rsc": true,
-  "tsx": true,
-  "tailwind": {
-    "config": "",
-    "css": "app/globals.css",
-    "baseColor": "slate",
-    "cssVariables": true,
-    "prefix": ""
-  },
-  "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
-  },
-  "iconLibrary": "lucide"
-}
-
-
-__
+---
 
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "next": {
-    "entry": [
-      "next.config.ts",
-      "app/**/*.{ts,tsx}",
-      "components/templates/**/Index.tsx",
-      "lib/cms.ts"
-    ]
-  },
-  "project": ["**/*.{ts,tsx}"]
+"compilerOptions": {
+"target": "ES2017",
+"lib": ["dom", "dom.iterable", "esnext"],
+"allowJs": true,
+"skipLibCheck": true,
+"strict": true,
+"noEmit": true,
+"esModuleInterop": true,
+"module": "esnext",
+"moduleResolution": "bundler",
+"resolveJsonModule": true,
+"isolatedModules": true,
+"jsx": "react-jsx",
+"incremental": true,
+"plugins": [
+{
+"name": "next"
+}
+],
+"paths": {
+"@/_": ["./_"]
+},
+"baseUrl": "."
+},
+"include": [
+"next-env.d.ts",
+"**/*.ts",
+"**/*.tsx",
+".next/types/**/*.ts",
+"types/**/*.d.ts",
+".next/dev/types/**/*.ts"
+],
+"exclude": ["node_modules"]
 }
 
+---
 
-__
+{
+"$schema": "https://ui.shadcn.com/schema.json",
+"style": "new-york",
+"rsc": true,
+"tsx": true,
+"tailwind": {
+"config": "",
+"css": "app/globals.css",
+"baseColor": "slate",
+"cssVariables": true,
+"prefix": ""
+},
+"aliases": {
+"components": "@/components",
+"utils": "@/lib/utils",
+"ui": "@/components/ui",
+"lib": "@/lib",
+"hooks": "@/hooks"
+},
+"iconLibrary": "lucide"
+}
+
+\_\_
+
+{
+"$schema": "https://unpkg.com/knip@5/schema.json",
+"next": {
+"entry": [
+"next.config.ts",
+"app/**/*.{ts,tsx}",
+"components/templates/**/Index.tsx",
+"lib/cms.ts"
+]
+},
+"project": ["**/*.{ts,tsx}"]
+}
+
+\_\_

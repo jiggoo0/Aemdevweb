@@ -41,7 +41,6 @@
       "destination": "/services/new-service-name",
       "permanent": true
     },
-    /* --- [STRATEGIC REDIRECTS: BLOG CONSOLIDATION] --- */
     {
       "source": "/blog/technical-seo-guide",
       "destination": "/blog/seo-2026-strategy",
@@ -52,7 +51,6 @@
       "destination": "/blog/seo-2026-strategy",
       "permanent": true
     },
-    /* --- [SEO LEGACY PATHS] --- */
     {
       "source": "/seo/core-web-vitals-speed",
       "destination": "/blog/core-web-vitals-speed",
