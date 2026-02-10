@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GENERAL_UTILITIES v17.4.2 (STABILIZED)
+ * [SYSTEM CORE]: GENERAL_UTILITIES v17.5.5 (STABILIZED)
  * [PLAN]: Performance-First Helpers | Thai Language Support | SEO Readiness
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -21,11 +21,15 @@ export function cn(...inputs: ClassValue[]): string {
  * สร้าง Absolute URL ที่ปลอดภัยสำหรับ Meta Tag / OG Image / Schema
  */
 export function absoluteUrl(path: string): string {
+  if (!path) return SITE_CONFIG.siteUrl;
+  
+  // หากเป็น External URL อยู่แล้ว ให้ส่งกลับทันที
+  if (path.startsWith("http")) return path;
+
   const baseUrl = SITE_CONFIG.siteUrl?.replace(/\/$/, "") || "";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-  // ป้องกันกรณี path เป็น root ("/" หรือ "") อยู่แล้ว
-  if (path === "/" || !path) return baseUrl;
+  if (path === "/") return baseUrl;
 
   return `${baseUrl}${cleanPath}`;
 }
@@ -57,10 +61,10 @@ export function slugify(text: string): string {
     .toString()
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-")
+    .replace(/\s+/g, "-") // แทนที่ช่องว่างด้วยขีด
     .replace(/[^\u0E00-\u0E7Fa-z0-9-]/g, "") // อนุญาตเฉพาะไทย, อังกฤษ, ตัวเลข, ขีด
-    .replace(/-+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/-+/g, "-") // ลบขีดซ้ำซ้อน
+    .replace(/^-+|-+$/g, ""); // ลบขีดหน้า-หลัง
 }
 
 /**
@@ -82,25 +86,27 @@ export function formatDate(date: string | Date, locale: string = "th-TH"): strin
 /**
  * [UTILITY]: Advanced Reading Time
  * คำนวณเวลาอ่านบทความ (รองรับภาษาไทย)
+ * สูตร: (จำนวนคำไทย / 4 + จำนวนคำอังกฤษ) / 200 คำต่อนาที
  */
 export function getReadingTime(content: string): string {
-  if (!content) return "0 นาที";
+  if (!content) return "1 นาที"; // Minimum reading time
 
   const wordsPerMinute = 200;
+  // ลบ HTML Tags ออกก่อนนับคำ
   const cleanContent = content.replace(/<\/?[^>]+(>|$)/g, "");
 
-  // ภาษาไทย: ใช้ค่าเฉลี่ย 4 ตัวอักษรต่อ 1 คำ
+  // ภาษาไทย: ใช้วิธีนับตัวอักษรแล้วหารเฉลี่ย
   const thaiCharCount = cleanContent.replace(/[^\u0E00-\u0E7F]/g, "").length;
 
-  // ภาษาอังกฤษ: นับคำตามปกติ
+  // ภาษาอังกฤษ: นับตามช่องว่าง
   const englishWordCount = cleanContent
     .replace(/[\u0E00-\u0E7F]/g, " ")
     .trim()
     .split(/\s+/)
     .filter(Boolean).length;
 
-  const totalWords = thaiCharCount / 4 + englishWordCount;
+  const totalWords = (thaiCharCount / 4) + englishWordCount;
   const minutes = Math.ceil(totalWords / wordsPerMinute);
 
-  return `${minutes} นาที`;
+  return `${minutes || 1} นาที`;
 }

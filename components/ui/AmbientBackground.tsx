@@ -1,6 +1,6 @@
 /**
- * [UI COMPONENT]: AMBIENT_BACKGROUND v17.5.0 (THEME_AWARE)
- * [STRATEGY]: Atmospheric Orchestration | Dynamic Color Injection | GPU Accelerated
+ * [UI COMPONENT]: AMBIENT_BACKGROUND v17.5.5 (STABILIZED)
+ * [STRATEGY]: GPU-Accelerated Atmosphere | Organic Pulse | Zero-LCP Impact
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -10,73 +10,71 @@ import { cn } from "@/lib/utils";
 interface AmbientBackgroundProps {
   readonly className?: string;
   readonly gridOpacity?: number;
-  /**
-   * [THEME]: สีหลักสำหรับ Aura (รับค่าจาก LayoutEngine)
-   */
   readonly color?: string;
-  /**
-   * [THEME]: ความเข้มของแสง Aura (0.0 - 1.0)
-   */
   readonly opacity?: number;
 }
 
-/**
- * @component AmbientBackground
- * @description หน่วยประมวลผลฉากหลังเชิงบรรยากาศ รองรับการเปลี่ยนสีตาม Theme
- * ใช้ตำแหน่ง fixed เพื่อความเสถียรของเลเยอร์ และใช้ memo เพื่อลดการคำนวณซ้ำ
- */
 function AmbientBackground({
   className,
-  gridOpacity = 0.05,
+  gridOpacity = 0.04, // ปรับลดลงเล็กน้อยเพื่อให้ดู Clean ขึ้น
   color,
   opacity,
 }: AmbientBackgroundProps) {
-  // [LOGIC]: สร้าง Dynamic Style สำหรับ Aura Nodes
-  // หากมีการส่งสีมา (color) ให้ใช้สีนั้น หากไม่มีให้ใช้ --color-brand-primary จาก Global CSS
+  
+  /**
+   * [PERFORMANCE]: ใช้ CSS Variables เพื่อลดการ Re-paint 
+   * การเปลี่ยนสีผ่าน Variable จะลื่นกว่าการเปลี่ยนผ่าน Inline Style ตรงๆ
+   */
   const auraStyle = {
-    backgroundColor: color || "var(--color-brand-primary)",
-    opacity: opacity ?? undefined, // ถ้ามีค่า opacity ส่งมา ให้ Override CSS Class
-    "--ambient-opacity": opacity ?? 0.1, // อัปเดต CSS Variable สำหรับ Animation
+    "--aura-color": color || "var(--color-brand-primary, #2563eb)",
+    "--aura-opacity": opacity ?? 0.12,
   } as React.CSSProperties;
 
   return (
     <div
       className={cn(
-        // [LAYOUT]: Fixed เพื่อให้ Background นิ่งสนิทแม้ Scroll เนื้อหา
-        // [INTERACTION]: pointer-events-none สำคัญมาก เพื่อไม่ให้ขวางการคลิก
         "pointer-events-none fixed inset-0 z-0 overflow-hidden select-none",
-        "bg-surface-main transition-colors duration-700",
+        "bg-surface-main transition-colors duration-1000",
         className,
       )}
       aria-hidden="true"
+      style={auraStyle}
     >
-      {/* 01. INFRASTRUCTURE GRID: ตารางโครงสร้างเชิงเทคนิค */}
+      {/* 01. TECHNICAL GRID: ตารางโครงสร้างระดับสถาปัตยกรรม */}
       <div
-        className="bg-infrastructure-grid absolute inset-0 transition-opacity duration-700"
-        style={{ opacity: gridOpacity }}
-      />
-
-      {/* 02. ATMOSPHERIC AURAS: แสงสว่างประดิษฐ์เพื่อสร้างมิติ */}
-      {/* Top-Left Aura: แสงหลัก (Dynamic Color) */}
-      <div
-        className="ambient-aura animate-pulse-slow absolute -top-[10%] -left-[10%] h-[800px] w-[800px] blur-[120px] transition-colors duration-700"
-        style={auraStyle}
-      />
-
-      {/* Bottom-Right Aura: แสงรอง (Dynamic Color) */}
-      <div
-        className="ambient-aura absolute -right-[5%] bottom-[10%] h-[600px] w-[600px] blur-[100px] transition-colors duration-700"
-        style={{
-          ...auraStyle,
-          opacity: opacity ? opacity * 0.8 : undefined, // ลดความเข้มลงเล็กน้อยสำหรับแสงรอง
+        className="absolute inset-0 bg-infrastructure-grid transition-opacity duration-1000"
+        style={{ 
+          opacity: gridOpacity,
+          maskImage: "radial-gradient(circle at center, black, transparent 80%)" // [ADD]: ให้ตารางจางหายไปตามขอบ
         }}
       />
 
-      {/* 03. DEPTH VIGNETTE: ไล่เฉดเพื่อสร้างความลึกให้กับ Content ตรงกลาง */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,var(--color-surface-main)_120%)] opacity-80" />
+      {/* 02. DYNAMIC AURAS: ใช้ transform-gpu เพื่อลดภาระ CPU */}
+      {/* Main Aura (Top-Left) */}
+      <div
+        className={cn(
+          "absolute -top-[20%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
+          "bg-[var(--aura-color)] opacity-[var(--aura-opacity)]",
+          "blur-[100px] md:blur-[150px] mix-blend-soft-light",
+          "animate-aura-float transform-gpu will-change-transform transition-colors duration-1000"
+        )}
+      />
+
+      {/* Secondary Aura (Bottom-Right) */}
+      <div
+        className={cn(
+          "absolute -right-[10%] -bottom-[10%] h-[50vw] w-[50vw] rounded-full",
+          "bg-[var(--aura-color)] opacity-[calc(var(--aura-opacity)*0.7)]",
+          "blur-[80px] md:blur-[120px] mix-blend-plus-lighter",
+          "animate-pulse-slow transform-gpu will-change-transform transition-colors duration-1000"
+        )}
+      />
+
+      {/* 03. DEPTH LAYER: สร้างความลึกแบบ Specialist */}
+      <div className="absolute inset-0 bg-surface-main/20 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-surface-main)_100%)] opacity-60" />
     </div>
   );
 }
 
-// [PERFORMANCE]: Memoization เพื่อป้องกัน Re-render โดยไม่จำเป็น
 export default memo(AmbientBackground);

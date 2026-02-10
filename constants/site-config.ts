@@ -1,20 +1,19 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.4 (EEAT_STABILIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.5 (EEAT_STABILIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
- * [UPDATE]: แก้ไข Locality เป็น "กำแพงเพชร" เพื่อผลลัพธ์ Local SEO ที่ถูกต้อง
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { SiteConfig } from "@/types";
 
 export const SITE_CONFIG: SiteConfig = {
-  // [01. BRAND IDENTITY]: ข้อมูลระบุตัวตนพื้นฐาน
+  // [01. BRAND IDENTITY]
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
   description:
     "AEMDEVWEB | Web Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับหน้าแรก Google อย่างมีประสิทธิภาพและยั่งยืน",
 
-  // [02. HERO_REGISTRY]: ศูนย์กลางควบคุมเนื้อหาหน้าแรก
+  // [02. HERO_REGISTRY]
   hero: {
     title: "AEMDEVWEB HYPER PERFORMANCE ARCHITECTURE",
     description:
@@ -23,15 +22,14 @@ export const SITE_CONFIG: SiteConfig = {
     secondaryAction: "ดูบริการทั้งหมด",
   },
 
-  // [03. PERSONA ANCHOR]: โทนและการสื่อสาร
+  // [03. PERSONA ANCHOR]
   persona: {
     tone: "Strategic Partner, Expert Authority, Business-Centric",
     communicationStyle: "Result-oriented, Friendly Specialist, Clear & Honest",
     antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising without Logic",
   },
 
-  // [SYSTEM: PROTECTED_DATA_START]
-  // [04. SEO AUTHORITY]: ชุดคำค้นหาเชิงยุทธศาสตร์ (High Intent Keywords 2026)
+  // [04. SEO AUTHORITY]
   keywords: [
     "รับทำเว็บไซต์",
     "รับทำ SEO สายขาว",
@@ -46,18 +44,17 @@ export const SITE_CONFIG: SiteConfig = {
     "นาย อลงกรณ์ ยมเกิด",
     "Technical SEO Specialist Thailand",
   ],
-  // [SYSTEM: PROTECTED_DATA_END]
 
-  // [05. TECHNICAL_STACK]: ข้อมูลทางเทคนิคของระบบ
+  // [05. TECHNICAL_STACK]
   project: {
     title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.5.4",
+    version: "17.5.5", // Sync with types
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
 
-  // [06. EXPERT NODE]: ข้อมูลผู้เชี่ยวชาญ (EEAT) และ Google Identity
+  // [06. EXPERT NODE]
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
     legalName: "Alongkorn Yomkerd",
@@ -68,11 +65,10 @@ export const SITE_CONFIG: SiteConfig = {
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/about",
-    // [VERIFIED]: รหัส Business Manager (om-8653...)
     googleMerchantId: "8653147979146207424",
   },
 
-  // [07. CONTACT & ACCESS]: ช่องทางการเข้าถึงแบบ Official
+  // [07. CONTACT & ACCESS]
   contact: {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
@@ -83,7 +79,7 @@ export const SITE_CONFIG: SiteConfig = {
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (ตอบแชทไวตลอดวัน)",
   },
 
-  // [08. STRATEGIC LINKS]: โหนดเชื่อมโยงเครือข่ายดิจิทัล
+  // [08. STRATEGIC LINKS]
   links: {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
@@ -94,21 +90,22 @@ export const SITE_CONFIG: SiteConfig = {
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
-  // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ & IDs
+  // [09. BUSINESS METRICS]
   business: {
-    // [FIXED]: เปลี่ยนจาก Thailand เป็นชื่อจังหวัด เพื่อให้ Schema AddressLocality ทำงานถูกต้อง
-    location: "กำแพงเพชร", 
+    location: "กำแพงเพชร",
     region: "Northern Thailand (ภาคเหนือ)",
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",
+    // [UPDATE]: เพิ่มสถานะโหนดเพื่อให้ LayoutEngine แสดงผลถูกต้อง
+    status: "Stable",
     ids: {
       businessProfileId: "17539943195708104348",
       storeCode: "01162024004001766449",
     },
   },
 
-  // [10. ENGINE VERIFICATION]: การยืนยันสิทธิ์
+  // [10. ENGINE VERIFICATION]
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },

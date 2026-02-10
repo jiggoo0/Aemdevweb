@@ -12,15 +12,19 @@ import { notFound } from "next/navigation";
 import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
+
+// --- 2. SEO & Schema Protocols (Separated) ---
+// ✅ Import Metadata Generator จาก seo-utils
 import { constructMetadata } from "@/lib/seo-utils";
 
-// --- 2. SEO & Schema Protocols ---
-import JsonLd from "@/components/seo/JsonLd";
+// ✅ Import Schema Generators จาก schema
 import {
   generateLocalBusinessSchema,
   generateBreadcrumbSchema,
   generateSchemaGraph,
 } from "@/lib/schema";
+
+import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. Specialist Templates & Layout Engine ---
 import LocalTemplate from "@/components/templates/new-service-name/index";
@@ -38,7 +42,7 @@ export async function generateStaticParams() {
 /* [B] SEO METADATA ENGINE */
 export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
   const params = await props.params;
-  const area = AREA_NODES.find((a) => a.slug === params.slug);
+  const area: AreaNode | undefined = AREA_NODES.find((a) => a.slug === params.slug);
 
   if (!area) return { title: "404 Not Found" };
 
@@ -53,7 +57,7 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
 
 /**
  * [DETERMINISTIC ADAPTER]: แปลงข้อมูล AreaNode ให้รองรับโครงสร้าง TemplateMasterData
- * ช่วยให้สามารถใช้เทมเพลตมาตรฐาน (Corporate/SalePage) ร่วมกับข้อมูลพิกัดได้
+ * [FIX]: ระบุ Return Type เป็น TemplateMasterData เพื่อให้ ESLint ใน Termux ทำงานผ่าน
  */
 const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
   const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw: string) => ({
@@ -93,7 +97,8 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
 
 export default async function AreaDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
-  const area = AREA_NODES.find((a) => a.slug === params.slug);
+  const area: AreaNode | undefined = AREA_NODES.find((a) => a.slug === params.slug);
+
   if (!area) notFound();
 
   // Unified Schema Graph
@@ -107,12 +112,19 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
   ]);
 
   const renderTemplate = () => {
-    const templateData = adaptAreaToTemplateData(area);
+    // [STRICT_TYPING]: บังคับใช้ TemplateMasterData เพื่อยืนยันการใช้งาน Type ต่อ ESLint
+    const templateData: TemplateMasterData = adaptAreaToTemplateData(area);
+
     switch (area.templateSlug) {
-      case "corporate": return <CorporateTemplate data={templateData} />;
-      case "salepage": return <SalePageTemplate data={templateData} />;
+      case "corporate":
+        return <CorporateTemplate data={templateData} />;
+      case "salepage":
+        return <SalePageTemplate data={templateData} />;
       case "local":
-      default: return <LocalTemplate data={area} />;
+      case "new-service-name":
+        return <LocalTemplate data={area} />;
+      default:
+        return <LocalTemplate data={area} />;
     }
   };
 
@@ -120,6 +132,7 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
     <LayoutEngine spacing="none">
       <JsonLd data={fullSchema} />
       <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
+        {/* Node Status Indicator */}
         <div className="flex justify-center pt-24 pb-4">
           <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
             Area_Node_Sync: v{SITE_CONFIG.project.version}

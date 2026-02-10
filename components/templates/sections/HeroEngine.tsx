@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.5.1 (COMPATIBILITY_MODE)
+ * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.5.5 (STABILIZED)
  * [STRATEGY]: Outcome-Driven Architecture | Config-Led Defaults | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -23,7 +23,7 @@ interface HeroEngineProps {
 
   // --- Action Interface (Reverted to match Templates) ---
   readonly primaryActionLabel?: string;
-  readonly primaryHref?: string; // [NOTE]: ใช้ชื่อนี้เพื่อให้ตรงกับ Bio/Catalog/Hotel Templates
+  readonly primaryHref?: string;
   readonly secondaryActionLabel?: string;
   readonly secondaryHref?: string;
 

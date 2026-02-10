@@ -21,9 +21,9 @@ export default function robots(): MetadataRoute.Robots {
           "/case-studies/",
           "/areas/",
           "/blog/",
-          "/_next/static/",
-          "/_next/image", // [CRITICAL]: เปิดให้ Bot เข้าถึงระบบจัดการรูปภาพ
-          "/images/",      // เปิดให้เข้าถึงโฟลเดอร์รูปภาพ Assets
+          "/_next/static/", // [CRITICAL]: ให้ Bot อ่าน CSS/JS ได้
+          "/_next/image",   // [CRITICAL]: ให้ Bot อ่านรูปที่ Optimize แล้วได้
+          "/images/",       // เปิดให้เข้าถึง Folder Assets
         ],
         disallow: [
           "/api/",

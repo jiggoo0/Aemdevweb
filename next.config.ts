@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.5.5 (IDENTITY_LOCKED)
- * [STRATEGY]: INP Reduction | Zero-Jitter | Termux Optimized | ARM Stability
+ * [SYSTEM CORE]: NEXT.JS INFRASTRUCTURE CONFIG v17.5.5 (STABILIZED)
+ * [STRATEGY]: INP Reduction | Resource Resiliency | SEO High-Fidelity
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -20,38 +20,35 @@ const withMDX = nextMDX({
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   reactStrictMode: true,
-  // [PERFORMANCE]: บังคับใช้การบีบอัดข้อมูลเพื่อลดขนาด Payload (ลด LCP)
   compress: true, 
 
   experimental: {
     scrollRestoration: true,
-    // [INP FIX]: ปรับจูนเพื่อคืนทรัพยากรให้ Main Thread บน Android (Zero-Freeze)
     workerThreads: false,
     cpus: 1,
     optimizePackageImports: [
       "lucide-react", 
       "framer-motion", 
       "@radix-ui/react-slot",
-      "tailwindcss-animate" // [FIX]: ป้องกัน Build Error ใน Termux
+      "tailwindcss-animate"
     ],
     mdxRs: false,
   },
 
-  // [INP FIX]: บังคับ Transpile แพ็กเกจที่อาจทำให้เกิด Long Tasks
   transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
 
   /**
-   * [IMAGE_OPTIMIZATION_HUB]: ระบบจัดการรูปภาพเพื่อกู้คะแนน LCP
+   * [IMAGE_OPTIMIZATION_HUB]: ปรับจูนเพื่อความเสถียรของ Bot
    */
   images: {
-    // [STRATEGY]: กำหนด Sizes ให้สอดคล้องกับ vercel.json (CLS Mitigation)
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60,
-    unoptimized: false, // รันบน Vercel ควรเป็น false เพื่อใช้พลังของ Edge Image Optimization
-
+    
+    // [FIX]: เพิ่ม TTL เป็น 24 ชั่วโมง เพื่อลดการ Optimize รูปใหม่บ่อยๆ จน CPU Spike
+    minimumCacheTTL: 86400, 
+    
+    unoptimized: false, 
     remotePatterns: [
       {
         protocol: "https",
@@ -61,10 +58,23 @@ const nextConfig: NextConfig = {
   },
 
   /**
-   * [WEBPACK_ENGINE]: ปรับแต่งเพื่อลดค่า Interaction to Next Paint (INP)
+   * [ASSET_RESILIENCY]: ป้องกัน Bot เจอ Error 404 เวลาไฟล์ CSS เก่าหายหลัง Deploy
    */
+  async headers() {
+    return [
+      {
+        source: "/_next/static/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+    ];
+  },
+
   webpack: (config, { dev, isServer }) => {
-    // [INP FIX]: เพิ่มการทำ Tree Shaking ที่รัดกุมขึ้นในฝั่ง Client
     if (!isServer) {
       config.optimization.usedExports = true;
     }

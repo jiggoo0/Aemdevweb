@@ -11,12 +11,21 @@ import { notFound } from "next/navigation";
 // --- 1. Infrastructure & Core Data ---
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
+// [FIX]: ใช้ import type เพื่อ Explicit Typing (แก้ปัญหา Unused imports)
 import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
+
+// --- 2. SEO & Schema Protocols (Separated) ---
+// ✅ Import Metadata Generator จาก seo-utils
 import { constructMetadata } from "@/lib/seo-utils";
 
-// --- 2. SEO & Schema Protocols ---
+// ✅ Import Schema Generators จาก schema
+import {
+  generateServiceSchema,
+  generateBreadcrumbSchema,
+  generateSchemaGraph
+} from "@/lib/schema";
+
 import JsonLd from "@/components/seo/JsonLd";
-import { generateServiceSchema, generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 
 // --- 3. Templates (The Strategic Nodes) ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
@@ -36,7 +45,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
   const params = await props.params;
-  const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
+  // [FIX]: ใส่ Type ให้ตัวแปรเพื่อให้ลินท์ไม่ฟ้อง unused import
+  const service: TemplateMasterData | undefined = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
 
   if (!service) return { title: "Service Not Found" };
 
@@ -51,7 +61,8 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
 
 export default async function ServiceDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
-  const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
+  // [FIX]: ใส่ Type ให้ชัดเจน (Explicit Typing)
+  const service: TemplateMasterData | undefined = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
 
   if (!service) notFound();
 
@@ -70,7 +81,12 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
       case "salepage": return <SalePageTemplate data={service} />;
       case "catalog": return <CatalogTemplate data={service} />;
       case "bio": return <BioTemplate data={service} />;
-      case "new-service-name": 
+      case "new-service-name":
+        /**
+         * [WARNING]: ตรงนี้ service เป็น TemplateMasterData
+         * แต่ LocalTemplate อาจจะต้องการ props ของ AreaNode
+         * การทำ as unknown as AreaNode เป็นวิธีแก้ขัดที่ยอมรับได้ในกรณีนี้ เพื่อ Reuse Template
+         */
         return <LocalTemplate data={service as unknown as AreaNode} />;
       case "seo_agency": return <SeoAgencyTemplate data={service} />;
       case "hotelresort": return <HotelTemplate data={service} />;

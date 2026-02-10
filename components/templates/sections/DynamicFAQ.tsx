@@ -1,5 +1,5 @@
 /**
- * [SECTION COMPONENT]: DYNAMIC_FAQ_SYSTEM v17.4.5 (STABILIZED)
+ * [SECTION COMPONENT]: DYNAMIC_FAQ_SYSTEM v17.5.5 (STABILIZED)
  * [STRATEGY]: Schema-First | UX Resiliency | Neural Physics
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -29,27 +29,11 @@ const DynamicFAQ = ({
   description = "คำถามที่พบบ่อยเกี่ยวกับบริการและขั้นตอนการทำงาน",
   className,
 }: DynamicFAQProps) => {
-  // [SAFETY_CHECK]: หากไม่มีข้อมูล ไม่ต้องเรนเดอร์ Schema และ UI
+  // [SAFETY_CHECK]: หากไม่มีข้อมูล ไม่ต้องเรนเดอร์ UI
   if (!items || items.length === 0) return null;
-
-  // 1. [SEO]: สร้าง JSON-LD Schema
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: { "@type": "Answer", text: item.answer },
-    })),
-  };
 
   return (
     <section className={cn("py-24 md:py-32", className)}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-24">
           {/* Header Column */}

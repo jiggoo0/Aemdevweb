@@ -1,36 +1,24 @@
 /**
- * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v17.5.5 (STABILIZED)
- * [STRATEGY]: Structured Data Authority | XSS Defense | SSR Integrity
- * [MANDATE]: Zero-Any Policy | Readonly Immutability
+ * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v17.5.5 (SERVER_STABILIZED)
+ * [STRATEGY]: SSR Integrity | XSS Defense | Zero-Hydration Overhead
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-"use client";
+import React from "react";
 
-import React, { memo } from "react";
-
-/**
- * [INTERFACE]: JsonLdProps
- * ใช้ Readonly เพื่อความปลอดภัยของข้อมูลตาม System Mandate
- */
 interface JsonLdProps {
-  /**
-   * ข้อมูล Schema ที่ผ่านการประมวลผลจาก @/lib/schema.ts
-   * รองรับทั้งรูปแบบ Object เดี่ยว และ Array Graph (@graph)
-   */
   readonly data?: Record<string, unknown> | readonly Record<string, unknown>[];
 }
 
 /**
  * @component JsonLd
- * @description หน่วยฉีดข้อมูลโครงสร้าง (JSON-LD) เข้าสู่ DOM 
- * เพื่อสร้าง "Digital Identity" ให้กับ Search Engine Bots (Google/Bing)
+ * @description เรนเดอร์ JSON-LD บน Server 100% เพื่อให้ Bot เก็บข้อมูลได้เร็วที่สุด
+ * และลดภาระของ Main Thread บนอุปกรณ์พกพา (Termux/Mobile)
  */
-const JsonLd = ({ data }: JsonLdProps) => {
-  /* [A] SAFETY GUARD: ตรวจสอบความสมบูรณ์ของข้อมูลก่อนเรนเดอร์ */
+export default function JsonLd({ data }: JsonLdProps) {
+  /* [A] SAFETY GUARD */
   if (!data) return null;
 
-  // ตรวจสอบว่ามีข้อมูลจริงๆ (ป้องกัน Empty Object {} หรือ Array [])
   const hasContent = Array.isArray(data) 
     ? data.length > 0 
     : Object.keys(data).length > 0;
@@ -40,21 +28,14 @@ const JsonLd = ({ data }: JsonLdProps) => {
   return (
     <script
       type="application/ld+json"
+      suppressHydrationWarning // [FIX]: ป้องกัน Warning กรณี Browser Extensions แก้ไขข้อมูล
       dangerouslySetInnerHTML={{
         /**
-         * [B] SECURITY PROTOCOL: Unicode Escaping (XSS Defense)
-         * - แทนที่เครื่องหมาย < ด้วย Unicode (\u003c) เพื่อป้องกัน Malicious Script Injection
-         * - ข้อมูลจะถูกฉีดเข้าสู่ Server Side (SSR/SSG) เพื่อให้ Bot อ่านได้ทันทีตั้งแต่ Request แรก
+         * [B] SECURITY & PERFORMANCE
+         * Unicode escaping ป้องกันการแทรกสคริปต์ (\u003c แทน <)
          */
         __html: JSON.stringify(data).replace(/</g, "\\u003c"),
       }}
     />
   );
-};
-
-/**
- * @optimization React.memo
- * ข้อมูล SEO มักจะ Static ตามรอบการ Build หรือเปลี่ยนไม่บ่อย
- * การใช้ memo ช่วยลดภาระของ Main Thread ในช่วง Hydration ได้อย่างมีประสิทธิภาพ
- */
-export default memo(JsonLd);
+}

@@ -1,7 +1,7 @@
 ---
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-10 04:17:58
+last_audit: 2026-02-10 18:12:04
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
@@ -400,65 +400,48 @@ export type TemplateDataSource = "service" | "area" | "custom";
 ### CONFIG: area-nodes.ts
 ```typescript
 /**
- * [SYSTEM CORE]: AREA_NODES_DATA v17.6.0 (STRATEGIC_LOCATIONS)
+ * [SYSTEM CORE]: AREA_NODES_DATA v17.6.1 (STRATEGIC_LOCATIONS)
+ * [AI-MANDATE]: DO NOT ALTER 'templateSlug' VALUES OR SCHEMA STRUCTURE.
  * [STRATEGY]: Economic Hubs | Local Dominance | Business Intelligence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { AreaNode } from "@/types";
 
+/**
+ * @description คลังข้อมูลพิกัดยุทธศาสตร์สำหรับการทำ Local SEO และ Dynamic Rendering
+ * @note templateSlug "new-service-name" ถูกล็อคไว้สำหรับระบบ Local Authority ชุดใหม่ ห้ามเปลี่ยนกลับเป็น "local"
+ */
 export const AREA_NODES: readonly AreaNode[] = [
   // --- [TIER 1]: MASTER ECONOMIC HUBS (ศูนย์กลางเศรษฐกิจและเทคโนโลยี) ---
   {
     slug: "bangkok",
     province: "กรุงเทพมหานคร",
     templateSlug: "corporate",
-    title:
-      "รับทำเว็บไซต์ กรุงเทพฯ | มาตรฐาน Corporate ระดับสากล & Technical SEO สำหรับองค์กรชั้นนำ",
-    description:
-      "บริการ Web Development และ SEO Strategy สำหรับบริษัทที่ต้องการความเป็นเลิศในตลาดที่มีการแข่งขันสูงสุด",
-    longDescription:
-      "กรุงเทพฯ คือศูนย์กลางเศรษฐกิจดิจิทัล การมีแค่เว็บไซต์ไม่เพียงพอ แต่ต้องเป็นสินทรัพย์ดิจิทัลที่ทรงพลัง เราให้บริการออกแบบเว็บไซต์มาตรฐานองค์กร (Corporate Grade) และ E-commerce System ที่รองรับ Traffic มหาศาล พร้อมกลยุทธ์ SEO ที่วางแผนโดย Specialist เพื่อให้แบรนด์ของคุณครองตำแหน่งผู้นำในอุตสาหกรรม",
+    title: "รับทำเว็บไซต์ กรุงเทพฯ | มาตรฐาน Corporate ระดับสากล & Technical SEO สำหรับองค์กรชั้นนำ",
+    description: "บริการ Web Development และ SEO Strategy สำหรับบริษัทที่ต้องการความเป็นเลิศในตลาดที่มีการแข่งขันสูงสุด",
+    longDescription: "กรุงเทพฯ คือศูนย์กลางเศรษฐกิจดิจิทัล การมีแค่เว็บไซต์ไม่เพียงพอ แต่ต้องเป็นสินทรัพย์ดิจิทัลที่ทรงพลัง เราให้บริการออกแบบเว็บไซต์มาตรฐานองค์กร (Corporate Grade) และ E-commerce System ที่รองรับ Traffic มหาศาล พร้อมกลยุทธ์ SEO ที่วางแผนโดย Specialist เพื่อให้แบรนด์ของคุณครองตำแหน่งผู้นำในอุตสาหกรรม",
     districts: ["สาทร", "สีลม", "สุขุมวิท", "ทองหล่อ", "พระราม 9", "ลาดพร้าว", "ปทุมวัน", "บางนา"],
-    keywords: [
-      "รับทำเว็บไซต์ กรุงเทพ",
-      "บริษัท SEO กรุงเทพ",
-      "Web Development Bangkok",
-      "รับทำเว็บ Corporate",
-      "Enterprise SEO Solution",
-    ],
+    keywords: ["รับทำเว็บไซต์ กรุงเทพ", "บริษัท SEO กรุงเทพ", "Web Development Bangkok", "รับทำเว็บ Corporate", "Enterprise SEO Solution"],
     heroImage: "/images/areas/bangkok-node.webp",
     priority: 100,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ กรุงเทพฯ (Bangkok) | บริษัทพัฒนาเว็บไซต์และ SEO มาตรฐานสากล",
-    seoDescription:
-      "ยกระดับธุรกิจในกรุงเทพฯ ด้วยเว็บไซต์คุณภาพสูงและกลยุทธ์ SEO สายขาว เน้นผลลัพธ์เชิงธุรกิจและการเติบโตที่ยั่งยืน",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ กรุงเทพฯ (Bangkok) | บริษัทพัฒนาเว็บไซต์และ SEO มาตรฐานสากล",
+    seoDescription: "ยกระดับธุรกิจในกรุงเทพฯ ด้วยเว็บไซต์คุณภาพสูงและกลยุทธ์ SEO สายขาว เน้นผลลัพธ์เชิงธุรกิจและการเติบโตที่ยั่งยืน",
     coordinates: { lat: 13.7563, lng: 100.5018 },
   },
   {
     slug: "chon-buri",
     province: "ชลบุรี",
     templateSlug: "corporate",
-    title:
-      "รับทำเว็บไซต์ ชลบุรี พัทยา | โซลูชั่นเว็บอุตสาหกรรม EEC และธุรกิจท่องเที่ยวรองรับหลายภาษา",
-    description:
-      "ออกแบบเว็บไซต์โรงงาน อสังหาฯ และโรงแรม ในเขต EEC รองรับระบบ Multi-Language (ไทย-อังกฤษ-จีน-ญี่ปุ่น)",
-    longDescription:
-      "ชลบุรีคือประตูสู่การค้าโลกและ EEC ธุรกิจที่นี่ต้องการความน่าเชื่อถือระดับสากล เราเชี่ยวชาญการทำเว็บไซต์โรงงานอุตสาหกรรมที่เน้นข้อมูลทางเทคนิค และเว็บไซต์ธุรกิจบริการในพัทยาที่ต้องรองรับชาวต่างชาติ ด้วยโครงสร้าง SEO ที่เจาะกลุ่มเป้าหมายได้ทั่วโลก",
+    title: "รับทำเว็บไซต์ ชลบุรี พัทยา | โซลูชั่นเว็บอุตสาหกรรม EEC และธุรกิจท่องเที่ยวรองรับหลายภาษา",
+    description: "ออกแบบเว็บไซต์โรงงาน อสังหาฯ และโรงแรม ในเขต EEC รองรับระบบ Multi-Language (ไทย-อังกฤษ-จีน-ญี่ปุ่น)",
+    longDescription: "ชลบุรีคือประตูสู่การค้าโลกและ EEC ธุรกิจที่นี่ต้องการความน่าเชื่อถือระดับสากล เราเชี่ยวชาญการทำเว็บไซต์โรงงานอุตสาหกรรมที่เน้นข้อมูลทางเทคนิค และเว็บไซต์ธุรกิจบริการในพัทยาที่ต้องรองรับชาวต่างชาติ ด้วยโครงสร้าง SEO ที่เจาะกลุ่มเป้าหมายได้ทั่วโลก",
     districts: ["เมืองพัทยา", "ศรีราชา", "แหลมฉบัง", "อมตะนคร", "บางแสน", "สัตหีบ"],
-    keywords: [
-      "รับทำเว็บไซต์ ชลบุรี",
-      "รับทำเว็บไซต์ พัทยา",
-      "Industrial Web Design",
-      "ทำเว็บโรงงาน EEC",
-      "รับทำ SEO อสังหาริมทรัพย์",
-    ],
+    keywords: ["รับทำเว็บไซต์ ชลบุรี", "รับทำเว็บไซต์ พัทยา", "Industrial Web Design", "ทำเว็บโรงงาน EEC", "รับทำ SEO อสังหาริมทรัพย์"],
     heroImage: "/images/areas/chon-buri-node.webp",
     priority: 99,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ ชลบุรี พัทยา | ผู้เชี่ยวชาญเว็บอุตสาหกรรม EEC และธุรกิจส่งออก",
-    seoDescription:
-      "บริการทำเว็บไซต์ในชลบุรี ศรีราชา พัทยา เน้นมาตรฐานโรงงานและธุรกิจอินเตอร์ รองรับ SEO ภาษาต่างประเทศ",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ชลบุรี พัทยา | ผู้เชี่ยวชาญเว็บอุตสาหกรรม EEC และธุรกิจส่งออก",
+    seoDescription: "บริการทำเว็บไซต์ในชลบุรี ศรีราชา พัทยา เน้นมาตรฐานโรงงานและธุรกิจอินเตอร์ รองรับ SEO ภาษาต่างประเทศ",
     coordinates: { lat: 13.3611, lng: 100.9847 },
   },
   {
@@ -466,50 +449,29 @@ export const AREA_NODES: readonly AreaNode[] = [
     province: "เชียงใหม่",
     templateSlug: "corporate",
     title: "รับทำเว็บไซต์ เชียงใหม่ | Web Design ผสานอัตลักษณ์ Lanna Modern เพื่อธุรกิจไลฟ์สไตล์",
-    description:
-      "ยกระดับธุรกิจคาเฟ่ โรงแรม และ Wellness ด้วยดีไซน์ที่เล่าเรื่องราว พร้อมระบบ Booking Engine ที่ทรงประสิทธิภาพ",
-    longDescription:
-      "เชียงใหม่เมืองแห่งความคิดสร้างสรรค์ เว็บไซต์ของคุณต้องสะท้อน Taste และ Storytelling ที่โดดเด่น เราผสานงานดีไซน์ที่มีเอกลักษณ์เข้ากับเทคโนโลยีเว็บไซต์สมัยใหม่ ช่วยให้ธุรกิจ Boutique Hotel, Cafe และ Tour Agency สามารถเปลี่ยนผู้ชมให้กลายเป็นลูกค้าได้ทันที",
+    description: "ยกระดับธุรกิจคาเฟ่ โรงแรม และ Wellness ด้วยดีไซน์ที่เล่าเรื่องราว พร้อมระบบ Booking Engine ที่ทรงประสิทธิภาพ",
+    longDescription: "เชียงใหม่เมืองแห่งความคิดสร้างสรรค์ เว็บไซต์ของคุณต้องสะท้อน Taste และ Storytelling ที่โดดเด่น เราผสานงานดีไซน์ที่มีเอกลักษณ์เข้ากับเทคโนโลยีเว็บไซต์สมัยใหม่ ช่วยให้ธุรกิจ Boutique Hotel, Cafe และ Tour Agency สามารถเปลี่ยนผู้ชมให้กลายเป็นลูกค้าได้ทันที",
     districts: ["นิมมาน", "เมืองเก่า", "สันกำแพง", "แม่ริม", "หางดง"],
-    keywords: [
-      "รับทำเว็บไซต์ เชียงใหม่",
-      "Chiang Mai Web Design",
-      "ทำเว็บโรงแรม Boutique",
-      "รับทำ SEO ท่องเที่ยว",
-      "Creative Web Agency",
-    ],
+    keywords: ["รับทำเว็บไซต์ เชียงใหม่", "Chiang Mai Web Design", "ทำเว็บโรงแรม Boutique", "รับทำ SEO ท่องเที่ยว", "Creative Web Agency"],
     heroImage: "/images/areas/chiang-mai-node.webp",
     priority: 98,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บสวยมีสไตล์ สำหรับธุรกิจท่องเที่ยวและ Wellness",
-    seoDescription:
-      "บริการรับทำเว็บไซต์ในเชียงใหม่ ที่เข้าใจ DNA ของธุรกิจไลฟ์สไตล์ เน้นดีไซน์สวยงามและระบบจองที่ใช้งานง่าย",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บสวยมีสไตล์ สำหรับธุรกิจท่องเที่ยวและ Wellness",
+    seoDescription: "บริการรับทำเว็บไซต์ในเชียงใหม่ ที่เข้าใจ DNA ของธุรกิจไลฟ์สไตล์ เน้นดีไซน์สวยงามและระบบจองที่ใช้งานง่าย",
     coordinates: { lat: 18.7883, lng: 98.9853 },
   },
   {
     slug: "phuket",
     province: "ภูเก็ต",
     templateSlug: "corporate",
-    title:
-      "รับทำเว็บไซต์ ภูเก็ต | Premium Web Design สำหรับธุรกิจ Luxury และตลาดนักท่องเที่ยว High-End",
-    description:
-      "สร้างภาพลักษณ์ World-Class ให้กับโรงแรม วิลล่า และธุรกิจ Yacht ด้วยเว็บไซต์และ SEO มาตรฐานสากล",
-    longDescription:
-      "ภูเก็ตคือตลาดระดับโลกที่ต้องการความเป็นเลิศ เราให้บริการออกแบบเว็บไซต์ Luxury ที่เน้น Visual Experience ระดับสูง สำหรับธุรกิจ Real Estate, 5-Star Hospitality และ Marine Tourism พร้อมทำ SEO ภาษาอังกฤษ/รัสเซีย เพื่อดึงดูดกลุ่มลูกค้าที่มีกำลังซื้อสูงโดยตรง",
+    title: "รับทำเว็บไซต์ ภูเก็ต | Premium Web Design สำหรับธุรกิจ Luxury และตลาดนักท่องเที่ยว High-End",
+    description: "สร้างภาพลักษณ์ World-Class ให้กับโรงแรม วิลล่า และธุรกิจ Yacht ด้วยเว็บไซต์และ SEO มาตรฐานสากล",
+    longDescription: "ภูเก็ตคือตลาดระดับโลกที่ต้องการความเป็นเลิศ เราให้บริการออกแบบเว็บไซต์ Luxury ที่เน้น Visual Experience ระดับสูง สำหรับธุรกิจ Real Estate, 5-Star Hospitality และ Marine Tourism พร้อมทำ SEO ภาษาอังกฤษ/รัสเซีย เพื่อดึงดูดกลุ่มลูกค้าที่มีกำลังซื้อสูงโดยตรง",
     districts: ["ป่าตอง", "กะรน", "เชิงทะเล (Laguna)", "ราไวย์", "เมืองภูเก็ต"],
-    keywords: [
-      "รับทำเว็บไซต์ ภูเก็ต",
-      "Phuket Web Design",
-      "Luxury Real Estate Website",
-      "ทำเว็บโรงแรมภูเก็ต",
-      "International SEO",
-    ],
+    keywords: ["รับทำเว็บไซต์ ภูเก็ต", "Phuket Web Design", "Luxury Real Estate Website", "ทำเว็บโรงแรมภูเก็ต", "International SEO"],
     heroImage: "/images/areas/phuket-node.webp",
     priority: 97,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ ภูเก็ต (Phuket) | บริการทำเว็บ Luxury Hotel และอสังหาฯ ระดับโลก",
-    seoDescription:
-      "ผู้เชี่ยวชาญด้าน Premium Website ในภูเก็ต เจาะตลาดชาวต่างชาติและนักลงทุน ด้วยดีไซน์ที่หรูหราและ SEO ประสิทธิภาพสูง",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ภูเก็ต (Phuket) | บริการทำเว็บ Luxury Hotel และอสังหาฯ ระดับโลก",
+    seoDescription: "ผู้เชี่ยวชาญด้าน Premium Website ในภูเก็ต เจาะตลาดชาวต่างชาติและนักลงทุน ด้วยดีไซน์ที่หรูหราและ SEO ประสิทธิภาพสูง",
     coordinates: { lat: 7.8804, lng: 98.3923 },
   },
 
@@ -519,50 +481,29 @@ export const AREA_NODES: readonly AreaNode[] = [
     province: "ขอนแก่น",
     templateSlug: "salepage",
     title: "รับทำเว็บไซต์ ขอนแก่น | Digital Hub แห่งอีสาน โซลูชั่นการตลาดออนไลน์และ Sale Page",
-    description:
-      "เครื่องมือปิดการขายสำหรับ Smart SME และธุรกิจคลินิกความงาม เน้นความรวดเร็วและแม่นยำด้วย Conversion Focus",
-    longDescription:
-      "ขอนแก่นคือศูนย์กลาง Smart City ของอีสาน ธุรกิจที่นี่ต้องปรับตัวไว เรานำเสนอเครื่องมือการตลาดอย่าง Sale Page (High Conversion) และระบบเว็บไซต์ที่รองรับการยิงโฆษณาเต็มรูปแบบ เหมาะสำหรับธุรกิจความงาม คลินิก และ SME ที่ต้องการสร้างยอดขายผ่านช่องทางออนไลน์อย่างจริงจัง",
+    description: "เครื่องมือปิดการขายสำหรับ Smart SME และธุรกิจคลินิกความงาม เน้นความรวดเร็วและแม่นยำด้วย Conversion Focus",
+    longDescription: "ขอนแก่นคือศูนย์กลาง Smart City ของอีสาน ธุรกิจที่นี่ต้องปรับตัวไว เรานำเสนอเครื่องมือการตลาดอย่าง Sale Page (High Conversion) และระบบเว็บไซต์ที่รองรับการยิงโฆษณาเต็มรูปแบบ เหมาะสำหรับธุรกิจความงาม คลินิก และ SME ที่ต้องการสร้างยอดขายผ่านช่องทางออนไลน์อย่างจริงจัง",
     districts: ["เมืองขอนแก่น", "มหาวิทยาลัยขอนแก่น", "ชุมแพ", "บ้านไผ่"],
-    keywords: [
-      "รับทำเว็บไซต์ ขอนแก่น",
-      "รับทำ Sale Page อีสาน",
-      "Digital Marketing ขอนแก่น",
-      "ทำเว็บคลินิกความงาม",
-      "SME Web Solution",
-    ],
+    keywords: ["รับทำเว็บไซต์ ขอนแก่น", "รับทำ Sale Page อีสาน", "Digital Marketing ขอนแก่น", "ทำเว็บคลินิกความงาม", "SME Web Solution"],
     heroImage: "/images/areas/khon-kaen-node.webp",
     priority: 95,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ ขอนแก่น | โซลูชั่น Sale Page และการตลาดออนไลน์สำหรับ Smart SME",
-    seoDescription:
-      "บริการทำเว็บไซต์และ Sale Page ในขอนแก่น ออกแบบมาเพื่อปิดการขายและรองรับ Digital Marketing เต็มรูปแบบ",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ขอนแก่น | โซลูชั่น Sale Page และการตลาดออนไลน์สำหรับ Smart SME",
+    seoDescription: "บริการทำเว็บไซต์และ Sale Page ในขอนแก่น ออกแบบมาเพื่อปิดการขายและรองรับ Digital Marketing เต็มรูปแบบ",
     coordinates: { lat: 16.4322, lng: 102.8236 },
   },
   {
     slug: "korat",
     province: "นครราชสีมา",
     templateSlug: "corporate",
-    title:
-      "รับทำเว็บไซต์ โคราช | ฐานข้อมูลสินค้า (E-Catalog) และเว็บธุรกิจสำหรับโรงงานและผู้รับเหมา",
-    description:
-      "ระบบจัดการสต็อกสินค้าออนไลน์และเว็บไซต์องค์กร สร้างความน่าเชื่อถือให้ธุรกิจรับเหมาและ Supply Chain",
-    longDescription:
-      "นครราชสีมาคือประตูสู่อีสานและฐานการผลิตสำคัญ เราช่วยยกระดับธุรกิจรับเหมาก่อสร้าง ร้านวัสดุ และโรงงาน ด้วยระบบ E-Catalog ที่ช่วยบริหารจัดการข้อมูลสินค้าจำนวนมาก และเว็บไซต์ Corporate ที่สร้างความมั่นใจให้กับคู่ค้าและ Supplier",
+    title: "รับทำเว็บไซต์ โคราช | ฐานข้อมูลสินค้า (E-Catalog) และเว็บธุรกิจสำหรับโรงงานและผู้รับเหมา",
+    description: "ระบบจัดการสต็อกสินค้าออนไลน์และเว็บไซต์องค์กร สร้างความน่าเชื่อถือให้ธุรกิจรับเหมาและ Supply Chain",
+    longDescription: "นครราชสีมาคือประตูสู่อีสานและฐานการผลิตสำคัญ เราช่วยยกระดับธุรกิจรับเหมาก่อสร้าง ร้านวัสดุ และโรงงาน ด้วยระบบ E-Catalog ที่ช่วยบริหารจัดการข้อมูลสินค้าจำนวนมาก และเว็บไซต์ Corporate ที่สร้างความมั่นใจให้กับคู่ค้าและ Supplier",
     districts: ["เมืองนครราชสีมา", "ปากช่อง (เขาใหญ่)", "สีคิ้ว", "วังน้ำเขียว"],
-    keywords: [
-      "รับทำเว็บไซต์ โคราช",
-      "รับทำเว็บไซต์ นครราชสีมา",
-      "ทำเว็บรับเหมาก่อสร้าง",
-      "ระบบ E-Catalog โคราช",
-      "เว็บโรงงานอุตสาหกรรม",
-    ],
+    keywords: ["รับทำเว็บไซต์ โคราช", "รับทำเว็บไซต์ นครราชสีมา", "ทำเว็บรับเหมาก่อสร้าง", "ระบบ E-Catalog โคราช", "เว็บโรงงานอุตสาหกรรม"],
     heroImage: "/images/areas/korat-node.webp",
     priority: 94,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ โคราช (นครราชสีมา) | ออกแบบเว็บโรงงานและระบบจัดการสินค้าออนไลน์",
-    seoDescription:
-      "บริการรับทำเว็บไซต์ในโคราช เขาใหญ่ เน้นระบบ E-Catalog และเว็บไซต์องค์กร เพื่อสร้างความน่าเชื่อถือทางธุรกิจ",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ โคราช (นครราชสีมา) | ออกแบบเว็บโรงงานและระบบจัดการสินค้าออนไลน์",
+    seoDescription: "บริการรับทำเว็บไซต์ในโคราช เขาใหญ่ เน้นระบบ E-Catalog และเว็บไซต์องค์กร เพื่อสร้างความน่าเชื่อถือทางธุรกิจ",
     coordinates: { lat: 14.9759, lng: 102.1177 },
   },
 
@@ -570,74 +511,46 @@ export const AREA_NODES: readonly AreaNode[] = [
   {
     slug: "nakhon-sawan",
     province: "นครสวรรค์",
-    templateSlug: "local",
+    templateSlug: "new-service-name", // [LOCKED]: DO NOT MOVE
     title: "รับทำเว็บไซต์ นครสวรรค์ | ผู้นำตลาดท้องถิ่นด้วย Local SEO และระบบค้นหา Google Maps",
-    description:
-      "เปลี่ยนร้านค้าดั้งเดิมให้เป็นผู้นำตลาดดิจิทัล ดักจับลูกค้าในพื้นที่ด้วยการค้นหาที่แม่นยำ",
-    longDescription:
-      "ในยุคที่คนนครสวรรค์ค้นหาทุกอย่างผ่านมือถือ ธุรกิจของคุณต้องเป็น 'ตัวเลือกแรก' ที่ลูกค้าเห็น เราเชี่ยวชาญการทำ Local SEO และปรับแต่ง Google Business Profile เพื่อดึง Traffic จากออนไลน์เข้าสู่หน้าร้านจริง เหมาะสำหรับร้านอาหาร คลินิก และธุรกิจบริการ",
+    description: "เปลี่ยนร้านค้าดั้งเดิมให้เป็นผู้นำตลาดดิจิทัล ดักจับลูกค้าในพื้นที่ด้วยการค้นหาที่แม่นยำ",
+    longDescription: "ในยุคที่คนนครสวรรค์ค้นหาทุกอย่างผ่านมือถือ ธุรกิจของคุณต้องเป็น 'ตัวเลือกแรก' ที่ลูกค้าเห็น เราเชี่ยวชาญการทำ Local SEO และปรับแต่ง Google Business Profile เพื่อดึง Traffic จากออนไลน์เข้าสู่หน้าร้านจริง เหมาะสำหรับร้านอาหาร คลินิก และธุรกิจบริการ",
     districts: ["เมืองนครสวรรค์", "ลาดยาว", "ตาคลี", "พยุหะคีรี"],
-    keywords: [
-      "รับทำเว็บไซต์ นครสวรรค์",
-      "Local SEO นครสวรรค์",
-      "ปักหมุด Google Maps",
-      "Digital Transformation",
-    ],
+    keywords: ["รับทำเว็บไซต์ นครสวรรค์", "Local SEO นครสวรรค์", "ปักหมุด Google Maps", "Digital Transformation"],
     heroImage: "/images/areas/nakhon-sawan-node.webp",
     priority: 90,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ นครสวรรค์ | ยึดพื้นที่การขายในจังหวัดด้วย Local SEO และเว็บไซต์",
-    seoDescription:
-      "ช่วยร้านค้าในนครสวรรค์ให้ติดอันดับการค้นหา Google Maps เพิ่มยอดขายหน้าร้านด้วยกลยุทธ์ Local Digital Marketing",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ นครสวรรค์ | ยึดพื้นที่การขายในจังหวัดด้วย Local SEO และเว็บไซต์",
+    seoDescription: "ช่วยร้านค้าในนครสวรรค์ให้ติดอันดับการค้นหา Google Maps เพิ่มยอดขายหน้าร้านด้วยกลยุทธ์ Local Digital Marketing",
     coordinates: { lat: 15.7042, lng: 100.1372 },
   },
   {
     slug: "kamphaeng-phet",
     province: "กำแพงเพชร",
-    templateSlug: "local",
-    title:
-      "รับทำเว็บไซต์ กำแพงเพชร | ยกระดับธุรกิจเกษตรและร้านค้า ด้วยเว็บไซต์ราคาที่คุ้มค่าการลงทุน",
-    description:
-      "เริ่มต้นสร้างตัวตนบนโลกออนไลน์อย่างมืออาชีพ ด้วยงบประมาณที่เข้าถึงได้ สำหรับ SME ยุคใหม่",
-    longDescription:
-      "เปลี่ยนภาพลักษณ์ธุรกิจท้องถิ่นให้ดูทันสมัย เราให้บริการทำเว็บไซต์สำหรับธุรกิจเกษตรสมัยใหม่ (Smart Farm) ร้านทอง และผู้ประกอบการรายย่อยในกำแพงเพชร เพื่อสร้างหน้าร้านออนไลน์ที่ดูดี น่าเชื่อถือ และใช้งานง่าย ในราคาที่สมเหตุสมผลกับการเริ่มต้น",
+    templateSlug: "new-service-name", // [LOCKED]: DO NOT MOVE
+    title: "รับทำเว็บไซต์ กำแพงเพชร | ยกระดับธุรกิจเกษตรและร้านค้า ด้วยเว็บไซต์ราคาที่คุ้มค่าการลงทุน",
+    description: "เริ่มต้นสร้างตัวตนบนโลกออนไลน์อย่างมืออาชีพ ด้วยงบประมาณที่เข้าถึงได้ สำหรับ SME ยุคใหม่",
+    longDescription: "เปลี่ยนภาพลักษณ์ธุรกิจท้องถิ่นให้ดูทันสมัย เราให้บริการทำเว็บไซต์สำหรับธุรกิจเกษตรสมัยใหม่ (Smart Farm) ร้านทอง และผู้ประกอบการรายย่อยในกำแพงเพชร เพื่อสร้างหน้าร้านออนไลน์ที่ดูดี น่าเชื่อถือ และใช้งานง่าย ในราคาที่สมเหตุสมผลกับการเริ่มต้น",
     districts: ["เมืองกำแพงเพชร", "ขาณุวรลักษบุรี", "คลองขลุง"],
-    keywords: [
-      "รับทำเว็บไซต์ กำแพงเพชร",
-      "ทำเว็บร้านค้าชุมชน",
-      "Smart Farm Website",
-      "SME Digital",
-    ],
+    keywords: ["รับทำเว็บไซต์ กำแพงเพชร", "ทำเว็บร้านค้าชุมชน", "Smart Farm Website", "SME Digital"],
     heroImage: "/images/areas/kamphaeng-phet-node.webp",
     priority: 85,
     seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ กำแพงเพชร | สร้างตัวตนธุรกิจออนไลน์ มาตรฐานมืออาชีพ",
-    seoDescription:
-      "บริการทำเว็บไซต์ในกำแพงเพชร เน้นความคุ้มค่าและภาพลักษณ์ที่ทันสมัย ช่วยธุรกิจท้องถิ่นเข้าสู่ตลาดออนไลน์ได้ง่ายขึ้น",
+    seoDescription: "บริการทำเว็บไซต์ในกำแพงเพชร เน้นความคุ้มค่าและภาพลักษณ์ที่ทันสมัย ช่วยธุรกิจท้องถิ่นเข้าสู่ตลาดออนไลน์ได้ง่ายขึ้น",
     coordinates: { lat: 16.4828, lng: 99.5227 },
   },
   {
     slug: "sukhothai",
     province: "สุโขทัย",
-    templateSlug: "local",
-    title:
-      "รับทำเว็บไซต์ สุโขทัย | Digital Storytelling สำหรับสินค้า OTOP และการท่องเที่ยวเชิงวัฒนธรรม",
-    description:
-      "เพิ่มมูลค่าสินค้าชุมชนและโฮมสเตย์ ด้วยเว็บไซต์ที่เน้นการเล่าเรื่อง (Content Marketing) และอัตลักษณ์ไทย",
-    longDescription:
-      "สุโขทัยมีต้นทุนทางวัฒนธรรมที่สูงลิ่ว เราช่วยนำเสนอคุณค่าเหล่านั้นผ่านเว็บไซต์ที่เน้น Storytelling เพื่อยกระดับสินค้า OTOP งานหัตถกรรม และที่พักเชิงวัฒนธรรม ให้ดึงดูดนักท่องเที่ยวและผู้ซื้อจากทั่วประเทศ เพิ่มมูลค่าสินค้าด้วยภาพลักษณ์ที่ดี",
+    templateSlug: "new-service-name", // [LOCKED]: DO NOT MOVE
+    title: "รับทำเว็บไซต์ สุโขทัย | Digital Storytelling สำหรับสินค้า OTOP และการท่องเที่ยวเชิงวัฒนธรรม",
+    description: "เพิ่มมูลค่าสินค้าชุมชนและโฮมสเตย์ ด้วยเว็บไซต์ที่เน้นการเล่าเรื่อง (Content Marketing) และอัตลักษณ์ไทย",
+    longDescription: "สุโขทัยมีต้นทุนทางวัฒนธรรมที่สูงลิ่ว เราช่วยนำเสนอคุณค่าเหล่านั้นผ่านเว็บไซต์ที่เน้น Storytelling เพื่อยกระดับสินค้า OTOP งานหัตถกรรม และที่พักเชิงวัฒนธรรม ให้ดึงดูดนักท่องเที่ยวและผู้ซื้อจากทั่วประเทศ เพิ่มมูลค่าสินค้าด้วยภาพลักษณ์ที่ดี",
     districts: ["เมืองสุโขทัย", "ศรีสัชนาลัย", "กงไกรลาศ", "สวรรคโลก"],
-    keywords: [
-      "รับทำเว็บไซต์ สุโขทัย",
-      "ทำเว็บ OTOP",
-      "Content Marketing สุโขทัย",
-      "เว็บท่องเที่ยวชุมชน",
-    ],
+    keywords: ["รับทำเว็บไซต์ สุโขทัย", "ทำเว็บ OTOP", "Content Marketing สุโขทัย", "เว็บท่องเที่ยวชุมชน"],
     heroImage: "/images/areas/sukhothai-node.webp",
     priority: 84,
-    seoTitle:
-      "AEMDEVWEB | รับทำเว็บไซต์ สุโขทัย | สร้างมูลค่าเพิ่มให้สินค้า OTOP และธุรกิจท่องเที่ยว",
-    seoDescription:
-      "รับออกแบบเว็บไซต์ในสุโขทัย เน้นการเล่าเรื่องราวเพื่อเพิ่มมูลค่าสินค้าชุมชนและดึงดูดนักท่องเที่ยว",
+    seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ สุโขทัย | สร้างมูลค่าเพิ่มให้สินค้า OTOP และธุรกิจท่องเที่ยว",
+    seoDescription: "รับออกแบบเว็บไซต์ในสุโขทัย เน้นการเล่าเรื่องราวเพื่อเพิ่มมูลค่าสินค้าชุมชนและดึงดูดนักท่องเที่ยว",
     coordinates: { lat: 17.0078, lng: 99.8235 },
   },
   {
@@ -646,68 +559,43 @@ export const AREA_NODES: readonly AreaNode[] = [
     templateSlug: "corporate",
     title: "รับทำเว็บไซต์ ตาก แม่สอด | ศูนย์กลาง Logistics และการค้าชายแดน (Cross-border Trade)",
     description: "ระบบเว็บไซต์รองรับธุรกิจนำเข้า-ส่งออก และขนส่งสินค้า พร้อมฟังก์ชันหลายภาษา",
-    longDescription:
-      "ในพื้นที่เศรษฐกิจพิเศษตาก-แม่สอด เว็บไซต์คือเครื่องมือเจรจาธุรกิจที่สำคัญ เราเชี่ยวชาญการทำเว็บสำหรับบริษัท Logistics ชิปปิ้ง และโรงงานชายแดน ที่ต้องการระบบจัดการข้อมูลที่แม่นยำ และรองรับภาษาเพื่อนบ้านเพื่อการสื่อสารที่ไร้รอยต่อ",
+    longDescription: "ในพื้นที่เศรษฐกิจพิเศษตาก-แม่สอด เว็บไซต์คือเครื่องมือเจรจาธุรกิจที่สำคัญ เราเชี่ยวชาญการทำเว็บสำหรับบริษัท Logistics ชิปปิ้ง และโรงงานชายแดน ที่ต้องการระบบจัดการข้อมูลที่แม่นยำ และรองรับภาษาเพื่อนบ้านเพื่อการสื่อสารที่ไร้รอยต่อ",
     districts: ["เมืองตาก", "แม่สอด", "แม่ระมาด", "พบพระ"],
-    keywords: [
-      "รับทำเว็บไซต์ ตาก",
-      "รับทำเว็บไซต์ แม่สอด",
-      "ทำเว็บ Logistics",
-      "เว็บนำเข้าส่งออก",
-      "Cross-border Web Solution",
-    ],
+    keywords: ["รับทำเว็บไซต์ ตาก", "รับทำเว็บไซต์ แม่สอด", "ทำเว็บ Logistics", "เว็บนำเข้าส่งออก", "Cross-border Web Solution"],
     heroImage: "/images/areas/tak-node.webp",
     priority: 83,
     seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ ตาก แม่สอด | โซลูชั่นเว็บ Logistics และการค้าชายแดน",
-    seoDescription:
-      "บริการทำเว็บไซต์ในตากและแม่สอด รองรับธุรกิจขนส่งและนำเข้า-ส่งออก ด้วยระบบมาตรฐานที่รองรับการค้าระหว่างประเทศ",
+    seoDescription: "บริการทำเว็บไซต์ในตากและแม่สอด รองรับธุรกิจขนส่งและนำเข้า-ส่งออก ด้วยระบบมาตรฐานที่รองรับการค้าระหว่างประเทศ",
     coordinates: { lat: 16.8831, lng: 99.1258 },
   },
   {
     slug: "phichit",
     province: "พิจิตร",
-    templateSlug: "local",
+    templateSlug: "new-service-name", // [LOCKED]: DO NOT MOVE
     title: "รับทำเว็บไซต์ พิจิตร | Agri-Business Solution ยกระดับธุรกิจเกษตรและโรงสีสู่ตลาดออนไลน์",
-    description:
-      "สร้างความน่าเชื่อถือให้ธุรกิจโรงสีและร้านวัสดุการเกษตร ด้วยเว็บไซต์ที่ค้นหาเจอง่ายบน Google",
-    longDescription:
-      "ยกระดับธุรกิจเกษตรดั้งเดิมสู่ Agri-Business ยุคใหม่ เราช่วยสร้างเว็บไซต์ให้โรงสีข้าว ร้านจำหน่ายปุ๋ยยา และธุรกิจท้องถิ่นในพิจิตร ให้มีตัวตนบนโลกออนไลน์ที่น่าเชื่อถือ เพิ่มช่องทางการติดต่อและขยายฐานลูกค้าได้กว้างไกลกว่าเดิม",
+    description: "สร้างความน่าเชื่อถือให้ธุรกิจโรงสีและร้านวัสดุการเกษตร ด้วยเว็บไซต์ที่ค้นหาเจอง่ายบน Google",
+    longDescription: "ยกระดับธุรกิจเกษตรดั้งเดิมสู่ Agri-Business ยุคใหม่ เราช่วยสร้างเว็บไซต์ให้โรงสีข้าว ร้านจำหน่ายปุ๋ยยา และธุรกิจท้องถิ่นในพิจิตร ให้มีตัวตนบนโลกออนไลน์ที่น่าเชื่อถือ เพิ่มช่องทางการติดต่อและขยายฐานลูกค้าได้กว้างไกลกว่าเดิม",
     districts: ["เมืองพิจิตร", "ตะพานหิน", "บางมูลนาก", "โพทะเล"],
-    keywords: [
-      "รับทำเว็บไซต์ พิจิตร",
-      "ทำเว็บธุรกิจเกษตร",
-      "Agri-Business Website",
-      "ปักหมุดร้านพิจิตร",
-    ],
+    keywords: ["รับทำเว็บไซต์ พิจิตร", "ทำเว็บธุรกิจเกษตร", "Agri-Business Website", "ปักหมุดร้านพิจิตร"],
     heroImage: "/images/areas/phichit-node.webp",
     priority: 82,
     seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ พิจิตร | ยกระดับธุรกิจเกษตรและร้านค้าท้องถิ่นสู่ออนไลน์",
-    seoDescription:
-      "รับทำเว็บไซต์ในพิจิตร ช่วยธุรกิจโรงสีและเกษตรกรรมให้เข้าถึงตลาดออนไลน์ สร้างความน่าเชื่อถือและยอดขาย",
+    seoDescription: "รับทำเว็บไซต์ในพิจิตร ช่วยธุรกิจโรงสีและเกษตรกรรมให้เข้าถึงตลาดออนไลน์ สร้างความน่าเชื่อถือและยอดขาย",
     coordinates: { lat: 16.4428, lng: 100.3501 },
   },
   {
     slug: "uttaradit",
     province: "อุตรดิตถ์",
-    templateSlug: "local",
-    title:
-      "รับทำเว็บไซต์ อุตรดิตถ์ | จากสินค้าท้องถิ่นสู่ E-commerce ระดับประเทศ (Local to Global)",
-    description:
-      "ขยายตลาดสินค้าเกษตรแปรรูปและของฝาก ด้วยระบบร้านค้าออนไลน์ที่จัดการออเดอร์ได้เอง 24 ชม.",
-    longDescription:
-      "ปลดล็อกศักยภาพสินค้าอุตรดิตถ์ด้วยระบบ E-commerce เราช่วยผู้ประกอบการสินค้าแปรรูปและของฝาก สร้างหน้าร้านออนไลน์ที่สามารถรับชำระเงินและจัดการสต็อกได้เอง เปลี่ยนการขายแค่ในจังหวัด เป็นการส่งออกสินค้าดีๆ ไปสู่ลูกค้าทั่วประเทศ",
+    templateSlug: "new-service-name", // [LOCKED]: DO NOT MOVE
+    title: "รับทำเว็บไซต์ อุตรดิตถ์ | จากสินค้าท้องถิ่นสู่ E-commerce ระดับประเทศ (Local to Global)",
+    description: "ขยายตลาดสินค้าเกษตรแปรรูปและของฝาก ด้วยระบบร้านค้าออนไลน์ที่จัดการออเดอร์ได้เอง 24 ชม.",
+    longDescription: "ปลดล็อกศักยภาพสินค้าอุตรดิตถ์ด้วยระบบ E-commerce เราช่วยผู้ประกอบการสินค้าแปรรูปและของฝาก สร้างหน้าร้านออนไลน์ที่สามารถรับชำระเงินและจัดการสต็อกได้เอง เปลี่ยนการขายแค่ในจังหวัด เป็นการส่งออกสินค้าดีๆ ไปสู่ลูกค้าทั่วประเทศ",
     districts: ["เมืองอุตรดิตถ์", "ลับแล", "พิชัย", "น้ำปาด"],
-    keywords: [
-      "รับทำเว็บไซต์ อุตรดิตถ์",
-      "ทำเว็บขายของฝาก",
-      "E-commerce อุตรดิตถ์",
-      "เว็บสินค้าแปรรูป",
-    ],
+    keywords: ["รับทำเว็บไซต์ อุตรดิตถ์", "ทำเว็บขายของฝาก", "E-commerce อุตรดิตถ์", "เว็บสินค้าแปรรูป"],
     heroImage: "/images/areas/uttaradit-node.webp",
     priority: 81,
     seoTitle: "AEMDEVWEB | รับทำเว็บไซต์ อุตรดิตถ์ | ระบบร้านค้าออนไลน์สำหรับสินค้า OTOP และของฝาก",
-    seoDescription:
-      "บริการทำเว็บไซต์ E-commerce ในอุตรดิตถ์ ช่วยขยายตลาดสินค้าท้องถิ่นสู่ระดับประเทศ ด้วยระบบขายของออนไลน์ที่ใช้งานง่าย",
+    seoDescription: "บริการทำเว็บไซต์ E-commerce ในอุตรดิตถ์ ช่วยขยายตลาดสินค้าท้องถิ่นสู่ระดับประเทศ ด้วยระบบขายของออนไลน์ที่ใช้งานง่าย",
     coordinates: { lat: 17.6256, lng: 100.0993 },
   },
 ] as const;
@@ -726,8 +614,8 @@ export const getAreaBySlug = (slug: string) => AREA_NODES.find((area) => area.sl
 ### CONFIG: master-registry.ts
 ```typescript
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.1 (REFACTORED_FINAL)
- * [STRATEGY]: Color Psychology | Business Alignment | Visual Hierarchy
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.2 (IDENTITY_LOCKED)
+ * [STRATEGY]: Color Psychology | Business Alignment | PSI Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -748,25 +636,19 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/seo-agency-node.webp",
     templateSlug: "seo_agency",
     category: "business",
-
-    // Commercial Specs
     price: "19,500",
     priceValue: 19500,
     currency: "THB",
     unit: "รายเดือน",
-
-    // Theme: Growth & Technology (Emerald / Dark Mode)
     theme: {
       primary: "#10b981",
       secondary: "#064e3b",
       background: "bg-slate-950",
       gradient: "from-emerald-500/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Technical Audit: ตรวจสุขภาพเว็บและแก้ไขจุดบอดทางเทคนิคครบวงจร",
-      "Keyword Strategy: วางแผนคำค้นหาที่เน้นยอดขาย (Commercial Intent) ไม่ใช่แค่ยอดวิว",
+      "Keyword Strategy: วางแผนคำค้นหาที่เน้นยอดขาย (Commercial Intent)",
       "Organic Growth: สร้างฐานลูกค้าที่เข้ามาเองตามธรรมชาติอย่างยั่งยืน",
     ],
     coreFeatures: [
@@ -814,22 +696,16 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/salepage-node.webp",
     templateSlug: "salepage",
     category: "landing",
-
-    // Commercial Specs
     price: "3,500",
     priceValue: 3500,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Urgency & Conversion (Rose Red / Clean White)
     theme: {
       primary: "#ef4444",
       secondary: "#7f1d1d",
       background: "bg-white",
       gradient: "from-rose-50 to-white",
     },
-
-    // Content Data
     benefits: [
       "Performance: โหลดเร็วทันใจ ลดโอกาสลูกค้ากดปิดหนี (Bounce Rate)",
       "Ad-Ready: โครงสร้างพร้อมสำหรับการติด Pixel และ Conversion API",
@@ -858,11 +734,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
         answer:
           "เพราะเราใช้โครงสร้างมาตรฐานเดียวกับบริษัทใหญ่ แต่ตัดทอนฟีเจอร์ที่ไม่จำเป็นออก เพื่อให้คุณได้ราคาที่คุ้มค่าที่สุดครับ",
       },
-      {
-        question: "เหมาะกับใคร?",
-        answer:
-          "เหมาะกับธุรกิจที่เน้นยิงโฆษณา หรือต้องการหน้าเว็บที่ส่งลิงก์แล้วปิดการขายได้เลยครับ",
-      },
     ],
     keywords: ["รับทำ Sale Page", "Landing Page ยิงแอด", "เว็บหน้าเดียว", "หน้าปิดการขาย"],
     priority: 1,
@@ -880,22 +751,16 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     image: "/images/service/corporate-node.webp",
     templateSlug: "corporate",
     category: "business",
-
-    // Commercial Specs
     price: "9,900",
     priceValue: 9900,
     currency: "THB",
     unit: "โปรเจกต์",
-
-    // Theme: Trust & Stability (Royal Blue / Professional Light)
     theme: {
       primary: "#2563eb",
       secondary: "#1e3a8a",
       background: "bg-slate-50",
       gradient: "from-blue-500/5 to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Professional Look: ออกแบบตามอัตลักษณ์แบรนด์ (CI) สร้างภาพจำที่ดี",
       "SEO Structure: วางโครงสร้างพื้นฐานให้ค้นหาเจอใน Google ได้ง่าย",
@@ -931,36 +796,81 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [03. E-CATALOG]: ความทันสมัยและการจัดการ (Modern & Logic)
+  // [03. LOCAL EXPERTISE]: ยกระดับธุรกิจรายพื้นที่ (Geographic Authority)
+  // ===========================================================================
+  {
+    id: "AEM-SVC-LS-10",
+    title: "Local Authority Engine",
+    description:
+      "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
+    image: "/images/service/local-node.webp",
+    // [FIXED]: แมปตรงกับโฟลเดอร์คอมโพเนนต์ใหม่ และ Redirect ใน vercel.json
+    templateSlug: "new-service-name", 
+    category: "business",
+    price: "6,900",
+    priceValue: 6900,
+    currency: "THB",
+    unit: "พื้นที่",
+    theme: {
+      primary: "#f59e0b",
+      secondary: "#78350f",
+      background: "bg-white",
+      gradient: "from-amber-50 to-transparent",
+    },
+    benefits: [
+      "Local Dominance: ติดอันดับต้นๆ เมื่อมีการค้นหาบริการในพื้นที่ของคุณ",
+      "Trust & Entity: สร้างความน่าเชื่อถือด้วยข้อมูลพิกัดที่ชัดเจน",
+      "Conversion Optimized: เปลี่ยนผู้เข้าชมในพื้นที่ให้เป็นลูกค้าตัวจริง",
+    ],
+    coreFeatures: [
+      {
+        title: "Map & Geo SEO",
+        description: "ปรับจูนโครงสร้าง Schema LocalBusiness ให้ Google เข้าใจพิกัดร้าน",
+        icon: "MapPin",
+      },
+      {
+        title: "Localized Content",
+        description: "วางกลยุทธ์เนื้อหาที่เจาะจงพฤติกรรมคนในพื้นที่นั้นๆ",
+        icon: "Search",
+      },
+    ],
+    faqs: [
+      {
+        question: "ทำไมต้องแยกเป็นรายพื้นที่?",
+        answer:
+          "การทำเจาะจงพื้นที่ช่วยให้ Google จัดอันดับคุณได้ง่ายขึ้น และลูกค้าจะรู้สึกใกล้ชิดมากกว่าครับ",
+      },
+    ],
+    keywords: ["รับปักหมุด", "Local SEO", "Google Maps ร้านค้า", "ทำเว็บรายจังหวัด"],
+    priority: 3,
+    isFeatured: true,
+  },
+
+  // ===========================================================================
+  // [04. E-CATALOG]: ความทันสมัยและการจัดการ (Modern & Logic)
   // ===========================================================================
   {
     id: "AEM-SVC-EC-05",
     title: "Smart E-Catalog System",
     description:
-      "เปลี่ยนแค็ตตาล็อกเล่มหนาหรือไฟล์ PDF เป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าค้นหาเจอทันที",
+      "เปลี่ยนแค็ตตาล็อกเล่มหนาเป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าค้นหาเจอทันที",
     image: "/images/service/catalog-node.webp",
     templateSlug: "catalog",
     category: "ecommerce",
-
-    // Commercial Specs
     price: "16,900",
     priceValue: 16900,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Innovation & Database (Violet / Modern Zinc)
     theme: {
       primary: "#8b5cf6",
       secondary: "#4c1d95",
       background: "bg-zinc-50",
       gradient: "from-violet-500/5 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
-      "Smart Search: ระบบค้นหาและตัวกรองสินค้า ช่วยให้ลูกค้าเจอสิ่งที่ต้องการไวขึ้น",
+      "Smart Search: ระบบค้นหาและตัวกรองสินค้าที่แม่นยำ",
       "Unlimited Data: รองรับสินค้าจำนวนมาก จัดหมวดหมู่ได้เป็นระเบียบ",
-      "Lead Generation: ปุ่มขอใบเสนอราคาอัตโนมัติ ช่วยเก็บรายชื่อลูกค้า",
+      "Lead Generation: ปุ่มขอใบเสนอราคาอัตโนมัติ เพื่อปิดการขาย",
     ],
     coreFeatures: [
       {
@@ -970,78 +880,17 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Filter System",
-        description: "ค้นหาจาก หมวดหมู่, ราคา, หรือคุณสมบัติ ได้ละเอียด",
+        description: "ค้นหาจาก หมวดหมู่ หรือราคา ได้ละเอียด",
         icon: "Filter",
-      },
-      {
-        title: "Inquiry Flow",
-        description: "เชื่อมต่อกับ Line/Email เพื่อปิดการขายได้รวดเร็ว",
-        icon: "MessageSquare",
       },
     ],
     faqs: [
       {
         question: "ลงสินค้าเองยากไหม?",
-        answer:
-          "ไม่ยากครับ เราออกแบบระบบมาให้ใช้งานง่ายเหมือนโพสต์ Facebook พร้อมมีคู่มือสอนการใช้งาน",
+        answer: "ไม่ยากครับ เรามีระบบจัดการที่ง่ายเหมือนการเล่นโซเชียลมีเดียทั่วไป",
       },
     ],
     keywords: ["เว็บแค็ตตาล็อก", "ระบบสินค้าออนไลน์", "E-Catalog", "โปรแกรมสต็อกสินค้า"],
-    priority: 3,
-  },
-
-  // ===========================================================================
-  // [04. LOCAL SEO]: พลังงานและการเข้าถึง (Energy & Friendly)
-  // ===========================================================================
-  {
-    id: "AEM-SVC-LS-10",
-    title: "Local SEO & Business Profile",
-    description:
-      "ทำให้ลูกค้าในพื้นที่ค้นหาร้านคุณเจอก่อนใคร เพิ่มโอกาสลูกค้า Walk-in ด้วยการปรับแต่งหมุดธุรกิจให้สมบูรณ์",
-    image: "/images/service/local-node.webp",
-    templateSlug: "local",
-    category: "business",
-
-    // Commercial Specs
-    price: "6,900",
-    priceValue: 6900,
-    currency: "THB",
-    unit: "พื้นที่",
-
-    // Theme: Local Visibility (Amber / Warm Light)
-    theme: {
-      primary: "#f59e0b",
-      secondary: "#78350f",
-      background: "bg-white",
-      gradient: "from-amber-50 to-transparent",
-    },
-
-    // Content Data
-    benefits: [
-      "Visibility: เพิ่มโอกาสการมองเห็นเมื่อมีการค้นหาในละแวกใกล้เคียง",
-      "Trust: สร้างความน่าเชื่อถือด้วยข้อมูลที่ครบถ้วนและรีวิวที่จัดการอย่างดี",
-      "Navigation: ลูกค้าเดินทางมาถูกร้าน ไม่หลงทาง ด้วยหมุดที่แม่นยำ",
-    ],
-    coreFeatures: [
-      {
-        title: "Map Optimization",
-        description: "ปรับแต่งข้อมูล Google Business Profile ให้ถูกต้องและน่าสนใจ",
-        icon: "MapPin",
-      },
-      {
-        title: "Keyword Focus",
-        description: "ใส่คำค้นหาที่คนท้องถิ่นใช้จริง เพื่อดักจับลูกค้า",
-        icon: "Search",
-      },
-    ],
-    faqs: [
-      {
-        question: "ทำแล้วยอดขายจะเพิ่มทันทีเลยไหม?",
-        answer:
-          "การมีตัวตนที่ชัดเจนจะเพิ่ม 'โอกาส' ให้ลูกค้าตัดสินใจง่ายขึ้นและเดินทางมาสะดวกขึ้นครับ",
-      },
-    ],
-    keywords: ["รับปักหมุด", "Local SEO", "Google Maps ร้านค้า", "โปรโมทร้านอาหาร"],
     priority: 4,
   },
 
@@ -1050,32 +899,25 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   // ===========================================================================
   {
     id: "AEM-SVC-PB-14",
-    title: "Professional Portfolio & Bio Link",
+    title: "Professional Bio & Portfolio",
     description:
-      "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว (One-Link Solution)",
+      "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว",
     image: "/images/service/personal-node.webp",
     templateSlug: "bio",
     category: "personal",
-
-    // Commercial Specs
     price: "4,900",
     priceValue: 4900,
     currency: "THB",
     unit: "โปรเจกต์",
-
-    // Theme: Digital Identity (Cyan / Dark Mode)
     theme: {
       primary: "#06b6d4",
       secondary: "#164e63",
       background: "bg-zinc-950",
       gradient: "from-cyan-500/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
-      "Centralized: รวม Facebook, Line, TikTok และผลงานไว้ที่เดียว",
-      "Professional: ดูดีกว่าการส่งไฟล์ทั่วไป สร้างความประทับใจแรกพบ",
-      "Customizable: ปรับแต่งธีมให้เข้ากับบุคลิกหรือสายงานของคุณ",
+      "Centralized: รวมทุก Social Media และผลงานไว้ที่เดียว",
+      "Professional: สร้างความประทับใจแรกด้วยดีไซน์ระดับ Specialist",
     ],
     coreFeatures: [
       {
@@ -1085,15 +927,14 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Smart Contact",
-        description: "ปุ่มติดต่อที่ออกแบบให้กดง่าย ส่งลูกค้าไปยังช่องทางหลักทันที",
+        description: "ปุ่มติดต่อที่ออกแบบให้กดง่ายที่สุด",
         icon: "Link",
       },
     ],
     faqs: [
       {
         question: "เอาไปใช้ทำอะไรได้บ้าง?",
-        answer:
-          "ใช้เป็นลิงก์แนะนำตัว (Bio Link) ใน Social Media หรือใช้แนบสมัครงาน/เสนองานลูกค้าครับ",
+        answer: "ใช้เป็น Bio Link ในโปรไฟล์ หรือใช้แนบสมัครงานและเสนองานลูกค้าครับ",
       },
     ],
     keywords: ["ทำเว็บพอร์ตโฟลิโอ", "Bio Link", "เว็บส่วนตัว", "Digital Name Card"],
@@ -1107,30 +948,23 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     id: "AEM-SVC-HR-08",
     title: "Hotel & Resort Website",
     description:
-      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (User Experience) ภาพสวย โหลดไว กระตุ้นให้อยากจองห้องพัก",
+      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (UX) ภาพสวย โหลดไว กระตุ้นให้อยากจองห้องพัก",
     image: "/images/service/hotel-resort-node.webp",
     templateSlug: "hotelresort",
     category: "business",
-
-    // Commercial Specs
     price: "16,900",
     priceValue: 16900,
     currency: "THB",
     unit: "เริ่มต้น",
-
-    // Theme: Premium & Experience (Gold / Deep Black)
     theme: {
       primary: "#c5a358",
       secondary: "#1a1a1a",
       background: "bg-[#0a0a0a]",
       gradient: "from-[#c5a358]/10 via-transparent to-transparent",
     },
-
-    // Content Data
     benefits: [
       "Visual Impact: นำเสนอภาพบรรยากาศที่พักได้เต็มอารมณ์ แต่ยังโหลดเร็ว",
-      "Direct Booking: เพิ่มช่องทางจองตรง ลดค่าคอมมิชชั่นจากแพลตฟอร์มอื่น",
-      "International: รองรับระบบ 2 ภาษา (ไทย/อังกฤษ) เพื่อลูกค้าต่างชาติ",
+      "Direct Booking: เพิ่มช่องทางจองตรง ลดค่าคอมมิชชั่น",
     ],
     coreFeatures: [
       {
@@ -1140,19 +974,14 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       },
       {
         title: "Room Showcase",
-        description: "หน้ารายละเอียดห้องพักที่ชัดเจน ครบถ้วน ตัดสินใจง่าย",
+        description: "หน้ารายละเอียดห้องพักที่ชัดเจน ตัดสินใจง่าย",
         icon: "Home",
-      },
-      {
-        title: "Call-to-Action",
-        description: "ปุ่มจองและช่องทางติดต่อที่เด่นชัดทุกหน้า",
-        icon: "MousePointer",
       },
     ],
     faqs: [
       {
         question: "มีระบบจองให้ไหม?",
-        answer: "เราสามารถเชื่อมต่อกับระบบจองที่คุณมีอยู่ หรือทำปุ่มจองผ่าน Line/Email ให้ได้ครับ",
+        answer: "เราสามารถเชื่อมต่อกับระบบจองที่คุณมีอยู่เดิมได้ทันทีครับ",
       },
     ],
     keywords: ["ทำเว็บโรงแรม", "เว็บไซต์รีสอร์ท", "ออกแบบเว็บที่พัก", "Hotel Web Design"],
@@ -1166,7 +995,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
  * @description คัดกรองบริการแนะนำ (Highlight) โดยเรียงตาม Priority
  */
 export const FEATURED_SERVICES = [...MASTER_REGISTRY]
-  .filter((svc: TemplateMasterData) => svc.isFeatured || svc.isPopular)
+  .filter((svc) => svc.isFeatured || svc.isPopular)
   .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
 
 ```
@@ -1230,9 +1059,9 @@ export type ServiceItem = (typeof SERVICE_SOLUTIONS)[number];
 ### CONFIG: site-config.ts
 ```typescript
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.2 (AUTHENTICATED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.4 (EEAT_STABILIZED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
- * [UPDATE]: ผสานข้อมูล Google Business Profile IDs เพื่อการยืนยันตัวตนระดับสูง
+ * [UPDATE]: แก้ไข Locality เป็น "กำแพงเพชร" เพื่อผลลัพธ์ Local SEO ที่ถูกต้อง
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -1283,7 +1112,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | Web Design & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.5.2",
+    version: "17.5.4",
     framework: "Next.js 16.1 (Latest Stable)",
     uiStack: "Tailwind CSS + React 19",
   },
@@ -1308,7 +1137,7 @@ export const SITE_CONFIG: SiteConfig = {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
     displayPhone: "099 032 2175 (สายด่วนปรึกษาช่างเอ็ม)",
-    address: "ประเทศไทย (ให้บริการทุกจังหวัดทั่วประเทศ)",
+    address: "กำแพงเพชร, ประเทศไทย (ให้บริการทั่วประเทศ)",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     postalCode: "62000",
     workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (ตอบแชทไวตลอดวัน)",
@@ -1321,23 +1150,21 @@ export const SITE_CONFIG: SiteConfig = {
     messenger: "https://m.me/aemdevweb",
     facebook: "https://facebook.com/aemdevweb",
     github: "https://github.com/aemdevweb",
-    // [UPDATE]: ลิงก์แผนที่จริง
     googleMaps: "https://share.google/MMWnXPv3evv4Qd8aC",
-    // [TODO]: รอการอัปเดต Place ID จริงแทนที่ ChIJ... เพื่อให้ลิงก์รีวิวทำงานสมบูรณ์
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
   // [09. BUSINESS METRICS]: ข้อมูลเชิงสถิติ & IDs
   business: {
-    location: "Thailand",
-    region: "ASEAN",
+    // [FIXED]: เปลี่ยนจาก Thailand เป็นชื่อจังหวัด เพื่อให้ Schema AddressLocality ทำงานถูกต้อง
+    location: "กำแพงเพชร", 
+    region: "Northern Thailand (ภาคเหนือ)",
     industry: "Web Infrastructure & Technical SEO",
     roiFocus: true,
     established: "2026",
-    // [NEW]: ชุดรหัสยืนยันตัวตนจาก Google Business Profile Setting
     ids: {
-      businessProfileId: "17539943195708104348", // รหัสโปรไฟล์หลัก
-      storeCode: "01162024004001766449",       // รหัสร้านค้า (ใช้สำหรับ Google Ads/Merchant)
+      businessProfileId: "17539943195708104348",
+      storeCode: "01162024004001766449",
     },
   },
 
@@ -1355,191 +1182,195 @@ export type GlobalConfig = typeof SITE_CONFIG;
 
 ## DIRECTORY INFRASTRUCTURE
 ```text
-[3.4K 2026-02-10 03:41]  .
-├── [9.3K 2026-02-09 20:29]  AEMDEVWEB-STRUCTURE.txt
-├── [ 12K 2026-02-10 01:41]  DEV.md
-├── [ 69K 2026-02-10 04:17]  README.md
-├── [1.9K 2026-02-07 18:40]  a.sh
-├── [3.4K 2026-02-09 00:38]  app
-│   ├── [3.4K 2026-02-09 10:25]  (routes)
-│   │   ├── [3.4K 2026-02-07 18:49]  areas
-│   │   │   ├── [3.4K 2026-02-07 18:49]  [slug]
-│   │   │   │   └── [6.5K 2026-02-09 22:08]  page.tsx
-│   │   │   └── [6.6K 2026-02-09 22:08]  page.tsx
-│   │   ├── [3.4K 2026-02-07 18:49]  blog
-│   │   │   ├── [3.4K 2026-02-07 18:49]  [slug]
-│   │   │   │   └── [5.6K 2026-02-09 22:08]  page.tsx
-│   │   │   └── [4.7K 2026-02-09 22:08]  page.tsx
-│   │   ├── [3.4K 2026-02-07 18:49]  case-studies
-│   │   │   ├── [3.4K 2026-02-07 18:49]  [slug]
-│   │   │   │   └── [6.0K 2026-02-09 22:08]  page.tsx
-│   │   │   └── [3.1K 2026-02-09 22:08]  page.tsx
-│   │   ├── [3.6K 2026-02-09 23:23]  layout.tsx
-│   │   └── [3.4K 2026-02-07 18:49]  services
-│   │       ├── [3.4K 2026-02-07 18:49]  [slug]
-│   │       │   └── [4.8K 2026-02-10 01:40]  page.tsx
-│   │       └── [8.0K 2026-02-10 02:48]  page.tsx
-│   ├── [3.4K 2026-02-07 18:41]  about
-│   │   └── [ 15K 2026-02-10 01:41]  page.tsx
-│   ├── [5.7K 2026-02-10 03:35]  globals.css
-│   ├── [5.4K 2026-02-10 03:35]  layout.tsx
-│   ├── [4.3K 2026-02-09 22:08]  loading.tsx
-│   ├── [1.4K 2026-02-09 22:12]  manifest.ts
-│   ├── [5.6K 2026-02-09 22:08]  not-found.tsx
-│   ├── [8.3K 2026-02-10 03:32]  page.tsx
-│   ├── [3.4K 2026-02-07 18:41]  privacy
-│   │   └── [ 11K 2026-02-09 22:08]  page.tsx
-│   ├── [ 940 2026-02-09 22:13]  robots.ts
-│   ├── [2.6K 2026-02-09 22:13]  sitemap.ts
-│   ├── [3.4K 2026-02-08 18:42]  status
-│   │   └── [ 12K 2026-02-09 22:08]  page.tsx
-│   └── [3.4K 2026-02-07 18:41]  terms
-│       └── [ 11K 2026-02-09 22:08]  page.tsx
+[3.4K 2026-02-10 18:00]  .
+├── [2.0K 2026-02-10 07:08]  00-SYSTEM-MANDATE.md
+├── [9.5K 2026-02-10 08:28]  AEMDEVWEB-STRUCTURE.txt
+├── [ 12K 2026-02-10 07:08]  DEV.md
+├── [236K 2026-02-10 18:00]  Dev.html
+├── [ 67K 2026-02-10 18:12]  README.md
+├── [1.9K 2026-02-10 07:08]  a.sh
+├── [3.4K 2026-02-10 07:08]  app
+│   ├── [3.4K 2026-02-10 07:08]  (routes)
+│   │   ├── [3.4K 2026-02-10 07:08]  areas
+│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
+│   │   │   │   └── [5.3K 2026-02-10 08:52]  page.tsx
+│   │   │   └── [6.6K 2026-02-10 07:08]  page.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  blog
+│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
+│   │   │   │   └── [5.6K 2026-02-10 07:08]  page.tsx
+│   │   │   └── [4.7K 2026-02-10 07:08]  page.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  case-studies
+│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
+│   │   │   │   └── [6.0K 2026-02-10 07:08]  page.tsx
+│   │   │   └── [3.1K 2026-02-10 07:08]  page.tsx
+│   │   ├── [3.6K 2026-02-10 07:08]  layout.tsx
+│   │   └── [3.4K 2026-02-10 07:08]  services
+│   │       ├── [3.4K 2026-02-10 07:08]  [slug]
+│   │       │   └── [3.7K 2026-02-10 08:53]  page.tsx
+│   │       └── [8.0K 2026-02-10 07:08]  page.tsx
+│   ├── [3.4K 2026-02-10 07:08]  about
+│   │   └── [ 12K 2026-02-10 07:08]  page.tsx
+│   ├── [5.5K 2026-02-10 07:08]  globals.css
+│   ├── [5.6K 2026-02-10 07:08]  layout.tsx
+│   ├── [4.3K 2026-02-10 07:08]  loading.tsx
+│   ├── [1.4K 2026-02-10 07:08]  manifest.ts
+│   ├── [5.6K 2026-02-10 07:08]  not-found.tsx
+│   ├── [7.3K 2026-02-10 07:08]  page.tsx
+│   ├── [3.4K 2026-02-10 07:08]  privacy
+│   │   └── [ 11K 2026-02-10 07:08]  page.tsx
+│   ├── [1.5K 2026-02-10 07:08]  robots.ts
+│   ├── [2.2K 2026-02-10 07:08]  sitemap.ts
+│   ├── [3.4K 2026-02-10 07:08]  status
+│   │   └── [ 12K 2026-02-10 07:08]  page.tsx
+│   └── [3.4K 2026-02-10 07:08]  terms
+│       └── [ 11K 2026-02-10 07:08]  page.tsx
 ├── [3.4K 2026-02-09 08:53]  components
 │   ├── [3.4K 2026-02-07 19:25]  features
-│   │   ├── [3.4K 2026-02-07 19:25]  areas
-│   │   │   └── [6.5K 2026-02-10 03:26]  AreaCard.tsx
-│   │   ├── [3.4K 2026-02-07 19:25]  blog
-│   │   │   └── [5.3K 2026-02-10 03:30]  BlogCard.tsx
-│   │   ├── [3.4K 2026-02-07 19:25]  case-studies
-│   │   │   └── [6.3K 2026-02-10 03:29]  CaseStudyCard.tsx
-│   │   ├── [3.4K 2026-02-09 16:56]  landing
-│   │   │   ├── [6.4K 2026-02-10 03:24]  Hero.tsx
-│   │   │   ├── [8.0K 2026-02-09 23:23]  PricingSection.tsx
-│   │   │   └── [9.1K 2026-02-10 03:19]  WorkProcess.tsx
-│   │   └── [3.4K 2026-02-07 19:25]  services
-│   │       ├── [7.1K 2026-02-10 03:27]  ServiceCard.tsx
-│   │       └── [2.8K 2026-02-09 22:08]  ServiceListingHub.tsx
-│   ├── [3.4K 2026-02-09 04:20]  layout
-│   │   ├── [9.9K 2026-02-10 02:48]  Footer.tsx
-│   │   ├── [9.5K 2026-02-10 02:48]  Navbar.tsx
-│   │   ├── [2.2K 2026-02-09 23:23]  PageTransition.tsx
-│   │   └── [2.0K 2026-02-09 23:23]  TopLoader.tsx
-│   ├── [3.4K 2026-02-09 08:53]  providers
-│   │   └── [1.8K 2026-02-09 22:08]  theme-provider.tsx
-│   ├── [3.4K 2026-02-07 18:03]  seo
-│   │   └── [2.4K 2026-02-09 22:08]  JsonLd.tsx
-│   ├── [3.4K 2026-02-08 23:27]  shared
-│   │   ├── [6.5K 2026-02-10 01:41]  ConversionCTA.tsx
-│   │   ├── [6.2K 2026-02-09 23:23]  ImpactStats.tsx
-│   │   ├── [4.2K 2026-02-09 23:23]  LineStickyButton.tsx
-│   │   └── [5.6K 2026-02-09 23:23]  TrustBadge.tsx
-│   ├── [3.4K 2026-02-09 19:43]  templates
-│   │   ├── [3.4K 2026-02-07 19:19]  bio
-│   │   │   ├── [9.4K 2026-02-09 22:08]  Index.tsx
-│   │   │   └── [2.2K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-07 19:20]  catalog
-│   │   │   ├── [7.3K 2026-02-09 22:08]  Index.tsx
-│   │   │   └── [2.5K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-07 19:20]  corporate
-│   │   │   ├── [9.2K 2026-02-09 22:08]  Index.tsx
-│   │   │   └── [3.8K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-09 19:43]  hotelresort
-│   │   │   ├── [7.0K 2026-02-09 22:08]  Index.tsx
-│   │   │   └── [1.9K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-09 19:32]  new_service_name
-│   │   │   ├── [2.1K 2026-02-09 22:08]  Schema.ts
-│   │   │   └── [9.8K 2026-02-09 22:08]  index.tsx
-│   │   ├── [3.4K 2026-02-07 19:20]  salepage
-│   │   │   ├── [8.6K 2026-02-09 22:08]  Index.tsx
-│   │   │   └── [2.3K 2026-02-09 22:08]  Schema.ts
-│   │   ├── [3.4K 2026-02-09 16:55]  sections
-│   │   │   ├── [3.4K 2026-02-09 22:08]  DynamicFAQ.tsx
-│   │   │   ├── [3.8K 2026-02-09 22:08]  FeatureGrid.tsx
-│   │   │   ├── [5.9K 2026-02-10 01:41]  HeroEngine.tsx
-│   │   │   └── [4.0K 2026-02-10 01:41]  LayoutEngine.tsx
-│   │   └── [3.4K 2026-02-09 19:37]  seo_agency
-│   │       ├── [1.9K 2026-02-09 22:08]  Schema.ts
-│   │       └── [6.7K 2026-02-09 22:08]  index.tsx
-│   └── [3.4K 2026-02-09 22:13]  ui
-│       ├── [3.7K 2026-02-10 01:41]  AmbientBackground.tsx
-│       ├── [1.5K 2026-02-09 23:23]  Callout.tsx
-│       ├── [4.3K 2026-02-09 22:08]  IconRenderer.tsx
-│       ├── [2.1K 2026-02-09 22:08]  SkeletonCard.tsx
-│       ├── [3.2K 2026-02-09 22:08]  ThemeToggle.tsx
-│       ├── [2.1K 2026-02-09 22:08]  accordion.tsx
-│       ├── [4.2K 2026-02-09 22:08]  button.tsx
-│       ├── [1.3K 2026-02-09 22:08]  skeleton-grid.tsx
-│       ├── [ 894 2026-02-09 22:08]  skeleton.tsx
-│       └── [3.3K 2026-02-09 22:08]  sonner.tsx
-├── [ 425 2026-02-09 04:27]  components.json
+│   │   ├── [3.4K 2026-02-10 07:08]  areas
+│   │   │   └── [6.5K 2026-02-10 07:08]  AreaCard.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  blog
+│   │   │   └── [5.3K 2026-02-10 07:08]  BlogCard.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  case-studies
+│   │   │   └── [6.3K 2026-02-10 07:08]  CaseStudyCard.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  landing
+│   │   │   ├── [6.6K 2026-02-10 07:08]  Hero.tsx
+│   │   │   ├── [8.0K 2026-02-10 07:08]  PricingSection.tsx
+│   │   │   └── [9.1K 2026-02-10 07:08]  WorkProcess.tsx
+│   │   └── [3.4K 2026-02-10 07:08]  services
+│   │       ├── [7.1K 2026-02-10 07:08]  ServiceCard.tsx
+│   │       └── [2.8K 2026-02-10 07:08]  ServiceListingHub.tsx
+│   ├── [3.4K 2026-02-10 07:08]  layout
+│   │   ├── [9.9K 2026-02-10 07:08]  Footer.tsx
+│   │   ├── [9.5K 2026-02-10 07:08]  Navbar.tsx
+│   │   ├── [2.2K 2026-02-10 07:08]  PageTransition.tsx
+│   │   └── [2.0K 2026-02-10 07:08]  TopLoader.tsx
+│   ├── [3.4K 2026-02-10 07:08]  providers
+│   │   └── [1.8K 2026-02-10 07:08]  theme-provider.tsx
+│   ├── [3.4K 2026-02-10 07:08]  seo
+│   │   └── [2.5K 2026-02-10 07:08]  JsonLd.tsx
+│   ├── [3.4K 2026-02-10 07:08]  shared
+│   │   ├── [6.5K 2026-02-10 07:08]  ConversionCTA.tsx
+│   │   ├── [6.2K 2026-02-10 07:08]  ImpactStats.tsx
+│   │   ├── [4.2K 2026-02-10 07:08]  LineStickyButton.tsx
+│   │   └── [5.6K 2026-02-10 07:08]  TrustBadge.tsx
+│   ├── [3.4K 2026-02-10 07:08]  templates
+│   │   ├── [3.4K 2026-02-10 07:08]  bio
+│   │   │   ├── [9.4K 2026-02-10 07:08]  Index.tsx
+│   │   │   └── [2.2K 2026-02-10 07:08]  Schema.ts
+│   │   ├── [3.4K 2026-02-10 07:08]  catalog
+│   │   │   ├── [7.3K 2026-02-10 07:08]  Index.tsx
+│   │   │   └── [2.5K 2026-02-10 07:08]  Schema.ts
+│   │   ├── [3.4K 2026-02-10 07:08]  corporate
+│   │   │   ├── [9.2K 2026-02-10 07:08]  Index.tsx
+│   │   │   └── [3.8K 2026-02-10 07:08]  Schema.ts
+│   │   ├── [3.4K 2026-02-10 07:08]  hotelresort
+│   │   │   ├── [7.0K 2026-02-10 07:08]  Index.tsx
+│   │   │   └── [1.9K 2026-02-10 07:08]  Schema.ts
+│   │   ├── [3.4K 2026-02-10 07:08]  new-service-name
+│   │   │   ├── [3.3K 2026-02-10 08:31]  Schema.ts
+│   │   │   └── [9.5K 2026-02-10 08:24]  index.tsx
+│   │   ├── [3.4K 2026-02-10 07:08]  salepage
+│   │   │   ├── [8.6K 2026-02-10 07:08]  Index.tsx
+│   │   │   └── [2.3K 2026-02-10 07:08]  Schema.ts
+│   │   ├── [3.4K 2026-02-10 07:08]  sections
+│   │   │   ├── [3.4K 2026-02-10 07:08]  DynamicFAQ.tsx
+│   │   │   ├── [3.8K 2026-02-10 07:08]  FeatureGrid.tsx
+│   │   │   ├── [5.9K 2026-02-10 07:08]  HeroEngine.tsx
+│   │   │   └── [4.0K 2026-02-10 07:08]  LayoutEngine.tsx
+│   │   └── [3.4K 2026-02-10 07:08]  seo_agency
+│   │       ├── [1.9K 2026-02-10 07:08]  Schema.ts
+│   │       └── [6.7K 2026-02-10 07:08]  index.tsx
+│   └── [3.4K 2026-02-10 07:08]  ui
+│       ├── [3.7K 2026-02-10 07:08]  AmbientBackground.tsx
+│       ├── [1.5K 2026-02-10 07:08]  Callout.tsx
+│       ├── [4.3K 2026-02-10 07:08]  IconRenderer.tsx
+│       ├── [3.0K 2026-02-10 07:08]  SkeletonCard.tsx
+│       ├── [3.2K 2026-02-10 07:08]  ThemeToggle.tsx
+│       ├── [2.1K 2026-02-10 07:08]  accordion.tsx
+│       ├── [4.2K 2026-02-10 07:08]  button.tsx
+│       ├── [1.3K 2026-02-10 07:08]  skeleton-grid.tsx
+│       ├── [ 894 2026-02-10 07:08]  skeleton.tsx
+│       └── [3.3K 2026-02-10 07:08]  sonner.tsx
+├── [ 425 2026-02-10 07:08]  components.json
 ├── [3.4K 2026-02-10 04:17]  config
-├── [3.4K 2026-02-08 23:27]  constants
-│   ├── [ 29K 2026-02-10 01:41]  area-nodes.ts
-│   ├── [ 22K 2026-02-10 01:41]  master-registry.ts
-│   ├── [2.4K 2026-02-10 02:48]  navigation.ts
-│   └── [5.7K 2026-02-10 04:15]  site-config.ts
+├── [3.4K 2026-02-10 07:08]  constants
+│   ├── [ 29K 2026-02-10 08:44]  area-nodes.ts
+│   ├── [ 19K 2026-02-10 08:45]  master-registry.ts
+│   ├── [2.4K 2026-02-10 07:08]  navigation.ts
+│   └── [5.5K 2026-02-10 07:08]  site-config.ts
 ├── [3.4K 2026-02-04 00:37]  content
-│   ├── [3.4K 2026-02-09 07:03]  blog
-│   │   ├── [8.8K 2026-02-10 02:48]  5-points-killing-sales.mdx
-│   │   ├── [8.4K 2026-02-10 02:48]  advanced-schema-markup.mdx
-│   │   ├── [9.0K 2026-02-10 02:48]  case-study-unlink-th.mdx
-│   │   ├── [7.9K 2026-02-10 02:48]  copywriting-secrets.mdx
-│   │   ├── [7.7K 2026-02-10 02:48]  core-web-vitals-speed.mdx
-│   │   ├── [8.7K 2026-02-10 02:48]  ecommerce-conversion-seo.mdx
-│   │   ├── [9.1K 2026-02-10 02:48]  facebook-ads-vs-website.mdx
-│   │   ├── [ 11K 2026-02-10 02:48]  lower-north-digital-transformation.mdx
-│   │   ├── [7.8K 2026-02-10 02:48]  seo-2026-strategy.mdx
-│   │   ├── [ 10K 2026-02-10 02:48]  technical-audit-protocol.mdx
-│   │   └── [ 11K 2026-02-10 02:48]  technical-seo-guide.mdx
-│   └── [3.4K 2026-02-10 00:29]  case-studies
-│       ├── [ 10K 2026-02-10 02:48]  case-study-industrial-catalog.mdx
-│       └── [9.7K 2026-02-10 02:48]  unlink-reputation-management-success.mdx
-├── [2.1K 2026-02-08 23:05]  eslint.config.mjs
+│   ├── [3.4K 2026-02-10 07:08]  blog
+│   │   ├── [8.8K 2026-02-10 07:08]  5-points-killing-sales.mdx
+│   │   ├── [8.4K 2026-02-10 07:08]  advanced-schema-markup.mdx
+│   │   ├── [9.0K 2026-02-10 07:08]  case-study-unlink-th.mdx
+│   │   ├── [7.9K 2026-02-10 07:08]  copywriting-secrets.mdx
+│   │   ├── [7.7K 2026-02-10 07:08]  core-web-vitals-speed.mdx
+│   │   ├── [8.7K 2026-02-10 07:08]  ecommerce-conversion-seo.mdx
+│   │   ├── [9.1K 2026-02-10 07:08]  facebook-ads-vs-website.mdx
+│   │   ├── [ 11K 2026-02-10 07:08]  lower-north-digital-transformation.mdx
+│   │   ├── [7.8K 2026-02-10 07:08]  seo-2026-strategy.mdx
+│   │   ├── [ 10K 2026-02-10 07:08]  technical-audit-protocol.mdx
+│   │   └── [ 11K 2026-02-10 07:08]  technical-seo-guide.mdx
+│   └── [3.4K 2026-02-10 07:08]  case-studies
+│       ├── [ 10K 2026-02-10 07:08]  case-study-industrial-catalog.mdx
+│       └── [9.7K 2026-02-10 07:08]  unlink-reputation-management-success.mdx
+├── [2.1K 2026-02-10 07:08]  eslint.config.mjs
 ├── [3.4K 2026-02-07 19:29]  hooks
-├── [ 239 2026-02-08 11:03]  knip.json
-├── [3.4K 2026-02-09 13:07]  lib
-│   ├── [4.4K 2026-02-09 22:08]  cms.ts
-│   ├── [6.5K 2026-02-10 04:16]  schema.ts
-│   ├── [2.0K 2026-02-09 22:08]  seo-utils.ts
-│   └── [3.4K 2026-02-09 22:08]  utils.ts
-├── [4.6K 2026-02-10 02:48]  mdx-components.tsx
-├── [ 247 2026-02-10 03:38]  next-env.d.ts
-├── [2.4K 2026-02-10 02:20]  next.config.ts
-├── [2.2K 2026-02-10 02:16]  package.json
-├── [  51 2026-02-04 00:22]  pnpm-workspace.yaml
-├── [1.1K 2026-02-08 03:53]  postcss.config.mjs
-├── [3.4K 2026-02-09 06:56]  public
-│   └── [3.4K 2026-02-09 02:26]  images
-│       ├── [3.4K 2026-02-09 07:02]  areas
-│       ├── [3.4K 2026-02-09 06:56]  blog
-│       ├── [3.4K 2026-02-09 16:28]  case-studies
+├── [ 239 2026-02-10 07:08]  knip.json
+├── [3.4K 2026-02-10 07:08]  lib
+│   ├── [4.4K 2026-02-10 07:08]  cms.ts
+│   ├── [6.7K 2026-02-10 07:08]  schema.ts
+│   ├── [2.3K 2026-02-10 07:08]  seo-utils.ts
+│   └── [3.4K 2026-02-10 07:08]  utils.ts
+├── [4.6K 2026-02-10 07:08]  mdx-components.tsx
+├── [ 247 2026-02-10 08:33]  next-env.d.ts
+├── [2.3K 2026-02-10 18:08]  next.config.ts
+├── [2.4K 2026-02-10 07:08]  package.json
+├── [221K 2026-02-10 07:08]  pnpm-lock.yaml
+├── [  51 2026-02-10 07:08]  pnpm-workspace.yaml
+├── [1.1K 2026-02-10 07:08]  postcss.config.mjs
+├── [3.4K 2026-02-10 07:08]  public
+│   └── [3.4K 2026-02-10 07:08]  images
+│       ├── [3.4K 2026-02-10 07:08]  areas
+│       ├── [3.4K 2026-02-10 07:08]  blog
+│       ├── [3.4K 2026-02-10 07:08]  case-studies
 │       ├── [3.4K 2026-02-08 22:09]  expert
-│       ├── [3.4K 2026-02-09 01:15]  hero
-│       ├── [3.4K 2026-02-04 00:34]  seo
-│       ├── [3.4K 2026-02-09 20:00]  service
-│       ├── [3.4K 2026-02-05 23:34]  shared
-│       ├── [3.4K 2026-02-09 06:56]  showcase
-│       ├── [3.4K 2026-02-08 00:13]  templates
-│       │   ├── [3.4K 2026-02-07 03:19]  corporate-pro
-│       │   ├── [3.4K 2026-02-07 03:19]  event-magic
-│       │   ├── [3.4K 2026-02-07 03:19]  facebook-ads-expert
-│       │   ├── [3.4K 2026-02-07 03:19]  hotel-resort
-│       │   ├── [3.4K 2026-02-07 03:20]  new-service-name
-│       │   ├── [3.4K 2026-02-07 03:20]  personal-bio
-│       │   ├── [3.4K 2026-02-07 03:20]  restaurant-cafe
-│       │   ├── [3.4K 2026-02-07 03:20]  salepage-single
-│       │   ├── [3.4K 2026-02-07 03:20]  seo-agency
-│       │   ├── [3.4K 2026-02-07 03:20]  shopmasterpro
-│       │   ├── [3.4K 2026-02-07 03:21]  starter-landing
-│       │   └── [3.4K 2026-02-07 03:21]  webrental
+│       ├── [3.4K 2026-02-10 07:08]  hero
+│       ├── [3.4K 2026-02-10 07:08]  seo
+│       ├── [3.4K 2026-02-10 07:08]  service
+│       ├── [3.4K 2026-02-10 07:08]  shared
+│       ├── [3.4K 2026-02-10 07:08]  showcase
+│       ├── [3.4K 2026-02-10 07:08]  templates
+│       │   ├── [3.4K 2026-02-10 07:08]  corporate-pro
+│       │   ├── [3.4K 2026-02-10 07:08]  event-magic
+│       │   ├── [3.4K 2026-02-10 07:08]  facebook-ads-expert
+│       │   ├── [3.4K 2026-02-10 07:08]  hotel-resort
+│       │   ├── [3.4K 2026-02-10 07:08]  local-service
+│       │   ├── [3.4K 2026-02-10 07:08]  personal-bio
+│       │   ├── [3.4K 2026-02-10 07:08]  restaurant-cafe
+│       │   ├── [3.4K 2026-02-10 07:08]  salepage-single
+│       │   ├── [3.4K 2026-02-10 07:08]  seo-agency
+│       │   ├── [3.4K 2026-02-10 07:08]  shopmasterpro
+│       │   ├── [3.4K 2026-02-10 07:08]  starter-landing
+│       │   └── [3.4K 2026-02-10 07:08]  webrental
 │       └── [3.4K 2026-02-08 22:09]  ui
-├── [3.4K 2026-02-08 22:09]  scripts
-│   ├── [1.2K 2026-02-05 16:14]  check-system.sh
-│   ├── [1.2K 2026-02-05 16:18]  clean-dev.sh
-│   ├── [2.0K 2026-02-08 22:09]  cleanup-images.sh
-│   ├── [3.4K 2026-02-05 21:08]  dev
-│   │   ├── [1.2K 2026-02-05 17:09]  clean-project.sh
-│   │   ├── [ 937 2026-02-04 20:50]  knip-check.sh
-│   │   └── [5.1K 2026-02-04 00:22]  pre-deploy-check.sh
-│   └── [1.9K 2026-02-07 19:44]  generate_docs.sh
-├── [5.0K 2026-02-10 00:29]  structure.txt
-├── [ 693 2026-02-09 22:08]  tsconfig.json
-├── [174K 2026-02-10 03:37]  tsconfig.tsbuildinfo
-└── [3.4K 2026-02-09 13:09]  types
-    ├── [6.7K 2026-02-10 04:16]  index.d.ts
-    ├── [ 423 2026-02-09 22:08]  mdx.d.ts
-    └── [3.0K 2026-02-10 01:41]  template-props.ts
+├── [3.4K 2026-02-10 07:08]  scripts
+│   ├── [1.2K 2026-02-10 07:08]  check-system.sh
+│   ├── [1.2K 2026-02-10 07:08]  clean-dev.sh
+│   ├── [2.0K 2026-02-10 07:08]  cleanup-images.sh
+│   ├── [3.4K 2026-02-10 07:08]  dev
+│   │   ├── [1.2K 2026-02-10 07:08]  clean-project.sh
+│   │   ├── [ 937 2026-02-10 07:08]  knip-check.sh
+│   │   └── [5.1K 2026-02-10 07:08]  pre-deploy-check.sh
+│   └── [1.9K 2026-02-10 07:08]  generate_docs.sh
+├── [5.0K 2026-02-10 07:08]  structure.txt
+├── [ 693 2026-02-10 07:08]  tsconfig.json
+├── [171K 2026-02-10 08:52]  tsconfig.tsbuildinfo
+├── [3.4K 2026-02-10 07:08]  types
+│   ├── [6.7K 2026-02-10 07:08]  index.d.ts
+│   ├── [ 423 2026-02-10 07:08]  mdx.d.ts
+│   └── [3.0K 2026-02-10 07:08]  template-props.ts
+└── [2.0K 2026-02-10 18:10]  vercel.json
 
-71 directories, 114 files
+71 directories, 118 files
 ```

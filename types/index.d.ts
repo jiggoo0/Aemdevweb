@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.2 (AUTHENTICATED)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.5 (AUTHENTICATED)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -108,7 +108,8 @@ export interface SiteConfig {
     readonly industry: string;
     readonly roiFocus: boolean;
     readonly established: string;
-    // [UPDATE]: Added support for Google Business Profile Verification
+    // [UPDATE]: เพิ่ม field status เพื่อรองรับการแสดงผลใน LayoutEngine
+    readonly status?: string; 
     readonly ids?: {
       readonly businessProfileId: string;
       readonly storeCode: string;
@@ -184,7 +185,6 @@ export interface TemplateMasterData {
   readonly expertise?: readonly ExpertiseItem[];
 }
 
-// Alias for backwards compatibility
 export type ServiceData = TemplateMasterData;
 
 // =========================================

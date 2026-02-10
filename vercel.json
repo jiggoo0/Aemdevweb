@@ -7,7 +7,7 @@
   "trailingSlash": false,
   "images": {
     "sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048],
-    "minimumCacheTTL": 60,
+    "minimumCacheTTL": 86400,
     "formats": ["image/avif", "image/webp"]
   },
   "redirects": [
@@ -64,9 +64,17 @@
   ],
   "headers": [
     {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Vercel-Cache", "value": "HIT" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" }

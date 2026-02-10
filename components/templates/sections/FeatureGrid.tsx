@@ -1,5 +1,5 @@
 /**
- * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.5.5 (STABILIZED)
  * [STRATEGY]: Intelligence Module Grid | Technical Authority | GPU Optimized
  */
 
@@ -10,16 +10,12 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
+import type { ServiceFeature } from "@/types"; // ใช้ Type กลางของระบบ
 
-export interface FeatureItem {
-  readonly title: string;
-  readonly description: string;
-  readonly icon: string;
-  readonly technicalDetail?: string;
-}
-
+// [UPDATE]: ใช้ ServiceFeature แทน FeatureItem เพื่อลดความซ้ำซ้อน
+// แต่ยังคงรองรับ technicalDetail แบบ Optional extension
 interface FeatureGridProps {
-  readonly items: readonly FeatureItem[];
+  readonly items: readonly (ServiceFeature & { technicalDetail?: string })[];
   readonly heading?: React.ReactNode;
   readonly subheading?: string;
   readonly columns?: 2 | 3 | 4;

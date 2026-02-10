@@ -1,6 +1,6 @@
 /**
- * [SEO UTILITY]: SEO_CORE_INFRASTRUCTURE v17.5.2 (STABILIZED)
- * [STRATEGY]: Shared Logic for Metadata & Structural Data | Zero-Any Policy
+ * [SEO UTILITY]: METADATA_CORE v17.5.5
+ * [RESPONSIBILITY]: Handle Next.js Metadata API Only
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -8,9 +8,6 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { Metadata } from "next";
 
-/**
- * [INTERFACE]: MetadataParams
- */
 export interface MetadataParams {
   readonly title: string;
   readonly description: string;
@@ -21,8 +18,9 @@ export interface MetadataParams {
 }
 
 /**
- * [FUNCTION]: constructMetadata
- * หน่วยประมวลผลกลางสำหรับสร้าง Next.js Metadata API
+ * [METADATA CONSTRUCTOR]
+ * ฟังก์ชันนี้ใช้สำหรับ generateMetadata() ใน page.tsx เท่านั้น
+ * ไม่มีความเกี่ยวข้องกับ JSON-LD Schema
  */
 export function constructMetadata({
   title,
@@ -70,13 +68,12 @@ export function constructMetadata({
       title,
       description,
       images: [image || "/images/og-main.png"],
-      // [SAFETY]: Fallback เป็น Account หลักถ้าไม่มีใน Config
       creator: SITE_CONFIG.links.twitter || "@aemdevweb",
     },
     robots: {
       index: !noIndex,
       follow: !noIndex,
-      nocache: noIndex, // [UPDATE]: สั่งห้าม Cache หากหน้าเป็น NoIndex
+      nocache: noIndex,
       googleBot: {
         index: !noIndex,
         follow: !noIndex,
@@ -85,6 +82,12 @@ export function constructMetadata({
         "max-image-preview": "large",
         "max-snippet": -1,
       },
+    },
+    // [ICONS]: เพิ่มความสมบูรณ์ให้ PWA
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+      apple: "/icon-192.png",
     },
   };
 }
