@@ -1,16 +1,226 @@
 ---
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-10 23:14:38
+last_audit: 2026-02-11 06:01:50
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
-> [ERROR] MISSION CRITICAL: 00-SYSTEM-MANDATE.md MISSING
+## SYSTEM MANDATE
+
+# SYSTEM MANDATE: AEMDEVWEB INFRASTRUCTURE
+
+> Version: 17.6.0 (STABILIZED)
+> Authority: STRICTLY ENFORCED
+> Context: High-Performance Web Infrastructure & Technical SEO Specialist
 
 ---
 
-> [WARNING] SYSTEM PROMPT EXTENSION MISSING
+## 01. CORE PHILOSOPHY & IDENTITY
+
+**"We are not just building websites; we are engineering digital assets."**
+
+- **System Role:** Technical Infrastructure Specialist.
+- **Primary Objective:** สร้างระบบเว็บไซต์ที่มีประสิทธิภาพสูงสุด (Hyper-Performance), รองรับ SEO โครงสร้างระดับสูง (Graph Architecture), และรักษาเสถียรภาพบนทุกอุปกรณ์
+- **Identity Anchor:** ข้อมูลทั้งหมดต้องยึดโยงกับ `SITE_CONFIG` ใน `constants/site-config.ts` ห้าม Hardcode ข้อมูลติดต่อหรือชื่อแบรนด์ใน Component โดยเด็ดขาด
+- **Tone of Voice:** Professional, Technical, Authoritative, "Specialist" (ไม่ใช้คำฟุ่มเฟือย เน้นผลลัพธ์และตัวเลข)
+
+## 02. ARCHITECTURE & FILE STRUCTURE
+
+**"Everything has a place, and every place has a purpose."**
+
+- **App Router First:** ใช้ Next.js App Router (`app/`) เป็นหลัก
+- **Colocation Strategy:**
+  - `components/features/`: สำหรับ Business Logic แยกตาม Domain (landing, services, areas).
+  - `components/ui/`: สำหรับ Reusable Primitives (Button, IconRenderer) ห้ามมี Business Logic.
+  - `components/templates/`: สำหรับ Page Layouts ที่ใช้ซ้ำได้ (Corporate, SalePage).
+- **Constants as Database:** ใช้ `constants/` (`master-registry.ts`, `area-nodes.ts`) เป็น Single Source of Truth สำหรับข้อมูลบริการและพื้นที่ ห้ามกระจายข้อมูลไว้ใน Component
+
+## 03. TYPE SAFETY & CODE QUALITY (ZERO-ANY POLICY)
+
+**"Runtime errors are failures of build-time discipline."**
+
+- **Strict Typing:** ห้ามใช้ `any` ในทุกกรณี (Zero-Any Policy). หากไม่ทราบ Type ให้ใช้ `unknown` หรือ `Record<string, unknown>` แล้วทำ Type Guard
+- **Immutability:** ข้อมูลใน `constants/` และ Props ต้องเป็น `readonly` เสมอ เพื่อป้องกัน Side Effects
+- **Interface Over Types:** ใช้ `interface` สำหรับ Object Definitions และ `type` สำหรับ Unions/Primitives
+- **No Magic Strings:** ห้ามใช้ String Hardcode สำหรับ Routing หรือ Keys ให้ดึงจาก `SITE_CONFIG` หรือ Enum/Const เสมอ
+
+## 04. SEO & DATA SCHEMAS (GRAPH ARCHITECTURE)
+
+**"If Google doesn't understand it, it doesn't exist."**
+
+- **Schema First:** ทุกหน้า (`page.tsx`) ต้องมีการ Inject JSON-LD ผ่านคอมโพเนนต์ `JsonLd`
+- **Logic Separation:** Logic การสร้าง Schema ต้องแยกออกจาก UI Component (เก็บไว้ใน `Schema.ts` ของแต่ละ Template)
+- **Entity Graphing:** Schema ต้องเชื่อมโยงกันเสมอ (WebPage -> Service -> Organization -> Person) ห้ามมี Node ลอยๆ (Orphan Nodes)
+- **Dynamic Metadata:** Metadata ต้องถูก generate ผ่าน `constructMetadata` ใน `lib/seo-utils.ts` เท่านั้น
+
+## 05. PERFORMANCE & CORE WEB VITALS (LCP/CLS)
+
+**"Speed is not a feature; it is the foundation."**
+
+- **LCP Protection:** Element ที่เป็น LCP (เช่น Hero Title, Hero Image) **ห้าม** ซ่อนด้วย Animation (`opacity: 0`) หรือใช้ Client-side lazy load
+- **Zero-CLS:** ต้องจองพื้นที่ (Height/AspectRatio) ให้กับรูปภาพและ Container เสมอ เพื่อป้องกัน Layout Shift
+- **Font Optimization:** ใช้ `next/font` พร้อม `display: swap` และห้ามโหลด Font ภายนอกผ่าน CSS `@import` ที่ไม่ผ่านการ Optimize
+- **Termux Friendly:** การตั้งค่า Build ต้องคำนึงถึง Environment ที่จำกัด (Termux/ARM) ห้ามใช้ Worker Threads เกินความจำเป็น (`cpus: 1`)
+
+## 06. STYLING & DESIGN SYSTEM (TAILWIND v4)
+
+**"Consistency creates trust."**
+
+- **Design Tokens:** ห้ามใช้ Hex Color ใน Component โดยตรง ให้ใช้ CSS Variables (`bg-surface-main`, `text-brand-primary`) ที่ประกาศใน `globals.css`
+- **GPU Acceleration:** Animation ที่ทำงานตลอดเวลา (Pulse, Float) ต้องใช้ `will-change-transform` และ `transform-gpu` เพื่อลดภาระ Main Thread
+- **Responsive Logic:** ใช้ Mobile-First approach เสมอ (`class="w-full md:w-1/2"`)
+- **Glassmorphism Standard:** ยึดมาตรฐานความโปร่งแสงและ Blur ตาม `AmbientBackground.tsx` เพื่อคุม Theme ของระบบ
+
+## 07. DATA FETCHING & RENDERING STRATEGY
+
+**"Static when possible, Dynamic when necessary."**
+
+- **SSG Priority:** พยายามทำให้ทุกหน้าเป็น Static Site Generation (SSG) โดยใช้ `generateStaticParams`
+- **Parallel Fetching:** หากมีการเรียกข้อมูลหลายแหล่งใน `page.tsx` ต้องใช้ `Promise.all` เสมอ
+- **CMS Integration:** การดึงข้อมูลจาก MDX ต้องผ่าน `lib/cms.ts` ที่มีการทำ Error Handling และ Type Guard เรียบร้อยแล้ว
+- **Client Boundary:** ใช้ `'use client'` เฉพาะที่จำเป็นจริงๆ (Leaf Nodes) พยายามดัน Logic ไปที่ Server Component ให้มากที่สุด
+
+## 08. COMPONENT ARCHITECTURE
+
+**"Modular, Atomic, and Dumb."**
+
+- **Dumb Components:** UI Components ไม่ควรมี Logic ซับซ้อน หรือรู้เรื่อง Business Data มากเกินไป (รับ Props -> แสดงผล)
+- **Prop Interface:** ชื่อ Props ต้องสื่อความหมายชัดเจน (เช่น `isActive` แทน `flag`) และสอดคล้องกับ `types/template-props.ts`
+- **Memoization:** ใช้ `React.memo` สำหรับ Component ที่มีการ Re-render บ่อย หรืออยู่ภายใน List ขนาดใหญ่
+- **Image Handling:** ใช้ `next/image` เสมอ ห้ามใช้ `<img>` tag ยกเว้นกรณี SVG ที่เป็น Icon
+
+## 09. LOCAL AUTHORITY PROTOCOL
+
+**"Dominate the map, dominate the market."**
+
+- **Area Node Structure:** การเพิ่มพื้นที่ให้บริการใหม่ใน `area-nodes.ts` ต้องระบุ `districts` และ `coordinates` เสมอ เพื่อผลลัพธ์ Local SEO
+- **Template Locking:** ห้ามเปลี่ยน `templateSlug` ของ Area Node ที่ถูกล็อคไว้ (เช่น `new-service-name`) หากไม่ได้รับคำสั่ง Migration
+- **Keyword Injection:** เนื้อหาในหน้า Area ต้องมีการ Inject ชื่อจังหวัด/อำเภอ เข้าไปใน H1, Title, และ Description อย่างเป็นธรรมชาติ
+
+## 10. DEPLOYMENT & QUALITY ASSURANCE
+
+**"Measure twice, cut once."**
+
+- **Audit Script:** ก่อน Commit หรือ Deploy ต้องรัน `bash a.sh` เพื่อตรวจสอบ Type Check, Lint, และ Build Status เสมอ
+- **Dead Code Elimination:** ใช้ `knip` ตรวจสอบและลบไฟล์/Dependencies ที่ไม่ได้ใช้ เพื่อรักษาความสะอาดของโปรเจกต์
+- **Asset Resilience:** ตรวจสอบว่ารูปภาพทั้งหมดใน `public/images` มีการใช้งานจริง และอยู่ใน Format ที่เหมาะสม (WebP)
+- **Build Stability:** ห้ามปล่อยให้มี Warning ใน Console ตอน Build (ยกเว้น Warning ของ Webpack/Termux ที่ทราบสาเหตุแล้ว)
+
+---
+
+_End of Mandate. Maintainer: AEMDEVWEB Specialist Team._
+
+---
+
+## SYSTEM PROMPT EXTENSION
+
+# SYSTEM PROMPT EXTENSION: AEMDEVWEB AI PROTOCOL
+
+> Version: 17.6.0 (ACTIVE)
+> Target: AI Agents & Copilots
+> Purpose: Operational Guidelines & Coding Standards
+
+---
+
+## 01. YOUR ROLE & PERSONA
+
+**You are the Lead Infrastructure Specialist for AEMDEVWEB.**
+
+- **Expertise:** High-Performance Next.js, Technical SEO, and Scalable Architecture.
+- **Mindset:** You do not just "write code"; you "engineer solutions". You prioritize stability, performance metrics (CWV), and type safety over quick hacks.
+- **Environment Awareness:** You are operating within a **Termux (Android)** environment. Resources are finite. Build processes must be efficient.
+
+## 02. CODING STANDARDS (STRICT)
+
+### TypeScript & Type Safety
+
+1.  **Zero-Any Policy:** Never use `any`. Use `unknown`, generics, or specific interfaces.
+2.  **Immutability:** Mark all interfaces and array props as `readonly`.
+    ```typescript
+    interface Props {
+      readonly data: readonly Item[];
+    }
+    ```
+3.  **Strict Props:** Use `interface` for object definitions. Use `type` for unions/intersections.
+4.  **No Magic Values:** Do not hardcode strings or numbers. Import from `@/constants` or use `SITE_CONFIG`.
+
+### Next.js 15 (App Router)
+
+1.  **Server Components Default:** All components are Server Components unless `useState` or `useEffect` is strictly required. Then, add `"use client";`.
+2.  **Async Params:** In `page.tsx`, `params` and `searchParams` must be awaited.
+    ```typescript
+    const { slug } = await params;
+    ```
+3.  **Image Optimization:** Always use `next/image`.
+    - **LCP Rule:** Hero images must have `priority`.
+    - **Aspect Ratio:** Always define `width/height` or `fill` with a parent container.
+
+### Tailwind CSS (v4)
+
+1.  **Variables First:** Use CSS variables defined in `globals.css` (e.g., `bg-surface-main`, `text-brand-primary`) instead of raw hex codes.
+2.  **Responsive Design:** Mobile-first approach.
+    - ✅ `class="w-full md:w-1/2"`
+    - ❌ `class="w-1/2 max-md:w-full"`
+3.  **Animation:** Use `transform-gpu` and `will-change-transform` for continuous animations to offload CPU.
+
+## 03. COMPONENT ARCHITECTURE PROTOCOL
+
+### File Structure Map
+
+- `components/features/`: Domain-specific logic (e.g., `Hero.tsx`, `ServiceCard.tsx`).
+- `components/templates/`: Page layouts (e.g., `CorporateTemplate`, `BioTemplate`).
+- `components/ui/`: Reusable primitives (e.g., `Button`, `IconRenderer`). **NO Business Logic here.**
+- `lib/`: Pure functions and utilities (e.g., `utils.ts`, `schema.ts`).
+
+### The "Template" Pattern
+
+When creating a new page template:
+
+1.  **Schema Separation:** Create a `Schema.ts` file alongside `Index.tsx`.
+2.  **Data Injection:** The template receives `readonly data: TemplateMasterData`.
+3.  **LCP Optimization:** The Hero section must render HTML immediately (no fade-in animations on H1/Img).
+
+## 04. SEO & SCHEMA STRATEGY
+
+1.  **JSON-LD:** Every page must render a `JsonLd` component.
+2.  **Graph Construction:** Connect entities using `@id`.
+    - `WebPage` -> `isPartOf` -> `WebSite`
+    - `Service` -> `provider` -> `Organization`
+3.  **Validation:** Ensure strict types for Schema generation functions.
+
+## 05. RESPONSE FORMATTING GUIDELINES
+
+When generating code, adhere to this structure:
+
+1.  **File Header:**
+    ```typescript
+    /**
+     * [COMPONENT_NAME]: MODULE_NAME v17.x.x (STATUS)
+     * [STRATEGY]: Brief explanation of the technical approach
+     * [MAINTAINER]: AEMDEVWEB Specialist Team
+     */
+    ```
+2.  **Imports:** Group imports:
+    1.  React/Next.js
+    2.  Internal Infrastructure (`@/lib`, `@/constants`)
+    3.  Components
+    4.  Types
+3.  **Content:** Full, copy-pasteable code. Do not use `// ... existing code` unless explicitly requested for a small snippet.
+
+## 06. CRITICAL CHECKS (PRE-COMPUTATION)
+
+Before outputting code, ask yourself:
+
+- [ ] Did I remove `opacity: 0` from the LCP element?
+- [ ] Is `SITE_CONFIG` used for branding/contact info?
+- [ ] Are all arrays mapped with a unique `key`?
+- [ ] Is this compatible with Tailwind v4 (no `@apply` in complex ways)?
+- [ ] Did I export the component using `memo` if it's a client component?
+
+---
+
+_Reference: See `config/00-SYSTEM-MANDATE.md` for absolute rules._
 
 ---
 
@@ -409,7 +619,7 @@ export type TemplateDataSource = "service" | "area" | "custom";
 
 ```typescript
 /**
- * [SYSTEM CORE]: AREA_NODES_DATA v17.6.1 (STRATEGIC_LOCATIONS)
+ * [SYSTEM CORE]: AREA_NODES_DATA v17.6.2 (CLEANED)
  * [AI-MANDATE]: DO NOT ALTER 'templateSlug' VALUES OR SCHEMA STRUCTURE.
  * [STRATEGY]: Economic Hubs | Local Dominance | Business Intelligence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
@@ -725,23 +935,13 @@ export const AREA_NODES: readonly AreaNode[] = [
     coordinates: { lat: 17.6256, lng: 100.0993 },
   },
 ] as const;
-
-/**
- * [HELPER]: Get Featured Areas
- */
-export const FEATURED_AREAS = [...AREA_NODES].sort((a, b) => b.priority - a.priority).slice(0, 6);
-
-/**
- * [HELPER]: Get Area by Slug
- */
-export const getAreaBySlug = (slug: string) => AREA_NODES.find((area) => area.slug === slug);
 ```
 
 ### CONFIG: master-registry.ts
 
 ```typescript
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.2 (IDENTITY_LOCKED)
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.3 (CLEANED)
  * [STRATEGY]: Color Psychology | Business Alignment | PSI Optimization
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -931,7 +1131,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     description:
       "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
     image: "/images/service/local-node.webp",
-    // [FIXED]: แมปตรงกับโฟลเดอร์คอมโพเนนต์ใหม่ และ Redirect ใน vercel.json
     templateSlug: "new-service-name",
     category: "business",
     price: "6,900",
@@ -1115,14 +1314,6 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     isFeatured: true,
   },
 ] as const;
-
-/**
- * @const FEATURED_SERVICES
- * @description คัดกรองบริการแนะนำ (Highlight) โดยเรียงตาม Priority
- */
-export const FEATURED_SERVICES = [...MASTER_REGISTRY]
-  .filter((svc) => svc.isFeatured || svc.isPopular)
-  .sort((a, b) => (a.priority ?? 99) - (b.priority ?? 99));
 ```
 
 ### CONFIG: navigation.ts
@@ -1307,553 +1498,183 @@ export type GlobalConfig = typeof SITE_CONFIG;
 ## DIRECTORY INFRASTRUCTURE
 
 ```text
-[3.4K 2026-02-10 23:14]  .
-├── [9.5K 2026-02-10 20:48]  AEMDEVWEB-STRUCTURE.txt
-├── [ 12K 2026-02-10 07:08]  DEV.md
-├── [ 66K 2026-02-10 23:14]  README.md
-├── [ 744 2026-02-10 18:43]  a.sh
-├── [3.4K 2026-02-10 07:08]  app
-│   ├── [3.4K 2026-02-10 07:08]  (routes)
-│   │   ├── [3.4K 2026-02-10 07:08]  areas
-│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
-│   │   │   │   └── [5.7K 2026-02-10 21:48]  page.tsx
-│   │   │   └── [6.6K 2026-02-10 07:08]  page.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  blog
-│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
-│   │   │   │   └── [5.6K 2026-02-10 07:08]  page.tsx
-│   │   │   └── [4.7K 2026-02-10 07:08]  page.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  case-studies
-│   │   │   ├── [3.4K 2026-02-10 07:08]  [slug]
-│   │   │   │   └── [6.0K 2026-02-10 07:08]  page.tsx
-│   │   │   └── [3.1K 2026-02-10 07:08]  page.tsx
-│   │   ├── [3.6K 2026-02-10 07:08]  layout.tsx
-│   │   └── [3.4K 2026-02-10 07:08]  services
-│   │       ├── [3.4K 2026-02-10 07:08]  [slug]
-│   │       │   └── [4.6K 2026-02-10 21:48]  page.tsx
-│   │       └── [8.0K 2026-02-10 07:08]  page.tsx
-│   ├── [3.4K 2026-02-10 07:08]  about
-│   │   └── [ 12K 2026-02-10 21:48]  page.tsx
-│   ├── [5.6K 2026-02-10 21:48]  globals.css
-│   ├── [5.5K 2026-02-10 21:48]  layout.tsx
-│   ├── [4.3K 2026-02-10 07:08]  loading.tsx
-│   ├── [1.4K 2026-02-10 07:08]  manifest.ts
-│   ├── [5.6K 2026-02-10 07:08]  not-found.tsx
-│   ├── [7.7K 2026-02-10 21:48]  page.tsx
-│   ├── [3.4K 2026-02-10 07:08]  privacy
-│   │   └── [ 11K 2026-02-10 07:08]  page.tsx
-│   ├── [1.5K 2026-02-10 21:48]  robots.ts
-│   ├── [2.7K 2026-02-10 21:48]  sitemap.ts
-│   ├── [3.4K 2026-02-10 07:08]  status
-│   │   └── [ 12K 2026-02-10 07:08]  page.tsx
-│   └── [3.4K 2026-02-10 07:08]  terms
-│       └── [ 11K 2026-02-10 07:08]  page.tsx
-├── [3.4K 2026-02-09 08:53]  components
-│   ├── [3.4K 2026-02-07 19:25]  features
-│   │   ├── [3.4K 2026-02-10 07:08]  areas
-│   │   │   └── [6.5K 2026-02-10 21:48]  AreaCard.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  blog
-│   │   │   └── [5.3K 2026-02-10 21:48]  BlogCard.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  case-studies
-│   │   │   └── [6.4K 2026-02-10 21:48]  CaseStudyCard.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  landing
-│   │   │   ├── [6.6K 2026-02-10 21:48]  Hero.tsx
-│   │   │   ├── [8.0K 2026-02-10 07:08]  PricingSection.tsx
-│   │   │   └── [9.2K 2026-02-10 21:48]  WorkProcess.tsx
-│   │   └── [3.4K 2026-02-10 07:08]  services
-│   │       ├── [7.1K 2026-02-10 21:48]  ServiceCard.tsx
-│   │       └── [2.8K 2026-02-10 07:08]  ServiceListingHub.tsx
-│   ├── [3.4K 2026-02-10 07:08]  layout
-│   │   ├── [9.9K 2026-02-10 21:48]  Footer.tsx
-│   │   ├── [ 11K 2026-02-10 23:01]  Navbar.tsx
-│   │   ├── [2.2K 2026-02-10 07:08]  PageTransition.tsx
-│   │   └── [2.0K 2026-02-10 07:08]  TopLoader.tsx
-│   ├── [3.4K 2026-02-10 07:08]  providers
-│   │   └── [1.8K 2026-02-10 07:08]  theme-provider.tsx
-│   ├── [3.4K 2026-02-10 07:08]  seo
-│   │   └── [1.3K 2026-02-10 21:48]  JsonLd.tsx
-│   ├── [3.4K 2026-02-10 07:08]  shared
-│   │   ├── [6.5K 2026-02-10 07:08]  ConversionCTA.tsx
-│   │   ├── [6.2K 2026-02-10 07:08]  ImpactStats.tsx
-│   │   ├── [4.2K 2026-02-10 07:08]  LineStickyButton.tsx
-│   │   └── [5.6K 2026-02-10 07:08]  TrustBadge.tsx
-│   ├── [3.4K 2026-02-10 07:08]  templates
-│   │   ├── [3.4K 2026-02-10 07:08]  bio
-│   │   │   ├── [9.3K 2026-02-10 21:48]  Index.tsx
-│   │   │   └── [2.3K 2026-02-10 20:55]  Schema.ts
-│   │   ├── [3.4K 2026-02-10 07:08]  catalog
-│   │   │   ├── [6.9K 2026-02-10 21:33]  Index.tsx
-│   │   │   └── [2.5K 2026-02-10 20:56]  Schema.ts
-│   │   ├── [3.4K 2026-02-10 07:08]  corporate
-│   │   │   ├── [9.9K 2026-02-10 20:53]  Index.tsx
-│   │   │   └── [3.7K 2026-02-10 20:53]  Schema.ts
-│   │   ├── [3.4K 2026-02-10 07:08]  hotelresort
-│   │   │   ├── [7.1K 2026-02-10 21:48]  Index.tsx
-│   │   │   └── [1.9K 2026-02-10 20:56]  Schema.ts
-│   │   ├── [3.4K 2026-02-10 07:08]  new-service-name
-│   │   │   ├── [2.9K 2026-02-10 20:52]  Schema.ts
-│   │   │   └── [9.5K 2026-02-10 21:48]  index.tsx
-│   │   ├── [3.4K 2026-02-10 07:08]  salepage
-│   │   │   ├── [8.5K 2026-02-10 20:59]  Index.tsx
-│   │   │   └── [2.3K 2026-02-10 20:59]  Schema.ts
-│   │   ├── [3.4K 2026-02-10 07:08]  sections
-│   │   │   ├── [3.0K 2026-02-10 18:41]  DynamicFAQ.tsx
-│   │   │   ├── [4.0K 2026-02-10 18:42]  FeatureGrid.tsx
-│   │   │   ├── [5.8K 2026-02-10 18:41]  HeroEngine.tsx
-│   │   │   └── [3.8K 2026-02-10 21:48]  LayoutEngine.tsx
-│   │   └── [3.4K 2026-02-10 07:08]  seo_agency
-│   │       ├── [1.9K 2026-02-10 20:59]  Schema.ts
-│   │       └── [6.7K 2026-02-10 20:59]  index.tsx
-│   └── [3.4K 2026-02-10 07:08]  ui
-│       ├── [3.2K 2026-02-10 21:48]  AmbientBackground.tsx
-│       ├── [1.5K 2026-02-10 07:08]  Callout.tsx
-│       ├── [4.3K 2026-02-10 07:08]  IconRenderer.tsx
-│       ├── [3.0K 2026-02-10 21:48]  SkeletonCard.tsx
-│       ├── [3.2K 2026-02-10 07:08]  ThemeToggle.tsx
-│       ├── [2.1K 2026-02-10 07:08]  accordion.tsx
-│       ├── [4.2K 2026-02-10 07:08]  button.tsx
-│       ├── [1.3K 2026-02-10 07:08]  skeleton-grid.tsx
-│       ├── [ 894 2026-02-10 07:08]  skeleton.tsx
-│       └── [3.3K 2026-02-10 07:08]  sonner.tsx
-├── [ 425 2026-02-10 07:08]  components.json
-├── [3.4K 2026-02-10 23:14]  config
-├── [3.4K 2026-02-10 07:08]  constants
-│   ├── [ 29K 2026-02-10 21:48]  area-nodes.ts
-│   ├── [ 19K 2026-02-10 21:48]  master-registry.ts
-│   ├── [2.4K 2026-02-10 21:05]  navigation.ts
-│   └── [4.5K 2026-02-10 18:39]  site-config.ts
-├── [3.4K 2026-02-04 00:37]  content
-│   ├── [3.4K 2026-02-10 22:45]  blog
-│   │   ├── [ 11K 2026-02-10 22:53]  5-points-killing-sales.mdx
-│   │   ├── [ 10K 2026-02-10 22:43]  advanced-schema-markup.mdx
-│   │   ├── [9.2K 2026-02-10 22:54]  case-study-unlink-th.mdx
-│   │   ├── [8.5K 2026-02-10 22:56]  copywriting-secrets.mdx
-│   │   ├── [9.9K 2026-02-10 22:42]  core-web-vitals-speed.mdx
-│   │   ├── [8.7K 2026-02-10 07:08]  ecommerce-conversion-seo.mdx
-│   │   ├── [9.4K 2026-02-10 23:06]  facebook-ads-vs-website.mdx
-│   │   ├── [ 10K 2026-02-10 22:59]  lower-north-digital-transformation.mdx
-│   │   ├── [ 16K 2026-02-10 22:39]  seo-2026-strategy.mdx
-│   │   └── [9.1K 2026-02-10 23:04]  technical-audit-protocol.mdx
-│   └── [3.4K 2026-02-10 07:08]  case-studies
-│       ├── [ 10K 2026-02-10 07:08]  case-study-industrial-catalog.mdx
-│       └── [9.7K 2026-02-10 07:08]  unlink-reputation-management-success.mdx
-├── [2.1K 2026-02-10 07:08]  eslint.config.mjs
-├── [3.4K 2026-02-07 19:29]  hooks
-├── [ 239 2026-02-10 07:08]  knip.json
-├── [3.4K 2026-02-10 07:08]  lib
-│   ├── [5.9K 2026-02-10 21:48]  cms.ts
-│   ├── [5.4K 2026-02-10 21:48]  schema.ts
-│   ├── [2.3K 2026-02-10 21:48]  seo-utils.ts
-│   └── [3.9K 2026-02-10 21:48]  utils.ts
-├── [4.6K 2026-02-10 07:08]  mdx-components.tsx
-├── [ 247 2026-02-10 23:12]  next-env.d.ts
-├── [2.2K 2026-02-10 22:50]  next.config.ts
-├── [2.4K 2026-02-10 18:58]  package.json
-├── [238K 2026-02-10 21:48]  pnpm-lock.yaml
-├── [  51 2026-02-10 07:08]  pnpm-workspace.yaml
-├── [1.1K 2026-02-10 07:08]  postcss.config.mjs
-├── [3.4K 2026-02-10 21:37]  public
-│   └── [3.4K 2026-02-10 21:37]  images
-│       ├── [3.4K 2026-02-10 07:08]  areas
-│       ├── [3.4K 2026-02-10 07:08]  blog
-│       ├── [3.4K 2026-02-10 21:37]  case-studies
-│       ├── [3.4K 2026-02-08 22:09]  expert
-│       ├── [3.4K 2026-02-10 07:08]  seo
-│       ├── [3.4K 2026-02-10 07:08]  service
-│       ├── [3.4K 2026-02-10 07:08]  shared
-│       ├── [3.4K 2026-02-10 07:08]  templates
-│       │   ├── [3.4K 2026-02-10 07:08]  corporate-pro
-│       │   ├── [3.4K 2026-02-10 07:08]  event-magic
-│       │   ├── [3.4K 2026-02-10 07:08]  facebook-ads-expert
-│       │   ├── [3.4K 2026-02-10 07:08]  hotel-resort
-│       │   ├── [3.4K 2026-02-10 07:08]  local-service
-│       │   ├── [3.4K 2026-02-10 07:08]  personal-bio
-│       │   ├── [3.4K 2026-02-10 07:08]  restaurant-cafe
-│       │   ├── [3.4K 2026-02-10 07:08]  salepage-single
-│       │   ├── [3.4K 2026-02-10 07:08]  seo-agency
-│       │   ├── [3.4K 2026-02-10 07:08]  shopmasterpro
-│       │   ├── [3.4K 2026-02-10 07:08]  starter-landing
-│       │   └── [3.4K 2026-02-10 07:08]  webrental
-│       └── [3.4K 2026-02-08 22:09]  ui
-├── [3.4K 2026-02-10 07:08]  scripts
-│   ├── [1.2K 2026-02-10 07:08]  check-system.sh
-│   ├── [1.2K 2026-02-10 07:08]  clean-dev.sh
-│   ├── [2.0K 2026-02-10 07:08]  cleanup-images.sh
-│   ├── [3.4K 2026-02-10 07:08]  dev
-│   │   ├── [1.2K 2026-02-10 07:08]  clean-project.sh
-│   │   ├── [ 937 2026-02-10 07:08]  knip-check.sh
-│   │   └── [5.1K 2026-02-10 07:08]  pre-deploy-check.sh
-│   └── [2.2K 2026-02-10 21:42]  generate_docs.sh
-├── [5.7K 2026-02-10 21:52]  structure.txt
-├── [ 693 2026-02-10 07:08]  tsconfig.json
-├── [178K 2026-02-10 23:10]  tsconfig.tsbuildinfo
-├── [3.4K 2026-02-10 07:08]  types
-│   ├── [6.7K 2026-02-10 21:48]  index.d.ts
-│   ├── [ 423 2026-02-10 07:08]  mdx.d.ts
-│   └── [3.0K 2026-02-10 07:08]  template-props.ts
-└── [2.5K 2026-02-10 22:47]  vercel.json
+[3.4K 2026-02-11 06:01]  .
+├── [ 78K 2026-02-11 06:01]  README.md
+├── [3.4K 2026-02-11 05:49]  app
+│   ├── [3.4K 2026-02-11 05:59]  (routes)
+│   │   ├── [3.4K 2026-02-11 05:49]  areas
+│   │   │   ├── [3.4K 2026-02-11 05:49]  [slug]
+│   │   │   │   └── [5.7K 2026-02-11 05:49]  page.tsx
+│   │   │   └── [6.6K 2026-02-11 05:49]  page.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  blog
+│   │   │   ├── [3.4K 2026-02-11 05:49]  [slug]
+│   │   │   │   └── [5.6K 2026-02-11 05:49]  page.tsx
+│   │   │   └── [4.7K 2026-02-11 05:49]  page.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  case-studies
+│   │   │   ├── [3.4K 2026-02-11 05:49]  [slug]
+│   │   │   │   └── [6.0K 2026-02-11 05:49]  page.tsx
+│   │   │   └── [3.1K 2026-02-11 05:49]  page.tsx
+│   │   └── [3.4K 2026-02-11 05:49]  services
+│   │       ├── [3.4K 2026-02-11 05:49]  [slug]
+│   │       │   └── [4.6K 2026-02-11 05:49]  page.tsx
+│   │       └── [8.0K 2026-02-11 05:49]  page.tsx
+│   ├── [3.4K 2026-02-11 05:49]  about
+│   │   └── [ 12K 2026-02-11 05:49]  page.tsx
+│   ├── [5.6K 2026-02-11 05:49]  globals.css
+│   ├── [5.5K 2026-02-11 05:49]  layout.tsx
+│   ├── [4.3K 2026-02-11 05:49]  loading.tsx
+│   ├── [1.4K 2026-02-11 05:49]  manifest.ts
+│   ├── [5.6K 2026-02-11 05:49]  not-found.tsx
+│   ├── [8.1K 2026-02-11 05:49]  page.tsx
+│   ├── [3.4K 2026-02-11 05:49]  privacy
+│   │   └── [ 11K 2026-02-11 05:49]  page.tsx
+│   ├── [1.5K 2026-02-11 05:49]  robots.ts
+│   ├── [4.7K 2026-02-11 05:49]  sitemap.ts
+│   ├── [3.4K 2026-02-11 05:49]  status
+│   │   └── [ 12K 2026-02-11 05:49]  page.tsx
+│   └── [3.4K 2026-02-11 05:49]  terms
+│       └── [ 11K 2026-02-11 05:49]  page.tsx
+├── [3.4K 2026-02-11 05:49]  components
+│   ├── [3.4K 2026-02-11 05:49]  features
+│   │   ├── [3.4K 2026-02-11 05:49]  areas
+│   │   │   └── [6.5K 2026-02-11 05:49]  AreaCard.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  blog
+│   │   │   └── [5.3K 2026-02-11 05:49]  BlogCard.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  case-studies
+│   │   │   └── [6.4K 2026-02-11 05:49]  CaseStudyCard.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  landing
+│   │   │   ├── [7.0K 2026-02-11 05:49]  Hero.tsx
+│   │   │   ├── [8.0K 2026-02-11 05:49]  PricingSection.tsx
+│   │   │   └── [9.2K 2026-02-11 05:49]  WorkProcess.tsx
+│   │   └── [3.4K 2026-02-11 05:49]  services
+│   │       ├── [7.1K 2026-02-11 05:49]  ServiceCard.tsx
+│   │       └── [2.8K 2026-02-11 05:49]  ServiceListingHub.tsx
+│   ├── [3.4K 2026-02-11 05:49]  layout
+│   │   ├── [9.9K 2026-02-11 05:49]  Footer.tsx
+│   │   ├── [ 11K 2026-02-11 05:49]  Navbar.tsx
+│   │   ├── [2.2K 2026-02-11 05:49]  PageTransition.tsx
+│   │   └── [2.0K 2026-02-11 05:49]  TopLoader.tsx
+│   ├── [3.4K 2026-02-11 05:49]  providers
+│   │   └── [1.8K 2026-02-11 05:49]  theme-provider.tsx
+│   ├── [3.4K 2026-02-11 05:49]  seo
+│   │   └── [1.3K 2026-02-11 05:49]  JsonLd.tsx
+│   ├── [3.4K 2026-02-11 05:49]  shared
+│   │   ├── [6.5K 2026-02-11 05:49]  ConversionCTA.tsx
+│   │   ├── [6.2K 2026-02-11 05:49]  ImpactStats.tsx
+│   │   ├── [4.2K 2026-02-11 05:49]  LineStickyButton.tsx
+│   │   └── [5.6K 2026-02-11 05:49]  TrustBadge.tsx
+│   ├── [3.4K 2026-02-11 05:49]  templates
+│   │   ├── [3.4K 2026-02-11 05:49]  bio
+│   │   │   ├── [9.1K 2026-02-11 05:49]  Index.tsx
+│   │   │   └── [2.3K 2026-02-11 05:49]  Schema.ts
+│   │   ├── [3.4K 2026-02-11 05:49]  catalog
+│   │   │   ├── [6.7K 2026-02-11 05:49]  Index.tsx
+│   │   │   └── [2.5K 2026-02-11 05:49]  Schema.ts
+│   │   ├── [3.4K 2026-02-11 05:49]  corporate
+│   │   │   ├── [9.7K 2026-02-11 05:49]  Index.tsx
+│   │   │   └── [3.7K 2026-02-11 05:49]  Schema.ts
+│   │   ├── [3.4K 2026-02-11 05:49]  hotelresort
+│   │   │   ├── [6.6K 2026-02-11 05:49]  Index.tsx
+│   │   │   └── [1.9K 2026-02-11 05:49]  Schema.ts
+│   │   ├── [3.4K 2026-02-11 05:49]  new-service-name
+│   │   │   ├── [2.9K 2026-02-11 05:49]  Schema.ts
+│   │   │   └── [9.6K 2026-02-11 05:49]  index.tsx
+│   │   ├── [3.4K 2026-02-11 05:49]  salepage
+│   │   │   ├── [8.7K 2026-02-11 05:49]  Index.tsx
+│   │   │   └── [2.3K 2026-02-11 05:49]  Schema.ts
+│   │   ├── [3.4K 2026-02-11 05:49]  sections
+│   │   │   ├── [3.0K 2026-02-11 05:49]  DynamicFAQ.tsx
+│   │   │   ├── [4.0K 2026-02-11 05:49]  FeatureGrid.tsx
+│   │   │   ├── [6.4K 2026-02-11 05:49]  HeroEngine.tsx
+│   │   │   └── [3.8K 2026-02-11 05:49]  LayoutEngine.tsx
+│   │   └── [3.4K 2026-02-11 05:49]  seo_agency
+│   │       ├── [1.9K 2026-02-11 05:49]  Schema.ts
+│   │       └── [6.7K 2026-02-11 05:49]  index.tsx
+│   └── [3.4K 2026-02-11 05:49]  ui
+│       ├── [3.2K 2026-02-11 05:49]  AmbientBackground.tsx
+│       ├── [1.5K 2026-02-11 05:49]  Callout.tsx
+│       ├── [4.3K 2026-02-11 05:49]  IconRenderer.tsx
+│       ├── [3.0K 2026-02-11 05:49]  SkeletonCard.tsx
+│       ├── [3.2K 2026-02-11 05:49]  ThemeToggle.tsx
+│       ├── [2.1K 2026-02-11 05:49]  accordion.tsx
+│       ├── [4.2K 2026-02-11 05:49]  button.tsx
+│       ├── [1.3K 2026-02-11 05:49]  skeleton-grid.tsx
+│       ├── [ 894 2026-02-11 05:49]  skeleton.tsx
+│       └── [3.3K 2026-02-11 05:49]  sonner.tsx
+├── [ 425 2026-02-11 05:49]  components.json
+├── [3.4K 2026-02-11 05:49]  config
+│   ├── [8.8K 2026-02-11 05:49]  00-SYSTEM-MANDATE.md
+│   └── [4.1K 2026-02-11 05:49]  01-SYSTEM-PROMPT-EXTENSION.md
+├── [3.4K 2026-02-11 05:49]  constants
+│   ├── [ 29K 2026-02-11 05:49]  area-nodes.ts
+│   ├── [ 19K 2026-02-11 05:49]  master-registry.ts
+│   ├── [2.4K 2026-02-11 05:49]  navigation.ts
+│   └── [4.5K 2026-02-11 05:49]  site-config.ts
+├── [3.4K 2026-02-11 05:49]  content
+│   ├── [3.4K 2026-02-11 05:49]  blog
+│   │   ├── [ 11K 2026-02-11 05:49]  5-points-killing-sales.mdx
+│   │   ├── [ 10K 2026-02-11 05:49]  advanced-schema-markup.mdx
+│   │   ├── [9.2K 2026-02-11 05:49]  case-study-unlink-th.mdx
+│   │   ├── [8.5K 2026-02-11 05:49]  copywriting-secrets.mdx
+│   │   ├── [9.9K 2026-02-11 05:49]  core-web-vitals-speed.mdx
+│   │   ├── [8.7K 2026-02-11 05:49]  ecommerce-conversion-seo.mdx
+│   │   ├── [9.5K 2026-02-11 05:49]  facebook-ads-vs-website.mdx
+│   │   ├── [ 10K 2026-02-11 05:49]  lower-north-digital-transformation.mdx
+│   │   ├── [ 16K 2026-02-11 05:49]  seo-2026-strategy.mdx
+│   │   └── [9.2K 2026-02-11 05:49]  technical-audit-protocol.mdx
+│   └── [3.4K 2026-02-11 05:49]  case-studies
+│       ├── [ 10K 2026-02-11 05:49]  case-study-industrial-catalog.mdx
+│       └── [9.7K 2026-02-11 05:49]  unlink-reputation-management-success.mdx
+├── [2.1K 2026-02-11 05:49]  eslint.config.mjs
+├── [ 420 2026-02-11 05:49]  knip.json
+├── [3.4K 2026-02-11 05:49]  lib
+│   ├── [5.9K 2026-02-11 05:49]  cms.ts
+│   ├── [4.7K 2026-02-11 05:49]  schema.ts
+│   ├── [2.2K 2026-02-11 05:49]  seo-utils.ts
+│   └── [3.6K 2026-02-11 05:49]  utils.ts
+├── [4.6K 2026-02-11 05:49]  mdx-components.tsx
+├── [ 251 2026-02-11 05:50]  next-env.d.ts
+├── [2.2K 2026-02-11 05:49]  next.config.ts
+├── [2.4K 2026-02-11 05:49]  package.json
+├── [239K 2026-02-11 05:49]  pnpm-lock.yaml
+├── [  51 2026-02-11 05:49]  pnpm-workspace.yaml
+├── [1.1K 2026-02-11 05:49]  postcss.config.mjs
+├── [3.4K 2026-02-11 05:49]  public
+│   └── [3.4K 2026-02-11 05:49]  images
+│       ├── [3.4K 2026-02-11 05:49]  areas
+│       ├── [3.4K 2026-02-11 05:49]  blog
+│       ├── [3.4K 2026-02-11 05:49]  case-studies
+│       ├── [3.4K 2026-02-11 05:49]  seo
+│       ├── [3.4K 2026-02-11 05:49]  service
+│       ├── [3.4K 2026-02-11 05:49]  shared
+│       └── [3.4K 2026-02-11 05:49]  templates
+│           ├── [3.4K 2026-02-11 05:49]  corporate-pro
+│           ├── [3.4K 2026-02-11 05:49]  event-magic
+│           ├── [3.4K 2026-02-11 05:49]  facebook-ads-expert
+│           ├── [3.4K 2026-02-11 05:49]  hotel-resort
+│           ├── [3.4K 2026-02-11 05:49]  local-service
+│           ├── [3.4K 2026-02-11 05:49]  personal-bio
+│           ├── [3.4K 2026-02-11 05:49]  restaurant-cafe
+│           ├── [3.4K 2026-02-11 05:49]  salepage-single
+│           ├── [3.4K 2026-02-11 05:49]  seo-agency
+│           ├── [3.4K 2026-02-11 05:49]  shopmasterpro
+│           ├── [3.4K 2026-02-11 05:49]  starter-landing
+│           └── [3.4K 2026-02-11 05:49]  webrental
+├── [3.4K 2026-02-11 05:49]  scripts
+│   ├── [1.2K 2026-02-11 05:49]  check-system.sh
+│   ├── [1.2K 2026-02-11 05:49]  clean-dev.sh
+│   ├── [2.0K 2026-02-11 05:49]  cleanup-images.sh
+│   ├── [3.4K 2026-02-11 05:49]  dev
+│   │   ├── [1.2K 2026-02-11 05:49]  clean-project.sh
+│   │   ├── [ 937 2026-02-11 05:49]  knip-check.sh
+│   │   └── [5.1K 2026-02-11 05:49]  pre-deploy-check.sh
+│   └── [2.2K 2026-02-11 05:49]  generate_docs.sh
+├── [ 693 2026-02-11 05:49]  tsconfig.json
+├── [3.4K 2026-02-11 05:49]  types
+│   ├── [6.7K 2026-02-11 05:49]  index.d.ts
+│   ├── [ 423 2026-02-11 05:49]  mdx.d.ts
+│   └── [3.0K 2026-02-11 05:49]  template-props.ts
+└── [2.4K 2026-02-11 05:49]  vercel.json
 
-69 directories, 115 files
+66 directories, 111 files
 ```
-
-/\*\*
-
-- [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
-- [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
-- [MAINTAINER]: AEMDEVWEB Specialist Team
-  \*/
-
-import nextMDX from "@next/mdx";
-import type { NextConfig } from "next";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkGfm from "remark-gfm";
-
-const isVercel = process.env.VERCEL === "1";
-
-const withMDX = nextMDX({
-extension: /\.mdx?$/,
-options: {
-remarkPlugins: [remarkGfm, remarkFrontmatter],
-rehypePlugins: [],
-},
-});
-
-const nextConfig: NextConfig = {
-pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-reactStrictMode: true,
-compress: true,
-
-experimental: {
-scrollRestoration: true,
-workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
-cpus: isVercel ? undefined : 1,
-
-    optimizePackageImports: [
-      "lucide-react",
-      "framer-motion",
-      "@radix-ui/react-slot",
-      "tailwindcss-animate",
-    ],
-    mdxRs: isVercel,
-
-},
-
-transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
-
-images: {
-deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-formats: ["image/avif", "image/webp"],
-
-    // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
-    qualities: [75, 85, 90],
-
-    minimumCacheTTL: 86400,
-    unoptimized: false,
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
-
-},
-
-async headers() {
-return [
-{
-source: "/\_next/static/(.\*)",
-headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-},
-];
-},
-
-webpack: (config, { dev, isServer }) => {
-if (!isVercel) {
-config.cache = false;
-}
-
-    if (!isServer) {
-      config.optimization.usedExports = true;
-    }
-
-    if (dev && !isVercel) {
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
-        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
-      };
-    }
-
-    return config;
-
-},
-};
-
-export default withMDX(nextConfig);
-
-{
-"version": 2,
-"framework": "nextjs",
-"installCommand": "pnpm install",
-"buildCommand": "pnpm build",
-"cleanUrls": true,
-"trailingSlash": false,
-"images": {
-"sizes": [256, 384, 640, 750, 828, 1080, 1200, 1920, 2048],
-"minimumCacheTTL": 86400,
-"formats": ["image/avif", "image/webp"]
-},
-"redirects": [
-{
-"source": "/services/corporate*lite",
-"destination": "/services/corporate",
-"permanent": true
-},
-{
-"source": "/services/corporate_pro",
-"destination": "/services/corporate",
-"permanent": true
-},
-{
-"source": "/templates/event_magic",
-"destination": "/services/corporate",
-"permanent": true
-},
-{
-"source": "/templates/booking/hotel-resort-node",
-"destination": "/services/hotelresort",
-"permanent": true
-},
-{
-"source": "/templates/local_service",
-"destination": "/services/new-service-name",
-"permanent": true
-},
-{
-"source": "/templates/new_service_name",
-"destination": "/services/new-service-name",
-"permanent": true
-},
-/* --- [STRATEGIC REDIRECTS: BLOG CONSOLIDATION] --- _/
-{
-"source": "/blog/technical-seo-guide",
-"destination": "/blog/seo-2026-strategy",
-"permanent": true
-},
-{
-"source": "/seo/technical-seo-guide",
-"destination": "/blog/seo-2026-strategy",
-"permanent": true
-},
-/_ --- [SEO LEGACY PATHS] --- _/
-{
-"source": "/seo/core-web-vitals-speed",
-"destination": "/blog/core-web-vitals-speed",
-"permanent": true
-},
-{
-"source": "/seo/advanced-schema-markup",
-"destination": "/blog/advanced-schema-markup",
-"permanent": true
-},
-{
-"source": "/seo/(._)",
-"destination": "/blog/$1",
-"permanent": true
-},
-{
-"source": "/old-service-path",
-"destination": "/services",
-"permanent": true
-}
-],
-"headers": [
-{
-"source": "/\_next/static/(.\_)",
-"headers": [
-{
-"key": "Cache-Control",
-"value": "public, max-age=31536000, immutable"
-}
-]
-},
-{
-"source": "/(.\*)",
-"headers": [
-{
-"key": "X-Content-Type-Options",
-"value": "nosniff"
-},
-{
-"key": "X-Frame-Options",
-"value": "DENY"
-},
-{
-"key": "Strict-Transport-Security",
-"value": "max-age=31536000; includeSubDomains; preload"
-}
-]
-}
-]
-}
-
----
-
-{
-"name": "aemdevweb.com",
-"version": "7.2.99",
-"private": true,
-"author": "AEMDEVWEB (Technical Infrastructure Specialist)",
-"description": "High-Performance Web Infrastructure & Technical SEO Specialist Hub",
-"engines": {
-"node": ">=22.0.0",
-"pnpm": ">=10.0.0"
-},
-"scripts": {
-"dev": "WATCHPACK_POLLING=true next dev --webpack",
-"type-check": "tsc --noEmit",
-"lint": "eslint .",
-"format": "prettier --write .",
-"fix": "pnpm format && pnpm lint --fix",
-"build": "next build --webpack",
-"start": "next start",
-"knip": "knip --cache --no-exit-code",
-"clean": "rm -rf .next node_modules pnpm-lock.yaml && pnpm install"
-},
-"dependencies": {
-"@img/sharp-wasm32": "^0.34.5",
-"@mdx-js/loader": "^3.1.1",
-"@mdx-js/react": "^3.1.1",
-"@next/mdx": "16.1.6",
-"@radix-ui/react-accordion": "^1.2.12",
-"@radix-ui/react-slot": "^1.2.4",
-"@vercel/speed-insights": "^1.3.1",
-"class-variance-authority": "^0.7.1",
-"clsx": "^2.1.1",
-"framer-motion": "^12.34.0",
-"gray-matter": "^4.0.3",
-"lucide-react": "^0.474.0",
-"next": "16.1.6",
-"next-mdx-remote": "^5.0.0",
-"next-themes": "^0.4.6",
-"nextjs-toploader": "^3.9.17",
-"react": "19.0.0",
-"react-dom": "19.0.0",
-"remark-frontmatter": "^5.0.0",
-"remark-gfm": "^4.0.1",
-"remark-unwrap-images": "^5.0.0",
-"sharp": "^0.34.5",
-"sonner": "^1.7.4",
-"tailwind-merge": "^3.4.0",
-"tailwindcss-animate": "^1.0.7"
-},
-"devDependencies": {
-"@eslint/js": "^9.39.2",
-"@next/eslint-plugin-next": "16.1.6",
-"@swc/helpers": "^0.5.18",
-"@tailwindcss/postcss": "^4.1.18",
-"@types/mdx": "^2.0.13",
-"@types/node": "22.13.1",
-"@types/react": "19.0.8",
-"@types/react-dom": "19.0.3",
-"autoprefixer": "^10.4.24",
-"eslint": "9.19.0",
-"eslint-plugin-tailwindcss": "^3.18.2",
-"eslint-plugin-unused-imports": "^4.4.1",
-"knip": "^5.83.1",
-"postcss": "^8.5.6",
-"prettier": "^3.8.1",
-"prettier-plugin-tailwindcss": "^0.7.2",
-"tailwindcss": "^4.1.18",
-"typescript": "^5.9.3",
-"typescript-eslint": "^8.54.0",
-"vercel": "^50.13.2"
-},
-"pnpm": {
-"shamefully-hoist": true,
-"overrides": {
-"react": "19.0.0",
-"react-dom": "19.0.0",
-"eslint-plugin-tailwindcss>tailwindcss": "$tailwindcss"
-},
-"onlyBuiltDependencies": [
-"esbuild",
-"sharp",
-"unrs-resolver"
-]
-}
-}
-
----
-
-{
-"compilerOptions": {
-"target": "ES2017",
-"lib": ["dom", "dom.iterable", "esnext"],
-"allowJs": true,
-"skipLibCheck": true,
-"strict": true,
-"noEmit": true,
-"esModuleInterop": true,
-"module": "esnext",
-"moduleResolution": "bundler",
-"resolveJsonModule": true,
-"isolatedModules": true,
-"jsx": "react-jsx",
-"incremental": true,
-"plugins": [
-{
-"name": "next"
-}
-],
-"paths": {
-"@/_": ["./_"]
-},
-"baseUrl": "."
-},
-"include": [
-"next-env.d.ts",
-"**/*.ts",
-"**/*.tsx",
-".next/types/**/*.ts",
-"types/**/*.d.ts",
-".next/dev/types/**/*.ts"
-],
-"exclude": ["node_modules"]
-}
-
----
-
-{
-"$schema": "https://ui.shadcn.com/schema.json",
-"style": "new-york",
-"rsc": true,
-"tsx": true,
-"tailwind": {
-"config": "",
-"css": "app/globals.css",
-"baseColor": "slate",
-"cssVariables": true,
-"prefix": ""
-},
-"aliases": {
-"components": "@/components",
-"utils": "@/lib/utils",
-"ui": "@/components/ui",
-"lib": "@/lib",
-"hooks": "@/hooks"
-},
-"iconLibrary": "lucide"
-}
-
-\_\_
-
-{
-"$schema": "https://unpkg.com/knip@5/schema.json",
-"next": {
-"entry": [
-"next.config.ts",
-"app/**/*.{ts,tsx}",
-"components/templates/**/Index.tsx",
-"lib/cms.ts"
-]
-},
-"project": ["**/*.{ts,tsx}"]
-}
-
-\_\_
