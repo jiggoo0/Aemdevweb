@@ -2,7 +2,7 @@
  * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v17.7.8
  * DO NOT EDIT MANUALLY. Run 'node scripts/gen-blur-data.mjs'
  */
-import { ImageBlurRegistry } from "@/types";
+import type { ImageBlurRegistry } from "@/types";
 
 export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
   "/images/areas/bangkok-node.webp": {

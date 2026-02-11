@@ -1,9 +1,14 @@
+/**
+ * [UI COMPONENT]: ACCORDION_PRIMITIVE v17.9.0 (HARDENED)
+ * [STRATEGY]: Radix UI Foundation | High-Fidelity Interaction | Specialist Styling
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
+ */
+
 "use client";
 
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
 
 const Accordion = AccordionPrimitive.Root;
@@ -14,7 +19,7 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn("border-border/50 border-b", className)}
+    className={cn("border-border/50 border-b transition-all duration-500", className)}
     {...props}
   />
 ));
@@ -28,13 +33,19 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "hover:text-brand-primary flex flex-1 items-center justify-between py-6 text-left text-sm font-bold tracking-wider uppercase transition-all [&[data-state=open]>svg]:rotate-180",
+        "hover:text-brand-primary flex flex-1 items-center justify-between py-6 text-left text-sm font-bold tracking-wider uppercase transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        "group [&[data-state=open]]:text-brand-primary [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
     >
-      {children}
-      <ChevronDown className="text-text-muted h-4 w-4 shrink-0 transition-transform duration-300" />
+      <span className="antialiased">{children}</span>
+      <ChevronDown
+        className={cn(
+          "text-text-muted h-4 w-4 shrink-0 transition-transform duration-500",
+          "group-hover:text-brand-primary/70",
+        )}
+      />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -46,10 +57,18 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
+    className={cn(
+      "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm transition-all",
+      "relative z-10", // มั่นใจว่าอยู่เหนือ Background
+    )}
     {...props}
   >
-    <div className={cn("text-text-secondary pt-0 pb-6 leading-relaxed font-medium", className)}>
+    <div
+      className={cn(
+        "text-text-secondary pt-0 pb-8 leading-relaxed font-medium italic opacity-90 md:text-base",
+        className,
+      )}
+    >
       {children}
     </div>
   </AccordionPrimitive.Content>

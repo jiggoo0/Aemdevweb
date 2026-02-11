@@ -1,5 +1,5 @@
 /**
- * [SYSTEM COMPONENT]: LAYOUT_ENGINE v17.8.5 (STABILIZED)
+ * [SYSTEM COMPONENT]: LAYOUT_ENGINE v17.9.0 (STABILIZED)
  * [STRATEGY]: Atmospheric Orchestration | Dynamic Theme Injection | Persona Sync
  */
 
@@ -49,6 +49,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
       className={cn(
         "relative flex min-h-screen w-full flex-col overflow-clip transition-colors duration-1000",
         isTailwindBg ? theme?.background : "bg-surface-main",
+        className,
       )}
       style={dynamicStyles}
     >
@@ -64,13 +65,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
         />
       )}
 
-      <main
-        className={cn(
-          "relative z-10 flex w-full flex-auto flex-col",
-          spacingMap[spacing],
-          className,
-        )}
-      >
+      <main className={cn("relative z-10 flex w-full flex-auto flex-col", spacingMap[spacing])}>
         {children}
       </main>
 

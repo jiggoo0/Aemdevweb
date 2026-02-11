@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.8.8 (PRERENDER_SAFE)
+ * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.9.0 (PRERENDER_SAFE)
  * [STRATEGY]: Contextual Injection | Zero-CLS Hardened | Null-Safe Mapping
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -34,7 +34,9 @@ interface LocalTemplateProps {
 const LocalTemplate = ({ data }: LocalTemplateProps) => {
   const ctx = data.localContext;
   const schema = useMemo(() => generateLocalBusinessSchema(data), [data]);
-  const imgData = IMAGE_BLUR_DATA[data.heroImage];
+
+  // [SAFETY]: Fallback if image not in registry (though unlikely with strict typing)
+  const imgData = IMAGE_BLUR_DATA[data.heroImage] || null;
 
   // [RESOLVED]: Safe Districts Extraction
   const districts = useMemo(() => data.districts || [], [data.districts]);
@@ -82,24 +84,27 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
 
       {/* --- FEATURED IMAGE NODE --- */}
       <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32">
-        <div
-          className="group border-border bg-surface-card relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border shadow-2xl md:rounded-[3rem]"
-          style={{
-            aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9",
-          }}
-        >
-          <Image
-            src={data.heroImage}
-            alt={`Web Infrastructure Specialist in ${data.province} - นายเอ็มซ่ามากส์`}
-            fill
-            priority
-            placeholder="blur"
-            blurDataURL={imgData?.blurDataURL}
-            className="object-cover transition-transform duration-[1.5s] group-hover:scale-[1.02]"
-            sizes="(max-width: 1280px) 100vw, 1280px"
-          />
-          <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-80" />
+        <div className="group border-border bg-surface-card relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border shadow-2xl md:rounded-[3rem]">
+          <div
+            className="relative w-full overflow-hidden"
+            style={{
+              aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9",
+            }}
+          >
+            <Image
+              src={data.heroImage}
+              alt={`Web Infrastructure Specialist in ${data.province} - นายเอ็มซ่ามากส์`}
+              fill
+              priority
+              placeholder={imgData ? "blur" : "empty"}
+              blurDataURL={imgData?.blurDataURL}
+              className="object-cover transition-transform duration-[1.5s] group-hover:scale-[1.02]"
+              sizes="(max-width: 1280px) 100vw, 1280px"
+            />
+            <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-80" />
+          </div>
 
+          {/* Location Badge Overlay */}
           <div className="absolute bottom-6 left-6 flex items-center gap-3 md:bottom-10 md:left-10">
             <div className="border-border bg-surface-card/40 flex h-12 w-12 items-center justify-center rounded-xl border backdrop-blur-md">
               <IconRenderer name="MapPin" className="text-brand-primary" size={24} />
@@ -159,17 +164,17 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
       {districts.length > 0 && (
         <section className="py-24">
           <div className="container mx-auto px-4">
-            <div className="mb-12 flex items-center gap-4 opacity-50">
+            <div className="mb-8 flex items-center gap-4 opacity-60">
               <IconRenderer name="Navigation" size={18} className="text-brand-primary" />
               <span className="text-text-primary text-xs font-black tracking-widest uppercase">
-                ขอบเขตบริการใน {data.province}
+                ขอบเขตบริการครอบคลุมพื้นที่ {data.province}
               </span>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {districts.map((d, i) => (
                 <span
                   key={i}
-                  className="border-border bg-surface-card text-text-secondary hover:border-brand-primary/50 hover:text-brand-primary rounded-full border px-5 py-2 text-xs font-bold transition-all"
+                  className="border-border bg-surface-card text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-glow cursor-default rounded-full border px-6 py-2.5 text-xs font-bold transition-all duration-300"
                 >
                   {d}
                 </span>
@@ -202,15 +207,20 @@ const LocalTemplate = ({ data }: LocalTemplateProps) => {
             technicalDetail: "ROI Focus",
           },
         ]}
+        columns={3}
       />
 
       <ConversionCTA
         title={`พร้อมครองตลาดใน ${data.province} หรือยังครับ?`}
-        description={`ให้นายเอ็มซ่ามากส์ ช่วยวางระบบเว็บไซต์ที่ถูกต้องให้ธุรกิจของคุณใน${data.province} เพื่อการเติบโตที่วัดผลได้จริงครับ`}
+        description={`ให้นายเอ็มซ่ามากส์ ช่วยวางระบบเว็บไซต์ที่ถูกต้องให้ธุรกิจของคุณใน ${data.province} เพื่อการเติบโตที่วัดผลได้จริงครับ`}
         buttonLabel="คุยกับนายเอ็มซ่ามากส์"
       />
 
-      <DynamicFAQ items={localFaqs} />
+      <DynamicFAQ
+        title={`คำถามที่พบบ่อยสำหรับธุรกิจใน ${data.province}`}
+        description="ข้อมูลเชิงลึกเฉพาะพื้นที่"
+        items={localFaqs}
+      />
     </LayoutEngine>
   );
 };

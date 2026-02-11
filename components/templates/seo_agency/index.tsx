@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.8.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.9.0 (STABILIZED)
  * [STRATEGY]: Technical Dominance | Semantic Excellence | Zero-CLS Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -74,7 +74,7 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
         </div>
       </section>
 
-      {/* 03. TECHNICAL CORE: ฟีเจอร์เชิงวิศวกรรม SEO (Zero-CLS Slot Reserved) */}
+      {/* 03. TECHNICAL CORE: ฟีเจอร์เชิงวิศวกรรม SEO */}
       <section id="strategy" className="py-24 md:py-32">
         <FeatureGrid
           heading="Core Growth Infrastructure"
@@ -120,32 +120,38 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
               </ul>
             </div>
 
-            {/* Visual Engineering Node (Slot Reserved) */}
-            <div
-              className="bg-surface-card border-border relative overflow-hidden rounded-[3rem] border shadow-2xl"
-              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "1/1" }}
-            >
-              {data.image ? (
-                <Image
-                  src={data.image}
-                  alt={`SEO Engineering Visual by นายเอ็มซ่ามากส์`}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={imgData?.blurDataURL}
-                  className="object-cover transition-transform duration-[2s] hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
-                  <IconRenderer name="Code2" size={120} className="text-brand-primary opacity-10" />
-                </div>
-              )}
+            {/* Visual Engineering Node */}
+            <div className="bg-surface-card border-border relative overflow-hidden rounded-[3rem] border shadow-2xl">
+              <div
+                className="relative w-full overflow-hidden"
+                style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "1/1" }}
+              >
+                {data.image ? (
+                  <Image
+                    src={data.image}
+                    alt={`SEO Engineering Visual by นายเอ็มซ่ามากส์`}
+                    fill
+                    placeholder="blur"
+                    blurDataURL={imgData?.blurDataURL}
+                    className="object-cover transition-transform duration-[2s] hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
+                    <IconRenderer
+                      name="Code2"
+                      size={120}
+                      className="text-brand-primary opacity-10"
+                    />
+                  </div>
+                )}
+              </div>
 
               {/* Specialist HUD Decoration */}
               <div className="text-brand-primary pointer-events-none absolute inset-10 flex flex-col justify-between font-mono text-[9px] font-black tracking-widest uppercase opacity-60">
                 <div className="border-brand-primary/20 flex justify-between border-b pb-2">
                   <span>Entity_ID: VALIDATED</span>
-                  <span>v17.8.5</span>
+                  <span>v17.9.0</span>
                 </div>
                 <div className="border-brand-primary/20 flex justify-between border-t pt-2">
                   <span>Knowledge_Graph: MAPPED</span>

@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.7.8 (STABILIZED_ASSETS)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.1 (STABILIZED_HOTFIX)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params (Next.js 15+)
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -30,10 +30,11 @@ export interface SkeletonCardProps extends BaseComponentProps {
   readonly aspectRatio?: "portrait" | "video" | "square";
 }
 
+/** [STRICT]: ไอคอนต้องตรงกับ Registry ใน IconRenderer เท่านั้น */
 export type IconName = string;
 
 // =========================================
-// [02] SITE CONFIGURATION & IDENTITY
+// [02] SITE CONFIGURATION & NAVIGATION
 // =========================================
 
 export interface NavItem {
@@ -120,10 +121,22 @@ export interface SiteConfig {
 }
 
 // =========================================
-// [03] DATA REGISTRY & SERVICES
+// [03] SERVICE REGISTRY & TEMPLATE DATA
 // =========================================
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal";
+
+/** [RESOLVED]: Exported for DynamicFAQ & TemplateProps support */
+export interface ServiceFaq {
+  readonly question: string;
+  readonly answer: string;
+}
+
+export interface ServiceFeature {
+  readonly title: string;
+  readonly description: string;
+  readonly icon: IconName;
+}
 
 export interface CatalogItem {
   readonly name: string;
@@ -139,17 +152,6 @@ export interface ExpertiseItem {
   readonly description: string;
   readonly icon: IconName;
   readonly level?: number;
-}
-
-export interface ServiceFeature {
-  readonly title: string;
-  readonly description: string;
-  readonly icon: IconName;
-}
-
-export interface ServiceFaq {
-  readonly question: string;
-  readonly answer: string;
 }
 
 export interface ThemeConfig {
@@ -184,7 +186,7 @@ export interface TemplateMasterData {
   readonly expertise?: readonly ExpertiseItem[];
 }
 
-/** [RESOLVED]: ผูกนิยาม ServiceData สำหรับใช้ในระบบ Listing */
+/** [RESOLVED]: ผูกนิยามสำหรับการใช้ในระบบ Listing Hub */
 export type ServiceData = TemplateMasterData;
 
 // =========================================
@@ -227,7 +229,7 @@ export interface CaseStudy extends BaseContent {
 }
 
 // =========================================
-// [05] GEO & AREA NODES
+// [05] GEO & AREA NODES (Programmatic SEO)
 // =========================================
 
 export interface LocalContext {
@@ -261,16 +263,10 @@ export interface AreaNode {
 // [06] ASSET & MEDIA INFRASTRUCTURE
 // =========================================
 
-/**
- * [RESOLVED]: ข้อมูลสำหรับป้องกัน CLS และสร้าง Blur-up Effect
- */
 export interface ImageBlurNode {
   readonly blurDataURL: string;
   readonly width: number;
   readonly height: number;
 }
 
-/**
- * [RESOLVED]: ฐานข้อมูลกลางสำหรับ Mapping รูปภาพกับ Metadata
- */
 export type ImageBlurRegistry = Record<string, ImageBlurNode>;

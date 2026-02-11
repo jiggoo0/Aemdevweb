@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.8.5 (STABILIZED)
+ * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.9.0 (STABILIZED)
  * [STRATEGY]: Knowledge Graph Linking | ItemList Collection | Semantic Hierarchy
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -13,7 +13,8 @@ export function generateCatalogSchema(data: TemplateMasterData) {
   const canonicalUrl = absoluteUrl(`/services/${data.templateSlug}`);
 
   // [DATA MAPPING]: รวมรายการ Node เพื่อสร้าง ItemList
-  const catalogItems = data.items || data.coreFeatures || [];
+  // ให้ความสำคัญกับ items (CatalogItem) ก่อน ถ้าไม่มีให้ใช้ coreFeatures (ServiceFeature)
+  const catalogItems = data.items && data.items.length > 0 ? data.items : data.coreFeatures || [];
 
   return {
     "@context": "https://schema.org",
@@ -40,6 +41,7 @@ export function generateCatalogSchema(data: TemplateMasterData) {
         "@id": `${canonicalUrl}/#itemlist`,
         numberOfItems: catalogItems.length,
         itemListElement: catalogItems.map((item, index) => {
+          // [TYPE GUARD]: ตรวจสอบว่า item มี property 'name' หรือไม่
           const itemName =
             "name" in item ? (item as CatalogItem).name : (item as ServiceFeature).title;
 

@@ -1,6 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.8.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.9.0 (STABILIZED_FINAL)
  * [STRATEGY]: Outcome-Driven | Persona Injected | Neural Physics | Zero-CLS
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
@@ -38,7 +39,7 @@ const HeroEngine = ({
 }: HeroEngineProps) => {
   const isCenter = align === "center";
 
-  // [RESOLVED]: กำหนดค่า ease เป็น Literal Tuple เพื่อให้ Match กับ Easing Type ของ Motion
+  // [RESOLVED]: Literal Tuple easing สำหรับ Motion เพื่อความสมูทสูงสุด
   const transition = {
     duration: 0.8,
     ease: [0.16, 1, 0.3, 1] as const,
@@ -141,6 +142,7 @@ const HeroEngine = ({
         </div>
       </div>
 
+      {/* Atmospheric Background Layer */}
       <div
         className={cn(
           "pointer-events-none absolute inset-0 -z-10",

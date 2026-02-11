@@ -1,9 +1,3 @@
-/**
- * [TEMPLATE SCHEMA]: SALE_PAGE_STRUCTURE v17.8.5 (STABILIZED)
- * [STRATEGY]: Multi-Rich Snippet (Product + FAQ) | Entity Graphing | Specialist Identity
- * [MAINTAINER]: AEMDEVWEB Specialist Team
- */
-
 import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { TemplateMasterData } from "@/types";
@@ -23,7 +17,6 @@ export function generateSalePageSchema(data: TemplateMasterData) {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      // NODE 1: PRODUCT (Sale Page Offering)
       {
         "@type": "Product",
         "@id": IDS.PRODUCT,
@@ -40,11 +33,9 @@ export function generateSalePageSchema(data: TemplateMasterData) {
           url: canonicalUrl,
           priceValidUntil: "2026-12-31",
           seller: { "@id": IDS.ORG },
-          offeredBy: { "@id": IDS.PERSON }, // ระบุ นายเอ็มซ่ามากส์ เป็นผู้เสนอโซลูชัน
+          offeredBy: { "@id": IDS.PERSON },
         },
       },
-
-      // NODE 2: WEB PAGE & ENTITY LINKING
       {
         "@type": "WebPage",
         "@id": IDS.WEBPAGE,
@@ -67,18 +58,13 @@ export function generateSalePageSchema(data: TemplateMasterData) {
           ],
         },
       },
-
-      // NODE 3: FAQ SCHEMA
       {
         "@type": "FAQPage",
         "@id": IDS.FAQ,
         mainEntity: (data.faqs || []).map((item) => ({
           "@type": "Question",
           name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
         })),
       },
     ],

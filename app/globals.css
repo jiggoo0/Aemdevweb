@@ -2,12 +2,12 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE STYLESHEET]: AEM-SYSTEM-v17.5.5 (IDENTITY_LOCKED)
- * [STRATEGY]: GPU Acceleration | Typography Fidelity | PSI Optimization
+ * [CORE STYLESHEET]: AEM-SYSTEM-v17.9.0 (STABILIZED_VIEWPORT)
+ * [STRATEGY]: Zero-Flash Overscroll | GPU Acceleration | Typography Fidelity
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-/* --- 01. BASE VARIABLES LAYER (Theme Logic) --- */
+/* --- 01. BASE VARIABLES LAYER --- */
 @layer base {
   :root {
     /* [TYPOGRAPHY SYSTEM] */
@@ -111,7 +111,7 @@
   }
 }
 
-/* --- 03. BASE LAYER RESET (Performance & Content Visibility) --- */
+/* --- 03. BASE LAYER RESET (Viewport & Performance) --- */
 @layer base {
   *,
   ::after,
@@ -127,41 +127,40 @@
     @apply scroll-smooth;
     scrollbar-gutter: stable;
 
-    /* [FIX 1: CORE]: Sync HTML background with Theme Surface */
+    /* [CRITICAL FIX]: Stop rubber-banding flash */
     background-color: var(--color-surface-main);
-
-    /* [FIX 2: OPTIONAL]: Prevent Mobile Rubber-band (White Space) */
     overscroll-behavior-y: none;
+    height: 100%;
   }
 
   body {
     @apply text-text-primary bg-surface-main overflow-x-hidden;
     font-family: var(--font-thai);
     line-height: 1.6;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum", "pnum";
     min-height: 100vh;
-    font-display: swap;
+    width: 100%;
+    position: relative;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum", "pnum";
   }
 
+  /* Typography Headers */
   h1 {
-    font-family: var(--font-sans);
     @apply text-text-primary font-bold tracking-tight;
+    font-family: var(--font-sans);
     line-height: 1.2;
-    content-visibility: visible !important;
     text-wrap: balance;
   }
-
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: var(--font-sans);
     @apply text-text-primary font-bold tracking-tight;
+    font-family: var(--font-sans);
     line-height: 1.2;
-    content-visibility: auto;
   }
 
+  /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -177,30 +176,25 @@
   }
 }
 
-/* --- 04. UTILITY LAYER (Technical Specialist) --- */
+/* --- 04. UTILITY LAYER --- */
 @layer utilities {
   .container {
     @apply mx-auto w-full max-w-[85rem] px-4 md:px-6;
   }
-
-  /* [CLS GUARD]: Aspect Ratio Utilities */
   .aspect-pro-hero {
     aspect-ratio: 16 / 9;
     @media (max-width: 768px) {
       aspect-ratio: 4 / 5;
     }
   }
-
   .hover-lift {
     @apply transition-transform duration-500 will-change-transform;
     &:hover {
       transform: translate3d(0, -4px, 0);
     }
   }
-
   .glass-morphism {
     @apply border-border/50 bg-surface-main/10 border shadow-2xl backdrop-blur-xl;
-    transform: translate3d(0, 0, 0);
   }
 
   .bg-infrastructure-grid {

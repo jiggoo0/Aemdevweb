@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: AMBIENT_BACKGROUND v17.8.5 (STABILIZED)
+ * [UI COMPONENT]: AMBIENT_BACKGROUND v17.9.0 (GPU_OPTIMIZED)
  * [STRATEGY]: GPU-Accelerated Atmosphere | Organic Pulse | Zero-LCP Impact
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -35,9 +35,9 @@ function AmbientBackground({
       aria-hidden="true"
       style={auraStyle}
     >
-      {/* 01. TECHNICAL GRID: ปรับปรุง Mask เพื่อความสมูท */}
+      {/* 01. TECHNICAL GRID */}
       <div
-        className="bg-infrastructure-grid absolute inset-0 transition-opacity duration-1000"
+        className="bg-infrastructure-grid absolute inset-0 transition-opacity duration-1000 will-change-transform"
         style={{
           opacity: gridOpacity,
           maskImage: "radial-gradient(circle at center, black, transparent 75%)",
@@ -45,13 +45,13 @@ function AmbientBackground({
         }}
       />
 
-      {/* 02. DYNAMIC AURAS: High-Fidelity Gradients */}
+      {/* 02. DYNAMIC AURAS */}
       <div
         className={cn(
           "absolute -top-[10%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
           "bg-[var(--aura-color)] opacity-[var(--aura-opacity)]",
           "mix-blend-soft-light blur-[80px] md:blur-[180px]",
-          "animate-aura-float transform-gpu will-change-transform",
+          "animate-float transform-gpu will-change-transform",
         )}
       />
 
@@ -64,7 +64,7 @@ function AmbientBackground({
         )}
       />
 
-      {/* 03. DEPTH SHIELD */}
+      {/* 03. DEPTH SHIELD: Prevents harsh transitions */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-surface-main)_120%)] opacity-80" />
     </div>
   );

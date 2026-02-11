@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.8.8 (PRERENDER_SAFE)
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.9.0 (STABLE_ADAPTER)
  * [STRATEGY]: Data Adapter Pattern | Safe Switch-Case | Zero-Crash Prerendering
  * [MAINTAINER]: นายเอ็มซ่ามากส์ (AEMDEVWEB Specialist Team)
  */
@@ -55,7 +55,7 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
 
   if (!service) notFound();
 
-  // [SCHEMA]: กราฟข้อมูลเชิงลึกสำหรับ Service Entity
+  // [SCHEMA]: Semantic Graph
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
@@ -65,10 +65,6 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
     generateServiceSchema(service),
   ]);
 
-  /**
-   * [DETERMINISTIC RENDERER]: ระบบเลือกเทมเพลตอัจฉริยะ
-   * มาพร้อมกับ Adapter เพื่อป้องกัน Data Mismatch ระหว่าง Prerendering
-   */
   const renderTemplate = () => {
     switch (service.templateSlug) {
       case "corporate":
@@ -79,12 +75,12 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
         return <CatalogTemplate data={service} />;
       case "bio":
         return <BioTemplate data={service} />;
+      case "seo_agency":
+        return <SeoAgencyTemplate data={service} />;
+      case "hotelresort":
+        return <HotelTemplate data={service} />;
 
       case "local-authority": {
-        /**
-         * [RESOLVED]: DATA_ADAPTER
-         * แปลง TemplateMasterData เป็น AreaNode จำลองเพื่อป้องกัน .map() พัง
-         */
         const safeAreaData: AreaNode = {
           slug: service.templateSlug,
           province: "ประเทศไทย",
@@ -94,22 +90,17 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
           seoDescription: service.description,
           priority: service.priority,
           templateSlug: "local-authority",
-          districts: [], // จ่ายค่า Array ว่างเพื่อป้องกัน TypeError
+          districts: [],
           keywords: service.keywords || [],
           heroImage: service.image || "/images/service/local-node.webp",
           localContext: {
-            marketInsight: "การเจาะตลาดท้องถิ่นในระดับประเทศ",
-            technicalApproach: "โครงสร้าง Technical SEO สำหรับ Local Search",
-            localStrength: "Specialist Knowledge",
+            marketInsight: "Market Insight",
+            technicalApproach: "Technical SEO",
+            localStrength: "Specialist",
           },
         };
         return <LocalTemplate data={safeAreaData} />;
       }
-
-      case "seo_agency":
-        return <SeoAgencyTemplate data={service} />;
-      case "hotelresort":
-        return <HotelTemplate data={service} />;
 
       default:
         return <CorporateTemplate data={service} />;
@@ -119,7 +110,8 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
   return (
     <LayoutEngine spacing="none" theme={service.theme}>
       <JsonLd data={fullSchema} />
-      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
+      {/* [CRITICAL]: min-h-screen ensures footer pushes down, avoiding white gap */}
+      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 min-h-screen duration-1000">
         <div className="flex justify-center pt-24 pb-4">
           <div className="border-border bg-surface-card/50 flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md">
             <div className="bg-brand-primary h-1 w-1 animate-pulse rounded-full" />

@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: SEO_AGENCY_STRUCTURE v17.8.5 (STABILIZED)
+ * [TEMPLATE SCHEMA]: SEO_AGENCY_STRUCTURE v17.9.0 (STABILIZED)
  * [STRATEGY]: Service Entity Graphing | EEAT Validation | Specialist Linking
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */

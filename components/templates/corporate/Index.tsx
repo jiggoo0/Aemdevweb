@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.8.5 (ZERO_CLS)
+ * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.9.0 (ZERO_CLS)
  * [STRATEGY]: Outcome-Driven Architecture | Asset Metadata Injection | Performance First
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -75,7 +75,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
                 alt={`Enterprise Architecture: ${data.title}`}
                 fill
                 priority
-                placeholder="blur"
+                placeholder={imgData ? "blur" : "empty"}
                 blurDataURL={imgData?.blurDataURL}
                 className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
@@ -170,6 +170,7 @@ function CorporateTemplate({ data }: CorporateTemplateProps) {
               </ul>
             </div>
 
+            {/* Visual Security Badge */}
             <div className="relative mx-auto w-full max-w-md">
               <div className="bg-brand-primary/10 absolute inset-0 animate-pulse rounded-full blur-3xl" />
               <div className="border-border bg-surface-card/40 shadow-glow relative flex aspect-square w-full items-center justify-center rounded-[3rem] border backdrop-blur-sm">

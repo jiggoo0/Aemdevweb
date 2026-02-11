@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.5.5 (STABILIZED)
+ * [ROUTE PAGE]: AREA_DETAIL_ENGINE v17.9.0 (GEO_AUTHORITY)
  * [STRATEGY]: Local Authority Engine | Linked Data Graph | Deterministic Rendering
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -8,12 +8,10 @@ import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-// --- 1. Infrastructure & Core Data ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
 
-// --- 2. SEO & Schema Protocols ---
 import { constructMetadata } from "@/lib/seo-utils";
 import {
   generateLocalBusinessSchema,
@@ -22,26 +20,18 @@ import {
 } from "@/lib/schema";
 import JsonLd from "@/components/seo/JsonLd";
 
-// --- 3. Templates ---
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-
-// [REFACTOR]: Changed from 'new-service-name' to 'local-authority'
 import LocalTemplate from "@/components/templates/local-authority/index";
 
-/* [A] STATIC GENERATION ENGINE (SSG) */
 export async function generateStaticParams() {
-  return AREA_NODES.map((area) => ({
-    slug: area.slug,
-  }));
+  return AREA_NODES.map((area) => ({ slug: area.slug }));
 }
 
-/* [B] SEO METADATA ENGINE */
 export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
   const params = await props.params;
-  const area: AreaNode | undefined = AREA_NODES.find((a) => a.slug === params.slug);
-
+  const area = AREA_NODES.find((a) => a.slug === params.slug);
   if (!area) return { title: "404 Not Found" };
 
   return constructMetadata({
@@ -53,11 +43,8 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
   });
 }
 
-/**
- * [DETERMINISTIC ADAPTER]: แปลงข้อมูล AreaNode ให้รองรับโครงสร้าง TemplateMasterData
- */
 const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
-  const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw: string) => ({
+  const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw) => ({
     question: `บริการ ${kw} ในจังหวัด ${area.province} มีจุดเด่นอย่างไร?`,
     answer: `เราเน้นการทำ ${kw} ที่ออกแบบมาเพื่อพฤติกรรมลูกค้าใน ${area.province} โดยเฉพาะ พร้อมโครงสร้าง Technical SEO ที่ช่วยให้ธุรกิจของคุณแซงหน้าคู่แข่งได้ทันทีครับ`,
   }));
@@ -69,7 +56,7 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
     description: area.description,
     image: area.heroImage,
     price: "ประเมินตามพื้นที่",
-    priceValue: 0,
+    priceValue: 15000, // [DEFAULT]: Set logic baseline
     currency: "THB",
     unit: "โปรเจกต์",
     faqs: generatedFaqs,
@@ -87,7 +74,7 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
       `มาตรฐานวิศวกรรมในพื้นที่ ${area.province}`,
       "Technical SEO Optimized 100%",
     ],
-    theme: { primary: "#2563eb", secondary: "#1e40af" },
+    theme: { primary: "#2563eb", secondary: "#1e40af", background: "bg-surface-main" },
     category: "business",
     priority: 99,
     keywords: area.keywords || [],
@@ -98,7 +85,7 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
 
 export default async function AreaDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
-  const area: AreaNode | undefined = AREA_NODES.find((a) => a.slug === params.slug);
+  const area = AREA_NODES.find((a) => a.slug === params.slug);
 
   if (!area) notFound();
 
@@ -112,17 +99,12 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
   ]);
 
   const renderTemplate = () => {
-    // [STRICT_TYPING]: บังคับใช้ TemplateMasterData เพื่อยืนยันการใช้งาน Type ต่อ ESLint
     const templateData: TemplateMasterData = adaptAreaToTemplateData(area);
-
     switch (area.templateSlug) {
       case "corporate":
         return <CorporateTemplate data={templateData} />;
       case "salepage":
         return <SalePageTemplate data={templateData} />;
-      case "local":
-      case "local-authority": // [FIXED]: Updated case name
-        return <LocalTemplate data={area} />;
       default:
         return <LocalTemplate data={area} />;
     }
@@ -131,8 +113,7 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
   return (
     <LayoutEngine spacing="none">
       <JsonLd data={fullSchema} />
-      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
-        {/* Node Status Indicator */}
+      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 min-h-screen duration-1000">
         <div className="flex justify-center pt-24 pb-4">
           <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
             Area_Node_Sync: v{SITE_CONFIG.project.version}

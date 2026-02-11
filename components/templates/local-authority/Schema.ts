@@ -1,6 +1,7 @@
 /**
- * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.8.8 (NULL_SAFE)
- * [FIX]: Removed unused 'ctx' variable to satisfy ESLint.
+ * [TEMPLATE SCHEMA]: LOCAL_BUSINESS_STRUCTURE v17.9.0 (NULL_SAFE)
+ * [STRATEGY]: Local SEO Graph | AreaServed Optimization | Specialist Linking
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -29,7 +30,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
         },
         isPartOf: { "@id": absoluteUrl("/#website") },
         provider: { "@id": absoluteUrl("/#organization") },
-        offeredBy: { "@id": absoluteUrl("/#person") },
+        offeredBy: { "@id": absoluteUrl("/#person") }, // เชื่อมโยงกับ นายเอ็มซ่ามากส์
         areaServed: [
           { "@type": "City", name: provinceName },
           // [RESOLVED]: Safe Mapping for Districts in Schema
@@ -38,6 +39,7 @@ export function generateLocalBusinessSchema(data: AreaNode) {
             name: `${d}, ${provinceName}`,
           })),
         ],
+        priceRange: "฿฿", // ระบุช่วงราคาเพื่อความสมบูรณ์ของ Schema
       },
     ],
   };

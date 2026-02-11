@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.0 (STABILIZED_FINAL)
  * [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -26,7 +26,11 @@ const nextConfig: NextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
+    
+    // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Proot/Termux Environments
+    workerThreads: false, 
+    
+    // [RESOURCE]: จำกัดการใช้ CPU เพื่อความเสถียรบนโมบายฮาร์ดแวร์
     cpus: isVercel ? undefined : 1,
 
     optimizePackageImports: [
@@ -35,6 +39,8 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
       "tailwindcss-animate",
     ],
+    
+    // [COMPILER]: เปิดใช้งาน Rust-based compiler เมื่ออยู่บน Vercel เท่านั้น
     mdxRs: isVercel,
   },
 
@@ -45,24 +51,41 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
 
-    // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
+    // [FIDELITY]: อนุญาตค่า Quality เฉพาะที่กำหนดใน Components เพื่อประสิทธิภาพสูงสุด
     qualities: [75, 85, 90],
 
     minimumCacheTTL: 86400,
     unoptimized: false,
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**", // [ADVISORY]: พิจารณาเจาะจง Hostname เมื่อขึ้น Production จริง
+      },
+    ],
   },
 
+  /**
+   * [HEADERS]: กำหนดนโยบายการทำ Caching สำหรับ Static Assets
+   */
   async headers() {
     return [
       {
         source: "/_next/static/(.*)",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
     ];
   },
 
+  /**
+   * [WEBPACK]: ปรับแต่งการทำ Bundling และระบบ File Watching ใน Termux
+   */
   webpack: (config, { dev, isServer }) => {
+    // ปิดการใช้ Disk Cache ใน Termux เพื่อป้องกันปัญหา File System Lock
     if (!isVercel) {
       config.cache = false;
     }
@@ -71,6 +94,7 @@ const nextConfig: NextConfig = {
       config.optimization.usedExports = true;
     }
 
+    // [TERMINAL OPS]: แก้ไขปัญหา Hot Reload ไม่ทำงานบน Android Filesystem
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,

@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: BIO_DATA_STRUCTURE v17.8.0 (STABILIZED)
+ * [TEMPLATE SCHEMA]: BIO_DATA_STRUCTURE v17.9.0 (STABILIZED)
  * [STRATEGY]: Knowledge Graph Linking | Entity Resolution | Semantic Authority
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -11,7 +11,7 @@ import type { TemplateMasterData } from "@/types";
 export function generateBioSchema(data: TemplateMasterData) {
   const canonicalUrl = absoluteUrl(`/services/${data.templateSlug}`);
 
-  // [FIX]: ป้องกัน Error กรณีข้อมูลไม่ครบถ้วน
+  // [SAFETY]: ป้องกัน Error กรณีข้อมูล Array เป็น undefined
   const expertiseList = (data.coreFeatures || []).map((feat) => feat.title);
   const price = (data.priceValue || 0).toString();
 

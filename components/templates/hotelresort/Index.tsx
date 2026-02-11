@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.8.5 (ZERO_CLS)
+ * [TEMPLATE COMPONENT]: HOTEL_LUXURY_ORCHESTRATOR v17.9.0 (ZERO_CLS)
  * [STRATEGY]: Experience-First Design | Visual Stability | Specialist ROI Logic
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -91,28 +91,35 @@ const HotelTemplate = ({ data }: HotelTemplateProps) => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:items-center">
             {/* Visual Node (Slot Reserved) */}
-            <div
-              className="bg-surface-card border-border relative overflow-hidden rounded-[3rem] border shadow-2xl"
-              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "4/5" }}
-            >
-              {data.image ? (
-                <Image
-                  src={data.image}
-                  alt={`Hospitality UI/UX Excellence: ${data.title}`}
-                  fill
-                  placeholder="blur"
-                  blurDataURL={imgData?.blurDataURL}
-                  className="object-cover transition-transform duration-[2s] hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              ) : (
-                <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
-                  <IconRenderer name="Image" size={120} className="text-brand-primary opacity-20" />
-                </div>
-              )}
+            <div className="relative w-full">
+              <div
+                className="bg-surface-card border-border relative w-full overflow-hidden rounded-[3rem] border shadow-2xl"
+                style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "4/5" }}
+              >
+                {data.image ? (
+                  <Image
+                    src={data.image}
+                    alt={`Hospitality UI/UX Excellence: ${data.title}`}
+                    fill
+                    placeholder="blur"
+                    blurDataURL={imgData?.blurDataURL}
+                    className="object-cover transition-transform duration-[2s] hover:scale-105"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
+                    <IconRenderer
+                      name="Image"
+                      size={120}
+                      className="text-brand-primary opacity-20"
+                    />
+                  </div>
+                )}
+              </div>
 
-              <div className="absolute inset-8 flex flex-col justify-end">
-                <div className="bg-surface-main/80 border-border rounded-2xl border p-8 backdrop-blur-md">
+              {/* Overlay Content */}
+              <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-8">
+                <div className="bg-surface-main/80 border-border pointer-events-auto rounded-2xl border p-8 backdrop-blur-md">
                   <span className="text-brand-primary mb-2 block font-mono text-[10px] font-black tracking-widest uppercase">
                     Direct_Booking_ROI
                   </span>

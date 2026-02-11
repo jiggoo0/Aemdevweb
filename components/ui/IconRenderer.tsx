@@ -1,6 +1,6 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.4.5 (STABILIZED_FINAL)
- * [STRATEGY]: Static Tree-Shaking | Zero-Runtime Error | Semantic Fallback
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.0 (HARDENED_STABILIZED)
+ * [STRATEGY]: Static Tree-Shaking | Zero-Runtime Error | GPU Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -76,6 +76,7 @@ import {
   Monitor,
   Laptop,
   Image as ImageIcon,
+  Box,
 
   // 4. Social & Media
   MessageCircle,
@@ -100,7 +101,7 @@ import {
 
 /**
  * [REGISTRY]: ทะเบียนสัญลักษณ์มาตรฐาน
- * การทำ Static Mapping ช่วยให้ Next.js ทำ Tree-shaking ตัด Code ส่วนเกินออกได้ 100%
+ * การทำ Static Mapping ช่วยให้ Next.js ทำ Tree-shaking ตัด Code ส่วนเกินออกได้จริง 100%
  */
 export const ICON_MAP = {
   // Core
@@ -170,6 +171,7 @@ export const ICON_MAP = {
   Monitor,
   Laptop,
   Image: ImageIcon,
+  Box,
 
   // Social
   MessageCircle,
@@ -204,7 +206,7 @@ interface IconRendererProps extends Omit<LucideProps, "ref"> {
 /**
  * @component IconRenderer
  * @description หน่วยแสดงผลสัญลักษณ์มาตรฐาน (Standardized Icon Unit)
- * รองรับการทำงานร่วมกับ CMS Data ที่อาจส่ง string มาเป็นชื่อไอคอน
+ * ออกแบบมาเพื่อป้องกัน Layout Shift และรองรับ GPU Acceleration
  */
 const IconRenderer = ({
   name,
@@ -214,19 +216,18 @@ const IconRenderer = ({
   title,
   ...props
 }: IconRendererProps) => {
-  // [LOGIC]: Direct Registry Lookup (O(1) complexity)
+  // [LOGIC]: Direct Registry Lookup (O(1))
   const IconComponent = ICON_MAP[name as IconName];
 
-  // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (เช่น CMS ส่งชื่อผิด)
+  // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (ป้องกันหน้าขาว)
   if (!IconComponent) {
     if (process.env.NODE_ENV === "development") {
-      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry v17.4.5`);
+      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry v17.9.0`);
     }
-    // แสดง Placeholder ที่ไม่ทำลาย Layout
     return (
       <AlertTriangle
         size={size}
-        className={cn("text-text-muted/40 opacity-50", className)}
+        className={cn("text-text-muted/40 shrink-0 opacity-50", className)}
         strokeWidth={1.5}
         {...props}
       />
@@ -237,8 +238,7 @@ const IconRenderer = ({
     <IconComponent
       size={size}
       className={cn(
-        /* Base Style: รองรับการสลับธีมและ Animation */
-        "text-text-primary shrink-0 transition-all duration-300",
+        "text-text-primary shrink-0 transition-all duration-300 will-change-transform",
         className,
       )}
       strokeWidth={strokeWidth}

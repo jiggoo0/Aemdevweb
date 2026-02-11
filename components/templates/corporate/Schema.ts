@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.8.5 (GRAPH_ENTERPRISE)
+ * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.9.0 (GRAPH_ENTERPRISE)
  * [STRATEGY]: Knowledge Graph Architecture | Entity Resolution | Specialist Trust
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -34,8 +34,10 @@ export function generateCorporateSchema(data: TemplateMasterData) {
         description: data.description,
         image: data.image ? absoluteUrl(data.image) : undefined,
         provider: { "@id": IDS.ORG },
-        seller: { "@id": IDS.PERSON }, // ระบุ นายเอ็มซ่ามากส์ เป็นผู้รับผิดชอบหลัก
+        // [ENTITY]: เชื่อมโยงกับบุคคล (นายเอ็มซ่ามากส์) เพื่อสร้าง Trust
+        seller: { "@id": IDS.PERSON },
         areaServed: { "@type": "Country", name: "Thailand" },
+        // [OFFER]: แสดงรายการบริการย่อย
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Enterprise Capability Matrix",

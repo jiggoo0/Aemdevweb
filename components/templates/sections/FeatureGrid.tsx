@@ -1,5 +1,5 @@
 /**
- * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.8.5 (STABILIZED)
+ * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.9.0 (STABILIZED)
  * [STRATEGY]: Technical Authority | Responsive Matrix | GPU Optimized
  */
 
@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
-import type { ServiceFeature } from "@/types";
+import type { ServiceFeature, IconName } from "@/types";
 
 interface FeatureGridProps {
   readonly items: readonly (ServiceFeature & { technicalDetail?: string })[];
@@ -27,10 +27,11 @@ const FeatureGrid = ({
   columns = 3,
   className,
 }: FeatureGridProps) => {
+  // [OPTIMIZATION]: Improved Grid Logic for better responsiveness
   const gridCols = {
-    2: "md:grid-cols-2",
-    3: "md:grid-cols-2 lg:grid-cols-3",
-    4: "md:grid-cols-2 lg:grid-cols-4",
+    2: "grid-cols-1 md:grid-cols-2",
+    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
+    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
   return (
@@ -63,7 +64,7 @@ const FeatureGrid = ({
               className="group bg-surface-card border-border hover:border-brand-primary/40 hover:shadow-glow-sm relative flex flex-col rounded-[3.5rem] border p-12 transition-all duration-500 hover:-translate-y-3"
             >
               <div className="text-brand-primary group-hover:bg-brand-primary bg-surface-offset group-hover:text-surface-main group-hover:shadow-glow mb-12 flex h-20 w-20 items-center justify-center rounded-[2rem] transition-all duration-500 group-hover:-rotate-6">
-                <IconRenderer name={feature.icon} size={36} />
+                <IconRenderer name={feature.icon as IconName} size={36} />
               </div>
               <div className="flex-grow space-y-5">
                 <h3 className="text-text-primary group-hover:text-brand-primary text-3xl leading-none font-black tracking-tighter uppercase italic transition-colors">

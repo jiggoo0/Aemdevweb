@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE SCHEMA]: HOTEL_RESORT_STRUCTURE v17.8.5 (STABILIZED)
+ * [TEMPLATE SCHEMA]: HOTEL_RESORT_STRUCTURE v17.9.0 (STABILIZED)
  * [STRATEGY]: LodgingBusiness Entity | Geo-Data Integration | Specialist Linking
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -33,7 +33,7 @@ export function generateHotelSchema(data: TemplateMasterData) {
         name: data.title,
         description: data.description,
         image: data.image ? absoluteUrl(data.image) : undefined,
-        priceRange: "฿฿฿",
+        priceRange: "฿฿฿", // [CONFIG]: ปรับตามระดับราคาจริงถ้ามีข้อมูล
         provider: { "@id": absoluteUrl("/#organization") },
         offeredBy: { "@id": absoluteUrl("/#person") }, // โดย นายเอ็มซ่ามากส์
         amenityFeature: (data.benefits || []).map((benefit) => ({

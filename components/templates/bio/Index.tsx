@@ -1,5 +1,5 @@
 /**
- * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.8.5 (STABILIZED)
+ * [TEMPLATE COMPONENT]: BIO_IDENTITY_ORCHESTRATOR v17.9.0 (STABILIZED)
  * [STRATEGY]: Instant LCP Paint | Identity Graphing | Performance First
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -25,7 +25,7 @@ import IconRenderer from "@/components/ui/IconRenderer";
 import ImpactStats from "@/components/shared/ImpactStats";
 
 // --- LOGIC ---
-import type { TemplateMasterData } from "@/types";
+import type { TemplateMasterData, IconName } from "@/types";
 import { generateBioSchema } from "./Schema";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -36,6 +36,12 @@ interface BioTemplateProps {
 function BioTemplate({ data }: BioTemplateProps) {
   const schema = useMemo(() => generateBioSchema(data), [data]);
   const imgData = data.image ? IMAGE_BLUR_DATA[data.image] : null;
+
+  // [CONFIG]: Social Links Mapping for Visual Display
+  const socialLinks = [
+    { name: "Github", href: SITE_CONFIG.links.github, icon: "Github" },
+    { name: "Facebook", href: SITE_CONFIG.links.facebook, icon: "Facebook" },
+  ];
 
   return (
     <LayoutEngine spacing="specialist" theme={data.theme}>
@@ -65,11 +71,9 @@ function BioTemplate({ data }: BioTemplateProps) {
           <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-opacity duration-1000 group-hover:opacity-40" />
 
           <div className="border-border bg-surface-card relative overflow-hidden rounded-[3rem] border shadow-2xl md:rounded-[4rem] md:p-4">
+            {/* Social Links Overlay */}
             <div className="absolute top-8 right-8 z-20 hidden items-center gap-3 md:flex">
-              {[
-                { name: "Github", href: SITE_CONFIG.links?.github, icon: "Github" },
-                { name: "Facebook", href: SITE_CONFIG.links?.facebook, icon: "Facebook" },
-              ].map(
+              {socialLinks.map(
                 (social) =>
                   social.href && (
                     <a
@@ -80,12 +84,13 @@ function BioTemplate({ data }: BioTemplateProps) {
                       className="border-border bg-surface-main/40 hover:bg-brand-primary hover:text-surface-main flex h-12 w-12 items-center justify-center rounded-full border backdrop-blur-md transition-all hover:scale-110"
                       aria-label={social.name}
                     >
-                      <IconRenderer name={social.icon} size={20} />
+                      <IconRenderer name={social.icon as IconName} size={20} />
                     </a>
                   ),
               )}
             </div>
 
+            {/* Main Visual */}
             <div
               className="bg-surface-offset relative w-full overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem]"
               style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "16/9" }}
@@ -95,7 +100,7 @@ function BioTemplate({ data }: BioTemplateProps) {
                 alt={`Portfolio: ${SITE_CONFIG.expert.displayName}`}
                 fill
                 priority
-                placeholder="blur"
+                placeholder={imgData ? "blur" : "empty"}
                 blurDataURL={imgData?.blurDataURL}
                 className="object-cover object-top transition-transform duration-1000 group-hover:scale-[1.02]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
@@ -105,6 +110,7 @@ function BioTemplate({ data }: BioTemplateProps) {
             </div>
           </div>
 
+          {/* Floating Expert Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
