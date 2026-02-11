@@ -26,10 +26,10 @@ const nextConfig: NextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    
+
     // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Proot/Termux Environments
-    workerThreads: false, 
-    
+    workerThreads: false,
+
     // [RESOURCE]: จำกัดการใช้ CPU เพื่อความเสถียรบนโมบายฮาร์ดแวร์
     cpus: isVercel ? undefined : 1,
 
@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
       "tailwindcss-animate",
     ],
-    
+
     // [COMPILER]: เปิดใช้งาน Rust-based compiler เมื่ออยู่บน Vercel เท่านั้น
     mdxRs: isVercel,
   },

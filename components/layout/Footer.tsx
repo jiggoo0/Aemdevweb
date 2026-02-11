@@ -1,6 +1,6 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.5.5 (SYNCHRONIZED)
- * [STRATEGY]: Atomic Data Mapping | Performance Optimized | Vivid UI Physics
+ * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.9.0 (SYNCHRONIZED_FINAL)
+ * [STRATEGY]: Atomic Data Mapping | Performance Optimized | E-E-A-T Signals
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -13,7 +13,7 @@ import { FOOTER_MAP } from "@/constants/navigation";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 
 const Footer = () => {
-  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 ตาม Mandate ระบบ
+  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 ตาม Mandate ระบบปี 2026
   const currentYear = 2026;
 
   return (
@@ -22,16 +22,19 @@ const Footer = () => {
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
+
+      {/* Ambient Aura: สร้างมิติแสงบริเวณมุมล่าง */}
       <div
-        className="ambient-aura absolute -bottom-48 -left-48 h-[600px] w-[600px] opacity-20 blur-[120px]"
+        className="ambient-aura pointer-events-none absolute -bottom-48 -left-48 h-[600px] w-[600px] opacity-20 blur-[120px]"
         style={{
           background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)",
         }}
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
+        {/* Main Footer Grid */}
         <div className="mb-24 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-          {/* Node 01: Brand Identity & Mission */}
+          {/* Node 01: Brand Identity & Social Matrix */}
           <div className="space-y-8">
             <div className="space-y-6">
               <Link href="/" className="group inline-flex items-center gap-4 outline-none">
@@ -52,7 +55,6 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Social Matrix */}
             <div className="flex items-center gap-3">
               {[
                 { name: "Facebook", href: SITE_CONFIG.links.facebook, icon: "Facebook" },
