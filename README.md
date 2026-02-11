@@ -1,607 +1,226 @@
-termux
-
---- [ CLEANING AEMDEVWEB JUNK ] ---
-Cleaning Next.js cache...
-Pruning pnpm store...
-Removed all cached metadata files
-Removed 0 files
-Removed 0 packages
-Cleaning npm cache...
-npm warn Unknown project config "arch". This will stop working in the next major version of npm.
-npm warn using --force Recommended protections disabled.
-Cleaning Termux APT cache...
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-Cleaning ~/.cache...
---- [ CLEAN COMPLETED ] ---
-Current storage status:
-Available: 74G
-➜ Aemdevweb git:(main) ✗ pf
-! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.29.2.tgz
-? Do you want to continue? [Y/n] y
-
-> aemdevweb.com@7.2.99 format /data/data/com.termux/files/home/Aemdevweb
-> prettier --write .
-
-.prettierrc 175ms (unchanged)
-app/(routes)/areas/[slug]/page.tsx 805ms (unchanged)
-app/(routes)/areas/page.tsx 199ms (unchanged)
-app/(routes)/blog/[slug]/page.tsx 151ms (unchanged)
-app/(routes)/blog/page.tsx 95ms (unchanged)
-app/(routes)/case-studies/[slug]/page.tsx 161ms (unchanged)
-app/(routes)/case-studies/page.tsx 64ms (unchanged)
-app/(routes)/services/[slug]/page.tsx 100ms (unchanged)
-app/(routes)/services/page.tsx 188ms (unchanged)
-app/about/page.tsx 123ms (unchanged)
-app/globals.css 508ms
-app/layout.tsx 269ms (unchanged)
-app/loading.tsx 375ms (unchanged)
-app/manifest.ts 111ms (unchanged)
-app/not-found.tsx 166ms (unchanged)
-app/page.tsx 426ms (unchanged)
-app/privacy/page.tsx 257ms (unchanged)
-app/robots.ts 86ms (unchanged)
-app/sitemap.ts 199ms (unchanged)
-app/status/page.tsx 533ms (unchanged)
-app/terms/page.tsx 214ms (unchanged)
-components.json 27ms (unchanged)
-components/features/areas/AreaCard.tsx 341ms (unchanged)
-components/features/blog/BlogCard.tsx 154ms (unchanged)
-components/features/case-studies/CaseStudyCard.tsx 145ms (unchanged)
-components/features/landing/Hero.tsx 208ms (unchanged)
-components/features/landing/PricingSection.tsx 216ms (unchanged)
-components/features/landing/WorkProcess.tsx 217ms (unchanged)
-components/features/services/ServiceCard.tsx 289ms (unchanged)
-components/features/services/ServiceListingHub.tsx 264ms (unchanged)
-components/layout/Footer.tsx 316ms (unchanged)
-components/layout/Navbar.tsx 276ms (unchanged)
-components/layout/PageTransition.tsx 90ms
-components/layout/TopLoader.tsx 59ms (unchanged)
-components/providers/theme-provider.tsx 59ms (unchanged)
-components/seo/JsonLd.tsx 64ms (unchanged)
-components/shared/ConversionCTA.tsx 185ms (unchanged)
-components/shared/ImpactStats.tsx 326ms (unchanged)
-components/shared/LineStickyButton.tsx 264ms (unchanged)
-components/shared/TrustBadge.tsx 160ms (unchanged)
-components/templates/bio/Index.tsx 262ms (unchanged)
-components/templates/bio/Schema.ts 169ms (unchanged)
-components/templates/catalog/Index.tsx 329ms (unchanged)
-components/templates/catalog/Schema.ts 93ms (unchanged)
-components/templates/corporate/Index.tsx 207ms (unchanged)
-components/templates/corporate/Schema.ts 196ms (unchanged)
-components/templates/hotelresort/Index.tsx 81ms (unchanged)
-components/templates/hotelresort/Schema.ts 44ms (unchanged)
-components/templates/local-authority/index.tsx 90ms (unchanged)
-components/templates/local-authority/Schema.ts 35ms (unchanged)
-components/templates/salepage/Index.tsx 79ms (unchanged)
-components/templates/salepage/Schema.ts 51ms (unchanged)
-components/templates/sections/DynamicFAQ.tsx 42ms (unchanged)
-components/templates/sections/FeatureGrid.tsx 50ms (unchanged)
-components/templates/sections/HeroEngine.tsx 57ms (unchanged)
-components/templates/sections/LayoutEngine.tsx 101ms (unchanged)
-components/templates/seo_agency/index.tsx 334ms (unchanged)
-components/templates/seo_agency/Schema.ts 169ms (unchanged)
-components/ui/accordion.tsx 152ms (unchanged)
-components/ui/AmbientBackground.tsx 126ms (unchanged)
-components/ui/button.tsx 154ms (unchanged)
-components/ui/Callout.tsx 125ms (unchanged)
-components/ui/IconRenderer.tsx 190ms (unchanged)
-components/ui/skeleton-grid.tsx 86ms (unchanged)
-components/ui/skeleton.tsx 63ms (unchanged)
-components/ui/SkeletonCard.tsx 57ms (unchanged)
-components/ui/sonner.tsx 123ms (unchanged)
-components/ui/ThemeToggle.tsx 177ms (unchanged)
-config/.00-SYSTEM-MANDATE.md 360ms (unchanged)
-config/.01-SYSTEM-PROMPT-EXTENSION.md 247ms (unchanged)
-constants/area-nodes.ts 96ms
-constants/image-blur-data.ts 63ms (unchanged)
-constants/master-registry.ts 81ms (unchanged)
-constants/navigation.ts 43ms (unchanged)
-constants/site-config.ts 51ms (unchanged)
-content/blog/5-points-killing-sales.mdx 197ms (unchanged)
-content/blog/advanced-schema-markup.mdx 106ms (unchanged)
-content/blog/case-study-unlink-th.mdx 94ms (unchanged)
-content/blog/copywriting-secrets.mdx 85ms (unchanged)
-content/blog/core-web-vitals-speed.mdx 128ms (unchanged)
-content/blog/ecommerce-conversion-seo.mdx 72ms (unchanged)
-content/blog/facebook-ads-vs-website.mdx 128ms (unchanged)
-content/blog/lower-north-digital-transformation.mdx 92ms (unchanged)
-content/blog/seo-2026-strategy.mdx 135ms (unchanged)
-content/blog/technical-audit-protocol.mdx 84ms (unchanged)
-content/case-studies/case-study-industrial-catalog.mdx 91ms (unchanged)
-content/case-studies/unlink-reputation-management-success.mdx 82ms (unchanged)
-eslint.config.mjs 72ms (unchanged)
-knip.json 9ms (unchanged)
-lib/cms.ts 110ms (unchanged)
-lib/schema.ts 101ms (unchanged)
-lib/seo-utils.ts 45ms (unchanged)
-lib/utils.ts 88ms (unchanged)
-mdx-components.tsx 57ms (unchanged)
-next.config.ts 45ms (unchanged)
-package.json 14ms (unchanged)
-pmpm-workspace.yaml 10ms (unchanged)
-pnpm-lock.yaml 2783ms (unchanged)
-postcss.config.mjs 38ms (unchanged)
-README.md 675ms
-scripts/gen-blur-data.mjs 98ms (unchanged)
-tsconfig.json 11ms (unchanged)
-types/index.d.ts 88ms (unchanged)
-types/mdx.d.ts 30ms (unchanged)
-types/template-props.ts 45ms (unchanged)
-vercel.json 20ms (unchanged)
-➜ Aemdevweb git:(main) ✗ pch
-
-> aemdevweb.com@7.2.99 lint /data/data/com.termux/files/home/Aemdevweb
-> eslint .
-
-> aemdevweb.com@7.2.99 type-check /data/data/com.termux/files/home/Aemdevweb
-> tsc --noEmit
-
-➜ Aemdevweb git:(main) ✗ node scripts/gen-blur-data.mjs
---- STARTING HIGH-FIDELITY BLUR GENERATION ---
-⚡ [Sharp] Optimized [1024x768]: /images/areas/bangkok-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/chiang-mai-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/chon-buri-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/kamphaeng-phet-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/khon-kaen-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/korat-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/nakhon-sawan-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/phichit-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/phuket-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/preview.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/sukhothai-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/tak-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/areas/uttaradit-node.webp
-⚡ [Sharp] Optimized [554x554]: /images/avatar.webp
-⚡ [Sharp] Optimized [1024x768]: /images/blog/advanced-schema-markup.webp
-⚡ [Sharp] Optimized [1024x768]: /images/blog/copywriting-specialist.webp
-⚡ [Sharp] Optimized [1024x768]: /images/blog/core-web-vitals-speed.webp
-⚡ [Sharp] Optimized [1024x768]: /images/blog/default-thumb.webp
-⚡ [Sharp] Optimized [1024x768]: /images/blog/ecommerce-seo.webp
-⚡ [Sharp] Optimized [696x495]: /images/blog/facebook-ads-vs-website.webp
-⚡ [Sharp] Optimized [640x479]: /images/blog/seo-google-love.webp
-⚡ [Sharp] Optimized [640x479]: /images/blog/technical-audit-visual.webp
-⚡ [Sharp] Optimized [1024x768]: /images/case-studies/industrial-catalog.webp
-⚡ [Sharp] Optimized [1024x768]: /images/case-studies/preview.webp
-⚡ [Sharp] Optimized [696x495]: /images/case-studies/unlink-reputation.webp
-⚡ [Sharp] Optimized [192x192]: /images/icon-192.png
-⚡ [Sharp] Optimized [1024x768]: /images/og-default.webp
-⚡ [Sharp] Optimized [1024x768]: /images/og-main.png
-⚡ [Sharp] Optimized [1024x768]: /images/seo/advanced-schema-markup.webp
-⚡ [Sharp] Optimized [1024x768]: /images/seo/core-web-vitals-speed.webp
-⚡ [Sharp] Optimized [1024x768]: /images/seo/ecommerce-seo.webp
-⚡ [Sharp] Optimized [1024x768]: /images/seo/seo.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/catalog-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/corporate-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/hotel-resort-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/local-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/personal-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/salepage-node.webp
-⚡ [Sharp] Optimized [1024x768]: /images/service/seo-agency-node.webp
-⚡ [Sharp] Optimized [696x495]: /images/shared/placeholder.webp
-⚡ [Sharp] Optimized [1024x768]: /images/shared/preview.webp
-
---- COMPLETED: 41 nodes baked ---
-➜ Aemdevweb git:(main) ✗ pb
-
-> aemdevweb.com@7.2.99 build /data/data/com.termux/files/home/Aemdevweb
-> next build --webpack
-
-Skipping creating a lockfile at /data/data/com.termux/files/home/Aemdevweb/.next/lock because we're using WASM bindings
-▲ Next.js 16.1.6 (webpack)
-
-- Experiments (use with caution):
-  ⨯ mdxRs
-  · optimizePackageImports
-  ✓ scrollRestoration
-
-  Creating an optimized production build ...
-  ✓ Compiled successfully in 87s
-  ✓ Finished TypeScript in 28.3s
-  ✓ Collecting page data using 1 worker in 4.9s
-  ✓ Generating static pages using 1 worker (46/46) in 10.2s
-  Finalizing page optimization . Collecting buil✓ Collecting build traces in 49s
-  ✓ Finalizing page optimization in 49s
-
-Route (app)
-┌ ○ /
-├ ○ /\_not-found
-├ ○ /about
-├ ○ /areas
-├ ● /areas/[slug]
-│ ├ /areas/bangkok
-│ ├ /areas/chon-buri
-│ ├ /areas/chiang-mai
-│ └ [+9 more paths]
-├ ○ /blog
-├ ● /blog/[slug]
-│ ├ /blog/seo-2026-strategy
-│ ├ /blog/5-points-killing-sales
-│ ├ /blog/advanced-schema-markup
-│ └ [+7 more paths]
-├ ○ /case-studies
-├ ● /case-studies/[slug]
-│ ├ /case-studies/case-study-industrial-catalog
-│ └ /case-studies/unlink-reputation-management-success
-├ ○ /manifest.webmanifest
-├ ○ /privacy
-├ ○ /robots.txt
-├ ○ /services
-├ ● /services/[slug]
-│ ├ /services/seo_agency
-│ ├ /services/salepage
-│ ├ /services/corporate
-│ └ [+4 more paths]
-├ ○ /sitemap.xml
-├ ○ /status
-└ ○ /terms
-
-○ (Static) prerendered as static content
-● (SSG) prerendered as static HTML (uses generateStaticParams)
-
-➜ Aemdevweb git:(main) ✗ git add .
-➜ Aemdevweb git:(main) ✗ git commit -m "update"
-[main 8d5630ef] update
-6 files changed, 693 insertions(+), 435 deletions(-)
-➜ Aemdevweb git:(main) git push
-Enumerating objects: 23, done.
-Counting objects: 100% (23/23), done.
-Delta compression using up to 8 threads
-Compressing objects: 100% (12/12), done.
-Writing objects: 100% (12/12), 17.71 KiB | 788.00 KiB/s, done.
-Total 12 (delta 9), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (9/9), completed with 9 local objects.
-To https://github.com/jiggoo0/Aemdevweb
-72fde8d8..8d5630ef main -> main
-➜ Aemdevweb git:(main) ./scripts/generate_docs.sh
-AUDIT COMPLETED: README.md GENERATED.
-➜ Aemdevweb git:(main) ✗
-
 ---
-
-vercel
-
-14:38:27.625
-Running build in Portland, USA (West) – pdx1
-14:38:27.626
-Build machine configuration: 2 cores, 8 GB
-14:38:27.747
-Cloning github.com/jiggoo0/Aemdevweb (Branch: main, Commit: 8d5630e)
-14:38:28.775
-Cloning completed: 1.027s
-14:38:28.942
-Restored build cache from previous deployment (Es61trquq7ThvDPquP9pyjFDsVcg)
-14:38:29.318
-Warning: Detected "engines": { "node": ">=22.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
-14:38:29.319
-Running "vercel build"
-14:38:30.469
-Vercel CLI 50.14.1
-14:38:30.792
-Warning: Detected "engines": { "node": ">=22.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
-14:38:30.861
-Detected `pnpm-lock.yaml` 9 which may be generated by pnpm@9.x or pnpm@10.x
-14:38:30.861
-Using pnpm@10.x based on project creation date
-14:38:30.862
-To use pnpm@9.x, manually opt in using corepack (https://vercel.com/docs/deployments/configure-a-build#corepack)
-14:38:30.866
-Running "install" command: `pnpm install`...
-14:38:31.624
-Lockfile is up to date, resolution step is skipped
-14:38:31.829
-Already up to date
-14:38:32.372
-14:38:32.392
-Done in 1.3s using pnpm v10.28.0
-14:38:32.406
-Detected Next.js version: 16.1.6
-14:38:32.407
-Running "pnpm build"
-14:38:32.689
-14:38:32.690
-
-> aemdevweb.com@7.2.99 build /vercel/path0
-> 14:38:32.690
-> next build --webpack
-> 14:38:32.690
-> 14:38:33.874
-> ▲ Next.js 16.1.6 (webpack)
-> 14:38:33.875
-
-- Experiments (use with caution):
-  14:38:33.876
-  · cpus
-  14:38:33.876
-  ✓ mdxRs
-  14:38:33.876
-  · optimizePackageImports
-  14:38:33.876
-  ✓ scrollRestoration
-  14:38:33.876
-  14:38:33.903
-  Creating an optimized production build ...
-  14:38:41.492
-  ✓ Compiled successfully in 7.4s
-  14:38:41.509
-  Running TypeScript ...
-  14:38:47.599
-  Collecting page data using 1 worker ...
-  14:38:49.784
-  Generating static pages using 1 worker (0/46) ...
-  14:38:51.336
-  Generating static pages using 1 worker (11/46)
-  14:38:51.532
-  Generating static pages using 1 worker (22/46)
-  14:38:52.164
-  Generating static pages using 1 worker (34/46)
-  14:38:52.267
-  ✓ Generating static pages using 1 worker (46/46) in 2.5s
-  14:38:52.531
-  Finalizing page optimization ...
-  14:38:52.533
-  Collecting build traces ...
-  14:38:58.339
-  14:38:58.341
-  Route (app)
-  14:38:58.342
-  ┌ ○ /
-  14:38:58.342
-  ├ ○ /\_not-found
-  14:38:58.342
-  ├ ○ /about
-  14:38:58.342
-  ├ ○ /areas
-  14:38:58.343
-  ├ ● /areas/[slug]
-  14:38:58.343
-  │ ├ /areas/Bangkok
-  58.343
-  ├ ● /areas/[slug]
-  14:38:58.343
-  │ ├ /areas/bangkok
-  14:38:58.343
-  │ ├ /areas/chon-buri
-  14:38:58.343
-  │ ├ /areas/chiang-mai
-  14:38:58.343
-  │ └ [+9 more paths]
-  14:38:58.343
-  ├ ○ /blog
-  14:38:58.343
-  ├ ● /blog/[slug]
-  14:38:58.343
-  │ ├ /blog/seo-2026-strategy
-  14:38:58.343
-  │ ├ /blog/5-points-killing-sales
-  14:38:58.343
-  │ ├ /blog/advanced-schema-markup
-  14:38:58.343
-  │ └ [+7 more paths]
-  14:38:58.343
-  ├ ○ /case-studies
-  14:38:58.343
-  ├ ● /case-studies/[slug]
-  14:38:58.343
-  │ ├ /case-studies/case-study-industrial-catalog
-  14:38:58.344
-  │ └ /case-studies/unlink-reputation-management-success
-  14:38:58.344
-  ├ ○ /manifest.webmanifest
-  14:38:58.344
-  ├ ○ /privacy
-  14:38:58.344
-  ├ ○ /robots.txt
-  14:38:58.344
-  ├ ○ /services
-  14:38:58.344
-  ├ ● /services/[slug]
-  14:38:58.344
-  │ ├ /services/seo_agency
-  14:38:58.344
-  │ ├ /services/salepage
-  14:38:58.344
-  │ ├ /services/corporate
-  14:38:58.344
-  │ └ [+4 more paths]
-  14:38:58.344
-  ├ ○ /sitemap.xml
-  14:38:58.344
-  ├ ○ /status
-  14:38:58.344
-  └ ○ /terms
-  14:38:58.344
-  14:38:58.344
-  14:38:58.344
-  ○ (Static) prerendered as static content
-  14:38:58.344
-  ● (SSG) prerendered as static HTML (uses generateStaticParams)
-  14:38:58.344
-  14:38:58.648
-  Traced Next.js server files in: 40.573ms
-  14:38:58.819
-  Created all serverless functions in: 170.923ms
-  14:38:58.848
-  Collected static files (public/, static/, .next/static): 11.644ms
-  14:38:59.278
-  Build Completed in /vercel/output [28s]
-  14:38:59.658
-  Deploying outputs...
-  14:39:07.731
-  Deployment completed
-  14:39:08.753
-  Creating build cache...
-  14:39:26.706
-  Created build cache: 18s
-  14:39:26.706
-  Uploading build cache [183.90 MB]
-  14:39:29.994
-  Build cache uploaded: 3.288s
-
-Next.js
-
-(16.1.6)
-
-Static Assets
-
-All (132)
-
-HTML (2)
-
-JS (46)
-
-CSS (2)
-
-Image (48)
-
-Font (33)
-
-Misc (1)
-
-Functions
-
-All (3)
-
-ISR
-ISR Functions
-
-All (14)
-
-Cron Jobs
-
-0
-
-Deployment Checks
-No checks configured
-
-Use events or statuses from your checks provider to determine when a deployment is promoted to Production.
-
-/\*\*
-
-- [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
-- [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
-- [MAINTAINER]: AEMDEVWEB Specialist Team
-  \*/
-
-import nextMDX from "@next/mdx";
-import type { NextConfig } from "next";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkGfm from "remark-gfm";
-
-const isVercel = process.env.VERCEL === "1";
-
-const withMDX = nextMDX({
-extension: /\.mdx?$/,
-options: {
-remarkPlugins: [remarkGfm, remarkFrontmatter],
-rehypePlugins: [],
-},
-});
-
-const nextConfig: NextConfig = {
-pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-reactStrictMode: true,
-compress: true,
-
-experimental: {
-scrollRestoration: true,
-workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
-cpus: isVercel ? undefined : 1,
-
-    optimizePackageImports: [
-      "lucide-react",
-      "framer-motion",
-      "@radix-ui/react-slot",
-      "tailwindcss-animate",
-    ],
-    mdxRs: isVercel,
-
-},
-
-transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
-
-images: {
-deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
-imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-formats: ["image/avif", "image/webp"],
-
-    // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
-    qualities: [75, 85, 90],
-
-    minimumCacheTTL: 86400,
-    unoptimized: false,
-    remotePatterns: [{ protocol: "https", hostname: "**" }],
-
-},
-
-async headers() {
-return [
-{
-source: "/\_next/static/(.\*)",
-headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-},
-];
-},
-
-webpack: (config, { dev, isServer }) => {
-if (!isVercel) {
-config.cache = false;
-}
-
-    if (!isServer) {
-      config.optimization.usedExports = true;
-    }
-
-    if (dev && !isVercel) {
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
-        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
-      };
-    }
-
-    return config;
-
-},
-};
-
-export default withMDX(nextConfig);
-
-Assigning Custom Domains
-www.aemdevweb.com
-·
-Custom Domain
-
-Manage
-aemdevweb.vercel.app
-·
-Custom Domain
-
-Manage
-aemdevweb.com
-·
-Custom Domain
-
-Manage
-Runtime Logs
-
----
-
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-11 14:40:17
-
+last_audit: 2026-02-11 17:17:19
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
-> [ERROR] MISSION CRITICAL: 00-SYSTEM-MANDATE.md MISSING
+## SYSTEM MANDATE
+
+# SYSTEM MANDATE: AEMDEVWEB INFRASTRUCTURE
+
+> Version: 17.6.0 (STABILIZED)
+> Authority: STRICTLY ENFORCED
+> Context: High-Performance Web Infrastructure & Technical SEO Specialist
 
 ---
 
-> [WARNING] SYSTEM PROMPT EXTENSION MISSING
+## 01. CORE PHILOSOPHY & IDENTITY
+
+**"We are not just building websites; we are engineering digital assets."**
+
+- **System Role:** Technical Infrastructure Specialist.
+- **Primary Objective:** สร้างระบบเว็บไซต์ที่มีประสิทธิภาพสูงสุด (Hyper-Performance), รองรับ SEO โครงสร้างระดับสูง (Graph Architecture), และรักษาเสถียรภาพบนทุกอุปกรณ์
+- **Identity Anchor:** ข้อมูลทั้งหมดต้องยึดโยงกับ `SITE_CONFIG` ใน `constants/site-config.ts` ห้าม Hardcode ข้อมูลติดต่อหรือชื่อแบรนด์ใน Component โดยเด็ดขาด
+- **Tone of Voice:** Professional, Technical, Authoritative, "Specialist" (ไม่ใช้คำฟุ่มเฟือย เน้นผลลัพธ์และตัวเลข)
+
+## 02. ARCHITECTURE & FILE STRUCTURE
+
+**"Everything has a place, and every place has a purpose."**
+
+- **App Router First:** ใช้ Next.js App Router (`app/`) เป็นหลัก
+- **Colocation Strategy:**
+  - `components/features/`: สำหรับ Business Logic แยกตาม Domain (landing, services, areas).
+  - `components/ui/`: สำหรับ Reusable Primitives (Button, IconRenderer) ห้ามมี Business Logic.
+  - `components/templates/`: สำหรับ Page Layouts ที่ใช้ซ้ำได้ (Corporate, SalePage).
+- **Constants as Database:** ใช้ `constants/` (`master-registry.ts`, `area-nodes.ts`) เป็น Single Source of Truth สำหรับข้อมูลบริการและพื้นที่ ห้ามกระจายข้อมูลไว้ใน Component
+
+## 03. TYPE SAFETY & CODE QUALITY (ZERO-ANY POLICY)
+
+**"Runtime errors are failures of build-time discipline."**
+
+- **Strict Typing:** ห้ามใช้ `any` ในทุกกรณี (Zero-Any Policy). หากไม่ทราบ Type ให้ใช้ `unknown` หรือ `Record<string, unknown>` แล้วทำ Type Guard
+- **Immutability:** ข้อมูลใน `constants/` และ Props ต้องเป็น `readonly` เสมอ เพื่อป้องกัน Side Effects
+- **Interface Over Types:** ใช้ `interface` สำหรับ Object Definitions และ `type` สำหรับ Unions/Primitives
+- **No Magic Strings:** ห้ามใช้ String Hardcode สำหรับ Routing หรือ Keys ให้ดึงจาก `SITE_CONFIG` หรือ Enum/Const เสมอ
+
+## 04. SEO & DATA SCHEMAS (GRAPH ARCHITECTURE)
+
+**"If Google doesn't understand it, it doesn't exist."**
+
+- **Schema First:** ทุกหน้า (`page.tsx`) ต้องมีการ Inject JSON-LD ผ่านคอมโพเนนต์ `JsonLd`
+- **Logic Separation:** Logic การสร้าง Schema ต้องแยกออกจาก UI Component (เก็บไว้ใน `Schema.ts` ของแต่ละ Template)
+- **Entity Graphing:** Schema ต้องเชื่อมโยงกันเสมอ (WebPage -> Service -> Organization -> Person) ห้ามมี Node ลอยๆ (Orphan Nodes)
+- **Dynamic Metadata:** Metadata ต้องถูก generate ผ่าน `constructMetadata` ใน `lib/seo-utils.ts` เท่านั้น
+
+## 05. PERFORMANCE & CORE WEB VITALS (LCP/CLS)
+
+**"Speed is not a feature; it is the foundation."**
+
+- **LCP Protection:** Element ที่เป็น LCP (เช่น Hero Title, Hero Image) **ห้าม** ซ่อนด้วย Animation (`opacity: 0`) หรือใช้ Client-side lazy load
+- **Zero-CLS:** ต้องจองพื้นที่ (Height/AspectRatio) ให้กับรูปภาพและ Container เสมอ เพื่อป้องกัน Layout Shift
+- **Font Optimization:** ใช้ `next/font` พร้อม `display: swap` และห้ามโหลด Font ภายนอกผ่าน CSS `@import` ที่ไม่ผ่านการ Optimize
+- **Termux Friendly:** การตั้งค่า Build ต้องคำนึงถึง Environment ที่จำกัด (Termux/ARM) ห้ามใช้ Worker Threads เกินความจำเป็น (`cpus: 1`)
+
+## 06. STYLING & DESIGN SYSTEM (TAILWIND v4)
+
+**"Consistency creates trust."**
+
+- **Design Tokens:** ห้ามใช้ Hex Color ใน Component โดยตรง ให้ใช้ CSS Variables (`bg-surface-main`, `text-brand-primary`) ที่ประกาศใน `globals.css`
+- **GPU Acceleration:** Animation ที่ทำงานตลอดเวลา (Pulse, Float) ต้องใช้ `will-change-transform` และ `transform-gpu` เพื่อลดภาระ Main Thread
+- **Responsive Logic:** ใช้ Mobile-First approach เสมอ (`class="w-full md:w-1/2"`)
+- **Glassmorphism Standard:** ยึดมาตรฐานความโปร่งแสงและ Blur ตาม `AmbientBackground.tsx` เพื่อคุม Theme ของระบบ
+
+## 07. DATA FETCHING & RENDERING STRATEGY
+
+**"Static when possible, Dynamic when necessary."**
+
+- **SSG Priority:** พยายามทำให้ทุกหน้าเป็น Static Site Generation (SSG) โดยใช้ `generateStaticParams`
+- **Parallel Fetching:** หากมีการเรียกข้อมูลหลายแหล่งใน `page.tsx` ต้องใช้ `Promise.all` เสมอ
+- **CMS Integration:** การดึงข้อมูลจาก MDX ต้องผ่าน `lib/cms.ts` ที่มีการทำ Error Handling และ Type Guard เรียบร้อยแล้ว
+- **Client Boundary:** ใช้ `'use client'` เฉพาะที่จำเป็นจริงๆ (Leaf Nodes) พยายามดัน Logic ไปที่ Server Component ให้มากที่สุด
+
+## 08. COMPONENT ARCHITECTURE
+
+**"Modular, Atomic, and Dumb."**
+
+- **Dumb Components:** UI Components ไม่ควรมี Logic ซับซ้อน หรือรู้เรื่อง Business Data มากเกินไป (รับ Props -> แสดงผล)
+- **Prop Interface:** ชื่อ Props ต้องสื่อความหมายชัดเจน (เช่น `isActive` แทน `flag`) และสอดคล้องกับ `types/template-props.ts`
+- **Memoization:** ใช้ `React.memo` สำหรับ Component ที่มีการ Re-render บ่อย หรืออยู่ภายใน List ขนาดใหญ่
+- **Image Handling:** ใช้ `next/image` เสมอ ห้ามใช้ `<img>` tag ยกเว้นกรณี SVG ที่เป็น Icon
+
+## 09. LOCAL AUTHORITY PROTOCOL
+
+**"Dominate the map, dominate the market."**
+
+- **Area Node Structure:** การเพิ่มพื้นที่ให้บริการใหม่ใน `area-nodes.ts` ต้องระบุ `districts` และ `coordinates` เสมอ เพื่อผลลัพธ์ Local SEO
+- **Template Locking:** ห้ามเปลี่ยน `templateSlug` ของ Area Node ที่ถูกล็อคไว้ (เช่น `new-service-name`) หากไม่ได้รับคำสั่ง Migration
+- **Keyword Injection:** เนื้อหาในหน้า Area ต้องมีการ Inject ชื่อจังหวัด/อำเภอ เข้าไปใน H1, Title, และ Description อย่างเป็นธรรมชาติ
+
+## 10. DEPLOYMENT & QUALITY ASSURANCE
+
+**"Measure twice, cut once."**
+
+- **Audit Script:** ก่อน Commit หรือ Deploy ต้องรัน `bash a.sh` เพื่อตรวจสอบ Type Check, Lint, และ Build Status เสมอ
+- **Dead Code Elimination:** ใช้ `knip` ตรวจสอบและลบไฟล์/Dependencies ที่ไม่ได้ใช้ เพื่อรักษาความสะอาดของโปรเจกต์
+- **Asset Resilience:** ตรวจสอบว่ารูปภาพทั้งหมดใน `public/images` มีการใช้งานจริง และอยู่ใน Format ที่เหมาะสม (WebP)
+- **Build Stability:** ห้ามปล่อยให้มี Warning ใน Console ตอน Build (ยกเว้น Warning ของ Webpack/Termux ที่ทราบสาเหตุแล้ว)
+
+---
+
+_End of Mandate. Maintainer: AEMDEVWEB Specialist Team._
+
+---
+
+## SYSTEM PROMPT EXTENSION
+
+# SYSTEM PROMPT EXTENSION: AEMDEVWEB AI PROTOCOL
+
+> Version: 17.6.0 (ACTIVE)
+> Target: AI Agents & Copilots
+> Purpose: Operational Guidelines & Coding Standards
+
+---
+
+## 01. YOUR ROLE & PERSONA
+
+**You are the Lead Infrastructure Specialist for AEMDEVWEB.**
+
+- **Expertise:** High-Performance Next.js, Technical SEO, and Scalable Architecture.
+- **Mindset:** You do not just "write code"; you "engineer solutions". You prioritize stability, performance metrics (CWV), and type safety over quick hacks.
+- **Environment Awareness:** You are operating within a **Termux (Android)** environment. Resources are finite. Build processes must be efficient.
+
+## 02. CODING STANDARDS (STRICT)
+
+### TypeScript & Type Safety
+
+1.  **Zero-Any Policy:** Never use `any`. Use `unknown`, generics, or specific interfaces.
+2.  **Immutability:** Mark all interfaces and array props as `readonly`.
+    ```typescript
+    interface Props {
+      readonly data: readonly Item[];
+    }
+    ```
+3.  **Strict Props:** Use `interface` for object definitions. Use `type` for unions/intersections.
+4.  **No Magic Values:** Do not hardcode strings or numbers. Import from `@/constants` or use `SITE_CONFIG`.
+
+### Next.js 15 (App Router)
+
+1.  **Server Components Default:** All components are Server Components unless `useState` or `useEffect` is strictly required. Then, add `"use client";`.
+2.  **Async Params:** In `page.tsx`, `params` and `searchParams` must be awaited.
+    ```typescript
+    const { slug } = await params;
+    ```
+3.  **Image Optimization:** Always use `next/image`.
+    - **LCP Rule:** Hero images must have `priority`.
+    - **Aspect Ratio:** Always define `width/height` or `fill` with a parent container.
+
+### Tailwind CSS (v4)
+
+1.  **Variables First:** Use CSS variables defined in `globals.css` (e.g., `bg-surface-main`, `text-brand-primary`) instead of raw hex codes.
+2.  **Responsive Design:** Mobile-first approach.
+    - ✅ `class="w-full md:w-1/2"`
+    - ❌ `class="w-1/2 max-md:w-full"`
+3.  **Animation:** Use `transform-gpu` and `will-change-transform` for continuous animations to offload CPU.
+
+## 03. COMPONENT ARCHITECTURE PROTOCOL
+
+### File Structure Map
+
+- `components/features/`: Domain-specific logic (e.g., `Hero.tsx`, `ServiceCard.tsx`).
+- `components/templates/`: Page layouts (e.g., `CorporateTemplate`, `BioTemplate`).
+- `components/ui/`: Reusable primitives (e.g., `Button`, `IconRenderer`). **NO Business Logic here.**
+- `lib/`: Pure functions and utilities (e.g., `utils.ts`, `schema.ts`).
+
+### The "Template" Pattern
+
+When creating a new page template:
+
+1.  **Schema Separation:** Create a `Schema.ts` file alongside `Index.tsx`.
+2.  **Data Injection:** The template receives `readonly data: TemplateMasterData`.
+3.  **LCP Optimization:** The Hero section must render HTML immediately (no fade-in animations on H1/Img).
+
+## 04. SEO & SCHEMA STRATEGY
+
+1.  **JSON-LD:** Every page must render a `JsonLd` component.
+2.  **Graph Construction:** Connect entities using `@id`.
+    - `WebPage` -> `isPartOf` -> `WebSite`
+    - `Service` -> `provider` -> `Organization`
+3.  **Validation:** Ensure strict types for Schema generation functions.
+
+## 05. RESPONSE FORMATTING GUIDELINES
+
+When generating code, adhere to this structure:
+
+1.  **File Header:**
+    ```typescript
+    /**
+     * [COMPONENT_NAME]: MODULE_NAME v17.x.x (STATUS)
+     * [STRATEGY]: Brief explanation of the technical approach
+     * [MAINTAINER]: AEMDEVWEB Specialist Team
+     */
+    ```
+2.  **Imports:** Group imports:
+    1.  React/Next.js
+    2.  Internal Infrastructure (`@/lib`, `@/constants`)
+    3.  Components
+    4.  Types
+3.  **Content:** Full, copy-pasteable code. Do not use `// ... existing code` unless explicitly requested for a small snippet.
+
+## 06. CRITICAL CHECKS (PRE-COMPUTATION)
+
+Before outputting code, ask yourself:
+
+- [ ] Did I remove `opacity: 0` from the LCP element?
+- [ ] Is `SITE_CONFIG` used for branding/contact info?
+- [ ] Are all arrays mapped with a unique `key`?
+- [ ] Is this compatible with Tailwind v4 (no `@apply` in complex ways)?
+- [ ] Did I export the component using `memo` if it's a client component?
+
+---
+
+_Reference: See `config/00-SYSTEM-MANDATE.md` for absolute rules._
 
 ---
 
@@ -611,7 +230,7 @@ last_audit: 2026-02-11 14:40:17
 
 ```typescript
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.7.8 (STABILIZED_ASSETS)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.1 (STABILIZED_HOTFIX)
  * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params (Next.js 15+)
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -642,10 +261,11 @@ export interface SkeletonCardProps extends BaseComponentProps {
   readonly aspectRatio?: "portrait" | "video" | "square";
 }
 
+/** [STRICT]: ไอคอนต้องตรงกับ Registry ใน IconRenderer เท่านั้น */
 export type IconName = string;
 
 // =========================================
-// [02] SITE CONFIGURATION & IDENTITY
+// [02] SITE CONFIGURATION & NAVIGATION
 // =========================================
 
 export interface NavItem {
@@ -732,10 +352,22 @@ export interface SiteConfig {
 }
 
 // =========================================
-// [03] DATA REGISTRY & SERVICES
+// [03] SERVICE REGISTRY & TEMPLATE DATA
 // =========================================
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal";
+
+/** [RESOLVED]: Exported for DynamicFAQ & TemplateProps support */
+export interface ServiceFaq {
+  readonly question: string;
+  readonly answer: string;
+}
+
+export interface ServiceFeature {
+  readonly title: string;
+  readonly description: string;
+  readonly icon: IconName;
+}
 
 export interface CatalogItem {
   readonly name: string;
@@ -751,17 +383,6 @@ export interface ExpertiseItem {
   readonly description: string;
   readonly icon: IconName;
   readonly level?: number;
-}
-
-export interface ServiceFeature {
-  readonly title: string;
-  readonly description: string;
-  readonly icon: IconName;
-}
-
-export interface ServiceFaq {
-  readonly question: string;
-  readonly answer: string;
 }
 
 export interface ThemeConfig {
@@ -796,7 +417,7 @@ export interface TemplateMasterData {
   readonly expertise?: readonly ExpertiseItem[];
 }
 
-/** [RESOLVED]: ผูกนิยาม ServiceData สำหรับใช้ในระบบ Listing */
+/** [RESOLVED]: ผูกนิยามสำหรับการใช้ในระบบ Listing Hub */
 export type ServiceData = TemplateMasterData;
 
 // =========================================
@@ -839,7 +460,7 @@ export interface CaseStudy extends BaseContent {
 }
 
 // =========================================
-// [05] GEO & AREA NODES
+// [05] GEO & AREA NODES (Programmatic SEO)
 // =========================================
 
 export interface LocalContext {
@@ -873,18 +494,12 @@ export interface AreaNode {
 // [06] ASSET & MEDIA INFRASTRUCTURE
 // =========================================
 
-/**
- * [RESOLVED]: ข้อมูลสำหรับป้องกัน CLS และสร้าง Blur-up Effect
- */
 export interface ImageBlurNode {
   readonly blurDataURL: string;
   readonly width: number;
   readonly height: number;
 }
 
-/**
- * [RESOLVED]: ฐานข้อมูลกลางสำหรับ Mapping รูปภาพกับ Metadata
- */
 export type ImageBlurRegistry = Record<string, ImageBlurNode>;
 ```
 
@@ -909,8 +524,8 @@ declare module "mdx/types" {
 
 ```typescript
 /**
- * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.5.0 (TYPE_SAFE)
- * [STRATEGY]: Decoupled UI Logic | Universal Adapter Pattern
+ * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.1 (SYNCED_FINAL)
+ * [STRATEGY]: Decoupled UI Logic | Universal Adapter Pattern | Type-Safe Bridge
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -922,7 +537,7 @@ import type { IconName, ServiceFeature, ServiceFaq } from "./index";
 // =========================================
 
 /**
- * Standard Call to Action structure for Buttons/Links
+ * โครงสร้างมาตรฐานสำหรับปุ่ม Call to Action (CTA) และลิงก์ภายในระบบ
  */
 export interface TemplateAction {
   readonly label: string;
@@ -936,25 +551,26 @@ export interface TemplateAction {
 // =========================================
 
 /**
- * [STRATEGIC]: Bridge Interface between ServiceData/AreaNode and UI
- * Designed for "Dumb Components" rendering to ensure consistency.
+ * [STRATEGIC]: Bridge Interface ระหว่าง ServiceData และ AreaNode
+ * ออกแบบมาเพื่อทำ Data Normalization ก่อนส่งเข้าสู่ Template Components
+ * ช่วยให้หนึ่ง Template สามารถรับข้อมูลได้จากหลายแหล่ง (Multi-Source)
  */
 export interface UniversalTemplateProps {
   // --- Core Identity ---
   readonly id: string;
-  readonly title: ReactNode | string; // Support Rich Text Titles
+  readonly title: ReactNode | string; // รองรับทั้งข้อความดิบและ JSX (Rich Text)
   readonly description: string;
   readonly heroImage?: string;
 
-  // --- Commercial Specs (Optional for Area pages) ---
+  // --- Commercial & Metadata (Optional สำหรับหน้า Area) ---
   readonly price?: string;
-  readonly priceValue?: number; // Added for Schema/Calculation
+  readonly priceValue?: number;
   readonly unit?: string;
   readonly currency?: string;
 
-  // --- Data Clusters ---
+  // --- Data Clusters (Normalized) ---
   readonly benefits?: readonly string[];
-  readonly features?: readonly ServiceFeature[]; // Mapped from coreFeatures
+  readonly features?: readonly ServiceFeature[]; // Mapped จาก coreFeatures
   readonly faqs?: readonly ServiceFaq[];
   readonly keywords?: readonly string[];
 
@@ -964,11 +580,11 @@ export interface UniversalTemplateProps {
   readonly secondaryAction?: TemplateAction;
 
   // --- Visual Metadata & Theming ---
-  // [UPDATED]: Align with LayoutEngine & ThemeConfig
+  // สอดคล้องกับ LayoutEngine และ ThemeConfig
   readonly theme?: {
     readonly primary?: string;
     readonly secondary?: string;
-    readonly background?: string; // Hex or Tailwind Class
+    readonly background?: string; // Tailwind class หรือ Hex
     readonly gradient?: string; // Tailwind Gradient
   };
   readonly priority?: number;
@@ -979,7 +595,7 @@ export interface UniversalTemplateProps {
 // =========================================
 
 /**
- * Base Props for all Template Components
+ * Base Props พื้นฐานสำหรับ Template ทุกประเภท
  */
 export interface BaseTemplateProps {
   readonly data: UniversalTemplateProps;
@@ -987,21 +603,21 @@ export interface BaseTemplateProps {
 }
 
 /**
- * Specialized Props for Catalog Template
+ * Specialized Props สำหรับ Catalog Template
  */
 export interface CatalogTemplateProps extends BaseTemplateProps {
   readonly displayMode?: "grid" | "list";
   readonly showPrice?: boolean;
   readonly items?: readonly {
-    name: string;
-    description: string;
-    image?: string;
-    price?: string;
+    readonly name: string;
+    readonly description: string;
+    readonly image?: string;
+    readonly price?: string;
   }[];
 }
 
 /**
- * Specialized Props for Bio/Portfolio Template
+ * Specialized Props สำหรับ Bio / Personal Portfolio Template
  */
 export interface BioTemplateProps extends BaseTemplateProps {
   readonly socialLinks?: readonly {
@@ -1011,8 +627,12 @@ export interface BioTemplateProps extends BaseTemplateProps {
   }[];
 }
 
+// =========================================
+// [04] ADAPTER TYPE DEFINITIONS
+// =========================================
+
 /**
- * [ADAPTER TYPE]: Data Source Validation Helper
+ * [ADAPTER TYPE]: ระบุแหล่งที่มาของข้อมูลเพื่อการจัดการ Logic ภายในที่แตกต่างกัน
  */
 export type TemplateDataSource = "service" | "area" | "custom";
 ```
@@ -1422,7 +1042,7 @@ export const AREA_NODES: readonly AreaNode[] = [
  * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v17.7.8
  * DO NOT EDIT MANUALLY. Run 'node scripts/gen-blur-data.mjs'
  */
-import { ImageBlurRegistry } from "@/types";
+import type { ImageBlurRegistry } from "@/types";
 
 export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
   "/images/areas/bangkok-node.webp": {
@@ -2308,13 +1928,14 @@ export type GlobalConfig = typeof SITE_CONFIG;
 ## DIRECTORY INFRASTRUCTURE
 
 ```text
-[3.4K 2026-02-11 14:34]  .
-├── [ 88K 2026-02-11 14:40]  README.md
+[3.4K 2026-02-11 17:12]  .
+├── [7.9K 2026-02-11 17:12]  AEMDEVWEB-STRUCTURE.txt
+├── [102K 2026-02-11 17:17]  README.md
 ├── [3.4K 2026-02-11 05:49]  app
 │   ├── [3.4K 2026-02-11 05:59]  (routes)
 │   │   ├── [3.4K 2026-02-11 05:49]  areas
 │   │   │   ├── [3.4K 2026-02-11 05:49]  [slug]
-│   │   │   │   └── [5.5K 2026-02-11 10:48]  page.tsx
+│   │   │   │   └── [4.8K 2026-02-11 15:51]  page.tsx
 │   │   │   └── [6.6K 2026-02-11 10:43]  page.tsx
 │   │   ├── [3.4K 2026-02-11 05:49]  blog
 │   │   │   ├── [3.4K 2026-02-11 05:49]  [slug]
@@ -2326,16 +1947,16 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │   │   │   └── [3.1K 2026-02-11 10:43]  page.tsx
 │   │   └── [3.4K 2026-02-11 05:49]  services
 │   │       ├── [3.4K 2026-02-11 05:49]  [slug]
-│   │       │   └── [5.4K 2026-02-11 13:33]  page.tsx
-│   │       └── [8.0K 2026-02-11 10:43]  page.tsx
+│   │       │   └── [5.7K 2026-02-11 17:16]  page.tsx
+│   │       └── [8.5K 2026-02-11 16:56]  page.tsx
 │   ├── [3.4K 2026-02-11 05:49]  about
 │   │   └── [ 12K 2026-02-11 10:41]  page.tsx
-│   ├── [5.8K 2026-02-11 14:32]  globals.css
-│   ├── [5.2K 2026-02-11 11:48]  layout.tsx
+│   ├── [5.6K 2026-02-11 15:51]  globals.css
+│   ├── [5.2K 2026-02-11 16:23]  layout.tsx
 │   ├── [4.3K 2026-02-11 10:34]  loading.tsx
 │   ├── [1.4K 2026-02-11 05:49]  manifest.ts
 │   ├── [5.6K 2026-02-11 05:49]  not-found.tsx
-│   ├── [7.6K 2026-02-11 13:31]  page.tsx
+│   ├── [7.6K 2026-02-11 16:23]  page.tsx
 │   ├── [3.4K 2026-02-11 05:49]  privacy
 │   │   └── [ 11K 2026-02-11 10:40]  page.tsx
 │   ├── [1.5K 2026-02-11 05:49]  robots.ts
@@ -2360,10 +1981,10 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │   │       ├── [4.6K 2026-02-11 13:31]  ServiceCard.tsx
 │   │       └── [2.8K 2026-02-11 10:38]  ServiceListingHub.tsx
 │   ├── [3.4K 2026-02-11 05:49]  layout
-│   │   ├── [9.9K 2026-02-11 10:32]  Footer.tsx
-│   │   ├── [ 11K 2026-02-11 13:31]  Navbar.tsx
-│   │   ├── [2.5K 2026-02-11 14:32]  PageTransition.tsx
-│   │   └── [2.0K 2026-02-11 10:33]  TopLoader.tsx
+│   │   ├── [ 10K 2026-02-11 16:31]  Footer.tsx
+│   │   ├── [ 11K 2026-02-11 16:22]  Navbar.tsx
+│   │   ├── [2.5K 2026-02-11 16:26]  PageTransition.tsx
+│   │   └── [2.0K 2026-02-11 16:19]  TopLoader.tsx
 │   ├── [3.4K 2026-02-11 05:49]  providers
 │   │   └── [1.8K 2026-02-11 05:49]  theme-provider.tsx
 │   ├── [3.4K 2026-02-11 05:49]  seo
@@ -2375,47 +1996,49 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │   │   └── [5.6K 2026-02-11 05:49]  TrustBadge.tsx
 │   ├── [3.4K 2026-02-11 10:55]  templates
 │   │   ├── [3.4K 2026-02-11 05:49]  bio
-│   │   │   ├── [9.6K 2026-02-11 13:31]  Index.tsx
-│   │   │   └── [2.5K 2026-02-11 13:31]  Schema.ts
+│   │   │   ├── [9.8K 2026-02-11 15:52]  Index.tsx
+│   │   │   └── [2.5K 2026-02-11 15:52]  Schema.ts
 │   │   ├── [3.4K 2026-02-11 05:49]  catalog
-│   │   │   ├── [8.1K 2026-02-11 13:31]  Index.tsx
-│   │   │   └── [2.6K 2026-02-11 13:31]  Schema.ts
+│   │   │   ├── [9.1K 2026-02-11 15:52]  Index.tsx
+│   │   │   └── [2.9K 2026-02-11 15:52]  Schema.ts
 │   │   ├── [3.4K 2026-02-11 05:49]  corporate
-│   │   │   ├── [9.8K 2026-02-11 13:31]  Index.tsx
-│   │   │   └── [3.3K 2026-02-11 13:31]  Schema.ts
+│   │   │   ├── [9.9K 2026-02-11 15:23]  Index.tsx
+│   │   │   └── [3.4K 2026-02-11 15:22]  Schema.ts
 │   │   ├── [3.4K 2026-02-11 05:49]  hotelresort
-│   │   │   ├── [7.9K 2026-02-11 13:31]  Index.tsx
-│   │   │   └── [2.5K 2026-02-11 13:31]  Schema.ts
+│   │   │   ├── [8.2K 2026-02-11 15:52]  Index.tsx
+│   │   │   └── [2.6K 2026-02-11 15:31]  Schema.ts
 │   │   ├── [3.4K 2026-02-11 10:55]  local-authority
-│   │   │   ├── [1.5K 2026-02-11 13:35]  Schema.ts
-│   │   │   └── [ 10K 2026-02-11 13:37]  index.tsx
+│   │   │   ├── [1.7K 2026-02-11 15:32]  Schema.ts
+│   │   │   └── [ 11K 2026-02-11 15:52]  index.tsx
 │   │   ├── [3.4K 2026-02-11 05:49]  salepage
-│   │   │   ├── [8.8K 2026-02-11 13:31]  Index.tsx
-│   │   │   └── [2.8K 2026-02-11 13:31]  Schema.ts
+│   │   │   ├── [8.8K 2026-02-11 15:52]  Index.tsx
+│   │   │   └── [2.3K 2026-02-11 15:52]  Schema.ts
 │   │   ├── [3.4K 2026-02-11 05:49]  sections
 │   │   │   ├── [2.8K 2026-02-11 13:31]  DynamicFAQ.tsx
-│   │   │   ├── [3.7K 2026-02-11 13:31]  FeatureGrid.tsx
-│   │   │   ├── [5.7K 2026-02-11 13:31]  HeroEngine.tsx
-│   │   │   └── [3.3K 2026-02-11 13:31]  LayoutEngine.tsx
+│   │   │   ├── [3.8K 2026-02-11 15:39]  FeatureGrid.tsx
+│   │   │   ├── [5.7K 2026-02-11 15:52]  HeroEngine.tsx
+│   │   │   └── [3.2K 2026-02-11 15:52]  LayoutEngine.tsx
 │   │   └── [3.4K 2026-02-11 05:49]  seo_agency
-│   │       ├── [2.7K 2026-02-11 13:31]  Schema.ts
-│   │       └── [8.7K 2026-02-11 13:31]  index.tsx
+│   │       ├── [2.7K 2026-02-11 15:34]  Schema.ts
+│   │       └── [8.9K 2026-02-11 15:52]  index.tsx
 │   └── [3.4K 2026-02-11 05:49]  ui
-│       ├── [2.3K 2026-02-11 12:00]  AmbientBackground.tsx
+│       ├── [2.2K 2026-02-11 14:59]  AmbientBackground.tsx
 │       ├── [1.5K 2026-02-11 05:49]  Callout.tsx
-│       ├── [4.3K 2026-02-11 05:49]  IconRenderer.tsx
+│       ├── [4.1K 2026-02-11 15:52]  IconRenderer.tsx
 │       ├── [3.0K 2026-02-11 10:29]  SkeletonCard.tsx
 │       ├── [3.2K 2026-02-11 05:49]  ThemeToggle.tsx
-│       ├── [2.1K 2026-02-11 05:49]  accordion.tsx
+│       ├── [2.7K 2026-02-11 15:52]  accordion.tsx
 │       ├── [4.2K 2026-02-11 05:49]  button.tsx
 │       ├── [1.3K 2026-02-11 05:49]  skeleton-grid.tsx
 │       ├── [ 894 2026-02-11 05:49]  skeleton.tsx
 │       └── [3.3K 2026-02-11 05:49]  sonner.tsx
 ├── [ 425 2026-02-11 05:49]  components.json
-├── [3.4K 2026-02-11 13:43]  config
+├── [3.4K 2026-02-11 17:02]  config
+│   ├── [8.8K 2026-02-11 17:02]  00-SYSTEM-MANDATE.md
+│   └── [4.1K 2026-02-11 17:02]  01-SYSTEM-PROMPT-EXTENSION.md
 ├── [3.4K 2026-02-11 11:33]  constants
 │   ├── [ 38K 2026-02-11 14:33]  area-nodes.ts
-│   ├── [9.3K 2026-02-11 14:34]  image-blur-data.ts
+│   ├── [9.3K 2026-02-11 16:31]  image-blur-data.ts
 │   ├── [ 22K 2026-02-11 14:28]  master-registry.ts
 │   ├── [2.4K 2026-02-11 05:49]  navigation.ts
 │   └── [5.7K 2026-02-11 13:06]  site-config.ts
@@ -2442,11 +2065,11 @@ export type GlobalConfig = typeof SITE_CONFIG;
 │   ├── [2.2K 2026-02-11 05:49]  seo-utils.ts
 │   └── [3.6K 2026-02-11 05:49]  utils.ts
 ├── [4.6K 2026-02-11 05:49]  mdx-components.tsx
-├── [ 247 2026-02-11 13:40]  next-env.d.ts
-├── [2.2K 2026-02-11 05:49]  next.config.ts
-├── [2.5K 2026-02-11 13:24]  package.json
+├── [ 247 2026-02-11 16:34]  next-env.d.ts
+├── [3.1K 2026-02-11 16:39]  next.config.ts
+├── [2.5K 2026-02-11 16:42]  package.json
 ├── [  51 2026-02-11 13:31]  pmpm-workspace.yaml
-├── [256K 2026-02-11 13:31]  pnpm-lock.yaml
+├── [260K 2026-02-11 16:56]  pnpm-lock.yaml
 ├── [1.1K 2026-02-11 05:49]  postcss.config.mjs
 ├── [3.4K 2026-02-11 05:49]  public
 │   └── [3.4K 2026-02-11 05:49]  images
@@ -2461,34 +2084,34 @@ export type GlobalConfig = typeof SITE_CONFIG;
 ├── [3.4K 2026-02-11 11:20]  scripts
 │   ├── [1.2K 2026-02-11 11:01]  clean-project.sh
 │   ├── [2.0K 2026-02-11 05:49]  cleanup-images.sh
-│   ├── [2.5K 2026-02-11 13:31]  gen-blur-data.mjs
-│   ├── [2.2K 2026-02-11 05:49]  generate_docs.sh
+│   ├── [2.6K 2026-02-11 15:12]  gen-blur-data.mjs
+│   ├── [2.8K 2026-02-11 17:01]  generate_docs.sh
 │   └── [ 411 2026-02-11 11:16]  optimize-assets.sh
 ├── [ 693 2026-02-11 05:49]  tsconfig.json
-├── [178K 2026-02-11 14:33]  tsconfig.tsbuildinfo
+├── [182K 2026-02-11 17:17]  tsconfig.tsbuildinfo
 ├── [3.4K 2026-02-11 05:49]  types
-│   ├── [7.5K 2026-02-11 12:06]  index.d.ts
+│   ├── [7.4K 2026-02-11 15:52]  index.d.ts
 │   ├── [ 423 2026-02-11 05:49]  mdx.d.ts
-│   └── [3.0K 2026-02-11 05:49]  template-props.ts
+│   └── [3.8K 2026-02-11 15:52]  template-props.ts
 └── [2.5K 2026-02-11 10:57]  vercel.json
 
-54 directories, 109 files
+54 directories, 112 files
 ```
 
-วิเคราะห์รายละ ขั้นตอนดำเนินการทั้งหมดและรายละเอียดเนื้อหา จากเอกสารที่ส่งให้
-
 ---
 
-วิเคราะห์
-สรุป
+## BUILD ARTIFACT ANALYSIS (.next/static)
 
-วิเคราะห์การดำเนินการทั้งหมดถูกหรือผิดหรือมีวิธีที่ดีกว่า
-
----
-
-วิเคราะห์ คู่แข่งในตลาดปัจจุบันจะเบียดช่องว่างในตลาดได้หรือไม่
-\_\_
-
-วิเคราะห์ธุรกิจโปรเจคนี้คิดว่าทำรายได้ ได้หรือไม่
-
-\_\_
+```text
+2.2M	.next/static
+196K	.next/static/chunks/92766bc8-e3b049cccdab7d67.js
+188K	.next/static/chunks/966-b80289eacf7ce2d0.js
+180K	.next/static/chunks/framework-4620d42bf61d4349.js
+132K	.next/static/chunks/main-c1e62b29230972a3.js
+124K	.next/static/chunks/409-2a4a6f1385207df3.js
+112K	.next/static/chunks/polyfills-42372ed130431b0a.js
+104K	.next/static/css/761c6718c24e6ac6.css
+84K	.next/static/media/8e9860b6e62d6359-s.woff2
+56K	.next/static/chunks/714-abc46d0f2e0b010c.js
+48K	.next/static/media/e4af272ccee01ff0-s.p.woff2
+```

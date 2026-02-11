@@ -1,7 +1,7 @@
 /**
- * [ROUTE PAGE]: SERVICES_HUB_SYSTEM v17.6.0 (PROCESS_INTEGRATED)
- * [STRATEGY]: Conversion Architecture | Anchor-Link Ready | Specialist Authority
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [ROUTE PAGE]: SERVICES_HUB_SYSTEM v17.9.1 (STABLE_ADAPTER_HARDENED)
+ * [STRATEGY]: Zero-Flicker Architecture | Conversion Optimized | Anchor-Ready
+ * [MAINTAINER]: นายเอ็มซ่ามากส์ (AEMDEVWEB Specialist Team)
  */
 
 import React, { Suspense } from "react";
@@ -11,7 +11,6 @@ import type { Metadata } from "next";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
 import WorkProcess from "@/components/features/landing/WorkProcess";
-import SkeletonCard from "@/components/ui/SkeletonCard";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { constructMetadata } from "@/lib/seo-utils";
 
@@ -36,7 +35,10 @@ export const metadata: Metadata = constructMetadata({
 export default function ServicesPage() {
   return (
     <LayoutEngine spacing="none">
-      <main className="relative min-h-screen pt-32 pb-24 transition-colors duration-500 md:pt-48 md:pb-32">
+      {/* [CRITICAL FIX]: ลบ 'transition-colors duration-500' ออก 
+        เพื่อให้สีพื้นหลังแสดงผลทันที 100% ป้องกันแสงขาวกระพริบระหว่าง Hydration
+      */}
+      <main className="relative min-h-screen pt-32 pb-24 md:pt-48 md:pb-32">
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           {/* 01. STRATEGIC HEADER */}
           <header className="mb-24 max-w-6xl space-y-10 md:mb-32">
@@ -61,14 +63,14 @@ export default function ServicesPage() {
           </header>
 
           {/* 02. HUB COMPONENT: Service Nodes */}
-          <section id="service-nodes" className="min-h-[600px]">
+          {/* [FIX]: เพิ่ม min-h เพื่อป้องกันการกระโดดของ Layout (Layout Shift) */}
+          <section id="service-nodes" className="min-h-[400px]">
             <Suspense fallback={<ServiceGridSkeleton />}>
               <ServiceListingHub className="gap-8 md:gap-14" />
             </Suspense>
           </section>
 
           {/* --- [ANCHOR POINT]: 03. WORK PROCESS INFRASTRUCTURE --- */}
-          {/* [FIX]: กำหนด ID เพื่อให้ลิงก์ #process จาก Footer ทำงานได้ถูกต้อง */}
           <section id="process" className="mt-32 scroll-mt-32 md:mt-48">
             <div className="mb-16 space-y-6">
               <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
@@ -130,11 +132,18 @@ export default function ServicesPage() {
   );
 }
 
+/**
+ * [UI]: Skeleton เฉพาะหน้า Services
+ * ปรับโทนสีให้เข้ม (Darker) เพื่อไม่ให้เกิดอาการแสงขาววาบ (Flash) เมื่อโหลด
+ */
 function ServiceGridSkeleton() {
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
       {[...Array(3)].map((_, i) => (
-        <SkeletonCard key={i} aspectRatio="portrait" className="rounded-[3.5rem]" />
+        <div
+          key={i}
+          className="bg-surface-card/20 border-border/50 aspect-[3/4] animate-pulse rounded-[3.5rem] border"
+        />
       ))}
     </div>
   );

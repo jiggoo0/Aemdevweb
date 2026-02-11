@@ -1,6 +1,6 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.9.0 (STABLE_ADAPTER)
- * [STRATEGY]: Data Adapter Pattern | Safe Switch-Case | Zero-Crash Prerendering
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.9.2 (ZERO_FLICKER_PATCHED)
+ * [STRATEGY]: Data Adapter Pattern | Motion Conflict Resolution | Zero-Flicker
  * [MAINTAINER]: นายเอ็มซ่ามากส์ (AEMDEVWEB Specialist Team)
  */
 
@@ -19,7 +19,6 @@ import { generateServiceSchema, generateBreadcrumbSchema, generateSchemaGraph } 
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. Templates (The Strategic Nodes) ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import CatalogTemplate from "@/components/templates/catalog/Index";
@@ -28,12 +27,18 @@ import SeoAgencyTemplate from "@/components/templates/seo_agency/index";
 import HotelTemplate from "@/components/templates/hotelresort/Index";
 import LocalTemplate from "@/components/templates/local-authority/index";
 
+/**
+ * [SSG]: สร้างเส้นทางล่วงหน้าสำหรับทุกบริการใน Registry
+ */
 export async function generateStaticParams() {
   return MASTER_REGISTRY.map((service) => ({
     slug: service.templateSlug,
   }));
 }
 
+/**
+ * [SEO]: Metadata เจาะจงแต่ละบริการพร้อมระบบ Fallback
+ */
 export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
   const params = await props.params;
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
@@ -49,13 +54,17 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
   });
 }
 
+/**
+ * @page ServiceDetailPage
+ * @description หน้าแสดงผลรายละเอียดบริการ โดยใช้ Adapter Pattern เพื่อเลือกใช้ Template ที่ถูกต้อง
+ */
 export default async function ServiceDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
   const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
 
   if (!service) notFound();
 
-  // [SCHEMA]: Semantic Graph
+  // [SCHEMA]: Semantic Graph Connection
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
@@ -65,6 +74,9 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
     generateServiceSchema(service),
   ]);
 
+  /**
+   * [ADAPTER]: เลือก Template ตามข้อมูล templateSlug ใน Registry
+   */
   const renderTemplate = () => {
     switch (service.templateSlug) {
       case "corporate":
@@ -108,20 +120,27 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
   };
 
   return (
-    <LayoutEngine spacing="none" theme={service.theme}>
+    <>
       <JsonLd data={fullSchema} />
-      {/* [CRITICAL]: min-h-screen ensures footer pushes down, avoiding white gap */}
-      <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 min-h-screen duration-1000">
-        <div className="flex justify-center pt-24 pb-4">
-          <div className="border-border bg-surface-card/50 flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md">
-            <div className="bg-brand-primary h-1 w-1 animate-pulse rounded-full" />
-            <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
-              Service_Node: v{SITE_CONFIG.project.version}
-            </span>
-          </div>
+
+      {/* [NODE SYSTEM BADGE]
+        วางเป็น Element อิสระ (Relative) เพื่อไม่ให้กระทบ Flow ของ Template
+        ใช้ pointer-events-none เพื่อให้คลิกทะลุได้หากไปทับปุ่มอื่น
+      */}
+      <div className="pointer-events-none relative z-50 flex justify-center pt-24 pb-4">
+        <div className="border-border bg-surface-card/50 flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md">
+          <div className="bg-brand-primary h-1 w-1 animate-pulse rounded-full" />
+          <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
+            Service_Node: v{SITE_CONFIG.project.version}
+          </span>
         </div>
-        {renderTemplate()}
-      </main>
-    </LayoutEngine>
+      </div>
+
+      {/* [TEMPLATE CONTENT]
+        ปล่อยให้ Template (เช่น SalePageTemplate) จัดการ LayoutEngine และ Theme เอง 100%
+        ป้องกันปัญหา Double Layout Injection ที่ทำให้จอกระพริบ
+      */}
+      {renderTemplate()}
+    </>
   );
 }

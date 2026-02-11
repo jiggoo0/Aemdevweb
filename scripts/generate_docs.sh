@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==========================================
-# Project Overview Generator v2.3
+# Project Overview Generator v2.4
 # Specialist Version for AEMDEVWEB
 # ==========================================
 
@@ -74,5 +74,18 @@ tree -L 10 -h -D --timefmt "%Y-%m-%d %H:%M" \
     -I "node_modules|.git|.next|*.webp|*.png|*.jpg|*.jpeg|*.svg|*.ico|*.gif" \
     >> $OUTPUT_FILE
 echo '```' >> $OUTPUT_FILE
+echo -e "\n---\n" >> $OUTPUT_FILE
+
+# 7. Build Artifact Analysis (Static Files)
+echo "## BUILD ARTIFACT ANALYSIS (.next/static)" >> $OUTPUT_FILE
+if [ -d ".next/static" ]; then
+    echo '```text' >> $OUTPUT_FILE
+    # แสดงขนาดรวม และไฟล์ที่ใหญ่ที่สุด 10 อันดับแรก
+    du -sh .next/static >> $OUTPUT_FILE
+    find .next/static -type f -exec du -h {} + | sort -rh | head -n 10 >> $OUTPUT_FILE
+    echo '```' >> $OUTPUT_FILE
+else
+    echo "> [INFO] .next/static directory not found. Skipping analysis." >> $OUTPUT_FILE
+fi
 
 echo "AUDIT COMPLETED: $OUTPUT_FILE GENERATED."
