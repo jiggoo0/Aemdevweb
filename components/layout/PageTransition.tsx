@@ -1,6 +1,6 @@
 /**
- * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.4.6 (STABILIZED)
- * [STRATEGY]: Neural Transition | Frame-rate Stability | Theme Persistence
+ * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.4.7 (STABILIZED)
+ * [STRATEGY]: Neural Transition | Frame-rate Stability | Layout Persistence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -19,7 +19,7 @@ interface PageTransitionProps {
 /**
  * @component PageTransition
  * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Seamless
- * เพื่อยกระดับ UX ให้เทียบเท่าระดับสากล
+ * พร้อมระบบ Layout Guard ป้องกันการกระพริบและ Footer ลอย
  */
 const PageTransition = ({ children, className }: PageTransitionProps) => {
   const pathname = usePathname();
@@ -30,20 +30,26 @@ const PageTransition = ({ children, className }: PageTransitionProps) => {
       <motion.div
         key={pathname}
         /* [PERFORMANCE]: เริ่มที่ 0.01 แทน 0 เพื่อหลีกเลี่ยง Bug ของ Browser 
-           ในการคำนวณ Layer ในบางสภาวะ 
+           ในการคำนวณ Layer ในบางสภาวะ (Composite Layer Bug)
         */
         initial={{ opacity: 0.01, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -12 }}
-        /* [NEURAL_PHYSICS]: จังหวะการเคลื่อนไหวที่นุ่มนวลแต่ฉับไว */
+        /* [NEURAL_PHYSICS]: จังหวะการเคลื่อนไหวที่นุ่มนวลแต่ฉับไว (Power4 Out) */
         transition={{
           duration: 0.4,
-          ease: [0.22, 1, 0.36, 1], // Power4 Out Curve
+          ease: [0.22, 1, 0.36, 1],
           opacity: { duration: 0.3 },
         }}
         className={cn(
-          "flex w-full flex-grow flex-col",
-          /* [GPU_ACCELERATION]: ผลักภาระงานวาดไปที่การ์ดจอ เพื่อรักษา 60FPS ตลอดการเปลี่ยนหน้า */
+          /* [LAYOUT GUARD]: 
+             - flex-1: บังคับให้ยืดเต็มพื้นที่ที่เหลือ (แก้ Footer ลอย)
+             - w-full: บังคับกว้างเต็มจอเสมอ
+             - flex-col: จัดเรียงลูกหลานแนวตั้ง
+          */
+          "flex min-h-full w-full flex-1 flex-col",
+
+          /* [GPU_ACCELERATION]: ผลักภาระงานวาดไปที่การ์ดจอ */
           "will-change-[transform,opacity]",
           className,
         )}

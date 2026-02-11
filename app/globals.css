@@ -126,6 +126,12 @@
   html {
     @apply scroll-smooth;
     scrollbar-gutter: stable;
+
+    /* [FIX 1: CORE]: Sync HTML background with Theme Surface */
+    background-color: var(--color-surface-main);
+
+    /* [FIX 2: OPTIONAL]: Prevent Mobile Rubber-band (White Space) */
+    overscroll-behavior-y: none;
   }
 
   body {

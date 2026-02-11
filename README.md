@@ -1,19 +1,208 @@
                                                                  ➜  Aemdevweb git:(main) ✗ ./scripts/clean-project.sh                                                --- [ CLEANING AEMDEVWEB JUNK ] ---               Pruning pnpm store...                             Removed all cached metadata files                 Removed 0 files                                   Removed 0 packages
-Cleaning npm cache...                             npm warn Unknown project config "arch". This will stop working in the next major version of npm.    npm warn using --force Recommended protections disabled.                                            Cleaning Termux APT cache...                      Reading package lists... Done                     Building dependency tree... Done                  Reading state information... Done                 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.                                      Cleaning ~/.cache...                              --- [ CLEAN COMPLETED ] ---                       Current storage status:                           Available: 73G                                    ➜  Aemdevweb git:(main) ✗ pf                      ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.29.2.tgz                  ? Do you want to continue? [Y/n] y                                                                                                                    > aemdevweb.com@7.2.99 format /data/data/com.termux/files/home/Aemdevweb                            > prettier --write .
-                                                  .prettierrc 221ms (unchanged)                     app/(routes)/areas/[slug]/page.tsx 996ms (unchanged)                                                app/(routes)/areas/page.tsx 262ms (unchanged)     app/(routes)/blog/[slug]/page.tsx 236ms (unchanged)                                                 app/(routes)/blog/page.tsx 139ms (unchanged)
-app/(routes)/case-studies/[slug]/page.tsx 204ms (unchanged)                                         app/(routes)/case-studies/page.tsx 115ms (unchanged)                                                app/(routes)/services/[slug]/page.tsx 181ms (unchanged)                                             app/(routes)/services/page.tsx 171ms (unchanged)  app/about/page.tsx 232ms (unchanged)              app/globals.css 433ms (unchanged)                 app/layout.tsx 221ms (unchanged)                  app/loading.tsx 108ms (unchanged)                 app/manifest.ts 59ms (unchanged)                  app/not-found.tsx 96ms (unchanged)                app/page.tsx 229ms (unchanged)                    app/privacy/page.tsx 182ms (unchanged)            app/robots.ts 60ms (unchanged)                    app/sitemap.ts 162ms (unchanged)                  app/status/page.tsx 297ms (unchanged)             app/terms/page.tsx 188ms (unchanged)              components.json 26ms (unchanged)                  components/features/areas/AreaCard.tsx 185ms (unchanged)                                            components/features/blog/BlogCard.tsx 138ms (unchanged)                                             components/features/case-studies/CaseStudyCard.tsx 157ms (unchanged)                                components/features/landing/Hero.tsx 250ms (unchanged)                                              components/features/landing/PricingSection.tsx 254ms (unchanged)                                    components/features/landing/WorkProcess.tsx 298ms (unchanged)                                       components/features/services/ServiceCard.tsx 193ms (unchanged)                                      components/features/services/ServiceListingHub.tsx 146ms (unchanged)                                components/layout/Footer.tsx 334ms (unchanged)    components/layout/Navbar.tsx 405ms (unchanged)    components/layout/PageTransition.tsx 163ms (unchanged)                                              components/layout/TopLoader.tsx 98ms (unchanged)  components/providers/theme-provider.tsx 79ms (unchanged)
-components/seo/JsonLd.tsx 116ms (unchanged)       components/shared/ConversionCTA.tsx 178ms (unchanged)                                               components/shared/ImpactStats.tsx 295ms (unchanged)                                                 components/shared/LineStickyButton.tsx 126ms (unchanged)                                            components/shared/TrustBadge.tsx 159ms (unchanged)components/templates/bio/Index.tsx 255ms (unchanged)                                                components/templates/bio/Schema.ts 132ms (unchanged)                                                components/templates/catalog/Index.tsx 176ms (unchanged)                                            components/templates/catalog/Schema.ts 86ms (unchanged)                                             components/templates/corporate/Index.tsx 178ms (unchanged)                                          components/templates/corporate/Schema.ts 107ms (unchanged)                                          components/templates/hotelresort/Index.tsx 154ms (unchanged)                                        components/templates/hotelresort/Schema.ts 92ms (unchanged)                                         components/templates/local-authority/index.tsx 200ms                                                components/templates/local-authority/Schema.ts 85ms (unchanged)                                     components/templates/salepage/Index.tsx 165ms (unchanged)                                           components/templates/salepage/Schema.ts 117ms (unchanged)                                           components/templates/sections/DynamicFAQ.tsx 142ms (unchanged)                                      components/templates/sections/FeatureGrid.tsx 125ms (unchanged)                                     components/templates/sections/HeroEngine.tsx 166ms (unchanged)                                      components/templates/sections/LayoutEngine.tsx 125ms (unchanged)                                    components/templates/seo_agency/index.tsx 146ms (unchanged)                                         components/templates/seo_agency/Schema.ts 105ms (unchanged)                                         components/ui/accordion.tsx 111ms (unchanged)     components/ui/AmbientBackground.tsx 67ms (unchanged)                                                components/ui/button.tsx 83ms (unchanged)         components/ui/Callout.tsx 81ms (unchanged)        components/ui/IconRenderer.tsx 110ms (unchanged)  components/ui/skeleton-grid.tsx 64ms (unchanged)  components/ui/skeleton.tsx 52ms (unchanged)       components/ui/SkeletonCard.tsx 79ms (unchanged)   components/ui/sonner.tsx 59ms (unchanged)         components/ui/ThemeToggle.tsx 96ms (unchanged)    config/00-SYSTEM-MANDATE.md 453ms (unchanged)     config/01-SYSTEM-PROMPT-EXTENSION.md 397ms (unchanged)                                              constants/area-nodes.ts 179ms (unchanged)         constants/image-blur-data.ts 99ms (unchanged)     constants/master-registry.ts 137ms (unchanged)    constants/navigation.ts 67ms (unchanged)          constants/site-config.ts 66ms (unchanged)         content/blog/5-points-killing-sales.mdx 287ms (unchanged)                                           content/blog/advanced-schema-markup.mdx 166ms (unchanged)                                           content/blog/case-study-unlink-th.mdx 140ms (unchanged)                                             content/blog/copywriting-secrets.mdx 136ms (unchanged)                                              content/blog/core-web-vitals-speed.mdx 135ms (unchanged)                                            content/blog/ecommerce-conversion-seo.mdx 108ms (unchanged)                                         content/blog/facebook-ads-vs-website.mdx 126ms (unchanged)                                          content/blog/lower-north-digital-transformation.mdx 133ms (unchanged)                               content/blog/seo-2026-strategy.mdx 203ms (unchanged)                                                content/blog/technical-audit-protocol.mdx 134ms (unchanged)                                         content/case-studies/case-study-industrial-catalog.mdx 125ms (unchanged)                            content/case-studies/unlink-reputation-management-success.mdx 113ms (unchanged)                     eslint.config.mjs 103ms (unchanged)               knip.json 14ms (unchanged)                        lib/cms.ts 171ms (unchanged)                      lib/schema.ts 144ms (unchanged)                   lib/seo-utils.ts 57ms (unchanged)                 lib/utils.ts 95ms (unchanged)                     mdx-components.tsx 109ms (unchanged)              next.config.ts 80ms (unchanged)                   package.json 23ms (unchanged)                     pmpm-workspace.yaml 15ms (unchanged)              pnpm-lock.yaml 4841ms (unchanged)                 postcss.config.mjs 74ms (unchanged)               README.md 1030ms (unchanged)                      scripts/gen-blur-data.mjs 120ms (unchanged)       tsconfig.json 15ms (unchanged)                    types/index.d.ts 130ms (unchanged)                types/mdx.d.ts 34ms (unchanged)                   types/template-props.ts 54ms (unchanged)          vercel.json 31ms (unchanged)                      ➜  Aemdevweb git:(main) ✗ pch                                                                       > aemdevweb.com@7.2.99 lint /data/data/com.termux/files/home/Aemdevweb                              > eslint .                                                                                                                                            > aemdevweb.com@7.2.99 type-check /data/data/com.termux/files/home/Aemdevweb                        > tsc --noEmit                                                                                      ➜  Aemdevweb git:(main) ✗ pb                                                                        > aemdevweb.com@7.2.99 build /data/data/com.termux/files/home/Aemdevweb                             > next build --webpack                                                                                Skipping creating a lockfile at /data/data/com.termux/files/home/Aemdevweb/.next/lock because we're using WASM bindings                             ▲ Next.js 16.1.6 (webpack)                        - Experiments (use with caution):                   ⨯ mdxRs                                           · optimizePackageImports                          ✓ scrollRestoration                                                                                 Creating an optimized production build ...      ✓ Compiled successfully in 2.0min                 ✓ Finished TypeScript in 36.3s                    ✓ Collecting page data using 1 worker in 5.6s     ✓ Generating static pages using 1 worker (46/46) in 13.1s                                             Finalizing page optimization  .  Collecting buil✓ Collecting build traces in 58s                  ✓ Finalizing page optimization in 58s                                                               Route (app)                                       ┌ ○ /                                             ├ ○ /_not-found                                   ├ ○ /about                                        ├ ○ /areas                                        ├ ● /areas/[slug]                                 │ ├ /areas/bangkok                                │ ├ /areas/chon-buri                              │ ├ /areas/chiang-mai                             │ └ [+9 more paths]                               ├ ○ /blog                                         ├ ● /blog/[slug]                                  │ ├ /blog/seo-2026-strategy                       │ ├ /blog/5-points-killing-sales                  │ ├ /blog/advanced-schema-markup                  │ └ [+7 more paths]                               ├ ○ /case-studies                                 ├ ● /case-studies/[slug]                          │ ├ /case-studies/case-study-industrial-catalog   │ └ /case-studies/unlink-reputation-management-success                                              ├ ○ /manifest.webmanifest                         ├ ○ /privacy                                      ├ ○ /robots.txt                                   ├ ○ /services                                     ├ ● /services/[slug]                              │ ├ /services/seo_agency                          │ ├ /services/salepage                            │ ├ /services/corporate                           │ └ [+4 more paths]                               ├ ○ /sitemap.xml                                  ├ ○ /status                                       └ ○ /terms                                                                                                                                            ○  (Static)  prerendered as static content        ●  (SSG)     prerendered as static HTML (uses generateStaticParams)                                                                                   ➜  Aemdevweb git:(main) ✗ ./scripts/generate_docs.sh                                                AUDIT COMPLETED: README.md GENERATED.             ➜  Aemdevweb git:(main) ✗
 
-____
-vercel
-
-
-
+Cleaning npm cache... npm warn Unknown project config "arch". This will stop working in the next major version of npm. npm warn using --force Recommended protections disabled. Cleaning Termux APT cache... Reading package lists... Done Building dependency tree... Done Reading state information... Done 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded. Cleaning ~/.cache... --- [ CLEAN COMPLETED ] --- Current storage status: Available: 73G ➜ Aemdevweb git:(main) ✗ pf ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.29.2.tgz ? Do you want to continue? [Y/n] y > aemdevweb.com@7.2.99 format /data/data/com.termux/files/home/Aemdevweb > prettier --write .
+.prettierrc 221ms (unchanged) app/(routes)/areas/[slug]/page.tsx 996ms (unchanged) app/(routes)/areas/page.tsx 262ms (unchanged) app/(routes)/blog/[slug]/page.tsx 236ms (unchanged) app/(routes)/blog/page.tsx 139ms (unchanged)
+app/(routes)/case-studies/[slug]/page.tsx 204ms (unchanged) app/(routes)/case-studies/page.tsx 115ms (unchanged) app/(routes)/services/[slug]/page.tsx 181ms (unchanged) app/(routes)/services/page.tsx 171ms (unchanged) app/about/page.tsx 232ms (unchanged) app/globals.css 433ms (unchanged) app/layout.tsx 221ms (unchanged) app/loading.tsx 108ms (unchanged) app/manifest.ts 59ms (unchanged) app/not-found.tsx 96ms (unchanged) app/page.tsx 229ms (unchanged) app/privacy/page.tsx 182ms (unchanged) app/robots.ts 60ms (unchanged) app/sitemap.ts 162ms (unchanged) app/status/page.tsx 297ms (unchanged) app/terms/page.tsx 188ms (unchanged) components.json 26ms (unchanged) components/features/areas/AreaCard.tsx 185ms (unchanged) components/features/blog/BlogCard.tsx 138ms (unchanged) components/features/case-studies/CaseStudyCard.tsx 157ms (unchanged) components/features/landing/Hero.tsx 250ms (unchanged) components/features/landing/PricingSection.tsx 254ms (unchanged) components/features/landing/WorkProcess.tsx 298ms (unchanged) components/features/services/ServiceCard.tsx 193ms (unchanged) components/features/services/ServiceListingHub.tsx 146ms (unchanged) components/layout/Footer.tsx 334ms (unchanged) components/layout/Navbar.tsx 405ms (unchanged) components/layout/PageTransition.tsx 163ms (unchanged) components/layout/TopLoader.tsx 98ms (unchanged) components/providers/theme-provider.tsx 79ms (unchanged)
+components/seo/JsonLd.tsx 116ms (unchanged) components/shared/ConversionCTA.tsx 178ms (unchanged) components/shared/ImpactStats.tsx 295ms (unchanged) components/shared/LineStickyButton.tsx 126ms (unchanged) components/shared/TrustBadge.tsx 159ms (unchanged)components/templates/bio/Index.tsx 255ms (unchanged) components/templates/bio/Schema.ts 132ms (unchanged) components/templates/catalog/Index.tsx 176ms (unchanged) components/templates/catalog/Schema.ts 86ms (unchanged) components/templates/corporate/Index.tsx 178ms (unchanged) components/templates/corporate/Schema.ts 107ms (unchanged) components/templates/hotelresort/Index.tsx 154ms (unchanged) components/templates/hotelresort/Schema.ts 92ms (unchanged) components/templates/local-authority/index.tsx 200ms components/templates/local-authority/Schema.ts 85ms (unchanged) components/templates/salepage/Index.tsx 165ms (unchanged) components/templates/salepage/Schema.ts 117ms (unchanged) components/templates/sections/DynamicFAQ.tsx 142ms (unchanged) components/templates/sections/FeatureGrid.tsx 125ms (unchanged) components/templates/sections/HeroEngine.tsx 166ms (unchanged) components/templates/sections/LayoutEngine.tsx 125ms (unchanged) components/templates/seo_agency/index.tsx 146ms (unchanged) components/templates/seo_agency/Schema.ts 105ms (unchanged) components/ui/accordion.tsx 111ms (unchanged) components/ui/AmbientBackground.tsx 67ms (unchanged) components/ui/button.tsx 83ms (unchanged) components/ui/Callout.tsx 81ms (unchanged) components/ui/IconRenderer.tsx 110ms (unchanged) components/ui/skeleton-grid.tsx 64ms (unchanged) components/ui/skeleton.tsx 52ms (unchanged) components/ui/SkeletonCard.tsx 79ms (unchanged) components/ui/sonner.tsx 59ms (unchanged) components/ui/ThemeToggle.tsx 96ms (unchanged) config/00-SYSTEM-MANDATE.md 453ms (unchanged) config/01-SYSTEM-PROMPT-EXTENSION.md 397ms (unchanged) constants/area-nodes.ts 179ms (unchanged) constants/image-blur-data.ts 99ms (unchanged) constants/master-registry.ts 137ms (unchanged) constants/navigation.ts 67ms (unchanged) constants/site-config.ts 66ms (unchanged) content/blog/5-points-killing-sales.mdx 287ms (unchanged) content/blog/advanced-schema-markup.mdx 166ms (unchanged) content/blog/case-study-unlink-th.mdx 140ms (unchanged) content/blog/copywriting-secrets.mdx 136ms (unchanged) content/blog/core-web-vitals-speed.mdx 135ms (unchanged) content/blog/ecommerce-conversion-seo.mdx 108ms (unchanged) content/blog/facebook-ads-vs-website.mdx 126ms (unchanged) content/blog/lower-north-digital-transformation.mdx 133ms (unchanged) content/blog/seo-2026-strategy.mdx 203ms (unchanged) content/blog/technical-audit-protocol.mdx 134ms (unchanged) content/case-studies/case-study-industrial-catalog.mdx 125ms (unchanged) content/case-studies/unlink-reputation-management-success.mdx 113ms (unchanged) eslint.config.mjs 103ms (unchanged) knip.json 14ms (unchanged) lib/cms.ts 171ms (unchanged) lib/schema.ts 144ms (unchanged) lib/seo-utils.ts 57ms (unchanged) lib/utils.ts 95ms (unchanged) mdx-components.tsx 109ms (unchanged) next.config.ts 80ms (unchanged) package.json 23ms (unchanged) pmpm-workspace.yaml 15ms (unchanged) pnpm-lock.yaml 4841ms (unchanged) postcss.config.mjs 74ms (unchanged) README.md 1030ms (unchanged) scripts/gen-blur-data.mjs 120ms (unchanged) tsconfig.json 15ms (unchanged) types/index.d.ts 130ms (unchanged) types/mdx.d.ts 34ms (unchanged) types/template-props.ts 54ms (unchanged) vercel.json 31ms (unchanged) ➜ Aemdevweb git:(main) ✗ pch > aemdevweb.com@7.2.99 lint /data/data/com.termux/files/home/Aemdevweb > eslint . > aemdevweb.com@7.2.99 type-check /data/data/com.termux/files/home/Aemdevweb > tsc --noEmit ➜ Aemdevweb git:(main) ✗ pb > aemdevweb.com@7.2.99 build /data/data/com.termux/files/home/Aemdevweb > next build --webpack Skipping creating a lockfile at /data/data/com.termux/files/home/Aemdevweb/.next/lock because we're using WASM bindings ▲ Next.js 16.1.6 (webpack) - Experiments (use with caution): ⨯ mdxRs · optimizePackageImports ✓ scrollRestoration Creating an optimized production build ... ✓ Compiled successfully in 2.0min ✓ Finished TypeScript in 36.3s ✓ Collecting page data using 1 worker in 5.6s ✓ Generating static pages using 1 worker (46/46) in 13.1s Finalizing page optimization . Collecting buil✓ Collecting build traces in 58s ✓ Finalizing page optimization in 58s Route (app) ┌ ○ / ├ ○ /\_not-found ├ ○ /about ├ ○ /areas ├ ● /areas/[slug] │ ├ /areas/bangkok │ ├ /areas/chon-buri │ ├ /areas/chiang-mai │ └ [+9 more paths] ├ ○ /blog ├ ● /blog/[slug] │ ├ /blog/seo-2026-strategy │ ├ /blog/5-points-killing-sales │ ├ /blog/advanced-schema-markup │ └ [+7 more paths] ├ ○ /case-studies ├ ● /case-studies/[slug] │ ├ /case-studies/case-study-industrial-catalog │ └ /case-studies/unlink-reputation-management-success ├ ○ /manifest.webmanifest ├ ○ /privacy ├ ○ /robots.txt ├ ○ /services ├ ● /services/[slug] │ ├ /services/seo_agency │ ├ /services/salepage │ ├ /services/corporate │ └ [+4 more paths] ├ ○ /sitemap.xml ├ ○ /status └ ○ /terms ○ (Static) prerendered as static content ● (SSG) prerendered as static HTML (uses generateStaticParams) ➜ Aemdevweb git:(main) ✗ ./scripts/generate_docs.sh AUDIT COMPLETED: README.md GENERATED. ➜ Aemdevweb git:(main) ✗
 
 ---
+
+vercel
+
+13:45:31.062
+Generating static pages using 1 worker (11/46)
+13:45:31.658
+Generating static pages using 1 worker (22/46)
+13:45:32.253
+Generating static pages using 1 worker (34/46)
+13:45:32.395
+✓ Generating static pages using 1 worker (46/46) in 2.6s
+13:45:32.639
+Finalizing page optimization ...
+13:45:32.642
+Collecting build traces ...
+13:45:38.722
+13:45:38.725
+Route (app)
+13:45:38.726
+┌ ○ /
+13:45:38.726
+├ ○ /\_not-found
+13:45:38.726
+├ ○ /about
+13:45:38.726
+├ ○ /areas
+13:45:38.726
+├ ● /areas/[slug]
+13:45:38.726
+│ ├ /areas/bangkok
+13:45:38.726
+│ ├ /areas/chon-buri
+13:45:38.726
+│ ├ /areas/chiang-mai
+13:45:38.726
+│ └ [+9 more paths]
+13:45:38.726
+├ ○ /blog
+13:45:38.727
+├ ● /blog/[slug]
+13:45:38.727
+│ ├ /blog/seo-2026-strategy
+13:45:38.727
+│ ├ /blog/5-points-killing-sales
+13:45:38.727
+│ ├ /blog/advanced-schema-markup
+13:45:38.728
+│ └ [+7 more paths]
+13:45:38.728
+├ ○ /case-studies
+13:45:38.728
+├ ● /case-studies/[slug]
+13:45:38.728
+│ ├ /case-studies/case-study-industrial-catalog
+13:45:38.728
+│ └ /case-studies/unlink-reputation-management-success
+13:45:38.728
+├ ○ /manifest.webmanifest
+13:45:38.729
+├ ○ /privacy
+13:45:38.729
+├ ○ /robots.txt
+13:45:38.729
+├ ○ /services
+13:45:38.729
+├ ● /services/[slug]
+13:45:38.729
+│ ├ /services/seo_agency
+13:45:38.729
+│ ├ /services/salepage
+13:45:38.729
+│ ├ /services/corporate
+13:45:38.729
+│ └ [+4 more paths]
+13:45:38.729
+├ ○ /sitemap.xml
+13:45:38.729
+├ ○ /status
+13:45:38.731
+└ ○ /terms
+13:45:38.731
+13:45:38.735
+13:45:38.735
+○ (Static) prerendered as static content
+13:45:38.735
+● (SSG) prerendered as static HTML (uses generateStaticParams)
+13:45:38.735
+13:45:39.088
+Traced Next.js server files in: 92.423ms
+13:45:39.259
+Created all serverless functions in: 171.121ms
+13:45:39.284
+Collected static files (public/, static/, .next/static): 12.318ms
+13:45:39.828
+Build Completed in /vercel/output [34s]
+13:45:40.265
+Deploying outputs...
+
+---
+
+/\*\*
+
+- [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.5.10 (IMAGE_PATCH)
+- [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Termux Optimized
+- [MAINTAINER]: AEMDEVWEB Specialist Team
+  \*/
+
+import nextMDX from "@next/mdx";
+import type { NextConfig } from "next";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+
+const isVercel = process.env.VERCEL === "1";
+
+const withMDX = nextMDX({
+extension: /\.mdx?$/,
+options: {
+remarkPlugins: [remarkGfm, remarkFrontmatter],
+rehypePlugins: [],
+},
+});
+
+const nextConfig: NextConfig = {
+pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+reactStrictMode: true,
+compress: true,
+
+experimental: {
+scrollRestoration: true,
+workerThreads: false, // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Termux
+cpus: isVercel ? undefined : 1,
+
+    optimizePackageImports: [
+      "lucide-react",
+      "framer-motion",
+      "@radix-ui/react-slot",
+      "tailwindcss-animate",
+    ],
+    mdxRs: isVercel,
+
+},
+
+transpilePackages: ["next-mdx-remote", "lucide-react", "tailwindcss-animate"],
+
+images: {
+deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
+imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+formats: ["image/avif", "image/webp"],
+
+    // [FIX]: เพิ่มการอนุญาตค่า Quality 85 และ 90 ตามที่ใช้ใน Components
+    qualities: [75, 85, 90],
+
+    minimumCacheTTL: 86400,
+    unoptimized: false,
+    remotePatterns: [{ protocol: "https", hostname: "**" }],
+
+},
+
+async headers() {
+return [
+{
+source: "/\_next/static/(.\*)",
+headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+},
+];
+},
+
+webpack: (config, { dev, isServer }) => {
+if (!isVercel) {
+config.cache = false;
+}
+
+    if (!isServer) {
+      config.optimization.usedExports = true;
+    }
+
+    if (dev && !isVercel) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
+      };
+    }
+
+    return config;
+
+},
+};
+
+export default withMDX(nextConfig);
+
+---
+
 domain: aemdevweb.com
 status: strictly-enforced
 last_audit: 2026-02-11 13:43:22
+
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
@@ -27,7 +216,9 @@ last_audit: 2026-02-11 13:43:22
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
+
 ### MODULE: index.d.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.7.8 (STABILIZED_ASSETS)
@@ -305,9 +496,10 @@ export interface ImageBlurNode {
  * [RESOLVED]: ฐานข้อมูลกลางสำหรับ Mapping รูปภาพกับ Metadata
  */
 export type ImageBlurRegistry = Record<string, ImageBlurNode>;
-
 ```
+
 ### MODULE: mdx.d.ts
+
 ```typescript
 declare module "*.mdx" {
   import type { ComponentType, ReactNode } from "react";
@@ -321,9 +513,10 @@ declare module "mdx/types" {
   // Extending definition to allow strictly typed MDX components
   export type MDXComponents = Record<string, ComponentType<{ children?: ReactNode }> | string>;
 }
-
 ```
+
 ### MODULE: template-props.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.5.0 (TYPE_SAFE)
@@ -432,13 +625,14 @@ export interface BioTemplateProps extends BaseTemplateProps {
  * [ADAPTER TYPE]: Data Source Validation Helper
  */
 export type TemplateDataSource = "service" | "area" | "custom";
-
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
+
 ### CONFIG: area-nodes.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: AREA_NODES_DATA v17.7.8 (PRODUCTION_TOTAL_SYNC)
@@ -770,9 +964,10 @@ export const AREA_NODES: readonly AreaNode[] = [
     },
   },
 ] as const;
-
 ```
+
 ### CONFIG: image-blur-data.ts
+
 ```typescript
 /**
  * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v17.8.2
@@ -1028,9 +1223,10 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     height: 768,
   },
 } as const;
-
 ```
+
 ### CONFIG: master-registry.ts
+
 ```typescript
 /**
  * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.8.5 (STRATEGIC_READY)
@@ -1428,9 +1624,10 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     isFeatured: true,
   },
 ] as const;
-
 ```
+
 ### CONFIG: navigation.ts
+
 ```typescript
 /**
  * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.5.3 (UTILITY_EXPANDED)
@@ -1485,9 +1682,10 @@ export const FOOTER_MAP = {
 /* TYPE DEFINITIONS */
 export type NavItem = (typeof MAIN_NAV)[number];
 export type ServiceItem = (typeof SERVICE_SOLUTIONS)[number];
-
 ```
+
 ### CONFIG: site-config.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.8.1 (IDENTITY_REFINED)
@@ -1624,12 +1822,12 @@ export const SITE_CONFIG: SiteConfig = {
 } as const;
 
 export type GlobalConfig = typeof SITE_CONFIG;
-
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
+
 ```text
 [3.4K 2026-02-11 13:38]  .
 ├── [ 85K 2026-02-11 13:43]  README.md
