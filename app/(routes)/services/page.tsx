@@ -10,7 +10,7 @@ import type { Metadata } from "next";
 // --- 1. Infrastructure & UI ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
-import WorkProcess from "@/components/features/landing/WorkProcess"; // [ADD]: Import WorkProcess
+import WorkProcess from "@/components/features/landing/WorkProcess";
 import SkeletonCard from "@/components/ui/SkeletonCard";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { constructMetadata } from "@/lib/seo-utils";

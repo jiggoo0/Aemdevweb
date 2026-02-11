@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: AMBIENT_BACKGROUND v17.5.5 (STABILIZED)
+ * [UI COMPONENT]: AMBIENT_BACKGROUND v17.8.5 (STABILIZED)
  * [STRATEGY]: GPU-Accelerated Atmosphere | Organic Pulse | Zero-LCP Impact
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -16,14 +16,10 @@ interface AmbientBackgroundProps {
 
 function AmbientBackground({
   className,
-  gridOpacity = 0.04, // ปรับลดลงเล็กน้อยเพื่อให้ดู Clean ขึ้น
+  gridOpacity = 0.03,
   color,
   opacity,
 }: AmbientBackgroundProps) {
-  /**
-   * [PERFORMANCE]: ใช้ CSS Variables เพื่อลดการ Re-paint
-   * การเปลี่ยนสีผ่าน Variable จะลื่นกว่าการเปลี่ยนผ่าน Inline Style ตรงๆ
-   */
   const auraStyle = {
     "--aura-color": color || "var(--color-brand-primary, #2563eb)",
     "--aura-opacity": opacity ?? 0.12,
@@ -39,41 +35,37 @@ function AmbientBackground({
       aria-hidden="true"
       style={auraStyle}
     >
-      {/* 01. TECHNICAL GRID: ตารางโครงสร้างระดับสถาปัตยกรรม */}
+      {/* 01. TECHNICAL GRID: ปรับปรุง Mask เพื่อความสมูท */}
       <div
         className="bg-infrastructure-grid absolute inset-0 transition-opacity duration-1000"
         style={{
           opacity: gridOpacity,
-          maskImage: "radial-gradient(circle at center, black, transparent 80%)", // [ADD]: ให้ตารางจางหายไปตามขอบ
+          maskImage: "radial-gradient(circle at center, black, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(circle at center, black, transparent 75%)",
         }}
       />
 
-      {/* 02. DYNAMIC AURAS: ใช้ transform-gpu เพื่อลดภาระ CPU */}
-      {/* Main Aura (Top-Left) */}
+      {/* 02. DYNAMIC AURAS: High-Fidelity Gradients */}
       <div
         className={cn(
-          "absolute -top-[20%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
+          "absolute -top-[10%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
           "bg-[var(--aura-color)] opacity-[var(--aura-opacity)]",
-          // [FIX]: ลด Blur บนมือถือเพื่อลดภาระ GPU (Mobile: 60px, Desktop: 150px)
-          "mix-blend-soft-light blur-[60px] md:blur-[150px]",
-          "animate-aura-float transform-gpu transition-colors duration-1000 will-change-transform",
+          "mix-blend-soft-light blur-[80px] md:blur-[180px]",
+          "animate-aura-float transform-gpu will-change-transform",
         )}
       />
 
-      {/* Secondary Aura (Bottom-Right) */}
       <div
         className={cn(
-          "absolute -right-[10%] -bottom-[10%] h-[50vw] w-[50vw] rounded-full",
-          "bg-[var(--aura-color)] opacity-[calc(var(--aura-opacity)*0.7)]",
-          // [FIX]: ลด Blur บนมือถือเพื่อลดภาระ GPU
-          "mix-blend-plus-lighter blur-[50px] md:blur-[120px]",
-          "animate-pulse-slow transform-gpu transition-colors duration-1000 will-change-transform",
+          "absolute -right-[5%] -bottom-[5%] h-[40vw] w-[40vw] rounded-full",
+          "bg-[var(--aura-color)] opacity-[calc(var(--aura-opacity)*0.6)]",
+          "mix-blend-plus-lighter blur-[60px] md:blur-[140px]",
+          "animate-pulse-slow transform-gpu will-change-transform",
         )}
       />
 
-      {/* 03. DEPTH LAYER: สร้างความลึกแบบ Specialist */}
-      <div className="bg-surface-main/20 absolute inset-0 backdrop-blur-[1px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-surface-main)_100%)] opacity-60" />
+      {/* 03. DEPTH SHIELD */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-surface-main)_120%)] opacity-80" />
     </div>
   );
 }

@@ -19,7 +19,7 @@ import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 // --- 3. UI Components ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
-import BlogCard from "@/components/features/blog/BlogCard"; // [AUDIT]: Use centralized component
+import BlogCard from "@/components/features/blog/BlogCard";
 
 /* [A] SEO AUTHORITY PROTOCOL: ระบบ Unified Metadata ระดับแบรนด์ */
 export const metadata: Metadata = constructMetadata({

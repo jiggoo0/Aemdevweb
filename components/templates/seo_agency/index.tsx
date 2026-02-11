@@ -1,18 +1,20 @@
 /**
- * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.5.6 (STABILIZED)
- * [STRATEGY]: Technical Dominance | Semantic Excellence | Conversion-Led Content
+ * [TEMPLATE COMPONENT]: SEO_AUTHORITY_HUB v17.8.5 (STABILIZED)
+ * [STRATEGY]: Technical Dominance | Semantic Excellence | Zero-CLS Architecture
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
+import Image from "next/image";
 
 // --- 1. Infrastructure & UI ---
+import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-// [FIX]: Use Shared HeroEngine
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
+import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
 // --- 2. Shared Component Nodes ---
 import TrustBadge from "@/components/shared/TrustBadge";
@@ -30,38 +32,39 @@ interface SeoAgencyTemplateProps {
 }
 
 const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
-  const schema = generateSeoAgencySchema(data);
+  const schema = useMemo(() => generateSeoAgencySchema(data), [data]);
+  const imgData = data.image ? IMAGE_BLUR_DATA[data.image] : null;
 
   return (
     <LayoutEngine spacing="none" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY: เน้นหัวข้อที่ Google รัก */}
+      {/* 01. HERO GATEWAY: เน้นหัวข้อที่ Google รักและ Authority ของนายเอ็ม */}
       <HeroEngine
         title={
           <span className="block">
             Technical SEO <br className="hidden md:block" />
-            <strong className="text-brand-primary italic">Agency Specialist</strong>
+            <strong className="text-brand-primary italic">Architecture by นายเอ็ม.</strong>
           </span>
         }
         subtitle={data.description}
-        primaryActionLabel="วิเคราะห์เว็บไซต์ฟรี"
+        primaryActionLabel="วิเคราะห์ระบบกับนายเอ็มซ่ามากส์"
         primaryHref="/audit"
-        secondaryActionLabel="ดูแผนงาน SEO"
-        secondaryHref="#roadmap"
+        secondaryActionLabel="Analyze Roadmap"
+        secondaryHref="#strategy"
         align="left"
       />
 
-      {/* 02. STRATEGIC METRICS: ยืนยันผลลัพธ์ด้วยตัวเลข */}
+      {/* 02. STRATEGIC METRICS: ยืนยันผลลัพธ์ด้วยตัวเลขจริง */}
       <section className="relative z-30 container mx-auto -mt-24 px-4">
         <div className="bg-surface-card border-border shadow-pro-lg rounded-[3rem] border p-12 backdrop-blur-2xl md:p-20">
           <div className="flex flex-col items-center gap-16">
             <div className="space-y-4 text-center">
-              <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
-                Specialist_Metrics
-              </h3>
+              <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
+                Specialist_Audit_Node
+              </span>
               <h2 className="text-text-primary text-3xl font-black uppercase italic md:text-5xl">
-                Engineered for Growth.
+                Engineered for Organic Growth.
               </h2>
             </div>
             <ImpactStats />
@@ -71,57 +74,82 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
         </div>
       </section>
 
-      {/* 03. TECHNICAL CORE: เจาะลึกฟีเจอร์เชิงวิศวกรรม SEO */}
+      {/* 03. TECHNICAL CORE: ฟีเจอร์เชิงวิศวกรรม SEO (Zero-CLS Slot Reserved) */}
       <section id="strategy" className="py-24 md:py-32">
         <FeatureGrid
-          heading="วางรากฐานเพื่อชัยชนะ"
-          subheading="เราจัดการทุกรายละเอียดทางเทคนิค เพื่อให้เว็บไซต์ของคุณไต่อันดับได้อย่างมั่นคงและยั่งยืน"
-          items={data.coreFeatures || []}
+          heading="Core Growth Infrastructure"
+          subheading={`นายเอ็มซ่ามากส์ จัดการทุกรายละเอียดทางเทคนิค เพื่อให้เว็บไซต์ของคุณไต่อันดับได้อย่างมั่นคงและยั่งยืน`}
+          items={(data.coreFeatures || []).map((f, idx) => ({
+            ...f,
+            technicalDetail: `SEO_NODE_0${idx + 1}`,
+          }))}
           columns={3}
         />
       </section>
 
-      {/* 04. SEMANTIC BENEFITS: คุณค่าที่จะได้รับ */}
-      <section className="bg-surface-offset/50 border-border border-y py-24">
+      {/* 04. SEMANTIC BENEFITS: การสร้าง Semantic Branding */}
+      <section className="bg-surface-offset/50 border-border border-y py-32">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+          <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:items-center">
             {/* Semantic Narrative */}
-            <div className="space-y-10">
-              <h2 className="text-text-primary text-4xl leading-none font-black uppercase italic md:text-6xl">
-                Semantic <br />
-                <span className="text-brand-primary">Branding.</span>
-              </h2>
-              <p className="text-text-secondary text-xl leading-relaxed font-medium opacity-80">
-                การทำ SEO ในยุค 2026 ไม่ใช่แค่การยัด Keyword แต่คือการทำให้ Google เข้าใจว่า
-                "คุณคือใคร" และ "ทำไมคุณถึงดีที่สุด" ผ่านโครงสร้างข้อมูลที่แม่นยำ
+            <div className="space-y-12">
+              <div className="space-y-4">
+                <h2 className="text-text-primary text-4xl leading-none font-black uppercase italic md:text-7xl">
+                  Semantic <br />
+                  <span className="text-brand-primary">Dominance.</span>
+                </h2>
+                <div className="bg-brand-primary h-1.5 w-24 rounded-full" />
+              </div>
+
+              <p className="text-text-secondary text-xl leading-relaxed font-medium italic opacity-85">
+                การทำ SEO ในยุค AI 2026 ไม่ใช่แค่การยัด Keyword แต่คือการทำให้ Search Engine เข้าใจ
+                "Entity ตัวตน" ของแบรนด์คุณผ่านสถาปัตยกรรมข้อมูลที่ นายเอ็มซ่ามากส์ ปรับจูนมาอย่างดี
               </p>
-              <ul className="space-y-6">
+
+              <ul className="space-y-8">
                 {(data.benefits || []).map((benefit, idx) => (
-                  <li key={idx} className="flex items-center gap-4">
-                    <div className="bg-brand-primary/10 text-brand-primary flex h-8 w-8 items-center justify-center rounded-full">
-                      <IconRenderer name="Check" size={16} strokeWidth={4} />
+                  <li key={idx} className="group flex items-center gap-6">
+                    <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main border-brand-primary/20 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 group-hover:rotate-12">
+                      <IconRenderer name="Check" size={18} strokeWidth={4} />
                     </div>
-                    <span className="text-text-primary font-bold">{benefit}</span>
+                    <span className="text-text-primary text-lg font-black tracking-tight uppercase italic">
+                      {benefit}
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Visual Engineering Node */}
-            <div className="bg-surface-card border-border relative aspect-square overflow-hidden rounded-[3rem] border shadow-2xl">
-              <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
-                <IconRenderer name="Code2" size={120} className="text-brand-primary opacity-20" />
-              </div>
-
-              {/* [DECORATION]: วิศวกรรมจำลอง */}
-              <div className="text-brand-primary absolute inset-8 flex flex-col justify-between font-mono text-[10px] tracking-tighter uppercase opacity-40">
-                <div className="flex justify-between">
-                  <span>Struct_Check: pass</span>
-                  <span>v17.4.5</span>
+            {/* Visual Engineering Node (Slot Reserved) */}
+            <div
+              className="bg-surface-card border-border relative overflow-hidden rounded-[3rem] border shadow-2xl"
+              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "1/1" }}
+            >
+              {data.image ? (
+                <Image
+                  src={data.image}
+                  alt={`SEO Engineering Visual by นายเอ็มซ่ามากส์`}
+                  fill
+                  placeholder="blur"
+                  blurDataURL={imgData?.blurDataURL}
+                  className="object-cover transition-transform duration-[2s] hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              ) : (
+                <div className="bg-brand-primary/10 absolute inset-0 flex items-center justify-center">
+                  <IconRenderer name="Code2" size={120} className="text-brand-primary opacity-10" />
                 </div>
-                <div className="flex justify-between">
-                  <span>Core_Web_Vitals: optimal</span>
-                  <span>99ms</span>
+              )}
+
+              {/* Specialist HUD Decoration */}
+              <div className="text-brand-primary pointer-events-none absolute inset-10 flex flex-col justify-between font-mono text-[9px] font-black tracking-widest uppercase opacity-60">
+                <div className="border-brand-primary/20 flex justify-between border-b pb-2">
+                  <span>Entity_ID: VALIDATED</span>
+                  <span>v17.8.5</span>
+                </div>
+                <div className="border-brand-primary/20 flex justify-between border-t pt-2">
+                  <span>Knowledge_Graph: MAPPED</span>
+                  <span>LATENCY: 99ms</span>
                 </div>
               </div>
             </div>
@@ -131,9 +159,16 @@ const SeoAgencyTemplate = ({ data }: SeoAgencyTemplateProps) => {
 
       {/* 05. CONVERSION HUB */}
       <ConversionCTA
-        title="หยุดเสียโอกาสจากการมองไม่เห็น"
-        description="ให้เราช่วยวางโครงสร้างที่ถูกต้อง เพื่อให้ธุรกิจของคุณปรากฏต่อหน้าลูกค้าในเวลาที่ต้องการที่สุด"
-        buttonLabel="เริ่มวางแผน SEO วันนี้"
+        title="หยุดเสียโอกาสจากการมองไม่เห็นบนหน้าแรก Google ได้แล้วครับ"
+        description={`ให้นายเอ็มซ่ามากส์ ช่วยวางรากฐาน Technical SEO ที่ถูกต้อง เพื่อให้ธุรกิจของคุณเติบโตอย่างยั่งยืนในโลกดิจิทัลวันนี้`}
+        buttonLabel="เริ่มวางแผนกลยุทธ์กับนายเอ็ม"
+      />
+
+      {/* 06. INTELLIGENCE FAQ */}
+      <DynamicFAQ
+        title="SEO Strategy FAQ"
+        description="เจาะลึกกระบวนการทำงานและเทคโนโลยีเบื้องหลังการดันอันดับ"
+        items={data.faqs}
       />
     </LayoutEngine>
   );

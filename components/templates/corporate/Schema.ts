@@ -1,22 +1,23 @@
 /**
- * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.5.5 (GRAPH_ENTERPRISE)
- * [STRATEGY]: Knowledge Graph Architecture | Multi-Entity Linking | Service Authority
+ * [TEMPLATE SCHEMA]: CORPORATE_SERVICE_STRUCTURE v17.8.5 (GRAPH_ENTERPRISE)
+ * [STRATEGY]: Knowledge Graph Architecture | Entity Resolution | Specialist Trust
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
+import { absoluteUrl } from "@/lib/utils";
 import type { TemplateMasterData } from "@/types";
 
 export function generateCorporateSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
-  const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
-  // [FIX]: Ensure data.priceValue exists before toString
+  const canonicalUrl = absoluteUrl(`/services/${data.templateSlug}`);
   const cleanPrice = (data.priceValue || 0).toString();
 
   const IDS = {
     WEBPAGE: `${canonicalUrl}/#webpage`,
     SERVICE: `${canonicalUrl}/#service`,
-    ORG: `${siteUrl}/#organization`,
+    ORG: absoluteUrl("/#organization"),
+    PERSON: absoluteUrl("/#person"),
     FAQ: `${canonicalUrl}/#faq`,
     BREADCRUMB: `${canonicalUrl}/#breadcrumb`,
   };
@@ -24,43 +25,20 @@ export function generateCorporateSchema(data: TemplateMasterData) {
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "Organization",
-        "@id": IDS.ORG,
-        name: SITE_CONFIG.brandName,
-        url: siteUrl,
-        logo: {
-          "@type": "ImageObject",
-          url: `${siteUrl}/images/logo.webp`,
-          width: 512,
-          height: 512,
-          caption: SITE_CONFIG.brandName,
-        },
-        contactPoint: {
-          "@type": "ContactPoint",
-          telephone: SITE_CONFIG.contact.phone,
-          contactType: "customer service",
-          areaServed: "TH",
-          availableLanguage: ["Thai", "English"],
-        },
-        sameAs: [
-          SITE_CONFIG.links.facebook,
-          SITE_CONFIG.links.github,
-          SITE_CONFIG.links.line,
-        ].filter(Boolean),
-      },
+      // NODE 1: SERVICE (Enterprise Offering)
       {
         "@type": "Service",
         "@id": IDS.SERVICE,
-        serviceType: "Enterprise Digital Infrastructure",
+        serviceType: "Enterprise Digital Infrastructure & SEO Specialist",
         name: data.title,
         description: data.description,
-        image: data.image ? `${siteUrl}${data.image}` : undefined,
+        image: data.image ? absoluteUrl(data.image) : undefined,
         provider: { "@id": IDS.ORG },
+        seller: { "@id": IDS.PERSON }, // ระบุ นายเอ็มซ่ามากส์ เป็นผู้รับผิดชอบหลัก
         areaServed: { "@type": "Country", name: "Thailand" },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Enterprise Capabilities",
+          name: "Enterprise Capability Matrix",
           itemListElement: (data.coreFeatures || []).map((feat, index) => ({
             "@type": "Offer",
             position: index + 1,
@@ -77,9 +55,36 @@ export function generateCorporateSchema(data: TemplateMasterData) {
           priceCurrency: data.currency || "THB",
           availability: "https://schema.org/InStock",
           url: canonicalUrl,
-          seller: { "@id": IDS.ORG },
         },
       },
+
+      // NODE 2: WEB PAGE & BREADCRUMB
+      {
+        "@type": "WebPage",
+        "@id": IDS.WEBPAGE,
+        url: canonicalUrl,
+        name: `${data.title} | ${SITE_CONFIG.brandName}`,
+        description: data.description,
+        isPartOf: { "@id": absoluteUrl("/#website") },
+        mainEntity: { "@id": IDS.SERVICE },
+        breadcrumb: { "@id": IDS.BREADCRUMB },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": IDS.BREADCRUMB,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "หน้าแรก", item: siteUrl },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "โซลูชันองค์กร",
+            item: absoluteUrl("/services"),
+          },
+          { "@type": "ListItem", position: 3, name: data.title, item: canonicalUrl },
+        ],
+      },
+
+      // NODE 3: FAQ SCHEMA
       {
         "@type": "FAQPage",
         "@id": IDS.FAQ,
@@ -91,26 +96,6 @@ export function generateCorporateSchema(data: TemplateMasterData) {
             text: item.answer,
           },
         })),
-      },
-      {
-        "@type": "WebPage",
-        "@id": IDS.WEBPAGE,
-        url: canonicalUrl,
-        name: `${data.title} | ${SITE_CONFIG.brandName}`,
-        description: data.description,
-        isPartOf: { "@id": `${siteUrl}/#website` },
-        about: { "@id": IDS.SERVICE },
-        breadcrumb: { "@id": IDS.BREADCRUMB },
-        mainEntity: { "@id": IDS.SERVICE },
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": IDS.BREADCRUMB,
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "หน้าแรก", item: siteUrl },
-          { "@type": "ListItem", position: 2, name: "โซลูชันองค์กร", item: `${siteUrl}/services` },
-          { "@type": "ListItem", position: 3, name: data.title, item: canonicalUrl },
-        ],
       },
     ],
   };

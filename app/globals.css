@@ -177,6 +177,7 @@
     @apply mx-auto w-full max-w-[85rem] px-4 md:px-6;
   }
 
+  /* [CLS GUARD]: Aspect Ratio Utilities */
   .aspect-pro-hero {
     aspect-ratio: 16 / 9;
     @media (max-width: 768px) {

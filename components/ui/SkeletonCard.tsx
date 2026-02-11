@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: SKELETON_CARD_HUB v17.5.5 (PSI_OPTIMIZED)
+ * [UI COMPONENT]: SKELETON_CARD_HUB v17.5.6 (PSI_OPTIMIZED)
  * [STRATEGY]: Blueprint Projection | Aspect Ratio Preservation | GPU Acceleration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */

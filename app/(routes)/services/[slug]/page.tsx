@@ -1,7 +1,7 @@
 /**
- * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.5.5 (STABILIZED)
- * [STRATEGY]: Outcome-Driven Architecture | Graph-Based SEO | Lean Performance
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [ROUTE PAGE]: SERVICE_DETAIL_RENDERER v17.8.8 (PRERENDER_SAFE)
+ * [STRATEGY]: Data Adapter Pattern | Safe Switch-Case | Zero-Crash Prerendering
+ * [MAINTAINER]: นายเอ็มซ่ามากส์ (AEMDEVWEB Specialist Team)
  */
 
 import React from "react";
@@ -11,16 +11,11 @@ import { notFound } from "next/navigation";
 // --- 1. Infrastructure & Core Data ---
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
-// [FIX]: ใช้ import type เพื่อ Explicit Typing (แก้ปัญหา Unused imports)
-import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
+import type { PageProps, AreaNode } from "@/types";
 
-// --- 2. SEO & Schema Protocols (Separated) ---
-// ✅ Import Metadata Generator จาก seo-utils
+// --- 2. SEO & Schema Protocols ---
 import { constructMetadata } from "@/lib/seo-utils";
-
-// ✅ Import Schema Generators จาก schema
 import { generateServiceSchema, generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
-
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. Templates (The Strategic Nodes) ---
@@ -29,9 +24,9 @@ import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import CatalogTemplate from "@/components/templates/catalog/Index";
 import BioTemplate from "@/components/templates/bio/Index";
-import LocalTemplate from "@/components/templates/new-service-name/index";
 import SeoAgencyTemplate from "@/components/templates/seo_agency/index";
 import HotelTemplate from "@/components/templates/hotelresort/Index";
+import LocalTemplate from "@/components/templates/local-authority/index";
 
 export async function generateStaticParams() {
   return MASTER_REGISTRY.map((service) => ({
@@ -41,10 +36,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(props: PageProps<{ slug: string }>): Promise<Metadata> {
   const params = await props.params;
-  // [FIX]: ใส่ Type ให้ตัวแปรเพื่อให้ลินท์ไม่ฟ้อง unused import
-  const service: TemplateMasterData | undefined = MASTER_REGISTRY.find(
-    (s) => s.templateSlug === params.slug,
-  );
+  const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
 
   if (!service) return { title: "Service Not Found" };
 
@@ -59,13 +51,11 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
 
 export default async function ServiceDetailPage(props: PageProps<{ slug: string }>) {
   const params = await props.params;
-  // [FIX]: ใส่ Type ให้ชัดเจน (Explicit Typing)
-  const service: TemplateMasterData | undefined = MASTER_REGISTRY.find(
-    (s) => s.templateSlug === params.slug,
-  );
+  const service = MASTER_REGISTRY.find((s) => s.templateSlug === params.slug);
 
   if (!service) notFound();
 
+  // [SCHEMA]: กราฟข้อมูลเชิงลึกสำหรับ Service Entity
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: SITE_CONFIG.siteUrl },
@@ -75,6 +65,10 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
     generateServiceSchema(service),
   ]);
 
+  /**
+   * [DETERMINISTIC RENDERER]: ระบบเลือกเทมเพลตอัจฉริยะ
+   * มาพร้อมกับ Adapter เพื่อป้องกัน Data Mismatch ระหว่าง Prerendering
+   */
   const renderTemplate = () => {
     switch (service.templateSlug) {
       case "corporate":
@@ -85,17 +79,38 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
         return <CatalogTemplate data={service} />;
       case "bio":
         return <BioTemplate data={service} />;
-      case "new-service-name":
+
+      case "local-authority": {
         /**
-         * [WARNING]: ตรงนี้ service เป็น TemplateMasterData
-         * แต่ LocalTemplate อาจจะต้องการ props ของ AreaNode
-         * การทำ as unknown as AreaNode เป็นวิธีแก้ขัดที่ยอมรับได้ในกรณีนี้ เพื่อ Reuse Template
+         * [RESOLVED]: DATA_ADAPTER
+         * แปลง TemplateMasterData เป็น AreaNode จำลองเพื่อป้องกัน .map() พัง
          */
-        return <LocalTemplate data={service as unknown as AreaNode} />;
+        const safeAreaData: AreaNode = {
+          slug: service.templateSlug,
+          province: "ประเทศไทย",
+          title: service.title,
+          description: service.description,
+          seoTitle: service.title,
+          seoDescription: service.description,
+          priority: service.priority,
+          templateSlug: "local-authority",
+          districts: [], // จ่ายค่า Array ว่างเพื่อป้องกัน TypeError
+          keywords: service.keywords || [],
+          heroImage: service.image || "/images/service/local-node.webp",
+          localContext: {
+            marketInsight: "การเจาะตลาดท้องถิ่นในระดับประเทศ",
+            technicalApproach: "โครงสร้าง Technical SEO สำหรับ Local Search",
+            localStrength: "Specialist Knowledge",
+          },
+        };
+        return <LocalTemplate data={safeAreaData} />;
+      }
+
       case "seo_agency":
         return <SeoAgencyTemplate data={service} />;
       case "hotelresort":
         return <HotelTemplate data={service} />;
+
       default:
         return <CorporateTemplate data={service} />;
     }
@@ -106,9 +121,12 @@ export default async function ServiceDetailPage(props: PageProps<{ slug: string 
       <JsonLd data={fullSchema} />
       <main className="animate-in fade-in slide-in-from-bottom-2 relative z-10 duration-1000">
         <div className="flex justify-center pt-24 pb-4">
-          <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
-            Node_Deployment: v{SITE_CONFIG.project.version}
-          </span>
+          <div className="border-border bg-surface-card/50 flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md">
+            <div className="bg-brand-primary h-1 w-1 animate-pulse rounded-full" />
+            <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
+              Service_Node: v{SITE_CONFIG.project.version}
+            </span>
+          </div>
         </div>
         {renderTemplate()}
       </main>

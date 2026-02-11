@@ -12,17 +12,12 @@
   },
   "redirects": [
     {
-      "source": "/services/corporate_lite",
+      "source": "/services/(corporate_lite|corporate_pro)",
       "destination": "/services/corporate",
       "permanent": true
     },
     {
-      "source": "/services/corporate_pro",
-      "destination": "/services/corporate",
-      "permanent": true
-    },
-    {
-      "source": "/templates/event_magic",
+      "source": "/templates/(event_magic|corporate_standard)",
       "destination": "/services/corporate",
       "permanent": true
     },
@@ -32,22 +27,12 @@
       "permanent": true
     },
     {
-      "source": "/templates/local_service",
-      "destination": "/services/new-service-name",
+      "source": "/(templates/local_service|templates/new_service_name|services/new-service-name)",
+      "destination": "/services/local-authority",
       "permanent": true
     },
     {
-      "source": "/templates/new_service_name",
-      "destination": "/services/new-service-name",
-      "permanent": true
-    },
-    {
-      "source": "/blog/technical-seo-guide",
-      "destination": "/blog/seo-2026-strategy",
-      "permanent": true
-    },
-    {
-      "source": "/seo/technical-seo-guide",
+      "source": "/(seo|blog)/technical-seo-guide",
       "destination": "/blog/seo-2026-strategy",
       "permanent": true
     },
@@ -83,6 +68,15 @@
       ]
     },
     {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -96,6 +90,14 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
         }
       ]
     }

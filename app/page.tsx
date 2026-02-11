@@ -1,13 +1,13 @@
 /**
- * [CORE PAGE]: HOMEPAGE v17.5.6 (CODE_SPLIT_OPTIMIZED)
- * [STRATEGY]: Symmetrical Rhythm | High-Mass Balance | Conversion Flow
+ * [CORE PAGE]: HOMEPAGE v17.8.1 (IDENTITY_SYNCED)
+ * [STRATEGY]: Symmetrical Rhythm | High-Mass Balance | Persona Hardening
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic"; // [ADD]: Import dynamic module
+import dynamic from "next/dynamic";
 
 // --- 1. Infrastructure & CMS Engine ---
 import { AREA_NODES } from "@/constants/area-nodes";
@@ -16,20 +16,19 @@ import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 import { generateSchemaGraph } from "@/lib/schema";
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
-import JsonLd from "@/components/seo/JsonLd"; // [KEEP]: SEO Data ต้อง Static
+import JsonLd from "@/components/seo/JsonLd";
 
 // --- 2. Feature & Section Engines ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import Hero from "@/components/features/landing/Hero"; // [KEEP]: Hero ต้องโหลดทันที (LCP)
+import Hero from "@/components/features/landing/Hero";
 
-// [OPTIMIZATION]: Dynamic Imports for Below-the-Fold Content
-// ช่วยลด TBT (Total Blocking Time) และเพิ่ม Speed Index
+// [OPTIMIZATION]: Dynamic Imports
 const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
   loading: () => <div className="bg-surface-offset/5 h-96 w-full animate-pulse rounded-3xl" />,
 });
 const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"));
 
-// --- 3. Component Nodes (Dynamic) ---
+// --- 3. Component Nodes ---
 const BlogCard = dynamic(() => import("@/components/features/blog/BlogCard"));
 const CaseStudyCard = dynamic(() => import("@/components/features/case-studies/CaseStudyCard"));
 const AreaCard = dynamic(() => import("@/components/features/areas/AreaCard"));
@@ -40,22 +39,21 @@ const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"));
 // --- 4. Types ---
 import type { AreaNode, TemplateMasterData, BlogPost, CaseStudy } from "@/types";
 
-/* [A] SEO AUTHORITY PROTOCOL: Metadata เชิงยุทธศาสตร์ */
+/* [A] SEO AUTHORITY PROTOCOL: Metadata เจาะจงตัวตนผู้เชี่ยวชาญ */
 export const metadata: Metadata = constructMetadata({
-  title: "รับทำเว็บไซต์และ SEO เชิงยุทธศาสตร์ | Web Infrastructure Specialist",
+  title: `รับทำเว็บไซต์ & SEO คุณภาพสูง โดย ${SITE_CONFIG.expert.displayName} | AEMDEVWEB Standard`,
   description: SITE_CONFIG.description,
   path: "/",
   image: "/images/og-main.png",
 });
 
 export default async function HomePage() {
-  // 01. PARALLEL DATA FETCHING: ดึงข้อมูลแบบคู่ขนานเพื่อลด Latency
+  // Waterfall Prevention
   const [cases, posts] = await Promise.all([
     getAllCaseStudies().catch(() => [] as CaseStudy[]),
     getAllPosts().catch(() => [] as BlogPost[]),
   ]);
 
-  // Strategic Data Slicing: คัดกรองโหนดสำคัญตาม Priority
   const recentCases = cases.slice(0, 2);
   const recentPosts = posts.slice(0, 3);
   const featuredAreas = AREA_NODES.filter((n: AreaNode) => (n.priority ?? 0) >= 95).slice(0, 4);
@@ -63,13 +61,13 @@ export default async function HomePage() {
 
   return (
     <LayoutEngine spacing="none">
-      {/* [SEO_GRAPH_INJECTION]: เชื่อมโยงตัวตน อลงกรณ์ ยมเกิด เข้ากับแบรนด์โดยตรง */}
+      {/* [SEO_GRAPH_INJECTION]: เชื่อมโยง นายเอ็มซ่ามากส์ (DisplayName) และ นายอลงกรณ์ ยมเกิด (Legal) */}
       <JsonLd data={generateSchemaGraph([])} />
 
-      {/* --- SECTION 01: HERO GATEWAY (Static Load) --- */}
+      {/* --- SECTION 01: HERO GATEWAY --- */}
       <Hero />
 
-      {/* --- SECTION 02: AUTHORITY HUB (Dynamic Load) --- */}
+      {/* --- SECTION 02: AUTHORITY HUB --- */}
       <section className="relative z-30 -mt-24 px-4 md:-mt-48 lg:-mt-56">
         <div className="mx-auto max-w-7xl">
           <div className="bg-surface-card/40 border-border shadow-pro-xl relative overflow-hidden rounded-[4rem] border p-12 backdrop-blur-3xl md:p-24">
@@ -89,12 +87,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 03: PROCESS ROADMAP (Dynamic Load) --- */}
+      {/* --- SECTION 03: PROCESS ROADMAP --- */}
       <section className="py-32 md:py-56 lg:py-64">
         <WorkProcess />
       </section>
 
-      {/* --- SECTION 04: CORE SOLUTIONS (Dynamic Load) --- */}
+      {/* --- SECTION 04: CORE SOLUTIONS --- */}
       <section id="services" className="bg-surface-offset/20 py-32 md:py-48">
         <div className="container mx-auto px-4">
           <header className="mb-24 space-y-8">
@@ -112,7 +110,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 05: SUCCESS EVIDENCE (Dynamic Load) --- */}
+      {/* --- SECTION 05: SUCCESS EVIDENCE --- */}
       <section id="success" className="py-32 md:py-56">
         <div className="container mx-auto px-4">
           <div className="border-border mb-24 flex flex-col justify-between gap-12 border-b pb-12 md:flex-row md:items-end">
@@ -136,7 +134,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 06: PRICING & INVESTMENT (Dynamic Load) --- */}
+      {/* --- SECTION 06: PRICING & INVESTMENT --- */}
       <section className="bg-surface-main relative overflow-hidden py-32 md:py-48">
         <div
           className="bg-brand-primary/5 absolute top-0 left-0 h-full w-full skew-y-3 transform"
@@ -145,7 +143,7 @@ export default async function HomePage() {
         <PricingSection />
       </section>
 
-      {/* --- SECTION 07: KNOWLEDGE HUB (Dynamic Load) --- */}
+      {/* --- SECTION 07: KNOWLEDGE HUB --- */}
       <section id="knowledge" className="py-32 md:py-56">
         <div className="container mx-auto px-4">
           <header className="mb-24">
@@ -161,7 +159,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- SECTION 08: GEOGRAPHIC EXPANSION (Dynamic Load) --- */}
+      {/* --- SECTION 08: GEOGRAPHIC EXPANSION --- */}
       <section className="border-border border-t py-32 md:py-48">
         <div className="container mx-auto px-4">
           <div className="mb-20 flex items-center gap-6">

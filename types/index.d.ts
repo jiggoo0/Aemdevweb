@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.5.5 (AUTHENTICATED)
- * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.7.8 (STABILIZED_ASSETS)
+ * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params (Next.js 15+)
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -108,7 +108,6 @@ export interface SiteConfig {
     readonly industry: string;
     readonly roiFocus: boolean;
     readonly established: string;
-    // [UPDATE]: เพิ่ม field status เพื่อรองรับการแสดงผลใน LayoutEngine
     readonly status?: string;
     readonly ids?: {
       readonly businessProfileId: string;
@@ -185,6 +184,7 @@ export interface TemplateMasterData {
   readonly expertise?: readonly ExpertiseItem[];
 }
 
+/** [RESOLVED]: ผูกนิยาม ServiceData สำหรับใช้ในระบบ Listing */
 export type ServiceData = TemplateMasterData;
 
 // =========================================
@@ -230,6 +230,12 @@ export interface CaseStudy extends BaseContent {
 // [05] GEO & AREA NODES
 // =========================================
 
+export interface LocalContext {
+  readonly marketInsight: string;
+  readonly technicalApproach: string;
+  readonly localStrength: string;
+}
+
 export interface AreaNode {
   readonly slug: string;
   readonly province: string;
@@ -239,7 +245,7 @@ export interface AreaNode {
   readonly seoTitle: string;
   readonly seoDescription: string;
   readonly priority: number;
-  readonly templateSlug: "corporate" | "salepage" | "local" | string;
+  readonly templateSlug: "corporate" | "salepage" | "local" | "local-authority" | string;
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
   readonly heroImage: string;
@@ -248,4 +254,23 @@ export interface AreaNode {
     readonly lat: number;
     readonly lng: number;
   };
+  readonly localContext?: LocalContext;
 }
+
+// =========================================
+// [06] ASSET & MEDIA INFRASTRUCTURE
+// =========================================
+
+/**
+ * [RESOLVED]: ข้อมูลสำหรับป้องกัน CLS และสร้าง Blur-up Effect
+ */
+export interface ImageBlurNode {
+  readonly blurDataURL: string;
+  readonly width: number;
+  readonly height: number;
+}
+
+/**
+ * [RESOLVED]: ฐานข้อมูลกลางสำหรับ Mapping รูปภาพกับ Metadata
+ */
+export type ImageBlurRegistry = Record<string, ImageBlurNode>;

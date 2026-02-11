@@ -1,16 +1,17 @@
 /**
- * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.5.7 (STABILIZED)
- * [STRATEGY]: Strategic Registry | Multi-Theme Depth | LCP Performance
+ * [TEMPLATE COMPONENT]: CATALOG_PAGE_SYSTEM v17.8.5 (ZERO_CLS_HARDENED)
+ * [STRATEGY]: Strategic Registry | Aspect-Ratio Locking | LCP Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
 // --- INFRASTRUCTURE ---
+import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
@@ -21,6 +22,7 @@ import TrustBadge from "@/components/shared/TrustBadge";
 import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
+import ImpactStats from "@/components/shared/ImpactStats";
 
 // --- LOGIC ---
 import type { TemplateMasterData } from "@/types";
@@ -31,43 +33,53 @@ interface CatalogTemplateProps {
 }
 
 const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
-  const schema = generateCatalogSchema(data);
+  const schema = useMemo(() => generateCatalogSchema(data), [data]);
   const catalogItems = data.coreFeatures || [];
+
+  // [RESOLVE]: ดึงข้อมูล Metadata เพื่อแก้ปัญหา Layout Shift
+  const imgData = data.image ? IMAGE_BLUR_DATA[data.image] : null;
 
   return (
     <LayoutEngine spacing="specialist" theme={data.theme}>
       <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY */}
+      {/* 01. HERO GATEWAY: Persona Injected */}
       <HeroEngine
         title={data.title}
         subtitle={data.description}
-        primaryActionLabel="ปรึกษาการเลือกแพ็กเกจ"
+        primaryActionLabel="ปรึกษาแผนงานกับนายเอ็มซ่ามากส์"
         primaryHref="/contact"
-        secondaryActionLabel="ดูรายการทั้งหมด"
+        secondaryActionLabel="Analyze Catalog"
         secondaryHref="#catalog-grid"
         align="center"
       />
 
-      {/* 02. VISUAL SHOWCASE */}
+      {/* 02. VISUAL SHOWCASE: Zero-CLS Protocol */}
       <section className="relative z-30 container mx-auto -mt-24 px-4 transition-colors duration-500 md:-mt-48">
         <div className="group relative mx-auto max-w-7xl">
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-all duration-1000 group-hover:opacity-[var(--ambient-opacity,0.4)]" />
+          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[5rem] opacity-0 blur-[120px] transition-all duration-1000 group-hover:opacity-40" />
 
           <div className="border-border bg-surface-card relative overflow-hidden rounded-[3rem] border shadow-2xl md:rounded-[4rem] md:p-4">
+            {/* Status Badge */}
             <div className="border-border bg-surface-main/40 absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-md md:flex">
               <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
               <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase">
-                Live Catalog.v17
+                Architecture_Node.v17
               </span>
             </div>
 
-            <div className="bg-surface-offset relative aspect-[16/9] w-full overflow-hidden rounded-[2.5rem] md:aspect-[21/9] md:rounded-[3.5rem]">
+            {/* Locked Aspect Ratio Container */}
+            <div
+              className="bg-surface-offset relative w-full overflow-hidden rounded-[2.5rem] md:rounded-[3.5rem]"
+              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9" }}
+            >
               <Image
                 src={data.image || "/images/templates/preview.webp"}
-                alt={`Catalog Preview: ${data.title}`}
+                alt={`Strategic Catalog Hub: ${data.title}`}
                 fill
                 priority
+                placeholder="blur"
+                blurDataURL={imgData?.blurDataURL}
                 className="object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
@@ -76,22 +88,22 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
             </div>
           </div>
 
+          {/* Unit Counter Overlay */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="border-border bg-surface-card/80 shadow-glow absolute right-10 -bottom-10 z-20 hidden items-center gap-6 rounded-[2.5rem] border px-8 py-6 backdrop-blur-xl md:flex"
+            className="border-border bg-surface-card/90 shadow-glow absolute -right-6 -bottom-6 z-20 hidden items-center gap-6 rounded-[2.5rem] border px-10 py-8 backdrop-blur-xl md:flex"
           >
             <div className="bg-brand-primary/10 border-brand-primary/20 flex h-14 w-14 items-center justify-center rounded-2xl border">
               <IconRenderer name="Layers" className="text-brand-primary" size={28} />
             </div>
             <div className="space-y-1">
               <p className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
-                Total_Units
+                System_Deployment
               </p>
               <p className="text-text-primary text-2xl leading-none font-black tracking-tighter uppercase italic">
-                {catalogItems.length > 0 ? `${catalogItems.length} Units` : "System Ready"}
+                {catalogItems.length} Nodes_Active
               </p>
             </div>
           </motion.div>
@@ -99,45 +111,54 @@ const CatalogTemplate = ({ data }: CatalogTemplateProps) => {
       </section>
 
       {/* 03. RELIABILITY STANDARDS */}
-      <section className="py-24 md:pt-32">
-        <div className="container mx-auto flex flex-col items-center gap-12 px-6">
-          <div className="flex items-center gap-4 opacity-40">
-            <div className="bg-border h-px w-12" />
-            <h3 className="text-text-muted font-mono text-[10px] font-black tracking-[0.5em] uppercase italic">
-              System_Integrity_Standards
-            </h3>
-            <div className="bg-border h-px w-12" />
-          </div>
-          <div className="w-full max-w-5xl">
-            <TrustBadge />
-          </div>
+      <section className="py-32">
+        <div className="container mx-auto flex flex-col items-center gap-16 px-6">
+          <ImpactStats />
+          <div className="via-border h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
+          <TrustBadge />
         </div>
       </section>
 
       {/* 04. CATALOG GRID */}
-      <div id="catalog-grid">
+      <div id="catalog-grid" className="bg-surface-offset/20 border-border border-y py-10">
         <FeatureGrid
-          heading="Strategic Solution Catalog"
-          subheading="รวบรวมรายการบริการที่คัดสรรมาเพื่อตอบโจทย์ธุรกิจของคุณโดยเฉพาะครับ"
+          heading="Specialist Solution Catalog"
+          subheading={`รายการโซลูชันที่ นายเอ็มซ่ามากส์ คัดสรรมาเพื่อขับเคลื่อนธุรกิจของคุณสู่มาตรฐานปี 2026`}
           items={catalogItems.map((item, idx) => ({
             title: item.title,
             description: item.description,
             icon: item.icon,
-            technicalDetail: `CATALOG_NODE: 0${idx + 1}`,
+            technicalDetail: `NODE_UUID: 0x${(idx + 1).toString(16).toUpperCase()}`,
           }))}
           columns={3}
         />
       </div>
 
+      {/* 05. PERSONAL COMMITMENT */}
+      <section className="py-24">
+        <div className="container mx-auto px-4 text-center">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <IconRenderer name="Zap" size={48} className="text-brand-primary mx-auto opacity-20" />
+            <h3 className="text-text-primary text-2xl font-black italic md:text-4xl">
+              "ทุกรายการในแค็ตตาล็อกนี้ ถูกออกแบบภายใต้โครงสร้างที่รองรับการขยายตัว{" "}
+              <br className="hidden md:block" /> ไม่ใช่แค่ทำให้จบ แต่ทำให้เติบโตครับ"
+            </h3>
+            <p className="text-brand-primary font-mono text-sm font-black tracking-widest uppercase">
+              — นายเอ็มซ่ามากส์
+            </p>
+          </div>
+        </div>
+      </section>
+
       <ConversionCTA
-        title="ยังไม่แน่ใจว่าจะเลือกโซลูชันไหนดีใช่ไหมครับ?"
-        description="ผมพร้อมช่วยวิเคราะห์และคัดเลือกแพ็กเกจที่คุ้มค่าและตรงกับเป้าหมายทางธุรกิจของคุณที่สุด ทักมาคุยกันก่อนได้เลยครับ"
-        buttonLabel="ให้ผมช่วยเลือกแพ็กเกจ"
+        title="ต้องการโซลูชันที่ปรับแต่งเฉพาะ (Tailor-made) ไหมครับ?"
+        description="หากรายการข้างต้นยังไม่ตอบโจทย์ 100% นายเอ็มซ่ามากส์ พร้อมช่วยออกแบบสถาปัตยกรรมใหม่ที่เหมาะกับธุรกิจคุณโดยเฉพาะครับ"
+        buttonLabel="คุยรายละเอียดกับนายเอ็ม"
       />
 
       <DynamicFAQ
-        title="Catalog Intelligence"
-        description="ข้อมูลสำคัญเกี่ยวกับการเลือกใช้บริการและระบบจัดการสินค้า"
+        title="Catalog Technical FAQ"
+        description="เจาะลึกรายละเอียดทางเทคนิคและการเลือกใช้งาน Catalog Nodes"
         items={data.faqs}
       />
     </LayoutEngine>

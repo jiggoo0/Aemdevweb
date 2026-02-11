@@ -1,5 +1,5 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.5.6 (LCP_PATCHED)
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.5.7 (LCP_PATCHED)
  * [STRATEGY]: Kinetic Typography | GPU Acceleration | Layout Stability
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */

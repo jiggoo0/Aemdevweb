@@ -13,24 +13,22 @@ import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, AreaNode, TemplateMasterData } from "@/types";
 
-// --- 2. SEO & Schema Protocols (Separated) ---
-// ✅ Import Metadata Generator จาก seo-utils
+// --- 2. SEO & Schema Protocols ---
 import { constructMetadata } from "@/lib/seo-utils";
-
-// ✅ Import Schema Generators จาก schema
 import {
   generateLocalBusinessSchema,
   generateBreadcrumbSchema,
   generateSchemaGraph,
 } from "@/lib/schema";
-
 import JsonLd from "@/components/seo/JsonLd";
 
-// --- 3. Specialist Templates & Layout Engine ---
-import LocalTemplate from "@/components/templates/new-service-name/index";
+// --- 3. Templates ---
 import CorporateTemplate from "@/components/templates/corporate/Index";
 import SalePageTemplate from "@/components/templates/salepage/Index";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+
+// [REFACTOR]: Changed from 'new-service-name' to 'local-authority'
+import LocalTemplate from "@/components/templates/local-authority/index";
 
 /* [A] STATIC GENERATION ENGINE (SSG) */
 export async function generateStaticParams() {
@@ -57,7 +55,6 @@ export async function generateMetadata(props: PageProps<{ slug: string }>): Prom
 
 /**
  * [DETERMINISTIC ADAPTER]: แปลงข้อมูล AreaNode ให้รองรับโครงสร้าง TemplateMasterData
- * [FIX]: ระบุ Return Type เป็น TemplateMasterData เพื่อให้ ESLint ใน Termux ทำงานผ่าน
  */
 const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
   const generatedFaqs = (area.keywords || []).slice(0, 3).map((kw: string) => ({
@@ -67,7 +64,7 @@ const adaptAreaToTemplateData = (area: AreaNode): TemplateMasterData => {
 
   return {
     id: `NODE-${area.slug.toUpperCase()}`,
-    templateSlug: area.templateSlug || "local",
+    templateSlug: area.templateSlug || "local-authority",
     title: area.title,
     description: area.description,
     image: area.heroImage,
@@ -105,7 +102,6 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
 
   if (!area) notFound();
 
-  // Unified Schema Graph
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -125,7 +121,7 @@ export default async function AreaDetailPage(props: PageProps<{ slug: string }>)
       case "salepage":
         return <SalePageTemplate data={templateData} />;
       case "local":
-      case "new-service-name":
+      case "local-authority": // [FIXED]: Updated case name
         return <LocalTemplate data={area} />;
       default:
         return <LocalTemplate data={area} />;

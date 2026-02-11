@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.5.5 (EEAT_STABILIZED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.8.1 (IDENTITY_REFINED)
  * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -7,79 +7,97 @@
 import type { SiteConfig } from "@/types";
 
 export const SITE_CONFIG: SiteConfig = {
-  // [01. BRAND IDENTITY]
+  // =========================================
+  // [01] BRAND IDENTITY & CORE MISSION
+  // =========================================
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
   description:
-    "AEMDEVWEB | Web Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับหน้าแรก Google อย่างมีประสิทธิภาพและยั่งยืน",
+    "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์มาตรฐานสากลเพื่อการติดอันดับ Google อย่างยั่งยืนและมีประสิทธิภาพ",
 
-  // [02. HERO_REGISTRY]
+  // =========================================
+  // [02] STRATEGIC HERO REGISTRY
+  // =========================================
   hero: {
-    title: "AEMDEVWEB HYPER PERFORMANCE ARCHITECTURE",
+    title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
     description:
-      "Development & SEO Solutions พัฒนาเว็บไซต์มาตรฐานสากล เพื่อการติดอันดับ Google อย่างมีประสิทธิภาพธุรกิจคุณ By นายเอ็มซ่ามากส์",
+      "วิศวกรรมโครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์ (Alongkorn Yomkerd)",
     primaryAction: "ปรึกษาวางแผนระบบฟรี",
-    secondaryAction: "ดูบริการทั้งหมด",
+    secondaryAction: "วิเคราะห์บริการทั้งหมด",
   },
 
-  // [03. PERSONA ANCHOR]
+  // =========================================
+  // [03] PERSONA & COMMUNICATION ANCHOR
+  // =========================================
   persona: {
-    tone: "Strategic Partner, Expert Authority, Business-Centric",
-    communicationStyle: "Result-oriented, Friendly Specialist, Clear & Honest",
-    antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising without Logic",
+    tone: "Strategic Partner, Technical Authority, Business-Centric",
+    communicationStyle: "Result-oriented, Friendly Specialist, Transparent & Logical",
+    antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising without Engineering Data",
   },
 
-  // [04. SEO AUTHORITY]
+  // =========================================
+  // [04] SEO & ENTITY AUTHORITY
+  // =========================================
   keywords: [
     "รับทำเว็บไซต์",
     "รับทำ SEO สายขาว",
+    "Technical SEO Specialist Thailand",
     "รับออกแบบเว็บไซต์ บริษัท",
     "รับทำ Sale Page ยิงแอด",
     "จ้างทำเว็บไซต์ ติดหน้าแรก Google",
-    "รับทำเว็บ E-commerce",
     "รับทำเว็บไซต์ Next.js",
-    "ที่ปรึกษา SEO",
     "AEMDEVWEB",
-    "นายเอ็มซ่ามากส์",
-    "นาย อลงกรณ์ ยมเกิด",
-    "Technical SEO Specialist Thailand",
+    "นายเอ็มซ่ามากส์ AEMDEVWEB",
+    "อลงกรณ์ ยมเกิด",
+    "Alongkorn Yomkerd",
+    "Web Infrastructure Specialist",
   ],
 
-  // [05. TECHNICAL_STACK]
+  // =========================================
+  // [05] TECHNICAL STACK REVISIT
+  // =========================================
   project: {
-    title: "AEMDEVWEB | Web Design & SEO Expert Hub",
+    title: "AEMDEVWEB | High-End Web & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.5.5", // Sync with types
-    framework: "Next.js 16.1 (Latest Stable)",
-    uiStack: "Tailwind CSS + React 19",
+    version: "17.8.1",
+    framework: "Next.js 16.1.6 (App Router)",
+    uiStack: "React 19 + Tailwind CSS 4",
   },
 
-  // [06. EXPERT NODE]
+  // =========================================
+  // [06] EXPERT NODE (EEAT CORE)
+  // =========================================
   expert: {
-    displayName: "นายเอ็มซ่ามากส์",
+    displayName: "นายเอ็มซ่ามากส์ (AemSaMak)",
     legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "Technical SEO Specialist",
-    jobTitle: "Technical SEO Specialist & Web Architect",
-    signature: "นายเอ็มซ่ามากส์",
+    jobTitle: "Web Architect & Technical SEO Specialist",
+    signature: "AEMDEVWEB Specialist",
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
-    bioUrl: "/about",
+    bioUrl: "/services/bio",
+    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO ที่เน้นการสร้างผลลัพธ์ทางธุรกิจ (ROI) ผ่านโครงสร้างพื้นฐานดิจิทัลที่แข็งแกร่ง",
     googleMerchantId: "8653147979146207424",
   },
 
-  // [07. CONTACT & ACCESS]
+  // =========================================
+  // [07] CONTACT & GEOGRAPHIC ACCESS
+  // =========================================
   contact: {
     email: "me@aemdevweb.com",
     phone: "099-032-2175",
-    displayPhone: "099 032 2175 (สายด่วนปรึกษาช่างเอ็ม)",
-    address: "กำแพงเพชร, ประเทศไทย (ให้บริการทั่วประเทศ)",
+    displayPhone: "099 032 2175 (สายด่วนปรึกษานายเอ็มซ่ามากส์)",
+    address: "กำแพงเพชร, ประเทศไทย",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     postalCode: "62000",
-    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (ตอบแชทไวตลอดวัน)",
+    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (Engineering Support 24/7)",
+    mapUrl: "https://share.google/MMWnXPv3evv4Qd8aC",
   },
 
-  // [08. STRATEGIC LINKS]
+  // =========================================
+  // [08] STRATEGIC CONNECTIVITY
+  // =========================================
   links: {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
@@ -90,14 +108,15 @@ export const SITE_CONFIG: SiteConfig = {
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
-  // [09. BUSINESS METRICS]
+  // =========================================
+  // [09] BUSINESS & TRUST METRICS
+  // =========================================
   business: {
     location: "กำแพงเพชร",
-    region: "Northern Thailand (ภาคเหนือ)",
-    industry: "Web Infrastructure & Technical SEO",
+    region: "Northern Thailand",
+    industry: "Digital Infrastructure & SEO",
     roiFocus: true,
     established: "2026",
-    // [UPDATE]: เพิ่มสถานะโหนดเพื่อให้ LayoutEngine แสดงผลถูกต้อง
     status: "Stable",
     ids: {
       businessProfileId: "17539943195708104348",
@@ -105,7 +124,9 @@ export const SITE_CONFIG: SiteConfig = {
     },
   },
 
-  // [10. ENGINE VERIFICATION]
+  // =========================================
+  // [10] SECURITY & VERIFICATION
+  // =========================================
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },

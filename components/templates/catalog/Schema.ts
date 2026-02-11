@@ -1,17 +1,18 @@
 /**
- * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.5.5 (STABILIZED)
- * [STRATEGY]: Knowledge Graph Linking | ItemList Collection | Type-Safe Registry
+ * [TEMPLATE SCHEMA]: CATALOG_DATA_STRUCTURE v17.8.5 (STABILIZED)
+ * [STRATEGY]: Knowledge Graph Linking | ItemList Collection | Semantic Hierarchy
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
+import { absoluteUrl } from "@/lib/utils";
 import type { TemplateMasterData, CatalogItem, ServiceFeature } from "@/types";
 
 export function generateCatalogSchema(data: TemplateMasterData) {
   const siteUrl = SITE_CONFIG.siteUrl;
-  const canonicalUrl = `${siteUrl}/services/${data.templateSlug}`;
+  const canonicalUrl = absoluteUrl(`/services/${data.templateSlug}`);
 
-  // [DATA MAPPING]: รองรับทั้ง items (Catalog) และ coreFeatures (Fallback)
+  // [DATA MAPPING]: รวมรายการ Node เพื่อสร้าง ItemList
   const catalogItems = data.items || data.coreFeatures || [];
 
   return {
@@ -26,20 +27,19 @@ export function generateCatalogSchema(data: TemplateMasterData) {
         description: data.description,
         image: {
           "@type": "ImageObject",
-          url: `${siteUrl}${data.image || "/images/og-default.webp"}`,
+          url: absoluteUrl(data.image || "/images/og-default.webp"),
         },
-        isPartOf: { "@id": `${siteUrl}/#website` },
+        isPartOf: { "@id": absoluteUrl("/#website") },
         breadcrumb: { "@id": `${canonicalUrl}/#breadcrumb` },
         mainEntity: { "@id": `${canonicalUrl}/#itemlist` },
       },
 
-      // NODE 2: ITEM LIST
+      // NODE 2: ITEM LIST (SEO Deep Scan)
       {
         "@type": "ItemList",
         "@id": `${canonicalUrl}/#itemlist`,
         numberOfItems: catalogItems.length,
         itemListElement: catalogItems.map((item, index) => {
-          // Type Guard เพื่อเช็คว่า item มี property อะไรบ้าง
           const itemName =
             "name" in item ? (item as CatalogItem).name : (item as ServiceFeature).title;
 
@@ -51,7 +51,8 @@ export function generateCatalogSchema(data: TemplateMasterData) {
               name: itemName,
               description: item.description,
               url: canonicalUrl,
-              provider: { "@id": `${siteUrl}/#organization` },
+              provider: { "@id": absoluteUrl("/#organization") },
+              offeredBy: { "@id": absoluteUrl("/#person") },
             },
           };
         }),
@@ -63,7 +64,12 @@ export function generateCatalogSchema(data: TemplateMasterData) {
         "@id": `${canonicalUrl}/#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "หน้าแรก", item: siteUrl },
-          { "@type": "ListItem", position: 2, name: "บริการทั้งหมด", item: `${siteUrl}/services` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "บริการทั้งหมด",
+            item: absoluteUrl("/services"),
+          },
           { "@type": "ListItem", position: 3, name: data.title, item: canonicalUrl },
         ],
       },

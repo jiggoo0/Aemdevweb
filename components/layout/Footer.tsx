@@ -24,7 +24,9 @@ const Footer = () => {
       </div>
       <div
         className="ambient-aura absolute -bottom-48 -left-48 h-[600px] w-[600px] opacity-20 blur-[120px]"
-        style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
+        style={{
+          background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)",
+        }}
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">

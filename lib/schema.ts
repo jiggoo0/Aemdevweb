@@ -1,6 +1,6 @@
 /**
- * [SEO ENGINE]: JSON_LD_GENERATOR v17.5.7 (FIXED_MISSING_EXPORT)
- * [RESPONSIBILITY]: Handle Google Structured Data (JSON-LD) Only
+ * [SEO ENGINE]: JSON_LD_GENERATOR v17.7.5 (GRAPH_HARDENED)
+ * [STRATEGY]: Entity Graph Interlinking | Identity Validation | Doorway Defense
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -9,9 +9,29 @@ import { absoluteUrl } from "@/lib/utils";
 import type { AreaNode, TemplateMasterData } from "@/types";
 
 // =========================================
-// [CORE]: Organization & Person
+// [01] ROOT ENTITIES: Website & Organization
 // =========================================
 
+/**
+ * @function generateWebsiteSchema
+ * @description สร้างโหนดหลักของ Website เพื่อใช้เป็นที่อยู่อาศัยของหน้าย่อย (isPartOf)
+ */
+export function generateWebsiteSchema(): Record<string, unknown> {
+  return {
+    "@type": "WebSite",
+    "@id": absoluteUrl("/#website"),
+    url: SITE_CONFIG.siteUrl,
+    name: SITE_CONFIG.brandName,
+    description: SITE_CONFIG.description,
+    publisher: { "@id": absoluteUrl("/#organization") },
+    inLanguage: "th-TH",
+  };
+}
+
+/**
+ * @function generateOrganizationSchema
+ * @description จุดศูนย์กลางของกราฟข้อมูล (Centralized Node)
+ */
 export function generateOrganizationSchema(): Record<string, unknown> {
   return {
     "@type": "ProfessionalService",
@@ -20,9 +40,11 @@ export function generateOrganizationSchema(): Record<string, unknown> {
     url: SITE_CONFIG.siteUrl,
     logo: {
       "@type": "ImageObject",
+      "@id": absoluteUrl("/#logo"),
       url: absoluteUrl("/icon-192.png"),
       width: "192",
       height: "192",
+      caption: SITE_CONFIG.brandName,
     },
     image: absoluteUrl("/images/og-main.png"),
     priceRange: "฿฿ - ฿฿฿",
@@ -67,7 +89,7 @@ export function generatePersonSchema(): Record<string, unknown> {
 }
 
 // =========================================
-// [DYNAMIC]: Service & Area
+// [02] DYNAMIC ENTITIES: Service & Area
 // =========================================
 
 export function generateServiceSchema(data: TemplateMasterData): Record<string, unknown> {
@@ -76,7 +98,8 @@ export function generateServiceSchema(data: TemplateMasterData): Record<string, 
     "@id": absoluteUrl(`/services/${data.templateSlug}/#service`),
     name: data.title,
     description: data.description,
-    provider: { "@id": absoluteUrl("/#organization") },
+    provider: { "@id": absoluteUrl("/#organization") }, // Link to Central Node
+    isPartOf: { "@id": absoluteUrl("/#website") }, // Link to Website Node
     areaServed: "TH",
     offers: {
       "@type": "Offer",
@@ -88,6 +111,10 @@ export function generateServiceSchema(data: TemplateMasterData): Record<string, 
   };
 }
 
+/**
+ * @function generateLocalBusinessSchema
+ * @description เชื่อมโยงหน้าจังหวัดย่อยเข้ากับกิจการหลัก เพื่อป้องกันการโดนมองว่าเป็น Spam
+ */
 export function generateLocalBusinessSchema(data: AreaNode): Record<string, unknown> {
   const schema: Record<string, unknown> = {
     "@type": "ProfessionalService",
@@ -103,6 +130,9 @@ export function generateLocalBusinessSchema(data: AreaNode): Record<string, unkn
       addressRegion: data.province,
       addressCountry: "TH",
     },
+    // [HARDENED]: เชื่อมโยง ID สำคัญ
+    isPartOf: { "@id": absoluteUrl("/#website") }, // ยืนยันว่าเป็นส่วนหนึ่งของเว็บหลัก
+    provider: { "@id": absoluteUrl("/#organization") }, // ยืนยันผู้ให้บริการหลัก
     parentOrganization: { "@id": absoluteUrl("/#organization") },
     areaServed: {
       "@type": "City",
@@ -121,7 +151,6 @@ export function generateLocalBusinessSchema(data: AreaNode): Record<string, unkn
   return schema;
 }
 
-// [FIX]: นำฟังก์ชันนี้กลับมา เพื่อให้หน้า Page ต่างๆ เรียกใช้ได้
 export function generateBreadcrumbSchema(
   items: readonly { name: string; item: string }[],
 ): Record<string, unknown> {
@@ -138,12 +167,21 @@ export function generateBreadcrumbSchema(
 }
 
 // =========================================
-// [ORCHESTRATOR]
+// [03] ORCHESTRATOR
 // =========================================
 
+/**
+ * @function generateSchemaGraph
+ * @description รวมทุกโหนดเข้าด้วยกันเป็นก้อนเดียว (Entity Graph) เพื่อให้ Google เข้าใจบริบททั้งหมด
+ */
 export function generateSchemaGraph(schemas: readonly object[]): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
-    "@graph": [generateOrganizationSchema(), generatePersonSchema(), ...schemas],
+    "@graph": [
+      generateWebsiteSchema(), // Root Node 1
+      generateOrganizationSchema(), // Root Node 2
+      generatePersonSchema(), // Root Node 3
+      ...schemas, // Page Specific Nodes
+    ],
   };
 }

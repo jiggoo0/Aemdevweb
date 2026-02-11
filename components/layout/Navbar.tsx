@@ -1,5 +1,5 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.5.6 (UX_PATCHED)
+ * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.5.6 (UX_PATCHED + HYDRATION_FIX)
  * [STRATEGY]: Optimized Hit Area | Pointer Event Flow | Mobile Responsive
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -24,9 +24,15 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
 
-  // [LOGIC]: ประมวลผล Scroll Event
+  // [LOGIC]: ตรวจสอบการ Mount ของ Component เพื่อป้องกัน Hydration Mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // [LOGIC]: ประมวลผล Scroll Event พร้อม Optimization (Passive Listener)
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -42,10 +48,10 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // [UI]: ปิด Mobile Menu เมื่อเปลี่ยนหน้า
+  // [UI]: ปิด Mobile Menu อัตโนมัติเมื่อมีการเปลี่ยนเส้นทาง (Pathname)
   useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
-  // [UX]: ป้องกันการ Scroll พื้นหลังเมื่อ Mobile Menu เปิดอยู่
+  // [UX]: ป้องกันการ Scroll พื้นหลังเมื่อ Mobile Menu เปิดอยู่ (Layout Lock)
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
   }, [isMobileMenuOpen]);
@@ -54,14 +60,13 @@ const Navbar = () => {
     <>
       <header
         className={cn(
-          // [FIX 1]: เพิ่ม pointer-events-none เพื่อไม่ให้ Container ที่มองไม่เห็นไปบังการกด
           "pointer-events-none fixed inset-x-0 top-0 z-[100] flex justify-center transition-all duration-700 ease-[0.16,1,0.3,1]",
           isScrolled ? "pt-6 md:pt-8" : "pt-0",
         )}
       >
         <nav
+          suppressHydrationWarning
           className={cn(
-            // [FIX 2]: คืนค่า pointer-events-auto ให้ตัวบาร์เมนู เพื่อให้กดได้
             "pointer-events-auto transition-all duration-1000 ease-[0.16,1,0.3,1]",
             isScrolled
               ? "border-border/50 bg-surface-main/80 shadow-pro-xl w-[96%] max-w-7xl rounded-[2.5rem] border backdrop-blur-2xl"
@@ -76,7 +81,10 @@ const Navbar = () => {
           >
             {/* --- NODE A: BRAND IDENTITY --- */}
             <Link href="/" className="group flex items-center gap-5 outline-none select-none">
-              <div className="bg-text-primary text-surface-main relative flex h-11 w-11 items-center justify-center rounded-[1rem] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
+              <div
+                suppressHydrationWarning
+                className="bg-text-primary text-surface-main relative flex h-11 w-11 items-center justify-center rounded-[1rem] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-12"
+              >
                 <IconRenderer
                   name="Cpu"
                   size={22}
@@ -85,11 +93,17 @@ const Navbar = () => {
                 />
               </div>
               <div className="hidden flex-col leading-none md:flex">
-                <span className="text-text-primary font-sans text-xl font-black tracking-tighter uppercase italic">
+                <span
+                  suppressHydrationWarning
+                  className="text-text-primary font-sans text-xl font-black tracking-tighter uppercase italic"
+                >
                   {SITE_CONFIG.brandName}
                 </span>
-                <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
-                  SYSTEM_CORE.v{SITE_CONFIG.project.version}
+                <span
+                  suppressHydrationWarning
+                  className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase"
+                >
+                  SYSTEM_CORE.v{mounted ? SITE_CONFIG.project.version : "---"}
                 </span>
               </div>
             </Link>
@@ -139,7 +153,7 @@ const Navbar = () => {
 
               <Button
                 asChild
-                className="hover:bg-brand-primary bg-text-primary text-surface-main shadow-glow hidden h-12 rounded-2xl px-8 text-[11px] font-black tracking-widest uppercase transition-all duration-500 md:flex"
+                className="bg-text-primary text-surface-main shadow-glow hover:bg-brand-primary hidden h-12 rounded-2xl px-8 text-[11px] font-black tracking-widest uppercase transition-all duration-500 md:flex"
               >
                 <Link href={SITE_CONFIG.links.line} target="_blank">
                   <IconRenderer name="MessageCircle" size={16} className="mr-3" />
@@ -147,22 +161,19 @@ const Navbar = () => {
                 </Link>
               </Button>
 
-              {/* [FIX 3]: Mobile Menu Trigger - ปรับขนาดและ Z-Index */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={cn(
-                  "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50",
-                  "relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
-                  "h-12 w-12", // ขยาย Hit Area จาก 11 เป็น 12 (48px)
-                  "active:scale-95", // ลดการเด้งให้น้อยลงเพื่อให้รู้สึก Firm ขึ้น
-                  "cursor-pointer touch-manipulation select-none", // เพิ่ม UX สำหรับ Touch Screen
+                  "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50 relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
+                  "h-12 w-12 active:scale-95",
+                  "cursor-pointer touch-manipulation select-none",
                 )}
                 aria-label="Toggle Menu"
               >
                 <IconRenderer
                   name={isMobileMenuOpen ? "X" : "Menu"}
-                  size={24} // ขยายไอคอนเล็กน้อยเพื่อให้สมดุลกับปุ่ม
-                  className="pointer-events-none" // ป้องกันไอคอนรับ Event แทนปุ่ม
+                  size={24}
+                  className="pointer-events-none"
                 />
               </button>
             </div>
@@ -189,7 +200,10 @@ const Navbar = () => {
                       key={item.href}
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.05 + 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{
+                        delay: idx * 0.05 + 0.2,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
                     >
                       <Link
                         href={item.href}

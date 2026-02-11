@@ -1,5 +1,5 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.5.5 (STABILIZED)
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.8.1 (IDENTITY_REFINED)
  * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | RUM Monitoring
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.siteUrl),
   keywords: [...SITE_CONFIG.keywords],
-  authors: [{ name: SITE_CONFIG.expert.displayName }],
+  authors: [{ name: SITE_CONFIG.expert.displayName }], // [RESOLVED]: นายเอ็มซ่ามากส์
   creator: SITE_CONFIG.expert.legalName,
   openGraph: {
     type: "website",
@@ -105,7 +105,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "selection:bg-brand-primary/20 selection:text-brand-primary",
         )}
       >
-        {/* --- GLOBAL AMBIENT LAYERS --- */}
         <div
           className="pointer-events-none fixed inset-0 z-0 opacity-[0.15]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
@@ -122,11 +121,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem={false}
           disableTransitionOnChange
         >
-          {/* ระบบแถบโหลดเสมือน: ลด Perceived Latency ระหว่างการเปลี่ยนหน้า */}
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
 
           <div className="relative z-10 flex min-h-screen flex-col">
-            {/* Accessibility: Skip to Content */}
             <a
               href="#main-content"
               className="focus:bg-brand-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:p-4 focus:text-white"
@@ -145,7 +142,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Footer />
           </div>
 
-          {/* --- GLOBAL OVERLAYS --- */}
           <div className="pointer-events-none fixed right-0 bottom-0 z-[60] flex flex-col items-end gap-4 p-4 md:p-6">
             <div className="pointer-events-auto">
               <LineStickyButton />
@@ -162,7 +158,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             />
           </div>
 
-          {/* [ANALYTICS NODE]: ตรวจเช็คค่า LCP/CLS จากผู้ใช้งานจริง (RUM) */}
           <SpeedInsights />
         </ThemeProvider>
       </body>

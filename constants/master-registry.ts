@@ -1,13 +1,14 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.7.3 (CLEANED)
- * [STRATEGY]: Color Psychology | Business Alignment | PSI Optimization
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.8.5 (STRATEGIC_READY)
+ * [STRATEGY]: Color Psychology | ROI Focus | Zero-CLS Preflight
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { TemplateMasterData } from "@/types";
 
 /**
- * @description คลังข้อมูลบริการที่ปรับโทนเป็น "Strategic Partner" เน้นความคุ้มค่าเชิงธุรกิจและมาตรฐานวิศวกรรม
+ * @description คลังข้อมูลบริการหลักที่ถูกปรับจูนเพื่อการแปลงผู้เข้าชมเป็นลูกค้า (High-Conversion)
+ * จัดกลุ่มตามความต้องการทางธุรกิจและระดับการลงทุน
  */
 export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   // ===========================================================================
@@ -38,17 +39,17 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     ],
     coreFeatures: [
       {
-        title: "Code Structure",
+        title: "Architecture Logic",
         description: "ปรับโครงสร้างหลังบ้านให้ Clean และถูกหลัก Google 100%",
         icon: "Code2",
       },
       {
-        title: "Speed & Core Vitals",
+        title: "LCP & Speed Tuning",
         description: "ทำความเร็วเว็บให้ผ่านเกณฑ์มาตรฐาน เพื่ออันดับที่ดีกว่า",
         icon: "Zap",
       },
       {
-        title: "Analytics",
+        title: "Conversion Tracking",
         description: "วัดผลด้วยข้อมูลจริง ปรับแผนตามพฤติกรรมลูกค้า",
         icon: "TrendingUp",
       },
@@ -77,7 +78,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     id: "AEM-SVC-SP-01",
     title: "High-Conversion Sale Page",
     description:
-      "หน้าเว็บไซต์สำหรับปิดการขายโดยเฉพาะ ออกแบบ UX/UI ให้กระชับ โหลดไว รองรับการทำโฆษณา (Ads Optimization)",
+      "หน้าเว็บไซต์สำหรับปิดการขายโดยเฉพาะ ออกแบบ UX/UI ให้กระชับ โหลดไว รองรับการทำโฆษณาเต็มรูปแบบ",
     image: "/images/service/salepage-node.webp",
     templateSlug: "salepage",
     category: "landing",
@@ -92,32 +93,32 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-rose-50 to-white",
     },
     benefits: [
-      "Performance: โหลดเร็วทันใจ ลดโอกาสลูกค้ากดปิดหนี (Bounce Rate)",
-      "Ad-Ready: โครงสร้างพร้อมสำหรับการติด Pixel และ Conversion API",
-      "User Friendly: ดีไซน์ปุ่มสั่งซื้อและติดต่อให้กดง่ายที่สุดบนมือถือ",
+      "Ultra Performance: โหลดเร็วทันใจ ลดโอกาสลูกค้ากดปิดหนี (Bounce Rate)",
+      "Ads-Ready: โครงสร้างพร้อมสำหรับการติด Pixel และ Conversion API",
+      "Action Focused: ดีไซน์ปุ่มสั่งซื้อและติดต่อให้กดง่ายที่สุดบนมือถือ",
     ],
     coreFeatures: [
       {
-        title: "Fast Loading",
-        description: "เทคโนโลยี Server-Side Rendering (SSR) โหลดไวแม้เน็ตช้า",
+        title: "Instant Loading",
+        description: "เทคโนโลยี SSR โหลดไวแม้ในพื้นที่สัญญาณอินเทอร์เน็ตต่ำ",
         icon: "Smartphone",
       },
       {
-        title: "Conversion Focus",
-        description: "ตัดสิ่งรบกวน เน้นเนื้อหาที่โน้มน้าวใจลูกค้า",
+        title: "Conversion UI",
+        description: "จัดเรียงเนื้อหาตามหลักจิตวิทยาการขาย (AIDA Model)",
         icon: "Target",
       },
       {
-        title: "Easy Update",
-        description: "ปรับเปลี่ยนโปรโมชั่นหรือรูปภาพได้รวดเร็ว",
-        icon: "RefreshCw",
+        title: "Direct Connect",
+        description: "เชื่อมต่อ Line, Facebook Messenger และปุ่มโทรออกทันที",
+        icon: "MessageSquare",
       },
     ],
     faqs: [
       {
         question: "ทำไมถึงคุ้มกว่าจ้างทั่วไป?",
         answer:
-          "เพราะเราใช้โครงสร้างมาตรฐานเดียวกับบริษัทใหญ่ แต่ตัดทอนฟีเจอร์ที่ไม่จำเป็นออก เพื่อให้คุณได้ราคาที่คุ้มค่าที่สุดครับ",
+          "เพราะเราใช้โครงสร้างเดียวกับเว็บระดับสูง แต่ปรับให้กระชับเพื่อปิดการขายหน้าเดียว ทำให้ได้ประสิทธิภาพสูงในราคา SME ครับ",
       },
     ],
     keywords: ["รับทำ Sale Page", "Landing Page ยิงแอด", "เว็บหน้าเดียว", "หน้าปิดการขาย"],
@@ -147,32 +148,31 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-blue-500/5 to-transparent",
     },
     benefits: [
-      "Professional Look: ออกแบบตามอัตลักษณ์แบรนด์ (CI) สร้างภาพจำที่ดี",
-      "SEO Structure: วางโครงสร้างพื้นฐานให้ค้นหาเจอใน Google ได้ง่าย",
-      "Scalability: รองรับการขยายเนื้อหาหรือเพิ่มหน้าใหม่ๆ ในอนาคต",
+      "Brand Authority: ออกแบบตาม CI สร้างภาพลักษณ์องค์กรที่มั่นคง",
+      "Future Proof: รองรับการขยายตัวและเพิ่มฟังก์ชันใหม่ในอนาคต",
+      "Trust Signals: วางโครงสร้างข้อมูลที่เน้นความโปร่งใสและน่าเชื่อถือ",
     ],
     coreFeatures: [
       {
-        title: "Brand Identity",
-        description: "สะท้อนความเป็นมืออาชีพ ผ่านงานดีไซน์ที่ลงตัว",
+        title: "Enterprise Design",
+        description: "สะท้อนวิสัยทัศน์องค์กร ผ่านงานดีไซน์ระดับ Specialist",
         icon: "ShieldCheck",
       },
       {
-        title: "CMS System",
-        description: "ระบบหลังบ้านให้คุณอัปเดตข่าวสารและผลงานได้เอง",
-        icon: "Edit3",
+        title: "Dynamic CMS",
+        description: "ระบบหลังบ้านให้คุณอัปเดตผลงานและข่าวสารได้แบบ Real-time",
+        icon: "Database",
       },
       {
-        title: "Responsive",
-        description: "แสดงผลสวยงามทุกหน้าจอ ทั้งมือถือ แท็บเล็ต และคอมพิวเตอร์",
+        title: "Responsive Matrix",
+        description: "แสดงผลสมบูรณ์แบบในทุกอุปกรณ์ (Desktop/Tablet/Mobile)",
         icon: "Monitor",
       },
     ],
     faqs: [
       {
-        question: "ดูแลหลังการขายอย่างไร?",
-        answer:
-          "เราดูแลทางเทคนิคให้ตลอดอายุการใช้งานโฮสติ้งกับเราครับ หากมีปัญหาการแสดงผล แจ้งได้ทันที",
+        question: "ดูแลง่ายไหม?",
+        answer: "เราใช้ระบบที่คนทั่วไปใช้งานได้ครับ พร้อมมีวิดีโอสอนการใช้งานระบบหลังบ้านให้ฟรี",
       },
     ],
     keywords: ["ทำเว็บองค์กร", "เว็บไซต์บริษัท", "ออกแบบเว็บธุรกิจ", "Web Design Corporate"],
@@ -181,15 +181,15 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [03. LOCAL EXPERTISE]: ยกระดับธุรกิจรายพื้นที่ (Geographic Authority)
+  // [03. LOCAL AUTHORITY]: ยกระดับธุรกิจรายพื้นที่ (Geographic Dominance)
   // ===========================================================================
   {
     id: "AEM-SVC-LS-10",
     title: "Local Authority Engine",
     description:
-      "ดันธุรกิจของคุณให้เป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
+      "ครองความเป็นเบอร์ 1 ในพื้นที่ ด้วยระบบเว็บไซต์ที่ออกแบบมาเพื่อกวาดลูกค้าในจังหวัดโดยเฉพาะ",
     image: "/images/service/local-node.webp",
-    templateSlug: "new-service-name",
+    templateSlug: "local-authority",
     category: "business",
     price: "6,900",
     priceValue: 6900,
@@ -202,27 +202,32 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-amber-50 to-transparent",
     },
     benefits: [
-      "Local Dominance: ติดอันดับต้นๆ เมื่อมีการค้นหาบริการในพื้นที่ของคุณ",
-      "Trust & Entity: สร้างความน่าเชื่อถือด้วยข้อมูลพิกัดที่ชัดเจน",
-      "Conversion Optimized: เปลี่ยนผู้เข้าชมในพื้นที่ให้เป็นลูกค้าตัวจริง",
+      "Geo-Dominance: ติดอันดับต้นๆ เมื่อมีการค้นหาบริการในพื้นที่ของคุณ",
+      "Maps Integration: เชื่อมต่อข้อมูลพิกัดร้านค้าให้ Google เข้าใจง่าย",
+      "Hyper-Local SEO: ดึงดูดลูกค้าที่อยู่ใกล้คุณที่สุดให้ตัดสินใจซื้อ",
     ],
     coreFeatures: [
       {
-        title: "Map & Geo SEO",
-        description: "ปรับจูนโครงสร้าง Schema LocalBusiness ให้ Google เข้าใจพิกัดร้าน",
+        title: "Entity Graphing",
+        description: "สร้างโครงสร้างข้อมูลให้ Google Maps จดจำร้านค้าของคุณ",
         icon: "MapPin",
       },
       {
         title: "Localized Content",
-        description: "วางกลยุทธ์เนื้อหาที่เจาะจงพฤติกรรมคนในพื้นที่นั้นๆ",
+        description: "วางกลยุทธ์เนื้อหาที่สอดรับกับพฤติกรรมลูกค้าในพื้นที่",
         icon: "Search",
+      },
+      {
+        title: "Local Authority",
+        description: "ยกระดับความน่าเชื่อถือรายจังหวัดด้วย Local Schema",
+        icon: "Navigation",
       },
     ],
     faqs: [
       {
-        question: "ทำไมต้องแยกเป็นรายพื้นที่?",
+        question: "ทำไมต้องเจาะพื้นที่?",
         answer:
-          "การทำเจาะจงพื้นที่ช่วยให้ Google จัดอันดับคุณได้ง่ายขึ้น และลูกค้าจะรู้สึกใกล้ชิดมากกว่าครับ",
+          "การทำเจาะจงพื้นที่ช่วยลดคู่แข่งในระดับประเทศ และเข้าถึงลูกค้าที่มีโอกาสซื้อจริงในพื้นที่ของคุณได้เร็วกว่าครับ",
       },
     ],
     keywords: ["รับปักหมุด", "Local SEO", "Google Maps ร้านค้า", "ทำเว็บรายจังหวัด"],
@@ -231,13 +236,13 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [04. E-CATALOG]: ความทันสมัยและการจัดการ (Modern & Logic)
+  // [04. E-CATALOG]: ระบบจัดการข้อมูลและการขาย (Structured Commerce)
   // ===========================================================================
   {
     id: "AEM-SVC-EC-05",
     title: "Smart E-Catalog System",
     description:
-      "เปลี่ยนแค็ตตาล็อกเล่มหนาเป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าค้นหาเจอทันที",
+      "เปลี่ยนแค็ตตาล็อกเล่มหนาเป็นระบบค้นหาสินค้าออนไลน์ ช่วยฝ่ายขายทำงานง่าย ลูกค้าปิดการขายไว",
     image: "/images/service/catalog-node.webp",
     templateSlug: "catalog",
     category: "ecommerce",
@@ -252,26 +257,31 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-violet-500/5 via-transparent to-transparent",
     },
     benefits: [
-      "Smart Search: ระบบค้นหาและตัวกรองสินค้าที่แม่นยำ",
-      "Unlimited Data: รองรับสินค้าจำนวนมาก จัดหมวดหมู่ได้เป็นระเบียบ",
-      "Lead Generation: ปุ่มขอใบเสนอราคาอัตโนมัติ เพื่อปิดการขาย",
+      "Sales Support: ช่วยให้ฝ่ายขายส่งข้อมูลสินค้าให้ลูกค้าได้ทันทีผ่านลิงก์",
+      "Mass Data: รองรับสินค้าจำนวนมาก จัดหมวดหมู่ได้เป็นระเบียบชัดเจน",
+      "Lead Generation: ระบบขอใบเสนอราคาที่ช่วยเก็บข้อมูลผู้สนใจซื้อ",
     ],
     coreFeatures: [
       {
-        title: "Product Database",
-        description: "จัดการข้อมูลสินค้า สเปค และรูปภาพ ได้อย่างเป็นระบบ",
+        title: "Advanced Database",
+        description: "จัดการสเปคสินค้า รูปภาพ และไฟล์ PDF ได้ในที่เดียว",
         icon: "Database",
       },
       {
-        title: "Filter System",
-        description: "ค้นหาจาก หมวดหมู่ หรือราคา ได้ละเอียด",
+        title: "Multi-Filter",
+        description: "ระบบกรองสินค้าอัจฉริยะ ค้นหาเจอง่ายในไม่กี่วินาที",
         icon: "Filter",
+      },
+      {
+        title: "Inquiry Flow",
+        description: "ระบบรับคำขอใบเสนอราคาผ่าน Line OA อัตโนมัติ",
+        icon: "Send",
       },
     ],
     faqs: [
       {
-        question: "ลงสินค้าเองยากไหม?",
-        answer: "ไม่ยากครับ เรามีระบบจัดการที่ง่ายเหมือนการเล่นโซเชียลมีเดียทั่วไป",
+        question: "ใส่สินค้าได้เยอะแค่ไหน?",
+        answer: "รองรับได้ไม่จำกัดครับ ระบบออกแบบมาเพื่อจัดการข้อมูลขนาดใหญ่โดยเฉพาะ",
       },
     ],
     keywords: ["เว็บแค็ตตาล็อก", "ระบบสินค้าออนไลน์", "E-Catalog", "โปรแกรมสต็อกสินค้า"],
@@ -279,12 +289,12 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [05. PORTFOLIO]: ความทันสมัยและเอกลักษณ์ (Personal & Tech)
+  // [05. PORTFOLIO]: อัตลักษณ์และผลงาน (Professional Persona)
   // ===========================================================================
   {
     id: "AEM-SVC-PB-14",
     title: "Professional Bio & Portfolio",
-    description: "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในลิงก์เดียว",
+    description: "พื้นที่นำเสนอตัวตนและผลงานแบบมืออาชีพ รวมทุกช่องทางติดต่อไว้ในโหนดเดียว",
     image: "/images/service/personal-node.webp",
     templateSlug: "bio",
     category: "personal",
@@ -299,25 +309,31 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-cyan-500/10 via-transparent to-transparent",
     },
     benefits: [
-      "Centralized: รวมทุก Social Media และผลงานไว้ที่เดียว",
-      "Professional: สร้างความประทับใจแรกด้วยดีไซน์ระดับ Specialist",
+      "Centralized Hub: รวมโซเชียลมีเดียและผลงานเด่นไว้ในที่เดียว",
+      "High Authority: สร้างความประทับใจแรกเห็นด้วยดีไซน์ระดับโปร",
+      "Speed Connectivity: ลูกค้าเข้าถึงช่องทางติดต่อได้ใน 1 คลิก",
     ],
     coreFeatures: [
       {
-        title: "Portfolio Gallery",
-        description: "จัดแสดงผลงานอย่างมีศิลปะ สวยงามน่าสนใจ",
-        icon: "Grid",
+        title: "Expert Showcase",
+        description: "จัดแสดงทักษะและผลงานอย่างมีชั้นเชิงและน่าสนใจ",
+        icon: "Award",
       },
       {
-        title: "Smart Contact",
-        description: "ปุ่มติดต่อที่ออกแบบให้กดง่ายที่สุด",
-        icon: "Link",
+        title: "Digital Bio",
+        description: "นามบัตรดิจิทัลที่เข้าถึงได้จากทั่วโลกตลอด 24 ชม.",
+        icon: "Fingerprint",
+      },
+      {
+        title: "Link Optimization",
+        description: "จัดการทราฟฟิกไปยัง Social Media ต่างๆ ได้อย่างเป็นระบบ",
+        icon: "Share2",
       },
     ],
     faqs: [
       {
-        question: "เอาไปใช้ทำอะไรได้บ้าง?",
-        answer: "ใช้เป็น Bio Link ในโปรไฟล์ หรือใช้แนบสมัครงานและเสนองานลูกค้าครับ",
+        question: "ใช้แทน LinkedIn ได้ไหม?",
+        answer: "ใช้เสริมกันได้ดีมากครับ เพื่อให้พอร์ตโฟลิโอของคุณดูมีเอกลักษณ์โดดเด่นกว่าใคร",
       },
     ],
     keywords: ["ทำเว็บพอร์ตโฟลิโอ", "Bio Link", "เว็บส่วนตัว", "Digital Name Card"],
@@ -325,13 +341,13 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   },
 
   // ===========================================================================
-  // [06. HOSPITALITY]: ความหรูหราและความพรีเมียม (Luxury & Elegance)
+  // [06. HOSPITALITY]: ประสบการณ์และความเหนือระดับ (Luxury Experience)
   // ===========================================================================
   {
     id: "AEM-SVC-HR-08",
     title: "Hotel & Resort Website",
     description:
-      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (UX) ภาพสวย โหลดไว กระตุ้นให้อยากจองห้องพัก",
+      "เว็บไซต์โรงแรมที่เน้นประสบการณ์ผู้ใช้งาน (UX) ภาพสวย โหลดไว เพื่อยอดจองห้องพักที่เพิ่มขึ้น",
     image: "/images/service/hotel-resort-node.webp",
     templateSlug: "hotelresort",
     category: "business",
@@ -346,25 +362,31 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
       gradient: "from-[#c5a358]/10 via-transparent to-transparent",
     },
     benefits: [
-      "Visual Impact: นำเสนอภาพบรรยากาศที่พักได้เต็มอารมณ์ แต่ยังโหลดเร็ว",
-      "Direct Booking: เพิ่มช่องทางจองตรง ลดค่าคอมมิชชั่น",
+      "Visual Immersion: ถ่ายทอดบรรยากาศที่พักผ่านหน้าเว็บที่โหลดไวระดับ Retina",
+      "Direct Booking ROI: ลดการจ่ายค่าคอมมิชชั่นให้ OTA ด้วยระบบจองตรง",
+      "Guest Trust: สร้างความมั่นใจให้แขกผู้เข้าพักด้วยมาตรฐานความปลอดภัยสูง",
     ],
     coreFeatures: [
       {
-        title: "Mood & Tone",
-        description: "ดีไซน์ที่ถ่ายทอดบรรยากาศการพักผ่อนได้อย่างลงตัว",
-        icon: "Image",
+        title: "Experience Design",
+        description: "ดีไซน์ที่เปลี่ยนผู้เข้าชมเว็บให้กลายเป็นแขกผู้เข้าพัก",
+        icon: "Home",
       },
       {
-        title: "Room Showcase",
-        description: "หน้ารายละเอียดห้องพักที่ชัดเจน ตัดสินใจง่าย",
-        icon: "Home",
+        title: "Booking Gateway",
+        description: "รองรับการเชื่อมต่อกับ Channel Manager และ Payment Engine",
+        icon: "CreditCard",
+      },
+      {
+        title: "Facility Showcase",
+        description: "นำเสนอสิ่งอำนวยความสะดวกด้วย Gallery ความละเอียดสูง",
+        icon: "Camera",
       },
     ],
     faqs: [
       {
-        question: "มีระบบจองให้ไหม?",
-        answer: "เราสามารถเชื่อมต่อกับระบบจองที่คุณมีอยู่เดิมได้ทันทีครับ",
+        question: "รองรับหลายภาษาไหม?",
+        answer: "รองรับครับ เพื่อดึงดูดนักท่องเที่ยวจากทั่วทุกมุมโลก",
       },
     ],
     keywords: ["ทำเว็บโรงแรม", "เว็บไซต์รีสอร์ท", "ออกแบบเว็บที่พัก", "Hotel Web Design"],

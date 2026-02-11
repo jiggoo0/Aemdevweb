@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import HeroEngine from "@/components/features/landing/Hero"; // [FIX]: Use Hero from landing/Hero
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -81,7 +81,6 @@ export default function AboutPage() {
         primaryHref={SITE_CONFIG.links.line}
         secondaryActionLabel="ดูผลงานทั้งหมด"
         secondaryHref="/case-studies"
-        align="center"
       />
 
       {/* 02. SPECIALIST IDENTITY: The Authority Node */}
