@@ -1,184 +1,107 @@
 /**
- * [TEMPLATE COMPONENT]: SALE_PAGE_SYSTEM v17.9.0 (ZERO_CLS_HARDENED)
- * [STRATEGY]: Visual Impact | Metadata Slot Reservation | Persona Hardening
+ * [TEMPLATE]: SALEPAGE_INDEX v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Zero-Friction Layout | Atomic Component Orchestration | Conversion Hardened
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo, useMemo } from "react";
-import Image from "next/image";
+import React from "react";
+import Script from "next/script";
 
-// --- 1. Infrastructure & UI ---
-import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
-import FeatureGrid from "@/components/templates/sections/FeatureGrid";
-import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
-
-// --- 2. Shared Component Nodes ---
-import TrustBadge from "@/components/shared/TrustBadge";
-import ConversionCTA from "@/components/shared/ConversionCTA";
-import JsonLd from "@/components/seo/JsonLd";
-import IconRenderer from "@/components/ui/IconRenderer";
-import ImpactStats from "@/components/shared/ImpactStats";
-
-// --- 3. Logic & Types ---
-import type { TemplateMasterData, IconName } from "@/types";
+// --- 1. Infrastructure & Types ---
+import type { BaseTemplateProps, TemplateMasterData } from "@/types";
 import { generateSalePageSchema } from "./Schema";
 
-interface SalePageTemplateProps {
-  readonly data: TemplateMasterData;
-}
+// --- 2. Atomic Components ---
+import { SaleHero } from "./_components/SaleHero";
+import { FlashSaleTimer } from "./_components/FlashSaleTimer";
+import { FeatureComparison } from "./_components/FeatureComparison";
+import { ThaiTrustBadge } from "./_components/ThaiTrustBadge";
+import { DirectOrderForm } from "./_components/DirectOrderForm";
+import StickyBuyButton from "./_components/StickyBuyButton";
 
-function SalePageTemplate({ data }: SalePageTemplateProps) {
-  const schema = useMemo(() => generateSalePageSchema(data), [data]);
-  const imgData = data.image ? IMAGE_BLUR_DATA[data.image] : null;
+export default function SalePageTemplate({ data }: BaseTemplateProps) {
+  const typedData = data as unknown as TemplateMasterData;
+  const schemas = generateSalePageSchema(typedData);
+  const currentYear = 2026;
 
   return (
-    <LayoutEngine spacing="specialist" theme={data.theme}>
-      <JsonLd data={schema} />
-
-      {/* 01. HERO GATEWAY */}
-      <HeroEngine
-        title={data.title}
-        subtitle={data.description}
-        primaryActionLabel="เริ่มวางแผนระบบกับนายเอ็มซ่ามากส์"
-        primaryHref="/contact"
-        secondaryActionLabel="Analyze Demo"
-        secondaryHref="#demo"
-        align="center"
+    <div className="relative min-h-screen overflow-x-hidden bg-white font-sans text-slate-900 selection:bg-rose-100 selection:text-rose-700">
+      <Script
+        id={`schema-${typedData.templateSlug || "salepage"}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
 
-      {/* 02. VISUAL SHOWCASE */}
-      <section
-        id="demo"
-        className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24 lg:-mt-32"
-      >
-        <div className="group relative mx-auto max-w-5xl">
-          <div className="bg-brand-primary/20 absolute -inset-1 opacity-0 blur-2xl transition-opacity duration-1000 group-hover:opacity-40" />
-
-          <div className="border-border bg-surface-card relative overflow-hidden rounded-[2rem] border shadow-2xl md:rounded-[3rem]">
-            {/* Specialist Browser Interface */}
-            <div className="border-border bg-surface-offset flex items-center gap-2 border-b px-6 py-4 backdrop-blur-md">
-              <div className="flex gap-1.5">
-                <div className="h-3 w-3 rounded-full bg-red-500/40" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500/40" />
-                <div className="h-3 w-3 rounded-full bg-green-500/40" />
-              </div>
-              <div className="bg-surface-main/50 border-border mx-auto flex w-1/2 items-center justify-center rounded-full border py-1.5">
-                <div className="bg-brand-primary shadow-glow mr-2 h-1.5 w-1.5 animate-pulse rounded-full" />
-                <span className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase">
-                  NODE_UUID: {data.id || "SP-NULL"} // SECURE_ARCHITECTURE
-                </span>
-              </div>
-            </div>
-
-            {/* Image Container */}
-            <div
-              className="bg-surface-offset relative w-full overflow-hidden"
-              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "16/10" }}
-            >
-              <Image
-                src={data.image || "/images/service/preview.webp"}
-                alt={`Strategic Sale Page Design: ${data.title}`}
-                fill
-                priority
-                placeholder={imgData ? "blur" : "empty"}
-                blurDataURL={imgData?.blurDataURL}
-                className="object-cover object-top transition-transform duration-[2s] group-hover:scale-[1.02]"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              />
-              <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.05]" />
-              <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 03. AUTHORITY & CONVERSION LOGIC */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center gap-16 text-center">
-            <div className="space-y-6">
-              <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-2 rounded-full border px-5 py-2 text-[10px] font-black tracking-widest uppercase">
-                <IconRenderer name="Target" size={14} />
-                Conversion_Architecture_v17
-              </div>
-              <h3 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-                High-Impact Results.
-              </h3>
-            </div>
-            <ImpactStats />
-            <div className="via-border h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
-            <TrustBadge />
-          </div>
-        </div>
-      </section>
-
-      {/* 04. CORE BENEFITS */}
-      <FeatureGrid
-        heading="Value Proposition Matrix"
-        subheading="ทุกโหนดของ Sale Page ถูกออกแบบมาเพื่อเปลี่ยนกระแสการเข้าชมให้เป็นยอดโอนเงิน (ROI) ที่จับต้องได้จริง"
-        items={(data.benefits || []).map((benefit, idx) => ({
-          title: benefit,
-          description:
-            "สถาปัตยกรรมที่ผ่านการปรับจูนโดย นายเอ็มซ่ามากส์ เพื่อความเร็วและ Conversion สูงสุด",
-          icon: idx % 2 === 0 ? "Target" : "Zap",
-          technicalDetail: "Business_Node",
-        }))}
-        columns={3}
-      />
-
-      {/* 05. TECHNICAL CAPABILITIES */}
-      <section className="border-border bg-surface-offset/30 border-y py-32">
-        <div className="container mx-auto px-4">
-          <div className="mb-20 space-y-4 text-center">
-            <span className="text-brand-primary font-mono text-xs font-black tracking-[0.4em] uppercase">
-              Protocol_Stack
+      {/* --- 01. HEADER: Focused Action --- */}
+      <nav className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/90 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center gap-2">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-rose-600 shadow-[0_0_8px_rgba(225,29,72,0.5)]" />
+            <span className="text-xl font-black tracking-tighter text-slate-900 uppercase">
+              {typedData.title}
             </span>
-            <h3 className="text-text-primary text-4xl font-black uppercase italic md:text-6xl">
-              Technical Engines.
-            </h3>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {(data.coreFeatures || []).map((feature, idx) => (
-              <div
-                key={idx}
-                className="group border-border bg-surface-card hover:border-brand-primary/30 hover:shadow-glow relative rounded-[2.5rem] border p-10 transition-all duration-500"
-              >
-                <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main mb-8 flex h-14 w-14 items-center justify-center rounded-2xl transition-all group-hover:-rotate-6">
-                  <IconRenderer name={feature.icon as IconName} size={28} />
-                </div>
-                <h4 className="text-text-primary mb-4 text-2xl leading-none font-black tracking-tighter uppercase italic">
-                  {feature.title}
-                </h4>
-                <p className="text-text-secondary text-base leading-relaxed font-medium italic opacity-80">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
+          <a
+            href="#order"
+            className="rounded-full bg-rose-600 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-rose-200 transition-all hover:bg-rose-700 hover:shadow-rose-300 active:scale-95"
+          >
+            สั่งซื้อตอนนี้
+          </a>
         </div>
-      </section>
+      </nav>
 
-      {/* 06. CONVERSION CTA */}
-      <ConversionCTA
-        title="พร้อมสร้างระบบปิดการขายอัตโนมัติหรือยังครับ?"
-        description="นายเอ็มซ่ามากส์ พร้อมช่วยคุณวางโครงสร้าง Sale Page ที่ไม่เพียงแต่สวยงาม แต่ยังโหลดไวและยิงแอดได้แม่นยำที่สุดครับ"
-        buttonLabel="ปรึกษาแผนงานกับนายเอ็ม"
-      />
-
-      {/* 07. INTELLIGENCE FAQ */}
-      {data.faqs && data.faqs.length > 0 && (
-        <DynamicFAQ
-          title="Sale Page Intelligence FAQ"
-          description="เจาะลึกกระบวนการทำงานและเทคโนโลยีเบื้องหลังการปิดการขาย"
-          items={data.faqs}
+      <main className="flex flex-col">
+        <SaleHero
+          title={typedData.title}
+          description={typedData.description}
+          image={typedData.image}
         />
-      )}
-    </LayoutEngine>
+
+        <section className="relative z-10">
+          <FlashSaleTimer />
+        </section>
+
+        <section className="bg-slate-50 py-24 sm:py-32">
+          <div className="container mx-auto px-4">
+            <FeatureComparison features={typedData.coreFeatures || []} />
+          </div>
+        </section>
+
+        <section className="py-24 sm:py-32">
+          <div className="container mx-auto px-4">
+            <ThaiTrustBadge />
+          </div>
+        </section>
+
+        {/* [CONVERSION]: Final Checkout Node */}
+        <section id="order" className="scroll-mt-20 bg-rose-50/30 py-24 sm:py-32">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <header className="mb-12 text-center">
+              <h2 className="text-3xl font-black tracking-tight text-slate-900 uppercase italic sm:text-4xl">
+                กรอกข้อมูลรับข้อเสนอพิเศษ
+              </h2>
+              <div className="shadow-glow-sm mx-auto mt-4 h-1.5 w-24 rounded-full bg-rose-600" />
+            </header>
+
+            <div className="shadow-pro-xl rounded-[2.5rem] border border-rose-100 bg-white p-2">
+              <DirectOrderForm price={typedData.price} unit={typedData.unit} />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* [ANCHOR]: เชื่อมโยง href และราคาเข้ากับตัวปุ่ม */}
+      <StickyBuyButton href="#order" price={typedData.priceValue} label="จองสิทธิ์พิเศษ" />
+
+      <footer className="border-t border-slate-100 bg-slate-50/50 py-12 text-center">
+        <div className="container mx-auto px-4">
+          <p className="text-sm font-medium text-slate-400">
+            &copy; {currentYear} {typedData.title} | Secured Infrastructure by AEMDEVWEB Node
+          </p>
+        </div>
+      </footer>
+    </div>
   );
 }
-
-export default memo(SalePageTemplate);

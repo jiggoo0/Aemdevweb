@@ -1,19 +1,17 @@
 /**
- * [UI COMPONENT]: CALLOUT_NODE v1.0.2 (STABILIZED)
+ * [UI COMPONENT]: CALLOUT_NODE v17.9.9 (STABILIZED)
  * [STRATEGY]: Information Hierarchy | Visual Anchor | MDX Integration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import IconRenderer from "@/components/ui/IconRenderer";
-import type { IconName } from "@/types";
+import IconRenderer, { type IconName } from "@/components/ui/IconRenderer"; // [FIX]: Import type correctly
 
 interface CalloutProps {
-  /** [FIX]: Made optional to satisfy MDX generic component types */
-  children?: React.ReactNode;
-  type?: "info" | "warning" | "success" | "danger";
-  icon?: IconName;
+  readonly children?: React.ReactNode;
+  readonly type?: "info" | "warning" | "success" | "danger";
+  readonly icon?: IconName;
 }
 
 export function Callout({ children, type = "info", icon }: CalloutProps) {

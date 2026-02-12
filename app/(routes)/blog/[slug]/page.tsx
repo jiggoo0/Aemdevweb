@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: BLOG_DETAIL_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [ROUTE PAGE]: BLOG_DETAIL_ENGINE v17.9.9 (HARDENED_TYPE_SAFE)
  * [STRATEGY]: Narrative Authority | MDX Remote Rendering | SEO Graph Injection
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -13,7 +13,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 // --- 1. Infrastructure & CMS ---
 import { getPostBySlug, getAllPosts } from "@/lib/cms";
 import { SITE_CONFIG } from "@/constants/site-config";
-import { constructMetadata } from "@/lib/seo-utils";
+// [FIXED]: Import MetadataParams เพื่อใช้งานร่วมกับ constructMetadata ให้ครบวงจร
+import { constructMetadata, type MetadataParams } from "@/lib/seo-utils";
 import { useMDXComponents } from "@/mdx-components";
 import type { PageProps } from "@/types";
 
@@ -25,33 +26,29 @@ import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-/**
- * [A] STATIC GENERATION ENGINE
- * สร้าง Static Paths ล่วงหน้าเพื่อความเร็วในการโหลดระดับมิลลิวินาที
- */
+/* [A] STATIC GENERATION ENGINE: สร้าง Static Paths ล่วงหน้า 100% */
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
-/**
- * [B] SEO METADATA ENGINE
- */
+/* [B] SEO METADATA ENGINE: ประมวลผล Metadata ระดับ Specialist */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) return { title: "Article Not Found" };
 
-  return constructMetadata({
+  // [INJECTION]: ใช้งาน MetadataParams Interface เพื่อความ Strict ของข้อมูล SEO บทความ
+  const seoConfig: MetadataParams = {
     title: post.title,
     description: post.description,
     path: `/blog/${slug}`,
     image: post.thumbnail,
     keywords: post.tags,
-  });
+  };
+
+  return constructMetadata(seoConfig);
 }
 
 export default async function BlogDetailPage({ params }: PageProps) {
@@ -60,7 +57,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   if (!post) notFound();
 
-  // สร้าง Schema Graph สำหรับบทความ (NewsArticle + Breadcrumb)
+  // สร้าง Schema Graph สำหรับบทความ (EEAT Optimization)
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -101,25 +98,19 @@ export default async function BlogDetailPage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* --- 02. VISUAL: ภาพหน้าปกเชิงยุทธศาสตร์ --- */}
+        {/* --- 02. VISUAL ENGINE: จัดการรูปภาพเพื่อคะแนน LCP สูงสุด --- */}
         <div className="shadow-glow-lg border-border bg-surface-card relative mx-auto mb-20 aspect-video max-w-6xl overflow-hidden rounded-[3.5rem] border">
-          <Image
-            src={post.thumbnail}
-            alt={post.title}
-            fill
-            className="object-cover"
-            priority // สำคัญสำหรับการทำคะแนน LCP
-          />
+          <Image src={post.thumbnail} alt={post.title} fill className="object-cover" priority />
         </div>
 
-        {/* --- 03. CONTENT: ขุมพลัง MDX Remote --- */}
+        {/* --- 03. CONTENT ENGINE: ขุมพลัง MDX Remote (RSC Optimized) --- */}
         <div className="mx-auto max-w-4xl">
           <div className="prose prose-invert prose-brand lg:prose-xl max-w-none">
             <MDXRemote source={post.content || ""} components={useMDXComponents({})} />
           </div>
         </div>
 
-        {/* --- 04. FOOTER: บทสรุปและการปิดท้าย --- */}
+        {/* --- 04. FOOTER: บทสรุปเชิงยุทธศาสตร์ --- */}
         <footer className="border-border mt-32 border-t pt-20 text-center">
           <div className="mx-auto max-w-3xl space-y-12">
             <p className="text-text-secondary text-2xl leading-relaxed font-medium italic opacity-80 md:text-3xl">
@@ -129,7 +120,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
             <div className="flex flex-col items-center justify-center gap-6 pt-10">
               <div className="bg-brand-primary shadow-glow h-1.5 w-24 rounded-full" />
               <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
-                AEMDEVWEB_NODE_CORE // v{SITE_CONFIG.project.version}
+                AEMDEVWEB_NODE_CORE // Specialist: {SITE_CONFIG.expert.displayName}
               </span>
             </div>
           </div>

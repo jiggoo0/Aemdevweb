@@ -1,5 +1,5 @@
 /**
- * [SYSTEM MODULE]: SPECIALIST_NOTIFICATION_SYSTEM v17.4.5 (HYBRID_STABILIZED)
+ * [SYSTEM MODULE]: SPECIALIST_NOTIFICATION_SYSTEM v17.9.9 (HYBRID_STABILIZED)
  * [STRATEGY]: Semantic Perceptual Integrity | Theme-Aware Depth | Fluid Feedback
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -26,26 +26,26 @@ const Toaster = ({ ...props }: ToasterProps) => {
       className="toaster group"
       toastOptions={{
         classNames: {
-          /* 01. BASE INFRASTRUCTURE: พื้นฐานความโปร่งแสงและมิติเงา */
+          /* 01. BASE INFRASTRUCTURE */
           toast: cn(
             "group toast group-[.toaster]:bg-surface-card/90 group-[.toaster]:text-text-primary",
             "group-[.toaster]:border-border group-[.toaster]:backdrop-blur-xl group-[.toaster]:rounded-[1.5rem]",
             "group-[.toaster]:p-6 group-[.toaster]:shadow-glow transition-all duration-500",
           ),
 
-          /* 02. TYPOGRAPHY HIERARCHY: ลำดับขั้นข้อมูลระดับ Specialist */
+          /* 02. TYPOGRAPHY HIERARCHY */
           title:
             "group-[.toast]:text-text-primary group-[.toast]:text-sm group-[.toast]:font-black group-[.toast]:uppercase group-[.toast]:italic group-[.toast]:tracking-wider",
           description:
             "group-[.toast]:text-text-secondary group-[.toast]:text-xs group-[.toast]:font-medium group-[.toast]:mt-1",
 
-          /* 03. ACTION INTERFACE: ระบบตอบสนองแบบ Tactile Physics */
+          /* 03. ACTION INTERFACE */
           actionButton:
             "group-[.toast]:bg-brand-primary group-[.toast]:text-surface-main group-[.toast]:font-black group-[.toast]:uppercase group-[.toast]:tracking-widest group-[.toast]:text-[10px] group-[.toast]:rounded-xl group-[.toast]:px-4 group-[.toast]:py-2 hover:group-[.toast]:brightness-110 active:group-[.toast]:scale-95 transition-all",
           cancelButton:
             "group-[.toast]:bg-surface-offset group-[.toast]:text-text-muted group-[.toast]:font-bold group-[.toast]:uppercase group-[.toast]:tracking-widest group-[.toast]:text-[10px] group-[.toast]:rounded-xl hover:group-[.toast]:bg-surface-card transition-all",
 
-          /* 04. STATUS REFINEMENT: การสื่อสารผ่านออร่าสีตามสถานะ */
+          /* 04. STATUS REFINEMENT */
           error:
             "group-[.toast]:text-red-500 group-[.toast]:border-red-500/20 group-[.toaster]:bg-red-500/10",
           success:

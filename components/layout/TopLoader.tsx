@@ -1,12 +1,12 @@
 /**
- * [SYSTEM COMPONENT]: SYSTEM_TOP_LOADER v17.4.6 (STABILIZED)
+ * [SYSTEM COMPONENT]: SYSTEM_TOP_LOADER v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Route Transition Physics | Theme-Aware Glow | Zero-Latency Perception
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import NextTopLoader from "nextjs-toploader";
 
 interface TopLoaderProps {
@@ -19,8 +19,8 @@ interface TopLoaderProps {
 
 /**
  * @component TopLoader
- * @description ระบบแถบสถานะการโหลดระดับ Specialist ที่เชื่อมต่อกับ CSS Variable ของแบรนด์
- * ออกแบบมาเพื่อลด Cognitive Load ระหว่างการเปลี่ยน Route
+ * @description แถบสถานะการโหลดระดับ Specialist เชื่อมต่อกับ CSS Variable ของแบรนด์
+ * [PHYSICS]: ใช้ Easing Curve แบบ Deceleration เพื่อความรู้สึกหรูหรา
  */
 const TopLoader = ({
   color = "var(--color-brand-primary)",
@@ -29,30 +29,26 @@ const TopLoader = ({
   shadow = true,
   zIndex = 9999,
 }: TopLoaderProps) => {
-  /**
-   * [LOGIC]: Dynamic Shadow Generation
-   * ใช้ค่าจาก Global CSS Variables เพื่อสร้างแสง Glow ที่สอดคล้องกับธีม (Dark/Light)
-   */
-  const getShadow = () => {
-    if (shadow === false) return "none";
+  // [OPTIMIZATION]: คำนวณ Shadow String แค่ครั้งเดียว หรือเมื่อสีเปลี่ยน
+  const shadowStyle = useMemo(() => {
+    if (shadow === false) return undefined;
     if (typeof shadow === "string") return shadow;
-    return `0 0 10px var(--color-brand-primary), 0 0 5px var(--color-brand-primary)`;
-  };
+    // Glow Effect: สร้างมิติแสงฟุ้งกระจายตามสีแบรนด์
+    return `0 0 10px ${color}, 0 0 5px ${color}`;
+  }, [shadow, color]);
 
   return (
     <NextTopLoader
       color={color}
       initialPosition={0.08}
-      crawlSpeed={250}
+      crawlSpeed={200} // [TUNING]: เร็วขึ้นเล็กน้อยเพื่อความรู้สึก Instant
       height={height}
       crawl={true}
       showSpinner={showSpinner}
-      /* [PHYSICS]: Specialist Power-Out Curve 
-         พุ่งตัวออกอย่างรวดเร็ว (0.16) และชะลอตัวลงอย่างนุ่มนวล (0.3) เมื่อใกล้เป้าหมาย 
-      */
+      /* [PHYSICS]: พุ่งตัวออกอย่างรวดเร็วและชะลอตัวนุ่มนวลเมื่อใกล้จบ (Exponential Ease Out) */
       easing="cubic-bezier(0.16, 1, 0.3, 1)"
-      speed={300}
-      shadow={getShadow()}
+      speed={200}
+      shadow={shadowStyle}
       zIndex={zIndex}
       showAtBottom={false}
     />

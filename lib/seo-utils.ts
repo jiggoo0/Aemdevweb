@@ -1,6 +1,6 @@
 /**
- * [SEO UTILITY]: METADATA_CORE v17.5.6 (STRICT_TYPED)
- * [RESPONSIBILITY]: Handle Next.js Metadata API Only
+ * [SEO UTILITY]: METADATA_CORE v17.9.9
+ * [RESPONSIBILITY]: Next.js Metadata API Orchestration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -8,18 +8,23 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { Metadata } from "next";
 
+/**
+ * [INTERFACE]: MetadataParams
+ * [STRATEGY]: Strict Typing with Immutability Support
+ * [FIXED]: ใช้ readonly string[] เพื่อรองรับข้อมูลจาก CMS และ Constants (TS4104)
+ */
 export interface MetadataParams {
   readonly title: string;
   readonly description: string;
   readonly path: string;
   readonly image?: string;
-  readonly keywords?: readonly string[];
+  readonly keywords?: readonly string[]; // Support for readonly arrays
   readonly noIndex?: boolean;
 }
 
 /**
- * [METADATA CONSTRUCTOR]
- * ฟังก์ชันนี้ใช้สำหรับ generateMetadata() ใน page.tsx เท่านั้น
+ * @function constructMetadata
+ * @description สร้าง Metadata สำหรับ Next.js App Router แบบ Zero-Defect
  */
 export function constructMetadata({
   title,
@@ -37,9 +42,8 @@ export function constructMetadata({
       template: `%s | ${SITE_CONFIG.brandName}`,
     },
     description,
+    // [LOGIC]: ผสาน Keywords แบบ Immutable-Safe
     keywords: [...keywords, ...SITE_CONFIG.keywords],
-    authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
-    creator: SITE_CONFIG.expert.legalName,
     metadataBase: new URL(SITE_CONFIG.siteUrl),
     alternates: {
       canonical: url,
@@ -51,7 +55,7 @@ export function constructMetadata({
       siteName: SITE_CONFIG.brandName,
       images: [
         {
-          url: image || "/images/og-main.png",
+          url: image || "/images/og-main.webp",
           width: 1200,
           height: 630,
           alt: title,
@@ -64,17 +68,14 @@ export function constructMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [image || "/images/og-main.png"],
-      creator: SITE_CONFIG.links.twitter || "@aemdevweb",
+      images: [image || "/images/og-main.webp"],
     },
     robots: {
       index: !noIndex,
       follow: !noIndex,
-      nocache: noIndex,
       googleBot: {
         index: !noIndex,
         follow: !noIndex,
-        noimageindex: noIndex,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,
@@ -83,7 +84,7 @@ export function constructMetadata({
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
-      apple: "/icon-192.png",
+      apple: "/android-chrome-192x192.png",
     },
   };
 }

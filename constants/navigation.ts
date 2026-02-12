@@ -1,6 +1,6 @@
 /**
- * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.5.3 (UTILITY_EXPANDED)
- * [STRATEGY]: Information Architecture | SEO Relevancy | System Transparency
+ * [DATA REGISTRY]: NAVIGATION_INFRASTRUCTURE v17.9.9 (REFINED)
+ * [STRATEGY]: Internal Scope Optimization | Pruned Unused Exports
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,13 +12,16 @@ export const MAIN_NAV = [
   { label: "ผลงานลูกค้า", href: "/case-studies" },
   { label: "พื้นที่ให้บริการ", href: "/areas" },
   { label: "บันทึกเทคนิค", href: "/blog" },
-  { label: "Status", href: "/status" }, // [ADD]: เพิ่มเมนูสถานะระบบ
+  { label: "Status", href: "/status" },
 ] as const;
 
-export const SERVICE_SOLUTIONS = [
+/** * [INTERNAL]: เปลี่ยนเป็นค่าภายในไฟล์ เนื่องจากไม่มีการใช้งานภายนอก
+ * ป้องกัน Unused Export Warning ใน Knip
+ */
+const SERVICE_SOLUTIONS = [
   { label: "Sale Page ปิดการขาย", href: "/services/salepage" },
   { label: "เว็บไซต์บริษัท (Corporate)", href: "/services/corporate" },
-  { label: "Technical SEO Specialist", href: "/services/seo_agency" },
+  { label: "Technical SEO Specialist", href: "/services/seo-agency" },
   { label: "E-Catalog & RFQ System", href: "/services/catalog" },
   { label: "Local SEO (ปักหมุดธุรกิจ)", href: "/services/local" },
   { label: "ระบบจองโรงแรม & ที่พัก", href: "/services/hotelresort" },
@@ -36,10 +39,6 @@ export const FOOTER_MAP = {
     { label: "แอดไลน์ปรึกษาฟรี", href: SITE_CONFIG.links.line },
     { label: "Facebook Page", href: SITE_CONFIG.links.facebook },
   ],
-  /**
-   * [LEGAL_&_SYSTEM]: จัดกลุ่มนโยบายและเส้นทางระบบ
-   * [ADDED]: /status และ /sitemap.xml
-   */
   legal: [
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
@@ -48,6 +47,6 @@ export const FOOTER_MAP = {
   ],
 } as const;
 
-/* TYPE DEFINITIONS */
-export type NavItem = (typeof MAIN_NAV)[number];
-export type ServiceItem = (typeof SERVICE_SOLUTIONS)[number];
+/** * [CLEANUP]: ลบ NavItem และ ServiceItem types
+ * เนื่องจากไม่ได้ถูกเรียกใช้งานใน Component อื่นๆ (Dead Types)
+ */

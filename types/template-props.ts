@@ -1,19 +1,14 @@
 /**
- * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.1 (SYNCED_FINAL)
+ * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Decoupled UI Logic | Universal Adapter Pattern | Type-Safe Bridge
- * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
-import type { ReactNode } from "react";
 import type { IconName, ServiceFeature, ServiceFaq } from "./index";
 
 // =========================================
 // [01] UI ACTION SCHEMAS
 // =========================================
 
-/**
- * โครงสร้างมาตรฐานสำหรับปุ่ม Call to Action (CTA) และลิงก์ภายในระบบ
- */
 export interface TemplateAction {
   readonly label: string;
   readonly href: string;
@@ -26,18 +21,19 @@ export interface TemplateAction {
 // =========================================
 
 /**
- * [STRATEGIC]: Bridge Interface ระหว่าง ServiceData และ AreaNode
- * ออกแบบมาเพื่อทำ Data Normalization ก่อนส่งเข้าสู่ Template Components
- * ช่วยให้หนึ่ง Template สามารถรับข้อมูลได้จากหลายแหล่ง (Multi-Source)
+ * [STRATEGIC]: Bridge Interface สำหรับ Data Normalization
+ * [FIXED]: เพิ่ม templateSlug และ category เพื่อให้รองรับ Schema Engine (TS2345)
  */
 export interface UniversalTemplateProps {
   // --- Core Identity ---
   readonly id: string;
-  readonly title: ReactNode | string; // รองรับทั้งข้อความดิบและ JSX (Rich Text)
+  readonly templateSlug: string; // [REQUIRED]: สำหรับการทำ SEO & Routing
+  readonly category: string; // [REQUIRED]: สำหรับ Schema categorization
+  readonly title: string; // เปลี่ยนเป็น string เพื่อความเสถียรใน Metadata
   readonly description: string;
-  readonly heroImage?: string;
+  readonly image?: string; // [SYNC]: ใช้ image แทน heroImage เพื่อความเป็นเอกภาพ
 
-  // --- Commercial & Metadata (Optional สำหรับหน้า Area) ---
+  // --- Commercial & Metadata ---
   readonly price?: string;
   readonly priceValue?: number;
   readonly unit?: string;
@@ -45,7 +41,7 @@ export interface UniversalTemplateProps {
 
   // --- Data Clusters (Normalized) ---
   readonly benefits?: readonly string[];
-  readonly features?: readonly ServiceFeature[]; // Mapped จาก coreFeatures
+  readonly coreFeatures?: readonly ServiceFeature[]; // [SYNC]: ชื่อเดียวกับ TemplateMasterData
   readonly faqs?: readonly ServiceFaq[];
   readonly keywords?: readonly string[];
 
@@ -54,35 +50,34 @@ export interface UniversalTemplateProps {
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 
-  // --- Visual Metadata & Theming ---
-  // สอดคล้องกับ LayoutEngine และ ThemeConfig
+  // --- Visual Metadata ---
   readonly theme?: {
     readonly primary?: string;
     readonly secondary?: string;
-    readonly background?: string; // Tailwind class หรือ Hex
-    readonly gradient?: string; // Tailwind Gradient
+    readonly background?: string;
+    readonly gradient?: string;
   };
-  readonly priority?: number;
 }
 
 // =========================================
-// [03] SPECIFIC COMPONENT PROPS
+// [03] COMPONENT PROPS (STRICT TYPING)
 // =========================================
 
-/**
- * Base Props พื้นฐานสำหรับ Template ทุกประเภท
- */
 export interface BaseTemplateProps {
   readonly data: UniversalTemplateProps;
   readonly className?: string;
 }
 
 /**
- * Specialized Props สำหรับ Catalog Template
+ * [FIXED]: เพิ่ม StickyBuyButtonProps เพื่อแก้ปัญหา TS2322 ใน SalePage
  */
+export interface StickyBuyButtonProps {
+  readonly href: string;
+  readonly label?: string;
+}
+
 export interface CatalogTemplateProps extends BaseTemplateProps {
   readonly displayMode?: "grid" | "list";
-  readonly showPrice?: boolean;
   readonly items?: readonly {
     readonly name: string;
     readonly description: string;
@@ -91,9 +86,6 @@ export interface CatalogTemplateProps extends BaseTemplateProps {
   }[];
 }
 
-/**
- * Specialized Props สำหรับ Bio / Personal Portfolio Template
- */
 export interface BioTemplateProps extends BaseTemplateProps {
   readonly socialLinks?: readonly {
     readonly platform: string;
@@ -101,12 +93,3 @@ export interface BioTemplateProps extends BaseTemplateProps {
     readonly icon: IconName;
   }[];
 }
-
-// =========================================
-// [04] ADAPTER TYPE DEFINITIONS
-// =========================================
-
-/**
- * [ADAPTER TYPE]: ระบุแหล่งที่มาของข้อมูลเพื่อการจัดการ Logic ภายในที่แตกต่างกัน
- */
-export type TemplateDataSource = "service" | "area" | "custom";

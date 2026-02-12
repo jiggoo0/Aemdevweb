@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.1 (ANALYZER_INTEGRATED)
- * [STRATEGY]: Whitelist Image Qualities | Resource Resiliency | Bundle Visualization
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Resource Resiliency | Next.js 16.1+ Compliance | Node-Termux Hardening
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -12,7 +12,6 @@ import remarkGfm from "remark-gfm";
 
 const isVercel = process.env.VERCEL === "1";
 
-// [STRATEGY]: 1. MDX Configuration
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
@@ -21,7 +20,6 @@ const withMDX = nextMDX({
   },
 });
 
-// [STRATEGY]: 2. Bundle Analyzer Configuration
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
@@ -31,11 +29,23 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
 
+  /**
+   * [TYPED_ROUTES]: Next.js 16 Compliance
+   * [FIXED]: ย้ายออกจาก experimental ตามคำเตือนใน Build Log
+   */
+  typedRoutes: true,
+
+  // [DEBUGGING]: เปิดการตรวจสอบ Logging ของข้อมูลที่ดึงจาก Server
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+
   experimental: {
     scrollRestoration: true,
-    // [STABILITY]: บังคับปิดเพื่อป้องกัน DataCloneError ใน Proot/Termux Environments
+    // [TERMUX_HARDENING]: ป้องกันการใช้ CPU/RAM เกินขีดจำกัดบน Android
     workerThreads: false,
-    // [RESOURCE]: จำกัดการใช้ CPU เพื่อความเสถียรบนโมบายฮาร์ดแวร์
     cpus: isVercel ? undefined : 1,
 
     optimizePackageImports: [
@@ -44,7 +54,7 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
       "tailwindcss-animate",
     ],
-    // [COMPILER]: เปิดใช้งาน Rust-based compiler เมื่ออยู่บน Vercel เท่านั้น
+    // ใช้ Rust-based compiler เฉพาะบน Vercel (Cloud)
     mdxRs: isVercel,
   },
 
@@ -54,33 +64,17 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
-    // [FIDELITY]: อนุญาตค่า Quality เฉพาะที่ใช้ใน Components เพื่อประสิทธิภาพสูงสุด
-    qualities: [75, 85, 90],
     minimumCacheTTL: 86400,
-    unoptimized: false,
     remotePatterns: [{ protocol: "https", hostname: "**" }],
   },
 
-  async headers() {
-    return [
-      {
-        source: "/_next/static/(.*)",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-    ];
-  },
-
-  webpack: (config, { dev, isServer }) => {
-    // ปิดการใช้ Disk Cache ใน Termux เพื่อป้องกันปัญหา File System Lock
+  webpack: (config, { dev }) => {
+    // [MEMORY_MANAGEMENT]: ปิด Cache บน Local (Termux) เพื่อประหยัดพื้นที่ Storage
     if (!isVercel) {
       config.cache = false;
     }
 
-    if (!isServer) {
-      config.optimization.usedExports = true;
-    }
-
-    // [TERMINAL OPS]: แก้ไขปัญหา Hot Reload ไม่ทำงานบน Android Filesystem
+    // [DEV_OPTIMIZATION]: เพิ่มประสิทธิภาพการ Watch ไฟล์บน Android Filesystem
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,
@@ -93,5 +87,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// [AEM_ORCHESTRATION]: หุ้ม Config ด้วย Analyzer และ MDX ตามลำดับความสำคัญ
 export default withBundleAnalyzer(withMDX(nextConfig));

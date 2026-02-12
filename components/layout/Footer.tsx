@@ -1,10 +1,11 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.9.0 (SYNCHRONIZED_FINAL)
- * [STRATEGY]: Atomic Data Mapping | Performance Optimized | E-E-A-T Signals
+ * [LAYOUT COMPONENT]: SYSTEM_FOOTER v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Explicit Class Normalization | Typed Routes Resolution | EEAT Signals
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
+import type { Route } from "next";
 
 import React, { memo } from "react";
 import Link from "next/link";
@@ -13,17 +14,16 @@ import { FOOTER_MAP } from "@/constants/navigation";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 
 const Footer = () => {
-  // [DETERMINISTIC]: ล็อกค่าปีปัจจุบันที่ 2026 ตาม Mandate ระบบปี 2026
+  // [DETERMINISTIC]: ล็อกปี 2026 เพื่อป้องกัน Server/Client Mismatch
   const currentYear = 2026;
 
   return (
     <footer className="border-border bg-surface-main relative overflow-hidden border-t pt-24 pb-12 transition-colors duration-700">
-      {/* --- 01. INFRASTRUCTURE LAYER (Atmospheric Grid) --- */}
+      {/* --- 01. INFRASTRUCTURE LAYER --- */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]" aria-hidden="true">
         <div className="bg-infrastructure-grid absolute inset-0" />
       </div>
 
-      {/* Ambient Aura: สร้างมิติแสงบริเวณมุมล่าง */}
       <div
         className="ambient-aura pointer-events-none absolute -bottom-48 -left-48 h-[600px] w-[600px] opacity-20 blur-[120px]"
         style={{
@@ -32,9 +32,8 @@ const Footer = () => {
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* Main Footer Grid */}
         <div className="mb-24 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-          {/* Node 01: Brand Identity & Social Matrix */}
+          {/* Node 01: Brand Identity */}
           <div className="space-y-8">
             <div className="space-y-6">
               <Link href="/" className="group inline-flex items-center gap-4 outline-none">
@@ -61,15 +60,17 @@ const Footer = () => {
                 { name: "Line OA", href: SITE_CONFIG.links.line, icon: "MessageCircle" },
                 { name: "Github", href: SITE_CONFIG.links.github, icon: "Github" },
               ].map((social) => (
-                <Link
+                /* [FIXED]: ใช้แท็ก <a> แทน <Link> สำหรับ External Links เพื่อแก้ TS2322 */
+                <a
                   key={social.name}
                   href={social.href}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="border-border bg-surface-card text-text-secondary hover:border-brand-primary hover:text-brand-primary hover:shadow-glow flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300"
                   aria-label={social.name}
                 >
                   <IconRenderer name={social.icon as IconName} size={18} />
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -83,7 +84,7 @@ const Footer = () => {
               {FOOTER_MAP.services.map((item) => (
                 <li key={item.label}>
                   <Link
-                    href={item.href}
+                    href={item.href as Route} /* [FIXED]: Type casting เพื่อรองรับ Typed Routes */
                     className="group text-text-secondary hover:text-brand-primary flex items-center gap-3 text-sm font-bold transition-all duration-300"
                   >
                     <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:scale-150 group-hover:opacity-100" />
@@ -105,7 +106,9 @@ const Footer = () => {
               {[...FOOTER_MAP.company, ...FOOTER_MAP.connect].map((item) => (
                 <li key={item.label}>
                   <Link
-                    href={item.href}
+                    href={
+                      item.href as Route
+                    } /* [FIXED]: Type casting สำหรับ Dynamic internal links */
                     className="group text-text-secondary hover:text-brand-primary flex items-center gap-3 text-sm font-bold transition-all duration-300"
                   >
                     <span className="bg-brand-primary h-1 w-1 rounded-full opacity-0 transition-all group-hover:scale-150 group-hover:opacity-100" />
@@ -118,7 +121,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Node 04: Coordination Center (EEAT Signals) */}
+          {/* Node 04: Coordination Center */}
           <div className="space-y-10">
             <h3 className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
               Coordination_Center
@@ -157,7 +160,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* --- 02. SYSTEM STATUS & LEGAL INFRASTRUCTURE --- */}
+        {/* --- 02. SYSTEM STATUS --- */}
         <div className="border-border flex flex-col items-center justify-between gap-10 border-t pt-12 md:flex-row">
           <div className="flex flex-col items-center gap-6 md:items-start lg:flex-row lg:gap-16">
             <div className="text-center md:text-left">
@@ -166,9 +169,13 @@ const Footer = () => {
                   <div className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-40" />
                   <div className="relative h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
                 </div>
-                <p className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase">
-                  System_Status: <span className="text-emerald-500">Online</span> // v
-                  {SITE_CONFIG.project.version}
+
+                <p className="text-text-muted font-mono text-[9px] tracking-widest uppercase">
+                  System_Status:{" "}
+                  <span suppressHydrationWarning className="font-black text-emerald-500">
+                    Online
+                  </span>{" "}
+                  // v{SITE_CONFIG.project.version}
                 </p>
               </div>
               <p className="text-text-secondary text-[10px] font-bold tracking-widest uppercase opacity-60">
@@ -176,21 +183,20 @@ const Footer = () => {
               </p>
             </div>
 
-            {/* Legal Matrix */}
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
               {FOOTER_MAP.legal.map((item) => (
-                <Link
+                /* [FIXED]: ใช้ <a> สำหรับ sitemap.xml และ assets อื่นๆ เพื่อหลีกเลี่ยง Typed Routes strictness */
+                <a
                   key={item.label}
                   href={item.href}
                   className="text-text-muted hover:text-brand-primary font-mono text-[9px] font-bold tracking-widest uppercase transition-colors"
                 >
                   {item.label}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Expert Signature */}
           <div className="border-border bg-surface-card hover:border-brand-primary/40 hover:shadow-glow flex items-center gap-4 rounded-2xl border px-6 py-2.5 transition-all duration-500">
             <IconRenderer name="ShieldCheck" size={16} className="text-brand-primary" />
             <span className="text-text-primary font-mono text-[10px] font-black tracking-widest uppercase">

@@ -12,12 +12,12 @@
   },
   "redirects": [
     {
-      "source": "/services/(corporate_lite|corporate_pro)",
+      "source": "/services/(corporate-lite|corporate-pro|corporate_lite|corporate_pro)",
       "destination": "/services/corporate",
       "permanent": true
     },
     {
-      "source": "/templates/(event_magic|corporate_standard)",
+      "source": "/templates/(event-magic|corporate-standard|event_magic|corporate_standard)",
       "destination": "/services/corporate",
       "permanent": true
     },
@@ -27,7 +27,12 @@
       "permanent": true
     },
     {
-      "source": "/(templates/local_service|templates/new_service_name|services/new-service-name)",
+      "source": "/templates/(local-service|local_service|new-service-name|new_service_name)",
+      "destination": "/services/local-authority",
+      "permanent": true
+    },
+    {
+      "source": "/services/new-service-name",
       "destination": "/services/local-authority",
       "permanent": true
     },
@@ -98,6 +103,10 @@
         {
           "key": "X-DNS-Prefetch-Control",
           "value": "on"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     }

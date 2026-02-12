@@ -1,5 +1,5 @@
 /**
- * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.9.0 (CONVERSION_ENGINEERED)
+ * [DATA REGISTRY]: MASTER_SERVICE_REGISTRY v17.9.2 (CONVERSION_ENGINEERED)
  * [STRATEGY]: Psychological Triggers | Engineering Trust | ROI-Centric
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -20,7 +20,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
     description:
       "เปลี่ยนเว็บไซต์ให้เป็นสินทรัพย์ดิจิทัลที่สร้างรายได้ระยะยาว ด้วยการปรับโครงสร้างวิศวกรรมเว็บ (Architecture) ให้ชนะอัลกอริทึม Google",
     image: "/images/service/seo-agency-node.webp",
-    templateSlug: "seo_agency",
+    templateSlug: "seo-agency",
     category: "business",
     price: "19,500",
     priceValue: 19500,

@@ -1,11 +1,15 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.8.1 (IDENTITY_REFINED)
- * [MANDATE]: Single Source of Truth | EEAT Alignment | Strategic Branding
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.8.1 (REFINED)
+ * [STRATEGY]: Single Source of Truth | Dead Type Elimination | Encapsulation
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { SiteConfig } from "@/types";
 
+/**
+ * [CORE_IDENTITY]: แหล่งข้อมูลอ้างอิงหลักของระบบ (Single Source of Truth)
+ * ห้ามทำการ Hardcode ข้อมูลเหล่านี้ลงใน Component โดยเด็ดขาด
+ */
 export const SITE_CONFIG: SiteConfig = {
   // =========================================
   // [01] BRAND IDENTITY & CORE MISSION
@@ -36,7 +40,7 @@ export const SITE_CONFIG: SiteConfig = {
   },
 
   // =========================================
-  // [04] SEO & ENTITY AUTHORITY
+  // [04] SEO & ENTITY AUTHORITY (EEAT)
   // =========================================
   keywords: [
     "รับทำเว็บไซต์",
@@ -131,5 +135,3 @@ export const SITE_CONFIG: SiteConfig = {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
   },
 } as const;
-
-export type GlobalConfig = typeof SITE_CONFIG;

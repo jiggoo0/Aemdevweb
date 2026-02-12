@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: IMPACT_STATS_SYSTEM v17.4.6 (STABILIZED_FINAL)
- * [STRATEGY]: Balanced Grid Architecture | Neural Physics | High-Performance Counters
+ * [SHARED COMPONENT]: IMPACT_STATS_SYSTEM v17.9.9 (PRODUCTION_HARDENED)
+ * [STRATEGY]: Direct DOM Counter | GPU-Accelerated Layers | Zero-CLS Hardened
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -11,6 +11,7 @@ import { motion, useSpring, useInView, useMotionValueEvent } from "framer-motion
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 // --- 1. Infrastructure: Metric Definition ---
 interface MetricItem {
@@ -24,6 +25,7 @@ interface MetricItem {
   readonly description: string;
 }
 
+// [STRATEGY]: ข้อมูลทางธุรกิจควรอ้างอิงจาก Constants ของระบบ
 const SYSTEM_METRICS: readonly MetricItem[] = [
   {
     id: "PERF_CORE",
@@ -61,21 +63,21 @@ const SYSTEM_METRICS: readonly MetricItem[] = [
   },
 ];
 
-// --- 2. Core Engine: High-Performance Counter ---
+// --- 2. Core Engine: High-Performance Counter (Direct DOM Path) ---
 const Counter = ({
   value,
   decimals = 0,
   prefix = "",
 }: {
-  value: number;
-  decimals?: number;
-  prefix?: string;
+  readonly value: number;
+  readonly decimals?: number;
+  readonly prefix?: string;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const springValue = useSpring(0, {
-    stiffness: 45, // ปรับให้นุ่มนวลขึ้นเพื่อความหรูหรา
+    stiffness: 45,
     damping: 20,
     mass: 1,
   });
@@ -84,6 +86,7 @@ const Counter = ({
     if (isInView) springValue.set(value);
   }, [isInView, value, springValue]);
 
+  // [OPTIMIZATION]: ลดภาระ React Re-render โดยใช้ Direct DOM Manipulation
   useMotionValueEvent(springValue, "change", (latest) => {
     if (ref.current) {
       ref.current.textContent = `${prefix}${latest.toLocaleString("en-US", {
@@ -93,11 +96,16 @@ const Counter = ({
     }
   });
 
-  return <span ref={ref} className="tracking-tighter tabular-nums" />;
+  return <span ref={ref} className="transform-gpu tracking-tighter tabular-nums" />;
 };
 
 // --- 3. UI Node: Balanced Metric Card ---
-const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
+interface MetricCardProps {
+  readonly stat: MetricItem;
+  readonly index: number;
+}
+
+const MetricCard = ({ stat, index }: MetricCardProps) => {
   return (
     <motion.div
       variants={{
@@ -113,10 +121,11 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
         "group relative flex min-h-[280px] flex-col overflow-hidden rounded-[2.5rem] border p-10 transition-all duration-700",
         "border-border bg-surface-card/40 shadow-pro-sm backdrop-blur-2xl",
         "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:shadow-glow-sm hover:-translate-y-3",
+        "transform-gpu will-change-transform", // บังคับใช้ GPU เร่งความเร็ว Animation
       )}
     >
       {/* 01. AMBIENT GRID TEXTURE */}
-      <div className="bg-infrastructure-grid absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay" />
+      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay" />
 
       {/* 02. IDENTITY CLUSTER */}
       <div className="relative z-10 mb-auto flex items-start justify-between">
@@ -125,7 +134,7 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
         </div>
         <div className="flex flex-col items-end gap-1">
           <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
-            METRIC_0{index + 1}
+            METRIC_NODE_0{index + 1}
           </span>
           <div className="bg-brand-primary shadow-glow h-1 w-1 animate-pulse rounded-full" />
         </div>
@@ -149,14 +158,17 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
 
         <div className="space-y-3">
           <div className="bg-border group-hover:bg-brand-primary/30 h-px w-full transition-all duration-700" />
-          <p className="text-text-muted font-mono text-[9px] leading-relaxed tracking-widest uppercase opacity-60">
+          <p
+            suppressHydrationWarning
+            className="text-text-muted font-mono text-[9px] leading-relaxed tracking-widest uppercase opacity-60"
+          >
             {stat.description}
           </p>
         </div>
       </div>
 
-      {/* 04. NEURAL SIGNAL (GPU Accelerated) */}
-      <div className="bg-border/10 absolute bottom-0 left-0 h-1 w-full">
+      {/* 04. NEURAL SIGNAL (Progress Visualization) */}
+      <div className="bg-border/10 absolute bottom-0 left-0 h-1 w-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "100%" }}
@@ -172,7 +184,7 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
 // --- 4. Main Orchestrator ---
 const ImpactStats = () => {
   return (
-    <div className="mx-auto w-full max-w-7xl">
+    <section className="mx-auto w-full max-w-7xl px-4 py-12 md:py-24">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -183,7 +195,15 @@ const ImpactStats = () => {
           <MetricCard key={stat.id} stat={stat} index={index} />
         ))}
       </motion.div>
-    </div>
+
+      {/* Infrastructure Metadata */}
+      <div className="mt-12 text-center opacity-20">
+        <p className="text-text-muted font-mono text-[8px] font-bold tracking-[0.5em] uppercase">
+          {SITE_CONFIG.brandName} // High_Performance_Metric_Engine // v
+          {SITE_CONFIG.project.version}
+        </p>
+      </div>
+    </section>
   );
 };
 

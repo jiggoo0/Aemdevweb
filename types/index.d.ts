@@ -1,15 +1,16 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.1 (STABILIZED_HOTFIX)
- * [MANDATE]: Zero-Any Policy | Deep Immutability | Async Route Params (Next.js 15+)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Strict Union Types | Centralized Definitions | Template Bridge
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { ReactNode, ComponentType, CSSProperties } from "react";
 
 // =========================================
-// [01] UTILITY & NEXT.JS 15 ADAPTERS
+// [01] UTILITY & NEXT.JS 16 ADAPTERS
 // =========================================
 
+/** [ADAPTER]: รองรับ Next.js 15/16 ที่ Params ต้องเป็น Promise */
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -32,6 +33,20 @@ export interface SkeletonCardProps extends BaseComponentProps {
 
 /** [STRICT]: ไอคอนต้องตรงกับ Registry ใน IconRenderer เท่านั้น */
 export type IconName = string;
+
+/**
+ * [STRICT]: Centralized Template Slugs
+ * กำหนดค่าที่อนุญาตเพื่อให้ระบบ Routing และ Template Mapping ทำงานได้แม่นยำ
+ */
+export type TemplateSlug =
+  | "corporate"
+  | "salepage"
+  | "local"
+  | "local-authority"
+  | "catalog"
+  | "bio"
+  | "hotelresort"
+  | "seo-agency";
 
 // =========================================
 // [02] SITE CONFIGURATION & NAVIGATION
@@ -126,7 +141,6 @@ export interface SiteConfig {
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal";
 
-/** [RESOLVED]: Exported for DynamicFAQ & TemplateProps support */
 export interface ServiceFaq {
   readonly question: string;
   readonly answer: string;
@@ -162,12 +176,16 @@ export interface ThemeConfig {
   readonly gradient?: string;
 }
 
+/**
+ * [CORE_MODEL]: TemplateMasterData
+ * เป็น Single Source of Truth สำหรับข้อมูลบริการและ P-SEO ทั้งหมด
+ */
 export interface TemplateMasterData {
   readonly id: string;
   readonly title: string;
   readonly description: string;
   readonly image?: string;
-  readonly templateSlug: string;
+  readonly templateSlug: TemplateSlug;
   readonly category: ServiceCategory;
   readonly priceValue: number;
   readonly price: string;
@@ -186,7 +204,6 @@ export interface TemplateMasterData {
   readonly expertise?: readonly ExpertiseItem[];
 }
 
-/** [RESOLVED]: ผูกนิยามสำหรับการใช้ในระบบ Listing Hub */
 export type ServiceData = TemplateMasterData;
 
 // =========================================
@@ -247,7 +264,7 @@ export interface AreaNode {
   readonly seoTitle: string;
   readonly seoDescription: string;
   readonly priority: number;
-  readonly templateSlug: "corporate" | "salepage" | "local" | "local-authority" | string;
+  readonly templateSlug: TemplateSlug;
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
   readonly heroImage: string;
@@ -270,3 +287,20 @@ export interface ImageBlurNode {
 }
 
 export type ImageBlurRegistry = Record<string, ImageBlurNode>;
+
+// =========================================
+// [07] TEMPLATE BRIDGE (RE-EXPORTS)
+// =========================================
+
+/** * [STRATEGIC]: เชื่อมโยง Interface จากไฟล์เฉพาะทาง
+ * เพื่อแก้ปัญหา TS2305 และทำให้การ Import สั้นลงทั่วทั้งโปรเจกต์
+ */
+export * from "./template-props";
+
+/** * [ALIAS]: เพื่อความสะดวกในการเรียกใช้งานในส่วนหน้าบ้าน (Templates)
+ */
+export type {
+  UniversalTemplateProps,
+  BaseTemplateProps,
+  StickyBuyButtonProps,
+} from "./template-props";

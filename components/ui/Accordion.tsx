@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: ACCORDION_PRIMITIVE v17.9.0 (HARDENED)
+ * [UI COMPONENT]: ACCORDION_PRIMITIVE v17.9.9 (HARDENED)
  * [STRATEGY]: Radix UI Foundation | High-Fidelity Interaction | Specialist Styling
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -59,7 +59,7 @@ const AccordionContent = React.forwardRef<
     ref={ref}
     className={cn(
       "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm transition-all",
-      "relative z-10", // มั่นใจว่าอยู่เหนือ Background
+      "relative z-10", // Layering fix for background overlap
     )}
     {...props}
   >

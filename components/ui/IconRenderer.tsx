@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.0 (HARDENED_STABILIZED)
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.9 (HARDENED_STABILIZED)
  * [STRATEGY]: Static Tree-Shaking | Zero-Runtime Error | GPU Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -29,7 +29,6 @@ import {
   HelpCircle,
   Sun,
   Moon,
-
   // 2. Navigation & Contact
   Home,
   MapPin,
@@ -43,7 +42,6 @@ import {
   ExternalLink,
   Link,
   Briefcase,
-
   // 3. Tech & Services & Analytics
   Cpu,
   Layers,
@@ -77,7 +75,6 @@ import {
   Laptop,
   Image as ImageIcon,
   Box,
-
   // 4. Social & Media
   MessageCircle,
   Facebook,
@@ -86,7 +83,6 @@ import {
   Twitter,
   Instagram,
   Linkedin,
-
   // 5. Specialist Elements & Badges
   User,
   UserCheck,
@@ -124,7 +120,6 @@ export const ICON_MAP = {
   HelpCircle,
   Sun,
   Moon,
-
   // Navigation
   Home,
   MapPin,
@@ -138,7 +133,6 @@ export const ICON_MAP = {
   ExternalLink,
   Link,
   Briefcase,
-
   // Tech
   Cpu,
   Layers,
@@ -172,7 +166,6 @@ export const ICON_MAP = {
   Laptop,
   Image: ImageIcon,
   Box,
-
   // Social
   MessageCircle,
   Facebook,
@@ -181,7 +174,6 @@ export const ICON_MAP = {
   Twitter,
   Instagram,
   Linkedin,
-
   // Specialist
   User,
   UserCheck,
@@ -196,7 +188,7 @@ export const ICON_MAP = {
 export type IconName = keyof typeof ICON_MAP;
 
 interface IconRendererProps extends Omit<LucideProps, "ref"> {
-  readonly name: IconName | string;
+  readonly name: IconName | string; // รองรับ string เพื่อความยืดหยุ่น แต่ prefer IconName
   readonly size?: number;
   readonly className?: string;
   readonly strokeWidth?: number;
@@ -222,7 +214,7 @@ const IconRenderer = ({
   // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (ป้องกันหน้าขาว)
   if (!IconComponent) {
     if (process.env.NODE_ENV === "development") {
-      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry v17.9.0`);
+      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry v17.9.9`);
     }
     return (
       <AlertTriangle

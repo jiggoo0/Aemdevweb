@@ -1,11 +1,11 @@
 /**
- * [UI COMPONENT]: SKELETON_CARD_HUB v17.5.6 (PSI_OPTIMIZED)
+ * [UI COMPONENT]: SKELETON_CARD_HUB v17.9.9 (PSI_OPTIMIZED)
  * [STRATEGY]: Blueprint Projection | Aspect Ratio Preservation | GPU Acceleration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import React, { memo, type CSSProperties } from "react";
-import Skeleton from "@/components/ui/skeleton";
+import Skeleton from "@/components/ui/Skeleton";
 import { cn } from "@/lib/utils";
 
 /**
@@ -24,7 +24,7 @@ const SkeletonCard = ({ className, style, aspectRatio = "video" }: SkeletonCardP
     video: "aspect-[16/10]",
     portrait: "aspect-[3/4]",
     square: "aspect-square",
-    hero: "aspect-pro-hero", // ใช้ Utility ล่าสุดที่เพิ่งอัปเดตใน globals.css
+    hero: "aspect-[21/9]", // Updated for modern hero sections
   };
 
   return (
@@ -39,7 +39,7 @@ const SkeletonCard = ({ className, style, aspectRatio = "video" }: SkeletonCardP
       {/* --- 01. IMAGE_PROJECTION (LCP/CLS Target) --- */}
       <Skeleton
         className={cn(
-          "bg-brand-glow/10 w-full rounded-[2.5rem] opacity-50", // ใช้ OKLCH Glow base
+          "bg-brand-primary/5 w-full rounded-[2.5rem] opacity-50",
           ratioMap[aspectRatio],
         )}
       />
@@ -71,8 +71,4 @@ const SkeletonCard = ({ className, style, aspectRatio = "video" }: SkeletonCardP
   );
 };
 
-/**
- * @optimization React.memo
- * ป้องกันการประมวลผลซ้ำในระหว่างการเปลี่ยนผ่านของธีม (Theme Switching)
- */
 export default memo(SkeletonCard);

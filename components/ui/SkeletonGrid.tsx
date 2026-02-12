@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: SKELETON_GRID_ORCHESTRATOR v17.4.5 (STABILIZED_FINAL)
+ * [UI COMPONENT]: SKELETON_GRID_ORCHESTRATOR v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Staggered Neural Pulse | GPU Accelerated | Zero-CLS Hub
  */
 
@@ -21,8 +21,9 @@ function SkeletonGrid({ count = 6, aspectRatio = "video", className }: SkeletonG
       {Array.from({ length: count }).map((_, index) => {
         // [PHYSICS ENGINE]: ระบบหน่วงเวลาแบบ Stagger เพื่อความนุ่มนวล
         const nodeStyle: React.CSSProperties = {
-          animationDelay: `${index * 80}ms`,
-          opacity: Math.max(0.5, 1 - index * 0.1),
+          animationDelay: `${index * 100}ms`, // เพิ่ม Delay เล็กน้อยให้เห็นลำดับชัดขึ้น
+          opacity: 0, // เริ่มต้นที่ 0 แล้วค่อย Fade-in
+          animationFillMode: "forwards",
         };
 
         return (
@@ -30,7 +31,7 @@ function SkeletonGrid({ count = 6, aspectRatio = "video", className }: SkeletonG
             key={`skeleton-node-${index}`}
             aspectRatio={aspectRatio}
             style={nodeStyle}
-            className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-1000"
+            className="animate-in fade-in slide-in-from-bottom-8 duration-700 ease-out"
           />
         );
       })}

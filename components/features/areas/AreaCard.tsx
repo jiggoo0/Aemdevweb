@@ -1,6 +1,7 @@
 /**
- * [FEATURE COMPONENT]: AREA_CARD_NODE v17.7.0 (ZERO_CLS_HARDENED)
- * [STRATEGY]: Aspect-Ratio Mapping | Geographic Authority | Neural Physics
+ * [FEATURE COMPONENT]: AREA_CARD_NODE v17.9.2 (ZERO_CLS_HARDENED)
+ * [STRATEGY]: Aspect-Ratio Mapping | Geographic Authority | Layout Stability
+ * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
@@ -24,12 +25,13 @@ interface AreaCardProps {
 const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
   const districts = Array.isArray(data.districts) ? [...data.districts] : [];
   const displayTitle = data.province || "พื้นที่ให้บริการ";
+
   const imagePath = useMemo(
     () => data.heroImage || `/images/areas/${data.slug}-node.webp`,
     [data.heroImage, data.slug],
   );
 
-  // [ENGINE]: ดึงข้อมูล Metadata เพื่อจองพื้นที่โฆษณา (Slot Reservation)
+  // [ENGINE]: ดึงข้อมูล Metadata เพื่อจองพื้นที่ (Slot Reservation) เพื่อป้องกัน CLS
   const imgData = IMAGE_BLUR_DATA[imagePath];
 
   return (
@@ -44,15 +46,15 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
     >
       {/* --- LAYER 01: VISUAL ENGINE (CLS PROTECTED) --- */}
       <div
-        className="absolute inset-0 z-0 overflow-hidden select-none"
-        /* [CLS GUARD]: บังคับสัดส่วนจาก Metadata จริง */
+        className="bg-surface-offset absolute inset-0 z-0 overflow-hidden select-none"
+        /* [CLS GUARD]: บังคับสัดส่วนจาก Metadata จริง ป้องกันการขยับของ Layout */
         style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "auto" }}
       >
         <Image
           src={imagePath}
           alt={`ผู้เชี่ยวชาญรับทำเว็บไซต์ ${displayTitle}`}
           fill
-          priority={index < 2}
+          priority={index < 2} // LCP Priority for first 2 nodes
           placeholder="blur"
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-50 transition-transform duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-25"
@@ -62,7 +64,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         <div className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.04] mix-blend-overlay" />
       </div>
 
-      {/* --- LAYER 02: CONTENT --- */}
+      {/* --- LAYER 02: CONTENT ENGINE --- */}
       <div className="relative z-30 flex h-full flex-col justify-between p-8 md:p-10">
         <div className="flex items-start justify-between">
           <div className="bg-surface-offset/80 text-brand-primary border-border group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-xl border backdrop-blur-xl transition-all duration-500 group-hover:rotate-[12deg]">
@@ -96,7 +98,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
 
           <div className="border-border flex items-center justify-between border-t pt-6">
             <span className="text-text-muted font-mono text-[8px] font-black tracking-[0.3em] uppercase opacity-40">
-              Analyze Connectivity
+              Analyze_Connectivity.Local
             </span>
             <IconRenderer
               name="ArrowRight"

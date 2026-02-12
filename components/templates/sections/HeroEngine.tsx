@@ -1,10 +1,11 @@
 /**
- * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.9.0 (STABILIZED_FINAL)
- * [STRATEGY]: Outcome-Driven | Persona Injected | Neural Physics | Zero-CLS
+ * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Outcome-Driven | Persona Injected | Typed Routes Hardened
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
+import type { Route } from "next";
 
 import React, { memo } from "react";
 import Link from "next/link";
@@ -12,7 +13,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 interface HeroEngineProps {
   readonly title?: React.ReactNode;
@@ -39,7 +40,7 @@ const HeroEngine = ({
 }: HeroEngineProps) => {
   const isCenter = align === "center";
 
-  // [RESOLVED]: Literal Tuple easing สำหรับ Motion เพื่อความสมูทสูงสุด
+  // [RESOLVED]: Motion Easing สำหรับความสมูทระดับ Specialist
   const transition = {
     duration: 0.8,
     ease: [0.16, 1, 0.3, 1] as const,
@@ -110,23 +111,25 @@ const HeroEngine = ({
                 isCenter ? "items-center justify-center" : "items-start",
               )}
             >
+              {/* [FIXED]: Primary Action - ใช้แท็ก <a> หากเป็นลิงก์ภายนอกเพื่อแก้ TS2322 */}
               {primaryActionLabel && primaryHref && (
                 <Button
                   asChild
                   size="lg"
                   className="shadow-glow group h-16 w-full rounded-2xl px-10 text-xs font-black tracking-[0.3em] uppercase md:w-auto"
                 >
-                  <Link href={primaryHref}>
+                  <a href={primaryHref} target="_blank" rel="noopener noreferrer">
                     <IconRenderer
                       name="Zap"
                       size={18}
                       className="mr-3 transition-transform group-hover:scale-125"
                     />
                     {primaryActionLabel}
-                  </Link>
+                  </a>
                 </Button>
               )}
 
+              {/* [FIXED]: Secondary Action - ใช้ Casting 'as Route' สำหรับ Dynamic Path */}
               {secondaryActionLabel && secondaryHref && (
                 <Button
                   asChild
@@ -134,7 +137,7 @@ const HeroEngine = ({
                   variant="outline"
                   className="border-border/60 bg-surface-card/40 hover:bg-surface-card hover:border-brand-primary/40 h-16 w-full rounded-2xl px-10 text-xs font-black tracking-[0.3em] uppercase backdrop-blur-sm md:w-auto"
                 >
-                  <Link href={secondaryHref}>{secondaryActionLabel}</Link>
+                  <Link href={secondaryHref as Route}>{secondaryActionLabel}</Link>
                 </Button>
               )}
             </motion.div>

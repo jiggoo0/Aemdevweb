@@ -1,6 +1,6 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.8.1 (IDENTITY_REFINED)
- * [STRATEGY]: Unified Theme Orchestration | Zero-CLS Font Loading | RUM Monitoring
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.9 (STABILIZED_FINAL)
+ * [STRATEGY]: Unified Theme Orchestration | Chroma Sync Hardening | Zero-CLS
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -11,19 +11,19 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 // --- 1. Infrastructure & Providers ---
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+// [FIX]: Import ให้ตรงกับ Named Export
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 // --- 2. Global UI Components ---
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import TopLoader from "@/components/layout/TopLoader";
 import LineStickyButton from "@/components/shared/LineStickyButton";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/Sonner";
 
-// --- 3. Styles ---
 import "./globals.css";
 
-/* [A] FONT ORCHESTRATION: โหลดแบบ Swap เพื่อรักษาค่า CLS: 0 และความคมชัดระดับ Retina */
+/* FONT ORCHESTRATION */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -45,7 +45,6 @@ const fontMono = JetBrains_Mono({
   weight: ["400", "700"],
 });
 
-/* [B] SEO PROTOCOL: ระบบ Metadata เชิงยุทธศาสตร์ระดับ Specialist */
 export const metadata: Metadata = {
   title: {
     default: SITE_CONFIG.project.title,
@@ -54,14 +53,14 @@ export const metadata: Metadata = {
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.siteUrl),
   keywords: [...SITE_CONFIG.keywords],
-  authors: [{ name: SITE_CONFIG.expert.displayName }], // [RESOLVED]: นายเอ็มซ่ามากส์
+  authors: [{ name: SITE_CONFIG.expert.displayName }],
   creator: SITE_CONFIG.expert.legalName,
   openGraph: {
     type: "website",
     locale: "th_TH",
     url: SITE_CONFIG.siteUrl,
     siteName: SITE_CONFIG.brandName,
-    images: [{ url: "/images/og-main.png", width: 1200, height: 630 }],
+    images: [{ url: "/images/og-main.webp", width: 1200, height: 630 }],
   },
   robots: {
     index: true,
@@ -76,18 +75,14 @@ export const metadata: Metadata = {
   verification: { google: SITE_CONFIG.verification.google },
 };
 
-/* [C] CHROMA SYNC: ควบคุมสี Browser UI ตามสถานะธีม */
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#050505" },
-  ],
+  themeColor: "#050505",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
   return (
     <html
       lang="th"
@@ -106,12 +101,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         )}
       >
         <div
-          className="pointer-events-none fixed inset-0 z-0 opacity-[0.15]"
+          className="pointer-events-none fixed inset-0 z-0 transform-gpu opacity-[0.15]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
           aria-hidden="true"
         />
         <div
-          className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
+          className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03] will-change-transform"
           aria-hidden="true"
         />
 
@@ -124,21 +119,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
 
           <div className="relative z-10 flex min-h-screen flex-col">
-            <a
-              href="#main-content"
-              className="focus:bg-brand-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-xl focus:p-4 focus:text-white"
-            >
-              ข้ามไปที่เนื้อหาหลัก
-            </a>
-
             <Navbar />
-            <main
-              id="main-content"
-              className="relative flex flex-grow flex-col outline-none"
-              tabIndex={-1}
-            >
+
+            <main id="main-content" className="relative flex flex-grow flex-col outline-none">
               {children}
             </main>
+
             <Footer />
           </div>
 

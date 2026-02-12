@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: CASE_STUDY_DETAIL_ENGINE v17.4.5 (STABILIZED_FINAL)
+ * [ROUTE PAGE]: CASE_STUDY_DETAIL_ENGINE v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Trust Architecture | Result-Driven SEO | Technical Depth
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -12,7 +12,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 
 // --- 1. Infrastructure & CMS ---
 import { getCaseStudyBySlug, getAllCaseStudies } from "@/lib/cms";
-import { constructMetadata } from "@/lib/seo-utils";
+// [FIXED]: Import MetadataParams เพื่อกำจัด Knip Warning และทำ Type Hardening
+import { constructMetadata, type MetadataParams } from "@/lib/seo-utils";
 import { useMDXComponents } from "@/mdx-components";
 import type { PageProps } from "@/types";
 
@@ -24,26 +25,29 @@ import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-/* [A] STATIC GENERATION PROTOCOL */
+/* [A] STATIC GENERATION PROTOCOL: สร้างหน้าแบบ Static ล่วงหน้าเพื่อความเร็วระดับมิลลิวินาที */
 export async function generateStaticParams() {
   const cases = await getAllCaseStudies();
   return cases.map((item) => ({ slug: item.slug }));
 }
 
-/* [B] SEO METADATA ENGINE */
+/* [B] SEO METADATA ENGINE: ประมวลผล Metadata ตามเนื้อหาจริงของโปรเจกต์ */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const item = await getCaseStudyBySlug(slug);
 
   if (!item) return { title: "Case Study Not Found" };
 
-  return constructMetadata({
+  // [INJECTION]: ใช้งาน MetadataParams Interface เพื่อความแม่นยำของข้อมูล SEO ผลงาน
+  const seoConfig: MetadataParams = {
     title: `ผลงาน: ${item.title}`,
     description: item.description,
     path: `/case-studies/${slug}`,
     image: item.thumbnail,
     keywords: [...item.tags, item.client, item.industry],
-  });
+  };
+
+  return constructMetadata(seoConfig);
 }
 
 /**
@@ -56,7 +60,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
   if (!item) notFound();
 
-  // 1. [SEO]: Linked Data Graph
+  // 1. [SEO]: Linked Data Graph (Schema.org Integration)
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -106,7 +110,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Strategic Sidebar */}
+          {/* Strategic Sidebar: Results & Technology */}
           <aside className="space-y-12 lg:col-span-4">
             <section className="bg-surface-card border-border rounded-[2.5rem] border p-8 md:p-10">
               <h3 className="text-text-primary mb-8 flex items-center gap-4 text-xl font-black tracking-tight uppercase italic">

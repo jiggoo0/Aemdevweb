@@ -1,12 +1,17 @@
 #!/bin/bash
 
 # ==========================================
-# Project Overview Generator v2.4
-# Specialist Version for AEMDEVWEB
+# Project Overview Generator v2.5
 # ==========================================
 
 OUTPUT_FILE="README.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+
+# ตรวจสอบ Argument: ถ้าใส่ --no-config จะไม่ดึงข้อมูลใน config/
+SKIP_CONFIG=false
+if [[ "$1" == "--no-config" ]]; then
+    SKIP_CONFIG=true
+fi
 
 # 1. Initialize Metadata
 cat <<EOF > $OUTPUT_FILE
@@ -20,24 +25,28 @@ last_audit: $TIMESTAMP
 
 EOF
 
-# 2. System Mandate Injection
-if [ -f "config/00-SYSTEM-MANDATE.md" ]; then
-    echo "## SYSTEM MANDATE" >> $OUTPUT_FILE
-    cat "config/00-SYSTEM-MANDATE.md" >> $OUTPUT_FILE
-else
-    echo "> [ERROR] MISSION CRITICAL: 00-SYSTEM-MANDATE.md MISSING" >> $OUTPUT_FILE
-fi
-echo -e "\n---\n" >> $OUTPUT_FILE
+if [ "$SKIP_CONFIG" = false ]; then
+    # 2. System Mandate Injection
+    if [ -f "config/00-SYSTEM-MANDATE.md" ]; then
+        echo "## SYSTEM MANDATE" >> $OUTPUT_FILE
+        cat "config/00-SYSTEM-MANDATE.md" >> $OUTPUT_FILE
+    else
+        echo "> [ERROR] MISSION CRITICAL: 00-SYSTEM-MANDATE.md MISSING" >> $OUTPUT_FILE
+    fi
+    echo -e "\n---\n" >> $OUTPUT_FILE
 
-# 3. AI Prompt Extension Injection 
-if [ -f "config/01-SYSTEM-PROMPT-EXTENSION.md" ]; then
-    echo "## SYSTEM PROMPT EXTENSION" >> $OUTPUT_FILE
-    cat "config/01-SYSTEM-PROMPT-EXTENSION.md" >> $OUTPUT_FILE
+    # 3. AI Prompt Extension Injection 
+    if [ -f "config/01-SYSTEM-PROMPT-EXTENSION.md" ]; then
+        echo "## SYSTEM PROMPT EXTENSION" >> $OUTPUT_FILE
+        cat "config/01-SYSTEM-PROMPT-EXTENSION.md" >> $OUTPUT_FILE
+    else
+        echo "> [WARNING] SYSTEM PROMPT EXTENSION MISSING" >> $OUTPUT_FILE
+    fi
+    echo -e "\n---\n" >> $OUTPUT_FILE
 else
-    echo "> [WARNING] SYSTEM PROMPT EXTENSION MISSING" >> $OUTPUT_FILE
+    echo "> [INFO] Config injection skipped by user." >> $OUTPUT_FILE
+    echo -e "\n---\n" >> $OUTPUT_FILE
 fi
-echo -e "\n---\n" >> $OUTPUT_FILE
-
 
 # 4. Core Types Definition
 echo "## TECHNICAL DATA SCHEMAS (TYPES)" >> $OUTPUT_FILE
@@ -80,7 +89,6 @@ echo -e "\n---\n" >> $OUTPUT_FILE
 echo "## BUILD ARTIFACT ANALYSIS (.next/static)" >> $OUTPUT_FILE
 if [ -d ".next/static" ]; then
     echo '```text' >> $OUTPUT_FILE
-    # แสดงขนาดรวม และไฟล์ที่ใหญ่ที่สุด 10 อันดับแรก
     du -sh .next/static >> $OUTPUT_FILE
     find .next/static -type f -exec du -h {} + | sort -rh | head -n 10 >> $OUTPUT_FILE
     echo '```' >> $OUTPUT_FILE

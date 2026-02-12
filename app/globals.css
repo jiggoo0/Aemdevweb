@@ -2,8 +2,8 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE STYLESHEET]: AEM-SYSTEM-v17.9.0 (STABILIZED_VIEWPORT)
- * [STRATEGY]: Zero-Flash Overscroll | GPU Acceleration | Typography Fidelity
+ * [CORE STYLESHEET]: AEM-SYSTEM-v17.9.1 (STABILIZED_VIEWPORT)
+ * [STRATEGY]: Zero-Flash Overscroll | Hardened Background | GPU Acceleration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -11,17 +11,16 @@
 @layer base {
   :root {
     /* [TYPOGRAPHY SYSTEM] */
-    --font-thai:
-      "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-mono: "JetBrains Mono", "Fira Code", monospace;
+    --font-thai: "IBM Plex Sans Thai", sans-serif;
+    --font-sans: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
 
     /* [COLOR PALETTE - OKLCH SYSTEM] */
     --color-brand-primary: oklch(0.72 0.18 150);
     --color-brand-secondary: oklch(0.6 0.15 150);
     --color-brand-glow-base: oklch(0.72 0.18 150 / 0.15);
 
-    /* Surface Palette */
+    /* Surface Palette: High Contrast Dark Mode Foundation */
     --color-surface-main: #050505;
     --color-surface-offset: #0a0a0a;
     --color-surface-card: #0f0f0f;
@@ -53,7 +52,7 @@
   }
 }
 
-/* --- 02. TAILWIND CONFIGURATION LAYER (v4) --- */
+/* --- 02. TAILWIND CONFIGURATION LAYER (v4 Engine) --- */
 @theme {
   --font-thai: var(--font-thai);
   --font-sans: var(--font-sans);
@@ -111,7 +110,7 @@
   }
 }
 
-/* --- 03. BASE LAYER RESET (Viewport & Performance) --- */
+/* --- 03. BASE LAYER RESET (Critical Anti-Flash & Performance) --- */
 @layer base {
   *,
   ::after,
@@ -127,13 +126,17 @@
     @apply scroll-smooth;
     scrollbar-gutter: stable;
 
-    /* [CRITICAL FIX]: Stop rubber-banding flash */
-    background-color: var(--color-surface-main);
+    /* [FIX 1]: บังคับพื้นหลังดำระดับ Kernel เพื่อป้องกัน White Flash ก่อนตัวแปรจะโหลด */
+    background-color: #050505;
+
+    /* [FIX 2]: หยุดพฤติกรรม Rubber-banding บน Mobile เพื่อไม่ให้เห็นขอบสีขาว */
     overscroll-behavior-y: none;
+
     height: 100%;
   }
 
   body {
+    /* [FIX 3]: Sync พื้นหลังกับตัวแปรหลักและป้องกันการเลื่อนแกน X */
     @apply text-text-primary bg-surface-main overflow-x-hidden;
     font-family: var(--font-thai);
     line-height: 1.6;
@@ -143,13 +146,8 @@
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum", "pnum";
   }
 
-  /* Typography Headers */
-  h1 {
-    @apply text-text-primary font-bold tracking-tight;
-    font-family: var(--font-sans);
-    line-height: 1.2;
-    text-wrap: balance;
-  }
+  /* Typography Logic */
+  h1,
   h2,
   h3,
   h4,
@@ -158,9 +156,10 @@
     @apply text-text-primary font-bold tracking-tight;
     font-family: var(--font-sans);
     line-height: 1.2;
+    text-wrap: balance;
   }
 
-  /* Custom Scrollbar */
+  /* Custom Professional Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -176,23 +175,12 @@
   }
 }
 
-/* --- 04. UTILITY LAYER --- */
+/* --- 04. UTILITY LAYER: Specialist Infrastructure --- */
 @layer utilities {
   .container {
     @apply mx-auto w-full max-w-[85rem] px-4 md:px-6;
   }
-  .aspect-pro-hero {
-    aspect-ratio: 16 / 9;
-    @media (max-width: 768px) {
-      aspect-ratio: 4 / 5;
-    }
-  }
-  .hover-lift {
-    @apply transition-transform duration-500 will-change-transform;
-    &:hover {
-      transform: translate3d(0, -4px, 0);
-    }
-  }
+
   .glass-morphism {
     @apply border-border/50 bg-surface-main/10 border shadow-2xl backdrop-blur-xl;
   }
@@ -204,7 +192,7 @@
       linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
     mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
     contain: strict;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); /* บังคับใช้ GPU Acceleration */
   }
 
   .ambient-aura {

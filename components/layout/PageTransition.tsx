@@ -1,5 +1,5 @@
 /**
- * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.4.7 (STABILIZED)
+ * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Neural Transition | Frame-rate Stability | Layout Persistence
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -18,39 +18,28 @@ interface PageTransitionProps {
 
 /**
  * @component PageTransition
- * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Seamless
- * พร้อมระบบ Layout Guard ป้องกันการกระพริบและ Footer ลอย
+ * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Seamless (Zero-Jitter)
+ * [ENGINEERING]: ใช้ GPU Acceleration และตัด Effect ที่กินทรัพยากร (เช่น Blur) ออกเพื่อความลื่นไหลสูงสุด
  */
 const PageTransition = ({ children, className }: PageTransitionProps) => {
+  // [LOGIC]: ใช้ Pathname เป็น Key เพื่อ Trigger Animation เมื่อเปลี่ยน Route
   const pathname = usePathname();
 
   return (
-    /* [STRATEGY]: mode="wait" ล็อคให้หน้าเก่า Exit จนจบก่อน เพื่อป้องกัน Layout Shift */
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="wait">
       <motion.div
         key={pathname}
-        /* [PERFORMANCE]: เริ่มที่ 0.01 แทน 0 เพื่อหลีกเลี่ยง Bug ของ Browser 
-           ในการคำนวณ Layer ในบางสภาวะ (Composite Layer Bug)
-        */
-        initial={{ opacity: 0.01, y: 12 }}
+        /* [PHYSICS]: Neural easing for premium feel (Specialist Curve) */
+        initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -12 }}
-        /* [NEURAL_PHYSICS]: จังหวะการเคลื่อนไหวที่นุ่มนวลแต่ฉับไว (Power4 Out) */
+        exit={{ opacity: 0, y: -15 }}
         transition={{
-          duration: 0.4,
-          ease: [0.22, 1, 0.36, 1],
-          opacity: { duration: 0.3 },
+          duration: 0.45,
+          ease: [0.16, 1, 0.3, 1], // Consistent with other components
         }}
         className={cn(
-          /* [LAYOUT GUARD]: 
-             - flex-1: บังคับให้ยืดเต็มพื้นที่ที่เหลือ (แก้ Footer ลอย)
-             - w-full: บังคับกว้างเต็มจอเสมอ
-             - flex-col: จัดเรียงลูกหลานแนวตั้ง
-          */
           "flex min-h-full w-full flex-1 flex-col",
-
-          /* [GPU_ACCELERATION]: ผลักภาระงานวาดไปที่การ์ดจอ */
-          "will-change-[transform,opacity]",
+          "transform-gpu will-change-[transform,opacity]", // [GPU_ACCELERATION]
           className,
         )}
       >

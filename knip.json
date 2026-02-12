@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "ignoreDependencies": [
+    "madge",
     "sharp",
     "@img/sharp-wasm32",
     "tailwindcss",
@@ -13,6 +14,7 @@
     "entry": [
       "next.config.ts",
       "app/**/*.{ts,tsx}",
+      "components/templates/**/index.tsx",
       "components/templates/**/Index.tsx",
       "lib/cms.ts"
     ]

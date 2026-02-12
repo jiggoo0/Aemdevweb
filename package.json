@@ -17,7 +17,7 @@
     "build": "next build --webpack",
     "start": "next start",
     "knip": "knip --cache --no-exit-code",
-    "clean": "rm -rf .next node_modules pnpm-lock.yaml && pnpm install"
+    "clean": "rm -rf .next node_modules pnpm-lock.yaml && GYP_DEFINES=\"android_ndk_path=''\" pnpm install"
   },
   "dependencies": {
     "@img/sharp-wasm32": "^0.34.5",
@@ -40,7 +40,6 @@
     "react-dom": "19.0.0",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-unwrap-images": "^5.0.0",
     "sharp": "^0.34.5",
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.4.0",
@@ -61,8 +60,7 @@
     "eslint-plugin-tailwindcss": "^3.18.2",
     "eslint-plugin-unused-imports": "^4.4.1",
     "knip": "^5.83.1",
-    "node-addon-api": "^8.0.0",
-    "node-gyp": "^11.1.0",
+    "madge": "^8.0.0",
     "postcss": "^8.5.6",
     "postcss-load-config": "^6.0.1",
     "prettier": "^3.8.1",
@@ -81,7 +79,6 @@
     },
     "onlyBuiltDependencies": [
       "esbuild",
-      "sharp",
       "unrs-resolver"
     ]
   }

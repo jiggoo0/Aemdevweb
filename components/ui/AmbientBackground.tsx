@@ -1,5 +1,5 @@
 /**
- * [UI COMPONENT]: AMBIENT_BACKGROUND v17.9.0 (GPU_OPTIMIZED)
+ * [UI COMPONENT]: AMBIENT_BACKGROUND v17.9.9 (GPU_OPTIMIZED)
  * [STRATEGY]: GPU-Accelerated Atmosphere | Organic Pulse | Zero-LCP Impact
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -20,6 +20,7 @@ function AmbientBackground({
   color,
   opacity,
 }: AmbientBackgroundProps) {
+  // [PERFORMANCE]: Pre-compute styles to avoid inline object thrashing
   const auraStyle = {
     "--aura-color": color || "var(--color-brand-primary, #2563eb)",
     "--aura-opacity": opacity ?? 0.12,
@@ -45,7 +46,7 @@ function AmbientBackground({
         }}
       />
 
-      {/* 02. DYNAMIC AURAS */}
+      {/* 02. DYNAMIC AURAS (GPU PROMOTED) */}
       <div
         className={cn(
           "absolute -top-[10%] -left-[10%] h-[70vw] w-[70vw] rounded-full",
@@ -64,7 +65,7 @@ function AmbientBackground({
         )}
       />
 
-      {/* 03. DEPTH SHIELD: Prevents harsh transitions */}
+      {/* 03. DEPTH SHIELD */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,var(--color-surface-main)_120%)] opacity-80" />
     </div>
   );
