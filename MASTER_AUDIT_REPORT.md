@@ -1,32 +1,31 @@
- Aemdevweb git:(main) ✗ clean
+Aemdevweb git:(main) ✗ clean
 --- [ LAUNCHING DEEP CLEANING PROCOTOL ] ---
 [1/5] Cleaning Project Artifacts...
-   > Removing .next build cache...
-[2/5] Pruning Package Managers...
-Removed all cached metadata files
-Removed 0 files
-Removed 0 packages
-npm warn Unknown project config "arch". This will stop working in the next major version of npm.
-npm warn Unknown project config "GYP_DEFINES". This will stop working in the next major version of npm.
-npm warn using --force Recommended protections disabled.
-[3/5] Cleaning Termux System...
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-[4/5] Clearing Global Caches...
---- [ CLEAN COMPLETED SUCCESSFULLY ] ---
-Current storage status:
-Filesystem       Size Used Avail Use% Mounted on
-/dev/block/dm-77 105G  31G   73G  31% /data/user/0
-➜  Aemdevweb git:(main) ✗ pch
-! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.29.3.tgz
-? Do you want to continue? [Y/n] y
 
+> Removing .next build cache...
+> [2/5] Pruning Package Managers...
+> Removed all cached metadata files
+> Removed 0 files
+> Removed 0 packages
+> npm warn Unknown project config "arch". This will stop working in the next major version of npm.
+> npm warn Unknown project config "GYP_DEFINES". This will stop working in the next major version of npm.
+> npm warn using --force Recommended protections disabled.
+> [3/5] Cleaning Termux System...
+> Reading package lists... Done
+> Building dependency tree... Done
+> Reading state information... Done
+> 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+> [4/5] Clearing Global Caches...
+> --- [ CLEAN COMPLETED SUCCESSFULLY ] ---
+> Current storage status:
+> Filesystem Size Used Avail Use% Mounted on
+> /dev/block/dm-77 105G 31G 73G 31% /data/user/0
+> ➜ Aemdevweb git:(main) ✗ pch
+> ! Corepack is about to download https://registry.npmjs.org/pnpm/-/pnpm-10.29.3.tgz
+> ? Do you want to continue? [Y/n] y
 
 > aemdevweb.com@17.9.10 fix /data/data/com.termux/files/home/Aemdevweb
 > pnpm format && pnpm lint --fix
-
 
 > aemdevweb.com@17.9.10 format /data/data/com.termux/files/home/Aemdevweb
 > prettier --write .
@@ -81,14 +80,14 @@ components/templates/catalog/Index.tsx 122ms (unchanged)
 components/templates/corporate/Index.tsx 108ms (unchanged)
 components/templates/hotelresort/Index.tsx 106ms (unchanged)
 components/templates/local-authority/Index.tsx 76ms (unchanged)
-components/templates/salepage/_components/DirectOrderForm.tsx 163ms (unchanged)
-components/templates/salepage/_components/FeatureComparison.tsx 82ms (unchanged)
-components/templates/salepage/_components/FlashSaleTimer.tsx 92ms (unchanged)
-components/templates/salepage/_components/SaleFooter.tsx 65ms (unchanged)
-components/templates/salepage/_components/SaleHero.tsx 81ms (unchanged)
-components/templates/salepage/_components/SaleNavbar.tsx 63ms (unchanged)
-components/templates/salepage/_components/StickyBuyButton.tsx 80ms (unchanged)
-components/templates/salepage/_components/ThaiTrustBadge.tsx 102ms (unchanged)
+components/templates/salepage/\_components/DirectOrderForm.tsx 163ms (unchanged)
+components/templates/salepage/\_components/FeatureComparison.tsx 82ms (unchanged)
+components/templates/salepage/\_components/FlashSaleTimer.tsx 92ms (unchanged)
+components/templates/salepage/\_components/SaleFooter.tsx 65ms (unchanged)
+components/templates/salepage/\_components/SaleHero.tsx 81ms (unchanged)
+components/templates/salepage/\_components/SaleNavbar.tsx 63ms (unchanged)
+components/templates/salepage/\_components/StickyBuyButton.tsx 80ms (unchanged)
+components/templates/salepage/\_components/ThaiTrustBadge.tsx 102ms (unchanged)
 components/templates/salepage/Index.tsx 113ms (unchanged)
 components/templates/sections/DynamicFAQ.tsx 97ms (unchanged)
 components/templates/sections/FeatureGrid.tsx 110ms (unchanged)
@@ -173,13 +172,12 @@ vercel.json 15ms (unchanged)
 > aemdevweb.com@17.9.10 lint /data/data/com.termux/files/home/Aemdevweb
 > eslint . --fix
 
-
 > aemdevweb.com@17.9.10 type-check /data/data/com.termux/files/home/Aemdevweb
 > tsc --noEmit
-git:(main) ✗ pnpm knip
+> git:(main) ✗ pnpm knip
 
 > aemdevweb.com@17.9.10 knip /data/data/com.termux/files/home/Aemdevweb
 > knip --cache --no-exit-code
 
-✂️  Excellent, Knip found no issues.
-➜  Aemdevweb git:(main) ✗
+✂️ Excellent, Knip found no issues.
+➜ Aemdevweb git:(main) ✗

@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.96 (ULTIMATE_HARDENED)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.97 (ULTIMATE_HARDENED)
  * [STRATEGY]: Infrastructure-Synced | E-E-A-T Enforcement | Social Identity
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -52,7 +52,7 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub",
     shortTitle: "AEMDEVWEB",
-    version: "17.9.96", // [INCREMENTED]: Sync with Social link update
+    version: "17.9.97", // [INCREMENTED]: Schema Warning Patch (telephone & priceRange)
     framework: "Next.js 16.1.6 (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
@@ -74,7 +74,7 @@ export const SITE_CONFIG: SiteConfig = {
 
   contact: {
     email: "me@aemdevweb.com",
-    phone: "099-032-2175",
+    phone: "099-032-2175", // [FIXED]: Mapping for telephone schema
     displayPhone: "099 032 2175 (สายด่วนปรึกษานายเอ็มซ่ามากส์)",
     address: "กำแพงเพชร, ประเทศไทย",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
@@ -87,7 +87,7 @@ export const SITE_CONFIG: SiteConfig = {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
     messenger: "https://m.me/aemdevweb",
-    facebook: "https://www.facebook.com/share/18HFcziyn7/", // [UPDATED]: New Entity Link
+    facebook: "https://www.facebook.com/share/18HFcziyn7/",
     github: "https://github.com/aemdevweb",
     twitter: "https://x.com/aemdevweb",
     youtube: "https://youtube.com/@aemdevweb",
@@ -102,6 +102,7 @@ export const SITE_CONFIG: SiteConfig = {
     roiFocus: true,
     established: "2024",
     status: "Stable",
+    priceRange: "฿฿฿", // [NEW]: Resolves Schema Warning "Missing priceRange"
     ids: {
       businessProfileId: "17539943195708104348",
       storeCode: "01162024004001766449",

@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.97 (ULTIMATE_HARDENED)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.98 (ULTIMATE_HARDENED)
  * [STRATEGY]: Strict Union Types | CMS Entity Normalization | Zero-Any Registry
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -76,6 +76,7 @@ export type IconName =
   | "Send"
   | "Loader2"
   | "Timer"
+  | "Activity" // [ADDED]: สำหรับหน้า Status
   | (string & {});
 
 export type TemplateSlug =
@@ -111,7 +112,7 @@ export interface SiteExpert {
   readonly email: string;
   readonly bioUrl: string;
   readonly bio: string;
-  readonly twitterHandle: string; // [FIXED]: ป้องกัน Error TS2339 ใน seo-utils
+  readonly twitterHandle: string;
   readonly googleMerchantId?: string;
 }
 
@@ -120,9 +121,9 @@ export interface SiteConfig {
   readonly siteUrl: string;
   readonly description: string;
   readonly logo: string;
-  readonly ogImage: string; // [FIXED]: ป้องกัน Metadata Error
-  readonly locale: string; // [FIXED]: ป้องกัน Metadata Error
-  readonly themeColor: string; // [FIXED]: ป้องกัน Metadata/Manifest Error
+  readonly ogImage: string;
+  readonly locale: string;
+  readonly themeColor: string;
   readonly hero: {
     readonly title: string;
     readonly description: string;
@@ -142,10 +143,10 @@ export interface SiteConfig {
     readonly framework: string;
     readonly uiStack: string;
   };
-  readonly expert: SiteExpert; // [FIXED]: ใช้ Interface เพื่อความสม่ำเสมอ
+  readonly expert: SiteExpert;
   readonly contact: {
     readonly email: string;
-    readonly phone: string;
+    readonly phone: string; // Mapping to 'telephone' in Schema
     readonly displayPhone: string;
     readonly address: string;
     readonly streetAddress: string;
@@ -161,14 +162,14 @@ export interface SiteConfig {
     readonly roiFocus: boolean;
     readonly established: string;
     readonly status: string;
+    readonly priceRange: string; // [FIXED]: ป้องกัน Error ใน lib/schema.ts
     readonly ids: Record<string, string>;
   };
   readonly verification: {
     readonly google: string;
-    readonly facebook?: string; // [FIXED]: รองรับ Facebook Domain Verification
+    readonly facebook?: string;
   };
   readonly analytics?: {
-    // [FIXED]: รองรับ GA/Pixel Tracking
     readonly gaId?: string;
     readonly pixelId?: string;
   };
@@ -178,7 +179,7 @@ export interface SiteConfig {
 // [03] DATA MODELS (Master Registry & CMS)
 // =========================================
 
-export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal";
+export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
 export interface ServiceFeature {
   readonly title: string;
@@ -292,5 +293,4 @@ export interface AreaNode {
   readonly theme?: ThemeConfig;
 }
 
-// [CRITICAL]: เชื่อมต่อ Contract ย่อยเข้ากับไฟล์หลัก
 export * from "./template-props";

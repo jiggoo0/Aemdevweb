@@ -1,6 +1,6 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.105 (ULTIMATE_HARDENED)
- * [STRATEGY]: Unified Entity Graph | Product & Local SEO Synergy | Zero-Any Policy
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.107 (STABILIZED)
+ * [STRATEGY]: Strict Schema Mapping | Intersection Types | Zero-Any Compliance
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -8,12 +8,21 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { AreaNode, UniversalTemplateProps, TemplateMasterData } from "@/types";
 
+// --- [INTERNAL TYPES]: Local Contracts ---
+/**
+ * [STRICT]: ขยายขอบเขต Schema Node เพื่อรองรับฟิลด์ที่ Google ต้องการ
+ * โดยไม่ต้องทำลายกฎ Zero-Any Policy
+ */
+interface ExtendedSchemaNode extends Record<string, unknown> {
+  telephone?: string;
+  priceRange?: string;
+}
+
 // --- [INTERNAL: CORE NODES] ---
 
 /**
  * [ENTITY]: sameAsLinks
- * รวบรวม Social Profiles เพื่อยืนยันตัวตน (Identity Verification) ใน Knowledge Graph
- * รองรับการฉีดลิงก์ Facebook ใหม่จาก SITE_CONFIG อัตโนมัติ
+ * รวบรวม Social Profiles เพื่อยืนยันตัวตนใน Knowledge Graph
  */
 const sameAsLinks = [
   SITE_CONFIG.links.facebook,
@@ -30,14 +39,20 @@ const websiteNode = {
   url: SITE_CONFIG.siteUrl,
   name: SITE_CONFIG.brandName,
   publisher: { "@id": absoluteUrl("/#organization") },
-  inLanguage: SITE_CONFIG.locale.replace("_", "-"), // th-TH
+  inLanguage: SITE_CONFIG.locale.replace("_", "-"),
 } as const;
 
+/**
+ * [NODE]: organizationNode (ProfessionalService)
+ * [UPDATE]: บรรจุ 'telephone' และ 'priceRange' เพื่อลบ Schema warnings
+ */
 const organizationNode = {
   "@type": "ProfessionalService",
   "@id": absoluteUrl("/#organization"),
   name: SITE_CONFIG.brandName,
   url: SITE_CONFIG.siteUrl,
+  telephone: SITE_CONFIG.contact.phone,
+  priceRange: SITE_CONFIG.business.priceRange,
   logo: {
     "@type": "ImageObject",
     "@id": absoluteUrl("/#logo"),
@@ -100,7 +115,7 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
 
 /**
  * [MASTER]: generateUniversalSchema
- * @description ฟังก์ชันหลักรองรับทุกเทมเพลต (Corporate, SalePage, Catalog, Hotel, Bio, SEO)
+ * [FIXED]: ปรับปรุงการฉีดข้อมูลด้วย ExtendedSchemaNode เพื่อความปลอดภัยสูงสุด
  */
 export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData) {
   const canonicalUrl = absoluteUrl(
@@ -116,7 +131,7 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
     ? "Product"
     : "ProfessionalService";
 
-  const baseNode: Record<string, unknown> = {
+  const baseNode: ExtendedSchemaNode = {
     "@type": mainType,
     "@id": `${canonicalUrl}/#main`,
     name: data.title,
@@ -137,8 +152,13 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
         addressRegion: province,
         addressCountry: "TH",
       };
+      // [FIXED]: ฉีดข้อมูลติดต่อลงในหน้าพื้นที่เพื่อลบ Warnings
+      baseNode.telephone = organizationNode.telephone;
+      baseNode.priceRange = organizationNode.priceRange;
     } else {
       baseNode.address = organizationNode.address;
+      baseNode.telephone = organizationNode.telephone;
+      baseNode.priceRange = organizationNode.priceRange;
     }
   }
 
@@ -191,6 +211,8 @@ export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaN
       ? (data as UniversalTemplateProps).title
       : `${SITE_CONFIG.brandName} - ${province}`,
     url: pageUrl,
+    telephone: SITE_CONFIG.contact.phone,
+    priceRange: SITE_CONFIG.business.priceRange,
     image: isUniversal
       ? (data as UniversalTemplateProps).image
         ? absoluteUrl((data as UniversalTemplateProps).image!)
@@ -203,6 +225,5 @@ export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaN
       addressCountry: "TH",
     },
     parentOrganization: { "@id": absoluteUrl("/#organization") },
-    priceRange: "฿฿",
   };
 }
