@@ -1,16 +1,17 @@
 /**
- * [SYSTEM CORE]: GENERAL_UTILITIES v17.9.9 (REFINED)
- * [STRATEGY]: Core Helper Consolidation | Dead Code Elimination | Termux Optimized
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [UTILS]: CORE_SYSTEM_HELPERS v17.9.106 (ULTIMATE_HARDENED)
+ * [STRATEGY]: CSS Variable Injection | Path Normalization | GPU Safe
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { SITE_CONFIG } from "@/constants/site-config";
+import type { ThemeConfig } from "@/types";
 
 /**
- * [UTILITY]: cn (Class Name Merger)
- * รวม Tailwind Classes และจัดการการทับซ้อนของ CSS อย่างมีประสิทธิภาพ
+ * [UI]: cn
+ * มาตรฐานการรวม Tailwind Classes พร้อมจัดการ Conflict (Tailwind 4 Ready)
  */
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
@@ -18,21 +19,43 @@ export function cn(...inputs: ClassValue[]): string {
 
 /**
  * [SEO]: absoluteUrl
- * สร้าง Full Path URL สำหรับ Metadata และ Schema โดยอ้างอิงจาก SITE_CONFIG
+ * แปลง Path ให้เป็น Full URL ที่ถูกต้อง 100% สำหรับ Metadata และ OpenGraph
  */
 export function absoluteUrl(path: string): string {
-  if (!path) return SITE_CONFIG.siteUrl;
+  const baseUrl = SITE_CONFIG.siteUrl.replace(/\/$/, ""); // ตัด slash ท้าย URL หลักออก
+
+  if (!path || path === "/") return baseUrl;
   if (path.startsWith("http")) return path;
 
-  const baseUrl = SITE_CONFIG.siteUrl.replace(/\/$/, "");
+  // จัดการตัวแปร path ให้มี slash นำหน้าเพียงตัวเดียวเสมอ
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
-
-  return path === "/" ? baseUrl : `${baseUrl}${cleanPath}`;
+  return `${baseUrl}${cleanPath.replace(/\/+$/, "")}`; // ลบ slash ท้าย path ออกถ้ามี
 }
 
 /**
- * [CLEANUP_NOTE]:
- * ลบ slugify และ formatDate ออกชั่วคราวตามรายงาน Knip Audit v5.0
- * เนื่องจากระบบปัจจุบันใช้ Static Slugs จาก constants/ เป็นหลัก
- * และจัดการ Date String ผ่าน MDX Content โดยตรงแล้ว
+ * [THEME]: injectThemeVariables
+ * @description กลไกการฉีดค่าธีมเข้าสู่ CSS Variables (The Bridge)
+ * [CRITICAL]: ใช้ override --surface-main หาก background เป็นค่าสี Hex
  */
+export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
+  if (!theme) return {} as React.CSSProperties;
+
+  const styles: Record<string, string> = {
+    "--brand-primary": theme.primary,
+    "--color-brand-primary": theme.primary, // Tailwind 4 Direct Mapping
+    "--brand-secondary": theme.secondary || `${theme.primary}CC`,
+    "--brand-accent": theme.accent || theme.primary,
+    "--brand-gradient":
+      theme.gradient || `linear-gradient(to bottom, ${theme.primary}15, transparent)`,
+  };
+
+  // [ANTI-WHITE-FLASH LOGIC]
+  if (theme.background && !theme.background.startsWith("bg-")) {
+    styles["--surface-main"] = theme.background;
+    styles["--brand-bg"] = theme.background;
+  } else {
+    styles["--brand-bg"] = "transparent";
+  }
+
+  return styles as React.CSSProperties;
+}

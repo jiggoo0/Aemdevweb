@@ -1,15 +1,16 @@
 /**
- * [FEATURE COMPONENT]: CASE_STUDY_CARD v17.9.9 (ZERO_CLS_HARDENED)
+ * [FEATURE COMPONENT]: CASE_STUDY_CARD v17.9.65 (ZERO_CLS_HARDENED)
  * [STRATEGY]: ROI Impact Logic | Metadata Resolution | GPU Optimized
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// [FIX]: ตรวจสอบ Import Path ให้ถูกต้อง
+
+// --- Infrastructure ---
 import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -22,87 +23,108 @@ interface CaseStudyCardProps {
 }
 
 const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
-  // [DATA_GUARD]: ป้องกัน undefined error
-  const primaryResult = data.results?.[0] || "Success Guaranteed";
-  const imageSource = data.thumbnail || "/images/case-study/default.webp";
+  // [DATA_GUARD]: Safe Access Logic
+  const primaryResult = useMemo(() => data.results?.[0] || "Growth Guaranteed", [data.results]);
+  const imageSource = useMemo(
+    () => data.thumbnail || "/images/case-study/default.webp",
+    [data.thumbnail],
+  );
 
-  // Safety Access: ป้องกัน Crash ถ้า key ไม่มีใน registry
+  // [ENGINE]: CLS Protection
   const imgData = IMAGE_BLUR_DATA?.[imageSource] || null;
 
   return (
     <Link
       href={`/case-studies/${data.slug}`}
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
-        "bg-surface-card border-border shadow-pro-sm md:rounded-[3rem]",
-        "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-3",
+        "group relative flex h-full flex-col justify-between overflow-hidden rounded-[2.5rem] transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "bg-surface-card border-border shadow-pro-sm border md:rounded-[3rem]",
+        "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
         "transform-gpu will-change-transform", // [PERFORMANCE]
         className,
       )}
     >
-      {/* --- VISUAL AUTHORITY (GPU ACCELERATED) --- */}
+      {/* --- LAYER 01: VISUAL AUTHORITY (GPU ACCELERATED) --- */}
       <div
-        className="bg-surface-offset border-border relative w-full overflow-hidden border-b"
-        // Force Aspect Ratio to prevent CLS
+        className="bg-surface-offset border-border relative w-full overflow-hidden border-b select-none"
+        /* [CLS GUARD]: Aspect Ratio Reservation */
         style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "16/10" }}
       >
         <Image
           src={imageSource}
-          alt={data.title}
+          alt={`Case Study: ${data.title}`}
           fill
           /* [LCP OPTIMIZATION]: Preload 2 ใบแรก */
           priority={index < 2}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
-          className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+          className="object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-110 group-hover:opacity-60"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        {/* Gradient Overlay */}
-        <div className="from-surface-main/90 absolute inset-0 z-10 bg-gradient-to-t to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
+        {/* Texture Overlay */}
+        <div
+          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.05] mix-blend-overlay transition-opacity group-hover:opacity-0"
+          style={{ backgroundImage: "url(/grid-pattern.svg)" }}
+        />
 
-        {/* --- ROI OVERLAY (Hover Reveal) --- */}
-        <div className="absolute inset-0 z-20 flex translate-y-8 flex-col items-center justify-center opacity-0 transition-all duration-700 group-hover:translate-y-0 group-hover:opacity-100">
-          <span className="text-brand-primary text-3xl font-black italic drop-shadow-lg md:text-4xl">
-            {primaryResult.split(" ")[0]}
-          </span>
-          <div className="bg-brand-primary text-surface-main shadow-glow mt-4 rounded-full px-5 py-1.5 text-[9px] font-black uppercase md:px-6 md:py-2 md:text-[10px]">
-            Verified_Success
+        {/* Gradient Overlay */}
+        <div className="from-surface-main/90 absolute inset-0 z-10 bg-gradient-to-t to-transparent opacity-40 transition-opacity duration-500 group-hover:opacity-90" />
+
+        {/* --- LAYER 01.5: ROI REVEAL (Hover Interaction) --- */}
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center p-6 opacity-0 transition-all duration-500 group-hover:opacity-100">
+          <div className="translate-y-4 transform-gpu transition-transform duration-500 group-hover:translate-y-0">
+            <span className="text-brand-primary block text-center text-4xl font-black tracking-tighter italic drop-shadow-lg md:text-5xl">
+              {primaryResult.split(" ")[0]}
+            </span>
+            <div className="bg-surface-main/20 border-brand-primary/30 mt-3 rounded-full border px-4 py-1.5 backdrop-blur-md">
+              <span className="text-surface-main font-mono text-[9px] font-black tracking-[0.2em] text-white uppercase shadow-black drop-shadow-md">
+                Verified_Success
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-grow flex-col justify-between p-8 md:p-10 lg:p-11">
-        <div className="space-y-6 md:space-y-7">
-          <span className="text-brand-primary font-mono text-[8px] font-black tracking-widest uppercase md:text-[9px]">
-            Log: {data.client}
-          </span>
-          <h3 className="text-text-primary group-hover:text-brand-primary text-xl font-black italic transition-colors md:text-2xl lg:text-3xl">
+      {/* --- LAYER 02: CONTENT ENGINE --- */}
+      <div className="flex flex-grow flex-col justify-between p-8 md:p-10">
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <span className="text-brand-primary font-mono text-[8px] font-black tracking-[0.3em] uppercase md:text-[9px]">
+              Client: {data.client}
+            </span>
+          </div>
+
+          <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-2xl font-black tracking-tighter italic transition-colors duration-300 md:text-3xl">
             {data.title}
           </h3>
+
           <p className="text-text-secondary line-clamp-2 text-sm font-medium italic opacity-75 md:text-base">
             “{data.description}”
           </p>
         </div>
 
+        {/* Footer */}
         <div className="border-border mt-10 flex items-center justify-between border-t pt-6 md:mt-12 md:pt-8">
-          <div className="flex items-center gap-4 md:gap-5">
-            <div className="bg-surface-offset group-hover:bg-brand-primary group-hover:text-surface-main rounded-2xl p-3 transition-all md:p-4">
-              <IconRenderer name="ArrowUpRight" size={20} className="md:h-6 md:w-6" />
+          <div className="flex items-center gap-4">
+            <div className="bg-surface-offset group-hover:bg-brand-primary group-hover:text-surface-main group-hover:border-brand-primary/50 group-hover:shadow-glow rounded-2xl border border-transparent p-3 transition-all duration-500 group-hover:-rotate-12 md:p-3.5">
+              <IconRenderer name="ArrowUpRight" size={20} className="md:h-5 md:w-5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-text-primary text-[10px] font-black uppercase md:text-[11px]">
-                Analyze Strategy
+              <span className="text-text-primary group-hover:text-brand-primary text-[10px] font-black uppercase transition-colors md:text-[11px]">
+                View Strategy
               </span>
               <span className="text-text-muted font-mono text-[8px] opacity-40">
-                Case_Node_0{index + 1}
+                Node_0{index + 1}
               </span>
             </div>
           </div>
+
           <IconRenderer
             name="ShieldCheck"
-            size={20}
-            className="text-text-muted opacity-20 transition-all group-hover:opacity-70 md:h-6 md:w-6"
+            size={18}
+            className="text-text-muted group-hover:text-brand-primary opacity-20 transition-all duration-500 group-hover:opacity-100"
           />
         </div>
       </div>

@@ -1,82 +1,81 @@
 /**
- * [CORE COMPONENT]: TEMPLATE_RENDERER v17.9.9 (STABILIZED)
- * [STRATEGY]: Dynamic Strategy Mapping | Bundle Optimization | Type-Safe Intersection
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [COMPONENT]: UNIVERSAL_RENDERER v17.9.102 (TYPE_HARDENED)
+ * [STRATEGY]: Case-Sensitive Import | Static Mapping | Visual Error Boundary
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
+import React from "react";
+import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 
-import React, { useMemo } from "react";
-import dynamic from "next/dynamic";
-import SkeletonGrid from "@/components/ui/SkeletonGrid";
-import type { TemplateMasterData, AreaNode } from "@/types";
+// --- 1. Template Registry (FileSystem Case-Sensitive Checked) ---
+import SalePageTemplate from "./salepage/Index";
+import CorporateTemplate from "./corporate/Index";
+import CatalogTemplate from "./catalog/Index";
+import BioTemplate from "./bio/Index";
+import LocalAuthorityTemplate from "./local-authority/Index";
+import HotelResortTemplate from "./hotelresort/Index";
+import SEOAgencyTemplate from "./seo-agency/Index";
 
-// --- [DYNAMIC IMPORT ENGINE]: โหลด Template เฉพาะเมื่อมีการเรียกใช้งานจริง ---
-const SalePage = dynamic(() => import("./salepage/Index"), { loading: () => <SkeletonGrid /> });
-const CatalogPage = dynamic(() => import("./catalog/Index"), { loading: () => <SkeletonGrid /> });
-const CorporatePage = dynamic(() => import("./corporate/Index"), {
-  loading: () => <SkeletonGrid />,
-});
-const BioLinkPage = dynamic(() => import("./bio/Index"), { loading: () => <SkeletonGrid /> });
-const LocalAuthorityPage = dynamic(() => import("./local-authority/Index"), {
-  loading: () => <SkeletonGrid />,
-});
-const HotelResortPage = dynamic(() => import("./hotelresort/Index"), {
-  loading: () => <SkeletonGrid />,
-});
-const SeoAgencyPage = dynamic(() => import("./seo-agency/index"), {
-  loading: () => <SkeletonGrid />,
-});
-
-/**
- * [INTERFACE_HARDENING]
- * [FIXED]: ปรับปรุง Interface ให้มีความเป็นระเบียบและรองรับ Readonly Props
- */
 interface TemplateRendererProps {
-  readonly data: TemplateMasterData | AreaNode;
-  readonly _source?: "service" | "area";
+  readonly data: UniversalTemplateProps;
+  readonly renderMode?: "full" | "section-only";
 }
 
-/**
- * @component TemplateRenderer
- * @description หน่วยประมวลผลกลางที่ตัดสินใจเลือก UI Engine ตามค่า templateSlug แบบ Type-Safe
- */
-const TemplateRenderer = ({ data, _source = "service" }: TemplateRendererProps) => {
-  // [LOGIC]: Mapping Slug เข้ากับ Component ผ่าน useMemo เพื่อรักษา Rendering Performance
-  const ActiveTemplate = useMemo(() => {
-    const slug = data.templateSlug;
-
-    switch (slug) {
-      case "salepage":
-        return SalePage;
-      case "catalog":
-        return CatalogPage;
-      case "corporate":
-        return CorporatePage;
-      case "bio":
-        return BioLinkPage;
-      case "local-authority":
-        return LocalAuthorityPage;
-      case "seo-agency":
-        return SeoAgencyPage;
-      case "hotelresort":
-        return HotelResortPage;
-      case "local":
-        return LocalAuthorityPage;
-      default:
-        console.warn(
-          `[SYSTEM_ALERT]: Template slug "${slug}" not found. Falling back to Corporate.`,
-        );
-        return CorporatePage;
-    }
-  }, [data.templateSlug]);
-
-  /**
-   * [CLEAN_UP]:
-   * [FIXED]: เปลี่ยนจาก data as any เป็นการระบุ Intersection Type (TemplateMasterData & AreaNode)
-   * เพื่อความปลอดภัยของข้อมูล (Type Safety) และผ่านกฎ @typescript-eslint/no-explicit-any
-   */
-  return <ActiveTemplate data={data as TemplateMasterData & AreaNode} />;
+// [OPTIMIZATION]: Define mapping logic cleanly with Strict Types
+// ใช้ BaseTemplateProps แทน any เพื่อผ่านกฎ Linter
+const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> = {
+  salepage: SalePageTemplate,
+  corporate: CorporateTemplate,
+  catalog: CatalogTemplate,
+  bio: BioTemplate,
+  "local-authority": LocalAuthorityTemplate,
+  local: LocalAuthorityTemplate, // Legacy Alias
+  hotelresort: HotelResortTemplate,
+  "seo-agency": SEOAgencyTemplate,
 };
 
-export default TemplateRenderer;
+export function TemplateRenderer({ data, renderMode = "full" }: TemplateRendererProps) {
+  // [LOGIC]: Direct lookup (Fastest O(1))
+  const ActiveTemplate = TEMPLATE_REGISTRY[data.templateSlug as string];
+
+  /**
+   * [GUARD_CLAUSE]: Visual Error Boundary for Missing Nodes
+   */
+  if (!ActiveTemplate) {
+    return (
+      <div className="relative flex min-h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-[2.5rem] border-2 border-dashed border-rose-500/20 bg-rose-500/5 p-8 text-center backdrop-blur-md md:rounded-[4rem] md:p-12">
+        {/* Background Grid Pattern */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "radial-gradient(#f43f5e 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+
+        {/* Animated Icon */}
+        <div className="relative z-10 mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-rose-500/10 shadow-[0_0_30px_-5px_rgba(244,63,94,0.3)] ring-1 ring-rose-500/20 transition-transform duration-700 hover:rotate-12">
+          <span className="animate-pulse text-5xl font-black text-rose-600 select-none">!</span>
+        </div>
+
+        {/* Error Details */}
+        <div className="relative z-10 max-w-md space-y-3">
+          <h3 className="font-mono text-xl font-black tracking-tighter text-rose-700 uppercase italic md:text-2xl">
+            404_TEMPLATE_NOT_FOUND
+          </h3>
+          <div className="rounded-lg border border-rose-200 bg-white/40 p-3 font-mono text-xs break-all text-rose-800">
+            Slug: "{data.templateSlug}"
+          </div>
+          <p className="text-sm leading-relaxed font-medium text-rose-900/60">
+            ระบบไม่พบ Template ที่ระบุใน Master Registry <br />
+            กรุณาตรวจสอบการสะกดคำใน{" "}
+            <span className="font-bold underline">constants/master-registry.ts</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // [EXECUTION]: Render with Props Injection
+  return <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />;
+}

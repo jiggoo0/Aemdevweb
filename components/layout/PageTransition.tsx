@@ -1,6 +1,6 @@
 /**
- * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Neural Transition | Frame-rate Stability | Layout Persistence
+ * [SYSTEM COMPONENT]: PAGE_TRANSITION_ENGINE v17.9.75 (GPU_ACCELERATED)
+ * [STRATEGY]: Instant-First Logic | GPU Compositing | Memory-Safe Unmounting
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -18,28 +18,32 @@ interface PageTransitionProps {
 
 /**
  * @component PageTransition
- * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้าแบบ Seamless (Zero-Jitter)
- * [ENGINEERING]: ใช้ GPU Acceleration และตัด Effect ที่กินทรัพยากร (เช่น Blur) ออกเพื่อความลื่นไหลสูงสุด
+ * @description หน่วยประมวลผลแอนิเมชันการเปลี่ยนหน้า
+ * [ENGINEERING]: ปรับลดระยะการเคลื่อนที่ (Distance) เพื่อป้องกัน Layout Shift
+ * และลด Duration เพื่อเพิ่ม Perceived Speed ให้รู้สึกเข้าถึงข้อมูลได้ทันที
  */
 const PageTransition = ({ children, className }: PageTransitionProps) => {
-  // [LOGIC]: ใช้ Pathname เป็น Key เพื่อ Trigger Animation เมื่อเปลี่ยน Route
   const pathname = usePathname();
 
   return (
-    <AnimatePresence mode="wait">
+    /* [STRATEGY]: mode="popLayout" ช่วยให้ Component ใหม่ Render ทันที 
+       โดยไม่ต้องรอตัวเก่า Unmount จนจบ (ลดอาการจอขาววูบวาบ) */
+    <AnimatePresence mode="popLayout" initial={false}>
       <motion.div
         key={pathname}
-        /* [PHYSICS]: Neural easing for premium feel (Specialist Curve) */
-        initial={{ opacity: 0, y: 15 }}
+        /* [TUNING]: ลดระยะ y offset จาก 15px -> 8px 
+           เพื่อให้ Transition ดู 'แพง' และนิ่งขึ้น (Stable Feel) */
+        initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -15 }}
+        exit={{ opacity: 0, y: -8 }}
         transition={{
-          duration: 0.45,
-          ease: [0.16, 1, 0.3, 1], // Consistent with other components
+          duration: 0.32, // [SPEED]: เร็วขึ้นเล็กน้อยเพื่อความทันใจ
+          ease: [0.22, 1, 0.36, 1], // Custom Ease: "Specialist Out-Quint"
         }}
         className={cn(
-          "flex min-h-full w-full flex-1 flex-col",
-          "transform-gpu will-change-[transform,opacity]", // [GPU_ACCELERATION]
+          "bg-surface-main relative flex min-h-full w-full flex-1 flex-col",
+          // [PERFORMANCE]: บังคับใช้ GPU Layer เพื่อความลื่นไหลระดับ 60fps+
+          "transform-gpu will-change-[transform,opacity]",
           className,
         )}
       >

@@ -1,167 +1,137 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Kinetic Typography | GPU-Accelerated Rendering | Typed Routes Fix
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.105 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Neural Motion Physics | Dynamic Theme Sync | Build-Stabilized
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
-import type { Route } from "next";
 
 import React, { memo } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import { motion, type Transition } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
 
-interface HeroProps {
-  readonly title?: React.ReactNode;
-  readonly subtitle?: string;
-  readonly primaryActionLabel?: string;
-  readonly primaryHref?: string;
-  readonly secondaryActionLabel?: string;
-  readonly secondaryHref?: string;
-  readonly className?: string;
-}
-
-const Hero = ({
-  title = SITE_CONFIG.hero.title,
-  subtitle = SITE_CONFIG.hero.description,
-  primaryActionLabel = SITE_CONFIG.hero.primaryAction,
-  primaryHref = SITE_CONFIG.links.line,
-  secondaryActionLabel = SITE_CONFIG.hero.secondaryAction,
-  secondaryHref = "/services",
-  className,
-}: HeroProps) => {
-  const entryTransition: Transition = {
+const Hero = () => {
+  /**
+   * [PHYSICS]: Neural Spring Transition
+   * จูน Easing ให้มีความรู้สึก "หนักแน่น" ในตอนเริ่ม และ "นุ่มนวล" ในตอนจบ
+   */
+  const sharedTransition: Transition = {
     duration: 0.8,
     ease: [0.16, 1, 0.3, 1],
   };
 
-  return (
-    <section
-      className={cn(
-        "relative flex min-h-[85vh] flex-col justify-center overflow-hidden pt-28 pb-20 md:pt-32 md:pb-32",
-        "content-visibility-visible will-change-contents",
-        className,
-      )}
-    >
-      {/* --- 01. INFRASTRUCTURE LAYER (Zero-CLS Asset) --- */}
-      <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.15] select-none">
-        <div
-          className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center bg-repeat opacity-50"
-          aria-hidden="true"
-        />
-      </div>
+  const fadeUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+  };
 
-      {/* --- 02. AMBIENT LAYER: GPU Accelerated Glow --- */}
+  return (
+    <section className="relative flex min-h-[85dvh] flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40 md:pb-36">
+      {/* --- 01. INFRASTRUCTURE LAYER (Visual Identity) --- */}
       <div
-        className="bg-brand-primary/10 absolute top-[10%] -right-[10%] z-0 h-[500px] w-[500px] transform-gpu rounded-full blur-[120px] will-change-transform md:h-[800px] md:w-[800px]"
+        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04] select-none"
+        style={{ backgroundImage: "url(/grid-pattern.svg)" }}
+        aria-hidden="true"
+      />
+
+      {/* Dynamic Ambient Aura: เชื่อมโยงสีธีมจาก LayoutEngine */}
+      <div
+        className="absolute top-[10%] -right-[5%] z-0 h-[500px] w-[500px] transform-gpu rounded-full opacity-20 blur-[100px]"
+        style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* --- 03. SYSTEM STATUS BADGE --- */}
+        {/* Node 01: Specialist Status Badge */}
         <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={entryTransition}
-          className="border-brand-primary/20 bg-brand-primary/5 mb-8 inline-flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md md:mb-12"
+          initial={fadeUp.initial}
+          animate={fadeUp.animate}
+          transition={sharedTransition}
+          className="border-brand-primary/20 bg-brand-primary/5 mb-10 inline-flex items-center gap-4 rounded-full border px-5 py-2.5 backdrop-blur-md"
         >
           <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
-          <span className="text-brand-primary/90 font-mono text-[9px] font-black tracking-[0.3em] uppercase md:text-[10px]">
-            System_Active: v{SITE_CONFIG.project.version}
+          <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase">
+            Protocol_Active: v{SITE_CONFIG.project.version}
           </span>
         </motion.div>
 
-        {/* --- 04. MAIN NARRATIVE HUB (LCP Target) --- */}
-        <div className="max-w-6xl space-y-10 md:space-y-12">
+        {/* Node 02: Main Messaging Matrix */}
+        <div className="max-w-7xl space-y-12">
           <motion.h1
-            initial={{ opacity: 0.9, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={entryTransition}
-            className="text-text-primary transform-gpu text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-7xl lg:text-8xl xl:text-[7.5rem]"
+            initial={fadeUp.initial}
+            animate={fadeUp.animate}
+            transition={{ ...sharedTransition, delay: 0.1 }}
+            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
           >
-            {typeof title === "string" && title.includes("AEMDEVWEB") ? (
-              <>
-                <span className="text-brand-primary mr-4 block md:inline-block">AEMDEVWEB</span>
-                {title.replace("AEMDEVWEB", "")}
-              </>
-            ) : (
-              title
-            )}
+            <span className="text-brand-primary mr-4 block md:inline">AEMDEVWEB</span>
+            {SITE_CONFIG.hero.title.replace("AEMDEVWEB", "")}
           </motion.h1>
 
           <motion.div
-            initial={{ opacity: 0, x: -15 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ ...entryTransition, delay: 0.15 }}
-            className="border-brand-primary border-l-[4px] pl-6 md:border-l-[6px] md:pl-10"
+            initial={fadeUp.initial}
+            animate={fadeUp.animate}
+            transition={{ ...sharedTransition, delay: 0.2 }}
+            className="border-brand-primary border-l-[6px] pl-8 md:pl-12"
           >
-            <p
-              suppressHydrationWarning
-              className="text-text-secondary max-w-3xl text-lg leading-relaxed font-medium italic opacity-90 md:text-2xl lg:text-3xl"
-            >
-              “{subtitle}”
+            <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
+              “{SITE_CONFIG.hero.description}”
             </p>
           </motion.div>
         </div>
 
-        {/* --- 05. INTERACTION GATEWAY --- */}
+        {/* Node 03: Conversion Gateway */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ ...entryTransition, delay: 0.3 }}
-          className="mt-16 flex flex-col items-start gap-6 md:mt-20 md:flex-row md:items-center md:gap-8"
+          initial={fadeUp.initial}
+          animate={fadeUp.animate}
+          transition={{ ...sharedTransition, delay: 0.3 }}
+          className="mt-16 flex flex-col gap-6 md:flex-row md:items-center"
         >
-          {/* [FIXED]: Primary Action - ใช้ <a> แทนนิวส์ Next Link เพื่อรองรับ External Line URL (TS2322) */}
+          {/* Primary Action (External Line) - [RESOLVED]: ใช้ variant="neo" */}
           <Button
             asChild
             size="lg"
-            className="group shadow-pro-lg relative h-16 w-full transform-gpu overflow-hidden rounded-xl px-10 transition-all duration-300 md:h-20 md:w-auto md:rounded-2xl md:px-12"
+            variant="neo"
+            className="shadow-glow-lg group h-16 transform-gpu rounded-2xl px-12 transition-all hover:scale-105 active:scale-95 md:h-20 md:px-16"
           >
-            <a href={primaryHref} target="_blank" rel="noopener noreferrer">
-              <div className="absolute inset-0 -translate-x-full bg-white/20 transition-transform duration-700 group-hover:translate-x-full" />
+            <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
               <IconRenderer
-                name="MessageCircle"
-                size={24}
-                className="relative z-10 mr-3 transition-transform group-hover:scale-110 md:mr-4"
+                name="Zap"
+                size={20}
+                className="mr-3 transition-transform group-hover:scale-125"
               />
-              <span className="relative z-10 text-xs font-black tracking-[0.2em] uppercase md:tracking-[0.3em]">
-                {primaryActionLabel}
+              <span className="text-[11px] font-black tracking-widest uppercase">
+                {SITE_CONFIG.hero.primaryAction}
               </span>
             </a>
           </Button>
 
-          {/* [FIXED]: Secondary Action - ใช้ Type Casting (as Route) สำหรับ Dynamic internal link */}
+          {/* Secondary Action (Services) */}
           <Button
             asChild
             size="lg"
             variant="outline"
-            className={cn(
-              "group h-16 w-full justify-start rounded-xl px-8 transition-all md:h-20 md:w-auto md:justify-center md:rounded-2xl",
-              "border-border bg-surface-card/50 text-text-secondary hover:border-brand-primary/50 hover:bg-surface-card hover:text-text-primary shadow-sm",
-            )}
+            className="border-border bg-surface-card/40 hover:bg-surface-card h-16 transform-gpu rounded-2xl px-10 backdrop-blur-sm transition-all active:scale-95 md:h-20 md:px-12"
           >
-            <Link href={secondaryHref as Route} className="flex items-center gap-3">
-              <span className="text-xs font-black tracking-[0.2em] uppercase">
-                {secondaryActionLabel}
+            <Link href={"/services" as Route} className="flex items-center gap-4">
+              <span className="text-[11px] font-black tracking-widest uppercase">
+                {SITE_CONFIG.hero.secondaryAction}
               </span>
               <IconRenderer
                 name="ArrowRight"
-                size={16}
-                className="transition-transform duration-300 group-hover:translate-x-1"
+                size={18}
+                className="transition-transform group-hover:translate-x-1"
               />
             </Link>
           </Button>
         </motion.div>
       </div>
 
-      <div
-        className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent"
-        aria-hidden="true"
-      />
+      {/* Visual Anchor Bottom */}
+      <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" />
     </section>
   );
 };

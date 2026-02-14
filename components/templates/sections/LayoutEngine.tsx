@@ -1,13 +1,12 @@
 /**
- * [SYSTEM COMPONENT]: LAYOUT_ENGINE v17.9.1 (STABILIZED)
- * [STRATEGY]: Atmospheric Orchestration | Dynamic Theme Injection | Persona Sync
- * [MAINTAINER]: AEMDEVWEB Specialist Team (นายเอ็มซ่ามากส์)
+ * [SYSTEM COMPONENT]: LAYOUT_ENGINE v17.9.105 (ULTIMATE_STABILIZED)
+ * [STRATEGY]: Atmospheric Orchestration | Dynamic Theme Injection | Gap Matrix
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { CSSProperties, ReactNode } from "react";
 import React, { useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { SITE_CONFIG } from "@/constants/site-config";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 
 type SpacingLevel = "none" | "small" | "medium" | "large" | "specialist";
@@ -25,74 +24,77 @@ interface LayoutEngineProps {
 }
 
 const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutEngineProps) => {
-  // [SPACING_LOGIC]: การจัดระยะห่างแกน Y ระหว่าง Section ต่างๆ แบบ Responsive
+  /**
+   * [SPACING_LOGIC]: ระบบจัดระยะห่างแนวตั้งระหว่าง Section
+   * [FIXED]: นำไปใช้งานใน <main> เพื่อลด Warning และสร้าง Layout ที่สมดุล
+   */
   const spacingMap: Record<SpacingLevel, string> = {
     none: "gap-y-0",
-    small: "gap-y-16 md:gap-y-24",
-    medium: "gap-y-28 md:gap-y-40",
-    large: "gap-y-40 md:gap-y-56",
-    specialist: "gap-y-52 md:gap-y-80",
+    small: "gap-y-12 md:gap-y-20",
+    medium: "gap-y-24 md:gap-y-32",
+    large: "gap-y-32 md:gap-y-48",
+    specialist: "gap-y-40 md:gap-y-64",
   };
 
   const isTailwindBg = theme?.background?.startsWith("bg-");
 
-  // [THEME_INJECTION]: ฉีดตัวแปร CSS เพื่อควบคุมสีแบรนด์ในระดับ Component Tree
-  const dynamicStyles = useMemo(
-    () =>
-      ({
-        "--color-brand-primary": theme?.primary || "oklch(0.72 0.18 150)",
-        "--color-brand-secondary": theme?.secondary || "oklch(0.6 0.15 150)",
-        ...(!isTailwindBg && theme?.background && { "--color-surface-main": theme.background }),
-      }) as CSSProperties,
-    [theme, isTailwindBg],
-  );
+  /**
+   * [THEME_INJECTION]: กลไกการฉีดค่าสีเข้าสู่ CSS Runtime
+   * [FIX]: ใช้ backgroundColor (camelCase) เพื่อรองรับ React 19+ Strict Mode
+   */
+  const dynamicStyles = useMemo(() => {
+    const styles: Record<string, string | undefined> = {};
+
+    if (theme?.primary) {
+      styles["--brand-primary"] = theme.primary;
+      styles["--color-brand-primary"] = theme.primary;
+    }
+
+    if (theme?.secondary) {
+      styles["--brand-secondary"] = theme.secondary;
+      styles["--color-brand-secondary"] = theme.secondary;
+    }
+
+    // [ANTI-WHITE-FLASH]: ผูกค่าสีพื้นหลังเข้ากับสถาปัตยกรรมหลัก
+    if (!isTailwindBg && theme?.background) {
+      styles["--surface-main"] = theme.background;
+      styles["backgroundColor"] = theme.background;
+    }
+
+    return styles as CSSProperties;
+  }, [theme, isTailwindBg]);
+
+  const ambientColor = theme?.primary || "var(--brand-primary)";
 
   return (
     <div
       className={cn(
-        /* [FIX]: บังคับพื้นหลังและสีตัวอักษรให้ตรงกับ Theme หลัก เพื่อป้องกัน White Flash */
-        "relative flex min-h-screen w-full flex-col overflow-x-hidden transition-colors duration-1000",
+        "relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden transition-colors duration-1000",
+        "selection:bg-brand-primary/30 selection:text-brand-primary",
         isTailwindBg ? theme?.background : "bg-surface-main",
         className,
       )}
       style={dynamicStyles}
     >
-      {/* --- LAYER 01: ATMOSPHERIC EFFECTS --- */}
-      <AmbientBackground color={theme?.primary} opacity={0.15} />
+      {/* --- LAYER 01: ATMOSPHERIC EFFECTS (Fixed Infrastructure) --- */}
+      <div
+        className="bg-infrastructure-grid pointer-events-none fixed inset-0 z-0 opacity-[0.03]"
+        style={{ backgroundImage: "url(/grid-pattern.svg)" }}
+        aria-hidden="true"
+      />
 
-      {theme?.gradient && (
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-0 z-0 bg-gradient-to-b opacity-30 mix-blend-soft-light",
-            theme.gradient,
-          )}
-          aria-hidden="true"
-        />
-      )}
+      {/* [DYNAMIC_AURA]: พื้นหลังบรรยากาศที่เปลี่ยนตามสีแบรนด์ */}
+      <AmbientBackground color={ambientColor} opacity={0.15} />
 
       {/* --- LAYER 02: MAIN CONTENT HUB --- */}
-      <main className={cn("relative z-10 flex w-full flex-auto flex-col", spacingMap[spacing])}>
+      <main
+        className={cn(
+          "relative z-10 flex w-full flex-auto flex-col",
+          spacingMap[spacing], // [RESOLVED]: เรียกใช้งาน Spacing Matrix เรียบร้อย
+        )}
+      >
         {children}
       </main>
-
-      {/* --- LAYER 03: SYSTEM SIGNATURE (Persona Validation) --- */}
-      <footer className="relative z-10 container mx-auto mt-auto px-6 py-16">
-        <div className="border-border/10 flex flex-col items-center justify-between gap-8 border-t pt-10 md:flex-row">
-          <div className="flex items-center gap-5">
-            <div
-              className="h-2 w-2 animate-pulse rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_12px_var(--color-brand-primary)]"
-              aria-hidden="true"
-            />
-            <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-50">
-              {SITE_CONFIG.brandName} // Specialist_Node v{SITE_CONFIG.project.version}
-            </span>
-          </div>
-          <div className="text-text-muted flex items-center gap-10 font-mono text-[9px] font-bold tracking-[0.2em] uppercase opacity-30">
-            <span>Arch: Next.js_16.1.6</span>
-            <span>Persona: {SITE_CONFIG.expert.displayName}</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -1,137 +1,108 @@
 /**
- * [COMPONENT]: FEATURE_COMPARISON v17.9.2 (VALUE_PROPOSITION)
- * [STRATEGY]: Logical Contrast | High-Visibility | ROI-Centric
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [COMPONENT]: FEATURE_COMPARISON v17.9.103 (STABILIZED)
+ * [STRATEGY]: Glassmorphism Support | Dark Mode Logic | Strict Readonly Types
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import { Check, X, ShieldCheck } from "lucide-react";
+import React, { memo } from "react";
+import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
+import { cn } from "@/lib/utils";
 import type { ServiceFeature } from "@/types";
 
 interface FeatureComparisonProps {
+  // [FIXED]: ใช้ ServiceFeature และกำหนดเป็น readonly array ตามมาตรฐานที่ได้รับมอบหมาย
   readonly features?: readonly ServiceFeature[];
+  readonly accentColor?: string;
+  readonly isDark?: boolean;
 }
 
-export function FeatureComparison({ features }: FeatureComparisonProps) {
-  // [DATA]: เปรียบเทียบจุดเด่นของ AEM กับ ตลาดทั่วไป
-  const comparisonItems = [
-    {
-      label: "ความเร็วในการโหลด (Core Web Vitals)",
-      aem: true,
-      others: false,
-      detail: "โหลดเสร็จใน < 1 วินาที",
-    },
-    {
-      label: "โครงสร้าง Technical SEO ระดับสูง",
-      aem: true,
-      others: false,
-      detail: "รองรับ AI-Search 2026",
-    },
-    {
-      label: "ระบบความปลอดภัย (Security)",
-      aem: true,
-      others: "limited",
-      detail: "ป้องกันการ Hack 100%",
-    },
-    {
-      label: "Mobile-First Infrastructure",
-      aem: true,
-      others: true,
-      detail: "ใช้งานลื่นไหลบนมือถือ",
-    },
-    {
-      label: "การดูแลหลังการขาย (Tech Support)",
-      aem: true,
-      others: false,
-      detail: "วิศวกรดูแลโดยตรง 24/7",
-    },
-  ];
+export const FeatureComparison = memo(
+  ({ features, accentColor = "#e11d48", isDark = false }: FeatureComparisonProps) => {
+    // [SAFETY]: Gatekeeper ป้องกันการเรนเดอร์หากไม่มีข้อมูล
+    if (!features || features.length === 0) return null;
 
-  return (
-    <div className="mx-auto max-w-5xl px-4">
-      <div className="mb-12 text-center">
-        <h2 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
-          ทำไมต้องจ้าง{" "}
-          <span className="text-rose-600 underline decoration-rose-200 underline-offset-8">
-            AEMDEVWEB
-          </span>{" "}
-          ?
-        </h2>
-        <p className="mt-4 text-lg text-slate-600">
-          ไม่ใช่แค่ทำเว็บให้จบ แต่คือการลงทุนใน "สินทรัพย์ดิจิทัล" ที่สร้างรายได้จริง
-        </p>
-      </div>
-
-      <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-200/50">
-        <table className="w-full border-collapse text-left">
-          <thead>
-            <tr className="bg-slate-50">
-              <th className="p-6 text-sm font-bold tracking-wider text-slate-500 uppercase">
-                คุณสมบัติ
-              </th>
-              <th className="bg-rose-50/50 p-6 text-center text-sm font-bold tracking-wider text-rose-600 uppercase">
-                AEM Solution
-              </th>
-              <th className="p-6 text-center text-sm font-bold tracking-wider text-slate-400 uppercase">
-                จ้างราคาถูกทั่วไป
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {comparisonItems.map((item, idx) => (
-              <tr key={idx} className="group transition-colors hover:bg-slate-50/50">
-                <td className="p-6">
-                  <p className="font-bold text-slate-900">{item.label}</p>
-                  <p className="mt-1 text-xs text-slate-400">{item.detail}</p>
-                </td>
-                <td className="bg-rose-50/30 p-6 text-center">
-                  <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                    <Check className="h-5 w-5" strokeWidth={3} />
-                  </div>
-                </td>
-                <td className="p-6 text-center">
-                  {item.others === true ? (
-                    <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-400">
-                      <Check className="h-5 w-5" strokeWidth={3} />
-                    </div>
-                  ) : item.others === "limited" ? (
-                    <span className="text-xs font-bold text-slate-400">บางส่วน</span>
-                  ) : (
-                    <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-full bg-rose-50 text-rose-300">
-                      <X className="h-5 w-5" strokeWidth={3} />
-                    </div>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {/* [TRUST_FOOTER]: ตอกย้ำความเชื่อมั่นท้ายตาราง */}
-        <div className="bg-slate-900 p-6 text-center text-white">
-          <div className="mb-2 flex items-center justify-center gap-2">
-            <ShieldCheck className="h-5 w-5 text-emerald-400" />
-            <span className="font-bold">คุ้มค่ากว่าในระยะยาว (High ROI)</span>
-          </div>
-          <p className="text-sm text-slate-400">
-            เราเน้นการแก้ปัญหาที่ต้นเหตุด้วยวิศวกรรม เพื่อให้เว็บของคุณทำงานแทนคุณได้จริง
-          </p>
+    return (
+      <div className="relative z-10 w-full">
+        {/* [01] SECTION HEADER: Branding & Scannability */}
+        <div className="mb-16 text-center">
+          <h3
+            style={{ color: accentColor }}
+            className="mb-4 text-xs font-black tracking-[0.3em] uppercase drop-shadow-sm"
+          >
+            Core Competencies
+          </h3>
+          <h2
+            className={cn(
+              "text-3xl leading-[0.9] font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-5xl",
+              isDark ? "text-white drop-shadow-lg" : "text-slate-900",
+            )}
+          >
+            จุดเด่นที่เหนือกว่า
+            <br />
+            <span className="font-thai text-2xl font-light tracking-normal not-italic opacity-50 md:text-4xl">
+              คู่แข่งในท้องตลาด
+            </span>
+          </h2>
         </div>
-      </div>
 
-      {/* [ADDITIONAL_FEATURES]: วนลูปข้อมูลจาก Registry จริง */}
-      {features && (
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
+        {/* [02] FEATURE GRID: Responsive Architecture */}
+
+        <div className="grid gap-6 md:grid-cols-3 md:gap-8 lg:gap-10">
+          {features.map((feature, idx) => (
             <div
-              key={index}
-              className="rounded-2xl border border-slate-100 p-6 transition-all hover:border-rose-100 hover:bg-rose-50/20"
+              key={`feat-comp-${idx}`}
+              className={cn(
+                "group relative rounded-[2.5rem] border p-8 transition-all duration-500 hover:-translate-y-2 md:p-10",
+                // [THEME_LOGIC]: สลับสไตล์ Glassmorphism ตามพื้นหลัง (isDark)
+                isDark
+                  ? "border-white/10 bg-white/5 backdrop-blur-sm hover:border-white/20 hover:bg-white/10 hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)]"
+                  : "border-slate-100 bg-white hover:shadow-2xl hover:shadow-slate-200/50",
+              )}
             >
-              <h4 className="text-lg font-bold text-slate-900">{feature.title}</h4>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{feature.description}</p>
+              {/* Icon Container: Dynamic Branding Glow */}
+              <div
+                className="mb-8 flex h-16 w-16 items-center justify-center rounded-[1.5rem] text-white shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[10deg]"
+                style={{
+                  backgroundColor: accentColor,
+                  boxShadow: isDark
+                    ? `0 0 20px ${accentColor}60`
+                    : `0 20px 40px -10px ${accentColor}40`,
+                }}
+              >
+                <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
+              </div>
+
+              {/* Content Body: Contrast-Aware Text */}
+              <h4
+                className={cn(
+                  "mb-4 text-2xl font-black tracking-tight transition-colors",
+                  isDark ? "text-white" : "text-slate-900",
+                )}
+              >
+                {feature.title}
+              </h4>
+              <p
+                className={cn(
+                  "font-thai leading-relaxed transition-colors",
+                  isDark
+                    ? "text-slate-300 group-hover:text-white"
+                    : "text-slate-500 group-hover:text-slate-700",
+                )}
+              >
+                {feature.description}
+              </p>
+
+              {/* Decorative Element: Theme-Based Corner Glow */}
+              <div
+                className="absolute top-0 right-0 h-24 w-24 rounded-tr-[2.5rem] rounded-bl-[2.5rem] opacity-0 transition-opacity duration-500 group-hover:opacity-10"
+                style={{ backgroundColor: accentColor }}
+              />
             </div>
           ))}
         </div>
-      )}
-    </div>
-  );
-}
+      </div>
+    );
+  },
+);
+
+FeatureComparison.displayName = "FeatureComparison";

@@ -1,7 +1,6 @@
 /**
- * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v17.9.9 (PRODUCTION_STABILIZED)
- * [STRATEGY]: Two-Pass Rendering | Typed Routes Resolution | Zero-Jitter UI
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v17.9.29 (REFINED_DIMENSIONS)
+ * [STRATEGY]: Refined Typography | Neural Spacing | Zero-Jitter UI
  */
 
 "use client";
@@ -14,7 +13,6 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import type { IconName } from "@/components/ui/IconRenderer";
 
-// --- 01. DATA INFRASTRUCTURE ---
 interface ProcessStep {
   readonly id: string;
   readonly title: string;
@@ -61,7 +59,6 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
 ];
 
 const WorkProcess = () => {
-  // [STRATEGY]: Two-Pass Rendering เพื่อล้างข้อพิพาทระหว่าง Server/Client HTML
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -74,7 +71,7 @@ const WorkProcess = () => {
       className="relative container mx-auto flex w-full flex-col overflow-hidden px-4 py-24 md:px-6 lg:py-32"
     >
       {/* --- 01. SECTION HEADER --- */}
-      <header className="border-border mb-24 flex flex-col justify-between gap-12 border-b pb-12 md:mb-32 md:pb-16 lg:flex-row lg:items-end">
+      <header className="border-border mb-20 flex flex-col justify-between gap-12 border-b pb-12 md:mb-28 md:pb-16 lg:flex-row lg:items-end">
         <div className="max-w-3xl space-y-6">
           <div className="text-brand-primary flex items-center gap-4">
             <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
@@ -104,9 +101,9 @@ const WorkProcess = () => {
         </div>
       </header>
 
-      {/* --- 02. PROCESS NODES: Signal Flow Grid --- */}
+      {/* --- 02. PROCESS NODES --- */}
       <div className="relative grid gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4 lg:gap-8">
-        {/* Signal Flow Connector (Desktop Only) */}
+        {/* Signal Flow Connector */}
         <div
           className="from-brand-primary/20 via-brand-primary/40 to-brand-primary/20 absolute top-20 left-0 hidden h-px w-full bg-gradient-to-r lg:block"
           aria-hidden="true"
@@ -115,22 +112,22 @@ const WorkProcess = () => {
         {PROCESS_STEPS.map((step, index) => (
           <motion.div
             key={step.id}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ delay: index * 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="group relative"
           >
             <div
               className={cn(
-                "border-border bg-surface-card/60 hover:border-brand-primary/40 relative z-10 flex h-full flex-col overflow-hidden rounded-[2.5rem] border p-8 backdrop-blur-xl transition-all duration-700 md:p-10",
-                "hover:shadow-glow transform-gpu will-change-transform hover:-translate-y-4",
+                "border-border bg-surface-card/60 hover:border-brand-primary/40 relative z-10 flex h-full flex-col overflow-hidden rounded-[2rem] border p-8 backdrop-blur-xl transition-all duration-700 md:rounded-[2.5rem] md:p-10",
+                "hover:shadow-glow transform-gpu will-change-transform hover:-translate-y-3",
               )}
             >
-              {/* [FIXED NODE]: พื้นหลังตัวเลขลำดับ (Client-Side Only Visibility) */}
+              {/* [REFINED NODE]: ปรับขนาดตัวเลขเลเยอร์หลังให้เล็กลงและคมชัดขึ้น */}
               <span
                 suppressHydrationWarning
-                className="text-border/5 group-hover:text-brand-primary/10 pointer-events-none absolute top-2 -left-4 z-0 font-sans text-[8rem] leading-none font-black transition-all duration-700 md:text-[10rem]"
+                className="text-border/10 group-hover:text-brand-primary/20 pointer-events-none absolute top-4 right-6 z-0 font-mono text-5xl font-black italic transition-all duration-700 md:text-7xl"
                 style={{
                   opacity: isClient ? undefined : 0,
                   visibility: isClient ? "visible" : "hidden",
@@ -184,9 +181,9 @@ const WorkProcess = () => {
       </div>
 
       {/* --- 03. CONVERSION GATEWAY --- */}
-      <div className="mt-24 flex flex-col items-center text-center md:mt-32">
+      <div className="mt-20 flex flex-col items-center text-center md:mt-32">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="max-w-4xl space-y-10 md:space-y-12"
@@ -196,7 +193,6 @@ const WorkProcess = () => {
           </h3>
 
           <div className="flex flex-col items-center gap-6 md:gap-8">
-            {/* [FIXED]: ใช้แท็ก <a> ร่วมกับ target="_blank" สำหรับลิงก์ภายนอก เพื่อแก้ปัญหา Next.js Typed Routes (TS2322) */}
             <Button
               asChild
               size="lg"
@@ -213,8 +209,7 @@ const WorkProcess = () => {
                 />
               </a>
             </Button>
-
-            <p className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-30 md:text-[10px] md:tracking-[0.5em]">
+            <p className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-30 md:text-[10px]">
               System_Awaiting_Signal
             </p>
           </div>

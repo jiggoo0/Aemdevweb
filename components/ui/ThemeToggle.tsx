@@ -1,7 +1,7 @@
 /**
- * [SYSTEM COMPONENT]: THEME_TOGGLE_ORCHESTRATOR v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Hydration-Safe State | Neural Physics | Adaptive Glow Engine
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [SYSTEM COMPONENT]: THEME_TOGGLE_ORCHESTRATOR v17.9.60 (STABILIZED)
+ * [STRATEGY]: Hydration-Safe State | GPU-Accelerated Physics | Zero-Layout Shift
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -12,25 +12,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-/**
- * @component ThemeToggle
- * @description หน่วยสลับโหมดการแสดงผลที่ใช้ Neural Animation Curve
- * [ENGINEERING]: ใช้ resolvedTheme เพื่อความแม่นยำในโหมด System Preference
- */
 const ThemeToggle = () => {
+  // [LOGIC]: ใช้ resolvedTheme เพื่อให้รู้ว่า System จริงๆ ตอนนี้เป็น Dark หรือ Light
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // [LOGIC]: Hydration Guard - ป้องกันปัญหา State Mismatch
+  // [HYDRATION_GUARD]: ป้องกันปุ่มกระพริบผิดสีตอนโหลดหน้าเว็บ
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // [ZERO_CLS]: Skeleton State ที่มีขนาดเท่าปุ่มจริง 100%
+  // [FALLBACK_UI]: แสดง Placeholder ขนาดเท่าจริงเพื่อป้องกัน Layout Shift
   if (!mounted) {
     return (
       <div
-        className="border-border/50 bg-surface-card h-10 w-10 rounded-xl border opacity-50"
+        className="h-10 w-10 rounded-xl border border-white/10 bg-white/5 opacity-50"
         aria-hidden="true"
       />
     );
@@ -40,56 +36,42 @@ const ThemeToggle = () => {
 
   return (
     <button
-      type="button" // [SAFETY]: ป้องกัน Form Submission โดยไม่ตั้งใจ
+      type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         "group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl",
-        "border-border/50 bg-surface-card border transition-all duration-500",
-        "hover:border-brand-primary/50 hover:shadow-glow active:scale-95",
-        "transform-gpu will-change-transform", // [PERFORMANCE]: GPU Acceleration
+        "border border-white/10 bg-white/5 transition-all duration-500",
+        "hover:border-brand-primary/50 hover:shadow-glow active:scale-90",
+        // [PERFORMANCE]: บังคับใช้ GPU ในการวาด Animation
+        "transform-gpu will-change-transform",
       )}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
-          key={isDark ? "dark-icon" : "light-icon"}
-          /* [NEURAL_PHYSICS]: การเคลื่อนไหวแบบพุ่งออกและหมุนวนนุ่มนวล (Specialist Curve) */
-          initial={{ y: 15, opacity: 0, rotate: -90, filter: "blur(4px)" }}
-          animate={{ y: 0, opacity: 1, rotate: 0, filter: "blur(0px)" }}
-          exit={{ y: -15, opacity: 0, rotate: 90, filter: "blur(4px)" }}
+          key={isDark ? "dark" : "light"}
+          initial={{ y: 10, opacity: 0, rotate: -45 }}
+          animate={{ y: 0, opacity: 1, rotate: 0 }}
+          exit={{ y: -10, opacity: 0, rotate: 45 }}
           transition={{
-            duration: 0.45,
-            ease: [0.16, 1, 0.3, 1],
+            duration: 0.3,
+            ease: [0.23, 1, 0.32, 1], // Specialist "Out-Quint" Curve (นุ่มนวลและดูแพง)
           }}
-          className="relative z-10 flex items-center justify-center"
+          className="relative z-10"
         >
           <IconRenderer
             name={isDark ? "Moon" : "Sun"}
             size={18}
-            strokeWidth={2.5}
-            className={cn(
-              "transition-colors duration-500",
-              isDark ? "text-brand-primary" : "text-amber-500",
-            )}
+            className={isDark ? "text-brand-primary" : "text-amber-400"}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Atmospheric Glow: สร้างบรรยากาศรอบปุ่มตามสถานะโหมด */}
+      {/* Atmospheric Glow: แสงเรืองรองเมื่อเอาเมาส์ไปวาง */}
       <div
         className={cn(
           "absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100",
-          isDark ? "bg-brand-primary/10" : "bg-amber-500/10",
-        )}
-      />
-
-      {/* Neural Indicator: จุดระบุสถานะขนาดเล็ก */}
-      <div
-        className={cn(
-          "absolute top-1.5 right-1.5 h-1 w-1 rounded-full transition-all duration-500",
-          isDark
-            ? "bg-brand-primary scale-125 shadow-[0_0_8px_var(--color-brand-primary)]"
-            : "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]",
+          isDark ? "bg-brand-primary/10" : "bg-amber-400/10",
         )}
       />
     </button>

@@ -1,242 +1,207 @@
 /**
- * [LAYOUT COMPONENT]: SYSTEM_NAVBAR v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Optimized Hit Area | Typed Routes Resolution | Zero-Jitter UI
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [COMPONENT]: NAV_BAR v17.9.115 (STABILIZED)
+ * [STRATEGY]: Bezier Motion | Compact Overlay | Glassmorphism
+ * [MAINTAINER]: AEMZA MACKS
  */
 
 "use client";
-import type { Route } from "next";
 
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-
-import { SITE_CONFIG } from "@/constants/site-config";
+import type { Variants, BezierDefinition } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { MAIN_NAV } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
-
-import IconRenderer from "@/components/ui/IconRenderer";
-import { Button } from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+// --- 1. Animation Configuration (Strict Types) ---
+const appleEase: BezierDefinition = [0.16, 1, 0.3, 1]; // พริ้วไหวแบบ iOS
+
+const menuVariants: Variants = {
+  initial: { opacity: 0, scale: 0.95, y: -20 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: appleEase },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.95,
+    y: -20,
+    transition: { duration: 0.3, ease: appleEase },
+  },
+};
+
+const linkVariants: Variants = {
+  initial: { x: -10, opacity: 0 },
+  open: { x: 0, opacity: 1, transition: { duration: 0.4, ease: appleEase } },
+};
+
+const containerVars: Variants = {
+  initial: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
+  open: { transition: { delayChildren: 0.2, staggerChildren: 0.07, staggerDirection: 1 } },
+};
+
+export default function Navbar() {
+  const [hidden, setHidden] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { scrollY } = useScroll();
   const pathname = usePathname();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // Smart Scroll Logic
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) setHidden(true);
+    else setHidden(false);
+  });
 
+  // Body Lock
   useEffect(() => {
-    const handleScroll = () => {
-      window.requestAnimationFrame(() => {
-        setIsScrolled(window.scrollY > 30);
-      });
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
 
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isMobileMenuOpen]);
+  // Auto Close on route change
+  useEffect(() => setOpen(false), [pathname]);
 
   return (
     <>
-      <header
-        className={cn(
-          "pointer-events-none fixed inset-x-0 top-0 z-[100] flex justify-center transition-all duration-700 ease-[0.16,1,0.3,1]",
-          isScrolled ? "pt-6 md:pt-8" : "pt-0",
-        )}
+      <motion.header
+        variants={{
+          visible: { y: 0, opacity: 1 },
+          hidden: { y: -100, opacity: 0 },
+        }}
+        animate={hidden ? "hidden" : "visible"}
+        transition={{ duration: 0.4, ease: appleEase }}
+        className="fixed top-0 left-0 z-[100] w-full px-4 py-4 md:px-8"
       >
-        <nav
-          suppressHydrationWarning
-          className={cn(
-            "pointer-events-auto transition-all duration-1000 ease-[0.16,1,0.3,1]",
-            isScrolled
-              ? "border-border/50 bg-surface-main/80 shadow-pro-xl w-[96%] max-w-7xl rounded-[2.5rem] border backdrop-blur-2xl"
-              : "border-border/10 bg-surface-main/30 w-full border-b backdrop-blur-sm",
-          )}
-        >
-          <div
-            className={cn(
-              "relative flex items-center justify-between px-6 py-3 md:px-8",
-              isScrolled ? "min-h-[72px]" : "min-h-[88px]",
-            )}
+        <div className="bg-surface-main/70 mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full border border-white/10 px-6 shadow-xl ring-1 ring-black/5 backdrop-blur-xl">
+          {/* LOGO */}
+          <Link
+            href="/"
+            className="z-[110] flex items-center gap-2 text-xl font-black tracking-tighter transition-transform active:scale-95"
+            onClick={() => setOpen(false)}
           >
-            {/* NODE A: BRAND IDENTITY */}
-            <Link href="/" className="group flex items-center gap-5 outline-none select-none">
-              <div className="bg-text-primary text-surface-main relative flex h-11 w-11 items-center justify-center rounded-[1rem] shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:rotate-12">
-                <IconRenderer
-                  name="Cpu"
-                  size={22}
-                  strokeWidth={2.5}
-                  className="text-surface-main"
-                />
-              </div>
-              <div className="hidden flex-col leading-none md:flex">
-                <span className="text-text-primary font-sans text-xl font-black tracking-tighter uppercase italic">
-                  {SITE_CONFIG.brandName}
-                </span>
-                <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
-                  SYSTEM_CORE.v{mounted ? SITE_CONFIG.project.version : "---"}
-                </span>
-              </div>
-            </Link>
+            <span className="text-brand-primary">AEM</span>
+            <span className="text-text-primary">DEVWEB</span>
+          </Link>
 
-            {/* NODE B: DESKTOP NAVIGATION */}
-            <div className="border-border/40 bg-surface-offset/40 hidden items-center gap-1 rounded-2xl border p-1.5 backdrop-blur-md lg:flex">
-              {MAIN_NAV.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  /* [FIXED]: ใช้ as Route สำหรับ internal dynamic paths เพื่อผ่าน Typed Routes check */
-                  <Link
-                    key={item.href}
-                    href={item.href as Route}
-                    className={cn(
-                      "relative flex items-center gap-2 rounded-xl px-5 py-2.5 text-[10px] font-black tracking-[0.2em] uppercase transition-all duration-500",
-                      isActive
-                        ? "bg-brand-primary text-surface-main shadow-glow"
-                        : "text-text-secondary hover:bg-surface-card hover:text-text-primary",
-                    )}
-                  >
-                    {item.href === "/status" && (
-                      <div className="relative mr-2 h-1.5 w-1.5">
-                        <div
-                          className={cn(
-                            "absolute inset-0 animate-ping rounded-full opacity-40",
-                            isActive ? "bg-surface-main" : "bg-emerald-500",
-                          )}
-                        />
-                        <div
-                          className={cn(
-                            "relative h-1.5 w-1.5 rounded-full",
-                            isActive ? "bg-surface-main" : "bg-emerald-500",
-                          )}
-                        />
-                      </div>
-                    )}
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* NODE C: INTERFACE CONTROLS */}
-            <div className="flex items-center gap-3 md:gap-5">
-              <ThemeToggle />
-
-              {/* [FIXED]: เปลี่ยนเป็น <a> สำหรับ External Link เพื่อแก้ TS2322 */}
-              <Button
-                asChild
-                className="bg-text-primary text-surface-main shadow-glow hover:bg-brand-primary hidden h-12 rounded-2xl px-8 text-[11px] font-black tracking-widest uppercase transition-all duration-500 md:flex"
-              >
-                <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
-                  <IconRenderer name="MessageCircle" size={16} className="mr-3" />
-                  Initiate Project
-                </a>
-              </Button>
-
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                suppressHydrationWarning
-                aria-label="Toggle Menu"
+          {/* DESKTOP NAV */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {MAIN_NAV.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
                 className={cn(
-                  "border-border/50 bg-surface-card text-text-primary hover:border-brand-primary/50 relative z-50 flex items-center justify-center rounded-2xl border transition-all lg:hidden",
-                  "h-12 w-12 cursor-pointer touch-manipulation select-none active:scale-95",
+                  "hover:text-brand-primary relative text-sm font-bold tracking-widest uppercase transition-colors",
+                  pathname === link.href ? "text-brand-primary" : "text-text-secondary",
                 )}
               >
-                <IconRenderer
-                  name={isMobileMenuOpen ? "X" : "Menu"}
-                  size={24}
-                  className="pointer-events-none"
-                />
-              </button>
-            </div>
-          </div>
-        </nav>
-      </header>
+                {link.label}
+                {pathname === link.href && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="bg-brand-primary absolute -bottom-1 left-0 h-1 w-full rounded-full"
+                  />
+                )}
+              </Link>
+            ))}
+            <div className="h-4 w-px bg-white/20" />
+            <ThemeToggle />
+          </nav>
 
-      {/* NODE D: MOBILE OVERLAY */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(32px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.5 }}
-            className="bg-surface-main/95 fixed inset-0 z-[90] flex flex-col lg:hidden"
-          >
-            <div className="flex h-full flex-col overflow-y-auto px-6 pt-36 pb-12">
-              <nav className="flex-1 space-y-4">
-                {MAIN_NAV.map((item, idx) => {
-                  const isActive = pathname === item.href;
-                  return (
-                    <motion.div
-                      key={item.href}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: idx * 0.05 + 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      <Link
-                        href={item.href as Route}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={cn(
-                          "group flex items-center justify-between rounded-[2.5rem] border p-6 transition-all duration-700 md:p-8",
-                          isActive
-                            ? "border-brand-primary/50 bg-brand-primary text-surface-main shadow-glow"
-                            : "border-border/50 bg-surface-card text-text-primary",
-                        )}
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
-                            {item.label}
-                          </span>
-                        </div>
-                        <div
-                          className={cn(
-                            "flex h-10 w-10 items-center justify-center rounded-full",
-                            isActive ? "bg-surface-main/20" : "bg-surface-offset",
-                          )}
-                        >
-                          <IconRenderer name="ArrowRight" size={20} />
-                        </div>
-                      </Link>
-                    </motion.div>
-                  );
-                })}
-              </nav>
-              <div className="mt-10">
-                {/* [FIXED]: เปลี่ยนเป็น <a> สำหรับ Mobile CTA ลิงก์ภายนอก */}
-                <Button
-                  asChild
-                  className="bg-text-primary text-surface-main h-20 w-full rounded-[2rem] text-[13px] font-black tracking-[0.4em] uppercase"
-                >
-                  <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
-                    Contact Specialist Node
-                  </a>
-                </Button>
+          {/* MOBILE TOGGLE */}
+          <div className="flex items-center gap-4 lg:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen(!open)}
+              className="bg-brand-primary relative z-[110] flex h-10 w-10 items-center justify-center rounded-full text-white shadow-lg transition-transform active:scale-90"
+              aria-label="Toggle Menu"
+            >
+              <div className="relative flex h-5 w-5 flex-col justify-between overflow-hidden">
+                <span
+                  className={cn(
+                    "h-0.5 w-full bg-current transition-all duration-300",
+                    open ? "translate-y-2.5 rotate-45" : "",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "h-0.5 w-full bg-current transition-all duration-300",
+                    open ? "opacity-0" : "",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "h-0.5 w-full bg-current transition-all duration-300",
+                    open ? "translate-x-0 -translate-y-2 -rotate-45" : "",
+                  )}
+                />
               </div>
-            </div>
-          </motion.div>
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* COMPACT MOBILE MENU */}
+      <AnimatePresence>
+        {open && (
+          <div className="fixed inset-0 z-[90] flex items-start justify-center px-4 pt-24 pb-10">
+            {/* Backdrop Layer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+
+            {/* Menu Card Layer */}
+            <motion.div
+              variants={menuVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="bg-surface-main/90 relative w-full max-w-sm overflow-hidden rounded-[2.5rem] border border-white/20 p-8 shadow-2xl backdrop-blur-2xl"
+            >
+              <motion.div
+                variants={containerVars}
+                initial="initial"
+                animate="open"
+                exit="initial"
+                className="flex flex-col gap-3"
+              >
+                <span className="text-brand-primary mb-2 text-[10px] font-black tracking-[0.3em] uppercase">
+                  Main Menu
+                </span>
+                {MAIN_NAV.map((link, index) => (
+                  <motion.div key={index} variants={linkVariants}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "block text-3xl font-black tracking-tight transition-all hover:translate-x-2",
+                        pathname === link.href
+                          ? "text-brand-primary translate-x-2"
+                          : "text-text-primary",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <div className="mt-8 border-t border-white/10 pt-6">
+                <p className="text-text-muted text-[10px] font-bold tracking-widest uppercase">
+                  © {new Date().getFullYear()} AEMDEVWEB Specialist
+                </p>
+              </div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>
   );
-};
-
-export default memo(Navbar);
+}

@@ -1,106 +1,143 @@
 /**
- * [COMPONENT]: SALE_HERO v17.9.2 (LCP_OPTIMIZED)
- * [STRATEGY]: FetchPriority High | Layout Stability | Product-Centric UI
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [COMPONENT]: SALE_HERO v17.9.100 (THEME_ADAPTIVE)
+ * [STRATEGY]: Transparent Base | Glassmorphism Container | LCP Optimized
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import Image from "next/image";
-import { MoveRight } from "lucide-react";
+import { MoveRight, ShieldCheck } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
 interface SaleHeroProps {
   readonly title: string | ReactNode;
   readonly description: string;
   readonly image?: string;
+  readonly accentColor?: string;
+  readonly className?: string; // [FIX]: รับ Class สีตัวอักษรจาก Parent
 }
 
-export function SaleHero({ title, description, image }: SaleHeroProps) {
+export const SaleHero = ({
+  title,
+  description,
+  image,
+  accentColor = "#e11d48",
+  className,
+}: SaleHeroProps) => {
   return (
-    <section className="relative overflow-hidden bg-white pt-16 pb-20 lg:pt-24 lg:pb-32">
+    <section className={cn("relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-32", className)}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="items-center lg:grid lg:grid-cols-12 lg:gap-16">
           {/* [01] COPYWRITING COLUMN (THE HOOK) */}
-          <div className="lg:col-span-7 xl:col-span-6">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-rose-50 px-3 py-1 text-sm font-semibold text-rose-600 ring-1 ring-rose-600/20 ring-inset">
-              <span>ลดราคาพิเศษสำหรับ 5 ท่านแรกของวัน</span>
+          <div className="relative z-10 lg:col-span-7 xl:col-span-6">
+            {/* Dynamic Badge: Branding Isolation */}
+            <div
+              style={{
+                backgroundColor: `${accentColor}15`, // 15% Opacity
+                color: accentColor,
+                borderColor: `${accentColor}40`,
+              }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-black tracking-[0.2em] uppercase backdrop-blur-sm"
+            >
+              <div
+                className="h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_10px_currentColor]"
+                style={{ backgroundColor: accentColor }}
+              />
+              <span>Limited Time Offer</span>
             </div>
 
-            <h1 className="text-4xl leading-[1.1] font-extrabold tracking-tight text-slate-900 sm:text-5xl xl:text-6xl">
-              <span className="block text-slate-900">{title}</span>
+            <h1 className="text-4xl leading-[1.1] font-black tracking-tighter uppercase italic drop-shadow-lg sm:text-5xl xl:text-7xl">
+              {title}
             </h1>
 
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">{description}</p>
+            <p className="font-thai mt-6 max-w-2xl text-lg leading-relaxed opacity-85 mix-blend-plus-lighter">
+              {description}
+            </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center">
+              {/* Primary CTA: High-Contrast Interaction */}
               <a
                 href="#order"
-                className="group inline-flex items-center justify-center rounded-xl bg-rose-600 px-8 py-4 text-lg font-bold text-white shadow-lg shadow-rose-200 transition-all hover:bg-rose-700 hover:shadow-xl active:scale-95"
+                style={{
+                  backgroundColor: accentColor,
+                  boxShadow: `0 0 20px -5px ${accentColor}`,
+                }}
+                className="group relative inline-flex items-center justify-center overflow-hidden rounded-2xl px-10 py-5 text-xl font-black text-white transition-all hover:scale-105 hover:shadow-2xl hover:brightness-110 active:scale-95"
               >
-                สั่งซื้อตอนนี้
-                <MoveRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <span className="relative z-10 flex items-center gap-2">
+                  สั่งซื้อทันที
+                  <MoveRight className="h-6 w-6 transition-transform group-hover:translate-x-2" />
+                </span>
+                {/* Shine Effect */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
               </a>
-              <div className="flex items-center gap-3 px-2">
-                <div className="flex -space-x-2">
+
+              {/* Social Proof */}
+              <div className="flex items-center gap-4 px-2">
+                <div className="flex -space-x-3">
                   {[1, 2, 3].map((i) => (
                     <div
                       key={i}
-                      className="h-10 w-10 rounded-full border-2 border-white bg-slate-200"
+                      className="h-10 w-10 rounded-full border-2 border-white/10 bg-white/20 backdrop-blur-md"
                     />
                   ))}
                 </div>
-                <p className="text-sm font-medium text-slate-500">
-                  <span className="font-bold text-slate-900">1,200+</span> คนไทยไว้วางใจ
-                </p>
+                <div className="flex flex-col">
+                  <span className="text-lg leading-none font-black opacity-90">1,200+</span>
+                  <span className="text-[10px] font-bold tracking-widest uppercase opacity-60">
+                    Happy Clients
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* [02] VISUAL COLUMN (THE PRODUCT - LCP PRIORITY) */}
+          {/* [02] VISUAL COLUMN (THE PRODUCT - LCP DOMINANCE) */}
           <div className="relative mt-16 lg:col-span-5 lg:mt-0 xl:col-span-6">
             <div className="relative mx-auto max-w-[500px] lg:max-w-none">
-              {/* Background Decorative Element */}
-              <div className="absolute -top-10 -right-10 h-64 w-64 rounded-full bg-rose-50 blur-3xl" />
+              {/* Dynamic Glow Element (Backlight) */}
+              <div
+                style={{ backgroundColor: accentColor }}
+                className="pointer-events-none absolute top-1/2 left-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-[120px]"
+              />
 
-              {/* [IMAGE_ENGINEERING]: 
-                  - priority={true}: บอก Next.js ให้โหลดรูปนี้ทันทีโดยไม่รอ Lazy load
-                  - fetchPriority="high": บอก Browser ให้จัดคิวโหลดรูปนี้เป็นอันดับ 1
-                  - fill: ให้รูปขยายเต็ม Container ที่เราจองพื้นที่ไว้ (Aspect Ratio 1:1)
-              */}
-              <div className="relative aspect-square w-full overflow-hidden rounded-3xl shadow-2xl ring-1 ring-slate-200">
+              {/* Glassmorphism Container */}
+              <div className="relative aspect-square w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl backdrop-blur-sm">
                 {image ? (
                   <Image
                     src={image}
                     alt={typeof title === "string" ? title : "Product Showcase"}
                     fill
                     priority={true}
-                    fetchPriority="high"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    className="object-cover transition-transform duration-1000 hover:scale-105"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-100 text-slate-400">
-                    Product Image Placeholder
+                  <div className="flex h-full w-full flex-col items-center justify-center p-8 text-center opacity-30">
+                    <div className="mb-4 h-20 w-20 animate-pulse rounded-full bg-white/10" />
+                    <span className="font-mono text-xs tracking-widest uppercase">
+                      Visual_Placeholder
+                    </span>
                   </div>
                 )}
               </div>
 
-              {/* Float Trust Badge (มนุษย์ไทยชอบเห็นตราประทับ) */}
-              <div className="absolute -bottom-6 -left-6 flex items-center gap-3 rounded-2xl bg-white p-4 shadow-xl ring-1 ring-slate-100">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+              {/* Floating Trust Shield (Glass Style) */}
+              <div className="shadow-pro-xl absolute -bottom-6 -left-6 hidden items-center gap-4 rounded-[2rem] border border-white/20 bg-white/10 p-5 backdrop-blur-xl md:flex">
+                <div
+                  style={{
+                    backgroundColor: accentColor,
+                    boxShadow: `0 0 15px ${accentColor}40`,
+                  }}
+                  className="flex h-12 w-12 items-center justify-center rounded-xl text-white"
+                >
+                  <ShieldCheck size={24} strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-                    Quality Verified
+                  <p className="text-[10px] font-black tracking-widest uppercase opacity-50">
+                    100% Guaranteed
                   </p>
-                  <p className="text-sm font-bold text-slate-900">รับประกันคุณภาพ 100%</p>
+                  <p className="text-sm font-bold opacity-90">คุณภาพระดับสากล</p>
                 </div>
               </div>
             </div>
@@ -109,4 +146,4 @@ export function SaleHero({ title, description, image }: SaleHeroProps) {
       </div>
     </section>
   );
-}
+};

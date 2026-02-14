@@ -1,14 +1,28 @@
 /**
- * [SEO ENGINE]: JSON_LD_GRAPH_ORCHESTRATOR v17.9.9 (STABILIZED)
- * [STRATEGY]: Entity Interlinking | identity-First | Rich Snippet Guard
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.105 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Unified Entity Graph | Product & Local SEO Synergy | Zero-Any Policy
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
-import type { AreaNode, ServiceData } from "@/types";
+import type { AreaNode, UniversalTemplateProps, TemplateMasterData } from "@/types";
 
-// --- [ROOT NODES: STATIC ENTITIES] ---
+// --- [INTERNAL: CORE NODES] ---
+
+/**
+ * [ENTITY]: sameAsLinks
+ * รวบรวม Social Profiles เพื่อยืนยันตัวตน (Identity Verification) ใน Knowledge Graph
+ * รองรับการฉีดลิงก์ Facebook ใหม่จาก SITE_CONFIG อัตโนมัติ
+ */
+const sameAsLinks = [
+  SITE_CONFIG.links.facebook,
+  SITE_CONFIG.links.youtube,
+  SITE_CONFIG.links.twitter,
+  SITE_CONFIG.links.github,
+  SITE_CONFIG.links.line,
+  SITE_CONFIG.links.googleMaps,
+].filter((link): link is string => !!link);
 
 const websiteNode = {
   "@type": "WebSite",
@@ -16,8 +30,8 @@ const websiteNode = {
   url: SITE_CONFIG.siteUrl,
   name: SITE_CONFIG.brandName,
   publisher: { "@id": absoluteUrl("/#organization") },
-  inLanguage: "th-TH",
-};
+  inLanguage: SITE_CONFIG.locale.replace("_", "-"), // th-TH
+} as const;
 
 const organizationNode = {
   "@type": "ProfessionalService",
@@ -27,9 +41,14 @@ const organizationNode = {
   logo: {
     "@type": "ImageObject",
     "@id": absoluteUrl("/#logo"),
-    url: absoluteUrl("/icon-192.png"),
+    url: absoluteUrl(SITE_CONFIG.logo),
+    caption: SITE_CONFIG.brandName,
   },
-  image: absoluteUrl("/images/og-main.webp"),
+  image: {
+    "@type": "ImageObject",
+    url: absoluteUrl(SITE_CONFIG.ogImage),
+  },
+  sameAs: sameAsLinks,
   address: {
     "@type": "PostalAddress",
     streetAddress: SITE_CONFIG.contact.streetAddress,
@@ -38,65 +57,37 @@ const organizationNode = {
     postalCode: SITE_CONFIG.contact.postalCode,
     addressCountry: "TH",
   },
-};
+} as const;
 
 const personNode = {
   "@type": "Person",
   "@id": absoluteUrl("/#expert"),
   name: SITE_CONFIG.expert.legalNameThai,
+  alternateName: SITE_CONFIG.expert.displayName,
   jobTitle: SITE_CONFIG.expert.jobTitle,
   image: absoluteUrl(SITE_CONFIG.expert.avatar),
   url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
   worksFor: { "@id": absoluteUrl("/#organization") },
-};
+  description: SITE_CONFIG.expert.bio,
+} as const;
 
-// --- [GENERATORS: DYNAMIC ENTITIES] ---
+// --- [EXPORTED GENERATORS] ---
 
-/**
- * @function generatePersonSchema
- * @description กู้คืนฟังก์ชันสำหรับหน้า About เพื่อยืนยันตัวตนผู้เชี่ยวชาญ (E-E-A-T)
- * [RESOLVED]: แก้ไขปัญหา Error TS2305 ในหน้า About
- */
-export function generatePersonSchema(): Record<string, unknown> {
-  return personNode;
-}
+export const generatePersonSchema = () => personNode;
 
 /**
  * @function generateSchemaGraph
- * @description รวมโหนดทั้งหมดเข้าเป็นก้อนเดียว (Normalized Graph)
- * [FIXED]: เปลี่ยนจาก any[] เป็น Record<string, unknown>[] เพื่อผ่าน Lint
+ * @description รวม Nodes เข้าเป็น Graph เพื่อเพิ่มน้ำหนัก SEO (Semantic interlinking)
  */
 export const generateSchemaGraph = (schemas: Record<string, unknown>[]) => ({
   "@context": "https://schema.org",
   "@graph": [websiteNode, organizationNode, personNode, ...schemas],
 });
 
-export const generateServiceSchema = (service: ServiceData) => ({
-  "@type": "Service",
-  "@id": absoluteUrl(`/services/${service.templateSlug}/#service`),
-  name: service.title,
-  description: service.description,
-  provider: { "@id": absoluteUrl("/#organization") },
-  offers: {
-    "@type": "Offer",
-    price: service.priceValue || 0,
-    priceCurrency: service.currency || "THB",
-  },
-});
-
-export const generateLocalBusinessSchema = (area: AreaNode) => ({
-  "@type": "LocalBusiness",
-  "@id": absoluteUrl(`/areas/${area.slug}/#localbusiness`),
-  name: `${SITE_CONFIG.brandName} - ${area.province}`,
-  url: absoluteUrl(`/areas/${area.slug}`),
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: area.province,
-    addressCountry: "TH",
-  },
-  parentOrganization: { "@id": absoluteUrl("/#organization") },
-});
-
+/**
+ * @function generateBreadcrumbSchema
+ * @description สร้าง Breadcrumb เพื่อให้ Google แสดง Path ในหน้า Search
+ */
 export const generateBreadcrumbSchema = (items: { name: string; item: string }[]) => ({
   "@type": "BreadcrumbList",
   itemListElement: items.map((it, idx) => ({
@@ -106,3 +97,112 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
     item: absoluteUrl(it.item),
   })),
 });
+
+/**
+ * [MASTER]: generateUniversalSchema
+ * @description ฟังก์ชันหลักรองรับทุกเทมเพลต (Corporate, SalePage, Catalog, Hotel, Bio, SEO)
+ */
+export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData) {
+  const canonicalUrl = absoluteUrl(
+    data.category === "business"
+      ? `/services/${data.templateSlug}`
+      : `/areas/${data.id?.replace("NODE-", "").toLowerCase() || data.templateSlug}`,
+  );
+
+  const social = (data as UniversalTemplateProps).socialProof;
+  const pricing = (data as UniversalTemplateProps).regionalPricing;
+
+  const mainType = ["salepage", "catalog"].includes(data.templateSlug)
+    ? "Product"
+    : "ProfessionalService";
+
+  const baseNode: Record<string, unknown> = {
+    "@type": mainType,
+    "@id": `${canonicalUrl}/#main`,
+    name: data.title,
+    description: data.description,
+    image: data.image ? absoluteUrl(data.image) : undefined,
+    url: canonicalUrl,
+    brand: { "@id": absoluteUrl("/#organization") },
+    provider: { "@id": absoluteUrl("/#organization") },
+  };
+
+  if (mainType === "ProfessionalService") {
+    const isAreaPage = data.category === "area" || (data.id && data.id.startsWith("NODE-"));
+    if (isAreaPage) {
+      const province = data.title.replace("รับทำเว็บไซต์", "").trim();
+      baseNode.address = {
+        "@type": "PostalAddress",
+        addressLocality: province,
+        addressRegion: province,
+        addressCountry: "TH",
+      };
+    } else {
+      baseNode.address = organizationNode.address;
+    }
+  }
+
+  if (social) {
+    baseNode.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: social.rating,
+      reviewCount: social.reviewCount,
+      bestRating: "5",
+      worstRating: "1",
+    };
+  }
+
+  if (data.priceValue || pricing) {
+    baseNode.offers = {
+      "@type": "Offer",
+      price:
+        data.priceValue ||
+        (pricing?.startPrice ? parseInt(pricing.startPrice.replace(/[^0-9]/g, "")) : 0),
+      priceCurrency: data.currency || "THB",
+      availability: "https://schema.org/InStock",
+      priceValidUntil:
+        data.templateSlug === "salepage"
+          ? new Date(Date.now() + 7776000000).toISOString().split("T")[0]
+          : undefined,
+    };
+  }
+
+  return baseNode;
+}
+
+/**
+ * [SPECIALIST]: generateLocalBusinessSchema
+ */
+export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaNode) {
+  const isUniversal = "templateSlug" in data;
+  const slug = isUniversal
+    ? (data as UniversalTemplateProps).templateSlug
+    : (data as AreaNode).slug;
+  const province = isUniversal
+    ? (data as UniversalTemplateProps).title.replace("รับทำเว็บไซต์", "").trim()
+    : (data as AreaNode).province;
+
+  const pageUrl = absoluteUrl(`/areas/${slug}`);
+
+  return {
+    "@type": "ProfessionalService",
+    "@id": `${pageUrl}/#localbusiness`,
+    name: isUniversal
+      ? (data as UniversalTemplateProps).title
+      : `${SITE_CONFIG.brandName} - ${province}`,
+    url: pageUrl,
+    image: isUniversal
+      ? (data as UniversalTemplateProps).image
+        ? absoluteUrl((data as UniversalTemplateProps).image!)
+        : undefined
+      : absoluteUrl((data as AreaNode).heroImage),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: province,
+      addressRegion: isUniversal ? province : SITE_CONFIG.business.region,
+      addressCountry: "TH",
+    },
+    parentOrganization: { "@id": absoluteUrl("/#organization") },
+    priceRange: "฿฿",
+  };
+}

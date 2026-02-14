@@ -1,66 +1,88 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Unified Theme Orchestration | Chroma Sync Hardening | Zero-CLS
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.112 (ARCHITECT_STABILIZED)
+ * [STRATEGY]: Strict Type-Safety | Modern Next.js 15 Standards | Full Stack Observability
+ * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
 import type { Metadata, Viewport } from "next";
-import { Inter, IBM_Plex_Sans_Thai, JetBrains_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// --- 1. Infrastructure & Providers ---
+// --- Infrastructure & Constants ---
 import { SITE_CONFIG } from "@/constants/site-config";
+import { generateSchemaGraph } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-// [FIX]: Import ให้ตรงกับ Named Export
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
-
-// --- 2. Global UI Components ---
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import TopLoader from "@/components/layout/TopLoader";
-import LineStickyButton from "@/components/shared/LineStickyButton";
-import { Toaster } from "@/components/ui/Sonner";
-
 import "./globals.css";
 
-/* FONT ORCHESTRATION */
+// --- Core Providers & UI Elements ---
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { TopLoader } from "@/components/layout/TopLoader";
+import { Toaster } from "@/components/ui/Sonner";
+import JsonLd from "@/components/seo/JsonLd";
+
+/* --- 01. FONT ORCHESTRATION (Variable-Based) --- */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  preload: true,
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
   weight: ["300", "400", "500", "600", "700"],
-  subsets: ["thai", "latin"],
+  subsets: ["thai"],
   variable: "--font-thai",
   display: "swap",
+  preload: true,
 });
 
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-  weight: ["400", "700"],
-});
-
+/* --- 02. METADATA ENGINE (Strict Definition) --- */
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.siteUrl),
   title: {
     default: SITE_CONFIG.project.title,
-    template: `%s | ${SITE_CONFIG.brandName}`,
+    template: `%s | ${SITE_CONFIG.brandName}`, // ปรับ Template ให้แสดงชื่อแบรนด์แทนชื่อโปรเจกต์
   },
   description: SITE_CONFIG.description,
-  metadataBase: new URL(SITE_CONFIG.siteUrl),
-  keywords: [...SITE_CONFIG.keywords],
-  authors: [{ name: SITE_CONFIG.expert.displayName }],
-  creator: SITE_CONFIG.expert.legalName,
+  applicationName: SITE_CONFIG.brandName,
+  authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
+  creator: SITE_CONFIG.expert.displayName,
+  publisher: SITE_CONFIG.brandName,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
-    locale: "th_TH",
+    locale: SITE_CONFIG.locale,
     url: SITE_CONFIG.siteUrl,
+    title: SITE_CONFIG.project.title,
+    description: SITE_CONFIG.description,
     siteName: SITE_CONFIG.brandName,
-    images: [{ url: "/images/og-main.webp", width: 1200, height: 630 }],
+    images: [
+      {
+        url: SITE_CONFIG.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.brandName,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.project.title,
+    description: SITE_CONFIG.description,
+    creator: SITE_CONFIG.expert.twitterHandle,
+    images: [SITE_CONFIG.ogImage],
   },
   robots: {
     index: true,
@@ -68,82 +90,68 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  verification: { google: SITE_CONFIG.verification.google },
 };
 
+/* --- 03. VIEWPORT CONFIGURATION --- */
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: SITE_CONFIG.themeColor },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" }, // ปรับให้เข้มขึ้นตามสไตล์ Modern Dark
+  ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  userScalable: true,
 };
 
-export default function RootLayout({ children }: { readonly children: React.ReactNode }) {
+/* --- 04. ROOT LAYOUT DEFINITION --- */
+interface RootLayoutProps {
+  readonly children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
+  // [SEO]: Initialize Global Knowledge Graph (Schema.org)
+  const schemaGraph = generateSchemaGraph([]);
+
   return (
     <html
       lang="th"
-      suppressHydrationWarning
-      className={cn(
-        "scroll-smooth antialiased",
-        fontSans.variable,
-        fontThai.variable,
-        fontMono.variable,
-      )}
+      suppressHydrationWarning // จำเป็นสำหรับ next-themes
+      className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
     >
+      <head>
+        <JsonLd data={schemaGraph} />
+      </head>
+
       <body
         className={cn(
-          "bg-surface-main text-text-primary font-thai min-h-screen overflow-x-hidden",
-          "selection:bg-brand-primary/20 selection:text-brand-primary",
+          "bg-surface-main text-text-primary min-h-[100dvh] font-sans antialiased",
+          "selection:bg-brand-primary/30 selection:text-brand-primary",
+          "transition-colors duration-300", // เพื่อความเนียนในการสลับธีม
         )}
       >
-        <div
-          className="pointer-events-none fixed inset-0 z-0 transform-gpu opacity-[0.15]"
-          style={{ backgroundImage: "url(/grid-pattern.svg)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="bg-noise pointer-events-none fixed inset-0 z-0 opacity-[0.03] will-change-transform"
-          aria-hidden="true"
-        />
-
+        {/* [PROVIDER]: Central Theme Authority */}
         <ThemeProvider
-          attribute="data-theme"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange // ป้องกันการเกิด White Flash ระหว่างโหลด
         >
-          <TopLoader color="var(--brand-primary)" showSpinner={false} height={2} />
+          {/* [CLIENT_UI]: Perceived Performance Layer */}
+          <TopLoader color={SITE_CONFIG.themeColor} />
 
-          <div className="relative z-10 flex min-h-screen flex-col">
-            <Navbar />
+          {/* [STRUCTURE]: Primary Viewport Container */}
+          <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">{children}</div>
 
-            <main id="main-content" className="relative flex flex-grow flex-col outline-none">
-              {children}
-            </main>
+          {/* [OVERLAY]: Feedback & Notification Layer */}
+          <Toaster position="top-center" richColors expand={false} closeButton />
 
-            <Footer />
-          </div>
-
-          <div className="pointer-events-none fixed right-0 bottom-0 z-[60] flex flex-col items-end gap-4 p-4 md:p-6">
-            <div className="pointer-events-auto">
-              <LineStickyButton />
-            </div>
-            <Toaster
-              theme="dark"
-              position="bottom-right"
-              richColors
-              closeButton
-              toastOptions={{
-                className:
-                  "rounded-2xl border border-border bg-surface-card text-text-primary shadow-pro-lg",
-              }}
-            />
-          </div>
-
+          {/* [MONITORING]: Real-world Performance Insights */}
           <SpeedInsights />
         </ThemeProvider>
       </body>

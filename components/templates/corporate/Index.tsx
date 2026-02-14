@@ -1,7 +1,7 @@
 /**
- * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.9.0 (ZERO_CLS)
- * [STRATEGY]: Outcome-Driven Architecture | Asset Metadata Injection | Performance First
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [TEMPLATE COMPONENT]: CORPORATE_SYSTEM_ORCHESTRATOR v17.9.102 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Outcome-Driven Architecture | Anti-White-Flash Wrapper | Performance-Optimized
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -17,190 +17,218 @@ import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
 import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 
-// --- 2. Shared Component Nodes ---
+// --- 2. Shared Nodes ---
 import TrustBadge from "@/components/shared/TrustBadge";
 import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
-import IconRenderer from "@/components/ui/IconRenderer";
+import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 import ImpactStats from "@/components/shared/ImpactStats";
 
 // --- 3. Logic & Types ---
-import type { TemplateMasterData } from "@/types";
-import { generateCorporateSchema } from "./Schema";
+import type { UniversalTemplateProps } from "@/types";
+import { generateUniversalSchema } from "@/lib/schema";
 
 interface CorporateTemplateProps {
-  readonly data: TemplateMasterData;
+  readonly data: UniversalTemplateProps;
+  readonly suppressUI?: boolean;
 }
 
-function CorporateTemplate({ data }: CorporateTemplateProps) {
-  const schema = useMemo(() => generateCorporateSchema(data), [data]);
-  const imgData = data.image ? IMAGE_BLUR_DATA[data.image] : null;
+const CorporateTemplate = ({ data, suppressUI: _suppressUI = false }: CorporateTemplateProps) => {
+  // [MEMOIZATION]: สร้าง Schema Graph เชื่อมโยง Organization Node
+  const schema = useMemo(() => generateUniversalSchema(data), [data]);
+
+  // [SAFETY]: ตรวจสอบ Blur Data แบบ Type-Safe (Zero CLS Strategy)
+  const imgKey = data.image as keyof typeof IMAGE_BLUR_DATA;
+  const imgData = data.image && IMAGE_BLUR_DATA[imgKey] ? IMAGE_BLUR_DATA[imgKey] : null;
 
   return (
-    <LayoutEngine spacing="specialist" theme={data.theme}>
-      <JsonLd data={schema} />
+    // [CRITICAL FIX]: Root Wrapper ป้องกันแสงขาวรอด และล็อคสีพื้นหลังระดับโครงสร้าง
+    <main
+      className="relative flex min-h-screen w-full flex-col overflow-x-hidden"
+      style={{
+        backgroundColor: data.theme?.background || "#ffffff",
+      }}
+    >
+      <LayoutEngine spacing="specialist" theme={data.theme}>
+        {/* 01. SEO Layer */}
+        <JsonLd data={schema} />
 
-      {/* 01. HERO GATEWAY: Enterprise Vision */}
-      <HeroEngine
-        title={data.title}
-        subtitle={data.description}
-        primaryActionLabel="ปรึกษาแผนงานกับนายเอ็มซ่ามากส์"
-        primaryHref="/contact"
-        secondaryActionLabel="Security Audit"
-        secondaryHref="#security"
-        align="left"
-      />
+        {/* 02. Hero Section: Strategic Messaging */}
+        <HeroEngine
+          title={data.title}
+          subtitle={data.description}
+          primaryActionLabel="ปรึกษาแผนงานระดับ Enterprise"
+          primaryHref="#contact"
+          secondaryActionLabel="Infrastructure Audit"
+          secondaryHref="#security"
+          align="left"
+        />
 
-      {/* 02. VISUAL AUTHORITY: Zero-CLS Protocol */}
-      <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
-        <div className="group relative mx-auto max-w-7xl">
-          <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-40" />
+        {/* 03. Featured Architecture Image Section */}
+        <section className="relative z-30 container mx-auto -mt-24 px-4 md:-mt-40">
+          <div className="group relative mx-auto max-w-7xl">
+            {/* Ambient Glow Node */}
+            <div className="bg-brand-primary/10 absolute -inset-10 rounded-[4rem] opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-40" />
 
-          <div className="bg-surface-main relative overflow-hidden rounded-[2.5rem] border border-white/10 shadow-2xl md:rounded-[4rem] md:p-4">
-            {/* Real-time Status Indicator */}
-            <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border border-green-500/20 bg-green-950/30 px-4 py-1.5 backdrop-blur-md md:flex">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
-              <span className="text-[10px] font-bold tracking-widest text-green-500 uppercase">
-                System Secure v17
-              </span>
-            </div>
-
-            {/* Locked Aspect Ratio Container */}
-            <div
-              className="bg-surface-offset relative w-full overflow-hidden rounded-[2rem] md:rounded-[3rem]"
-              style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9" }}
-            >
-              <Image
-                src={data.image || "/images/templates/preview.webp"}
-                alt={`Enterprise Architecture: ${data.title}`}
-                fill
-                priority
-                placeholder={imgData ? "blur" : "empty"}
-                blurDataURL={imgData?.blurDataURL}
-                className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.02]"
-                sizes="(max-width: 1280px) 100vw, 1280px"
-              />
-              <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.05]" />
-              <div className="from-surface-main absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
-            </div>
-          </div>
-
-          {/* Specialist Node Overlay */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="border-border bg-surface-card/90 absolute -bottom-8 left-8 z-20 hidden items-center gap-4 rounded-[2rem] border px-8 py-6 shadow-2xl backdrop-blur-xl md:flex"
-          >
-            <div className="bg-brand-primary/10 border-brand-primary/20 flex h-12 w-12 items-center justify-center rounded-xl border">
-              <IconRenderer name="ShieldCheck" className="text-brand-primary" size={24} />
-            </div>
-            <div>
-              <span className="text-text-muted block text-[10px] font-black tracking-[0.3em] uppercase opacity-60">
-                Deployment_Mode
-              </span>
-              <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
-                Enterprise_Grade
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 03. IMPACT & TRUST */}
-      <section className="py-24 md:pt-32">
-        <div className="container mx-auto px-4 text-center">
-          <header className="mb-16 space-y-4">
-            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase">
-              Infrastructure_Reliability
-            </span>
-            <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase md:text-6xl">
-              {data.clientTrust || "High-Stake Digital Solutions"}
-            </h2>
-          </header>
-          <ImpactStats />
-          <div className="via-border mx-auto my-16 h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
-          <TrustBadge />
-        </div>
-      </section>
-
-      {/* 04. CORE FEATURE GRID */}
-      <FeatureGrid
-        heading="Enterprise Matrix"
-        subheading="ทุกโหนดของระบบถูกออกแบบเพื่อรองรับ Scalability และ Security สูงสุดตามมาตรฐานสากล"
-        items={(data.coreFeatures || []).map((feat, idx) => ({
-          ...feat,
-          technicalDetail: `CORE_MODULE_0${idx + 1}`,
-        }))}
-        columns={2}
-      />
-
-      {/* 05. SECURITY & COMPLIANCE SECTION */}
-      <article id="security" className="border-border bg-surface-offset/30 border-y py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-            <div className="space-y-10">
-              <div className="space-y-4">
-                <span className="text-brand-primary font-mono text-xs font-black tracking-widest uppercase">
-                  Protocol_Security
+            <div className="bg-surface-main border-border/50 relative overflow-hidden rounded-[2.5rem] border shadow-2xl md:rounded-[4rem] md:p-4">
+              {/* Architecture Verification Badge */}
+              <div className="absolute top-8 right-8 z-20 hidden items-center gap-2 rounded-full border border-green-500/20 bg-green-950/40 px-4 py-1.5 backdrop-blur-md md:flex">
+                <div className="h-2 w-2 animate-pulse rounded-full bg-green-500 shadow-sm" />
+                <span className="text-[9px] font-black tracking-widest text-green-400 uppercase">
+                  Architecture_Verified_v18
                 </span>
-                <h3 className="text-text-primary text-4xl leading-none font-black uppercase italic md:text-5xl">
-                  Data Security <br /> & Compliance.
-                </h3>
               </div>
-              <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-80">
-                นายเอ็มซ่ามากส์ ให้ความสำคัญสูงสุดกับการปกป้องข้อมูลองค์กร ด้วยมาตรฐาน TLS 1.3
-                และการออกแบบระบบที่รองรับ PDPA Compliance อย่างสมบูรณ์
-              </p>
-              <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                {[
-                  "PDPA / GDPR Ready",
-                  "SSL TLS 1.3 Encryption",
-                  "L7 DDoS Protection",
-                  "Daily Auto-Backups",
-                ].map((item, i) => (
-                  <li
-                    key={i}
-                    className="text-text-primary flex items-center gap-3 text-sm font-bold italic"
-                  >
-                    <IconRenderer name="CheckCircle" className="text-brand-primary" size={18} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              <div
+                className="bg-surface-offset relative w-full overflow-hidden rounded-[2rem] md:rounded-[3rem]"
+                style={{
+                  aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9",
+                }}
+              >
+                <Image
+                  src={data.image || "/images/service/corporate-node.webp"}
+                  alt={`Enterprise Infrastructure: ${data.title}`}
+                  fill
+                  priority
+                  placeholder={imgData ? "blur" : "empty"}
+                  blurDataURL={imgData?.blurDataURL}
+                  className="object-cover object-center transition-transform duration-1000 group-hover:scale-[1.03]"
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                />
+                <div className="from-surface-main absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40" />
+              </div>
             </div>
 
-            {/* Visual Security Badge */}
-            <div className="relative mx-auto w-full max-w-md">
-              <div className="bg-brand-primary/10 absolute inset-0 animate-pulse rounded-full blur-3xl" />
-              <div className="border-border bg-surface-card/40 shadow-glow relative flex aspect-square w-full items-center justify-center rounded-[3rem] border backdrop-blur-sm">
-                <IconRenderer name="Shield" size={140} className="text-brand-primary opacity-20" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  <span className="text-brand-primary animate-pulse font-mono text-[10px] font-black tracking-widest uppercase">
-                    Encryption_Node
+            {/* Floating Trust Node */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="border-border bg-surface-card/95 absolute -bottom-8 left-8 z-20 hidden items-center gap-5 rounded-[2.5rem] border px-10 py-8 shadow-2xl backdrop-blur-xl md:flex"
+            >
+              <div className="bg-brand-primary/10 border-brand-primary/20 flex h-14 w-14 items-center justify-center rounded-2xl border">
+                <IconRenderer name="ShieldCheck" className="text-brand-primary" size={28} />
+              </div>
+              <div>
+                <span className="text-text-muted block font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-50">
+                  Node_Stability
+                </span>
+                <span className="text-text-primary text-2xl font-black tracking-tighter uppercase italic">
+                  {data.priceValue ? `฿${data.priceValue.toLocaleString()}` : "Premium_Build"}
+                </span>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 04. Trust & Impact Matrix */}
+        <section className="py-24 md:pt-48">
+          <div className="container mx-auto px-4 text-center">
+            <header className="mb-20 space-y-6">
+              <span className="text-brand-primary font-mono text-xs font-black tracking-[0.5em] uppercase">
+                Reliability_Signals
+              </span>
+              <h2 className="text-text-primary text-4xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-7xl">
+                {data.clientTrust || "High-Stake Digital Solutions"}
+              </h2>
+            </header>
+
+            <ImpactStats />
+
+            <div className="via-border/50 mx-auto my-20 h-px w-full max-w-4xl bg-gradient-to-r from-transparent to-transparent" />
+
+            <TrustBadge />
+          </div>
+        </section>
+
+        {/* 05. Capability Grid */}
+        <FeatureGrid
+          heading="Corporate Matrix"
+          subheading="วิศวกรรมสถาปัตยกรรมเว็บไซต์ที่เน้นความมั่นคงและภาพลักษณ์ระดับสากล"
+          items={(data.coreFeatures || []).map((feat, idx) => ({
+            title: feat.title,
+            description: feat.description,
+            icon: feat.icon as IconName,
+            technicalDetail: `CORP_MOD_0${idx + 1}`,
+          }))}
+          columns={2}
+        />
+
+        {/* 06. Security & Compliance Section */}
+        <article id="security" className="border-border bg-surface-offset/30 border-y py-32">
+          <div className="container mx-auto px-4">
+            <div className="grid gap-20 lg:grid-cols-2 lg:items-center">
+              <div className="space-y-12">
+                <div className="space-y-6">
+                  <span className="text-brand-primary font-mono text-xs font-black tracking-widest uppercase">
+                    Security_Protocol
                   </span>
-                  <div className="bg-brand-primary h-1.5 w-24 rounded-full opacity-40" />
+                  <h3 className="text-text-primary text-5xl leading-[0.85] font-black uppercase italic md:text-6xl">
+                    Stability, Security <br /> & Compliance.
+                  </h3>
+                </div>
+                <p className="text-text-secondary text-xl leading-relaxed font-medium italic opacity-85">
+                  เราวางโครงสร้างพื้นฐานโดยยึดหลัก Zero-Trust Architecture
+                  เพื่อให้มั่นใจว่าข้อมูลองค์กรของคุณจะปลอดภัย พร้อมรองรับมาตรฐาน PDPA และ SSL TLS
+                  1.3
+                </p>
+
+                <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {[
+                    "PDPA Compliance Ready",
+                    "TLS 1.3 Encryption",
+                    "Infrastructure Security",
+                    "Disaster Recovery Plan",
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="text-text-primary flex items-center gap-4 text-sm font-bold italic"
+                    >
+                      <div className="bg-brand-primary/10 flex h-6 w-6 items-center justify-center rounded-full">
+                        <IconRenderer name="CheckCircle" className="text-brand-primary" size={16} />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="relative mx-auto w-full max-w-md">
+                <div className="bg-brand-primary/5 absolute inset-0 animate-pulse rounded-full blur-[120px]" />
+                <div className="border-border bg-surface-card/40 shadow-glow-sm relative flex aspect-square w-full items-center justify-center rounded-[4rem] border backdrop-blur-md">
+                  <IconRenderer
+                    name="Shield"
+                    size={160}
+                    className="text-brand-primary opacity-20"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+                    <span className="text-brand-primary animate-pulse font-mono text-[10px] font-black tracking-widest uppercase">
+                      Security_Node_Active
+                    </span>
+                    <div className="bg-brand-primary h-2 w-32 rounded-full opacity-30" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      {/* 06. CONVERSION ARCHITECTURE */}
-      <ConversionCTA
-        title="พร้อมยกระดับโครงสร้างธุรกิจของคุณหรือยังครับ?"
-        description="นายเอ็มซ่ามากส์ พร้อมร่วมวิเคราะห์และวางรากฐานระบบ Enterprise ที่มั่นคงที่สุดให้คุณตั้งแต่วันนี้"
-        buttonLabel="จองคิวปรึกษาแผนงาน"
-      />
+        {/* 07. Conversion CTA */}
+        <ConversionCTA
+          title="พร้อมสร้างรากฐานที่มั่นคงให้ธุรกิจของคุณหรือยัง?"
+          description="ปรึกษาแผนงานระดับ Enterprise เพื่อประสิทธิภาพสูงสุดในการดำเนินธุรกิจออนไลน์"
+          buttonLabel="คุยรายละเอียดกับทีม Specialist"
+        />
 
-      <DynamicFAQ
-        title="Enterprise Technical FAQ"
-        description="เจาะลึกรายละเอียด SLA และกระบวนการ Support ระดับ Specialist"
-        items={data.faqs}
-      />
-    </LayoutEngine>
+        {/* 08. FAQ */}
+        <DynamicFAQ
+          title="Enterprise Technical FAQ"
+          description="เจาะลึกรายละเอียดเกี่ยวกับเทคโนโลยีและมาตรฐานการทำงานสำหรับองค์กร"
+          items={data.faqs}
+        />
+      </LayoutEngine>
+    </main>
   );
-}
+};
 
 export default memo(CorporateTemplate);

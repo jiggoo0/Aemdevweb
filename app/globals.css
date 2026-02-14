@@ -2,203 +2,188 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE STYLESHEET]: AEM-SYSTEM-v17.9.1 (STABILIZED_VIEWPORT)
- * [STRATEGY]: Zero-Flash Overscroll | Hardened Background | GPU Acceleration
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v17.9.112 (REFINED)
+ * [STRATEGY]: Optical Typography | Adaptive Glass | GPU Composition
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-/* --- 01. BASE VARIABLES LAYER --- */
+@theme {
+  /* --- 01. TYPOGRAPHY SYSTEM --- */
+  --font-thai: var(--font-thai), ui-sans-serif, system-ui;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
+
+  /* --- 02. COLOR PALETTE (Dynamic References) --- */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+
+  --color-surface-main: var(--surface-main);
+  --color-surface-offset: var(--surface-offset);
+  --color-surface-card: var(--surface-card);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border: var(--border);
+
+  /* --- 03. DEPTH & LIGHTING --- */
+  --shadow-glow: 0 0 40px -10px var(--brand-primary);
+  --shadow-pro: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  --shadow-pro-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
+
+  /* --- 04. MOTION PHYSICS --- */
+  --ease-specialist: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 @layer base {
   :root {
-    /* [TYPOGRAPHY SYSTEM] */
-    --font-thai: "IBM Plex Sans Thai", sans-serif;
-    --font-sans: "Inter", sans-serif;
-    --font-mono: "JetBrains Mono", monospace;
+    /* Brand Identity */
+    --brand-primary: #ef4444;
+    --brand-secondary: #dc2626;
+    --brand-accent: #f87171;
 
-    /* [COLOR PALETTE - OKLCH SYSTEM] */
-    --color-brand-primary: oklch(0.72 0.18 150);
-    --color-brand-secondary: oklch(0.6 0.15 150);
-    --color-brand-glow-base: oklch(0.72 0.18 150 / 0.15);
+    /* Light Mode Surfaces */
+    --surface-main: #ffffff;
+    --surface-offset: #f8fafc; /* Cool Gray Tint */
+    --surface-card: #ffffff;
 
-    /* Surface Palette: High Contrast Dark Mode Foundation */
-    --color-surface-main: #050505;
-    --color-surface-offset: #0a0a0a;
-    --color-surface-card: #0f0f0f;
+    /* Light Mode Text */
+    --text-primary: #0f172a; /* Slate 900 - คมชัดกว่า Pure Black */
+    --text-secondary: #475569; /* Slate 600 */
+    --text-muted: #94a3b8; /* Slate 400 */
 
-    /* Content Palette */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #a1a1aa;
-    --color-text-muted: #52525b;
-    --color-text-inverted: #000000;
+    --border: #e2e8f0;
+    --radius: 0.75rem;
 
-    --color-border: rgba(255, 255, 255, 0.1);
-
-    /* Physics & Atmosphere */
-    --shadow-glow-color: var(--color-brand-glow-base);
-    --ambient-opacity: 0.1;
+    /* Shadcn/UI Compatibility Bridge */
+    --background: var(--surface-main);
+    --foreground: var(--text-primary);
+    --primary: var(--brand-primary);
+    --primary-foreground: #ffffff;
+    --card: var(--surface-card);
+    --popover: var(--surface-card);
+    --border: var(--border);
+    --ring: var(--brand-primary);
   }
 
-  :root[data-theme="light"] {
-    --color-surface-main: #ffffff;
-    --color-surface-offset: #f8fafc;
-    --color-surface-card: #ffffff;
-    --color-text-primary: #0f172a;
-    --color-text-secondary: #475569;
-    --color-text-muted: #94a3b8;
-    --color-text-inverted: #ffffff;
-    --color-border: rgba(15, 23, 42, 0.08);
-    --shadow-glow-color: rgba(0, 0, 0, 0.05);
-    --ambient-opacity: 0.03;
+  .dark {
+    /* Dark Mode Surfaces */
+    --surface-main: #020617; /* Deep Slate - ดูแพงกว่า Pure Black */
+    --surface-offset: #0f172a;
+    --surface-card: #1e293b;
+
+    /* Dark Mode Text */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    --border: rgba(255, 255, 255, 0.08);
+    color-scheme: dark;
   }
-}
 
-/* --- 02. TAILWIND CONFIGURATION LAYER (v4 Engine) --- */
-@theme {
-  --font-thai: var(--font-thai);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  /* --- GLOBAL RESET & OPTICAL TUNING --- */
+  html {
+    @apply antialiased;
+    background-color: var(--surface-main);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
 
-  --color-brand-primary: var(--color-brand-primary);
-  --color-brand-secondary: var(--color-brand-secondary);
-  --color-brand-glow: var(--color-brand-glow-base);
-
-  --color-surface-main: var(--color-surface-main);
-  --color-surface-offset: var(--color-surface-offset);
-  --color-surface-card: var(--color-surface-card);
-
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-text-muted: var(--color-text-muted);
-  --color-text-inverted: var(--color-text-inverted);
-
-  --color-border: var(--color-border);
-
-  --shadow-glow: 0 0 20px -5px var(--shadow-glow-color);
-  --shadow-pro-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-pro-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.5s linear infinite;
-
-  @keyframes pulse-slow {
-    0%,
-    100% {
-      opacity: 0.4;
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      opacity: 0.1;
-    }
-  }
-  @keyframes float {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      transform: translate3d(0, -10px, 0);
-    }
-  }
-  @keyframes shimmer {
-    0% {
-      transform: translate3d(-100%, 0, 0);
-    }
-    100% {
-      transform: translate3d(100%, 0, 0);
-    }
-  }
-}
-
-/* --- 03. BASE LAYER RESET (Critical Anti-Flash & Performance) --- */
-@layer base {
-  *,
-  ::after,
-  ::before {
-    @apply border-border;
-    box-sizing: border-box;
+    /* [OPTICAL]: ปรับการเรนเดอร์ตัวอักษรให้คมชัดที่สุด */
     text-rendering: optimizeLegibility;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  body {
+    font-family: var(--font-thai);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  html {
-    @apply scroll-smooth;
-    scrollbar-gutter: stable;
-
-    /* [FIX 1]: บังคับพื้นหลังดำระดับ Kernel เพื่อป้องกัน White Flash ก่อนตัวแปรจะโหลด */
-    background-color: #050505;
-
-    /* [FIX 2]: หยุดพฤติกรรม Rubber-banding บน Mobile เพื่อไม่ให้เห็นขอบสีขาว */
-    overscroll-behavior-y: none;
-
-    height: 100%;
+  /* [LAYOUT]: ป้องกัน Image Layout Shift */
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+    height: auto;
   }
 
-  body {
-    /* [FIX 3]: Sync พื้นหลังกับตัวแปรหลักและป้องกันการเลื่อนแกน X */
-    @apply text-text-primary bg-surface-main overflow-x-hidden;
-    font-family: var(--font-thai);
-    line-height: 1.6;
-    min-height: 100vh;
-    width: 100%;
-    position: relative;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "tnum", "pnum";
+  /* [ACCESSIBILITY]: Focus Ring มาตรฐานสากล */
+  :focus-visible {
+    outline: 2px solid var(--brand-primary);
+    outline-offset: 2px;
   }
 
-  /* Typography Logic */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-text-primary font-bold tracking-tight;
-    font-family: var(--font-sans);
-    line-height: 1.2;
-    text-wrap: balance;
-  }
-
-  /* Custom Professional Scrollbar */
+  /* [SCROLLBAR]: Premium Floating Bar */
   ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--color-surface-main);
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: 9999px;
-    &:hover {
-      background: var(--color-text-secondary);
-    }
+    background: var(--text-muted);
+    opacity: 0.4;
+    border-radius: 99px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.2s;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-secondary);
+  }
+
+  /* [STYLE]: Global Selection */
+  ::selection {
+    background-color: color-mix(in srgb, var(--brand-primary), transparent 82%);
+    color: var(--brand-primary);
+  }
+
+  /* [SAFETY]: Isolation Context */
+  #main-content {
+    isolation: isolate;
   }
 }
 
-/* --- 04. UTILITY LAYER: Specialist Infrastructure --- */
 @layer utilities {
   .container {
-    @apply mx-auto w-full max-w-[85rem] px-4 md:px-6;
+    @apply mx-auto w-full max-w-[90rem] px-4 md:px-6 lg:px-8;
   }
 
-  .glass-morphism {
-    @apply border-border/50 bg-surface-main/10 border shadow-2xl backdrop-blur-xl;
+  /* [GLASSMORPHISM]: Adaptive Glass Engine */
+  .glass-card {
+    background-color: color-mix(in srgb, var(--surface-card), transparent 30%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
 
-  .bg-infrastructure-grid {
-    background-size: 40px 40px;
-    background-image:
-      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-    contain: strict;
-    transform: translate3d(0, 0, 0); /* บังคับใช้ GPU Acceleration */
+  /* [TEXT_EFFECTS]: Gradient Text Utility */
+  .text-gradient {
+    @apply from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent;
   }
 
-  .ambient-aura {
-    @apply pointer-events-none fixed z-0 rounded-full mix-blend-screen blur-[100px];
-    opacity: var(--ambient-opacity);
-    will-change: transform, opacity;
+  /* [PERFORMANCE]: Hardware Acceleration */
+  .gpu-layer {
     transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+
+  /* [LAYOUT]: Hide Scrollbar but keep functionality */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

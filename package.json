@@ -1,6 +1,6 @@
 {
   "name": "aemdevweb.com",
-  "version": "7.2.99",
+  "version": "17.9.10",
   "private": true,
   "author": "AEMDEVWEB (Technical Infrastructure Specialist)",
   "description": "High-Performance Web Infrastructure & Technical SEO Specialist Hub",
@@ -10,15 +10,36 @@
   },
   "scripts": {
     "dev": "WATCHPACK_POLLING=true next dev --webpack",
+    "build": "pnpm test:schema && next build --webpack",
+    "postbuild": "bundlesize",
+    "start": "next start",
+    "test:schema": "ts-node --project tsconfig.json -r tsconfig-paths/register scripts/test-schema.ts",
+    "test:size": "bundlesize",
     "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
     "fix": "pnpm format && pnpm lint --fix",
-    "build": "next build --webpack",
-    "start": "next start",
     "knip": "knip --cache --no-exit-code",
     "clean": "rm -rf .next node_modules pnpm-lock.yaml && GYP_DEFINES=\"android_ndk_path=''\" pnpm install"
   },
+  "bundlesize": [
+    {
+      "path": ".next/static/chunks/main-*.js",
+      "maxSize": "150 kB"
+    },
+    {
+      "path": ".next/static/chunks/framework-*.js",
+      "maxSize": "200 kB"
+    },
+    {
+      "path": ".next/static/css/*.css",
+      "maxSize": "130 kB"
+    },
+    {
+      "path": ".next/static/chunks/[0-9]*.js",
+      "maxSize": "250 kB"
+    }
+  ],
   "dependencies": {
     "@img/sharp-wasm32": "^0.34.5",
     "@mdx-js/loader": "^3.1.1",
@@ -56,6 +77,7 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "autoprefixer": "^10.4.24",
+    "bundlesize2": "^0.0.35",
     "eslint": "9.19.0",
     "eslint-plugin-tailwindcss": "^3.18.2",
     "eslint-plugin-unused-imports": "^4.4.1",
@@ -66,6 +88,8 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.55.0",
     "vercel": "^50.14.0"

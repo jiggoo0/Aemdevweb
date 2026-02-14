@@ -1,92 +1,152 @@
 /**
- * [SYSTEM LIB]: CMS_ENGINE v17.9.9 (STABILIZED)
- * [STRATEGY]: Type-Safe Collections | Memoized I/O | Alias Resolution
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [LIB]: CMS_ENGINE v17.9.92 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Record-safe Access | No-Any Internal Logic | Strict Normalization
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { cache } from "react";
-import type { BlogPost, CaseStudy, BaseContent } from "@/types";
+import type { BlogPost, CaseStudy } from "@/types";
+import { MASTER_REGISTRY } from "@/constants/master-registry";
+import { AREA_NODES } from "@/constants/area-nodes";
 
-const CONTENT_ROOT = path.join(process.cwd(), "content");
+// --- Configuration ---
+const BLOG_DIR = path.join(process.cwd(), "content/blog");
+const CASE_DIR = path.join(process.cwd(), "content/case-studies");
+
+// =========================================
+// [01] DATA ADAPTERS (STRICT NORMALIZATION)
+// =========================================
 
 /**
- * @function sanitize
- * @description แปลงข้อมูลดิบจาก MDX Frontmatter ให้เป็น Type-Safe Object
- * [FIXED]: เปลี่ยนจาก any เป็น Record<string, unknown> เพื่อผ่าน ESLint
+ * [ADAPTER]: จัดการข้อมูลบล็อกให้เข้าสู่โครงสร้างที่สมบูรณ์ (Zero-Any)
  */
-const sanitize = (data: Record<string, unknown>, slug: string) => {
-  const getString = (key: string, fallback: string) =>
-    typeof data[key] === "string" ? (data[key] as string) : fallback;
-
-  const getArray = (key: string) => (Array.isArray(data[key]) ? (data[key] as string[]) : []);
-
+export const mapToBlogPost = (
+  slug: string,
+  content: string,
+  data: Record<string, unknown>,
+): BlogPost => {
   return {
     slug,
-    title: getString("title", "Untitled Node"),
-    date: getString("date", new Date().toISOString()),
-    thumbnail: getString("thumbnail", "/images/shared/placeholder.webp"),
-    author: "นายเอ็มซ่ามากส์",
-    excerpt: getString("excerpt", getString("description", "")),
-    tags: getArray("tags"),
-    category: getString("category", "General"),
-    client: getString("client", "Confidential"),
-    industry: getString("industry", "Technology"),
-    results: getArray("results"),
-    technicalStack: getArray("technicalStack"),
-    ogImage: getString("ogImage", getString("thumbnail", "/images/og-main.webp")),
-  };
+    content,
+    // [STRICT_CASTING]: ตรวจสอบและ Cast ข้อมูลทีละฟิลด์
+    title: (data.title as string) || "Untitled Post",
+    date: (data.date as string) || new Date().toISOString(),
+    category: (data.category as string) || "General",
+    coverImage:
+      (data.coverImage as string) ||
+      (data.thumbnail as string) ||
+      "/images/blog/default-thumb.webp",
+    thumbnail:
+      (data.thumbnail as string) ||
+      (data.coverImage as string) ||
+      "/images/blog/default-thumb.webp",
+    description: (data.description as string) || (data.excerpt as string) || "",
+    excerpt: (data.excerpt as string) || (data.description as string) || "",
+    tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
+    readingTime: (data.readingTime as string) || "5 min read",
+  } as BlogPost;
 };
 
-// --- [INTERNAL FETCHERS] ---
-
-async function fetchCollection<T extends BaseContent>(folder: string): Promise<readonly T[]> {
-  const dir = path.join(CONTENT_ROOT, folder);
-  if (!fs.existsSync(dir)) return [];
-
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
-  const collection = files.map((file) => {
-    const { data } = matter(fs.readFileSync(path.join(dir, file), "utf8"));
-    return sanitize(data as Record<string, unknown>, file.replace(".mdx", "")) as unknown as T;
-  });
-
-  return Object.freeze(
-    collection.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
-  );
-}
-
-async function fetchDocument<T extends BaseContent>(
-  folder: string,
+/**
+ * [ADAPTER]: จัดการข้อมูลกรณีศึกษา และรองรับ Legacy Fields
+ */
+export const mapToCaseStudy = (
   slug: string,
-): Promise<(T & { content: string }) | null> {
-  try {
-    const filePath = path.join(CONTENT_ROOT, folder, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) return null;
+  content: string,
+  data: Record<string, unknown>,
+): CaseStudy => {
+  return {
+    slug,
+    content,
+    title: (data.title as string) || "Success Case",
+    client: (data.client as string) || "Confidential Client",
+    result:
+      (data.result as string) ||
+      (Array.isArray(data.results) ? (data.results[0] as string) : "Growth Guaranteed"),
+    image:
+      (data.image as string) || (data.thumbnail as string) || "/images/case-studies/preview.webp",
+    thumbnail:
+      (data.thumbnail as string) || (data.image as string) || "/images/case-studies/preview.webp",
+    description: (data.description as string) || (data.excerpt as string) || "",
+    date: (data.date as string) || new Date().toISOString(),
+  } as CaseStudy;
+};
 
-    const { data, content } = matter(fs.readFileSync(filePath, "utf8"));
-    return {
-      ...(sanitize(data as Record<string, unknown>, slug) as unknown as T),
-      content,
-    };
-  } catch {
-    return null;
-  }
+// =========================================
+// [02] CONTENT RETRIEVAL ENGINES
+// =========================================
+
+export async function getAllPosts(): Promise<BlogPost[]> {
+  if (!fs.existsSync(BLOG_DIR)) return [];
+  const fileNames = fs.readdirSync(BLOG_DIR);
+
+  const posts = fileNames
+    .filter((fn) => fn.endsWith(".mdx"))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, "");
+      const fullPath = path.join(BLOG_DIR, fileName);
+      const { data, content } = matter(fs.readFileSync(fullPath, "utf8"));
+
+      // ส่งข้อมูลเข้า Adapter พร้อม Casting เป็น Record<string, unknown>
+      return mapToBlogPost(slug, content, data as Record<string, unknown>);
+    });
+
+  // [SAFE_SORT]: ป้องกันการพังจากการเปรียบเทียบค่าวันที่
+  return posts.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
 }
 
-// --- [PUBLIC API: MEMOIZED EXPORTS] ---
-
-// Blog & Articles
-export const getAllPosts = cache(() => fetchCollection<BlogPost>("blog"));
-/** @alias สำหรับ Sitemap และระบบเก่า */
+/** [ALIAS]: สำหรับเรียกใช้ตามมาตรฐานเดิม */
 export const getAllBlogs = getAllPosts;
 
-export const getPostBySlug = cache((slug: string) => fetchDocument<BlogPost>("blog", slug));
+export async function getAllCaseStudies(): Promise<CaseStudy[]> {
+  if (!fs.existsSync(CASE_DIR)) return [];
+  const fileNames = fs.readdirSync(CASE_DIR);
 
-// Case Studies
-export const getAllCaseStudies = cache(() => fetchCollection<CaseStudy>("case-studies"));
+  const cases = fileNames
+    .filter((fn) => fn.endsWith(".mdx"))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx$/, "");
+      const fullPath = path.join(CASE_DIR, fileName);
+      const { data, content } = matter(fs.readFileSync(fullPath, "utf8"));
+      return mapToCaseStudy(slug, content, data as Record<string, unknown>);
+    });
 
-export const getCaseStudyBySlug = cache((slug: string) =>
-  fetchDocument<CaseStudy>("case-studies", slug),
-);
+  return cases.sort((a, b) => {
+    const dateA = new Date(a.date || 0).getTime();
+    const dateB = new Date(b.date || 0).getTime();
+    return dateB - dateA;
+  });
+}
+
+// =========================================
+// [03] SPECIFIC DATA LOOKUPS
+// =========================================
+
+export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  const posts = await getAllPosts();
+  return posts.find((p) => p.slug === slug);
+}
+
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | undefined> {
+  const cases = await getAllCaseStudies();
+  return cases.find((c) => c.slug === slug);
+}
+
+export async function getAllServices() {
+  return Promise.resolve(MASTER_REGISTRY);
+}
+
+export async function getServiceBySlug(slug: string) {
+  const services = await getAllServices();
+  return services.find((s) => s.templateSlug === slug || s.id.toLowerCase() === slug.toLowerCase());
+}
+
+export async function getAreaBySlug(slug: string) {
+  return Promise.resolve(AREA_NODES.find((a) => a.slug === slug));
+}

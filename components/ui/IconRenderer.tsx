@@ -1,6 +1,6 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.9 (HARDENED_STABILIZED)
- * [STRATEGY]: Static Tree-Shaking | Zero-Runtime Error | GPU Optimized
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.100 (STRICT_MODE_PATCHED)
+ * [STRATEGY]: Static Tree-Shaking | Compile-Time Safety | Layout Stable
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
@@ -29,6 +29,7 @@ import {
   HelpCircle,
   Sun,
   Moon,
+  Loader2, // [ADDED]: สำหรับ Loading State
   // 2. Navigation & Contact
   Home,
   MapPin,
@@ -42,6 +43,7 @@ import {
   ExternalLink,
   Link,
   Briefcase,
+  Send, // [ADDED]: สำหรับปุ่ม Submit Form
   // 3. Tech & Services & Analytics
   Cpu,
   Layers,
@@ -75,6 +77,9 @@ import {
   Laptop,
   Image as ImageIcon,
   Box,
+  Fingerprint, // [ADDED]: สำหรับ About Page
+  Hash, // [ADDED]: สำหรับ Tech Specs
+  Newspaper, // [ADDED]: สำหรับ Feature Grid / Blog
   // 4. Social & Media
   MessageCircle,
   Facebook,
@@ -86,6 +91,7 @@ import {
   // 5. Specialist Elements & Badges
   User,
   UserCheck,
+  UserCircle2, // [ADDED]: สำหรับ Avatar / Profile
   BookOpen,
   Quote,
   Lightbulb,
@@ -120,6 +126,7 @@ export const ICON_MAP = {
   HelpCircle,
   Sun,
   Moon,
+  Loader2, // [ADDED]
   // Navigation
   Home,
   MapPin,
@@ -133,6 +140,7 @@ export const ICON_MAP = {
   ExternalLink,
   Link,
   Briefcase,
+  Send, // [ADDED]
   // Tech
   Cpu,
   Layers,
@@ -166,6 +174,9 @@ export const ICON_MAP = {
   Laptop,
   Image: ImageIcon,
   Box,
+  Fingerprint, // [ADDED]
+  Hash, // [ADDED]
+  Newspaper, // [ADDED]
   // Social
   MessageCircle,
   Facebook,
@@ -177,6 +188,7 @@ export const ICON_MAP = {
   // Specialist
   User,
   UserCheck,
+  UserCircle2, // [ADDED]
   BookOpen,
   Quote,
   Lightbulb,
@@ -185,10 +197,11 @@ export const ICON_MAP = {
   ThumbsUp,
 } as const;
 
+// [STRICT_TYPE]: บังคับใช้ Key ที่มีอยู่จริงเท่านั้น ห้ามใช้ String มั่ว
 export type IconName = keyof typeof ICON_MAP;
 
 interface IconRendererProps extends Omit<LucideProps, "ref"> {
-  readonly name: IconName | string; // รองรับ string เพื่อความยืดหยุ่น แต่ prefer IconName
+  readonly name: IconName; // [STRICT]: ลบ | string ออกเพื่อความปลอดภัยสูงสุด
   readonly size?: number;
   readonly className?: string;
   readonly strokeWidth?: number;
@@ -209,12 +222,12 @@ const IconRenderer = ({
   ...props
 }: IconRendererProps) => {
   // [LOGIC]: Direct Registry Lookup (O(1))
-  const IconComponent = ICON_MAP[name as IconName];
+  const IconComponent = ICON_MAP[name];
 
   // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (ป้องกันหน้าขาว)
   if (!IconComponent) {
     if (process.env.NODE_ENV === "development") {
-      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry v17.9.9`);
+      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry`);
     }
     return (
       <AlertTriangle
@@ -230,9 +243,14 @@ const IconRenderer = ({
     <IconComponent
       size={size}
       className={cn(
+        // [LAYOUT_STABILITY]: เพิ่ม shrink-0 และ size locking ป้องกันไอคอนบี้
         "text-text-primary shrink-0 transition-all duration-300 will-change-transform",
         className,
       )}
+      style={{
+        minWidth: size,
+        minHeight: size,
+      }}
       strokeWidth={strokeWidth}
       aria-hidden={!title}
       {...(title ? { title } : {})}

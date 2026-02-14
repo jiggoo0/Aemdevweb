@@ -1,7 +1,7 @@
 /**
  * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.9 (STABILIZED_FINAL)
  * [STRATEGY]: Resource Resiliency | Next.js 16.1+ Compliance | Node-Termux Hardening
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import nextMDX from "@next/mdx";
@@ -30,12 +30,12 @@ const nextConfig: NextConfig = {
   compress: true,
 
   /**
-   * [TYPED_ROUTES]: Next.js 16 Compliance
-   * [FIXED]: ย้ายออกจาก experimental ตามคำเตือนใน Build Log
+   * [TYPED_ROUTES]: Next.js 16.1+ Compliance
+   * [FIXED]: ย้ายออกจาก experimental เพื่อรองรับฟีเจอร์ที่ Stable แล้ว
    */
   typedRoutes: true,
 
-  // [DEBUGGING]: เปิดการตรวจสอบ Logging ของข้อมูลที่ดึงจาก Server
+  // [DEBUGGING]: ระบบติดตามการดึงข้อมูลเพื่อตรวจสอบประสิทธิภาพ
   logging: {
     fetches: {
       fullUrl: true,
@@ -44,7 +44,7 @@ const nextConfig: NextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกันการใช้ CPU/RAM เกินขีดจำกัดบน Android
+    // [TERMUX_HARDENING]: จำกัดการใช้ Thread เพื่อไม่ให้ Android Kill Process
     workerThreads: false,
     cpus: isVercel ? undefined : 1,
 
@@ -54,7 +54,7 @@ const nextConfig: NextConfig = {
       "@radix-ui/react-slot",
       "tailwindcss-animate",
     ],
-    // ใช้ Rust-based compiler เฉพาะบน Vercel (Cloud)
+    // ใช้ Rust-based compiler เฉพาะบน Vercel เพื่อความเร็วในการ Build บน Cloud
     mdxRs: isVercel,
   },
 
@@ -69,12 +69,12 @@ const nextConfig: NextConfig = {
   },
 
   webpack: (config, { dev }) => {
-    // [MEMORY_MANAGEMENT]: ปิด Cache บน Local (Termux) เพื่อประหยัดพื้นที่ Storage
+    // [MEMORY_MANAGEMENT]: ปิด Cache บน Local เพื่อรักษาพื้นที่ Storage ของมือถือ
     if (!isVercel) {
       config.cache = false;
     }
 
-    // [DEV_OPTIMIZATION]: เพิ่มประสิทธิภาพการ Watch ไฟล์บน Android Filesystem
+    // [DEV_OPTIMIZATION]: เพิ่มประสิทธิภาพการ Watch ไฟล์บน Android Filesystem (Polling)
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,

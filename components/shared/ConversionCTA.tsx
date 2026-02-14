@@ -1,14 +1,15 @@
 /**
- * [SHARED COMPONENT]: CONVERSION_CTA_SYSTEM v17.9.9 (STABILIZED_FINAL)
- * [STRATEGY]: Partnership Integration | Typed Routes Resolution | Zero-CLS Hardened
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [SHARED COMPONENT]: CONVERSION_CTA_SYSTEM v17.9.105 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Partnership Integration | Typed Routes Resolution | Build-Stabilized
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
-import type { Route } from "next";
 
 import React, { memo } from "react";
 import Link from "next/link";
+import type { Route } from "next";
+
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -27,7 +28,6 @@ interface ConversionCTAProps {
 /**
  * @component ConversionCTA
  * @description โหนดปิดท้ายเชิงกลยุทธ์ ออกแบบมาเพื่อเปลี่ยนความสนใจให้เป็นผลลัพธ์ธุรกิจ
- * [FIXED]: แก้ไข TS2322 โดยใช้ Hybrid Link Strategy (<a> สำหรับ External / <Link> สำหรับ Internal)
  */
 const ConversionCTA = ({
   title = "พร้อมรีดประสิทธิภาพธุรกิจของคุณหรือยังครับ?",
@@ -47,9 +47,12 @@ const ConversionCTA = ({
       role="region"
       aria-label="Conversion Node"
     >
-      {/* --- 01. INFRASTRUCTURE LAYER --- */}
+      {/* --- LAYER 01: INFRASTRUCTURE (Visual Base) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
-        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
+        <div
+          className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]"
+          style={{ backgroundImage: "url(/grid-pattern.svg)" }}
+        />
         <div className="from-surface-main to-surface-main absolute inset-0 bg-gradient-to-b via-transparent opacity-80" />
       </div>
 
@@ -61,17 +64,18 @@ const ConversionCTA = ({
             "hover:border-brand-primary/30 hover:shadow-glow-lg transform-gpu will-change-transform",
           )}
         >
-          {/* --- 02. NARRATIVE NODE --- */}
+          {/* --- LAYER 02: NARRATIVE MATRIX --- */}
           <div className="mx-auto max-w-4xl space-y-12">
-            <div
-              suppressHydrationWarning
-              className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-sm"
-            >
+            {/* Specialist Badge Status */}
+            <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-sm">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="bg-brand-primary absolute inline-flex h-full w-full transform-gpu animate-ping rounded-full opacity-75"></span>
                 <span className="bg-brand-primary shadow-glow relative inline-flex h-2.5 w-2.5 rounded-full"></span>
               </span>
-              <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase md:text-[10px]">
+              <span
+                suppressHydrationWarning
+                className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase md:text-[10px]"
+              >
                 System_Node.v{SITE_CONFIG.project.version} // Specialist_Active
               </span>
             </div>
@@ -86,18 +90,19 @@ const ConversionCTA = ({
               </p>
             </div>
 
-            {/* --- 03. ACTION INTERFACE: Hybrid Link Dispatcher --- */}
+            {/* --- LAYER 03: INTERFACE DISPATCHER --- */}
             <div className="flex flex-col items-center justify-center gap-6 pt-10 sm:flex-row">
+              {/* PRIMARY: External Gateway (Line OA) - [RESOLVED]: ใช้ variant="neo" */}
               {buttonHref && (
                 <Button
                   asChild
                   size="lg"
+                  variant="neo"
                   className={cn(
                     "group relative h-20 overflow-hidden rounded-[2rem] px-12 transition-all duration-500 md:h-24 md:rounded-[2.5rem] md:px-16",
-                    "bg-brand-primary text-surface-main hover:bg-text-primary hover:text-surface-main shadow-glow-lg transform-gpu hover:scale-110 active:scale-95",
+                    "shadow-glow-lg transform-gpu hover:scale-110 active:scale-95",
                   )}
                 >
-                  {/* [FIXED]: ใช้แท็ก <a> สำหรับ External Link (Line OA) เพื่อผ่าน Typed Routes check */}
                   <a
                     href={buttonHref}
                     target="_blank"
@@ -108,11 +113,13 @@ const ConversionCTA = ({
                     <span className="text-xs font-black tracking-[0.3em] uppercase md:text-sm">
                       {buttonLabel}
                     </span>
+                    {/* Neural Sweep Effect */}
                     <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-[1500ms] group-hover:translate-x-full" />
                   </a>
                 </Button>
               )}
 
+              {/* SECONDARY: Internal Bridge */}
               {secondaryLabel && secondaryHref && (
                 <Button
                   asChild
@@ -120,13 +127,12 @@ const ConversionCTA = ({
                   variant="outline"
                   className="hover:bg-surface-offset h-20 transform-gpu rounded-[2rem] border-2 px-10 text-xs font-black tracking-[0.2em] uppercase md:h-24 md:rounded-[2.5rem] md:px-12 md:text-sm"
                 >
-                  {/* [FIXED]: ใช้ Casting 'as Route' สำหรับลิงก์ภายในที่เป็น Dynamic String */}
                   <Link href={secondaryHref as Route}>{secondaryLabel}</Link>
                 </Button>
               )}
             </div>
 
-            {/* Specialist Marker */}
+            {/* Response Protocol Footer */}
             <div className="flex items-center justify-center gap-4 opacity-40 transition-opacity duration-500 hover:opacity-100">
               <IconRenderer name="Clock" size={16} className="text-brand-primary" strokeWidth={3} />
               <span
@@ -139,7 +145,7 @@ const ConversionCTA = ({
             </div>
           </div>
 
-          {/* --- 04. ATMOSPHERIC PULSE (GPU Accelerated) --- */}
+          {/* ATMOSPHERIC DEPTH (GPU Accelerated) */}
           <div className="bg-brand-primary/5 pointer-events-none absolute -bottom-60 -left-60 h-[500px] w-[500px] transform-gpu rounded-full mix-blend-screen blur-[120px] will-change-transform" />
         </div>
       </div>
