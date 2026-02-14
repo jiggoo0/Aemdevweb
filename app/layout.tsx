@@ -1,6 +1,6 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.112 (ARCHITECT_STABILIZED)
- * [STRATEGY]: Strict Type-Safety | Modern Next.js 15 Standards | Full Stack Observability
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.113 (STRUCTURE_ALIGNED)
+ * [STRATEGY]: Strict Type-Safety | Resource Prioritization | Path Alignment
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -20,7 +20,11 @@ import { TopLoader } from "@/components/layout/TopLoader";
 import { Toaster } from "@/components/ui/Sonner";
 import JsonLd from "@/components/seo/JsonLd";
 
-/* --- 01. FONT ORCHESTRATION (Variable-Based) --- */
+// --- Shared Feature Components ---
+// [ALIGNED]: นำเข้าจากตำแหน่งจริงตาม Directory Tree (components/shared)
+import LineStickyButton from "@/components/shared/LineStickyButton";
+
+/* --- 01. FONT ORCHESTRATION --- */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -36,12 +40,12 @@ const fontThai = IBM_Plex_Sans_Thai({
   preload: true,
 });
 
-/* --- 02. METADATA ENGINE (Strict Definition) --- */
+/* --- 02. METADATA ENGINE --- */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),
   title: {
     default: SITE_CONFIG.project.title,
-    template: `%s | ${SITE_CONFIG.brandName}`, // ปรับ Template ให้แสดงชื่อแบรนด์แทนชื่อโปรเจกต์
+    template: `%s | ${SITE_CONFIG.brandName}`,
   },
   description: SITE_CONFIG.description,
   applicationName: SITE_CONFIG.brandName,
@@ -54,11 +58,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.ico" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
@@ -97,11 +97,10 @@ export const metadata: Metadata = {
   },
 };
 
-/* --- 03. VIEWPORT CONFIGURATION --- */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: SITE_CONFIG.themeColor },
-    { media: "(prefers-color-scheme: dark)", color: "#020617" }, // ปรับให้เข้มขึ้นตามสไตล์ Modern Dark
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -109,22 +108,30 @@ export const viewport: Viewport = {
   userScalable: true,
 };
 
-/* --- 04. ROOT LAYOUT DEFINITION --- */
+/* --- 03. ROOT LAYOUT DEFINITION --- */
 interface RootLayoutProps {
   readonly children: React.ReactNode;
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  // [SEO]: Initialize Global Knowledge Graph (Schema.org)
+  // [SEO]: Initialize Global Knowledge Graph (Organization & Website)
   const schemaGraph = generateSchemaGraph([]);
 
   return (
     <html
       lang="th"
-      suppressHydrationWarning // จำเป็นสำหรับ next-themes
+      suppressHydrationWarning
       className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
     >
       <head>
+        {/* [CRITICAL_ASSET]: Preload LCP-breaking grid pattern */}
+        <link
+          rel="preload"
+          href="/grid-pattern.svg"
+          as="image"
+          type="image/svg+xml"
+          fetchPriority="high"
+        />
         <JsonLd data={schemaGraph} />
       </head>
 
@@ -132,26 +139,28 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           "bg-surface-main text-text-primary min-h-[100dvh] font-sans antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
-          "transition-colors duration-300", // เพื่อความเนียนในการสลับธีม
+          "transition-colors duration-300",
         )}
       >
-        {/* [PROVIDER]: Central Theme Authority */}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange // ป้องกันการเกิด White Flash ระหว่างโหลด
+          disableTransitionOnChange
         >
-          {/* [CLIENT_UI]: Perceived Performance Layer */}
+          {/* [UI]: Persistent Perceived Performance Layer */}
           <TopLoader color={SITE_CONFIG.themeColor} />
 
-          {/* [STRUCTURE]: Primary Viewport Container */}
+          {/* [STRUCTURE]: Primary Content Engine */}
           <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">{children}</div>
 
-          {/* [OVERLAY]: Feedback & Notification Layer */}
+          {/* [CONVERSION]: Global Line Sticky Button Anchor */}
+          <LineStickyButton />
+
+          {/* [FEEDBACK]: Global Notification Provider */}
           <Toaster position="top-center" richColors expand={false} closeButton />
 
-          {/* [MONITORING]: Real-world Performance Insights */}
+          {/* [INSIGHTS]: Performance Observability */}
           <SpeedInsights />
         </ThemeProvider>
       </body>

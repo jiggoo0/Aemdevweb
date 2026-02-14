@@ -1,64 +1,104 @@
-00-SYSTEM-MANDATE.md
-PROJECT IDENTITY
-Domain: aemdevweb.com
-Codename: AEM-HYPER-PERFORMANCE
-Version: 17.9.52 (Production-Ready / Hardened)
-Framework: Next.js 16.1.6 (App Router)
-Runtime: Node.js (Termux / Vercel Edge)
-Maintainer: AEMZA MACKS (Alongkorn Yomkerd)
-Last Audit: 2026-02-13 03:32:15
-Status: STRICTLY_ENFORCED
+# SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
+**Version:** 17.9.100 (Ultimate Hardened)
+**Last Updated:** 2026-02-14
+**Maintainer:** AEMZA MACKS (Lead Architect / Alongkorn Yomkerd)
 
-1. CORE DIRECTIVES (กฎเหล็กสูงสุด)
+---
 
-- Strict Type Safety: ห้ามใช้ any โดยเด็ดขาด ทุกส่วนต้องใช้ Strict Typing จาก types/index.d.ts และรองรับ Async Params ของ Next.js 16
-- Single Source of Truth (SSOT): ห้าม Hardcode ข้อมูลทางธุรกิจ ข้อมูลทั้งหมดต้องดึงจาก constants/ และ SITE_CONFIG เท่านั้น
-- Static-First Architecture: ทุก Route ที่เป็นไปได้ต้องเป็น ● (SSG) ห้ามใช้ Dynamic Rendering (ƒ) หากไม่จำเป็น เพื่อรักษาขีดความสามารถในการทำ Indexing ของ Google
-- Zero-Error Policy: ห้ามข้ามขั้นตอนการรัน tsc --noEmit และ test:schema ก่อนการ Build เด็ดขาด
-- Performance or Death: ทุกหน้าต้องทำคะแนน Lighthouse ในส่วน Performance ให้ได้ 95+ โดยใช้ระบบ IMAGE_BLUR_DATA สำหรับภาพประกอบทั้งหมด
+## 1. CORE PHILOSOPHY (ปรัชญาหลัก)
+**"We don't just build websites; We engineer Digital Infrastructure."**
 
-2. TECHNOLOGY STACK & DEPENDENCIES
-   | Component | Version | Role |
-   |---|---|---|
-   | Framework | Next.js 16.1.6 | Core Infrastructure (webpack-based) |
-   | UI Engine | React 19.0.0 | Rendering Layer |
-   | Styling | Tailwind CSS 4.1.18 | Zero-Runtime Atomic CSS |
-   | Package Manager | pnpm 10.29.3 | Strict Dependency & Lockfile Integrity |
-   | Content Engine | MDX 3.1.1 | Dynamic-Static Content (Blog/Case Studies) |
-   | PWA Engine | Next Metadata API | manifest.ts & Web App Features |
-3. ARCHITECTURE & ROUTE GROUPS
-   ระบบจัดกลุ่มแบบ Route Groups เพื่อแยก Layout Logic อย่างเด็ดขาด:
-   app/
-   ├── (business)/ # P-SEO & Content (Areas, Blog, Case Studies)
-   ├── (main)/ # Core Pages (About, Privacy, Terms, Status)
-   ├── (sales)/ # Conversion Funnels (Services Hub)
-   ├── api/diag/ # System Diagnostic & Schema Validation
-   ├── layout.tsx # Root Layout (Fonts & Theme Provider)
-   └── manifest.ts # Dynamic PWA Manifest
+ระบบนี้ไม่ใช่แค่เว็บโชว์ข้อมูล แต่คือ **"เครื่องจักรทำเงิน (Revenue Engine)"** ที่ถูกจูนมาเพื่อ:
+1.  **Speed:** เร็วระดับปีศาจ (LCP < 2.5s) แม้บนมือถือ
+2.  **Trust:** ความน่าเชื่อถือต้องมาเป็นอันดับ 1 (E-E-A-T)
+3.  **SEO-First:** โครงสร้างต้องดันอันดับ Google ได้จริง ไม่ใช่แค่แปะ Keyword
+4.  **Lean:** ตัดขยะทิ้งให้หมด โค้ดทุกบรรทัดต้องมีหน้าที่
 
-4. DATA REGISTRY (THE BRAIN)
+---
 
-- site-config.ts: ควบคุม Brand Identity, Persona (Technical Authority), และช่องทางติดต่อหลัก
-- master-registry.ts: ฐานข้อมูลบริการ 7 รายการ (SEO Agency ถึง Bio-Link) พร้อมระบบราคาและ Features
-- area-nodes.ts: ฐานข้อมูล P-SEO 12 จังหวัดยุทธศาสตร์ (Bangkok ถึง Uttaradit)
-- image-blur-data.ts: ทะเบียน Base64 Placeholders สำหรับระบบ Blur-up ทุกจุด
+## 2. TECHNOLOGY STACK (เสาหลักทางเทคนิค)
+ระบบรันบนเทคโนโลยีล่าสุดของปี 2026 (Bleeding Edge) แต่ปรับจูนให้เสถียร:
 
-5. OPERATIONAL PROTOCOLS (ขั้นตอนมาตรฐาน)
-   5.1 Pre-Build Validation
-   ต้องรันและผ่าน 100% ก่อนทำเรื่อง Deploy:
+* **Core:** Next.js 16.1.6 (App Router) + React 19
+* **Styling:** Tailwind CSS v4 (No Runtime Overhead)
+* **Language:** TypeScript 5.9 (Strict Mode Only - ห้ามใช้ Any)
+* **Content:** MDX (สำหรับ Blog/Case Studies)
+* **Performance Monitor:** Bundle Analyzer + Knip (Dead Code Hunter)
 
-- pnpm fix: จัดระเบียบโค้ดตาม Prettier และ Lint
-- pnpm type-check: ตรวจสอบความสมบูรณ์ของ Type System
-- pnpm test:schema: ตรวจสอบความถูกต้องของ JSON-LD ทั้ง 19 Nodes
-  5.2 Build Execution
-  รัน pnpm build เพื่อสร้าง Artifacts:
-- Case Studies Hardening: ต้องแสดงผลเป็น ● (SSG) เท่านั้น (แก้ปัญหา ƒ Dynamic สำเร็จแล้ว)
-- Manifest & Robots: ระบบต้อง Generate ไฟล์ Static ออกมาให้ Bot อ่านได้ทันที
+### ⚠️ Special Environment Constraint (กฎเหล็กสภาพแวดล้อม)
+Project นี้พัฒนาแบบ **Hybrid Environment**:
+1.  **Local (Dev):** รันบน Android (Termux) -> **ต้องประหยัด Resource สูงสุด**
+    * `workerThreads: false`
+    * `webpack.cache: false` (เพื่อ save storage)
+2.  **Production:** Vercel Cloud -> **อัดเต็มสูบ** (Rust Compiler, Image Optimization)
 
-6. SYSTEM STATE SNAPSHOT (CURRENT)
+---
 
-- Build Integrity: ✅ PASS (46/46 Pages Prerendered)
-- Schema Health: ✅ OK (All 19 nodes are SEO-Ready)
-- Performance: ✅ OPTIMIZED (Atomic CSS < 110K, Minimal Chunks)
-- PWA Status: ✅ STANDALONE (Manifest & Icons fully integrated)
-  END OF MANDATE อำนาจการตัดสินใจทางเทคนิคถูกล็อคตามเอกสารนี้เพื่อรักษามาตรฐาน Specialist Infrastructure
+## 3. DATA ARCHITECTURE (โครงสร้างข้อมูล)
+เราใช้ระบบ **"The Bridge Pattern"** เพื่อรวมศูนย์ข้อมูล (Single Source of Truth):
+
+### 3.1 Master Registry (`master-registry.ts`)
+* คลังข้อมูลบริการทั้งหมด (Services) อยู่ที่นี่ที่เดียว
+* ห้าม Hard-code ข้อมูลบริการลงในไฟล์ Page โดยเด็ดขาด
+* ข้อมูลจะถูกส่งผ่าน Interface `UniversalTemplateProps` เพื่อให้ Template ทุกตัวคุยภาษาเดียวกัน
+
+### 3.2 Area Nodes (P-SEO Engine)
+* ใช้สำหรับทำ Local SEO (เจาะรายจังหวัด/อำเภอ)
+* ไฟล์อยู่ที่ `constants/area-nodes/`
+* ทุก Node ต้องมี `blurDataURL` (Gen อัตโนมัติ) เพื่อ UX ที่ลื่นไหล
+
+### 3.3 Site Config (Brand Identity)
+* ไฟล์ `site-config.ts` คือกฎหมายสูงสุดของ Brand
+* ชื่อ, เบอร์โทร, Social Links, Tone of Voice แก้ที่นี่ที่เดียว เปลี่ยนทั้งเว็บ
+
+---
+
+## 4. ROUTE STRUCTURE (โครงสร้างหน้าเว็บ)
+เราแบ่ง Folder ด้วย **Route Groups** เพื่อแยก Layout ให้ชัดเจน:
+
+* `app/(main)`: หน้าทั่วไป (Home, About, Legal) -> มี Navbar/Footer เต็มรูปแบบ
+* `app/(business)`: หน้าเนื้อหา (Blog, Areas, Case Studies) -> เน้นการอ่านและ Internal Link
+* `app/(sales)`: หน้าขายของ (Services, Sale Pages) -> **Conversion Focused** (ตัดเมนูรกๆ ออก เน้นปุ่มซื้อ)
+
+---
+
+## 5. SEO & SCHEMA STRATEGY
+นี่คือจุดขายหลักของ AEMDEVWEB:
+
+1.  **Strict Schema:** ทุกหน้าต้องมี JSON-LD ที่ถูกต้อง (เช็คผ่าน `test:schema` ก่อน Build)
+2.  **Meta Tags:** ห้ามปล่อยว่าง ต้องมี Title, Description, OG-Image ครบทุกหน้า
+3.  **No-Index Logic:**
+    * Production: Index ปกติ
+    * Dev/Preview: บังคับ `noindex, nofollow` ผ่าน `next.config.ts` เพื่อกัน Google สับสน
+
+---
+
+## 6. CODING STANDARDS (กฎการเขียนโค้ด)
+เพื่อให้ Aemza Macks ทำงานง่ายและเร็วที่สุด:
+
+* **Don't Repeat Yourself (DRY):** ถ้า Logic ซ้ำกันเกิน 2 ครั้ง -> แยกเป็น Component หรือ Utility
+* **Type Safety:** ห้าม `ts-ignore` ถ้าไม่จำเป็นจริงๆ (ต้องมีเหตุผลแนบ)
+* **Image Handling:** ห้ามใช้ `<img>` ธรรมดา ต้องใช้ `<Image />` ของ Next.js และใส่ `alt` เสมอ
+* **Clean Imports:** ใช้ Path Alias `@/components`, `@/lib` เสมอ อย่าใช้ `../../`
+
+---
+
+## 7. PERFORMANCE BUDGET (งบประมาณความเร็ว)
+ห้ามปล่อยให้เว็บอ้วนเกินความจำเป็น (มี `bundlesize` คุมอยู่):
+
+* **Main Bundle:** ห้ามเกิน 150 kB
+* **CSS:** ห้ามเกิน 130 kB (Tailwind v4 ช่วยตรงนี้ได้เยอะ)
+* **Images:** ใช้ WebP/AVIF เท่านั้น และ Cache 1 ปี (`immutable`)
+
+---
+
+## 8. DEPLOYMENT CHECKLIST
+ก่อนสั่ง `git push` หรือ `pnpm build` ต้องผ่านเช็คลิสต์นี้:
+
+1.  ✅ `pnpm test:schema` -> Schema ต้องเขียวหมด (Audited: OK)
+2.  ✅ `pnpm knip` -> ต้องไม่มีไฟล์ขยะหรือตัวแปรที่ไม่ได้ใช้
+3.  ✅ `pnpm type-check` -> TypeScript ต้องไม่แดง
+
+---
+
+**"Code is Poetry, Performance is Art, ROI is the Goal."**

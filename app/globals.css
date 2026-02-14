@@ -2,8 +2,8 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v17.9.112 (REFINED)
- * [STRATEGY]: Optical Typography | Adaptive Glass | GPU Composition
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v17.9.112 (ULTIMATE_HARDENED)
+ * [STRATEGY]: OKLCH Color Engine | Neural Physics | Adaptive Glass v2
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -13,10 +13,11 @@
   --font-sans: var(--font-sans), ui-sans-serif, system-ui;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
-  /* --- 02. COLOR PALETTE (Dynamic References) --- */
-  --color-brand-primary: var(--brand-primary);
-  --color-brand-secondary: var(--brand-secondary);
-  --color-brand-accent: var(--brand-accent);
+  /* --- 02. COLOR PALETTE (OKLCH Dynamic Mapping) --- */
+  /* [UPGRADED]: ใช้ OKLCH บังคับเพื่อรองรับ Dynamic Opacity โดยสีไม่เพี้ยน */
+  --color-brand-primary: oklch(var(--brand-primary-raw));
+  --color-brand-secondary: oklch(var(--brand-secondary-raw));
+  --color-brand-accent: oklch(var(--brand-accent-raw));
 
   --color-surface-main: var(--surface-main);
   --color-surface-offset: var(--surface-offset);
@@ -28,32 +29,33 @@
 
   --color-border: var(--border);
 
-  /* --- 03. DEPTH & LIGHTING --- */
-  --shadow-glow: 0 0 40px -10px var(--brand-primary);
+  /* --- 03. DEPTH & LIGHTING (Hardened) --- */
+  --shadow-glow: 0 0 40px -10px oklch(var(--brand-primary-raw) / 0.5);
   --shadow-pro: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
   --shadow-pro-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
 
-  /* --- 04. MOTION PHYSICS --- */
+  /* --- 04. MOTION PHYSICS (Neural Spring) --- */
   --ease-specialist: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
   :root {
-    /* Brand Identity */
-    --brand-primary: #ef4444;
-    --brand-secondary: #dc2626;
-    --brand-accent: #f87171;
+    /* [OKLCH_COMPONENTS]: L (Lightness) C (Chroma) H (Hue) */
+    /* Red-Dominant Strategy: Hardened Red for Authority */
+    --brand-primary-raw: 60% 0.25 25;
+    --brand-secondary-raw: 50% 0.22 25;
+    --brand-accent-raw: 75% 0.18 25;
 
     /* Light Mode Surfaces */
     --surface-main: #ffffff;
-    --surface-offset: #f8fafc; /* Cool Gray Tint */
+    --surface-offset: #f8fafc;
     --surface-card: #ffffff;
 
     /* Light Mode Text */
-    --text-primary: #0f172a; /* Slate 900 - คมชัดกว่า Pure Black */
-    --text-secondary: #475569; /* Slate 600 */
-    --text-muted: #94a3b8; /* Slate 400 */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
 
     --border: #e2e8f0;
     --radius: 0.75rem;
@@ -61,17 +63,14 @@
     /* Shadcn/UI Compatibility Bridge */
     --background: var(--surface-main);
     --foreground: var(--text-primary);
-    --primary: var(--brand-primary);
+    --primary: oklch(var(--brand-primary-raw));
     --primary-foreground: #ffffff;
-    --card: var(--surface-card);
-    --popover: var(--surface-card);
-    --border: var(--border);
-    --ring: var(--brand-primary);
+    --ring: oklch(var(--brand-primary-raw));
   }
 
   .dark {
     /* Dark Mode Surfaces */
-    --surface-main: #020617; /* Deep Slate - ดูแพงกว่า Pure Black */
+    --surface-main: #020617;
     --surface-offset: #0f172a;
     --surface-card: #1e293b;
 
@@ -84,17 +83,15 @@
     color-scheme: dark;
   }
 
-  /* --- GLOBAL RESET & OPTICAL TUNING --- */
   html {
     @apply antialiased;
     background-color: var(--surface-main);
     color: var(--text-primary);
     scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
 
-    /* [OPTICAL]: ปรับการเรนเดอร์ตัวอักษรให้คมชัดที่สุด */
+    /* [OPTICAL_TUNING]: เพิ่มความคมชัดสูงสุดของฟอนต์ */
     text-rendering: optimizeLegibility;
-    font-feature-settings: "cv11", "ss01";
+    font-feature-settings: "cv11", "ss01", "zero", "tnum";
   }
 
   body {
@@ -103,87 +100,52 @@
     overflow-x: hidden;
     position: relative;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* [LAYOUT]: ป้องกัน Image Layout Shift */
-  img,
-  video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* [ACCESSIBILITY]: Focus Ring มาตรฐานสากล */
-  :focus-visible {
-    outline: 2px solid var(--brand-primary);
-    outline-offset: 2px;
-  }
-
-  /* [SCROLLBAR]: Premium Floating Bar */
+  /* [SCROLLBAR]: AEM-Signature Compact Bar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--text-muted);
-    opacity: 0.4;
+    background: color-mix(in oklch, var(--text-muted), transparent 60%);
     border-radius: 99px;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     background-clip: content-box;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--text-secondary);
+    background-color: var(--brand-primary);
   }
 
-  /* [STYLE]: Global Selection */
   ::selection {
-    background-color: color-mix(in srgb, var(--brand-primary), transparent 82%);
-    color: var(--brand-primary);
-  }
-
-  /* [SAFETY]: Isolation Context */
-  #main-content {
-    isolation: isolate;
+    background-color: oklch(var(--brand-primary-raw) / 0.15);
+    color: oklch(var(--brand-primary-raw));
   }
 }
 
 @layer utilities {
   .container {
-    @apply mx-auto w-full max-w-[90rem] px-4 md:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[90rem] px-4 md:px-8;
   }
 
-  /* [GLASSMORPHISM]: Adaptive Glass Engine */
+  /* [GLASSMORPHISM]: Optimized Engine v2 */
   .glass-card {
-    background-color: color-mix(in srgb, var(--surface-card), transparent 30%);
+    background-color: color-mix(in oklch, var(--surface-card), transparent 30%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in srgb, var(--border), transparent 40%);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid color-mix(in oklch, var(--border), transparent 50%);
+    box-shadow: var(--shadow-pro);
   }
 
-  /* [TEXT_EFFECTS]: Gradient Text Utility */
   .text-gradient {
-    @apply from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent;
+    @apply from-brand-primary to-brand-accent bg-gradient-to-r bg-clip-text text-transparent;
   }
 
-  /* [PERFORMANCE]: Hardware Acceleration */
   .gpu-layer {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
+    @apply transform-gpu backface-hidden;
     will-change: transform, opacity;
-  }
-
-  /* [LAYOUT]: Hide Scrollbar but keep functionality */
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
   }
 }

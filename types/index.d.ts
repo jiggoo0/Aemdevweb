@@ -76,7 +76,7 @@ export type IconName =
   | "Send"
   | "Loader2"
   | "Timer"
-  | "Activity" // [ADDED]: สำหรับหน้า Status
+  | "Activity"
   | (string & {});
 
 export type TemplateSlug =
@@ -99,6 +99,7 @@ export interface ThemeConfig {
   readonly background?: string;
   readonly accent?: string;
   readonly gradient?: string;
+  readonly token?: string; // [FIXED]: เพิ่มเพื่อรองรับ Color Token เช่น gold, emerald
 }
 
 export interface SiteExpert {
@@ -146,7 +147,7 @@ export interface SiteConfig {
   readonly expert: SiteExpert;
   readonly contact: {
     readonly email: string;
-    readonly phone: string; // Mapping to 'telephone' in Schema
+    readonly phone: string;
     readonly displayPhone: string;
     readonly address: string;
     readonly streetAddress: string;
@@ -162,7 +163,7 @@ export interface SiteConfig {
     readonly roiFocus: boolean;
     readonly established: string;
     readonly status: string;
-    readonly priceRange: string; // [FIXED]: ป้องกัน Error ใน lib/schema.ts
+    readonly priceRange: string;
     readonly ids: Record<string, string>;
   };
   readonly verification: {

@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.105 (ULTIMATE_HARDENED)
- * [STRATEGY]: Neural Motion Physics | Dynamic Theme Sync | Build-Stabilized
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.106 (HYBRID_HARDENED)
+ * [STRATEGY]: CSS-First Initial State | Neural Physics | LCP Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -17,28 +17,29 @@ import { Button } from "@/components/ui/Button";
 const Hero = () => {
   /**
    * [PHYSICS]: Neural Spring Transition
-   * จูน Easing ให้มีความรู้สึก "หนักแน่น" ในตอนเริ่ม และ "นุ่มนวล" ในตอนจบ
+   * ปรับ Duration ให้กระชับขึ้นเพื่อลด Time to Interactive (TTI)
    */
   const sharedTransition: Transition = {
-    duration: 0.8,
+    duration: 0.6,
     ease: [0.16, 1, 0.3, 1],
   };
 
+  // [OPTIMIZED]: ใช้ opacity: 0.01 เพื่อรักษาพื้นที่ใน Layout ระหว่างรอ Hydration
   const fadeUp = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0.01, y: 15 },
     animate: { opacity: 1, y: 0 },
   };
 
   return (
     <section className="relative flex min-h-[85dvh] flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40 md:pb-36">
-      {/* --- 01. INFRASTRUCTURE LAYER (Visual Identity) --- */}
+      {/* --- 01. INFRASTRUCTURE LAYER --- */}
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04] select-none"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         aria-hidden="true"
       />
 
-      {/* Dynamic Ambient Aura: เชื่อมโยงสีธีมจาก LayoutEngine */}
+      {/* Dynamic Ambient Aura */}
       <div
         className="absolute top-[10%] -right-[5%] z-0 h-[500px] w-[500px] transform-gpu rounded-full opacity-20 blur-[100px]"
         style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
@@ -64,8 +65,8 @@ const Hero = () => {
           <motion.h1
             initial={fadeUp.initial}
             animate={fadeUp.animate}
-            transition={{ ...sharedTransition, delay: 0.1 }}
-            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
+            transition={{ ...sharedTransition, delay: 0.05 }}
+            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic opacity-100 transition-opacity duration-300 md:text-8xl lg:text-[7.5rem]"
           >
             <span className="text-brand-primary mr-4 block md:inline">AEMDEVWEB</span>
             {SITE_CONFIG.hero.title.replace("AEMDEVWEB", "")}
@@ -74,7 +75,7 @@ const Hero = () => {
           <motion.div
             initial={fadeUp.initial}
             animate={fadeUp.animate}
-            transition={{ ...sharedTransition, delay: 0.2 }}
+            transition={{ ...sharedTransition, delay: 0.1 }}
             className="border-brand-primary border-l-[6px] pl-8 md:pl-12"
           >
             <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
@@ -87,10 +88,9 @@ const Hero = () => {
         <motion.div
           initial={fadeUp.initial}
           animate={fadeUp.animate}
-          transition={{ ...sharedTransition, delay: 0.3 }}
+          transition={{ ...sharedTransition, delay: 0.15 }}
           className="mt-16 flex flex-col gap-6 md:flex-row md:items-center"
         >
-          {/* Primary Action (External Line) - [RESOLVED]: ใช้ variant="neo" */}
           <Button
             asChild
             size="lg"
@@ -109,7 +109,6 @@ const Hero = () => {
             </a>
           </Button>
 
-          {/* Secondary Action (Services) */}
           <Button
             asChild
             size="lg"

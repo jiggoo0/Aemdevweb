@@ -1,7 +1,7 @@
 /**
- * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v17.9.85 (HARDENED)
- * [STRATEGY]: Visual Storytelling | Direct Booking Profit | International SEO
- * [MAINTAINER]: AEMZA MACKS
+ * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v17.9.87 (THEME_HARDENED)
+ * [STRATEGY]: OKLCH Dynamic Gold | P3 Color Logic | Unified Tokens
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { TemplateMasterData } from "@/types";
@@ -19,19 +19,18 @@ export const hotelResortService: TemplateMasterData = {
   currency: "THB",
   unit: "เริ่มต้น",
 
-  // [HARDENED_THEME]: คุม Mood & Tone ให้เป็น Premium Luxury (Gold on Dark)
+  // [REFACTORED_THEME]: อัปเกรดสู่ระบบ OKLCH Engine เพื่อความหรูหราขั้นสูงสุด
   theme: {
-    primary: "#c5a358", // Luxury Gold
-    secondary: "#1a1a1a",
-    background: "bg-[#0a0a0a]",
-    accent: "#d4af37",
-    gradient: "from-[#c5a358]/15 via-transparent to-transparent",
+    token: "gold",
+    primary: "oklch(var(--brand-primary-raw))", // Luxury Gold Authority
+    secondary: "oklch(var(--brand-secondary-raw))",
+    background: "bg-slate-950", // พื้นหลังเข้มจัดเพื่อขับเน้นสีทอง
+    accent: "oklch(var(--brand-accent-raw))",
+    gradient: "from-brand-primary/15 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNALS]: ข้อความเน้นย้ำความมั่นใจระดับสากล
   clientTrust: "ยกระดับภาพลักษณ์ที่พักสู่มาตรฐานสากล พร้อมระบบจองตรงที่ทรงพลัง",
 
-  // [HUMAN_STORYTELLING]: เน้นการเพิ่มกำไรและการนำเสนอภาพลักษณ์ที่หรูหราเหนือคู่แข่ง
   benefits: [
     "รับกำไรเต็มเม็ดเต็มหน่วย: เพิ่มยอดจองตรง (Direct Booking) ช่วยคุณประหยัดค่าคอมมิชชั่น OTA (Agoda/Booking) 15-20% ในทุกออเดอร์",
     "โชว์เสน่ห์ที่พักได้เต็มที่: ดีไซน์เล่าเรื่องด้วยภาพ High-Resolution ช่วยให้ลูกค้าสัมผัสบรรยากาศจริงได้ดีกว่าหน้าเว็บจองที่พักทั่วไป",

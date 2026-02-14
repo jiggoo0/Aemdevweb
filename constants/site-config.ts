@@ -58,7 +58,7 @@ export const SITE_CONFIG: SiteConfig = {
   },
 
   expert: {
-    displayName: "นายเอ็มซ่ามากส์ (Alongkorn Yomkerd)", // [UPDATED]: Combined for UI visibility
+    displayName: "นายเอ็มซ่ามากส์", // [UPDATED]: Combined for UI visibility
     legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "Technical SEO Specialist",
