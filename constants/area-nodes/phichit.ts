@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v17.9.70
- * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Regional Authority
+ * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v17.9.71 (HEX_STANDARDIZED)
+ * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Hex Standard
  * [MARKET]: Phichit City, Taphan Hin, Bang Mun Nak (Rice Mill Belt)
  */
 import type { AreaNode } from "@/types";
@@ -8,13 +8,16 @@ import type { AreaNode } from "@/types";
 export const phichitNode: AreaNode = {
   slug: "phichit",
   province: "พิจิตร",
+  // [STRATEGY]: ใช้ 'local-authority' เพื่อสร้างความน่าเชื่อถือให้กับโรงสี/ธุรกิจท้องถิ่น
+  // หรืออาจพิจารณาใช้ 'catalog' หากเน้นขายเครื่องจักร/ปุ๋ยยาจำนวนมาก
   templateSlug: "local-authority",
+
   title: "รับทำเว็บไซต์ พิจิตร | จ้างทำเว็บโรงสีและธุรกิจการเกษตร ติดหน้าแรก Google",
   description:
     "สร้างความน่าเชื่อถือให้ธุรกิจของคุณด้วยเว็บไซต์ระดับมืออาชีพ โหลดไว ลูกค้าหาเจอง่ายบน Google คุยง่าย งานจบไว โดย นายเอ็มซ่ามากส์",
 
   longDescription:
-    "พิจิตรบ้านเราคือเมืองอู่ข้าวอู่น้ำที่สำคัญครับ ไม่ว่าคุณจะทำโรงสีข้าว ขายเครื่องจักรการเกษตร หรือทำธุรกิจค้าส่งรายใหญ่ การมีเว็บไซต์ที่ดูดีคือการโชว์ศักยภาพว่าบริษัทของคุณมั่นคงและเป็นมืออาชีพขนาดไหน " +
+    "พิจิตรบ้านเราคือเมืองอู่ข้าวอู่น้ำที่สำคัญครับ ไม่ว่าคุณจะเป็นโรงสีข้าว ขายเครื่องจักรการเกษตร หรือทำธุรกิจค้าส่งรายใหญ่ การมีเว็บไซต์ที่ดูดีคือการโชว์ศักยภาพว่าบริษัทของคุณมั่นคงและเป็นมืออาชีพขนาดไหน " +
     "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนธุรกิจของคุณให้ทันสมัยขึ้น เราเน้นทำเว็บไซต์ที่โชว์ผลงานและมาตรฐานโรงงานของคุณให้ชัดเจน เพื่อให้คู่ค้าจากทั่วประเทศตัดสินใจร่วมงานกับคุณได้ง่ายขึ้น " +
     "ที่สำคัญคือเราวางระบบให้คนค้นหาธุรกิจของคุณเจอใน Google ทันที ช่วยเพิ่มโอกาสในการปิดดีลใหม่ๆ โดยที่คุณไม่ต้องเหนื่อยออกไปหาลูกค้าเองครับ",
 
@@ -35,12 +38,15 @@ export const phichitNode: AreaNode = {
   heroImage: "/images/areas/phichit-node.webp",
   coordinates: { lat: 16.4428, lng: 100.3501 },
 
-  // [HARDENED_THEME]: ใช้สีเขียวมรกต (Emerald Green) สื่อถึงการเกษตรที่รุ่งเรืองและความสดใหม่ของแบรนด์
+  // [THEME_FIX]: Emerald Agro-Industry (เขียวมรกต-เทาเข้ม)
   theme: {
-    primary: "#059669", // Emerald 600
-    secondary: "#064e3b", // Emerald 900
-    background: "bg-slate-50",
-    gradient: "from-emerald-600/10 via-transparent to-transparent",
+    mode: "light",
+    primary: "#059669", // Emerald 600 (เขียวเกษตรมั่งคั่ง)
+    secondary: "#064e3b", // Emerald 900 (เขียวเข้มมั่นคง)
+    background: "#ecfdf5", // Emerald 50 (พื้นเขียวมิ้นต์อ่อนจาง สบายตา)
+    foreground: "#022c22", // Emerald 950 (ตัวหนังสือเข้มจัด อ่านชัดเจน)
+    accent: "#34d399", // Emerald 400
+    gradient: "from-[#059669]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -63,7 +69,7 @@ export const phichitNode: AreaNode = {
     ],
     competitorLevel: "low",
 
-    // [V17.9.70_EXTENSION]: Trust & Industrial Capability Data
+    // [TRUST_DATA]: Industrial Capability Data
     socialProof: {
       rating: 4.9,
       reviewCount: 38,

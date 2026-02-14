@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v17.9.80
- * [STRATEGY]: Regional Authority | Medical & Service SEO | Logistics Dominance
+ * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v17.9.81 (HEX_STANDARDIZED)
+ * [STRATEGY]: Regional Authority | Medical & Service SEO | Hex Standard
  * [MARKET]: Phitsanulok City, Indochina Intersection (Service & Healthcare Hub)
  */
 import type { AreaNode } from "@/types";
@@ -8,12 +8,14 @@ import type { AreaNode } from "@/types";
 export const phitsanulokNode: AreaNode = {
   slug: "phitsanulok",
   province: "พิษณุโลก",
+  // [STRATEGY]: ใช้ 'local-authority' เพื่อสร้างภาพลักษณ์ความน่าเชื่อถือ
+  // เหมาะสำหรับคลินิกการแพทย์ ธุรกิจโลจิสติกส์ และหน่วยงานบริการระดับภูมิภาค
   templateSlug: "local-authority",
+
   title: "รับทำเว็บไซต์ พิษณุโลก | จ้างทำเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
   description:
     "ยกระดับธุรกิจบริการและการแพทย์ของคุณด้วยเว็บไซต์มาตรฐานสากล โหลดไว ปลอดภัย และติดอันดับ Google ในฐานะผู้นำของภูมิภาค โดย นายเอ็มซ่ามากส์",
 
-  // [HUMAN_STORYTELLING]: เน้นความเป็นศูนย์กลางและการสร้างความน่าเชื่อถือในระดับวิชาชีพ
   longDescription:
     "พิษณุโลกคือหัวใจสำคัญของภาคเหนือตอนล่างครับ ไม่ว่าคุณจะบริหารคลินิกเฉพาะทาง ทำธุรกิจขนส่งระดับภูมิภาค หรือสถาบันการศึกษา เว็บไซต์ของคุณต้องสะท้อนถึง 'มาตรฐานสูงสุด' " +
     "นายเอ็มซ่ามากส์ เข้าใจดีว่าความเชื่อถือคือหัวใจของธุรกิจในเมืองนี้ เราจึงเน้นออกแบบเว็บไซต์ที่ดูสะอาดตา มั่นคง และเป็นมืออาชีพ เพื่อให้ลูกค้าหรือคนไข้ที่ค้นหาบริการของคุณใน Google " +
@@ -44,13 +46,15 @@ export const phitsanulokNode: AreaNode = {
   heroImage: "/images/areas/phitsanulok-node.webp",
   coordinates: { lat: 16.8211, lng: 100.2659 },
 
-  // [HARDENED_THEME]: ใช้สีน้ำเงินภูมิฐาน (Civic Blue) สื่อถึงความน่าเชื่อถือระดับองค์กรและการบริการ
+  // [THEME_FIX]: Civic Blue (น้ำเงินภูมิฐาน-ขาวสะอาด)
   theme: {
-    primary: "#1d4ed8", // Blue 700
-    secondary: "#1e3a8a", // Blue 900
-    background: "bg-slate-50",
-    accent: "#60a5fa",
-    gradient: "from-blue-600/10 via-transparent to-transparent",
+    mode: "light",
+    primary: "#1d4ed8", // Blue 700 (น้ำเงินวิชาชีพ)
+    secondary: "#1e3a8a", // Blue 900 (น้ำเงินเข้มองค์กร)
+    background: "#f8fafc", // Slate 50 (พื้นฟ้าเทาอ่อนจาง สะอาดตา)
+    foreground: "#0f172a", // Slate 900 (ตัวหนังสือเข้มจัด อ่านง่าย)
+    accent: "#60a5fa", // Blue 400
+    gradient: "from-[#1d4ed8]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -73,7 +77,7 @@ export const phitsanulokNode: AreaNode = {
     ],
     competitorLevel: "medium",
 
-    // [V17.9.80_EXTENSION]: Trust & Hub Conversion Data
+    // [TRUST_DATA]: Hub Conversion Data
     socialProof: {
       rating: 5.0,
       reviewCount: 112,

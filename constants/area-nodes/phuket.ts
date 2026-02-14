@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v17.9.70
- * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Ultra-High Conversion
+ * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v17.9.71 (HEX_STANDARDIZED)
+ * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Hex Standard
  * [MARKET]: Phuket, Laguna, Patong, Rawai (Luxury Real Estate & Hospitality)
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const phuketNode: AreaNode = {
   slug: "phuket",
   province: "ภูเก็ต",
+  // [STRATEGY]: ใช้ 'hotelresort' เพื่อโชว์ภาพ Visual ขนาดใหญ่
+  // และเน้นบรรยากาศแบบ Luxury ที่ดึงดูดลูกค้ากำลังซื้อสูง
   templateSlug: "hotelresort",
+
   title:
     "รับทำเว็บไซต์ ภูเก็ต | ออกแบบเว็บไซต์วิลล่าหรูและธุรกิจท่องเที่ยวพรีเมียม ติดหน้าแรก Google",
   description:
@@ -36,11 +39,14 @@ export const phuketNode: AreaNode = {
   heroImage: "/images/areas/phuket-node.webp",
   coordinates: { lat: 7.8804, lng: 98.3923 },
 
-  // [HARDENED_THEME]: ใช้สี Midnight Blue & Champagne Gold เพื่อสื่อถึงความหรูหราเหนือระดับ
+  // [THEME_FIX]: Midnight & Champagne Gold (หรูหรา-ระดับโลก)
   theme: {
-    primary: "#1e293b", // Slate 800 (Midnight Blue)
-    secondary: "#d4af37", // Metallic Gold
-    background: "bg-[#020617]",
+    mode: "dark", // ธีมเข้มเพื่อความหรูหรา (Premium Dark Mode)
+    primary: "#d4af37", // Champagne Gold (ทองแชมเปญ)
+    secondary: "#1e293b", // Midnight Blue (น้ำเงินเข้ม)
+    background: "#020617", // Rich Navy Black (เปลี่ยนจาก Class เป็น Hex)
+    foreground: "#f8fafc", // Ivory White (ขาวงาช้าง อ่านง่ายบนพื้นเข้ม)
+    accent: "#f59e0b", // Amber 500
     gradient: "from-[#d4af37]/10 via-transparent to-transparent",
   },
 
@@ -64,14 +70,14 @@ export const phuketNode: AreaNode = {
     ],
     competitorLevel: "high",
 
-    // [V17.9.70_EXTENSION]: Trust & High-End Conversion Data
+    // [TRUST_DATA]: High-End Conversion Data
     socialProof: {
       rating: 5.0,
       reviewCount: 215,
       localClient: "กลุ่มวิลล่าหรูระดับ Ultra-Luxury ย่านเชิงทะเล",
     },
     regionalPricing: {
-      startPrice: "25,000 บาท", // สะท้อนถึงคุณภาพงานระดับ World-class
+      startPrice: "25,000 บาท",
       timeline: "21-45 วัน",
     },
     localSuccessStory: {

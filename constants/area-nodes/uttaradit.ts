@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: UTTARADIT_D2C_HUB v17.9.80
- * [STRATEGY]: D2C Empowerment | Agricultural Branding | ROI-Driven E-commerce
+ * [SERVICE_NODE]: UTTARADIT_D2C_HUB v17.9.81 (HEX_STANDARDIZED)
+ * [STRATEGY]: D2C Empowerment | Agricultural Branding | Hex Standard
  * [MARKET]: Uttaradit City, Lablae, Phichai (Premium Agro-Trading)
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const uttaraditNode: AreaNode = {
   slug: "uttaradit",
   province: "อุตรดิตถ์",
+  // [STRATEGY]: ใช้ 'local-authority' เพื่อสร้าง Trust ให้กับสวนและแบรนด์ D2C
+  // เหมาะสำหรับเกษตรกรยุคใหม่ที่ต้องการขายตรงสู่ผู้บริโภคโดยไม่ผ่านคนกลาง
   templateSlug: "local-authority",
+
   title:
     "รับทำเว็บไซต์ อุตรดิตถ์ | จ้างทำเว็บขายของออนไลน์และสินค้าเกษตรพรีเมียม ติดหน้าแรก Google",
   description:
@@ -37,36 +40,38 @@ export const uttaraditNode: AreaNode = {
   heroImage: "/images/areas/uttaradit-node.webp",
   coordinates: { lat: 17.6256, lng: 100.0993 },
 
-  // [HARDENED_THEME]: ใช้สีเขียวทุเรียน (Forest/Emerald) ตัดกับสีส้มทอง เพื่อสื่อถึงผลผลิตคุณภาพสูง
+  // [THEME_FIX]: Agro-Premium (เขียวสวนมรกต-ทองทุเรียน)
   theme: {
-    primary: "#10b981", // Emerald 500
-    secondary: "#064e3b", // Deep Forest Green
-    background: "bg-slate-50",
-    accent: "#f59e0b", // Amber/Durian Gold
-    gradient: "from-emerald-600/10 via-transparent to-transparent",
+    mode: "light",
+    primary: "#059669", // Emerald 600 (เขียวสวนผลไม้)
+    secondary: "#064e3b", // Emerald 900 (เขียวป่าลึก - ความมั่นคง)
+    background: "#f0fdf4", // Emerald 50 (พื้นขาวเขียวอ่อน - สดชื่น)
+    foreground: "#022c22", // Emerald 950 (ตัวหนังสืออ่านง่าย คมชัด)
+    accent: "#d97706", // Amber 600 (สีทองทุเรียนหลงลับแล)
+    gradient: "from-[#059669]/10 via-transparent to-transparent",
   },
 
   localContext: {
     marketInsight:
-      "อุตรดิตถ์มีสินค้า Rare Item สูงมาก เว็บไซต์ที่รองรับระบบ Pre-order และโชว์ Story ของสวนอย่างชัดเจน จะช่วยให้คุณขายสินค้าได้ราคาสูงกว่าตลาดทั่วไปถึง 2-3 เท่า",
+      "อุตรดิตถ์มีสินค้า Rare Item สูงมาก เว็บไซต์ที่รองรับระบบ Pre-order และโชว์ Story ของสวนอย่างชัดเจน จะช่วยให้คุณขายสินค้าได้ราคาสูงกว่าตลาดทั่วไป",
     technicalApproach:
-      "เน้น Mobile-First Ordering System และการติดตั้ง Conversion API เพื่อติดตามเส้นทางลูกค้าจาก Facebook/TikTok มายังหน้าสั่งซื้อสวนของคุณโดยตรง",
+      "เน้น Mobile-First Ordering System และการติดตั้ง Conversion API เพื่อติดตามเส้นทางลูกค้าจาก Social Media มายังสวนของคุณโดยตรง",
     localStrength:
-      "เข้าใจวิถีการขายทุเรียนและของฝากเมืองอุตรดิตถ์ พร้อมช่วยวางแผน SEO ภาษาไทยที่เจาะจงกลุ่มคนรักสุขภาพและกลุ่มลูกค้าระดับพรีเมียม",
+      "เข้าใจวิถีการขายผลไม้พรีเมียมเมืองลับแล พร้อมช่วยวางแผน SEO ภาษาไทยที่เจาะจงกลุ่มคนรักสุขภาพและกลุ่มลูกค้าระดับ High-end",
     nicheIndustries: [
       "สวนทุเรียนหลง-หลินลับแล และผลไม้ฤดูกาล",
       "ธุรกิจของฝากและสินค้าเกษตรแปรรูป",
       "SME ท้องถิ่นที่ต้องการขายตรง (D2C)",
-      "ธุรกิจท่องเที่ยวเชิงวิถีชุมชน",
+      "ธุรกิจท่องเที่ยวเชิงวิถีชุมชนบ้านท่าเหนือ",
     ],
     painPoints: [
-      "ถูกกดราคาจากพ่อค้าคนกลางเพราะไม่มีช่องทางการขายของตัวเอง",
-      "ระบบจองจดใส่กระดาษแล้วตกหล่น ทำลูกค้าเสียความรู้สึก",
-      "สินค้าดีมากแต่หน้าเว็บ/เพจ ดูไม่น่าเชื่อถือพอที่จะขายราคาแพง",
+      "ถูกกดราคาจากพ่อค้าคนกลางเพราะไม่มีช่องทางการสื่อสารแบรนด์ของตัวเอง",
+      "ระบบจองจดใส่กระดาษแล้วตกหล่นในช่วงฤดูกาลทุเรียน",
+      "สินค้าเกรดส่งออกแต่ภาพลักษณ์หน้าเว็บดูไม่น่าเชื่อถือพอที่จะขายราคาพรีเมียม",
     ],
     competitorLevel: "low",
 
-    // [V17.9.80_EXTENSION]: Trust & D2C Conversion Data
+    // [TRUST_DATA]: D2C Conversion Data
     socialProof: {
       rating: 4.9,
       reviewCount: 48,

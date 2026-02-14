@@ -1,7 +1,7 @@
 /**
- * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v17.9.81 (THEME_FIXED)
+ * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v17.9.130 (THEME_STABILIZED)
  * [STRATEGY]: High Contrast | Dark Navy Premium | Readability Fix
- * [MAINTAINER]: AEMZA MACKS
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { TemplateMasterData } from "@/types";
@@ -19,13 +19,15 @@ export const corporateService: TemplateMasterData = {
   currency: "THB",
   unit: "โปรเจกต์",
 
-  // [THEME_ADJUSTMENT]: ปรับเป็น Dark Mode (Navy) เพื่อให้ตัวหนังสือสีขาวอ่านง่ายและดูแพง
+  // [THEME_ADJUSTMENT]: ปรับจูนเพื่อรองรับ DynamicThemeWrapper และ OKLCH Engine
   theme: {
-    primary: "#60a5fa", // สีฟ้าสว่าง (Light Blue) เพื่อให้ตัดกับพื้นหลังเข้ม
-    secondary: "#93c5fd", // สีฟ้าพาสเทล (Soft Blue) สำหรับข้อรอง
-    background: "bg-[#0f172a]", // Deep Navy (Slate-900) พื้นหลังสีน้ำเงินเข้มจัด
+    mode: "dark", // [FIXED]: กำหนดโหมดมืดเพื่อให้ระบบ Contrast ทำงานถูกต้อง
+    foreground: "#ffffff", // [FIXED]: กำหนดสีตัวอักษรหลักเป็นสีขาวเพื่อความอ่านง่าย
+    primary: "#60a5fa", // สีฟ้าสว่าง (Light Blue)
+    secondary: "#93c5fd", // สีฟ้าพาสเทล (Soft Blue)
+    background: "#0f172a", // [FIXED]: เปลี่ยนจาก Tailwind class เป็น Hex Code (Deep Navy)
     accent: "#1e40af", // สีน้ำเงินเข้มสำหรับเงาหรือกรอบ
-    gradient: "from-blue-900/50 via-[#0f172a] to-[#0f172a]", // ไล่เฉดให้ดูมีมิติ
+    gradient: "from-blue-900/50 via-[#0f172a] to-[#0f172a]",
   },
 
   clientTrust: "ได้รับความไว้วางใจจากบริษัทและองค์กรชั้นนำทั่วประเทศ",

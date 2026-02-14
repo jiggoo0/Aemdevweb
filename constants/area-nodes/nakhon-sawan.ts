@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v17.9.70
- * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Pak Nam Pho Dominance
+ * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v17.9.71 (HEX_STANDARDIZED)
+ * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Hex Standard
  * [MARKET]: Nakhon Sawan City, Pak Nam Pho, Logistics & Trading Hub
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const nakhonSawanNode: AreaNode = {
   slug: "nakhon-sawan",
   province: "นครสวรรค์",
+  // [STRATEGY]: ใช้ 'local-authority' เพื่อสร้างภาพลักษณ์ความน่าเชื่อถือ
+  // ให้กับร้านค้าส่ง (Gongsi) และธุรกิจท้องถิ่นที่มีประวัติยาวนาน
   templateSlug: "local-authority",
+
   title: "รับทำเว็บไซต์ นครสวรรค์ | จ้างทำเว็บร้านค้าส่งและธุรกิจให้คนหาเจอใน Google",
   description:
     "เปลี่ยนธุรกิจแบบเดิมให้ทันสมัยขึ้น ด้วยเว็บไซต์ที่ช่วยให้ลูกค้าใหม่ๆ หาคุณเจอจากทุกที่ทั่วไทย พร้อมปักหมุดร้านค้าให้คนโทรหาทันที โดย นายเอ็มซ่ามากส์",
@@ -43,12 +46,15 @@ export const nakhonSawanNode: AreaNode = {
   heroImage: "/images/areas/nakhon-sawan-node.webp",
   coordinates: { lat: 15.7042, lng: 100.1372 },
 
-  // [HARDENED_THEME]: ใช้สีแดงมงคล (Crimson Red) ตัดกับสีทอง เพื่อสื่อถึงความมั่งคั่งและการค้าขายตามวัฒนธรรมปากน้ำโพ
+  // [THEME_FIX]: Pak Nam Pho Prosperity (แดงมงคล-ทองอำพัน)
   theme: {
-    primary: "#be123c", // Rose 700 (Merchant Crimson)
-    secondary: "#fbbf24", // Amber 400 (Prosperity Gold)
-    background: "bg-slate-50",
-    gradient: "from-rose-600/10 via-transparent to-transparent",
+    mode: "light",
+    primary: "#be123c", // Rose 700 (แดงมงคล - สื่อถึงพลังค้าขาย)
+    secondary: "#881337", // Rose 900 (แดงเข้ม - ความหนักแน่น/กงสี)
+    background: "#fff1f2", // Rose 50 (พื้นขาวอมชมพูจางๆ ให้ความรู้สึกอบอุ่น)
+    foreground: "#4c0519", // Rose 950 (ตัวหนังสือสีแดงเลือดหมูเกือบดำ อ่านง่าย)
+    accent: "#d97706", // Amber 600 (สีทอง/ส้ม - ความมั่งคั่ง)
+    gradient: "from-[#be123c]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -71,7 +77,7 @@ export const nakhonSawanNode: AreaNode = {
     ],
     competitorLevel: "low",
 
-    // [V17.9.70_EXTENSION]: Trust & Merchant Conversion Data
+    // [TRUST_DATA]: Merchant Conversion Data
     socialProof: {
       rating: 4.9,
       reviewCount: 52,

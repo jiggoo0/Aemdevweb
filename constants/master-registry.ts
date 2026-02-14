@@ -1,5 +1,5 @@
 /**
- * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.106 (LEAN_RELEASE)
+ * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.107 (STABLE_RELEASE)
  * [STRATEGY]: Centralized Data Aggregation | Type-Safe Helper Export | SSG Core
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -18,7 +18,7 @@ import { localAuthorityService } from "./services/local-authority";
 /**
  * [REGISTRY]: คลังข้อมูลบริการหลัก (Master Database)
  * ทำหน้าที่เป็นหัวใจการเรนเดอร์สำหรับหน้า Hub และการสร้าง Static Paths
- * [LOGIC]: เรียงลำดับตาม Priority (0 = สูงสุด)
+ * [LOGIC]: เรียงลำดับตาม Priority (0 = สูงสุด) เพื่อการแสดงผลที่กำหนดได้
  */
 export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   seoAgencyService,
@@ -32,7 +32,8 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
 
 /**
  * [HELPER]: getServiceBySlug
- * @description ค้นหาข้อมูลบริการจาก URL Slug แบบ Type-Safe
+ * @description ค้นหาข้อมูลบริการจาก URL Slug แบบ Type-Safe 
+ * ใช้ในหน้า app/(sales)/services/[slug]/page.tsx
  */
 export const getServiceBySlug = (slug: string): TemplateMasterData | undefined => {
   return MASTER_REGISTRY.find((service) => service.templateSlug === slug);
@@ -41,11 +42,11 @@ export const getServiceBySlug = (slug: string): TemplateMasterData | undefined =
 /**
  * [HELPER]: getFeaturedServices
  * @description ดึงรายการบริการที่ระบุเป็น 'Featured' (isFeatured: true)
- * ใช้สำหรับแสดงผลในหน้าแรก (Main Landing Page)
+ * ใช้สำหรับแสดงผลใน Section บริการหน้าแรก (Main Landing Page)
  */
 export const getFeaturedServices = (): TemplateMasterData[] => {
   return MASTER_REGISTRY.filter((service) => service.isFeatured);
 };
 
-// [REMOVED]: getServicesByCategory (Deleted to satisfy Knip unused-export check)
-// หากต้องการใช้งานในอนาคต สามารถเพิ่มกลับมาได้เมื่อมีหน้า Component ที่เรียกใช้จริง
+// [KNIP_HYGIENE]: getServicesByCategory ถูกถอดออกชั่วคราวเพื่อลด Unused Exports
+// จะถูกเพิ่มกลับมาเมื่อมีการสร้างระบบ Filter ในหน้า Directory บริการ

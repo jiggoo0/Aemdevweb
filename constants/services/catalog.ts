@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v17.9.85 (HARDENED)
- * [STRATEGY]: Sales Enablement | B2B Authority | High-CTR SEO
+ * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v17.9.86 (THEME_STABILIZED)
+ * [STRATEGY]: Sales Enablement | B2B Authority | Hex Standard
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -19,56 +19,88 @@ export const catalogService: TemplateMasterData = {
   currency: "THB",
   unit: "เริ่มต้น",
 
-  // [HARDENED_THEME]: ใช้โทนสี Indigo-Violet ที่สื่อถึงความทันสมัยของระบบ E-commerce แต่ยังมีความเป็นมืออาชีพสูง
+  // [THEME_FIX]: ใช้ Hex Code เพื่อรองรับ OKLCH Engine
   theme: {
+    mode: "light",
     primary: "#7c3aed", // Violet 600
     secondary: "#4c1d95", // Violet 900
-    background: "bg-zinc-50",
-    accent: "#a78bfa",
-    gradient: "from-violet-600/10 via-transparent to-transparent",
+    background: "#f5f3ff", // Violet 50 (Very light purple for clean look)
+    foreground: "#1e1b4b", // Indigo 950 (Dark text)
+    accent: "#a78bfa", // Violet 400
+    gradient: "from-[#7c3aed]/15 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNALS]: เน้นย้ำความเป็นมืออาชีพและการจัดการข้อมูลระดับสูง
   clientTrust: "สถาปัตยกรรมจัดการข้อมูลสินค้าที่ลื่นไหลที่สุด สำหรับธุรกิจ B2B ยุคใหม่",
 
-  // [HUMAN_STORYTELLING]: เน้นแก้ปัญหาหน้างานจริง (Sales Empowerment)
   benefits: [
-    "Sales Team Empowerment: เซลส์ทำงานง่ายขึ้น ไม่ต้องพกแคตตาล็อกเล่มหนา แค่ส่งลิงก์เดียวลูกค้าดูสเปคได้ครบถ้วน พร้อมปิดการขายได้ทุกที่",
-    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ ช่วยคัดกรองลูกค้าที่มีความต้องการซื้อจริง (Qualified Leads)",
-    "Scalable Data Management: รองรับสินค้าหลักหมื่น SKU ได้อย่างไร้กังวล ระบบค้นหาอัจฉริยะช่วยให้ลูกค้าเจอสิ่งที่ต้องการในไม่กี่วินาที",
+    "Sales Team Empowerment: เซลส์ทำงานง่ายขึ้น ไม่ต้องพกแคตตาล็อกเล่มหนา แค่ส่งลิงก์เดียวลูกค้าดูสเปคได้ครบถ้วน",
+    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ คัดกรองลูกค้าตัวจริง",
+    "Scalable Data Management: รองรับสินค้าหลักหมื่น SKU ได้อย่างไร้กังวล พร้อมระบบค้นหาอัจฉริยะ",
   ],
 
   coreFeatures: [
     {
       title: "Smart Filter & Search",
-      description:
-        "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดแม่นยำ เหมาะสำหรับสินค้าอุตสาหกรรมที่มีสเปคซับซ้อน",
+      description: "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดแม่นยำ",
       icon: "Search",
     },
     {
       title: "Direct RFQ System",
-      description:
-        "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายของคุณไม่พลาดทุกโอกาสในการปิดดีลใหญ่",
+      description: "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายไม่พลาดทุกโอกาส",
       icon: "FileText",
     },
     {
       title: "Automated Datasheets",
-      description:
-        "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF หรือ Datasheet ให้ลูกค้าดาวน์โหลดได้ทันทีจากหน้าเว็บ",
+      description: "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF ให้ลูกค้าดาวน์โหลดได้ทันที",
       icon: "FileDown",
+    },
+  ],
+
+  // [CATALOG_ITEMS]: ตัวอย่างรายการสินค้า (Mockup)
+  items: [
+    {
+      name: "Industrial Pump X-200",
+      description: "ปั๊มน้ำอุตสาหกรรมแรงดันสูง",
+      icon: "Settings",
+      price: "Call",
+    },
+    { name: "Heavy Duty Valve", description: "วาล์วทองเหลืองเกรด A", icon: "Disc", price: "Call" },
+    {
+      name: "Conveyor Belt 5M",
+      description: "สายพานลำเลียงทนความร้อน",
+      icon: "Activity",
+      price: "Call",
+    },
+    {
+      name: "Hydraulic Press",
+      description: "เครื่องอัดไฮดรอลิก 50 ตัน",
+      icon: "Cpu",
+      price: "Call",
+    },
+    {
+      name: "Safety Gear Set",
+      description: "ชุดป้องกันความปลอดภัยโรงงาน",
+      icon: "Shield",
+      price: "Call",
+    },
+    {
+      name: "Smart Sensor IoT",
+      description: "เซ็นเซอร์ตรวจจับการทำงานเครื่องจักร",
+      icon: "Wifi",
+      price: "Call",
     },
   ],
 
   faqs: [
     {
-      question: "ต่างจากขายบน Marketplace อย่าง Shopee/Lazada อย่างไร?",
+      question: "ต่างจากขายบน Shopee/Lazada อย่างไร?",
       answer:
-        "แคตตาล็อกออนไลน์ของเราเน้น 'Brand Authority' และ 'B2B Workflow' ครับ เราสร้างมาเพื่อรองรับการสั่งซื้อล็อตใหญ่และการสร้างความเชื่อถือองค์กร ไม่ใช่แค่การขายปลีกแข่งราคา",
+        "เน้น 'Brand Authority' และการสั่งซื้อล็อตใหญ่ (B2B) ครับ ไม่ใช่การขายปลีกแข่งราคาแบบ Marketplace",
     },
     {
-      question: "ถ้าข้อมูลสินค้ามีการเปลี่ยนแปลงบ่อย จัดการยากไหม?",
+      question: "ถ้าข้อมูลสินค้าเยอะ จัดการยากไหม?",
       answer:
-        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload หรือแก้ไขรายชิ้นได้อย่างรวดเร็ว ไม่ต้องรอโปรแกรมเมอร์",
+        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload หรือแก้ไขรายชิ้นได้อย่างรวดเร็ว",
     },
   ],
 
@@ -77,7 +109,6 @@ export const catalogService: TemplateMasterData = {
     "จ้างทำเว็บไซต์บริษัท",
     "ระบบขอใบเสนอราคาออนไลน์",
     "ทำเว็บโรงงานอุตสาหกรรม",
-    "แคตตาล็อกออนไลน์ B2B",
     "Digital Product Catalog",
   ],
 

@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: KORAT_TRADE_CATALOG_HUB v17.9.70
- * [STRATEGY]: Industrial Catalog Authority | B2B Trust | Gateway SEO
+ * [SERVICE_NODE]: KORAT_TRADE_CATALOG_HUB v17.9.71 (THEME_NORMALIZED)
+ * [STRATEGY]: Industrial Catalog Authority | B2B Trust | Hex Standard
  * [MARKET]: Nakhon Ratchasima (Korat), Pak Chong, Industrial Zones
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const koratNode: AreaNode = {
   slug: "korat",
   province: "นครราชสีมา",
+  // [STRATEGY]: ใช้ Catalog สำหรับโคราช เพราะเน้นโรงงาน ร้านวัสดุ และธุรกิจรับเหมา
+  // ที่ต้องการโชว์รายการสินค้า/ผลงานจำนวนมาก
   templateSlug: "catalog",
+
   title: "รับทำเว็บไซต์ โคราช | จ้างทำเว็บแค็ตตาล็อกสินค้าและธุรกิจรับเหมา ติดหน้าแรก Google",
   description:
     "เปลี่ยนการขายของแบบเดิมๆ ให้ทันสมัยด้วยระบบแค็ตตาล็อกออนไลน์ที่ลูกค้าดูง่าย โหลดไว พร้อมสร้างความน่าเชื่อถือให้บริษัทของคุณ โดย นายเอ็มซ่ามากส์",
@@ -36,12 +39,15 @@ export const koratNode: AreaNode = {
   heroImage: "/images/areas/korat-node.webp",
   coordinates: { lat: 14.9759, lng: 102.1177 },
 
-  // [HARDENED_THEME]: ใช้โทนสี Slate/Teal เพื่อสื่อถึงความมั่นคงในงานอุตสาหกรรมและวิศวกรรม
+  // [THEME_FIX]: เปลี่ยนเป็น Hex Standard เพื่อให้รองรับ OKLCH Engine
   theme: {
-    primary: "#0f172a", // Slate 900
-    secondary: "#0d9488", // Teal 600
-    background: "bg-slate-50",
-    gradient: "from-teal-500/10 via-transparent to-transparent",
+    mode: "light", // ระบุโหมดพื้นสว่าง
+    primary: "#0f172a", // Slate 900 (สีเข้มสื่อถึงความหนักแน่น/วัสดุก่อสร้าง)
+    secondary: "#0d9488", // Teal 600 (สีเขียวอมฟ้า สื่อถึงวิศวกรรมและความเติบโต)
+    background: "#f8fafc", // Slate 50 (เปลี่ยนจาก bg-slate-50 เป็น Hex)
+    foreground: "#020617", // Slate 950 (ตัวหนังสือเกือบดำ อ่านชัดที่สุด)
+    accent: "#14b8a6", // Teal 500
+    gradient: "from-[#0d9488]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -64,7 +70,7 @@ export const koratNode: AreaNode = {
     ],
     competitorLevel: "medium",
 
-    // [V17.9.70_EXTENSION]: Trust & Business Capability Data
+    // [TRUST_DATA]: Business Capability Data
     socialProof: {
       rating: 4.9,
       reviewCount: 68,

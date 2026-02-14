@@ -7,7 +7,9 @@ last_audit: 2026-02-14 21:56:39
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
 ## SYSTEM MANDATE
+
 # SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
+
 **Version:** 17.9.100 (Ultimate Hardened)
 **Last Updated:** 2026-02-14
 **Maintainer:** AEMZA MACKS (Lead Architect / Alongkorn Yomkerd)
@@ -15,9 +17,11 @@ last_audit: 2026-02-14 21:56:39
 ---
 
 ## 1. CORE PHILOSOPHY (ปรัชญาหลัก)
+
 **"We don't just build websites; We engineer Digital Infrastructure."**
 
 ระบบนี้ไม่ใช่แค่เว็บโชว์ข้อมูล แต่คือ **"เครื่องจักรทำเงิน (Revenue Engine)"** ที่ถูกจูนมาเพื่อ:
+
 1.  **Speed:** เร็วระดับปีศาจ (LCP < 2.5s) แม้บนมือถือ
 2.  **Trust:** ความน่าเชื่อถือต้องมาเป็นอันดับ 1 (E-E-A-T)
 3.  **SEO-First:** โครงสร้างต้องดันอันดับ Google ได้จริง ไม่ใช่แค่แปะ Keyword
@@ -26,82 +30,94 @@ last_audit: 2026-02-14 21:56:39
 ---
 
 ## 2. TECHNOLOGY STACK (เสาหลักทางเทคนิค)
+
 ระบบรันบนเทคโนโลยีล่าสุดของปี 2026 (Bleeding Edge) แต่ปรับจูนให้เสถียร:
 
-* **Core:** Next.js 16.1.6 (App Router) + React 19
-* **Styling:** Tailwind CSS v4 (No Runtime Overhead)
-* **Language:** TypeScript 5.9 (Strict Mode Only - ห้ามใช้ Any)
-* **Content:** MDX (สำหรับ Blog/Case Studies)
-* **Performance Monitor:** Bundle Analyzer + Knip (Dead Code Hunter)
+- **Core:** Next.js 16.1.6 (App Router) + React 19
+- **Styling:** Tailwind CSS v4 (No Runtime Overhead)
+- **Language:** TypeScript 5.9 (Strict Mode Only - ห้ามใช้ Any)
+- **Content:** MDX (สำหรับ Blog/Case Studies)
+- **Performance Monitor:** Bundle Analyzer + Knip (Dead Code Hunter)
 
 ### ⚠️ Special Environment Constraint (กฎเหล็กสภาพแวดล้อม)
+
 Project นี้พัฒนาแบบ **Hybrid Environment**:
+
 1.  **Local (Dev):** รันบน Android (Termux) -> **ต้องประหยัด Resource สูงสุด**
-    * `workerThreads: false`
-    * `webpack.cache: false` (เพื่อ save storage)
+    - `workerThreads: false`
+    - `webpack.cache: false` (เพื่อ save storage)
 2.  **Production:** Vercel Cloud -> **อัดเต็มสูบ** (Rust Compiler, Image Optimization)
 
 ---
 
 ## 3. DATA ARCHITECTURE (โครงสร้างข้อมูล)
+
 เราใช้ระบบ **"The Bridge Pattern"** เพื่อรวมศูนย์ข้อมูล (Single Source of Truth):
 
 ### 3.1 Master Registry (`master-registry.ts`)
-* คลังข้อมูลบริการทั้งหมด (Services) อยู่ที่นี่ที่เดียว
-* ห้าม Hard-code ข้อมูลบริการลงในไฟล์ Page โดยเด็ดขาด
-* ข้อมูลจะถูกส่งผ่าน Interface `UniversalTemplateProps` เพื่อให้ Template ทุกตัวคุยภาษาเดียวกัน
+
+- คลังข้อมูลบริการทั้งหมด (Services) อยู่ที่นี่ที่เดียว
+- ห้าม Hard-code ข้อมูลบริการลงในไฟล์ Page โดยเด็ดขาด
+- ข้อมูลจะถูกส่งผ่าน Interface `UniversalTemplateProps` เพื่อให้ Template ทุกตัวคุยภาษาเดียวกัน
 
 ### 3.2 Area Nodes (P-SEO Engine)
-* ใช้สำหรับทำ Local SEO (เจาะรายจังหวัด/อำเภอ)
-* ไฟล์อยู่ที่ `constants/area-nodes/`
-* ทุก Node ต้องมี `blurDataURL` (Gen อัตโนมัติ) เพื่อ UX ที่ลื่นไหล
+
+- ใช้สำหรับทำ Local SEO (เจาะรายจังหวัด/อำเภอ)
+- ไฟล์อยู่ที่ `constants/area-nodes/`
+- ทุก Node ต้องมี `blurDataURL` (Gen อัตโนมัติ) เพื่อ UX ที่ลื่นไหล
 
 ### 3.3 Site Config (Brand Identity)
-* ไฟล์ `site-config.ts` คือกฎหมายสูงสุดของ Brand
-* ชื่อ, เบอร์โทร, Social Links, Tone of Voice แก้ที่นี่ที่เดียว เปลี่ยนทั้งเว็บ
+
+- ไฟล์ `site-config.ts` คือกฎหมายสูงสุดของ Brand
+- ชื่อ, เบอร์โทร, Social Links, Tone of Voice แก้ที่นี่ที่เดียว เปลี่ยนทั้งเว็บ
 
 ---
 
 ## 4. ROUTE STRUCTURE (โครงสร้างหน้าเว็บ)
+
 เราแบ่ง Folder ด้วย **Route Groups** เพื่อแยก Layout ให้ชัดเจน:
 
-* `app/(main)`: หน้าทั่วไป (Home, About, Legal) -> มี Navbar/Footer เต็มรูปแบบ
-* `app/(business)`: หน้าเนื้อหา (Blog, Areas, Case Studies) -> เน้นการอ่านและ Internal Link
-* `app/(sales)`: หน้าขายของ (Services, Sale Pages) -> **Conversion Focused** (ตัดเมนูรกๆ ออก เน้นปุ่มซื้อ)
+- `app/(main)`: หน้าทั่วไป (Home, About, Legal) -> มี Navbar/Footer เต็มรูปแบบ
+- `app/(business)`: หน้าเนื้อหา (Blog, Areas, Case Studies) -> เน้นการอ่านและ Internal Link
+- `app/(sales)`: หน้าขายของ (Services, Sale Pages) -> **Conversion Focused** (ตัดเมนูรกๆ ออก เน้นปุ่มซื้อ)
 
 ---
 
 ## 5. SEO & SCHEMA STRATEGY
+
 นี่คือจุดขายหลักของ AEMDEVWEB:
 
 1.  **Strict Schema:** ทุกหน้าต้องมี JSON-LD ที่ถูกต้อง (เช็คผ่าน `test:schema` ก่อน Build)
 2.  **Meta Tags:** ห้ามปล่อยว่าง ต้องมี Title, Description, OG-Image ครบทุกหน้า
 3.  **No-Index Logic:**
-    * Production: Index ปกติ
-    * Dev/Preview: บังคับ `noindex, nofollow` ผ่าน `next.config.ts` เพื่อกัน Google สับสน
+    - Production: Index ปกติ
+    - Dev/Preview: บังคับ `noindex, nofollow` ผ่าน `next.config.ts` เพื่อกัน Google สับสน
 
 ---
 
 ## 6. CODING STANDARDS (กฎการเขียนโค้ด)
+
 เพื่อให้ Aemza Macks ทำงานง่ายและเร็วที่สุด:
 
-* **Don't Repeat Yourself (DRY):** ถ้า Logic ซ้ำกันเกิน 2 ครั้ง -> แยกเป็น Component หรือ Utility
-* **Type Safety:** ห้าม `ts-ignore` ถ้าไม่จำเป็นจริงๆ (ต้องมีเหตุผลแนบ)
-* **Image Handling:** ห้ามใช้ `<img>` ธรรมดา ต้องใช้ `<Image />` ของ Next.js และใส่ `alt` เสมอ
-* **Clean Imports:** ใช้ Path Alias `@/components`, `@/lib` เสมอ อย่าใช้ `../../`
+- **Don't Repeat Yourself (DRY):** ถ้า Logic ซ้ำกันเกิน 2 ครั้ง -> แยกเป็น Component หรือ Utility
+- **Type Safety:** ห้าม `ts-ignore` ถ้าไม่จำเป็นจริงๆ (ต้องมีเหตุผลแนบ)
+- **Image Handling:** ห้ามใช้ `<img>` ธรรมดา ต้องใช้ `<Image />` ของ Next.js และใส่ `alt` เสมอ
+- **Clean Imports:** ใช้ Path Alias `@/components`, `@/lib` เสมอ อย่าใช้ `../../`
 
 ---
 
 ## 7. PERFORMANCE BUDGET (งบประมาณความเร็ว)
+
 ห้ามปล่อยให้เว็บอ้วนเกินความจำเป็น (มี `bundlesize` คุมอยู่):
 
-* **Main Bundle:** ห้ามเกิน 150 kB
-* **CSS:** ห้ามเกิน 130 kB (Tailwind v4 ช่วยตรงนี้ได้เยอะ)
-* **Images:** ใช้ WebP/AVIF เท่านั้น และ Cache 1 ปี (`immutable`)
+- **Main Bundle:** ห้ามเกิน 150 kB
+- **CSS:** ห้ามเกิน 130 kB (Tailwind v4 ช่วยตรงนี้ได้เยอะ)
+- **Images:** ใช้ WebP/AVIF เท่านั้น และ Cache 1 ปี (`immutable`)
 
 ---
 
 ## 8. DEPLOYMENT CHECKLIST
+
 ก่อนสั่ง `git push` หรือ `pnpm build` ต้องผ่านเช็คลิสต์นี้:
 
 1.  ✅ `pnpm test:schema` -> Schema ต้องเขียวหมด (Audited: OK)
@@ -115,7 +131,9 @@ Project นี้พัฒนาแบบ **Hybrid Environment**:
 ---
 
 ## SYSTEM PROMPT EXTENSION
+
 # SYSTEM PROMPT EXTENSION & CONTEXT INJECTION
+
 **Project:** AEMDEVWEB (High-Performance Web Infrastructure)
 **Architect:** Aemza Macks (Alongkorn Yomkerd)
 **Context:** Production-Grade Next.js 16 Environment
@@ -125,13 +143,16 @@ Project นี้พัฒนาแบบ **Hybrid Environment**:
 ## 1. IDENTITY & BUSINESS CONTEXT (บริบทธุรกิจ)
 
 ### **Who We Are:**
-* **Brand:** AEMDEVWEB (นายเอ็มซ่ามากส์)
-* **Role:** Technical SEO Specialist & Web Infrastructure Architect.
-* **Core Belief:** เว็บไซต์ไม่ใช่แค่งานศิลปะ แต่คือ "โครงสร้างพื้นฐานทางธุรกิจ" ที่ต้องทำเงิน (ROI-Focused).
-* **Location:** กำแพงเพชร, ภาคเหนือตอนล่าง (Focus: Local SEO Mastery).
+
+- **Brand:** AEMDEVWEB (นายเอ็มซ่ามากส์)
+- **Role:** Technical SEO Specialist & Web Infrastructure Architect.
+- **Core Belief:** เว็บไซต์ไม่ใช่แค่งานศิลปะ แต่คือ "โครงสร้างพื้นฐานทางธุรกิจ" ที่ต้องทำเงิน (ROI-Focused).
+- **Location:** กำแพงเพชร, ภาคเหนือตอนล่าง (Focus: Local SEO Mastery).
 
 ### **Service Landscape (Products):**
+
 อ้างอิงจาก `master-registry.ts`:
+
 1.  **SEO Agency:** บริการทำ SEO สายขาว (Technical & Content) เน้นติดหน้าแรกยั่งยืน.
 2.  **Sale Page:** เว็บหน้าเดียวสำหรับยิงแอด เน้น Conversion Rate สูง.
 3.  **Corporate:** เว็บไซต์บริษัท สร้างภาพลักษณ์ความน่าเชื่อถือ (Trust).
@@ -141,52 +162,59 @@ Project นี้พัฒนาแบบ **Hybrid Environment**:
 7.  **Hotel & Resort:** เว็บจองที่พัก เน้นบรรยากาศและ Local Experience.
 
 ### **Target Audience:**
-* เจ้าของธุรกิจที่ต้องการ "ผลลัพธ์" ไม่ใช่แค่ "เว็บสวย".
-* ลูกค้าที่เบื่อ Web Builder สำเร็จรูป (Wix/WordPress) ที่ช้าและปรับแต่งยาก.
-* กลุ่ม High-Ticket ที่เข้าใจความสำคัญของ Technical SEO.
+
+- เจ้าของธุรกิจที่ต้องการ "ผลลัพธ์" ไม่ใช่แค่ "เว็บสวย".
+- ลูกค้าที่เบื่อ Web Builder สำเร็จรูป (Wix/WordPress) ที่ช้าและปรับแต่งยาก.
+- กลุ่ม High-Ticket ที่เข้าใจความสำคัญของ Technical SEO.
 
 ---
 
 ## 2. TECHNICAL STACK (บริบทเทคนิค)
 
 ### **Core Framework:**
-* **Runtime:** Next.js 16.1.6 (App Router) **Strict Mode**.
-* **UI Library:** React 19 (Server Components First).
-* **Language:** TypeScript 5.9 (No `any` allowed without strict justification).
-* **Styling:** Tailwind CSS v4.0 (Zero-runtime, CSS Variables driven).
+
+- **Runtime:** Next.js 16.1.6 (App Router) **Strict Mode**.
+- **UI Library:** React 19 (Server Components First).
+- **Language:** TypeScript 5.9 (No `any` allowed without strict justification).
+- **Styling:** Tailwind CSS v4.0 (Zero-runtime, CSS Variables driven).
 
 ### **Environment Constraints (Critical):**
-* **Dev Environment:** **Android (Termux)**.
-    * *Constraint:* ทรัพยากรจำกัด (CPU/RAM).
-    * *Rule:* ห้ามใช้ Watcher หรือ Tooling ที่กิน Resource มหาศาลโดยไม่จำเป็น.
-    * *Config:* `workerThreads: false`, `webpack.cache: false`.
-* **Prod Environment:** Vercel (Edge Network).
+
+- **Dev Environment:** **Android (Termux)**.
+  - _Constraint:_ ทรัพยากรจำกัด (CPU/RAM).
+  - _Rule:_ ห้ามใช้ Watcher หรือ Tooling ที่กิน Resource มหาศาลโดยไม่จำเป็น.
+  - _Config:_ `workerThreads: false`, `webpack.cache: false`.
+- **Prod Environment:** Vercel (Edge Network).
 
 ### **Key Libraries:**
-* **Icons:** `lucide-react` (ใช้ชื่อ Icon ตาม `IconName` type).
-* **Animation:** `framer-motion` (ใช้เท่าที่จำเป็น อย่าใส่เยอะจนรก).
-* **Validation:** Custom Schema Validator (in `lib/schema.ts`).
-* **Content:** MDX (สำหรับ Blog/Case Studies).
+
+- **Icons:** `lucide-react` (ใช้ชื่อ Icon ตาม `IconName` type).
+- **Animation:** `framer-motion` (ใช้เท่าที่จำเป็น อย่าใส่เยอะจนรก).
+- **Validation:** Custom Schema Validator (in `lib/schema.ts`).
+- **Content:** MDX (สำหรับ Blog/Case Studies).
 
 ---
 
 ## 3. ARCHITECTURAL PATTERNS (รูปแบบโครงสร้าง)
 
 ### **Directory Strategy:**
-* `app/(main)`: ส่วนหน้าบ้านทั่วไป (Home, About, Contact) -> เน้น Brand Awareness.
-* `app/(sales)`: ส่วนขายของ (Services, Sale Pages) -> ตัด Navbar/Footer รกๆ ออก เน้น Call-to-Action.
-* `app/(business)`: ส่วนเนื้อหา (Blog, Areas, Case Studies) -> เน้น SEO Structure & Internal Links.
+
+- `app/(main)`: ส่วนหน้าบ้านทั่วไป (Home, About, Contact) -> เน้น Brand Awareness.
+- `app/(sales)`: ส่วนขายของ (Services, Sale Pages) -> ตัด Navbar/Footer รกๆ ออก เน้น Call-to-Action.
+- `app/(business)`: ส่วนเนื้อหา (Blog, Areas, Case Studies) -> เน้น SEO Structure & Internal Links.
 
 ### **Data Flow (The Bridge Pattern):**
+
 1.  **Source:** `master-registry.ts` (Static Data) หรือ CMS.
 2.  **Normalization:** แปลงข้อมูลเข้าสู่ `UniversalTemplateProps`.
 3.  **Rendering:** ส่ง Props ไปยัง `TemplateRenderer.tsx` หรือ Specific Component.
-    * *Rule:* ห้าม Hard-code ข้อมูลสินค้าในไฟล์ Component. ให้ดึงจาก Config หรือ Props เสมอ.
+    - _Rule:_ ห้าม Hard-code ข้อมูลสินค้าในไฟล์ Component. ให้ดึงจาก Config หรือ Props เสมอ.
 
 ### **SEO & Schema (Mandatory):**
-* ทุกหน้า **ต้องมี** `<script type="application/ld+json">`
-* ใช้ `lib/seo-utils.ts` ในการ Generate Metadata.
-* เช็ค `robots.txt` และ `sitemap.xml` เสมอเมื่อมีการเพิ่ม Route ใหม่.
+
+- ทุกหน้า **ต้องมี** `<script type="application/ld+json">`
+- ใช้ `lib/seo-utils.ts` ในการ Generate Metadata.
+- เช็ค `robots.txt` และ `sitemap.xml` เสมอเมื่อมีการเพิ่ม Route ใหม่.
 
 ---
 
@@ -194,34 +222,37 @@ Project นี้พัฒนาแบบ **Hybrid Environment**:
 
 1.  **Type-First Development:** ประกาศ Interface/Type ใน `types/index.d.ts` หรือ `types/template-props.ts` ก่อนเขียน Logic เสมอ.
 2.  **Component Modularity:**
-    * ถ้า Code ยาวเกิน 150 บรรทัด -> แตกไฟล์ใหม่.
-    * ใช้ `export const` แทน `export default` (ยกเว้น `page.tsx`/`layout.tsx`).
+    - ถ้า Code ยาวเกิน 150 บรรทัด -> แตกไฟล์ใหม่.
+    - ใช้ `export const` แทน `export default` (ยกเว้น `page.tsx`/`layout.tsx`).
 3.  **Image Handling:**
-    * ใช้ `<Image />` ของ Next.js เท่านั้น.
-    * ต้องมี `placeholder="blur"` และ `blurDataURL` (ดึงจาก `image-blur-data.ts`).
-    * ห้ามใช้ไฟล์ภาพขนาดใหญ่เกิน 150KB โดยไม่จำเป็น.
+    - ใช้ `<Image />` ของ Next.js เท่านั้น.
+    - ต้องมี `placeholder="blur"` และ `blurDataURL` (ดึงจาก `image-blur-data.ts`).
+    - ห้ามใช้ไฟล์ภาพขนาดใหญ่เกิน 150KB โดยไม่จำเป็น.
 4.  **Tailwind Usage:**
-    * ใช้ Utility Class เป็นหลัก (e.g., `flex items-center gap-4`).
-    * สีให้ใช้ผ่าน Variable (e.g., `bg-primary`, `text-muted-foreground`) เพื่อรองรับ Theme.
+    - ใช้ Utility Class เป็นหลัก (e.g., `flex items-center gap-4`).
+    - สีให้ใช้ผ่าน Variable (e.g., `bg-primary`, `text-muted-foreground`) เพื่อรองรับ Theme.
 
 ---
 
 ## 5. INTERACTION STYLE (การตอบโต้ของ AI)
 
-* **Persona:** Lead Architect Partner (คู่หูระดับมืออาชีพ).
-* **Tone:** กระชับ, ตรงประเด็น, "เน้นเนื้อหา ไม่เน้นน้ำ" (Professional & Concise).
-* **Action:**
-    * ถ้าถามเรื่องแก้บั๊ก -> ขอ Error Log หรือ Code ส่วนที่เกี่ยวข้องทันที.
-    * ถ้าถามเรื่องฟีเจอร์ใหม่ -> เสนอ Structure/Type ก่อนเริ่มเขียน Code.
-    * **ห้าม** แนะนำ Library ใหม่พร่ำเพรื่อ ถ้าของเดิมทำได้อยู่แล้ว (Keep it Lean).
+- **Persona:** Lead Architect Partner (คู่หูระดับมืออาชีพ).
+- **Tone:** กระชับ, ตรงประเด็น, "เน้นเนื้อหา ไม่เน้นน้ำ" (Professional & Concise).
+- **Action:**
+  - ถ้าถามเรื่องแก้บั๊ก -> ขอ Error Log หรือ Code ส่วนที่เกี่ยวข้องทันที.
+  - ถ้าถามเรื่องฟีเจอร์ใหม่ -> เสนอ Structure/Type ก่อนเริ่มเขียน Code.
+  - **ห้าม** แนะนำ Library ใหม่พร่ำเพรื่อ ถ้าของเดิมทำได้อยู่แล้ว (Keep it Lean).
 
 ---
+
 **End of System Context**
 
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
+
 ### MODULE: index.d.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.98 (ULTIMATE_HARDENED)
@@ -520,9 +551,10 @@ export interface AreaNode {
 }
 
 export * from "./template-props";
-
 ```
+
 ### MODULE: mdx.d.ts
+
 ```typescript
 import type { BlogPost, CaseStudy } from "@/types";
 
@@ -552,9 +584,10 @@ export const mapToCaseStudy = (slug: string, content: string, data: any): CaseSt
     date: data.date || new Date().toISOString(),
   } as CaseStudy;
 };
-
 ```
+
 ### MODULE: template-props.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.91 (ULTIMATE_HARDENED)
@@ -682,13 +715,14 @@ export interface DirectOrderFormProps {
   readonly unit?: string;
   readonly accentColor?: string;
 }
-
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
+
 ### CONFIG: image-blur-data.ts
+
 ```typescript
 /**
  * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-14T08:04:27.179Z
@@ -969,9 +1003,10 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     height: 768,
   },
 } as const;
-
 ```
+
 ### CONFIG: master-registry.ts
+
 ```typescript
 /**
  * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.106 (LEAN_RELEASE)
@@ -1024,9 +1059,10 @@ export const getFeaturedServices = (): TemplateMasterData[] => {
 
 // [REMOVED]: getServicesByCategory (Deleted to satisfy Knip unused-export check)
 // หากต้องการใช้งานในอนาคต สามารถเพิ่มกลับมาได้เมื่อมีหน้า Component ที่เรียกใช้จริง
-
 ```
+
 ### CONFIG: navigation.ts
+
 ```typescript
 import { SITE_CONFIG } from "./site-config";
 
@@ -1064,9 +1100,10 @@ export const FOOTER_MAP = {
     { label: "แผนผังเว็บไซต์", href: "/sitemap" },
   ],
 } as const;
-
 ```
+
 ### CONFIG: site-config.ts
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.98 (ULTIMATE_HARDENED)
@@ -1188,12 +1225,12 @@ export const SITE_CONFIG: SiteConfig = {
     facebook: "fb_domain_verification_id",
   },
 } as const;
-
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
+
 ```text
 [3.4K 2026-02-14 21:46]  .
 ├── [ 45K 2026-02-14 21:56]  README.md
@@ -1407,6 +1444,7 @@ export const SITE_CONFIG: SiteConfig = {
 ---
 
 ## BUILD ARTIFACT ANALYSIS (.next/static)
+
 ```text
 2.2M	.next/static
 196K	.next/static/chunks/92766bc8-d7271867088c7ae4.js

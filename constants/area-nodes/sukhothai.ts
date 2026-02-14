@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v17.9.70
- * [STRATEGY]: Premium Branding | Aesthetic Storytelling | Cultural SEO
+ * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v17.9.71 (HEX_STANDARDIZED)
+ * [STRATEGY]: Premium Branding | Aesthetic Storytelling | Hex Standard
  * [MARKET]: Sukhothai Old Town, Si Satchanalai (Premium OTOP & Boutique Tourism)
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const sukhothaiNode: AreaNode = {
   slug: "sukhothai",
   province: "สุโขทัย",
+  // [STRATEGY]: ใช้ 'local-authority' เพื่อสร้างโครงสร้างที่ดูสะอาดตา มั่นคง
+  // และเน้นการเล่าเรื่อง (Storytelling) ให้กับแบรนด์หัตถกรรมระดับพรีเมียม
   templateSlug: "local-authority",
+
   title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ให้งานฝีมือดูพรีเมียม ติดหน้าแรก Google",
   description:
     "เปลี่ยนงานหัตถศิลป์และธุรกิจท่องเที่ยวสุโขทัย ให้ดูสวยแพงและน่าเชื่อถือ ด้วยเว็บไซต์ที่บอกเล่าเรื่องราวได้โดนใจลูกค้า โดย นายเอ็มซ่ามากส์",
@@ -34,11 +37,14 @@ export const sukhothaiNode: AreaNode = {
   heroImage: "/images/areas/sukhothai-node.webp",
   coordinates: { lat: 17.0078, lng: 99.8235 },
 
-  // [HARDENED_THEME]: ใช้สี Heritage Gold & Clay Brown เพื่อสื่อถึงเครื่องทองและงานสังคโลกที่มีค่า
+  // [THEME_FIX]: Heritage Gold & Clay (ทองเหลือง-น้ำตาลดินเผา)
   theme: {
-    primary: "#b58d3d", // Heritage Gold
-    secondary: "#5c4033", // Deep Clay
-    background: "bg-[#fdfbf7]", // Warm Paper White
+    mode: "light",
+    primary: "#b58d3d", // Heritage Gold (ทองโบราณ)
+    secondary: "#5c4033", // Deep Clay (น้ำตาลดินเผาเข้ม)
+    background: "#fdfbf7", // Warm Paper White (ขาวนวลแบบกระดาษสา)
+    foreground: "#2a1b0f", // Dark Clay Wood (น้ำตาลเข้มเกือบดำ อ่านง่ายและดูแพง)
+    accent: "#d4af37", // Bright Gold
     gradient: "from-[#b58d3d]/10 via-transparent to-transparent",
   },
 
@@ -62,14 +68,14 @@ export const sukhothaiNode: AreaNode = {
     ],
     competitorLevel: "low",
 
-    // [V17.9.70_EXTENSION]: Trust & Aesthetic Conversion Data
+    // [TRUST_DATA]: Aesthetic Conversion Data
     socialProof: {
       rating: 4.9,
       reviewCount: 45,
       localClient: "แบรนด์เครื่องเงินโบราณชื่อดัง ในศรีสัชนาลัย",
     },
     regionalPricing: {
-      startPrice: "10,500 บาท", // สะท้อนงาน Branding & Design
+      startPrice: "10,500 บาท",
       timeline: "10-14 วัน",
     },
     localSuccessStory: {

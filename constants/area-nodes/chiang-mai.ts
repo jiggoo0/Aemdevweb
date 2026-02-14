@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v17.9.70
- * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Global Reach
+ * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v17.9.72 (THEME_NORMALIZED)
+ * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Hex Standard
  * [MARKET]: Chiang Mai Tourism, Wellness & Creative Arts
  */
 import type { AreaNode } from "@/types";
@@ -9,6 +9,7 @@ export const chiangMaiNode: AreaNode = {
   slug: "chiang-mai",
   province: "เชียงใหม่",
   templateSlug: "hotelresort",
+
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บไซต์โรงแรม ติดหน้าแรก Google เพิ่มยอดจอง",
   description:
     "เปลี่ยนเว็บไซต์ให้เป็นพนักงานต้อนรับมือโปร ออกแบบเว็บสวยมีระดับ พร้อมดึงดูดลูกค้าจากทั่วโลก โดย นายเอ็มซ่ามากส์",
@@ -35,12 +36,15 @@ export const chiangMaiNode: AreaNode = {
   heroImage: "/images/areas/chiang-mai-node.webp",
   coordinates: { lat: 18.7883, lng: 98.9853 },
 
-  // [HARDENED_THEME]: ใช้โทนสีทอง/บรอนซ์ เพื่อสื่อถึงความหรูหราและงานบริการระดับพรีเมียม
+  // [THEME_FIX]: ปรับเป็น Hex Standard โดยใช้โทน "Lanna Luxury" (ทอง-ดำอุ่น)
   theme: {
-    primary: "#c5a358", // Gold/Bronze
-    secondary: "#1a1a1a",
-    background: "bg-[#0a0a0a]",
-    gradient: "from-[#c5a358]/10 via-transparent to-transparent",
+    mode: "dark", // ระบุ Mode ให้ชัดเจนเพื่อการคำนวณ Shadow
+    primary: "#c5a358", // Chiang Mai Gold (ทองด้าน หรูหราแบบล้านนา)
+    secondary: "#453a1f", // Dark Gold Brown (สีน้ำตาลไหม้)
+    background: "#1c1917", // Stone 900 (ดำอมน้ำตาล อุ่นกว่าดำสนิท สื่อถึงไม้/ธรรมชาติ)
+    foreground: "#fafaf9", // Stone 50 (ขาวนวล อ่านสบายตาในที่มืด)
+    accent: "#eab308", // Yellow 500
+    gradient: "from-[#c5a358]/15 via-transparent to-transparent",
   },
 
   localContext: {
@@ -63,7 +67,7 @@ export const chiangMaiNode: AreaNode = {
     ],
     competitorLevel: "medium",
 
-    // [V17.9.70_EXTENSION]: Trust & Conversion Data
+    // [TRUST_DATA]: Hospitality Conversion Data
     socialProof: {
       rating: 4.9,
       reviewCount: 156,

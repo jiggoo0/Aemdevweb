@@ -1,7 +1,7 @@
 /**
- * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v17.9.110 (TOTAL_WHITE_REMOVAL)
- * [STRATEGY]: Zero-Glare UI | Absolute Readability | Emerald-Slate Hardening
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v17.9.111 (HEX_NORMALIZED)
+ * [STRATEGY]: Zero-Glare UI | Absolute Readability | Hex Standard
+ * [MAINTAINER]: AEMZA MACKS
  */
 
 import type { TemplateMasterData } from "@/types";
@@ -19,46 +19,54 @@ export const localAuthorityService: TemplateMasterData = {
   currency: "THB",
   unit: "พื้นที่ / สาขา",
 
-  // [THEME_PURGE]: ถอดสีขาวทิ้ง 100% ตามคำสั่ง (Strict Enforcement)
+  // [THEME_FIX]: ใช้ Hex Code ล้วน รองรับ OKLCH Engine
   theme: {
-    primary: "#059669",
-    // [FIXED]: ใช้สีเขียวเข้มจัด (Nearly Black-Green) เพื่อให้อ่านออก 100% บนพื้นหลังใหม่
-    secondary: "#022c22",
-
-    // [TRANSFORM]: จาก bg-white -> bg-slate-100 (สีเทาอ่อนแบบ Matte ลดแสงสะท้อน)
-    background: "bg-slate-100",
-
-    accent: "#059669",
-
-    // [GRADIENT_REWORK]: ใช้ Gradient เพื่อสร้างขอบเขตเนื้อหาแทนการใช้กล่องสีขาว
-    gradient: "from-slate-200 via-slate-100 to-emerald-50/20",
+    mode: "light", // ธีมสว่าง สะอาดตา (ทางการ)
+    primary: "#059669", // Emerald 600 (สีเขียวราชการ/ท้องถิ่น)
+    secondary: "#022c22", // Emerald 950 (เขียวเข้มเกือบดำ)
+    background: "#f1f5f9", // Slate 100 (เทาอ่อน ไม่ใช่ขาวล้วน ลดแสงสะท้อน)
+    foreground: "#0f172a", // Slate 900 (ตัวหนังสือสีเข้ม อ่านง่าย)
+    accent: "#34d399", // Emerald 400
+    gradient: "from-[#059669]/10 via-transparent to-transparent",
   },
 
   clientTrust: "โซลูชันที่ช่วยให้ธุรกิจท้องถิ่นกว่า 500+ แห่ง เติบโตอย่างยั่งยืนบน Google Maps",
   benefits: [
-    "Dominate Local Search: ยึดครองพื้นที่ 'Map Pack' อันดับ 1-3",
-    "Trust & Reputation: สร้างความน่าเชื่อถือผ่านระบบ Entity Linking",
-    "Zero-Ad Dependency: เน้นยอดขายจาก Organic Traffic 100%",
+    "Dominate Local Search: ยึดครองพื้นที่ 'Map Pack' อันดับ 1-3 บนหน้า Google",
+    "Trust & Reputation: สร้างความน่าเชื่อถือผ่านระบบ Entity Linking และการจัดการรีวิว",
+    "Zero-Ad Dependency: เน้นยอดขายจาก Organic Traffic 100% ไม่ต้องพึ่งพาแอดตลอดไป",
   ],
   coreFeatures: [
     {
-      title: "Google Business Profile Audit",
-      description: "ปรับแต่งโปรไฟล์ธุรกิจให้ครบถ้วนตามกฎ Google 100% เพื่อคุณภาพสูงสุด",
+      title: "Google Business Audit",
+      description: "ปรับแต่งโปรไฟล์ธุรกิจให้ครบถ้วนตามกฎ Google 100% เพื่อคะแนนคุณภาพสูงสุด",
       icon: "MapPin",
     },
     {
-      title: "Hyper-Local Content Strategy",
-      description: "ทำ SEO เจาะจงพื้นที่ เพื่อดักจับลูกค้าที่ค้นหาด้วยคำว่า 'ใกล้ฉัน'",
+      title: "Hyper-Local Content",
+      description:
+        "ทำ SEO เจาะจงพื้นที่ เพื่อดักจับลูกค้าที่ค้นหาด้วยคำว่า 'ใกล้ฉัน' หรือชื่ออำเภอ",
       icon: "Globe",
+    },
+    {
+      title: "Review Management",
+      description: "ระบบจัดการและตอบกลับรีวิว เพื่อสร้างภาพลักษณ์ที่ดีและกระตุ้นการตัดสินใจซื้อ",
+      icon: "Star",
     },
   ],
   faqs: [
     {
       question: "ทำไมต้องทำ Local SEO ทั้งที่มีเพจ Facebook?",
-      answer: "ลูกค้าใน Google Maps คือกลุ่มที่มี Intent พร้อมจ่ายเงินทันที (High Conversion Rate)",
+      answer:
+        "ลูกค้าใน Google Maps คือกลุ่มที่มี Intent พร้อมจ่ายเงินทันที (High Conversion Rate) สูงกว่าคนเล่น Facebook ครับ",
+    },
+    {
+      question: "นานแค่ไหนถึงจะเห็นผล?",
+      answer:
+        "โดยปกติจะเริ่มเห็น Traffic เพิ่มขึ้นใน 30-45 วันครับ ขึ้นอยู่กับการแข่งขันในพื้นที่นั้นๆ ด้วย",
     },
   ],
-  keywords: ["รับทำ Local SEO", "รับปักหมุด Google Maps"],
+  keywords: ["รับทำ Local SEO", "รับปักหมุด Google Maps", "ทำเว็บ อบต.", "เว็บไซต์หน่วยงานราชการ"],
   priority: 3,
   isFeatured: true,
 };

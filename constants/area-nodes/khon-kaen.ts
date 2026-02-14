@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v17.9.70
- * [STRATEGY]: Sales Conversion | Modern Business Trust | SME Domination
+ * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v17.9.71 (THEME_NORMALIZED)
+ * [STRATEGY]: Sales Conversion | Modern Business Trust | Hex Standard
  * [MARKET]: Khon Kaen City, Kangsadan, University Zone (Digital Hub)
  */
 import type { AreaNode } from "@/types";
@@ -36,13 +36,16 @@ export const khonKaenNode: AreaNode = {
   heroImage: "/images/areas/khon-kaen-node.webp",
   coordinates: { lat: 16.4322, lng: 102.8236 },
 
-  // [HARDENED_THEME]: ใช้สีม่วง-คราม (Indigo/Violet) เพื่อสื่อถึงเทคโนโลยี ความทันสมัย และพลังสร้างสรรค์
+  // [THEME_FIX]: เปลี่ยนเป็น Hex Standard เพื่อให้รองรับ OKLCH Engine
+  // ขอนแก่นใช้ธีม "สว่าง" (Light) ต่างจาก Sale Page ปกติที่เป็นธีม "มืด" (Dark)
   theme: {
-    primary: "#6366f1", // Indigo 500
+    mode: "light", // ระบุโหมดให้ชัดเจน เพื่อให้ Shadow ทำงานถูก
+    primary: "#6366f1", // Indigo 500 (สีม่วงคราม ทันสมัย)
     secondary: "#4338ca", // Indigo 700
-    background: "bg-white",
-    accent: "#818cf8",
-    gradient: "from-indigo-500/10 via-transparent to-transparent",
+    background: "#ffffff", // Pure White (เปลี่ยนจาก bg-white เป็น Hex)
+    foreground: "#1e1b4b", // Indigo 950 (ตัวหนังสือสีเข้ม อ่านง่ายบนพื้นขาว)
+    accent: "#818cf8", // Indigo 400
+    gradient: "from-[#6366f1]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -65,7 +68,7 @@ export const khonKaenNode: AreaNode = {
     ],
     competitorLevel: "medium",
 
-    // [V17.9.70_EXTENSION]: Trust & High-Speed Conversion Data
+    // [TRUST_DATA]: High-Speed Conversion Data
     socialProof: {
       rating: 5.0,
       reviewCount: 96,
@@ -73,7 +76,7 @@ export const khonKaenNode: AreaNode = {
     },
     regionalPricing: {
       startPrice: "8,900 บาท",
-      timeline: "5-10 วัน", // เน้นงานไวสำหรับกลุ่ม Sale Page
+      timeline: "5-10 วัน",
     },
     localSuccessStory: {
       title: "ปั้น Sale Page คลินิกความงาม ปิดเคสหลักล้าน",

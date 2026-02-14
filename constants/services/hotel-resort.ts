@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v17.9.87 (THEME_HARDENED)
- * [STRATEGY]: OKLCH Dynamic Gold | P3 Color Logic | Unified Tokens
+ * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v17.9.130 (THEME_STABILIZED)
+ * [STRATEGY]: OKLCH Hybrid Support | Hex Fallback | Unified Tokens
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -19,14 +19,16 @@ export const hotelResortService: TemplateMasterData = {
   currency: "THB",
   unit: "เริ่มต้น",
 
-  // [REFACTORED_THEME]: อัปเกรดสู่ระบบ OKLCH Engine เพื่อความหรูหราขั้นสูงสุด
+  // [THEME_ADJUSTMENT]: ฉีดโหมดและสีพื้นหน้าเพื่อให้ระบบ Type-Check และ Render ทำงานได้สมบูรณ์
   theme: {
+    mode: "dark", // [FIXED]: กำหนดโหมดมืดเพื่อให้เงาสีทอง (Gold Shadow) ดูลอยและแพง
+    foreground: "#f8fafc", // [FIXED]: ใช้สีขาวนวล Slate-50 เพื่อความ Soft ในการอ่านเนื้อหา
     token: "gold",
-    primary: "oklch(var(--brand-primary-raw))", // Luxury Gold Authority
-    secondary: "oklch(var(--brand-secondary-raw))",
-    background: "bg-slate-950", // พื้นหลังเข้มจัดเพื่อขับเน้นสีทอง
-    accent: "oklch(var(--brand-accent-raw))",
-    gradient: "from-brand-primary/15 via-transparent to-transparent",
+    primary: "#D4AF37", // Gold Standard (Metallic Gold)
+    secondary: "#1A1A1A", // Dark Contrast
+    background: "#0a0a0a", // Deep Black (Night Mode)
+    accent: "#B8860B", // Dark Goldenrod
+    gradient: "from-[#D4AF37]/15 via-transparent to-transparent",
   },
 
   clientTrust: "ยกระดับภาพลักษณ์ที่พักสู่มาตรฐานสากล พร้อมระบบจองตรงที่ทรงพลัง",

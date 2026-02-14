@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v17.9.70
- * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Global-Ready SEO
+ * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v17.9.71 (THEME_NORMALIZED)
+ * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Hex Standard
  * [MARKET]: Chon Buri, Sriracha, Laem Chabang, Amata Nakorn (EEC Zone)
  */
 import type { AreaNode } from "@/types";
@@ -8,7 +8,10 @@ import type { AreaNode } from "@/types";
 export const chonBuriNode: AreaNode = {
   slug: "chon-buri",
   province: "ชลบุรี",
+  // [STRATEGY]: ใช้ corporate สำหรับบริษัท/โรงงานที่เน้นภาพลักษณ์องค์กร
+  // (หากเน้นขายอะไหล่/เครื่องจักรจำนวนมาก แนะนำให้เปลี่ยนเป็น 'catalog')
   templateSlug: "corporate",
+
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจในชลบุรี พัทยา ติดอันดับ Google",
   description:
     "ยกระดับภาพลักษณ์โรงงานและธุรกิจขนส่งใน EEC ให้ดูโปรระดับสากล พร้อมระบบรองรับหลายภาษาเพื่อดีลธุรกิจทั่วโลก โดย นายเอ็มซ่ามากส์",
@@ -45,12 +48,15 @@ export const chonBuriNode: AreaNode = {
   heroImage: "/images/areas/chon-buri-node.webp",
   coordinates: { lat: 13.3611, lng: 100.9847 },
 
-  // [HARDENED_THEME]: ใช้สี Deep Navy & Steel Blue เพื่อสื่อถึงอุตสาหกรรมและความมั่นคง
+  // [THEME_FIX]: เปลี่ยนเป็น Hex Standard เพื่อให้รองรับ OKLCH Engine
   theme: {
-    primary: "#0369a1", // Sky 700 (Professional Blue)
+    mode: "light", // ระบุโหมดชัดเจน (พื้นสว่าง)
+    primary: "#0369a1", // Sky 700 (Industrial Blue - สีแห่งความเชื่อมั่น)
     secondary: "#0c4a6e", // Sky 900
-    background: "bg-slate-50",
-    gradient: "from-sky-600/10 via-transparent to-transparent",
+    background: "#f8fafc", // Slate 50 (เปลี่ยนจาก bg-slate-50 เป็น Hex)
+    foreground: "#0f172a", // Slate 900 (ตัวหนังสือสีเข้ม อ่านง่ายบนพื้นสว่าง)
+    accent: "#0ea5e9", // Sky 500
+    gradient: "from-[#0369a1]/10 via-transparent to-transparent",
   },
 
   localContext: {
@@ -73,7 +79,7 @@ export const chonBuriNode: AreaNode = {
     ],
     competitorLevel: "high",
 
-    // [V17.9.70_EXTENSION]: Trust & Industrial Conversion Data
+    // [TRUST_DATA]: Industrial Conversion Data
     socialProof: {
       rating: 5.0,
       reviewCount: 184,

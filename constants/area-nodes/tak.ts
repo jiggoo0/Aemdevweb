@@ -1,13 +1,17 @@
 /**
- * [SERVICE_NODE]: TAK_MAESOT_GATEWAY
- * [STRATEGY]: Corporate Authority | International Logistics | Trade Focus
+ * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v17.9.71 (HEX_STANDARDIZED)
+ * [STRATEGY]: Corporate Authority | International Logistics | Hex Standard
+ * [MARKET]: Mae Sot, Tak City, Border Trade Special Economic Zone
  */
 import type { AreaNode } from "@/types";
 
 export const takNode: AreaNode = {
   slug: "tak",
   province: "ตาก",
+  // [STRATEGY]: ใช้ 'corporate' เพื่อเน้นภาพลักษณ์ความน่าเชื่อถือระดับสากล
+  // เหมาะสำหรับบริษัทชิปปิ้ง โลจิสติกส์ และโรงงานในเขตเศรษฐกิจพิเศษ
   templateSlug: "corporate",
+
   title: "รับทำเว็บไซต์ ตาก แม่สอด | ออกแบบเว็บไซต์ธุรกิจขนส่งและนำเข้า-ส่งออก ติดหน้าแรก Google",
   description:
     "เปลี่ยนบริษัทชิปปิ้งและร้านค้าชายแดนให้ดูโปรระดับสากล สร้างความน่าเชื่อถือให้คู่ค้าต่างชาติมั่นใจ โดย นายเอ็มซ่ามากส์",
@@ -35,24 +39,57 @@ export const takNode: AreaNode = {
   heroImage: "/images/areas/tak-node.webp",
   coordinates: { lat: 16.8831, lng: 99.1258 },
 
+  // [THEME_FIX]: Forest Industrial (เขียวป่าเข้ม-เทาโลจิสติกส์)
+  theme: {
+    mode: "light",
+    primary: "#065f46", // Emerald 800 (เขียวเข้ม - ความมั่งคั่งชายแดน)
+    secondary: "#1e293b", // Slate 800 (เทาเข้ม - ความมั่นคงทางธุรกิจ)
+    background: "#f0fdf4", // Emerald 50 (พื้นเขียวอ่อนจาง สบายตา)
+    foreground: "#022c22", // Emerald 950 (ตัวหนังสืออ่านง่าย คมชัด)
+    accent: "#10b981", // Emerald 500
+    gradient: "from-[#065f46]/10 via-transparent to-transparent",
+  },
+
   localContext: {
     marketInsight:
-      "การค้าข้ามพรมแดนตัดสินที่ Credentials เว็บไซต์คือใบเบิกทางความเชื่อถือระดับสากล",
+      "การค้าข้ามพรมแดนตัดสินที่ Credentials เว็บไซต์คือใบเบิกทางความเชื่อถือระดับสากลในการทำดีลธุรกิจระดับรัฐหรือองค์กรใหญ่",
     technicalApproach:
-      "เน้นระบบความปลอดภัยสูง (Security) และการแสดงผลข้อมูลบริการที่ซับซ้อนให้ดูง่าย",
+      "เน้นระบบความปลอดภัยข้อมูล (Security) และการนำเสนอข้อมูลบริการชิปปิ้งที่ซับซ้อนให้ดูเข้าใจง่ายในหน้าเดียว",
     localStrength:
-      "เข้าใจ Flow ธุรกิจแม่สอด-ตาก สามารถเรียบเรียงเนื้อหาให้ดูเป็น 'มืออาชีพรายใหญ่'",
+      "เข้าใจ Flow ธุรกิจแม่สอด-ตาก สามารถเรียบเรียงเนื้อหาให้ดูเป็น 'มืออาชีพรายใหญ่' เพื่อดึงดูดนักลงทุนต่างชาติ",
     nicheIndustries: [
       "โลจิสติกส์และขนส่งข้ามพรมแดน",
       "บริษัทชิปปิ้งนำเข้า-ส่งออก",
       "คลังสินค้าเขตเศรษฐกิจพิเศษ",
-      "ธุรกิจท่องเที่ยวเชิงธรรมชาติ",
+      "ธุรกิจท่องเที่ยวเชิงธรรมชาติและที่พักอุ้มผาง",
     ],
     painPoints: [
-      "มีบริษัทจริงแต่ภาพลักษณ์ออนไลน์ดูไม่โปร ทำให้พลาดงานใหญ่",
-      "คู่ค้าต่างชาติค้นหาข้อมูลบริษัทไม่เจอใน Google",
-      "อยากนำเสนอโปรไฟล์บริษัทเป็นภาษาอังกฤษ/มาตรฐานสากล",
+      "มีบริษัทจริงแต่ภาพลักษณ์ออนไลน์ดูไม่โปร ทำให้พลาดงานโปรเจกต์ใหญ่",
+      "คู่ค้าต่างชาติค้นหาข้อมูลบริษัทไม่เจอใน Google เมื่อต้องการตรวจสอบเครดิต",
+      "อยากนำเสนอโปรไฟล์บริษัทเป็นภาษาอังกฤษตามมาตรฐานสากล",
     ],
     competitorLevel: "low",
+
+    // [TRUST_DATA]: Logistics Conversion Data
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 48,
+      localClient: "บริษัทขนส่งรายใหญ่ เขตเศรษฐกิจพิเศษแม่สอด",
+    },
+    regionalPricing: {
+      startPrice: "14,500 บาท", // สะท้อนงาน Corporate ระดับสูง
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "ยกระดับภาพลักษณ์ชิปปิ้งแม่สอดสู่สากล",
+      result:
+        "ช่วยให้บริษัทขนส่งท้องถิ่นปิดดีลงานกับบริษัทข้ามชาติได้สำเร็จจากการแสดงโปรไฟล์ผ่านหน้าเว็บ",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ แม่สอด",
+      "จ้างทำเว็บชิปปิ้ง ตาก",
+      "ทำ SEO ขนส่ง แม่สอด",
+      "ปักหมุด Google Maps ธุรกิจแม่สอด",
+    ],
   },
 };

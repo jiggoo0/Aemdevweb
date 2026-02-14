@@ -1,59 +1,41 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.98 (ULTIMATE_HARDENED)
- * [STRATEGY]: Strict Union Types | CMS Entity Normalization | Zero-Any Registry
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.160 (STABLE_FINAL)
+ * [STRATEGY]: Full Property Alignment | Analytics Injection | SSOT
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { ReactNode, CSSProperties } from "react";
 
 // =========================================
-// [01] INFRASTRUCTURE & NEXT.JS ADAPTERS
+// [01] INFRASTRUCTURE & ADAPTERS
 // =========================================
-
-export interface ValidationResult {
-  readonly isValid: boolean;
-  readonly errors: readonly string[];
-  readonly warnings: readonly string[];
-}
 
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export interface LayoutProps<T = Record<string, string>> {
+export interface LayoutProps {
   readonly children: ReactNode;
-  readonly params: Promise<T>;
 }
 
-export interface BaseComponentProps {
-  readonly children?: ReactNode;
-  readonly className?: string;
-  readonly style?: CSSProperties;
-}
-
-/** [RE-EXPORT]: รองรับ Icon ทั้งหมดในระบบและขยายตัวได้ */
 export type IconName =
   | "Menu"
   | "X"
+  | "Check"
+  | "CheckCircle"
+  | "CheckCircle2"
+  | "Star"
   | "ChevronRight"
   | "ChevronDown"
   | "ArrowRight"
   | "ArrowUpRight"
-  | "Check"
-  | "CheckCircle"
-  | "CheckCircle2"
-  | "AlertTriangle"
   | "Search"
   | "SearchX"
-  | "MoreHorizontal"
-  | "ThumbsUp"
-  | "MapPin"
   | "Zap"
   | "Target"
   | "Layers"
-  | "Star"
-  | "BarChart"
+  | "Shield"
   | "ShieldCheck"
   | "Newspaper"
   | "Building2"
@@ -61,22 +43,20 @@ export type IconName =
   | "FileDown"
   | "MousePointerClick"
   | "Smartphone"
-  | "Camera"
-  | "CalendarCheck"
   | "Globe"
   | "TrendingUp"
-  | "Shield"
-  | "Lock"
   | "Award"
-  | "Truck"
-  | "CreditCard"
-  | "Landmark"
-  | "Wallet"
-  | "ShoppingBag"
-  | "Send"
-  | "Loader2"
-  | "Timer"
+  | "MapPin"
   | "Activity"
+  | "UserCheck"
+  | "Quote"
+  | "Settings"
+  | "Disc"
+  | "Wifi"
+  | "Code2"
+  | "Network"
+  | "User"
+  | "Camera"
   | (string & {});
 
 export type TemplateSlug =
@@ -89,32 +69,21 @@ export type TemplateSlug =
   | "hotelresort"
   | "seo-agency";
 
+export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
+
 // =========================================
-// [02] THEME & BRANDING ENGINE (SSOT)
+// [02] THEME & SITE CONFIG (TOTAL SYNC)
 // =========================================
 
 export interface ThemeConfig {
   readonly primary: string;
+  readonly background: string;
+  readonly mode: "light" | "dark";
+  readonly foreground: string;
   readonly secondary?: string;
-  readonly background?: string;
   readonly accent?: string;
   readonly gradient?: string;
-  readonly token?: string; // [FIXED]: เพิ่มเพื่อรองรับ Color Token เช่น gold, emerald
-}
-
-export interface SiteExpert {
-  readonly displayName: string;
-  readonly legalName: string;
-  readonly legalNameThai: string;
-  readonly role: string;
-  readonly jobTitle: string;
-  readonly signature: string;
-  readonly avatar: string;
-  readonly email: string;
-  readonly bioUrl: string;
-  readonly bio: string;
-  readonly twitterHandle: string;
-  readonly googleMerchantId?: string;
+  readonly token?: string;
 }
 
 export interface SiteConfig {
@@ -125,6 +94,7 @@ export interface SiteConfig {
   readonly ogImage: string;
   readonly locale: string;
   readonly themeColor: string;
+  readonly keywords: readonly string[];
   readonly hero: {
     readonly title: string;
     readonly description: string;
@@ -136,15 +106,20 @@ export interface SiteConfig {
     readonly communicationStyle: string;
     readonly antiConnotation: string;
   };
-  readonly keywords: readonly string[];
-  readonly project: {
-    readonly title: string;
-    readonly shortTitle: string;
-    readonly version: string;
-    readonly framework: string;
-    readonly uiStack: string;
+  readonly expert: {
+    readonly displayName: string;
+    readonly legalName: string;
+    readonly legalNameThai: string;
+    readonly role: string;
+    readonly jobTitle: string;
+    readonly signature: string;
+    readonly avatar: string;
+    readonly email: string;
+    readonly bio: string;
+    readonly bioUrl: string;
+    readonly twitterHandle: string;
+    readonly googleMerchantId?: string;
   };
-  readonly expert: SiteExpert;
   readonly contact: {
     readonly email: string;
     readonly phone: string;
@@ -155,32 +130,38 @@ export interface SiteConfig {
     readonly workHours: string;
     readonly mapUrl: string;
   };
-  readonly links: Record<string, string>;
+  readonly project: {
+    readonly title: string;
+    readonly shortTitle: string;
+    readonly version: string;
+    readonly framework: string;
+    readonly uiStack: string;
+  };
   readonly business: {
     readonly location: string;
     readonly region: string;
     readonly industry: string;
     readonly roiFocus: boolean;
+    readonly priceRange: string;
     readonly established: string;
     readonly status: string;
-    readonly priceRange: string;
     readonly ids: Record<string, string>;
   };
   readonly verification: {
     readonly google: string;
     readonly facebook?: string;
   };
+  /** [FIXED]: ป้องกัน Error TS2353 บรรทัดที่ 112 (Tracking & Metrics) */
   readonly analytics?: {
     readonly gaId?: string;
     readonly pixelId?: string;
   };
+  readonly links: Record<string, string>;
 }
 
 // =========================================
-// [03] DATA MODELS (Master Registry & CMS)
+// [03] DATA MODELS (CMS & REGISTRY)
 // =========================================
-
-export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
 export interface ServiceFeature {
   readonly title: string;
@@ -193,33 +174,6 @@ export interface ServiceFaq {
   readonly answer: string;
 }
 
-export interface BlogPost {
-  readonly slug: string;
-  readonly title: string;
-  readonly date: string;
-  readonly excerpt: string;
-  readonly coverImage: string;
-  readonly thumbnail?: string;
-  readonly category: string;
-  readonly content?: string;
-  readonly description?: string;
-  readonly tags?: readonly string[];
-  readonly readingTime?: string;
-}
-
-export interface CaseStudy {
-  readonly slug: string;
-  readonly title: string;
-  readonly client: string;
-  readonly result: string;
-  readonly results?: readonly string[];
-  readonly image: string;
-  readonly thumbnail?: string;
-  readonly content?: string;
-  readonly description?: string;
-  readonly date?: string;
-}
-
 export interface CatalogItem {
   readonly name: string;
   readonly description: string;
@@ -228,27 +182,31 @@ export interface CatalogItem {
   readonly image?: string;
 }
 
-export interface TemplateMasterData {
-  readonly id: string;
+export interface BlogPost {
+  readonly slug: string;
   readonly title: string;
-  readonly description: string;
-  readonly image?: string;
-  readonly templateSlug: TemplateSlug;
-  readonly category: ServiceCategory;
-  readonly priceValue: number;
-  readonly price: string;
-  readonly currency: string;
-  readonly unit: string;
-  readonly priority: number;
-  readonly theme?: ThemeConfig;
-  readonly benefits: readonly string[];
-  readonly coreFeatures: readonly ServiceFeature[];
-  readonly faqs: readonly ServiceFaq[];
-  readonly keywords: readonly string[];
-  readonly isPopular?: boolean;
-  readonly isFeatured?: boolean;
-  readonly clientTrust?: string;
-  readonly items?: readonly CatalogItem[];
+  readonly date: string;
+  readonly excerpt: string;
+  readonly description?: string;
+  readonly coverImage: string;
+  readonly thumbnail?: string;
+  readonly category: string;
+  readonly tags?: readonly string[];
+  readonly readingTime?: string;
+  readonly content?: string;
+}
+
+export interface CaseStudy {
+  readonly slug: string;
+  readonly title: string;
+  readonly client: string;
+  readonly result: string;
+  readonly results?: readonly string[];
+  readonly description?: string;
+  readonly date?: string;
+  readonly image: string;
+  readonly thumbnail?: string;
+  readonly content?: string;
 }
 
 export interface ImageBlurMetadata {
@@ -259,7 +217,7 @@ export interface ImageBlurMetadata {
 export type ImageBlurRegistry = Record<string, ImageBlurMetadata>;
 
 // =========================================
-// [04] GEO & AREA NODES (Authority & Trust Engine)
+// [04] UNIVERSAL PROPS (Post-Merger Bridge)
 // =========================================
 
 export interface LocalContext {
@@ -275,10 +233,76 @@ export interface LocalContext {
   readonly hyperLocalKeywords?: readonly string[];
 }
 
+export interface TemplateAction {
+  readonly label: string;
+  readonly href: string;
+  readonly variant?: "brand" | "outline" | "ghost" | "default" | "link";
+}
+
+export interface UniversalTemplateProps {
+  readonly id: string;
+  readonly templateSlug: TemplateSlug;
+  readonly category: string;
+  readonly title: string;
+  readonly description: string;
+  readonly image?: string;
+  readonly theme: ThemeConfig;
+  readonly price: string;
+  readonly priceValue: number;
+  readonly currency: string;
+  readonly unit: string;
+  readonly priority: number;
+  readonly benefits: readonly string[];
+  readonly coreFeatures: readonly ServiceFeature[];
+  readonly faqs: readonly ServiceFaq[];
+  readonly keywords: readonly string[];
+  readonly items?: readonly CatalogItem[];
+  readonly clientTrust?: string;
+  readonly isPopular?: boolean;
+  readonly isFeatured?: boolean;
+  readonly localContext?: LocalContext;
+  readonly socialProof?: LocalContext["socialProof"];
+  readonly regionalPricing?: LocalContext["regionalPricing"];
+  readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly primaryAction: TemplateAction;
+  readonly secondaryAction?: TemplateAction;
+}
+
+export interface BaseTemplateProps {
+  readonly data: UniversalTemplateProps;
+  readonly suppressUI?: boolean;
+}
+
+// =========================================
+// [05] REGISTRY SCHEMAS
+// =========================================
+
+export interface TemplateMasterData {
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly image?: string;
+  readonly templateSlug: TemplateSlug;
+  readonly category: ServiceCategory;
+  readonly priceValue: number;
+  readonly price: string;
+  readonly currency: string;
+  readonly unit: string;
+  readonly priority: number;
+  readonly theme: ThemeConfig;
+  readonly benefits: readonly string[];
+  readonly coreFeatures: readonly ServiceFeature[];
+  readonly faqs: readonly ServiceFaq[];
+  readonly keywords: readonly string[];
+  readonly isPopular?: boolean;
+  readonly isFeatured?: boolean;
+  readonly clientTrust?: string;
+  readonly items?: readonly CatalogItem[];
+}
+
 export interface AreaNode {
   readonly slug: string;
   readonly province: string;
-  readonly name?: string;
   readonly title: string;
   readonly description: string;
   readonly longDescription: string;
@@ -291,7 +315,6 @@ export interface AreaNode {
   readonly heroImage: string;
   readonly coordinates: { lat: number; lng: number };
   readonly localContext: LocalContext;
-  readonly theme?: ThemeConfig;
+  readonly theme?: Partial<ThemeConfig>;
 }
-
 export * from "./template-props";

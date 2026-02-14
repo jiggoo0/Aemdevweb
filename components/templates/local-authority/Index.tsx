@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.9.102 (STABLE_RELEASE)
- * [STRATEGY]: Universal Prop Sync | Zero-Any Compliance | Background Fixed
+ * [TEMPLATE COMPONENT]: LOCAL_AUTHORITY_ORCHESTRATOR v17.9.106 (STABLE_RECOVERY)
+ * [STRATEGY]: Universal Prop Sync | Prop Suppression Logic | Zero-Warning Build
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -9,7 +9,7 @@
 import React, { memo, useMemo } from "react";
 import Image from "next/image";
 
-// --- 1. Infrastructure ---
+// --- Infrastructure ---
 import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/templates/sections/HeroEngine";
@@ -18,7 +18,7 @@ import DynamicFAQ from "@/components/templates/sections/DynamicFAQ";
 import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 
-// --- 2. Types & Logic ---
+// --- Logic ---
 import type { UniversalTemplateProps } from "@/types";
 import { type IconName } from "@/components/ui/IconRenderer";
 import { generateLocalBusinessSchema } from "@/lib/schema";
@@ -28,14 +28,14 @@ interface LocalTemplateProps {
   readonly suppressUI?: boolean;
 }
 
-const LocalTemplate = ({ data, suppressUI: _suppressUI = false }: LocalTemplateProps) => {
-  // [DATA_MAPPING]: ดึงชื่อจังหวัดมาใช้ใน UI (ตัดคำนำหน้า 'รับทำเว็บไซต์' ออกเพื่อความ Clean)
+const LocalTemplate = ({ data, suppressUI = false }: LocalTemplateProps) => {
+  // [LOGIC]: สกัดชื่อจังหวัดออกจาก Title เพื่อนำไปใช้ใน Dynamic Content
   const province = useMemo(() => data.title.replace("รับทำเว็บไซต์", "").trim(), [data.title]);
 
-  // [SEO_SCHEMA]: สร้าง Schema สำหรับ Local Business (JSON-LD) เพื่อ Geographic Authority
+  // [SEO]: สร้าง Schema Markup เฉพาะพื้นที่
   const schema = useMemo(() => generateLocalBusinessSchema(data), [data]);
 
-  // [FAQ_LOGIC]: ระบบสร้างคำถามเฉพาะพื้นที่อัตโนมัติ (Zero-Empty Policy)
+  // [CONTENT]: จัดการ FAQ ให้รองรับทั้งข้อมูลจาก Registry และ Default Fallback
   const displayFaqs = useMemo(() => {
     if (data.faqs && data.faqs.length > 0) return data.faqs;
     return [
@@ -50,28 +50,24 @@ const LocalTemplate = ({ data, suppressUI: _suppressUI = false }: LocalTemplateP
     ];
   }, [data.faqs, province]);
 
-  // [IMAGE_LOGIC]: ตรวจสอบ Image Registry แบบ Type-Safe (ป้องกัน CLS)
+  // [ASSETS]: ดึง Blur Metadata เพื่อประสิทธิภาพการโหลดระดับ Retina
   const imgKey = data.image as keyof typeof IMAGE_BLUR_DATA;
   const imgData = data.image && IMAGE_BLUR_DATA[imgKey] ? IMAGE_BLUR_DATA[imgKey] : null;
 
   return (
-    // [CRITICAL FIX]: Root Wrapper บังคับเต็มจอและฉีดสี Background โดยตรง (Anti-White-Flash)
-    <main
-      className="relative flex min-h-screen w-full flex-col overflow-x-hidden"
-      style={{
-        backgroundColor: data.theme?.background || "#ffffff",
-      }}
-    >
-      <LayoutEngine spacing="none" theme={data.theme}>
-        {/* 01. SEO Infrastructure */}
-        <JsonLd data={schema} />
+    <>
+      <JsonLd data={schema} />
 
-        {/* 02. Hero Section: Persona-Driven Content */}
+      {/* Wrapper หลักที่จัดการระบบ Dynamic Colors */}
+      <LayoutEngine spacing="none">
+        {/* 01. Hero Section: เน้นหัวข้อที่ทำ SEO ในพื้นที่นั้นๆ */}
         <HeroEngine
           title={
             <span className="block italic">
               รับทำเว็บไซต์และ SEO <br className="hidden md:block" />
-              <strong className="text-brand-primary font-black uppercase">{province}</strong>
+              <strong className="font-black text-[var(--brand-primary)] uppercase">
+                {province}
+              </strong>
             </span>
           }
           subtitle={data.description}
@@ -80,11 +76,11 @@ const LocalTemplate = ({ data, suppressUI: _suppressUI = false }: LocalTemplateP
           align="left"
         />
 
-        {/* 03. Showcase Image Section with Blur Effect (LCP Optimized) */}
+        {/* 02. Showcase Image: จัดวางแบบ Magazine Style */}
         <section className="relative z-30 container mx-auto -mt-16 px-4 md:-mt-24">
-          <div className="group border-border bg-surface-card relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border shadow-2xl">
+          <div className="group relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] border border-[var(--foreground)]/10 bg-[var(--background)] shadow-2xl">
             <div
-              className="bg-surface-offset relative w-full overflow-hidden"
+              className="relative w-full overflow-hidden"
               style={{
                 aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "21/9",
               }}
@@ -97,13 +93,12 @@ const LocalTemplate = ({ data, suppressUI: _suppressUI = false }: LocalTemplateP
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 placeholder={imgData ? "blur" : "empty"}
                 blurDataURL={imgData?.blurDataURL}
-                sizes="(max-width: 1280px) 100vw, 1280px"
               />
             </div>
           </div>
         </section>
 
-        {/* 04. Feature Matrix: Authority Signaling */}
+        {/* 03. Feature Matrix: แสดงจุดแข็งทางวิศวกรรม */}
         <div className="py-20">
           <FeatureGrid
             heading="Area Domination Engine"
@@ -138,17 +133,19 @@ const LocalTemplate = ({ data, suppressUI: _suppressUI = false }: LocalTemplateP
           />
         </div>
 
-        {/* 05. Localized FAQ: E-E-A-T Injection */}
+        {/* 04. FAQ Section */}
         <DynamicFAQ title={`คำถามที่พบบ่อยสำหรับบริการใน ${province}`} items={displayFaqs} />
 
-        {/* 06. Regional Conversion CTA: Business Growth Anchor */}
-        <ConversionCTA
-          title={`พร้อมยกระดับธุรกิจใน ${province} หรือยังครับ?`}
-          description="ปรึกษาแนวทางการทำเว็บไซต์ให้ติดหน้าแรก Google กับผู้เชี่ยวชาญตัวจริง"
-          buttonLabel="ปรึกษาวางแผนฟรี"
-        />
+        {/* 05. Conversion Section: ใช้งาน suppressUI เพื่อป้องกัน CTA ซ้อนกัน */}
+        {!suppressUI && (
+          <ConversionCTA
+            title={`พร้อมยกระดับธุรกิจใน ${province} หรือยังครับ?`}
+            description="ปรึกษาแนวทางการทำเว็บไซต์ให้ติดหน้าแรก Google กับผู้เชี่ยวชาญตัวจริง"
+            buttonLabel="ปรึกษาวางแผนฟรี"
+          />
+        )}
       </LayoutEngine>
-    </main>
+    </>
   );
 };
 

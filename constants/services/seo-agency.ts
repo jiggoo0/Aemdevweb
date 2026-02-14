@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v17.9.86 (HARDENED_REFACTOR)
- * [STRATEGY]: Technical Excellence | Design Token Integration | Entity-based SEO
+ * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v17.9.87 (HEX_NORMALIZED)
+ * [STRATEGY]: Technical Excellence | Organic Growth | Hex Standard
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -19,32 +19,30 @@ export const seoAgencyService: TemplateMasterData = {
   currency: "THB",
   unit: "รายเดือน",
 
-  // [REFACTORED_THEME]: ใช้ Semantic Mapping แทน Hardcoded Hex
-  // ค่าเหล่านี้จะถูกแมพเข้ากับ CSS Variables ใน globals.css ทันที
+  // [THEME_FIX]: ใช้ Hex Code ล้วน รองรับ OKLCH Engine
   theme: {
-    token: "emerald", // สื่อถึง Growth & Sustainability
-    primary: "var(--brand-primary)",
-    secondary: "var(--brand-secondary)",
-    background: "bg-slate-950",
-    accent: "var(--brand-accent)",
-    // ใช้ GPU-Accelerated Gradient
-    gradient: "from-brand-primary/15 via-transparent to-transparent",
+    mode: "dark",
+    primary: "#10b981", // Emerald 500 (Growth Green)
+    secondary: "#064e3b", // Emerald 900 (Deep Forest)
+    background: "#020617", // Slate 950 (High Contrast Dark Mode)
+    foreground: "#f0fdf4", // Emerald 50 (White with hint of green)
+    accent: "#34d399", // Emerald 400
+    gradient: "from-[#10b981]/20 via-transparent to-transparent",
   },
 
   clientTrust: "Proven Authority: ดัน High-Intent Keywords ขึ้นหน้าแรกสำเร็จกว่า 500+ คีย์เวิร์ด",
 
   benefits: [
-    "Zero-Ad Dependency: สร้างกระแส Traffic คุณภาพที่ไหลเข้าสู่ระบบอย่างยั่งยืนโดยไม่ต้องพึ่งพางบโฆษณา (PPC) ในระยะยาว",
-    "Technical Core Hardening: ปรับจูนโครงสร้างเว็บไซต์ผ่านหลัก Core Web Vitals 2026 เพื่อประสิทธิภาพการเก็บข้อมูลของ Googlebot ที่สูงสุด",
-    "Conversion-Centric Strategy: โฟกัสการทำอันดับบนคีย์เวิร์ดที่มีแรงจูงใจในการซื้อสูง (High-Commercial Intent) เพื่อเปลี่ยน Traffic เป็นรายได้",
+    "Zero-Ad Dependency: สร้างกระแส Traffic คุณภาพที่ไหลเข้าสู่ระบบอย่างยั่งยืนโดยไม่ต้องพึ่งพางบโฆษณา (PPC)",
+    "Technical Core Hardening: ปรับจูนโครงสร้างเว็บไซต์ผ่านหลัก Core Web Vitals 2026 เพื่อประสิทธิภาพสูงสุด",
+    "Conversion-Centric Strategy: โฟกัสการทำอันดับบนคีย์เวิร์ดที่มีแรงจูงใจในการซื้อสูง (High-Commercial Intent)",
   ],
 
   coreFeatures: [
     {
       title: "Deep Technical Audit",
-      description:
-        "วิเคราะห์ระบบ Rendering, JavaScript Payload และ DOM Structure เพื่อขจัดคอขวดที่ขัดขวางการจัดอันดับ",
-      icon: "Code2", // เปลี่ยน Icon ให้ดู Technical ขึ้น
+      description: "วิเคราะห์ระบบ Rendering และ DOM Structure เพื่อขจัดคอขวดที่ขัดขวางการจัดอันดับ",
+      icon: "Code2",
     },
     {
       title: "Topic Cluster Architecture",
@@ -55,7 +53,7 @@ export const seoAgencyService: TemplateMasterData = {
     {
       title: "Data Observability",
       description:
-        "Dashboard รายงานผลแบบ Real-time วิเคราะห์เจาะลึกทั้ง Search Intent และ Conversion Tracking",
+        "Dashboard รายงานผลแบบ Real-time วิเคราะห์เจาะลึกทั้ง Search Intent และ Conversion",
       icon: "Activity",
     },
   ],
@@ -64,12 +62,12 @@ export const seoAgencyService: TemplateMasterData = {
     {
       question: "ทำไมต้องเน้น Technical SEO มากกว่าการแค่เขียนบทความ?",
       answer:
-        "เพราะโครงสร้างพื้นฐานที่แย่จะทำให้เนื้อหาที่ดีที่สุดถูกมองข้ามครับ การทำ Technical SEO เปรียบเสมือนการสร้างถนนที่ราบรื่นเพื่อให้ Googlebot เข้าถึงเนื้อหาของคุณได้ง่ายและไวที่สุด",
+        "เพราะโครงสร้างพื้นฐานที่แย่จะทำให้เนื้อหาที่ดีที่สุดถูกมองข้ามครับ เปรียบเสมือนการสร้างถนนที่ราบรื่นเพื่อให้ Googlebot เข้าถึงเนื้อหาของคุณได้ง่ายที่สุด",
     },
     {
       question: "กลยุทธ์ Content Authority ต่างจากการเขียนบทความทั่วไปอย่างไร?",
       answer:
-        "เราไม่ได้เขียนเพื่อเอาปริมาณครับ แต่เราวางระบบ Entity Linking และ Topic Clusters เพื่อบอก Google ว่าเว็บไซต์ของคุณคือแหล่งข้อมูลที่น่าเชื่อถือที่สุดในหัวข้อนั้นๆ",
+        "เราวางระบบ Entity Linking และ Topic Clusters เพื่อบอก Google ว่าเว็บไซต์ของคุณคือแหล่งข้อมูลที่น่าเชื่อถือที่สุดในหัวข้อนั้นๆ ไม่ใช่แค่เขียนเอาปริมาณ",
     },
   ],
 
@@ -82,6 +80,6 @@ export const seoAgencyService: TemplateMasterData = {
     "ปรับแต่ง Core Web Vitals",
   ],
 
-  priority: 1, // ปรับ Priority ให้สูงขึ้นสำหรับหน้า Feature
+  priority: 1,
   isFeatured: true,
 };
