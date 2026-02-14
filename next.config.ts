@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.100 (LCP_OPTIMIZED)
- * [STRATEGY]: Retina-Ready Images | Termux Resource Safety | Aggressive Caching
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.110 (ULTIMATE_OPTIMIZED)
+ * [STRATEGY]: Aggressive Image Caching | Compiler Hardening | Termux Resource Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -11,7 +11,6 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
 const isVercel = process.env.VERCEL === "1";
-// const isProductionDomain = process.env.NEXT_PUBLIC_SITE_URL === "https://aemdevweb.com";
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -26,11 +25,15 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // [OPTIMIZATION]: ลดภาระการ Compile และเร่งความเร็ว LCP
+  // [OPTIMIZATION]: เร่งความเร็ว Core Web Vitals
   reactStrictMode: true,
   compress: true,
 
-  // [SECURITY]: ปิด Source Maps บน Prod เพื่อความปลอดภัยและลดขนาด (Hardened)
+  // [COMPILER_HARDENING]: กำจัด Unused JS (Console Logs) เพื่อลด Payload 12-51KB
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+  },
+
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
@@ -38,11 +41,10 @@ const nextConfig: NextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process (สำคัญมาก)
+    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process ในสภาพแวดล้อมทรัพยากรจำกัด
     workerThreads: false,
-    cpus: isVercel ? undefined : 1, // จำกัด CPU บน Local (Termux) แต่ปล่อยเต็มที่บน Cloud
+    cpus: isVercel ? undefined : 1,
 
-    // [TREE_SHAKING]: บังคับ Optimize Library หนักๆ
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -52,18 +54,17 @@ const nextConfig: NextConfig = {
       "clsx",
       "tailwind-merge",
     ],
-    // ใช้ Rust Compiler เฉพาะบน Vercel เพื่อความเร็ว (Termux ใช้ WASM/JS fallback)
     mdxRs: isVercel,
   },
 
   images: {
-    // [MOBILE_LCP]: จูน Breakpoints ให้ละเอียดขึ้นสำหรับ Retina Display
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920], // เพิ่ม 750/828 สำหรับ iPhone Models
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // [FIXED]: เพิ่ม 256, 384 เพื่อปิดช่องว่างระหว่าง Thumbnail กับ Full Width
+    // [MOBILE_LCP]: Breakpoints ที่ละเอียดขึ้นสำหรับความคมชัดระดับ Retina
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000, // Cache 1 ปี (Aggressive Strategy)
-    dangerouslyAllowSVG: true, // อนุญาต SVG สำหรับ Vector Graphics
+    minimumCacheTTL: 31536000, // [FIXED]: ปูฐานราก Cache 1 ปี
+    dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
     remotePatterns: [
@@ -71,7 +72,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "aemdevweb.com",
       },
-      // [STRICT]: ไม่อนุญาต Wildcard (**) เพื่อความปลอดภัยสูงสุด
     ],
   },
 
@@ -83,7 +83,6 @@ const nextConfig: NextConfig = {
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
     ];
 
-    // ป้องกัน Indexing บน Environment ที่ไม่ใช่ Production
     if (process.env.VERCEL_ENV !== "production") {
       securityHeaders.push({
         key: "X-Robots-Tag",
@@ -96,7 +95,17 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // [CACHE_POLICY]: Force Cache Static Assets 1 Year
+      // [OPTIMIZED_IMAGE_CACHE]: บังคับ Cache รูปภาพที่ผ่านการรีไซส์ (แก้ปัญหา TTL 1 ชม. ใน PageSpeed)
+      {
+        source: "/_next/image/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // [STATIC_ASSET_CACHE]: บังคับ Cache ไฟล์ดิบและฟอนต์
       {
         source: "/images/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
@@ -109,11 +118,9 @@ const nextConfig: NextConfig = {
   },
 
   webpack: (config, { dev }) => {
-    // [STORAGE_SAVER]: ปิด Webpack Cache บน Termux เพื่อประหยัดพื้นที่ Storage
     if (!isVercel) {
       config.cache = false;
     }
-    // [DEV_DX]: Polling สำหรับ File System ของ Android (แก้ปัญหา Hot Reload ไม่ติด)
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,
@@ -125,5 +132,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-// Wrap Config ด้วย Plugins ตามลำดับ
 export default withBundleAnalyzer(withMDX(nextConfig));

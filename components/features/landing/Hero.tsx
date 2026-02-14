@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.106 (HYBRID_HARDENED)
- * [STRATEGY]: CSS-First Initial State | Neural Physics | LCP Optimized
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.110 (LCP_HARDENED)
+ * [STRATEGY]: CSS-First Initial State | Neural Physics | Hydration Safety
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -17,14 +17,16 @@ import { Button } from "@/components/ui/Button";
 const Hero = () => {
   /**
    * [PHYSICS]: Neural Spring Transition
-   * ปรับ Duration ให้กระชับขึ้นเพื่อลด Time to Interactive (TTI)
+   * ออกแบบมาให้ตอบสนองไว (0.6s) เพื่อความรู้สึกแบบ High-Performance
    */
   const sharedTransition: Transition = {
     duration: 0.6,
-    ease: [0.16, 1, 0.3, 1],
+    ease: [0.16, 1, 0.3, 1], // Custom Cubic Bezier สำหรับความพรีเมียม
   };
 
-  // [OPTIMIZED]: ใช้ opacity: 0.01 เพื่อรักษาพื้นที่ใน Layout ระหว่างรอ Hydration
+  /** * [OPTIMIZED]: ป้องกัน Layout Shift (CLS)
+   * ใช้ opacity: 0.01 แทน 0 เพื่อให้ Browser จองพื้นที่ไว้ก่อน Hydration
+   */
   const fadeUp = {
     initial: { opacity: 0.01, y: 15 },
     animate: { opacity: 1, y: 0 },
@@ -32,14 +34,15 @@ const Hero = () => {
 
   return (
     <section className="relative flex min-h-[85dvh] flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40 md:pb-36">
-      {/* --- 01. INFRASTRUCTURE LAYER --- */}
+      
+      {/* --- 01. INFRASTRUCTURE LAYER (CSS Pattern) --- */}
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04] select-none"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         aria-hidden="true"
       />
 
-      {/* Dynamic Ambient Aura */}
+      {/* Dynamic Ambient Aura (GPU Accelerated) */}
       <div
         className="absolute top-[10%] -right-[5%] z-0 h-[500px] w-[500px] transform-gpu rounded-full opacity-20 blur-[100px]"
         style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
@@ -47,7 +50,8 @@ const Hero = () => {
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* Node 01: Specialist Status Badge */}
+        
+        {/* Node 01: Status Protocol Badge */}
         <motion.div
           initial={fadeUp.initial}
           animate={fadeUp.animate}
@@ -60,13 +64,13 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Node 02: Main Messaging Matrix */}
+        {/* Node 02: Main Messaging Matrix (LCP Element) */}
         <div className="max-w-7xl space-y-12">
           <motion.h1
             initial={fadeUp.initial}
             animate={fadeUp.animate}
             transition={{ ...sharedTransition, delay: 0.05 }}
-            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic opacity-100 transition-opacity duration-300 md:text-8xl lg:text-[7.5rem]"
+            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic transition-opacity duration-300 md:text-8xl lg:text-[7.5rem]"
           >
             <span className="text-brand-primary mr-4 block md:inline">AEMDEVWEB</span>
             {SITE_CONFIG.hero.title.replace("AEMDEVWEB", "")}
@@ -129,7 +133,7 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Visual Anchor Bottom */}
+      {/* Visual Anchor Bottom (Divider) */}
       <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" />
     </section>
   );
