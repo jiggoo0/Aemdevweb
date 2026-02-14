@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.97 (ULTIMATE_HARDENED)
- * [STRATEGY]: Infrastructure-Synced | E-E-A-T Enforcement | Social Identity
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.98 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Dual-Language Identity | E-E-A-T Enforcement | Global Reach
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -23,7 +23,7 @@ export const SITE_CONFIG: SiteConfig = {
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
     description:
-      "โครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์",
+      "โครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์ (Alongkorn Yomkerd)", // [UPDATED]: Dual Name in Hero
     primaryAction: "ปรึกษาวางแผนระบบฟรี",
     secondaryAction: "วิเคราะห์บริการทั้งหมด",
   },
@@ -50,15 +50,15 @@ export const SITE_CONFIG: SiteConfig = {
   ],
 
   project: {
-    title: "AEMDEVWEB | High-End Web & SEO Expert Hub",
+    title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)", // [UPDATED]: Combined Title
     shortTitle: "AEMDEVWEB",
-    version: "17.9.97", // [INCREMENTED]: Schema Warning Patch (telephone & priceRange)
+    version: "17.9.98", // [INCREMENTED]: Dual-Language Identity Patch
     framework: "Next.js 16.1.6 (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
   expert: {
-    displayName: "นายเอ็มซ่ามากส์ (AemSaMak)",
+    displayName: "นายเอ็มซ่ามากส์ (Alongkorn Yomkerd)", // [UPDATED]: Combined for UI visibility
     legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "Technical SEO Specialist",
@@ -67,14 +67,14 @@ export const SITE_CONFIG: SiteConfig = {
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/services/bio",
-    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO ที่เน้นการสร้างผลลัพธ์ทางธุรกิจ (ROI) ผ่านโครงสร้างพื้นฐานดิจิทัลที่แข็งแกร่ง",
+    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO (Alongkorn Yomkerd) ที่เน้นการสร้างผลลัพธ์ทางธุรกิจ (ROI) ผ่านโครงสร้างพื้นฐานดิจิทัลที่แข็งแกร่ง",
     googleMerchantId: "8653147979146207424",
     twitterHandle: "@aemdevweb",
   },
 
   contact: {
     email: "me@aemdevweb.com",
-    phone: "099-032-2175", // [FIXED]: Mapping for telephone schema
+    phone: "099-032-2175",
     displayPhone: "099 032 2175 (สายด่วนปรึกษานายเอ็มซ่ามากส์)",
     address: "กำแพงเพชร, ประเทศไทย",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
@@ -102,7 +102,7 @@ export const SITE_CONFIG: SiteConfig = {
     roiFocus: true,
     established: "2024",
     status: "Stable",
-    priceRange: "฿฿฿", // [NEW]: Resolves Schema Warning "Missing priceRange"
+    priceRange: "฿฿฿",
     ids: {
       businessProfileId: "17539943195708104348",
       storeCode: "01162024004001766449",
