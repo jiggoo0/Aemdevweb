@@ -4,7 +4,7 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { ReactNode, CSSProperties } from "react";
+import type { ReactNode } from "react";
 
 // =========================================
 // [01] INFRASTRUCTURE & ADAPTERS
@@ -15,7 +15,10 @@ export interface PageProps<T = Record<string, string>> {
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export interface LayoutProps {
+/** * [CLEANUP]: ปรับเป็น Local Interface เนื่องจากใช้ภายในไฟล์ Layout หลักเท่านั้น 
+ * ลดรายงาน Unused Exported Type
+ */
+interface LayoutProps {
   readonly children: ReactNode;
 }
 
@@ -151,7 +154,7 @@ export interface SiteConfig {
     readonly google: string;
     readonly facebook?: string;
   };
-  /** [FIXED]: ป้องกัน Error TS2353 บรรทัดที่ 112 (Tracking & Metrics) */
+  /** [FIXED]: Tracking & Metrics */
   readonly analytics?: {
     readonly gaId?: string;
     readonly pixelId?: string;
@@ -317,4 +320,5 @@ export interface AreaNode {
   readonly localContext: LocalContext;
   readonly theme?: Partial<ThemeConfig>;
 }
+
 export * from "./template-props";

@@ -17,7 +17,9 @@ import { phuketNode } from "./phuket";
 import { sukhothaiNode } from "./sukhothai";
 import { takNode } from "./tak";
 import { uttaraditNode } from "./uttaradit";
-import { lampangNode } from "./lampang"; // [ADD]: ยึดพื้นที่เซรามิกและอุตสาหกรรมภาคเหนือ
+import { lampangNode } from "./lampang";
+import { chiangRaiNode } from "./chiang-rai"; // [ADD]: ยึดพื้นที่ Coffee Specialty & Gateway
+import { maeHongSonNode } from "./mae-hong-son"; // [ADD]: ยึดพื้นที่ Wellness & Slow Living
 
 import type { AreaNode } from "@/types";
 
@@ -41,4 +43,6 @@ export const AREA_NODES: AreaNode[] = [
   takNode,
   uttaraditNode,
   lampangNode,
+  chiangRaiNode, // เพิ่มเข้า Array
+  maeHongSonNode, // เพิ่มเข้า Array
 ].sort((a, b) => b.priority - a.priority);

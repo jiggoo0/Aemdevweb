@@ -34,7 +34,6 @@ const Hero = () => {
 
   return (
     <section className="relative flex min-h-[85dvh] flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40 md:pb-36">
-      
       {/* --- 01. INFRASTRUCTURE LAYER (CSS Pattern) --- */}
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04] select-none"
@@ -50,7 +49,6 @@ const Hero = () => {
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        
         {/* Node 01: Status Protocol Badge */}
         <motion.div
           initial={fadeUp.initial}

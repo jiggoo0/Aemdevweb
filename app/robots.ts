@@ -22,16 +22,16 @@ export default function robots(): MetadataRoute.Robots {
       allow: [
         "/",
         "/_next/static/", // [CRITICAL]: สำหรับไฟล์ CSS/JS หลัก
-        "/_next/image",  // [CRITICAL]: สำหรับรูปภาพที่ผ่านการ Optimize (วัดผล LCP)
-        "/images/",      // สำหรับ Image Search Indexing
+        "/_next/image", // [CRITICAL]: สำหรับรูปภาพที่ผ่านการ Optimize (วัดผล LCP)
+        "/images/", // สำหรับ Image Search Indexing
       ],
       // [SECURITY_PATH]: ป้องกันบอทเข้าถึงพื้นที่ที่ไม่เกี่ยวข้องกับการค้นหาหรือข้อมูลหลังบ้าน
       disallow: [
-        "/api/",      // API Endpoints
-        "/admin/",    // ระบบจัดการ (ถ้ามี)
-        "/status",    // หน้าเช็คสถานะระบบ
-        "/private/",  // ข้อมูลส่วนบุคคล
-        "/*?*",       // [STRATEGY]: ป้องกัน Duplicate Content จาก URL Parameters (เช่น ?fbclid=...)
+        "/api/", // API Endpoints
+        "/admin/", // ระบบจัดการ (ถ้ามี)
+        "/status", // หน้าเช็คสถานะระบบ
+        "/private/", // ข้อมูลส่วนบุคคล
+        "/*?*", // [STRATEGY]: ป้องกัน Duplicate Content จาก URL Parameters (เช่น ?fbclid=...)
       ],
     },
     // [ORCHESTRATION]: ลิงก์ไปยัง Sitemap ที่เราเพิ่งสร้างไว้

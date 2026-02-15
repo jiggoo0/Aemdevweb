@@ -32,7 +32,7 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
 
 /**
  * [HELPER]: getServiceBySlug
- * @description ค้นหาข้อมูลบริการจาก URL Slug แบบ Type-Safe 
+ * @description ค้นหาข้อมูลบริการจาก URL Slug แบบ Type-Safe
  * ใช้ในหน้า app/(sales)/services/[slug]/page.tsx
  */
 export const getServiceBySlug = (slug: string): TemplateMasterData | undefined => {

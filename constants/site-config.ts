@@ -23,7 +23,7 @@ export const SITE_CONFIG: SiteConfig = {
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
     description:
-      "โครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์ ", 
+      "โครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์ ",
     primaryAction: "ปรึกษาวางแผนระบบฟรี",
     secondaryAction: "วิเคราะห์บริการทั้งหมด",
   },

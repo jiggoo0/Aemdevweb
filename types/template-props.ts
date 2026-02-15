@@ -61,7 +61,7 @@ export interface UniversalTemplateProps {
   /** [STABLE]: รายการสินค้า/บริการย่อยสำหรับ Catalog หรือหน้ารวมบริการ */
   readonly items?: readonly CatalogItem[];
 
-  // --- [TRUST_SIGNAL_INJECTION]: ข้อมูลส่วนนี้ถูกฉีดเข้ามา Dynamic จาก Data Merger ---
+  // --- [TRUST_SIGNAL_INJECTION]: ข้อมูลถูกฉีด Dynamic จาก Data Merger ---
   readonly clientTrust?: string;
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
@@ -90,42 +90,10 @@ export interface BaseTemplateProps {
   readonly suppressUI?: boolean;
 }
 
-/** [ALIASES]: เพื่อความสะดวกและชัดเจนในการเรียกใช้ภายในแต่ละเทมเพลต */
-export type SalePageTemplateProps = BaseTemplateProps;
-export type CorporateTemplateProps = BaseTemplateProps;
-export type HotelResortTemplateProps = BaseTemplateProps;
-export type LocalTemplateProps = BaseTemplateProps;
-
-/** [SPECIFIC]: สำหรับ Catalog ที่ต้องการการจัดการรายการแบบเข้มงวด */
-export interface CatalogTemplateProps extends BaseTemplateProps {
-  readonly catalogItems?: readonly CatalogItem[];
-}
-
-// =========================================
-// [04] ATOMIC COMPONENT PROPS
-// =========================================
-
-export interface SaleHeroProps {
-  readonly title: string;
-  readonly description: string;
-  readonly image?: string;
-  readonly theme?: ThemeConfig;
-}
-
-export interface StickyBuyButtonProps {
-  readonly href: string;
-  readonly label: string;
-  readonly price?: number | string;
-  readonly theme?: ThemeConfig;
-}
-
-export interface FeatureComparisonProps {
-  readonly features: readonly ServiceFeature[];
-  readonly theme?: ThemeConfig;
-}
-
-export interface DirectOrderFormProps {
-  readonly price: string;
-  readonly unit: string;
-  readonly theme?: ThemeConfig;
-}
+/** * [CLEANUP_NOTICE]: 
+ * ส่วนประกอบย่อย (Aliases & Atomic Props) ถูกนำออกชั่วคราวตาม Zero-Unused Policy
+ * เพื่อลด Bundle Size และป้องกัน Linter Warning ในระบบ Mobile-Dev
+ * * [RECOVERY_PATH]:
+ * หากต้องการเพิ่มหน้าใหม่ (New Template) สามารถประกาศเฉพาะจุดที่ใช้งานจริง
+ * ในไฟล์ Component นั้นๆ หรือเพิ่มกลับมาที่นี่หากมีการใช้ซ้ำ (Reuse) มากกว่า 2 จุด
+ */

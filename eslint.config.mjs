@@ -44,7 +44,6 @@ export default tseslint.config(
     },
     rules: {
       // --- [SECTION: NEXT.JS CORE] ---
-      // ดึงกฎมาเฉพาะที่จำเป็นเพื่อเลี่ยง Error "Could not find rule"
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
       "@next/next/no-img-element": "error",
@@ -69,6 +68,28 @@ export default tseslint.config(
       "@typescript-eslint/consistent-type-imports": "error",
       "no-var": "error",
       "prefer-const": "error",
+    },
+  },
+  // --- [SECTION: SCRIPTS OVERRIDE] ---
+  {
+    files: ["scripts/**/*.{js,ts}"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        setTimeout: "readonly",
+        fetch: "readonly",
+        require: "readonly",
+        module: "readonly",
+        __dirname: "readonly",
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/no-explicit-any": "off", // ผ่อนปรนให้ script ใช้งานได้คล่องตัว
+      "no-undef": "off",
+      "no-unused-vars": "off",
     },
   },
 );

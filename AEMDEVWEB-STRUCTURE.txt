@@ -1,0 +1,270 @@
+.
+├── .gitignore
+├── .npmrc
+├── .prettierrc
+├── AEMDEVWEB-STRUCTURE.txt
+├── README.md
+├── app
+│   ├── (business)
+│   │   ├── areas
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── case-studies
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (main)
+│   │   ├── about
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   ├── privacy
+│   │   │   └── page.tsx
+│   │   ├── status
+│   │   │   └── page.tsx
+│   │   └── terms
+│   │       └── page.tsx
+│   ├── (sales)
+│   │   ├── layout.tsx
+│   │   └── services
+│   │       ├── [slug]
+│   │       │   └── page.tsx
+│   │       └── page.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── manifest.ts
+│   ├── not-found.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── template.tsx
+├── components
+│   ├── features
+│   │   ├── areas
+│   │   │   └── AreaCard.tsx
+│   │   ├── blog
+│   │   │   └── BlogCard.tsx
+│   │   ├── case-studies
+│   │   │   └── CaseStudyCard.tsx
+│   │   ├── landing
+│   │   │   ├── Hero.tsx
+│   │   │   ├── PricingSection.tsx
+│   │   │   └── WorkProcess.tsx
+│   │   └── services
+│   │       ├── ServiceCard.tsx
+│   │       └── ServiceListingHub.tsx
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── PageTransition.tsx
+│   │   └── TopLoader.tsx
+│   ├── providers
+│   │   └── ThemeProvider.tsx
+│   ├── seo
+│   │   └── JsonLd.tsx
+│   ├── shared
+│   │   ├── ConversionCTA.tsx
+│   │   ├── FloatingContainer.tsx
+│   │   ├── ImpactStats.tsx
+│   │   ├── LineStickyButton.tsx
+│   │   └── TrustBadge.tsx
+│   ├── templates
+│   │   ├── DynamicThemeWrapper.tsx
+│   │   ├── TemplateRenderer.tsx
+│   │   ├── bio
+│   │   │   └── Index.tsx
+│   │   ├── catalog
+│   │   │   └── Index.tsx
+│   │   ├── corporate
+│   │   │   └── Index.tsx
+│   │   ├── hotelresort
+│   │   │   └── Index.tsx
+│   │   ├── local-authority
+│   │   │   └── Index.tsx
+│   │   ├── salepage
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── DirectOrderForm.tsx
+│   │   │       ├── FeatureComparison.tsx
+│   │   │       ├── FlashSaleTimer.tsx
+│   │   │       ├── SaleFooter.tsx
+│   │   │       ├── SaleHero.tsx
+│   │   │       ├── SaleNavbar.tsx
+│   │   │       ├── StickyBuyButton.tsx
+│   │   │       └── ThaiTrustBadge.tsx
+│   │   ├── sections
+│   │   │   ├── DynamicFAQ.tsx
+│   │   │   ├── FeatureGrid.tsx
+│   │   │   ├── HeroEngine.tsx
+│   │   │   └── LayoutEngine.tsx
+│   │   └── seo-agency
+│   │       └── Index.tsx
+│   └── ui
+│       ├── Accordion.tsx
+│       ├── AmbientBackground.tsx
+│       ├── Button.tsx
+│       ├── Callout.tsx
+│       ├── IconRenderer.tsx
+│       ├── Skeleton.tsx
+│       ├── SkeletonCard.tsx
+│       ├── SkeletonGrid.tsx
+│       ├── Sonner.tsx
+│       └── ThemeToggle.tsx
+├── components.json
+├── config
+│   ├── 00-SYSTEM-MANDATE.md
+│   └── 01-SYSTEM-PROMPT-EXTENSION.md
+├── constants
+│   ├── area-nodes
+│   │   ├── bangkok.ts
+│   │   ├── chiang-mai.ts
+│   │   ├── chiang-rai.ts
+│   │   ├── chon-buri.ts
+│   │   ├── index.ts
+│   │   ├── kamphaeng-phet.ts
+│   │   ├── khon-kaen.ts
+│   │   ├── korat.ts
+│   │   ├── lampang.ts
+│   │   ├── mae-hong-son.ts
+│   │   ├── nakhon-sawan.ts
+│   │   ├── phichit.ts
+│   │   ├── phitsanulok.ts
+│   │   ├── phuket.ts
+│   │   ├── sukhothai.ts
+│   │   ├── tak.ts
+│   │   └── uttaradit.ts
+│   ├── image-blur-data.ts
+│   ├── master-registry.ts
+│   ├── navigation.ts
+│   ├── services
+│   │   ├── bio.ts
+│   │   ├── catalog.ts
+│   │   ├── corporate.ts
+│   │   ├── hotel-resort.ts
+│   │   ├── local-authority.ts
+│   │   ├── salepage.ts
+│   │   └── seo-agency.ts
+│   └── site-config.ts
+├── content
+│   ├── blog
+│   │   ├── 5-points-killing-sales.mdx
+│   │   ├── advanced-schema-markup.mdx
+│   │   ├── case-study-unlink-th.mdx
+│   │   ├── copywriting-secrets.mdx
+│   │   ├── core-web-vitals-speed.mdx
+│   │   ├── ecommerce-conversion-seo.mdx
+│   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── lower-north-digital-transformation.mdx
+│   │   ├── seo-2026-strategy.mdx
+│   │   └── technical-audit-protocol.mdx
+│   └── case-studies
+│       ├── case-study-industrial-catalog.mdx
+│       └── unlink-reputation-management-success.mdx
+├── docs
+│   ├── Dev.md
+│   └── MASTER_AUDIT_REPORT.md
+├── eslint.config.mjs
+├── knip.json
+├── lib
+│   ├── cms.ts
+│   ├── data-merger.ts
+│   ├── schema-validator.ts
+│   ├── schema.ts
+│   ├── seo-utils.ts
+│   └── utils.ts
+├── mdx-components.tsx
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── public
+│   ├── android-chrome-192x192(1).png
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512(1).png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── favicon(1).ico
+│   ├── favicon-16x16.png
+│   ├── favicon-16x16.svg
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── grid-pattern.svg
+│   ├── images
+│   │   ├── areas
+│   │   │   ├── bangkok-node.webp
+│   │   │   ├── chiang-mai-node.webp
+│   │   │   ├── chiang-rai-node.webp
+│   │   │   ├── chon-buri-node.webp
+│   │   │   ├── kamphaeng-phet-node.webp
+│   │   │   ├── khon-kaen-node.webp
+│   │   │   ├── korat-node.webp
+│   │   │   ├── lampang-node.webp
+│   │   │   ├── mae-hong-son-node.webp
+│   │   │   ├── nakhon-sawan-node.webp
+│   │   │   ├── phichit-node.webp
+│   │   │   ├── phitsanulok-node.webp
+│   │   │   ├── phuket-node.webp
+│   │   │   ├── preview.webp
+│   │   │   ├── sukhothai-node.webp
+│   │   │   ├── tak-node.webp
+│   │   │   └── uttaradit-node.webp
+│   │   ├── avatar.webp
+│   │   ├── blog
+│   │   │   ├── advanced-schema-markup.webp
+│   │   │   ├── copywriting-specialist.webp
+│   │   │   ├── core-web-vitals-speed.webp
+│   │   │   ├── default-thumb.webp
+│   │   │   ├── ecommerce-seo.webp
+│   │   │   ├── facebook-ads-vs-website.webp
+│   │   │   ├── seo-google-love.webp
+│   │   │   └── technical-audit-visual.webp
+│   │   ├── case-studies
+│   │   │   ├── industrial-catalog.webp
+│   │   │   ├── preview.webp
+│   │   │   └── unlink-reputation.webp
+│   │   ├── experts
+│   │   │   └── profile-hero.webp
+│   │   ├── logo-main.webp
+│   │   ├── og-default.webp
+│   │   ├── og-main.webp
+│   │   ├── seo
+│   │   │   ├── advanced-schema-markup.webp
+│   │   │   ├── core-web-vitals-speed.webp
+│   │   │   ├── ecommerce-seo.webp
+│   │   │   └── seo.webp
+│   │   ├── service
+│   │   │   ├── bio-node.webp
+│   │   │   ├── catalog-node.webp
+│   │   │   ├── corporate-node.webp
+│   │   │   ├── default.webp
+│   │   │   ├── hotel-resort-node.webp
+│   │   │   ├── local-node.webp
+│   │   │   ├── personal-node.webp
+│   │   │   ├── salepage-node.webp
+│   │   │   └── seo-agency-node.webp
+│   │   ├── shared
+│   │   │   ├── placeholder.webp
+│   │   │   └── preview.webp
+│   │   └── templates
+│   │       ├── local-service
+│   │       │   └── og.webp
+│   │       └── preview.webp
+│   └── logo-full.svg
+├── service-account.json
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+├── types
+│   ├── index.d.ts
+│   ├── mdx.d.ts
+│   └── template-props.ts
+└── vercel.json

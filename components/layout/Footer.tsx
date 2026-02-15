@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 // [CONSTANTS]: แยก Class เพื่อความสะอาดและ Maintain ง่าย
 const LINK_STYLE = cn(
   "text-text-secondary hover:text-brand-primary text-sm transition-all duration-300",
-  "hover:translate-x-1 inline-block", // [MICRO-INTERACTION]: ขยับเล็กน้อยเมื่อ Hover
+  "inline-block hover:translate-x-1", // [MICRO-INTERACTION]: ขยับเล็กน้อยเมื่อ Hover
 );
 
 const HEADER_STYLE = "text-text-primary mb-6 text-sm font-black tracking-[0.15em] uppercase";

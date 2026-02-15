@@ -35,11 +35,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    */
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: currentDate, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${baseUrl}/services`, lastModified: currentDate, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${baseUrl}/case-studies`, lastModified: currentDate, changeFrequency: "weekly", priority: 0.8 },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/case-studies`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     { url: `${baseUrl}/blog`, lastModified: currentDate, changeFrequency: "daily", priority: 0.8 },
-    { url: `${baseUrl}/about`, lastModified: currentDate, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: currentDate, changeFrequency: "yearly", priority: 0.6 },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: currentDate,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    },
   ];
 
   /**
@@ -88,11 +108,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   /**
    * [AGGREGATION]: รวมทุกเส้นทางเข้าด้วยกันเป็นไฟล์เดียว
    */
-  return [
-    ...staticRoutes,
-    ...serviceRoutes,
-    ...areaRoutes,
-    ...caseStudyRoutes,
-    ...blogRoutes,
-  ];
+  return [...staticRoutes, ...serviceRoutes, ...areaRoutes, ...caseStudyRoutes, ...blogRoutes];
 }

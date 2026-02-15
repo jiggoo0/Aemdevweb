@@ -29,8 +29,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
           /* 01. BASE INFRASTRUCTURE */
           toast: cn(
             "group toast group-[.toaster]:bg-surface-card/90 group-[.toaster]:text-text-primary",
-            "group-[.toaster]:border-border group-[.toaster]:backdrop-blur-xl group-[.toaster]:rounded-[1.5rem]",
-            "group-[.toaster]:p-6 group-[.toaster]:shadow-glow transition-all duration-500",
+            "group-[.toaster]:border-border group-[.toaster]:rounded-[1.5rem] group-[.toaster]:backdrop-blur-xl",
+            "group-[.toaster]:shadow-glow transition-all duration-500 group-[.toaster]:p-6",
           ),
 
           /* 02. TYPOGRAPHY HIERARCHY */

@@ -86,7 +86,7 @@ export default async function AreaPage(props: PageProps) {
     notFound();
   }
 
-  /** * [MERGER]: ผสมข้อมูล Master + Area Node 
+  /** * [MERGER]: ผสมข้อมูล Master + Area Node
    * ผลลัพธ์ที่ได้จะเป็น UniversalTemplateProps ที่สมบูรณ์ (มี Theme, Features, FAQs ครบ)
    */
   const templateData = mergeServiceData(masterService, area) as UniversalTemplateProps;
