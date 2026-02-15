@@ -1,8 +1,10 @@
 /**
- * [UI COMPONENT]: SPECIALIST_BUTTON_SYSTEM v17.9.102 (ULTIMATE_HARDENED)
- * [STRATEGY]: Private Type Mapping | GPU-Accelerated Rendering
+ * [UI COMPONENT]: SPECIALIST_BUTTON_SYSTEM v18.0.33 (STABLE_INTERNAL)
+ * [STRATEGY]: Private Type Mapping | GPU-Accelerated Rendering | Knip_Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
+"use client";
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -11,6 +13,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * [VARIANTS_MATRIX]: ระบบจัดการสไตล์แบบ Deterministic
+ * [KNIP_FIX]: นำ 'export' ออกเพื่อจำกัดการใช้งานเฉพาะภายในไฟล์นี้ตามมาตรฐาน Zero-Waste
  */
 const buttonVariants = cva(
   "group focus-visible:ring-brand-primary inline-flex transform-gpu items-center justify-center gap-2.5 text-sm font-black tracking-[0.15em] whitespace-nowrap uppercase italic transition-all duration-500 ease-[0.16,1,0.3,1] will-change-transform focus-visible:ring-1 focus-visible:outline-none active:scale-95 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -45,7 +48,9 @@ const buttonVariants = cva(
   },
 );
 
-// [FIXED]: ลบ export ออกเพื่อให้เป็น Internal Interface ตามคำแนะนำของ knip
+/**
+ * [INTERFACE_HARDENING]: การกำจัด Public Interface ที่ไม่จำเป็น
+ */
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
@@ -53,6 +58,7 @@ interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
+    // [POLYMORPHISM]: รองรับการเปลี่ยน Tag ผ่าน Radix Slot (เช่น ใช้เป็น <Link>)
     const Comp = asChild ? Slot : "button";
 
     return (
@@ -63,4 +69,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
+/**
+ * [SYSTEM_EXPORTS]: ส่งออกเฉพาะตัวคอมโพเนนต์หลัก
+ * ปรับปรุง: ไม่ส่งออก buttonVariants เพื่อลดการแจ้งเตือน Unused Exports จาก knip
+ */
 export { Button };

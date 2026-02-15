@@ -1,40 +1,41 @@
 /**
- * [SEO MODULE]: ROBOTS_CONFIGURATION v17.9.10 (STABLE_FINAL)
- * [STRATEGY]: Rendering Optimization | Asset Accessibility | Duplicate Prevention
+ * [SEO MODULE]: ROBOTS_CONFIGURATION v17.9.11 (ULTIMATE_HARDENED)
+ * [STRATEGY]: Rendering Optimization | Asset Accessibility | Crawl Budget Management
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { MetadataRoute } from "next";
-import { SITE_CONFIG } from "@/constants/site-config";
+import type { MetadataRoute } from "next"; // [FIXED]: ใช้ import type เพื่อความคลีนของระบบ
+import { absoluteUrl } from "@/lib/utils"; // [FIXED]: ใช้ absoluteUrl เพื่อความสอดคล้องกับ sitemap.ts
 
 /**
  * @function robots
  * @description ควบคุมพฤติกรรมการจัดเก็บข้อมูลของ Search Engine เพื่อรักษาความปลอดภัยและประสิทธิภาพสูงสุด
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = SITE_CONFIG.siteUrl;
-
   return {
     rules: {
       userAgent: "*",
-      // [RENDERING_PATH]: อนุญาตให้บอทเข้าถึงทรัพยากรสำคัญเพื่อการเรนเดอร์ UI
-      // หากปิดส่วนนี้ บอทจะมองเห็นเว็บเป็นหน้าขาว ซึ่งส่งผลเสียต่อคะแนน SEO และ LCP
+
+      // [RENDERING_PATH]: อนุญาตให้บอทเข้าถึงทรัพยากรสำคัญเพื่อการเรนเดอร์ UI แบบ Full-Paint
+      // หัวใจสำคัญของการรักษาคะแนน LCP และ SEO Visibility
       allow: [
         "/",
-        "/_next/static/", // [CRITICAL]: สำหรับไฟล์ CSS/JS หลัก
-        "/_next/image", // [CRITICAL]: สำหรับรูปภาพที่ผ่านการ Optimize (วัดผล LCP)
-        "/images/", // สำหรับ Image Search Indexing
+        "/_next/static/", // Critical CSS/JS
+        "/_next/image", // Optimized Next-Images
+        "/images/", // Image Search Assets
       ],
-      // [SECURITY_PATH]: ป้องกันบอทเข้าถึงพื้นที่ที่ไม่เกี่ยวข้องกับการค้นหาหรือข้อมูลหลังบ้าน
+
+      // [SECURITY_PATH]: ป้องกันการรั่วไหลของข้อมูลและประหยัดงบการไต่ (Crawl Budget)
       disallow: [
-        "/api/", // API Endpoints
-        "/admin/", // ระบบจัดการ (ถ้ามี)
-        "/status", // หน้าเช็คสถานะระบบ
-        "/private/", // ข้อมูลส่วนบุคคล
-        "/*?*", // [STRATEGY]: ป้องกัน Duplicate Content จาก URL Parameters (เช่น ?fbclid=...)
+        "/api/", // Backend Endpoints
+        "/admin/", // Management Console
+        "/status", // System Health Checks
+        "/private/", // Internal Data
+        "/*?*", // [STRATEGY]: ป้องกัน Duplicate Content จาก Tracking Params (?fbclid, ?utm...)
       ],
     },
-    // [ORCHESTRATION]: ลิงก์ไปยัง Sitemap ที่เราเพิ่งสร้างไว้
-    sitemap: `${baseUrl}/sitemap.xml`,
+
+    // [ORCHESTRATION]: ระบุพิกัดแผนผังเว็บไซต์เพื่อให้บอทค้นพบ 37+ Area Nodes ได้ทันที
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }

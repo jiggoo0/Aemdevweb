@@ -3,7 +3,6 @@
 ├── .npmrc
 ├── .prettierrc
 ├── AEMDEVWEB-STRUCTURE.txt
-├── README.md
 ├── app
 │   ├── (business)
 │   │   ├── areas
@@ -79,15 +78,50 @@
 │   │   ├── DynamicThemeWrapper.tsx
 │   │   ├── TemplateRenderer.tsx
 │   │   ├── bio
-│   │   │   └── Index.tsx
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── ActionRegistry.tsx
+│   │   │       ├── CapabilityGraph.tsx
+│   │   │       ├── CredentialStack.tsx
+│   │   │       ├── DirectTerminal.tsx
+│   │   │       ├── IdentityNode.tsx
+│   │   │       └── ProjectHighlight.tsx
 │   │   ├── catalog
-│   │   │   └── Index.tsx
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── CatalogHeader.tsx
+│   │   │       ├── InquiryPortal.tsx
+│   │   │       ├── ProductGrid.tsx
+│   │   │       ├── ProductNode.tsx
+│   │   │       ├── SearchOrchestrator.tsx
+│   │   │       └── TechnicalSpecSheet.tsx
 │   │   ├── corporate
-│   │   │   └── Index.tsx
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── CapabilityMatrix.tsx
+│   │   │       ├── ConsultGateway.tsx
+│   │   │       ├── SuccessTimeline.tsx
+│   │   │       ├── TrustNetwork.tsx
+│   │   │       ├── ValueBlueprint.tsx
+│   │   │       └── VisionPortal.tsx
 │   │   ├── hotelresort
-│   │   │   └── Index.tsx
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── AtmosphereHeader.tsx
+│   │   │       ├── ExperienceNodes.tsx
+│   │   │       ├── FacilityMatrix.tsx
+│   │   │       ├── ReservationPortal.tsx
+│   │   │       ├── SuiteRegistry.tsx
+│   │   │       └── WeatherTracker.tsx
 │   │   ├── local-authority
-│   │   │   └── Index.tsx
+│   │   │   ├── Index.tsx
+│   │   │   └── _components
+│   │   │       ├── DistrictRegistry.tsx
+│   │   │       ├── GeoNodeHeader.tsx
+│   │   │       ├── LocalInsight.tsx
+│   │   │       ├── LocalMapNode.tsx
+│   │   │       ├── MarketIntelligence.tsx
+│   │   │       └── RegionalAction.tsx
 │   │   ├── salepage
 │   │   │   ├── Index.tsx
 │   │   │   └── _components
@@ -105,7 +139,14 @@
 │   │   │   ├── HeroEngine.tsx
 │   │   │   └── LayoutEngine.tsx
 │   │   └── seo-agency
-│   │       └── Index.tsx
+│   │       ├── Index.tsx
+│   │       └── _components
+│   │           ├── AuditHero.tsx
+│   │           ├── AuditReportGenerator.tsx
+│   │           ├── ConversionPortal.tsx
+│   │           ├── KeywordRegistry.tsx
+│   │           ├── PerformanceTrajectory.tsx
+│   │           └── StrategyBlueprint.tsx
 │   └── ui
 │       ├── Accordion.tsx
 │       ├── AmbientBackground.tsx
@@ -207,6 +248,7 @@
 │   │   │   ├── chon-buri-node.webp
 │   │   │   ├── kamphaeng-phet-node.webp
 │   │   │   ├── khon-kaen-node.webp
+│   │   │   ├── korat-monolith.webp
 │   │   │   ├── korat-node.webp
 │   │   │   ├── lampang-node.webp
 │   │   │   ├── mae-hong-son-node.webp

@@ -1,6 +1,6 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.113 (STRUCTURE_ALIGNED)
- * [STRATEGY]: Strict Type-Safety | Resource Prioritization | Path Alignment
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.114 (GLOBAL_ORCHESTRATION)
+ * [STRATEGY]: Strict Type-Safety | Resource Prioritization | Global Conversion Anchor
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -21,7 +21,6 @@ import { Toaster } from "@/components/ui/Sonner";
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- Shared Feature Components ---
-// [ALIGNED]: นำเข้าจากตำแหน่งจริงตาม Directory Tree (components/shared)
 import LineStickyButton from "@/components/shared/LineStickyButton";
 
 /* --- 01. FONT ORCHESTRATION --- */
@@ -137,7 +136,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
       <body
         className={cn(
-          "bg-surface-main text-text-primary min-h-[100dvh] font-sans antialiased",
+          "bg-surface-main text-text-primary min-h-dvh font-sans antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
           "transition-colors duration-300",
         )}
@@ -152,9 +151,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <TopLoader color={SITE_CONFIG.themeColor} />
 
           {/* [STRUCTURE]: Primary Content Engine */}
-          <div className="relative flex min-h-[100dvh] flex-col overflow-x-hidden">{children}</div>
+          <div id="root-container" className="relative flex min-h-dvh flex-col overflow-x-hidden">
+            {children}
+          </div>
 
-          {/* [CONVERSION]: Global Line Sticky Button Anchor */}
+          {/* [CONVERSION]: Global Line Sticky Button Anchor
+              ปุ่มนี้จะลอยอยู่ในระดับสูงสุดของระบบเพื่อรองรับการติดต่อจากทุกหน้า
+          */}
           <LineStickyButton />
 
           {/* [FEEDBACK]: Global Notification Provider */}

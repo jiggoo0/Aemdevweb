@@ -12,13 +12,23 @@
   },
   "redirects": [
     {
-      "source": "/services/(corporate-lite|corporate-pro|corporate_lite|corporate_pro)",
+      "source": "/areas/undefined",
+      "destination": "/areas",
+      "permanent": true
+    },
+    {
+      "source": "/services/(corporate-lite|corporate-pro|corporate_lite|corporate_pro|starter_landing)",
       "destination": "/services/corporate",
       "permanent": true
     },
     {
-      "source": "/templates/(event-magic|corporate-standard|event_magic|corporate_standard)",
+      "source": "/templates/(event-magic|corporate-standard|event_magic|corporate_standard|restaurant_cafe|invert_image)",
       "destination": "/services/corporate",
+      "permanent": true
+    },
+    {
+      "source": "/templates/maintenance_page",
+      "destination": "/",
       "permanent": true
     },
     {
@@ -37,8 +47,18 @@
       "permanent": true
     },
     {
+      "source": "/blog/seo-for-sme-2025",
+      "destination": "/blog/seo-2026-strategy",
+      "permanent": true
+    },
+    {
       "source": "/(seo|blog)/technical-seo-guide",
       "destination": "/blog/seo-2026-strategy",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/case-studies-2",
+      "destination": "/case-studies",
       "permanent": true
     },
     {

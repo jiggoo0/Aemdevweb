@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: DATA_MERGER_ENGINE v17.9.106 (ULTIMATE_HARDENED)
+ * [SYSTEM CORE]: DATA_MERGER_ENGINE v17.9.107 (ULTIMATE_HARDENED)
  * [STRATEGY]: Blueprint Inheritance | Smart Theme Fusion | SEO Aggregation
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -16,17 +16,14 @@ export function mergeServiceData(
 ): UniversalTemplateProps {
   // 1. [SMART_THEME_FUSION]: รวมธีมพร้อมระบบป้องกันปัญหา Contrast
   const mergedTheme: ThemeConfig = {
-    // รับมรดกจาก Master Service ทั้งหมด
     ...master.theme,
-    // ทับด้วยข้อมูลเฉพาะจังหวัด (ถ้ามี)
     ...(area.theme || {}),
 
     // [FAIL-SAFE]: รับประกันค่าพื้นฐานสำคัญต้องไม่เป็นค่าว่าง
-    primary: area.theme?.primary || master.theme?.primary || "#2563eb",
+    primary: area.theme?.primary || master.theme?.primary || "#10b981",
     background: area.theme?.background || master.theme?.background || "#ffffff",
 
-    // [READABILITY_LOGIC]: คำนวณสีตัวอักษรให้อัตโนมัติหากไม่ได้ระบุ
-    // เพื่อป้องกันปัญหาตัวหนังสือจม (เช่น พื้นขาว ตัวหนังสือขาว)
+    // [READABILITY_LOGIC]: ระบบเลือกสีตัวอักษรอัตโนมัติ ป้องกัน Text-Invisibility
     mode: area.theme?.mode || master.theme?.mode || "light",
     foreground:
       area.theme?.foreground ||
@@ -34,7 +31,7 @@ export function mergeServiceData(
       ((area.theme?.mode || master.theme?.mode) === "dark" ? "#ffffff" : "#0f172a"),
   };
 
-  // 2. [SEO_KEYWORD_AGGREGATION]: ผสานพลังคีย์เวิร์ด (Unique Only)
+  // 2. [SEO_KEYWORD_AGGREGATION]: ผสานคีย์เวิร์ด (Unique Only)
   const mergedKeywords = Array.from(
     new Set([
       ...(master.keywords || []),
@@ -45,19 +42,19 @@ export function mergeServiceData(
 
   // 3. [PROPS_CONSTRUCTION]: สังเคราะห์ข้อมูลชุดสุดท้าย
   return {
-    // --- Identity ---
+    // --- Identity & Meta ---
     id: `NODE-${area.slug.toUpperCase()}`,
     templateSlug: master.templateSlug,
     category: master.category,
     priority: area.priority || master.priority,
 
-    // --- Content (Area Nodes take precedence) ---
+    // --- Dynamic Content (Area Context takes precedence) ---
     title: area.title || master.title,
     description: area.description || master.description,
     image: area.heroImage || master.image,
 
     // --- Commercial Data ---
-    // ใช้ราคาประเมินพื้นที่ (Regional) หากไม่มีให้ใช้ราคามาตรฐานของแบรนด์
+    // ใช้ราคาประเมินรายพื้นที่ เพื่อความแม่นยำในการสื่อสาร
     price: area.localContext?.regionalPricing?.startPrice || master.price,
     priceValue: master.priceValue,
     currency: master.currency,
@@ -75,20 +72,20 @@ export function mergeServiceData(
     socialProof: area.localContext?.socialProof || {
       rating: 5.0,
       reviewCount: 100,
-      localClient: "ลูกค้าในพื้นที่",
+      localClient: `ลูกค้าใน${area.province}`,
     },
     regionalPricing: area.localContext?.regionalPricing,
     localSuccessStory: area.localContext?.localSuccessStory,
 
-    // --- UI Actions & Strategic CTA ---
-    primaryAction: {
-      label: "ปรึกษาแผนงานฟรี",
+    // --- UI Actions & Strategic CTA (Inherit from Master) ---
+    primaryAction: master.primaryAction || {
+      label: "ปรึกษาผู้เชี่ยวชาญ",
       href: "#contact",
       variant: "brand",
     },
-    secondaryAction: {
-      label: "วิเคราะห์ข้อมูลธุรกิจ",
-      href: "#analysis",
+    secondaryAction: master.secondaryAction || {
+      label: "ดูตัวอย่างงาน",
+      href: "#process",
       variant: "outline",
     },
 

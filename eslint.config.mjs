@@ -1,6 +1,7 @@
 /**
- * [SYSTEM CONFIG]: ESLINT_STABILIZER v16.4.4 (FLAT_CONFIG_OPTIMIZED)
- * [STRATEGY]: Zero-Any Policy | Unused Asset Excision | Next.js Optimized
+ * [SYSTEM CONFIG]: ESLINT_STABILIZER v18.0.0 (SCRIPTS_EXCISED)
+ * [STRATEGY]: Full Scripts Exclusion | Zero-Any Policy | Next.js Optimized
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import js from "@eslint/js";
@@ -13,12 +14,16 @@ const unusedImports = require("eslint-plugin-unused-imports");
 
 export default tseslint.config(
   {
-    // [IGNORE ENGINE]
+    /**
+     * [IGNORE ENGINE]: ระบุ Folder ที่ต้องการให้ ESLint ข้ามการตรวจสอบ
+     * [ADDED]: 'scripts/**' เพื่อไม่ให้สคริปต์เบื้องหลังมารบกวนขั้นตอน Build
+     */
     ignores: [
       ".next/**",
       "node_modules/**",
       "out/**",
       "public/**",
+      "scripts/**", // <--- ละเว้นสคริปต์ทั้งหมดที่นี่
       "**/*.d.ts",
       "eslint.config.mjs",
       "next.config.mjs",
@@ -68,28 +73,6 @@ export default tseslint.config(
       "@typescript-eslint/consistent-type-imports": "error",
       "no-var": "error",
       "prefer-const": "error",
-    },
-  },
-  // --- [SECTION: SCRIPTS OVERRIDE] ---
-  {
-    files: ["scripts/**/*.{js,ts}"],
-    languageOptions: {
-      globals: {
-        process: "readonly",
-        console: "readonly",
-        setTimeout: "readonly",
-        fetch: "readonly",
-        require: "readonly",
-        module: "readonly",
-        __dirname: "readonly",
-      },
-    },
-    rules: {
-      "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-var-requires": "off",
-      "@typescript-eslint/no-explicit-any": "off", // ผ่อนปรนให้ script ใช้งานได้คล่องตัว
-      "no-undef": "off",
-      "no-unused-vars": "off",
     },
   },
 );

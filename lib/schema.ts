@@ -1,6 +1,6 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.107 (STABILIZED)
- * [STRATEGY]: Strict Schema Mapping | Intersection Types | Zero-Any Compliance
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.108 (HARDENED)
+ * [STRATEGY]: Strict Schema Mapping | Semantic Graph | GSC Compliance
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -92,7 +92,7 @@ export const generatePersonSchema = () => personNode;
 
 /**
  * @function generateSchemaGraph
- * @description รวม Nodes เข้าเป็น Graph เพื่อเพิ่มน้ำหนัก SEO (Semantic interlinking)
+ * @description รวม Nodes เข้าเป็น Graph เพื่อเพิ่มน้ำหนัก SEO (Semantic Interlinking)
  */
 export const generateSchemaGraph = (schemas: Record<string, unknown>[]) => ({
   "@context": "https://schema.org",
@@ -115,18 +115,22 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
 
 /**
  * [MASTER]: generateUniversalSchema
- * [FIXED]: ปรับปรุงการฉีดข้อมูลด้วย ExtendedSchemaNode เพื่อความปลอดภัยสูงสุด
+ * [STRATEGY]: เลือก Type ตามจุดประสงค์ของหน้า (Transactional vs Informational)
  */
 export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData) {
+  // [OPTIMIZED]: ตรวจสอบประเภท Node เพื่อสร้าง Canonical URL ที่แม่นยำ
+  const isAreaNode = data.category === "area" || (data.id && data.id.startsWith("NODE-"));
+
   const canonicalUrl = absoluteUrl(
-    data.category === "business"
-      ? `/services/${data.templateSlug}`
-      : `/areas/${data.id?.replace("NODE-", "").toLowerCase() || data.templateSlug}`,
+    isAreaNode
+      ? `/areas/${data.id?.replace("NODE-", "").toLowerCase() || data.templateSlug}`
+      : `/services/${data.templateSlug}`,
   );
 
   const social = (data as UniversalTemplateProps).socialProof;
   const pricing = (data as UniversalTemplateProps).regionalPricing;
 
+  // [DECISION_ENGINE]: กำหนด Schema Type ตามพฤติกรรมเทมเพลต
   const mainType = ["salepage", "catalog"].includes(data.templateSlug)
     ? "Product"
     : "ProfessionalService";
@@ -136,15 +140,18 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
     "@id": `${canonicalUrl}/#main`,
     name: data.title,
     description: data.description,
-    image: data.image ? absoluteUrl(data.image) : undefined,
+    image: data.image ? absoluteUrl(data.image) : absoluteUrl(SITE_CONFIG.ogImage),
     url: canonicalUrl,
     brand: { "@id": absoluteUrl("/#organization") },
     provider: { "@id": absoluteUrl("/#organization") },
   };
 
+  // [GSC_FIX]: บังคับฉีดข้อมูลติดต่อลงใน ProfessionalService Node เสมอ
   if (mainType === "ProfessionalService") {
-    const isAreaPage = data.category === "area" || (data.id && data.id.startsWith("NODE-"));
-    if (isAreaPage) {
+    baseNode.telephone = SITE_CONFIG.contact.phone;
+    baseNode.priceRange = SITE_CONFIG.business.priceRange;
+
+    if (isAreaNode) {
       const province = data.title.replace("รับทำเว็บไซต์", "").trim();
       baseNode.address = {
         "@type": "PostalAddress",
@@ -152,16 +159,12 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
         addressRegion: province,
         addressCountry: "TH",
       };
-      // [FIXED]: ฉีดข้อมูลติดต่อลงในหน้าพื้นที่เพื่อลบ Warnings
-      baseNode.telephone = organizationNode.telephone;
-      baseNode.priceRange = organizationNode.priceRange;
     } else {
       baseNode.address = organizationNode.address;
-      baseNode.telephone = organizationNode.telephone;
-      baseNode.priceRange = organizationNode.priceRange;
     }
   }
 
+  // [SOCIAL_PROOF]: ระบบ Aggregate Rating
   if (social) {
     baseNode.aggregateRating = {
       "@type": "AggregateRating",
@@ -172,18 +175,21 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
     };
   }
 
-  if (data.priceValue || pricing) {
+  // [OFFER_LOGIC]: ป้องกันราคา 0 บาทแสดงใน Schema
+  const numericPrice =
+    data.priceValue ||
+    (pricing?.startPrice ? parseInt(pricing.startPrice.replace(/[^0-9]/g, "")) : 0);
+
+  if (numericPrice > 0) {
     baseNode.offers = {
       "@type": "Offer",
-      price:
-        data.priceValue ||
-        (pricing?.startPrice ? parseInt(pricing.startPrice.replace(/[^0-9]/g, "")) : 0),
+      price: numericPrice,
       priceCurrency: data.currency || "THB",
       availability: "https://schema.org/InStock",
-      priceValidUntil:
-        data.templateSlug === "salepage"
-          ? new Date(Date.now() + 7776000000).toISOString().split("T")[0]
-          : undefined,
+      url: canonicalUrl,
+      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+        .toISOString()
+        .split("T")[0],
     };
   }
 
@@ -192,6 +198,7 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
 
 /**
  * [SPECIALIST]: generateLocalBusinessSchema
+ * @description เน้นข้อมูลพื้นที่เพื่อทำ Local SEO Map Pack
  */
 export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaNode) {
   const isUniversal = "templateSlug" in data;
@@ -216,7 +223,7 @@ export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaN
     image: isUniversal
       ? (data as UniversalTemplateProps).image
         ? absoluteUrl((data as UniversalTemplateProps).image!)
-        : undefined
+        : absoluteUrl(SITE_CONFIG.ogImage)
       : absoluteUrl((data as AreaNode).heroImage),
     address: {
       "@type": "PostalAddress",

@@ -1,5 +1,5 @@
 /**
- * [(MAIN) LAYOUT]: CORE_ORCHESTRATOR v17.9.117
+ * [(MAIN) LAYOUT]: CORE_ORCHESTRATOR v17.9.118 (LITE_VERSION)
  * [STRATEGY]: Stacking Context Isolation | Async Type-Safety | Mobile-First Spacing
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -7,7 +7,6 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import LineStickyButton from "@/components/shared/LineStickyButton";
 import { cn } from "@/lib/utils";
 
 interface MainLayoutProps {
@@ -16,7 +15,7 @@ interface MainLayoutProps {
 }
 
 export default async function MainLayout({ children, params }: MainLayoutProps) {
-  // [CORE]: Resolve params เพื่อรองรับมาตรฐาน Next.js 15+ และป้องกัน Lint Error
+  // [CORE]: Resolve params เพื่อรองรับมาตรฐาน Next.js 15+ (Prevent Hydration Mismatch)
   await params;
 
   return (
@@ -49,16 +48,6 @@ export default async function MainLayout({ children, params }: MainLayoutProps) 
       <footer className="bg-surface-main relative z-10 shrink-0">
         <Footer />
       </footer>
-
-      {/* [LAYER 4]: FLOATING CONVERSION GATEWAY
-          - z-[100]: ระดับสูงสุด (Topmost Layer) เหนือ Navbar และ Overlay อื่นๆ
-          - pointer-events-none: ป้องกัน Container บังการคลิกในจุดที่ไม่มีปุ่ม
-      */}
-      <div className="safe-area-bottom pointer-events-none fixed right-6 bottom-6 z-[100]">
-        <div className="pointer-events-auto transform-gpu transition-all duration-300 hover:scale-110 active:scale-95">
-          <LineStickyButton />
-        </div>
-      </div>
     </div>
   );
 }

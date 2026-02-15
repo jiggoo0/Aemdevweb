@@ -1,8 +1,7 @@
 /**
- * AEM ULTRA LEAN INDEXER (Pure JS)
- * No TypeScript
- * No googleapis
- * Uses google-auth-library + native fetch (Node 22+)
+ * AEM ULTRA LEAN INDEXER v2.0 (Stable)
+ * [STRATEGY]: Pure JS | Independent Data Resolution
+ * [MAINTAINER]: AEMZA MACKS
  */
 
 const { JWT } = require("google-auth-library");
@@ -12,59 +11,66 @@ const path = require("path");
 const BASE_URL = "https://aemdevweb.com";
 const INDEXING_ENDPOINT = "https://indexing.googleapis.com/v3/urlNotifications:publish";
 
+// [HELPERS]: Load API Credentials
 function loadServiceAccount() {
-  const raw = fs.readFileSync(path.join(process.cwd(), "service-account.json"), "utf-8");
-
-  const parsed = JSON.parse(raw);
-
-  if (!parsed.client_email || !parsed.private_key) {
-    throw new Error("Invalid service-account.json");
+  const filePath = path.join(process.cwd(), "service-account.json");
+  if (!fs.existsSync(filePath)) {
+    throw new Error("service-account.json not found in project root");
   }
-
-  return parsed;
+  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
 }
 
 async function getAccessToken() {
   const { client_email, private_key } = loadServiceAccount();
-
   const client = new JWT({
     email: client_email,
     key: private_key,
     scopes: ["https://www.googleapis.com/auth/indexing"],
   });
-
   const { access_token } = await client.authorize();
-
-  if (!access_token) {
-    throw new Error("Failed to obtain access token");
-  }
-
   return access_token;
 }
 
+/**
+ * [URL_COLLECTOR]: รวบรวม URL ทั้งหมดโดยไม่อาศัย TS Modules
+ */
 function collectUrls() {
-  const AREA_NODES = require("../constants/area-nodes");
-  const MASTER_REGISTRY = require("../constants/master-registry");
+  const urls = [`${BASE_URL}/`, `${BASE_URL}/about`, `${BASE_URL}/services`, `${BASE_URL}/areas`];
 
-  const baseUrls = [
-    `${BASE_URL}/`,
-    `${BASE_URL}/about`,
-    `${BASE_URL}/services`,
-    `${BASE_URL}/areas`,
-    ...AREA_NODES.map((n) => `${BASE_URL}/areas/${n.slug}`),
-    ...MASTER_REGISTRY.map((s) => `${BASE_URL}/services/${s.templateSlug}`),
-  ];
+  // 1. ดึง Area URLs จาก Folder Constants (อ่านชื่อไฟล์โดยตรง)
+  const areasDir = path.join(process.cwd(), "constants/area-nodes");
+  if (fs.existsSync(areasDir)) {
+    fs.readdirSync(areasDir)
+      .filter((f) => f.endsWith(".ts") && f !== "index.ts")
+      .forEach((f) => {
+        const slug = f.replace(".ts", "");
+        urls.push(`${BASE_URL}/areas/${slug}`);
+      });
+  }
 
+  // 2. ดึง Service URLs จาก Folder Services
+  const servicesDir = path.join(process.cwd(), "constants/services");
+  if (fs.existsSync(servicesDir)) {
+    fs.readdirSync(servicesDir)
+      .filter((f) => f.endsWith(".ts"))
+      .forEach((f) => {
+        const slug = f.replace(".ts", "");
+        urls.push(`${BASE_URL}/services/${slug}`);
+      });
+  }
+
+  // 3. ดึง Blog URLs จาก Content Folder
   const blogDir = path.join(process.cwd(), "content/blog");
+  if (fs.existsSync(blogDir)) {
+    fs.readdirSync(blogDir)
+      .filter((f) => f.endsWith(".mdx"))
+      .forEach((f) => {
+        const slug = f.replace(".mdx", "");
+        urls.push(`${BASE_URL}/blog/${slug}`);
+      });
+  }
 
-  const blogUrls = fs.existsSync(blogDir)
-    ? fs
-        .readdirSync(blogDir)
-        .filter((f) => f.endsWith(".mdx"))
-        .map((f) => `${BASE_URL}/blog/${f.replace(".mdx", "")}`)
-    : [];
-
-  return [...baseUrls, ...blogUrls];
+  return [...new Set(urls)]; // ลบ URL ซ้ำ
 }
 
 async function publishUrl(url, token) {
@@ -74,10 +80,7 @@ async function publishUrl(url, token) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({
-      url,
-      type: "URL_UPDATED",
-    }),
+    body: JSON.stringify({ url, type: "URL_UPDATED" }),
   });
 
   if (!response.ok) {
@@ -87,29 +90,31 @@ async function publishUrl(url, token) {
 }
 
 async function main() {
-  console.log("AEM ULTRA LEAN INDEXER START");
+  console.log("\n🚀 AEM ULTRA LEAN INDEXER v2.0 START");
 
-  const token = await getAccessToken();
-  const urls = collectUrls();
+  try {
+    const token = await getAccessToken();
+    const urls = collectUrls();
 
-  console.log(`Detected ${urls.length} URLs`);
+    console.log(`📡 Detected ${urls.length} target URLs`);
 
-  let success = 0;
-
-  for (const url of urls) {
-    try {
-      await publishUrl(url, token);
-      success++;
-      console.log(`[${success}/${urls.length}] SUCCESS: ${url}`);
-      await new Promise((r) => setTimeout(r, 500));
-    } catch (err) {
-      console.error(`FAILED: ${url}`, err.message);
+    let success = 0;
+    for (const url of urls) {
+      try {
+        await publishUrl(url, token);
+        success++;
+        console.log(`✅ [${success}/${urls.length}] INDEXED: ${url}`);
+        // Google Indexing API Rate Limit คือ 600/min. 200ms delay คือปลอดภัย
+        await new Promise((r) => setTimeout(r, 200));
+      } catch (err) {
+        console.error(`❌ FAILED: ${url} -> ${err.message}`);
+      }
     }
-  }
 
-  console.log(`Completed ${success}/${urls.length}`);
+    console.log(`\n🏁 FINISHED: Successfully indexed ${success}/${urls.length} URLs`);
+  } catch (err) {
+    console.error("\n🚫 CRITICAL ERROR:", err.message);
+  }
 }
 
-main().catch((err) => {
-  console.error("CRITICAL ERROR:", err.message);
-});
+main();

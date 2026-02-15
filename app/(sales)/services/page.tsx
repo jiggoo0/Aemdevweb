@@ -1,5 +1,5 @@
 /**
- * [PAGE]: SERVICES_HUB_SYSTEM v17.9.102 (STABILIZED)
+ * [PAGE]: SERVICES_HUB_SYSTEM v17.9.103 (STABLE_PRODUCTION)
  * [STRATEGY]: Emotional Hook | Benefit-Driven Architecture | ROI Focus
  * [MAINTAINER]: AEMZA MACKS (คุณเอ็ม)
  */
@@ -12,6 +12,7 @@ import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
 import WorkProcess from "@/components/features/landing/WorkProcess";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
+import SkeletonGrid from "@/components/ui/SkeletonGrid"; // [SYNCED]: ใช้ Grid กลางของระบบ
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -19,7 +20,7 @@ import { SITE_CONFIG } from "@/constants/site-config";
 export const metadata: Metadata = constructMetadata({
   title: "บริการรับทำเว็บไซต์ครบวงจร | เปลี่ยนเว็บไซต์ให้เป็นเครื่องมือผลิตกำไร",
   description:
-    "รวมโซลูชันเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจยุคใหม่ ตั้งแต่ Sale Page ไปจนถึงเว็บองค์กรมาตรฐานสากล เน้นโหลดไว ติดหน้าแรก Google และปิดการขายได้จริง โดย นายเอ็มซ่ามากส์",
+    "รวมโซลูชันเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจยุคใหม่ ตั้งแต่ Sale Page ไปจนถึงเว็บองค์กรมาตรฐานสากล เน้นโหลดไว ติดหน้าแรก Google และปิดการขายได้จริง โดย AEMZA MACKS",
   path: "/services",
   image: "/images/service/corporate-node.webp",
 });
@@ -54,7 +55,7 @@ export default function ServicesPage() {
 
           {/* 02. SERVICE GRID: ส่วนแสดงผล Node บริการทั้งหมด (Dynamic Data) */}
           <section id="service-nodes" className="min-h-[600px] w-full">
-            <Suspense fallback={<ServiceGridSkeleton />}>
+            <Suspense fallback={<SkeletonGrid count={6} aspectRatio="video" />}>
               <ServiceListingHub className="gap-8 md:gap-14" />
             </Suspense>
           </section>
@@ -115,22 +116,5 @@ export default function ServicesPage() {
         </div>
       </main>
     </LayoutEngine>
-  );
-}
-
-/**
- * [HELPER]: ServiceGridSkeleton
- * ป้องกัน Layout Shift ระหว่างโหลดข้อมูล (Zero CLS Strategy)
- */
-function ServiceGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-      {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          className="bg-surface-card/20 border-border/50 aspect-[3/4] animate-pulse rounded-[3.5rem] border"
-        />
-      ))}
-    </div>
   );
 }

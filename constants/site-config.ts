@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v17.9.98 (ULTIMATE_HARDENED)
- * [STRATEGY]: Dual-Language Identity | E-E-A-T Enforcement | Global Reach
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
+ * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -12,10 +12,10 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
   siteUrl: "https://aemdevweb.com",
   description:
-    "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์มาตรฐานสากลเพื่อการติดอันดับ Google อย่างยั่งยืนและมีประสิทธิภาพ",
+    "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์ประสิทธิภาพสูงเพื่อยึดครองพื้นที่บน Google และ AI Answer Engines อย่างยั่งยืน",
   logo: "/images/logo-main.webp",
 
-  // [INFRASTRUCTURE]: Social Graph & Identity Signals
+  // [INFRASTRUCTURE]: Global Identity & Performance Signals
   ogImage: "/images/og-main.webp",
   locale: "th_TH",
   themeColor: "#ef4444",
@@ -23,11 +23,12 @@ export const SITE_CONFIG: SiteConfig = {
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
     description:
-      "โครงสร้างเว็บไซต์และกลยุทธ์ SEO ระดับ Specialist เพื่อการเติบโตของธุรกิจในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์ ",
-    primaryAction: "ปรึกษาวางแผนระบบฟรี",
-    secondaryAction: "วิเคราะห์บริการทั้งหมด",
+      "โครงสร้างเว็บไซต์และกลยุทธ์ Technical SEO ระดับวิศวกรรม เพื่อสร้างอำนาจการจัดอันดับในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์",
+    primaryAction: "วางแผนระบบกับ Specialist",
+    secondaryAction: "วิเคราะห์โซลูชันทั้งหมด",
   },
 
+  // [PERSONA]: กำหนดทิศทางการสื่อสารให้มีความเป็นมนุษย์และผู้เชี่ยวชาญ (Human-Centric Authority)
   persona: {
     tone: "Strategic Partner, Technical Authority, Business-Centric",
     communicationStyle: "Result-oriented, Friendly Specialist, Transparent & Logical",
@@ -47,27 +48,28 @@ export const SITE_CONFIG: SiteConfig = {
     "อลงกรณ์ ยมเกิด",
     "Alongkorn Yomkerd",
     "Web Infrastructure Specialist",
+    "AI Search Optimization 2026",
   ],
 
   project: {
-    title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)", // [UPDATED]: Combined Title
+    title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
-    version: "17.9.98", // [INCREMENTED]: Dual-Language Identity Patch
+    version: "18.0.0", // [INCREMENTED]: Major Universal Sync Release
     framework: "Next.js 16.1.6 (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
   expert: {
-    displayName: "นายเอ็มซ่ามากส์", // [UPDATED]: Combined for UI visibility
+    displayName: "นายเอ็มซ่ามากส์",
     legalName: "Alongkorn Yomkerd",
     legalNameThai: "อลงกรณ์ ยมเกิด",
     role: "Technical SEO Specialist",
     jobTitle: "Web Architect & Technical SEO Specialist",
-    signature: "AEMDEVWEB Specialist",
+    signature: "AEMZA MACKS",
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/services/bio",
-    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO (Alongkorn Yomkerd) ที่เน้นการสร้างผลลัพธ์ทางธุรกิจ (ROI) ผ่านโครงสร้างพื้นฐานดิจิทัลที่แข็งแกร่ง",
+    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO (Alongkorn Yomkerd) ที่เน้นการสร้างผลลัพธ์ทางธุรกิจผ่านโครงสร้างพื้นฐานดิจิทัลที่แม่นยำและล้ำสมัย",
     googleMerchantId: "8653147979146207424",
     twitterHandle: "@aemdevweb",
   },
@@ -79,7 +81,7 @@ export const SITE_CONFIG: SiteConfig = {
     address: "กำแพงเพชร, ประเทศไทย",
     streetAddress: "ตำบลในเมือง อำเภอเมืองกำแพงเพชร",
     postalCode: "62000",
-    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (Engineering Support 24/7)",
+    workHours: "จันทร์ - ศุกร์, 09:00 - 18:00 (Technical Support 24/7)",
     mapUrl: GOOGLE_MAPS_URL,
   },
 
@@ -101,7 +103,7 @@ export const SITE_CONFIG: SiteConfig = {
     industry: "Digital Infrastructure & SEO",
     roiFocus: true,
     established: "2024",
-    status: "Stable",
+    status: "Active",
     priceRange: "฿฿฿",
     ids: {
       businessProfileId: "17539943195708104348",

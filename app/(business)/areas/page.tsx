@@ -1,5 +1,5 @@
 /**
- * [ROUTE_PAGE]: LOCAL_HUB_SYSTEM v17.9.105 (ULTIMATE_HARDENED)
+ * [ROUTE_PAGE]: LOCAL_HUB_SYSTEM v17.9.106 (ULTIMATE_HARDENED)
  * [STRATEGY]: Geographic Authority Hub | Priority-Based Sorting | SSG Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -20,7 +20,7 @@ import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 
-/* [A] SEO AUTHORITY PROTOCOL */
+/* [A] SEO AUTHORITY PROTOCOL: ดึงดูดการค้นหาแบบ Local Intent */
 export const metadata: Metadata = constructMetadata({
   title: "พื้นที่ให้บริการและแผนงานรายจังหวัด | Regional Authority Network",
   description:
@@ -37,7 +37,7 @@ export const metadata: Metadata = constructMetadata({
 
 export default function AreasPage() {
   /**
-   * [SCHEMA_INJECTION]: เชื่อมโยงตัวตนองค์กรเข้ากับเครือข่ายพื้นที่ให้บริการ
+   * [SCHEMA_INJECTION]: เชื่อมโยงตัวตนองค์กรเข้ากับเครือข่ายพื้นที่ให้บริการ (Knowledge Graph)
    */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
@@ -46,7 +46,7 @@ export default function AreasPage() {
     ]),
   ]);
 
-  // [LOGIC]: จัดเรียง Node ตาม Priority (Low Number = High Priority)
+  // [LOGIC]: จัดเรียง Node ตาม Priority เพื่อคุม Visual Hierarchy
   const sortedNodes = [...AREA_NODES].sort((a, b) => a.priority - b.priority);
 
   return (
@@ -76,7 +76,7 @@ export default function AreasPage() {
           </div>
         </header>
 
-        {/* --- 02. AREA CARD GRID --- */}
+        {/* --- 02. AREA CARD GRID: แสดงผลจังหวัดทั้งหมด (Programmatic SEO Entry) --- */}
         <section className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
           {sortedNodes.map((node, index) => (
             <div key={node.slug} className="h-full">
@@ -99,7 +99,6 @@ export default function AreasPage() {
             </div>
 
             <div className="flex justify-center pt-8">
-              {/* [RESOLVED]: เปลี่ยน variant="brand" เป็น "neo" และ Icon เป็น MessageCircle */}
               <Button
                 asChild
                 size="lg"

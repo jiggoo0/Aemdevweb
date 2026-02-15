@@ -1,10 +1,12 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v17.9.160 (STABLE_FINAL)
- * [STRATEGY]: Full Property Alignment | Analytics Injection | SSOT
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.0.3 (HOTFIX_BUILD)
+ * [STRATEGY]: Loose Constraints for Build | Restore Missing Exports
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { ReactNode } from "react";
+// [IMPORT]: ดึงค่า Action Type สำหรับการใช้งานใน Registry
+import type { TemplateAction } from "./template-props";
 
 // =========================================
 // [01] INFRASTRUCTURE & ADAPTERS
@@ -15,13 +17,12 @@ export interface PageProps<T = Record<string, string>> {
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-/** * [CLEANUP]: ปรับเป็น Local Interface เนื่องจากใช้ภายในไฟล์ Layout หลักเท่านั้น 
- * ลดรายงาน Unused Exported Type
- */
+/** [INTERNAL]: ใช้ภายในไฟล์นี้เท่านั้น ไม่ต้อง export */
 interface LayoutProps {
   readonly children: ReactNode;
 }
 
+/** [ICON_SYSTEM]: รายชื่อไอคอนที่รองรับในระบบ (Lucide React) */
 export type IconName =
   | "Menu"
   | "X"
@@ -60,6 +61,16 @@ export type IconName =
   | "Network"
   | "User"
   | "Camera"
+  | "CloudSun"
+  | "Wind"
+  | "Droplets"
+  | "Eye"
+  | "Cloud"
+  | "AlertCircle"
+  | "Sparkles"
+  | "Database"
+  | "Map"
+  | "CalendarCheck"
   | (string & {});
 
 export type TemplateSlug =
@@ -75,7 +86,7 @@ export type TemplateSlug =
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
 // =========================================
-// [02] THEME & SITE CONFIG (TOTAL SYNC)
+// [02] THEME & SITE CONFIG
 // =========================================
 
 export interface ThemeConfig {
@@ -87,6 +98,11 @@ export interface ThemeConfig {
   readonly accent?: string;
   readonly gradient?: string;
   readonly token?: string;
+
+  // [IDENTITY_SWITCHER]
+  readonly radius?: string;
+  readonly fontFamily?: string;
+  readonly borderWidth?: string;
 }
 
 export interface SiteConfig {
@@ -154,7 +170,6 @@ export interface SiteConfig {
     readonly google: string;
     readonly facebook?: string;
   };
-  /** [FIXED]: Tracking & Metrics */
   readonly analytics?: {
     readonly gaId?: string;
     readonly pixelId?: string;
@@ -182,7 +197,9 @@ export interface CatalogItem {
   readonly description: string;
   readonly icon: IconName;
   readonly price?: string;
+  readonly unit?: string;
   readonly image?: string;
+  readonly technicalID?: string;
 }
 
 export interface BlogPost {
@@ -199,6 +216,7 @@ export interface BlogPost {
   readonly content?: string;
 }
 
+// [FIXED]: เพิ่ม CaseStudy กลับเข้ามาเพื่อแก้ Error TS2305
 export interface CaseStudy {
   readonly slug: string;
   readonly title: string;
@@ -229,17 +247,12 @@ export interface LocalContext {
   readonly localStrength: string;
   readonly nicheIndustries: readonly string[];
   readonly painPoints: readonly string[];
-  readonly competitorLevel: "low" | "medium" | "high";
+  readonly competitorLevel: "low" | "medium" | "high" | "extreme";
+
   readonly socialProof?: { rating: number; reviewCount: number; localClient?: string };
   readonly regionalPricing?: { startPrice: string; timeline: string };
   readonly localSuccessStory?: { title: string; result: string };
   readonly hyperLocalKeywords?: readonly string[];
-}
-
-export interface TemplateAction {
-  readonly label: string;
-  readonly href: string;
-  readonly variant?: "brand" | "outline" | "ghost" | "default" | "link";
 }
 
 export interface UniversalTemplateProps {
@@ -260,14 +273,22 @@ export interface UniversalTemplateProps {
   readonly faqs: readonly ServiceFaq[];
   readonly keywords: readonly string[];
   readonly items?: readonly CatalogItem[];
+
   readonly clientTrust?: string;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
+  readonly featuredProjects?: readonly any[];
+
   readonly localContext?: LocalContext;
+  readonly province?: string;
+  readonly districts?: readonly string[];
+  readonly coordinates?: { lat: number; lng: number };
+
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
-  readonly primaryAction: TemplateAction;
+
+  readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 }
 
@@ -297,6 +318,10 @@ export interface TemplateMasterData {
   readonly coreFeatures: readonly ServiceFeature[];
   readonly faqs: readonly ServiceFaq[];
   readonly keywords: readonly string[];
+
+  readonly primaryAction?: TemplateAction;
+  readonly secondaryAction?: TemplateAction;
+
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
   readonly clientTrust?: string;
@@ -308,7 +333,8 @@ export interface AreaNode {
   readonly province: string;
   readonly title: string;
   readonly description: string;
-  readonly longDescription: string;
+  // [FIXED]: ปรับเป็น Optional (?) เพื่อแก้ Error TS2741 ในไฟล์ที่ไม่ต้องการ Long Desc
+  readonly longDescription?: string;
   readonly seoTitle: string;
   readonly seoDescription: string;
   readonly priority: number;
@@ -319,6 +345,15 @@ export interface AreaNode {
   readonly coordinates: { lat: number; lng: number };
   readonly localContext: LocalContext;
   readonly theme?: Partial<ThemeConfig>;
+
+  readonly price?: string;
+  readonly priceValue?: number;
+  readonly currency?: string;
+  readonly unit?: string;
+  readonly clientTrust?: string;
+  readonly benefits?: readonly string[];
+  readonly coreFeatures?: readonly ServiceFeature[];
+  readonly faqs?: readonly ServiceFaq[];
 }
 
 export * from "./template-props";

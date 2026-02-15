@@ -1,9 +1,3 @@
-/**
- * [UI COMPONENT]: ACCORDION_PRIMITIVE v17.9.9 (HARDENED)
- * [STRATEGY]: Radix UI Foundation | High-Fidelity Interaction | Specialist Styling
- * [MAINTAINER]: AEMDEVWEB Specialist Team
- */
-
 "use client";
 
 import * as React from "react";
@@ -19,7 +13,7 @@ const AccordionItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn("border-border/50 border-b transition-all duration-500", className)}
+    className={cn("border-b border-[var(--foreground)]/10", className)}
     {...props}
   />
 ));
@@ -33,19 +27,13 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "hover:text-brand-primary flex flex-1 items-center justify-between py-6 text-left text-sm font-bold tracking-wider uppercase transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-        "group [&[data-state=open]]:text-brand-primary [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 items-center justify-between py-6 font-black uppercase italic transition-all hover:text-[var(--brand-primary)] [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
     >
-      <span className="antialiased">{children}</span>
-      <ChevronDown
-        className={cn(
-          "text-text-muted h-4 w-4 shrink-0 transition-transform duration-500",
-          "group-hover:text-brand-primary/70",
-        )}
-      />
+      {children}
+      <ChevronDown className="h-4 w-4 shrink-0 opacity-50 transition-transform duration-200" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -57,18 +45,10 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className={cn(
-      "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm transition-all",
-      "relative z-10", // Layering fix for background overlap
-    )}
+    className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm transition-all"
     {...props}
   >
-    <div
-      className={cn(
-        "text-text-secondary pt-0 pb-8 leading-relaxed font-medium italic opacity-90 md:text-base",
-        className,
-      )}
-    >
+    <div className={cn("pt-0 pb-6 leading-relaxed font-medium italic opacity-70", className)}>
       {children}
     </div>
   </AccordionPrimitive.Content>

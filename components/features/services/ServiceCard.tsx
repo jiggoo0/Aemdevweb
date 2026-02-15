@@ -1,5 +1,5 @@
 /**
- * [FEATURE COMPONENT]: SERVICE_CARD_NODE v17.9.73 (ULTIMATE_STABILIZED)
+ * [FEATURE COMPONENT]: SERVICE_CARD_NODE v17.9.74 (ULTIMATE_STABILIZED)
  * [STRATEGY]: Adaptive Visual Logic | CLS Hardening | Hydration-Safe Pricing
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -23,19 +23,23 @@ interface ServiceCardProps {
   readonly index?: number;
 }
 
+/**
+ * @component ServiceCard
+ * @description การ์ดแสดงผลบริการหลักที่ผ่านการจูนประสิทธิภาพและ SEO มาอย่างเข้มข้น
+ */
 const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps) => {
-  // [DATA_ADAPTER]: สังเคราะห์จุดเด่นบริการ (Max 3 Nodes)
+  // [DATA_ADAPTER]: ระบบคัดเลือกจุดขายที่ทรงพลังที่สุด (Max 3 Nodes)
   const displayFeatures = useMemo(() => {
     if (data.benefits?.length) return data.benefits.slice(0, 3);
     if (data.coreFeatures?.length) return data.coreFeatures.slice(0, 3).map((f) => f.title);
     return ["High-Performance Architecture", "Technical SEO Strategy", "ROI-Focused Design"];
   }, [data]);
 
-  // [IMAGE_ENGINE]: จัดการ visual layer (SSOT)
+  // [IMAGE_ENGINE]: จัดการ Visual Layer และป้องกัน Layout Shift (CLS)
   const imageSource = useMemo(() => data.image || "/images/service/default.webp", [data.image]);
   const imgData = IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null;
 
-  // [COMMERCIAL_LOGIC]: ระบบแสดงราคาแบบ Hybrid
+  // [COMMERCIAL_LOGIC]: ระบบแสดงราคาแบบ Hybrid (รองรับทั้งราคาตัวเลขและใบเสนอราคา)
   const priceDisplay = useMemo(() => {
     if (!data.priceValue || data.priceValue === 0) return "Premium_Quote";
     return new Intl.NumberFormat("th-TH").format(data.priceValue);
@@ -73,14 +77,14 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           src={imageSource}
           alt={`Solution: ${data.title}`}
           fill
-          priority={index < 3} // Optimize LCP สำหรับแถวบนสุด
+          priority={index < 3} // Optimize LCP สำหรับบริการลำดับแรกๆ
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        {/* Aesthetic Gradients */}
+        {/* Aesthetic Overlay Layers */}
         <div
           className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04] mix-blend-overlay"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
@@ -107,7 +111,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           </p>
         </header>
 
-        {/* Feature Registry */}
+        {/* Feature Registry List */}
         <ul className="mb-10 space-y-3.5">
           {displayFeatures.map((feature, i) => (
             <li key={i} className="flex items-center gap-4">
@@ -148,5 +152,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
     </Link>
   );
 };
+
+ServiceCard.displayName = "ServiceCard";
 
 export default memo(ServiceCard);

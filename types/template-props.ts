@@ -90,7 +90,7 @@ export interface BaseTemplateProps {
   readonly suppressUI?: boolean;
 }
 
-/** * [CLEANUP_NOTICE]: 
+/** * [CLEANUP_NOTICE]:
  * ส่วนประกอบย่อย (Aliases & Atomic Props) ถูกนำออกชั่วคราวตาม Zero-Unused Policy
  * เพื่อลด Bundle Size และป้องกัน Linter Warning ในระบบ Mobile-Dev
  * * [RECOVERY_PATH]:

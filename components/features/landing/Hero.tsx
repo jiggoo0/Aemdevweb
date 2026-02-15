@@ -1,5 +1,5 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.110 (LCP_HARDENED)
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.111 (LCP_STABILIZED)
  * [STRATEGY]: CSS-First Initial State | Neural Physics | Hydration Safety
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -14,6 +14,10 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
 
+/**
+ * @component Hero
+ * @description จุดยุทธศาสตร์หลักในการนำเสนอคุณค่าแบรนด์และกระตุ้น Conversion ทันที
+ */
 const Hero = () => {
   /**
    * [PHYSICS]: Neural Spring Transition
@@ -57,7 +61,7 @@ const Hero = () => {
           className="border-brand-primary/20 bg-brand-primary/5 mb-10 inline-flex items-center gap-4 rounded-full border px-5 py-2.5 backdrop-blur-md"
         >
           <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
-          <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase">
+          <span className="text-brand-primary font-mono text-[10px] font-bold tracking-[0.3em] uppercase">
             Protocol_Active: v{SITE_CONFIG.project.version}
           </span>
         </motion.div>
@@ -136,5 +140,7 @@ const Hero = () => {
     </section>
   );
 };
+
+Hero.displayName = "Hero";
 
 export default memo(Hero);

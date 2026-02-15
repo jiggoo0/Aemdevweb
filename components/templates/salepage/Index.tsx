@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE]: SALEPAGE_INDEX v17.9.115 (STABLE_FINAL)
- * [STRATEGY]: Psychological Flow | Component-Based Conversion | Zero-Waste
+ * [TEMPLATE]: SALEPAGE_ORCHESTRATOR v18.0.39 (STABLE_CONVERSION)
+ * [STRATEGY]: Psychological Flow | Intelligence FAQ Activation | Named Import Standard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -22,8 +22,13 @@ import { FeatureComparison } from "./_components/FeatureComparison";
 import { ThaiTrustBadge } from "./_components/ThaiTrustBadge";
 import { DirectOrderForm } from "./_components/DirectOrderForm";
 import { SaleFooter } from "./_components/SaleFooter";
-import StickyBuyButton from "./_components/StickyBuyButton"; // [FIXED]: เชื่อมต่อ Component ให้ Knip เลิกบ่น
+import StickyBuyButton from "./_components/StickyBuyButton";
 import IconRenderer from "@/components/ui/IconRenderer";
+
+/** * [INJECT]: ดึงระบบ FAQ Engine ด้วย Named Import { DynamicFAQ }
+ * [TECHNICAL_PATCH]: ป้องกันค่า undefined ในขั้นตอนการสร้าง Static Page (Build Engine)
+ */
+import { DynamicFAQ } from "../sections/DynamicFAQ";
 
 interface SalePageTemplateProps {
   readonly data: UniversalTemplateProps;
@@ -31,7 +36,7 @@ interface SalePageTemplateProps {
 }
 
 export default function SalePageTemplate({ data, suppressUI = false }: SalePageTemplateProps) {
-  // [SEO]: รวบรวม Schema ทั้งหมดเพื่อส่งให้ Google Bot
+  // [SEO]: รวบรวมข้อมูล Schema สำหรับ Product/Offer เพื่อส่งค่าให้ Google Core Algorithm
   const schemas = useMemo(() => generateUniversalSchema(data), [data]);
 
   const { socialProof: social, regionalPricing: pricing } = data;
@@ -41,7 +46,6 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
     <>
       <JsonLd data={schemas} />
 
-      {/* ระบบ DynamicThemeWrapper จัดการพื้นหลังและสีหลักให้แล้วผ่าน CSS Variables */}
       <LayoutEngine spacing="none">
         {!suppressUI && (
           <>
@@ -51,7 +55,6 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
               theme={data.theme}
             />
 
-            {/* [FIXED]: ใช้งาน StickyBuyButton Component แทนการเขียน Inline Div */}
             <StickyBuyButton
               href="#order"
               label={`สั่งซื้อเลย ${data.price ? `(${data.price})` : ""}`}
@@ -60,7 +63,9 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
           </>
         )}
 
-        {/* 01. HERO: ส่วนแสดงจุดเด่นและภาพลักษณ์หลัก */}
+        {/* --- Phase 01: Core Hero Section --- 
+            สร้าง First Impression และระบุ Value Proposition หลัก
+        */}
         <SaleHero
           title={data.title}
           description={data.description}
@@ -69,18 +74,18 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
           className="text-[var(--brand-foreground)]"
         />
 
-        {/* 02. URGENCY HUB: กระตุ้นการตัดสินใจด้วยความจำกัดและผลตอบรับ */}
+        {/* --- Phase 02: Scarcity & Social Proof --- 
+            กระตุ้นการตัดสินใจด้วยเวลาที่จำกัดและยืนยันด้วยฐานลูกค้าจริง
+        */}
         <section className="relative z-30 -mt-10 mb-20 px-4 sm:-mt-16 lg:mb-32">
           <div className="mx-auto max-w-4xl text-center">
-            {/* Flash Sale Timer: กำหนดเวลา 24 ชม. จากปัจจุบันเป็นค่าเริ่มต้น */}
-            <div className="inline-block rounded-[2rem] border border-[var(--foreground)]/10 bg-[var(--background)]/80 px-8 py-5 shadow-2xl backdrop-blur-md transition-transform hover:scale-[1.02]">
+            <div className="inline-block rounded-[2rem] border border-[var(--foreground)]/10 bg-[var(--surface-main)]/80 px-8 py-5 shadow-2xl backdrop-blur-md transition-transform hover:scale-[1.02]">
               <FlashSaleTimer
                 targetDate={new Date(Date.now() + 86400000).toISOString()}
                 color="var(--brand-primary)"
               />
             </div>
 
-            {/* Social Proof: ยืนยันความเชื่อมั่นด้วยดาวและจำนวนลูกค้า */}
             {social && (
               <div className="mt-8 flex flex-col items-center gap-3">
                 <div className="flex text-yellow-400 drop-shadow-md">
@@ -96,7 +101,9 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
           </div>
         </section>
 
-        {/* 03. COMPARISON MATRIX: แสดงคุณสมบัติที่เหนือกว่าคู่แข่ง */}
+        {/* --- Phase 03: Feature Matrix --- 
+            แสดงความเหนือกว่าในเชิงเทคนิคและผลประโยชน์ที่ลูกค้าจะได้รับ
+        */}
         {data.coreFeatures && data.coreFeatures.length > 0 && (
           <section className="relative overflow-hidden border-y border-[var(--foreground)]/5 py-24">
             <div className="container mx-auto px-4">
@@ -109,7 +116,9 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
           </section>
         )}
 
-        {/* 04. TRUST BADGES: ความน่าเชื่อถือในแบบฉบับธุรกิจไทย */}
+        {/* --- Phase 04: Authority Validation --- 
+            ยืนยันมาตรฐานความปลอดภัยและความน่าเชื่อถือ (Trust Signals)
+        */}
         <section className="py-20 lg:py-32">
           <ThaiTrustBadge
             clientTrust={data.clientTrust}
@@ -118,11 +127,23 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
           />
         </section>
 
-        {/* 05. ORDER GATEWAY: ด่านสุดท้ายสำหรับการเปลี่ยนผู้เยี่ยมชมเป็นลูกค้า */}
-        <section id="order" className="relative scroll-mt-24 py-24">
+        {/* --- Phase 05: Objection Killer (FAQ) --- 
+            [STRATEGY]: ด่านสุดท้ายในการทำลายข้อโต้แย้งก่อนเข้าสู่ขั้นตอนการชำระเงิน
+        */}
+        <div className="border-t border-[var(--foreground)]/5 bg-[var(--surface-main)]/30">
+          <DynamicFAQ
+            items={data.faqs}
+            title="คำถามที่พบบ่อย"
+            description="เราตอบทุกข้อสงสัยเชิงเทคนิค เพื่อให้คุณมั่นใจในคุณภาพและการบริการที่เหนือกว่า"
+          />
+        </div>
+
+        {/* --- Phase 06: Conversion Gateway --- 
+            Closing Section: ปิดการขายด้วยฟอร์มการสั่งซื้อตรง (Direct Order)
+        */}
+        <section id="order" className="relative scroll-mt-24 py-24 min-h-[50dvh]">
           <div className="container mx-auto max-w-4xl px-4">
-            <div className="overflow-hidden rounded-[3rem] border border-[var(--brand-primary)]/30 shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_-10px_var(--brand-primary)]">
-              {/* Form Header: เน้นความ Exclusive */}
+            <div className="overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-primary)]/30 shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_-10px_var(--brand-primary)]">
               <div
                 className="relative overflow-hidden p-10 text-center text-white"
                 style={{ backgroundColor: "var(--brand-secondary)" }}
@@ -144,7 +165,6 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
                 )}
               </div>
 
-              {/* Form Body: ระบบรับข้อมูลการสั่งซื้อโดยตรง */}
               <div className="bg-white p-8 md:p-14">
                 <DirectOrderForm
                   price={data.price}
@@ -157,6 +177,13 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
         </section>
 
         {!suppressUI && <SaleFooter brandName={data.title} isDark={isDarkMode} />}
+
+        {/* --- SYSTEM FOOTER: Technical Stamp --- */}
+        <footer className="py-8 text-center border-t border-[var(--foreground)]/5 opacity-10">
+          <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
+            SalePage_Active_Node.v18.0.39
+          </p>
+        </footer>
       </LayoutEngine>
     </>
   );
