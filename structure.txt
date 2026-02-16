@@ -1,4 +1,4 @@
-AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 02:19:13 +07 2026
+AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 03:44:29 +07 2026
 ------------------------------------------------
 .
 ./README.md
@@ -143,7 +143,9 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 02:19:13 +07 2026
 ./pnpm-workspace.yaml
 ./postcss.config.mjs
 ./public
+./public/favicon-32x32.png
 ./public/android-chrome-192x192.png
+./public/favicon-16x16.png
 ./public/android-chrome-512x512.png
 ./public/apple-touch-icon.png
 ./public/favicon.ico
@@ -180,17 +182,6 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 02:19:13 +07 2026
 ./types
 ./types/index.d.ts
 ./types/template-props.ts
-./vercel.json
-./service-account.json
-./system_audit_result.md
-./types_usage_report.md
 ./structure.txt
+./service-account.json
 ./tsconfig.tsbuildinfo
-./_backup_unused_images_
-./_backup_unused_images_/android-chrome-192x192(1).png
-./_backup_unused_images_/android-chrome-512x512(1).png
-./_backup_unused_images_/favicon(1).ico
-./_backup_unused_images_/favicon-16x16.png
-./_backup_unused_images_/favicon-16x16.svg
-./_backup_unused_images_/favicon-32x32.png
-./_backup_unused_images_/favicon.svg

@@ -1,6 +1,6 @@
 /**
- * [SEO UTILITY]: METADATA_CORE v17.9.97 (CLEAN_STABLE)
- * [STRATEGY]: Next.js Metadata API Orchestration | SSOT Sync | Viewport Decoupled
+ * [SEO UTILITY]: METADATA_CORE v18.0.0 (SYNCHRONIZED)
+ * [STRATEGY]: Next.js Metadata API | WWW-Enforced | Deduplicated Keywords
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -17,11 +17,6 @@ interface MetadataParams {
   readonly noIndex?: boolean;
 }
 
-/**
- * @function constructMetadata
- * @description สร้าง Next.js Metadata Object แบบ Zero-Defect (v15 Compliant)
- * [CHANGES]: แยก themeColor ออกไปไว้ใน Viewport API เพื่อลดคำเตือนระบบ Build
- */
 export function constructMetadata({
   title,
   description,
@@ -30,10 +25,11 @@ export function constructMetadata({
   keywords = [],
   noIndex = false,
 }: MetadataParams): Metadata {
+  // [CLEAN_URL]: มั่นใจว่า path ไม่สร้าง url ซ้ำซ้อน
   const url = absoluteUrl(path);
 
-  // [STRATEGY]: ผสาน Keywords หน้าเว็บเข้ากับ Brand Keywords (SSOT)
-  const mergedKeywords = [...keywords, ...SITE_CONFIG.keywords];
+  // [STRATEGY]: Deduplicate Keywords เพื่อลดขนาด HTML Payload
+  const mergedKeywords = Array.from(new Set([...keywords, ...SITE_CONFIG.keywords]));
 
   return {
     title: {
@@ -41,7 +37,7 @@ export function constructMetadata({
       template: `%s | ${SITE_CONFIG.brandName}`,
     },
     description,
-    keywords: mergedKeywords,
+    keywords: mergedKeywords.join(", "), // แปลงเป็น String เพื่อความเป๊ะของ Meta Tag
     metadataBase: new URL(SITE_CONFIG.siteUrl),
 
     alternates: {
@@ -49,7 +45,7 @@ export function constructMetadata({
     },
 
     openGraph: {
-      title,
+      title: `${title} | ${SITE_CONFIG.brandName}`,
       description,
       url,
       siteName: SITE_CONFIG.brandName,
@@ -67,16 +63,17 @@ export function constructMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title,
+      title: `${title} | ${SITE_CONFIG.brandName}`,
       description,
       images: [image || SITE_CONFIG.ogImage],
-      creator: SITE_CONFIG.expert.twitterHandle,
-      site: SITE_CONFIG.expert.twitterHandle,
+      // [FIX]: มั่นใจว่า Handle มี @ นำหน้าตามมาตรฐาน Twitter
+      creator: SITE_CONFIG.expert.twitterHandle.startsWith("@") 
+        ? SITE_CONFIG.expert.twitterHandle 
+        : `@${SITE_CONFIG.expert.twitterHandle}`,
     },
 
     verification: {
       google: SITE_CONFIG.verification.google,
-      // [FIXED]: การใช้ 'other' สำหรับ Facebook Domain Verification เพื่อผ่าน TSC
       other: {
         "facebook-domain-verification": [SITE_CONFIG.verification.facebook || ""],
       },
@@ -95,9 +92,14 @@ export function constructMetadata({
     },
 
     icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-      apple: "/android-chrome-192x192.png",
+      icon: [
+        { url: "/favicon.ico" },
+        { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+        { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      ],
     },
   };
 }

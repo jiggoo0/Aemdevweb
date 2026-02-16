@@ -1,6 +1,6 @@
 /**
- * [UTILS]: CORE_SYSTEM_HELPERS v17.9.109 (STABLE_OKLCH)
- * [STRATEGY]: Identity Overriding | CSS Variable Injection | Tailwind 4 optimized
+ * [UTILS]: CORE_SYSTEM_HELPERS v18.0.0 (SYNCHRONIZED)
+ * [STRATEGY]: Identity Overriding | OKLCH Precision | Tailwind 4 optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -14,29 +14,42 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
 
-/** [SEO]: Path to Absolute URL Conversion */
+/** * [SEO]: Path to Absolute URL Conversion
+ * [FIXED]: มั่นใจว่าสอดคล้องกับ SITE_CONFIG (www) และจัดการ slash อย่างแม่นยำ
+ */
 export function absoluteUrl(path: string): string {
   const baseUrl = SITE_CONFIG.siteUrl.replace(/\/$/, "");
-  if (!path || path === "/") return baseUrl;
+  
+  if (!path || path === "/" || path === "") return `${baseUrl}/`;
   if (path.startsWith("http")) return path;
+  
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  // คืนค่า URL ที่สะอาดและคงโครงสร้าง www ไว้เสมอ
   return `${baseUrl}${cleanPath.replace(/\/+$/, "")}`;
 }
 
 /**
  * [COLOR_MATH]: hexToOklch
- * @description แปลง Hex เป็นค่า L C H มอบความแม่นยำสูงตามการมองเห็น
+ * @description แปลง Hex เป็นค่า L C H (รองรับทั้ง 3 และ 6 หลัก)
  */
 export function hexToOklch(hex: string): { l: number; c: number; h: number } | null {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  // รองรับ Hex แบบสั้น (#abc)
+  let fullHex = hex.replace(/^#/, "");
+  if (fullHex.length === 3) {
+    fullHex = fullHex.split("").map(s => s + s).join("");
+  }
+
+  const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
   if (!result) return null;
 
   let r = parseInt(result[1], 16) / 255;
   let g = parseInt(result[2], 16) / 255;
   let b = parseInt(result[3], 16) / 255;
 
+  // Linearize RGB
   [r, g, b] = [r, g, b].map((v) => (v > 0.04045 ? Math.pow((v + 0.055) / 1.055, 2.4) : v / 12.92));
 
+  // Oklch Matrix Transformation
   const l = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b;
   const m = 0.2119034982 * r + 0.6740398696 * g + 0.1140566322 * b;
   const s = 0.0883024619 * r + 0.2817185376 * g + 0.6299791005 * b;
@@ -62,48 +75,42 @@ export function hexToOklch(hex: string): { l: number; c: number; h: number } | n
 
 /**
  * [THEME]: injectThemeVariables
- * @description กลไกการฉีดค่าธีมพร้อมระบบ Identity Overriding (Radius & Fonts)
+ * @description กลไกการฉีดค่าธีมพร้อมระบบ Identity Overriding
  */
 export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
-  if (!theme) return {} as React.CSSProperties;
+  const styles: Record<string, string> = {};
+  if (!theme) return styles as React.CSSProperties;
 
-  // [FALLBACKS]: กำหนดค่าพื้นฐานของระบบ
   const defaultRadius = "2.5rem";
   const defaultFont = "var(--font-sans)";
 
-  const styles: Record<string, string> = {
-    // --- Functional Surfaces ---
-    "--surface-main": theme.background || (theme.mode === "dark" ? "#020617" : "#ffffff"),
-    "--text-primary": theme.foreground || (theme.mode === "dark" ? "#f8fafc" : "#0f172a"),
+  // Core Surfaces
+  styles["--surface-main"] = theme.background || (theme.mode === "dark" ? "#020617" : "#ffffff");
+  styles["--text-primary"] = theme.foreground || (theme.mode === "dark" ? "#f8fafc" : "#0f172a");
+  
+  // Identity Overrides
+  styles["--radius"] = theme.radius || defaultRadius;
+  styles["--font-primary"] = theme.fontFamily || defaultFont;
+  styles["--border-width"] = theme.borderWidth || "1px";
 
-    // --- Identity Overrides (The Identity Switcher) ---
-    // หาก Node ระบุ radius: "0px" หรือ "none" มันจะล้างความมนทิ้งทั้งหน้า
-    "--radius": theme.radius || defaultRadius,
-
-    // สลับชุดฟอนต์หลัก เช่น สลับไปใช้ var(--font-mono) สำหรับ Industrial Vibe
-    "--font-primary": theme.fontFamily || defaultFont,
-
-    // เส้นขอบแบบปรับแต่งได้ (ใช้สำหรับ Blueprint Style)
-    "--border-width": theme.borderWidth || "1px",
+  // [ENGINE]: OKLCH Dynamic Generator
+  const processColor = (hex: string, key: string) => {
+    const lch = hexToOklch(hex);
+    if (lch) {
+      const raw = `${lch.l} ${lch.c} ${lch.h}`;
+      styles[`--brand-${key}-raw`] = raw;
+      styles[`--brand-${key}`] = `oklch(${raw})`;
+      // [NEW]: Contrast Text Logic (Simple L-threshold)
+      styles[`--brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
+    } else {
+      // Fallback กรณี Hex พัง
+      styles[`--brand-${key}`] = hex;
+    }
   };
 
-  // [ENGINE]: Primary Color Resolution (OKLCH)
-  const primaryLch = hexToOklch(theme.primary);
-  if (primaryLch) {
-    const rawVal = `${primaryLch.l} ${primaryLch.c} ${primaryLch.h}`;
-    styles["--brand-primary-raw"] = rawVal;
-    styles["--brand-primary"] = `oklch(${rawVal})`;
-  }
-
-  // [ENGINE]: Secondary & Accent
-  if (theme.secondary) {
-    const sLch = hexToOklch(theme.secondary);
-    if (sLch) styles["--brand-secondary-raw"] = `${sLch.l} ${sLch.c} ${sLch.h}`;
-  }
-  if (theme.accent) {
-    const aLch = hexToOklch(theme.accent);
-    if (aLch) styles["--brand-accent-raw"] = `${aLch.l} ${aLch.c} ${aLch.h}`;
-  }
+  processColor(theme.primary, "primary");
+  if (theme.secondary) processColor(theme.secondary, "secondary");
+  if (theme.accent) processColor(theme.accent, "accent");
 
   return styles as React.CSSProperties;
 }

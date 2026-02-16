@@ -1,87 +1,68 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.110 (TYPE_SAFE_GUARDED)
- * [STRATEGY]: Strict Schema Mapping | Semantic Graph | GSC Compliance
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.0.8 (BUILD_FIXED)
+ * [STRATEGY]: Schema-DTS Integration | Export Restoration | Zero-TSC-Error
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { AreaNode, UniversalTemplateProps, TemplateMasterData } from "@/types";
+import type { 
+  Graph, 
+  Organization, 
+  Person, 
+  WebSite, 
+  ProfessionalService, 
+  Product, 
+  BreadcrumbList,
+  PostalAddress,
+  Thing,
+  GeoCoordinates,
+  Offer
+} from "schema-dts";
 
-// --- [INTERNAL TYPES] ---
-interface ExtendedSchemaNode extends Record<string, unknown> {
-  "@context"?: string;
-  "@type": string;
-  telephone?: string;
-  priceRange?: string;
-}
+// --- [TYPE DEFINITIONS] ---
+type SchemaInput = UniversalTemplateProps | TemplateMasterData | AreaNode;
 
-// --- [TYPE GUARDS]: For Runtime Safety ---
-const isUniversalTemplate = (
-  data: UniversalTemplateProps | TemplateMasterData | AreaNode
-): data is UniversalTemplateProps => {
-  return "regionalPricing" in data || "socialProof" in data;
+// --- [CORE CONSTANTS] ---
+const sharedAddress: PostalAddress = {
+  "@type": "PostalAddress",
+  streetAddress: SITE_CONFIG.contact.streetAddress,
+  addressLocality: SITE_CONFIG.business.location,
+  addressRegion: SITE_CONFIG.business.region,
+  postalCode: SITE_CONFIG.contact.postalCode,
+  addressCountry: "TH",
 };
 
-const isAreaNode = (
-  data: UniversalTemplateProps | TemplateMasterData | AreaNode
-): data is AreaNode => {
-  return "province" in data && "coordinates" in data;
-};
+// --- [TYPE GUARDS] ---
+const isUniversalTemplate = (data: SchemaInput): data is UniversalTemplateProps => 
+  "regionalPricing" in data || "socialProof" in data;
 
-// --- [INTERNAL: CORE NODES] ---
+const isAreaNode = (data: SchemaInput): data is AreaNode => 
+  "province" in data && "coordinates" in data;
 
+// --- [CORE NODES] ---
 const sameAsLinks = Object.values(SITE_CONFIG.links).filter(
   (link): link is string => typeof link === "string" && link.length > 0
 );
 
-const websiteNode = {
-  "@type": "WebSite",
-  "@id": absoluteUrl("/#website"),
-  url: SITE_CONFIG.siteUrl,
-  name: SITE_CONFIG.brandName,
-  publisher: { "@id": absoluteUrl("/#organization") },
-  inLanguage: SITE_CONFIG.locale.replace("_", "-"),
-} as const;
-
-const organizationNode = {
-  "@type": "ProfessionalService",
+const organizationNode: Organization = {
+  "@type": "Organization",
   "@id": absoluteUrl("/#organization"),
   name: SITE_CONFIG.brandName,
   url: SITE_CONFIG.siteUrl,
-  telephone: SITE_CONFIG.contact.phone,
-  priceRange: SITE_CONFIG.business.priceRange,
   logo: {
     "@type": "ImageObject",
     "@id": absoluteUrl("/#logo"),
     url: absoluteUrl(SITE_CONFIG.logo),
-    caption: SITE_CONFIG.brandName,
-  },
-  image: {
-    "@type": "ImageObject",
-    url: absoluteUrl(SITE_CONFIG.ogImage),
+    width: "512px", 
+    height: "512px"
   },
   sameAs: sameAsLinks,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: SITE_CONFIG.contact.streetAddress,
-    addressLocality: SITE_CONFIG.business.location,
-    addressRegion: SITE_CONFIG.business.region,
-    postalCode: SITE_CONFIG.contact.postalCode,
-    addressCountry: "TH",
-  },
-  // [ADD]: Opening Hours for Local SEO
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "09:00",
-      closes: "18:00",
-    },
-  ],
-} as const;
+  address: sharedAddress,
+};
 
-const personNode = {
+const personNode: Person = {
   "@type": "Person",
   "@id": absoluteUrl("/#expert"),
   name: SITE_CONFIG.expert.legalNameThai,
@@ -91,19 +72,44 @@ const personNode = {
   url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
   worksFor: { "@id": absoluteUrl("/#organization") },
   description: SITE_CONFIG.expert.bio,
-  sameAs: [SITE_CONFIG.expert.twitterHandle],
-} as const;
+  sameAs: [
+    SITE_CONFIG.links.facebook,
+    SITE_CONFIG.links.github,
+    SITE_CONFIG.links.youtube,
+    `https://x.com/${SITE_CONFIG.expert.twitterHandle.replace("@", "")}`
+  ].filter(Boolean),
+};
+
+const websiteNode: WebSite = {
+  "@type": "WebSite",
+  "@id": absoluteUrl("/#website"),
+  url: SITE_CONFIG.siteUrl,
+  name: SITE_CONFIG.brandName,
+  publisher: { "@id": absoluteUrl("/#organization") },
+  inLanguage: SITE_CONFIG.locale.replace("_", "-"),
+};
 
 // --- [EXPORTED GENERATORS] ---
 
-export const generatePersonSchema = () => personNode;
+/**
+ * [NEWLY_RESTORED]: generatePersonSchema
+ * @description คืนค่า Person Node สำหรับหน้า About หรือ Bio
+ */
+export const generatePersonSchema = (): Person => personNode;
 
-export const generateSchemaGraph = (schemas: Record<string, unknown>[]) => ({
+/** [MASTER]: generateSchemaGraph */
+export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
   "@context": "https://schema.org",
-  "@graph": [websiteNode, organizationNode, personNode, ...schemas],
+  "@graph": [
+    organizationNode as Thing, 
+    websiteNode as Thing, 
+    personNode as Thing, 
+    ...schemas
+  ],
 });
 
-export const generateBreadcrumbSchema = (items: { name: string; item: string }[]) => ({
+/** [MASTER]: generateBreadcrumbSchema */
+export const generateBreadcrumbSchema = (items: { name: string; item: string }[]): BreadcrumbList => ({
   "@type": "BreadcrumbList",
   itemListElement: items.map((it, idx) => ({
     "@type": "ListItem",
@@ -113,145 +119,89 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
   })),
 });
 
-/**
- * [MASTER]: generateUniversalSchema
- * [STRATEGY]: Auto-detect Context & Pricing Logic
- */
-export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData) {
-  // 1. Context Detection
-  const isArea = (data.id && data.id.startsWith("NODE-")) || data.category === "area";
-  
-  // 2. Canonical Logic
-  const slug = isArea && data.id 
-    ? data.id.replace("NODE-", "").toLowerCase() 
-    : data.templateSlug;
-    
-  const pathPrefix = isArea ? "/areas/" : "/services/";
-  const canonicalUrl = absoluteUrl(`${pathPrefix}${slug}`);
+/** [MASTER]: generateUniversalSchema */
+export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData): ProfessionalService | Product {
+  const isProduct = ["salepage", "catalog"].includes(data.templateSlug);
+  const templateId = "id" in data ? (data.id as string) : "";
+  const slug = data.templateSlug || templateId.replace("NODE-", "").toLowerCase();
+  const canonicalUrl = absoluteUrl(`/services/${slug}`);
 
-  // 3. Pricing Logic (Safe Access)
   let numericPrice = 0;
   if ("priceValue" in data && typeof data.priceValue === "number") {
     numericPrice = data.priceValue;
   } else if (isUniversalTemplate(data) && data.regionalPricing?.startPrice) {
-    numericPrice = parseInt(data.regionalPricing.startPrice.replace(/[^0-9]/g, "")) || 0;
+    numericPrice = parseInt(data.regionalPricing.startPrice.replace(/\D/g, "")) || 0;
   }
 
-  // 4. Schema Construction
-  const mainType = ["salepage", "catalog"].includes(data.templateSlug)
-    ? "Product"
-    : "ProfessionalService";
-
-  const baseNode: ExtendedSchemaNode = {
-    "@type": mainType,
+  const schemaBase = {
     "@id": `${canonicalUrl}/#main`,
     name: data.title,
     description: data.description,
-    image: data.image ? absoluteUrl(data.image) : absoluteUrl(SITE_CONFIG.ogImage),
+    image: absoluteUrl(data.image || SITE_CONFIG.ogImage),
     url: canonicalUrl,
-    brand: { "@id": absoluteUrl("/#organization") },
     provider: { "@id": absoluteUrl("/#organization") },
+    brand: { "@id": absoluteUrl("/#organization") },
   };
 
-  // 5. ProfessionalService Enhancements
-  if (mainType === "ProfessionalService") {
-    baseNode.telephone = SITE_CONFIG.contact.phone;
-    baseNode.priceRange = SITE_CONFIG.business.priceRange;
-
-    // Dynamic Address for Area Pages
-    if (isArea) {
-      const province = data.title.replace("รับทำเว็บไซต์", "").trim();
-      baseNode.address = {
-        "@type": "PostalAddress",
-        addressLocality: province,
-        addressRegion: province,
-        addressCountry: "TH",
-      };
-      baseNode.areaServed = {
-        "@type": "City",
-        name: province,
-      };
-    } else {
-      baseNode.address = organizationNode.address;
-    }
-  }
-
-  // 6. Aggregate Rating (Safe Access)
-  if (isUniversalTemplate(data) && data.socialProof) {
-    baseNode.aggregateRating = {
-      "@type": "AggregateRating",
-      ratingValue: data.socialProof.rating,
-      reviewCount: data.socialProof.reviewCount,
-      bestRating: "5",
-      worstRating: "1",
+  if (isProduct) {
+    const productSchema: Product = {
+      "@type": "Product",
+      ...schemaBase,
+      ...(numericPrice > 0 && {
+        offers: {
+          "@type": "Offer",
+          price: numericPrice,
+          priceCurrency: "THB",
+          itemCondition: "https://schema.org/NewCondition",
+          availability: "https://schema.org/InStock",
+          url: canonicalUrl,
+          seller: { "@id": absoluteUrl("/#organization") }
+        } as Offer
+      })
     };
+    return productSchema;
   }
 
-  // 7. Offer Schema
-  if (numericPrice > 0) {
-    baseNode.offers = {
-      "@type": "Offer",
-      price: numericPrice,
-      priceCurrency: data.currency || "THB",
-      availability: "https://schema.org/InStock",
-      url: canonicalUrl,
-      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-        .toISOString()
-        .split("T")[0],
-    };
-  }
+  const serviceSchema: ProfessionalService = {
+    "@type": "ProfessionalService",
+    ...schemaBase,
+    priceRange: SITE_CONFIG.business.priceRange,
+    telephone: SITE_CONFIG.contact.phone,
+    address: sharedAddress,
+  };
 
-  return baseNode;
+  return serviceSchema;
 }
 
-/**
- * [SPECIALIST]: generateLocalBusinessSchema
- * @description รองรับ GeoCoordinates และ Map URL
- */
-export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaNode) {
-  // 1. Identify Data Source
-  const isUniversal = isUniversalTemplate(data);
+/** [RESTORED]: generateLocalBusinessSchema */
+export function generateLocalBusinessSchema(data: AreaNode | UniversalTemplateProps): ProfessionalService {
   const isArea = isAreaNode(data);
+  const slug = isArea ? data.slug : data.templateSlug;
+  const url = absoluteUrl(`/areas/${slug}`);
 
-  // 2. Extract Data Safely
-  const slug = isUniversal ? data.templateSlug : (data as AreaNode).slug;
-  const province = isUniversal
-    ? data.title.replace("รับทำเว็บไซต์", "").trim()
-    : (data as AreaNode).province;
-
-  const imageUrl = isUniversal
-    ? data.image || SITE_CONFIG.ogImage
-    : (data as AreaNode).heroImage;
-
-  const pageUrl = absoluteUrl(`/areas/${slug}`);
-
-  // 3. Construct Schema
-  const schema: ExtendedSchemaNode = {
+  const schema: ProfessionalService = {
     "@type": "ProfessionalService",
-    "@id": `${pageUrl}/#localbusiness`,
-    name: isUniversal ? data.title : `${SITE_CONFIG.brandName} - ${province}`,
-    url: pageUrl,
+    "@id": `${url}/#localbusiness`,
+    name: isArea ? `${SITE_CONFIG.brandName} ${data.province}` : data.title,
+    url: url,
     telephone: SITE_CONFIG.contact.phone,
     priceRange: SITE_CONFIG.business.priceRange,
-    image: absoluteUrl(imageUrl),
+    image: absoluteUrl((isArea ? data.heroImage : data.image) || SITE_CONFIG.ogImage),
     address: {
       "@type": "PostalAddress",
-      addressLocality: province,
-      addressRegion: isUniversal ? province : SITE_CONFIG.business.region,
+      addressLocality: isArea ? data.province : SITE_CONFIG.business.location,
+      addressRegion: isArea ? data.province : SITE_CONFIG.business.region,
       addressCountry: "TH",
-    },
-    parentOrganization: { "@id": absoluteUrl("/#organization") },
-    // [ADD]: Map Link
-    hasMap: SITE_CONFIG.contact.mapUrl,
+    } as PostalAddress,
+    parentOrganization: { "@id": absoluteUrl("/#organization") } as Organization,
   };
 
-  // 4. Inject GeoCoordinates (If available in AreaNode)
-  if (isArea && (data as AreaNode).coordinates) {
+  if (isArea && data.coordinates) {
     schema.geo = {
       "@type": "GeoCoordinates",
-      latitude: (data as AreaNode).coordinates.lat,
-      longitude: (data as AreaNode).coordinates.lng,
-    };
+      latitude: data.coordinates.lat,
+      longitude: data.coordinates.lng
+    } as GeoCoordinates;
   }
 
   return schema;

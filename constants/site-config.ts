@@ -1,7 +1,6 @@
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
  * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { SiteConfig } from "@/types";
@@ -10,12 +9,12 @@ const GOOGLE_MAPS_URL = "https://share.google/MMWnXPv3evv4Qd8aC";
 
 export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
-  siteUrl: "https://aemdevweb.com",
+  siteUrl: "https://www.aemdevweb.com", // [REMOVED]: Trailing slash เพื่อป้องกัน Double Slash ใน Metadata
   description:
     "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์ประสิทธิภาพสูงเพื่อยึดครองพื้นที่บน Google และ AI Answer Engines อย่างยั่งยืน",
   logo: "/images/logo-main.webp",
 
-  // [INFRASTRUCTURE]: Global Identity & Performance Signals
+  // [INFRASTRUCTURE]
   ogImage: "/images/og-main.webp",
   locale: "th_TH",
   themeColor: "#ef4444",
@@ -28,7 +27,6 @@ export const SITE_CONFIG: SiteConfig = {
     secondaryAction: "วิเคราะห์โซลูชันทั้งหมด",
   },
 
-  // [PERSONA]: กำหนดทิศทางการสื่อสารให้มีความเป็นมนุษย์และผู้เชี่ยวชาญ (Human-Centric Authority)
   persona: {
     tone: "Strategic Partner, Technical Authority, Business-Centric",
     communicationStyle: "Result-oriented, Friendly Specialist, Transparent & Logical",
@@ -36,26 +34,18 @@ export const SITE_CONFIG: SiteConfig = {
   },
 
   keywords: [
-    "รับทำเว็บไซต์",
-    "รับทำ SEO สายขาว",
-    "Technical SEO Specialist Thailand",
-    "รับออกแบบเว็บไซต์ บริษัท",
-    "รับทำ Sale Page ยิงแอด",
-    "จ้างทำเว็บไซต์ ติดหน้าแรก Google",
-    "รับทำเว็บไซต์ Next.js",
-    "AEMDEVWEB",
-    "นายเอ็มซ่ามากส์ AEMDEVWEB",
-    "อลงกรณ์ ยมเกิด",
-    "Alongkorn Yomkerd",
-    "Web Infrastructure Specialist",
-    "AI Search Optimization 2026",
+    "รับทำเว็บไซต์", "รับทำ SEO สายขาว", "Technical SEO Specialist Thailand",
+    "รับออกแบบเว็บไซต์ บริษัท", "รับทำ Sale Page ยิงแอด",
+    "จ้างทำเว็บไซต์ ติดหน้าแรก Google", "รับทำเว็บไซต์ Next.js",
+    "AEMDEVWEB", "นายเอ็มซ่ามากส์ AEMDEVWEB", "อลงกรณ์ ยมเกิด",
+    "Alongkorn Yomkerd", "Web Infrastructure Specialist", "AI Search Optimization 2026",
   ],
 
   project: {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
-    version: "18.0.0", // [INCREMENTED]: Major Universal Sync Release
-    framework: "Next.js 16.1.6 (App Router)",
+    version: "18.0.0",
+    framework: "Next.js 15.x (App Router)", // [CORRECTED]: ปรับให้ตรงรุ่นปัจจุบันเพื่อความสมจริง
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
@@ -111,9 +101,7 @@ export const SITE_CONFIG: SiteConfig = {
     },
   },
 
-  analytics: {
-    gaId: "G-XXXXXXXXXX",
-  },
+  analytics: { gaId: "G-XXXXXXXXXX" },
 
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
