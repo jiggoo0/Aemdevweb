@@ -23,12 +23,8 @@ interface ServiceCardProps {
   readonly index?: number;
 }
 
-/**
- * @component ServiceCard
- * @description การ์ดแสดงผลบริการหลักที่ผ่านการจูนประสิทธิภาพและ SEO มาอย่างเข้มข้น
- */
 const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps) => {
-  // [DATA_ADAPTER]: ระบบคัดเลือกจุดขายที่ทรงพลังที่สุด (Max 3 Nodes)
+  // [DATA_ADAPTER]: คัดเลือกจุดขายที่ทรงพลังที่สุด (จำกัดที่ 3 รายการเพื่อ Visual Balance)
   const displayFeatures = useMemo(() => {
     if (data.benefits?.length) return data.benefits.slice(0, 3);
     if (data.coreFeatures?.length) return data.coreFeatures.slice(0, 3).map((f) => f.title);
@@ -39,7 +35,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
   const imageSource = useMemo(() => data.image || "/images/service/default.webp", [data.image]);
   const imgData = IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null;
 
-  // [COMMERCIAL_LOGIC]: ระบบแสดงราคาแบบ Hybrid (รองรับทั้งราคาตัวเลขและใบเสนอราคา)
+  // [COMMERCIAL_LOGIC]: ระบบแสดงราคาแบบ Hybrid (ตัวเลขจริง vs ใบเสนอราคา)
   const priceDisplay = useMemo(() => {
     if (!data.priceValue || data.priceValue === 0) return "Premium_Quote";
     return new Intl.NumberFormat("th-TH").format(data.priceValue);
@@ -77,14 +73,14 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           src={imageSource}
           alt={`Solution: ${data.title}`}
           fill
-          priority={index < 3} // Optimize LCP สำหรับบริการลำดับแรกๆ
+          priority={index < 3} // ปรับจูน LCP สำหรับ 3 บริการแรก
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        {/* Aesthetic Overlay Layers */}
+        {/* Aesthetic Layers: เพิ่มมิติและความขลังของ UI */}
         <div
           className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04] mix-blend-overlay"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
@@ -152,7 +148,5 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
     </Link>
   );
 };
-
-ServiceCard.displayName = "ServiceCard";
 
 export default memo(ServiceCard);

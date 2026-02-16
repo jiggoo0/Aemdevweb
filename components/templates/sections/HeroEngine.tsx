@@ -43,7 +43,7 @@ const HeroEngine = ({
 
   /**
    * [PHYSICS]: Neural Ease Transition
-   * ออกแบบมาเพื่อสร้างจังหวะการเคลื่อนไหวที่นิ่งและทรงพลัง
+   * ออกแบบมาเพื่อสร้างจังหวะการเคลื่อนไหวที่นิ่งและทรงพลัง (Neural-Impulse)
    */
   const transition: Transition = {
     duration: 0.8,
@@ -66,7 +66,7 @@ const HeroEngine = ({
         aria-hidden="true"
       />
 
-      {/* [DYNAMIC_AURA]: เชื่อมโยงสีแบรนด์ผ่าน CSS Variable */}
+      {/* [DYNAMIC_AURA]: เชื่อมโยงสีแบรนด์ผ่าน CSS Variable (OKLCH Ready) */}
       <div
         className={cn(
           "pointer-events-none absolute inset-0 z-0",
@@ -84,7 +84,7 @@ const HeroEngine = ({
             isCenter ? "mx-auto max-w-5xl items-center" : "max-w-7xl items-start",
           )}
         >
-          {/* Node 01: Specialist Protocol Indicator */}
+          {/* NODE 01: SPECIALIST PROTOCOL INDICATOR */}
           {showIndicator && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -99,7 +99,7 @@ const HeroEngine = ({
             </motion.div>
           )}
 
-          {/* Node 02: Main Messaging Matrix */}
+          {/* NODE 02: MAIN MESSAGING MATRIX */}
           <div className="w-full space-y-8 md:space-y-12">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -127,7 +127,7 @@ const HeroEngine = ({
             </motion.div>
           </div>
 
-          {/* Node 03: Conversion Gateway */}
+          {/* NODE 03: CONVERSION GATEWAY (CTA BLOCK) */}
           {(primaryActionLabel || secondaryActionLabel) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -138,7 +138,7 @@ const HeroEngine = ({
                 isCenter ? "items-center justify-center" : "items-start",
               )}
             >
-              {/* Primary Action (Contact) - [RESOLVED]: variant="neo" */}
+              {/* PRIMARY ACTION: DIRECT CONVERSION */}
               {primaryActionLabel && primaryHref && (
                 <Button
                   asChild
@@ -157,7 +157,7 @@ const HeroEngine = ({
                 </Button>
               )}
 
-              {/* Secondary Action (Internal Navigation) */}
+              {/* SECONDARY ACTION: NAVIGATION/SOCIAL PROOF */}
               {secondaryActionLabel && secondaryHref && (
                 <Button
                   asChild
@@ -173,6 +173,7 @@ const HeroEngine = ({
         </div>
       </div>
 
+      {/* Decorative Bottom Baseline */}
       <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" />
     </section>
   );

@@ -1,6 +1,6 @@
 /**
- * [CORE PAGE]: HOMEPAGE v18.0.3 (PRODUCTION_STABILIZED)
- * [STRATEGY]: Parallel Execution | Zero-CLS Lazy Loading | LCP Optimized
+ * [CORE PAGE]: HOMEPAGE v18.0.4 (ENGINE_INTEGRATED)
+ * [STRATEGY]: Parallel Execution | HeroEngine Integration | LCP Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -25,12 +25,12 @@ import { constructMetadata } from "@/lib/seo-utils";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-// --- 4. Critical UI (LCP Layer - Static Import) ---
-import Hero from "@/components/features/landing/Hero";
+// --- 4. Critical UI (LCP Layer - [RESOLVED]: Unified HeroEngine) ---
+import HeroEngine from "@/components/templates/sections/HeroEngine";
 import TrustBadge from "@/components/shared/TrustBadge";
 import ImpactStats from "@/components/shared/ImpactStats";
 
-// --- 5. Optimized Lazy Loading (Stability Guard) ---
+// --- 5. Optimized Lazy Loading ---
 const LoadingSkeleton = ({
   height = "h-[400px]",
   className,
@@ -76,15 +76,17 @@ export default async function HomePage() {
 
   const featuredServices = getFeaturedServices().slice(0, 3);
   const recentCases = caseStudies.slice(0, 2);
-  const recentPosts = blogPosts.slice(0, 3); // เรียกใช้งานใน Section 06
+  const recentPosts = blogPosts.slice(0, 3);
   const featuredAreas = AREA_NODES.filter((n) => (n.priority ?? 0) >= 95).slice(0, 4);
 
   return (
     <div className="bg-surface-main flex w-full flex-col overflow-hidden">
       <JsonLd data={generateSchemaGraph([])} />
 
-      {/* --- 01. HERO GATEWAY (LCP Layer) --- */}
-      <Hero />
+      {/* --- 01. HERO GATEWAY (LCP Layer) --- 
+          [FIXED]: เปลี่ยนมาใช้ HeroEngine พร้อมตั้งค่า align="center" เพื่อ Impact หน้าแรก
+      */}
+      <HeroEngine align="center" showIndicator={true} />
 
       {/* --- 02. AUTHORITY HUB --- */}
       <section className="relative z-10 -mt-16 px-4 md:-mt-24 lg:-mt-32">
@@ -152,7 +154,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- 06. INSIGHTS (Resolved Warnings) --- */}
+      {/* --- 06. INSIGHTS --- */}
       <section className="border-border/40 border-t py-24">
         <div className="container mx-auto">
           <div className="mb-12 flex items-center justify-between">
@@ -168,7 +170,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- 07. INVESTMENT (Resolved Warnings) --- */}
+      {/* --- 07. INVESTMENT --- */}
       <section className="pb-24">
         <PricingSection />
       </section>

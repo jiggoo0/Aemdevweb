@@ -12,10 +12,10 @@ import { FOOTER_MAP } from "@/constants/navigation";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
 
-// [CONSTANTS]: แยก Class เพื่อความสะอาดและ Maintain ง่าย
+// [CONSTANTS]: การกำหนด Class สไตล์ส่วนกลางเพื่อการบำรุงรักษาที่ง่าย
 const LINK_STYLE = cn(
   "text-text-secondary hover:text-brand-primary text-sm transition-all duration-300",
-  "inline-block hover:translate-x-1", // [MICRO-INTERACTION]: ขยับเล็กน้อยเมื่อ Hover
+  "inline-block hover:translate-x-1", // [MICRO-INTERACTION]: ขยับเล็กน้อยเพื่อสร้าง Feedback
 );
 
 const HEADER_STYLE = "text-text-primary mb-6 text-sm font-black tracking-[0.15em] uppercase";
@@ -32,7 +32,7 @@ const Footer = () => {
         aria-hidden="true"
       />
 
-      {/* Visual Anchor Gradient */}
+      {/* Visual Anchor Gradient: เส้นนำสายตาระดับพิกเซล */}
       <div
         className="via-brand-primary/50 absolute top-0 left-1/2 h-px w-3/4 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent blur-[1px]"
         aria-hidden="true"
@@ -56,6 +56,7 @@ const Footer = () => {
                 "Engineering High-Performance Digital Infrastructure. เราไม่ได้สร้างแค่เว็บไซต์ แต่เราวางระบบรากฐานที่แข็งแกร่งสำหรับธุรกิจยุคใหม่"}
             </p>
 
+            {/* Systems Operational Indicator */}
             <div className="mt-2 flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
@@ -69,7 +70,7 @@ const Footer = () => {
 
           {/* --- 03. NAVIGATION MATRIX (Column 5-12) --- */}
           <div className="grid grid-cols-2 gap-8 md:col-span-8 md:grid-cols-3 lg:col-span-7">
-            {/* Services Node */}
+            {/* Services Directory Section */}
             <nav aria-label="Services Directory">
               <h3 className={HEADER_STYLE}>บริการ</h3>
               <ul className="space-y-3">
@@ -83,7 +84,7 @@ const Footer = () => {
               </ul>
             </nav>
 
-            {/* Company Node */}
+            {/* Company Information Section */}
             <nav aria-label="Company Information">
               <h3 className={HEADER_STYLE}>เกี่ยวกับเรา</h3>
               <ul className="space-y-3">
@@ -97,7 +98,7 @@ const Footer = () => {
               </ul>
             </nav>
 
-            {/* Connect Node */}
+            {/* Connect Channels Section */}
             <nav aria-label="Connect Channels">
               <h3 className={HEADER_STYLE}>ติดต่อทีมงาน</h3>
               <ul className="space-y-3">

@@ -10,18 +10,20 @@ import { cn } from "@/lib/utils";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import type { ThemeConfig } from "@/types";
 
+// --- 01. TYPE DEFINITIONS ---
 type SpacingLevel = "none" | "small" | "medium" | "large" | "specialist";
 
 interface LayoutEngineProps {
   readonly children: ReactNode;
   readonly className?: string;
   readonly spacing?: SpacingLevel;
-  readonly theme?: Partial<ThemeConfig>; // [UPGRADED]: รองรับ ThemeConfig เต็มรูปแบบ
+  readonly theme?: Partial<ThemeConfig>; // [UPGRADED]: รองรับการทำ Identity Switcher เต็มรูปแบบ
 }
 
 const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutEngineProps) => {
   /**
    * [SPACING_MATRIX]: ระบบจัดการระยะห่างแบบ Fluid Gap
+   * ปรับจังหวะการเว้นช่องไฟระหว่าง Section อัตโนมัติตามค่าความสำคัญของ Node
    */
   const spacingMap: Record<SpacingLevel, string> = {
     none: "gap-y-0",
@@ -36,12 +38,12 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
   /**
    * [IDENTITY_ORCHESTRATION]: การฉีดตัวแปรอัตลักษณ์เข้าสู่ CSS Runtime
    * กลไกนี้ช่วยให้ Node อย่าง "โคราช" กลายเป็นเหลี่ยมคม (Radius 0)
-   * ในขณะที่ "ขอนแก่น" ดูนุ่มนวลตามค่าที่กำหนดไว้ใน Node Data
+   * ในขณะที่ "เชียงใหม่" ดูนุ่มนวลตามค่าที่กำหนดไว้ใน Node Data
    */
   const dynamicStyles = useMemo(() => {
     const styles: Record<string, string | undefined> = {};
 
-    // 1. Core Colors
+    // 1. CORE COLOR PALETTE
     if (theme?.primary) {
       styles["--brand-primary"] = theme.primary;
       styles["--color-brand-primary"] = theme.primary;
@@ -53,17 +55,18 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
       styles["--brand-accent"] = theme.accent;
     }
 
-    // 2. Geometry & Identity (Switcher Support)
-    // [FIX]: กำหนดค่า Fallback ให้กับระบบเพื่อป้องกัน Layout เพี้ยน
+    // 2. GEOMETRY & IDENTITY (Radius & Borders)
+    // [FIX]: ป้องกันการแตกของ Layout ด้วยค่า Fallback มาตรฐาน
     styles["--brand-radius"] = theme?.radius ?? "0.75rem";
     styles["--brand-border-width"] = theme?.borderWidth ?? "1px";
 
+    // 3. TYPOGRAPHY INJECTION
     if (theme?.fontFamily) {
       styles["--font-brand"] = theme.fontFamily;
-      styles["fontFamily"] = theme.fontFamily; // บังคับใช้ฟอนต์ที่ Root
+      styles["fontFamily"] = theme.fontFamily; // บังคับใช้ Font-Family ที่ Root ของ Node
     }
 
-    // 3. Surface & Anti-Flash Logic
+    // 4. SURFACE & ANTI-FLASH LOGIC
     if (!isTailwindBg && theme?.background) {
       styles["--surface-main"] = theme.background;
       styles["backgroundColor"] = theme.background;
@@ -77,7 +80,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
     return styles as CSSProperties;
   }, [theme, isTailwindBg]);
 
-  // กำหนดสีพื้นหลัง Aura โดยอ้างอิงจาก Primary Color ของ Node นั้นๆ
+  // คำนวณสี ambient โดยอ้างอิงจาก Primary Color ของ Node
   const ambientColor = theme?.primary || "var(--brand-primary)";
 
   return (
@@ -90,14 +93,14 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
       )}
       style={dynamicStyles}
     >
-      {/* --- LAYER 01: INFRASTRUCTURE (The Grid) --- */}
+      {/* --- LAYER 01: INFRASTRUCTURE (The Visual Grid) --- */}
       <div
-        className="bg-infrastructure-grid pointer-events-none fixed inset-0 z-0 opacity-[0.04]"
+        className="bg-infrastructure-grid pointer-events-none fixed inset-0 z-0 opacity-[0.04] select-none"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         aria-hidden="true"
       />
 
-      {/* [DYNAMIC_AURA]: ชั้นบรรยากาศสีฟุ้งที่เปลี่ยนตาม Identity */}
+      {/* [DYNAMIC_AURA]: ชั้นบรรยากาศสีฟุ้งที่เปลี่ยนตาม Identity ของแต่ละพื้นที่ */}
       <AmbientBackground color={ambientColor} opacity={theme?.mode === "dark" ? 0.2 : 0.1} />
 
       {/* --- LAYER 02: CONTENT HUB --- */}
@@ -108,7 +111,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
           spacingMap[spacing],
         )}
       >
-        {/* [IDENTITY_MASK]: ถ้ามี Gradient พิเศษใน Theme จะถูกนำมาใช้เป็นเลเยอร์พื้นหลังเสริม */}
+        {/* [IDENTITY_MASK]: เลเยอร์ Gradient เสริมกรณีระบุพิเศษใน Theme Node */}
         {theme?.gradient && (
           <div
             className={cn(
@@ -121,6 +124,9 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
 
         {children}
       </main>
+
+      {/* Decorative Final Baseline */}
+      <div className="via-brand-primary/10 absolute bottom-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" />
     </div>
   );
 };

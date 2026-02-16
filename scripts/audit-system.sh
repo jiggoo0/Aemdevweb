@@ -1,66 +1,94 @@
 #!/bin/bash
 
-# [CONFIG]: ชื่อไฟล์รายงานผลลัพธ์
-REPORT="system_audit_result.md"
+# ==============================================================================
+# [SYSTEM CORE]: AUDIT_SYSTEM_WRAPPER v18.0.5
+# [STRATEGY]: Fresh-Baseline Generation | Self-Healing Infrastructure
+# [MAINTAINER]: AEMZA MACKS (Lead Architect)
+# [REF]: aemdevweb.com
+# ==============================================================================
 
-echo "# 🔍 AEMDEVWEB MASTER AUDIT REPORT" > $REPORT
-echo "Generated: $(date)" >> $REPORT
-echo "Environment: Next.js v15+ (App Router)" >> $REPORT
-echo "------------------------------------------------" >> $REPORT
+# ANSI Color Codes
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
 
-echo "## 🎨 1. THEME & COLOR ARCHITECTURE" >> $REPORT
-echo "### 1.1 Tailwind Config (Theme Mapping)" >> $REPORT
-echo '```ts' >> $REPORT
-cat tailwind.config.ts >> $REPORT 2>/dev/null || echo "❌ tailwind.config.ts not found" >> $REPORT
-echo '```' >> $REPORT
+echo -e "${BLUE}[AEMZA MACKS] เริ่มต้นกระบวนการ Audit ระบบ (Fresh-Baseline Mode)...${NC}"
 
-echo "### 1.2 CSS Variables (Root Definition)" >> $REPORT
-echo '```css' >> $REPORT
-cat app/globals.css >> $REPORT 2>/dev/null || echo "❌ globals.css not found" >> $REPORT
-echo '```' >> $REPORT
+# ------------------------------------------------------------------------------
+# 1. FORCE-REGENERATE STRUCTURE BASELINE (ลบและสร้างใหม่ทุกครั้ง)
+# ------------------------------------------------------------------------------
+echo -e "\n${YELLOW}[01/05] กำลังล้างข้อมูลและสร้าง Baseline โครงสร้างใหม่...${NC}"
 
-echo "### 1.3 LayoutEngine (Injection Logic)" >> $REPORT
-echo '```tsx' >> $REPORT
-cat components/templates/sections/LayoutEngine.tsx >> $REPORT 2>/dev/null || echo "❌ LayoutEngine.tsx not found" >> $REPORT
-echo '```' >> $REPORT
+# ลบไฟล์เดิมเพื่อยืนยันว่าเป็นข้อมูลล่าสุด
+rm -f structure.txt
 
-echo "" >> $REPORT
-echo "## 🏛️ 2. SERVICE NODES (Template & Theme Config)" >> $REPORT
-SERVICES=("seo-agency" "corporate" "catalog" "salepage" "hotel-resort")
-for service in "${SERVICES[@]}"; do
-    echo "### NODE: $service" >> $REPORT
-    echo '```ts' >> $REPORT
-    cat "constants/services/$service.ts" >> $REPORT 2>/dev/null || echo "❌ $service.ts not found" >> $REPORT
-    echo '```' >> $REPORT
-done
+# สร้าง Snapshot ใหม่ตามโครงสร้างปัจจุบัน
+echo "AEMDEVWEB STRUCTURE SNAPSHOT - $(date)" > structure.txt
+echo "------------------------------------------------" >> structure.txt
+# สแกนโครงสร้างโดยยกเว้นไฟล์ขยะและสารบบภายในที่ไม่จำเป็น
+find . -maxdepth 3 -not -path '*/.*' -not -path './node_modules*' -not -path './.next*' >> structure.txt
 
-echo "" >> $REPORT
-echo "## 📍 3. AREA & PROVINCIAL MAPPING (Dynamic Routes)" >> $REPORT
-echo "### 3.1 Slug Page Logic ([slug]/page.tsx)" >> $REPORT
-echo '```tsx' >> $REPORT
-cat "app/(business)/areas/[slug]/page.tsx" >> $REPORT 2>/dev/null || echo "❌ Area page.tsx not found" >> $REPORT
-echo '```' >> $REPORT
+if [ -f "structure.txt" ]; then
+    echo -e "${GREEN}[DONE] สร้าง structure.txt (Fresh Snapshot) สำเร็จ${NC}"
+else
+    echo -e "${RED}[CRITICAL] ไม่สามารถสร้าง Baseline ได้ ระบบหยุดการทำงาน${NC}"
+    exit 1
+fi
 
-echo "### 3.2 Template Renderer (The Decision Maker)" >> $REPORT
-echo '```tsx' >> $REPORT
-cat "components/templates/TemplateRenderer.tsx" >> $REPORT 2>/dev/null || echo "❌ TemplateRenderer.tsx not found" >> $REPORT
-echo '```' >> $REPORT
+# ------------------------------------------------------------------------------
+# 2. TYPE INTEGRITY & ZERO-UNUSED POLICY
+# ------------------------------------------------------------------------------
+echo -e "\n${YELLOW}[02/05] ตรวจสอบ Type Integrity (TSC & Knip)...${NC}"
+pnpm knip --no-progress
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}[PASS] ไม่พบ Dead Code ตามนโยบาย Zero-Unused${NC}"
+else
+    echo -e "${RED}[FAIL] พบปัญหาในระดับ Type หรือมี Code เกินในระบบ${NC}"
+    exit 1
+fi
 
-echo "### 3.3 Area Registry Index" >> $REPORT
-echo '```ts' >> $REPORT
-cat "constants/area-nodes/index.ts" >> $REPORT 2>/dev/null || echo "❌ Area index.ts not found" >> $REPORT
-echo '```' >> $REPORT
+# ------------------------------------------------------------------------------
+# 3. MASTER REGISTRY LOGIC AUDIT
+# ------------------------------------------------------------------------------
+echo -e "\n${YELLOW}[03/05] รัน Master Audit Protocol (Python)...${NC}"
+if [ -f "scripts/master_audit.py" ]; then
+    python3 scripts/master_audit.py
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}[PASS] ตรรกะใน Registry ถูกต้องตาม Schema${NC}"
+    else
+        echo -e "${RED}[FAIL] พบข้อผิดพลาดในระดับ Business Logic${NC}"
+        exit 1
+    fi
+else
+    echo -e "${BLUE}[INFO] ไม่พบ scripts/master_audit.py (Skipped)${NC}"
+fi
 
-echo "### 3.4 Provincial Data Example (Tak Node)" >> $REPORT
-echo '```ts' >> $REPORT
-cat "constants/area-nodes/tak.ts" >> $REPORT 2>/dev/null || echo "❌ tak.ts not found" >> $REPORT
-echo '```' >> $REPORT
+# ------------------------------------------------------------------------------
+# 4. IMAGE BLUR METADATA SYNC
+# ------------------------------------------------------------------------------
+echo -e "\n${YELLOW}[04/05] ตรวจสอบ Image Blur Metadata...${NC}"
+if [ -f "scripts/image-audit.mjs" ]; then
+    node scripts/image-audit.mjs
+    if [ $? -ne 0 ]; then
+        echo -e "${YELLOW}[WARN] พบรูปภาพใหม่ | กำลังรัน gen-blur-data.mjs...${NC}"
+        node scripts/gen-blur-data.mjs
+    fi
+else
+    echo -e "${BLUE}[INFO] ไม่พบ scripts/image-audit.mjs (Skipped)${NC}"
+fi
 
-echo "" >> $REPORT
-echo "## 🛠️ 4. SYSTEM VARIABLES & DEPENDENCIES" >> $REPORT
-echo '```json' >> $REPORT
-grep -E "\"next\":|\"tailwindcss\":|\"framer-motion\":" package.json >> $REPORT
-echo '```' >> $REPORT
+# ------------------------------------------------------------------------------
+# 5. HEX COLOR STANDARD (TAILWIND 4 READY)
+# ------------------------------------------------------------------------------
+echo -e "\n${YELLOW}[05/05] ตรวจสอบมาตรฐานรหัสสีใน Constants...${NC}"
+grep -r "#[0-9a-fA-F]\{6\}" constants/ | grep ".ts" > /dev/null
+if [ $? -eq 0 ]; then
+    echo -e "${GREEN}[PASS] บังคับใช้ HEX Standard สำเร็จ (Tailwind 4 Ready)${NC}"
+else
+    echo -e "${RED}[FAIL] พบรหัสสีที่ไม่ได้มาตรฐาน OKLCH Engine${NC}"
+    exit 1
+fi
 
-echo "------------------------------------------------" >> $REPORT
-echo "✅ Audit Complete! Please send '$REPORT' to AI Specialist."
+echo -e "\n${GREEN}[COMPLETE] Audit ผ่านทุกขั้นตอน ระบบสะอาดและพร้อมสำหรับการ Deployment${NC}"

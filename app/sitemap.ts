@@ -1,10 +1,10 @@
 /**
- * [SEO INFRA]: SITEMAP_ORCHESTRATOR v17.9.203 (LINT_FIXED)
- * [STRATEGY]: Strict Type-Imports | Parallel Node Discovery | Zero-Unused
+ * [SEO INFRA]: SITEMAP_ORCHESTRATOR v18.0.4 (PATH_VALIDATED)
+ * [STRATEGY]: Strict Type-Imports | Parallel Node Discovery | Path Integrity
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { MetadataRoute } from "next"; // [FIXED]: Use 'import type'
+import type { MetadataRoute } from "next";
 
 // --- 1. Infrastructure Data (SSOT) ---
 import { MASTER_REGISTRY } from "@/constants/master-registry";
@@ -16,12 +16,12 @@ import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 /**
  * @function sitemap
- * @description เครื่องยนต์รวบรวม URL ทั้งหมดแบบ Dynamic พร้อมรองรับ SSG 100%
+ * @description เครื่องยนต์รวบรวม URL ทั้งหมดแบบ Dynamic พร้อมตรวจสอบความถูกต้องของ Path
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  // [FETCH]: ดึงข้อมูลจาก CMS แบบขนานเพื่อประสิทธิภาพสูงสุด (Parallel Processing)
+  // [FETCH]: ดึงข้อมูลจาก CMS แบบขนาน (Parallel Processing)
   const [posts, caseStudies] = await Promise.all([
     getAllPosts().catch(() => []),
     getAllCaseStudies().catch(() => []),
@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * -------------------------------------------------------
-   * GROUP 1: STATIC CORE ROUTES
+   * GROUP 1: STATIC CORE ROUTES (Verified via structure.txt)
    * -------------------------------------------------------
    */
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -38,7 +38,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/case-studies"), lastModified, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/blog"), lastModified, changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.7 },
-    { url: absoluteUrl("/contact"), lastModified, changeFrequency: "yearly", priority: 0.6 },
+    // [REMOVED]: /contact ถูกถอดออกเนื่องจากไม่พบ app/(main)/contact ในโครงสร้างไฟล์
+    { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: absoluteUrl("/terms"), lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   /**
@@ -50,24 +52,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: absoluteUrl(`/services/${service.templateSlug}`),
     lastModified,
     changeFrequency: "weekly",
-    priority: service.priority === 0 ? 1.0 : 0.9,
+    priority: 0.9,
   }));
 
   /**
    * -------------------------------------------------------
-   * GROUP 3: AREA NODES (Programmatic SEO - 37+ Provinces)
+   * GROUP 3: AREA NODES (Programmatic SEO - Local Context)
    * -------------------------------------------------------
    */
   const areaRoutes: MetadataRoute.Sitemap = AREA_NODES.map((area) => ({
     url: absoluteUrl(`/areas/${area.slug}`),
     lastModified,
     changeFrequency: "weekly",
+    // คำนวณ priority จาก area.priority (0-100) ให้อยู่ในเกณฑ์ 0.0-1.0
     priority: Number(((area.priority || 50) / 100).toFixed(1)),
   }));
 
   /**
    * -------------------------------------------------------
-   * GROUP 4: KNOWLEDGE GRAPH NODES (Blog & Success Stories)
+   * GROUP 4: KNOWLEDGE GRAPH NODES (Blog & Case Studies)
    * -------------------------------------------------------
    */
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({

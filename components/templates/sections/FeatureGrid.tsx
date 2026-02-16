@@ -34,22 +34,19 @@ const FeatureGridEngine = ({
   columns = 3,
   className,
 }: FeatureGridProps) => {
-  // [OPTIMIZATION]: Grid Layout Matrix
+  // [OPTIMIZATION]: Grid Layout Matrix แบบ Responsive
   const gridCols = {
     2: "grid-cols-1 md:grid-cols-2",
     3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
     4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
-  // [PHYSICS]: Staggered Animation Logic (จูนเพื่อความ Smooth)
+  // [PHYSICS]: Neural Staggered Animation Curve
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
@@ -58,22 +55,16 @@ const FeatureGridEngine = ({
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.16, 1, 0.3, 1], // Specialist Curve
-      },
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
     },
   };
 
   return (
     <section className={cn("relative overflow-hidden py-24 md:py-36", className)}>
-      {/* LAYER 00: INFRASTRUCTURE TEXTURE */}
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
       />
-
-      {/* Dynamic Aura Sync: ใช้ CSS Variable จาก LayoutEngine */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--brand-primary)_0%,transparent_70%)] opacity-[0.04] blur-3xl" />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
@@ -99,7 +90,7 @@ const FeatureGridEngine = ({
           )}
         </header>
 
-        {/* LAYER 02: GRID SYSTEM */}
+        {/* LAYER 02: GRID SYSTEM (UI Render Node) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -118,11 +109,10 @@ const FeatureGridEngine = ({
                 "transform-gpu will-change-transform",
               )}
             >
-              {/* Hover Aura Effect */}
               <div className="from-brand-primary/5 absolute inset-0 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative z-10">
-                {/* Icon Container */}
+                {/* ICON DYNAMIC RENDERER */}
                 <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] border transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12">
                   <IconRenderer name={feature.icon} size={32} strokeWidth={2} />
                 </div>
@@ -137,7 +127,7 @@ const FeatureGridEngine = ({
                 </div>
               </div>
 
-              {/* Technical Node Bottom Bar */}
+              {/* TECHNICAL NODE BOTTOM BAR */}
               {feature.technicalDetail && (
                 <div className="border-border text-text-muted relative z-10 mt-12 flex items-center justify-between border-t pt-8">
                   <span className="group-hover:text-brand-primary font-mono text-[9px] font-black tracking-[0.2em] uppercase opacity-50 transition-colors group-hover:opacity-100">

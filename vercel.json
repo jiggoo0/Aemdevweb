@@ -27,11 +27,6 @@
       "permanent": true
     },
     {
-      "source": "/templates/maintenance_page",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/templates/booking/hotel-resort-node",
       "destination": "/services/hotelresort",
       "permanent": true
@@ -42,23 +37,13 @@
       "permanent": true
     },
     {
-      "source": "/services/new-service-name",
-      "destination": "/services/local-authority",
+      "source": "/services/seo",
+      "destination": "/services/seo-agency",
       "permanent": true
     },
     {
       "source": "/blog/seo-for-sme-2025",
       "destination": "/blog/seo-2026-strategy",
-      "permanent": true
-    },
-    {
-      "source": "/(seo|blog)/technical-seo-guide",
-      "destination": "/blog/seo-2026-strategy",
-      "permanent": true
-    },
-    {
-      "source": "/case-studies/case-studies-2",
-      "destination": "/case-studies",
       "permanent": true
     },
     {
@@ -69,6 +54,11 @@
     {
       "source": "/seo/advanced-schema-markup",
       "destination": "/blog/advanced-schema-markup",
+      "permanent": true
+    },
+    {
+      "source": "/(seo|blog)/technical-seo-guide",
+      "destination": "/blog/technical-audit-protocol",
       "permanent": true
     },
     {
@@ -126,7 +116,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         }
       ]
     }
