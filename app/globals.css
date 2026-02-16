@@ -2,8 +2,8 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v17.9.112 (ULTIMATE_HARDENED)
- * [STRATEGY]: OKLCH Color Engine | Neural Physics | Adaptive Glass v2
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.2 (PERFORMANCE_HARDENED)
+ * [STRATEGY]: OKLCH Color Engine | GPU Acceleration | LCP Stabilization
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -14,7 +14,6 @@
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
   /* --- 02. COLOR PALETTE (OKLCH Dynamic Mapping) --- */
-  /* [UPGRADED]: ใช้ OKLCH บังคับเพื่อรองรับ Dynamic Opacity โดยสีไม่เพี้ยน */
   --color-brand-primary: oklch(var(--brand-primary-raw));
   --color-brand-secondary: oklch(var(--brand-secondary-raw));
   --color-brand-accent: oklch(var(--brand-accent-raw));
@@ -29,52 +28,34 @@
 
   --color-border: var(--border);
 
-  /* --- 03. DEPTH & LIGHTING (Hardened) --- */
+  /* --- 03. DEPTH & LIGHTING --- */
   --shadow-glow: 0 0 40px -10px oklch(var(--brand-primary-raw) / 0.5);
   --shadow-pro: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
-  --shadow-pro-xl: 0 24px 48px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -8px rgba(0, 0, 0, 0.08);
-
-  /* --- 04. MOTION PHYSICS (Neural Spring) --- */
-  --ease-specialist: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
   :root {
-    /* [OKLCH_COMPONENTS]: L (Lightness) C (Chroma) H (Hue) */
-    /* Red-Dominant Strategy: Hardened Red for Authority */
     --brand-primary-raw: 60% 0.25 25;
     --brand-secondary-raw: 50% 0.22 25;
     --brand-accent-raw: 75% 0.18 25;
 
-    /* Light Mode Surfaces */
     --surface-main: #ffffff;
     --surface-offset: #f8fafc;
     --surface-card: #ffffff;
 
-    /* Light Mode Text */
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
 
     --border: #e2e8f0;
     --radius: 0.75rem;
-
-    /* Shadcn/UI Compatibility Bridge */
-    --background: var(--surface-main);
-    --foreground: var(--text-primary);
-    --primary: oklch(var(--brand-primary-raw));
-    --primary-foreground: #ffffff;
-    --ring: oklch(var(--brand-primary-raw));
   }
 
   .dark {
-    /* Dark Mode Surfaces */
     --surface-main: #020617;
     --surface-offset: #0f172a;
     --surface-card: #1e293b;
 
-    /* Dark Mode Text */
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
@@ -89,8 +70,10 @@
     color: var(--text-primary);
     scroll-behavior: smooth;
 
-    /* [OPTICAL_TUNING]: เพิ่มความคมชัดสูงสุดของฟอนต์ */
-    text-rendering: optimizeLegibility;
+    /* [PERFORMANCE]: บังคับวาดภาพด้วย GPU และลดความซับซ้อนของการประมวลผลข้อความบน Mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed; /* */
     font-feature-settings: "cv11", "ss01", "zero", "tnum";
   }
 
@@ -99,30 +82,23 @@
     min-height: 100dvh;
     overflow-x: hidden;
     position: relative;
-    -webkit-font-smoothing: antialiased;
+
+    /* [OPTIMIZED]: ป้องกัน LCP พุ่งจากการใช้ Background-attachment: fixed บนมือถือ */
+    background-attachment: scroll;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      oklch(var(--brand-primary-raw) / 0.02) 0%,
+      transparent 100%
+    );
   }
 
-  /* [SCROLLBAR]: AEM-Signature Compact Bar */
+  /* [SCROLLBAR]: Compact Optimization */
   ::-webkit-scrollbar {
     width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
     background: color-mix(in oklch, var(--text-muted), transparent 60%);
     border-radius: 99px;
-    border: 1px solid transparent;
-    background-clip: content-box;
-    transition: background-color 0.3s;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--brand-primary);
-  }
-
-  ::selection {
-    background-color: oklch(var(--brand-primary-raw) / 0.15);
-    color: oklch(var(--brand-primary-raw));
   }
 }
 
@@ -131,17 +107,21 @@
     @apply mx-auto w-full max-w-[90rem] px-4 md:px-8;
   }
 
-  /* [GLASSMORPHISM]: Optimized Engine v2 */
+  /* [OPTIMIZED]: ปรับแก้ Glass Effect ลด Blur เหลือ 8px เพื่อช่วย GPU มือถือ */
   .glass-card {
     background-color: color-mix(in oklch, var(--surface-card), transparent 30%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    @supports (backdrop-filter: blur(1px)) {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
     border: 1px solid color-mix(in oklch, var(--border), transparent 50%);
-    box-shadow: var(--shadow-pro);
   }
 
-  .text-gradient {
-    @apply from-brand-primary to-brand-accent bg-gradient-to-r bg-clip-text text-transparent;
+  /* [CRITICAL]: คลาสสำหรับหยุด Animation บน LCP Element เพื่อให้ Google Bot วัดผลได้ทันที */
+  .lcp-priority {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
   .gpu-layer {

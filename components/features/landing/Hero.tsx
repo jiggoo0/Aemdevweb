@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v17.9.111 (LCP_STABILIZED)
- * [STRATEGY]: CSS-First Initial State | Neural Physics | Hydration Safety
+ * [FEATURE COMPONENT]: HERO_GATEWAY_NODE v18.0.2 (LCP_OPTIMIZED)
+ * [STRATEGY]: Zero-Delay Paint | CSS-First Visibility | GPU Accelerated Aura
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -13,24 +13,18 @@ import { motion, type Transition } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
-/**
- * @component Hero
- * @description จุดยุทธศาสตร์หลักในการนำเสนอคุณค่าแบรนด์และกระตุ้น Conversion ทันที
- */
 const Hero = () => {
   /**
    * [PHYSICS]: Neural Spring Transition
-   * ออกแบบมาให้ตอบสนองไว (0.6s) เพื่อความรู้สึกแบบ High-Performance
+   * ใช้เฉพาะกับส่วนประกอบที่ไม่ใช่ LCP (เช่น ปุ่ม และ Badge)
    */
   const sharedTransition: Transition = {
     duration: 0.6,
-    ease: [0.16, 1, 0.3, 1], // Custom Cubic Bezier สำหรับความพรีเมียม
+    ease: [0.16, 1, 0.3, 1],
   };
 
-  /** * [OPTIMIZED]: ป้องกัน Layout Shift (CLS)
-   * ใช้ opacity: 0.01 แทน 0 เพื่อให้ Browser จองพื้นที่ไว้ก่อน Hydration
-   */
   const fadeUp = {
     initial: { opacity: 0.01, y: 15 },
     animate: { opacity: 1, y: 0 },
@@ -38,22 +32,22 @@ const Hero = () => {
 
   return (
     <section className="relative flex min-h-[85dvh] flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40 md:pb-36">
-      {/* --- 01. INFRASTRUCTURE LAYER (CSS Pattern) --- */}
+      {/* --- 01. INFRASTRUCTURE LAYER (Optimized GPU Background) --- */}
       <div
-        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.04] select-none"
+        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 transform-gpu opacity-[0.04] select-none"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         aria-hidden="true"
       />
 
-      {/* Dynamic Ambient Aura (GPU Accelerated) */}
+      {/* Dynamic Ambient Aura (GPU Accelerated & Reduced Blur for Mobile) */}
       <div
-        className="absolute top-[10%] -right-[5%] z-0 h-[500px] w-[500px] transform-gpu rounded-full opacity-20 blur-[100px]"
+        className="absolute top-[10%] -right-[5%] z-0 h-[300px] w-[300px] transform-gpu rounded-full opacity-15 blur-[60px] md:h-[500px] md:w-[500px] md:opacity-20 md:blur-[100px]"
         style={{ background: "radial-gradient(circle, var(--brand-primary) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6">
-        {/* Node 01: Status Protocol Badge */}
+        {/* Node 01: Status Protocol Badge (Secondary Element) */}
         <motion.div
           initial={fadeUp.initial}
           animate={fadeUp.animate}
@@ -66,18 +60,22 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Node 02: Main Messaging Matrix (LCP Element) */}
+        {/* Node 02: Main Messaging Matrix (CRITICAL LCP ELEMENT) */}
         <div className="max-w-7xl space-y-12">
-          <motion.h1
-            initial={fadeUp.initial}
-            animate={fadeUp.animate}
-            transition={{ ...sharedTransition, delay: 0.05 }}
-            className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic transition-opacity duration-300 md:text-8xl lg:text-[7.5rem]"
+          {/* [FIXED]: เปลี่ยนจาก motion.h1 เป็น h1 ปกติ พร้อมใช้คลาส lcp-priority
+            เพื่อป้องกันอาการ "ค้าง" ของ Animation ในช่วง Hydration ที่ทำให้ LCP ช้า
+          */}
+          <h1
+            className={cn(
+              "lcp-priority", // บังคับแสดงผลทันที
+              "text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]",
+            )}
           >
             <span className="text-brand-primary mr-4 block md:inline">AEMDEVWEB</span>
             {SITE_CONFIG.hero.title.replace("AEMDEVWEB", "")}
-          </motion.h1>
+          </h1>
 
+          {/* คำอธิบายรอง ใช้ motion ได้เนื่องจากไม่ใช่จุดที่ Google ใช้วัด LCP หลัก */}
           <motion.div
             initial={fadeUp.initial}
             animate={fadeUp.animate}
@@ -94,7 +92,7 @@ const Hero = () => {
         <motion.div
           initial={fadeUp.initial}
           animate={fadeUp.animate}
-          transition={{ ...sharedTransition, delay: 0.15 }}
+          transition={{ ...sharedTransition, delay: 0.2 }}
           className="mt-16 flex flex-col gap-6 md:flex-row md:items-center"
         >
           <Button

@@ -11,11 +11,7 @@
     "eslint-plugin-tailwindcss"
   ],
   "next": {
-    "entry": [
-      "next.config.ts",
-      "app/**/*.{ts,tsx}",
-      "lib/cms.ts"
-    ]
+    "entry": ["next.config.ts", "app/**/*.{ts,tsx}", "lib/cms.ts"]
   },
   "project": ["**/*.{ts,tsx}"]
 }

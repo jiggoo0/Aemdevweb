@@ -1,6 +1,6 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v17.9.114 (GLOBAL_ORCHESTRATION)
- * [STRATEGY]: Strict Type-Safety | Resource Prioritization | Global Conversion Anchor
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v18.0.3 (STABILIZED)
+ * [STRATEGY]: Server-Client Boundary Isolation | E-E-A-T Signal | Performance Hardened
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -14,16 +14,15 @@ import { generateSchemaGraph } from "@/lib/schema";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-// --- Core Providers & UI Elements ---
+// --- Components (Server Side / Critical) ---
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import { TopLoader } from "@/components/layout/TopLoader";
-import { Toaster } from "@/components/ui/Sonner";
 import JsonLd from "@/components/seo/JsonLd";
 
-// --- Shared Feature Components ---
-import LineStickyButton from "@/components/shared/LineStickyButton";
+// --- [STABILIZED]: Client Bridge Infrastructure ---
+// ย้าย Non-critical UI ที่ต้องใช้ ssr: false ไปไว้ในคอมโพเนนต์นี้เพื่อแก้ปัญหา Build Error
+import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
 
-/* --- 01. FONT ORCHESTRATION --- */
+/* --- 01. FONT ORCHESTRATION (Hardened Trimming) --- */
 const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -32,14 +31,15 @@ const fontSans = Inter({
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "600", "700"], // Trimming weights เพื่อลด Payload 40%
   subsets: ["thai"],
   variable: "--font-thai",
   display: "swap",
   preload: true,
+  adjustFontFallback: true,
 });
 
-/* --- 02. METADATA ENGINE --- */
+/* --- 02. METADATA ENGINE (E-E-A-T Strategy) --- */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),
   title: {
@@ -51,11 +51,6 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
   creator: SITE_CONFIG.expert.displayName,
   publisher: SITE_CONFIG.brandName,
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
   icons: {
     icon: [{ url: "/favicon.ico" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
@@ -67,32 +62,12 @@ export const metadata: Metadata = {
     title: SITE_CONFIG.project.title,
     description: SITE_CONFIG.description,
     siteName: SITE_CONFIG.brandName,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_CONFIG.brandName,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_CONFIG.project.title,
-    description: SITE_CONFIG.description,
-    creator: SITE_CONFIG.expert.twitterHandle,
-    images: [SITE_CONFIG.ogImage],
+    images: [{ url: SITE_CONFIG.ogImage, width: 1200, height: 630, alt: SITE_CONFIG.brandName }],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 
@@ -104,7 +79,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  userScalable: true,
 };
 
 /* --- 03. ROOT LAYOUT DEFINITION --- */
@@ -113,7 +87,7 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  // [SEO]: Initialize Global Knowledge Graph (Organization & Website)
+  // [SEO]: Initialize Global Knowledge Graph
   const schemaGraph = generateSchemaGraph([]);
 
   return (
@@ -123,14 +97,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
     >
       <head>
-        {/* [CRITICAL_ASSET]: Preload LCP-breaking grid pattern */}
-        <link
-          rel="preload"
-          href="/grid-pattern.svg"
-          as="image"
-          type="image/svg+xml"
-          fetchPriority="high"
-        />
         <JsonLd data={schemaGraph} />
       </head>
 
@@ -147,23 +113,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          {/* [UI]: Persistent Perceived Performance Layer */}
-          <TopLoader color={SITE_CONFIG.themeColor} />
-
-          {/* [STRUCTURE]: Primary Content Engine */}
-          <div id="root-container" className="relative flex min-h-dvh flex-col overflow-x-hidden">
-            {children}
-          </div>
-
-          {/* [CONVERSION]: Global Line Sticky Button Anchor
-              ปุ่มนี้จะลอยอยู่ในระดับสูงสุดของระบบเพื่อรองรับการติดต่อจากทุกหน้า
+          {/* [SOLUTION]: Client-side Infrastructure 
+              ห่อหุ้ม TopLoader, LineButton, และ Toaster ไว้ในที่เดียว
+              เพื่อรองรับ Dynamic Import (ssr: false) ได้อย่างถูกต้อง
           */}
-          <LineStickyButton />
+          <ClientInfrastructure />
 
-          {/* [FEEDBACK]: Global Notification Provider */}
-          <Toaster position="top-center" richColors expand={false} closeButton />
+          <main id="root-container" className="relative flex min-h-dvh flex-col overflow-x-hidden">
+            {children}
+          </main>
 
-          {/* [INSIGHTS]: Performance Observability */}
+          {/* [ANALYTICS]: Performance Monitoring */}
           <SpeedInsights />
         </ThemeProvider>
       </body>

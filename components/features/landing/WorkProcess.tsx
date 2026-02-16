@@ -1,6 +1,7 @@
 /**
- * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v17.9.29 (REFINED_DIMENSIONS)
- * [STRATEGY]: Refined Typography | Neural Spacing | Zero-Jitter UI
+ * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v18.0.3 (PERFORMANCE_HARDENED)
+ * [STRATEGY]: Adaptive Blur | GPU Accelerated Transitions | Zero-CLS Infrastructure
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -59,10 +60,10 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
 ];
 
 const WorkProcess = () => {
-  const [isClient, setIsClient] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setIsClient(true);
+    setMounted(true);
   }, []);
 
   return (
@@ -103,7 +104,7 @@ const WorkProcess = () => {
 
       {/* --- 02. PROCESS NODES --- */}
       <div className="relative grid gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4 lg:gap-8">
-        {/* Signal Flow Connector */}
+        {/* Signal Flow Connector (Hidden on Mobile for Performance) */}
         <div
           className="from-brand-primary/20 via-brand-primary/40 to-brand-primary/20 absolute top-20 left-0 hidden h-px w-full bg-gradient-to-r lg:block"
           aria-hidden="true"
@@ -112,33 +113,36 @@ const WorkProcess = () => {
         {PROCESS_STEPS.map((step, index) => (
           <motion.div
             key={step.id}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="group relative"
           >
             <div
               className={cn(
-                "border-border bg-surface-card/60 hover:border-brand-primary/40 relative z-10 flex h-full flex-col overflow-hidden rounded-[2rem] border p-8 backdrop-blur-xl transition-all duration-700 md:rounded-[2.5rem] md:p-10",
-                "hover:shadow-glow transform-gpu will-change-transform hover:-translate-y-3",
+                "border-border bg-surface-card/60 relative z-10 flex h-full flex-col overflow-hidden border p-8 transition-all duration-700 md:p-10",
+                "rounded-[2rem] md:rounded-[2.5rem]",
+                "hover:border-brand-primary/40 hover:shadow-glow transform-gpu will-change-transform hover:-translate-y-2",
+                /* [ADAPTIVE_BLUR]: ลดค่า Blur บน Mobile เพื่อช่วย GPU */
+                "backdrop-blur-md md:backdrop-blur-xl",
               )}
             >
-              {/* [REFINED NODE]: ปรับขนาดตัวเลขเลเยอร์หลังให้เล็กลงและคมชัดขึ้น */}
+              {/* Node ID Background */}
               <span
                 suppressHydrationWarning
-                className="text-border/10 group-hover:text-brand-primary/20 pointer-events-none absolute top-4 right-6 z-0 font-mono text-5xl font-black italic transition-all duration-700 md:text-7xl"
-                style={{
-                  opacity: isClient ? undefined : 0,
-                  visibility: isClient ? "visible" : "hidden",
-                }}
+                className={cn(
+                  "pointer-events-none absolute top-4 right-6 z-0 font-mono text-5xl font-black italic transition-all duration-700 md:text-7xl",
+                  "text-border/10 group-hover:text-brand-primary/20",
+                  !mounted && "opacity-0",
+                )}
               >
                 {step.id}
               </span>
 
               {/* Icon Matrix */}
               <div className="relative z-10 mb-8 flex items-center justify-between md:mb-12">
-                <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border flex h-14 w-14 items-center justify-center rounded-[1.25rem] border transition-all duration-500 group-hover:rotate-[10deg] md:h-16 md:w-16">
+                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-[1.25rem] border transition-all duration-500 group-hover:rotate-[10deg] md:h-16 md:w-16">
                   <IconRenderer
                     name={step.icon}
                     size={28}
@@ -149,7 +153,7 @@ const WorkProcess = () => {
                 <div className="bg-brand-primary h-1.5 w-1.5 rounded-full opacity-30 group-hover:animate-ping group-hover:opacity-100" />
               </div>
 
-              {/* Textual Content */}
+              {/* Content Hub */}
               <div className="relative z-10 mb-8 flex-grow space-y-3 md:mb-10 md:space-y-4">
                 <div className="space-y-1">
                   <p className="text-text-muted font-mono text-[8px] font-black tracking-[0.3em] uppercase opacity-50 md:text-[9px]">
@@ -164,7 +168,7 @@ const WorkProcess = () => {
                 </p>
               </div>
 
-              {/* Metric Verification */}
+              {/* Status Verification */}
               <div className="border-border relative z-10 mt-auto border-t pt-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-brand-primary/20 flex h-4 w-4 items-center justify-center rounded-full md:h-5 md:w-5">
@@ -183,7 +187,7 @@ const WorkProcess = () => {
       {/* --- 03. CONVERSION GATEWAY --- */}
       <div className="mt-20 flex flex-col items-center text-center md:mt-32">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="max-w-4xl space-y-10 md:space-y-12"
@@ -196,7 +200,7 @@ const WorkProcess = () => {
             <Button
               asChild
               size="lg"
-              className="group bg-text-primary text-surface-main hover:bg-brand-primary hover:shadow-glow h-16 w-full rounded-full px-10 transition-all duration-500 hover:scale-110 active:scale-95 md:h-20 md:w-auto md:px-16"
+              className="group bg-text-primary text-surface-main hover:bg-brand-primary hover:shadow-glow h-16 w-full transform-gpu rounded-full px-10 transition-all duration-500 hover:scale-105 md:h-20 md:w-auto md:px-16"
             >
               <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                 <span className="mr-4 text-[10px] font-black tracking-[0.3em] uppercase md:text-xs md:tracking-[0.4em]">

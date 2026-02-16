@@ -2,7 +2,7 @@
 ├── .gitignore
 ├── .npmrc
 ├── .prettierrc
-├── AEMDEVWEB-STRUCTURE.txt
+├── README.md
 ├── app
 │   ├── (business)
 │   │   ├── areas
@@ -231,8 +231,10 @@
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml
 ├── postcss.config.mjs
+├── service-account.json
 ├── structure.txt
 ├── tsconfig.json
+├── tsconfig.tsbuildinfo
 ├── types
 │   ├── index.d.ts
 │   └── template-props.ts
