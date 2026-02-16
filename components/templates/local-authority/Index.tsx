@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE]: LOCAL_AUTHORITY_ORCHESTRATOR v18.1.1 (HUMAN_CENTRIC_PATCH)
- * [STRATEGY]: Hyper-Local Authority | Defensive Rendering | Dynamic District Hook
+ * [TEMPLATE]: LOCAL_AUTHORITY_ORCHESTRATOR v18.1.2 (STRICT_ARRAY_SAFETY)
+ * [STRATEGY]: Hyper-Local Authority | Defensive Rendering | Named Import Standard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -14,7 +14,7 @@ import type { UniversalTemplateProps } from "@/types";
 
 // --- Modular Component Registry ---
 import { GeoNodeHeader } from "./_components/GeoNodeHeader";
-import { DistrictHero } from "./_components/DistrictHero"; // [NEW_COMPONENT]
+import { DistrictHero } from "./_components/DistrictHero"; 
 import { LocalMapNode } from "./_components/LocalMapNode";
 import { LocalInsight } from "./_components/LocalInsight";
 import { MarketIntelligence } from "./_components/MarketIntelligence";
@@ -25,9 +25,11 @@ import { RegionalAction } from "./_components/RegionalAction";
 import { DynamicFAQ } from "../sections/DynamicFAQ";
 
 const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
+  // [SEO_ENGINE]: ประมวลผล Semantic Schema สำหรับ Google
   const schema = useMemo(() => generateUniversalSchema(data), [data]);
   const provinceName = data.province || "THAILAND";
 
+  // [DATA_GUARD]: แผนสำรองข้อมูลบริบทท้องถิ่น
   const context = data.localContext || {
     marketInsight: `บริการรับทำเว็บไซต์และตลาดยุคใหม่สำหรับพื้นที่ ${provinceName} โดยผู้เชี่ยวชาญเฉพาะทาง`,
     painPoints: [],
@@ -40,6 +42,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
       <JsonLd data={schema} />
 
       <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
+        
         {/* --- Phase 01: Identification --- */}
         <GeoNodeHeader
           province={provinceName}
@@ -48,10 +51,14 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           lng={data.coordinates?.lng}
         />
 
-        {/* --- Phase 01.5: [NEW] Local Hook Experience --- 
-            ใช้ Component สุ่มรายชื่ออำเภอเพื่อสร้างความรู้สึก "เฉพาะคุณ" (Personalization)
+        {/* --- Phase 01.5: Local Hook Experience --- 
+            [STRATEGY]: Personalization ผ่านระบบ Shuffle ชื่ออำเภอ
+            [CHECK]: บังคับส่ง Array อย่างน้อย 1 ค่าเสมอเพื่อความเสถียรของเครื่องยนต์เรนเดอร์
         */}
-        <DistrictHero districts={data.districts || []} province={provinceName} />
+        <DistrictHero 
+          districts={data.districts && data.districts.length > 0 ? data.districts : ["เมือง"]} 
+          province={provinceName} 
+        />
 
         {/* --- Phase 02: Geographical Proof --- */}
         <LocalMapNode
@@ -62,7 +69,10 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
         {/* --- Phase 03: Market Analysis --- */}
         <div className="space-y-0">
-          <LocalInsight insight={context.marketInsight} painPoints={context.painPoints || []} />
+          <LocalInsight 
+            insight={context.marketInsight} 
+            painPoints={context.painPoints || []} 
+          />
 
           <MarketIntelligence
             level={context.competitorLevel || "medium"}
@@ -84,9 +94,10 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         {/* --- Phase 05: Local Conversion --- */}
         <RegionalAction province={provinceName} />
 
+        {/* --- SYSTEM FOOTER --- */}
         <footer className="py-8 text-center opacity-10">
           <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
-            PSEO_Node_Active.v18.1.1_{provinceName.toUpperCase()}
+            PSEO_Node_Active.v18.1.2_{provinceName.toUpperCase()}
           </p>
         </footer>
       </main>
