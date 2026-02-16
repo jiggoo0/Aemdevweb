@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v18.0.1 (HYDRATION_SAFE)
- * [STRATEGY]: SSOT (Force WWW) | Edge-Ready Redirects | Termux Stability
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.120 (ULTIMATE_OPTIMIZED)
+ * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -25,107 +25,111 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  // [OPTIMIZATION]: เร่งความเร็ว Core Web Vitals
   reactStrictMode: true,
   compress: true,
-  poweredByHeader: false,
-  
-  // [COMPILER_HARDENING]: กำจัด Payload ส่วนเกินใน Production
+
+  // [COMPILER_HARDENING]: กำจัด Unused JS เพื่อลด Payload
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
 
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_OPTIMIZATION]: ป้องกัน Android OOM Kill สำหรับสภาพแวดล้อมทรัพยากรต่ำ
+    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process
     workerThreads: false,
     cpus: isVercel ? undefined : 1,
+
     optimizePackageImports: [
-      "lucide-react", "framer-motion", "@radix-ui/react-slot", 
-      "tailwindcss-animate", "date-fns", "clsx", "tailwind-merge"
+      "lucide-react",
+      "framer-motion",
+      "@radix-ui/react-slot",
+      "tailwindcss-animate",
+      "date-fns",
+      "clsx",
+      "tailwind-merge",
     ],
     mdxRs: isVercel,
   },
 
   images: {
-    // [FIXED]: ตัด 2048px ออกเพื่อแก้ปัญหา Hydration Mismatch บน Environment ที่จำกัด (Termux)
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920], 
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    
+
     remotePatterns: [
-      { protocol: "https", hostname: "www.aemdevweb.com" },
-      { protocol: "https", hostname: "aemdevweb.com" },
-      { protocol: "https", hostname: "lh3.googleusercontent.com" } // รองรับ Google Avatar
+      {
+        protocol: "https",
+        hostname: "www.aemdevweb.com",
+      },
     ],
   },
 
-  async redirects() {
-    return [
-      // [SEO_FORCE_WWW]: บังคับใช้ WWW ให้สอดคล้องกับ SITE_CONFIG เพื่อป้องกัน Duplicate Content
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "aemdevweb.com" }],
-        destination: "https://www.aemdevweb.com/:path*",
-        permanent: true,
-      },
-      // [CONTENT_MIGRATION]: รักษาค่า Ranking จาก URL เก่า
-      { source: "/areas/web-design-phang-nga-local-authority", destination: "/areas/phang-nga", permanent: true },
-      { source: "/areas/undefined", destination: "/areas", permanent: true },
-      {
-        source: "/services/:path(corporate-lite|corporate-pro|corporate_lite|corporate_pro|starter_landing)",
-        destination: "/services/corporate",
-        permanent: true,
-      },
-      {
-        source: "/templates/:path(event-magic|corporate-standard|event_magic|corporate_standard|restaurant_cafe|invert_image)",
-        destination: "/services/corporate",
-        permanent: true,
-      },
-      { source: "/templates/booking/hotel-resort-node", destination: "/services/hotelresort", permanent: true },
-      {
-        source: "/templates/:path(local-service|local_service|new-service-name|new_service_name)",
-        destination: "/services/local-authority",
-        permanent: true,
-      },
-      { source: "/services/seo", destination: "/services/seo-agency", permanent: true },
-      { source: "/blog/seo-for-sme-2025", destination: "/blog/seo-2026-strategy", permanent: true },
-      { source: "/seo/core-web-vitals-speed", destination: "/blog/core-web-vitals-speed", permanent: true },
-      { source: "/seo/advanced-schema-markup", destination: "/blog/advanced-schema-markup", permanent: true },
-      { source: "/:path(seo|blog)/technical-seo-guide", destination: "/blog/technical-audit-protocol", permanent: true },
-      { source: "/seo/:path*", destination: "/blog/:path*", permanent: true },
-      { source: "/old-service-path", destination: "/services", permanent: true },
-    ];
-  },
-
+  // [SEO_ARCHITECTURE]: Headers Management
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
       { key: "X-Content-Type-Options", value: "nosniff" },
-      { key: "X-Frame-Options", value: "DENY" },
-      { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
     ];
 
     if (process.env.VERCEL_ENV !== "production") {
-      securityHeaders.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });
+      securityHeaders.push({
+        key: "X-Robots-Tag",
+        value: "noindex, nofollow",
+      });
     }
 
     return [
-      { source: "/:path*", headers: securityHeaders },
       {
-        source: "/(images|fonts|_next/static)/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+        source: "/:path*",
+        headers: securityHeaders,
+      },
+      // [NEW: EDGE_HTML_CACHE]: บังคับให้ Edge Network เก็บหน้าหลักไว้ถาวรจนกว่าจะมีการ Revalidate
+      {
+        source: "/(about|services|areas|blog|case-studies|privacy|terms)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60",
+          },
+        ],
+      },
+      // [OPTIMIZED_IMAGE_CACHE]: สำหรับรูปภาพที่รีไซส์แล้ว
+      {
+        source: "/_next/image/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      // [STATIC_ASSET_CACHE]: สำหรับไฟล์ดิบใน public/
+      {
+        source: "/(images|fonts)/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
     ];
   },
 
   webpack: (config, { dev }) => {
-    if (!isVercel) config.cache = false;
+    if (!isVercel) {
+      config.cache = false;
+    }
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,
