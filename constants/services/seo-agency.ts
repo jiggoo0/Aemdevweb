@@ -11,7 +11,7 @@ export const seoAgencyService: TemplateMasterData = {
   title: "Technical SEO & Authority Building | ยึดพื้นที่ทำเลทองบน Google ด้วยวิศวกรรมข้อมูล",
   description:
     "เลิกเอาเงินไปละลายกับค่าโฆษณาที่แพงขึ้นทุกวัน เปลี่ยนเว็บไซต์ของคุณให้เป็นพนักงานขายมือหนึ่งที่ทำงานตลอด 24 ชั่วโมง ด้วยการปรับจูนโครงสร้างหลังบ้านให้ถูกหลัก Google และสร้างเนื้อหาที่ลูกค้าค้นหาเจอในวันที่เขาพร้อมจ่ายเงิน",
-  image: "/images/service/seo-agency-node.webp",
+  image: "/images/services/seo-agency-node.webp",
   templateSlug: "seo-agency",
   category: "business",
   price: "19,500",

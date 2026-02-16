@@ -12,7 +12,7 @@ export const hotelResortService: TemplateMasterData = {
     "Luxury Hotel & Resort Website | เปลี่ยนยอดวิวเป็นยอดจองตรง เลิกจ่ายค่าคอมฯ OTA โดยไม่จำเป็น",
   description:
     "หยุดเฉือนกำไร 15-20% ให้กับเว็บนายหน้า (OTA) สร้างอาณาจักรดิจิทัลของคุณเองด้วยเว็บไซต์โรงแรมระดับ High-End ที่ถ่ายทอดประสบการณ์การพักผ่อนได้เหนือกว่า และเปลี่ยนผู้ชมให้กลายเป็นแขกที่กดจองตรงกับคุณทันที",
-  image: "/images/service/hotel-resort-node.webp",
+  image: "/images/services/hotel-resort-node.webp",
   templateSlug: "hotelresort",
   category: "business",
   price: "16,900",

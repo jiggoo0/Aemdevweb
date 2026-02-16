@@ -11,7 +11,7 @@ export const catalogService: TemplateMasterData = {
   title: "รับทำเว็บแคตตาล็อกสินค้าออนไลน์ | โชว์รูม 24 ชม. ปิดดีลใหญ่ได้ไวกว่าเดิม",
   description:
     "เปลี่ยนสินค้าหลักพันชิ้นให้เป็นโชว์รูมออนไลน์ที่ดูง่าย เซลส์แฮปปี้ ลูกค้ากดขอใบเสนอราคาสบาย ไม่ต้องส่งไฟล์ PDF ให้หนักเครื่องอีกต่อไป โดย นายเอ็มซ่ามากส์",
-  image: "/images/service/catalog-node.webp",
+  image: "/images/services/catalog-node.webp",
   templateSlug: "catalog",
   category: "ecommerce",
   price: "16,900",

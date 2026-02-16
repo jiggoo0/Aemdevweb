@@ -1,4 +1,3 @@
-cat << 'EOF' > scripts/standardize-paths.sh
 #!/bin/bash
 # AEMZA MACKS - GLOBAL PATH STANDARDIZATION v1.1
 
@@ -28,7 +27,3 @@ find . -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.mdx" \) -not -path "
 echo "✅ All code references updated to Plural."
 echo "--------------------------------"
 echo "🚀 Standardizing complete. Run audit-system.sh to verify."
-EOF
-
-chmod +x scripts/standardize-paths.sh
-./scripts/standardize-paths.sh

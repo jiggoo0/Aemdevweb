@@ -282,55 +282,55 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
-  "/images/service/bio-node.webp": {
+  "/images/services/bio-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAgABUB8JYwCdADc9U44QAD+5a3vLwE2CvtSvGyaza+hIrPt9vL8MAA=",
     width: 1024,
     height: 768,
   },
-  "/images/service/catalog-node.webp": {
+  "/images/services/catalog-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
-  "/images/service/corporate-node.webp": {
+  "/images/services/corporate-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
-  "/images/service/default.webp": {
+  "/images/services/default.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAgABUB8JYwCdADc9U44QAD+5a3vLwE2CvtSvGyaza+hIrPt9vL8MAA=",
     width: 1024,
     height: 768,
   },
-  "/images/service/hotel-resort-node.webp": {
+  "/images/services/hotel-resort-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
-  "/images/service/local-node.webp": {
+  "/images/services/local-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
-  "/images/service/personal-node.webp": {
+  "/images/services/personal-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO62XxaCgAA=",
     width: 1024,
     height: 768,
   },
-  "/images/service/salepage-node.webp": {
+  "/images/services/salepage-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO62XxaCgAA=",
     width: 1024,
     height: 768,
   },
-  "/images/service/seo-agency-node.webp": {
+  "/images/services/seo-agency-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,

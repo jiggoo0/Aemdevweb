@@ -1,7 +1,6 @@
 /**
  * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.121 (STABLE_RELEASE)
- * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [STRATEGY]: Diagnostic Mode - Bypass Security & Optimization Logic
  */
 
 import nextMDX from "@next/mdx";
@@ -21,20 +20,9 @@ const withMDX = nextMDX({
   },
 });
 
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
-
-  compiler: {
-    removeConsole: isProduction ? { exclude: ["error"] } : false,
-  },
-
-  productionBrowserSourceMaps: false,
-  poweredByHeader: false,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   experimental: {
@@ -42,30 +30,25 @@ const nextConfig: NextConfig = {
     workerThreads: false,
     cpus: isVercel ? undefined : 1,
     optimizePackageImports: [
-      "lucide-react",
-      "framer-motion",
-      "@radix-ui/react-slot",
-      "tailwindcss-animate",
-      "date-fns",
-      "clsx",
-      "tailwind-merge",
+      "lucide-react", "framer-motion", "@radix-ui/react-slot",
+      "tailwindcss-animate", "date-fns", "clsx", "tailwind-merge",
     ],
     mdxRs: isVercel,
   },
 
-  // [ASSET_ARCHITECTURE]: Optimized for Local FS & Edge Caching
   images: {
+    // [TEST_OPTION]: หากแก้แล้วรูปยังไม่ขึ้น ให้เปลี่ยน false เป็น true 
+    // เพื่อข้ามระบบ Optimize ของ Vercel ทั้งหมด (จะรู้ทันทีว่าปัญหาอยู่ที่ Quota หรือ Path)
+    unoptimized: false, 
+
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
-
-    // [SECURITY]: Restricted to Self + Base64 + Trusted Protocols
-    contentSecurityPolicy:
-      "default-src 'self'; script-src 'none'; img-src 'self' data: https: blob:; sandbox;",
-
-    // [REMOTE_PATTERNS]: Removed self-referencing domains to avoid Internal Fetch overhead
+    
+    // [FIXED]: ลบ sandbox; ออกเพื่อป้องกัน Browser Block การเรนเดอร์รูป
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; img-src 'self' data: https: blob:;",
     remotePatterns: [],
   },
 
@@ -81,45 +64,14 @@ const nextConfig: NextConfig = {
       securityHeaders.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });
     }
 
-    const cachingGroup = "(about|services|areas|blog|case-studies|privacy|terms)";
-
     return [
       { source: "/:path*", headers: securityHeaders },
-      {
-        source: `/:slug${cachingGroup}`,
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60",
-          },
-        ],
-      },
-      // [EDGE_IMAGE_OPTIMIZATION]: Long-term retention for optimized assets
-      {
-        source: "/_next/image/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
       {
         source: "/images/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
     ];
   },
-
-  webpack: (config, { dev }) => {
-    // [RESOURCE_GUARD]: Disable caching on Termux/Mobile to prevent storage bloat
-    if (!isVercel) {
-      config.cache = false;
-    }
-    if (dev && !isVercel) {
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 500,
-        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**", "**/structure.txt"],
-      };
-    }
-    return config;
-  },
 };
 
-export default withBundleAnalyzer(withMDX(nextConfig));
+export default bundleAnalyzer({ enabled: process.env.ANALYZE === "true" })(withMDX(nextConfig));

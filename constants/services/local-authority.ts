@@ -13,7 +13,7 @@ export const localAuthorityService: TemplateMasterData = {
   description:
     "เปลี่ยนหมุดธุรกิจของคุณให้เป็นแม่เหล็กดูดเงิน ด้วยกลยุทธ์ Local SEO ที่จะดันร้านคุณขึ้นอันดับ 1-3 ใน 'Google Map Pack' ตัดหน้าคู่แข่งที่ยิงแอด โดยไม่ต้องเสียค่าโฆษณาสักบาท",
 
-  image: "/images/service/local-node.webp",
+  image: "/images/services/local-node.webp",
   templateSlug: "local-authority",
   category: "business",
 

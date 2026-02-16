@@ -12,7 +12,7 @@ export const corporateService: TemplateMasterData = {
     "Corporate Identity Website | ยกระดับภาพลักษณ์องค์กรสู่สากล เปลี่ยนผู้เยี่ยมชมให้เป็นคู่ค้าทางธุรกิจ",
   description:
     "เว็บไซต์ไม่ใช่แค่โบรชัวร์ออนไลน์ แต่คือสำนักงานใหญ่บนโลกดิจิทัลที่เปิดต้อนรับนักลงทุนและลูกค้าตลอด 24 ชั่วโมง หยุดเสี่ยงกับเว็บไซต์ราคาถูกที่ทำลายความน่าเชื่อถือ เปลี่ยนมาใช้เว็บไซต์มาตรฐาน Enterprise ที่มีความปลอดภัยสูง ดีไซน์สะท้อนตัวตนผู้นำ และรองรับการเติบโตของธุรกิจในอนาคต",
-  image: "/images/service/corporate-node.webp",
+  image: "/images/services/corporate-node.webp",
   templateSlug: "corporate",
   category: "business",
   price: "9,900",

@@ -22,7 +22,7 @@ export const metadata: Metadata = constructMetadata({
   description:
     "รวมโซลูชันเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจยุคใหม่ ตั้งแต่ Sale Page ไปจนถึงเว็บองค์กรมาตรฐานสากล เน้นโหลดไว ติดหน้าแรก Google และปิดการขายได้จริง โดย AEMZA MACKS",
   path: "/services",
-  image: "/images/service/corporate-node.webp",
+  image: "/images/services/corporate-node.webp",
 });
 
 export default function ServicesPage() {

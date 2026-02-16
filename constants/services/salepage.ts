@@ -11,7 +11,7 @@ export const salePageService: TemplateMasterData = {
   title: "High-Conversion Sale Page | ปิดการขายไว ยิงแอดแม่น ไม่โดนปิดกั้น",
   description:
     "หยุดตำน้ำพริกละลายแม่น้ำกับค่าแอดที่แพงหูฉี่ เปลี่ยนงบโฆษณาให้เป็นยอดโอนด้วย Sale Page โครงสร้างคลีนที่โหลดไวระดับปีศาจ รองรับ Conversion API 100% ช่วยให้ AI ของ Facebook และ TikTok นำส่งแม่นยำขึ้น และเปลี่ยนคนดูขาจรให้กลายเป็นลูกค้าทันที",
-  image: "/images/service/salepage-node.webp",
+  image: "/images/services/salepage-node.webp",
   templateSlug: "salepage",
   category: "landing",
   price: "3,500",

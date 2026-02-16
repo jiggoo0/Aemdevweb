@@ -32,7 +32,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
   }, [data]);
 
   // [IMAGE_ENGINE]: จัดการ Visual Layer และป้องกัน Layout Shift (CLS)
-  const imageSource = useMemo(() => data.image || "/images/service/default.webp", [data.image]);
+  const imageSource = useMemo(() => data.image || "/images/services/default.webp", [data.image]);
   const imgData = IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null;
 
   // [COMMERCIAL_LOGIC]: ระบบแสดงราคาแบบ Hybrid (ตัวเลขจริง vs ใบเสนอราคา)

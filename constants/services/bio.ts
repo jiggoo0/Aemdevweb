@@ -12,7 +12,7 @@ export const bioService: TemplateMasterData = {
     "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI และ Google จดจำในชื่อที่คุณต้องการ",
   description:
     "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ โดย นายเอ็มซ่ามากส์",
-  image: "/images/service/bio-node.webp",
+  image: "/images/services/bio-node.webp",
   templateSlug: "bio",
   category: "personal",
   price: "4,900",
