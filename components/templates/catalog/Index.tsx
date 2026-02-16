@@ -39,7 +39,7 @@ type CatalogNode = {
  * @description ศูนย์กลางการบริหารจัดการ Node ข้อมูลและอัตลักษณ์เฉพาะพื้นที่แบบ Type-Safe
  */
 const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
-  // [STATE_MANAGEMENT]: ประมวลผลสถานะการเลือก Node 
+  // [STATE_MANAGEMENT]: ประมวลผลสถานะการเลือก Node
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedNode, setSelectedNode] = useState<CatalogNode | null>(null);
 
@@ -71,8 +71,7 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
     const lowerTerm = searchTerm.toLowerCase();
     return allNodes.filter(
       (n) =>
-        n.name.toLowerCase().includes(lowerTerm) || 
-        n.description.toLowerCase().includes(lowerTerm),
+        n.name.toLowerCase().includes(lowerTerm) || n.description.toLowerCase().includes(lowerTerm),
     );
   }, [allNodes, searchTerm]);
 
@@ -82,11 +81,7 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
       <div className="container mx-auto px-4 py-20">
         {/* --- Phase 01: Status & Navigation --- */}
-        <CatalogHeader 
-          title={data.title} 
-          subtitle={data.description} 
-          nodeCount={allNodes.length} 
-        />
+        <CatalogHeader title={data.title} subtitle={data.description} nodeCount={allNodes.length} />
 
         {/* --- Phase 02: Search & Filter Interface --- */}
         <SearchOrchestrator value={searchTerm} onChange={setSearchTerm} />

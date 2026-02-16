@@ -38,7 +38,6 @@ const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
       <JsonLd data={schema} />
 
       <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
-        
         {/* --- Phase 01: Strategic Intent --- 
             แสดงวิสัยทัศน์และพันธกิจขององค์กรในรูปแบบพรีเมียม
         */}
@@ -84,7 +83,7 @@ const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         <ConsultGateway />
 
         {/* --- SYSTEM FOOTER: Technical Stamp --- */}
-        <footer className="py-8 text-center border-t border-[var(--foreground)]/5 opacity-10">
+        <footer className="border-t border-[var(--foreground)]/5 py-8 text-center opacity-10">
           <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
             Corporate_Node_Protocol.v{schema ? "18.0.39" : "INIT"}
           </p>

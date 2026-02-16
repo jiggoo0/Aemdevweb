@@ -1,99 +1,124 @@
 #!/bin/bash
 
-# ==========================================
-# Project Overview Generator v2.5
-# ==========================================
+# ==============================================================================
+# [SYSTEM]: AEM DOCS GENERATOR v3.0 (ULTIMATE)
+# [STRATEGY]: Single I/O Block | Recursive Scanning | Full Coverage
+# ==============================================================================
 
 OUTPUT_FILE="README.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
 
-# ตรวจสอบ Argument: ถ้าใส่ --no-config จะไม่ดึงข้อมูลใน config/
+# ตรวจสอบ Argument: --no-config
 SKIP_CONFIG=false
 if [[ "$1" == "--no-config" ]]; then
     SKIP_CONFIG=true
 fi
 
-# 1. Initialize Metadata
-cat <<EOF > $OUTPUT_FILE
----
-domain: aemdevweb.com
-status: strictly-enforced
-last_audit: $TIMESTAMP
----
+echo "> 🚀 Starting Documentation Generation..."
 
-# SYSTEM ARCHITECTURE & DATA SCHEMAS
+# เริ่มเขียนเนื้อหาทั้งหมดลงไฟล์ในคำสั่งเดียว (Performance Optimization)
+{
+    # ---------------------------------------------------------
+    # 1. HEADER & METADATA
+    # ---------------------------------------------------------
+    echo "---"
+    echo "domain: aemdevweb.com"
+    echo "status: strictly-enforced"
+    echo "last_audit: $TIMESTAMP"
+    echo "generated_by: generate_docs.sh v3.0"
+    echo "---"
+    echo ""
+    echo "# SYSTEM ARCHITECTURE & DATA SCHEMAS"
+    echo ""
 
-EOF
-
-if [ "$SKIP_CONFIG" = false ]; then
-    # 2. System Mandate Injection
-    if [ -f "config/00-SYSTEM-MANDATE.md" ]; then
-        echo "## SYSTEM MANDATE" >> $OUTPUT_FILE
-        cat "config/00-SYSTEM-MANDATE.md" >> $OUTPUT_FILE
-    else
-        echo "> [ERROR] MISSION CRITICAL: 00-SYSTEM-MANDATE.md MISSING" >> $OUTPUT_FILE
-    fi
-    echo -e "\n---\n" >> $OUTPUT_FILE
-
-    # 3. AI Prompt Extension Injection 
-    if [ -f "config/01-SYSTEM-PROMPT-EXTENSION.md" ]; then
-        echo "## SYSTEM PROMPT EXTENSION" >> $OUTPUT_FILE
-        cat "config/01-SYSTEM-PROMPT-EXTENSION.md" >> $OUTPUT_FILE
-    else
-        echo "> [WARNING] SYSTEM PROMPT EXTENSION MISSING" >> $OUTPUT_FILE
-    fi
-    echo -e "\n---\n" >> $OUTPUT_FILE
-else
-    echo "> [INFO] Config injection skipped by user." >> $OUTPUT_FILE
-    echo -e "\n---\n" >> $OUTPUT_FILE
-fi
-
-# 4. Core Types Definition
-echo "## TECHNICAL DATA SCHEMAS (TYPES)" >> $OUTPUT_FILE
-if [ -d "types" ]; then
-    for file in types/*.ts; do
-        if [ -f "$file" ]; then
-            echo "### MODULE: $(basename "$file")" >> $OUTPUT_FILE
-            echo '```typescript' >> $OUTPUT_FILE
-            cat "$file" >> $OUTPUT_FILE
-            echo -e '\n```' >> $OUTPUT_FILE
+    # ---------------------------------------------------------
+    # 2. SYSTEM CONFIGURATION (Optional)
+    # ---------------------------------------------------------
+    if [ "$SKIP_CONFIG" = false ]; then
+        if [ -f "config/00-SYSTEM-MANDATE.md" ]; then
+            echo "## SYSTEM MANDATE"
+            cat "config/00-SYSTEM-MANDATE.md"
+            echo -e "\n---\n"
         fi
-    done
-fi
-echo -e "\n---\n" >> $OUTPUT_FILE
 
-# 5. Constants & Configuration Registry
-echo "## CONSTANTS REGISTRY" >> $OUTPUT_FILE
-if [ -d "constants" ]; then
-    for file in constants/*.ts; do
-        if [ -f "$file" ] && [[ "$file" != *"index.ts"* ]]; then
-            echo "### CONFIG: $(basename "$file")" >> $OUTPUT_FILE
-            echo '```typescript' >> $OUTPUT_FILE
-            cat "$file" >> $OUTPUT_FILE
-            echo -e '\n```' >> $OUTPUT_FILE
+        if [ -f "config/01-SYSTEM-PROMPT-EXTENSION.md" ]; then
+            echo "## SYSTEM PROMPT EXTENSION"
+            cat "config/01-SYSTEM-PROMPT-EXTENSION.md"
+            echo -e "\n---\n"
         fi
-    done
-fi
-echo -e "\n---\n" >> $OUTPUT_FILE
+    else
+        echo "> [INFO] Configuration sections skipped by user flag."
+        echo -e "\n---\n"
+    fi
 
-# 6. Infrastructure Tree
-echo "## DIRECTORY INFRASTRUCTURE" >> $OUTPUT_FILE
-echo '```text' >> $OUTPUT_FILE
-tree -L 10 -h -D --timefmt "%Y-%m-%d %H:%M" \
-    -I "node_modules|.git|.next|*.webp|*.png|*.jpg|*.jpeg|*.svg|*.ico|*.gif" \
-    >> $OUTPUT_FILE
-echo '```' >> $OUTPUT_FILE
-echo -e "\n---\n" >> $OUTPUT_FILE
+    # ---------------------------------------------------------
+    # 3. TYPE DEFINITIONS (Recursive Scan)
+    # ---------------------------------------------------------
+    echo "## TECHNICAL DATA SCHEMAS (TYPES)"
+    if [ -d "types" ]; then
+        # ใช้ find เพื่อหาไฟล์ทั้งหมดรวมถึงใน sub-folder
+        find types -type f -name "*.ts" | sort | while read -r file; do
+            echo "### MODULE: $(basename "$file")"
+            echo "\`Path: $file\`"
+            echo '```typescript'
+            cat "$file"
+            echo -e '\n```'
+        done
+    else
+        echo "> [WARN] 'types' directory not found."
+    fi
+    echo -e "\n---\n"
 
-# 7. Build Artifact Analysis (Static Files)
-echo "## BUILD ARTIFACT ANALYSIS (.next/static)" >> $OUTPUT_FILE
-if [ -d ".next/static" ]; then
-    echo '```text' >> $OUTPUT_FILE
-    du -sh .next/static >> $OUTPUT_FILE
-    find .next/static -type f -exec du -h {} + | sort -rh | head -n 10 >> $OUTPUT_FILE
-    echo '```' >> $OUTPUT_FILE
-else
-    echo "> [INFO] .next/static directory not found. Skipping analysis." >> $OUTPUT_FILE
-fi
+    # ---------------------------------------------------------
+    # 4. CONSTANTS REGISTRY (Recursive Scan)
+    # ---------------------------------------------------------
+    echo "## CONSTANTS REGISTRY"
+    if [ -d "constants" ]; then
+        # ค้นหาไฟล์ .ts ทั้งหมด ยกเว้น index.ts และไฟล์ใน node_modules (ถ้ามีหลุดมา)
+        find constants -type f -name "*.ts" -not -name "index.ts" | sort | while read -r file; do
+            echo "### CONFIG: $(basename "$file")"
+            echo "\`Path: $file\`"
+            echo '```typescript'
+            cat "$file"
+            echo -e '\n```'
+        done
+    else
+        echo "> [WARN] 'constants' directory not found."
+    fi
+    echo -e "\n---\n"
 
-echo "AUDIT COMPLETED: $OUTPUT_FILE GENERATED."
+    # ---------------------------------------------------------
+    # 5. INFRASTRUCTURE TREE
+    # ---------------------------------------------------------
+    echo "## DIRECTORY INFRASTRUCTURE"
+    echo '```text'
+    if command -v tree &> /dev/null; then
+        tree -L 10 -h -D --timefmt "%Y-%m-%d %H:%M" \
+            -I "node_modules|.git|.next|*.webp|*.png|*.jpg|*.jpeg|*.svg|*.ico|*.gif|*.DS_Store"
+    else
+        echo "> [ERROR] 'tree' command not found. Please install it (pkg install tree)."
+        # Fallback: ใช้ find แบบง่ายๆ
+        find . -maxdepth 3 -not -path '*/.*'
+    fi
+    echo '```'
+    echo -e "\n---\n"
+
+    # ---------------------------------------------------------
+    # 6. BUILD ARTIFACTS ANALYSIS
+    # ---------------------------------------------------------
+    echo "## BUILD ARTIFACT ANALYSIS (.next/static)"
+    if [ -d ".next/static" ]; then
+        echo '```text'
+        echo "Total Size:"
+        du -sh .next/static 2>/dev/null
+        echo ""
+        echo "Top 10 Largest Assets:"
+        find .next/static -type f -exec du -h {} + 2>/dev/null | sort -rh | head -n 10
+        echo '```'
+    else
+        echo "> [INFO] Build artifacts not found. Run 'pnpm build' to generate stats."
+    fi
+
+} > "$OUTPUT_FILE"
+
+echo "✅ AUDIT COMPLETED: $OUTPUT_FILE has been generated."

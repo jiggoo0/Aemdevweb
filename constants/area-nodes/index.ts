@@ -1,5 +1,5 @@
 /**
- * [MASTER REGISTRY]: AREA_NODES_AGGREGATOR v17.9.96 (STABLE_EXPANDED)
+ * [MASTER REGISTRY]: AREA_NODES_AGGREGATOR v18.0.01 (SOUTHERN_EXPANSION_STABLE)
  * [STRATEGY]: Centralized Entry Point | Priority-Based Ranking | Regional Domination
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -20,6 +20,12 @@ import { uttaraditNode } from "./uttaradit";
 import { lampangNode } from "./lampang";
 import { chiangRaiNode } from "./chiang-rai"; // [ADD]: ยึดพื้นที่ Coffee Specialty & Gateway
 import { maeHongSonNode } from "./mae-hong-son"; // [ADD]: ยึดพื้นที่ Wellness & Slow Living
+
+// [SOUTHERN EXPANSION NODES]:
+import { chumphonNode } from "./chumphon"; // [ADD]: ประตูสู่ภาคใต้ & Logistic Hub
+import { phangNgaNode } from "./phang-nga"; // [ADD]: ยึดพื้นที่ Luxury Travel & Marine Resources
+import { ranongNode } from "./ranong"; // [ADD]: ยึดพื้นที่ Mineral Springs & Nature Eco-tourism
+import { suratThaniNode } from "./surat-thani"; // [ADD]: ยึดพื้นที่ Economic Hub & Island Destination
 
 import type { AreaNode } from "@/types";
 
@@ -43,6 +49,11 @@ export const AREA_NODES: AreaNode[] = [
   takNode,
   uttaraditNode,
   lampangNode,
-  chiangRaiNode, // เพิ่มเข้า Array
-  maeHongSonNode, // เพิ่มเข้า Array
+  chiangRaiNode,
+  maeHongSonNode,
+  // Southern Nodes
+  chumphonNode,
+  phangNgaNode,
+  ranongNode,
+  suratThaniNode,
 ].sort((a, b) => b.priority - a.priority);

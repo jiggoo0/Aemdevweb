@@ -168,6 +168,7 @@
 │   │   ├── chiang-mai.ts
 │   │   ├── chiang-rai.ts
 │   │   ├── chon-buri.ts
+│   │   ├── chumphon.ts
 │   │   ├── index.ts
 │   │   ├── kamphaeng-phet.ts
 │   │   ├── khon-kaen.ts
@@ -175,10 +176,13 @@
 │   │   ├── lampang.ts
 │   │   ├── mae-hong-son.ts
 │   │   ├── nakhon-sawan.ts
+│   │   ├── phang-nga.ts
 │   │   ├── phichit.ts
 │   │   ├── phitsanulok.ts
 │   │   ├── phuket.ts
+│   │   ├── ranong.ts
 │   │   ├── sukhothai.ts
+│   │   ├── surat-thani.ts
 │   │   ├── tak.ts
 │   │   └── uttaradit.ts
 │   ├── image-blur-data.ts
@@ -227,86 +231,9 @@
 ├── pnpm-lock.yaml
 ├── pnpm-workspace.yaml
 ├── postcss.config.mjs
-├── public
-│   ├── android-chrome-192x192(1).png
-│   ├── android-chrome-192x192.png
-│   ├── android-chrome-512x512(1).png
-│   ├── android-chrome-512x512.png
-│   ├── apple-touch-icon.png
-│   ├── favicon(1).ico
-│   ├── favicon-16x16.png
-│   ├── favicon-16x16.svg
-│   ├── favicon-32x32.png
-│   ├── favicon.ico
-│   ├── favicon.svg
-│   ├── grid-pattern.svg
-│   ├── images
-│   │   ├── areas
-│   │   │   ├── bangkok-node.webp
-│   │   │   ├── chiang-mai-node.webp
-│   │   │   ├── chiang-rai-node.webp
-│   │   │   ├── chon-buri-node.webp
-│   │   │   ├── kamphaeng-phet-node.webp
-│   │   │   ├── khon-kaen-node.webp
-│   │   │   ├── korat-monolith.webp
-│   │   │   ├── korat-node.webp
-│   │   │   ├── lampang-node.webp
-│   │   │   ├── mae-hong-son-node.webp
-│   │   │   ├── nakhon-sawan-node.webp
-│   │   │   ├── phichit-node.webp
-│   │   │   ├── phitsanulok-node.webp
-│   │   │   ├── phuket-node.webp
-│   │   │   ├── preview.webp
-│   │   │   ├── sukhothai-node.webp
-│   │   │   ├── tak-node.webp
-│   │   │   └── uttaradit-node.webp
-│   │   ├── avatar.webp
-│   │   ├── blog
-│   │   │   ├── advanced-schema-markup.webp
-│   │   │   ├── copywriting-specialist.webp
-│   │   │   ├── core-web-vitals-speed.webp
-│   │   │   ├── default-thumb.webp
-│   │   │   ├── ecommerce-seo.webp
-│   │   │   ├── facebook-ads-vs-website.webp
-│   │   │   ├── seo-google-love.webp
-│   │   │   └── technical-audit-visual.webp
-│   │   ├── case-studies
-│   │   │   ├── industrial-catalog.webp
-│   │   │   ├── preview.webp
-│   │   │   └── unlink-reputation.webp
-│   │   ├── experts
-│   │   │   └── profile-hero.webp
-│   │   ├── logo-main.webp
-│   │   ├── og-default.webp
-│   │   ├── og-main.webp
-│   │   ├── seo
-│   │   │   ├── advanced-schema-markup.webp
-│   │   │   ├── core-web-vitals-speed.webp
-│   │   │   ├── ecommerce-seo.webp
-│   │   │   └── seo.webp
-│   │   ├── service
-│   │   │   ├── bio-node.webp
-│   │   │   ├── catalog-node.webp
-│   │   │   ├── corporate-node.webp
-│   │   │   ├── default.webp
-│   │   │   ├── hotel-resort-node.webp
-│   │   │   ├── local-node.webp
-│   │   │   ├── personal-node.webp
-│   │   │   ├── salepage-node.webp
-│   │   │   └── seo-agency-node.webp
-│   │   ├── shared
-│   │   │   ├── placeholder.webp
-│   │   │   └── preview.webp
-│   │   └── templates
-│   │       ├── local-service
-│   │       │   └── og.webp
-│   │       └── preview.webp
-│   └── logo-full.svg
-├── service-account.json
+├── structure.txt
 ├── tsconfig.json
-├── tsconfig.tsbuildinfo
 ├── types
 │   ├── index.d.ts
-│   ├── mdx.d.ts
 │   └── template-props.ts
 └── vercel.json

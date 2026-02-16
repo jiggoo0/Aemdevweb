@@ -38,7 +38,7 @@ const HotelResortTemplate = ({ data }: { data: UniversalTemplateProps }) => {
     <LayoutEngine spacing="none">
       <JsonLd data={schema} />
 
-      <main className="min-h-[100dvh] bg-[var(--surface-main)] selection:bg-[var(--brand-primary)] selection:text-white transition-colors duration-500">
+      <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-white">
         {/* --- Phase 01: Environmental Aura --- 
             แสดงภาพลักษณ์แบรนด์พร้อมข้อมูล Weather Node แบบ Real-time
         */}
@@ -88,7 +88,7 @@ const HotelResortTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         <ReservationPortal />
 
         {/* --- SYSTEM FOOTER: Technical Stamp --- */}
-        <footer className="py-8 text-center border-t border-[var(--foreground)]/5 opacity-10">
+        <footer className="border-t border-[var(--foreground)]/5 py-8 text-center opacity-10">
           <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
             Hospitality_Node_Protocol.v18.0.39
           </p>

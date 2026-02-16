@@ -141,7 +141,7 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
         {/* --- Phase 06: Conversion Gateway --- 
             Closing Section: ปิดการขายด้วยฟอร์มการสั่งซื้อตรง (Direct Order)
         */}
-        <section id="order" className="relative scroll-mt-24 py-24 min-h-[50dvh]">
+        <section id="order" className="relative min-h-[50dvh] scroll-mt-24 py-24">
           <div className="container mx-auto max-w-4xl px-4">
             <div className="overflow-hidden rounded-[var(--brand-radius)] border border-[var(--brand-primary)]/30 shadow-2xl transition-all duration-500 hover:shadow-[0_0_50px_-10px_var(--brand-primary)]">
               <div
@@ -179,7 +179,7 @@ export default function SalePageTemplate({ data, suppressUI = false }: SalePageT
         {!suppressUI && <SaleFooter brandName={data.title} isDark={isDarkMode} />}
 
         {/* --- SYSTEM FOOTER: Technical Stamp --- */}
-        <footer className="py-8 text-center border-t border-[var(--foreground)]/5 opacity-10">
+        <footer className="border-t border-[var(--foreground)]/5 py-8 text-center opacity-10">
           <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
             SalePage_Active_Node.v18.0.39
           </p>

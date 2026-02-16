@@ -1,8 +1,10 @@
 /**
- * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.0 (FULL_SYNC)
+ * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
  * [STRATEGY]: D2C Empowerment | Agricultural Branding | Hex Standard
  * [MARKET]: Uttaradit City, Lablae, Phichai (Premium Agro-Trading)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
 
 export const uttaraditNode: AreaNode = {
@@ -29,12 +31,15 @@ export const uttaraditNode: AreaNode = {
   heroImage: "/images/areas/uttaradit-node.webp",
   theme: {
     mode: "light",
-    primary: "#059669", // Emerald 600 (เขียวสวนผลไม้)
-    secondary: "#064e3b", // Emerald 900 (เขียวป่าลึก)
-    background: "#f0fdf4", // Emerald 50 (สะอาด สดชื่น)
+    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #059669 (Emerald 600) เป็น #047857 (Emerald 700)
+     * เพื่อให้ผ่านเกณฑ์ WCAG AA (> 4.5:1) เมื่อแสดงผลบนพื้นหลัง Emerald 50 (#f0fdf4)
+     */
+    primary: "#047857",
+    secondary: "#064e3b", // Emerald 900
+    background: "#f0fdf4", // Emerald 50
     foreground: "#022c22", // Emerald 950
     accent: "#d97706", // Amber 600 (สีทองทุเรียนลับแล)
-    gradient: "from-[#059669]/10 via-transparent to-transparent",
+    gradient: "from-[#047857]/10 via-transparent to-transparent",
   },
 
   // --- Pricing Strategy (Grower Friendly) ---
@@ -76,7 +81,7 @@ export const uttaraditNode: AreaNode = {
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำไมต้องมีเว็บ ในเมื่อขายในเพจหรือกลุ่ม Facebook ก็ได้?",

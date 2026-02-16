@@ -30,7 +30,7 @@ import { DynamicFAQ } from "../sections/DynamicFAQ";
  * @description นามบัตรดิจิทัลระดับ Specialist ที่รวบรวมอัตลักษณ์ ผลงาน และความรู้เข้าด้วยกัน
  */
 const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
-  // [LOGIC]: ประมวลผล Schema สำหรับอัตลักษณ์บุคคล (Person / Specialist) 
+  // [LOGIC]: ประมวลผล Schema สำหรับอัตลักษณ์บุคคล (Person / Specialist)
   // เพื่อส่งเสริม E-E-A-T ของโดเมนในระดับโครงสร้าง
   const schema = useMemo(() => generateUniversalSchema(data), [data]);
 
@@ -40,15 +40,10 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
       <main className="flex min-h-[100dvh] flex-col items-center bg-[var(--surface-main)] px-4 py-16 selection:bg-[var(--brand-primary)] selection:text-black md:py-24">
         <div className="w-full max-w-xl space-y-16">
-          
           {/* --- Phase 01: Core Identification --- 
               แสดงตัวตนและสถานะ Real-time ของ Specialist
           */}
-          <IdentityNode 
-            name={data.title} 
-            description={data.description} 
-            image={data.image} 
-          />
+          <IdentityNode name={data.title} description={data.description} image={data.image} />
 
           {/* --- Phase 02: Strategic Linkage --- 
               ศูนย์รวม Link สำคัญ (Registry Mapping)

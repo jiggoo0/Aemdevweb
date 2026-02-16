@@ -13,7 +13,7 @@ import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 import DynamicThemeWrapper from "./DynamicThemeWrapper";
 
 // --- 2. Template Registry (Default Import Alignment) ---
-/** * [FIX]: ลบปีกกา { } ออกจากการ Import ทั้งหมด 
+/** * [FIX]: ลบปีกกา { } ออกจากการ Import ทั้งหมด
  * เพราะไฟล์ Index ในแต่ละโฟลเดอร์ใช้ 'export default'
  */
 import SalePageTemplate from "./salepage/Index";
@@ -42,8 +42,6 @@ const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> 
   hotelresort: HotelResortTemplate,
   "seo-agency": SeoAgencyTemplate,
 };
-
-
 
 /**
  * [RENDERER]: หัวใจหลักในการเลือกแสดงผลเทมเพลตตามข้อมูลจาก Registry

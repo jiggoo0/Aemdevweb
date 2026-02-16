@@ -14,8 +14,6 @@
     "entry": [
       "next.config.ts",
       "app/**/*.{ts,tsx}",
-      "components/templates/**/index.tsx",
-      "components/templates/**/Index.tsx",
       "lib/cms.ts"
     ]
   },

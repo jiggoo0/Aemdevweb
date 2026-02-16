@@ -1,5 +1,5 @@
 /**
- * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.0 (HUMAN_OPTIMIZED)
+ * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.1 (CONTRAST_PATCHED)
  * [STRATEGY]: Hyper-Local Targeting | Map Pack Dominance | Zero-Emoji
  * [MAINTAINER]: AEMZA MACKS
  */
@@ -19,15 +19,15 @@ export const localAuthorityService: TemplateMasterData = {
   currency: "THB",
   unit: "เริ่มต้น / สาขา",
 
-  // [THEME_FIX]: ใช้ Hex Code ล้วน (Emerald/Slate Theme) สื่อถึงความมั่งคั่งในท้องถิ่นและความน่าเชื่อถือ
+  // [THEME_FIX]: ปรับ Primary เป็น Emerald 700 (#047857) เพื่อให้ Contrast Ratio > 4.5 (WCAG AA)
   theme: {
-    mode: "light", // ธีมสว่าง สะอาดตา ดูเป็นทางการและเข้าถึงง่าย
-    primary: "#059669", // Emerald 600 (สีเขียวเหนี่ยวทรัพย์)
+    mode: "light",
+    primary: "#047857", // [UPDATED]: Emerald 700 (Passes Accessibility Check)
     secondary: "#022c22", // Emerald 950
-    background: "#f1f5f9", // Slate 100 (พื้นหลังสะอาดตา ลดแสงสะท้อน)
-    foreground: "#0f172a", // Slate 900 (อ่านง่ายชัดเจน)
+    background: "#f1f5f9", // Slate 100
+    foreground: "#0f172a", // Slate 900
     accent: "#34d399", // Emerald 400
-    gradient: "from-[#059669]/10 via-transparent to-transparent",
+    gradient: "from-[#047857]/10 via-transparent to-transparent", // [SYNC]: ปรับ Gradient ให้ตรงกับ Primary ใหม่
   },
 
   // [TRUST_SIGNAL]: เน้นผลลัพธ์ที่จับต้องได้ (Walk-in / Calls)

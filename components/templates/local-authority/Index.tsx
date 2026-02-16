@@ -21,7 +21,7 @@ import { DistrictRegistry } from "./_components/DistrictRegistry";
 import { RegionalAction } from "./_components/RegionalAction";
 
 /** * [INJECT]: ดึงระบบ FAQ Engine ด้วย Named Import { DynamicFAQ }
- * [TECHNICAL_FIX]: ปรับปรุงเพื่อแก้ปัญหา 'undefined' ระหว่างการทำ Static Site Generation (SSG) 
+ * [TECHNICAL_FIX]: ปรับปรุงเพื่อแก้ปัญหา 'undefined' ระหว่างการทำ Static Site Generation (SSG)
  * ซึ่งเป็นสาเหตุหลักที่ทำให้หน้า /areas/kamphaeng-phet พังในช่วง Build
  */
 import { DynamicFAQ } from "../sections/DynamicFAQ";
@@ -31,7 +31,7 @@ import { DynamicFAQ } from "../sections/DynamicFAQ";
  * @description เทมเพลตสำหรับหน้า P-SEO รายพื้นที่ เน้นการสร้าง Authority ผ่านข้อมูลพิกัดและบริบทท้องถิ่น
  */
 const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
-  // [LOGIC]: ประมวลผล Schema สำหรับ SEO ประจำท้องถิ่น (LocalBusiness / Place) 
+  // [LOGIC]: ประมวลผล Schema สำหรับ SEO ประจำท้องถิ่น (LocalBusiness / Place)
   // เพื่อยืนยันตัวตนระดับ Geographic Entity ต่อ Google Search
   const schema = useMemo(() => generateUniversalSchema(data), [data]);
   const context = data.localContext;
@@ -41,8 +41,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
     <LayoutEngine spacing="none">
       <JsonLd data={schema} />
 
-      <main className="min-h-[100dvh] bg-[var(--surface-main)] selection:bg-[var(--brand-primary)] selection:text-black transition-colors duration-500">
-        
+      <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
         {/* --- Phase 01: Identification --- 
             ระบุชื่อจังหวัดและสถานะของ Digital Node ในเครือข่ายวิศวกรรม
         */}
@@ -67,10 +66,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         */}
         {context && (
           <div className="space-y-0">
-            <LocalInsight 
-              insight={context.marketInsight} 
-              painPoints={context.painPoints || []} 
-            />
+            <LocalInsight insight={context.marketInsight} painPoints={context.painPoints || []} />
 
             <MarketIntelligence
               level={context.competitorLevel || "medium"}

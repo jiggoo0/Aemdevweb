@@ -37,8 +37,7 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
     <LayoutEngine spacing="none">
       <JsonLd data={schema} />
 
-      <main className="min-h-[100dvh] bg-[var(--surface-main)] selection:bg-[var(--brand-primary)] selection:text-black transition-colors duration-500">
-        
+      <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
         {/* --- Phase 01: Authority Entry --- 
             Hero Section ที่แสดงความมั่นใจด้วยข้อมูล Performance เบื้องต้น
         */}
@@ -47,13 +46,13 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         {/* --- Phase 02: Interactive Proof (Lead Magnet) --- 
             จุดยุทธศาสตร์: ระบบจำลองการแสกนเว็บไซต์ (Audit Simulation)
         */}
-        
+
         <AuditReportGenerator />
 
         {/* --- Phase 03: Growth Visualization --- 
             Data Visualization แสดงวิถีการเติบโตของ Traffic (Trajectory Node)
         */}
-        
+
         <PerformanceTrajectory />
 
         {/* --- Phase 04: Solution Architecture --- 
@@ -89,7 +88,7 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         <ConversionPortal />
 
         {/* --- SYSTEM FOOTER: Technical Stamp --- */}
-        <footer className="py-8 text-center border-t border-[var(--foreground)]/5 opacity-10">
+        <footer className="border-t border-[var(--foreground)]/5 py-8 text-center opacity-10">
           <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
             SEO_Lab_Engine.v18.0.39_STABLE
           </p>

@@ -1,119 +1,144 @@
 # SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
 
-**Version:** 17.9.100 (Ultimate Hardened)
-**Last Updated:** 2026-02-14
-**Maintainer:** AEMZA MACKS (Lead Architect / Alongkorn Yomkerd)
+**Project:** AEMDEVWEB (High-Performance Web Infrastructure)
+**Version:** 18.0.0 (Universal Sync)
+**Maintainer:** AEMZA MACKS (Lead Architect)
+**Last Audit:** 2026-02-16
 
 ---
 
-## 1. CORE PHILOSOPHY (ปรัชญาหลัก)
+## 1. CORE PHILOSOPHY
 
-**"We don't just build websites; We engineer Digital Infrastructure."**
+This project is not just a website; it is a **Digital Infrastructure**. Every line of code must serve a specific business purpose: **Speed, SEO Authority, or Conversion**.
 
-ระบบนี้ไม่ใช่แค่เว็บโชว์ข้อมูล แต่คือ **"เครื่องจักรทำเงิน (Revenue Engine)"** ที่ถูกจูนมาเพื่อ:
-
-1.  **Speed:** เร็วระดับปีศาจ (LCP < 2.5s) แม้บนมือถือ
-2.  **Trust:** ความน่าเชื่อถือต้องมาเป็นอันดับ 1 (E-E-A-T)
-3.  **SEO-First:** โครงสร้างต้องดันอันดับ Google ได้จริง ไม่ใช่แค่แปะ Keyword
-4.  **Lean:** ตัดขยะทิ้งให้หมด โค้ดทุกบรรทัดต้องมีหน้าที่
+- **Zero Fluff:** No decorative animations that hinder performance.
+- **Performance First:** Core Web Vitals must be green (95+).
+- **Structure over Style:** Data integrity (`types/`) dictates UI rendering, not the other way around.
+- **Human-Centric Engineering:** We build for users first, search engines second, but satisfy both through semantic precision.
 
 ---
 
-## 2. TECHNOLOGY STACK (เสาหลักทางเทคนิค)
+## 2. TECHNOLOGY STACK (STRICT)
 
-ระบบรันบนเทคโนโลยีล่าสุดของปี 2026 (Bleeding Edge) แต่ปรับจูนให้เสถียร:
-
-- **Core:** Next.js 16.1.6 (App Router) + React 19
-- **Styling:** Tailwind CSS v4 (No Runtime Overhead)
-- **Language:** TypeScript 5.9 (Strict Mode Only - ห้ามใช้ Any)
-- **Content:** MDX (สำหรับ Blog/Case Studies)
-- **Performance Monitor:** Bundle Analyzer + Knip (Dead Code Hunter)
-
-### ⚠️ Special Environment Constraint (กฎเหล็กสภาพแวดล้อม)
-
-Project นี้พัฒนาแบบ **Hybrid Environment**:
-
-1.  **Local (Dev):** รันบน Android (Termux) -> **ต้องประหยัด Resource สูงสุด**
-    - `workerThreads: false`
-    - `webpack.cache: false` (เพื่อ save storage)
-2.  **Production:** Vercel Cloud -> **อัดเต็มสูบ** (Rust Compiler, Image Optimization)
+- **Framework:** Next.js 16.1.6 (App Router)
+- **Language:** TypeScript 5.x (Strict Mode Enforced)
+- **Styling:** Tailwind CSS 4.0 (OKLCH Color Space Compatible)
+- **State/Data:** React 19 (Server Components by default)
+- **Validation:** Zod / Custom Schema Validators
+- **Automation:** Bash & Node.js Scripts (`scripts/`)
 
 ---
 
-## 3. DATA ARCHITECTURE (โครงสร้างข้อมูล)
+## 3. DIRECTORY ARCHITECTURE & SSOT
 
-เราใช้ระบบ **"The Bridge Pattern"** เพื่อรวมศูนย์ข้อมูล (Single Source of Truth):
+The project follows a **Data-Driven Architecture**. The UI is merely a renderer for the data defined in `constants/`.
 
-### 3.1 Master Registry (`master-registry.ts`)
+### 3.1 The "Constants" Directory (The Brain)
 
-- คลังข้อมูลบริการทั้งหมด (Services) อยู่ที่นี่ที่เดียว
-- ห้าม Hard-code ข้อมูลบริการลงในไฟล์ Page โดยเด็ดขาด
-- ข้อมูลจะถูกส่งผ่าน Interface `UniversalTemplateProps` เพื่อให้ Template ทุกตัวคุยภาษาเดียวกัน
+- `constants/site-config.ts`: Global configuration (Brand, Links, SEO defaults).
+- `constants/master-registry.ts`: The central index of all services.
+- `constants/services/*.ts`: Individual **Service Nodes** (Corporate, Sale Page, etc.).
+- `constants/area-nodes/*.ts`: **Area Nodes** for Local SEO (Bangkok, Phuket, etc.).
+- **Rule:** Never hardcode data in `app/` components. Always import from `constants/`.
 
-### 3.2 Area Nodes (P-SEO Engine)
+### 3.2 The "Types" Directory (The Law)
 
-- ใช้สำหรับทำ Local SEO (เจาะรายจังหวัด/อำเภอ)
-- ไฟล์อยู่ที่ `constants/area-nodes/`
-- ทุก Node ต้องมี `blurDataURL` (Gen อัตโนมัติ) เพื่อ UX ที่ลื่นไหล
+- `types/index.d.ts`: Core definitions (SiteConfig, ThemeConfig).
+- `types/template-props.ts`: The **Universal Adapter**. It acts as the bridge between raw data and the UI renderer.
+- **Rule:** No `any`. All props must be typed via `UniversalTemplateProps` or specific interfaces.
 
-### 3.3 Site Config (Brand Identity)
+### 3.3 The "Scripts" Directory (The Automation)
 
-- ไฟล์ `site-config.ts` คือกฎหมายสูงสุดของ Brand
-- ชื่อ, เบอร์โทร, Social Links, Tone of Voice แก้ที่นี่ที่เดียว เปลี่ยนทั้งเว็บ
-
----
-
-## 4. ROUTE STRUCTURE (โครงสร้างหน้าเว็บ)
-
-เราแบ่ง Folder ด้วย **Route Groups** เพื่อแยก Layout ให้ชัดเจน:
-
-- `app/(main)`: หน้าทั่วไป (Home, About, Legal) -> มี Navbar/Footer เต็มรูปแบบ
-- `app/(business)`: หน้าเนื้อหา (Blog, Areas, Case Studies) -> เน้นการอ่านและ Internal Link
-- `app/(sales)`: หน้าขายของ (Services, Sale Pages) -> **Conversion Focused** (ตัดเมนูรกๆ ออก เน้นปุ่มซื้อ)
+- `gen-blur-data.mjs`: Auto-generates BlurHash for all images. Must run before build.
+- `audit-system.sh`: Routine health checks.
+- **Rule:** Do not manually edit `constants/image-blur-data.ts`. Use the script.
 
 ---
 
-## 5. SEO & SCHEMA STRATEGY
+## 4. DATA MODELS & SCHEMAS
 
-นี่คือจุดขายหลักของ AEMDEVWEB:
+### 4.1 Service Node (TemplateMasterData)
 
-1.  **Strict Schema:** ทุกหน้าต้องมี JSON-LD ที่ถูกต้อง (เช็คผ่าน `test:schema` ก่อน Build)
-2.  **Meta Tags:** ห้ามปล่อยว่าง ต้องมี Title, Description, OG-Image ครบทุกหน้า
-3.  **No-Index Logic:**
-    - Production: Index ปกติ
-    - Dev/Preview: บังคับ `noindex, nofollow` ผ่าน `next.config.ts` เพื่อกัน Google สับสน
+Defines a specific business service (e.g., SEO Agency, Hotel Website).
 
----
+- **Required:** `id`, `templateSlug`, `price`, `theme` (Hex codes), `clientTrust`.
+- **Strategy:** Uses `templateSlug` to determine which UI Component to render via `TemplateRenderer.tsx`.
 
-## 6. CODING STANDARDS (กฎการเขียนโค้ด)
+### 4.2 Area Node (Local SEO)
 
-เพื่อให้ Aemza Macks ทำงานง่ายและเร็วที่สุด:
+Defines a geographic landing page (e.g., `constants/area-nodes/korat.ts`).
 
-- **Don't Repeat Yourself (DRY):** ถ้า Logic ซ้ำกันเกิน 2 ครั้ง -> แยกเป็น Component หรือ Utility
-- **Type Safety:** ห้าม `ts-ignore` ถ้าไม่จำเป็นจริงๆ (ต้องมีเหตุผลแนบ)
-- **Image Handling:** ห้ามใช้ `<img>` ธรรมดา ต้องใช้ `<Image />` ของ Next.js และใส่ `alt` เสมอ
-- **Clean Imports:** ใช้ Path Alias `@/components`, `@/lib` เสมอ อย่าใช้ `../../`
+- **Strategy:** "Hex Standard" or "Zero-Radius Geometry" (as seen in Korat).
+- **Required:** `slug`, `province`, `hyperLocalKeywords`, `localContext` (Pain Points, Competitor Level).
+- **Mapping:** Each Area Node must map to a `templateSlug` (e.g., Korat -> Catalog, Phuket -> HotelResort).
 
 ---
 
-## 7. PERFORMANCE BUDGET (งบประมาณความเร็ว)
+## 5. UI & THEMING GUIDELINES
 
-ห้ามปล่อยให้เว็บอ้วนเกินความจำเป็น (มี `bundlesize` คุมอยู่):
+### 5.1 Color System
 
-- **Main Bundle:** ห้ามเกิน 150 kB
-- **CSS:** ห้ามเกิน 130 kB (Tailwind v4 ช่วยตรงนี้ได้เยอะ)
-- **Images:** ใช้ WebP/AVIF เท่านั้น และ Cache 1 ปี (`immutable`)
+- **Format:** Strict **HEX Codes** required in configuration files (e.g., `#06b6d4`).
+- **Contrast:** Primary colors must pass WCAG AA (Contrast Ratio > 4.5:1) against the background.
+- **Dark/Light Mode:** Defined per Service/Area node via `theme.mode`.
 
----
+### 5.2 Component Strictness
 
-## 8. DEPLOYMENT CHECKLIST
-
-ก่อนสั่ง `git push` หรือ `pnpm build` ต้องผ่านเช็คลิสต์นี้:
-
-1.  ✅ `pnpm test:schema` -> Schema ต้องเขียวหมด (Audited: OK)
-2.  ✅ `pnpm knip` -> ต้องไม่มีไฟล์ขยะหรือตัวแปรที่ไม่ได้ใช้
-3.  ✅ `pnpm type-check` -> TypeScript ต้องไม่แดง
+- **Zero-Unused Policy:** Components not in use are removed (Knip hygiene).
+- **Atomic Design:** Reusable UI parts live in `components/ui/` or `components/shared/`.
+- **Feature Modules:** Complex logic lives in `components/features/` (e.g., `DirectOrderForm.tsx`).
 
 ---
 
-**"Code is Poetry, Performance is Art, ROI is the Goal."**
+## 6. SEO & SEMANTICS PROTOCOL
+
+### 6.1 Meta Strategy
+
+- **Titles:** Must include High-Intent keywords (e.g., "Hire", "Service", "Price").
+- **Description:** Benefit-driven, under 160 characters.
+- **Keywords:** Array of strings found in `site-config.ts` and individual nodes.
+
+### 6.2 Schema Markup (JSON-LD)
+
+- **Global:** `Organization`, `WebSite`.
+- **Service Pages:** `Service`, `Product` (for Catalog).
+- **Local Pages:** `LocalBusiness` (critical for Area Nodes).
+
+### 6.3 Image Optimization
+
+- All images **must** have an entry in `image-blur-data.ts`.
+- Use `gen-blur-data.mjs` to sync new assets.
+- Alt text is mandatory and must be descriptive.
+
+---
+
+## 7. MAINTENANCE & WORKFLOW
+
+### Adding a New Service
+
+1.  Create `constants/services/[service-name].ts`.
+2.  Define strict types implementing `TemplateMasterData`.
+3.  Register in `constants/master-registry.ts`.
+4.  Run `pnpm build` to verify types.
+
+### Adding a New Area
+
+1.  Create `constants/area-nodes/[province].ts`.
+2.  Define strict types implementing `AreaNode`.
+3.  Add export to `constants/area-nodes/index.ts`.
+4.  Verify `coordinates` and `hyperLocalKeywords`.
+
+### Production Deployment
+
+1.  Run `scripts/gen-blur-data.mjs`.
+2.  Run `scripts/clean.sh`.
+3.  Execute strict type check.
+4.  Deploy to Vercel.
+
+---
+
+## 8. PERSONA: "AEMZA MACKS"
+
+- **Role:** Technical SEO Specialist & Web Architect.
+- **Tone:** Professional, Transparent, Technical but Accessible.
+- **Anti-Patterns:** No "Robot-speak", no over-promising without data, **Zero Emoji** in business logic/source code.

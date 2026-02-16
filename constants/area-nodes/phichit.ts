@@ -1,8 +1,10 @@
 /**
- * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
+ * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.1 (ACCESSIBILITY_PATCHED)
  * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Hex Standard
  * [MARKET]: Phichit City, Taphan Hin, Bang Mun Nak (Rice Mill Belt)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
 
 export const phichitNode: AreaNode = {
@@ -29,12 +31,15 @@ export const phichitNode: AreaNode = {
   heroImage: "/images/areas/phichit-node.webp",
   theme: {
     mode: "light",
-    primary: "#059669", // Emerald 600 (เขียวเกษตรมั่งคั่ง)
+    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #059669 (Emerald 600) เป็น #047857 (Emerald 700)
+     * เพื่อให้ผ่านเกณฑ์ WCAG AA (> 4.5:1) บนพื้นหลัง #ecfdf5
+     */
+    primary: "#047857",
     secondary: "#064e3b", // Emerald 900 (เขียวเข้มมั่นคง)
-    background: "#ecfdf5", // Emerald 50 (พื้นเขียวมิ้นต์อ่อนจาง สบายตา)
-    foreground: "#022c22", // Emerald 950 (ตัวหนังสือเข้มชัดเจน)
+    background: "#ecfdf5", // Emerald 50 (พื้นเขียวมิ้นต์อ่อนจาง)
+    foreground: "#022c22", // Emerald 950
     accent: "#34d399", // Emerald 400
-    gradient: "from-[#059669]/10 via-transparent to-transparent",
+    gradient: "from-[#047857]/10 via-transparent to-transparent",
   },
 
   // --- Pricing Strategy (Industrial Grade) ---
@@ -50,7 +55,7 @@ export const phichitNode: AreaNode = {
   // --- Localized Benefits ---
   benefits: [
     "สร้างเครดิตระดับประเทศ: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้คู่ค้าจากต่างจังหวัดหรือบริษัทส่งออก มั่นใจในมาตรฐานโรงงานของคุณตั้งแต่วินาทีแรกที่ค้นหาเจอ",
-    "โชว์ศักยภาพ 24 ชั่วโมง: ไม่ว่าจะเป็นกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้า คุณสามารถโชว์ทุกอย่างให้ลูกค้าเห็นได้ผ่านหน้าเว็บ โดยไม่ต้องส่งไฟล์รูปภาพซ้ำๆ ทางไลน์",
+    "โชว์ศักยภาพ 24 ชั่วโมง: ไม่ว่าจะเป็นกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้า คุณสามารถโชว์ทุกอย่างให้ลูกค้าเห็นได้ผ่านหน้าเว็บ โดยไม่ต้องส่งไฟล์รูปภาพซ้ำๆ",
     "ยึดพื้นที่บน Google: เราเน้นคีย์เวิร์ดเฉพาะทาง เช่น 'โรงสีข้าว พิจิตร', 'ขายเครื่องจักรเกษตร ตะพานหิน' เพื่อดักกลุ่มลูกค้าที่กำลังมองหาซัพพลายเออร์ตัวจริง",
   ],
 
@@ -76,7 +81,7 @@ export const phichitNode: AreaNode = {
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำไมโรงสีข้าวต้องมีเว็บไซต์ ทั้งที่มีลูกค้าประจำอยู่แล้ว?",
@@ -146,7 +151,7 @@ export const phichitNode: AreaNode = {
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
-      title: "Case Study: โรงสีข้าวยุคใหม่",
+      title: "Case Study: โรงสีข้าวยยุคใหม่",
       result:
         "ได้รับยอดสั่งซื้อจากบริษัทส่งออกรายใหญ่ผ่านหน้าเว็บ หลังจากปรับโฉมให้ดูเป็นสากลและติดอันดับ SEO",
     },
