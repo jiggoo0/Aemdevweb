@@ -26,28 +26,21 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // [OPTIMIZATION]: Core Web Vitals & Stability
   reactStrictMode: true,
-  compress: true, 
+  compress: true,
 
-  // [COMPILER_HARDENING]: Cleaner Production Logs
   compiler: {
     removeConsole: isProduction ? { exclude: ["error"] } : false,
   },
 
   productionBrowserSourceMaps: false,
-  poweredByHeader: false, 
-
+  poweredByHeader: false,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   experimental: {
     scrollRestoration: true,
-    
-    // [TERMUX_HARDENING]: ป้องกัน Android OOM Killer
     workerThreads: false,
-    cpus: isVercel ? undefined : 1, 
-
-    // [TREE_SHAKING]: Optimize Critical Libraries
+    cpus: isVercel ? undefined : 1,
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -57,33 +50,25 @@ const nextConfig: NextConfig = {
       "clsx",
       "tailwind-merge",
     ],
-    
-    // MDX Rust Compiler: เปิดเฉพาะบน Vercel เพื่อเลี่ยงปัญหาสถาปัตยกรรมบนมือถือ
     mdxRs: isVercel,
   },
 
-  // [ASSET_OPTIMIZATION]: High-Performance Media Handling
+  // [ASSET_ARCHITECTURE]: Optimized for Local FS & Edge Caching
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000, // 1 Year Persistent Cache
+    minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.aemdevweb.com",
-      },
-      {
-        protocol: "https",
-        hostname: "aemdevweb.com",
-      },
-    ],
+    // [SECURITY]: Restricted to Self + Base64 + Trusted Protocols
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'none'; img-src 'self' data: https: blob:; sandbox;",
+
+    // [REMOTE_PATTERNS]: Removed self-referencing domains to avoid Internal Fetch overhead
+    remotePatterns: [],
   },
 
-  // [SEO_ARCHITECTURE]: Security & Caching Orchestration
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
@@ -93,20 +78,13 @@ const nextConfig: NextConfig = {
     ];
 
     if (!isProduction) {
-      securityHeaders.push({
-        key: "X-Robots-Tag",
-        value: "noindex, nofollow",
-      });
+      securityHeaders.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });
     }
 
     const cachingGroup = "(about|services|areas|blog|case-studies|privacy|terms)";
 
     return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-      // [EDGE_CACHE]: Intelligent SWR for Dynamic Sections
+      { source: "/:path*", headers: securityHeaders },
       {
         source: `/:slug${cachingGroup}`,
         headers: [
@@ -116,43 +94,23 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      {
-        source: `/:slug${cachingGroup}/:path*`,
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60",
-          },
-        ],
-      },
-      // [IMAGE_CACHE]: Optimized Asset Retention
+      // [EDGE_IMAGE_OPTIMIZATION]: Long-term retention for optimized assets
       {
         source: "/_next/image/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
       {
-        source: "/(images|fonts)/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
     ];
   },
 
   webpack: (config, { dev }) => {
-    // [TERMUX_FS_ADAPTATION]: ระบบจัดการหน่วยความจำบน Android
+    // [RESOURCE_GUARD]: Disable caching on Termux/Mobile to prevent storage bloat
     if (!isVercel) {
-      config.cache = false; // ปิด Cache เพื่อป้องกัน Disk I/O Bottleneck บนมือถือ
+      config.cache = false;
     }
-
     if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,

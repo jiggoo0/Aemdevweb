@@ -1,6 +1,7 @@
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
  * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { SiteConfig } from "@/types";
@@ -9,12 +10,12 @@ const GOOGLE_MAPS_URL = "https://share.google/MMWnXPv3evv4Qd8aC";
 
 export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
-  siteUrl: "https://www.aemdevweb.com", // [REMOVED]: Trailing slash เพื่อป้องกัน Double Slash ใน Metadata
+  siteUrl: "https://www.aemdevweb.com",
   description:
     "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์ประสิทธิภาพสูงเพื่อยึดครองพื้นที่บน Google และ AI Answer Engines อย่างยั่งยืน",
   logo: "/images/logo-main.webp",
 
-  // [INFRASTRUCTURE]
+  // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
   ogImage: "/images/og-main.webp",
   locale: "th_TH",
   themeColor: "#ef4444",
@@ -30,7 +31,7 @@ export const SITE_CONFIG: SiteConfig = {
   persona: {
     tone: "Strategic Partner, Technical Authority, Business-Centric",
     communicationStyle: "Result-oriented, Friendly Specialist, Transparent & Logical",
-    antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising without Engineering Data",
+    antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising",
   },
 
   keywords: [
@@ -53,7 +54,7 @@ export const SITE_CONFIG: SiteConfig = {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
     version: "18.0.0",
-    framework: "Next.js 15.x (App Router)", // [CORRECTED]: ปรับให้ตรงรุ่นปัจจุบันเพื่อความสมจริง
+    framework: "Next.js 15.x (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
@@ -67,7 +68,7 @@ export const SITE_CONFIG: SiteConfig = {
     avatar: "/images/avatar.webp",
     email: "me@aemdevweb.com",
     bioUrl: "/services/bio",
-    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO (Alongkorn Yomkerd) ที่เน้นการสร้างผลลัพธ์ทางธุรกิจผ่านโครงสร้างพื้นฐานดิจิทัลที่แม่นยำและล้ำสมัย",
+    bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO ที่เน้นการสร้างผลลัพธ์ทางธุรกิจผ่านโครงสร้างพื้นฐานดิจิทัลที่แม่นยำและล้ำสมัย",
     googleMerchantId: "8653147979146207424",
     twitterHandle: "@aemdevweb",
   },

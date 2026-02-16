@@ -1,4 +1,4 @@
-AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 05:34:07 +07 2026
+AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 06:07:37 +07 2026
 ------------------------------------------------
 .
 ./structure.txt
@@ -176,6 +176,7 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 05:34:07 +07 2026
 ./scripts/index-urls.js
 ./scripts/master_audit.py
 ./scripts/test-schema.ts
+./scripts/asset-audit.sh
 ./scripts/seo-monitor.py
 ./pnpm-lock.yaml
 ./tsconfig.json
@@ -184,4 +185,119 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 05:34:07 +07 2026
 ./types/template-props.ts
 ./service-account.json
 ./tsconfig.tsbuildinfo
-./_quarantine_assets_
+./a.sh
+Aemdevweb git:(main) ✗ ./scripts/audit-system.sh                                                 [AEMZA MACKS] เริ่มต้นกระบวนการ Audit ระบบ (Fresh-Baseline Mode)...                                                                                      [01/05] กำลังล้างข้อมูลและสร้าง Baseline โครงสร้างใหม่...[DONE] สร้าง structure.txt (Fresh Snapshot) สำเร็จ                                                    [02/05] ตรวจสอบ Type Integrity (TSC & Knip)...                                                      > www.aemdevweb.com@17.9.11 knip /data/data/com.termux/files/home/Aemdevweb                         > knip --cache --no-exit-code --no-progress                                                         [PASS] ไม่พบ Dead Code ตามนโยบาย Zero-Unused                                                         [03/05] รัน Master Audit Protocol (Python)...      🚀 AEM MASTER AUDITOR v1.0.1 (Unified Architecture)                                                 ==================================================                                                  🏗️  PHASE 1: STRUCTURAL INTEGRITY SCAN                ✅ Switchboard Loaded: 8 routes active.                                                          🎨  PHASE 2: VISUAL ACCESSIBILITY SCAN (WCAG AA)     ✅ Global CSS Loaded: 26 variables.                                                              ==================================================✨ ALL SYSTEMS GO: Project is Structurally & Visually Clean.                                        [PASS] ตรรกะใน Registry ถูกต้องตาม Schema                                                             [04/05] ตรวจสอบ Image Blur Metadata...                                                              🚀 INITIALIZING ASSET AUDIT PROTOCOL v18.0.4...                                                     📊 AUDIT SUMMARY:                                    - Total Assets Indexed: 65                        - Verified In-Use:     57                         - Protected (System):  11 rules active            - Unused Detected:     0                                                                         ✅ ALL STATIC REFERENCES VERIFIED.                                                                  🚀 AUDIT COMPLETE.                                                                                  [05/05] ตรวจสอบมาตรฐานรหัสสีใน Constants...         [PASS] บังคับใช้ HEX Standard สำเร็จ (Tailwind 4 Ready)                                                                                                   [COMPLETE] Audit ผ่านทุกขั้นตอน ระบบสะอาดและพร้อมสำหรับการ Deployment                                     ➜  Aemdevweb git:(main) ✗ pb                                                                        > www.aemdevweb.com@17.9.11 build /data/data/com.termux/files/home/Aemdevweb                        > pnpm test:schema && next build --webpack                                                                                                            > www.aemdevweb.com@17.9.11 test:schema /data/data/com.termux/files/home/Aemdevweb                  > tsx scripts/test-schema.ts                                                                                                                          --- [AEMDEVWEB] SCHEMA DIAGNOSTIC ENGINE v18.0.3 ---                                                🔍 [IDENTITY]: Auditing Global Site Graph... ✅ OK                                                  🔍 [SERVICES]: Auditing 7 Service nodes...                                                          🔍 [P-SEO]: Auditing 20 Area nodes...                                                               -------------------------------------------       ⏱️  Diagnostic Duration: 0.01s                     📦 Nodes Audited: 27                              🚀 [SUCCESS]: System Integrity Verified. No SEO Leaks found.                                        -------------------------------------------                                                           Skipping creating a lockfile at /data/data/com.termux/files/home/Aemdevweb/.next/lock because we're using WASM bindings                             ▲ Next.js 16.1.6 (webpack)                        - Experiments (use with caution):                   ⨯ mdxRs                                           · optimizePackageImports                          ✓ scrollRestoration                                                                                 Creating an optimized production build ...      ✓ Compiled successfully in 52s                    ✓ Finished TypeScript in 11.1s                    ✓ Collecting page data using 1 worker in 4.6s     ✓ Generating static pages using 1 worker (55/55) in 7.2s                                              Finalizing page optimization  .  Collecting buil✓ Collecting build traces in 37.3s                ✓ Finalizing page optimization in 37.3s                                                             Route (app)                                             Revalidate  Expire                          ┌ ○ /                                                           1h      1y                          ├ ○ /_not-found                                   ├ ○ /about                                        ├ ○ /areas                                        ├ ● /areas/[slug]                                 │ ├ /areas/bangkok                                │ ├ /areas/chon-buri                              │ ├ /areas/korat                                  │ └ [+17 more paths]                              ├ ○ /blog                                                       1h      1y                          ├ ● /blog/[slug]                                                1h      1y                          │ ├ /blog/seo-2026-strategy                                     1h      1y                          │ ├ /blog/5-points-killing-sales                                1h      1y                          │ ├ /blog/advanced-schema-markup                                1h      1y                          │ └ [+7 more paths]                               ├ ○ /case-studies                                               1h      1y                          ├ ● /case-studies/[slug]                                        1h      1y                          │ ├ /case-studies/provincial-digital-domination                 1h      1y                          │ ├ /case-studies/case-study-industrial-catalog                 1h      1y                          │ └ /case-studies/unlink-reputation-management-success          1h      1y                          ├ ○ /manifest.webmanifest                         ├ ○ /privacy                                      ├ ○ /robots.txt                                   ├ ○ /services                                     ├ ● /services/[slug]                              │ ├ /services/seo-agency                          │ ├ /services/salepage                            │ ├ /services/corporate                           │ └ [+4 more paths]                               ├ ○ /sitemap.xml                                  ├ ○ /status                                       └ ○ /terms                                                                                                                                            ○  (Static)  prerendered as static content        ●  (SSG)     prerendered as static HTML (uses generateStaticParams)                                                                                                                                     > www.aemdevweb.com@17.9.11 postbuild /data/data/com.termux/files/home/Aemdevweb                    > bundlesize                                                                                                                                          ─ .next/static/chunks/main-*.js                     ✔ .next/static/chunks/main-app-fe1e315cabdb21d7.js     229B < 150 kB gzip                           ✔ .next/static/chunks/main-41868e4c6eab357c.js         38.13KB < 150 kB gzip                                                                        ─ .next/static/chunks/framework-*.js                ✔ .next/static/chunks/framework-bc511be5d789680f.js    56.14KB < 200 kB gzip                                                                        ─ .next/static/css/*.css                            ✔ .next/static/css/e11c71db23a5c4e8.css                18.95KB < 130 kB gzip                        ✔ .next/static/css/c2fb95b2b8054b05.css                982B < 130 kB gzip                                                                           ─ .next/static/chunks/[0-9]*.js                     ✔ .next/static/chunks/9567-a781aea9eb02e64c.js         6.2KB < 250 kB gzip                          ✔ .next/static/chunks/9541.5f7a0baa4d3397b8.js         1.39KB < 250 kB gzip                         ✔ .next/static/chunks/9528-226f79eefb6229b8.js         3.67KB < 250 kB gzip                         ✔ .next/static/chunks/9482.27236347262624db.js         4.04KB < 250 kB gzip                         ✔ .next/static/chunks/8290-edefcf3e18655c59.js         5.37KB < 250 kB gzip                         ✔ .next/static/chunks/7799-05f56e4d981d16f5.js         17.07KB < 250 kB gzip                        ✔ .next/static/chunks/7694-45e4dc82892f6415.js         8.94KB < 250 kB gzip                         ✔ .next/static/chunks/7024-f3c71ec269b29c84.js         2.58KB < 250 kB gzip                         ✔ .next/static/chunks/6594-1a8f9d17d7f0d390.js         50.6KB < 250 kB gzip                         ✔ .next/static/chunks/5959-9768dc434d834b00.js         5.42KB < 250 kB gzip                         ✔ .next/static/chunks/5438-c63090ff1914f4ba.js         5.15KB < 250 kB gzip                         ✔ .next/static/chunks/5378-89586b58a579d037.js         29.39KB < 250 kB gzip                        ✔ .next/static/chunks/3962-2106ee1128db1c06.js         7.84KB < 250 kB gzip                         ✔ .next/static/chunks/3311.0c5cfb5e65dc9633.js         5.23KB < 250 kB gzip                         ✔ .next/static/chunks/3132-91b87065ebe89e32.js         7.94KB < 250 kB gzip                         ✔ .next/static/chunks/2454-144c0464473f94ce.js         41.34KB < 250 kB gzip                        ✔ .next/static/chunks/2417-9661f86d4f471021.js         3.43KB < 250 kB gzip                         ✔ .next/static/chunks/1428-545860e6cff2497b.js         8.25KB < 250 kB gzip                                                                           23 checks passed                                                                                  ➜  Aemdevweb git:(main) ✗
+/**
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.121 (STABLE_RELEASE)
+ * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ */
+
+import nextMDX from "@next/mdx";
+import bundleAnalyzer from "@next/bundle-analyzer";
+import type { NextConfig } from "next";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkGfm from "remark-gfm";
+
+const isVercel = process.env.VERCEL === "1";
+const isProduction = process.env.NODE_ENV === "production";
+
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [remarkGfm, remarkFrontmatter],
+    rehypePlugins: [],
+  },
+});
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+  compress: true, 
+
+  compiler: {
+    removeConsole: isProduction ? { exclude: ["error"] } : false,
+  },
+
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false, 
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
+  experimental: {
+    scrollRestoration: true,
+    workerThreads: false,
+    cpus: isVercel ? undefined : 1, 
+    optimizePackageImports: [
+      "lucide-react", "framer-motion", "@radix-ui/react-slot",
+      "tailwindcss-animate", "date-fns", "clsx", "tailwind-merge",
+    ],
+    mdxRs: isVercel,
+  },
+
+  // [ASSET_ARCHITECTURE]: Optimized for Local FS & Edge Caching
+  images: {
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000, 
+    dangerouslyAllowSVG: true,
+    
+    // [SECURITY]: Restricted to Self + Base64 + Trusted Protocols
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; img-src 'self' data: https: blob:; sandbox;",
+
+    // [REMOTE_PATTERNS]: Removed self-referencing domains to avoid Internal Fetch overhead
+    remotePatterns: [], 
+  },
+
+  async headers() {
+    const securityHeaders = [
+      { key: "X-DNS-Prefetch-Control", value: "on" },
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+    ];
+
+    if (!isProduction) {
+      securityHeaders.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });
+    }
+
+    const cachingGroup = "(about|services|areas|blog|case-studies|privacy|terms)";
+
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      {
+        source: `/:slug${cachingGroup}`,
+        headers: [{ key: "Cache-Control", value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60" }],
+      },
+      // [EDGE_IMAGE_OPTIMIZATION]: Long-term retention for optimized assets
+      {
+        source: "/_next/image/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
+
+  webpack: (config, { dev }) => {
+    // [RESOURCE_GUARD]: Disable caching on Termux/Mobile to prevent storage bloat
+    if (!isVercel) {
+      config.cache = false; 
+    }
+    if (dev && !isVercel) {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 500,
+        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**", "**/structure.txt"],
+      };
+    }
+    return config;
+  },
+};
+
+export default withBundleAnalyzer(withMDX(nextConfig));
