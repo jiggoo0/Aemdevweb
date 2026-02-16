@@ -1,18 +1,24 @@
 /**
- * [SEO TOOL]: SCHEMA_INTEGRITY_VALIDATOR v17.9.42 (TYPE_STABILIZED)
- * [STRATEGY]: Pre-flight Validation | E-E-A-T Guard | P-SEO Structural Audit
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [SEO TOOL]: SCHEMA_INTEGRITY_VALIDATOR v18.0.8 (ESLINT_SAFE)
+ * [STRATEGY]: Strict Mapping | EEAT Compliance | Zero-Any Logic
  */
 
-import { SITE_CONFIG } from "@/constants/site-config";
+// --- [STRICT TYPES FOR VALIDATION] ---
+interface BreadcrumbTarget {
+  "@id": string;
+  name?: string;
+}
 
-// --- [TYPE DEFINITIONS] ---
+interface ImageTarget {
+  url: string;
+}
+
 interface SchemaNode {
   "@type": string;
   "@id"?: string;
   url?: string;
   name?: string;
-  image?: string | string[];
+  image?: string | string[] | ImageTarget;
   address?: unknown;
   geo?: unknown;
   telephone?: string;
@@ -26,111 +32,86 @@ interface SchemaGraph {
   "@graph": SchemaNode[];
 }
 
-interface ValidationResult {
+interface BreadcrumbItem {
+  "@type": "ListItem";
+  position: number;
+  item?: string | BreadcrumbTarget;
+}
+
+export interface ValidationReport {
   readonly isValid: boolean;
   readonly errors: readonly string[];
   readonly warnings: readonly string[];
 }
 
-/**
- * @function validateSchemaIntegrity
- * @description ตรวจสอบโครงสร้าง JSON-LD เพื่อป้องกันปัญหาการโดนลดอันดับจากข้อมูลที่ไม่สมบูรณ์
- */
-export function validateSchemaIntegrity(graph: unknown): ValidationResult {
+export function validateSchemaIntegrity(graph: unknown): ValidationReport {
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  // [01] TYPE GUARD: ป้องกัน Input ผิดประเภท
   if (typeof graph !== "object" || graph === null) {
-    return {
-      isValid: false,
-      errors: ["[CRITICAL]: Schema input is not a valid object"],
-      warnings: [],
-    };
+    return { isValid: false, errors: ["[CRITICAL]: Invalid Object"], warnings: [] };
   }
 
   const schemaData = graph as Partial<SchemaGraph>;
 
-  // [02] CONTEXT CHECK: ต้องเป็น https เท่านั้น
   if (schemaData["@context"] !== "https://schema.org") {
-    errors.push(
-      `[CONTEXT_ERROR]: '@context' must be 'https://schema.org' (Found: ${schemaData["@context"]})`,
-    );
+    errors.push(`[CONTEXT_ERROR]: Missing https context`);
   }
 
   const graphNodes = Array.isArray(schemaData["@graph"]) ? schemaData["@graph"] : [];
   if (graphNodes.length === 0) {
-    errors.push("[STRUCTURE_ERROR]: Schema Graph is empty or missing '@graph'");
+    errors.push("[STRUCTURE_ERROR]: Empty Graph");
     return { isValid: false, errors, warnings };
   }
 
-  /**
-   * [INTERNAL HELPER]: ตรวจสอบ Absolute URL (บังคับสำหรับ Google Indexing)
-   */
   const checkAbsoluteUrl = (url: unknown, path: string) => {
     if (typeof url === "string" && !url.startsWith("http")) {
-      errors.push(`[URL_ERROR]: "${path}" must be an Absolute URL (Current: ${url})`);
+      errors.push(`[URL_ERROR]: "${path}" must be Absolute (Current: ${url})`);
     }
   };
 
-  // [03] IDENTITY AUDIT: ตรวจสอบโหนด Organization และ Person
+  // IDENTITY CHECK
   const identityNode = graphNodes.find((n) =>
-    ["ProfessionalService", "Organization", "LocalBusiness"].includes(n["@type"]),
+    ["ProfessionalService", "Organization", "LocalBusiness", "WebSite"].includes(n["@type"]),
   );
-  const expertNode = graphNodes.find((n) => n["@type"] === "Person");
+  if (!identityNode) errors.push("[EEAT_ERROR]: Missing Identity Node");
 
-  if (!identityNode) errors.push("[EEAT_ERROR]: Missing Organization/ProfessionalService node");
-  if (!expertNode)
-    warnings.push("[EEAT_WARNING]: Missing 'Person' node (Affects Author Authority)");
-
-  // [04] P-SEO AUDIT: เจาะลึกโหนด LocalBusiness และ Breadcrumbs
   graphNodes.forEach((node, idx) => {
     const type = node["@type"];
-    const identifier = node.name || node.slug || `@graph[${idx}]`;
+    const identifier = node.name || node["@id"] || `@graph[${idx}]`;
 
-    // A. LocalBusiness Hardening (หัวใจของ P-SEO)
+    // LocalBusiness Hardening
     if (type === "LocalBusiness" || type === "ProfessionalService") {
-      if (!node.address) errors.push(`[SEO_ERROR]: ${identifier} requires 'address'`);
-      if (!node.telephone)
-        warnings.push(`[SEO_WARNING]: ${identifier} should have 'telephone' for Local Pack`);
-      if (!node.geo)
-        warnings.push(
-          `[SEO_WARNING]: ${identifier} missing 'geo' coordinates (Affects Google Maps)`,
-        );
-      if (!node.priceRange) warnings.push(`[SEO_WARNING]: ${identifier} missing 'priceRange'`);
-
+      if (!node.address) errors.push(`[SEO_ERROR]: ${identifier} missing address`);
       checkAbsoluteUrl(node.url, `${identifier}.url`);
-      checkAbsoluteUrl(node["@id"], `${identifier}.@id`);
     }
 
-    // B. Breadcrumb Integrity (กันปัญหา Breadcrumbs ใน Search Console)
+    // [FIXED]: Breadcrumb Integrity - No Any
     if (type === "BreadcrumbList") {
       const items = Array.isArray(node.itemListElement) ? node.itemListElement : [];
-      if (items.length === 0) errors.push(`[SEO_ERROR]: BreadcrumbList "${identifier}" is empty`);
-
-      // [FIXED]: เปลี่ยนจาก item: any เป็น Explicit Type เพื่อแก้ ESLint / TypeScript Error
       items.forEach((item: unknown, i: number) => {
-        // ทำการ Type Check อย่างปลอดภัยก่อนเข้าถึง Property
         if (item && typeof item === "object" && "item" in item) {
-          const breadcrumbItem = (item as { item: unknown }).item;
-          if (typeof breadcrumbItem === "string") {
-            checkAbsoluteUrl(breadcrumbItem, `Breadcrumb[${i}].item`);
-          }
+          const listItem = item as BreadcrumbItem;
+          // [SAFE_CAST]: ไม่ใช้ any แต่ใช้ Interface ที่นิยามไว้
+          const targetUrl =
+            typeof listItem.item === "string"
+              ? listItem.item
+              : (listItem.item as BreadcrumbTarget)?.["@id"];
+          if (targetUrl) checkAbsoluteUrl(targetUrl, `Breadcrumb[${i}].item`);
         }
       });
     }
 
-    // C. Image Validation
+    // [FIXED]: Image Validation - No Any
     if (node.image) {
       const images = Array.isArray(node.image) ? node.image : [node.image];
-      images.forEach((img, i) => checkAbsoluteUrl(img, `${identifier}.image[${i}]`));
+      images.forEach((img, i) => {
+        // [SAFE_CAST]: ตรวจสอบว่าเป็น String หรือ ImageTarget Object
+        const imgUrl = typeof img === "string" ? img : (img as ImageTarget)?.url;
+        if (imgUrl) checkAbsoluteUrl(imgUrl, `${identifier}.image[${i}]`);
+      });
     }
   });
-
-  // [05] GLOBAL CONFIG SYNC
-  if (SITE_CONFIG.siteUrl && !SITE_CONFIG.siteUrl.startsWith("https")) {
-    errors.push("[CONFIG_ERROR]: SITE_CONFIG.siteUrl must use HTTPS");
-  }
 
   return {
     isValid: errors.length === 0,

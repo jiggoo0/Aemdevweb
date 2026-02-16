@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.121 (PATCHED)
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.121 (STABLE_RELEASE)
  * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -18,8 +18,6 @@ const withMDX = nextMDX({
   options: {
     remarkPlugins: [remarkGfm, remarkFrontmatter],
     rehypePlugins: [],
-    // [PERFORMANCE]: บังคับใช้ Rust compiler สำหรับ MDX ถ้าอยู่บน Vercel
-    // บน Termux (ARM) บางครั้ง JS compiler เสถียรกว่า ให้ Test ดูครับ
   },
 });
 
@@ -28,27 +26,28 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // [OPTIMIZATION]: Core Web Vitals Acceleration
+  // [OPTIMIZATION]: Core Web Vitals & Stability
   reactStrictMode: true,
-  compress: true, // Gzip/Brotli
+  compress: true, 
 
-  // [COMPILER_HARDENING]: Drop Console in Production
+  // [COMPILER_HARDENING]: Cleaner Production Logs
   compiler: {
     removeConsole: isProduction ? { exclude: ["error"] } : false,
   },
 
-  productionBrowserSourceMaps: false, // ปิดเพื่อลดขนาด Build และซ่อน Source code
-  poweredByHeader: false, // Security: ซ่อน X-Powered-By: Next.js
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false, 
 
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process (OOM Killer prevention)
-    workerThreads: false,
-    cpus: isVercel ? undefined : 1, // บังคับ Single Core บน Local เพื่อเสถียรภาพ
     
-    // [TREE_SHAKING]: Optimize Libs
+    // [TERMUX_HARDENING]: ป้องกัน Android OOM Killer
+    workerThreads: false,
+    cpus: isVercel ? undefined : 1, 
+
+    // [TREE_SHAKING]: Optimize Critical Libraries
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -58,37 +57,39 @@ const nextConfig: NextConfig = {
       "clsx",
       "tailwind-merge",
     ],
-    // เปิด MDX Rust Compiler เฉพาะบน Vercel เพื่อเลี่ยงปัญหา Binary บน Android/Termux
-    mdxRs: isVercel, 
+    
+    // MDX Rust Compiler: เปิดเฉพาะบน Vercel เพื่อเลี่ยงปัญหาสถาปัตยกรรมบนมือถือ
+    mdxRs: isVercel,
   },
 
+  // [ASSET_OPTIMIZATION]: High-Performance Media Handling
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000, // 1 Year
+    minimumCacheTTL: 31536000, // 1 Year Persistent Cache
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.aemdevweb.com", // [FIXED]: Added dot
+        hostname: "www.aemdevweb.com",
       },
       {
         protocol: "https",
-        hostname: "aemdevweb.com", // [ADDED]: Support naked domain
+        hostname: "aemdevweb.com",
       },
     ],
   },
 
-  // [SEO_ARCHITECTURE]: Headers Management
+  // [SEO_ARCHITECTURE]: Security & Caching Orchestration
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-      { key: "X-Frame-Options", value: "SAMEORIGIN" }, // [ADDED]: Prevent Clickjacking
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
     ];
 
     if (!isProduction) {
@@ -105,7 +106,7 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // [EDGE_CACHE_ROOT]: สำหรับหน้าหลักของ section
+      // [EDGE_CACHE]: Intelligent SWR for Dynamic Sections
       {
         source: `/:slug${cachingGroup}`,
         headers: [
@@ -115,7 +116,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // [EDGE_CACHE_DEEP]: [FIXED] สำหรับหน้าลูก (เช่น /blog/post-1)
       {
         source: `/:slug${cachingGroup}/:path*`,
         headers: [
@@ -125,7 +125,7 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // [OPTIMIZED_IMAGE_CACHE]: สำหรับรูปภาพ Next/Image
+      // [IMAGE_CACHE]: Optimized Asset Retention
       {
         source: "/_next/image/:path*",
         headers: [
@@ -135,9 +135,8 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // [STATIC_ASSET_CACHE]: สำหรับไฟล์ใน public/images และ fonts
       {
-        source: "/(images|fonts)/:path*", 
+        source: "/(images|fonts)/:path*",
         headers: [
           {
             key: "Cache-Control",
@@ -149,16 +148,15 @@ const nextConfig: NextConfig = {
   },
 
   webpack: (config, { dev }) => {
-    // [TERMUX_OPTIMIZATION]: Memory Management
+    // [TERMUX_FS_ADAPTATION]: ระบบจัดการหน่วยความจำบน Android
     if (!isVercel) {
-       // ปิด Cache webpack บน Termux เพื่อลดการเขียนไฟล์ขยะมหาศาล (แลกกับ build ช้าลงนิดหน่อยแต่เครื่องไม่ค้าง)
-      config.cache = false; 
+      config.cache = false; // ปิด Cache เพื่อป้องกัน Disk I/O Bottleneck บนมือถือ
     }
-    
+
     if (dev && !isVercel) {
       config.watchOptions = {
-        poll: 1000, // Check changes every 1s
-        aggregateTimeout: 500, // [TUNED]: รอ 500ms หลัง save ก่อน rebuild เพื่อลด load
+        poll: 1000,
+        aggregateTimeout: 500,
         ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**", "**/structure.txt"],
       };
     }

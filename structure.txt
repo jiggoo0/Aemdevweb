@@ -1,7 +1,7 @@
-AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 03:44:29 +07 2026
+AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 05:34:07 +07 2026
 ------------------------------------------------
 .
-./README.md
+./structure.txt
 ./app
 ./app/(business)
 ./app/(business)/areas
@@ -143,13 +143,14 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 03:44:29 +07 2026
 ./pnpm-workspace.yaml
 ./postcss.config.mjs
 ./public
-./public/favicon-32x32.png
 ./public/android-chrome-192x192.png
-./public/favicon-16x16.png
 ./public/android-chrome-512x512.png
 ./public/apple-touch-icon.png
+./public/favicon-16x16.png
+./public/favicon-32x32.png
 ./public/favicon.ico
 ./public/grid-pattern.svg
+./public/logo-icon.svg
 ./public/images
 ./public/images/areas
 ./public/images/avatar.webp
@@ -165,7 +166,6 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 03:44:29 +07 2026
 ./public/images/seo
 ./public/images/service
 ./public/images/shared
-./public/logo-icon.svg
 ./scripts
 ./scripts/audit-system.sh
 ./scripts/check-types-usage.sh
@@ -182,6 +182,6 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 03:44:29 +07 2026
 ./types
 ./types/index.d.ts
 ./types/template-props.ts
-./structure.txt
 ./service-account.json
 ./tsconfig.tsbuildinfo
+./_quarantine_assets_

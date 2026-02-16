@@ -19,10 +19,10 @@ export function cn(...inputs: ClassValue[]): string {
  */
 export function absoluteUrl(path: string): string {
   const baseUrl = SITE_CONFIG.siteUrl.replace(/\/$/, "");
-  
+
   if (!path || path === "/" || path === "") return `${baseUrl}/`;
   if (path.startsWith("http")) return path;
-  
+
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
   // คืนค่า URL ที่สะอาดและคงโครงสร้าง www ไว้เสมอ
   return `${baseUrl}${cleanPath.replace(/\/+$/, "")}`;
@@ -36,7 +36,10 @@ export function hexToOklch(hex: string): { l: number; c: number; h: number } | n
   // รองรับ Hex แบบสั้น (#abc)
   let fullHex = hex.replace(/^#/, "");
   if (fullHex.length === 3) {
-    fullHex = fullHex.split("").map(s => s + s).join("");
+    fullHex = fullHex
+      .split("")
+      .map((s) => s + s)
+      .join("");
   }
 
   const result = /^([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
@@ -87,7 +90,7 @@ export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
   // Core Surfaces
   styles["--surface-main"] = theme.background || (theme.mode === "dark" ? "#020617" : "#ffffff");
   styles["--text-primary"] = theme.foreground || (theme.mode === "dark" ? "#f8fafc" : "#0f172a");
-  
+
   // Identity Overrides
   styles["--radius"] = theme.radius || defaultRadius;
   styles["--font-primary"] = theme.fontFamily || defaultFont;

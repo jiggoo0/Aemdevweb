@@ -14,7 +14,7 @@ import type { UniversalTemplateProps } from "@/types";
 
 // --- Modular Component Registry ---
 import { GeoNodeHeader } from "./_components/GeoNodeHeader";
-import { DistrictHero } from "./_components/DistrictHero"; 
+import { DistrictHero } from "./_components/DistrictHero";
 import { LocalMapNode } from "./_components/LocalMapNode";
 import { LocalInsight } from "./_components/LocalInsight";
 import { MarketIntelligence } from "./_components/MarketIntelligence";
@@ -42,7 +42,6 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
       <JsonLd data={schema} />
 
       <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
-        
         {/* --- Phase 01: Identification --- */}
         <GeoNodeHeader
           province={provinceName}
@@ -55,9 +54,9 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
             [STRATEGY]: Personalization ผ่านระบบ Shuffle ชื่ออำเภอ
             [CHECK]: บังคับส่ง Array อย่างน้อย 1 ค่าเสมอเพื่อความเสถียรของเครื่องยนต์เรนเดอร์ (Hydration Safe)
         */}
-        <DistrictHero 
-          districts={data.districts && data.districts.length > 0 ? data.districts : ["เมือง"]} 
-          province={provinceName} 
+        <DistrictHero
+          districts={data.districts && data.districts.length > 0 ? data.districts : ["เมือง"]}
+          province={provinceName}
         />
 
         {/* --- Phase 02: Geographical Proof --- */}
@@ -69,10 +68,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
         {/* --- Phase 03: Market Analysis --- */}
         <div className="space-y-0">
-          <LocalInsight 
-            insight={context.marketInsight} 
-            painPoints={context.painPoints || []} 
-          />
+          <LocalInsight insight={context.marketInsight} painPoints={context.painPoints || []} />
 
           <MarketIntelligence
             level={context.competitorLevel || "medium"}

@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+[SCRIPT]: MASTER_AUDIT_PIPELINE v1.0.1
+[STRATEGY]: Structural Integrity & Visual Accessibility (WCAG AA)
+[MAINTAINER]: AEMDEVWEB Specialist Team
+"""
+
 import os
 import re
 import sys
@@ -15,6 +24,7 @@ PATHS = {
     "TEMPLATES_DIR": os.path.join(PROJECT_ROOT, "components/templates"),
     "SERVICES_DIR": os.path.join(PROJECT_ROOT, "constants/services"),
     "NODES_DIR": os.path.join(PROJECT_ROOT, "constants/area-nodes"),
+    # Directories to scan for color definitions
     "COLOR_TARGETS": [
         os.path.join(PROJECT_ROOT, "app"),
         os.path.join(PROJECT_ROOT, "constants/services"),
@@ -44,7 +54,7 @@ class Colors:
 # ==========================================
 class StructuralAuditor:
     def __init__(self):
-        self.registered_slugs = {}
+        self.registered_slugs = set()
         self.issues = []
         self.warnings = []
 
@@ -63,13 +73,15 @@ class StructuralAuditor:
         with open(PATHS["RENDERER"], 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # [FIX]: Regex รองรับ Type Definition (: Record<...>)
+        # [REGEX]: จับคู่ Key ใน TEMPLATE_REGISTRY รองรับทั้งแบบ 'key': val และ key: val
+        # ค้นหา Block: const TEMPLATE_REGISTRY = { ... };
         registry_block = re.search(r'const TEMPLATE_REGISTRY[\s\S]*?=\s*\{([\s\S]*?)\};', content)
         
         if registry_block:
-            matches = re.findall(r'["\']?([\w-]+)["\']?\s*:\s*(\w+)', registry_block.group(1))
-            for slug, component in matches:
-                self.registered_slugs[slug] = component
+            # ดึง Key ทั้งหมดออกมา
+            matches = re.findall(r'["\']?([\w-]+)["\']?\s*:', registry_block.group(1))
+            for slug in matches:
+                self.registered_slugs.add(slug)
             return True
         else:
             self.log_issue("RENDERER", "Could not parse TEMPLATE_REGISTRY. Regex mismatch.")
@@ -77,46 +89,56 @@ class StructuralAuditor:
 
     def scan_templates(self):
         """Phase 2: Check Template Integrity & Orphans"""
-        ignored = ['sections', 'ui', '_components']
+        ignored = ['sections', 'ui', '_components', 'DynamicThemeWrapper.tsx', 'TemplateRenderer.tsx']
         if not os.path.exists(PATHS["TEMPLATES_DIR"]): return
 
         for item in os.listdir(PATHS["TEMPLATES_DIR"]):
             folder_path = os.path.join(PATHS["TEMPLATES_DIR"], item)
-            if os.path.isdir(folder_path) and item not in ignored:
-                # Check Index.tsx
-                index_path = os.path.join(folder_path, "Index.tsx")
-                if not os.path.exists(index_path): index_path = os.path.join(folder_path, "index.tsx")
-                
-                if not os.path.exists(index_path):
-                    self.log_warning(f"TEMPLATE/{item}", "Folder exists but no 'Index.tsx' found.")
-                    continue
+            
+            # ข้ามถ้าไม่ใช่ Folder หรืออยู่ใน Ignore list
+            if not os.path.isdir(folder_path) or item in ignored:
+                continue
 
-                # Check Orphan Components
-                components_path = os.path.join(folder_path, "_components")
-                if os.path.exists(components_path):
-                    with open(index_path, 'r', encoding='utf-8') as f: index_content = f.read()
-                    for sub in [f for f in os.listdir(components_path) if f.endswith('.tsx')]:
-                        component_name = sub.replace('.tsx', '')
-                        if component_name not in index_content:
-                            self.log_issue(f"TEMPLATE/{item}", f"Orphan Component: {sub} in _components but unused.")
+            # Check Index.tsx existence
+            index_path = os.path.join(folder_path, "Index.tsx")
+            if not os.path.exists(index_path): 
+                index_path = os.path.join(folder_path, "index.tsx")
+            
+            if not os.path.exists(index_path):
+                self.log_warning(f"TEMPLATE/{item}", "Folder exists but no 'Index.tsx' found.")
+                continue
+
+            # Check Orphan Components in _components
+            components_path = os.path.join(folder_path, "_components")
+            if os.path.exists(components_path):
+                with open(index_path, 'r', encoding='utf-8') as f: index_content = f.read()
+                
+                for sub in [f for f in os.listdir(components_path) if f.endswith('.tsx')]:
+                    component_name = sub.replace('.tsx', '')
+                    # เช็คว่า Component ถูกเรียกใช้ใน Index.tsx หรือไม่ (แบบ Simple String Check)
+                    if component_name not in index_content:
+                        self.log_issue(f"TEMPLATE/{item}", f"Orphan Component found: '{sub}' is in _components but unused in Index.tsx")
 
     def scan_bindings(self, dir_path, context):
-        """Phase 3: Verify Data Bindings"""
+        """Phase 3: Verify Data Bindings in Constants"""
         if not os.path.exists(dir_path): return
+        
         for root, _, files in os.walk(dir_path):
             for file in files:
                 if file.endswith('.ts') and file != 'index.ts':
-                    with open(os.path.join(root, file), 'r', encoding='utf-8') as f: content = f.read()
+                    file_path = os.path.join(root, file)
+                    with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
                     
+                    # ค้นหา templateSlug: "value"
                     match = re.search(r'templateSlug\s*:\s*["\']([\w-]+)["\']', content)
                     if match:
                         slug = match.group(1)
-                        # Check against registry ONLY if registry was successfully loaded
+                        # ตรวจสอบว่า Slug นี้มีอยู่จริงใน Registry หรือไม่
                         if self.registered_slugs and slug not in self.registered_slugs:
-                            self.log_issue(f"{context}/{file}", f"Invalid templateSlug: '{slug}' (Not in Registry)")
+                            self.log_issue(f"{context}/{file}", f"Invalid templateSlug: '{slug}' (Not found in Registry)")
                     else:
-                        # Only warn if it looks like a data node
-                        if "export const" in content and "Node" in content:
+                        # แจ้งเตือนถ้าดูเหมือนจะเป็นไฟล์ Data Node แต่ไม่มี templateSlug
+                        if "export const" in content and ("Node" in content or "Service" in content):
                             self.log_warning(f"{context}/{file}", "No 'templateSlug' definition found.")
 
     def run(self):
@@ -138,9 +160,12 @@ class ColorAuditor:
         self.issues = []
 
     def load_css_variables(self):
+        """Load CSS Variables from globals.css"""
         if not os.path.exists(PATHS["GLOBAL_CSS"]): return
         with open(PATHS["GLOBAL_CSS"], 'r', encoding='utf-8') as f:
+            # ลบ Comment ออกก่อน
             content = re.sub(r'/\*.*?\*/', '', f.read(), flags=re.DOTALL)
+            # ดึง Variable ทั้งหมด
             for m in re.finditer(r'(--[\w-]+)\s*:\s*([^;]+);', content):
                 val = m.group(2).strip()
                 if '//' in val: val = val.split('//')[0].strip()
@@ -154,24 +179,38 @@ class ColorAuditor:
         return float(val_str)
 
     def oklch_to_rgb(self, l, c, h):
+        """Approximation of OKLCH to sRGB for audit purposes"""
+        # Convert degrees to radians
         h_rad = math.radians(h)
-        L_, a_, b_ = l, c * math.cos(h_rad), c * math.sin(h_rad)
+        
+        # OKLCH -> LMS
+        L_ = l
+        a_ = c * math.cos(h_rad)
+        b_ = c * math.sin(h_rad)
+        
         l_ = L_ + 0.3963377774 * a_ + 0.2158037573 * b_
         m_ = L_ - 0.1055613458 * a_ - 0.0638541728 * b_
         s_ = L_ - 0.0894841775 * a_ - 1.2914855480 * b_
+        
+        # LMS -> Linear RGB
         l_lin, m_lin, s_lin = l_**3, m_**3, s_**3
+        
         r = +4.0767416621 * l_lin - 3.3077115913 * m_lin + 0.2309699292 * s_lin
         g = -1.2684380046 * l_lin + 2.6097574011 * m_lin - 0.3413190965 * s_lin
         b = -0.0041960863 * l_lin - 0.7034186147 * m_lin + 1.7076147010 * s_lin
-        def to_255(v): return int((1.055 * (v**(1.0/2.4)) - 0.055 if v >= 0.0031308 else 12.92 * v) * 255)
-        return (to_255(max(0, min(1, r))), to_255(max(0, min(1, g))), to_255(max(0, min(1, b))))
+        
+        # Linear RGB -> sRGB (Gamma Correction)
+        def to_255(v): 
+            val = (1.055 * (v**(1.0/2.4)) - 0.055) if v >= 0.0031308 else (12.92 * v)
+            return int(max(0, min(1, val)) * 255)
+            
+        return (to_255(r), to_255(g), to_255(b))
 
     def parse_color(self, color_str):
         if not color_str: return None
         color_str = str(color_str).lower().strip()
         
-        # OKLCH Parser (Tailwind 4 Style)
-        # Matches: oklch(0.6 0.1 240) or 60% 0.1 240
+        # OKLCH Parser (Tailwind 4 Style): oklch(0.6 0.1 240)
         oklch_match = re.search(r'(?:oklch\()?\s*([\d.]+%?)\s+([\d.]+)\s+([\d.]+)', color_str)
         if oklch_match:
             try:
@@ -190,24 +229,35 @@ class ColorAuditor:
         return None
 
     def resolve_var(self, value, depth=0):
+        """Recursive variable resolver"""
         if not value or depth > 5: return None
         value = str(value).strip()
         
-        # 1. Direct Var
+        # Check for direct var usage
         if value.startswith('var('):
              match = re.search(r'var\((--[\w-]+)\)', value)
              if match: return self.resolve_var(self.css_vars.get(match.group(1)), depth + 1)
+        
+        # Check if it's a value mapped in css_vars (direct key)
+        if value in self.css_vars:
+            return self.resolve_var(self.css_vars[value], depth + 1)
 
-        # 2. Wrapped Var (e.g., oklch(var(--foo)))
-        while 'var(--' in value and depth < 5:
+        # Try parsing as color directly
+        parsed = self.parse_color(value)
+        if parsed: return parsed
+
+        # Handle wrapped vars inside color functions
+        if 'var(--' in value:
             match = re.search(r'var\((--[\w-]+)\)', value)
-            if not match: break
-            value = value.replace(match.group(0), self.css_vars.get(match.group(1), ''))
-            depth += 1
+            if match:
+                resolved_inner = self.css_vars.get(match.group(1), '')
+                new_val = value.replace(match.group(0), resolved_inner)
+                return self.resolve_var(new_val, depth + 1)
             
-        return self.parse_color(value)
+        return None
 
     def get_contrast(self, rgb1, rgb2):
+        """Calculate WCAG Contrast Ratio"""
         def lum(rgb):
             a = [x/255.0 for x in rgb]
             a = [((x+0.055)/1.055)**2.4 if x > 0.03928 else x/12.92 for x in a]
@@ -224,26 +274,29 @@ class ColorAuditor:
             if not os.path.exists(target): continue
             for root, _, files in os.walk(target):
                 for file in files:
-                    if file.endswith('.ts') and 'node_modules' not in root:
-                        with open(os.path.join(root, file), 'r', encoding='utf-8') as f: content = f.read()
+                    # Scan TypeScript/TSX files for color definitions
+                    if (file.endswith('.ts') or file.endswith('.tsx')) and 'node_modules' not in root:
+                        file_path = os.path.join(root, file)
+                        with open(file_path, 'r', encoding='utf-8') as f: content = f.read()
                         
-                        # Find Theme Objects using Regex
-                        for block in re.findall(r'\{([^}]+)\}', content):
-                            mode = re.search(r'mode\s*:\s*["\'](dark|light)["\']', block)
-                            mode_key = mode.group(1) if mode else "light"
-                            
-                            primary = re.search(r'primary\s*:\s*["\']([^"\']+)["\']', block)
-                            bg = re.search(r'background\s*:\s*["\']([^"\']+)["\']', block)
-                            
-                            p_val = primary.group(1) if primary else None
-                            bg_val = bg.group(1) if bg else SYSTEM_DEFAULTS[mode_key]["bg"]
+                        # Regex to find Theme Objects: { primary: "...", background: "..." }
+                        # This is heuristic and assumes a certain structure
+                        matches = re.findall(r'primary\s*:\s*["\']([^"\']+)["\']', content)
+                        
+                        for p_val in matches:
+                            # Try to find corresponding background or default to system
+                            # This is a basic check assuming standard light/dark modes
+                            bg_val = SYSTEM_DEFAULTS["light"]["bg"] 
+                            if "mode: 'dark'" in content or 'mode: "dark"' in content:
+                                bg_val = SYSTEM_DEFAULTS["dark"]["bg"]
 
-                            if p_val:
-                                rgb_p, rgb_b = self.resolve_var(p_val), self.resolve_var(bg_val)
-                                if rgb_p and rgb_b:
-                                    ratio = self.get_contrast(rgb_p, rgb_b)
-                                    if ratio < MIN_CONTRAST_RATIO:
-                                        self.issues.append(f"{os.path.join(root, file)} ({mode_key}): {p_val} on {bg_val} -> Ratio {ratio:.2f}")
+                            rgb_p = self.resolve_var(p_val)
+                            rgb_b = self.resolve_var(bg_val)
+                            
+                            if rgb_p and rgb_b:
+                                ratio = self.get_contrast(rgb_p, rgb_b)
+                                if ratio < MIN_CONTRAST_RATIO:
+                                    self.issues.append(f"{file} -> Color '{p_val}' on '{bg_val}' ratio is {ratio:.2f} (Fail)")
 
         return len(self.issues)
 
@@ -251,15 +304,17 @@ class ColorAuditor:
 # 🏁 MAIN EXECUTION
 # ==========================================
 def main():
-    print(f"{Colors.BOLD}🚀 AEM MASTER AUDITOR v1.0.0 (Unified Architecture){Colors.ENDC}")
+    print(f"{Colors.BOLD}🚀 AEM MASTER AUDITOR v1.0.1 (Unified Architecture){Colors.ENDC}")
     print("==================================================")
     
+    # 1. Structural Audit
     struct_audit = StructuralAuditor()
     struct_errors = struct_audit.run()
     
     for err in struct_audit.issues: print(err)
     for warn in struct_audit.warnings: print(warn)
 
+    # 2. Color Audit
     color_audit = ColorAuditor()
     color_errors = color_audit.run()
     

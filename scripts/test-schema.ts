@@ -1,92 +1,101 @@
 /**
- * [SEO QA]: SCHEMA_AUTOMATED_TEST v17.9.99 (STRICT_BUILD_LOCKED)
- * [STRATEGY]: Pre-build Validation | No-Any Compliance | Error Isolation
+ * [SEO QA]: SCHEMA_AUTOMATED_TEST v18.0.3 (STRICT_TYPES)
+ * [STRATEGY]: Pre-build Validation | Identity Injection Test | Zero-Any Compliance
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import {
   generateSchemaGraph,
-  generateUniversalSchema, // [UPDATED]: ใช้ Universal Generator ตัวใหม่
+  generateUniversalSchema,
   generateLocalBusinessSchema,
 } from "../lib/schema";
 import { validateSchemaIntegrity } from "../lib/schema-validator";
+import type { ValidationReport } from "../lib/schema-validator";
 import { MASTER_REGISTRY } from "../constants/master-registry";
 import { AREA_NODES } from "../constants/area-nodes";
-import type { TemplateMasterData, AreaNode, UniversalTemplateProps } from "../types";
+import type { AreaNode, TemplateMasterData } from "../types";
 
-/**
- * @function runSchemaDiagnostic
- * @description หน่วยประมวลผลตรวจสอบความถูกต้องของ JSON-LD ทั้งระบบ
- */
 async function runSchemaDiagnostic() {
-  console.log("\n--- [AEMDEVWEB] SCHEMA DIAGNOSTIC ENGINE v17.9.99 ---");
+  console.log("\n--- [AEMDEVWEB] SCHEMA DIAGNOSTIC ENGINE v18.0.3 ---");
   const startTime = Date.now();
   let totalErrors = 0;
   let auditedNodes = 0;
 
-  // [1] Global Graph Audit (Identity & Website Nodes)
+  // ---------------------------------------------------------
+  // [1] Global Graph Audit (Identity & E-E-A-T)
+  // ---------------------------------------------------------
   process.stdout.write("🔍 [IDENTITY]: Auditing Global Site Graph... ");
+
   const globalGraph = generateSchemaGraph([]);
-  const globalReport = validateSchemaIntegrity(globalGraph);
+  const globalReport: ValidationReport = validateSchemaIntegrity(globalGraph);
+
   if (!globalReport.isValid) {
     console.log("❌ FAILED");
-    console.error("   > Corruption in Global Identity Schema:", globalReport.errors);
+    globalReport.errors.forEach((e) => console.error(`   > ${e}`));
     totalErrors++;
   } else {
     console.log("✅ OK");
   }
 
-  // [2] Master Registry Audit (Service & Offer Nodes)
-  console.log(`🔍 [SERVICES]: Auditing ${MASTER_REGISTRY.length} Service nodes...`);
+  // ---------------------------------------------------------
+  // [2] Service Nodes Audit (7 Services Expected)
+  // ---------------------------------------------------------
+  console.log(`\n🔍 [SERVICES]: Auditing ${MASTER_REGISTRY.length} Service nodes...`);
+
   MASTER_REGISTRY.forEach((service: TemplateMasterData) => {
     auditedNodes++;
-    // [FIXED]: ส่งผ่าน Universal Schema Generator
-    const schema = generateUniversalSchema(service as unknown as UniversalTemplateProps);
-    const report = validateSchemaIntegrity(generateSchemaGraph([schema]));
+    const node = generateUniversalSchema(service);
+    const graph = generateSchemaGraph([node]);
+    const report: ValidationReport = validateSchemaIntegrity(graph);
 
     if (!report.isValid) {
-      console.error(`   ❌ [NODE_ID: ${service.id}]: "${service.title}"`);
-      console.error(`      > Reason:`, report.errors);
+      console.error(`   ❌ [ID: ${service.id}]: "${service.title}"`);
+      report.errors.forEach((e) => console.error(`      > ${e}`));
       totalErrors++;
     }
   });
 
-  // [3] Area Nodes Audit (LocalBusiness & P-SEO Nodes)
-  console.log(`🔍 [P-SEO]: Auditing ${AREA_NODES.length} Area nodes...`);
+  // ---------------------------------------------------------
+  // [3] Area Nodes Audit (P-SEO / 20 จังหวัด)
+  // ---------------------------------------------------------
+  console.log(`\n🔍 [P-SEO]: Auditing ${AREA_NODES.length} Area nodes...`);
+
   AREA_NODES.forEach((area: AreaNode) => {
     auditedNodes++;
-    const schema = generateLocalBusinessSchema(area);
-    const report = validateSchemaIntegrity(generateSchemaGraph([schema]));
+    const node = generateLocalBusinessSchema(area);
+    const graph = generateSchemaGraph([node]);
+    const report: ValidationReport = validateSchemaIntegrity(graph);
 
     if (!report.isValid) {
-      console.error(`   ❌ [SLUG: ${area.slug}]: Province: ${area.province}`);
-      console.error(`      > Reason:`, report.errors);
+      console.error(`   ❌ [SLUG: ${area.slug}]: ${area.province}`);
+      report.errors.forEach((e) => console.error(`      > ${e}`));
       totalErrors++;
     }
   });
 
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
 
-  // --- [SUMMARY REPORT] ---
+  // ---------------------------------------------------------
+  // [SUMMARY REPORT]
+  // ---------------------------------------------------------
   console.log("\n-------------------------------------------");
-  console.log(`⏱️ Diagnostic Duration: ${duration}s`);
+  console.log(`⏱️  Diagnostic Duration: ${duration}s`);
   console.log(`📦 Nodes Audited: ${auditedNodes}`);
 
   if (totalErrors > 0) {
-    console.error(`🚨 [CRITICAL]: Found ${totalErrors} Schema Integrity Violations.`);
-    console.error(`💡 Build Aborted. Fix errors in data registry to resume.`);
-    console.log("-------------------------------------------\n");
+    console.error(`🚨 [CRITICAL]: Found ${totalErrors} Schema Violations.`);
+    console.error(`💡 ACTION: Fix Absolute URL logic or Data Registry files.`);
     process.exit(1);
   } else {
-    console.log(`🚀 [SUCCESS]: All 47 Schema Entities are SEO-Ready.`);
+    console.log(`🚀 [SUCCESS]: System Integrity Verified. No SEO Leaks found.`);
     console.log("-------------------------------------------\n");
     process.exit(0);
   }
 }
 
-// [EXECUTION]
+// Global Crash Guard
 runSchemaDiagnostic().catch((err) => {
-  console.error("--- [SYSTEM CRASH] ---");
+  console.error("\n💥 [SYSTEM CRASH]: Unexpected Diagnostic Failure");
   console.error(err);
   process.exit(1);
 });

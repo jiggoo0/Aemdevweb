@@ -9,11 +9,11 @@ import React from "react";
 import type { Thing, WithContext } from "schema-dts";
 
 interface JsonLdProps {
-  /** * [STRICT]: รองรับ Schema.org Types อย่างสมบูรณ์ 
+  /** * [STRICT]: รองรับ Schema.org Types อย่างสมบูรณ์
    * ใช้ WithContext<Thing> เพื่อบังคับให้มี @context เสมอใน Root Level
    */
   readonly data: WithContext<Thing> | readonly Thing[] | Record<string, unknown> | null | undefined;
-  
+
   /** [OPTIONAL]: กำหนด ID เพื่อการ Debug หรือ Testing */
   readonly id?: string;
 }
@@ -28,9 +28,7 @@ export default function JsonLd({ data, id }: JsonLdProps) {
   if (!data) return null;
 
   // ตรวจสอบ Content: รองรับทั้ง Array และ Object
-  const hasContent = Array.isArray(data) 
-    ? data.length > 0 
-    : Object.keys(data).length > 0;
+  const hasContent = Array.isArray(data) ? data.length > 0 : Object.keys(data).length > 0;
 
   if (!hasContent) return null;
 

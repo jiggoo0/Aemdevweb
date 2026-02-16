@@ -34,11 +34,19 @@ export const SITE_CONFIG: SiteConfig = {
   },
 
   keywords: [
-    "รับทำเว็บไซต์", "รับทำ SEO สายขาว", "Technical SEO Specialist Thailand",
-    "รับออกแบบเว็บไซต์ บริษัท", "รับทำ Sale Page ยิงแอด",
-    "จ้างทำเว็บไซต์ ติดหน้าแรก Google", "รับทำเว็บไซต์ Next.js",
-    "AEMDEVWEB", "นายเอ็มซ่ามากส์ AEMDEVWEB", "อลงกรณ์ ยมเกิด",
-    "Alongkorn Yomkerd", "Web Infrastructure Specialist", "AI Search Optimization 2026",
+    "รับทำเว็บไซต์",
+    "รับทำ SEO สายขาว",
+    "Technical SEO Specialist Thailand",
+    "รับออกแบบเว็บไซต์ บริษัท",
+    "รับทำ Sale Page ยิงแอด",
+    "จ้างทำเว็บไซต์ ติดหน้าแรก Google",
+    "รับทำเว็บไซต์ Next.js",
+    "AEMDEVWEB",
+    "นายเอ็มซ่ามากส์ AEMDEVWEB",
+    "อลงกรณ์ ยมเกิด",
+    "Alongkorn Yomkerd",
+    "Web Infrastructure Specialist",
+    "AI Search Optimization 2026",
   ],
 
   project: {

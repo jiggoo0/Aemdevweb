@@ -1,7 +1,7 @@
 /**
- * [FEATURE COMPONENT]: BLOG_CARD_NODE v17.9.66 (ZERO_CLS_HARDENED)
+ * [FEATURE COMPONENT]: BLOG_CARD_NODE v18.0.0 (ZERO_CLS_HARDENED)
  * [STRATEGY]: Adaptive Aesthetics | Metadata Aspect-Ratio | LCP Optimized
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -24,19 +24,21 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProps) => {
-  // [LOGIC]: Image Fallback Strategy
-  // [FIX]: Removed post.coverImage to fix TS2339
-  const imageSource = useMemo(
-    () => post.thumbnail || "/images/blog/default-thumb.webp",
-    [post.thumbnail],
-  );
+  // [LOGIC]: Image Path Normalization & Fallback
+  const imageSource = useMemo(() => {
+    const src = post.thumbnail || "/images/blog/default-thumb.webp"; // [FIXED]: Extension typo
+    return src.trim().toLowerCase();
+  }, [post.thumbnail]);
 
-  // [ENGINE]: CLS Protection Data
-  const imgData = IMAGE_BLUR_DATA?.[imageSource] || null;
+  // [ENGINE]: CLS Protection Data (Strict Type Assertion)
+  const imgData = useMemo(
+    () => IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null,
+    [imageSource],
+  );
 
   return (
     <Link
-      href={`/blog/${post.slug}`}
+      href={`/blog/${post.slug.toLowerCase()}`}
       className={cn(
         "group relative flex h-full flex-col justify-between overflow-hidden rounded-[2.5rem] transition-all duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm border md:rounded-[3rem]",
@@ -48,26 +50,26 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
       {/* --- LAYER 01: IMAGE ENGINE (CLS PROTECTED) --- */}
       <div
         className="bg-surface-offset border-border relative w-full overflow-hidden border-b select-none"
-        /* [CLS GUARD]: Reserve Space using Aspect Ratio */
-        style={{ aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "16/10" }}
+        /* [CLS GUARD]: ป้องกันการขยับของ Grid (Layout Shift) 100% */
+        style={{
+          aspectRatio: imgData ? `${imgData.width}/${imgData.height}` : "16/10",
+          backgroundColor: "#111111",
+        }}
       >
         <Image
           src={imageSource}
           alt={post.title}
           fill
-          /* [LCP OPTIMIZATION]: Auto-prioritize first 2 items */
-          priority={priority || index < 2}
+          /* [LCP OPTIMIZATION]: เร่งความเร็วการแสดงผล 3 ใบแรก */
+          priority={priority || index < 3}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-110 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        {/* Texture Overlay (Consistent with System Design) */}
-        <div
-          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.05] mix-blend-overlay transition-opacity group-hover:opacity-0"
-          style={{ backgroundImage: "url(/grid-pattern.svg)" }}
-        />
+        {/* Texture Overlay */}
+        <div className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.05] mix-blend-overlay transition-opacity group-hover:opacity-0" />
 
         {/* Gradient Overlay */}
         <div className="from-surface-card/80 absolute inset-0 z-10 bg-gradient-to-t to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-40" />
@@ -84,12 +86,20 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
       <div className="flex flex-grow flex-col p-8 md:p-10">
         {/* Metadata */}
         <div className="text-text-muted mb-6 flex items-center gap-4 font-mono text-[8px] font-black tracking-[0.4em] uppercase md:mb-8 md:gap-6 md:text-[9px]">
-          <span suppressHydrationWarning>{post.date}</span>
+          <span suppressHydrationWarning>
+            {post.date
+              ? new Date(post.date).toLocaleDateString("th-TH", {
+                  year: "2-digit",
+                  month: "short",
+                  day: "numeric",
+                })
+              : "RECENT_NODE"}
+          </span>
           <span className="bg-border h-px w-8" />
           <span className="opacity-60">{post.readingTime || "5 MIN"} READ</span>
         </div>
 
-        {/* Title & Desc */}
+        {/* Title & Description */}
         <div className="flex-grow space-y-4 md:space-y-5">
           <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-xl font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-2xl">
             {post.title}
@@ -105,7 +115,7 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
             Analyze_Insight.Read
           </span>
           <div className="bg-surface-offset border-border group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow rounded-2xl border p-3 transition-all duration-500 group-hover:-rotate-45 md:p-3.5">
-            <IconRenderer name="ArrowRight" size={16} className="md:h-5 md:w-5" />
+            <IconRenderer name="ArrowRight" size={16} />
           </div>
         </div>
       </div>

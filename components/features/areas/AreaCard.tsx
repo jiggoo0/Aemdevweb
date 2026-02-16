@@ -1,7 +1,7 @@
 /**
- * [FEATURE COMPONENT]: AREA_CARD_NODE v17.9.72 (TRUST_HARDENED)
+ * [FEATURE COMPONENT]: AREA_CARD_NODE v18.0.0 (STRICT_PATH_HARDENED)
  * [STRATEGY]: Social Proof Injection | Geographic Authority | CLS Stability
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -23,7 +23,7 @@ interface AreaCardProps {
 }
 
 const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
-  // [DEFENSIVE]: ป้องกัน Array เป็น undefined และ Clone เพื่อความปลอดภัย
+  // [DEFENSIVE]: ป้องกัน Array เป็น undefined
   const districts = useMemo(
     () => (Array.isArray(data.districts) ? [...data.districts] : []),
     [data.districts],
@@ -31,21 +31,26 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
 
   const displayTitle = data.province || "พื้นที่ให้บริการ";
 
-  // [TRUST_SIGNAL]: ดึงข้อมูล Social Proof จาก Local Context
-  const socialProof = data.localContext?.socialProof;
+  // [LOGIC]: Smart Fallback Image Strategy (Strict Case-Sensitive Guard)
+  const imagePath = useMemo(() => {
+    if (data.heroImage) return data.heroImage.trim();
+    // บังคับ slug เป็น lowercase เพื่อให้ตรงกับไฟล์บน Linux/Vercel Server
+    const safeSlug = data.slug.trim().toLowerCase();
+    return `/images/areas/${safeSlug}-node.webp`;
+  }, [data.heroImage, data.slug]);
 
-  // [LOGIC]: Smart Fallback Image Strategy & Type-Safe Lookup
-  const imagePath = useMemo(
-    () => data.heroImage || `/images/areas/${data.slug}-node.webp`,
-    [data.heroImage, data.slug],
+  // [TYPE_FIX]: Match Key กับ IMAGE_BLUR_DATA ให้แม่นยำ
+  const imgData = useMemo(
+    () => IMAGE_BLUR_DATA[imagePath as keyof typeof IMAGE_BLUR_DATA] || null,
+    [imagePath],
   );
 
-  // [TYPE_FIX]: Assertion เพื่อป้องกัน TS Index Error
-  const imgData = IMAGE_BLUR_DATA[imagePath as keyof typeof IMAGE_BLUR_DATA] || null;
+  // [TRUST_SIGNAL]: Local Context Data
+  const socialProof = data.localContext?.socialProof;
 
   return (
     <Link
-      href={`/areas/${data.slug}`}
+      href={`/areas/${data.slug.toLowerCase()}`}
       className={cn(
         "group relative flex min-h-[480px] flex-col justify-between overflow-hidden rounded-[3rem] transition-all duration-700 ease-[0.16,1,0.3,1]",
         "border-border bg-surface-card shadow-pro-sm border",
@@ -58,10 +63,10 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
       <div className="absolute inset-0 z-0 overflow-hidden select-none">
         <Image
           src={imagePath}
-          alt={`บริการรับทำเว็บไซต์ ${displayTitle} โดยผู้เชี่ยวชาญ`}
+          alt={`บริการรับทำเว็บไซต์ ${displayTitle} ครบวงจร โดยผู้เชี่ยวชาญ`}
           fill
           priority={index < 2}
-          placeholder={imgData ? "blur" : "empty"}
+          placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-50 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-40"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -75,8 +80,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
 
       {/* --- LAYER 02: CONTENT ENGINE --- */}
       <div className="relative z-30 flex h-full flex-col justify-between p-8 md:p-10">
-        {/* Header: Icon, ID & Trust Signal */}
-        <div className="flex items-start justify-between">
+        <header className="flex items-start justify-between">
           <div className="bg-surface-offset/80 text-brand-primary border-border group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-2xl border backdrop-blur-xl transition-all duration-500 group-hover:rotate-[12deg]">
             <IconRenderer name="MapPin" size={24} strokeWidth={2.5} />
           </div>
@@ -86,7 +90,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
               NODE_{data.slug.slice(0, 3).toUpperCase()}
             </span>
 
-            {/* [TRUST_INJECTION]: แสดงคะแนนรีวิวรายพื้นที่ */}
+            {/* [TRUST_INJECTION]: Review Scores */}
             {socialProof && (
               <div className="bg-brand-primary/10 border-brand-primary/20 flex items-center gap-1.5 rounded-full border px-2.5 py-1 backdrop-blur-md">
                 <div className="text-brand-primary flex">
@@ -107,10 +111,9 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
               </div>
             )}
           </div>
-        </div>
+        </header>
 
-        {/* Body: Title & Tags */}
-        <div className="space-y-6">
+        <section className="space-y-6">
           <div className="space-y-2">
             <h3 className="text-text-primary group-hover:text-brand-primary text-4xl leading-[0.9] font-black tracking-tighter uppercase italic transition-colors md:text-5xl">
               {displayTitle}
@@ -134,8 +137,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             </div>
           )}
 
-          {/* Footer: Action Indicator */}
-          <div className="border-border flex items-center justify-between border-t pt-6">
+          <footer className="border-border flex items-center justify-between border-t pt-6">
             <span className="text-text-muted group-hover:text-brand-primary font-mono text-[8px] font-black tracking-[0.3em] uppercase opacity-50 transition-colors">
               Analyze_Connectivity.Local
             </span>
@@ -146,8 +148,8 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
                 className="text-text-primary group-hover:text-brand-primary transition-colors"
               />
             </div>
-          </div>
-        </div>
+          </footer>
+        </section>
       </div>
     </Link>
   );
