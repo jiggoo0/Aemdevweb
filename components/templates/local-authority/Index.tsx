@@ -29,7 +29,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
   const schema = useMemo(() => generateUniversalSchema(data), [data]);
   const provinceName = data.province || "THAILAND";
 
-  // [DATA_GUARD]: แผนสำรองข้อมูลบริบทท้องถิ่น
+  // [DATA_GUARD]: แผนสำรองข้อมูลบริบทท้องถิ่น ป้องกัน Runtime Error
   const context = data.localContext || {
     marketInsight: `บริการรับทำเว็บไซต์และตลาดยุคใหม่สำหรับพื้นที่ ${provinceName} โดยผู้เชี่ยวชาญเฉพาะทาง`,
     painPoints: [],
@@ -53,7 +53,7 @@ const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
         {/* --- Phase 01.5: Local Hook Experience --- 
             [STRATEGY]: Personalization ผ่านระบบ Shuffle ชื่ออำเภอ
-            [CHECK]: บังคับส่ง Array อย่างน้อย 1 ค่าเสมอเพื่อความเสถียรของเครื่องยนต์เรนเดอร์
+            [CHECK]: บังคับส่ง Array อย่างน้อย 1 ค่าเสมอเพื่อความเสถียรของเครื่องยนต์เรนเดอร์ (Hydration Safe)
         */}
         <DistrictHero 
           districts={data.districts && data.districts.length > 0 ? data.districts : ["เมือง"]} 

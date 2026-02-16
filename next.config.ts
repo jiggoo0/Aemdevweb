@@ -1,16 +1,16 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.120 (ULTIMATE_OPTIMIZED)
- * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v18.0.0 (STABLE_HYBRID)
+ * [STRATEGY]: environment-Aware Optimization | Build Stability | SSR Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import nextMDX from "@next/mdx";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import type { NextConfig } from "next";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
 const isVercel = process.env.VERCEL === "1";
+const isProd = process.env.NODE_ENV === "production";
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -24,27 +24,25 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-const nextConfig: NextConfig = {
-  // [OPTIMIZATION]: เร่งความเร็ว Core Web Vitals
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   compress: true,
-
-  // [COMPILER_HARDENING]: กำจัด Unused JS เพื่อลด Payload
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
-  },
-
-  productionBrowserSourceMaps: false,
   poweredByHeader: false,
-
+  productionBrowserSourceMaps: false,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
+  compiler: {
+    // ลบ Console เฉพาะใน Production แต่เก็บ Error/Warn ไว้ Debug
+    removeConsole: isProd ? { exclude: ["error", "warn"] } : false,
+  },
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process
-    workerThreads: false,
+    // [TERMUX_GUARD]: ใช้ CPU 1 ตัวเฉพาะตอนไม่ได้รันบน Vercel (Local Build)
+    workerThreads: isVercel, 
     cpus: isVercel ? undefined : 1,
-
+    
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -54,7 +52,8 @@ const nextConfig: NextConfig = {
       "clsx",
       "tailwind-merge",
     ],
-    mdxRs: isVercel,
+    // ปิด mdxRs ไว้ก่อนเพื่อความเสถียรของ Client-side hydration
+    mdxRs: false,
   },
 
   images: {
@@ -64,58 +63,38 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "aemdevweb.com",
-      },
+      { protocol: "https", hostname: "aemdevweb.com" },
+      { protocol: "https", hostname: "www.aemdevweb.com" }, // [FIX]: เพิ่ม WWW Support
+      { protocol: "https", hostname: "vercel.com" },
     ],
   },
 
-  // [SEO_ARCHITECTURE]: Headers Management
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
       { key: "X-Content-Type-Options", value: "nosniff" },
       { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
     ];
-
-    if (process.env.VERCEL_ENV !== "production") {
-      securityHeaders.push({
-        key: "X-Robots-Tag",
-        value: "noindex, nofollow",
-      });
-    }
 
     return [
       {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // [NEW: EDGE_HTML_CACHE]: บังคับให้ Edge Network เก็บหน้าหลักไว้ถาวรจนกว่าจะมีการ Revalidate
       {
-        source: "/(about|services|areas|blog|case-studies|privacy|terms)",
+        source: "/(about|services|areas|blog|case-studies)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60",
+            // [OPTIMIZED]: s-maxage 1 ปี, revalidate ทุก 1 ชม. เพื่อความเสถียรของ Hydration
+            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=3600",
           },
         ],
       },
-      // [OPTIMIZED_IMAGE_CACHE]: สำหรับรูปภาพที่รีไซส์แล้ว
       {
-        source: "/_next/image/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // [STATIC_ASSET_CACHE]: สำหรับไฟล์ดิบใน public/
-      {
-        source: "/(images|fonts)/:path*",
+        source: "/(images|fonts|_next/static)/:path*",
         headers: [
           {
             key: "Cache-Control",
@@ -126,15 +105,17 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  webpack: (config, { dev }) => {
+  webpack: (config, { isServer }) => {
+    // [MEMORY_GUARD]: ปิด Cache บน Local (Termux) เพื่อป้องกันแรมเต็มตอน Build
     if (!isVercel) {
       config.cache = false;
     }
-    if (dev && !isVercel) {
+    
+    // จัดการระบบ Watch ไฟล์สำหรับ Termux
+    if (!isVercel && process.env.NODE_ENV === "development") {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
-        ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
       };
     }
     return config;
