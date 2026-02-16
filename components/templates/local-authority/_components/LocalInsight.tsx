@@ -9,8 +9,9 @@ interface LocalInsightProps {
 
 export const LocalInsight = ({ insight, painPoints }: LocalInsightProps) => {
   return (
-    <section className="border-[var(--foreground)]/10 border-b-[var(--border-width)] py-24 md:py-32">
+    <section className="border-b border-[var(--foreground)]/10 py-24 md:py-32">
       <div className="container mx-auto grid grid-cols-1 gap-20 px-4 lg:grid-cols-2">
+        {/* Insight Column */}
         <div className="space-y-8">
           <p className="font-mono text-xs font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase italic">
             // Market_Insight
@@ -18,26 +19,29 @@ export const LocalInsight = ({ insight, painPoints }: LocalInsightProps) => {
           <h2 className="font-[family-name:var(--font-primary)] text-4xl leading-tight font-black uppercase italic">
             วิเคราะห์บริบทธุรกิจ <br /> ในพื้นที่จังหวัดของคุณ
           </h2>
-          <p className="border-l-4 border-[var(--brand-primary)] pl-8 text-xl leading-relaxed text-[var(--text-primary)]/70 italic">
+          <p className="border-l-4 border-[var(--brand-primary)] pl-8 text-xl leading-relaxed text-[var(--foreground)]/80 italic">
             "{insight}"
           </p>
         </div>
 
-        <div className="rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)] p-8 md:p-12">
-          <p className="mb-8 font-mono text-[10px] font-bold tracking-widest uppercase opacity-40">
-            Target_Pain_Points
-          </p>
-          <div className="space-y-6">
-            {painPoints.map((point, idx) => (
-              <div key={idx} className="flex items-start gap-4">
-                <div className="pt-1 text-[var(--brand-primary)]">
-                  <IconRenderer name="AlertCircle" size={18} />
+        {/* Pain Points Column */}
+        {painPoints && painPoints.length > 0 && (
+          <div className="rounded-[var(--radius)] border border-[var(--foreground)]/10 bg-[var(--surface-card)] p-8 md:p-12">
+            <p className="mb-8 font-mono text-[10px] font-bold tracking-widest uppercase opacity-40">
+              Target_Pain_Points
+            </p>
+            <div className="space-y-6">
+              {painPoints.map((point, idx) => (
+                <div key={idx} className="flex items-start gap-4">
+                  <div className="pt-1 text-[var(--brand-primary)]">
+                    <IconRenderer name="AlertCircle" size={18} />
+                  </div>
+                  <p className="font-medium text-[var(--foreground)]/80 italic">{point}</p>
                 </div>
-                <p className="font-medium text-[var(--text-primary)]/80 italic">{point}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

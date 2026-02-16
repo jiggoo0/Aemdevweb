@@ -1,6 +1,6 @@
 /**
- * [SCRIPT]: IMAGE_AUDIT_SYSTEM v18.0.1 (ESLINT_COMPLIANT)
- * [STRATEGY]: Filesystem vs Source-Code Cross-Reference
+ * [SCRIPT]: IMAGE_AUDIT_SYSTEM v18.0.2 (PRECISION_ENGINE)
+ * [STRATEGY]: Regex Extraction & Path Normalization
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -9,118 +9,176 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // --- CONFIGURATION ---
-const IMAGE_DIR = "./public/images";
-const SCAN_DIRS = ["./app", "./components", "./constants", "./data", "./lib"];
-const EXTENSIONS = [".tsx", ".ts", ".js", ".jsx", ".json"];
-const IMG_EXTS = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg"];
-const BACKUP_DIR = "./_backup_images_";
+const CONFIG = {
+  publicDir: "./public",
+  backupDir: "./_backup_unused_images_",
+  scanDirs: ["./app", "./components", "./constants", "./data", "./lib", "./content", "./styles"],
+  scanExts: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss", ".md", ".mdx"],
+  imgExts: [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico", ".avif"],
+};
 
-// [FIX]: ลบ __dirname ออกเพราะไม่ได้ใช้งาน เพื่อแก้ error TS / ESLint
-fileURLToPath(import.meta.url);
+// [UTILS]: Path Handling
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Helper: อ่านไฟล์ทั้งหมดในโฟลเดอร์แบบ Recursive
+// Helper: Recursive File Walker
 const getAllFiles = (dirPath, arrayOfFiles = []) => {
+  if (!fs.existsSync(dirPath)) return arrayOfFiles;
+  
   const files = fs.readdirSync(dirPath);
-  let updatedFiles = arrayOfFiles;
-
   files.forEach((file) => {
     const fullPath = path.join(dirPath, file);
     if (fs.statSync(fullPath).isDirectory()) {
-      updatedFiles = getAllFiles(fullPath, updatedFiles);
+      if (file !== "node_modules" && file !== ".next" && file !== ".git") {
+        getAllFiles(fullPath, arrayOfFiles);
+      }
     } else {
-      updatedFiles.push(fullPath);
+      arrayOfFiles.push(fullPath);
     }
   });
-
-  return updatedFiles;
+  return arrayOfFiles;
 };
 
-console.log("🚀 Starting Image Audit System...");
-
-// 1. รวบรวมรูปภาพที่มีอยู่จริงใน Disk
-if (!fs.existsSync(IMAGE_DIR)) {
-  console.error(`❌ Error: Directory ${IMAGE_DIR} not found.`);
-  process.exit(1);
-}
-
-const allImages = getAllFiles(IMAGE_DIR)
-  .filter((file) => IMG_EXTS.includes(path.extname(file).toLowerCase()))
-  .map((file) => file.replace(/\\/g, "/").replace("public/", "/"));
-
-const imageUsageMap = new Map();
-allImages.forEach((img) => imageUsageMap.set(img, false));
-
-// 2. รวบรวมไฟล์ Code ทั้งหมด
-let codeFiles = [];
-SCAN_DIRS.forEach((dir) => {
-  if (fs.existsSync(dir)) {
-    const files = getAllFiles(dir).filter((file) => EXTENSIONS.includes(path.extname(file)));
-    codeFiles = [...codeFiles, ...files];
+// Helper: Normalize Path to standard "/images/..." format for comparison
+const normalizePath = (filePath) => {
+  // Convert backslashes to slashes
+  let clean = filePath.replace(/\\/g, "/");
+  
+  // Remove public prefix or local relative dots
+  clean = clean.replace(/^\.\/public\//, "/");
+  clean = clean.replace(/^public\//, "/");
+  
+  // Ensure it starts with / if it looks like an absolute path from root
+  if (!clean.startsWith("/") && !clean.startsWith(".")) {
+    clean = "/" + clean;
   }
-});
+  return clean;
+};
 
-const missingImages = new Set();
-const foundReferences = new Set();
+console.log("\n🚀 INITIALIZING AEM IMAGE AUDIT v18.0.2...");
 
-// 3. วิเคราะห์การใช้งาน
-console.log(`🔍 Scanning ${codeFiles.length} source files for image references...`);
+// --- STEP 1: INDEX PHYSICAL ASSETS ---
+console.log("📂 Indexing physical images in ./public...");
 
-codeFiles.forEach((file) => {
-  const content = fs.readFileSync(file, "utf8");
-
-  // เช็ครูปที่มีอยู่จริง
-  allImages.forEach((img) => {
-    const imgName = img.replace("/images/", "");
-    if (content.includes(img) || content.includes(imgName)) {
-      imageUsageMap.set(img, true);
-      foundReferences.add(img);
-    }
+const physicalImages = getAllFiles(CONFIG.publicDir)
+  .filter(f => CONFIG.imgExts.includes(path.extname(f).toLowerCase()))
+  .map(f => {
+    return {
+      originalPath: f, // ./public/images/logo.png
+      normalized: normalizePath(f) // /images/logo.png
+    };
   });
 
-  // เช็ครูปที่ถูกเรียกแต่ไม่มีไฟล์จริง
-  const regex = /\/images\/[a-zA-Z0-9\-_./]+\.(jpg|jpeg|png|gif|webp|svg)/g;
+const physicalImageSet = new Set(physicalImages.map(img => img.normalized));
+console.log(`   > Found ${physicalImages.length} physical images.`);
+
+// --- STEP 2: SCAN CODEBASE ---
+console.log("🔍 Scanning codebase for references...");
+
+const codeFiles = [];
+CONFIG.scanDirs.forEach(dir => {
+  const files = getAllFiles(dir).filter(f => CONFIG.scanExts.includes(path.extname(f)));
+  codeFiles.push(...files);
+});
+
+const usedImages = new Set();
+const missingImages = new Set();
+
+// Regex to find anything that looks like an image file
+// Matches: "image.png", '/path/to/image.jpg', url(image.webp)
+const imageRegex = new RegExp(`['"\\(]([^'"\\)]+\\.(${CONFIG.imgExts.map(e => e.replace('.', '')).join('|')}))['"\\)]`, 'gi');
+
+codeFiles.forEach(file => {
+  const content = fs.readFileSync(file, "utf8");
   let match;
 
-  while ((match = regex.exec(content)) !== null) {
-    const referencedImg = match[0];
-    if (!imageUsageMap.has(referencedImg)) {
-      missingImages.add(referencedImg);
+  // Reset regex index for each file
+  while ((match = imageRegex.exec(content)) !== null) {
+    let ref = match[1]; // The captured path
+    
+    // Normalize reference for comparison
+    // Case 1: /images/pic.png -> /images/pic.png
+    // Case 2: public/images/pic.png -> /images/pic.png
+    // Case 3: images/pic.png -> /images/pic.png
+    let normalizedRef = ref.replace(/\\/g, "/");
+    
+    // Handle Next.js Import aliases or root paths
+    if (normalizedRef.startsWith("public/")) normalizedRef = "/" + normalizedRef.replace("public/", "");
+    if (!normalizedRef.startsWith("/") && !normalizedRef.startsWith("http") && !normalizedRef.startsWith("data:")) {
+       // Assume root relative if not starting with . or /
+       if (!normalizedRef.startsWith(".")) normalizedRef = "/" + normalizedRef;
+    }
+
+    // Check if it matches any physical image
+    // Note: We check endsWith because sometimes code uses dynamic paths or imports
+    const foundPhysical = physicalImages.find(p => 
+      normalizedRef === p.normalized || 
+      normalizedRef.endsWith(p.normalized) ||
+      p.normalized.endsWith(normalizedRef)
+    );
+
+    if (foundPhysical) {
+      usedImages.add(foundPhysical.normalized);
+    } else {
+      // If it looks like a local asset path but not found
+      if (!normalizedRef.startsWith("http") && !normalizedRef.startsWith("data:")) {
+         // Filter out potential false positives (like variable names ending in .png if any)
+         // Check if the extension is valid
+         if (CONFIG.imgExts.includes(path.extname(normalizedRef).toLowerCase())) {
+             missingImages.add({ file: file, ref: ref });
+         }
+      }
     }
   }
 });
 
-// 4. แยกแยะผลลัพธ์
-const unusedImages = allImages.filter((img) => !imageUsageMap.get(img));
+console.log(`   > Scanned ${codeFiles.length} files.`);
+console.log(`   > Found references to ${usedImages.size} unique images.`);
 
-console.log("\n--- 📊 AUDIT REPORT ---");
+// --- STEP 3: ANALYZE RESULTS ---
 
+// Calculate Unused
+const unusedImagesList = physicalImages.filter(img => !usedImages.has(img.normalized));
+
+console.log("\n📊 --- AUDIT REPORT --- 📊");
+
+// REPORT: Missing Images
 if (missingImages.size > 0) {
-  console.error("\n❌ MISSING IMAGES (Called in code but not found in disk):");
-  missingImages.forEach((img) => console.error(`   - ${img}`));
+  console.log(`\n❌ MISSING IMAGES (Referenced in code, but not found):`);
+  missingImages.forEach(item => {
+    console.log(`   - "${item.ref}" \n     in: ${item.file}`);
+  });
 } else {
-  console.log("\n✅ No missing images found.");
+  console.log("\n✅ INTEGRITY CHECK PASSED: No missing images.");
 }
 
-if (unusedImages.length > 0) {
-  console.log(`\n⚠️  UNUSED IMAGES (${unusedImages.length} files found):`);
+// REPORT: Unused Images & Backup
+if (unusedImagesList.length > 0) {
+  console.log(`\n⚠️  UNUSED IMAGES DETECTED: ${unusedImagesList.length} files`);
+  console.log(`   Moving to backup directory: ${CONFIG.backupDir}...`);
 
-  if (!fs.existsSync(BACKUP_DIR)) fs.mkdirSync(BACKUP_DIR);
+  if (!fs.existsSync(CONFIG.backupDir)) fs.mkdirSync(CONFIG.backupDir);
 
-  unusedImages.forEach((img) => {
-    const sourcePath = path.join("public", img);
-    const destPath = path.join(BACKUP_DIR, path.basename(img));
-
-    console.log(`   - Moving: ${img} -> ${BACKUP_DIR}`);
-
+  let moveCount = 0;
+  unusedImagesList.forEach(img => {
     try {
-      fs.renameSync(sourcePath, destPath);
-    } catch (err) {
-      console.error(`   ! Failed to move ${img}:`, err.message);
+      const fileName = path.basename(img.originalPath);
+      // Create subfolder structure in backup if needed, or just flatten? 
+      // For safety, let's flatten but prepend timestamp if conflict, or keep folder structure.
+      // Simple strategy: Flatten for now.
+      const destPath = path.join(CONFIG.backupDir, fileName);
+      
+      // Move file
+      fs.renameSync(img.originalPath, destPath);
+      console.log(`   [MOVED] ${img.normalized}`);
+      moveCount++;
+    } catch (e) {
+      console.error(`   [ERROR] Could not move ${img.originalPath}: ${e.message}`);
     }
   });
-  console.log(`\n📦 Unused images have been moved to: ${BACKUP_DIR}`);
+  console.log(`\n📦 Successfully moved ${moveCount} files to quarantine.`);
 } else {
-  console.log("\n✨ Everything is clean! No unused images found.");
+  console.log("\n✨ CLEAN ASSET STATUS: All images are in use.");
 }
 
-console.log("\n--- END OF AUDIT ---");
+console.log("\n🚀 AUDIT COMPLETE.");

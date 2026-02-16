@@ -1,11 +1,10 @@
 /**
- * [SYSTEM CORE]: MDX_COMPONENT_MAPPER v17.9.9 (STABILIZED)
- * [STRATEGY]: Prop Destructuring | TS2783 Resolution | Callout Integration
+ * [SYSTEM CORE]: MDX_COMPONENT_MAPPER v18.0.0 (TYPE_SAFE_HARDENED)
+ * [STRATEGY]: Strict Typing | Prop Omission | Callout Integration
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
 
 import type { MDXComponents } from "mdx/types";
-import type { Route } from "next";
 import type { ComponentPropsWithoutRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,14 +14,9 @@ import { cn } from "@/lib/utils";
 // [INTERNAL INFRASTRUCTURE]
 import { Callout } from "@/components/ui/Callout";
 
-/**
- * @function useMDXComponents
- * @description แมปแท็ก MDX เป็น UI Components แบบ Type-Safe 100%
- * และลงทะเบียน Custom Components สำหรับใช้งานในเนื้อหา .mdx
- */
-export function useMDXComponents(_components: MDXComponents): MDXComponents {
+export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    // --- [01. TYPOGRAPHY: SEO & READABILITY] ---
+    // --- [01. TYPOGRAPHY] ---
     h1: ({ className, ...props }: ComponentPropsWithoutRef<"h1">) => (
       <h1
         className={cn(
@@ -32,7 +26,6 @@ export function useMDXComponents(_components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-
     h2: ({ className, ...props }: ComponentPropsWithoutRef<"h2">) => (
       <h2
         className={cn(
@@ -43,22 +36,17 @@ export function useMDXComponents(_components: MDXComponents): MDXComponents {
       />
     ),
 
-    // --- [02. NAVIGATION: FIXED TS2783] ---
-    a: (props: ComponentPropsWithoutRef<"a">) => {
-      const { href, className, children, ...rest } = props;
+    // --- [02. NAVIGATION: TS2783 RESOLVED] ---
+    a: ({ href, className, children, ...props }: ComponentPropsWithoutRef<"a">) => {
       const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
       const style = cn("text-brand-primary font-bold underline transition-colors", className);
 
       if (isInternal) {
         return (
           <Link
-            href={(href || "#") as Route}
+            href={href as string}
             className={style}
-            /**
-             * [FIXED]: ใช้ Omit เพื่อลบ href ออกจากนิยาม Type ของ rest
-             * ป้องกัน Compiler แจ้งเตือนเรื่องการ Overwrite (TS2783)
-             */
-            {...(rest as Omit<ComponentPropsWithoutRef<typeof Link>, "href">)}
+            {...(props as Omit<ComponentPropsWithoutRef<typeof Link>, "href">)}
           >
             {children}
           </Link>
@@ -66,44 +54,32 @@ export function useMDXComponents(_components: MDXComponents): MDXComponents {
       }
 
       return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={style} {...rest}>
+        <a href={href} target="_blank" rel="noopener noreferrer" className={style} {...props}>
           {children}
         </a>
       );
     },
 
-    // --- [03. VISUALS: PERFORMANCE OPTIMIZED] ---
-    img: (props: ComponentPropsWithoutRef<"img">) => {
-      const { src, alt, className, ...rest } = props;
+    // --- [03. VISUALS: STRICT PROPS] ---
+    img: ({ src, alt, className, ...props }: ComponentPropsWithoutRef<"img">) => (
+      <span className="border-border bg-surface-card shadow-pro-sm my-10 block overflow-hidden rounded-[2.5rem] border">
+        <Image
+          src={src || "/images/og-main.webp"}
+          alt={alt || "AEMDEVWEB Content"}
+          width={1200}
+          height={675}
+          className={cn(
+            "h-auto w-full transition-transform duration-700 hover:scale-105",
+            className,
+          )}
+          sizes="(max-width: 1280px) 100vw, 1280px"
+          {...(props as Omit<ComponentPropsWithoutRef<typeof Image>, "src" | "alt">)}
+        />
+      </span>
+    ),
 
-      return (
-        <span className="border-border bg-surface-card shadow-pro-sm my-10 block overflow-hidden rounded-[2.5rem] border">
-          <Image
-            sizes="(max-width: 1280px) 100vw, 1280px"
-            width={1200}
-            height={675}
-            className={cn(
-              "h-auto w-full transition-transform duration-700 hover:scale-105",
-              className,
-            )}
-            alt={alt || "AEMDEVWEB Specialist Content"}
-            src={src || "/images/og-main.webp"}
-            /**
-             * [FIXED]: ใช้ Omit กับ src และ alt เพื่อความชัวร์ 100% ตามมาตรฐาน Zero-Any
-             */
-            {...(rest as Omit<Partial<ComponentPropsWithoutRef<typeof Image>>, "src" | "alt">)}
-          />
-        </span>
-      );
-    },
-
-    // --- [04. CUSTOM SPECIALIST COMPONENTS] ---
-    /**
-     * [STRATEGIC]: ลงทะเบียน Callout เพื่อให้ไฟล์ .mdx เรียกใช้งานได้
-     * ป้องกันปัญหา Prerender Error เนื่องจากไม่พบ Component
-     */
+    // --- [04. CUSTOM COMPONENTS] ---
     Callout,
-
-    ..._components,
+    ...components,
   };
 }

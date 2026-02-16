@@ -1,5 +1,5 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.108 (HARDENED)
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v17.9.110 (TYPE_SAFE_GUARDED)
  * [STRATEGY]: Strict Schema Mapping | Semantic Graph | GSC Compliance
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -8,30 +8,32 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 import type { AreaNode, UniversalTemplateProps, TemplateMasterData } from "@/types";
 
-// --- [INTERNAL TYPES]: Local Contracts ---
-/**
- * [STRICT]: ขยายขอบเขต Schema Node เพื่อรองรับฟิลด์ที่ Google ต้องการ
- * โดยไม่ต้องทำลายกฎ Zero-Any Policy
- */
+// --- [INTERNAL TYPES] ---
 interface ExtendedSchemaNode extends Record<string, unknown> {
+  "@context"?: string;
+  "@type": string;
   telephone?: string;
   priceRange?: string;
 }
 
+// --- [TYPE GUARDS]: For Runtime Safety ---
+const isUniversalTemplate = (
+  data: UniversalTemplateProps | TemplateMasterData | AreaNode
+): data is UniversalTemplateProps => {
+  return "regionalPricing" in data || "socialProof" in data;
+};
+
+const isAreaNode = (
+  data: UniversalTemplateProps | TemplateMasterData | AreaNode
+): data is AreaNode => {
+  return "province" in data && "coordinates" in data;
+};
+
 // --- [INTERNAL: CORE NODES] ---
 
-/**
- * [ENTITY]: sameAsLinks
- * รวบรวม Social Profiles เพื่อยืนยันตัวตนใน Knowledge Graph
- */
-const sameAsLinks = [
-  SITE_CONFIG.links.facebook,
-  SITE_CONFIG.links.youtube,
-  SITE_CONFIG.links.twitter,
-  SITE_CONFIG.links.github,
-  SITE_CONFIG.links.line,
-  SITE_CONFIG.links.googleMaps,
-].filter((link): link is string => !!link);
+const sameAsLinks = Object.values(SITE_CONFIG.links).filter(
+  (link): link is string => typeof link === "string" && link.length > 0
+);
 
 const websiteNode = {
   "@type": "WebSite",
@@ -42,10 +44,6 @@ const websiteNode = {
   inLanguage: SITE_CONFIG.locale.replace("_", "-"),
 } as const;
 
-/**
- * [NODE]: organizationNode (ProfessionalService)
- * [UPDATE]: บรรจุ 'telephone' และ 'priceRange' เพื่อลบ Schema warnings
- */
 const organizationNode = {
   "@type": "ProfessionalService",
   "@id": absoluteUrl("/#organization"),
@@ -72,6 +70,15 @@ const organizationNode = {
     postalCode: SITE_CONFIG.contact.postalCode,
     addressCountry: "TH",
   },
+  // [ADD]: Opening Hours for Local SEO
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
 } as const;
 
 const personNode = {
@@ -84,25 +91,18 @@ const personNode = {
   url: absoluteUrl(SITE_CONFIG.expert.bioUrl),
   worksFor: { "@id": absoluteUrl("/#organization") },
   description: SITE_CONFIG.expert.bio,
+  sameAs: [SITE_CONFIG.expert.twitterHandle],
 } as const;
 
 // --- [EXPORTED GENERATORS] ---
 
 export const generatePersonSchema = () => personNode;
 
-/**
- * @function generateSchemaGraph
- * @description รวม Nodes เข้าเป็น Graph เพื่อเพิ่มน้ำหนัก SEO (Semantic Interlinking)
- */
 export const generateSchemaGraph = (schemas: Record<string, unknown>[]) => ({
   "@context": "https://schema.org",
   "@graph": [websiteNode, organizationNode, personNode, ...schemas],
 });
 
-/**
- * @function generateBreadcrumbSchema
- * @description สร้าง Breadcrumb เพื่อให้ Google แสดง Path ในหน้า Search
- */
 export const generateBreadcrumbSchema = (items: { name: string; item: string }[]) => ({
   "@type": "BreadcrumbList",
   itemListElement: items.map((it, idx) => ({
@@ -115,22 +115,29 @@ export const generateBreadcrumbSchema = (items: { name: string; item: string }[]
 
 /**
  * [MASTER]: generateUniversalSchema
- * [STRATEGY]: เลือก Type ตามจุดประสงค์ของหน้า (Transactional vs Informational)
+ * [STRATEGY]: Auto-detect Context & Pricing Logic
  */
 export function generateUniversalSchema(data: UniversalTemplateProps | TemplateMasterData) {
-  // [OPTIMIZED]: ตรวจสอบประเภท Node เพื่อสร้าง Canonical URL ที่แม่นยำ
-  const isAreaNode = data.category === "area" || (data.id && data.id.startsWith("NODE-"));
+  // 1. Context Detection
+  const isArea = (data.id && data.id.startsWith("NODE-")) || data.category === "area";
+  
+  // 2. Canonical Logic
+  const slug = isArea && data.id 
+    ? data.id.replace("NODE-", "").toLowerCase() 
+    : data.templateSlug;
+    
+  const pathPrefix = isArea ? "/areas/" : "/services/";
+  const canonicalUrl = absoluteUrl(`${pathPrefix}${slug}`);
 
-  const canonicalUrl = absoluteUrl(
-    isAreaNode
-      ? `/areas/${data.id?.replace("NODE-", "").toLowerCase() || data.templateSlug}`
-      : `/services/${data.templateSlug}`,
-  );
+  // 3. Pricing Logic (Safe Access)
+  let numericPrice = 0;
+  if ("priceValue" in data && typeof data.priceValue === "number") {
+    numericPrice = data.priceValue;
+  } else if (isUniversalTemplate(data) && data.regionalPricing?.startPrice) {
+    numericPrice = parseInt(data.regionalPricing.startPrice.replace(/[^0-9]/g, "")) || 0;
+  }
 
-  const social = (data as UniversalTemplateProps).socialProof;
-  const pricing = (data as UniversalTemplateProps).regionalPricing;
-
-  // [DECISION_ENGINE]: กำหนด Schema Type ตามพฤติกรรมเทมเพลต
+  // 4. Schema Construction
   const mainType = ["salepage", "catalog"].includes(data.templateSlug)
     ? "Product"
     : "ProfessionalService";
@@ -146,12 +153,13 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
     provider: { "@id": absoluteUrl("/#organization") },
   };
 
-  // [GSC_FIX]: บังคับฉีดข้อมูลติดต่อลงใน ProfessionalService Node เสมอ
+  // 5. ProfessionalService Enhancements
   if (mainType === "ProfessionalService") {
     baseNode.telephone = SITE_CONFIG.contact.phone;
     baseNode.priceRange = SITE_CONFIG.business.priceRange;
 
-    if (isAreaNode) {
+    // Dynamic Address for Area Pages
+    if (isArea) {
       const province = data.title.replace("รับทำเว็บไซต์", "").trim();
       baseNode.address = {
         "@type": "PostalAddress",
@@ -159,27 +167,27 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
         addressRegion: province,
         addressCountry: "TH",
       };
+      baseNode.areaServed = {
+        "@type": "City",
+        name: province,
+      };
     } else {
       baseNode.address = organizationNode.address;
     }
   }
 
-  // [SOCIAL_PROOF]: ระบบ Aggregate Rating
-  if (social) {
+  // 6. Aggregate Rating (Safe Access)
+  if (isUniversalTemplate(data) && data.socialProof) {
     baseNode.aggregateRating = {
       "@type": "AggregateRating",
-      ratingValue: social.rating,
-      reviewCount: social.reviewCount,
+      ratingValue: data.socialProof.rating,
+      reviewCount: data.socialProof.reviewCount,
       bestRating: "5",
       worstRating: "1",
     };
   }
 
-  // [OFFER_LOGIC]: ป้องกันราคา 0 บาทแสดงใน Schema
-  const numericPrice =
-    data.priceValue ||
-    (pricing?.startPrice ? parseInt(pricing.startPrice.replace(/[^0-9]/g, "")) : 0);
-
+  // 7. Offer Schema
   if (numericPrice > 0) {
     baseNode.offers = {
       "@type": "Offer",
@@ -198,33 +206,34 @@ export function generateUniversalSchema(data: UniversalTemplateProps | TemplateM
 
 /**
  * [SPECIALIST]: generateLocalBusinessSchema
- * @description เน้นข้อมูลพื้นที่เพื่อทำ Local SEO Map Pack
+ * @description รองรับ GeoCoordinates และ Map URL
  */
 export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaNode) {
-  const isUniversal = "templateSlug" in data;
-  const slug = isUniversal
-    ? (data as UniversalTemplateProps).templateSlug
-    : (data as AreaNode).slug;
+  // 1. Identify Data Source
+  const isUniversal = isUniversalTemplate(data);
+  const isArea = isAreaNode(data);
+
+  // 2. Extract Data Safely
+  const slug = isUniversal ? data.templateSlug : (data as AreaNode).slug;
   const province = isUniversal
-    ? (data as UniversalTemplateProps).title.replace("รับทำเว็บไซต์", "").trim()
+    ? data.title.replace("รับทำเว็บไซต์", "").trim()
     : (data as AreaNode).province;
+
+  const imageUrl = isUniversal
+    ? data.image || SITE_CONFIG.ogImage
+    : (data as AreaNode).heroImage;
 
   const pageUrl = absoluteUrl(`/areas/${slug}`);
 
-  return {
+  // 3. Construct Schema
+  const schema: ExtendedSchemaNode = {
     "@type": "ProfessionalService",
     "@id": `${pageUrl}/#localbusiness`,
-    name: isUniversal
-      ? (data as UniversalTemplateProps).title
-      : `${SITE_CONFIG.brandName} - ${province}`,
+    name: isUniversal ? data.title : `${SITE_CONFIG.brandName} - ${province}`,
     url: pageUrl,
     telephone: SITE_CONFIG.contact.phone,
     priceRange: SITE_CONFIG.business.priceRange,
-    image: isUniversal
-      ? (data as UniversalTemplateProps).image
-        ? absoluteUrl((data as UniversalTemplateProps).image!)
-        : absoluteUrl(SITE_CONFIG.ogImage)
-      : absoluteUrl((data as AreaNode).heroImage),
+    image: absoluteUrl(imageUrl),
     address: {
       "@type": "PostalAddress",
       addressLocality: province,
@@ -232,5 +241,18 @@ export function generateLocalBusinessSchema(data: UniversalTemplateProps | AreaN
       addressCountry: "TH",
     },
     parentOrganization: { "@id": absoluteUrl("/#organization") },
+    // [ADD]: Map Link
+    hasMap: SITE_CONFIG.contact.mapUrl,
   };
+
+  // 4. Inject GeoCoordinates (If available in AreaNode)
+  if (isArea && (data as AreaNode).coordinates) {
+    schema.geo = {
+      "@type": "GeoCoordinates",
+      latitude: (data as AreaNode).coordinates.lat,
+      longitude: (data as AreaNode).coordinates.lng,
+    };
+  }
+
+  return schema;
 }

@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.110 (ULTIMATE_OPTIMIZED)
- * [STRATEGY]: Aggressive Image Caching | Compiler Hardening | Termux Resource Guard
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.120 (ULTIMATE_OPTIMIZED)
+ * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
 
-  // [COMPILER_HARDENING]: กำจัด Unused JS (Console Logs) เพื่อลด Payload 12-51KB
+  // [COMPILER_HARDENING]: กำจัด Unused JS เพื่อลด Payload
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
@@ -41,7 +41,7 @@ const nextConfig: NextConfig = {
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process ในสภาพแวดล้อมทรัพยากรจำกัด
+    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process
     workerThreads: false,
     cpus: isVercel ? undefined : 1,
 
@@ -58,12 +58,10 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    // [MOBILE_LCP]: Breakpoints ที่ละเอียดขึ้นสำหรับความคมชัดระดับ Retina
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000, // [FIXED]: ปูฐานราก Cache 1 ปี
+    minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
@@ -95,7 +93,17 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // [OPTIMIZED_IMAGE_CACHE]: บังคับ Cache รูปภาพที่ผ่านการรีไซส์ (แก้ปัญหา TTL 1 ชม. ใน PageSpeed)
+      // [NEW: EDGE_HTML_CACHE]: บังคับให้ Edge Network เก็บหน้าหลักไว้ถาวรจนกว่าจะมีการ Revalidate
+      {
+        source: "/(about|services|areas|blog|case-studies|privacy|terms)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, s-maxage=31536000, stale-while-revalidate=60",
+          },
+        ],
+      },
+      // [OPTIMIZED_IMAGE_CACHE]: สำหรับรูปภาพที่รีไซส์แล้ว
       {
         source: "/_next/image/:path*",
         headers: [
@@ -105,14 +113,15 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // [STATIC_ASSET_CACHE]: บังคับ Cache ไฟล์ดิบและฟอนต์
+      // [STATIC_ASSET_CACHE]: สำหรับไฟล์ดิบใน public/
       {
-        source: "/images/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-      {
-        source: "/fonts/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+        source: "/(images|fonts)/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
     ];
   },

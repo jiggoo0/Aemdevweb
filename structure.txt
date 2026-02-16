@@ -1,4 +1,4 @@
-AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 00:57:37 +07 2026
+AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 02:19:13 +07 2026
 ------------------------------------------------
 .
 ./README.md
@@ -126,6 +126,7 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 00:57:37 +07 2026
 ./content/case-studies
 ./content/case-studies/case-study-industrial-catalog.mdx
 ./content/case-studies/unlink-reputation-management-success.mdx
+./content/case-studies/provincial-digital-domination.mdx
 ./eslint.config.mjs
 ./knip.json
 ./lib
@@ -142,17 +143,10 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 00:57:37 +07 2026
 ./pnpm-workspace.yaml
 ./postcss.config.mjs
 ./public
-./public/android-chrome-192x192(1).png
 ./public/android-chrome-192x192.png
-./public/android-chrome-512x512(1).png
 ./public/android-chrome-512x512.png
 ./public/apple-touch-icon.png
-./public/favicon(1).ico
-./public/favicon-16x16.png
-./public/favicon-16x16.svg
-./public/favicon-32x32.png
 ./public/favicon.ico
-./public/favicon.svg
 ./public/grid-pattern.svg
 ./public/images
 ./public/images/areas
@@ -180,6 +174,7 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 00:57:37 +07 2026
 ./scripts/index-urls.js
 ./scripts/master_audit.py
 ./scripts/test-schema.ts
+./scripts/seo-monitor.py
 ./pnpm-lock.yaml
 ./tsconfig.json
 ./types
@@ -191,3 +186,11 @@ AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 00:57:37 +07 2026
 ./types_usage_report.md
 ./structure.txt
 ./tsconfig.tsbuildinfo
+./_backup_unused_images_
+./_backup_unused_images_/android-chrome-192x192(1).png
+./_backup_unused_images_/android-chrome-512x512(1).png
+./_backup_unused_images_/favicon(1).ico
+./_backup_unused_images_/favicon-16x16.png
+./_backup_unused_images_/favicon-16x16.svg
+./_backup_unused_images_/favicon-32x32.png
+./_backup_unused_images_/favicon.svg

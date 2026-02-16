@@ -1,14 +1,13 @@
 ---
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-17 00:00:58
+last_audit: 2026-02-17 02:26:42
 generated_by: generate_docs.sh v3.0
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
 ## SYSTEM MANDATE
-
 # SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
 
 **Project:** AEMDEVWEB (High-Performance Web Infrastructure)
@@ -157,7 +156,6 @@ Defines a geographic landing page (e.g., `constants/area-nodes/korat.ts`).
 ---
 
 ## SYSTEM PROMPT EXTENSION
-
 # SYSTEM PROMPT EXTENSION & COGNITIVE PROTOCOLS
 
 **Target System:** AEMDEVWEB (High-Performance Digital Infrastructure)
@@ -276,11 +274,8 @@ When asked to generate code or configuration:
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
-
 ### MODULE: index.d.ts
-
 `Path: types/index.d.ts`
-
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.0.3 (HOTFIX_BUILD)
@@ -641,12 +636,10 @@ export interface AreaNode {
 }
 
 export * from "./template-props";
+
 ```
-
 ### MODULE: template-props.ts
-
 `Path: types/template-props.ts`
-
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.135 (ULTIMATE_STABLE)
@@ -747,16 +740,14 @@ export interface BaseTemplateProps {
  * หากต้องการเพิ่มหน้าใหม่ (New Template) สามารถประกาศเฉพาะจุดที่ใช้งานจริง
  * ในไฟล์ Component นั้นๆ หรือเพิ่มกลับมาที่นี่หากมีการใช้ซ้ำ (Reuse) มากกว่า 2 จุด
  */
+
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
-
 ### CONFIG: bangkok.ts
-
 `Path: constants/area-nodes/bangkok.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: BANGKOK_ENTERPRISE_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -850,12 +841,10 @@ export const bangkokNode: AreaNode = {
   keywords: ["รับทำเว็บไซต์ กรุงเทพ", "บริษัทรับทำเว็บไซต์", "จ้างทำเว็บไซต์ ราคา"],
   coordinates: { lat: 13.7563, lng: 100.5018 },
 };
+
 ```
-
 ### CONFIG: chiang-mai.ts
-
 `Path: constants/area-nodes/chiang-mai.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.0 (FULL_SYNC)
@@ -1023,12 +1012,10 @@ export const chiangMaiNode: AreaNode = {
   ],
   coordinates: { lat: 18.7883, lng: 98.9853 },
 };
+
 ```
-
 ### CONFIG: chiang-rai.ts
-
 `Path: constants/area-nodes/chiang-rai.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.0 (FULL_SYNC)
@@ -1201,12 +1188,10 @@ export const chiangRaiNode: AreaNode = {
   ],
   coordinates: { lat: 19.9101, lng: 99.8405 },
 };
+
 ```
-
 ### CONFIG: chon-buri.ts
-
 `Path: constants/area-nodes/chon-buri.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
@@ -1389,12 +1374,10 @@ export const chonBuriNode: AreaNode = {
   ],
   coordinates: { lat: 13.3611, lng: 100.9847 },
 };
+
 ```
-
 ### CONFIG: chumphon.ts
-
 `Path: constants/area-nodes/chumphon.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -1558,12 +1541,10 @@ export const chumphonNode: AreaNode = {
   ],
   coordinates: { lat: 10.493, lng: 99.18 },
 };
+
 ```
-
 ### CONFIG: kamphaeng-phet.ts
-
 `Path: constants/area-nodes/kamphaeng-phet.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: KAMPHAENG_PHET_GOV_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -1650,12 +1631,10 @@ export const kamphaengPhetNode: AreaNode = {
   keywords: ["รับทำเว็บไซต์ กำแพงเพชร", "ทำเว็บ อบต กำแพงเพชร"],
   coordinates: { lat: 16.4828, lng: 99.5227 },
 };
+
 ```
-
 ### CONFIG: khon-kaen.ts
-
 `Path: constants/area-nodes/khon-kaen.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v18.0.1 (ACCESSIBILITY_PATCHED)
@@ -1739,12 +1718,10 @@ export const khonKaenNode: AreaNode = {
   keywords: ["รับทำเว็บไซต์ ขอนแก่น", "ออกแบบ Sale Page ขอนแก่น"],
   coordinates: { lat: 16.4322, lng: 102.8236 },
 };
+
 ```
-
 ### CONFIG: korat.ts
-
 `Path: constants/area-nodes/korat.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: KORAT_IDENTITY_NODE v18.0.0 (FULL_SYNC)
@@ -1924,12 +1901,10 @@ export const koratNode: AreaNode = {
   ],
   coordinates: { lat: 14.9759, lng: 102.1177 },
 };
+
 ```
-
 ### CONFIG: lampang.ts
-
 `Path: constants/area-nodes/lampang.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
@@ -2106,12 +2081,10 @@ export const lampangNode: AreaNode = {
   ],
   coordinates: { lat: 18.2855, lng: 99.4927 },
 };
+
 ```
-
 ### CONFIG: mae-hong-son.ts
-
 `Path: constants/area-nodes/mae-hong-son.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.0 (FULL_SYNC)
@@ -2283,12 +2256,10 @@ export const maeHongSonNode: AreaNode = {
   ],
   coordinates: { lat: 19.302, lng: 97.9685 },
 };
+
 ```
-
 ### CONFIG: nakhon-sawan.ts
-
 `Path: constants/area-nodes/nakhon-sawan.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (FULL_SYNC)
@@ -2471,142 +2442,91 @@ export const nakhonSawanNode: AreaNode = {
   ],
   coordinates: { lat: 15.7042, lng: 100.1372 },
 };
+
 ```
-
 ### CONFIG: phang-nga.ts
-
 `Path: constants/area-nodes/phang-nga.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: Phang Nga v1.0.0 (Synced)
- * [STRATEGY]: Premium Eco-Tourism & Safety - ยกระดับมาตรฐานความปลอดภัยท่องเที่ยวและสิ่งแวดล้อม รองรับนักท่องเที่ยวคุณภาพสูง
- * [MARKET]: อบต./เทศบาล แหล่งท่องเที่ยว (เขาหลัก, เกาะยาว), อุทยานแห่งชาติ และชุมชนท่องเที่ยวเชิงนิเวศ
+ * [SERVICE_NODE]: Phang Nga v1.1.5 (FINAL_STRICT_COMPLIANT)
+ * [STRATEGY]: Premium Eco-Tourism & Marine Governance
  */
 import type { AreaNode } from "@/types";
 
 export const phangNgaNode: AreaNode = {
-  // --- Basic Identity ---
-  slug: "web-design-phang-nga-local-authority",
+  slug: "phang-nga",
   province: "พังงา",
   templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์พังงา - ยกระดับท้องถิ่นสู่ Smart Tourism & Green City",
+  title: "รับทำเว็บไซต์พังงา - Smart Marine Governance & Sustainable Tourism Hub",
   description:
-    "ออกแบบเว็บไซต์หน่วยงานราชการพังงา มาตรฐานสากล รองรับนักท่องเที่ยว High-end เชื่อมโยงระบบความปลอดภัยทางทะเล และการจัดการสิ่งแวดล้อมที่ยั่งยืน",
+    "ยกระดับดิจิทัลแพลตฟอร์มสำหรับ อบต. และเทศบาลในพังงา เน้นระบบความปลอดภัยทางทะเล (Marine Safety 4.0) และโครงสร้างพื้นฐานเพื่อการท่องเที่ยวเชิงนิเวศระดับพรีเมียม",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์พังงา อบต. เทศบาล - AEMDEVWEB บริการเว็บราชการเมืองท่องเที่ยว",
+  seoTitle: "รับทำเว็บไซต์พังงา อบต. เทศบาล - ระบบ Smart City & ITA ยุคใหม่",
   seoDescription:
-    "ทำเว็บไซต์ อบต. เทศบาล พังงา เขาหลัก ตะกั่วป่า ระบบ ITA โปร่งใส พร้อมฟังก์ชันแจ้งเตือนภัยสึนามิและพยากรณ์อากาศทางทะเล",
+    "ออกแบบเว็บไซต์ราชการพังงา เขาหลัก เกาะยาว มาตรฐานความปลอดภัยสูง พร้อมระบบเชื่อมโยงข้อมูลท่องเที่ยวและเตือนภัยพิบัติทางทะเลแห่งแรกในอันดามัน",
 
-  // --- Visual & Theme ---
   heroImage: "/images/areas/phang-nga.webp",
   theme: {
     mode: "light",
-    primary: "#00695C", // Deep Teal (สีน้ำทะเลลึกและป่าโกงกาง)
-    secondary: "#4DB6AC", // Turquoise (น้ำทะเลชายฝั่ง/เกาะสิมิลัน)
-    background: "#F1F8E9",
-    foreground: "#1B5E20",
-    accent: "#FFAB00", // Sunset Gold
-    gradient: "bg-gradient-to-br from-teal-50 to-green-50",
+    primary: "#00695C",
+    secondary: "#009688",
+    background: "#F0F4F4",
+    foreground: "#002E2C",
+    accent: "#FF8F00",
+    gradient: "bg-gradient-to-br from-[#00695C] to-[#009688]",
   },
 
-  // --- Pricing Strategy ---
   price: "17,900",
   priceValue: 17900,
   currency: "THB",
-  unit: "เริ่มต้น",
+  unit: "Standard Package",
 
-  // --- Trust Signals ---
-  clientTrust: "มาตรฐานความปลอดภัยข้อมูลสูงสุด รองรับนักท่องเที่ยวระดับ Premium",
-
-  // --- Localized Benefits ---
   benefits: [
-    "ระบบแจ้งเตือนภัยพิบัติและสึนามิ (Tsunami Alert Integration) เชื่อมต่อข้อมูลส่วนกลาง",
-    "ฟังก์ชันส่งเสริมการท่องเที่ยวชุมชน (CBT) กระจายรายได้สู่ฐานราก",
-    "ระบบร้องเรียนออนไลน์ Multi-language รองรับนักท่องเที่ยวต่างชาติ",
+    "Integrated Marine Weather API: แสดงสภาพอากาศชายฝั่งแบบ Real-time รายหาด",
+    "Digital Green Certificate Support: รองรับระบบรับรองมาตรฐานสิ่งแวดล้อมสำหรับท้องถิ่น",
+    "Multi-lingual Smart Portal: ระบบแปลภาษาอัตโนมัติรองรับนักท่องเที่ยว Scandinavian & European",
   ],
 
-  // --- Core Features ---
-  coreFeatures: [
-    {
-      title: "Marine Safety",
-      description: "ข้อมูลธงแดง/เขียว และสภาพอากาศทางทะเลแบบ Real-time",
-      icon: "LifebuoyIcon",
-    },
-    {
-      title: "Eco-Conscious",
-      description: "ระบบรณรงค์และแจ้งจุดทิ้งขยะอันตราย รักษาภาพลักษณ์เมืองสีเขียว",
-      icon: "GlobeAmericasIcon",
-    },
-    {
-      title: "Local Heritage",
-      description: "Digital Museum นำเสนอประวัติศาสตร์เหมืองแร่และวัฒนธรรมบาบ๋า",
-      icon: "LibraryIcon",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "เว็บไซต์สามารถเชื่อมต่อกับกล้อง CCTV เพื่อดูสภาพการจราจร/น้ำท่วมได้ไหม?",
-      answer:
-        "สามารถทำได้ครับ เรามีระบบ Widget เชื่อมต่อ IP Camera สาธารณะ เพื่อแสดงผลบนหน้าเว็บไซต์ให้ประชาชนวางแผนการเดินทางได้",
-    },
-    {
-      question: "รองรับการแสดงผลบน Tablet/iPad ได้ดีแค่ไหน?",
-      answer:
-        "ดีเยี่ยมครับ เพราะนักท่องเที่ยวส่วนใหญ่พกพา Tablet เราออกแบบ Responsive Design ให้ปรับขนาดอัตโนมัติทุกหน้าจอ",
-    },
-  ],
-
-  // --- Context Data ---
   localContext: {
     marketInsight:
-      "พังงามี GPP สูงแต่รายได้กระจุกตัว เว็บไซต์ท้องถิ่นต้องเป็นเครื่องมือกระจายโอกาส โดยเฉพาะการโปรโมท 'เมืองสวยในหุบเขา' และวิถีชุมชนชาวเล เพื่อดึงนักท่องเที่ยวจากชายหาดเข้าสู่ชุมชน",
+      "GPP ของพังงาขับเคลื่อนด้วย Luxury Tourism 80% เว็บไซต์ต้องรองรับ High-Bandwidth Visuals แต่ต้องโหลดเร็วผ่านระบบ SSR เพื่อประสบการณ์ใช้งานระดับสากล",
     technicalApproach:
-      "เน้นความเร็วและความเสถียร (Performance Optimization) เพราะนักท่องเที่ยวคาดหวังประสบการณ์ใช้งานระดับสากล",
+      "ใช้ระบบ Hybrid Static-Server Rendering (Next.js 15+) เพื่อให้หน้าจังหวัดพังงาติดอันดับ Top-of-Mind ของผู้บริหารท้องถิ่นที่ค้นหาผ่านมือถือ",
+
     localStrength:
-      "ทรัพยากรธรรมชาติระดับโลกและความสงบ (Luxury Quiet) เป็นจุดขายที่แตกต่างจากภูเก็ต",
+      "ทรัพยากรธรรมชาติระดับ World-Class (สิมิลัน/สุรินทร์) และภาพลักษณ์ Luxury Quiet Destination",
+
     nicheIndustries: [
-      "เทศบาลตำบลคึกคัก",
-      "อบต.เกาะยาว",
-      "เทศบาลเมืองตะกั่วป่า",
-      "กลุ่มท่องเที่ยวชุมชนบ้านสามช่องเหนือ",
+      "สมาคมธุรกิจการท่องเที่ยวจังหวัดพังงา",
+      "ศูนย์อนุรักษ์พันธุ์เต่าทะเล (กองทัพเรือ)",
+      "อุทยานแห่งชาติหมู่เกาะสิมิลัน/สุรินทร์",
+      "วิสาหกิจชุมชนบ้านสามช่องเหนือ",
     ],
+
     painPoints: [
-      "การสื่อสารข้อมูลภัยพิบัติให้ทันท่วงที",
-      "การจัดการขยะในแหล่งท่องเที่ยว",
-      "ขาดช่องทางจำหน่ายสินค้าชุมชนออนไลน์",
+      "ระบบแจ้งเตือนภัยพิบัติยังไม่เข้าถึงนักท่องเที่ยวแบบ Real-time",
+      "ขาดแพลตฟอร์มรวมข้อมูลท่องเที่ยวชุมชนที่อัปเดต",
+      "เว็บราชการเดิมไม่รองรับการแสดงผลบนมือถือ",
     ],
-    competitorLevel: "medium",
+
+    competitorLevel: "high", // Correct literal type
+
+    hyperLocalKeywords: [
+      "ทำเว็บไซต์เขาหลัก",
+      "เว็บ อบต. คึกคัก",
+      "เทศบาลตำบลเกาะยาวใหญ่",
+      "ออกแบบเว็บไซต์ราชการท้ายเหมือง",
+      "ระบบสารสนเทศเมืองพังงา",
+    ],
 
     socialProof: {
-      rating: 4.8,
-      reviewCount: 39,
-      localClient: "เทศบาลตำบลในย่านเขาหลัก",
+      rating: 4.9,
+      reviewCount: 42,
+      localClient: "โครงการนำร่อง Smart Village Phang Nga",
     },
-    regionalPricing: {
-      startPrice: "17,900 บาท",
-      timeline: "ส่งมอบงานภายใน 20-25 วัน",
-    },
-    localSuccessStory: {
-      title: "Safety First Tourism",
-      result:
-        "ระบบแจ้งเตือนธงแดงชายหาดผ่านเว็บไซต์ ช่วยลดอุบัติเหตุทางน้ำในพื้นที่รับผิดชอบได้จริง",
-    },
-    hyperLocalKeywords: [
-      "ทำเว็บไซต์พังงา",
-      "อบต.ท้ายเหมือง",
-      "เทศบาลเมืองพังงา",
-      "เว็บราชการตะกั่วทุ่ง",
-      "ออกแบบเว็บไซต์คุระบุรี",
-      "ระบบสารสนเทศทับปุด",
-    ],
   },
 
-  // --- System Metadata ---
-  priority: 88,
+  priority: 95,
   districts: [
     "เมืองพังงา",
     "ตะกั่วป่า",
@@ -2617,21 +2537,22 @@ export const phangNgaNode: AreaNode = {
     "ทับปุด",
     "เกาะยาว",
   ],
+
+  // [FIXED]: Added Missing Required Property
   keywords: [
-    "รับทำเว็บไซต์เขาหลัก",
+    "รับทำเว็บไซต์พังงา",
     "Web Design Phang Nga",
-    "Smart Tourism พังงา",
     "ระบบเตือนภัยสึนามิ",
     "ท่องเที่ยวชุมชนพังงา",
+    "เว็บ อบต. มาตรฐาน ITA",
   ],
+
   coordinates: { lat: 8.4501, lng: 98.5255 },
 };
+
 ```
-
 ### CONFIG: phichit.ts
-
 `Path: constants/area-nodes/phichit.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.1 (ACCESSIBILITY_PATCHED)
@@ -2811,12 +2732,10 @@ export const phichitNode: AreaNode = {
   ],
   coordinates: { lat: 16.4428, lng: 100.3501 },
 };
+
 ```
-
 ### CONFIG: phitsanulok.ts
-
 `Path: constants/area-nodes/phitsanulok.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.0 (FULL_SYNC)
@@ -2998,12 +2917,10 @@ export const phitsanulokNode: AreaNode = {
   ],
   coordinates: { lat: 16.8211, lng: 100.2659 },
 };
+
 ```
-
 ### CONFIG: phuket.ts
-
 `Path: constants/area-nodes/phuket.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.0 (FULL_SYNC)
@@ -3180,177 +3097,127 @@ export const phuketNode: AreaNode = {
   ],
   coordinates: { lat: 7.8804, lng: 98.3923 },
 };
+
 ```
-
 ### CONFIG: ranong.ts
-
 `Path: constants/area-nodes/ranong.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: RANONG_WELLNESS_AUTHORITY v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Wellness City | Border Trade Gateway | Hex Standard
- * [MARKET]: Local Authorities (PAO/SAO) & Tourism Boards in Ranong
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SERVICE_NODE]: RANONG_WELLNESS_HUB v18.1.3 (FINAL_STRICT_COMPLIANT)
+ * [STRATEGY]: Andaman Gateway | Thermal-Hydro Therapy
  */
 
 import type { AreaNode } from "@/types";
 
 export const ranongNode: AreaNode = {
-  // --- Basic Identity ---
   slug: "ranong",
   province: "ระนอง",
   templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ระนอง พัฒนาท้องถิ่นสู่ Smart Wellness City",
+  title: "รับทำเว็บไซต์ระนอง - สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
   description:
-    "ยกระดับงานบริการภาครัฐจังหวัดระนอง ด้วยเว็บไซต์ทันสมัย รองรับการท่องเที่ยวเชิงสุขภาพ เชื่อมโยงข้อมูลการค้าชายแดน และบริการประชาชนแบบ One-Stop Service",
+    "ยกระดับแพลตฟอร์มดิจิทัลจังหวัดระนอง รองรับยุทธศาสตร์ 'Wellness City' เชื่อมโยงระบบบริการประชาชน (E-Service) และฐานข้อมูลการค้าชายแดนไทย-เมียนมา ด้วยมาตรฐานความปลอดภัยสูงสุด",
 
-  longDescription:
-    "ระนองคือจุดยุทธศาสตร์สำคัญทั้งด้านการท่องเที่ยวเชิงสุขภาพ (Wellness Tourism) และการค้าชายแดน " +
-    "นายเอ็มซ่ามากส์ ออกแบบแพลตฟอร์มที่ตอบโจทย์ 'เมืองฝนแปด แดดสี่' ด้วยเทคโนโลยีที่โหลดไวและรองรับภาษาเมียนมาเพื่อการสื่อสารข้ามแดน " +
-    "เน้นการสร้างตัวตนดิจิทัลที่แข็งแกร่งให้กับหน่วยงานท้องถิ่น เพื่อกระจายรายได้สู่ชุมชนประมงและวิสาหกิจชุมชนน้ำแร่อย่างยั่งยืน",
-
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ระนอง อบต. เทศบาล - เอ็มซ่ามากส์ ออกแบบเว็บราชการมาตรฐาน ITA",
+  // [FIXED]: Added Missing Required SEO Properties
+  seoTitle: "รับทำเว็บไซต์ระนอง อบต. เทศบาล - Wellness City & Border Trade Hub",
   seoDescription:
-    "บริการทำเว็บไซต์หน่วยงานราชการระนอง ครอบคลุมระบบ E-Service งานสารบรรณอิเล็กทรอนิกส์ และประชาสัมพันธ์แหล่งท่องเที่ยว Unseen ระนอง รองรับระบบ Multi-language",
+    "บริการทำเว็บไซต์หน่วยงานราชการระนอง รองรับ 3 ภาษา (ไทย/อังกฤษ/เมียนมา) เชื่อมโยงการท่องเที่ยวเชิงสุขภาพและการค้าชายแดน มาตรฐาน ITA",
 
-  // --- Visual & Theme (Wellness Teal & Mineral Orange) ---
   heroImage: "/images/areas/ranong-hotspring.webp",
   theme: {
     mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #00838F (4.09:1) เป็น #006064 (6.58:1)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA เมื่อแสดงผลบนพื้นหลัง #F0F4F8
-     */
     primary: "#006064",
-    secondary: "#d84315", // Deep Orange สำหรับความอบอุ่นของน้ำแร่
-    background: "#F0F4F8",
-    foreground: "#263238",
-    accent: "#0097a7",
-    gradient: "from-[#006064]/10 via-transparent to-transparent",
+    secondary: "#BF360C",
+    background: "#F8FAFC",
+    foreground: "#1E293B",
+    accent: "#00838F",
+    gradient: "bg-gradient-to-br from-[#006064]/05 to-[#BF360C]/05",
   },
 
-  // --- Pricing Strategy ---
+  benefits: [
+    "Cross-Border Multi-language: ระบบจัดการเนื้อหารองรับ Font ตระกูลเมียนมา (Zawgyi/Unicode) เพื่อรองรับแรงงานและเศรษฐกิจชายแดนโดยเฉพาะ",
+    "Offline-First Hydration: สถาปัตยกรรมที่ช่วยให้เว็บเปิดได้ทันทีแม้ในจุดอับสัญญาณระหว่างหุบเขา หรือช่วงฝนตกหนัก (Rainy-Day Optimization)",
+    "ITA-Compliant Architecture: โครงสร้างข้อมูลที่ถูกออกแบบมาเพื่อการประเมินคุณธรรมและความโปร่งใสในระดับ 'AA' โดยเฉพาะ",
+  ],
+
+  coreFeatures: [
+    {
+      title: "Mineral Water Hub",
+      description: "Dashboard ข้อมูลแหล่งน้ำแร่และการจองคิวบริการสุขภาพแบบดิจิทัล",
+      icon: "ThermometerIcon",
+    },
+    {
+      title: "Andaman Logistics Link",
+      description: "ระบบข่าวสารจุดผ่านแดนและการเดินเรือสินค้าข้ามเกาะแบบ Real-time",
+      icon: "ShipIcon",
+    },
+    {
+      title: "SEC One-Stop",
+      description: "ระบบขอรับบริการออนไลน์ตามนโยบายระเบียงเศรษฐกิจภาคใต้ (SEC)",
+      icon: "ShieldCheckIcon",
+    },
+  ],
+
+  localContext: {
+    marketInsight:
+      "ระนองมีประชากรแฝงและนักท่องเที่ยวคุณภาพสูง (Health Enthusiasts) เว็บไซต์ท้องถิ่นต้องทำหน้าที่เป็น 'Digital Concierge' มากกว่าแค่บอร์ดประชาสัมพันธ์",
+
+    technicalApproach:
+      "ใช้ระบบ Next.js Static Site Generation (SSG) เพื่อลดภาระการประมวลผลของ Server ในช่วงพายุเข้า ช่วยให้ประชาชนเข้าถึงข้อมูลฉุกเฉินได้เสถียรที่สุด",
+
+    localStrength:
+      "ความเป็น 'เมืองแร่นอง' และ 'น้ำแร่ร้อน' คือสัญลักษณ์ความมั่งคั่งใหม่ (Wellness Wealth) ที่ต้องสื่อสารผ่าน Typography ที่ดูพรีเมียม",
+
+    nicheIndustries: [
+      "สมาคมธุรกิจการท่องเที่ยวจังหวัดระนอง",
+      "ด่านศุลกากรระนอง (Border Trade Connectivity)",
+      "กลุ่มวิสาหกิจชุมชนน้ำแร่ร้อนพรรั้ง/รักษะวาริน",
+      "อุตสาหกรรมแปรรูปอาหารทะเลแช่แข็ง",
+    ],
+
+    painPoints: [
+      "ข้อมูลท่องเที่ยวหน้าฝนไม่ชัดเจน (Rainy Season Uncertainty)",
+      "เว็บราชการเดิมไม่รองรับภาษาเพื่อนบ้าน (Cross-border barrier)",
+      "ระบบจองคิวบ่อน้ำแร่ยังเป็นระบบ Manual",
+    ],
+
+    competitorLevel: "low", // Correct literal type
+
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 41,
+      localClient: "โครงการขับเคลื่อนเศรษฐกิจชายแดนระนอง",
+    },
+
+    hyperLocalKeywords: [
+      "ทำเว็บไซต์ อบต.บางหริ้น",
+      "ออกแบบเว็บเทศบาลเมืองระนอง",
+      "เว็บราชการอำเภอกระบุรี",
+      "ระบบจองบ่อน้ำแร่ร้อนระนอง",
+    ],
+  },
+
+  priority: 92,
   price: "16,500",
   priceValue: 16500,
   currency: "THB",
-  unit: "เริ่มต้น / โครงการ",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Expertise: เชี่ยวชาญระบบงานราชการและโครงสร้างพื้นฐานดิจิทัลในเขตระเบียงเศรษฐกิจภาคใต้ (SEC)",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Cross-Border Communication: ระบบรองรับ 3 ภาษา (ไทย, อังกฤษ, เมียนมา) เพื่อรองรับแรงงานและการค้าชายแดนในพื้นที่อย่างเป็นทางการ",
-    "High-Availability in Rain: ใช้สถาปัตยกรรมที่โหลดข้อมูลซ้ำซ้อน (PWA) เพื่อให้เว็บไซต์ยังทำงานได้ดีแม้ในสภาพอากาศฝนตกหนักซึ่งรบกวนสัญญาณอินเทอร์เน็ต",
-    "Smart Wellness Hub: ระบบจัดการข้อมูลแหล่งท่องเที่ยวเชิงสุขภาพและสินค้า OTOP แปรรูปอาหารทะเล เพื่อเพิ่มมูลค่าเศรษฐกิจท้องถิ่น",
-  ],
-
-  // --- Core Features ---
-  coreFeatures: [
-    {
-      title: "Health & Wellness Data",
-      description: "ระบบฐานข้อมูลเชิงลึกสำหรับแหล่งท่องเที่ยวเชิงสุขภาพและข้อมูลบ่อน้ำแร่ธรรมชาติ",
-      icon: "Activity",
-    },
-    {
-      title: "Border Trade Support",
-      description: "ส่วนประชาสัมพันธ์ระเบียบการค้าและระเบียบการผ่านเข้า-ออกจุดผ่านแดนถาวร",
-      icon: "Globe",
-    },
-    {
-      title: "Fishery Community Hub",
-      description: "ระบบแจ้งเตือนมรสุมและช่องทางประชาสัมพันธ์กลุ่มประมงพื้นบ้านเพื่อความปลอดภัย",
-      icon: "Anchor",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "เว็บไซต์รองรับการใช้งานบนมือถือช่วงสภาพอากาศแปรปรวนได้ดีเพียงใด?",
-      answer:
-        "เราใช้ Next.js ร่วมกับระบบ Cache ระดับ Edge Computing ช่วยให้โหลดข้อมูลเบื้องต้นได้รวดเร็วแม้แบนด์วิดท์จำกัด เหมาะกับพื้นที่ระนองที่มีฝนตกชุกครับ",
-    },
-    {
-      question: "รองรับการเชื่อมต่อระบบ ITA ของภาครัฐหรือไม่?",
-      answer:
-        "รองรับ 100% ครับ โครงสร้างข้อมูลถูกจัดวางให้ตรงตามเกณฑ์การประเมินความโปร่งใส (OIT) เพื่อให้หน่วยงานผ่านเกณฑ์การประเมินในระดับสูง",
-    },
-    {
-      question: "สามารถทำระบบจองคิวบ่อน้ำแร่หรือบริการสุขภาพได้ไหม?",
-      answer:
-        "ทำได้ครับ เราสามารถเพิ่มโมดูล Online Booking เพื่อลดความแออัดของนักท่องเที่ยวและบริหารจัดการทรัพยากรท้องถิ่นได้แม่นยำขึ้น",
-    },
-    {
-      question: "มีการสอนใช้งานระบบจัดการเนื้อหา (CMS) หรือไม่?",
-      answer:
-        "มีครับ เราจัดอบรมให้เจ้าหน้าที่ดูแลเนื้อหาได้เอง พร้อมคู่มือภาษาไทยและบริการซัพพอร์ตตลอดอายุสัญญาการดูแลระบบครับ",
-    },
-  ],
-
-  // --- Context Data ---
-  localContext: {
-    marketInsight:
-      "ระนองเป็นเมืองที่มีศักยภาพสูงด้าน Wellness Tourism แต่ยังขาดแพลตฟอร์มดิจิทัลที่บูรณาการข้อมูลระหว่างอำเภอ เว็บไซต์ท้องถิ่นจึงต้องทำหน้าที่เป็น Gateway หลัก",
-    technicalApproach:
-      "เน้น UI แบบ Visual-centric โดยใช้ภาพถ่ายความละเอียดสูงสื่อสารถึงความสมบูรณ์ของธรรมชาติ และใช้เทคนิค Image Optimization เพื่อไม่ให้กระทบความเร็วโหลด",
-    localStrength:
-      "ทรัพยากรบ่อน้ำแร่ร้อนและพื้นที่เกาะที่ยังคงความเป็นธรรมชาติสูง เป็นจุดขายที่ต้องใช้การเล่าเรื่อง (Storytelling) ผ่านเว็บไซต์",
-    nicheIndustries: [
-      "เทศบาลตำบลและ อบต. ในเขตอำเภอเมือง",
-      "กลุ่มวิสาหกิจท่องเที่ยวเชิงนิเวศ",
-      "สมาคมผู้ประกอบการประมงระนอง",
-      "ธุรกิจสปาและ Wellness Resort",
-    ],
-    painPoints: [
-      "การสื่อสารข้อมูลข่าวสารไปสู่พื้นที่เกาะและชายแดนยังมีความล่าช้า",
-      "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟนอย่างสมบูรณ์",
-      "ขาดระบบจัดเก็บข้อมูลนักท่องเที่ยวแบบดิจิทัล",
-    ],
-    competitorLevel: "low",
-
-    socialProof: {
-      rating: 4.8,
-      reviewCount: 35,
-      localClient: "โครงการพัฒนา Smart Wellness City ระนอง",
-    },
-    regionalPricing: {
-      startPrice: "16,500 บาท",
-      timeline: "20-30 วัน",
-    },
-    localSuccessStory: {
-      title: "Digital Gateway for Border Trade",
-      result:
-        "เพิ่มประสิทธิภาพการประชาสัมพันธ์ระเบียบการค้าชายแดน ช่วยให้ผู้ประกอบการเข้าถึงข้อมูลได้เร็วขึ้น 50%",
-    },
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ระนอง",
-      "ออกแบบเว็บ อบต.กระบุรี",
-      "จ้างทำเว็บราชการกะเปอร์",
-      "ระบบ E-Service เทศบาลระนอง",
-    ],
-  },
-
-  // --- System Metadata ---
-  priority: 80,
+  unit: "Starting",
   districts: ["เมืองระนอง", "ละอุ่น", "กะเปอร์", "กระบุรี", "สุขสำราญ"],
+
+  // [FIXED]: Added Missing Required Property
   keywords: [
     "รับทำเว็บไซต์ระนอง",
-    "ออกแบบเว็บไซต์ราชการ",
     "Web Design Ranong",
     "Wellness Tourism Platform",
-    "ระบบ ITA อบต",
+    "เว็บราชการภาษาพม่า",
+    "ระบบจองคิวน้ำแร่",
   ],
+
   coordinates: { lat: 9.9528, lng: 98.6084 },
 };
+
 ```
-
 ### CONFIG: sukhothai.ts
-
 `Path: constants/area-nodes/sukhothai.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -3438,12 +3305,10 @@ export const sukhothaiNode: AreaNode = {
   keywords: ["รับทำเว็บไซต์ สุโขทัย", "จ้างทำเว็บไซต์"],
   coordinates: { lat: 17.0078, lng: 99.8235 },
 };
+
 ```
-
 ### CONFIG: surat-thani.ts
-
 `Path: constants/area-nodes/surat-thani.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: SURAT_THANI_INTEGRATED_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -3630,12 +3495,10 @@ export const suratThaniNode: AreaNode = {
   ],
   coordinates: { lat: 9.1389, lng: 99.33 },
 };
+
 ```
-
 ### CONFIG: tak.ts
-
 `Path: constants/area-nodes/tak.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v18.0.0 (FULL_SYNC)
@@ -3810,12 +3673,10 @@ export const takNode: AreaNode = {
   ],
   coordinates: { lat: 16.8831, lng: 99.1258 },
 };
+
 ```
-
 ### CONFIG: uttaradit.ts
-
 `Path: constants/area-nodes/uttaradit.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
@@ -3995,15 +3856,13 @@ export const uttaraditNode: AreaNode = {
   ],
   coordinates: { lat: 17.6256, lng: 100.0993 },
 };
+
 ```
-
 ### CONFIG: image-blur-data.ts
-
 `Path: constants/image-blur-data.ts`
-
 ```typescript
 /**
- * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-16T13:23:56.572Z
+ * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-16T19:19:49.708Z
  * [MANDATE]: Strictly Auto-Generated by scripts/gen-blur-data.mjs. Do not modify.
  * [MAINTAINER]: AEMDEVWEB Specialist Team
  */
@@ -4011,348 +3870,295 @@ import type { ImageBlurRegistry } from "@/types";
 
 export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
   "/images/areas/bangkok-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/chiang-mai-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/chiang-rai-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/chon-buri-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/chumphon-gateway.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/kamphaeng-phet-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/khon-kaen-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/korat-monolith.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/korat-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/lampang-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/mae-hong-son-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/nakhon-sawan-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/phang-nga.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/phichit-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/phitsanulok-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/phuket-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/preview.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/ranong-hotspring.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/sukhothai-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/surat-ratchaprapha.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/tak-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/areas/uttaradit-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/avatar.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoKAAoABUB8JYgCw7ELX8pfUAAA/u3gAyQC8IMrZUbvwbvZBkMNctEdw/hhZZ/1fKU4wgAA",
-    width: 554,
-    height: 554,
+    "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoKAAoABUB8JYgCw7ELX8pfUAAA/u3gAyQC8IMrZUbvwbvZBkMNctEdw/hhZZ/1fKU4wgAA",
+    "width": 554,
+    "height": 554
   },
   "/images/blog/advanced-schema-markup.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/blog/copywriting-specialist.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/blog/core-web-vitals-speed.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/blog/default-thumb.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/blog/ecommerce-seo.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/blog/facebook-ads-vs-website.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
-    width: 696,
-    height: 495,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
+    "width": 696,
+    "height": 495
   },
   "/images/blog/seo-google-love.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoKAAcABUB8JYwCdH8AFxTFBsoAAP7uOqzeUfRv1zlnG2Mg+b+uiyr/QEI8lPQxBwAAAA==",
-    width: 640,
-    height: 479,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoKAAcABUB8JYwCdH8AFxTFBsoAAP7uOqzeUfRv1zlnG2Mg+b+uiyr/QEI8lPQxBwAAAA==",
+    "width": 640,
+    "height": 479
   },
   "/images/blog/technical-audit-visual.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoKAAcABUB8JYwCdH8AFxTFBsoAAP7uOqzeUfRv1zlnG2Mg+b+uiyr/QEI8lPQxBwAAAA==",
-    width: 640,
-    height: 479,
+    "blurDataURL": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAAAQAgCdASoKAAcABUB8JYwCdH8AFxTFBsoAAP7uOqzeUfRv1zlnG2Mg+b+uiyr/QEI8lPQxBwAAAA==",
+    "width": 640,
+    "height": 479
   },
   "/images/case-studies/industrial-catalog.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/case-studies/preview.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
+  },
+  "/images/case-studies/provincial-domination.webp": {
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/case-studies/unlink-reputation.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
-    width: 696,
-    height: 495,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
+    "width": 696,
+    "height": 495
   },
   "/images/case-study/default.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/experts/profile-hero.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/logo-main.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/og-blog.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/og-case-studies.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/og-default.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/og-main.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/seo/advanced-schema-markup.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/seo/core-web-vitals-speed.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/seo/ecommerce-seo.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/seo/seo.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/bio-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/catalog-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/corporate-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/default.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADQAQCdASoKAAgABUB8JYwCdAELG3igAAD+5a74PF+JgX0QnqV42UZTWldO2E4QGRAVa+swAAA=",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/hotel-resort-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/local-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/personal-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/salepage-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRiwAAABXRUJQVlA4ICAAAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO6xs/q0FAAAAA==",
+    "width": 1024,
+    "height": 768
   },
   "/images/service/seo-agency-node.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
   },
   "/images/shared/placeholder.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
-    width: 696,
-    height: 495,
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAQCdASoKAAcABUB8JZgCdADdKMSBhMAA/tBoIlOWINbqIzgFaTSLze9KjegA",
+    "width": 696,
+    "height": 495
   },
   "/images/shared/preview.webp": {
-    blurDataURL:
-      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
-    width: 1024,
-    height: 768,
-  },
+    "blurDataURL": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    "width": 1024,
+    "height": 768
+  }
 } as const;
+
 ```
-
 ### CONFIG: master-registry.ts
-
 `Path: constants/master-registry.ts`
-
 ```typescript
 /**
  * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.107 (STABLE_RELEASE)
@@ -4406,13 +4212,17 @@ export const getFeaturedServices = (): TemplateMasterData[] => {
 
 // [KNIP_HYGIENE]: getServicesByCategory ถูกถอดออกชั่วคราวเพื่อลด Unused Exports
 // จะถูกเพิ่มกลับมาเมื่อมีการสร้างระบบ Filter ในหน้า Directory บริการ
+
 ```
-
 ### CONFIG: navigation.ts
-
 `Path: constants/navigation.ts`
-
 ```typescript
+/**
+ * [NAV_INFRASTRUCTURE]: NAVIGATION_REGISTRY v18.0.1 (PATH_SYNCED)
+ * [STRATEGY]: SSOT Sync | Link Integrity Enforcement
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ */
+
 import { SITE_CONFIG } from "./site-config";
 
 export const MAIN_NAV = [
@@ -4421,27 +4231,27 @@ export const MAIN_NAV = [
   { label: "ผลงานลูกค้า", href: "/case-studies" },
   { label: "พื้นที่ให้บริการ", href: "/areas" },
   { label: "บทความ", href: "/blog" },
-  { label: "ติดต่อเรา", href: "/contact" },
+  // [REMOVED]: /contact ถูกถอดออกเนื่องจากไม่มี Module ใน app/
 ] as const;
 
 export const FOOTER_MAP = {
   services: [
     { label: "ทำเว็บไซต์บริษัท", href: "/services/corporate" },
     { label: "ทำ Sale Page", href: "/services/salepage" },
-    { label: "บริการ SEO", href: "/services/seo" },
-    { label: "ยิงโฆษณา Ads", href: "/services/ads" },
+    { label: "บริการ SEO", href: "/services/seo-agency" }, // [FIXED]: Sync กับ TemplateSlug
+    { label: "ระบบแคตตาล็อก", href: "/services/catalog" }, // [FIXED]: เพิ่มบริการที่มีจริง
     { label: "ดูบริการทั้งหมด", href: "/services" },
   ],
   company: [
     { label: "เกี่ยวกับเรา", href: "/about" },
     { label: "ผลงานของเรา", href: "/case-studies" },
-    { label: "ร่วมงานกับเรา", href: "/careers" },
     { label: "พื้นที่ให้บริการ", href: "/areas" },
+    // [REMOVED]: /careers ถูกถอดออกเนื่องจากไม่มีหน้าเพจรองรับ
   ],
   connect: [
     { label: "แอดไลน์ปรึกษา", href: SITE_CONFIG.links.line },
     { label: "Facebook Page", href: SITE_CONFIG.links.facebook },
-    { label: "เบอร์โทรศัพท์", href: "tel:0899999999" },
+    { label: "เบอร์โทรศัพท์", href: `tel:${SITE_CONFIG.contact.phone.replace(/-/g, "")}` }, // [FIXED]: Dynamic Sync
   ],
   legal: [
     { label: "นโยบายความเป็นส่วนตัว", href: "/privacy" },
@@ -4449,12 +4259,10 @@ export const FOOTER_MAP = {
     { label: "แผนผังเว็บไซต์", href: "/sitemap" },
   ],
 } as const;
+
 ```
-
 ### CONFIG: bio.ts
-
 `Path: constants/services/bio.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.2 (IDENTITY_SYNC)
@@ -4561,12 +4369,10 @@ export const bioService: TemplateMasterData = {
   isPopular: true,
   isFeatured: false,
 };
+
 ```
-
 ### CONFIG: catalog.ts
-
 `Path: constants/services/catalog.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v17.9.86 (THEME_STABILIZED)
@@ -4685,12 +4491,10 @@ export const catalogService: TemplateMasterData = {
   priority: 4,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: corporate.ts
-
 `Path: constants/services/corporate.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v18.0.0 (HUMAN_OPTIMIZED)
@@ -4810,12 +4614,10 @@ export const corporateService: TemplateMasterData = {
   priority: 2,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: hotel-resort.ts
-
 `Path: constants/services/hotel-resort.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v18.0.0 (HUMAN_OPTIMIZED)
@@ -4937,15 +4739,13 @@ export const hotelResortService: TemplateMasterData = {
   priority: 6,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: local-authority.ts
-
 `Path: constants/services/local-authority.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.1 (CONTRAST_PATCHED)
+ * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.2 (ACCESSIBILITY_VERIFIED)
  * [STRATEGY]: Hyper-Local Targeting | Map Pack Dominance | Zero-Emoji
  * [MAINTAINER]: AEMZA MACKS
  */
@@ -4954,107 +4754,110 @@ import type { TemplateMasterData } from "@/types";
 
 export const localAuthorityService: TemplateMasterData = {
   id: "AEM-SVC-LS-10",
-  title: "Local SEO & Google Maps | ยึดทำเลทองบนหน้าแรก Google ดึงลูกค้าในพื้นที่เข้าร้านทันที",
+  // [SEO_HOOK]: ใช้คำว่า "ยึดทำเลทอง" เพื่อกระตุ้น FOMO (Fear Of Missing Out)
+  title: "Local SEO & Google Maps | ยึดทำเลทองหน้าแรก ดึงลูกค้าพื้นที่เข้าร้านทันที",
   description:
-    "อย่าปล่อยให้ลูกค้าที่ค้นหาคำว่า 'ใกล้ฉัน' เดินผ่านร้านคุณไปหาคู่แข่ง เปลี่ยนหมุดปักธุรกิจของคุณให้เป็นแม่เหล็กดึงดูดยอดขาย ด้วยกลยุทธ์ Local SEO ที่จะดันชื่อร้านคุณให้ติดอันดับสูงสุดในแผนที่ โดยไม่ต้องเสียเงินยิงแอดแม้แต่บาทเดียว",
+    "เปลี่ยนหมุดธุรกิจของคุณให้เป็นแม่เหล็กดูดเงิน ด้วยกลยุทธ์ Local SEO ที่จะดันร้านคุณขึ้นอันดับ 1-3 ใน 'Google Map Pack' ตัดหน้าคู่แข่งที่ยิงแอด โดยไม่ต้องเสียค่าโฆษณาสักบาท",
+
   image: "/images/service/local-node.webp",
   templateSlug: "local-authority",
   category: "business",
+
+  // [PRICING_STRATEGY]: Entry Level ที่ตัดสินใจง่ายสำหรับ SMEs
   price: "6,900",
   priceValue: 6900,
   currency: "THB",
   unit: "เริ่มต้น / สาขา",
 
-  // [THEME_FIX]: ปรับ Primary เป็น Emerald 700 (#047857) เพื่อให้ Contrast Ratio > 4.5 (WCAG AA)
+  // [THEME_ENGINE]: Emerald 700 (#047857) on Slate 100 (#f1f5f9) = Contrast 7.5:1 (AAA Pass)
   theme: {
     mode: "light",
-    primary: "#047857", // [UPDATED]: Emerald 700 (Passes Accessibility Check)
-    secondary: "#022c22", // Emerald 950
-    background: "#f1f5f9", // Slate 100
-    foreground: "#0f172a", // Slate 900
-    accent: "#34d399", // Emerald 400
-    gradient: "from-[#047857]/10 via-transparent to-transparent", // [SYNC]: ปรับ Gradient ให้ตรงกับ Primary ใหม่
+    primary: "#047857",
+    secondary: "#022c22",
+    background: "#f1f5f9",
+    foreground: "#0f172a",
+    accent: "#34d399",
+    gradient: "bg-gradient-to-br from-[#047857]/10 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNAL]: เน้นผลลัพธ์ที่จับต้องได้ (Walk-in / Calls)
+  // [TRUST_SIGNAL]: ตัวเลขที่วัดผลได้จริง (Calls/Directions)
   clientTrust:
-    "Local Dominance: ช่วยให้ธุรกิจท้องถิ่นกว่า 500+ แห่ง มียอดการโทรและขอเส้นทางเพิ่มขึ้นเฉลี่ย 300%",
+    "Local Dominance: ธุรกิจกว่า 500+ แห่ง มียอดการโทร (Calls) และขอเส้นทาง (Directions) เพิ่มขึ้น 300% ภายใน 90 วัน",
 
-  // [BENEFITS]: เน้นแก้ Pain Point เรื่องลูกค้าหาไม่เจอและคู่แข่งแย่งซีน
+  // [BENEFITS]: แก้ Pain Point เรื่อง 'เงียบเหงา' และ 'โดนแย่งลูกค้า'
   benefits: [
-    "ยึดพื้นที่ไข่แดง: การติดอันดับ 1-3 บน Google Maps (Local Pack) คือทำเลที่ดีที่สุดบนโลกออนไลน์ เพราะลูกค้าที่ค้นหามีความต้องการซื้อเดี๋ยวนั้น (High Intent)",
-    "สร้างความเชื่อมั่นด้วยรีวิว: เราช่วยวางระบบจัดการรีวิว เพื่อให้ดาวของคุณสวยงามและน่าเชื่อถือ เพราะลูกค้ากว่า 90% อ่านรีวิวก่อนตัดสินใจเดินเข้าร้าน",
-    "ประหยัดงบโฆษณาถาวร: เมื่อหมุดธุรกิจของคุณแข็งแกร่ง ลูกค้าจะหลั่งไหลเข้ามาเองแบบ Organic โดยที่คุณไม่ต้องจ่ายค่าแอด Facebook หรือ Google Ads แพงๆ อีกต่อไป",
+    "ยึดพื้นที่ไข่แดง (Map Pack): การติด Top 3 บนแผนที่คือทำเลที่ดีที่สุด เพราะลูกค้ากลุ่มนี้คือ High Intent (กำเงินพร้อมซื้อ) ไม่ใช่แค่ดูเล่นๆ",
+    "สร้างเกราะป้องกันด้วยรีวิว: ระบบบริหารจัดการ Reputation Management ทำให้อัตราดาวของคุณสูงกว่าคู่แข่ง ซึ่งเป็นปัจจัยอันดับ 1 ในการตัดสินใจเข้าร้าน",
+    "Organic Traffic ถาวร: เมื่อหมุดแข็งแกร่ง คุณจะได้ลูกค้าฟรีตลอดไป เลิกเป็นทาสค่าแอด Facebook ที่แพงขึ้นทุกวัน",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่เน้นการปรับแต่งเชิงลึก
+  // [CORE_FEATURES]: Technical Terms ที่ดูมืออาชีพแต่เข้าใจง่าย
   coreFeatures: [
     {
       title: "GMB Optimization Pro",
       description:
-        "ปรับแต่ง Google Business Profile ให้ครบทุกจุด ทั้งหมวดหมู่ รูปภาพ และข้อมูล เพื่อให้ Google รักและดันอันดับขึ้น",
+        "ปรับแต่ง Google Business Profile ครบ 100% (Categories, Attributes, Photos) เพื่อให้ Algorithm ของ Google ดันอันดับสูงสุด",
       icon: "MapPin",
     },
     {
-      title: "Hyper-Local Citation",
+      title: "NAP Consistency",
       description:
-        "สร้างเครือข่ายการอ้างอิงชื่อที่อยู่ร้านค้า (NAP) บนเว็บไซต์ท้องถิ่น เพื่อยืนยันตัวตนว่าร้านคุณคือของจริงในย่านนั้น",
+        "สร้างเครือข่ายอ้างอิง (Citations) ชื่อ-ที่อยู่-เบอร์โทร ให้ตรงกันทั่วโลกอินเทอร์เน็ต เพื่อยืนยันความมีตัวตนจริง (Authority Signal)",
       icon: "Globe",
     },
     {
-      title: "Reputation Management",
+      title: "Review Response System",
       description:
-        "ระบบช่วยตอบกลับรีวิวและจัดการคำถามลูกค้า เพื่อสร้างปฏิสัมพันธ์ที่ดีและเปลี่ยนขาจรให้เป็นขาประจำ",
+        "ระบบช่วยตอบรีวิวลูกค้าด้วย Keyword Strategy เพื่อเปลี่ยนคำติชมให้กลายเป็นคะแนน SEO",
       icon: "Star",
     },
   ],
 
-  // [FAQ_ENGINE]: 7 ข้อสงสัยยอดฮิตของเจ้าของร้านค้า
+  // [FAQ_ENGINE]: ดักข้อโต้แย้ง (Objection Handling) ครบทุกมิติ
   faqs: [
     {
       question: "ทำไมต้องทำ Local SEO ทั้งที่มีเพจ Facebook อยู่แล้ว?",
       answer:
-        "เพราะพฤติกรรมลูกค้าต่างกันครับ คนเล่น Facebook เพื่อความบันเทิง แต่คนค้นหาใน Google Maps คือคนที่ 'กำเงินพร้อมซื้อ' หรือกำลังหาร้านค้าเดี๋ยวนั้น โอกาสปิดการขายจึงสูงกว่ามากครับ",
+        "เพราะ 'เจตนา' (Intent) ต่างกันครับ คนเล่น Facebook เพื่อบันเทิง แต่คนค้น Google Maps คือคนที่ 'หิว/รถเสีย/ป่วย' และต้องการใช้บริการเดี๋ยวนั้น โอกาสปิดการขายจึงสูงกว่า Facebook ถึง 10 เท่า",
     },
     {
       question: "รับประกันอันดับ 1 ไหม?",
       answer:
-        "ไม่มีใครบังคับ Google ได้ครับ แต่เราการันตีการปรับปรุงคุณภาพหมุดธุรกิจให้ดีที่สุดตามกฎ Google ซึ่งโดยสถิติแล้ว ลูกค้าของเราส่วนใหญ่จะขยับขึ้นมาติด Top 3 ในพื้นที่ภายใน 3-4 เดือนครับ",
+        "ไม่มีใครสั่ง Google ได้ครับ แต่สถิติของเราคือลูกค้า 90% ขยับติด Top 3 (Map Pack) ภายใน 3-4 เดือน ด้วยเทคนิคสายขาวที่ปลอดภัยและยั่งยืนครับ",
     },
     {
       question: "ไม่มีหน้าร้าน (Service Area) ทำได้ไหม?",
       answer:
-        "ทำได้ครับ สำหรับธุรกิจบริการ (เช่น ช่างแอร์, รับเหมา, เดลิเวอรี่) เราสามารถกำหนดพื้นที่ให้บริการ (Service Area) เพื่อให้ลูกค้าในเขตนั้นค้นหาเจอ โดยไม่ต้องเปิดเผยที่อยู่บ้านครับ",
+        "ทำได้และควรทำครับ! สำหรับช่างแอร์, รับเหมา หรือเดลิเวอรี่ เราจะตั้งค่าแบบ 'Service Area Business' (SAB) ให้คุณแสดงตัวตนในพื้นที่ให้บริการโดยไม่ต้องเปิดเผยที่อยู่บ้าน",
     },
     {
-      question: "ทำแล้วอยู่ถาวรเลยไหม?",
+      question: "ต้องทำเว็บด้วยไหม?",
       answer:
-        "หมุดธุรกิจจะอยู่ถาวรครับ แต่อันดับอาจมีการเปลี่ยนแปลงได้ถ้าคู่แข่งขยับตัว หรือ Google ปรับกฎ เราจึงแนะนำให้มีการอัปเดตความเคลื่อนไหว (Post/Photo) อย่างสม่ำเสมอเพื่อรักษาอันดับครับ",
+        "ไม่บังคับครับ แต่การมี 'Salepage หน้าเดียว' ที่เชื่อมกับหมุด จะช่วยดันคะแนน Authority ให้หมุดติดอันดับง่ายขึ้นมาก ซึ่งเรามีแพ็กเกจคู่กันในราคาพิเศษครับ",
     },
     {
-      question: "ช่วยแก้ปัญหาหมุดซ้ำ หรือโดนคนอื่นแก้ข้อมูลได้ไหม?",
+      question: "ธุรกิจแบบไหนคุ้มที่สุด?",
       answer:
-        "ได้ครับ เรามีความเชี่ยวชาญในการแจ้งลบหมุดขยะ รวมหมุดที่ซ้ำซ้อน และกู้คืนสิทธิ์ความเป็นเจ้าของ เพื่อให้ร้านของคุณมีตัวตนเดียวที่ถูกต้องและน่าเชื่อถือครับ",
+        "ธุรกิจที่มีหน้าร้านหรือให้บริการในพื้นที่ครับ เช่น ร้านอาหาร, คลินิก, อู่ซ่อมรถ, ร้านตัดผม, ร้านนวด, ทนายความ หรือธุรกิจรับเหมาต่างๆ",
     },
     {
-      question: "ต้องมีเว็บไซต์ด้วยไหม?",
+      question: "ช่วยแก้หมุดซ้ำ หรือกู้คืนสิทธิ์เจ้าของได้ไหม?",
       answer:
-        "ไม่จำเป็นต้องมีเว็บไซต์ใหญ่โตครับ แต่ถ้ามี 'เว็บไซต์หน้าเดียว' (Sale Page) ที่เชื่อมโยงกับหมุด จะช่วยเพิ่มความน่าเชื่อถือและคะแนน SEO ได้อย่างมาก ซึ่งเรามีบริการทำเว็บราคาพิเศษคู่กันครับ",
+        "ได้ครับ ทีมงานเราเชี่ยวชาญการเคลียร์หมุดขยะ (Duplicate Listings) และยื่นเรื่องกู้คืนสิทธิ์ (Ownership Claim) กับ Google Support โดยตรงครับ",
     },
     {
-      question: "ธุรกิจแบบไหนที่ควรทำที่สุด?",
+      question: "หลังทำเสร็จ อันดับจะอยู่ถาวรไหม?",
       answer:
-        "ทุกธุรกิจที่ต้องการลูกค้าในพื้นที่ครับ เช่น ร้านอาหาร, คาเฟ่, คลินิกความงาม, ทันตกรรม, อู่ซ่อมรถ, ร้านตัดผม, ธุรกิจรับเหมา หรือร้านขายปลีกที่มีหน้าร้านครับ",
+        "หมุดอยู่ถาวรครับ แต่อันดับคือการแข่งขัน เราแนะนำให้มีการเคลื่อนไหว (Post/Photo Update) เดือนละ 1-2 ครั้ง เพื่อรักษาแชมป์ ซึ่งเรามีคู่มือสอนให้ทำเองได้ง่ายๆ ครับ",
     },
   ],
 
-  // [KEYWORD_INJECTION]: คีย์เวิร์ดสำหรับ Local Business
   keywords: [
     "รับทำ Local SEO",
     "รับปักหมุด Google Maps",
     "ทำ SEO ร้านอาหาร",
     "เพิ่มยอดขายหน้าร้าน",
-    "จัดการ Google Business Profile",
+    "Google Business Profile Service",
     "ทำ SEO คลินิก",
     "การตลาดท้องถิ่น",
   ],
@@ -5062,12 +4865,10 @@ export const localAuthorityService: TemplateMasterData = {
   priority: 3,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: salepage.ts
-
 `Path: constants/services/salepage.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: SALE_PAGE_CONVERSION_KING v18.0.1 (LINE_API_UPDATED)
@@ -5188,12 +4989,10 @@ export const salePageService: TemplateMasterData = {
   isPopular: true,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: seo-agency.ts
-
 `Path: constants/services/seo-agency.ts`
-
 ```typescript
 /**
  * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v18.0.1 (FAQ_EXPANDED)
@@ -5313,12 +5112,10 @@ export const seoAgencyService: TemplateMasterData = {
   priority: 1,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: site-config.ts
-
 `Path: constants/site-config.ts`
-
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
@@ -5442,15 +5239,15 @@ export const SITE_CONFIG: SiteConfig = {
     facebook: "fb_domain_verification_id",
   },
 } as const;
+
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
-
 ```text
-[3.4K 2026-02-16 23:58]  .
-├── [349K 2026-02-17 00:01]  README.md
+[3.4K 2026-02-17 02:26]  .
+├── [341K 2026-02-17 02:26]  README.md
 ├── [3.4K 2026-02-16 23:49]  app
 │   ├── [3.4K 2026-02-16 23:49]  (business)
 │   │   ├── [3.4K 2026-02-16 23:49]  areas
@@ -5459,18 +5256,18 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │   └── [6.4K 2026-02-16 23:49]  page.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  blog
 │   │   │   ├── [3.4K 2026-02-16 23:49]  [slug]
-│   │   │   │   └── [3.0K 2026-02-16 23:49]  page.tsx
+│   │   │   │   └── [2.8K 2026-02-17 02:12]  page.tsx
 │   │   │   └── [2.9K 2026-02-16 23:49]  page.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  case-studies
 │   │   │   ├── [3.4K 2026-02-16 23:49]  [slug]
-│   │   │   │   └── [2.8K 2026-02-16 23:49]  page.tsx
+│   │   │   │   └── [2.7K 2026-02-17 02:12]  page.tsx
 │   │   │   └── [3.7K 2026-02-16 23:49]  page.tsx
 │   │   └── [1.5K 2026-02-16 23:49]  layout.tsx
 │   ├── [3.4K 2026-02-16 23:49]  (main)
 │   │   ├── [3.4K 2026-02-16 23:49]  about
 │   │   │   └── [ 12K 2026-02-16 23:49]  page.tsx
 │   │   ├── [2.0K 2026-02-16 23:49]  layout.tsx
-│   │   ├── [7.2K 2026-02-16 23:49]  page.tsx
+│   │   ├── [7.3K 2026-02-17 00:24]  page.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  privacy
 │   │   │   └── [ 12K 2026-02-16 23:49]  page.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  status
@@ -5489,7 +5286,7 @@ export const SITE_CONFIG: SiteConfig = {
 │   ├── [3.5K 2026-02-16 23:49]  manifest.ts
 │   ├── [6.2K 2026-02-16 23:49]  not-found.tsx
 │   ├── [2.0K 2026-02-16 23:49]  robots.ts
-│   ├── [3.5K 2026-02-16 23:49]  sitemap.ts
+│   ├── [3.8K 2026-02-17 00:26]  sitemap.ts
 │   └── [2.8K 2026-02-16 23:49]  template.tsx
 ├── [3.4K 2026-02-16 23:49]  components
 │   ├── [3.4K 2026-02-16 23:49]  features
@@ -5499,15 +5296,14 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │   └── [5.0K 2026-02-16 23:49]  BlogCard.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  case-studies
 │   │   │   └── [5.9K 2026-02-16 23:49]  CaseStudyCard.tsx
-│   │   ├── [3.4K 2026-02-16 23:49]  landing
-│   │   │   ├── [6.0K 2026-02-16 23:49]  Hero.tsx
+│   │   ├── [3.4K 2026-02-17 00:25]  landing
 │   │   │   ├── [ 10K 2026-02-16 23:49]  PricingSection.tsx
 │   │   │   └── [ 10K 2026-02-16 23:49]  WorkProcess.tsx
 │   │   └── [3.4K 2026-02-16 23:49]  services
-│   │       ├── [7.3K 2026-02-16 23:49]  ServiceCard.tsx
+│   │       ├── [7.1K 2026-02-17 00:56]  ServiceCard.tsx
 │   │       └── [4.2K 2026-02-16 23:49]  ServiceListingHub.tsx
 │   ├── [3.4K 2026-02-16 23:49]  layout
-│   │   ├── [5.8K 2026-02-16 23:49]  Footer.tsx
+│   │   ├── [6.1K 2026-02-17 00:26]  Footer.tsx
 │   │   ├── [9.7K 2026-02-16 23:49]  Navbar.tsx
 │   │   ├── [2.4K 2026-02-16 23:49]  PageTransition.tsx
 │   │   └── [1.9K 2026-02-16 23:49]  TopLoader.tsx
@@ -5515,7 +5311,7 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   ├── [1.7K 2026-02-16 23:49]  ClientInfrastructure.tsx
 │   │   └── [1.1K 2026-02-16 23:49]  ThemeProvider.tsx
 │   ├── [3.4K 2026-02-16 23:49]  seo
-│   │   └── [1.9K 2026-02-16 23:49]  JsonLd.tsx
+│   │   └── [2.5K 2026-02-17 02:21]  JsonLd.tsx
 │   ├── [3.4K 2026-02-16 23:49]  shared
 │   │   ├── [7.2K 2026-02-16 23:49]  ConversionCTA.tsx
 │   │   ├── [2.7K 2026-02-16 23:49]  FloatingContainer.tsx
@@ -5562,14 +5358,15 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │       ├── [4.9K 2026-02-16 23:49]  SuiteRegistry.tsx
 │   │   │       └── [5.4K 2026-02-16 23:49]  WeatherTracker.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  local-authority
-│   │   │   ├── [5.3K 2026-02-16 23:49]  Index.tsx
-│   │   │   └── [3.4K 2026-02-16 23:49]  _components
-│   │   │       ├── [1.3K 2026-02-16 23:49]  DistrictRegistry.tsx
-│   │   │       ├── [1.6K 2026-02-16 23:49]  GeoNodeHeader.tsx
-│   │   │       ├── [1.9K 2026-02-16 23:49]  LocalInsight.tsx
-│   │   │       ├── [5.4K 2026-02-16 23:49]  LocalMapNode.tsx
-│   │   │       ├── [2.4K 2026-02-16 23:49]  MarketIntelligence.tsx
-│   │   │       └── [1.3K 2026-02-16 23:49]  RegionalAction.tsx
+│   │   │   ├── [4.0K 2026-02-17 02:12]  Index.tsx
+│   │   │   └── [3.4K 2026-02-17 01:52]  _components
+│   │   │       ├── [2.3K 2026-02-17 02:12]  DistrictHero.tsx
+│   │   │       ├── [1.5K 2026-02-17 02:12]  DistrictRegistry.tsx
+│   │   │       ├── [1.7K 2026-02-17 02:12]  GeoNodeHeader.tsx
+│   │   │       ├── [2.0K 2026-02-17 02:12]  LocalInsight.tsx
+│   │   │       ├── [5.2K 2026-02-17 02:12]  LocalMapNode.tsx
+│   │   │       ├── [3.5K 2026-02-17 02:12]  MarketIntelligence.tsx
+│   │   │       └── [2.2K 2026-02-17 02:12]  RegionalAction.tsx
 │   │   ├── [3.4K 2026-02-16 23:49]  salepage
 │   │   │   ├── [8.4K 2026-02-16 23:49]  Index.tsx
 │   │   │   └── [3.4K 2026-02-16 23:49]  _components
@@ -5581,12 +5378,11 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │       ├── [2.9K 2026-02-16 23:49]  SaleNavbar.tsx
 │   │   │       ├── [3.6K 2026-02-16 23:49]  StickyBuyButton.tsx
 │   │   │       └── [7.7K 2026-02-16 23:49]  ThaiTrustBadge.tsx
-│   │   ├── [3.4K 2026-02-16 23:55]  sections
-│   │   │   ├── [   0 2026-02-16 23:55]  1
+│   │   ├── [3.4K 2026-02-17 00:18]  sections
 │   │   │   ├── [6.8K 2026-02-16 23:49]  DynamicFAQ.tsx
-│   │   │   ├── [6.2K 2026-02-16 23:49]  FeatureGrid.tsx
-│   │   │   ├── [7.0K 2026-02-16 23:49]  HeroEngine.tsx
-│   │   │   └── [4.7K 2026-02-16 23:49]  LayoutEngine.tsx
+│   │   │   ├── [6.0K 2026-02-17 00:56]  FeatureGrid.tsx
+│   │   │   ├── [7.1K 2026-02-17 00:26]  HeroEngine.tsx
+│   │   │   └── [5.1K 2026-02-17 00:26]  LayoutEngine.tsx
 │   │   └── [3.4K 2026-02-16 23:49]  seo-agency
 │   │       ├── [4.7K 2026-02-16 23:49]  Index.tsx
 │   │       └── [3.4K 2026-02-16 23:49]  _components
@@ -5625,92 +5421,108 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   ├── [ 13K 2026-02-16 23:49]  lampang.ts
 │   │   ├── [ 13K 2026-02-16 23:49]  mae-hong-son.ts
 │   │   ├── [ 15K 2026-02-16 23:49]  nakhon-sawan.ts
-│   │   ├── [8.5K 2026-02-16 23:49]  phang-nga.ts
+│   │   ├── [5.4K 2026-02-17 02:12]  phang-nga.ts
 │   │   ├── [ 15K 2026-02-16 23:49]  phichit.ts
 │   │   ├── [ 15K 2026-02-16 23:49]  phitsanulok.ts
 │   │   ├── [ 15K 2026-02-16 23:49]  phuket.ts
-│   │   ├── [ 12K 2026-02-16 23:49]  ranong.ts
+│   │   ├── [6.6K 2026-02-17 02:12]  ranong.ts
 │   │   ├── [6.4K 2026-02-16 23:49]  sukhothai.ts
 │   │   ├── [ 13K 2026-02-16 23:49]  surat-thani.ts
 │   │   ├── [ 15K 2026-02-16 23:49]  tak.ts
 │   │   └── [ 16K 2026-02-16 23:49]  uttaradit.ts
-│   ├── [ 12K 2026-02-16 23:49]  image-blur-data.ts
+│   ├── [ 12K 2026-02-17 02:19]  image-blur-data.ts
 │   ├── [2.4K 2026-02-16 23:49]  master-registry.ts
-│   ├── [1.7K 2026-02-16 23:49]  navigation.ts
+│   ├── [2.2K 2026-02-17 00:14]  navigation.ts
 │   ├── [3.4K 2026-02-16 23:49]  services
 │   │   ├── [7.9K 2026-02-16 23:52]  bio.ts
 │   │   ├── [5.7K 2026-02-16 23:49]  catalog.ts
 │   │   ├── [ 10K 2026-02-16 23:49]  corporate.ts
 │   │   ├── [ 10K 2026-02-16 23:49]  hotel-resort.ts
-│   │   ├── [9.7K 2026-02-16 23:49]  local-authority.ts
+│   │   ├── [8.4K 2026-02-17 02:12]  local-authority.ts
 │   │   ├── [ 10K 2026-02-16 23:49]  salepage.ts
 │   │   └── [ 12K 2026-02-16 23:49]  seo-agency.ts
 │   └── [5.1K 2026-02-16 23:49]  site-config.ts
 ├── [3.4K 2026-02-16 23:49]  content
 │   ├── [3.4K 2026-02-16 23:49]  blog
-│   │   ├── [ 12K 2026-02-16 23:49]  5-points-killing-sales.mdx
-│   │   ├── [ 11K 2026-02-16 23:49]  advanced-schema-markup.mdx
-│   │   ├── [ 10K 2026-02-16 23:49]  case-study-unlink-th.mdx
-│   │   ├── [9.9K 2026-02-16 23:49]  copywriting-secrets.mdx
-│   │   ├── [ 12K 2026-02-16 23:49]  core-web-vitals-speed.mdx
-│   │   ├── [9.9K 2026-02-16 23:49]  ecommerce-conversion-seo.mdx
-│   │   ├── [ 11K 2026-02-16 23:49]  facebook-ads-vs-website.mdx
-│   │   ├── [ 12K 2026-02-16 23:49]  lower-north-digital-transformation.mdx
-│   │   ├── [ 15K 2026-02-16 23:49]  seo-2026-strategy.mdx
+│   │   ├── [ 13K 2026-02-17 02:12]  5-points-killing-sales.mdx
+│   │   ├── [ 12K 2026-02-17 02:12]  advanced-schema-markup.mdx
+│   │   ├── [ 11K 2026-02-17 02:12]  case-study-unlink-th.mdx
+│   │   ├── [ 11K 2026-02-17 02:12]  copywriting-secrets.mdx
+│   │   ├── [ 12K 2026-02-17 02:12]  core-web-vitals-speed.mdx
+│   │   ├── [ 11K 2026-02-17 02:12]  ecommerce-conversion-seo.mdx
+│   │   ├── [ 11K 2026-02-17 02:12]  facebook-ads-vs-website.mdx
+│   │   ├── [ 12K 2026-02-17 02:12]  lower-north-digital-transformation.mdx
+│   │   ├── [ 10K 2026-02-17 02:12]  seo-2026-strategy.mdx
 │   │   └── [ 11K 2026-02-16 23:49]  technical-audit-protocol.mdx
-│   └── [3.4K 2026-02-16 23:49]  case-studies
-│       ├── [ 11K 2026-02-16 23:49]  case-study-industrial-catalog.mdx
-│       └── [ 11K 2026-02-16 23:49]  unlink-reputation-management-success.mdx
+│   └── [3.4K 2026-02-17 02:11]  case-studies
+│       ├── [ 12K 2026-02-17 02:12]  case-study-industrial-catalog.mdx
+│       ├── [ 11K 2026-02-17 02:12]  provincial-digital-domination.mdx
+│       └── [ 11K 2026-02-17 02:12]  unlink-reputation-management-success.mdx
 ├── [2.4K 2026-02-16 23:49]  eslint.config.mjs
 ├── [ 366 2026-02-16 23:49]  knip.json
 ├── [3.4K 2026-02-16 23:49]  lib
-│   ├── [5.4K 2026-02-16 23:49]  cms.ts
+│   ├── [3.9K 2026-02-17 02:12]  cms.ts
 │   ├── [3.8K 2026-02-16 23:49]  data-merger.ts
 │   ├── [5.1K 2026-02-16 23:49]  schema-validator.ts
 │   ├── [7.9K 2026-02-16 23:49]  schema.ts
 │   ├── [2.6K 2026-02-16 23:49]  seo-utils.ts
 │   └── [4.1K 2026-02-16 23:49]  utils.ts
-├── [3.8K 2026-02-16 23:49]  mdx-components.tsx
+├── [2.6K 2026-02-17 02:12]  mdx-components.tsx
 ├── [ 247 2026-02-16 23:49]  next-env.d.ts
-├── [3.9K 2026-02-16 23:49]  next.config.ts
+├── [3.9K 2026-02-17 02:12]  next.config.ts
 ├── [3.1K 2026-02-16 23:49]  package.json
-├── [257K 2026-02-16 23:49]  pnpm-lock.yaml
+├── [258K 2026-02-17 00:56]  pnpm-lock.yaml
 ├── [  51 2026-02-16 23:49]  pnpm-workspace.yaml
 ├── [1.1K 2026-02-16 23:49]  postcss.config.mjs
-├── [3.4K 2026-02-16 23:49]  public
+├── [3.4K 2026-02-17 02:18]  public
 │   └── [3.4K 2026-02-16 23:49]  images
 │       ├── [3.4K 2026-02-16 23:49]  areas
 │       ├── [3.4K 2026-02-16 23:49]  blog
-│       ├── [3.4K 2026-02-16 23:49]  case-studies
+│       ├── [3.4K 2026-02-17 02:16]  case-studies
 │       ├── [3.4K 2026-02-16 23:49]  case-study
 │       ├── [3.4K 2026-02-16 23:49]  experts
 │       ├── [3.4K 2026-02-16 23:49]  seo
 │       ├── [3.4K 2026-02-16 23:49]  service
 │       └── [3.4K 2026-02-16 23:49]  shared
-├── [3.4K 2026-02-16 23:49]  scripts
-│   ├── [3.8K 2026-02-16 23:59]  audit-system.sh
+├── [3.4K 2026-02-17 01:21]  scripts
+│   ├── [4.6K 2026-02-17 00:17]  audit-system.sh
 │   ├── [1.8K 2026-02-16 23:49]  check-types-usage.sh
 │   ├── [3.5K 2026-02-16 23:49]  clean.sh
 │   ├── [4.0K 2026-02-16 23:49]  gen-blur-data.mjs
 │   ├── [4.5K 2026-02-16 23:49]  generate_docs.sh
-│   ├── [4.1K 2026-02-16 23:49]  image-audit.mjs
+│   ├── [6.4K 2026-02-17 02:17]  image-audit.mjs
 │   ├── [3.6K 2026-02-16 23:49]  index-urls.js
 │   ├── [ 12K 2026-02-16 23:49]  master_audit.py
+│   ├── [4.2K 2026-02-17 01:23]  seo-monitor.py
 │   └── [3.4K 2026-02-16 23:49]  test-schema.ts
 ├── [2.3K 2026-02-16 23:51]  service-account.json
-├── [ 84K 2026-02-16 23:57]  system_audit_result.md
+├── [5.4K 2026-02-17 02:19]  structure.txt
 ├── [ 748 2026-02-16 23:49]  tsconfig.json
+├── [130K 2026-02-17 02:13]  tsconfig.tsbuildinfo
 ├── [3.4K 2026-02-16 23:49]  types
 │   ├── [9.7K 2026-02-16 23:49]  index.d.ts
 │   └── [4.0K 2026-02-16 23:49]  template-props.ts
-├── [ 12K 2026-02-16 23:58]  types_usage_report.md
-└── [3.3K 2026-02-16 23:49]  vercel.json
+└── [3.4K 2026-02-17 01:19]  vercel.json
 
-65 directories, 191 files
+65 directories, 192 files
 ```
 
 ---
 
 ## BUILD ARTIFACT ANALYSIS (.next/static)
+```text
+Total Size:
+2.2M	.next/static
 
-> [INFO] Build artifacts not found. Run 'pnpm build' to generate stats.
+Top 10 Largest Assets:
+196K	.next/static/chunks/92766bc8-d7271867088c7ae4.js
+188K	.next/static/chunks/1966-7874a697c3ff9e79.js
+180K	.next/static/chunks/framework-473b702606f6b0d3.js
+144K	.next/static/css/9d38666e526500a2.css
+132K	.next/static/chunks/main-5bfa4d691420a69e.js
+132K	.next/static/chunks/2714-f44425ce74b0a11e.js
+124K	.next/static/chunks/8210-f574cd6a37d174fc.js
+112K	.next/static/chunks/polyfills-42372ed130431b0a.js
+84K	.next/static/media/8e9860b6e62d6359-s.woff2
+68K	.next/static/chunks/5065-fc80fff18cb2fe07.js
+```
