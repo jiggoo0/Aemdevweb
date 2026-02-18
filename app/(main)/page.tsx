@@ -158,7 +158,7 @@ export default async function HomePage() {
       <section id="success" className="py-24 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <header className="mb-16">
-            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl">
+            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-6xl">
               Success <span className="text-text-secondary opacity-30">Nodes.</span>
             </h2>
           </header>

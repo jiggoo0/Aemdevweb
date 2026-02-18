@@ -19,7 +19,6 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- [STABILIZED]: Client Bridge Infrastructure ---
-// ย้าย Non-critical UI ที่ต้องใช้ ssr: false ไปไว้ในคอมโพเนนต์นี้เพื่อแก้ปัญหา Build Error
 import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
 
 /* --- 01. FONT ORCHESTRATION (Hardened Trimming) --- */
@@ -113,10 +112,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          {/* [SOLUTION]: Client-side Infrastructure 
-              ห่อหุ้ม TopLoader, LineButton, และ Toaster ไว้ในที่เดียว
-              เพื่อรองรับ Dynamic Import (ssr: false) ได้อย่างถูกต้อง
-          */}
+          {/* [SOLUTION]: Client-side Infrastructure */}
           <ClientInfrastructure />
 
           <main id="root-container" className="relative flex min-h-dvh flex-col overflow-x-hidden">

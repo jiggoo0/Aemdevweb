@@ -1,5 +1,5 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.3 (FULL_EXPORT_RESTORED)
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.4 (HOTFIX_RELIABILITY)
  * [STRATEGY]: Schema-DTS Strict | Zero-Any | All Generators Restored
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -20,7 +20,11 @@ import type {
   Offer,
 } from "schema-dts";
 
-// --- [HELPERS] ---
+// --- [01]: INFRASTRUCTURE HELPERS ---
+
+/**
+ * แปลง Path ให้เป็น Absolute URL เพื่อความถูกต้องของ Schema Graph
+ */
 const absoluteUrl = (path: string | undefined): string => {
   if (!path) return `${SITE_CONFIG.siteUrl}/images/og-default.webp`;
   if (path.startsWith("http")) return path;
@@ -28,10 +32,11 @@ const absoluteUrl = (path: string | undefined): string => {
   return `${SITE_CONFIG.siteUrl}/${cleanPath}`;
 };
 
-// --- [CORE CONSTANTS] ---
+// --- [02]: CORE SHARED NODES ---
+
 const sharedAddress: PostalAddress = {
   "@type": "PostalAddress",
-  streetAddress: SITE_CONFIG.contact.address || SITE_CONFIG.contact.streetAddress,
+  streetAddress: SITE_CONFIG.contact.streetAddress || SITE_CONFIG.contact.address,
   addressLocality: SITE_CONFIG.business.location,
   addressRegion: SITE_CONFIG.business.region,
   postalCode: SITE_CONFIG.contact.postalCode,
@@ -62,7 +67,7 @@ const personNode: Person = {
   description: SITE_CONFIG.expert.bio,
 };
 
-// --- [GENERATORS] ---
+// --- [03]: SCHEMA GENERATORS ---
 
 /** [RESTORED]: generatePersonSchema */
 export const generatePersonSchema = (): Person => personNode;
@@ -108,7 +113,7 @@ export function generateUniversalSchema(
 
   const base = {
     "@id": `${canonicalUrl}/#main`,
-    name: data.title,
+    name: data.title || SITE_CONFIG.brandName, // [FIX]: บังคับให้มีชื่อเสมอ
     description: data.description,
     image: absoluteUrl(data.image || SITE_CONFIG.ogImage),
     url: canonicalUrl,
@@ -125,11 +130,13 @@ export function generateUniversalSchema(
     return { "@type": "Product", ...base, offers: offer } as Product;
   }
 
+  // [FIXED]: เพิ่มฟิลด์ name, telephone และ priceRange เพื่อแก้ Error จาก Google
   return {
     "@type": "ProfessionalService",
     ...base,
     address: sharedAddress,
-    priceRange: "฿฿-฿฿฿",
+    telephone: SITE_CONFIG.contact.phone, // [ADD]: ดึงจาก Config 099-032-2175
+    priceRange: SITE_CONFIG.business.priceRange, // [ADD]: ดึงจาก Config ฿฿฿
   } as ProfessionalService;
 }
 
@@ -139,9 +146,11 @@ export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService
   return {
     "@type": "ProfessionalService",
     "@id": `${url}/#localbusiness`,
-    name: `รับทำเว็บไซต์ ${data.province} - ${SITE_CONFIG.expert.displayName}`,
+    name: `รับทำเว็บไซต์ ${data.province} - ${SITE_CONFIG.expert.displayName}`, // [FIX]: ระบุชื่อชัดเจน
     url: url,
     image: absoluteUrl(data.heroImage || SITE_CONFIG.ogImage),
+    telephone: SITE_CONFIG.contact.phone, // [ADD]: แก้ปัญหา Missing Field
+    priceRange: SITE_CONFIG.business.priceRange, // [ADD]: แก้ปัญหา Missing Field
     address: {
       "@type": "PostalAddress",
       addressLocality: data.province,
