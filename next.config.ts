@@ -25,26 +25,48 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  // [OPTIMIZATION]: เร่งความเร็ว Core Web Vitals
   reactStrictMode: true,
   compress: true,
 
-  // [COMPILER_HARDENING]: กำจัด Unused JS เพื่อลด Payload
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },
 
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
+
+  // [SEO_REDIRECTS_ENGINE]: จัดการหน้าเก่า (Legacy) ตามรายงาน Audit
+  async redirects() {
+    return [
+      // 1. [FORCE_WWW]: บังคับ non-www ไปที่ www ทันที (SEO Canonicalization)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'aemdevweb.com' }],
+        destination: 'https://www.aemdevweb.com/:path*',
+        permanent: true,
+      },
+      // 2. [LEGACY_MAPPING]: เปลี่ยนจาก Underscore (_) เป็น Hyphen (-) และโครงสร้างเก่า
+      { source: '/services/corporate_pro', destination: '/services/corporate', permanent: true },
+      { source: '/services/corporate_lite', destination: '/services/corporate', permanent: true },
+      { source: '/services/seo_agency', destination: '/services/seo-agency', permanent: true },
+      { source: '/services/local_service', destination: '/services/local-authority', permanent: true },
+      { source: '/services/local', destination: '/services/local-authority', permanent: true },
+      { source: '/services/event_magic', destination: '/services/salepage', permanent: true },
+      { source: '/seo/advanced-schema-markup', destination: '/blog/advanced-schema-markup', permanent: true },
+      { source: '/seo/core-web-vitals-speed', destination: '/blog/core-web-vitals-speed', permanent: true },
+      { source: '/seo/technical-structure-audit', destination: '/blog/technical-audit-protocol', permanent: true },
+      { source: '/blog/technical-seo-guide', destination: '/blog/technical-audit-protocol', permanent: true },
+      { source: '/blog/technical-structure-audit', destination: '/blog/technical-audit-protocol', permanent: true },
+      { source: '/case-studies/project-01', destination: '/case-studies', permanent: true },
+      { source: '/templates/:path*', destination: '/services', permanent: true },
+    ];
+  },
 
   experimental: {
     scrollRestoration: true,
-    // [TERMUX_HARDENING]: ป้องกัน Android Kill Process
     workerThreads: false,
     cpus: isVercel ? undefined : 1,
-
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
@@ -64,16 +86,14 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "aemdevweb.com",
+        hostname: "www.aemdevweb.com", // ปรับเป็น www
       },
     ],
   },
 
-  // [SEO_ARCHITECTURE]: Headers Management
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
@@ -93,7 +113,6 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         headers: securityHeaders,
       },
-      // [NEW: EDGE_HTML_CACHE]: บังคับให้ Edge Network เก็บหน้าหลักไว้ถาวรจนกว่าจะมีการ Revalidate
       {
         source: "/(about|services|areas|blog|case-studies|privacy|terms)",
         headers: [
@@ -103,25 +122,13 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // [OPTIMIZED_IMAGE_CACHE]: สำหรับรูปภาพที่รีไซส์แล้ว
       {
         source: "/_next/image/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
-      // [STATIC_ASSET_CACHE]: สำหรับไฟล์ดิบใน public/
       {
         source: "/(images|fonts)/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
     ];
   },
