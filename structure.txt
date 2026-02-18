@@ -1,189 +1,324 @@
-AEMDEVWEB STRUCTURE SNAPSHOT - Tue Feb 17 06:15:59 +07 2026
-------------------------------------------------
 .
-./structure.txt
-./app
-./app/(business)
-./app/(business)/areas
-./app/(business)/blog
-./app/(business)/case-studies
-./app/(business)/layout.tsx
-./app/(main)
-./app/(main)/about
-./app/(main)/layout.tsx
-./app/(main)/page.tsx
-./app/(main)/privacy
-./app/(main)/status
-./app/(main)/terms
-./app/(sales)
-./app/(sales)/layout.tsx
-./app/(sales)/services
-./app/favicon.ico
-./app/globals.css
-./app/layout.tsx
-./app/loading.tsx
-./app/manifest.ts
-./app/not-found.tsx
-./app/robots.ts
-./app/sitemap.ts
-./app/template.tsx
-./components.json
-./components
-./components/features
-./components/features/areas
-./components/features/blog
-./components/features/case-studies
-./components/features/landing
-./components/features/services
-./components/layout
-./components/layout/Footer.tsx
-./components/layout/Navbar.tsx
-./components/layout/PageTransition.tsx
-./components/layout/TopLoader.tsx
-./components/providers
-./components/providers/ClientInfrastructure.tsx
-./components/providers/ThemeProvider.tsx
-./components/seo
-./components/seo/JsonLd.tsx
-./components/shared
-./components/shared/ConversionCTA.tsx
-./components/shared/FloatingContainer.tsx
-./components/shared/ImpactStats.tsx
-./components/shared/LineStickyButton.tsx
-./components/shared/TrustBadge.tsx
-./components/templates
-./components/templates/DynamicThemeWrapper.tsx
-./components/templates/TemplateRenderer.tsx
-./components/templates/bio
-./components/templates/catalog
-./components/templates/corporate
-./components/templates/hotelresort
-./components/templates/local-authority
-./components/templates/salepage
-./components/templates/sections
-./components/templates/seo-agency
-./components/ui
-./components/ui/Accordion.tsx
-./components/ui/AmbientBackground.tsx
-./components/ui/Button.tsx
-./components/ui/Callout.tsx
-./components/ui/IconRenderer.tsx
-./components/ui/Skeleton.tsx
-./components/ui/SkeletonCard.tsx
-./components/ui/SkeletonGrid.tsx
-./components/ui/Sonner.tsx
-./components/ui/ThemeToggle.tsx
-./config
-./config/00-SYSTEM-MANDATE.md
-./config/01-SYSTEM-PROMPT-EXTENSION.md
-./constants
-./constants/area-nodes
-./constants/area-nodes/bangkok.ts
-./constants/area-nodes/chiang-mai.ts
-./constants/area-nodes/chiang-rai.ts
-./constants/area-nodes/chon-buri.ts
-./constants/area-nodes/chumphon.ts
-./constants/area-nodes/index.ts
-./constants/area-nodes/kamphaeng-phet.ts
-./constants/area-nodes/khon-kaen.ts
-./constants/area-nodes/korat.ts
-./constants/area-nodes/lampang.ts
-./constants/area-nodes/mae-hong-son.ts
-./constants/area-nodes/nakhon-sawan.ts
-./constants/area-nodes/phang-nga.ts
-./constants/area-nodes/phichit.ts
-./constants/area-nodes/phitsanulok.ts
-./constants/area-nodes/phuket.ts
-./constants/area-nodes/ranong.ts
-./constants/area-nodes/sukhothai.ts
-./constants/area-nodes/surat-thani.ts
-./constants/area-nodes/tak.ts
-./constants/area-nodes/uttaradit.ts
-./constants/image-blur-data.ts
-./constants/master-registry.ts
-./constants/navigation.ts
-./constants/services
-./constants/services/bio.ts
-./constants/services/catalog.ts
-./constants/services/corporate.ts
-./constants/services/hotel-resort.ts
-./constants/services/local-authority.ts
-./constants/services/salepage.ts
-./constants/services/seo-agency.ts
-./constants/site-config.ts
-./content
-./content/blog
-./content/blog/5-points-killing-sales.mdx
-./content/blog/advanced-schema-markup.mdx
-./content/blog/case-study-unlink-th.mdx
-./content/blog/copywriting-secrets.mdx
-./content/blog/core-web-vitals-speed.mdx
-./content/blog/ecommerce-conversion-seo.mdx
-./content/blog/facebook-ads-vs-website.mdx
-./content/blog/lower-north-digital-transformation.mdx
-./content/blog/seo-2026-strategy.mdx
-./content/blog/technical-audit-protocol.mdx
-./content/case-studies
-./content/case-studies/case-study-industrial-catalog.mdx
-./content/case-studies/unlink-reputation-management-success.mdx
-./content/case-studies/provincial-digital-domination.mdx
-./eslint.config.mjs
-./knip.json
-./lib
-./lib/cms.ts
-./lib/data-merger.ts
-./lib/schema-validator.ts
-./lib/schema.ts
-./lib/seo-utils.ts
-./lib/utils.ts
-./mdx-components.tsx
-./next-env.d.ts
-./next.config.ts
-./package.json
-./pnpm-workspace.yaml
-./postcss.config.mjs
-./public
-./public/android-chrome-192x192.png
-./public/android-chrome-512x512.png
-./public/apple-touch-icon.png
-./public/favicon-16x16.png
-./public/favicon-32x32.png
-./public/favicon.ico
-./public/grid-pattern.svg
-./public/logo-icon.svg
-./public/images
-./public/images/areas
-./public/images/avatar.webp
-./public/images/blog
-./public/images/case-studies
-./public/images/experts
-./public/images/logo-main.webp
-./public/images/og-blog.webp
-./public/images/og-case-studies.webp
-./public/images/og-default.webp
-./public/images/og-main.webp
-./public/images/seo
-./public/images/shared
-./public/images/services
-./scripts
-./scripts/audit-system.sh
-./scripts/check-types-usage.sh
-./scripts/clean.sh
-./scripts/gen-blur-data.mjs
-./scripts/generate_docs.sh
-./scripts/image-audit.mjs
-./scripts/index-urls.js
-./scripts/master_audit.py
-./scripts/test-schema.ts
-./scripts/asset-audit.sh
-./scripts/seo-monitor.py
-./scripts/check-naming-sync.sh
-./scripts/standardize-paths.sh
-./pnpm-lock.yaml
-./tsconfig.json
-./types
-./types/index.d.ts
-./types/template-props.ts
-./service-account.json
-./tsconfig.tsbuildinfo
-./a.sh
+├── app
+│   ├── (business)
+│   │   ├── areas
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── blog
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── case-studies
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (main)
+│   │   ├── about
+│   │   │   └── page.tsx
+│   │   ├── privacy
+│   │   │   └── page.tsx
+│   │   ├── status
+│   │   │   └── page.tsx
+│   │   ├── terms
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── (sales)
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── loading.tsx
+│   ├── manifest.ts
+│   ├── not-found.tsx
+│   ├── robots.ts
+│   ├── sitemap.ts
+│   └── template.tsx
+├── components
+│   ├── features
+│   │   ├── areas
+│   │   │   └── AreaCard.tsx
+│   │   ├── blog
+│   │   │   └── BlogCard.tsx
+│   │   ├── case-studies
+│   │   │   └── CaseStudyCard.tsx
+│   │   ├── landing
+│   │   │   ├── PricingSection.tsx
+│   │   │   └── WorkProcess.tsx
+│   │   └── services
+│   │       ├── ServiceCard.tsx
+│   │       └── ServiceListingHub.tsx
+│   ├── layout
+│   │   ├── Footer.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── PageTransition.tsx
+│   │   └── TopLoader.tsx
+│   ├── providers
+│   │   ├── ClientInfrastructure.tsx
+│   │   └── ThemeProvider.tsx
+│   ├── seo
+│   │   └── JsonLd.tsx
+│   ├── shared
+│   │   ├── ConversionCTA.tsx
+│   │   ├── FloatingContainer.tsx
+│   │   ├── ImpactStats.tsx
+│   │   ├── LineStickyButton.tsx
+│   │   └── TrustBadge.tsx
+│   ├── templates
+│   │   ├── bio
+│   │   │   ├── _components
+│   │   │   │   ├── ActionRegistry.tsx
+│   │   │   │   ├── CapabilityGraph.tsx
+│   │   │   │   ├── CredentialStack.tsx
+│   │   │   │   ├── DirectTerminal.tsx
+│   │   │   │   ├── IdentityNode.tsx
+│   │   │   │   └── ProjectHighlight.tsx
+│   │   │   └── Index.tsx
+│   │   ├── catalog
+│   │   │   ├── _components
+│   │   │   │   ├── CatalogHeader.tsx
+│   │   │   │   ├── InquiryPortal.tsx
+│   │   │   │   ├── ProductGrid.tsx
+│   │   │   │   ├── ProductNode.tsx
+│   │   │   │   ├── SearchOrchestrator.tsx
+│   │   │   │   └── TechnicalSpecSheet.tsx
+│   │   │   └── Index.tsx
+│   │   ├── corporate
+│   │   │   ├── _components
+│   │   │   │   ├── CapabilityMatrix.tsx
+│   │   │   │   ├── ConsultGateway.tsx
+│   │   │   │   ├── SuccessTimeline.tsx
+│   │   │   │   ├── TrustNetwork.tsx
+│   │   │   │   ├── ValueBlueprint.tsx
+│   │   │   │   └── VisionPortal.tsx
+│   │   │   └── Index.tsx
+│   │   ├── hotelresort
+│   │   │   ├── _components
+│   │   │   │   ├── AtmosphereHeader.tsx
+│   │   │   │   ├── ExperienceNodes.tsx
+│   │   │   │   ├── FacilityMatrix.tsx
+│   │   │   │   ├── ReservationPortal.tsx
+│   │   │   │   ├── SuiteRegistry.tsx
+│   │   │   │   └── WeatherTracker.tsx
+│   │   │   └── Index.tsx
+│   │   ├── local-authority
+│   │   │   ├── _components
+│   │   │   │   ├── DistrictHero.tsx
+│   │   │   │   ├── DistrictRegistry.tsx
+│   │   │   │   ├── GeoNodeHeader.tsx
+│   │   │   │   ├── LocalInsight.tsx
+│   │   │   │   ├── LocalMapNode.tsx
+│   │   │   │   ├── MarketIntelligence.tsx
+│   │   │   │   └── RegionalAction.tsx
+│   │   │   └── Index.tsx
+│   │   ├── salepage
+│   │   │   ├── _components
+│   │   │   │   ├── DirectOrderForm.tsx
+│   │   │   │   ├── FeatureComparison.tsx
+│   │   │   │   ├── FlashSaleTimer.tsx
+│   │   │   │   ├── SaleFooter.tsx
+│   │   │   │   ├── SaleHero.tsx
+│   │   │   │   ├── SaleNavbar.tsx
+│   │   │   │   ├── StickyBuyButton.tsx
+│   │   │   │   └── ThaiTrustBadge.tsx
+│   │   │   └── Index.tsx
+│   │   ├── sections
+│   │   │   ├── DynamicFAQ.tsx
+│   │   │   ├── FeatureGrid.tsx
+│   │   │   ├── HeroEngine.tsx
+│   │   │   └── LayoutEngine.tsx
+│   │   ├── seo-agency
+│   │   │   ├── _components
+│   │   │   │   ├── AuditHero.tsx
+│   │   │   │   ├── AuditReportGenerator.tsx
+│   │   │   │   ├── ConversionPortal.tsx
+│   │   │   │   ├── KeywordRegistry.tsx
+│   │   │   │   ├── PerformanceTrajectory.tsx
+│   │   │   │   └── StrategyBlueprint.tsx
+│   │   │   └── Index.tsx
+│   │   ├── DynamicThemeWrapper.tsx
+│   │   └── TemplateRenderer.tsx
+│   └── ui
+│       ├── Accordion.tsx
+│       ├── AmbientBackground.tsx
+│       ├── Button.tsx
+│       ├── Callout.tsx
+│       ├── IconRenderer.tsx
+│       ├── Skeleton.tsx
+│       ├── SkeletonCard.tsx
+│       ├── SkeletonGrid.tsx
+│       ├── Sonner.tsx
+│       └── ThemeToggle.tsx
+├── config
+│   ├── 00-SYSTEM-MANDATE.md
+│   └── 01-SYSTEM-PROMPT-EXTENSION.md
+├── constants
+│   ├── area-nodes
+│   │   ├── bangkok.ts
+│   │   ├── chiang-mai.ts
+│   │   ├── chiang-rai.ts
+│   │   ├── chon-buri.ts
+│   │   ├── chumphon.ts
+│   │   ├── index.ts
+│   │   ├── kamphaeng-phet.ts
+│   │   ├── khon-kaen.ts
+│   │   ├── korat.ts
+│   │   ├── lampang.ts
+│   │   ├── mae-hong-son.ts
+│   │   ├── nakhon-sawan.ts
+│   │   ├── phang-nga.ts
+│   │   ├── phichit.ts
+│   │   ├── phitsanulok.ts
+│   │   ├── phuket.ts
+│   │   ├── ranong.ts
+│   │   ├── sukhothai.ts
+│   │   ├── surat-thani.ts
+│   │   ├── tak.ts
+│   │   └── uttaradit.ts
+│   ├── services
+│   │   ├── bio.ts
+│   │   ├── catalog.ts
+│   │   ├── corporate.ts
+│   │   ├── hotel-resort.ts
+│   │   ├── local-authority.ts
+│   │   ├── salepage.ts
+│   │   └── seo-agency.ts
+│   ├── image-blur-data.ts
+│   ├── master-registry.ts
+│   ├── navigation.ts
+│   └── site-config.ts
+├── content
+│   ├── blog
+│   │   ├── 5-points-killing-sales.mdx
+│   │   ├── advanced-schema-markup.mdx
+│   │   ├── case-study-unlink-th.mdx
+│   │   ├── copywriting-secrets.mdx
+│   │   ├── core-web-vitals-speed.mdx
+│   │   ├── ecommerce-conversion-seo.mdx
+│   │   ├── facebook-ads-vs-website.mdx
+│   │   ├── lower-north-digital-transformation.mdx
+│   │   ├── seo-2026-strategy.mdx
+│   │   └── technical-audit-protocol.mdx
+│   └── case-studies
+│       ├── case-study-industrial-catalog.mdx
+│       ├── provincial-digital-domination.mdx
+│       └── unlink-reputation-management-success.mdx
+├── lib
+│   ├── cms.ts
+│   ├── data-merger.ts
+│   ├── schema-validator.ts
+│   ├── schema.ts
+│   ├── seo-utils.ts
+│   └── utils.ts
+├── public
+│   ├── images
+│   │   ├── areas
+│   │   │   ├── bangkok-node.webp
+│   │   │   ├── chiang-mai-node.webp
+│   │   │   ├── chiang-rai-node.webp
+│   │   │   ├── chon-buri-node.webp
+│   │   │   ├── chumphon-gateway.webp
+│   │   │   ├── kamphaeng-phet-node.webp
+│   │   │   ├── khon-kaen-node.webp
+│   │   │   ├── korat-monolith.webp
+│   │   │   ├── korat-node.webp
+│   │   │   ├── lampang-node.webp
+│   │   │   ├── mae-hong-son-node.webp
+│   │   │   ├── nakhon-sawan-node.webp
+│   │   │   ├── phang-nga.webp
+│   │   │   ├── phichit-node.webp
+│   │   │   ├── phitsanulok-node.webp
+│   │   │   ├── phuket-node.webp
+│   │   │   ├── preview.webp
+│   │   │   ├── ranong-hotspring.webp
+│   │   │   ├── sukhothai-node.webp
+│   │   │   ├── surat-ratchaprapha.webp
+│   │   │   ├── tak-node.webp
+│   │   │   └── uttaradit-node.webp
+│   │   ├── blog
+│   │   │   ├── advanced-schema-markup.webp
+│   │   │   ├── copywriting-specialist.webp
+│   │   │   ├── core-web-vitals-speed.webp
+│   │   │   ├── default-thumb.webp
+│   │   │   ├── ecommerce-seo.webp
+│   │   │   ├── facebook-ads-vs-website.webp
+│   │   │   ├── seo-google-love.webp
+│   │   │   └── technical-audit-visual.webp
+│   │   ├── case-studies
+│   │   │   ├── default.webp
+│   │   │   ├── industrial-catalog.webp
+│   │   │   ├── preview.webp
+│   │   │   ├── provincial-domination.webp
+│   │   │   └── unlink-reputation.webp
+│   │   ├── experts
+│   │   │   └── profile-hero.webp
+│   │   ├── seo
+│   │   │   ├── advanced-schema-markup.webp
+│   │   │   ├── core-web-vitals-speed.webp
+│   │   │   ├── ecommerce-seo.webp
+│   │   │   └── seo.webp
+│   │   ├── services
+│   │   │   ├── bio-node.webp
+│   │   │   ├── catalog-node.webp
+│   │   │   ├── corporate-node.webp
+│   │   │   ├── default.webp
+│   │   │   ├── hotel-resort-node.webp
+│   │   │   ├── local-node.webp
+│   │   │   ├── personal-node.webp
+│   │   │   ├── salepage-node.webp
+│   │   │   └── seo-agency-node.webp
+│   │   ├── shared
+│   │   │   ├── placeholder.webp
+│   │   │   └── preview.webp
+│   │   ├── avatar.webp
+│   │   ├── logo-main.webp
+│   │   ├── og-blog.webp
+│   │   ├── og-case-studies.webp
+│   │   ├── og-default.webp
+│   │   └── og-main.webp
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   ├── grid-pattern.svg
+│   └── logo-icon.svg
+├── scripts
+│   ├── audit-system.sh
+│   ├── gen-blur-data.mjs
+│   ├── generate_docs.sh
+│   ├── image-audit.mjs
+│   ├── index-urls.js
+│   ├── master_audit.py
+│   ├── seo-monitor.py
+│   └── test-schema.ts
+├── types
+│   ├── index.d.ts
+│   └── template-props.ts
+├── .gitignore
+├── .npmrc
+├── .prettierrc
+├── a.sh
+├── components.json
+├── eslint.config.mjs
+├── knip.json
+├── mdx-components.tsx
+├── next-env.d.ts
+├── next.config.ts
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+├── postcss.config.mjs
+├── structure.txt
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+└── vercel.json
+
+64 directories, 258 files
