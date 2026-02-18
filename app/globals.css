@@ -2,20 +2,18 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.7 (STABILIZED_HYBRID)
- * [STRATEGY]: OKLCH Dynamic Identity | Zero-CLS Layering | Theme-Aware Contrast
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.2 (PERFORMANCE_HARDENED)
+ * [STRATEGY]: OKLCH Color Engine | GPU Acceleration | LCP Stabilization
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 @theme {
-  /* --- 01. TYPOGRAPHY --- */
+  /* --- 01. TYPOGRAPHY SYSTEM --- */
   --font-thai: var(--font-thai), ui-sans-serif, system-ui;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui;
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
-  /* --- 02. DYNAMIC COLOR ENGINE --- 
-     ใช้ OKLCH เพื่อรักษาความสดของสี (Chroma) แม้ความสว่าง (Lightness) จะเปลี่ยน
-  */
+  /* --- 02. COLOR PALETTE (OKLCH Dynamic Mapping) --- */
   --color-brand-primary: oklch(var(--brand-primary-raw));
   --color-brand-secondary: oklch(var(--brand-secondary-raw));
   --color-brand-accent: oklch(var(--brand-accent-raw));
@@ -30,46 +28,39 @@
 
   --color-border: var(--border);
 
-  /* --- 03. SPECIAL EFFECTS --- */
-  --shadow-glow: 0 0 50px -12px oklch(var(--brand-primary-raw) / 0.4);
-  --shadow-pro: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+  /* --- 03. DEPTH & LIGHTING --- */
+  --shadow-glow: 0 0 40px -10px oklch(var(--brand-primary-raw) / 0.5);
+  --shadow-pro: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
 }
 
 @layer base {
   :root {
-    /* [LIGHT_MODE]: Zinc 50 Base (Slightly warmer than White) */
-    --brand-primary-raw: 65% 0.22 165; /* Emerald Dynamic Base */
-    --brand-secondary-raw: 45% 0.20 165;
-    --brand-accent-raw: 75% 0.15 165;
+    --brand-primary-raw: 60% 0.25 25;
+    --brand-secondary-raw: 50% 0.22 25;
+    --brand-accent-raw: 75% 0.18 25;
 
-    --surface-main: #fafafa;   /* Zinc 50 */
-    --surface-offset: #f4f4f5; /* Zinc 100 */
+    --surface-main: #ffffff;
+    --surface-offset: #f8fafc;
     --surface-card: #ffffff;
 
-    --text-primary: #09090b;   /* Zinc 950 */
-    --text-secondary: #3f3f46; /* Zinc 700 */
-    --text-muted: #71717a;    /* Zinc 500 */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
 
-    --border: #e4e4e7;         /* Zinc 200 */
-    --radius: 1rem;
+    --border: #e2e8f0;
+    --radius: 0.75rem;
   }
 
   .dark {
-    /* [DARK_MODE]: Zinc 950 Base (Deep Graphite) */
-    /* ปรับ Chroma ของสีหลักลงเล็กน้อยในโหมดมืด เพื่อลด Eye Strain */
-    --brand-primary-raw: 70% 0.18 165; 
-    --brand-secondary-raw: 60% 0.15 165;
-    --brand-accent-raw: 80% 0.12 165;
+    --surface-main: #020617;
+    --surface-offset: #0f172a;
+    --surface-card: #1e293b;
 
-    --surface-main: #09090b;   /* Zinc 950 */
-    --surface-offset: #18181b; /* Zinc 900 */
-    --surface-card: #111113;   /* Custom Deep Slate */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
 
-    --text-primary: #fafafa;   /* Zinc 50 */
-    --text-secondary: #a1a1aa; /* Zinc 400 */
-    --text-muted: #52525b;    /* Zinc 600 */
-
-    --border: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.08);
     color-scheme: dark;
   }
 
@@ -78,46 +69,63 @@
     background-color: var(--surface-main);
     color: var(--text-primary);
     scroll-behavior: smooth;
+
+    /* [PERFORMANCE]: บังคับวาดภาพด้วย GPU และลดความซับซ้อนของการประมวลผลข้อความบน Mobile */
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+    font-feature-settings: "cv11", "ss01", "zero", "tnum";
   }
 
   body {
     font-family: var(--font-thai);
     min-height: 100dvh;
-    /* [TEXTURE]: เพิ่ม Grain อ่อนๆ เพื่อความพรีเมียมในโหมดมืด */
+    overflow-x: hidden;
+    position: relative;
+
+    /* [OPTIMIZED]: ป้องกัน LCP พุ่งจากการใช้ Background-attachment: fixed บนมือถือ */
+    background-attachment: scroll;
     background-image: radial-gradient(
-      circle at 2px 2px, 
-      oklch(var(--brand-primary-raw) / 0.015) 1px, 
-      transparent 0
+      circle at 50% 50%,
+      oklch(var(--brand-primary-raw) / 0.02) 0%,
+      transparent 100%
     );
-    background-size: 40px 40px;
+  }
+
+  /* [SCROLLBAR]: Compact Optimization */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklch, var(--text-muted), transparent 60%);
+    border-radius: 99px;
   }
 }
 
 @layer utilities {
-  /* [CONVERSION_BOOST]: คลาสสำหรับเน้นจุดปิดการขาย */
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
+  .container {
+    @apply mx-auto w-full max-w-[90rem] px-4 md:px-8;
   }
 
+  /* [OPTIMIZED]: ปรับแก้ Glass Effect ลด Blur เหลือ 8px เพื่อช่วย GPU มือถือ */
   .glass-card {
-    @apply relative overflow-hidden border;
-    background-color: color-mix(in oklch, var(--surface-card), transparent 20%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-color: var(--border);
+    background-color: color-mix(in oklch, var(--surface-card), transparent 30%);
+    @supports (backdrop-filter: blur(1px)) {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    border: 1px solid color-mix(in oklch, var(--border), transparent 50%);
   }
 
-  /* [SEO_CRITICAL]: บังคับให้ LCP Element เรนเดอร์ทันที */
+  /* [CRITICAL]: คลาสสำหรับหยุด Animation บน LCP Element เพื่อให้ Google Bot วัดผลได้ทันที */
   .lcp-priority {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 500px;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
-  .gpu-render {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
+  .gpu-layer {
+    @apply transform-gpu backface-hidden;
+    will-change: transform, opacity;
   }
 }

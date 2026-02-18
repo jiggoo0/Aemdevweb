@@ -22,7 +22,6 @@ export const PerformanceTrajectory = memo(() => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
-          
           {/* --- 01. CONTENT_LAYER: Strategic Narrative --- */}
           <div className="space-y-8">
             <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">

@@ -1,7 +1,7 @@
 /**
- * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v17.9.86 (THEME_STABILIZED)
- * [STRATEGY]: Sales Enablement | B2B Authority | Hex Standard
- * [MAINTAINER]: AEMZA MACKS
+ * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v18.1.6 (STABILIZED_FINAL)
+ * [STRATEGY]: Sales Enablement | B2B Authority | Hex Standard Implementation
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { TemplateMasterData } from "@/types";
@@ -19,14 +19,18 @@ export const catalogService: TemplateMasterData = {
   currency: "THB",
   unit: "เริ่มต้น",
 
-  // [THEME_FIX]: ใช้ Hex Code เพื่อรองรับ OKLCH Engine
+  /**
+   * [THEME_ADAPTER]: Violet 600 Core | Zinc-Infused UI
+   * ออกแบบมาเพื่อสร้างความรู้สึกทันสมัยและเป็นมืออาชีพ (Clean Professionalism)
+   * รองรับการสลับธีมแบบ Adaptive Contrast
+   */
   theme: {
     mode: "light",
-    primary: "#7c3aed", // Violet 600
-    secondary: "#4c1d95", // Violet 900
-    background: "#f5f3ff", // Violet 50 (Very light purple for clean look)
-    foreground: "#1e1b4b", // Indigo 950 (Dark text)
-    accent: "#a78bfa", // Violet 400
+    primary: "#7c3aed",      // Violet 600 (Brand Identity)
+    secondary: "#4c1d95",    // Violet 900 (Visual Depth)
+    background: "#f5f3ff",   // Violet 50 (Clean Canvas)
+    foreground: "#1e1b4b",   // Indigo 950 (High Legibility)
+    accent: "#a78bfa",       // Violet 400 (Soft Highlights)
     gradient: "from-[#7c3aed]/15 via-transparent to-transparent",
   },
 
@@ -34,29 +38,29 @@ export const catalogService: TemplateMasterData = {
 
   benefits: [
     "Sales Team Empowerment: เซลส์ทำงานง่ายขึ้น ไม่ต้องพกแคตตาล็อกเล่มหนา แค่ส่งลิงก์เดียวลูกค้าดูสเปคได้ครบถ้วน",
-    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ คัดกรองลูกค้าตัวจริง",
-    "Scalable Data Management: รองรับสินค้าหลักหมื่น SKU ได้อย่างไร้กังวล พร้อมระบบค้นหาอัจฉริยะ",
+    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ เพื่อการคัดกรองลูกค้าที่มีเจตนาซื้อจริง",
+    "Scalable Data Management: โครงสร้างข้อมูลแบบ Matrix ที่รองรับสินค้าหลักหมื่น SKU พร้อมระบบค้นหาอัจฉริยะ (Zero-Latency)",
   ],
 
   coreFeatures: [
     {
       title: "Smart Filter & Search",
-      description: "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดแม่นยำ",
+      description: "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดและแม่นยำระดับรหัสอะไหล่",
       icon: "Search",
     },
     {
       title: "Direct RFQ System",
-      description: "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายไม่พลาดทุกโอกาส",
+      description: "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายไม่พลาดทุกโอกาสปิดดีล",
       icon: "FileText",
     },
     {
       title: "Automated Datasheets",
-      description: "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF ให้ลูกค้าดาวน์โหลดได้ทันที",
+      description: "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF ให้ลูกค้าดาวน์โหลดไปแนบใบเสนอราคาได้ทันที",
       icon: "FileDown",
     },
   ],
 
-  // [CATALOG_ITEMS]: ตัวอย่างรายการสินค้า (Mockup)
+  // [CATALOG_ITEMS]: โครงสร้างรายการสินค้าตัวอย่าง (B2B Matrix)
   items: [
     {
       name: "Industrial Pump X-200",
@@ -64,28 +68,33 @@ export const catalogService: TemplateMasterData = {
       icon: "Settings",
       price: "Call",
     },
-    { name: "Heavy Duty Valve", description: "วาล์วทองเหลืองเกรด A", icon: "Disc", price: "Call" },
+    { 
+      name: "Heavy Duty Valve", 
+      description: "วาล์วทองเหลืองเกรด A สำหรับงานอุตสาหกรรม", 
+      icon: "Disc", 
+      price: "Call" 
+    },
     {
       name: "Conveyor Belt 5M",
-      description: "สายพานลำเลียงทนความร้อน",
+      description: "สายพานลำเลียงทนความร้อนสูง",
       icon: "Activity",
       price: "Call",
     },
     {
       name: "Hydraulic Press",
-      description: "เครื่องอัดไฮดรอลิก 50 ตัน",
+      description: "เครื่องอัดไฮดรอลิก 50 ตัน มาตรฐานสากล",
       icon: "Cpu",
       price: "Call",
     },
     {
       name: "Safety Gear Set",
-      description: "ชุดป้องกันความปลอดภัยโรงงาน",
+      description: "ชุดอุปกรณ์ป้องกันความปลอดภัยส่วนบุคคลในโรงงาน",
       icon: "Shield",
       price: "Call",
     },
     {
       name: "Smart Sensor IoT",
-      description: "เซ็นเซอร์ตรวจจับการทำงานเครื่องจักร",
+      description: "เซ็นเซอร์ตรวจจับพฤติกรรมการทำงานเครื่องจักรผ่านระบบ Cloud",
       icon: "Wifi",
       price: "Call",
     },
@@ -95,12 +104,12 @@ export const catalogService: TemplateMasterData = {
     {
       question: "ต่างจากขายบน Shopee/Lazada อย่างไร?",
       answer:
-        "เน้น 'Brand Authority' และการสั่งซื้อล็อตใหญ่ (B2B) ครับ ไม่ใช่การขายปลีกแข่งราคาแบบ Marketplace",
+        "ระบบของเราเน้น 'Brand Authority' และการสั่งซื้อล็อตใหญ่ (B2B) ครับ ไม่ใช่การขายปลีกแข่งราคา แต่เป็นการสร้างความเชื่อมั่นผ่านข้อมูลสเปกที่ชัดเจนและระบบขอใบเสนอราคาที่เป็นมืออาชีพ",
     },
     {
-      question: "ถ้าข้อมูลสินค้าเยอะ จัดการยากไหม?",
+      question: "ถ้าข้อมูลสินค้ามีเป็นจำนวนมาก จะจัดการยากไหม?",
       answer:
-        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload หรือแก้ไขรายชิ้นได้อย่างรวดเร็ว",
+        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload ผ่าน Excel หรือแก้ไขรายชิ้นได้อย่างรวดเร็วผ่านหน้าจัดการที่ใช้งานง่ายเหมือนสมุดบันทึก",
     },
   ],
 

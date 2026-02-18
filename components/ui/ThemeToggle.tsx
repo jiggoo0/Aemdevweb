@@ -26,20 +26,20 @@ const ThemeToggle = () => {
   const glowStyles = useMemo(() => {
     const isDark = resolvedTheme === "dark";
     return {
-      container: isDark 
-        ? "border-brand-primary/20 bg-brand-primary/5 hover:border-brand-primary/50" 
+      container: isDark
+        ? "border-brand-primary/20 bg-brand-primary/5 hover:border-brand-primary/50"
         : "border-amber-400/20 bg-amber-400/5 hover:border-amber-400/50",
-      glow: isDark 
-        ? "bg-brand-primary/10 shadow-[0_0_20px_oklch(var(--brand-primary-raw)/0.2)]" 
+      glow: isDark
+        ? "bg-brand-primary/10 shadow-[0_0_20px_oklch(var(--brand-primary-raw)/0.2)]"
         : "bg-amber-400/15 shadow-[0_0_20px_oklch(0.8_0.15_90/0.2)]",
-      icon: isDark ? "text-brand-primary" : "text-amber-500"
+      icon: isDark ? "text-brand-primary" : "text-amber-500",
     };
   }, [resolvedTheme]);
 
   if (!mounted) {
     return (
       <div
-        className="h-10 w-10 rounded-xl border border-border/10 bg-surface-card/50"
+        className="border-border/10 bg-surface-card/50 h-10 w-10 rounded-xl border"
         aria-hidden="true"
       />
     );
@@ -53,9 +53,9 @@ const ThemeToggle = () => {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         "group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl",
-        "border transition-all duration-500 transform-gpu will-change-transform",
+        "transform-gpu border transition-all duration-500 will-change-transform",
         "active:scale-90",
-        glowStyles.container
+        glowStyles.container,
       )}
       aria-label={isDark ? "Activate Light Mode" : "Activate Dark Mode"}
     >
@@ -83,7 +83,7 @@ const ThemeToggle = () => {
       <div
         className={cn(
           "absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100",
-          glowStyles.glow
+          glowStyles.glow,
         )}
       />
     </button>

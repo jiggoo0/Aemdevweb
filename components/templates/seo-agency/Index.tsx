@@ -90,7 +90,7 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 SeoAgencyTemplate.displayName = "SeoAgencyTemplate";
 
 /**
- * [CRITICAL]: ต้องคง 'export default' ไว้ที่นี่ 
+ * [CRITICAL]: ต้องคง 'export default' ไว้ที่นี่
  * เพื่อให้ TemplateRenderer (Dynamic Registry) โหลด Component นี้ได้ถูกต้อง
  */
 export default memo(SeoAgencyTemplate);
