@@ -8,7 +8,7 @@ const { JWT } = require("google-auth-library");
 const fs = require("fs");
 const path = require("path");
 
-const BASE_URL = "https://aemdevweb.com";
+const BASE_URL = "https://www.aemdevweb.com";
 const INDEXING_ENDPOINT = "https://indexing.googleapis.com/v3/urlNotifications:publish";
 
 // [HELPERS]: Load API Credentials
