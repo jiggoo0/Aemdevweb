@@ -1,22 +1,60 @@
 /**
- * [SHARED COMPONENT]: LINE_STICKY_BUTTON v17.9.68 (ULTIMATE_HARDENED)
- * [STRATEGY]: Partnership Integration | Neural Physics | GPU-Leaning
+ * [SHARED COMPONENT]: LINE_STICKY_BUTTON v18.0.1 (STABILIZED)
+ * [STRATEGY]: Partnership Integration | Neural Physics | Type-Safe Tracking
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { FloatingContainer } from "./FloatingContainer";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
 
-interface LineStickyButtonProps {
-  readonly className?: string;
+// --- [TYPE_DEFINITION]: Extend Global Window for DataLayer ---
+interface DataLayerEvent {
+  event: string;
+  event_category?: string;
+  event_label?: string;
+  contact_source?: string;
+  timestamp?: string;
+  [key: string]: string | number | boolean | undefined;
 }
 
-const LineStickyButton = ({ className }: LineStickyButtonProps) => {
+declare global {
+  interface Window {
+    dataLayer?: DataLayerEvent[];
+  }
+}
+
+interface LineStickyButtonProps {
+  readonly className?: string;
+  /** [TRACKING]: ป้ายกำกับสำหรับแยกประเภท Conversion (เช่น 'services_page', 'area_node') */
+  readonly source?: string;
+}
+
+/**
+ * @component LineStickyButton
+ * @description ปุ่มลอยติดต่อ Line พร้อมระบบ Tracking แบบ Strict-Type
+ */
+const LineStickyButton = ({ className, source = "general_conversion" }: LineStickyButtonProps) => {
+  /**
+   * [HANDLER]: trackConversion
+   * @description บันทึกเหตุการณ์ลง DataLayer โดยปราศจาก "any" casting
+   */
+  const handleContactClick = useCallback(() => {
+    if (typeof window !== "undefined" && window.dataLayer) {
+      window.dataLayer.push({
+        event: "conversion_intent",
+        event_category: "contact",
+        event_label: "line_contact",
+        contact_source: source,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  }, [source]);
+
   return (
     <FloatingContainer
       triggerY={120}
@@ -24,9 +62,9 @@ const LineStickyButton = ({ className }: LineStickyButtonProps) => {
       className={cn("fixed right-6 bottom-6 z-[60]", className)}
     >
       <div className="group relative flex items-center justify-end">
-        {/* --- 01. STATUS NODE (Neural Specialist Indicator) --- */}
+        {/* --- 01. STATUS NODE: Specialist Availability Signal --- */}
         <div className="pointer-events-none absolute right-0 bottom-full mb-5 w-max origin-bottom translate-y-3 scale-90 transform-gpu opacity-0 transition-all duration-500 ease-[0.16,1,0.3,1] will-change-[transform,opacity] group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
-          <div className="border-border/40 bg-surface-card/90 shadow-pro-xl flex items-center gap-3 rounded-2xl border px-5 py-2.5 backdrop-blur-xl">
+          <div className="border-border/40 bg-surface-card/90 flex items-center gap-3 rounded-2xl border px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#06C755] opacity-75"></span>
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#06C755] shadow-[0_0_10px_#06C755]"></span>
@@ -37,20 +75,21 @@ const LineStickyButton = ({ className }: LineStickyButtonProps) => {
           </div>
         </div>
 
-        {/* --- 02. PRIMARY ACTION NODE (Neural-Spring Button) --- */}
+        {/* --- 02. PRIMARY ACTION NODE: High-Intensity Contact Point --- */}
         <a
           href={SITE_CONFIG.links.line}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleContactClick}
           className={cn(
             "relative flex h-14 w-14 items-center justify-center rounded-[1.6rem] md:h-16 md:w-16 md:rounded-[1.9rem]",
             "bg-gradient-to-br from-[#06C755] to-[#00B900] text-white",
             "shadow-[0_8px_20px_-6px_rgba(6,199,85,0.5)] hover:shadow-[0_12px_32px_-6px_rgba(6,199,85,0.7)]",
             "transform-gpu transition-all duration-700 ease-[0.16,1,0.3,1]",
             "hover:scale-110 hover:-rotate-6 active:scale-95",
-            "pointer-events-auto", // รับประกันการคลิกได้แม้ wrapper จะเป็น none
+            "pointer-events-auto cursor-pointer",
           )}
-          aria-label="Connect with AEMZA MACKS via Line"
+          aria-label="Connect with Technical Specialist via Line"
         >
           {/* Ambient Signal Pulse - GPU Optimized */}
           <span className="absolute inset-0 z-0 transform-gpu animate-ping rounded-[1.6rem] bg-[#06C755] opacity-20 duration-[2500ms]" />
@@ -64,7 +103,7 @@ const LineStickyButton = ({ className }: LineStickyButtonProps) => {
             />
           </div>
 
-          {/* --- 03. CTA DESKTOP LABEL (Neural Slide-out) --- */}
+          {/* --- 03. CTA DESKTOP LABEL: Conversion Hook --- */}
           <div className="pointer-events-none absolute right-full mr-6 hidden transform-gpu items-center md:flex">
             <span
               className={cn(
@@ -73,7 +112,7 @@ const LineStickyButton = ({ className }: LineStickyButtonProps) => {
             >
               ปรึกษาโปรเจกต์
             </span>
-            {/* Visual Linkage Logic */}
+            {/* Neural Linkage UI */}
             <div className="bg-brand-primary h-px w-6 origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
           </div>
         </a>

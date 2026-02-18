@@ -1,6 +1,12 @@
+/**
+ * [FEATURE]: AUDIT_REPORT_GENERATOR v18.0.6 (STABILIZED_FINAL)
+ * [STRATEGY]: Scanning Simulation | Conversion Hook | Named Export Alignment
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ */
+
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
@@ -9,193 +15,211 @@ import { cn } from "@/lib/utils";
 /**
  * @component AuditReportGenerator
  * @description ระบบจำลองการตรวจสุขภาพเว็บไซต์ (SEO Audit Simulator)
- * เพื่อดึงดูด Lead คุณภาพสูงด้วยข้อมูลเทคนิค
+ * [FIXED]: เปลี่ยนเป็น Named Export เพื่อแก้ปัญหา Knip Unused Exports และปรับปรุง Tree-shaking
  */
-export const AuditReportGenerator = () => {
+export const AuditReportGenerator = memo(() => {
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState<"idle" | "scanning" | "completed">("idle");
   const [progress, setProgress] = useState(0);
 
-  // [LOGIC]: ระบบจำลองการ Scan (Scanning Simulation)
+  // [LOGIC]: Scanning Simulation - ประมวลผลแบบ Non-linear เพื่อความสมจริง
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
+
     if (status === "scanning") {
       interval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval);
-            setTimeout(() => setStatus("completed"), 500);
+            setTimeout(() => setStatus("completed"), 600);
             return 100;
           }
-          return prev + Math.random() * 15;
+          // สุ่มความเร็วเพื่อให้ดูเหมือนการประมวลผลจริง (Perceived Performance)
+          const increment = Math.random() * (prev > 80 ? 5 : 15);
+          return Math.min(prev + increment, 100);
         });
       }, 400);
     }
+
     return () => clearInterval(interval);
   }, [status]);
 
-  const handleStartScan = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!url) return;
-    setStatus("scanning");
-    setProgress(0);
-  };
+  const handleStartScan = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!url || !url.includes(".")) return;
+      setStatus("scanning");
+      setProgress(0);
+    },
+    [url],
+  );
 
   return (
-    <section className="container mx-auto px-4 py-32">
+    <section id="audit-simulator" className="container mx-auto px-4 py-24 md:py-32">
       <div
         className={cn(
-          "relative overflow-hidden border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)] transition-all duration-700",
-          "rounded-[var(--radius)]",
-          status === "scanning" ? "shadow-glow-sm border-[var(--brand-primary)]/50" : "",
+          "border-border/10 bg-surface-card relative overflow-hidden border transition-all duration-700",
+          "rounded-[3rem] shadow-2xl",
+          status === "scanning" ? "ring-brand-primary/30 ring-2" : "ring-1 ring-white/5",
         )}
       >
-        {/* --- 1. Blueprint Grid Decor --- */}
+        {/* --- Blueprint Matrix Background --- */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent)] opacity-[0.05]"
           style={{
-            backgroundImage: `radial-gradient(var(--foreground) 1px, transparent 0)`,
-            backgroundSize: "32px 32px",
+            backgroundImage: `radial-gradient(var(--text-primary) 1px, transparent 0)`,
+            backgroundSize: "40px 40px",
           }}
         />
 
-        <div className="relative z-10 p-8 md:p-16">
+        <div className="relative z-10 p-8 md:p-20">
           <AnimatePresence mode="wait">
-            {/* --- STATE: IDLE (Input Stage) --- */}
+            {/* --- STAGE 01: IDLE (Target Acquisition) --- */}
             {status === "idle" && (
               <motion.div
-                key="idle"
-                initial={{ opacity: 0, y: 10 }}
+                key="idle-node"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="mx-auto max-w-3xl space-y-10 text-center"
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="mx-auto max-w-3xl space-y-12 text-center"
               >
-                <div className="space-y-4">
-                  <p className="font-mono text-[10px] font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase italic">
-                    // Domain_Feasibility_Check
-                  </p>
-                  <h2 className="font-[family-name:var(--font-primary)] text-4xl leading-none font-black uppercase italic md:text-6xl">
-                    วิเคราะห์ศักยภาพ <br /> โดเมนของคุณฟรี
+                <div className="space-y-6">
+                  <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-6 py-2">
+                    <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+                    <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase italic">
+                      Domain_Feasibility_Analysis
+                    </span>
+                  </div>
+                  <h2 className="text-4xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
+                    Scan your <br /> <span className="text-brand-primary">Competitor.</span>
                   </h2>
-                  <p className="text-lg italic opacity-60">
-                    ป้อน URL เว็บไซต์ของคุณเพื่อเริ่มกระบวนการตรวจสอบโครงสร้างเชิงเทคนิค
+                  <p className="mx-auto max-w-xl text-lg font-medium italic opacity-60 md:text-xl">
+                    ป้อน URL เว็บไซต์เพื่อเข้าถึงรายงานวิเคราะห์โครงสร้างพื้นฐาน{" "}
+                    <br className="hidden md:block" />
+                    และโอกาสในการทำอันดับเหนือคู่แข่ง
                   </p>
                 </div>
 
-                <form onSubmit={handleStartScan} className="group relative mx-auto max-w-2xl">
-                  <input
-                    type="url"
-                    required
-                    placeholder="https://your-website.com"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    className="w-full rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-main)] px-8 py-6 pl-14 text-xl italic transition-all outline-none focus:border-[var(--brand-primary)]"
-                  />
-                  <div className="absolute top-1/2 left-5 -translate-y-1/2 text-[var(--brand-primary)]">
-                    <IconRenderer name="Globe" size={24} />
+                <form onSubmit={handleStartScan} className="relative mx-auto max-w-2xl space-y-6">
+                  <div className="group relative">
+                    <input
+                      type="text"
+                      required
+                      placeholder="example-domain.com"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
+                      className="bg-surface-main/50 focus:border-brand-primary focus:ring-brand-primary/10 w-full rounded-3xl border border-white/10 px-8 py-8 pl-16 text-xl font-bold italic transition-all outline-none focus:ring-4"
+                    />
+                    <div className="text-brand-primary/50 group-focus-within:text-brand-primary absolute top-1/2 left-6 -translate-y-1/2 transition-colors">
+                      <IconRenderer name="Globe" size={28} />
+                    </div>
                   </div>
-                  <div className="mt-6">
-                    <Button
-                      type="submit"
-                      variant="specialist"
-                      size="lg"
-                      className="h-16 w-full text-lg tracking-widest uppercase italic"
-                    >
-                      เริ่มการ Scan ระบบ (Start Audit)
-                    </Button>
-                  </div>
+                  <Button
+                    type="submit"
+                    className="bg-text-primary text-surface-main hover:bg-brand-primary h-20 w-full rounded-3xl text-xl font-black tracking-[0.2em] uppercase italic transition-all duration-500"
+                  >
+                    เริ่มการ Audit ระบบ (Initialize)
+                  </Button>
                 </form>
               </motion.div>
             )}
 
-            {/* --- STATE: SCANNING (Processing Stage) --- */}
+            {/* --- STAGE 02: SCANNING (Intelligence Gathering) --- */}
             {status === "scanning" && (
               <motion.div
-                key="scanning"
+                key="scanning-node"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="space-y-12 py-10 text-center"
+                className="space-y-16 py-12 text-center"
               >
-                <div className="relative mx-auto flex h-32 w-32 items-center justify-center">
+                <div className="relative mx-auto flex h-40 w-40 items-center justify-center">
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border-4 border-dashed border-[var(--brand-primary)]/30"
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                    className="border-brand-primary absolute inset-0 rounded-full border-b-2"
                   />
-                  <IconRenderer
-                    name="Search"
-                    size={48}
-                    className="animate-pulse text-[var(--brand-primary)]"
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="font-[family-name:var(--font-primary)] text-2xl font-black uppercase italic">
-                    Analyzing_Structure: {Math.round(progress)}%
-                  </h3>
-                  <div className="mx-auto h-2 max-w-md overflow-hidden rounded-full border border-[var(--foreground)]/10 bg-[var(--foreground)]/5">
-                    <motion.div
-                      className="h-full bg-[var(--brand-primary)]"
-                      style={{ width: `${progress}%` }}
+                  <div className="bg-surface-main absolute inset-4 flex items-center justify-center rounded-full border border-white/5">
+                    <IconRenderer
+                      name="Search"
+                      size={48}
+                      className="text-brand-primary animate-pulse"
                     />
                   </div>
-                  <p className="animate-pulse font-mono text-[9px] tracking-[0.2em] uppercase opacity-40">
-                    Scanning: Core_Web_Vitals | Semantic_HTML | Registry_Match
+                </div>
+
+                <div className="mx-auto max-w-md space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="text-brand-primary font-mono text-3xl font-black italic">
+                      {Math.round(progress)}%
+                    </h3>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                      <motion.div
+                        className="bg-brand-primary h-full shadow-[0_0_15px_var(--brand-primary)]"
+                        animate={{ width: `${progress}%` }}
+                      />
+                    </div>
+                  </div>
+                  <p className="font-mono text-[9px] font-bold tracking-[0.3em] uppercase opacity-40">
+                    Scanning: Core_Web_Vitals | Semantic_Mapping | Link_Equity
                   </p>
                 </div>
               </motion.div>
             )}
 
-            {/* --- STATE: COMPLETED (Result Stage) --- */}
+            {/* --- STAGE 03: COMPLETED (Authority Insight) --- */}
             {status === "completed" && (
               <motion.div
-                key="completed"
-                initial={{ opacity: 0, scale: 0.95 }}
+                key="completed-node"
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2"
+                className="grid grid-cols-1 items-center gap-12 md:gap-20 lg:grid-cols-2"
               >
-                <div className="space-y-8">
-                  <div className="rounded-[var(--radius)] border-[var(--border-width)] border-green-500/20 bg-green-500/10 p-6">
-                    <div className="mb-4 flex items-center gap-4 text-green-500">
-                      <IconRenderer name="CheckCircle" size={28} />
-                      <span className="font-black uppercase italic">Analysis_Ready</span>
+                <div className="space-y-10">
+                  <div className="space-y-6">
+                    <div className="inline-flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-2 text-emerald-500">
+                      <IconRenderer name="CheckCircle" size={20} />
+                      <span className="font-mono text-[10px] font-black tracking-widest uppercase italic">
+                        Analysis_Complete
+                      </span>
                     </div>
-                    <p className="text-lg font-medium italic opacity-80">
-                      เราพบโอกาสในการปรับปรุงโครงสร้างเว็บไซต์ของคุณ
-                      เพื่อเพิ่มความสามารถในการแข่งขันบน Google
+                    <h3 className="text-4xl leading-none font-black uppercase italic md:text-6xl">
+                      พบช่องโหว่ <br /> <span className="text-emerald-500">เชิงเทคนิค.</span>
+                    </h3>
+                    <p className="text-lg font-medium italic opacity-70">
+                      เราตรวจพบจุดวิกฤตที่ทำให้เว็บไซต์ของคุณเสียเปรียบในการจัดอันดับ
+                      ต้องการรายงานสรุปแนวทางแก้ไขระดับ Enterprise หรือไม่?
                     </p>
                   </div>
 
-                  <div className="space-y-4">
-                    <p className="font-mono text-[10px] tracking-widest uppercase opacity-40">
-                      // Next_Action
-                    </p>
-                    <h3 className="text-3xl leading-tight font-black uppercase italic">
-                      รับรายงานฉบับเต็ม <br /> พร้อมแผนยุทธศาสตร์ 2026
-                    </h3>
+                  <div className="flex flex-col gap-4 sm:flex-row">
                     <Button
-                      variant="neo"
                       size="lg"
-                      className="h-16 w-full px-10 text-lg uppercase italic md:w-auto"
+                      className="bg-brand-primary h-16 rounded-2xl px-10 text-xs font-black tracking-widest uppercase italic"
                     >
-                      ดาวน์โหลด PDF และปรึกษาฟรี
+                      รับรายงาน PDF ฉบับเต็ม
                     </Button>
+                    <button
+                      onClick={() => setStatus("idle")}
+                      className="text-[10px] font-black tracking-widest uppercase opacity-30 transition-opacity hover:opacity-100"
+                    >
+                      [ Scan_New_Target ]
+                    </button>
                   </div>
                 </div>
 
-                {/* Simulated Results Card */}
-                <div className="space-y-6 rounded-[var(--radius)] border-[var(--border-width)] border-white/10 bg-black p-8">
+                {/* Technical Scoreboard Card */}
+                <div className="space-y-6 rounded-[2.5rem] border border-white/10 bg-black/40 p-10 backdrop-blur-xl">
                   {[
-                    { label: "Technical_Score", val: "68/100", color: "text-amber-500" },
-                    { label: "Indexing_Speed", val: "Critical", color: "text-red-500" },
-                    { label: "Mobile_Authority", val: "Optimal", color: "text-green-500" },
+                    { label: "Technical_Health", val: "62/100", color: "text-amber-500" },
+                    { label: "Indexing_Latency", val: "Critical", color: "text-red-500" },
+                    { label: "Semantic_Score", val: "Optimal", color: "text-emerald-500" },
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="flex items-end justify-between border-b border-white/5 pb-4"
+                      className="flex items-center justify-between border-b border-white/5 pb-6 last:border-0 last:pb-0"
                     >
-                      <span className="font-mono text-[10px] tracking-widest uppercase opacity-40">
+                      <span className="font-mono text-[10px] font-bold tracking-widest uppercase opacity-40">
                         {item.label}
                       </span>
                       <span className={cn("text-2xl font-black italic", item.color)}>
@@ -203,14 +227,6 @@ export const AuditReportGenerator = () => {
                       </span>
                     </div>
                   ))}
-                  <div className="pt-4 text-center">
-                    <button
-                      onClick={() => setStatus("idle")}
-                      className="font-mono text-[10px] tracking-widest uppercase underline opacity-30 hover:opacity-100"
-                    >
-                      Re_Scan_New_Domain
-                    </button>
-                  </div>
                 </div>
               </motion.div>
             )}
@@ -219,4 +235,6 @@ export const AuditReportGenerator = () => {
       </div>
     </section>
   );
-};
+});
+
+AuditReportGenerator.displayName = "AuditReportGenerator";

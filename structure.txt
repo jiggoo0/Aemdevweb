@@ -1,4 +1,4 @@
-AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
+AEMDEVWEB ARCHITECTURE SNAPSHOT - Thu Feb 19 02:31:01 +07 2026
 ================================================
 .
 ├── app
@@ -16,6 +16,12 @@ AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
 │   │   │   │   └── page.tsx
 │   │   │   └── page.tsx
 │   │   └── layout.tsx
+│   ├── (conversion)
+│   │   ├── services
+│   │   │   ├── [slug]
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
 │   ├── (main)
 │   │   ├── about
 │   │   │   └── page.tsx
@@ -27,12 +33,6 @@ AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
 │   │   │   └── page.tsx
 │   │   ├── layout.tsx
 │   │   └── page.tsx
-│   ├── (sales)
-│   │   ├── services
-│   │   │   ├── [slug]
-│   │   │   │   └── page.tsx
-│   │   │   └── page.tsx
-│   │   └── layout.tsx
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
@@ -283,7 +283,8 @@ AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
 │   │   ├── og-blog.webp
 │   │   ├── og-case-studies.webp
 │   │   ├── og-default.webp
-│   │   └── og-main.webp
+│   │   ├── og-main.webp
+│   │   └── og-seo-agency.webp
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
 │   ├── apple-touch-icon.png
@@ -307,6 +308,7 @@ AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
 ├── .gitignore
 ├── .npmrc
 ├── .prettierrc
+├── README.md
 ├── a.sh
 ├── components.json
 ├── eslint.config.mjs
@@ -323,4 +325,4 @@ AEMDEVWEB DEEP ARCHITECTURE SNAPSHOT - Thu Feb 19 00:35:06 +07 2026
 ├── tsconfig.json
 └── tsconfig.tsbuildinfo
 
-64 directories, 258 files
+64 directories, 260 files

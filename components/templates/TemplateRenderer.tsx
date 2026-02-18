@@ -1,5 +1,5 @@
 /**
- * [COMPONENT]: UNIVERSAL_RENDERER v18.0.1 (STABILIZED)
+ * [COMPONENT]: UNIVERSAL_RENDERER v18.0.5 (STABILIZED)
  * [STRATEGY]: Blueprint Orchestration | Default Import Alignment | Zero-Jank
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -13,8 +13,8 @@ import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 import DynamicThemeWrapper from "./DynamicThemeWrapper";
 
 // --- 2. Template Registry (Default Import Alignment) ---
-/** * [FIX]: ลบปีกกา { } ออกจากการ Import ทั้งหมด
- * เพราะไฟล์ Index ในแต่ละโฟลเดอร์ใช้ 'export default'
+/** * [MANDATORY]: ทุกไฟล์ Index.tsx ในโฟลเดอร์เทมเพลตต้องใช้ 'export default'
+ * เพื่อป้องกันปัญหา Element type is invalid (undefined)
  */
 import SalePageTemplate from "./salepage/Index";
 import CorporateTemplate from "./corporate/Index";
@@ -30,7 +30,7 @@ interface TemplateRendererProps {
 }
 
 /**
- * [MAPPING]: สถาปัตยกรรมจับคู่ Slug กับ Component
+ * [MAPPING]: สถาปัตยกรรมจับคู่ Template Slug กับ Component
  */
 const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> = {
   salepage: SalePageTemplate,
@@ -44,11 +44,19 @@ const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> 
 };
 
 /**
- * [RENDERER]: หัวใจหลักในการเลือกแสดงผลเทมเพลตตามข้อมูลจาก Registry
+ * @component TemplateRenderer
+ * @description หัวใจหลักในการเลือกแสดงผลเทมเพลตตามข้อมูลจาก CMS/Registry
  */
 export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRendererProps) => {
+  // [SAFETY]: ตรวจสอบว่ามีข้อมูลและ Slug หรือไม่
+  if (!data || !data.templateSlug) {
+    console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
+    return null;
+  }
+
   const ActiveTemplate = TEMPLATE_REGISTRY[data.templateSlug];
 
+  // [SAFETY]: หากไม่พบเทมเพลต ให้แสดง UI แจ้งเตือนแทนการปล่อยให้ Build พัง
   if (!ActiveTemplate) {
     return <TemplateNotFound data={data} />;
   }
@@ -77,7 +85,7 @@ const TemplateNotFound = ({ data }: { data: UniversalTemplateProps }) => (
         Target_Slug: <span className="font-bold underline">"{data.templateSlug}"</span>
       </div>
       <p className="text-sm leading-relaxed font-medium text-rose-900/60 italic">
-        "ตรวจสอบโครงสร้างข้อมูลใน constants/master-registry.ts"
+        "ตรวจสอบโครงสร้างข้อมูลใน constants/master-registry.ts และการ Export ในเทมเพลต"
       </p>
     </div>
   </div>

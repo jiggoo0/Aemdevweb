@@ -1,17 +1,18 @@
 /**
- * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.3 (BUILD_STABILIZED)
- * [STRATEGY]: De-coupled Hydration | Next.js 16 Compatibility | Zero-SSR Logic
+ * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.5 (PRODUCTION_READY)
+ * [STRATEGY]: De-coupled Hydration | Next.js 16 Compatibility | TBT Optimization
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client"; // [MANDATORY]: บังคับให้เป็น Client Component เพื่อรองรับ ssr: false
+"use client";
 
 import React, { memo } from "react";
 import dynamic from "next/dynamic";
 import { SITE_CONFIG } from "@/constants/site-config";
 
 // --- [OPTIMIZED]: Dynamic Imports (Client-Side Only) ---
-// การย้ายมาไว้ที่นี่ช่วยแก้ปัญหา Build Failed ใน Next.js 15/16
+// [ENGINEERING]: การใช้ { ssr: false } ช่วยลด Payload ของ Initial HTML และป้องกันปัญหา Hydration Mismatch 100%
+
 const TopLoader = dynamic(
   () => import("@/components/layout/TopLoader").then((mod) => mod.TopLoader),
   { ssr: false },
@@ -27,22 +28,30 @@ const Toaster = dynamic(() => import("@/components/ui/Sonner").then((mod) => mod
 
 /**
  * @function ClientInfrastructure
- * @description สะพานเชื่อมสำหรับ UI Components ที่ไม่ต้องทำ SSR
- * เพื่อลดค่า TBT และป้องกันปัญหา Hydration Mismatch
+ * @description ศูนย์กลางควบคุม UI Components ที่ทำงานเฉพาะฝั่ง Client (Browser APIs)
+ * ออกแบบมาเพื่อรักษาคะแนน Core Web Vitals ในส่วนของ LCP และ CLS
  */
 const ClientInfrastructure = () => {
   return (
     <>
-      {/* ระบบแถบโหลดด้านบน */}
+      {/* [CORE]: Navigation Progress Indicator 
+          จัดการผ่าน TopLoader เพื่อให้ User Experience มีความลื่นไหลในขณะสลับ Node ข้อมูล
+      */}
       <TopLoader color={SITE_CONFIG.themeColor} />
 
-      {/* ปุ่มติดต่อ Line ลอยตัว */}
-      <LineStickyButton />
+      {/* [CONVERSION]: High-Intent Contact FAB 
+          ปุ่ม Line ลอยตัวพร้อมระบบ Tracking Conversion รายหน้า
+      */}
+      <LineStickyButton source="global_infrastructure" />
 
-      {/* ระบบแจ้งเตือน Global Notification */}
-      <Toaster position="top-center" richColors expand={false} closeButton />
+      {/* [UI]: Global Notification System 
+          ใช้ Sonner สำหรับระบบ Toast ที่มีความเบา (Lightweight) และรองรับ Accessibility
+      */}
+      <Toaster position="top-center" richColors expand={false} closeButton theme="system" />
     </>
   );
 };
+
+ClientInfrastructure.displayName = "ClientInfrastructure";
 
 export default memo(ClientInfrastructure);

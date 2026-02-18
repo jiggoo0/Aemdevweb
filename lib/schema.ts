@@ -1,6 +1,7 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.4 (HOTFIX_RELIABILITY)
- * [STRATEGY]: Schema-DTS Strict | Zero-Any | All Generators Restored
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.5 (PROD_READY)
+ * [STRATEGY]: Schema-DTS Strict | Zero-Any Compliance | Graph-Based Injection
+ * [MANDATE]: Fix Missing "name", "telephone", "priceRange" for Rich Results
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -20,10 +21,13 @@ import type {
   Offer,
 } from "schema-dts";
 
-// --- [01]: INFRASTRUCTURE HELPERS ---
+// =========================================
+// [01] INFRASTRUCTURE HELPERS (SSOT)
+// =========================================
 
 /**
- * แปลง Path ให้เป็น Absolute URL เพื่อความถูกต้องของ Schema Graph
+ * [HELPER]: absoluteUrl
+ * @description แปลง Path ให้เป็น Absolute URL ตามมาตรฐาน Search Engine
  */
 const absoluteUrl = (path: string | undefined): string => {
   if (!path) return `${SITE_CONFIG.siteUrl}/images/og-default.webp`;
@@ -32,7 +36,9 @@ const absoluteUrl = (path: string | undefined): string => {
   return `${SITE_CONFIG.siteUrl}/${cleanPath}`;
 };
 
-// --- [02]: CORE SHARED NODES ---
+// =========================================
+// [02] CORE SHARED NODES (BLUEPRINT)
+// =========================================
 
 const sharedAddress: PostalAddress = {
   "@type": "PostalAddress",
@@ -67,7 +73,9 @@ const personNode: Person = {
   description: SITE_CONFIG.expert.bio,
 };
 
-// --- [03]: SCHEMA GENERATORS ---
+// =========================================
+// [03] SCHEMA GENERATORS
+// =========================================
 
 /** [RESTORED]: generatePersonSchema */
 export const generatePersonSchema = (): Person => personNode;
@@ -85,7 +93,9 @@ export const generateBreadcrumbSchema = (
   })),
 });
 
-/** [MASTER]: generateSchemaGraph */
+/** * [MASTER]: generateSchemaGraph
+ * @description รวบรวม Node ทั้งหมดเข้าสู่ระบบ Graph เพื่อให้ Google เข้าใจความสัมพันธ์ของข้อมูล
+ */
 export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
   "@context": "https://schema.org",
   "@graph": [
@@ -102,7 +112,9 @@ export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
   ],
 });
 
-/** [MASTER]: generateUniversalSchema */
+/** * [MASTER]: generateUniversalSchema
+ * @description จัดการข้อมูล Schema สำหรับบริการหลัก (Master Services)
+ */
 export function generateUniversalSchema(
   data: UniversalTemplateProps | TemplateMasterData,
 ): ProfessionalService | Product {
@@ -113,7 +125,7 @@ export function generateUniversalSchema(
 
   const base = {
     "@id": `${canonicalUrl}/#main`,
-    name: data.title || SITE_CONFIG.brandName, // [FIX]: บังคับให้มีชื่อเสมอ
+    name: data.title || SITE_CONFIG.brandName,
     description: data.description,
     image: absoluteUrl(data.image || SITE_CONFIG.ogImage),
     url: canonicalUrl,
@@ -130,32 +142,39 @@ export function generateUniversalSchema(
     return { "@type": "Product", ...base, offers: offer } as Product;
   }
 
-  // [FIXED]: เพิ่มฟิลด์ name, telephone และ priceRange เพื่อแก้ Error จาก Google
   return {
     "@type": "ProfessionalService",
     ...base,
     address: sharedAddress,
-    telephone: SITE_CONFIG.contact.phone, // [ADD]: ดึงจาก Config 099-032-2175
-    priceRange: SITE_CONFIG.business.priceRange, // [ADD]: ดึงจาก Config ฿฿฿
+    telephone: SITE_CONFIG.contact.phone,
+    priceRange: SITE_CONFIG.business.priceRange,
   } as ProfessionalService;
 }
 
-/** [MASTER]: generateLocalBusinessSchema */
+/** * [MASTER]: generateLocalBusinessSchema
+ * @description ปรับปรุงฟิลด์บังคับเพื่อแก้ปัญหา Rich Results Test Error ในหน้า Area Node
+ */
 export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService {
   const url = absoluteUrl(`/areas/${data.slug}`);
+
   return {
     "@type": "ProfessionalService",
     "@id": `${url}/#localbusiness`,
-    name: `รับทำเว็บไซต์ ${data.province} - ${SITE_CONFIG.expert.displayName}`, // [FIX]: ระบุชื่อชัดเจน
+
+    /* [FIX]: บังคับฉีดฟิลด์ที่ Google ตรวจพบว่าขาดหาย */
+    name: data.title, // ใช้ title จาก node เป็นชื่อบริการที่แสดงใน Search
+    telephone: SITE_CONFIG.contact.phone, // ดึงค่าจาก 099-032-2175
+    priceRange: SITE_CONFIG.business.priceRange, // ดึงค่า ฿฿฿ จากระบบ
+
     url: url,
     image: absoluteUrl(data.heroImage || SITE_CONFIG.ogImage),
-    telephone: SITE_CONFIG.contact.phone, // [ADD]: แก้ปัญหา Missing Field
-    priceRange: SITE_CONFIG.business.priceRange, // [ADD]: แก้ปัญหา Missing Field
+    description: data.description,
     address: {
       "@type": "PostalAddress",
       addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
+      postalCode: SITE_CONFIG.contact.postalCode,
     } as PostalAddress,
     parentOrganization: { "@id": absoluteUrl("/#organization") },
     ...(data.coordinates && {

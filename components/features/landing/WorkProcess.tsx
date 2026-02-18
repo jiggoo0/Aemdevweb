@@ -1,6 +1,6 @@
 /**
- * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v18.0.3 (PERFORMANCE_HARDENED)
- * [STRATEGY]: Adaptive Blur | GPU Accelerated Transitions | Zero-CLS Infrastructure
+ * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v18.0.5 (STABILIZED)
+ * [STRATEGY]: Adaptive Blur | GPU Accelerated Transitions | Hydration Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -23,6 +23,10 @@ interface ProcessStep {
   readonly metric: string;
 }
 
+/**
+ * [DATA_NODE]: PROCESS_STEPS
+ * ย้ายข้อมูลที่เกี่ยวข้องกับธุรกิจออกจากการเรนเดอร์หลักเพื่อความคลีนของ Logic
+ */
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: "01",
@@ -59,9 +63,14 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
   },
 ];
 
+/**
+ * @component WorkProcess
+ * @description แสดงขั้นตอนการทำงานด้วยเทคนิคแอนิเมชันขั้นสูงที่ไม่กระทบต่อ Core Web Vitals
+ */
 const WorkProcess = () => {
   const [mounted, setMounted] = useState(false);
 
+  // [HYDRATION_GUARD]: ป้องกันปัญหา Mismatch ระหว่าง Server และ Client
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -71,11 +80,11 @@ const WorkProcess = () => {
       id="process"
       className="relative container mx-auto flex w-full flex-col overflow-hidden px-4 py-24 md:px-6 lg:py-32"
     >
-      {/* --- 01. SECTION HEADER --- */}
+      {/* --- 01. STRATEGIC HEADER --- */}
       <header className="border-border mb-20 flex flex-col justify-between gap-12 border-b pb-12 md:mb-28 md:pb-16 lg:flex-row lg:items-end">
         <div className="max-w-3xl space-y-6">
           <div className="text-brand-primary flex items-center gap-4">
-            <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
+            <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_15px_var(--brand-primary)]" />
             <span
               suppressHydrationWarning
               className="font-mono text-[9px] font-black tracking-[0.4em] uppercase md:text-[10px]"
@@ -104,7 +113,7 @@ const WorkProcess = () => {
 
       {/* --- 02. PROCESS NODES --- */}
       <div className="relative grid gap-8 md:grid-cols-2 md:gap-10 lg:grid-cols-4 lg:gap-8">
-        {/* Signal Flow Connector (Hidden on Mobile for Performance) */}
+        {/* Visual Connector: GPU Optimized */}
         <div
           className="from-brand-primary/20 via-brand-primary/40 to-brand-primary/20 absolute top-20 left-0 hidden h-px w-full bg-gradient-to-r lg:block"
           aria-hidden="true"
@@ -123,12 +132,11 @@ const WorkProcess = () => {
               className={cn(
                 "border-border bg-surface-card/60 relative z-10 flex h-full flex-col overflow-hidden border p-8 transition-all duration-700 md:p-10",
                 "rounded-[2rem] md:rounded-[2.5rem]",
-                "hover:border-brand-primary/40 hover:shadow-glow transform-gpu will-change-transform hover:-translate-y-2",
-                /* [ADAPTIVE_BLUR]: ลดค่า Blur บน Mobile เพื่อช่วย GPU */
+                "hover:border-brand-primary/40 transform-gpu will-change-transform hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(var(--brand-primary-rgb),0.1)]",
                 "backdrop-blur-md md:backdrop-blur-xl",
               )}
             >
-              {/* Node ID Background */}
+              {/* Background Identifier */}
               <span
                 suppressHydrationWarning
                 className={cn(
@@ -140,9 +148,9 @@ const WorkProcess = () => {
                 {step.id}
               </span>
 
-              {/* Icon Matrix */}
+              {/* Icon Container */}
               <div className="relative z-10 mb-8 flex items-center justify-between md:mb-12">
-                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-[1.25rem] border transition-all duration-500 group-hover:rotate-[10deg] md:h-16 md:w-16">
+                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main flex h-14 w-14 items-center justify-center rounded-[1.25rem] border transition-all duration-500 group-hover:rotate-[10deg] md:h-16 md:w-16">
                   <IconRenderer
                     name={step.icon}
                     size={28}
@@ -168,7 +176,7 @@ const WorkProcess = () => {
                 </p>
               </div>
 
-              {/* Status Verification */}
+              {/* Integrity Metric */}
               <div className="border-border relative z-10 mt-auto border-t pt-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-brand-primary/20 flex h-4 w-4 items-center justify-center rounded-full md:h-5 md:w-5">
@@ -200,7 +208,7 @@ const WorkProcess = () => {
             <Button
               asChild
               size="lg"
-              className="group bg-text-primary text-surface-main hover:bg-brand-primary hover:shadow-glow h-16 w-full transform-gpu rounded-full px-10 transition-all duration-500 hover:scale-105 md:h-20 md:w-auto md:px-16"
+              className="group bg-text-primary text-surface-main hover:bg-brand-primary h-16 w-full transform-gpu rounded-full px-10 shadow-2xl transition-all duration-500 hover:scale-105 md:h-20 md:w-auto md:px-16"
             >
               <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                 <span className="mr-4 text-[10px] font-black tracking-[0.3em] uppercase md:text-xs md:tracking-[0.4em]">
@@ -222,5 +230,7 @@ const WorkProcess = () => {
     </section>
   );
 };
+
+WorkProcess.displayName = "WorkProcess";
 
 export default memo(WorkProcess);

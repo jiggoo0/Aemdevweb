@@ -1,7 +1,7 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v17.9.100 (STRICT_MODE_PATCHED)
- * [STRATEGY]: Static Tree-Shaking | Compile-Time Safety | Layout Stable
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v18.0.6 (STABILIZED_FINAL)
+ * [STRATEGY]: Static Tree-Shaking | Compile-Time Safety | Zero-CLS Infrastructure
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -9,7 +9,7 @@
 import React, { memo } from "react";
 import { cn } from "@/lib/utils";
 import {
-  // 1. Core UI & Controls
+  // 1. Core UI & Navigation Controls
   Menu,
   X,
   ChevronRight,
@@ -29,8 +29,8 @@ import {
   HelpCircle,
   Sun,
   Moon,
-  Loader2, // [ADDED]: สำหรับ Loading State
-  // 2. Navigation & Contact
+  Loader2,
+  // 2. Connectivity & Mapping
   Home,
   MapPin,
   Map,
@@ -43,8 +43,8 @@ import {
   ExternalLink,
   Link,
   Briefcase,
-  Send, // [ADDED]: สำหรับปุ่ม Submit Form
-  // 3. Tech & Services & Analytics
+  Send,
+  // 3. High-End Tech & Intelligence Nodes
   Cpu,
   Layers,
   Database,
@@ -77,10 +77,10 @@ import {
   Laptop,
   Image as ImageIcon,
   Box,
-  Fingerprint, // [ADDED]: สำหรับ About Page
-  Hash, // [ADDED]: สำหรับ Tech Specs
-  Newspaper, // [ADDED]: สำหรับ Feature Grid / Blog
-  // 4. Social & Media
+  Fingerprint,
+  Hash,
+  Newspaper,
+  // 4. Conversion & Social Signals
   MessageCircle,
   Facebook,
   Github,
@@ -88,10 +88,11 @@ import {
   Twitter,
   Instagram,
   Linkedin,
-  // 5. Specialist Elements & Badges
+  MessageSquare,
+  // 5. Specialist Authority Elements
   User,
   UserCheck,
-  UserCircle2, // [ADDED]: สำหรับ Avatar / Profile
+  UserCircle2,
   BookOpen,
   Quote,
   Lightbulb,
@@ -102,11 +103,10 @@ import {
 } from "lucide-react";
 
 /**
- * [REGISTRY]: ทะเบียนสัญลักษณ์มาตรฐาน
- * การทำ Static Mapping ช่วยให้ Next.js ทำ Tree-shaking ตัด Code ส่วนเกินออกได้จริง 100%
+ * [REGISTRY]: ทะเบียนสัญลักษณ์มาตรฐาน (Centralized Registry)
+ * ออกแบบมาเพื่อให้ Bundler สามารถทำ Static Analysis และตัด Code ที่ไม่ใช้ออกได้จริง 100%
  */
 export const ICON_MAP = {
-  // Core
   Menu,
   X,
   ChevronRight,
@@ -126,8 +126,7 @@ export const ICON_MAP = {
   HelpCircle,
   Sun,
   Moon,
-  Loader2, // [ADDED]
-  // Navigation
+  Loader2,
   Home,
   MapPin,
   Map,
@@ -140,8 +139,7 @@ export const ICON_MAP = {
   ExternalLink,
   Link,
   Briefcase,
-  Send, // [ADDED]
-  // Tech
+  Send,
   Cpu,
   Layers,
   Database,
@@ -174,21 +172,20 @@ export const ICON_MAP = {
   Laptop,
   Image: ImageIcon,
   Box,
-  Fingerprint, // [ADDED]
-  Hash, // [ADDED]
-  Newspaper, // [ADDED]
-  // Social
+  Fingerprint,
+  Hash,
+  Newspaper,
   MessageCircle,
+  MessageSquare,
   Facebook,
   Github,
   Youtube,
   Twitter,
   Instagram,
   Linkedin,
-  // Specialist
   User,
   UserCheck,
-  UserCircle2, // [ADDED]
+  UserCircle2,
   BookOpen,
   Quote,
   Lightbulb,
@@ -197,11 +194,11 @@ export const ICON_MAP = {
   ThumbsUp,
 } as const;
 
-// [STRICT_TYPE]: บังคับใช้ Key ที่มีอยู่จริงเท่านั้น ห้ามใช้ String มั่ว
+/** [STRICT_TYPE]: บังคับใช้เฉพาะ Key ที่มีอยู่ใน Registry เท่านั้น เพื่อความปลอดภัยระดับ Type-Safe */
 export type IconName = keyof typeof ICON_MAP;
 
 interface IconRendererProps extends Omit<LucideProps, "ref"> {
-  readonly name: IconName; // [STRICT]: ลบ | string ออกเพื่อความปลอดภัยสูงสุด
+  readonly name: IconName;
   readonly size?: number;
   readonly className?: string;
   readonly strokeWidth?: number;
@@ -210,8 +207,7 @@ interface IconRendererProps extends Omit<LucideProps, "ref"> {
 
 /**
  * @component IconRenderer
- * @description หน่วยแสดงผลสัญลักษณ์มาตรฐาน (Standardized Icon Unit)
- * ออกแบบมาเพื่อป้องกัน Layout Shift และรองรับ GPU Acceleration
+ * @description หน่วยเรนเดอร์สัญลักษณ์แบบ Optimized สำหรับ Next.js 16 และ Tailwind 4
  */
 const IconRenderer = ({
   name,
@@ -221,20 +217,20 @@ const IconRenderer = ({
   title,
   ...props
 }: IconRendererProps) => {
-  // [LOGIC]: Direct Registry Lookup (O(1))
+  // [LOGIC]: O(1) Registry Lookup
   const IconComponent = ICON_MAP[name];
 
-  // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (ป้องกันหน้าขาว)
+  // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (Safe-Guard Node)
   if (!IconComponent) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(`[SYSTEM_CORE]: Icon "${name}" not found in Registry`);
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(`[SYSTEM_CORE]: Icon "${name}" missing in ICON_MAP Registry.`);
     }
     return (
       <AlertTriangle
         size={size}
-        className={cn("text-text-muted/40 shrink-0 opacity-50", className)}
+        className={cn("shrink-0 text-rose-500/40", className)}
         strokeWidth={1.5}
-        {...props}
+        aria-hidden="true"
       />
     );
   }
@@ -243,8 +239,9 @@ const IconRenderer = ({
     <IconComponent
       size={size}
       className={cn(
-        // [LAYOUT_STABILITY]: เพิ่ม shrink-0 และ size locking ป้องกันไอคอนบี้
-        "text-text-primary shrink-0 transition-all duration-300 will-change-transform",
+        // [LAYOUT_STABILITY]: ป้องกันไอคอนบีบอัด (Zero-CLS Strategy)
+        "shrink-0 transform-gpu transition-all duration-300 will-change-transform",
+        "text-text-primary",
         className,
       )}
       style={{
@@ -259,4 +256,10 @@ const IconRenderer = ({
   );
 };
 
+IconRenderer.displayName = "IconRenderer";
+
+/**
+ * [STABILIZED_EXPORT]: ใช้ Default Export เพียงอย่างเดียว เพื่อกำจัดรายงาน Duplicate Exports จาก Knip
+ * โดยห่อหุ้มด้วย memo เพื่อประสิทธิภาพสูงสุดในการลด Re-renders
+ */
 export default memo(IconRenderer);

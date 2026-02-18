@@ -1,11 +1,15 @@
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
- * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT
+ * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT (Single Source of Truth)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [FRAMEWORK]: Next.js 16.1.6 | React 19 | Tailwind CSS 4.0
  */
 
 import type { SiteConfig } from "@/types";
 
+/**
+ * [RESOURCE_NODES]: พิกัดและทรัพยากรภายนอกที่สำคัญ
+ */
 const GOOGLE_MAPS_URL = "https://share.google/MMWnXPv3evv4Qd8aC";
 
 export const SITE_CONFIG: SiteConfig = {
@@ -18,7 +22,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
   ogImage: "/images/og-main.webp",
   locale: "th_TH",
-  themeColor: "#ef4444",
+  themeColor: "#ef4444", // Tailwind Red 500 (HEX Standard)
 
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
@@ -34,6 +38,9 @@ export const SITE_CONFIG: SiteConfig = {
     antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising",
   },
 
+  /**
+   * [SEO_REGISTRY]: คำค้นหาที่มีนัยสำคัญต่อการทำ Conversion รายภูมิภาค
+   */
   keywords: [
     "รับทำเว็บไซต์",
     "รับทำ SEO สายขาว",
@@ -54,10 +61,13 @@ export const SITE_CONFIG: SiteConfig = {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
     version: "18.0.0",
-    framework: "Next.js 15.x (App Router)",
+    framework: "Next.js 16.1.6 (App Router)", // [STABILIZED]: Sync กับระบบหลัก
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
+  /**
+   * [EXPERT_IDENTITY]: การฉีดตัวตน (EEAT) เพื่อการยืนยันผู้เชี่ยวชาญใน Knowledge Graph
+   */
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
     legalName: "Alongkorn Yomkerd",
@@ -96,6 +106,9 @@ export const SITE_CONFIG: SiteConfig = {
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
+  /**
+   * [BUSINESS_METRICS]: ข้อมูลบริบทสำหรับการทำ Local SEO (NAP)
+   */
   business: {
     location: "กำแพงเพชร",
     region: "Northern Thailand",
@@ -110,7 +123,9 @@ export const SITE_CONFIG: SiteConfig = {
     },
   },
 
-  analytics: { gaId: "G-XXXXXXXXXX" },
+  analytics: {
+    gaId: "G-XXXXXXXXXX",
+  },
 
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",

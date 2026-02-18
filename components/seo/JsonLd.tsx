@@ -1,16 +1,16 @@
 /**
- * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v18.0.0 (TYPE_SAFE_ENFORCED)
+ * [SEO COMPONENT]: JSON_LD_ORCHESTRATOR v18.1.0 (STABLE)
  * [STRATEGY]: SSR Integrity | XSS Defense | Zero-Any Compliance | React 19 Ready
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React from "react";
-// แนะนำให้ลง: pnpm add -D schema-dts
 import type { Thing, WithContext } from "schema-dts";
 
 interface JsonLdProps {
-  /** * [STRICT]: รองรับ Schema.org Types อย่างสมบูรณ์
-   * ใช้ WithContext<Thing> เพื่อบังคับให้มี @context เสมอใน Root Level
+  /**
+   * [STRICT]: รองรับ Schema.org Types อย่างสมบูรณ์
+   * ใช้ WithContext<Thing> เพื่อบังคับให้มี @context ใน Root Level
    */
   readonly data: WithContext<Thing> | readonly Thing[] | Record<string, unknown> | null | undefined;
 
@@ -21,13 +21,11 @@ interface JsonLdProps {
 /**
  * @component JsonLd
  * @description เรนเดอร์ JSON-LD บน Server 100% พร้อมระบบ XSS Protection
- * ออกแบบมาเพื่อความเสถียรสูงสุดในสถาปัตยกรรม Next.js 16 (App Router)
  */
 export default function JsonLd({ data, id }: JsonLdProps) {
-  /* [A] SAFETY GUARD: Fail Fast */
+  /* [A] SAFETY GUARD */
   if (!data) return null;
 
-  // ตรวจสอบ Content: รองรับทั้ง Array และ Object
   const hasContent = Array.isArray(data) ? data.length > 0 : Object.keys(data).length > 0;
 
   if (!hasContent) return null;
@@ -37,14 +35,13 @@ export default function JsonLd({ data, id }: JsonLdProps) {
     <script
       id={id || "seo-json-ld"}
       type="application/ld+json"
-      // [SAFE_HYDRATION]: ป้องกันความขัดแย้งของข้อมูลหากถูกแทรกแซงโดย Extension
       suppressHydrationWarning
       dangerouslySetInnerHTML={{
         /**
          * SECURITY STRATEGY:
-         * 1. JSON.stringify: แปลงข้อมูลเป็นสตริงมาตรฐานตามมาตรฐาน ECMA
-         * 2. Unicode Escaping: เปลี่ยน < เป็น \u003c เพื่อยับยั้งการรันสคริปต์แปลกปลอม (XSS) 100%
-         * และเปลี่ยน U+2028/U+2029 เพื่อป้องกัน Line Separator Crash ในบาง Browser เก่า
+         * 1. JSON.stringify: แปลงข้อมูลเป็นสตริงมาตรฐาน ECMA
+         * 2. Unicode Escaping: ยับยั้ง XSS โดยเปลี่ยน < เป็น \u003c
+         * 3. Line Separator Protection: ป้องกันการ Crash ใน Browser เก่า
          */
         __html: JSON.stringify(data)
           .replace(/</g, "\\u003c")

@@ -1,6 +1,6 @@
 /**
- * [SEO INFRA]: SITEMAP_ORCHESTRATOR v18.0.4 (PATH_VALIDATED)
- * [STRATEGY]: Strict Type-Imports | Parallel Node Discovery | Path Integrity
+ * [SEO_INFRA]: SITEMAP_ORCHESTRATOR v18.0.5 (PRODUCTION_READY)
+ * [STRATEGY]: Parallel Node Discovery | SSOT Integration | Priority Calculation
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -9,19 +9,21 @@ import type { MetadataRoute } from "next";
 // --- 1. Infrastructure Data (SSOT) ---
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { AREA_NODES } from "@/constants/area-nodes";
+import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 
-// --- 2. Content CMS Data ---
+// --- 2. Content CMS Data (Markdown/MDX) ---
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 /**
  * @function sitemap
- * @description เครื่องยนต์รวบรวม URL ทั้งหมดแบบ Dynamic พร้อมตรวจสอบความถูกต้องของ Path
+ * @description รวบรวมและแจกจ่ายพิกัด URL ทั้งหมดในระบบไปยัง Search Engine Bots
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
+  const baseUrl = SITE_CONFIG.siteUrl;
 
-  // [FETCH]: ดึงข้อมูลจาก CMS แบบขนาน (Parallel Processing)
+  /* [A] DATA_RESOLUTION: ดึงข้อมูลจาก CMS แบบขนานเพื่อ Performance สูงสุด */
   const [posts, caseStudies] = await Promise.all([
     getAllPosts().catch(() => []),
     getAllCaseStudies().catch(() => []),
@@ -29,23 +31,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * -------------------------------------------------------
-   * GROUP 1: STATIC CORE ROUTES (Verified via structure.txt)
+   * GROUP 1: STATIC CORE NODES (System Pillars)
    * -------------------------------------------------------
    */
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: absoluteUrl("/"), lastModified, changeFrequency: "daily", priority: 1.0 },
-    { url: absoluteUrl("/services"), lastModified, changeFrequency: "weekly", priority: 0.9 },
-    { url: absoluteUrl("/case-studies"), lastModified, changeFrequency: "weekly", priority: 0.8 },
-    { url: absoluteUrl("/blog"), lastModified, changeFrequency: "daily", priority: 0.8 },
-    { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.7 },
-    // [REMOVED]: /contact ถูกถอดออกเนื่องจากไม่พบ app/(main)/contact ในโครงสร้างไฟล์
-    { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: absoluteUrl("/terms"), lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/`, lastModified, changeFrequency: "daily", priority: 1.0 },
+    { url: `${baseUrl}/services`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/case-studies`, lastModified, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${baseUrl}/blog`, lastModified, changeFrequency: "daily", priority: 0.8 },
+    { url: `${baseUrl}/about`, lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/terms`, lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   /**
    * -------------------------------------------------------
-   * GROUP 2: SERVICE NODES (Master Blueprints)
+   * GROUP 2: SERVICE NODES (Solution Blueprints)
    * -------------------------------------------------------
    */
   const serviceRoutes: MetadataRoute.Sitemap = MASTER_REGISTRY.map((service) => ({
@@ -57,20 +58,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /**
    * -------------------------------------------------------
-   * GROUP 3: AREA NODES (Programmatic SEO - Local Context)
+   * GROUP 3: AREA NODES (Local SEO Domination)
    * -------------------------------------------------------
    */
   const areaRoutes: MetadataRoute.Sitemap = AREA_NODES.map((area) => ({
     url: absoluteUrl(`/areas/${area.slug}`),
     lastModified,
     changeFrequency: "weekly",
-    // คำนวณ priority จาก area.priority (0-100) ให้อยู่ในเกณฑ์ 0.0-1.0
+    // [LOGIC]: แปลงคะแนน Priority 0-100 เป็นเกณฑ์ 0.0-1.0 สำหรับ Search Engine
     priority: Number(((area.priority || 50) / 100).toFixed(1)),
   }));
 
   /**
    * -------------------------------------------------------
-   * GROUP 4: KNOWLEDGE GRAPH NODES (Blog & Case Studies)
+   * GROUP 4: KNOWLEDGE GRAPH NODES (Blog & Proof of Concept)
    * -------------------------------------------------------
    */
   const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
@@ -87,5 +88,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  /* [B] ORCHESTRATION: รวมทุก Node เข้าเป็นแผนผังเดียว */
   return [...staticRoutes, ...serviceRoutes, ...areaRoutes, ...caseStudyRoutes, ...blogRoutes];
 }
