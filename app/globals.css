@@ -2,8 +2,8 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.2 (PERFORMANCE_HARDENED)
- * [STRATEGY]: OKLCH Color Engine | GPU Acceleration | LCP Stabilization
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.6 (PRODUCTION_READY)
+ * [STRATEGY]: Card Symmetry Protocol | OKLCH Precision | GPU-Accelerated
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -28,9 +28,9 @@
 
   --color-border: var(--border);
 
-  /* --- 03. DEPTH & LIGHTING --- */
+  /* --- 03. DEPTH & DYNAMIC LIGHTING --- */
   --shadow-glow: 0 0 40px -10px oklch(var(--brand-primary-raw) / 0.5);
-  --shadow-pro: 0 2px 8px -2px rgba(0, 0, 0, 0.08);
+  --shadow-pro: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
 @layer base {
@@ -38,15 +38,12 @@
     --brand-primary-raw: 60% 0.25 25;
     --brand-secondary-raw: 50% 0.22 25;
     --brand-accent-raw: 75% 0.18 25;
-
     --surface-main: #ffffff;
     --surface-offset: #f8fafc;
     --surface-card: #ffffff;
-
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
-
     --border: #e2e8f0;
     --radius: 0.75rem;
   }
@@ -55,11 +52,9 @@
     --surface-main: #020617;
     --surface-offset: #0f172a;
     --surface-card: #1e293b;
-
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-
     --border: rgba(255, 255, 255, 0.08);
     color-scheme: dark;
   }
@@ -68,64 +63,79 @@
     @apply antialiased;
     background-color: var(--surface-main);
     color: var(--text-primary);
-    scroll-behavior: smooth;
-
-    /* [PERFORMANCE]: บังคับวาดภาพด้วย GPU และลดความซับซ้อนของการประมวลผลข้อความบน Mobile */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeSpeed;
-    font-feature-settings: "cv11", "ss01", "zero", "tnum";
+    overflow-y: scroll;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     font-family: var(--font-thai);
     min-height: 100dvh;
-    overflow-x: hidden;
     position: relative;
+    background: var(--surface-main);
+    scrollbar-gutter: stable;
+  }
+}
 
-    /* [OPTIMIZED]: ป้องกัน LCP พุ่งจากการใช้ Background-attachment: fixed บนมือถือ */
-    background-attachment: scroll;
-    background-image: radial-gradient(
-      circle at 50% 50%,
-      oklch(var(--brand-primary-raw) / 0.02) 0%,
-      transparent 100%
-    );
+@layer components {
+  /**
+   * [CARD_ARCHITECTURE]: ระบบควบคุมความสมดุลของการ์ด
+   * ป้องกันการยืดยาวเกินความจำเป็นด้วยระบบ Auto-Sizing
+   */
+  .pro-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 350px), 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
   }
 
-  /* [SCROLLBAR]: Compact Optimization */
-  ::-webkit-scrollbar {
-    width: 6px;
+  .pro-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 420px; /* บังคับความสูงขั้นต่ำเพื่อความสมดุล */
+    max-width: 480px; /* ป้องกันการยืดกว้างเกินไปในหน้าจอใหญ่ */
+    overflow: hidden;
+    border-radius: 2rem;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  ::-webkit-scrollbar-thumb {
-    background: color-mix(in oklch, var(--text-muted), transparent 60%);
-    border-radius: 99px;
+
+  /* ส่วนเนื้อหาภายในการ์ดที่แบ่งสัดส่วนชัดเจน */
+  .pro-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    gap: 1.25rem;
+  }
+
+  .pro-card-footer {
+    padding: 1.5rem 2rem;
+    margin-top: auto;
+    border-top: 1px solid var(--border);
   }
 }
 
 @layer utilities {
-  .container {
-    @apply mx-auto w-full max-w-[90rem] px-4 md:px-8;
-  }
-
-  /* [OPTIMIZED]: ปรับแก้ Glass Effect ลด Blur เหลือ 8px เพื่อช่วย GPU มือถือ */
+  /* [OPTIMIZED]: Glassmorphism v3.0 - Balanced Depth */
   .glass-card {
-    background-color: color-mix(in oklch, var(--surface-card), transparent 30%);
+    background-color: color-mix(in oklch, var(--surface-card), transparent 15%);
+    box-shadow: var(--shadow-pro);
     @supports (backdrop-filter: blur(1px)) {
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
     }
-    border: 1px solid color-mix(in oklch, var(--border), transparent 50%);
+    border: 1px solid color-mix(in oklch, var(--border), transparent 40%);
   }
 
-  /* [CRITICAL]: คลาสสำหรับหยุด Animation บน LCP Element เพื่อให้ Google Bot วัดผลได้ทันที */
-  .lcp-priority {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
+  .glow-primary {
+    box-shadow: 0 10px 40px -10px oklch(var(--brand-primary-raw) / 0.3);
   }
 
   .gpu-layer {
-    @apply transform-gpu backface-hidden;
-    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
 }

@@ -8,6 +8,7 @@
     "tailwindcss-animate",
     "vercel",
     "@swc/helpers",
+    "google-auth-library",
     "eslint-plugin-tailwindcss"
   ],
   "next": {

@@ -41,25 +41,49 @@ const nextConfig: NextConfig = {
     return [
       // 1. [FORCE_WWW]: บังคับ non-www ไปที่ www ทันที (SEO Canonicalization)
       {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'aemdevweb.com' }],
-        destination: 'https://www.aemdevweb.com/:path*',
+        source: "/:path*",
+        has: [{ type: "host", value: "aemdevweb.com" }],
+        destination: "https://www.aemdevweb.com/:path*",
         permanent: true,
       },
       // 2. [LEGACY_MAPPING]: เปลี่ยนจาก Underscore (_) เป็น Hyphen (-) และโครงสร้างเก่า
-      { source: '/services/corporate_pro', destination: '/services/corporate', permanent: true },
-      { source: '/services/corporate_lite', destination: '/services/corporate', permanent: true },
-      { source: '/services/seo_agency', destination: '/services/seo-agency', permanent: true },
-      { source: '/services/local_service', destination: '/services/local-authority', permanent: true },
-      { source: '/services/local', destination: '/services/local-authority', permanent: true },
-      { source: '/services/event_magic', destination: '/services/salepage', permanent: true },
-      { source: '/seo/advanced-schema-markup', destination: '/blog/advanced-schema-markup', permanent: true },
-      { source: '/seo/core-web-vitals-speed', destination: '/blog/core-web-vitals-speed', permanent: true },
-      { source: '/seo/technical-structure-audit', destination: '/blog/technical-audit-protocol', permanent: true },
-      { source: '/blog/technical-seo-guide', destination: '/blog/technical-audit-protocol', permanent: true },
-      { source: '/blog/technical-structure-audit', destination: '/blog/technical-audit-protocol', permanent: true },
-      { source: '/case-studies/project-01', destination: '/case-studies', permanent: true },
-      { source: '/templates/:path*', destination: '/services', permanent: true },
+      { source: "/services/corporate_pro", destination: "/services/corporate", permanent: true },
+      { source: "/services/corporate_lite", destination: "/services/corporate", permanent: true },
+      { source: "/services/seo_agency", destination: "/services/seo-agency", permanent: true },
+      {
+        source: "/services/local_service",
+        destination: "/services/local-authority",
+        permanent: true,
+      },
+      { source: "/services/local", destination: "/services/local-authority", permanent: true },
+      { source: "/services/event_magic", destination: "/services/salepage", permanent: true },
+      {
+        source: "/seo/advanced-schema-markup",
+        destination: "/blog/advanced-schema-markup",
+        permanent: true,
+      },
+      {
+        source: "/seo/core-web-vitals-speed",
+        destination: "/blog/core-web-vitals-speed",
+        permanent: true,
+      },
+      {
+        source: "/seo/technical-structure-audit",
+        destination: "/blog/technical-audit-protocol",
+        permanent: true,
+      },
+      {
+        source: "/blog/technical-seo-guide",
+        destination: "/blog/technical-audit-protocol",
+        permanent: true,
+      },
+      {
+        source: "/blog/technical-structure-audit",
+        destination: "/blog/technical-audit-protocol",
+        permanent: true,
+      },
+      { source: "/case-studies/project-01", destination: "/case-studies", permanent: true },
+      { source: "/templates/:path*", destination: "/services", permanent: true },
     ];
   },
 

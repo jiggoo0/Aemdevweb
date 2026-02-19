@@ -1,15 +1,18 @@
 /**
- * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (FULL_SYNC)
- * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Hex Standard
+ * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Dynamic Inheritance
  * [MARKET]: Nakhon Sawan City, Pak Nam Pho, Logistics & Trading Hub
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const nakhonSawanNode: AreaNode = {
   // --- Basic Identity ---
   slug: "nakhon-sawan",
   province: "นครสวรรค์",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ นครสวรรค์ | ออกแบบเว็บร้านค้าส่งและธุรกิจกงสี ให้ทันสมัยและขายดีกว่าเดิม",
   description:
@@ -26,23 +29,16 @@ export const nakhonSawanNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์นครสวรรค์ ครบวงจร เน้นช่วยร้านค้าส่งและธุรกิจท้องถิ่นให้มีตัวตนบน Google ปักหมุดแผนที่ให้ลูกค้าหาเจอง่าย เพิ่มความน่าเชื่อถือระดับมืออาชีพ",
 
-  // --- Visual & Theme (Pak Nam Pho Prosperity: Red/Gold) ---
-  heroImage: "/images/areas/nakhon-sawan-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#be123c", // Rose 700 (แดงมงคล - สื่อถึงพลังค้าขาย)
-    secondary: "#881337", // Rose 900 (แดงเข้ม - ความหนักแน่น/กงสี)
-    background: "#fff1f2", // Rose 50 (พื้นขาวอมชมพูจางๆ ให้ความรู้สึกอบอุ่น)
-    foreground: "#4c0519", // Rose 950 (ตัวหนังสือสีแดงเข้ม อ่านง่าย)
-    accent: "#d97706", // Amber 600 (สีทอง/ส้ม - ความมั่งคั่ง)
-    gradient: "from-[#be123c]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Merchant Friendly) ---
-  price: "9,500",
-  priceValue: 9500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/nakhon-sawan-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -50,70 +46,64 @@ export const nakhonSawanNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ยึดทำเลทองบน Google: ปักหมุดร้านค้าให้ติดอันดับต้นๆ เมื่อคนค้นหาสินค้าในพื้นที่ เพื่อให้ลูกค้าที่กำลังต้องการของโทรหาคุณก่อนคู่แข่ง",
-    "สร้างความมั่นใจให้คู่ค้า: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ลูกค้านอกเขตปากน้ำโพกล้าที่จะโอนเงินและสั่งซื้อสินค้าจากคุณมากขึ้น",
-    "ระบบเรียบง่ายไม่ซับซ้อน: เราออกแบบมาให้เจ้าของกิจการที่อาจไม่สันทัดเทคโนโลยีสามารถดูแลข้อมูลพื้นฐานเองได้ง่ายๆ ผ่านมือถือ",
+    "Google Maps Dominance: ปักหมุดร้านค้าให้ติดอันดับต้นๆ เมื่อคนค้นหาสินค้าในพื้นที่ เพื่อให้ลูกค้าที่กำลังต้องการของโทรหาคุณก่อนคู่แข่ง",
+    "Professional Image: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ลูกค้านอกเขตปากน้ำโพกล้าที่จะโอนเงินและสั่งซื้อสินค้าจากคุณมากขึ้น",
+    "Easy to Manage: ระบบหลังบ้านที่ออกแบบมาให้เจ้าของกิจการที่อาจไม่สันทัดเทคโนโลยีสามารถดูแลข้อมูลพื้นฐานเองได้ง่ายๆ ผ่านมือถือ",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Trader Specific) ---
   coreFeatures: [
     {
-      title: "Google Maps Domination",
+      title: "Local SEO Boost",
       description:
         "ปรับแต่งหมุดร้านค้า (GMB) ให้สมบูรณ์แบบที่สุด เพื่อดึง Traffic จากกลุ่มคนค้นหา 'ใกล้ฉัน' ในนครสวรรค์",
       icon: "MapPin",
     },
     {
-      title: "Quick-Action Layout",
+      title: "Quick Action Buttons",
       description:
-        "เน้นปุ่มโทรออกและปุ่มแชท LINE ที่เห็นชัดเจนในทุกหน้าหน้าจอ เพื่อเปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้าโดยเร็วที่สุด",
+        "เน้นปุ่มโทรออกและปุ่มแชท LINE ที่เห็นชัดเจนในทุกหน้าจอ เพื่อเปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้าโดยเร็วที่สุด",
       icon: "Zap",
     },
     {
-      title: "Business Trust Profile",
+      title: "Business Profile",
       description:
         "ระบบโชว์หน้าร้าน รีวิวจากลูกค้า และความสำเร็จของธุรกิจ เพื่อยืนยันว่าคุณคือตัวจริงในอุตสาหกรรมนั้น",
       icon: "ShieldCheck",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "มีหน้าร้านอยู่แล้ว ทำไมยังต้องทำเว็บไซต์อีก?",
       answer:
-        "เพราะพฤติกรรมลูกค้าเปลี่ยนไปครับ แม้แต่คนในนครสวรรค์เองเวลานึกอะไรไม่ออกเขาก็จะค้นหาใน Google ก่อน ถ้าคุณไม่มีตัวตนบนนั้น ลูกค้าก็อาจจะหลุดไปหาร้านอื่นที่เขาเจอได้ง่ายกว่าครับ",
+        "เพราะพฤติกรรมลูกค้าเปลี่ยนไปครับ แม้แต่คนในพื้นที่เองเวลานึกอะไรไม่ออกเขาก็จะค้นหาใน Google ก่อน ถ้าคุณไม่มีตัวตนบนนั้น ลูกค้าก็อาจจะหลุดไปหาร้านอื่นครับ",
     },
     {
       question: "ดูแลเว็บไม่เป็น จะทำได้ไหม?",
       answer:
-        "ทำได้แน่นอนครับ ผมจะเซตระบบทุกอย่างให้เป็นอัตโนมัติที่สุด และสอนการใช้งานเบื้องต้นเพียงไม่กี่นาทีคุณก็ทำได้แล้ว หรือจะให้ผมดูแลรายเดือนให้คุณก็ได้ครับ",
+        "ทำได้แน่นอนครับ ผมจะเซตระบบทุกอย่างให้เป็นอัตโนมัติที่สุด และสอนการใช้งานเบื้องต้นให้ หรือจะให้ผมดูแลรายเดือนให้คุณก็ได้ครับ",
     },
     {
       question: "นานไหมกว่าจะเห็นผล?",
       answer:
-        "สำหรับเว็บไซต์และการปักหมุดแผนที่ ปกติจะเริ่มเห็นผลในแง่ของการค้นหาเจอภายใน 2-4 สัปดาห์ และจะค่อยๆ แข็งแกร่งขึ้นเรื่อยๆ เมื่อเวลาผ่านไปครับ",
+        "สำหรับเว็บไซต์และการปักหมุดแผนที่ ปกติจะเริ่มเห็นผลการค้นหาเจอภายใน 2-4 สัปดาห์ และจะค่อยๆ แข็งแกร่งขึ้นเรื่อยๆ ครับ",
     },
     {
       question: "ช่วยเรื่องการขายส่ง (Wholesale) ได้อย่างไร?",
       answer:
-        "เราจะเน้นการทำ SEO ในคีย์เวิร์ดประเภท 'ขายส่ง' หรือ 'แหล่งจำหน่าย' เพื่อดึงดูดเจ้าของร้านค้ารายย่อยจากจังหวัดใกล้เคียงให้เข้ามาเจอคุณครับ",
-    },
-    {
-      question: "ต้องเตรียมข้อมูลอะไรบ้าง?",
-      answer:
-        "เตรียมแค่รูปภาพหน้าร้าน สินค้าหลักของคุณ และประวัติคร่าวๆ ครับ ที่เหลือผมจะช่วยเรียบเรียงและวางโครงสร้างการขายให้ทั้งหมดครับ",
-    },
-    {
-      question: "ราคา 9,500 จบจริงไหม มีค่าใช้จ่ายแอบแฝงไหม?",
-      answer:
-        "ราคานี้เป็นราคาเริ่มต้นสำหรับเว็บหน้าเดียวที่สมบูรณ์ครับ ค่าใช้จ่ายรายปีจะมีแค่ค่าโดเมนและโฮสติ้ง ซึ่งผมจะแจ้งให้ทราบตั้งแต่วันแรกอย่างชัดเจนครับ",
+        "เราจะเน้นการทำ SEO ในคีย์เวิร์ดประเภท 'ขายส่ง' หรือ 'แหล่งจำหน่าย' เพื่อดึงดูดเจ้าของร้านค้ารายย่อยจากจังหวัดใกล้เคียงครับ",
     },
     {
       question: "นัดเจอเพื่อคุยรายละเอียดในเมืองนครสวรรค์ได้ไหม?",
       answer:
         "ได้ครับ ผมยินดีเข้าไปพูดคุยที่ร้านของคุณในย่านสวรรค์วิถี ปากน้ำโพ หรือระแวกใกล้เคียง เพื่อให้เข้าใจบริบทของธุรกิจคุณมากที่สุดครับ",
     },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -136,14 +126,13 @@ export const nakhonSawanNode: AreaNode = {
       "กลัวเทคโนโลยียุ่งยากและไม่มีคนดูแลหลังทำเสร็จ",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 52,
       localClient: "ร้านค้าส่งอะไหล่รายใหญ่ ย่านสวรรค์วิถี",
     },
     regionalPricing: {
-      startPrice: "9,500 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "10-14 วัน",
     },
     localSuccessStory: {

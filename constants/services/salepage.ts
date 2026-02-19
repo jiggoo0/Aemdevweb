@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: SALE_PAGE_CONVERSION_KING v18.0.5 (STABILIZED_AGGRESSIVE)
- * [STRATEGY]: Aggressive Trust | Conversion API Mastery | Obsidian Rose Theme
+ * [SERVICE_NODE]: SALE_PAGE_CONVERSION_ENGINE v18.0.1 (ROAS_OPTIMIZED)
+ * [STRATEGY]: Aggressive Conversion | Server-Side Tracking | Neon Rose Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,83 +8,86 @@ import type { TemplateMasterData } from "@/types";
 
 export const salePageService: TemplateMasterData = {
   id: "AEM-SVC-SP-01",
-  title: "Next-Gen Sale Page | สถาปัตยกรรมปิดการขายระดับปีศาจ ยอดโอนพุ่ง แอดแม่นยำ",
+  title: "High-Performance Sale Page | หน้าปิดการขายอัจฉริยะ ยอดทักแชทแตก แอดแม่นยำ",
   description:
-    "เปลี่ยนเว็บไซต์หน้าเดียวให้กลายเป็นเครื่องจักรพิมพ์เงิน ด้วยโครงสร้าง Next.js 16 ที่โหลดไวระดับมิลลิวินาที พร้อมวางระบบ Conversion API (CAPI) แบบ Deep Integration เพื่อป้อนข้อมูลลูกค้าตัวจริงให้ AI ของ Facebook และ TikTok ฉลาดขึ้น 10 เท่า",
+    "เปลี่ยนคลิกเป็นยอดโอนด้วย Sale Page โครงสร้าง Next.js ที่โหลดไวระดับมิลลิวินาที พร้อมระบบ Conversion API (CAPI) ที่ส่งข้อมูลลูกค้าตัวจริงกลับไปเทรน AI โฆษณาให้ฉลาดขึ้น 10 เท่า เลิกตำน้ำพริกละลายแม่น้ำกับเว็บสำเร็จรูปที่โหลดช้า",
 
   image: "/images/services/salepage-node.webp",
   templateSlug: "salepage",
   category: "landing",
 
+  // [PRICING_MASTER]: ราคากลางสำหรับ Sale Page (คุ้มค่าเมื่อเทียบกับผลลัพธ์)
   price: "3,500",
   priceValue: 3500,
   currency: "THB",
   unit: "เริ่มต้น / หน้า",
 
-  /**
-   * [THEME_ADAPTER]: Obsidian & Cyber Rose
-   * ออกแบบมาเพื่อลด Friction ในการตัดสินใจ แต่ยังคงความตื่นเต้น (Urgency)
-   */
+  // [THEME_STANDARD]: ธีม Neon Rose (Vibrant Pink/Dark)
+  // จิตวิทยา: สีแดง/ชมพูสดกระตุ้น Heart Rate และความอยากซื้อ (Impulse Buying)
   theme: {
-    mode: "dark",
-    primary: "#f43f5e", // Rose 500 (Vibrant & Urgent)
-    secondary: "#4c0519", // Rose 950 (Depth)
-    background: "#0a0102", // Deep Obsidian (Pure Premium Dark)
-    foreground: "#fff1f2", // Rose 50 (Readability)
-    accent: "#fb7185", // Rose 400 (Cyber Glow)
-    gradient: "from-[#f43f5e]/15 via-transparent to-transparent",
+    mode: "dark", // Dark Mode ช่วยให้สินค้าและปุ่ม CTA ดูโดดเด่นที่สุด
+    primary: "#f43f5e", // Rose 500: สีหลักสดใส กระตุ้น Action
+    secondary: "#881337", // Rose 900: สีพื้นหลังส่วนลึก
+    background: "#0f0505", // Obsidian: ดำเกือบสนิท (Premium Dark)
+    foreground: "#fff1f2", // Rose 50: ตัวหนังสืออ่านง่าย
+    accent: "#fb7185", // Rose 400: สีปุ่มรองหรือ Highlight
+    gradient: "from-[#f43f5e]/20 via-transparent to-transparent", // Glow Effect
   },
 
+  // [TRUST_SIGNAL]
   clientTrust:
-    "ROAS Optimizer: พิสูจน์แล้วจากผู้ใช้งานจริง ช่วยลดต้นทุนต่อผลลัพธ์ (CPA) ลงได้เฉลี่ย 42% ภายใน 14 วันหลังติดตั้งระบบ CAPI",
+    "Performance Proven: ช่วยธุรกิจลดต้นทุนต่อการทัก (Cost per Message) เฉลี่ย 40% หลังเปลี่ยนมาใช้โครงสร้างนี้",
 
   benefits: [
-    "Bot-Friendly Architecture: โครงสร้าง Clean Code ที่ถูกออกแบบมาเพื่อผ่านการตรวจจับของ AI Platform ช่วยให้คะแนนความเชื่อถือ (Trust Score) ของโฆษณาคุณสูงขึ้น",
-    "Psychological UI Mapping: การวาง Layout ตามหลักลำดับความสำคัญของสายตา (F-Pattern) ที่บังคับให้ผู้อ่านซึมซับ Value Proposition ก่อนจะจบด้วยปุ่มโอนเงิน",
-    "Smart Data Feeding: ระบบ Server-Side Tracking ที่ส่งข้อมูลพฤติกรรมลูกค้ากลับไปยังแม่ข่ายโฆษณาโดยตรง แม้ลูกค้าจะบล็อกคุกกี้หรือใช้ iOS 14+",
+    "Instant Load: โหลดเสร็จในพริบตา (0.5s) ลูกค้าไม่กดออกเพราะรอนาน ช่วยดันคะแนน Quality Score ของโฆษณา",
+    "Smart Pixel Integration: ฝัง Facebook Pixel & TikTok Pixel แบบ Advanced Matching เก็บ Data ลูกค้าได้แม่นยำกว่าคู่แข่ง",
+    "Bot-Friendly: โครงสร้าง Clean Code ที่ AI ของแพลตฟอร์มโฆษณาชอบ ช่วยให้คอนเทนต์ถูกนำส่งได้ดีขึ้น",
   ],
 
   coreFeatures: [
     {
-      title: "Hyper-Speed Loading",
-      description:
-        "ทำคะแนน Google PageSpeed เกือบเต็ม 100% เพื่อลดอัตราการกดออก (Bounce Rate) และเพิ่มคะแนนคุณภาพโฆษณา (Quality Score)",
-      icon: "Zap",
-    },
-    {
-      title: "Unified CAPI Setup",
-      description:
-        "ติดตั้ง Facebook & TikTok Conversion API ผ่าน Server-Side เพื่อให้ AI นำส่งโฆษณาหาคนที่ 'พร้อมซื้อ' จริงๆ ไม่ใช่แค่ 'คนชอบกดไลก์'",
+      title: "Server-Side CAPI",
+      description: "ส่ง Event การซื้อจากเซิร์ฟเวอร์โดยตรง แก้ปัญหา iOS 14+ บล็อกการติดตาม",
       icon: "Activity",
     },
     {
-      title: "LINE Messaging v2",
-      description:
-        "ระบบแจ้งเตือนออเดอร์เข้า LINE OA แบบ Real-time ผ่าน Messaging API มาตรฐานใหม่ มั่นใจได้ว่าข้อมูลไม่ตกหล่นและแจ้งเตือนเด้ง 100%",
+      title: "Auto-Line Notification",
+      description: "แจ้งเตือนออเดอร์ใหม่เข้า LINE OA ทันที (Real-time) ไม่พลาดทุกยอดขาย",
       icon: "MessageCircle",
+    },
+    {
+      title: "Sticky CTA Bar",
+      description:
+        "แถบปุ่ม 'ซื้อเลย / แอดไลน์' ที่ตามติดหน้าจอโทรศัพท์ตลอดเวลา เพิ่มโอกาสกด 2 เท่า",
+      icon: "MousePointerClick",
     },
   ],
 
   faqs: [
     {
-      question: "ทำไมต้องใช้ Next.js ทำ Sale Page แทนที่จะใช้เจ้าตลาดรายเดือน?",
+      question: "ทำไมต้อง Next.js ไม่ใช้ WordPress หรือเว็บสำเร็จรูป?",
       answer:
-        "เพราะ 'ความเร็ว' และ 'ความเป็นเจ้าของ' ครับ Next.js คือเทคโนโลยีเดียวกับที่แอปชั้นนำระดับโลกใช้ ทำให้เว็บคุณโหลดเสร็จในพริบตา และที่สำคัญคือจ่ายครั้งเดียวจบ ไม่มีการเก็บค่าเช่ารายเดือนให้เป็นภาระต้นทุนธุรกิจครับ",
+        "เพราะ 'ความเร็ว' คือเงินครับ Next.js โหลดไวกว่ามาก และไม่มีปัญหาระบบล่มหรือโดนแฮกเหมือน CMS เก่าๆ ที่สำคัญคือจ่ายครั้งเดียวจบ เป็นกรรมสิทธิ์ของคุณ 100%",
     },
     {
-      question: "ระบบ Conversion API สำคัญยังไงกับการยิงแอด?",
+      question: "Conversion API (CAPI) สำคัญแค่ไหน?",
       answer:
-        "ปัจจุบันการเก็บข้อมูลผ่านเบราว์เซอร์ (Pixel) ถูกปิดกั้นเยอะมากครับ CAPI จะทำหน้าที่ส่งข้อมูลจาก 'เซิร์ฟเวอร์ถึงเซิร์ฟเวอร์' ทำให้ AI เห็นพฤติกรรมการซื้อที่แท้จริง ผลที่ได้คือแอดคุณจะ 'ฉลาด' ขึ้นและ 'แม่น' ขึ้นเรื่อยๆ ครับ",
+        "สำคัญที่สุดในยุคนี้ครับ เพราะ Browser เริ่มบล็อกการเก็บข้อมูล (Cookie) การใช้ CAPI จะช่วยกู้คืนข้อมูลลูกค้าที่หายไปกลับมาได้ถึง 30-40% ทำให้แอดแม่นขึ้น",
     },
     {
-      question: "การแจ้งเตือนออเดอร์ผ่าน LINE ทำงานอย่างไร?",
+      question: "ไม่มีพื้นฐานเทคนิคเลย ดูแลยากไหม?",
       answer:
-        "เมื่อลูกค้ากดสั่งซื้อ ข้อมูลจะถูกบันทึกลง Google Sheets และส่งข้อความสรุปยอดพร้อมรายละเอียดลูกค้าเข้า LINE OA ของคุณทันทีผ่านระบบ API ใหม่ ซึ่งเสถียรกว่าระบบ Notify แบบเดิมมากครับ",
+        "ไม่ต้องดูแลเลยครับ ผมเซ็ตระบบให้จบพร้อมใช้งาน หน้าที่ของคุณคือแค่เอาลิงก์ไปยิงแอด แล้วรอตอบแชทลูกค้าครับ",
     },
     {
-      question: "ถ้าไม่มี Domain และ Hosting ต้องทำอย่างไร?",
+      question: "แก้ไขข้อมูลสินค้าเองได้ไหม?",
       answer:
-        "ผมดูแลให้ครบวงจรครับ! มีบริการจดชื่อโดเมนและเช่าเซิร์ฟเวอร์ความเร็วสูง (Cloud VPS) ในราคาต้นทุน พร้อมติดตั้ง SSL (กุญแจล็อค) ให้ฟรี เพื่อความปลอดภัยระดับสูงสุดของเว็บไซต์",
+        "ได้ครับ ผมมีระบบหลังบ้าน (Admin Panel) ให้คุณเข้าไปแก้ราคา เปลี่ยนรูป หรือแก้ข้อความโปรโมชั่นได้เองง่ายๆ ผ่านมือถือครับ",
+    },
+    {
+      question: "รวมโดเมนและโฮสติ้งไหม?",
+      answer:
+        "แพ็กเกจนี้ยังไม่รวมครับ แต่ผมมีบริการจดโดเมนและเช่า Cloud Server ความเร็วสูงให้ในราคาต้นทุน พร้อมดูแลความปลอดภัยให้ฟรีครับ",
     },
   ],
 
@@ -93,10 +96,9 @@ export const salePageService: TemplateMasterData = {
     "ทำ Landing Page TikTok",
     "ติดตั้ง Conversion API",
     "Sale Page Next.js",
-    "ระบบแจ้งเตือนออเดอร์ LINE",
-    "ทำเว็บหน้าเดียว ยิงแอด",
+    "เว็บหน้าเดียว ขายของออนไลน์",
   ],
 
-  priority: 1,
+  priority: 1, // สินค้าขายดีอันดับ 1
   isFeatured: true,
 };

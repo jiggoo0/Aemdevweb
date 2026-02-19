@@ -1,17 +1,19 @@
 /**
- * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Smart Gateway | Government Trust | Hex Standard
- * [MARKET]: Local Authorities (PAO/SAO) & Agricultural Cooperatives in Chumphon
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Smart Gateway | Government Trust | Dynamic Inheritance
+ * [MARKET]: Chumphon Local Authorities (PAO/SAO) & Agriculture
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const chumphonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chumphon",
   province: "ชุมพร",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
   description:
     "พัฒนาระบบเว็บไซต์ อบต. และเทศบาลในจังหวัดชุมพร รองรับยุทธศาสตร์ประตูสู่ภาคใต้ เชื่อมโยง E-Service และส่งเสริมการท่องเที่ยวชุมชนอย่างยั่งยืน",
@@ -26,27 +28,16 @@ export const chumphonNode: AreaNode = {
   seoDescription:
     "บริการจัดทำเว็บไซต์หน่วยงานราชการในจังหวัดชุมพร รองรับมาตรฐาน ITA และ WCAG ครบถ้วน พร้อมระบบจัดการเรื่องร้องเรียนออนไลน์ และประชาสัมพันธ์แหล่งท่องเที่ยว Unseen ชุมพร",
 
-  // --- Visual & Theme (Government Blue & Agricultural Green) ---
-  heroImage: "/images/areas/chumphon-gateway.webp",
-  theme: {
-    mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #1E88E5 เป็น #1565C0 (Contrast 5.61:1)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA เมื่อแสดงผลบนพื้นหลัง #F8FAFC
-     */
-    primary: "#1565C0",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #43A047 เป็น #1b5e20 เพื่อความชัดเจนในการอ่านบนพื้นหลังสว่าง */
-    secondary: "#1b5e20",
-    background: "#F8FAFC",
-    foreground: "#1E293B",
-    accent: "#FFC107",
-    gradient: "from-[#1565C0]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกัน
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy ---
-  price: "15,900",
-  priceValue: 15900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chumphon-gateway.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -54,12 +45,12 @@ export const chumphonNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อข้อกำหนด",
-    "Digital Service Gateway: ระบบรับเรื่องร้องเรียน คำร้องออนไลน์ และชำระค่าธรรมเนียม ที่ช่วยลดภาระงานหน้าเคาน์เตอร์ได้กว่า 40%",
-    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชนในพื้นที่",
+    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อ",
+    "Digital Service Gateway: ระบบรับเรื่องร้องเรียนและคำร้องออนไลน์ ช่วยลดภาระงานหน้าเคาน์เตอร์และอำนวยความสะดวกประชาชน",
+    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชน",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Gov & Agri Specific) ---
   coreFeatures: [
     {
       title: "Smart Public Service",
@@ -86,7 +77,7 @@ export const chumphonNode: AreaNode = {
     {
       question: "เว็บไซต์รองรับมาตรฐาน WCAG สำหรับผู้พิการหรือไม่?",
       answer:
-        "รองรับครับ เราออกแบบโครงสร้างให้โปรแกรมอ่านหน้าจอ (Screen Reader) เข้าถึงได้ และปรับขนาดตัวอักษร/Contrast ได้ตามมาตรฐานสากลครับ",
+        "รองรับครับ เราออกแบบโครงสร้างให้โปรแกรมอ่านหน้าจอ (Screen Reader) เข้าถึงได้ และปรับขนาดตัวอักษรได้ตามมาตรฐานสากลครับ",
     },
     {
       question: "สามารถทำระบบแผนที่ภาษีและทะเบียนทรัพย์สินเชื่อมต่อได้ไหม?",
@@ -98,11 +89,10 @@ export const chumphonNode: AreaNode = {
       answer:
         "เรามีระบบฐานข้อมูลสวัสดิการชุมชนที่เจ้าหน้าที่สามารถบริหารจัดการข้อมูลเบี้ยยังชีพผ่านระบบหลังบ้านได้โดยตรงครับ",
     },
-    {
-      question: "ใช้เวลานานไหมกว่าจะเริ่มใช้งานระบบ E-Service ได้?",
-      answer:
-        "ปกติใช้เวลา 14-21 วันครับ โดยเราจะทำการเทรนนิ่งเจ้าหน้าที่ให้ใช้งานระบบได้อย่างเชี่ยวชาญก่อนเปิดใช้งานจริงครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("จัดซื้อจัดจ้าง") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -120,25 +110,24 @@ export const chumphonNode: AreaNode = {
       "ธุรกิจท่องเที่ยวเชิงนิเวศปะทิว",
     ],
     painPoints: [
-      "ระบบรับเรื่องร้องเรียนเดิมใช้งานยากและไม่มีสถานะแจ้งกลับ",
-      "ขาดช่องทางดิจิทัลในการสนับสนุนสินค้าเกษตรในช่วงฤดูกาล",
+      "ระบบรับเรื่องร้องเรียนเดิมใช้งานยาก",
+      "ขาดช่องทางดิจิทัลในการสนับสนุนสินค้าเกษตร",
       "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟน",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 4.8,
       reviewCount: 42,
       localClient: "อปท. ชั้นนำในเขตอำเภอหลังสวนและละแม",
     },
     regionalPricing: {
-      startPrice: "15,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
       title: "Digital Transformation for SAO",
       result:
-        "ช่วยให้ อบต. ในพื้นที่สามารถประมวลผลเรื่องร้องเรียนได้เร็วขึ้น 50% และได้รับการยอมรับจากประชาชนในด้านความโปร่งใส",
+        "ช่วยให้ อบต. สามารถประมวลผลเรื่องร้องเรียนได้เร็วขึ้น 50% และผ่านเกณฑ์ประเมิน ITA ระดับ A",
     },
     hyperLocalKeywords: [
       "ทำเว็บไซต์ชุมพร",

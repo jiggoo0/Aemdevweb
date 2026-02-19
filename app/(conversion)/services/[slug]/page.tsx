@@ -1,6 +1,6 @@
 /**
- * [PAGE]: SERVICE_DETAIL_ENGINE v18.0.0 (STABLE_PRODUCTION)
- * [STRATEGY]: Next.js 16 Async Params | Theme Variable Injection | SSG
+ * [PAGE]: SERVICE_DETAIL_ENGINE v18.0.1 (LAYOUT_INTEGRATED)
+ * [STRATEGY]: Next.js 16 Async Params | Unified Identity Shell | SSG
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -11,7 +11,7 @@ import type { Metadata, Viewport } from "next";
 import { MASTER_REGISTRY, getServiceBySlug } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, UniversalTemplateProps } from "@/types";
-import { absoluteUrl, injectThemeVariables } from "@/lib/utils";
+import { absoluteUrl } from "@/lib/utils";
 
 // --- 2. SEO & Schema Protocols ---
 import {
@@ -24,24 +24,27 @@ import JsonLd from "@/components/seo/JsonLd";
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
 
-/** [SSG]: รับประกันประสิทธิภาพระดับสูงสุดผ่าน Static Site Generation */
+/** [SSG]: สร้างหน้า Static ล่วงหน้าสำหรับทุกบริการ */
 export async function generateStaticParams() {
   return MASTER_REGISTRY.map((service) => ({
     slug: service.templateSlug,
   }));
 }
 
-/** [VIEWPORT]: Dynamic Theme Color Support */
-export async function generateViewport(): Promise<Viewport> {
+/** [VIEWPORT]: ปรับสี Browser UI ตามแบรนด์ของโหนดนั้นๆ */
+export async function generateViewport(props: PageProps): Promise<Viewport> {
+  const { slug } = await props.params;
+  const service = getServiceBySlug(slug as string);
+
   return {
-    themeColor: SITE_CONFIG.themeColor,
+    themeColor: service?.theme?.primary || SITE_CONFIG.themeColor,
     width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
   };
 }
 
-/** [SEO]: Dynamic Metadata Orchestration */
+/** [SEO]: จัดการ Metadata แบบ Dynamic */
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { slug } = await props.params;
   const service = getServiceBySlug(slug as string);
@@ -67,23 +70,16 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       images: [{ url: ogImage, width: 1200, height: 630, alt: service.title }],
       type: "article",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: service.title,
-      description: service.description,
-      images: [ogImage],
-    },
   };
 }
 
 export default async function ServicePage(props: PageProps) {
-  /* [CORE]: จัดการ Async Params ตามมาตรฐาน Next.js 16/React 19 */
   const { slug } = await props.params;
   const service = getServiceBySlug(slug as string);
 
   if (!service) notFound();
 
-  /* [THEME_RESOLVER]: รับประกันค่าธีมเริ่มต้นเพื่อความเสถียรของ UI */
+  // รับประกันค่าธีมที่ผ่านการประมวลผลแล้ว
   const activeTheme = service.theme || {
     primary: SITE_CONFIG.themeColor,
     background: "#ffffff",
@@ -91,7 +87,7 @@ export default async function ServicePage(props: PageProps) {
     foreground: "#0f172a",
   };
 
-  /* [SCHEMA]: พัฒนา Knowledge Graph เพื่อคะแนน SEO สูงสุด */
+  // [SCHEMA]: สร้าง Knowledge Graph
   const jsonLd = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -105,32 +101,25 @@ export default async function ServicePage(props: PageProps) {
     <>
       <JsonLd data={jsonLd} id={`schema-service-${service.templateSlug}`} />
 
-      {/* [STRUCTURE]: ฉีด CSS Variables เข้าสู่ขอบเขตการเรนเดอร์ */}
-      <main
-        className="bg-surface-main relative min-h-screen w-full overflow-hidden transition-colors duration-500"
-        style={injectThemeVariables(activeTheme)}
-      >
-        {/* [HUD]: Node Geographic & Status Indicator */}
-        <div className="pointer-events-none relative z-50 flex justify-center pt-24 mix-blend-difference select-none md:pt-28">
-          <div className="border-border/10 flex items-center gap-3 rounded-full border bg-black/20 px-4 py-1.5 backdrop-blur-md">
-            <div
-              className="h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]"
-              style={{ backgroundColor: "var(--brand-primary)" }}
-            />
-            <span className="font-mono text-[9px] font-bold tracking-[0.3em] text-white/70 uppercase">
-              Service_Node: {service.templateSlug.replace(/-/g, "_")}
-            </span>
-          </div>
-        </div>
+      {/* [ORCHESTRATION]: เราส่งต่อหน้าที่การจัดการ Visual Shell (CSS Variables, HUD, Spacing)
+        ให้ TemplateRenderer เป็นผู้ดูแล เพื่อให้เกิดความสอดคล้องระหว่างหน้า Service และหน้า Area
+      */}
+      <TemplateRenderer
+        data={{ ...service, theme: activeTheme } as UniversalTemplateProps}
+        renderMode="full"
+      />
 
-        {/* [RENDERER]: ส่วนประกอบ UI หลักตามแม่แบบที่กำหนด */}
-        <div className="relative -mt-16 w-full">
-          <TemplateRenderer
-            data={{ ...service, theme: activeTheme } as UniversalTemplateProps}
-            renderMode="full"
-          />
+      {/* [HUD]: ย้ายมาอยู่ระดับล่างสุดของ DOM และใช้ Fixed Position 
+        เพื่อให้แสดงผลทับทุกส่วนของเทมเพลตได้อย่างแม่นยำ 
+      */}
+      <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
+        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/40 px-4 py-1.5 shadow-sm backdrop-blur-md">
+          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
+          <span className="font-mono text-[9px] font-black tracking-[0.3em] text-[var(--text-primary)] uppercase opacity-70">
+            Service_Node: {service.templateSlug.replace(/-/g, "_")}
+          </span>
         </div>
-      </main>
+      </div>
     </>
   );
 }

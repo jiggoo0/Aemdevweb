@@ -1,124 +1,137 @@
 /**
- * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v18.1.6 (STABILIZED_FINAL)
- * [STRATEGY]: Sales Enablement | B2B Authority | Hex Standard Implementation
+ * [SERVICE_NODE]: CATALOG_ENGINEERING_HUB v18.0.3 (INDUSTRIAL_MASTER)
+ * [STRATEGY]: B2B Engineering | SKU Management | High-Trust Theme
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { TemplateMasterData } from "@/types";
 
 export const catalogService: TemplateMasterData = {
-  id: "AEM-SVC-EC-05",
-  title: "รับทำเว็บแคตตาล็อกสินค้าออนไลน์ | โชว์รูม 24 ชม. ปิดดีลใหญ่ได้ไวกว่าเดิม",
+  id: "AEM-SVC-CT-05",
+  title: "Industrial Catalog Website | เปลี่ยนสมุดแคตตาล็อกเป็นฐานข้อมูลสินค้าออนไลน์",
   description:
-    "เปลี่ยนสินค้าหลักพันชิ้นให้เป็นโชว์รูมออนไลน์ที่ดูง่าย เซลส์แฮปปี้ ลูกค้ากดขอใบเสนอราคาสบาย ไม่ต้องส่งไฟล์ PDF ให้หนักเครื่องอีกต่อไป โดย นายเอ็มซ่ามากส์",
+    "โซลูชันเว็บไซต์สำหรับโรงงานและธุรกิจ B2B ที่ต้องการนำเสนอสินค้าจำนวนมาก (SKU) ให้ค้นหาง่าย พร้อมระบบขอใบเสนอราคา (RFQ) ที่ช่วยให้ฝ่ายจัดซื้อทำงานสะดวกขึ้น ลดภาระฝ่ายขายในการตอบคำถามสเปกสินค้าเดิมๆ",
+
   image: "/images/services/catalog-node.webp",
   templateSlug: "catalog",
-  category: "ecommerce",
-  price: "16,900",
-  priceValue: 16900,
-  currency: "THB",
-  unit: "เริ่มต้น",
+  category: "business",
 
-  /**
-   * [THEME_ADAPTER]: Violet 600 Core | Zinc-Infused UI
-   * ออกแบบมาเพื่อสร้างความรู้สึกทันสมัยและเป็นมืออาชีพ (Clean Professionalism)
-   * รองรับการสลับธีมแบบ Adaptive Contrast
-   */
+  // [PRICING_MASTER]: ราคากลางสำหรับระบบ Catalog (ซับซ้อนกว่าเว็บองค์กรปกติ)
+  price: "24,900",
+  priceValue: 24900,
+  currency: "THB",
+  unit: "เริ่มต้น / ระบบ",
+
+  // [THEME_STANDARD]: ธีม Engineering Slate (Blue-Grey/Industrial Orange)
+  // สื่อถึงความแม่นยำ (Precision) วิศวกรรม (Engineering) และความปลอดภัย (Safety)
   theme: {
-    mode: "light",
-    primary: "#7c3aed",      // Violet 600 (Brand Identity)
-    secondary: "#4c1d95",    // Violet 900 (Visual Depth)
-    background: "#f5f3ff",   // Violet 50 (Clean Canvas)
-    foreground: "#1e1b4b",   // Indigo 950 (High Legibility)
-    accent: "#a78bfa",       // Violet 400 (Soft Highlights)
-    gradient: "from-[#7c3aed]/15 via-transparent to-transparent",
+    mode: "light", // เน้นความชัดเจนของข้อมูลสินค้า (High Legibility)
+    primary: "#334155", // Slate 700: สีเทาเข้มแบบเครื่องจักร/โลหะ
+    secondary: "#0f172a", // Slate 900: สีพื้นหลังส่วนหัว
+    background: "#f8fafc", // Slate 50: พื้นหลังสะอาดตา อ่านสเปกง่าย
+    foreground: "#1e293b", // Slate 800: สีตัวอักษร
+    accent: "#f97316", // Orange 500: สี Safety/Action (ปุ่ม RFQ)
+    gradient: "from-[#334155]/5 via-transparent to-transparent",
   },
 
-  clientTrust: "สถาปัตยกรรมจัดการข้อมูลสินค้าที่ลื่นไหลที่สุด สำหรับธุรกิจ B2B ยุคใหม่",
+  // [TRUST_SIGNAL]
+  clientTrust:
+    "Engineering Grade: โครงสร้างข้อมูลรองรับ Part Number และ Spec Sheet มาตรฐานอุตสาหกรรม",
 
   benefits: [
-    "Sales Team Empowerment: เซลส์ทำงานง่ายขึ้น ไม่ต้องพกแคตตาล็อกเล่มหนา แค่ส่งลิงก์เดียวลูกค้าดูสเปคได้ครบถ้วน",
-    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ เพื่อการคัดกรองลูกค้าที่มีเจตนาซื้อจริง",
-    "Scalable Data Management: โครงสร้างข้อมูลแบบ Matrix ที่รองรับสินค้าหลักหมื่น SKU พร้อมระบบค้นหาอัจฉริยะ (Zero-Latency)",
+    "Digital Inventory: เปลี่ยนสินค้าในโกดังให้เป็นลิงก์ที่ส่งให้ลูกค้าได้ทันที ไม่ต้องถ่ายรูปส่งไลน์ทีละชิ้น",
+    "Smart Search: ระบบค้นหาที่เข้าใจรหัสสินค้า (Part Number) และชื่อเรียกทางเทคนิค ช่วยให้ลูกค้าเจอของที่ต้องการไวขึ้น",
+    "Lead Generation: เปลี่ยนคนดูสเปกให้เป็นคนขอใบเสนอราคา (RFQ) ด้วยระบบปุ่มติดต่อที่วางถูกตำแหน่ง",
   ],
 
   coreFeatures: [
     {
-      title: "Smart Filter & Search",
-      description: "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดและแม่นยำระดับรหัสอะไหล่",
+      title: "Advanced Filter",
+      description: "ระบบกรองสินค้าตามสเปก (เช่น ขนาด, วัสดุ, กำลังไฟ) เพื่อความแม่นยำในการค้นหา",
       icon: "Search",
     },
     {
-      title: "Direct RFQ System",
-      description: "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายไม่พลาดทุกโอกาสปิดดีล",
-      icon: "FileText",
+      title: "Spec Sheet Download",
+      description: "ปุ่มดาวน์โหลด PDF Catalog หรือ Data Sheet สำหรับวิศวกรและฝ่ายจัดซื้อ",
+      icon: "FileDown",
     },
     {
-      title: "Automated Datasheets",
-      description: "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF ให้ลูกค้าดาวน์โหลดไปแนบใบเสนอราคาได้ทันที",
-      icon: "FileDown",
+      title: "RFQ System",
+      description: "ระบบตะกร้าขอใบเสนอราคา (ไม่ตัดบัตรเครดิต) เหมาะกับรูปแบบการซื้อขาย B2B",
+      icon: "FileText",
     },
   ],
 
-  // [CATALOG_ITEMS]: โครงสร้างรายการสินค้าตัวอย่าง (B2B Matrix)
+  // [CATALOG_DEMO]: รายการสินค้าตัวอย่างเพื่อแสดงศักยภาพระบบ
   items: [
     {
-      name: "Industrial Pump X-200",
-      description: "ปั๊มน้ำอุตสาหกรรมแรงดันสูง",
+      name: "Industrial Pump Series-X",
+      description: "ปั๊มน้ำอุตสาหกรรมแรงดันสูง สำหรับไลน์การผลิต",
       icon: "Settings",
       price: "Call",
     },
-    { 
-      name: "Heavy Duty Valve", 
-      description: "วาล์วทองเหลืองเกรด A สำหรับงานอุตสาหกรรม", 
-      icon: "Disc", 
-      price: "Call" 
-    },
     {
-      name: "Conveyor Belt 5M",
-      description: "สายพานลำเลียงทนความร้อนสูง",
-      icon: "Activity",
+      name: "Hydraulic Valve 200mm",
+      description: "วาล์วไฮดรอลิกทนแรงดัน สเปกนำเข้า",
+      icon: "Disc",
       price: "Call",
     },
     {
-      name: "Hydraulic Press",
-      description: "เครื่องอัดไฮดรอลิก 50 ตัน มาตรฐานสากล",
-      icon: "Cpu",
+      name: "CNC Cutting Tool",
+      description: "ดอกกัด CNC คาร์ไบด์ เกรดพิเศษ",
+      icon: "Zap",
       price: "Call",
     },
     {
-      name: "Safety Gear Set",
-      description: "ชุดอุปกรณ์ป้องกันความปลอดภัยส่วนบุคคลในโรงงาน",
+      name: "Safety Helmet Pro",
+      description: "หมวกนิรภัยมาตรฐาน มอก. สำหรับวิศวกร",
       icon: "Shield",
-      price: "Call",
-    },
-    {
-      name: "Smart Sensor IoT",
-      description: "เซ็นเซอร์ตรวจจับพฤติกรรมการทำงานเครื่องจักรผ่านระบบ Cloud",
-      icon: "Wifi",
       price: "Call",
     },
   ],
 
   faqs: [
     {
-      question: "ต่างจากขายบน Shopee/Lazada อย่างไร?",
+      question: "ลงสินค้าได้กี่รายการ?",
       answer:
-        "ระบบของเราเน้น 'Brand Authority' และการสั่งซื้อล็อตใหญ่ (B2B) ครับ ไม่ใช่การขายปลีกแข่งราคา แต่เป็นการสร้างความเชื่อมั่นผ่านข้อมูลสเปกที่ชัดเจนและระบบขอใบเสนอราคาที่เป็นมืออาชีพ",
+        "ระบบรองรับได้ไม่จำกัดครับ แต่ในแพ็กเกจเริ่มต้นเราช่วยลงข้อมูลให้พร้อมตกแต่งภาพฟรี 50 รายการแรกครับ",
     },
     {
-      question: "ถ้าข้อมูลสินค้ามีเป็นจำนวนมาก จะจัดการยากไหม?",
+      question: "เชื่อมต่อกับ ERP หรือโปรแกรมสต็อกได้ไหม?",
       answer:
-        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload ผ่าน Excel หรือแก้ไขรายชิ้นได้อย่างรวดเร็วผ่านหน้าจัดการที่ใช้งานง่ายเหมือนสมุดบันทึก",
+        "ทำได้ครับ (เป็นบริการ Add-on) เราสามารถเขียน API เชื่อมต่อกับระบบเดิมของคุณเพื่อให้สต็อกหน้าเว็บตรงกันครับ",
+    },
+    {
+      question: "ลูกค้าต้องล็อกอินก่อนดูราคาไหม?",
+      answer:
+        "กำหนดได้ครับ จะเปิดราคาให้ทุกคนเห็น หรือต้องล็อกอิน (Member Price) ถึงจะเห็นราคาก็ทำได้ครับ",
+    },
+    {
+      question: "ค้นหาด้วยรหัส Part Number ได้ไหม?",
+      answer: "ได้แน่นอนครับ ระบบ Search ของเราถูกออกแบบมาให้จับคู่รหัสสินค้าได้แม่นยำ 100% ครับ",
+    },
+    {
+      question: "ออกใบกำกับภาษีได้ไหม?",
+      answer:
+        "ได้ครับ เราจดทะเบียนนิติบุคคลถูกต้อง สามารถออกใบกำกับภาษีค่าทำเว็บไซต์ได้เต็มรูปแบบครับ",
+    },
+    {
+      question: "ดูแลยากไหม ถ้าไม่มีฝ่ายไอที?",
+      answer:
+        "ไม่ยากครับ ระบบหลังบ้านใช้งานเหมือน Shopee/Lazada แค่กรอกข้อมูล ใส่รูป แล้วกดบันทึกครับ",
+    },
+    {
+      question: "เว็บรองรับมือถือไหม?",
+      answer: "รองรับ 100% ครับ วิศวกรหน้างานสามารถเปิดดูสเปกสินค้าผ่านมือถือได้สะดวกและชัดเจนครับ",
     },
   ],
 
   keywords: [
-    "รับทำเว็บแคตตาล็อกสินค้า",
-    "จ้างทำเว็บไซต์บริษัท",
-    "ระบบขอใบเสนอราคาออนไลน์",
-    "ทำเว็บโรงงานอุตสาหกรรม",
-    "Digital Product Catalog",
+    "รับทำเว็บไซต์แคตตาล็อก",
+    "ออกแบบเว็บโรงงาน",
+    "ระบบ E-Catalog",
+    "รับทำเว็บไซต์ B2B",
+    "เว็บขายอะไหล่อุตสาหกรรม",
   ],
 
   priority: 4,

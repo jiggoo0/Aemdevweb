@@ -1,48 +1,43 @@
 /**
- * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Hex Standard
+ * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.2 (DYNAMIC_LINKED)
+ * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Dynamic Inheritance
  * [MARKET]: Chon Buri, Sriracha, Laem Chabang, Amata Nakorn (EEC Zone)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
+import { corporateService } from "@/constants/services/corporate";
 
 export const chonBuriNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chon-buri",
   province: "ชลบุรี",
-  // [STRATEGY]: ใช้ corporate สำหรับบริษัท/โรงงานที่เน้นภาพลักษณ์องค์กร
-  templateSlug: "corporate",
+  templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจ EEC ติดอันดับ Google",
   description:
     "บริการรับทำเว็บไซต์โรงงานในชลบุรีและพัทยา ยกระดับภาพลักษณ์ธุรกิจสู่สากล รองรับ 3 ภาษา (TH/EN/JP) เพื่อเจาะกลุ่มทุนญี่ปุ่นและคู่ค้าต่างชาติ",
 
   longDescription:
-    "ในเขตเศรษฐกิจพิเศษ EEC เว็บไซต์เปรียบเสมือน 'หน้าตา' และ 'ความน่าเชื่อถือ' ของโรงงาน หากเว็บไซต์ของคุณยังดูเก่า โหลดช้า หรือไม่มีภาษาอังกฤษ คู่ค้าต่างชาติจะมองข้ามไปหาคู่แข่งทันที " +
-    "นายเอ็มซ่ามากส์ เชี่ยวชาญการออกแบบเว็บไซต์สำหรับอุตสาหกรรม (Industrial Web Design) ที่เน้นความน่าเชื่อถือ แสดงศักยภาพการผลิต และมาตรฐาน ISO อย่างชัดเจน " +
-    "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรก เพื่อโอกาสในการคว้าดีลใหญ่ระดับ Global",
+    "ในเขตเศรษฐกิจพิเศษ EEC เว็บไซต์เปรียบเสมือน 'หน้าตา' ของโรงงาน หากเว็บไซต์ดูเก่า โหลดช้า หรือไม่มีภาษาอังกฤษ คู่ค้าต่างชาติจะมองข้ามทันที " +
+    "นายเอ็มซ่ามากส์ เชี่ยวชาญการออกแบบ Industrial Web Design ที่เน้นความน่าเชื่อถือ แสดงมาตรฐาน ISO ชัดเจน " +
+    "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรกในคีย์เวิร์ดอุตสาหกรรม",
 
   // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ ชลบุรี ออกแบบเว็บโรงงาน นิคมอมตะ พัทยา ศรีราชา - เอ็มซ่ามากส์",
   seoDescription:
     "บริษัทรับทำเว็บไซต์ชลบุรี รับทำ SEO โรงงาน โลจิสติกส์ และธุรกิจใน EEC เว็บไซต์มาตรฐานสากล รองรับมือถือและหลายภาษา เพิ่มยอดขอใบเสนอราคา (RFQ)",
 
-  // --- Visual & Theme (Industrial Blue: Trust/Stability) ---
-  heroImage: "/images/areas/chon-buri-node.webp",
-  theme: {
-    mode: "light", // ธีมสว่าง สะอาดตา ดูเป็นทางการ
-    primary: "#0369a1", // Sky 700 (Industrial Blue - สีแห่งความเชื่อมั่น)
-    secondary: "#0c4a6e", // Sky 900
-    background: "#f8fafc", // Slate 50 (พื้นหลังสะอาด)
-    foreground: "#0f172a", // Slate 900
-    accent: "#0ea5e9", // Sky 500
-    gradient: "from-[#0369a1]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
 
-  // --- Pricing Strategy (B2B Market) ---
-  price: "19,500",
-  priceValue: 19500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chon-buri-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -50,28 +45,27 @@ export const chonBuriNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ภาพลักษณ์ระดับสากล: ออกแบบ CI (Corporate Identity) ให้ดูทันสมัยและน่าเชื่อถือ เพื่อสร้างความมั่นใจให้นักลงทุนและคู่ค้าต่างชาติ",
-    "รองรับ 3 ภาษา (TH/EN/JP): เจาะตลาดกลุ่มทุนญี่ปุ่นและลูกค้าต่างชาติใน EEC ด้วยระบบสลับภาษาที่แม่นยำและใช้งานง่าย",
-    "SEO สายอุตสาหกรรม: ดันเว็บไซต์ให้ติดหน้าแรก Google ในคีย์เวิร์ดเฉพาะทาง เช่น 'โรงงานผลิตชิ้นส่วน', 'CNC ชลบุรี', 'โกดังให้เช่า'",
+    "International Image: ออกแบบ CI ให้ดูทันสมัยและเป็นสากล สร้างความมั่นใจให้นักลงทุนและคู่ค้าต่างชาติ",
+    "Multi-Language Support: รองรับ 3 ภาษา (TH/EN/JP) เพื่อเจาะตลาดกลุ่มทุนญี่ปุ่นและลูกค้าต่างชาติใน EEC โดยเฉพาะ",
+    "Industrial SEO: ดันเว็บไซต์ติดหน้าแรก Google ในคีย์เวิร์ดเฉพาะทาง เช่น 'CNC ชลบุรี', 'โกดังให้เช่า', 'แม่พิมพ์โลหะ'",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Industrial Specific) ---
   coreFeatures: [
     {
       title: "Product Catalog System",
-      description:
-        "ระบบแคตตาล็อกสินค้าอุตสาหกรรมที่ค้นหาง่าย โหลดไว รองรับสินค้าหลักพันรายการโดยไม่หน่วง",
+      description: "ระบบแคตตาล็อกสินค้าอุตสาหกรรม ค้นหาง่าย รองรับสินค้าหลักพันรายการโดยไม่หน่วง",
       icon: "Database",
     },
     {
-      title: "RFQ Generation",
-      description: "ปุ่ม 'ขอใบเสนอราคา' ที่เด่นชัดและฟอร์มกรอกข้อมูลที่ส่งตรงเข้าอีเมลฝ่ายขายทันที",
+      title: "RFQ Generator",
+      description: "ระบบขอใบเสนอราคา (Request for Quotation) ที่ส่งตรงเข้าอีเมลฝ่ายขายทันที",
       icon: "FileText",
     },
     {
-      title: "Compliance & ISO Page",
+      title: "Compliance Page",
       description:
-        "หน้าแสดงใบรับรองมาตรฐาน (ISO/HACCP) ที่ออกแบบมาให้ดูน่าเชื่อถือและตรวจสอบได้ง่าย",
+        "หน้าแสดงใบรับรองมาตรฐาน (ISO/HACCP/BOI) ที่ออกแบบมาให้ตรวจสอบได้ง่ายและน่าเชื่อถือ",
       icon: "ShieldCheck",
     },
   ],
@@ -86,39 +80,23 @@ export const chonBuriNode: AreaNode = {
     {
       question: "ทำเว็บ 2 ภาษา (ไทย-อังกฤษ) เพิ่มเท่าไหร่?",
       answer:
-        "แพ็กเกจเริ่มต้นรองรับ 1 ภาษาครับ หากต้องการเพิ่มภาษาที่ 2 (เช่น อังกฤษ หรือ ญี่ปุ่น) มีค่าบริการเพิ่มเล็กน้อยตามปริมาณเนื้อหาครับ",
+        "แพ็กเกจเริ่มต้นรองรับ 1 ภาษาครับ หากต้องการเพิ่มภาษาที่ 2 หรือ 3 (ญี่ปุ่น) มีค่าบริการเพิ่มตามปริมาณเนื้อหาครับ",
     },
     {
       question: "มีบริการถ่ายภาพโรงงาน/เครื่องจักรไหม?",
       answer:
-        "มีครับ ผมมีทีมช่างภาพสาย Industrial ที่เชี่ยวชาญการถ่ายไลน์ผลิตและเครื่องจักร เพื่อให้ภาพออกมาดูยิ่งใหญ่และเป็นมืออาชีพครับ",
+        "มีครับ ผมมีทีมช่างภาพสาย Industrial ที่เชี่ยวชาญการถ่ายไลน์ผลิตและเครื่องจักร เพื่อให้ภาพออกมาดูเป็นมืออาชีพครับ",
     },
-    {
-      question: "ออกใบกำกับภาษีในนามบริษัทได้ไหม?",
-      answer:
-        "ได้แน่นอนครับ สามารถออกใบเสนอราคาและใบกำกับภาษีเต็มรูปแบบเพื่อนำไปหักค่าใช้จ่ายบริษัทได้ครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับการเปิดบนมือถือไหม?",
-      answer:
-        "100% ครับ ผู้บริหารและฝ่ายจัดซื้อสมัยนี้ใช้มือถือค้นหาข้อมูลเป็นหลัก เว็บไซต์จะแสดงผลสวยงามบนทุกอุปกรณ์ครับ",
-    },
-    {
-      question: "ใช้เวลาทำนานไหม?",
-      answer:
-        "สำหรับเว็บองค์กรขนาดกลาง (10-15 หน้า) ใช้เวลาประมาณ 3-4 สัปดาห์ครับ รวมขั้นตอนตรวจสอบและแก้ไขครับ",
-    },
-    {
-      question: "มีบริการดูแลรายปีไหม?",
-      answer:
-        "มีครับ บริการดูแลความปลอดภัย อัปเดตข้อมูลข่าวสาร และต่ออายุโดเมน/โฮสติ้ง เพื่อให้ฝ่ายไอทีของคุณไม่ต้องกังวลครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Corporate)
+    ...corporateService.faqs.filter(
+      (f) => f.question.includes("ใบกำกับภาษี") || f.question.includes("PDPA"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าใน EEC ให้ความสำคัญกับ 'มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบและดูโปรจะปิดดีล B2B ได้ง่ายกว่า",
+      "คู่ค้าใน EEC ให้ความสำคัญกับ 'มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบ (Spec Sheet, Certificate) และดูโปร จะปิดดีล B2B ได้ง่ายกว่า",
     technicalApproach:
       "เน้นโครงสร้าง Clean Code เพื่อความปลอดภัยข้อมูลสูงสุด และรองรับการทำ SEO ในตลาด B2B ที่การแข่งขันสูง",
     localStrength:
@@ -135,20 +113,19 @@ export const chonBuriNode: AreaNode = {
       "ไม่มีข้อมูลสินค้า/สเปกเครื่องจักรบนเว็บ",
     ],
     competitorLevel: "high",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 184,
       localClient: "บริษัทโลจิสติกส์รายใหญ่ ในนิคมฯ แหลมฉบัง",
     },
     regionalPricing: {
-      startPrice: "19,500 บาท",
+      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
       timeline: "14-30 วัน",
     },
     localSuccessStory: {
       title: "Case Study: โรงงานชิ้นส่วน CNC",
       result:
-        "ปรับปรุงเว็บไซต์และทำ SEO ภาษาอังกฤษ ยอด RFQ จากลูกค้าโซนยุโรปและญี่ปุ่นเพิ่มขึ้น 250% ใน 6 เดือน",
+        "ปรับปรุงเว็บไซต์และทำ SEO ภาษาอังกฤษ ยอด RFQ จากลูกค้าโซนยุโรปและญี่ปุ่นเพิ่มขึ้น 250%",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ศรีราชา",

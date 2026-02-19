@@ -1,15 +1,19 @@
 /**
- * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Hex Standard
+ * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.1 (DYNAMIC_LINKED)
+ * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Dynamic Inheritance
  * [MARKET]: Chiang Mai Tourism, Wellness & Creative Arts
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Theme/Price)
+import { hotelResortService } from "@/constants/services/hotel-resort";
 
 export const chiangMaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-mai",
   province: "เชียงใหม่",
-  templateSlug: "hotelresort", // เชื่อมต่อกับ HotelResortTemplate
+  templateSlug: "hotelresort", // เชื่อมโยง Logic การ Render กับ Template โรงแรม
+
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บโรงแรมและรีสอร์ต เพิ่มยอดจองตรง ไม่ผ่าน OTA",
   description:
     "บริการรับทำเว็บไซต์โรงแรมในเชียงใหม่ ดีไซน์หรูหราแบบล้านนาร่วมสมัย โหลดไว ดึงดูดนักท่องเที่ยวทั่วโลก พร้อมระบบจองตรงที่ช่วยลดค่าคอมมิชชั่น OTA ทันที",
@@ -19,23 +23,17 @@ export const chiangMaiNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์เชียงใหม่ เน้นธุรกิจท่องเที่ยว โรงแรม และ Wellness เว็บสวยโหลดไว รองรับหลายภาษา ช่วยดึงลูกค้าต่างชาติและเพิ่มยอดจองตรง (Direct Booking)",
 
-  // --- Visual & Theme (Lanna Luxury: Gold/Stone) ---
-  heroImage: "/images/areas/chiang-mai-node.webp",
-  theme: {
-    mode: "dark",
-    primary: "#c5a358", // Chiang Mai Gold (ทองด้าน)
-    secondary: "#453a1f", // Dark Gold Brown
-    background: "#1c1917", // Stone 900 (ดำอมน้ำตาล อุ่นกว่าดำสนิท)
-    foreground: "#fafaf9", // Stone 50
-    accent: "#eab308", // Yellow 500
-    gradient: "from-[#c5a358]/15 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก hotelResortService เพื่อความเป็นมาตรฐานเดียวกันทั้งระบบ
+  // (Chiang Mai Gold & Lanna Dark Theme)
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
 
-  // --- Pricing Strategy (Localized) ---
-  price: "12,900",
-  priceValue: 12900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chiang-mai-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -43,29 +41,27 @@ export const chiangMaiNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ดีไซน์สะท้อนอัตลักษณ์: ถ่ายทอดเสน่ห์ล้านนาร่วมสมัย (Contemporary Lanna) ผ่านหน้าเว็บไซต์ เพื่อสร้าง First Impression ที่น่าจดจำให้นักท่องเที่ยว",
-    "ระบบจองตรงที่ทรงพลัง: ลดการเสียค่าคอมมิชชั่นให้ Agoda/Booking ด้วยปุ่มจองที่ใช้ง่าย เชื่อมต่อ Payment Gateway ตัดบัตรเครดิตได้ทันที",
-    "รองรับนักท่องเที่ยวทั่วโลก: โครงสร้างเว็บรองรับ Multi-language (อังกฤษ/จีน) เพื่อต้อนรับแขกจากทุกมุมโลกที่ค้นหาที่พักในเชียงใหม่",
+    "Lanna Identity: ถ่ายทอดเสน่ห์ล้านนาร่วมสมัย (Contemporary Lanna) ผ่านหน้าเว็บไซต์ สร้าง First Impression ที่น่าจดจำ",
+    "Powerful Direct Booking: ลดค่าคอมมิชชั่น Agoda/Booking ด้วยปุ่มจองที่ใช้ง่ายและเชื่อมต่อ Payment Gateway",
+    "Global Welcoming: รองรับ Multi-language (อังกฤษ/จีน) เพื่อต้อนรับแขกจากทุกมุมโลกที่ค้นหาที่พักในเชียงใหม่",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Tourism Specific) ---
   coreFeatures: [
     {
       title: "Visual Storytelling",
-      description:
-        "ระบบโชว์ภาพห้องพักและบรรยากาศความละเอียดสูง (High-Res) แต่โหลดไว เพื่อให้ลูกค้า 'อิน' กับบรรยากาศก่อนเข้าพัก",
+      description: "ระบบโชว์ภาพบรรยากาศ High-Res ที่โหลดไว เพื่อให้ลูกค้า 'อิน' ก่อนเข้าพัก",
       icon: "Camera",
     },
     {
       title: "Direct Booking Engine",
-      description:
-        "ระบบเช็คห้องว่างและจองทันทีที่เชื่อมต่อกับ Google Calendar หรือระบบหลังบ้านของคุณได้",
+      description: "ระบบเช็คห้องว่างและจองทันที เชื่อมต่อกับ Google Calendar ได้",
       icon: "CalendarCheck",
     },
     {
-      title: "Tourism SEO Structure",
+      title: "Tourism SEO",
       description:
-        "วางโครงสร้าง SEO ดักจับคำค้นหายอดฮิต เช่น 'ที่พักแม่ริม', 'รีสอร์ตเชียงใหม่' ให้ติดหน้าแรก Google",
+        "โครงสร้าง SEO ดักจับคำค้นหา 'ที่พักแม่ริม', 'รีสอร์ตเชียงใหม่' ติดหน้าแรก Google",
       icon: "Map",
     },
   ],
@@ -75,38 +71,27 @@ export const chiangMaiNode: AreaNode = {
     {
       question: "ทำเว็บโรงแรมจำเป็นต้องแพงไหม?",
       answer:
-        "ไม่จำเป็นครับ ผมมีแพ็กเกจเริ่มต้นสำหรับ Boutique Hotel ขนาดเล็กที่เน้นความคุ้มค่า แต่ได้ฟีเจอร์ครบทั้งระบบจองและแกลเลอรี่สวยๆ ครับ",
+        "ไม่จำเป็นครับ ผมมีแพ็กเกจเริ่มต้นสำหรับ Boutique Hotel ขนาดเล็กที่เน้นความคุ้มค่า แต่ได้ฟีเจอร์ครบ",
     },
     {
       question: "นัดคุยงานที่เชียงใหม่ได้ไหม?",
       answer:
-        "ได้ครับ ผมเดินทางไปเชียงใหม่บ่อย สามารถนัดคุยรายละเอียดที่รีสอร์ตหรือคาเฟ่ในตัวเมือง/นิมมานได้เลยครับ เพื่อให้เห็นภาพบรรยากาศจริง",
+        "ได้ครับ ผมเดินทางไปเชียงใหม่บ่อย สามารถนัดคุยรายละเอียดที่รีสอร์ตหรือคาเฟ่ในตัวเมือง/นิมมานได้เลยครับ",
     },
     {
       question: "มีบริการถ่ายภาพที่พักด้วยไหม?",
       answer:
-        "มีครับ ผมทำงานร่วมกับช่างภาพสายโรงแรมมืออาชีพในเชียงใหม่ เพื่อให้ได้ภาพที่สื่ออารมณ์และขายราคาห้องได้แพงขึ้นครับ",
+        "มีครับ ผมทำงานร่วมกับช่างภาพสายโรงแรมมืออาชีพในเชียงใหม่ เพื่อภาพที่สื่ออารมณ์และขายราคาได้แพงขึ้น",
     },
     {
       question: "เว็บรองรับภาษาจีนไหม?",
       answer:
-        "รองรับครับ เชียงใหม่เป็นจุดหมายหลักของนักท่องเที่ยวจีน ผมสามารถวางระบบให้รองรับภาษาจีนและเชื่อมต่อ WeChat Pay/Alipay ได้ครับ (Add-on)",
+        "รองรับครับ เชียงใหม่เป็นจุดหมายหลักของนักท่องเที่ยวจีน ผมวางระบบรองรับภาษาจีนและ WeChat Pay ได้ครับ",
     },
-    {
-      question: "เชื่อมต่อกับ Agoda/Booking ได้ไหม?",
-      answer:
-        "ทำได้ครับ ผมสามารถวางระบบ Channel Manager เพื่อให้สต็อกห้องพักบนเว็บตรงกันกับ OTA ป้องกันปัญหาจองซ้ำ (Overbooking) ครับ",
-    },
-    {
-      question: "ดูแลหลังการขายยังไง?",
-      answer:
-        "มีประกันดูแลฟรี 3 เดือนครับ สอนพนักงานของคุณอัปเดตราคา/โปรโมชั่นหน้าเว็บ หรือถ้าไม่มีคนทำ ผมมีบริการดูแลรายเดือนครับ",
-    },
-    {
-      question: "ใช้เวลากี่วันเสร็จ?",
-      answer:
-        "สำหรับเว็บโรงแรมมาตรฐานประมาณ 10-15 วันครับ แต่ถ้าเป็นโปรเจกต์ใหญ่ที่มีระบบจองซับซ้อนอาจใช้เวลา 20-30 วันครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานเรื่อง OTA จาก Template หลักมาผสม
+    ...hotelResortService.faqs.filter(
+      (f) => f.question.includes("Channel Manager") || f.question.includes("OTA"),
+    ),
   ],
 
   // --- Context Data ---
@@ -136,13 +121,12 @@ export const chiangMaiNode: AreaNode = {
       localClient: "บูทีครีสอร์ตชื่อดัง ย่านแม่ริม",
     },
     regionalPricing: {
-      startPrice: "12,900 บาท",
+      startPrice: `${hotelResortService.price} บาท`, // Dynamic Reference
       timeline: "10-15 วัน",
     },
     localSuccessStory: {
       title: "Case Study: รีสอร์ตหางดง",
-      result:
-        "ปรับเว็บใหม่เน้นจองตรง ยอด Direct Booking เพิ่ม 40% ใน 3 เดือน คืนทุนค่าทำเว็บตั้งแต่เดือนแรก",
+      result: "ปรับเว็บใหม่เน้นจองตรง ยอด Direct Booking เพิ่ม 40% ใน 3 เดือน คืนทุนไว",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ นิมมาน",

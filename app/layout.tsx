@@ -1,83 +1,95 @@
 /**
- * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v18.0.5 (HARDENED_STABLE)
- * [STRATEGY]: Server-Client Boundary Isolation | E-E-A-T Signal | Performance Hardened
- * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
+ * [ROOT LAYOUT]: SYSTEM_INFRASTRUCTURE v18.2.0 (PRODUCTION_MAXIMIZED)
+ * [STRATEGY]: Zero-FOUC Injection | Semantic Core | LCP Optimization
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { Metadata, Viewport } from "next";
+import React from "react";
 import { Inter, IBM_Plex_Sans_Thai } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-// --- Infrastructure & Constants (SSOT) ---
+// --- 1. Infrastructure & Core Constants ---
 import { SITE_CONFIG } from "@/constants/site-config";
 import { generateSchemaGraph } from "@/lib/schema";
 import { cn } from "@/lib/utils";
-import "./globals.css";
+import { type LayoutProps } from "@/types";
 
-// --- Components (Server Side / Critical) ---
+// --- 2. Providers & SEO ---
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import JsonLd from "@/components/seo/JsonLd";
-
-// --- [STABILIZED]: Client Bridge Infrastructure ---
 import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
 
-/* --- 01. FONT ORCHESTRATION (Hardened Trimming) 
-   [ENGINEERING]: บังคับใช้ Display: Swap และ Trimming Weights เพื่อลด Payload ของฟอนต์ไทยลง 40%
-*/
-const fontSans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-  preload: true,
+// --- 3. Style Engine ---
+import "./globals.css";
+
+// [FONT_ORCHESTRATION]: Optimized for Thai/Latin Glyph Balancing
+const fontSans = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-sans", 
+  display: "swap" 
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
-  weight: ["400", "600", "700"],
+  weight: ["400", "700"],
   subsets: ["thai"],
   variable: "--font-thai",
   display: "swap",
-  preload: true,
   adjustFontFallback: true,
 });
 
-/* --- 02. METADATA ENGINE (E-E-A-T Strategy)
-   [SEO]: ใช้ Template System เพื่อรองรับ Dynamic Meta Tags ทั่วทั้งเครือข่าย
-*/
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),
-  title: {
-    default: SITE_CONFIG.project.title,
-    template: `%s | ${SITE_CONFIG.brandName}`,
+  title: { 
+    default: SITE_CONFIG.project.title, 
+    template: `%s | ${SITE_CONFIG.brandName}` 
   },
   description: SITE_CONFIG.description,
   applicationName: SITE_CONFIG.brandName,
   authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
-  creator: SITE_CONFIG.expert.displayName,
-  publisher: SITE_CONFIG.brandName,
-  icons: {
-    icon: [{ url: "/favicon.ico" }],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  generator: "AEMDEVWEB Engine v18",
+  keywords: [...SITE_CONFIG.keywords],
+  icons: { 
+    icon: "/favicon.ico", 
+    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon-32x32.png",
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
-    locale: SITE_CONFIG.locale || "th_TH",
+    locale: "th_TH",
     url: SITE_CONFIG.siteUrl,
+    siteName: SITE_CONFIG.brandName,
+    images: [{ 
+      url: SITE_CONFIG.ogImage, 
+      width: 1200, 
+      height: 630, 
+      alt: SITE_CONFIG.brandName 
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
     title: SITE_CONFIG.project.title,
     description: SITE_CONFIG.description,
-    siteName: SITE_CONFIG.brandName,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_CONFIG.brandName,
-      },
-    ],
+    creator: SITE_CONFIG.expert.twitterHandle,
+    images: [SITE_CONFIG.ogImage],
+  },
+  verification: {
+    google: SITE_CONFIG.verification.google,
+    other: {
+      "facebook-domain-verification": SITE_CONFIG.verification.facebook || "",
+    },
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 
@@ -89,52 +101,80 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  viewportFit: "cover",
 };
 
-/* --- 03. ROOT LAYOUT DEFINITION --- */
-interface RootLayoutProps {
-  readonly children: React.ReactNode;
-}
-
-export default function RootLayout({ children }: RootLayoutProps) {
-  /* [SEO]: Initialize Global Knowledge Graph 
-     สร้างความสัมพันธ์ระหว่าง Organization และ Website ในระดับ Root
-  */
+export default function RootLayout({ children }: LayoutProps) {
+  // [INSIGHT]: Global Graph Injection for sitewide entity linking
   const schemaGraph = generateSchemaGraph([]);
 
   return (
     <html
       lang="th"
       suppressHydrationWarning
-      className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
+      className={cn(
+        "scroll-smooth focus-within:scroll-auto", 
+        fontSans.variable, 
+        fontThai.variable
+      )}
     >
       <head>
-        {/* [SCHEMA]: Global Identity Injection */}
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
+        {/* [CRITICAL_CSS]: Inline styles for instant paint & Zero-FOUC */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              :root { background-color: ${SITE_CONFIG.themeColor}; }
+              .dark { background-color: #020617; }
+              body:not(.hydrated) { visibility: hidden; opacity: 0; }
+              body.hydrated { visibility: visible; opacity: 1; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+              #root-container { contain-intrinsic-size: 1000px; }
+            `,
+          }}
+        />
+        {/* [HYDRATION_SHIELD]: Script to trigger visibility immediately after DOM ready */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const observer = new MutationObserver(() => {
+                  if (document.body) {
+                    document.body.classList.add('hydrated');
+                    observer.disconnect();
+                  }
+                });
+                observer.observe(document.documentElement, { childList: true });
+                window.addEventListener('DOMContentLoaded', () => document.body.classList.add('hydrated'));
+              })();
+            `,
+          }}
+        />
       </head>
-
       <body
+        suppressHydrationWarning
         className={cn(
-          "bg-surface-main text-text-primary min-h-dvh font-sans antialiased",
+          "bg-surface-main text-text-primary min-h-dvh antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
-          "transition-colors duration-300",
+          "overflow-x-hidden font-sans"
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="system" 
+          enableSystem 
           disableTransitionOnChange
         >
-          {/* [BRIDGE]: Client-side Infrastructure (Overlay, Toast, Analytics) */}
+          {/* [INFRA]: Client-side logic for analytics, performance, and global listeners */}
           <ClientInfrastructure />
-
-          {/* [STREAM]: Main Content Delivery */}
-          <main id="root-container" className="relative flex min-h-dvh flex-col overflow-x-hidden">
+          
+          <main
+            id="root-container"
+            className="relative flex min-h-dvh flex-col"
+            style={{ contentVisibility: "auto" } as React.CSSProperties}
+          >
             {children}
           </main>
 
-          {/* [ANALYTICS]: Vercel Real-time Performance Monitoring */}
           <SpeedInsights />
         </ThemeProvider>
       </body>

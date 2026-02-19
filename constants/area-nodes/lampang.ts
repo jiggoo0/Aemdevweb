@@ -1,16 +1,18 @@
 /**
- * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Craftsmanship Authority | Tourism Storytelling | Hex Standard
+ * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Craftsmanship Authority | Tourism Storytelling | Dynamic Inheritance
  * [MARKET]: Lampang City, Koh Kha, Mae Moh (Ceramics & Energy Hub)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const lampangNode: AreaNode = {
   // --- Basic Identity ---
   slug: "lampang",
   province: "ลำปาง",
-  // [STRATEGY]: ใช้ 'local-authority' หรือ 'catalog' (ถ้าเน้นขายเซรามิก)
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ ลำปาง | ออกแบบเว็บเซรามิกและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
   description:
@@ -27,23 +29,16 @@ export const lampangNode: AreaNode = {
   seoDescription:
     "บริการรับทำเว็บไซต์ลำปาง ครบวงจร สำหรับโรงงานเซรามิก SME และธุรกิจท่องเที่ยว เน้นเว็บสวยสะอาดตา รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายและภาพลักษณ์แบรนด์",
 
-  // --- Visual & Theme (Indigo Clay: Craft/Trust) ---
-  heroImage: "/images/areas/lampang-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#312e81", // Indigo 900 (น้ำเงินครามเข้ม - ความน่าเชื่อถือ)
-    secondary: "#c2410c", // Orange 700 (สีดินเผา Clay - งานเซรามิก)
-    background: "#fafaf9", // Stone 50 (ขาวนวลแบบเนื้อเซรามิกสะอาดตา)
-    foreground: "#1c1917", // Stone 900 (ตัวหนังสือสีเข้ม อ่านง่ายคมชัด)
-    accent: "#4338ca", // Indigo 700
-    gradient: "from-[#312e81]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (SME Friendly) ---
-  price: "9,900",
-  priceValue: 9900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/lampang-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -51,12 +46,12 @@ export const lampangNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Aesthetic & Detail: ดีไซน์ที่เน้นความสะอาดตาและการจัดวาง (Layout) ที่สวยงาม เพื่อขับเน้นรายละเอียดของสินค้างานฝีมือให้ดูโดดเด่นที่สุด",
+    "Aesthetic Design: ดีไซน์ที่เน้นความสะอาดตาและการจัดวาง (Layout) ที่สวยงาม เพื่อขับเน้นรายละเอียดของสินค้างานฝีมือให้ดูโดดเด่น",
     "Export Ready: โครงสร้างเว็บรองรับหลายภาษา (Multi-language) และระบบ Catalog ที่เป็นสากล เพื่อให้โรงงานเซรามิกคุยกับลูกค้าต่างชาติได้รู้เรื่อง",
-    "Lampang SEO: เจาะกลุ่มคำค้นหาท้องถิ่นแม่นยำ เช่น 'โรงงานเซรามิก ลำปาง', 'ที่พักเกาะคา', 'รถเช่าสนามบินลำปาง' เพื่อให้ลูกค้าเจอคุณก่อนใคร",
+    "Lampang SEO: เจาะกลุ่มคำค้นหาท้องถิ่นแม่นยำ เช่น 'โรงงานเซรามิก ลำปาง', 'ที่พักเกาะคา' เพื่อให้ลูกค้าเจอคุณก่อนใคร",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Ceramic & Craft Specific) ---
   coreFeatures: [
     {
       title: "Digital Showroom",
@@ -96,25 +91,14 @@ export const lampangNode: AreaNode = {
         "ได้ครับ ผมชอบไปดูหน้างานจริงเพื่อให้เข้าใจกระบวนการผลิตและบรรยากาศร้าน จะได้ออกแบบเว็บออกมาได้ตรงโจทย์ที่สุดครับ",
     },
     {
-      question: "ดูแลเว็บยากไหม ป้าทำไม่เป็น?",
-      answer:
-        "ไม่ยากครับ ผมทำระบบหลังบ้านให้เหมือนเล่นไลน์ แค่พิมพ์ข้อความ เลือกรูป แล้วกดโพสต์ ถ้าติดตรงไหนโทรหาผมได้ตลอดครับ",
-    },
-    {
       question: "เว็บไซต์จะติดหน้าแรก Google นานไหม?",
       answer:
         "ถ้าทำ SEO อย่างถูกต้อง อันดับจะอยู่ค่อนข้างยั่งยืนครับ ยิ่งเป็นคำค้นหาเฉพาะทางในลำปาง คู่แข่งยังไม่เยอะ โอกาสติดอันดับยาวยิ่งสูงครับ",
     },
-    {
-      question: "ใช้เวลาทำกี่วัน?",
-      answer:
-        "ปกติ 10-14 วันครับ แต่ถ้าเป็นแค็ตตาล็อกสินค้าเยอะๆ อาจใช้เวลา 3 สัปดาห์ครับ เพื่อลงข้อมูลให้ครบถ้วน",
-    },
-    {
-      question: "มีค่าใช้จ่ายรายปีไหม?",
-      answer:
-        "ปีแรกฟรีครับ ปีต่อไปมีค่าต่ออายุโดเมนและโฮสติ้ง (ประมาณ 3,000 บาท) เพื่อรักษาชื่อเว็บและข้อมูลไว้ครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("ค่าใช้จ่าย"),
+    ),
   ],
 
   // --- Context Data ---
@@ -137,14 +121,13 @@ export const lampangNode: AreaNode = {
       "ต้องการเปลี่ยนจากรับจ้างผลิต (OEM) มาสร้างแบรนด์ตัวเอง",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 42,
       localClient: "โรงงานเซรามิกส่งออก ย่านเกาะคา",
     },
     regionalPricing: {
-      startPrice: "9,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "10-14 วัน",
     },
     localSuccessStory: {

@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.6 (HARDENED)
- * [STRATEGY]: Hyper-Local Targeting | Adaptive Theme | Professional Authority
+ * [SERVICE_NODE]: LOCAL_AUTHORITY_ENGINE v18.0.1 (GOV_BUSINESS_HYBRID)
+ * [STRATEGY]: Hyper-Local Trust | Government Standard | SME Growth
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,63 +8,105 @@ import type { TemplateMasterData } from "@/types";
 
 export const localAuthorityService: TemplateMasterData = {
   id: "AEM-SVC-LS-10",
-  title: "Local SEO & Google Maps Dominance | ยึดอันดับ 1 บนแผนที่ สร้างความเชื่อถือระดับสูงสุดในพื้นที่",
-  description: "กลยุทธ์ยึดพื้นที่ Google Map Pack 1-3 ที่ออกแบบมาเพื่อยกระดับความน่าเชื่อถือของธุรกิจท้องถิ่น ดันอันดับเหนือคู่แข่งด้วยโครงสร้างข้อมูลที่ถูกต้องแม่นยำตามมาตรฐาน Google Search AI",
+  title: "Local Authority & Business Solutions | ยกระดับความน่าเชื่อถือท้องถิ่นสู่สากล",
+  description:
+    "โซลูชันเว็บไซต์และการตลาดท้องถิ่นสำหรับหน่วยงานราชการ (อบต./เทศบาล) และธุรกิจ SME ที่ต้องการสร้างความเชื่อถือสูงสุดในพื้นที่ ยึดครองอันดับค้นหาบน Google Maps และให้บริการประชาชนด้วยมาตรฐานดิจิทัลภาครัฐ",
   image: "/images/services/local-node.webp",
   templateSlug: "local-authority",
   category: "business",
-  price: "6,900",
-  priceValue: 6900,
-  currency: "THB",
-  unit: "เริ่มต้น / สาขา",
 
-  /**
-   * [THEME_ADAPTER]: ออกแบบให้เน้นความน่าเชื่อถือ (Trust-Centric)
-   * ปรับจาก Emerald 600 เป็น Emerald 700 เพื่อความสุขุม
-   */
+  // [PRICING_MASTER]: ราคากลางสำหรับบริการท้องถิ่น/ราชการ (พื้นที่อื่นจะดึงค่านี้ไปใช้)
+  price: "12,900", // ปรับราคาให้ครอบคลุมงานราชการที่มีเอกสารซับซ้อนกว่า SME ปกติ
+  priceValue: 12900,
+  currency: "THB",
+  unit: "เริ่มต้น / โครงการ",
+
+  // [THEME_STANDARD]: ธีม Civil Emerald (Green/Amber)
+  // สื่อถึงการพัฒนา ความมั่นคง และความใกล้ชิดชุมชน
   theme: {
-    mode: "light",
-    primary: "#047857",     // Emerald 700
-    secondary: "#064e3b",   // Emerald 900
-    background: "#fafafa",  // Zinc 50 (สะอาด ตาไม่ล้า)
-    foreground: "#09090b",  // Zinc 950
-    accent: "#059669",      // Emerald 600
-    gradient: "from-emerald-700/10 via-zinc-50/50 to-zinc-50",
+    mode: "light", // เน้นธีมสว่างเพื่อความโปร่งใส (Transparency)
+    primary: "#047857", // Emerald 700: สีเขียวข้าราชการ/ความมั่นคง
+    secondary: "#064e3b", // Emerald 900: สีเขียวเข้ม
+    background: "#fafafa", // Zinc 50: พื้นหลังสะอาดตา อ่านง่าย
+    foreground: "#09090b", // Zinc 950: ตัวอักษรสีเข้มชัดเจน
+    accent: "#d97706", // Amber 600: สีส้มอิฐ/ดินเผา (ตัดกันเพื่อความโดดเด่นแต่สุภาพ)
+    gradient: "from-[#047857]/5 via-transparent to-transparent",
   },
 
-  clientTrust: "Success Metric: ช่วยธุรกิจเพิ่มอัตราการขอเส้นทาง (Directions) และโทรออก (Calls) เฉลี่ย 315% ผ่านการปรับปรุงคุณภาพหมุดในระดับเทคนิค",
+  // [TRUST_SIGNAL]
+  clientTrust:
+    "Government & Local Standard: มาตรฐานความปลอดภัยข้อมูลและ ITA ที่ยอมรับโดยหน่วยงานท้องถิ่น",
 
   benefits: [
-    "High-Intent Conversion: เข้าถึงกลุ่มเป้าหมายที่มีความต้องการซื้อจริง (Ready-to-Buy) ซึ่งมีประสิทธิภาพการปิดการขายสูงกว่าแพลตฟอร์มโซเชียลมีเดีย",
-    "Reputation Infrastructure: วางโครงสร้างความน่าเชื่อถือผ่านระบบ Review Management ที่ออกแบบมาเพื่อสร้างภาพลักษณ์ผู้เชี่ยวชาญในสายตาลูกค้า",
-    "Sustainable Organic Asset: สร้างสินทรัพย์ดิจิทัลถาวรที่ทำงานต่อเนื่อง 24 ชั่วโมง ช่วยลดภาระงบประมาณโฆษณาที่ผันผวนตามตลาด",
+    "Public Trust: สร้างภาพลักษณ์องค์กรที่ทันสมัย โปร่งใส และเข้าถึงง่ายสำหรับประชาชนทุกช่วงวัย",
+    "Local Dominance: ยึดพื้นที่การค้นหาบน Google Maps (SEO) เหนือคู่แข่งในพื้นที่เดียวกัน",
+    "Compliance Ready: โครงสร้างเว็บรองรับมาตรฐาน ITA/OIT และระเบียบราชการอย่างครบถ้วน",
   ],
 
   coreFeatures: [
     {
-      title: "GMB Deep Optimization",
-      description: "ปรับปรุงโครงสร้าง Google Business Profile ทุกมิติ (Semantic Metadata) เพื่อความแม่นยำในการระบุตัวตนธุรกิจ",
+      title: "E-Service Gateway",
+      description: "ระบบบริการออนไลน์รับเรื่องร้องเรียนหรือติดต่อราชการ ลดขั้นตอนเอกสาร",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Local SEO Structure",
+      description: "โครงสร้างดันอันดับค้นหาท้องถิ่น (Local SEO) ให้ติดหน้าแรกเมื่อคนในพื้นที่ค้นหา",
       icon: "MapPin",
     },
     {
-      title: "Citations Consistency",
-      description: "ตรวจสอบความสอดคล้องของข้อมูล NAP (Name-Address-Phone) ทั่วโลกดิจิทัล เพื่อสร้าง Authority Signal ระดับสูง",
-      icon: "Globe",
-    },
-    {
-      title: "Review Intelligence",
-      description: "กลยุทธ์การบริหารจัดการความคิดเห็นที่ผสมผสานคีย์เวิร์ดเชิงกลยุทธ์ เพื่อเพิ่มความแข็งแกร่งให้อันดับการค้นหา",
-      icon: "Star",
+      title: "Smart CMS",
+      description: "ระบบจัดการเนื้อหาที่เจ้าหน้าที่ใช้งานง่าย อัปเดตข่าวสาร/จัดซื้อจัดจ้างได้เอง",
+      icon: "FileText",
     },
   ],
-  // ... (FAQs และ Keywords คงเดิมตามโครงสร้างมาตรฐาน)
+
   faqs: [
     {
-      question: "ต้องใช้เวลาเท่าไหร่ถึงจะเห็นผล?",
-      answer: "โดยปกติจะเริ่มเห็นการเปลี่ยนแปลงของอันดับภายใน 30-45 วัน และจะเริ่มคงที่ในตำแหน่งยุทธศาสตร์ (Top 3) ภายใน 90-120 วัน ขึ้นอยู่กับการแข่งขันครับ",
+      question: "เหมาะกับหน่วยงานราชการไหม?",
+      answer:
+        "เหมาะมากครับ เราออกแบบตามมาตรฐานเว็บภาครัฐ (Government Website Standard) รองรับการประเมิน ITA และ OIT ครบถ้วน",
+    },
+    {
+      question: "ดำเนินการตามระเบียบจัดซื้อจัดจ้างได้ไหม?",
+      answer:
+        "ได้ครับ ผมเข้าใจระเบียบพัสดุ สามารถจัดเตรียมเอกสารใบเสนอราคา/TOR และตรวจรับงานตามงวดงานราชการได้ครับ",
+    },
+    {
+      question: "ช่วยทำ Google Maps ด้วยไหม?",
+      answer:
+        "รวมอยู่ในบริการครับ ผมจะปรับปรุงหมุดปัก (GMB) ให้ถูกต้องและดันอันดับให้คนในพื้นที่ค้นหาเจอเป็นที่แรกครับ",
+    },
+    {
+      question: "ดูแลหลังการขายยังไง?",
+      answer:
+        "มีประกันดูแลระบบฟรี 1 ปี พร้อมสอนเจ้าหน้าที่ใช้งานจนคล่อง และมีบริการต่อสัญญา MA รายปีครับ",
+    },
+    {
+      question: "ธุรกิจทั่วไปใช้แพ็กเกจนี้ได้ไหม?",
+      answer:
+        "ได้ครับ เหมาะกับธุรกิจที่มีหน้าร้านหรือให้บริการในท้องถิ่น เช่น คลินิก, ร้านวัสดุก่อสร้าง, โรงเรียนกวดวิชา ที่ต้องการความน่าเชื่อถือสูง",
+    },
+    {
+      question: "รองรับการเปิดบนมือถือไหม?",
+      answer:
+        "100% ครับ ประชาชนส่วนใหญ่เข้าถึงผ่านมือถือ เราออกแบบ Mobile-First ให้ใช้งานง่ายที่สุด",
+    },
+    {
+      question: "มีค่าใช้จ่ายรายปีไหม?",
+      answer:
+        "ปีแรกฟรีครับ ปีถัดไปมีค่าต่ออายุโดเมน/โฮสติ้งและดูแลระบบ (Maintenance) ในราคาประหยัดครับ",
     },
   ],
-  keywords: ["รับทำ Local SEO", "ปักหมุด Google Maps", "Local SEO Thailand"],
-  priority: 1,
+
+  keywords: [
+    "รับทำเว็บไซต์ อบต",
+    "ทำเว็บเทศบาล",
+    "รับทำ Local SEO",
+    "ออกแบบเว็บไซต์ราชการ",
+    "จ้างทำเว็บธุรกิจท้องถิ่น",
+  ],
+
+  priority: 3, // Priority รองจาก Corporate/Hotel แต่สำคัญสำหรับตลาดต่างจังหวัด
   isFeatured: true,
 };

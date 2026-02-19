@@ -1,15 +1,20 @@
 /**
- * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Regional Authority | Medical & Service SEO | Hex Standard
+ * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.2 (STRICT_SYNC)
+ * [STRATEGY]: Regional Authority | Medical & Service SEO | Dynamic Inheritance
  * [MARKET]: Phitsanulok City, Indochina Intersection (Service & Healthcare Hub)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const phitsanulokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phitsanulok",
   province: "พิษณุโลก",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและมาตรฐานราชการ/วิชาชีพ
+
   title: "รับทำเว็บไซต์ พิษณุโลก | ออกแบบเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
   description:
     "ยกระดับธุรกิจบริการและการแพทย์สู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือ โหลดไว และติดอันดับ Google ในฐานะผู้นำของภูมิภาคสี่แยกอินโดจีน",
@@ -25,23 +30,16 @@ export const phitsanulokNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์พิษณุโลก ครบวงจร สำหรับคลินิก โรงแรม และธุรกิจบริการ เน้นความน่าเชื่อถือระดับมืออาชีพ รองรับ SEO พื้นที่ภาคเหนือตอนล่าง เพื่อครองความเป็นผู้นำในภูมิภาค",
 
-  // --- Visual & Theme (Civic Blue: Trust/Professional) ---
-  heroImage: "/images/areas/phitsanulok-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#1d4ed8", // Blue 700 (น้ำเงินวิชาชีพ)
-    secondary: "#1e3a8a", // Blue 900
-    background: "#f8fafc", // Slate 50 (สะอาดตา)
-    foreground: "#0f172a", // Slate 900
-    accent: "#60a5fa", // Blue 400
-    gradient: "from-[#1d4ed8]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Hub Level) ---
-  price: "12,900",
-  priceValue: 12900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/phitsanulok-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -49,70 +47,59 @@ export const phitsanulokNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Professional Identity: สร้างภาพลักษณ์ที่น่าเชื่อถือและภูมิฐานในระดับภูมิภาค เพื่อให้ธุรกิจของคุณโดดเด่นเหนือคู่แข่งในฐานะผู้เชี่ยวชาญตัวจริง",
-    "Regional SEO Dominance: วางโครงสร้างการค้นหาครอบคลุมพื้นที่พิษณุโลกและจังหวัดใกล้เคียง (สุโขทัย, พิจิตร, อุตรดิตถ์) เพื่อดึงดูดลูกค้าจากทั่วภาคเหนือตอนล่าง",
-    "Service-Oriented Design: ออกแบบการใช้งาน (UX) ให้เรียบง่ายและเข้าถึงข้อมูลสำคัญได้ไวที่สุด เหมาะสำหรับคนไข้หรือลูกค้าธุรกิจที่ต้องการความรวดเร็ว",
+    "Professional Identity: สร้างภาพลักษณ์ที่น่าเชื่อถือและภูมิฐานระดับภูมิภาค เพื่อโดดเด่นเหนือคู่แข่งในฐานะผู้เชี่ยวชาญตัวจริง",
+    "Regional SEO Dominance: วางโครงสร้างการค้นหาครอบคลุมพิษณุโลกและจังหวัดใกล้เคียง เพื่อดึงดูดลูกค้าจากทั่วภาคเหนือตอนล่าง",
+    "Service-Oriented Design: ออกแบบการใช้งาน (UX) ให้เรียบง่ายและเข้าถึงข้อมูลสำคัญได้ไวที่สุด เหมาะสำหรับลูกค้าที่ต้องการความรวดเร็ว",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Service & Medical Specific) ---
   coreFeatures: [
     {
-      title: "Appointment & Contact Sync",
+      title: "Appointment Sync",
       description:
-        "ระบบจองนัดหมายหรือติดต่อสอบถามที่เชื่อมต่อตรงสู่ LINE หรืออีเมลบริษัท แจ้งเตือนทันที ไม่พลาดทุกโอกาสทางธุรกิจ",
+        "ระบบจองนัดหมายหรือติดต่อสอบถามที่เชื่อมต่อตรงสู่ LINE หรืออีเมล แจ้งเตือนทันที ไม่พลาดทุกโอกาสทางธุรกิจ",
       icon: "CalendarCheck",
     },
     {
       title: "Compliance & Security",
       description:
-        "มาตรฐานความปลอดภัยระดับสูง รองรับ PDPA และการแสดงผลข้อมูลที่ถูกต้องตามระเบียบวิชาชีพ (สำหรับคลินิกและการแพทย์)",
+        "มาตรฐานความปลอดภัยสูง รองรับ PDPA และการแสดงผลข้อมูลที่ถูกต้องตามระเบียบวิชาชีพ (สำหรับคลินิกและการแพทย์)",
       icon: "ShieldCheck",
     },
     {
-      title: "Interactive Location Hub",
+      title: "Location Hub",
       description:
         "ปักหมุดธุรกิจบน Google Maps อย่างละเอียด พร้อมระบบนำทางที่แม่นยำสำหรับลูกค้าจากต่างพื้นที่",
       icon: "MapPin",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำเว็บคลินิก ต้องระวังเรื่องกฎระเบียบอะไรบ้าง?",
       answer:
-        "สำคัญมากครับ เว็บคลินิกต้องปฏิบัติตาม พรบ.สถานพยาบาล และระเบียบแพทยสภา ผมมีความเชี่ยวชาญในการจัดวางเนื้อหาให้ถูกต้อง ไม่โอ้อวดเกินจริง และติดตั้งระบบ Consent ตามกฎหมาย PDPA ให้ครบถ้วนครับ",
+        "สำคัญมากครับ เว็บคลินิกต้องปฏิบัติตาม พรบ.สถานพยาบาล และระเบียบแพทยสภา ผมเน้นจัดวางเนื้อหาให้ถูกต้อง ไม่โอ้อวดเกินจริง และติดตั้งระบบ Consent ตามกฎหมาย PDPA ครับ",
     },
     {
       question: "จ้างทำเว็บไซต์ที่พิษณุโลก นัดเจอคุยงานได้ไหม?",
       answer:
-        "ได้แน่นอนครับ ผมยินดีเข้าไปคุยรายละเอียดที่คลินิก ออฟฟิศ หรือคาเฟ่ในตัวเมืองพิษณุโลก เพื่อรับโจทย์และวิเคราะห์ความต้องการหน้างานให้แม่นยำที่สุดครับ",
-    },
-    {
-      question: "ใช้เวลากี่วันเสร็จ?",
-      answer:
-        "สำหรับเว็บไซต์ธุรกิจบริการหรือคลินิกมาตรฐาน ใช้เวลาประมาณ 14-21 วันครับ รวมขั้นตอนการออกแบบและติดตั้งระบบความปลอดภัยข้อมูลครับ",
+        "ได้แน่นอนครับ ผมยินดีเข้าไปคุยรายละเอียดที่คลินิก ออฟฟิศ หรือคาเฟ่ในตัวเมืองพิษณุโลก เพื่อวิเคราะห์ความต้องการหน้างานให้แม่นยำที่สุดครับ",
     },
     {
       question: "ทำเว็บไซต์แล้ว จะช่วยให้คนไข้หรือลูกค้าเพิ่มขึ้นจริงไหม?",
       answer:
-        "จริงครับ เพราะคนในภูมิภาคนี้มักค้นหาบริการที่น่าเชื่อถือผ่าน Google ก่อน ถ้าเว็บคุณดูเป็นมืออาชีพและติดอันดับต้นๆ โอกาสที่เขาจะเลือกคุณมากกว่าคู่แข่งย่อมสูงขึ้นชัดเจนครับ",
-    },
-    {
-      question: "รองรับการเข้าใช้งานผ่านมือถือไหม?",
-      answer:
-        "100% ครับ ผมให้ความสำคัญกับ Mobile-First เพราะลูกค้ากว่า 90% ในพิษณุโลกเข้าเว็บผ่านสมาร์ทโฟน เว็บของคุณจะโหลดไวและสวยงามบนทุกหน้าจอครับ",
+        "จริงครับ เพราะคนในภูมิภาคนี้มักค้นหาบริการที่น่าเชื่อถือผ่าน Google ก่อน ถ้าเว็บคุณดูเป็นมืออาชีพและติดอันดับต้นๆ โอกาสที่เขาจะเลือกคุณย่อมสูงขึ้นครับ",
     },
     {
       question: "มีระบบนัดหมายออนไลน์ให้ด้วยไหม?",
       answer:
         "มีครับ เราสามารถทำตั้งแต่ระบบฟอร์มนัดหมายง่ายๆ ไปจนถึงระบบปฏิทินเช็คคิวว่าง เพื่อให้เจ้าหน้าที่หน้าเคาน์เตอร์ทำงานได้สะดวกขึ้นครับ",
     },
-    {
-      question: "มีค่าใช้จ่ายรายปีเท่าไหร่?",
-      answer:
-        "ปีแรกฟรีค่าโดเมนและโฮสติ้งครับ ปีต่อไปมีค่าดูแลรักษาประมาณ 3,000 - 5,000 บาท ขึ้นอยู่กับขนาดข้อมูล เพื่อให้เว็บไซต์ของคุณออนไลน์ได้เสถียรตลอด 24 ชั่วโมงครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -135,14 +122,13 @@ export const phitsanulokNode: AreaNode = {
       "ต้องการระบบนัดหมายออนไลน์ที่เสถียรสำหรับคนทุกวัย",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 112,
       localClient: "คลินิกทันตกรรมพรีเมียม ในตัวเมืองพิษณุโลก",
     },
     regionalPricing: {
-      startPrice: "12,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
@@ -168,6 +154,8 @@ export const phitsanulokNode: AreaNode = {
     "นครไทย",
     "วัดโบสถ์",
     "บางกระทุ่ม",
+    "ชาติตระการ",
+    "เนินมะปราง",
   ],
   keywords: [
     "รับทำเว็บไซต์ พิษณุโลก",

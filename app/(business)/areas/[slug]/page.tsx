@@ -1,6 +1,6 @@
 /**
- * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.1.0 (STABLE_HYDRATION)
- * [STRATEGY]: Blueprint Inheritance | Local SEO Domination | React 19 Async
+ * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.1.1 (IDENTITY_INTEGRATED)
+ * [STRATEGY]: Blueprint Inheritance | Unified Identity Shell | Local SEO
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -12,7 +12,7 @@ import { AREA_NODES } from "@/constants/area-nodes";
 import { getServiceBySlug } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, UniversalTemplateProps } from "@/types";
-import { absoluteUrl, injectThemeVariables } from "@/lib/utils";
+import { absoluteUrl } from "@/lib/utils";
 import { mergeServiceData } from "@/lib/data-merger";
 
 // --- 2. SEO & Schema Protocols ---
@@ -26,15 +26,18 @@ import JsonLd from "@/components/seo/JsonLd";
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
 
-/** [SSG]: รับประกันผล Build เป็น Static 100% สำหรับภูมิภาค */
+/** [SSG]: รับประกันผล Build เป็น Static 100% ทั่วไทย */
 export async function generateStaticParams() {
   return AREA_NODES.map((area) => ({ slug: area.slug }));
 }
 
-/** [VIEWPORT]: Mobile-First Optimization */
-export async function generateViewport(): Promise<Viewport> {
+/** [VIEWPORT]: ปรับสี Browser ตามอัตลักษณ์พื้นที่ */
+export async function generateViewport(props: PageProps): Promise<Viewport> {
+  const { slug } = await props.params;
+  const area = AREA_NODES.find((a) => a.slug === slug);
+
   return {
-    themeColor: SITE_CONFIG.themeColor,
+    themeColor: area?.theme?.primary || SITE_CONFIG.themeColor,
     width: "device-width",
     initialScale: 1,
     viewportFit: "cover",
@@ -68,32 +71,22 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
       type: "website",
       locale: "th_TH",
     },
-    twitter: {
-      card: "summary_large_image",
-      title: area.seoTitle,
-      description: area.seoDescription,
-      images: [ogImage],
-    },
   };
 }
 
 export default async function AreaPage(props: PageProps) {
-  /* [A] DATA_RESOLUTION: รองรับ Next.js 15 Async Params */
   const { slug } = await props.params;
   const area = AREA_NODES.find((a) => a.slug === slug);
 
   if (!area) notFound();
 
   const masterService = getServiceBySlug(area.templateSlug);
-  if (!masterService) {
-    console.error(`Architecture Mismatch: Missing master service for ${area.templateSlug}`);
-    notFound();
-  }
+  if (!masterService) notFound();
 
-  /* [B] MERGER_ENGINE: ผสาน Master Blueprint กับ Area Context */
+  /* [MERGER]: ผสาน Master Blueprint กับ Area Context (ราคา, ธีม, เนื้อหา) */
   const templateData = mergeServiceData(masterService, area) as UniversalTemplateProps;
 
-  /* [C] SCHEMA_ORCHESTRATION: 100/100 Knowledge Graph */
+  /* [SCHEMA]: 100/100 Knowledge Graph */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -108,32 +101,24 @@ export default async function AreaPage(props: PageProps) {
     }),
   ]);
 
-  /* [D] RENDERING_LAYER */
   return (
     <>
       <JsonLd data={fullSchema} id={`schema-graph-${area.slug}`} />
 
-      <main
-        className="bg-surface-main relative min-h-screen w-full overflow-hidden transition-colors duration-500"
-        style={injectThemeVariables(templateData.theme)}
-      >
-        {/* HUD Layer: Visual Geographic Status Indicator */}
-        <div className="pointer-events-none relative z-50 flex justify-center pt-24 select-none md:pt-32">
-          <div className="border-border bg-surface-card/50 flex items-center gap-3 rounded-full border px-5 py-2 shadow-sm backdrop-blur-xl">
-            <div
-              className="h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]"
-              style={{ backgroundColor: "var(--brand-primary)" }}
-            />
-            <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase">
-              Geo_Sync: {area.province} | Node_{area.slug.replace(/-/g, "_")}
-            </span>
-          </div>
-        </div>
+      {/* [RENDER_LAYER]: ปล่อยให้ TemplateRenderer จัดการ Visual Shell ทั้งหมด 
+          เพื่อให้สีแบรนด์และ Spacing ของแต่ละจังหวัดทำงานได้ลื่นไหลที่สุด
+      */}
+      <TemplateRenderer data={templateData} renderMode="full" />
 
-        <div className="relative -mt-16 w-full">
-          <TemplateRenderer data={templateData} renderMode="section-only" />
+      {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
+      <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
+        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/40 px-5 py-2 shadow-sm backdrop-blur-md">
+          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
+          <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--text-primary)] uppercase opacity-70">
+            Geo_Sync: {area.province} | Node_{area.slug.replace(/-/g, "_")}
+          </span>
         </div>
-      </main>
+      </div>
     </>
   );
 }

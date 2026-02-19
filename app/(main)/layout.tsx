@@ -1,55 +1,54 @@
 /**
- * [(MAIN) LAYOUT]: CORE_ORCHESTRATOR v18.0.2 (ULTIMATE_STABILITY)
- * [STRATEGY]: Accessibility Priority | Layered Architecture | Next.js 15 Async Params
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [(MAIN) LAYOUT]: CORE_ORCHESTRATOR v18.1.6 (FINAL_STABILIZED)
+ * [STRATEGY]: Stacking Context Protection | Geometric Stability
  */
 
 import React from "react";
+import { type LayoutProps } from "@/types";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 
-interface MainLayoutProps {
-  readonly children: React.ReactNode;
-  readonly params: Promise<{ slug?: string; [key: string]: string | string[] | undefined }>;
+interface MainLayoutProps extends LayoutProps {
+  readonly params: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export default async function MainLayout({ children, params }: MainLayoutProps) {
-  // [CORE]: Next.js 15 Async Params Resolve (ป้องกัน Hydration Mismatch)
+  // [CORE]: Next.js 15 Async Contract Validation
   await params;
 
   return (
-    <div className="bg-surface-main selection:bg-brand-primary/30 selection:text-brand-primary relative flex min-h-dvh flex-col font-sans antialiased">
-      {/* [A11Y]: Skip to Content (สำคัญมากสำหรับ SEO & Accessibility) */}
+    <div className="bg-surface-main relative flex min-h-dvh flex-col font-sans antialiased">
+      {/* 00. A11Y GATEWAY */}
       <a
         href="#main-content"
-        className="bg-brand-primary absolute top-0 left-0 z-[100] -translate-y-full px-4 py-2 text-white transition-transform focus:translate-y-0"
+        className="bg-brand-primary absolute top-4 left-4 z-[1000] -translate-y-[200%] rounded-xl px-6 py-3 text-sm font-black text-white shadow-2xl transition-transform focus:translate-y-0"
       >
         ข้ามไปยังเนื้อหาหลัก
       </a>
 
-      {/* [LAYER 1]: NAVIGATIONAL OVERLAY (Fixed) */}
+      {/* 01. NAVIGATION LAYER (Zero-Constraint Stack) */}
       <Navbar />
 
-      {/* [LAYER 2]: MAIN CONTENT HUB 
-          - pt-24 (96px) md:pt-28 (112px): Clearance สำหรับ Fixed Navbar
-          - isolate: ป้องกัน z-index ภายในตีกับระบบ Overlay ภายนอก
-      */}
+      {/* 02. MAIN CONTENT HUB */}
       <main
         id="main-content"
         className={cn(
-          "relative z-0 flex flex-grow flex-col",
-          "pt-24 md:pt-28",
-          "isolate outline-none",
+          "relative z-10 flex flex-auto flex-col pt-24 md:pt-32 isolate outline-none",
         )}
+        style={{ contentVisibility: "auto" } as React.CSSProperties}
       >
-        {children}
+        <div className="flex w-full flex-col">{children}</div>
       </main>
 
-      {/* [LAYER 3]: FOOTER TERMINUS */}
-      <footer className="bg-surface-main border-border/40 relative z-10 shrink-0 border-t">
+      {/* 03. FOOTER TERMINUS */}
+      <footer className="border-border/40 bg-surface-main relative z-20 shrink-0 border-t">
         <Footer />
       </footer>
+
+      {/* 04. DECORATIVE ARCHITECTURE */}
+      <div className="pointer-events-none fixed inset-y-0 left-0 z-50 hidden w-px bg-gradient-to-b from-transparent via-border/20 to-transparent lg:block" />
+      <div className="pointer-events-none fixed inset-y-0 right-0 z-50 hidden w-px bg-gradient-to-b from-transparent via-border/20 to-transparent lg:block" />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.2 (IDENTITY_SYNC)
+ * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.3 (IDENTITY_SYNC_PRO)
  * [STRATEGY]: Personal Authority | AI-Search Synchronization | E-E-A-T Focus
  * [MAINTAINER]: AEMZA MACKS
  */
@@ -8,88 +8,85 @@ import type { TemplateMasterData } from "@/types";
 
 export const bioService: TemplateMasterData = {
   id: "AEM-SVC-PB-14",
-  title:
-    "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI และ Google จดจำในชื่อที่คุณต้องการ",
+  title: "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI จดจำ",
   description:
-    "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ โดย นายเอ็มซ่ามากส์",
+    "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ",
+
   image: "/images/services/bio-node.webp",
   templateSlug: "bio",
   category: "personal",
+
+  // [PRICING_MASTER]: ราคาเริ่มต้นสำหรับ Personal Branding
   price: "4,900",
   priceValue: 4900,
   currency: "THB",
   unit: "เริ่มต้น / โปรเจกต์",
 
-  // [THEME_FIX]: "Cyber-Tech Professional" (Dark Mode)
-  // สื่อถึงความลึกลับแต่แม่นยำและทันสมัย สอดคล้องกับภาพลักษณ์ Specialist
+  // [THEME_STANDARD]: ธีม Cyber-Tech Professional (Dark Mode)
+  // สื่อถึงความลึกลับแต่แม่นยำ ทันสมัย และเป็น Tech Specialist
   theme: {
     mode: "dark",
-    primary: "#06b6d4", // Cyan 500
-    secondary: "#164e63", // Cyan 900
-    background: "#09090b", // Zinc 950
-    foreground: "#fafafa", // Zinc 50
-    accent: "#22d3ee", // Cyan 400
-    gradient: "from-[#06b6d4]/15 via-transparent to-transparent",
+    primary: "#06b6d4", // Cyan 500: สีฟ้าเทค สื่อถึงนวัตกรรม
+    secondary: "#164e63", // Cyan 900: สีพื้นหลังเข้มลึก
+    background: "#09090b", // Zinc 950: สีดำด้าน (Matte Black) ดูพรีเมียม
+    foreground: "#fafafa", // Zinc 50: สีตัวอักษรขาวสะอาด
+    accent: "#22d3ee", // Cyan 400: สี Highlight จุดสำคัญ
+    gradient: "from-[#06b6d4]/15 via-transparent to-transparent", // Cyber Glow Effect
   },
 
-  // [TRUST_SIGNAL]: การแก้ปัญหาเรื่องร่องรอยดิจิทัล (Digital Footprint)
+  // [TRUST_SIGNAL]
   clientTrust:
     "Identity Control: ระบบที่ออกแบบมาเพื่อจัดการ E-E-A-T และแก้ปัญหาข้อมูลซ้ำซ้อนในฐานข้อมูล AI",
 
-  // [BENEFITS]: เน้นการแก้ Pain Point เรื่องการค้นหาชื่อแล้วเจอข้อมูลเก่าหรือไม่ถูกต้อง
   benefits: [
-    "Authority Synchronization: แก้ปัญหาชื่อไม่ตรงหรือข้อมูลเก่าใน Google และ AI Search ด้วยการสร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด",
-    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและเลขทะเบียนธุรกิจอย่างชัดเจน ป้องกันการสับสนระหว่างชื่อที่ใช้ทำงานและชื่อทางกฎหมาย",
-    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยังระบบ Knowledge Graph ของ Google โดยตรง ช่วยให้ตัวตนของคุณถูกจัดหมวดหมู่ในฐานะ Specialist อย่างถูกต้อง",
+    "Authority Synchronization: สร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด เพื่อให้ Google จำข้อมูลที่ถูกต้อง",
+    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและผลงานชัดเจน ป้องกันการสับสนของข้อมูล",
+    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยัง Knowledge Graph ของ Google โดยตรง ช่วยให้ตัวตนของคุณถูกจัดหมวดหมู่เป็น Specialist",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่เน้นการทำ SEO ตัวบุคคล
   coreFeatures: [
     {
       title: "Knowledge Graph Markup",
       description:
-        "ฝังข้อมูลโครงสร้าง (Schema JSON-LD) เพื่อบอก Google ให้ชัดเจนว่า 'นายเอ็มซ่ามากส์' คือใคร และเกี่ยวข้องกับ 'อลงกรณ์ ยมเกิด' อย่างไร",
+        "ฝัง Schema JSON-LD เพื่อบอก Google ชัดเจนว่า 'นายเอ็มซ่ามากส์' คือใคร และเกี่ยวข้องกับ 'อลงกรณ์ ยมเกิด' อย่างไร",
       icon: "UserCheck",
     },
     {
       title: "Digital Footprint Clean-up",
-      description:
-        "วางโครงสร้างหน้าเว็บเพื่อดันข้อมูลใหม่ขึ้นหน้าแรก และกลบข้อมูลเก่าที่ไม่อัปเดตในระบบการค้นหา",
+      description: "ดันข้อมูลใหม่ที่ถูกต้องขึ้นหน้าแรก Google และกลบข้อมูลเก่าที่ไม่อัปเดต",
       icon: "Shield",
     },
     {
       title: "Integrated Business ID",
       description:
-        "ส่วนแสดงผลข้อมูลจดทะเบียนนิติบุคคลหรือเลขประจำตัวผู้เสียภาษีเพื่อความโปร่งใสในระดับองค์กร",
+        "แสดงผลข้อมูลทางธุรกิจหรือเลขผู้เสียภาษีอย่างโปร่งใส สร้างความน่าเชื่อถือระดับองค์กร",
       icon: "FileText",
     },
   ],
 
-  // [FAQ_ENGINE]: เพิ่มคำถามเรื่องชื่อและความเป็นส่วนตัว
   faqs: [
     {
-      question: "ทำไมค้นหาชื่อใน Google แล้วยังเจอข้อมูลเก่าหรือชื่อเดิมอยู่?",
+      question: "ทำไมค้นหาชื่อใน Google แล้วเจอข้อมูลเก่า?",
       answer:
-        "เป็นเพราะ Google ยังจำ 'ร่องรอยดิจิทัล' (Digital Footprint) เก่าของคุณอยู่ครับ เว็บไซต์นี้จะทำหน้าที่เป็นหน้าแรกที่ Google จะเข้ามาเก็บข้อมูลใหม่ เพื่อแทนที่ข้อมูลเดิมในฐานข้อมูล AI ให้ถูกต้องที่สุดครับ",
+        "เพราะ Google ยังจำ Digital Footprint เดิมครับ เว็บไซต์นี้จะทำหน้าที่ป้อนข้อมูลใหม่ให้ Google แทนที่ข้อมูลเก่าในฐานข้อมูลครับ",
     },
     {
-      question: "ทำไมชื่อที่ใช้ทำงาน (Alias) กับชื่อจริงในบัตรประชาชนถึงไม่ตรงกัน?",
+      question: "ชื่อในวงการ (Alias) กับชื่อจริงไม่ตรงกัน มีผลเสียไหม?",
       answer:
-        "เป็นเรื่องปกติของ Specialist ครับ เราใช้ชื่อแบรนด์เพื่อการจดจำ แต่ในเว็บไซต์จะมีการระบุชื่อทางกฎหมายอย่างโปร่งใสในจุดที่เหมาะสม เพื่อความปลอดภัยและผลทางกฎหมายครับ",
+        "ไม่มีครับ เป็นเรื่องปกติของ Specialist เว็บไซต์จะระบุความเชื่อมโยงของทั้งสองชื่อให้ Google เข้าใจว่าเป็นคนเดียวกันครับ",
     },
     {
-      question: "จดโดเมนเป็นชื่อ-นามสกุลจริง จะปลอดภัยไหม?",
+      question: "จดโดเมนเป็นชื่อจริงปลอดภัยไหม?",
       answer:
-        "ผมแนะนำให้จดเป็นชื่อที่คุณต้องการสร้างแบรนด์ครับ หากต้องการความเป็นส่วนตัว เราสามารถใช้มาตรการปิดบังข้อมูลผู้จดทะเบียน (Domain Privacy) ได้ครับ",
+        "ปลอดภัยครับ แนะนำให้จดเป็นชื่อแบรนด์ที่คุณต้องการสร้างตัวตน หากกังวลเรื่องข้อมูลส่วนตัว เราเปิดระบบ Domain Privacy ได้ครับ",
     },
     {
-      question: "ใช้เวลานานไหมกว่า Google จะอัปเดตชื่อใหม่ให้เรา?",
+      question: "นานไหมกว่า Google จะอัปเดตข้อมูลใหม่?",
       answer:
-        "ปกติใช้เวลา 1-4 สัปดาห์ครับ หลังจากเรา Submit Sitemap ใหม่ Google จะเริ่มรับรู้และปรับเปลี่ยนข้อมูลใน Knowledge Graph ตามข้อมูลล่าสุดในเว็บครับ",
+        "ประมาณ 1-4 สัปดาห์ครับ หลังจากเรา Submit Sitemap ใหม่ Google จะเริ่มปรับปรุงข้อมูลใน Knowledge Graph ครับ",
     },
   ],
 
-  // [KEYWORD_INJECTION]: เน้นชื่อจริงเพื่อดึง Authority
   keywords: [
     "อลงกรณ์ ยมเกิด",
     "Alongkorn Yomkerd",

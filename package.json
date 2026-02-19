@@ -20,8 +20,7 @@
     "format": "prettier --write .",
     "fix": "pnpm format && pnpm lint --fix",
     "knip": "knip --cache --no-exit-code",
-    "clean": "rm -rf .next node_modules pnpm-lock.yaml && GYP_DEFINES=\"android_ndk_path=''\" pnpm install",
-    "index:urls": "node scripts/index-urls.js"
+    "clean": "rm -rf .next node_modules pnpm-lock.yaml && GYP_DEFINES=\"android_ndk_path=''\" pnpm install"
   },
   "bundlesize": [
     {

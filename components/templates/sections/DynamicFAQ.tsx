@@ -1,6 +1,6 @@
 /**
- * [SECTION COMPONENT]: DYNAMIC_FAQ_ENGINE v18.0.5 (STABILIZED_PRODUCTION)
- * [STRATEGY]: FAQPage Schema Injection | Identity-Aware UI | Named Export
+ * [SECTION COMPONENT]: DYNAMIC_FAQ_ENGINE v18.0.6 (THEME_AGNOSTIC_STABILIZED)
+ * [STRATEGY]: CSS Variable Strict Mapping | Identity-Aware UI | SEO Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -26,10 +26,6 @@ interface DynamicFAQProps {
   readonly className?: string;
 }
 
-/**
- * @component DynamicFAQ
- * @description เครื่องยนต์ FAQ ที่มาพร้อมกับการฉีด Structured Data อัตโนมัติเพื่อผลลัพธ์บน Search Engine
- */
 export const DynamicFAQ = memo(
   ({
     items = [],
@@ -37,7 +33,6 @@ export const DynamicFAQ = memo(
     description = "ข้อมูลเชิงลึกและคำแนะนำทางเทคนิคจากทีมผู้เชี่ยวชาญ เพื่อให้คุณตัดสินใจได้แม่นยำที่สุด",
     className,
   }: DynamicFAQProps) => {
-    // [SEO_LOGIC]: สร้าง FAQPage Schema เพื่อครองพื้นที่บน Google SERP
     const faqSchema = useMemo(() => {
       if (!items || items.length === 0) return null;
       return {
@@ -54,18 +49,19 @@ export const DynamicFAQ = memo(
       };
     }, [items]);
 
-    // [GUARD]: ป้องกันการ Render พื้นที่ว่าง
     if (!items || items.length === 0) return null;
 
     return (
       <section
         id="intelligence-hub"
-        className={cn("bg-surface-main relative overflow-hidden py-24 md:py-36", className)}
+        className={cn(
+          "relative overflow-hidden bg-[var(--surface-main)] py-24 md:py-36",
+          className,
+        )}
       >
-        {/* [SEO]: ฉีด Micro-Schema เข้าสู่ส่วน <head> ของ Node นี้ */}
         {faqSchema && <JsonLd data={faqSchema} id="schema-faq-dynamic" />}
 
-        {/* --- 01. INFRASTRUCTURE LAYER --- */}
+        {/* --- 01. INFRASTRUCTURE LAYER (Strict Variable Usage) --- */}
         <div
           className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
           style={{
@@ -79,19 +75,19 @@ export const DynamicFAQ = memo(
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-24">
             {/* --- 02. HEADER NODE: Sticky Narrative --- */}
             <div className="space-y-10 lg:sticky lg:top-32 lg:col-span-5 lg:h-fit">
-              <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-                <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_10px_var(--brand-primary)]" />
-                <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase">
+              <div className="inline-flex items-center gap-4 rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
+                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]" />
+                <span className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
                   Intelligence_Registry.v{SITE_CONFIG.project.version}
                 </span>
               </div>
 
-              <h2 className="text-text-primary text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl">
+              <h2 className="text-5xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl">
                 {title}
               </h2>
 
-              <div className="border-brand-primary/40 border-l-[6px] pl-8">
-                <p className="text-text-secondary text-xl leading-relaxed font-medium italic opacity-90 md:text-2xl">
+              <div className="border-l-[6px] border-[var(--brand-primary)]/40 pl-8">
+                <p className="text-xl leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-2xl">
                   “{description}”
                 </p>
               </div>
@@ -103,10 +99,10 @@ export const DynamicFAQ = memo(
                   rel="noopener noreferrer"
                   className="group flex items-center gap-5 opacity-40 transition-all hover:opacity-100"
                 >
-                  <div className="border-border/10 bg-surface-card group-hover:border-brand-primary/40 group-hover:text-brand-primary group-hover:shadow-glow-sm flex h-12 w-12 items-center justify-center rounded-2xl border transition-all">
+                  <div className="border-border/10 group-hover:shadow-glow-sm flex h-12 w-12 items-center justify-center rounded-2xl border bg-[var(--surface-main)] transition-all group-hover:border-[var(--brand-primary)]/40 group-hover:text-[var(--brand-primary)]">
                     <IconRenderer name="MessageCircle" size={20} />
                   </div>
-                  <span className="font-mono text-[10px] font-black tracking-widest uppercase">
+                  <span className="font-mono text-[10px] font-black tracking-widest text-[var(--text-primary)] uppercase">
                     Technical_Inquiry_Line
                   </span>
                 </a>
@@ -122,21 +118,21 @@ export const DynamicFAQ = memo(
                     value={`item-${index}`}
                     className={cn(
                       "group relative overflow-hidden border transition-all duration-500",
-                      "border-border/10 bg-surface-card shadow-sm",
+                      "border-border/10 bg-[var(--surface-main)] shadow-sm",
                       "rounded-[2rem] md:rounded-[2.5rem]",
-                      "data-[state=open]:border-brand-primary/40 data-[state=open]:shadow-glow-sm",
-                      "hover:border-brand-primary/20",
+                      "data-[state=open]:shadow-glow-sm data-[state=open]:border-[var(--brand-primary)]/40",
+                      "hover:border-[var(--brand-primary)]/20",
                     )}
                   >
                     <AccordionTrigger className="flex w-full items-center justify-between px-8 py-8 text-left transition-all hover:no-underline [&[data-state=open]>div>svg]:rotate-180">
-                      <span className="group-hover:text-brand-primary pr-6 text-xl font-black tracking-tighter uppercase italic transition-colors md:text-3xl">
+                      <span className="pr-6 text-xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--brand-primary)] md:text-3xl">
                         {item.question}
                       </span>
                     </AccordionTrigger>
 
                     <AccordionContent className="px-8 pt-0 pb-10">
                       <div className="border-border/5 border-t pt-8">
-                        <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-90 md:text-2xl">
+                        <p className="text-lg leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-2xl">
                           {item.answer}
                         </p>
                       </div>

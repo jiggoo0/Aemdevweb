@@ -1,18 +1,16 @@
 /**
- * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.5 (PRODUCTION_READY)
+ * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.6 (HYDRATION_FIXED)
  * [STRATEGY]: De-coupled Hydration | Next.js 16 Compatibility | TBT Optimization
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { SITE_CONFIG } from "@/constants/site-config";
 
 // --- [OPTIMIZED]: Dynamic Imports (Client-Side Only) ---
-// [ENGINEERING]: การใช้ { ssr: false } ช่วยลด Payload ของ Initial HTML และป้องกันปัญหา Hydration Mismatch 100%
-
 const TopLoader = dynamic(
   () => import("@/components/layout/TopLoader").then((mod) => mod.TopLoader),
   { ssr: false },
@@ -26,27 +24,27 @@ const Toaster = dynamic(() => import("@/components/ui/Sonner").then((mod) => mod
   ssr: false,
 });
 
-/**
- * @function ClientInfrastructure
- * @description ศูนย์กลางควบคุม UI Components ที่ทำงานเฉพาะฝั่ง Client (Browser APIs)
- * ออกแบบมาเพื่อรักษาคะแนน Core Web Vitals ในส่วนของ LCP และ CLS
- */
 const ClientInfrastructure = () => {
+  /**
+   * [CRITICAL_FIX]: สวิตช์เปิดไฟให้ระบบ
+   * เติมคลาส 'hydrated' เพื่อให้ CSS Opacity เปลี่ยนจาก 0 เป็น 1
+   */
+  useEffect(() => {
+    const body = document.body;
+    if (body) {
+      body.classList.add("hydrated");
+    }
+  }, []);
+
   return (
     <>
-      {/* [CORE]: Navigation Progress Indicator 
-          จัดการผ่าน TopLoader เพื่อให้ User Experience มีความลื่นไหลในขณะสลับ Node ข้อมูล
-      */}
+      {/* [CORE]: Navigation Progress Indicator */}
       <TopLoader color={SITE_CONFIG.themeColor} />
 
-      {/* [CONVERSION]: High-Intent Contact FAB 
-          ปุ่ม Line ลอยตัวพร้อมระบบ Tracking Conversion รายหน้า
-      */}
+      {/* [CONVERSION]: High-Intent Contact FAB */}
       <LineStickyButton source="global_infrastructure" />
 
-      {/* [UI]: Global Notification System 
-          ใช้ Sonner สำหรับระบบ Toast ที่มีความเบา (Lightweight) และรองรับ Accessibility
-      */}
+      {/* [UI]: Global Notification System */}
       <Toaster position="top-center" richColors expand={false} closeButton theme="system" />
     </>
   );

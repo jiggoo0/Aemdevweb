@@ -1,15 +1,19 @@
 /**
- * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Slow Living | Wellness Retreat | Ethnic Craft D2C
+ * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Slow Living | Wellness Retreat | Dynamic Inheritance
  * [MARKET]: Mueang Mae Hong Son, Pai, Mae Sariang (High-Value Niche)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const maeHongSonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "mae-hong-son",
   province: "แม่ฮ่องสอน",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์ แม่ฮ่องสอน | ออกแบบเว็บที่พักและงานคราฟต์พรีเมียม โดย นายเอ็มซ่ามากส์",
   description:
     "เปลี่ยนความสงบของแม่ฮ่องสอนให้เป็นจุดขายระดับโลก ด้วยเว็บไซต์ที่ปิดการขายได้จริง แม้ในพื้นที่ห่างไกล พร้อมระบบที่ช่วยให้ธุรกิจท้องถิ่นขยายฐานลูกค้าสู่ระดับสากล",
@@ -24,23 +28,16 @@ export const maeHongSonNode: AreaNode = {
   seoDescription:
     "บริการรับทำเว็บไซต์แม่ฮ่องสอน เน้นงานดีไซน์เรียบง่ายแต่ทรงพลัง สำหรับรีสอร์ตและสินค้าภูมิปัญญาที่ต้องการขายตรง (D2C) โหลดไว ติดหน้าแรก Google แม้เน็ตจำกัด",
 
-  // --- Visual & Theme (Mist Green: Peace/Nature) ---
-  heroImage: "/images/areas/mae-hong-son-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#065f46", // Mist Green (เขียวหมอก)
-    secondary: "#064e3b", // Forest Green (เขียวป่าลึก)
-    background: "#f8fafc", // Slate 50 (ขาวนวลสะอาด)
-    foreground: "#0f172a", // Slate 900
-    accent: "#ea580c", // Clay Orange (ส้มดินเผา)
-    gradient: "from-[#065f46]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Niche Market) ---
-  price: "7,900",
-  priceValue: 7900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/mae-hong-son-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -48,29 +45,29 @@ export const maeHongSonNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "High-Speed Connectivity: สถาปัตยกรรมเว็บแบบเบาเป็นพิเศษ (Ultralight) ช่วยให้ลูกค้าเปิดเว็บคุณได้ลื่นไหลแม้จะใช้เน็ตมือถือบนดอยสูง",
-    "Storytelling Experience: ดีไซน์ที่เน้นการเล่าเรื่อง (Story) เพื่อเพิ่มมูลค่าให้สินค้าชุมชนหรือที่พัก ให้ดูมีความหมายและราคาแพงกว่าทั่วไป",
-    "Direct Sales Mastery: ระบบที่ช่วยให้คุณขายตรงสู่ลูกค้าได้ทันที ไม่ต้องผ่านคนกลาง ช่วยให้ผลกำไรส่วนใหญ่ตกอยู่ที่ชุมชนแม่ฮ่องสอน 100%",
+    "Ultralight Performance: สถาปัตยกรรมเว็บแบบเบาเป็นพิเศษ ช่วยให้ลูกค้าเปิดเว็บคุณได้ลื่นไหลแม้จะใช้เน็ตมือถือบนดอยสูง",
+    "Storytelling Design: ดีไซน์ที่เน้นการเล่าเรื่อง (Story) เพื่อเพิ่มมูลค่าให้สินค้าชุมชนหรือที่พัก ให้ดูมีความหมายและราคาแพงกว่าทั่วไป",
+    "Direct Sales: ระบบที่ช่วยให้คุณขายตรงสู่ลูกค้าได้ทันที ไม่ต้องผ่านคนกลาง ช่วยให้ผลกำไรตกอยู่ที่ชุมชนแม่ฮ่องสอนเต็มเม็ดเต็มหน่วย",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Remote & Craft Specific) ---
   coreFeatures: [
     {
-      title: "Connectivity Cache",
+      title: "Fast Loading Cache",
       description:
         "ระบบจดจำข้อมูลชั่วคราวเพื่อให้เว็บไซต์เปิดได้เร็วที่สุดแม้ในจุดที่สัญญาณอินเทอร์เน็ตไม่สม่ำเสมอ",
       icon: "Wifi",
     },
     {
-      title: "Digital Booking Sync",
+      title: "Booking Notification",
       description:
         "ระบบจองที่พักเชื่อมต่อตรงกับสมาร์ทโฟนของเจ้าของที่พัก แจ้งเตือนผ่าน LINE ทันทีเมื่อมีการจอง",
       icon: "CalendarCheck",
     },
     {
-      title: "Ethnic Product Showcase",
+      title: "Craft Gallery",
       description:
-        "ระบบแกลเลอรี่และแคตตาล็อกสินค้าที่โชว์รายละเอียดงานฝีมือได้คมชัด เพื่อเจาะกลุ่มลูกค้า D2C สายคราฟต์",
+        "ระบบแกลเลอรี่สินค้าที่โชว์รายละเอียดงานฝีมือได้คมชัด เพื่อเจาะกลุ่มลูกค้า D2C สายคราฟต์",
       icon: "Award",
     },
   ],
@@ -80,38 +77,27 @@ export const maeHongSonNode: AreaNode = {
     {
       question: "อยู่ในพื้นที่ห่างไกล นัดคุยงานอย่างไร?",
       answer:
-        "ปกติผมคุยผ่าน Zoom หรือ Google Meet ได้สะดวกมากครับ แต่ถ้าเป็นโปรเจกต์ที่ต้องการให้เห็นพื้นที่จริง ผมสามารถจัดตารางเดินทางไปหาคุณที่ปายหรือตัวเมืองแม่ฮ่องสอนได้ครับ",
+        "ปกติผมคุยผ่าน Zoom หรือ Google Meet ได้สะดวกมากครับ แต่ถ้าเป็นโปรเจกต์ใหญ่ ผมสามารถเดินทางไปหาคุณที่ปายหรือตัวเมืองแม่ฮ่องสอนได้ครับ",
     },
     {
       question: "อินเทอร์เน็ตที่แม่ฮ่องสอนช้า เว็บจะโหลดไหวไหม?",
       answer:
-        "นี่คือจุดแข็งของเราครับ ผมใช้เทคโนโลยี Next.js ที่รีดประสิทธิภาพสูงสุด ทำให้หน้าเว็บมีขนาดเล็กและเปิดได้ไวที่สุดแม้เน็ตจะเหลือเพียงไม่กี่ขีดครับ",
+        "สบายมากครับ ผมใช้เทคโนโลยี Next.js ที่รีดประสิทธิภาพสูงสุด ทำให้หน้าเว็บมีขนาดเล็กและเปิดได้ไวที่สุดแม้เน็ตจะช้าครับ",
     },
     {
       question: "มีระบบรับจองที่พัก (Booking) ให้เลยไหม?",
       answer:
-        "มีครับ เราสามารถติดตั้งระบบจองตรงหน้าเว็บ (Direct Booking) เพื่อลดการเสียค่าคอมมิชชั่นให้แอปจองที่พักอื่นๆ และให้เงินเข้ากระเป๋าคุณโดยตรงครับ",
+        "มีครับ เราสามารถติดตั้งระบบจองตรงหน้าเว็บ (Direct Booking) เพื่อลดการเสียค่าคอมมิชชั่นให้ OTA ครับ",
     },
     {
       question: "ทำเว็บหลายภาษาเพื่อรับฝรั่งด้วยได้ไหม?",
       answer:
-        "ได้แน่นอนครับ แม่ฮ่องสอนเป็นที่นิยมของนักท่องเที่ยวต่างชาติ ผมสามารถทำระบบสลับภาษา (Multi-language) ที่แปลได้อย่างลื่นไหลและดูเป็นมืออาชีพครับ",
+        "ได้แน่นอนครับ แม่ฮ่องสอนเป็นที่นิยมของต่างชาติ ผมสามารถทำระบบสลับภาษา (Multi-language) ที่ลื่นไหลและดูโปรครับ",
     },
-    {
-      question: "ดูแลหลังการขายอย่างไร ถ้าเว็บมีปัญหา?",
-      answer:
-        "ผมดูแลให้ตลอดอายุการใช้งานในส่วนของระบบพื้นฐานครับ และมีคู่มือภาษาไทยให้เจ้าของกิจการสามารถแก้ไขข้อมูลเองได้ง่ายๆ ผ่านมือถือครับ",
-    },
-    {
-      question: "ช่วยโปรโมทใน Google Maps ให้ด้วยไหม?",
-      answer:
-        "รวมอยู่ในบริการครับ ผมจะช่วย Optimize หมุดธุรกิจของคุณใน Google Maps ให้เชื่อมโยงกับเว็บไซต์ เพื่อให้อันดับการค้นหาดีขึ้นแบบทวีคูณ",
-    },
-    {
-      question: "ใช้เวลานานไหมกว่าจะเสร็จ?",
-      answer:
-        "สำหรับเว็บไซต์เริ่มต้น ใช้เวลาประมาณ 7-12 วันครับ ขึ้นอยู่กับการเตรียมข้อมูลรูปภาพและเนื้อหาของคุณลูกค้าครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
+    ),
   ],
 
   // --- Context Data ---
@@ -129,8 +115,8 @@ export const maeHongSonNode: AreaNode = {
       "ธุรกิจท่องเที่ยวเชิงอนุรักษ์ (Eco-Tourism)",
     ],
     painPoints: [
-      "ที่พักสวยมากแต่ใน Google Map หรือหน้าเว็บดูเก่าไม่ทันสมัย",
-      "การสื่อสารข้อมูลการเดินทางที่ลำบาก ทำให้ลูกค้าลังเลที่จะจอง",
+      "ที่พักสวยมากแต่ใน Google Maps ดูเก่า",
+      "การสื่อสารข้อมูลการเดินทางลำบาก ลูกค้าไม่กล้าจอง",
       "สินค้าชุมชนมีจำกัด แต่ไม่มีระบบสต็อกออนไลน์ที่แม่นยำ",
     ],
     competitorLevel: "low",
@@ -140,13 +126,13 @@ export const maeHongSonNode: AreaNode = {
       localClient: "ที่พักแนว Wellness และร้านสินค้าคราฟต์ในอำเภอปาย",
     },
     regionalPricing: {
-      startPrice: "7,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "7-12 วัน",
     },
     localSuccessStory: {
-      title: "เปลี่ยนที่พักกลางดอยให้เป็นที่รู้จักระดับโลก",
+      title: "Case Study: ที่พักกลางดอย",
       result:
-        "ยอดจองตรง (Direct Booking) เพิ่มขึ้น 200% หลังจากปรับปรุงเว็บไซต์ให้โหลดไวและดูแพงขึ้น",
+        "ยอดจองตรง (Direct Booking) เพิ่มขึ้น 200% หลังจากปรับปรุงเว็บไซต์ให้โหลดไวและดูทันสมัย",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ปาย",
@@ -158,7 +144,7 @@ export const maeHongSonNode: AreaNode = {
 
   // --- System Metadata ---
   priority: 83,
-  districts: ["เมืองแม่ฮ่องสอน", "ปาย", "แม่สะเรียง", "ขุนยวม", "ปางมะผ้า", "สบเมย", "แม่ลาหน่อย"],
+  districts: ["เมืองแม่ฮ่องสอน", "ปาย", "แม่สะเรียง", "ขุนยวม", "ปางมะผ้า", "สบเมย", "แม่ลาน้อย"],
   keywords: [
     "รับทำเว็บไซต์ แม่ฮ่องสอน",
     "จ้างทำเว็บที่พัก ปาย",

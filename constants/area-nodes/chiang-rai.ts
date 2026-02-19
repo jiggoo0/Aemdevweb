@@ -1,46 +1,43 @@
 /**
- * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Coffee Specialty | Border Trade | Artistic Branding
- * [MARKET]: Mueang Chiang Rai, Mae Sai, Chiang Saen (Premium Trade)
+ * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.2 (STRICT_SYNC)
+ * [STRATEGY]: Local Authority Standard | Coffee & Art Content | Dynamic Inheritance
+ * [MARKET]: Mueang Chiang Rai, Mae Sai, Chiang Saen
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const chiangRaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-rai",
   province: "เชียงราย",
-  templateSlug: "local-authority", // หรือ catalog ถ้าเน้นขายกาแฟหนักๆ
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์ เชียงราย | จ้างทำเว็บกาแฟ Specialty และรีสอร์ตศิลปะ ติดหน้าแรก Google",
   description:
     "บริการรับทำเว็บไซต์เชียงราย ยกระดับแบรนด์กาแฟและที่พักสู่สากล ด้วยดีไซน์เชิงศิลปะและระบบ E-commerce ที่ขายได้ทั่วโลก",
 
   longDescription:
     "เชียงรายคือเมืองหลวงแห่งกาแฟและศิลปะระดับโลก เว็บไซต์ของคุณจึงต้องไม่ใช่แค่ 'มี' แต่ต้อง 'เล่าเรื่อง' ได้อย่างลึกซึ้ง " +
-    "นายเอ็มซ่ามากส์ เข้าใจหัวใจของ Specialty Coffee และงาน Craft เราพร้อมเปลี่ยนเว็บไซต์ธรรมดาให้เป็นแกลเลอรี่ออนไลน์ที่ลูกค้าสัมผัสได้ถึงความพิถีพิถัน " +
-    "พร้อมวางระบบขายกาแฟ Subscription และระบบจองที่พักที่รองรับนักท่องเที่ยวคุณภาพ เพื่อให้ธุรกิจเชียงรายเติบโตอย่างยั่งยืนบนเวทีโลก",
+    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์ธรรมดาให้เป็นแกลเลอรี่ออนไลน์ที่ลูกค้าสัมผัสได้ถึงความพิถีพิถัน " +
+    "พร้อมวางระบบขายสินค้าและจองที่พักที่รองรับนักท่องเที่ยวคุณภาพ เพื่อให้ธุรกิจเชียงรายเติบโตอย่างยั่งยืนบนเวทีโลก",
 
   // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ เชียงราย ออกแบบเว็บกาแฟ รีสอร์ต ศิลปะ ติด SEO - เอ็มซ่ามากส์",
   seoDescription:
     "จ้างทำเว็บไซต์เชียงราย ครบวงจร เน้นธุรกิจโรงคั่วกาแฟ ที่พักแนว Art Stay และการค้าชายแดน เว็บสวยโหลดไว รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายออนไลน์",
 
-  // --- Visual & Theme (Coffee Art: Warm Brown/Cream) ---
-  heroImage: "/images/areas/chiang-rai-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#7c2d12", // Warm Coffee Brown (สีน้ำตาลกาแฟคั่วกลาง)
-    secondary: "#451a03", // Deep Espresso
-    background: "#fffaf3", // Creamy Latte (พื้นครีมนวลตา)
-    foreground: "#1c1917", // Charcoal (ดำถ่านไม้)
-    accent: "#b45309", // Amber/Caramel
-    gradient: "from-[#7c2d12]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService ตามคำสั่ง เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Premium Niche) ---
-  price: "9,900",
-  priceValue: 9900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chiang-rai-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -48,29 +45,29 @@ export const chiangRaiNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Storytelling Design: ถ่ายทอดเรื่องราว (Story) ของเมล็ดกาแฟและงานศิลป์ผ่านดีไซน์เว็บไซต์ ให้ดูมีมูลค่าสูงและน่าค้นหา",
-    "Global E-commerce: ระบบขายออนไลน์ที่รองรับการส่งออกกาแฟและงานคราฟต์ไปทั่วโลก พร้อมระบบคำนวณค่าส่งอัตโนมัติ",
-    "Tourism SEO: ดึงดูดนักท่องเที่ยวคุณภาพ (High Spender) ด้วยการทำ SEO ภาษาอังกฤษในคีย์เวิร์ดที่พักและคาเฟ่",
+    "Storytelling Design: ถ่ายทอดเรื่องราว (Story) ของสินค้าและบริการผ่านดีไซน์เว็บไซต์ ให้ดูมีมูลค่าสูงตามมาตรฐานสากล",
+    "Global Reach: ระบบรองรับการส่งออกข้อมูลและสินค้าไปทั่วโลก พร้อมโครงสร้างที่เอื้อต่อการทำ SEO ต่างประเทศ",
+    "Tourism Ready: ดึงดูดนักท่องเที่ยวคุณภาพ (High Spender) ด้วยการวางโครงสร้างเว็บให้รองรับภาษาอังกฤษและจีน",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Local Specific Content) ---
   coreFeatures: [
     {
-      title: "Coffee Subscription",
+      title: "Coffee & Product System",
       description:
-        "ระบบสมาชิกสั่งซื้อเมล็ดกาแฟรายเดือน เพื่อสร้างรายได้ที่มั่นคง (Recurring Income) ให้โรงคั่ว",
-      icon: "Repeat", // หรือ Icon อื่นที่สื่อถึงการวนลูป
+        "ระบบจัดการสินค้าที่เหมาะสำหรับโรงคั่วกาแฟและงานคราฟต์ รองรับรายละเอียดสินค้าเชิงลึก",
+      icon: "Database",
     },
     {
-      title: "Art Gallery Mode",
+      title: "Gallery Mode",
       description:
-        "โหมดแสดงผลภาพความละเอียดสูงแบบพิพิธภัณฑ์ศิลปะ สำหรับขายงานปั้น ภาพวาด หรือที่พักตกแต่งสวยงาม",
+        "โหมดแสดงผลภาพความละเอียดสูง สำหรับรีสอร์ตและงานศิลปะ เพื่อสร้างความประทับใจแรกพบ",
       icon: "Image",
     },
     {
-      title: "Multi-Language (TH/EN/CN)",
+      title: "Multi-Language Support",
       description:
-        "รองรับ 3 ภาษาเพื่อต้อนรับนักท่องเที่ยวจีนและฝรั่ง ที่หลั่งไหลเข้ามาผ่านด่านแม่สายและสนามบิน",
+        "รองรับ 3 ภาษา (ไทย/อังกฤษ/จีน) เพื่อต้อนรับนักท่องเที่ยวและคู่ค้าผ่านด่านแม่สาย",
       icon: "Globe",
     },
   ],
@@ -80,46 +77,35 @@ export const chiangRaiNode: AreaNode = {
     {
       question: "ทำเว็บขายกาแฟออนไลน์ ยากไหม?",
       answer:
-        "ไม่ยากครับ ผมทำระบบจัดการสินค้าให้ใช้งานง่าย คุณแค่ถ่ายรูปถุงกาแฟ ใส่รายละเอียด Taste Note แล้วกดโพสต์ขายได้เลย รองรับตัดบัตรเครดิตครับ",
+        "ไม่ยากครับ ระบบที่เราเตรียมไว้ให้ใช้งานง่าย คุณแค่ถ่ายรูปสินค้า ใส่รายละเอียด แล้วกดโพสต์ขายได้เลย",
     },
     {
       question: "นัดคุยงานที่ร้านกาแฟในเมืองได้ไหม?",
       answer:
-        "ยินดีมากครับ ผมชอบบรรยากาศร้านกาแฟในเชียงรายอยู่แล้ว นัดคุยเพื่อดูสไตล์งานและจิบกาแฟไปด้วยได้เลยครับ",
+        "ยินดีมากครับ ผมชอบบรรยากาศร้านกาแฟในเชียงรายอยู่แล้ว นัดคุยเพื่อดูสไตล์งานจริงได้เลยครับ",
     },
     {
-      question: "มีระบบจองโต๊ะหรือจองที่พักไหม?",
+      question: "มีระบบจองที่พักไหม?",
       answer:
-        "มีครับ ผมสามารถติดตั้งระบบจอง (Booking System) ที่แจ้งเตือนผ่าน LINE ทันทีที่มีลูกค้าจองเข้ามา สะดวกและไม่พลาดทุกออเดอร์ครับ",
+        "มีครับ สามารถติดตั้งระบบจอง (Booking System) ที่แจ้งเตือนผ่าน LINE ทันทีที่มีลูกค้าจองเข้ามา",
     },
     {
       question: "ทำ SEO ภาษาจีนได้ไหม?",
       answer:
-        "ทำได้ครับ ผมมีพาร์ทเนอร์นักแปลภาษาจีนที่เชี่ยวชาญ เพื่อทำหน้าเว็บสำหรับนักท่องเที่ยวจีนโดยเฉพาะครับ",
+        "ทำได้ครับ เรามีแนวทางในการทำหน้าเว็บสำหรับนักท่องเที่ยวจีนโดยเฉพาะ เพื่อรองรับตลาดเชียงรายครับ",
     },
-    {
-      question: "ดูแลเว็บหลังทำเสร็จให้ไหม?",
-      answer:
-        "ดูแลให้ฟรี 3 เดือนแรกครับ สอนใช้งานจนเป็น หรือถ้าไม่ถนัด ผมมีแพ็กเกจดูแลรายเดือนราคาเป็นกันเองครับ",
-    },
-    {
-      question: "ใช้เวลาทำกี่วัน?",
-      answer:
-        "ถ้าข้อมูลพร้อม (รูป/เนื้อหา) ใช้เวลาประมาณ 7-10 วันสำหรับเว็บมาตรฐาน และ 15-20 วันสำหรับเว็บ E-commerce ครับ",
-    },
-    {
-      question: "ช่วยถ่ายรูปสินค้าให้ด้วยไหม?",
-      answer:
-        "ผมมีทีมช่างภาพสายคาเฟ่และสินค้าในเชียงรายแนะนำให้ได้ครับ เพื่อให้รูปออกมาดูดีที่สุดบนหน้าเว็บครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Local Authority)
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("มือถือ"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Specialty Coffee ยอมจ่ายแพงเพื่อ 'เรื่องราว' และ 'คุณภาพ' เว็บไซต์ที่เล่าเรื่องได้ดีจะเพิ่มมูลค่าสินค้าได้มหาศาล",
+      "ลูกค้ากลุ่ม Specialty Coffee และนักท่องเที่ยวเชียงราย ยอมจ่ายแพงเพื่อ 'เรื่องราว' และ 'คุณภาพ' เว็บไซต์ที่เล่าเรื่องได้ดีจะเพิ่มมูลค่าสินค้าได้มหาศาล",
     technicalApproach:
-      "เน้นระบบ Filter สินค้าที่ละเอียด (Process, Roast Level, Origin) เพื่อตอบโจทย์คอกาแฟตัวจริง",
+      "เน้นระบบการแสดงผลรูปภาพและข้อมูลที่คมชัด แต่ยังคงความเร็วในการโหลด (Performance) ตามมาตรฐาน Google",
     localStrength:
       "เข้าใจวัฒนธรรมกาแฟและศิลปะเชียงราย สามารถดึงจุดเด่นของแบรนด์ออกมานำเสนอได้อย่างมีรสนิยม",
     nicheIndustries: [
@@ -129,25 +115,24 @@ export const chiangRaiNode: AreaNode = {
       "วิสาหกิจชุมชนชาและสมุนไพร",
     ],
     painPoints: [
-      "กาแฟดีแต่เว็บไม่สวย ขายไม่ออก",
+      "สินค้าดีแต่เว็บไม่สวย ขายไม่ออก",
       "ตอบแชทลูกค้าต่างชาติไม่ทัน",
       "ลูกค้าหาไม่เจอใน Google Maps",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 62,
       localClient: "แบรนด์กาแฟและรีสอร์ตบนดอยช้าง",
     },
     regionalPricing: {
-      startPrice: "9,900 บาท",
-      timeline: "10-15 วัน",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference ตาม Template
+      timeline: "14-20 วัน",
     },
     localSuccessStory: {
       title: "Case Study: โรงคั่วแม่สรวย",
       result:
-        "ทำเว็บ E-commerce ขายเมล็ดกาแฟ ยอดขายออนไลน์โต 300% ลูกค้าประจำสมัคร Subscription เพียบ",
+        "ปรับปรุงเว็บไซต์ให้มีระบบสั่งซื้อออนไลน์ ยอดขายโต 300% และขยายฐานลูกค้าต่างชาติได้สำเร็จ",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ แม่สาย",

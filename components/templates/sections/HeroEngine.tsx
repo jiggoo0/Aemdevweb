@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v17.9.105 (ULTIMATE_HARDENED)
- * [STRATEGY]: Outcome-Driven | Persona Injected | Build-Stabilized
+ * [TEMPLATE COMPONENT]: HERO_ENGINE_SYSTEM v18.0.0 (ULTIMATE_PRODUCTION)
+ * [STRATEGY]: LCP Priority Rendering | GPU-Accelerated Transitions | Zero-CLS Layout
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -15,7 +15,6 @@ import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
 
-// --- 01. TYPE DEFINITIONS ---
 interface HeroEngineProps {
   readonly title?: React.ReactNode;
   readonly subtitle?: string;
@@ -42,12 +41,14 @@ const HeroEngine = ({
   const isCenter = align === "center";
 
   /**
-   * [PHYSICS]: Neural Ease Transition
-   * ออกแบบมาเพื่อสร้างจังหวะการเคลื่อนไหวที่นิ่งและทรงพลัง (Neural-Impulse)
+   * [PHYSICS]: Neural-Impulse Transition
+   * ออกแบบมาให้ทำงานบน GPU Layer (transform-gpu) เพื่อความนิ่งระดับสูงสุด
    */
   const transition: Transition = {
     duration: 0.8,
     ease: [0.16, 1, 0.3, 1],
+    // [FIX]: ป้องกันกระบวนการกระพริบระหว่างทำ Animation
+    type: "tween",
   };
 
   return (
@@ -59,17 +60,21 @@ const HeroEngine = ({
         className,
       )}
     >
-      {/* --- 00. INFRASTRUCTURE LAYER (Visual Identity) --- */}
+      {/* --- 00. INFRASTRUCTURE LAYER (LCP Stable Background) --- */}
       <div
-        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
-        style={{ backgroundImage: "url(/grid-pattern.svg)" }}
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] select-none"
+        style={{
+          backgroundImage: "url(/grid-pattern.svg)",
+          /* [FIX]: บังคับใช้ GPU เพื่อไม่ให้รบกวนการวาดของ Text Content */
+          willChange: "transform",
+        }}
         aria-hidden="true"
       />
 
-      {/* [DYNAMIC_AURA]: เชื่อมโยงสีแบรนด์ผ่าน CSS Variable (OKLCH Ready) */}
+      {/* [DYNAMIC_AURA]: ระบบ Ambient ที่ใช้ GPU Compositing */}
       <div
         className={cn(
-          "pointer-events-none absolute inset-0 z-0",
+          "pointer-events-none absolute inset-0 z-0 transform-gpu",
           isCenter
             ? "bg-[radial-gradient(circle_at_center,var(--brand-primary)_0%,transparent_60%)] opacity-10 blur-3xl"
             : "bg-[radial-gradient(circle_at_top_left,var(--brand-primary)_0%,transparent_50%)] opacity-15 blur-[100px]",
@@ -84,7 +89,7 @@ const HeroEngine = ({
             isCenter ? "mx-auto max-w-5xl items-center" : "max-w-7xl items-start",
           )}
         >
-          {/* NODE 01: SPECIALIST PROTOCOL INDICATOR */}
+          {/* NODE 01: PROTOCOL INDICATOR */}
           {showIndicator && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -99,20 +104,21 @@ const HeroEngine = ({
             </motion.div>
           )}
 
-          {/* NODE 02: MAIN MESSAGING MATRIX */}
+          {/* NODE 02: MAIN MESSAGING MATRIX (The LCP Hub) */}
           <div className="w-full space-y-8 md:space-y-12">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              /* [LCP_OPT]: มั่นใจว่า H1 จะเริ่มปรากฏทันที (Initial Opacity > 0) เพื่อไม่ให้ LCP Mark ล่าช้า */
+              initial={{ opacity: 0.2, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={transition}
-              className="text-text-primary text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
+              className="text-text-primary transform-gpu text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
             >
               {title}
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, x: isCenter ? 0 : -20, y: isCenter ? 20 : 0 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
+              initial={{ opacity: 0, x: isCenter ? 0 : -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ ...transition, delay: 0.2 }}
               className={cn(
                 "border-brand-primary/40",
@@ -127,7 +133,7 @@ const HeroEngine = ({
             </motion.div>
           </div>
 
-          {/* NODE 03: CONVERSION GATEWAY (CTA BLOCK) */}
+          {/* NODE 03: CONVERSION GATEWAY */}
           {(primaryActionLabel || secondaryActionLabel) && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -138,13 +144,12 @@ const HeroEngine = ({
                 isCenter ? "items-center justify-center" : "items-start",
               )}
             >
-              {/* PRIMARY ACTION: DIRECT CONVERSION */}
               {primaryActionLabel && primaryHref && (
                 <Button
                   asChild
                   size="lg"
                   variant="neo"
-                  className="shadow-glow-lg group h-16 w-full transform-gpu rounded-2xl px-10 text-[11px] font-black tracking-[0.2em] uppercase transition-all hover:scale-105 active:scale-95 md:w-auto"
+                  className="shadow-glow-lg group h-16 w-full transform-gpu rounded-2xl px-10 text-[11px] font-black tracking-[0.2em] uppercase transition-all hover:scale-[1.03] active:scale-95 md:w-auto"
                 >
                   <a href={primaryHref} target="_blank" rel="noopener noreferrer">
                     <IconRenderer
@@ -157,7 +162,6 @@ const HeroEngine = ({
                 </Button>
               )}
 
-              {/* SECONDARY ACTION: NAVIGATION/SOCIAL PROOF */}
               {secondaryActionLabel && secondaryHref && (
                 <Button
                   asChild
@@ -174,7 +178,7 @@ const HeroEngine = ({
       </div>
 
       {/* Decorative Bottom Baseline */}
-      <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent" />
+      <div className="via-border/30 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-40" />
     </section>
   );
 };

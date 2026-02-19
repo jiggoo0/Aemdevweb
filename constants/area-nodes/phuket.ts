@@ -1,49 +1,45 @@
 /**
- * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Hex Standard
+ * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Dynamic Inheritance
  * [MARKET]: Phuket, Laguna, Patong, Rawai (Luxury Real Estate & Hospitality)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
+import { hotelResortService } from "@/constants/services/hotel-resort";
 
 export const phuketNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phuket",
   province: "ภูเก็ต",
-  templateSlug: "hotelresort", // ใช้แม่แบบ Hotel & Resort เพื่อเน้นงาน Visual ระดับ High-end
+  templateSlug: "hotelresort", // เชื่อมโยงกับแม่แบบที่เน้นงาน Visual ระดับ High-end
 
   title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจสู่ระดับสากลด้วยเว็บไซต์ที่มอบประสบการณ์ระดับ Ultra-Luxury โหลดไวจากทั่วโลกด้วย Edge Computing และเปลี่ยนผู้ชมให้เป็นลูกค้ากำลังซื้อสูง",
 
   longDescription:
-    "ในตลาดที่มีการแข่งขันระดับโลกอย่างภูเก็ต เว็บไซต์ของคุณคือพนักงานต้อนรับคนแรกที่ลูกค้าจากยุโรป รัสเซีย หรือตะวันออกกลางจะได้สัมผัสครับ หากหน้าเว็บดูธรรมดาหรือโหลดช้า คุณอาจกำลังเสียโอกาสในดีลหลักล้านไปอย่างน่าเสียดาย " +
-    "นายเอ็มซ่ามากส์ พร้อมเนรมิตเว็บไซต์ที่ไม่ได้มีดีแค่ความสวยงาม แต่ต้องสะท้อนถึงเอกลักษณ์ชั้นสูงและมอบความสะดวกสบายที่ไร้รอยต่อ (Seamless Experience) " +
-    "เราเน้นการทำเว็บไซต์ที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจวิลล่าหรูหรือบริการระดับพรีเมียมของคุณครองอันดับหนึ่งบน Google Global",
+    "ในตลาดที่มีการแข่งขันระดับโลกอย่างภูเก็ต เว็บไซต์คือพนักงานต้อนรับคนแรกที่ลูกค้าจากยุโรป รัสเซีย หรือตะวันออกกลางจะได้สัมผัส " +
+    "นายเอ็มซ่ามากส์ พร้อมเนรมิตเว็บไซต์ที่สะท้อนถึงเอกลักษณ์ชั้นสูงและมอบความสะดวกสบายที่ไร้รอยต่อ (Seamless Experience) " +
+    "เราเน้นโครงสร้างที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจของคุณครองอันดับหนึ่งบน Google Global",
 
   // --- SEO Metadata ---
   seoTitle:
     "รับทำเว็บไซต์ ภูเก็ต ออกแบบเว็บวิลล่าหรู โรงแรม 5 ดาว ติดหน้าแรก Google Global - เอ็มซ่ามากส์",
   seoDescription:
-    "จ้างทำเว็บไซต์ภูเก็ต มาตรฐานสากล เน้นดีไซน์ Minimal Luxury สำหรับอสังหาริมทรัพย์และท่องเที่ยวพรีเมียม รองรับภาษาอังกฤษและรัสเซีย ติด SEO ระดับโลกเพื่อดึงดูดลูกค้ากำลังซื้อสูง",
+    "จ้างทำเว็บไซต์ภูเก็ต มาตรฐานสากล เน้นดีไซน์ Minimal Luxury สำหรับอสังหาริมทรัพย์และท่องเที่ยวพรีเมียม รองรับภาษาอังกฤษและรัสเซีย ติด SEO ระดับโลก",
 
-  // --- Visual & Theme (Midnight & Champagne Gold: Global Premium) ---
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก hotelResortService (Lanna Gold & Luxury Dark) เพื่อมาตรฐานพรีเมียมของระบบ
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phuket-node.webp",
-  theme: {
-    mode: "dark",
-    primary: "#d4af37", // Champagne Gold (ทองแชมเปญ)
-    secondary: "#1e293b", // Midnight Blue
-    background: "#020617", // Rich Navy Black
-    foreground: "#f8fafc", // Ivory White
-    accent: "#f59e0b", // Amber 500
-    gradient: "from-[#d4af37]/10 via-transparent to-transparent",
-    radius: "2px", // ความมนเล็กน้อยให้ความรู้สึกคมชัดแบบโมเดิร์น
-  },
-
-  // --- Pricing Strategy (Global Standard) ---
-  price: "25,000",
-  priceValue: 25000,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
 
   // --- Trust Signals ---
   clientTrust:
@@ -51,78 +47,62 @@ export const phuketNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Global Speed Performance: ใช้เทคโนโลยี Edge Computing เพื่อให้ลูกค้าจากลอนดอน มอสโก หรือดูไบ เปิดเว็บไซต์ของคุณได้รวดเร็วเหมือนอยู่ข้างบ้าน",
-    "Prestige Branding: งานดีไซน์ที่คัดสรรมาเพื่อดึงดูดลูกค้าเกรด Ultra-High-Net-Worth (UHNW) โดยเฉพาะ เน้นความเรียบหรูและน่าเชื่อถือในระดับสากล",
-    "Direct Booking Maximization: ระบบที่ช่วยเพิ่มยอดจองตรงโดยไม่ผ่านเอเย่นต์ ช่วยให้คุณรักษาผลกำไรได้เต็มเม็ดเต็มหน่วยและครอบครองข้อมูลลูกค้าไว้เอง",
+    "Global Speed Performance: ใช้เทคโนโลยี Edge Computing (CDN) เพื่อให้ลูกค้าจากลอนดอน มอสโก หรือดูไบ เปิดเว็บคุณได้รวดเร็วระดับมิลลิวินาที",
+    "Prestige Branding: งานดีไซน์ระดับ Ultra-High-Net-Worth (UHNW) เน้นความเรียบหรูและน่าเชื่อถือในระดับสากลเพื่อปิดดีลมูลค่าสูง",
+    "Direct Booking Maximization: ระบบที่ช่วยเพิ่มยอดจองตรงโดยไม่ผ่านเอเย่นต์ ช่วยรักษาผลกำไรได้เต็มเม็ดเต็มหน่วย",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Global Luxury Specific) ---
   coreFeatures: [
     {
-      title: "Immersive Visual Gallery",
+      title: "Immersive Visuals",
       description:
-        "ระบบเรนเดอร์ภาพและวิดีโอความละเอียดสูงที่ลื่นไหล เพื่อโชว์บรรยากาศที่พักหรือบริการให้สมจริงและน่าหลงใหลที่สุด",
+        "ระบบเรนเดอร์ภาพและวิดีโอความละเอียดสูงที่ลื่นไหล เพื่อโชว์บรรยากาศที่พักให้สมจริงที่สุด",
       icon: "Camera",
     },
     {
       title: "Multi-Language & Currency",
       description:
-        "รองรับการแสดงผลหลายภาษาและการแปลงค่าเงินแบบ Real-time เพื่ออำนวยความสะดวกแก่ลูกค้าจากทั่วทุกมุมโลก",
+        "รองรับการแสดงผลหลายภาษาและการแปลงค่าเงินแบบ Real-time อำนวยความสะดวกลูกค้าทั่วโลก",
       icon: "Globe",
     },
     {
       title: "Advanced Global SEO",
       description:
-        "วางรากฐานการค้นหาภาษาอังกฤษและภาษาเป้าหมายอื่นๆ เพื่อดักจับ Traffic คุณภาพจากกลุ่มเป้าหมายในต่างประเทศ",
+        "วางรากฐานการค้นหาภาษาอังกฤษ รัสเซีย และจีน เพื่อดักจับ Traffic คุณภาพจากต่างประเทศ",
       icon: "TrendingUp",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
-      question: "ทำไมราคาทำเว็บไซต์ในภูเก็ตถึงสูงกว่าฟรีแลนซ์ทั่วไป?",
+      question: "ทำไมตลาดภูเก็ตต้องการเทคนิคที่ต่างจากจังหวัดอื่น?",
       answer:
-        "เพราะตลาดภูเก็ตคือตลาดระดับโลกครับ เราไม่ได้แค่ทำเว็บให้สวย แต่เราวางโครงสร้างเชิงวิศวกรรมที่รองรับผู้เข้าชมจากต่างประเทศ (Global Traffic) และระบบความปลอดภัยขั้นสูง ซึ่งคุ้มค่ากว่ามากเมื่อเทียบกับมูลค่าดีลอสังหาฯ หรือที่พักระดับพรีเมียมของคุณครับ",
+        "เพราะต้องรองรับ Global Traffic ครับ เราใช้ระบบ Cloud และ CDN กระจายข้อมูลไปทั่วโลก เพื่อให้ลูกค้าจากยุโรปเปิดเว็บคุณได้ไวเท่ากับคนในไทยครับ",
     },
     {
-      question: "ลูกค้าต่างชาติจะเปิดเว็บได้ไวไหม ถ้าเซิร์ฟเวอร์อยู่ในไทย?",
+      question: "รองรับการเชื่อมต่อกับระบบ Property Management (PMS) ไหม?",
       answer:
-        "ไม่ต้องกังวลครับ ผมใช้ระบบ Cloud ระดับโลกและ Content Delivery Network (CDN) กระจายข้อมูลไปทั่วโลก ลูกค้าจากยุโรปหรือรัสเซียจะเปิดเว็บคุณได้ไวเท่ากับคนในไทยแน่นอนครับ",
+        "รองรับครับ เราสามารถเขียน API เชื่อมต่อกับระบบจัดการโรงแรมชั้นนำ เพื่อให้สต็อกห้องพักและราคาอัปเดตตรงกันอัตโนมัติครับ",
     },
     {
       question: "ช่วยดูแลเรื่องการเขียนคำโฆษณาภาษาอังกฤษด้วยไหม?",
       answer:
-        "ในแพ็กเกจพรีเมียม ผมทำงานร่วมกับ Copywriter มืออาชีพที่เชี่ยวชาญตลาด Luxury เพื่อเกลาเนื้อหาภาษาอังกฤษให้ดูแพงและโน้มน้าวใจลูกค้าต่างชาติได้จริงครับ",
+        "เรามีทีมงานและพาร์ทเนอร์ Copywriter ที่เชี่ยวชาญตลาด Luxury เพื่อเกลาเนื้อหาให้ดูแพงและโน้มน้าวใจลูกค้าต่างชาติได้จริงครับ",
     },
-    {
-      question: "รองรับการทำ SEO ในตลาดรัสเซียหรือจีนไหม?",
-      answer:
-        "รองรับครับ เราเข้าใจอัลกอริทึมการค้นหาที่แตกต่างกันในแต่ละภูมิภาค และสามารถวางโครงสร้าง Metadata ให้ตอบโจทย์เครื่องมือค้นหาในตลาดนั้นๆ ได้โดยเฉพาะครับ",
-    },
-    {
-      question: "สามารถนัดคุยงานที่ลากูน่าหรือเชิงทะเลได้ไหม?",
-      answer:
-        "ยินดีมากครับ ผมพร้อมเดินทางเข้าไปพบเพื่อรับโจทย์และดูบรรยากาศโครงการจริงในเขตภูเก็ต เพื่อให้นำเสนอจุดเด่นของธุรกิจออกมาได้แม่นยำที่สุดครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับการเชื่อมต่อกับระบบ Property Management (PMS) ไหม?",
-      answer:
-        "รองรับครับ เราสามารถเขียน API เชื่อมต่อกับระบบจัดการโรงแรมหรือวิลล่าชั้นนำ เพื่อให้สต็อกห้องพักและราคาอัปเดตตรงกันโดยอัตโนมัติครับ",
-    },
-    {
-      question: "หลังทำเสร็จ มีบริการดูแลต่อเนื่องอย่างไร?",
-      answer:
-        "เรามีประกันดูแลระบบฟรี 6 เดือนครับ และมีบริการ Maintenance รายปีที่ครอบคลุมการอัปเดตความปลอดภัย และการปรับจูนความเร็วให้คงที่ตลอดเวลาครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...hotelResortService.faqs.filter(
+      (f) => f.question.includes("ตัดบัตรเครดิต") || f.question.includes("คุ้มค่า"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Luxury ในภูเก็ตตัดสินใจด้วย 'อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ยถึง 3 เท่า",
+      "ลูกค้ากลุ่ม Luxury ในภูเก็ตตัดสินใจด้วย 'อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ย 3 เท่า",
     technicalApproach:
-      "เน้นสถาปัตยกรรมแบบ Edge Computing และการทำ Image Optimization ขั้นสูงเพื่อรองรับ Global Traffic และความเร็วระดับมิลลิวินาที",
+      "เน้นสถาปัตยกรรมแบบ Edge Computing และการทำ Image Optimization ขั้นสูงเพื่อรองรับความเร็วระดับโลก",
     localStrength:
       "เข้าใจรสนิยมแบบ World-class และความต้องการของกลุ่มพรีเมียม พร้อมเป็นที่ปรึกษาในการปั้นแบรนด์ให้ดู 'แพง' ในระดับสากล",
     nicheIndustries: [
@@ -137,20 +117,19 @@ export const phuketNode: AreaNode = {
       "การทำ SEO ภาษาอังกฤษที่ไม่เห็นผลในตลาดต่างประเทศ",
     ],
     competitorLevel: "high",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 215,
       localClient: "กลุ่มวิลล่าหรูระดับ Ultra-Luxury ย่านเชิงทะเล",
     },
     regionalPricing: {
-      startPrice: "25,000 บาท",
+      startPrice: `${hotelResortService.price} บาท`, // Dynamic Reference
       timeline: "21-45 วัน",
     },
     localSuccessStory: {
       title: "Case Study: พูลวิลล่าหรูเชิงทะเล",
       result:
-        "เพิ่มยอดจองตรง (Direct Booking) จากกลุ่มลูกค้ายุโรปได้มากกว่า 400% ภายใน 1 ฤดูกาลท่องเที่ยวหลังปรับปรุงเว็บไซต์",
+        "เพิ่มยอดจองตรง (Direct Booking) จากกลุ่มลูกค้ายุโรปได้มากกว่า 400% ภายใน 1 ฤดูกาลท่องเที่ยว",
     },
     hyperLocalKeywords: [
       "Phuket Luxury Web Design",
@@ -162,7 +141,7 @@ export const phuketNode: AreaNode = {
 
   // --- System Metadata ---
   priority: 97,
-  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล"],
+  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล", "กะทู้"],
   keywords: [
     "รับทำเว็บไซต์ ภูเก็ต",
     "Phuket Web Design",

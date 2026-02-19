@@ -1,8 +1,11 @@
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.1 (UNIVERSAL_SYNC)
  * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT (Single Source of Truth)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  * [FRAMEWORK]: Next.js 16.1.6 | React 19 | Tailwind CSS 4.0
+ * [CHANGELOG]: 
+ * - Integrated LinkedIn Professional Profile (alongkorl-aemdevweb).
+ * - Synchronized Link Registry for Schema Injection.
  */
 
 import type { SiteConfig } from "@/types";
@@ -60,8 +63,8 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
-    version: "18.0.0",
-    framework: "Next.js 16.1.6 (App Router)", // [STABILIZED]: Sync กับระบบหลัก
+    version: "18.0.1",
+    framework: "Next.js 16.1.6 (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
@@ -81,6 +84,7 @@ export const SITE_CONFIG: SiteConfig = {
     bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO ที่เน้นการสร้างผลลัพธ์ทางธุรกิจผ่านโครงสร้างพื้นฐานดิจิทัลที่แม่นยำและล้ำสมัย",
     googleMerchantId: "8653147979146207424",
     twitterHandle: "@aemdevweb",
+    linkedinUrl: "https://th.linkedin.com/in/alongkorl-aemdevweb",
   },
 
   contact: {
@@ -94,21 +98,22 @@ export const SITE_CONFIG: SiteConfig = {
     mapUrl: GOOGLE_MAPS_URL,
   },
 
+  /**
+   * [LINK_REGISTRY]: แหล่งรวม Social Graph ทั้งหมด
+   */
   links: {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
     messenger: "https://m.me/aemdevweb",
     facebook: "https://www.facebook.com/share/18HFcziyn7/",
     github: "https://github.com/aemdevweb",
+    linkedin: "https://th.linkedin.com/in/alongkorl-aemdevweb", // [ADDED]: เพื่อแก้ Error Runtime และสร้าง Author Graph
     twitter: "https://x.com/aemdevweb",
     youtube: "https://youtube.com/@aemdevweb",
     googleMaps: GOOGLE_MAPS_URL,
     googleReview: "https://search.google.com/local/writereview?placeid=ChIJ0S9uG79lHTERERERERERERE",
   },
 
-  /**
-   * [BUSINESS_METRICS]: ข้อมูลบริบทสำหรับการทำ Local SEO (NAP)
-   */
   business: {
     location: "กำแพงเพชร",
     region: "Northern Thailand",

@@ -1,5 +1,3 @@
-AEMDEVWEB ARCHITECTURE SNAPSHOT - Thu Feb 19 02:31:01 +07 2026
-================================================
 .
 ├── app
 │   ├── (business)
@@ -144,7 +142,6 @@ AEMDEVWEB ARCHITECTURE SNAPSHOT - Thu Feb 19 02:31:01 +07 2026
 │   │   │   │   ├── PerformanceTrajectory.tsx
 │   │   │   │   └── StrategyBlueprint.tsx
 │   │   │   └── Index.tsx
-│   │   ├── DynamicThemeWrapper.tsx
 │   │   └── TemplateRenderer.tsx
 │   └── ui
 │       ├── Accordion.tsx
@@ -294,13 +291,15 @@ AEMDEVWEB ARCHITECTURE SNAPSHOT - Thu Feb 19 02:31:01 +07 2026
 │   ├── grid-pattern.svg
 │   └── logo-icon.svg
 ├── scripts
-│   ├── audit-system.sh
+│   ├── asset-integrity-protocol.mjs
 │   ├── gen-blur-data.mjs
 │   ├── generate_docs.sh
-│   ├── image-audit.mjs
 │   ├── index-urls.js
-│   ├── master_audit.py
+│   ├── integrity-enforcer.py
 │   ├── seo-monitor.py
+│   ├── seo-structure-audit.mjs
+│   ├── system-integrity-gatekeeper.sh
+│   ├── template-audit.mjs
 │   └── test-schema.ts
 ├── types
 │   ├── index.d.ts
@@ -325,4 +324,4 @@ AEMDEVWEB ARCHITECTURE SNAPSHOT - Thu Feb 19 02:31:01 +07 2026
 ├── tsconfig.json
 └── tsconfig.tsbuildinfo
 
-64 directories, 260 files
+64 directories, 261 files

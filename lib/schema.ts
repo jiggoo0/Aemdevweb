@@ -1,6 +1,6 @@
 /**
- * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.5 (STABILIZED_FINAL)
- * [STRATEGY]: Schema-DTS Strict | Rich Results Patch | Zero-Any Compliance
+ * [SEO ENGINE]: MASTER_SCHEMA_ORCHESTRATOR v18.1.6 (PRODUCTION_MAXIMIZED)
+ * [STRATEGY]: Schema-DTS Strict | E-E-A-T Knowledge Graph | Zero-Crash Execution
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -25,10 +25,6 @@ import type {
 // [01] INFRASTRUCTURE HELPERS (SSOT)
 // =========================================
 
-/**
- * [HELPER]: absoluteUrl
- * @description แปลง Path ให้เป็น Absolute URL ตามมาตรฐาน Search Engine เพื่อป้องกันความสับสนของ Bot
- */
 const absoluteUrl = (path: string | undefined): string => {
   if (!path) return `${SITE_CONFIG.siteUrl}/images/og-main.webp`;
   if (path.startsWith("http")) return path;
@@ -42,6 +38,7 @@ const absoluteUrl = (path: string | undefined): string => {
 
 const sharedAddress: PostalAddress = {
   "@type": "PostalAddress",
+  "@id": absoluteUrl("/#address"),
   streetAddress: SITE_CONFIG.contact.streetAddress || SITE_CONFIG.contact.address,
   addressLocality: SITE_CONFIG.business.location,
   addressRegion: SITE_CONFIG.business.region,
@@ -60,6 +57,14 @@ const organizationNode: Organization = {
     url: absoluteUrl(SITE_CONFIG.logo),
   } as ImageObject,
   address: sharedAddress,
+  /** [DEEP_LINKING]: เชื่อมโยงตัวตนบนโซเชียลเพื่อ E-E-A-T */
+  sameAs: [
+    SITE_CONFIG.links.facebook,
+    SITE_CONFIG.links.github,
+    SITE_CONFIG.links.linkedin,
+    SITE_CONFIG.links.twitter,
+    SITE_CONFIG.links.youtube,
+  ].filter(Boolean) as string[],
 };
 
 const personNode: Person = {
@@ -68,19 +73,22 @@ const personNode: Person = {
   name: SITE_CONFIG.expert.legalNameThai,
   jobTitle: SITE_CONFIG.expert.jobTitle,
   image: absoluteUrl(SITE_CONFIG.expert.avatar),
-  url: absoluteUrl("/about"),
+  url: absoluteUrl("/about"), // หรือตาม bioUrl
   worksFor: { "@id": absoluteUrl("/#organization") },
   description: SITE_CONFIG.expert.bio,
+  sameAs: [
+    SITE_CONFIG.links.linkedin,
+    SITE_CONFIG.links.twitter,
+    SITE_CONFIG.links.github,
+  ].filter(Boolean) as string[],
 };
 
 // =========================================
-// [03] SCHEMA GENERATORS (FIXED_NODES)
+// [03] SCHEMA GENERATORS
 // =========================================
 
-/** [RESTORED]: generatePersonSchema */
 export const generatePersonSchema = (): Person => personNode;
 
-/** [RESTORED]: generateBreadcrumbSchema */
 export const generateBreadcrumbSchema = (
   items: { name: string; item: string }[],
 ): BreadcrumbList => ({
@@ -93,9 +101,6 @@ export const generateBreadcrumbSchema = (
   })),
 });
 
-/** * [MASTER]: generateSchemaGraph
- * @description รวบรวม Node ทั้งหมดเข้าสู่ระบบ Graph เพื่อสร้างความเชื่อมโยงของข้อมูลระดับ Enterprise
- */
 export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
   "@context": "https://schema.org",
   "@graph": [
@@ -112,9 +117,6 @@ export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
   ],
 });
 
-/** * [MASTER]: generateUniversalSchema
- * @description จัดการข้อมูล Schema สำหรับบริการหลัก แก้ไขปัญหา Missing Fields จากการ Audit
- */
 export function generateUniversalSchema(
   data: UniversalTemplateProps | TemplateMasterData,
 ): ProfessionalService | Product {
@@ -123,27 +125,25 @@ export function generateUniversalSchema(
   const slug = data.templateSlug || idValue;
   const canonicalUrl = absoluteUrl(`/services/${slug}`);
 
-  // [BASE_BLUEPRINT]: ฟิลด์พื้นฐานที่ทุก Node ต้องมี
   const base = {
-    name: data.title || SITE_CONFIG.brandName, // [FIX]: ป้องกันชื่อว่าง
+    name: data.title || SITE_CONFIG.brandName,
     description: data.description,
     image: absoluteUrl(data.image || SITE_CONFIG.ogImage),
     url: canonicalUrl,
   };
 
   if (isProduct) {
-    const offer: Offer = {
-      "@type": "Offer",
-      price: data.priceValue?.toString(),
-      priceCurrency: "THB",
-      availability: "https://schema.org/InStock",
-      seller: { "@id": absoluteUrl("/#organization") },
-    };
     return {
       "@type": "Product",
       "@id": `${canonicalUrl}/#product`,
       ...base,
-      offers: offer,
+      offers: {
+        "@type": "Offer",
+        price: data.priceValue?.toString(),
+        priceCurrency: "THB",
+        availability: "https://schema.org/InStock",
+        seller: { "@id": absoluteUrl("/#organization") },
+      } as Offer,
       brand: { "@id": absoluteUrl("/#organization") },
     } as Product;
   }
@@ -153,40 +153,33 @@ export function generateUniversalSchema(
     "@id": `${canonicalUrl}/#service`,
     ...base,
     address: sharedAddress,
-    telephone: SITE_CONFIG.contact.phone, // [FIX]: ฉีดเบอร์โทรศัพท์ (099-032-2175)
-    priceRange: SITE_CONFIG.business.priceRange, // [FIX]: ฉีดช่วงราคา (฿฿฿)
+    telephone: SITE_CONFIG.contact.phone,
+    priceRange: SITE_CONFIG.business.priceRange,
     provider: { "@id": absoluteUrl("/#organization") },
   } as ProfessionalService;
 }
 
-/** * [MASTER]: generateLocalBusinessSchema
- * @description ปรับปรุงฟิลด์บังคับเพื่อแก้ปัญหา Rich Results Test Error ในหน้า Local Area Node (จังหวัด)
- */
 export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService {
   const url = absoluteUrl(`/areas/${data.slug}`);
 
   return {
     "@type": "ProfessionalService",
     "@id": `${url}/#localbusiness`,
-
-    /* [CRITICAL_FIX]: บังคับฉีดฟิลด์ที่ Google Rich Results ตรวจพบว่าขาดหาย */
     name: data.title || `${SITE_CONFIG.brandName} - ${data.province}`,
-    telephone: SITE_CONFIG.contact.phone, // แก้ปัญหา Missing "telephone"
-    priceRange: SITE_CONFIG.business.priceRange, // แก้ปัญหา Missing "priceRange"
-
+    telephone: SITE_CONFIG.contact.phone,
+    priceRange: SITE_CONFIG.business.priceRange,
     url: url,
     image: absoluteUrl(data.heroImage || SITE_CONFIG.ogImage),
     description: data.description,
     address: {
       "@type": "PostalAddress",
+      "@id": `${url}/#localaddress`,
       addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
       postalCode: SITE_CONFIG.contact.postalCode,
     } as PostalAddress,
     parentOrganization: { "@id": absoluteUrl("/#organization") },
-
-    // [LOCAL_SIGNAL]: พิกัดภูมิศาสตร์เพื่อความแม่นยำบนแผนที่
     ...(data.coordinates && {
       geo: {
         "@type": "GeoCoordinates",
