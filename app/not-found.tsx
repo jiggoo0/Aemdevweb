@@ -4,10 +4,7 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import Link from "next/link";
-import IconRenderer from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
 import { connection } from "next/server"; // ✅ เพิ่มการนำเข้า connection
 
 /**

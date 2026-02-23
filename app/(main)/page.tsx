@@ -1,7 +1,6 @@
 /**
- * [CORE PAGE]: HOMEPAGE v18.1.5 (PRODUCTION_MAXIMIZED)
- * [STRATEGY]: Static-First Rendering | Zero-CLS Hydration | Advanced Schema Graph
- * [UPDATED]: 2026-02-19
+ * [CORE PAGE]: HOMEPAGE v18.2.0 (OPTIMIZED_REFACTOR)
+ * [STRATEGY]: Static-First | Zero-CLS | Schema-Synchronized
  */
 
 import React, { Suspense } from "react";
@@ -9,23 +8,18 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-// --- 1. Infrastructure & Core Constants ---
+// --- Infrastructure ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { getFeaturedServices } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-
-// --- 2. Data Access Layer ---
 import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
-import type { BlogPost, CaseStudy } from "@/types";
-
-// --- 3. SEO & Technical Schema ---
 import { generateSchemaGraph } from "@/lib/schema";
 import { constructMetadata } from "@/lib/seo-utils";
+
+// --- UI Components ---
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
-
-// --- 4. Critical UI (Synchronous for LCP) ---
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import TrustBadge from "@/components/shared/TrustBadge";
 import ImpactStats from "@/components/shared/ImpactStats";
@@ -34,20 +28,18 @@ import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
 
-// [ISR]: Optimal revalidation cycle (Refactored to lib/cms.ts)
-
-// --- 5. Deferred UI (Dynamic Imports for TBT Optimization) ---
-const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (
-  <div className={cn("bg-surface-card/30 border-border/10 animate-pulse rounded-[2.5rem] border", height, className)} />
+// --- Deferred UI (Hydration Optimization) ---
+const Skeleton = ({ className }: { className?: string }) => (
+  <div className={cn("bg-surface-card/30 border-border/10 animate-pulse rounded-[2.5rem] border overflow-hidden", className)} />
 );
 
 const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
-  loading: () => <LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />,
+  loading: () => <Skeleton className="mx-auto max-w-7xl h-[500px]" />,
   ssr: true, 
 });
 
 const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"), {
-  loading: () => <LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />,
+  loading: () => <Skeleton className="mx-auto max-w-7xl h-[650px]" />,
   ssr: true,
 });
 
@@ -61,24 +53,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  /** [PERFORMANCE]: Parallel Prefetching with Fail-Safe Fallbacks */
+  // 1. Parallel Data Fetching with Integrated Slicing (ลดการประมวลผลซ้ำใน UI)
   const [caseStudies, blogPosts] = await Promise.all([
-    getAllCaseStudies().catch((err) => {
-      console.error("Critical: CaseStudies Fetch Failed", err);
-      return [] as CaseStudy[];
-    }),
-    getAllPosts().catch((err) => {
-      console.error("Critical: BlogPosts Fetch Failed", err);
-      return [] as BlogPost[];
-    }),
+    getAllCaseStudies().then(res => res.slice(0, 2)).catch(() => []),
+    getAllPosts().then(res => res.slice(0, 3)).catch(() => []),
   ]);
 
   const featuredServices = getFeaturedServices().slice(0, 3);
-  const recentCases = caseStudies.slice(0, 2);
-  const recentPosts = blogPosts.slice(0, 3);
   const featuredAreas = AREA_NODES.filter((n) => (n.priority ?? 0) >= 95).slice(0, 4);
 
-  /** [SEO]: Deep Schema Integration for Knowledge Graph */
+  // 2. Specialized Schema Graph Generation
   const homeSchema = generateSchemaGraph([
     {
       "@type": "WebSite",
@@ -93,15 +77,11 @@ export default async function HomePage() {
       name: SITE_CONFIG.brandName,
       url: SITE_CONFIG.siteUrl,
       logo: { "@type": "ImageObject", url: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.logo}` },
-      sameAs: [
-        SITE_CONFIG.links.facebook,
-        SITE_CONFIG.links.github,
-        SITE_CONFIG.links.linkedin,
-        SITE_CONFIG.links.youtube,
-      ].filter(Boolean) as string[],
+      sameAs: Object.values(SITE_CONFIG.links).filter(Boolean) as string[],
     },
     {
       "@type": "ItemList",
+      "name": "Featured Core Services",
       "itemListElement": featuredServices.map((s, i) => ({
         "@type": "ListItem",
         "position": i + 1,
@@ -115,24 +95,22 @@ export default async function HomePage() {
     <main className="bg-surface-main flex w-full flex-col overflow-hidden">
       <JsonLd data={homeSchema} />
 
-      {/* 01. HERO GATEWAY: Pure Performance LCP */}
-      <HeroEngine align="center" showIndicator={true} priority={true} />
+      <HeroEngine align="center" showIndicator priority />
 
-      {/* 02. AUTHORITY HUB: Micro-interaction ready */}
+      {/* AUTHORITY HUB */}
       <section className="relative z-20 -mt-16 px-4 md:-mt-24 lg:-mt-32">
         <div className="mx-auto max-w-7xl">
           <div className="glass-card shadow-pro-xl relative overflow-hidden rounded-[2.5rem] border border-white/5 p-8 md:p-16">
-            <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
+            <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16 text-center">
               <TrustBadge />
-              <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-border/30 to-transparent" />
               <ImpactStats />
             </div>
-            <div className="bg-brand-primary/10 pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full blur-[120px]" />
           </div>
         </div>
       </section>
 
-      {/* 03. SOLUTIONS: Content First Rendering */}
+      {/* SOLUTIONS SECTION */}
       <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-4">
           <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -155,58 +133,52 @@ export default async function HomePage() {
           
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((service, i) => (
-              <ServiceCard key={service.id} data={service} index={i} />
+              <ServiceCard key={service.id || i} data={service} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 04. PROCESS: Dynamic Hydration Section */}
+      {/* DYNAMIC SECTIONS */}
       <section className="bg-surface-offset border-border/40 border-y py-24">
-        <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
+        <Suspense fallback={<Skeleton className="mx-auto max-w-7xl h-[500px]" />}>
           <WorkProcess />
         </Suspense>
       </section>
 
-      {/* 05. SUCCESS EVIDENCE: High Authority Evidence */}
+      {/* SUCCESS EVIDENCE */}
       <section id="success" className="py-24 md:py-32">
         <div className="container mx-auto px-4">
-          <header className="mb-16">
-            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-6xl">
-              Success <span className="text-text-secondary/30">Nodes.</span>
-            </h2>
-          </header>
+          <h2 className="text-text-primary mb-16 text-5xl font-black tracking-tighter uppercase italic md:text-6xl">
+            Success <span className="text-text-secondary/30">Nodes.</span>
+          </h2>
           <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
-            {recentCases.map((item, i) => (
+            {caseStudies.map((item, i) => (
               <CaseStudyCard key={item.slug} data={item} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 06. TECHNICAL INSIGHTS: SEO Context Injection */}
+      {/* TECHNICAL INSIGHTS */}
       <section className="bg-surface-main border-border/40 border-t py-24 md:py-32">
         <div className="container mx-auto px-4">
-          <div className="mb-16 flex items-center justify-between">
-            <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-              Technical <span className="text-brand-primary">Insights.</span>
-            </h2>
-          </div>
+          <h2 className="text-text-primary mb-16 text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+            Technical <span className="text-brand-primary">Insights.</span>
+          </h2>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {recentPosts.map((post, i) => (
+            {blogPosts.map((post, i) => (
               <BlogCard key={post.slug} post={post} index={i} priority={false} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 07. CONVERSION & GEOGRAPHIC DISTANCE */}
+      {/* GEOGRAPHIC & CONVERSION */}
       <div className="bg-surface-offset">
-        <section className="pb-24">
-          <Suspense fallback={<LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />}>
-            <PricingSection />
-          </Suspense>
-        </section>
+        <Suspense fallback={<Skeleton className="mx-auto max-w-7xl h-[650px]" />}>
+          <PricingSection />
+        </Suspense>
 
         <section className="border-border/60 border-t py-16">
           <div className="container mx-auto px-4">

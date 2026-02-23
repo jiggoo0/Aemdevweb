@@ -21,7 +21,7 @@ import { AuditReportGenerator } from "./_components/AuditReportGenerator";
 import { PerformanceTrajectory } from "./_components/PerformanceTrajectory";
 import { StrategyBlueprint } from "./_components/StrategyBlueprint";
 import { KeywordRegistry } from "./_components/KeywordRegistry";
-import { ConversionPortal } from "./_components/ConversionPortal";
+import { ConsultGateway } from "./_components/ConsultGateway";
 
 // --- 2. Shared Sections ---
 import { DynamicFAQ } from "../sections/DynamicFAQ";
@@ -74,7 +74,7 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
         </div>
 
         {/* Phase 07: Conversion Gateway */}
-        <ConversionPortal />
+        <ConsultGateway />
 
         {/* SYSTEM FOOTER */}
         <footer className="border-border/5 border-t py-12 text-center opacity-20">
