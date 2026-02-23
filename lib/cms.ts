@@ -6,7 +6,6 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { cacheLife } from "next/cache";
 import type { BlogPost, CaseStudy } from "@/types";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { AREA_NODES } from "@/constants/area-nodes";
@@ -73,9 +72,6 @@ const mapToCaseStudy = (slug: string, content: string, data: MDXAttributes): Cas
 // --- [02] RETRIEVAL ENGINES ---
 
 export async function getAllPosts(): Promise<BlogPost[]> {
-  "use cache";
-  cacheLife("hours");
-
   if (!fs.existsSync(BLOG_DIR)) return [];
   const fileNames = fs.readdirSync(BLOG_DIR);
 
@@ -92,9 +88,6 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 }
 
 export async function getAllCaseStudies(): Promise<CaseStudy[]> {
-  "use cache";
-  cacheLife("hours");
-
   if (!fs.existsSync(CASE_DIR)) return [];
   const fileNames = fs.readdirSync(CASE_DIR);
 
@@ -112,9 +105,6 @@ export async function getAllCaseStudies(): Promise<CaseStudy[]> {
 // --- [03] SPECIFIC LOOKUPS ---
 
 export async function getPostBySlug(slug: string): Promise<BlogPost | undefined> {
-  "use cache";
-  cacheLife("hours");
-
   const fullPath = path.join(BLOG_DIR, `${slug}.mdx`);
   if (!fs.existsSync(fullPath)) return undefined;
 
@@ -128,9 +118,6 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | undefined>
 }
 
 export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | undefined> {
-  "use cache";
-  cacheLife("hours");
-
   const fullPath = path.join(CASE_DIR, `${slug}.mdx`);
   if (!fs.existsSync(fullPath)) return undefined;
 
@@ -146,19 +133,9 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | unde
 // --- [04] STATIC LOOKUPS ---
 
 export async function getAllServices() {
-  "use cache";
-  cacheLife("hours");
   return MASTER_REGISTRY;
 }
 
 export async function getAreaBySlug(slug: string) {
-  "use cache";
-  cacheLife("hours");
   return AREA_NODES.find((a) => a.slug === slug);
-}
-
-export async function getAllAreas() {
-  "use cache";
-  cacheLife("hours");
-  return AREA_NODES;
 }

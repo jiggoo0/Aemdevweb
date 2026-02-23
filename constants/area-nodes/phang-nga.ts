@@ -12,6 +12,7 @@ export const phangNgaNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phang-nga",
   province: "พังงา",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์พังงา | Smart Marine Governance & Sustainable Tourism Hub",
@@ -35,6 +36,30 @@ export const phangNgaNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 62,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Marine Entity Analysis",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลด้านความปลอดภัยทางทะเลและการท่องเที่ยวเชิงนิเวศเพื่อให้สอดคล้องกับการค้นหา",
+    },
+    {
+      step: "02",
+      title: "Premium UX Deployment",
+      description:
+        "ออกแบบหน้าเว็บไซต์ที่สะท้อนถึงความหรูหราและความสงบ (Luxury Quiet) ตามภาพลักษณ์ของจังหวัดพังงา",
+    },
+    {
+      step: "03",
+      title: "Global Visibility Sync",
+      description:
+        "เชื่อมโยงข้อมูลสู่แพลตฟอร์มระดับสากลและทำ Schema Markup เพื่อดักจับกลุ่มนักท่องเที่ยวคุณภาพสูง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phang-nga.webp",

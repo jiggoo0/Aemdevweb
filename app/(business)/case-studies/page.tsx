@@ -22,7 +22,8 @@ import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-/** [STRATEGY]: บังคับ Static Generation พร้อม Revalidate ทุก 1 ชั่วโมง (Refactored to lib/cms.ts) */
+/** [STRATEGY]: บังคับ Static Generation พร้อม Revalidate ทุก 1 ชั่วโมง (ISR) */
+export const revalidate = 3600;
 
 /** [VIEWPORT]: Mobile-First Theme Integration */
 export const viewport: Viewport = {
@@ -112,7 +113,7 @@ export default async function CaseStudiesPage() {
               </div>
             ) : (
               /* [EMPTY_STATE]: Technical Terminal Style */
-              <div className="border-border/40 bg-surface-card/20 flex flex-col items-center justify-center rounded-[3.5rem] border border-dashed py-40 text-center backdrop-blur-md">
+              <div className="border-border/40 bg-surface-card/20 rounded-card-xl flex flex-col items-center justify-center border border-dashed py-40 text-center backdrop-blur-md">
                 <div className="bg-brand-primary/10 mb-6 flex h-16 w-16 animate-pulse items-center justify-center rounded-full">
                   <div className="bg-brand-primary h-3 w-3 rounded-full" />
                 </div>

@@ -24,10 +24,10 @@ import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
 import "./globals.css";
 
 // [FONT_ORCHESTRATION]: Optimized for Thai/Latin Glyph Balancing
-const fontSans = Inter({ 
-  subsets: ["latin"], 
-  variable: "--font-sans", 
-  display: "swap" 
+const fontSans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
@@ -40,17 +40,17 @@ const fontThai = IBM_Plex_Sans_Thai({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.siteUrl),
-  title: { 
-    default: SITE_CONFIG.project.title, 
-    template: `%s | ${SITE_CONFIG.brandName}` 
+  title: {
+    default: SITE_CONFIG.project.title,
+    template: `%s | ${SITE_CONFIG.brandName}`,
   },
   description: SITE_CONFIG.description,
   applicationName: SITE_CONFIG.brandName,
   authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
   generator: "AEMDEVWEB Engine v18",
   keywords: [...SITE_CONFIG.keywords],
-  icons: { 
-    icon: "/favicon.ico", 
+  icons: {
+    icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
     shortcut: "/favicon-32x32.png",
   },
@@ -60,12 +60,14 @@ export const metadata: Metadata = {
     locale: "th_TH",
     url: SITE_CONFIG.siteUrl,
     siteName: SITE_CONFIG.brandName,
-    images: [{ 
-      url: SITE_CONFIG.ogImage, 
-      width: 1200, 
-      height: 630, 
-      alt: SITE_CONFIG.brandName 
-    }],
+    images: [
+      {
+        url: SITE_CONFIG.ogImage,
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.brandName,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -112,11 +114,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html
       lang="th"
       suppressHydrationWarning
-      className={cn(
-        "scroll-smooth focus-within:scroll-auto", 
-        fontSans.variable, 
-        fontThai.variable
-      )}
+      className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
     >
       <head>
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
@@ -155,18 +153,18 @@ export default function RootLayout({ children }: LayoutProps) {
         className={cn(
           "bg-surface-main text-text-primary min-h-dvh antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
-          "overflow-x-hidden font-sans"
+          "overflow-x-hidden font-sans",
         )}
       >
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="system" 
-          enableSystem 
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
         >
           {/* [INFRA]: Client-side logic for analytics, performance, and global listeners */}
           <ClientInfrastructure />
-          
+
           <main
             id="root-container"
             className="relative flex min-h-dvh flex-col"

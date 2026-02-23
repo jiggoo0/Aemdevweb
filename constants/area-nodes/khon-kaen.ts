@@ -12,6 +12,7 @@ export const khonKaenNode: AreaNode = {
   // --- Basic Identity ---
   slug: "khon-kaen",
   province: "ขอนแก่น",
+  region: "Northeast",
   templateSlug: "salepage", // เชื่อมโยง Logic การ Render
 
   title: "รับทำเว็บไซต์ ขอนแก่น | Sale Page คลินิกและ SME ปิดการขายไว ทักแชทแตก",
@@ -35,6 +36,29 @@ export const khonKaenNode: AreaNode = {
   priceValue: salePageService.priceValue,
   currency: salePageService.currency,
   unit: salePageService.unit,
+
+  marketSaturation: 65,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Conversion Audit",
+      description:
+        "วิเคราะห์จุดหลุดของลูกค้าในพื้นที่และวางแผนการแก้ปัญหาด้วย UX ที่เข้าใจคนขอนแก่น",
+    },
+    {
+      step: "02",
+      title: "Smart CAPI Deployment",
+      description:
+        "ติดตั้งระบบ Conversion API เพื่อส่งข้อมูลการซื้อขายกลับไปเทรน AI ของโฆษณาให้แม่นยำยิ่งขึ้น",
+    },
+    {
+      step: "03",
+      title: "Local SEO Dominance",
+      description:
+        "ทำ Local Entity Mapping เพื่อให้ร้านค้าหรือคลินิกของคุณขึ้นอันดับหนึ่งใน Google Maps ทั่วขอนแก่น",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/khon-kaen-node.webp",

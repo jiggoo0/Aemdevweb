@@ -12,6 +12,7 @@ export const koratNode: AreaNode = {
   // --- Basic Identity ---
   slug: "korat",
   province: "นครราชสีมา",
+  region: "Northeast",
   templateSlug: "catalog", // เชื่อมโยงกับ Catalog Template
 
   title: "รับทำเว็บไซต์ โคราช | เว็บไซต์โรงงานและแคตตาล็อกสินค้าอุตสาหกรรม",
@@ -35,6 +36,29 @@ export const koratNode: AreaNode = {
   priceValue: catalogService.priceValue,
   currency: catalogService.currency,
   unit: catalogService.unit,
+
+  marketSaturation: 72,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Digital Catalog Audit",
+      description:
+        "จัดระเบียบข้อมูลสินค้า (SKU) และ Part Number เพื่อวางโครงสร้าง Database ที่ค้นหาง่ายที่สุด",
+    },
+    {
+      step: "02",
+      title: "B2B Inquiry Gateway",
+      description:
+        "ติดตั้งระบบขอใบเสนอราคา (RFQ) ที่เชื่อมต่อกับระบบหลังบ้านของโรงงานเพื่อความรวดเร็วในการปิดดีล",
+    },
+    {
+      step: "03",
+      title: "Industrial SEO Layering",
+      description:
+        "วางรากฐานคีย์เวิร์ดเฉพาะทางเพื่อดักจับ Traffic จากฝ่ายจัดซื้อโรงงานทั่วเขตโคราชและอีสาน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/korat-monolith.webp",

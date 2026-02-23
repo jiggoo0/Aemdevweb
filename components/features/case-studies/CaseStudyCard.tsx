@@ -8,8 +8,6 @@
  * - Hardened image source resolution for strict Linux/Vercel paths.
  */
 
-"use client";
-
 import React, { memo, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -46,7 +44,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
       href={`/case-studies/${data.slug.toLowerCase()}`}
       aria-label={`ดูรายละเอียดผลงาน: ${data.title}`}
       className={cn(
-        "group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "group rounded-section relative flex h-full w-full flex-col justify-between overflow-hidden border transition-[transform,box-shadow,border-color,background-color] duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
         "transform-gpu will-change-transform",
@@ -54,10 +52,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
       )}
     >
       {/* --- LAYER 01: VISUAL AUTHORITY (ROI REVEAL ENGINE) --- */}
-      <div
-        className="border-border relative aspect-[16/10] w-full overflow-hidden border-b select-none"
-        style={{ backgroundColor: "#020617" }}
-      >
+      <div className="border-border bg-surface-main relative aspect-[16/10] w-full overflow-hidden border-b select-none">
         <Image
           src={imageSource}
           alt={`Result: ${data.title}`}
@@ -100,7 +95,7 @@ const CaseStudyCard = ({ data, index = 0, className }: CaseStudyCardProps) => {
           </header>
 
           <div className="space-y-4">
-            <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-2xl leading-[0.95] font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-3xl">
+            <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-2xl leading-relaxed font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-3xl">
               {data.title}
             </h3>
 

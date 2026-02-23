@@ -18,6 +18,12 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 
+// [DYNAMIC CONFIG]:
+// 1. revalidate: อัปเดต Cache ทุก 1 ชม. (ISR)
+// 2. dynamicParams: อนุญาตให้สร้างหน้าใหม่ที่ไม่มีตอน Build (สำหรับบทความใหม่)
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
@@ -98,7 +104,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
           </div>
         </header>
 
-        <div className="shadow-glow-lg border-border bg-surface-card relative mx-auto mb-16 aspect-video max-w-5xl overflow-hidden rounded-[2.5rem] border md:rounded-[3.5rem]">
+        <div className="shadow-glow-lg border-border bg-surface-card rounded-section md:rounded-card-xl relative mx-auto mb-16 aspect-video max-w-5xl overflow-hidden border">
           <Image
             src={post.thumbnail || "/images/blog/default-thumb.webp"}
             alt={post.title}

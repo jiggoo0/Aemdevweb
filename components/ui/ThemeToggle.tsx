@@ -32,9 +32,9 @@ const ThemeToggle = () => {
 
   if (!mounted) {
     return (
-      <div 
-        className="h-10 w-10 rounded-xl border border-border/10 bg-surface-card/50" 
-        aria-hidden="true" 
+      <div
+        className="border-border/10 bg-surface-card/50 h-10 w-10 rounded-xl border"
+        aria-hidden="true"
       />
     );
   }
@@ -49,10 +49,10 @@ const ThemeToggle = () => {
       className={cn(
         "group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl",
         "transform-gpu border transition-all duration-500 will-change-transform",
-        "active:scale-90 focus-visible:ring-2 focus-visible:ring-brand-primary/50 outline-none",
+        "focus-visible:ring-brand-primary/50 outline-none focus-visible:ring-2 active:scale-90",
         // [COLOR_ENGINE]: ใช้ระบบสี OKLCH ผ่าน Tailwind Utility
         "border-amber-400/20 bg-amber-400/5 hover:border-amber-400/50",
-        "dark:border-brand-primary/20 dark:bg-brand-primary/5 dark:hover:border-brand-primary/50"
+        "dark:border-brand-primary/20 dark:bg-brand-primary/5 dark:hover:border-brand-primary/50",
       )}
     >
       <AnimatePresence mode="wait" initial={false}>
@@ -69,7 +69,7 @@ const ThemeToggle = () => {
             size={18}
             className={cn(
               "transition-colors duration-500",
-              "text-amber-500 dark:text-brand-primary"
+              "dark:text-brand-primary text-amber-500",
             )}
           />
         </motion.div>
@@ -85,7 +85,7 @@ const ThemeToggle = () => {
           // Light Mode Glow (Amber OKLCH)
           "bg-amber-400/10 shadow-[0_0_20px_oklch(0.85_0.15_90/0.3)]",
           // Dark Mode Glow (Brand Primary OKLCH)
-          "dark:bg-brand-primary/10 dark:shadow-[0_0_20px_oklch(var(--brand-primary-raw)/0.25)]"
+          "dark:bg-brand-primary/10 dark:shadow-[0_0_20px_oklch(var(--brand-primary-raw)/0.25)]",
         )}
         aria-hidden="true"
       />

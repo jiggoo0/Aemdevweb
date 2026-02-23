@@ -1,0 +1,96 @@
+/**
+ * [SERVICE_NODE]: BUENG_KAN_ADVENTURE v18.0.1
+ * [STRATEGY]: Eco-Tourism | Religious Wisdom | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const buengKanNode: AreaNode = {
+  slug: "bueng-kan",
+  province: "บึงกาฬ",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ บึงกาฬ | ออกแบบเว็บท่องเที่ยวผาพบรักและธุรกิจในเมืองน้องใหม่ที่กำลังเติบโต",
+  description:
+    "เปลี่ยนกระแสการท่องเที่ยวภูทอกและหินสามวาฬ ให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นความตื่นตาตื่นใจและระบบที่เสถียร",
+  seoTitle: "รับทำเว็บไซต์ บึงกาฬ ออกแบบเว็บที่พัก หินสามวาฬ ภูทอก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์บึงกาฬ สำหรับรีสอร์ต โฮมสเตย์ และธุรกิจท่องเที่ยวสายผจญภัย ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่บึงกาฬ",
+
+  longDescription:
+    "บึงกาฬ จังหวัดน้องใหม่ที่มาพร้อมกับความมหัศจรรย์ทางธรรมชาติระดับโลกอย่าง 'หินสามวาฬ' " +
+    "นายเอ็มซ่ามากส์ พร้อมผลักดันธุรกิจท่องเที่ยวและที่พักในบึงกาฬสู่ระดับสากล " +
+    "ด้วยการออกแบบเว็บไซต์ที่เน้นการนำเสนอภาพลักษณ์ Unseen Thailand ควบคู่ไปกับระบบจองที่เสถียร " +
+    "เพื่อเปลี่ยนกระแสความสนใจในโลกโซเชียลให้กลายเป็นยอดจองตรง และสร้างตัวตนที่แข็งแกร่งในฐานะจังหวัดท่องเที่ยวมาแรง",
+
+  // --- Localized Benefits ---
+  benefits: [
+    "Adventure-First Design: งานดีไซน์ที่เน้นความตื่นตาตื่นใจและเข้าถึงง่ายสำหรับนักท่องเที่ยวสายผจญภัย",
+    "Digital Landmark Mastery: วางโครงสร้าง SEO เพื่อครองพื้นที่หน้าแรกในคำค้นหาเกี่ยวกับสถานที่ท่องเที่ยวสำคัญในบึงกาฬ",
+    "New Economy Hub: ระบบจัดการข้อมูลที่รองรับการเติบโตของธุรกิจในจังหวัดใหม่ที่กำลังขยายตัวอย่างรวดเร็ว",
+  ],
+
+  priority: 84,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/bueng-kan-node.webp",
+  coordinates: { lat: 18.362, lng: 103.654 },
+  isTourismHeavy: true,
+  marketSaturation: 32,
+  regionalLatency: 29,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Nature-Adventure Audit",
+      description:
+        "ดึงภาพลักษณ์ความมหัศจรรย์ทางธรรมชาติมาเป็นธีมหลักในการนำเสนอเพื่อสร้างแรงบันดาลใจให้นักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Digital Concierge Sync",
+      description:
+        "ติดตั้งระบบนำทางและข้อมูลการเข้าชมอุทยานฯ ที่เข้าถึงง่ายผ่านหน้าเว็บเพื่อเพิ่มความสะดวกให้ลูกค้า",
+    },
+    {
+      step: "03",
+      title: "New Province SEO Hub",
+      description:
+        "ทำ SEO เจาะจงพื้นที่บึงกาฬและแลนด์มาร์คสำคัญเพื่อชิงพื้นที่หน้าแรกในฐานะเมืองท่องเที่ยวมาแรง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "บึงกาฬมีนักท่องเที่ยวสาย Adventure และสายมูหนาแน่น เว็บไซต์ที่ภาพสวยและให้ข้อมูลการเดินทางที่ถูกต้องจะได้รับความเชื่อถือสูง",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพโดรนและระบบการจัดการข้อมูลที่รองรับ Mobile Users สูง",
+    localStrength:
+      "ทรัพยากรธรรมชาติที่ Unseen (หินสามวาฬ) และความสงบของเมืองริมโขงที่เป็นเอกลักษณ์",
+    nicheIndustries: [
+      "ที่พักและรีสอร์ตสาย Adventure",
+      "ธุรกิจนำเที่ยวและรถเช่า",
+      "วิสาหกิจชุมชนสินค้ายางพารา",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาพิกัดแหล่งท่องเที่ยวใหม่ๆ ยาก",
+      "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟน",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หินสามวาฬ",
+      "ออกแบบเว็บที่พัก บึงกาฬ",
+      "จ้างทำ SEO บึงกาฬ",
+      "ทำเว็บท่องเที่ยว ภูทอก",
+    ],
+  },
+  districts: ["เมืองบึงกาฬ", "เซกา", "โซ่พิสัย", "บึงโขงหลง", "บุ่งคล้า"],
+  keywords: [
+    "รับทำเว็บไซต์ บึงกาฬ",
+    "ทำเว็บที่พัก หินสามวาฬ",
+    "จ้างทำเว็บบึงกาฬ",
+    "รับทำ SEO บึงกาฬ",
+  ],
+};

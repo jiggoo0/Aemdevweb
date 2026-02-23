@@ -28,7 +28,7 @@ export function Callout({ children, type = "info", icon }: CalloutProps) {
   return (
     <div
       className={cn(
-        "my-8 flex gap-4 rounded-[2rem] border p-6 backdrop-blur-md transition-all duration-500",
+        "rounded-card my-8 flex gap-4 border p-6 backdrop-blur-md transition-all duration-500",
         styles[type],
       )}
     >

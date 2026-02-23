@@ -12,6 +12,7 @@ export const kamphaengPhetNode: AreaNode = {
   // --- Basic Identity ---
   slug: "kamphaeng-phet",
   province: "กำแพงเพชร",
+  region: "North",
   templateSlug: "local-authority", // เชื่อมโยง Logic การ Render
 
   title: "รับทำเว็บไซต์ กำแพงเพชร | ออกแบบระบบเว็บไซต์หน่วยงานราชการ และธุรกิจท้องถิ่น",
@@ -34,6 +35,29 @@ export const kamphaengPhetNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 38,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Public Service Audit",
+      description:
+        "ตรวจสอบความง่ายในการเข้าถึงข้อมูลบริการประชาชนออนไลน์เพื่อให้สอดคล้องกับพฤติกรรมคนในพื้นที่",
+    },
+    {
+      step: "02",
+      title: "Digital City Deployment",
+      description:
+        "ติดตั้งระบบรับเรื่องร้องเรียนและบริการอิเล็กทรอนิกส์ (E-Service) ที่เสถียรและปลอดภัยสูงสุด",
+    },
+    {
+      step: "03",
+      title: "Heritage & SME SEO",
+      description:
+        "วางรากฐานการค้นหาเพื่อสนับสนุนแหล่งท่องเที่ยวทางประวัติศาสตร์และสินค้า OTOP ของจังหวัด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/kamphaeng-phet-node.webp",

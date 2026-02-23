@@ -13,6 +13,7 @@ export const ranongNode: AreaNode = {
   // --- Basic Identity ---
   slug: "ranong",
   province: "ระนอง",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
 
   title: "รับทำเว็บไซต์ระนอง | สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
@@ -36,6 +37,30 @@ export const ranongNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 38,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Wellness Data Audit",
+      description:
+        "วิเคราะห์จุดเด่นของบริการสุขภาพและน้ำแร่ร้อนเพื่อวางโครงสร้างการนำเสนอดิจิทัลระดับสากล",
+    },
+    {
+      step: "02",
+      title: "SSG Performance Hub",
+      description:
+        "ติดตั้งระบบ Static Site Generation เพื่อให้เว็บไซต์เข้าถึงได้เสถียรที่สุดแม้ในช่วงฤดูมรสุมของระนอง",
+    },
+    {
+      step: "03",
+      title: "Cross-Border SEO Sync",
+      description:
+        "วางโครงสร้าง 3 ภาษา (ไทย/อังกฤษ/พม่า) เพื่อดักจับกลุ่มนักท่องเที่ยวและคู่ค้าในเขตเศรษฐกิจพิเศษชายแดน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/ranong-hotspring.webp",

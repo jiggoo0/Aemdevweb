@@ -1,24 +1,24 @@
 /**
- * [TEMPLATE]: BIO_IDENTITY_ORCHESTRATOR v18.0.39 (STABLE_FINAL)
- * [STRATEGY]: Identity Consolidation | Specialist FAQ Activation | Zero-Waste
+ * [TEMPLATE]: BIO_IDENTITY_ORCHESTRATOR v18.0.40 (RSC_ENFORCED)
+ * [STRATEGY]: Identity Consolidation | Specialist FAQ Activation | Server-Side Rendering
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
-import React, { useMemo } from "react";
+import React from "react";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";
 
 // --- 1. Modular Component Registry (Identity Suite) ---
-import { IdentityNode } from "./_components/IdentityNode";
-import { ActionRegistry } from "./_components/ActionRegistry";
-import { ProjectHighlight } from "./_components/ProjectHighlight";
-import { CapabilityGraph } from "./_components/CapabilityGraph";
-import { CredentialStack } from "./_components/CredentialStack";
-import { DirectTerminal } from "./_components/DirectTerminal";
+import { IdentityNode } from "../sections/IdentityNode";
+import { ActionRegistry } from "../sections/ActionRegistry";
+import { ProjectHighlight } from "../sections/ProjectHighlight";
+import { CapabilityGraph } from "../sections/CapabilityGraph";
+import { CredentialStack } from "../sections/CredentialStack";
+import { DirectTerminal } from "../sections/DirectTerminal";
+import { RegionalRoadmap } from "../sections/RegionalRoadmap";
+import { LocalInsight } from "../sections/LocalInsight";
 
 /** * [INJECT]: เปิดใช้งานระบบ Intelligence FAQ ด้วย Named Import { DynamicFAQ }
  * [TECHNICAL_FIX]: ปรับปรุงเพื่อแก้ปัญหา 'Attempted import error' ในรอบ Build ก่อนหน้า
@@ -30,9 +30,8 @@ import { DynamicFAQ } from "../sections/DynamicFAQ";
  * @description นามบัตรดิจิทัลระดับ Specialist ที่รวบรวมอัตลักษณ์ ผลงาน และความรู้เข้าด้วยกัน
  */
 const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
-  // [LOGIC]: ประมวลผล Schema สำหรับอัตลักษณ์บุคคล (Person / Specialist)
-  // เพื่อส่งเสริม E-E-A-T ของโดเมนในระดับโครงสร้าง
-  const schema = useMemo(() => generateUniversalSchema(data), [data]);
+  // [LOGIC]: Direct Schema Generation for RSC Compliance
+  const schema = generateUniversalSchema(data);
 
   return (
     <LayoutEngine spacing="none">
@@ -43,7 +42,39 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           {/* --- Phase 01: Core Identification --- 
               แสดงตัวตนและสถานะ Real-time ของ Specialist
           */}
-          <IdentityNode name={data.title} description={data.description} image={data.image} />
+          <IdentityNode
+            name={data.title}
+            description={data.description}
+            image={data.image}
+            banner={data.regionalVisuals?.banner}
+          />
+
+          {/* [NEW]: Regional Promotions (Specialist Style) */}
+          {data.promotions && data.promotions.length > 0 && (
+            <section className="relative z-10 w-full">
+              <div className="rounded-[var(--radius)] border border-dashed border-[var(--brand-primary)]/40 bg-[var(--brand-primary)]/5 p-8 text-center backdrop-blur-md">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--brand-primary)]/20 bg-white/5 px-4 py-1 dark:bg-black/20">
+                  <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)]" />
+                  <span className="font-mono text-[9px] font-black tracking-widest text-[var(--brand-primary)] uppercase">
+                    Personal_Promotion_Node
+                  </span>
+                </div>
+                <h3 className="mb-2 text-2xl font-black tracking-tighter uppercase italic">
+                  {data.promotions[0].title}
+                </h3>
+                <p className="mb-6 text-sm font-medium opacity-60">
+                  {data.promotions[0].description}
+                </p>
+                {data.promotions[0].discount && (
+                  <div className="inline-block rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--brand-primary)]/10 px-8 py-3">
+                    <span className="text-3xl font-black text-[var(--brand-primary)] italic">
+                      {data.promotions[0].discount}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
 
           {/* --- Phase 02: Strategic Linkage --- 
               ศูนย์รวม Link สำคัญ (Registry Mapping)
@@ -59,6 +90,25 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
               จำลองข้อมูลความสามารถผ่าน Data Visualization (Graph Node)
           */}
           <CapabilityGraph skills={data.coreFeatures || []} />
+
+          {/* [NEW]: Regional Authority for Bio Nodes */}
+          {data.province && (
+            <div className="space-y-16 py-8">
+              <div className="-mx-4 md:-mx-10">
+                <LocalInsight
+                  insight={data.localContext?.marketInsight || ""}
+                  painPoints={(data.localContext?.painPoints as string[]) || []}
+                  marketSaturation={data.marketSaturation}
+                />
+                <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
+              </div>
+              <DirectTerminal
+                mode="health-check"
+                province={data.province}
+                latency={data.regionalLatency}
+              />
+            </div>
+          )}
 
           {/* --- Phase 05: Intelligence Hub (FAQ) ---
               [STRATEGIC_INSERTION]: ลดภาระการตอบคำถามซ้ำซากและกำจัด Dead Code ในโปรเจกต์
@@ -79,14 +129,14 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           {/* --- Phase 07: Direct Gateway --- 
               Terminal Contact Node สำหรับการสื่อสารโดยตรง
           */}
-          <DirectTerminal />
+          <DirectTerminal mode="contact" />
 
           {/* --- FOOTER: System Status --- */}
           <footer className="pt-8 text-center">
             <div className="inline-flex items-center gap-2 opacity-20">
               <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)]" />
               <p className="font-mono text-[8px] tracking-[0.5em] uppercase">
-                Architected_By_AEMZA_v18.0.39
+                Architected_By_AEMZA_v18.0.40_RSC
               </p>
             </div>
           </footer>

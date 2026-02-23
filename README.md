@@ -1,281 +1,111 @@
 ---
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-19 20:10:40
+last_audit: 2026-02-24 01:54:18
 generated_by: generate_docs.sh v3.0
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
 ## SYSTEM MANDATE
-# SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
 
-**Project:** AEMDEVWEB (High-Performance Web Infrastructure)
-**Version:** 18.0.0 (Universal Sync)
-**Maintainer:** AEMZA MACKS (Lead Architect)
-**Last Audit:** 2026-02-16
+# 00-SYSTEM-MANDATE.md: Technical Infrastructure Specialist Hub Mandate
 
----
+## 1. 🏗 Core Architecture (Next.js 16.1.6 + React 19)
 
-## 1. CORE PHILOSOPHY
+- **RSC First:** All new components must be React Server Components (RSC) by default. Do not use `'use client'` unless interactivity is strictly required.
+- **Async Patterns:** Strictly follow Next.js 15+ async APIs. Access to `params`, `searchParams`, `cookies()`, and `headers()` must be awaited.
+- **Hydration Integrity:** Ensure zero hydration mismatches. Use Suspense boundaries for client-side data fetching and components relying on browser APIs.
+- **SSG Compliance:** Enforce `export const dynamicParams = false;` in all dynamic routes to ensure 100% Static Site Generation (SSG).
 
-This project is not just a website; it is a **Digital Infrastructure**. Every line of code must serve a specific business purpose: **Speed, SEO Authority, or Conversion**.
+## 2. 📂 Directory & Encapsulation
 
-- **Zero Fluff:** No decorative animations that hinder performance.
-- **Performance First:** Core Web Vitals must be green (95+).
-- **Structure over Style:** Data integrity (`types/`) dictates UI rendering, not the other way around.
-- **Human-Centric Engineering:** We build for users first, search engines second, but satisfy both through semantic precision.
+- **Private Encapsulation:** Sub-components should be stored in the centralized `components/templates/sections/` directory to promote reuse and maintain consistent RSC boundaries across templates.
+- **Registry-Driven:** Use `constants/master-registry.ts` and `constants/area-nodes/` as the single source of truth for all service and location data.
+- **App Router Conventions:** Adhere to `(group)`, `[dynamic]`, and `@slot` patterns for clean URL structures and layout management.
 
----
+## 3. 🎨 UI & Styling Standards (Tailwind 4.1.18)
 
-## 2. TECHNOLOGY STACK (STRICT)
+- **Theme Standard:** No hard-coded hex colors or arbitrary values (e.g., `bg-[#ffffff]`). Use CSS Theme Variables via `@theme` variables.
+- **Color Space:** Use **OKLCH** for all new color definitions to ensure perceptual uniformity and maximum precision.
+- **Thai Typography:** Apply `leading-relaxed` or `leading-loose` to all Thai text to prevent overlapping vowels/tone marks.
+- **Zero-CLS Strategy:** Layouts must not shift during loading. All images must have an Aspect Ratio and use `blurDataURL` from the `ImageBlurRegistry`.
 
-- **Framework:** Next.js 16.1.6 (App Router)
-- **Language:** TypeScript 5.x (Strict Mode Enforced)
-- **Styling:** Tailwind CSS 4.0 (OKLCH Color Space Compatible)
-- **State/Data:** React 19 (Server Components by default)
-- **Validation:** Zod / Custom Schema Validators
-- **Automation:** Bash & Node.js Scripts (`scripts/`)
+## 4. 🔍 SEO & Data Integrity
 
----
+- **Schema-First:** All pages must include valid JSON-LD. Validation via `scripts/test-schema.ts` is mandatory before deployment.
+- **P-SEO Logic:** Area Nodes must contain unique, non-duplicated content. Cross-province content duplication is a hard failure.
+- **Metadata:** Use `generateMetadata` for dynamic pages to ensure accurate SEO titles, descriptions, and OpenGraph tags.
 
-## 3. DIRECTORY ARCHITECTURE & SSOT
+## 5. 🤖 AI & Developer Workflow
 
-The project follows a **Data-Driven Architecture**. The UI is merely a renderer for the data defined in `constants/`.
+- **No Fluff:** Technical excellence only. No lecturing, no filler, and no basic explanations. Focus on high-quality code and deep architectural insights.
+- **Auto-Verification:** After every code modification, the AI MUST run `pnpm type-check` and `pnpm lint` automatically.
+- **Source Files:** Always read configuration files in `config/` and `constants/` before making assumptions about the system structure.
+- **Technical Integrity:** You are responsible for implementation, testing, and validation. A task is not complete until verified within the full project context.
 
-### 3.1 The "Constants" Directory (The Brain)
+## 6. 🛠 Tech Stack Constraints
 
-- `constants/site-config.ts`: Global configuration (Brand, Links, SEO defaults).
-- `constants/master-registry.ts`: The central index of all services.
-- `constants/services/*.ts`: Individual **Service Nodes** (Corporate, Sale Page, etc.).
-- `constants/area-nodes/*.ts`: **Area Nodes** for Local SEO (Bangkok, Phuket, etc.).
-- **Rule:** Never hardcode data in `app/` components. Always import from `constants/`.
-
-### 3.2 The "Types" Directory (The Law)
-
-- `types/index.d.ts`: Core definitions (SiteConfig, ThemeConfig).
-- `types/template-props.ts`: The **Universal Adapter**. It acts as the bridge between raw data and the UI renderer.
-- **Rule:** No `any`. All props must be typed via `UniversalTemplateProps` or specific interfaces.
-
-### 3.3 The "Scripts" Directory (The Automation)
-
-- `gen-blur-data.mjs`: Auto-generates BlurHash for all images. Must run before build.
-- `audit-system.sh`: Routine health checks.
-- **Rule:** Do not manually edit `constants/image-blur-data.ts`. Use the script.
-
----
-
-## 4. DATA MODELS & SCHEMAS
-
-### 4.1 Service Node (TemplateMasterData)
-
-Defines a specific business service (e.g., SEO Agency, Hotel Website).
-
-- **Required:** `id`, `templateSlug`, `price`, `theme` (Hex codes), `clientTrust`.
-- **Strategy:** Uses `templateSlug` to determine which UI Component to render via `TemplateRenderer.tsx`.
-
-### 4.2 Area Node (Local SEO)
-
-Defines a geographic landing page (e.g., `constants/area-nodes/korat.ts`).
-
-- **Strategy:** "Hex Standard" or "Zero-Radius Geometry" (as seen in Korat).
-- **Required:** `slug`, `province`, `hyperLocalKeywords`, `localContext` (Pain Points, Competitor Level).
-- **Mapping:** Each Area Node must map to a `templateSlug` (e.g., Korat -> Catalog, Phuket -> HotelResort).
-
----
-
-## 5. UI & THEMING GUIDELINES
-
-### 5.1 Color System
-
-- **Format:** Strict **HEX Codes** required in configuration files (e.g., `#06b6d4`).
-- **Contrast:** Primary colors must pass WCAG AA (Contrast Ratio > 4.5:1) against the background.
-- **Dark/Light Mode:** Defined per Service/Area node via `theme.mode`.
-
-### 5.2 Component Strictness
-
-- **Zero-Unused Policy:** Components not in use are removed (Knip hygiene).
-- **Atomic Design:** Reusable UI parts live in `components/ui/` or `components/shared/`.
-- **Feature Modules:** Complex logic lives in `components/features/` (e.g., `DirectOrderForm.tsx`).
-
----
-
-## 6. SEO & SEMANTICS PROTOCOL
-
-### 6.1 Meta Strategy
-
-- **Titles:** Must include High-Intent keywords (e.g., "Hire", "Service", "Price").
-- **Description:** Benefit-driven, under 160 characters.
-- **Keywords:** Array of strings found in `site-config.ts` and individual nodes.
-
-### 6.2 Schema Markup (JSON-LD)
-
-- **Global:** `Organization`, `WebSite`.
-- **Service Pages:** `Service`, `Product` (for Catalog).
-- **Local Pages:** `LocalBusiness` (critical for Area Nodes).
-
-### 6.3 Image Optimization
-
-- All images **must** have an entry in `image-blur-data.ts`.
-- Use `gen-blur-data.mjs` to sync new assets.
-- Alt text is mandatory and must be descriptive.
-
----
-
-## 7. MAINTENANCE & WORKFLOW
-
-### Adding a New Service
-
-1.  Create `constants/services/[service-name].ts`.
-2.  Define strict types implementing `TemplateMasterData`.
-3.  Register in `constants/master-registry.ts`.
-4.  Run `pnpm build` to verify types.
-
-### Adding a New Area
-
-1.  Create `constants/area-nodes/[province].ts`.
-2.  Define strict types implementing `AreaNode`.
-3.  Add export to `constants/area-nodes/index.ts`.
-4.  Verify `coordinates` and `hyperLocalKeywords`.
-
-### Production Deployment
-
-1.  Run `scripts/gen-blur-data.mjs`.
-2.  Run `scripts/clean.sh`.
-3.  Execute strict type check.
-4.  Deploy to Vercel.
-
----
-
-## 8. PERSONA: "AEMZA MACKS"
-
-- **Role:** Technical SEO Specialist & Web Architect.
-- **Tone:** Professional, Transparent, Technical but Accessible.
-- **Anti-Patterns:** No "Robot-speak", no over-promising without data, **Zero Emoji** in business logic/source code.
+- **Runtime:** Node.js >= 22.0.0
+- **Package Manager:** PNPM >= 10.0.0
+- **Image Optimization:** Always use `next/image` with `sharp`.
+- **Bundling:** Maintain `bundlesize` limits as defined in `package.json`.
 
 ---
 
 ## SYSTEM PROMPT EXTENSION
-# SYSTEM PROMPT EXTENSION & COGNITIVE PROTOCOLS
 
-**Target System:** AEMDEVWEB (High-Performance Digital Infrastructure)
-**Framework:** Next.js 16.1.6 (App Router) | React 19 | Tailwind CSS 4.0
-**Architect:** AEMZA MACKS (Lead Technical SEO Specialist)
-**Reference:** Source Code Audit v18.0.0
+# 01-SYSTEM-PROMPT-EXTENSION.md: Specialized Implementation Protocols
 
----
+## 1. 📍 Area Node Implementation Protocol (P-SEO)
 
-## 1. PERSONA & COMMUNICATION PROTOCOL
+When creating or modifying Area Nodes in `constants/area-nodes/`:
 
-**You are AEMZA MACKS.**
-You are not a generic AI assistant. You are a **Technical Web Architect** and **SEO Specialist** who values engineering precision over marketing fluff.
+- **Unique Content Requirement:** Each node MUST have a unique `longDescription` and `benefits` list. Do not copy-paste content between provinces.
+- **Inheritance Pattern:** Use "Blueprint Inheritance" by importing a base service from `@/constants/services/`.
+- **Theme Sync:** Use the primary theme colors from the inherited service (`theme: baseService.theme`).
+- **Dynamic FAQ Merging:** Merge local FAQs with standard template FAQs using the filter/spread pattern as seen in `bangkok.ts`.
+- **Hyper-Local Keywords:** Include specific districts and local insights in the `localContext` object to maximize geographic SEO relevance.
+- **Data Integrity:** Ensure `priority` is set correctly (lower numbers = higher priority) and coordinates are accurate for schema generation.
 
-- **Tone:** Professional, Transparent, Engineering-First.
-- **Language Style:** "Result-oriented." Use technical terminology correctly (e.g., "Semantic HTML," "Conversion API," "Edge Computing").
-- **Anti-Patterns (DO NOT USE):**
-  - No "Robot-speak" (e.g., "I hope this helps").
-  - **[span_0](start_span)[span_1](start_span)Zero Emoji** in business logic, source code, or serious technical explanations[span_0](end_span)[span_1](end_span).
-  - No over-promising without data backing.
+## 2. 🧩 Template Development Standards
 
----
+Templates in `components/templates/` must follow these rules:
 
-## 2. ARCHITECTURAL STRICTNESS (THE "LAW")
+- **Unified Identity Shell:** Use the `UniversalTemplateProps` type to ensure compatibility with the `TemplateRenderer`.
+- **Color Variables:** Reference `--brand-primary`, `--brand-secondary`, and `--surface-main` which are dynamically injected via the `TemplateRenderer`'s wrapper.
+- **Section Isolation:** Each section of the template should be a separate, atomic component within the template's `_components/` directory.
+- **Adaptive Rendering:** Support both `renderMode="full"` (for landing/area pages) and potential partial renders.
 
-### 2.1 Data-Driven Rendering
+## 3. 🏷 Schema & Metadata Execution
 
-The UI is strictly a renderer of data. You **must not** hardcode content into components.
+- **JsonLd Integration:** Every new page or significant route must use the `JsonLd` component from `@/components/seo/JsonLd`.
+- **Breadcrumb Logic:** Always include a breadcrumb schema in `generateSchemaGraph` that reflects the full path from Home to the current leaf node.
+- **LocalBusiness Schema:** For area pages, use `generateLocalBusinessSchema` with the area-specific coordinates and localized contact info.
 
-- **Source of Truth:** All data lives in `constants/`.
-- **[span_2](start_span)[span_3](start_span)Type Safety:** All data must strictly adhere to types defined in `types/index.d.ts` and `types/template-props.ts`[span_2](end_span)[span_3](end_span).
-- **Workflow:**
-  1.  Define Type (`types/`).
-  2.  Create/Update Data Node (`constants/`).
-  3.  Render via Component (`components/`).
+## 4. 🚀 Performance & Asset Handling
 
-### 2.2 Directory Structure Awareness
+- **ImageBlurRegistry:** When adding new critical images, ensure they are registered in `constants/image-blur-data.ts` to prevent CLS.
+- **Dynamic Imports:** Use `next/dynamic` for heavy client-side components (like maps or complex animations) to keep the initial JS bundle small.
+- **Icon Strategy:** Use the `IconRenderer` utility which leverages `lucide-react` dynamically to avoid bloating the bundle with unused icons.
 
-- `app/`: Routing logic only. Minimal code.
-- `components/features/`: Complex business logic (e.g., `DirectOrderForm`, `AuditReportGenerator`).
-- `components/ui/`: Atomic, reusable UI elements (e.g., `Button`, `IconRenderer`).
-- [span_4](start_span)[span_5](start_span)`constants/services/`: Master Service Nodes (e.g., `corporate.ts`, `salepage.ts`)[span_4](end_span)[span_5](end_span).
-- [span_6](start_span)[span_7](start_span)`constants/area-nodes/`: Local SEO Nodes (e.g., `bangkok.ts`, `korat.ts`)[span_6](end_span)[span_7](end_span).
+## 5. 🧪 Verification & "Definition of Done"
 
-### 2.3 Valid Template Slugs
+A task is considered done ONLY when:
 
-[span_8](start_span)When creating or referencing services, you must strictly use these `TemplateSlug` values[span_8](end_span):
-
-- `"corporate"` (Corporate Identity)
-- `"salepage"` (High-Conversion Landing)
-- `"local-authority"` (Local SEO/Maps)
-- `"catalog"` (Industrial/B2B)
-- `"hotelresort"` (Luxury Hospitality)
-- `"seo-agency"` (Technical Authority)
-- `"bio"` (Personal Branding)
-- `"local"` (General Local Business)
-
----
-
-## 3. CODING STANDARDS (Next.js 16 / Tailwind 4)
-
-### 3.1 Styling & Theming
-
-- **Engine:** Tailwind CSS v4.0.
-- **[span_9](start_span)[span_10](start_span)Color System:** Use **HEX Codes** exclusively in `constants/` files to ensure OKLCH compatibility and theme consistency[span_9](end_span)[span_10](end_span).
-- **[span_11](start_span)Constraint:** Primary text must pass WCAG AA contrast ratios against backgrounds (e.g., Emerald 700 `#047857` instead of lighter variants)[span_11](end_span).
-
-### 3.2 Component Rules
-
-- **React 19:** Default to Server Components. Use `'use client'` only when interactivity (hooks, event listeners) is strictly required.
-- **Images:** All images must utilize `ImageBlurRegistry` from `constants/image-blur-data.ts`. [span_12](start_span)Do not use standard `<img>` tags; use Next.js `<Image>` with blur data[span_12](end_span).
-- **Icons:** Use `IconName` type from `types/index.d.ts`. [span_13](start_span)Do not import icons directly in data files; pass string names (e.g., "Zap", "ShieldCheck")[span_13](end_span).
-
-### 3.3 Type Strictness
-
-- **No `any`:** Strict prohibition. Use `UniversalTemplateProps`, `TemplateMasterData`, or `AreaNode`.
-- **Explicit Exports:** Ensure all new nodes are exported in their respective `index.ts`.
-
----
-
-## 4. BUSINESS LOGIC & SEO STRATEGY
-
-### 4.1 Local SEO (Area Nodes)
-
-When generating content for a specific province/area:
-
-- **[span_14](start_span)[span_15](start_span)Strategy:** Apply "Hex Standard" or specific strategies like "Zero-Radius Geometry" (Korat) or "Mist Green" (Mae Hong Son)[span_14](end_span)[span_15](end_span).
-- **[span_16](start_span)Context:** Populate `localContext` with specific `painPoints`, `marketInsight`, and `hyperLocalKeywords` relevant to that specific geography[span_16](end_span).
-
-### 4.2 Commercial Intent
-
-- **[span_17](start_span)Keywords:** Focus on "High-Intent" keywords (e.g., "Hire", "Price", "Service", "Company") rather than informational keywords[span_17](end_span).
-- **[span_18](start_span)[span_19](start_span)Trust Signals:** Always inject `clientTrust` and `socialProof` into data nodes to establish authority[span_18](end_span)[span_19](end_span).
-
----
-
-## 5. OPERATIONAL SCRIPTS
-
-Be aware of the automation ecosystem:
-
-- [span_20](start_span)`gen-blur-data.mjs`: If you add an image path to a constant, remind the user to run this script[span_20](end_span).
-- `clean.sh`: For resetting the environment.
-- `audit-system.sh`: For health checks.
-
----
-
-## 6. RESPONSE FORMAT
-
-When asked to generate code or configuration:
-
-1.  **Analyze** the request against the `TemplateMasterData` or `AreaNode` schema.
-2.  **Verify** strict type compliance (`TemplateSlug`, `IconName`).
-3.  **Output** the code block (TypeScript/React).
-4.  **Append** a "Next Step" suggestion (e.g., "Run `pnpm build` to verify types" or "Execute `gen-blur-data.mjs`").
+1. The code passes `pnpm type-check` and `pnpm lint`.
+2. New Area Nodes are correctly exported in `constants/area-nodes/index.ts`.
+3. The `README.md` has been updated via `pnpm run build` (which triggers `generate_docs.sh`) if structural changes occurred.
+4. (Optional) `scripts/test-schema.ts` has been run for any new schema implementations.
 
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
+
 ### MODULE: index.d.ts
+
 `Path: types/index.d.ts`
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.1.0 (STABILIZED_EEAT)
@@ -305,20 +135,65 @@ export interface LayoutProps {
 
 /** [ICON_SYSTEM]: Registry of Validated Lucide Icons */
 export type IconName =
-  | "Menu" | "X" | "Check" | "CheckCircle" | "CheckCircle2" | "Star"
-  | "ChevronRight" | "ChevronDown" | "ArrowRight" | "ArrowUpRight"
-  | "Search" | "SearchX" | "Zap" | "Target" | "Layers" | "Shield"
-  | "ShieldCheck" | "Newspaper" | "Building2" | "FileText" | "FileDown"
-  | "MousePointerClick" | "Smartphone" | "Globe" | "TrendingUp"
-  | "Award" | "MapPin" | "Activity" | "UserCheck" | "Quote" | "Settings"
-  | "Disc" | "Wifi" | "Code2" | "Network" | "User" | "Camera"
-  | "CloudSun" | "Wind" | "Droplets" | "Eye" | "Cloud" | "AlertCircle"
-  | "Sparkles" | "Database" | "Map" | "CalendarCheck" | "Lock"
+  | "Menu"
+  | "X"
+  | "Check"
+  | "CheckCircle"
+  | "CheckCircle2"
+  | "Star"
+  | "ChevronRight"
+  | "ChevronDown"
+  | "ArrowRight"
+  | "ArrowUpRight"
+  | "Search"
+  | "SearchX"
+  | "Zap"
+  | "Target"
+  | "Layers"
+  | "Shield"
+  | "ShieldCheck"
+  | "Newspaper"
+  | "Building2"
+  | "FileText"
+  | "FileDown"
+  | "MousePointerClick"
+  | "Smartphone"
+  | "Globe"
+  | "TrendingUp"
+  | "Award"
+  | "MapPin"
+  | "Activity"
+  | "UserCheck"
+  | "Quote"
+  | "Settings"
+  | "Disc"
+  | "Wifi"
+  | "Code2"
+  | "Network"
+  | "User"
+  | "Camera"
+  | "CloudSun"
+  | "Wind"
+  | "Droplets"
+  | "Eye"
+  | "Cloud"
+  | "AlertCircle"
+  | "Sparkles"
+  | "Database"
+  | "Map"
+  | "CalendarCheck"
+  | "Lock"
   | (string & {});
 
 export type TemplateSlug =
-  | "corporate" | "salepage" | "local" | "local-authority"
-  | "catalog" | "bio" | "hotelresort" | "seo-agency";
+  | "corporate"
+  | "salepage"
+  | "local"
+  | "local-authority"
+  | "catalog"
+  | "bio"
+  | "hotelresort"
+  | "seo-agency";
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
@@ -374,7 +249,7 @@ export interface SiteConfig {
     readonly twitterHandle: string;
     readonly googleMerchantId?: string;
     /** [PATCH_v18.1.0]: LinkedIn Authority Link */
-    readonly linkedinUrl?: string; 
+    readonly linkedinUrl?: string;
   };
   readonly contact: {
     readonly email: string;
@@ -497,6 +372,8 @@ export interface LocalContext {
   readonly nicheIndustries: readonly string[];
   readonly painPoints: readonly string[];
   readonly competitorLevel: "low" | "medium" | "high" | "extreme";
+  readonly marketSaturation?: number; // 0-100 percentage
+  readonly isTourismHeavy?: boolean;
   readonly socialProof?: {
     readonly rating: number;
     readonly reviewCount: number;
@@ -505,6 +382,24 @@ export interface LocalContext {
   readonly regionalPricing?: { readonly startPrice: string; readonly timeline: string };
   readonly localSuccessStory?: { readonly title: string; readonly result: string };
   readonly hyperLocalKeywords?: readonly string[];
+  readonly promotions?: readonly {
+    readonly title: string;
+    readonly description?: string;
+    readonly discount?: string;
+    readonly expiry?: string;
+  }[];
+  readonly regionalVisuals?: {
+    readonly banner?: string;
+    readonly gallery?: readonly string[];
+  };
+}
+
+export interface BioProject {
+  readonly title: string;
+  readonly category: string;
+  readonly description: string;
+  readonly link?: string;
+  readonly thumbnail?: string;
 }
 
 export interface UniversalTemplateProps {
@@ -528,7 +423,7 @@ export interface UniversalTemplateProps {
   readonly clientTrust?: string;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
-  readonly featuredProjects?: readonly any[];
+  readonly featuredProjects?: readonly BioProject[];
   readonly localContext?: LocalContext;
   readonly province?: string;
   readonly districts?: readonly string[];
@@ -536,6 +431,16 @@ export interface UniversalTemplateProps {
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly promotions?: LocalContext["promotions"];
+  readonly marketSaturation?: number;
+  readonly isTourismHeavy?: boolean;
+  readonly regionalLatency?: number;
+  readonly regionalRoadmap?: readonly {
+    readonly step: string;
+    readonly title: string;
+    readonly description: string;
+  }[];
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 }
@@ -546,21 +451,22 @@ export interface BaseTemplateProps {
 }
 
 // =========================================
-// [05] REGISTRY SCHEMAS
+// [05] REGISTRY SCHEMAS (CROSS-LINKED)
 // =========================================
 
 export interface TemplateMasterData {
   readonly id: string;
+  readonly slug?: string;
   readonly title: string;
   readonly description: string;
-  readonly image?: string;
   readonly templateSlug: TemplateSlug;
+  readonly priority: number;
+  readonly image?: string;
   readonly category: ServiceCategory;
   readonly priceValue: number;
   readonly price: string;
   readonly currency: string;
   readonly unit: string;
-  readonly priority: number;
   readonly theme: ThemeConfig;
   readonly benefits: readonly string[];
   readonly coreFeatures: readonly ServiceFeature[];
@@ -572,24 +478,39 @@ export interface TemplateMasterData {
   readonly isFeatured?: boolean;
   readonly clientTrust?: string;
   readonly items?: readonly CatalogItem[];
+  readonly activeAreas?: readonly string[];
 }
 
 export interface AreaNode {
+  readonly id?: string;
   readonly slug: string;
   readonly province: string;
   readonly title: string;
   readonly description: string;
-  readonly longDescription?: string;
+  readonly templateSlug: TemplateSlug;
+  readonly priority: number;
+  readonly region: "North" | "Northeast" | "Central" | "East" | "South" | "West";
   readonly seoTitle: string;
   readonly seoDescription: string;
-  readonly priority: number;
-  readonly templateSlug: TemplateSlug;
+  readonly longDescription?: string;
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
   readonly heroImage: string;
   readonly coordinates: { readonly lat: number; readonly lng: number };
   readonly localContext: LocalContext;
   readonly theme?: Partial<ThemeConfig> | ThemeConfig;
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly socialProof?: LocalContext["socialProof"];
+  readonly regionalPricing?: LocalContext["regionalPricing"];
+  readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly marketSaturation?: number;
+  readonly isTourismHeavy?: boolean;
+  readonly regionalLatency?: number;
+  readonly regionalRoadmap?: readonly {
+    readonly step: string;
+    readonly title: string;
+    readonly description: string;
+  }[];
   readonly price?: string;
   readonly priceValue?: number;
   readonly currency?: string;
@@ -601,10 +522,12 @@ export interface AreaNode {
 }
 
 export * from "./template-props";
-
 ```
+
 ### MODULE: template-props.ts
+
 `Path: types/template-props.ts`
+
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.135 (ULTIMATE_STABLE)
@@ -680,6 +603,10 @@ export interface UniversalTemplateProps {
   /** [FIXED]: ข้อมูลบริบทพื้นที่เต็มรูปแบบสำหรับ Area Node */
   readonly localContext?: LocalContext;
 
+  /** [NEW]: ข้อมูล Visual และโปรโมชั่นรายพื้นที่ */
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly promotions?: LocalContext["promotions"];
+
   // --- Strategic UI Elements ---
   readonly primaryAction: TemplateAction;
   readonly secondaryAction?: TemplateAction;
@@ -705,14 +632,317 @@ export interface BaseTemplateProps {
  * หากต้องการเพิ่มหน้าใหม่ (New Template) สามารถประกาศเฉพาะจุดที่ใช้งานจริง
  * ในไฟล์ Component นั้นๆ หรือเพิ่มกลับมาที่นี่หากมีการใช้ซ้ำ (Reuse) มากกว่า 2 จุด
  */
-
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
+
+### CONFIG: about.ts
+
+`Path: constants/about.ts`
+
+```typescript
+/**
+ * [DATA_NODE]: ABOUT_PAGE_CONTENT v18.0.1 (DATA_DRIVEN)
+ * [STRATEGY]: Identity Consolidation | Specialist Authority | RSC Sync
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ */
+
+import { SITE_CONFIG } from "./site-config";
+
+export const ABOUT_CONTENT = {
+  hero: {
+    title: 'มากกว่าการทำเว็บไซต์ คือการวาง "ยุทธศาสตร์ดิจิทัล" ให้ธุรกิจคุณ',
+    subtitle: `"เพราะเว็บไซต์ที่สมบูรณ์แบบคือการผสมผสานระหว่างเทคโนโลยีที่เฉียบคมและวิสัยทัศน์ทางธุรกิจ ผมจึงมุ่งมั่นสร้าง ${SITE_CONFIG.brandName} เพื่อเป็นรากฐานความสำเร็จให้ผู้ประกอบการไทยครับ"`,
+  },
+  vision: {
+    title: "Strategic Design Meets Pure Logic.",
+    description:
+      "ภารกิจของผมคือการใช้ความเชี่ยวชาญด้านเทคนิค ผสานกับวิสัยทัศน์ทางธุรกิจ เพื่อเปลี่ยนเว็บไซต์ให้กลายเป็นสินทรัพย์ที่สร้างมูลค่าให้คุณอย่างไม่มีที่สิ้นสุด",
+    tags: ["Digital_Architect", "Technical_SEO", "Business_Optimization", "Data_Driven"],
+  },
+  coreValues: [
+    {
+      title: "Performance Driven",
+      description:
+        "ทุกระบบที่เราสร้างต้องวัดผลได้จริง โค้ดทุกบรรทัดต้องทำหน้าที่สนับสนุนยอดขายและการเติบโตของธุรกิจคุณ",
+      icon: "TrendingUp",
+    },
+    {
+      title: "Strategic Partnership",
+      description:
+        "เราไม่ใช่แค่ผู้รับจ้าง แต่เราคือพาร์ทเนอร์ที่พร้อมให้คำปรึกษาอย่างตรงไปตรงมา เพื่อให้คุณตัดสินใจบนพื้นฐานของข้อมูลจริง",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Future-Ready Stack",
+      description:
+        "เลือกใช้เทคโนโลยีระดับ High-End เพื่อให้เว็บไซต์ของคุณรองรับการเปลี่ยนแปลงของ Search Engine ในปี 2026 อย่างสมบูรณ์",
+      icon: "Cpu",
+    },
+  ],
+  cta: {
+    title: "พร้อมสร้างความได้เปรียบให้ธุรกิจของคุณหรือยังครับ?",
+    description:
+      "ให้ผมร่วมเป็นส่วนหนึ่งในการวางรากฐานดิจิทัลที่แข็งแกร่ง เพื่อการเติบโตอย่างก้าวกระโดดของธุรกิจคุณ",
+    primaryLabel: "ปรึกษาคุณเอ็มผ่าน Line",
+    secondaryLabel: "ศึกษาบริการและแนวทาง",
+  },
+};
+```
+
+### CONFIG: amnat-charoen.ts
+
+`Path: constants/area-nodes/amnat-charoen.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: AMNAT_CHAROEN_WELLNESS v18.0.1
+ * [STRATEGY]: Slow Living | Local Agri-Craft | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const amnatCharoenNode: AreaNode = {
+  slug: "amnat-charoen",
+  province: "อำนาจเจริญ",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อำนาจเจริญ | พัฒนาเว็บไซต์วิสาหกิจชุมชนและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
+  description:
+    "ยกระดับธุรกิจในอำนาจเจริญสู่โลกออนไลน์ ด้วยเว็บไซต์ที่เน้นงานดีไซน์ที่เป็นมิตรและระบบจัดการข้อมูลที่ใช้งานง่าย",
+  seoTitle: "รับทำเว็บไซต์ อำนาจเจริญ ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อำนาจเจริญ สำหรับ SME ท้องถิ่น วิสาหกิจชุมชน และที่พักสายธรรมชาติ ดีไซน์สวยสะอาดตา โหลดไว รองรับ SEO พื้นที่",
+  priority: 80,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/amnat-charoen-node.webp",
+  coordinates: { lat: 15.858, lng: 104.625 },
+  marketSaturation: 25,
+  regionalLatency: 26,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Local Identity Audit",
+      description:
+        "วิเคราะห์จุดเด่นของงานหัตถกรรมและวิถีเกษตรในพื้นที่เพื่อสร้างแบรนด์ดิจิทัลที่ดูน่าสนใจ",
+    },
+    {
+      step: "02",
+      title: "Community Sync Deployment",
+      description: "ติดตั้งระบบแสดงผลสินค้าและช่องทางติดต่อที่รวดเร็วเพื่อรองรับกลุ่มวิสาหกิจชุมชน",
+    },
+    {
+      step: "03",
+      title: "Lower North SEO Hub",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหาธุรกิจและสินค้าสำคัญในอำนาจเจริญเพื่อให้คนหาเจอง่ายขึ้น",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อำนาจเจริญเป็นเมืองแห่งธรรมและวิถีเกษตรที่สงบ เว็บไซต์ที่ดูจริงใจและเข้าถึงง่ายจะตรงใจลูกค้าที่สุด",
+    technicalApproach:
+      "เน้นการใช้งานผ่านมือถือเป็นหลัก (Mobile-First) และโครงสร้างเว็บที่เบาเพื่อการโหลดที่รวดเร็ว",
+    localStrength:
+      "มีความโดดเด่นด้านเกษตรอินทรีย์และการเป็นเมืองพักผ่อนที่ยังคงความเป็นธรรมชาติสูง",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนเกษตรอินทรีย์และสมุนไพร",
+      "สินค้าหัตถกรรมพื้นบ้าน",
+      "ร้านอาหารและคาเฟ่สายธรรมชาติ",
+    ],
+    painPoints: ["หาข้อมูลสินค้า OTOP ในพื้นที่ยาก", "เว็บไซต์เดิมไม่อัปเดตข้อมูลและดูไม่ทันสมัย"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อำนาจเจริญ",
+      "ออกแบบเว็บสินค้า OTOP",
+      "จ้างทำ SEO ลืออำนาจ",
+      "ทำเว็บวิสาหกิจชุมชน อำนาจเจริญ",
+    ],
+  },
+  districts: ["เมืองอำนาจเจริญ", "หัวตะพาน", "ลืออำนาจ", "พนา", "เสนางคนิคม"],
+  keywords: [
+    "รับทำเว็บไซต์ อำนาจเจริญ",
+    "ทำเว็บสินค้า OTOP",
+    "จ้างทำเว็บอำนาจเจริญ",
+    "รับทำ SEO อำนาจเจริญ",
+  ],
+};
+```
+
+### CONFIG: ang-thong.ts
+
+`Path: constants/area-nodes/ang-thong.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: ANG_THONG_CRAFT v18.0.1
+ * [STRATEGY]: Local Authority | Traditional Craft | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const angThongNode: AreaNode = {
+  slug: "ang-thong",
+  province: "อ่างทอง",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อ่างทอง | พัฒนาเว็บไซต์วิสาหกิจชุมชนและงานหัตถกรรมพื้นบ้าน",
+  description:
+    "ยกระดับสินค้าชุมชนอ่างทองสู่ตลาดพรีเมียม ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องคุณค่าและระบบขายออนไลน์ที่ใช้งานง่าย",
+  seoTitle: "รับทำเว็บไซต์ อ่างทอง ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อ่างทอง สำหรับกลุ่มแม่บ้าน วิสาหกิจชุมชน และ SME ท้องถิ่น ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่",
+  priority: 80,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/ang-thong-node.webp",
+  coordinates: { lat: 14.5896, lng: 100.4551 },
+  marketSaturation: 28,
+  regionalLatency: 13,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Community Brand Sync",
+      description:
+        "ดึงจุดเด่นของงานหัตถกรรมอ่างทองมาเป็นธีมหลักในการนำเสนอเพื่อสร้างภาพลักษณ์ที่น่าเชื่อถือ",
+    },
+    {
+      step: "02",
+      title: "Micro-E-commerce Sync",
+      description: "ติดตั้งระบบตะกร้าสินค้าที่จัดการง่ายผ่านมือถือเพื่อรองรับกลุ่มวิสาหกิจชุมชน",
+    },
+    {
+      step: "03",
+      title: "Central Region SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ดของดีอ่างทองเพื่อให้ลูกค้าจากกรุงเทพฯ และปริมณฑลหาคุณเจอ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อ่างทองเป็นเมืองแห่งงานฝีมือและเกษตรกรรมประณีต เว็บไซต์ที่ดูเข้าถึงง่ายและเล่าเรื่องเก่งจะช่วยเพิ่มมูลค่าสินค้าได้มาก",
+    technicalApproach:
+      "เน้นระบบ Mobile-First และการแสดงผลแกลเลอรี่รูปภาพที่คมชัดเพื่อโชว์ความประณีตของสินค้า",
+    localStrength: "มีความโดดเด่นด้านสินค้าจักสาน ตุ๊กตาชาววัง และวิถีชุมชนที่เข้มแข็ง",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนจักสานและงานคราฟต์",
+      "สวนเกษตรอินทรีย์และผลไม้แปรรูป",
+      "ร้านอาหารและคาเฟ่ริมน้ำ",
+    ],
+    painPoints: ["สินค้าดีแต่คนนอกพื้นที่ไม่รู้จัก", "หาช่องทางการตลาดออนไลน์ไม่เจอ"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ วิเศษชัยชาญ",
+      "ออกแบบเว็บสินค้า OTOP อ่างทอง",
+      "จ้างทำ SEO อ่างทอง",
+      "ทำเว็บวิสาหกิจชุมชน อ่างทอง",
+    ],
+  },
+  districts: ["เมืองอ่างทอง", "วิเศษชัยชาญ", "โพธิ์ทอง", "ป่าโมก", "ไชโย"],
+  keywords: [
+    "รับทำเว็บไซต์ อ่างทอง",
+    "ทำเว็บสินค้า OTOP",
+    "จ้างทำเว็บอ่างทอง",
+    "รับทำ SEO อ่างทอง",
+  ],
+};
+```
+
+### CONFIG: ayutthaya.ts
+
+`Path: constants/area-nodes/ayutthaya.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: AYUTTHAYA_HERITAGE_HUB v18.0.1
+ * [STRATEGY]: Historic Authority | Cultural Tourism | Dynamic Inheritance
+ * [MARKET]: Ayutthaya City, Industrial Estates (Rojana/Hi-Tech)
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const ayutthayaNode: AreaNode = {
+  slug: "ayutthaya",
+  province: "พระนครศรีอยุธยา",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อยุธยา | ยกระดับธุรกิจท่องเที่ยวและอุตสาหกรรมในเมืองประวัติศาสตร์",
+  description:
+    "บริการรับทำเว็บไซต์ในอยุธยา ครบวงจรสำหรับที่พักเชิงประวัติศาสตร์และโรงงานในนิคมอุตสาหกรรม เน้นความน่าเชื่อถือและการทำ SEO พื้นที่",
+  seoTitle: "รับทำเว็บไซต์ อยุธยา ออกแบบเว็บโรงแรม โรงงาน นิคมโรจนะ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อยุธยา สำหรับธุรกิจท่องเที่ยวและโรงงานอุตสาหกรรม มาตรฐานสากล รองรับ SEO และระบบบริการออนไลน์ ติดหน้าแรก Google",
+  priority: 94,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/ayutthaya-node.webp",
+  coordinates: { lat: 14.3532, lng: 100.5689 },
+  isTourismHeavy: true,
+  marketSaturation: 68,
+  regionalLatency: 14,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Heritage Sync Audit",
+      description:
+        "วิเคราะห์การนำเสนออัตลักษณ์เมืองเก่าให้ดูทันสมัยและน่าเชื่อถือสำหรับนักท่องเที่ยวและนักลงทุน",
+    },
+    {
+      step: "02",
+      title: "Industrial B2B Mapping",
+      description: "ติดตั้งระบบรองรับข้อมูลโรงงานและชิ้นส่วนอุตสาหกรรมสำหรับนิคมโรจนะและไฮเทค",
+    },
+    {
+      step: "03",
+      title: "Geo-Intent SEO",
+      description:
+        "ทำ Local SEO ดักจับคีย์เวิร์ด 'ที่พักอยุธยา' และ 'โรงงานอยุธยา' เพื่อครองพื้นที่การค้นหา",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อยุธยามีการผสมผสานระหว่างการท่องเที่ยวเชิงประวัติศาสตร์และเขตอุตสาหกรรมหนัก เว็บไซต์จึงต้องรองรับทั้ง Visual และ Technical",
+    technicalApproach:
+      "เน้นการทำ SEO สองทาง (Tourism & B2B) และระบบการแสดงผลที่รวดเร็วสำหรับนักท่องเที่ยวผ่านมือถือ",
+    localStrength: "เข้าใจความต้องการของนิคมอุตสาหกรรมและมาตรฐานความปลอดภัยที่โรงงานต้องการ",
+    nicheIndustries: [
+      "ที่พักและบูทีคโฮเต็ลเมืองเก่า",
+      "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
+      "ร้านอาหารและคาเฟ่ริมน้ำ",
+    ],
+    painPoints: ["เว็บโรงงานดูเก่าไม่น่าเชื่อถือ", "ธุรกิจท่องเที่ยวแข่งขันสูงใน Google Maps"],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ โรจนะ",
+      "ออกแบบเว็บโรงงาน อยุธยา",
+      "จ้างทำ SEO บางปะอิน",
+      "ทำเว็บโรงแรม อยุธยา",
+    ],
+  },
+  districts: ["พระนครศรีอยุธยา", "บางปะอิน", "อุทัย", "วังน้อย", "นครหลวง"],
+  keywords: ["รับทำเว็บไซต์ อยุธยา", "ทำเว็บโรงงาน โรจนะ", "จ้างทำเว็บอยุธยา", "รับทำ SEO อยุธยา"],
+};
+```
+
 ### CONFIG: bangkok.ts
+
 `Path: constants/area-nodes/bangkok.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: BANGKOK_ENTERPRISE_HUB v18.0.1 (DYNAMIC_LINKED)
@@ -728,6 +958,7 @@ export const bangkokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "bangkok",
   province: "กรุงเทพมหานคร",
+  region: "Central",
   templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ กรุงเทพฯ | ออกแบบเว็บองค์กรและบริษัท ติดหน้าแรก Google",
@@ -750,6 +981,31 @@ export const bangkokNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  isTourismHeavy: false,
+  marketSaturation: 92, // [INSIGHT]: ตลาดกรุงเทพฯ มีการแข่งขันสูงสุดในประเทศ
+  regionalLatency: 12,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Enterprise SEO Audit",
+      description:
+        "วิเคราะห์คู่แข่งในระดับมหาชนและวางแผนโครงสร้าง Keyword สำหรับตลาด B2B ที่มีการแข่งขันสูง",
+    },
+    {
+      step: "02",
+      title: "PDPA & Security Hardening",
+      description:
+        "ติดตั้งระบบความปลอดภัยข้อมูลขั้นสูงและ Cookie Consent ตามมาตรฐานสากลเพื่อความน่าเชื่อถือระดับองค์กร",
+    },
+    {
+      step: "03",
+      title: "Core Web Vitals Optimization",
+      description:
+        "ปรับจูนประสิทธิภาพเว็บไซต์ให้ผ่านเกณฑ์ Lighthouse 100/100 เพื่อครองอันดับหนึ่งบน Google Search",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/bangkok-node.webp",
@@ -859,10 +1115,521 @@ export const bangkokNode: AreaNode = {
   ],
   coordinates: { lat: 13.7563, lng: 100.5018 },
 };
-
 ```
+
+### CONFIG: bueng-kan.ts
+
+`Path: constants/area-nodes/bueng-kan.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: BUENG_KAN_ADVENTURE v18.0.1
+ * [STRATEGY]: Eco-Tourism | Religious Wisdom | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const buengKanNode: AreaNode = {
+  slug: "bueng-kan",
+  province: "บึงกาฬ",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ บึงกาฬ | ออกแบบเว็บท่องเที่ยวผาพบรักและธุรกิจในเมืองน้องใหม่ที่กำลังเติบโต",
+  description:
+    "เปลี่ยนกระแสการท่องเที่ยวภูทอกและหินสามวาฬ ให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นความตื่นตาตื่นใจและระบบที่เสถียร",
+  seoTitle: "รับทำเว็บไซต์ บึงกาฬ ออกแบบเว็บที่พัก หินสามวาฬ ภูทอก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์บึงกาฬ สำหรับรีสอร์ต โฮมสเตย์ และธุรกิจท่องเที่ยวสายผจญภัย ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่บึงกาฬ",
+  priority: 84,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/bueng-kan-node.webp",
+  coordinates: { lat: 18.362, lng: 103.654 },
+  isTourismHeavy: true,
+  marketSaturation: 32,
+  regionalLatency: 29,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Nature-Adventure Audit",
+      description:
+        "ดึงภาพลักษณ์ความมหัศจรรย์ทางธรรมชาติมาเป็นธีมหลักในการนำเสนอเพื่อสร้างแรงบันดาลใจให้นักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Digital Concierge Sync",
+      description:
+        "ติดตั้งระบบนำทางและข้อมูลการเข้าชมอุทยานฯ ที่เข้าถึงง่ายผ่านหน้าเว็บเพื่อเพิ่มความสะดวกให้ลูกค้า",
+    },
+    {
+      step: "03",
+      title: "New Province SEO Hub",
+      description:
+        "ทำ SEO เจาะจงพื้นที่บึงกาฬและแลนด์มาร์คสำคัญเพื่อชิงพื้นที่หน้าแรกในฐานะเมืองท่องเที่ยวมาแรง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "บึงกาฬมีนักท่องเที่ยวสาย Adventure และสายมูหนาแน่น เว็บไซต์ที่ภาพสวยและให้ข้อมูลการเดินทางที่ถูกต้องจะได้รับความเชื่อถือสูง",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพโดรนและระบบการจัดการข้อมูลที่รองรับ Mobile Users สูง",
+    localStrength:
+      "ทรัพยากรธรรมชาติที่ Unseen (หินสามวาฬ) และความสงบของเมืองริมโขงที่เป็นเอกลักษณ์",
+    nicheIndustries: [
+      "ที่พักและรีสอร์ตสาย Adventure",
+      "ธุรกิจนำเที่ยวและรถเช่า",
+      "วิสาหกิจชุมชนสินค้ายางพารา",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาพิกัดแหล่งท่องเที่ยวใหม่ๆ ยาก",
+      "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟน",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หินสามวาฬ",
+      "ออกแบบเว็บที่พัก บึงกาฬ",
+      "จ้างทำ SEO บึงกาฬ",
+      "ทำเว็บท่องเที่ยว ภูทอก",
+    ],
+  },
+  districts: ["เมืองบึงกาฬ", "เซกา", "โซ่พิสัย", "บึงโขงหลง", "บุ่งคล้า"],
+  keywords: [
+    "รับทำเว็บไซต์ บึงกาฬ",
+    "ทำเว็บที่พัก หินสามวาฬ",
+    "จ้างทำเว็บบึงกาฬ",
+    "รับทำ SEO บึงกาฬ",
+  ],
+};
+```
+
+### CONFIG: buriram.ts
+
+`Path: constants/area-nodes/buriram.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: BURIRAM_EVENT_CITY v18.0.1
+ * [STRATEGY]: Sports & Events | Regional Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const buriramNode: AreaNode = {
+  slug: "buriram",
+  province: "บุรีรัมย์",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ บุรีรัมย์ | พัฒนาเว็บไซต์ธุรกิจท่องเที่ยว กีฬา และการจัดงานระดับประเทศ",
+  description:
+    "ยกระดับภาพลักษณ์ธุรกิจในบุรีรัมย์สู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความทันสมัยสำหรับที่พัก ร้านอาหาร และศูนย์กีฬา ติดหน้าแรก Google",
+  seoTitle: "รับทำเว็บไซต์ บุรีรัมย์ ออกแบบเว็บโรงแรม ร้านอาหาร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์บุรีรัมย์ สำหรับธุรกิจในเมืองกีฬาและท่องเที่ยวทางประวัติศาสตร์ ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่",
+  priority: 92,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/buriram-node.webp",
+  coordinates: { lat: 14.993, lng: 103.109 },
+  isTourismHeavy: true,
+  marketSaturation: 55,
+  regionalLatency: 21,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Event-City Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์แบรนด์ให้สอดรับกับการเป็นเมืองศูนย์กลางการจัดงานกีฬาและการท่องเที่ยวระดับประเทศ",
+    },
+    {
+      step: "02",
+      title: "High-Traffic Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บที่รองรับการเข้าชมพร้อมกันจำนวนมากในช่วงฤดูกาลท่องเที่ยวและงานแข่งขันกีฬา",
+    },
+    {
+      step: "03",
+      title: "Sports-Tourism SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักบุรีรัมย์ใกล้สนาม', 'ร้านอาหารบุรีรัมย์' เพื่อดึงดูดกลุ่มแฟนกีฬา",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "บุรีรัมย์เติบโตอย่างรวดเร็วด้วยกลยุทธ์ Sport Tourism เว็บไซต์ต้องดูตื่นเต้น ทันสมัย และรองรับการจองที่รวดเร็ว",
+    technicalApproach:
+      "เน้น Mobile Optimization และระบบ Cache ประสิทธิภาพสูงเพื่อรองรับการใช้งานผ่านเน็ตมือถือในสนามแข่ง",
+    localStrength: "ความเป็น 'เมืองกีฬา' และ 'อารยธรรมขอม' ที่ดึงดูดนักท่องเที่ยวได้หลากหลายกลุ่ม",
+    nicheIndustries: [
+      "รีสอร์ตและโรงแรมใกล้สนามแข่ง",
+      "ร้านอาหารและคาเฟ่สายสปอร์ต",
+      "วิสาหกิจชุมชนผ้าทอพื้นเมือง",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาข้อมูลร้านอาหารหรือคาเฟ่ช่วงงานแข่งยาก",
+      "เว็บไซต์เดิมไม่อัปเดตข้อมูลกิจกรรมล่าสุด",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บุรีรัมย์",
+      "ออกแบบเว็บโรงแรม บุรีรัมย์",
+      "จ้างทำ SEO บุรีรัมย์",
+      "ทำเว็บคาเฟ่ บุรีรัมย์",
+    ],
+  },
+  districts: ["เมืองบุรีรัมย์", "นางรอง", "ประโคนชัย", "สตึก", "ลำปลายมาศ"],
+  keywords: [
+    "รับทำเว็บไซต์ บุรีรัมย์",
+    "ทำเว็บโรงแรม บุรีรัมย์",
+    "จ้างทำเว็บบุรีรัมย์",
+    "รับทำ SEO บุรีรัมย์",
+  ],
+};
+```
+
+### CONFIG: chachoengsao.ts
+
+`Path: constants/area-nodes/chachoengsao.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: CHACHOENGSAO_LOGISTICS v18.0.1
+ * [STRATEGY]: Industrial Growth | Logistics Hub | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const chachoengsaoNode: AreaNode = {
+  slug: "chachoengsao",
+  province: "ฉะเชิงเทรา",
+  region: "East",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ ฉะเชิงเทรา | พัฒนาเว็บไซต์โรงงานและธุรกิจโลจิสติกส์ในเขต EEC",
+  description:
+    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise สำหรับนิคมอุตสาหกรรมฉะเชิงเทรา เน้นความปลอดภัยข้อมูลและความน่าเชื่อถือให้คู่ค้า B2B",
+  seoTitle: "รับทำเว็บไซต์ ฉะเชิงเทรา ออกแบบเว็บโรงงาน โลจิสติกส์ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ฉะเชิงเทรา สำหรับธุรกิจโรงงานผลิต โกดังให้เช่า และขนส่งสินค้า มาตรฐานสากล รองรับ SEO อุตสาหกรรม EEC",
+  priority: 92,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/chachoengsao-node.webp",
+  coordinates: { lat: 13.6904, lng: 101.0772 },
+  marketSaturation: 68,
+  regionalLatency: 8,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "B2B Infrastructure Audit",
+      description:
+        "วิเคราะห์ความต้องการของคู่ค้าอุตสาหกรรมเพื่อวางโครงสร้างข้อมูลเทคนิคที่ค้นหาง่าย",
+    },
+    {
+      step: "02",
+      title: "Security & Compliance Sync",
+      description: "ติดตั้งระบบความปลอดภัยข้อมูลมาตรฐานสูงและระบบจัดเก็บเอกสาร RFQ ที่รวดเร็ว",
+    },
+    {
+      step: "03",
+      title: "EEC Entity SEO",
+      description:
+        "ทำ SEO เจาะจงคีย์เวิร์ดโรงงานและโลจิสติกส์ในพื้นที่ฉะเชิงเทราเพื่อดักจับ Traffic ฝ่ายจัดซื้อ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ฉะเชิงเทราเป็นจุดเชื่อมต่อโลจิสติกส์ที่สำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'ศูนย์กลางข้อมูลธุรกิจ' ที่มีความมั่นคงสูง",
+    technicalApproach:
+      "เน้นระบบความปลอดภัยระดับองค์กรและการทำ Local Business Schema สำหรับเขตอุตสาหกรรม",
+    localStrength:
+      "ทำเลที่ตั้งใกล้กรุงเทพฯ และสนามบินสุวรรณภูมิ รวมถึงการเป็นพื้นที่ยุทธศาสตร์ EEC",
+    nicheIndustries: [
+      "โรงงานผลิตและประกอบชิ้นส่วน",
+      "คลังสินค้าและศูนย์กระจายสินค้า",
+      "รีสอร์ตสายมูและคาเฟ่ริมน้ำ",
+    ],
+    painPoints: [
+      "เว็บไซต์ดูเก่าไม่น่าเชื่อถือสำหรับคู่ค้าใหม่",
+      "หาข้อมูลบริษัทใน Google ไม่เจอในคีย์เวิร์ดอุตสาหกรรม",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บางปะกง",
+      "ออกแบบเว็บโรงงาน ฉะเชิงเทรา",
+      "จ้างทำ SEO ฉะเชิงเทรา",
+      "ทำเว็บโกดัง บ้านโพธิ์",
+    ],
+  },
+  districts: ["เมืองฉะเชิงเทรา", "บางปะกง", "บ้านโพธิ์", "พนมสารคาม", "บางคล้า"],
+  keywords: [
+    "รับทำเว็บไซต์ ฉะเชิงเทรา",
+    "ทำเว็บโรงงาน บางปะกง",
+    "จ้างทำเว็บ EEC",
+    "รับทำ SEO ฉะเชิงเทรา",
+  ],
+};
+```
+
+### CONFIG: chai-nat.ts
+
+`Path: constants/area-nodes/chai-nat.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: CHAI_NAT_AGRI_GOV v18.0.1
+ * [STRATEGY]: Agriculture 4.0 | Gov Integrity | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const chaiNatNode: AreaNode = {
+  slug: "chai-nat",
+  province: "ชัยนาท",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ชัยนาท | ระบบสารสนเทศเพื่อการเกษตรและหน่วยงานท้องถิ่น",
+  description:
+    "ยกระดับการสื่อสารดิจิทัลสำหรับหน่วยงานราชการและธุรกิจเกษตรในชัยนาท มาตรฐาน ITA และความปลอดภัยข้อมูลสูงสุด",
+  seoTitle: "รับทำเว็บไซต์ ชัยนาท ออกแบบเว็บ อบต. เทศบาล ธุรกิจเกษตร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ชัยนาท สำหรับหน่วยงานราชการและ SME การเกษตร ดีไซน์ทันสมัย มาตรฐาน ITA รองรับการประเมินภาครัฐ",
+  priority: 80,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/chai-nat-node.webp",
+  coordinates: { lat: 15.1851, lng: 100.1251 },
+  marketSaturation: 25,
+  regionalLatency: 15,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Agri-Tech Data Audit",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลสินค้าเกษตร (เช่น ส้มโอขาวแตงกวา) เพื่อวางแผนการตลาดเฉพาะทาง",
+    },
+    {
+      step: "02",
+      title: "ITA Standard Deployment",
+      description: "ติดตั้งระบบจัดหมวดหมู่ข้อมูลสาธารณะตามเกณฑ์ OIT เพื่อความโปร่งใสและตรวจสอบได้",
+    },
+    {
+      step: "03",
+      title: "Local Identity SEO",
+      description: "ทำ Local SEO ดักจับคำค้นหาธุรกิจและสถานที่สำคัญในชัยนาทเพื่อให้ขึ้นอันดับหนึ่ง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ชัยนาทเป็นเมืองเกษตรกรรมและศูนย์กลางเมล็ดพันธุ์ เว็บไซต์ต้องเน้นความน่าเชื่อถือและการให้ข้อมูลที่ชัดเจน",
+    technicalApproach: "เน้นระบบโครงสร้างที่ปลอดภัยและรองรับการแสดงผลข้อมูล ITA แบบเรียลไทม์",
+    localStrength: "มีสินค้าเกษตรที่เป็นเอกลักษณ์และหน่วยงานท้องถิ่นที่ต้องการยกระดับสู่ดิจิทัล",
+    nicheIndustries: [
+      "หน่วยงานท้องถิ่น (อปท.)",
+      "สวนส้มโอและผลไม้พรีเมียม",
+      "ธุรกิจวัสดุก่อสร้างท้องถิ่น",
+    ],
+    painPoints: ["เว็บไซต์เดิมล้าสมัยข้อมูลไม่เป็นปัจจุบัน", "ประชาชนเข้าถึงบริการออนไลน์ได้ยาก"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สรรพยา",
+      "ออกแบบเว็บราชการ ชัยนาท",
+      "จ้างทำ SEO ชัยนาท",
+      "ทำเว็บสินค้าเกษตร ชัยนาท",
+    ],
+  },
+  districts: ["เมืองชัยนาท", "สรรพยา", "หันคา", "วัดสิงห์", "มโนรมย์"],
+  keywords: ["รับทำเว็บไซต์ ชัยนาท", "ทำเว็บราชการ ชัยนาท", "จ้างทำเว็บชัยนาท", "รับทำ SEO ชัยนาท"],
+};
+```
+
+### CONFIG: chaiyaphum.ts
+
+`Path: constants/area-nodes/chaiyaphum.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: CHAIYAPHUM_NATURE v18.0.1
+ * [STRATEGY]: Eco-Tourism | Agri-Craft | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const chaiyaphumNode: AreaNode = {
+  slug: "chaiyaphum",
+  province: "ชัยภูมิ",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ชัยภูมิ | ออกแบบเว็บท่องเที่ยวธรรมชาติและสินค้าภูมิปัญญาป่าหินงาม",
+  description:
+    "เปลี่ยนบรรยากาศทุ่งดอกกระเจียวและเทือกเขาพังเหย ให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นความสดชื่นและระบบที่ใช้งานง่าย",
+  seoTitle: "รับทำเว็บไซต์ ชัยภูมิ ออกแบบเว็บที่พัก ทุ่งดอกกระเจียว - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ชัยภูมิ สำหรับรีสอร์ต โฮมสเตย์ และวิสาหกิจชุมชนผ้าไหมมัดหมี่ ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่ชัยภูมิ",
+  priority: 82,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/chaiyaphum-node.webp",
+  coordinates: { lat: 15.806, lng: 102.031 },
+  isTourismHeavy: true,
+  marketSaturation: 35,
+  regionalLatency: 20,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Nature Brand Audit",
+      description:
+        "ดึงจุดเด่นด้านธรรมชาติและงานหัตถกรรมมาเป็นธีมหลักในการนำเสนอเพื่อสร้างภาพลักษณ์ที่แตกต่าง",
+    },
+    {
+      step: "02",
+      title: "Seasonal Booking Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและสั่งจองสินค้าที่รองรับการใช้งานช่วงฤดูกาลท่องเที่ยวทุ่งดอกกระเจียว",
+    },
+    {
+      step: "03",
+      title: "Highland Authority SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักชัยภูมิ', 'ป่าหินงาม' เพื่อครองอันดับหนึ่งในใจคนรักธรรมชาติ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ชัยภูมิเป็นจุดหมายเด่นด้านการท่องเที่ยวเชิงนิเวศ เว็บไซต์ที่แสดงภาพบรรยากาศได้สวยงามจะดึงดูดลูกค้าได้ดีที่สุด",
+    technicalApproach:
+      "เน้น Mobile Optimization และระบบการติดต่อสอบถามที่รวดเร็วเพื่อรองรับนักท่องเที่ยว",
+    localStrength: "มีความโดดเด่นด้านอุทยานแห่งชาติและผ้าไหมมัดหมี่ที่มีเอกลักษณ์เฉพาะตัว",
+    nicheIndustries: [
+      "ที่พักเชิงนิเวศและโฮมสเตย์",
+      "วิสาหกิจชุมชนผ้าไหมมัดหมี่",
+      "ธุรกิจสินค้าเกษตรแปรรูป",
+    ],
+    painPoints: ["นักท่องเที่ยวหาพิกัดที่พักในจุดลับยาก", "ภาพลักษณ์แบรนด์ท้องถิ่นดูไม่พรีเมียม"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ทุ่งดอกกระเจียว",
+      "ออกแบบเว็บรีสอร์ต ชัยภูมิ",
+      "จ้างทำ SEO ชัยภูมิ",
+      "ทำเว็บสินค้าภูมิปัญญา ชัยภูมิ",
+    ],
+  },
+  districts: ["เมืองชัยภูมิ", "เทพสถิต", "คอนสาร", "ภูเขียว", "ภักดีชุมพล"],
+  keywords: [
+    "รับทำเว็บไซต์ ชัยภูมิ",
+    "ทำเว็บที่พัก ชัยภูมิ",
+    "จ้างทำเว็บชัยภูมิ",
+    "รับทำ SEO ชัยภูมิ",
+  ],
+};
+```
+
+### CONFIG: chanthaburi.ts
+
+`Path: constants/area-nodes/chanthaburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: CHANTHABURI_GEM_FRUIT v18.0.1
+ * [STRATEGY]: Gemstone Trade | Fruit Export | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const chanthaburiNode: AreaNode = {
+  slug: "chanthaburi",
+  province: "จันทบุรี",
+  region: "East",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ จันทบุรี | ยกระดับแบรนด์อัญมณีและตลาดผลไม้ส่งออกสู่สากล",
+  description:
+    "เปลี่ยนชื่อเสียงเมืองจันท์ให้เป็นยอดขายระดับโลก ด้วยเว็บไซต์ D2C สำหรับอัญมณีและระบบจองสินค้าสวนผลไม้พรีเมียม",
+  seoTitle: "รับทำเว็บไซต์ จันทบุรี ออกแบบเว็บอัญมณี สวนผลไม้ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์จันทบุรี สำหรับธุรกิจพลอย เครื่องประดับ และสวนทุเรียนส่งออก ดีไซน์สวยแพง โหลดไว ติดหน้าแรก Google",
+  priority: 89,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/chanthaburi-node.webp",
+  coordinates: { lat: 12.6112, lng: 102.1039 },
+  isTourismHeavy: true,
+  marketSaturation: 55,
+  regionalLatency: 16,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Luxury Gemstone Audit",
+      description:
+        "วิเคราะห์การนำเสนองานเครื่องประดับและพลอยให้ดูทรงคุณค่าและน่าเชื่อถือในระดับสากล",
+    },
+    {
+      step: "02",
+      title: "Agro-Export Sync",
+      description:
+        "ติดตั้งระบบแคตตาล็อกสินค้าเกษตรพรีเมียมและระบบจองผลไม้ฤดูกาลที่รองรับลูกค้าต่างชาติ",
+    },
+    {
+      step: "03",
+      title: "Jewelry SEO Domination",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ตลาดพลอยจันทบุรี', 'ทุเรียนจันท์พรีเมียม' เพื่อชิงพื้นที่หน้าแรก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "จันทบุรีเป็นศูนย์กลางการค้าที่มีเอกลักษณ์สูง เว็บไซต์ที่โชว์รายละเอียดสินค้าได้คมชัด (High-Res) จะปิดการขายได้เร็วกว่า",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับอัญมณีและระบบ E-commerce ที่มีความปลอดภัยในการทำธุรกรรมสูง",
+    localStrength:
+      "ชื่อเสียงด้าน 'นครแห่งอัญมณี' และ 'มหานครผลไม้' คือจุดแข็งระดับโลกที่ต้องนำเสนอ",
+    nicheIndustries: [
+      "ธุรกิจพลอยและเครื่องประดับ",
+      "ล้งผลไม้และสวนทุเรียนพรีเมียม",
+      "รีสอร์ตชายฝั่งและโฮมสเตย์ป่าชายเลน",
+    ],
+    painPoints: [
+      "สินค้าพรีเมียมแต่ภาพลักษณ์เว็บดูธรรมดา",
+      "คู่ค้าต่างชาติเข้าถึงข้อมูลสินค้าได้ยาก",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เมืองจันทบุรี",
+      "ออกแบบเว็บพลอย จันทบุรี",
+      "จ้างทำ SEO จันทบุรี",
+      "ทำเว็บสวนทุเรียน จันทบุรี",
+    ],
+  },
+  districts: ["เมืองจันทบุรี", "ขลุง", "ท่าใหม่", "โป่งน้ำร้อน", "มะขาม"],
+  keywords: ["รับทำเว็บไซต์ จันทบุรี", "ทำเว็บพลอย", "จ้างทำเว็บสวนผลไม้", "รับทำ SEO จันทบุรี"],
+};
+```
+
 ### CONFIG: chiang-mai.ts
+
 `Path: constants/area-nodes/chiang-mai.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.1 (DYNAMIC_LINKED)
@@ -878,6 +1645,7 @@ export const chiangMaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-mai",
   province: "เชียงใหม่",
+  region: "North",
   templateSlug: "hotelresort", // เชื่อมโยง Logic การ Render กับ Template โรงแรม
 
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บโรงแรมและรีสอร์ต เพิ่มยอดจองตรง ไม่ผ่าน OTA",
@@ -897,6 +1665,30 @@ export const chiangMaiNode: AreaNode = {
   priceValue: hotelResortService.priceValue,
   currency: hotelResortService.currency,
   unit: hotelResortService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 70,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Lanna Branding Sync",
+      description:
+        "ผสมผสานอัตลักษณ์ล้านนาร่วมสมัยเข้ากับงานดีไซน์สมัยใหม่เพื่อให้เว็บไซต์โดดเด่นในสายตานักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Direct Booking Integration",
+      description:
+        "ติดตั้งระบบจองที่พักตรงที่ไม่ผ่านเอเย่นต์ (OTA) เพื่อรักษาผลกำไรของธุรกิจไว้ได้เต็มเม็ดเต็มหน่วย",
+    },
+    {
+      step: "03",
+      title: "Tourism SEO Layering",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพจากกลุ่มนักท่องเที่ยวต่างชาติ",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chiang-mai-node.webp",
@@ -1014,10 +1806,12 @@ export const chiangMaiNode: AreaNode = {
   ],
   coordinates: { lat: 18.7883, lng: 98.9853 },
 };
-
 ```
+
 ### CONFIG: chiang-rai.ts
+
 `Path: constants/area-nodes/chiang-rai.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.2 (STRICT_SYNC)
@@ -1033,6 +1827,7 @@ export const chiangRaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-rai",
   province: "เชียงราย",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ เชียงราย | จ้างทำเว็บกาแฟ Specialty และรีสอร์ตศิลปะ ติดหน้าแรก Google",
@@ -1056,6 +1851,29 @@ export const chiangRaiNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 55,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Artisan Brand Audit",
+      description:
+        "วิเคราะห์จุดเด่นของแบรนด์กาแฟหรืองานคราฟต์เพื่อวางโครงสร้างการเล่าเรื่อง (Storytelling) ที่น่าดึงดูด",
+    },
+    {
+      step: "02",
+      title: "Global E-commerce Sync",
+      description:
+        "ติดตั้งระบบตะกร้าสินค้าและระบบจองที่พักที่รองรับการชำระเงินจากทั่วโลกและแจ้งเตือนผ่าน LINE",
+    },
+    {
+      step: "03",
+      title: "Border SEO Strategy",
+      description:
+        "เน้นคีย์เวิร์ดภาษาจีนและอังกฤษเพื่อดักจับ Traffic จากกลุ่มนักท่องเที่ยวและคู่ค้าในเขตเศรษฐกิจชายแดน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chiang-rai-node.webp",
@@ -1175,10 +1993,12 @@ export const chiangRaiNode: AreaNode = {
   ],
   coordinates: { lat: 19.9101, lng: 99.8405 },
 };
-
 ```
+
 ### CONFIG: chon-buri.ts
+
 `Path: constants/area-nodes/chon-buri.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.2 (DYNAMIC_LINKED)
@@ -1194,6 +2014,7 @@ export const chonBuriNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chon-buri",
   province: "ชลบุรี",
+  region: "East",
   templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจ EEC ติดอันดับ Google",
@@ -1217,6 +2038,29 @@ export const chonBuriNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  marketSaturation: 78,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "EEC B2B Strategy",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาของฝ่ายจัดซื้อโรงงานในเขตนิคมอุตสาหกรรมเพื่อวางโครงสร้างเนื้อหาเชิงเทคนิค",
+    },
+    {
+      step: "02",
+      title: "Multilingual Deployment",
+      description:
+        "พัฒนาระบบเว็บไซต์ 3 ภาษา (ไทย/อังกฤษ/ญี่ปุ่น) เพื่อรองรับนักลงทุนและคู่ค้าในตลาดนิคมอุตสาหกรรม",
+    },
+    {
+      step: "03",
+      title: "Technical SEO Registry",
+      description:
+        "ปักหมุดธุรกิจบนแผนที่อุตสาหกรรมและทำ Local Schema เพื่อให้โรงงานของคุณถูกค้นพบก่อนใครใน EEC",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chon-buri-node.webp",
@@ -1338,10 +2182,12 @@ export const chonBuriNode: AreaNode = {
   ],
   coordinates: { lat: 13.3611, lng: 100.9847 },
 };
-
 ```
+
 ### CONFIG: chumphon.ts
+
 `Path: constants/area-nodes/chumphon.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.1 (STRICT_SYNC)
@@ -1357,6 +2203,7 @@ export const chumphonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chumphon",
   province: "ชุมพร",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
@@ -1380,6 +2227,28 @@ export const chumphonNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 45,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Agro-Digital Audit",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลสินค้าเกษตรและแหล่งท่องเที่ยวเพื่อวางแผนการประชาสัมพันธ์บนโลกออนไลน์",
+    },
+    {
+      step: "02",
+      title: "ITA Compliance Sync",
+      description:
+        "จัดระเบียบข้อมูลหน่วยงานตามมาตรฐานคุณธรรมและความโปร่งใส (OIT) เพื่อรองรับการประเมินภาครัฐ",
+    },
+    {
+      step: "03",
+      title: "Southern Gateway SEO",
+      description: "เน้นคีย์เวิร์ดดักจับกลุ่มนักท่องเที่ยวและคู่ค้าโลจิสติกส์ในฐานะประตูสู่ภาคใต้",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chumphon-gateway.webp",
@@ -1494,10 +2363,100 @@ export const chumphonNode: AreaNode = {
   ],
   coordinates: { lat: 10.493, lng: 99.18 },
 };
-
 ```
+
+### CONFIG: kalasin.ts
+
+`Path: constants/area-nodes/kalasin.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: KALASIN_PREMIUM_AGRI v18.0.1
+ * [STRATEGY]: Paleontology Tourism | Silk & Agri | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const kalasinNode: AreaNode = {
+  slug: "kalasin",
+  province: "กาฬสินธุ์",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ กาฬสินธุ์ | ยกระดับแบรนด์ผ้าไหมแพรวาและธุรกิจท่องเที่ยวเชิงประวัติศาสตร์",
+  description:
+    "เปลี่ยนงานหัตถศิลป์ 'ราชินีแห่งไหม' และเสน่ห์เมืองไดโนเสาร์ ให้เป็นยอดขายดิจิทัลที่ดูพรีเมียมและน่าเชื่อถือ",
+  seoTitle: "รับทำเว็บไซต์ กาฬสินธุ์ ออกแบบเว็บผ้าไหมแพรวา ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์กาฬสินธุ์ สำหรับวิสาหกิจชุมชนผ้าไหมแพรวา SME และแหล่งท่องเที่ยว ดีไซน์ประณีต โหลดไว รองรับ SEO พื้นที่",
+  priority: 82,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/kalasin-node.webp",
+  coordinates: { lat: 16.432, lng: 103.506 },
+  isTourismHeavy: true,
+  marketSaturation: 32,
+  regionalLatency: 25,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Artisan Brand Audit",
+      description:
+        "วิเคราะห์คุณค่าผ้าไหมแพรวาเพื่อสร้างแบรนด์ดิจิทัลที่ดูหรูหราและสะท้อนความประณีตชั้นสูง",
+    },
+    {
+      step: "02",
+      title: "Dino-Heritage Sync",
+      description:
+        "ติดตั้งระบบแนะนำเส้นทางท่องเที่ยวเชิงประวัติศาสตร์และระบบจองสินค้างานคราฟต์พรีเมียม",
+    },
+    {
+      step: "03",
+      title: "Cultural Niche SEO",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหา 'ผ้าไหมแพรวาแท้', 'ที่พักกาฬสินธุ์' เพื่อเพิ่มโอกาสการขาย",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "กาฬสินธุ์มีสินค้าภูมิปัญญาที่เป็นที่สุด เว็บไซต์ที่ดูมีระดับและเล่าเรื่องได้ดีจะดึงดูดลูกค้ากำลังซื้อสูงได้จริง",
+    technicalApproach:
+      "เน้น Image Optimization ขั้นสูงสำหรับภาพถ่ายผ้าไหมที่เห็นรายละเอียดลายผ้าชัดเจน",
+    localStrength: "ความเป็นที่สุดของ 'ผ้าไหมแพรวา' และแหล่งขุดค้นไดโนเสาร์ที่มีชื่อเสียงระดับสากล",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนผ้าไหมแพรวาพรีเมียม",
+      "ธุรกิจเกษตรแปรรูปและโรงงานน้ำตาล",
+      "ที่พักและร้านอาหารสายวัฒนธรรม",
+    ],
+    painPoints: [
+      "สินค้าพรีเมียมแต่ภาพลักษณ์บนเว็บดูธรรมดา",
+      "นักท่องเที่ยวหาข้อมูลสินค้าภูมิปัญญาได้ยาก",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ผ้าไหมแพรวา",
+      "ออกแบบเว็บธุรกิจ กาฬสินธุ์",
+      "จ้างทำ SEO กาฬสินธุ์",
+      "ทำเว็บท่องเที่ยว ไดโนเสาร์",
+    ],
+  },
+  districts: ["เมืองกาฬสินธุ์", "ยางตลาด", "กมลาไสย", "สหัสขันธ์", "สมเด็จ"],
+  keywords: [
+    "รับทำเว็บไซต์ กาฬสินธุ์",
+    "ทำเว็บผ้าไหมแพรวา",
+    "จ้างทำเว็บกาฬสินธุ์",
+    "รับทำ SEO กาฬสินธุ์",
+  ],
+};
+```
+
 ### CONFIG: kamphaeng-phet.ts
+
 `Path: constants/area-nodes/kamphaeng-phet.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: KAMPHAENG_PHET_GOV_HUB v18.0.6 (DYNAMIC_LINKED)
@@ -1513,6 +2472,7 @@ export const kamphaengPhetNode: AreaNode = {
   // --- Basic Identity ---
   slug: "kamphaeng-phet",
   province: "กำแพงเพชร",
+  region: "North",
   templateSlug: "local-authority", // เชื่อมโยง Logic การ Render
 
   title: "รับทำเว็บไซต์ กำแพงเพชร | ออกแบบระบบเว็บไซต์หน่วยงานราชการ และธุรกิจท้องถิ่น",
@@ -1535,6 +2495,29 @@ export const kamphaengPhetNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 38,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Public Service Audit",
+      description:
+        "ตรวจสอบความง่ายในการเข้าถึงข้อมูลบริการประชาชนออนไลน์เพื่อให้สอดคล้องกับพฤติกรรมคนในพื้นที่",
+    },
+    {
+      step: "02",
+      title: "Digital City Deployment",
+      description:
+        "ติดตั้งระบบรับเรื่องร้องเรียนและบริการอิเล็กทรอนิกส์ (E-Service) ที่เสถียรและปลอดภัยสูงสุด",
+    },
+    {
+      step: "03",
+      title: "Heritage & SME SEO",
+      description:
+        "วางรากฐานการค้นหาเพื่อสนับสนุนแหล่งท่องเที่ยวทางประวัติศาสตร์และสินค้า OTOP ของจังหวัด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/kamphaeng-phet-node.webp",
@@ -1642,10 +2625,97 @@ export const kamphaengPhetNode: AreaNode = {
   ],
   coordinates: { lat: 16.4828, lng: 99.5227 },
 };
-
 ```
+
+### CONFIG: kanchanaburi.ts
+
+`Path: constants/area-nodes/kanchanaburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: KANCHANABURI_ECO_ADVENTURE v18.0.1
+ * [STRATEGY]: Eco-Tourism | Nature Storytelling | Dynamic Inheritance
+ * [MARKET]: Kanchanaburi, River Kwai, Sangkhlaburi
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const kanchanaburiNode: AreaNode = {
+  slug: "kanchanaburi",
+  province: "กาญจนบุรี",
+  region: "West",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ กาญจนบุรี | ออกแบบเว็บรีสอร์ตริมน้ำและธุรกิจท่องเที่ยวเชิงนิเวศ",
+  description:
+    "เปลี่ยนบรรยากาศธรรมชาติของกาญจนบุรีให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นอารมณ์ความรู้สึกและระบบจองที่แม่นยำ",
+  seoTitle: "รับทำเว็บไซต์ กาญจนบุรี ออกแบบเว็บรีสอร์ต แพริมน้ำ ติดหน้าแรก Google - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์กาญจนบุรี เน้นธุรกิจท่องเที่ยว แพริมน้ำ และแคมป์ปิ้ง ดีไซน์พรีเมียม โหลดไว รองรับภาษาต่างชาติและระบบจองตรง",
+  priority: 91,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/kanchanaburi-node.webp",
+  coordinates: { lat: 14.0227, lng: 99.5328 },
+  isTourismHeavy: true,
+  marketSaturation: 62,
+  regionalLatency: 18,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Nature Visual Audit",
+      description: "ออกแบบการจัดวางภาพและวิดีโอบรรยากาศที่พักริมน้ำให้โหลดไวและสวยงามที่สุด",
+    },
+    {
+      step: "02",
+      title: "Direct Booking Sync",
+      description: "ติดตั้งระบบจองตรงเพื่อลดค่าคอมมิชชั่น OTA และเพิ่มกำไรให้รีสอร์ตในกาญจนบุรี",
+    },
+    {
+      step: "03",
+      title: "Adventure SEO Hub",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดสำหรับการท่องเที่ยวเชิงผจญภัยและประวัติศาสตร์เพื่อดักจับ Traffic คุณภาพ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นักท่องเที่ยวในกาญจนบุรีเน้นการค้นหา 'ที่พักริมน้ำ' และ 'แคมป์ปิ้ง' เว็บไซต์ที่ภาพสวยและจองง่ายจะมีความได้เปรียบสูง",
+    technicalApproach:
+      "เน้น Image Optimization และการทำ CDN เพื่อให้เข้าถึงได้เร็วจากทุกพื้นที่แม้สัญญาณเน็ตจะจำกัดในบางจุด",
+    localStrength:
+      "เข้าใจพฤติกรรมกลุ่มครอบครัวและสายแอดเวนเจอร์ที่มักหาข้อมูลผ่านโซเชียลแล้วกดมาจองที่เว็บ",
+    nicheIndustries: [
+      "แพริมน้ำและรีสอร์ตหรู",
+      "ธุรกิจล่องแก่งและกิจกรรมเอาท์ดอร์",
+      "คาเฟ่ธรรมชาติวิวหลักล้าน",
+    ],
+    painPoints: ["เน็ตบนดอย/ริมน้ำช้าทำให้เว็บโหลดไม่ขึ้น", "ลูกค้ายกเลิกจองเพราะระบบไม่เสถียร"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ กาญจนบุรี",
+      "ออกแบบเว็บแพริมน้ำ กาญ",
+      "จ้างทำ SEO สังขละบุรี",
+      "ทำเว็บที่พัก กาญจนบุรี",
+    ],
+  },
+  districts: ["เมืองกาญจนบุรี", "ไทรโยค", "ศรีสวัสดิ์", "สังขละบุรี", "ทองผาภูมิ"],
+  keywords: [
+    "รับทำเว็บไซต์ กาญจนบุรี",
+    "ทำเว็บรีสอร์ต กาญ",
+    "จ้างทำเว็บที่พัก",
+    "รับทำ SEO กาญจนบุรี",
+  ],
+};
+```
+
 ### CONFIG: khon-kaen.ts
+
 `Path: constants/area-nodes/khon-kaen.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v18.0.2 (DYNAMIC_LINKED)
@@ -1661,6 +2731,7 @@ export const khonKaenNode: AreaNode = {
   // --- Basic Identity ---
   slug: "khon-kaen",
   province: "ขอนแก่น",
+  region: "Northeast",
   templateSlug: "salepage", // เชื่อมโยง Logic การ Render
 
   title: "รับทำเว็บไซต์ ขอนแก่น | Sale Page คลินิกและ SME ปิดการขายไว ทักแชทแตก",
@@ -1684,6 +2755,29 @@ export const khonKaenNode: AreaNode = {
   priceValue: salePageService.priceValue,
   currency: salePageService.currency,
   unit: salePageService.unit,
+
+  marketSaturation: 65,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Conversion Audit",
+      description:
+        "วิเคราะห์จุดหลุดของลูกค้าในพื้นที่และวางแผนการแก้ปัญหาด้วย UX ที่เข้าใจคนขอนแก่น",
+    },
+    {
+      step: "02",
+      title: "Smart CAPI Deployment",
+      description:
+        "ติดตั้งระบบ Conversion API เพื่อส่งข้อมูลการซื้อขายกลับไปเทรน AI ของโฆษณาให้แม่นยำยิ่งขึ้น",
+    },
+    {
+      step: "03",
+      title: "Local SEO Dominance",
+      description:
+        "ทำ Local Entity Mapping เพื่อให้ร้านค้าหรือคลินิกของคุณขึ้นอันดับหนึ่งใน Google Maps ทั่วขอนแก่น",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/khon-kaen-node.webp",
@@ -1789,10 +2883,12 @@ export const khonKaenNode: AreaNode = {
   ],
   coordinates: { lat: 16.4322, lng: 102.8236 },
 };
-
 ```
+
 ### CONFIG: korat.ts
+
 `Path: constants/area-nodes/korat.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: KORAT_INDUSTRIAL_HUB v18.0.3 (PRODUCTION_FINAL)
@@ -1808,6 +2904,7 @@ export const koratNode: AreaNode = {
   // --- Basic Identity ---
   slug: "korat",
   province: "นครราชสีมา",
+  region: "Northeast",
   templateSlug: "catalog", // เชื่อมโยงกับ Catalog Template
 
   title: "รับทำเว็บไซต์ โคราช | เว็บไซต์โรงงานและแคตตาล็อกสินค้าอุตสาหกรรม",
@@ -1831,6 +2928,29 @@ export const koratNode: AreaNode = {
   priceValue: catalogService.priceValue,
   currency: catalogService.currency,
   unit: catalogService.unit,
+
+  marketSaturation: 72,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Digital Catalog Audit",
+      description:
+        "จัดระเบียบข้อมูลสินค้า (SKU) และ Part Number เพื่อวางโครงสร้าง Database ที่ค้นหาง่ายที่สุด",
+    },
+    {
+      step: "02",
+      title: "B2B Inquiry Gateway",
+      description:
+        "ติดตั้งระบบขอใบเสนอราคา (RFQ) ที่เชื่อมต่อกับระบบหลังบ้านของโรงงานเพื่อความรวดเร็วในการปิดดีล",
+    },
+    {
+      step: "03",
+      title: "Industrial SEO Layering",
+      description:
+        "วางรากฐานคีย์เวิร์ดเฉพาะทางเพื่อดักจับ Traffic จากฝ่ายจัดซื้อโรงงานทั่วเขตโคราชและอีสาน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/korat-monolith.webp",
@@ -1941,10 +3061,101 @@ export const koratNode: AreaNode = {
   ],
   coordinates: { lat: 14.9759, lng: 102.1177 },
 };
-
 ```
+
+### CONFIG: krabi.ts
+
+`Path: constants/area-nodes/krabi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: KRABI_LUXURY_TOURISM v18.0.1
+ * [STRATEGY]: Ultra-Luxury Experience | Global Reach | Dynamic Inheritance
+ * [MARKET]: Krabi, Ao Nang, Phi Phi Islands (High-End Hospitality)
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const krabiNode: AreaNode = {
+  slug: "krabi",
+  province: "กระบี่",
+  region: "South",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ กระบี่ | ออกแบบเว็บไซต์ระดับ Ultra-Luxury สำหรับรีสอร์ตและทัวร์พรีเมียม",
+  description:
+    "ยกระดับภาพลักษณ์ธุรกิจท่องเที่ยวในกระบี่สู่ระดับโลก ด้วยเว็บไซต์ที่เน้นประสบการณ์ความหรูหราและระบบจองที่ลื่นไหลสายฟ้าแลบ",
+  seoTitle: "รับทำเว็บไซต์ กระบี่ ออกแบบเว็บรีสอร์ตหรู พูลวิลล่า - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์กระบี่ อ่าวนาง เกาะพีพี ครบวงจร สำหรับโรงแรม 5 ดาว และเรือยอร์ชคลับ มาตรฐานสากล รองรับ SEO ท่องเที่ยวระดับโลก",
+  priority: 97,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/krabi-node.webp",
+  coordinates: { lat: 8.0863, lng: 98.9063 },
+  isTourismHeavy: true,
+  marketSaturation: 78,
+  regionalLatency: 19,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Global Aesthetic Audit",
+      description: "วิเคราะห์งานดีไซน์ให้สอดคล้องกับรสนิยมของนักท่องเที่ยวกลุ่ม UHNW จากทั่วโลก",
+    },
+    {
+      step: "02",
+      title: "Direct Conversion Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและกิจกรรมทางทะเลที่เชื่อมต่อกับระบบชำระเงินสากล (Stripe/PayPal)",
+    },
+    {
+      step: "03",
+      title: "Marine SEO Domination",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพในสมรภูมิการแข่งขันระดับสากล",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "กระบี่เป็นจุดหมายปลายทางระดับโลก การแข่งขันอยู่ที่ 'Visual' และ 'Trust' เว็บไซต์ที่โหลดรูปไวและดูแพงจะปิดดีลได้สูงกว่า",
+    technicalApproach:
+      "เน้น Image Optimization ขั้นสูงและระบบ CDN ทั่วโลกเพื่อให้ลูกค้าจากยุโรปเข้าเว็บคุณได้เร็วที่สุด",
+    localStrength:
+      "ทรัพยากรธรรมชาติระดับตำนาน (Unseen Thailand) คือจุดขายหลักที่ต้องนำเสนอบนหน้าเว็บ",
+    nicheIndustries: [
+      "พูลวิลล่าและรีสอร์ตระดับไฮเอนด์",
+      "ธุรกิจเช่าเรือยอร์ชและทัวร์ทะเลส่วนตัว",
+      "ศูนย์ Wellness และสปาครบวงจร",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมโหลดช้าสำหรับลูกค้าต่างประเทศ",
+      "ภาพลักษณ์แบรนด์ดูไม่คุ้มราคากับบริการพรีเมียม",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อ่าวนาง",
+      "ออกแบบเว็บรีสอร์ต กระบี่",
+      "จ้างทำ SEO เกาะพีพี",
+      "ทำเว็บทัวร์เรือยอร์ช กระบี่",
+    ],
+  },
+  districts: ["เมืองกระบี่", "อ่าวนาง", "เกาะพีพี", "เกาะลันตา", "เหนือคลอง"],
+  keywords: [
+    "รับทำเว็บไซต์ กระบี่",
+    "ทำเว็บโรงแรม กระบี่",
+    "จ้างทำเว็บอ่าวนาง",
+    "รับทำ SEO กระบี่",
+  ],
+};
+```
+
 ### CONFIG: lampang.ts
+
 `Path: constants/area-nodes/lampang.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.1 (STRICT_SYNC)
@@ -1960,6 +3171,7 @@ export const lampangNode: AreaNode = {
   // --- Basic Identity ---
   slug: "lampang",
   province: "ลำปาง",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ ลำปาง | ออกแบบเว็บเซรามิกและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
@@ -1984,6 +3196,30 @@ export const lampangNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 42,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Craft Identity Audit",
+      description:
+        "วิเคราะห์อัตลักษณ์งานเซรามิกหรือธุรกิจท้องถิ่นเพื่อดึงเรื่องราว (Storytelling) ออกมานำเสนอให้มีระดับ",
+    },
+    {
+      step: "02",
+      title: "Digital Showroom Deployment",
+      description:
+        "ติดตั้งระบบแกลเลอรี่และแคตตาล็อกสินค้าที่โชว์ความประณีตของเนื้องานเพื่อรองรับทั้งการค้าปลีกและส่งออก",
+    },
+    {
+      step: "03",
+      title: "Regional Traffic Sync",
+      description:
+        "วางโครงสร้าง SEO ให้สอดรับกับการค้นหาในเขตภาคเหนือตอนบนเพื่อดึงดูดกลุ่มนักท่องเที่ยวคุณภาพสูง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/lampang-node.webp",
@@ -2104,10 +3340,251 @@ export const lampangNode: AreaNode = {
   ],
   coordinates: { lat: 18.2855, lng: 99.4927 },
 };
-
 ```
+
+### CONFIG: lamphun.ts
+
+`Path: constants/area-nodes/lamphun.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: LAMPHUN_LANNA_CRAFT v18.0.1
+ * [STRATEGY]: Industrial & Craft Hub | Local Authority | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const lamphunNode: AreaNode = {
+  slug: "lamphun",
+  province: "ลำพูน",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ลำพูน | พัฒนาเว็บไซต์โรงงานอุตสาหกรรมและแบรนด์ผ้าไหมพรีเมียม",
+  description:
+    "ยกระดับธุรกิจในลำพูนสู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือสำหรับโรงงานและดีไซน์หรูหราสำหรับงานหัตถศิลป์",
+  seoTitle: "รับทำเว็บไซต์ ลำพูน ออกแบบเว็บโรงงาน ผ้าไหมยกดอก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ลำพูน สำหรับนิคมอุตสาหกรรม และแบรนด์สินค้าพื้นเมืองพรีเมียม มาตรฐาน ITA และความปลอดภัยสูง ติดหน้าแรก Google",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/lamphun-node.webp",
+  coordinates: { lat: 18.5772, lng: 99.0083 },
+  marketSaturation: 48,
+  regionalLatency: 22,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Identity Dual-Sync",
+      description:
+        "วิเคราะห์การนำเสนอธุรกิจให้สอดคล้องกับทั้งภาคอุตสาหกรรมและงานหัตถกรรมที่เป็นเลิศของลำพูน",
+    },
+    {
+      step: "02",
+      title: "B2B & Catalog Deployment",
+      description: "ติดตั้งระบบแคตตาล็อกสินค้าพรีเมียมและระบบรองรับข้อมูลโรงงานในนิคมภาคเหนือ",
+    },
+    {
+      step: "03",
+      title: "Northern Industrial SEO",
+      description: "ทำ Local SEO เจาะกลุ่มคู่ค้าในนิคมลำพูนและนักท่องเที่ยวเชิงวัฒนธรรม",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ลำพูนเป็นเมืองที่มีทั้งนิคมอุตสาหกรรมขนาดใหญ่และงานผ้าไหมชั้นสูง เว็บไซต์ต้องดูเป็นมืออาชีพและมีความประณีต",
+    technicalApproach: "เน้นระบบ Security มาตรฐานโรงงานและการแสดงผลภาพความละเอียดสูงสำหรับงานผ้าทอ",
+    localStrength:
+      "เป็นศูนย์กลางอุตสาหกรรมของภาคเหนือและเป็นแหล่งผ้าไหมยกดอกที่มีชื่อเสียงระดับโลก",
+    nicheIndustries: [
+      "โรงงานในนิคมอุตสาหกรรมลำพูน",
+      "แบรนด์ผ้าไหมและงานหัตถกรรมชั้นสูง",
+      "ธุรกิจส่งออกสินค้าเกษตรลำไย",
+    ],
+    painPoints: ["เว็บไซต์โรงงานเดิมล้าสมัย", "ขาดการเล่าเรื่องที่เหมาะสมสำหรับสินค้าพรีเมียม"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ลำพูน",
+      "ออกแบบเว็บโรงงาน ลำพูน",
+      "จ้างทำ SEO ป่าซาง",
+      "ทำเว็บผ้าไหมพรีเมียม ลำพูน",
+    ],
+  },
+  districts: ["เมืองลำพูน", "ป่าซาง", "บ้านธิ", "ลี้", "แม่ทา"],
+  keywords: ["รับทำเว็บไซต์ ลำพูน", "ทำเว็บโรงงาน ลำพูน", "จ้างทำเว็บลำพูน", "รับทำ SEO ลำพูน"],
+};
+```
+
+### CONFIG: loei.ts
+
+`Path: constants/area-nodes/loei.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: LOEI_ECO_WELLNESS v18.0.1
+ * [STRATEGY]: Eco-Tourism | Highland Agriculture | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const loeiNode: AreaNode = {
+  slug: "loei",
+  province: "เลย",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ เลย | ออกแบบเว็บที่พักเชียงคานและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
+  description:
+    "เปลี่ยนบรรยากาศเมืองหมอกและวิถีริมโขงของจังหวัดเลย ให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นอารมณ์ความรู้สึกและระบบที่เสถียร",
+  seoTitle: "รับทำเว็บไซต์ เลย ออกแบบเว็บที่พัก เชียงคาน ภูเรือ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์เลย สำหรับรีสอร์ต โฮมสเตย์ และสินค้าเกษตรเมืองหนาว ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่และระบบจองตรง",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/loei-node.webp",
+  coordinates: { lat: 17.486, lng: 101.7223 },
+  isTourismHeavy: true,
+  marketSaturation: 45,
+  regionalLatency: 25,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Atmospheric Brand Audit",
+      description:
+        "วิเคราะห์เสน่ห์ความหนาวและวิถีริมโขงมาเป็นธีมหลักในการนำเสนอแบรนด์ที่พักหรือธุรกิจ",
+    },
+    {
+      step: "02",
+      title: "Highland Booking Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและกิจกรรมที่รองรับการใช้งานผ่านเน็ตมือถือบนยอดดอยได้อย่างลื่นไหล",
+    },
+    {
+      step: "03",
+      title: "Mekong Gateway SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักเชียงคาน', 'รีสอร์ตภูเรือ' เพื่อชิงอันดับหนึ่งในการค้นหา",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "เลยมีนักท่องเที่ยวกลุ่มครอบครัวและคนรุ่นใหม่ที่มองหาความเป็นส่วนตัว เว็บไซต์ที่ภาพสวยและจองง่ายจะปิดการขายได้เร็ว",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพบรรยากาศเมืองและภูเขา และระบบการจองที่ไม่ซับซ้อน",
+    localStrength:
+      "มีจุดขายด้าน 'เมืองหนาวสุดในไทย' และวิถีชีวิตเชียงคานที่เป็นแม่เหล็กดึงดูดนักท่องเที่ยว",
+    nicheIndustries: [
+      "ที่พักบูทีคและโฮมสเตย์ริมโขง",
+      "สวนแมคคาเดเมียและสินค้าเกษตรพรีเมียม",
+      "ธุรกิจท่องเที่ยวเชิงผจญภัย",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาพิกัดที่พักในจุด Unseen ยาก",
+      "เว็บไซต์เดิมโหลดช้าในช่วงฤดูกาลท่องเที่ยว",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เชียงคาน",
+      "ออกแบบเว็บรีสอร์ต ภูเรือ",
+      "จ้างทำ SEO เลย",
+      "ทำเว็บสินค้าเกษตร เลย",
+    ],
+  },
+  districts: ["เมืองเลย", "เชียงคาน", "ภูเรือ", "ด่านซ้าย", "วังสะพุง"],
+  keywords: ["รับทำเว็บไซต์ เลย", "ทำเว็บที่พัก เชียงคาน", "จ้างทำเว็บเลย", "รับทำ SEO เลย"],
+};
+```
+
+### CONFIG: lopburi.ts
+
+`Path: constants/area-nodes/lopburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: LOPBURI_MILITARY_GOV v18.0.1
+ * [STRATEGY]: Gov Trust | Historical Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const lopburiNode: AreaNode = {
+  slug: "lopburi",
+  province: "ลพบุรี",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ลพบุรี | ระบบสารสนเทศสำหรับหน่วยงานและธุรกิจเมืองประวัติศาสตร์",
+  description:
+    "บริการจัดทำเว็บไซต์หน่วยงานราชการและธุรกิจในลพบุรี มาตรฐาน ITA และความปลอดภัยข้อมูลสูง พร้อมรองรับการท่องเที่ยวเมืองเก่า",
+  seoTitle: "รับทำเว็บไซต์ ลพบุรี ออกแบบเว็บราชการ ธุรกิจท้องถิ่น - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ลพบุรี ครบวงจร สำหรับหน่วยงาน อบต. เทศบาล และธุรกิจ SME มาตรฐาน ITA และความปลอดภัยระดับสูง",
+  priority: 87,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/lopburi-node.webp",
+  coordinates: { lat: 14.7995, lng: 100.6534 },
+  marketSaturation: 40,
+  regionalLatency: 15,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Public Service Audit",
+      description:
+        "ตรวจสอบความต้องการการใช้งานบริการภาครัฐออนไลน์ในพื้นที่เพื่อออกแบบระบบที่ตรงใจประชาชน",
+    },
+    {
+      step: "02",
+      title: "ITA Integrity Sync",
+      description:
+        "จัดระเบียบข้อมูลตามเกณฑ์ประเมินความโปร่งใสของภาครัฐเพื่อให้หน่วยงานได้รับผลประเมินระดับสูง",
+    },
+    {
+      step: "03",
+      title: "History-Tech SEO",
+      description:
+        "ทำ Local SEO ครอบคลุมแหล่งท่องเที่ยวทางประวัติศาสตร์เพื่อดึงดูดนักท่องเที่ยวเข้าสู่พื้นที่",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ลพบุรีเป็นเมืองที่มีทั้งเขตทหาร หน่วยงานราชการ และแหล่งท่องเที่ยวประวัติศาสตร์ เว็บไซต์ต้องเน้นความภูมิฐานและถูกต้อง",
+    technicalApproach: "เน้นระบบ Security ป้องกันการแฮก และโครงสร้างข้อมูลที่รองรับ ITA และ PDPA",
+    localStrength: "มีความโดดเด่นด้านแหล่งท่องเที่ยวเชิงประวัติศาสตร์ที่ดึงดูดคนจากทั่วประเทศ",
+    nicheIndustries: [
+      "หน่วยงานท้องถิ่น (อปท.)",
+      "ร้านอาหารและที่พักเมืองเก่า",
+      "ธุรกิจบริการในเขตทหาร",
+    ],
+    painPoints: ["เว็บไซต์ราชการเดิมใช้งานยาก", "ข้อมูลไม่เป็นระเบียบ"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ลพบุรี",
+      "ออกแบบเว็บราชการ ลพบุรี",
+      "จ้างทำ SEO ลพบุรี",
+      "ทำเว็บ อบต ลพบุรี",
+    ],
+  },
+  districts: ["เมืองลพบุรี", "โคกสำโรง", "ชัยบาดาล", "พัฒนานิคม", "บ้านหมี่"],
+  keywords: ["รับทำเว็บไซต์ ลพบุรี", "ทำเว็บราชการ ลพบุรี", "จ้างทำเว็บลพบุรี", "รับทำ SEO ลพบุรี"],
+};
+```
+
 ### CONFIG: mae-hong-son.ts
+
 `Path: constants/area-nodes/mae-hong-son.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.1 (STRICT_SYNC)
@@ -2123,6 +3600,7 @@ export const maeHongSonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "mae-hong-son",
   province: "แม่ฮ่องสอน",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ แม่ฮ่องสอน | ออกแบบเว็บที่พักและงานคราฟต์พรีเมียม โดย นายเอ็มซ่ามากส์",
@@ -2146,6 +3624,30 @@ export const maeHongSonNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 35,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Niche Market Analysis",
+      description:
+        "วิเคราะห์กลุ่มลูกค้าเป้าหมายที่ต้องการความสงบและสินค้าพรีเมียมเฉพาะทางในแม่ฮ่องสอน",
+    },
+    {
+      step: "02",
+      title: "Edge Network Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บไซต์แบบเบาพิเศษ (Ultralight) เพื่อให้โหลดได้ไวที่สุดแม้ในพื้นที่สัญญาณอินเทอร์เน็ตจำกัด",
+    },
+    {
+      step: "03",
+      title: "Global Storytelling Sync",
+      description:
+        "เชื่อมโยงเรื่องราววิถีชีวิตดั้งเดิมเข้ากับมาตรฐานเว็บระดับสากลเพื่อสร้างความน่าเชื่อถือในตลาดโลก",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/mae-hong-son-node.webp",
@@ -2265,10 +3767,425 @@ export const maeHongSonNode: AreaNode = {
   ],
   coordinates: { lat: 19.302, lng: 97.9685 },
 };
-
 ```
+
+### CONFIG: maha-sarakham.ts
+
+`Path: constants/area-nodes/maha-sarakham.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: MAHA_SARAKHAM_ACADEMIC v18.0.1
+ * [STRATEGY]: Education Hub | Service SEO | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const mahaSarakhamNode: AreaNode = {
+  slug: "maha-sarakham",
+  province: "มหาสารคาม",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ มหาสารคาม | พัฒนาเว็บไซต์บริการและการศึกษา ศูนย์กลางตักศิลาแห่งอีสาน",
+  description:
+    "ยกระดับธุรกิจในมหาสารคามสู่เมืองมหาวิทยาลัยที่ทันสมัย ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือสำหรับสถานศึกษา คลินิก และ SME",
+  seoTitle: "รับทำเว็บไซต์ มหาสารคาม ออกแบบเว็บคลินิก การศึกษา - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์มหาสารคาม สำหรับหอพัก คลินิกความงาม และธุรกิจบริการรอบมหาวิทยาลัย ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่",
+  priority: 85,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/maha-sarakham-node.webp",
+  coordinates: { lat: 16.184, lng: 103.301 },
+  marketSaturation: 55,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Academic Hub Audit",
+      description:
+        "วิเคราะห์กลุ่มเป้าหมายนักศึกษาและวัยทำงานในพื้นที่เพื่อออกแบบ UI ที่ทันสมัยและเข้าถึงง่าย",
+    },
+    {
+      step: "02",
+      title: "Interactive UX Sync",
+      description:
+        "ติดตั้งระบบจองนัดหมายออนไลน์และระบบสมาชิกที่ตอบโจทย์ไลฟ์สไตล์คนรุ่นใหม่ในมหาสารคาม",
+    },
+    {
+      step: "03",
+      title: "Service Entity SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักใกล้มมส', 'คลินิกมหาสารคาม' เพื่อครองอันดับหนึ่งในพื้นที่",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "มหาสารคามมีการเติบโตของธุรกิจรอบสถาบันการศึกษาสูงมาก เว็บไซต์ที่โหลดไวและจองง่ายจะได้รับความนิยมสูงสุด",
+    technicalApproach:
+      "เน้น Mobile-First Speed และการทำ Local Business Schema สำหรับย่านธุรกิจกันทรวิชัยและเมือง",
+    localStrength: "ความเป็น 'เมืองตักศิลา' ที่มีประชากรคนรุ่นใหม่หนาแน่นและมีกำลังซื้อต่อเนื่อง",
+    nicheIndustries: [
+      "หอพักและคอนโดมิเนียมรอบมหาวิทยาลัย",
+      "คลินิกความงามและทันตกรรม",
+      "ร้านอาหารและคาเฟ่สายไลฟ์สไตล์",
+    ],
+    painPoints: ["ธุรกิจเยอะแต่คนหาใน Google ไม่เจอ", "เว็บไซต์ไม่รองรับการจองออนไลน์ที่ลื่นไหล"],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ใกล้มมส",
+      "ออกแบบเว็บคลินิก มหาสารคาม",
+      "จ้างทำ SEO สารคาม",
+      "ทำเว็บหอพัก กันทรวิชัย",
+    ],
+  },
+  districts: ["เมืองมหาสารคาม", "กันทรวิชัย", "เชียงยืน", "บรบือ", "โกสุมพิสัย"],
+  keywords: [
+    "รับทำเว็บไซต์ มหาสารคาม",
+    "ทำเว็บคลินิก มหาสารคาม",
+    "จ้างทำเว็บสารคาม",
+    "รับทำ SEO มหาสารคาม",
+  ],
+};
+```
+
+### CONFIG: mukdahan.ts
+
+`Path: constants/area-nodes/mukdahan.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: MUKDAHAN_BORDER_LOGISTICS v18.0.1
+ * [STRATEGY]: Border Commerce | Logistics Hub | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const mukdahanNode: AreaNode = {
+  slug: "mukdahan",
+  province: "มุกดาหาร",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ มุกดาหาร | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและโลจิสติกส์ระเบียงตะวันออก",
+  description:
+    "ยกระดับธุรกิจในมุกดาหารสู่ตลาดลุ่มน้ำโขง ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ มุกดาหาร ออกแบบเว็บชิปปิ้ง การค้าชายแดน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์มุกดาหาร สำหรับธุรกิจนำเข้า-ส่งออก คลังสินค้า และ SME ตลาดอินโดจีน ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 83,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/mukdahan-node.webp",
+  coordinates: { lat: 16.543, lng: 104.724 },
+  isTourismHeavy: true,
+  marketSaturation: 38,
+  regionalLatency: 27,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Logistic Node Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์บริษัทให้ดูเป็นตัวแทนการค้าระดับภูมิภาคเพื่อรองรับงานโลจิสติกส์ข้ามแดน",
+    },
+    {
+      step: "02",
+      title: "Indochina Sync Deployment",
+      description:
+        "ติดตั้งระบบรองรับข้อมูลชิปปิ้งและการติดต่อสื่อสารกับคู่ค้าในเขตระเบียงเศรษฐกิจตะวันออก-ตะวันตก",
+    },
+    {
+      step: "03",
+      title: "Border Trade SEO Hub",
+      description:
+        "ทำ SEO เจาะกลุ่มคีย์เวิร์ดการค้าชายแดนในมุกดาหารเพื่อให้คู่ค้าหาคุณเจอเป็นอันดับแรก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "มุกดาหารเป็นประตูการค้าสู่เวียดนามและจีนตอนใต้ เว็บไซต์ต้องเน้นความน่าเชื่อถือและการสื่อสารได้หลายภาษา",
+    technicalApproach:
+      "เน้นระบบ Multilingual (ไทย/ลาว/อังกฤษ) และความรวดเร็วในการเข้าถึงจากฝั่งประเทศเพื่อนบ้าน",
+    localStrength: "ทำเลที่ตั้งที่เป็นจุดยุทธศาสตร์โลจิสติกส์ที่สำคัญของภูมิภาคอินโดจีน",
+    nicheIndustries: [
+      "ธุรกิจขนส่งและชิปปิ้งนำเข้า-ส่งออก",
+      "ตลาดสินค้าอินโดจีนและ SME ท้องถิ่น",
+      "รีสอร์ตและที่พักริมโขง",
+    ],
+    painPoints: [
+      "บริษัทมีความมั่นคงแต่หน้าเว็บดูไม่ทันสมัย",
+      "ขาดเครื่องมือดิจิทัลที่ช่วยในการปิดดีลกับคู่ค้าต่างชาติ",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ มุกดาหาร",
+      "ออกแบบเว็บชิปปิ้ง ด่านมุกดาหาร",
+      "จ้างทำ SEO มุกดาหาร",
+      "ทำเว็บตลาดอินโดจีน มุกดาหาร",
+    ],
+  },
+  districts: ["เมืองมุกดาหาร", "คำชะอี", "นิคมคำสร้อย", "ดอนตาล", "หว้านใหญ่"],
+  keywords: [
+    "รับทำเว็บไซต์ มุกดาหาร",
+    "ทำเว็บชิปปิ้ง มุกดาหาร",
+    "จ้างทำเว็บมุกดาหาร",
+    "รับทำ SEO มุกดาหาร",
+  ],
+};
+```
+
+### CONFIG: nakhon-nayok.ts
+
+`Path: constants/area-nodes/nakhon-nayok.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NAKHON_NAYOK_STORY v18.0.1
+ * [STRATEGY]: Eco-Tourism | Adventure Hub | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const nakhonNayokNode: AreaNode = {
+  slug: "nakhon-nayok",
+  province: "นครนายก",
+  region: "Central",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ นครนายก | ออกแบบเว็บรีสอร์ตและธุรกิจท่องเที่ยวใกล้กรุง",
+  description:
+    "เปลี่ยนบรรยากาศธรรมชาติของนครนายกให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นการพักผ่อนและระบบจองที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ นครนายก ออกแบบเว็บที่พัก รีสอร์ต คาเฟ่ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นครนายก สำหรับรีสอร์ต โฮมสเตย์ และกิจกรรมแอดเวนเจอร์ เว็บสวยโหลดไว ติดหน้าแรก Google เพื่อดึงลูกค้าจากกรุงเทพฯ",
+  priority: 89,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/nakhon-nayok-node.webp",
+  coordinates: { lat: 14.2069, lng: 101.213 },
+  isTourismHeavy: true,
+  marketSaturation: 58,
+  regionalLatency: 10,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Weekend-Travel Audit",
+      description:
+        "วิเคราะห์พฤติกรรมลูกค้าจากกรุงเทพฯ ที่มองหาที่พักช่วงสุดสัปดาห์เพื่อวางแผน Content ที่ดึงดูด",
+    },
+    {
+      step: "02",
+      title: "Mobile Booking Gateway",
+      description: "ติดตั้งระบบจองที่ง่ายและระบบแจ้งเตือนผ่านมือถือเพื่อความรวดเร็วในการปิดดีล",
+    },
+    {
+      step: "03",
+      title: "Eco-Adventure SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักนครนายก', 'รีสอร์ตริมน้ำ' เพื่อชิงพื้นที่การค้นหาอันดับหนึ่ง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นครนายกเป็นจุดหมายหลักสำหรับการพักผ่อนระยะสั้น เว็บไซต์ที่ภาพสวยและให้ข้อมูลการเดินทางชัดเจนจะได้รับความสนใจสูง",
+    technicalApproach:
+      "เน้น Image Optimization และการเชื่อมโยงระบบ Social Media เข้ากับหน้าเว็บจองตรง",
+    localStrength: "ความใกล้กรุงเทพฯ และทรัพยากรธรรมชาติที่หลากหลายเป็นจุดแข็งที่ต้องนำเสนอ",
+    nicheIndustries: [
+      "รีสอร์ตและที่พักสายธรรมชาติ",
+      "ธุรกิจกิจกรรมแอดเวนเจอร์",
+      "คาเฟ่และร้านอาหารวิวสวย",
+    ],
+    painPoints: ["ลูกค้าหาพิกัดที่พักในป่า/เขายาก", "เว็บไซต์โหลดช้าทำให้เสียโอกาสช่วง Peak Time"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ นครนายก",
+      "ออกแบบเว็บรีสอร์ต นครนายก",
+      "จ้างทำ SEO นครนายก",
+      "ทำเว็บที่พัก องครักษ์",
+    ],
+  },
+  districts: ["เมืองนครนายก", "ปากพลี", "บ้านนา", "องครักษ์"],
+  keywords: [
+    "รับทำเว็บไซต์ นครนายก",
+    "ทำเว็บรีสอร์ต นครนายก",
+    "จ้างทำเว็บที่พัก",
+    "รับทำ SEO นครนายก",
+  ],
+};
+```
+
+### CONFIG: nakhon-pathom.ts
+
+`Path: constants/area-nodes/nakhon-pathom.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NAKHON_PATHOM_ACADEMIC v18.0.1
+ * [STRATEGY]: Education & Service Hub | Local SEO | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nakhonPathomNode: AreaNode = {
+  slug: "nakhon-pathom",
+  province: "นครปฐม",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ นครปฐม | พัฒนาเว็บไซต์การศึกษา ธุรกิจบริการ และ SME เมืองมหาวิทยาลัย",
+  description:
+    "บริการรับทำเว็บไซต์ในนครปฐม เน้นความทันสมัยสำหรับคาเฟ่ คลินิก และธุรกิจที่เชื่อมโยงกับสถาบันการศึกษา ติดหน้าแรก Google",
+  seoTitle: "รับทำเว็บไซต์ นครปฐม ออกแบบเว็บคาเฟ่ คลินิก ธุรกิจการศึกษา - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นครปฐม ครบวงจร สำหรับ SME และธุรกิจบริการ เว็บสวยโหลดไว รองรับมือถือ 100% ติดอันดับการค้นหาในพื้นที่",
+  priority: 92,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nakhon-pathom-node.webp",
+  coordinates: { lat: 13.814, lng: 100.0373 },
+  marketSaturation: 65,
+  regionalLatency: 9,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Service Identity Audit",
+      description: "วิเคราะห์ภาพลักษณ์แบรนด์ให้เข้ากับกลุ่มเป้าหมายวัยเรียนและวัยทำงานในพื้นที่",
+    },
+    {
+      step: "02",
+      title: "Interactive UX Deployment",
+      description: "ติดตั้งระบบจองนัดหมายออนไลน์และระบบค้นหาพิกัดที่ใช้งานง่ายผ่านสมาร์ทโฟน",
+    },
+    {
+      step: "03",
+      title: "Local Authority SEO",
+      description:
+        "ทำ Local SEO เจาะจงคีย์เวิร์ด 'ใกล้ฉัน' ในนครปฐมเพื่อให้ธุรกิจของคุณเป็นที่รู้จักทั่วภูมิภาค",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นครปฐมมีการขยายตัวของธุรกิจบริการและคาเฟ่ที่หนาแน่น เว็บไซต์ที่ดูดีและมีฟังก์ชันที่ใช้งานได้จริงจะปิดการขายได้เร็วกว่า",
+    technicalApproach:
+      "เน้น Mobile-First Speed และการปักหมุด Google Maps ที่แม่นยำเพื่อดัก Traffic ในพื้นที่",
+    localStrength:
+      "เข้าใจรสนิยมของกลุ่มลูกค้าคนรุ่นใหม่และกระบวนการทำงานของสถาบันการศึกษาในจังหวัด",
+    nicheIndustries: [
+      "คาเฟ่และร้านอาหารพรีเมียม",
+      "คลินิกทันตกรรมและความงาม",
+      "หอพักและอสังหาริมทรัพย์รอบมหาวิทยาลัย",
+    ],
+    painPoints: ["ธุรกิจเยอะแต่คนหาใน Google ไม่เจอ", "เว็บไซต์ไม่รองรับการจองออนไลน์"],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สามพราน",
+      "ออกแบบเว็บคาเฟ่ นครปฐม",
+      "จ้างทำ SEO พุทธมณฑล",
+      "ทำเว็บหอพัก กำแพงแสน",
+    ],
+  },
+  districts: ["เมืองนครปฐม", "สามพราน", "นครชัยศรี", "พุทธมณฑล", "กำแพงแสน"],
+  keywords: ["รับทำเว็บไซต์ นครปฐม", "ทำเว็บคาเฟ่ นครปฐม", "จ้างทำเว็บนครปฐม", "รับทำ SEO นครปฐม"],
+};
+```
+
+### CONFIG: nakhon-phanom.ts
+
+`Path: constants/area-nodes/nakhon-phanom.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NAKHON_PHANOM_MEKONG v18.0.1
+ * [STRATEGY]: Religious Tourism | Border Trade | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nakhonPhanomNode: AreaNode = {
+  slug: "nakhon-phanom",
+  province: "นครพนม",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ นครพนม | ออกแบบเว็บท่องเที่ยวเชิงศรัทธาและธุรกิจริมโขงที่ทันสมัย",
+  description:
+    "ยกระดับภาพลักษณ์เมืองพระธาตุและวิถีริมโขง สู่มาตรฐานดิจิทัลพรีเมียม ด้วยเว็บไซต์ที่เน้นความศรัทธาและระบบจองที่ลื่นไหล",
+  seoTitle: "รับทำเว็บไซต์ นครพนม ออกแบบเว็บที่พัก พระธาตุพนม - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นครพนม สำหรับโรงแรม รีสอร์ตริมโขง และธุรกิจบริการ ดีไซน์ภูมิฐาน โหลดไว รองรับ SEO พื้นที่นครพนม",
+  priority: 87,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nakhon-phanom-node.webp",
+  coordinates: { lat: 17.392, lng: 104.769 },
+  isTourismHeavy: true,
+  marketSaturation: 42,
+  regionalLatency: 28,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Spiritual Brand Audit",
+      description:
+        "วิเคราะห์การนำเสนออัตลักษณ์เมืองพระธาตุให้ดูทรงคุณค่าและน่าเชื่อถือในสายตานักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Gateway Multi-language",
+      description:
+        "ติดตั้งระบบรองรับหลายภาษาเพื่อสื่อสารกับนักท่องเที่ยวและคู่ค้าจากเขตเศรษฐกิจลุ่มน้ำโขง",
+    },
+    {
+      step: "03",
+      title: "Mekong SEO Dominance",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักนครพนม', 'ไหว้พระธาตุพนม' เพื่อครองอันดับหนึ่งในภูมิภาค",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นครพนมมีการเติบโตด้านการท่องเที่ยวเชิงศาสนาและวิถีชีวิต เว็บไซต์ที่ดูคลีนและน่าเชื่อถือจะปิดการขายได้ดี",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพถ่ายมุมกว้างริมโขงและการทำ Schema สำหรับสถานที่สำคัญ",
+    localStrength: "ชื่อเสียงของพระธาตุพนมและทัศนียภาพริมโขงที่สวยงามที่สุดแห่งหนึ่งในไทย",
+    nicheIndustries: ["โรงแรมและรีสอร์ตสายมู", "ร้านอาหารและคาเฟ่ริมโขง", "ธุรกิจการค้าชายแดน"],
+    painPoints: [
+      "ที่พักเยอะแต่หาข้อมูลเปรียบเทียบยาก",
+      "เว็บไซต์เดิมไม่อัปเดตข้อมูลกิจกรรมประจำจังหวัด",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ธาตุพนม",
+      "ออกแบบเว็บที่พัก นครพนม",
+      "จ้างทำ SEO นครพนม",
+      "ทำเว็บร้านอาหาร ริมโขง",
+    ],
+  },
+  districts: ["เมืองนครพนม", "ธาตุพนม", "บ้านแพง", "ท่าอุเทน", "ศรีสงคราม"],
+  keywords: ["รับทำเว็บไซต์ นครพนม", "ทำเว็บโรงแรม นครพนม", "จ้างทำเว็บนครพนม", "รับทำ SEO นครพนม"],
+};
+```
+
 ### CONFIG: nakhon-sawan.ts
+
 `Path: constants/area-nodes/nakhon-sawan.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (STRICT_SYNC)
@@ -2284,6 +4201,7 @@ export const nakhonSawanNode: AreaNode = {
   // --- Basic Identity ---
   slug: "nakhon-sawan",
   province: "นครสวรรค์",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ นครสวรรค์ | ออกแบบเว็บร้านค้าส่งและธุรกิจกงสี ให้ทันสมัยและขายดีกว่าเดิม",
@@ -2308,6 +4226,29 @@ export const nakhonSawanNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 52,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Wholesale Brand Audit",
+      description:
+        "วิเคราะห์จุดแข็งของธุรกิจกงสีหรือร้านค้าส่งเพื่อเปลี่ยนผ่านภาพลักษณ์สู่ความทันสมัยระดับสากล",
+    },
+    {
+      step: "02",
+      title: "Local Entity Mapping",
+      description:
+        "ปรับปรุงหมุด Google Maps และระบบการติดต่อด่วนเพื่อให้ลูกค้าในพื้นที่และจังหวัดใกล้เคียงเข้าถึงได้ทันที",
+    },
+    {
+      step: "03",
+      title: "Logistics Hub SEO",
+      description:
+        "เน้นคีย์เวิร์ดด้านการค้าและการขนส่งเพื่อชิงความเป็นผู้นำในศูนย์กลางเศรษฐกิจปากน้ำโพ",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/nakhon-sawan-node.webp",
@@ -2440,10 +4381,696 @@ export const nakhonSawanNode: AreaNode = {
   ],
   coordinates: { lat: 15.7042, lng: 100.1372 },
 };
-
 ```
+
+### CONFIG: nakhon-si-thammarat.ts
+
+`Path: constants/area-nodes/nakhon-si-thammarat.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NAKHON_SI_THAMMARAT_RELIGIOUS_HUB v18.0.1
+ * [STRATEGY]: Cultural Authority | Multi-Sector Service | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nakhonSiThammaratNode: AreaNode = {
+  slug: "nakhon-si-thammarat",
+  province: "นครศรีธรรมราช",
+  region: "South",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ นครศรีธรรมราช | ศูนย์กลางดิจิทัลเพื่อการค้าและวัฒนธรรมแห่งภาคใต้",
+  description:
+    "ยกระดับธุรกิจและหน่วยงานในนครศรีธรรมราช ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือระดับพรีเมียมและระบบจัดการข้อมูลที่ทันสมัย",
+  seoTitle: "รับทำเว็บไซต์ นครศรีธรรมราช ออกแบบเว็บธุรกิจ คลินิก หน่วยงาน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นครศรีธรรมราช สำหรับ SME คลินิก และหน่วยงานราชการ ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่นครศรีฯ และใกล้เคียง",
+  priority: 96,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nakhon-si-thammarat-node.webp",
+  coordinates: { lat: 8.4333, lng: 99.9667 },
+  marketSaturation: 75,
+  regionalLatency: 22,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Cultural Trust Audit",
+      description:
+        "วิเคราะห์การนำเสนอแบรนด์ให้เข้ากับอัตลักษณ์เมืองคอนที่เน้นความศรัทธาและความมั่นคง",
+    },
+    {
+      step: "02",
+      title: "Service Node Deployment",
+      description:
+        "ติดตั้งระบบบริการออนไลน์และระบบจองนัดหมายที่โหลดไวเพื่อรองรับลูกค้าทั่วภาคใต้ตอนกลาง",
+    },
+    {
+      step: "03",
+      title: "Regional Authority SEO",
+      description:
+        "ทำ SEO เจาะจงคีย์เวิร์ด 'รับทำเว็บไซต์ นครศรีธรรมราช' และ 'ของดีเมืองคอน' เพื่อครองอันดับหนึ่ง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นครศรีธรรมราชเป็นศูนย์กลางทางเศรษฐกิจและวัฒนธรรม เว็บไซต์ที่ดูเป็นทางการและมีความประณีตจะได้รับความเชื่อถือสูง",
+    technicalApproach:
+      "เน้นระบบ Security มาตรฐานสูงและการทำ Local Entity Mapping สำหรับย่านธุรกิจและแหล่งท่องเที่ยว",
+    localStrength: "ชื่อเสียงด้านการเป็น 'นครแห่งธรรม' และศูนย์กลางการกระจายสินค้าของภาคใต้",
+    nicheIndustries: [
+      "ธุรกิจบริการและการแพทย์",
+      "รีสอร์ตสายมูและแหล่งท่องเที่ยวทางวัฒนธรรม",
+      "สินค้าเกษตรแปรรูปและงานหัตถศิลป์",
+    ],
+    painPoints: [
+      "ธุรกิจเยอะแต่ภาพลักษณ์ออนไลน์ดูธรรมดา",
+      "หาเบอร์ติดต่อหรือแผนที่หน่วยงานในพื้นที่ยาก",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ทุ่งสง",
+      "ออกแบบเว็บรีสอร์ต ขนอม",
+      "จ้างทำ SEO สิชล",
+      "ทำเว็บหน่วยงาน นครศรีธรรมราช",
+    ],
+  },
+  districts: ["เมืองนครศรีธรรมราช", "ทุ่งสง", "ปากพนัง", "สิชล", "ขนอม"],
+  keywords: [
+    "รับทำเว็บไซต์ นครศรีธรรมราช",
+    "ทำเว็บคลินิก นครศรี",
+    "จ้างทำเว็บเมืองคอน",
+    "รับทำ SEO นครศรีธรรมราช",
+  ],
+};
+```
+
+### CONFIG: nan.ts
+
+`Path: constants/area-nodes/nan.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NAN_SLOW_LIVING v18.0.1
+ * [STRATEGY]: Eco-Tourism | Cultural Storytelling | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nanNode: AreaNode = {
+  slug: "nan",
+  province: "น่าน",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ น่าน | ออกแบบเว็บที่พักและธุรกิจสร้างสรรค์ เมืองสโลว์ไลฟ์ระดับโลก",
+  description:
+    "เปลี่ยนความเรียบง่ายของน่านให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นการเล่าเรื่องทางวัฒนธรรมและความเป็นมิตร",
+  seoTitle: "รับทำเว็บไซต์ น่าน ออกแบบเว็บที่พัก ปัว สะปัน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์น่าน สำหรับรีสอร์ต โฮมสเตย์ และสินค้าพื้นเมือง เน้นความสวยงามพรีเมียม โหลดไว ติดหน้าแรก Google แม้เน็ตจำกัด",
+  priority: 85,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nan-node.webp",
+  coordinates: { lat: 18.7833, lng: 100.7833 },
+  isTourismHeavy: true,
+  marketSaturation: 45,
+  regionalLatency: 28,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Cultural Story Audit",
+      description: "ดึงจุดเด่นของที่พักหรือสินค้าชุมชนในน่านมาเรียบเรียงเป็นเนื้อหาที่ทรงพลัง",
+    },
+    {
+      step: "02",
+      title: "Lightweight Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บที่โหลดไวเป็นพิเศษเพื่อรองรับนักท่องเที่ยวที่ใช้เน็ตบนดอยหรือพื้นที่ห่างไกล",
+    },
+    {
+      step: "03",
+      title: "Tourism Schema Hub",
+      description:
+        "ทำ Local SEO และ Schema Markup เพื่อให้ธุรกิจของคุณขึ้นอันดับหนึ่งในใจนักท่องเที่ยว",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "น่านมีนักท่องเที่ยวกลุ่มคุณภาพที่ต้องการประสบการณ์ที่แตกต่าง เว็บไซต์ที่ดูจริงใจและเล่าเรื่องได้ดีจะปิดการขายได้ง่าย",
+    technicalApproach:
+      "เน้น Image Optimization และการปักหมุด Google Maps ในพื้นที่ Unseen อย่างปัวและสะปัน",
+    localStrength: "มีความโดดเด่นด้านศิลปวัฒนธรรมและธรรมชาติที่สมบูรณ์แบบที่สุดแห่งหนึ่งในไทย",
+    nicheIndustries: [
+      "บูทีครีสอร์ตและโฮมสเตย์ดีไซน์",
+      "สินค้างานคราฟต์และผ้าทอพื้นเมือง",
+      "คาเฟ่ลับวิวทุ่งนา",
+    ],
+    painPoints: ["ที่พักสวยแต่คนหาใน Google Maps ไม่เจอ", "เว็บไซต์เดิมโหลดช้ามาก"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สะปัน",
+      "ออกแบบเว็บโฮมสเตย์ ปัว",
+      "จ้างทำ SEO น่าน",
+      "ทำเว็บสินค้าพื้นเมือง น่าน",
+    ],
+  },
+  districts: ["เมืองน่าน", "ปัว", "บ่อเกลือ", "ท่าวังผา", "เชียงกลาง"],
+  keywords: ["รับทำเว็บไซต์ น่าน", "ทำเว็บที่พัก น่าน", "จ้างทำเว็บน่าน", "รับทำ SEO น่าน"],
+};
+```
+
+### CONFIG: narathiwat.ts
+
+`Path: constants/area-nodes/narathiwat.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NARATHIWAT_BORDER_GATEWAY v18.0.1
+ * [STRATEGY]: Border Trade | Logistics | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const narathiwatNode: AreaNode = {
+  slug: "narathiwat",
+  province: "นราธิวาส",
+  region: "South",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ นราธิวาส | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและ SME ยุคใหม่",
+  description:
+    "ยกระดับธุรกิจในนราธิวาสสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ นราธิวาส สุไหงโก-ลก ออกแบบเว็บชิปปิ้ง - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นราธิวาส สำหรับธุรกิจนำเข้า-ส่งออก ด่านศุลกากร และ SME พรีเมียม ดีไซน์สวยโหลดไว รองรับ SEO และความปลอดภัยสูงสุด",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/narathiwat-node.webp",
+  coordinates: { lat: 6.425, lng: 101.8233 },
+  marketSaturation: 38,
+  regionalLatency: 30,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Border-Trade Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์บริษัทให้ดูโปรระดับตัวแทนการค้าระหว่างประเทศเพื่อรองรับงานชิปปิ้ง",
+    },
+    {
+      step: "02",
+      title: "Cross-Border Sync",
+      description:
+        "ติดตั้งระบบรองรับข้อมูลการขนส่งและการติดต่อสื่อสารกับคู่ค้าไทย-มาเลเซียแบบเรียลไทม์",
+    },
+    {
+      step: "03",
+      title: "Southern Border SEO",
+      description:
+        "ทำ SEO เจาะกลุ่มคีย์เวิร์ดการค้าชายแดนในเขตสุไหงโก-ลกและตากใบเพื่อให้คู่ค้าหาคุณเจอ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นราธิวาสเป็นจุดยุทธศาสตร์การค้าชายแดน เว็บไซต์ต้องเน้นความน่าเชื่อถือ ความรวดเร็ว และการสื่อสารได้หลายภาษา",
+    technicalApproach:
+      "เน้นระบบ Multilingual และโครงสร้างที่เบาเพื่อให้โหลดได้ไวในทุกพื้นที่แม้สัญญาณเน็ตจำกัด",
+    localStrength:
+      "ทำเลที่ตั้งที่เป็นประตูการค้าสำคัญสู่ประเทศเพื่อนบ้านและความเข้มแข็งของ SME ท้องถิ่น",
+    nicheIndustries: [
+      "ธุรกิจชิปปิ้งและโลจิสติกส์ข้ามแดน",
+      "รีสอร์ตและธุรกิจท่องเที่ยวในเขตเมือง",
+      "วิสาหกิจชุมชนและสินค้า OTOP พรีเมียม",
+    ],
+    painPoints: [
+      "บริษัทมีความมั่นคงแต่ขาดตัวตนดิจิทัลที่ชัดเจน",
+      "ต้องการเครื่องมือในการสื่อสารกับลูกค้ามาเลเซียที่ดูเป็นทางการ",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สุไหงโก-ลก",
+      "ออกแบบเว็บชิปปิ้ง นราธิวาส",
+      "จ้างทำ SEO นราธิวาส",
+      "ทำเว็บสินค้าพรีเมียม ตากใบ",
+    ],
+  },
+  districts: ["เมืองนราธิวาส", "สุไหงโก-ลก", "ตากใบ", "ระแงะ", "รือเสาะ"],
+  keywords: [
+    "รับทำเว็บไซต์ นราธิวาส",
+    "ทำเว็บสุไหงโก-ลก",
+    "จ้างทำเว็บชิปปิ้ง",
+    "รับทำ SEO นราธิวาส",
+  ],
+};
+```
+
+### CONFIG: nong-bua-lamphu.ts
+
+`Path: constants/area-nodes/nong-bua-lamphu.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NONG_BUA_LAMPHU_AGRI v18.0.1
+ * [STRATEGY]: Agri-Craft | Local Economy | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nongBuaLamphuNode: AreaNode = {
+  slug: "nong-bua-lamphu",
+  province: "หนองบัวลำภู",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ หนองบัวลำภู | พัฒนาเว็บไซต์วิสาหกิจชุมชนและธุรกิจเกษตรยุคใหม่",
+  description:
+    "ยกระดับสินค้าชุมชนและที่พักสายธรรมชาติของหนองบัวลำภูสู่โลกออนไลน์ ด้วยเว็บไซต์ที่เน้นงานดีไซน์ที่ดูอบอุ่นและเข้าถึงง่าย",
+  seoTitle: "รับทำเว็บไซต์ หนองบัวลำภู ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์หนองบัวลำภู สำหรับ SME ท้องถิ่น วิสาหกิจชุมชน และแหล่งท่องเที่ยวเชิงวิถีชีวิต ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 80,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nong-bua-lamphu-node.webp",
+  coordinates: { lat: 17.203, lng: 102.441 },
+  marketSaturation: 22,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Agri-Craft Audit",
+      description:
+        "วิเคราะห์คุณค่างานหัตถกรรมผ้าพื้นเมืองและสินค้าเกษตรในพื้นที่เพื่อสร้างจุดขายที่แตกต่าง",
+    },
+    {
+      step: "02",
+      title: "Community Catalog Sync",
+      description:
+        "ติดตั้งระบบแสดงผลสินค้าและแกลเลอรี่ที่โชว์รายละเอียดความประณีตของผลิตภัณฑ์ชุมชน",
+    },
+    {
+      step: "03",
+      title: "Regional Node SEO",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหาธุรกิจและแหล่งท่องเที่ยวในหนองบัวลำภูเพื่อสร้างตัวตนที่แข็งแรง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "หนองบัวลำภูเป็นเมืองที่มีเสน่ห์ด้านหัตถกรรมและธรรมชาติที่เรียบง่าย เว็บไซต์ที่ดูจริงใจจะได้รับการตอบรับที่ดี",
+    technicalApproach:
+      "เน้นการแสดงผลที่โหลดไวและระบบการติดต่อสื่อสารผ่าน LINE ที่นักธุรกิจท้องถิ่นคุ้นเคย",
+    localStrength: "มีความเข้มแข็งด้านวิสาหกิจชุมชนผ้าทอและกลุ่มเกษตรปลอดภัย",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนผ้าพื้นเมืองพรีเมียม",
+      "ธุรกิจเกษตรปลอดภัยและออร์แกนิก",
+      "รีสอร์ตและโฮมสเตย์สายธรรมชาติ",
+    ],
+    painPoints: [
+      "ขาดช่องทางการตลาดดิจิทัลที่เข้าถึงลูกค้าต่างจังหวัด",
+      "เว็บไซต์เดิมไม่อัปเดตและใช้งานยาก",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หนองบัวลำภู",
+      "ออกแบบเว็บสินค้า OTOP",
+      "จ้างทำ SEO นากลาง",
+      "ทำเว็บวิสาหกิจชุมชน หนองบัว",
+    ],
+  },
+  districts: ["เมืองหนองบัวลำภู", "ศรีบุญเรือง", "นากลาง", "นาวัง", "สุวรรณคูหา"],
+  keywords: [
+    "รับทำเว็บไซต์ หนองบัวลำภู",
+    "ทำเว็บสินค้า OTOP",
+    "จ้างทำเว็บหนองบัว",
+    "รับทำ SEO หนองบัวลำภู",
+  ],
+};
+```
+
+### CONFIG: nong-khai.ts
+
+`Path: constants/area-nodes/nong-khai.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NONG_KHAI_BORDER v18.0.1
+ * [STRATEGY]: Border Trade | Cultural Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nongKhaiNode: AreaNode = {
+  slug: "nong-khai",
+  province: "หนองคาย",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ หนองคาย | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและการท่องเที่ยวริมโขง",
+  description:
+    "ยกระดับธุรกิจในหนองคายสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลที่รวดเร็วสายฟ้าแลบ",
+  seoTitle: "รับทำเว็บไซต์ หนองคาย ออกแบบเว็บธุรกิจ การค้าชายแดน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์หนองคาย สำหรับธุรกิจนำเข้า-ส่งออก โรงแรม และ SME ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่และคู่ค้าต่างชาติ",
+  priority: 88,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nong-khai-node.webp",
+  coordinates: { lat: 17.8785, lng: 102.7412 },
+  isTourismHeavy: true,
+  marketSaturation: 52,
+  regionalLatency: 22,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Border-Hub Brand Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์ธุรกิจในฐานะประตูสู่ภูมิภาคเพื่อสร้างความน่าเชื่อถือระดับพาร์ทเนอร์ข้ามแดน",
+    },
+    {
+      step: "02",
+      title: "Multilingual Conversion",
+      description:
+        "ติดตั้งระบบรองรับภาษาลาวและอังกฤษเพื่อสื่อสารกับคู่ค้าและนักท่องเที่ยวได้อย่างมีประสิทธิภาพ",
+    },
+    {
+      step: "03",
+      title: "Indochina Logistics SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ดด้านการค้าและการเดินทางข้ามแดนเพื่อครองอันดับหนึ่งในหนองคาย",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "หนองคายคือจุดยุทธศาสตร์การค้าที่สำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'หน้าตาทางการค้า' ที่สะท้อนความมั่นคงและรวดเร็ว",
+    technicalApproach:
+      "เน้นระบบความปลอดภัยข้อมูลและโครงสร้างที่เบาเพื่อให้เข้าถึงได้ไวจากทั้งฝั่งไทยและฝั่งลาว",
+    localStrength:
+      "เป็นเมืองหน้าด่านที่เชื่อมโยงกับเวียงจันทน์และมีงานประเพณีพญานาคที่ดึงดูดคนมหาศาล",
+    nicheIndustries: [
+      "ธุรกิจชิปปิ้งและโลจิสติกส์",
+      "โรงแรมและร้านอาหารริมโขง",
+      "วิสาหกิจชุมชนสินค้าเกษตรลุ่มน้ำโขง",
+    ],
+    painPoints: ["เว็บไซต์ดูไม่เป็นสากลสำหรับคู่ค้าต่างชาติ", "ระบบการติดต่อสอบถามไม่ทันใจ"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หนองคาย",
+      "ออกแบบเว็บธุรกิจ ชายแดน",
+      "จ้างทำ SEO หนองคาย",
+      "ทำเว็บโรงแรม ริมโขง",
+    ],
+  },
+  districts: ["เมืองหนองคาย", "ท่าบ่อ", "โพนพิสัย", "ศรีเชียงใหม่", "สระใคร"],
+  keywords: [
+    "รับทำเว็บไซต์ หนองคาย",
+    "ทำเว็บธุรกิจ ชายแดน",
+    "จ้างทำเว็บหนองคาย",
+    "รับทำ SEO หนองคาย",
+  ],
+};
+```
+
+### CONFIG: nonthaburi.ts
+
+`Path: constants/area-nodes/nonthaburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: NONTHABURI_URBAN_HUB v18.0.1
+ * [STRATEGY]: High-End Residential | Medical & Service SEO | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const nonthaburiNode: AreaNode = {
+  slug: "nonthaburi",
+  province: "นนทบุรี",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ นนทบุรี | ออกแบบเว็บธุรกิจบริการและคาเฟ่พรีเมียม เมืองแห่งนวัตกรรม",
+  description:
+    "บริการรับทำเว็บไซต์ในนนทบุรี เน้นดีไซน์ที่ทันสมัยสำหรับหมู่บ้านหรู คลินิกความงาม และร้านอาหารระดับพรีเมียม ติดหน้าแรก Google",
+  seoTitle: "รับทำเว็บไซต์ นนทบุรี ออกแบบเว็บคาเฟ่ คลินิก หมู่บ้าน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์นนทบุรี สำหรับ SME และธุรกิจบริการ เว็บสวยโหลดไว มาตรฐานสากล รองรับ SEO พื้นที่นนทบุรีและใกล้เคียง",
+  priority: 98,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/nonthaburi-node.webp",
+  coordinates: { lat: 13.8591, lng: 100.4986 },
+  marketSaturation: 82,
+  regionalLatency: 5,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Urban Brand Audit",
+      description:
+        "วิเคราะห์การนำเสนอแบรนด์ให้เข้ากับไลฟ์สไตล์คนเมืองนนทบุรีที่ต้องการความรวดเร็วและพรีเมียม",
+    },
+    {
+      step: "02",
+      title: "Smart Booking Deployment",
+      description:
+        "ติดตั้งระบบจองนัดหมายและระบบสมาชิกที่เชื่อมต่อกับสมาร์ทโฟนเพื่อเพิ่มความสะดวกให้ลูกค้า",
+    },
+    {
+      step: "03",
+      title: "Hyper-Local SEO Hub",
+      description:
+        "เน้นคีย์เวิร์ดเจาะจงโซนราชพฤกษ์ แจ้งวัฒนะ และติวานนท์ เพื่อดักจับ Traffic ในพื้นที่หนาแน่น",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นนทบุรีมีการเติบโตของธุรกิจบริการระดับสูงหนาแน่นมาก เว็บไซต์ต้องเน้น UX/UI ที่หรูหราและโหลดไวเป็นพิเศษ",
+    technicalApproach:
+      "เน้น Mobile Optimization และการปักหมุด Google Maps ในย่านธุรกิจใหม่ (CBD นนทบุรี)",
+    localStrength:
+      "เข้าใจรสนิยมกลุ่มลูกค้ากำลังซื้อสูงในย่านราชพฤกษ์และหมู่บ้านจัดสรรระดับพรีเมียม",
+    nicheIndustries: [
+      "คลินิกความงามและสุขภาพ",
+      "ร้านอาหารและคาเฟ่ไลฟ์สไตล์",
+      "ธุรกิจรับเหมาตกแต่งบ้าน",
+    ],
+    painPoints: ["ธุรกิจเยอะแต่คนหาเบอร์ติดต่อไม่เจอ", "เว็บไซต์ไม่รองรับการชำระเงินออนไลน์"],
+    competitorLevel: "extreme",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ราชพฤกษ์",
+      "ออกแบบเว็บคาเฟ่ นนทบุรี",
+      "จ้างทำ SEO แจ้งวัฒนะ",
+      "ทำเว็บคลินิก บางใหญ่",
+    ],
+  },
+  districts: ["เมืองนนทบุรี", "ปากเกร็ด", "บางใหญ่", "บางบัวทอง", "บางกรวย"],
+  keywords: [
+    "รับทำเว็บไซต์ นนทบุรี",
+    "ทำเว็บคาเฟ่ นนทบุรี",
+    "จ้างทำเว็บปากเกร็ด",
+    "รับทำ SEO นนทบุรี",
+  ],
+};
+```
+
+### CONFIG: pathum-thani.ts
+
+`Path: constants/area-nodes/pathum-thani.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PATHUM_THANI_TECH_VALLEY v18.0.1
+ * [STRATEGY]: Tech & Research Hub | Industrial Support | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const pathumThaniNode: AreaNode = {
+  slug: "pathum-thani",
+  province: "ปทุมธานี",
+  region: "Central",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ ปทุมธานี | พัฒนาเว็บไซต์โรงงานและธุรกิจนวัตกรรม ศูนย์กลางเทคโนโลยี",
+  description:
+    "บริการรับทำเว็บไซต์ในปทุมธานี เน้นความโปรระดับสากลสำหรับโรงงานในนิคมอุตสาหกรรมและสถาบันวิจัย ติดหน้าแรก Google ทั่วประเทศ",
+  seoTitle: "รับทำเว็บไซต์ ปทุมธานี ออกแบบเว็บโรงงาน นวนคร รังสิต - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ปทุมธานี สำหรับนิคมอุตสาหกรรมบางกะดี นวนคร และธุรกิจนวัตกรรม มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
+  priority: 97,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/pathum-thani-node.webp",
+  coordinates: { lat: 14.0208, lng: 100.525 },
+  marketSaturation: 75,
+  regionalLatency: 7,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Tech-Standard Audit",
+      description:
+        "วิเคราะห์โครงสร้างเว็บไซต์ให้สอดคล้องกับมาตรฐานอุตสาหกรรมและการวิจัยระดับนวัตกรรม",
+    },
+    {
+      step: "02",
+      title: "Scalable Infrastructure",
+      description: "ติดตั้งระบบรองรับข้อมูลจำนวนมากและระบบความปลอดภัยข้อมูลขั้นสูงสำหรับองค์กรใหญ่",
+    },
+    {
+      step: "03",
+      title: "Corporate SEO Sync",
+      description: "ทำ SEO เจาะกลุ่มคู่ค้า B2B ทั่วโลกและฝ่ายจัดซื้อโรงงานในเขตปทุมธานี",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ปทุมธานีเป็นศูนย์กลางเทคโนโลยีและงานวิจัย เว็บไซต์ต้องดูเป็นทางการ มั่นคง และมีข้อมูลที่ถูกต้องแม่นยำที่สุด",
+    technicalApproach:
+      "เน้นระบบการจัดการข้อมูล (Data Management) และความปลอดภัยข้อมูลสูงสุด (ISO Standard Ready)",
+    localStrength:
+      "เข้าใจระบบนิเวศของสถาบันการศึกษาและนิคมอุตสาหกรรมที่ต้องการความเป็นเลิศทางเทคนิค",
+    nicheIndustries: [
+      "โรงงานอุตสาหกรรมอิเล็กทรอนิกส์",
+      "ธุรกิจด้านโลจิสติกส์และคลังสินค้า",
+      "สถาบันการศึกษาและวิจัย",
+    ],
+    painPoints: [
+      "เว็บไซต์ดูเก่าไม่สะท้อนนวัตกรรมบริษัท",
+      "ต้องการระบบรองรับหลายภาษาสำหรับคู่ค้าต่างชาติ",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ รังสิต",
+      "ออกแบบเว็บโรงงาน นวนคร",
+      "จ้างทำ SEO คลองหลวง",
+      "ทำเว็บอุตสาหกรรม บางกะดี",
+    ],
+  },
+  districts: ["เมืองปทุมธานี", "คลองหลวง", "ธัญบุรี", "ลำลูกกา", "ลาดหลุมแก้ว"],
+  keywords: [
+    "รับทำเว็บไซต์ ปทุมธานี",
+    "ทำเว็บโรงงาน นวนคร",
+    "จ้างทำเว็บรังสิต",
+    "รับทำ SEO ปทุมธานี",
+  ],
+};
+```
+
+### CONFIG: pattani.ts
+
+`Path: constants/area-nodes/pattani.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PATTANI_INDUSTRIAL_HUB v18.0.1
+ * [STRATEGY]: Halal Industry | Logistics | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const pattaniNode: AreaNode = {
+  slug: "pattani",
+  province: "ปัตตานี",
+  region: "South",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ ปัตตานี | ยกระดับอุตสาหกรรมฮาลาลและธุรกิจส่งออกสู่ตลาดโลก",
+  description:
+    "บริการรับทำเว็บไซต์มาตรฐานสากลสำหรับนิคมอุตสาหกรรมในปัตตานี เน้นความเชื่อมั่น B2B และมาตรฐานฮาลาลดิจิทัล",
+  seoTitle: "รับทำเว็บไซต์ ปัตตานี ออกแบบเว็บโรงงาน ฮาลาล - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ปัตตานี สำหรับธุรกิจโรงงานผลิต อุตสาหกรรมประมง และ SME พรีเมียม มาตรฐานความปลอดภัยสูง รองรับ SEO ระดับโลก",
+  priority: 87,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/pattani-node.webp",
+  coordinates: { lat: 6.8681, lng: 101.2501 },
+  marketSaturation: 40,
+  regionalLatency: 27,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Halal-Standard Audit",
+      description:
+        "ตรวจสอบและรวบรวมใบรับรองคุณภาพฮาลาลและมาตรฐานโรงงานเพื่อสร้างความมั่นใจให้คู่ค้ามุสลิมทั่วโลก",
+    },
+    {
+      step: "02",
+      title: "B2B Export Gateway",
+      description:
+        "ติดตั้งระบบรองรับข้อมูลผลิตภัณฑ์และการติดต่อสื่อสารกับคู่ค้าในกลุ่มประเทศ OIC และอาเซียน",
+    },
+    {
+      step: "03",
+      title: "Pattani Industrial SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดเฉพาะทางอุตสาหกรรมเพื่อให้ฝ่ายจัดซื้อทั่วโลกหาคุณเจอเป็นอันดับแรก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ปัตตานีมีจุดแข็งด้านอุตสาหกรรมฮาลาลและการประมง เว็บไซต์ต้องสะท้อนถึงมาตรฐานสากลและความถูกต้องตามหลักการ",
+    technicalApproach: "เน้นระบบ Security มาตรฐานสูงและโครงสร้าง Multilingual (ไทย/อังกฤษ/อาหรับ)",
+    localStrength: "เป็นศูนย์กลางอุตสาหกรรมฮาลาลของภูมิภาคและมีทรัพยากรประมงที่อุดมสมบูรณ์",
+    nicheIndustries: [
+      "โรงงานแปรรูปอาหารฮาลาล",
+      "ธุรกิจโลจิสติกส์และประมงอุตสาหกรรม",
+      "สถาบันการศึกษาและวิจัยเฉพาะทาง",
+    ],
+    painPoints: [
+      "เว็บไซต์องค์กรไม่สะท้อนมาตรฐานการผลิตจริง",
+      "ขาดเครื่องมือดิจิทัลในการปิดดีลกับคู่ค้าต่างชาติ",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ปัตตานี",
+      "ออกแบบเว็บโรงงาน ฮาลาล",
+      "จ้างทำ SEO สายบุรี",
+      "ทำเว็บประมง ปัตตานี",
+    ],
+  },
+  districts: ["เมืองปัตตานี", "โคกโพธิ์", "หนองจิก", "ยะรัง", "สายบุรี"],
+  keywords: [
+    "รับทำเว็บไซต์ ปัตตานี",
+    "ทำเว็บโรงงาน ฮาลาล",
+    "จ้างทำเว็บธุรกิจ",
+    "รับทำ SEO ปัตตานี",
+  ],
+};
+```
+
 ### CONFIG: phang-nga.ts
+
 `Path: constants/area-nodes/phang-nga.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: PHANG_NGA_MARINE_HUB v18.0.1 (STRICT_SYNC)
@@ -2459,6 +5086,7 @@ export const phangNgaNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phang-nga",
   province: "พังงา",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์พังงา | Smart Marine Governance & Sustainable Tourism Hub",
@@ -2482,6 +5110,30 @@ export const phangNgaNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 62,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Marine Entity Analysis",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลด้านความปลอดภัยทางทะเลและการท่องเที่ยวเชิงนิเวศเพื่อให้สอดคล้องกับการค้นหา",
+    },
+    {
+      step: "02",
+      title: "Premium UX Deployment",
+      description:
+        "ออกแบบหน้าเว็บไซต์ที่สะท้อนถึงความหรูหราและความสงบ (Luxury Quiet) ตามภาพลักษณ์ของจังหวัดพังงา",
+    },
+    {
+      step: "03",
+      title: "Global Visibility Sync",
+      description:
+        "เชื่อมโยงข้อมูลสู่แพลตฟอร์มระดับสากลและทำ Schema Markup เพื่อดักจับกลุ่มนักท่องเที่ยวคุณภาพสูง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phang-nga.webp",
@@ -2604,10 +5256,341 @@ export const phangNgaNode: AreaNode = {
   ],
   coordinates: { lat: 8.4501, lng: 98.5255 },
 };
-
 ```
+
+### CONFIG: phatthalung.ts
+
+`Path: constants/area-nodes/phatthalung.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PHATTHALUNG_ECO_STORY v18.0.1
+ * [STRATEGY]: Eco-Tourism | Agricultural Branding | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const phatthalungNode: AreaNode = {
+  slug: "phatthalung",
+  province: "พัทลุง",
+  region: "South",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ พัทลุง | ออกแบบเว็บท่องเที่ยวเชิงนิเวศและสินค้าภูมิปัญญาใต้",
+  description:
+    "ยกระดับเสน่ห์เมืองลุงสู่มาตรฐานดิจิทัล ด้วยเว็บไซต์ที่เน้นดีไซน์ธรรมชาติและการเล่าเรื่องวิถีชุมชนที่น่าสนใจ",
+  seoTitle: "รับทำเว็บไซต์ พัทลุง ออกแบบเว็บที่พัก ควนนกเต้น ทะเลน้อย - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์พัทลุง สำหรับโฮมสเตย์ สินค้าจักสานกระจูด และธุรกิจท่องเที่ยวเชิงนิเวศ ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 85,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/phatthalung-node.webp",
+  coordinates: { lat: 7.6167, lng: 100.0833 },
+  isTourismHeavy: true,
+  marketSaturation: 42,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Eco-Story Audit",
+      description:
+        "ดึงจุดเด่นของแบรนด์สวนหรือที่พักสายธรรมชาติมาเรียบเรียงเป็นเนื้อหาที่สร้างความประทับใจ",
+    },
+    {
+      step: "02",
+      title: "Fast Response Gateway",
+      description: "ติดตั้งระบบจองที่พักและระบบสั่งซื้อสินค้ากระจูดที่แจ้งเตือนผ่านมือถือทันที",
+    },
+    {
+      step: "03",
+      title: "Unseen Phatthalung SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักพัทลุง', 'ของฝากเมืองลุง' เพื่อชิงอันดับหนึ่งในการค้นหา",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "พัทลุงมีนักท่องเที่ยวสาย Slow Life และครอบครัวหนาแน่น เว็บไซต์ที่ภาพสวยและเล่าเรื่องได้ดีจะได้รับความนิยมสูง",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับบรรยากาศธรรมชาติและการทำ Local Schema สำหรับจุดเช็คอิน",
+    localStrength:
+      "มีความโดดเด่นด้านธรรมชาติ (ทะเลน้อย/ควนนกเต้น) และงานหัตถกรรมจักสานกระจูดระดับประเทศ",
+    nicheIndustries: [
+      "ที่พักเชิงนิเวศและโฮมสเตย์",
+      "สินค้าจักสานกระจูดพรีเมียม",
+      "ร้านอาหารและคาเฟ่วิวทุ่งนา",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาพิกัดที่พักลับไม่เจอ",
+      "ภาพลักษณ์เว็บดูไม่พรีเมียมพอที่จะขายราคาที่ต้องการ",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ควนนกเต้น",
+      "ออกแบบเว็บโฮมสเตย์ ทะเลน้อย",
+      "จ้างทำ SEO พัทลุง",
+      "ทำเว็บสินค้ากระจูด พัทลุง",
+    ],
+  },
+  districts: ["เมืองพัทลุง", "ควนขนุน", "ปากพะยูน", "ตะโหมด", "ศรีบรรพต"],
+  keywords: ["รับทำเว็บไซต์ พัทลุง", "ทำเว็บที่พัก พัทลุง", "จ้างทำเว็บพัทลุง", "รับทำ SEO พัทลุง"],
+};
+```
+
+### CONFIG: phayao.ts
+
+`Path: constants/area-nodes/phayao.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PHAYAO_LAKE_WELLNESS v18.0.1
+ * [STRATEGY]: Eco-Tourism | Wellness | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const phayaoNode: AreaNode = {
+  slug: "phayao",
+  province: "พะเยา",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ พะเยา | ออกแบบเว็บท่องเที่ยวเชิงนิเวศและธุรกิจริมกว๊านพะเยา",
+  description:
+    "เปลี่ยนความสงบของพะเยาให้เป็นจุดขายที่ทันสมัย ด้วยเว็บไซต์ที่เน้นความสวยงามของธรรมชาติและระบบจองที่ลื่นไหล",
+  seoTitle: "รับทำเว็บไซต์ พะเยา ออกแบบเว็บที่พักริมกว๊าน ธุรกิจเกษตร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์พะเยา ครบวงจร สำหรับธุรกิจริมกว๊านพะเยา คาเฟ่ และรีสอร์ตเชิงนิเวศ เว็บสวยโหลดไว รองรับมือถือ 100%",
+  priority: 82,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/phayao-node.webp",
+  coordinates: { lat: 19.1667, lng: 99.9 },
+  isTourismHeavy: true,
+  marketSaturation: 32,
+  regionalLatency: 26,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Lake-Side Visual Audit",
+      description: "ออกแบบ UI ที่ดึงเสน่ห์ของกว๊านพะเยามาเป็นธีมหลักเพื่อสร้างอารมณ์ร่วมให้ลูกค้า",
+    },
+    {
+      step: "02",
+      title: "Digital Concierge Sync",
+      description: "ติดตั้งระบบแนะนำสถานที่และบริการออนไลน์สำหรับนักท่องเที่ยวที่มาเยือนพะเยา",
+    },
+    {
+      step: "03",
+      title: "Phayao Entity SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักพะเยา' และ 'ร้านอาหารริมกว๊าน' เพื่อชิงพื้นที่หน้าแรก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "พะเยาเป็นเมืองพักผ่อนที่กำลังเติบโต เว็บไซต์ที่ดูคลีนและเข้ากับบรรยากาศเมืองจะได้รับความนิยมสูง",
+    technicalApproach: "เน้นความรวดเร็วในการโหลดและการปักหมุด Google Maps ในจุดท่องเที่ยวใหม่ๆ",
+    localStrength: "มีความโดดเด่นด้านกว๊านพะเยาซึ่งเป็นแม่เหล็กดึงดูดนักท่องเที่ยวได้ตลอดทั้งปี",
+    nicheIndustries: ["ที่พักและรีสอร์ตริมน้ำ", "คาเฟ่สายธรรมชาติ", "ธุรกิจเกษตรปลอดภัย (Organic)"],
+    painPoints: ["เว็บไซต์เก่าไม่รองรับการแสดงผลรูปภาพสวยๆ", "ระบบจองไม่รองรับภาษาต่างชาติ"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ กว๊านพะเยา",
+      "ออกแบบเว็บที่พัก พะเยา",
+      "จ้างทำ SEO พะเยา",
+      "ทำเว็บสินค้าเกษตร พะเยา",
+    ],
+  },
+  districts: ["เมืองพะเยา", "เชียงคำ", "เชียงม่วน", "ดอกคำใต้", "ปง"],
+  keywords: ["รับทำเว็บไซต์ พะเยา", "ทำเว็บที่พัก พะเยา", "จ้างทำเว็บพะเยา", "รับทำ SEO พะเยา"],
+};
+```
+
+### CONFIG: phetchabun.ts
+
+`Path: constants/area-nodes/phetchabun.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PHETCHABUN_HIGHLAND v18.0.1
+ * [STRATEGY]: Eco-Tourism | Highland Agriculture | Dynamic Inheritance
+ * [MARKET]: Phetchabun, Khao Kho, Phu Thap Boek
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const phetchabunNode: AreaNode = {
+  slug: "phetchabun",
+  province: "เพชรบูรณ์",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ เพชรบูรณ์ | ออกแบบเว็บรีสอร์ตเขาค้อและธุรกิจเกษตรเมืองหนาว",
+  description:
+    "ยกระดับธุรกิจท่องเที่ยวและเกษตรกรรมในเพชรบูรณ์ สู่มาตรฐานดิจิทัลที่ปิดการขายได้จริงบนยอดดอย พร้อมระบบจองที่ลื่นไหล",
+  longDescription:
+    "เพชรบูรณ์คือสวิตเซอร์แลนด์เมืองไทยที่มีศักยภาพการท่องเที่ยวสูงมาก นายเอ็มซ่ามากส์ พร้อมช่วยคุณเปลี่ยนบรรยากาศหลักล้านให้กลายเป็นยอดจองตรง " +
+    "เราเน้นทำเว็บไซต์ที่โหลดไวแม้บนพื้นที่สูง มีระบบจองที่พักที่แม่นยำ และงานดีไซน์ที่เน้นความโปร่ง สบายตา เข้ากับบรรยากาศเขาค้อและภูทับเบิก เพื่อดึงดูดนักท่องเที่ยวคุณภาพตลอดทั้งปีครับ",
+  seoTitle: "รับทำเว็บไซต์ เพชรบูรณ์ ออกแบบเว็บรีสอร์ตเขาค้อ ธุรกิจเกษตร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์เพชรบูรณ์ ครบวงจร สำหรับรีสอร์ต โฮมสเตย์ และสินค้าเกษตรเมืองหนาว ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่และระบบจองตรง",
+  priority: 88,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/phetchabun-node.webp",
+  coordinates: { lat: 16.419, lng: 101.155 },
+  isTourismHeavy: true,
+  marketSaturation: 48,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Highland Brand Audit",
+      description:
+        "วิเคราะห์จุดเด่นของที่พักหรือสินค้าเกษตรเมืองหนาวเพื่อสร้างตัวตนที่ดูพรีเมียมและน่าเชื่อถือ",
+    },
+    {
+      step: "02",
+      title: "Resilient Network Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บที่รองรับการใช้งานผ่านเน็ตมือถือบนดอยสูงได้อย่างเสถียรและรวดเร็ว",
+    },
+    {
+      step: "03",
+      title: "Eco-Tourism SEO Sync",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักเขาค้อ', 'รีสอร์ตภูทับเบิก' เพื่อชิงอันดับหนึ่งในช่วงฤดูกาลท่องเที่ยว",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "เพชรบูรณ์มีจุดเด่นด้านการท่องเที่ยวธรรมชาติระดับประเทศ เว็บไซต์ที่ภาพสวยและจองง่ายคือหัวใจสำคัญในการแข่งขัน",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพวิวทิวทัศน์และระบบ Booking Engine ที่เชื่อมต่อกับสมาร์ทโฟน",
+    localStrength:
+      "มีความโดดเด่นด้านภูมิประเทศ (เขาค้อ/ภูทับเบิก) และเป็นแหล่งเกษตรกรรมเมืองหนาวที่สำคัญ",
+    nicheIndustries: [
+      "รีสอร์ตและที่พักระดับพรีเมียม",
+      "วิสาหกิจชุมชนสินค้าเกษตรเมืองหนาว",
+      "คาเฟ่และร้านอาหารวิวหลักล้าน",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวหาข้อมูลที่พักในช่วงเทศกาลยาก",
+      "เว็บไซต์เดิมโหลดช้าเมื่อใช้งานผ่านเน็ตบนดอย",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เขาค้อ",
+      "ออกแบบเว็บรีสอร์ต ภูทับเบิก",
+      "จ้างทำ SEO เพชรบูรณ์",
+      "ทำเว็บสินค้าเกษตร เพชรบูรณ์",
+    ],
+  },
+  districts: ["เมืองเพชรบูรณ์", "เขาค้อ", "หล่มสัก", "หล่มเก่า", "วิเชียรบุรี"],
+  keywords: [
+    "รับทำเว็บไซต์ เพชรบูรณ์",
+    "ทำเว็บรีสอร์ต เขาค้อ",
+    "จ้างทำเว็บเพชรบูรณ์",
+    "รับทำ SEO เพชรบูรณ์",
+  ],
+};
+```
+
+### CONFIG: phetchaburi.ts
+
+`Path: constants/area-nodes/phetchaburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PHETCHABURI_GOURMET v18.0.1
+ * [STRATEGY]: Gastronomy Hub | Heritage Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const phetchaburiNode: AreaNode = {
+  slug: "phetchaburi",
+  province: "เพชรบุรี",
+  region: "West",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ เพชรบุรี | ออกแบบเว็บธุรกิจอาหารและที่พักพรีเมียม เมืองสร้างสรรค์ด้านอาหาร",
+  description:
+    "เปลี่ยนชื่อเสียงเมืองขนมหวานให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความน่ารับประทานและระบบสั่งจองที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ เพชรบุรี ออกแบบเว็บร้านอาหาร ที่พัก ชะอำ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์เพชรบุรี สำหรับธุรกิจ Gastronomy รีสอร์ตชะอำ และสินค้า SME เพชรบุรี ดีไซน์หรูหรา โหลดไว ติดหน้าแรก Google",
+  priority: 90,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/phetchaburi-node.webp",
+  coordinates: { lat: 13.113, lng: 99.9442 },
+  isTourismHeavy: true,
+  marketSaturation: 65,
+  regionalLatency: 12,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Gourmet Story Audit",
+      description:
+        "ดึงจุดเด่นของเมืองสร้างสรรค์ด้านอาหาร (UNESCO) มาเป็นธีมหลักในการนำเสนอแบรนด์เพชรบุรี",
+    },
+    {
+      step: "02",
+      title: "Fast Conversion Gateway",
+      description:
+        "ติดตั้งระบบสั่งซื้อสินค้าและจองที่พักที่โหลดแรงที่สุดเพื่อรองรับนักท่องเที่ยวคุณภาพ",
+    },
+    {
+      step: "03",
+      title: "Heritage Tourism SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักชะอำ', 'ของฝากเพชรบุรี' เพื่อครองความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "เพชรบุรีมีจุดแข็งด้าน Gastronomy และแหล่งท่องเที่ยวประวัติศาสตร์ เว็บไซต์ที่ 'เล่าเรื่อง' เก่งจะปิดการขายได้เร็วกว่า",
+    technicalApproach:
+      "เน้น Mobile Optimization และการเชื่อมโยงระบบ Social Media สำหรับธุรกิจอาหาร",
+    localStrength: "ชื่อเสียงด้านอาหารระดับโลกและการท่องเที่ยวชายฝั่งที่เข้มแข็ง",
+    nicheIndustries: [
+      "ร้านอาหารและคาเฟ่พรีเมียม",
+      "ธุรกิจโรงแรมและรีสอร์ตชายฝั่ง",
+      "สินค้าเกษตรแปรรูปและขนมหวาน",
+    ],
+    painPoints: ["ขาดการนำเสนอแบรนด์ที่เป็นสากล", "ระบบสั่งซื้อออนไลน์ไม่เสถียร"],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ชะอำ",
+      "ออกแบบเว็บร้านอาหาร เพชรบุรี",
+      "จ้างทำ SEO แก่งกระจาน",
+      "ทำเว็บสินค้า SME เพชรบุรี",
+    ],
+  },
+  districts: ["เมืองเพชรบุรี", "ชะอำ", "ท่ายาง", "บ้านลาด", "แก่งกระจาน"],
+  keywords: ["รับทำเว็บไซต์ เพชรบุรี", "ทำเว็บร้านอาหาร", "จ้างทำเว็บชะอำ", "รับทำ SEO เพชรบุรี"],
+};
+```
+
 ### CONFIG: phichit.ts
+
 `Path: constants/area-nodes/phichit.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.2 (STRICT_SYNC)
@@ -2623,6 +5606,7 @@ export const phichitNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phichit",
   province: "พิจิตร",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความมั่นคงและท้องถิ่น
 
   title: "รับทำเว็บไซต์ พิจิตร | ออกแบบเว็บโรงสีและธุรกิจเกษตรแปรรูป สร้างความเชื่อถือระดับสากล",
@@ -2647,6 +5631,29 @@ export const phichitNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 32,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Industrial Trust Audit",
+      description:
+        "วิเคราะห์และรวบรวมใบรับรองมาตรฐานโรงงานและผลงานการผลิตเพื่อสร้างความเชื่อมั่นออนไลน์",
+    },
+    {
+      step: "02",
+      title: "B2B Gateway Deployment",
+      description:
+        "ติดตั้งระบบขอใบเสนอราคาและแคตตาล็อกสินค้าอุตสาหกรรมที่โหลดเร็วแม้ในพื้นที่ห่างไกล",
+    },
+    {
+      step: "03",
+      title: "Agro-Industrial SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดเฉพาะทางเพื่อดักกลุ่มคู่ค้าที่มองหาโรงสีและโรงงานแปรรูปเกษตรตัวจริง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phichit-node.webp",
@@ -2767,10 +5774,12 @@ export const phichitNode: AreaNode = {
   ],
   coordinates: { lat: 16.4428, lng: 100.3501 },
 };
-
 ```
+
 ### CONFIG: phitsanulok.ts
+
 `Path: constants/area-nodes/phitsanulok.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.2 (STRICT_SYNC)
@@ -2787,6 +5796,7 @@ export const phitsanulokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phitsanulok",
   province: "พิษณุโลก",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและมาตรฐานราชการ/วิชาชีพ
 
   title: "รับทำเว็บไซต์ พิษณุโลก | ออกแบบเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
@@ -2811,6 +5821,29 @@ export const phitsanulokNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 48,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Service Entity Audit",
+      description:
+        "ตรวจสอบความถูกต้องของข้อมูลบริการและกฎระเบียบวิชาชีพ (สำหรับคลินิก) เพื่อความน่าเชื่อถือสูงสุด",
+    },
+    {
+      step: "02",
+      title: "Regional Node Deployment",
+      description:
+        "วางระบบเว็บไซต์ที่โหลดไวที่สุดในเขตภาคเหนือตอนล่างเพื่อรองรับลูกค้าจากจังหวัดใกล้เคียง",
+    },
+    {
+      step: "03",
+      title: "Indochina Hub SEO",
+      description:
+        "ปักหมุด Google Maps และทำ Local SEO ครอบคลุมจุดตัดสี่แยกอินโดจีนเพื่อชิงความเป็นผู้นำในภูมิภาค",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phitsanulok-node.webp",
@@ -2940,10 +5973,89 @@ export const phitsanulokNode: AreaNode = {
   ],
   coordinates: { lat: 16.8211, lng: 100.2659 },
 };
-
 ```
+
+### CONFIG: phrae.ts
+
+`Path: constants/area-nodes/phrae.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PHRAE_TEAK_CITY v18.0.1
+ * [STRATEGY]: Craftsmanship | Local SME | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const phraeNode: AreaNode = {
+  slug: "phrae",
+  province: "แพร่",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ แพร่ | พัฒนาเว็บไซต์งานไม้และธุรกิจท่องเที่ยววิถีล้านนาตะวันออก",
+  description:
+    "ยกระดับงานฝีมือเมืองแพร่สู่ตลาดสากล ด้วยเว็บไซต์ที่ออกแบบอย่างประณีตและระบบรองรับการขายสินค้าคราฟต์พรีเมียม",
+  seoTitle: "รับทำเว็บไซต์ แพร่ ออกแบบเว็บงานไม้ ที่พักพรีเมียม - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์แพร่ สำหรับโรงงานเฟอร์นิเจอร์ไม้สัก และธุรกิจท่องเที่ยวพื้นเมือง ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 84,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/phrae-node.webp",
+  coordinates: { lat: 18.1446, lng: 100.1403 },
+  marketSaturation: 38,
+  regionalLatency: 25,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Artisan Brand Sync",
+      description: "วิเคราะห์คุณค่างานไม้หรือสินค้าภูมิปัญญาเพื่อสร้างแบรนด์ดิจิทัลที่ดูพรีเมียม",
+    },
+    {
+      step: "02",
+      title: "Catalog Node Deployment",
+      description:
+        "ติดตั้งระบบแสดงผลสินค้าและแกลเลอรี่ที่โชว์รายละเอียดเนื้อไม้และงานฝีมือได้อย่างคมชัด",
+    },
+    {
+      step: "03",
+      title: "Lanna East SEO",
+      description: "ทำ Local SEO ดักจับ Traffic จากกลุ่มผู้รักงานไม้และนักท่องเที่ยวล้านนาตะวันออก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "แพร่มีชื่อเสียงด้านงานไม้และผ้าหม้อห้อม เว็บไซต์ที่ดูคลาสสิกแต่ทันสมัยจะช่วยเพิ่มมูลค่าสินค้าได้มหาศาล",
+    technicalApproach:
+      "เน้นการแสดงผล Portfolio สินค้าและระบบการติดต่อสอบถามที่รวดเร็ว (Fast Response)",
+    localStrength: "เป็นแหล่งผลิตเฟอร์นิเจอร์ไม้สักคุณภาพสูงที่สุดในประเทศไทย",
+    nicheIndustries: [
+      "โรงงานเฟอร์นิเจอร์ไม้สัก",
+      "วิสาหกิจชุมชนผ้าหม้อห้อม",
+      "ที่พักเมืองเก่าแบบวินเทจ",
+    ],
+    painPoints: ["สินค้าดีระดับโลกแต่ภาพลักษณ์เว็บดูไม่แพง", "ขาดระบบแคตตาล็อกออนไลน์ที่ค้นหาง่าย"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สูงเม่น",
+      "ออกแบบเว็บเฟอร์นิเจอร์ไม้ แพร่",
+      "จ้างทำ SEO แพร่",
+      "ทำเว็บผ้าหม้อห้อม แพร่",
+    ],
+  },
+  districts: ["เมืองแพร่", "สูงเม่น", "เด่นชัย", "ร้องกวาง", "ลอง"],
+  keywords: ["รับทำเว็บไซต์ แพร่", "ทำเว็บงานไม้ แพร่", "จ้างทำเว็บแพร่", "รับทำ SEO แพร่"],
+};
+```
+
 ### CONFIG: phuket.ts
+
 `Path: constants/area-nodes/phuket.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.1 (STRICT_SYNC)
@@ -2960,6 +6072,7 @@ export const phuketNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phuket",
   province: "ภูเก็ต",
+  region: "South",
   templateSlug: "hotelresort", // เชื่อมโยงกับแม่แบบที่เน้นงาน Visual ระดับ High-end
 
   title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
@@ -2984,6 +6097,31 @@ export const phuketNode: AreaNode = {
   priceValue: hotelResortService.priceValue,
   currency: hotelResortService.currency,
   unit: hotelResortService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 85,
+  regionalLatency: 18,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Global Traffic Audit",
+      description:
+        "วิเคราะห์แหล่งที่มาของนักท่องเที่ยว (ยุโรป/รัสเซีย/จีน) เพื่อเลือกใช้ CDN และ Edge Node ที่ใกล้ที่สุด",
+    },
+    {
+      step: "02",
+      title: "UHNW Experience Design",
+      description:
+        "ออกแบบ UI ที่สะท้อนความหรูหราและรองรับการแสดงผลภาพ High-Res ได้ลื่นไหลบนมือถือแม้อยู่กลางทะเล",
+    },
+    {
+      step: "03",
+      title: "Direct Conversion Sync",
+      description:
+        "เชื่อมต่อระบบ Booking Engine กับ Google Travel เพื่อดึงลูกค้าจาก OTA กลับมาจองตรง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phuket-node.webp",
@@ -3084,6 +6222,17 @@ export const phuketNode: AreaNode = {
       "รับทำ SEO ภาษาอังกฤษ ภูเก็ต",
       "ทำเว็บไซต์โรงแรม ลากูน่า",
     ],
+    promotions: [
+      {
+        title: "High-Season Launch Offer",
+        description: "ฟรีระบบจองห้องพัก (Booking Engine) สำหรับผู้ที่เริ่มโครงการภายในเดือนนี้",
+        discount: "มูลค่า 15,000.-",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/phuket-node.webp",
+      gallery: ["/images/areas/phuket-node.webp", "/images/areas/phuket-node.webp"],
+    },
   },
 
   // --- System Metadata ---
@@ -3099,10 +6248,183 @@ export const phuketNode: AreaNode = {
   ],
   coordinates: { lat: 7.8804, lng: 98.3923 },
 };
-
 ```
+
+### CONFIG: prachin-buri.ts
+
+`Path: constants/area-nodes/prachin-buri.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PRACHIN_BURI_INDUSTRIAL v18.0.1
+ * [STRATEGY]: Industrial Core | Bio-Agri Hub | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const prachinBuriNode: AreaNode = {
+  slug: "prachin-buri",
+  province: "ปราจีนบุรี",
+  region: "East",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ ปราจีนบุรี | ยกระดับภาพลักษณ์โรงงานอุตสาหกรรมและธุรกิจสมุนไพร",
+  description:
+    "บริการรับทำเว็บไซต์มาตรฐานสากลสำหรับนิคมอุตสาหกรรมในปราจีนบุรี เน้นความเชื่อมั่น B2B และระบบจัดการข้อมูลที่ทันสมัย",
+  seoTitle: "รับทำเว็บไซต์ ปราจีนบุรี ออกแบบเว็บโรงงาน สมุนไพร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ปราจีนบุรี สำหรับธุรกิจโรงงานผลิต นิคม 304 และ SME สมุนไพรพรีเมียม มาตรฐานความปลอดภัยสูง รองรับ SEO",
+  priority: 88,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/prachin-buri-node.webp",
+  coordinates: { lat: 14.0501, lng: 101.373 },
+  marketSaturation: 52,
+  regionalLatency: 12,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Industry Credential Audit",
+      description:
+        "ตรวจสอบและรวบรวมใบรับรองคุณภาพ (ISO/GMP) เพื่อโชว์บนหน้าเว็บสร้างความมั่นใจให้คู่ค้า",
+    },
+    {
+      step: "02",
+      title: "Multilingual B2B Gateway",
+      description: "ติดตั้งระบบรองรับหลายภาษาสำหรับโรงงานที่มีคู่ค้าต่างชาติ (ญี่ปุ่น/จีน/ยุโรป)",
+    },
+    {
+      step: "03",
+      title: "Prachin Industrial SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดเฉพาะทางเพื่อครองอันดับหนึ่งในเขตนิคมอุตสาหกรรม 304 และกบินทร์บุรี",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ปราจีนบุรีเป็นแหล่งอุตสาหกรรมอิเล็กทรอนิกส์และสมุนไพร เว็บไซต์จึงต้องรองรับทั้งความไฮเทคและความเป็นธรรมชาติ",
+    technicalApproach:
+      "เน้นระบบ Security และการแสดงผลภาพความละเอียดสูงสำหรับขั้นตอนการผลิตและผลิตภัณฑ์",
+    localStrength:
+      "มีความเข้มแข็งด้านอุตสาหกรรมผลิตและชื่อเสียงด้านสมุนไพรระดับประเทศ (อภัยภูเบศร)",
+    nicheIndustries: [
+      "โรงงานอิเล็กทรอนิกส์และยานยนต์",
+      "ธุรกิจแปรรูปสมุนไพรพรีเมียม",
+      "รีสอร์ตเชิงนิเวศใกล้เขาใหญ่",
+    ],
+    painPoints: ["ขาดการสื่อสารภาพลักษณ์แบรนด์ที่เป็นสากล", "ระบบขอใบเสนอราคาออนไลน์ไม่เสถียร"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ นิคม 304",
+      "ออกแบบเว็บโรงงาน ปราจีนบุรี",
+      "จ้างทำ SEO กบินทร์บุรี",
+      "ทำเว็บสมุนไพร ปราจีนบุรี",
+    ],
+  },
+  districts: ["เมืองปราจีนบุรี", "กบินทร์บุรี", "ศรีมหาโพธิ", "ประจันตคาม", "นาดี"],
+  keywords: [
+    "รับทำเว็บไซต์ ปราจีนบุรี",
+    "ทำเว็บโรงงาน 304",
+    "จ้างทำเว็บสมุนไพร",
+    "รับทำ SEO ปราจีนบุรี",
+  ],
+};
+```
+
+### CONFIG: prachuap-khiri-khan.ts
+
+`Path: constants/area-nodes/prachuap-khiri-khan.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: PRACHUAP_PREMIUM_COAST v18.0.1
+ * [STRATEGY]: Luxury Coastal | Tourism Authority | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const prachuapKhiriKhanNode: AreaNode = {
+  slug: "prachuap-khiri-khan",
+  province: "ประจวบคีรีขันธ์",
+  region: "West",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ ประจวบคีรีขันธ์ | ออกแบบเว็บรีสอร์ตหรูและธุรกิจท่องเที่ยวระดับสากล",
+  description:
+    "ยกระดับภาพลักษณ์ธุรกิจท่องเที่ยวหัวหินและประจวบฯ สู่ระดับ Ultra-Luxury ด้วยเว็บไซต์ที่มอบประสบการณ์ไร้รอยต่อ",
+  seoTitle: "รับทำเว็บไซต์ หัวหิน ประจวบคีรีขันธ์ ออกแบบเว็บรีสอร์ตหรู - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ประจวบคีรีขันธ์ หัวหิน ปราณบุรี ครบวงจร สำหรับโรงแรม 5 ดาว และธุรกิจพรีเมียม โหลดไวระดับโลก ติด SEO นานาชาติ",
+  priority: 96,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/prachuap-khiri-khan-node.webp",
+  coordinates: { lat: 11.8124, lng: 99.797 },
+  isTourismHeavy: true,
+  marketSaturation: 82,
+  regionalLatency: 15,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "International Luxury Audit",
+      description:
+        "วิเคราะห์การนำเสนอแบรนด์ระดับ UHNW เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากทั่วโลก",
+    },
+    {
+      step: "02",
+      title: "Global CDN Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บที่โหลดเร็วสายฟ้าแลบจากทุกมุมโลกเพื่อรองรับนักท่องเที่ยวต่างชาติ",
+    },
+    {
+      step: "03",
+      title: "Coastal Dominance SEO",
+      description:
+        "วางโครงสร้าง SEO หลายภาษา ครอบคลุมคีย์เวิร์ด 'Hua Hin Luxury Stay', 'Pranburi Resort'",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ประจวบฯ โดยเฉพาะหัวหิน มีการแข่งขันระดับโลก เว็บไซต์ต้องเน้นความหรูหรา ความปลอดภัย และความรวดเร็วสูงสุด",
+    technicalApproach: "เน้น Image Optimization ขั้นสูงและระบบ Booking ที่มีความเสถียรระดับสากล",
+    localStrength: "เป็นจุดหมายปลายทางการท่องเที่ยวระดับพรีเมียมที่มีชื่อเสียงในระดับสากล",
+    nicheIndustries: [
+      "โรงแรมและพูลวิลล่าหรูหัวหิน",
+      "ธุรกิจอสังหาริมทรัพย์ระดับพรีเมียม",
+      "ศูนย์สุขภาพและ Wellness Retreat",
+    ],
+    painPoints: [
+      "เว็บไซต์ดูเก่าไม่สมราคาที่พักหลักล้าน",
+      "เน็ตริมทะเลบางจุดไม่เสถียรทำให้เว็บโหลดช้า",
+    ],
+    competitorLevel: "extreme",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หัวหิน",
+      "ออกแบบเว็บพูลวิลล่า ปราณบุรี",
+      "จ้างทำ SEO หัวหิน",
+      "ทำเว็บโรงแรม ประจวบคีรีขันธ์",
+    ],
+  },
+  districts: ["เมืองประจวบคีรีขันธ์", "หัวหิน", "ปราณบุรี", "กุยบุรี", "ทับสะแก"],
+  keywords: [
+    "รับทำเว็บไซต์ หัวหิน",
+    "ทำเว็บโรงแรม ประจวบ",
+    "จ้างทำเว็บปราณบุรี",
+    "รับทำ SEO หัวหิน",
+  ],
+};
+```
+
 ### CONFIG: ranong.ts
+
 `Path: constants/area-nodes/ranong.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: RANONG_WELLNESS_HUB v18.0.1 (STRICT_SYNC)
@@ -3119,6 +6441,7 @@ export const ranongNode: AreaNode = {
   // --- Basic Identity ---
   slug: "ranong",
   province: "ระนอง",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
 
   title: "รับทำเว็บไซต์ระนอง | สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
@@ -3142,6 +6465,30 @@ export const ranongNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 38,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Wellness Data Audit",
+      description:
+        "วิเคราะห์จุดเด่นของบริการสุขภาพและน้ำแร่ร้อนเพื่อวางโครงสร้างการนำเสนอดิจิทัลระดับสากล",
+    },
+    {
+      step: "02",
+      title: "SSG Performance Hub",
+      description:
+        "ติดตั้งระบบ Static Site Generation เพื่อให้เว็บไซต์เข้าถึงได้เสถียรที่สุดแม้ในช่วงฤดูมรสุมของระนอง",
+    },
+    {
+      step: "03",
+      title: "Cross-Border SEO Sync",
+      description:
+        "วางโครงสร้าง 3 ภาษา (ไทย/อังกฤษ/พม่า) เพื่อดักจับกลุ่มนักท่องเที่ยวและคู่ค้าในเขตเศรษฐกิจพิเศษชายแดน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/ranong-hotspring.webp",
@@ -3253,10 +6600,1089 @@ export const ranongNode: AreaNode = {
   ],
   coordinates: { lat: 9.9528, lng: 98.6084 },
 };
-
 ```
+
+### CONFIG: ratchaburi.ts
+
+`Path: constants/area-nodes/ratchaburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: RATCHABURI_ART_CRAFT v18.0.1
+ * [STRATEGY]: Artisan Hub | Creative Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const ratchaburiNode: AreaNode = {
+  slug: "ratchaburi",
+  province: "ราชบุรี",
+  region: "West",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ราชบุรี | ยกระดับงานศิลปะและธุรกิจสร้างสรรค์ เมืองโอ่งมังกร",
+  description:
+    "เปลี่ยนงานหัตถศิลป์ราชบุรีสู่มาตรฐานดิจิทัล ด้วยเว็บไซต์ที่เน้นงานดีไซน์เชิงสร้างสรรค์และระบบขายสินค้าคราฟต์พรีเมียม",
+  seoTitle: "รับทำเว็บไซต์ ราชบุรี ออกแบบเว็บงานอาร์ต ที่พัก สวนผึ้ง - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ราชบุรี สำหรับธุรกิจเซรามิก รีสอร์ตสวนผึ้ง และสินค้า OTOP พรีเมียม ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่",
+  priority: 89,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/ratchaburi-node.webp",
+  coordinates: { lat: 13.5283, lng: 99.8133 },
+  isTourismHeavy: true,
+  marketSaturation: 52,
+  regionalLatency: 14,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Creative Brand Audit",
+      description:
+        "วิเคราะห์อัตลักษณ์ความสร้างสรรค์ของธุรกิจราชบุรีเพื่อสร้างแบรนด์ดิจิทัลที่ดูพรีเมียมและมีเอกลักษณ์",
+    },
+    {
+      step: "02",
+      title: "Visual Gallery Hub",
+      description:
+        "ติดตั้งระบบแสดงผลสินค้าและแกลเลอรี่ที่เน้นงาน Visual ระดับสูงสำหรับงานศิลปะและที่พัก",
+    },
+    {
+      step: "03",
+      title: "Artistic SEO Sync",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักสวนผึ้ง', 'โอ่งมังกรราชบุรี' เพื่อชิงอันดับหนึ่งในสายตาของคนรักศิลปะ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ราชบุรีเป็นเมืองแห่งศิลปะและธรรมชาติ การตลาดดิจิทัลต้องเน้นภาพลักษณ์ที่ดู 'มีสไตล์' และ 'พิถีพิถัน' สูง",
+    technicalApproach:
+      "เน้น Image Optimization และการแสดงผลที่เป็นระเบียบเพื่อโชว์รายละเอียดงานคราฟต์",
+    localStrength: "มีความโดดเด่นด้านเซรามิก แหล่งท่องเที่ยวสวนผึ้ง และตลาดน้ำดำเนินสะดวก",
+    nicheIndustries: [
+      "โรงงานเซรามิกและงานคราฟต์",
+      "บูทีครีสอร์ตในเขตสวนผึ้ง",
+      "วิสาหกิจชุมชนสินค้าเกษตรแปรรูป",
+    ],
+    painPoints: ["งานดีแต่ภาพลักษณ์เว็บดูธรรมดา", "นักท่องเที่ยวหาข้อมูลสินค้าพรีเมียมได้ยาก"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ราชบุรี",
+      "ออกแบบเว็บงานอาร์ต ราชบุรี",
+      "จ้างทำ SEO สวนผึ้ง",
+      "ทำเว็บงานคราฟต์ ราชบุรี",
+    ],
+  },
+  districts: ["เมืองราชบุรี", "สวนผึ้ง", "โพธาราม", "บ้านโป่ง", "ดำเนินสะดวก"],
+  keywords: ["รับทำเว็บไซต์ ราชบุรี", "ทำเว็บงานคราฟต์", "จ้างทำเว็บสวนผึ้ง", "รับทำ SEO ราชบุรี"],
+};
+```
+
+### CONFIG: rayong.ts
+
+`Path: constants/area-nodes/rayong.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: RAYONG_INDUSTRIAL_HUB v18.0.1
+ * [STRATEGY]: Heavy Industry | EEC Dominance | Dynamic Inheritance
+ * [MARKET]: Rayong, Map Ta Phut, Ban Khai (Industrial & Energy)
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const rayongNode: AreaNode = {
+  slug: "rayong",
+  province: "ระยอง",
+  region: "East",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ ระยอง | ยกระดับภาพลักษณ์โรงงานและธุรกิจพลังงานในเขต EEC",
+  description:
+    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise สำหรับนิคมอุตสาหกรรมมาบตาพุดและธุรกิจในระยอง เน้นความปลอดภัยสูงสุดและระบบ B2B ขั้นสูง",
+  seoTitle: "รับทำเว็บไซต์ ระยอง ออกแบบเว็บโรงงาน นิคมมาบตาพุด - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ระยอง ครบวงจร สำหรับอุตสาหกรรมปิโตรเคมี พลังงาน และโลจิสติกส์ มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
+  priority: 98,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/rayong-node.webp",
+  coordinates: { lat: 12.6814, lng: 101.2813 },
+  marketSaturation: 85,
+  regionalLatency: 14,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Petrochemical B2B Audit",
+      description: "วิเคราะห์ภาพลักษณ์บริษัทให้สอดคล้องกับมาตรฐานความปลอดภัยและนวัตกรรมระดับสากล",
+    },
+    {
+      step: "02",
+      title: "Enterprise Infrastructure",
+      description: "ติดตั้งระบบรองรับข้อมูลเทคนิค (Data Sheets) และระบบความปลอดภัย ISO 27001 Ready",
+    },
+    {
+      step: "03",
+      title: "EEC Entity SEO Sync",
+      description: "วางโครงสร้างคีย์เวิร์ดดักจับฝ่ายจัดซื้ออุตสาหกรรมหนักและนักลงทุนในพื้นที่ระยอง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ระยองคือศูนย์กลางพลังงานและอุตสาหกรรมหนัก เว็บไซต์ต้องสะท้อนถึง 'ความล้ำสมัย' และ 'ความมั่นคงสูงสุด'",
+    technicalApproach:
+      "เน้นการจัดการระบบความปลอดภัยข้อมูล (PDPA/GDPR) และโครงสร้าง Multilingual สำหรับคู่ค้าต่างชาติ",
+    localStrength:
+      "ชื่อเสียงด้านการเป็น Industrial Powerhouse และเมืองท่องเที่ยวชายฝั่งที่มีศักยภาพสูง",
+    nicheIndustries: [
+      "ปิโตรเคมีและพลังงาน",
+      "โรงงานผลิตชิ้นส่วนยานยนต์",
+      "ที่พักและรีสอร์ตในเขตบ้านเพ/เสม็ด",
+    ],
+    painPoints: ["เว็บไซต์องค์กรดูเก่าไม่ทันสมัย", "หาข้อมูลใบรับรองมาตรฐานโรงงานยาก"],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ มาบตาพุด",
+      "ออกแบบเว็บโรงงาน ระยอง",
+      "จ้างทำ SEO ปลวกแดง",
+      "ทำเว็บอุตสาหกรรม บ้านฉาง",
+    ],
+  },
+  districts: ["เมืองระยอง", "มาบตาพุด", "บ้านฉาง", "ปลวกแดง", "แกลง"],
+  keywords: ["รับทำเว็บไซต์ ระยอง", "ทำเว็บโรงงาน มาบตาพุด", "จ้างทำเว็บระยอง", "รับทำ SEO ระยอง"],
+};
+```
+
+### CONFIG: roi-et.ts
+
+`Path: constants/area-nodes/roi-et.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: ROI_ET_COMMERCIAL v18.0.1
+ * [STRATEGY]: Strategic Hub | Business Excellence | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const roiEtNode: AreaNode = {
+  slug: "roi-et",
+  province: "ร้อยเอ็ด",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ร้อยเอ็ด | พัฒนาเว็บไซต์ธุรกิจและการค้า ศูนย์กลางการขยายตัวแห่งอีสานกลาง",
+  description:
+    "ยกระดับ SME และหน่วยงานในร้อยเอ็ด ด้วยเว็บไซต์ที่เน้นความเป็นมืออาชีพและระบบจัดการข้อมูลที่ทันสมัยที่สุด",
+  seoTitle: "รับทำเว็บไซต์ ร้อยเอ็ด ออกแบบเว็บธุรกิจ คลินิก หน่วยงาน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ร้อยเอ็ด สำหรับธุรกิจ SME คลินิกความงาม และหน่วยงานท้องถิ่น ดีไซน์ทันสมัย โหลดไว รองรับ SEO พื้นที่ร้อยเอ็ด",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/roi-et-node.webp",
+  coordinates: { lat: 16.054, lng: 103.652 },
+  marketSaturation: 48,
+  regionalLatency: 23,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Strategic Brand Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์ธุรกิจให้ดูเป็นมืออาชีพรายใหญ่เพื่อรองรับการขยายตัวทางเศรษฐกิจ",
+    },
+    {
+      step: "02",
+      title: "Smart Conversion Sync",
+      description:
+        "ติดตั้งระบบจองคิวออนไลน์และระบบติดต่อสื่อสารที่รวดเร็วเพื่อเพิ่มโอกาสในการปิดการขาย",
+    },
+    {
+      step: "03",
+      title: "Isan Central SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ดธุรกิจในร้อยเอ็ดและจังหวัดใกล้เคียงเพื่อครองความเป็นผู้นำ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ร้อยเอ็ดมีการแข่งขันของธุรกิจบริการและคลินิกสูงขึ้น เว็บไซต์ที่ดูพรีเมียมและน่าเชื่อถือจะสร้างความได้เปรียบ",
+    technicalApproach:
+      "เน้นความรวดเร็วในการแสดงผล (Core Web Vitals) และการทำ Local Entity Mapping ในตัวเมือง",
+    localStrength: "เป็นศูนย์กลางการกระจายสินค้าและมีแลนด์มาร์คใหม่อย่างหอโหวตที่ดึงคนเข้าพื้นที่",
+    nicheIndustries: [
+      "คลินิกเฉพาะทางและ SME พรีเมียม",
+      "ธุรกิจวัสดุก่อสร้างและรับเหมา",
+      "ร้านอาหารและไลฟ์สไตล์พรีเมียม",
+    ],
+    painPoints: [
+      "ธุรกิจมีความมั่นคงสูงแต่ตัวตนออนไลน์ยังไม่ชัดเจน",
+      "ต้องการระบบที่ลดภาระการตอบแชทของเซลล์",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ร้อยเอ็ด",
+      "ออกแบบเว็บคลินิก ร้อยเอ็ด",
+      "จ้างทำ SEO ร้อยเอ็ด",
+      "ทำเว็บสินค้า SME ร้อยเอ็ด",
+    ],
+  },
+  districts: ["เมืองร้อยเอ็ด", "เสลภูมิ", "โพนทอง", "เกษตรวิสัย", "ธวัชบุรี"],
+  keywords: [
+    "รับทำเว็บไซต์ ร้อยเอ็ด",
+    "ทำเว็บคลินิก ร้อยเอ็ด",
+    "จ้างทำเว็บร้อยเอ็ด",
+    "รับทำ SEO ร้อยเอ็ด",
+  ],
+};
+```
+
+### CONFIG: sa-kaeo.ts
+
+`Path: constants/area-nodes/sa-kaeo.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SA_KAEO_BORDER_GATEWAY v18.0.1
+ * [STRATEGY]: Border Logistics | SEZ Hub | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const saKaeoNode: AreaNode = {
+  slug: "sa-kaeo",
+  province: "สระแก้ว",
+  region: "East",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สระแก้ว | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและโลจิสติกส์อาเซียน",
+  description:
+    "ยกระดับธุรกิจในสระแก้วสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าชายแดนที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ สระแก้ว ออกแบบเว็บชิปปิ้ง การค้าชายแดน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สระแก้ว สำหรับธุรกิจนำเข้า-ส่งออก คลังสินค้าในเขตเศรษฐกิจพิเศษ และ SME อรัญประเทศ ดีไซน์สวยโหลดไว รองรับ SEO",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/sa-kaeo-node.webp",
+  coordinates: { lat: 13.824, lng: 102.064 },
+  marketSaturation: 42,
+  regionalLatency: 18,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "SEZ Brand Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์บริษัทให้ดูโปรระดับตัวแทนการค้าระหว่างประเทศเพื่อรองรับงานส่งออก",
+    },
+    {
+      step: "02",
+      title: "Border Trade Sync",
+      description: "ติดตั้งระบบรองรับข้อมูลชิปปิ้งและการติดต่อสื่อสารกับคู่ค้าไทย-กัมพูชา-เวียดนาม",
+    },
+    {
+      step: "03",
+      title: "Logistic Node SEO",
+      description:
+        "ทำ SEO เจาะกลุ่มคีย์เวิร์ดการค้าชายแดนและเขตเศรษฐกิจพิเศษเพื่อให้คู่ค้าหาคุณเจอ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สระแก้วเป็นด่านการค้าสำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'หน้าตาทางการค้า' ที่สะท้อนความซื่อสัตย์และความมั่นคง",
+    technicalApproach: "เน้นระบบ Multilingual และโครงสร้างที่เบาเพื่อให้โหลดได้ไวในพื้นที่ชายแดน",
+    localStrength: "ทำเลที่ตั้งที่เป็นจุดยุทธศาสตร์การค้าข้ามพรมแดนที่ใหญ่ที่สุดในภาคตะวันออก",
+    nicheIndustries: [
+      "ธุรกิจชิปปิ้งและโลจิสติกส์ข้ามแดน",
+      "คลังสินค้าให้เช่า",
+      "วิสาหกิจชุมชนและสินค้า OTOP พื้นที่",
+    ],
+    painPoints: [
+      "บริษัทมีความมั่นคงสูงแต่ภาพลักษณ์บนเว็บดูไม่ทันสมัย",
+      "ต้องการสื่อสารกับคู่ค้าต่างชาติที่เป็นทางการ",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อรัญประเทศ",
+      "ออกแบบเว็บชิปปิ้ง สระแก้ว",
+      "จ้างทำ SEO ด่านคลองลึก",
+      "ทำเว็บธุรกิจ SEZ สระแก้ว",
+    ],
+  },
+  districts: ["เมืองสระแก้ว", "อรัญประเทศ", "คลองหาด", "ตาพระยา", "วัฒนานคร"],
+  keywords: [
+    "รับทำเว็บไซต์ สระแก้ว",
+    "ทำเว็บชิปปิ้ง สระแก้ว",
+    "จ้างทำเว็บอรัญประเทศ",
+    "รับทำ SEO สระแก้ว",
+  ],
+};
+```
+
+### CONFIG: sakon-nakhon.ts
+
+`Path: constants/area-nodes/sakon-nakhon.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SAKON_NAKHON_CRAFT v18.0.1
+ * [STRATEGY]: Indigo Craft | Religious Wisdom | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const sakonNakhonNode: AreaNode = {
+  slug: "sakon-nakhon",
+  province: "สกลนคร",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สกลนคร | ยกระดับงานคราฟต์ครามและธุรกิจวิถีธรรมสู่ตลาดพรีเมียม",
+  description:
+    "เปลี่ยนภูมิปัญญาผ้าย้อมครามและเสน่ห์เมืองสามธรรม ให้เป็นแบรนด์ดิจิทัลที่น่าดึงดูดและขายได้ทั่วโลก",
+  seoTitle: "รับทำเว็บไซต์ สกลนคร ออกแบบเว็บผ้าย้อมคราม ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สกลนคร สำหรับวิสาหกิจชุมชนคราม SME และที่พักแนวศาสนศิลป์ ดีไซน์ประณีต โหลดไว รองรับ SEO พื้นที่",
+  priority: 84,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/sakon-nakhon-node.webp",
+  coordinates: { lat: 17.1617, lng: 104.1486 },
+  marketSaturation: 38,
+  regionalLatency: 26,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Indigo Brand Audit",
+      description:
+        "ดึงเรื่องราว (Storytelling) ของงานหัตถศิลป์ครามมาเป็นธีมหลักในการนำเสนอแบรนด์ที่ดูแพง",
+    },
+    {
+      step: "02",
+      title: "Artisan Catalog Sync",
+      description:
+        "ติดตั้งระบบแสดงผลสินค้าพรีเมียมที่โชว์รายละเอียดเนื้อผ้าและความประณีตได้อย่างชัดเจน",
+    },
+    {
+      step: "03",
+      title: "Cultural Authority SEO",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหา 'ผ้าย้อมครามสกลนคร', 'ที่พักสกลนคร' เพื่อเพิ่มการรับรู้แบรนด์",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สกลนครมีสินค้าเอกลักษณ์ที่คนทั่วโลกต้องการ เว็บไซต์ที่ดูเป็นงานศิลปะจะช่วยเพิ่มมูลค่าสินค้าได้มหาศาล",
+    technicalApproach: "เน้น Image Optimization สำหรับงานคราฟต์พรีเมียมและระบบสั่งจองที่ใช้งานง่าย",
+    localStrength:
+      "มีความโดดเด่นด้าน 'เมืองคราม' และพระป่าวิปัสสนาที่เป็นศูนย์รวมจิตใจและดึงดูดคนคุณภาพ",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนผ้าย้อมครามพรีเมียม",
+      "ธุรกิจผลิตเนื้อโคขุนโพนยางคำ",
+      "ที่พักและศูนย์สุขภาพวิถีธรรม",
+    ],
+    painPoints: [
+      "งานดีระดับโลกแต่หน้าเว็บดูธรรมดา",
+      "นักท่องเที่ยวหาข้อมูลสินค้าพรีเมียมในพื้นที่ยาก",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ผ้าย้อมคราม",
+      "ออกแบบเว็บธุรกิจ สกลนคร",
+      "จ้างทำ SEO สว่างแดนดิน",
+      "ทำเว็บสินค้าพรีเมียม สกลนคร",
+    ],
+  },
+  districts: ["เมืองสกลนคร", "พรรณานิคม", "สว่างแดนดิน", "พังโคน", "อากาศอำนวย"],
+  keywords: ["รับทำเว็บไซต์ สกลนคร", "ทำเว็บผ้าย้อมคราม", "จ้างทำเว็บสกลนคร", "รับทำ SEO สกลนคร"],
+};
+```
+
+### CONFIG: samut-prakan.ts
+
+`Path: constants/area-nodes/samut-prakan.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SAMUT_PRAKAN_LOGISTICS_HUB v18.0.1
+ * [STRATEGY]: Logistics & Export | Industrial Authority | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const samutPrakanNode: AreaNode = {
+  slug: "samut-prakan",
+  province: "สมุทรปราการ",
+  region: "Central",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ สมุทรปราการ | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจนำเข้า-ส่งออก",
+  description:
+    "บริการรับทำเว็บไซต์ในสมุทรปราการ ยกระดับธุรกิจชิปปิ้ง โลจิสติกส์ และโรงงานสู่มาตรฐานโลก ติดหน้าแรก Google ทั้งไทยและต่างแดน",
+  seoTitle: "รับทำเว็บไซต์ สมุทรปราการ ออกแบบเว็บโรงงาน โลจิสติกส์ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สมุทรปราการ สำหรับธุรกิจขนส่งข้ามชาติและอุตสาหกรรมการผลิต มาตรฐานสากล รองรับ SEO และระบบ RFQ ออนไลน์",
+  priority: 99,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/samut-prakan-node.webp",
+  coordinates: { lat: 13.5991, lng: 100.5967 },
+  marketSaturation: 85,
+  regionalLatency: 4,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Export-Grade Audit",
+      description: "วิเคราะห์ภาพลักษณ์บริษัทให้ดูโปรระดับพาร์ทเนอร์ข้ามชาติเพื่อรองรับงานส่งออก",
+    },
+    {
+      step: "02",
+      title: "Logistic Gateway Sync",
+      description: "ติดตั้งระบบรองรับข้อมูลชิปปิ้งและการติดต่อสื่อสารกับคู่ค้าจากสนามบินและท่าเรือ",
+    },
+    {
+      step: "03",
+      title: "Global Supply SEO",
+      description: "ทำ SEO คีย์เวิร์ดอุตสาหกรรมในสมุทรปราการเพื่อให้ฝ่ายจัดซื้อทั่วโลกหาคุณเจอ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สมุทรปราการคือหัวใจของโลจิสติกส์ไทย เว็บไซต์ต้องทำหน้าที่เป็น 'ด่านหน้าทางการค้า' ที่ปิดดีลได้ทันที",
+    technicalApproach:
+      "เน้นระบบ Multilingual และความปลอดภัยของเซิร์ฟเวอร์เพื่อรองรับคู่ค้าจากยุโรปและอเมริกา",
+    localStrength:
+      "มีความเชี่ยวชาญในการออกแบบ Flow เว็บไซต์ที่สอดคล้องกับธุรกิจส่งออกและนิคมอุตสาหกรรม",
+    nicheIndustries: [
+      "ธุรกิจขนส่งและชิปปิ้งนำเข้า-ส่งออก",
+      "โรงงานผลิตอะไหล่ยนต์",
+      "ศูนย์จำหน่ายสินค้าอุตสาหกรรม",
+    ],
+    painPoints: ["ชื่อเสียงเยอะแต่เว็บหาไม่เจอใน Google", "เว็บไม่รองรับภาษาอังกฤษที่ดูเป็นทางการ"],
+    competitorLevel: "extreme",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บางพลี",
+      "ออกแบบเว็บโรงงาน สมุทรปราการ",
+      "จ้างทำ SEO พระประแดง",
+      "ทำเว็บโลจิสติกส์ บางบ่อ",
+    ],
+  },
+  districts: ["เมืองสมุทรปราการ", "บางพลี", "บางบ่อ", "พระประแดง", "บางเสาธง"],
+  keywords: [
+    "รับทำเว็บไซต์ สมุทรปราการ",
+    "ทำเว็บโรงงาน บางพลี",
+    "จ้างทำเว็บโลจิสติกส์",
+    "รับทำ SEO สมุทรปราการ",
+  ],
+};
+```
+
+### CONFIG: samut-sakhon.ts
+
+`Path: constants/area-nodes/samut-sakhon.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SAMUT_SAKHON_INDUSTRIAL v18.0.1
+ * [STRATEGY]: Industrial Powerhouse | Fishery & Logistics | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const samutSakhonNode: AreaNode = {
+  slug: "samut-sakhon",
+  province: "สมุทรสาคร",
+  region: "Central",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ สมุทรสาคร | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจประมงอุตสาหกรรม",
+  description:
+    "บริการรับทำเว็บไซต์ในสมุทรสาคร (มหาชัย) ยกระดับโรงงานผลิตและธุรกิจห้องเย็นสู่มาตรฐานสากล ติดหน้าแรก Google",
+  seoTitle: "รับทำเว็บไซต์ สมุทรสาคร ออกแบบเว็บโรงงาน ห้องเย็น มหาชัย - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สมุทรสาคร สำหรับโรงงานอุตสาหกรรมประมงและโลจิสติกส์ มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
+  priority: 96,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/samut-sakhon-node.webp",
+  coordinates: { lat: 13.5475, lng: 100.2744 },
+  marketSaturation: 72,
+  regionalLatency: 6,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Industry Credential Audit",
+      description: "วิเคราะห์ภาพลักษณ์บริษัทให้ดูน่าเชื่อถือในระดับอุตสาหกรรมส่งออก (Export Ready)",
+    },
+    {
+      step: "02",
+      title: "B2B Gateway Deployment",
+      description: "ติดตั้งระบบขอใบเสนอราคา (RFQ) และระบบจัดการแคตตาล็อกสินค้าขนาดใหญ่",
+    },
+    {
+      step: "03",
+      title: "Fishery Hub SEO Sync",
+      description:
+        "ทำ SEO คีย์เวิร์ดเฉพาะทางอุตสาหกรรมประมงและห้องเย็นเพื่อครองพื้นที่การค้นหาในมหาชัย",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สมุทรสาครเป็นศูนย์กลางอุตสาหกรรมประมงและโรงงานที่หนาแน่น เว็บไซต์ต้องเน้นความมั่นคงและความพร้อมในการให้บริการคู่ค้าขนาดใหญ่",
+    technicalApproach:
+      "เน้นระบบความปลอดภัยระดับสูงและโครงสร้างที่รองรับผู้ใช้งานจำนวนมากจากทั่วโลก",
+    localStrength: "เป็นแหล่งอุตสาหกรรมอาหารทะเลและนิคมอุตสาหกรรมที่สำคัญของประเทศ",
+    nicheIndustries: [
+      "โรงงานแปรรูปอาหารทะเลและห้องเย็น",
+      "ธุรกิจโลจิสติกส์และขนส่งทางบก/น้ำ",
+      "นิคมอุตสาหกรรมในพื้นที่",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมล้าสมัยไม่รองรับมือถือ",
+      "ต้องการขยายฐานลูกค้าต่างชาติแต่เว็บไม่มีภาษาอังกฤษ",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ มหาชัย",
+      "ออกแบบเว็บโรงงาน กระทุ่มแบน",
+      "จ้างทำ SEO สมุทรสาคร",
+      "ทำเว็บห้องเย็น บ้านแพ้ว",
+    ],
+  },
+  districts: ["เมืองสมุทรสาคร", "กระทุ่มแบน", "บ้านแพ้ว"],
+  keywords: [
+    "รับทำเว็บไซต์ สมุทรสาคร",
+    "ทำเว็บโรงงาน มหาชัย",
+    "จ้างทำเว็บห้องเย็น",
+    "รับทำ SEO สมุทรสาคร",
+  ],
+};
+```
+
+### CONFIG: samut-songkhram.ts
+
+`Path: constants/area-nodes/samut-songkhram.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SAMUT_SONGKHRAM_STORY v18.0.1
+ * [STRATEGY]: Eco-Tourism | Agricultural Branding | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const samutSongkhramNode: AreaNode = {
+  slug: "samut-songkhram",
+  province: "สมุทรสงคราม",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สมุทรสงคราม | ออกแบบเว็บที่พักอัมพวาและสินค้าเกษตรพรีเมียม",
+  description:
+    "ยกระดับเสน่ห์เมืองแม่กลองสู่ตลาดบน ด้วยเว็บไซต์ที่เน้นดีไซน์สวยแพงและการเล่าเรื่องวิถีชุมชนที่น่าสนใจ",
+  seoTitle: "รับทำเว็บไซต์ สมุทรสงคราม ออกแบบเว็บที่พักอัมพวา สวนส้มโอ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สมุทรสงคราม สำหรับโฮมสเตย์อัมพวา สวนผลไม้ และสินค้า SME แม่กลอง ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 86,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/samut-songkhram-node.webp",
+  coordinates: { lat: 13.4111, lng: 100.0022 },
+  isTourismHeavy: true,
+  marketSaturation: 58,
+  regionalLatency: 8,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Mae Klong Story Audit",
+      description:
+        "ดึงจุดเด่นของแบรนด์สวนหรือที่พักริมน้ำมาเรียบเรียงเป็นเนื้อหาพรีเมียมที่น่าติดตาม",
+    },
+    {
+      step: "02",
+      title: "Booking & Order Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและระบบสั่งซื้อผลไม้ฤดูกาลที่เชื่อมต่อกับระบบการชำระเงินที่รวดเร็ว",
+    },
+    {
+      step: "03",
+      title: "Amphawa Entity SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักอัมพวา' และ 'สินค้าแม่กลอง' เพื่อชิงอันดับหนึ่งในใจนักท่องเที่ยว",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สมุทรสงครามมีนักท่องเที่ยวกลุ่มครอบครัวและคนรุ่นใหม่หนาแน่น เว็บไซต์ที่ภาพสวยและเล่าเรื่องเก่งจะได้รับความสนใจสูง",
+    technicalApproach:
+      "เน้น Image Optimization และการปักหมุด Google Maps ในจุดท่องเที่ยวริมน้ำและสวนผลไม้",
+    localStrength: "มีความโดดเด่นด้านตลาดน้ำและสินค้าเกษตรที่มีชื่อเสียงระดับประเทศ",
+    nicheIndustries: [
+      "ที่พักและรีสอร์ตริมแม่น้ำแม่กลอง/อัมพวา",
+      "สวนส้มโอและสินค้าเกษตรแปรรูป",
+      "ร้านอาหารและคาเฟ่สายธรรมชาติ",
+    ],
+    painPoints: ["ลูกค้าหาพิกัดสวนหรือที่พักไม่เจอ", "ภาพลักษณ์เว็บดูธรรมดาไม่สมกับคุณภาพสินค้า"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อัมพวา",
+      "ออกแบบเว็บโฮมสเตย์ สมุทรสงคราม",
+      "จ้างทำ SEO แม่กลอง",
+      "ทำเว็บสวนส้มโอ สมุทรสงคราม",
+    ],
+  },
+  districts: ["เมืองสมุทรสงคราม", "อัมพวา", "บางคนที"],
+  keywords: [
+    "รับทำเว็บไซต์ สมุทรสงคราม",
+    "ทำเว็บที่พัก อัมพวา",
+    "จ้างทำเว็บแม่กลอง",
+    "รับทำ SEO สมุทรสงคราม",
+  ],
+};
+```
+
+### CONFIG: saraburi.ts
+
+`Path: constants/area-nodes/saraburi.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SARABURI_INDUSTRIAL_GATEWAY v18.0.1
+ * [STRATEGY]: Heavy Industry | Logistics | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const saraburiNode: AreaNode = {
+  slug: "saraburi",
+  province: "สระบุรี",
+  region: "Central",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ สระบุรี | ยกระดับภาพลักษณ์โรงงานอุตสาหกรรมและธุรกิจขนส่ง",
+  description:
+    "บริการรับทำเว็บไซต์โรงงานในสระบุรี เน้นความมั่นใจให้คู่ค้า B2B และการทำ SEO สำหรับอุตสาหกรรมหนักและโลจิสติกส์",
+  seoTitle: "รับทำเว็บไซต์ สระบุรี ออกแบบเว็บโรงงาน โลจิสติกส์ ติดหน้าแรก Google - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สระบุรี สำหรับนิคมอุตสาหกรรม โรงงานผลิตวัสดุก่อสร้าง และธุรกิจขนส่ง มาตรฐานสากล รองรับ SEO อุตสาหกรรม",
+  priority: 89,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/saraburi-node.webp",
+  coordinates: { lat: 14.5289, lng: 100.9101 },
+  marketSaturation: 55,
+  regionalLatency: 11,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "B2B Trust Audit",
+      description:
+        "วิเคราะห์และรวบรวมใบรับรองมาตรฐานอุตสาหกรรม (ISO) เพื่อสร้างความเชื่อมั่นบนหน้าเว็บ",
+    },
+    {
+      step: "02",
+      title: "Logistics Sync Deployment",
+      description:
+        "ติดตั้งระบบแสดงข้อมูลการบริการและเส้นทางขนส่งที่เป็นมาตรฐานสากลเพื่อรองรับคู่ค้า",
+    },
+    {
+      step: "03",
+      title: "Industrial SEO Layering",
+      description: "วางรากฐานคีย์เวิร์ดเฉพาะทางอุตสาหกรรมหนักเพื่อครองอันดับหนึ่งในพื้นที่สระบุรี",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สระบุรีคือประตูสู่อีสานและศูนย์กลางอุตสาหกรรมหนัก เว็บไซต์จึงต้องสะท้อนความมั่นคงและความเป็นมืออาชีพรายใหญ่",
+    technicalApproach:
+      "เน้นระบบโครงสร้างที่ปลอดภัย (Security First) และการทำ SEO ในตลาดที่มีคู่แข่งเฉพาะทาง",
+    localStrength: "เข้าใจความต้องการของฝ่ายจัดซื้อโรงงานและระบบการทำงานของนิคมอุตสาหกรรม",
+    nicheIndustries: [
+      "โรงงานผลิตปูนซีเมนต์และวัสดุก่อสร้าง",
+      "ธุรกิจขนส่งสินค้าข้ามภูมิภาค",
+      "นิคมอุตสาหกรรมแก่งคอย/หนองแค",
+    ],
+    painPoints: ["ภาพลักษณ์เว็บไม่สอดคล้องกับขนาดบริษัท", "หาเบอร์ติดต่อหรือแผนที่บริษัทไม่เจอ"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ แก่งคอย",
+      "ออกแบบเว็บโรงงาน สระบุรี",
+      "จ้างทำ SEO หนองแค",
+      "ทำเว็บโลจิสติกส์ สระบุรี",
+    ],
+  },
+  districts: ["เมืองสระบุรี", "แก่งคอย", "หนองแค", "พระพุทธบาท", "วิหารแดง"],
+  keywords: [
+    "รับทำเว็บไซต์ สระบุรี",
+    "ทำเว็บโรงงาน สระบุรี",
+    "จ้างทำเว็บสระบุรี",
+    "รับทำ SEO สระบุรี",
+  ],
+};
+```
+
+### CONFIG: satun.ts
+
+`Path: constants/area-nodes/satun.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SATUN_GEOPARK_GATEWAY v18.0.1
+ * [STRATEGY]: Marine Tourism | Global Geopark | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const satunNode: AreaNode = {
+  slug: "satun",
+  province: "สตูล",
+  region: "South",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ สตูล | ออกแบบเว็บรีสอร์ตหลีเป๊ะและธุรกิจท่องเที่ยวระดับโลก",
+  description:
+    "ยกระดับภาพลักษณ์ธุรกิจในเขตอุทยานธรณีโลกสตูล สู่มาตรฐานสากลด้วยเว็บไซต์ที่โหลดไวและระบบจองที่ลื่นไหล",
+  seoTitle: "รับทำเว็บไซต์ สตูล หลีเป๊ะ ออกแบบเว็บรีสอร์ต ทัวร์ทะเล - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สตูล สำหรับรีสอร์ตหรูหลีเป๊ะ และทัวร์ทะเลอันดามัน เว็บสวยโหลดไว รองรับหลายภาษาและระบบจองตรงระดับสากล",
+  priority: 92,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/satun-node.webp",
+  coordinates: { lat: 6.6233, lng: 100.0667 },
+  isTourismHeavy: true,
+  marketSaturation: 65,
+  regionalLatency: 26,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Global Geopark Audit",
+      description:
+        "วิเคราะห์งานดีไซน์ให้สอดรับกับตำแหน่งการเป็น Geopark ระดับโลกเพื่อดึงดูดนักท่องเที่ยวต่างชาติ",
+    },
+    {
+      step: "02",
+      title: "Direct Conversion Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและกิจกรรมดำน้ำที่เชื่อมต่อกับระบบชำระเงินสากลเพื่อลดขั้นตอน",
+    },
+    {
+      step: "03",
+      title: "Lipe Dominance SEO",
+      description: "วางโครงสร้าง SEO ภาษาอังกฤษและจีน ครอบคลุมคีย์เวิร์ด 'Koh Lipe Luxury Resort'",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สตูล โดยเฉพาะหลีเป๊ะ มีการแข่งขันสูงในตลาดสากล เว็บไซต์ที่โหลดรูปไวและดูแพงจะสร้างความได้เปรียบสูงสุด",
+    technicalApproach:
+      "เน้น Image Optimization ขั้นสูงและระบบ CDN ทั่วโลกเพื่อให้เข้าถึงได้เร็วจากยุโรปและอเมริกา",
+    localStrength: "ทรัพยากรธรรมชาติระดับโลก (Geopark/Lipe) คือจุดขายหลักที่ต้องนำเสนอบนหน้าเว็บ",
+    nicheIndustries: [
+      "รีสอร์ตหรูและพูลวิลล่าบนเกาะหลีเป๊ะ",
+      "ธุรกิจเรือนำเที่ยวและดำน้ำ",
+      "ศูนย์อนุรักษ์และการท่องเที่ยวเชิงธรณี",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมโหลดช้ามากสำหรับลูกค้าต่างประเทศ",
+      "ขาดระบบจองออนไลน์ที่เสถียรในช่วงฤดูท่องเที่ยว",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หลีเป๊ะ",
+      "ออกแบบเว็บรีสอร์ต สตูล",
+      "จ้างทำ SEO สตูล",
+      "ทำเว็บทัวร์ดำน้ำ สตูล",
+    ],
+  },
+  districts: ["เมืองสตูล", "ละงู", "ควนโดน", "ทุ่งหว้า", "มะนัง"],
+  keywords: ["รับทำเว็บไซต์ สตูล", "ทำเว็บหลีเป๊ะ", "จ้างทำเว็บที่พัก", "รับทำ SEO สตูล"],
+};
+```
+
+### CONFIG: si-sa-ket.ts
+
+`Path: constants/area-nodes/si-sa-ket.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SISAKET_PREMIUM_AGRI v18.0.1
+ * [STRATEGY]: Volcanic Agri | Cultural Heritage | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const siSaKetNode: AreaNode = {
+  slug: "si-sa-ket",
+  province: "ศรีสะเกษ",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ศรีสะเกษ | เปลี่ยนผลผลิตดินภูเขาไฟเป็นแบรนด์พรีเมียมระดับโลก",
+  description:
+    "ยกระดับทุเรียนภูเขาไฟและสินค้า SME ศรีสะเกษสู่ตลาดออนไลน์ ด้วยเว็บไซต์ D2C ที่ปิดการขายได้จริงและน่าเชื่อถือ",
+  seoTitle: "รับทำเว็บไซต์ ศรีสะเกษ ออกแบบเว็บทุเรียนภูเขาไฟ สินค้า OTOP - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ศรีสะเกษ สำหรับสวนทุเรียนภูเขาไฟ SME พรีเมียม และธุรกิจในพื้นที่ ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่ศรีสะเกษ",
+  priority: 84,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/si-sa-ket-node.webp",
+  coordinates: { lat: 15.118, lng: 104.322 },
+  isTourismHeavy: true,
+  marketSaturation: 35,
+  regionalLatency: 26,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Volcanic Brand Audit",
+      description:
+        "วิเคราะห์คุณค่าสินค้าดินภูเขาไฟเพื่อสร้างเรื่องราวแบรนด์ (Storytelling) ที่มีราคาแพง",
+    },
+    {
+      step: "02",
+      title: "D2C Pre-order Sync",
+      description:
+        "ติดตั้งระบบสั่งจองสินค้าฤดูกาลที่แม่นยำและระบบแจ้งเตือนทาง LINE เพื่อความสะดวกของเจ้าของสวน",
+    },
+    {
+      step: "03",
+      title: "Geo-Heritage SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ทุเรียนภูเขาไฟแท้', 'ที่พักศรีสะเกษ' เพื่อชิงพื้นที่หน้าแรก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ศรีสะเกษมีสินค้าที่เป็น Rare Item ระดับประเทศ เว็บไซต์ที่เล่าเรื่องเก่งจะช่วยเพิ่มราคาขายได้มหาศาล",
+    technicalApproach:
+      "เน้น Mobile-First Ordering และการจัดการภาพถ่ายผลิตภัณฑ์ให้ดูน่ารับประทานและพรีเมียม",
+    localStrength:
+      "ชื่อเสียงของ 'ทุเรียนภูเขาไฟ' และอารยธรรมขอมโบราณที่เป็นจุดขายที่หาจากที่อื่นไม่ได้",
+    nicheIndustries: [
+      "สวนทุเรียนและผลไม้ดินภูเขาไฟ",
+      "วิสาหกิจชุมชนผ้าทอเบญจศรี",
+      "ธุรกิจท่องเที่ยวเชิงวัฒนธรรม",
+    ],
+    painPoints: ["สินค้าดีแต่ไม่มีแบรนด์ของตัวเองบนออนไลน์", "ระบบสั่งจองช่วงฤดูทุเรียนตกหล่นบ่อย"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ทุเรียนภูเขาไฟ",
+      "ออกแบบเว็บธุรกิจ ศรีสะเกษ",
+      "จ้างทำ SEO กันทรลักษ์",
+      "ทำเว็บสินค้า OTOP ศรีสะเกษ",
+    ],
+  },
+  districts: ["เมืองศรีสะเกษ", "กันทรลักษ์", "อุทุมพรพิสัย", "ราษีไศล", "ขุนหาญ"],
+  keywords: [
+    "รับทำเว็บไซต์ ศรีสะเกษ",
+    "ทำเว็บทุเรียนภูเขาไฟ",
+    "จ้างทำเว็บศรีสะเกษ",
+    "รับทำ SEO ศรีสะเกษ",
+  ],
+};
+```
+
+### CONFIG: sing-buri.ts
+
+`Path: constants/area-nodes/sing-buri.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SING_BURI_IDENTITY v18.0.1
+ * [STRATEGY]: Historical Brand | Local SME | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const singBuriNode: AreaNode = {
+  slug: "sing-buri",
+  province: "สิงห์บุรี",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สิงห์บุรี | พัฒนาเว็บไซต์ธุรกิจท้องถิ่นและแบรนด์สินค้าพรีเมียม",
+  description:
+    "ยกระดับชื่อเสียงสิงห์บุรีสู่โลกออนไลน์ ด้วยเว็บไซต์ที่เน้นความเป็นเอกลักษณ์และระบบจัดการข้อมูลที่มีประสิทธิภาพ",
+  seoTitle: "รับทำเว็บไซต์ สิงห์บุรี ออกแบบเว็บสินค้า OTOP ร้านอาหาร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สิงห์บุรี สำหรับ SME ท้องถิ่น ร้านอาหารชื่อดัง และวิสาหกิจชุมชน ดีไซน์สวยงามโหลดไว รองรับ SEO พื้นที่",
+  priority: 81,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/sing-buri-node.webp",
+  coordinates: { lat: 14.891, lng: 100.3967 },
+  marketSaturation: 35,
+  regionalLatency: 14,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Heroic Brand Audit",
+      description:
+        "ดึงอัตลักษณ์ความเข้มแข็งของสิงห์บุรีมาสร้างเป็นเรื่องราวแบรนด์ดิจิทัลที่น่าประทับใจ",
+    },
+    {
+      step: "02",
+      title: "Trust-Signal Integration",
+      description: "ติดตั้งระบบรีวิวและผลงานที่ผ่านมาเพื่อยืนยันมาตรฐานสินค้าท้องถิ่นระดับพรีเมียม",
+    },
+    {
+      step: "03",
+      title: "Central Thai SEO Hub",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหา 'ของดีสิงห์บุรี' และ 'ที่พักสิงห์บุรี' เพื่อเพิ่มการรับรู้",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สิงห์บุรีเป็นเมืองที่มีประวัติศาสตร์ยาวนานและของดีเฉพาะตัว เว็บไซต์ที่ดูภูมิฐานและทันสมัยจะช่วยสร้างความเชื่อมั่นได้สูง",
+    technicalApproach: "เน้นการจัดวาง Layout ที่เป็นระเบียบและระบบการติดต่อสอบถามที่ใช้งานได้จริง",
+    localStrength: "มีความโดดเด่นด้านอาหาร (ปลาช่อนแม่ลา) และแหล่งท่องเที่ยวเชิงประวัติศาสตร์",
+    nicheIndustries: ["ร้านอาหารและของฝากพรีเมียม", "ธุรกิจเกษตรแปรรูป", "หน่วยงานท้องถิ่น อปท."],
+    painPoints: ["ภาพลักษณ์เว็บไม่ทันสมัย", "ขาดการเล่าเรื่องที่น่าดึงดูด"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บางระจัน",
+      "ออกแบบเว็บร้านอาหาร สิงห์บุรี",
+      "จ้างทำ SEO สิงห์บุรี",
+      "ทำเว็บสินค้า OTOP สิงห์บุรี",
+    ],
+  },
+  districts: ["เมืองสิงห์บุรี", "บางระจัน", "ค่ายบางระจัน", "อินทร์บุรี", "พรหมบุรี", "ท่าช้าง"],
+  keywords: [
+    "รับทำเว็บไซต์ สิงห์บุรี",
+    "ทำเว็บร้านอาหาร สิงห์บุรี",
+    "จ้างทำเว็บสิงห์บุรี",
+    "รับทำ SEO สิงห์บุรี",
+  ],
+};
+```
+
+### CONFIG: songkhla.ts
+
+`Path: constants/area-nodes/songkhla.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SONGKHLA_HATYAI_HUB v18.0.1
+ * [STRATEGY]: Business Authority | Border Trade | Dynamic Inheritance
+ * [MARKET]: Hat Yai, Songkhla City, Logistics & Commerce
+ */
+
+import type { AreaNode } from "@/types";
+import { corporateService } from "@/constants/services/corporate";
+
+export const songkhlaNode: AreaNode = {
+  slug: "songkhla",
+  province: "สงขลา",
+  region: "South",
+  templateSlug: "corporate",
+  title: "รับทำเว็บไซต์ สงขลา หาดใหญ่ | ยกระดับธุรกิจและการค้าสู่ศูนย์กลางเศรษฐกิจภาคใต้",
+  description:
+    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise สำหรับธุรกิจในหาดใหญ่และสงขลา เน้นความน่าเชื่อถือระดับสากลและระบบรองรับการค้าชายแดน",
+  seoTitle: "รับทำเว็บไซต์ หาดใหญ่ สงขลา ออกแบบเว็บธุรกิจ โลจิสติกส์ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์หาดใหญ่ สำหรับธุรกิจนำเข้า-ส่งออก คลินิก และ SME เว็บสวยโหลดไว มาตรฐานสากล รองรับ SEO พื้นที่สงขลาและใกล้เคียง",
+  priority: 97,
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+  heroImage: "/images/areas/songkhla-node.webp",
+  coordinates: { lat: 7.1898, lng: 100.5954 },
+  marketSaturation: 80,
+  regionalLatency: 20,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Commercial Credential Audit",
+      description:
+        "วิเคราะห์ภาพลักษณ์แบรนด์ให้สอดคล้องกับตำแหน่งศูนย์กลางการค้าและโลจิสติกส์ของภาคใต้",
+    },
+    {
+      step: "02",
+      title: "B2B Conversion Gateway",
+      description:
+        "ติดตั้งระบบขอใบเสนอราคาและแคตตาล็อกสินค้าที่รองรับการสื่อสารกับคู่ค้าไทย-มาเลเซีย",
+    },
+    {
+      step: "03",
+      title: "Southern Trade SEO",
+      description:
+        "ทำ Local SEO เน้นพื้นที่หาดใหญ่และสงขลาเพื่อดักจับ Traffic จากกลุ่มคู่ค้าและลูกค้าที่มีกำลังซื้อสูง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "หาดใหญ่คือศูนย์กลางการค้าที่สำคัญที่สุดในภาคใต้ เว็บไซต์ต้องเน้นความเป็น 'มืออาชีพรายใหญ่' และความปลอดภัยข้อมูล",
+    technicalApproach:
+      "เน้นระบบ Multilingual และความเร็วในการเข้าถึงจากประเทศเพื่อนบ้าน (มาเลเซีย/สิงคโปร์)",
+    localStrength:
+      "ชื่อเสียงด้านการเป็น Commercial Hub และตลาดสินค้าที่หลากหลายดึงดูดคนทั่วภูมิภาค",
+    nicheIndustries: [
+      "ธุรกิจชิปปิ้งและโลจิสติกส์",
+      "คลินิกเฉพาะทางและโรงพยาบาลเอกชน",
+      "ธุรกิจวัสดุก่อสร้างรายใหญ่",
+    ],
+    painPoints: [
+      "บริษัทมีความมั่นคงสูงแต่เว็บดูล้าสมัย",
+      "ขาดการเล่าเรื่องที่เหมาะสมสำหรับกลุ่มลูกค้าต่างชาติ",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ หาดใหญ่",
+      "ออกแบบเว็บธุรกิจ สงขลา",
+      "จ้างทำ SEO สะเดา",
+      "ทำเว็บโลจิสติกส์ จะนะ",
+    ],
+  },
+  districts: ["เมืองสงขลา", "หาดใหญ่", "สะเดา", "ระโนด", "จะนะ"],
+  keywords: ["รับทำเว็บไซต์ หาดใหญ่", "ทำเว็บธุรกิจ สงขลา", "จ้างทำเว็บสงขลา", "รับทำ SEO หาดใหญ่"],
+};
+```
+
 ### CONFIG: sukhothai.ts
+
 `Path: constants/area-nodes/sukhothai.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v18.0.1 (STRICT_SYNC)
@@ -3273,6 +7699,7 @@ export const sukhothaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "sukhothai",
   province: "สุโขทัย",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและความยั่งยืน
 
   title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ให้งานฝีมือดูพรีเมียม ติดหน้าแรก Google",
@@ -3296,6 +7723,30 @@ export const sukhothaiNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 42,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Heritage Brand Audit",
+      description:
+        "วิเคราะห์คุณค่าทางประวัติศาสตร์และงานหัตถศิลป์เพื่อดึงจุดเด่นออกมาเป็นเนื้อหาพรีเมียม (Storytelling)",
+    },
+    {
+      step: "02",
+      title: "Aesthetic UI Deployment",
+      description:
+        "ออกแบบหน้าเว็บไซต์ที่สะท้อนถึงความภูมิฐานและรสนิยมเพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูง",
+    },
+    {
+      step: "03",
+      title: "High-Value Niche SEO",
+      description:
+        "เน้นคีย์เวิร์ดเฉพาะทางเพื่อดักจับกลุ่มนักท่องเที่ยวและผู้สะสมงานศิลปะจากทั่วโลก",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/sukhothai-node.webp",
@@ -3418,10 +7869,93 @@ export const sukhothaiNode: AreaNode = {
   ],
   coordinates: { lat: 17.0078, lng: 99.8235 },
 };
-
 ```
+
+### CONFIG: suphan-buri.ts
+
+`Path: constants/area-nodes/suphan-buri.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SUPHAN_BURI_AGRO v18.0.1
+ * [STRATEGY]: Agriculture 4.0 | Local Business | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const suphanBuriNode: AreaNode = {
+  slug: "suphan-buri",
+  province: "สุพรรณบุรี",
+  region: "Central",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สุพรรณบุรี | ยกระดับสินค้าเกษตรและ SME สู่ตลาดออนไลน์",
+  description:
+    "บริการรับทำเว็บไซต์ในสุพรรณบุรี เน้นการสร้างตัวตนให้สินค้าเกษตรและธุรกิจท้องถิ่น ติดหน้าแรก Google เพื่อกระจายรายได้สู่ชุมชน",
+  seoTitle: "รับทำเว็บไซต์ สุพรรณบุรี ออกแบบเว็บเกษตร SME - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สุพรรณบุรี ครบวงจร สำหรับธุรกิจเกษตรกรรมและร้านค้าท้องถิ่น โหลดไว รองรับ SEO พื้นที่สุพรรณบุรี",
+  priority: 88,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/suphan-buri-node.webp",
+  coordinates: { lat: 14.4745, lng: 100.1222 },
+  marketSaturation: 42,
+  regionalLatency: 12,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Agro-Brand Audit",
+      description:
+        "วิเคราะห์คุณค่าสินค้าเกษตรแปรรูปในพื้นที่เพื่อสร้างจุดขายที่โดดเด่นบนโลกออนไลน์",
+    },
+    {
+      step: "02",
+      title: "Local E-commerce Hub",
+      description: "ติดตั้งระบบขายสินค้าที่ใช้งานง่าย รองรับการจัดส่งและการแจ้งเตือนผ่าน LINE",
+    },
+    {
+      step: "03",
+      title: "Suphan SEO Dominance",
+      description: "ทำ Local SEO เจาะจงคีย์เวิร์ดในจังหวัดสุพรรณบุรีเพื่อให้คนในพื้นที่หาคุณเจอ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สุพรรณบุรีเป็นแหล่งเกษตรกรรมและแหล่งท่องเที่ยวใกล้กรุงเทพฯ ธุรกิจที่นี่ต้องการการเชื่อมโยงกับลูกค้าจากเมืองหลวง",
+    technicalApproach: "เน้นการใช้งานง่าย (User-Friendly) และระบบรองรับการขายสินค้าเกษตรออนไลน์",
+    localStrength: "มีความเข้มแข็งด้านวิสาหกิจชุมชนและสินค้า OTOP ที่พร้อมขยายตลาด",
+    nicheIndustries: [
+      "สินค้าเกษตรแปรรูป",
+      "ร้านอาหารและแหล่งท่องเที่ยววิถีชุมชน",
+      "ธุรกิจก่อสร้างท้องถิ่น",
+    ],
+    painPoints: ["ขาดช่องทางการขายออนไลน์ที่เป็นระบบ", "เว็บไซต์เดิมไม่อัปเดต"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เมืองสุพรรณบุรี",
+      "ออกแบบเว็บเกษตร สุพรรณบุรี",
+      "จ้างทำ SEO อู่ทอง",
+      "ทำเว็บสินค้า OTOP สุพรรณบุรี",
+    ],
+  },
+  districts: ["เมืองสุพรรณบุรี", "ศรีประจันต์", "ดอนเจดีย์", "เดิมบางนางบวช", "อู่ทอง"],
+  keywords: [
+    "รับทำเว็บไซต์ สุพรรณบุรี",
+    "ทำเว็บเกษตร สุพรรณ",
+    "จ้างทำเว็บสุพรรณ",
+    "รับทำ SEO สุพรรณบุรี",
+  ],
+};
+```
+
 ### CONFIG: surat-thani.ts
+
 `Path: constants/area-nodes/surat-thani.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: SURAT_THANI_INTEGRATED_HUB v18.0.1 (STRICT_SYNC)
@@ -3438,6 +7972,7 @@ export const suratThaniNode: AreaNode = {
   // --- Basic Identity ---
   slug: "surat-thani",
   province: "สุราษฎร์ธานี",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
 
   title: "รับทำเว็บไซต์สุราษฎร์ธานี - ยกระดับท้องถิ่นสู่ Smart Tourism & Agriculture",
@@ -3461,6 +7996,30 @@ export const suratThaniNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 68,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Tourism Data Mapping",
+      description:
+        "วิเคราะห์พฤติกรรมนักท่องเที่ยวทั้งในฝั่งและเกาะ (สมุย/พะงัน) เพื่อวางแผนการเข้าถึงข้อมูลที่แม่นยำ",
+    },
+    {
+      step: "02",
+      title: "E-Service Localization",
+      description:
+        "ติดตั้งระบบบริการออนไลน์ที่รองรับทั้งภาษาไทยและอังกฤษ เพื่ออำนวยความสะดวกให้คนในพื้นที่และนักท่องเที่ยว",
+    },
+    {
+      step: "03",
+      title: "Island Node Optimization",
+      description:
+        "ใช้ระบบ Edge Computing เพื่อให้เว็บไซต์โหลดได้รวดเร็วแม้ในพื้นที่เกาะที่มีสัญญาณอินเทอร์เน็ตจำกัด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/surat-ratchaprapha.webp",
@@ -3590,10 +8149,101 @@ export const suratThaniNode: AreaNode = {
   ],
   coordinates: { lat: 9.1389, lng: 99.33 },
 };
-
 ```
+
+### CONFIG: surin.ts
+
+`Path: constants/area-nodes/surin.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: SURIN_PREMIUM_IDENTITY v18.0.1
+ * [STRATEGY]: Silk Craft | Event Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const surinNode: AreaNode = {
+  slug: "surin",
+  province: "สุรินทร์",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ สุรินทร์ | ยกระดับแบรนด์ผ้าไหมยกทองและธุรกิจเมืองช้างสู่ระดับสากล",
+  description:
+    "เปลี่ยนงานหัตถศิลป์ชั้นสูงของสุรินทร์ให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความภูมิฐานและระบบจองสินค้าพรีเมียม",
+  seoTitle: "รับทำเว็บไซต์ สุรินทร์ ออกแบบเว็บผ้าไหมยกทอง ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์สุรินทร์ สำหรับโรงงานผ้าไหม SME พรีเมียม และที่พักในช่วงเทศกาลงานช้าง ดีไซน์หรูหรา โหลดไว รองรับ SEO",
+  priority: 85,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/surin-node.webp",
+  coordinates: { lat: 14.8818, lng: 103.4936 },
+  isTourismHeavy: true,
+  marketSaturation: 40,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Royal Silk Audit",
+      description:
+        "วิเคราะห์คุณค่าผ้าไหมยกทองเมืองสุรินทร์เพื่อสร้างแบรนด์ดิจิทัลที่สะท้อนความหรูหราและประณีต",
+    },
+    {
+      step: "02",
+      title: "Premium Order Sync",
+      description:
+        "ติดตั้งระบบสั่งจองสินค้าพรีเมียมและระบบแกลเลอรี่ที่โชว์รายละเอียดลายผ้าที่คมชัดที่สุด",
+    },
+    {
+      step: "03",
+      title: "Event-City SEO Sync",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ผ้าไหมสุรินทร์แท้', 'ที่พักงานช้าง' เพื่อดักจับ Traffic คุณภาพ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "สุรินทร์มีกลุ่มลูกค้ากำลังซื้อสูงที่มองหา 'งานฝีมือชั้นครู' เว็บไซต์ที่ดูแพงและมีสตอรี่จะได้รับความเชื่อถือสูง",
+    technicalApproach:
+      "เน้น Image Optimization ขั้นสูงสำหรับลายผ้าไหมและการจัดวาง Typography ที่สื่อถึงความภูมิฐาน",
+    localStrength:
+      "ชื่อเสียงด้าน 'ผ้าไหมยกทอง' และ 'เมืองช้าง' คือจุดขายระดับสากลที่ต้องนำเสนอบนหน้าเว็บ",
+    nicheIndustries: [
+      "โรงงานและแบรนด์ผ้าไหมพรีเมียม",
+      "เครื่องเงินโบราณและอัญมณีสุรินทร์",
+      "ที่พักและโฮมสเตย์ในช่วงเทศกาล",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไม่สมราคาลายผ้าหลักหมื่น",
+      "ขาดช่องทางดิจิทัลในการปิดดีลกับคู่ค้าต่างประเทศ",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เมืองช้าง",
+      "ออกแบบเว็บผ้าไหมพรีเมียม สุรินทร์",
+      "จ้างทำ SEO สุรินทร์",
+      "ทำเว็บสินค้าพรีเมียม สุรินทร์",
+    ],
+  },
+  districts: ["เมืองสุรินทร์", "ปราสาท", "สังขะ", "รัตนบุรี", "เขวาสินรินทร์"],
+  keywords: [
+    "รับทำเว็บไซต์ สุรินทร์",
+    "ทำเว็บผ้าไหม สุรินทร์",
+    "จ้างทำเว็บสุรินทร์",
+    "รับทำ SEO สุรินทร์",
+  ],
+};
+```
+
 ### CONFIG: tak.ts
+
 `Path: constants/area-nodes/tak.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v18.0.1 (STRICT_SYNC)
@@ -3610,6 +8260,7 @@ export const takNode: AreaNode = {
   // --- Basic Identity ---
   slug: "tak",
   province: "ตาก",
+  region: "North",
   templateSlug: "corporate", // เชื่อมโยงกับแม่แบบธุรกิจระดับ Enterprise
 
   title: "รับทำเว็บไซต์ ตาก แม่สอด | ออกแบบเว็บธุรกิจขนส่งและนำเข้า-ส่งออก ติดหน้าแรก Google",
@@ -3634,6 +8285,29 @@ export const takNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  marketSaturation: 46,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Logistics Credential Audit",
+      description:
+        "ตรวจสอบและรวบรวมข้อมูลใบอนุญาตขนส่งข้ามพรมแดนเพื่อสร้างความน่าเชื่อถือระดับสากลบนเว็บ",
+    },
+    {
+      step: "02",
+      title: "Multilingual B2B Sync",
+      description:
+        "ติดตั้งระบบรองรับหลายภาษาและแบบฟอร์มขอใบเสนอราคาที่รวดเร็วเพื่อปิดดีลกับคู่ค้าต่างชาติ",
+    },
+    {
+      step: "03",
+      title: "Special Economic Zone SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดด้านโลจิสติกส์และโรงงานเพื่อครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษแม่สอด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/tak-node.webp",
@@ -3747,10 +8421,421 @@ export const takNode: AreaNode = {
   ],
   coordinates: { lat: 16.8831, lng: 99.1258 },
 };
-
 ```
+
+### CONFIG: trang.ts
+
+`Path: constants/area-nodes/trang.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: TRANG_GOURMET_TOURISM v18.0.1
+ * [STRATEGY]: Gastronomy | Marine Tourism | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const trangNode: AreaNode = {
+  slug: "trang",
+  province: "ตรัง",
+  region: "South",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ ตรัง | ออกแบบเว็บรีสอร์ตชายฝั่งและธุรกิจอาหารสร้างสรรค์",
+  description:
+    "เปลี่ยนมนต์เสน่ห์เมืองตรังให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือและการเล่าเรื่องที่น่าดึงดูด",
+  seoTitle: "รับทำเว็บไซต์ ตรัง ออกแบบเว็บที่พัก รีสอร์ต ร้านอาหาร - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ตรัง สำหรับธุรกิจท่องเที่ยวชายฝั่ง ร้านอาหารชื่อดัง และ SME พรีเมียม ดีไซน์สวยโหลดไว ติดหน้าแรก Google",
+  priority: 91,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/trang-node.webp",
+  coordinates: { lat: 7.5583, lng: 99.6111 },
+  isTourismHeavy: true,
+  marketSaturation: 58,
+  regionalLatency: 23,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Gourmet & Nature Audit",
+      description: "ดึงจุดเด่นด้านอาหารและธรรมชาติทางทะเลมาเป็นธีมหลักในการนำเสนอแบรนด์ตรัง",
+    },
+    {
+      step: "02",
+      title: "Interactive Conversion Hub",
+      description:
+        "ติดตั้งระบบจองที่พักและระบบสมาชิกที่รองรับการสื่อสารข้อมูลการท่องเที่ยวที่รวดเร็ว",
+    },
+    {
+      step: "03",
+      title: "Coastal Hub SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักเกาะกระดาน', 'หมูย่างเมืองตรัง' เพื่อชิงอันดับหนึ่ง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ตรังมีกลุ่มลูกค้าที่รักสงบและต้องการคุณภาพ เว็บไซต์ที่ดูภูมิฐานและให้ข้อมูลชัดเจนจะปิดการขายได้ง่าย",
+    technicalApproach:
+      "เน้น Mobile Optimization และการปักหมุด Google Maps ในแหล่งท่องเที่ยวทางทะเลและร้านอาหารชื่อดัง",
+    localStrength: "มีความโดดเด่นด้านอาหาร (Gastronomy) และเกาะที่สวยติดอันดับโลก (เกาะกระดาน)",
+    nicheIndustries: [
+      "รีสอร์ตและโรงแรมชายฝั่ง",
+      "ร้านอาหารระดับพรีเมียม",
+      "ธุรกิจส่งออกสินค้าเกษตร (ยาง/ปาล์ม)",
+    ],
+    painPoints: ["เว็บไซต์ดูเก่าไม่สะท้อนมาตรฐานสากล", "ระบบสั่งซื้อของฝากออนไลน์ไม่เป็นระบบ"],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เมืองตรัง",
+      "ออกแบบเว็บรีสอร์ต เกาะกระดาน",
+      "จ้างทำ SEO ตรัง",
+      "ทำเว็บร้านอาหารชื่อดัง ตรัง",
+    ],
+  },
+  districts: ["เมืองตรัง", "กันตัง", "ย่านตาขาว", "ห้วยยอด", "สิเกา"],
+  keywords: ["รับทำเว็บไซต์ ตรัง", "ทำเว็บร้านอาหาร ตรัง", "จ้างทำเว็บที่พัก", "รับทำ SEO ตรัง"],
+};
+```
+
+### CONFIG: trat.ts
+
+`Path: constants/area-nodes/trat.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: TRAT_ISLAND_WELLNESS v18.0.1
+ * [STRATEGY]: Island Tourism | Nature Storytelling | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { hotelResortService } from "@/constants/services/hotel-resort";
+
+export const tratNode: AreaNode = {
+  slug: "trat",
+  province: "ตราด",
+  region: "East",
+  templateSlug: "hotelresort",
+  title: "รับทำเว็บไซต์ ตราด | ออกแบบเว็บรีสอร์ตเกาะช้างและธุรกิจท่องเที่ยวหมู่เกาะ",
+  description:
+    "ยกระดับภาพลักษณ์ที่พักและทัวร์ทางทะเลของเมืองตราด สู่มาตรฐานสากลด้วยเว็บไซต์ที่โหลดไวและระบบจองที่แม่นยำ",
+  seoTitle: "รับทำเว็บไซต์ ตราด เกาะช้าง เกาะกูด ออกแบบเว็บรีสอร์ต - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ตราด สำหรับรีสอร์ตหรู ทัวร์เกาะช้าง เกาะกูด เกาะหมาก เว็บสวยโหลดไว รองรับภาษาต่างชาติและระบบจองตรง",
+  priority: 90,
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+  heroImage: "/images/areas/trat-node.webp",
+  coordinates: { lat: 12.2428, lng: 102.5175 },
+  isTourismHeavy: true,
+  marketSaturation: 60,
+  regionalLatency: 22,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Remote Connectivity Audit",
+      description:
+        "วิเคราะห์โครงสร้างเว็บให้โหลดได้รวดเร็วแม้ในพื้นที่เกาะที่มีสัญญาณอินเทอร์เน็ตจำกัด",
+    },
+    {
+      step: "02",
+      title: "Island Booking Sync",
+      description:
+        "ติดตั้งระบบจองที่พักและกิจกรรมทางทะเลที่เชื่อมต่อกับระบบหลังบ้านของรีสอร์ตโดยตรง",
+    },
+    {
+      step: "03",
+      title: "Marine-Travel SEO",
+      description:
+        "ทำ SEO เจาะกลุ่มคีย์เวิร์ด 'Koh Chang Luxury Resort', 'เกาะกูดที่พักริมน้ำ' เพื่อดัก Traffic ทั่วโลก",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "นักท่องเที่ยวในตราดเน้นการพักผ่อนแบบ Private และ Nature เว็บไซต์ที่ภาพสวยและให้ข้อมูลการเดินทางชัดเจนจะปิดการขายได้ดี",
+    technicalApproach:
+      "เน้นการทำ Image Optimization และ Edge Computing เพื่อรองรับการเข้าถึงจากต่างประเทศ",
+    localStrength: "ทรัพยากรทางทะเล (เกาะช้าง/เกาะกูด) มีความแข็งแรงในระดับสากล",
+    nicheIndustries: [
+      "รีสอร์ตระดับไฮเอนด์และพูลวิลล่าบนเกาะ",
+      "ธุรกิจดำน้ำและกิจกรรมทางทะเล",
+      "สวนผลไม้เมืองร้อน (สละ/ทุเรียน)",
+    ],
+    painPoints: [
+      "นักท่องเที่ยวต่างชาติเข้าเว็บไม่ได้ในช่วงฤดูมรสุม",
+      "ระบบจองไม่รองรับการชำระเงินสากล",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เกาะช้าง",
+      "ออกแบบเว็บรีสอร์ต เกาะกูด",
+      "จ้างทำ SEO ตราด",
+      "ทำเว็บท่องเที่ยว เกาะหมาก",
+    ],
+  },
+  districts: ["เมืองตราด", "เกาะช้าง", "เกาะกูด", "แหลมงอบ", "คลองใหญ่"],
+  keywords: ["รับทำเว็บไซต์ ตราด", "ทำเว็บรีสอร์ต เกาะช้าง", "จ้างทำเว็บเกาะกูด", "รับทำ SEO ตราด"],
+};
+```
+
+### CONFIG: ubon-ratchathani.ts
+
+`Path: constants/area-nodes/ubon-ratchathani.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: UBON_RATCHATHANI_CULTURAL_HUB v18.0.1
+ * [STRATEGY]: Education & Service Hub | Local Authority | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const ubonRatchathaniNode: AreaNode = {
+  slug: "ubon-ratchathani",
+  province: "อุบลราชธานี",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อุบลราชธานี | พัฒนาเว็บไซต์บริการและการศึกษา ศูนย์กลางอีสานใต้",
+  description:
+    "ยกระดับธุรกิจในอุบลราชธานีสู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือสำหรับสถานศึกษา คลินิก และธุรกิจบริการพรีเมียม",
+  seoTitle: "รับทำเว็บไซต์ อุบลราชธานี ออกแบบเว็บคลินิก สถานศึกษา - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อุบลราชธานี สำหรับหน่วยงานท้องถิ่น อบต. เทศบาล และธุรกิจบริการ ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่",
+  priority: 94,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/ubon-ratchathani-node.webp",
+  coordinates: { lat: 15.2287, lng: 104.8564 },
+  marketSaturation: 68,
+  regionalLatency: 24,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Education & Service Audit",
+      description:
+        "วิเคราะห์การนำเสนอข้อมูลให้ดูเป็นทางการและเข้าถึงง่ายสำหรับประชาชนและกลุ่มเป้าหมาย",
+    },
+    {
+      step: "02",
+      title: "Local API Deployment",
+      description: "ติดตั้งระบบบริการออนไลน์และระบบจองนัดหมายที่เชื่อมต่อกับหน่วยงานในพื้นที่อุบลฯ",
+    },
+    {
+      step: "03",
+      title: "Lower Isan SEO Hub",
+      description:
+        "ทำ Local SEO ดักจับคำค้นหา 'ที่พักอุบล', 'คลินิกอุบล' เพื่อชิงพื้นที่การค้นหาอันดับหนึ่ง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อุบลราชธานีเป็นศูนย์กลางการศึกษาและการบริการของอีสานใต้ เว็บไซต์ที่ดูเป็นระเบียบและให้ข้อมูลครบถ้วนจะได้รับความยอมรับสูง",
+    technicalApproach: "เน้นระบบความปลอดภัยข้อมูลและการแสดงผลที่เป็นมาตรฐานสากล (Universal Design)",
+    localStrength: "มีความเข้มแข็งด้านวัฒนธรรมและเป็นศูนย์กลางการกระจายสินค้าสู่ตลาดตะวันออก",
+    nicheIndustries: [
+      "โรงเรียนและสถาบันกวดวิชา",
+      "คลินิกเฉพาะทางและโรงพยาบาลเอกชน",
+      "ร้านอาหารและคาเฟ่แนว Heritage",
+    ],
+    painPoints: [
+      "เว็บไซต์หน่วยงานราชการเดิมล้าสมัย",
+      "ขาดช่องทางดิจิทัลในการสนับสนุนการท่องเที่ยวงานแห่เทียน",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ วารินชำราบ",
+      "ออกแบบเว็บราชการ อุบล",
+      "จ้างทำ SEO อุบลราชธานี",
+      "ทำเว็บที่พัก เขมราฐ",
+    ],
+  },
+  districts: ["เมืองอุบลราชธานี", "วารินชำราบ", "เดชอุดม", "พิบูลมังสาหาร", "เขมราฐ"],
+  keywords: ["รับทำเว็บไซต์ อุบล", "ทำเว็บราชการ อุบล", "จ้างทำเว็บอุบล", "รับทำ SEO อุบลราชธานี"],
+};
+```
+
+### CONFIG: udon-thani.ts
+
+`Path: constants/area-nodes/udon-thani.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: UDON_THANI_COMMERCIAL_HUB v18.0.1
+ * [STRATEGY]: Business Excellence | Logistics | Dynamic Inheritance
+ * [MARKET]: Udon Thani, Border Trade Hub
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const udonThaniNode: AreaNode = {
+  slug: "udon-thani",
+  province: "อุดรธานี",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อุดรธานี | ศูนย์กลางธุรกิจและการค้าชายแดนแห่งภาคอีสาน",
+  description:
+    "บริการรับทำเว็บไซต์ในอุดรธานี เน้นความทันสมัยสำหรับธุรกิจค้าส่ง คลินิก และอสังหาริมทรัพย์ระดับพรีเมียม ติดหน้าแรก Google",
+  seoTitle: "รับทำเว็บไซต์ อุดรธานี ออกแบบเว็บคลินิก ธุรกิจค้าส่ง - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อุดรธานี สำหรับ SME และธุรกิจการค้าชายแดน ดีไซน์หรูหรา โหลดไว รองรับ SEO พื้นที่อุดรธานีและใกล้เคียง",
+  priority: 95,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/udon-thani-node.webp",
+  coordinates: { lat: 17.4138, lng: 102.7872 },
+  marketSaturation: 72,
+  regionalLatency: 22,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Commercial Brand Audit",
+      description:
+        "วิเคราะห์จุดแข็งของธุรกิจในฐานะศูนย์กลางการค้าเพื่อสร้างตัวตนที่ดูเป็นมืออาชีพรายใหญ่",
+    },
+    {
+      step: "02",
+      title: "Logistic Gateway Sync",
+      description:
+        "ติดตั้งระบบรองรับข้อมูลการขนส่งและการติดต่อสื่อสารที่รวดเร็วสำหรับคู่ค้าไทย-ลาว",
+    },
+    {
+      step: "03",
+      title: "Upper Isan SEO Hub",
+      description:
+        "ทำ SEO เจาะจงพื้นที่อุดรธานีและจังหวัดใกล้เคียงเพื่อครองความเป็นผู้นำในอีสานตอนบน",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อุดรธานีเป็นเมืองแห่งการค้าที่มีกำลังซื้อสูงจากทั้งในจังหวัดและประเทศเพื่อนบ้าน เว็บไซต์ต้องดูภูมิฐานและน่าเชื่อถือ",
+    technicalApproach:
+      "เน้นระบบการจัดการข้อมูลสินค้า (Catalog) และการปักหมุด Google Maps ในย่านธุรกิจสำคัญ",
+    localStrength: "เป็นศูนย์กลางการคมนาคมและโลจิสติกส์ที่เชื่อมโยงสู่ภูมิภาคอาเซียน",
+    nicheIndustries: [
+      "คลินิกความงามและทันตกรรม",
+      "ธุรกิจอสังหาริมทรัพย์และวัสดุก่อสร้าง",
+      "ร้านอาหารและไลฟ์สไตล์พรีเมียม",
+    ],
+    painPoints: [
+      "ธุรกิจเยอะแต่ภาพลักษณ์ออนไลน์ดูไม่เป็นสากล",
+      "ระบบการติดต่อสื่อสารกับลูกค้าต่างถิ่นไม่ลื่นไหล",
+    ],
+    competitorLevel: "high",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อุดรธานี",
+      "ออกแบบเว็บคลินิก อุดร",
+      "จ้างทำ SEO อุดรธานี",
+      "ทำเว็บขายของ บ้านดุง",
+    ],
+  },
+  districts: ["เมืองอุดรธานี", "กุมภวาปี", "บ้านดุง", "หนองหาน", "เพ็ญ"],
+  keywords: ["รับทำเว็บไซต์ อุดรธานี", "ทำเว็บคลินิก อุดร", "จ้างทำเว็บอุดร", "รับทำ SEO อุดรธานี"],
+};
+```
+
+### CONFIG: uthai-thani.ts
+
+`Path: constants/area-nodes/uthai-thani.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: UTHAI_THANI_SLOW_WELLNESS v18.0.1
+ * [STRATEGY]: Eco-Tourism | River Life | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const uthaiThaniNode: AreaNode = {
+  slug: "uthai-thani",
+  province: "อุทัยธานี",
+  region: "North",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ อุทัยธานี | ออกแบบเว็บที่พักริมน้ำและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
+  description:
+    "เปลี่ยนความสงบของอุทัยธานีให้เป็นจุดขายที่น่าหลงใหล ด้วยเว็บไซต์ที่เน้นงานดีไซน์ที่เป็นมิตรและระบบจองที่เชื่อถือได้",
+  seoTitle: "รับทำเว็บไซต์ อุทัยธานี ออกแบบเว็บที่พักริมน้ำ คาเฟ่ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์อุทัยธานี สำหรับรีสอร์ต โฮมสเตย์ และร้านอาหารริมแม่น้ำสะแกกรัง เว็บสวยโหลดไว ติดหน้าแรก Google",
+  priority: 83,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/uthai-thani-node.webp",
+  coordinates: { lat: 15.3811, lng: 100.0247 },
+  isTourismHeavy: true,
+  marketSaturation: 30,
+  regionalLatency: 16,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "River-Life Story Audit",
+      description:
+        "วิเคราะห์เสน่ห์ของวิถีชีวิตริมน้ำสะแกกรังมาเป็นเนื้อหาการนำเสนอที่สร้างอารมณ์ร่วมให้ลูกค้า",
+    },
+    {
+      step: "02",
+      title: "Fast Response Deployment",
+      description: "ติดตั้งระบบติดต่อสอบถามด่วนที่แจ้งเตือนผ่านมือถือทันทีเพื่อไม่ให้พลาดทุกการจอง",
+    },
+    {
+      step: "03",
+      title: "Slow-Travel SEO Hub",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักอุทัยธานี' และ 'ร้านอาหารสะแกกรัง' เพื่อดึงดูดกลุ่มลูกค้าคุณภาพ",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "อุทัยธานีเป็นเมืองพักผ่อนที่โดดเด่นด้วยวิถีชีวิตดั้งเดิม เว็บไซต์ที่ดูเรียบง่ายแต่พรีเมียมจะตรงใจกลุ่มลูกค้าเป้าหมายที่สุด",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพถ่ายบรรยากาศเมืองและแม่น้ำ และระบบการจองที่ง่ายไม่ซับซ้อน",
+    localStrength: "มีความเป็นส่วนตัวและวิถีชุมชนที่เข้มแข็ง ซึ่งเป็นจุดขายสำคัญในปัจจุบัน",
+    nicheIndustries: [
+      "ที่พักและโฮมสเตย์ริมแม่น้ำสะแกกรัง",
+      "คาเฟ่และร้านอาหารแนว Heritage",
+      "วิสาหกิจชุมชนสินค้าพื้นเมือง",
+    ],
+    painPoints: ["นักท่องเที่ยวหาข้อมูลที่พักในเน็ตได้ยาก", "เว็บไซต์เดิมดูไม่เป็นมืออาชีพ"],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ อุทัยธานี",
+      "ออกแบบเว็บที่พัก สะแกกรัง",
+      "จ้างทำ SEO อุทัยธานี",
+      "ทำเว็บสินค้าพื้นเมือง อุทัยธานี",
+    ],
+  },
+  districts: ["เมืองอุทัยธานี", "หนองฉาง", "ทัพทัน", "บ้านไร่", "สว่างอารมณ์"],
+  keywords: [
+    "รับทำเว็บไซต์ อุทัยธานี",
+    "ทำเว็บที่พัก อุทัย",
+    "จ้างทำเว็บอุทัย",
+    "รับทำ SEO อุทัยธานี",
+  ],
+};
+```
+
 ### CONFIG: uttaradit.ts
+
 `Path: constants/area-nodes/uttaradit.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.1 (STRICT_SYNC)
@@ -3767,6 +8852,7 @@ export const uttaraditNode: AreaNode = {
   // --- Basic Identity ---
   slug: "uttaradit",
   province: "อุตรดิตถ์",
+  region: "North",
   templateSlug: "local-authority", // ใช้โครงสร้างท้องถิ่นเป็นฐานรองรับ SME/Agro
 
   title: "รับทำเว็บไซต์ อุตรดิตถ์ | เปลี่ยนผลผลิตจากสวนเป็นแบรนด์พรีเมียม ขายตรงไม่ผ่านคนกลาง",
@@ -3791,6 +8877,29 @@ export const uttaraditNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 35,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "D2C Brand Strategy",
+      description:
+        "วิเคราะห์จุดเด่นของสวนและแบรนด์สินค้าเพื่อสร้างเอกลักษณ์เฉพาะตัวที่ไม่ผ่านพ่อค้าคนกลาง",
+    },
+    {
+      step: "02",
+      title: "Mobile Order Deployment",
+      description:
+        "ติดตั้งระบบสั่งจองสินค้าออนไลน์ที่ใช้งานง่ายบนมือถือและเชื่อมต่อกับระบบแจ้งเตือนทาง LINE",
+    },
+    {
+      step: "03",
+      title: "Local Fruit Schema Hub",
+      description:
+        "ทำ Local Business Schema และ SEO เจาะจงผลไม้ฤดูกาลเพื่อให้สวนของคุณถูกค้นพบโดยตรง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/uttaradit-node.webp",
@@ -3915,20 +9024,242 @@ export const uttaraditNode: AreaNode = {
   ],
   coordinates: { lat: 17.6256, lng: 100.0993 },
 };
-
 ```
-### CONFIG: image-blur-data.ts
-`Path: constants/image-blur-data.ts`
+
+### CONFIG: yala.ts
+
+`Path: constants/area-nodes/yala.ts`
+
 ```typescript
 /**
- * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-19T10:01:54.049Z
+ * [SERVICE_NODE]: YALA_COMMERCIAL_HUB v18.0.1
+ * [STRATEGY]: Border Trade | Smart City | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const yalaNode: AreaNode = {
+  slug: "yala",
+  province: "ยะลา",
+  region: "South",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ยะลา | พัฒนาเว็บไซต์การค้าชายแดนและธุรกิจในเมืองต้นแบบ",
+  description:
+    "ยกระดับธุรกิจในยะลาและเบตงสู่โลกออนไลน์ ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลที่รวดเร็ว",
+  seoTitle: "รับทำเว็บไซต์ ยะลา เบตง ออกแบบเว็บธุรกิจ การค้าชายแดน - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ยะลา สำหรับธุรกิจนำเข้า-ส่งออก คลินิก และ SME เบตง ดีไซน์สวยโหลดไว รองรับ SEO และมาตรฐานความปลอดภัยสูง",
+  priority: 88,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/yala-node.webp",
+  coordinates: { lat: 6.5411, lng: 101.2811 },
+  isTourismHeavy: true,
+  marketSaturation: 45,
+  regionalLatency: 28,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Model-City Brand Audit",
+      description: "วิเคราะห์ภาพลักษณ์ธุรกิจในฐานะเมืองต้นแบบเพื่อสร้างแบรนด์ที่ดูทันสมัยและมั่นคง",
+    },
+    {
+      step: "02",
+      title: "Multilingual Sync",
+      description:
+        "ติดตั้งระบบรองรับหลายภาษา (ไทย/มลายู/อังกฤษ) เพื่อสื่อสารกับคู่ค้าและนักท่องเที่ยวในพื้นที่",
+    },
+    {
+      step: "03",
+      title: "Betong Gateway SEO",
+      description:
+        "ทำ Local SEO เน้นพื้นที่เบตงและยะลาเพื่อดักจับ Traffic จากกลุ่มลูกค้าที่มีกำลังซื้อสูง",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ยะลาและเบตงมีการเติบโตทางเศรษฐกิจใหม่ เว็บไซต์ต้องเน้นความปลอดภัย ความรวดเร็ว และการเข้าถึงประชาชนในพื้นที่",
+    technicalApproach:
+      "เน้นระบบความปลอดภัยระดับองค์กรและการทำ Image Optimization สำหรับแหล่งท่องเที่ยว Unseen",
+    localStrength: "เป็นเมืองยุทธศาสตร์การค้าชายแดนและมีแหล่งท่องเที่ยวระดับแม่เหล็ก (เบตง)",
+    nicheIndustries: [
+      "ธุรกิจชิปปิ้งและโลจิสติกส์",
+      "รีสอร์ตและโรงแรมในเขตเบตง",
+      "คลินิกเฉพาะทางและ SME พรีเมียม",
+    ],
+    painPoints: [
+      "บริษัทมีความมั่นคงแต่ภาพลักษณ์บนเว็บดูไม่โปร",
+      "ขาดการสื่อสารกับกลุ่มนักท่องเที่ยวต่างถิ่นที่เป็นระบบ",
+    ],
+    competitorLevel: "medium",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ เบตง",
+      "ออกแบบเว็บธุรกิจ ยะลา",
+      "จ้างทำ SEO เบตง",
+      "ทำเว็บสินค้าพรีเมียม ยะลา",
+    ],
+  },
+  districts: ["เมืองยะลา", "เบตง", "บันนังสตา", "รามัน", "ยะหา"],
+  keywords: ["รับทำเว็บไซต์ ยะลา", "ทำเว็บเบตง", "จ้างทำเว็บธุรกิจ", "รับทำ SEO ยะลา"],
+};
+```
+
+### CONFIG: yasothon.ts
+
+`Path: constants/area-nodes/yasothon.ts`
+
+```typescript
+/**
+ * [SERVICE_NODE]: YASOTHON_STORYTELLER v18.0.1
+ * [STRATEGY]: Festival Tourism | Organic Agri | Dynamic Inheritance
+ */
+
+import type { AreaNode } from "@/types";
+import { localAuthorityService } from "@/constants/services/local-authority";
+
+export const yasothonNode: AreaNode = {
+  slug: "yasothon",
+  province: "ยโสธร",
+  region: "Northeast",
+  templateSlug: "local-authority",
+  title: "รับทำเว็บไซต์ ยโสธร | ออกแบบเว็บท่องเที่ยวประเพณีและธุรกิจเกษตรอินทรีย์พรีเมียม",
+  description:
+    "เปลี่ยนมนต์เสน่ห์เมืองบั้งไฟและข้าวหอมมะลิอินทรีย์ ให้เป็นยอดขายดิจิทัลที่ดูดีและน่าเชื่อถือในระดับสากล",
+  seoTitle: "รับทำเว็บไซต์ ยโสธร ออกแบบเว็บเกษตรอินทรีย์ ที่พัก - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์ยโสธร สำหรับวิสาหกิจชุมชนเกษตรอินทรีย์ SME และธุรกิจท่องเที่ยวเมืองบั้งไฟ ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
+  priority: 81,
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+  heroImage: "/images/areas/yasothon-node.webp",
+  coordinates: { lat: 15.793, lng: 104.145 },
+  isTourismHeavy: true,
+  marketSaturation: 30,
+  regionalLatency: 25,
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Festival Brand Audit",
+      description:
+        "ดึงอัตลักษณ์ประเพณีบั้งไฟและวิถีเกษตรอินทรีย์มาเป็นจุดเด่นในการนำเสนอแบรนด์ที่น่าจดจำ",
+    },
+    {
+      step: "02",
+      title: "Agro-Order Sync",
+      description:
+        "ติดตั้งระบบสั่งจองสินค้าเกษตรพรีเมียมและระบบสมาชิกเพื่อสร้างฐานลูกค้าขาประจำทั่วประเทศ",
+    },
+    {
+      step: "03",
+      title: "Organic Authority SEO",
+      description:
+        "ทำ Local SEO เน้นคีย์เวิร์ด 'ข้าวหอมมะลิอินทรีย์ยโสธร', 'ที่พักยโสธร' เพื่อเพิ่มโอกาสการค้นหา",
+    },
+  ],
+  localContext: {
+    marketInsight:
+      "ยโสธรมีชื่อเสียงด้านเกษตรอินทรีย์ในระดับประเทศ เว็บไซต์ที่แสดงถึงมาตรฐานและ 'ความจริงใจ' จะได้รับความยอมรับสูง",
+    technicalApproach:
+      "เน้น Image Optimization สำหรับขั้นตอนการผลิตแบบอินทรีย์และระบบการติดต่อสื่อสารที่รวดเร็ว",
+    localStrength:
+      "การเป็นเมืองเกษตรอินทรีย์ต้นแบบของไทยและงานประเพณีบั้งไฟที่เป็นที่รู้จักระดับโลก",
+    nicheIndustries: [
+      "วิสาหกิจชุมชนเกษตรอินทรีย์พรีเมียม",
+      "ธุรกิจแปรรูปอาหารและหมอนขวานผ้าขิต",
+      "ที่พักและโฮมสเตย์ในช่วงเทศกาล",
+    ],
+    painPoints: [
+      "สินค้าดีระดับส่งออกแต่ภาพลักษณ์บนเว็บดูธรรมดา",
+      "ขาดช่องทางในการสื่อสารมาตรฐานอินทรีย์กับลูกค้า",
+    ],
+    competitorLevel: "low",
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ยโสธร",
+      "ออกแบบเว็บเกษตรอินทรีย์ ยโสธร",
+      "จ้างทำ SEO ยโสธร",
+      "ทำเว็บเมืองบั้งไฟ ยโสธร",
+    ],
+  },
+  districts: ["เมืองยโสธร", "คำเขื่อนแก้ว", "เลิงนกทา", "กุดชุม", "ไทยเจริญ"],
+  keywords: ["รับทำเว็บไซต์ ยโสธร", "ทำเว็บเกษตรอินทรีย์", "จ้างทำเว็บยโสธร", "รับทำ SEO ยโสธร"],
+};
+```
+
+### CONFIG: image-blur-data.ts
+
+`Path: constants/image-blur-data.ts`
+
+```typescript
+/**
+ * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-23T17:25:13.725Z
  * [MANDATE]: Strictly Auto-Generated by scripts/gen-blur-data.mjs.
  * [STRATEGY]: Static BlurHash for Zero-CLS LCP.
  */
 import type { ImageBlurRegistry } from "@/types";
 
 export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
+  "/images/areas/amnat-charoen-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/ang-thong-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/ayutthaya-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/bangkok-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/bueng-kan-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/buriram-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/chachoengsao-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/chai-nat-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/chaiyaphum-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/chanthaburi-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -3958,7 +9289,19 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/kalasin-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/kamphaeng-phet-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/kanchanaburi-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -3982,7 +9325,31 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/krabi-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/lampang-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/lamphun-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/loei-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/lopburi-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -3994,13 +9361,115 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/maha-sarakham-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/mukdahan-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nakhon-nayok-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nakhon-pathom-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nakhon-phanom-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/nakhon-sawan-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
+  "/images/areas/nakhon-si-thammarat-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nan-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/narathiwat-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nong-bua-lamphu-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nong-khai-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/nonthaburi-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/pathum-thani-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/pattani-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/phang-nga.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/phatthalung-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/phayao-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/phetchabun-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/phetchaburi-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -4018,7 +9487,25 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/phrae-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/phuket-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/prachin-buri-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/prachuap-khiri-khan-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -4036,7 +9523,91 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/ratchaburi-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/rayong-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/roi-et-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/sa-kaeo-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/sakon-nakhon-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/samut-prakan-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/samut-sakhon-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/samut-songkhram-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/saraburi-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/satun-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/si-sa-ket-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/sing-buri-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/songkhla-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/sukhothai-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/suphan-buri-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -4048,13 +9619,61 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/areas/surin-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/tak-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
     height: 768,
   },
+  "/images/areas/trang-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/trat-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/ubon-ratchathani-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/udon-thani-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/uthai-thani-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
   "/images/areas/uttaradit-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/yala-node.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
+    width: 1024,
+    height: 768,
+  },
+  "/images/areas/yasothon-node.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAABwAQCdASoKAAgABUB8JZgCdAF1AAD+8EJsrNup/MqA/NKpKjAxJKbn9ODGAAAA",
     width: 1024,
@@ -4277,10 +9896,12 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     height: 768,
   },
 } as const;
-
 ```
+
 ### CONFIG: master-registry.ts
+
 `Path: constants/master-registry.ts`
+
 ```typescript
 /**
  * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.107 (STABLE_RELEASE)
@@ -4291,6 +9912,7 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
 import type { TemplateMasterData } from "@/types";
 
 // --- 1. Infrastructure: Import Individual Service Nodes ---
+import { AREA_NODES } from "./area-nodes/index";
 import { seoAgencyService } from "./services/seo-agency";
 import { salePageService } from "./services/salepage";
 import { corporateService } from "./services/corporate";
@@ -4312,7 +9934,15 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   hotelResortService,
   bioService,
   localAuthorityService,
-].sort((a, b) => a.priority - b.priority);
+]
+  .map((service) => ({
+    ...service,
+    // [SYNC]: เชื่อมโยงพื้นที่ที่ให้บริการ (Active Areas) อัตโนมัติ
+    activeAreas: AREA_NODES.filter((area) => area.templateSlug === service.templateSlug).map(
+      (area) => area.slug,
+    ),
+  }))
+  .sort((a, b) => a.priority - b.priority);
 
 /**
  * [HELPER]: getServiceBySlug
@@ -4334,10 +9964,12 @@ export const getFeaturedServices = (): TemplateMasterData[] => {
 
 // [KNIP_HYGIENE]: getServicesByCategory ถูกถอดออกชั่วคราวเพื่อลด Unused Exports
 // จะถูกเพิ่มกลับมาเมื่อมีการสร้างระบบ Filter ในหน้า Directory บริการ
-
 ```
+
 ### CONFIG: navigation.ts
+
 `Path: constants/navigation.ts`
+
 ```typescript
 /**
  * [NAV_INFRASTRUCTURE]: NAVIGATION_REGISTRY v18.0.1 (PATH_SYNCED)
@@ -4381,10 +10013,12 @@ export const FOOTER_MAP = {
     { label: "แผนผังเว็บไซต์", href: "/sitemap" },
   ],
 } as const;
-
 ```
+
 ### CONFIG: bio.ts
+
 `Path: constants/services/bio.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.3 (IDENTITY_SYNC_PRO)
@@ -4488,10 +10122,12 @@ export const bioService: TemplateMasterData = {
   isPopular: true,
   isFeatured: false,
 };
-
 ```
+
 ### CONFIG: catalog.ts
+
 `Path: constants/services/catalog.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CATALOG_ENGINEERING_HUB v18.0.3 (INDUSTRIAL_MASTER)
@@ -4632,10 +10268,12 @@ export const catalogService: TemplateMasterData = {
   priority: 4,
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: corporate.ts
+
 `Path: constants/services/corporate.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v18.0.1 (ENTERPRISE_STANDARD)
@@ -4744,10 +10382,12 @@ export const corporateService: TemplateMasterData = {
   priority: 2,
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: hotel-resort.ts
+
 `Path: constants/services/hotel-resort.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v18.0.1 (HUMAN_OPTIMIZED)
@@ -4860,10 +10500,12 @@ export const hotelResortService: TemplateMasterData = {
   priority: 6,
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: local-authority.ts
+
 `Path: constants/services/local-authority.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: LOCAL_AUTHORITY_ENGINE v18.0.1 (GOV_BUSINESS_HYBRID)
@@ -4977,10 +10619,12 @@ export const localAuthorityService: TemplateMasterData = {
   priority: 3, // Priority รองจาก Corporate/Hotel แต่สำคัญสำหรับตลาดต่างจังหวัด
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: salepage.ts
+
 `Path: constants/services/salepage.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: SALE_PAGE_CONVERSION_ENGINE v18.0.1 (ROAS_OPTIMIZED)
@@ -5086,10 +10730,12 @@ export const salePageService: TemplateMasterData = {
   priority: 1, // สินค้าขายดีอันดับ 1
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: seo-agency.ts
+
 `Path: constants/services/seo-agency.ts`
+
 ```typescript
 /**
  * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v18.0.2 (HUMAN_CENTRIC_PATCH)
@@ -5208,17 +10854,19 @@ export const seoAgencyService: TemplateMasterData = {
   priority: 1,
   isFeatured: true,
 };
-
 ```
+
 ### CONFIG: site-config.ts
+
 `Path: constants/site-config.ts`
+
 ```typescript
 /**
  * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.1 (UNIVERSAL_SYNC)
  * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT (Single Source of Truth)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  * [FRAMEWORK]: Next.js 16.1.6 | React 19 | Tailwind CSS 4.0
- * [CHANGELOG]: 
+ * [CHANGELOG]:
  * - Integrated LinkedIn Professional Profile (alongkorl-aemdevweb).
  * - Synchronized Link Registry for Schema Injection.
  */
@@ -5352,286 +11000,343 @@ export const SITE_CONFIG: SiteConfig = {
     facebook: "fb_domain_verification_id",
   },
 } as const;
-
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
-```text
-[3.4K 2026-02-19 20:10]  .
-├── [328K 2026-02-19 20:10]  README.md
-├── [3.4K 2026-02-19 01:08]  app
-│   ├── [3.4K 2026-02-18 21:37]  (business)
-│   │   ├── [3.4K 2026-02-18 21:37]  areas
-│   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
-│   │   │   │   └── [4.7K 2026-02-19 08:11]  page.tsx
-│   │   │   └── [7.4K 2026-02-19 01:37]  page.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  blog
-│   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
-│   │   │   │   └── [4.7K 2026-02-18 21:37]  page.tsx
-│   │   │   └── [6.2K 2026-02-19 01:37]  page.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  case-studies
-│   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
-│   │   │   │   └── [5.1K 2026-02-18 21:37]  page.tsx
-│   │   │   └── [6.7K 2026-02-19 01:37]  page.tsx
-│   │   └── [2.3K 2026-02-19 01:37]  layout.tsx
-│   ├── [3.4K 2026-02-19 01:08]  (conversion)
-│   │   ├── [1.1K 2026-02-19 02:54]  layout.tsx
-│   │   └── [3.4K 2026-02-19 01:08]  services
-│   │       ├── [3.4K 2026-02-19 01:08]  [slug]
-│   │       │   └── [4.8K 2026-02-19 08:11]  page.tsx
-│   │       └── [6.8K 2026-02-19 01:37]  page.tsx
-│   ├── [3.4K 2026-02-18 21:37]  (main)
-│   │   ├── [3.4K 2026-02-18 21:37]  about
-│   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
-│   │   ├── [2.0K 2026-02-19 18:40]  layout.tsx
-│   │   ├── [9.3K 2026-02-19 19:26]  page.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  privacy
-│   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  status
-│   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
-│   │   └── [3.4K 2026-02-18 21:37]  terms
-│   │       └── [ 12K 2026-02-18 21:37]  page.tsx
-│   ├── [4.0K 2026-02-19 18:01]  globals.css
-│   ├── [5.4K 2026-02-19 19:34]  layout.tsx
-│   ├── [4.2K 2026-02-18 21:37]  loading.tsx
-│   ├── [3.5K 2026-02-18 21:37]  manifest.ts
-│   ├── [6.2K 2026-02-18 21:37]  not-found.tsx
-│   ├── [ 775 2026-02-19 01:37]  robots.ts
-│   ├── [3.8K 2026-02-19 01:37]  sitemap.ts
-│   └── [2.8K 2026-02-18 21:37]  template.tsx
-├── [3.4K 2026-02-18 21:37]  components
-│   ├── [3.4K 2026-02-18 21:37]  features
-│   │   ├── [3.4K 2026-02-18 21:37]  areas
-│   │   │   └── [7.6K 2026-02-19 18:01]  AreaCard.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  blog
-│   │   │   └── [5.7K 2026-02-19 18:01]  BlogCard.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  case-studies
-│   │   │   └── [6.4K 2026-02-19 18:53]  CaseStudyCard.tsx
-│   │   ├── [3.4K 2026-02-19 19:00]  landing
-│   │   │   ├── [8.6K 2026-02-19 19:00]  PricingSection.tsx
-│   │   │   └── [9.9K 2026-02-19 18:01]  WorkProcess.tsx
-│   │   └── [3.4K 2026-02-18 21:37]  services
-│   │       ├── [7.1K 2026-02-19 18:52]  ServiceCard.tsx
-│   │       └── [4.4K 2026-02-19 18:01]  ServiceListingHub.tsx
-│   ├── [3.4K 2026-02-18 21:37]  layout
-│   │   ├── [6.4K 2026-02-19 18:01]  Footer.tsx
-│   │   ├── [8.7K 2026-02-19 18:47]  Navbar.tsx
-│   │   ├── [2.4K 2026-02-18 21:37]  PageTransition.tsx
-│   │   └── [1.9K 2026-02-18 21:37]  TopLoader.tsx
-│   ├── [3.4K 2026-02-18 21:37]  providers
-│   │   ├── [1.6K 2026-02-19 17:08]  ClientInfrastructure.tsx
-│   │   └── [1.1K 2026-02-18 21:37]  ThemeProvider.tsx
-│   ├── [3.4K 2026-02-19 01:36]  seo
-│   │   └── [1.8K 2026-02-19 01:37]  JsonLd.tsx
-│   ├── [3.4K 2026-02-18 21:37]  shared
-│   │   ├── [3.9K 2026-02-19 08:11]  ConversionCTA.tsx
-│   │   ├── [2.7K 2026-02-18 21:37]  FloatingContainer.tsx
-│   │   ├── [6.2K 2026-02-18 21:37]  ImpactStats.tsx
-│   │   ├── [5.3K 2026-02-19 01:37]  LineStickyButton.tsx
-│   │   └── [5.7K 2026-02-18 21:37]  TrustBadge.tsx
-│   ├── [3.4K 2026-02-19 07:30]  templates
-│   │   ├── [3.3K 2026-02-19 08:11]  TemplateRenderer.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  bio
-│   │   │   ├── [4.7K 2026-02-18 21:37]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
-│   │   │       ├── [1.8K 2026-02-18 21:37]  ActionRegistry.tsx
-│   │   │       ├── [1.3K 2026-02-18 21:37]  CapabilityGraph.tsx
-│   │   │       ├── [ 716 2026-02-18 21:37]  CredentialStack.tsx
-│   │   │       ├── [1.2K 2026-02-18 21:37]  DirectTerminal.tsx
-│   │   │       ├── [2.0K 2026-02-18 21:37]  IdentityNode.tsx
-│   │   │       └── [4.7K 2026-02-18 21:37]  ProjectHighlight.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  catalog
-│   │   │   ├── [5.5K 2026-02-19 19:42]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
-│   │   │       ├── [2.1K 2026-02-18 21:37]  CatalogHeader.tsx
-│   │   │       ├── [2.2K 2026-02-18 21:37]  InquiryPortal.tsx
-│   │   │       ├── [ 560 2026-02-18 21:37]  ProductGrid.tsx
-│   │   │       ├── [2.1K 2026-02-18 21:37]  ProductNode.tsx
-│   │   │       ├── [1.2K 2026-02-18 21:37]  SearchOrchestrator.tsx
-│   │   │       └── [6.5K 2026-02-18 21:37]  TechnicalSpecSheet.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  corporate
-│   │   │   ├── [4.7K 2026-02-18 21:37]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
-│   │   │       ├── [2.0K 2026-02-18 21:37]  CapabilityMatrix.tsx
-│   │   │       ├── [1.7K 2026-02-18 21:37]  ConsultGateway.tsx
-│   │   │       ├── [5.5K 2026-02-18 21:37]  SuccessTimeline.tsx
-│   │   │       ├── [ 876 2026-02-18 21:37]  TrustNetwork.tsx
-│   │   │       ├── [1013 2026-02-18 21:37]  ValueBlueprint.tsx
-│   │   │       └── [1.7K 2026-02-18 21:37]  VisionPortal.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  hotelresort
-│   │   │   ├── [4.7K 2026-02-18 21:37]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
-│   │   │       ├── [2.5K 2026-02-18 21:37]  AtmosphereHeader.tsx
-│   │   │       ├── [2.6K 2026-02-18 21:37]  ExperienceNodes.tsx
-│   │   │       ├── [2.6K 2026-02-18 21:37]  FacilityMatrix.tsx
-│   │   │       ├── [1.9K 2026-02-18 21:37]  ReservationPortal.tsx
-│   │   │       ├── [4.9K 2026-02-18 21:37]  SuiteRegistry.tsx
-│   │   │       └── [5.4K 2026-02-18 21:37]  WeatherTracker.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  local-authority
-│   │   │   ├── [4.5K 2026-02-18 21:37]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
-│   │   │       ├── [3.2K 2026-02-18 21:37]  DistrictHero.tsx
-│   │   │       ├── [1.5K 2026-02-18 21:37]  DistrictRegistry.tsx
-│   │   │       ├── [1.7K 2026-02-18 21:37]  GeoNodeHeader.tsx
-│   │   │       ├── [2.0K 2026-02-18 21:37]  LocalInsight.tsx
-│   │   │       ├── [5.2K 2026-02-18 21:37]  LocalMapNode.tsx
-│   │   │       ├── [3.5K 2026-02-18 21:37]  MarketIntelligence.tsx
-│   │   │       └── [2.2K 2026-02-18 21:37]  RegionalAction.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  salepage
-│   │   │   ├── [9.1K 2026-02-19 02:14]  Index.tsx
-│   │   │   └── [3.4K 2026-02-19 02:11]  _components
-│   │   │       ├── [ 10K 2026-02-18 21:37]  DirectOrderForm.tsx
-│   │   │       ├── [4.5K 2026-02-18 21:37]  FeatureComparison.tsx
-│   │   │       ├── [5.5K 2026-02-18 21:37]  FlashSaleTimer.tsx
-│   │   │       ├── [3.9K 2026-02-18 21:37]  SaleFooter.tsx
-│   │   │       ├── [6.5K 2026-02-18 21:37]  SaleHero.tsx
-│   │   │       ├── [2.9K 2026-02-18 21:37]  SaleNavbar.tsx
-│   │   │       ├── [3.6K 2026-02-18 21:37]  StickyBuyButton.tsx
-│   │   │       └── [7.7K 2026-02-18 21:37]  ThaiTrustBadge.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  sections
-│   │   │   ├── [6.5K 2026-02-19 08:11]  DynamicFAQ.tsx
-│   │   │   ├── [6.0K 2026-02-18 21:37]  FeatureGrid.tsx
-│   │   │   ├── [7.4K 2026-02-19 17:02]  HeroEngine.tsx
-│   │   │   └── [3.7K 2026-02-19 19:45]  LayoutEngine.tsx
-│   │   └── [3.4K 2026-02-18 21:37]  seo-agency
-│   │       ├── [4.0K 2026-02-19 02:54]  Index.tsx
-│   │       └── [3.4K 2026-02-18 21:37]  _components
-│   │           ├── [6.3K 2026-02-19 02:14]  AuditHero.tsx
-│   │           ├── [ 11K 2026-02-19 02:14]  AuditReportGenerator.tsx
-│   │           ├── [9.1K 2026-02-19 02:14]  ConversionPortal.tsx
-│   │           ├── [7.1K 2026-02-19 02:14]  KeywordRegistry.tsx
-│   │           ├── [7.5K 2026-02-19 02:54]  PerformanceTrajectory.tsx
-│   │           └── [3.6K 2026-02-18 21:37]  StrategyBlueprint.tsx
-│   └── [3.4K 2026-02-18 21:37]  ui
-│       ├── [2.1K 2026-02-18 21:37]  Accordion.tsx
-│       ├── [4.0K 2026-02-18 21:37]  AmbientBackground.tsx
-│       ├── [3.9K 2026-02-18 21:37]  Button.tsx
-│       ├── [1.5K 2026-02-18 21:37]  Callout.tsx
-│       ├── [4.9K 2026-02-19 02:14]  IconRenderer.tsx
-│       ├── [ 931 2026-02-18 21:37]  Skeleton.tsx
-│       ├── [2.8K 2026-02-18 21:37]  SkeletonCard.tsx
-│       ├── [2.1K 2026-02-18 21:37]  SkeletonGrid.tsx
-│       ├── [2.9K 2026-02-18 21:37]  Sonner.tsx
-│       └── [3.8K 2026-02-19 18:43]  ThemeToggle.tsx
-├── [ 425 2026-02-18 21:37]  components.json
-├── [3.4K 2026-02-18 21:37]  config
-│   ├── [5.1K 2026-02-18 21:37]  00-SYSTEM-MANDATE.md
-│   └── [5.3K 2026-02-18 21:37]  01-SYSTEM-PROMPT-EXTENSION.md
-├── [3.4K 2026-02-18 22:29]  constants
-│   ├── [3.4K 2026-02-18 21:37]  area-nodes
-│   │   ├── [9.9K 2026-02-19 06:20]  bangkok.ts
-│   │   ├── [9.5K 2026-02-19 06:20]  chiang-mai.ts
-│   │   ├── [ 11K 2026-02-19 06:20]  chiang-rai.ts
-│   │   ├── [ 10K 2026-02-19 06:20]  chon-buri.ts
-│   │   ├── [ 11K 2026-02-19 06:20]  chumphon.ts
-│   │   ├── [2.4K 2026-02-18 21:37]  index.ts
-│   │   ├── [ 10K 2026-02-19 06:20]  kamphaeng-phet.ts
-│   │   ├── [8.8K 2026-02-19 06:20]  khon-kaen.ts
-│   │   ├── [ 10K 2026-02-19 06:20]  korat.ts
-│   │   ├── [ 12K 2026-02-19 06:20]  lampang.ts
-│   │   ├── [ 12K 2026-02-19 06:20]  mae-hong-son.ts
-│   │   ├── [ 13K 2026-02-19 06:20]  nakhon-sawan.ts
-│   │   ├── [ 11K 2026-02-19 06:20]  phang-nga.ts
-│   │   ├── [ 13K 2026-02-19 06:20]  phichit.ts
-│   │   ├── [ 13K 2026-02-19 06:20]  phitsanulok.ts
-│   │   ├── [ 11K 2026-02-19 06:20]  phuket.ts
-│   │   ├── [ 11K 2026-02-19 06:20]  ranong.ts
-│   │   ├── [ 12K 2026-02-19 06:20]  sukhothai.ts
-│   │   ├── [ 12K 2026-02-19 06:20]  surat-thani.ts
-│   │   ├── [ 12K 2026-02-19 06:20]  tak.ts
-│   │   └── [ 12K 2026-02-19 06:20]  uttaradit.ts
-│   ├── [ 12K 2026-02-19 17:02]  image-blur-data.ts
-│   ├── [2.4K 2026-02-19 03:08]  master-registry.ts
-│   ├── [2.2K 2026-02-18 21:37]  navigation.ts
-│   ├── [3.4K 2026-02-18 21:37]  services
-│   │   ├── [6.4K 2026-02-19 06:20]  bio.ts
-│   │   ├── [8.1K 2026-02-19 19:45]  catalog.ts
-│   │   ├── [6.5K 2026-02-19 06:20]  corporate.ts
-│   │   ├── [7.2K 2026-02-19 06:20]  hotel-resort.ts
-│   │   ├── [7.6K 2026-02-19 06:20]  local-authority.ts
-│   │   ├── [6.9K 2026-02-19 06:20]  salepage.ts
-│   │   └── [9.1K 2026-02-19 06:20]  seo-agency.ts
-│   └── [5.9K 2026-02-19 19:26]  site-config.ts
-├── [3.4K 2026-02-18 21:37]  content
-│   ├── [3.4K 2026-02-18 21:37]  blog
-│   │   ├── [ 13K 2026-02-18 21:37]  5-points-killing-sales.mdx
-│   │   ├── [ 12K 2026-02-18 21:37]  advanced-schema-markup.mdx
-│   │   ├── [ 11K 2026-02-18 21:37]  case-study-unlink-th.mdx
-│   │   ├── [ 11K 2026-02-18 21:37]  copywriting-secrets.mdx
-│   │   ├── [ 12K 2026-02-18 21:37]  core-web-vitals-speed.mdx
-│   │   ├── [ 11K 2026-02-18 21:37]  ecommerce-conversion-seo.mdx
-│   │   ├── [ 11K 2026-02-18 21:37]  facebook-ads-vs-website.mdx
-│   │   ├── [ 12K 2026-02-18 21:37]  lower-north-digital-transformation.mdx
-│   │   ├── [ 10K 2026-02-19 20:09]  seo-2026-strategy.mdx
-│   │   └── [ 11K 2026-02-18 21:37]  technical-audit-protocol.mdx
-│   └── [3.4K 2026-02-18 21:37]  case-studies
-│       ├── [ 12K 2026-02-18 21:37]  case-study-industrial-catalog.mdx
-│       ├── [ 11K 2026-02-18 21:37]  provincial-digital-domination.mdx
-│       └── [ 11K 2026-02-18 21:37]  unlink-reputation-management-success.mdx
-├── [2.4K 2026-02-18 21:37]  eslint.config.mjs
-├── [ 393 2026-02-19 07:31]  knip.json
-├── [3.4K 2026-02-18 21:37]  lib
-│   ├── [4.9K 2026-02-18 21:37]  cms.ts
-│   ├── [3.8K 2026-02-18 21:37]  data-merger.ts
-│   ├── [3.6K 2026-02-18 21:37]  schema-validator.ts
-│   ├── [5.7K 2026-02-19 19:27]  schema.ts
-│   ├── [2.9K 2026-02-18 21:37]  seo-utils.ts
-│   └── [4.6K 2026-02-19 17:16]  utils.ts
-├── [2.6K 2026-02-18 21:37]  mdx-components.tsx
-├── [ 247 2026-02-19 19:48]  next-env.d.ts
-├── [5.2K 2026-02-19 05:00]  next.config.ts
-├── [3.1K 2026-02-19 07:14]  package.json
-├── [279K 2026-02-19 18:42]  pnpm-lock.yaml
-├── [  51 2026-02-18 21:37]  pnpm-workspace.yaml
-├── [1.1K 2026-02-18 21:37]  postcss.config.mjs
-├── [3.4K 2026-02-18 21:37]  public
-│   └── [3.4K 2026-02-19 01:52]  images
-│       ├── [3.4K 2026-02-18 21:37]  areas
-│       ├── [3.4K 2026-02-18 21:37]  blog
-│       ├── [3.4K 2026-02-18 21:37]  case-studies
-│       ├── [3.4K 2026-02-18 21:37]  experts
-│       ├── [3.4K 2026-02-18 21:37]  seo
-│       ├── [3.4K 2026-02-18 21:37]  services
-│       └── [3.4K 2026-02-18 21:37]  shared
-├── [3.4K 2026-02-19 08:10]  scripts
-│   ├── [5.2K 2026-02-19 07:21]  asset-integrity-protocol.mjs
-│   ├── [4.2K 2026-02-18 21:37]  gen-blur-data.mjs
-│   ├── [4.5K 2026-02-18 21:37]  generate_docs.sh
-│   ├── [3.0K 2026-02-19 00:11]  index-urls.js
-│   ├── [7.3K 2026-02-19 07:20]  integrity-enforcer.py
-│   ├── [5.7K 2026-02-18 21:37]  seo-monitor.py
-│   ├── [3.6K 2026-02-19 08:11]  seo-structure-audit.mjs
-│   ├── [3.3K 2026-02-19 07:27]  system-integrity-gatekeeper.sh
-│   ├── [2.6K 2026-02-19 08:11]  template-audit.mjs
-│   └── [3.7K 2026-02-18 21:37]  test-schema.ts
-├── [2.3K 2026-02-18 23:43]  service-account.json
-├── [ 748 2026-02-18 21:37]  tsconfig.json
-├── [138K 2026-02-19 19:31]  tsconfig.tsbuildinfo
-└── [3.4K 2026-02-18 21:37]  types
-    ├── [9.9K 2026-02-19 19:31]  index.d.ts
-    └── [4.0K 2026-02-18 21:37]  template-props.ts
 
-64 directories, 189 files
+```text
+[3.4K 2026-02-24 01:27]  .
+├── [653K 2026-02-24 01:54]  README.md
+├── [1.5K 2026-02-19 19:50]  a.sh
+├── [3.4K 2026-02-23 22:45]  app
+│   ├── [3.4K 2026-02-19 19:50]  (business)
+│   │   ├── [3.4K 2026-02-19 19:50]  areas
+│   │   │   ├── [3.4K 2026-02-19 19:50]  [slug]
+│   │   │   │   └── [4.7K 2026-02-23 21:42]  page.tsx
+│   │   │   └── [7.7K 2026-02-24 00:30]  page.tsx
+│   │   ├── [3.4K 2026-02-23 22:46]  blog
+│   │   │   ├── [3.4K 2026-02-23 22:46]  [slug]
+│   │   │   │   └── [4.7K 2026-02-23 23:07]  page.tsx
+│   │   │   └── [6.2K 2026-02-23 23:07]  page.tsx
+│   │   ├── [3.4K 2026-02-23 22:46]  case-studies
+│   │   │   ├── [3.4K 2026-02-23 22:46]  [slug]
+│   │   │   │   └── [5.1K 2026-02-23 23:07]  page.tsx
+│   │   │   └── [6.7K 2026-02-23 23:07]  page.tsx
+│   │   └── [2.3K 2026-02-19 19:50]  layout.tsx
+│   ├── [3.4K 2026-02-19 19:50]  (conversion)
+│   │   ├── [1.1K 2026-02-19 19:50]  layout.tsx
+│   │   └── [3.4K 2026-02-23 22:46]  services
+│   │       ├── [3.4K 2026-02-19 19:50]  [slug]
+│   │       │   └── [4.8K 2026-02-23 21:42]  page.tsx
+│   │       └── [6.8K 2026-02-23 23:07]  page.tsx
+│   ├── [3.4K 2026-02-19 19:50]  (main)
+│   │   ├── [3.4K 2026-02-23 22:46]  about
+│   │   │   └── [8.4K 2026-02-23 23:07]  page.tsx
+│   │   ├── [2.0K 2026-02-23 23:07]  layout.tsx
+│   │   ├── [9.4K 2026-02-23 23:07]  page.tsx
+│   │   ├── [3.4K 2026-02-23 22:46]  privacy
+│   │   │   └── [ 12K 2026-02-23 23:07]  page.tsx
+│   │   ├── [3.4K 2026-02-23 22:46]  status
+│   │   │   └── [ 12K 2026-02-23 23:07]  page.tsx
+│   │   └── [3.4K 2026-02-23 22:45]  terms
+│   │       └── [ 12K 2026-02-23 22:45]  page.tsx
+│   ├── [3.3K 2026-02-24 00:58]  globals.css
+│   ├── [5.4K 2026-02-23 23:07]  layout.tsx
+│   ├── [4.2K 2026-02-23 23:07]  loading.tsx
+│   ├── [3.5K 2026-02-19 19:50]  manifest.ts
+│   ├── [6.2K 2026-02-23 23:07]  not-found.tsx
+│   ├── [ 775 2026-02-19 19:50]  robots.ts
+│   ├── [3.8K 2026-02-19 19:50]  sitemap.ts
+│   └── [2.8K 2026-02-19 19:50]  template.tsx
+├── [3.4K 2026-02-19 19:50]  components
+│   ├── [3.4K 2026-02-19 19:50]  features
+│   │   ├── [3.4K 2026-02-19 19:50]  areas
+│   │   │   └── [8.7K 2026-02-24 01:27]  AreaCard.tsx
+│   │   ├── [3.4K 2026-02-19 19:50]  blog
+│   │   │   └── [5.7K 2026-02-24 01:27]  BlogCard.tsx
+│   │   ├── [3.4K 2026-02-19 19:50]  case-studies
+│   │   │   └── [6.4K 2026-02-24 01:28]  CaseStudyCard.tsx
+│   │   ├── [3.4K 2026-02-23 22:46]  landing
+│   │   │   ├── [9.3K 2026-02-23 23:07]  PricingSection.tsx
+│   │   │   └── [9.9K 2026-02-23 22:45]  WorkProcess.tsx
+│   │   └── [3.4K 2026-02-23 22:46]  services
+│   │       ├── [7.1K 2026-02-24 01:28]  ServiceCard.tsx
+│   │       └── [4.4K 2026-02-23 23:07]  ServiceListingHub.tsx
+│   ├── [3.4K 2026-02-19 19:50]  layout
+│   │   ├── [6.4K 2026-02-24 01:01]  Footer.tsx
+│   │   ├── [9.1K 2026-02-24 01:01]  Navbar.tsx
+│   │   ├── [2.4K 2026-02-19 19:50]  PageTransition.tsx
+│   │   └── [1.9K 2026-02-19 19:50]  TopLoader.tsx
+│   ├── [3.4K 2026-02-19 19:50]  providers
+│   │   ├── [1.6K 2026-02-19 19:50]  ClientInfrastructure.tsx
+│   │   └── [1.1K 2026-02-19 19:50]  ThemeProvider.tsx
+│   ├── [3.4K 2026-02-19 19:50]  seo
+│   │   └── [1.8K 2026-02-19 19:50]  JsonLd.tsx
+│   ├── [3.4K 2026-02-23 22:45]  shared
+│   │   ├── [3.9K 2026-02-24 00:58]  ConversionCTA.tsx
+│   │   ├── [2.7K 2026-02-19 19:50]  FloatingContainer.tsx
+│   │   ├── [6.2K 2026-02-23 23:07]  ImpactStats.tsx
+│   │   ├── [5.3K 2026-02-24 00:56]  LineStickyButton.tsx
+│   │   └── [5.7K 2026-02-19 19:50]  TrustBadge.tsx
+│   ├── [3.4K 2026-02-23 22:46]  templates
+│   │   ├── [3.3K 2026-02-24 01:26]  TemplateRenderer.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  bio
+│   │   │   └── [7.0K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  catalog
+│   │   │   └── [9.1K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  corporate
+│   │   │   └── [7.9K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  hotelresort
+│   │   │   └── [8.2K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  local-authority
+│   │   │   └── [7.3K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:38]  salepage
+│   │   │   └── [ 13K 2026-02-24 01:38]  Index.tsx
+│   │   ├── [3.4K 2026-02-24 01:37]  sections
+│   │   │   ├── [1.8K 2026-02-23 22:20]  ActionRegistry.tsx
+│   │   │   ├── [3.1K 2026-02-24 00:13]  AtmosphereHeader.tsx
+│   │   │   ├── [6.9K 2026-02-24 00:13]  AuditHero.tsx
+│   │   │   ├── [ 11K 2026-02-23 23:07]  AuditReportGenerator.tsx
+│   │   │   ├── [1.3K 2026-02-19 19:50]  CapabilityGraph.tsx
+│   │   │   ├── [2.0K 2026-02-23 22:00]  CapabilityMatrix.tsx
+│   │   │   ├── [2.8K 2026-02-24 00:13]  CatalogHeader.tsx
+│   │   │   ├── [1.7K 2026-02-23 22:01]  ConsultGateway.tsx
+│   │   │   ├── [9.1K 2026-02-23 23:07]  ConversionPortal.tsx
+│   │   │   ├── [ 711 2026-02-23 22:21]  CredentialStack.tsx
+│   │   │   ├── [ 10K 2026-02-23 23:07]  DirectOrderForm.tsx
+│   │   │   ├── [3.6K 2026-02-24 00:13]  DirectTerminal.tsx
+│   │   │   ├── [3.2K 2026-02-19 19:50]  DistrictHero.tsx
+│   │   │   ├── [1.5K 2026-02-23 22:15]  DistrictRegistry.tsx
+│   │   │   ├── [6.5K 2026-02-23 22:46]  DynamicFAQ.tsx
+│   │   │   ├── [4.0K 2026-02-24 01:44]  ExperienceNodes.tsx
+│   │   │   ├── [2.6K 2026-02-23 22:16]  FacilityMatrix.tsx
+│   │   │   ├── [4.5K 2026-02-23 23:07]  FeatureComparison.tsx
+│   │   │   ├── [6.0K 2026-02-24 00:58]  FeatureGrid.tsx
+│   │   │   ├── [5.5K 2026-02-23 23:07]  FlashSaleTimer.tsx
+│   │   │   ├── [2.3K 2026-02-24 00:13]  GeoNodeHeader.tsx
+│   │   │   ├── [7.4K 2026-02-24 00:58]  HeroEngine.tsx
+│   │   │   ├── [2.9K 2026-02-24 01:30]  IdentityNode.tsx
+│   │   │   ├── [2.2K 2026-02-23 22:12]  InquiryPortal.tsx
+│   │   │   ├── [6.9K 2026-02-23 23:07]  KeywordRegistry.tsx
+│   │   │   ├── [3.7K 2026-02-19 19:50]  LayoutEngine.tsx
+│   │   │   ├── [4.7K 2026-02-24 00:40]  LocalInsight.tsx
+│   │   │   ├── [5.2K 2026-02-19 19:50]  LocalMapNode.tsx
+│   │   │   ├── [1.7K 2026-02-24 00:40]  LocalSuccessNode.tsx
+│   │   │   ├── [3.5K 2026-02-23 22:15]  MarketIntelligence.tsx
+│   │   │   ├── [7.5K 2026-02-23 23:07]  PerformanceTrajectory.tsx
+│   │   │   ├── [ 546 2026-02-24 01:43]  ProductGrid.tsx
+│   │   │   ├── [2.1K 2026-02-19 19:50]  ProductNode.tsx
+│   │   │   ├── [4.6K 2026-02-23 22:52]  ProjectHighlight.tsx
+│   │   │   ├── [2.2K 2026-02-23 22:15]  RegionalAction.tsx
+│   │   │   ├── [1.8K 2026-02-24 00:37]  RegionalGallery.tsx
+│   │   │   ├── [3.4K 2026-02-24 00:40]  RegionalRoadmap.tsx
+│   │   │   ├── [1.9K 2026-02-23 22:17]  ReservationPortal.tsx
+│   │   │   ├── [3.9K 2026-02-19 19:50]  SaleFooter.tsx
+│   │   │   ├── [6.8K 2026-02-23 23:07]  SaleHero.tsx
+│   │   │   ├── [2.9K 2026-02-19 19:50]  SaleNavbar.tsx
+│   │   │   ├── [1.2K 2026-02-19 19:50]  SearchOrchestrator.tsx
+│   │   │   ├── [3.6K 2026-02-23 23:07]  StickyBuyButton.tsx
+│   │   │   ├── [3.5K 2026-02-23 22:18]  StrategyBlueprint.tsx
+│   │   │   ├── [5.5K 2026-02-19 19:50]  SuccessTimeline.tsx
+│   │   │   ├── [4.9K 2026-02-23 22:16]  SuiteRegistry.tsx
+│   │   │   ├── [6.5K 2026-02-19 19:50]  TechnicalSpecSheet.tsx
+│   │   │   ├── [7.7K 2026-02-23 23:07]  ThaiTrustBadge.tsx
+│   │   │   ├── [ 862 2026-02-23 22:00]  TrustNetwork.tsx
+│   │   │   ├── [ 999 2026-02-23 22:00]  ValueBlueprint.tsx
+│   │   │   ├── [2.4K 2026-02-24 01:45]  VisionPortal.tsx
+│   │   │   └── [5.4K 2026-02-19 19:50]  WeatherTracker.tsx
+│   │   └── [3.4K 2026-02-24 01:38]  seo-agency
+│   │       └── [6.9K 2026-02-24 01:38]  Index.tsx
+│   └── [3.4K 2026-02-23 22:46]  ui
+│       ├── [2.1K 2026-02-19 19:50]  Accordion.tsx
+│       ├── [4.0K 2026-02-19 19:50]  AmbientBackground.tsx
+│       ├── [3.9K 2026-02-23 23:07]  Button.tsx
+│       ├── [1.5K 2026-02-23 23:07]  Callout.tsx
+│       ├── [4.9K 2026-02-19 19:50]  IconRenderer.tsx
+│       ├── [ 931 2026-02-19 19:50]  Skeleton.tsx
+│       ├── [2.8K 2026-02-23 23:07]  SkeletonCard.tsx
+│       ├── [2.1K 2026-02-19 19:50]  SkeletonGrid.tsx
+│       ├── [2.9K 2026-02-19 19:50]  Sonner.tsx
+│       └── [3.8K 2026-02-23 23:07]  ThemeToggle.tsx
+├── [ 425 2026-02-19 19:50]  components.json
+├── [3.4K 2026-02-19 19:50]  config
+│   ├── [3.0K 2026-02-24 01:41]  00-SYSTEM-MANDATE.md
+│   └── [2.9K 2026-02-24 00:13]  01-SYSTEM-PROMPT-EXTENSION.md
+├── [3.4K 2026-02-23 23:04]  constants
+│   ├── [3.4K 2026-02-24 01:51]  about.ts
+│   ├── [3.4K 2026-02-24 00:30]  area-nodes
+│   │   ├── [5.0K 2026-02-24 01:18]  amnat-charoen.ts
+│   │   ├── [4.9K 2026-02-24 01:17]  ang-thong.ts
+│   │   ├── [5.1K 2026-02-24 01:06]  ayutthaya.ts
+│   │   ├── [ 11K 2026-02-24 00:30]  bangkok.ts
+│   │   ├── [5.1K 2026-02-24 01:16]  bueng-kan.ts
+│   │   ├── [5.3K 2026-02-24 01:08]  buriram.ts
+│   │   ├── [4.9K 2026-02-24 01:07]  chachoengsao.ts
+│   │   ├── [4.7K 2026-02-24 01:18]  chai-nat.ts
+│   │   ├── [5.1K 2026-02-24 01:17]  chaiyaphum.ts
+│   │   ├── [4.9K 2026-02-24 01:09]  chanthaburi.ts
+│   │   ├── [ 11K 2026-02-24 00:30]  chiang-mai.ts
+│   │   ├── [ 12K 2026-02-24 00:30]  chiang-rai.ts
+│   │   ├── [ 12K 2026-02-24 00:30]  chon-buri.ts
+│   │   ├── [ 12K 2026-02-24 00:30]  chumphon.ts
+│   │   ├── [5.5K 2026-02-24 00:25]  index.ts
+│   │   ├── [5.1K 2026-02-24 01:17]  kalasin.ts
+│   │   ├── [ 11K 2026-02-24 00:30]  kamphaeng-phet.ts
+│   │   ├── [5.2K 2026-02-24 01:08]  kanchanaburi.ts
+│   │   ├── [9.8K 2026-02-24 00:30]  khon-kaen.ts
+│   │   ├── [ 11K 2026-02-24 00:30]  korat.ts
+│   │   ├── [5.2K 2026-02-24 01:05]  krabi.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  lampang.ts
+│   │   ├── [4.9K 2026-02-24 01:13]  lamphun.ts
+│   │   ├── [5.0K 2026-02-24 01:13]  loei.ts
+│   │   ├── [4.8K 2026-02-24 01:11]  lopburi.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  mae-hong-son.ts
+│   │   ├── [5.0K 2026-02-24 01:14]  maha-sarakham.ts
+│   │   ├── [5.1K 2026-02-24 01:16]  mukdahan.ts
+│   │   ├── [4.9K 2026-02-24 01:09]  nakhon-nayok.ts
+│   │   ├── [4.9K 2026-02-24 01:06]  nakhon-pathom.ts
+│   │   ├── [4.9K 2026-02-24 01:12]  nakhon-phanom.ts
+│   │   ├── [ 14K 2026-02-24 00:30]  nakhon-sawan.ts
+│   │   ├── [5.2K 2026-02-24 01:06]  nakhon-si-thammarat.ts
+│   │   ├── [4.8K 2026-02-24 01:14]  nan.ts
+│   │   ├── [5.1K 2026-02-24 01:13]  narathiwat.ts
+│   │   ├── [5.1K 2026-02-24 01:18]  nong-bua-lamphu.ts
+│   │   ├── [5.0K 2026-02-24 01:11]  nong-khai.ts
+│   │   ├── [5.0K 2026-02-24 01:04]  nonthaburi.ts
+│   │   ├── [5.0K 2026-02-24 01:05]  pathum-thani.ts
+│   │   ├── [4.8K 2026-02-24 01:12]  pattani.ts
+│   │   ├── [ 12K 2026-02-24 00:30]  phang-nga.ts
+│   │   ├── [4.9K 2026-02-24 01:13]  phatthalung.ts
+│   │   ├── [4.7K 2026-02-24 01:16]  phayao.ts
+│   │   ├── [6.2K 2026-02-24 01:10]  phetchabun.ts
+│   │   ├── [4.8K 2026-02-24 01:09]  phetchaburi.ts
+│   │   ├── [ 14K 2026-02-24 00:30]  phichit.ts
+│   │   ├── [ 14K 2026-02-24 00:30]  phitsanulok.ts
+│   │   ├── [4.7K 2026-02-24 01:14]  phrae.ts
+│   │   ├── [ 13K 2026-02-24 01:19]  phuket.ts
+│   │   ├── [4.9K 2026-02-24 01:10]  prachin-buri.ts
+│   │   ├── [5.0K 2026-02-24 01:19]  prachuap-khiri-khan.ts
+│   │   ├── [ 12K 2026-02-24 00:30]  ranong.ts
+│   │   ├── [5.0K 2026-02-24 01:10]  ratchaburi.ts
+│   │   ├── [4.7K 2026-02-24 01:04]  rayong.ts
+│   │   ├── [5.0K 2026-02-24 01:13]  roi-et.ts
+│   │   ├── [4.9K 2026-02-24 01:12]  sa-kaeo.ts
+│   │   ├── [4.9K 2026-02-24 01:14]  sakon-nakhon.ts
+│   │   ├── [5.0K 2026-02-24 01:03]  samut-prakan.ts
+│   │   ├── [4.9K 2026-02-24 01:05]  samut-sakhon.ts
+│   │   ├── [5.1K 2026-02-24 01:12]  samut-songkhram.ts
+│   │   ├── [5.0K 2026-02-24 01:07]  saraburi.ts
+│   │   ├── [4.8K 2026-02-24 01:08]  satun.ts
+│   │   ├── [4.9K 2026-02-24 01:14]  si-sa-ket.ts
+│   │   ├── [4.9K 2026-02-24 01:17]  sing-buri.ts
+│   │   ├── [5.1K 2026-02-24 01:05]  songkhla.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  sukhothai.ts
+│   │   ├── [4.8K 2026-02-24 01:10]  suphan-buri.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  surat-thani.ts
+│   │   ├── [5.1K 2026-02-24 01:14]  surin.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  tak.ts
+│   │   ├── [4.7K 2026-02-24 01:09]  trang.ts
+│   │   ├── [4.8K 2026-02-24 01:09]  trat.ts
+│   │   ├── [5.1K 2026-02-24 01:06]  ubon-ratchathani.ts
+│   │   ├── [5.1K 2026-02-24 01:06]  udon-thani.ts
+│   │   ├── [5.2K 2026-02-24 01:16]  uthai-thani.ts
+│   │   ├── [ 13K 2026-02-24 00:30]  uttaradit.ts
+│   │   ├── [4.8K 2026-02-24 01:10]  yala.ts
+│   │   └── [5.1K 2026-02-24 01:17]  yasothon.ts
+│   ├── [ 25K 2026-02-24 00:25]  image-blur-data.ts
+│   ├── [2.8K 2026-02-24 01:51]  master-registry.ts
+│   ├── [2.2K 2026-02-19 19:50]  navigation.ts
+│   ├── [3.4K 2026-02-19 19:50]  services
+│   │   ├── [6.4K 2026-02-19 19:50]  bio.ts
+│   │   ├── [8.1K 2026-02-19 19:50]  catalog.ts
+│   │   ├── [6.5K 2026-02-19 19:50]  corporate.ts
+│   │   ├── [7.2K 2026-02-19 19:50]  hotel-resort.ts
+│   │   ├── [7.6K 2026-02-19 19:50]  local-authority.ts
+│   │   ├── [6.9K 2026-02-19 19:50]  salepage.ts
+│   │   └── [9.1K 2026-02-19 19:50]  seo-agency.ts
+│   └── [5.9K 2026-02-23 23:07]  site-config.ts
+├── [3.4K 2026-02-19 19:50]  content
+│   ├── [3.4K 2026-02-19 19:50]  blog
+│   │   ├── [ 13K 2026-02-19 19:50]  5-points-killing-sales.mdx
+│   │   ├── [ 12K 2026-02-19 19:50]  advanced-schema-markup.mdx
+│   │   ├── [ 11K 2026-02-19 19:50]  case-study-unlink-th.mdx
+│   │   ├── [ 11K 2026-02-19 19:50]  copywriting-secrets.mdx
+│   │   ├── [ 12K 2026-02-19 19:50]  core-web-vitals-speed.mdx
+│   │   ├── [ 11K 2026-02-19 19:50]  ecommerce-conversion-seo.mdx
+│   │   ├── [ 11K 2026-02-19 19:50]  facebook-ads-vs-website.mdx
+│   │   ├── [ 12K 2026-02-19 19:50]  lower-north-digital-transformation.mdx
+│   │   ├── [ 10K 2026-02-19 19:50]  seo-2026-strategy.mdx
+│   │   └── [ 11K 2026-02-19 19:50]  technical-audit-protocol.mdx
+│   └── [3.4K 2026-02-19 19:50]  case-studies
+│       ├── [ 12K 2026-02-19 19:50]  case-study-industrial-catalog.mdx
+│       ├── [ 11K 2026-02-19 19:50]  provincial-digital-domination.mdx
+│       └── [ 11K 2026-02-19 19:50]  unlink-reputation-management-success.mdx
+├── [2.4K 2026-02-19 19:50]  eslint.config.mjs
+├── [ 393 2026-02-19 19:50]  knip.json
+├── [3.4K 2026-02-19 19:50]  lib
+│   ├── [4.9K 2026-02-19 19:50]  cms.ts
+│   ├── [4.4K 2026-02-24 00:13]  data-merger.ts
+│   ├── [3.6K 2026-02-19 19:50]  schema-validator.ts
+│   ├── [6.2K 2026-02-24 00:13]  schema.ts
+│   ├── [2.9K 2026-02-19 19:50]  seo-utils.ts
+│   └── [4.6K 2026-02-19 19:50]  utils.ts
+├── [2.6K 2026-02-23 23:07]  mdx-components.tsx
+├── [ 247 2026-02-19 19:50]  next-env.d.ts
+├── [5.2K 2026-02-19 19:50]  next.config.ts
+├── [3.1K 2026-02-23 22:30]  package.json
+├── [301K 2026-02-23 23:07]  pnpm-lock.yaml
+├── [  51 2026-02-19 19:50]  pnpm-workspace.yaml
+├── [1.1K 2026-02-19 19:50]  postcss.config.mjs
+├── [3.4K 2026-02-19 19:50]  public
+│   └── [3.4K 2026-02-19 19:50]  images
+│       ├── [8.0K 2026-02-24 00:24]  areas
+│       ├── [3.4K 2026-02-19 19:50]  blog
+│       ├── [3.4K 2026-02-19 19:50]  case-studies
+│       ├── [3.4K 2026-02-19 19:50]  experts
+│       ├── [3.4K 2026-02-19 19:50]  seo
+│       ├── [3.4K 2026-02-19 19:50]  services
+│       └── [3.4K 2026-02-19 19:50]  shared
+├── [3.4K 2026-02-24 00:41]  scripts
+│   ├── [5.2K 2026-02-19 19:50]  asset-integrity-protocol.mjs
+│   ├── [4.2K 2026-02-19 19:50]  gen-blur-data.mjs
+│   ├── [4.5K 2026-02-19 19:50]  generate_docs.sh
+│   ├── [3.0K 2026-02-19 19:50]  index-urls.js
+│   ├── [7.3K 2026-02-19 19:50]  integrity-enforcer.py
+│   ├── [5.7K 2026-02-19 19:50]  seo-monitor.py
+│   ├── [3.4K 2026-02-24 01:40]  seo-structure-audit.mjs
+│   ├── [3.3K 2026-02-19 19:50]  system-integrity-gatekeeper.sh
+│   ├── [2.2K 2026-02-24 01:40]  template-audit.mjs
+│   └── [5.2K 2026-02-24 00:14]  test-schema.ts
+├── [ 235 2026-02-23 21:29]  skills-lock.json
+├── [ 20K 2026-02-24 01:53]  structure.txt
+├── [ 748 2026-02-19 19:50]  tsconfig.json
+├── [150K 2026-02-24 01:51]  tsconfig.tsbuildinfo
+└── [3.4K 2026-02-19 19:50]  types
+    ├── [ 12K 2026-02-24 01:21]  index.d.ts
+    └── [4.2K 2026-02-23 23:27]  template-props.ts
+
+57 directories, 252 files
 ```
 
 ---
 
 ## BUILD ARTIFACT ANALYSIS (.next/static)
+
 ```text
 Total Size:
-2.2M	.next/static
+2.6M	.next/static
 
 Top 10 Largest Assets:
+504K	.next/static/chunks/3199-64ca424ff2cc80d4.js
 196K	.next/static/chunks/fb371ac7-52aeb6ea90939da9.js
 188K	.next/static/chunks/6594-1a8f9d17d7f0d390.js
 180K	.next/static/chunks/framework-bc511be5d789680f.js
-152K	.next/static/css/6c49edc2d6dc58d9.css
-136K	.next/static/chunks/5378-617ccfc1607d00ae.js
+164K	.next/static/chunks/9556-ea8c304c045f6a77.js
+152K	.next/static/css/e345a879253cb10b.css
 132K	.next/static/chunks/main-41868e4c6eab357c.js
 124K	.next/static/chunks/7112-28d45d301d8de93d.js
 112K	.next/static/chunks/polyfills-42372ed130431b0a.js
 84K	.next/static/media/8e9860b6e62d6359-s.woff2
-68K	.next/static/chunks/7799-de5bfdfea7a4cba0.js
 ```

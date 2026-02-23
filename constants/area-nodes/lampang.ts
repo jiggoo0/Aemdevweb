@@ -12,6 +12,7 @@ export const lampangNode: AreaNode = {
   // --- Basic Identity ---
   slug: "lampang",
   province: "ลำปาง",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ ลำปาง | ออกแบบเว็บเซรามิกและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
@@ -36,6 +37,30 @@ export const lampangNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 42,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Craft Identity Audit",
+      description:
+        "วิเคราะห์อัตลักษณ์งานเซรามิกหรือธุรกิจท้องถิ่นเพื่อดึงเรื่องราว (Storytelling) ออกมานำเสนอให้มีระดับ",
+    },
+    {
+      step: "02",
+      title: "Digital Showroom Deployment",
+      description:
+        "ติดตั้งระบบแกลเลอรี่และแคตตาล็อกสินค้าที่โชว์ความประณีตของเนื้องานเพื่อรองรับทั้งการค้าปลีกและส่งออก",
+    },
+    {
+      step: "03",
+      title: "Regional Traffic Sync",
+      description:
+        "วางโครงสร้าง SEO ให้สอดรับกับการค้นหาในเขตภาคเหนือตอนบนเพื่อดึงดูดกลุ่มนักท่องเที่ยวคุณภาพสูง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/lampang-node.webp",

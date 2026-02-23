@@ -7,11 +7,13 @@
 import type { MetadataRoute } from "next";
 
 // --- 1. Infrastructure Data (SSOT) ---
+import { MASTER_REGISTRY } from "@/constants/master-registry";
+import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { absoluteUrl } from "@/lib/utils";
 
 // --- 2. Content CMS Data (Markdown/MDX) ---
-import { getAllPosts, getAllCaseStudies, getAllServices, getAllAreas } from "@/lib/cms";
+import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
 
 /**
  * @function sitemap
@@ -22,11 +24,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_CONFIG.siteUrl;
 
   /* [A] DATA_RESOLUTION: ดึงข้อมูลจาก CMS แบบขนานเพื่อ Performance สูงสุด */
-  const [posts, caseStudies, services, areas] = await Promise.all([
+  const [posts, caseStudies] = await Promise.all([
     getAllPosts().catch(() => []),
     getAllCaseStudies().catch(() => []),
-    getAllServices().catch(() => []),
-    getAllAreas().catch(() => []),
   ]);
 
   /**
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    * GROUP 2: SERVICE NODES (Solution Blueprints)
    * -------------------------------------------------------
    */
-  const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
+  const serviceRoutes: MetadataRoute.Sitemap = MASTER_REGISTRY.map((service) => ({
     url: absoluteUrl(`/services/${service.templateSlug}`),
     lastModified,
     changeFrequency: "weekly",
@@ -61,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
    * GROUP 3: AREA NODES (Local SEO Domination)
    * -------------------------------------------------------
    */
-  const areaRoutes: MetadataRoute.Sitemap = areas.map((area) => ({
+  const areaRoutes: MetadataRoute.Sitemap = AREA_NODES.map((area) => ({
     url: absoluteUrl(`/areas/${area.slug}`),
     lastModified,
     changeFrequency: "weekly",

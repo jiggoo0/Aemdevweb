@@ -62,7 +62,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // --- [03. VISUALS: STRICT PROPS] ---
     img: ({ src, alt, className, ...props }: ComponentPropsWithoutRef<"img">) => (
-      <span className="border-border bg-surface-card shadow-pro-sm my-10 block overflow-hidden rounded-[2.5rem] border">
+      <span className="border-border bg-surface-card shadow-pro-sm rounded-section my-10 block overflow-hidden border">
         <Image
           src={src || "/images/og-main.webp"}
           alt={alt || "AEMDEVWEB Content"}

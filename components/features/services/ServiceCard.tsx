@@ -8,8 +8,6 @@
  * - Enhanced Hardware Acceleration for fluid hover transitions.
  */
 
-"use client";
-
 import React, { memo, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -52,7 +50,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
     <Link
       href={`/services/${data.templateSlug}`}
       className={cn(
-        "group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "group rounded-section relative flex h-full w-full flex-col justify-between overflow-hidden border transition-[transform,box-shadow,border-color,background-color] duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
         "transform-gpu will-change-transform",
@@ -116,7 +114,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
               <div className="border-border bg-surface-offset text-brand-primary group-hover:border-brand-primary/20 flex h-6 w-6 shrink-0 items-center justify-center rounded-xl border transition-all duration-500">
                 <IconRenderer name="Check" size={12} strokeWidth={4} />
               </div>
-              <span className="text-text-secondary group-hover:text-text-primary text-xs font-bold transition-colors md:text-sm">
+              <span className="text-text-secondary group-hover:text-text-primary text-xs leading-relaxed font-bold transition-colors md:text-sm">
                 {feature}
               </span>
             </li>

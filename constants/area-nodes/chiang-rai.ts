@@ -12,6 +12,7 @@ export const chiangRaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-rai",
   province: "เชียงราย",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ เชียงราย | จ้างทำเว็บกาแฟ Specialty และรีสอร์ตศิลปะ ติดหน้าแรก Google",
@@ -35,6 +36,29 @@ export const chiangRaiNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 55,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Artisan Brand Audit",
+      description:
+        "วิเคราะห์จุดเด่นของแบรนด์กาแฟหรืองานคราฟต์เพื่อวางโครงสร้างการเล่าเรื่อง (Storytelling) ที่น่าดึงดูด",
+    },
+    {
+      step: "02",
+      title: "Global E-commerce Sync",
+      description:
+        "ติดตั้งระบบตะกร้าสินค้าและระบบจองที่พักที่รองรับการชำระเงินจากทั่วโลกและแจ้งเตือนผ่าน LINE",
+    },
+    {
+      step: "03",
+      title: "Border SEO Strategy",
+      description:
+        "เน้นคีย์เวิร์ดภาษาจีนและอังกฤษเพื่อดักจับ Traffic จากกลุ่มนักท่องเที่ยวและคู่ค้าในเขตเศรษฐกิจชายแดน",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chiang-rai-node.webp",

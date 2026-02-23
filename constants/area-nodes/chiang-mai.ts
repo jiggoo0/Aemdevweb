@@ -12,6 +12,7 @@ export const chiangMaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-mai",
   province: "เชียงใหม่",
+  region: "North",
   templateSlug: "hotelresort", // เชื่อมโยง Logic การ Render กับ Template โรงแรม
 
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บโรงแรมและรีสอร์ต เพิ่มยอดจองตรง ไม่ผ่าน OTA",
@@ -23,6 +24,19 @@ export const chiangMaiNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์เชียงใหม่ เน้นธุรกิจท่องเที่ยว โรงแรม และ Wellness เว็บสวยโหลดไว รองรับหลายภาษา ช่วยดึงลูกค้าต่างชาติและเพิ่มยอดจองตรง (Direct Booking)",
 
+  longDescription:
+    "เชียงใหม่ 'กุหลาบเหนือ' คือจุดหมายปลายทางระดับโลกที่ธุรกิจต้องมีตัวตนดิจิทัลที่แข็งแกร่ง " +
+    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์โรงแรมและรีสอร์ตของคุณให้เป็น 'Lanna Digital Hub' " +
+    "ที่ผสานความอ่อนช้อยของศิลปะล้านนากับเทคโนโลยี Next.js ที่โหลดไวที่สุด เพื่อดึงดูดนักท่องเที่ยวคุณภาพ " +
+    "และเพิ่มสัดส่วนการจองตรง (Direct Booking) ให้คุณมีอิสระจากการพึ่งพา OTA อย่างยั่งยืน",
+
+  // --- Localized Benefits ---
+  benefits: [
+    "Lanna Digital Authority: สร้างตัวตนออนไลน์ที่ผสานศิลปะล้านนาเข้ากับความทันสมัย เพื่อสร้างความประทับใจระดับสากล",
+    "Maximized Direct Profit: ระบบจองตรงที่ทรงพลัง ช่วยลดการพึ่งพา OTA และเพิ่มกำไรสุทธิให้ธุรกิจโรงแรมและที่พัก",
+    "Global Search Visibility: วางโครงสร้าง SEO หลายภาษาเพื่อดักจับนักท่องเที่ยวจากยุโรป อเมริกา และกลุ่มนักท่องเที่ยวจีน",
+  ],
+
   // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
   // รับค่าโดยตรงจาก hotelResortService เพื่อความเป็นมาตรฐานเดียวกันทั้งระบบ
   // (Chiang Mai Gold & Lanna Dark Theme)
@@ -32,19 +46,36 @@ export const chiangMaiNode: AreaNode = {
   currency: hotelResortService.currency,
   unit: hotelResortService.unit,
 
+  isTourismHeavy: true,
+  marketSaturation: 70,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Lanna Branding Sync",
+      description:
+        "ผสมผสานอัตลักษณ์ล้านนาร่วมสมัยเข้ากับงานดีไซน์สมัยใหม่เพื่อให้เว็บไซต์โดดเด่นในสายตานักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Direct Booking Integration",
+      description:
+        "ติดตั้งระบบจองที่พักตรงที่ไม่ผ่านเอเย่นต์ (OTA) เพื่อรักษาผลกำไรของธุรกิจไว้ได้เต็มเม็ดเต็มหน่วย",
+    },
+    {
+      step: "03",
+      title: "Tourism SEO Layering",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพจากกลุ่มนักท่องเที่ยวต่างชาติ",
+    },
+  ],
+
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chiang-mai-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
     "Trusted Hospitality: เบื้องหลังความสำเร็จของ 20+ บูทีครีสอร์ตและสปาชั้นนำในเชียงใหม่",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Lanna Identity: ถ่ายทอดเสน่ห์ล้านนาร่วมสมัย (Contemporary Lanna) ผ่านหน้าเว็บไซต์ สร้าง First Impression ที่น่าจดจำ",
-    "Powerful Direct Booking: ลดค่าคอมมิชชั่น Agoda/Booking ด้วยปุ่มจองที่ใช้ง่ายและเชื่อมต่อ Payment Gateway",
-    "Global Welcoming: รองรับ Multi-language (อังกฤษ/จีน) เพื่อต้อนรับแขกจากทุกมุมโลกที่ค้นหาที่พักในเชียงใหม่",
-  ],
 
   // --- Core Features (Tourism Specific) ---
   coreFeatures: [

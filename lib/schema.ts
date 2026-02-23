@@ -76,11 +76,9 @@ const personNode: Person = {
   url: absoluteUrl("/about"), // หรือตาม bioUrl
   worksFor: { "@id": absoluteUrl("/#organization") },
   description: SITE_CONFIG.expert.bio,
-  sameAs: [
-    SITE_CONFIG.links.linkedin,
-    SITE_CONFIG.links.twitter,
-    SITE_CONFIG.links.github,
-  ].filter(Boolean) as string[],
+  sameAs: [SITE_CONFIG.links.linkedin, SITE_CONFIG.links.twitter, SITE_CONFIG.links.github].filter(
+    Boolean,
+  ) as string[],
 };
 
 // =========================================
@@ -125,6 +123,14 @@ export function generateUniversalSchema(
   const slug = data.templateSlug || idValue;
   const canonicalUrl = absoluteUrl(`/services/${slug}`);
 
+  // [DATA_SYNC]: Extract regional contexts if available
+  const price =
+    "regionalPricing" in data && data.regionalPricing
+      ? data.regionalPricing.startPrice.replace(/[^0-9]/g, "")
+      : data.priceValue?.toString();
+
+  const promotions = "promotions" in data ? data.promotions : undefined;
+
   const base = {
     name: data.title || SITE_CONFIG.brandName,
     description: data.description,
@@ -132,18 +138,25 @@ export function generateUniversalSchema(
     url: canonicalUrl,
   };
 
+  const offerNode: Offer = {
+    "@type": "Offer",
+    price: price,
+    priceCurrency: "THB",
+    availability: "https://schema.org/InStock",
+    seller: { "@id": absoluteUrl("/#organization") },
+    ...(promotions &&
+      promotions.length > 0 && {
+        name: promotions[0].title,
+        description: promotions[0].description,
+      }),
+  } as Offer;
+
   if (isProduct) {
     return {
       "@type": "Product",
       "@id": `${canonicalUrl}/#product`,
       ...base,
-      offers: {
-        "@type": "Offer",
-        price: data.priceValue?.toString(),
-        priceCurrency: "THB",
-        availability: "https://schema.org/InStock",
-        seller: { "@id": absoluteUrl("/#organization") },
-      } as Offer,
+      offers: offerNode,
       brand: { "@id": absoluteUrl("/#organization") },
     } as Product;
   }
@@ -154,8 +167,9 @@ export function generateUniversalSchema(
     ...base,
     address: sharedAddress,
     telephone: SITE_CONFIG.contact.phone,
-    priceRange: SITE_CONFIG.business.priceRange,
+    priceRange: price ? `THB ${price}` : SITE_CONFIG.business.priceRange,
     provider: { "@id": absoluteUrl("/#organization") },
+    offers: offerNode, // Standard services also have offers
   } as ProfessionalService;
 }
 

@@ -54,28 +54,38 @@ export function mergeServiceData(
     image: area.heroImage || master.image,
 
     // --- Commercial Data ---
-    // ใช้ราคาประเมินรายพื้นที่ เพื่อความแม่นยำในการสื่อสาร
-    price: area.localContext?.regionalPricing?.startPrice || master.price,
-    priceValue: master.priceValue,
-    currency: master.currency,
-    unit: master.unit,
+    // [PRICE_SYNC_LOGIC]: ลำดับความสำคัญ Area Node Specific > Regional Context > Master Blueprint
+    price: area.price || area.localContext?.regionalPricing?.startPrice || master.price,
+    priceValue: area.priceValue || master.priceValue,
+    currency: area.currency || master.currency,
+    unit: area.unit || master.unit,
 
     // --- Data Clusters (Blueprints Inheritance) ---
-    benefits: master.benefits || [],
-    coreFeatures: master.coreFeatures || [],
-    faqs: master.faqs || [],
+    benefits: area.benefits || master.benefits || [],
+    coreFeatures: area.coreFeatures || master.coreFeatures || [],
+    faqs: area.faqs || master.faqs || [],
     keywords: mergedKeywords,
     items: master.items || [],
 
     // --- Trust & Social Proof Injection ---
-    clientTrust: area.localContext?.localSuccessStory?.title || master.clientTrust,
-    socialProof: area.localContext?.socialProof || {
-      rating: 5.0,
-      reviewCount: 100,
-      localClient: `ลูกค้าใน${area.province}`,
-    },
+    clientTrust:
+      area.clientTrust || area.localContext?.localSuccessStory?.title || master.clientTrust,
+    socialProof: area.socialProof ||
+      area.localContext?.socialProof || {
+        rating: 5.0,
+        reviewCount: 100,
+        localClient: `ลูกค้าใน${area.province}`,
+      },
     regionalPricing: area.localContext?.regionalPricing,
     localSuccessStory: area.localContext?.localSuccessStory,
+
+    // --- [NEW]: Regional Content Injection ---
+    regionalVisuals: area.regionalVisuals || area.localContext?.regionalVisuals,
+    promotions: area.localContext?.promotions,
+    marketSaturation: area.marketSaturation || area.localContext?.marketSaturation,
+    isTourismHeavy: area.isTourismHeavy || area.localContext?.isTourismHeavy,
+    regionalLatency: area.regionalLatency,
+    regionalRoadmap: area.regionalRoadmap,
 
     // --- UI Actions & Strategic CTA (Inherit from Master) ---
     primaryAction: master.primaryAction || {

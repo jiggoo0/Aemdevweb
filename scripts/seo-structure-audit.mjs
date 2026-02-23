@@ -41,10 +41,7 @@ async function runMasterAudit() {
         console.log("❌ CRITICAL_MISSING");
         globalStats.templates.failed++;
       } else {
-        const compCount = fs.existsSync(path.join(dir, "_components"))
-          ? fs.readdirSync(path.join(dir, "_components")).filter((f) => !f.startsWith(".")).length
-          : 0;
-        console.log(`✅ OK (${compCount.toString().padStart(2)} comps)`);
+        console.log(`✅ OK (RSC_ENFORCED)`);
         globalStats.templates.passed++;
       }
     });

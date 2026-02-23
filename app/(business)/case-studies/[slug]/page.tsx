@@ -18,6 +18,10 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 
+// [DYNAMIC CONFIG]: เปลี่ยนเป็น ISR เพื่อความยืดหยุ่นในการอัปเดตข้อมูล
+export const revalidate = 3600; // Revalidate ทุก 1 ชั่วโมง
+export const dynamicParams = true; // รองรับ Slug ใหม่ที่ยังไม่มีตอน Build
+
 export async function generateStaticParams() {
   const cases = await getAllCaseStudies();
   return cases.map((item) => ({ slug: item.slug }));
@@ -105,7 +109,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </header>
 
         {/* Hero Image with LCP Optimization */}
-        <div className="shadow-glow-sm border-border bg-surface-card relative mx-auto mb-16 aspect-video max-w-6xl overflow-hidden rounded-[2.5rem] border md:rounded-[3rem]">
+        <div className="shadow-glow-sm border-border bg-surface-card rounded-section md:rounded-card-lg relative mx-auto mb-16 aspect-video max-w-6xl overflow-hidden border">
           <Image
             src={data.image || "/images/case-studies/preview.webp"}
             alt={`ผลงานเว็บไซต์ ${data.title} - ${data.client}`}

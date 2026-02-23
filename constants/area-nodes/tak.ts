@@ -13,6 +13,7 @@ export const takNode: AreaNode = {
   // --- Basic Identity ---
   slug: "tak",
   province: "ตาก",
+  region: "North",
   templateSlug: "corporate", // เชื่อมโยงกับแม่แบบธุรกิจระดับ Enterprise
 
   title: "รับทำเว็บไซต์ ตาก แม่สอด | ออกแบบเว็บธุรกิจขนส่งและนำเข้า-ส่งออก ติดหน้าแรก Google",
@@ -37,6 +38,29 @@ export const takNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  marketSaturation: 46,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Logistics Credential Audit",
+      description:
+        "ตรวจสอบและรวบรวมข้อมูลใบอนุญาตขนส่งข้ามพรมแดนเพื่อสร้างความน่าเชื่อถือระดับสากลบนเว็บ",
+    },
+    {
+      step: "02",
+      title: "Multilingual B2B Sync",
+      description:
+        "ติดตั้งระบบรองรับหลายภาษาและแบบฟอร์มขอใบเสนอราคาที่รวดเร็วเพื่อปิดดีลกับคู่ค้าต่างชาติ",
+    },
+    {
+      step: "03",
+      title: "Special Economic Zone SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดด้านโลจิสติกส์และโรงงานเพื่อครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษแม่สอด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/tak-node.webp",

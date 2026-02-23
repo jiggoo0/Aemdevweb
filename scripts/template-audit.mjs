@@ -30,7 +30,6 @@ async function executeAudit() {
       stats.total++;
       const slug = service.templateSlug;
       const dir = path.join(TEMPLATE_BASE, slug);
-      const componentsDir = path.join(dir, "_components");
 
       process.stdout.write(`Node_Check: [${slug.padEnd(15)}] `);
 
@@ -48,12 +47,7 @@ async function executeAudit() {
         return;
       }
 
-      // 3. ตรวจสอบคอมโพเนนต์ย่อย
-      const componentCount = fs.existsSync(componentsDir)
-        ? fs.readdirSync(componentsDir).filter((f) => !f.startsWith(".")).length
-        : 0;
-
-      console.log(`✅ OK (${componentCount.toString().padStart(2)} comps)`);
+      console.log(`✅ OK (RSC_ENFORCED)`);
       stats.passed++;
     });
 

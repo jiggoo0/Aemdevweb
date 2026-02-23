@@ -125,7 +125,7 @@ const WorkProcess = () => {
             <div
               className={cn(
                 "border-border bg-surface-card/60 relative z-10 flex h-full flex-col overflow-hidden border p-8 transition-all duration-700 md:p-10",
-                "rounded-[2.5rem] backdrop-blur-xl",
+                "rounded-section backdrop-blur-xl",
                 "hover:border-brand-primary/40 hover:shadow-glow-lg transform-gpu will-change-transform hover:-translate-y-2",
               )}
             >

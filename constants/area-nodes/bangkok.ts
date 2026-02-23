@@ -12,6 +12,7 @@ export const bangkokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "bangkok",
   province: "กรุงเทพมหานคร",
+  region: "Central",
   templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ กรุงเทพฯ | ออกแบบเว็บองค์กรและบริษัท ติดหน้าแรก Google",
@@ -34,6 +35,31 @@ export const bangkokNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  isTourismHeavy: false,
+  marketSaturation: 92, // [INSIGHT]: ตลาดกรุงเทพฯ มีการแข่งขันสูงสุดในประเทศ
+  regionalLatency: 12,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Enterprise SEO Audit",
+      description:
+        "วิเคราะห์คู่แข่งในระดับมหาชนและวางแผนโครงสร้าง Keyword สำหรับตลาด B2B ที่มีการแข่งขันสูง",
+    },
+    {
+      step: "02",
+      title: "PDPA & Security Hardening",
+      description:
+        "ติดตั้งระบบความปลอดภัยข้อมูลขั้นสูงและ Cookie Consent ตามมาตรฐานสากลเพื่อความน่าเชื่อถือระดับองค์กร",
+    },
+    {
+      step: "03",
+      title: "Core Web Vitals Optimization",
+      description:
+        "ปรับจูนประสิทธิภาพเว็บไซต์ให้ผ่านเกณฑ์ Lighthouse 100/100 เพื่อครองอันดับหนึ่งบน Google Search",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/bangkok-node.webp",

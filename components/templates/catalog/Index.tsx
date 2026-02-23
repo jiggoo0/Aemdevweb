@@ -13,12 +13,17 @@ import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";
 
 // --- 1. Modular Component Registry ---
-import { CatalogHeader } from "./_components/CatalogHeader";
-import { SearchOrchestrator } from "./_components/SearchOrchestrator";
-import { ProductGrid, EmptyState } from "./_components/ProductGrid";
-import { ProductNode } from "./_components/ProductNode";
-import { InquiryPortal } from "./_components/InquiryPortal";
-import { TechnicalSpecSheet } from "./_components/TechnicalSpecSheet";
+import { CatalogHeader } from "../sections/CatalogHeader";
+import { SearchOrchestrator } from "../sections/SearchOrchestrator";
+import { ProductGrid, EmptyState } from "../sections/ProductGrid";
+import { ProductNode } from "../sections/ProductNode";
+import { InquiryPortal } from "../sections/InquiryPortal";
+import { TechnicalSpecSheet } from "../sections/TechnicalSpecSheet";
+import { RegionalRoadmap } from "../sections/RegionalRoadmap";
+import { LocalSuccessNode } from "../sections/LocalSuccessNode";
+import { RegionalGallery } from "../sections/RegionalGallery";
+import { LocalInsight } from "../sections/LocalInsight";
+import { DirectTerminal } from "../sections/DirectTerminal";
 
 /** * [INJECT]: ดึงระบบ FAQ Engine ด้วย Named Import { DynamicFAQ }
  * [TECHNICAL_FIX]: เปลี่ยนจาก Default Import เป็น Named Import เพื่อป้องกันค่า undefined ในช่วง Prerender
@@ -81,7 +86,59 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
       <div className="container mx-auto px-4 py-20">
         {/* --- Phase 01: Status & Navigation --- */}
-        <CatalogHeader title={data.title} subtitle={data.description} nodeCount={allNodes.length} />
+        <CatalogHeader
+          title={data.title}
+          subtitle={data.description}
+          nodeCount={allNodes.length}
+          banner={data.regionalVisuals?.banner}
+        />
+
+        {/* [NEW]: Regional Market Context */}
+        {data.province && (
+          <div className="mb-20">
+            <LocalInsight
+              insight={data.localContext?.marketInsight || ""}
+              painPoints={(data.localContext?.painPoints as string[]) || []}
+              marketSaturation={data.marketSaturation}
+            />
+          </div>
+        )}
+
+        {/* [NEW]: Regional Promotions (Industrial/Catalog Style) */}
+        {data.promotions && data.promotions.length > 0 && (
+          <section className="mb-20">
+            <div className="shadow-pro-lg rounded-[var(--radius)] border border-[var(--brand-primary)]/20 bg-[var(--surface-card)] p-8 transition-all hover:border-[var(--brand-primary)]/40 md:p-12">
+              <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
+                <div className="space-y-4 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[var(--brand-primary)]/10 px-4 py-1">
+                    <span className="font-mono text-[9px] font-black tracking-widest text-[var(--brand-primary)] uppercase">
+                      Industrial_Promotion_Active
+                    </span>
+                  </div>
+                  <h3 className="text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
+                    {data.promotions[0].title}
+                  </h3>
+                  <p className="max-w-xl text-base font-medium opacity-60">
+                    {data.promotions[0].description}
+                  </p>
+                </div>
+                {data.promotions[0].discount && (
+                  <div className="shadow-glow flex flex-col items-center justify-center rounded-3xl bg-[var(--brand-primary)] px-10 py-8 text-white">
+                    <p className="mb-1 font-mono text-[10px] font-bold tracking-[0.3em] uppercase opacity-80">
+                      Value_Add
+                    </p>
+                    <p className="text-4xl font-black tracking-tighter italic">
+                      {data.promotions[0].discount}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* [NEW]: Regional Showcase Gallery */}
+        {data.regionalVisuals?.gallery && <RegionalGallery images={data.regionalVisuals.gallery} />}
 
         {/* --- Phase 02: Search & Filter Interface --- */}
         <SearchOrchestrator value={searchTerm} onChange={setSearchTerm} />
@@ -111,6 +168,34 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           </ProductGrid>
         ) : (
           <EmptyState />
+        )}
+
+        {/* [NEW]: Regional Roadmap & Terminal */}
+        {data.province && (
+          <>
+            <div className="-mx-4 md:-mx-10">
+              <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
+            </div>
+
+            {/* [NEW]: Local Success Story */}
+            {data.localSuccessStory && (
+              <div className="py-12">
+                <LocalSuccessNode
+                  title={data.localSuccessStory.title}
+                  result={data.localSuccessStory.result}
+                  province={data.province}
+                />
+              </div>
+            )}
+
+            <div className="mx-auto max-w-2xl py-24">
+              <DirectTerminal
+                mode="health-check"
+                province={data.province}
+                latency={data.regionalLatency}
+              />
+            </div>
+          </>
         )}
 
         {/* --- Phase 04: Intelligence FAQ (Objection Killer) --- 

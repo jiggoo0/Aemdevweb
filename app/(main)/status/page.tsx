@@ -132,7 +132,7 @@ export default function StatusPage() {
             </div>
 
             {/* Status Panel: Real-time Metrics Visualizer */}
-            <div className="border-border bg-surface-card/80 shadow-glow group w-full rounded-[2rem] border p-8 backdrop-blur-md transition-all duration-500 lg:w-96">
+            <div className="border-border bg-surface-card/80 shadow-glow group rounded-card w-full border p-8 backdrop-blur-md transition-all duration-500 lg:w-96">
               <div className="mb-6 flex items-center justify-between">
                 <div className="space-y-1">
                   <span className="text-text-muted font-mono text-[9px] font-black uppercase opacity-60">
@@ -178,7 +178,7 @@ export default function StatusPage() {
                 transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true }}
                 className={cn(
-                  "group border-border bg-surface-card relative overflow-hidden rounded-[2.5rem] border p-8 transition-all duration-700 ease-out",
+                  "group border-border bg-surface-card rounded-section relative overflow-hidden border p-8 transition-all duration-700 ease-out",
                   "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-glow hover:-translate-y-2",
                   "will-change-transform",
                 )}

@@ -7,6 +7,7 @@
 import type { TemplateMasterData } from "@/types";
 
 // --- 1. Infrastructure: Import Individual Service Nodes ---
+import { AREA_NODES } from "./area-nodes/index";
 import { seoAgencyService } from "./services/seo-agency";
 import { salePageService } from "./services/salepage";
 import { corporateService } from "./services/corporate";
@@ -28,7 +29,15 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   hotelResortService,
   bioService,
   localAuthorityService,
-].sort((a, b) => a.priority - b.priority);
+]
+  .map((service) => ({
+    ...service,
+    // [SYNC]: เชื่อมโยงพื้นที่ที่ให้บริการ (Active Areas) อัตโนมัติ
+    activeAreas: AREA_NODES.filter((area) => area.templateSlug === service.templateSlug).map(
+      (area) => area.slug,
+    ),
+  }))
+  .sort((a, b) => a.priority - b.priority);
 
 /**
  * [HELPER]: getServiceBySlug

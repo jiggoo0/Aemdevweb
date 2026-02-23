@@ -4,8 +4,6 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
 import type { ReactNode } from "react";
 import React, { useMemo } from "react";
 import { cn, injectThemeVariables } from "@/lib/utils";

@@ -8,8 +8,6 @@
  * - Hardware-accelerated hover transitions for 60fps interaction.
  */
 
-"use client";
-
 import React, { memo, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -45,7 +43,7 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
       href={`/blog/${post.slug.toLowerCase()}`}
       aria-label={`อ่านบทความ: ${post.title}`}
       className={cn(
-        "group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "group rounded-section relative flex h-full w-full flex-col justify-between overflow-hidden border transition-[transform,box-shadow,border-color,background-color] duration-700 ease-[0.16,1,0.3,1]",
         "bg-surface-card border-border shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-sm hover:-translate-y-2",
         "transform-gpu will-change-transform",
@@ -53,7 +51,7 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
       )}
     >
       {/* --- LAYER 01: IMAGE ENGINE (Zero-CLS Guard) --- */}
-      <div className="border-border relative aspect-[16/10] w-full overflow-hidden border-b bg-[#020617] select-none">
+      <div className="border-border bg-surface-main relative aspect-[16/10] w-full overflow-hidden border-b select-none">
         <Image
           src={imageSource}
           alt={post.title}
@@ -96,7 +94,7 @@ const BlogCard = ({ post, index = 0, priority = false, className }: BlogCardProp
 
         {/* Title & Narrative (Flex-1 for equal spacing) */}
         <div className="flex-1 space-y-4 md:space-y-5">
-          <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-2xl leading-[0.95] font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-3xl">
+          <h3 className="text-text-primary group-hover:text-brand-primary line-clamp-2 text-2xl leading-relaxed font-black tracking-tighter uppercase italic transition-colors duration-300 md:text-3xl">
             {post.title}
           </h3>
           <p className="text-text-secondary line-clamp-3 min-h-[4.5rem] text-sm leading-relaxed font-medium italic opacity-75 md:text-base">

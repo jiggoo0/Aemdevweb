@@ -56,7 +56,7 @@ const ServiceListingHub = ({
     return (
       <div
         role="alert"
-        className="border-border bg-surface-card/30 relative flex flex-col items-center justify-center overflow-hidden rounded-[2.5rem] border border-dashed p-12 text-center backdrop-blur-md transition-all duration-700 md:rounded-[3.5rem] md:p-24"
+        className="border-border bg-surface-card/30 rounded-section md:rounded-card-xl relative flex flex-col items-center justify-center overflow-hidden border border-dashed p-12 text-center backdrop-blur-md transition-all duration-700 md:p-24"
       >
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -64,7 +64,7 @@ const ServiceListingHub = ({
           aria-hidden="true"
         />
 
-        <div className="border-border bg-surface-offset shadow-glow-sm relative z-10 mb-8 flex h-20 w-20 items-center justify-center rounded-[2rem] border">
+        <div className="border-border bg-surface-offset shadow-glow-sm rounded-card relative z-10 mb-8 flex h-20 w-20 items-center justify-center border">
           <IconRenderer name="Layers" size={32} className="text-brand-primary/40 animate-pulse" />
         </div>
 

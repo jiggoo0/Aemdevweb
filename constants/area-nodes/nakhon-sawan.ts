@@ -12,6 +12,7 @@ export const nakhonSawanNode: AreaNode = {
   // --- Basic Identity ---
   slug: "nakhon-sawan",
   province: "นครสวรรค์",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ นครสวรรค์ | ออกแบบเว็บร้านค้าส่งและธุรกิจกงสี ให้ทันสมัยและขายดีกว่าเดิม",
@@ -36,6 +37,29 @@ export const nakhonSawanNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 52,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Wholesale Brand Audit",
+      description:
+        "วิเคราะห์จุดแข็งของธุรกิจกงสีหรือร้านค้าส่งเพื่อเปลี่ยนผ่านภาพลักษณ์สู่ความทันสมัยระดับสากล",
+    },
+    {
+      step: "02",
+      title: "Local Entity Mapping",
+      description:
+        "ปรับปรุงหมุด Google Maps และระบบการติดต่อด่วนเพื่อให้ลูกค้าในพื้นที่และจังหวัดใกล้เคียงเข้าถึงได้ทันที",
+    },
+    {
+      step: "03",
+      title: "Logistics Hub SEO",
+      description:
+        "เน้นคีย์เวิร์ดด้านการค้าและการขนส่งเพื่อชิงความเป็นผู้นำในศูนย์กลางเศรษฐกิจปากน้ำโพ",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/nakhon-sawan-node.webp",

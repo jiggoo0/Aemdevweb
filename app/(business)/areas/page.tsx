@@ -49,10 +49,20 @@ export const metadata: Metadata = constructMetadata({
  * @description หน้า Hub กลางสำหรับการเชื่อมโยง Digital Nodes ทั่วประเทศ (Programmatic SEO Core)
  */
 export default function AreasPage() {
-  /* [A] DATA_ORCHESTRATION: จัดเรียงตามระดับความสำคัญเชิงยุทธศาสตร์ (Priority Mapping) */
-  const sortedNodes = [...AREA_NODES].sort((a, b) => (a.priority || 99) - (b.priority || 99));
+  /* [A] DATA_ORCHESTRATION: จัดกลุ่มตามภูมิภาคและเรียงลำดับตาม Priority */
+  const regions = ["Central", "North", "Northeast", "East", "South", "West"] as const;
 
-  /* [B] SCHEMA_INJECTION: การฝัง Knowledge Graph เพื่อเชื่อมโยง Node ทั้งเครือข่ายเข้าด้วยกัน */
+  const groupedNodes = regions.reduce(
+    (acc, region) => {
+      acc[region] = AREA_NODES.filter((node) => node.region === region).sort(
+        (a, b) => (b.priority || 0) - (a.priority || 0),
+      );
+      return acc;
+    },
+    {} as Record<string, typeof AREA_NODES>,
+  );
+
+  /* [B] SCHEMA_INJECTION */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -62,13 +72,11 @@ export default function AreasPage() {
 
   return (
     <LayoutEngine spacing="none">
-      {/* ฉีด Structured Data เข้าสู่ Header ของหน้าเพื่อความแม่นยำของ Crawler */}
       <JsonLd data={fullSchema} id="schema-areas-hub-v18" />
 
       <main className="relative z-10 container mx-auto px-4 pt-32 pb-24 md:px-6 md:pt-48 md:pb-32">
         {/* --- 01. STRATEGIC HUB HEADER --- */}
         <header className="mb-24 max-w-6xl space-y-10 md:mb-32">
-          {/* Version Indicator: ยืนยันความสมบูรณ์ของระบบ Infrastructure */}
           <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-6 py-2.5 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">
             <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_12px_var(--brand-primary)]" />
             <span>Regional_Authority_Network.v{SITE_CONFIG.project.version}</span>
@@ -85,23 +93,38 @@ export default function AreasPage() {
               <span className="text-text-primary decoration-brand-primary font-black not-italic underline decoration-4 underline-offset-8">
                 Digital Node
               </span>{" "}
-              ที่ทรงพลังที่สุดในการครองพื้นที่การค้นหาในภูมิภาคของคุณ
+              ที่ทรงพลังที่สุดในภูมิภาคของคุณ
             </p>
           </div>
         </header>
 
-        {/* --- 02. AREA CARD GRID: Programmatic Rendering (SSR) --- */}
-        <section
-          id="area-nodes-registry"
-          className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12"
-        >
-          {sortedNodes.map((node, index) => (
-            <div key={node.slug} className="h-full">
-              {/* การเรนเดอร์ผ่าน AreaCard พร้อมระบบ Image Blur Registry เพื่อป้องกัน CLS */}
-              <AreaCard data={node} index={index} className="h-full" />
-            </div>
-          ))}
-        </section>
+        {/* --- 02. REGIONAL SECTIONS --- */}
+        <div className="space-y-32">
+          {regions.map((region) => {
+            const nodes = groupedNodes[region];
+            if (!nodes || nodes.length === 0) return null;
+
+            return (
+              <section key={region} className="space-y-12">
+                <div className="flex items-center gap-6">
+                  <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
+                    {region}_<span className="text-brand-primary">Region</span>
+                  </h2>
+                  <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
+                  <span className="font-mono text-[10px] font-bold opacity-30">
+                    NODES: {nodes.length.toString().padStart(2, "0")}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                  {nodes.map((node, index) => (
+                    <AreaCard key={node.slug} data={node} index={index} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
 
         {/* --- 03. CTA: STRATEGIC GROWTH GATEWAY --- */}
         <section className="border-border mt-32 border-t pt-24 text-center">

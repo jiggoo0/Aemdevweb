@@ -127,7 +127,7 @@ export default function PrivacyPage() {
                 ข้อมูลแผนธุรกิจของคุณจะถูกรักษาเป็นความลับอย่างเข้มงวดตลอดเวลาครับ
               </p>
 
-              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-primary hover:bg-surface-offset rounded-[2.5rem] border-l-[12px] p-8 transition-all duration-500 md:p-12">
+              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-primary hover:bg-surface-offset rounded-section border-l-[12px] p-8 transition-all duration-500 md:p-12">
                 <div className="mb-4 flex items-center gap-3">
                   <IconRenderer name="Lock" size={20} className="text-brand-primary" />
                   <span className="text-brand-primary text-xs font-black tracking-widest uppercase">
@@ -161,7 +161,7 @@ export default function PrivacyPage() {
 
           {/* Section 05: Coordination Node */}
           <div className="border-border border-t pt-16">
-            <div className="bg-text-primary text-surface-main group shadow-glow relative overflow-hidden rounded-[3rem] p-10 transition-all duration-500 hover:scale-[1.01] md:p-16">
+            <div className="bg-text-primary text-surface-main group shadow-glow rounded-card-lg relative overflow-hidden p-10 transition-all duration-500 hover:scale-[1.01] md:p-16">
               <div className="relative z-10 space-y-6">
                 <h3 className="text-2xl font-black tracking-tight uppercase italic md:text-3xl">
                   สอบถามเรื่องความปลอดภัย

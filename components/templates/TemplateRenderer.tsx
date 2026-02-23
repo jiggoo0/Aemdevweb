@@ -1,11 +1,10 @@
 /**
- * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.7 (IDENTITY_INTEGRATED)
- * [STRATEGY]: Server-Side Cache | Blueprint Orchestration | Zero-Jank
+ * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.6 (IDENTITY_INTEGRATED)
+ * [STRATEGY]: Blueprint Orchestration | Layout Engine Integration | Zero-Jank
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import React from "react";
-import { cacheLife, cacheTag } from "next/cache";
+import React, { memo } from "react";
 import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 
 // --- 1. Infrastructure (Integrated Identity Shell) ---
@@ -36,11 +35,7 @@ const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> 
   "seo-agency": SeoAgencyTemplate,
 };
 
-export async function TemplateRenderer({ data, renderMode = "full" }: TemplateRendererProps) {
-  "use cache";
-  cacheLife("days");
-  cacheTag("template-renderer", data.templateSlug, data.id);
-
+export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRendererProps) => {
   if (!data || !data.templateSlug) {
     console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
     return null;
@@ -58,11 +53,13 @@ export async function TemplateRenderer({ data, renderMode = "full" }: TemplateRe
       <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />
     </LayoutEngine>
   );
-}
+});
+
+TemplateRenderer.displayName = "TemplateRenderer";
 
 /** [SUB-COMPONENT]: TemplateNotFound (Debugger View) */
 const TemplateNotFound = ({ data }: { data: UniversalTemplateProps }) => (
-  <div className="relative flex min-h-[60vh] w-full flex-col items-center justify-center overflow-hidden rounded-[3rem] border-2 border-dashed border-rose-500/20 bg-rose-500/5 p-12 text-center backdrop-blur-xl">
+  <div className="rounded-card-lg relative flex min-h-[60vh] w-full flex-col items-center justify-center overflow-hidden border-2 border-dashed border-rose-500/20 bg-rose-500/5 p-12 text-center backdrop-blur-xl">
     <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-rose-500/10 shadow-2xl ring-1 ring-rose-500/20">
       <span className="animate-pulse text-5xl font-black text-rose-600">!</span>
     </div>

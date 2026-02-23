@@ -13,6 +13,7 @@ export const uttaraditNode: AreaNode = {
   // --- Basic Identity ---
   slug: "uttaradit",
   province: "อุตรดิตถ์",
+  region: "North",
   templateSlug: "local-authority", // ใช้โครงสร้างท้องถิ่นเป็นฐานรองรับ SME/Agro
 
   title: "รับทำเว็บไซต์ อุตรดิตถ์ | เปลี่ยนผลผลิตจากสวนเป็นแบรนด์พรีเมียม ขายตรงไม่ผ่านคนกลาง",
@@ -37,6 +38,29 @@ export const uttaraditNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 35,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "D2C Brand Strategy",
+      description:
+        "วิเคราะห์จุดเด่นของสวนและแบรนด์สินค้าเพื่อสร้างเอกลักษณ์เฉพาะตัวที่ไม่ผ่านพ่อค้าคนกลาง",
+    },
+    {
+      step: "02",
+      title: "Mobile Order Deployment",
+      description:
+        "ติดตั้งระบบสั่งจองสินค้าออนไลน์ที่ใช้งานง่ายบนมือถือและเชื่อมต่อกับระบบแจ้งเตือนทาง LINE",
+    },
+    {
+      step: "03",
+      title: "Local Fruit Schema Hub",
+      description:
+        "ทำ Local Business Schema และ SEO เจาะจงผลไม้ฤดูกาลเพื่อให้สวนของคุณถูกค้นพบโดยตรง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/uttaradit-node.webp",

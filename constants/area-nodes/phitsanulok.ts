@@ -13,6 +13,7 @@ export const phitsanulokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phitsanulok",
   province: "พิษณุโลก",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและมาตรฐานราชการ/วิชาชีพ
 
   title: "รับทำเว็บไซต์ พิษณุโลก | ออกแบบเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
@@ -37,6 +38,29 @@ export const phitsanulokNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 48,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Service Entity Audit",
+      description:
+        "ตรวจสอบความถูกต้องของข้อมูลบริการและกฎระเบียบวิชาชีพ (สำหรับคลินิก) เพื่อความน่าเชื่อถือสูงสุด",
+    },
+    {
+      step: "02",
+      title: "Regional Node Deployment",
+      description:
+        "วางระบบเว็บไซต์ที่โหลดไวที่สุดในเขตภาคเหนือตอนล่างเพื่อรองรับลูกค้าจากจังหวัดใกล้เคียง",
+    },
+    {
+      step: "03",
+      title: "Indochina Hub SEO",
+      description:
+        "ปักหมุด Google Maps และทำ Local SEO ครอบคลุมจุดตัดสี่แยกอินโดจีนเพื่อชิงความเป็นผู้นำในภูมิภาค",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phitsanulok-node.webp",

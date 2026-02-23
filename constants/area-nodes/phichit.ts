@@ -12,6 +12,7 @@ export const phichitNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phichit",
   province: "พิจิตร",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความมั่นคงและท้องถิ่น
 
   title: "รับทำเว็บไซต์ พิจิตร | ออกแบบเว็บโรงสีและธุรกิจเกษตรแปรรูป สร้างความเชื่อถือระดับสากล",
@@ -36,6 +37,29 @@ export const phichitNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 32,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Industrial Trust Audit",
+      description:
+        "วิเคราะห์และรวบรวมใบรับรองมาตรฐานโรงงานและผลงานการผลิตเพื่อสร้างความเชื่อมั่นออนไลน์",
+    },
+    {
+      step: "02",
+      title: "B2B Gateway Deployment",
+      description:
+        "ติดตั้งระบบขอใบเสนอราคาและแคตตาล็อกสินค้าอุตสาหกรรมที่โหลดเร็วแม้ในพื้นที่ห่างไกล",
+    },
+    {
+      step: "03",
+      title: "Agro-Industrial SEO",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดเฉพาะทางเพื่อดักกลุ่มคู่ค้าที่มองหาโรงสีและโรงงานแปรรูปเกษตรตัวจริง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phichit-node.webp",

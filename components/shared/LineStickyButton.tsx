@@ -66,8 +66,8 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
         <div className="pointer-events-none absolute right-0 bottom-full mb-5 w-max origin-bottom translate-y-3 scale-90 transform-gpu opacity-0 transition-all duration-500 ease-[0.16,1,0.3,1] will-change-[transform,opacity] group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
           <div className="border-border/40 bg-surface-card/90 flex items-center gap-3 rounded-2xl border px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#06C755] opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#06C755] shadow-[0_0_10px_#06C755]"></span>
+              <span className="bg-line-green absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
+              <span className="bg-line-green relative inline-flex h-2 w-2 rounded-full shadow-[0_0_10px_var(--color-line-green)]"></span>
             </span>
             <p className="text-text-primary font-mono text-[9px] font-black tracking-[0.2em] uppercase">
               Specialist_Online
@@ -83,7 +83,7 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
           onClick={handleContactClick}
           className={cn(
             "relative flex h-14 w-14 items-center justify-center rounded-[1.6rem] md:h-16 md:w-16 md:rounded-[1.9rem]",
-            "bg-gradient-to-br from-[#06C755] to-[#00B900] text-white",
+            "from-line-green to-line-dark bg-gradient-to-br text-white",
             "shadow-[0_8px_20px_-6px_rgba(6,199,85,0.5)] hover:shadow-[0_12px_32px_-6px_rgba(6,199,85,0.7)]",
             "transform-gpu transition-all duration-700 ease-[0.16,1,0.3,1]",
             "hover:scale-110 hover:-rotate-6 active:scale-95",
@@ -92,7 +92,7 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
           aria-label="Connect with Technical Specialist via Line"
         >
           {/* Ambient Signal Pulse - GPU Optimized */}
-          <span className="absolute inset-0 z-0 transform-gpu animate-ping rounded-[1.6rem] bg-[#06C755] opacity-20 duration-[2500ms]" />
+          <span className="bg-line-green absolute inset-0 z-0 transform-gpu animate-ping rounded-[1.6rem] opacity-20 duration-[2500ms]" />
 
           <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
             <IconRenderer

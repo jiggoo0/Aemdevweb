@@ -31,7 +31,7 @@ const ConversionCTA = ({
       <div className="relative z-10 container mx-auto px-4">
         <div
           className={cn(
-            "relative overflow-hidden rounded-[2.5rem] p-8 md:p-16 lg:p-24",
+            "rounded-section relative overflow-hidden p-8 md:p-16 lg:p-24",
             "border border-[var(--brand-primary)]/20 bg-[var(--surface-main)] shadow-2xl",
             "transition-all duration-500 hover:border-[var(--brand-primary)]/40",
           )}
@@ -54,11 +54,11 @@ const ConversionCTA = ({
               </span>
             </div>
 
-            <h2 className="max-w-4xl text-4xl leading-tight font-black tracking-tighter text-[var(--text-primary)] md:text-6xl lg:text-7xl">
+            <h2 className="max-w-4xl text-4xl leading-relaxed font-black tracking-tighter text-[var(--text-primary)] md:text-6xl lg:text-7xl">
               {title}
             </h2>
 
-            <p className="max-w-2xl text-lg font-medium text-[var(--text-primary)] italic opacity-80 md:text-xl">
+            <p className="max-w-2xl text-lg leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-xl">
               “{description}”
             </p>
 

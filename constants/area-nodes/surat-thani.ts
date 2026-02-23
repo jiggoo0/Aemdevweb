@@ -13,6 +13,7 @@ export const suratThaniNode: AreaNode = {
   // --- Basic Identity ---
   slug: "surat-thani",
   province: "สุราษฎร์ธานี",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
 
   title: "รับทำเว็บไซต์สุราษฎร์ธานี - ยกระดับท้องถิ่นสู่ Smart Tourism & Agriculture",
@@ -36,6 +37,30 @@ export const suratThaniNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 68,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Tourism Data Mapping",
+      description:
+        "วิเคราะห์พฤติกรรมนักท่องเที่ยวทั้งในฝั่งและเกาะ (สมุย/พะงัน) เพื่อวางแผนการเข้าถึงข้อมูลที่แม่นยำ",
+    },
+    {
+      step: "02",
+      title: "E-Service Localization",
+      description:
+        "ติดตั้งระบบบริการออนไลน์ที่รองรับทั้งภาษาไทยและอังกฤษ เพื่ออำนวยความสะดวกให้คนในพื้นที่และนักท่องเที่ยว",
+    },
+    {
+      step: "03",
+      title: "Island Node Optimization",
+      description:
+        "ใช้ระบบ Edge Computing เพื่อให้เว็บไซต์โหลดได้รวดเร็วแม้ในพื้นที่เกาะที่มีสัญญาณอินเทอร์เน็ตจำกัด",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/surat-ratchaprapha.webp",

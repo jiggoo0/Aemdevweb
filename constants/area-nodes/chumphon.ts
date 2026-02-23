@@ -12,6 +12,7 @@ export const chumphonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chumphon",
   province: "ชุมพร",
+  region: "South",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
@@ -35,6 +36,28 @@ export const chumphonNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  marketSaturation: 45,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Agro-Digital Audit",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลสินค้าเกษตรและแหล่งท่องเที่ยวเพื่อวางแผนการประชาสัมพันธ์บนโลกออนไลน์",
+    },
+    {
+      step: "02",
+      title: "ITA Compliance Sync",
+      description:
+        "จัดระเบียบข้อมูลหน่วยงานตามมาตรฐานคุณธรรมและความโปร่งใส (OIT) เพื่อรองรับการประเมินภาครัฐ",
+    },
+    {
+      step: "03",
+      title: "Southern Gateway SEO",
+      description: "เน้นคีย์เวิร์ดดักจับกลุ่มนักท่องเที่ยวและคู่ค้าโลจิสติกส์ในฐานะประตูสู่ภาคใต้",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chumphon-gateway.webp",

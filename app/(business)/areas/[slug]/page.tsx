@@ -27,6 +27,8 @@ import JsonLd from "@/components/seo/JsonLd";
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
 
 /** [SSG]: รับประกันผล Build เป็น Static 100% ทั่วไทย */
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return AREA_NODES.map((area) => ({ slug: area.slug }));
 }
@@ -108,7 +110,7 @@ export default async function AreaPage(props: PageProps) {
       {/* [RENDER_LAYER]: ปล่อยให้ TemplateRenderer จัดการ Visual Shell ทั้งหมด 
           เพื่อให้สีแบรนด์และ Spacing ของแต่ละจังหวัดทำงานได้ลื่นไหลที่สุด
       */}
-      {await TemplateRenderer({ data: templateData, renderMode: "full" })}
+      <TemplateRenderer data={templateData} renderMode="full" />
 
       {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">

@@ -13,6 +13,7 @@ export const phuketNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phuket",
   province: "ภูเก็ต",
+  region: "South",
   templateSlug: "hotelresort", // เชื่อมโยงกับแม่แบบที่เน้นงาน Visual ระดับ High-end
 
   title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
@@ -37,6 +38,31 @@ export const phuketNode: AreaNode = {
   priceValue: hotelResortService.priceValue,
   currency: hotelResortService.currency,
   unit: hotelResortService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 85,
+  regionalLatency: 18,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Global Traffic Audit",
+      description:
+        "วิเคราะห์แหล่งที่มาของนักท่องเที่ยว (ยุโรป/รัสเซีย/จีน) เพื่อเลือกใช้ CDN และ Edge Node ที่ใกล้ที่สุด",
+    },
+    {
+      step: "02",
+      title: "UHNW Experience Design",
+      description:
+        "ออกแบบ UI ที่สะท้อนความหรูหราและรองรับการแสดงผลภาพ High-Res ได้ลื่นไหลบนมือถือแม้อยู่กลางทะเล",
+    },
+    {
+      step: "03",
+      title: "Direct Conversion Sync",
+      description:
+        "เชื่อมต่อระบบ Booking Engine กับ Google Travel เพื่อดึงลูกค้าจาก OTA กลับมาจองตรง",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phuket-node.webp",
@@ -137,6 +163,17 @@ export const phuketNode: AreaNode = {
       "รับทำ SEO ภาษาอังกฤษ ภูเก็ต",
       "ทำเว็บไซต์โรงแรม ลากูน่า",
     ],
+    promotions: [
+      {
+        title: "High-Season Launch Offer",
+        description: "ฟรีระบบจองห้องพัก (Booking Engine) สำหรับผู้ที่เริ่มโครงการภายในเดือนนี้",
+        discount: "มูลค่า 15,000.-",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/phuket-node.webp",
+      gallery: ["/images/areas/phuket-node.webp", "/images/areas/phuket-node.webp"],
+    },
   },
 
   // --- System Metadata ---

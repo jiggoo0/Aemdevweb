@@ -3,7 +3,7 @@
  * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT (Single Source of Truth)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  * [FRAMEWORK]: Next.js 16.1.6 | React 19 | Tailwind CSS 4.0
- * [CHANGELOG]: 
+ * [CHANGELOG]:
  * - Integrated LinkedIn Professional Profile (alongkorl-aemdevweb).
  * - Synchronized Link Registry for Schema Injection.
  */

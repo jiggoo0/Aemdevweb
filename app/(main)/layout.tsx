@@ -33,9 +33,7 @@ export default async function MainLayout({ children, params }: MainLayoutProps) 
       {/* 02. MAIN CONTENT HUB */}
       <main
         id="main-content"
-        className={cn(
-          "relative z-10 flex flex-auto flex-col pt-24 md:pt-32 isolate outline-none",
-        )}
+        className={cn("relative isolate z-10 flex flex-auto flex-col pt-24 outline-none md:pt-32")}
         style={{ contentVisibility: "auto" } as React.CSSProperties}
       >
         <div className="flex w-full flex-col">{children}</div>
@@ -47,8 +45,8 @@ export default async function MainLayout({ children, params }: MainLayoutProps) 
       </footer>
 
       {/* 04. DECORATIVE ARCHITECTURE */}
-      <div className="pointer-events-none fixed inset-y-0 left-0 z-50 hidden w-px bg-gradient-to-b from-transparent via-border/20 to-transparent lg:block" />
-      <div className="pointer-events-none fixed inset-y-0 right-0 z-50 hidden w-px bg-gradient-to-b from-transparent via-border/20 to-transparent lg:block" />
+      <div className="via-border/20 pointer-events-none fixed inset-y-0 left-0 z-50 hidden w-px bg-gradient-to-b from-transparent to-transparent lg:block" />
+      <div className="via-border/20 pointer-events-none fixed inset-y-0 right-0 z-50 hidden w-px bg-gradient-to-b from-transparent to-transparent lg:block" />
     </div>
   );
 }

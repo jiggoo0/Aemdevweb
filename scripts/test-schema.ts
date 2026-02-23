@@ -73,6 +73,49 @@ async function runSchemaDiagnostic() {
     }
   });
 
+  // ---------------------------------------------------------
+  // [4] Cross-Reference Audit (Registry Sync)
+  // ---------------------------------------------------------
+  process.stdout.write("\n🔍 [SYNC]: Auditing Master-Area Cross-References... ");
+  let syncErrors = 0;
+
+  MASTER_REGISTRY.forEach((service) => {
+    const activeNodes = AREA_NODES.filter((a) => a.templateSlug === service.templateSlug);
+    if (service.activeAreas?.length !== activeNodes.length) {
+      syncErrors++;
+      console.error(
+        `\n   ❌ [SERVICE: ${service.templateSlug}]: ActiveAreas mismatch (${service.activeAreas?.length} vs ${activeNodes.length})`,
+      );
+    }
+  });
+
+  AREA_NODES.forEach((area) => {
+    const service = MASTER_REGISTRY.find((s) => s.templateSlug === area.templateSlug);
+    if (!service) {
+      syncErrors++;
+      console.error(
+        `\n   ❌ [AREA: ${area.slug}]: Points to non-existent templateSlug "${area.templateSlug}"`,
+      );
+    }
+
+    // [TECHNICAL_AUTHORITY_CHECK]: Verify mandatory insights for Area Nodes
+    if (area.marketSaturation === undefined) {
+      syncErrors++;
+      console.error(`\n   ❌ [AREA: ${area.slug}]: Missing marketSaturation data`);
+    }
+    if (!area.regionalRoadmap || area.regionalRoadmap.length !== 3) {
+      syncErrors++;
+      console.error(`\n   ❌ [AREA: ${area.slug}]: Missing or invalid 3-step regionalRoadmap`);
+    }
+  });
+
+  if (syncErrors > 0) {
+    console.log("❌ FAILED");
+    totalErrors += syncErrors;
+  } else {
+    console.log("✅ OK");
+  }
+
   const duration = ((Date.now() - startTime) / 1000).toFixed(2);
 
   // ---------------------------------------------------------

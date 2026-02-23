@@ -72,6 +72,10 @@ export interface UniversalTemplateProps {
   /** [FIXED]: ข้อมูลบริบทพื้นที่เต็มรูปแบบสำหรับ Area Node */
   readonly localContext?: LocalContext;
 
+  /** [NEW]: ข้อมูล Visual และโปรโมชั่นรายพื้นที่ */
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly promotions?: LocalContext["promotions"];
+
   // --- Strategic UI Elements ---
   readonly primaryAction: TemplateAction;
   readonly secondaryAction?: TemplateAction;

@@ -55,7 +55,7 @@ export default function Loading() {
             <div className="bg-brand-primary/20 absolute inset-0 animate-pulse rounded-full blur-3xl" />
             <div
               className={cn(
-                "border-border bg-surface-card relative flex h-28 w-28 items-center justify-center rounded-[2.5rem] border",
+                "border-border bg-surface-card rounded-section relative flex h-28 w-28 items-center justify-center border",
                 "shadow-glow-lg backdrop-blur-xl transition-all duration-500",
               )}
             >

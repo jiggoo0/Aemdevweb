@@ -107,7 +107,7 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
         },
       }}
       className={cn(
-        "group relative flex min-h-[280px] flex-col overflow-hidden rounded-[2.5rem] border p-10 transition-all duration-700",
+        "group rounded-section relative flex min-h-[280px] flex-col overflow-hidden border p-10 transition-[transform,box-shadow,border-color,background-color] duration-700",
         "border-border bg-surface-card/30 shadow-pro-sm backdrop-blur-3xl",
         "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:shadow-glow-sm hover:-translate-y-3",
         "transform-gpu will-change-transform",

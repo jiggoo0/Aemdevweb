@@ -12,6 +12,7 @@ export const chonBuriNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chon-buri",
   province: "ชลบุรี",
+  region: "East",
   templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจ EEC ติดอันดับ Google",
@@ -35,6 +36,29 @@ export const chonBuriNode: AreaNode = {
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
+
+  marketSaturation: 78,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "EEC B2B Strategy",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาของฝ่ายจัดซื้อโรงงานในเขตนิคมอุตสาหกรรมเพื่อวางโครงสร้างเนื้อหาเชิงเทคนิค",
+    },
+    {
+      step: "02",
+      title: "Multilingual Deployment",
+      description:
+        "พัฒนาระบบเว็บไซต์ 3 ภาษา (ไทย/อังกฤษ/ญี่ปุ่น) เพื่อรองรับนักลงทุนและคู่ค้าในตลาดนิคมอุตสาหกรรม",
+    },
+    {
+      step: "03",
+      title: "Technical SEO Registry",
+      description:
+        "ปักหมุดธุรกิจบนแผนที่อุตสาหกรรมและทำ Local Schema เพื่อให้โรงงานของคุณถูกค้นพบก่อนใครใน EEC",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/chon-buri-node.webp",

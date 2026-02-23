@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 
 // --- Infrastructure Constants (BEM-ish Pattern) ---
 const LINK_STYLE = cn(
-  "text-text-secondary hover:text-brand-primary text-sm transition-all duration-300",
+  "text-text-secondary hover:text-brand-primary text-sm leading-relaxed transition-all duration-300",
   "inline-block hover:translate-x-1",
 );
 
@@ -139,7 +139,7 @@ const Footer = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-text-muted hover:text-brand-primary text-[10px] font-black tracking-widest uppercase transition-colors"
+                className="text-text-muted hover:text-brand-primary text-[10px] leading-relaxed font-black tracking-widest uppercase transition-colors"
               >
                 {item.label}
               </Link>

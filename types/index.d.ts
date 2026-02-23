@@ -26,20 +26,65 @@ export interface LayoutProps {
 
 /** [ICON_SYSTEM]: Registry of Validated Lucide Icons */
 export type IconName =
-  | "Menu" | "X" | "Check" | "CheckCircle" | "CheckCircle2" | "Star"
-  | "ChevronRight" | "ChevronDown" | "ArrowRight" | "ArrowUpRight"
-  | "Search" | "SearchX" | "Zap" | "Target" | "Layers" | "Shield"
-  | "ShieldCheck" | "Newspaper" | "Building2" | "FileText" | "FileDown"
-  | "MousePointerClick" | "Smartphone" | "Globe" | "TrendingUp"
-  | "Award" | "MapPin" | "Activity" | "UserCheck" | "Quote" | "Settings"
-  | "Disc" | "Wifi" | "Code2" | "Network" | "User" | "Camera"
-  | "CloudSun" | "Wind" | "Droplets" | "Eye" | "Cloud" | "AlertCircle"
-  | "Sparkles" | "Database" | "Map" | "CalendarCheck" | "Lock"
+  | "Menu"
+  | "X"
+  | "Check"
+  | "CheckCircle"
+  | "CheckCircle2"
+  | "Star"
+  | "ChevronRight"
+  | "ChevronDown"
+  | "ArrowRight"
+  | "ArrowUpRight"
+  | "Search"
+  | "SearchX"
+  | "Zap"
+  | "Target"
+  | "Layers"
+  | "Shield"
+  | "ShieldCheck"
+  | "Newspaper"
+  | "Building2"
+  | "FileText"
+  | "FileDown"
+  | "MousePointerClick"
+  | "Smartphone"
+  | "Globe"
+  | "TrendingUp"
+  | "Award"
+  | "MapPin"
+  | "Activity"
+  | "UserCheck"
+  | "Quote"
+  | "Settings"
+  | "Disc"
+  | "Wifi"
+  | "Code2"
+  | "Network"
+  | "User"
+  | "Camera"
+  | "CloudSun"
+  | "Wind"
+  | "Droplets"
+  | "Eye"
+  | "Cloud"
+  | "AlertCircle"
+  | "Sparkles"
+  | "Database"
+  | "Map"
+  | "CalendarCheck"
+  | "Lock"
   | (string & {});
 
 export type TemplateSlug =
-  | "corporate" | "salepage" | "local" | "local-authority"
-  | "catalog" | "bio" | "hotelresort" | "seo-agency";
+  | "corporate"
+  | "salepage"
+  | "local"
+  | "local-authority"
+  | "catalog"
+  | "bio"
+  | "hotelresort"
+  | "seo-agency";
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
@@ -95,7 +140,7 @@ export interface SiteConfig {
     readonly twitterHandle: string;
     readonly googleMerchantId?: string;
     /** [PATCH_v18.1.0]: LinkedIn Authority Link */
-    readonly linkedinUrl?: string; 
+    readonly linkedinUrl?: string;
   };
   readonly contact: {
     readonly email: string;
@@ -218,6 +263,8 @@ export interface LocalContext {
   readonly nicheIndustries: readonly string[];
   readonly painPoints: readonly string[];
   readonly competitorLevel: "low" | "medium" | "high" | "extreme";
+  readonly marketSaturation?: number; // 0-100 percentage
+  readonly isTourismHeavy?: boolean;
   readonly socialProof?: {
     readonly rating: number;
     readonly reviewCount: number;
@@ -226,6 +273,24 @@ export interface LocalContext {
   readonly regionalPricing?: { readonly startPrice: string; readonly timeline: string };
   readonly localSuccessStory?: { readonly title: string; readonly result: string };
   readonly hyperLocalKeywords?: readonly string[];
+  readonly promotions?: readonly {
+    readonly title: string;
+    readonly description?: string;
+    readonly discount?: string;
+    readonly expiry?: string;
+  }[];
+  readonly regionalVisuals?: {
+    readonly banner?: string;
+    readonly gallery?: readonly string[];
+  };
+}
+
+export interface BioProject {
+  readonly title: string;
+  readonly category: string;
+  readonly description: string;
+  readonly link?: string;
+  readonly thumbnail?: string;
 }
 
 export interface UniversalTemplateProps {
@@ -249,7 +314,7 @@ export interface UniversalTemplateProps {
   readonly clientTrust?: string;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
-  readonly featuredProjects?: readonly any[];
+  readonly featuredProjects?: readonly BioProject[];
   readonly localContext?: LocalContext;
   readonly province?: string;
   readonly districts?: readonly string[];
@@ -257,6 +322,16 @@ export interface UniversalTemplateProps {
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly promotions?: LocalContext["promotions"];
+  readonly marketSaturation?: number;
+  readonly isTourismHeavy?: boolean;
+  readonly regionalLatency?: number;
+  readonly regionalRoadmap?: readonly {
+    readonly step: string;
+    readonly title: string;
+    readonly description: string;
+  }[];
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 }
@@ -267,21 +342,22 @@ export interface BaseTemplateProps {
 }
 
 // =========================================
-// [05] REGISTRY SCHEMAS
+// [05] REGISTRY SCHEMAS (CROSS-LINKED)
 // =========================================
 
 export interface TemplateMasterData {
   readonly id: string;
+  readonly slug?: string;
   readonly title: string;
   readonly description: string;
-  readonly image?: string;
   readonly templateSlug: TemplateSlug;
+  readonly priority: number;
+  readonly image?: string;
   readonly category: ServiceCategory;
   readonly priceValue: number;
   readonly price: string;
   readonly currency: string;
   readonly unit: string;
-  readonly priority: number;
   readonly theme: ThemeConfig;
   readonly benefits: readonly string[];
   readonly coreFeatures: readonly ServiceFeature[];
@@ -293,24 +369,39 @@ export interface TemplateMasterData {
   readonly isFeatured?: boolean;
   readonly clientTrust?: string;
   readonly items?: readonly CatalogItem[];
+  readonly activeAreas?: readonly string[];
 }
 
 export interface AreaNode {
+  readonly id?: string;
   readonly slug: string;
   readonly province: string;
   readonly title: string;
   readonly description: string;
-  readonly longDescription?: string;
+  readonly templateSlug: TemplateSlug;
+  readonly priority: number;
+  readonly region: "North" | "Northeast" | "Central" | "East" | "South" | "West";
   readonly seoTitle: string;
   readonly seoDescription: string;
-  readonly priority: number;
-  readonly templateSlug: TemplateSlug;
+  readonly longDescription?: string;
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
   readonly heroImage: string;
   readonly coordinates: { readonly lat: number; readonly lng: number };
   readonly localContext: LocalContext;
   readonly theme?: Partial<ThemeConfig> | ThemeConfig;
+  readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly socialProof?: LocalContext["socialProof"];
+  readonly regionalPricing?: LocalContext["regionalPricing"];
+  readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly marketSaturation?: number;
+  readonly isTourismHeavy?: boolean;
+  readonly regionalLatency?: number;
+  readonly regionalRoadmap?: readonly {
+    readonly step: string;
+    readonly title: string;
+    readonly description: string;
+  }[];
   readonly price?: string;
   readonly priceValue?: number;
   readonly currency?: string;

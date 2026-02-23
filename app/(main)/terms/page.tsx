@@ -151,7 +151,7 @@ export default function TermsPage() {
                 ผมยินดีรีบแก้ไขให้ทันทีเพื่อให้ธุรกิจของคุณเดินหน้าต่อได้ไม่สะดุดครับ
               </p>
 
-              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-secondary hover:bg-surface-offset rounded-[2.5rem] border-l-[12px] p-8 transition-all duration-500 md:p-12">
+              <blockquote className="border-brand-primary bg-surface-card shadow-glow text-text-secondary hover:bg-surface-offset rounded-section border-l-[12px] p-8 transition-all duration-500 md:p-12">
                 <div className="mb-4 flex items-center gap-3">
                   <IconRenderer name="ShieldAlert" size={20} className="text-brand-primary" />
                   <span className="text-brand-primary text-xs font-black tracking-widest uppercase">

@@ -119,7 +119,7 @@ export const DynamicFAQ = memo(
                     className={cn(
                       "group relative overflow-hidden border transition-all duration-500",
                       "border-border/10 bg-[var(--surface-main)] shadow-sm",
-                      "rounded-[2rem] md:rounded-[2.5rem]",
+                      "rounded-card md:rounded-section",
                       "data-[state=open]:shadow-glow-sm data-[state=open]:border-[var(--brand-primary)]/40",
                       "hover:border-[var(--brand-primary)]/20",
                     )}

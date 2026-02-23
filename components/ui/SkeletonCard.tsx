@@ -37,14 +37,14 @@ const SkeletonCard = ({ className, style, aspectRatio = "video" }: SkeletonCardP
       aria-live="polite"
       aria-busy="true"
       className={cn(
-        "border-border bg-surface-card/40 shadow-pro-sm space-y-8 rounded-[2.5rem] border p-8 md:p-10",
+        "border-border bg-surface-card/40 shadow-pro-sm rounded-section space-y-8 border p-8 md:p-10",
         "transform-gpu transition-all duration-500 will-change-transform",
         className,
       )}
     >
       {/* --- 01. IMAGE_PROJECTION (LCP Target) --- */}
       <Skeleton
-        className={cn("bg-brand-primary/5 w-full rounded-[2rem] opacity-50", ratioMap[aspectRatio])}
+        className={cn("bg-brand-primary/5 rounded-card w-full opacity-50", ratioMap[aspectRatio])}
       />
 
       <div className="space-y-5">

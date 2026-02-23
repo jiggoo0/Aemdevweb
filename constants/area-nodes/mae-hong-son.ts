@@ -12,6 +12,7 @@ export const maeHongSonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "mae-hong-son",
   province: "แม่ฮ่องสอน",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ แม่ฮ่องสอน | ออกแบบเว็บที่พักและงานคราฟต์พรีเมียม โดย นายเอ็มซ่ามากส์",
@@ -35,6 +36,30 @@ export const maeHongSonNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 35,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Niche Market Analysis",
+      description:
+        "วิเคราะห์กลุ่มลูกค้าเป้าหมายที่ต้องการความสงบและสินค้าพรีเมียมเฉพาะทางในแม่ฮ่องสอน",
+    },
+    {
+      step: "02",
+      title: "Edge Network Deployment",
+      description:
+        "ติดตั้งโครงสร้างเว็บไซต์แบบเบาพิเศษ (Ultralight) เพื่อให้โหลดได้ไวที่สุดแม้ในพื้นที่สัญญาณอินเทอร์เน็ตจำกัด",
+    },
+    {
+      step: "03",
+      title: "Global Storytelling Sync",
+      description:
+        "เชื่อมโยงเรื่องราววิถีชีวิตดั้งเดิมเข้ากับมาตรฐานเว็บระดับสากลเพื่อสร้างความน่าเชื่อถือในตลาดโลก",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/mae-hong-son-node.webp",

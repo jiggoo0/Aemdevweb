@@ -101,9 +101,9 @@ export default function ServicesPage() {
               ].map((feature, i) => (
                 <div
                   key={i}
-                  className="group border-border bg-surface-card hover:border-brand-primary/40 relative overflow-hidden rounded-[3.5rem] border p-10 transition-all duration-700 hover:-translate-y-2 md:p-14"
+                  className="group border-border bg-surface-card hover:border-brand-primary/40 rounded-card-xl relative overflow-hidden border p-10 transition-all duration-700 hover:-translate-y-2 md:p-14"
                 >
-                  <div className="text-brand-primary border-border bg-surface-main group-hover:bg-brand-primary group-hover:text-surface-main mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] border transition-all duration-500 group-hover:rotate-6">
+                  <div className="text-brand-primary border-border bg-surface-main group-hover:bg-brand-primary group-hover:text-surface-main rounded-card mb-10 flex h-20 w-20 items-center justify-center border transition-all duration-500 group-hover:rotate-6">
                     <IconRenderer name={feature.icon} size={36} />
                   </div>
                   <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors">

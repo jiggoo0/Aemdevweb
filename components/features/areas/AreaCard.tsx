@@ -8,8 +8,6 @@
  * - Enforced strict lowercase path mapping for Linux/Vercel stability.
  */
 
-"use client";
-
 import React, { memo, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -49,13 +47,14 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
   );
 
   const socialProof = data.localContext?.socialProof;
+  const displayPrice = data.price || data.localContext?.regionalPricing?.startPrice;
 
   return (
     <Link
       href={`/areas/${safeSlug}`}
       aria-label={`ดูรายละเอียดบริการรับทำเว็บไซต์ในพื้นที่ ${displayTitle}`}
       className={cn(
-        "group relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "group rounded-section relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden border transition-[transform,box-shadow,border-color,background-color] duration-700 ease-[0.16,1,0.3,1]",
         "border-border bg-surface-card shadow-pro-sm",
         "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
         "transform-gpu will-change-transform",
@@ -127,29 +126,48 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           </div>
 
           {/* Tags Node (Flexible wrapping) */}
-          {districts.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {districts.slice(0, 3).map((d) => (
-                <span
-                  key={d}
-                  className="border-border bg-surface-card/40 text-text-secondary group-hover:border-brand-primary/20 rounded-lg border px-3 py-1 text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm transition-colors"
-                >
-                  {d}
-                </span>
-              ))}
-              {districts.length > 3 && (
-                <span className="text-brand-primary px-1 py-1 text-[9px] font-black opacity-60">
-                  +MORE
-                </span>
-              )}
+          <div className="space-y-4">
+            {districts.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {districts.slice(0, 2).map((d) => (
+                  <span
+                    key={d}
+                    className="border-border bg-surface-card/40 text-text-secondary group-hover:border-brand-primary/20 rounded-lg border px-3 py-1 text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm transition-colors"
+                  >
+                    {d}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* [NEW]: Regional Technical Pulse */}
+            <div className="flex items-center gap-6 border-t border-[var(--brand-primary)]/10 pt-4">
+              <div className="space-y-1">
+                <p className="font-mono text-[8px] font-bold uppercase opacity-40">Saturation</p>
+                <p className="text-sm font-black italic">{data.marketSaturation || 45}%</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-mono text-[8px] font-bold uppercase opacity-40">Latency</p>
+                <p className="text-sm font-black text-emerald-500 italic">
+                  {data.regionalLatency || 25}
+                  <span className="ml-0.5 text-[8px]">ms</span>
+                </p>
+              </div>
             </div>
-          )}
+          </div>
 
           {/* NODE_FOOTER: Action Signal */}
           <footer className="border-border flex items-center justify-between border-t pt-6">
-            <span className="text-text-muted group-hover:text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40 transition-all group-hover:translate-x-1 group-hover:opacity-100">
-              Analyze_Node
-            </span>
+            <div className="flex flex-col">
+              {displayPrice && (
+                <span className="text-brand-primary text-xs font-black italic">
+                  ฿{displayPrice} <span className="text-[8px] uppercase opacity-40">Start</span>
+                </span>
+              )}
+              <span className="text-text-muted group-hover:text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+                Analyze_Node
+              </span>
+            </div>
             <div className="bg-surface-offset/50 group-hover:bg-brand-primary flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 group-hover:text-white">
               <IconRenderer name="ArrowRight" size={18} />
             </div>

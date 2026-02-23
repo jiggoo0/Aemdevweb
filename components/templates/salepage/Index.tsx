@@ -1,12 +1,10 @@
 /**
- * [TEMPLATE]: SALEPAGE_ORCHESTRATOR v18.0.6 (STABILIZED_FINAL)
- * [STRATEGY]: Psychological Funnel | Intelligence FAQ | Zero-Jank Deployment
+ * [TEMPLATE]: SALEPAGE_ORCHESTRATOR v18.0.7 (RSC_ENFORCED)
+ * [STRATEGY]: Server-Side Rendering | Psychological Funnel | Zero-Jank
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
-import React, { useMemo, memo } from "react";
+import React from "react";
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- 1. Infrastructure ---
@@ -15,18 +13,23 @@ import type { UniversalTemplateProps } from "@/types";
 import { generateUniversalSchema } from "@/lib/schema";
 
 // --- 2. Components (Atomic Blocks) ---
-import { SaleNavbar } from "./_components/SaleNavbar";
-import { SaleHero } from "./_components/SaleHero";
-import { FlashSaleTimer } from "./_components/FlashSaleTimer";
-import { FeatureComparison } from "./_components/FeatureComparison";
-import { ThaiTrustBadge } from "./_components/ThaiTrustBadge";
-import { DirectOrderForm } from "./_components/DirectOrderForm";
-import { SaleFooter } from "./_components/SaleFooter";
-import StickyBuyButton from "./_components/StickyBuyButton";
+import { SaleNavbar } from "../sections/SaleNavbar";
+import { SaleHero } from "../sections/SaleHero";
+import { FlashSaleTimer } from "../sections/FlashSaleTimer";
+import { FeatureComparison } from "../sections/FeatureComparison";
+import { ThaiTrustBadge } from "../sections/ThaiTrustBadge";
+import { DirectOrderForm } from "../sections/DirectOrderForm";
+import { SaleFooter } from "../sections/SaleFooter";
+import StickyBuyButton from "../sections/StickyBuyButton";
 import IconRenderer from "@/components/ui/IconRenderer";
 
 // --- 3. Shared Sections ---
 import { DynamicFAQ } from "../sections/DynamicFAQ";
+import { RegionalRoadmap } from "../sections/RegionalRoadmap";
+import { LocalSuccessNode } from "../sections/LocalSuccessNode";
+import { RegionalGallery } from "../sections/RegionalGallery";
+import { LocalInsight } from "../sections/LocalInsight";
+import { DirectTerminal } from "../sections/DirectTerminal";
 
 interface SalePageTemplateProps {
   readonly data: UniversalTemplateProps;
@@ -35,19 +38,18 @@ interface SalePageTemplateProps {
 
 /**
  * @component SalePageTemplate
- * @description เทมเพลตหน้าขายระดับพรีเมียมที่ผ่านการปรับแต่งความเร็วและการจัดเรียงเนื้อหาเชิงจิตวิทยา
+ * @description เทมเพลตหน้าขายระดับพรีเมียมที่ผ่านการปรับแต่งความเร็วและการจัดเรียงเนื้อหาเชิงจิตวิทยา (RSC Version)
  */
 const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) => {
-  // [SEO]: ประมวลผล Schema สำหรับ Product/Offer (Search AI Optimization)
-  const schemas = useMemo(() => generateUniversalSchema(data), [data]);
+  // [SEO]: Direct Schema Generation for RSC compliance
+  const schemas = generateUniversalSchema(data);
 
   // [DESTRUCTURING]: แยกข้อมูลสำคัญเพื่อความสะอาดของโค้ด
   const { socialProof: social, regionalPricing: pricing, theme } = data;
   const isDarkMode = theme?.mode === "dark";
 
-  // [LOGIC]: กำหนดเวลาสิ้นสุดโปรโมชั่น (จำลอง 24 ชม. จากปัจจุบัน)
-  // หมายเหตุ: ในระบบจริงควรส่งมาจาก Database เพื่อความแม่นยำ
-  const promoExpiry = useMemo(() => new Date(Date.now() + 86400000).toISOString(), []);
+  // [LOGIC]: กำหนดเวลาสิ้นสุดโปรโมชั่น (Static computation for initial render)
+  const promoExpiry = new Date(Date.now() + 86400000).toISOString();
 
   return (
     <>
@@ -74,10 +76,57 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
           <SaleHero
             title={data.title}
             description={data.description}
-            image={data.image}
+            image={data.regionalVisuals?.banner || data.image}
             accentColor="var(--brand-primary)"
             className="text-text-primary"
           />
+
+          {/* [NEW]: Regional Insight & Competition */}
+          {data.province && (
+            <LocalInsight
+              insight={data.localContext?.marketInsight || ""}
+              painPoints={(data.localContext?.painPoints as string[]) || []}
+              marketSaturation={data.marketSaturation}
+            />
+          )}
+
+          {/* [NEW]: Regional Promotions (Only if available) */}
+          {data.promotions && data.promotions.length > 0 && (
+            <section className="relative z-40 container mx-auto -mt-8 px-4">
+              <div className="rounded-card-lg shadow-glow hover:shadow-glow-lg border border-[var(--brand-primary)]/30 bg-black/40 p-6 backdrop-blur-2xl transition-all hover:scale-[1.01]">
+                <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+                  <div className="flex items-center gap-6">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--brand-primary)]/20 text-[var(--brand-primary)] shadow-inner">
+                      <IconRenderer name="Sparkles" size={32} />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="font-mono text-[10px] font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase">
+                        Regional_Exclusive_Deal
+                      </span>
+                      <h4 className="text-xl font-black tracking-tighter text-white uppercase italic">
+                        {data.promotions[0].title}
+                      </h4>
+                      <p className="text-xs font-medium text-white/60">
+                        {data.promotions[0].description}
+                      </p>
+                    </div>
+                  </div>
+                  {data.promotions[0].discount && (
+                    <div className="flex items-center gap-4 border-l border-white/10 pl-8">
+                      <div className="text-right">
+                        <p className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                          Discount
+                        </p>
+                        <p className="text-3xl font-black text-[var(--brand-primary)] italic">
+                          {data.promotions[0].discount}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Phase 02: SCARCITY & PROOF - กระตุ้นด้วยความจำกัดและฐานลูกค้า */}
           <section
@@ -85,7 +134,7 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
             className="relative z-30 -mt-10 mb-20 px-4 sm:-mt-16 lg:mb-32"
           >
             <div className="mx-auto max-w-4xl text-center">
-              <div className="border-border/10 bg-surface-card/80 shadow-pro-xl inline-block rounded-[2.5rem] border px-8 py-6 backdrop-blur-xl transition-all hover:scale-[1.02]">
+              <div className="border-border/10 bg-surface-card/80 shadow-pro-xl rounded-section inline-block border px-8 py-6 backdrop-blur-xl transition-all hover:scale-[1.02]">
                 <FlashSaleTimer targetDate={promoExpiry} color="var(--brand-primary)" />
               </div>
 
@@ -120,6 +169,27 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
             </section>
           )}
 
+          {/* [NEW]: Regional Product Showcase Gallery */}
+          {data.regionalVisuals?.gallery && (
+            <RegionalGallery images={data.regionalVisuals.gallery} />
+          )}
+
+          {/* [NEW]: Regional Roadmap & Health Check Terminal */}
+          {data.province && (
+            <>
+              <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
+              <div className="container mx-auto px-4 py-24">
+                <div className="mx-auto max-w-2xl">
+                  <DirectTerminal
+                    mode="health-check"
+                    province={data.province}
+                    latency={data.regionalLatency}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+
           {/* Phase 04: TRUST SIGNALS - ตอกย้ำความปลอดภัยและมาตรฐานบริการ */}
           <section id="trust-signals" className="py-24 lg:py-32">
             <ThaiTrustBadge
@@ -128,6 +198,17 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
               accentColor="var(--brand-primary)"
             />
           </section>
+
+          {/* [NEW]: Local Regional Success Proof */}
+          {data.localSuccessStory && data.province && (
+            <div className="-mt-24 mb-24">
+              <LocalSuccessNode
+                title={data.localSuccessStory.title}
+                result={data.localSuccessStory.result}
+                province={data.province}
+              />
+            </div>
+          )}
 
           {/* Phase 05: OBJECTION BUSTER - ตอบข้อสงสัยก่อนปิดการขาย */}
           <div id="objection-buster" className="border-border/5 bg-surface-card/30 border-t">
@@ -141,7 +222,7 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
           {/* Phase 06: CONVERSION GATEWAY - ส่วนสรุปและฟอร์มสั่งซื้อ */}
           <section id="order" className="relative min-h-[60dvh] scroll-mt-24 py-24 md:py-32">
             <div className="container mx-auto max-w-4xl px-4">
-              <div className="border-brand-primary/30 shadow-glow-sm bg-surface-card hover:shadow-glow overflow-hidden rounded-[3rem] border transition-all duration-700">
+              <div className="border-brand-primary/30 shadow-glow-sm bg-surface-card hover:shadow-glow rounded-card-lg overflow-hidden border transition-all duration-700">
                 <div className="bg-brand-secondary relative overflow-hidden p-10 text-center text-white md:p-16">
                   {/* Pattern Decorator */}
                   <div
@@ -184,7 +265,7 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
 
           <footer className="border-border/5 py-12 text-center opacity-20">
             <p className="font-mono text-[8px] font-black tracking-[0.6em] uppercase">
-              SalePage_Active_Node.v18.0.6_STABLE
+              SalePage_Active_Node.v18.0.7_RSC
             </p>
           </footer>
         </main>
@@ -193,6 +274,4 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
   );
 };
 
-SalePageTemplate.displayName = "SalePageTemplate";
-
-export default memo(SalePageTemplate);
+export default SalePageTemplate;

@@ -13,6 +13,7 @@ export const sukhothaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "sukhothai",
   province: "สุโขทัย",
+  region: "North",
   templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและความยั่งยืน
 
   title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ให้งานฝีมือดูพรีเมียม ติดหน้าแรก Google",
@@ -36,6 +37,30 @@ export const sukhothaiNode: AreaNode = {
   priceValue: localAuthorityService.priceValue,
   currency: localAuthorityService.currency,
   unit: localAuthorityService.unit,
+
+  isTourismHeavy: true,
+  marketSaturation: 42,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Heritage Brand Audit",
+      description:
+        "วิเคราะห์คุณค่าทางประวัติศาสตร์และงานหัตถศิลป์เพื่อดึงจุดเด่นออกมาเป็นเนื้อหาพรีเมียม (Storytelling)",
+    },
+    {
+      step: "02",
+      title: "Aesthetic UI Deployment",
+      description:
+        "ออกแบบหน้าเว็บไซต์ที่สะท้อนถึงความภูมิฐานและรสนิยมเพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูง",
+    },
+    {
+      step: "03",
+      title: "High-Value Niche SEO",
+      description:
+        "เน้นคีย์เวิร์ดเฉพาะทางเพื่อดักจับกลุ่มนักท่องเที่ยวและผู้สะสมงานศิลปะจากทั่วโลก",
+    },
+  ],
 
   // --- Visual (Local Specific) ---
   heroImage: "/images/areas/sukhothai-node.webp",

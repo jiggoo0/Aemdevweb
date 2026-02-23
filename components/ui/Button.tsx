@@ -37,7 +37,7 @@ const buttonVariants = cva(
       size: {
         default: "h-12 rounded-2xl px-6 py-2 md:rounded-[1.2rem]",
         sm: "h-9 rounded-xl px-4 text-[10px] tracking-[0.1em]",
-        lg: "h-16 rounded-[2rem] px-10 text-base tracking-[0.2em]",
+        lg: "rounded-card h-16 px-10 text-base tracking-[0.2em]",
         icon: "h-10 w-10 rounded-xl p-0",
       },
     },

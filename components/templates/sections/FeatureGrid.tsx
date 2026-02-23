@@ -77,7 +77,7 @@ const FeatureGridEngine = ({
             </span>
           </div>
 
-          <h2 className="text-text-primary text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
+          <h2 className="text-text-primary text-5xl leading-relaxed font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
             {heading}
           </h2>
 
@@ -103,7 +103,7 @@ const FeatureGridEngine = ({
               key={`feature-${index}`}
               variants={itemVariants}
               className={cn(
-                "group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border transition-all duration-700 ease-[0.16,1,0.3,1]",
+                "group rounded-section relative flex flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
                 "bg-surface-card border-border shadow-pro-sm p-10 md:p-12",
                 "hover:border-brand-primary/40 hover:shadow-glow-sm hover:-translate-y-2",
                 "transform-gpu will-change-transform",
@@ -113,12 +113,12 @@ const FeatureGridEngine = ({
 
               <div className="relative z-10">
                 {/* ICON DYNAMIC RENDERER */}
-                <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border mb-10 flex h-20 w-20 items-center justify-center rounded-[2rem] border transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12">
+                <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border rounded-card mb-10 flex h-20 w-20 items-center justify-center border transition-all duration-500 group-hover:scale-110 group-hover:-rotate-12">
                   <IconRenderer name={feature.icon} size={32} strokeWidth={2} />
                 </div>
 
                 <div className="space-y-5">
-                  <h3 className="text-text-primary group-hover:text-brand-primary text-3xl leading-[0.95] font-black tracking-tighter uppercase italic transition-colors duration-300">
+                  <h3 className="text-text-primary group-hover:text-brand-primary text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-colors duration-300">
                     {feature.title}
                   </h3>
                   <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-75 transition-opacity duration-500 group-hover:opacity-100">

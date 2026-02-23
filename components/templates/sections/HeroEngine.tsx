@@ -111,7 +111,7 @@ const HeroEngine = ({
               initial={{ opacity: 0.2, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={transition}
-              className="text-text-primary transform-gpu text-5xl leading-[0.95] font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
+              className="text-text-primary transform-gpu text-5xl leading-relaxed font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
             >
               {title}
             </motion.h1>
