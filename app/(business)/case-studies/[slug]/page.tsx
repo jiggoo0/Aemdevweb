@@ -18,10 +18,6 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 
-// [DYNAMIC CONFIG]: เปลี่ยนเป็น ISR เพื่อความยืดหยุ่นในการอัปเดตข้อมูล
-export const revalidate = 3600; // Revalidate ทุก 1 ชั่วโมง
-export const dynamicParams = true; // รองรับ Slug ใหม่ที่ยังไม่มีตอน Build
-
 export async function generateStaticParams() {
   const cases = await getAllCaseStudies();
   return cases.map((item) => ({ slug: item.slug }));

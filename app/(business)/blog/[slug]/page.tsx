@@ -18,12 +18,6 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 
-// [DYNAMIC CONFIG]:
-// 1. revalidate: อัปเดต Cache ทุก 1 ชม. (ISR)
-// 2. dynamicParams: อนุญาตให้สร้างหน้าใหม่ที่ไม่มีตอน Build (สำหรับบทความใหม่)
-export const revalidate = 3600;
-export const dynamicParams = true;
-
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));

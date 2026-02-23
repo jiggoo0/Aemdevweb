@@ -104,10 +104,10 @@ export default async function ServicePage(props: PageProps) {
       {/* [ORCHESTRATION]: เราส่งต่อหน้าที่การจัดการ Visual Shell (CSS Variables, HUD, Spacing)
         ให้ TemplateRenderer เป็นผู้ดูแล เพื่อให้เกิดความสอดคล้องระหว่างหน้า Service และหน้า Area
       */}
-      <TemplateRenderer
-        data={{ ...service, theme: activeTheme } as UniversalTemplateProps}
-        renderMode="full"
-      />
+      {await TemplateRenderer({
+        data: { ...service, theme: activeTheme } as UniversalTemplateProps,
+        renderMode: "full",
+      })}
 
       {/* [HUD]: ย้ายมาอยู่ระดับล่างสุดของ DOM และใช้ Fixed Position 
         เพื่อให้แสดงผลทับทุกส่วนของเทมเพลตได้อย่างแม่นยำ 

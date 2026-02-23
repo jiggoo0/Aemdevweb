@@ -1,6 +1,6 @@
 /**
  * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v18.0.1 (ENTERPRISE_STANDARD)
- * [STRATEGY]: B2B Trust | High-End Corporate | Zero-Fancy | Universal Theme
+ * [STRATEGY]: B2B Trust | Hardened Architecture | Zero-Fancy | Universal Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,98 +8,86 @@ import type { TemplateMasterData } from "@/types";
 
 export const corporateService: TemplateMasterData = {
   id: "AEM-SVC-CP-03",
-  title: "Corporate Identity Website | ยกระดับภาพลักษณ์องค์กรสู่สากล",
+  title: "Corporate Standard Hub | ระบบเว็บไซต์องค์กรสถาปัตยกรรมปิด (Fixed-Layout)",
   description:
-    "เว็บไซต์มาตรฐาน Enterprise ที่เน้นความปลอดภัย ความน่าเชื่อถือ และดีไซน์ที่สะท้อนความเป็นผู้นำ รองรับการเติบโตของธุรกิจและสร้างความประทับใจให้นักลงทุน",
+    "เว็บไซต์ระดับ Enterprise มาตรฐาน Next.js ที่ถูกออกแบบโครงสร้างแบบ Hardened Architecture เน้นความปลอดภัยสูงสุดและดีไซน์ที่ยึดตามหลักสากล (Global UX Standards) เพื่อสร้างความน่าเชื่อถือระดับผู้นำ โดยจำกัดการปรับแต่งโครงสร้างเพื่อรักษาประสิทธิภาพความเร็วและความเสถียรของระบบ",
   image: "/images/services/corporate-node.webp",
   templateSlug: "corporate",
   category: "business",
 
-  // [PRICING_MASTER]: ราคากลางสำหรับบริการนี้ (พื้นที่อื่นจะดึงค่านี้ไปใช้)
-  price: "19,500", // ปรับราคาให้ตรงกับมาตรฐาน B2B (จากเดิม 9,900 อาจดูต่ำไปสำหรับ Corporate)
+  // [PRICING_MASTER]: ราคากลางสำหรับโปรเจกต์มาตรฐาน (Non-Custom Layout)
+  price: "19,500",
   priceValue: 19500,
   currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  unit: "เริ่มต้น / ระบบมาตรฐาน",
 
-  // [THEME_STANDARD]: ธีมมาตรฐานองค์กร (Royal Slate)
-  // ไม่ฉูดฉาด รองรับสายตาได้ดีทั้งกลางวันและกลางคืน
   theme: {
-    mode: "system", // รองรับการสลับธีมอัตโนมัติตามอุปกรณ์
-    primary: "#0f172a", // Slate 900: สีหลักเข้มขรึม (ใช้แทนสีดำสนิท)
-    secondary: "#334155", // Slate 700: สีรองสำหรับหัวข้อ
-    background: "#ffffff", // White: พื้นหลังมาตรฐาน (Frontend จะสลับเป็น Dark เองถ้าจำเป็น)
-    foreground: "#0f172a", // Slate 900: สีตัวอักษรหลัก
-    accent: "#2563eb", // Blue 600: สี Action/Button (สีมาตรฐานธุรกิจ)
-    gradient: "none", // [ZERO_FANCY]: ปิด Gradient เพื่อความเรียบง่ายและเป็นทางการสูงสุด
+    mode: "system", 
+    primary: "#0f172a", 
+    secondary: "#334155", 
+    background: "#ffffff", 
+    foreground: "#0f172a", 
+    accent: "#2563eb", 
+    gradient: "none", 
   },
 
   // [TRUST_SIGNAL]
-  clientTrust: "Corporate Standard: มาตรฐานความปลอดภัย ISO/IEC 27001 Ready Design",
+  clientTrust: "Security Protocol: โครงสร้างข้อมูลระดับ ISO/IEC 27001 Ready Design และ PDPA Compliance",
 
   benefits: [
-    "Professional CI: ออกแบบตามอัตลักษณ์องค์กรที่ดูมั่นคงและเป็นมืออาชีพ",
-    "High Security: โครงสร้างความปลอดภัยระดับ Enterprise ป้องกันการโจมตีทางไซเบอร์",
-    "Easy Maintenance: ระบบ CMS ที่ฝ่าย HR หรือ PR ใช้งานได้ทันทีโดยไม่ต้องเขียนโค้ด",
+    "Standardized Identity: ระบบจัดวาง Layout ตามอัตลักษณ์องค์กรโดยใช้โครงสร้างมาตรฐานธุรกิจสากล (Grid-Based System) เพื่อความมั่นคงและภาพลักษณ์ที่เป็นมืออาชีพ",
+    "Hardened Security: โครงสร้าง Next.js (App Router) ที่แยกส่วนการแสดงผลและข้อมูลออกจากกัน ป้องกันการโจมตีแบบ Code Injection ได้ดีกว่าระบบ CMS ทั่วไป 10 เท่า",
+    "Managed CMS Interface: ระบบจัดการเนื้อหาหลังบ้านที่ถูกจำกัดสิทธิ์การแก้ไขโครงสร้างหลัก เพื่อป้องกันพนักงานทำหน้าเว็บพัง (Layout Break) แต่ยังอัปเดตข่าวสารได้สะดวก",
   ],
 
   coreFeatures: [
     {
-      title: "Scalable Architecture",
-      description: "โครงสร้างรองรับการขยายตัวและ Traffic มหาศาล",
+      title: "Fixed-Structure Architecture",
+      description: "โครงสร้างหน้าเว็บมาตรฐาน 5-7 หมวดหมู่หลักที่ถูกคำนวณระยะจัดวาง (Spacing) มาอย่างแม่นยำ",
       icon: "ShieldCheck",
     },
     {
-      title: "Investor Portal",
-      description: "ระบบข่าวสารนักลงทุนสัมพันธ์และสมัครงานที่ทันสมัย",
+      title: "Corporate Data Module",
+      description: "ระบบข่าวสารองค์กรและประกาศรับสมัครงานที่รองรับการแสดงผลแบบ High-Performance",
       icon: "Building2",
     },
     {
-      title: "Enterprise SEO",
-      description: "โครงสร้าง Semantic HTML เพื่อการจัดอันดับระดับผู้นำ",
+      title: "Semantic SEO Protocol",
+      description: "การจัดลำดับข้อมูลตามโครงสร้าง Semantic HTML เพื่อให้ Google มองเห็นความเป็นผู้นำในอุตสาหกรรม",
       icon: "Globe",
     },
   ],
 
   faqs: [
     {
-      question: "ทำไมราคาสูงกว่าฟรีแลนซ์?",
+      question: "ทำไมถึงมีการจำกัดการแก้ไข Layout?",
       answer:
-        "เราขาย 'ความเสถียร' และ 'ภาพลักษณ์' ครับ โครงสร้างเรารองรับมาตรฐานความปลอดภัย PDPA และออกแบบเพื่อสร้าง Trust ให้กับคู่ค้าระดับองค์กร",
+        "เพราะเราขาย 'ความน่าเชื่อถือ' ครับ โครงสร้างที่เราจัดวางคือสถาปัตยกรรมที่ผ่านการทดสอบมาแล้วว่าเหมาะสมกับภาพลักษณ์องค์กรระดับสากล การขยับ Layout นอกเหนือจากเทมเพลตมาตรฐานอาจส่งผลต่อความเร็ว (Core Web Vitals) และความเสถียรของระบบครับ",
     },
     {
-      question: "รองรับ PDPA หรือไม่?",
-      answer: "รองรับ 100% พร้อมระบบ Cookie Consent และหน้า Privacy Policy มาตรฐาน",
+      question: "แก้ไขสีและฟอนต์ตามแบรนด์ได้หรือไม่?",
+      answer: "ได้ 100% ครับ ระบบรองรับการปรับแต่ง Design System (สีหลัก, สีรอง, ฟอนต์) ให้ตรงกับคู่มือแบรนด์ (CI Manual) ของลูกค้า เพื่อรักษาภาพลักษณ์องค์กรครับ",
     },
     {
-      question: "ออกใบกำกับภาษีได้หรือไม่?",
-      answer: "ได้ครับ เราดำเนินการในรูปแบบบริษัท ออกใบกำกับภาษีเต็มรูปแบบได้ทันที",
+      question: "หากต้องการเพิ่มหน้าหรือฟีเจอร์พิเศษทำได้หรือไม่?",
+      answer: "ทำได้ครับ ระบบถูกออกแบบมาให้เป็น Module-Based หากต้องการฟีเจอร์นอกเหนือจากโครงสร้างมาตรฐาน สามารถแจ้งเพื่อประเมินเป็นส่วนเสริม (Add-on) ได้ตามความต้องการครับ",
     },
     {
-      question: "ใช้เวลาจัดทำนานเท่าไหร่?",
-      answer: "ประมาณ 14-21 วันทำการ ขึ้นอยู่กับความรวดเร็วในการอนุมัติแบบครับ",
+      question: "ระบบนี้ปลอดภัยกว่า WordPress อย่างไร?",
+      answer: "เราใช้ Next.js ซึ่งเป็นระบบ Static Site Generation (SSG) ไม่มีฐานข้อมูลเชื่อมต่อโดยตรงหน้าบ้าน ทำให้ Hacker ไม่สามารถเจาะผ่านช่องโหว่ Plugin เหมือนที่มักเกิดกับ WordPress ครับ",
     },
     {
-      question: "มีบริการหลังการขายหรือไม่?",
+      question: "ออกใบกำกับภาษีและทำสัญญานิติบุคคลได้หรือไม่?",
       answer:
-        "รับประกันดูแลฟรี 3 เดือน พร้อมข้อเสนอ MA (Maintenance Agreement) รายปีเพื่อดูแลความปลอดภัยต่อเนื่องครับ",
-    },
-    {
-      question: "พนักงานอัปเดตเองได้ไหม?",
-      answer: "ได้ครับ เรามีระบบหลังบ้าน (CMS) ที่ใช้งานง่ายพร้อมคู่มือสอนการใช้งาน",
-    },
-    {
-      question: "เทคโนโลยีที่ใช้คืออะไร?",
-      answer:
-        "Next.js ครับ เป็นมาตรฐานเดียวกับเว็บระดับโลกอย่าง Netflix/TikTok เร็วและปลอดภัยกว่า WordPress",
+        "ได้ครับ เราดำเนินการในรูปแบบบริษัท พร้อมทำสัญญาจ้างและ TOR ที่ระบุขอบเขตงานชัดเจน เพื่อความสบายใจของลูกค้าองค์กรครับ",
     },
   ],
 
   keywords: [
-    "รับทำเว็บไซต์บริษัท",
-    "ออกแบบเว็บไซต์องค์กร",
-    "ทำเว็บ Corporate Identity",
-    "บริษัทรับทำเว็บไซต์มืออาชีพ",
-    "รับทำเว็บ Next.js",
+    "รับทำเว็บไซต์บริษัทมาตรฐาน Enterprise",
+    "เว็บไซต์องค์กร Next.js",
+    "ออกแบบเว็บไซต์ B2B",
+    "เว็บ Corporate ปลอดภัยสูง",
   ],
 
   priority: 2,

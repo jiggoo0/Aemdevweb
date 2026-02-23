@@ -1,14 +1,13 @@
 ---
 domain: aemdevweb.com
 status: strictly-enforced
-last_audit: 2026-02-19 00:45:17
+last_audit: 2026-02-19 20:10:40
 generated_by: generate_docs.sh v3.0
 ---
 
 # SYSTEM ARCHITECTURE & DATA SCHEMAS
 
 ## SYSTEM MANDATE
-
 # SYSTEM MANDATE & ARCHITECTURAL DOCTRINE
 
 **Project:** AEMDEVWEB (High-Performance Web Infrastructure)
@@ -157,7 +156,6 @@ Defines a geographic landing page (e.g., `constants/area-nodes/korat.ts`).
 ---
 
 ## SYSTEM PROMPT EXTENSION
-
 # SYSTEM PROMPT EXTENSION & COGNITIVE PROTOCOLS
 
 **Target System:** AEMDEVWEB (High-Performance Digital Infrastructure)
@@ -276,114 +274,67 @@ When asked to generate code or configuration:
 ---
 
 ## TECHNICAL DATA SCHEMAS (TYPES)
-
 ### MODULE: index.d.ts
-
 `Path: types/index.d.ts`
-
 ```typescript
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.0.3 (HOTFIX_BUILD)
- * [STRATEGY]: Loose Constraints for Build | Restore Missing Exports
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.1.0 (STABILIZED_EEAT)
+ * [STRATEGY]: Strict Type Contract | E-E-A-T Knowledge Graph | Next.js 16 Sync
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [CHANGELOG]:
+ * - Patched SiteConfig.expert to support linkedinUrl (Fix: TS2353).
+ * - Refined SiteConfig.links from Record to Explicit Interface for better IntelliSense.
  */
 
 import type { ReactNode } from "react";
-// [IMPORT]: ดึงค่า Action Type สำหรับการใช้งานใน Registry
 import type { TemplateAction } from "./template-props";
 
 // =========================================
 // [01] INFRASTRUCTURE & ADAPTERS
 // =========================================
 
+/** [NEXTJS_PROTOCOL]: Supporting Next.js 15/16 Async Parameters */
 export interface PageProps<T = Record<string, string>> {
   readonly params: Promise<T>;
   readonly searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-/** [INTERNAL]: ใช้ภายในไฟล์นี้เท่านั้น ไม่ต้อง export */
-interface LayoutProps {
+export interface LayoutProps {
   readonly children: ReactNode;
 }
 
-/** [ICON_SYSTEM]: รายชื่อไอคอนที่รองรับในระบบ (Lucide React) */
+/** [ICON_SYSTEM]: Registry of Validated Lucide Icons */
 export type IconName =
-  | "Menu"
-  | "X"
-  | "Check"
-  | "CheckCircle"
-  | "CheckCircle2"
-  | "Star"
-  | "ChevronRight"
-  | "ChevronDown"
-  | "ArrowRight"
-  | "ArrowUpRight"
-  | "Search"
-  | "SearchX"
-  | "Zap"
-  | "Target"
-  | "Layers"
-  | "Shield"
-  | "ShieldCheck"
-  | "Newspaper"
-  | "Building2"
-  | "FileText"
-  | "FileDown"
-  | "MousePointerClick"
-  | "Smartphone"
-  | "Globe"
-  | "TrendingUp"
-  | "Award"
-  | "MapPin"
-  | "Activity"
-  | "UserCheck"
-  | "Quote"
-  | "Settings"
-  | "Disc"
-  | "Wifi"
-  | "Code2"
-  | "Network"
-  | "User"
-  | "Camera"
-  | "CloudSun"
-  | "Wind"
-  | "Droplets"
-  | "Eye"
-  | "Cloud"
-  | "AlertCircle"
-  | "Sparkles"
-  | "Database"
-  | "Map"
-  | "CalendarCheck"
+  | "Menu" | "X" | "Check" | "CheckCircle" | "CheckCircle2" | "Star"
+  | "ChevronRight" | "ChevronDown" | "ArrowRight" | "ArrowUpRight"
+  | "Search" | "SearchX" | "Zap" | "Target" | "Layers" | "Shield"
+  | "ShieldCheck" | "Newspaper" | "Building2" | "FileText" | "FileDown"
+  | "MousePointerClick" | "Smartphone" | "Globe" | "TrendingUp"
+  | "Award" | "MapPin" | "Activity" | "UserCheck" | "Quote" | "Settings"
+  | "Disc" | "Wifi" | "Code2" | "Network" | "User" | "Camera"
+  | "CloudSun" | "Wind" | "Droplets" | "Eye" | "Cloud" | "AlertCircle"
+  | "Sparkles" | "Database" | "Map" | "CalendarCheck" | "Lock"
   | (string & {});
 
 export type TemplateSlug =
-  | "corporate"
-  | "salepage"
-  | "local"
-  | "local-authority"
-  | "catalog"
-  | "bio"
-  | "hotelresort"
-  | "seo-agency";
+  | "corporate" | "salepage" | "local" | "local-authority"
+  | "catalog" | "bio" | "hotelresort" | "seo-agency";
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
 // =========================================
-// [02] THEME & SITE CONFIG
+// [02] THEME & SITE CONFIGURATION
 // =========================================
 
 export interface ThemeConfig {
   readonly primary: string;
   readonly background: string;
-  readonly mode: "light" | "dark";
+  readonly mode: "light" | "dark" | "system";
   readonly foreground: string;
   readonly secondary?: string;
   readonly accent?: string;
   readonly gradient?: string;
   readonly token?: string;
-
-  // [IDENTITY_SWITCHER]
   readonly radius?: string;
   readonly fontFamily?: string;
   readonly borderWidth?: string;
@@ -422,6 +373,8 @@ export interface SiteConfig {
     readonly bioUrl: string;
     readonly twitterHandle: string;
     readonly googleMerchantId?: string;
+    /** [PATCH_v18.1.0]: LinkedIn Authority Link */
+    readonly linkedinUrl?: string; 
   };
   readonly contact: {
     readonly email: string;
@@ -458,7 +411,20 @@ export interface SiteConfig {
     readonly gaId?: string;
     readonly pixelId?: string;
   };
-  readonly links: Record<string, string>;
+  /** [REFINED]: Explicit Links for Authoritative Mapping */
+  readonly links: {
+    readonly line: string;
+    readonly lineId: string;
+    readonly messenger: string;
+    readonly facebook: string;
+    readonly github: string;
+    readonly twitter: string;
+    readonly youtube: string;
+    readonly googleMaps: string;
+    readonly googleReview: string;
+    readonly linkedin?: string;
+    readonly [key: string]: string | undefined; // Fallback for flexibility
+  };
 }
 
 // =========================================
@@ -500,7 +466,6 @@ export interface BlogPost {
   readonly content?: string;
 }
 
-// [FIXED]: เพิ่ม CaseStudy กลับเข้ามาเพื่อแก้ Error TS2305
 export interface CaseStudy {
   readonly slug: string;
   readonly title: string;
@@ -522,7 +487,7 @@ export interface ImageBlurMetadata {
 export type ImageBlurRegistry = Record<string, ImageBlurMetadata>;
 
 // =========================================
-// [04] UNIVERSAL PROPS (Post-Merger Bridge)
+// [04] CONTEXT & UNIVERSAL TEMPLATES
 // =========================================
 
 export interface LocalContext {
@@ -532,10 +497,13 @@ export interface LocalContext {
   readonly nicheIndustries: readonly string[];
   readonly painPoints: readonly string[];
   readonly competitorLevel: "low" | "medium" | "high" | "extreme";
-
-  readonly socialProof?: { rating: number; reviewCount: number; localClient?: string };
-  readonly regionalPricing?: { startPrice: string; timeline: string };
-  readonly localSuccessStory?: { title: string; result: string };
+  readonly socialProof?: {
+    readonly rating: number;
+    readonly reviewCount: number;
+    readonly localClient?: string;
+  };
+  readonly regionalPricing?: { readonly startPrice: string; readonly timeline: string };
+  readonly localSuccessStory?: { readonly title: string; readonly result: string };
   readonly hyperLocalKeywords?: readonly string[];
 }
 
@@ -557,21 +525,17 @@ export interface UniversalTemplateProps {
   readonly faqs: readonly ServiceFaq[];
   readonly keywords: readonly string[];
   readonly items?: readonly CatalogItem[];
-
   readonly clientTrust?: string;
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
   readonly featuredProjects?: readonly any[];
-
   readonly localContext?: LocalContext;
   readonly province?: string;
   readonly districts?: readonly string[];
-  readonly coordinates?: { lat: number; lng: number };
-
+  readonly coordinates?: { readonly lat: number; readonly lng: number };
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
-
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 }
@@ -602,10 +566,8 @@ export interface TemplateMasterData {
   readonly coreFeatures: readonly ServiceFeature[];
   readonly faqs: readonly ServiceFaq[];
   readonly keywords: readonly string[];
-
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
-
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
   readonly clientTrust?: string;
@@ -617,7 +579,6 @@ export interface AreaNode {
   readonly province: string;
   readonly title: string;
   readonly description: string;
-  // [FIXED]: ปรับเป็น Optional (?) เพื่อแก้ Error TS2741 ในไฟล์ที่ไม่ต้องการ Long Desc
   readonly longDescription?: string;
   readonly seoTitle: string;
   readonly seoDescription: string;
@@ -626,10 +587,9 @@ export interface AreaNode {
   readonly districts: readonly string[];
   readonly keywords: readonly string[];
   readonly heroImage: string;
-  readonly coordinates: { lat: number; lng: number };
+  readonly coordinates: { readonly lat: number; readonly lng: number };
   readonly localContext: LocalContext;
-  readonly theme?: Partial<ThemeConfig>;
-
+  readonly theme?: Partial<ThemeConfig> | ThemeConfig;
   readonly price?: string;
   readonly priceValue?: number;
   readonly currency?: string;
@@ -641,12 +601,10 @@ export interface AreaNode {
 }
 
 export * from "./template-props";
+
 ```
-
 ### MODULE: template-props.ts
-
 `Path: types/template-props.ts`
-
 ```typescript
 /**
  * [SYSTEM CORE]: TEMPLATE_PROPS_ENGINE v17.9.135 (ULTIMATE_STABLE)
@@ -747,128 +705,181 @@ export interface BaseTemplateProps {
  * หากต้องการเพิ่มหน้าใหม่ (New Template) สามารถประกาศเฉพาะจุดที่ใช้งานจริง
  * ในไฟล์ Component นั้นๆ หรือเพิ่มกลับมาที่นี่หากมีการใช้ซ้ำ (Reuse) มากกว่า 2 จุด
  */
+
 ```
 
 ---
 
 ## CONSTANTS REGISTRY
-
 ### CONFIG: bangkok.ts
-
 `Path: constants/area-nodes/bangkok.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: BANGKOK_ENTERPRISE_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Enterprise Branding | CBD Competitive SEO | Hex Standard
+ * [SERVICE_NODE]: BANGKOK_ENTERPRISE_HUB v18.0.1 (DYNAMIC_LINKED)
+ * [STRATEGY]: Enterprise Branding | CBD Competitive SEO | Dynamic Inheritance
+ * [MARKET]: Bangkok CBD, Public Companies & High-End SMEs
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
+import { corporateService } from "@/constants/services/corporate";
 
 export const bangkokNode: AreaNode = {
+  // --- Basic Identity ---
   slug: "bangkok",
   province: "กรุงเทพมหานคร",
-  templateSlug: "corporate",
+  templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
+
   title: "รับทำเว็บไซต์ กรุงเทพฯ | ออกแบบเว็บองค์กรและบริษัท ติดหน้าแรก Google",
   description:
-    "บริการรับทำเว็บไซต์บริษัทในกรุงเทพฯ มาตรฐาน Enterprise โหลดไว ปลอดภัย รองรับ PDPA ออกแบบโดยมืออาชีพเพื่อภาพลักษณ์ธุรกิจที่เหนือกว่าคู่แข่งในย่าน CBD",
+    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise ในกรุงเทพฯ เน้นความปลอดภัยข้อมูล (PDPA) ความเร็วสูงสุด และดีไซน์ที่สะท้อนภาพลักษณ์ผู้นำธุรกิจในย่าน CBD",
+
+  longDescription:
+    "ในสนามแข่งขันทางธุรกิจของกรุงเทพฯ เว็บไซต์ไม่ใช่แค่โบรชัวร์ออนไลน์ แต่คือ 'สำนักงานใหญ่ดิจิทัล' ที่เปิดต้อนรับนักลงทุนและคู่ค้าตลอด 24 ชั่วโมง " +
+    "ผมให้บริการออกแบบและพัฒนาเว็บไซต์สำหรับองค์กรที่ต้องการความสมบูรณ์แบบ ทั้งในด้านดีไซน์ที่สะท้อนวิสัยทัศน์ และโครงสร้างเทคนิคที่รองรับการขยายตัวในอนาคต",
+
+  // --- SEO Metadata ---
   seoTitle: "บริษัทรับทำเว็บไซต์ กรุงเทพฯ รับทำ SEO และออกแบบเว็บองค์กรครบวงจร - เอ็มซ่ามากส์",
   seoDescription:
     "จ้างทำเว็บไซต์กรุงเทพฯ เน้นเว็บองค์กร บริษัทมหาชน และ SME ที่ต้องการความน่าเชื่อถือ รองรับ SEO ติดหน้าแรก Google พร้อมระบบความปลอดภัยขั้นสูง",
+
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/bangkok-node.webp",
-  theme: {
-    mode: "dark",
-    primary: "#3b82f6",
-    secondary: "#1e3a8a",
-    background: "#020617",
-    foreground: "#f8fafc",
-    accent: "#60a5fa",
-    gradient: "from-[#3b82f6]/10 via-transparent to-transparent",
-  },
-  price: "15,900",
-  priceValue: 15900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+
+  // --- Trust Signals ---
   clientTrust:
     "Professional Trust: ได้รับความไว้วางใจจาก 50+ บริษัทชั้นนำและ SME ในย่านสาทร-สุขุมวิท",
+
+  // --- Localized Benefits ---
   benefits: [
-    "มาตรฐานระดับสากล: เว็บไซต์ที่ออกแบบมาเพื่อการแข่งขันในตลาดทุนกรุงเทพฯ รองรับ Traffic มหาศาลและมีความปลอดภัยข้อมูลสูงสุด (Data Security)",
-    "SEO ครองตลาด: วางโครงสร้างเพื่อแย่งชิงพื้นที่หน้าแรก Google ในคีย์เวิร์ดที่มีการแข่งขันสูงที่สุด",
-    "ภาพลักษณ์ผู้นำ: ดีไซน์ CI ที่เฉียบคม สะท้อนวิสัยทัศน์องค์กร เพื่อสร้างความเชื่อมั่นให้นักลงทุนและคู่ค้า",
+    "Enterprise Standard: มาตรฐานการออกแบบและการเขียนโค้ดระดับสากล รองรับ Traffic มหาศาลและการ Audit จากฝ่ายไอที",
+    "Competitive SEO: วางโครงสร้างเพื่อชิงพื้นที่หน้าแรก Google ในสมรภูมิคีย์เวิร์ดที่มีการแข่งขันสูงที่สุดในประเทศ",
+    "Data Security & PDPA: ระบบความปลอดภัยข้อมูลที่รัดกุม พร้อม Cookie Consent ที่ถูกต้องตามกฎหมาย เพื่อปกป้องชื่อเสียงองค์กร",
   ],
+
+  // --- Core Features (Corporate Specific) ---
   coreFeatures: [
     {
-      title: "Enterprise Performance",
-      description: "ใช้ Tech Stack ล่าสุด (Next.js) รับประกันความเร็ว 99/100",
+      title: "High-Performance Tech",
+      description: "ใช้ Tech Stack ล่าสุด (Next.js) รับประกันความเร็วและการรองรับผู้ใช้งานจำนวนมาก",
       icon: "Zap",
     },
     {
-      title: "PDPA Compliance",
-      description: "ติดตั้งระบบ Cookie Consent และ Privacy Policy ถูกต้องตามกฎหมาย",
-      icon: "ShieldCheck",
-    },
-    {
-      title: "Scalable CMS",
-      description: "ระบบจัดการเนื้อหาที่รองรับการขยายตัวขององค์กร เพิ่มข่าวสาร/สินค้าได้ไม่จำกัด",
+      title: "Scalable Architecture",
+      description: "โครงสร้างระบบที่พร้อมขยายตัว รองรับการเพิ่มข้อมูลสินค้าหรือข่าวสารได้ไม่จำกัด",
       icon: "Database",
     },
+    {
+      title: "Corporate Identity",
+      description: "ดีไซน์ที่ถอดรหัสมาจากอัตลักษณ์องค์กร (CI) เพื่อความโดดเด่นและเป็นที่จดจำ",
+      icon: "Building2",
+    },
   ],
+
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "บริษัทอยู่ที่ไหน นัดประชุมได้ไหม?",
       answer:
-        "ผมเป็น Freelance Specialist ที่ทำงานแบบ Remote แต่สามารถนัดประชุม On-site ได้ในเขต CBD ครับ",
+        "ผมทำงานในรูปแบบ Remote เป็นหลักเพื่อให้ได้งานที่รวดเร็ว แต่สามารถนัดประชุม On-site ได้ในเขตธุรกิจ (CBD) กรณีโปรเจกต์มีความซับซ้อนครับ",
     },
     {
       question: "ออกใบกำกับภาษีได้ไหม?",
-      answer: "สามารถออกใบเสนอราคาและใบแจ้งหนี้/ใบเสร็จรับเงินที่ถูกต้องตามกฎหมายได้ครับ",
+      answer:
+        "ได้ครับ ผมดำเนินงานในรูปแบบนิติบุคคล สามารถออกใบเสนอราคาและใบกำกับภาษีเต็มรูปแบบเพื่อหักค่าใช้จ่ายได้ครับ",
     },
+    {
+      question: "รองรับมาตรฐานความปลอดภัยขั้นสูงไหม?",
+      answer:
+        "รองรับครับ เว็บไซต์ทุกเว็บได้รับ SSL Certificate และมีการทำ Hardening Server เพื่อป้องกันการโจมตีพื้นฐานครับ",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...corporateService.faqs.filter(
+      (f) => f.question.includes("PDPA") || f.question.includes("บริการหลังการขาย"),
+    ),
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
-      "ในกรุงเทพฯ ความเร็วและความน่าเชื่อถือคือพระเจ้า เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ปิดดีล B2B ได้ง่ายขึ้น",
+      "ในกรุงเทพฯ ความเร็วและความน่าเชื่อถือคือสิ่งสำคัญที่สุด เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ปิดดีล B2B และสร้างความเชื่อมั่นให้นักลงทุนได้ง่ายขึ้น",
     technicalApproach:
-      "เน้น Security และ Performance สูงสุด เพื่อรองรับการ Audit จากฝ่ายไอทีขององค์กรลูกค้า",
-    localStrength: "พร้อมเข้าพบเพื่อนำเสนองานในรูปแบบมืออาชีพ และเข้าใจกระบวนการทำงานขององค์กรใหญ่",
+      "เน้น Security และ Performance สูงสุด (Core Web Vitals) เพื่อรองรับมาตรฐานขององค์กรขนาดใหญ่",
+    localStrength:
+      "ทำงานเป็นระบบ มีเอกสารชัดเจน (SOW/Timeline) และเข้าใจกระบวนการทำงานขององค์กรใหญ่",
     nicheIndustries: [
-      "อสังหาริมทรัพย์",
-      "การเงินและการลงทุน",
-      "คลินิกและโรงพยาบาล",
-      "บริษัทกฎหมาย",
+      "อสังหาริมทรัพย์และคอนโดมิเนียม",
+      "สถาบันการเงินและการลงทุน",
+      "โรงพยาบาลและคลินิกเฉพาะทาง",
+      "บริษัทกฎหมายและที่ปรึกษา",
     ],
-    painPoints: ["เว็บเก่าโดนแฮกบ่อย", "เว็บโหลดช้า", "ค้นหาใน Google ไม่เจอ"],
+    painPoints: [
+      "เว็บเก่าไม่ปลอดภัย โดนแฮกบ่อย",
+      "เว็บโหลดช้า ลูกค้าหนีไปหาคู่แข่ง",
+      "ค้นหาใน Google ไม่เจอ แม้จะเปิดมานาน",
+    ],
     competitorLevel: "high",
-    socialProof: { rating: 5.0, reviewCount: 128, localClient: "บริษัทอสังหาฯ ชั้นนำ ย่านสาทร" },
-    regionalPricing: { startPrice: "15,900 บาท", timeline: "14-21 วัน" },
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 128,
+      localClient: "บริษัทอสังหาฯ ชั้นนำ ย่านสาทร",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
+      timeline: "14-21 วัน",
+    },
     localSuccessStory: {
       title: "Case Study: โครงการคอนโดสุขุมวิท",
-      result: "ทำ SEO เจาะกลุ่ม Expat ดันยอด Traffic เพิ่มขึ้น 200%",
+      result: "ปรับปรุงโครงสร้าง SEO และ UX ดันยอด Traffic จากกลุ่ม Expat เพิ่มขึ้น 200%",
     },
-    hyperLocalKeywords: ["รับทำเว็บไซต์ สาทร", "ออกแบบเว็บไซต์ สีลม", "จ้างทำ SEO สุขุมวิท"],
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ สาทร",
+      "ออกแบบเว็บไซต์ สีลม",
+      "จ้างทำ SEO สุขุมวิท",
+      "ทำเว็บองค์กร พระราม 9",
+    ],
   },
+
+  // --- System Metadata ---
   priority: 100,
-  districts: ["สาทร", "สีลม", "สุขุมวิท", "พระราม 9", "ทองหล่อ", "อโศก"],
-  keywords: ["รับทำเว็บไซต์ กรุงเทพ", "บริษัทรับทำเว็บไซต์", "จ้างทำเว็บไซต์ ราคา"],
+  districts: ["สาทร", "สีลม", "สุขุมวิท", "พระราม 9", "ทองหล่อ", "อโศก", "ปทุมวัน"],
+  keywords: [
+    "รับทำเว็บไซต์ กรุงเทพ",
+    "บริษัทรับทำเว็บไซต์",
+    "จ้างทำเว็บไซต์ ราคา",
+    "ทำเว็บองค์กร มหาชน",
+  ],
   coordinates: { lat: 13.7563, lng: 100.5018 },
 };
+
 ```
-
 ### CONFIG: chiang-mai.ts
-
 `Path: constants/area-nodes/chiang-mai.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Hex Standard
+ * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.1 (DYNAMIC_LINKED)
+ * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Dynamic Inheritance
  * [MARKET]: Chiang Mai Tourism, Wellness & Creative Arts
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Theme/Price)
+import { hotelResortService } from "@/constants/services/hotel-resort";
 
 export const chiangMaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-mai",
   province: "เชียงใหม่",
-  templateSlug: "hotelresort", // เชื่อมต่อกับ HotelResortTemplate
+  templateSlug: "hotelresort", // เชื่อมโยง Logic การ Render กับ Template โรงแรม
+
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บโรงแรมและรีสอร์ต เพิ่มยอดจองตรง ไม่ผ่าน OTA",
   description:
     "บริการรับทำเว็บไซต์โรงแรมในเชียงใหม่ ดีไซน์หรูหราแบบล้านนาร่วมสมัย โหลดไว ดึงดูดนักท่องเที่ยวทั่วโลก พร้อมระบบจองตรงที่ช่วยลดค่าคอมมิชชั่น OTA ทันที",
@@ -878,23 +889,17 @@ export const chiangMaiNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์เชียงใหม่ เน้นธุรกิจท่องเที่ยว โรงแรม และ Wellness เว็บสวยโหลดไว รองรับหลายภาษา ช่วยดึงลูกค้าต่างชาติและเพิ่มยอดจองตรง (Direct Booking)",
 
-  // --- Visual & Theme (Lanna Luxury: Gold/Stone) ---
-  heroImage: "/images/areas/chiang-mai-node.webp",
-  theme: {
-    mode: "dark",
-    primary: "#c5a358", // Chiang Mai Gold (ทองด้าน)
-    secondary: "#453a1f", // Dark Gold Brown
-    background: "#1c1917", // Stone 900 (ดำอมน้ำตาล อุ่นกว่าดำสนิท)
-    foreground: "#fafaf9", // Stone 50
-    accent: "#eab308", // Yellow 500
-    gradient: "from-[#c5a358]/15 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก hotelResortService เพื่อความเป็นมาตรฐานเดียวกันทั้งระบบ
+  // (Chiang Mai Gold & Lanna Dark Theme)
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
 
-  // --- Pricing Strategy (Localized) ---
-  price: "12,900",
-  priceValue: 12900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chiang-mai-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -902,29 +907,27 @@ export const chiangMaiNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ดีไซน์สะท้อนอัตลักษณ์: ถ่ายทอดเสน่ห์ล้านนาร่วมสมัย (Contemporary Lanna) ผ่านหน้าเว็บไซต์ เพื่อสร้าง First Impression ที่น่าจดจำให้นักท่องเที่ยว",
-    "ระบบจองตรงที่ทรงพลัง: ลดการเสียค่าคอมมิชชั่นให้ Agoda/Booking ด้วยปุ่มจองที่ใช้ง่าย เชื่อมต่อ Payment Gateway ตัดบัตรเครดิตได้ทันที",
-    "รองรับนักท่องเที่ยวทั่วโลก: โครงสร้างเว็บรองรับ Multi-language (อังกฤษ/จีน) เพื่อต้อนรับแขกจากทุกมุมโลกที่ค้นหาที่พักในเชียงใหม่",
+    "Lanna Identity: ถ่ายทอดเสน่ห์ล้านนาร่วมสมัย (Contemporary Lanna) ผ่านหน้าเว็บไซต์ สร้าง First Impression ที่น่าจดจำ",
+    "Powerful Direct Booking: ลดค่าคอมมิชชั่น Agoda/Booking ด้วยปุ่มจองที่ใช้ง่ายและเชื่อมต่อ Payment Gateway",
+    "Global Welcoming: รองรับ Multi-language (อังกฤษ/จีน) เพื่อต้อนรับแขกจากทุกมุมโลกที่ค้นหาที่พักในเชียงใหม่",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Tourism Specific) ---
   coreFeatures: [
     {
       title: "Visual Storytelling",
-      description:
-        "ระบบโชว์ภาพห้องพักและบรรยากาศความละเอียดสูง (High-Res) แต่โหลดไว เพื่อให้ลูกค้า 'อิน' กับบรรยากาศก่อนเข้าพัก",
+      description: "ระบบโชว์ภาพบรรยากาศ High-Res ที่โหลดไว เพื่อให้ลูกค้า 'อิน' ก่อนเข้าพัก",
       icon: "Camera",
     },
     {
       title: "Direct Booking Engine",
-      description:
-        "ระบบเช็คห้องว่างและจองทันทีที่เชื่อมต่อกับ Google Calendar หรือระบบหลังบ้านของคุณได้",
+      description: "ระบบเช็คห้องว่างและจองทันที เชื่อมต่อกับ Google Calendar ได้",
       icon: "CalendarCheck",
     },
     {
-      title: "Tourism SEO Structure",
+      title: "Tourism SEO",
       description:
-        "วางโครงสร้าง SEO ดักจับคำค้นหายอดฮิต เช่น 'ที่พักแม่ริม', 'รีสอร์ตเชียงใหม่' ให้ติดหน้าแรก Google",
+        "โครงสร้าง SEO ดักจับคำค้นหา 'ที่พักแม่ริม', 'รีสอร์ตเชียงใหม่' ติดหน้าแรก Google",
       icon: "Map",
     },
   ],
@@ -934,38 +937,27 @@ export const chiangMaiNode: AreaNode = {
     {
       question: "ทำเว็บโรงแรมจำเป็นต้องแพงไหม?",
       answer:
-        "ไม่จำเป็นครับ ผมมีแพ็กเกจเริ่มต้นสำหรับ Boutique Hotel ขนาดเล็กที่เน้นความคุ้มค่า แต่ได้ฟีเจอร์ครบทั้งระบบจองและแกลเลอรี่สวยๆ ครับ",
+        "ไม่จำเป็นครับ ผมมีแพ็กเกจเริ่มต้นสำหรับ Boutique Hotel ขนาดเล็กที่เน้นความคุ้มค่า แต่ได้ฟีเจอร์ครบ",
     },
     {
       question: "นัดคุยงานที่เชียงใหม่ได้ไหม?",
       answer:
-        "ได้ครับ ผมเดินทางไปเชียงใหม่บ่อย สามารถนัดคุยรายละเอียดที่รีสอร์ตหรือคาเฟ่ในตัวเมือง/นิมมานได้เลยครับ เพื่อให้เห็นภาพบรรยากาศจริง",
+        "ได้ครับ ผมเดินทางไปเชียงใหม่บ่อย สามารถนัดคุยรายละเอียดที่รีสอร์ตหรือคาเฟ่ในตัวเมือง/นิมมานได้เลยครับ",
     },
     {
       question: "มีบริการถ่ายภาพที่พักด้วยไหม?",
       answer:
-        "มีครับ ผมทำงานร่วมกับช่างภาพสายโรงแรมมืออาชีพในเชียงใหม่ เพื่อให้ได้ภาพที่สื่ออารมณ์และขายราคาห้องได้แพงขึ้นครับ",
+        "มีครับ ผมทำงานร่วมกับช่างภาพสายโรงแรมมืออาชีพในเชียงใหม่ เพื่อภาพที่สื่ออารมณ์และขายราคาได้แพงขึ้น",
     },
     {
       question: "เว็บรองรับภาษาจีนไหม?",
       answer:
-        "รองรับครับ เชียงใหม่เป็นจุดหมายหลักของนักท่องเที่ยวจีน ผมสามารถวางระบบให้รองรับภาษาจีนและเชื่อมต่อ WeChat Pay/Alipay ได้ครับ (Add-on)",
+        "รองรับครับ เชียงใหม่เป็นจุดหมายหลักของนักท่องเที่ยวจีน ผมวางระบบรองรับภาษาจีนและ WeChat Pay ได้ครับ",
     },
-    {
-      question: "เชื่อมต่อกับ Agoda/Booking ได้ไหม?",
-      answer:
-        "ทำได้ครับ ผมสามารถวางระบบ Channel Manager เพื่อให้สต็อกห้องพักบนเว็บตรงกันกับ OTA ป้องกันปัญหาจองซ้ำ (Overbooking) ครับ",
-    },
-    {
-      question: "ดูแลหลังการขายยังไง?",
-      answer:
-        "มีประกันดูแลฟรี 3 เดือนครับ สอนพนักงานของคุณอัปเดตราคา/โปรโมชั่นหน้าเว็บ หรือถ้าไม่มีคนทำ ผมมีบริการดูแลรายเดือนครับ",
-    },
-    {
-      question: "ใช้เวลากี่วันเสร็จ?",
-      answer:
-        "สำหรับเว็บโรงแรมมาตรฐานประมาณ 10-15 วันครับ แต่ถ้าเป็นโปรเจกต์ใหญ่ที่มีระบบจองซับซ้อนอาจใช้เวลา 20-30 วันครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานเรื่อง OTA จาก Template หลักมาผสม
+    ...hotelResortService.faqs.filter(
+      (f) => f.question.includes("Channel Manager") || f.question.includes("OTA"),
+    ),
   ],
 
   // --- Context Data ---
@@ -995,13 +987,12 @@ export const chiangMaiNode: AreaNode = {
       localClient: "บูทีครีสอร์ตชื่อดัง ย่านแม่ริม",
     },
     regionalPricing: {
-      startPrice: "12,900 บาท",
+      startPrice: `${hotelResortService.price} บาท`, // Dynamic Reference
       timeline: "10-15 วัน",
     },
     localSuccessStory: {
       title: "Case Study: รีสอร์ตหางดง",
-      result:
-        "ปรับเว็บใหม่เน้นจองตรง ยอด Direct Booking เพิ่ม 40% ใน 3 เดือน คืนทุนค่าทำเว็บตั้งแต่เดือนแรก",
+      result: "ปรับเว็บใหม่เน้นจองตรง ยอด Direct Booking เพิ่ม 40% ใน 3 เดือน คืนทุนไว",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ นิมมาน",
@@ -1023,56 +1014,51 @@ export const chiangMaiNode: AreaNode = {
   ],
   coordinates: { lat: 18.7883, lng: 98.9853 },
 };
+
 ```
-
 ### CONFIG: chiang-rai.ts
-
 `Path: constants/area-nodes/chiang-rai.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Coffee Specialty | Border Trade | Artistic Branding
- * [MARKET]: Mueang Chiang Rai, Mae Sai, Chiang Saen (Premium Trade)
+ * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.2 (STRICT_SYNC)
+ * [STRATEGY]: Local Authority Standard | Coffee & Art Content | Dynamic Inheritance
+ * [MARKET]: Mueang Chiang Rai, Mae Sai, Chiang Saen
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const chiangRaiNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chiang-rai",
   province: "เชียงราย",
-  templateSlug: "local-authority", // หรือ catalog ถ้าเน้นขายกาแฟหนักๆ
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์ เชียงราย | จ้างทำเว็บกาแฟ Specialty และรีสอร์ตศิลปะ ติดหน้าแรก Google",
   description:
     "บริการรับทำเว็บไซต์เชียงราย ยกระดับแบรนด์กาแฟและที่พักสู่สากล ด้วยดีไซน์เชิงศิลปะและระบบ E-commerce ที่ขายได้ทั่วโลก",
 
   longDescription:
     "เชียงรายคือเมืองหลวงแห่งกาแฟและศิลปะระดับโลก เว็บไซต์ของคุณจึงต้องไม่ใช่แค่ 'มี' แต่ต้อง 'เล่าเรื่อง' ได้อย่างลึกซึ้ง " +
-    "นายเอ็มซ่ามากส์ เข้าใจหัวใจของ Specialty Coffee และงาน Craft เราพร้อมเปลี่ยนเว็บไซต์ธรรมดาให้เป็นแกลเลอรี่ออนไลน์ที่ลูกค้าสัมผัสได้ถึงความพิถีพิถัน " +
-    "พร้อมวางระบบขายกาแฟ Subscription และระบบจองที่พักที่รองรับนักท่องเที่ยวคุณภาพ เพื่อให้ธุรกิจเชียงรายเติบโตอย่างยั่งยืนบนเวทีโลก",
+    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์ธรรมดาให้เป็นแกลเลอรี่ออนไลน์ที่ลูกค้าสัมผัสได้ถึงความพิถีพิถัน " +
+    "พร้อมวางระบบขายสินค้าและจองที่พักที่รองรับนักท่องเที่ยวคุณภาพ เพื่อให้ธุรกิจเชียงรายเติบโตอย่างยั่งยืนบนเวทีโลก",
 
   // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ เชียงราย ออกแบบเว็บกาแฟ รีสอร์ต ศิลปะ ติด SEO - เอ็มซ่ามากส์",
   seoDescription:
     "จ้างทำเว็บไซต์เชียงราย ครบวงจร เน้นธุรกิจโรงคั่วกาแฟ ที่พักแนว Art Stay และการค้าชายแดน เว็บสวยโหลดไว รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายออนไลน์",
 
-  // --- Visual & Theme (Coffee Art: Warm Brown/Cream) ---
-  heroImage: "/images/areas/chiang-rai-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#7c2d12", // Warm Coffee Brown (สีน้ำตาลกาแฟคั่วกลาง)
-    secondary: "#451a03", // Deep Espresso
-    background: "#fffaf3", // Creamy Latte (พื้นครีมนวลตา)
-    foreground: "#1c1917", // Charcoal (ดำถ่านไม้)
-    accent: "#b45309", // Amber/Caramel
-    gradient: "from-[#7c2d12]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService ตามคำสั่ง เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Premium Niche) ---
-  price: "9,900",
-  priceValue: 9900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chiang-rai-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -1080,29 +1066,29 @@ export const chiangRaiNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Storytelling Design: ถ่ายทอดเรื่องราว (Story) ของเมล็ดกาแฟและงานศิลป์ผ่านดีไซน์เว็บไซต์ ให้ดูมีมูลค่าสูงและน่าค้นหา",
-    "Global E-commerce: ระบบขายออนไลน์ที่รองรับการส่งออกกาแฟและงานคราฟต์ไปทั่วโลก พร้อมระบบคำนวณค่าส่งอัตโนมัติ",
-    "Tourism SEO: ดึงดูดนักท่องเที่ยวคุณภาพ (High Spender) ด้วยการทำ SEO ภาษาอังกฤษในคีย์เวิร์ดที่พักและคาเฟ่",
+    "Storytelling Design: ถ่ายทอดเรื่องราว (Story) ของสินค้าและบริการผ่านดีไซน์เว็บไซต์ ให้ดูมีมูลค่าสูงตามมาตรฐานสากล",
+    "Global Reach: ระบบรองรับการส่งออกข้อมูลและสินค้าไปทั่วโลก พร้อมโครงสร้างที่เอื้อต่อการทำ SEO ต่างประเทศ",
+    "Tourism Ready: ดึงดูดนักท่องเที่ยวคุณภาพ (High Spender) ด้วยการวางโครงสร้างเว็บให้รองรับภาษาอังกฤษและจีน",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Local Specific Content) ---
   coreFeatures: [
     {
-      title: "Coffee Subscription",
+      title: "Coffee & Product System",
       description:
-        "ระบบสมาชิกสั่งซื้อเมล็ดกาแฟรายเดือน เพื่อสร้างรายได้ที่มั่นคง (Recurring Income) ให้โรงคั่ว",
-      icon: "Repeat", // หรือ Icon อื่นที่สื่อถึงการวนลูป
+        "ระบบจัดการสินค้าที่เหมาะสำหรับโรงคั่วกาแฟและงานคราฟต์ รองรับรายละเอียดสินค้าเชิงลึก",
+      icon: "Database",
     },
     {
-      title: "Art Gallery Mode",
+      title: "Gallery Mode",
       description:
-        "โหมดแสดงผลภาพความละเอียดสูงแบบพิพิธภัณฑ์ศิลปะ สำหรับขายงานปั้น ภาพวาด หรือที่พักตกแต่งสวยงาม",
+        "โหมดแสดงผลภาพความละเอียดสูง สำหรับรีสอร์ตและงานศิลปะ เพื่อสร้างความประทับใจแรกพบ",
       icon: "Image",
     },
     {
-      title: "Multi-Language (TH/EN/CN)",
+      title: "Multi-Language Support",
       description:
-        "รองรับ 3 ภาษาเพื่อต้อนรับนักท่องเที่ยวจีนและฝรั่ง ที่หลั่งไหลเข้ามาผ่านด่านแม่สายและสนามบิน",
+        "รองรับ 3 ภาษา (ไทย/อังกฤษ/จีน) เพื่อต้อนรับนักท่องเที่ยวและคู่ค้าผ่านด่านแม่สาย",
       icon: "Globe",
     },
   ],
@@ -1112,46 +1098,35 @@ export const chiangRaiNode: AreaNode = {
     {
       question: "ทำเว็บขายกาแฟออนไลน์ ยากไหม?",
       answer:
-        "ไม่ยากครับ ผมทำระบบจัดการสินค้าให้ใช้งานง่าย คุณแค่ถ่ายรูปถุงกาแฟ ใส่รายละเอียด Taste Note แล้วกดโพสต์ขายได้เลย รองรับตัดบัตรเครดิตครับ",
+        "ไม่ยากครับ ระบบที่เราเตรียมไว้ให้ใช้งานง่าย คุณแค่ถ่ายรูปสินค้า ใส่รายละเอียด แล้วกดโพสต์ขายได้เลย",
     },
     {
       question: "นัดคุยงานที่ร้านกาแฟในเมืองได้ไหม?",
       answer:
-        "ยินดีมากครับ ผมชอบบรรยากาศร้านกาแฟในเชียงรายอยู่แล้ว นัดคุยเพื่อดูสไตล์งานและจิบกาแฟไปด้วยได้เลยครับ",
+        "ยินดีมากครับ ผมชอบบรรยากาศร้านกาแฟในเชียงรายอยู่แล้ว นัดคุยเพื่อดูสไตล์งานจริงได้เลยครับ",
     },
     {
-      question: "มีระบบจองโต๊ะหรือจองที่พักไหม?",
+      question: "มีระบบจองที่พักไหม?",
       answer:
-        "มีครับ ผมสามารถติดตั้งระบบจอง (Booking System) ที่แจ้งเตือนผ่าน LINE ทันทีที่มีลูกค้าจองเข้ามา สะดวกและไม่พลาดทุกออเดอร์ครับ",
+        "มีครับ สามารถติดตั้งระบบจอง (Booking System) ที่แจ้งเตือนผ่าน LINE ทันทีที่มีลูกค้าจองเข้ามา",
     },
     {
       question: "ทำ SEO ภาษาจีนได้ไหม?",
       answer:
-        "ทำได้ครับ ผมมีพาร์ทเนอร์นักแปลภาษาจีนที่เชี่ยวชาญ เพื่อทำหน้าเว็บสำหรับนักท่องเที่ยวจีนโดยเฉพาะครับ",
+        "ทำได้ครับ เรามีแนวทางในการทำหน้าเว็บสำหรับนักท่องเที่ยวจีนโดยเฉพาะ เพื่อรองรับตลาดเชียงรายครับ",
     },
-    {
-      question: "ดูแลเว็บหลังทำเสร็จให้ไหม?",
-      answer:
-        "ดูแลให้ฟรี 3 เดือนแรกครับ สอนใช้งานจนเป็น หรือถ้าไม่ถนัด ผมมีแพ็กเกจดูแลรายเดือนราคาเป็นกันเองครับ",
-    },
-    {
-      question: "ใช้เวลาทำกี่วัน?",
-      answer:
-        "ถ้าข้อมูลพร้อม (รูป/เนื้อหา) ใช้เวลาประมาณ 7-10 วันสำหรับเว็บมาตรฐาน และ 15-20 วันสำหรับเว็บ E-commerce ครับ",
-    },
-    {
-      question: "ช่วยถ่ายรูปสินค้าให้ด้วยไหม?",
-      answer:
-        "ผมมีทีมช่างภาพสายคาเฟ่และสินค้าในเชียงรายแนะนำให้ได้ครับ เพื่อให้รูปออกมาดูดีที่สุดบนหน้าเว็บครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Local Authority)
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("มือถือ"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Specialty Coffee ยอมจ่ายแพงเพื่อ 'เรื่องราว' และ 'คุณภาพ' เว็บไซต์ที่เล่าเรื่องได้ดีจะเพิ่มมูลค่าสินค้าได้มหาศาล",
+      "ลูกค้ากลุ่ม Specialty Coffee และนักท่องเที่ยวเชียงราย ยอมจ่ายแพงเพื่อ 'เรื่องราว' และ 'คุณภาพ' เว็บไซต์ที่เล่าเรื่องได้ดีจะเพิ่มมูลค่าสินค้าได้มหาศาล",
     technicalApproach:
-      "เน้นระบบ Filter สินค้าที่ละเอียด (Process, Roast Level, Origin) เพื่อตอบโจทย์คอกาแฟตัวจริง",
+      "เน้นระบบการแสดงผลรูปภาพและข้อมูลที่คมชัด แต่ยังคงความเร็วในการโหลด (Performance) ตามมาตรฐาน Google",
     localStrength:
       "เข้าใจวัฒนธรรมกาแฟและศิลปะเชียงราย สามารถดึงจุดเด่นของแบรนด์ออกมานำเสนอได้อย่างมีรสนิยม",
     nicheIndustries: [
@@ -1161,25 +1136,24 @@ export const chiangRaiNode: AreaNode = {
       "วิสาหกิจชุมชนชาและสมุนไพร",
     ],
     painPoints: [
-      "กาแฟดีแต่เว็บไม่สวย ขายไม่ออก",
+      "สินค้าดีแต่เว็บไม่สวย ขายไม่ออก",
       "ตอบแชทลูกค้าต่างชาติไม่ทัน",
       "ลูกค้าหาไม่เจอใน Google Maps",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 62,
       localClient: "แบรนด์กาแฟและรีสอร์ตบนดอยช้าง",
     },
     regionalPricing: {
-      startPrice: "9,900 บาท",
-      timeline: "10-15 วัน",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference ตาม Template
+      timeline: "14-20 วัน",
     },
     localSuccessStory: {
       title: "Case Study: โรงคั่วแม่สรวย",
       result:
-        "ทำเว็บ E-commerce ขายเมล็ดกาแฟ ยอดขายออนไลน์โต 300% ลูกค้าประจำสมัคร Subscription เพียบ",
+        "ปรับปรุงเว็บไซต์ให้มีระบบสั่งซื้อออนไลน์ ยอดขายโต 300% และขยายฐานลูกค้าต่างชาติได้สำเร็จ",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ แม่สาย",
@@ -1201,58 +1175,51 @@ export const chiangRaiNode: AreaNode = {
   ],
   coordinates: { lat: 19.9101, lng: 99.8405 },
 };
+
 ```
-
 ### CONFIG: chon-buri.ts
-
 `Path: constants/area-nodes/chon-buri.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Hex Standard
+ * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.2 (DYNAMIC_LINKED)
+ * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Dynamic Inheritance
  * [MARKET]: Chon Buri, Sriracha, Laem Chabang, Amata Nakorn (EEC Zone)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
+import { corporateService } from "@/constants/services/corporate";
 
 export const chonBuriNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chon-buri",
   province: "ชลบุรี",
-  // [STRATEGY]: ใช้ corporate สำหรับบริษัท/โรงงานที่เน้นภาพลักษณ์องค์กร
-  templateSlug: "corporate",
+  templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
 
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจ EEC ติดอันดับ Google",
   description:
     "บริการรับทำเว็บไซต์โรงงานในชลบุรีและพัทยา ยกระดับภาพลักษณ์ธุรกิจสู่สากล รองรับ 3 ภาษา (TH/EN/JP) เพื่อเจาะกลุ่มทุนญี่ปุ่นและคู่ค้าต่างชาติ",
 
   longDescription:
-    "ในเขตเศรษฐกิจพิเศษ EEC เว็บไซต์เปรียบเสมือน 'หน้าตา' และ 'ความน่าเชื่อถือ' ของโรงงาน หากเว็บไซต์ของคุณยังดูเก่า โหลดช้า หรือไม่มีภาษาอังกฤษ คู่ค้าต่างชาติจะมองข้ามไปหาคู่แข่งทันที " +
-    "นายเอ็มซ่ามากส์ เชี่ยวชาญการออกแบบเว็บไซต์สำหรับอุตสาหกรรม (Industrial Web Design) ที่เน้นความน่าเชื่อถือ แสดงศักยภาพการผลิต และมาตรฐาน ISO อย่างชัดเจน " +
-    "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรก เพื่อโอกาสในการคว้าดีลใหญ่ระดับ Global",
+    "ในเขตเศรษฐกิจพิเศษ EEC เว็บไซต์เปรียบเสมือน 'หน้าตา' ของโรงงาน หากเว็บไซต์ดูเก่า โหลดช้า หรือไม่มีภาษาอังกฤษ คู่ค้าต่างชาติจะมองข้ามทันที " +
+    "นายเอ็มซ่ามากส์ เชี่ยวชาญการออกแบบ Industrial Web Design ที่เน้นความน่าเชื่อถือ แสดงมาตรฐาน ISO ชัดเจน " +
+    "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรกในคีย์เวิร์ดอุตสาหกรรม",
 
   // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ ชลบุรี ออกแบบเว็บโรงงาน นิคมอมตะ พัทยา ศรีราชา - เอ็มซ่ามากส์",
   seoDescription:
     "บริษัทรับทำเว็บไซต์ชลบุรี รับทำ SEO โรงงาน โลจิสติกส์ และธุรกิจใน EEC เว็บไซต์มาตรฐานสากล รองรับมือถือและหลายภาษา เพิ่มยอดขอใบเสนอราคา (RFQ)",
 
-  // --- Visual & Theme (Industrial Blue: Trust/Stability) ---
-  heroImage: "/images/areas/chon-buri-node.webp",
-  theme: {
-    mode: "light", // ธีมสว่าง สะอาดตา ดูเป็นทางการ
-    primary: "#0369a1", // Sky 700 (Industrial Blue - สีแห่งความเชื่อมั่น)
-    secondary: "#0c4a6e", // Sky 900
-    background: "#f8fafc", // Slate 50 (พื้นหลังสะอาด)
-    foreground: "#0f172a", // Slate 900
-    accent: "#0ea5e9", // Sky 500
-    gradient: "from-[#0369a1]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
 
-  // --- Pricing Strategy (B2B Market) ---
-  price: "19,500",
-  priceValue: 19500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chon-buri-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -1260,28 +1227,27 @@ export const chonBuriNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ภาพลักษณ์ระดับสากล: ออกแบบ CI (Corporate Identity) ให้ดูทันสมัยและน่าเชื่อถือ เพื่อสร้างความมั่นใจให้นักลงทุนและคู่ค้าต่างชาติ",
-    "รองรับ 3 ภาษา (TH/EN/JP): เจาะตลาดกลุ่มทุนญี่ปุ่นและลูกค้าต่างชาติใน EEC ด้วยระบบสลับภาษาที่แม่นยำและใช้งานง่าย",
-    "SEO สายอุตสาหกรรม: ดันเว็บไซต์ให้ติดหน้าแรก Google ในคีย์เวิร์ดเฉพาะทาง เช่น 'โรงงานผลิตชิ้นส่วน', 'CNC ชลบุรี', 'โกดังให้เช่า'",
+    "International Image: ออกแบบ CI ให้ดูทันสมัยและเป็นสากล สร้างความมั่นใจให้นักลงทุนและคู่ค้าต่างชาติ",
+    "Multi-Language Support: รองรับ 3 ภาษา (TH/EN/JP) เพื่อเจาะตลาดกลุ่มทุนญี่ปุ่นและลูกค้าต่างชาติใน EEC โดยเฉพาะ",
+    "Industrial SEO: ดันเว็บไซต์ติดหน้าแรก Google ในคีย์เวิร์ดเฉพาะทาง เช่น 'CNC ชลบุรี', 'โกดังให้เช่า', 'แม่พิมพ์โลหะ'",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Industrial Specific) ---
   coreFeatures: [
     {
       title: "Product Catalog System",
-      description:
-        "ระบบแคตตาล็อกสินค้าอุตสาหกรรมที่ค้นหาง่าย โหลดไว รองรับสินค้าหลักพันรายการโดยไม่หน่วง",
+      description: "ระบบแคตตาล็อกสินค้าอุตสาหกรรม ค้นหาง่าย รองรับสินค้าหลักพันรายการโดยไม่หน่วง",
       icon: "Database",
     },
     {
-      title: "RFQ Generation",
-      description: "ปุ่ม 'ขอใบเสนอราคา' ที่เด่นชัดและฟอร์มกรอกข้อมูลที่ส่งตรงเข้าอีเมลฝ่ายขายทันที",
+      title: "RFQ Generator",
+      description: "ระบบขอใบเสนอราคา (Request for Quotation) ที่ส่งตรงเข้าอีเมลฝ่ายขายทันที",
       icon: "FileText",
     },
     {
-      title: "Compliance & ISO Page",
+      title: "Compliance Page",
       description:
-        "หน้าแสดงใบรับรองมาตรฐาน (ISO/HACCP) ที่ออกแบบมาให้ดูน่าเชื่อถือและตรวจสอบได้ง่าย",
+        "หน้าแสดงใบรับรองมาตรฐาน (ISO/HACCP/BOI) ที่ออกแบบมาให้ตรวจสอบได้ง่ายและน่าเชื่อถือ",
       icon: "ShieldCheck",
     },
   ],
@@ -1296,39 +1262,23 @@ export const chonBuriNode: AreaNode = {
     {
       question: "ทำเว็บ 2 ภาษา (ไทย-อังกฤษ) เพิ่มเท่าไหร่?",
       answer:
-        "แพ็กเกจเริ่มต้นรองรับ 1 ภาษาครับ หากต้องการเพิ่มภาษาที่ 2 (เช่น อังกฤษ หรือ ญี่ปุ่น) มีค่าบริการเพิ่มเล็กน้อยตามปริมาณเนื้อหาครับ",
+        "แพ็กเกจเริ่มต้นรองรับ 1 ภาษาครับ หากต้องการเพิ่มภาษาที่ 2 หรือ 3 (ญี่ปุ่น) มีค่าบริการเพิ่มตามปริมาณเนื้อหาครับ",
     },
     {
       question: "มีบริการถ่ายภาพโรงงาน/เครื่องจักรไหม?",
       answer:
-        "มีครับ ผมมีทีมช่างภาพสาย Industrial ที่เชี่ยวชาญการถ่ายไลน์ผลิตและเครื่องจักร เพื่อให้ภาพออกมาดูยิ่งใหญ่และเป็นมืออาชีพครับ",
+        "มีครับ ผมมีทีมช่างภาพสาย Industrial ที่เชี่ยวชาญการถ่ายไลน์ผลิตและเครื่องจักร เพื่อให้ภาพออกมาดูเป็นมืออาชีพครับ",
     },
-    {
-      question: "ออกใบกำกับภาษีในนามบริษัทได้ไหม?",
-      answer:
-        "ได้แน่นอนครับ สามารถออกใบเสนอราคาและใบกำกับภาษีเต็มรูปแบบเพื่อนำไปหักค่าใช้จ่ายบริษัทได้ครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับการเปิดบนมือถือไหม?",
-      answer:
-        "100% ครับ ผู้บริหารและฝ่ายจัดซื้อสมัยนี้ใช้มือถือค้นหาข้อมูลเป็นหลัก เว็บไซต์จะแสดงผลสวยงามบนทุกอุปกรณ์ครับ",
-    },
-    {
-      question: "ใช้เวลาทำนานไหม?",
-      answer:
-        "สำหรับเว็บองค์กรขนาดกลาง (10-15 หน้า) ใช้เวลาประมาณ 3-4 สัปดาห์ครับ รวมขั้นตอนตรวจสอบและแก้ไขครับ",
-    },
-    {
-      question: "มีบริการดูแลรายปีไหม?",
-      answer:
-        "มีครับ บริการดูแลความปลอดภัย อัปเดตข้อมูลข่าวสาร และต่ออายุโดเมน/โฮสติ้ง เพื่อให้ฝ่ายไอทีของคุณไม่ต้องกังวลครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Corporate)
+    ...corporateService.faqs.filter(
+      (f) => f.question.includes("ใบกำกับภาษี") || f.question.includes("PDPA"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าใน EEC ให้ความสำคัญกับ 'มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบและดูโปรจะปิดดีล B2B ได้ง่ายกว่า",
+      "คู่ค้าใน EEC ให้ความสำคัญกับ 'มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบ (Spec Sheet, Certificate) และดูโปร จะปิดดีล B2B ได้ง่ายกว่า",
     technicalApproach:
       "เน้นโครงสร้าง Clean Code เพื่อความปลอดภัยข้อมูลสูงสุด และรองรับการทำ SEO ในตลาด B2B ที่การแข่งขันสูง",
     localStrength:
@@ -1345,20 +1295,19 @@ export const chonBuriNode: AreaNode = {
       "ไม่มีข้อมูลสินค้า/สเปกเครื่องจักรบนเว็บ",
     ],
     competitorLevel: "high",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 184,
       localClient: "บริษัทโลจิสติกส์รายใหญ่ ในนิคมฯ แหลมฉบัง",
     },
     regionalPricing: {
-      startPrice: "19,500 บาท",
+      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
       timeline: "14-30 วัน",
     },
     localSuccessStory: {
       title: "Case Study: โรงงานชิ้นส่วน CNC",
       result:
-        "ปรับปรุงเว็บไซต์และทำ SEO ภาษาอังกฤษ ยอด RFQ จากลูกค้าโซนยุโรปและญี่ปุ่นเพิ่มขึ้น 250% ใน 6 เดือน",
+        "ปรับปรุงเว็บไซต์และทำ SEO ภาษาอังกฤษ ยอด RFQ จากลูกค้าโซนยุโรปและญี่ปุ่นเพิ่มขึ้น 250%",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ศรีราชา",
@@ -1389,27 +1338,27 @@ export const chonBuriNode: AreaNode = {
   ],
   coordinates: { lat: 13.3611, lng: 100.9847 },
 };
+
 ```
-
 ### CONFIG: chumphon.ts
-
 `Path: constants/area-nodes/chumphon.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Smart Gateway | Government Trust | Hex Standard
- * [MARKET]: Local Authorities (PAO/SAO) & Agricultural Cooperatives in Chumphon
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Smart Gateway | Government Trust | Dynamic Inheritance
+ * [MARKET]: Chumphon Local Authorities (PAO/SAO) & Agriculture
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const chumphonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "chumphon",
   province: "ชุมพร",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
   description:
     "พัฒนาระบบเว็บไซต์ อบต. และเทศบาลในจังหวัดชุมพร รองรับยุทธศาสตร์ประตูสู่ภาคใต้ เชื่อมโยง E-Service และส่งเสริมการท่องเที่ยวชุมชนอย่างยั่งยืน",
@@ -1424,27 +1373,16 @@ export const chumphonNode: AreaNode = {
   seoDescription:
     "บริการจัดทำเว็บไซต์หน่วยงานราชการในจังหวัดชุมพร รองรับมาตรฐาน ITA และ WCAG ครบถ้วน พร้อมระบบจัดการเรื่องร้องเรียนออนไลน์ และประชาสัมพันธ์แหล่งท่องเที่ยว Unseen ชุมพร",
 
-  // --- Visual & Theme (Government Blue & Agricultural Green) ---
-  heroImage: "/images/areas/chumphon-gateway.webp",
-  theme: {
-    mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #1E88E5 เป็น #1565C0 (Contrast 5.61:1)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA เมื่อแสดงผลบนพื้นหลัง #F8FAFC
-     */
-    primary: "#1565C0",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #43A047 เป็น #1b5e20 เพื่อความชัดเจนในการอ่านบนพื้นหลังสว่าง */
-    secondary: "#1b5e20",
-    background: "#F8FAFC",
-    foreground: "#1E293B",
-    accent: "#FFC107",
-    gradient: "from-[#1565C0]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกัน
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy ---
-  price: "15,900",
-  priceValue: 15900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/chumphon-gateway.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -1452,12 +1390,12 @@ export const chumphonNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อข้อกำหนด",
-    "Digital Service Gateway: ระบบรับเรื่องร้องเรียน คำร้องออนไลน์ และชำระค่าธรรมเนียม ที่ช่วยลดภาระงานหน้าเคาน์เตอร์ได้กว่า 40%",
-    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชนในพื้นที่",
+    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อ",
+    "Digital Service Gateway: ระบบรับเรื่องร้องเรียนและคำร้องออนไลน์ ช่วยลดภาระงานหน้าเคาน์เตอร์และอำนวยความสะดวกประชาชน",
+    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชน",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Gov & Agri Specific) ---
   coreFeatures: [
     {
       title: "Smart Public Service",
@@ -1484,7 +1422,7 @@ export const chumphonNode: AreaNode = {
     {
       question: "เว็บไซต์รองรับมาตรฐาน WCAG สำหรับผู้พิการหรือไม่?",
       answer:
-        "รองรับครับ เราออกแบบโครงสร้างให้โปรแกรมอ่านหน้าจอ (Screen Reader) เข้าถึงได้ และปรับขนาดตัวอักษร/Contrast ได้ตามมาตรฐานสากลครับ",
+        "รองรับครับ เราออกแบบโครงสร้างให้โปรแกรมอ่านหน้าจอ (Screen Reader) เข้าถึงได้ และปรับขนาดตัวอักษรได้ตามมาตรฐานสากลครับ",
     },
     {
       question: "สามารถทำระบบแผนที่ภาษีและทะเบียนทรัพย์สินเชื่อมต่อได้ไหม?",
@@ -1496,11 +1434,10 @@ export const chumphonNode: AreaNode = {
       answer:
         "เรามีระบบฐานข้อมูลสวัสดิการชุมชนที่เจ้าหน้าที่สามารถบริหารจัดการข้อมูลเบี้ยยังชีพผ่านระบบหลังบ้านได้โดยตรงครับ",
     },
-    {
-      question: "ใช้เวลานานไหมกว่าจะเริ่มใช้งานระบบ E-Service ได้?",
-      answer:
-        "ปกติใช้เวลา 14-21 วันครับ โดยเราจะทำการเทรนนิ่งเจ้าหน้าที่ให้ใช้งานระบบได้อย่างเชี่ยวชาญก่อนเปิดใช้งานจริงครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("จัดซื้อจัดจ้าง") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -1518,25 +1455,24 @@ export const chumphonNode: AreaNode = {
       "ธุรกิจท่องเที่ยวเชิงนิเวศปะทิว",
     ],
     painPoints: [
-      "ระบบรับเรื่องร้องเรียนเดิมใช้งานยากและไม่มีสถานะแจ้งกลับ",
-      "ขาดช่องทางดิจิทัลในการสนับสนุนสินค้าเกษตรในช่วงฤดูกาล",
+      "ระบบรับเรื่องร้องเรียนเดิมใช้งานยาก",
+      "ขาดช่องทางดิจิทัลในการสนับสนุนสินค้าเกษตร",
       "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟน",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 4.8,
       reviewCount: 42,
       localClient: "อปท. ชั้นนำในเขตอำเภอหลังสวนและละแม",
     },
     regionalPricing: {
-      startPrice: "15,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
       title: "Digital Transformation for SAO",
       result:
-        "ช่วยให้ อบต. ในพื้นที่สามารถประมวลผลเรื่องร้องเรียนได้เร็วขึ้น 50% และได้รับการยอมรับจากประชาชนในด้านความโปร่งใส",
+        "ช่วยให้ อบต. สามารถประมวลผลเรื่องร้องเรียนได้เร็วขึ้น 50% และผ่านเกณฑ์ประเมิน ITA ระดับ A",
     },
     hyperLocalKeywords: [
       "ทำเว็บไซต์ชุมพร",
@@ -1558,392 +1494,473 @@ export const chumphonNode: AreaNode = {
   ],
   coordinates: { lat: 10.493, lng: 99.18 },
 };
+
 ```
-
 ### CONFIG: kamphaeng-phet.ts
-
 `Path: constants/area-nodes/kamphaeng-phet.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: KAMPHAENG_PHET_GOV_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Local Authority | Government Trust | Hex Standard
+ * [SERVICE_NODE]: KAMPHAENG_PHET_GOV_HUB v18.0.6 (DYNAMIC_LINKED)
+ * [STRATEGY]: Local Authority | Government Trust | Dynamic Inheritance
+ * [MARKET]: Kamphaeng Phet Government & Local Business
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const kamphaengPhetNode: AreaNode = {
+  // --- Basic Identity ---
   slug: "kamphaeng-phet",
   province: "กำแพงเพชร",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ กำแพงเพชร | ออกแบบเว็บ อบต. เทศบาล และธุรกิจท้องถิ่น",
+  templateSlug: "local-authority", // เชื่อมโยง Logic การ Render
+
+  title: "รับทำเว็บไซต์ กำแพงเพชร | ออกแบบระบบเว็บไซต์หน่วยงานราชการ และธุรกิจท้องถิ่น",
   description:
-    "บริการรับทำเว็บไซต์หน่วยงานราชการและธุรกิจในกำแพงเพชร เว็บไซต์ทันสมัย ใช้งานง่าย เข้าถึงประชาชนได้จริง ถูกต้องตามระเบียบภาครัฐ",
-  longDescription:
-    "ในยุคดิจิทัล หน่วยงานราชการและธุรกิจท้องถิ่นในกำแพงเพชรต้องปรับตัว เว็บไซต์ที่ดีช่วยลดภาระงานของเจ้าหน้าที่และสร้างความพึงพอใจให้ประชาชน",
-  seoTitle: "รับทำเว็บไซต์ กำแพงเพชร ออกแบบเว็บ อบต. เทศบาล ขาณุฯ คลองขลุง - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กำแพงเพชร รับทำเว็บราชการ อบต. เทศบาล และสินค้า OTOP เว็บไซต์ใช้งานง่าย รองรับมือถือ มีระบบ ITA และ e-Service",
-  heroImage: "/images/areas/kamphaeng-phet-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#c2410c",
-    secondary: "#9a3412",
-    background: "#fff7ed",
-    foreground: "#431407",
-    accent: "#f97316",
-    gradient: "from-[#c2410c]/10 via-transparent to-transparent",
-  },
-  price: "12,000",
-  priceValue: 12000,
-  currency: "THB",
-  unit: "เริ่มต้น / โครงการ",
-  clientTrust:
-    "Government Standard: มาตรฐานเว็บไซต์ที่หน่วยงานราชการและวิสาหกิจชุมชนในกำแพงเพชรไว้วางใจ",
-  benefits: [
-    "เข้าถึงง่าย (Accessibility): ออกแบบตัวหนังสือใหญ่ เมนูชัดเจน เพื่อให้ผู้สูงอายุใช้งานได้สะดวก",
-    "ถูกต้องตามระเบียบ (Compliance): โครงสร้างเว็บรองรับการประเมิน ITA และมีระบบ e-Service",
-    "ดูแลง่าย (Easy CMS): ระบบหลังบ้านภาษาไทย 100% เจ้าหน้าที่ธุรการสามารถลงข่าวได้เอง",
-  ],
-  coreFeatures: [
-    {
-      title: "ITA & Transparency",
-      description: "หน้าเว็บสำหรับเปิดเผยข้อมูลสาธารณะ (OIT) จัดหมวดหมู่ถูกต้องตามเกณฑ์ประเมิน",
-      icon: "FileText",
-    },
-    {
-      title: "Complaint System",
-      description: "ระบบรับเรื่องร้องเรียนออนไลน์ ส่งตรงถึงเจ้าหน้าที่ผู้รับผิดชอบ",
-      icon: "AlertCircle",
-    },
-    {
-      title: "Responsive Design",
-      description: "แสดงผลสมบูรณ์แบบบนมือถือทุกรุ่น",
-      icon: "Smartphone",
-    },
-  ],
-  faqs: [
-    {
-      question: "รับงานราชการ ต้องทำ TOR ไหม?",
-      answer: "รับครับ ผมสามารถช่วยร่างสเปก (TOR) และเตรียมเอกสารเบิกจ่ายได้ครับ",
-    },
-    { question: "สอนเจ้าหน้าที่ใช้งานไหม?", answer: "สอนให้ฟรีครับ พร้อมคู่มือการใช้งานภาษาไทย" },
-  ],
-  localContext: {
-    marketInsight:
-      "ประชาชนต้องการความสะดวกในการติดต่อราชการ เว็บไซต์ที่ลดขั้นตอนเอกสารจะได้รับคำชม",
-    technicalApproach:
-      "ใช้ CMS ที่มีความปลอดภัยสูง ป้องกันการถูกแฮก และระบบจัดการไฟล์ PDF สำหรับเอกสารราชการ",
-    localStrength: "เข้าใจวัฒนธรรมองค์กรท้องถิ่น ทำงานรวดเร็ว เอกสารครบถ้วน",
-    nicheIndustries: ["หน่วยงานราชการ (อบต./เทศบาล)", "วิสาหกิจชุมชนและสินค้า OTOP"],
-    painPoints: ["เว็บเดิมลิงก์ตาย ข้อมูลเก่า", "เจ้าหน้าที่คนเดิมย้าย ไม่มีใครดูแลต่อ"],
-    competitorLevel: "low",
-    socialProof: { rating: 4.8, reviewCount: 42, localClient: "วิสาหกิจชุมชนแปรรูปกล้วยไข่" },
-    regionalPricing: { startPrice: "12,000 บาท", timeline: "20-30 วัน" },
-    localSuccessStory: {
-      title: "Case Study: อบต. ยุคใหม่",
-      result: "ความพึงพอใจประชาชนเพิ่มขึ้น 80% ผ่านเกณฑ์ ITA ระดับ A",
-    },
-    hyperLocalKeywords: ["ทำเว็บ อบต คลองขลุง", "รับทำเว็บไซต์ พรานกระต่าย"],
-  },
-  priority: 96,
-  districts: ["เมืองกำแพงเพชร", "คลองขลุง", "ขาณุวรลักษบุรี", "พรานกระต่าย"],
-  keywords: ["รับทำเว็บไซต์ กำแพงเพชร", "ทำเว็บ อบต กำแพงเพชร"],
-  coordinates: { lat: 16.4828, lng: 99.5227 },
-};
-```
-
-### CONFIG: khon-kaen.ts
-
-`Path: constants/area-nodes/khon-kaen.ts`
-
-```typescript
-/**
- * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v18.0.1 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Localized Conversion | Clinic & SME Expert | Hex Standard
- */
-import type { AreaNode } from "@/types";
-
-export const khonKaenNode: AreaNode = {
-  slug: "khon-kaen",
-  province: "ขอนแก่น",
-  templateSlug: "salepage",
-  title: "รับทำเว็บไซต์ ขอนแก่น | Sale Page คลินิกและ SME ปิดการขายไว ทักแชทแตก",
-  description:
-    "บริการรับทำ Sale Page ในขอนแก่น เน้นดีไซน์ที่ 'คนอีสานยุคใหม่' ชอบ โหลดไวบนมือถือ รองรับยิงแอด TikTok/FB",
-  longDescription:
-    "ขอนแก่นคือ Smart City เราเชี่ยวชาญการทำ Sale Page ที่ออกแบบมาเพื่อปิดการขายโดยเฉพาะ",
-  seoTitle: "รับทำเว็บไซต์ ขอนแก่น Sale Page ปิดการขาย ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "รับทำเว็บไซต์ขอนแก่น ออกแบบ Sale Page สำหรับคลินิกความงามและร้านค้า นัดคุยงานในเมืองขอนแก่นได้",
-  heroImage: "/images/areas/khon-kaen-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#4f46e5",
-    secondary: "#4338ca",
-    background: "#ffffff",
-    foreground: "#1e1b4b",
-    accent: "#818cf8",
-    gradient: "from-[#4f46e5]/10 via-transparent to-transparent",
-  },
-  price: "8,900",
-  priceValue: 8900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
-  clientTrust: "Trusted by Local: เบื้องหลังความสำเร็จของ 15+ คลินิกและร้านดังในขอนแก่น",
-  benefits: [
-    "เข้าใจจริตคนขอนแก่น: ออกแบบ UX/UI ให้เข้ากับพฤติกรรมคนในพื้นที่",
-    "นัดคุยงานได้จริง: ผมอยู่ในพื้นที่พร้อมนัดประชุมวางแผนกลยุทธ์ย่านกังสดาลหรือในเมือง",
-    "ระบบหลังบ้านแน่นปึ้ก: ติดตั้ง Conversion API ให้ครบ",
-  ],
-  coreFeatures: [
-    {
-      title: "KKC Speed Architecture",
-      description: "ปรับจูนเซิร์ฟเวอร์ให้โหลดแรงสุดๆ รองรับการใช้งานผ่าน 5G/WiFi",
-      icon: "Zap",
-    },
-    {
-      title: "Line OA & Map Integration",
-      description: "ปุ่ม 'แอดไลน์' และ 'นำทาง' แบบ Sticky ที่กดง่าย",
-      icon: "MapPin",
-    },
-    {
-      title: "Clean Design for Clinics",
-      description: "เทมเพลตคลีนๆ ที่ออกแบบมาเพื่อคลินิกความงามโดยเฉพาะ",
-      icon: "Sparkles",
-    },
-  ],
-  faqs: [
-    {
-      question: "ออฟฟิศอยู่ที่ไหน นัดเจอได้ไหม?",
-      answer: "ผมเบสอยู่ในตัวเมืองขอนแก่นครับ สามารถนัดคุยงานได้ย่านกังสดาลครับ",
-    },
-    { question: "ใช้เวลาทำนานไหม?", answer: "โดยปกติใช้เวลา 5-7 วันครับ" },
-  ],
-  localContext: {
-    marketInsight: "คนขอนแก่นตัดสินใจซื้อเร็วถ้าเห็นรีวิวชัดเจนและช่องทางติดต่อสะดวก",
-    technicalApproach: "เน้น Speed และ Mobile Experience เป็นหลัก",
-    localStrength: "เข้าใจภาษาถิ่นและวัฒนธรรม ช่วยเขียน Copywriting ที่เข้าถึงใจลูกค้า",
-    nicheIndustries: ["คลินิกความงาม", "ร้านอาหารและคาเฟ่", "อสังหาริมทรัพย์"],
-    painPoints: ["ยิงแอดไปแล้วลูกค้าไม่ทัก เพราะเว็บโหลดช้า", "เว็บไม่สวย ดูไม่น่าเชื่อถือ"],
-    competitorLevel: "high",
-    socialProof: { rating: 4.9, reviewCount: 96, localClient: "คลินิกความงาม ย่านกังสดาล" },
-    regionalPricing: { startPrice: "8,900 บาท", timeline: "5-7 วัน" },
-    localSuccessStory: {
-      title: "Case Study: คลินิกดังหลังมอ",
-      result: "ยอดจองคิวเพิ่มขึ้น 300% ภายใน 1 เดือน",
-    },
-    hyperLocalKeywords: ["รับทำ Sale Page ขอนแก่น", "จ้างทำเว็บ กังสดาล"],
-  },
-  priority: 95,
-  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่"],
-  keywords: ["รับทำเว็บไซต์ ขอนแก่น", "ออกแบบ Sale Page ขอนแก่น"],
-  coordinates: { lat: 16.4322, lng: 102.8236 },
-};
-```
-
-### CONFIG: korat.ts
-
-`Path: constants/area-nodes/korat.ts`
-
-```typescript
-/**
- * [SERVICE_NODE]: KORAT_IDENTITY_NODE v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Total Identity Shift | Zero-Radius Geometry | Industrial Monolith
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
-import type { AreaNode } from "@/types";
-
-export const koratNode: AreaNode = {
-  // --- Basic Identity ---
-  slug: "korat",
-  province: "นครราชสีมา",
-  templateSlug: "catalog", // ใช้ Catalog Template สำหรับอุตสาหกรรม
-
-  // [IDENTITY_COPY]: ปรับโทนคำพูดให้เป็นภาษาเครื่องจักรและการก่อสร้าง
-  title: "KORAT_INDUSTRIAL_HUB | รับทำเว็บไซต์โรงงาน โคราช ระบบ Catalog อะไหล่",
-  description:
-    "DEPLOYING: ระบบจัดการข้อมูลสินค้าเชิงวิศวกรรมสำหรับโรงงานและอุตสาหกรรมโคราช ทรงพลัง หนักแน่น และไร้ขีดจำกัด โดย นายเอ็มซ่ามากส์",
+    "บริการยกระดับโครงสร้างพื้นฐานดิจิทัลสำหรับหน่วยงานราชการและธุรกิจในกำแพงเพชร เน้นความปลอดภัยข้อมูล มาตรฐาน ITA และการเข้าถึงประชาชนอย่างมีประสิทธิภาพ",
 
   longDescription:
-    "นี่คือสถาปัตยกรรมที่ออกแบบมาเพื่อธุรกิจที่ขับเคลื่อนด้วยเครื่องจักรและโครงสร้างครับ " +
-    "ในจังหวัดนครราชสีมา ความอ่อนช้อยไม่ใช่คำตอบ แต่ความ 'ทนทาน' และ 'แม่นยำ' คือกุญแจสำคัญ " +
-    "เราจึงตัดความโค้งมนทิ้งทั้งหมด เพื่อสร้าง UI ที่เฉียบคมเหมือนใบมีดอุตสาหกรรม " +
-    "ระบบนี้จะเปลี่ยนแค็ตตาล็อกของคุณให้เป็นฐานข้อมูลที่แข็งแกร่งที่สุดในภาคอีสาน รองรับสินค้าหลักหมื่นรายการโดยไม่สะดุด",
+    "การพัฒนาเว็บไซต์สำหรับหน่วยงานท้องถิ่นในกำแพงเพชร ต้องอาศัยความเข้าใจในระเบียบราชการและพฤติกรรมการใช้งานของประชาชน เว็บไซต์ที่ดีต้องเป็น 'ศาลากลางดิจิทัล' ที่ทำงานได้ตลอด 24 ชั่วโมง " +
+    "นายเอ็มซ่ามากส์ พร้อมให้บริการออกแบบและพัฒนาเว็บไซต์ที่ถูกต้องตามระเบียบภาครัฐ และช่วยธุรกิจท้องถิ่นให้เติบโตด้วย Local SEO",
 
   // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ โคราช | ออกแบบเว็บโรงงานและแค็ตตาล็อกอุตสาหกรรม - เอ็มซ่ามากส์",
+  seoTitle: "รับทำเว็บไซต์ กำแพงเพชร ออกแบบเว็บ อบต. เทศบาล และธุรกิจท้องถิ่น - เอ็มซ่ามากส์",
   seoDescription:
-    "Web Engineering เฉพาะทางโคราช: ระบบ Dark Catalog ความละเอียดสูง ออกแบบมาเพื่อโรงงานและธุรกิจก่อสร้างโดยเฉพาะ ติดหน้าแรก Google ในคีย์เวิร์ดอุตสาหกรรม",
+    "จ้างทำเว็บไซต์กำแพงเพชร สำหรับหน่วยงานราชการ อบต. เทศบาล และธุรกิจ SME รองรับมาตรฐานความปลอดภัยระดับสูง ระบบ e-Service และ ITA",
 
-  // --- Visual & Theme (Industrial Monolith: Gold/Black) ---
-  heroImage: "/images/areas/korat-monolith.webp",
-  theme: {
-    mode: "dark",
-    primary: "#FFD700", // Construction Gold (สีเหลืองอำพันแบบป้ายเขตก่อสร้าง)
-    secondary: "#334155", // Deep Steel Slate
-    background: "#000000", // Absolute Black (ดำสนิทแบบน้ำมันเครื่อง)
-    foreground: "#FFFFFF", // High-Contrast White
-    accent: "#EAB308",
-    gradient: "from-[#FFD700]/20 via-black to-black",
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก localAuthorityService เพื่อความเป็นมาตรฐานเดียวกัน
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-    // [EXTRA_ATTRIBUTES]: ค่ากำหนดพิเศษที่จะเปลี่ยน UI ทั้งหน้าให้เป็นเหลี่ยมคม
-    radius: "0px", // ตัดความมนทิ้งทั้งหมด (Hard Edge)
-    borderWidth: "2px", // เส้นขอบหนาและชัดเจนเหมือนแบบแปลน
-    fontFamily: "var(--font-mono)", // ใช้ฟอนต์ Monospace ทั้งหมดเพื่อให้ดูเป็น Technical Manual
-  },
-
-  // --- Pricing Strategy (Industrial Grade) ---
-  price: "24,500",
-  priceValue: 24500,
-  currency: "THB",
-  unit: "เริ่มต้น / ระบบ",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/kamphaeng-phet-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
-    "Heavy Duty Certified: ระบบที่ผ่านการทดสอบในโรงงานผลิตชิ้นส่วนยานยนต์และไซตฺ์ก่อสร้างจริงในโคราช",
+    "Government Integrity: มาตรฐานเว็บไซต์ที่ได้รับการยอมรับจากหน่วยงานท้องถิ่นและวิสาหกิจชุมชนในกำแพงเพชร",
 
   // --- Localized Benefits ---
   benefits: [
-    "STRUCTURED DATA: โครงสร้างข้อมูลแบบ Matrix ที่รองรับการค้นหา Part Number หรือ Spec สินค้าได้แม่นยำ 100%",
-    "ZERO-LATENCY: ระบบ Cache สินค้าที่โหลดข้อมูลหลักพันรายการได้ในเสี้ยววินาที เพื่อให้ฝ่ายจัดซื้อทำงานได้ไม่สะดุด",
-    "INDUSTRIAL UI: ดีไซน์แบบ High-Contrast (ดำ-เหลือง) ที่มองเห็นชัดเจนแม้ในสภาพแสงจ้าของไซต์งานหรือโรงงาน",
+    "Public Accessibility: ออกแบบโครงสร้างตามหลักสากล (WCAG) เพื่อให้ประชาชนทุกช่วงวัยใช้งานได้ง่าย",
+    "Compliance Verified: รองรับมาตรฐานการประเมิน ITA และระเบียบการเปิดเผยข้อมูลภาครัฐ (OIT) ครบถ้วน",
+    "Local Growth: ช่วยธุรกิจท้องถิ่นและวิสาหกิจชุมชนให้ค้นหาเจอใน Google Maps เพิ่มโอกาสการขาย",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Gov & Local Specific) ---
   coreFeatures: [
     {
-      title: "Part Number Search",
-      description: "Engine ค้นหาอัจฉริยะที่เข้าใจรหัสสินค้า (SKU) และสเปกทางวิศวกรรม",
-      icon: "Search", // หรือ Code2
-    },
-    {
-      title: "Technical Spec Sheet",
-      description:
-        "ระบบสร้างตารางสเปกสินค้า (PDF Generate) อัตโนมัติ เพื่อให้ลูกค้านำไปแนบใบเสนอราคาได้ทันที",
+      title: "Transparency Hub",
+      description: "ระบบจัดหมวดหมู่ข้อมูลสาธารณะ (OIT) ที่ถูกต้องตามเกณฑ์ประเมินความโปร่งใส",
       icon: "FileText",
     },
     {
-      title: "B2B Quote System",
-      description:
-        "ระบบขอใบเสนอราคา (RFQ) แบบล็อกอินสำหรับคู่ค้าประจำ เพื่อดูราคาส่งและสต็อกสินค้า",
+      title: "E-Service Gateway",
+      description: "ช่องทางรับเรื่องร้องเรียนและบริการออนไลน์เพื่อลดขั้นตอนการทำงานของเจ้าหน้าที่",
       icon: "ShieldCheck",
+    },
+    {
+      title: "Local SEO Booster",
+      description: "ปรับปรุงหมุด Google Maps ให้ธุรกิจ/สถานที่ราชการค้นหาเจอง่ายและน่าเชื่อถือ",
+      icon: "MapPin",
     },
   ],
 
   // --- Localized FAQs ---
   faqs: [
     {
-      question: "ระบบรองรับสินค้ากี่รายการ?",
+      question: "การเบิกจ่ายงบประมาณราชการทำอย่างไร?",
       answer:
-        "สถาปัตยกรรมของเราออกแบบมาให้รองรับได้ไม่จำกัด (Scalable) ครับ ทดสอบจริงกับฐานข้อมูลอะไหล่กว่า 50,000 รายการยังทำงานได้ลื่นไหลครับ",
+        "ผมสามารถจัดทำใบเสนอราคา เปรียบเทียบราคา และส่งมอบงานตามงวดงานราชการได้ถูกต้องตามระเบียบพัสดุครับ",
     },
     {
-      question: "เชื่อมต่อกับ ERP ของโรงงานได้ไหม?",
-      answer:
-        "ทำได้ครับ เราสามารถเขียน API เชื่อมต่อกับระบบ SAP, Oracle หรือ Express เพื่อดึงสต็อกและราคามาแสดงหน้าเว็บแบบ Real-time",
+      question: "สอนเจ้าหน้าที่ใช้งานไหม?",
+      answer: "มีอบรมการใช้งานระบบหลังบ้าน (CMS) ให้เจ้าหน้าที่ฟรี จนกว่าจะลงข้อมูลเองได้คล่องครับ",
     },
     {
-      question: "นัดคุยงานที่โรงงานในเขตสุรนารีได้ไหม?",
+      question: "เว็บไซต์รองรับคนพิการ/ผู้สูงอายุไหม?",
       answer:
-        "ได้ครับ ทีมงานพร้อมใส่หมวกเซฟตี้เข้าไปดูหน้างานและกระบวนการผลิต เพื่อออกแบบระบบให้ตรงโจทย์การใช้งานจริงที่สุดครับ",
+        "รองรับครับ เราออกแบบตัวอักษรให้อ่านง่ายและเมนูไม่ซับซ้อน ตามหลัก Universal Design ครับ",
     },
-    {
-      question: "เว็บรองรับการเปิดบนแท็บเล็ตหน้างานไหม?",
-      answer:
-        "แน่นอนครับ UI ของเราเป็น Responsive แบบ Hard-Grid ที่แสดงผลชัดเจนบน Tablet และ Industrial Panel PC ทุกรุ่นครับ",
-    },
-    {
-      question: "มีระบบ Dealer Login ไหม?",
-      answer:
-        "มีครับ เราสามารถทำระบบสมาชิกแยก Tier (Dealer/End User) เพื่อให้เห็นราคาและโปรโมชั่นที่ต่างกันได้ครับ",
-    },
-    {
-      question: "ใช้เวลาพัฒนานานเท่าไหร่?",
-      answer:
-        "สำหรับระบบ Catalog มาตรฐานใช้เวลา 20-30 วันครับ แต่ถ้ามีการเชื่อมต่อ ERP อาจใช้เวลา 45-60 วันเพื่อความแม่นยำของข้อมูลครับ",
-    },
-    {
-      question: "ออกใบกำกับภาษีได้ไหม?",
-      answer:
-        "ได้ครับ เราจดทะเบียนพาณิชย์ถูกต้อง สามารถออกเอกสารหัก ณ ที่จ่าย และใบกำกับภาษีเต็มรูปแบบสำหรับนิติบุคคลครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ธุรกิจ B2B ในโคราชไม่ได้ซื้อของด้วยอารมณ์ แต่ซื้อด้วย 'ความมั่นใจในโครงสร้าง' เว็บไซต์ที่ดูแข็งแกร่งจะช่วยดึงดูดโปรเจกต์ระดับพันล้าน",
+      "ประชาชนในพื้นที่ต้องการความสะดวกในการเข้าถึงข้อมูล เว็บไซต์ที่รวดเร็วและเป็นระเบียบจะสร้างภาพลักษณ์ที่ดีให้องค์กร",
     technicalApproach:
-      "Engineered Search: ระบบค้นหาที่แม่นยำระดับรหัสอะไหล่ และการเรนเดอร์ UI แบบ High-Contrast เพื่อการอ่านข้อมูลในไซต์งาน",
-    localStrength:
-      "สถาปัตยกรรมแบบ Monolith ที่สะท้อนถึงความยิ่งใหญ่ของประตูสู่อีสาน พร้อมรองรับการขัดแย้งของข้อมูลมหาศาล",
+      "เน้นการใช้ Open-source Stack ที่มีความเสถียร ปลอดภัย และไม่มีค่าใช้จ่ายลิขสิทธิ์รายเดือนที่เป็นภาระผูกพัน",
+    localStrength: "เข้าใจวัฒนธรรมท้องถิ่นกำแพงเพชร ทำงานรวดเร็ว มีเอกสารประกอบการดำเนินงานครบถ้วน",
     nicheIndustries: [
-      "Heavy Machinery & Spare Parts",
-      "Steel Construction & Engineering",
-      "Logistics Infrastructure",
-      "Industrial Real Estate",
+      "หน่วยงานราชการท้องถิ่น (อบต./เทศบาล)",
+      "วิสาหกิจชุมชนและสินค้า OTOP",
+      "โรงเรียนและสถานศึกษา",
+      "ร้านวัสดุก่อสร้างและเกษตรภัณฑ์",
     ],
     painPoints: [
-      "ระบบเดิม 'เปราะบาง' เกินไปสำหรับสเกลข้อมูลอุตสาหกรรม",
-      "ความสวยงามแบบทั่วไปไม่สามารถสร้างความเกรงขามให้กับคู่ค้า B2B ได้",
-      "ขาดระบบจัดเก็บข้อมูลที่มีโครงสร้าง (Structured Data) ที่ชัดเจน",
+      "เว็บไซต์เดิมข้อมูลไม่อัปเดต/เข้าไม่ได้",
+      "ระบบใช้งานยากสำหรับชาวบ้าน",
+      "ไม่มีความปลอดภัยข้อมูล (โดนแฮกบ่อย)",
     ],
-    competitorLevel: "extreme",
-
+    competitorLevel: "low",
     socialProof: {
-      rating: 5.0,
-      reviewCount: 99,
-      localClient: "KORAT_INDUSTRIAL_PARTNERSHIP",
+      rating: 4.8,
+      reviewCount: 42,
+      localClient: "วิสาหกิจชุมชนแปรรูปกล้วยไข่",
     },
     regionalPricing: {
-      startPrice: "24,500 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "20-30 วัน",
     },
     localSuccessStory: {
-      title: "SYSTEM_DEPLOYMENT: โรงงานเหล็กโซนสีคิ้ว",
-      result:
-        "สร้าง Digital Inventory ที่ฝ่ายจัดซื้อทั่วประเทศเข้าถึงได้ 24 ชม. เพิ่มโอกาสปิดงานโปรเจกต์ภาครัฐ 400%",
+      title: "Case Study: อบต. ยุคใหม่",
+      result: "ยกระดับการให้บริการประชาชนผ่านช่องทางออนไลน์ ลดเวลารับเรื่องร้องเรียนลง 50%",
     },
     hyperLocalKeywords: [
-      "INDUSTRIAL WEB KORAT",
-      "ENGINEERING CATALOG SYSTEM",
-      "KORAT B2B SOLUTION",
-      "รับทำเว็บโรงงาน ปากช่อง",
+      "ทำเว็บ อบต กำแพงเพชร",
+      "รับทำเว็บไซต์ เทศบาล กำแพงเพชร",
+      "จ้างทำเว็บ คลองขลุง",
+      "ออกแบบเว็บ พรานกระต่าย",
     ],
   },
 
   // --- System Metadata ---
-  priority: 99, // สูงสุดในระดับยุทธศาสตร์
-  districts: ["เมืองนครราชสีมา", "ปากช่อง", "สีคิ้ว", "สูงเนิน", "ขามทะเลสอ"],
+  priority: 96,
+  districts: ["เมืองกำแพงเพชร", "คลองขลุง", "ขาณุวรลักษบุรี", "พรานกระต่าย", "ไทรงาม", "ลานกระบือ"],
   keywords: [
-    "KORAT INDUSTRIAL WEB",
-    "รับทำเว็บไซต์ โคราช อุตสาหกรรม",
-    "ระบบแค็ตตาล็อกโรงงาน นครราชสีมา",
-    "Web Architect Korat",
+    "รับทำเว็บไซต์ กำแพงเพชร",
+    "ทำเว็บไซต์ อบต กำแพงเพชร",
+    "รับทำเว็บราชการ",
+    "บริษัทรับทำเว็บไซต์",
+  ],
+  coordinates: { lat: 16.4828, lng: 99.5227 },
+};
+
+```
+### CONFIG: khon-kaen.ts
+`Path: constants/area-nodes/khon-kaen.ts`
+```typescript
+/**
+ * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v18.0.2 (DYNAMIC_LINKED)
+ * [STRATEGY]: Localized Conversion | Clinic & SME Expert | Dynamic Inheritance
+ * [MARKET]: Khon Kaen Smart City & University Zone
+ */
+
+import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { salePageService } from "@/constants/services/salepage";
+
+export const khonKaenNode: AreaNode = {
+  // --- Basic Identity ---
+  slug: "khon-kaen",
+  province: "ขอนแก่น",
+  templateSlug: "salepage", // เชื่อมโยง Logic การ Render
+
+  title: "รับทำเว็บไซต์ ขอนแก่น | Sale Page คลินิกและ SME ปิดการขายไว ทักแชทแตก",
+  description:
+    "บริการรับทำ Sale Page ในขอนแก่น เน้นดีไซน์ที่ 'คนอีสานยุคใหม่' ชอบ โหลดไวบนมือถือ รองรับยิงแอด TikTok/FB พร้อมระบบหลังบ้านที่ใช้งานง่าย",
+
+  longDescription:
+    "ขอนแก่นคือ Smart City ที่มีการแข่งขันสูง โดยเฉพาะธุรกิจคลินิกความงามและร้านอาหาร " +
+    "เราเชี่ยวชาญการทำ Sale Page ที่ออกแบบ UX/UI มาเพื่อคนขอนแก่นโดยเฉพาะ เน้นความจริงใจ ข้อมูลชัด และปุ่มติดต่อที่กดง่าย " +
+    "ช่วยเปลี่ยนคนดูให้กลายเป็นลูกค้าทักแชท หรือกดแผนที่มาร้านทันที",
+
+  // --- SEO Metadata ---
+  seoTitle: "รับทำเว็บไซต์ ขอนแก่น Sale Page ปิดการขาย ติดหน้าแรก Google - เอ็มซ่ามากส์",
+  seoDescription:
+    "รับทำเว็บไซต์ขอนแก่น ออกแบบ Sale Page สำหรับคลินิกความงามและร้านค้า นัดคุยงานในเมืองขอนแก่นได้ รองรับ Conversion API",
+
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก salePageService เพื่อความเป็นมาตรฐานเดียวกัน
+  theme: salePageService.theme,
+  price: salePageService.price,
+  priceValue: salePageService.priceValue,
+  currency: salePageService.currency,
+  unit: salePageService.unit,
+
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/khon-kaen-node.webp",
+
+  // --- Trust Signals ---
+  clientTrust: "Trusted by Local: เบื้องหลังความสำเร็จของ 15+ คลินิกและร้านดังย่านกังสดาลและหลังมอ",
+
+  // --- Localized Benefits ---
+  benefits: [
+    "Local Behavior UX: ออกแบบโดยเข้าใจพฤติกรรมคนขอนแก่น เน้นความเร็วและข้อมูลที่ 'เนื้อๆ เน้นๆ' ไม่เยิ่นเย้อ",
+    "On-Site Meeting: ผมเบสอยู่ในตัวเมืองขอนแก่น สามารถนัดประชุมวางแผนกลยุทธ์ได้จริง (โซนกังสดาล/มข.)",
+    "Full-Stack Conversion: ติดตั้งระบบวัดผล (Pixel/CAPI) ให้ครบชุด พร้อมยิงแอดได้ทันที",
+  ],
+
+  // --- Core Features (Local Specific) ---
+  coreFeatures: [
+    {
+      title: "KKC Speed Architecture",
+      description: "ปรับจูน Server ให้โหลดแรงสุดๆ รองรับการใช้งานหนักๆ ช่วงพีคไทม์",
+      icon: "Zap",
+    },
+    {
+      title: "Line OA & Map Integration",
+      description: "ปุ่ม 'แอดไลน์' และ 'นำทาง' แบบ Sticky ที่กดง่ายบนมือถือ",
+      icon: "MapPin",
+    },
+    {
+      title: "Clean Design for Clinics",
+      description: "เทมเพลตคลีนๆ ที่ออกแบบมาเพื่อคลินิกความงามโดยเฉพาะ ดูน่าเชื่อถือ สะอาดตา",
+      icon: "Sparkles",
+    },
+  ],
+
+  // --- Localized FAQs ---
+  faqs: [
+    {
+      question: "ออฟฟิศอยู่ที่ไหน นัดเจอได้ไหม?",
+      answer:
+        "ผมทำงานอิสระแต่เบสอยู่ในตัวเมืองขอนแก่นครับ สะดวกนัดคุยงานย่านกังสดาล หรือร้านกาแฟในเมืองได้ครับ",
+    },
+    {
+      question: "ใช้เวลาทำนานไหม?",
+      answer: "Sale Page หน้าเดียวใช้เวลาประมาณ 3-5 วันครับ ถ้าข้อมูลพร้อม เริ่มงานได้ทันที",
+    },
+    {
+      question: "มีบริการถ่ายรูปสินค้า/คลินิกไหม?",
+      answer: "ผมมีทีมช่างภาพฟรีแลนซ์ในขอนแก่นแนะนำให้ได้ครับ เพื่อให้ได้รูปที่สวยและดูโปรที่สุด",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานเรื่อง CAPI/Next.js จาก Template หลัก
+    ...salePageService.faqs.filter(
+      (f) => f.question.includes("Next.js") || f.question.includes("Conversion API"),
+    ),
+  ],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คนขอนแก่นตัดสินใจซื้อเร็วถ้าเห็นรีวิวชัดเจนและช่องทางติดต่อสะดวก (โดยเฉพาะ Line)",
+    technicalApproach: "เน้น Mobile-First Speed เพราะคนส่วนใหญ่ไถฟีดผ่านมือถือ",
+    localStrength:
+      "เข้าใจภาษาถิ่นและวัฒนธรรมอีสาน ช่วยปรับคำโฆษณา (Copywriting) ให้เข้าถึงใจลูกค้า",
+    nicheIndustries: [
+      "คลินิกความงามและศัลยกรรม",
+      "ร้านอาหารและคาเฟ่",
+      "อสังหาริมทรัพย์ (หอพัก/คอนโด)",
+      "ร้านขายส่งเสื้อผ้า",
+    ],
+    painPoints: [
+      "ยิงแอดไปแล้วลูกค้าไม่ทัก",
+      "เว็บเดิมโหลดช้า ลูกค้าหนี",
+      "เว็บไม่สวย ดูไม่น่าเชื่อถือเทียบกับคู่แข่งในกรุงเทพ",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 96,
+      localClient: "คลินิกความงามชื่อดัง ย่านกังสดาล",
+    },
+    regionalPricing: {
+      startPrice: `${salePageService.price} บาท`, // Dynamic Reference
+      timeline: "3-5 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: คลินิกหลังมอ",
+      result: "ปรับหน้าเว็บใหม่ ยอดจองคิวผ่านไลน์เพิ่มขึ้น 300% ภายใน 1 เดือน",
+    },
+    hyperLocalKeywords: [
+      "รับทำ Sale Page ขอนแก่น",
+      "จ้างทำเว็บ กังสดาล",
+      "ทำเว็บคลินิก ขอนแก่น",
+      "ยิงแอด ขอนแก่น",
+    ],
+  },
+
+  // --- System Metadata ---
+  priority: 95,
+  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ"],
+  keywords: [
+    "รับทำเว็บไซต์ ขอนแก่น",
+    "ออกแบบ Sale Page ขอนแก่น",
+    "รับทำเว็บคลินิก",
+    "บริษัทรับทำเว็บไซต์ ภาคอีสาน",
+  ],
+  coordinates: { lat: 16.4322, lng: 102.8236 },
+};
+
+```
+### CONFIG: korat.ts
+`Path: constants/area-nodes/korat.ts`
+```typescript
+/**
+ * [SERVICE_NODE]: KORAT_INDUSTRIAL_HUB v18.0.3 (PRODUCTION_FINAL)
+ * [STRATEGY]: Industrial Authority | B2B Engineering | Dynamic Inheritance
+ * [MARKET]: Nakhon Ratchasima (Korat), Sung Noen, Pak Chong
+ */
+
+import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Industrial Standard)
+import { catalogService } from "@/constants/services/catalog";
+
+export const koratNode: AreaNode = {
+  // --- Basic Identity ---
+  slug: "korat",
+  province: "นครราชสีมา",
+  templateSlug: "catalog", // เชื่อมโยงกับ Catalog Template
+
+  title: "รับทำเว็บไซต์ โคราช | เว็บไซต์โรงงานและแคตตาล็อกสินค้าอุตสาหกรรม",
+  description:
+    "บริการรับทำเว็บไซต์โรงงานในโคราช เปลี่ยนแคตตาล็อกเล่มหนาเป็นระบบออนไลน์ ค้นหาง่ายด้วย Part Number รองรับงานจัดซื้อ B2B และนิคมอุตสาหกรรม",
+
+  longDescription:
+    "โคราชคือศูนย์กลางอุตสาหกรรมและประตูสู่อีสาน ธุรกิจที่นี่ต้องการความรวดเร็วและความแม่นยำ " +
+    "นายเอ็มซ่ามากส์ ให้บริการออกแบบเว็บไซต์เชิงวิศวกรรม (Engineering Web Design) ที่เน้นการจัดระเบียบข้อมูลสินค้าจำนวนมาก (SKU) ให้ค้นหาง่าย " +
+    "ลดความผิดพลาดในการสั่งซื้อ และช่วยให้ทีมขายของคุณปิดดีลกับฝ่ายจัดซื้อของโรงงานในนวนครและสุรนารีได้ง่ายขึ้น",
+
+  // --- SEO Metadata ---
+  seoTitle: "รับทำเว็บไซต์ โคราช ออกแบบเว็บโรงงาน แคตตาล็อกอะไหล่ - เอ็มซ่ามากส์",
+  seoDescription:
+    "จ้างทำเว็บไซต์โคราช สำหรับโรงงาน ร้านวัสดุก่อสร้าง และธุรกิจ B2B ระบบค้นหาอะไหล่แม่นยำ รองรับ SEO อุตสาหกรรม ติดหน้าแรก Google",
+
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // รับค่าโดยตรงจาก catalogService เพื่อความเป็นมาตรฐาน Industrial Grade
+  theme: catalogService.theme,
+  price: catalogService.price,
+  priceValue: catalogService.priceValue,
+  currency: catalogService.currency,
+  unit: catalogService.unit,
+
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/korat-monolith.webp",
+
+  // --- Trust Signals ---
+  clientTrust:
+    "Heavy Duty Certified: ระบบที่ผ่านการใช้งานจริงในโรงงานผลิตและไซต์ก่อสร้างชั้นนำในโคราช",
+
+  // --- Localized Benefits ---
+  benefits: [
+    "Structured Data: จัดระเบียบข้อมูลสินค้าแบบ Matrix รองรับการค้นหา Part Number หรือ Spec สินค้าได้แม่นยำ",
+    "Zero-Latency Search: ระบบ Cache สินค้าที่ช่วยให้ฝ่ายจัดซื้อค้นหารายการสินค้าหลักหมื่นได้ในเสี้ยววินาที",
+    "Site-Ready UI: ดีไซน์ที่เน้นความชัดเจน (High Legibility) อ่านสเปกง่ายแม้เปิดดูผ่านมือถือกลางไซต์งานก่อสร้าง",
+  ],
+
+  // --- Core Features (Industrial Specific) ---
+  coreFeatures: [
+    {
+      title: "Part Number Search",
+      description: "ระบบค้นหาอัจฉริยะที่เข้าใจรหัสสินค้า (SKU) และสเปกทางวิศวกรรม",
+      icon: "Search",
+    },
+    {
+      title: "B2B RFQ Portal",
+      description: "ระบบสมาชิกสำหรับคู่ค้า (Dealer) เพื่อล็อกอินดูราคาส่งและเช็คสต็อก Real-time",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Spec Sheet Hub",
+      description: "ศูนย์รวมไฟล์ PDF และ Data Sheet ให้ลูกค้าดาวน์โหลดได้เอง ลดงานส่งไฟล์ของเซลล์",
+      icon: "FileDown",
+    },
+  ],
+
+  // --- Localized FAQs ---
+  faqs: [
+    {
+      question: "ระบบรองรับการเชื่อมต่อ ERP ของโรงงานหรือไม่?",
+      answer:
+        "ทำได้ครับ เราสามารถพัฒนา API เชื่อมต่อกับระบบบัญชีหรือ ERP (เช่น SAP, Express) เพื่อดึงสต็อกมาแสดงผลได้ครับ",
+    },
+    {
+      question: "นัดคุยงานที่โรงงานในเขตอุตสาหกรรมได้ไหม?",
+      answer:
+        "ได้ครับ ผมพร้อมเข้าไปดูหน้างานจริงในเขตนวนคร, สุรนารี หรือสูงเนิน เพื่อออกแบบระบบให้ตรงโจทย์การใช้งานที่สุดครับ",
+    },
+    {
+      question: "สินค้ามีสเปกซับซ้อน (ขนาด, สี, รุ่น) ทำได้ไหม?",
+      answer:
+        "ทำได้สบายมากครับ ระบบของเราออกแบบมาเพื่อจัดการ Product Variant ที่ซับซ้อนโดยเฉพาะครับ",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...catalogService.faqs.filter(
+      (f) => f.question.includes("ออกใบกำกับภาษี") || f.question.includes("ลงสินค้า"),
+    ),
+  ],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ธุรกิจ B2B ในโคราชตัดสินใจด้วย 'ความเชื่อมั่น' และ 'สเปกที่ถูกต้อง' เว็บไซต์ที่ข้อมูลชัดเจนจะช่วยลดเวลาการตอบคำถามลูกค้าได้มหาศาล",
+    technicalApproach:
+      "เน้นระบบ Search และ Filtering ที่แม่นยำ เพื่อให้ฝ่ายจัดซื้อหาสินค้าเจอเร็วที่สุด",
+    localStrength:
+      "เข้าใจศัพท์เทคนิคและกระบวนการทำงานของโรงงาน สามารถจัดหมวดหมู่สินค้าได้ถูกต้องตามหลักวิศวกรรม",
+    nicheIndustries: [
+      "อุตสาหกรรมผลิตชิ้นส่วน (Heavy Machinery)",
+      "ร้านขายเหล็กและวัสดุก่อสร้าง (Construction Material)",
+      "โลจิสติกส์และคลังสินค้า (Logistics)",
+      "เครื่องมือช่างและฮาร์ดแวร์ (Hardware Tools)",
+    ],
+    painPoints: [
+      "ลูกค้าโทรมาถามสเปกเดิมๆ ซ้ำๆ",
+      "ส่งไฟล์แคตตาล็อก PDF ทางไลน์แล้วลูกค้าหาของไม่เจอ",
+      "สต็อกหน้าเว็บไม่ตรงกับของจริง",
+    ],
+    competitorLevel: "high", // โคราชการแข่งขันสูง
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 99,
+      localClient: "โรงงานเหล็กรายใหญ่ อ.สีคิ้ว",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`, // Dynamic Reference
+      timeline: "20-30 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานเหล็กสีคิ้ว",
+      result: "สร้าง Digital Catalog 2,000 รายการ ช่วยลดเวลาตอบคำถามลูกค้าทางไลน์ได้ 60%",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ นวนคร โคราช",
+      "ออกแบบเว็บ ปากช่อง",
+      "ทำเว็บโรงงาน สูงเนิน",
+      "รับทำ SEO โคราช",
+    ],
+  },
+
+  // --- System Metadata ---
+  priority: 99,
+  districts: ["เมืองนครราชสีมา", "ปากช่อง", "สีคิ้ว", "สูงเนิน", "ขามทะเลสอ", "โชคชัย"],
+  keywords: [
     "รับทำเว็บไซต์ โคราช",
+    "ทำเว็บโรงงาน นครราชสีมา",
+    "ระบบแคตตาล็อกออนไลน์",
+    "รับทำเว็บไซต์ B2B",
+    "Web Design Korat",
   ],
   coordinates: { lat: 14.9759, lng: 102.1177 },
 };
+
 ```
-
 ### CONFIG: lampang.ts
-
 `Path: constants/area-nodes/lampang.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Craftsmanship Authority | Tourism Storytelling | Hex Standard
+ * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Craftsmanship Authority | Tourism Storytelling | Dynamic Inheritance
  * [MARKET]: Lampang City, Koh Kha, Mae Moh (Ceramics & Energy Hub)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const lampangNode: AreaNode = {
   // --- Basic Identity ---
   slug: "lampang",
   province: "ลำปาง",
-  // [STRATEGY]: ใช้ 'local-authority' หรือ 'catalog' (ถ้าเน้นขายเซรามิก)
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ ลำปาง | ออกแบบเว็บเซรามิกและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
   description:
@@ -1960,23 +1977,16 @@ export const lampangNode: AreaNode = {
   seoDescription:
     "บริการรับทำเว็บไซต์ลำปาง ครบวงจร สำหรับโรงงานเซรามิก SME และธุรกิจท่องเที่ยว เน้นเว็บสวยสะอาดตา รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายและภาพลักษณ์แบรนด์",
 
-  // --- Visual & Theme (Indigo Clay: Craft/Trust) ---
-  heroImage: "/images/areas/lampang-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#312e81", // Indigo 900 (น้ำเงินครามเข้ม - ความน่าเชื่อถือ)
-    secondary: "#c2410c", // Orange 700 (สีดินเผา Clay - งานเซรามิก)
-    background: "#fafaf9", // Stone 50 (ขาวนวลแบบเนื้อเซรามิกสะอาดตา)
-    foreground: "#1c1917", // Stone 900 (ตัวหนังสือสีเข้ม อ่านง่ายคมชัด)
-    accent: "#4338ca", // Indigo 700
-    gradient: "from-[#312e81]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (SME Friendly) ---
-  price: "9,900",
-  priceValue: 9900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/lampang-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -1984,12 +1994,12 @@ export const lampangNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Aesthetic & Detail: ดีไซน์ที่เน้นความสะอาดตาและการจัดวาง (Layout) ที่สวยงาม เพื่อขับเน้นรายละเอียดของสินค้างานฝีมือให้ดูโดดเด่นที่สุด",
+    "Aesthetic Design: ดีไซน์ที่เน้นความสะอาดตาและการจัดวาง (Layout) ที่สวยงาม เพื่อขับเน้นรายละเอียดของสินค้างานฝีมือให้ดูโดดเด่น",
     "Export Ready: โครงสร้างเว็บรองรับหลายภาษา (Multi-language) และระบบ Catalog ที่เป็นสากล เพื่อให้โรงงานเซรามิกคุยกับลูกค้าต่างชาติได้รู้เรื่อง",
-    "Lampang SEO: เจาะกลุ่มคำค้นหาท้องถิ่นแม่นยำ เช่น 'โรงงานเซรามิก ลำปาง', 'ที่พักเกาะคา', 'รถเช่าสนามบินลำปาง' เพื่อให้ลูกค้าเจอคุณก่อนใคร",
+    "Lampang SEO: เจาะกลุ่มคำค้นหาท้องถิ่นแม่นยำ เช่น 'โรงงานเซรามิก ลำปาง', 'ที่พักเกาะคา' เพื่อให้ลูกค้าเจอคุณก่อนใคร",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Ceramic & Craft Specific) ---
   coreFeatures: [
     {
       title: "Digital Showroom",
@@ -2029,25 +2039,14 @@ export const lampangNode: AreaNode = {
         "ได้ครับ ผมชอบไปดูหน้างานจริงเพื่อให้เข้าใจกระบวนการผลิตและบรรยากาศร้าน จะได้ออกแบบเว็บออกมาได้ตรงโจทย์ที่สุดครับ",
     },
     {
-      question: "ดูแลเว็บยากไหม ป้าทำไม่เป็น?",
-      answer:
-        "ไม่ยากครับ ผมทำระบบหลังบ้านให้เหมือนเล่นไลน์ แค่พิมพ์ข้อความ เลือกรูป แล้วกดโพสต์ ถ้าติดตรงไหนโทรหาผมได้ตลอดครับ",
-    },
-    {
       question: "เว็บไซต์จะติดหน้าแรก Google นานไหม?",
       answer:
         "ถ้าทำ SEO อย่างถูกต้อง อันดับจะอยู่ค่อนข้างยั่งยืนครับ ยิ่งเป็นคำค้นหาเฉพาะทางในลำปาง คู่แข่งยังไม่เยอะ โอกาสติดอันดับยาวยิ่งสูงครับ",
     },
-    {
-      question: "ใช้เวลาทำกี่วัน?",
-      answer:
-        "ปกติ 10-14 วันครับ แต่ถ้าเป็นแค็ตตาล็อกสินค้าเยอะๆ อาจใช้เวลา 3 สัปดาห์ครับ เพื่อลงข้อมูลให้ครบถ้วน",
-    },
-    {
-      question: "มีค่าใช้จ่ายรายปีไหม?",
-      answer:
-        "ปีแรกฟรีครับ ปีต่อไปมีค่าต่ออายุโดเมนและโฮสติ้ง (ประมาณ 3,000 บาท) เพื่อรักษาชื่อเว็บและข้อมูลไว้ครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("ค่าใช้จ่าย"),
+    ),
   ],
 
   // --- Context Data ---
@@ -2070,14 +2069,13 @@ export const lampangNode: AreaNode = {
       "ต้องการเปลี่ยนจากรับจ้างผลิต (OEM) มาสร้างแบรนด์ตัวเอง",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 42,
       localClient: "โรงงานเซรามิกส่งออก ย่านเกาะคา",
     },
     regionalPricing: {
-      startPrice: "9,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
@@ -2106,25 +2104,27 @@ export const lampangNode: AreaNode = {
   ],
   coordinates: { lat: 18.2855, lng: 99.4927 },
 };
+
 ```
-
 ### CONFIG: mae-hong-son.ts
-
 `Path: constants/area-nodes/mae-hong-son.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Slow Living | Wellness Retreat | Ethnic Craft D2C
+ * [SERVICE_NODE]: MAE_HONG_SON_CRAFT v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Slow Living | Wellness Retreat | Dynamic Inheritance
  * [MARKET]: Mueang Mae Hong Son, Pai, Mae Sariang (High-Value Niche)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const maeHongSonNode: AreaNode = {
   // --- Basic Identity ---
   slug: "mae-hong-son",
   province: "แม่ฮ่องสอน",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
+
   title: "รับทำเว็บไซต์ แม่ฮ่องสอน | ออกแบบเว็บที่พักและงานคราฟต์พรีเมียม โดย นายเอ็มซ่ามากส์",
   description:
     "เปลี่ยนความสงบของแม่ฮ่องสอนให้เป็นจุดขายระดับโลก ด้วยเว็บไซต์ที่ปิดการขายได้จริง แม้ในพื้นที่ห่างไกล พร้อมระบบที่ช่วยให้ธุรกิจท้องถิ่นขยายฐานลูกค้าสู่ระดับสากล",
@@ -2139,23 +2139,16 @@ export const maeHongSonNode: AreaNode = {
   seoDescription:
     "บริการรับทำเว็บไซต์แม่ฮ่องสอน เน้นงานดีไซน์เรียบง่ายแต่ทรงพลัง สำหรับรีสอร์ตและสินค้าภูมิปัญญาที่ต้องการขายตรง (D2C) โหลดไว ติดหน้าแรก Google แม้เน็ตจำกัด",
 
-  // --- Visual & Theme (Mist Green: Peace/Nature) ---
-  heroImage: "/images/areas/mae-hong-son-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#065f46", // Mist Green (เขียวหมอก)
-    secondary: "#064e3b", // Forest Green (เขียวป่าลึก)
-    background: "#f8fafc", // Slate 50 (ขาวนวลสะอาด)
-    foreground: "#0f172a", // Slate 900
-    accent: "#ea580c", // Clay Orange (ส้มดินเผา)
-    gradient: "from-[#065f46]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Niche Market) ---
-  price: "7,900",
-  priceValue: 7900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/mae-hong-son-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -2163,29 +2156,29 @@ export const maeHongSonNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "High-Speed Connectivity: สถาปัตยกรรมเว็บแบบเบาเป็นพิเศษ (Ultralight) ช่วยให้ลูกค้าเปิดเว็บคุณได้ลื่นไหลแม้จะใช้เน็ตมือถือบนดอยสูง",
-    "Storytelling Experience: ดีไซน์ที่เน้นการเล่าเรื่อง (Story) เพื่อเพิ่มมูลค่าให้สินค้าชุมชนหรือที่พัก ให้ดูมีความหมายและราคาแพงกว่าทั่วไป",
-    "Direct Sales Mastery: ระบบที่ช่วยให้คุณขายตรงสู่ลูกค้าได้ทันที ไม่ต้องผ่านคนกลาง ช่วยให้ผลกำไรส่วนใหญ่ตกอยู่ที่ชุมชนแม่ฮ่องสอน 100%",
+    "Ultralight Performance: สถาปัตยกรรมเว็บแบบเบาเป็นพิเศษ ช่วยให้ลูกค้าเปิดเว็บคุณได้ลื่นไหลแม้จะใช้เน็ตมือถือบนดอยสูง",
+    "Storytelling Design: ดีไซน์ที่เน้นการเล่าเรื่อง (Story) เพื่อเพิ่มมูลค่าให้สินค้าชุมชนหรือที่พัก ให้ดูมีความหมายและราคาแพงกว่าทั่วไป",
+    "Direct Sales: ระบบที่ช่วยให้คุณขายตรงสู่ลูกค้าได้ทันที ไม่ต้องผ่านคนกลาง ช่วยให้ผลกำไรตกอยู่ที่ชุมชนแม่ฮ่องสอนเต็มเม็ดเต็มหน่วย",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Remote & Craft Specific) ---
   coreFeatures: [
     {
-      title: "Connectivity Cache",
+      title: "Fast Loading Cache",
       description:
         "ระบบจดจำข้อมูลชั่วคราวเพื่อให้เว็บไซต์เปิดได้เร็วที่สุดแม้ในจุดที่สัญญาณอินเทอร์เน็ตไม่สม่ำเสมอ",
       icon: "Wifi",
     },
     {
-      title: "Digital Booking Sync",
+      title: "Booking Notification",
       description:
         "ระบบจองที่พักเชื่อมต่อตรงกับสมาร์ทโฟนของเจ้าของที่พัก แจ้งเตือนผ่าน LINE ทันทีเมื่อมีการจอง",
       icon: "CalendarCheck",
     },
     {
-      title: "Ethnic Product Showcase",
+      title: "Craft Gallery",
       description:
-        "ระบบแกลเลอรี่และแคตตาล็อกสินค้าที่โชว์รายละเอียดงานฝีมือได้คมชัด เพื่อเจาะกลุ่มลูกค้า D2C สายคราฟต์",
+        "ระบบแกลเลอรี่สินค้าที่โชว์รายละเอียดงานฝีมือได้คมชัด เพื่อเจาะกลุ่มลูกค้า D2C สายคราฟต์",
       icon: "Award",
     },
   ],
@@ -2195,38 +2188,27 @@ export const maeHongSonNode: AreaNode = {
     {
       question: "อยู่ในพื้นที่ห่างไกล นัดคุยงานอย่างไร?",
       answer:
-        "ปกติผมคุยผ่าน Zoom หรือ Google Meet ได้สะดวกมากครับ แต่ถ้าเป็นโปรเจกต์ที่ต้องการให้เห็นพื้นที่จริง ผมสามารถจัดตารางเดินทางไปหาคุณที่ปายหรือตัวเมืองแม่ฮ่องสอนได้ครับ",
+        "ปกติผมคุยผ่าน Zoom หรือ Google Meet ได้สะดวกมากครับ แต่ถ้าเป็นโปรเจกต์ใหญ่ ผมสามารถเดินทางไปหาคุณที่ปายหรือตัวเมืองแม่ฮ่องสอนได้ครับ",
     },
     {
       question: "อินเทอร์เน็ตที่แม่ฮ่องสอนช้า เว็บจะโหลดไหวไหม?",
       answer:
-        "นี่คือจุดแข็งของเราครับ ผมใช้เทคโนโลยี Next.js ที่รีดประสิทธิภาพสูงสุด ทำให้หน้าเว็บมีขนาดเล็กและเปิดได้ไวที่สุดแม้เน็ตจะเหลือเพียงไม่กี่ขีดครับ",
+        "สบายมากครับ ผมใช้เทคโนโลยี Next.js ที่รีดประสิทธิภาพสูงสุด ทำให้หน้าเว็บมีขนาดเล็กและเปิดได้ไวที่สุดแม้เน็ตจะช้าครับ",
     },
     {
       question: "มีระบบรับจองที่พัก (Booking) ให้เลยไหม?",
       answer:
-        "มีครับ เราสามารถติดตั้งระบบจองตรงหน้าเว็บ (Direct Booking) เพื่อลดการเสียค่าคอมมิชชั่นให้แอปจองที่พักอื่นๆ และให้เงินเข้ากระเป๋าคุณโดยตรงครับ",
+        "มีครับ เราสามารถติดตั้งระบบจองตรงหน้าเว็บ (Direct Booking) เพื่อลดการเสียค่าคอมมิชชั่นให้ OTA ครับ",
     },
     {
       question: "ทำเว็บหลายภาษาเพื่อรับฝรั่งด้วยได้ไหม?",
       answer:
-        "ได้แน่นอนครับ แม่ฮ่องสอนเป็นที่นิยมของนักท่องเที่ยวต่างชาติ ผมสามารถทำระบบสลับภาษา (Multi-language) ที่แปลได้อย่างลื่นไหลและดูเป็นมืออาชีพครับ",
+        "ได้แน่นอนครับ แม่ฮ่องสอนเป็นที่นิยมของต่างชาติ ผมสามารถทำระบบสลับภาษา (Multi-language) ที่ลื่นไหลและดูโปรครับ",
     },
-    {
-      question: "ดูแลหลังการขายอย่างไร ถ้าเว็บมีปัญหา?",
-      answer:
-        "ผมดูแลให้ตลอดอายุการใช้งานในส่วนของระบบพื้นฐานครับ และมีคู่มือภาษาไทยให้เจ้าของกิจการสามารถแก้ไขข้อมูลเองได้ง่ายๆ ผ่านมือถือครับ",
-    },
-    {
-      question: "ช่วยโปรโมทใน Google Maps ให้ด้วยไหม?",
-      answer:
-        "รวมอยู่ในบริการครับ ผมจะช่วย Optimize หมุดธุรกิจของคุณใน Google Maps ให้เชื่อมโยงกับเว็บไซต์ เพื่อให้อันดับการค้นหาดีขึ้นแบบทวีคูณ",
-    },
-    {
-      question: "ใช้เวลานานไหมกว่าจะเสร็จ?",
-      answer:
-        "สำหรับเว็บไซต์เริ่มต้น ใช้เวลาประมาณ 7-12 วันครับ ขึ้นอยู่กับการเตรียมข้อมูลรูปภาพและเนื้อหาของคุณลูกค้าครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
+    ),
   ],
 
   // --- Context Data ---
@@ -2244,8 +2226,8 @@ export const maeHongSonNode: AreaNode = {
       "ธุรกิจท่องเที่ยวเชิงอนุรักษ์ (Eco-Tourism)",
     ],
     painPoints: [
-      "ที่พักสวยมากแต่ใน Google Map หรือหน้าเว็บดูเก่าไม่ทันสมัย",
-      "การสื่อสารข้อมูลการเดินทางที่ลำบาก ทำให้ลูกค้าลังเลที่จะจอง",
+      "ที่พักสวยมากแต่ใน Google Maps ดูเก่า",
+      "การสื่อสารข้อมูลการเดินทางลำบาก ลูกค้าไม่กล้าจอง",
       "สินค้าชุมชนมีจำกัด แต่ไม่มีระบบสต็อกออนไลน์ที่แม่นยำ",
     ],
     competitorLevel: "low",
@@ -2255,13 +2237,13 @@ export const maeHongSonNode: AreaNode = {
       localClient: "ที่พักแนว Wellness และร้านสินค้าคราฟต์ในอำเภอปาย",
     },
     regionalPricing: {
-      startPrice: "7,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "7-12 วัน",
     },
     localSuccessStory: {
-      title: "เปลี่ยนที่พักกลางดอยให้เป็นที่รู้จักระดับโลก",
+      title: "Case Study: ที่พักกลางดอย",
       result:
-        "ยอดจองตรง (Direct Booking) เพิ่มขึ้น 200% หลังจากปรับปรุงเว็บไซต์ให้โหลดไวและดูแพงขึ้น",
+        "ยอดจองตรง (Direct Booking) เพิ่มขึ้น 200% หลังจากปรับปรุงเว็บไซต์ให้โหลดไวและดูทันสมัย",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ปาย",
@@ -2273,7 +2255,7 @@ export const maeHongSonNode: AreaNode = {
 
   // --- System Metadata ---
   priority: 83,
-  districts: ["เมืองแม่ฮ่องสอน", "ปาย", "แม่สะเรียง", "ขุนยวม", "ปางมะผ้า", "สบเมย", "แม่ลาหน่อย"],
+  districts: ["เมืองแม่ฮ่องสอน", "ปาย", "แม่สะเรียง", "ขุนยวม", "ปางมะผ้า", "สบเมย", "แม่ลาน้อย"],
   keywords: [
     "รับทำเว็บไซต์ แม่ฮ่องสอน",
     "จ้างทำเว็บที่พัก ปาย",
@@ -2283,25 +2265,26 @@ export const maeHongSonNode: AreaNode = {
   ],
   coordinates: { lat: 19.302, lng: 97.9685 },
 };
+
 ```
-
 ### CONFIG: nakhon-sawan.ts
-
 `Path: constants/area-nodes/nakhon-sawan.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (FULL_SYNC)
- * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Hex Standard
+ * [SERVICE_NODE]: NAKHON_SAWAN_TRADER_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Merchant Authority | Wholesale P-SEO | Dynamic Inheritance
  * [MARKET]: Nakhon Sawan City, Pak Nam Pho, Logistics & Trading Hub
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const nakhonSawanNode: AreaNode = {
   // --- Basic Identity ---
   slug: "nakhon-sawan",
   province: "นครสวรรค์",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
 
   title: "รับทำเว็บไซต์ นครสวรรค์ | ออกแบบเว็บร้านค้าส่งและธุรกิจกงสี ให้ทันสมัยและขายดีกว่าเดิม",
   description:
@@ -2318,23 +2301,16 @@ export const nakhonSawanNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์นครสวรรค์ ครบวงจร เน้นช่วยร้านค้าส่งและธุรกิจท้องถิ่นให้มีตัวตนบน Google ปักหมุดแผนที่ให้ลูกค้าหาเจอง่าย เพิ่มความน่าเชื่อถือระดับมืออาชีพ",
 
-  // --- Visual & Theme (Pak Nam Pho Prosperity: Red/Gold) ---
-  heroImage: "/images/areas/nakhon-sawan-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#be123c", // Rose 700 (แดงมงคล - สื่อถึงพลังค้าขาย)
-    secondary: "#881337", // Rose 900 (แดงเข้ม - ความหนักแน่น/กงสี)
-    background: "#fff1f2", // Rose 50 (พื้นขาวอมชมพูจางๆ ให้ความรู้สึกอบอุ่น)
-    foreground: "#4c0519", // Rose 950 (ตัวหนังสือสีแดงเข้ม อ่านง่าย)
-    accent: "#d97706", // Amber 600 (สีทอง/ส้ม - ความมั่งคั่ง)
-    gradient: "from-[#be123c]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Merchant Friendly) ---
-  price: "9,500",
-  priceValue: 9500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/nakhon-sawan-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -2342,70 +2318,64 @@ export const nakhonSawanNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "ยึดทำเลทองบน Google: ปักหมุดร้านค้าให้ติดอันดับต้นๆ เมื่อคนค้นหาสินค้าในพื้นที่ เพื่อให้ลูกค้าที่กำลังต้องการของโทรหาคุณก่อนคู่แข่ง",
-    "สร้างความมั่นใจให้คู่ค้า: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ลูกค้านอกเขตปากน้ำโพกล้าที่จะโอนเงินและสั่งซื้อสินค้าจากคุณมากขึ้น",
-    "ระบบเรียบง่ายไม่ซับซ้อน: เราออกแบบมาให้เจ้าของกิจการที่อาจไม่สันทัดเทคโนโลยีสามารถดูแลข้อมูลพื้นฐานเองได้ง่ายๆ ผ่านมือถือ",
+    "Google Maps Dominance: ปักหมุดร้านค้าให้ติดอันดับต้นๆ เมื่อคนค้นหาสินค้าในพื้นที่ เพื่อให้ลูกค้าที่กำลังต้องการของโทรหาคุณก่อนคู่แข่ง",
+    "Professional Image: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ลูกค้านอกเขตปากน้ำโพกล้าที่จะโอนเงินและสั่งซื้อสินค้าจากคุณมากขึ้น",
+    "Easy to Manage: ระบบหลังบ้านที่ออกแบบมาให้เจ้าของกิจการที่อาจไม่สันทัดเทคโนโลยีสามารถดูแลข้อมูลพื้นฐานเองได้ง่ายๆ ผ่านมือถือ",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Trader Specific) ---
   coreFeatures: [
     {
-      title: "Google Maps Domination",
+      title: "Local SEO Boost",
       description:
         "ปรับแต่งหมุดร้านค้า (GMB) ให้สมบูรณ์แบบที่สุด เพื่อดึง Traffic จากกลุ่มคนค้นหา 'ใกล้ฉัน' ในนครสวรรค์",
       icon: "MapPin",
     },
     {
-      title: "Quick-Action Layout",
+      title: "Quick Action Buttons",
       description:
-        "เน้นปุ่มโทรออกและปุ่มแชท LINE ที่เห็นชัดเจนในทุกหน้าหน้าจอ เพื่อเปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้าโดยเร็วที่สุด",
+        "เน้นปุ่มโทรออกและปุ่มแชท LINE ที่เห็นชัดเจนในทุกหน้าจอ เพื่อเปลี่ยนผู้เยี่ยมชมให้เป็นลูกค้าโดยเร็วที่สุด",
       icon: "Zap",
     },
     {
-      title: "Business Trust Profile",
+      title: "Business Profile",
       description:
         "ระบบโชว์หน้าร้าน รีวิวจากลูกค้า และความสำเร็จของธุรกิจ เพื่อยืนยันว่าคุณคือตัวจริงในอุตสาหกรรมนั้น",
       icon: "ShieldCheck",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "มีหน้าร้านอยู่แล้ว ทำไมยังต้องทำเว็บไซต์อีก?",
       answer:
-        "เพราะพฤติกรรมลูกค้าเปลี่ยนไปครับ แม้แต่คนในนครสวรรค์เองเวลานึกอะไรไม่ออกเขาก็จะค้นหาใน Google ก่อน ถ้าคุณไม่มีตัวตนบนนั้น ลูกค้าก็อาจจะหลุดไปหาร้านอื่นที่เขาเจอได้ง่ายกว่าครับ",
+        "เพราะพฤติกรรมลูกค้าเปลี่ยนไปครับ แม้แต่คนในพื้นที่เองเวลานึกอะไรไม่ออกเขาก็จะค้นหาใน Google ก่อน ถ้าคุณไม่มีตัวตนบนนั้น ลูกค้าก็อาจจะหลุดไปหาร้านอื่นครับ",
     },
     {
       question: "ดูแลเว็บไม่เป็น จะทำได้ไหม?",
       answer:
-        "ทำได้แน่นอนครับ ผมจะเซตระบบทุกอย่างให้เป็นอัตโนมัติที่สุด และสอนการใช้งานเบื้องต้นเพียงไม่กี่นาทีคุณก็ทำได้แล้ว หรือจะให้ผมดูแลรายเดือนให้คุณก็ได้ครับ",
+        "ทำได้แน่นอนครับ ผมจะเซตระบบทุกอย่างให้เป็นอัตโนมัติที่สุด และสอนการใช้งานเบื้องต้นให้ หรือจะให้ผมดูแลรายเดือนให้คุณก็ได้ครับ",
     },
     {
       question: "นานไหมกว่าจะเห็นผล?",
       answer:
-        "สำหรับเว็บไซต์และการปักหมุดแผนที่ ปกติจะเริ่มเห็นผลในแง่ของการค้นหาเจอภายใน 2-4 สัปดาห์ และจะค่อยๆ แข็งแกร่งขึ้นเรื่อยๆ เมื่อเวลาผ่านไปครับ",
+        "สำหรับเว็บไซต์และการปักหมุดแผนที่ ปกติจะเริ่มเห็นผลการค้นหาเจอภายใน 2-4 สัปดาห์ และจะค่อยๆ แข็งแกร่งขึ้นเรื่อยๆ ครับ",
     },
     {
       question: "ช่วยเรื่องการขายส่ง (Wholesale) ได้อย่างไร?",
       answer:
-        "เราจะเน้นการทำ SEO ในคีย์เวิร์ดประเภท 'ขายส่ง' หรือ 'แหล่งจำหน่าย' เพื่อดึงดูดเจ้าของร้านค้ารายย่อยจากจังหวัดใกล้เคียงให้เข้ามาเจอคุณครับ",
-    },
-    {
-      question: "ต้องเตรียมข้อมูลอะไรบ้าง?",
-      answer:
-        "เตรียมแค่รูปภาพหน้าร้าน สินค้าหลักของคุณ และประวัติคร่าวๆ ครับ ที่เหลือผมจะช่วยเรียบเรียงและวางโครงสร้างการขายให้ทั้งหมดครับ",
-    },
-    {
-      question: "ราคา 9,500 จบจริงไหม มีค่าใช้จ่ายแอบแฝงไหม?",
-      answer:
-        "ราคานี้เป็นราคาเริ่มต้นสำหรับเว็บหน้าเดียวที่สมบูรณ์ครับ ค่าใช้จ่ายรายปีจะมีแค่ค่าโดเมนและโฮสติ้ง ซึ่งผมจะแจ้งให้ทราบตั้งแต่วันแรกอย่างชัดเจนครับ",
+        "เราจะเน้นการทำ SEO ในคีย์เวิร์ดประเภท 'ขายส่ง' หรือ 'แหล่งจำหน่าย' เพื่อดึงดูดเจ้าของร้านค้ารายย่อยจากจังหวัดใกล้เคียงครับ",
     },
     {
       question: "นัดเจอเพื่อคุยรายละเอียดในเมืองนครสวรรค์ได้ไหม?",
       answer:
         "ได้ครับ ผมยินดีเข้าไปพูดคุยที่ร้านของคุณในย่านสวรรค์วิถี ปากน้ำโพ หรือระแวกใกล้เคียง เพื่อให้เข้าใจบริบทของธุรกิจคุณมากที่สุดครับ",
     },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -2428,14 +2398,13 @@ export const nakhonSawanNode: AreaNode = {
       "กลัวเทคโนโลยียุ่งยากและไม่มีคนดูแลหลังทำเสร็จ",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 52,
       localClient: "ร้านค้าส่งอะไหล่รายใหญ่ ย่านสวรรค์วิถี",
     },
     regionalPricing: {
-      startPrice: "9,500 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
@@ -2471,77 +2440,140 @@ export const nakhonSawanNode: AreaNode = {
   ],
   coordinates: { lat: 15.7042, lng: 100.1372 },
 };
+
 ```
-
 ### CONFIG: phang-nga.ts
-
 `Path: constants/area-nodes/phang-nga.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: Phang Nga v1.1.5 (FINAL_STRICT_COMPLIANT)
- * [STRATEGY]: Premium Eco-Tourism & Marine Governance
+ * [SERVICE_NODE]: PHANG_NGA_MARINE_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Premium Eco-Tourism | Marine Governance | Dynamic Inheritance
+ * [MARKET]: Phang Nga Local Authorities, Khao Lak, Koh Yao
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const phangNgaNode: AreaNode = {
+  // --- Basic Identity ---
   slug: "phang-nga",
   province: "พังงา",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์พังงา - Smart Marine Governance & Sustainable Tourism Hub",
-  description:
-    "ยกระดับดิจิทัลแพลตฟอร์มสำหรับ อบต. และเทศบาลในพังงา เน้นระบบความปลอดภัยทางทะเล (Marine Safety 4.0) และโครงสร้างพื้นฐานเพื่อการท่องเที่ยวเชิงนิเวศระดับพรีเมียม",
+  templateSlug: "local-authority", // ยึดตาม Template หลัก
 
+  title: "รับทำเว็บไซต์พังงา | Smart Marine Governance & Sustainable Tourism Hub",
+  description:
+    "ยกระดับดิจิทัลแพลตฟอร์มสำหรับ อบต. และเทศบาลในพังงา เน้นระบบความปลอดภัยทางทะเล (Marine Safety) และโครงสร้างพื้นฐานเพื่อการท่องเที่ยวเชิงนิเวศระดับพรีเมียม",
+
+  longDescription:
+    "พังงาคือจุดหมายปลายทางระดับ Luxury Quiet Destination ของโลก นายเอ็มซ่ามากส์ ออกแบบโครงสร้างเว็บไซต์ราชการและท้องถิ่นพังงายคใหม่ " +
+    "ที่ไม่ได้เป็นแค่หน้าเว็บประชาสัมพันธ์ แต่คือศูนย์กลางข้อมูลความปลอดภัยทางทะเล (Marine Safety 4.0) และการเชื่อมโยงการท่องเที่ยวเชิงนิเวศ " +
+    "เพื่อให้สอดคล้องกับภาพลักษณ์การท่องเที่ยวระดับสูง และรองรับการประเมิน ITA ในระดับสูงสุดอย่างยั่งยืน",
+
+  // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์พังงา อบต. เทศบาล - ระบบ Smart City & ITA ยุคใหม่",
   seoDescription:
     "ออกแบบเว็บไซต์ราชการพังงา เขาหลัก เกาะยาว มาตรฐานความปลอดภัยสูง พร้อมระบบเชื่อมโยงข้อมูลท่องเที่ยวและเตือนภัยพิบัติทางทะเลแห่งแรกในอันดามัน",
 
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกัน
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phang-nga.webp",
-  theme: {
-    mode: "light",
-    primary: "#00695C",
-    secondary: "#009688",
-    background: "#F0F4F4",
-    foreground: "#002E2C",
-    accent: "#FF8F00",
-    gradient: "bg-gradient-to-br from-[#00695C] to-[#009688]",
-  },
 
-  price: "17,900",
-  priceValue: 17900,
-  currency: "THB",
-  unit: "Standard Package",
+  // --- Trust Signals ---
+  clientTrust:
+    "Governance Integrity: ผู้อยู่เบื้องหลังโครงสร้างพื้นฐานดิจิทัลสำหรับโครงการนำร่อง Smart Village ในเขตอันดามัน",
 
+  // --- Localized Benefits ---
   benefits: [
-    "Integrated Marine Weather API: แสดงสภาพอากาศชายฝั่งแบบ Real-time รายหาด",
-    "Digital Green Certificate Support: รองรับระบบรับรองมาตรฐานสิ่งแวดล้อมสำหรับท้องถิ่น",
-    "Multi-lingual Smart Portal: ระบบแปลภาษาอัตโนมัติรองรับนักท่องเที่ยว Scandinavian & European",
+    "Marine Weather Integration: ระบบแสดงสภาพอากาศชายฝั่งแบบ Real-time เพื่อความปลอดภัยของนักท่องเที่ยวและชาวประมง",
+    "Luxury User Experience: ดีไซน์ที่เน้นความเรียบหรูและโหลดเร็ว (SSR) เพื่อรองรับการเข้าถึงจากนักท่องเที่ยวทั่วโลก",
+    "ITA & Transparency Hub: ระบบจัดหมวดหมู่ข้อมูลตามเกณฑ์การประเมินคุณธรรมและความโปร่งใสของภาครัฐครบถ้วน",
   ],
 
+  // --- Core Features (Phang Nga Specific) ---
+  coreFeatures: [
+    {
+      title: "Marine Safety Gateway",
+      description:
+        "ระบบแจ้งเตือนภัยพิบัติทางทะเลและพยากรณ์คลื่นลมที่เชื่อมต่อกับสถานีตรวจวัดโดยตรง",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Eco-Tourism Portal",
+      description: "ระบบประชาสัมพันธ์แหล่งท่องเที่ยวเชิงนิเวศและวิสาหกิจชุมชนที่เน้นความยั่งยืน",
+      icon: "Map",
+    },
+    {
+      title: "Multi-lingual Smart Portal",
+      description: "ระบบรองรับหลายภาษาเพื่อต้อนรับกลุ่มนักท่องเที่ยวคุณภาพจากยุโรปและสแกนดิเนเวีย",
+      icon: "Globe",
+    },
+  ],
+
+  // --- Localized FAQs ---
+  faqs: [
+    {
+      question: "เว็บไซต์รองรับการแจ้งเตือนภัยสึนามิหรือไม่?",
+      answer:
+        "เราสามารถเชื่อมต่อ API แจ้งเตือนภัยจากศูนย์เตือนภัยพิบัติแห่งชาติเพื่อแสดงผลบนหน้าเว็บไซต์แบบ Real-time ได้ครับ",
+    },
+    {
+      question: "นัดคุยงานที่เขาหลักหรือเกาะยาวได้ไหม?",
+      answer:
+        "ได้ครับ ผมสามารถเดินทางไปรับโจทย์และสำรวจหน้างานในเขตตะกั่วป่า ท้ายเหมือง หรือนัดคุยผ่านวิดีโอคอลได้ตามความสะดวกครับ",
+    },
+    {
+      question: "ระบบ E-Service รองรับการจองพื้นที่สาธารณะไหม?",
+      answer:
+        "รองรับครับ เรามีระบบจองคิวออนไลน์และระบบขออนุญาตต่างๆ เพื่อลดขั้นตอนราชการและอำนวยความสะดวกประชาชนครับ",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("จัดซื้อจัดจ้าง") || f.question.includes("ดูแลหลังการขาย"),
+    ),
+  ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
-      "GPP ของพังงาขับเคลื่อนด้วย Luxury Tourism 80% เว็บไซต์ต้องรองรับ High-Bandwidth Visuals แต่ต้องโหลดเร็วผ่านระบบ SSR เพื่อประสบการณ์ใช้งานระดับสากล",
+      "GPP ของพังงาขับเคลื่อนด้วย Luxury Tourism เป็นหลัก เว็บไซต์ราชการจึงต้องสะท้อนภาพลักษณ์ความเป็นมืออาชีพและเข้าถึงง่ายระดับสากล",
     technicalApproach:
-      "ใช้ระบบ Hybrid Static-Server Rendering (Next.js 15+) เพื่อให้หน้าจังหวัดพังงาติดอันดับ Top-of-Mind ของผู้บริหารท้องถิ่นที่ค้นหาผ่านมือถือ",
-
+      "ใช้ระบบ Hybrid Static-Server Rendering (Next.js 15+) เพื่อให้หน้าเว็บไซต์ติดอันดับการค้นหา (SEO) ได้รวดเร็วและรองรับผู้ใช้จำนวนมาก",
     localStrength:
-      "ทรัพยากรธรรมชาติระดับ World-Class (สิมิลัน/สุรินทร์) และภาพลักษณ์ Luxury Quiet Destination",
-
+      "ทรัพยากรธรรมชาติระดับ World-Class และภาพลักษณ์ Luxury Quiet Destination คือจุดแข็งที่ต้องนำเสนอผ่านสื่อคุณภาพสูงบนเว็บ",
     nicheIndustries: [
+      "องค์การบริหารส่วนตำบลและเทศบาลในเขตท่องเที่ยว",
       "สมาคมธุรกิจการท่องเที่ยวจังหวัดพังงา",
-      "ศูนย์อนุรักษ์พันธุ์เต่าทะเล (กองทัพเรือ)",
-      "อุทยานแห่งชาติหมู่เกาะสิมิลัน/สุรินทร์",
-      "วิสาหกิจชุมชนบ้านสามช่องเหนือ",
+      "อุทยานแห่งชาติหมู่เกาะสิมิลันและสุรินทร์",
+      "วิสาหกิจชุมชนด้านการท่องเที่ยวเชิงนิเวศ",
     ],
-
     painPoints: [
-      "ระบบแจ้งเตือนภัยพิบัติยังไม่เข้าถึงนักท่องเที่ยวแบบ Real-time",
-      "ขาดแพลตฟอร์มรวมข้อมูลท่องเที่ยวชุมชนที่อัปเดต",
-      "เว็บราชการเดิมไม่รองรับการแสดงผลบนมือถือ",
+      "ระบบแจ้งเตือนภัยพิบัติยังไม่เข้าถึงมือถือนักท่องเที่ยวโดยตรง",
+      "ขาดแพลตฟอร์มรวมข้อมูลท่องเที่ยวชุมชนที่ดูทันสมัย",
+      "เว็บไซต์เดิมไม่รองรับการแสดงผลบนสมาร์ทโฟนของผู้ใช้งาน",
     ],
-
-    competitorLevel: "high", // Correct literal type
-
+    competitorLevel: "high",
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 42,
+      localClient: "โครงการนำร่อง Smart Village Phang Nga",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Smart Village Deployment",
+      result:
+        "ยกระดับการจัดการข้อมูลท้องถิ่นและเพิ่มประสิทธิภาพการสื่อสารกับนักท่องเที่ยวต่างชาติขึ้น 60%",
+    },
     hyperLocalKeywords: [
       "ทำเว็บไซต์เขาหลัก",
       "เว็บ อบต. คึกคัก",
@@ -2549,14 +2581,9 @@ export const phangNgaNode: AreaNode = {
       "ออกแบบเว็บไซต์ราชการท้ายเหมือง",
       "ระบบสารสนเทศเมืองพังงา",
     ],
-
-    socialProof: {
-      rating: 4.9,
-      reviewCount: 42,
-      localClient: "โครงการนำร่อง Smart Village Phang Nga",
-    },
   },
 
+  // --- System Metadata ---
   priority: 95,
   districts: [
     "เมืองพังงา",
@@ -2568,8 +2595,6 @@ export const phangNgaNode: AreaNode = {
     "ทับปุด",
     "เกาะยาว",
   ],
-
-  // [FIXED]: Added Missing Required Property
   keywords: [
     "รับทำเว็บไซต์พังงา",
     "Web Design Phang Nga",
@@ -2577,38 +2602,37 @@ export const phangNgaNode: AreaNode = {
     "ท่องเที่ยวชุมชนพังงา",
     "เว็บ อบต. มาตรฐาน ITA",
   ],
-
   coordinates: { lat: 8.4501, lng: 98.5255 },
 };
+
 ```
-
 ### CONFIG: phichit.ts
-
 `Path: constants/area-nodes/phichit.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.1 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Hex Standard
+ * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.2 (STRICT_SYNC)
+ * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Dynamic Inheritance
  * [MARKET]: Phichit City, Taphan Hin, Bang Mun Nak (Rice Mill Belt)
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const phichitNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phichit",
   province: "พิจิตร",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความมั่นคงและท้องถิ่น
+
   title: "รับทำเว็บไซต์ พิจิตร | ออกแบบเว็บโรงสีและธุรกิจเกษตรแปรรูป สร้างความเชื่อถือระดับสากล",
   description:
     "เปลี่ยนภาพลักษณ์โรงสีและธุรกิจการเกษตรในพิจิตรให้ดูโปรระดับมาตรฐานโลก ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือ โหลดไว และช่วยให้คู่ค้าหาคุณเจอเป็นอันดับแรกใน Google",
 
   longDescription:
-    "พิจิตรบ้านเราคือเมืองอู่ข้าวอู่น้ำที่สำคัญครับ ไม่ว่าคุณจะเป็นโรงสีข้าว ขายเครื่องจักรการเกษตร หรือทำธุรกิจค้าส่งรายใหญ่ การมีเว็บไซต์ที่ดูดีคือการโชว์ศักยภาพว่าบริษัทของคุณมั่นคงขนาดไหน " +
-    "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนธุรกิจของคุณให้ทันสมัยขึ้น เราเน้นทำเว็บไซต์ที่โชว์ผลงาน มาตรฐานโรงงาน และใบรับรองต่างๆ ให้ชัดเจน เพื่อให้คู่ค้าจากทั่วประเทศตัดสินใจร่วมงานกับคุณได้ทันทีโดยไม่ต้องเดินทางมาดูหน้างาน " +
-    "เราวางระบบให้คนค้นหาธุรกิจของคุณเจอใน Google ทันที ช่วยเพิ่มโอกาสในการปิดดีลใหม่ๆ และสร้างการเติบโตที่ยั่งยืนให้ธุรกิจในท้องถิ่นของเราครับ",
+    "พิจิตรคือเมืองอู่ข้าวอู่น้ำที่สำคัญครับ ไม่ว่าคุณจะเป็นโรงสีข้าว ขายเครื่องจักรการเกษตร หรือทำธุรกิจค้าส่งรายใหญ่ การมีเว็บไซต์ที่ดูดีคือการโชว์ศักยภาพว่าบริษัทของคุณมั่นคงขนาดไหน " +
+    "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนธุรกิจของคุณให้ทันสมัยขึ้น เราเน้นทำเว็บไซต์ที่โชว์ผลงาน มาตรฐานโรงงาน และใบรับรองต่างๆ ให้ชัดเจน เพื่อให้คู่ค้าตัดสินใจร่วมงานกับคุณได้ทันทีโดยไม่ต้องเดินทางมาดูหน้างาน " +
+    "เราวางระบบให้คนค้นหาธุรกิจของคุณเจอใน Google ทันที ช่วยเพิ่มโอกาสในการปิดดีลใหม่ๆ และสร้างการเติบโตที่ยั่งยืนให้ธุรกิจในท้องถิ่นครับ",
 
   // --- SEO Metadata ---
   seoTitle:
@@ -2616,26 +2640,16 @@ export const phichitNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์พิจิตร ครบวงจร สำหรับโรงงาน โรงสี และ SME การเกษตร เน้นความน่าเชื่อถือ โหลดเร็ว รองรับการแสดงผลบนมือถือ พร้อมระบบช่วยดันอันดับ Google SEO",
 
-  // --- Visual & Theme (Emerald Agro-Industry: Growth/Stability) ---
-  heroImage: "/images/areas/phichit-node.webp",
-  theme: {
-    mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #059669 (Emerald 600) เป็น #047857 (Emerald 700)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA (> 4.5:1) บนพื้นหลัง #ecfdf5
-     */
-    primary: "#047857",
-    secondary: "#064e3b", // Emerald 900 (เขียวเข้มมั่นคง)
-    background: "#ecfdf5", // Emerald 50 (พื้นเขียวมิ้นต์อ่อนจาง)
-    foreground: "#022c22", // Emerald 950
-    accent: "#34d399", // Emerald 400
-    gradient: "from-[#047857]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Industrial Grade) ---
-  price: "11,500",
-  priceValue: 11500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/phichit-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -2643,29 +2657,29 @@ export const phichitNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "สร้างเครดิตระดับประเทศ: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้คู่ค้าจากต่างจังหวัดหรือบริษัทส่งออก มั่นใจในมาตรฐานโรงงานของคุณตั้งแต่วินาทีแรกที่ค้นหาเจอ",
-    "โชว์ศักยภาพ 24 ชั่วโมง: ไม่ว่าจะเป็นกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้า คุณสามารถโชว์ทุกอย่างให้ลูกค้าเห็นได้ผ่านหน้าเว็บ โดยไม่ต้องส่งไฟล์รูปภาพซ้ำๆ",
-    "ยึดพื้นที่บน Google: เราเน้นคีย์เวิร์ดเฉพาะทาง เช่น 'โรงสีข้าว พิจิตร', 'ขายเครื่องจักรเกษตร ตะพานหิน' เพื่อดักกลุ่มลูกค้าที่กำลังมองหาซัพพลายเออร์ตัวจริง",
+    "National Credibility: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้คู่ค้าต่างจังหวัดหรือบริษัทส่งออก มั่นใจในมาตรฐานโรงงานของคุณตั้งแต่วินาทีแรก",
+    "Capacity Showcase: โชว์ศักยภาพกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้าให้ลูกค้าเห็นได้ทั่วโลกผ่านหน้าเว็บตลอด 24 ชั่วโมง",
+    "B2B SEO Domination: เน้นคีย์เวิร์ดเฉพาะทาง เช่น 'โรงสีข้าว พิจิตร', 'ขายเครื่องจักรเกษตร' เพื่อดักกลุ่มลูกค้าที่มองหาซัพพลายเออร์ตัวจริง",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Industrial & Agro Specific) ---
   coreFeatures: [
     {
       title: "Industrial Showroom",
       description:
-        "ระบบจัดวางแกลเลอรี่รูปภาพโรงงานและเครื่องจักรที่คมชัด โหลดไว เพื่อสะท้อนถึงเทคโนโลยีการผลิตที่ทันสมัย",
+        "ระบบแกลเลอรี่รูปภาพโรงงานและเครื่องจักรที่คมชัด โหลดไว สะท้อนเทคโนโลยีการผลิตที่ทันสมัย",
       icon: "Building2",
     },
     {
-      title: "Standard & Compliance",
+      title: "Compliance Hub",
       description:
-        "ส่วนแสดงใบรับรองและมาตรฐานการผลิต (GMP/HACCP) ที่จัดวางอย่างเป็นระเบียบ สร้างความมั่นใจในคุณภาพสินค้า",
+        "ส่วนแสดงใบรับรองมาตรฐานการผลิต (GMP/HACCP) ที่เป็นระเบียบ สร้างความมั่นใจในคุณภาพสินค้า",
       icon: "ShieldCheck",
     },
     {
-      title: "Mobile-First Inquiry",
+      title: "Mobile Inquiry Gateway",
       description:
-        "ระบบปุ่มติดต่อด่วนและแบบฟอร์มขอใบเสนอราคาที่ใช้งานง่ายบนมือถือ เพื่อให้ฝ่ายจัดซื้อติดต่อหาคุณได้ทันที",
+        "ระบบปุ่มติดต่อด่วนและแบบฟอร์มขอใบเสนอราคาที่ใช้งานง่าย เพื่อให้ฝ่ายจัดซื้อติดต่อหาคุณได้ทันที",
       icon: "Smartphone",
     },
   ],
@@ -2675,38 +2689,27 @@ export const phichitNode: AreaNode = {
     {
       question: "ทำไมโรงสีข้าวต้องมีเว็บไซต์ ทั้งที่มีลูกค้าประจำอยู่แล้ว?",
       answer:
-        "ลูกค้าประจำคือพื้นฐานครับ แต่เว็บไซต์คือโอกาสในการหาลูกค้าใหม่และคู่ค้าส่งออกรายใหญ่ที่เขาต้องการตรวจสอบเครดิตบริษัทผ่าน Google ก่อนตัดสินใจทำสัญญาซื้อขายก้อนโตครับ",
+        "ลูกค้าประจำคือพื้นฐานครับ แต่เว็บไซต์คือโอกาสในการหาลูกค้าใหม่และคู่ค้าส่งออกรายใหญ่ที่ต้องการตรวจสอบเครดิตบริษัทผ่าน Google ก่อนตัดสินใจครับ",
     },
     {
-      question: "จ้างทำแล้วต้องรอนานไหมกว่าจะเสร็จ?",
+      question: "แก้ไขข้อมูลเองได้ไหม เช่น อัปเดตรูปผลงาน?",
       answer:
-        "สำหรับเว็บไซต์มาตรฐานธุรกิจ ปกติใช้เวลา 10-14 วันครับ ขึ้นอยู่กับการเตรียมข้อมูลรูปภาพโรงงานและรายละเอียดมาตรฐานต่างๆ ของคุณลูกค้าครับ",
-    },
-    {
-      question: "แก้ไขข้อมูลเองได้ไหม เช่น เปลี่ยนราคาหรืออัปเดตรูปผลงาน?",
-      answer:
-        "ได้แน่นอนครับ ผมจะสอนเจ้าหน้าที่ของคุณใช้งานระบบหลังบ้านที่ง่ายเหมือนพิมพ์ไลน์ คุณสามารถเพิ่มรูปกิจกรรมหรือประกาศข่าวสารได้เองทันทีครับ",
+        "ได้แน่นอนครับ ผมจะสอนเจ้าหน้าที่ใช้งานระบบหลังบ้านที่ง่ายเหมือนพิมพ์ไลน์ คุณสามารถเพิ่มรูปกิจกรรมหรือประกาศข่าวสารได้เองทันทีครับ",
     },
     {
       question: "รับปักหมุดโรงงานใน Google Maps ด้วยไหม?",
       answer:
-        "รวมอยู่ในบริการครับ ผมจะช่วยปรับแต่งหมุดธุรกิจของคุณให้แม่นยำและน่าเชื่อถือ เพื่อให้รถขนส่งหรือคู่ค้าหาตำแหน่งโรงงานของคุณได้ง่ายที่สุดครับ",
+        "รวมอยู่ในบริการครับ ผมจะช่วยปรับแต่งหมุดธุรกิจของคุณให้แม่นยำ เพื่อให้รถขนส่งหรือคู่ค้าหาตำแหน่งโรงงานได้ง่ายที่สุดครับ",
     },
     {
       question: "นัดคุยรายละเอียดที่บริษัทในพิจิตรได้ไหม?",
       answer:
-        "ยินดีครับ ผมเดินทางไปพบคุณลูกค้าที่โรงงานในเขตเมือง พิจิตร, ตะพานหิน หรือบางมูลนาก ได้เลยครับ เพื่อให้เข้าใจหน้างานและโจทย์ธุรกิจที่สุด",
+        "ยินดีครับ ผมเดินทางไปพบคุณลูกค้าที่โรงงานในเขตพิจิตร, ตะพานหิน หรือบางมูลนาก เพื่อให้เข้าใจโจทย์ธุรกิจที่สุดครับ",
     },
-    {
-      question: "มีบริการทำ SEO ให้ด้วยไหม?",
-      answer:
-        "โครงสร้างเว็บที่ผมทำรองรับ SEO 100% ครับ ผมจะช่วยตั้งค่าคีย์เวิร์ดที่คนค้นหาเยอะในอุตสาหกรรมการเกษตรให้เบื้องต้นเพื่อให้ติดหน้าแรกได้ง่ายขึ้นครับ",
-    },
-    {
-      question: "ค่าใช้จ่ายมีรายเดือนไหม?",
-      answer:
-        "ไม่มีรายเดือนครับ จ่ายจบครั้งเดียวเป็นกรรมสิทธิ์ของคุณ จะมีแค่ค่าต่ออายุชื่อเว็บและโฮสติ้งรายปี (ประมาณ 3,000 บาท) ซึ่งผมแถมให้ฟรีในปีแรกครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -2714,7 +2717,7 @@ export const phichitNode: AreaNode = {
     marketInsight:
       "เจ้าของธุรกิจในพิจิตรมีรากฐานมั่นคง เว็บไซต์ที่ทันสมัยจะช่วยสร้างความแตกต่างและพิสูจน์มาตรฐานโรงงานให้คู่ค้าเห็นได้ทันที",
     technicalApproach:
-      "เน้น Industrial Schema และการนำเสนอระบบการผลิตที่ชัดเจน พร้อมโครงสร้างเว็บที่เบาและโหลดเร็วเพื่อรองรับการเปิดจากพื้นที่ห่างไกล",
+      "เน้น Industrial Schema และการนำเสนอระบบการผลิตที่ชัดเจน พร้อมโครงสร้างเว็บที่เบาและโหลดเร็วเพื่อรองรับพื้นที่ห่างไกล",
     localStrength:
       "เข้าใจระบบธุรกิจเกษตรแปรรูปในพิจิตร พร้อมช่วยเรียบเรียงเนื้อหาให้ดูเป็นสากลและน่าเชื่อถือที่สุดในเขตภาคเหนือตอนล่าง",
     nicheIndustries: [
@@ -2725,22 +2728,21 @@ export const phichitNode: AreaNode = {
     ],
     painPoints: [
       "คู่ค้าหาข้อมูลบริษัทเพื่อเช็คความน่าเชื่อถือไม่เจอ",
-      "ภาพลักษณ์บนออนไลน์ไม่สะท้อนถึงมาตรฐานโรงงานจริงๆ",
-      "ต้องการขยายตลาดสู่คู่ค้าระดับประเทศแต่ขาดเครื่องมือโชว์ศักยภาพ",
+      "ภาพลักษณ์ออนไลน์ไม่สะท้อนมาตรฐานโรงงานจริงๆ",
+      "ต้องการขยายตลาดระดับประเทศแต่ขาดเครื่องมือโชว์ศักยภาพ",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 38,
       localClient: "โรงสีข้าวขนาดใหญ่ ย่านตะพานหิน",
     },
     regionalPricing: {
-      startPrice: "11,500 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
-      title: "Case Study: โรงสีข้าวยยุคใหม่",
+      title: "Case Study: โรงสีข้าวยุคใหม่",
       result:
         "ได้รับยอดสั่งซื้อจากบริษัทส่งออกรายใหญ่ผ่านหน้าเว็บ หลังจากปรับโฉมให้ดูเป็นสากลและติดอันดับ SEO",
     },
@@ -2765,25 +2767,28 @@ export const phichitNode: AreaNode = {
   ],
   coordinates: { lat: 16.4428, lng: 100.3501 },
 };
+
 ```
-
 ### CONFIG: phitsanulok.ts
-
 `Path: constants/area-nodes/phitsanulok.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Regional Authority | Medical & Service SEO | Hex Standard
+ * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.2 (STRICT_SYNC)
+ * [STRATEGY]: Regional Authority | Medical & Service SEO | Dynamic Inheritance
  * [MARKET]: Phitsanulok City, Indochina Intersection (Service & Healthcare Hub)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const phitsanulokNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phitsanulok",
   province: "พิษณุโลก",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและมาตรฐานราชการ/วิชาชีพ
+
   title: "รับทำเว็บไซต์ พิษณุโลก | ออกแบบเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
   description:
     "ยกระดับธุรกิจบริการและการแพทย์สู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือ โหลดไว และติดอันดับ Google ในฐานะผู้นำของภูมิภาคสี่แยกอินโดจีน",
@@ -2799,23 +2804,16 @@ export const phitsanulokNode: AreaNode = {
   seoDescription:
     "จ้างทำเว็บไซต์พิษณุโลก ครบวงจร สำหรับคลินิก โรงแรม และธุรกิจบริการ เน้นความน่าเชื่อถือระดับมืออาชีพ รองรับ SEO พื้นที่ภาคเหนือตอนล่าง เพื่อครองความเป็นผู้นำในภูมิภาค",
 
-  // --- Visual & Theme (Civic Blue: Trust/Professional) ---
-  heroImage: "/images/areas/phitsanulok-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#1d4ed8", // Blue 700 (น้ำเงินวิชาชีพ)
-    secondary: "#1e3a8a", // Blue 900
-    background: "#f8fafc", // Slate 50 (สะอาดตา)
-    foreground: "#0f172a", // Slate 900
-    accent: "#60a5fa", // Blue 400
-    gradient: "from-[#1d4ed8]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy (Hub Level) ---
-  price: "12,900",
-  priceValue: 12900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/phitsanulok-node.webp",
 
   // --- Trust Signals ---
   clientTrust:
@@ -2823,70 +2821,59 @@ export const phitsanulokNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Professional Identity: สร้างภาพลักษณ์ที่น่าเชื่อถือและภูมิฐานในระดับภูมิภาค เพื่อให้ธุรกิจของคุณโดดเด่นเหนือคู่แข่งในฐานะผู้เชี่ยวชาญตัวจริง",
-    "Regional SEO Dominance: วางโครงสร้างการค้นหาครอบคลุมพื้นที่พิษณุโลกและจังหวัดใกล้เคียง (สุโขทัย, พิจิตร, อุตรดิตถ์) เพื่อดึงดูดลูกค้าจากทั่วภาคเหนือตอนล่าง",
-    "Service-Oriented Design: ออกแบบการใช้งาน (UX) ให้เรียบง่ายและเข้าถึงข้อมูลสำคัญได้ไวที่สุด เหมาะสำหรับคนไข้หรือลูกค้าธุรกิจที่ต้องการความรวดเร็ว",
+    "Professional Identity: สร้างภาพลักษณ์ที่น่าเชื่อถือและภูมิฐานระดับภูมิภาค เพื่อโดดเด่นเหนือคู่แข่งในฐานะผู้เชี่ยวชาญตัวจริง",
+    "Regional SEO Dominance: วางโครงสร้างการค้นหาครอบคลุมพิษณุโลกและจังหวัดใกล้เคียง เพื่อดึงดูดลูกค้าจากทั่วภาคเหนือตอนล่าง",
+    "Service-Oriented Design: ออกแบบการใช้งาน (UX) ให้เรียบง่ายและเข้าถึงข้อมูลสำคัญได้ไวที่สุด เหมาะสำหรับลูกค้าที่ต้องการความรวดเร็ว",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Service & Medical Specific) ---
   coreFeatures: [
     {
-      title: "Appointment & Contact Sync",
+      title: "Appointment Sync",
       description:
-        "ระบบจองนัดหมายหรือติดต่อสอบถามที่เชื่อมต่อตรงสู่ LINE หรืออีเมลบริษัท แจ้งเตือนทันที ไม่พลาดทุกโอกาสทางธุรกิจ",
+        "ระบบจองนัดหมายหรือติดต่อสอบถามที่เชื่อมต่อตรงสู่ LINE หรืออีเมล แจ้งเตือนทันที ไม่พลาดทุกโอกาสทางธุรกิจ",
       icon: "CalendarCheck",
     },
     {
       title: "Compliance & Security",
       description:
-        "มาตรฐานความปลอดภัยระดับสูง รองรับ PDPA และการแสดงผลข้อมูลที่ถูกต้องตามระเบียบวิชาชีพ (สำหรับคลินิกและการแพทย์)",
+        "มาตรฐานความปลอดภัยสูง รองรับ PDPA และการแสดงผลข้อมูลที่ถูกต้องตามระเบียบวิชาชีพ (สำหรับคลินิกและการแพทย์)",
       icon: "ShieldCheck",
     },
     {
-      title: "Interactive Location Hub",
+      title: "Location Hub",
       description:
         "ปักหมุดธุรกิจบน Google Maps อย่างละเอียด พร้อมระบบนำทางที่แม่นยำสำหรับลูกค้าจากต่างพื้นที่",
       icon: "MapPin",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำเว็บคลินิก ต้องระวังเรื่องกฎระเบียบอะไรบ้าง?",
       answer:
-        "สำคัญมากครับ เว็บคลินิกต้องปฏิบัติตาม พรบ.สถานพยาบาล และระเบียบแพทยสภา ผมมีความเชี่ยวชาญในการจัดวางเนื้อหาให้ถูกต้อง ไม่โอ้อวดเกินจริง และติดตั้งระบบ Consent ตามกฎหมาย PDPA ให้ครบถ้วนครับ",
+        "สำคัญมากครับ เว็บคลินิกต้องปฏิบัติตาม พรบ.สถานพยาบาล และระเบียบแพทยสภา ผมเน้นจัดวางเนื้อหาให้ถูกต้อง ไม่โอ้อวดเกินจริง และติดตั้งระบบ Consent ตามกฎหมาย PDPA ครับ",
     },
     {
       question: "จ้างทำเว็บไซต์ที่พิษณุโลก นัดเจอคุยงานได้ไหม?",
       answer:
-        "ได้แน่นอนครับ ผมยินดีเข้าไปคุยรายละเอียดที่คลินิก ออฟฟิศ หรือคาเฟ่ในตัวเมืองพิษณุโลก เพื่อรับโจทย์และวิเคราะห์ความต้องการหน้างานให้แม่นยำที่สุดครับ",
-    },
-    {
-      question: "ใช้เวลากี่วันเสร็จ?",
-      answer:
-        "สำหรับเว็บไซต์ธุรกิจบริการหรือคลินิกมาตรฐาน ใช้เวลาประมาณ 14-21 วันครับ รวมขั้นตอนการออกแบบและติดตั้งระบบความปลอดภัยข้อมูลครับ",
+        "ได้แน่นอนครับ ผมยินดีเข้าไปคุยรายละเอียดที่คลินิก ออฟฟิศ หรือคาเฟ่ในตัวเมืองพิษณุโลก เพื่อวิเคราะห์ความต้องการหน้างานให้แม่นยำที่สุดครับ",
     },
     {
       question: "ทำเว็บไซต์แล้ว จะช่วยให้คนไข้หรือลูกค้าเพิ่มขึ้นจริงไหม?",
       answer:
-        "จริงครับ เพราะคนในภูมิภาคนี้มักค้นหาบริการที่น่าเชื่อถือผ่าน Google ก่อน ถ้าเว็บคุณดูเป็นมืออาชีพและติดอันดับต้นๆ โอกาสที่เขาจะเลือกคุณมากกว่าคู่แข่งย่อมสูงขึ้นชัดเจนครับ",
-    },
-    {
-      question: "รองรับการเข้าใช้งานผ่านมือถือไหม?",
-      answer:
-        "100% ครับ ผมให้ความสำคัญกับ Mobile-First เพราะลูกค้ากว่า 90% ในพิษณุโลกเข้าเว็บผ่านสมาร์ทโฟน เว็บของคุณจะโหลดไวและสวยงามบนทุกหน้าจอครับ",
+        "จริงครับ เพราะคนในภูมิภาคนี้มักค้นหาบริการที่น่าเชื่อถือผ่าน Google ก่อน ถ้าเว็บคุณดูเป็นมืออาชีพและติดอันดับต้นๆ โอกาสที่เขาจะเลือกคุณย่อมสูงขึ้นครับ",
     },
     {
       question: "มีระบบนัดหมายออนไลน์ให้ด้วยไหม?",
       answer:
         "มีครับ เราสามารถทำตั้งแต่ระบบฟอร์มนัดหมายง่ายๆ ไปจนถึงระบบปฏิทินเช็คคิวว่าง เพื่อให้เจ้าหน้าที่หน้าเคาน์เตอร์ทำงานได้สะดวกขึ้นครับ",
     },
-    {
-      question: "มีค่าใช้จ่ายรายปีเท่าไหร่?",
-      answer:
-        "ปีแรกฟรีค่าโดเมนและโฮสติ้งครับ ปีต่อไปมีค่าดูแลรักษาประมาณ 3,000 - 5,000 บาท ขึ้นอยู่กับขนาดข้อมูล เพื่อให้เว็บไซต์ของคุณออนไลน์ได้เสถียรตลอด 24 ชั่วโมงครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
@@ -2909,14 +2896,13 @@ export const phitsanulokNode: AreaNode = {
       "ต้องการระบบนัดหมายออนไลน์ที่เสถียรสำหรับคนทุกวัย",
     ],
     competitorLevel: "medium",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 112,
       localClient: "คลินิกทันตกรรมพรีเมียม ในตัวเมืองพิษณุโลก",
     },
     regionalPricing: {
-      startPrice: "12,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
@@ -2942,6 +2928,8 @@ export const phitsanulokNode: AreaNode = {
     "นครไทย",
     "วัดโบสถ์",
     "บางกระทุ่ม",
+    "ชาติตระการ",
+    "เนินมะปราง",
   ],
   keywords: [
     "รับทำเว็บไซต์ พิษณุโลก",
@@ -2952,59 +2940,53 @@ export const phitsanulokNode: AreaNode = {
   ],
   coordinates: { lat: 16.8211, lng: 100.2659 },
 };
+
 ```
-
 ### CONFIG: phuket.ts
-
 `Path: constants/area-nodes/phuket.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Hex Standard
+ * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Dynamic Inheritance
  * [MARKET]: Phuket, Laguna, Patong, Rawai (Luxury Real Estate & Hospitality)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
+import { hotelResortService } from "@/constants/services/hotel-resort";
 
 export const phuketNode: AreaNode = {
   // --- Basic Identity ---
   slug: "phuket",
   province: "ภูเก็ต",
-  templateSlug: "hotelresort", // ใช้แม่แบบ Hotel & Resort เพื่อเน้นงาน Visual ระดับ High-end
+  templateSlug: "hotelresort", // เชื่อมโยงกับแม่แบบที่เน้นงาน Visual ระดับ High-end
 
   title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจสู่ระดับสากลด้วยเว็บไซต์ที่มอบประสบการณ์ระดับ Ultra-Luxury โหลดไวจากทั่วโลกด้วย Edge Computing และเปลี่ยนผู้ชมให้เป็นลูกค้ากำลังซื้อสูง",
 
   longDescription:
-    "ในตลาดที่มีการแข่งขันระดับโลกอย่างภูเก็ต เว็บไซต์ของคุณคือพนักงานต้อนรับคนแรกที่ลูกค้าจากยุโรป รัสเซีย หรือตะวันออกกลางจะได้สัมผัสครับ หากหน้าเว็บดูธรรมดาหรือโหลดช้า คุณอาจกำลังเสียโอกาสในดีลหลักล้านไปอย่างน่าเสียดาย " +
-    "นายเอ็มซ่ามากส์ พร้อมเนรมิตเว็บไซต์ที่ไม่ได้มีดีแค่ความสวยงาม แต่ต้องสะท้อนถึงเอกลักษณ์ชั้นสูงและมอบความสะดวกสบายที่ไร้รอยต่อ (Seamless Experience) " +
-    "เราเน้นการทำเว็บไซต์ที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจวิลล่าหรูหรือบริการระดับพรีเมียมของคุณครองอันดับหนึ่งบน Google Global",
+    "ในตลาดที่มีการแข่งขันระดับโลกอย่างภูเก็ต เว็บไซต์คือพนักงานต้อนรับคนแรกที่ลูกค้าจากยุโรป รัสเซีย หรือตะวันออกกลางจะได้สัมผัส " +
+    "นายเอ็มซ่ามากส์ พร้อมเนรมิตเว็บไซต์ที่สะท้อนถึงเอกลักษณ์ชั้นสูงและมอบความสะดวกสบายที่ไร้รอยต่อ (Seamless Experience) " +
+    "เราเน้นโครงสร้างที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจของคุณครองอันดับหนึ่งบน Google Global",
 
   // --- SEO Metadata ---
   seoTitle:
     "รับทำเว็บไซต์ ภูเก็ต ออกแบบเว็บวิลล่าหรู โรงแรม 5 ดาว ติดหน้าแรก Google Global - เอ็มซ่ามากส์",
   seoDescription:
-    "จ้างทำเว็บไซต์ภูเก็ต มาตรฐานสากล เน้นดีไซน์ Minimal Luxury สำหรับอสังหาริมทรัพย์และท่องเที่ยวพรีเมียม รองรับภาษาอังกฤษและรัสเซีย ติด SEO ระดับโลกเพื่อดึงดูดลูกค้ากำลังซื้อสูง",
+    "จ้างทำเว็บไซต์ภูเก็ต มาตรฐานสากล เน้นดีไซน์ Minimal Luxury สำหรับอสังหาริมทรัพย์และท่องเที่ยวพรีเมียม รองรับภาษาอังกฤษและรัสเซีย ติด SEO ระดับโลก",
 
-  // --- Visual & Theme (Midnight & Champagne Gold: Global Premium) ---
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก hotelResortService (Lanna Gold & Luxury Dark) เพื่อมาตรฐานพรีเมียมของระบบ
+  theme: hotelResortService.theme,
+  price: hotelResortService.price,
+  priceValue: hotelResortService.priceValue,
+  currency: hotelResortService.currency,
+  unit: hotelResortService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/phuket-node.webp",
-  theme: {
-    mode: "dark",
-    primary: "#d4af37", // Champagne Gold (ทองแชมเปญ)
-    secondary: "#1e293b", // Midnight Blue
-    background: "#020617", // Rich Navy Black
-    foreground: "#f8fafc", // Ivory White
-    accent: "#f59e0b", // Amber 500
-    gradient: "from-[#d4af37]/10 via-transparent to-transparent",
-    radius: "2px", // ความมนเล็กน้อยให้ความรู้สึกคมชัดแบบโมเดิร์น
-  },
-
-  // --- Pricing Strategy (Global Standard) ---
-  price: "25,000",
-  priceValue: 25000,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
 
   // --- Trust Signals ---
   clientTrust:
@@ -3012,78 +2994,62 @@ export const phuketNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "Global Speed Performance: ใช้เทคโนโลยี Edge Computing เพื่อให้ลูกค้าจากลอนดอน มอสโก หรือดูไบ เปิดเว็บไซต์ของคุณได้รวดเร็วเหมือนอยู่ข้างบ้าน",
-    "Prestige Branding: งานดีไซน์ที่คัดสรรมาเพื่อดึงดูดลูกค้าเกรด Ultra-High-Net-Worth (UHNW) โดยเฉพาะ เน้นความเรียบหรูและน่าเชื่อถือในระดับสากล",
-    "Direct Booking Maximization: ระบบที่ช่วยเพิ่มยอดจองตรงโดยไม่ผ่านเอเย่นต์ ช่วยให้คุณรักษาผลกำไรได้เต็มเม็ดเต็มหน่วยและครอบครองข้อมูลลูกค้าไว้เอง",
+    "Global Speed Performance: ใช้เทคโนโลยี Edge Computing (CDN) เพื่อให้ลูกค้าจากลอนดอน มอสโก หรือดูไบ เปิดเว็บคุณได้รวดเร็วระดับมิลลิวินาที",
+    "Prestige Branding: งานดีไซน์ระดับ Ultra-High-Net-Worth (UHNW) เน้นความเรียบหรูและน่าเชื่อถือในระดับสากลเพื่อปิดดีลมูลค่าสูง",
+    "Direct Booking Maximization: ระบบที่ช่วยเพิ่มยอดจองตรงโดยไม่ผ่านเอเย่นต์ ช่วยรักษาผลกำไรได้เต็มเม็ดเต็มหน่วย",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Global Luxury Specific) ---
   coreFeatures: [
     {
-      title: "Immersive Visual Gallery",
+      title: "Immersive Visuals",
       description:
-        "ระบบเรนเดอร์ภาพและวิดีโอความละเอียดสูงที่ลื่นไหล เพื่อโชว์บรรยากาศที่พักหรือบริการให้สมจริงและน่าหลงใหลที่สุด",
+        "ระบบเรนเดอร์ภาพและวิดีโอความละเอียดสูงที่ลื่นไหล เพื่อโชว์บรรยากาศที่พักให้สมจริงที่สุด",
       icon: "Camera",
     },
     {
       title: "Multi-Language & Currency",
       description:
-        "รองรับการแสดงผลหลายภาษาและการแปลงค่าเงินแบบ Real-time เพื่ออำนวยความสะดวกแก่ลูกค้าจากทั่วทุกมุมโลก",
+        "รองรับการแสดงผลหลายภาษาและการแปลงค่าเงินแบบ Real-time อำนวยความสะดวกลูกค้าทั่วโลก",
       icon: "Globe",
     },
     {
       title: "Advanced Global SEO",
       description:
-        "วางรากฐานการค้นหาภาษาอังกฤษและภาษาเป้าหมายอื่นๆ เพื่อดักจับ Traffic คุณภาพจากกลุ่มเป้าหมายในต่างประเทศ",
+        "วางรากฐานการค้นหาภาษาอังกฤษ รัสเซีย และจีน เพื่อดักจับ Traffic คุณภาพจากต่างประเทศ",
       icon: "TrendingUp",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
-      question: "ทำไมราคาทำเว็บไซต์ในภูเก็ตถึงสูงกว่าฟรีแลนซ์ทั่วไป?",
+      question: "ทำไมตลาดภูเก็ตต้องการเทคนิคที่ต่างจากจังหวัดอื่น?",
       answer:
-        "เพราะตลาดภูเก็ตคือตลาดระดับโลกครับ เราไม่ได้แค่ทำเว็บให้สวย แต่เราวางโครงสร้างเชิงวิศวกรรมที่รองรับผู้เข้าชมจากต่างประเทศ (Global Traffic) และระบบความปลอดภัยขั้นสูง ซึ่งคุ้มค่ากว่ามากเมื่อเทียบกับมูลค่าดีลอสังหาฯ หรือที่พักระดับพรีเมียมของคุณครับ",
+        "เพราะต้องรองรับ Global Traffic ครับ เราใช้ระบบ Cloud และ CDN กระจายข้อมูลไปทั่วโลก เพื่อให้ลูกค้าจากยุโรปเปิดเว็บคุณได้ไวเท่ากับคนในไทยครับ",
     },
     {
-      question: "ลูกค้าต่างชาติจะเปิดเว็บได้ไวไหม ถ้าเซิร์ฟเวอร์อยู่ในไทย?",
+      question: "รองรับการเชื่อมต่อกับระบบ Property Management (PMS) ไหม?",
       answer:
-        "ไม่ต้องกังวลครับ ผมใช้ระบบ Cloud ระดับโลกและ Content Delivery Network (CDN) กระจายข้อมูลไปทั่วโลก ลูกค้าจากยุโรปหรือรัสเซียจะเปิดเว็บคุณได้ไวเท่ากับคนในไทยแน่นอนครับ",
+        "รองรับครับ เราสามารถเขียน API เชื่อมต่อกับระบบจัดการโรงแรมชั้นนำ เพื่อให้สต็อกห้องพักและราคาอัปเดตตรงกันอัตโนมัติครับ",
     },
     {
       question: "ช่วยดูแลเรื่องการเขียนคำโฆษณาภาษาอังกฤษด้วยไหม?",
       answer:
-        "ในแพ็กเกจพรีเมียม ผมทำงานร่วมกับ Copywriter มืออาชีพที่เชี่ยวชาญตลาด Luxury เพื่อเกลาเนื้อหาภาษาอังกฤษให้ดูแพงและโน้มน้าวใจลูกค้าต่างชาติได้จริงครับ",
+        "เรามีทีมงานและพาร์ทเนอร์ Copywriter ที่เชี่ยวชาญตลาด Luxury เพื่อเกลาเนื้อหาให้ดูแพงและโน้มน้าวใจลูกค้าต่างชาติได้จริงครับ",
     },
-    {
-      question: "รองรับการทำ SEO ในตลาดรัสเซียหรือจีนไหม?",
-      answer:
-        "รองรับครับ เราเข้าใจอัลกอริทึมการค้นหาที่แตกต่างกันในแต่ละภูมิภาค และสามารถวางโครงสร้าง Metadata ให้ตอบโจทย์เครื่องมือค้นหาในตลาดนั้นๆ ได้โดยเฉพาะครับ",
-    },
-    {
-      question: "สามารถนัดคุยงานที่ลากูน่าหรือเชิงทะเลได้ไหม?",
-      answer:
-        "ยินดีมากครับ ผมพร้อมเดินทางเข้าไปพบเพื่อรับโจทย์และดูบรรยากาศโครงการจริงในเขตภูเก็ต เพื่อให้นำเสนอจุดเด่นของธุรกิจออกมาได้แม่นยำที่สุดครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับการเชื่อมต่อกับระบบ Property Management (PMS) ไหม?",
-      answer:
-        "รองรับครับ เราสามารถเขียน API เชื่อมต่อกับระบบจัดการโรงแรมหรือวิลล่าชั้นนำ เพื่อให้สต็อกห้องพักและราคาอัปเดตตรงกันโดยอัตโนมัติครับ",
-    },
-    {
-      question: "หลังทำเสร็จ มีบริการดูแลต่อเนื่องอย่างไร?",
-      answer:
-        "เรามีประกันดูแลระบบฟรี 6 เดือนครับ และมีบริการ Maintenance รายปีที่ครอบคลุมการอัปเดตความปลอดภัย และการปรับจูนความเร็วให้คงที่ตลอดเวลาครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...hotelResortService.faqs.filter(
+      (f) => f.question.includes("ตัดบัตรเครดิต") || f.question.includes("คุ้มค่า"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Luxury ในภูเก็ตตัดสินใจด้วย 'อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ยถึง 3 เท่า",
+      "ลูกค้ากลุ่ม Luxury ในภูเก็ตตัดสินใจด้วย 'อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ย 3 เท่า",
     technicalApproach:
-      "เน้นสถาปัตยกรรมแบบ Edge Computing และการทำ Image Optimization ขั้นสูงเพื่อรองรับ Global Traffic และความเร็วระดับมิลลิวินาที",
+      "เน้นสถาปัตยกรรมแบบ Edge Computing และการทำ Image Optimization ขั้นสูงเพื่อรองรับความเร็วระดับโลก",
     localStrength:
       "เข้าใจรสนิยมแบบ World-class และความต้องการของกลุ่มพรีเมียม พร้อมเป็นที่ปรึกษาในการปั้นแบรนด์ให้ดู 'แพง' ในระดับสากล",
     nicheIndustries: [
@@ -3098,20 +3064,19 @@ export const phuketNode: AreaNode = {
       "การทำ SEO ภาษาอังกฤษที่ไม่เห็นผลในตลาดต่างประเทศ",
     ],
     competitorLevel: "high",
-
     socialProof: {
       rating: 5.0,
       reviewCount: 215,
       localClient: "กลุ่มวิลล่าหรูระดับ Ultra-Luxury ย่านเชิงทะเล",
     },
     regionalPricing: {
-      startPrice: "25,000 บาท",
+      startPrice: `${hotelResortService.price} บาท`, // Dynamic Reference
       timeline: "21-45 วัน",
     },
     localSuccessStory: {
       title: "Case Study: พูลวิลล่าหรูเชิงทะเล",
       result:
-        "เพิ่มยอดจองตรง (Direct Booking) จากกลุ่มลูกค้ายุโรปได้มากกว่า 400% ภายใน 1 ฤดูกาลท่องเที่ยวหลังปรับปรุงเว็บไซต์",
+        "เพิ่มยอดจองตรง (Direct Booking) จากกลุ่มลูกค้ายุโรปได้มากกว่า 400% ภายใน 1 ฤดูกาลท่องเที่ยว",
     },
     hyperLocalKeywords: [
       "Phuket Luxury Web Design",
@@ -3123,7 +3088,7 @@ export const phuketNode: AreaNode = {
 
   // --- System Metadata ---
   priority: 97,
-  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล"],
+  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล", "กะทู้"],
   keywords: [
     "รับทำเว็บไซต์ ภูเก็ต",
     "Phuket Web Design",
@@ -3134,99 +3099,140 @@ export const phuketNode: AreaNode = {
   ],
   coordinates: { lat: 7.8804, lng: 98.3923 },
 };
+
 ```
-
 ### CONFIG: ranong.ts
-
 `Path: constants/area-nodes/ranong.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: RANONG_WELLNESS_HUB v18.1.3 (FINAL_STRICT_COMPLIANT)
- * [STRATEGY]: Andaman Gateway | Thermal-Hydro Therapy
+ * [SERVICE_NODE]: RANONG_WELLNESS_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Andaman Gateway | Thermal-Hydro Therapy | Dynamic Inheritance
+ * [MARKET]: Ranong Local Authorities, Border Trade & Wellness Tourism
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const ranongNode: AreaNode = {
+  // --- Basic Identity ---
   slug: "ranong",
   province: "ระนอง",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ระนอง - สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
-  description:
-    "ยกระดับแพลตฟอร์มดิจิทัลจังหวัดระนอง รองรับยุทธศาสตร์ 'Wellness City' เชื่อมโยงระบบบริการประชาชน (E-Service) และฐานข้อมูลการค้าชายแดนไทย-เมียนมา ด้วยมาตรฐานความปลอดภัยสูงสุด",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
 
-  // [FIXED]: Added Missing Required SEO Properties
+  title: "รับทำเว็บไซต์ระนอง | สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
+  description:
+    "ยกระดับแพลตฟอร์มดิจิทัลจังหวัดระนอง รองรับยุทธศาสตร์ 'Wellness City' เชื่อมโยงระบบบริการประชาชน (E-Service) และฐานข้อมูลการค้าชายแดนไทย-เมียนมา",
+
+  longDescription:
+    "ระนองคือเมืองแห่งสุขภาพและประตูการค้าชายแดนที่สำคัญ นายเอ็มซ่ามากส์ ออกแบบโครงสร้างเว็บไซต์ท้องถิ่นระนองยุคใหม่ " +
+    "ที่รองรับการใช้งานแบบ Multi-language (ไทย/เมียนมา/อังกฤษ) เพื่อสนับสนุนเศรษฐกิจชายแดน และระบบจองคิวสุขภาพออนไลน์ " +
+    "โดยเน้นความเสถียรสูงสุดด้วยเทคโนโลยี Static Site Generation (SSG) ที่ช่วยให้เว็บเข้าถึงได้รวดเร็วแม้ในช่วงฤดูมรสุมที่มีสัญญาณอินเทอร์เน็ตจำกัด",
+
+  // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ระนอง อบต. เทศบาล - Wellness City & Border Trade Hub",
   seoDescription:
     "บริการทำเว็บไซต์หน่วยงานราชการระนอง รองรับ 3 ภาษา (ไทย/อังกฤษ/เมียนมา) เชื่อมโยงการท่องเที่ยวเชิงสุขภาพและการค้าชายแดน มาตรฐาน ITA",
 
-  heroImage: "/images/areas/ranong-hotspring.webp",
-  theme: {
-    mode: "light",
-    primary: "#006064",
-    secondary: "#BF360C",
-    background: "#F8FAFC",
-    foreground: "#1E293B",
-    accent: "#00838F",
-    gradient: "bg-gradient-to-br from-[#006064]/05 to-[#BF360C]/05",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกัน
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/ranong-hotspring.webp",
+
+  // --- Trust Signals ---
+  clientTrust:
+    "Andaman Gateway Integrity: ผู้อยู่เบื้องหลังระบบดิจิทัลสนับสนุนนโยบายระเบียงเศรษฐกิจภาคใต้ (SEC) ในเขตระนอง",
+
+  // --- Localized Benefits ---
   benefits: [
-    "Cross-Border Multi-language: ระบบจัดการเนื้อหารองรับ Font ตระกูลเมียนมา (Zawgyi/Unicode) เพื่อรองรับแรงงานและเศรษฐกิจชายแดนโดยเฉพาะ",
-    "Offline-First Hydration: สถาปัตยกรรมที่ช่วยให้เว็บเปิดได้ทันทีแม้ในจุดอับสัญญาณระหว่างหุบเขา หรือช่วงฝนตกหนัก (Rainy-Day Optimization)",
-    "ITA-Compliant Architecture: โครงสร้างข้อมูลที่ถูกออกแบบมาเพื่อการประเมินคุณธรรมและความโปร่งใสในระดับ 'AA' โดยเฉพาะ",
+    "Cross-Border Multi-language: ระบบจัดการเนื้อหารองรับภาษาเมียนมา (Zawgyi/Unicode) เพื่อรองรับแรงงานและเศรษฐกิจชายแดน",
+    "Rainy-Day Optimization: สถาปัตยกรรมที่ช่วยให้เว็บเปิดได้ทันทีแม้ในช่วงฝนตกหนักหรือสัญญาณอินเทอร์เน็ตไม่สม่ำเสมอ",
+    "ITA AA-Compliant: โครงสร้างข้อมูลที่ถูกออกแบบมาเพื่อรองรับเกณฑ์การประเมินคุณธรรมและความโปร่งใสในระดับสูงสุด",
   ],
 
+  // --- Core Features (Wellness & Border Trade Specific) ---
   coreFeatures: [
     {
       title: "Mineral Water Hub",
-      description: "Dashboard ข้อมูลแหล่งน้ำแร่และการจองคิวบริการสุขภาพแบบดิจิทัล",
-      icon: "ThermometerIcon",
+      description:
+        "ระบบแสดงข้อมูลแหล่งน้ำแร่และการจองคิวบริการแช่น้ำแร่ร้อนแบบดิจิทัล ลดความแออัดหน้างาน",
+      icon: "Thermometer",
     },
     {
-      title: "Andaman Logistics Link",
-      description: "ระบบข่าวสารจุดผ่านแดนและการเดินเรือสินค้าข้ามเกาะแบบ Real-time",
-      icon: "ShipIcon",
+      title: "Border Logistics Link",
+      description: "ระบบข่าวสารจุดผ่านแดนและการเดินเรือขนส่งสินค้าข้ามเกาะแบบเรียลไทม์",
+      icon: "Ship",
     },
     {
-      title: "SEC One-Stop",
-      description: "ระบบขอรับบริการออนไลน์ตามนโยบายระเบียงเศรษฐกิจภาคใต้ (SEC)",
-      icon: "ShieldCheckIcon",
+      title: "SEC One-Stop Service",
+      description: "ระบบขอรับบริการออนไลน์ตามยุทธศาสตร์ระเบียงเศรษฐกิจภาคใต้ เชื่อมโยงทุกภาคส่วน",
+      icon: "ShieldCheck",
     },
   ],
 
+  // --- Localized FAQs ---
+  faqs: [
+    {
+      question: "เว็บไซต์รองรับภาษาพม่าหรือไม่?",
+      answer:
+        "รองรับครับ เราติดตั้งระบบฟอนต์ที่แสดงผลได้ถูกต้องทั้งแบบ Unicode และ Zawgyi เพื่อสื่อสารกับกลุ่มคู่ค้าชายแดนและแรงงานในพื้นที่ครับ",
+    },
+    {
+      question: "ช่วงหน้าฝนหรือพายุเข้า เว็บไซต์จะยังเข้าได้ปกติไหม?",
+      answer:
+        "เข้าได้รวดเร็วครับ เราใช้ระบบ SSG ที่ทำให้หน้าเว็บเป็นไฟล์เบาและกระจายอยู่บน CDN ทั่วโลก แม้เน็ตในพื้นที่ไม่เสถียรก็ยังโหลดขึ้นได้ไวครับ",
+    },
+    {
+      question: "สามารถทำระบบจองบ่อน้ำแร่ร้อนพรรั้งหรือรักษะวารินได้ไหม?",
+      answer:
+        "ทำได้ครับ เรามีโมดูล Booking สำหรับจัดการคิวผู้เข้าใช้บริการ เพื่อให้เจ้าหน้าที่และนักท่องเที่ยววางแผนเวลาได้แม่นยำขึ้นครับ",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("จัดซื้อจัดจ้าง") || f.question.includes("ความปลอดภัย"),
+    ),
+  ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
-      "ระนองมีประชากรแฝงและนักท่องเที่ยวคุณภาพสูง (Health Enthusiasts) เว็บไซต์ท้องถิ่นต้องทำหน้าที่เป็น 'Digital Concierge' มากกว่าแค่บอร์ดประชาสัมพันธ์",
-
+      "ระนองมีนักท่องเที่ยวกลุ่ม Wellness คุณภาพสูง เว็บไซต์ท้องถิ่นต้องทำหน้าที่เป็น 'Digital Concierge' ที่คอยแนะนำบริการสุขภาพและการเดินทางข้ามแดน",
     technicalApproach:
-      "ใช้ระบบ Next.js Static Site Generation (SSG) เพื่อลดภาระการประมวลผลของ Server ในช่วงพายุเข้า ช่วยให้ประชาชนเข้าถึงข้อมูลฉุกเฉินได้เสถียรที่สุด",
-
+      "ใช้ Next.js 15+ ร่วมกับ Static Site Generation เพื่อลดภาระ Server ในช่วงภัยพิบัติหรือพายุเข้า ช่วยให้ประชาชนเข้าถึงข้อมูลฉุกเฉินได้เสถียรที่สุด",
     localStrength:
-      "ความเป็น 'เมืองแร่นอง' และ 'น้ำแร่ร้อน' คือสัญลักษณ์ความมั่งคั่งใหม่ (Wellness Wealth) ที่ต้องสื่อสารผ่าน Typography ที่ดูพรีเมียม",
-
+      "สัญลักษณ์ความมั่งคั่งใหม่ (Wellness Wealth) ของระนองคือ 'น้ำแร่ร้อน' ซึ่งเรานำเสนอผ่านดีไซน์ที่ดูพรีเมียมและน่าเชื่อถือ",
     nicheIndustries: [
       "สมาคมธุรกิจการท่องเที่ยวจังหวัดระนอง",
-      "ด่านศุลกากรระนอง (Border Trade Connectivity)",
-      "กลุ่มวิสาหกิจชุมชนน้ำแร่ร้อนพรรั้ง/รักษะวาริน",
-      "อุตสาหกรรมแปรรูปอาหารทะเลแช่แข็ง",
+      "ด่านศุลกากรระนอง (Border Trade Hub)",
+      "กลุ่มวิสาหกิจชุมชนน้ำแร่ร้อนพรรั้งและรักษะวาริน",
+      "อุตสาหกรรมแปรรูปอาหารทะเลและท่าเทียบเรือ",
     ],
-
     painPoints: [
-      "ข้อมูลท่องเที่ยวหน้าฝนไม่ชัดเจน (Rainy Season Uncertainty)",
-      "เว็บราชการเดิมไม่รองรับภาษาเพื่อนบ้าน (Cross-border barrier)",
-      "ระบบจองคิวบ่อน้ำแร่ยังเป็นระบบ Manual",
+      "ข้อมูลท่องเที่ยวหน้าฝนไม่ชัดเจน (Rainy Season Gap)",
+      "เว็บราชการเดิมไม่รองรับภาษาเพื่อนบ้านเพื่อการค้าชายแดน",
+      "ระบบจองคิวบ่อน้ำแร่ยังเป็นระบบ Manual ที่จัดการยาก",
     ],
-
-    competitorLevel: "low", // Correct literal type
-
+    competitorLevel: "low",
     socialProof: {
       rating: 4.9,
       reviewCount: 41,
       localClient: "โครงการขับเคลื่อนเศรษฐกิจชายแดนระนอง",
     },
-
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Wellness City Digitalization",
+      result: "ยกระดับการจองบริการสุขภาพออนไลน์และเพิ่มการเข้าถึงข้อมูลของคู่ค้าชายแดนขึ้น 50%",
+    },
     hyperLocalKeywords: [
       "ทำเว็บไซต์ อบต.บางหริ้น",
       "ออกแบบเว็บเทศบาลเมืองระนอง",
@@ -3235,14 +3241,9 @@ export const ranongNode: AreaNode = {
     ],
   },
 
+  // --- System Metadata ---
   priority: 92,
-  price: "16,500",
-  priceValue: 16500,
-  currency: "THB",
-  unit: "Starting",
   districts: ["เมืองระนอง", "ละอุ่น", "กะเปอร์", "กระบุรี", "สุขสำราญ"],
-
-  // [FIXED]: Added Missing Required Property
   keywords: [
     "รับทำเว็บไซต์ระนอง",
     "Web Design Ranong",
@@ -3250,130 +3251,202 @@ export const ranongNode: AreaNode = {
     "เว็บราชการภาษาพม่า",
     "ระบบจองคิวน้ำแร่",
   ],
-
   coordinates: { lat: 9.9528, lng: 98.6084 },
 };
+
 ```
-
 ### CONFIG: sukhothai.ts
-
 `Path: constants/area-nodes/sukhothai.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Premium Branding | Aesthetic Storytelling | Hex Standard
+ * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Premium Branding | Aesthetic Storytelling | Dynamic Inheritance
+ * [MARKET]: Sukhothai, Sri Satchanalai, Sawankhalok (Heritage & Craft)
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const sukhothaiNode: AreaNode = {
+  // --- Basic Identity ---
   slug: "sukhothai",
   province: "สุโขทัย",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและความยั่งยืน
+
   title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ให้งานฝีมือดูพรีเมียม ติดหน้าแรก Google",
   description:
-    "เปลี่ยนงานหัตถศิลป์และธุรกิจท่องเที่ยวสุโขทัย ให้ดูสวยแพงและน่าเชื่อถือ ด้วยเว็บไซต์ที่บอกเล่าเรื่องราวแบรนด์อย่างมีรสนิยม",
+    "เปลี่ยนงานหัตถศิลป์และธุรกิจท่องเที่ยวสุโขทัย ให้ดูสวยแพงและน่าเชื่อถือ ด้วยเว็บไซต์ที่บอกเล่าเรื่องราวแบรนด์อย่างมีรสนิยม โดย นายเอ็มซ่ามากส์",
+
   longDescription:
-    "สุโขทัยคือเมืองแห่งมนต์เสน่ห์และงานฝีมือระดับครู หัวใจสำคัญคือการทำให้ลูกค้า 'เห็นคุณค่า' ก่อนเห็นราคา",
+    "สุโขทัยคือเมืองแห่งมนต์เสน่ห์และงานฝีมือระดับครูครับ หัวใจสำคัญของการทำธุรกิจที่นี่คือการทำให้ลูกค้า 'เห็นคุณค่า' ก่อนเห็นราคา " +
+    "ผมพร้อมช่วยเปลี่ยนธุรกิจของคุณให้มีตัวตนที่สง่างามบนโลกออนไลน์ เน้นการเล่าเรื่อง (Storytelling) ที่ทรงพลัง เพื่อเพิ่มมูลค่าให้เครื่องเงินศรีสัชนาลัย เครื่องสังคโลก หรือที่พักบูทีคโฮเต็ล " +
+    "ให้เข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูงและโหยหาคุณค่าทางวัฒนธรรมอย่างแท้จริงครับ",
+
+  // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ สุโขทัย ออกแบบเว็บเครื่องเงิน สังคโลก ที่พักพรีเมียม - เอ็มซ่ามากส์",
   seoDescription:
-    "จ้างทำเว็บไซต์สุโขทัย ครบวงจร เน้นดีไซน์สวยงามเพิ่มมูลค่าสินค้า OTOP และธุรกิจท่องเที่ยว",
+    "จ้างทำเว็บไซต์สุโขทัย ครบวงจร เน้นดีไซน์สวยงามเพิ่มมูลค่าสินค้า OTOP พรีเมียม และธุรกิจท่องเที่ยวในเขตมรดกโลก ติดหน้าแรก Google",
+
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/sukhothai-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#8b6b2d",
-    secondary: "#5c4033",
-    background: "#fdfbf7",
-    foreground: "#2a1b0f",
-    accent: "#d4af37",
-    gradient: "from-[#8b6b2d]/10 via-transparent to-transparent",
-  },
-  price: "10,500",
-  priceValue: 10500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
-  clientTrust: "Aesthetic Authority: เบื้องหลังเว็บไซต์แบรนด์เครื่องเงินโบราณในเขตมรดกโลกสุโขทัย",
+
+  // --- Trust Signals ---
+  clientTrust:
+    "Aesthetic Authority: เบื้องหลังการสร้างตัวตนดิจิทัลให้แบรนด์เครื่องเงินโบราณและที่พักระดับพรีเมียมในสุโขทัย",
+
+  // --- Localized Benefits ---
   benefits: [
-    "Aesthetic Storytelling: เปลี่ยนข้อมูลสินค้าที่แห้งแล้งให้เป็นเรื่องราวที่น่าหลงใหล",
-    "Luxury Positioning: ปรับตำแหน่งแบรนด์ให้เข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูง",
-    "Search Excellence: วางโครงสร้าง SEO เจาะจงคีย์เวิร์ดทรงคุณค่า",
+    "Aesthetic Storytelling: เปลี่ยนข้อมูลสินค้าที่แห้งแล้งให้เป็นเรื่องราวที่น่าหลงใหล เพื่อดึงดูดอารมณ์ร่วมของลูกค้า",
+    "Luxury Positioning: ปรับตำแหน่งแบรนด์ (Positioning) ให้เข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูงผ่านดีไซน์ที่ดูแพงและมีระดับ",
+    "Heritage SEO: วางโครงสร้างการค้นหาเจาะจงคีย์เวิร์ดทรงคุณค่า เช่น 'เครื่องเงินโบราณ', 'สังคโลกสุโขทัย', 'ที่พักเมืองเก่า'",
   ],
+
+  // --- Core Features (Heritage Specific) ---
   coreFeatures: [
     {
-      title: "Heritage Visual Showcase",
-      description: "ระบบแกลเลอรี่ภาพความละเอียดสูงที่เน้นรายละเอียดงานฝีมือ",
+      title: "Visual Gallery Showcase",
+      description:
+        "ระบบแสดงภาพความละเอียดสูงที่เน้นรายละเอียดงานฝีมือ (Craftsmanship) ให้โดดเด่นและชัดเจนที่สุด",
       icon: "Image",
     },
     {
-      title: "Editorial Typography",
-      description: "การจัดวางฟอนต์ในสไตล์นิตยสารพรีเมียม",
+      title: "Premium Typography",
+      description:
+        "การจัดวางตัวอักษรในสไตล์ Editorial ที่มอบความรู้สึกเหมือนอ่านนิตยสารระดับพรีเมียม",
       icon: "FileText",
     },
     {
-      title: "Direct Contact Gateway",
-      description: "ปุ่มติดต่อและจองที่ชัดเจน เชื่อมต่อตรงกับ LINE",
+      title: "Direct Conversion Link",
+      description:
+        "ระบบเชื่อมต่อการติดต่อและการจองที่รวดเร็ว เชื่อมตรงสู่ LINE หรือระบบจองของที่พักโดยตรง",
       icon: "Zap",
     },
   ],
+
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำไมสินค้า OTOP สุโขทัยถึงต้องมีเว็บไซต์เฉพาะทาง?",
       answer:
-        "เพื่อสร้างโลกของแบรนด์ขึ้นมา ทำให้ลูกค้าเข้าใจและยอมรับในราคาพรีเมียมได้ง่ายขึ้นครับ",
+        "เพื่อสร้าง 'โลกของแบรนด์' ขึ้นมาครับ ทำให้ลูกค้าเข้าใจคุณค่าและยอมรับในราคาที่สูงกว่าท้องตลาดได้ง่ายขึ้นผ่านการเล่าเรื่องที่สวยงามครับ",
     },
     {
-      question: "นัดเจอเพื่อคุยรายละเอียดได้ไหม?",
-      answer: "ยินดีมากครับ ผมสามารถนัดพูดคุยงานในเขตเมืองเก่าได้เลยครับ",
+      question: "นัดเจอเพื่อคุยรายละเอียดในสุโขทัยได้ไหม?",
+      answer:
+        "ยินดีมากครับ ผมสามารถนัดพูดคุยงานในเขตเมืองเก่า หรือพื้นที่ศรีสัชนาลัยได้ตามความสะดวกของคุณลูกค้าครับ",
     },
+    {
+      question: "ถ้าเป็นที่พักขนาดเล็ก ทำเว็บจะคุ้มไหม?",
+      answer:
+        "คุ้มมากครับ เพราะจะช่วยให้คุณรับจองโดยตรง (Direct Booking) ไม่ต้องเสียค่าคอมมิชชั่นให้แอปอื่น และสร้างฐานลูกค้าประจำของคุณเองครับ",
+    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
+    ),
   ],
+
+  // --- Context Data ---
   localContext: {
-    marketInsight: "ลูกค้ากลุ่มพรีเมียมที่ซื้องานฝีมือสุโขทัยต้องการ 'Story' และ 'Aesthetic'",
-    technicalApproach: "เน้นการทำ Image Showcase ที่มีความคมชัดสูงและการจัดวาง Typography ที่ดูแพง",
-    localStrength: "เราเข้าใจคุณค่าของงานศิลปะท้องถิ่น พร้อมช่วยเรียบเรียงเนื้อหาให้ดูร่วมสมัย",
-    nicheIndustries: ["เครื่องเงินศรีสัชนาลัย", "เครื่องสังคโลก", "บูทีคโฮเต็ล"],
-    painPoints: ["สินค้าพรีเมียมแต่ภาพลักษณ์ดูธรรมดา", "ขาดความน่าเชื่อถือในการขยายตลาด"],
+    marketInsight:
+      "ลูกค้ากลุ่มพรีเมียมที่ซื้องานฝีมือหรือท่องเที่ยวสุโขทัย ตัดสินใจด้วย 'Story' และ 'Aesthetic' เว็บไซต์ที่ดูสวยงามจะช่วยปิดการขายได้ง่ายขึ้น",
+    technicalApproach:
+      "เน้น Image Optimization ขั้นสูงเพื่อโชว์รายละเอียดสินค้าให้คมชัดที่สุด และการจัดวาง Typography ที่สื่อถึงความภูมิฐาน",
+    localStrength:
+      "เราเข้าใจคุณค่าของงานหัตถศิลป์เมืองมรดกโลก พร้อมช่วยเรียบเรียงเนื้อหาให้ดูร่วมสมัยและเป็นสากล",
+    nicheIndustries: [
+      "เครื่องเงินศรีสัชนาลัยและทองโบราณ",
+      "เครื่องสังคโลกและเซรามิกคราฟต์",
+      "บูทีคโฮเต็ลและโฮมสเตย์ระดับพรีเมียม",
+      "ธุรกิจท่องเที่ยวเชิงวัฒนธรรม (Cultural Tourism)",
+    ],
+    painPoints: [
+      "สินค้าเป็นงานฝีมือชั้นสูงแต่ภาพลักษณ์บนเว็บดูธรรมดาเกินไป",
+      "ขาดความน่าเชื่อถือในการส่งออกหรือขยายตลาดสู่ต่างจังหวัด",
+      "ต้องการเพิ่มราคาขายแต่ไม่มีช่องทางเล่าเรื่องราว (Story) ให้ลูกค้าเข้าใจ",
+    ],
     competitorLevel: "low",
-    socialProof: { rating: 4.9, reviewCount: 45, localClient: "แบรนด์เครื่องเงินโบราณชื่อดัง" },
-    regionalPricing: { startPrice: "10,500 บาท", timeline: "10-14 วัน" },
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 45,
+      localClient: "แบรนด์เครื่องเงินโบราณชื่อดังในศรีสัชนาลัย",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      timeline: "10-14 วัน",
+    },
     localSuccessStory: {
       title: "Case Study: แบรนด์สังคโลกเมืองเก่า",
-      result: "ยอดขายคอลเลกชันพิเศษพุ่งขึ้น 200%",
+      result:
+        "สร้างเว็บไซต์แบบ Digital Storytelling ช่วยให้มียอดสั่งซื้อคอลเลกชันพิเศษเพิ่มขึ้น 200% ในช่วงฤดูกาลท่องเที่ยว",
     },
-    hyperLocalKeywords: ["รับทำเว็บ ศรีสัชนาลัย", "ออกแบบเว็บเครื่องเงิน สุโขทัย"],
+    hyperLocalKeywords: [
+      "รับทำเว็บ ศรีสัชนาลัย",
+      "ออกแบบเว็บเครื่องเงิน สุโขทัย",
+      "จ้างทำเว็บที่พักเมืองเก่า",
+      "ทำ SEO สินค้า OTOP สุโขทัย",
+    ],
   },
+
+  // --- System Metadata ---
   priority: 84,
-  districts: ["เมืองสุโขทัย", "ศรีสัชนาลัย", "กงไกรลาศ", "สวรรคโลก"],
-  keywords: ["รับทำเว็บไซต์ สุโขทัย", "จ้างทำเว็บไซต์"],
+  districts: [
+    "เมืองสุโขทัย",
+    "ศรีสัชนาลัย",
+    "กงไกรลาศ",
+    "สวรรคโลก",
+    "ศรีสำโรง",
+    "คีรีมาศ",
+    "บ้านด่านลานหอย",
+  ],
+  keywords: [
+    "รับทำเว็บไซต์ สุโขทัย",
+    "จ้างทำเว็บไซต์",
+    "ออกแบบเว็บพรีเมียม",
+    "รับทำ SEO สุโขทัย",
+    "ทำเว็บขายเครื่องเงิน",
+  ],
   coordinates: { lat: 17.0078, lng: 99.8235 },
 };
+
 ```
-
 ### CONFIG: surat-thani.ts
-
 `Path: constants/area-nodes/surat-thani.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: SURAT_THANI_INTEGRATED_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: Integrated Hub | Smart Tourism & Agriculture | Hex Standard
+ * [SERVICE_NODE]: SURAT_THANI_INTEGRATED_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Integrated Hub | Smart Tourism & Agriculture | Dynamic Inheritance
  * [MARKET]: Municipalities, SAOs, and Smart Farmers in Surat Thani
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const suratThaniNode: AreaNode = {
   // --- Basic Identity ---
   slug: "surat-thani",
   province: "สุราษฎร์ธานี",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
+
   title: "รับทำเว็บไซต์สุราษฎร์ธานี - ยกระดับท้องถิ่นสู่ Smart Tourism & Agriculture",
   description:
     "บริการออกแบบเว็บไซต์หน่วยงานราชการในสุราษฎร์ธานี รองรับปริมาณนักท่องเที่ยวหลักล้าน เชื่อมโยงเศรษฐกิจพืชเศรษฐกิจ (ยาง/ปาล์ม) และระบบจัดการสิ่งแวดล้อม",
 
   longDescription:
     "สุราษฎร์ธานี 'เมืองร้อยเกาะ' คือศูนย์กลางเศรษฐกิจและท่องเที่ยวที่สำคัญที่สุดของภาคใต้ตอนบน นายเอ็มซ่ามากส์ เข้าใจความหลากหลายของพื้นที่ " +
-    "ตั้งแต่เขตเทศบาลนครเกาะสมุยไปจนถึงพื้นที่เกษตรกรรมในพุนพินและไชยา เราจึงออกแบบเว็บไซต์ที่เน้นการบริหารจัดการข้อมูลขนาดใหญ่ " +
+    "ตั้งแต่นครเกาะสมุยไปจนถึงพื้นที่เกษตรกรรมในพุนพินและไชยา เราจึงออกแบบเว็บไซต์ที่เน้นการบริหารจัดการข้อมูลขนาดใหญ่ " +
     "รองรับการใช้งานจากนักท่องเที่ยวทั่วโลกและประชาชนในพื้นที่ ด้วยสถาปัตยกรรม Next.js ที่โหลดไวและปลอดภัยสูงสุด เพื่อสร้างรากฐานดิจิทัลที่ยั่งยืนให้กับท้องถิ่น",
 
   // --- SEO Metadata ---
@@ -3381,133 +3454,111 @@ export const suratThaniNode: AreaNode = {
   seoDescription:
     "ทำเว็บไซต์ อบต. เทศบาล สุราษฎร์ธานี เกาะสมุย พะงัน ระบบ E-Service ชำระภาษีออนไลน์ และฐานข้อมูลเกษตรกร Smart Farmer มาตรฐานความปลอดภัยสูง รองรับ PDPA",
 
-  // --- Visual & Theme (Srivijaya Gold & Deep Ocean) ---
-  heroImage: "/images/areas/surat-ratchaprapha.webp",
-  theme: {
-    mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #FBC02D (Ratio 1.66) เป็น #a16207 (Yellow 900)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA (> 4.5:1) เมื่อแสดงผลบนพื้นหลังสีขาว (#FFFFFF)
-     */
-    primary: "#a16207",
-    secondary: "#0277bd",
-    background: "#ffffff",
-    foreground: "#212121",
-    accent: "#15803d",
-    gradient: "from-[#a16207]/10 via-transparent to-transparent",
-  },
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกันทั้งระบบ
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
 
-  // --- Pricing Strategy ---
-  price: "18,900",
-  priceValue: 18900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  // --- Visual (Local Specific) ---
+  heroImage: "/images/areas/surat-ratchaprapha.webp",
 
   // --- Trust Signals ---
   clientTrust:
-    "International Standard: รองรับมาตรฐานความปลอดภัยข้อมูล (PDPA) สำหรับเมืองท่องเที่ยวระดับสากล",
+    "International Standard: รองรับมาตรฐานความปลอดภัยข้อมูล (PDPA) และเกณฑ์ ITA สำหรับเมืองท่องเที่ยวระดับสากล",
 
   // --- Localized Benefits ---
   benefits: [
-    "High-Traffic Resilience: Server ประสิทธิภาพสูงรองรับปริมาณนักท่องเที่ยวและประชาชนที่เข้าใช้งานพร้อมกันจำนวนมากในช่วงฤดูกาลท่องเที่ยว",
-    "Digital Service Integration: ระบบ E-Service และระบบจองคิวออนไลน์ ช่วยลดความแออัด ณ สำนักงานเทศบาลและอำนวยความสะดวกให้ประชาชน 24 ชม.",
-    "Smart Agriculture Data: โมดูลฐานข้อมูลเกษตรกรและรายงานราคากลางพืชเศรษฐกิจ (ยาง/ปาล์ม) เพื่อสนับสนุนกลุ่มเกษตรกรแปลงใหญ่ในพื้นที่",
+    "High-Traffic Resilience: โครงสร้างระบบที่รองรับการเข้าใช้งานพร้อมกันจำนวนมากในช่วงฤดูกาลท่องเที่ยวโดยไม่ล่ม",
+    "Smart Agriculture Sync: ระบบรายงานราคากลางพืชเศรษฐกิจ (ยาง/ปาล์ม) แบบรายวันเพื่อสนับสนุนกลุ่มเกษตรกรในพื้นที่",
+    "Digital Service Integration: ระบบ E-Service ชำระภาษีและแจ้งเรื่องร้องเรียนออนไลน์ ช่วยอำนวยความสะดวกประชาชน 24 ชม.",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Surat Thani Specific) ---
   coreFeatures: [
     {
-      title: "Waste Management",
+      title: "Waste & GPS Tracking",
       description:
-        "ระบบรับเรื่องร้องเรียนและแจ้งจุดเก็บขยะผ่านพิกัด GPS จำเป็นอย่างยิ่งสำหรับพื้นที่เกาะและแหล่งท่องเที่ยวธรรมชาติ",
+        "ระบบรับเรื่องร้องเรียนและแจ้งจุดเก็บขยะผ่านพิกัด GPS สำหรับพื้นที่เกาะและแหล่งท่องเที่ยวธรรมชาติ",
       icon: "Trash2",
     },
     {
-      title: "Tourism Safety Hub",
+      title: "Tourism Safety Gateway",
       description:
-        "ศูนย์รวมข้อมูลความปลอดภัย จุดปฐมพยาบาล และเบอร์ฉุกเฉิน Multilingual สำหรับนักท่องเที่ยวต่างชาติ",
+        "ศูนย์รวมข้อมูลความปลอดภัย จุดปฐมพยาบาล และเบอร์ฉุกเฉินหลายภาษาสำหรับนักท่องเที่ยวต่างชาติ",
       icon: "ShieldCheck",
     },
     {
-      title: "Logistic Connectivity",
+      title: "Logistic Linkage",
       description:
-        "ระบบแสดงข้อมูลเส้นทางเดินเรือ ตารางรถไฟ และเที่ยวบิน เชื่อมโยงการเดินทางจากฝั่งสู่เกาะแบบไร้รอยต่อ",
+        "ระบบแสดงข้อมูลเส้นทางเดินเรือ ตารางรถไฟ และเที่ยวบิน เชื่อมโยงการเดินทางฝั่งสู่เกาะแบบไร้รอยต่อ",
       icon: "Truck",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
-      question: "ระบบจองคิวออนไลน์สามารถเชื่อมต่อกับงานทะเบียนได้ไหม?",
+      question: "ระบบจองคิวออนไลน์สามารถแยกประเภทงานบริการได้ไหม?",
       answer:
-        "ได้ครับ ระบบสามารถจัดคิวแยกตามประเภทงานบริการ ทำให้เจ้าหน้าที่บริหารจัดการทรัพยากรและลดระยะเวลาการรอของประชาชนได้จริงครับ",
+        "ได้ครับ ระบบสามารถจัดคิวแยกตามหน้างานทะเบียน งานโยธา หรือภาษี ทำให้เจ้าหน้าที่บริหารจัดการคิวได้อย่างมีประสิทธิภาพครับ",
     },
     {
       question: "เว็บไซต์รองรับภาษาอังกฤษและจีนเพื่อนักท่องเที่ยวไหม?",
       answer:
-        "รองรับครับ เรามีระบบ Multi-language ที่ออกแบบมาเพื่อธุรกิจท่องเที่ยวและหน่วยงานในสมุย/พะงันโดยเฉพาะครับ",
-    },
-    {
-      question: "การจัดการข้อมูลขยะบนเกาะทำงานอย่างไร?",
-      answer:
-        "ประชาชนสามารถถ่ายรูปและระบุพิกัดผ่านมือถือ ข้อมูลจะถูกส่งเข้า Dashboard ของเจ้าหน้าที่เพื่อวางแผนการเก็บขนได้ทันทีครับ",
+        "รองรับครับ เรามีโมดูล Multi-language ที่ออกแบบมาเพื่อรองรับนักท่องเที่ยวในเขตสมุย พะงัน และเขื่อนเชี่ยวหลานโดยเฉพาะครับ",
     },
     {
       question: "รองรับการประเมิน ITA ภาครัฐหรือไม่?",
       answer:
-        "เราออกแบบโครงสร้างเว็บไซต์ตามเกณฑ์ OIT อย่างเคร่งครัด เพื่อให้หน่วยงานได้รับคะแนนการประเมินในระดับสูงครับ",
-    },
-    {
-      question: "มีระบบแจ้งเตือนมรสุมหรือประกาศจากเจ้าท่าไหม?",
-      answer:
-        "สามารถติดตั้งระบบ Notification หรือ Banner แจ้งเตือนสถานการณ์ด่วนที่หน้าแรกของเว็บไซต์ได้ทันทีครับ",
+        "เราออกแบบโครงสร้างเว็บไซต์และจัดหมวดหมู่ข้อมูลตามเกณฑ์ OIT ของ ป.ป.ช. เพื่อให้หน่วยงานได้รับผลประเมินในระดับสูงครับ",
     },
     {
       question: "เกษตรกรสามารถเช็คราคากลางยางพาราได้จากที่ไหน?",
       answer:
-        "เรามีระบบ Smart Farmer ดึงข้อมูลราคากลางแบบรายวันมาแสดงผลอัตโนมัติ ช่วยให้เกษตรกรตัดสินใจขายผลผลิตได้แม่นยำขึ้นครับ",
+        "เรามีระบบ Smart Farmer ที่ดึงข้อมูลราคากลางอัตโนมัติมาแสดงผลหน้าเว็บ ช่วยให้เกษตรกรตัดสินใจขายผลผลิตได้แม่นยำขึ้นครับ",
     },
-    {
-      question: "ความปลอดภัยของข้อมูลประชาชน (PDPA) มั่นใจได้แค่ไหน?",
-      answer:
-        "ระบบใช้การเข้ารหัสข้อมูลระดับสูงและมีการตั้งค่านโยบายความเป็นส่วนตัวตามกฎหมาย PDPA ทุกประการครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("ความปลอดภัย") || f.question.includes("Google Maps"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "สุราษฎร์ธานีมีความหลากหลายของข้อมูลสูงมาก ตั้งแต่เมืองท่องเที่ยวระดับโลกไปจนถึงพื้นที่เกษตรกรรม แพลตฟอร์มจึงต้องยืดหยุ่นและรองรับความต้องการที่ต่างกัน",
+      "สุราษฎร์ธานีมีความหลากหลายสูง ตั้งแต่เมืองท่องเที่ยวระดับโลกไปจนถึงพื้นที่เกษตรกรรม แพลตฟอร์มจึงต้องรองรับความต้องการที่ต่างกันในแต่ละเขตพื้นที่",
     technicalApproach:
       "ใช้ Cloud Infrastructure พร้อมระบบ CDN เพื่อการเข้าถึงจากต่างประเทศที่รวดเร็ว และเน้นระบบ Security ป้องกันการโจมตีทางไซเบอร์",
     localStrength:
-      "เราเข้าใจบริบทของเมืองท่องเที่ยวชายฝั่งและระบบนิเวศของเกษตรกรพืชเศรษฐกิจ ทำให้เราออกแบบฟังก์ชันที่ใช้งานได้จริงไม่ใช่แค่สวยงาม",
+      "เข้าใจบริบทของเมืองท่องเที่ยวชายฝั่งและระบบนิเวศของเกษตรกรพืชเศรษฐกิจ ทำให้เราออกแบบฟังก์ชันที่ใช้งานได้จริงในทางปฏิบัติ",
     nicheIndustries: [
       "เทศบาลนครเกาะสมุยและเทศบาลเมืองในพื้นที่",
-      "อบต. แหล่งท่องเที่ยว (พะงัน/เต่า)",
+      "อบต. แหล่งท่องเที่ยว (พะงัน/เต่า/เชี่ยวหลาน)",
       "กลุ่มสหกรณ์ปาล์มน้ำมันและยางพารา",
-      "วิสาหกิจชุมชนประมงและหอยนางรม",
+      "วิสาหกิจชุมชนประมงและฟาร์มหอยนางรม",
     ],
     painPoints: [
-      "การจัดการขยะล้นในพื้นที่ท่องเที่ยวเกาะ",
+      "การจัดการขยะในพื้นที่ท่องเที่ยวเกาะ",
       "ความซับซ้อนของการสื่อสารข้อมูลการเดินทางเชื่อมต่อ",
       "ช่องทางการสื่อสารกับนักท่องเที่ยวต่างชาติที่ยังไม่เป็นระบบ",
     ],
     competitorLevel: "high",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 58,
       localClient: "โครงการ Digital Transformation ท้องถิ่น สุราษฎร์ธานี",
     },
     regionalPricing: {
-      startPrice: "18,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "25-30 วัน",
     },
     localSuccessStory: {
       title: "Smart Island Governance",
       result:
-        "ช่วยให้หน่วยงานลดปริมาณเรื่องร้องเรียนที่ค้างคาได้ 50% ด้วยระบบ Tracking สถานะแบบเรียลไทม์",
+        "ช่วยให้หน่วยงานลดปริมาณเรื่องร้องเรียนค้างคาได้ 50% ด้วยระบบ Tracking สถานะแบบเรียลไทม์ที่ประชาชนตรวจสอบได้",
     },
     hyperLocalKeywords: [
       "ทำเว็บไซต์สมุย",
@@ -3528,6 +3579,7 @@ export const suratThaniNode: AreaNode = {
     "กาญจนดิษฐ์",
     "ไชยา",
     "บ้านนาสาร",
+    "เกาะเต่า",
   ],
   keywords: [
     "รับทำเว็บไซต์เกาะสมุย",
@@ -3538,158 +3590,136 @@ export const suratThaniNode: AreaNode = {
   ],
   coordinates: { lat: 9.1389, lng: 99.33 },
 };
+
 ```
-
 ### CONFIG: tak.ts
-
 `Path: constants/area-nodes/tak.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v18.0.0 (FULL_SYNC)
- * [STRATEGY]: Corporate Authority | International Logistics | Hex Standard
+ * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: Corporate Authority | International Logistics | Dynamic Inheritance
  * [MARKET]: Mae Sot, Tak City, Border Trade Special Economic Zone
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
+
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
+import { corporateService } from "@/constants/services/corporate";
 
 export const takNode: AreaNode = {
   // --- Basic Identity ---
   slug: "tak",
   province: "ตาก",
-  templateSlug: "corporate", // เน้นภาพลักษณ์บริษัทขนส่งและชิปปิ้งระดับสากล
+  templateSlug: "corporate", // เชื่อมโยงกับแม่แบบธุรกิจระดับ Enterprise
+
   title: "รับทำเว็บไซต์ ตาก แม่สอด | ออกแบบเว็บธุรกิจขนส่งและนำเข้า-ส่งออก ติดหน้าแรก Google",
   description:
     "ยกระดับบริษัทชิปปิ้งและโรงงานในเขตเศรษฐกิจพิเศษแม่สอดให้ดูโปรระดับสากล สร้างความน่าเชื่อถือให้คู่ค้าต่างชาติมั่นใจด้วยเว็บไซต์มาตรฐาน Enterprise",
 
   longDescription:
     "แม่สอดและจังหวัดตากคือจุดยุทธศาสตร์การค้าชายแดนที่สำคัญที่สุดของไทยครับ ในโลกของการค้าระหว่างประเทศ 'ความน่าเชื่อถือ' คือใบเบิกทางเดียวที่ตัดสินว่าคุณจะได้รับดีลใหญ่หรือไม่ " +
-    "หากธุรกิจขนส่งหรือชิปปิ้งของคุณยังไม่มีเว็บไซต์ที่แสดงโปรไฟล์อย่างมืออาชีพ คุณกำลังเสียโอกาสให้คู่แข่งที่มีตัวตนบน Google ชัดเจนกว่า " +
-    "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนภาพลักษณ์ธุรกิจของคุณให้ดูน่าเกรงขามและมั่นคง เราเน้นการทำเว็บไซต์ที่โชว์ศักยภาพการบริการ (Credentials) พร้อมวางรากฐาน SEO ให้คู่ค้าทั่วโลกค้นหาคุณเจอ เพื่อให้ธุรกิจของคุณเป็นเบอร์หนึ่งในเขตเศรษฐกิจพิเศษตากครับ",
+    "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนภาพลักษณ์ธุรกิจของคุณให้ดูน่าเกรงขามและมั่นคง เราเน้นการทำเว็บไซต์ที่โชว์ศักยภาพการบริการ (Credentials) " +
+    "พร้อมวางรากฐาน SEO ให้คู่ค้าทั่วโลกค้นหาคุณเจอ เพื่อให้ธุรกิจของคุณเป็นเบอร์หนึ่งในเขตเศรษฐกิจพิเศษตาก",
 
   // --- SEO Metadata ---
   seoTitle:
     "รับทำเว็บไซต์ ตาก แม่สอด ออกแบบเว็บชิปปิ้งและโลจิสติกส์ ติดหน้าแรก Google - เอ็มซ่ามากส์",
   seoDescription:
-    "จ้างทำเว็บไซต์จังหวัดตาก และแม่สอด ครบวงจร เน้นดีไซน์ที่ดูน่าเชื่อถือสำหรับธุรกิจ Logistics และนำเข้า-ส่งออก รองรับหลายภาษา ช่วยให้บริษัทติดหน้าแรก Google และปิดดีลธุรกิจระดับสากลได้ง่ายขึ้น",
+    "จ้างทำเว็บไซต์จังหวัดตาก และแม่สอด ครบวงจร เน้นดีไซน์ที่ดูน่าเชื่อถือสำหรับธุรกิจ Logistics และนำเข้า-ส่งออก รองรับหลายภาษา ติดหน้าแรก Google เพื่อปิดดีลระดับสากล",
 
-  // --- Visual & Theme (Forest Industrial: Emerald/Slate) ---
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก corporateService เพื่อมาตรฐานความน่าเชื่อถือระดับสากล
+  theme: corporateService.theme,
+  price: corporateService.price,
+  priceValue: corporateService.priceValue,
+  currency: corporateService.currency,
+  unit: corporateService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/tak-node.webp",
-  theme: {
-    mode: "light",
-    primary: "#065f46", // Emerald 800 (เขียวเข้ม - ความมั่งคั่งชายแดน)
-    secondary: "#1e293b", // Slate 800 (เทาเข้ม - ความมั่นคง)
-    background: "#f0fdf4", // Emerald 50 (สะอาด สบายตา)
-    foreground: "#022c22", // Emerald 950
-    accent: "#10b981", // Emerald 500
-    gradient: "from-[#065f46]/10 via-transparent to-transparent",
-  },
-
-  // --- Pricing Strategy (Corporate Grade) ---
-  price: "14,500",
-  priceValue: 14500,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
 
   // --- Trust Signals ---
   clientTrust:
-    "Border Trade Authority: เบื้องหลังความสำเร็จของบริษัทขนส่งข้ามพรมแดนและโรงงานอุตสาหกรรมในเขตเศรษฐกิจพิเศษแม่สอด",
+    "Border Trade Authority: เบื้องหลังความสำเร็จของบริษัทขนส่งข้ามพรมแดนและโรงงานในเขตเศรษฐกิจพิเศษแม่สอด",
 
   // --- Localized Benefits ---
   benefits: [
-    "International Credibility: เปลี่ยนภาพลักษณ์บริษัทท้องถิ่นให้ดูเป็นพาร์ทเนอร์ระดับสากล ช่วยให้นักลงทุนต่างชาติและบริษัทข้ามชาติกล้าตัดสินใจร่วมงานกับคุณ",
-    "Bilingual Expansion: ระบบรองรับหลายภาษา (ไทย-อังกฤษ) เพื่อสื่อสารขอบเขตการบริการและมาตรฐานความปลอดภัยให้คู่ค้าจากทุกประเทศเข้าใจอย่างถูกต้อง",
-    "Logistics-Focused SEO: เจาะกลุ่มคีย์เวิร์ดทรงพลัง เช่น 'ชิปปิ้งแม่สอด', 'ขนส่งสินค้าไปพม่า', 'โกดังให้เช่า ตาก' เพื่อให้คนหาคุณเจอในจังหวะที่เขาต้องการบริการ",
+    "International Credibility: เปลี่ยนภาพลักษณ์บริษัทท้องถิ่นให้ดูเป็นพาร์ทเนอร์ระดับสากล ช่วยให้นักลงทุนต่างชาติกล้าตัดสินใจร่วมงานกับคุณ",
+    "Bilingual Expansion: ระบบรองรับหลายภาษา (ไทย-อังกฤษ) เพื่อสื่อสารมาตรฐานความปลอดภัยให้คู่ค้าจากทุกประเทศเข้าใจอย่างถูกต้อง",
+    "Logistics-Focused SEO: เจาะกลุ่มคีย์เวิร์ดทรงพลัง เช่น 'ชิปปิ้งแม่สอด', 'ขนส่งสินค้าไปพม่า' เพื่อให้คนหาคุณเจอในจังหวะที่เขาต้องการบริการ",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Logistics & Border Trade Specific) ---
   coreFeatures: [
     {
-      title: "Service Portfolio Showcase",
+      title: "Service Credentials Showcase",
       description:
-        "ระบบจัดวางรายละเอียดการบริการขนส่งและชิปปิ้งที่เข้าใจง่าย โชว์ความเชี่ยวชาญและเส้นทางเดินรถอย่างเป็นมืออาชีพ",
+        "ระบบจัดวางรายละเอียดการบริการและเส้นทางเดินรถอย่างเป็นมืออาชีพ เพื่อสร้างความมั่นใจในศักยภาพการขนส่ง",
       icon: "TrendingUp",
     },
     {
-      title: "Multi-language Framework",
-      description:
-        "สลับภาษาได้อย่างลื่นไหล รองรับภาษาอังกฤษและภาษาเป้าหมายอื่น เพื่อเจาะกลุ่มลูกค้าตลาดชายแดนและสากล",
+      title: "Multilingual Framework",
+      description: "สลับภาษาได้อย่างลื่นไหล รองรับภาษาอังกฤษเพื่อเจาะกลุ่มลูกค้าตลาดชายแดนและสากล",
       icon: "Globe",
     },
     {
-      title: "High-Security Standards",
+      title: "Enterprise Security",
       description:
-        "ระบบความปลอดภัยข้อมูลมาตรฐานสูง รองรับ PDPA เพื่อสร้างความมั่นใจให้กับบริษัทคู่สัญญาในการส่งต่อข้อมูลธุรกิจ",
+        "ระบบความปลอดภัยข้อมูลมาตรฐานสูง รองรับ PDPA เพื่อสร้างความมั่นใจให้กับบริษัทคู่สัญญา",
       icon: "ShieldCheck",
     },
   ],
 
-  // --- Localized FAQs (7 Items) ---
+  // --- Localized FAQs ---
   faqs: [
     {
       question: "ทำไมบริษัทขนส่งในแม่สอดถึงจำเป็นต้องมีเว็บไซต์?",
       answer:
-        "เพราะในโลกการค้าชายแดน คู่ค้าใหม่ๆ มักตรวจสอบความมีตัวตนผ่าน Google ก่อนเสมอครับ เว็บไซต์ที่เป็นมืออาชีพจะช่วยยืนยันว่าคุณคือตัวจริง มีออฟฟิศจริง และมีมาตรฐานการทำงานที่เชื่อถือได้ครับ",
+        "เพราะคู่ค้าใหม่มักตรวจสอบความมีตัวตนผ่าน Google ก่อนเสมอครับ เว็บไซต์ที่เป็นมืออาชีพจะช่วยยืนยันว่าคุณคือตัวจริง มีออฟฟิศจริง และมีมาตรฐานที่เชื่อถือได้ครับ",
     },
     {
       question: "สามารถนัดคุยงานที่แม่สอดหรือตัวเมืองตากได้ไหม?",
       answer:
-        "ได้แน่นอนครับ ผมยินดีเดินทางเข้าไปพบลูกค้าในเขตอำเภอแม่สอด หรือตัวเมืองตาก เพื่อรับฟังความต้องการหน้างานและดูสเกลธุรกิจจริง เพื่อออกแบบเว็บให้ตรงโจทย์ที่สุดครับ",
+        "ได้แน่นอนครับ ผมยินดีเดินทางเข้าไปพบลูกค้าในเขตอำเภอแม่สอด หรือตัวเมืองตาก เพื่อวิเคราะห์ความต้องการหน้างานและออกแบบเว็บให้ตรงโจทย์ที่สุดครับ",
     },
     {
-      question: "ช่วยเขียนข้อมูลบริการเป็นภาษาอังกฤษด้วยไหม?",
+      question: "ช่วยเรียบเรียงข้อมูลบริการเป็นภาษาอังกฤษด้วยไหม?",
       answer:
-        "ในแพ็กเกจระดับ Corporate ผมมีบริการช่วยเรียบเรียงและเกลาเนื้อหาภาษาอังกฤษให้ดูเป็นทางการ (Business English) เพื่อสร้างภาพลักษณ์ที่น่าเชื่อถือในระดับสากลครับ",
+        "ในแพ็กเกจระดับ Corporate ผมมีบริการช่วยเกลาเนื้อหาภาษาอังกฤษให้ดูเป็นทางการ (Business English) เพื่อสร้างความเชื่อถือในระดับสากลครับ",
     },
-    {
-      question: "ใช้เวลากี่วันถึงจะเสร็จ?",
-      answer:
-        "สำหรับเว็บไซต์บริษัทขนส่งขนาดกลาง ใช้เวลาประมาณ 14-25 วันครับ ขึ้นอยู่กับความละเอียดของข้อมูลบริการและขั้นตอนการตรวจสอบความถูกต้องของข้อมูลครับ",
-    },
-    {
-      question: "มีบริการทำ SEO สำหรับคำว่า 'ชิปปิ้ง' หรือ 'โลจิสติกส์' ไหม?",
-      answer:
-        "มีครับ ผมจะวางโครงสร้าง Technical SEO ให้เบื้องต้นเพื่อให้ Google เข้าใจธุรกิจของคุณ และมีบริการ SEO รายเดือนแยกต่างหากสำหรับผู้ที่ต้องการขึ้นหน้า 1 ในคีย์เวิร์ดที่มีการแข่งขันสูงครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับการแสดงผลบนมือถือไหม?",
-      answer:
-        "แน่นอนครับ ฝ่ายจัดซื้อหรือเจ้าของธุรกิจสมัยนี้ใช้มือถือเป็นหลัก เว็บไซต์จะถูกออกแบบมาให้โหลดไวและสวยงามบนสมาร์ทโฟนทุกรุ่นครับ",
-    },
-    {
-      question: "ออกใบกำกับภาษีได้ไหม?",
-      answer:
-        "ได้ครับ ผมจดทะเบียนพาณิชย์ถูกต้อง สามารถออกใบเสนอราคาและใบเสร็จ/ใบกำกับภาษีเต็มรูปแบบเพื่อนำไปหักค่าใช้จ่ายในนามนิติบุคคลได้ครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...corporateService.faqs.filter(
+      (f) => f.question.includes("ออกใบกำกับภาษี") || f.question.includes("PDPA"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "การค้าข้ามพรมแดนตัดสินที่ความน่าเชื่อถือ (Credentials) เว็บไซต์คือใบเบิกทางระดับสากลในการทำดีลธุรกิจระดับรัฐหรือองค์กรใหญ่",
+      "การค้าข้ามพรมแดนตัดสินที่ความน่าเชื่อถือ (Credentials) เว็บไซต์คือใบเบิกทางระดับสากลในการทำดีลธุรกิจระดับองค์กรใหญ่",
     technicalApproach:
-      "เน้นระบบความปลอดภัยข้อมูลและโครงสร้างที่รองรับ Multilingual เพื่อนำเสนอข้อมูลชิปปิ้งที่ซับซ้อนให้ดูเข้าใจง่ายในหน้าเดียว",
+      "เน้นระบบความปลอดภัยข้อมูลและโครงสร้างที่รองรับ Multilingual เพื่อนำเสนอข้อมูลชิปปิ้งที่ซับซ้อนให้เข้าใจง่ายในหน้าเดียว",
     localStrength:
       "เข้าใจ Flow ธุรกิจแม่สอด-ตาก สามารถเรียบเรียงเนื้อหาให้ดูเป็น 'มืออาชีพรายใหญ่' เพื่อดึงดูดพาร์ทเนอร์ต่างชาติ",
     nicheIndustries: [
       "โลจิสติกส์และขนส่งข้ามพรมแดน",
       "บริษัทชิปปิ้งนำเข้า-ส่งออก",
-      "คลังสินค้าเขตเศรษฐกิจพิเศษ",
-      "ธุรกิจท่องเที่ยวเชิงธรรมชาติและที่พักอุ้มผาง",
+      "คลังสินค้าและโรงงานในเขตเศรษฐกิจพิเศษ",
+      "ธุรกิจท่องเที่ยวเชิงธรรมชาติ (อุ้มผาง/ทีลอซู)",
     ],
     painPoints: [
       "มีบริษัทจริงแต่ภาพลักษณ์ออนไลน์ดูไม่โปร ทำให้พลาดดีลโครงการใหญ่",
-      "คู่ค้าต่างชาติค้นหาข้อมูลบริษัทไม่เจอใน Google เมื่อต้องการเช็คเครดิต",
+      "คู่ค้าต่างชาติค้นหาข้อมูลบริษัทไม่เจอเมื่อต้องการเช็คเครดิต",
       "ต้องการนำเสนอโปรไฟล์บริษัทเป็นภาษาอังกฤษตามมาตรฐานสากล",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 48,
       localClient: "บริษัทขนส่งรายใหญ่ เขตเศรษฐกิจพิเศษแม่สอด",
     },
     regionalPricing: {
-      startPrice: "14,500 บาท",
+      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
       timeline: "14-25 วัน",
     },
     localSuccessStory: {
@@ -3713,67 +3743,57 @@ export const takNode: AreaNode = {
     "รับทำเว็บไซต์ แม่สอด",
     "จ้างทำเว็บไซต์",
     "ทำเว็บชิปปิ้ง",
-    "บริษัทรับทำเว็บไซต์",
     "รับทำ SEO ตาก",
   ],
   coordinates: { lat: 16.8831, lng: 99.1258 },
 };
+
 ```
-
 ### CONFIG: uttaradit.ts
-
 `Path: constants/area-nodes/uttaradit.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.0 (ACCESSIBILITY_PATCHED)
- * [STRATEGY]: D2C Empowerment | Agricultural Branding | Hex Standard
+ * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.1 (STRICT_SYNC)
+ * [STRATEGY]: D2C Empowerment | Agricultural Branding | Dynamic Inheritance
  * [MARKET]: Uttaradit City, Lablae, Phichai (Premium Agro-Trading)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { AreaNode } from "@/types";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { localAuthorityService } from "@/constants/services/local-authority";
 
 export const uttaraditNode: AreaNode = {
   // --- Basic Identity ---
   slug: "uttaradit",
   province: "อุตรดิตถ์",
-  templateSlug: "local-authority",
+  templateSlug: "local-authority", // ใช้โครงสร้างท้องถิ่นเป็นฐานรองรับ SME/Agro
+
   title: "รับทำเว็บไซต์ อุตรดิตถ์ | เปลี่ยนผลผลิตจากสวนเป็นแบรนด์พรีเมียม ขายตรงไม่ผ่านคนกลาง",
   description:
     "ยกระดับทุเรียนลับแลและสินค้า SME อุตรดิตถ์สู่ตลาดบน ด้วยเว็บไซต์ D2C ที่ช่วยให้คุณเป็นเจ้าของฐานลูกค้าเอง 100% พร้อมระบบสั่งจองที่แม่นยำและน่าเชื่อถือ",
 
   longDescription:
-    "ชาวอุตรดิตถ์ที่อยากให้สินค้าจากสวนหรือแบรนด์ของคุณขายได้ราคาดีกว่าเดิม นายเอ็มซ่ามากส์ พร้อมช่วยคุณสร้างตัวตนออนไลน์ที่แข็งแรงครับ " +
-    "เราเข้าใจดีว่าของดีเมืองอุตรดิตถ์อย่างทุเรียนหลง-หลินลับแล หรือของฝากขึ้นชื่อ มีความต้องการสูงทั่วประเทศ แต่ปัญหาคือลูกค้ามักหาตัวจริงไม่เจอ หรือระบบการรับออเดอร์ยังไม่เป็นมืออาชีพพอ " +
-    "เราจึงเน้นทำเว็บไซต์ที่ไม่ได้แค่สวยงามระดับพรีเมียม แต่ต้องใช้งานง่ายทั้งคนขายและคนซื้อ มีระบบ Pre-order ที่จัดระเบียบออเดอร์ได้แม่นยำ และวางแผน SEO ให้ Google พาคนที่มีกำลังซื้อสูงมาเจอสวนของคุณโดยตรง " +
-    "เพื่อให้คุณขายสินค้าได้ราคาเต็มเม็ดเต็มหน่วย และสร้างฐานลูกค้าขาประจำที่จะอุดหนุนแบรนด์ของคุณไปตลอดอย่างยั่งยืนครับ",
+    "ชาวอุตรดิตถ์ที่ต้องการเพิ่มมูลค่าสินค้าจากสวนหรือแบรนด์ SME นายเอ็มซ่ามากส์ พร้อมช่วยคุณสร้างตัวตนออนไลน์ที่แข็งแรง " +
+    "เราเข้าใจดีว่าของดีเมืองอุตรดิตถ์อย่างทุเรียนหลง-หลินลับแล มีความต้องการสูงทั่วประเทศ แต่ปัญหาคือลูกค้ามักหาตัวจริงไม่เจอ " +
+    "เราจึงเน้นทำเว็บไซต์ที่ไม่ได้แค่สวยงามพรีเมียม แต่ต้องใช้งานง่ายทั้งคนขายและคนซื้อ มีระบบ Pre-order ที่จัดระเบียบออเดอร์ได้แม่นยำ " +
+    "เพื่อให้คุณขายสินค้าได้ราคาเต็มเม็ดเต็มหน่วย และสร้างฐานลูกค้าขาประจำที่จะอุดหนุนแบรนด์ของคุณอย่างยั่งยืนครับ",
 
   // --- SEO Metadata ---
   seoTitle: "รับทำเว็บไซต์ อุตรดิตถ์ ออกแบบเว็บขายทุเรียนลับแลและสินค้า SME - เอ็มซ่ามากส์",
   seoDescription:
-    "จ้างทำเว็บไซต์อุตรดิตถ์ ครบวงจร สำหรับสวนผลไม้และร้านค้าออนไลน์ เน้นระบบสั่งซื้อ D2C ที่สะดวก รวดเร็ว ช่วยให้แบรนด์เกษตรพรีเมียมติดหน้าแรก Google และปิดการขายได้จริง",
+    "จ้างทำเว็บไซต์อุตรดิตถ์ ครบวงจร สำหรับสวนผลไม้และร้านค้าออนไลน์ เน้นระบบสั่งซื้อ D2C ที่สะดวก รวดเร็ว ช่วยให้แบรนด์เกษตรพรีเมียมติดหน้าแรก Google",
 
-  // --- Visual & Theme (Agro-Premium: Emerald & Durian Gold) ---
+  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
+  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานความน่าเชื่อถือเดียวกัน (Emerald/Civil Theme)
+  theme: localAuthorityService.theme,
+  price: localAuthorityService.price,
+  priceValue: localAuthorityService.priceValue,
+  currency: localAuthorityService.currency,
+  unit: localAuthorityService.unit,
+
+  // --- Visual (Local Specific) ---
   heroImage: "/images/areas/uttaradit-node.webp",
-  theme: {
-    mode: "light",
-    /** * [ACCESSIBILITY_PATCH]: ปรับจาก #059669 (Emerald 600) เป็น #047857 (Emerald 700)
-     * เพื่อให้ผ่านเกณฑ์ WCAG AA (> 4.5:1) เมื่อแสดงผลบนพื้นหลัง Emerald 50 (#f0fdf4)
-     */
-    primary: "#047857",
-    secondary: "#064e3b", // Emerald 900
-    background: "#f0fdf4", // Emerald 50
-    foreground: "#022c22", // Emerald 950
-    accent: "#d97706", // Amber 600 (สีทองทุเรียนลับแล)
-    gradient: "from-[#047857]/10 via-transparent to-transparent",
-  },
-
-  // --- Pricing Strategy (Grower Friendly) ---
-  price: "8,900",
-  priceValue: 8900,
-  currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
 
   // --- Trust Signals ---
   clientTrust:
@@ -3781,29 +3801,29 @@ export const uttaraditNode: AreaNode = {
 
   // --- Localized Benefits ---
   benefits: [
-    "เลิกพึ่งพาพ่อค้าคนกลาง: การมีหน้าเว็บขายตรง (Direct-to-Consumer) ช่วยให้คุณกำหนดราคาเองได้ตามคุณภาพสินค้าจริง และรับกำไรเต็มเม็ดเต็มหน่วยโดยไม่ต้องผ่านการกดราคา",
-    "ระบบจัดการออเดอร์ไม่ตกหล่น: เปลี่ยนจากการจดกระดาษหรือตอบแชทวนไปมา เป็นระบบหลังบ้านที่สรุปยอดสั่งจอง ชื่อที่อยู่ และสลิปโอนเงินให้คุณดูง่ายในที่เดียว",
-    "ยกระดับแบรนด์ลับแล: สร้างภาพลักษณ์ให้สินค้าเกษตรดูแพงและมีสตอรี่ เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากกรุงเทพฯ และทั่วประเทศที่มองหาของดีเกรดพรีเมียม",
+    "Direct-to-Consumer Mastery: การมีหน้าเว็บขายตรงช่วยให้คุณกำหนดราคาเองได้ตามคุณภาพจริง และรับกำไรเต็มเม็ดเต็มหน่วยโดยไม่ต้องผ่านคนกลาง",
+    "Order Management System: เปลี่ยนจากการจดกระดาษเป็นระบบหลังบ้านที่สรุปยอดสั่งจอง ชื่อที่อยู่ และหลักฐานการโอนเงินให้คุณดูง่ายในที่เดียว",
+    "Premium Branding: สร้างภาพลักษณ์ให้สินค้าเกษตรดูแพงและมีสตอรี่ เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากทั่วประเทศ",
   ],
 
-  // --- Core Features ---
+  // --- Core Features (Agro-D2C Specific) ---
   coreFeatures: [
     {
       title: "Seasonal Pre-order System",
       description:
-        "ระบบจองสินค้าล่วงหน้าตามฤดูกาล เหมาะสำหรับทุเรียนหรือผลไม้ที่ต้องคัดเกรดพิเศษ ช่วยให้คุณบริหารสต็อกได้ล่วงหน้า",
+        "ระบบจองสินค้าล่วงหน้าตามฤดูกาล เหมาะสำหรับผลไม้คัดเกรดพิเศษ ช่วยบริหารสต็อกได้แม่นยำ",
       icon: "CalendarCheck",
     },
     {
       title: "Mobile Order Gateway",
       description:
-        "ออกแบบหน้าสั่งซื้อให้กดง่ายบนมือถือ เชื่อมต่อการแจ้งเตือนออเดอร์เข้า LINE ส่วนตัวของคุณทันทีที่มีคนสั่งซื้อ",
+        "หน้าสั่งซื้อที่กดง่ายบนมือถือ พร้อมแจ้งเตือนออเดอร์เข้า LINE ส่วนตัวทันทีที่มีคนสั่ง",
       icon: "Smartphone",
     },
     {
-      title: "Agro-Storytelling Page",
+      title: "Agro-Storytelling Hub",
       description:
-        "หน้าเว็บพิเศษสำหรับเล่าประวัติของสวน วิธีการปลูก และความพิถีพิถัน เพื่อสร้างความประทับใจและความเชื่อมั่นให้ลูกค้า",
+        "หน้าเว็บเล่าความพิถีพิถันของสวนและวิธีการปลูก เพื่อสร้างความเชื่อมั่นและเพิ่มมูลค่าสินค้า",
       icon: "Award",
     },
   ],
@@ -3811,50 +3831,34 @@ export const uttaraditNode: AreaNode = {
   // --- Localized FAQs ---
   faqs: [
     {
-      question: "ทำไมต้องมีเว็บ ในเมื่อขายในเพจหรือกลุ่ม Facebook ก็ได้?",
+      question: "ทำไมต้องมีเว็บ ในเมื่อขายในเพจ Facebook ก็ได้?",
       answer:
-        "ในเฟซบุ๊กออเดอร์มักตกหล่นและลูกค้าค้นหาเรายากครับ แต่เว็บไซต์คือ 'หน้าร้านถาวร' ที่ดูเป็นมืออาชีพมากกว่า สร้างความน่าเชื่อถือให้ลูกค้ากล้าโอนเงินหลักพันหลักหมื่น และ Google จะช่วยหาลูกค้าใหม่ๆ มาให้เราเองโดยไม่ต้องเหนื่อยโพสต์ทุกวันครับ",
+        "ในโซเชียลออเดอร์ตกหล่นง่ายและลูกค้าหาเรายากครับ เว็บไซต์คือหน้าร้านถาวรที่ดูเป็นมืออาชีพกว่า และ Google จะช่วยหาลูกค้าใหม่ให้เราโดยไม่ต้องเหนื่อยโพสต์ทุกวันครับ",
     },
     {
       question: "แก่แล้ว ทำเว็บไม่เป็น จะใช้ระบบยากไหม?",
       answer:
-        "ผมออกแบบมาให้ 'คนสวนใช้ได้ ลูกค้าใช้เป็น' ครับ ระบบหลังบ้านภาษาไทย 100% ใช้งานง่ายเหมือนเล่นไลน์ ถ้าพิมพ์ข้อความและส่งรูปทางไลน์ได้ คุณก็จัดการเว็บนี้ได้แน่นอนครับ",
-    },
-    {
-      question: "มีระบบช่วยเก็บเงินหรือแนบสลิปไหม?",
-      answer:
-        "มีครับ ลูกค้าสามารถเลือกวิธีชำระเงินและแนบหลักฐานการโอนเงินผ่านหน้าเว็บได้เลย ข้อมูลจะถูกจัดระเบียบให้คุณตรวจสอบได้ง่าย ไม่ต้องคอยแคปหน้าจอแชทมาไล่ดูครับ",
-    },
-    {
-      question: "ช่วยถ่ายรูปผลไม้หรือเขียนเรื่องราวของสวนให้ด้วยไหม?",
-      answer:
-        "ผมมีคำแนะนำในการเตรียมรูปภาพให้ดูแพงครับ หรือหากต้องการทีมงานมืออาชีพ ผมมีพาร์ทเนอร์ช่างภาพที่เชี่ยวชาญการถ่ายสินค้าเกษตรแนะนำให้ เพื่อให้ภาพลักษณ์ออกมาดูดีที่สุดครับ",
+        "ผมออกแบบมาให้ 'คนสวนใช้ได้ ลูกค้าใช้เป็น' ครับ ระบบหลังบ้านภาษาไทย 100% ใช้งานง่ายเหมือนเล่นไลน์ ถ้าคุณส่งรูปทางไลน์ได้ คุณก็จัดการเว็บนี้ได้ครับ",
     },
     {
       question: "นัดคุยรายละเอียดที่สวนในลับแลหรือในเมืองได้ไหม?",
       answer:
-        "ยินดีครับ! ผมชอบลงพื้นที่จริงเพื่อให้เข้าใจจุดเด่นของแต่ละสวน นัดคุยกันที่สวนหรือร้านกาแฟในอุตรดิตถ์ได้เลยครับ จะได้ช่วยกันวางแผนการตลาดได้ถูกจุด",
+        "ยินดีครับ! ผมชอบลงพื้นที่จริงเพื่อให้เข้าใจจุดเด่นของแต่ละสวน นัดคุยกันที่สวนหรือร้านกาแฟในอุตรดิตถ์ได้เลยครับ",
     },
-    {
-      question: "เว็บไซต์จะช่วยให้คนหาทุเรียนของผมเจอใน Google ไหม?",
-      answer:
-        "ช่วยแน่นอนครับ ผมจะวางรากฐาน SEO โดยใช้คีย์เวิร์ดอย่าง 'ทุเรียนลับแลแท้', 'หลงลับแลสั่งออนไลน์' เพื่อดึงกลุ่มคนที่อยากซื้อของดีจริงๆ ให้มาเจอสวนของคุณเป็นอันดับต้นๆ",
-    },
-    {
-      question: "ใช้เวลากี่วันถึงจะเริ่มขายได้?",
-      answer:
-        "ถ้าข้อมูลและรูปภาพพร้อม ปกติใช้เวลา 7-14 วันครับ ผมจะเร่งทำให้ทันช่วงก่อนผลผลิตออก เพื่อให้คุณเริ่มเปิดรับยอดจองล่วงหน้าได้ทันทีครับ",
-    },
+    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
+    ...localAuthorityService.faqs.filter(
+      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
+    ),
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "อุตรดิตถ์มีสินค้า Rare Item สูงมาก เว็บไซต์ที่รองรับระบบ Pre-order และโชว์ Story ของสวนอย่างชัดเจน จะช่วยให้คุณขายสินค้าได้ราคาสูงกว่าตลาดทั่วไป",
+      "อุตรดิตถ์มีสินค้า Rare Item สูงมาก เว็บไซต์ที่รองรับระบบ Pre-order และโชว์ Story ของสวน จะช่วยให้ขายสินค้าได้ราคาสูงกว่าตลาดทั่วไป",
     technicalApproach:
-      "เน้น Mobile-First Ordering System และสถาปัตยกรรมเว็บที่โหลดไวเพื่อรองรับลูกค้าที่เข้าชมผ่าน Social Media มายังหน้าสวนโดยตรง",
+      "เน้น Mobile-First Ordering System และสถาปัตยกรรมที่โหลดไวเพื่อรองรับลูกค้าที่เข้าชมผ่าน Social Media มายังหน้าสวนโดยตรง",
     localStrength:
-      "เข้าใจวิถีการขายผลไม้พรีเมียมเมืองลับแล พร้อมช่วยวางแผนเนื้อหาที่เจาะจงกลุ่มลูกค้าระดับ High-end ที่ต้องการความมั่นใจในคุณภาพ",
+      "เข้าใจวิถีการขายผลไม้พรีเมียมเมืองลับแล พร้อมช่วยวางแผนเนื้อหาเจาะจงกลุ่มลูกค้าระดับ High-end ที่ต้องการคุณภาพ",
     nicheIndustries: [
       "สวนทุเรียนหลง-หลินลับแล และผลไม้ฤดูกาล",
       "ธุรกิจของฝากและสินค้าเกษตรแปรรูป",
@@ -3864,17 +3868,16 @@ export const uttaraditNode: AreaNode = {
     painPoints: [
       "ถูกกดราคาจากคนกลางเพราะไม่มีแบรนด์ของตัวเอง",
       "ระบบจองตกหล่นในช่วงฤดูกาลที่มีออเดอร์จำนวนมาก",
-      "สินค้าดีมากแต่หน้าเว็บดูไม่พรีเมียมพอที่จะขายราคาที่ต้องการ",
+      "สินค้าดีแต่หน้าเว็บดูไม่พรีเมียมพอที่จะขายราคาที่ต้องการ",
     ],
     competitorLevel: "low",
-
     socialProof: {
       rating: 4.9,
       reviewCount: 48,
       localClient: "สวนทุเรียนพรีเมียมชื่อดัง ย่านลับแล",
     },
     regionalPricing: {
-      startPrice: "8,900 บาท",
+      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
       timeline: "7-14 วัน",
     },
     localSuccessStory: {
@@ -3892,26 +3895,33 @@ export const uttaraditNode: AreaNode = {
 
   // --- System Metadata ---
   priority: 81,
-  districts: ["เมืองอุตรดิตถ์", "ลับแล", "พิชัย", "ตรอน", "ทองแสนขัน", "ฟากท่า", "น้ำปาด"],
+  districts: [
+    "เมืองอุตรดิตถ์",
+    "ลับแล",
+    "พิชัย",
+    "ตรอน",
+    "ทองแสนขัน",
+    "ฟากท่า",
+    "น้ำปาด",
+    "ท่าปลา",
+    "บ้านโคก",
+  ],
   keywords: [
     "รับทำเว็บไซต์ อุตรดิตถ์",
     "จ้างทำเว็บไซต์",
     "ทำเว็บขายผลไม้",
     "ออกแบบเว็บไซต์ขายของ",
-    "คนทำเว็บ อุตรดิตถ์",
     "รับทำ SEO อุตรดิตถ์",
   ],
   coordinates: { lat: 17.6256, lng: 100.0993 },
 };
+
 ```
-
 ### CONFIG: image-blur-data.ts
-
 `Path: constants/image-blur-data.ts`
-
 ```typescript
 /**
- * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-18T17:35:32.217Z
+ * [SYSTEM GENERATED]: IMAGE_BLUR_REGISTRY v2026-02-19T10:01:54.049Z
  * [MANDATE]: Strictly Auto-Generated by scripts/gen-blur-data.mjs.
  * [STRATEGY]: Static BlurHash for Zero-CLS LCP.
  */
@@ -4170,6 +4180,12 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     width: 1024,
     height: 768,
   },
+  "/images/og-seo-agency.webp": {
+    blurDataURL:
+      "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoKAAgABUB8JYwCdADc9U44QAD+5a3vLwE2CvtSvGyaza+hIrPt9vL8MAA=",
+    width: 1024,
+    height: 768,
+  },
   "/images/seo/advanced-schema-markup.webp": {
     blurDataURL:
       "data:image/webp;base64,UklGRioAAABXRUJQVlA4IB4AAAAwAQCdASoKAAgABUB8JZwAA3AA/vAEDO62XxaCgAA=",
@@ -4261,12 +4277,10 @@ export const IMAGE_BLUR_DATA: ImageBlurRegistry = {
     height: 768,
   },
 } as const;
+
 ```
-
 ### CONFIG: master-registry.ts
-
 `Path: constants/master-registry.ts`
-
 ```typescript
 /**
  * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.107 (STABLE_RELEASE)
@@ -4320,12 +4334,10 @@ export const getFeaturedServices = (): TemplateMasterData[] => {
 
 // [KNIP_HYGIENE]: getServicesByCategory ถูกถอดออกชั่วคราวเพื่อลด Unused Exports
 // จะถูกเพิ่มกลับมาเมื่อมีการสร้างระบบ Filter ในหน้า Directory บริการ
+
 ```
-
 ### CONFIG: navigation.ts
-
 `Path: constants/navigation.ts`
-
 ```typescript
 /**
  * [NAV_INFRASTRUCTURE]: NAVIGATION_REGISTRY v18.0.1 (PATH_SYNCED)
@@ -4369,15 +4381,13 @@ export const FOOTER_MAP = {
     { label: "แผนผังเว็บไซต์", href: "/sitemap" },
   ],
 } as const;
+
 ```
-
 ### CONFIG: bio.ts
-
 `Path: constants/services/bio.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.2 (IDENTITY_SYNC)
+ * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.3 (IDENTITY_SYNC_PRO)
  * [STRATEGY]: Personal Authority | AI-Search Synchronization | E-E-A-T Focus
  * [MAINTAINER]: AEMZA MACKS
  */
@@ -4386,88 +4396,85 @@ import type { TemplateMasterData } from "@/types";
 
 export const bioService: TemplateMasterData = {
   id: "AEM-SVC-PB-14",
-  title:
-    "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI และ Google จดจำในชื่อที่คุณต้องการ",
+  title: "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI จดจำ",
   description:
-    "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ โดย นายเอ็มซ่ามากส์",
+    "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ",
+
   image: "/images/services/bio-node.webp",
   templateSlug: "bio",
   category: "personal",
+
+  // [PRICING_MASTER]: ราคาเริ่มต้นสำหรับ Personal Branding
   price: "4,900",
   priceValue: 4900,
   currency: "THB",
   unit: "เริ่มต้น / โปรเจกต์",
 
-  // [THEME_FIX]: "Cyber-Tech Professional" (Dark Mode)
-  // สื่อถึงความลึกลับแต่แม่นยำและทันสมัย สอดคล้องกับภาพลักษณ์ Specialist
+  // [THEME_STANDARD]: ธีม Cyber-Tech Professional (Dark Mode)
+  // สื่อถึงความลึกลับแต่แม่นยำ ทันสมัย และเป็น Tech Specialist
   theme: {
     mode: "dark",
-    primary: "#06b6d4", // Cyan 500
-    secondary: "#164e63", // Cyan 900
-    background: "#09090b", // Zinc 950
-    foreground: "#fafafa", // Zinc 50
-    accent: "#22d3ee", // Cyan 400
-    gradient: "from-[#06b6d4]/15 via-transparent to-transparent",
+    primary: "#06b6d4", // Cyan 500: สีฟ้าเทค สื่อถึงนวัตกรรม
+    secondary: "#164e63", // Cyan 900: สีพื้นหลังเข้มลึก
+    background: "#09090b", // Zinc 950: สีดำด้าน (Matte Black) ดูพรีเมียม
+    foreground: "#fafafa", // Zinc 50: สีตัวอักษรขาวสะอาด
+    accent: "#22d3ee", // Cyan 400: สี Highlight จุดสำคัญ
+    gradient: "from-[#06b6d4]/15 via-transparent to-transparent", // Cyber Glow Effect
   },
 
-  // [TRUST_SIGNAL]: การแก้ปัญหาเรื่องร่องรอยดิจิทัล (Digital Footprint)
+  // [TRUST_SIGNAL]
   clientTrust:
     "Identity Control: ระบบที่ออกแบบมาเพื่อจัดการ E-E-A-T และแก้ปัญหาข้อมูลซ้ำซ้อนในฐานข้อมูล AI",
 
-  // [BENEFITS]: เน้นการแก้ Pain Point เรื่องการค้นหาชื่อแล้วเจอข้อมูลเก่าหรือไม่ถูกต้อง
   benefits: [
-    "Authority Synchronization: แก้ปัญหาชื่อไม่ตรงหรือข้อมูลเก่าใน Google และ AI Search ด้วยการสร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด",
-    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและเลขทะเบียนธุรกิจอย่างชัดเจน ป้องกันการสับสนระหว่างชื่อที่ใช้ทำงานและชื่อทางกฎหมาย",
-    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยังระบบ Knowledge Graph ของ Google โดยตรง ช่วยให้ตัวตนของคุณถูกจัดหมวดหมู่ในฐานะ Specialist อย่างถูกต้อง",
+    "Authority Synchronization: สร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด เพื่อให้ Google จำข้อมูลที่ถูกต้อง",
+    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและผลงานชัดเจน ป้องกันการสับสนของข้อมูล",
+    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยัง Knowledge Graph ของ Google โดยตรง ช่วยให้ตัวตนของคุณถูกจัดหมวดหมู่เป็น Specialist",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่เน้นการทำ SEO ตัวบุคคล
   coreFeatures: [
     {
       title: "Knowledge Graph Markup",
       description:
-        "ฝังข้อมูลโครงสร้าง (Schema JSON-LD) เพื่อบอก Google ให้ชัดเจนว่า 'นายเอ็มซ่ามากส์' คือใคร และเกี่ยวข้องกับ 'อลงกรณ์ ยมเกิด' อย่างไร",
+        "ฝัง Schema JSON-LD เพื่อบอก Google ชัดเจนว่า 'นายเอ็มซ่ามากส์' คือใคร และเกี่ยวข้องกับ 'อลงกรณ์ ยมเกิด' อย่างไร",
       icon: "UserCheck",
     },
     {
       title: "Digital Footprint Clean-up",
-      description:
-        "วางโครงสร้างหน้าเว็บเพื่อดันข้อมูลใหม่ขึ้นหน้าแรก และกลบข้อมูลเก่าที่ไม่อัปเดตในระบบการค้นหา",
+      description: "ดันข้อมูลใหม่ที่ถูกต้องขึ้นหน้าแรก Google และกลบข้อมูลเก่าที่ไม่อัปเดต",
       icon: "Shield",
     },
     {
       title: "Integrated Business ID",
       description:
-        "ส่วนแสดงผลข้อมูลจดทะเบียนนิติบุคคลหรือเลขประจำตัวผู้เสียภาษีเพื่อความโปร่งใสในระดับองค์กร",
+        "แสดงผลข้อมูลทางธุรกิจหรือเลขผู้เสียภาษีอย่างโปร่งใส สร้างความน่าเชื่อถือระดับองค์กร",
       icon: "FileText",
     },
   ],
 
-  // [FAQ_ENGINE]: เพิ่มคำถามเรื่องชื่อและความเป็นส่วนตัว
   faqs: [
     {
-      question: "ทำไมค้นหาชื่อใน Google แล้วยังเจอข้อมูลเก่าหรือชื่อเดิมอยู่?",
+      question: "ทำไมค้นหาชื่อใน Google แล้วเจอข้อมูลเก่า?",
       answer:
-        "เป็นเพราะ Google ยังจำ 'ร่องรอยดิจิทัล' (Digital Footprint) เก่าของคุณอยู่ครับ เว็บไซต์นี้จะทำหน้าที่เป็นหน้าแรกที่ Google จะเข้ามาเก็บข้อมูลใหม่ เพื่อแทนที่ข้อมูลเดิมในฐานข้อมูล AI ให้ถูกต้องที่สุดครับ",
+        "เพราะ Google ยังจำ Digital Footprint เดิมครับ เว็บไซต์นี้จะทำหน้าที่ป้อนข้อมูลใหม่ให้ Google แทนที่ข้อมูลเก่าในฐานข้อมูลครับ",
     },
     {
-      question: "ทำไมชื่อที่ใช้ทำงาน (Alias) กับชื่อจริงในบัตรประชาชนถึงไม่ตรงกัน?",
+      question: "ชื่อในวงการ (Alias) กับชื่อจริงไม่ตรงกัน มีผลเสียไหม?",
       answer:
-        "เป็นเรื่องปกติของ Specialist ครับ เราใช้ชื่อแบรนด์เพื่อการจดจำ แต่ในเว็บไซต์จะมีการระบุชื่อทางกฎหมายอย่างโปร่งใสในจุดที่เหมาะสม เพื่อความปลอดภัยและผลทางกฎหมายครับ",
+        "ไม่มีครับ เป็นเรื่องปกติของ Specialist เว็บไซต์จะระบุความเชื่อมโยงของทั้งสองชื่อให้ Google เข้าใจว่าเป็นคนเดียวกันครับ",
     },
     {
-      question: "จดโดเมนเป็นชื่อ-นามสกุลจริง จะปลอดภัยไหม?",
+      question: "จดโดเมนเป็นชื่อจริงปลอดภัยไหม?",
       answer:
-        "ผมแนะนำให้จดเป็นชื่อที่คุณต้องการสร้างแบรนด์ครับ หากต้องการความเป็นส่วนตัว เราสามารถใช้มาตรการปิดบังข้อมูลผู้จดทะเบียน (Domain Privacy) ได้ครับ",
+        "ปลอดภัยครับ แนะนำให้จดเป็นชื่อแบรนด์ที่คุณต้องการสร้างตัวตน หากกังวลเรื่องข้อมูลส่วนตัว เราเปิดระบบ Domain Privacy ได้ครับ",
     },
     {
-      question: "ใช้เวลานานไหมกว่า Google จะอัปเดตชื่อใหม่ให้เรา?",
+      question: "นานไหมกว่า Google จะอัปเดตข้อมูลใหม่?",
       answer:
-        "ปกติใช้เวลา 1-4 สัปดาห์ครับ หลังจากเรา Submit Sitemap ใหม่ Google จะเริ่มรับรู้และปรับเปลี่ยนข้อมูลใน Knowledge Graph ตามข้อมูลล่าสุดในเว็บครับ",
+        "ประมาณ 1-4 สัปดาห์ครับ หลังจากเรา Submit Sitemap ใหม่ Google จะเริ่มปรับปรุงข้อมูลใน Knowledge Graph ครับ",
     },
   ],
 
-  // [KEYWORD_INJECTION]: เน้นชื่อจริงเพื่อดึง Authority
   keywords: [
     "อลงกรณ์ ยมเกิด",
     "Alongkorn Yomkerd",
@@ -4481,140 +4488,158 @@ export const bioService: TemplateMasterData = {
   isPopular: true,
   isFeatured: false,
 };
+
 ```
-
 ### CONFIG: catalog.ts
-
 `Path: constants/services/catalog.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CATALOG_COMMERCE_HUB v17.9.86 (THEME_STABILIZED)
- * [STRATEGY]: Sales Enablement | B2B Authority | Hex Standard
- * [MAINTAINER]: AEMZA MACKS
+ * [SERVICE_NODE]: CATALOG_ENGINEERING_HUB v18.0.3 (INDUSTRIAL_MASTER)
+ * [STRATEGY]: B2B Engineering | SKU Management | High-Trust Theme
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { TemplateMasterData } from "@/types";
 
 export const catalogService: TemplateMasterData = {
-  id: "AEM-SVC-EC-05",
-  title: "รับทำเว็บแคตตาล็อกสินค้าออนไลน์ | โชว์รูม 24 ชม. ปิดดีลใหญ่ได้ไวกว่าเดิม",
+  id: "AEM-SVC-CT-05",
+  title: "Industrial Catalog Website | เปลี่ยนสมุดแคตตาล็อกเป็นฐานข้อมูลสินค้าออนไลน์",
   description:
-    "เปลี่ยนสินค้าหลักพันชิ้นให้เป็นโชว์รูมออนไลน์ที่ดูง่าย เซลส์แฮปปี้ ลูกค้ากดขอใบเสนอราคาสบาย ไม่ต้องส่งไฟล์ PDF ให้หนักเครื่องอีกต่อไป โดย นายเอ็มซ่ามากส์",
+    "โซลูชันเว็บไซต์สำหรับโรงงานและธุรกิจ B2B ที่ต้องการนำเสนอสินค้าจำนวนมาก (SKU) ให้ค้นหาง่าย พร้อมระบบขอใบเสนอราคา (RFQ) ที่ช่วยให้ฝ่ายจัดซื้อทำงานสะดวกขึ้น ลดภาระฝ่ายขายในการตอบคำถามสเปกสินค้าเดิมๆ",
+
   image: "/images/services/catalog-node.webp",
   templateSlug: "catalog",
-  category: "ecommerce",
-  price: "16,900",
-  priceValue: 16900,
-  currency: "THB",
-  unit: "เริ่มต้น",
+  category: "business",
 
-  // [THEME_FIX]: ใช้ Hex Code เพื่อรองรับ OKLCH Engine
+  // [PRICING_MASTER]: ราคากลางสำหรับระบบ Catalog (ซับซ้อนกว่าเว็บองค์กรปกติ)
+  price: "24,900",
+  priceValue: 24900,
+  currency: "THB",
+  unit: "เริ่มต้น / ระบบ",
+
+  // [THEME_STANDARD]: ธีม Engineering Slate (Blue-Grey/Industrial Orange)
+  // สื่อถึงความแม่นยำ (Precision) วิศวกรรม (Engineering) และความปลอดภัย (Safety)
   theme: {
-    mode: "light",
-    primary: "#7c3aed", // Violet 600
-    secondary: "#4c1d95", // Violet 900
-    background: "#f5f3ff", // Violet 50 (Very light purple for clean look)
-    foreground: "#1e1b4b", // Indigo 950 (Dark text)
-    accent: "#a78bfa", // Violet 400
-    gradient: "from-[#7c3aed]/15 via-transparent to-transparent",
+    mode: "light", // เน้นความชัดเจนของข้อมูลสินค้า (High Legibility)
+    primary: "#334155", // Slate 700: สีเทาเข้มแบบเครื่องจักร/โลหะ
+    secondary: "#0f172a", // Slate 900: สีพื้นหลังส่วนหัว
+    background: "#f8fafc", // Slate 50: พื้นหลังสะอาดตา อ่านสเปกง่าย
+    foreground: "#1e293b", // Slate 800: สีตัวอักษร
+    accent: "#f97316", // Orange 500: สี Safety/Action (ปุ่ม RFQ)
+    gradient: "from-[#334155]/5 via-transparent to-transparent",
   },
 
-  clientTrust: "สถาปัตยกรรมจัดการข้อมูลสินค้าที่ลื่นไหลที่สุด สำหรับธุรกิจ B2B ยุคใหม่",
+  // [TRUST_SIGNAL]
+  clientTrust:
+    "Engineering Grade: โครงสร้างข้อมูลรองรับ Part Number และ Spec Sheet มาตรฐานอุตสาหกรรม",
 
   benefits: [
-    "Sales Team Empowerment: เซลส์ทำงานง่ายขึ้น ไม่ต้องพกแคตตาล็อกเล่มหนา แค่ส่งลิงก์เดียวลูกค้าดูสเปคได้ครบถ้วน",
-    "Inquiry-First Logic: ระบบ 'ขอใบเสนอราคา' (RFQ) ที่ออกแบบมาเพื่อธุรกิจ B2B โดยเฉพาะ คัดกรองลูกค้าตัวจริง",
-    "Scalable Data Management: รองรับสินค้าหลักหมื่น SKU ได้อย่างไร้กังวล พร้อมระบบค้นหาอัจฉริยะ",
+    "Digital Inventory: เปลี่ยนสินค้าในโกดังให้เป็นลิงก์ที่ส่งให้ลูกค้าได้ทันที ไม่ต้องถ่ายรูปส่งไลน์ทีละชิ้น",
+    "Smart Search: ระบบค้นหาที่เข้าใจรหัสสินค้า (Part Number) และชื่อเรียกทางเทคนิค ช่วยให้ลูกค้าเจอของที่ต้องการไวขึ้น",
+    "Lead Generation: เปลี่ยนคนดูสเปกให้เป็นคนขอใบเสนอราคา (RFQ) ด้วยระบบปุ่มติดต่อที่วางถูกตำแหน่ง",
   ],
 
   coreFeatures: [
     {
-      title: "Smart Filter & Search",
-      description: "ระบบกรองสินค้าตามคุณสมบัติ (Size, Material, Type) ที่ละเอียดแม่นยำ",
+      title: "Advanced Filter",
+      description: "ระบบกรองสินค้าตามสเปก (เช่น ขนาด, วัสดุ, กำลังไฟ) เพื่อความแม่นยำในการค้นหา",
       icon: "Search",
     },
     {
-      title: "Direct RFQ System",
-      description: "ปุ่มขอใบเสนอราคาที่ทำงานร่วมกับระบบแจ้งเตือน ช่วยให้ฝ่ายขายไม่พลาดทุกโอกาส",
-      icon: "FileText",
+      title: "Spec Sheet Download",
+      description: "ปุ่มดาวน์โหลด PDF Catalog หรือ Data Sheet สำหรับวิศวกรและฝ่ายจัดซื้อ",
+      icon: "FileDown",
     },
     {
-      title: "Automated Datasheets",
-      description: "ระบบดึงข้อมูลสเปคสินค้าออกมาเป็นไฟล์ PDF ให้ลูกค้าดาวน์โหลดได้ทันที",
-      icon: "FileDown",
+      title: "RFQ System",
+      description: "ระบบตะกร้าขอใบเสนอราคา (ไม่ตัดบัตรเครดิต) เหมาะกับรูปแบบการซื้อขาย B2B",
+      icon: "FileText",
     },
   ],
 
-  // [CATALOG_ITEMS]: ตัวอย่างรายการสินค้า (Mockup)
+  // [CATALOG_DEMO]: รายการสินค้าตัวอย่างเพื่อแสดงศักยภาพระบบ
   items: [
     {
-      name: "Industrial Pump X-200",
-      description: "ปั๊มน้ำอุตสาหกรรมแรงดันสูง",
+      name: "Industrial Pump Series-X",
+      description: "ปั๊มน้ำอุตสาหกรรมแรงดันสูง สำหรับไลน์การผลิต",
       icon: "Settings",
       price: "Call",
     },
-    { name: "Heavy Duty Valve", description: "วาล์วทองเหลืองเกรด A", icon: "Disc", price: "Call" },
     {
-      name: "Conveyor Belt 5M",
-      description: "สายพานลำเลียงทนความร้อน",
-      icon: "Activity",
+      name: "Hydraulic Valve 200mm",
+      description: "วาล์วไฮดรอลิกทนแรงดัน สเปกนำเข้า",
+      icon: "Disc",
       price: "Call",
     },
     {
-      name: "Hydraulic Press",
-      description: "เครื่องอัดไฮดรอลิก 50 ตัน",
-      icon: "Cpu",
+      name: "CNC Cutting Tool",
+      description: "ดอกกัด CNC คาร์ไบด์ เกรดพิเศษ",
+      icon: "Zap",
       price: "Call",
     },
     {
-      name: "Safety Gear Set",
-      description: "ชุดป้องกันความปลอดภัยโรงงาน",
+      name: "Safety Helmet Pro",
+      description: "หมวกนิรภัยมาตรฐาน มอก. สำหรับวิศวกร",
       icon: "Shield",
-      price: "Call",
-    },
-    {
-      name: "Smart Sensor IoT",
-      description: "เซ็นเซอร์ตรวจจับการทำงานเครื่องจักร",
-      icon: "Wifi",
       price: "Call",
     },
   ],
 
   faqs: [
     {
-      question: "ต่างจากขายบน Shopee/Lazada อย่างไร?",
+      question: "ลงสินค้าได้กี่รายการ?",
       answer:
-        "เน้น 'Brand Authority' และการสั่งซื้อล็อตใหญ่ (B2B) ครับ ไม่ใช่การขายปลีกแข่งราคาแบบ Marketplace",
+        "ระบบรองรับได้ไม่จำกัดครับ แต่ในแพ็กเกจเริ่มต้นเราช่วยลงข้อมูลให้พร้อมตกแต่งภาพฟรี 50 รายการแรกครับ",
     },
     {
-      question: "ถ้าข้อมูลสินค้าเยอะ จัดการยากไหม?",
+      question: "เชื่อมต่อกับ ERP หรือโปรแกรมสต็อกได้ไหม?",
       answer:
-        "ง่ายมากครับ เราวางระบบหลังบ้านให้คุณอัปเดตข้อมูลได้เองแบบ Bulk Upload หรือแก้ไขรายชิ้นได้อย่างรวดเร็ว",
+        "ทำได้ครับ (เป็นบริการ Add-on) เราสามารถเขียน API เชื่อมต่อกับระบบเดิมของคุณเพื่อให้สต็อกหน้าเว็บตรงกันครับ",
+    },
+    {
+      question: "ลูกค้าต้องล็อกอินก่อนดูราคาไหม?",
+      answer:
+        "กำหนดได้ครับ จะเปิดราคาให้ทุกคนเห็น หรือต้องล็อกอิน (Member Price) ถึงจะเห็นราคาก็ทำได้ครับ",
+    },
+    {
+      question: "ค้นหาด้วยรหัส Part Number ได้ไหม?",
+      answer: "ได้แน่นอนครับ ระบบ Search ของเราถูกออกแบบมาให้จับคู่รหัสสินค้าได้แม่นยำ 100% ครับ",
+    },
+    {
+      question: "ออกใบกำกับภาษีได้ไหม?",
+      answer:
+        "ได้ครับ เราจดทะเบียนนิติบุคคลถูกต้อง สามารถออกใบกำกับภาษีค่าทำเว็บไซต์ได้เต็มรูปแบบครับ",
+    },
+    {
+      question: "ดูแลยากไหม ถ้าไม่มีฝ่ายไอที?",
+      answer:
+        "ไม่ยากครับ ระบบหลังบ้านใช้งานเหมือน Shopee/Lazada แค่กรอกข้อมูล ใส่รูป แล้วกดบันทึกครับ",
+    },
+    {
+      question: "เว็บรองรับมือถือไหม?",
+      answer: "รองรับ 100% ครับ วิศวกรหน้างานสามารถเปิดดูสเปกสินค้าผ่านมือถือได้สะดวกและชัดเจนครับ",
     },
   ],
 
   keywords: [
-    "รับทำเว็บแคตตาล็อกสินค้า",
-    "จ้างทำเว็บไซต์บริษัท",
-    "ระบบขอใบเสนอราคาออนไลน์",
-    "ทำเว็บโรงงานอุตสาหกรรม",
-    "Digital Product Catalog",
+    "รับทำเว็บไซต์แคตตาล็อก",
+    "ออกแบบเว็บโรงงาน",
+    "ระบบ E-Catalog",
+    "รับทำเว็บไซต์ B2B",
+    "เว็บขายอะไหล่อุตสาหกรรม",
   ],
 
   priority: 4,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: corporate.ts
-
 `Path: constants/services/corporate.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v18.0.0 (HUMAN_OPTIMIZED)
- * [STRATEGY]: B2B Trust | High-End Corporate | Zero-Emoji
+ * [SERVICE_NODE]: CORPORATE_IDENTITY_HUB v18.0.1 (ENTERPRISE_STANDARD)
+ * [STRATEGY]: B2B Trust | High-End Corporate | Zero-Fancy | Universal Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -4622,124 +4647,111 @@ import type { TemplateMasterData } from "@/types";
 
 export const corporateService: TemplateMasterData = {
   id: "AEM-SVC-CP-03",
-  title:
-    "Corporate Identity Website | ยกระดับภาพลักษณ์องค์กรสู่สากล เปลี่ยนผู้เยี่ยมชมให้เป็นคู่ค้าทางธุรกิจ",
+  title: "Corporate Identity Website | ยกระดับภาพลักษณ์องค์กรสู่สากล",
   description:
-    "เว็บไซต์ไม่ใช่แค่โบรชัวร์ออนไลน์ แต่คือสำนักงานใหญ่บนโลกดิจิทัลที่เปิดต้อนรับนักลงทุนและลูกค้าตลอด 24 ชั่วโมง หยุดเสี่ยงกับเว็บไซต์ราคาถูกที่ทำลายความน่าเชื่อถือ เปลี่ยนมาใช้เว็บไซต์มาตรฐาน Enterprise ที่มีความปลอดภัยสูง ดีไซน์สะท้อนตัวตนผู้นำ และรองรับการเติบโตของธุรกิจในอนาคต",
+    "เว็บไซต์มาตรฐาน Enterprise ที่เน้นความปลอดภัย ความน่าเชื่อถือ และดีไซน์ที่สะท้อนความเป็นผู้นำ รองรับการเติบโตของธุรกิจและสร้างความประทับใจให้นักลงทุน",
   image: "/images/services/corporate-node.webp",
   templateSlug: "corporate",
   category: "business",
-  price: "9,900",
-  priceValue: 9900,
+
+  // [PRICING_MASTER]: ราคากลางสำหรับบริการนี้ (พื้นที่อื่นจะดึงค่านี้ไปใช้)
+  price: "19,500", // ปรับราคาให้ตรงกับมาตรฐาน B2B (จากเดิม 9,900 อาจดูต่ำไปสำหรับ Corporate)
+  priceValue: 19500,
   currency: "THB",
   unit: "เริ่มต้น / โปรเจกต์",
 
-  // [THEME_FIX]: ใช้ Hex Code ล้วน (Royal Blue/Slate Theme) สื่อถึงความมั่นคงและความเป็นผู้นำ
+  // [THEME_STANDARD]: ธีมมาตรฐานองค์กร (Royal Slate)
+  // ไม่ฉูดฉาด รองรับสายตาได้ดีทั้งกลางวันและกลางคืน
   theme: {
-    mode: "dark",
-    primary: "#3b82f6", // Blue 500 (สีแห่งความน่าเชื่อถือและเทคโนโลยี)
-    secondary: "#1e3a8a", // Blue 900
-    background: "#020617", // Slate 950 (เข้มขรึม ทางการ)
-    foreground: "#f8fafc", // Slate 50 (อ่านง่ายสบายตา)
-    accent: "#60a5fa", // Blue 400
-    gradient: "from-[#3b82f6]/20 via-transparent to-transparent",
+    mode: "system", // รองรับการสลับธีมอัตโนมัติตามอุปกรณ์
+    primary: "#0f172a", // Slate 900: สีหลักเข้มขรึม (ใช้แทนสีดำสนิท)
+    secondary: "#334155", // Slate 700: สีรองสำหรับหัวข้อ
+    background: "#ffffff", // White: พื้นหลังมาตรฐาน (Frontend จะสลับเป็น Dark เองถ้าจำเป็น)
+    foreground: "#0f172a", // Slate 900: สีตัวอักษรหลัก
+    accent: "#2563eb", // Blue 600: สี Action/Button (สีมาตรฐานธุรกิจ)
+    gradient: "none", // [ZERO_FANCY]: ปิด Gradient เพื่อความเรียบง่ายและเป็นทางการสูงสุด
   },
 
-  // [TRUST_SIGNAL]: เน้นมาตรฐานระดับองค์กร
-  clientTrust: "Corporate Standard: มาตรฐานความปลอดภัยและการออกแบบระดับเดียวกับบริษัทมหาชน",
+  // [TRUST_SIGNAL]
+  clientTrust: "Corporate Standard: มาตรฐานความปลอดภัย ISO/IEC 27001 Ready Design",
 
-  // [BENEFITS]: เน้นแก้ Pain Point เรื่องภาพลักษณ์และความปลอดภัย
   benefits: [
-    "ความประทับใจแรกที่ตีราคาไม่ได้: คู่ค้าและนักลงทุนตัดสินบริษัทคุณจากหน้าเว็บไซต์ภายใน 3 วินาทีแรก เราออกแบบ CI (Corporate Identity) ให้ดูมั่นคงและเป็นมืออาชีพ เพื่อให้การเจรจาธุรกิจง่ายขึ้น",
-    "ป้อมปราการดิจิทัล: เราให้ความสำคัญสูงสุดกับความปลอดภัยของข้อมูล (Data Security) ป้องกันการถูกเจาะระบบ เพื่อรักษาชื่อเสียงและข้อมูลความลับขององค์กร",
-    "เครื่องมือที่ทีมงานรัก: ระบบหลังบ้านถูกออกแบบมาให้ฝ่ายการตลาดหรือ HR ใช้งานง่าย อัปเดตข่าวสารหรือประกาศรับสมัครงานได้เองโดยไม่ต้องง้อโปรแกรมเมอร์",
+    "Professional CI: ออกแบบตามอัตลักษณ์องค์กรที่ดูมั่นคงและเป็นมืออาชีพ",
+    "High Security: โครงสร้างความปลอดภัยระดับ Enterprise ป้องกันการโจมตีทางไซเบอร์",
+    "Easy Maintenance: ระบบ CMS ที่ฝ่าย HR หรือ PR ใช้งานได้ทันทีโดยไม่ต้องเขียนโค้ด",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่องค์กรต้องมี
   coreFeatures: [
     {
       title: "Scalable Architecture",
-      description:
-        "โครงสร้างเว็บไซต์ที่รองรับการขยายตัว ไม่ว่าจะเพิ่มหน้าสินค้าอีกพันรายการหรือรองรับ Traffic มหาศาลในอนาคต ก็ไม่ล่ม",
+      description: "โครงสร้างรองรับการขยายตัวและ Traffic มหาศาล",
       icon: "ShieldCheck",
     },
     {
-      title: "Investor & Career Portal",
-      description:
-        "ระบบจัดการข่าวสารนักลงทุนสัมพันธ์และหน้าสมัครงานที่ทันสมัย ช่วยดึงดูด Talent รุ่นใหม่เข้ามาร่วมงาน",
+      title: "Investor Portal",
+      description: "ระบบข่าวสารนักลงทุนสัมพันธ์และสมัครงานที่ทันสมัย",
       icon: "Building2",
     },
     {
-      title: "Enterprise SEO Foundation",
-      description:
-        "วางโครงสร้าง Semantic HTML ให้ถูกต้องตามหลักสากล เพื่อให้ Google จัดอันดับแบรนด์ของคุณในฐานะผู้นำอุตสาหกรรม",
+      title: "Enterprise SEO",
+      description: "โครงสร้าง Semantic HTML เพื่อการจัดอันดับระดับผู้นำ",
       icon: "Globe",
     },
   ],
 
-  // [FAQ_ENGINE]: 7 ข้อสงสัยที่ฝ่ายบริหารและจัดซื้อต้องการคำตอบ
   faqs: [
     {
-      question: "ทำไมราคาสูงกว่าฟรีแลนซ์ทั่วไป?",
+      question: "ทำไมราคาสูงกว่าฟรีแลนซ์?",
       answer:
-        "เพราะนี่ไม่ใช่แค่ค่าทำเว็บครับ แต่คือค่าที่ปรึกษาทางภาพลักษณ์และระบบความปลอดภัย ฟรีแลนซ์ทั่วไปอาจเน้นแค่ความสวย แต่เราวางโครงสร้างเพื่อรองรับธุรกิจระดับองค์กร ที่ต้องมีความเสถียร รองรับ PDPA และมีความน่าเชื่อถือในสายตาคู่ค้าระดับโลกครับ",
+        "เราขาย 'ความเสถียร' และ 'ภาพลักษณ์' ครับ โครงสร้างเรารองรับมาตรฐานความปลอดภัย PDPA และออกแบบเพื่อสร้าง Trust ให้กับคู่ค้าระดับองค์กร",
     },
     {
-      question: "ใช้ WordPress หรือเขียนโค้ดใหม่?",
-      answer:
-        "เราใช้ Next.js (เทคโนโลยีเดียวกับ Facebook/Netflix) ในการเขียนใหม่ครับ ข้อดีคือเร็วกว่า ปลอดภัยกว่า และยืดหยุ่นกว่า WordPress มาก ไม่ต้องคอยพะวงเรื่อง Plugin จะโดนแฮก หรือเว็บจะอืดเมื่อคนเข้าเยอะครับ",
+      question: "รองรับ PDPA หรือไม่?",
+      answer: "รองรับ 100% พร้อมระบบ Cookie Consent และหน้า Privacy Policy มาตรฐาน",
     },
     {
-      question: "รองรับกฎหมาย PDPA ไหม?",
-      answer:
-        "รองรับ 100% ครับ เราติดตั้งระบบ Cookie Consent Banner และจัดทำหน้านโยบายความเป็นส่วนตัว (Privacy Policy) ให้ถูกต้องตามกฎหมาย เพื่อปกป้ององค์กรของคุณจากการถูกฟ้องร้องครับ",
+      question: "ออกใบกำกับภาษีได้หรือไม่?",
+      answer: "ได้ครับ เราดำเนินการในรูปแบบบริษัท ออกใบกำกับภาษีเต็มรูปแบบได้ทันที",
     },
     {
-      question: "พนักงานอัปเดตข้อมูลเองได้ไหม?",
-      answer:
-        "ได้แน่นอนครับ เราทำระบบหลังบ้าน (CMS) ที่ใช้งานง่ายเหมือนพิมพ์งานใน Word ให้ฝ่าย PR หรือ HR สามารถลงข่าวสารกิจกรรมหรือประกาศรับสมัครงานได้เองทันที โดยมีคู่มือการใช้งานอบรมให้ฟรีครับ",
+      question: "ใช้เวลาจัดทำนานเท่าไหร่?",
+      answer: "ประมาณ 14-21 วันทำการ ขึ้นอยู่กับความรวดเร็วในการอนุมัติแบบครับ",
     },
     {
-      question: "ออกใบกำกับภาษีได้ไหม?",
+      question: "มีบริการหลังการขายหรือไม่?",
       answer:
-        "สามารถออกใบเสนอราคาและใบเสร็จรับเงิน/ใบกำกับภาษีเต็มรูปแบบในนามบุคคลหรือนิติบุคคลได้ครับ เพื่อให้ฝ่ายบัญชีของคุณทำงานได้สะดวกที่สุด",
+        "รับประกันดูแลฟรี 3 เดือน พร้อมข้อเสนอ MA (Maintenance Agreement) รายปีเพื่อดูแลความปลอดภัยต่อเนื่องครับ",
     },
     {
-      question: "ใช้เวลาทำนานเท่าไหร่?",
-      answer:
-        "สำหรับเว็บไซต์องค์กรขนาดมาตรฐาน ใช้เวลาประมาณ 14-20 วันครับ ขึ้นอยู่กับความรวดเร็วในการตรวจสอบและอนุมัติแบบ (Approval Process) ของทางลูกค้าด้วยครับ",
+      question: "พนักงานอัปเดตเองได้ไหม?",
+      answer: "ได้ครับ เรามีระบบหลังบ้าน (CMS) ที่ใช้งานง่ายพร้อมคู่มือสอนการใช้งาน",
     },
     {
-      question: "มีบริการดูแลหลังการขายไหม?",
+      question: "เทคโนโลยีที่ใช้คืออะไร?",
       answer:
-        "เรามีประกันดูแลแก้บั๊กฟรี 3 เดือนแรกครับ หลังจากนั้นมีแพ็กเกจ Maintenance รายปีให้บริการ (ดูแล Server, ต่ออายุโดเมน, สำรองข้อมูล) เพื่อให้เว็บไซต์ของคุณทำงานราบรื่นตลอด 24 ชั่วโมงโดยไม่ต้องจ้างฝ่ายไอทีเพิ่มครับ",
+        "Next.js ครับ เป็นมาตรฐานเดียวกับเว็บระดับโลกอย่าง Netflix/TikTok เร็วและปลอดภัยกว่า WordPress",
     },
   ],
 
-  // [KEYWORD_INJECTION]: คีย์เวิร์ดสำหรับ B2B และ Corporate
   keywords: [
     "รับทำเว็บไซต์บริษัท",
     "ออกแบบเว็บไซต์องค์กร",
     "ทำเว็บ Corporate Identity",
     "บริษัทรับทำเว็บไซต์มืออาชีพ",
     "รับทำเว็บ Next.js",
-    "ทำเว็บไซต์บริษัทมหาชน",
-    "ออกแบบ UX/UI องค์กร",
   ],
 
   priority: 2,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: hotel-resort.ts
-
 `Path: constants/services/hotel-resort.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v18.0.0 (HUMAN_OPTIMIZED)
- * [STRATEGY]: Direct Booking Focus | High-End Imagery | Zero-Emoji
+ * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v18.0.1 (HUMAN_OPTIMIZED)
+ * [STRATEGY]: Direct Booking Focus | High-End Imagery | Zero-Emoji | Lanna Gold Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -4747,126 +4759,115 @@ import type { TemplateMasterData } from "@/types";
 
 export const hotelResortService: TemplateMasterData = {
   id: "AEM-SVC-HR-08",
-  title:
-    "Luxury Hotel & Resort Website | เปลี่ยนยอดวิวเป็นยอดจองตรง เลิกจ่ายค่าคอมฯ OTA โดยไม่จำเป็น",
+  title: "Luxury Hotel & Resort Website | เปลี่ยนยอดวิวเป็นยอดจองตรง",
   description:
-    "หยุดเฉือนกำไร 15-20% ให้กับเว็บนายหน้า (OTA) สร้างอาณาจักรดิจิทัลของคุณเองด้วยเว็บไซต์โรงแรมระดับ High-End ที่ถ่ายทอดประสบการณ์การพักผ่อนได้เหนือกว่า และเปลี่ยนผู้ชมให้กลายเป็นแขกที่กดจองตรงกับคุณทันที",
+    "หยุดจ่ายค่าคอมมิชชั่น OTA โดยไม่จำเป็น สร้างอาณาจักรดิจิทัลของคุณเองด้วยเว็บไซต์โรงแรมระดับ High-End ที่ถ่ายทอดประสบการณ์การพักผ่อนเหนือระดับ และเปลี่ยนผู้ชมให้กลายเป็นแขกที่กดจองตรงกับคุณทันที",
   image: "/images/services/hotel-resort-node.webp",
   templateSlug: "hotelresort",
   category: "business",
+
+  // [PRICING_MASTER]: ราคากลางสำหรับบริการโรงแรม (พื้นที่อื่นจะดึงค่านี้ไปใช้)
   price: "16,900",
   priceValue: 16900,
   currency: "THB",
   unit: "เริ่มต้น / โปรเจกต์",
 
-  // [THEME_ADJUSTMENT]: ธีมสีทอง-ดำ (Gold/Dark) สื่อถึงความหรูหราและ Exclusive
+  // [THEME_STANDARD]: ธีม Lanna Luxury (Gold/Dark Stone)
+  // สื่อถึงความหรูหรา วัฒนธรรม และความเงียบสงบ
   theme: {
-    mode: "dark",
-    foreground: "#f8fafc", // Slate 50 (สีขาวนวล อ่านสบายตาบนพื้นมืด)
-    token: "gold",
-    primary: "#D4AF37", // Metallic Gold (ทองคำ)
-    secondary: "#1A1A1A", // Dark Contrast
-    background: "#0a0a0a", // Deep Black (ดำสนิท ขับให้รูปห้องพักเด่น)
-    accent: "#B8860B", // Dark Goldenrod
-    gradient: "from-[#D4AF37]/15 via-transparent to-transparent",
+    mode: "dark", // เน้น Dark Mode เพื่อขับให้รูปห้องพักดูเด่น
+    primary: "#c5a358", // Chiang Mai Gold: สีทองคำเปลว (ด้าน) ดูแพงไม่ลิเก
+    secondary: "#453a1f", // Dark Gold Brown: สีน้ำตาลไหม้ทอง
+    background: "#1c1917", // Stone 900: สีถ่านหิน (Warm Black) ดูอบอุ่นกว่าดำสนิท
+    foreground: "#fafaf9", // Stone 50: สีขาวครีม อ่านสบายตา
+    accent: "#eab308", // Yellow 500: สีทองสว่างสำหรับปุ่มจอง (Call to Action)
+    gradient: "from-[#c5a358]/10 via-transparent to-transparent", // Gradient บางๆ สร้างมิติ
   },
 
-  // [TRUST_SIGNAL]: เน้นภาพลักษณ์และมาตรฐาน
+  // [TRUST_SIGNAL]
   clientTrust:
-    "Luxury Standard: ยกระดับภาพลักษณ์ที่พักให้ดูแพงสมราคา สร้างความมั่นใจให้นักท่องเที่ยวทั่วโลกกล้ากดจอง",
+    "Luxury Standard: ยกระดับภาพลักษณ์ที่พักให้ดูแพงสมราคา สร้างความมั่นใจให้นักท่องเที่ยวทั่วโลก",
 
-  // [BENEFITS]: เน้นแก้ Pain Point เรื่อง OTA และการสร้างแบรนด์
   benefits: [
-    "ทวงคืนกำไรของคุณ: การมีเว็บจองตรง (Direct Booking) ช่วยให้คุณประหยัดค่าคอมมิชชั่น OTA ได้มหาศาลในระยะยาว เงินส่วนนั้นสามารถนำมาทำโปรโมชั่นหรือพัฒนาโรงแรมได้อีกเยอะ",
-    "โชว์ของได้เต็มที่: ใน Agoda โรงแรมคุณเป็นแค่หนึ่งในตัวเลือกที่หน้าตาเหมือนคนอื่นหมด แต่ในเว็บไซต์นี้ คุณคือพระเอก เราดีไซน์ให้รูปภาพและวิดีโอทำงานหนักเพื่อขายประสบการณ์การพักผ่อนที่ดีที่สุด",
-    "ฐานข้อมูลลูกค้าเป็นของคุณ: เมื่อจองตรง คุณจะได้ Data ลูกค้าครบถ้วน (Email/เบอร์โทร) เพื่อทำ CRM ส่งโปรโมชั่นกลับไปหาพวกเขาได้ฟรีๆ ในอนาคต โดยไม่ต้องเสียเงินยิงแอดซ้ำ",
+    "Maximize Profit: ลดการพึ่งพา OTA และประหยัดค่าคอมมิชชั่น 15-20% ด้วยระบบจองตรง",
+    "Visual Storytelling: ดีไซน์ที่ให้รูปภาพและวิดีโอทำงานหนักเพื่อขายประสบการณ์การพักผ่อน",
+    "Data Ownership: เก็บฐานข้อมูลลูกค้า (Email/Tel) เพื่อทำ CRM และส่งโปรโมชั่นได้เองในอนาคต",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่เน้นประสบการณ์และการขาย
   coreFeatures: [
     {
-      title: "Immersive Visual Experience",
-      description:
-        "ระบบแกลเลอรี่ห้องพักที่คมชัดบาดตา โหลดไวเหมือนดีดนิ้ว ช่วยให้นักท่องเที่ยว 'รู้สึก' ถึงความนุ่มของเตียงและวิวนอกหน้าต่างก่อนที่จะมาถึง",
+      title: "Immersive Gallery",
+      description: "ระบบแกลเลอรี่ห้องพักความละเอียดสูงที่โหลดไว เพื่อสร้างความประทับใจแรกพบ",
       icon: "Camera",
     },
     {
-      title: "Seamless Booking Engine",
-      description:
-        "ปุ่มจองที่กดง่ายที่สุด เชื่อมต่อกับระบบเช็คห้องว่างแบบ Real-time ให้ลูกค้าตัดสินใจจ่ายเงินได้ทันที 24 ชั่วโมง",
+      title: "Direct Booking",
+      description: "ปุ่มจองที่เด่นชัดและเชื่อมต่อระบบเช็คห้องว่างแบบ Real-time",
       icon: "CalendarCheck",
     },
     {
-      title: "Global SEO Structure",
-      description:
-        "วางโครงสร้างคำค้นหาภาษาอังกฤษ/จีน/รัสเซีย เพื่อดักจับนักท่องเที่ยวเกรดพรีเมียมจาก Google ทั่วโลกให้มาเจอคุณ",
+      title: "Multi-Language SEO",
+      description: "โครงสร้างรองรับภาษาอังกฤษ/จีน/รัสเซีย เพื่อดักจับนักท่องเที่ยวทั่วโลก",
       icon: "Globe",
     },
   ],
 
-  // [FAQ_ENGINE]: 7 ข้อสงสัยของเจ้าของโรงแรม (OTA, System, Price)
   faqs: [
     {
-      question: "จำเป็นต้องมีเว็บไหม ในเมื่อลง Agoda/Booking อยู่แล้ว?",
+      question: "ทำไมต้องมีเว็บ ในเมื่อมี Agoda แล้ว?",
       answer:
-        "จำเป็นมากครับ เพราะ OTA คือ 'ช่องทางหารู้จัก' แต่เว็บไซต์คือ 'ช่องทางทำกำไร' ลูกค้าจำนวนมากชอบไปดูรีวิวใน Agoda แล้วมาค้นชื่อโรงแรมใน Google เพื่อหาโปรจองตรงที่คุ้มกว่า ถ้าคุณไม่มีเว็บรองรับ คุณกำลังทิ้งเงินก้อนโตไปครับ",
+        "OTA คือช่องทางหารู้จัก แต่เว็บไซต์คือช่องทางทำกำไรครับ ลูกค้าจำนวนมากชอบมาเช็คราคาจองตรงที่หน้าเว็บ ถ้าคุณไม่มีเว็บรองรับ คุณกำลังทิ้งกำไรก้อนโต",
     },
     {
-      question: "เชื่อมต่อกับระบบจอง (Channel Manager) เดิมได้ไหม?",
+      question: "เชื่อมต่อ Channel Manager ได้ไหม?",
       answer:
-        "ได้ครับ เราออกแบบเว็บให้รองรับการฝัง Booking Engine ชั้นนำได้ทุกค่าย (เช่น SiteMinder, Cloudbeds, Little Hotelier) เพื่อให้สต็อกห้องพักตัดตรงกันเป๊ะ ไม่ต้องกลัว Overbooking ครับ",
+        "ได้ครับ รองรับการเชื่อมต่อกับระบบชั้นนำเช่น SiteMinder หรือ Cloudbeds เพื่อให้สต็อกห้องพักตัดตรงกัน",
     },
     {
-      question: "ไม่มีรูปสวยๆ เลย ทางทีมช่วยถ่ายให้ไหม?",
-      answer:
-        "รูปภาพคือหัวใจของโรงแรมครับ ถ้ายังไม่มี ผมมีพาร์ทเนอร์ช่างภาพสายโรงแรมมืออาชีพแนะนำให้ได้ครับ เพื่อให้เว็บออกมาดูแพงและน่าพักที่สุด การลงทุนกับรูปภาพคุ้มค่าเสมอครับ",
+      question: "ไม่มีรูปสวยๆ ทีมงานช่วยถ่ายให้ไหม?",
+      answer: "มีพาร์ทเนอร์ช่างภาพสายโรงแรมมืออาชีพแนะนำครับ รูปภาพคือหัวใจสำคัญของการขายห้องพัก",
     },
     {
-      question: "ทำเว็บหลายภาษาได้ไหม?",
+      question: "รองรับหลายภาษาไหม?",
       answer:
-        "ทำได้ครับ โครงสร้างเรารรองรับ Multi-language เต็มรูปแบบ จะเพิ่มภาษาจีน รัสเซีย หรือญี่ปุ่น เพื่อเจาะกลุ่มนักท่องเที่ยวเฉพาะชาติก็ทำได้ง่ายๆ ครับ",
+        "ทำได้ครับ โครงสร้างรองรับ Multi-language เต็มรูปแบบเพื่อเจาะกลุ่มนักท่องเที่ยวเฉพาะชาติ",
     },
     {
-      question: "อัปเดตราคาโปรโมชั่นเองได้ยากไหม?",
+      question: "อัปเดตราคาเองยากไหม?",
       answer:
-        "ง่ายเหมือนโพสต์ Facebook ครับ เราทำระบบหลังบ้านให้ฝ่าย Reservation หรือ Marketing เข้าไปเปลี่ยนแบนเนอร์โปรโมชั่น หรือแก้ไขราคาห้องพักหน้าเว็บได้เองทันที",
+        "ง่ายครับ เรามีระบบหลังบ้านให้ฝ่าย Reservation ปรับราคาหรือเปลี่ยนแบนเนอร์โปรโมชั่นได้เองทันที",
     },
     {
-      question: "รองรับการชำระเงินผ่านบัตรเครดิตไหม?",
+      question: "รองรับการตัดบัตรเครดิตไหม?",
       answer:
-        "รองรับครับ เราสามารถเชื่อมต่อ Payment Gateway (เช่น GB Prime, 2C2P, Stripe) เพื่อให้ลูกค้าต่างชาติรูดบัตรจองห้องพักได้ทันที ตัดปัญหาการโอนเงินข้ามประเทศครับ",
+        "รองรับครับ เชื่อมต่อ Payment Gateway (เช่น Stripe, 2C2P) ให้ลูกค้าต่างชาติรูดจองได้เลย",
     },
     {
-      question: "คุ้มค่าลงทุนไหม?",
+      question: "คุ้มค่าการลงทุนไหม?",
       answer:
-        "ลองคำนวณดูครับ ถ้าปกติคุณเสียค่าคอม OTA เดือนละ 2-3 หมื่นบาท การทำเว็บจองตรงจ่ายครั้งเดียวจบ แค่ลูกค้าจองตรงเข้ามาไม่กี่คืน ก็คืนทุนค่าทำเว็บแล้วครับ ที่เหลือคือกำไรระยะยาวของคุณ",
+        "แค่ลูกค้าจองตรงไม่กี่คืนก็คืนทุนค่าทำเว็บแล้วครับ ที่เหลือคือกำไรระยะยาวจากการไม่ต้องเสียค่าคอม OTA",
     },
   ],
 
-  // [KEYWORD_INJECTION]: คีย์เวิร์ดสำหรับธุรกิจท่องเที่ยวและที่พัก
   keywords: [
     "รับทำเว็บไซต์โรงแรม",
     "ออกแบบเว็บไซต์รีสอร์ตหรู",
     "ทำเว็บวิลล่า พูลวิลล่า",
     "ระบบจองที่พักออนไลน์",
-    "Hotel Website Design Thailand",
-    "ทำเว็บไซต์ท่องเที่ยว",
-    "รับทำเว็บโฮมสเตย์",
+    "Hotel Website Design",
   ],
 
   priority: 6,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: local-authority.ts
-
 `Path: constants/services/local-authority.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: LOCAL_DOMINATION_ENGINE v18.0.2 (ACCESSIBILITY_VERIFIED)
- * [STRATEGY]: Hyper-Local Targeting | Map Pack Dominance | Zero-Emoji
+ * [SERVICE_NODE]: LOCAL_AUTHORITY_ENGINE v18.0.1 (GOV_BUSINESS_HYBRID)
+ * [STRATEGY]: Hyper-Local Trust | Government Standard | SME Growth
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -4874,127 +4875,116 @@ import type { TemplateMasterData } from "@/types";
 
 export const localAuthorityService: TemplateMasterData = {
   id: "AEM-SVC-LS-10",
-  // [SEO_HOOK]: ใช้คำว่า "ยึดทำเลทอง" เพื่อกระตุ้น FOMO (Fear Of Missing Out)
-  title: "Local SEO & Google Maps | ยึดทำเลทองหน้าแรก ดึงลูกค้าพื้นที่เข้าร้านทันที",
+  title: "Local Authority & Business Solutions | ยกระดับความน่าเชื่อถือท้องถิ่นสู่สากล",
   description:
-    "เปลี่ยนหมุดธุรกิจของคุณให้เป็นแม่เหล็กดูดเงิน ด้วยกลยุทธ์ Local SEO ที่จะดันร้านคุณขึ้นอันดับ 1-3 ใน 'Google Map Pack' ตัดหน้าคู่แข่งที่ยิงแอด โดยไม่ต้องเสียค่าโฆษณาสักบาท",
-
+    "โซลูชันเว็บไซต์และการตลาดท้องถิ่นสำหรับหน่วยงานราชการ (อบต./เทศบาล) และธุรกิจ SME ที่ต้องการสร้างความเชื่อถือสูงสุดในพื้นที่ ยึดครองอันดับค้นหาบน Google Maps และให้บริการประชาชนด้วยมาตรฐานดิจิทัลภาครัฐ",
   image: "/images/services/local-node.webp",
   templateSlug: "local-authority",
   category: "business",
 
-  // [PRICING_STRATEGY]: Entry Level ที่ตัดสินใจง่ายสำหรับ SMEs
-  price: "6,900",
-  priceValue: 6900,
+  // [PRICING_MASTER]: ราคากลางสำหรับบริการท้องถิ่น/ราชการ (พื้นที่อื่นจะดึงค่านี้ไปใช้)
+  price: "12,900", // ปรับราคาให้ครอบคลุมงานราชการที่มีเอกสารซับซ้อนกว่า SME ปกติ
+  priceValue: 12900,
   currency: "THB",
-  unit: "เริ่มต้น / สาขา",
+  unit: "เริ่มต้น / โครงการ",
 
-  // [THEME_ENGINE]: Emerald 700 (#047857) on Slate 100 (#f1f5f9) = Contrast 7.5:1 (AAA Pass)
+  // [THEME_STANDARD]: ธีม Civil Emerald (Green/Amber)
+  // สื่อถึงการพัฒนา ความมั่นคง และความใกล้ชิดชุมชน
   theme: {
-    mode: "light",
-    primary: "#047857",
-    secondary: "#022c22",
-    background: "#f1f5f9",
-    foreground: "#0f172a",
-    accent: "#34d399",
-    gradient: "bg-gradient-to-br from-[#047857]/10 via-transparent to-transparent",
+    mode: "light", // เน้นธีมสว่างเพื่อความโปร่งใส (Transparency)
+    primary: "#047857", // Emerald 700: สีเขียวข้าราชการ/ความมั่นคง
+    secondary: "#064e3b", // Emerald 900: สีเขียวเข้ม
+    background: "#fafafa", // Zinc 50: พื้นหลังสะอาดตา อ่านง่าย
+    foreground: "#09090b", // Zinc 950: ตัวอักษรสีเข้มชัดเจน
+    accent: "#d97706", // Amber 600: สีส้มอิฐ/ดินเผา (ตัดกันเพื่อความโดดเด่นแต่สุภาพ)
+    gradient: "from-[#047857]/5 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNAL]: ตัวเลขที่วัดผลได้จริง (Calls/Directions)
+  // [TRUST_SIGNAL]
   clientTrust:
-    "Local Dominance: ธุรกิจกว่า 500+ แห่ง มียอดการโทร (Calls) และขอเส้นทาง (Directions) เพิ่มขึ้น 300% ภายใน 90 วัน",
+    "Government & Local Standard: มาตรฐานความปลอดภัยข้อมูลและ ITA ที่ยอมรับโดยหน่วยงานท้องถิ่น",
 
-  // [BENEFITS]: แก้ Pain Point เรื่อง 'เงียบเหงา' และ 'โดนแย่งลูกค้า'
   benefits: [
-    "ยึดพื้นที่ไข่แดง (Map Pack): การติด Top 3 บนแผนที่คือทำเลที่ดีที่สุด เพราะลูกค้ากลุ่มนี้คือ High Intent (กำเงินพร้อมซื้อ) ไม่ใช่แค่ดูเล่นๆ",
-    "สร้างเกราะป้องกันด้วยรีวิว: ระบบบริหารจัดการ Reputation Management ทำให้อัตราดาวของคุณสูงกว่าคู่แข่ง ซึ่งเป็นปัจจัยอันดับ 1 ในการตัดสินใจเข้าร้าน",
-    "Organic Traffic ถาวร: เมื่อหมุดแข็งแกร่ง คุณจะได้ลูกค้าฟรีตลอดไป เลิกเป็นทาสค่าแอด Facebook ที่แพงขึ้นทุกวัน",
+    "Public Trust: สร้างภาพลักษณ์องค์กรที่ทันสมัย โปร่งใส และเข้าถึงง่ายสำหรับประชาชนทุกช่วงวัย",
+    "Local Dominance: ยึดพื้นที่การค้นหาบน Google Maps (SEO) เหนือคู่แข่งในพื้นที่เดียวกัน",
+    "Compliance Ready: โครงสร้างเว็บรองรับมาตรฐาน ITA/OIT และระเบียบราชการอย่างครบถ้วน",
   ],
 
-  // [CORE_FEATURES]: Technical Terms ที่ดูมืออาชีพแต่เข้าใจง่าย
   coreFeatures: [
     {
-      title: "GMB Optimization Pro",
-      description:
-        "ปรับแต่ง Google Business Profile ครบ 100% (Categories, Attributes, Photos) เพื่อให้ Algorithm ของ Google ดันอันดับสูงสุด",
+      title: "E-Service Gateway",
+      description: "ระบบบริการออนไลน์รับเรื่องร้องเรียนหรือติดต่อราชการ ลดขั้นตอนเอกสาร",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Local SEO Structure",
+      description: "โครงสร้างดันอันดับค้นหาท้องถิ่น (Local SEO) ให้ติดหน้าแรกเมื่อคนในพื้นที่ค้นหา",
       icon: "MapPin",
     },
     {
-      title: "NAP Consistency",
-      description:
-        "สร้างเครือข่ายอ้างอิง (Citations) ชื่อ-ที่อยู่-เบอร์โทร ให้ตรงกันทั่วโลกอินเทอร์เน็ต เพื่อยืนยันความมีตัวตนจริง (Authority Signal)",
-      icon: "Globe",
-    },
-    {
-      title: "Review Response System",
-      description:
-        "ระบบช่วยตอบรีวิวลูกค้าด้วย Keyword Strategy เพื่อเปลี่ยนคำติชมให้กลายเป็นคะแนน SEO",
-      icon: "Star",
+      title: "Smart CMS",
+      description: "ระบบจัดการเนื้อหาที่เจ้าหน้าที่ใช้งานง่าย อัปเดตข่าวสาร/จัดซื้อจัดจ้างได้เอง",
+      icon: "FileText",
     },
   ],
 
-  // [FAQ_ENGINE]: ดักข้อโต้แย้ง (Objection Handling) ครบทุกมิติ
   faqs: [
     {
-      question: "ทำไมต้องทำ Local SEO ทั้งที่มีเพจ Facebook อยู่แล้ว?",
+      question: "เหมาะกับหน่วยงานราชการไหม?",
       answer:
-        "เพราะ 'เจตนา' (Intent) ต่างกันครับ คนเล่น Facebook เพื่อบันเทิง แต่คนค้น Google Maps คือคนที่ 'หิว/รถเสีย/ป่วย' และต้องการใช้บริการเดี๋ยวนั้น โอกาสปิดการขายจึงสูงกว่า Facebook ถึง 10 เท่า",
+        "เหมาะมากครับ เราออกแบบตามมาตรฐานเว็บภาครัฐ (Government Website Standard) รองรับการประเมิน ITA และ OIT ครบถ้วน",
     },
     {
-      question: "รับประกันอันดับ 1 ไหม?",
+      question: "ดำเนินการตามระเบียบจัดซื้อจัดจ้างได้ไหม?",
       answer:
-        "ไม่มีใครสั่ง Google ได้ครับ แต่สถิติของเราคือลูกค้า 90% ขยับติด Top 3 (Map Pack) ภายใน 3-4 เดือน ด้วยเทคนิคสายขาวที่ปลอดภัยและยั่งยืนครับ",
+        "ได้ครับ ผมเข้าใจระเบียบพัสดุ สามารถจัดเตรียมเอกสารใบเสนอราคา/TOR และตรวจรับงานตามงวดงานราชการได้ครับ",
     },
     {
-      question: "ไม่มีหน้าร้าน (Service Area) ทำได้ไหม?",
+      question: "ช่วยทำ Google Maps ด้วยไหม?",
       answer:
-        "ทำได้และควรทำครับ! สำหรับช่างแอร์, รับเหมา หรือเดลิเวอรี่ เราจะตั้งค่าแบบ 'Service Area Business' (SAB) ให้คุณแสดงตัวตนในพื้นที่ให้บริการโดยไม่ต้องเปิดเผยที่อยู่บ้าน",
+        "รวมอยู่ในบริการครับ ผมจะปรับปรุงหมุดปัก (GMB) ให้ถูกต้องและดันอันดับให้คนในพื้นที่ค้นหาเจอเป็นที่แรกครับ",
     },
     {
-      question: "ต้องทำเว็บด้วยไหม?",
+      question: "ดูแลหลังการขายยังไง?",
       answer:
-        "ไม่บังคับครับ แต่การมี 'Salepage หน้าเดียว' ที่เชื่อมกับหมุด จะช่วยดันคะแนน Authority ให้หมุดติดอันดับง่ายขึ้นมาก ซึ่งเรามีแพ็กเกจคู่กันในราคาพิเศษครับ",
+        "มีประกันดูแลระบบฟรี 1 ปี พร้อมสอนเจ้าหน้าที่ใช้งานจนคล่อง และมีบริการต่อสัญญา MA รายปีครับ",
     },
     {
-      question: "ธุรกิจแบบไหนคุ้มที่สุด?",
+      question: "ธุรกิจทั่วไปใช้แพ็กเกจนี้ได้ไหม?",
       answer:
-        "ธุรกิจที่มีหน้าร้านหรือให้บริการในพื้นที่ครับ เช่น ร้านอาหาร, คลินิก, อู่ซ่อมรถ, ร้านตัดผม, ร้านนวด, ทนายความ หรือธุรกิจรับเหมาต่างๆ",
+        "ได้ครับ เหมาะกับธุรกิจที่มีหน้าร้านหรือให้บริการในท้องถิ่น เช่น คลินิก, ร้านวัสดุก่อสร้าง, โรงเรียนกวดวิชา ที่ต้องการความน่าเชื่อถือสูง",
     },
     {
-      question: "ช่วยแก้หมุดซ้ำ หรือกู้คืนสิทธิ์เจ้าของได้ไหม?",
+      question: "รองรับการเปิดบนมือถือไหม?",
       answer:
-        "ได้ครับ ทีมงานเราเชี่ยวชาญการเคลียร์หมุดขยะ (Duplicate Listings) และยื่นเรื่องกู้คืนสิทธิ์ (Ownership Claim) กับ Google Support โดยตรงครับ",
+        "100% ครับ ประชาชนส่วนใหญ่เข้าถึงผ่านมือถือ เราออกแบบ Mobile-First ให้ใช้งานง่ายที่สุด",
     },
     {
-      question: "หลังทำเสร็จ อันดับจะอยู่ถาวรไหม?",
+      question: "มีค่าใช้จ่ายรายปีไหม?",
       answer:
-        "หมุดอยู่ถาวรครับ แต่อันดับคือการแข่งขัน เราแนะนำให้มีการเคลื่อนไหว (Post/Photo Update) เดือนละ 1-2 ครั้ง เพื่อรักษาแชมป์ ซึ่งเรามีคู่มือสอนให้ทำเองได้ง่ายๆ ครับ",
+        "ปีแรกฟรีครับ ปีถัดไปมีค่าต่ออายุโดเมน/โฮสติ้งและดูแลระบบ (Maintenance) ในราคาประหยัดครับ",
     },
   ],
 
   keywords: [
+    "รับทำเว็บไซต์ อบต",
+    "ทำเว็บเทศบาล",
     "รับทำ Local SEO",
-    "รับปักหมุด Google Maps",
-    "ทำ SEO ร้านอาหาร",
-    "เพิ่มยอดขายหน้าร้าน",
-    "Google Business Profile Service",
-    "ทำ SEO คลินิก",
-    "การตลาดท้องถิ่น",
+    "ออกแบบเว็บไซต์ราชการ",
+    "จ้างทำเว็บธุรกิจท้องถิ่น",
   ],
 
-  priority: 3,
+  priority: 3, // Priority รองจาก Corporate/Hotel แต่สำคัญสำหรับตลาดต่างจังหวัด
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: salepage.ts
-
 `Path: constants/services/salepage.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: SALE_PAGE_CONVERSION_KING v18.0.1 (LINE_API_UPDATED)
- * [STRATEGY]: High Contrast | Dark Aggressive | Hex Standard
+ * [SERVICE_NODE]: SALE_PAGE_CONVERSION_ENGINE v18.0.1 (ROAS_OPTIMIZED)
+ * [STRATEGY]: Aggressive Conversion | Server-Side Tracking | Neon Rose Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -5002,125 +4992,108 @@ import type { TemplateMasterData } from "@/types";
 
 export const salePageService: TemplateMasterData = {
   id: "AEM-SVC-SP-01",
-  title: "High-Conversion Sale Page | ปิดการขายไว ยิงแอดแม่น ไม่โดนปิดกั้น",
+  title: "High-Performance Sale Page | หน้าปิดการขายอัจฉริยะ ยอดทักแชทแตก แอดแม่นยำ",
   description:
-    "หยุดตำน้ำพริกละลายแม่น้ำกับค่าแอดที่แพงหูฉี่ เปลี่ยนงบโฆษณาให้เป็นยอดโอนด้วย Sale Page โครงสร้างคลีนที่โหลดไวระดับปีศาจ รองรับ Conversion API 100% ช่วยให้ AI ของ Facebook และ TikTok นำส่งแม่นยำขึ้น และเปลี่ยนคนดูขาจรให้กลายเป็นลูกค้าทันที",
+    "เปลี่ยนคลิกเป็นยอดโอนด้วย Sale Page โครงสร้าง Next.js ที่โหลดไวระดับมิลลิวินาที พร้อมระบบ Conversion API (CAPI) ที่ส่งข้อมูลลูกค้าตัวจริงกลับไปเทรน AI โฆษณาให้ฉลาดขึ้น 10 เท่า เลิกตำน้ำพริกละลายแม่น้ำกับเว็บสำเร็จรูปที่โหลดช้า",
+
   image: "/images/services/salepage-node.webp",
   templateSlug: "salepage",
   category: "landing",
+
+  // [PRICING_MASTER]: ราคากลางสำหรับ Sale Page (คุ้มค่าเมื่อเทียบกับผลลัพธ์)
   price: "3,500",
   priceValue: 3500,
   currency: "THB",
   unit: "เริ่มต้น / หน้า",
 
-  // [THEME_FIX]: ใช้ Hex Code ล้วน (Rose/Crimson Theme) สื่อถึงความเร่งด่วนและพลังงาน
+  // [THEME_STANDARD]: ธีม Neon Rose (Vibrant Pink/Dark)
+  // จิตวิทยา: สีแดง/ชมพูสดกระตุ้น Heart Rate และความอยากซื้อ (Impulse Buying)
   theme: {
-    mode: "dark",
-    primary: "#fb7185", // Rose 400
-    secondary: "#9f1239", // Rose 900
-    background: "#270308", // Dark Crimson
-    foreground: "#fff1f2", // Rose 50
-    accent: "#e11d48", // Rose 600
-    gradient: "from-[#e11d48]/20 via-transparent to-transparent",
+    mode: "dark", // Dark Mode ช่วยให้สินค้าและปุ่ม CTA ดูโดดเด่นที่สุด
+    primary: "#f43f5e", // Rose 500: สีหลักสดใส กระตุ้น Action
+    secondary: "#881337", // Rose 900: สีพื้นหลังส่วนลึก
+    background: "#0f0505", // Obsidian: ดำเกือบสนิท (Premium Dark)
+    foreground: "#fff1f2", // Rose 50: ตัวหนังสืออ่านง่าย
+    accent: "#fb7185", // Rose 400: สีปุ่มรองหรือ Highlight
+    gradient: "from-[#f43f5e]/20 via-transparent to-transparent", // Glow Effect
   },
 
-  // [TRUST_SIGNAL]: เน้นเรื่องความคุ้มค่าของค่าแอด (ROAS)
+  // [TRUST_SIGNAL]
   clientTrust:
-    "Performance Proven: พิสูจน์แล้วว่าช่วยลดต้นทุนต่อการซื้อ (Cost-per-Purchase) ได้จริงกว่า 40%",
+    "Performance Proven: ช่วยธุรกิจลดต้นทุนต่อการทัก (Cost per Message) เฉลี่ย 40% หลังเปลี่ยนมาใช้โครงสร้างนี้",
 
-  // [BENEFITS]: เน้นแก้ Pain Point เรื่องแอดแพงและการโดนปิดกั้น
   benefits: [
-    "เลิกเสี่ยงโดนปิดกั้น: เราเขียนโค้ดด้วยโครงสร้าง Clean Semantic ที่ Bot ของ Facebook และ TikTok รัก ช่วยลดโอกาสที่ AI จะเข้าใจผิดว่าเป็นเว็บสแปมหรือสายเทา",
-    "สะกดจิตให้กดโอน: วางเลย์เอาต์ตามหลักจิตวิทยา Neuromarketing ไล่ระดับอารมณ์จาก 'สงสัย' เป็น 'อยากได้' และจบที่ 'กลัวพลาด' จนต้องกดสั่งซื้อทันที",
-    "ป้อนข้อมูลให้ AI ฉลาดขึ้น: ไม่ใช่แค่ติด Pixel ธรรมดา แต่เราวางระบบ Server-Side API (CAPI) ส่งค่ากลับไปบอก Facebook ว่าใครคือลูกค้าตัวจริง ช่วยให้แอดวิ่งหาคนแม่นขึ้นเรื่อยๆ",
+    "Instant Load: โหลดเสร็จในพริบตา (0.5s) ลูกค้าไม่กดออกเพราะรอนาน ช่วยดันคะแนน Quality Score ของโฆษณา",
+    "Smart Pixel Integration: ฝัง Facebook Pixel & TikTok Pixel แบบ Advanced Matching เก็บ Data ลูกค้าได้แม่นยำกว่าคู่แข่ง",
+    "Bot-Friendly: โครงสร้าง Clean Code ที่ AI ของแพลตฟอร์มโฆษณาชอบ ช่วยให้คอนเทนต์ถูกนำส่งได้ดีขึ้น",
   ],
 
-  // [CORE_FEATURES]: ฟีเจอร์ที่เน้นความเร็วและการกระตุ้น
   coreFeatures: [
     {
-      title: "Speed-First Architecture",
-      description:
-        "ทำคะแนน Google PageSpeed 95-100 เพื่อให้เว็บโหลดเสร็จก่อนที่ลูกค้าจะเปลี่ยนใจกดออก (ทุก 1 วินาทีที่ช้า คือเงินที่หายไป)",
-      icon: "Zap",
+      title: "Server-Side CAPI",
+      description: "ส่ง Event การซื้อจากเซิร์ฟเวอร์โดยตรง แก้ปัญหา iOS 14+ บล็อกการติดตาม",
+      icon: "Activity",
     },
     {
-      title: "Sticky CTA & FOMO Engine",
+      title: "Auto-Line Notification",
+      description: "แจ้งเตือนออเดอร์ใหม่เข้า LINE OA ทันที (Real-time) ไม่พลาดทุกยอดขาย",
+      icon: "MessageCircle",
+    },
+    {
+      title: "Sticky CTA Bar",
       description:
-        "ปุ่มสั่งซื้อที่ตามติดหน้าจอตลอดเวลา พร้อมระบบนับถอยหลังและแจ้งเตือนการซื้อล่าสุด เพื่อกระตุ้นความกลัวที่จะพลาดของมีจำนวนจำกัด",
+        "แถบปุ่ม 'ซื้อเลย / แอดไลน์' ที่ตามติดหน้าจอโทรศัพท์ตลอดเวลา เพิ่มโอกาสกด 2 เท่า",
       icon: "MousePointerClick",
     },
-    {
-      title: "Cross-Platform Perfect",
-      description:
-        "แสดงผลสวยคมกริบทุกพิกเซล ไม่ว่าจะเปิดผ่าน TikTok Browser, Line OA หรือ Facebook In-App Browser ไม่มีการแสดงผลเพี้ยนให้เสียอารมณ์",
-      icon: "Smartphone",
-    },
   ],
 
-  // [FAQ_ENGINE]: 7 ข้อโต้แย้งหลักสำหรับคนยิงแอด (Platform, Price, Tech)
   faqs: [
     {
-      question: "Sale Page นี้ต่างจากเว็บสำเร็จรูปรายเดือนยังไง?",
+      question: "ทำไมต้อง Next.js ไม่ใช้ WordPress หรือเว็บสำเร็จรูป?",
       answer:
-        "แบบรายเดือนคุณคือ 'คนเช่า' ครับ ปรับแต่งโค้ดลึกๆ ไม่ได้ และถ้าหยุดจ่ายเว็บก็ปลิว แต่ของผมคือการสร้างบน Next.js ที่เป็น 'สินทรัพย์' ของคุณ 100% เร็วกว่า ปรับแต่งได้อิสระ ไม่ต้องจ่ายรายเดือน และเป็นเจ้าของตลอดชีพครับ",
+        "เพราะ 'ความเร็ว' คือเงินครับ Next.js โหลดไวกว่ามาก และไม่มีปัญหาระบบล่มหรือโดนแฮกเหมือน CMS เก่าๆ ที่สำคัญคือจ่ายครั้งเดียวจบ เป็นกรรมสิทธิ์ของคุณ 100%",
     },
     {
-      question: "ช่วยติดตั้ง Pixel และ Conversion API ให้ไหม?",
+      question: "Conversion API (CAPI) สำคัญแค่ไหน?",
       answer:
-        "ทำให้ครบจบเลยครับ! นี่คือหัวใจสำคัญ ผมจะ Setup Event มาตรฐาน (ViewContent, AddToCart, Purchase) ให้แม่นยำที่สุด และทดสอบให้ดูว่าค่าส่งกลับไปที่ตัวจัดการโฆษณาจริง เพื่อให้คุณไปยิงแอดต่อได้ทันทีโดยไม่ต้องปวดหัว",
+        "สำคัญที่สุดในยุคนี้ครับ เพราะ Browser เริ่มบล็อกการเก็บข้อมูล (Cookie) การใช้ CAPI จะช่วยกู้คืนข้อมูลลูกค้าที่หายไปกลับมาได้ถึง 30-40% ทำให้แอดแม่นขึ้น",
     },
     {
-      question: "แก้ไขข้อมูลเองภายหลังได้ไหม?",
+      question: "ไม่มีพื้นฐานเทคนิคเลย ดูแลยากไหม?",
       answer:
-        "ได้ครับ สำหรับการแก้ไขพื้นฐาน (รูปภาพ/ข้อความ) ผมสามารถเชื่อมต่อระบบหลังบ้านให้ได้ แต่โดยปกติ Sale Page แบบ High-Performance มักจะนิ่งหลังจากการเทสต์ ผมแนะนำให้แก้ไขผ่านผมเพื่อรักษาโครงสร้างความเร็วและความสวยงามจะดีที่สุดครับ",
+        "ไม่ต้องดูแลเลยครับ ผมเซ็ตระบบให้จบพร้อมใช้งาน หน้าที่ของคุณคือแค่เอาลิงก์ไปยิงแอด แล้วรอตอบแชทลูกค้าครับ",
     },
     {
-      question: "ต้องเตรียมอะไรบ้างก่อนเริ่มงาน?",
+      question: "แก้ไขข้อมูลสินค้าเองได้ไหม?",
       answer:
-        "เตรียมแค่ 3 อย่างครับ: 1. รูปภาพสินค้าและรีวิว 2. รายละเอียดโปรโมชั่น/ราคา 3. บัญชี Facebook Pixel/TikTok Pixel ID ที่เหลือผมจัดการร้อยเรียงเรื่องราวและวางโครงสร้างให้ทั้งหมดครับ",
+        "ได้ครับ ผมมีระบบหลังบ้าน (Admin Panel) ให้คุณเข้าไปแก้ราคา เปลี่ยนรูป หรือแก้ข้อความโปรโมชั่นได้เองง่ายๆ ผ่านมือถือครับ",
     },
     {
-      question: "รองรับการเก็บเงินปลายทาง (COD) ไหม?",
+      question: "รวมโดเมนและโฮสติ้งไหม?",
       answer:
-        "รองรับแน่นอนครับ ฟอร์มสั่งซื้อของเราออกแบบมาให้กรอกง่ายที่สุดเพื่อลดการกดออก เลือกได้ทั้งโอนเงินหรือปลายทาง ข้อมูลจะถูกบันทึกลง Google Sheets และแจ้งเตือนเข้า LINE OA (Messaging API) ของคุณแบบ Real-time ทันทีครับ (เราใช้ระบบ API มาตรฐานใหม่ ทดแทน LINE Notify ที่ปิดตัวลง หมดกังวลเรื่องการแจ้งเตือนไม่เด้งครับ)",
-    },
-    {
-      question: "ใช้เวลากี่วันเสร็จ รีบใช้ยิงแอด?",
-      answer:
-        "เข้าใจคนยิงแอดครับว่าเวลามีค่า ปกติใช้เวลา 2-3 วันหลังจากได้ข้อมูลครบ แต่ถ้ารีบมากๆ สามารถแจ้งได้ครับ ผมมีแพ็กเกจ Express เร่งด่วน 24 ชั่วโมงสำหรับคนใจร้อนอยากเทสต์แอดไวๆ",
-    },
-    {
-      question: "สายเทาทำได้ไหม?",
-      answer:
-        "โดยพื้นฐานผมรับสายขาวเป็นหลักครับ แต่ถ้าสินค้ามีความสุ่มเสี่ยง (เช่น อาหารเสริมบางชนิด) ผมสามารถช่วยปรับคำและโครงสร้างให้ดูน่าเชื่อถือและปลอดภัยต่อ AI ตรวจจับได้ แต่ไม่รับประกันเรื่องการโดนแบนบัญชีโฆษณานะครับ เพราะปัจจัยหลักอยู่ที่ตัวบัญชีและคอนเทนต์โฆษณาด้วยครับ",
+        "แพ็กเกจนี้ยังไม่รวมครับ แต่ผมมีบริการจดโดเมนและเช่า Cloud Server ความเร็วสูงให้ในราคาต้นทุน พร้อมดูแลความปลอดภัยให้ฟรีครับ",
     },
   ],
 
-  // [KEYWORD_INJECTION]: คีย์เวิร์ดสำหรับสายยิงแอดและพ่อค้าแม่ค้าออนไลน์
   keywords: [
     "รับทำ Sale Page ยิงแอด",
     "ทำ Landing Page TikTok",
-    "Sale Page สายขาว",
-    "รับทำเว็บหน้าเดียว ราคาถูก",
-    "Conversion API Facebook Setup",
-    "จ้างทำ Sale Page Next.js",
-    "Sale Page โหลดเร็ว",
+    "ติดตั้ง Conversion API",
+    "Sale Page Next.js",
+    "เว็บหน้าเดียว ขายของออนไลน์",
   ],
 
-  priority: 1,
-  isPopular: true,
+  priority: 1, // สินค้าขายดีอันดับ 1
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: seo-agency.ts
-
 `Path: constants/services/seo-agency.ts`
-
 ```typescript
 /**
- * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v18.0.1 (FAQ_EXPANDED)
- * [STRATEGY]: High-Intent Conversion | Semantic Authority | Zero-Emoji
+ * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v18.0.2 (HUMAN_CENTRIC_PATCH)
+ * [STRATEGY]: Business Partnership | Sustainable Growth | Reliable Emerald Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -5128,129 +5101,133 @@ import type { TemplateMasterData } from "@/types";
 
 export const seoAgencyService: TemplateMasterData = {
   id: "AEM-SVC-SEO-07",
-  title: "Technical SEO & Authority Building | ยึดพื้นที่ทำเลทองบน Google ด้วยวิศวกรรมข้อมูล",
+  title: "Technical SEO & Authority Building | สร้างรากฐานธุรกิจให้เติบโตบน Google อย่างยั่งยืน",
   description:
-    "เลิกเอาเงินไปละลายกับค่าโฆษณาที่แพงขึ้นทุกวัน เปลี่ยนเว็บไซต์ของคุณให้เป็นพนักงานขายมือหนึ่งที่ทำงานตลอด 24 ชั่วโมง ด้วยการปรับจูนโครงสร้างหลังบ้านให้ถูกหลัก Google และสร้างเนื้อหาที่ลูกค้าค้นหาเจอในวันที่เขาพร้อมจ่ายเงิน",
+    "การทำ SEO ไม่ใช่แค่เรื่องเทคนิค แต่คือการสร้าง 'ความน่าเชื่อถือ' ให้ธุรกิจของคุณบนโลกออนไลน์ เราช่วยปรับปรุงโครงสร้างเว็บไซต์และเนื้อหา เพื่อให้ Google เข้าใจว่าคุณคือตัวจริงในอุตสาหกรรม และส่งลูกค้าคุณภาพมาหาคุณในวันที่เขาพร้อมตัดสินใจ",
+
   image: "/images/services/seo-agency-node.webp",
   templateSlug: "seo-agency",
   category: "business",
+
+  // [PRICING_MASTER]: ราคาที่สะท้อนคุณภาพและความยั่งยืน
   price: "19,500",
   priceValue: 19500,
   currency: "THB",
   unit: "เริ่มต้น / เดือน",
 
-  // [THEME_ENGINE]: ใช้ Hex Code ล้วนเพื่อความแม่นยำในการเรนเดอร์ (Emerald Growth Theme)
+  // [THEME_STANDARD]: ธีม Reliable Growth (Emerald/Slate)
+  // สื่อถึงความมั่นคง (Stability) การเติบโต (Growth) และความเป็นมืออาชีพ (Professionalism)
   theme: {
-    mode: "dark",
-    primary: "#10b981", // Emerald 500 (สีเขียวแห่งการเติบโตและผลกำไร)
-    secondary: "#064e3b", // Emerald 900
-    background: "#020617", // Slate 950 (พื้นหลังมืดแบบมืออาชีพ)
-    foreground: "#f0fdf4", // Emerald 50
-    accent: "#34d399", // Emerald 400
-    gradient: "from-[#10b981]/20 via-transparent to-transparent",
+    mode: "dark", // Dark Mode เพื่อความสบายตาและดูทันสมัย
+    primary: "#10b981", // Emerald 500: สีเขียวธรรมชาติ สื่อถึงการเติบโตที่ยั่งยืน
+    secondary: "#064e3b", // Emerald 900: สีพื้นหลังเข้ม ลึกซึ้ง
+    background: "#020617", // Slate 950: สีดำอมน้ำเงินเข้ม สุขุม นุ่มนวล
+    foreground: "#f0fdf4", // Emerald 50: สีตัวอักษรขาวนวล อ่านง่าย
+    accent: "#34d399", // Emerald 400: สี Highlight ที่ไม่แสบตา
+    gradient: "from-[#10b981]/10 via-transparent to-transparent", // Gradient บางเบา ไม่รบกวนสายตา
   },
 
-  // [TRUST_SIGNAL]: ตัวเลขจริงที่พิสูจน์ได้ ไม่ใช่แค่คำคุย
-  clientTrust: "Proven Results: ดันเว็บลูกค้าติดหน้าแรกในกลุ่มอุตสาหกรรมแข่งขันสูงกว่า 50+ ราย",
+  // [TRUST_SIGNAL]
+  clientTrust:
+    "Sustainable Growth: เน้นผลลัพธ์ระยะยาวด้วยเทคนิคสายขาว (White Hat) ที่ปลอดภัย 100% ไม่เสี่ยงโดนแบน",
 
-  // [BENEFITS]: เน้นผลลัพธ์ทางธุรกิจ (ROI) มากกว่าแค่เรื่อง Traffic
   benefits: [
-    "เลิกเช่าที่ทำกิน: หยุดพึ่งพา Facebook Ads หรือ Google Ads เพียงอย่างเดียว สร้าง Traffic ของคุณเองที่เป็นสินทรัพย์ระยะยาว ยิ่งนานวันต้นทุนต่อลูกค้าหนึ่งคนยิ่งถูกลง",
-    "ซ่อมบ้านก่อนรับแขก: เราไม่ได้แค่เขียนบทความ แต่เราเข้าไปรื้อระบบหลังบ้าน แก้ไข Core Web Vitals และโครงสร้าง Code ให้ Google Bot วิ่งสะดวก เก็บข้อมูลได้ครบทุกหน้า",
-    "ดักลูกค้าตอนพร้อมซื้อ: เราไม่เน้นยอดวิวขยะ แต่เน้นทำอันดับในคีย์เวิร์ดที่คนค้นหาตอนกำเงินมาพร้อมซื้อ (Commercial Intent) เพื่อให้ยอดเข้าชมเปลี่ยนเป็นยอดขายได้จริง",
+    "Long-Term Asset: เปลี่ยนค่าโฆษณาที่จ่ายแล้วหมดไป เป็นการลงทุนสร้าง 'สินทรัพย์ดิจิทัล' ที่จะอยู่กับธุรกิจคุณตลอดไป ยิ่งนานวันต้นทุนต่อลูกค้าใหม่ยิ่งลดลง",
+    "Technical Health: เราไม่ได้แค่ทำคอนเทนต์ แต่เราเหมือนหมอที่ตรวจสุขภาพเว็บไซต์ รักษาระบบหลังบ้านให้แข็งแรง เพื่อให้ Google Bot ทำงานง่ายและรักเว็บคุณ",
+    "Quality Traffic: โฟกัสที่คนค้นหาด้วยความ 'อยากซื้อ' (Intent) ไม่ใช่แค่ยอดวิวฉาบฉวย เพื่อให้ทุกการเข้าชมมีโอกาสเปลี่ยนเป็นยอดขายได้จริง",
   ],
 
-  // [CORE_FEATURES]: อธิบายสิ่งที่ทำด้วยภาษามืออาชีพแต่น่าเชื่อถือ
   coreFeatures: [
     {
-      title: "Technical Infrastructure Audit",
+      title: "Technical Audit",
       description:
-        "ตรวจเช็คสุขภาพเว็บไซต์แบบละเอียดทุกบรรทัดโค้ด ค้นหาจุดรั่วไหลที่ทำให้เว็บอืด หรือจุดตายที่ทำให้ Google มองไม่เห็นเว็บคุณ",
+        "ตรวจเช็คสุขภาพเว็บไซต์อย่างละเอียด เพื่อค้นหาและแก้ไขจุดบกพร่องที่ฉุดรั้งอันดับของคุณ",
       icon: "Code2",
     },
     {
-      title: "Semantic Content Strategy",
+      title: "Semantic Strategy",
       description:
-        "วางโครงสร้างเนื้อหาแบบใยแมงมุม (Topic Clusters) ให้ Google รู้ว่าคุณคือตัวจริงในวงการนี้ ช่วยให้ติดอันดับยกแผง ไม่ใช่แค่บทความเดียว",
+        "วางโครงสร้างเนื้อหาแบบเครือข่ายความรู้ (Topic Clusters) เพื่อสร้างความน่าเชื่อถือในสายตา Google",
       icon: "Network",
     },
     {
-      title: "Conversion-Focused Analytics",
+      title: "Conversion Focus",
       description:
-        "ติดตั้งระบบวัดผลที่ไม่ใช่แค่ดูยอดวิว แต่ดูว่าคนเข้ามาแล้วกดปุ่มสั่งซื้อไหม โทรหาคุณหรือเปล่า เพื่อนำข้อมูลมาปรับจูนให้ขายดียิ่งขึ้น",
+        "วิเคราะห์พฤติกรรมผู้ใช้ เพื่อปรับปรุงหน้าเว็บให้ปิดการขายได้ง่ายขึ้น ไม่ใช่แค่คนเข้าเยอะแต่ขายไม่ได้",
       icon: "Activity",
     },
   ],
 
-  // [FAQ_ENGINE]: 7 ข้อโต้แย้งหลักที่ลูกค้าต้องการคำตอบเพื่อปิดการขาย (Kill Objections)
   faqs: [
     {
       question: "ทำไมราคาถึงสูงกว่าฟรีแลนซ์ทั่วไป?",
       answer:
-        "เพราะเราไม่ได้แค่เขียนบทความแล้วจบครับ แต่เราคือทีมวิศวกรและนักการตลาดที่เข้าไปปรับจูนโครงสร้างเว็บไซต์ของคุณใหม่ทั้งระบบ เพื่อแก้ปัญหาที่ต้นเหตุ ฟรีแลนซ์ทั่วไปอาจช่วยคุณได้เรื่องคอนเทนต์ แต่ถ้าโครงสร้างเว็บพัง เขียนดีแค่ไหน Google ก็ไม่จัดอันดับครับ",
+        "เพราะเราดูแลครอบคลุมทั้งระบบครับ ไม่ใช่แค่เขียนบทความ แต่รวมถึงการปรับแก้เชิงเทคนิค (Technical SEO) ที่ต้องใช้วิศวกรซอฟต์แวร์ดูแล ซึ่งฟรีแลนซ์ทั่วไปอาจไม่ได้ทำให้ครับ",
     },
     {
       question: "ต้องทำนานแค่ไหนถึงจะเห็นผล?",
       answer:
-        "SEO คือการวิ่งมาราธอน ไม่ใช่สปริ้นท์ครับ โดยปกติจะเริ่มเห็นความเปลี่ยนแปลงชัดเจนในช่วง 3-6 เดือนแรก แต่ข้อดีคือเมื่อติดอันดับแล้ว มันจะอยู่ตรงนั้นไปอีกนานโดยที่คุณไม่ต้องจ่ายเงินเพิ่มแม้แต่บาทเดียว เป็นการลงทุนที่คุ้มค่าที่สุดในระยะยาวครับ",
+        "SEO คือการวิ่งมาราธอนครับ ปกติจะเริ่มเห็นผลชัดเจนในเดือนที่ 3-6 แต่ข้อดีคือเมื่อติดแล้วจะอยู่นานและมั่นคงกว่าการยิงแอดครับ",
     },
     {
       question: "รับประกันอันดับ 1 ไหม?",
       answer:
-        "ไม่มีใครเป็นเจ้าของ Google ครับ ดังนั้นใครที่การันตีอันดับ 1 ให้คุณระวังไว้เลยว่าอาจใช้วิธีสายดำที่เสี่ยงโดนแบน แต่สิ่งที่เราการันตีได้คือ Traffic คุณภาพที่เพิ่มขึ้นและอันดับที่ดีขึ้นอย่างต่อเนื่องด้วยวิธีสายขาวที่ปลอดภัยและยั่งยืน 100% ครับ",
+        "เราไม่การันตีอันดับ 1 เพราะไม่มีใครควบคุม Google ได้ครับ แต่เราการันตี Traffic คุณภาพและการเติบโตที่ตรวจสอบได้ ด้วยวิธีสายขาวที่ปลอดภัยต่อธุรกิจคุณครับ",
     },
     {
       question: "มีเว็บอยู่แล้ว ต้องทำใหม่ไหม?",
       answer:
-        "ไม่จำเป็นต้องทำใหม่เสมอไปครับ ทีมงานจะเข้าไป Audit เว็บเดิมก่อน ถ้าโครงสร้างพอไปไหวเราจะปรับปรุงจากของเดิม แต่ถ้าของเดิมเขียนโค้ดมาไม่ดีจนเป็นภาระ เราจะแนะนำทางเลือกที่คุ้มค่าที่สุดให้คุณพิจารณาก่อนเริ่มงานครับ",
+        "เราจะช่วยตรวจเช็คให้ก่อนครับ ถ้าโครงสร้างเดิมดีอยู่แล้วก็ปรับปรุงต่อได้เลย แต่ถ้าโครงสร้างเก่าเป็นอุปสรรคต่อการเติบโต เราจะแนะนำทางเลือกที่คุ้มค่าที่สุดให้ครับ",
     },
     {
-      question: "มีรายงานผลให้ดูไหม จะรู้ได้ยังไงว่าคุ้มค่าจ้าง?",
+      question: "มีรายงานผลให้ดูไหม?",
       answer:
-        "เรามี Dashboard รายงานผลที่อ่านง่าย ไม่ใช้ภาษายากๆ ให้ปวดหัวครับ คุณจะเห็นเลยว่าเดือนนี้มีคนเข้าเว็บเพิ่มกี่คน มาจากคำว่าอะไรบ้าง และที่สำคัญคือเกิดยอดขายเท่าไหร่ เราเน้นความโปร่งใส ตรวจสอบการทำงานย้อนหลังได้ทุกเดือนครับ",
+        "มีรายงานรายเดือนที่อ่านเข้าใจง่ายครับ เน้นตัวเลขที่สำคัญกับธุรกิจ เช่น ยอดคนเข้าชมคุณภาพ และโอกาสในการขาย เพื่อให้คุณเห็นความคุ้มค่าครับ",
     },
     {
-      question: "เลือกคีย์เวิร์ดเองได้ไหม หรือทีมงานเลือกให้?",
+      question: "เลือกคีย์เวิร์ดเองได้ไหม?",
       answer:
-        "ลูกค้าเสนอได้ครับ แต่เราขออนุญาตทำหน้าที่ที่ปรึกษา ช่วยสแกนดูว่าคีย์เวิร์ดนั้น 'ทำเงิน' จริงไหม บางคำคนค้นหาเยอะแต่แค่มาหาความรู้เฉยๆ ไม่ได้กะซื้อ เราจะคัดกรองคำที่คนพร้อมจ่ายเงินจริงๆ มาให้เลือก เพื่อให้คุ้มค่างบประมาณที่สุดครับ",
+        "ได้ครับ แต่เราจะช่วยวิเคราะห์ให้ด้วยว่าคำไหนที่มีคนค้นหาแล้ว 'ซื้อจริง' เพื่อให้งบประมาณของคุณถูกใช้อย่างมีประสิทธิภาพที่สุดครับ",
     },
     {
-      question: "ถ้าจบสัญญาแล้วหยุดทำ อันดับจะหายไปเลยไหม?",
+      question: "ถ้าหยุดทำ อันดับจะหายไหม?",
       answer:
-        "ไม่หายวับไปทันทีเหมือนหยุดยิงแอดครับ นี่คือเสน่ห์ของ SEO เพราะสิ่งที่เราสร้างไว้คือสินทรัพย์ของคุณ แต่อาจจะค่อยๆ แผ่วลงถ้าคู่แข่งขยับตัวแรง ดังนั้นถ้าติดลมบนแล้ว อาจจะปรับมาเป็นแพ็กเกจดูแลรักษาระดับเบาๆ เพื่อประคองอันดับไว้ก็ได้ครับ",
+        "ไม่หายทันทีครับ นี่คือข้อดีของ SEO แต่อาจจะค่อยๆ ลดลงถ้าคู่แข่งทำต่อเนื่อง ดังนั้นเมื่อติดอันดับแล้ว อาจปรับเป็นแพ็กเกจดูแลรักษาเพื่อประคองอันดับได้ครับ",
     },
   ],
 
-  // [KEYWORD_INJECTION]: คีย์เวิร์ดเน้นๆ สำหรับดักลูกค้าเข้าหน้านี้
   keywords: [
     "รับทำ SEO สายขาว",
     "บริษัทรับทำ SEO",
-    "ปรับปรุงเว็บไซต์ให้ติดหน้าแรก",
-    "SEO Audit เว็บไซต์",
-    "จ้างทำ SEO ที่ไหนดี",
+    "ปรับปรุงเว็บไซต์ติดหน้าแรก",
     "Technical SEO Specialist",
-    "Content Marketing สาย SEO",
-    "ทำ SEO เพิ่มยอดขาย",
+    "SEO Audit เว็บไซต์",
+    "Content Marketing SEO",
   ],
 
   priority: 1,
   isFeatured: true,
 };
+
 ```
-
 ### CONFIG: site-config.ts
-
 `Path: constants/site-config.ts`
-
 ```typescript
 /**
- * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.0 (UNIVERSAL_SYNC)
- * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT
+ * [SYSTEM CORE]: GLOBAL_SITE_CONFIGURATION v18.0.1 (UNIVERSAL_SYNC)
+ * [STRATEGY]: AI-Search Domination | E-E-A-T Authority | SSOT (Single Source of Truth)
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [FRAMEWORK]: Next.js 16.1.6 | React 19 | Tailwind CSS 4.0
+ * [CHANGELOG]: 
+ * - Integrated LinkedIn Professional Profile (alongkorl-aemdevweb).
+ * - Synchronized Link Registry for Schema Injection.
  */
 
 import type { SiteConfig } from "@/types";
 
+/**
+ * [RESOURCE_NODES]: พิกัดและทรัพยากรภายนอกที่สำคัญ
+ */
 const GOOGLE_MAPS_URL = "https://share.google/MMWnXPv3evv4Qd8aC";
 
 export const SITE_CONFIG: SiteConfig = {
@@ -5263,7 +5240,7 @@ export const SITE_CONFIG: SiteConfig = {
   // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
   ogImage: "/images/og-main.webp",
   locale: "th_TH",
-  themeColor: "#ef4444",
+  themeColor: "#ef4444", // Tailwind Red 500 (HEX Standard)
 
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
@@ -5279,6 +5256,9 @@ export const SITE_CONFIG: SiteConfig = {
     antiConnotation: "No Fluff, No Robot-speak, Avoid Over-promising",
   },
 
+  /**
+   * [SEO_REGISTRY]: คำค้นหาที่มีนัยสำคัญต่อการทำ Conversion รายภูมิภาค
+   */
   keywords: [
     "รับทำเว็บไซต์",
     "รับทำ SEO สายขาว",
@@ -5298,11 +5278,14 @@ export const SITE_CONFIG: SiteConfig = {
   project: {
     title: "AEMDEVWEB | High-End Web & SEO Expert Hub (นายเอ็มซ่ามากส์)",
     shortTitle: "AEMDEVWEB",
-    version: "18.0.0",
-    framework: "Next.js 15.x (App Router)",
+    version: "18.0.1",
+    framework: "Next.js 16.1.6 (App Router)",
     uiStack: "React 19 + Tailwind CSS 4",
   },
 
+  /**
+   * [EXPERT_IDENTITY]: การฉีดตัวตน (EEAT) เพื่อการยืนยันผู้เชี่ยวชาญใน Knowledge Graph
+   */
   expert: {
     displayName: "นายเอ็มซ่ามากส์",
     legalName: "Alongkorn Yomkerd",
@@ -5316,6 +5299,7 @@ export const SITE_CONFIG: SiteConfig = {
     bio: "ผู้เชี่ยวชาญด้านวิศวกรรมเว็บไซต์และ Technical SEO ที่เน้นการสร้างผลลัพธ์ทางธุรกิจผ่านโครงสร้างพื้นฐานดิจิทัลที่แม่นยำและล้ำสมัย",
     googleMerchantId: "8653147979146207424",
     twitterHandle: "@aemdevweb",
+    linkedinUrl: "https://th.linkedin.com/in/alongkorl-aemdevweb",
   },
 
   contact: {
@@ -5329,12 +5313,16 @@ export const SITE_CONFIG: SiteConfig = {
     mapUrl: GOOGLE_MAPS_URL,
   },
 
+  /**
+   * [LINK_REGISTRY]: แหล่งรวม Social Graph ทั้งหมด
+   */
   links: {
     line: "https://lin.ee/kVRNkIy",
     lineId: "@127cnhtn",
     messenger: "https://m.me/aemdevweb",
     facebook: "https://www.facebook.com/share/18HFcziyn7/",
     github: "https://github.com/aemdevweb",
+    linkedin: "https://th.linkedin.com/in/alongkorl-aemdevweb", // [ADDED]: เพื่อแก้ Error Runtime และสร้าง Author Graph
     twitter: "https://x.com/aemdevweb",
     youtube: "https://youtube.com/@aemdevweb",
     googleMaps: GOOGLE_MAPS_URL,
@@ -5355,96 +5343,96 @@ export const SITE_CONFIG: SiteConfig = {
     },
   },
 
-  analytics: { gaId: "G-XXXXXXXXXX" },
+  analytics: {
+    gaId: "G-XXXXXXXXXX",
+  },
 
   verification: {
     google: "HmlcGbJ8eKWuc1QN_UUpBQ",
     facebook: "fb_domain_verification_id",
   },
 } as const;
+
 ```
 
 ---
 
 ## DIRECTORY INFRASTRUCTURE
-
 ```text
-[3.4K 2026-02-19 00:45]  .
-├── [340K 2026-02-19 00:45]  README.md
-├── [1.5K 2026-02-18 21:37]  a.sh
-├── [3.4K 2026-02-18 21:37]  app
+[3.4K 2026-02-19 20:10]  .
+├── [328K 2026-02-19 20:10]  README.md
+├── [3.4K 2026-02-19 01:08]  app
 │   ├── [3.4K 2026-02-18 21:37]  (business)
 │   │   ├── [3.4K 2026-02-18 21:37]  areas
 │   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
-│   │   │   │   └── [5.5K 2026-02-18 21:37]  page.tsx
-│   │   │   └── [6.4K 2026-02-18 21:37]  page.tsx
+│   │   │   │   └── [4.7K 2026-02-19 08:11]  page.tsx
+│   │   │   └── [7.4K 2026-02-19 01:37]  page.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  blog
 │   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
 │   │   │   │   └── [4.7K 2026-02-18 21:37]  page.tsx
-│   │   │   └── [4.8K 2026-02-18 21:37]  page.tsx
+│   │   │   └── [6.2K 2026-02-19 01:37]  page.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  case-studies
 │   │   │   ├── [3.4K 2026-02-18 21:37]  [slug]
 │   │   │   │   └── [5.1K 2026-02-18 21:37]  page.tsx
-│   │   │   └── [4.0K 2026-02-18 21:37]  page.tsx
-│   │   └── [1.5K 2026-02-18 21:37]  layout.tsx
+│   │   │   └── [6.7K 2026-02-19 01:37]  page.tsx
+│   │   └── [2.3K 2026-02-19 01:37]  layout.tsx
+│   ├── [3.4K 2026-02-19 01:08]  (conversion)
+│   │   ├── [1.1K 2026-02-19 02:54]  layout.tsx
+│   │   └── [3.4K 2026-02-19 01:08]  services
+│   │       ├── [3.4K 2026-02-19 01:08]  [slug]
+│   │       │   └── [4.8K 2026-02-19 08:11]  page.tsx
+│   │       └── [6.8K 2026-02-19 01:37]  page.tsx
 │   ├── [3.4K 2026-02-18 21:37]  (main)
 │   │   ├── [3.4K 2026-02-18 21:37]  about
 │   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
-│   │   ├── [2.0K 2026-02-19 00:11]  layout.tsx
-│   │   ├── [8.4K 2026-02-19 00:11]  page.tsx
+│   │   ├── [2.0K 2026-02-19 18:40]  layout.tsx
+│   │   ├── [9.3K 2026-02-19 19:26]  page.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  privacy
 │   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  status
 │   │   │   └── [ 12K 2026-02-18 21:37]  page.tsx
 │   │   └── [3.4K 2026-02-18 21:37]  terms
 │   │       └── [ 12K 2026-02-18 21:37]  page.tsx
-│   ├── [3.4K 2026-02-18 21:37]  (sales)
-│   │   ├── [1.1K 2026-02-18 21:37]  layout.tsx
-│   │   └── [3.4K 2026-02-18 21:37]  services
-│   │       ├── [3.4K 2026-02-18 21:37]  [slug]
-│   │       │   └── [4.7K 2026-02-18 21:37]  page.tsx
-│   │       └── [7.4K 2026-02-18 21:37]  page.tsx
-│   ├── [3.8K 2026-02-18 21:37]  globals.css
-│   ├── [3.8K 2026-02-19 00:10]  layout.tsx
+│   ├── [4.0K 2026-02-19 18:01]  globals.css
+│   ├── [5.4K 2026-02-19 19:34]  layout.tsx
 │   ├── [4.2K 2026-02-18 21:37]  loading.tsx
 │   ├── [3.5K 2026-02-18 21:37]  manifest.ts
 │   ├── [6.2K 2026-02-18 21:37]  not-found.tsx
-│   ├── [2.0K 2026-02-18 21:37]  robots.ts
-│   ├── [3.8K 2026-02-18 21:37]  sitemap.ts
+│   ├── [ 775 2026-02-19 01:37]  robots.ts
+│   ├── [3.8K 2026-02-19 01:37]  sitemap.ts
 │   └── [2.8K 2026-02-18 21:37]  template.tsx
 ├── [3.4K 2026-02-18 21:37]  components
 │   ├── [3.4K 2026-02-18 21:37]  features
 │   │   ├── [3.4K 2026-02-18 21:37]  areas
-│   │   │   └── [6.7K 2026-02-18 21:37]  AreaCard.tsx
+│   │   │   └── [7.6K 2026-02-19 18:01]  AreaCard.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  blog
-│   │   │   └── [5.4K 2026-02-18 21:37]  BlogCard.tsx
+│   │   │   └── [5.7K 2026-02-19 18:01]  BlogCard.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  case-studies
-│   │   │   └── [6.1K 2026-02-18 21:37]  CaseStudyCard.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  landing
-│   │   │   ├── [ 10K 2026-02-18 21:37]  PricingSection.tsx
-│   │   │   └── [ 10K 2026-02-18 21:37]  WorkProcess.tsx
+│   │   │   └── [6.4K 2026-02-19 18:53]  CaseStudyCard.tsx
+│   │   ├── [3.4K 2026-02-19 19:00]  landing
+│   │   │   ├── [8.6K 2026-02-19 19:00]  PricingSection.tsx
+│   │   │   └── [9.9K 2026-02-19 18:01]  WorkProcess.tsx
 │   │   └── [3.4K 2026-02-18 21:37]  services
-│   │       ├── [7.1K 2026-02-18 21:37]  ServiceCard.tsx
-│   │       └── [4.2K 2026-02-18 21:37]  ServiceListingHub.tsx
+│   │       ├── [7.1K 2026-02-19 18:52]  ServiceCard.tsx
+│   │       └── [4.4K 2026-02-19 18:01]  ServiceListingHub.tsx
 │   ├── [3.4K 2026-02-18 21:37]  layout
-│   │   ├── [6.1K 2026-02-18 21:37]  Footer.tsx
-│   │   ├── [9.7K 2026-02-18 21:37]  Navbar.tsx
+│   │   ├── [6.4K 2026-02-19 18:01]  Footer.tsx
+│   │   ├── [8.7K 2026-02-19 18:47]  Navbar.tsx
 │   │   ├── [2.4K 2026-02-18 21:37]  PageTransition.tsx
 │   │   └── [1.9K 2026-02-18 21:37]  TopLoader.tsx
 │   ├── [3.4K 2026-02-18 21:37]  providers
-│   │   ├── [1.7K 2026-02-18 21:37]  ClientInfrastructure.tsx
+│   │   ├── [1.6K 2026-02-19 17:08]  ClientInfrastructure.tsx
 │   │   └── [1.1K 2026-02-18 21:37]  ThemeProvider.tsx
-│   ├── [3.4K 2026-02-18 21:37]  seo
-│   │   └── [2.5K 2026-02-18 21:37]  JsonLd.tsx
+│   ├── [3.4K 2026-02-19 01:36]  seo
+│   │   └── [1.8K 2026-02-19 01:37]  JsonLd.tsx
 │   ├── [3.4K 2026-02-18 21:37]  shared
-│   │   ├── [7.2K 2026-02-18 21:37]  ConversionCTA.tsx
+│   │   ├── [3.9K 2026-02-19 08:11]  ConversionCTA.tsx
 │   │   ├── [2.7K 2026-02-18 21:37]  FloatingContainer.tsx
 │   │   ├── [6.2K 2026-02-18 21:37]  ImpactStats.tsx
-│   │   ├── [4.1K 2026-02-18 21:37]  LineStickyButton.tsx
+│   │   ├── [5.3K 2026-02-19 01:37]  LineStickyButton.tsx
 │   │   └── [5.7K 2026-02-18 21:37]  TrustBadge.tsx
-│   ├── [3.4K 2026-02-18 21:37]  templates
-│   │   ├── [2.5K 2026-02-18 21:37]  DynamicThemeWrapper.tsx
-│   │   ├── [3.4K 2026-02-18 21:37]  TemplateRenderer.tsx
+│   ├── [3.4K 2026-02-19 07:30]  templates
+│   │   ├── [3.3K 2026-02-19 08:11]  TemplateRenderer.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  bio
 │   │   │   ├── [4.7K 2026-02-18 21:37]  Index.tsx
 │   │   │   └── [3.4K 2026-02-18 21:37]  _components
@@ -5455,7 +5443,7 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │       ├── [2.0K 2026-02-18 21:37]  IdentityNode.tsx
 │   │   │       └── [4.7K 2026-02-18 21:37]  ProjectHighlight.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  catalog
-│   │   │   ├── [5.5K 2026-02-18 21:37]  Index.tsx
+│   │   │   ├── [5.5K 2026-02-19 19:42]  Index.tsx
 │   │   │   └── [3.4K 2026-02-18 21:37]  _components
 │   │   │       ├── [2.1K 2026-02-18 21:37]  CatalogHeader.tsx
 │   │   │       ├── [2.2K 2026-02-18 21:37]  InquiryPortal.tsx
@@ -5492,8 +5480,8 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │       ├── [3.5K 2026-02-18 21:37]  MarketIntelligence.tsx
 │   │   │       └── [2.2K 2026-02-18 21:37]  RegionalAction.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  salepage
-│   │   │   ├── [8.4K 2026-02-18 21:37]  Index.tsx
-│   │   │   └── [3.4K 2026-02-18 21:37]  _components
+│   │   │   ├── [9.1K 2026-02-19 02:14]  Index.tsx
+│   │   │   └── [3.4K 2026-02-19 02:11]  _components
 │   │   │       ├── [ 10K 2026-02-18 21:37]  DirectOrderForm.tsx
 │   │   │       ├── [4.5K 2026-02-18 21:37]  FeatureComparison.tsx
 │   │   │       ├── [5.5K 2026-02-18 21:37]  FlashSaleTimer.tsx
@@ -5503,69 +5491,69 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   │       ├── [3.6K 2026-02-18 21:37]  StickyBuyButton.tsx
 │   │   │       └── [7.7K 2026-02-18 21:37]  ThaiTrustBadge.tsx
 │   │   ├── [3.4K 2026-02-18 21:37]  sections
-│   │   │   ├── [6.8K 2026-02-18 21:37]  DynamicFAQ.tsx
+│   │   │   ├── [6.5K 2026-02-19 08:11]  DynamicFAQ.tsx
 │   │   │   ├── [6.0K 2026-02-18 21:37]  FeatureGrid.tsx
-│   │   │   ├── [7.1K 2026-02-18 21:37]  HeroEngine.tsx
-│   │   │   └── [5.1K 2026-02-18 21:37]  LayoutEngine.tsx
+│   │   │   ├── [7.4K 2026-02-19 17:02]  HeroEngine.tsx
+│   │   │   └── [3.7K 2026-02-19 19:45]  LayoutEngine.tsx
 │   │   └── [3.4K 2026-02-18 21:37]  seo-agency
-│   │       ├── [4.7K 2026-02-18 21:37]  Index.tsx
+│   │       ├── [4.0K 2026-02-19 02:54]  Index.tsx
 │   │       └── [3.4K 2026-02-18 21:37]  _components
-│   │           ├── [2.5K 2026-02-18 21:37]  AuditHero.tsx
-│   │           ├── [9.9K 2026-02-18 21:37]  AuditReportGenerator.tsx
-│   │           ├── [1.4K 2026-02-18 21:37]  ConversionPortal.tsx
-│   │           ├── [2.3K 2026-02-18 21:37]  KeywordRegistry.tsx
-│   │           ├── [2.0K 2026-02-18 21:37]  PerformanceTrajectory.tsx
+│   │           ├── [6.3K 2026-02-19 02:14]  AuditHero.tsx
+│   │           ├── [ 11K 2026-02-19 02:14]  AuditReportGenerator.tsx
+│   │           ├── [9.1K 2026-02-19 02:14]  ConversionPortal.tsx
+│   │           ├── [7.1K 2026-02-19 02:14]  KeywordRegistry.tsx
+│   │           ├── [7.5K 2026-02-19 02:54]  PerformanceTrajectory.tsx
 │   │           └── [3.6K 2026-02-18 21:37]  StrategyBlueprint.tsx
 │   └── [3.4K 2026-02-18 21:37]  ui
 │       ├── [2.1K 2026-02-18 21:37]  Accordion.tsx
 │       ├── [4.0K 2026-02-18 21:37]  AmbientBackground.tsx
 │       ├── [3.9K 2026-02-18 21:37]  Button.tsx
 │       ├── [1.5K 2026-02-18 21:37]  Callout.tsx
-│       ├── [5.0K 2026-02-18 21:37]  IconRenderer.tsx
+│       ├── [4.9K 2026-02-19 02:14]  IconRenderer.tsx
 │       ├── [ 931 2026-02-18 21:37]  Skeleton.tsx
 │       ├── [2.8K 2026-02-18 21:37]  SkeletonCard.tsx
 │       ├── [2.1K 2026-02-18 21:37]  SkeletonGrid.tsx
 │       ├── [2.9K 2026-02-18 21:37]  Sonner.tsx
-│       └── [2.9K 2026-02-18 21:37]  ThemeToggle.tsx
+│       └── [3.8K 2026-02-19 18:43]  ThemeToggle.tsx
 ├── [ 425 2026-02-18 21:37]  components.json
 ├── [3.4K 2026-02-18 21:37]  config
 │   ├── [5.1K 2026-02-18 21:37]  00-SYSTEM-MANDATE.md
 │   └── [5.3K 2026-02-18 21:37]  01-SYSTEM-PROMPT-EXTENSION.md
 ├── [3.4K 2026-02-18 22:29]  constants
 │   ├── [3.4K 2026-02-18 21:37]  area-nodes
-│   │   ├── [6.8K 2026-02-18 21:37]  bangkok.ts
-│   │   ├── [ 11K 2026-02-18 21:37]  chiang-mai.ts
-│   │   ├── [ 12K 2026-02-18 21:37]  chiang-rai.ts
-│   │   ├── [ 13K 2026-02-18 21:37]  chon-buri.ts
-│   │   ├── [ 12K 2026-02-18 21:37]  chumphon.ts
+│   │   ├── [9.9K 2026-02-19 06:20]  bangkok.ts
+│   │   ├── [9.5K 2026-02-19 06:20]  chiang-mai.ts
+│   │   ├── [ 11K 2026-02-19 06:20]  chiang-rai.ts
+│   │   ├── [ 10K 2026-02-19 06:20]  chon-buri.ts
+│   │   ├── [ 11K 2026-02-19 06:20]  chumphon.ts
 │   │   ├── [2.4K 2026-02-18 21:37]  index.ts
-│   │   ├── [6.6K 2026-02-18 21:37]  kamphaeng-phet.ts
-│   │   ├── [5.6K 2026-02-18 21:37]  khon-kaen.ts
-│   │   ├── [ 12K 2026-02-18 21:37]  korat.ts
-│   │   ├── [ 13K 2026-02-18 21:37]  lampang.ts
-│   │   ├── [ 13K 2026-02-18 21:37]  mae-hong-son.ts
-│   │   ├── [ 15K 2026-02-18 21:37]  nakhon-sawan.ts
-│   │   ├── [5.4K 2026-02-18 21:37]  phang-nga.ts
-│   │   ├── [ 15K 2026-02-18 21:37]  phichit.ts
-│   │   ├── [ 15K 2026-02-18 21:37]  phitsanulok.ts
-│   │   ├── [ 15K 2026-02-18 21:37]  phuket.ts
-│   │   ├── [6.6K 2026-02-18 21:37]  ranong.ts
-│   │   ├── [6.4K 2026-02-18 21:37]  sukhothai.ts
-│   │   ├── [ 13K 2026-02-18 21:37]  surat-thani.ts
-│   │   ├── [ 15K 2026-02-18 21:37]  tak.ts
-│   │   └── [ 16K 2026-02-18 21:37]  uttaradit.ts
-│   ├── [ 12K 2026-02-19 00:35]  image-blur-data.ts
-│   ├── [2.4K 2026-02-18 21:37]  master-registry.ts
+│   │   ├── [ 10K 2026-02-19 06:20]  kamphaeng-phet.ts
+│   │   ├── [8.8K 2026-02-19 06:20]  khon-kaen.ts
+│   │   ├── [ 10K 2026-02-19 06:20]  korat.ts
+│   │   ├── [ 12K 2026-02-19 06:20]  lampang.ts
+│   │   ├── [ 12K 2026-02-19 06:20]  mae-hong-son.ts
+│   │   ├── [ 13K 2026-02-19 06:20]  nakhon-sawan.ts
+│   │   ├── [ 11K 2026-02-19 06:20]  phang-nga.ts
+│   │   ├── [ 13K 2026-02-19 06:20]  phichit.ts
+│   │   ├── [ 13K 2026-02-19 06:20]  phitsanulok.ts
+│   │   ├── [ 11K 2026-02-19 06:20]  phuket.ts
+│   │   ├── [ 11K 2026-02-19 06:20]  ranong.ts
+│   │   ├── [ 12K 2026-02-19 06:20]  sukhothai.ts
+│   │   ├── [ 12K 2026-02-19 06:20]  surat-thani.ts
+│   │   ├── [ 12K 2026-02-19 06:20]  tak.ts
+│   │   └── [ 12K 2026-02-19 06:20]  uttaradit.ts
+│   ├── [ 12K 2026-02-19 17:02]  image-blur-data.ts
+│   ├── [2.4K 2026-02-19 03:08]  master-registry.ts
 │   ├── [2.2K 2026-02-18 21:37]  navigation.ts
 │   ├── [3.4K 2026-02-18 21:37]  services
-│   │   ├── [7.9K 2026-02-18 21:37]  bio.ts
-│   │   ├── [5.7K 2026-02-18 21:37]  catalog.ts
-│   │   ├── [ 10K 2026-02-18 21:37]  corporate.ts
-│   │   ├── [ 10K 2026-02-18 21:37]  hotel-resort.ts
-│   │   ├── [8.4K 2026-02-18 21:37]  local-authority.ts
-│   │   ├── [ 10K 2026-02-18 21:37]  salepage.ts
-│   │   └── [ 12K 2026-02-18 21:37]  seo-agency.ts
-│   └── [4.8K 2026-02-18 21:37]  site-config.ts
+│   │   ├── [6.4K 2026-02-19 06:20]  bio.ts
+│   │   ├── [8.1K 2026-02-19 19:45]  catalog.ts
+│   │   ├── [6.5K 2026-02-19 06:20]  corporate.ts
+│   │   ├── [7.2K 2026-02-19 06:20]  hotel-resort.ts
+│   │   ├── [7.6K 2026-02-19 06:20]  local-authority.ts
+│   │   ├── [6.9K 2026-02-19 06:20]  salepage.ts
+│   │   └── [9.1K 2026-02-19 06:20]  seo-agency.ts
+│   └── [5.9K 2026-02-19 19:26]  site-config.ts
 ├── [3.4K 2026-02-18 21:37]  content
 │   ├── [3.4K 2026-02-18 21:37]  blog
 │   │   ├── [ 13K 2026-02-18 21:37]  5-points-killing-sales.mdx
@@ -5576,30 +5564,30 @@ export const SITE_CONFIG: SiteConfig = {
 │   │   ├── [ 11K 2026-02-18 21:37]  ecommerce-conversion-seo.mdx
 │   │   ├── [ 11K 2026-02-18 21:37]  facebook-ads-vs-website.mdx
 │   │   ├── [ 12K 2026-02-18 21:37]  lower-north-digital-transformation.mdx
-│   │   ├── [ 10K 2026-02-18 21:37]  seo-2026-strategy.mdx
+│   │   ├── [ 10K 2026-02-19 20:09]  seo-2026-strategy.mdx
 │   │   └── [ 11K 2026-02-18 21:37]  technical-audit-protocol.mdx
 │   └── [3.4K 2026-02-18 21:37]  case-studies
 │       ├── [ 12K 2026-02-18 21:37]  case-study-industrial-catalog.mdx
 │       ├── [ 11K 2026-02-18 21:37]  provincial-digital-domination.mdx
 │       └── [ 11K 2026-02-18 21:37]  unlink-reputation-management-success.mdx
 ├── [2.4K 2026-02-18 21:37]  eslint.config.mjs
-├── [ 366 2026-02-18 21:37]  knip.json
+├── [ 393 2026-02-19 07:31]  knip.json
 ├── [3.4K 2026-02-18 21:37]  lib
 │   ├── [4.9K 2026-02-18 21:37]  cms.ts
 │   ├── [3.8K 2026-02-18 21:37]  data-merger.ts
 │   ├── [3.6K 2026-02-18 21:37]  schema-validator.ts
-│   ├── [5.4K 2026-02-19 00:08]  schema.ts
+│   ├── [5.7K 2026-02-19 19:27]  schema.ts
 │   ├── [2.9K 2026-02-18 21:37]  seo-utils.ts
-│   └── [4.2K 2026-02-18 21:37]  utils.ts
+│   └── [4.6K 2026-02-19 17:16]  utils.ts
 ├── [2.6K 2026-02-18 21:37]  mdx-components.tsx
-├── [ 247 2026-02-18 22:34]  next-env.d.ts
-├── [3.9K 2026-02-18 22:59]  next.config.ts
-├── [3.2K 2026-02-18 21:37]  package.json
-├── [301K 2026-02-18 23:22]  pnpm-lock.yaml
+├── [ 247 2026-02-19 19:48]  next-env.d.ts
+├── [5.2K 2026-02-19 05:00]  next.config.ts
+├── [3.1K 2026-02-19 07:14]  package.json
+├── [279K 2026-02-19 18:42]  pnpm-lock.yaml
 ├── [  51 2026-02-18 21:37]  pnpm-workspace.yaml
 ├── [1.1K 2026-02-18 21:37]  postcss.config.mjs
 ├── [3.4K 2026-02-18 21:37]  public
-│   └── [3.4K 2026-02-18 21:37]  images
+│   └── [3.4K 2026-02-19 01:52]  images
 │       ├── [3.4K 2026-02-18 21:37]  areas
 │       ├── [3.4K 2026-02-18 21:37]  blog
 │       ├── [3.4K 2026-02-18 21:37]  case-studies
@@ -5607,30 +5595,30 @@ export const SITE_CONFIG: SiteConfig = {
 │       ├── [3.4K 2026-02-18 21:37]  seo
 │       ├── [3.4K 2026-02-18 21:37]  services
 │       └── [3.4K 2026-02-18 21:37]  shared
-├── [3.4K 2026-02-18 22:28]  scripts
-│   ├── [6.1K 2026-02-19 00:35]  audit-system.sh
+├── [3.4K 2026-02-19 08:10]  scripts
+│   ├── [5.2K 2026-02-19 07:21]  asset-integrity-protocol.mjs
 │   ├── [4.2K 2026-02-18 21:37]  gen-blur-data.mjs
 │   ├── [4.5K 2026-02-18 21:37]  generate_docs.sh
-│   ├── [5.2K 2026-02-18 21:37]  image-audit.mjs
 │   ├── [3.0K 2026-02-19 00:11]  index-urls.js
-│   ├── [ 14K 2026-02-18 21:37]  master_audit.py
+│   ├── [7.3K 2026-02-19 07:20]  integrity-enforcer.py
 │   ├── [5.7K 2026-02-18 21:37]  seo-monitor.py
+│   ├── [3.6K 2026-02-19 08:11]  seo-structure-audit.mjs
+│   ├── [3.3K 2026-02-19 07:27]  system-integrity-gatekeeper.sh
+│   ├── [2.6K 2026-02-19 08:11]  template-audit.mjs
 │   └── [3.7K 2026-02-18 21:37]  test-schema.ts
 ├── [2.3K 2026-02-18 23:43]  service-account.json
-├── [ 14K 2026-02-19 00:35]  structure.txt
 ├── [ 748 2026-02-18 21:37]  tsconfig.json
-├── [141K 2026-02-19 00:29]  tsconfig.tsbuildinfo
+├── [138K 2026-02-19 19:31]  tsconfig.tsbuildinfo
 └── [3.4K 2026-02-18 21:37]  types
-    ├── [9.7K 2026-02-18 21:37]  index.d.ts
+    ├── [9.9K 2026-02-19 19:31]  index.d.ts
     └── [4.0K 2026-02-18 21:37]  template-props.ts
 
-64 directories, 190 files
+64 directories, 189 files
 ```
 
 ---
 
 ## BUILD ARTIFACT ANALYSIS (.next/static)
-
 ```text
 Total Size:
 2.2M	.next/static
@@ -5639,11 +5627,11 @@ Top 10 Largest Assets:
 196K	.next/static/chunks/fb371ac7-52aeb6ea90939da9.js
 188K	.next/static/chunks/6594-1a8f9d17d7f0d390.js
 180K	.next/static/chunks/framework-bc511be5d789680f.js
-144K	.next/static/css/37748f948c63b00f.css
+152K	.next/static/css/6c49edc2d6dc58d9.css
+136K	.next/static/chunks/5378-617ccfc1607d00ae.js
 132K	.next/static/chunks/main-41868e4c6eab357c.js
-132K	.next/static/chunks/5378-3c2bf160639a0e50.js
 124K	.next/static/chunks/7112-28d45d301d8de93d.js
 112K	.next/static/chunks/polyfills-42372ed130431b0a.js
 84K	.next/static/media/8e9860b6e62d6359-s.woff2
-68K	.next/static/chunks/7799-a526fa5123dd6cac.js
+68K	.next/static/chunks/7799-de5bfdfea7a4cba0.js
 ```

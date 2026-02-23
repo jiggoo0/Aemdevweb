@@ -108,7 +108,7 @@ export default async function AreaPage(props: PageProps) {
       {/* [RENDER_LAYER]: ปล่อยให้ TemplateRenderer จัดการ Visual Shell ทั้งหมด 
           เพื่อให้สีแบรนด์และ Spacing ของแต่ละจังหวัดทำงานได้ลื่นไหลที่สุด
       */}
-      <TemplateRenderer data={templateData} renderMode="full" />
+      {await TemplateRenderer({ data: templateData, renderMode: "full" })}
 
       {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">

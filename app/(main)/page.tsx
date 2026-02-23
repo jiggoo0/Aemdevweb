@@ -34,8 +34,7 @@ import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
 
-// [ISR]: Optimal revalidation cycle for high-performance indexing
-export const revalidate = 3600;
+// [ISR]: Optimal revalidation cycle (Refactored to lib/cms.ts)
 
 // --- 5. Deferred UI (Dynamic Imports for TBT Optimization) ---
 const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (

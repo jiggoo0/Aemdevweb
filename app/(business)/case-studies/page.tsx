@@ -22,8 +22,7 @@ import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-/** [STRATEGY]: บังคับ Static Generation พร้อม Revalidate ทุก 1 ชั่วโมง (ISR) */
-export const revalidate = 3600;
+/** [STRATEGY]: บังคับ Static Generation พร้อม Revalidate ทุก 1 ชั่วโมง (Refactored to lib/cms.ts) */
 
 /** [VIEWPORT]: Mobile-First Theme Integration */
 export const viewport: Viewport = {

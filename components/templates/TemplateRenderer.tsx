@@ -1,12 +1,11 @@
 /**
- * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.6 (IDENTITY_INTEGRATED)
- * [STRATEGY]: Blueprint Orchestration | Layout Engine Integration | Zero-Jank
+ * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.7 (IDENTITY_INTEGRATED)
+ * [STRATEGY]: Server-Side Cache | Blueprint Orchestration | Zero-Jank
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
-import React, { memo } from "react";
+import React from "react";
+import { cacheLife, cacheTag } from "next/cache";
 import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 
 // --- 1. Infrastructure (Integrated Identity Shell) ---
@@ -37,7 +36,11 @@ const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> 
   "seo-agency": SeoAgencyTemplate,
 };
 
-export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRendererProps) => {
+export async function TemplateRenderer({ data, renderMode = "full" }: TemplateRendererProps) {
+  "use cache";
+  cacheLife("days");
+  cacheTag("template-renderer", data.templateSlug, data.id);
+
   if (!data || !data.templateSlug) {
     console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
     return null;
@@ -55,9 +58,7 @@ export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRen
       <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />
     </LayoutEngine>
   );
-});
-
-TemplateRenderer.displayName = "TemplateRenderer";
+}
 
 /** [SUB-COMPONENT]: TemplateNotFound (Debugger View) */
 const TemplateNotFound = ({ data }: { data: UniversalTemplateProps }) => (

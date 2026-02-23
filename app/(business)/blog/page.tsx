@@ -21,8 +21,7 @@ import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import BlogCard from "@/components/features/blog/BlogCard";
 
-/** [STRATEGY]: บังคับอัปเดต Content ทุก 1 ชม. โดยไม่ต้อง Rebuild ทั้งระบบ (ISR) */
-export const revalidate = 3600;
+/** [STRATEGY]: บังคับอัปเดต Content ทุก 1 ชม. โดยไม่ต้อง Rebuild ทั้งระบบ (Refactored to lib/cms.ts) */
 
 /** [VIEWPORT]: Mobile-First Theme Integration */
 export const viewport: Viewport = {
