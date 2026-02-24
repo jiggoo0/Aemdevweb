@@ -27,15 +27,10 @@ import IconRenderer from "@/components/ui/IconRenderer";
 
 // --- 4. Critical UI (Synchronous for LCP) ---
 import HeroEngine from "@/components/templates/sections/HeroEngine";
-import TrustBadge from "@/components/shared/TrustBadge";
-import ImpactStats from "@/components/shared/ImpactStats";
 import ServiceCard from "@/components/features/services/ServiceCard";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
-
-// [ISR]: Optimal revalidation cycle for high-performance indexing
-export const revalidate = 3600;
 
 // --- 5. Deferred UI (Dynamic Imports for TBT Optimization) ---
 const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (
@@ -48,6 +43,14 @@ const LoadingSkeleton = ({ height, className }: { height: string; className?: st
   />
 );
 
+const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), {
+  ssr: true,
+});
+
+const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), {
+  ssr: true,
+});
+
 const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
   loading: () => <LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />,
   ssr: true,
@@ -57,6 +60,9 @@ const PricingSection = dynamic(() => import("@/components/features/landing/Prici
   loading: () => <LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />,
   ssr: true,
 });
+
+// [ISR]: Optimal revalidation cycle for high-performance indexing
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
@@ -131,9 +137,13 @@ export default async function HomePage() {
           <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
             <h2 className="sr-only">Authority and Infrastructure Performance Hub</h2>
             <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
-              <TrustBadge />
+              <Suspense fallback={<div className="h-20 w-full animate-pulse rounded-full bg-surface-card/10" />}>
+                <TrustBadge />
+              </Suspense>
               <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
-              <ImpactStats />
+              <Suspense fallback={<div className="h-64 w-full animate-pulse rounded-section bg-surface-card/10" />}>
+                <ImpactStats />
+              </Suspense>
             </div>
             <div className="bg-brand-primary/10 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
           </div>

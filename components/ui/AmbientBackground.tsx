@@ -1,13 +1,10 @@
 /**
- * [UI COMPONENT]: AMBIENT_BACKGROUND v18.0.2 (AURA_ENGINE_OPTIMIZED)
- * [STRATEGY]: Adaptive Fluidity | GPU Conservation | Static Aura for Mobile
+ * [UI COMPONENT]: AMBIENT_BACKGROUND v18.0.5 (CSS_ACCELERATED)
+ * [STRATEGY]: CSS Keyframes | Compositor Orchestration | Zero-JS Hydration
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
-import React, { memo, useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { memo } from "react";
 import { cn } from "@/lib/utils";
 
 interface AmbientBackgroundProps {
@@ -16,19 +13,13 @@ interface AmbientBackgroundProps {
   readonly opacity?: number;
 }
 
+/**
+ * @component AmbientBackground
+ * @description หน่วยประมวลผลพื้นหลังแบบไดนามิกที่ใช้ CSS Animation (60fps)
+ * [OPTIMIZATION]: ย้าย Logic การทำแอนิเมชันจาก JS ไปยัง CSS Engine ของเบราว์เซอร์
+ * เพื่อลด Total Blocking Time (TBT) และประหยัดแบตเตอรี่บน Mobile
+ */
 const AmbientBackground = ({ className, color, opacity = 1 }: AmbientBackgroundProps) => {
-  // [PERFORMANCE]: ตรวจสอบสถานะ Mobile เพื่อหยุด Animation ที่กินทรัพยากร
-  const [isLowPowerMode, setIsLowPowerMode] = useState(false);
-
-  useEffect(() => {
-    const checkPerformanceMode = () => {
-      setIsLowPowerMode(window.innerWidth < 768);
-    };
-    checkPerformanceMode();
-    window.addEventListener("resize", checkPerformanceMode);
-    return () => window.removeEventListener("resize", checkPerformanceMode);
-  }, []);
-
   return (
     <div
       className={cn(
@@ -44,51 +35,21 @@ const AmbientBackground = ({ className, color, opacity = 1 }: AmbientBackgroundP
       }}
       aria-hidden="true"
     >
-      {/* --- LAYER 01: ADAPTIVE AURA NODES --- */}
-      {/* [OPTIMIZED]: 
-          1. ลด Blur บน Mobile ลงเหลือ 60px เพื่อลดงาน GPU
-          2. หยุด Infinite Animation บน Mobile เพื่อประหยัด CPU/Battery
-      */}
-      <motion.div
-        animate={
-          !isLowPowerMode
-            ? {
-                x: [0, 30, 0],
-                y: [0, -50, 0],
-                scale: [1, 1.1, 1],
-              }
-            : {}
-        }
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+      {/* --- LAYER 01: ADAPTIVE AURA NODES (CSS Accelerated) --- */}
+      <div
         className={cn(
           "absolute -top-[15%] -left-[10%] h-[80vw] w-[80vw] transform-gpu rounded-full opacity-[0.10]",
-          "blur-[60px] md:blur-[120px]", // ลดการเบลอหนักๆ บนจอเล็ก
+          "blur-[60px] md:blur-[120px]",
+          "md:animate-aura-1", // รันแอนิเมชันเฉพาะบน Desktop เพื่อถนอม CPU ของ Mobile
         )}
         style={{ backgroundColor: "var(--brand-primary)" }}
       />
 
-      <motion.div
-        animate={
-          !isLowPowerMode
-            ? {
-                x: [0, -40, 0],
-                y: [0, 30, 0],
-                scale: [1, 1.2, 1],
-              }
-            : {}
-        }
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear",
-        }}
+      <div
         className={cn(
           "absolute -right-[10%] -bottom-[10%] h-[60vw] w-[60vw] transform-gpu rounded-full opacity-[0.06]",
           "blur-[50px] md:blur-[100px]",
+          "md:animate-aura-2",
         )}
         style={{ backgroundColor: "var(--brand-secondary, var(--brand-primary))" }}
       />
