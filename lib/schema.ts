@@ -55,6 +55,8 @@ const organizationNode: Organization = {
     "@type": "ImageObject",
     "@id": absoluteUrl("/#logo"),
     url: absoluteUrl(SITE_CONFIG.logo),
+    width: "112",
+    height: "112",
   } as ImageObject,
   address: sharedAddress,
   /** [DEEP_LINKING]: เชื่อมโยงตัวตนบนโซเชียลเพื่อ E-E-A-T */
@@ -65,13 +67,6 @@ const organizationNode: Organization = {
     SITE_CONFIG.links.twitter,
     SITE_CONFIG.links.youtube,
   ].filter(Boolean) as string[],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "128",
-    bestRating: "5",
-    worstRating: "1",
-  },
 };
 
 // ... (openingHours logic)
@@ -126,6 +121,14 @@ export const generateSchemaGraph = (schemas: Thing[]): Graph => ({
       url: SITE_CONFIG.siteUrl,
       name: SITE_CONFIG.brandName,
       publisher: { "@id": absoluteUrl("/#organization") },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE_CONFIG.siteUrl}/?s={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
+      },
     } as WebSite,
     personNode as Thing,
     ...schemas,
@@ -159,7 +162,9 @@ export function generateUniversalSchema(
     "@type": "Offer",
     price: price || "0",
     priceCurrency: "THB",
+    priceValidUntil: "2026-12-31",
     availability: "https://schema.org/InStock",
+    url: canonicalUrl,
     seller: { "@id": absoluteUrl("/#organization") },
     ...(promotions &&
       promotions.length > 0 && {
@@ -190,8 +195,12 @@ export function generateUniversalSchema(
       "@type": "Product",
       "@id": `${canonicalUrl}/#product`,
       ...base,
+      sku: `AEM-${slug.toUpperCase()}`,
+      brand: {
+        "@type": "Brand",
+        name: SITE_CONFIG.brandName,
+      },
       offers: offerNode,
-      brand: { "@id": absoluteUrl("/#organization") },
       aggregateRating: ratingNode,
       review: reviewNode,
     } as Product;
@@ -235,6 +244,7 @@ export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService
     address: {
       "@type": "PostalAddress",
       "@id": `${url}/#localaddress`,
+      streetAddress: SITE_CONFIG.contact.streetAddress || SITE_CONFIG.contact.address,
       addressLocality: data.province,
       addressRegion: data.province,
       addressCountry: "TH",
