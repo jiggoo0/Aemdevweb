@@ -8,7 +8,6 @@
 import React, { memo, useMemo, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import type { Route } from "next";
-import { SITE_CONFIG } from "@/constants/site-config";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -52,55 +51,42 @@ const PricingSection = () => {
   }, []);
 
   const displayPlans = useMemo<readonly PricingPlan[]>(() => {
+    const conversionData =
+      MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-SP-01") || MASTER_REGISTRY[1];
     const foundationData =
-      MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-CP-03") || MASTER_REGISTRY[0];
-    const growthData = MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-SEO-07") || MASTER_REGISTRY[1];
+      MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-CP-03") || MASTER_REGISTRY[2];
+    const growthData = MASTER_REGISTRY.find((s) => s.id === "AEM-SVC-SEO-07") || MASTER_REGISTRY[0];
 
     return [
       {
-        id: "foundation",
-        name: "Standard Foundation",
-        price: foundationData?.priceValue || 29000,
-        unit: "/ Project",
-        features: foundationData?.benefits?.slice(0, 4) || [
-          "Core System Infrastructure",
-          "Responsive Neural UI",
-          "Technical SEO Setup",
-          "Admin Deployment",
-        ],
-        cta: "เริ่มวางรากฐานธุรกิจ",
+        id: "conversion",
+        name: "Conversion Engine",
+        price: conversionData?.priceValue || 3500,
+        unit: conversionData?.unit || "/ Project",
+        features: conversionData?.benefits?.slice(0, 4) || [],
+        cta: "ปั้นยอดขายทันที",
         highlight: false,
-        href: `/services/${foundationData?.templateSlug || "standard"}`,
+        href: `/services/${conversionData?.templateSlug || "salepage"}`,
+      },
+      {
+        id: "foundation",
+        name: "Infrastructure Core",
+        price: foundationData?.priceValue || 19500,
+        unit: foundationData?.unit || "/ Project",
+        features: foundationData?.benefits?.slice(0, 4) || [],
+        cta: "วางรากฐานธุรกิจสากล",
+        highlight: true,
+        href: `/services/${foundationData?.templateSlug || "corporate"}`,
       },
       {
         id: "growth",
-        name: "Strategic Growth",
-        price: growthData?.priceValue || 45000,
-        unit: "/ Project",
-        features: [
-          ...(growthData?.benefits?.slice(0, 3) || []),
-          "Specialist Consultation (Priority)",
-          "Conversion Rate Optimization",
-        ],
-        cta: "ยกระดับธุรกิจให้เติบโต",
-        highlight: true,
-        href: `/services/${growthData?.templateSlug || "growth"}`,
-      },
-      {
-        id: "enterprise",
-        name: "Enterprise Custom",
-        price: "Custom",
-        unit: "Tailored Architecture",
-        features: [
-          "Infrastructure Scaling Strategy",
-          "API & Advanced DB Integration",
-          "National SEO Dominance",
-          "Dedicated Support Node",
-        ],
-        cta: "คุยแผนงานพิเศษ",
+        name: "Authority Growth",
+        price: growthData?.priceValue || 19500,
+        unit: growthData?.unit || "/ Month",
+        features: growthData?.benefits?.slice(0, 4) || [],
+        cta: "ยกระดับอันดับ Google",
         highlight: false,
-        href: SITE_CONFIG.links.line,
-        isExternal: true,
+        href: `/services/${growthData?.templateSlug || "seo-agency"}`,
       },
     ];
   }, []);

@@ -27,6 +27,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
+  reactCompiler: true,
 
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,

@@ -9,7 +9,7 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "dev": "WATCHPACK_POLLING=true next dev --webpack",
+    "dev": "WATCHPACK_POLLING=true next dev --turbo",
     "build": "pnpm test:schema && next build --webpack",
     "postbuild": "bundlesize",
     "start": "next start",

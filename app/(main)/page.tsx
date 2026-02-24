@@ -144,47 +144,55 @@ export default async function HomePage() {
 
   return (
     <main className="bg-surface-main flex w-full flex-col overflow-hidden">
-      <JsonLd data={homeSchema} />
+      <JsonLd data={homeSchema} id="schema-homepage" />
 
-      {/* 01. HERO GATEWAY: Pure Performance LCP */}
-      <HeroEngine align="center" showIndicator={true} priority={true} />
+      {/* --- 01. INTRODUCTORY SEQUENCE --- */}
+      <header className="relative w-full">
+        {/* HERO GATEWAY: Pure Performance LCP */}
+        <HeroEngine align="center" showIndicator={true} priority={true} />
 
-      {/* 02. AUTHORITY HUB: Micro-interaction ready */}
-      <section className="relative z-20 -mt-16 px-4 md:-mt-24 lg:-mt-32">
-        <div className="mx-auto max-w-7xl">
-          <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
-            <h2 className="sr-only">Authority and Infrastructure Performance Hub</h2>
-            <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
-              <Suspense
-                fallback={
-                  <div className="bg-surface-card/10 h-20 w-full animate-pulse rounded-full" />
-                }
-              >
-                <TrustBadge />
-              </Suspense>
-              <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
-              <Suspense
-                fallback={
-                  <div className="rounded-section bg-surface-card/10 h-64 w-full animate-pulse" />
-                }
-              >
-                <ImpactStats />
-              </Suspense>
+        {/* AUTHORITY HUB: Micro-interaction ready */}
+        <section
+          className="relative z-20 -mt-16 px-4 md:-mt-24 lg:-mt-32"
+          aria-label="Authority Metrics"
+        >
+          <div className="mx-auto max-w-7xl">
+            <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
+              <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
+                <Suspense
+                  fallback={
+                    <div className="bg-surface-card/10 h-20 w-full animate-pulse rounded-full" />
+                  }
+                >
+                  <TrustBadge />
+                </Suspense>
+                <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
+                <Suspense
+                  fallback={
+                    <div className="rounded-section bg-surface-card/10 h-64 w-full animate-pulse" />
+                  }
+                >
+                  <ImpactStats />
+                </Suspense>
+              </div>
+              <div className="bg-brand-primary/10 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
             </div>
-            <div className="bg-brand-primary/10 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
           </div>
-        </div>
-      </section>
+        </section>
+      </header>
 
-      {/* 03. SOLUTIONS: Content First Rendering */}
-      <section id="services" className="py-24 md:py-32">
-        <div className="container mx-auto px-4">
+      {/* --- 02. CORE EXPERTISE --- */}
+      <section id="services" className="py-24 md:py-32" aria-labelledby="services-heading">
+        <div className="container mx-auto px-4 md:px-8">
           <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="space-y-2">
               <span className="text-brand-primary block font-mono text-[10px] font-black tracking-[0.4em] uppercase">
                 Expertise_Architecture
               </span>
-              <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl">
+              <h2
+                id="services-heading"
+                className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl"
+              >
                 Core <span className="text-brand-primary">Solutions.</span>
               </h2>
             </div>
@@ -209,14 +217,20 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 04. LABORATORY: Interactive Audit Tool */}
-      <section className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
-        <div className="container mx-auto px-4">
+      {/* --- 03. DIAGNOSTIC LABORATORY --- */}
+      <section
+        className="bg-surface-offset border-border/40 border-y py-24 md:py-32"
+        aria-labelledby="audit-heading"
+      >
+        <div className="container mx-auto px-4 md:px-8">
           <header className="mb-16 text-center">
             <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
               Technical_Diagnosis_Engine
             </span>
-            <h2 className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+            <h2
+              id="audit-heading"
+              className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl"
+            >
               Audit <span className="text-brand-primary">Laboratory.</span>
             </h2>
           </header>
@@ -226,61 +240,97 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 05. PROCESS: Dynamic Hydration Section */}
-      <section className="bg-surface-main py-24">
+      {/* --- 04. EXECUTION FRAMEWORK --- */}
+      <section className="bg-surface-main py-24" aria-label="Working Process">
         <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
           <WorkProcess />
         </Suspense>
       </section>
 
-      {/* 06. SUCCESS EVIDENCE: High Authority Evidence */}
-      <section id="success" className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
-        <div className="container mx-auto px-4">
-          <header className="mb-16">
-            <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-6xl">
-              Success <span className="text-text-secondary/30">Nodes.</span>
-            </h2>
-          </header>
-          <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
-            {recentCases.map((item, i) => (
-              <CaseStudyCard key={item.slug} data={item} index={i} />
-            ))}
+      {/* --- 05. EVIDENCE & INSIGHTS --- */}
+      <div className="bg-surface-offset border-border/40 border-y">
+        {/* Success Evidence */}
+        <section id="success" className="py-24 md:py-32" aria-labelledby="success-heading">
+          <div className="container mx-auto px-4 md:px-8">
+            <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div className="space-y-2">
+                <span className="text-text-muted block font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-50">
+                  Performance_Verified
+                </span>
+                <h2
+                  id="success-heading"
+                  className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl"
+                >
+                  Success <span className="text-text-secondary/30">Nodes.</span>
+                </h2>
+              </div>
+              <Link
+                href="/case-studies"
+                className="group border-border bg-surface-card text-text-primary hover:border-brand-primary/40 hover:text-brand-primary flex items-center gap-3 rounded-full border px-6 py-4 text-[10px] font-black tracking-widest uppercase transition-all duration-500"
+              >
+                View All Success Logs
+                <IconRenderer
+                  name="ArrowRight"
+                  size={14}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+            </header>
+            <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2">
+              {recentCases.map((item, i) => (
+                <CaseStudyCard key={item.slug} data={item} index={i} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 07. TECHNICAL INSIGHTS: SEO Context Injection */}
-      <section className="bg-surface-main border-border/40 border-t py-24 md:py-32">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 flex items-center justify-between">
-            <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-              Technical <span className="text-brand-primary">Insights.</span>
-            </h2>
+        {/* Technical Insights */}
+        <section
+          className="border-border/40 border-t py-24 md:py-32"
+          aria-labelledby="insights-heading"
+        >
+          <div className="container mx-auto px-4 md:px-8">
+            <header className="mb-16 flex items-center justify-between">
+              <h2
+                id="insights-heading"
+                className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl"
+              >
+                Technical <span className="text-brand-primary">Insights.</span>
+              </h2>
+            </header>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {recentPosts.map((post, i) => (
+                <BlogCard key={post.slug} post={post} index={i} priority={false} />
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {recentPosts.map((post, i) => (
-              <BlogCard key={post.slug} post={post} index={i} priority={false} />
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      {/* 08. CONVERSION & GEOGRAPHIC DISTANCE */}
-      <div className="bg-surface-offset">
+      {/* --- 06. CONVERSION & REGIONAL COVERAGE --- */}
+      <div className="bg-surface-main">
+        {/* Pricing Strategy */}
         <section className="pb-24">
           <Suspense fallback={<LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />}>
             <PricingSection />
           </Suspense>
         </section>
 
-        <section className="border-border/60 border-t py-16">
-          <div className="container mx-auto px-4">
-            <div className="mb-16 flex flex-col items-center justify-center gap-12">
+        {/* Geographic Terminal */}
+        <section
+          className="bg-surface-offset border-border/60 border-t py-24"
+          aria-labelledby="coverage-heading"
+        >
+          <div className="container mx-auto px-4 md:px-8">
+            <div className="mb-20 flex flex-col items-center justify-center gap-12">
               <div className="text-center">
                 <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-50">
                   Network_Coverage_Index
                 </span>
-                <h2 className="text-text-primary mt-4 text-3xl font-black tracking-tighter uppercase italic">
+                <h2
+                  id="coverage-heading"
+                  className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-5xl"
+                >
                   Regional <span className="text-brand-primary">Stability.</span>
                 </h2>
               </div>
@@ -294,10 +344,20 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
               {featuredAreas.map((area, i) => (
                 <AreaCard key={area.slug} data={area} index={i} />
               ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Link
+                href="/areas"
+                className="text-text-muted hover:text-brand-primary inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase transition-colors"
+              >
+                Explore All Regional Nodes
+                <IconRenderer name="ArrowRight" size={14} />
+              </Link>
             </div>
           </div>
         </section>

@@ -24,33 +24,37 @@ interface ProcessStep {
 const PROCESS_STEPS: readonly ProcessStep[] = [
   {
     id: "01",
-    title: "Discovery & Strategy",
-    thTitle: "วางแผนกลยุทธ์",
-    description: "วิเคราะห์ธุรกิจและพฤติกรรมลูกค้า เพื่อวางโครงสร้างข้อมูลและ SEO ให้แม่นยำที่สุด",
+    title: "Audit & Strategy",
+    thTitle: "วิเคราะห์เชิงวิศวกรรม",
+    description:
+      "Audit โครงสร้างพื้นฐานเดิมและคู่แข่ง เพื่อวางแผน Technical SEO และ Schema ให้แม่นยำที่สุด",
     icon: "Search",
-    metric: "Business_Logic_Verified",
+    metric: "Deep_Infra_Audit_Done",
   },
   {
     id: "02",
     title: "High-Performance Build",
     thTitle: "พัฒนาระบบพลังสูง",
-    description: "พัฒนาด้วย Next.js 15 เน้นความเร็วระดับเสี้ยววินาที เพื่อ UX ที่ลื่นไหลระดับสากล",
+    description:
+      "พัฒนาด้วย Next.js 16 และ React 19 เน้นความเร็วระดับ LCP < 1s เพื่อครองใจทั้งคนและบอท",
     icon: "Code2",
-    metric: "Speed_Core_100",
+    metric: "Core_Web_Vitals_100",
   },
   {
     id: "03",
-    title: "Quality Assurance",
-    thTitle: "ตรวจสอบคุณภาพ",
-    description: "ตรวจสอบความปลอดภัยและ Performance อย่างละเอียด 100% ก่อนส่งมอบงานจริง",
+    title: "SEO Schema Injection",
+    thTitle: "ฝังโครงสร้างข้อมูล",
+    description:
+      "ฉีด JSON-LD Schema และจัดระเบียบ Semantic HTML เพื่อสร้างความน่าเชื่อถือระดับ Authority",
     icon: "ShieldCheck",
-    metric: "Zero_Vulnerability",
+    metric: "Knowledge_Graph_Active",
   },
   {
     id: "04",
-    title: "Growth Optimization",
+    title: "Authority Monitoring",
     thTitle: "ดูแลการเติบโต",
-    description: "ติดตั้งระบบ Analytics ติดตามผล และเปลี่ยนผู้เข้าชมให้เป็นยอดขายที่วัดผลได้",
+    description:
+      "ติดตามผลผ่าน Search Console และ Analytics เพื่อรีดประสิทธิภาพ ROI ให้สูงที่สุดอย่างยั่งยืน",
     icon: "TrendingUp",
     metric: "ROI_Dominance",
   },
