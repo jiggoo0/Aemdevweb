@@ -57,6 +57,7 @@ export default function PrivacyPage() {
 
       {/* 03. CONTENT LAYER: Policy Details */}
       <section className="relative z-10 container mx-auto px-4 py-24 md:py-32">
+        <h2 className="sr-only">Data Protection & Privacy Framework</h2>
         <div className="mx-auto max-w-3xl space-y-20">
           {/* Diagnostic Header */}
           <div className="border-border flex flex-col gap-4 border-b pb-8 md:flex-row md:items-center md:justify-between">

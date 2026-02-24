@@ -75,6 +75,7 @@ export default function AreasPage() {
       <JsonLd data={fullSchema} id="schema-areas-hub-v18" />
 
       <main className="relative z-10 container mx-auto px-4 pt-32 pb-24 md:px-6 md:pt-48 md:pb-32">
+        <h2 className="sr-only">National Geographic Authority & Regional Hubs</h2>
         {/* --- 01. STRATEGIC HUB HEADER --- */}
         <header className="mb-24 max-w-6xl space-y-10 md:mb-32">
           <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-6 py-2.5 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">

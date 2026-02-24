@@ -28,18 +28,7 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
          โดยอ้างอิงจากลำดับความสำคัญ (Priority) ที่กำหนดไว้ในแต่ละ Node
       */}
       <PageTransition className="flex w-full flex-auto flex-col">
-        {/* [MOTION_GATEWAY]: ชั้นเลเยอร์สุดท้ายที่ควบคุมความนุ่มนวลก่อนส่งเนื้อหาออกสู่จอภาพ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.5,
-            ease: [0.22, 1, 0.36, 1], // [QUINTIC_EASE]: ให้ความรู้สึกหรูหราและมั่นคง
-          }}
-          className="flex w-full flex-auto flex-col"
-        >
-          {children}
-        </motion.div>
+        {children}
       </PageTransition>
 
       {/* [STRATEGY]: Global Atmospheric Mask 

@@ -70,6 +70,7 @@ export default function ServicesPage() {
 
           {/* 02. SERVICE GRID */}
           <section id="service-nodes" className="min-h-[600px] w-full">
+            <h2 className="sr-only">Expertise & Specialized Services Hub</h2>
             <Suspense fallback={<SkeletonGrid count={6} aspectRatio="video" />}>
               <ServiceListingHub className="gap-8 md:gap-14" />
             </Suspense>

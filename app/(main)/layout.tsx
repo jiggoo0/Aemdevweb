@@ -34,15 +34,12 @@ export default async function MainLayout({ children, params }: MainLayoutProps) 
       <main
         id="main-content"
         className={cn("relative isolate z-10 flex flex-auto flex-col pt-24 outline-none md:pt-32")}
-        style={{ contentVisibility: "auto" } as React.CSSProperties}
       >
         <div className="flex w-full flex-col">{children}</div>
       </main>
 
       {/* 03. FOOTER TERMINUS */}
-      <footer className="border-border/40 bg-surface-main relative z-20 shrink-0 border-t">
-        <Footer />
-      </footer>
+      <Footer />
 
       {/* 04. DECORATIVE ARCHITECTURE */}
       <div className="via-border/20 pointer-events-none fixed inset-y-0 left-0 z-50 hidden w-px bg-gradient-to-b from-transparent to-transparent lg:block" />

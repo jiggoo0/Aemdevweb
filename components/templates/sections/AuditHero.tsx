@@ -82,9 +82,7 @@ export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) =
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
           {/* --- 01. NARRATIVE_NODE --- */}
           <div className="space-y-10">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+            <div
               className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md"
             >
               <IconRenderer
@@ -95,7 +93,7 @@ export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) =
               <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase italic">
                 System_Audit_Active.v{SITE_CONFIG.project.version}
               </span>
-            </motion.div>
+            </div>
 
             <div className="space-y-6">
               <h1 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">

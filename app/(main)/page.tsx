@@ -129,6 +129,7 @@ export default async function HomePage() {
       <section className="relative z-20 -mt-16 px-4 md:-mt-24 lg:-mt-32">
         <div className="mx-auto max-w-7xl">
           <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
+            <h2 className="sr-only">Authority and Infrastructure Performance Hub</h2>
             <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
               <TrustBadge />
               <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />

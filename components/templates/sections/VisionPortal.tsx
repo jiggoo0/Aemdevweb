@@ -32,16 +32,14 @@ export const VisionPortal = ({ title, subtitle, banner }: VisionPortalProps) => 
       )}
       <div className="container mx-auto px-4">
         <div className="max-w-5xl space-y-10">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+          <div
             className="inline-flex items-center gap-4 rounded-[var(--radius)] border-[var(--border-width)] border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-5 py-2"
           >
             <div className="shadow-glow h-2 w-2 rounded-full bg-[var(--brand-primary)]" />
             <span className="font-mono text-[10px] font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase">
               Corporate_Strategic_Node.v2026
             </span>
-          </motion.div>
+          </div>
 
           <h1 className="font-[family-name:var(--font-primary)] text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-9xl">
             {title.split("|")[0]} <br />

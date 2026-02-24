@@ -110,6 +110,7 @@ export default function StatusPage() {
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:items-end">
             <div className="max-w-4xl space-y-8">
+              <h2 className="sr-only">Diagnostic Overview & Metrics</h2>
               <div className="flex items-center gap-4">
                 <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary shadow-glow flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-sm">
                   <span className="relative flex h-2 w-2">

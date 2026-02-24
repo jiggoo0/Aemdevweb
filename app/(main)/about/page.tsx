@@ -135,6 +135,7 @@ export default function AboutPage() {
       {/* 03. TRUST INFRASTRUCTURE */}
       <section className="border-border bg-surface-offset/30 border-y py-20">
         <div className="container mx-auto px-4 text-center">
+          <h2 className="sr-only">Professional Trust and Performance Metrics</h2>
           <p className="text-text-muted mb-12 font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-50">
             Industrial Standards & Excellence
           </p>

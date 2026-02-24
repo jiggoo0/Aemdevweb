@@ -368,6 +368,11 @@ export interface TemplateMasterData {
   readonly isPopular?: boolean;
   readonly isFeatured?: boolean;
   readonly clientTrust?: string;
+  readonly socialProof?: {
+    readonly rating: number;
+    readonly reviewCount: number;
+    readonly localClient?: string;
+  };
   readonly items?: readonly CatalogItem[];
   readonly activeAreas?: readonly string[];
 }

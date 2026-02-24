@@ -71,9 +71,9 @@ export default function Loading() {
           {/* Status Intelligence Text Group */}
           <div className="flex flex-col items-center space-y-5 text-center">
             <div className="space-y-2">
-              <h3 className="text-text-primary animate-pulse text-base font-black tracking-[0.5em] uppercase italic">
+              <h2 className="text-text-primary animate-pulse text-base font-black tracking-[0.5em] uppercase italic">
                 System_Initializing
-              </h3>
+              </h2>
               <p className="text-text-muted font-mono text-[10px] font-bold tracking-[0.2em] uppercase opacity-70">
                 Projecting v{SITE_CONFIG.project.version} Data_Nodes...
               </p>

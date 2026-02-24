@@ -95,6 +95,7 @@ export default async function BlogListingPage() {
             </header>
 
             {/* --- 02. BLOG GRID: Optimized Rendering Path --- */}
+            <h2 className="sr-only">Technical Engineering Insights & SEO Archive</h2>
             {posts.length > 0 ? (
               <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 xl:gap-16">
                 {posts.map((post, index) => (

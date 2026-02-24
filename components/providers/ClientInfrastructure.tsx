@@ -25,17 +25,6 @@ const Toaster = dynamic(() => import("@/components/ui/Sonner").then((mod) => mod
 });
 
 const ClientInfrastructure = () => {
-  /**
-   * [CRITICAL_FIX]: สวิตช์เปิดไฟให้ระบบ
-   * เติมคลาส 'hydrated' เพื่อให้ CSS Opacity เปลี่ยนจาก 0 เป็น 1
-   */
-  useEffect(() => {
-    const body = document.body;
-    if (body) {
-      body.classList.add("hydrated");
-    }
-  }, []);
-
   return (
     <>
       {/* [CORE]: Navigation Progress Indicator */}

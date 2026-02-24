@@ -98,6 +98,7 @@ export default async function CaseStudiesPage() {
             </header>
 
             {/* --- 02. CASE STUDY GRID: High-Performance Rendering --- */}
+            <h2 className="sr-only">Industrial Project Success Archive</h2>
             {cases.length > 0 ? (
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
                 {cases.map((item, index) => (

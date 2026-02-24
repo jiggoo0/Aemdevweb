@@ -41,6 +41,7 @@ const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
       <JsonLd data={schema} />
 
       <main className="min-h-[100dvh] bg-[var(--surface-main)] transition-colors duration-500 selection:bg-[var(--brand-primary)] selection:text-black">
+        <h2 className="sr-only">Executive Strategy & Capability Architecture</h2>
         {/* --- Phase 01: Strategic Intent --- 
             แสดงวิสัยทัศน์และพันธกิจขององค์กรในรูปแบบพรีเมียม
         */}

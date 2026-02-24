@@ -106,15 +106,11 @@ const HeroEngine = ({
 
           {/* NODE 02: MAIN MESSAGING MATRIX (The LCP Hub) */}
           <div className="w-full space-y-8 md:space-y-12">
-            <motion.h1
-              /* [LCP_OPT]: มั่นใจว่า H1 จะเริ่มปรากฏทันที (Initial Opacity > 0) เพื่อไม่ให้ LCP Mark ล่าช้า */
-              initial={{ opacity: 0.2, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={transition}
+            <h1
               className="text-text-primary transform-gpu text-5xl leading-relaxed font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]"
             >
               {title}
-            </motion.h1>
+            </h1>
 
             <motion.div
               initial={{ opacity: 0, x: isCenter ? 0 : -20 }}

@@ -83,6 +83,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
     <LayoutEngine spacing="medium">
       <JsonLd data={fullSchema} />
       <article className="container mx-auto px-4 md:px-6">
+        <h2 className="sr-only">Project Narrative & Success Evidence</h2>
         <header className="mx-auto mb-12 max-w-4xl space-y-6 pt-32 text-center md:pt-40">
           <div className="flex flex-col items-center gap-2">
             <p className="text-brand-primary font-mono text-sm font-black tracking-[0.3em] uppercase">

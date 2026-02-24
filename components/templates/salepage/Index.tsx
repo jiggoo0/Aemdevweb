@@ -72,6 +72,7 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
         )}
 
         <main className="bg-surface-main relative flex flex-col antialiased">
+          <h2 className="sr-only">Sale Channel & Conversion Funnel</h2>
           {/* Phase 01: CORE HERO - สร้าง First Impression ทันทีที่โหลดหน้า */}
           <SaleHero
             title={data.title}

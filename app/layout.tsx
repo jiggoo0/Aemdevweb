@@ -118,32 +118,12 @@ export default function RootLayout({ children }: LayoutProps) {
     >
       <head>
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
-        {/* [CRITICAL_CSS]: Inline styles for instant paint & Zero-FOUC */}
+        {/* [CRITICAL_CSS]: Inline styles for instant paint */}
         <style
           dangerouslySetInnerHTML={{
             __html: `
               :root { background-color: ${SITE_CONFIG.themeColor}; }
               .dark { background-color: #020617; }
-              body:not(.hydrated) { visibility: hidden; opacity: 0; }
-              body.hydrated { visibility: visible; opacity: 1; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-              #root-container { contain-intrinsic-size: 1000px; }
-            `,
-          }}
-        />
-        {/* [HYDRATION_SHIELD]: Script to trigger visibility immediately after DOM ready */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const observer = new MutationObserver(() => {
-                  if (document.body) {
-                    document.body.classList.add('hydrated');
-                    observer.disconnect();
-                  }
-                });
-                observer.observe(document.documentElement, { childList: true });
-                window.addEventListener('DOMContentLoaded', () => document.body.classList.add('hydrated'));
-              })();
             `,
           }}
         />
@@ -153,7 +133,7 @@ export default function RootLayout({ children }: LayoutProps) {
         className={cn(
           "bg-surface-main text-text-primary min-h-dvh antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
-          "overflow-x-hidden font-sans",
+          "overflow-x-hidden font-thai",
         )}
       >
         <ThemeProvider
@@ -165,13 +145,12 @@ export default function RootLayout({ children }: LayoutProps) {
           {/* [INFRA]: Client-side logic for analytics, performance, and global listeners */}
           <ClientInfrastructure />
 
-          <main
+          <div
             id="root-container"
             className="relative flex min-h-dvh flex-col"
-            style={{ contentVisibility: "auto" } as React.CSSProperties}
           >
             {children}
-          </main>
+          </div>
 
           <SpeedInsights />
         </ThemeProvider>
