@@ -1,11 +1,11 @@
 /**
- * [SYSTEM COMPONENT]: LAYOUT_ENGINE v18.0.2 (PERFORMANCE_HARDENED)
- * [STRATEGY]: GPU Acceleration | Paint Flashing Mitigation | Composite Isolation
+ * [SYSTEM COMPONENT]: LAYOUT_ENGINE v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure Server Component | GPU Acceleration | Zero-JS
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { ReactNode } from "react";
-import React, { useMemo } from "react";
+import React from "react";
 import { cn, injectThemeVariables } from "@/lib/utils";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import type { ThemeConfig } from "@/types";
@@ -28,25 +28,28 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
     specialist: "gap-y-40 md:gap-y-64",
   };
 
-  const dynamicStyles = useMemo(() => injectThemeVariables(theme), [theme]);
+  // [SERVER_ONLY]: Logic executed during RSC rendering
+  const dynamicStyles = injectThemeVariables(theme);
   const ambientColor = theme?.primary || "var(--brand-primary)";
 
   return (
     <div
       className={cn(
         "relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden",
-        "transition-colors duration-700 ease-in-out", // [FIX]: เปลี่ยนจาก transition-all เป็น transition-colors
+        "transition-colors duration-700 ease-in-out",
         "bg-[var(--surface-main)] text-[var(--text-primary)]",
-        "touch-pan-y antialiased", // [FIX]: เพิ่ม Antialiasing และจำกัดการจัดการ Touch
+        "touch-pan-y antialiased",
         className,
       )}
-      style={{
-        ...dynamicStyles,
-        // [HARDWARE_ACCELERATION]: บังคับให้เบราว์เซอร์ใช้ GPU ในการประมวลผลเลเยอร์นี้
-        backfaceVisibility: "hidden",
-        WebkitBackfaceVisibility: "hidden",
-        transform: "translateZ(0)",
-      }}
+      style={
+        {
+          ...dynamicStyles,
+          // [HARDWARE_ACCELERATION]: Forced GPU compositing
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+          transform: "translateZ(0)",
+        } as React.CSSProperties
+      }
       data-theme-mode={theme?.mode || "light"}
     >
       {/* --- LAYER 01: INFRASTRUCTURE (The Visual Grid) --- */}
@@ -54,13 +57,12 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
         className="pointer-events-none fixed inset-0 z-0 opacity-[0.03] select-none"
         style={{
           backgroundImage: "url(/grid-pattern.svg)",
-          // [FIX]: ป้องกันการกระพริบของ Fixed Element ขณะ Scroll
           willChange: "transform",
         }}
         aria-hidden="true"
       />
 
-      {/* [DYNAMIC_AURA]: ชั้นบรรยากาศสีฟุ้ง */}
+      {/* [DYNAMIC_AURA]: Layered atmosphere */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <AmbientBackground color={ambientColor} opacity={theme?.mode === "dark" ? 0.12 : 0.06} />
       </div>
@@ -69,8 +71,8 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
       <main
         className={cn(
           "relative z-10 flex w-full flex-auto flex-col",
-          "transition-opacity duration-500 ease-in-out", // [FIX]: เจาะจงเฉพาะ Opacity
-          "isolation-auto", // [FIX]: แยก Layer Context เพื่อลดการ Blending ที่ซับซ้อน
+          "transition-opacity duration-500 ease-in-out",
+          "isolation-auto",
           spacingMap[spacing],
         )}
       >
@@ -94,4 +96,4 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
   );
 };
 
-export default React.memo(LayoutEngine);
+export default LayoutEngine;

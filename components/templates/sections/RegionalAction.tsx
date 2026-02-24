@@ -1,12 +1,17 @@
+/**
+ * [SECTION COMPONENT]: REGIONAL_ACTION v18.0.3 (LINK_FIXED)
+ * [STRATEGY]: Pure CSS Transitions | Dynamic Context | Zero-Framer
+ */
+
 import React from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 export const RegionalAction = ({ province }: { province: string }) => {
   return (
     <section className="container mx-auto px-4 pt-12 pb-32">
-      <div className="group relative overflow-hidden rounded-[var(--radius)] bg-[var(--brand-primary)] p-12 text-white shadow-xl transition-transform hover:-translate-y-1 md:p-24">
+      <div className="group relative overflow-hidden rounded-[var(--radius)] bg-[var(--brand-primary)] p-12 text-white shadow-xl transition-all duration-500 hover:-translate-y-1 md:p-24">
         {/* Background Texture */}
         <div
           className="absolute inset-0 opacity-10"
@@ -25,16 +30,17 @@ export const RegionalAction = ({ province }: { province: string }) => {
           </p>
 
           <div className="pt-8">
-            <Link href="/contact" className="inline-block">
-              <Button
-                variant="default"
-                size="lg"
-                className="h-16 border-0 bg-white px-10 text-lg text-[var(--brand-primary)] shadow-lg hover:bg-white/90"
-              >
+            <Button
+              asChild
+              variant="default"
+              size="lg"
+              className="h-16 border-0 bg-white px-10 text-lg text-[var(--brand-primary)] shadow-lg transition-all hover:bg-white/90 active:scale-95"
+            >
+              <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                 <span className="mr-3">วิเคราะห์แผนงาน {province}</span>
-                <IconRenderer name="ArrowRight" size={20} />
-              </Button>
-            </Link>
+                <IconRenderer name="ArrowRight" size={20} className="text-[var(--brand-primary)]" />
+              </a>
+            </Button>
           </div>
         </div>
 

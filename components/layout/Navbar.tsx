@@ -1,6 +1,6 @@
 /**
- * [SYSTEM COMPONENT]: NAV_BAR v18.1.8 (TITAN_STABLE)
- * [STRATEGY]: Passive Scroll Tracking | Z-700 Escalation | SSR-Safe Hydration
+ * [SYSTEM COMPONENT]: NAV_BAR v18.1.9 (PRODUCTION_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | High-Performance Scroll Logic | Zero-Framer
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -9,41 +9,14 @@
 import React, { useState, useEffect, memo, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-  type Variants,
-} from "framer-motion";
 import { MAIN_NAV } from "@/constants/navigation";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-
-const FLUID_EASE = [0.16, 1, 0.3, 1] as const;
-
-// [ANIMATION]: Mobile Menu Transitions
-const mobileMenuVariants: Variants = {
-  initial: { opacity: 0, scale: 0.96, y: 10 },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: FLUID_EASE },
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.98,
-    y: 5,
-    transition: { duration: 0.2, ease: "easeIn" },
-  },
-};
 
 const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { scrollY } = useScroll();
   const pathname = usePathname();
 
   // [REF]: ป้องกัน Scroll Tracking เพี้ยนในช่วง Hydration
@@ -52,23 +25,26 @@ const Navbar = () => {
   useEffect(() => {
     setMounted(true);
     lastScrollY.current = window.scrollY;
-  }, []);
 
-  // [LOGIC]: Smart Header Hiding (Scroll Logic Stabilization)
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const diff = latest - lastScrollY.current;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const diff = currentScrollY - lastScrollY.current;
 
-    // เงื่อนไข: ซ่อนเมื่อเลื่อนลงเกิน 150px และเลื่อนเร็วพอ (diff > 10)
-    if (latest > 150 && diff > 10 && !isOpen) {
-      setIsHidden(true);
-    }
-    // เงื่อนไข: แสดงเมื่อเลื่อนขึ้น (diff < -5) หรืออยู่บนสุดของหน้า
-    else if (diff < -5 || latest < 20) {
-      setIsHidden(false);
-    }
+      // เงื่อนไข: ซ่อนเมื่อเลื่อนลงเกิน 150px และเลื่อนเร็วพอ (diff > 10)
+      if (currentScrollY > 150 && diff > 10 && !isOpen) {
+        setIsHidden(true);
+      }
+      // เงื่อนไข: แสดงเมื่อเลื่อนขึ้น (diff < -5) หรืออยู่บนสุดของหน้า
+      else if (diff < -5 || currentScrollY < 20) {
+        setIsHidden(false);
+      }
 
-    lastScrollY.current = latest;
-  });
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isOpen]);
 
   // [SIDE_EFFECT]: Body Scroll Lock
   useEffect(() => {
@@ -94,12 +70,12 @@ const Navbar = () => {
   return (
     <>
       {/* --- LAYER 1: HEADER --- */}
-      <motion.header
-        initial={{ y: 0 }}
-        animate={{ y: isHidden ? -120 : 0 }}
-        transition={{ duration: 0.5, ease: FLUID_EASE }}
+      <header
         // [Z-INDEX]: ดันขึ้น Z-700 เพื่อให้อยู่เหนือ Mobile Overlay และ Content ทั้งหมด
-        className="z-nav pointer-events-none fixed top-0 left-0 w-full px-4 py-4 md:px-6"
+        className={cn(
+          "z-nav fixed top-0 left-0 w-full px-4 py-4 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:px-6",
+          isHidden ? "-translate-y-[120%]" : "translate-y-0",
+        )}
       >
         <div className="bg-surface-main/80 border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border px-5 shadow-lg backdrop-blur-xl md:h-16 md:px-8">
           {/* Logo Section */}
@@ -132,11 +108,7 @@ const Navbar = () => {
                       )}
                     >
                       {isActive && (
-                        <motion.span
-                          layoutId="nav-pill"
-                          className="bg-brand-primary shadow-glow-sm absolute inset-0 z-[-1] rounded-full"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                        />
+                        <span className="bg-brand-primary shadow-glow-sm absolute inset-0 z-[-1] rounded-full transition-all duration-300" />
                       )}
                       {link.label}
                     </Link>
@@ -186,60 +158,57 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* --- LAYER 2: MOBILE OVERLAY --- */}
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <motion.div
-            key="mobile-nav-portal"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            // [Z-INDEX]: อยู่ที่ Z-600 (ต่ำกว่า Header เล็กน้อยเพื่อให้ปุ่ม Toggle อยู่เหนือ Overlay เสมอ)
-            className="z-overlay fixed inset-0 flex flex-col items-center justify-start px-4 pt-28"
-          >
-            {/* Click-to-close backdrop */}
-            <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-md"
-              onClick={() => setIsOpen(false)}
-              aria-hidden="true"
-            />
-
-            <motion.nav
-              variants={mobileMenuVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="bg-surface-main/95 rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-2xl"
-            >
-              <ul className="flex flex-col gap-2">
-                {navigationItems.map((link, index) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "flex items-center justify-between rounded-2xl px-5 py-4 text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-all",
-                        pathname === link.href
-                          ? "text-brand-primary bg-brand-primary/10"
-                          : "text-text-primary hover:bg-white/5",
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.nav>
-          </motion.div>
+      <div
+        className={cn(
+          "z-overlay fixed inset-0 flex flex-col items-center justify-start px-4 pt-28 transition-all duration-500",
+          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
-      </AnimatePresence>
+      >
+        {/* Click-to-close backdrop */}
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-md"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+
+        <nav
+          className={cn(
+            "bg-surface-main/95 rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-2xl transition-all duration-500",
+            isOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-5 scale-95 opacity-0",
+          )}
+        >
+          <ul className="flex flex-col gap-2">
+            {navigationItems.map((link, index) => (
+              <li
+                key={link.href}
+                style={{
+                  transitionDelay: `${index * 50}ms`,
+                }}
+                className={cn(
+                  "transition-all duration-500",
+                  isOpen ? "translate-x-0 opacity-100" : "-translate-x-5 opacity-0",
+                )}
+              >
+                <Link
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "flex items-center justify-between rounded-2xl px-5 py-4 text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-all",
+                    pathname === link.href
+                      ? "text-brand-primary bg-brand-primary/10"
+                      : "text-text-primary hover:bg-white/5",
+                  )}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </>
   );
 };

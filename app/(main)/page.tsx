@@ -1,7 +1,7 @@
 /**
- * [CORE PAGE]: HOMEPAGE v18.1.5 (PRODUCTION_MAXIMIZED)
- * [STRATEGY]: Static-First Rendering | Zero-CLS Hydration | Advanced Schema Graph
- * [UPDATED]: 2026-02-19
+ * [CORE PAGE]: HOMEPAGE v18.1.6 (INTERACTIVE_MAXIMIZED)
+ * [STRATEGY]: Static-First Rendering | Narrative Conversion | Interactive Lead Magnets
+ * [UPDATED]: 2026-02-24
  */
 
 import React, { Suspense } from "react";
@@ -60,6 +60,24 @@ const PricingSection = dynamic(() => import("@/components/features/landing/Prici
   loading: () => <LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />,
   ssr: true,
 });
+
+const AuditReportGenerator = dynamic(
+  () =>
+    import("@/components/templates/sections/AuditReportGenerator").then(
+      (mod) => mod.AuditReportGenerator,
+    ),
+  {
+    loading: () => <LoadingSkeleton height="h-[400px]" className="mx-auto max-w-7xl" />,
+    ssr: true,
+  },
+);
+
+const DirectTerminal = dynamic(
+  () => import("@/components/templates/sections/DirectTerminal").then((mod) => mod.DirectTerminal),
+  {
+    ssr: true,
+  },
+);
 
 // [ISR]: Optimal revalidation cycle for high-performance indexing
 export const revalidate = 3600;
@@ -137,11 +155,19 @@ export default async function HomePage() {
           <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
             <h2 className="sr-only">Authority and Infrastructure Performance Hub</h2>
             <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
-              <Suspense fallback={<div className="h-20 w-full animate-pulse rounded-full bg-surface-card/10" />}>
+              <Suspense
+                fallback={
+                  <div className="bg-surface-card/10 h-20 w-full animate-pulse rounded-full" />
+                }
+              >
                 <TrustBadge />
               </Suspense>
               <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
-              <Suspense fallback={<div className="h-64 w-full animate-pulse rounded-section bg-surface-card/10" />}>
+              <Suspense
+                fallback={
+                  <div className="rounded-section bg-surface-card/10 h-64 w-full animate-pulse" />
+                }
+              >
                 <ImpactStats />
               </Suspense>
             </div>
@@ -183,15 +209,32 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 04. PROCESS: Dynamic Hydration Section */}
-      <section className="bg-surface-offset border-border/40 border-y py-24">
+      {/* 04. LABORATORY: Interactive Audit Tool */}
+      <section className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
+        <div className="container mx-auto px-4">
+          <header className="mb-16 text-center">
+            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+              Technical_Diagnosis_Engine
+            </span>
+            <h2 className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+              Audit <span className="text-brand-primary">Laboratory.</span>
+            </h2>
+          </header>
+          <Suspense fallback={<LoadingSkeleton height="h-[400px]" className="mx-auto max-w-5xl" />}>
+            <AuditReportGenerator />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* 05. PROCESS: Dynamic Hydration Section */}
+      <section className="bg-surface-main py-24">
         <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
           <WorkProcess />
         </Suspense>
       </section>
 
-      {/* 05. SUCCESS EVIDENCE: High Authority Evidence */}
-      <section id="success" className="py-24 md:py-32">
+      {/* 06. SUCCESS EVIDENCE: High Authority Evidence */}
+      <section id="success" className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
         <div className="container mx-auto px-4">
           <header className="mb-16">
             <h2 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-6xl">
@@ -206,7 +249,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 06. TECHNICAL INSIGHTS: SEO Context Injection */}
+      {/* 07. TECHNICAL INSIGHTS: SEO Context Injection */}
       <section className="bg-surface-main border-border/40 border-t py-24 md:py-32">
         <div className="container mx-auto px-4">
           <div className="mb-16 flex items-center justify-between">
@@ -222,7 +265,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 07. CONVERSION & GEOGRAPHIC DISTANCE */}
+      {/* 08. CONVERSION & GEOGRAPHIC DISTANCE */}
       <div className="bg-surface-offset">
         <section className="pb-24">
           <Suspense fallback={<LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />}>
@@ -232,11 +275,25 @@ export default async function HomePage() {
 
         <section className="border-border/60 border-t py-16">
           <div className="container mx-auto px-4">
-            <div className="mb-10 text-center">
-              <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-50">
-                Network_Coverage_Index
-              </span>
+            <div className="mb-16 flex flex-col items-center justify-center gap-12">
+              <div className="text-center">
+                <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-50">
+                  Network_Coverage_Index
+                </span>
+                <h2 className="text-text-primary mt-4 text-3xl font-black tracking-tighter uppercase italic">
+                  Regional <span className="text-brand-primary">Stability.</span>
+                </h2>
+              </div>
+
+              <div className="w-full max-w-2xl">
+                <Suspense
+                  fallback={<div className="h-48 w-full animate-pulse rounded-2xl bg-black/20" />}
+                >
+                  <DirectTerminal mode="health-check" province="Thailand" />
+                </Suspense>
+              </div>
             </div>
+
             <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-6">
               {featuredAreas.map((area, i) => (
                 <AreaCard key={area.slug} data={area} index={i} />

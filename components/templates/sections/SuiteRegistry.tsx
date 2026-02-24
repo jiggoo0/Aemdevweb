@@ -1,23 +1,45 @@
-import React from "react";
+/**
+ * [SECTION COMPONENT]: SUITE_REGISTRY v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Interaction Reveal | Zero-Framer
+ */
+
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import type { CatalogItem } from "@/types";
 import { cn } from "@/lib/utils";
 
 interface SuiteRegistryProps {
-  /** รายการยูนิตที่พักที่ดึงมาจาก Registry ระบบ */
   readonly items: readonly CatalogItem[];
 }
 
-/**
- * @component SuiteRegistry
- * @description ทะเบียนยูนิตที่พัก แสดงผลในรูปแบบ Node ข้อมูลเชิงเทคนิค
- * รองรับระบบ Identity Switcher (เหลี่ยม/มน) และการแสดงผลเชิงอุตสาหกรรม
- */
 export const SuiteRegistry = ({ items }: SuiteRegistryProps) => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-24 md:py-32">
+    <section ref={ref} className="overflow-hidden py-24 md:py-32">
       <div className="container mx-auto px-4">
         {/* --- Header Section --- */}
-        <div className="mb-16 space-y-2">
+        <div
+          className={cn(
+            "mb-16 space-y-2 transition-all duration-1000",
+            visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+          )}
+        >
           <p className="font-mono text-xs font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase italic">
             // Unit_Registry_v18
           </p>
@@ -32,22 +54,22 @@ export const SuiteRegistry = ({ items }: SuiteRegistryProps) => {
             <div
               key={idx}
               className={cn(
-                "group relative overflow-hidden bg-[var(--surface-card)] transition-all duration-500",
+                "group relative overflow-hidden bg-[var(--surface-card)] transition-all duration-700",
                 "border-[var(--border-width)] border-[var(--foreground)]/10 hover:border-[var(--brand-primary)]/50",
                 "rounded-[var(--radius)] shadow-sm hover:shadow-xl",
+                "transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
               {/* Media Node: Placeholder for Room Image */}
               <div className="relative aspect-[16/10] overflow-hidden bg-zinc-900">
-                {/* Technical Badge Overlay */}
                 <div className="absolute top-6 left-6 z-10 rounded-[calc(var(--radius)*0.5)] border border-white/10 bg-black/40 p-3 font-mono text-[10px] tracking-widest text-white uppercase backdrop-blur-md">
                   SQM: {idx === 0 ? "55" : "85"} | MAX_GUESTS: 2
                 </div>
 
-                {/* [IMAGE_TIP]: หากมี URL รูปภาพ สามารถเปลี่ยน div นี้เป็น <Image /> ได้ทันที */}
                 <div className="absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-40" />
 
-                {/* Blueprint Pattern Decor */}
                 <div
                   className="pointer-events-none absolute inset-0 opacity-[0.03]"
                   style={{
@@ -64,7 +86,7 @@ export const SuiteRegistry = ({ items }: SuiteRegistryProps) => {
                     <p className="font-mono text-[9px] tracking-tighter uppercase italic opacity-40">
                       // Unit_Identity
                     </p>
-                    <h3 className="text-3xl leading-none font-black uppercase italic">
+                    <h3 className="text-3xl leading-none font-black uppercase italic transition-colors group-hover:text-[var(--brand-primary)]">
                       {room.name}
                     </h3>
                   </div>

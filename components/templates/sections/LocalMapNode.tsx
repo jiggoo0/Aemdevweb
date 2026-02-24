@@ -1,7 +1,11 @@
+/**
+ * [SECTION COMPONENT]: LOCAL_MAP_NODE v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Interaction Reveal | Zero-Framer
+ */
+
 "use client";
 
-import React, { memo } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
 
@@ -11,18 +15,29 @@ interface LocalMapNodeProps {
   province: string;
 }
 
-/**
- * @component LocalMapNode
- * @description แสดงพิกัดที่ตั้งในรูปแบบ Industrial Blueprint พร้อมระบบ Identity Switcher
- * [OPTIMIZED]: Wrapped with memo for rendering performance
- */
 export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => {
-  // [DEFENSIVE]: Fallback coordinates if undefined (Bangkok Center)
   const safeLat = lat || 13.7563;
   const safeLng = lng || 100.5018;
 
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="container mx-auto px-4 py-24">
+    <section ref={ref} className="container mx-auto px-4 py-24">
       <div className="group relative">
         {/* --- 1. Technical Frame Area (Geographic Blueprint) --- */}
         <div
@@ -66,20 +81,25 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
 
           {/* Target Marker */}
           <div className="absolute top-1/2 left-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "backOut" }}
-              className="relative flex items-center justify-center"
+            <div
+              className={cn(
+                "relative flex items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                visible ? "scale-100 opacity-100" : "scale-0 opacity-0",
+              )}
             >
               <div className="absolute h-20 w-20 animate-ping rounded-full border-2 border-[var(--brand-primary)] opacity-20" />
               <div className="h-4 w-4 rotate-45 bg-[var(--brand-primary)] shadow-[0_0_20px_var(--brand-primary)]" />
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* --- 2. Data Readout Floater --- */}
-        <div className="absolute bottom-8 left-8 z-40 hidden md:block">
+        <div
+          className={cn(
+            "absolute bottom-8 left-8 z-40 hidden transition-all delay-500 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:block",
+            visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+          )}
+        >
           <div className="space-y-4 rounded-[calc(var(--radius)*0.5)] border border-[var(--brand-primary)]/30 bg-black/80 p-6 backdrop-blur-xl">
             <div className="flex items-center gap-3">
               <div className="h-2 w-2 animate-pulse rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]" />

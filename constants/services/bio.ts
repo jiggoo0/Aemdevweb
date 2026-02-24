@@ -1,10 +1,11 @@
 /**
- * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.3 (IDENTITY_SYNC_PRO)
+ * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.4 (IDENTITY_SYNC_PRO)
  * [STRATEGY]: Personal Authority | AI-Search Synchronization | E-E-A-T Focus
  * [MAINTAINER]: AEMZA MACKS
  */
 
 import type { TemplateMasterData } from "@/types";
+import { SITE_CONFIG } from "../site-config";
 
 export const bioService: TemplateMasterData = {
   id: "AEM-SVC-PB-14",
@@ -23,15 +24,14 @@ export const bioService: TemplateMasterData = {
   unit: "เริ่มต้น / โปรเจกต์",
 
   // [THEME_STANDARD]: ธีม Cyber-Tech Professional (Dark Mode)
-  // สื่อถึงความลึกลับแต่แม่นยำ ทันสมัย และเป็น Tech Specialist
   theme: {
     mode: "dark",
-    primary: "#06b6d4", // Cyan 500: สีฟ้าเทค สื่อถึงนวัตกรรม
-    secondary: "#164e63", // Cyan 900: สีพื้นหลังเข้มลึก
-    background: "#09090b", // Zinc 950: สีดำด้าน (Matte Black) ดูพรีเมียม
-    foreground: "#fafafa", // Zinc 50: สีตัวอักษรขาวสะอาด
-    accent: "#22d3ee", // Cyan 400: สี Highlight จุดสำคัญ
-    gradient: "from-[#06b6d4]/15 via-transparent to-transparent", // Cyber Glow Effect
+    primary: "#06b6d4", // Cyan 500
+    secondary: "#164e63", // Cyan 900
+    background: "#09090b", // Zinc 950
+    foreground: "#fafafa", // Zinc 50
+    accent: "#22d3ee", // Cyan 400
+    gradient: "from-[#06b6d4]/15 via-transparent to-transparent",
   },
 
   // [TRUST_SIGNAL]
@@ -39,9 +39,9 @@ export const bioService: TemplateMasterData = {
     "Identity Control: ระบบที่ออกแบบมาเพื่อจัดการ E-E-A-T และแก้ปัญหาข้อมูลซ้ำซ้อนในฐานข้อมูล AI",
 
   benefits: [
-    "Authority Synchronization: สร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด เพื่อให้ Google จำข้อมูลที่ถูกต้อง",
-    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและผลงานชัดเจน ป้องกันการสับสนของข้อมูล",
-    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยัง Knowledge Graph ของ Google โดยตรง ช่วยให้ตัวตนของคุณถูกจัดหมวดหมู่เป็น Specialist",
+    "Authority Synchronization: สร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด",
+    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและผลงานชัดเจน",
+    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยัง Knowledge Graph ของ Google โดยตรง",
   ],
 
   coreFeatures: [
@@ -61,6 +61,34 @@ export const bioService: TemplateMasterData = {
       description:
         "แสดงผลข้อมูลทางธุรกิจหรือเลขผู้เสียภาษีอย่างโปร่งใส สร้างความน่าเชื่อถือระดับองค์กร",
       icon: "FileText",
+    },
+  ],
+
+  // [ACTION_REGISTRY]: ทะเบียนลิงก์สำคัญที่ต้องการให้ AI และผู้ใช้เข้าถึง
+  items: [
+    {
+      name: "Line Official Account",
+      description: "ช่องทางปรึกษาโปรเจกต์และวางแผนระบบโดยตรง",
+      icon: "MessageCircle",
+      url: SITE_CONFIG.links.line,
+    },
+    {
+      name: "Facebook Specialist Page",
+      description: "ติดตามอัปเดตกลยุทธ์ Technical SEO และ Web Architecture",
+      icon: "Facebook",
+      url: SITE_CONFIG.links.facebook,
+    },
+    {
+      name: "GitHub Repository",
+      description: "ตรวจสอบมาตรฐานการเขียนโค้ดและ Open Source Projects",
+      icon: "Github",
+      url: SITE_CONFIG.links.github,
+    },
+    {
+      name: "LinkedIn Professional Profile",
+      description: "ประวัติการทำงานและการเชื่อมโยงเครือข่ายธุรกิจ",
+      icon: "Linkedin",
+      url: SITE_CONFIG.links.linkedin,
     },
   ],
 

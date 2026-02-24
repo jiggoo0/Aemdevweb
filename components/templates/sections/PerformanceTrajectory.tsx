@@ -1,29 +1,46 @@
 /**
- * [FEATURE]: PERFORMANCE_TRAJECTORY v18.0.7 (STABILIZED_FINAL)
- * [STRATEGY]: Growth Visualization | Named Export Alignment | GPU-Optimized
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [FEATURE]: PERFORMANCE_TRAJECTORY v18.0.8 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Growth Visualization | Pure CSS SVG Animation | Zero-Framer
  */
 
 "use client";
 
-import React, { memo } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
-/**
- * @component PerformanceTrajectory
- * @description แสดงกราฟการเติบโตของ Traffic แบบจำลอง เพื่อสร้างความเชื่อมั่นในเชิงเทคนิค
- * [FIXED]: เปลี่ยนเป็น Named Export เพื่อแก้ปัญหา Build Error และปรับปรุงสถาปัตยกรรม
- */
 export const PerformanceTrajectory = memo(() => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1, margin: "-100px" },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={ref}
       id="growth-trajectory"
       className="border-border/10 bg-surface-main/50 border-y py-24 md:py-32"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
           {/* --- 01. CONTENT_LAYER: Strategic Narrative --- */}
-          <div className="space-y-8">
+          <div
+            className={cn(
+              "space-y-8 transition-all duration-1000",
+              visible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0",
+            )}
+          >
             <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
               <span className="bg-brand-primary h-1 w-1 animate-pulse rounded-full" />
               <p className="text-brand-primary font-mono text-[9px] font-black tracking-[0.3em] uppercase">
@@ -65,7 +82,12 @@ export const PerformanceTrajectory = memo(() => {
           </div>
 
           {/* --- 02. VISUAL_LAYER: Technical Growth Chart --- */}
-          <div className="group relative">
+          <div
+            className={cn(
+              "group relative transition-all delay-300 duration-[1200ms]",
+              visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+            )}
+          >
             <div className="border-border/10 bg-surface-card rounded-section relative h-[300px] w-full overflow-hidden border p-10 md:h-[400px]">
               {/* Chart Grid - Blueprint Style */}
               <div
@@ -99,42 +121,50 @@ export const PerformanceTrajectory = memo(() => {
                   </defs>
 
                   {/* Area Fill */}
-                  <motion.path
+                  <path
                     d="M 0 190 Q 50 185 100 170 T 200 130 T 300 70 T 400 20 V 200 H 0 Z"
                     fill="url(#chartGradient)"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 1.5, delay: 0.5 }}
+                    className={cn(
+                      "transition-opacity delay-1000 duration-1000",
+                      visible ? "opacity-100" : "opacity-0",
+                    )}
                   />
 
-                  {/* Main Trajectory Path - GPU Accelerated */}
-                  <motion.path
+                  {/* Main Trajectory Path */}
+                  <path
                     d="M 0 190 Q 50 185 100 170 T 200 130 T 300 70 T 400 20"
                     fill="none"
                     stroke="var(--brand-primary)"
                     strokeWidth="4"
                     strokeLinecap="round"
-                    className="transform-gpu drop-shadow-[0_0_12px_var(--brand-primary)] will-change-[pathLength]"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                    strokeDasharray="1000"
+                    strokeDashoffset={visible ? "0" : "1000"}
+                    className={cn(
+                      "transform-gpu drop-shadow-[0_0_12px_var(--brand-primary)] transition-all delay-500 duration-[2500ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    )}
                   />
 
                   {/* Target Node Indicator */}
-                  <motion.circle
+                  <circle
                     cx="400"
                     cy="20"
                     r="6"
                     fill="var(--brand-primary)"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 2, type: "spring" }}
+                    className={cn(
+                      "transition-transform delay-[2800ms] duration-700 ease-out",
+                      visible ? "scale-100" : "scale-0",
+                    )}
+                    style={{ transformOrigin: "400px 20px" }}
                   />
                 </svg>
 
                 {/* Status Nodes Labeling */}
-                <div className="absolute top-4 right-0 flex flex-col items-end gap-1">
+                <div
+                  className={cn(
+                    "absolute top-4 right-0 flex flex-col items-end gap-1 transition-all delay-[2500ms] duration-700",
+                    visible ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0",
+                  )}
+                >
                   <span className="text-brand-primary animate-pulse font-mono text-[10px] font-black tracking-widest uppercase">
                     Target_Acquired
                   </span>

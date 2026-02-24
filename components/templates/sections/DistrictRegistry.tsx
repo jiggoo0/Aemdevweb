@@ -1,13 +1,41 @@
-import React from "react";
+/**
+ * [SECTION COMPONENT]: DISTRICT_REGISTRY v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Interaction Reveal | Zero-Framer
+ */
+
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 export const DistrictRegistry = ({ districts }: { districts: string[] }) => {
-  // [OPTIMIZATION]: Don't render empty section
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   if (!districts || districts.length === 0) return null;
 
   return (
-    <section className="border-t border-[var(--foreground)]/10 py-24">
+    <section ref={ref} className="overflow-hidden border-t border-[var(--foreground)]/10 py-24">
       <div className="container mx-auto px-4">
-        <div className="mb-12">
+        <div
+          className={cn(
+            "mb-12 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+          )}
+        >
           <h3 className="font-[family-name:var(--font-primary)] text-2xl font-black uppercase italic">
             Regional_Cluster_Nodes
           </h3>
@@ -17,7 +45,12 @@ export const DistrictRegistry = ({ districts }: { districts: string[] }) => {
         </div>
 
         {/* Grid System with Borders */}
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius)] border border-[var(--foreground)]/10 bg-[var(--foreground)]/10 md:grid-cols-4 lg:grid-cols-6">
+        <div
+          className={cn(
+            "grid grid-cols-2 gap-px overflow-hidden rounded-[var(--radius)] border border-[var(--foreground)]/10 bg-[var(--foreground)]/10 transition-all delay-300 duration-1000 md:grid-cols-4 lg:grid-cols-6",
+            visible ? "scale-100 opacity-100" : "scale-[0.98] opacity-0",
+          )}
+        >
           {districts.map((district, idx) => (
             <div
               key={`${district}-${idx}`}

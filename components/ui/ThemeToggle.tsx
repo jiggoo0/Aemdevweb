@@ -1,6 +1,6 @@
 /**
- * [SYSTEM COMPONENT]: THEME_TOGGLE_ORCHESTRATOR v18.1.7 (STABILIZED)
- * [STRATEGY]: OKLCH Dynamic Glow | Hardware Compositing | Perceptual Color Matching
+ * [SYSTEM COMPONENT]: THEME_TOGGLE_ORCHESTRATOR v18.1.8 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Hardware Compositing | Zero-Framer
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -8,11 +8,8 @@
 
 import React, { useEffect, useState, memo, useCallback } from "react";
 import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
-
-const FLUID_EASE = [0.16, 1, 0.3, 1] as const;
 
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -55,30 +52,30 @@ const ThemeToggle = () => {
         "dark:border-brand-primary/20 dark:bg-brand-primary/5 dark:hover:border-brand-primary/50",
       )}
     >
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={resolvedTheme}
-          initial={{ y: 12, opacity: 0, rotate: -45, scale: 0.5 }}
-          animate={{ y: 0, opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ y: -12, opacity: 0, rotate: 45, scale: 0.5 }}
-          transition={{ duration: 0.4, ease: FLUID_EASE }}
-          className="relative z-10"
+      <div className="relative z-10 flex h-full w-full items-center justify-center">
+        <div
+          className={cn(
+            "absolute transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            isDark
+              ? "translate-y-12 scale-50 rotate-45 opacity-0"
+              : "translate-y-0 scale-100 rotate-0 opacity-100",
+          )}
         >
-          <IconRenderer
-            name={isDark ? "Moon" : "Sun"}
-            size={18}
-            className={cn(
-              "transition-colors duration-500",
-              "dark:text-brand-primary text-amber-500",
-            )}
-          />
-        </motion.div>
-      </AnimatePresence>
+          <IconRenderer name="Sun" size={18} className="text-amber-500" />
+        </div>
+        <div
+          className={cn(
+            "absolute transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            !isDark
+              ? "translate-y-12 scale-50 rotate-45 opacity-0"
+              : "translate-y-0 scale-100 rotate-0 opacity-100",
+          )}
+        >
+          <IconRenderer name="Moon" size={18} className="text-brand-primary" />
+        </div>
+      </div>
 
-      {/* [ATMOSPHERIC_GLOW]: แยก Layer ออกมาเพื่อทำ GPU Compositing
-        - การใช้ Shadow บน OKLCH ให้ค่าความสว่างที่ตรงตามการรับรู้ของมนุษย์ (Perceptual Uniformity)
-        - ใช้ opacity transition แทนการเปลี่ยนสี Shadow โดยตรงเพื่อป้องกันกระตุก
-      */}
+      {/* [ATMOSPHERIC_GLOW]: แยก Layer ออกมาเพื่อทำ GPU Compositing */}
       <div
         className={cn(
           "absolute inset-0 z-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100",

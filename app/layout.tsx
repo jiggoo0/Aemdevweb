@@ -54,7 +54,6 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
     shortcut: "/favicon-32x32.png",
   },
-  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "th_TH",
@@ -133,7 +132,7 @@ export default function RootLayout({ children }: LayoutProps) {
         className={cn(
           "bg-surface-main text-text-primary min-h-dvh antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
-          "overflow-x-hidden font-thai",
+          "font-thai overflow-x-hidden",
         )}
       >
         <ThemeProvider
@@ -145,10 +144,7 @@ export default function RootLayout({ children }: LayoutProps) {
           {/* [INFRA]: Client-side logic for analytics, performance, and global listeners */}
           <ClientInfrastructure />
 
-          <div
-            id="root-container"
-            className="relative flex min-h-dvh flex-col"
-          >
+          <div id="root-container" className="relative flex min-h-dvh flex-col">
             {children}
           </div>
 

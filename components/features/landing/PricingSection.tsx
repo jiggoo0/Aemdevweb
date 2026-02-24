@@ -1,14 +1,13 @@
 /**
- * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v18.1.0 (PRODUCTION_MAXIMIZED)
- * [STRATEGY]: Symmetric Balance | Hydration Guarded | GPU-Accelerated
+ * [FEATURE COMPONENT]: PRICING_ARCHITECTURE v18.1.1 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Hybrid Performance | Zero-Framer
  */
 
 "use client";
 
-import React, { memo, useMemo, useState, useEffect } from "react";
+import React, { memo, useMemo, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import type { Route } from "next";
-import { motion } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { cn } from "@/lib/utils";
@@ -28,10 +27,28 @@ interface PricingPlan {
 
 const PricingSection = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
 
-  // ป้องกัน Hydration Mismatch จากการใช้ toLocaleString()
   useEffect(() => {
     setIsMounted(true);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            setVisibleItems((prev) => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    const items = sectionRef.current?.querySelectorAll("[data-pricing-card]");
+    items?.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
   }, []);
 
   const displayPlans = useMemo<readonly PricingPlan[]>(() => {
@@ -89,7 +106,11 @@ const PricingSection = () => {
   }, []);
 
   return (
-    <section id="pricing" className="relative overflow-hidden py-24 md:py-32 lg:py-40">
+    <section
+      id="pricing"
+      ref={sectionRef}
+      className="relative overflow-hidden py-24 md:py-32 lg:py-40"
+    >
       <div className="container mx-auto px-4 md:px-8">
         {/* --- 01. HEADER --- */}
         <header className="mb-20 max-w-5xl md:mb-32">
@@ -117,18 +138,21 @@ const PricingSection = () => {
         {/* --- 02. PRICING GRID --- */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-stretch lg:gap-10">
           {displayPlans.map((plan, i) => (
-            <motion.div
+            <div
               key={plan.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              data-pricing-card
+              data-index={i}
               className={cn(
-                "group rounded-section relative flex transform-gpu flex-col border p-8 transition-all duration-500 md:p-12",
+                "group rounded-section relative flex transform-gpu flex-col border p-8 transition-all duration-700 md:p-12",
+                "translate-y-8 opacity-0",
+                visibleItems.has(i) && "translate-y-0 opacity-100",
                 plan.highlight
                   ? "border-brand-primary bg-surface-card/90 shadow-glow-lg z-10 lg:scale-[1.03]"
                   : "bg-surface-card border-border hover:border-brand-primary/40",
               )}
+              style={{
+                transitionDelay: `${i * 100}ms`,
+              }}
             >
               {plan.highlight && (
                 <div className="absolute -top-5 left-1/2 z-20 -translate-x-1/2">
@@ -213,7 +237,7 @@ const PricingSection = () => {
                   )}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -1,27 +1,34 @@
 /**
- * [FEATURE]: CONVERSION_PORTAL v18.0.6 (STABILIZED_FINAL)
- * [STRATEGY]: ROI-Focused CTA | DataLayer Tracking | Named Export Alignment
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [FEATURE]: CONVERSION_PORTAL v18.0.8 (STRICT_TYPED)
+ * [STRATEGY]: ROI-Focused CTA | Global DataLayer | Zero-Framer
  */
 
 "use client";
 
-import React, { memo, useCallback } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useCallback, useState, useEffect, useRef } from "react";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
-/**
- * @component ConversionPortal
- * @description ด่านสุดท้ายของ Conversion Funnel ออกแบบมาเพื่อกระตุ้นการตัดสินใจระดับ Enterprise
- * [FIXED]: เปลี่ยนเป็น Named Export เพื่อให้สอดคล้องกับระบบ Tree-shaking และมาตรฐาน v18
- */
 export const ConversionPortal = memo(() => {
-  /**
-   * [TRACKING_LOGIC]: การบันทึกพฤติกรรมผู้ใช้เข้าสู่ Google Tag Manager
-   * ช่วยให้วิเคราะห์ได้ว่าช่องทางใด (Line/Phone) มีประสิทธิภาพสูงสุด
-   */
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   const handleContactTracking = useCallback((platform: string) => {
     if (typeof window !== "undefined" && window.dataLayer) {
       window.dataLayer.push({
@@ -36,10 +43,11 @@ export const ConversionPortal = memo(() => {
 
   return (
     <section
+      ref={ref}
       id="conversion-portal"
       className="bg-surface-main relative overflow-hidden py-32 md:py-48"
     >
-      {/* --- 01. AMBIENT_INFRA: Neural Physics Background --- */}
+      {/* --- 01. AMBIENT_INFRA --- */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
@@ -52,19 +60,20 @@ export const ConversionPortal = memo(() => {
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
-            {/* --- 02. NARRATIVE_NODE: High-Impact Hook --- */}
-            <div className="space-y-12 lg:col-span-7">
+            {/* --- 02. NARRATIVE_NODE --- */}
+            <div
+              className={cn(
+                "space-y-12 transition-all duration-1000 lg:col-span-7",
+                visible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0",
+              )}
+            >
               <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2"
-                >
+                <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2">
                   <IconRenderer name="Target" size={14} className="text-brand-primary" />
                   <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
                     Strategic_Partnership_Initiative
                   </span>
-                </motion.div>
+                </div>
 
                 <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl">
                   Ready to <br />
@@ -96,10 +105,16 @@ export const ConversionPortal = memo(() => {
               </div>
             </div>
 
-            {/* --- 03. ACTION_NODE: Direct Conversion Hub --- */}
-            <div className="lg:col-span-5">
+            {/* --- 03. ACTION_NODE --- */}
+            <div
+              className={cn(
+                "transition-all delay-300 duration-1000 lg:col-span-5",
+                visible
+                  ? "translate-y-0 scale-100 opacity-100"
+                  : "translate-y-8 scale-95 opacity-0",
+              )}
+            >
               <div className="group relative">
-                {/* Glow Effect Layer */}
                 <div className="from-brand-primary/20 rounded-card-lg absolute -inset-1 bg-gradient-to-r to-emerald-500/20 opacity-0 blur-2xl transition-opacity duration-700 group-hover:opacity-100" />
 
                 <div className="bg-surface-card rounded-card-xl relative space-y-10 border border-white/5 p-10 shadow-2xl md:p-14">

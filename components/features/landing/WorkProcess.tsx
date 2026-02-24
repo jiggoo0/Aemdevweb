@@ -1,17 +1,11 @@
 /**
- * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v18.1.0 (PRODUCTION_HARDENED)
- * [STRATEGY]: Symmetry Protocol | GPU-Driven Reveal | Zero-CLS Execution
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- * [CHANGELOG]:
- * - Integrated 'h-full' wrappers for grid balance.
- * - Refined typography to match the v18.2.0 Global Aesthetic.
- * - Optimized Framer Motion props for smoother mobile performance.
+ * [FEATURE COMPONENT]: WORK_PROCESS_SYSTEM v18.1.1 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Hybrid Performance | Zero-Framer
  */
 
 "use client";
 
-import React, { memo, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
@@ -64,18 +58,51 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
 
 const WorkProcess = () => {
   const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = entry.target.getAttribute("data-index");
+            if (index === "header") setHeaderVisible(true);
+            else if (index === "footer") setFooterVisible(true);
+            else if (index) {
+              setVisibleItems((prev) => new Set([...prev, Number(index)]));
+            }
+          }
+        });
+      },
+      { threshold: 0.1, margin: "-50px" },
+    );
+
+    const items = sectionRef.current?.querySelectorAll("[data-animate]");
+    items?.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
   }, []);
 
   return (
     <section
       id="process"
+      ref={sectionRef}
       className="relative container mx-auto flex w-full flex-col overflow-hidden px-4 py-24 md:px-8 lg:py-40"
     >
       {/* --- 01. STRATEGIC HEADER (Unified Aesthetic) --- */}
-      <header className="border-border/40 mb-20 flex flex-col justify-between gap-12 border-b pb-12 md:mb-28 md:pb-16 lg:flex-row lg:items-end">
+      <header
+        data-animate
+        data-index="header"
+        className={cn(
+          "border-border/40 mb-20 flex flex-col justify-between gap-12 border-b pb-12 transition-all duration-1000 md:mb-28 md:pb-16 lg:flex-row lg:items-end",
+          headerVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+        )}
+      >
         <div className="max-w-4xl space-y-6">
           <div className="text-brand-primary flex items-center gap-4">
             <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
@@ -114,13 +141,18 @@ const WorkProcess = () => {
         />
 
         {PROCESS_STEPS.map((step, index) => (
-          <motion.div
+          <div
             key={step.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group flex h-full w-full flex-col"
+            data-animate
+            data-index={index}
+            className={cn(
+              "group flex h-full w-full flex-col transition-all duration-1000",
+              visibleItems.has(index) ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+            )}
+            style={{
+              transitionDelay: `${index * 150}ms`,
+              transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
           >
             <div
               className={cn(
@@ -176,17 +208,18 @@ const WorkProcess = () => {
                 </div>
               </footer>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
       {/* --- 03. CONVERSION HUB --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="mt-24 flex flex-col items-center text-center md:mt-40"
+      <div
+        data-animate
+        data-index="footer"
+        className={cn(
+          "mt-24 flex flex-col items-center text-center transition-all duration-1000 md:mt-40",
+          footerVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
+        )}
       >
         <div className="max-w-3xl space-y-12">
           <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-6xl lg:text-7xl">
@@ -217,7 +250,7 @@ const WorkProcess = () => {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

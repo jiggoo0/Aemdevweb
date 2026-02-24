@@ -1,13 +1,11 @@
 /**
- * [SHARED COMPONENT]: TRUST_BADGE_SYSTEM v17.9.102 (ULTIMATE_HARDENED)
- * [STRATEGY]: Modular Trust Nodes | Neural Physics | GPU-Accelerated Rendering
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SHARED COMPONENT]: TRUST_BADGE_SYSTEM v17.9.103 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | IntersectionObserver | Zero-Framer
  */
 
 "use client";
 
-import React, { memo } from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
@@ -28,46 +26,35 @@ const TRUST_NODES: readonly TrustNode[] = [
 ];
 
 const TrustBadge = () => {
-  /* [PHYSICS]: จูนค่า Spring เพื่อความนิ่งและหนักแน่น (Premium Damping) */
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15, scale: 0.95, filter: "blur(4px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      filter: "blur(0px)",
-      transition: {
-        type: "spring",
-        stiffness: 150,
-        damping: 22,
-        mass: 0.8,
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
       },
-    },
-  };
+      { threshold: 0.1, margin: "-50px" },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={ref}
       className="flex w-full flex-col items-center justify-center py-16 md:py-24"
       aria-label="Trust Signals"
     >
       {/* --- 01. STATUS HEADER: Blueprint Alignment --- */}
-      <motion.div
-        initial={{ opacity: 0, width: "30%" }}
-        whileInView={{ opacity: 0.6, width: "100%" }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-14 flex max-w-2xl items-center justify-center gap-6 px-4"
+      <div
+        className={cn(
+          "mb-14 flex w-full max-w-2xl items-center justify-center gap-6 px-4 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+          visible ? "scale-x-100 opacity-60" : "scale-x-75 opacity-0",
+        )}
       >
         <div className="via-border/50 h-px flex-1 bg-gradient-to-r from-transparent to-transparent" />
         <span
@@ -77,31 +64,27 @@ const TrustBadge = () => {
           Infrastructure_Verified.v{SITE_CONFIG.project.version}
         </span>
         <div className="via-border/50 h-px flex-1 bg-gradient-to-r from-transparent to-transparent" />
-      </motion.div>
+      </div>
 
       {/* --- 02. NODES GRID: Balanced Kinetic Chips --- */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="flex flex-wrap justify-center gap-4 px-4 md:gap-5 lg:gap-6"
-      >
-        {TRUST_NODES.map((node) => (
-          <motion.div
+      <div className="flex flex-wrap justify-center gap-4 px-4 md:gap-5 lg:gap-6">
+        {TRUST_NODES.map((node, index) => (
+          <div
             key={node.label}
-            variants={itemVariants}
-            whileHover={{
-              scale: 1.03,
-              y: -5,
-              transition: { duration: 0.3, ease: "easeOut" },
-            }}
             className={cn(
               "group relative flex cursor-default items-center gap-5 overflow-hidden rounded-[1.8rem] md:rounded-[2.2rem]",
               "border-border bg-surface-card/30 shadow-pro-sm border px-6 py-4 backdrop-blur-3xl md:px-9 md:py-5",
               "hover:border-brand-primary/40 hover:bg-surface-offset/60 transition-all duration-500",
               "transform-gpu will-change-transform",
+              "hover:-translate-y-1.5 hover:scale-103",
+              "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              visible
+                ? "blur-0 translate-y-0 scale-100 opacity-100"
+                : "translate-y-4 scale-95 opacity-0 blur-[4px]",
             )}
+            style={{
+              transitionDelay: `${index * 120}ms`,
+            }}
           >
             {/* Neural Signal: Emerald (Online/Secure) */}
             <div className="relative flex h-2.5 w-2.5 items-center justify-center">
@@ -141,9 +124,9 @@ const TrustBadge = () => {
               className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent transition-transform duration-[1500ms] group-hover:translate-x-full"
               aria-hidden="true"
             />
-          </motion.div>
+          </div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };

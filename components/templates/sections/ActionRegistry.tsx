@@ -1,3 +1,8 @@
+/**
+ * [SECTION COMPONENT]: ACTION_REGISTRY v18.0.3 (LINK_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Registry Mapping | Zero-Framer
+ */
+
 import React from "react";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 import type { CatalogItem } from "@/types";
@@ -13,10 +18,10 @@ export const ActionRegistry = ({ links }: ActionRegistryProps) => {
         links.map((link, idx) => (
           <a
             key={idx}
-            href="#" // ใน Production ควร map field url จาก CMS
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-between rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)] p-5 transition-all hover:translate-x-1 hover:border-[var(--brand-primary)]"
+            href={link.url || "#"}
+            target={link.url?.startsWith("http") ? "_blank" : "_self"}
+            rel={link.url?.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="group relative flex items-center justify-between rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)] p-5 transition-all duration-500 hover:translate-x-1 hover:border-[var(--brand-primary)]"
           >
             <div className="flex items-center gap-4">
               <div className="text-[var(--brand-primary)]">

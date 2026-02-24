@@ -1,7 +1,11 @@
+/**
+ * [SECTION COMPONENT]: SUCCESS_TIMELINE v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Interaction Reveal | Zero-Framer
+ */
+
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface TimelineNode {
@@ -15,12 +19,29 @@ interface SuccessTimelineProps {
   items?: TimelineNode[];
 }
 
-/**
- * @component SuccessTimeline
- * @description แสดงเส้นทางความสำเร็จในรูปแบบโครงสร้างวิศวกรรม (Blueprint Path)
- */
 export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
-  // Mockup ข้อมูลกรณีไม่มีการส่ง Props เข้ามา
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.getAttribute("data-index"));
+            setVisibleItems((prev) => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    const nodes = sectionRef.current?.querySelectorAll("[data-timeline-node]");
+    nodes?.forEach((node) => observer.observe(node));
+
+    return () => observer.disconnect();
+  }, []);
+
   const defaultItems: TimelineNode[] = [
     {
       year: "2023",
@@ -46,35 +67,34 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
   const displayItems = items || defaultItems;
 
   return (
-    <section className="relative overflow-hidden py-24">
-      {/* Blueprint Grid Background (Subtle) */}
+    <section ref={sectionRef} className="relative overflow-hidden py-24">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)`,
-          size: "40px 40px",
+          backgroundSize: "40px 40px",
         }}
       />
 
       <div className="container mx-auto px-4">
         <div className="relative flex flex-col space-y-20">
-          {/* Central Path (The Blueprint Line) */}
           <div className="absolute top-0 bottom-0 left-4 w-[var(--border-width)] bg-gradient-to-b from-[var(--brand-primary)] via-[var(--brand-primary)]/50 to-transparent md:left-1/2 md:-translate-x-1/2" />
 
           {displayItems.map((item, idx) => {
             const isEven = idx % 2 === 0;
+            const isVisible = visibleItems.has(idx);
 
             return (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                viewport={{ once: true }}
+                data-timeline-node
+                data-index={idx}
                 className={cn(
-                  "relative flex w-full flex-col items-start md:flex-row md:items-center",
+                  "relative flex w-full flex-col items-start transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:flex-row md:items-center",
+                  isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                   isEven ? "md:flex-row-reverse" : "",
                 )}
+                style={{ transitionDelay: `${idx * 150}ms` }}
               >
                 {/* 1. Content Block */}
                 <div
@@ -103,7 +123,6 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
                         : "border-[var(--brand-primary)] bg-[var(--surface-main)]",
                     )}
                   />
-                  {/* Glow Effect for Active Node */}
                   {item.status === "active" && (
                     <div className="absolute inset-0 animate-ping rounded-full bg-[var(--brand-primary)] opacity-20 blur-lg" />
                   )}
@@ -120,7 +139,7 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
                     {item.year}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

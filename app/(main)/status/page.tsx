@@ -1,12 +1,11 @@
 /**
- * [ROUTE PAGE]: SYSTEM_STATUS_TERMINAL v17.4.5 (STABILIZED)
- * [STRATEGY]: Kinetic Grid Architecture | Multi-Theme Logic | Node Matrix
- * [MAINTAINER]: AEMDEVWEB Specialist Team
+ * [ROUTE PAGE]: SYSTEM_STATUS_TERMINAL v18.0.0 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Kinetic Grid Architecture | Pure CSS Transitions | Zero-Framer
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React from "react";
 import type { Metadata } from "next";
-import * as motion from "framer-motion/client"; // [NOTE]: Next.js 14/15 Server Component Compatible
 
 // --- Infrastructure ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
@@ -18,7 +17,7 @@ import type { IconName } from "@/components/ui/IconRenderer";
 
 export const metadata: Metadata = {
   title: `System_Integrity_Report | ${SITE_CONFIG.brandName}`,
-  description: "Advanced diagnostic report for multi-node architecture in v17.4.5 environment.",
+  description: "Advanced diagnostic report for multi-node architecture in v18 environment.",
   alternates: { canonical: `${SITE_CONFIG.siteUrl}/status` },
 };
 
@@ -72,7 +71,7 @@ const ARCHITECTURE_NODES: readonly StatusNode[] = [
   },
   {
     id: "NODE_05",
-    label: "Security_Firewall_v17",
+    label: "Security_Firewall_v18",
     latency: "02ms",
     load: "04%",
     status: "LOCKED",
@@ -93,6 +92,7 @@ const ARCHITECTURE_NODES: readonly StatusNode[] = [
 /**
  * @page StatusPage
  * @description หน้าจอแสดงสถานะความสมบูรณ์ของระบบแบบ Real-time (Diagnostic Terminal)
+ * [OPTIMIZATION]: เปลี่ยนเป็น Pure Server Component โดยใช้ CSS animations เพื่อประหยัด JS
  */
 export default function StatusPage() {
   const systemRefId = `AEM-${SITE_CONFIG.project.version}-NODE`;
@@ -101,17 +101,16 @@ export default function StatusPage() {
     <LayoutEngine spacing="none">
       {/* 01. TERMINAL HEADER: Kinetic Visual Infrastructure */}
       <section className="border-border relative overflow-hidden border-b pt-32 pb-16 transition-colors duration-500 md:pt-48 md:pb-24">
-        {/* Atmospheric Engine: ปรับค่า Opacity ให้เหมาะสมกับทุกธีม */}
         <div className="pointer-events-none absolute inset-0 z-0 select-none" aria-hidden="true">
           <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.05]" />
-          <div className="ambient-aura absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/2 opacity-[var(--ambient-opacity,0.4)] blur-[140px]" />
+          <div className="bg-brand-primary/10 absolute top-0 right-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/2 opacity-40 blur-[140px]" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <div className="flex flex-col justify-between gap-12 lg:flex-row lg:items-end">
             <div className="max-w-4xl space-y-8">
               <h2 className="sr-only">Diagnostic Overview & Metrics</h2>
-              <div className="flex items-center gap-4">
+              <div className="animate-in fade-in slide-in-from-top-2 flex items-center gap-4 duration-700">
                 <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary shadow-glow flex items-center gap-3 rounded-full border px-4 py-1.5 backdrop-blur-sm">
                   <span className="relative flex h-2 w-2">
                     <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
@@ -126,14 +125,13 @@ export default function StatusPage() {
                 </span>
               </div>
 
-              <h1 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic sm:text-7xl md:text-8xl lg:text-9xl">
+              <h1 className="text-text-primary animate-in fade-in slide-in-from-left-4 fill-mode-both text-6xl leading-[0.85] font-black tracking-tighter uppercase italic delay-150 duration-1000 sm:text-7xl md:text-8xl lg:text-9xl">
                 System <br className="hidden sm:block" />{" "}
                 <span className="text-brand-primary">Integrity.</span>
               </h1>
             </div>
 
-            {/* Status Panel: Real-time Metrics Visualizer */}
-            <div className="border-border bg-surface-card/80 shadow-glow group rounded-card w-full border p-8 backdrop-blur-md transition-all duration-500 lg:w-96">
+            <div className="border-border bg-surface-card/80 shadow-glow group rounded-card animate-in fade-in zoom-in-95 fill-mode-both w-full border p-8 backdrop-blur-md transition-all delay-300 duration-500 duration-1000 lg:w-96">
               <div className="mb-6 flex items-center justify-between">
                 <div className="space-y-1">
                   <span className="text-text-muted font-mono text-[9px] font-black uppercase opacity-60">
@@ -151,7 +149,7 @@ export default function StatusPage() {
                 />
               </div>
               <div className="bg-surface-offset border-border h-1.5 w-full overflow-hidden rounded-full border">
-                <div className="bg-brand-primary shadow-glow h-full w-[99.99%]" />
+                <div className="bg-brand-primary shadow-glow animate-in slide-in-from-left h-full w-[99.99%] duration-[2000ms] ease-out" />
               </div>
             </div>
           </div>
@@ -172,17 +170,15 @@ export default function StatusPage() {
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {ARCHITECTURE_NODES.map((node, index) => (
-              <motion.div
+              <div
                 key={node.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                viewport={{ once: true }}
                 className={cn(
                   "group border-border bg-surface-card rounded-section relative overflow-hidden border p-8 transition-all duration-700 ease-out",
                   "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-glow hover:-translate-y-2",
                   "will-change-transform",
+                  "animate-in fade-in slide-in-from-bottom-4 fill-mode-both",
                 )}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Node Identity Interface */}
                 <div className="mb-14 flex items-start justify-between">
@@ -196,7 +192,7 @@ export default function StatusPage() {
                     <div className="flex items-center justify-end gap-2">
                       <div className="border-border bg-surface-offset h-1 w-12 overflow-hidden rounded-full border">
                         <div
-                          className="bg-brand-primary shadow-glow h-full"
+                          className="bg-brand-primary shadow-glow animate-in slide-in-from-left h-full delay-500 duration-[1500ms] ease-out"
                           style={{ width: `${node.health}%` }}
                         />
                       </div>
@@ -246,7 +242,7 @@ export default function StatusPage() {
 
                 {/* Interaction Aura */}
                 <div className="bg-brand-primary/10 pointer-events-none absolute -right-20 -bottom-20 h-64 w-64 opacity-0 blur-[100px] transition-opacity duration-1000 group-hover:opacity-100" />
-              </motion.div>
+              </div>
             ))}
           </div>
 

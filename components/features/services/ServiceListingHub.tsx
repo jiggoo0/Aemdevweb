@@ -1,12 +1,10 @@
 /**
- * [FEATURE COMPONENT]: SERVICE_LISTING_HUB v18.0.0 (PRODUCTION_READY)
- * [STRATEGY]: Grid-Symmetry Protocol | Deterministic Sort | Hardware-Accelerated Stacking
+ * [FEATURE COMPONENT]: SERVICE_LISTING_HUB v18.0.1 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure Server Component | Grid-Symmetry Protocol | Zero-JS
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-"use client";
-
-import React, { useMemo, memo } from "react";
+import React from "react";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import ServiceCard from "./ServiceCard";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -22,7 +20,7 @@ interface ServiceListingHubProps {
 
 /**
  * @component ServiceListingHub
- * @description ศูนย์กลางการจัดระเบียบ Node บริการ พร้อมระบบควบคุมความสมดุลของ Layout
+ * @description ศูนย์กลางการจัดระเบียบ Node บริการ (RSC Version)
  */
 const ServiceListingHub = ({
   limit,
@@ -31,23 +29,19 @@ const ServiceListingHub = ({
   showEmptyState = true,
 }: ServiceListingHubProps) => {
   /**
-   * [DATA_ORCHESTRATION]: ระบบคัดกรองข้อมูลระดับ Hardened
-   * [LOGIC]: Priority-First -> Title-Secondary (Deterministic)
+   * [DATA_ORCHESTRATION]: Server-side sorting and filtering
    */
-  const services = useMemo(() => {
-    const registry = Array.isArray(MASTER_REGISTRY) ? MASTER_REGISTRY : [];
+  const registry = Array.isArray(MASTER_REGISTRY) ? MASTER_REGISTRY : [];
 
-    return [...registry]
-      .filter((svc) => !category || svc.category === category)
-      .sort((a, b) => {
-        // [STRICT_SORT]: ต่ำกว่า 99 คือ Priority สูง
-        const pA = a.priority ?? 99;
-        const pB = b.priority ?? 99;
-        if (pA !== pB) return pA - pB;
-        return (a.title || "").localeCompare(b.title || "", "th");
-      })
-      .slice(0, limit || registry.length);
-  }, [category, limit]);
+  const services = [...registry]
+    .filter((svc) => !category || svc.category === category)
+    .sort((a, b) => {
+      const pA = a.priority ?? 99;
+      const pB = b.priority ?? 99;
+      if (pA !== pB) return pA - pB;
+      return (a.title || "").localeCompare(b.title || "", "th");
+    })
+    .slice(0, limit || registry.length);
 
   /**
    * [UI_STATE]: STANDBY_NODE (Empty State Protocol)
@@ -85,12 +79,7 @@ const ServiceListingHub = ({
     <div
       role="list"
       aria-label="Professional Service Nodes"
-      className={cn(
-        // [SYMMETRY_ENGINE]: บังคับ Grid และใช้ gap ที่แม่นยำเพื่อลดอาการยืดยาวของการ์ด
-        "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8",
-        "transform-gpu", // บังคับใช้ GPU Layer สำหรับ Grid Animation
-        className,
-      )}
+      className={cn("grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8", className)}
     >
       {services.map((service, index) => (
         <div
@@ -98,9 +87,6 @@ const ServiceListingHub = ({
           role="listitem"
           className="group flex h-full w-full flex-col"
         >
-          {/* [STRATEGY]: หุ้มด้วย flex h-full เพื่อให้ ServiceCard 
-              ขยายตัวเต็มพื้นที่ Grid Cell เสมอ (ป้องกันการสูงไม่เท่ากัน) 
-          */}
           <ServiceCard
             data={service as TemplateMasterData}
             index={index}
@@ -113,6 +99,4 @@ const ServiceListingHub = ({
   );
 };
 
-ServiceListingHub.displayName = "ServiceListingHub";
-
-export default memo(ServiceListingHub);
+export default ServiceListingHub;

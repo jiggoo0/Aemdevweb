@@ -6,7 +6,7 @@
 
 "use client";
 
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import dynamic from "next/dynamic";
 import { SITE_CONFIG } from "@/constants/site-config";
 

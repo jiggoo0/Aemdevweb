@@ -1,19 +1,22 @@
-import React, { useMemo } from "react";
+/**
+ * [SECTION COMPONENT]: CATALOG_HEADER v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure Server Component | Narrative Identity | Zero-Framer
+ */
+
+import React from "react";
 import Image from "next/image";
 import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
+import { cn } from "@/lib/utils";
 
 interface CatalogHeaderProps {
-  title: string;
-  subtitle: string;
-  nodeCount: number;
-  banner?: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly nodeCount: number;
+  readonly banner?: string;
 }
 
 export const CatalogHeader = ({ title, subtitle, nodeCount, banner }: CatalogHeaderProps) => {
-  const imgData = useMemo(
-    () => (banner ? IMAGE_BLUR_DATA[banner as keyof typeof IMAGE_BLUR_DATA] || null : null),
-    [banner],
-  );
+  const imgData = banner ? IMAGE_BLUR_DATA[banner as keyof typeof IMAGE_BLUR_DATA] || null : null;
 
   return (
     <header className="relative mb-20 space-y-8 overflow-hidden rounded-[var(--radius)] p-8 md:p-0">
@@ -29,7 +32,7 @@ export const CatalogHeader = ({ title, subtitle, nodeCount, banner }: CatalogHea
           />
         </div>
       )}
-      <div className="inline-flex items-center gap-3 rounded-[var(--radius)] border-[var(--border-width)] border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/5 px-4 py-2">
+      <div className="animate-in fade-in slide-in-from-top-2 inline-flex items-center gap-3 rounded-[var(--radius)] border-[var(--border-width)] border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/5 px-4 py-2 duration-700">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-primary)] opacity-75"></span>
           <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-primary)]"></span>
@@ -40,16 +43,31 @@ export const CatalogHeader = ({ title, subtitle, nodeCount, banner }: CatalogHea
       </div>
 
       <div className="space-y-4">
-        <h1 className="font-[family-name:var(--font-primary)] text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-7xl">
+        <h1
+          className={cn(
+            "font-[family-name:var(--font-primary)] text-5xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-7xl",
+            "animate-in fade-in slide-in-from-left-4 fill-mode-both delay-150 duration-700",
+          )}
+        >
           {title.split("|")[0]} <br />
           <span className="text-[var(--brand-primary)]">Architecture.</span>
         </h1>
-        <p className="max-w-2xl text-lg leading-relaxed font-medium text-[var(--text-primary)]/70 italic md:text-xl">
+        <p
+          className={cn(
+            "max-w-2xl text-lg leading-relaxed font-medium text-[var(--text-primary)]/70 italic md:text-xl",
+            "animate-in fade-in slide-in-from-bottom-2 fill-mode-both delay-300 duration-700",
+          )}
+        >
           {subtitle}
         </p>
       </div>
 
-      <div className="flex items-center gap-8 border-[var(--foreground)]/10 border-t-[var(--border-width)] pt-6">
+      <div
+        className={cn(
+          "flex items-center gap-8 border-[var(--foreground)]/10 border-t-[var(--border-width)] pt-6",
+          "animate-in fade-in slide-in-from-bottom-2 fill-mode-both delay-500 duration-700",
+        )}
+      >
         <div className="space-y-1">
           <p className="font-mono text-[9px] tracking-[0.2em] uppercase opacity-50">Total_Nodes</p>
           <p className="text-3xl font-black italic">{nodeCount.toString().padStart(2, "0")}</p>

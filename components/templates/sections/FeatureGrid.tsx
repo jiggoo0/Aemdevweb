@@ -1,13 +1,12 @@
 /**
- * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.9.102 (ULTIMATE_HARDENED)
- * [STRATEGY]: Technical Authority | Responsive Matrix | Zero-Any Policy
+ * [SECTION COMPONENT]: FEATURE_GRID_ENGINE v17.9.103 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | IntersectionObserver | Zero-Framer
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo } from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -34,6 +33,23 @@ const FeatureGridEngine = ({
   columns = 3,
   className,
 }: FeatureGridProps) => {
+  const [visible, setVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1, margin: "-100px" },
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   // [OPTIMIZATION]: Grid Layout Matrix แบบ Responsive
   const gridCols = {
     2: "grid-cols-1 md:grid-cols-2",
@@ -41,26 +57,8 @@ const FeatureGridEngine = ({
     4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-4",
   }[columns];
 
-  // [PHYSICS]: Neural Staggered Animation Curve
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-    },
-  };
-
   return (
-    <section className={cn("relative overflow-hidden py-24 md:py-36", className)}>
+    <section ref={sectionRef} className={cn("relative overflow-hidden py-24 md:py-36", className)}>
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
@@ -91,23 +89,20 @@ const FeatureGridEngine = ({
         </header>
 
         {/* LAYER 02: GRID SYSTEM (UI Render Node) */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className={cn("grid gap-8 lg:gap-10", gridCols)}
-        >
+        <div className={cn("grid gap-8 lg:gap-10", gridCols)}>
           {items.map((feature, index) => (
-            <motion.div
+            <div
               key={`feature-${index}`}
-              variants={itemVariants}
               className={cn(
-                "group rounded-section relative flex flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
+                "group rounded-section relative flex flex-col justify-between overflow-hidden border transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
                 "bg-surface-card border-border shadow-pro-sm p-10 md:p-12",
                 "hover:border-brand-primary/40 hover:shadow-glow-sm hover:-translate-y-2",
                 "transform-gpu will-change-transform",
+                visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
               )}
+              style={{
+                transitionDelay: `${index * 100}ms`,
+              }}
             >
               <div className="from-brand-primary/5 absolute inset-0 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -136,9 +131,9 @@ const FeatureGridEngine = ({
                   <div className="bg-border group-hover:bg-brand-primary h-1.5 w-1.5 rounded-full shadow-sm transition-colors duration-500" />
                 </div>
               )}
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,13 +1,11 @@
 /**
- * [SHARED COMPONENT]: IMPACT_STATS_SYSTEM v17.9.102 (ULTIMATE_HARDENED)
- * [STRATEGY]: Direct DOM Counter | GPU-Accelerated Layers | Zero-CLS Hardened
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SHARED COMPONENT]: IMPACT_STATS_SYSTEM v17.9.103 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure DOM Counter | IntersectionObserver | Zero-Framer
  */
 
 "use client";
 
-import React, { memo, useEffect, useRef } from "react";
-import { motion, useSpring, useInView, useMotionValueEvent } from "framer-motion";
+import React, { memo, useEffect, useRef, useState } from "react";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
@@ -60,8 +58,8 @@ const SYSTEM_METRICS: readonly MetricItem[] = [
   },
 ];
 
-/** * @engine High-Performance Counter
- * [OPTIMIZATION]: ใช้ Direct DOM Manipulation เพื่อ Zero-Jank Animation
+/** * @engine High-Performance Counter (Non-Framer)
+ * [OPTIMIZATION]: ใช้ requestAnimationFrame เพื่อ Zero-Jank Animation
  */
 const Counter = ({
   value,
@@ -73,45 +71,80 @@ const Counter = ({
   readonly prefix?: string;
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const springValue = useSpring(0, { stiffness: 40, damping: 20, mass: 1 });
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
-    if (isInView) springValue.set(value);
-  }, [isInView, value, springValue]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1, margin: "-100px" },
+    );
 
-  useMotionValueEvent(springValue, "change", (latest) => {
-    if (ref.current) {
-      const numericValue = Number(latest);
-      ref.current.textContent = `${prefix}${numericValue.toLocaleString("en-US", {
-        minimumFractionDigits: decimals,
-        maximumFractionDigits: decimals,
-      })}`;
-    }
-  });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
-  return <span ref={ref} className="transform-gpu tabular-nums" />;
+  useEffect(() => {
+    if (!isInView || !ref.current) return;
+
+    let startTimestamp: number | null = null;
+    const duration = 2000; // 2 seconds
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+      // Easing function: easeOutExpo
+      const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+
+      const current = easedProgress * value;
+
+      if (ref.current) {
+        ref.current.textContent = `${prefix}${current.toLocaleString("en-US", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })}`;
+      }
+
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  }, [isInView, value, decimals, prefix]);
+
+  return (
+    <span ref={ref} className="transform-gpu tabular-nums">
+      0
+    </span>
+  );
 };
 
-const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
+const MetricCard = ({
+  stat,
+  index,
+  visible,
+}: {
+  stat: MetricItem;
+  index: number;
+  visible: boolean;
+}) => {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-        visible: {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          transition: { duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] },
-        },
-      }}
+    <div
       className={cn(
-        "group rounded-section relative flex min-h-[280px] flex-col overflow-hidden border p-10 transition-[transform,box-shadow,border-color,background-color] duration-700",
+        "group rounded-section relative flex min-h-[280px] flex-col overflow-hidden border p-10 transition-all duration-1000",
         "border-border bg-surface-card/30 shadow-pro-sm backdrop-blur-3xl",
         "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:shadow-glow-sm hover:-translate-y-3",
         "transform-gpu will-change-transform",
+        visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
       )}
+      style={{
+        transitionDelay: `${index * 100}ms`,
+      }}
     >
       <div
         className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay"
@@ -155,31 +188,43 @@ const MetricCard = ({ stat, index }: { stat: MetricItem; index: number }) => {
 
       {/* Neural Progress Bar */}
       <div className="bg-border/5 absolute bottom-0 left-0 h-1.5 w-full overflow-hidden">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "100%" }}
-          viewport={{ once: true }}
-          transition={{ duration: 3, delay: 0.5 + index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="via-brand-primary/50 to-brand-primary h-full bg-gradient-to-r from-transparent"
+        <div
+          className={cn(
+            "via-brand-primary/50 to-brand-primary h-full bg-gradient-to-r from-transparent transition-all duration-[3000ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+            visible ? "w-full" : "w-0",
+          )}
+          style={{ transitionDelay: `${500 + index * 100}ms` }}
         />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const ImpactStats = () => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1, margin: "-100px" },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4"
-      >
+    <section ref={ref} className="mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {SYSTEM_METRICS.map((stat, index) => (
-          <MetricCard key={stat.id} stat={stat} index={index} />
+          <MetricCard key={stat.id} stat={stat} index={index} visible={visible} />
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };

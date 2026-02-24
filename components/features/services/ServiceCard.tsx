@@ -1,14 +1,10 @@
 /**
- * [FEATURE COMPONENT]: SERVICE_CARD_NODE v18.2.0 (PRODUCTION_HARDENED)
- * [STRATEGY]: Equal-Height Orchestration | GPU-Accelerated Stacking | CLS Stability
+ * [FEATURE COMPONENT]: SERVICE_CARD_NODE v18.2.1 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure Server Component | Zero-JS Payload | CLS Stability
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- * [CHANGELOG]:
- * - Implemented Flex-1 on Content Hub to enforce Footer alignment across Grid.
- * - Refined Image Aspect-Ratio (16:10) for visual symmetry.
- * - Enhanced Hardware Acceleration for fluid hover transitions.
  */
 
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -26,25 +22,22 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps) => {
-  // [DATA_ADAPTER]: ปรับจูนจุดขายให้สมดุล (จำกัดที่ 3 เพื่อความสวยงามในระดับสายตา)
-  const displayFeatures = useMemo(() => {
-    const source = data.benefits?.length ? data.benefits : data.coreFeatures?.map((f) => f.title);
-    return (
-      source?.slice(0, 3) || [
-        "High-End Architecture",
-        "Technical SEO Strategy",
-        "ROI-Focused Design",
-      ]
-    );
-  }, [data]);
+  // [SERVER_ONLY]: Pure logic for RSC execution
+  const sourceFeatures = data.benefits?.length
+    ? data.benefits
+    : data.coreFeatures?.map((f) => f.title);
+  const displayFeatures = sourceFeatures?.slice(0, 3) || [
+    "High-End Architecture",
+    "Technical SEO Strategy",
+    "ROI-Focused Design",
+  ];
 
-  const imageSource = useMemo(() => data.image || "/images/services/default.webp", [data.image]);
+  const imageSource = data.image || "/images/services/default.webp";
   const imgData = IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null;
 
-  const priceDisplay = useMemo(() => {
-    if (!data.priceValue || data.priceValue === 0) return "Premium_Quote";
-    return new Intl.NumberFormat("th-TH").format(data.priceValue);
-  }, [data.priceValue]);
+  const priceValue = data.priceValue || 0;
+  const priceDisplay =
+    priceValue === 0 ? "Premium_Quote" : new Intl.NumberFormat("th-TH").format(priceValue);
 
   return (
     <Link
@@ -88,7 +81,6 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
         <div className="from-surface-card absolute inset-0 z-10 bg-gradient-to-t via-transparent to-transparent opacity-60" />
       </div>
 
-      {/* --- LAYER 3: CONTENT HUB (Flex-Orchestrated) --- */}
       <div className="flex flex-1 flex-col p-8 md:p-10">
         <header className="mb-8 space-y-4">
           <div className="flex items-center gap-2">
@@ -107,7 +99,6 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           </p>
         </header>
 
-        {/* Feature Registry List */}
         <ul className="mb-10 space-y-3.5">
           {displayFeatures.map((feature, i) => (
             <li key={i} className="flex items-center gap-4">
@@ -121,18 +112,17 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           ))}
         </ul>
 
-        {/* --- LAYER 4: COMMERCIAL GATEWAY (Absolute Bottom) --- */}
         <div className="border-border mt-auto flex items-end justify-between border-t pt-8">
           <div className="space-y-1">
             <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-40">
-              {data.priceValue ? "Starting_Investment" : "Inquiry_Status"}
+              {priceValue ? "Starting_Investment" : "Inquiry_Status"}
             </span>
             <div className="text-text-primary group-hover:text-brand-primary flex items-baseline font-black transition-colors">
-              {data.priceValue > 0 && <span className="mr-1 font-sans text-xs opacity-50">฿</span>}
+              {priceValue > 0 && <span className="mr-1 font-sans text-xs opacity-50">฿</span>}
               <span
                 className={cn(
                   "tracking-tight uppercase italic tabular-nums",
-                  data.priceValue ? "text-3xl md:text-4xl" : "text-xl opacity-80 md:text-2xl",
+                  priceValue ? "text-3xl md:text-4xl" : "text-xl opacity-80 md:text-2xl",
                 )}
               >
                 {priceDisplay}
@@ -140,14 +130,12 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
             </div>
           </div>
 
-          {/* Interactive Action Icon */}
           <div className="bg-surface-offset group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow rounded-2xl p-4 transition-all duration-500 group-hover:-rotate-45">
             <IconRenderer name="ArrowRight" size={20} />
           </div>
         </div>
       </div>
 
-      {/* Subtle Glow Overlay */}
       <div className="from-brand-primary/5 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </Link>
   );

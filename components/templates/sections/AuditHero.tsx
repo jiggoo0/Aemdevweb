@@ -1,13 +1,12 @@
 /**
- * [FEATURE]: AUDIT_HERO v18.0.7 (STABILIZED_FINAL)
- * [STRATEGY]: Technical Authority | Type-Safe Icons | Zero-CLS Execution
+ * [FEATURE]: AUDIT_HERO v18.0.8 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Technical Authority | Pure CSS Animations | Zero-Framer
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo, useMemo } from "react";
-import { motion } from "framer-motion";
+import React, { memo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -20,10 +19,6 @@ interface AuditHeroProps {
   readonly banner?: string;
 }
 
-/**
- * [DATA_NODE]: Lighthouse Metrics Registry
- * [FIXED]: กำหนด Type ให้ icon เป็น IconName เพื่อป้องกันการใช้ any
- */
 interface AuditMetric {
   label: string;
   value: string;
@@ -38,21 +33,30 @@ const AUDIT_METRICS: readonly AuditMetric[] = [
   { label: "SEO_Index", value: "100", color: "text-brand-primary", icon: "SearchCheck" },
 ] as const;
 
-/**
- * @component AuditHero
- * @description ส่วนหัวของหน้าเอเจนซี่ที่เน้นการโชว์ศักยภาพทางวิศวกรรม (Engineering-First)
- */
 export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) => {
-  // [LOGIC]: แยก Title เพื่อสร้าง Visual Hierarchy ที่ดุดัน
   const mainTitle = title.split("|")[0].trim();
+  const imgData = banner ? IMAGE_BLUR_DATA[banner as keyof typeof IMAGE_BLUR_DATA] || null : null;
 
-  const imgData = useMemo(
-    () => (banner ? IMAGE_BLUR_DATA[banner as keyof typeof IMAGE_BLUR_DATA] || null : null),
-    [banner],
-  );
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={ref}
       id="audit-hero-entry"
       className="border-border/10 bg-surface-main relative overflow-hidden border-b pt-32 pb-24 md:pt-48 md:pb-32"
     >
@@ -81,10 +85,13 @@ export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) =
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
           {/* --- 01. NARRATIVE_NODE --- */}
-          <div className="space-y-10">
-            <div
-              className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md"
-            >
+          <div
+            className={cn(
+              "space-y-10 transition-all duration-1000",
+              visible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0",
+            )}
+          >
+            <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
               <IconRenderer
                 name="Activity"
                 size={14}
@@ -109,25 +116,31 @@ export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) =
           </div>
 
           {/* --- 02. METRICS_NODE --- */}
-          <div className="group relative">
+          <div
+            className={cn(
+              "group relative transition-all delay-300 duration-1000",
+              visible ? "scale-100 opacity-100" : "scale-95 opacity-0",
+            )}
+          >
             <div className="bg-brand-primary/10 rounded-card-lg absolute -inset-4 opacity-50 blur-3xl transition-opacity duration-700 group-hover:opacity-100" />
 
             <div className="rounded-section relative grid grid-cols-2 gap-4 overflow-hidden border border-white/10 bg-black/80 p-6 shadow-2xl backdrop-blur-2xl md:p-10">
               <div className="via-brand-primary/40 animate-scan absolute top-0 left-0 z-20 h-1 w-full bg-gradient-to-r from-transparent to-transparent" />
 
               {AUDIT_METRICS.map((m, idx) => (
-                <motion.div
+                <div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="relative space-y-4 border border-white/5 bg-white/[0.02] p-6 transition-all duration-500 hover:bg-white/[0.05]"
+                  className={cn(
+                    "relative space-y-4 border border-white/5 bg-white/[0.02] p-6 transition-all duration-500 hover:bg-white/[0.05]",
+                    "transition-all duration-700",
+                    visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+                  )}
+                  style={{ transitionDelay: `${500 + idx * 100}ms` }}
                 >
                   <div className="flex items-center justify-between">
                     <p className="font-mono text-[9px] font-bold tracking-widest uppercase opacity-40">
                       {m.label}
                     </p>
-                    {/* [FIXED]: ลบ as any ออก และใช้ค่าที่ถูก Type-safe จาก Interface */}
                     <IconRenderer name={m.icon} size={14} className={cn("opacity-20", m.color)} />
                   </div>
 
@@ -138,14 +151,15 @@ export const AuditHero = memo(({ title, description, banner }: AuditHeroProps) =
                   </p>
 
                   <div className="h-1 w-full overflow-hidden rounded-full bg-white/5">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-                      className={cn("h-full transform-gpu", m.color.replace("text-", "bg-"))}
+                    <div
+                      className={cn(
+                        "h-full transform-gpu transition-all delay-[1000ms] duration-[1500ms] ease-out",
+                        m.color.replace("text-", "bg-"),
+                        visible ? "w-full" : "w-0",
+                      )}
                     />
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 

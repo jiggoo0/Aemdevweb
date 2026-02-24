@@ -1,17 +1,46 @@
-import React from "react";
+/**
+ * [SECTION COMPONENT]: REGIONAL_GALLERY v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Interaction Reveal | Zero-Framer
+ */
+
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
+import { cn } from "@/lib/utils";
 
 interface RegionalGalleryProps {
   images: readonly string[];
 }
 
 export const RegionalGallery = ({ images }: RegionalGalleryProps) => {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   if (!images || images.length === 0) return null;
 
   return (
-    <section className="container mx-auto px-4 py-24">
-      <div className="mb-12 space-y-4">
+    <section ref={ref} className="container mx-auto overflow-hidden px-4 py-24">
+      <div
+        className={cn(
+          "mb-12 space-y-4 transition-all duration-1000",
+          visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+        )}
+      >
         <p className="font-mono text-xs font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase">
           Regional_Visual_Assets
         </p>
@@ -26,7 +55,13 @@ export const RegionalGallery = ({ images }: RegionalGalleryProps) => {
           return (
             <div
               key={idx}
-              className="group relative aspect-video overflow-hidden rounded-[var(--radius)] border border-[var(--foreground)]/5"
+              className={cn(
+                "group relative aspect-video overflow-hidden rounded-[var(--radius)] border border-[var(--foreground)]/5 transition-all duration-1000",
+                visible
+                  ? "translate-y-0 scale-100 opacity-100"
+                  : "translate-y-12 scale-95 opacity-0",
+              )}
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
               <Image
                 src={img}

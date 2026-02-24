@@ -85,7 +85,7 @@ const HeroEngine = ({
             <div
               className={cn(
                 "border-brand-primary/20 bg-brand-primary/5 text-brand-primary mb-10 inline-flex items-center gap-4 rounded-full border px-5 py-2.5 backdrop-blur-md md:mb-12",
-                "animate-in fade-in slide-in-from-top-4 duration-1000 fill-mode-both",
+                "animate-in fade-in slide-in-from-top-4 fill-mode-both duration-1000",
               )}
             >
               <div className="bg-brand-primary shadow-glow h-1.5 w-1.5 animate-pulse rounded-full" />
@@ -100,7 +100,7 @@ const HeroEngine = ({
             <h1
               className={cn(
                 "text-text-primary transform-gpu text-5xl leading-relaxed font-black tracking-tighter text-balance uppercase italic md:text-8xl lg:text-[7.5rem]",
-                "animate-in fade-in duration-700 fill-mode-both",
+                "animate-in fade-in fill-mode-both duration-700",
               )}
             >
               {title}
@@ -112,7 +112,7 @@ const HeroEngine = ({
                 isCenter
                   ? "mx-auto max-w-3xl border-t-2 pt-10"
                   : "max-w-3xl border-l-[6px] pl-8 md:pl-12",
-                "animate-in fade-in slide-in-from-left-4 duration-1000 delay-200 fill-mode-both",
+                "animate-in fade-in slide-in-from-left-4 fill-mode-both delay-200 duration-1000",
               )}
             >
               <p className="text-text-secondary text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
@@ -127,7 +127,7 @@ const HeroEngine = ({
               className={cn(
                 "mt-16 flex w-full flex-col gap-5 md:mt-20 md:flex-row md:gap-8",
                 isCenter ? "items-center justify-center" : "items-start",
-                "animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 fill-mode-both",
+                "animate-in fade-in slide-in-from-bottom-4 fill-mode-both delay-500 duration-1000",
               )}
             >
               {primaryActionLabel && primaryHref && (

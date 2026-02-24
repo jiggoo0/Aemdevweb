@@ -1,14 +1,10 @@
 /**
- * [FEATURE COMPONENT]: AREA_CARD_NODE v18.2.0 (PRODUCTION_HARDENED)
- * [STRATEGY]: Symmetry Protocol | GPU-Accelerated Identity | Geospatial Authority
+ * [FEATURE COMPONENT]: AREA_CARD_NODE v18.2.1 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure Server Component | Zero-JS Payload | Geospatial Authority
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- * [CHANGELOG]:
- * - Integrated Flex-Grow logic to prevent "stretching" in unbalanced grids.
- * - Refined Visual Overlay for 100% text legibility (A11y).
- * - Enforced strict lowercase path mapping for Linux/Vercel stability.
  */
 
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -25,26 +21,13 @@ interface AreaCardProps {
 }
 
 const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
-  // [REFINED]: บังคับ Slug เป็น Lowercase (Strict Path Mapping)
-  const safeSlug = useMemo(() => data.slug.trim().toLowerCase(), [data.slug]);
-
-  const districts = useMemo(
-    () => (Array.isArray(data.districts) ? [...data.districts] : []),
-    [data.districts],
-  );
-
+  // [SERVER_ONLY]: Pure logic for RSC execution
+  const safeSlug = data.slug.trim().toLowerCase();
+  const districts = Array.isArray(data.districts) ? [...data.districts] : [];
   const displayTitle = data.province || "พื้นที่ให้บริการ";
 
-  // [ENGINEERING]: Dynamic Image Mapping Strategy
-  const imagePath = useMemo(() => {
-    if (data.heroImage) return data.heroImage.trim();
-    return `/images/areas/${safeSlug}-node.webp`;
-  }, [data.heroImage, safeSlug]);
-
-  const imgData = useMemo(
-    () => IMAGE_BLUR_DATA[imagePath as keyof typeof IMAGE_BLUR_DATA] || null,
-    [imagePath],
-  );
+  const imagePath = data.heroImage ? data.heroImage.trim() : `/images/areas/${safeSlug}-node.webp`;
+  const imgData = IMAGE_BLUR_DATA[imagePath as keyof typeof IMAGE_BLUR_DATA] || null;
 
   const socialProof = data.localContext?.socialProof;
   const displayPrice = data.price || data.localContext?.regionalPricing?.startPrice;
@@ -73,7 +56,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           className="object-cover opacity-60 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-30"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
-        {/* [DYNAMIC_OVERLAY]: ไล่ระดับสีเพื่อให้อ่าน Text ได้ชัดเจนแม้ภาพจะสว่าง */}
         <div className="from-surface-main via-surface-main/80 absolute inset-0 z-10 bg-gradient-to-t to-transparent" />
         <div
           className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.04] mix-blend-overlay"
@@ -81,9 +63,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         />
       </div>
 
-      {/* --- LAYER 02: CONTENT ARCHITECTURE (FLEX-BASED) --- */}
       <div className="relative z-30 flex flex-1 flex-col justify-between p-8 md:p-10">
-        {/* NODE_HEADER: Identity & Trust Score */}
         <header className="flex items-start justify-between">
           <div className="border-border bg-surface-offset/80 text-brand-primary group-hover:bg-brand-primary group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-xl transition-all duration-500 group-hover:rotate-[15deg] group-hover:text-white">
             <IconRenderer name="MapPin" size={20} strokeWidth={2.5} />
@@ -116,7 +96,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           </div>
         </header>
 
-        {/* NODE_BODY: Title & Region Metadata */}
         <section className="mt-auto space-y-6">
           <div className="space-y-3">
             <h3 className="text-text-primary group-hover:text-brand-primary text-4xl font-black tracking-tighter uppercase italic transition-colors md:text-5xl">
@@ -125,7 +104,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             <div className="bg-brand-primary/20 group-hover:bg-brand-primary h-1 w-10 rounded-full transition-all duration-700 group-hover:w-full" />
           </div>
 
-          {/* Tags Node (Flexible wrapping) */}
           <div className="space-y-4">
             {districts.length > 0 && (
               <div className="flex flex-wrap gap-1.5">
@@ -140,7 +118,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
               </div>
             )}
 
-            {/* [NEW]: Regional Technical Pulse */}
             <div className="flex items-center gap-6 border-t border-[var(--brand-primary)]/10 pt-4">
               <div className="space-y-1">
                 <p className="font-mono text-[8px] font-bold uppercase opacity-40">Saturation</p>
@@ -156,7 +133,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             </div>
           </div>
 
-          {/* NODE_FOOTER: Action Signal */}
           <footer className="border-border flex items-center justify-between border-t pt-6">
             <div className="flex flex-col">
               {displayPrice && (
@@ -175,7 +151,6 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
         </section>
       </div>
 
-      {/* [DYNAMIC_GLOW_ENGINE]: ปรับปรุงให้สีฟุ้งนวลตาขึ้น */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_right,var(--brand-primary)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-10" />
     </Link>
   );

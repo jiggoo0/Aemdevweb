@@ -1,10 +1,10 @@
 /**
- * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.6 (IDENTITY_INTEGRATED)
- * [STRATEGY]: Blueprint Orchestration | Layout Engine Integration | Zero-Jank
+ * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.7 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Blueprint Orchestration | Pure Server Component | Zero-JS
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import React, { memo } from "react";
+import React from "react";
 import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 
 // --- 1. Infrastructure (Integrated Identity Shell) ---
@@ -35,7 +35,7 @@ const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> 
   "seo-agency": SeoAgencyTemplate,
 };
 
-export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRendererProps) => {
+export const TemplateRenderer = ({ data, renderMode = "full" }: TemplateRendererProps) => {
   if (!data || !data.templateSlug) {
     console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
     return null;
@@ -47,15 +47,13 @@ export const TemplateRenderer = memo(({ data, renderMode = "full" }: TemplateRen
     return <TemplateNotFound data={data} />;
   }
 
-  // [IDENTITY_INTEGRATION]: ใช้ LayoutEngine เป็น Shell ครอบเพื่อฉีดธีมและจัดการ Spacing
+  // [IDENTITY_INTEGRATION]: Using LayoutEngine as a Server Shell
   return (
     <LayoutEngine theme={data.theme} spacing={renderMode === "section-only" ? "none" : "large"}>
       <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />
     </LayoutEngine>
   );
-});
-
-TemplateRenderer.displayName = "TemplateRenderer";
+};
 
 /** [SUB-COMPONENT]: TemplateNotFound (Debugger View) */
 const TemplateNotFound = ({ data }: { data: UniversalTemplateProps }) => (

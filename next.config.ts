@@ -93,7 +93,6 @@ const nextConfig: NextConfig = {
     cpus: isVercel ? undefined : 1,
     optimizePackageImports: [
       "lucide-react",
-      "framer-motion",
       "@radix-ui/react-slot",
       "tailwindcss-animate",
       "date-fns",

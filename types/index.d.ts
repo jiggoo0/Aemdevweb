@@ -1,14 +1,22 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.1.0 (STABILIZED_EEAT)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.1.1 (STABILIZED_EEAT)
  * [STRATEGY]: Strict Type Contract | E-E-A-T Knowledge Graph | Next.js 16 Sync
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- * [CHANGELOG]:
- * - Patched SiteConfig.expert to support linkedinUrl (Fix: TS2353).
- * - Refined SiteConfig.links from Record to Explicit Interface for better IntelliSense.
  */
 
 import type { ReactNode } from "react";
 import type { TemplateAction } from "./template-props";
+
+// =========================================
+// [00] GLOBAL AUGMENTATION
+// =========================================
+
+declare global {
+  interface Window {
+    /** [MARKETING]: Google Tag Manager Data Layer */
+    dataLayer: any[];
+  }
+}
 
 // =========================================
 // [01] INFRASTRUCTURE & ADAPTERS
@@ -74,6 +82,8 @@ export type IconName =
   | "Map"
   | "CalendarCheck"
   | "Lock"
+  | "Phone"
+  | "MessageCircle"
   | (string & {});
 
 export type TemplateSlug =
@@ -215,6 +225,7 @@ export interface CatalogItem {
   readonly price?: string;
   readonly unit?: string;
   readonly image?: string;
+  readonly url?: string;
   readonly technicalID?: string;
 }
 

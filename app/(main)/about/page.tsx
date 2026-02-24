@@ -1,5 +1,5 @@
 /**
- * [ROUTE PAGE]: ABOUT_US v17.9.66 (PROFESSIONAL_REWRITE)
+ * [ROUTE PAGE]: ABOUT_US v18.0.0 (INTERACTIVE_MAXIMIZED)
  * [STRATEGY]: High-Authority Positioning | Digital Strategist | E-E-A-T Optimized
  */
 
@@ -10,6 +10,8 @@ import type { Metadata } from "next";
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
 import HeroEngine from "@/components/templates/sections/HeroEngine";
 import FeatureGrid from "@/components/templates/sections/FeatureGrid";
+import { CapabilityGraph } from "@/components/templates/sections/CapabilityGraph";
+import { SuccessTimeline } from "@/components/templates/sections/SuccessTimeline";
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import { ABOUT_CONTENT } from "@/constants/about";
@@ -132,7 +134,42 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 03. TRUST INFRASTRUCTURE */}
+      {/* 03. CAPABILITY NODES: Visualize the Expertise */}
+      <section className="bg-surface-offset/50 border-border border-y py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+            <div className="space-y-8">
+              <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+                Technical <br /> <span className="text-brand-primary">Command.</span>
+              </h2>
+              <p className="text-text-secondary max-w-xl text-lg leading-relaxed font-medium italic opacity-80">
+                เราใช้ทักษะทางวิศวกรรมซอฟต์แวร์ระดับลึก เพื่อสร้างระบบที่ไม่ใช่แค่สวยงาม
+                แต่คือโครงสร้างพื้นฐานที่แข็งแกร่งที่สุดสำหรับธุรกิจคุณ
+              </p>
+            </div>
+            <CapabilityGraph
+              skills={[
+                { title: "Web Architecture (Next.js)", description: "", icon: "Layers" },
+                { title: "Technical SEO Engineering", description: "", icon: "SearchCheck" },
+                { title: "Data-Driven Conversion", description: "", icon: "Activity" },
+                { title: "Core Web Vitals Mastery", description: "", icon: "Zap" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 04. MILESTONES: The Success Journey */}
+      <section className="py-24">
+        <div className="container mx-auto mb-16 px-4 text-center">
+          <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+            Success <span className="text-brand-primary">Roadmap.</span>
+          </h2>
+        </div>
+        <SuccessTimeline />
+      </section>
+
+      {/* 05. TRUST INFRASTRUCTURE */}
       <section className="border-border bg-surface-offset/30 border-y py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="sr-only">Professional Trust and Performance Metrics</h2>
@@ -146,7 +183,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 04. CORE VALUES */}
+      {/* 06. CORE VALUES */}
       <div className="py-24">
         <FeatureGrid
           heading="Why AEMDEVWEB?"
@@ -156,7 +193,7 @@ export default function AboutPage() {
         />
       </div>
 
-      {/* 05. CALL TO ACTION: ยกระดับการเรียกขานให้เป็นระดับมืออาชีพ */}
+      {/* 07. CALL TO ACTION: ยกระดับการเรียกขานให้เป็นระดับมืออาชีพ */}
       <ConversionCTA
         title={ABOUT_CONTENT.cta.title}
         description={ABOUT_CONTENT.cta.description}

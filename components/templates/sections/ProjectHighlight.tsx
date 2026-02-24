@@ -1,6 +1,10 @@
+/**
+ * [SECTION COMPONENT]: PROJECT_HIGHLIGHT v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Staggered Reveal | Zero-Framer
+ */
+
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
 import type { BioProject } from "@/types";
@@ -9,12 +13,24 @@ interface ProjectHighlightProps {
   projects?: readonly BioProject[];
 }
 
-/**
- * @component ProjectHighlight
- * @description แสดงผลงานชิ้นเอกในรูปแบบ Horizontal Node ที่เน้นความพรีเมียมและความขลัง
- */
 export const ProjectHighlight = ({ projects }: ProjectHighlightProps) => {
-  // Mockup กรณีไม่มีข้อมูล (เพื่อความสวยงามในหน้า Bio)
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
   const defaultProjects: readonly BioProject[] = [
     {
       title: "Neural_Architecture_v1",
@@ -28,7 +44,7 @@ export const ProjectHighlight = ({ projects }: ProjectHighlightProps) => {
   const displayProjects = projects || defaultProjects;
 
   return (
-    <div className="w-full space-y-6">
+    <div ref={ref} className="w-full space-y-6">
       <div className="flex items-center justify-between px-2">
         <p className="font-mono text-[10px] font-black tracking-[0.4em] uppercase italic opacity-40">
           // Featured_Deployments
@@ -38,15 +54,17 @@ export const ProjectHighlight = ({ projects }: ProjectHighlightProps) => {
 
       <div className="space-y-4">
         {displayProjects.map((project, idx) => (
-          <motion.div
+          <div
             key={idx}
-            initial={{ opacity: 0, x: -10 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
             className={cn(
               "group relative overflow-hidden border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)] p-6 transition-all duration-500 hover:border-[var(--brand-primary)]/40",
               "rounded-[var(--radius)]",
+              "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              visible ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0",
             )}
+            style={{
+              transitionDelay: `${idx * 100}ms`,
+            }}
           >
             <div className="flex flex-col items-center gap-6 md:flex-row">
               {/* Thumbnail Node */}
@@ -104,7 +122,7 @@ export const ProjectHighlight = ({ projects }: ProjectHighlightProps) => {
                 backgroundSize: "16px 16px",
               }}
             />
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>

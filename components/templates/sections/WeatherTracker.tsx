@@ -1,7 +1,11 @@
+/**
+ * [SECTION COMPONENT]: WEATHER_TRACKER v18.0.3 (SERVER_OPTIMIZED)
+ * [STRATEGY]: Pure CSS Transitions | Real-time Simulation | Zero-Framer
+ */
+
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +19,6 @@ interface WeatherStats {
 /**
  * @component WeatherTracker
  * @description ระบบจำลองการตรวจวัดสภาพแวดล้อมแบบ Real-time
- * ใช้สำหรับแสดงผลข้อมูลสภาพอากาศในพื้นที่ด้วยสไตล์ Technical Blueprint
  */
 export const WeatherTracker = ({ location = "Khao Yai" }: { location?: string }) => {
   const [stats, setStats] = useState<WeatherStats>({
@@ -25,7 +28,7 @@ export const WeatherTracker = ({ location = "Khao Yai" }: { location?: string })
     visibility: "9.5km",
   });
 
-  // [LOGIC]: จำลองการผันผวนของข้อมูลแบบ Real-time (Neural Wiggle Simulation)
+  // [LOGIC]: จำลองการผันผวนของข้อมูลแบบ Real-time
   useEffect(() => {
     const interval = setInterval(() => {
       setStats((prev) => ({
@@ -73,14 +76,16 @@ export const WeatherTracker = ({ location = "Khao Yai" }: { location?: string })
             </h4>
           </div>
           <div className="text-right">
-            <motion.p
+            <p
               key={stats.temp}
-              initial={{ opacity: 0, y: -5 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="font-[family-name:var(--font-primary)] text-5xl font-black tracking-tighter text-[var(--brand-primary)] italic"
+              className={cn(
+                "font-[family-name:var(--font-primary)] text-5xl font-black tracking-tighter text-[var(--brand-primary)] italic",
+                "transition-all duration-500",
+                "animate-in fade-in slide-in-from-top-1 fill-mode-both",
+              )}
             >
               {stats.temp}°C
-            </motion.p>
+            </p>
           </div>
         </div>
 
@@ -98,7 +103,7 @@ export const WeatherTracker = ({ location = "Khao Yai" }: { location?: string })
             >
               <div className="flex items-center gap-2 opacity-30 transition-opacity group-hover/item:opacity-100">
                 <IconRenderer
-                  name={item.icon as IconName} // [FIXED]: กำจัด any ด้วยการ Cast เป็น IconName
+                  name={item.icon as IconName}
                   size={12}
                   className="text-[var(--brand-primary)]"
                 />
