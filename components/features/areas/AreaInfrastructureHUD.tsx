@@ -1,0 +1,114 @@
+"use client";
+
+import React from "react";
+import { cn } from "@/lib/utils";
+import IconRenderer from "@/components/ui/IconRenderer";
+import type { AreaNode } from "@/types";
+
+interface AreaInfrastructureHUDProps {
+  readonly allNodes: AreaNode[];
+}
+
+/**
+ * @component AreaInfrastructureHUD
+ * @description แผงควบคุมสถิติโครงสร้างพื้นฐานดิจิทัลระดับประเทศ (National Digital Hub HUD)
+ */
+export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHUDProps) {
+  // [OPTIMIZATION]: คำนวณสถิติเฉพาะเมื่อ allNodes เปลี่ยนแปลงเท่านั้น
+  const stats = React.useMemo(() => {
+    const totalNodes = allNodes.length;
+    if (totalNodes === 0) return [];
+
+    const avgLatency = (
+      allNodes.reduce((acc, n) => acc + (n.regionalLatency || 25), 0) / totalNodes
+    ).toFixed(1);
+    const totalDistricts = allNodes.reduce((acc, n) => acc + (n.districts?.length || 0), 0);
+    const highPriorityNodes = allNodes.filter((n) => (n.priority || 0) >= 90).length;
+
+    return [
+      {
+        label: "Active_Nodes",
+        value: totalNodes,
+        unit: "Provinces",
+        icon: "Globe" as const,
+        description: "Coverage_Verified",
+      },
+      {
+        label: "Avg_Latency",
+        value: avgLatency,
+        unit: "ms",
+        icon: "Zap" as const,
+        description: "Fiber_Optimized",
+        color: "text-emerald-500",
+      },
+      {
+        label: "Service_Points",
+        value: totalDistricts,
+        unit: "Districts",
+        icon: "MapPin" as const,
+        description: "Hyper_Local_Reach",
+      },
+      {
+        label: "High_Priority",
+        value: highPriorityNodes,
+        unit: "Zones",
+        icon: "ShieldCheck" as const,
+        description: "Tier_1_Authority",
+      },
+    ];
+  }, [allNodes]);
+
+  if (stats.length === 0) return null;
+
+  return (
+    <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      {stats.map((stat, i) => (
+        <div
+          key={stat.label}
+          className={cn(
+            "group border-border/40 bg-surface-card/30 relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-500",
+            "hover:border-brand-primary/40 hover:bg-surface-offset/50 hover:shadow-glow-sm",
+          )}
+        >
+          {/* Decorative Grid */}
+          <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.03] select-none" />
+
+          <div className="relative z-10 mb-4 flex items-start justify-between">
+            <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500">
+              <IconRenderer name={stat.icon} size={18} />
+            </div>
+            <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-30">
+              SYS_METRIC.0{i + 1}
+            </span>
+          </div>
+
+          <div className="relative z-10 space-y-1">
+            <div className="flex items-baseline gap-2">
+              <span
+                className={cn(
+                  "text-3xl font-black tracking-tighter italic md:text-4xl",
+                  stat.color || "text-text-primary",
+                )}
+              >
+                {stat.value}
+              </span>
+              <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase opacity-60">
+                {stat.unit}
+              </span>
+            </div>
+            <p className="text-text-muted font-mono text-[9px] font-bold tracking-[0.2em] uppercase">
+              {stat.label}
+            </p>
+          </div>
+
+          <div className="bg-border/20 relative z-10 mt-4 h-px w-full overflow-hidden">
+            <div className="bg-brand-primary absolute h-full w-1/3 animate-[shimmer_2s_infinite]" />
+          </div>
+          <p className="text-text-muted mt-2 text-[8px] font-medium italic opacity-40">
+            {stat.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}

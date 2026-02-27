@@ -12,7 +12,13 @@
     "eslint-plugin-tailwindcss"
   ],
   "next": {
-    "entry": ["next.config.ts", "app/**/*.{ts,tsx}", "lib/cms.ts"]
+    "entry": [
+      "next.config.ts",
+      "app/**/*.{ts,tsx}",
+      "lib/cms.ts",
+      "mdx-components.tsx",
+      "scripts/test-schema.ts"
+    ]
   },
   "project": ["**/*.{ts,tsx}"]
 }

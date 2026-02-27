@@ -31,13 +31,19 @@ export const chonBuriNode: AreaNode = {
 
   // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
   // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
-  theme: corporateService.theme,
   price: corporateService.price,
   priceValue: corporateService.priceValue,
   currency: corporateService.currency,
   unit: corporateService.unit,
 
-  marketSaturation: 78,
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าชลบุรีดูเป็น "เว็บไซต์โรงงานอิสระ" สำหรับ EEC
+  layoutOrder: ["hero", "gallery", "process", "stats", "insight", "trust", "pricing", "faq", "cta"],
+  theme: {
+    primary: "oklch(60% 0.12 230)", // Industrial Steel Blue
+    secondary: "oklch(50% 0.1 230)",
+    mode: "light", // ชลบุรีเน้นความสะอาด โปร่งใส (Light Mode)
+    radius: "0.75rem", // ขอบมนน้อยลงเพื่อให้ดูเป็นงานอุตสาหกรรม (Hardened)
+  },
 
   regionalRoadmap: [
     {

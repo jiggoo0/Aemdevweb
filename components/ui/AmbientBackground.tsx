@@ -31,7 +31,6 @@ const AmbientBackground = ({ className, color, opacity = 1 }: AmbientBackgroundP
       style={{
         backgroundColor: color,
         opacity: opacity,
-        transition: "background-color 1.2s cubic-bezier(0.22, 1, 0.36, 1)",
       }}
       aria-hidden="true"
     >

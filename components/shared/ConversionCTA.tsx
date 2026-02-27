@@ -54,21 +54,21 @@ const ConversionCTA = ({
               </span>
             </div>
 
-            <h2 className="max-w-4xl text-4xl leading-relaxed font-black tracking-tighter text-[var(--text-primary)] md:text-6xl lg:text-7xl">
+            <h2 className="max-w-4xl text-4xl leading-tight font-black tracking-tight text-[var(--text-primary)] md:text-6xl lg:text-7xl">
               {title}
             </h2>
 
-            <p className="max-w-2xl text-lg leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-xl">
-              “{description}”
+            <p className="text-text-secondary max-w-2xl text-lg leading-relaxed font-medium opacity-90 md:text-xl">
+              {description}
             </p>
 
             <Button
               asChild
               size="lg"
               className={cn(
-                "h-16 rounded-2xl px-10 md:h-20 md:px-16",
-                "bg-[var(--brand-primary)] text-[var(--brand-primary-fg)] hover:opacity-90",
-                "shadow-[var(--brand-primary)]/20 shadow-lg transition-transform hover:scale-105 active:scale-95",
+                "h-16 rounded-2xl px-12 md:h-20 md:px-16",
+                "bg-[var(--brand-primary)] text-white hover:opacity-95",
+                "shadow-glow-md transition-all hover:scale-[1.02] active:scale-95",
               )}
             >
               <a
@@ -77,8 +77,10 @@ const ConversionCTA = ({
                 rel="noopener noreferrer"
                 className="flex items-center gap-4"
               >
-                <IconRenderer name="MessageCircle" size={24} />
-                <span className="text-sm font-black tracking-widest uppercase">{buttonLabel}</span>
+                <IconRenderer name="Zap" size={24} />
+                <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
+                  {buttonLabel}
+                </span>
               </a>
             </Button>
           </div>

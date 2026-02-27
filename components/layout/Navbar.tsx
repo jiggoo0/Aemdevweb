@@ -30,12 +30,10 @@ const Navbar = () => {
       const currentScrollY = window.scrollY;
       const diff = currentScrollY - lastScrollY.current;
 
-      // เงื่อนไข: ซ่อนเมื่อเลื่อนลงเกิน 150px และเลื่อนเร็วพอ (diff > 10)
-      if (currentScrollY > 150 && diff > 10 && !isOpen) {
+      // [OPTIMIZED]: เพิ่ม Threshold 50px เพื่อป้องกันการกระพริบสลับ State ไปมา
+      if (currentScrollY > 150 && diff > 50 && !isOpen) {
         setIsHidden(true);
-      }
-      // เงื่อนไข: แสดงเมื่อเลื่อนขึ้น (diff < -5) หรืออยู่บนสุดของหน้า
-      else if (diff < -5 || currentScrollY < 20) {
+      } else if (diff < -20 || currentScrollY < 20) {
         setIsHidden(false);
       }
 

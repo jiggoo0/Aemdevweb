@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { SITE_CONFIG } from "@/constants/site-config";
+import { cn } from "@/lib/utils";
 
 interface DirectTerminalProps {
   mode?: "contact" | "health-check";
@@ -16,7 +17,7 @@ export const DirectTerminal = ({
 }: DirectTerminalProps) => {
   const [status, setStatus] = React.useState<"idle" | "running" | "complete">("idle");
   const [output, setOutput] = React.useState<string[]>([]);
-  const [latency, setLatency] = React.useState<number>(providedLatency || 25);
+  const [_latency, setLatency] = React.useState<number>(providedLatency || 25);
 
   // [HYDRATION_SAFE]: Generate stable simulated latency on mount if not provided
   React.useEffect(() => {
@@ -27,56 +28,95 @@ export const DirectTerminal = ({
     }
   }, [providedLatency, province]);
 
+  const [email, setEmail] = React.useState("");
+  const [error, setError] = React.useState("");
+
   const runCheck = () => {
     setStatus("running");
-    setOutput(["Initializing_Regional_Node...", `Target_Geo: ${province}`, "Measuring_Latency..."]);
+    const steps = [
+      "Initializing_Regional_Node...",
+      `Target_Geo: ${province}`,
+      "Measuring_Network_Latencies...",
+      `Syncing_Local_Registry_v18.4...`,
+      "Verifying_SSL_End-to-End...",
+      "Firewall_Audit: PASS",
+      `Success: Node_${province}_Online`,
+    ];
+
+    let currentStep = 0;
+    const runStep = () => {
+      if (currentStep < steps.length) {
+        setOutput((prev) => [...prev, steps[currentStep]]);
+        currentStep++;
+        // [REALISM]: ปรับความเร็วแต่ละขั้นตอนไม่เท่ากันตามความซับซ้อนของ Task
+        const nextDelay = currentStep === 2 ? 1500 : 400 + Math.random() * 600;
+        setTimeout(runStep, nextDelay);
+      } else {
+        setStatus("complete");
+      }
+    };
+    runStep();
+  };
+
+  const handleDeploy = () => {
+    if (!email.includes("@") || email.length < 5) {
+      setError("Error: Invalid_Credential_Protocol");
+      return;
+    }
+    setError("");
+    setStatus("running");
+    setOutput(["Encrypting_Request...", "Sending_Handshake_Signal..."]);
 
     setTimeout(() => {
-      setOutput((prev) => [...prev, `Ping: ${latency}ms`, "Securing_Endpoint_v18..."]);
-      setTimeout(() => {
-        setOutput((prev) => [
-          ...prev,
-          "Firewall: Active",
-          "SSL_Protocol: Hardened",
-          "Identity_Sync: Verified",
-          "Success: Node_Security_100%",
-        ]);
-        setStatus("complete");
-      }, 1200);
-    }, 1000);
+      setStatus("complete");
+      setOutput((prev) => [...prev, "Status: Dispatched", "Specialist_Notified_v18"]);
+    }, 2000);
   };
 
   return (
-    <div className="border-border/50 bg-surface-card shadow-pro-xl w-full space-y-6 rounded-[var(--radius)] p-6 font-mono">
-      <div className="border-border/10 flex items-center justify-between border-b pb-4">
+    <div className="group border-border/50 bg-surface-card/90 hover:border-brand-primary/30 relative overflow-hidden rounded-2xl border p-6 font-mono shadow-2xl transition-all duration-500">
+      {/* [VISUAL]: CRT Scanline Effect */}
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,3px_100%] opacity-20" />
+
+      <div className="border-border/10 relative z-10 flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-red-500/50" />
-          <div className="h-2 w-2 rounded-full bg-amber-500/50" />
-          <div className="h-2 w-2 rounded-full bg-emerald-500/50" />
-          <span className="text-text-muted ml-2 text-[9px] uppercase opacity-30">
-            {mode === "health-check" ? `Geo_Terminal: ${province}` : "Communication_Terminal"}
+          <div className="h-2 w-2 animate-pulse rounded-full bg-red-500/50" />
+          <div className="h-2 w-2 rounded-full bg-amber-500/40" />
+          <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
+          <span className="text-text-muted ml-2 text-[9px] font-black tracking-widest uppercase opacity-40">
+            {mode === "health-check" ? `GEO_NODE: ${province}` : "DEPLOY_TERMINAL_v18"}
           </span>
         </div>
         {status === "complete" && (
-          <span className="text-brand-primary animate-pulse text-[8px] font-black tracking-widest uppercase">
-            // Authenticated
-          </span>
+          <div className="flex items-center gap-2 text-emerald-500">
+            <div className="h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500" />
+            <span className="text-[8px] font-black tracking-widest uppercase">Authenticated</span>
+          </div>
         )}
       </div>
 
-      <div className="space-y-4">
+      <div className="relative z-10 mt-4 space-y-4">
         {mode === "health-check" ? (
-          <div className="space-y-3">
-            <div className="min-h-[120px] text-[10px] leading-relaxed">
+          <div className="space-y-4">
+            <div className="min-h-[140px] text-[10px] leading-relaxed font-bold">
               {output.map((line, i) => (
-                <p key={i} className="text-text-secondary">
+                <p
+                  key={i}
+                  className={cn(
+                    "transition-all duration-300",
+                    line.includes("Success") ? "text-emerald-500" : "text-text-secondary",
+                  )}
+                >
                   <span className="text-brand-primary mr-2 opacity-30">❯</span>
                   {line}
+                  {i === output.length - 1 && status === "running" && (
+                    <span className="bg-brand-primary ml-1 inline-block h-3 w-1.5 animate-pulse" />
+                  )}
                 </p>
               ))}
               {status === "idle" && (
                 <p className="text-text-muted italic opacity-40">
-                  System_Idle. Ready to scan regional infrastructure...
+                  Ready to scan infrastructure. Initializing...
                 </p>
               )}
             </div>
@@ -84,7 +124,7 @@ export const DirectTerminal = ({
               <Button
                 asChild
                 variant="specialist"
-                className="h-12 w-full text-[10px] font-black tracking-[0.2em] uppercase"
+                className="glow-primary h-12 w-full text-[10px] font-black tracking-[0.2em] uppercase"
               >
                 <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                   Connect_With_Specialist
@@ -97,27 +137,56 @@ export const DirectTerminal = ({
                 variant="specialist"
                 className="h-12 w-full text-[10px] font-black tracking-[0.2em] uppercase"
               >
-                {status === "running" ? "Scanning..." : "Analyze_Health"}
+                {status === "running" ? "Analyzing_Infrastructure..." : "Analyze_Health"}
               </Button>
             )}
           </div>
         ) : (
-          <>
-            <div className="flex gap-3 text-sm">
-              <span className="text-brand-primary font-bold">❯</span>
-              <input
-                type="text"
-                placeholder="Enter_Email_For_Project_Quote..."
-                className="text-text-primary w-full border-none bg-transparent italic outline-none placeholder:opacity-20"
-              />
+          <div className="space-y-4">
+            <div className="flex flex-col gap-2">
+              <div className="border-border/20 flex gap-3 border-b pb-2 text-sm">
+                <span className="text-brand-primary font-bold">❯</span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter_Access_ID (Email)..."
+                  className="text-text-primary selection:bg-brand-primary/30 w-full border-none bg-transparent font-bold outline-none placeholder:opacity-20"
+                />
+              </div>
+              {error && (
+                <span className="text-[9px] font-black tracking-widest text-red-500 uppercase italic">
+                  {error}
+                </span>
+              )}
+              <div className="text-text-muted/60 min-h-[40px] text-[10px] leading-tight italic">
+                {output.map((line, i) => (
+                  <p key={i}>
+                    <span className="text-brand-primary/30 mr-2">⌁</span>
+                    {line}
+                  </p>
+                ))}
+              </div>
             </div>
+
             <Button
+              onClick={handleDeploy}
+              disabled={status === "running" || status === "complete"}
               variant="specialist"
-              className="h-12 w-full text-[10px] font-black tracking-[0.2em] uppercase"
+              className={cn(
+                "h-12 w-full text-[10px] font-black tracking-[0.2em] uppercase transition-all",
+                status === "complete"
+                  ? "border-emerald-500/30 bg-emerald-500/20 text-emerald-500"
+                  : "",
+              )}
             >
-              Deploy_Request
+              {status === "running"
+                ? "Processing_Handshake..."
+                : status === "complete"
+                  ? "Request_Acknowledged"
+                  : "Deploy_Strategic_Signal"}
             </Button>
-          </>
+          </div>
         )}
       </div>
     </div>

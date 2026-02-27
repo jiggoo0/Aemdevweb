@@ -1,24 +1,20 @@
 /**
- * [SYSTEM COMPONENT]: UNIVERSAL_RENDERER v18.0.7 (SERVER_OPTIMIZED)
- * [STRATEGY]: Blueprint Orchestration | Pure Server Component | Zero-JS
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
+ * [SYSTEM ENGINE]: UNIVERSAL_RENDERER v19.1.0 (PRO-DIVERSITY)
+ * [STRATEGY]: Template Mapping | Fallback to Strategy | Next.js 16 Optimized
+ * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
 import React from "react";
-import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
+import type { UniversalTemplateProps } from "@/types";
+import LayoutEngine from "./LayoutEngine";
 
-// --- 1. Infrastructure (Integrated Identity Shell) ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import { AIPersonaInsight } from "./sections/AIPersonaInsight";
-import { AgentCommandCenter } from "./sections/AgentCommandCenter";
-
-// --- 2. Template Registry ---
-import SalePageTemplate from "./salepage/Index";
+// --- Specialized Templates ---
 import CorporateTemplate from "./corporate/Index";
+import SalePageTemplate from "./salepage/Index";
 import CatalogTemplate from "./catalog/Index";
 import BioTemplate from "./bio/Index";
-import LocalAuthorityTemplate from "./local-authority/Index";
 import HotelResortTemplate from "./hotelresort/Index";
+import LocalAuthorityTemplate from "./local-authority/Index";
 import SeoAgencyTemplate from "./seo-agency/Index";
 
 interface TemplateRendererProps {
@@ -26,66 +22,35 @@ interface TemplateRendererProps {
   readonly renderMode?: "full" | "section-only";
 }
 
-const TEMPLATE_REGISTRY: Record<string, React.ComponentType<BaseTemplateProps>> = {
-  salepage: SalePageTemplate,
+const TEMPLATE_MAP: Record<string, React.ComponentType<{ data: UniversalTemplateProps }>> = {
   corporate: CorporateTemplate,
+  salepage: SalePageTemplate,
   catalog: CatalogTemplate,
   bio: BioTemplate,
-  "local-authority": LocalAuthorityTemplate,
-  local: LocalAuthorityTemplate,
   hotelresort: HotelResortTemplate,
+  "local-authority": LocalAuthorityTemplate,
   "seo-agency": SeoAgencyTemplate,
 };
 
-export const TemplateRenderer = ({ data, renderMode = "full" }: TemplateRendererProps) => {
+/**
+ * @component TemplateRenderer
+ * @description ด่านหน้าในการเลือกเทมเพลตที่เหมาะสมที่สุดตาม templateSlug
+ * โดยจะเลือกใช้เทมเพลตเฉพาะทาง (Index.tsx) ก่อน หากไม่มีจึงจะถอยกลับไปใช้ LayoutEngine (Strategy)
+ */
+export const TemplateRenderer = ({ data }: TemplateRendererProps) => {
   if (!data || !data.templateSlug) {
     console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
     return null;
   }
 
-  const ActiveTemplate = TEMPLATE_REGISTRY[data.templateSlug];
+  const SpecificTemplate = TEMPLATE_MAP[data.templateSlug];
 
-  if (!ActiveTemplate) {
-    return <TemplateNotFound data={data} />;
+  if (SpecificTemplate) {
+    return <SpecificTemplate data={data} />;
   }
 
-  // [IDENTITY_INTEGRATION]: Using LayoutEngine as a Server Shell
-  return (
-    <LayoutEngine theme={data.theme} spacing={renderMode === "section-only" ? "none" : "large"}>
-      {renderMode === "full" && data.aiSignal && (
-        <section className="container mx-auto px-4 pt-12 md:px-8">
-          <AIPersonaInsight data={data.aiSignal} />
-        </section>
-      )}
-      <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />
-
-      {renderMode === "full" && (
-        <section className="container mx-auto px-4 py-24 md:px-8">
-          <div className="mx-auto max-w-3xl">
-            <AgentCommandCenter />
-          </div>
-        </section>
-      )}
-    </LayoutEngine>
-  );
+  // [FALLBACK]: ถอยกลับไปใช้ระบบ Dynamic Sections หากไม่มีเทมเพลตเฉพาะทาง
+  return <LayoutEngine data={data} sectionOrder={data.layoutOrder} />;
 };
 
-/** [SUB-COMPONENT]: TemplateNotFound (Debugger View) */
-const TemplateNotFound = ({ data }: { data: UniversalTemplateProps }) => (
-  <div className="rounded-card-lg relative flex min-h-[60vh] w-full flex-col items-center justify-center overflow-hidden border-2 border-dashed border-rose-500/20 bg-rose-500/5 p-12 text-center backdrop-blur-xl">
-    <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-rose-500/10 shadow-2xl ring-1 ring-rose-500/20">
-      <span className="animate-pulse text-5xl font-black text-rose-600">!</span>
-    </div>
-    <div className="max-w-md space-y-4">
-      <h3 className="font-mono text-2xl font-black tracking-tighter text-rose-700 uppercase italic">
-        404_TEMPLATE_NOT_FOUND
-      </h3>
-      <div className="rounded-xl border border-rose-200 bg-white/50 p-4 font-mono text-xs break-all text-rose-800 shadow-sm">
-        Target_Slug: <span className="font-bold underline">"{data.templateSlug}"</span>
-      </div>
-      <p className="text-sm leading-relaxed font-medium text-rose-900/60 italic">
-        "โปรดตรวจสอบการแมพข้อมูลใน MASTER_REGISTRY และโครงสร้าง Export ของเทมเพลต"
-      </p>
-    </div>
-  </div>
-);
+TemplateRenderer.displayName = "TemplateRenderer";

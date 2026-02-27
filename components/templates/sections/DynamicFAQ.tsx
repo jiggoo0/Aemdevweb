@@ -17,9 +17,10 @@ import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import JsonLd from "@/components/seo/JsonLd";
-import type { ServiceFaq } from "@/types";
+import type { ServiceFaq, UniversalTemplateProps } from "@/types";
 
 interface DynamicFAQProps {
+  readonly data?: UniversalTemplateProps;
   readonly items?: readonly ServiceFaq[];
   readonly title?: string;
   readonly description?: string;
@@ -28,11 +29,13 @@ interface DynamicFAQProps {
 
 export const DynamicFAQ = memo(
   ({
-    items = [],
+    data,
+    items: directItems,
     title: _title = "Specialist FAQ",
     description = "ข้อมูลเชิงลึกและคำแนะนำทางเทคนิคจากทีมผู้เชี่ยวชาญ เพื่อให้คุณตัดสินใจได้แม่นยำที่สุด",
     className,
   }: DynamicFAQProps) => {
+    const items = directItems || data?.faqs || [];
     const faqSchema = useMemo(() => {
       if (!items || items.length === 0) return null;
       return {

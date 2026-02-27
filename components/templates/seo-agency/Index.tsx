@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";

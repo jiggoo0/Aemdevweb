@@ -115,7 +115,7 @@ export default async function ServicePage(props: PageProps) {
         เพื่อให้แสดงผลทับทุกส่วนของเทมเพลตได้อย่างแม่นยำ 
       */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
-        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/40 px-4 py-1.5 shadow-sm backdrop-blur-md">
+        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/80 px-4 py-1.5 shadow-sm">
           <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
           <span className="font-mono text-[9px] font-black tracking-[0.3em] text-[var(--text-primary)] uppercase opacity-70">
             Service_Node: {service.templateSlug.replace(/-/g, "_")}

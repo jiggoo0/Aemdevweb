@@ -11,14 +11,14 @@ import type { Metadata, Viewport } from "next";
 import { AREA_NODES } from "@/constants/area-nodes/index";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { constructMetadata } from "@/lib/seo-utils";
-import AreaCard from "@/components/features/areas/AreaCard";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 
 // --- 2. SEO & Schema Protocols (Knowledge Graph) ---
 import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
+import AreaSearchHub from "@/components/features/areas/AreaSearchHub";
 
 /** [VIEWPORT]: Mobile-First & Theme Color Engine */
 export const viewport: Viewport = {
@@ -51,16 +51,6 @@ export const metadata: Metadata = constructMetadata({
 export default function AreasPage() {
   /* [A] DATA_ORCHESTRATION: จัดกลุ่มตามภูมิภาคและเรียงลำดับตาม Priority */
   const regions = ["Central", "North", "Northeast", "East", "South", "West"] as const;
-
-  const groupedNodes = regions.reduce(
-    (acc, region) => {
-      acc[region] = AREA_NODES.filter((node) => node.region === region).sort(
-        (a, b) => (b.priority || 0) - (a.priority || 0),
-      );
-      return acc;
-    },
-    {} as Record<string, typeof AREA_NODES>,
-  );
 
   /* [B] SCHEMA_INJECTION */
   const fullSchema = generateSchemaGraph([
@@ -99,33 +89,8 @@ export default function AreasPage() {
           </div>
         </header>
 
-        {/* --- 02. REGIONAL SECTIONS --- */}
-        <div className="space-y-32">
-          {regions.map((region) => {
-            const nodes = groupedNodes[region];
-            if (!nodes || nodes.length === 0) return null;
-
-            return (
-              <section key={region} className="space-y-12">
-                <div className="flex items-center gap-6">
-                  <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
-                    {region}_<span className="text-brand-primary">Region</span>
-                  </h2>
-                  <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
-                  <span className="font-mono text-[10px] font-bold opacity-30">
-                    NODES: {nodes.length.toString().padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
-                  {nodes.map((node, index) => (
-                    <AreaCard key={node.slug} data={node} index={index} />
-                  ))}
-                </div>
-              </section>
-            );
-          })}
-        </div>
+        {/* --- 02. INTERACTIVE SEARCH HUB --- */}
+        <AreaSearchHub allNodes={[...AREA_NODES]} regions={regions} />
 
         {/* --- 03. CTA: STRATEGIC GROWTH GATEWAY --- */}
         <section className="border-border mt-32 border-t pt-24 text-center">

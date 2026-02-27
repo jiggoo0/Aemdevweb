@@ -25,7 +25,6 @@ import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
-import { RegionalVisuals } from "@/components/features/areas/RegionalVisuals";
 
 /** [SSG]: รับประกันผล Build เป็น Static 100% ทั่วไทย */
 export const dynamicParams = false;
@@ -108,20 +107,17 @@ export default async function AreaPage(props: PageProps) {
     <>
       <JsonLd data={fullSchema} id={`schema-graph-${area.slug}`} />
 
-      {/* [RENDER_LAYER]: ปล่อยให้ TemplateRenderer จัดการ Visual Shell ทั้งหมด 
-          เพื่อให้สีแบรนด์และ Spacing ของแต่ละจังหวัดทำงานได้ลื่นไหลที่สุด
+      {/* [SYSTEM_LAYOUT]: ใช้ TemplateRenderer เพื่อรองรับการแสดงผลเทมเพลตเฉพาะทาง (Corporate, SalePage, ฯลฯ) 
+          ช่วยให้การแสดงผลแต่ละจังหวัดมีฟีเจอร์ที่สมบูรณ์ตามประเภทบริการ
       */}
-      <TemplateRenderer data={templateData} renderMode="full" />
-
-      {/* Regional Assets Layer: Show success logs for specific area */}
-      <RegionalVisuals data={templateData.regionalVisuals} province={area.province} />
+      <TemplateRenderer data={templateData} />
 
       {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
-        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/40 px-5 py-2 shadow-sm backdrop-blur-md">
+        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/80 px-5 py-2 shadow-sm">
           <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
-          <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--text-primary)] uppercase opacity-70">
-            Geo_Sync: {area.province} | Node_{area.slug.replace(/-/g, "_")}
+          <span className="font-sans text-[9px] font-bold tracking-[0.4em] text-[var(--text-primary)] uppercase opacity-70">
+            Node_Active: {area.province} | Node_{area.slug.replace(/-/g, "_")}
           </span>
         </div>
       </div>

@@ -16,7 +16,7 @@ import type { PageProps } from "@/types";
 
 import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 
 // [DYNAMIC CONFIG]:
 // 1. revalidate: อัปเดต Cache ทุก 1 ชม. (ISR)

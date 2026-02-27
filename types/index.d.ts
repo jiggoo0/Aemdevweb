@@ -344,6 +344,7 @@ export interface UniversalTemplateProps {
   readonly marketSaturation?: number;
   readonly isTourismHeavy?: boolean;
   readonly regionalLatency?: number;
+  readonly layoutOrder?: string[]; // [PATCH]: Supports custom section ordering
   readonly regionalRoadmap?: readonly {
     readonly step: string;
     readonly title: string;
@@ -419,6 +420,7 @@ export interface AreaNode {
   readonly marketSaturation?: number;
   readonly isTourismHeavy?: boolean;
   readonly regionalLatency?: number;
+  readonly layoutOrder?: string[]; // [PATCH]: Custom section ordering per node
   readonly regionalRoadmap?: readonly {
     readonly step: string;
     readonly title: string;

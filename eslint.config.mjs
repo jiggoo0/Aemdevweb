@@ -16,14 +16,13 @@ export default tseslint.config(
   {
     /**
      * [IGNORE ENGINE]: ระบุ Folder ที่ต้องการให้ ESLint ข้ามการตรวจสอบ
-     * [ADDED]: 'scripts/**' เพื่อไม่ให้สคริปต์เบื้องหลังมารบกวนขั้นตอน Build
      */
     ignores: [
       ".next/**",
       "node_modules/**",
       "out/**",
       "public/**",
-      "scripts/**", // <--- ละเว้นสคริปต์ทั้งหมดที่นี่
+      "scripts/**",
       "**/*.d.ts",
       "eslint.config.mjs",
       "next.config.mjs",
@@ -59,7 +58,7 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
-        "warn",
+        "error",
         {
           vars: "all",
           varsIgnorePattern: "^_",

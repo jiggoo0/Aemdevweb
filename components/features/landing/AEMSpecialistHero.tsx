@@ -10,6 +10,7 @@ import React, { memo, useEffect, useState, useRef } from "react";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { cn } from "@/lib/utils";
 
 export const AEMSpecialistHero = memo(() => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -61,47 +62,66 @@ export const AEMSpecialistHero = memo(() => {
       {/* --- LAYER 03: CONTENT HUB --- */}
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="flex flex-col items-center text-center">
-          {/* Status Chip: High-Authority Marker */}
-          <div className="border-brand-primary/20 bg-brand-primary/5 group hover:border-brand-primary/40 mb-12 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md transition-all">
-            <div className="relative flex h-2 w-2">
-              <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"></span>
-              <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-[0_0_10px_var(--brand-primary)]"></span>
-            </div>
-            <span className="text-text-primary font-mono text-[10px] font-black tracking-[0.5em] uppercase italic">
-              System_Integrity: <span className="text-brand-primary">Optimal_v18.5</span>
-            </span>
+          {/* Status Architecture: High-Authority Meta-Data */}
+          <div className="mb-16 flex flex-wrap items-center justify-center gap-4 px-4 md:gap-8">
+            {[
+              { label: "ENGINE", value: "NEXT.JS 16.1.6", status: "emerald" },
+              { label: "RUNTIME", value: "REACT 19.0.0", status: "emerald" },
+              { label: "SECURITY", value: "HARDENED", status: "amber" },
+              { label: "LOCATION", value: "BANGKOK CBD", status: "emerald" },
+            ].map((node, i) => (
+              <div
+                key={i}
+                className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-3xl transition-all"
+              >
+                <div
+                  className={cn(
+                    "h-1.5 w-1.5 rounded-full",
+                    node.status === "emerald"
+                      ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
+                      : "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]",
+                  )}
+                />
+                <span className="text-text-muted font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-40 transition-opacity group-hover:opacity-100">
+                  {node.label}: <span className="text-text-primary ml-1">{node.value}</span>
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* Main Title: Fluid Precision Scaling */}
-          <h1 className="text-text-primary mb-10 max-w-5xl text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
+          <h1 className="text-text-primary mb-12 max-w-6xl text-6xl leading-[0.8] font-black tracking-tighter uppercase italic drop-shadow-2xl md:text-9xl lg:text-[11rem]">
             Hyper <br />
-            <span className="from-brand-primary via-brand-primary to-brand-accent bg-gradient-to-r bg-clip-text text-transparent">
-              Performance.
+            <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
+              Authority.
             </span>
           </h1>
 
           {/* Core Vision: Tactical Copywriting */}
-          <div className="mb-16 flex max-w-3xl flex-col items-center gap-8">
-            <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-90 md:text-2xl">
-              “วิศวกรรมโครงสร้างพื้นฐานเว็บไซต์ เพื่อสร้างอำนาจการจัดอันดับที่ยั่งยืนในยุค AI-Search
+          <div className="mb-20 flex max-w-4xl flex-col items-center gap-10">
+            <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
+              “สถาปัตยกรรมเว็บไซต์เพื่อสร้าง{" "}
+              <span className="text-text-primary">อำนาจการจัดอันดับ</span> ที่ยั่งยืนในยุค AI-Search
               Domination”
             </p>
-            <div className="bg-border/40 h-px w-24" />
+            <div className="bg-border/20 relative h-px w-48 overflow-hidden">
+              <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full animate-[shimmer_2s_infinite]" />
+            </div>
           </div>
 
           {/* Conversion Actions: Weighted Response */}
-          <div className="flex flex-col items-center gap-6 sm:flex-row">
+          <div className="flex flex-col items-center gap-8 sm:flex-row">
             <Button
               size="lg"
               variant="default"
               href={SITE_CONFIG.links.line}
-              className="shadow-glow-lg group h-16 rounded-2xl px-10 text-[11px] font-black tracking-[0.3em] uppercase italic transition-all duration-500 hover:scale-[1.02] active:scale-95"
+              className="shadow-glow-lg group glow-primary h-20 min-w-[320px] rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic transition-all duration-500 hover:scale-[1.02] active:scale-95"
             >
-              <span className="mr-4">Initialize Specialist Audit</span>
+              <span className="mr-6">Initialize Specialist Audit</span>
               <IconRenderer
                 name="Zap"
-                size={16}
-                className="transition-transform group-hover:rotate-12"
+                size={20}
+                className="transition-transform group-hover:scale-125 group-hover:rotate-12"
               />
             </Button>
 
@@ -109,9 +129,9 @@ export const AEMSpecialistHero = memo(() => {
               size="lg"
               variant="outline"
               href="/services"
-              className="border-border hover:border-brand-primary/40 h-16 rounded-2xl px-10 text-[11px] font-black tracking-[0.3em] uppercase italic transition-all duration-500"
+              className="border-border hover:border-brand-primary/40 h-20 min-w-[280px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-3xl transition-all duration-500"
             >
-              Master Services Registry
+              Expertise Registry
             </Button>
           </div>
         </div>

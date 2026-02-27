@@ -82,24 +82,24 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
           rel="noopener noreferrer"
           onClick={handleContactClick}
           className={cn(
-            "relative flex h-14 w-14 items-center justify-center rounded-[1.6rem] md:h-16 md:w-16 md:rounded-[1.9rem]",
+            "relative flex h-14 w-14 items-center justify-center rounded-[1.8rem] md:h-16 md:w-16 md:rounded-[2.1rem]",
             "from-line-green to-line-dark bg-gradient-to-br text-white",
-            "shadow-[0_8px_20px_-6px_rgba(6,199,85,0.5)] hover:shadow-[0_12px_32px_-6px_rgba(6,199,85,0.7)]",
-            "transform-gpu transition-all duration-700 ease-[0.16,1,0.3,1]",
-            "hover:scale-110 hover:-rotate-6 active:scale-95",
+            "shadow-[0_10px_25px_-5px_rgba(6,199,85,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(6,199,85,0.5)]",
+            "transform-gpu transition-all duration-500 ease-[0.23,1,0.32,1]",
+            "hover:scale-105 hover:-rotate-3 active:scale-95",
             "pointer-events-auto cursor-pointer",
           )}
           aria-label="Connect with Technical Specialist via Line"
         >
-          {/* Ambient Signal Pulse - GPU Optimized */}
-          <span className="bg-line-green absolute inset-0 z-0 transform-gpu animate-ping rounded-[1.6rem] opacity-20 duration-[2500ms]" />
+          {/* Ambient Signal Pulse - Subdued for Professionalism */}
+          <span className="bg-line-green absolute inset-0 z-0 transform-gpu animate-ping rounded-[1.8rem] opacity-10 duration-[3000ms]" />
 
           <div className="relative z-10 transition-transform duration-500 group-hover:scale-110">
             <IconRenderer
               name="MessageCircle"
-              size={28}
-              strokeWidth={2.5}
-              className="drop-shadow-md"
+              size={26}
+              strokeWidth={2}
+              className="drop-shadow-sm"
             />
           </div>
 
@@ -107,10 +107,10 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
           <div className="pointer-events-none absolute right-full mr-6 hidden transform-gpu items-center md:flex">
             <span
               className={cn(
-                "shadow-pro-xl border-border/60 bg-surface-main/90 text-text-primary translate-x-4 rounded-2xl border px-6 py-3 text-[10px] font-black tracking-[0.2em] whitespace-nowrap uppercase opacity-0 backdrop-blur-md transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
+                "shadow-pro border-border/40 bg-surface-main/95 text-text-primary translate-x-3 rounded-2xl border px-6 py-3 text-[11px] font-bold tracking-[0.2em] whitespace-nowrap uppercase opacity-0 backdrop-blur-xl transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
               )}
             >
-              ปรึกษาโปรเจกต์
+              Consult Expert
             </span>
             {/* Neural Linkage UI */}
             <div className="bg-brand-primary h-px w-6 origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />

@@ -8,7 +8,7 @@ import React, { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
 
 // --- UI Components & Layout ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
 import WorkProcess from "@/components/features/landing/WorkProcess"; // [RESOLVED]: Now in active use
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";

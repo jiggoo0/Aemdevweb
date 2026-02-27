@@ -49,9 +49,9 @@
 
 @layer base {
   :root {
-    --brand-primary-raw: 60% 0.25 25;
-    --brand-secondary-raw: 50% 0.22 25;
-    --brand-accent-raw: 75% 0.18 25;
+    --brand-primary-raw: 55% 0.18 260; /* Deep Professional Indigo */
+    --brand-secondary-raw: 45% 0.15 260;
+    --brand-accent-raw: 85% 0.1 260;
     --surface-main: #ffffff;
     --surface-offset: #f8fafc;
     --surface-card: #ffffff;
@@ -63,13 +63,16 @@
   }
 
   .dark {
+    --brand-primary-raw: 65% 0.2 260;
+    --brand-secondary-raw: 55% 0.15 260;
+    --brand-accent-raw: 80% 0.12 260;
     --surface-main: #020617;
-    --surface-offset: #0f172a;
-    --surface-card: #1e293b;
+    --surface-offset: #0b1120;
+    --surface-card: #0f172a;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.06);
     color-scheme: dark;
   }
 

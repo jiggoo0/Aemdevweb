@@ -8,7 +8,7 @@ import React from "react";
 import JsonLd from "@/components/seo/JsonLd";
 
 // --- 1. Infrastructure ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import type { UniversalTemplateProps } from "@/types";
 import { generateUniversalSchema } from "@/lib/schema";
 
@@ -95,19 +95,19 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
                         <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
                           Regional_Exclusive_Deal
                         </span>
-                        <h4 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
+                        <h4 className="text-text-primary line-clamp-2 text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
                           {data.promotions[0].title}
                         </h4>
-                        <p className="text-text-secondary font-medium italic opacity-70">
+                        <p className="text-text-secondary line-clamp-2 font-medium italic opacity-70">
                           {data.promotions[0].description}
                         </p>
                       </div>
                     </div>
                     {data.promotions[0].discount && (
-                      <div className="border-border flex items-center gap-4 border-l pl-8">
+                      <div className="border-border flex min-w-[180px] items-center justify-end gap-4 border-l pl-8">
                         <div className="text-right">
                           <p className="text-text-muted text-[9px] font-bold tracking-widest uppercase opacity-40">
-                            Discount
+                            Deal_Value
                           </p>
                           <p className="text-brand-primary text-4xl font-black italic">
                             {data.promotions[0].discount}

@@ -9,11 +9,15 @@ import Image from "next/image";
 import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import { cn } from "@/lib/utils";
 
+import type { UniversalTemplateProps } from "@/types";
+
 interface RegionalGalleryProps {
-  images: readonly string[];
+  data?: UniversalTemplateProps;
+  images?: readonly string[];
 }
 
-export const RegionalGallery = ({ images }: RegionalGalleryProps) => {
+export const RegionalGallery = ({ data, images: directImages }: RegionalGalleryProps) => {
+  const images = directImages || data?.regionalVisuals?.gallery || [];
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLElement>(null);
 

@@ -8,7 +8,7 @@ import React from "react";
 import type { Metadata } from "next";
 
 // --- Infrastructure ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import IconRenderer from "@/components/ui/IconRenderer";
 
 import { cn } from "@/lib/utils";

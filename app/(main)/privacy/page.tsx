@@ -8,7 +8,7 @@ import React from "react";
 import type { Metadata } from "next";
 
 // --- 1. System Infrastructure & Layout Components ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import UniversalHero from "@/components/templates/sections/UniversalHero";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";

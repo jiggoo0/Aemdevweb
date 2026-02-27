@@ -1,6 +1,7 @@
 /**
- * [SHARED COMPONENT]: TRUST_BADGE_SYSTEM v17.9.103 (SERVER_OPTIMIZED)
- * [STRATEGY]: Pure CSS Transitions | IntersectionObserver | Zero-Framer
+ * [SHARED COMPONENT]: TRUST_BADGE_SYSTEM v18.0.0 (PROFESSIONAL_OVERHAUL)
+ * [STRATEGY]: Reality-Based Authority | Clean Typography | Subdued Motion
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
@@ -9,7 +10,6 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
-import { SITE_CONFIG } from "@/constants/site-config";
 
 interface TrustNode {
   readonly label: string;
@@ -18,11 +18,11 @@ interface TrustNode {
 }
 
 const TRUST_NODES: readonly TrustNode[] = [
-  { label: "High-Speed Protocol", icon: "Zap", status: "active" },
-  { label: "SEO Architecture", icon: "SearchCheck", status: "active" },
-  { label: "Bank-Grade Security", icon: "ShieldCheck", status: "active" },
-  { label: "Responsive Geometry", icon: "Layers", status: "active" },
-  { label: "Next.js Core", icon: "Cpu", status: "active" },
+  { label: "High-Speed Performance", icon: "Zap", status: "active" },
+  { label: "Modern SEO Structure", icon: "SearchCheck", status: "active" },
+  { label: "Secure Architecture", icon: "ShieldCheck", status: "active" },
+  { label: "Responsive Design", icon: "Layers", status: "active" },
+  { label: "Next.js 16 Optimized", icon: "Cpu", status: "active" },
 ];
 
 const TrustBadge = () => {
@@ -52,16 +52,16 @@ const TrustBadge = () => {
       {/* --- 01. STATUS HEADER: Blueprint Alignment --- */}
       <div
         className={cn(
-          "mb-10 flex w-full max-w-2xl items-center justify-center gap-6 px-4 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "mb-10 flex w-full max-w-2xl items-center justify-center gap-6 px-4 transition-all duration-[1500ms] ease-[0.23,1,0.32,1]",
           visible ? "scale-x-100 opacity-60" : "scale-x-75 opacity-0",
         )}
       >
         <div className="bg-border/20 h-px flex-1" />
         <span
           suppressHydrationWarning
-          className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] whitespace-nowrap uppercase italic md:text-[10px]"
+          className="text-text-muted font-sans text-[10px] font-bold tracking-[0.3em] whitespace-nowrap uppercase md:text-[11px]"
         >
-          Infrastructure_Verified.v{SITE_CONFIG.project.version}
+          Technology Stack & Standards
         </span>
         <div className="bg-border/20 h-px flex-1" />
       </div>
@@ -72,56 +72,38 @@ const TrustBadge = () => {
           <div
             key={node.label}
             className={cn(
-              "group relative flex cursor-default items-center gap-5 overflow-hidden rounded-[1.8rem] md:rounded-[2.2rem]",
-              "border-border bg-surface-card/30 shadow-pro-sm border px-6 py-4 backdrop-blur-3xl md:px-9 md:py-5",
+              "group relative flex cursor-default items-center gap-4 overflow-hidden rounded-[1.8rem] md:rounded-[2.2rem]",
+              "border-border bg-surface-card/30 shadow-pro border px-6 py-4 backdrop-blur-3xl md:px-8 md:py-5",
               "hover:border-brand-primary/40 hover:bg-surface-offset/60 transition-all duration-500",
               "transform-gpu will-change-transform",
-              "hover:-translate-y-1.5 hover:scale-103",
-              "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              "hover:-translate-y-1.5",
+              "transition-all duration-700 ease-[0.23,1,0.32,1]",
               visible
                 ? "blur-0 translate-y-0 scale-100 opacity-100"
                 : "translate-y-4 scale-95 opacity-0 blur-[4px]",
             )}
             style={{
-              transitionDelay: `${index * 120}ms`,
+              transitionDelay: `${index * 80}ms`,
             }}
           >
-            {/* Neural Signal: Emerald (Online/Secure) */}
-            <div className="relative flex h-2.5 w-2.5 items-center justify-center">
-              <span
-                className={cn(
-                  "absolute inline-flex h-full w-full animate-ping rounded-full opacity-0 group-hover:opacity-40",
-                  node.status === "active" ? "bg-emerald-500" : "bg-text-muted",
-                )}
-              />
-              <span
-                className={cn(
-                  "relative inline-flex h-2 w-2 rounded-full transition-all duration-500",
-                  node.status === "active"
-                    ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
-                    : "bg-text-muted/40",
-                )}
-              />
-            </div>
-
             {/* Content Hub */}
-            <div className="flex items-center gap-5">
-              <div className="text-text-muted group-hover:text-brand-primary transition-all duration-500 group-hover:scale-110 group-hover:rotate-[8deg]">
-                <IconRenderer name={node.icon} size={20} strokeWidth={2.5} />
+            <div className="flex items-center gap-4">
+              <div className="text-brand-primary/80 group-hover:text-brand-primary transition-all duration-500 group-hover:scale-110">
+                <IconRenderer name={node.icon} size={20} strokeWidth={2} />
               </div>
               <div className="flex flex-col">
-                <span className="text-text-secondary group-hover:text-text-primary font-mono text-[10px] font-black tracking-widest uppercase transition-colors duration-500 md:text-[11px]">
+                <span className="text-text-secondary group-hover:text-text-primary font-sans text-[11px] font-bold tracking-wider uppercase transition-colors duration-500 md:text-[12px]">
                   {node.label}
                 </span>
-                <span className="text-brand-primary/0 group-hover:text-brand-primary/60 font-mono text-[7px] font-bold tracking-tighter uppercase transition-all duration-500">
-                  Node_Authenticated_Stable
+                <span className="text-brand-primary/40 group-hover:text-brand-primary/60 font-mono text-[8px] font-bold tracking-widest uppercase transition-all duration-500">
+                  Verified_Standard
                 </span>
               </div>
             </div>
 
             {/* Shine Sweep Effect */}
             <div
-              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent transition-transform duration-[1500ms] group-hover:translate-x-full"
+              className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/[0.04] to-transparent transition-transform duration-[2000ms] group-hover:translate-x-full"
               aria-hidden="true"
             />
           </div>
@@ -130,5 +112,7 @@ const TrustBadge = () => {
     </div>
   );
 };
+
+TrustBadge.displayName = "TrustBadge";
 
 export default memo(TrustBadge);

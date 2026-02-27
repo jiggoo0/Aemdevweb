@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v17.9.120 (ULTIMATE_OPTIMIZED)
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v16.1.6 (ULTIMATE_OPTIMIZED)
  * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */

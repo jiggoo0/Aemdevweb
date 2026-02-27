@@ -7,7 +7,7 @@ import React from "react";
 import type { Metadata } from "next";
 
 // --- 1. Infrastructure & Engines ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import UniversalHero from "@/components/templates/sections/UniversalHero";
 import { FeatureGrid } from "@/components/templates/sections/UniversalRegistry";
 import { CapabilityGraph } from "@/components/templates/sections/CapabilityGraph";

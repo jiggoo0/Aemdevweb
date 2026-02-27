@@ -115,6 +115,15 @@ export const bangkokNode = defineAreaNode(corporateService, {
   marketSaturation: 95,
   regionalLatency: 5,
 
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้ากรุงเทพฯ ดูเป็น "เว็บไซต์อิสระ" สำหรับองค์กรใหญ่
+  layoutOrder: ["hero", "stats", "trust", "insight", "process", "pricing", "faq", "cta"],
+  theme: {
+    primary: "oklch(55% 0.18 260)", // Deep Enterprise Indigo
+    secondary: "oklch(45% 0.15 260)",
+    mode: "dark", // กรุงเทพฯ เน้นความหรูหรา ดุดัน (Dark Mode)
+    radius: "1.5rem",
+  },
+
   regionalRoadmap: [
     {
       step: "01",

@@ -40,7 +40,6 @@ export const chiangMaiNode: AreaNode = {
   // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
   // รับค่าโดยตรงจาก hotelResortService เพื่อความเป็นมาตรฐานเดียวกันทั้งระบบ
   // (Chiang Mai Gold & Lanna Dark Theme)
-  theme: hotelResortService.theme,
   price: hotelResortService.price,
   priceValue: hotelResortService.priceValue,
   currency: hotelResortService.currency,
@@ -48,6 +47,15 @@ export const chiangMaiNode: AreaNode = {
 
   isTourismHeavy: true,
   marketSaturation: 70,
+
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าเชียงใหม่ดูเป็น "เว็บไซต์โรงแรมล้านนาหรูหรา"
+  layoutOrder: ["hero", "gallery", "trust", "insight", "process", "pricing", "faq", "cta"],
+  theme: {
+    primary: "oklch(75% 0.1 85)", // Elegant Lanna Gold
+    secondary: "oklch(65% 0.08 85)",
+    mode: "light",
+    radius: "2.5rem",
+  },
 
   regionalRoadmap: [
     {

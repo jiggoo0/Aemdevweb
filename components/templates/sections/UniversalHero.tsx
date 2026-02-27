@@ -100,16 +100,16 @@ const UniversalHero = ({
           <div className="bg-surface-offset border-border/50 shadow-pro-lg flex h-20 w-20 items-center justify-center rounded-3xl border text-[var(--brand-primary)] ring-1 ring-[var(--brand-primary)]/20 backdrop-blur-2xl">
             {getHeroIcon()}
           </div>
-          <div className="flex flex-col items-start gap-1">
-            <span className="font-mono text-[10px] font-black tracking-[0.5em] text-[var(--brand-primary)] uppercase opacity-80">
-              System_Specialist_Node
+          <div className="flex flex-col items-start gap-1 text-left">
+            <span className="font-sans text-[10px] font-bold tracking-[0.3em] text-[var(--brand-primary)] uppercase opacity-90">
+              Expertise_Engine_Active
             </span>
-            <div className="h-[2px] w-16 bg-[var(--brand-primary)]/40" />
+            <div className="h-[2px] w-12 bg-[var(--brand-primary)]/40" />
           </div>
         </div>
 
         {/* --- MAIN TITLE: Executive Typography --- */}
-        <h1 className="mb-10 max-w-5xl text-5xl leading-[0.85] font-black tracking-tighter uppercase italic sm:text-7xl lg:text-8xl">
+        <h1 className="mb-10 max-w-5xl text-5xl leading-[0.95] font-black tracking-tight sm:text-7xl lg:text-8xl">
           {typeof title === "string"
             ? title.split(" ").map((word, i) => (
                 <span
@@ -125,11 +125,11 @@ const UniversalHero = ({
         {/* --- SUBTITLE: Professional Insight --- */}
         <div
           className={cn(
-            "text-text-secondary mb-14 max-w-3xl text-xl leading-relaxed font-semibold italic opacity-90 md:text-2xl",
+            "text-text-secondary mb-14 max-w-3xl text-xl leading-relaxed font-medium opacity-90 md:text-2xl",
             align === "center" ? "mx-auto" : "mr-auto",
           )}
         >
-          {typeof description === "string" ? `“${description}”` : description}
+          {description}
         </div>
 
         {/* --- ACTION SEQUENCE: High-Conversion Flow --- */}
@@ -142,11 +142,11 @@ const UniversalHero = ({
           <Button
             size="lg"
             href={primaryHref || SITE_CONFIG.links.line}
-            className="shadow-glow-md h-16 rounded-2xl px-10 text-[11px] font-black tracking-widest uppercase italic"
+            className="shadow-glow-md h-16 rounded-2xl px-10 text-[12px] font-bold tracking-widest uppercase"
           >
             <span className="flex items-center gap-2">
-              {primaryActionLabel || "Initialize Strategy"}
-              <IconRenderer name="ChevronRight" size={20} />
+              {primaryActionLabel || "Start Your Project"}
+              <IconRenderer name="ArrowRight" size={20} />
             </span>
           </Button>
 
@@ -154,9 +154,9 @@ const UniversalHero = ({
             <Button
               variant="outline"
               href={secondaryHref || "#"}
-              className="border-border hover:border-brand-primary/60 h-16 rounded-2xl px-10 text-[11px] font-black tracking-widest uppercase italic backdrop-blur-sm"
+              className="border-border hover:border-brand-primary/60 h-16 rounded-2xl px-10 text-[12px] font-bold tracking-widest uppercase backdrop-blur-sm"
             >
-              {secondaryActionLabel || data?.secondaryAction?.label || "Technical Audit"}
+              {secondaryActionLabel || data?.secondaryAction?.label || "View Solutions"}
             </Button>
           )}
         </div>

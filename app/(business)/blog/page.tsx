@@ -18,7 +18,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 
 // --- 3. UI Render Engine ---
-import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import LayoutEngine from "@/components/templates/LayoutEngine";
 import BlogCard from "@/components/features/blog/BlogCard";
 
 /** [STRATEGY]: บังคับอัปเดต Content ทุก 1 ชม. โดยไม่ต้อง Rebuild ทั้งระบบ (ISR) */

@@ -83,14 +83,13 @@ function hexToOklch(hex: string): { l: number; c: number; h: number } | null {
 /**
  * [THEME]: injectThemeVariables
  * @description กลไกการฉีดค่าธีมพร้อมระบบ Identity Sync เข้าสู่ CSS Object Model
+ * [FIX]: ยกเลิกการ Override --surface-main และ --text-primary เพื่อให้รองรับ Dark/Light Mode Toggle
  */
 export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
   const styles: Record<string, string> = {};
   if (!theme) return styles as React.CSSProperties;
 
-  // 1. Core Surfaces & Typography
-  styles["--surface-main"] = theme.background || (theme.mode === "dark" ? "#020617" : "#ffffff");
-  styles["--text-primary"] = theme.foreground || (theme.mode === "dark" ? "#f8fafc" : "#0f172a");
+  // 1. Core Geometry
   styles["--radius"] = theme.radius || "2.5rem";
 
   // 2. [ENGINE]: OKLCH Dynamic Generator (Standardized Prefix)
@@ -102,7 +101,7 @@ export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
       styles[`--brand-${key}-raw`] = raw;
       styles[`--brand-${key}`] = `oklch(${raw})`;
 
-      // Inject legacy compatibility variable to prevent immediate breakage during refactor
+      // Inject legacy compatibility variable
       styles[`--theme-${key}`] = `oklch(${raw})`;
 
       // [CONTRAST_LOGIC]: Automatic Foreground Calculation

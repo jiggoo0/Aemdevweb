@@ -117,15 +117,6 @@ export default function RootLayout({ children }: LayoutProps) {
     >
       <head>
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
-        {/* [CRITICAL_CSS]: Inline styles for instant paint */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              :root { background-color: ${SITE_CONFIG.themeColor}; }
-              .dark { background-color: #020617; }
-            `,
-          }}
-        />
       </head>
       <body
         suppressHydrationWarning

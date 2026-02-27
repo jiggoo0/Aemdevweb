@@ -22,7 +22,7 @@ interface MetricItem {
   readonly trend?: "up" | "stable";
 }
 
-const SYSTEM_METRICS: readonly MetricItem[] = [
+const _SYSTEM_METRICS: readonly MetricItem[] = [
   {
     id: "PERF_CORE",
     label: "Core Performance",
@@ -215,9 +215,56 @@ const MetricCard = ({
   );
 };
 
-const ImpactStats = () => {
+interface ImpactStatsProps {
+  readonly data?: UniversalTemplateProps;
+  readonly className?: string;
+}
+
+const ImpactStats = ({ data, className }: ImpactStatsProps) => {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  // [DYNAMIC_DATA]: ดึงข้อมูลจาก Province DNA หากไม่มีให้ใช้ค่ามาตรฐานที่สมเหตุสมผล
+  const metrics: MetricItem[] = [
+    {
+      id: "LOCAL_TRAFFIC",
+      label: `${data?.province || "Global"} Reach`,
+      value: data?.socialProof?.reviewCount ? data.socialProof.reviewCount * 10 : 12000,
+      unit: "P/M",
+      icon: "TrendingUp",
+      description: "Regional Market Awareness",
+      trend: "up",
+    },
+    {
+      id: "SPEED_NODE",
+      label: "Node Latency",
+      value: data?.regionalLatency || 14,
+      decimals: 1,
+      unit: "MS",
+      icon: "Zap",
+      description: "Infrastructure Response Time",
+      trend: "stable",
+    },
+    {
+      id: "SATURATION",
+      label: "Market Presence",
+      value: data?.marketSaturation || 85,
+      unit: "%",
+      icon: "Target",
+      description: "Regional Service Coverage",
+      trend: "up",
+    },
+    {
+      id: "TRUST_INDEX",
+      label: "Authority Score",
+      value: data?.socialProof?.rating || 4.9,
+      decimals: 1,
+      unit: "/5.0",
+      icon: "Award",
+      description: "Partner Success Index",
+      trend: "stable",
+    },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -234,9 +281,9 @@ const ImpactStats = () => {
   }, []);
 
   return (
-    <div ref={ref} className="w-full">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {SYSTEM_METRICS.map((stat, index) => (
+    <div ref={ref} className={cn("w-full", className)}>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {metrics.map((stat, index) => (
           <MetricCard key={stat.id} stat={stat} index={index} visible={visible} />
         ))}
       </div>
