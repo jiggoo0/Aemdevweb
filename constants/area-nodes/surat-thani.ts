@@ -5,188 +5,126 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const suratThaniNode: AreaNode = {
+export const suratThaniNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "surat-thani",
   province: "สุราษฎร์ธานี",
   region: "South",
-  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและการบริการประชาชน
+  priority: 96,
 
-  title: "รับทำเว็บไซต์สุราษฎร์ธานี - ยกระดับท้องถิ่นสู่ Smart Tourism & Agriculture",
+  title:
+    "รับทำเว็บไซต์ สุราษฎร์ธานี | Digital Architecture สำหรับโรงแรมหรูและธุรกิจท่องเที่ยวระดับโลก",
   description:
-    "บริการออกแบบเว็บไซต์หน่วยงานราชการในสุราษฎร์ธานี รองรับปริมาณนักท่องเที่ยวหลักล้าน เชื่อมโยงเศรษฐกิจพืชเศรษฐกิจ (ยาง/ปาล์ม) และระบบจัดการสิ่งแวดล้อม",
+    "บริการวางระบบเว็บไซต์ระดับสากลในสุราษฎร์ธานี สมุย พะงัน และเต่า เน้นงานดีไซน์หรูหรา โหลดไวจากทั่วโลกด้วย Global CDN และเพิ่มยอดจองตรง (Direct Booking) ทันที",
 
   longDescription:
-    "สุราษฎร์ธานี 'เมืองร้อยเกาะ' คือศูนย์กลางเศรษฐกิจและท่องเที่ยวที่สำคัญที่สุดของภาคใต้ตอนบน นายเอ็มซ่ามากส์ เข้าใจความหลากหลายของพื้นที่ " +
-    "ตั้งแต่นครเกาะสมุยไปจนถึงพื้นที่เกษตรกรรมในพุนพินและไชยา เราจึงออกแบบเว็บไซต์ที่เน้นการบริหารจัดการข้อมูลขนาดใหญ่ " +
-    "รองรับการใช้งานจากนักท่องเที่ยวทั่วโลกและประชาชนในพื้นที่ ด้วยสถาปัตยกรรม Next.js ที่โหลดไวและปลอดภัยสูงสุด เพื่อสร้างรากฐานดิจิทัลที่ยั่งยืนให้กับท้องถิ่น",
+    "สุราษฎร์ธานี 'เมืองร้อยเกาะ' คือจุดยุทธศาสตร์การท่องเที่ยวระดับโลกที่ต้องการเว็บไซต์มาตรฐานสากล " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับ Luxury Resort, Boutique Hotel และธุรกิจดำน้ำที่ต้องการเข้าถึงลูกค้าต่างชาติ " +
+    "เราเน้นโครงสร้างที่รองรับการโหลดภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางระบบจองตรงที่ช่วยให้คุณเป็นอิสระจาก OTA",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์สุราษฎร์ธานี อบจ. เทศบาล - เอ็มซ่ามากส์ พัฒนาเว็บราชการมาตรฐาน ITA",
-  seoDescription:
-    "ทำเว็บไซต์ อบต. เทศบาล สุราษฎร์ธานี เกาะสมุย พะงัน ระบบ E-Service ชำระภาษีออนไลน์ และฐานข้อมูลเกษตรกร Smart Farmer มาตรฐานความปลอดภัยสูง รองรับ PDPA",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกันทั้งระบบ
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-
-  isTourismHeavy: true,
-  marketSaturation: 68,
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Tourism Data Mapping",
-      description:
-        "วิเคราะห์พฤติกรรมนักท่องเที่ยวทั้งในฝั่งและเกาะ (สมุย/พะงัน) เพื่อวางแผนการเข้าถึงข้อมูลที่แม่นยำ",
-    },
-    {
-      step: "02",
-      title: "E-Service Localization",
-      description:
-        "ติดตั้งระบบบริการออนไลน์ที่รองรับทั้งภาษาไทยและอังกฤษ เพื่ออำนวยความสะดวกให้คนในพื้นที่และนักท่องเที่ยว",
-    },
-    {
-      step: "03",
-      title: "Island Node Optimization",
-      description:
-        "ใช้ระบบ Edge Computing เพื่อให้เว็บไซต์โหลดได้รวดเร็วแม้ในพื้นที่เกาะที่มีสัญญาณอินเทอร์เน็ตจำกัด",
-    },
-  ],
-
-  // --- Visual (Local Specific) ---
+  // --- Visual & Location ---
   heroImage: "/images/areas/surat-ratchaprapha.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "International Standard: รองรับมาตรฐานความปลอดภัยข้อมูล (PDPA) และเกณฑ์ ITA สำหรับเมืองท่องเที่ยวระดับสากล",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "High-Traffic Resilience: โครงสร้างระบบที่รองรับการเข้าใช้งานพร้อมกันจำนวนมากในช่วงฤดูกาลท่องเที่ยวโดยไม่ล่ม",
-    "Smart Agriculture Sync: ระบบรายงานราคากลางพืชเศรษฐกิจ (ยาง/ปาล์ม) แบบรายวันเพื่อสนับสนุนกลุ่มเกษตรกรในพื้นที่",
-    "Digital Service Integration: ระบบ E-Service ชำระภาษีและแจ้งเรื่องร้องเรียนออนไลน์ ช่วยอำนวยความสะดวกประชาชน 24 ชม.",
-  ],
-
-  // --- Core Features (Surat Thani Specific) ---
-  coreFeatures: [
-    {
-      title: "Waste & GPS Tracking",
-      description:
-        "ระบบรับเรื่องร้องเรียนและแจ้งจุดเก็บขยะผ่านพิกัด GPS สำหรับพื้นที่เกาะและแหล่งท่องเที่ยวธรรมชาติ",
-      icon: "Trash2",
-    },
-    {
-      title: "Tourism Safety Gateway",
-      description:
-        "ศูนย์รวมข้อมูลความปลอดภัย จุดปฐมพยาบาล และเบอร์ฉุกเฉินหลายภาษาสำหรับนักท่องเที่ยวต่างชาติ",
-      icon: "ShieldCheck",
-    },
-    {
-      title: "Logistic Linkage",
-      description:
-        "ระบบแสดงข้อมูลเส้นทางเดินเรือ ตารางรถไฟ และเที่ยวบิน เชื่อมโยงการเดินทางฝั่งสู่เกาะแบบไร้รอยต่อ",
-      icon: "Truck",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "ระบบจองคิวออนไลน์สามารถแยกประเภทงานบริการได้ไหม?",
-      answer:
-        "ได้ครับ ระบบสามารถจัดคิวแยกตามหน้างานทะเบียน งานโยธา หรือภาษี ทำให้เจ้าหน้าที่บริหารจัดการคิวได้อย่างมีประสิทธิภาพครับ",
-    },
-    {
-      question: "เว็บไซต์รองรับภาษาอังกฤษและจีนเพื่อนักท่องเที่ยวไหม?",
-      answer:
-        "รองรับครับ เรามีโมดูล Multi-language ที่ออกแบบมาเพื่อรองรับนักท่องเที่ยวในเขตสมุย พะงัน และเขื่อนเชี่ยวหลานโดยเฉพาะครับ",
-    },
-    {
-      question: "รองรับการประเมิน ITA ภาครัฐหรือไม่?",
-      answer:
-        "เราออกแบบโครงสร้างเว็บไซต์และจัดหมวดหมู่ข้อมูลตามเกณฑ์ OIT ของ ป.ป.ช. เพื่อให้หน่วยงานได้รับผลประเมินในระดับสูงครับ",
-    },
-    {
-      question: "เกษตรกรสามารถเช็คราคากลางยางพาราได้จากที่ไหน?",
-      answer:
-        "เรามีระบบ Smart Farmer ที่ดึงข้อมูลราคากลางอัตโนมัติมาแสดงผลหน้าเว็บ ช่วยให้เกษตรกรตัดสินใจขายผลผลิตได้แม่นยำขึ้นครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("ความปลอดภัย") || f.question.includes("Google Maps"),
-    ),
-  ],
+  coordinates: { lat: 9.1389, lng: 99.33 },
+  districts: ["เกาะสมุย", "เกาะพะงัน", "เกาะเต่า", "เมืองสุราษฎร์ธานี", "ดอนสัก", "พุนพิน"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "สุราษฎร์ธานีมีความหลากหลายสูง ตั้งแต่เมืองท่องเที่ยวระดับโลกไปจนถึงพื้นที่เกษตรกรรม แพลตฟอร์มจึงต้องรองรับความต้องการที่ต่างกันในแต่ละเขตพื้นที่",
+      "ลูกค้าในกลุ่มเกาะท่องเที่ยว (Samui/Phangan/Tao) เป็นกลุ่มที่มีกำลังซื้อสูงและต้องการความรวดเร็วในการจอง เว็บไซต์ที่รองรับภาษาต่างประเทศและ Mobile-friendly จะปิดการขายได้สูงที่สุด",
     technicalApproach:
-      "ใช้ Cloud Infrastructure พร้อมระบบ CDN เพื่อการเข้าถึงจากต่างประเทศที่รวดเร็ว และเน้นระบบ Security ป้องกันการโจมตีทางไซเบอร์",
+      "ใช้ Cloud Infrastructure พร้อมระบบ Global CDN เพื่อรองรับ Traffic จากยุโรปและรัสเซีย และเน้นระบบ Booking Engine ที่แม่นยำ",
     localStrength:
-      "เข้าใจบริบทของเมืองท่องเที่ยวชายฝั่งและระบบนิเวศของเกษตรกรพืชเศรษฐกิจ ทำให้เราออกแบบฟังก์ชันที่ใช้งานได้จริงในทางปฏิบัติ",
+      "เข้าใจพฤติกรรมนักท่องเที่ยวต่างชาติและระบบนิเวศการท่องเที่ยวชายฝั่งภาคใต้ตอนบนเป็นอย่างดี",
     nicheIndustries: [
-      "เทศบาลนครเกาะสมุยและเทศบาลเมืองในพื้นที่",
-      "อบต. แหล่งท่องเที่ยว (พะงัน/เต่า/เชี่ยวหลาน)",
-      "กลุ่มสหกรณ์ปาล์มน้ำมันและยางพารา",
-      "วิสาหกิจชุมชนประมงและฟาร์มหอยนางรม",
+      "Luxury Resort & Pool Villa (Samui)",
+      "Wellness & Yoga Retreat (Phangan)",
+      "PADI Diving School (Koh Tao)",
+      "ธุรกิจเช่าเรือยอร์ชและสปีดโบ๊ท",
     ],
     painPoints: [
-      "การจัดการขยะในพื้นที่ท่องเที่ยวเกาะ",
-      "ความซับซ้อนของการสื่อสารข้อมูลการเดินทางเชื่อมต่อ",
-      "ช่องทางการสื่อสารกับนักท่องเที่ยวต่างชาติที่ยังไม่เป็นระบบ",
+      "โดน OTA หักคอมมิชชั่นสูงจนกำไรบาง",
+      "เว็บไซต์เดิมโหลดช้าสำหรับลูกค้าที่เปิดจากต่างประเทศ",
+      "ขาดระบบจองที่เชื่อถือได้และรองรับบัตรเครดิตสากล",
     ],
     competitorLevel: "high",
     socialProof: {
-      rating: 4.9,
-      reviewCount: 58,
-      localClient: "โครงการ Digital Transformation ท้องถิ่น สุราษฎร์ธานี",
+      rating: 5.0,
+      reviewCount: 142,
+      localClient: "รีสอร์ตหรูระดับ 5 ดาว ย่านหาดเฉวง เกาะสมุย",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
-      timeline: "25-30 วัน",
+      startPrice: `${hotelResortService.price} บาท`,
+      timeline: "14-25 วัน",
     },
     localSuccessStory: {
-      title: "Smart Island Governance",
-      result:
-        "ช่วยให้หน่วยงานลดปริมาณเรื่องร้องเรียนค้างคาได้ 50% ด้วยระบบ Tracking สถานะแบบเรียลไทม์ที่ประชาชนตรวจสอบได้",
+      title: "Case Study: โยคะรีสอร์ต เกาะพะงัน",
+      result: "วางระบบจองตรงและทำ SEO หลายภาษา ยอด Direct Booking จากยุโรปเพิ่มขึ้น 280%",
     },
     hyperLocalKeywords: [
-      "ทำเว็บไซต์สมุย",
-      "ออกแบบเว็บ อบต.พุนพิน",
-      "ระบบ E-Service สุราษฎร์ธานี",
-      "จ้างทำเว็บราชการดอนสัก",
+      "รับทำเว็บไซต์เกาะสมุย",
+      "จ้างทำเว็บโรงแรม พะงัน",
+      "ทำเว็บโรงเรียนดำน้ำ เกาะเต่า",
+      "Phuket/Surat SEO Agency",
     ],
+    promotions: [
+      {
+        title: "Island Authority Audit",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจท่องเที่ยวในสุราษฎร์ธานี รับฟรีบริการ Global Visibility Audit มูลค่า 12,000 บาท เพื่อเช็คประสิทธิภาพการเข้าถึงจากทั่วโลก",
+        discount: "Free Global Performance Audit",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/surat-ratchaprapha.webp",
+      gallery: [
+        "/images/services/hotel-resort-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 90,
-  districts: [
-    "เมืองสุราษฎร์ธานี",
-    "เกาะสมุย",
-    "เกาะพะงัน",
-    "พุนพิน",
-    "ดอนสัก",
-    "กาญจนดิษฐ์",
-    "ไชยา",
-    "บ้านนาสาร",
-    "เกาะเต่า",
+  faqs: [
+    {
+      question: "ระบบจองรองรับการจ่ายเงินผ่าน Stripe หรือ PayPal ไหม?",
+      answer:
+        "รองรับครับ เราเชื่อมต่อ Payment Gateway ระดับสากลได้ทุกระบบ เพื่อให้ลูกค้าต่างชาติจองห้องพักได้สะดวกและปลอดภัยที่สุดครับ",
+    },
   ],
+
   keywords: [
     "รับทำเว็บไซต์เกาะสมุย",
-    "Web Design Surat Thani",
-    "ระบบจัดการขยะออนไลน์",
-    "Smart Farming สุราษฎร์",
-    "ITA ภาครัฐ",
+    "ออกแบบเว็บไซต์ สุราษฎร์ธานี",
+    "จ้างทำเว็บโรงแรม",
+    "Direct Booking System",
   ],
-  coordinates: { lat: 9.1389, lng: 99.33 },
-};
+
+  isTourismHeavy: true,
+  marketSaturation: 82,
+  regionalLatency: 9,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
+    },
+    {
+      step: "02",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
+    },
+    {
+      step: "03",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+});

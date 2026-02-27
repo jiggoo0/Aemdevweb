@@ -3,83 +3,125 @@
  * [STRATEGY]: Education & Service Hub | Local SEO | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { seoAgencyService } from "@/constants/services/seo-agency";
 
-export const nakhonPathomNode: AreaNode = {
+export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
+  // --- Basic Identity ---
   slug: "nakhon-pathom",
   province: "นครปฐม",
   region: "Central",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ นครปฐม | พัฒนาเว็บไซต์การศึกษา ธุรกิจบริการ และ SME เมืองมหาวิทยาลัย",
+  priority: 92,
+
+  title: "รับทำเว็บไซต์ นครปฐม | Digital Infrastructure สำหรับธุรกิจบริการและการศึกษาพรีเมียม",
   description:
-    "บริการรับทำเว็บไซต์ในนครปฐม เน้นความทันสมัยสำหรับคาเฟ่ คลินิก และธุรกิจที่เชื่อมโยงกับสถาบันการศึกษา ติดหน้าแรก Google",
-  seoTitle: "รับทำเว็บไซต์ นครปฐม ออกแบบเว็บคาเฟ่ คลินิก ธุรกิจการศึกษา - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์นครปฐม ครบวงจร สำหรับ SME และธุรกิจบริการ เว็บสวยโหลดไว รองรับมือถือ 100% ติดอันดับการค้นหาในพื้นที่",
+    "บริการวางระบบเว็บไซต์และกลยุทธ์ Local SEO ในนครปฐม เจาะกลุ่มศาลายา-สามพราน เน้นดีไซน์ทันสมัย โหลดไวสายฟ้าแลบ และการสร้างความเชื่อมั่นระดับสถาบัน",
 
   longDescription:
-    "นครปฐม เมืองศูนย์กลางการศึกษาและธุรกิจบริการที่เติบโตอย่างต่อเนื่องด้วยพลังของคนรุ่นใหม่ " +
-    "นายเอ็มซ่ามากส์ พร้อมขับเคลื่อนธุรกิจคาเฟ่ คลินิก และหอพักในนครปฐมด้วยเว็บไซต์ที่สะท้อนภาพลักษณ์ทันสมัย " +
-    "เราออกแบบระบบที่เน้นความเร็วบนมือถือและการจองออนไลน์ที่ลื่นไหล เพื่อตอบโจทย์ไลฟ์สไตล์นักศึกษาและวัยทำงาน " +
-    "พร้อมวางกลยุทธ์ Local SEO เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในคำค้นหา 'ใกล้ฉัน' ทั่วทั้งจังหวัด",
+    "นครปฐม เมืองศูนย์กลางการศึกษาและธุรกิจบริการที่เติบโตด้วยพลังของคนรุ่นใหม่ " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับสถานพยาบาล คาเฟ่พรีเมียม และธุรกิจที่ต้องการเข้าถึงกลุ่มนักศึกษาและวัยทำงานในโซนพุทธมณฑล " +
+    "เราเน้นการทำ Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในใจคนท้องถิ่นและเป็นที่รู้จักในวงกว้างบน Google Global",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Academic-Centric Design: งานดีไซน์ที่เข้าถึงง่ายและตรงใจกลุ่มเป้าหมายนักศึกษาและวัยทำงานในพื้นที่",
-    "Student-Service Gateway: ระบบจองห้องพักและนัดหมายออนไลน์ที่ออกแบบมาเพื่อเพิ่มประสิทธิภาพการให้บริการ 24 ชม.",
-    "Greater Bangkok SEO Hub: วางโครงสร้างการค้นหาเพื่อดักจับลูกค้าจากนครปฐมและปริมณฑลที่กำลังมองหาบริการคุณภาพ",
-  ],
-
-  priority: 92,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/nakhon-pathom-node.webp",
   coordinates: { lat: 13.814, lng: 100.0373 },
-  marketSaturation: 65,
+  districts: ["ศาลายา", "พุทธมณฑล", "สามพราน", "นครชัยศรี", "เมืองนครปฐม", "พุทธมณฑลสาย 4"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในนครปฐม (โดยเฉพาะโซนศาลายา) มีความต้องการบริการที่รวดเร็วและดูเป็นมืออาชีพ เว็บไซต์ที่มีข้อมูลชัดเจนและจองนัดหมายง่าย (Mobile-friendly) จะได้รับความนิยมสูงสุด",
+    technicalApproach:
+      "เน้นระบบ Search Generative Experience (SGE) และการปักหมุด Google Maps ในย่านธุรกิจรอบมหาวิทยาลัยและแหล่งท่องเที่ยวสำคัญ",
+    localStrength:
+      "เข้าใจระบบนิเวศของสถาบันการศึกษาและการใช้ชีวิตของคนรุ่นใหม่ในจังหวัด พร้อมบริการที่ปรึกษาเชิงเทคนิคในพื้นที่",
+    nicheIndustries: [
+      "คลินิกเฉพาะทางและศูนย์ดูแลสุขภาพ",
+      "สถาบันกวดวิชาและคอร์สออนไลน์",
+      "คาเฟ่ไลฟ์สไตล์และร้านอาหาร Fine Dining",
+      "อสังหาริมทรัพย์และหอพักระดับพรีเมียม",
+    ],
+    painPoints: [
+      "ธุรกิจบริการหนาแน่นแต่คนหาคุณไม่เจอในคำค้นหา 'ใกล้ฉัน'",
+      "เว็บไซต์เดิมโหลดช้าจนนักศึกษาวัยรุ่นรำคาญและปิดหนี",
+      "ขาดระบบจองนัดหมายที่เชื่อมต่อกับระบบ LINE หรือ Calendar",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 124,
+      localClient: "คลินิกทันตกรรมระดับพรีเมียม ย่านศาลายา",
+    },
+    regionalPricing: {
+      startPrice: `${seoAgencyService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงเรียนสอนศิลปะศาลายา",
+      result: "ทำ SEO และระบบจองคิวออนไลน์ ยอดนักเรียนใหม่จากต่างอำเภอเพิ่มขึ้น 350%",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ศาลายา",
+      "จ้างทำ SEO นครปฐม",
+      "ทำเว็บคาเฟ่ พุทธมณฑล",
+      "Web Design Nakhon Pathom",
+    ],
+    promotions: [
+      {
+        title: "Academic Satellite Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจบริการและสถาบันการศึกษา รับฟรีบริการ Local Entity Mapping และปักหมุด GMB แบบมืออาชีพมูลค่า 8,000 บาท",
+        discount: "Free Map & Entity Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nakhon-pathom-node.webp",
+      gallery: [
+        "/images/services/seo-agency-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ธุรกิจในนครปฐมจำเป็นต้องทำ SEO ภาษาอังกฤษไหม?",
+      answer:
+        "หากเป็นธุรกิจย่านศาลายาหรือแหล่งท่องเที่ยวที่ต้องการลูกค้านักศึกษาต่างชาติหรือ Expat แนะนำให้ทำครับ เพื่อเพิ่มโอกาสในการถูกค้นพบจากทั่วโลกครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ นครปฐม",
+    "ออกแบบเว็บไซต์ ศาลายา",
+    "รับทำ SEO พุทธมณฑล",
+    "Local SEO Nakhon Pathom",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 80,
   regionalLatency: 9,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Service Identity Audit",
-      description: "วิเคราะห์ภาพลักษณ์แบรนด์ให้เข้ากับกลุ่มเป้าหมายวัยเรียนและวัยทำงานในพื้นที่",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Interactive UX Deployment",
-      description: "ติดตั้งระบบจองนัดหมายออนไลน์และระบบค้นหาพิกัดที่ใช้งานง่ายผ่านสมาร์ทโฟน",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Local Authority SEO",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ Local SEO เจาะจงคีย์เวิร์ด 'ใกล้ฉัน' ในนครปฐมเพื่อให้ธุรกิจของคุณเป็นที่รู้จักทั่วภูมิภาค",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "นครปฐมมีการขยายตัวของธุรกิจบริการและคาเฟ่ที่หนาแน่น เว็บไซต์ที่ดูดีและมีฟังก์ชันที่ใช้งานได้จริงจะปิดการขายได้เร็วกว่า",
-    technicalApproach:
-      "เน้น Mobile-First Speed และการปักหมุด Google Maps ที่แม่นยำเพื่อดัก Traffic ในพื้นที่",
-    localStrength:
-      "เข้าใจรสนิยมของกลุ่มลูกค้าคนรุ่นใหม่และกระบวนการทำงานของสถาบันการศึกษาในจังหวัด",
-    nicheIndustries: [
-      "คาเฟ่และร้านอาหารพรีเมียม",
-      "คลินิกทันตกรรมและความงาม",
-      "หอพักและอสังหาริมทรัพย์รอบมหาวิทยาลัย",
-    ],
-    painPoints: ["ธุรกิจเยอะแต่คนหาใน Google ไม่เจอ", "เว็บไซต์ไม่รองรับการจองออนไลน์"],
-    competitorLevel: "high",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ สามพราน",
-      "ออกแบบเว็บคาเฟ่ นครปฐม",
-      "จ้างทำ SEO พุทธมณฑล",
-      "ทำเว็บหอพัก กำแพงแสน",
-    ],
-  },
-  districts: ["เมืองนครปฐม", "สามพราน", "นครชัยศรี", "พุทธมณฑล", "กำแพงแสน"],
-  keywords: ["รับทำเว็บไซต์ นครปฐม", "ทำเว็บคาเฟ่ นครปฐม", "จ้างทำเว็บนครปฐม", "รับทำ SEO นครปฐม"],
-};
+});

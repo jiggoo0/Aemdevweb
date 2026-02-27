@@ -1,180 +1,129 @@
 /**
- * [SERVICE_NODE]: CHIANG_RAI_GATEWAY v18.0.2 (STRICT_SYNC)
- * [STRATEGY]: Local Authority Standard | Coffee & Art Content | Dynamic Inheritance
- * [MARKET]: Mueang Chiang Rai, Mae Sai, Chiang Saen
+ * [SERVICE_NODE]: CHIANG_RAI_GMS_HUB v18.2.0
+ * [STRATEGY]: GMS Trading Gateway | Luxury Art & Coffee | Dynamic Inheritance
+ * [MARKET]: Mueang Chiang Rai, Mae Sai Border, Golden Triangle
  */
 
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { corporateService } from "@/constants/services/corporate";
 
-export const chiangRaiNode: AreaNode = {
+export const chiangRaiNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "chiang-rai",
   province: "เชียงราย",
   region: "North",
-  templateSlug: "local-authority", // ยึดตาม Template หลัก
+  priority: 92,
 
-  title: "รับทำเว็บไซต์ เชียงราย | จ้างทำเว็บกาแฟ Specialty และรีสอร์ตศิลปะ ติดหน้าแรก Google",
+  title: "รับทำเว็บไซต์ เชียงราย | Digital Infrastructure สำหรับการค้าข้ามแดนและธุรกิจสร้างสรรค์",
   description:
-    "บริการรับทำเว็บไซต์เชียงราย ยกระดับแบรนด์กาแฟและที่พักสู่สากล ด้วยดีไซน์เชิงศิลปะและระบบ E-commerce ที่ขายได้ทั่วโลก",
+    "บริการวางระบบเว็บไซต์มาตรฐานสากลในเชียงราย เจาะกลุ่มธุรกิจนำเข้า-ส่งออก แบรนด์กาแฟ Specialty และรีสอร์ตพรีเมียม เน้นดีไซน์เชิงศิลปะ โหลดไว และครองอันดับหนึ่งในเขตลุ่มน้ำโขง",
 
   longDescription:
-    "เชียงรายคือเมืองหลวงแห่งกาแฟและศิลปะระดับโลก เว็บไซต์ของคุณจึงต้องไม่ใช่แค่ 'มี' แต่ต้อง 'เล่าเรื่อง' ได้อย่างลึกซึ้ง " +
-    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์ธรรมดาให้เป็นแกลเลอรี่ออนไลน์ที่ลูกค้าสัมผัสได้ถึงความพิถีพิถัน " +
-    "พร้อมวางระบบขายสินค้าและจองที่พักที่รองรับนักท่องเที่ยวคุณภาพ เพื่อให้ธุรกิจเชียงรายเติบโตอย่างยั่งยืนบนเวทีโลก",
+    "เชียงราย 'ประตูสู่กลุ่มประเทศลุ่มน้ำโขง' และศูนย์กลางงานศิลปะระดับโลกที่ต้องการสถาปัตยกรรมดิจิทัลที่เหนือระดับ " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงพาณิชย์สำหรับโรงคั่วกาแฟส่งออก ธุรกิจชิปปิ้งแม่สาย และที่พักที่ต้องการดึงดูดลูกค้ากำลังซื้อสูง " +
+    "เราเน้นโครงสร้างที่รองรับการทำ SEO หลายภาษา (ไทย/อังกฤษ/จีน) และระบบความปลอดภัยระดับสากล เพื่อสร้างอำนาจทางการค้าในย่านเศรษฐกิจ GMS",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ เชียงราย ออกแบบเว็บกาแฟ รีสอร์ต ศิลปะ ติด SEO - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์เชียงราย ครบวงจร เน้นธุรกิจโรงคั่วกาแฟ ที่พักแนว Art Stay และการค้าชายแดน เว็บสวยโหลดไว รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายออนไลน์",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService ตามคำสั่ง เพื่อมาตรฐานเดียวกันทั้งระบบ
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-
-  marketSaturation: 55,
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Artisan Brand Audit",
-      description:
-        "วิเคราะห์จุดเด่นของแบรนด์กาแฟหรืองานคราฟต์เพื่อวางโครงสร้างการเล่าเรื่อง (Storytelling) ที่น่าดึงดูด",
-    },
-    {
-      step: "02",
-      title: "Global E-commerce Sync",
-      description:
-        "ติดตั้งระบบตะกร้าสินค้าและระบบจองที่พักที่รองรับการชำระเงินจากทั่วโลกและแจ้งเตือนผ่าน LINE",
-    },
-    {
-      step: "03",
-      title: "Border SEO Strategy",
-      description:
-        "เน้นคีย์เวิร์ดภาษาจีนและอังกฤษเพื่อดักจับ Traffic จากกลุ่มนักท่องเที่ยวและคู่ค้าในเขตเศรษฐกิจชายแดน",
-    },
-  ],
-
-  // --- Visual (Local Specific) ---
+  // --- Visual & Location ---
   heroImage: "/images/areas/chiang-rai-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Artisan Trusted: ผู้อยู่เบื้องหลังเว็บไซต์แบรนด์กาแฟดอยช้างและรีสอร์ตศิลปะกว่า 15 แห่ง",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Storytelling Design: ถ่ายทอดเรื่องราว (Story) ของสินค้าและบริการผ่านดีไซน์เว็บไซต์ ให้ดูมีมูลค่าสูงตามมาตรฐานสากล",
-    "Global Reach: ระบบรองรับการส่งออกข้อมูลและสินค้าไปทั่วโลก พร้อมโครงสร้างที่เอื้อต่อการทำ SEO ต่างประเทศ",
-    "Tourism Ready: ดึงดูดนักท่องเที่ยวคุณภาพ (High Spender) ด้วยการวางโครงสร้างเว็บให้รองรับภาษาอังกฤษและจีน",
-  ],
-
-  // --- Core Features (Local Specific Content) ---
-  coreFeatures: [
-    {
-      title: "Coffee & Product System",
-      description:
-        "ระบบจัดการสินค้าที่เหมาะสำหรับโรงคั่วกาแฟและงานคราฟต์ รองรับรายละเอียดสินค้าเชิงลึก",
-      icon: "Database",
-    },
-    {
-      title: "Gallery Mode",
-      description:
-        "โหมดแสดงผลภาพความละเอียดสูง สำหรับรีสอร์ตและงานศิลปะ เพื่อสร้างความประทับใจแรกพบ",
-      icon: "Image",
-    },
-    {
-      title: "Multi-Language Support",
-      description:
-        "รองรับ 3 ภาษา (ไทย/อังกฤษ/จีน) เพื่อต้อนรับนักท่องเที่ยวและคู่ค้าผ่านด่านแม่สาย",
-      icon: "Globe",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "ทำเว็บขายกาแฟออนไลน์ ยากไหม?",
-      answer:
-        "ไม่ยากครับ ระบบที่เราเตรียมไว้ให้ใช้งานง่าย คุณแค่ถ่ายรูปสินค้า ใส่รายละเอียด แล้วกดโพสต์ขายได้เลย",
-    },
-    {
-      question: "นัดคุยงานที่ร้านกาแฟในเมืองได้ไหม?",
-      answer:
-        "ยินดีมากครับ ผมชอบบรรยากาศร้านกาแฟในเชียงรายอยู่แล้ว นัดคุยเพื่อดูสไตล์งานจริงได้เลยครับ",
-    },
-    {
-      question: "มีระบบจองที่พักไหม?",
-      answer:
-        "มีครับ สามารถติดตั้งระบบจอง (Booking System) ที่แจ้งเตือนผ่าน LINE ทันทีที่มีลูกค้าจองเข้ามา",
-    },
-    {
-      question: "ทำ SEO ภาษาจีนได้ไหม?",
-      answer:
-        "ทำได้ครับ เรามีแนวทางในการทำหน้าเว็บสำหรับนักท่องเที่ยวจีนโดยเฉพาะ เพื่อรองรับตลาดเชียงรายครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Local Authority)
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("มือถือ"),
-    ),
-  ],
+  coordinates: { lat: 19.9101, lng: 99.8405 },
+  districts: ["เมืองเชียงราย", "แม่สาย", "เชียงแสน", "แม่จัน", "แม่สรวย", "เชียงของ"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Specialty Coffee และนักท่องเที่ยวเชียงราย ยอมจ่ายแพงเพื่อ 'เรื่องราว' และ 'คุณภาพ' เว็บไซต์ที่เล่าเรื่องได้ดีจะเพิ่มมูลค่าสินค้าได้มหาศาล",
+      "ลูกค้าในเชียงรายและคู่ค้า GMS ให้ความสำคัญกับ 'สุนทรียภาพ' ควบคู่ไปกับ 'ความน่าเชื่อถือ' เว็บไซต์ที่ภาพสวยระดับ Art Gallery และข้อมูลเทคนิคครบถ้วนจะปิดดีลธุรกิจมูลค่าสูงได้ง่ายกว่า",
     technicalApproach:
-      "เน้นระบบการแสดงผลรูปภาพและข้อมูลที่คมชัด แต่ยังคงความเร็วในการโหลด (Performance) ตามมาตรฐาน Google",
+      "เน้นระบบ Image-Optimization ขั้นสูงสำหรับโชว์อัตลักษณ์แบรนด์ และการทำ Local Entity Mapping สำหรับตลาดภาคเหนือตอนบนและคู่ค้าข้ามแดน",
     localStrength:
-      "เข้าใจวัฒนธรรมกาแฟและศิลปะเชียงราย สามารถดึงจุดเด่นของแบรนด์ออกมานำเสนอได้อย่างมีรสนิยม",
+      "เข้าใจวัฒนธรรมการค้าชายแดนและระบบนิเวศธุรกิจสร้างสรรค์ของเชียงราย พร้อมบริการวางแผนระบบถึงที่",
     nicheIndustries: [
-      "โรงคั่วกาแฟและคาเฟ่ Specialty",
-      "รีสอร์ตเชิงนิเวศและ Art Stay",
-      "ธุรกิจนำเข้า-ส่งออก ชายแดน",
-      "วิสาหกิจชุมชนชาและสมุนไพร",
+      "โรงคั่วกาแฟและแบรนด์เครื่องดื่ม Specialty",
+      "ธุรกิจนำเข้า-ส่งออกและโลจิสติกส์ (GMS Gateway)",
+      "รีสอร์ตเชิงนิเวศและบูทีคโฮเต็ลระดับพรีเมียม",
+      "วิสาหกิจชุมชนงานคราฟต์และศิลปะร่วมสมัย",
     ],
     painPoints: [
-      "สินค้าดีแต่เว็บไม่สวย ขายไม่ออก",
-      "ตอบแชทลูกค้าต่างชาติไม่ทัน",
-      "ลูกค้าหาไม่เจอใน Google Maps",
+      "ภาพลักษณ์เว็บไซต์ไม่สะท้อนถึงคุณภาพระดับสากลของสินค้า",
+      "หาพิกัดจุดกระจายสินค้าหรือที่พักได้ยากบน Google Maps ภาษาต่างชาติ",
+      "ระบบ E-commerce เดิมไม่รองรับการชำระเงินข้ามประเทศที่สะดวก",
     ],
     competitorLevel: "medium",
     socialProof: {
       rating: 5.0,
-      reviewCount: 62,
-      localClient: "แบรนด์กาแฟและรีสอร์ตบนดอยช้าง",
+      reviewCount: 142,
+      localClient: "แบรนด์กาแฟ Specialty รายใหญ่ ย่านดอยช้าง",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference ตาม Template
-      timeline: "14-20 วัน",
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
     },
     localSuccessStory: {
-      title: "Case Study: โรงคั่วแม่สรวย",
+      title: "Case Study: โรงคั่วกาแฟส่งออก",
       result:
-        "ปรับปรุงเว็บไซต์ให้มีระบบสั่งซื้อออนไลน์ ยอดขายโต 300% และขยายฐานลูกค้าต่างชาติได้สำเร็จ",
+        "วางระบบระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ/จีน ยอดสั่งซื้อจากพาร์ทเนอร์ต่างชาติเพิ่มขึ้น 280% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ แม่สาย",
-      "ออกแบบเว็บไซต์ เชียงแสน",
-      "จ้างทำเว็บกาแฟ เชียงราย",
-      "ทำ SEO รีสอร์ต เชียงราย",
+      "รับทำเว็บไซต์ เชียงราย",
+      "จ้างทำ SEO แม่สาย",
+      "ทำเว็บกาแฟ Specialty",
+      "GMS Trade Web Solution",
     ],
+    promotions: [
+      {
+        title: "GMS Market Expansion Blueprint",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจส่งออกและแบรนด์สินค้าพรีเมียม รับฟรีบริการวางแผน Digital Multi-language Strategy และปักหมุด GMB จีน/อังกฤษ มูลค่า 12,000 บาท",
+        discount: "Free Regional SEO & Multi-lang Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chiang-rai-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 82,
-  districts: ["เมืองเชียงราย", "แม่สาย", "เชียงแสน", "แม่จัน", "พาน", "เทิง", "แม่สรวย"],
+  faqs: [
+    {
+      question: "ระบบรองรับการเชื่อมต่อกับแพลตฟอร์มขนส่งระหว่างประเทศไหม?",
+      answer:
+        "รองรับครับ เราสามารถเขียน API เชื่อมต่อกับระบบโลจิสติกส์ชั้นนำเพื่อเช็คค่าขนส่งและสถานะสินค้าได้แบบ Real-time ครับ",
+    },
+  ],
+
   keywords: [
     "รับทำเว็บไซต์ เชียงราย",
-    "ทำเว็บขายกาแฟ Specialty",
-    "ออกแบบเว็บรีสอร์ต เชียงราย",
-    "รับทำ SEO เชียงราย",
-    "จ้างทำเว็บไซต์ เชียงราย",
+    "ออกแบบเว็บไซต์ แม่สาย",
+    "จ้างทำเว็บกาแฟ",
+    "Technical SEO Northern Thailand",
   ],
-  coordinates: { lat: 19.9101, lng: 99.8405 },
-};
+
+  isTourismHeavy: true,
+  marketSaturation: 72,
+  regionalLatency: 14,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
+    },
+    {
+      step: "02",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
+    },
+    {
+      step: "03",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+});

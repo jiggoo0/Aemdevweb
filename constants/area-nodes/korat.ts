@@ -155,6 +155,22 @@ export const koratNode: AreaNode = {
       "ทำเว็บโรงงาน สูงเนิน",
       "รับทำ SEO โคราช",
     ],
+    promotions: [
+      {
+        title: "Logistics Hub Digitalization (Korat)",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจคลังสินค้าและโรงงาน รับฟรีบริการเชื่อมต่อระบบสต็อกสินค้าออนไลน์มูลค่า 12,000 บาท เพื่อความโปร่งใสของข้อมูล B2B",
+        discount: "Free Stock Sync Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/korat-monolith.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/services/catalog-node.webp",
+      ],
+    },
   },
 
   // --- System Metadata ---

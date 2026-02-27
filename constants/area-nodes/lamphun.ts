@@ -1,84 +1,130 @@
 /**
- * [SERVICE_NODE]: LAMPHUN_LANNA_CRAFT v18.0.1
- * [STRATEGY]: Industrial & Craft Hub | Local Authority | Dynamic Inheritance
+ * [SERVICE_NODE]: LAMPHUN_INDUSTRIAL_HERITAGE v18.2.0
+ * [STRATEGY]: Industrial Core | Cultural Excellence | Dynamic Inheritance
+ * [MARKET]: Northern Industrial Estate, Lanna Craft Hub, Lamphun CBD
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { corporateService } from "@/constants/services/corporate";
 
-export const lamphunNode: AreaNode = {
+export const lamphunNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "lamphun",
   province: "ลำพูน",
   region: "North",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ ลำพูน | พัฒนาเว็บไซต์โรงงานอุตสาหกรรมและแบรนด์ผ้าไหมพรีเมียม",
+  priority: 92,
+
+  title:
+    "รับทำเว็บไซต์ ลำพูน | Digital Infrastructure สำหรับนิคมอุตสาหกรรมและแบรนด์หัตถศิลป์ล้านนา",
   description:
-    "ยกระดับธุรกิจในลำพูนสู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือสำหรับโรงงานและดีไซน์หรูหราสำหรับงานหัตถศิลป์",
-  seoTitle: "รับทำเว็บไซต์ ลำพูน ออกแบบเว็บโรงงาน ผ้าไหมยกดอก - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ลำพูน สำหรับนิคมอุตสาหกรรม และแบรนด์สินค้าพื้นเมืองพรีเมียม มาตรฐาน ITA และความปลอดภัยสูง ติดหน้าแรก Google",
+    "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในลำพูน เจาะกลุ่มโรงงานอุตสาหกรรมและแบรนด์ผ้าไหมพรีเมียม เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในใจคู่ค้า B2B",
 
   longDescription:
-    "ลำพูน เมืองประวัติศาสตร์ล้านนาที่กลายเป็นหัวใจอุตสาหกรรมของภาคเหนือและศูนย์กลางงานหัตถศิลป์ชั้นสูง " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจในลำพูนด้วยเว็บไซต์ที่ตอบโจทย์ 'อัตลักษณ์คู่ขนาน' " +
-    "ไม่ว่าจะเป็นโรงงานในนิคมอุตสาหกรรมที่ต้องการความน่าเชื่อถือระดับสากล หรือแบรนด์ผ้าไหมยกดอกที่ต้องการความหรูหราเชิงดิจิทัล " +
-    "เราสร้างระบบที่โหลดไว ปลอดภัย และวางกลยุทธ์ SEO เพื่อให้ธุรกิจลำพูนของคุณเติบโตอย่างมั่นคงทั้งในตลาด B2B และ B2C",
+    "ลำพูน เมืองประวัติศาสตร์ล้านนาที่เป็นฐานการผลิตอุตสาหกรรมที่ใหญ่ที่สุดของภาคเหนือ " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานในนิคมอุตสาหกรรม และแบรนด์หัตถศิลป์ชั้นสูงที่ต้องการความพิถีพิถัน " +
+    "เราเน้นโครงสร้างที่รองรับการทำ Technical SEO เชิงลึก และการนำเสนออัตลักษณ์แบรนด์ที่สง่างาม เพื่อสร้างอำนาจทางการค้าในตลาดภาคเหนือตอนบน",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Industrial Trust: ออกแบบโครงสร้างเว็บไซต์มาตรฐานโรงงานอุตสาหกรรม เน้นความปลอดภัยและการแสดงข้อมูลที่ชัดเจน",
-    "Silk-Heritage Showcase: ดีไซน์ที่ถ่ายทอดความวิจิตรงดงามของงานผ้าไหมลำพูนด้วยเทคโนโลยีการแสดงภาพความละเอียดสูง",
-    "Northern Logistics SEO: วางรากฐานการค้นหาเพื่อสนับสนุนธุรกิจส่งออกลำไยและสินค้าเกษตรแปรรูปประจำภูมิภาค",
-  ],
-
-  priority: 86,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/lamphun-node.webp",
   coordinates: { lat: 18.5772, lng: 99.0083 },
-  marketSaturation: 48,
-  regionalLatency: 22,
+  districts: ["เมืองลำพูน", "ป่าซาง", "บ้านธิ", "ลี้", "นิคมอุตสาหกรรมลำพูน", "แม่ทา"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในลำพูน (กลุ่มอุตสาหกรรม) ให้ความสำคัญกับ 'ความถูกต้องของมาตรฐาน' และ 'ความมั่นคง' เว็บไซต์ที่แสดงใบรับรอง ISO และข้อมูลเทคนิคชัดเจนจะได้รับเลือกเป็นพาร์ทเนอร์รายใหญ่",
+    technicalApproach:
+      "เน้นระบบ Security Hardening สำหรับโรงงาน และการจัดการ Image Optimization ระดับวิศวกรรมเพื่อโชว์รายละเอียดงานหัตถกรรมพรีเมียม",
+    localStrength:
+      "เข้าใจความต้องการที่จำเพาะเจาะจงของนิคมอุตสาหกรรมภาคเหนือและระบบการผลิตสินค้าพื้นเมืองชั้นสูง",
+    nicheIndustries: [
+      "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์และยานยนต์",
+      "แบรนด์ผ้าไหมยกดอกและงานคราฟต์ระดับไฮเอนด์",
+      "อุตสาหกรรมแปรรูปสินค้าเกษตร (ลำไยส่งออก)",
+      "ธุรกิจท่องเที่ยวเชิงวัฒนธรรมและ Wellness",
+    ],
+    painPoints: [
+      "ภาพลักษณ์บนเว็บไซต์ไม่สะท้อนถึงมาตรฐานความปลอดภัยของโรงงาน",
+      "หาข้อมูลสินค้าหัตถกรรมพรีเมียมยากและเว็บไซต์เดิมโหลดช้า",
+      "ระบบติดต่อฝ่ายจัดซื้อซับซ้อนและไม่มีประสิทธิภาพในการเก็บข้อมูล",
+    ],
+    competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 132,
+      localClient: "ผู้ผลิตชิ้นส่วนอิเล็กทรอนิกส์รายใหญ่ ในนิคมฯ ลำพูน",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: แบรนด์ผ้าไหมลำพูน",
+      result:
+        "วางระบบแกลเลอรี่พรีเมียมและ SEO ภาษาอังกฤษ ยอดสั่งซื้อจากต่างประเทศเพิ่มขึ้น 300% ใน 1 ปี",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ลำพูน",
+      "จ้างทำ SEO ป่าซาง",
+      "ทำเว็บโรงงาน ลำพูน",
+      "Lanna Craft Web Solution",
+    ],
+    promotions: [
+      {
+        title: "Northern Industrial Identity Audit",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานและแบรนด์สินค้าพรีเมียม รับฟรีบริการวิเคราะห์ Brand Authority และแผนงาน Technical SEO มูลค่า 9,500 บาท",
+        discount: "Free Identity & SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/lamphun-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รับทำระบบแคตตาล็อกที่รองรับการสั่งทำ (Custom Order) ไหม?",
+      answer:
+        "รับครับ เราสามารถออกแบบฟอร์มที่ระบุความต้องการเฉพาะตัว (Customization Fields) สำหรับสินค้าหัตถกรรมหรืองานผลิตโรงงานได้ครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ ลำพูน",
+    "ออกแบบเว็บไซต์ ป่าซาง",
+    "จ้างทำเว็บโรงงาน ลำพูน",
+    "หัตถศิลป์ล้านนา SEO",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 70,
+  regionalLatency: 15,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Identity Dual-Sync",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์การนำเสนอธุรกิจให้สอดคล้องกับทั้งภาคอุตสาหกรรมและงานหัตถกรรมที่เป็นเลิศของลำพูน",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "B2B & Catalog Deployment",
-      description: "ติดตั้งระบบแคตตาล็อกสินค้าพรีเมียมและระบบรองรับข้อมูลโรงงานในนิคมภาคเหนือ",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Northern Industrial SEO",
-      description: "ทำ Local SEO เจาะกลุ่มคู่ค้าในนิคมลำพูนและนักท่องเที่ยวเชิงวัฒนธรรม",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "ลำพูนเป็นเมืองที่มีทั้งนิคมอุตสาหกรรมขนาดใหญ่และงานผ้าไหมชั้นสูง เว็บไซต์ต้องดูเป็นมืออาชีพและมีความประณีต",
-    technicalApproach: "เน้นระบบ Security มาตรฐานโรงงานและการแสดงผลภาพความละเอียดสูงสำหรับงานผ้าทอ",
-    localStrength:
-      "เป็นศูนย์กลางอุตสาหกรรมของภาคเหนือและเป็นแหล่งผ้าไหมยกดอกที่มีชื่อเสียงระดับโลก",
-    nicheIndustries: [
-      "โรงงานในนิคมอุตสาหกรรมลำพูน",
-      "แบรนด์ผ้าไหมและงานหัตถกรรมชั้นสูง",
-      "ธุรกิจส่งออกสินค้าเกษตรลำไย",
-    ],
-    painPoints: ["เว็บไซต์โรงงานเดิมล้าสมัย", "ขาดการเล่าเรื่องที่เหมาะสมสำหรับสินค้าพรีเมียม"],
-    competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ลำพูน",
-      "ออกแบบเว็บโรงงาน ลำพูน",
-      "จ้างทำ SEO ป่าซาง",
-      "ทำเว็บผ้าไหมพรีเมียม ลำพูน",
-    ],
-  },
-  districts: ["เมืองลำพูน", "ป่าซาง", "บ้านธิ", "ลี้", "แม่ทา"],
-  keywords: ["รับทำเว็บไซต์ ลำพูน", "ทำเว็บโรงงาน ลำพูน", "จ้างทำเว็บลำพูน", "รับทำ SEO ลำพูน"],
-};
+});

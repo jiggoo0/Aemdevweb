@@ -1,92 +1,129 @@
 /**
- * [SERVICE_NODE]: KANCHANABURI_ECO_ADVENTURE v18.0.1
- * [STRATEGY]: Eco-Tourism | Nature Storytelling | Dynamic Inheritance
- * [MARKET]: Kanchanaburi, River Kwai, Sangkhlaburi
+ * [SERVICE_NODE]: KANCHANABURI_SUSTAINABLE_HUB v18.2.0
+ * [STRATEGY]: Sustainable Industry | High-End Hospitality | Dynamic Inheritance
+ * [MARKET]: Kanchanaburi CBD, Industrial Plants & Luxury River Kwai Resorts
  */
 
-import type { AreaNode } from "@/types";
-import { hotelResortService } from "@/constants/services/hotel-resort";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { corporateService } from "@/constants/services/corporate";
 
-export const kanchanaburiNode: AreaNode = {
+export const kanchanaburiNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "kanchanaburi",
   province: "กาญจนบุรี",
   region: "West",
-  templateSlug: "hotelresort",
-  title: "รับทำเว็บไซต์ กาญจนบุรี | ออกแบบเว็บรีสอร์ตริมน้ำและธุรกิจท่องเที่ยวเชิงนิเวศ",
+  priority: 92,
+
+  title: "รับทำเว็บไซต์ กาญจนบุรี | Digital Infrastructure สำหรับโรงงานและธุรกิจท่องเที่ยวพรีเมียม",
   description:
-    "เปลี่ยนบรรยากาศธรรมชาติของกาญจนบุรีให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นอารมณ์ความรู้สึกและระบบจองที่แม่นยำ",
-  seoTitle: "รับทำเว็บไซต์ กาญจนบุรี ออกแบบเว็บรีสอร์ต แพริมน้ำ ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กาญจนบุรี เน้นธุรกิจท่องเที่ยว แพริมน้ำ และแคมป์ปิ้ง ดีไซน์พรีเมียม โหลดไว รองรับภาษาต่างชาติและระบบจองตรง",
+    "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในกาญจนบุรี เจาะกลุ่มอุตสาหกรรมพลังงานสะอาดและรีสอร์ตหรูริมน้ำ เน้นความมั่นคงระดับวิศวกรรม โหลดไว และครองอันดับหนึ่งในภาคตะวันตก",
 
   longDescription:
-    "กาญจนบุรี ดินแดนแห่งขุนเขาและสายน้ำ คือจุดหมายสำคัญของนักท่องเที่ยวสายธรรมชาติและประวัติศาสตร์ " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจแพริมน้ำและรีสอร์ตหรูในกาญจนบุรีให้โดดเด่นบนโลกออนไลน์ " +
-    "ด้วยการออกแบบเว็บไซต์ที่เน้นการเล่าเรื่องผ่านภาพบรรยากาศ (Nature Storytelling) " +
-    "ผสานกับระบบจองตรงที่รวดเร็วและเสถียร เพื่อเปลี่ยนผู้เยี่ยมชมให้กลายเป็นยอดจองจริงโดยไม่ผ่าน OTA",
+    "กาญจนบุรี ศูนย์กลางพลังงานสะอาดและจุดยุทธศาสตร์การท่องเที่ยวที่ใหญ่ที่สุดของภาคตะวันตก " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานผลิตไฟฟ้า แปรรูปสินค้าเกษตร และโครงการที่ต้องการความเชื่อถือระดับมหาชน " +
+    "เราเน้นโครงสร้างที่รองรับการทำ Technical SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรอง เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในย่านเศรษฐกิจใหม่",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Nature-Driven Design: ถ่ายทอดความสงบและสุนทรียภาพของที่พักริมน้ำผ่านงานดีไซน์ระดับไฮเอนด์",
-    "Direct Revenue Growth: ระบบจองตรงที่ช่วยลดต้นทุนค่าคอมมิชชั่นและเพิ่มกระแสเงินสดให้ธุรกิจโดยตรง",
-    "Eco-Adventure SEO: วางโครงสร้างการค้นหาเจาะกลุ่มนักท่องเที่ยวสายผจญภัยและคนรักธรรมชาติทั่วประเทศ",
-  ],
-
-  priority: 91,
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/kanchanaburi-node.webp",
   coordinates: { lat: 14.0227, lng: 99.5328 },
+  districts: ["เมืองกาญจนบุรี", "ไทรโยค", "ศรีสวัสดิ์", "สังขละบุรี", "ทองผาภูมิ", "ท่าม่วง"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในกาญจนบุรี (โดยเฉพาะกลุ่มโรงงานและที่พักหรู) ให้ความสำคัญกับ 'ความยั่งยืน' และ 'ภาพลักษณ์ที่เป็นมิตรต่อสิ่งแวดล้อม' เว็บไซต์ที่ดูเป็นทางการและมีข้อมูลที่ถูกต้องแม่นยำจะได้รับความไว้วางใจสูงสุดในระดับพาร์ทเนอร์",
+    technicalApproach:
+      "เน้นระบบ Security Hardening และการจัดการ Cloud Infrastructure ที่เข้าถึงได้รวดเร็วแม้ในพื้นที่ห่างไกล (Remote Areas Optimization)",
+    localStrength:
+      "เข้าใจพลวัตการเติบโตของธุรกิจสีเขียวและระบบนิเวศการท่องเที่ยวเชิงประวัติศาสตร์ พร้อมบริการที่ปรึกษาเชิงเทคนิคในพื้นที่",
+    nicheIndustries: [
+      "โรงงานผลิตพลังงานทดแทน (Solar/Hydro)",
+      "อุตสาหกรรมแปรรูปสินค้าเกษตรส่งออก",
+      "รีสอร์ตระดับ Ultra-Luxury ริมแม่น้ำแคว",
+      "ธุรกิจล่องแก่งและกิจกรรมผจญภัยมาตรฐานสากล",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไซต์ไม่สะท้อนถึงนวัตกรรมและความมั่นคงของโรงงาน",
+      "หาพิกัดแหล่งท่องเที่ยวหรือจุดนัดพบบน Google Maps ไม่เจอและข้อมูลไม่ชัดเจน",
+      "ระบบจองที่พักออนไลน์ไม่เสถียรเมื่อมีการเข้าชมจำนวนมาก",
+    ],
+    competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 116,
+      localClient: "โครงการรีสอร์ตหรูระดับ 5 ดาว ย่านแม่น้ำแคว",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานผลิตไฟฟ้าพลังงานสะอาด",
+      result:
+        "วางโครงสร้าง SEO และระบบ ESG Reporting ใหม่ ยอดนักลงทุนทักสอบถามเพิ่มขึ้น 200% ใน 1 ปี",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ กาญจนบุรี",
+      "จ้างทำ SEO ท่าม่วง",
+      "ทำเว็บโรงงาน กาญ",
+      "Sustainable Web Solution",
+    ],
+    promotions: [
+      {
+        title: "Sustainable Growth Audit",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจอุตสาหกรรมและที่พักพรีเมียม รับฟรีบริการวิเคราะห์ศักยภาพความยั่งยืนทางดิจิทัล (Digital Sustainability Audit) มูลค่า 10,000 บาท",
+        discount: "Free Engineering & SEO Audit",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/kanchanaburi-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รับทำระบบแสดงผลข้อมูล ESG หรือรายงานความยั่งยืนบนเว็บไหม?",
+      answer:
+        "รับครับ เราสามารถออกแบบ Interactive Dashboard เพื่อแสดงผลตัวเลขและรายงานความรับผิดชอบต่อสังคม (CSR/ESG) ให้กับบริษัทมหาชนหรือโรงงานได้ครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ กาญจนบุรี",
+    "ออกแบบเว็บไซต์ ท่าม่วง",
+    "จ้างทำเว็บโรงแรม กาญ",
+    "Technical SEO Western Thailand",
+  ],
+
   isTourismHeavy: true,
-  marketSaturation: 62,
+  marketSaturation: 68,
   regionalLatency: 18,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Nature Visual Audit",
-      description: "ออกแบบการจัดวางภาพและวิดีโอบรรยากาศที่พักริมน้ำให้โหลดไวและสวยงามที่สุด",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Direct Booking Sync",
-      description: "ติดตั้งระบบจองตรงเพื่อลดค่าคอมมิชชั่น OTA และเพิ่มกำไรให้รีสอร์ตในกาญจนบุรี",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Adventure SEO Hub",
+      title: "Strategic Growth & Scaling",
       description:
-        "วางโครงสร้างคีย์เวิร์ดสำหรับการท่องเที่ยวเชิงผจญภัยและประวัติศาสตร์เพื่อดักจับ Traffic คุณภาพ",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "นักท่องเที่ยวในกาญจนบุรีเน้นการค้นหา 'ที่พักริมน้ำ' และ 'แคมป์ปิ้ง' เว็บไซต์ที่ภาพสวยและจองง่ายจะมีความได้เปรียบสูง",
-    technicalApproach:
-      "เน้น Image Optimization และการทำ CDN เพื่อให้เข้าถึงได้เร็วจากทุกพื้นที่แม้สัญญาณเน็ตจะจำกัดในบางจุด",
-    localStrength:
-      "เข้าใจพฤติกรรมกลุ่มครอบครัวและสายแอดเวนเจอร์ที่มักหาข้อมูลผ่านโซเชียลแล้วกดมาจองที่เว็บ",
-    nicheIndustries: [
-      "แพริมน้ำและรีสอร์ตหรู",
-      "ธุรกิจล่องแก่งและกิจกรรมเอาท์ดอร์",
-      "คาเฟ่ธรรมชาติวิวหลักล้าน",
-    ],
-    painPoints: ["เน็ตบนดอย/ริมน้ำช้าทำให้เว็บโหลดไม่ขึ้น", "ลูกค้ายกเลิกจองเพราะระบบไม่เสถียร"],
-    competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ กาญจนบุรี",
-      "ออกแบบเว็บแพริมน้ำ กาญ",
-      "จ้างทำ SEO สังขละบุรี",
-      "ทำเว็บที่พัก กาญจนบุรี",
-    ],
-  },
-  districts: ["เมืองกาญจนบุรี", "ไทรโยค", "ศรีสวัสดิ์", "สังขละบุรี", "ทองผาภูมิ"],
-  keywords: [
-    "รับทำเว็บไซต์ กาญจนบุรี",
-    "ทำเว็บรีสอร์ต กาญ",
-    "จ้างทำเว็บที่พัก",
-    "รับทำ SEO กาญจนบุรี",
-  ],
-};
+});

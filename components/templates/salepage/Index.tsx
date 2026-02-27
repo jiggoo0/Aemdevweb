@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE]: SALEPAGE_ORCHESTRATOR v18.0.7 (RSC_ENFORCED)
- * [STRATEGY]: Server-Side Rendering | Psychological Funnel | Zero-Jank
+ * [TEMPLATE]: SALEPAGE_ORCHESTRATOR v18.5.0 (FINAL_HARDENED)
+ * [STRATEGY]: Sequence-First Layout | Identity Guard | Tactical Flow
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -13,10 +13,10 @@ import type { UniversalTemplateProps } from "@/types";
 import { generateUniversalSchema } from "@/lib/schema";
 
 // --- 2. Components (Atomic Blocks) ---
+import UniversalHero from "@/components/templates/sections/UniversalHero";
+import UniversalRegistry from "@/components/templates/sections/UniversalRegistry";
 import { SaleNavbar } from "../sections/SaleNavbar";
-import { SaleHero } from "../sections/SaleHero";
 import { FlashSaleTimer } from "../sections/FlashSaleTimer";
-import { FeatureComparison } from "../sections/FeatureComparison";
 import { ThaiTrustBadge } from "../sections/ThaiTrustBadge";
 import { DirectOrderForm } from "../sections/DirectOrderForm";
 import { SaleFooter } from "../sections/SaleFooter";
@@ -36,26 +36,17 @@ interface SalePageTemplateProps {
   readonly suppressUI?: boolean;
 }
 
-/**
- * @component SalePageTemplate
- * @description เทมเพลตหน้าขายระดับพรีเมียมที่ผ่านการปรับแต่งความเร็วและการจัดเรียงเนื้อหาเชิงจิตวิทยา (RSC Version)
- */
 const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) => {
-  // [SEO]: Direct Schema Generation for RSC compliance
   const schemas = generateUniversalSchema(data);
-
-  // [DESTRUCTURING]: แยกข้อมูลสำคัญเพื่อความสะอาดของโค้ด
   const { socialProof: social, regionalPricing: pricing, theme } = data;
   const isDarkMode = theme?.mode === "dark";
-
-  // [LOGIC]: กำหนดเวลาสิ้นสุดโปรโมชั่น (Static computation for initial render)
   const promoExpiry = new Date(Date.now() + 86400000).toISOString();
 
   return (
     <>
       <JsonLd data={schemas} id={`schema-salepage-${data.templateSlug}`} />
 
-      <LayoutEngine spacing="none">
+      <LayoutEngine spacing="none" theme={theme}>
         {!suppressUI && (
           <>
             <SaleNavbar
@@ -71,128 +62,121 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
           </>
         )}
 
-        <main className="bg-surface-main relative flex flex-col antialiased">
+        <main className="relative flex flex-col antialiased">
           <h2 className="sr-only">Sale Channel & Conversion Funnel</h2>
-          {/* Phase 01: CORE HERO - สร้าง First Impression ทันทีที่โหลดหน้า */}
-          <SaleHero
-            title={data.title}
-            description={data.description}
-            image={data.regionalVisuals?.banner || data.image}
-            accentColor="var(--brand-primary)"
-            className="text-text-primary"
-          />
 
-          {/* [NEW]: Regional Insight & Competition */}
+          {/* [SEQUENCE_00]: CORE HERO (Universal Entry) */}
+          <section className="bg-surface-main">
+            <UniversalHero data={data} />
+          </section>
+
+          {/* [SEQUENCE_01]: REGIONAL INSIGHT (Surface Main) */}
           {data.province && (
-            <LocalInsight
-              insight={data.localContext?.marketInsight || ""}
-              painPoints={(data.localContext?.painPoints as string[]) || []}
-              marketSaturation={data.marketSaturation}
-            />
+            <section className="bg-surface-main py-24 md:py-32">
+              <LocalInsight
+                insight={data.localContext?.marketInsight || ""}
+                painPoints={(data.localContext?.painPoints as string[]) || []}
+                marketSaturation={data.marketSaturation}
+              />
+            </section>
           )}
 
-          {/* [NEW]: Regional Promotions (Only if available) */}
+          {/* [SEQUENCE_02]: EXCLUSIVE DEAL (Surface Offset for Visual Break) */}
           {data.promotions && data.promotions.length > 0 && (
-            <section className="relative z-40 container mx-auto -mt-8 px-4">
-              <div className="rounded-card-lg shadow-glow hover:shadow-glow-lg border border-[var(--brand-primary)]/30 bg-black/40 p-6 backdrop-blur-2xl transition-all hover:scale-[1.01]">
-                <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-                  <div className="flex items-center gap-6">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--brand-primary)]/20 text-[var(--brand-primary)] shadow-inner">
-                      <IconRenderer name="Sparkles" size={32} />
-                    </div>
-                    <div className="space-y-1">
-                      <span className="font-mono text-[10px] font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase">
-                        Regional_Exclusive_Deal
-                      </span>
-                      <h4 className="text-xl font-black tracking-tighter text-white uppercase italic">
-                        {data.promotions[0].title}
-                      </h4>
-                      <p className="text-xs font-medium text-white/60">
-                        {data.promotions[0].description}
-                      </p>
-                    </div>
-                  </div>
-                  {data.promotions[0].discount && (
-                    <div className="flex items-center gap-4 border-l border-white/10 pl-8">
-                      <div className="text-right">
-                        <p className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
-                          Discount
-                        </p>
-                        <p className="text-3xl font-black text-[var(--brand-primary)] italic">
-                          {data.promotions[0].discount}
+            <section className="bg-surface-offset border-border/40 border-y py-24">
+              <div className="container mx-auto px-4">
+                <div className="rounded-card-lg border-brand-primary/20 bg-surface-card shadow-pro-xl relative overflow-hidden border p-8 backdrop-blur-3xl md:p-12">
+                  <div className="relative z-10 flex flex-col items-center justify-between gap-8 md:flex-row">
+                    <div className="flex items-center gap-6">
+                      <div className="bg-brand-primary/10 flex h-16 w-16 items-center justify-center rounded-2xl text-[var(--brand-primary)]">
+                        <IconRenderer name="Sparkles" size={32} />
+                      </div>
+                      <div className="space-y-1">
+                        <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+                          Regional_Exclusive_Deal
+                        </span>
+                        <h4 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
+                          {data.promotions[0].title}
+                        </h4>
+                        <p className="text-text-secondary font-medium italic opacity-70">
+                          {data.promotions[0].description}
                         </p>
                       </div>
                     </div>
-                  )}
+                    {data.promotions[0].discount && (
+                      <div className="border-border flex items-center gap-4 border-l pl-8">
+                        <div className="text-right">
+                          <p className="text-text-muted text-[9px] font-bold tracking-widest uppercase opacity-40">
+                            Discount
+                          </p>
+                          <p className="text-brand-primary text-4xl font-black italic">
+                            {data.promotions[0].discount}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="bg-brand-primary/5 absolute inset-0 -z-0" />
                 </div>
               </div>
             </section>
           )}
 
-          {/* Phase 02: SCARCITY & PROOF - กระตุ้นด้วยความจำกัดและฐานลูกค้า */}
-          <section
-            id="scarcity-node"
-            className="relative z-30 -mt-10 mb-20 px-4 sm:-mt-16 lg:mb-32"
-          >
-            <div className="mx-auto max-w-4xl text-center">
-              <div className="border-border/10 bg-surface-card/80 shadow-pro-xl rounded-section inline-block border px-8 py-6 backdrop-blur-xl transition-all hover:scale-[1.02]">
+          {/* [SEQUENCE_03]: SCARCITY NODE (Surface Main) */}
+          <section id="scarcity-node" className="bg-surface-main py-24 md:py-32">
+            <div className="container mx-auto px-4">
+              <div className="mx-auto max-w-4xl text-center">
                 <FlashSaleTimer targetDate={promoExpiry} color="var(--brand-primary)" />
-              </div>
-
-              {social && (
-                <div className="mt-10 flex flex-col items-center gap-4">
-                  <div className="flex text-amber-400 drop-shadow-md">
-                    {[...Array(5)].map((_, i) => (
-                      <IconRenderer key={i} name="Star" size={20} className="fill-current" />
-                    ))}
+                {social && (
+                  <div className="mt-16 flex flex-col items-center gap-4">
+                    <div className="flex text-amber-400 drop-shadow-sm">
+                      {[...Array(5)].map((_, i) => (
+                        <IconRenderer key={i} name="Star" size={24} className="fill-current" />
+                      ))}
+                    </div>
+                    <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-70">
+                      Validated_Specialist_Node: {social.reviewCount?.toLocaleString()}+ Partners
+                      Trusted
+                    </span>
                   </div>
-                  <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-70">
-                    Trusted by {social.reviewCount?.toLocaleString()}+ Professional Partners
-                  </span>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </section>
 
-          {/* Phase 03: FEATURE MATRIX - เปรียบเทียบความคุ้มค่าและจุดเด่น */}
-          {data.coreFeatures && data.coreFeatures.length > 0 && (
-            <section
-              id="features"
-              className="border-border/5 bg-surface-main/50 relative overflow-hidden border-y py-24 lg:py-32"
-            >
-              <div className="container mx-auto px-4">
-                <FeatureComparison
-                  features={data.coreFeatures}
-                  accentColor="var(--brand-primary)"
-                  isDark={isDarkMode}
-                />
-              </div>
+          {/* [SEQUENCE_04]: UNIVERSAL REGISTRY (Surface Offset) */}
+          <section className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
+            <UniversalRegistry data={data} />
+          </section>
+
+          {/* [SEQUENCE_05]: REGIONAL MATRIX (Surface Main) */}
+          {(data.regionalVisuals?.gallery || data.province) && (
+            <section className="bg-surface-main space-y-32 py-24 md:py-32">
+              {data.regionalVisuals?.gallery && (
+                <RegionalGallery images={data.regionalVisuals.gallery} />
+              )}
+              {data.province && (
+                <div className="space-y-32">
+                  <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
+                  <div className="container mx-auto px-4">
+                    <div className="mx-auto max-w-2xl">
+                      <DirectTerminal
+                        mode="health-check"
+                        province={data.province}
+                        latency={data.regionalLatency}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </section>
           )}
 
-          {/* [NEW]: Regional Product Showcase Gallery */}
-          {data.regionalVisuals?.gallery && (
-            <RegionalGallery images={data.regionalVisuals.gallery} />
-          )}
-
-          {/* [NEW]: Regional Roadmap & Health Check Terminal */}
-          {data.province && (
-            <>
-              <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
-              <div className="container mx-auto px-4 py-24">
-                <div className="mx-auto max-w-2xl">
-                  <DirectTerminal
-                    mode="health-check"
-                    province={data.province}
-                    latency={data.regionalLatency}
-                  />
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Phase 04: TRUST SIGNALS - ตอกย้ำความปลอดภัยและมาตรฐานบริการ */}
-          <section id="trust-signals" className="py-24 lg:py-32">
+          {/* [SEQUENCE_06]: TRUST SIGNALS (Surface Offset) */}
+          <section
+            id="trust-signals"
+            className="bg-surface-offset border-border/40 border-y py-24 md:py-32"
+          >
             <ThaiTrustBadge
               clientTrust={data.clientTrust}
               isDark={isDarkMode}
@@ -200,58 +184,54 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
             />
           </section>
 
-          {/* [NEW]: Local Regional Success Proof */}
+          {/* [SEQUENCE_07]: LOCAL SUCCESS (Surface Main) */}
           {data.localSuccessStory && data.province && (
-            <div className="-mt-24 mb-24">
+            <section className="bg-surface-main py-24 md:py-32">
               <LocalSuccessNode
                 title={data.localSuccessStory.title}
                 result={data.localSuccessStory.result}
                 province={data.province}
               />
-            </div>
+            </section>
           )}
 
-          {/* Phase 05: OBJECTION BUSTER - ตอบข้อสงสัยก่อนปิดการขาย */}
-          <div id="objection-buster" className="border-border/5 bg-surface-card/30 border-t">
+          {/* [SEQUENCE_08]: OBJECTION BUSTER (Surface Offset) */}
+          <section id="objection-buster" className="bg-surface-offset border-border/40 border-t">
             <DynamicFAQ
               items={data.faqs}
               title="คำถามที่พบบ่อย"
               description="ตอบทุกข้อสงสัยเชิงเทคนิค เพื่อความมั่นใจสูงสุดก่อนการตัดสินใจของคุณ"
             />
-          </div>
+          </section>
 
-          {/* Phase 06: CONVERSION GATEWAY - ส่วนสรุปและฟอร์มสั่งซื้อ */}
-          <section id="order" className="relative min-h-[60dvh] scroll-mt-24 py-24 md:py-32">
+          {/* [SEQUENCE_09]: CONVERSION GATEWAY (Surface Main) */}
+          <section
+            id="order"
+            className="bg-surface-main relative min-h-[60dvh] scroll-mt-24 py-24 md:py-40"
+          >
             <div className="container mx-auto max-w-4xl px-4">
-              <div className="border-brand-primary/30 shadow-glow-sm bg-surface-card hover:shadow-glow rounded-card-lg overflow-hidden border transition-all duration-700">
-                <div className="bg-brand-secondary relative overflow-hidden p-10 text-center text-white md:p-16">
-                  {/* Pattern Decorator */}
-                  <div
-                    className="bg-brand-primary absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent)] opacity-10"
-                    style={{
-                      backgroundImage: "radial-gradient(circle, #fff 1px, transparent 0)",
-                      backgroundSize: "32px 32px",
-                    }}
-                  />
-                  <h3 className="relative z-10 text-4xl font-black tracking-tighter uppercase italic drop-shadow-lg md:text-6xl">
-                    Limited <span className="text-brand-primary">Offer</span>
+              <div className="rounded-card-lg border-border shadow-pro-xl bg-surface-card overflow-hidden border">
+                <div className="bg-text-primary relative overflow-hidden p-10 text-center text-white md:p-20">
+                  <div className="bg-brand-primary absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-20 blur-[100px]" />
+                  <h3 className="relative z-10 text-4xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
+                    Initialize <br /> <span className="text-brand-primary">Growth.</span>
                   </h3>
-
                   {pricing ? (
-                    <div className="relative z-10 mt-8 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/40 px-8 py-3 text-sm font-bold backdrop-blur-md">
-                      <span className="tracking-widest text-white/70 uppercase">Special_Price</span>
-                      <span className="text-brand-primary text-xl font-black">
+                    <div className="relative z-10 mt-10 inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-10 py-4 backdrop-blur-xl">
+                      <span className="text-[10px] font-black tracking-widest text-white/40 uppercase">
+                        Special_Start_Rate
+                      </span>
+                      <span className="text-brand-primary text-2xl font-black italic">
                         {pricing.startPrice}
                       </span>
                     </div>
                   ) : (
-                    <p className="relative z-10 mt-5 font-mono text-[10px] font-bold tracking-[0.4em] text-white/60 uppercase">
+                    <p className="relative z-10 mt-8 font-mono text-[10px] font-black tracking-[0.4em] text-white/30 uppercase">
                       System_Awaiting_Order_Signal
                     </p>
                   )}
                 </div>
-
-                <div className="p-8 md:p-16">
+                <div className="p-8 md:p-20">
                   <DirectOrderForm
                     price={data.price}
                     unit={data.unit}
@@ -264,9 +244,9 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
 
           {!suppressUI && <SaleFooter brandName={data.title} isDark={isDarkMode} />}
 
-          <footer className="border-border/5 py-12 text-center opacity-20">
+          <footer className="bg-surface-main border-border/5 border-t py-12 text-center opacity-20">
             <p className="font-mono text-[8px] font-black tracking-[0.6em] uppercase">
-              SalePage_Active_Node.v18.0.7_RSC
+              SalePage_Active_Node.v18.5.0_RSC
             </p>
           </footer>
         </main>

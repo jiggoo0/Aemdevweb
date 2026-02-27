@@ -26,13 +26,23 @@ import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 
 // --- 4. Critical UI (Synchronous for LCP) ---
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import { AEMSpecialistHero } from "@/components/features/landing/AEMSpecialistHero";
 import ServiceCard from "@/components/features/services/ServiceCard";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
 
 // --- 5. Deferred UI (Dynamic Imports for TBT Optimization) ---
+const LeadScoringHUD = dynamic(
+  () => import("@/components/templates/sections/LeadScoringHUD").then((mod) => mod.LeadScoringHUD),
+  { ssr: true },
+);
+
+const TrustEquation = dynamic(
+  () => import("@/components/templates/sections/TrustEquation").then((mod) => mod.TrustEquation),
+  { ssr: true },
+);
+
 const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (
   <div
     className={cn(
@@ -148,17 +158,17 @@ export default async function HomePage() {
 
       {/* --- 01. INTRODUCTORY SEQUENCE --- */}
       <header className="relative w-full">
-        {/* HERO GATEWAY: Pure Performance LCP */}
-        <HeroEngine align="center" showIndicator={true} priority={true} />
+        {/* HERO GATEWAY: Specialist Dedicated Design */}
+        <AEMSpecialistHero />
 
         {/* AUTHORITY HUB: Micro-interaction ready */}
         <section
-          className="relative z-20 -mt-16 px-4 md:-mt-24 lg:-mt-32"
+          className="relative z-20 -mt-20 px-4 md:-mt-28 lg:-mt-36"
           aria-label="Authority Metrics"
         >
           <div className="mx-auto max-w-7xl">
-            <div className="glass-card shadow-pro-xl rounded-section relative overflow-hidden border border-white/5 p-8 md:p-16">
-              <div className="relative z-10 flex flex-col items-center gap-12 md:gap-16">
+            <div className="glass-card shadow-pro-xl rounded-section border-border/50 bg-surface-card/80 relative overflow-hidden border p-10 backdrop-blur-3xl md:p-20">
+              <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24">
                 <Suspense
                   fallback={
                     <div className="bg-surface-card/10 h-20 w-full animate-pulse rounded-full" />
@@ -166,7 +176,9 @@ export default async function HomePage() {
                 >
                   <TrustBadge />
                 </Suspense>
-                <div className="via-border h-px w-full bg-gradient-to-r from-transparent to-transparent opacity-30" />
+
+                <div className="bg-border/20 h-px w-full" />
+
                 <Suspense
                   fallback={
                     <div className="rounded-section bg-surface-card/10 h-64 w-full animate-pulse" />
@@ -175,7 +187,7 @@ export default async function HomePage() {
                   <ImpactStats />
                 </Suspense>
               </div>
-              <div className="bg-brand-primary/10 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
+              <div className="bg-brand-primary/5 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
             </div>
           </div>
         </section>
@@ -231,16 +243,35 @@ export default async function HomePage() {
               id="audit-heading"
               className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl"
             >
-              Audit <span className="text-brand-primary">Laboratory.</span>
+              Audit <br /> <span className="text-brand-primary">Laboratory.</span>
             </h2>
           </header>
-          <Suspense fallback={<LoadingSkeleton height="h-[400px]" className="mx-auto max-w-5xl" />}>
-            <AuditReportGenerator />
-          </Suspense>
+
+          <div className="space-y-24">
+            <Suspense
+              fallback={<LoadingSkeleton height="h-[400px]" className="mx-auto max-w-5xl" />}
+            >
+              <AuditReportGenerator />
+            </Suspense>
+
+            {/* Neural Authority Layer */}
+            <div className="mx-auto max-w-5xl">
+              <Suspense fallback={<LoadingSkeleton height="h-[300px]" />}>
+                <LeadScoringHUD />
+              </Suspense>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* --- 04. EXECUTION FRAMEWORK --- */}
+      {/* --- 04. AUTHORITY EQUATION --- */}
+      <section className="bg-black py-24">
+        <Suspense fallback={<LoadingSkeleton height="h-[500px]" />}>
+          <TrustEquation />
+        </Suspense>
+      </section>
+
+      {/* --- 05. EXECUTION FRAMEWORK --- */}
       <section className="bg-surface-main py-24" aria-label="Working Process">
         <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
           <WorkProcess />

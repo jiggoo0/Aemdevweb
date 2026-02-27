@@ -60,6 +60,13 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
       title: "Neural_Infrastructure",
       description:
         "อัปเกรดระบบการประมวลผลและ Identity Overriding เพื่อความเป็นเอกลักษณ์ระดับสูงสุด",
+      status: "completed",
+    },
+    {
+      year: "2026",
+      title: "Ultimate_Engine_v18",
+      description:
+        "ประกาศใช้ Next.js 16 + React 19 พร้อมระบบ P-SEO ขั้นสูงสุดเพื่อการครองอันดับอย่างยั่งยืน",
       status: "active",
     },
   ];

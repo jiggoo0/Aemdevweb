@@ -8,10 +8,11 @@ import type { Metadata } from "next";
 
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-import HeroEngine from "@/components/templates/sections/HeroEngine";
-import FeatureGrid from "@/components/templates/sections/FeatureGrid";
+import UniversalHero from "@/components/templates/sections/UniversalHero";
+import { FeatureGrid } from "@/components/templates/sections/UniversalRegistry";
 import { CapabilityGraph } from "@/components/templates/sections/CapabilityGraph";
 import { SuccessTimeline } from "@/components/templates/sections/SuccessTimeline";
+import { TrustEquation } from "@/components/templates/sections/TrustEquation";
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import { ABOUT_CONTENT } from "@/constants/about";
@@ -43,7 +44,7 @@ export default function AboutPage() {
       <JsonLd data={breadcrumbSchema} />
 
       {/* 01. HERO LAYER: วางตำแหน่งเป็นคู่คิดทางธุรกิจ */}
-      <HeroEngine
+      <UniversalHero
         title={ABOUT_CONTENT.hero.title}
         subtitle={ABOUT_CONTENT.hero.subtitle}
         primaryActionLabel="ปรึกษาแผนงานกับผมโดยตรง"
@@ -178,20 +179,28 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col items-center gap-y-16">
             <TrustBadge />
+            <div className="w-full max-w-5xl">
+              <TrustEquation />
+            </div>
             <ImpactStats />
           </div>
         </div>
       </section>
 
       {/* 06. CORE VALUES */}
-      <div className="py-24">
-        <FeatureGrid
-          heading="Why AEMDEVWEB?"
-          subheading="สัมผัสประสบการณ์การทำงานกับพาร์ทเนอร์ที่ให้ความสำคัญกับเป้าหมายของคุณ"
-          items={ABOUT_CONTENT.coreValues}
-          columns={3}
-        />
-      </div>
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-16 text-center">
+            <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
+              Why AEMDEVWEB?
+            </h2>
+            <p className="text-text-secondary mx-auto mt-4 max-w-2xl text-lg font-medium opacity-60">
+              สัมผัสประสบการณ์การทำงานกับพาร์ทเนอร์ที่ให้ความสำคัญกับเป้าหมายของคุณ
+            </p>
+          </div>
+          <FeatureGrid features={ABOUT_CONTENT.coreValues} />
+        </div>
+      </section>
 
       {/* 07. CALL TO ACTION: ยกระดับการเรียกขานให้เป็นระดับมืออาชีพ */}
       <ConversionCTA

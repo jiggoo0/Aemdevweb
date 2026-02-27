@@ -3,90 +3,125 @@
  * [STRATEGY]: Industrial Powerhouse | Fishery & Logistics | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { corporateService } from "@/constants/services/corporate";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const samutSakhonNode: AreaNode = {
+export const samutSakhonNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "samut-sakhon",
   province: "สมุทรสาคร",
   region: "Central",
-  templateSlug: "corporate",
-  title: "รับทำเว็บไซต์ สมุทรสาคร | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจประมงอุตสาหกรรม",
+  priority: 96,
+
+  title: "รับทำเว็บไซต์ สมุทรสาคร | Digital Seafood Hub สำหรับโรงงานและธุรกิจห้องเย็นอุตสาหกรรม",
   description:
-    "บริการรับทำเว็บไซต์ในสมุทรสาคร (มหาชัย) ยกระดับโรงงานผลิตและธุรกิจห้องเย็นสู่มาตรฐานสากล ติดหน้าแรก Google",
-  seoTitle: "รับทำเว็บไซต์ สมุทรสาคร ออกแบบเว็บโรงงาน ห้องเย็น มหาชัย - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สมุทรสาคร สำหรับโรงงานอุตสาหกรรมประมงและโลจิสติกส์ มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในสมุทรสาคร (มหาชัย) เจาะกลุ่มแปรรูปอาหารทะเลและโรงงานอุตสาหกรรม เน้นความโปรระดับส่งออก โหลดไว และระบบ RFQ ที่แม่นยำ",
 
   longDescription:
-    "สมุทรสาคร หัวใจของอุตสาหกรรมประมงและศูนย์กลางห้องเย็นที่ใหญ่ที่สุดในประเทศไทย " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับโรงงานและธุรกิจ B2B ในสมุทรสาคร (มหาชัย) ด้วยเว็บไซต์มาตรฐาน Enterprise " +
-    "เราออกแบบระบบที่เน้นความมั่นคง ปลอดภัย และแสดงศักยภาพการผลิตของคุณสู่สายตาคู่ค้าทั่วโลก " +
-    "พร้อมกลยุทธ์ SEO ที่จะทำให้โรงงานของคุณครองอันดับหนึ่งในคีย์เวิร์ดอุตสาหกรรมประมงและโลจิสติกส์อย่างยั่งยืน",
+    "สมุทรสาคร (มหาชัย) หัวใจของอุตสาหกรรมประมงและศูนย์กลางห้องเย็นที่ใหญ่ที่สุดในไทย " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานผลิตและธุรกิจ B2B ที่ต้องการแสดงศักยภาพการผลิตสู่ระดับสากล " +
+    "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Entity Mapping เพื่อให้โรงงานของคุณครองอันดับหนึ่งในสายตาคู่ค้าข้ามชาติ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Global Fishery Trust: งานดีไซน์ที่สร้างความเชื่อมั่นระดับสากลเพื่อรองรับการเจรจาธุรกิจส่งออกอาหารทะเล",
-    "Cold-Chain Logistics Mastery: ระบบจัดการข้อมูลเชิงเทคนิคและระบบ RFQ ออนไลน์ที่ออกแบบมาเพื่อธุรกิจห้องเย็นและขนส่งโดยเฉพาะ",
-    "Mahachai Industrial SEO: วางโครงสร้างการค้นหาครอบคลุมคีย์เวิร์ดโรงงานในเขตมหาชัยและนิคมอุตสาหกรรมจังหวัดสมุทรสาคร",
-  ],
-
-  priority: 96,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/samut-sakhon-node.webp",
   coordinates: { lat: 13.5475, lng: 100.2744 },
-  marketSaturation: 72,
-  regionalLatency: 6,
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Industry Credential Audit",
-      description: "วิเคราะห์ภาพลักษณ์บริษัทให้ดูน่าเชื่อถือในระดับอุตสาหกรรมส่งออก (Export Ready)",
-    },
-    {
-      step: "02",
-      title: "B2B Gateway Deployment",
-      description: "ติดตั้งระบบขอใบเสนอราคา (RFQ) และระบบจัดการแคตตาล็อกสินค้าขนาดใหญ่",
-    },
-    {
-      step: "03",
-      title: "Fishery Hub SEO Sync",
-      description:
-        "ทำ SEO คีย์เวิร์ดเฉพาะทางอุตสาหกรรมประมงและห้องเย็นเพื่อครองพื้นที่การค้นหาในมหาชัย",
-    },
-  ],
+  districts: ["มหาชัย", "กระทุ่มแบน", "บ้านแพ้ว", "เมืองสมุทรสาคร", "นิคมอุตสาหกรรมสมุทรสาคร"],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
-      "สมุทรสาครเป็นศูนย์กลางอุตสาหกรรมประมงและโรงงานที่หนาแน่น เว็บไซต์ต้องเน้นความมั่นคงและความพร้อมในการให้บริการคู่ค้าขนาดใหญ่",
+      "คู่ค้าในมหาชัยให้ความสำคัญกับ 'มาตรฐาน ISO' และ 'ความพร้อมในการส่งออก' เว็บไซต์ที่โชว์ Certificate ชัดเจนและมีระบบแคตตาล็อกภาษาอังกฤษจะได้รับความไว้วางใจสูงสุด",
     technicalApproach:
-      "เน้นระบบความปลอดภัยระดับสูงและโครงสร้างที่รองรับผู้ใช้งานจำนวนมากจากทั่วโลก",
-    localStrength: "เป็นแหล่งอุตสาหกรรมอาหารทะเลและนิคมอุตสาหกรรมที่สำคัญของประเทศ",
+      "เน้นระบบจัดการแคตตาล็อกสินค้าที่รองรับการอัปเดตสต็อก Real-time และการทำ SEO สำหรับตลาดอุตสาหกรรมประมง",
+    localStrength:
+      "เข้าใจระบบนิเวศของธุรกิจ Cold-chain และโรงงานอุตสาหกรรมในพื้นที่ พร้อมบริการที่ปรึกษาเชิงเทคนิคถึงหน้าโรงงาน",
     nicheIndustries: [
-      "โรงงานแปรรูปอาหารทะเลและห้องเย็น",
-      "ธุรกิจโลจิสติกส์และขนส่งทางบก/น้ำ",
-      "นิคมอุตสาหกรรมในพื้นที่",
+      "โรงงานแปรรูปอาหารทะเล (Seafood Processing)",
+      "ธุรกิจห้องเย็นและคลังสินค้า (Cold Storage)",
+      "ผู้ผลิตบรรจุภัณฑ์และฉลากสินค้า (Packaging)",
+      "ธุรกิจนำเข้า-ส่งออกสัตว์น้ำ",
     ],
     painPoints: [
-      "เว็บไซต์เดิมล้าสมัยไม่รองรับมือถือ",
-      "ต้องการขยายฐานลูกค้าต่างชาติแต่เว็บไม่มีภาษาอังกฤษ",
+      "เว็บไซต์เดิมดูไม่น่าเชื่อถือสำหรับคู่ค้าต่างชาติ",
+      "ระบบติดต่อสื่อสารกับฝ่ายจัดซื้อล่าช้า ไม่เป็นระบบ",
+      "หาพิกัดโรงงานบน Google Maps ได้ยากและข้อมูลไม่ชัดเจน",
     ],
     competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 156,
+      localClient: "โรงงานแปรรูปอาหารทะเลรายใหญ่ ย่านมหาชัย",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: บริษัทห้องเย็นสมุทรสาคร",
+      result: "ทำแคตตาล็อกบริการและ SEO ใหม่ ยอดขอใบเสนอราคาจากลูกค้า B2B เพิ่มขึ้น 240%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ มหาชัย",
-      "ออกแบบเว็บโรงงาน กระทุ่มแบน",
-      "จ้างทำ SEO สมุทรสาคร",
-      "ทำเว็บห้องเย็น บ้านแพ้ว",
+      "จ้างทำเว็บโรงงาน สมุทรสาคร",
+      "Cold Storage SEO Thailand",
+      "ทำแคตตาล็อกสินค้าอุตสาหกรรม",
     ],
+    promotions: [
+      {
+        title: "Cold-Chain Expansion Offer",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานและธุรกิจห้องเย็น รับฟรีบริการ Cold-Chain SEO Blueprint พร้อมระบบ RFQ ติดตามสถานะได้ทาง LINE มูลค่า 12,000 บาท",
+        discount: "Free RFQ & SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/samut-sakhon-node.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/services/catalog-node.webp",
+      ],
+    },
   },
-  districts: ["เมืองสมุทรสาคร", "กระทุ่มแบน", "บ้านแพ้ว"],
+
+  faqs: [
+    {
+      question: "ระบบแคตตาล็อกรองรับสินค้าจำนวนมากไหม?",
+      answer:
+        "รองรับครับ สถาปัตยกรรมของเราออกแบบมาเพื่อจัดการข้อมูลสินค้าหลักหมื่นรายการ (SKU) ได้อย่างลื่นไหลและค้นหาได้รวดเร็วครับ",
+    },
+  ],
+
   keywords: [
     "รับทำเว็บไซต์ สมุทรสาคร",
     "ทำเว็บโรงงาน มหาชัย",
-    "จ้างทำเว็บห้องเย็น",
-    "รับทำ SEO สมุทรสาคร",
+    "Web Design Mahachai",
+    "Seafood Industry SEO",
   ],
-};
+
+  isTourismHeavy: false,
+  marketSaturation: 84,
+  regionalLatency: 8,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
+    },
+    {
+      step: "02",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
+    },
+    {
+      step: "03",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+});

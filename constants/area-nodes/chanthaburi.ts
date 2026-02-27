@@ -1,91 +1,129 @@
 /**
- * [SERVICE_NODE]: CHANTHABURI_GEM_FRUIT v18.0.1
- * [STRATEGY]: Gemstone Trade | Fruit Export | Dynamic Inheritance
+ * [SERVICE_NODE]: CHANTHABURI_PREMIUM_EXPORT v18.2.0
+ * [STRATEGY]: Global Fruit Export | Gemstone Authority | Dynamic Inheritance
+ * [MARKET]: Chanthaburi CBD, Gem Market, High-End Fruit Exporters
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const chanthaburiNode: AreaNode = {
+export const chanthaburiNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "chanthaburi",
   province: "จันทบุรี",
   region: "East",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ จันทบุรี | ยกระดับแบรนด์อัญมณีและตลาดผลไม้ส่งออกสู่สากล",
+  priority: 94,
+
+  title: "รับทำเว็บไซต์ จันทบุรี | Digital Infrastructure สำหรับแบรนด์ผลไม้ส่งออกและอัญมณีพรีเมียม",
   description:
-    "เปลี่ยนชื่อเสียงเมืองจันท์ให้เป็นยอดขายระดับโลก ด้วยเว็บไซต์ D2C สำหรับอัญมณีและระบบจองสินค้าสวนผลไม้พรีเมียม",
-  seoTitle: "รับทำเว็บไซต์ จันทบุรี ออกแบบเว็บอัญมณี สวนผลไม้ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์จันทบุรี สำหรับธุรกิจพลอย เครื่องประดับ และสวนทุเรียนส่งออก ดีไซน์สวยแพง โหลดไว ติดหน้าแรก Google",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในจันทบุรี เจาะกลุ่มล้งทุเรียนส่งออกและธุรกิจพลอยพรีเมียม เน้นดีไซน์สวยแพง โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งในตลาดโลก",
 
   longDescription:
-    "จันทบุรี 'มหานครแห่งผลไม้' และศูนย์กลางการค้าอัญมณีระดับโลกที่เป็นหัวใจทางเศรษฐกิจของภาคตะวันออก " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับแบรนด์อัญมณีและธุรกิจสวนผลไม้พรีเมียมในจันทบุรีสู่ตลาดสากล " +
-    "ด้วยการออกแบบเว็บไซต์ที่เน้นความหรูหราเชิง Visual (High-Res Display) และระบบจองสินค้าส่งออกที่แม่นยำ " +
-    "เพื่อให้แบรนด์จันท์ของคุณ ครองความเป็นอันดับหนึ่งบน Google และเป็นที่ยอมรับในสายตาคู่ค้าจากทั่วโลก",
+    "จันทบุรี 'มหานครแห่งผลไม้' และศูนย์กลางการค้าอัญมณีของอาเซียนที่ต้องการสถาปัตยกรรมดิจิทัลระดับสูง " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับแบรนด์ทุเรียนพรีเมียม ล้งผลไม้ส่งออก และธุรกิจพลอยที่ต้องการภาพลักษณ์ระดับสากล " +
+    "เราเน้นโครงสร้างข้อมูลที่รองรับการโชว์รายละเอียดสินค้า (High-Res) และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยคู่ค้าทั่วโลก",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Luxury Gemstone Branding: งานดีไซน์ระดับสากลที่สะท้อนถึงมูลค่าและความน่าเชื่อถือของธุรกิจพลอยและเครื่องประดับ",
-    "Agro-Export Mastery: ระบบจัดการแคตตาล็อกทุเรียนพรีเมียมและผลไม้ฤดูกาลที่ออกแบบมาเพื่อดักจับคู่ค้าทั้งในและต่างประเทศ",
-    "Eastern Trade Authority SEO: วางรากฐานการค้นหาครอบคลุมแหล่งท่องเที่ยวชายฝั่งและพื้นที่เศรษฐกิจสำคัญทั่วจันทบุรี",
-  ],
-
-  priority: 89,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/chanthaburi-node.webp",
   coordinates: { lat: 12.6112, lng: 102.1039 },
+  districts: ["เมืองจันทบุรี", "ท่าใหม่", "ขลุง", "มะขาม", "โป่งน้ำร้อน", "นายายอาม"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในกลุ่มสินค้าพรีเมียมของจันทบุรี (ทุเรียน/พลอย) ตัดสินใจจาก 'ภาพลักษณ์' และ 'ความโปร่งใสของข้อมูล' เว็บไซต์ที่แสดงรายละเอียด Spec สินค้าชัดเจนและโหลดรูปภาพได้รวดเร็วจะได้รับความไว้วางใจสูงสุดในระดับ Global B2B",
+    technicalApproach:
+      "เน้นระบบ Image-Optimization ขั้นสูงสำหรับโชว์สินค้า และการทำ Local SEO เจาะจงกลุ่มคู่ค้าชาวจีนและยุโรป",
+    localStrength:
+      "เข้าใจระบบนิเวศการค้าผลไม้และพลอยในจังหวัดจันทบุรี พร้อมบริการที่ปรึกษาเชิงเทคนิคถึงหน้าสวน/หน้าร้าน",
+    nicheIndustries: [
+      "ล้งทุเรียนและผลไม้ส่งออกพรีเมียม",
+      "ธุรกิจอัญมณีและเครื่องประดับพลอยจันท์",
+      "บูทีครีสอร์ตและโฮมสเตย์ชายฝั่ง",
+      "วิสาหกิจชุมชนสินค้าเกษตรแปรรูปคุณภาพสูง",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไซต์ไม่สมราคาแบรนด์หลักล้าน ทำให้เสียอำนาจการต่อรอง",
+      "ระบบจองหรือสั่งซื้อผลไม้ล่วงหน้าซับซ้อนและไม่เสถียร",
+      "คู่ค้าต่างชาติ (โดยเฉพาะชาวจีน) ค้นหาธุรกิจบน Google/Baidu ไม่เจอ",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 126,
+      localClient: "แบรนด์ทุเรียนส่งออกรายใหญ่ ย่านท่าใหม่",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: แบรนด์พลอยเมืองจันท์",
+      result:
+        "วางโครงสร้างระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ ยอดสั่งซื้อจากต่างชาติเพิ่มขึ้น 300% ใน 1 ปี",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ จันทบุรี",
+      "จ้างทำ SEO ทุเรียนจันท์",
+      "ทำเว็บพลอยพรีเมียม",
+      "Global Fruit Export Web",
+    ],
+    promotions: [
+      {
+        title: "Global Fruit Export Strategy",
+        description:
+          "สิทธิพิเศษสำหรับล้งผลไม้และสวนพรีเมียม รับฟรีบริการออกแบบ Digital Export Blueprint พร้อมระบบปักหมุด GMB หลายภาษามูลค่า 12,000 บาท",
+        discount: "Free Global SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chanthaburi-node.webp",
+      gallery: [
+        "/images/services/catalog-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ระบบรองรับการแสดงผลแกลเลอรี่ภาพสินค้าความละเอียดสูงไหม?",
+      answer:
+        "รองรับครับ เราใช้ระบบ Adaptive Image Delivery เพื่อให้รูปภาพพลอยหรือผลไม้ของคุณคมชัดที่สุด แต่ยังคงความเร็วในการโหลดที่เร็วสายฟ้าแลบครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ จันทบุรี",
+    "ออกแบบเว็บไซต์ ท่าใหม่",
+    "จ้างทำเว็บทุเรียน",
+    "Gemstone Trade SEO",
+  ],
+
   isTourismHeavy: true,
-  marketSaturation: 55,
-  regionalLatency: 16,
+  marketSaturation: 65,
+  regionalLatency: 15,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Luxury Gemstone Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์การนำเสนองานเครื่องประดับและพลอยให้ดูทรงคุณค่าและน่าเชื่อถือในระดับสากล",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Agro-Export Sync",
+      title: "High-Performance Deployment",
       description:
-        "ติดตั้งระบบแคตตาล็อกสินค้าเกษตรพรีเมียมและระบบจองผลไม้ฤดูกาลที่รองรับลูกค้าต่างชาติ",
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Jewelry SEO Domination",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ Local SEO เน้นคีย์เวิร์ด 'ตลาดพลอยจันทบุรี', 'ทุเรียนจันท์พรีเมียม' เพื่อชิงพื้นที่หน้าแรก",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "จันทบุรีเป็นศูนย์กลางการค้าที่มีเอกลักษณ์สูง เว็บไซต์ที่โชว์รายละเอียดสินค้าได้คมชัด (High-Res) จะปิดการขายได้เร็วกว่า",
-    technicalApproach:
-      "เน้น Image Optimization สำหรับอัญมณีและระบบ E-commerce ที่มีความปลอดภัยในการทำธุรกรรมสูง",
-    localStrength:
-      "ชื่อเสียงด้าน 'นครแห่งอัญมณี' และ 'มหานครผลไม้' คือจุดแข็งระดับโลกที่ต้องนำเสนอ",
-    nicheIndustries: [
-      "ธุรกิจพลอยและเครื่องประดับ",
-      "ล้งผลไม้และสวนทุเรียนพรีเมียม",
-      "รีสอร์ตชายฝั่งและโฮมสเตย์ป่าชายเลน",
-    ],
-    painPoints: [
-      "สินค้าพรีเมียมแต่ภาพลักษณ์เว็บดูธรรมดา",
-      "คู่ค้าต่างชาติเข้าถึงข้อมูลสินค้าได้ยาก",
-    ],
-    competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ เมืองจันทบุรี",
-      "ออกแบบเว็บพลอย จันทบุรี",
-      "จ้างทำ SEO จันทบุรี",
-      "ทำเว็บสวนทุเรียน จันทบุรี",
-    ],
-  },
-  districts: ["เมืองจันทบุรี", "ขลุง", "ท่าใหม่", "โป่งน้ำร้อน", "มะขาม"],
-  keywords: ["รับทำเว็บไซต์ จันทบุรี", "ทำเว็บพลอย", "จ้างทำเว็บสวนผลไม้", "รับทำ SEO จันทบุรี"],
-};
+});

@@ -1,87 +1,129 @@
 /**
- * [SERVICE_NODE]: RATCHABURI_ART_CRAFT v18.0.1
- * [STRATEGY]: Artisan Hub | Creative Tourism | Dynamic Inheritance
+ * [SERVICE_NODE]: RATCHABURI_AGRI_INDUSTRIAL v18.2.0
+ * [STRATEGY]: Agricultural Authority | Manufacturing P-SEO | Dynamic Inheritance
+ * [MARKET]: Ratchaburi CBD, Industrial Plants & Smart Farming Exporters
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const ratchaburiNode: AreaNode = {
+export const ratchaburiNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "ratchaburi",
   province: "ราชบุรี",
   region: "West",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ ราชบุรี | ยกระดับงานศิลปะและธุรกิจสร้างสรรค์ เมืองโอ่งมังกร",
+  priority: 94,
+
+  title: "รับทำเว็บไซต์ ราชบุรี | Digital Infrastructure สำหรับโรงงานเกษตรแปรรูปและอุตสาหกรรมหนัก",
   description:
-    "เปลี่ยนงานหัตถศิลป์ราชบุรีสู่มาตรฐานดิจิทัล ด้วยเว็บไซต์ที่เน้นงานดีไซน์เชิงสร้างสรรค์และระบบขายสินค้าคราฟต์พรีเมียม",
-  seoTitle: "รับทำเว็บไซต์ ราชบุรี ออกแบบเว็บงานอาร์ต ที่พัก สวนผึ้ง - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ราชบุรี สำหรับธุรกิจเซรามิก รีสอร์ตสวนผึ้ง และสินค้า OTOP พรีเมียม ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในราชบุรี เจาะกลุ่มอุตสาหกรรมแปรรูปอาหาร ฟาร์มอัจฉริยะ และโรงงานเซรามิกพรีเมียม เน้นความโปรระดับส่งออก โหลดไว และระบบ RFQ ที่แม่นยำ",
 
   longDescription:
-    "ราชบุรี เมืองแห่งศิลปะสายหมอกและศูนย์กลางงานหัตถศิลป์ที่ทั่วโลกยอมรับจาก 'โอ่งมังกร' สู่รีสอร์ตดีไซน์หรู " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับแบรนด์สร้างสรรค์ในราชบุรีด้วยเว็บไซต์ที่เน้นสุนทรียภาพ (Aesthetic Excellence) " +
-    "ไม่ว่าจะเป็นที่พักบูทีคในสวนผึ้ง หรือโรงงานเซรามิกพรีเมียม เราออกแบบระบบที่เน้น Visual Storytelling " +
-    "เพื่อเปลี่ยน 'ความอาร์ต' ของธุรกิจคุณ ให้กลายเป็นยอดขายที่จับต้องได้จริงบนโลกดิจิทัล",
+    "ราชบุรี ศูนย์กลางเกษตรกรรมและอุตสาหกรรมแปรรูปที่สำคัญที่สุดของภาคตะวันตกที่เป็นประตูสู่ตลาดโลก " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานผลิตและธุรกิจ B2B ที่ต้องการแสดงศักยภาพการจัดส่งสู่ระดับสากล " +
+    "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Local Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาฝ่ายจัดซื้อทั่วประเทศ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Creative-Centric Design: งานดีไซน์ที่สะท้อนถึงรสนิยมและความพิถีพิถันของงานคราฟต์ระดับพรีเมียมในราชบุรี",
-    "Visual Asset Mastery: ระบบแกลเลอรี่สินค้าและที่พักที่เน้นความคมชัดและโหลดไว เพื่อสร้างความประทับใจระดับสากล",
-    "Artisan SEO Authority: วางรากฐานการค้นหาเพื่อครองอันดับหนึ่งในคีย์เวิร์ดด้านงานศิลปะ แหล่งท่องเที่ยว และที่พักในสวนผึ้ง",
-  ],
-
-  priority: 89,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/ratchaburi-node.webp",
   coordinates: { lat: 13.5283, lng: 99.8133 },
-  isTourismHeavy: true,
-  marketSaturation: 52,
-  regionalLatency: 14,
+  districts: ["เมืองราชบุรี", "บ้านโป่ง", "โพธาราม", "สวนผึ้ง", "ดำเนินสะดวก", "จอมบึง"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คู่ค้าในราชบุรี (โดยเฉพาะกลุ่มเกษตรแปรรูปและโรงงาน) ให้ความสำคัญกับ 'ความแม่นยำของข้อมูล' และ 'ความน่าเชื่อถือของแหล่งผลิต' เว็บไซต์ที่แสดงข้อมูลเทคนิคชัดเจนและมีระบบแคตตาล็อกออนไลน์จะได้รับเลือกเป็นพาร์ทเนอร์ก่อนเสมอ",
+    technicalApproach:
+      "เน้นระบบ Search สำหรับสินค้าเกษตรและเทคนิค พร้อมการทำ SEO สำหรับตลาดส่งออกและ B2B ท้องถิ่น",
+    localStrength:
+      "เข้าใจระบบนิเวศของธุรกิจฟาร์มอัจฉริยะและโรงงานอุตสาหกรรมในพื้นที่ พร้อมบริการที่ปรึกษาเชิงเทคนิคถึงหน้าฟาร์ม/โรงงาน",
+    nicheIndustries: [
+      "โรงงานแปรรูปอาหารและเครื่องดื่ม",
+      "อุตสาหกรรมเซรามิกและเครื่องปั้นพรีเมียม",
+      "ธุรกิจฟาร์มอัจฉริยะและส่งออกผักผลไม้",
+      "ศูนย์กระจายสินค้าและโลจิสติกส์ฝั่งตะวันตก",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมดูไม่ทันสมัยไม่สะท้อนนวัตกรรมการผลิต",
+      "ต้องการขยายฐานลูกค้าส่งออกแต่เว็บไม่มีระบบรองรับหลายภาษา",
+      "ระบบติดต่อฝ่ายขายล่าช้าและข้อมูลสินค้าบนหน้าเว็บไม่ชัดเจน",
+    ],
+    competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 132,
+      localClient: "โรงงานแปรรูปอาหารส่งออกรายใหญ่ ย่านบ้านโป่ง",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานเซรามิกส่งออก",
+      result:
+        "สร้างระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ ยอด RFQ จากคู่ค้าโซนยุโรปเพิ่มขึ้น 250% ใน 1 ปี",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บ้านโป่ง",
+      "จ้างทำเว็บโรงงาน ราชบุรี",
+      "Agri-Tech SEO Thailand",
+      "ทำแคตตาล็อกสินค้า ราชบุรี",
+    ],
+    promotions: [
+      {
+        title: "Agri-Industrial Digital Fortress",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานและฟาร์มส่งออก รับฟรีบริการวางแผน Technical Data Structure พร้อมระบบ RFQ มูลค่า 12,000 บาท",
+        discount: "Free Catalog & Data Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/ratchaburi-node.webp",
+      gallery: [
+        "/images/services/catalog-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ระบบแคตตาล็อกรองรับการแสดงผลสเปกสินค้าทางเทคนิคไหม?",
+      answer:
+        "รองรับครับ เราออกแบบฟิลด์ข้อมูลให้รองรับทั้งค่าตัวเลข หน่วยวัด และไฟล์ดาวน์โหลดทางวิศวกรรม เพื่อให้ฝ่ายจัดซื้อได้ข้อมูลที่แม่นยำที่สุดครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ ราชบุรี",
+    "ทำเว็บโรงงาน บ้านโป่ง",
+    "Web Design Ratchaburi",
+    "Agri-Industrial SEO",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 75,
+  regionalLatency: 12,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Creative Brand Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์อัตลักษณ์ความสร้างสรรค์ของธุรกิจราชบุรีเพื่อสร้างแบรนด์ดิจิทัลที่ดูพรีเมียมและมีเอกลักษณ์",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Visual Gallery Hub",
+      title: "High-Performance Deployment",
       description:
-        "ติดตั้งระบบแสดงผลสินค้าและแกลเลอรี่ที่เน้นงาน Visual ระดับสูงสำหรับงานศิลปะและที่พัก",
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Artistic SEO Sync",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักสวนผึ้ง', 'โอ่งมังกรราชบุรี' เพื่อชิงอันดับหนึ่งในสายตาของคนรักศิลปะ",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "ราชบุรีเป็นเมืองแห่งศิลปะและธรรมชาติ การตลาดดิจิทัลต้องเน้นภาพลักษณ์ที่ดู 'มีสไตล์' และ 'พิถีพิถัน' สูง",
-    technicalApproach:
-      "เน้น Image Optimization และการแสดงผลที่เป็นระเบียบเพื่อโชว์รายละเอียดงานคราฟต์",
-    localStrength: "มีความโดดเด่นด้านเซรามิก แหล่งท่องเที่ยวสวนผึ้ง และตลาดน้ำดำเนินสะดวก",
-    nicheIndustries: [
-      "โรงงานเซรามิกและงานคราฟต์",
-      "บูทีครีสอร์ตในเขตสวนผึ้ง",
-      "วิสาหกิจชุมชนสินค้าเกษตรแปรรูป",
-    ],
-    painPoints: ["งานดีแต่ภาพลักษณ์เว็บดูธรรมดา", "นักท่องเที่ยวหาข้อมูลสินค้าพรีเมียมได้ยาก"],
-    competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ราชบุรี",
-      "ออกแบบเว็บงานอาร์ต ราชบุรี",
-      "จ้างทำ SEO สวนผึ้ง",
-      "ทำเว็บงานคราฟต์ ราชบุรี",
-    ],
-  },
-  districts: ["เมืองราชบุรี", "สวนผึ้ง", "โพธาราม", "บ้านโป่ง", "ดำเนินสะดวก"],
-  keywords: ["รับทำเว็บไซต์ ราชบุรี", "ทำเว็บงานคราฟต์", "จ้างทำเว็บสวนผึ้ง", "รับทำ SEO ราชบุรี"],
-};
+});

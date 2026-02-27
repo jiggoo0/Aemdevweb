@@ -29,7 +29,7 @@ interface DynamicFAQProps {
 export const DynamicFAQ = memo(
   ({
     items = [],
-    title = "Specialist FAQ",
+    title: _title = "Specialist FAQ",
     description = "ข้อมูลเชิงลึกและคำแนะนำทางเทคนิคจากทีมผู้เชี่ยวชาญ เพื่อให้คุณตัดสินใจได้แม่นยำที่สุด",
     className,
   }: DynamicFAQProps) => {
@@ -78,12 +78,12 @@ export const DynamicFAQ = memo(
               <div className="inline-flex items-center gap-4 rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
                 <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]" />
                 <span className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
-                  Intelligence_Registry.v{SITE_CONFIG.project.version}
+                  Knowledge_Hub.v18.2
                 </span>
               </div>
 
-              <h2 className="text-5xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl">
-                {title}
+              <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl">
+                Technical <br /> <span className="text-[var(--brand-primary)]">Insights.</span>
               </h2>
 
               <div className="border-l-[6px] border-[var(--brand-primary)]/40 pl-8">
@@ -125,9 +125,14 @@ export const DynamicFAQ = memo(
                     )}
                   >
                     <AccordionTrigger className="flex w-full items-center justify-between px-8 py-8 text-left transition-all hover:no-underline [&[data-state=open]>div>svg]:rotate-180">
-                      <span className="pr-6 text-xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--brand-primary)] md:text-3xl">
-                        {item.question}
-                      </span>
+                      <div className="flex flex-col gap-2">
+                        <span className="text-brand-primary hidden font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-0 transition-all data-[state=open]:block data-[state=open]:opacity-40">
+                          Active_Registry_Node
+                        </span>
+                        <span className="pr-6 text-xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--brand-primary)] md:text-3xl">
+                          {item.question}
+                        </span>
+                      </div>
                     </AccordionTrigger>
 
                     <AccordionContent className="px-8 pt-0 pb-10">

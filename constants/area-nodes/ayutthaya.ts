@@ -4,84 +4,126 @@
  * [MARKET]: Ayutthaya City, Industrial Estates (Rojana/Hi-Tech)
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { corporateService } from "@/constants/services/corporate";
 
-export const ayutthayaNode: AreaNode = {
+export const ayutthayaNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "ayutthaya",
   province: "พระนครศรีอยุธยา",
   region: "Central",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ อยุธยา | ยกระดับธุรกิจท่องเที่ยวและอุตสาหกรรมในเมืองประวัติศาสตร์",
+  priority: 94,
+
+  title: "รับทำเว็บไซต์ อยุธยา | Digital Infrastructure สำหรับโรงงาน High-Tech และธุรกิจมรดกโลก",
   description:
-    "บริการรับทำเว็บไซต์ในอยุธยา ครบวงจรสำหรับที่พักเชิงประวัติศาสตร์และโรงงานในนิคมอุตสาหกรรม เน้นความน่าเชื่อถือและการทำ SEO พื้นที่",
-  seoTitle: "รับทำเว็บไซต์ อยุธยา ออกแบบเว็บโรงแรม โรงงาน นิคมโรจนะ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์อยุธยา สำหรับธุรกิจท่องเที่ยวและโรงงานอุตสาหกรรม มาตรฐานสากล รองรับ SEO และระบบบริการออนไลน์ ติดหน้าแรก Google",
+    "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอยุธยา เจาะกลุ่มนิคมโรจนะ-ไฮเทค เน้นความมั่นคงระดับวิศวกรรม โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งในเมืองอุตสาหกรรม",
 
   longDescription:
-    "พระนครศรีอยุธยา เมืองมรดกโลกที่เป็นจุดตัดสำคัญระหว่างการท่องเที่ยวเชิงประวัติศาสตร์และเขตอุตสาหกรรมหนัก " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจของคุณด้วยเว็บไซต์ที่ผสาน 'ความขลัง' ของอัตลักษณ์เมืองเก่าเข้ากับ 'ความคม' ของเทคโนโลยีสมัยใหม่ " +
-    "ไม่ว่าจะเป็นที่พักบูทีคโฮเต็ลที่ต้องการยอดจองตรง หรือโรงงานในนิคมอุตสาหกรรม (โรจนะ/ไฮเทค) ที่ต้องการความน่าเชื่อถือระดับ B2B " +
-    "เราวางโครงสร้างระบบที่โหลดไว ปลอดภัย และครองอันดับหนึ่งบน Google อย่างยั่งยืน",
+    "พระนครศรีอยุธยา จุดตัดที่สำคัญที่สุดของประวัติศาสตร์ไทยและเทคโนโลยีการผลิตสมัยใหม่ " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานอุตสาหกรรมและโครงการที่ต้องการความน่าเชื่อถือระดับมหาชน " +
+    "เราเน้นโครงสร้างที่รองรับการทำ B2B SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรองมาตรฐานสากล เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในเขตอุตสาหกรรมชั้นนำ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Heritage Branding: ออกแบบเว็บไซต์ที่สะท้อนคุณค่าทางประวัติศาสตร์ควบคู่ไปกับความทันสมัยเพื่อสร้าง Authority",
-    "Industrial SEO Mastery: ดันเว็บไซต์โรงงานและธุรกิจ B2B ให้ติดหน้าแรกในคีย์เวิร์ดเฉพาะทางอุตสาหกรรม",
-    "Seamless Tourism Flow: ระบบรองรับนักท่องเที่ยวทั่วโลกด้วยโครงสร้าง Multi-language และ Local SEO ที่แม่นยำ",
-  ],
-
-  priority: 94,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/ayutthaya-node.webp",
   coordinates: { lat: 14.3532, lng: 100.5689 },
-  isTourismHeavy: true,
-  marketSaturation: 68,
-  regionalLatency: 14,
+  districts: ["นิคมโรจนะ", "นิคมไฮเทค", "บางปะอิน", "พระนครศรีอยุธยา", "วังน้อย", "อุทัย"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คู่ค้าในอยุธยา (โดยเฉพาะนิคมอุตสาหกรรม) ต้องการความชัดเจนของ 'ข้อมูลเทคนิค' และ 'ภาพลักษณ์ที่มั่นคง' เว็บไซต์ที่แสดงมาตรฐาน ISO ชัดเจนและโหลดไวในระดับ Enterprise จะปิดดีลได้ง่ายกว่า",
+    technicalApproach:
+      "เน้นระบบ Security Hardening และการทำ Local SEO เจาะจงกลุ่มคู่ค้า B2B ในเขตนิคมอุตสาหกรรมหลัก",
+    localStrength:
+      "เข้าใจความซับซ้อนของธุรกิจโรงงานและระบบการจัดซื้อในเขตพระนครศรีอยุธยา พร้อมบริการ Audit ระบบถึงที่",
+    nicheIndustries: [
+      "อุตสาหกรรมอิเล็กทรอนิกส์และชิ้นส่วนยานยนต์",
+      "โรงงานผลิตพลังงานและระบบไฟฟ้า",
+      "ธุรกิจท่องเที่ยวและโรงแรมระดับพรีเมียม (มรดกโลก)",
+      "ศูนย์กระจายสินค้าและโลจิสติกส์ภาคกลาง",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมดูเก่าจนคู่ค้าต่างชาติไม่มั่นใจในศักยภาพ",
+      "หาสเปกสินค้าหรือใบรับรองมาตรฐานของโรงงานไม่เจอใน Google",
+      "ระบบติดต่อประสานงานฝ่ายจัดซื้อล่าช้าและไม่มีประสิทธิภาพ",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 128,
+      localClient: "ผู้ผลิตชิ้นส่วนอิเล็กทรอนิกส์รายใหญ่ นิคมโรจนะ",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานย่านบางปะอิน",
+      result:
+        "วางโครงสร้าง SEO และระบบ RFQ ใหม่ ยอดคู่ค้าต่างชาติทักสอบถามเพิ่มขึ้น 300% ใน 6 เดือน",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ โรจนะ",
+      "จ้างทำ SEO อยุธยา",
+      "ออกแบบเว็บโรงงาน ไฮเทค",
+      "Web Design Ayutthaya",
+    ],
+    promotions: [
+      {
+        title: "Industrial Hub Identity Audit",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานในนิคมอุตสาหกรรม รับฟรีบริการวิเคราะห์ภาพลักษณ์ Digital Identity และแผนงาน Technical SEO มูลค่า 9,500 บาท",
+        discount: "Free Identity & SEO Audit",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/ayutthaya-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รองรับการทำเว็บไซต์ 2 ภาษา (ไทย-อังกฤษ) สำหรับคู่ค้าต่างชาติไหม?",
+      answer:
+        "รองรับครับ เราออกแบบระบบ Multi-language ที่ถูกต้องตามหลัก SEO เพื่อให้คู่ค้าจากทุกมุมโลกค้นหาและเข้าถึงข้อมูลโรงงานของคุณได้ง่ายที่สุดครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ อยุธยา",
+    "ทำเว็บโรงงาน โรจนะ",
+    "Web Design Ayutthaya",
+    "Technical SEO Central Thailand",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 82,
+  regionalLatency: 10,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Heritage Sync Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์การนำเสนออัตลักษณ์เมืองเก่าให้ดูทันสมัยและน่าเชื่อถือสำหรับนักท่องเที่ยวและนักลงทุน",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Industrial B2B Mapping",
-      description: "ติดตั้งระบบรองรับข้อมูลโรงงานและชิ้นส่วนอุตสาหกรรมสำหรับนิคมโรจนะและไฮเทค",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Geo-Intent SEO",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ Local SEO ดักจับคีย์เวิร์ด 'ที่พักอยุธยา' และ 'โรงงานอยุธยา' เพื่อครองพื้นที่การค้นหา",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "อยุธยามีการผสมผสานระหว่างการท่องเที่ยวเชิงประวัติศาสตร์และเขตอุตสาหกรรมหนัก เว็บไซต์จึงต้องรองรับทั้ง Visual และ Technical",
-    technicalApproach:
-      "เน้นการทำ SEO สองทาง (Tourism & B2B) และระบบการแสดงผลที่รวดเร็วสำหรับนักท่องเที่ยวผ่านมือถือ",
-    localStrength: "เข้าใจความต้องการของนิคมอุตสาหกรรมและมาตรฐานความปลอดภัยที่โรงงานต้องการ",
-    nicheIndustries: [
-      "ที่พักและบูทีคโฮเต็ลเมืองเก่า",
-      "โรงงานผลิตชิ้นส่วนอิเล็กทรอนิกส์",
-      "ร้านอาหารและคาเฟ่ริมน้ำ",
-    ],
-    painPoints: ["เว็บโรงงานดูเก่าไม่น่าเชื่อถือ", "ธุรกิจท่องเที่ยวแข่งขันสูงใน Google Maps"],
-    competitorLevel: "high",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ โรจนะ",
-      "ออกแบบเว็บโรงงาน อยุธยา",
-      "จ้างทำ SEO บางปะอิน",
-      "ทำเว็บโรงแรม อยุธยา",
-    ],
-  },
-  districts: ["พระนครศรีอยุธยา", "บางปะอิน", "อุทัย", "วังน้อย", "นครหลวง"],
-  keywords: ["รับทำเว็บไซต์ อยุธยา", "ทำเว็บโรงงาน โรจนะ", "จ้างทำเว็บอยุธยา", "รับทำ SEO อยุธยา"],
-};
+});

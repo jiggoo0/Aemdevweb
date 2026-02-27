@@ -38,7 +38,7 @@ interface BreadcrumbItem {
   item?: string | BreadcrumbTarget;
 }
 
-export interface ValidationReport {
+interface ValidationReport {
   readonly isValid: boolean;
   readonly errors: readonly string[];
   readonly warnings: readonly string[];

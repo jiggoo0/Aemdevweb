@@ -1,94 +1,129 @@
 /**
- * [SERVICE_NODE]: PRACHUAP_PREMIUM_COAST v18.0.1
- * [STRATEGY]: Luxury Coastal | Tourism Authority | Dynamic Inheritance
+ * [SERVICE_NODE]: HUA_HIN_LUXURY_HUB v18.2.0
+ * [STRATEGY]: Coastal Luxury Branding | Global P-SEO | Dynamic Inheritance
+ * [MARKET]: Hua Hin, Pranburi, Luxury Villas & High-End Condos
  */
 
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const prachuapKhiriKhanNode: AreaNode = {
+export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
+  // --- Basic Identity ---
   slug: "prachuap-khiri-khan",
   province: "ประจวบคีรีขันธ์",
   region: "West",
-  templateSlug: "hotelresort",
-  title: "รับทำเว็บไซต์ ประจวบคีรีขันธ์ | ออกแบบเว็บรีสอร์ตหรูและธุรกิจท่องเที่ยวระดับสากล",
+  priority: 96,
+
+  title: "รับทำเว็บไซต์ หัวหิน ประจวบฯ | Digital Architecture สำหรับวิลล่าหรูและอสังหาฯ พรีเมียม",
   description:
-    "ยกระดับภาพลักษณ์ธุรกิจท่องเที่ยวหัวหินและประจวบฯ สู่ระดับ Ultra-Luxury ด้วยเว็บไซต์ที่มอบประสบการณ์ไร้รอยต่อ",
-  seoTitle: "รับทำเว็บไซต์ หัวหิน ประจวบคีรีขันธ์ ออกแบบเว็บรีสอร์ตหรู - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ประจวบคีรีขันธ์ หัวหิน ปราณบุรี ครบวงจร สำหรับโรงแรม 5 ดาว และธุรกิจพรีเมียม โหลดไวระดับโลก ติด SEO นานาชาติ",
+    "บริการวางระบบเว็บไซต์ระดับสากลในหัวหินและปราณบุรี เน้นดีไซน์ Luxury Coastal โหลดไวสายฟ้าแลบจากทั่วโลก และระบบจองตรง (Direct Booking) เพื่อกลุ่มลูกค้ากำลังซื้อสูง",
 
   longDescription:
-    "ประจวบคีรีขันธ์ โดยเฉพาะพื้นที่หัวหินและปราณบุรี คือจุดหมายปลายทางระดับ Ultra-Luxury ของนักท่องเที่ยวคุณภาพจากทั่วโลก " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับที่พักหรูและธุรกิจพรีเมียมของคุณด้วยเว็บไซต์ที่มอบประสบการณ์ 'Digital First Class' " +
-    "เราออกแบบระบบที่เน้นความวิจิตรของ Visual ควบคู่ไปกับความเร็วในการโหลดที่เป็นเลิศจากทุกมุมโลกผ่านระบบ Global CDN " +
-    "เพื่อให้แบรนด์หัวหินของคุณ ครองพื้นที่ในใจกลุ่มลูกค้ากำลังซื้อสูง (High Net Worth) อย่างมั่นคง",
+    "ประจวบคีรีขันธ์ โดยเฉพาะหัวหิน คือหัวใจของตลาด Ultra-Luxury ของไทยที่ต้องการมาตรฐานสากล " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับโครงการพูลวิลล่าหรู คอนโดมิเนียมพรีเมียม และบูทีครีสอร์ตที่ต้องการความโดดเด่นระดับโลก " +
+    "เราเน้นโครงสร้างที่รองรับ Global Traffic และการทำ Multi-language SEO เชิงลึก เพื่อให้แบรนด์ของคุณครองอันดับหนึ่งในคีย์เวิร์ดระดับ High-intent ทั้งไทยและต่างชาติ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "UHNW-Luxury Aesthetic: งานดีไซน์ระดับไฮเอนด์ที่ออกแบบมาเพื่อดึงดูดกลุ่มลูกค้าพรีเมียมจากทั่งยุโรป อเมริกา และเอเชีย",
-    "Global Velocity Hub: โครงสร้างเซิร์ฟเวอร์ที่รับประกันความเร็วในการเข้าถึงจากทั่วโลกเพื่อยอดจองตรง (Direct Booking)",
-    "Coastal Premier SEO: วางโครงสร้างการค้นหาครอบคลุมคีย์เวิร์ด 'Hua Hin Pool Villa' และ 'Pranburi Luxury Stay' อันดับหนึ่ง",
-  ],
-
-  priority: 96,
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/prachuap-khiri-khan-node.webp",
   coordinates: { lat: 11.8124, lng: 99.797 },
+  districts: ["หัวหิน", "ปราณบุรี", "กุยบุรี", "เมืองประจวบคีรีขันธ์", "ทับสะแก", "สามร้อยยอด"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในตลาดหัวหิน (UHNW) ตัดสินใจด้วย 'สุนทรียภาพ' และ 'ความสะดวกสบาย' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless ตั้งแต่การโหลดรูปภาพความละเอียดสูงไปจนถึงการจองออนไลน์ จะได้รับความเชื่อถือสูงสุด",
+    technicalApproach:
+      "เน้นระบบ Edge Computing (Global CDN) และ Image-Optimization ระดับวิศวกรรมเพื่อรองรับการเข้าชมจากยุโรปและอเมริกา",
+    localStrength:
+      "เข้าใจรสนิยมระดับ World-class และพลวัตของตลาดอสังหาฯ พรีเมียมในย่านหัวหิน-ปราณบุรี",
+    nicheIndustries: [
+      "โครงการพูลวิลล่าและอสังหาริมทรัพย์หรู",
+      "บูทีคโรงแรมและรีสอร์ตระดับ 5 ดาว",
+      "ศูนย์สุขภาพและความงามระดับพรีเมียม",
+      "ธุรกิจเช่าเรือยอร์ชและสปอร์ตคลับพรีเมียม",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไซต์ไม่สมราคาโครงการหลักสิบล้าน ทำให้เสียโอกาสปิดดีล",
+      "เว็บไซต์โหลดช้ามากสำหรับลูกค้าต่างชาติที่ต้องการความรวดเร็ว",
+      "ระบบจองตรงล้าสมัย ไม่รองรับ Payment Gateway มาตรฐานสากล",
+    ],
+    competitorLevel: "extreme",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 164,
+      localClient: "โครงการพูลวิลล่าหรูระดับ Ultra-Luxury ย่านเขาเต่า",
+    },
+    regionalPricing: {
+      startPrice: `${hotelResortService.price} บาท`,
+      timeline: "21-35 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: วิลล่าหรูหัวหิน",
+      result:
+        "วางโครงสร้าง SEO สองภาษาและระบบ Virtual Tour ยอดนัดดูโครงการจากต่างชาติเพิ่มขึ้น 300%",
+    },
+    hyperLocalKeywords: [
+      "Hua Hin Luxury Web Design",
+      "จ้างทำเว็บอสังหาฯ หัวหิน",
+      "รับทำ SEO ภาษาอังกฤษ ประจวบ",
+      "ทำเว็บไซต์รีสอร์ต ปราณบุรี",
+    ],
+    promotions: [
+      {
+        title: "Coastal Premier Identity Audit",
+        description:
+          "สิทธิพิเศษสำหรับโครงการอสังหาฯ และโรงแรมระดับพรีเมียม รับฟรีบริการวิเคราะห์ Brand Identity และแผนงาน Global CDN Strategy มูลค่า 15,000 บาท",
+        discount: "Free Strategy & Infra Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/prachuap-khiri-khan-node.webp",
+      gallery: [
+        "/images/templates/hotelresort/hotel-resort-node.webp",
+        "/images/case-studies/phuket-luxury-seo.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รองรับการทำระบบ Virtual Tour 360 หรือฝังวิดีโอ 4K ไหม?",
+      answer:
+        "รองรับครับ เราใช้ระบบ Streaming และ Lazy-loading ขั้นสูงเพื่อให้วิดีโอและภาพ 360 ของโครงการคุณแสดงผลได้อย่างลื่นไหลโดยไม่ทำให้หน้าเว็บโหลดช้าครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ หัวหิน",
+    "ออกแบบเว็บไซต์ ประจวบคีรีขันธ์",
+    "จ้างทำเว็บพูลวิลล่า",
+    "Global SEO Hua Hin",
+  ],
+
   isTourismHeavy: true,
   marketSaturation: 82,
-  regionalLatency: 15,
+  regionalLatency: 8,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "International Luxury Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์การนำเสนอแบรนด์ระดับ UHNW เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากทั่วโลก",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Global CDN Deployment",
+      title: "High-Performance Deployment",
       description:
-        "ติดตั้งโครงสร้างเว็บที่โหลดเร็วสายฟ้าแลบจากทุกมุมโลกเพื่อรองรับนักท่องเที่ยวต่างชาติ",
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Coastal Dominance SEO",
+      title: "Strategic Growth & Scaling",
       description:
-        "วางโครงสร้าง SEO หลายภาษา ครอบคลุมคีย์เวิร์ด 'Hua Hin Luxury Stay', 'Pranburi Resort'",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "ประจวบฯ โดยเฉพาะหัวหิน มีการแข่งขันระดับโลก เว็บไซต์ต้องเน้นความหรูหรา ความปลอดภัย และความรวดเร็วสูงสุด",
-    technicalApproach: "เน้น Image Optimization ขั้นสูงและระบบ Booking ที่มีความเสถียรระดับสากล",
-    localStrength: "เป็นจุดหมายปลายทางการท่องเที่ยวระดับพรีเมียมที่มีชื่อเสียงในระดับสากล",
-    nicheIndustries: [
-      "โรงแรมและพูลวิลล่าหรูหัวหิน",
-      "ธุรกิจอสังหาริมทรัพย์ระดับพรีเมียม",
-      "ศูนย์สุขภาพและ Wellness Retreat",
-    ],
-    painPoints: [
-      "เว็บไซต์ดูเก่าไม่สมราคาที่พักหลักล้าน",
-      "เน็ตริมทะเลบางจุดไม่เสถียรทำให้เว็บโหลดช้า",
-    ],
-    competitorLevel: "extreme",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ หัวหิน",
-      "ออกแบบเว็บพูลวิลล่า ปราณบุรี",
-      "จ้างทำ SEO หัวหิน",
-      "ทำเว็บโรงแรม ประจวบคีรีขันธ์",
-    ],
-  },
-  districts: ["เมืองประจวบคีรีขันธ์", "หัวหิน", "ปราณบุรี", "กุยบุรี", "ทับสะแก"],
-  keywords: [
-    "รับทำเว็บไซต์ หัวหิน",
-    "ทำเว็บโรงแรม ประจวบ",
-    "จ้างทำเว็บปราณบุรี",
-    "รับทำ SEO หัวหิน",
-  ],
-};
+});

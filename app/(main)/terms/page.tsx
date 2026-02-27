@@ -9,10 +9,7 @@ import type { Metadata } from "next";
 
 // --- 1. Infrastructure & UI Components ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-/** * [FIXED]: เปลี่ยนการนำเข้า HeroEngine จาก landing/Hero เป็น sections/HeroEngine
- * เพื่อแก้ไขปัญหา 'Property title does not exist on type IntrinsicAttributes'
- */
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import UniversalHero from "@/components/templates/sections/UniversalHero";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { generateBreadcrumbSchema } from "@/lib/schema";
@@ -46,7 +43,7 @@ export default function TermsPage() {
       <JsonLd data={breadcrumbSchema} />
 
       {/* 01. HERO LAYER: Strategic Alignment */}
-      <HeroEngine
+      <UniversalHero
         title={
           <>
             ข้อตกลงการทำงาน <br />

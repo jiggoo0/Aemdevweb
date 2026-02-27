@@ -79,23 +79,36 @@ const Navbar = () => {
       >
         <div className="bg-surface-main/80 border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border px-5 shadow-lg backdrop-blur-xl md:h-16 md:px-8">
           {/* Logo Section */}
-          <Link
-            href="/"
-            className="group relative z-[710] flex items-center gap-2"
-            onClick={() => setIsOpen(false)}
-            aria-label="Home"
-          >
-            <div className="bg-brand-primary shadow-glow flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-black text-white uppercase transition-transform group-hover:rotate-6">
-              AEM
+          <div className="flex items-center gap-4">
+            <Link
+              href="/"
+              className="group relative z-[710] flex items-center gap-2"
+              onClick={() => setIsOpen(false)}
+              aria-label="Home"
+            >
+              <div className="bg-brand-primary shadow-glow flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-black text-white uppercase transition-transform group-hover:rotate-6">
+                AEM
+              </div>
+              <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
+                DEVWEB
+              </span>
+            </Link>
+
+            {/* System Intelligence HUD */}
+            <div className="hidden items-center gap-2 border-l border-white/10 pl-4 md:flex">
+              <div className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_var(--brand-primary)]"></span>
+              </div>
+              <span className="font-mono text-[7px] font-black tracking-[0.2em] text-emerald-500 uppercase opacity-60">
+                Node_Healthy_v18.4
+              </span>
             </div>
-            <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
-              DEVWEB
-            </span>
-          </Link>
+          </div>
 
           {/* Desktop Navigation (Visible on Large Screens) */}
           <nav className="hidden items-center gap-2 lg:flex" role="navigation">
-            <ul className="flex items-center gap-1 rounded-full bg-white/5 p-1 pr-6 backdrop-blur-sm">
+            <ul className="bg-border/20 flex items-center gap-1 rounded-full p-1 pr-6 backdrop-blur-sm">
               {navigationItems.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -115,7 +128,7 @@ const Navbar = () => {
                   </li>
                 );
               })}
-              <li className="mx-2 h-4 w-px bg-white/10" aria-hidden="true" />
+              <li className="bg-border/20 mx-2 h-4 w-px" aria-hidden="true" />
               <li>
                 <ThemeToggle />
               </li>

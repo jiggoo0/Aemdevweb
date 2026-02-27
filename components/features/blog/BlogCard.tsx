@@ -38,7 +38,7 @@ const BlogCard = ({ post, index = 0, priority = false }: BlogCardProps) => {
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-90 transition-transform duration-[1.5s] ease-out group-hover:scale-105 group-hover:opacity-100"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="from-surface-card absolute inset-0 z-10 bg-gradient-to-t via-transparent to-transparent opacity-60" />
       </div>

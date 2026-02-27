@@ -9,17 +9,16 @@
     "pnpm": ">=10.0.0"
   },
   "scripts": {
-    "dev": "WATCHPACK_POLLING=true next dev --turbo",
+    "dev": "WATCHPACK_POLLING=true next dev",
     "build": "pnpm test:schema && next build --webpack",
-    "postbuild": "bundlesize",
     "start": "next start",
-    "test:schema": "tsx scripts/test-schema.ts",
-    "test:size": "bundlesize",
-    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "fix": "pnpm format && pnpm lint --fix",
-    "knip": "knip --cache --no-exit-code",
+    "type-check": "tsc --noEmit",
+    "check": "pnpm run format && pnpm run lint && pnpm run type-check && pnpm run build",
+    "unused": "knip",
+    "aipc": "pnpm run check && pnpm run unused",
+    "test:schema": "tsx scripts/test-schema.ts",
     "clean": "rm -rf .next node_modules pnpm-lock.yaml && GYP_DEFINES=\"android_ndk_path=''\" pnpm install"
   },
   "bundlesize": [
@@ -105,6 +104,10 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "@openrouter/sdk",
+      "sharp"
     ]
   }
 }

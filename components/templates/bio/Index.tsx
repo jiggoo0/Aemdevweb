@@ -1,6 +1,6 @@
 /**
- * [TEMPLATE]: BIO_IDENTITY_ORCHESTRATOR v18.0.40 (RSC_ENFORCED)
- * [STRATEGY]: Identity Consolidation | Specialist FAQ Activation | Server-Side Rendering
+ * [TEMPLATE]: BIO_IDENTITY_ORCHESTRATOR v18.5.0 (SPECIALIST_HARDENED)
+ * [STRATEGY]: Sequence-First Layout | Specialist Personal Branding | Identity Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -10,64 +10,51 @@ import JsonLd from "@/components/seo/JsonLd";
 import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";
 
-// --- 1. Modular Component Registry (Identity Suite) ---
-import { IdentityNode } from "../sections/IdentityNode";
-import { ActionRegistry } from "../sections/ActionRegistry";
-import { ProjectHighlight } from "../sections/ProjectHighlight";
-import { CapabilityGraph } from "../sections/CapabilityGraph";
-import { CredentialStack } from "../sections/CredentialStack";
+// --- 1. Modular Component Registry ---
+import UniversalHero from "@/components/templates/sections/UniversalHero";
+import UniversalRegistry from "@/components/templates/sections/UniversalRegistry";
+import UniversalLogoCloud from "@/components/templates/sections/UniversalLogoCloud";
 import { DirectTerminal } from "../sections/DirectTerminal";
 import { RegionalRoadmap } from "../sections/RegionalRoadmap";
 import { LocalInsight } from "../sections/LocalInsight";
-
-/** * [INJECT]: เปิดใช้งานระบบ Intelligence FAQ ด้วย Named Import { DynamicFAQ }
- * [TECHNICAL_FIX]: ปรับปรุงเพื่อแก้ปัญหา 'Attempted import error' ในรอบ Build ก่อนหน้า
- */
 import { DynamicFAQ } from "../sections/DynamicFAQ";
 
-/**
- * @component BioTemplate
- * @description นามบัตรดิจิทัลระดับ Specialist ที่รวบรวมอัตลักษณ์ ผลงาน และความรู้เข้าด้วยกัน
- */
 const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
-  // [LOGIC]: Direct Schema Generation for RSC Compliance
   const schema = generateUniversalSchema(data);
+  const { theme } = data;
 
   return (
-    <LayoutEngine spacing="none">
+    <LayoutEngine spacing="none" theme={theme}>
       <JsonLd data={schema} />
 
-      <main className="flex min-h-[100dvh] flex-col items-center bg-[var(--surface-main)] px-4 py-16 selection:bg-[var(--brand-primary)] selection:text-black md:py-24">
-        <div className="w-full max-w-xl space-y-16">
-          {/* --- Phase 01: Core Identification --- 
-              แสดงตัวตนและสถานะ Real-time ของ Specialist
-          */}
-          <IdentityNode
-            name={data.title}
-            description={data.description}
-            image={data.image}
-            banner={data.regionalVisuals?.banner}
-          />
+      <main className="bg-surface-main relative flex flex-col items-center antialiased">
+        <h2 className="sr-only">Specialist Identity & Performance Portfolio</h2>
 
-          {/* [NEW]: Regional Promotions (Specialist Style) */}
+        <div className="w-full max-w-3xl space-y-24 px-4 py-16 md:py-32">
+          {/* [SEQUENCE_00]: CORE HERO (Universal Entry) */}
+          <section>
+            <UniversalHero data={data} />
+          </section>
+
+          {/* [SEQUENCE_01]: PERSONAL PROMOTION (Surface Card) */}
           {data.promotions && data.promotions.length > 0 && (
             <section className="relative z-10 w-full">
-              <div className="rounded-[var(--radius)] border border-dashed border-[var(--brand-primary)]/40 bg-[var(--brand-primary)]/5 p-8 text-center backdrop-blur-md">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--brand-primary)]/20 bg-white/5 px-4 py-1 dark:bg-black/20">
-                  <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)]" />
-                  <span className="font-mono text-[9px] font-black tracking-widest text-[var(--brand-primary)] uppercase">
-                    Personal_Promotion_Node
+              <div className="rounded-card border-brand-primary/40 bg-brand-primary/5 border border-dashed p-8 text-center backdrop-blur-md">
+                <div className="border-brand-primary/20 bg-surface-card shadow-pro-sm mb-6 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
+                  <div className="bg-brand-primary shadow-glow-sm h-1.5 w-1.5 animate-pulse rounded-full" />
+                  <span className="text-brand-primary font-mono text-[9px] font-black tracking-widest uppercase">
+                    Personal_Bonus_Node
                   </span>
                 </div>
-                <h3 className="mb-2 text-2xl font-black tracking-tighter uppercase italic">
+                <h3 className="text-text-primary mb-2 text-2xl font-black tracking-tighter uppercase italic md:text-4xl">
                   {data.promotions[0].title}
                 </h3>
-                <p className="mb-6 text-sm font-medium opacity-60">
-                  {data.promotions[0].description}
+                <p className="text-text-secondary mb-8 text-lg font-medium italic opacity-70">
+                  “{data.promotions[0].description}”
                 </p>
                 {data.promotions[0].discount && (
-                  <div className="inline-block rounded-2xl border-2 border-[var(--brand-primary)] bg-[var(--brand-primary)]/10 px-8 py-3">
-                    <span className="text-3xl font-black text-[var(--brand-primary)] italic">
+                  <div className="bg-brand-primary shadow-glow-sm inline-block rounded-2xl px-10 py-4">
+                    <span className="text-surface-main text-3xl font-black italic">
                       {data.promotions[0].discount}
                     </span>
                   </div>
@@ -76,67 +63,57 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
             </section>
           )}
 
-          {/* --- Phase 02: Strategic Linkage --- 
-              ศูนย์รวม Link สำคัญ (Registry Mapping)
-          */}
-          <ActionRegistry links={data.items || []} />
+          {/* [SEQUENCE_02]: SKILLS & LINKS (Registry Matrix) */}
+          <section className="bg-surface-offset/50 rounded-section border-border/40 border p-8 shadow-inner md:p-12">
+            <UniversalRegistry data={data} />
+          </section>
 
-          {/* --- Phase 03: Performance Evidence --- 
-              คัดกรองผลงานที่โดดเด่น (Featured Portfolio)
-          */}
-          <ProjectHighlight projects={data.featuredProjects} />
-
-          {/* --- Phase 04: Capability Metrics --- 
-              จำลองข้อมูลความสามารถผ่าน Data Visualization (Graph Node)
-          */}
-          <CapabilityGraph skills={data.coreFeatures || []} />
-
-          {/* [NEW]: Regional Authority for Bio Nodes */}
+          {/* [SEQUENCE_03]: REGIONAL AUTHORITY (Context Node) */}
           {data.province && (
-            <div className="space-y-16 py-8">
-              <div className="-mx-4 md:-mx-10">
-                <LocalInsight
-                  insight={data.localContext?.marketInsight || ""}
-                  painPoints={(data.localContext?.painPoints as string[]) || []}
-                  marketSaturation={data.marketSaturation}
-                />
-                <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
-              </div>
-              <DirectTerminal
-                mode="health-check"
-                province={data.province}
-                latency={data.regionalLatency}
+            <section className="border-border/10 space-y-20 border-t py-8">
+              <LocalInsight
+                insight={data.localContext?.marketInsight || ""}
+                painPoints={(data.localContext?.painPoints as string[]) || []}
+                marketSaturation={data.marketSaturation}
               />
-            </div>
+              <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
+              <div className="mx-auto max-w-xl">
+                <DirectTerminal
+                  mode="health-check"
+                  province={data.province}
+                  latency={data.regionalLatency}
+                />
+              </div>
+            </section>
           )}
 
-          {/* --- Phase 05: Intelligence Hub (FAQ) ---
-              [STRATEGIC_INSERTION]: ลดภาระการตอบคำถามซ้ำซากและกำจัด Dead Code ในโปรเจกต์
-          */}
-          <div className="border-t border-[var(--foreground)]/5 pt-4">
+          {/* [SEQUENCE_04]: INTELLIGENCE HUB (FAQ) */}
+          <section className="border-border/10 border-t pt-12">
             <DynamicFAQ
               items={data.faqs}
               title="Process_FAQ"
               description="ข้อมูลเบื้องต้นเกี่ยวกับขั้นตอนการทำงานและการร่วมงานในระดับ Specialist"
             />
-          </div>
+          </section>
 
-          {/* --- Phase 06: Experience Stack --- 
-              การยืนยันความน่าเชื่อถือผ่านประวัติและรางวัล
-          */}
-          <CredentialStack trustTitle={data.clientTrust} />
+          {/* [SEQUENCE_05]: EXPERIENCE STACK (Proof Node) */}
+          <section className="py-8">
+            <UniversalLogoCloud
+              title={data.clientTrust || "Authorized Experience"}
+              theme="minimal_bar"
+            />
+          </section>
 
-          {/* --- Phase 07: Direct Gateway --- 
-              Terminal Contact Node สำหรับการสื่อสารโดยตรง
-          */}
-          <DirectTerminal mode="contact" />
+          {/* [SEQUENCE_06]: DIRECT TERMINAL (Conversion) */}
+          <section className="pt-8">
+            <DirectTerminal mode="contact" />
+          </section>
 
-          {/* --- FOOTER: System Status --- */}
-          <footer className="pt-8 text-center">
-            <div className="inline-flex items-center gap-2 opacity-20">
-              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)]" />
+          <footer className="pt-16 text-center opacity-20">
+            <div className="inline-flex items-center gap-3">
+              <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
               <p className="font-mono text-[8px] tracking-[0.5em] uppercase">
-                Architected_By_AEMZA_v18.0.40_RSC
+                Architected_By_AEMZA_v18.5.0_FINAL
               </p>
             </div>
           </footer>

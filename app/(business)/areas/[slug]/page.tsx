@@ -25,6 +25,7 @@ import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
+import { RegionalVisuals } from "@/components/features/areas/RegionalVisuals";
 
 /** [SSG]: รับประกันผล Build เป็น Static 100% ทั่วไทย */
 export const dynamicParams = false;
@@ -111,6 +112,9 @@ export default async function AreaPage(props: PageProps) {
           เพื่อให้สีแบรนด์และ Spacing ของแต่ละจังหวัดทำงานได้ลื่นไหลที่สุด
       */}
       <TemplateRenderer data={templateData} renderMode="full" />
+
+      {/* Regional Assets Layer: Show success logs for specific area */}
+      <RegionalVisuals data={templateData.regionalVisuals} province={area.province} />
 
       {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">

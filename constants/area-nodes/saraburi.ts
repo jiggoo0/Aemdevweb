@@ -3,88 +3,125 @@
  * [STRATEGY]: Heavy Industry | Logistics | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { corporateService } from "@/constants/services/corporate";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const saraburiNode: AreaNode = {
+export const saraburiNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "saraburi",
   province: "สระบุรี",
   region: "Central",
-  templateSlug: "corporate",
-  title: "รับทำเว็บไซต์ สระบุรี | ยกระดับภาพลักษณ์โรงงานอุตสาหกรรมและธุรกิจขนส่ง",
+  priority: 94,
+
+  title: "รับทำเว็บไซต์ สระบุรี | Digital Infrastructure สำหรับอุตสาหกรรมก่อสร้างและโลจิสติกส์",
   description:
-    "บริการรับทำเว็บไซต์โรงงานในสระบุรี เน้นความมั่นใจให้คู่ค้า B2B และการทำ SEO สำหรับอุตสาหกรรมหนักและโลจิสติกส์",
-  seoTitle: "รับทำเว็บไซต์ สระบุรี ออกแบบเว็บโรงงาน โลจิสติกส์ ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สระบุรี สำหรับนิคมอุตสาหกรรม โรงงานผลิตวัสดุก่อสร้าง และธุรกิจขนส่ง มาตรฐานสากล รองรับ SEO อุตสาหกรรม",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าอุตสาหกรรมในสระบุรี เจาะกลุ่มโรงงานปูนซีเมนต์และวัสดุก่อสร้างย่านแก่งคอย-หนองแค เน้นความโปรระดับ B2B โหลดไว และระบบ RFQ ที่แม่นยำ",
 
   longDescription:
-    "สระบุรี ประตูสู่ภาคอีสานและฐานการผลิตวัสดุก่อสร้างและปูนซีเมนต์ที่ใหญ่ที่สุดในประเทศไทย " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับโรงงานอุตสาหกรรมและธุรกิจขนส่งในสระบุรีด้วยเว็บไซต์มาตรฐานสากล " +
-    "เราออกแบบระบบที่เน้นความน่าเชื่อถือระดับ B2B (Trust Architecture) และความปลอดภัยข้อมูลสูงสุด " +
-    "เพื่อให้ธุรกิจในเขตรามแก่งคอย หนองแค และพื้นที่ยุทธศาสตร์ของสระบุรี ครองอันดับหนึ่งในสายตาคู่ค้าและฝ่ายจัดซื้อทั่วประเทศ",
+    "สระบุรี 'ประตูสู่ภาคอีสาน' และหัวใจของอุตสาหกรรมก่อสร้างไทย " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานผลิตและธุรกิจขนส่งที่ต้องการแสดงศักยภาพการจัดส่งสู่ระดับสากล " +
+    "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Local Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาฝ่ายจัดซื้อทั่วประเทศ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Industrial Authority Design: งานดีไซน์ที่สะท้อนถึงนวัตกรรมการผลิตและความมั่นคงของโรงงานวัสดุก่อสร้างรายใหญ่",
-    "B2B Conversion Mastery: ระบบจัดการแคตตาล็อกสินค้าและระบบ RFQ ออนไลน์ที่ออกแบบมาเพื่อธุรกิจอุตสาหกรรมและขนส่งโดยเฉพาะ",
-    "Logistics Hub SEO: วางโครงสร้างการค้นหาครอบคลุมคีย์เวิร์ดโรงงานในเขตนิคมอุตสาหกรรมหนองแคและแก่งคอยอย่างแม่นยำ",
-  ],
-
-  priority: 89,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/saraburi-node.webp",
   coordinates: { lat: 14.5289, lng: 100.9101 },
-  marketSaturation: 55,
+  districts: ["แก่งคอย", "หนองแค", "เมืองสระบุรี", "พระพุทธบาท", "วิหารแดง", "มวกเหล็ก"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คู่ค้าในสระบุรี (โดยเฉพาะกลุ่มวัสดุก่อสร้าง) ให้ความสำคัญกับ 'สเปกที่ถูกต้อง' และ 'ความมั่นคงของบริษัท' เว็บไซต์ที่แสดงข้อมูลเทคนิคครบถ้วนและระบบความปลอดภัยสูงจะได้รับเลือกก่อนเสมอ",
+    technicalApproach:
+      "เน้นระบบ Search สำหรับ Part Number และสเปกสินค้าอุตสาหกรรม พร้อมการทำ SEO สำหรับตลาดอุตสาหกรรมหนัก",
+    localStrength:
+      "เข้าใจความซับซ้อนของธุรกิจวัสดุก่อสร้างและระบบโลจิสติกส์ในเขตสระบุรี พร้อมบริการที่ปรึกษาเชิงเทคนิคถึงหน้างาน",
+    nicheIndustries: [
+      "โรงงานผลิตปูนซีเมนต์และคอนกรีตผสมเสร็จ",
+      "เหมืองหินและโรงโม่หิน (Industrial Rock)",
+      "ศูนย์กระจายสินค้าวัสดุก่อสร้างรายใหญ่",
+      "ธุรกิจขนส่งและชิปปิ้งข้ามภูมิภาค",
+    ],
+    painPoints: [
+      "เว็บไซต์เดิมดูเก่าไม่สะท้อนมาตรฐานสากลของบริษัท",
+      "หาข้อมูลใบรับรองมาตรฐาน (ISO/TIS) บนหน้าเว็บได้ยาก",
+      "ระบบติดต่อประสานงานฝ่ายจัดซื้อล่าช้าและไม่มีประสิทธิภาพ",
+    ],
+    competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 148,
+      localClient: "ผู้ผลิตวัสดุก่อสร้างรายใหญ่ ย่านหนองแค",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงโม่หินสระบุรี",
+      result: "สร้างระบบแคตตาล็อกสินค้าและ SEO ใหม่ ยอด RFQ จากโครงการก่อสร้างภาครัฐเพิ่มขึ้น 200%",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ แก่งคอย",
+      "จ้างทำเว็บโรงงาน สระบุรี",
+      "Construction SEO Thailand",
+      "ทำแคตตาล็อกสินค้าก่อสร้าง",
+    ],
+    promotions: [
+      {
+        title: "B2B Catalog Transformation",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานวัสดุก่อสร้าง รับฟรีระบบ Digital Catalog รองรับ SKU หลักพันรายการ พร้อมระบบ RFQ มูลค่า 12,000 บาท",
+        discount: "Free Catalog & RFQ Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/saraburi-node.webp",
+      gallery: [
+        "/images/services/catalog-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ระบบรองรับการดาวน์โหลดไฟล์ Spec Sheet (PDF) ไหม?",
+      answer:
+        "รองรับครับ เราออกแบบปุ่ม Download ที่เห็นชัดเจนและจัดการไฟล์เป็นหมวดหมู่ เพื่อให้ฝ่ายจัดซื้อเข้าถึงข้อมูลวิศวกรรมได้ง่ายที่สุดครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ สระบุรี",
+    "ทำเว็บโรงงาน แก่งคอย",
+    "Web Design Saraburi",
+    "Construction Industry SEO",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 78,
   regionalLatency: 11,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "B2B Trust Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์และรวบรวมใบรับรองมาตรฐานอุตสาหกรรม (ISO) เพื่อสร้างความเชื่อมั่นบนหน้าเว็บ",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Logistics Sync Deployment",
+      title: "High-Performance Deployment",
       description:
-        "ติดตั้งระบบแสดงข้อมูลการบริการและเส้นทางขนส่งที่เป็นมาตรฐานสากลเพื่อรองรับคู่ค้า",
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Industrial SEO Layering",
-      description: "วางรากฐานคีย์เวิร์ดเฉพาะทางอุตสาหกรรมหนักเพื่อครองอันดับหนึ่งในพื้นที่สระบุรี",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "สระบุรีคือประตูสู่อีสานและศูนย์กลางอุตสาหกรรมหนัก เว็บไซต์จึงต้องสะท้อนความมั่นคงและความเป็นมืออาชีพรายใหญ่",
-    technicalApproach:
-      "เน้นระบบโครงสร้างที่ปลอดภัย (Security First) และการทำ SEO ในตลาดที่มีคู่แข่งเฉพาะทาง",
-    localStrength: "เข้าใจความต้องการของฝ่ายจัดซื้อโรงงานและระบบการทำงานของนิคมอุตสาหกรรม",
-    nicheIndustries: [
-      "โรงงานผลิตปูนซีเมนต์และวัสดุก่อสร้าง",
-      "ธุรกิจขนส่งสินค้าข้ามภูมิภาค",
-      "นิคมอุตสาหกรรมแก่งคอย/หนองแค",
-    ],
-    painPoints: ["ภาพลักษณ์เว็บไม่สอดคล้องกับขนาดบริษัท", "หาเบอร์ติดต่อหรือแผนที่บริษัทไม่เจอ"],
-    competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ แก่งคอย",
-      "ออกแบบเว็บโรงงาน สระบุรี",
-      "จ้างทำ SEO หนองแค",
-      "ทำเว็บโลจิสติกส์ สระบุรี",
-    ],
-  },
-  districts: ["เมืองสระบุรี", "แก่งคอย", "หนองแค", "พระพุทธบาท", "วิหารแดง"],
-  keywords: [
-    "รับทำเว็บไซต์ สระบุรี",
-    "ทำเว็บโรงงาน สระบุรี",
-    "จ้างทำเว็บสระบุรี",
-    "รับทำ SEO สระบุรี",
-  ],
-};
+});

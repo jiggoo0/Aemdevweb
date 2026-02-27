@@ -82,6 +82,22 @@ export const pathumThaniNode: AreaNode = {
       "จ้างทำ SEO คลองหลวง",
       "ทำเว็บอุตสาหกรรม บางกะดี",
     ],
+    promotions: [
+      {
+        title: "Innovation Node Acceleration (Pathum)",
+        description:
+          "สิทธิพิเศษสำหรับบริษัทใน Science Park และ Startup สายเทคโนโลยี รับฟรีบริการ Technical Infrastructure Audit ระดับ ISO Standard มูลค่า 10,500 บาท",
+        discount: "Free Engineering Audit",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/pathum-thani-node.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/services/corporate-node.webp",
+      ],
+    },
   },
   districts: ["เมืองปทุมธานี", "คลองหลวง", "ธัญบุรี", "ลำลูกกา", "ลาดหลุมแก้ว"],
   keywords: [

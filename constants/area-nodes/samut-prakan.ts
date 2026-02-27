@@ -3,87 +3,125 @@
  * [STRATEGY]: Logistics & Export | Industrial Authority | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { corporateService } from "@/constants/services/corporate";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const samutPrakanNode: AreaNode = {
+export const samutPrakanNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "samut-prakan",
   province: "สมุทรปราการ",
   region: "Central",
-  templateSlug: "corporate",
-  title: "รับทำเว็บไซต์ สมุทรปราการ | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจนำเข้า-ส่งออก",
+  priority: 99,
+
+  title: "รับทำเว็บไซต์ สมุทรปราการ | Digital Monolith สำหรับโรงงานและธุรกิจ Maritime Logistics",
   description:
-    "บริการรับทำเว็บไซต์ในสมุทรปราการ ยกระดับธุรกิจชิปปิ้ง โลจิสติกส์ และโรงงานสู่มาตรฐานโลก ติดหน้าแรก Google ทั้งไทยและต่างแดน",
-  seoTitle: "รับทำเว็บไซต์ สมุทรปราการ ออกแบบเว็บโรงงาน โลจิสติกส์ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สมุทรปราการ สำหรับธุรกิจขนส่งข้ามชาติและอุตสาหกรรมการผลิต มาตรฐานสากล รองรับ SEO และระบบ RFQ ออนไลน์",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าอุตสาหกรรมในสมุทรปราการ เจาะกลุ่มบางปู-บางพลี เน้นความเชื่อมั่นระดับสากล โหลดไว และระบบ RFQ ที่แม่นยำเพื่อปิดดีลส่งออก",
 
   longDescription:
-    "สมุทรปราการ ป้อมปราการทางเศรษฐกิจที่เป็นประตูบก เรือ และอากาศที่สำคัญที่สุดของประเทศไทย " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจโรงงานและโลจิสติกส์ในสมุทรปราการด้วยเว็บไซต์มาตรฐาน Enterprise Grade " +
-    "ไม่ว่าจะเป็นธุรกิจชิปปิ้งย่านบางพลี หรือโรงงานผลิตอะไหล่ยนต์ในเขตบางปู เราออกแบบระบบที่เน้น 'ความเชื่อมั่นระดับสากล' " +
-    "ด้วยเทคโนโลยีที่โหลดไวที่สุดและวางกลยุทธ์ SEO เพื่อให้ฝ่ายจัดซื้อทั่วโลก ค้นหาธุรกิจของคุณเจอเป็นอันดับแรก",
+    "สมุทรปราการคือ 'ป้อมปราการทางเศรษฐกิจ' และประตูการค้าที่สำคัญที่สุดของไทย " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงวิศวกรรมสำหรับโรงงานอุตสาหกรรมและธุรกิจชิปปิ้งข้ามชาติที่ต้องการความสมบูรณ์แบบ " +
+    "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาคู่ค้าทั่วโลก",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Export-Elite Authority: งานดีไซน์ที่สะท้อนถึงศักยภาพระดับพาร์ทเนอร์ข้ามชาติ เพื่อดึงดูดนักลงทุนและคู่ค้าจากยุโรปและอเมริกา",
-    "Logistics-Flow Mastery: ระบบจัดการข้อมูลชิปปิ้งและระบบ RFQ ออนไลน์ที่ออกแบบมาเพื่อลดขั้นตอนการทำงานและเพิ่มยอดขาย B2B",
-    "Global Gateway SEO: วางโครงสร้างการค้นหาครอบคลุมคีย์เวิร์ดอุตสาหกรรมในพื้นที่ยุทธศาสตร์ เช่น สนามบินสุวรรณภูมิและท่าเรือคลองเตย",
-  ],
-
-  priority: 99,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/samut-prakan-node.webp",
   coordinates: { lat: 13.5991, lng: 100.5967 },
+  districts: ["บางปู", "บางพลี", "เมืองสมุทรปราการ", "พระประแดง", "บางบ่อ", "สุวรรณภูมิ"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คู่ค้าในสมุทรปราการ (โดยเฉพาะกลุ่มโรงงานย่านบางปู) ให้ความสำคัญกับ 'สเปกที่ถูกต้อง' และ 'ความรวดเร็วในการติดต่อ' เว็บไซต์ที่ข้อมูลครบและมีระบบ RFQ จะได้รับเลือกเป็นพาร์ทเนอร์ก่อนเสมอ",
+    technicalApproach:
+      "เน้นระบบ Database ที่รองรับ Part Number จำนวนมหาศาล และการทำ SEO ภาษาอังกฤษเพื่อดักจับ Traffic จากต่างชาติย่านสุวรรณภูมิ",
+    localStrength:
+      "เข้าใจกระบวนการทำงานของอุตสาหกรรมชิ้นส่วนยานยนต์และงานโลจิสติกส์ท่าเรือ พร้อมบริการ Audit ระบบถึงโรงงานในพื้นที่",
+    nicheIndustries: [
+      "โรงงานผลิตชิ้นส่วนยานยนต์ (บางปู/บางพลี)",
+      "ธุรกิจชิปปิ้งและโกดังให้เช่า (Maritime Logistics)",
+      "ตัวแทนจำหน่ายเครื่องจักรกลหนัก (Machinery)",
+      "ธุรกิจบริการรอบสนามบินสุวรรณภูมิ",
+    ],
+    painPoints: [
+      "แคตตาล็อกสินค้าเล่มหนาเกินไปจนลูกค้าหาของไม่เจอ",
+      "เว็บไซต์เดิมโหลดช้าจนคู่ค้าต่างชาติปิดหนี",
+      "ระบบสต็อกออนไลน์ไม่เชื่อมโยงกับฝ่ายขาย",
+    ],
+    competitorLevel: "extreme",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 192,
+      localClient: "ผู้ผลิตชิ้นส่วนอะไหล่ส่งออกรายใหญ่ ย่านบางพลี",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "20-30 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: บริษัทชิปปิ้งบางปู",
+      result:
+        "วางระบบ Tracking และแคตตาล็อกบริการใหม่ ยอดลูกค้าองค์กรข้ามชาติเพิ่มขึ้น 300% ใน 1 ปี",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บางปู",
+      "จ้างทำเว็บโรงงาน บางพลี",
+      "Maritime SEO Thailand",
+      "ทำแคตตาล็อกออนไลน์ สมุทรปราการ",
+    ],
+    promotions: [
+      {
+        title: "Maritime Digital Fortress",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจโลจิสติกส์และโรงงาน รับฟรีบริการ Maritime SEO Blueprint พร้อมระบบ Multi-language (TH/EN) มูลค่า 15,000 บาท",
+        discount: "Free Global SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/samut-prakan-node.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/services/catalog-node.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ระบบแคตตาล็อกรองรับการค้นหาผ่าน Part Number ไหม?",
+      answer:
+        "รองรับครับ เราออกแบบระบบ Search ให้สามารถดักจับรหัสสินค้าและสเปกทางวิศวกรรมได้แม่นยำ 100% ครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ สมุทรปราการ",
+    "ทำเว็บโรงงาน บางปู",
+    "Web Design Bangphli",
+    "Maritime Logistics SEO",
+  ],
+
+  isTourismHeavy: false,
   marketSaturation: 85,
-  regionalLatency: 4,
+  regionalLatency: 8,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Export-Grade Audit",
-      description: "วิเคราะห์ภาพลักษณ์บริษัทให้ดูโปรระดับพาร์ทเนอร์ข้ามชาติเพื่อรองรับงานส่งออก",
+      title: "Industrial Data Architecture",
+      description:
+        "วางรากฐานโครงสร้างข้อมูล SKU และเทคนิคอลเซ็ตอัพเพื่อรองรับระบบแคตตาล็อกขนาดใหญ่",
     },
     {
       step: "02",
-      title: "Logistic Gateway Sync",
-      description: "ติดตั้งระบบรองรับข้อมูลชิปปิ้งและการติดต่อสื่อสารกับคู่ค้าจากสนามบินและท่าเรือ",
+      title: "Global Connectivity Layer",
+      description: "เชื่อมโยงระบบ RFQ และการตั้งค่า Multi-language เพื่อรองรับคู่ค้าจากต่างชาติ",
     },
     {
       step: "03",
-      title: "Global Supply SEO",
-      description: "ทำ SEO คีย์เวิร์ดอุตสาหกรรมในสมุทรปราการเพื่อให้ฝ่ายจัดซื้อทั่วโลกหาคุณเจอ",
+      title: "Logistics Hub Domination",
+      description:
+        "ทำ Entity Mapping เจาะกลุ่มพื้นที่บางปู-บางพลี เพื่อครองอันดับหนึ่งในสายตาโรงงานอุตสาหกรรม",
     },
   ],
-  localContext: {
-    marketInsight:
-      "สมุทรปราการคือหัวใจของโลจิสติกส์ไทย เว็บไซต์ต้องทำหน้าที่เป็น 'ด่านหน้าทางการค้า' ที่ปิดดีลได้ทันที",
-    technicalApproach:
-      "เน้นระบบ Multilingual และความปลอดภัยของเซิร์ฟเวอร์เพื่อรองรับคู่ค้าจากยุโรปและอเมริกา",
-    localStrength:
-      "มีความเชี่ยวชาญในการออกแบบ Flow เว็บไซต์ที่สอดคล้องกับธุรกิจส่งออกและนิคมอุตสาหกรรม",
-    nicheIndustries: [
-      "ธุรกิจขนส่งและชิปปิ้งนำเข้า-ส่งออก",
-      "โรงงานผลิตอะไหล่ยนต์",
-      "ศูนย์จำหน่ายสินค้าอุตสาหกรรม",
-    ],
-    painPoints: ["ชื่อเสียงเยอะแต่เว็บหาไม่เจอใน Google", "เว็บไม่รองรับภาษาอังกฤษที่ดูเป็นทางการ"],
-    competitorLevel: "extreme",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ บางพลี",
-      "ออกแบบเว็บโรงงาน สมุทรปราการ",
-      "จ้างทำ SEO พระประแดง",
-      "ทำเว็บโลจิสติกส์ บางบ่อ",
-    ],
-  },
-  districts: ["เมืองสมุทรปราการ", "บางพลี", "บางบ่อ", "พระประแดง", "บางเสาธง"],
-  keywords: [
-    "รับทำเว็บไซต์ สมุทรปราการ",
-    "ทำเว็บโรงงาน บางพลี",
-    "จ้างทำเว็บโลจิสติกส์",
-    "รับทำ SEO สมุทรปราการ",
-  ],
-};
+});

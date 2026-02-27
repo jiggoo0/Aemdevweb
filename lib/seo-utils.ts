@@ -32,10 +32,7 @@ export function constructMetadata({
   const mergedKeywords = Array.from(new Set([...keywords, ...SITE_CONFIG.keywords]));
 
   return {
-    title: {
-      default: `${title} | ${SITE_CONFIG.brandName}`,
-      template: `%s | ${SITE_CONFIG.brandName}`,
-    },
+    title,
     description,
     keywords: mergedKeywords.join(", "), // แปลงเป็น String เพื่อความเป๊ะของ Meta Tag
     metadataBase: new URL(SITE_CONFIG.siteUrl),

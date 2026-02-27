@@ -24,7 +24,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
     none: "gap-y-0",
     small: "gap-y-12 md:gap-y-16",
     medium: "gap-y-20 md:gap-y-28",
-    large: "gap-y-32 md:gap-y-48",
+    large: "gap-y-24 md:gap-y-36", // Optimized for better flow
     specialist: "gap-y-40 md:gap-y-64",
   };
 
@@ -36,9 +36,9 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
     <div
       className={cn(
         "relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden",
-        "transition-colors duration-700 ease-in-out",
+        "transition-colors duration-1000 ease-in-out", // Smoother transition
         "bg-[var(--surface-main)] text-[var(--text-primary)]",
-        "touch-pan-y antialiased",
+        "touch-pan-y antialiased selection:bg-[var(--brand-primary)]/20",
         className,
       )}
       style={
@@ -54,7 +54,7 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
     >
       {/* --- LAYER 01: INFRASTRUCTURE (The Visual Grid) --- */}
       <div
-        className="pointer-events-none fixed inset-0 z-0 opacity-[0.03] select-none"
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.02] select-none" // Reduced opacity for subtlety
         style={{
           backgroundImage: "url(/grid-pattern.svg)",
           willChange: "transform",
@@ -62,16 +62,18 @@ const LayoutEngine = ({ children, className, spacing = "large", theme }: LayoutE
         aria-hidden="true"
       />
 
-      {/* [DYNAMIC_AURA]: Layered atmosphere */}
+      {/* [DYNAMIC_AURA]: Enhanced atmosphere for depth */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <AmbientBackground color={ambientColor} opacity={theme?.mode === "dark" ? 0.12 : 0.06} />
+        <div className="absolute inset-0 bg-[#020617]/5 dark:bg-black/20" />{" "}
+        {/* Added overlay for contrast */}
+        <AmbientBackground color={ambientColor} opacity={theme?.mode === "dark" ? 0.15 : 0.08} />
       </div>
 
       {/* --- LAYER 02: CONTENT HUB --- */}
       <main
         className={cn(
           "relative z-10 flex w-full flex-auto flex-col",
-          "transition-opacity duration-500 ease-in-out",
+          "transition-opacity duration-700 ease-in-out",
           "isolation-auto",
           spacingMap[spacing],
         )}

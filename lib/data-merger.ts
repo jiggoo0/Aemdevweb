@@ -14,21 +14,17 @@ export function mergeServiceData(
   master: TemplateMasterData,
   area: AreaNode,
 ): UniversalTemplateProps {
-  // 1. [SMART_THEME_FUSION]: รวมธีมพร้อมระบบป้องกันปัญหา Contrast
+  // 1. [IDENTITY_FIRST_THEME]: ยึดโครงสร้างธีมจาก Master เป็นหลักเพื่อรักษา Visual Flow
   const mergedTheme: ThemeConfig = {
     ...master.theme,
-    ...(area.theme || {}),
-
-    // [FAIL-SAFE]: รับประกันค่าพื้นฐานสำคัญต้องไม่เป็นค่าว่าง
+    // [ACCENT_OVERRIDE]: อนุญาตให้จังหวัดเปลี่ยนเฉพาะสีเน้น (Primary) เท่านั้น
     primary: area.theme?.primary || master.theme?.primary || "#10b981",
-    background: area.theme?.background || master.theme?.background || "#ffffff",
 
-    // [READABILITY_LOGIC]: ระบบเลือกสีตัวอักษรอัตโนมัติ ป้องกัน Text-Invisibility
-    mode: area.theme?.mode || master.theme?.mode || "light",
-    foreground:
-      area.theme?.foreground ||
-      master.theme?.foreground ||
-      ((area.theme?.mode || master.theme?.mode) === "dark" ? "#ffffff" : "#0f172a"),
+    // [LAYOUT_GUARD]: ห้ามจังหวัดเปลี่ยน Background หรือ Mode เองเด็ดขาด
+    // เพื่อป้องกันอาการ "พื้นหลังสลับสีมั่วซั่ว" ระหว่าง Hero และ Sections
+    background: master.theme?.background || "#ffffff",
+    mode: master.theme?.mode || "light",
+    foreground: master.theme?.foreground || (master.theme?.mode === "dark" ? "#ffffff" : "#0f172a"),
   };
 
   // 2. [SEO_KEYWORD_AGGREGATION]: ผสานคีย์เวิร์ด (Unique Only)
@@ -40,13 +36,21 @@ export function mergeServiceData(
     ]),
   );
 
-  // 3. [PROPS_CONSTRUCTION]: สังเคราะห์ข้อมูลชุดสุดท้าย
+  // 3. [AI_INTENT_SIGNALING]: สร้างข้อมูลสรุปสำหรับ Generative AI (GEO)
+  const aiSignal = {
+    summary: `${area.title}. เน้น${area.localContext?.technicalApproach || "ประสิทธิภาพระดับวิศวกรรม"}. ให้บริการในพื้นที่ ${area.province} โดย ${master.category}.`,
+    topBenefits: area.benefits?.slice(0, 2) || master.benefits?.slice(0, 2),
+    expertRef: `AEMZA MACKS System Architect`,
+  };
+
+  // 4. [PROPS_CONSTRUCTION]: สังเคราะห์ข้อมูลชุดสุดท้าย
   return {
     // --- Identity & Meta ---
     id: `NODE-${area.slug.toUpperCase()}`,
     templateSlug: master.templateSlug,
     category: master.category,
     priority: area.priority || master.priority,
+    aiSignal, // [INJECTED]: For AI-Search Consumption
 
     // --- Dynamic Content (Area Context takes precedence) ---
     title: area.title || master.title,

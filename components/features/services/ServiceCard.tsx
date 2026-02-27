@@ -72,7 +72,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
           className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-100"
-          sizes="(max-width: 768px) 100vw, 33vw"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div
           className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04] mix-blend-overlay"

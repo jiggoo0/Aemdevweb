@@ -8,7 +8,7 @@
 
 import React, { useState, memo, useCallback } from "react";
 import { toast } from "sonner";
-import { Loader2, CheckCircle, Send, ShieldCheck } from "lucide-react";
+import IconRenderer from "@/components/ui/IconRenderer";
 
 interface DirectOrderFormProps {
   readonly price?: string | number;
@@ -67,7 +67,7 @@ export const DirectOrderForm = memo(
             style={{ backgroundColor: `${accentColor}20`, color: accentColor }}
             className="mb-6 flex h-24 w-24 items-center justify-center rounded-full shadow-lg"
           >
-            <CheckCircle size={48} strokeWidth={2} className="animate-bounce" />
+            <IconRenderer name="CheckCircle" size={48} strokeWidth={2} className="animate-bounce" />
           </div>
           <h3 className="text-3xl font-black tracking-tighter text-white uppercase italic">
             Order Received!
@@ -199,7 +199,7 @@ export const DirectOrderForm = memo(
             className="group relative flex w-full items-center justify-center overflow-hidden rounded-2xl py-6 text-xl font-black text-white transition-all hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
           >
             {isPending ? (
-              <Loader2 className="h-7 w-7 animate-spin" />
+              <IconRenderer name="Loader2" className="h-7 w-7 animate-spin" />
             ) : (
               <div className="relative z-10 flex items-center gap-3">
                 <span>ยืนยันคำสั่งซื้อ</span>
@@ -208,7 +208,11 @@ export const DirectOrderForm = memo(
                     (฿{typeof price === "number" ? price.toLocaleString() : price} {unit})
                   </span>
                 )}
-                <Send className="h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <IconRenderer
+                  name="Send"
+                  size={20}
+                  className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                />
               </div>
             )}
 
@@ -218,7 +222,7 @@ export const DirectOrderForm = memo(
 
           {/* Security Indicator */}
           <div className="flex items-center justify-center gap-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-            <ShieldCheck size={14} className="text-emerald-500" />
+            <IconRenderer name="ShieldCheck" size={14} className="text-emerald-500" />
             <span>Encrypted Secure Transaction</span>
           </div>
         </form>

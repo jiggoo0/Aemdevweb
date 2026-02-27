@@ -7,9 +7,9 @@
 
 import React, { memo, useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ThemeConfig } from "@/types"; // เพิ่ม Import Type
+import IconRenderer from "@/components/ui/IconRenderer";
 
 interface StickyBuyButtonProps {
   readonly href: string;
@@ -69,7 +69,7 @@ const StickyBuyButton = memo(
             className="group relative flex h-12 flex-grow items-center justify-center overflow-hidden rounded-[1.5rem] px-6 text-white transition-transform active:scale-95"
           >
             <div className="relative z-10 flex items-center gap-2 text-sm font-black tracking-wide uppercase">
-              <ShoppingBag size={18} strokeWidth={2.5} className="mb-0.5" />
+              <IconRenderer name="ShoppingBag" size={18} strokeWidth={2.5} className="mb-0.5" />
               {label}
             </div>
             <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />

@@ -165,14 +165,19 @@ export const phuketNode: AreaNode = {
     ],
     promotions: [
       {
-        title: "High-Season Launch Offer",
-        description: "ฟรีระบบจองห้องพัก (Booking Engine) สำหรับผู้ที่เริ่มโครงการภายในเดือนนี้",
-        discount: "มูลค่า 15,000.-",
+        title: "Global Elite Blueprint (Phuket)",
+        description:
+          "สิทธิพิเศษสำหรับโครงการ Luxury Villa และโรงแรม 5 ดาว รับฟรีบริการวางแผน Global CDN Strategy และระบบจองตรงมูลค่า 25,000 บาท",
+        discount: "Free Global Infra Setup",
+        expiry: "2026-12-31",
       },
     ],
     regionalVisuals: {
       banner: "/images/areas/phuket-node.webp",
-      gallery: ["/images/areas/phuket-node.webp", "/images/areas/phuket-node.webp"],
+      gallery: [
+        "/images/templates/hotelresort/hotel-resort-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
     },
   },
 

@@ -9,6 +9,8 @@ import type { UniversalTemplateProps, BaseTemplateProps } from "@/types";
 
 // --- 1. Infrastructure (Integrated Identity Shell) ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
+import { AIPersonaInsight } from "./sections/AIPersonaInsight";
+import { AgentCommandCenter } from "./sections/AgentCommandCenter";
 
 // --- 2. Template Registry ---
 import SalePageTemplate from "./salepage/Index";
@@ -50,7 +52,20 @@ export const TemplateRenderer = ({ data, renderMode = "full" }: TemplateRenderer
   // [IDENTITY_INTEGRATION]: Using LayoutEngine as a Server Shell
   return (
     <LayoutEngine theme={data.theme} spacing={renderMode === "section-only" ? "none" : "large"}>
+      {renderMode === "full" && data.aiSignal && (
+        <section className="container mx-auto px-4 pt-12 md:px-8">
+          <AIPersonaInsight data={data.aiSignal} />
+        </section>
+      )}
       <ActiveTemplate data={data} suppressUI={renderMode === "section-only"} />
+
+      {renderMode === "full" && (
+        <section className="container mx-auto px-4 py-24 md:px-8">
+          <div className="mx-auto max-w-3xl">
+            <AgentCommandCenter />
+          </div>
+        </section>
+      )}
     </LayoutEngine>
   );
 };

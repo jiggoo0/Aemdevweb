@@ -9,10 +9,7 @@ import type { Metadata } from "next";
 
 // --- 1. System Infrastructure & Layout Components ---
 import LayoutEngine from "@/components/templates/sections/LayoutEngine";
-/** * [FIXED]: เปลี่ยนการนำเข้า HeroEngine จาก landing/Hero เป็น sections/HeroEngine
- * เพื่อให้รองรับ Props ที่เราแก้ไขไปก่อนหน้า (แก้ปัญหา tsc Error)
- */
-import HeroEngine from "@/components/templates/sections/HeroEngine";
+import UniversalHero from "@/components/templates/sections/UniversalHero";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
 
@@ -36,7 +33,7 @@ export default function PrivacyPage() {
   return (
     <LayoutEngine spacing="none">
       {/* 01. HERO LAYER: Privacy Vision */}
-      <HeroEngine
+      <UniversalHero
         title={
           <>
             ข้อมูลของคุณคือ <br />

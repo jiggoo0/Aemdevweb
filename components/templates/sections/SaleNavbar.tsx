@@ -5,10 +5,10 @@
  */
 
 import Link from "next/link";
-import { MoveRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Route } from "next";
 import type { ThemeConfig } from "@/types"; // [IMPORT]: นำเข้า Type มาตรฐาน
+import IconRenderer from "@/components/ui/IconRenderer";
 
 interface SaleNavbarProps {
   readonly title: string;
@@ -59,7 +59,11 @@ export function SaleNavbar({ title, action, theme }: SaleNavbarProps) {
           >
             <span className="relative z-10 flex items-center gap-2">
               {action.label}
-              <MoveRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+              <IconRenderer
+                name="MoveRight"
+                size={12}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
             </span>
 
             {/* Shimmer Effect: สร้างการเคลื่อนไหวเพื่อดึงดูดสายตา */}

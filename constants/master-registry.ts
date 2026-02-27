@@ -1,12 +1,12 @@
 /**
- * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v17.9.107 (STABLE_RELEASE)
- * [STRATEGY]: Centralized Data Aggregation | Type-Safe Helper Export | SSG Core
+ * [MASTER REGISTRY]: MASTER_SERVICE_INDEX v18.5.0 (STABLE_HARDENED)
+ * [STRATEGY]: Centralized Data Aggregation | Pure Blueprint Services | SSG Core
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { TemplateMasterData } from "@/types";
+import type { TemplateMasterData, TemplateSlug, ServiceCategory } from "@/types";
 
-// --- 1. Infrastructure: Import Individual Service Nodes ---
+// --- 1. Infrastructure: Import Core Blueprint Services ---
 import { AREA_NODES } from "./area-nodes/index";
 import { seoAgencyService } from "./services/seo-agency";
 import { salePageService } from "./services/salepage";
@@ -19,7 +19,7 @@ import { localAuthorityService } from "./services/local-authority";
 /**
  * [REGISTRY]: คลังข้อมูลบริการหลัก (Master Database)
  * ทำหน้าที่เป็นหัวใจการเรนเดอร์สำหรับหน้า Hub และการสร้าง Static Paths
- * [LOGIC]: เรียงลำดับตาม Priority (0 = สูงสุด) เพื่อการแสดงผลที่กำหนดได้
+ * [LOGIC]: ดึงข้อมูลจาก Blueprint Services โดยตรง เพื่อรักษาเอกลักษณ์ของดีไซน์
  */
 export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   seoAgencyService,
@@ -30,19 +30,32 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
   bioService,
   localAuthorityService,
 ]
-  .map((service) => ({
-    ...service,
-    // [SYNC]: เชื่อมโยงพื้นที่ที่ให้บริการ (Active Areas) อัตโนมัติ
-    activeAreas: AREA_NODES.filter((area) => area.templateSlug === service.templateSlug).map(
-      (area) => area.slug,
-    ),
-  }))
-  .sort((a, b) => a.priority - b.priority);
+  .map((service) => {
+    // Determine activeAreas: Inferred from AREA_NODES based on templateSlug.
+    const finalActiveAreas = AREA_NODES.filter(
+      (area) => area.templateSlug === service.templateSlug,
+    ).map((area) => area.slug);
+
+    return {
+      ...service,
+      activeAreas: finalActiveAreas || [],
+      benefits: service.benefits || [],
+      coreFeatures: service.coreFeatures || [],
+      faqs: service.faqs || [],
+      keywords: service.keywords || [],
+      category: service.category || ("business" as ServiceCategory),
+      templateSlug: service.templateSlug || ("business" as TemplateSlug),
+      priceValue: service.priceValue || 10000,
+      price: service.price || "10000",
+      currency: service.currency || "THB",
+      unit: service.unit || "service",
+      priority: service.priority ?? 50,
+    } as TemplateMasterData;
+  })
+  .sort((a, b) => (a.priority ?? 50) - (b.priority ?? 50));
 
 /**
  * [HELPER]: getServiceBySlug
- * @description ค้นหาข้อมูลบริการจาก URL Slug แบบ Type-Safe
- * ใช้ในหน้า app/(sales)/services/[slug]/page.tsx
  */
 export const getServiceBySlug = (slug: string): TemplateMasterData | undefined => {
   return MASTER_REGISTRY.find((service) => service.templateSlug === slug);
@@ -50,12 +63,7 @@ export const getServiceBySlug = (slug: string): TemplateMasterData | undefined =
 
 /**
  * [HELPER]: getFeaturedServices
- * @description ดึงรายการบริการที่ระบุเป็น 'Featured' (isFeatured: true)
- * ใช้สำหรับแสดงผลใน Section บริการหน้าแรก (Main Landing Page)
  */
 export const getFeaturedServices = (): TemplateMasterData[] => {
   return MASTER_REGISTRY.filter((service) => service.isFeatured);
 };
-
-// [KNIP_HYGIENE]: getServicesByCategory ถูกถอดออกชั่วคราวเพื่อลด Unused Exports
-// จะถูกเพิ่มกลับมาเมื่อมีการสร้างระบบ Filter ในหน้า Directory บริการ

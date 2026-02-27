@@ -7,7 +7,7 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
-import { ShieldCheck, Lock } from "lucide-react";
+import IconRenderer from "@/components/ui/IconRenderer";
 
 interface SaleFooterProps {
   readonly brandName: string;
@@ -45,11 +45,11 @@ export function SaleFooter({ brandName, isDark = false }: SaleFooterProps) {
         {/* 02. Trust Signals */}
         <div className="mb-10 flex flex-wrap justify-center gap-6 opacity-60">
           <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase">
-            <Lock size={12} />
+            <IconRenderer name="Lock" size={12} />
             <span>256-bit SSL Secure</span>
           </div>
           <div className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase">
-            <ShieldCheck size={12} />
+            <IconRenderer name="ShieldCheck" size={12} />
             <span>100% Satisfaction Guarantee</span>
           </div>
         </div>

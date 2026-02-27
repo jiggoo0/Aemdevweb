@@ -4,82 +4,126 @@
  * [MARKET]: Rayong, Map Ta Phut, Ban Khai (Industrial & Energy)
  */
 
-import type { AreaNode } from "@/types";
-import { corporateService } from "@/constants/services/corporate";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { catalogService } from "@/constants/services/catalog";
 
-export const rayongNode: AreaNode = {
+export const rayongNode = defineAreaNode(catalogService, {
+  // --- Basic Identity ---
   slug: "rayong",
   province: "ระยอง",
   region: "East",
-  templateSlug: "corporate",
-  title: "รับทำเว็บไซต์ ระยอง | ยกระดับภาพลักษณ์โรงงานและธุรกิจพลังงานในเขต EEC",
+  priority: 98,
+
+  title: "รับทำเว็บไซต์ ระยอง | Digital Infrastructure สำหรับโรงงานอุตสาหกรรมหนักและพลังงาน",
   description:
-    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise สำหรับนิคมอุตสาหกรรมมาบตาพุดและธุรกิจในระยอง เน้นความปลอดภัยสูงสุดและระบบ B2B ขั้นสูง",
-  seoTitle: "รับทำเว็บไซต์ ระยอง ออกแบบเว็บโรงงาน นิคมมาบตาพุด - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ระยอง ครบวงจร สำหรับอุตสาหกรรมปิโตรเคมี พลังงาน และโลจิสติกส์ มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
+    "บริการวางระบบเว็บไซต์และแคตตาล็อกเทคนิคในระยอง เจาะกลุ่มนิคมมาบตาพุด-ปลวกแดง เน้นความปลอดภัยระดับ Enterprise โหลดไว และครองอันดับหนึ่งในใจฝ่ายจัดซื้อ B2B",
 
   longDescription:
-    "ระยอง ศูนย์กลางพลังงานและอุตสาหกรรมปิโตรเคมีที่ใหญ่ที่สุดในเอเชียตะวันออกเฉียงใต้ ซึ่งเป็นหัวใจสำคัญของ EEC " +
-    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์บริษัทและโรงงานของคุณให้เป็น 'Executive Portal' ที่ทรงพลังและน่าเชื่อถือ " +
-    "เราออกแบบระบบที่เน้นความปลอดภัยข้อมูลขั้นสูง (Cybersecurity) และโครงสร้าง B2B ที่รองรับการเจรจาธุรกิจระดับสากล " +
-    "เพื่อให้ธุรกิจในเขตมาบตาพุดและระยองของคุณ ครองความเป็นผู้นำในตลาดอุตสาหกรรมหนักของภูมิภาค",
+    "ระยอง ศูนย์กลางพลังงานและอุตสาหกรรมปิโตรเคมีที่เป็นหัวใจสำคัญของ EEC " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับโรงงานอุตสาหกรรมหนักที่ต้องการภาพลักษณ์ระดับมหาชน " +
+    "เราเน้นโครงสร้างข้อมูลที่รองรับการแสดงผลสเปกเครื่องจักร (Spec Sheets) และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยคู่ค้าทั่วโลก",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Enterprise-Standard Branding: งานดีไซน์ที่สะท้อนถึงนวัตกรรม ความมั่นคง และภาพลักษณ์บริษัทระดับมหาชน",
-    "Technical B2B Mastery: วางกลยุทธ์ SEO เจาะกลุ่มฝ่ายจัดซื้อโรงงานในนิคมมาบตาพุด, ปลวกแดง และเขตอุตสาหกรรมหนัก",
-    "Compliance-First Hub: โครงสร้างระบบที่รองรับมาตรฐานความปลอดภัย ISO และ PDPA 100% สำหรับการทำงานระดับองค์กร",
-  ],
-
-  priority: 98,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/rayong-node.webp",
   coordinates: { lat: 12.6814, lng: 101.2813 },
-  marketSaturation: 85,
-  regionalLatency: 14,
+  districts: ["มาบตาพุด", "ปลวกแดง", "บ้านฉาง", "เมืองระยอง", "แกลง", "บ้านเพ"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "คู่ค้าในระยอง (โดยเฉพาะมาบตาพุด) ให้ความสำคัญกับ 'ความโปร่งใส' และ 'มาตรฐานวิศวกรรม' เว็บไซต์ที่ข้อมูลเทคนิคครบถ้วนและระบบความปลอดภัยสูงจะได้รับการยอมรับในระดับ Executive",
+    technicalApproach:
+      "เน้นระบบจัดการแคตตาล็อกสำหรับสินค้าเทคนิค (Part Number Search) และการทำ SEO สำหรับตลาดอุตสาหกรรมหนัก",
+    localStrength:
+      "เข้าใจพลวัตของกลุ่มโรงงานปิโตรเคมีและยานยนต์ พร้อมบริการที่ปรึกษาด้าน Digital Transformation ในพื้นที่",
+    nicheIndustries: [
+      "อุตสาหกรรมปิโตรเคมีและพลังงาน",
+      "โรงงานผลิตชิ้นส่วนยานยนต์ (EEC Zone)",
+      "ศูนย์จำหน่ายวัสดุและเครื่องจักรโรงงาน",
+      "ธุรกิจท่องเที่ยวและโรงแรมระดับพรีเมียม (เสม็ด/ระยอง)",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไซต์ไม่สะท้อนนวัตกรรมของบริษัท",
+      "หาข้อมูลใบรับรองมาตรฐานโรงงาน (ISO/TIS) บนเว็บได้ยาก",
+      "ระบบติดต่อฝ่ายจัดซื้อซับซ้อนและล่าช้า",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 176,
+      localClient: "บริษัทพลังงานข้ามชาติ ย่านมาบตาพุด",
+    },
+    regionalPricing: {
+      startPrice: `${catalogService.price} บาท`,
+      timeline: "20-35 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานปิโตรเคมีระยอง",
+      result:
+        "วางระบบเทคนิคแคตตาล็อกและ SEO เจาะจงคีย์เวิร์ดวิศวกรรม ยอด RFQ จากคู่ค้าต่างชาติเพิ่มขึ้น 200%",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ มาบตาพุด",
+      "จ้างทำเว็บโรงงาน ระยอง",
+      "Industrial SEO Rayong",
+      "ออกแบบเว็บอุตสาหกรรมหนัก",
+    ],
+    promotions: [
+      {
+        title: "Executive B2B Blueprint",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานในนิคมอุตสาหกรรม รับฟรีบริการออกแบบ Executive Brand Storytelling และระบบ Technical SEO สำหรับอุตสาหกรรมหนักมูลค่า 18,500 บาท",
+        discount: "Free Strategy & Technical Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/rayong-node.webp",
+      gallery: [
+        "/images/services/catalog-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รับทำระบบล็อกอินสำหรับตัวแทนจำหน่าย (Dealer) ไหม?",
+      answer:
+        "รับครับ เราสามารถสร้างระบบ Portal ให้ Dealer ล็อกอินเข้ามาดูราคาสเปกสินค้าพิเศษ และดาวน์โหลดคู่มือการใช้งานได้ครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ ระยอง",
+    "ทำเว็บโรงงาน มาบตาพุด",
+    "Web Design Rayong",
+    "Industrial Authority SEO",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 88,
+  regionalLatency: 6,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Petrochemical B2B Audit",
-      description: "วิเคราะห์ภาพลักษณ์บริษัทให้สอดคล้องกับมาตรฐานความปลอดภัยและนวัตกรรมระดับสากล",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Enterprise Infrastructure",
-      description: "ติดตั้งระบบรองรับข้อมูลเทคนิค (Data Sheets) และระบบความปลอดภัย ISO 27001 Ready",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "EEC Entity SEO Sync",
-      description: "วางโครงสร้างคีย์เวิร์ดดักจับฝ่ายจัดซื้ออุตสาหกรรมหนักและนักลงทุนในพื้นที่ระยอง",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "ระยองคือศูนย์กลางพลังงานและอุตสาหกรรมหนัก เว็บไซต์ต้องสะท้อนถึง 'ความล้ำสมัย' และ 'ความมั่นคงสูงสุด'",
-    technicalApproach:
-      "เน้นการจัดการระบบความปลอดภัยข้อมูล (PDPA/GDPR) และโครงสร้าง Multilingual สำหรับคู่ค้าต่างชาติ",
-    localStrength:
-      "ชื่อเสียงด้านการเป็น Industrial Powerhouse และเมืองท่องเที่ยวชายฝั่งที่มีศักยภาพสูง",
-    nicheIndustries: [
-      "ปิโตรเคมีและพลังงาน",
-      "โรงงานผลิตชิ้นส่วนยานยนต์",
-      "ที่พักและรีสอร์ตในเขตบ้านเพ/เสม็ด",
-    ],
-    painPoints: ["เว็บไซต์องค์กรดูเก่าไม่ทันสมัย", "หาข้อมูลใบรับรองมาตรฐานโรงงานยาก"],
-    competitorLevel: "high",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ มาบตาพุด",
-      "ออกแบบเว็บโรงงาน ระยอง",
-      "จ้างทำ SEO ปลวกแดง",
-      "ทำเว็บอุตสาหกรรม บ้านฉาง",
-    ],
-  },
-  districts: ["เมืองระยอง", "มาบตาพุด", "บ้านฉาง", "ปลวกแดง", "แกลง"],
-  keywords: ["รับทำเว็บไซต์ ระยอง", "ทำเว็บโรงงาน มาบตาพุด", "จ้างทำเว็บระยอง", "รับทำ SEO ระยอง"],
-};
+});

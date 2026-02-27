@@ -6,11 +6,11 @@
 "use client";
 
 import React, { memo, useMemo, useState, useEffect, useRef } from "react";
-import Link from "next/link";
-import type { Route } from "next";
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { Button } from "@/components/ui/Button";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 interface PricingPlan {
   readonly id: string;
@@ -18,6 +18,7 @@ interface PricingPlan {
   readonly price: number | string;
   readonly unit: string;
   readonly features: readonly string[];
+  readonly roi: string;
   readonly cta: string;
   readonly highlight: boolean;
   readonly href: string;
@@ -63,6 +64,7 @@ const PricingSection = () => {
         name: "Conversion Engine",
         price: conversionData?.priceValue || 3500,
         unit: conversionData?.unit || "/ Project",
+        roi: "x4.5 Expected Growth",
         features: conversionData?.benefits?.slice(0, 4) || [],
         cta: "ปั้นยอดขายทันที",
         highlight: false,
@@ -73,6 +75,7 @@ const PricingSection = () => {
         name: "Infrastructure Core",
         price: foundationData?.priceValue || 19500,
         unit: foundationData?.unit || "/ Project",
+        roi: "Global Trust Authority",
         features: foundationData?.benefits?.slice(0, 4) || [],
         cta: "วางรากฐานธุรกิจสากล",
         highlight: true,
@@ -83,6 +86,7 @@ const PricingSection = () => {
         name: "Authority Growth",
         price: growthData?.priceValue || 19500,
         unit: growthData?.unit || "/ Month",
+        roi: "Sustainable Market Dominance",
         features: growthData?.benefits?.slice(0, 4) || [],
         cta: "ยกระดับอันดับ Google",
         highlight: false,
@@ -95,103 +99,95 @@ const PricingSection = () => {
     <section
       id="pricing"
       ref={sectionRef}
-      className="relative overflow-hidden py-24 md:py-32 lg:py-40"
+      className="bg-surface-offset border-border/10 relative overflow-hidden border-y py-24 md:py-48"
     >
-      <div className="container mx-auto px-4 md:px-8">
-        {/* --- 01. HEADER --- */}
-        <header className="mb-20 max-w-5xl md:mb-32">
-          <div className="text-brand-primary mb-8 flex items-center gap-4">
-            <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
-            <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-              Investment_Protocol
+      {/* 01. BLUEPRINT INFRASTRUCTURE */}
+      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.03]" />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-8">
+        {/* --- HEADER_NODE --- */}
+        <header className="mb-24 space-y-6 text-center md:text-left">
+          <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
+            <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+              Capital_Allocation_v18.2
             </span>
           </div>
+
           <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
-            Value-Driven <br />
-            <span className="text-brand-primary">Investment.</span>
+            Investment <br /> <span className="text-brand-primary">Matrix.</span>
           </h2>
-          <div className="border-brand-primary mt-12 max-w-3xl border-l-[6px] pl-10">
-            <p className="text-text-secondary text-xl leading-relaxed font-medium italic opacity-80 md:text-3xl">
-              “งบประมาณที่โปร่งใส คือ{" "}
-              <span className="text-text-primary decoration-brand-primary font-black underline underline-offset-8">
-                ความจริงใจ
-              </span>{" "}
-              ที่วัดผลได้จริง”
+
+          <div className="border-brand-primary/40 border-l-[6px] pl-8 md:pl-12">
+            <p className="text-text-primary max-w-3xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
+              “เราเปลี่ยนงบประมาณโฆษณา ให้เป็นสินทรัพย์ดิจิทัลที่ทำงานแทนคุณได้ตลอด 24 ชม.”
             </p>
           </div>
         </header>
 
-        {/* --- 02. PRICING GRID --- */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-stretch lg:gap-10">
+        {/* --- PRICING_MATRIX --- */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:items-stretch">
           {displayPlans.map((plan, i) => (
             <div
               key={plan.id}
               data-pricing-card
               data-index={i}
               className={cn(
-                "group rounded-section relative flex transform-gpu flex-col border p-8 transition-all duration-700 md:p-12",
-                "translate-y-8 opacity-0",
+                "group rounded-section relative flex flex-col border p-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] md:p-16",
+                "translate-y-16 opacity-0",
                 visibleItems.has(i) && "translate-y-0 opacity-100",
                 plan.highlight
-                  ? "border-brand-primary bg-surface-card/90 shadow-glow-lg z-10 lg:scale-[1.03]"
-                  : "bg-surface-card border-border hover:border-brand-primary/40",
+                  ? "border-brand-primary bg-surface-card shadow-glow-lg z-10 lg:-translate-y-4"
+                  : "bg-surface-card border-border/10 hover:border-brand-primary/40",
               )}
-              style={{
-                transitionDelay: `${i * 100}ms`,
-              }}
+              style={{ transitionDelay: `${i * 200}ms` }}
             >
               {plan.highlight && (
-                <div className="absolute -top-5 left-1/2 z-20 -translate-x-1/2">
-                  <div className="bg-brand-primary text-surface-main shadow-glow flex items-center gap-2 rounded-full px-6 py-2">
-                    <IconRenderer name="Zap" size={12} className="fill-current" />
-                    <span className="text-[10px] font-black tracking-widest uppercase">
-                      Recommended
-                    </span>
-                  </div>
+                <div className="absolute top-8 right-10">
+                  <span className="text-brand-primary font-mono text-[8px] font-black tracking-widest uppercase">
+                    // HIGH_VELOCITY_NODE
+                  </span>
                 </div>
               )}
 
-              <div className="border-border mb-10 border-b pb-10">
-                <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
-                  Plan_Node.0{i + 1}
+              <div className="mb-12 space-y-2">
+                <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-40">
+                  INV_NODE.0{i + 1}
                 </span>
-                <h3 className="text-text-primary group-hover:text-brand-primary mt-4 text-3xl font-black tracking-tighter uppercase italic transition-colors">
+                <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors md:text-4xl">
                   {plan.name}
                 </h3>
-                <div className="mt-8 flex flex-col gap-1">
+
+                <div className="pt-8">
                   <div className="flex items-baseline gap-2">
-                    {typeof plan.price === "number" && (
-                      <span className="text-brand-primary font-black opacity-60">฿</span>
-                    )}
-                    <span className="text-text-primary text-5xl font-black tracking-tighter italic tabular-nums md:text-7xl">
-                      {!isMounted
-                        ? "---"
-                        : typeof plan.price === "number"
-                          ? plan.price.toLocaleString("th-TH")
-                          : plan.price}
+                    <span className="text-brand-primary text-5xl font-black tracking-tighter italic tabular-nums md:text-7xl">
+                      {isMounted
+                        ? typeof plan.price === "number"
+                          ? `฿${plan.price.toLocaleString()}`
+                          : plan.price
+                        : "---"}
+                    </span>
+                    <span className="text-text-muted text-xs font-black uppercase opacity-40">
+                      {plan.unit}
                     </span>
                   </div>
-                  <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-50">
-                    {plan.unit}
-                  </span>
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
+                    <div className="h-1 w-1 animate-pulse rounded-full bg-emerald-500" />
+                    <span className="font-mono text-[9px] font-black tracking-widest text-emerald-500 uppercase">
+                      {plan.roi}
+                    </span>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-1 flex-col">
-                <ul className="mb-14 space-y-6">
+                <ul className="border-border/5 mb-16 space-y-6 border-t pt-12">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-4">
-                      <div
-                        className={cn(
-                          "mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-xl border",
-                          plan.highlight
-                            ? "bg-brand-primary border-brand-primary shadow-glow text-white"
-                            : "bg-surface-offset border-border text-brand-primary",
-                        )}
-                      >
-                        <IconRenderer name="Check" size={12} strokeWidth={4} />
+                      <div className="text-brand-primary mt-1 shrink-0">
+                        <IconRenderer name="CheckCircle2" size={16} />
                       </div>
-                      <span className="text-text-secondary text-sm font-bold italic opacity-90 md:text-base">
+                      <span className="text-text-secondary text-sm leading-relaxed font-medium italic opacity-80 md:text-base">
                         {feature}
                       </span>
                     </li>
@@ -199,28 +195,19 @@ const PricingSection = () => {
                 </ul>
 
                 <div className="mt-auto">
-                  {plan.isExternal ? (
-                    <a
-                      href={plan.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border-border bg-surface-offset text-text-primary hover:border-brand-primary hover:text-brand-primary rounded-card flex h-16 w-full items-center justify-center border text-[11px] font-black tracking-[0.3em] uppercase transition-all duration-500"
-                    >
+                  <Button
+                    asChild
+                    variant={plan.highlight ? "specialist" : "outline"}
+                    className={cn(
+                      "h-16 w-full text-[11px] font-black tracking-[0.3em] uppercase transition-all duration-500",
+                      !plan.highlight &&
+                        "border-border hover:border-brand-primary hover:text-brand-primary",
+                    )}
+                  >
+                    <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                       {plan.cta}
                     </a>
-                  ) : (
-                    <Link
-                      href={plan.href as Route}
-                      className={cn(
-                        "rounded-card flex h-16 w-full items-center justify-center text-[11px] font-black tracking-[0.3em] uppercase transition-all duration-500",
-                        plan.highlight
-                          ? "bg-brand-primary shadow-glow text-white hover:scale-[1.02]"
-                          : "border-border bg-surface-offset text-text-primary hover:border-brand-primary border",
-                      )}
-                    >
-                      {plan.cta}
-                    </Link>
-                  )}
+                  </Button>
                 </div>
               </div>
             </div>

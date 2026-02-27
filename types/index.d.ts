@@ -94,7 +94,8 @@ export type TemplateSlug =
   | "catalog"
   | "bio"
   | "hotelresort"
-  | "seo-agency";
+  | "seo-agency"
+  | (string & {});
 
 export type ServiceCategory = "landing" | "business" | "ecommerce" | "personal" | "area";
 
@@ -330,6 +331,11 @@ export interface UniversalTemplateProps {
   readonly province?: string;
   readonly districts?: readonly string[];
   readonly coordinates?: { readonly lat: number; readonly lng: number };
+  readonly aiSignal?: {
+    readonly summary: string;
+    readonly topBenefits: readonly string[];
+    readonly expertRef: string;
+  };
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];

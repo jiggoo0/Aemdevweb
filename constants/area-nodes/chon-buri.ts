@@ -157,6 +157,22 @@ export const chonBuriNode: AreaNode = {
       "จ้างทำ SEO พัทยา",
       "ทำเว็บโรงงาน อมตะนคร",
     ],
+    promotions: [
+      {
+        title: "Industrial Digital Transformation (EEC Only)",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานในนิคมอุตสาหกรรม รับฟรีระบบ RFQ Generator พร้อมบริการถ่ายภาพไลน์การผลิตมูลค่า 15,000 บาท",
+        discount: "Free RFQ System + Photography",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chon-buri-node.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/services/catalog-node.webp",
+      ],
+    },
   },
 
   // --- System Metadata ---

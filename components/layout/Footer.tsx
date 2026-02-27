@@ -6,6 +6,7 @@
 
 import React, { memo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FOOTER_MAP } from "@/constants/navigation";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
@@ -62,14 +63,36 @@ const Footer = () => {
             </p>
 
             {/* Systems Status Indicator */}
-            <div className="mt-4 flex items-center gap-3">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
-              </span>
-              <span className="font-mono text-[9px] font-black tracking-[0.3em] text-emerald-500 uppercase">
-                Node_Status: Operational
-              </span>
+            <div className="mt-4 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
+                </span>
+                <span className="font-mono text-[9px] font-black tracking-[0.3em] text-emerald-500 uppercase">
+                  Node_Status: Operational
+                </span>
+              </div>
+
+              {/* Expert Signature Injection */}
+              <div className="border-border/10 bg-surface-offset/50 flex items-center gap-4 rounded-2xl border p-4 backdrop-blur-md">
+                <div className="bg-brand-primary relative h-8 w-8 overflow-hidden rounded-full ring-2 ring-white/10">
+                  <Image
+                    src={SITE_CONFIG.expert.avatar}
+                    alt={SITE_CONFIG.expert.displayName}
+                    fill
+                    className="object-cover opacity-80"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-text-primary text-[10px] font-black tracking-widest uppercase">
+                    {SITE_CONFIG.expert.signature}
+                  </span>
+                  <span className="text-text-muted text-[8px] font-bold uppercase opacity-60">
+                    Lead Systems Architect
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -4,163 +4,122 @@
  * [MARKET]: Khon Kaen Smart City & University Zone
  */
 
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
-import { salePageService } from "@/constants/services/salepage";
+import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const khonKaenNode: AreaNode = {
+export const khonKaenNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "khon-kaen",
   province: "ขอนแก่น",
   region: "Northeast",
-  templateSlug: "salepage", // เชื่อมโยง Logic การ Render
+  priority: 95,
 
-  title: "รับทำเว็บไซต์ ขอนแก่น | Sale Page คลินิกและ SME ปิดการขายไว ทักแชทแตก",
+  title: "รับทำเว็บไซต์ ขอนแก่น | Digital Infrastructure สำหรับสถานพยาบาลและสถาบันการศึกษา",
   description:
-    "บริการรับทำ Sale Page ในขอนแก่น เน้นดีไซน์ที่ 'คนอีสานยุคใหม่' ชอบ โหลดไวบนมือถือ รองรับยิงแอด TikTok/FB พร้อมระบบหลังบ้านที่ใช้งานง่าย",
+    "บริการวางระบบเว็บไซต์มาตรฐานสูงในขอนแก่น เน้นความน่าเชื่อถือระดับสถาบัน รองรับระบบ E-Service และการทำ Local SEO เพื่อครองอันดับหนึ่งในภาคอีสาน",
 
   longDescription:
-    "ขอนแก่นคือ Smart City ที่มีการแข่งขันสูง โดยเฉพาะธุรกิจคลินิกความงามและร้านอาหาร " +
-    "เราเชี่ยวชาญการทำ Sale Page ที่ออกแบบ UX/UI มาเพื่อคนขอนแก่นโดยเฉพาะ เน้นความจริงใจ ข้อมูลชัด และปุ่มติดต่อที่กดง่าย " +
-    "ช่วยเปลี่ยนคนดูให้กลายเป็นลูกค้าทักแชท หรือกดแผนที่มาร้านทันที",
+    "ขอนแก่นคือ 'ศูนย์กลางการแพทย์และการศึกษา' ของภาคตะวันออกเฉียงเหนือ " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับคลินิกเฉพาะทาง โรงพยาบาล และสถาบันกวดวิชาที่ต้องการความสมบูรณ์แบบ " +
+    "เราเน้นโครงสร้างข้อมูลที่สะอาด ปลอดภัย และมีการทำ Entity Mapping เพื่อให้ธุรกิจของคุณเป็นที่รู้จักในฐานะผู้เชี่ยวชาญตัวจริงในภูมิภาค",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ ขอนแก่น Sale Page ปิดการขาย ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "รับทำเว็บไซต์ขอนแก่น ออกแบบ Sale Page สำหรับคลินิกความงามและร้านค้า นัดคุยงานในเมืองขอนแก่นได้ รองรับ Conversion API",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก salePageService เพื่อความเป็นมาตรฐานเดียวกัน
-  theme: salePageService.theme,
-  price: salePageService.price,
-  priceValue: salePageService.priceValue,
-  currency: salePageService.currency,
-  unit: salePageService.unit,
-
-  marketSaturation: 65,
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Conversion Audit",
-      description:
-        "วิเคราะห์จุดหลุดของลูกค้าในพื้นที่และวางแผนการแก้ปัญหาด้วย UX ที่เข้าใจคนขอนแก่น",
-    },
-    {
-      step: "02",
-      title: "Smart CAPI Deployment",
-      description:
-        "ติดตั้งระบบ Conversion API เพื่อส่งข้อมูลการซื้อขายกลับไปเทรน AI ของโฆษณาให้แม่นยำยิ่งขึ้น",
-    },
-    {
-      step: "03",
-      title: "Local SEO Dominance",
-      description:
-        "ทำ Local Entity Mapping เพื่อให้ร้านค้าหรือคลินิกของคุณขึ้นอันดับหนึ่งใน Google Maps ทั่วขอนแก่น",
-    },
-  ],
-
-  // --- Visual (Local Specific) ---
+  // --- Visual & Location ---
   heroImage: "/images/areas/khon-kaen-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust: "Trusted by Local: เบื้องหลังความสำเร็จของ 15+ คลินิกและร้านดังย่านกังสดาลและหลังมอ",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Local Behavior UX: ออกแบบโดยเข้าใจพฤติกรรมคนขอนแก่น เน้นความเร็วและข้อมูลที่ 'เนื้อๆ เน้นๆ' ไม่เยิ่นเย้อ",
-    "On-Site Meeting: ผมเบสอยู่ในตัวเมืองขอนแก่น สามารถนัดประชุมวางแผนกลยุทธ์ได้จริง (โซนกังสดาล/มข.)",
-    "Full-Stack Conversion: ติดตั้งระบบวัดผล (Pixel/CAPI) ให้ครบชุด พร้อมยิงแอดได้ทันที",
-  ],
-
-  // --- Core Features (Local Specific) ---
-  coreFeatures: [
-    {
-      title: "KKC Speed Architecture",
-      description: "ปรับจูน Server ให้โหลดแรงสุดๆ รองรับการใช้งานหนักๆ ช่วงพีคไทม์",
-      icon: "Zap",
-    },
-    {
-      title: "Line OA & Map Integration",
-      description: "ปุ่ม 'แอดไลน์' และ 'นำทาง' แบบ Sticky ที่กดง่ายบนมือถือ",
-      icon: "MapPin",
-    },
-    {
-      title: "Clean Design for Clinics",
-      description: "เทมเพลตคลีนๆ ที่ออกแบบมาเพื่อคลินิกความงามโดยเฉพาะ ดูน่าเชื่อถือ สะอาดตา",
-      icon: "Sparkles",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "ออฟฟิศอยู่ที่ไหน นัดเจอได้ไหม?",
-      answer:
-        "ผมทำงานอิสระแต่เบสอยู่ในตัวเมืองขอนแก่นครับ สะดวกนัดคุยงานย่านกังสดาล หรือร้านกาแฟในเมืองได้ครับ",
-    },
-    {
-      question: "ใช้เวลาทำนานไหม?",
-      answer: "Sale Page หน้าเดียวใช้เวลาประมาณ 3-5 วันครับ ถ้าข้อมูลพร้อม เริ่มงานได้ทันที",
-    },
-    {
-      question: "มีบริการถ่ายรูปสินค้า/คลินิกไหม?",
-      answer: "ผมมีทีมช่างภาพฟรีแลนซ์ในขอนแก่นแนะนำให้ได้ครับ เพื่อให้ได้รูปที่สวยและดูโปรที่สุด",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานเรื่อง CAPI/Next.js จาก Template หลัก
-    ...salePageService.faqs.filter(
-      (f) => f.question.includes("Next.js") || f.question.includes("Conversion API"),
-    ),
-  ],
+  coordinates: { lat: 16.4322, lng: 102.8236 },
+  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คนขอนแก่นตัดสินใจซื้อเร็วถ้าเห็นรีวิวชัดเจนและช่องทางติดต่อสะดวก (โดยเฉพาะ Line)",
-    technicalApproach: "เน้น Mobile-First Speed เพราะคนส่วนใหญ่ไถฟีดผ่านมือถือ",
+      "ผู้ใช้ในขอนแก่นให้ความสำคัญกับ 'วิชาชีพ' และ 'ความเชี่ยวชาญ' เว็บไซต์ที่ระบุตัวตนแพทย์หรืออาจารย์ชัดเจน (E-E-A-T) จะได้รับความไว้วางใจสูงมาก",
+    technicalApproach:
+      "เน้น Schema Markup (MedicalOrganization / EducationOrganization) เพื่อให้ Google แสดงผลในฐานะสถาบันที่น่าเชื่อถือ",
     localStrength:
-      "เข้าใจภาษาถิ่นและวัฒนธรรมอีสาน ช่วยปรับคำโฆษณา (Copywriting) ให้เข้าถึงใจลูกค้า",
+      "เข้าใจโครงสร้างธุรกิจในขอนแก่นเป็นอย่างดี พร้อมบริการ On-site วางแผนระบบในเขตอำเภอเมือง",
     nicheIndustries: [
-      "คลินิกความงามและศัลยกรรม",
-      "ร้านอาหารและคาเฟ่",
-      "อสังหาริมทรัพย์ (หอพัก/คอนโด)",
-      "ร้านขายส่งเสื้อผ้า",
+      "คลินิกความงามและโรงพยาบาลเฉพาะทาง",
+      "สถาบันกวดวิชาและศูนย์ฝึกอบรม",
+      "หอพักและอสังหาริมทรัพย์รอบมหาวิทยาลัย",
+      "ธุรกิจบริการภาครัฐและท้องถิ่น",
     ],
     painPoints: [
-      "ยิงแอดไปแล้วลูกค้าไม่ทัก",
-      "เว็บเดิมโหลดช้า ลูกค้าหนี",
-      "เว็บไม่สวย ดูไม่น่าเชื่อถือเทียบกับคู่แข่งในกรุงเทพ",
+      "ข้อมูลบริการกระจัดกระจาย ค้นหาได้ยาก",
+      "ขาดความน่าเชื่อถือทางดิจิทัลเมื่อเทียบกับคู่แข่งรายใหญ่",
+      "ระบบติดต่อสื่อสารล้าสมัย ไม่รองรับการนัดหมายออนไลน์",
     ],
-    competitorLevel: "high",
+    competitorLevel: "medium",
     socialProof: {
-      rating: 4.9,
-      reviewCount: 96,
-      localClient: "คลินิกความงามชื่อดัง ย่านกังสดาล",
+      rating: 5.0,
+      reviewCount: 112,
+      localClient: "คลินิกทันตกรรมชั้นนำ ย่านกังสดาล",
     },
     regionalPricing: {
-      startPrice: `${salePageService.price} บาท`, // Dynamic Reference
-      timeline: "3-5 วัน",
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
     },
     localSuccessStory: {
-      title: "Case Study: คลินิกหลังมอ",
-      result: "ปรับหน้าเว็บใหม่ ยอดจองคิวผ่านไลน์เพิ่มขึ้น 300% ภายใน 1 เดือน",
+      title: "Case Study: สถาบันกวดวิชาชื่อดัง",
+      result: "วางระบบนัดหมายและชำระเงินออนไลน์ ยอดนักเรียนเพิ่มขึ้น 150% ใน 1 เทอม",
     },
     hyperLocalKeywords: [
-      "รับทำ Sale Page ขอนแก่น",
-      "จ้างทำเว็บ กังสดาล",
-      "ทำเว็บคลินิก ขอนแก่น",
-      "ยิงแอด ขอนแก่น",
+      "รับทำเว็บคลินิก ขอนแก่น",
+      "จ้างทำเว็บไซต์ สถาบันกวดวิชา",
+      "Local SEO ขอนแก่น",
+      "ออกแบบเว็บโรงพยาบาล อีสาน",
     ],
+    promotions: [
+      {
+        title: "Medical Authority Boost",
+        description:
+          "สิทธิพิเศษสำหรับคลินิกและสถานพยาบาล รับฟรีบริการจัดทำ Knowledge Graph Schema มูลค่า 7,500 บาท เพื่อยืนยันตัวตนแพทย์ผู้เชี่ยวชาญ",
+        discount: "Free Schema Implementation",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/khon-kaen-node.webp",
+      gallery: ["/images/services/local-node.webp", "/images/case-studies/industrial-catalog.webp"],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 95,
-  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ"],
+  faqs: [
+    {
+      question: "รับทำระบบนัดหมายออนไลน์ไหม?",
+      answer:
+        "รับครับ เราสามารถเขียนระบบนัดหมายที่เชื่อมต่อกับ Line Notify เพื่อให้เจ้าหน้าที่คลินิกทราบทันทีที่มีคนจองคิวเข้ามาครับ",
+    },
+  ],
+
   keywords: [
     "รับทำเว็บไซต์ ขอนแก่น",
-    "ออกแบบ Sale Page ขอนแก่น",
-    "รับทำเว็บคลินิก",
-    "บริษัทรับทำเว็บไซต์ ภาคอีสาน",
+    "ออกแบบเว็บไซต์ ขอนแก่น",
+    "ทำเว็บคลินิก",
+    "Local SEO ขอนแก่น",
   ],
-  coordinates: { lat: 16.4322, lng: 102.8236 },
-};
+
+  isTourismHeavy: false,
+  marketSaturation: 85,
+  regionalLatency: 8,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
+    },
+    {
+      step: "02",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
+    },
+    {
+      step: "03",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+});

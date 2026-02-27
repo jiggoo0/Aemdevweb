@@ -1,171 +1,138 @@
 /**
- * [SERVICE_NODE]: BANGKOK_ENTERPRISE_HUB v18.0.1 (DYNAMIC_LINKED)
- * [STRATEGY]: Enterprise Branding | CBD Competitive SEO | Dynamic Inheritance
- * [MARKET]: Bangkok CBD, Public Companies & High-End SMEs
+ * [SERVICE_NODE]: BANGKOK_PINNACLE_HUB v18.5.0 (FINAL_HARDENED)
+ * [STRATEGY]: Enterprise Autonomous UX | CBD Domination | Dynamic AI Signals
+ * [MARKET]: Bangkok CBD, Public Companies & AI-First Enterprises
+ * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: ดึง Master Data มาเป็น Blueprint
 import { corporateService } from "@/constants/services/corporate";
 
-export const bangkokNode: AreaNode = {
+export const bangkokNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "bangkok",
   province: "กรุงเทพมหานคร",
   region: "Central",
-  templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
+  priority: 100,
 
-  title: "รับทำเว็บไซต์ กรุงเทพฯ | ออกแบบเว็บองค์กรและบริษัท ติดหน้าแรก Google",
+  title: "รับทำเว็บไซต์ กรุงเทพฯ | Digital Architecture & AI-Strategy สำหรับองค์กรชั้นนำ",
   description:
-    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise ในกรุงเทพฯ เน้นความปลอดภัยข้อมูล (PDPA) ความเร็วสูงสุด และดีไซน์ที่สะท้อนภาพลักษณ์ผู้นำธุรกิจในย่าน CBD",
+    "ยกระดับธุรกิจสู่ยุค Autonomous ด้วยเว็บไซต์มาตรฐาน Enterprise ในกรุงเทพฯ เน้นความปลอดภัยสูงสุด (ISO Standard Ready) และกลยุทธ์ AI-Search Domination",
 
   longDescription:
-    "ในสนามแข่งขันทางธุรกิจของกรุงเทพฯ เว็บไซต์ไม่ใช่แค่โบรชัวร์ออนไลน์ แต่คือ 'สำนักงานใหญ่ดิจิทัล' ที่เปิดต้อนรับนักลงทุนและคู่ค้าตลอด 24 ชั่วโมง " +
-    "ผมให้บริการออกแบบและพัฒนาเว็บไซต์สำหรับองค์กรที่ต้องการความสมบูรณ์แบบ ทั้งในด้านดีไซน์ที่สะท้อนวิสัยทัศน์ และโครงสร้างเทคนิคที่รองรับการขยายตัวในอนาคต",
+    "ในสนามแข่งขันระดับสากลของกรุงเทพฯ เว็บไซต์คือ 'ระบบปฏิบัติการทางธุรกิจ' ที่ต้องทำงานได้มากกว่าการแสดงผล " +
+    "นายเอ็มซ่ามากส์ พร้อมเนรมิตสำนักงานใหญ่ดิจิทัลที่ขับเคลื่อนด้วย AI Agents และโครงสร้างพื้นฐานที่โหลดไวที่สุดในระดับมิลลิวินาที " +
+    "เราเน้นการปกป้องข้อมูลระดับสูงสุด (Hardened Security) และการทำ Entity Mapping เพื่อให้องค์กรของคุณครองอำนาจบน Google และ AI Answer Engines อย่างเบ็ดเสร็จ",
 
-  // --- SEO Metadata ---
-  seoTitle: "บริษัทรับทำเว็บไซต์ กรุงเทพฯ รับทำ SEO และออกแบบเว็บองค์กรครบวงจร - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กรุงเทพฯ เน้นเว็บองค์กร บริษัทมหาชน และ SME ที่ต้องการความน่าเชื่อถือ รองรับ SEO ติดหน้าแรก Google พร้อมระบบความปลอดภัยขั้นสูง",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
-
-  isTourismHeavy: false,
-  marketSaturation: 92, // [INSIGHT]: ตลาดกรุงเทพฯ มีการแข่งขันสูงสุดในประเทศ
-  regionalLatency: 12,
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Enterprise SEO Audit",
-      description:
-        "วิเคราะห์คู่แข่งในระดับมหาชนและวางแผนโครงสร้าง Keyword สำหรับตลาด B2B ที่มีการแข่งขันสูง",
-    },
-    {
-      step: "02",
-      title: "PDPA & Security Hardening",
-      description:
-        "ติดตั้งระบบความปลอดภัยข้อมูลขั้นสูงและ Cookie Consent ตามมาตรฐานสากลเพื่อความน่าเชื่อถือระดับองค์กร",
-    },
-    {
-      step: "03",
-      title: "Core Web Vitals Optimization",
-      description:
-        "ปรับจูนประสิทธิภาพเว็บไซต์ให้ผ่านเกณฑ์ Lighthouse 100/100 เพื่อครองอันดับหนึ่งบน Google Search",
-    },
-  ],
-
-  // --- Visual (Local Specific) ---
+  // --- Visual & Location ---
   heroImage: "/images/areas/bangkok-node.webp",
+  coordinates: { lat: 13.7563, lng: 100.5018 },
+  districts: ["สาทร", "สีลม", "สุขุมวิท", "พระราม 9", "ทองหล่อ", "อโศก", "ปทุมวัน", "รัชดา"],
 
-  // --- Trust Signals ---
-  clientTrust:
-    "Professional Trust: ได้รับความไว้วางใจจาก 50+ บริษัทชั้นนำและ SME ในย่านสาทร-สุขุมวิท",
-
-  // --- Localized Benefits ---
+  // --- P-SEO Localized Content ---
   benefits: [
-    "Enterprise Standard: มาตรฐานการออกแบบและการเขียนโค้ดระดับสากล รองรับ Traffic มหาศาลและการ Audit จากฝ่ายไอที",
-    "Competitive SEO: วางโครงสร้างเพื่อชิงพื้นที่หน้าแรก Google ในสมรภูมิคีย์เวิร์ดที่มีการแข่งขันสูงที่สุดในประเทศ",
-    "Data Security & PDPA: ระบบความปลอดภัยข้อมูลที่รัดกุม พร้อม Cookie Consent ที่ถูกต้องตามกฎหมาย เพื่อปกป้องชื่อเสียงองค์กร",
-  ],
-
-  // --- Core Features (Corporate Specific) ---
-  coreFeatures: [
-    {
-      title: "High-Performance Tech",
-      description: "ใช้ Tech Stack ล่าสุด (Next.js) รับประกันความเร็วและการรองรับผู้ใช้งานจำนวนมาก",
-      icon: "Zap",
-    },
-    {
-      title: "Scalable Architecture",
-      description: "โครงสร้างระบบที่พร้อมขยายตัว รองรับการเพิ่มข้อมูลสินค้าหรือข่าวสารได้ไม่จำกัด",
-      icon: "Database",
-    },
-    {
-      title: "Corporate Identity",
-      description: "ดีไซน์ที่ถอดรหัสมาจากอัตลักษณ์องค์กร (CI) เพื่อความโดดเด่นและเป็นที่จดจำ",
-      icon: "Building2",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "บริษัทอยู่ที่ไหน นัดประชุมได้ไหม?",
-      answer:
-        "ผมทำงานในรูปแบบ Remote เป็นหลักเพื่อให้ได้งานที่รวดเร็ว แต่สามารถนัดประชุม On-site ได้ในเขตธุรกิจ (CBD) กรณีโปรเจกต์มีความซับซ้อนครับ",
-    },
-    {
-      question: "ออกใบกำกับภาษีได้ไหม?",
-      answer:
-        "ได้ครับ ผมดำเนินงานในรูปแบบนิติบุคคล สามารถออกใบเสนอราคาและใบกำกับภาษีเต็มรูปแบบเพื่อหักค่าใช้จ่ายได้ครับ",
-    },
-    {
-      question: "รองรับมาตรฐานความปลอดภัยขั้นสูงไหม?",
-      answer:
-        "รองรับครับ เว็บไซต์ทุกเว็บได้รับ SSL Certificate และมีการทำ Hardening Server เพื่อป้องกันการโจมตีพื้นฐานครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...corporateService.faqs.filter(
-      (f) => f.question.includes("PDPA") || f.question.includes("บริการหลังการขาย"),
-    ),
+    "Autonomous UX Integration: ระบบเว็บไซต์ที่ปรับตัวตามพฤติกรรมลูกค้าได้อัตโนมัติ เพื่อ Conversion สูงสุดในตลาด CBD",
+    "Enterprise-Grade Security: ติดตั้ง Content Security Policy (CSP) และระบบป้องกันการโจมตีระดับวิศวกรรมข้อมูล",
+    "Predictive ROI Analytics: วางโครงสร้างเพื่อวิเคราะห์และคาดการณ์คุณภาพลูกค้า (Lead Scoring) ก่อนเริ่มการสนทนา",
   ],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ในกรุงเทพฯ ความเร็วและความน่าเชื่อถือคือสิ่งสำคัญที่สุด เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้ปิดดีล B2B และสร้างความเชื่อมั่นให้นักลงทุนได้ง่ายขึ้น",
+      "กรุงเทพฯ คือสมรภูมิที่มีการแข่งขันด้านเทคโนโลยีสูงที่สุด เว็บไซต์ต้องทำหน้าที่เป็น 'Trust Hub' ที่มีความเสถียร 99.99% และรองรับพฤติกรรมการค้นหาผ่าน AI Search ยุคใหม่",
     technicalApproach:
-      "เน้น Security และ Performance สูงสุด (Core Web Vitals) เพื่อรองรับมาตรฐานขององค์กรขนาดใหญ่",
+      "เน้นสถาปัตยกรรม Partial Prerendering (PPR) และ Zero-JS Core เพื่อประสิทธิภาพ Core Web Vitals ที่ดีที่สุดในอุตสาหกรรม",
     localStrength:
-      "ทำงานเป็นระบบ มีเอกสารชัดเจน (SOW/Timeline) และเข้าใจกระบวนการทำงานขององค์กรใหญ่",
+      "เข้าใจพลวัตธุรกิจในย่าน CBD และมีประสบการณ์การวางระบบโครงสร้างพื้นฐานดิจิทัลให้บริษัทระดับมหาชน",
     nicheIndustries: [
-      "อสังหาริมทรัพย์และคอนโดมิเนียม",
-      "สถาบันการเงินและการลงทุน",
-      "โรงพยาบาลและคลินิกเฉพาะทาง",
-      "บริษัทกฎหมายและที่ปรึกษา",
+      "อสังหาริมทรัพย์และ Smart Condominiums",
+      "สถาบันการเงินและการจัดการสินทรัพย์ (FinTech)",
+      "โรงพยาบาลระดับสากลและศูนย์การแพทย์เฉพาะทาง",
+      "บริษัทที่ปรึกษาทางธุรกิจและบริษัทกฎหมายชั้นนำ",
     ],
     painPoints: [
-      "เว็บเก่าไม่ปลอดภัย โดนแฮกบ่อย",
-      "เว็บโหลดช้า ลูกค้าหนีไปหาคู่แข่ง",
-      "ค้นหาใน Google ไม่เจอ แม้จะเปิดมานาน",
+      "ระบบเดิมล้าสมัยไม่สามารถสู้กับคู่แข่งที่ใช้เทคโนโลยี AI Search ได้",
+      "ความกังวลด้านความปลอดภัยของข้อมูลลูกค้าและมาตรฐาน PDPA/GDPR",
+      "ต้องการขยายฐานลูกค้าต่างชาติแต่เว็บไซต์เดิมโหลดช้าจากต่างประเทศ",
     ],
-    competitorLevel: "high",
+    competitorLevel: "extreme",
     socialProof: {
       rating: 5.0,
-      reviewCount: 128,
-      localClient: "บริษัทอสังหาฯ ชั้นนำ ย่านสาทร",
+      reviewCount: 215,
+      localClient: "กลุ่มบริษัทมหาชน ย่านสาทร-สุขุมวิท",
     },
     regionalPricing: {
-      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
+      startPrice: `${corporateService.price} บาท`,
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
-      title: "Case Study: โครงการคอนโดสุขุมวิท",
-      result: "ปรับปรุงโครงสร้าง SEO และ UX ดันยอด Traffic จากกลุ่ม Expat เพิ่มขึ้น 200%",
+      title: "Case Study: องค์กรการเงินย่านอโศก",
+      result:
+        "วางระบบ Security Hardening และ SEO ใหม่ ยอดนักลงทุนทักสอบถามเพิ่มขึ้น 400% ภายใน 1 ปี",
     },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ สาทร",
-      "ออกแบบเว็บไซต์ สีลม",
       "จ้างทำ SEO สุขุมวิท",
-      "ทำเว็บองค์กร พระราม 9",
+      "ออกแบบเว็บองค์กร พระราม 9",
+      "Enterprise Web Solution Bangkok",
     ],
+    promotions: [
+      {
+        title: "Autonomous Transformation Offer",
+        description:
+          "สิทธิพิเศษสำหรับองค์กรในเขตกรุงเทพฯ รับฟรีบริการวางแผน AI-Agent Roadmap และระบบ Predictive Lead Scoring มูลค่า 25,000 บาท",
+        discount: "Free AI-Strategy Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/bangkok-node.webp",
+      gallery: [
+        "/images/case-studies/industrial-catalog.webp",
+        "/images/case-studies/phuket-luxury-seo.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 100,
-  districts: ["สาทร", "สีลม", "สุขุมวิท", "พระราม 9", "ทองหล่อ", "อโศก", "ปทุมวัน"],
+  faqs: [
+    {
+      question: "รองรับการ Audit ความปลอดภัยจากแผนก IT ขององค์กรไหม?",
+      answer:
+        "ยินดีอย่างยิ่งครับ เราเขียนโค้ดตามมาตรฐาน OWASP และรองรับการทำ Penetration Testing เพื่อให้มั่นใจว่าเว็บไซต์ของคุณปลอดภัยระดับ Enterprise ครับ",
+    },
+  ],
+
   keywords: [
     "รับทำเว็บไซต์ กรุงเทพ",
     "บริษัทรับทำเว็บไซต์",
-    "จ้างทำเว็บไซต์ ราคา",
-    "ทำเว็บองค์กร มหาชน",
+    "ออกแบบเว็บไซต์ องค์กร",
+    "Technical SEO Specialist Bangkok",
   ],
-  coordinates: { lat: 13.7563, lng: 100.5018 },
-};
+
+  isTourismHeavy: false,
+  marketSaturation: 95,
+  regionalLatency: 5,
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Neural Infrastructure Audit",
+      description:
+        "วิเคราะห์โครงสร้างข้อมูลและช่องโหว่ความปลอดภัยเพื่อเตรียมความพร้อมสู่ระบบอัจฉริยะ",
+    },
+    {
+      step: "02",
+      title: "Autonomous UX Deployment",
+      description:
+        "ติดตั้งระบบที่ปรับเปลี่ยนเนื้อหาตาม Intent ผู้ใช้และระบบ Lead Scoring อัตโนมัติ",
+    },
+    {
+      step: "03",
+      title: "AI-Search Domination (GEO)",
+      description:
+        "ทำ Entity Mapping ขั้นสูงเพื่อให้เว็บไซต์ของคุณครองอันดับหนึ่งบน Google และ AI Agents",
+    },
+  ],
+});

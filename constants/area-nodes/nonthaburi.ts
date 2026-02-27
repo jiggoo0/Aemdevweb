@@ -3,90 +3,125 @@
  * [STRATEGY]: High-End Residential | Medical & Service SEO | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { seoAgencyService } from "@/constants/services/seo-agency";
 
-export const nonthaburiNode: AreaNode = {
+export const nonthaburiNode = defineAreaNode(seoAgencyService, {
+  // --- Basic Identity ---
   slug: "nonthaburi",
   province: "นนทบุรี",
   region: "Central",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ นนทบุรี | ออกแบบเว็บธุรกิจบริการและคาเฟ่พรีเมียม เมืองแห่งนวัตกรรม",
+  priority: 98,
+
+  title: "รับทำเว็บไซต์ นนทบุรี | Digital Strategy สำหรับธุรกิจบริการและ SME พรีเมียม",
   description:
-    "บริการรับทำเว็บไซต์ในนนทบุรี เน้นดีไซน์ที่ทันสมัยสำหรับหมู่บ้านหรู คลินิกความงาม และร้านอาหารระดับพรีเมียม ติดหน้าแรก Google",
-  seoTitle: "รับทำเว็บไซต์ นนทบุรี ออกแบบเว็บคาเฟ่ คลินิก หมู่บ้าน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์นนทบุรี สำหรับ SME และธุรกิจบริการ เว็บสวยโหลดไว มาตรฐานสากล รองรับ SEO พื้นที่นนทบุรีและใกล้เคียง",
+    "บริการวางระบบเว็บไซต์และกลยุทธ์ SEO ในนนทบุรี เจาะกลุ่มราชพฤกษ์-แจ้งวัฒนะ เน้นความหรูหรา โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งบน Google Maps ท้องถิ่น",
 
   longDescription:
-    "นนทบุรี เมืองแห่งนวัตกรรมและการขยายตัวของย่านที่พักอาศัยระดับพรีเมียมที่เป็นหัวใจสำคัญของกรุงเทพฯ ฝั่งตะวันตก " +
-    "นายเอ็มซ่ามากส์ พร้อมยกระดับคลินิก คาเฟ่ และธุรกิจบริการในนนทบุรีด้วยเว็บไซต์ที่สะท้อนภาพลักษณ์ 'Modern Urban Luxury' " +
-    "เราเน้นโครงสร้างที่โหลดไวสายฟ้าแลบและระบบจองออนไลน์ที่ลื่นไหล เพื่อตอบโจทย์ไลฟ์สไตล์คนเมืองในย่านราชพฤกษ์และแจ้งวัฒนะ " +
-    "พร้อมกลยุทธ์ Hyper-Local SEO ที่จะทำให้ธุรกิจของคุณเป็นอันดับหนึ่งในพื้นที่ที่มีการแข่งขันสูงสุดแห่งหนึ่งของประเทศ",
+    "นนทบุรีคือเมืองแห่งนวัตกรรมและการขยายตัวของไลฟ์สไตล์ระดับพรีเมียม " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับคลินิก คาเฟ่ และธุรกิจบริการย่านราชพฤกษ์ที่ต้องการความโดดเด่นเหนือคู่แข่ง " +
+    "เราเน้นการทำ Local Entity Mapping และ GMB Optimization เพื่อให้ลูกค้าในพื้นที่ค้นหาคุณเจอเป็นอันดับแรกทันทีที่ต้องการรับบริการ",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Urban-Elite Aesthetic: งานดีไซน์ที่เน้นความเรียบหรูและทันสมัย เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงในโครงการหมู่บ้านระดับพรีเมียม",
-    "High-Performance Booking: ระบบจองนัดหมายออนไลน์ที่ทำงานรวดเร็ว ช่วยลดขั้นตอนและเพิ่มโอกาสปิดการขายได้ทันทีบนมือถือ",
-    "Zone-Specific SEO Domination: วางโครงสร้างการค้นหาเจาะกลุ่มพื้นที่ยุทธศาสตร์ เช่น ราชพฤกษ์, แจ้งวัฒนะ และติวานนท์ อย่างแม่นยำ",
-  ],
-
-  priority: 98,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/nonthaburi-node.webp",
   coordinates: { lat: 13.8591, lng: 100.4986 },
-  marketSaturation: 82,
-  regionalLatency: 5,
+  districts: ["ราชพฤกษ์", "แจ้งวัฒนะ", "ปากเกร็ด", "บางใหญ่", "เมืองนนทบุรี", "รัตนาธิเบศร์"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในนนทบุรีมีพฤติกรรมการค้นหาผ่านมือถือสูงมาก และมักตัดสินใจจากรีวิวบน Google Maps ความสมบูรณ์ของข้อมูลท้องถิ่น (Local Authority) คือกุญแจสู่ Conversion",
+    technicalApproach:
+      "เน้นระบบ Search Generative Experience (SGE) และการปักหมุดธุรกิจในโซนหมู่บ้านหรูและห้างสรรพสินค้าชั้นนำ",
+    localStrength:
+      "เข้าใจโครงสร้างสังคมและย่านธุรกิจใหม่ในนนทบุรี พร้อมบริการวางระบบถึงที่ทำงาน (On-site Consultation)",
+    nicheIndustries: [
+      "คลินิกความงามและศูนย์สุขภาพพรีเมียม",
+      "ร้านอาหารไลฟ์สไตล์และคาเฟ่ถ่ายรูปสวย",
+      "ธุรกิจตกแต่งภายในและงานวิศวกรรมอาคาร",
+      "บริษัทจัดหาบุคลากรและงานบริการ B2B",
+    ],
+    painPoints: [
+      "คู่แข่งเยอะมากในพื้นที่ แต่คนหาธุรกิจคุณไม่เจอ",
+      "เว็บไซต์เดิมโหลดช้าจนลูกค้าหมู่บ้านหรูรำคาญและปิดหนี",
+      "ข้อมูลพิกัดบนแผนที่ Google Maps ไม่แม่นยำ",
+    ],
+    competitorLevel: "extreme",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 168,
+      localClient: "คลินิกความงามชื่อดัง ย่านราชพฤกษ์",
+    },
+    regionalPricing: {
+      startPrice: `${seoAgencyService.price} บาท`,
+      timeline: "10-20 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: คาเฟ่แจ้งวัฒนะ",
+      result: "ทำ SEO และปรับ GMB ใหม่ ยอด Traffic จากคนในพื้นที่เพิ่มขึ้น 400% จนต้องขยายสาขา",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ ราชพฤกษ์",
+      "จ้างทำ SEO นนทบุรี",
+      "ปักหมุด Google Maps แจ้งวัฒนะ",
+      "Web Design Nonthaburi",
+    ],
+    promotions: [
+      {
+        title: "Local Dominance Package",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจในนนทบุรี รับฟรีบริการ Google My Business (GMB) Optimization พร้อมระบบ Local Local Schema มูลค่า 8,500 บาท",
+        discount: "Free Map Domination Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nonthaburi-node.webp",
+      gallery: [
+        "/images/services/seo-agency-node.webp",
+        "/images/case-studies/ecommerce-nextjs-migration.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "ทำ SEO ในนนทบุรีใช้เวลานานไหมกว่าจะติดหน้าแรก?",
+      answer:
+        "สำหรับ Local SEO (เช่น คำค้นหา + นนทบุรี) มักจะเห็นผลภายใน 1-3 เดือนครับ ขึ้นอยู่กับความแข็งแรงของ GMB และโครงสร้างเทคนิคของเว็บครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ นนทบุรี",
+    "ออกแบบเว็บไซต์ ราชพฤกษ์",
+    "รับทำ SEO นนทบุรี",
+    "Local SEO Thailand",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 90,
+  regionalLatency: 6,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Urban Brand Audit",
+      title: "Local Authority Blueprint",
       description:
-        "วิเคราะห์การนำเสนอแบรนด์ให้เข้ากับไลฟ์สไตล์คนเมืองนนทบุรีที่ต้องการความรวดเร็วและพรีเมียม",
+        "วิเคราะห์คู่แข่งในพื้นที่นนทบุรีและวางโครงสร้าง Semantic SEO เพื่อสร้างความน่าเชื่อถือระดับท้องถิ่น",
     },
     {
       step: "02",
-      title: "Smart Booking Deployment",
+      title: "Conversion Engine Setup",
       description:
-        "ติดตั้งระบบจองนัดหมายและระบบสมาชิกที่เชื่อมต่อกับสมาร์ทโฟนเพื่อเพิ่มความสะดวกให้ลูกค้า",
+        "ออกแบบระบบเว็บไซต์ที่รองรับ Mobile-First และเชื่อมต่อกับ Google Business Profile อย่างสมบูรณ์",
     },
     {
       step: "03",
-      title: "Hyper-Local SEO Hub",
+      title: "Regional Market Domination",
       description:
-        "เน้นคีย์เวิร์ดเจาะจงโซนราชพฤกษ์ แจ้งวัฒนะ และติวานนท์ เพื่อดักจับ Traffic ในพื้นที่หนาแน่น",
+        "เร่ง Traffic ด้วยกลยุทธ์ Content Hub และการทำ Entity Mapping เพื่อครองอันดับหนึ่งในย่านราชพฤกษ์-แจ้งวัฒนะ",
     },
   ],
-  localContext: {
-    marketInsight:
-      "นนทบุรีมีการเติบโตของธุรกิจบริการระดับสูงหนาแน่นมาก เว็บไซต์ต้องเน้น UX/UI ที่หรูหราและโหลดไวเป็นพิเศษ",
-    technicalApproach:
-      "เน้น Mobile Optimization และการปักหมุด Google Maps ในย่านธุรกิจใหม่ (CBD นนทบุรี)",
-    localStrength:
-      "เข้าใจรสนิยมกลุ่มลูกค้ากำลังซื้อสูงในย่านราชพฤกษ์และหมู่บ้านจัดสรรระดับพรีเมียม",
-    nicheIndustries: [
-      "คลินิกความงามและสุขภาพ",
-      "ร้านอาหารและคาเฟ่ไลฟ์สไตล์",
-      "ธุรกิจรับเหมาตกแต่งบ้าน",
-    ],
-    painPoints: ["ธุรกิจเยอะแต่คนหาเบอร์ติดต่อไม่เจอ", "เว็บไซต์ไม่รองรับการชำระเงินออนไลน์"],
-    competitorLevel: "extreme",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ราชพฤกษ์",
-      "ออกแบบเว็บคาเฟ่ นนทบุรี",
-      "จ้างทำ SEO แจ้งวัฒนะ",
-      "ทำเว็บคลินิก บางใหญ่",
-    ],
-  },
-  districts: ["เมืองนนทบุรี", "ปากเกร็ด", "บางใหญ่", "บางบัวทอง", "บางกรวย"],
-  keywords: [
-    "รับทำเว็บไซต์ นนทบุรี",
-    "ทำเว็บคาเฟ่ นนทบุรี",
-    "จ้างทำเว็บปากเกร็ด",
-    "รับทำ SEO นนทบุรี",
-  ],
-};
+});

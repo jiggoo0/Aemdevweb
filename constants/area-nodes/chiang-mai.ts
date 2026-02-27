@@ -165,6 +165,22 @@ export const chiangMaiNode: AreaNode = {
       "จ้างทำเว็บโรงแรม หางดง",
       "ทำ SEO โรงแรม เชียงใหม่",
     ],
+    promotions: [
+      {
+        title: "OTA Escape Strategy (Chiang Mai)",
+        description:
+          "สิทธิพิเศษสำหรับรีสอร์ตและสปาในเชียงใหม่ รับฟรีบริการวางแผน Direct Booking Blueprint เพื่อลดการพึ่งพา OTA ทันที",
+        discount: "Free Strategy Session",
+        expiry: "2026-06-30",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chiang-mai-node.webp",
+      gallery: [
+        "/images/services/hotel-resort-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
   // --- System Metadata ---

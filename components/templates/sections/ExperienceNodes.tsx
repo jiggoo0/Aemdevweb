@@ -31,89 +31,100 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
   }, []);
 
   return (
-    <section ref={ref} className="overflow-hidden bg-[var(--brand-primary)]/5 py-24">
-      <div className="container mx-auto px-4">
-        <div className="grid h-full grid-cols-1 gap-6 lg:h-[700px] lg:grid-cols-12">
-          {/* Main Visual Node */}
+    <section ref={ref} className="bg-surface-offset relative overflow-hidden py-24 md:py-48">
+      {/* 01. MATRIX INFRASTRUCTURE */}
+      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.02]" />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-8">
+        <div className="grid h-full grid-cols-1 gap-8 lg:h-[750px] lg:grid-cols-12">
+          {/* Main Specialist Node */}
           <div
             className={cn(
-              "group relative flex flex-col justify-end overflow-hidden rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-black p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[var(--brand-primary)]/40 lg:col-span-7",
-              visible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0",
+              "group rounded-section hover:border-brand-primary/40 border-border/10 bg-surface-card relative flex flex-col justify-end overflow-hidden border p-12 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:col-span-7",
+              visible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0",
             )}
           >
-            {/* Background Image: Narrative Anchor */}
-            <div className="absolute inset-0 z-0 opacity-40 transition-opacity duration-700 group-hover:opacity-60">
+            <div className="absolute inset-0 z-0 opacity-40 transition-all duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-60">
               <Image
                 src={
                   isTourismHeavy
                     ? "/images/areas/chiang-mai-node.webp"
-                    : "/images/shared/preview.webp"
+                    : "/images/case-studies/industrial-catalog.webp"
                 }
-                alt="Experience Node Visual"
+                alt="Specialist Experience Visual"
                 fill
-                className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-110"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 60vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
             </div>
 
-            <div className="absolute top-0 right-0 origin-top-right rotate-90 p-8 font-mono text-[10px] tracking-[0.4em] text-white uppercase opacity-20">
-              Identity_Node_Protocol
+            <div className="absolute top-8 right-8 flex items-center gap-4 opacity-30 transition-opacity group-hover:opacity-100">
+              <span className="font-mono text-[10px] font-black tracking-[0.4em] text-white uppercase">
+                MASTER_NODE_V18
+              </span>
+              <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
             </div>
 
-            <div className="relative z-10 space-y-4 text-white">
+            <div className="relative z-10 space-y-6 text-white">
               {isTourismHeavy && (
-                <div className="mb-2 flex items-center gap-2 text-emerald-400">
-                  <div className="h-1 w-8 rounded-full bg-emerald-400" />
-                  <div className="h-1 w-4 rounded-full bg-emerald-400/30" />
-                  <span className="font-mono text-[8px] font-bold tracking-widest uppercase">
-                    Speed_Optimized
+                <div className="inline-flex items-center gap-3 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500" />
+                  <span className="font-mono text-[9px] font-black tracking-widest text-emerald-400 uppercase">
+                    GEO_Performance_Optimal
                   </span>
                 </div>
               )}
-              <h3 className="font-[family-name:var(--font-primary)] text-4xl leading-none font-black uppercase italic md:text-5xl">
-                {isTourismHeavy ? "Global Speed & Mobile First." : "Advanced Infrastructure."}
+              <h3 className="text-5xl leading-[0.85] font-black uppercase italic md:text-7xl">
+                {isTourismHeavy ? "Global <br/> Reach." : "Digital <br/> Hardened."}
               </h3>
-              <p className="max-w-md italic opacity-80">
+              <p className="max-w-md text-lg leading-relaxed font-medium italic opacity-80 md:text-xl">
                 {isTourismHeavy
-                  ? "ในพื้นที่ที่มี Global Traffic หนาแน่น เว็บไซต์ของคุณต้องโหลดเสร็จในเสี้ยววินาทีเพื่อรั้งนักท่องเที่ยวจากทั่วโลก"
-                  : "วางรากฐานระบบดิจิทัลที่เสถียรที่สุด เพื่อความสำเร็จที่วัดผลได้จริงของธุรกิจคุณ"}
+                  ? "วางโครงสร้างเพื่อดักจับ Traffic จากทั่วโลกด้วยสถาปัตยกรรม Edge Computing ที่เร็วที่สุดในภูมิภาค"
+                  : "ออกแบบระบบพื้นฐานที่ทนทานต่อการโจมตีและพร้อมสำหรับการขยายตัวสู่ระดับ Enterprise Grade"}
               </p>
             </div>
           </div>
 
-          {/* Side Nodes: Tactical Detail */}
-          <div className="grid grid-rows-2 gap-6 lg:col-span-5">
+          {/* Tactical Matrix Nodes */}
+          <div className="grid grid-rows-2 gap-8 lg:col-span-5">
             <div
               className={cn(
-                "group flex flex-col justify-center rounded-[var(--radius)] bg-[var(--brand-primary)] p-10 text-white shadow-lg transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02]",
-                visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+                "group rounded-section bg-brand-primary shadow-pro-xl hover:shadow-glow text-surface-main relative flex flex-col justify-center p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2",
+                visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
-              style={{ transitionDelay: "200ms" }}
+              style={{ transitionDelay: "300ms" }}
             >
-              <h4 className="mb-4 font-[family-name:var(--font-primary)] text-2xl font-black uppercase italic">
-                {isTourismHeavy ? "Booking_Optimization" : "ROI_Strategy"}
+              <span className="absolute top-8 right-8 font-mono text-[10px] font-black opacity-20">
+                REF_ID: ROI_01
+              </span>
+              <h4 className="mb-4 text-3xl font-black uppercase italic">
+                {isTourismHeavy ? "Direct_Booking" : "ROI_Optimization"}
               </h4>
-              <p className="italic opacity-80">
+              <p className="text-lg leading-relaxed font-medium italic opacity-90">
                 {isTourismHeavy
-                  ? "เพิ่มอัตราการจองตรง (Direct Booking) ด้วย UX ที่ลื่นไหลบนทุกอุปกรณ์"
-                  : "ออกแบบระบบที่เปลี่ยนผู้เข้าชมเป็นยอดขาย ด้วยการวิเคราะห์ข้อมูลพฤติกรรมจริง"}
+                  ? "เพิ่มกำไรสุทธิด้วยระบบจองตรงที่ไม่ผ่านเอเย่นต์ ลดค่าคอมมิชชั่นทันที 100%"
+                  : "เปลี่ยนทุกคลิกให้เป็นรายได้ด้วยการออกแบบ UX ที่ผ่านการคำนวณจิตวิทยาการซื้อ"}
               </p>
             </div>
+
             <div
               className={cn(
-                "group rounded-[var(--radius)] border-[var(--border-width)] border-[var(--brand-primary)]/30 bg-black p-10 text-white shadow-xl transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[var(--brand-primary)]",
-                visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+                "group rounded-section border-brand-primary/30 hover:border-brand-primary bg-surface-card relative flex flex-col justify-center border p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+                visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
-              style={{ transitionDelay: "400ms" }}
+              style={{ transitionDelay: "500ms" }}
             >
-              <h4 className="mb-4 font-[family-name:var(--font-primary)] text-2xl font-black text-[var(--brand-primary)] uppercase italic">
-                {isTourismHeavy ? "Multi-Lingual_Node" : "Security_Ledger"}
+              <span className="text-brand-primary absolute top-8 right-8 font-mono text-[10px] font-black opacity-20">
+                REF_ID: SEC_02
+              </span>
+              <h4 className="text-brand-primary mb-4 text-3xl font-black uppercase italic">
+                {isTourismHeavy ? "Edge_Network" : "Security_Ledger"}
               </h4>
-              <p className="italic opacity-80">
+              <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-80">
                 {isTourismHeavy
-                  ? "รองรับการเข้าถึงจากทั่วโลกด้วยระบบ Multi-language และ CDN ระดับพรีเมียม"
-                  : "ปกป้องข้อมูลพาร์ทเนอร์และลูกค้าด้วยระบบความปลอดภัยมาตรฐานสูงสุด"}
+                  ? "เข้าถึงลูกค้ายุโรปและอเมริกาด้วยความเร็วระดับมิลลิวินาทีผ่าน Global Nodes"
+                  : "ปกป้องข้อมูลธุรกิจและลูกค้าด้วยระบบเข้ารหัสขั้นสูงและมาตรฐาน PDPA ล่าสุด"}
               </p>
             </div>
           </div>

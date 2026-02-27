@@ -93,19 +93,23 @@ export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
   styles["--text-primary"] = theme.foreground || (theme.mode === "dark" ? "#f8fafc" : "#0f172a");
   styles["--radius"] = theme.radius || "2.5rem";
 
-  // 2. [ENGINE]: OKLCH Dynamic Generator (Color Bridge)
+  // 2. [ENGINE]: OKLCH Dynamic Generator (Standardized Prefix)
   const processColor = (hex: string, key: string) => {
     const lch = hexToOklch(hex);
     if (lch) {
       const raw = `${lch.l} ${lch.c} ${lch.h}`;
-      // ส่งค่า RAW เพื่อให้ globals.css นำไปทำ Alpha Blending ได้
+      // Standardize on --brand- prefix for consistency across all components
       styles[`--brand-${key}-raw`] = raw;
       styles[`--brand-${key}`] = `oklch(${raw})`;
 
-      // [CONTRAST_LOGIC]: คำนวณสี Foreground อัตโนมัติ (A11y Compliant)
+      // Inject legacy compatibility variable to prevent immediate breakage during refactor
+      styles[`--theme-${key}`] = `oklch(${raw})`;
+
+      // [CONTRAST_LOGIC]: Automatic Foreground Calculation
       styles[`--brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
     } else {
       styles[`--brand-${key}`] = hex;
+      styles[`--theme-${key}`] = hex;
     }
   };
 

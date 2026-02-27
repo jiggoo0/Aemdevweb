@@ -3,92 +3,126 @@
  * [STRATEGY]: Industrial Growth | Logistics Hub | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
 import { corporateService } from "@/constants/services/corporate";
 
-export const chachoengsaoNode: AreaNode = {
+export const chachoengsaoNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "chachoengsao",
   province: "ฉะเชิงเทรา",
   region: "East",
-  templateSlug: "corporate",
-  title: "รับทำเว็บไซต์ ฉะเชิงเทรา | พัฒนาเว็บไซต์โรงงานและธุรกิจโลจิสติกส์ในเขต EEC",
+  priority: 94,
+
+  title:
+    "รับทำเว็บไซต์ ฉะเชิงเทรา | Digital Infrastructure สำหรับโรงงาน EEC และโครงการ Smart Living",
   description:
-    "บริการรับทำเว็บไซต์มาตรฐาน Enterprise สำหรับนิคมอุตสาหกรรมฉะเชิงเทรา เน้นความปลอดภัยข้อมูลและความน่าเชื่อถือให้คู่ค้า B2B",
-  seoTitle: "รับทำเว็บไซต์ ฉะเชิงเทรา ออกแบบเว็บโรงงาน โลจิสติกส์ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ฉะเชิงเทรา สำหรับธุรกิจโรงงานผลิต โกดังให้เช่า และขนส่งสินค้า มาตรฐานสากล รองรับ SEO อุตสาหกรรม EEC",
+    "บริการวางระบบเว็บไซต์มาตรฐานสูงในฉะเชิงเทรา เจาะกลุ่มโรงงานบางปะกงและอสังหาฯ แนวราบ เน้นความปลอดภัยข้อมูลระดับวิศวกรรม โหลดไว และครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษ",
 
   longDescription:
-    "ฉะเชิงเทรา จังหวัดยุทธศาสตร์ในเขตระเบียงเศรษฐกิจภาคใต้ (EEC) ที่เป็นศูนย์กลางโลจิสติกส์และอุตสาหกรรมหนัก " +
-    "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์บริษัทและโรงงานของคุณให้เป็นเครื่องมือปิดการขายระดับสากล " +
-    "ด้วยการออกแบบที่เน้นความน่าเชื่อถือ (B2B Trust) และระบบความปลอดภัยข้อมูลสูงสุด " +
-    "เพื่อให้คู่ค้าและฝ่ายจัดซื้อค้นหาโรงงานของคุณเจอเป็นอันดับแรกในคีย์เวิร์ดอุตสาหกรรม EEC",
+    "ฉะเชิงเทรา จังหวัดยุทธศาสตร์ที่เป็นประตูสำคัญของระเบียงเศรษฐกิจภาคตะวันออก (EEC) " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับนิคมอุตสาหกรรม โลจิสติกส์ และโครงการหมู่บ้านจัดสรรที่ขยายตัวจากกรุงเทพฯ " +
+    "เราเน้นโครงสร้างที่รองรับการแสดงผลบนมือถือที่รวดเร็ว (Mobile-First) และระบบความปลอดภัยระดับ Enterprise เพื่อสร้างความเชื่อมั่นสูงสุดให้คู่ค้า B2B",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Industrial Authority: ออกแบบเว็บไซต์ที่สะท้อนความมั่นคงและมาตรฐานสากล (ISO/EEC) เพื่อสร้างความเชื่อมั่นให้คู่ค้า B2B",
-    "Logistics-Optimized SEO: วางโครงสร้างการค้นหาเจาะกลุ่มคลังสินค้า ขนส่ง และโรงงานผลิตชิ้นส่วนในเขตฉะเชิงเทรา",
-    "High-Security Infrastructure: ระบบโครงสร้างพื้นฐานที่ป้องกันการโจมตีทางไซเบอร์และรองรับมาตรฐาน PDPA 100%",
-  ],
-
-  priority: 92,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/chachoengsao-node.webp",
   coordinates: { lat: 13.6904, lng: 101.0772 },
-  marketSaturation: 68,
-  regionalLatency: 8,
+  districts: ["บางปะกง", "เมืองฉะเชิงเทรา", "บ้านโพธิ์", "พนมสารคาม", "บางคล้า", "แปลงยาว"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ฉะเชิงเทรากำลังเปลี่ยนผ่านสู่ Smart City เว็บไซต์ต้องทำหน้าที่เป็น 'สำนักงานดิจิทัล' ที่สะท้อนทั้งงานวิศวกรรมและการใช้ชีวิตสมัยใหม่ (Modern Lifestyle) พร้อมกัน",
+    technicalApproach:
+      "เน้นระบบ Security Hardening และการปักหมุด Google Maps ในเขตอุตสาหกรรมและโครงการอสังหาฯ ใหม่ๆ ทั่วทั้งจังหวัด",
+    localStrength:
+      "เข้าใจพลวัตของการเติบโตในเขต EEC และความต้องการที่จำเพาะเจาะจงของโรงงานย่านบางปะกง",
+    nicheIndustries: [
+      "โรงงานอุตสาหกรรมหนักและประกอบรถยนต์",
+      "คลังสินค้าและศูนย์กระจายสินค้าโลจิสติกส์",
+      "โครงการหมู่บ้านและอสังหาฯ พรีเมียม",
+      "ธุรกิจบริการและการท่องเที่ยวเชิงศรัทธา (สายมู)",
+    ],
+    painPoints: [
+      "หาพิกัดโรงงานหรือโครงการหมู่บ้านบน Google Maps ได้ยาก",
+      "ขาดความน่าเชื่อถือทางเทคนิคสำหรับคู่ค้าต่างชาติย่านอุตสาหกรรม",
+      "เว็บไซต์เดิมไม่รองรับการขอใบเสนอราคา (RFQ) ออนไลน์",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 132,
+      localClient: "โครงการหมู่บ้านระดับพรีเมียม ย่านบางปะกง",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โครงการอสังหาฯ บางปะกง",
+      result: "วางโครงสร้าง SEO เจาะกลุ่มครอบครัวรุ่นใหม่ ยอดจองดูบ้านผ่านเว็บเพิ่มขึ้น 200%",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ บางปะกง",
+      "จ้างทำ SEO ฉะเชิงเทรา",
+      "ออกแบบเว็บโครงการหมู่บ้าน",
+      "Industrial Web Design EEC",
+    ],
+    promotions: [
+      {
+        title: "EEC Digital Fortress Offer",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานและโครงการอสังหาฯ รับฟรีบริการ B2B Security Hardening (CSP/SSL/PDPA Ready) มูลค่า 9,500 บาท",
+        discount: "Free Security Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chachoengsao-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รับทำเว็บไซต์ที่รองรับระบบสมาชิกสำหรับโครงการหมู่บ้านไหม?",
+      answer:
+        "รับครับ เราสามารถทำระบบนิติบุคคลออนไลน์ ระบบแจ้งซ่อม หรือดาวน์โหลดเอกสารสำหรับลูกบ้านได้ครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ ฉะเชิงเทรา",
+    "ออกแบบเว็บไซต์ บางปะกง",
+    "รับทำ SEO ฉะเชิงเทรา",
+    "Smart City Web Solution",
+  ],
+
+  isTourismHeavy: false,
+  marketSaturation: 78,
+  regionalLatency: 12,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "B2B Infrastructure Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์ความต้องการของคู่ค้าอุตสาหกรรมเพื่อวางโครงสร้างข้อมูลเทคนิคที่ค้นหาง่าย",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Security & Compliance Sync",
-      description: "ติดตั้งระบบความปลอดภัยข้อมูลมาตรฐานสูงและระบบจัดเก็บเอกสาร RFQ ที่รวดเร็ว",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "EEC Entity SEO",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ SEO เจาะจงคีย์เวิร์ดโรงงานและโลจิสติกส์ในพื้นที่ฉะเชิงเทราเพื่อดักจับ Traffic ฝ่ายจัดซื้อ",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "ฉะเชิงเทราเป็นจุดเชื่อมต่อโลจิสติกส์ที่สำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'ศูนย์กลางข้อมูลธุรกิจ' ที่มีความมั่นคงสูง",
-    technicalApproach:
-      "เน้นระบบความปลอดภัยระดับองค์กรและการทำ Local Business Schema สำหรับเขตอุตสาหกรรม",
-    localStrength:
-      "ทำเลที่ตั้งใกล้กรุงเทพฯ และสนามบินสุวรรณภูมิ รวมถึงการเป็นพื้นที่ยุทธศาสตร์ EEC",
-    nicheIndustries: [
-      "โรงงานผลิตและประกอบชิ้นส่วน",
-      "คลังสินค้าและศูนย์กระจายสินค้า",
-      "รีสอร์ตสายมูและคาเฟ่ริมน้ำ",
-    ],
-    painPoints: [
-      "เว็บไซต์ดูเก่าไม่น่าเชื่อถือสำหรับคู่ค้าใหม่",
-      "หาข้อมูลบริษัทใน Google ไม่เจอในคีย์เวิร์ดอุตสาหกรรม",
-    ],
-    competitorLevel: "high",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ บางปะกง",
-      "ออกแบบเว็บโรงงาน ฉะเชิงเทรา",
-      "จ้างทำ SEO ฉะเชิงเทรา",
-      "ทำเว็บโกดัง บ้านโพธิ์",
-    ],
-  },
-  districts: ["เมืองฉะเชิงเทรา", "บางปะกง", "บ้านโพธิ์", "พนมสารคาม", "บางคล้า"],
-  keywords: [
-    "รับทำเว็บไซต์ ฉะเชิงเทรา",
-    "ทำเว็บโรงงาน บางปะกง",
-    "จ้างทำเว็บ EEC",
-    "รับทำ SEO ฉะเชิงเทรา",
-  ],
-};
+});

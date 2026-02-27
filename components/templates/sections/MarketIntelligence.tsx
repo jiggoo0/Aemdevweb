@@ -26,7 +26,7 @@ export const MarketIntelligence = ({
           setVisible(true);
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1, margin: "-100px" },
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -36,88 +36,123 @@ export const MarketIntelligence = ({
   const getWidth = () => {
     switch (level.toLowerCase()) {
       case "high":
-        return "90%";
+      case "extreme":
+        return "95%";
       case "low":
-        return "30%";
+        return "35%";
       default:
-        return "60%";
+        return "65%";
     }
   };
 
   return (
-    <section ref={ref} className="overflow-hidden bg-[var(--brand-primary)]/5 py-24">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
-          {/* Competitive Level Analysis */}
+    <section
+      ref={ref}
+      className="bg-surface-offset border-border/10 relative overflow-hidden border-y py-24 md:py-48"
+    >
+      {/* 01. ANALYTIC INFRASTRUCTURE */}
+      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.03]" />
+      <div className="bg-brand-primary/5 absolute top-0 left-0 h-full w-1/2 -translate-x-1/2 skew-x-12" />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-12 lg:gap-32">
+          {/* --- COMPETITIVE_ANALYSIS: Strategic Dashboard --- */}
           <div
             className={cn(
-              "space-y-10 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
-              visible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0",
+              "space-y-12 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:col-span-6",
+              visible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0",
             )}
           >
-            <div className="space-y-4">
-              <p className="font-mono text-xs font-black tracking-[0.2em] uppercase opacity-50">
-                Competitive_Level
-              </p>
-              <div className="space-y-2">
-                <div className="flex items-end justify-between">
-                  <p className="text-5xl leading-none font-black text-[var(--brand-primary)] uppercase italic">
-                    {level}
-                  </p>
-                  <span className="font-mono text-xs font-bold opacity-40">INDEX_SCORE</span>
-                </div>
-
-                <div className="h-3 w-full overflow-hidden rounded-full bg-[var(--foreground)]/10">
-                  <div
-                    className={cn(
-                      "h-full bg-[var(--brand-primary)] transition-all duration-[1500ms] ease-out",
-                      visible ? "w-full" : "w-0",
-                    )}
-                    style={{ width: visible ? getWidth() : "0%", transitionDelay: "500ms" }}
-                  />
-                </div>
+            <div className="space-y-8">
+              <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
+                <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+                <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+                  Market_Saturation_Matrix.v18
+                </span>
               </div>
+
+              <h3 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl">
+                Competitive <br /> <span className="text-brand-primary">Hardened.</span>
+              </h3>
             </div>
 
-            <p className="text-lg leading-relaxed font-medium italic opacity-70">
-              เราวิเคราะห์คู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ให้คุณ "โดดเด่น" และ "ครองอันดับ"
-              ได้ไวกว่ามาตรฐานทั่วไป โดยใช้กลยุทธ์เฉพาะทางสำหรับตลาด {level} competition
-            </p>
+            <div className="border-brand-primary/40 border-l-[6px] pl-8">
+              <p className="text-text-primary text-xl leading-relaxed font-medium italic opacity-90 md:text-2xl">
+                เราไม่ได้แค่สร้างเว็บ แต่เรา "ชิงพื้นที่"
+                การตลาดออนไลน์ด้วยสถาปัตยกรรมที่เหนือกว่าค่าเฉลี่ยของกลุ่มอุตสาหกรรมในระดับ {level}{" "}
+                competition
+              </p>
+            </div>
+
+            {/* Performance HUD */}
+            <div className="bg-surface-card border-border/10 rounded-card shadow-pro-xl relative overflow-hidden border p-8">
+              <div className="mb-6 flex items-end justify-between">
+                <span className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase opacity-40">
+                  // Displacement_Index
+                </span>
+                <div className="text-right">
+                  <p className="text-brand-primary text-4xl leading-none font-black tracking-tighter uppercase italic">
+                    {level}
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-border/5 h-2 w-full overflow-hidden rounded-full">
+                <div
+                  className="bg-brand-primary shadow-glow h-full transition-all delay-500 duration-[2000ms] ease-out"
+                  style={{ width: visible ? getWidth() : "0%" }}
+                />
+              </div>
+
+              <div className="text-text-primary/20 mt-6 flex justify-between font-mono text-[8px] font-bold tracking-widest uppercase">
+                <span>Baseline</span>
+                <span>Saturation_Node</span>
+                <span>Optimized</span>
+              </div>
+            </div>
           </div>
 
-          {/* Niche Industry List */}
-          {industries && industries.length > 0 && (
-            <div className="space-y-6">
+          {/* --- NICHE_MATRIX: Focus Areas --- */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-1 gap-4">
               <p
                 className={cn(
-                  "font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-40 transition-all duration-1000",
-                  visible ? "translate-y-0 opacity-40" : "translate-y-4 opacity-0",
+                  "mb-4 font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-30 transition-all duration-1000",
+                  visible ? "translate-y-0 opacity-30" : "translate-y-4 opacity-0",
                 )}
               >
-                // Niche_Industry_Focus
+                // High_Intensity_Focus_Nodes
               </p>
-              <div className="grid gap-3">
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {industries.map((industry, idx) => (
                   <div
                     key={idx}
                     className={cn(
-                      "group flex items-center gap-4 rounded-[var(--radius)] border border-[var(--foreground)]/10 bg-[var(--surface-main)] p-4 transition-all hover:border-[var(--brand-primary)] hover:shadow-sm",
-                      "transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                      visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+                      "group border-border/10 bg-surface-card relative overflow-hidden rounded-2xl border p-6 transition-all duration-500",
+                      "hover:border-brand-primary/40 hover:bg-surface-main hover:shadow-glow-sm",
+                      visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                     )}
-                    style={{ transitionDelay: `${idx * 100 + 300}ms` }}
+                    style={{ transitionDelay: `${idx * 150 + 500}ms` }}
                   >
-                    <span className="flex h-6 w-6 items-center justify-center rounded bg-[var(--brand-primary)]/10 font-mono text-xs font-bold text-[var(--brand-primary)] transition-colors group-hover:bg-[var(--brand-primary)] group-hover:text-white">
-                      0{idx + 1}
-                    </span>
-                    <span className="font-bold text-[var(--foreground)]/80 italic group-hover:text-[var(--foreground)]">
-                      {industry}
-                    </span>
+                    <div className="flex items-center gap-4">
+                      <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-mono text-xs font-black transition-all group-hover:text-white">
+                        {idx + 1}
+                      </div>
+                      <span className="text-text-primary text-sm leading-tight font-bold italic opacity-80 group-hover:opacity-100">
+                        {industry}
+                      </span>
+                    </div>
+
+                    {/* Diagnostic Bar */}
+                    <div className="bg-border/5 mt-6 h-0.5 w-full overflow-hidden rounded-full">
+                      <div className="bg-brand-primary/20 group-hover:bg-brand-primary h-full w-1/2 transition-all duration-1000 group-hover:w-full" />
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </section>

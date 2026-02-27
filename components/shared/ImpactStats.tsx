@@ -19,42 +19,48 @@ interface MetricItem {
   readonly icon: IconName;
   readonly prefix?: string;
   readonly description: string;
+  readonly trend?: "up" | "stable";
 }
 
 const SYSTEM_METRICS: readonly MetricItem[] = [
   {
     id: "PERF_CORE",
-    label: "Performance Score",
+    label: "Core Performance",
     value: 99,
     unit: "/100",
     icon: "Zap",
     description: "Lighthouse Speed Index",
+    trend: "stable",
   },
   {
     id: "ROI_VELOCITY",
-    label: "Conversion Growth",
+    label: "Growth Velocity",
     value: 300,
     unit: "%",
     icon: "TrendingUp",
     prefix: "+",
-    description: "Average Client Uplift",
+    description: "Conversion Uplift",
+    trend: "up",
   },
   {
     id: "UPTIME_SHIELD",
-    label: "System Uptime",
+    label: "Security SLA",
     value: 99.99,
     decimals: 2,
     unit: "%",
     icon: "ShieldCheck",
-    description: "Enterprise Grade SLA",
+    description: "Uptime Guaranteed",
+    trend: "stable",
   },
   {
-    id: "PRT_NETWORK",
-    label: "Active Partners",
-    value: 150,
-    unit: "+",
-    icon: "Users",
-    description: "Trusting Businesses",
+    id: "AI_AUTHORITY",
+    label: "Entity Reach",
+    value: 1.2,
+    decimals: 1,
+    unit: "M+",
+    icon: "Globe",
+    description: "Digital Footprint",
+    trend: "up",
   },
 ];
 
@@ -169,9 +175,18 @@ const MetricCard = ({
             <h3 className="text-text-primary font-mono text-5xl font-black tracking-tighter italic md:text-6xl">
               <Counter value={stat.value} decimals={stat.decimals} prefix={stat.prefix} />
             </h3>
-            <span className="text-brand-primary text-lg font-black tracking-widest uppercase opacity-80">
-              {stat.unit}
-            </span>
+            <div className="flex flex-col">
+              {stat.trend === "up" && (
+                <IconRenderer
+                  name="ArrowUpRight"
+                  size={12}
+                  className="mb-1 animate-pulse text-emerald-500"
+                />
+              )}
+              <span className="text-brand-primary text-lg leading-none font-black tracking-widest uppercase opacity-80">
+                {stat.unit}
+              </span>
+            </div>
           </div>
           <p className="text-text-primary group-hover:text-brand-primary text-sm font-black tracking-[0.2em] uppercase italic transition-colors">
             {stat.label}
@@ -202,7 +217,7 @@ const MetricCard = ({
 
 const ImpactStats = () => {
   const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -219,13 +234,13 @@ const ImpactStats = () => {
   }, []);
 
   return (
-    <section ref={ref} className="mx-auto w-full max-w-7xl px-4 py-16 md:py-24">
+    <div ref={ref} className="w-full">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {SYSTEM_METRICS.map((stat, index) => (
           <MetricCard key={stat.id} stat={stat} index={index} visible={visible} />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

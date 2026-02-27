@@ -1,12 +1,11 @@
 /**
- * [SHARED COMPONENT]: FLOATING_CONTAINER v1.1.1 (SERVER_OPTIMIZED)
- * [STRATEGY]: Throttled Scroll Listener | Pure CSS Transitions | Zero-Framer
- * [MAINTAINER]: AEMZA MACKS
+ * [SHARED COMPONENT]: NEURAL_INTERACTION_NODE v18.4.0
+ * [STRATEGY]: Autonomous UI Sync | GPU-Accelerated Positioning | Zero-JS Animation
  */
 
 "use client";
 
-import React, { useEffect, useState, type ReactNode, useCallback } from "react";
+import React, { useEffect, useState, type ReactNode, useCallback, memo } from "react";
 import { cn } from "@/lib/utils";
 
 interface FloatingContainerProps {
@@ -14,30 +13,25 @@ interface FloatingContainerProps {
   readonly triggerY?: number;
   readonly className?: string;
   readonly id?: string;
+  readonly showStatus?: boolean;
 }
 
-export const FloatingContainer = ({
+const FloatingContainerBase = ({
   children,
   triggerY = 100,
   className,
   id,
+  showStatus = true,
 }: FloatingContainerProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // [STRATEGY]: Throttled Scroll Logic
   const handleScroll = useCallback(() => {
-    const currentScrollY = window.scrollY;
-    if (currentScrollY > triggerY) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
+    setIsVisible(window.scrollY > triggerY);
   }, [triggerY]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Initial check
-
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
@@ -45,17 +39,22 @@ export const FloatingContainer = ({
     <div
       id={id}
       className={cn(
-        "pointer-events-none fixed transform-gpu transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity]",
-        isVisible
-          ? "translate-y-0 scale-100 opacity-100"
-          : "pointer-events-none translate-y-4 scale-90 opacity-0",
+        "pointer-events-none fixed z-50 transform-gpu transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-[transform,opacity]",
+        isVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-90 opacity-0",
         className,
       )}
     >
-      {/* คืนค่า pointer-events เพื่อให้ปุ่มภายในคลิกได้ */}
-      <div className={cn("pointer-events-auto", !isVisible && "pointer-events-none")}>
+      <div className={cn("pointer-events-auto relative", !isVisible && "pointer-events-none")}>
+        {showStatus && (
+          <div className="absolute -top-2 -right-2 z-10 flex h-4 w-4 items-center justify-center">
+            <span className="bg-brand-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-40" />
+            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+          </div>
+        )}
         {children}
       </div>
     </div>
   );
 };
+
+export const FloatingContainer = memo(FloatingContainerBase);

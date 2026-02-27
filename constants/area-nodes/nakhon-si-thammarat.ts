@@ -3,92 +3,126 @@
  * [STRATEGY]: Cultural Authority | Multi-Sector Service | Dynamic Inheritance
  */
 
-import type { AreaNode } from "@/types";
-import { localAuthorityService } from "@/constants/services/local-authority";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { corporateService } from "@/constants/services/corporate";
 
-export const nakhonSiThammaratNode: AreaNode = {
+export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "nakhon-si-thammarat",
   province: "นครศรีธรรมราช",
   region: "South",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ นครศรีธรรมราช | ศูนย์กลางดิจิทัลเพื่อการค้าและวัฒนธรรมแห่งภาคใต้",
+  priority: 96,
+
+  title:
+    "รับทำเว็บไซต์ นครศรีธรรมราช | Digital Infrastructure สำหรับธุรกิจการค้าและอุตสาหกรรมภาคใต้",
   description:
-    "ยกระดับธุรกิจและหน่วยงานในนครศรีธรรมราช ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือระดับพรีเมียมและระบบจัดการข้อมูลที่ทันสมัย",
-  seoTitle: "รับทำเว็บไซต์ นครศรีธรรมราช ออกแบบเว็บธุรกิจ คลินิก หน่วยงาน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์นครศรีธรรมราช สำหรับ SME คลินิก และหน่วยงานราชการ ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่นครศรีฯ และใกล้เคียง",
+    "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในนครศรีธรรมราช เจาะกลุ่มธุรกิจค้าส่ง ขนส่ง และอสังหาริมทรัพย์พรีเมียม เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในเมืองคอน",
 
   longDescription:
-    "นครศรีธรรมราช 'เมืองคอน' ศูนย์กลางทางเศรษฐกิจและวัฒนธรรมที่ยิ่งใหญ่ที่สุดของภาคใต้ตอนกลาง " +
-    "นายเอ็มซ่ามากส์ พร้อมขับเคลื่อนธุรกิจและหน่วยงานในนครศรีธรรมราชด้วยเว็บไซต์ที่ผสาน 'ความศรัทธา' เข้ากับ 'ความเร็ว' " +
-    "ไม่ว่าจะเป็นรีสอร์ตหรูย่านขนอม คลินิกในตัวเมือง หรือหน่วยงานราชการที่ต้องการมาตรฐาน ITA สูงสุด " +
-    "เราออกแบบระบบที่โหลดไวระดับเสถียรและวางกลยุทธ์ Local SEO เพื่อให้ธุรกิจของคุณเป็นเบอร์ 1 ในใจคนใต้และนักท่องเที่ยวทั่วประเทศ",
+    "นครศรีธรรมราช 'นครแห่งธรรม' และศูนย์กลางเศรษฐกิจที่สำคัญที่สุดของภาคใต้ตอนกลาง " +
+    "เราให้บริการออกแบบเว็บไซต์เชิงพาณิชย์สำหรับธุรกิจที่ต้องการภาพลักษณ์ที่มั่นคงและเทคโนโลยีที่ล้ำสมัย " +
+    "เราเน้นโครงสร้างที่รองรับการทำ Local SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรอง เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในย่านเศรษฐกิจหลัก",
 
-  // --- Localized Benefits ---
-  benefits: [
-    "Cultural-Digital Fusion: งานดีไซน์ที่สะท้อนความเป็นเมืองแห่งธรรมควบคู่ไปกับความล้ำสมัยสไตล์ Minimal Luxury",
-    "Southern Logistics Hub SEO: วางรากฐานการค้นหาเพื่อสนับสนุนธุรกิจขนส่งและการค้าส่งประจำภูมิภาคภาคใต้",
-    "Multi-Sector Scalability: ระบบโครงสร้างพื้นฐานที่รองรับทั้งงานบริการ การแพทย์ และการท่องเที่ยวเชิงจิตวิญญาณ",
-  ],
-
-  priority: 96,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
   heroImage: "/images/areas/nakhon-si-thammarat-node.webp",
   coordinates: { lat: 8.4333, lng: 99.9667 },
-  marketSaturation: 75,
-  regionalLatency: 22,
+  districts: ["เมืองนครศรีธรรมราช", "ทุ่งสง", "ขนอม", "สิชล", "ปากพนัง", "ฉวาง"],
+
+  // --- Context Data ---
+  localContext: {
+    marketInsight:
+      "ลูกค้าในนครศรีธรรมราชให้ความสำคัญกับ 'ความศรัทธา' และ 'ความมั่นคงของบริษัท' เว็บไซต์ที่ดูภูมิฐาน แสดงตัวตนชัดเจน (E-E-A-T) และโหลดไวจะได้รับความไว้วางใจสูงสุดในกลุ่มธุรกิจ B2B",
+    technicalApproach:
+      "เน้นระบบ Security Hardening และการทำ Local Entity Mapping สำหรับตลาดภาคใต้ตอนล่างและกลุ่มนักท่องเที่ยวพรีเมียม",
+    localStrength:
+      "เข้าใจพลวัตการค้าของธุรกิจท้องถิ่นและระบบนิเวศการกระจายสินค้าในภาคใต้ พร้อมบริการวางแผนระบบดิจิทัลในพื้นที่",
+    nicheIndustries: [
+      "ธุรกิจค้าส่งและโลจิสติกส์ภูมิภาค",
+      "อสังหาริมทรัพย์และรีสอร์ตพรีเมียม (ขนอม/สิชล)",
+      "ศูนย์การแพทย์และคลินิกเฉพาะทาง",
+      "ธุรกิจท่องเที่ยวเชิงวัฒนธรรมและศรัทธา (สายมู)",
+    ],
+    painPoints: [
+      "ภาพลักษณ์เว็บไซต์ไม่สะท้อนถึงขนาดและความมั่นคงของธุรกิจ",
+      "หาข้อมูลพิกัดร้านหรือบริษัทบน Google Maps ไม่เจอในคีย์เวิร์ดสำคัญ",
+      "ระบบติดต่อฝ่ายขายล่าช้าและไม่มีการเก็บข้อมูลลูกค้าที่เป็นระบบ",
+    ],
+    competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 145,
+      localClient: "บริษัทส่งออกสินค้าเกษตรรายใหญ่ ย่านทุ่งสง",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โครงการวิลล่าหรูขนอม",
+      result: "วางระบบ SEO และการนำเสนออัตลักษณ์ใหม่ ยอดจองตรงเพิ่มขึ้น 250% ภายใน 1 ซีซั่น",
+    },
+    hyperLocalKeywords: [
+      "รับทำเว็บไซต์ นครศรีธรรมราช",
+      "จ้างทำ SEO ทุ่งสง",
+      "ทำเว็บโรงแรม ขนอม",
+      "Southern Commercial Web Solution",
+    ],
+    promotions: [
+      {
+        title: "Cultural Hub Tech Strategy",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจในนครศรีธรรมราช รับฟรีบริการออกแบบ Digital Brand Storytelling ที่ผสานอัตลักษณ์ท้องถิ่นเข้ากับเทคโนโลยีมูลค่า 12,000 บาท",
+        discount: "Free Identity & Tech Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nakhon-si-thammarat-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
+  },
+
+  faqs: [
+    {
+      question: "รับทำระบบจองคิวสำหรับคลินิกในนครศรีธรรมราชไหม?",
+      answer:
+        "รับครับ เราสามารถเขียนระบบนัดหมายที่เชื่อมต่อกับระบบหลังบ้านและแจ้งเตือนผ่าน SMS หรือ LINE ให้กับเจ้าหน้าที่และคนไข้ได้ทันทีครับ",
+    },
+  ],
+
+  keywords: [
+    "รับทำเว็บไซต์ นครศรีธรรมราช",
+    "ออกแบบเว็บไซต์ ทุ่งสง",
+    "จ้างทำเว็บโรงแรม นครศรี",
+    "Technical SEO Southern Thailand",
+  ],
+
+  isTourismHeavy: true,
+  marketSaturation: 74,
+  regionalLatency: 14,
+
   regionalRoadmap: [
     {
       step: "01",
-      title: "Cultural Trust Audit",
+      title: "Regional Market Analysis",
       description:
-        "วิเคราะห์การนำเสนอแบรนด์ให้เข้ากับอัตลักษณ์เมืองคอนที่เน้นความศรัทธาและความมั่นคง",
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
     },
     {
       step: "02",
-      title: "Service Node Deployment",
+      title: "High-Performance Deployment",
       description:
-        "ติดตั้งระบบบริการออนไลน์และระบบจองนัดหมายที่โหลดไวเพื่อรองรับลูกค้าทั่วภาคใต้ตอนกลาง",
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
     },
     {
       step: "03",
-      title: "Regional Authority SEO",
+      title: "Strategic Growth & Scaling",
       description:
-        "ทำ SEO เจาะจงคีย์เวิร์ด 'รับทำเว็บไซต์ นครศรีธรรมราช' และ 'ของดีเมืองคอน' เพื่อครองอันดับหนึ่ง",
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
     },
   ],
-  localContext: {
-    marketInsight:
-      "นครศรีธรรมราชเป็นศูนย์กลางทางเศรษฐกิจและวัฒนธรรม เว็บไซต์ที่ดูเป็นทางการและมีความประณีตจะได้รับความเชื่อถือสูง",
-    technicalApproach:
-      "เน้นระบบ Security มาตรฐานสูงและการทำ Local Entity Mapping สำหรับย่านธุรกิจและแหล่งท่องเที่ยว",
-    localStrength: "ชื่อเสียงด้านการเป็น 'นครแห่งธรรม' และศูนย์กลางการกระจายสินค้าของภาคใต้",
-    nicheIndustries: [
-      "ธุรกิจบริการและการแพทย์",
-      "รีสอร์ตสายมูและแหล่งท่องเที่ยวทางวัฒนธรรม",
-      "สินค้าเกษตรแปรรูปและงานหัตถศิลป์",
-    ],
-    painPoints: [
-      "ธุรกิจเยอะแต่ภาพลักษณ์ออนไลน์ดูธรรมดา",
-      "หาเบอร์ติดต่อหรือแผนที่หน่วยงานในพื้นที่ยาก",
-    ],
-    competitorLevel: "high",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ทุ่งสง",
-      "ออกแบบเว็บรีสอร์ต ขนอม",
-      "จ้างทำ SEO สิชล",
-      "ทำเว็บหน่วยงาน นครศรีธรรมราช",
-    ],
-  },
-  districts: ["เมืองนครศรีธรรมราช", "ทุ่งสง", "ปากพนัง", "สิชล", "ขนอม"],
-  keywords: [
-    "รับทำเว็บไซต์ นครศรีธรรมราช",
-    "ทำเว็บคลินิก นครศรี",
-    "จ้างทำเว็บเมืองคอน",
-    "รับทำ SEO นครศรีธรรมราช",
-  ],
-};
+});

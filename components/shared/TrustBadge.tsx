@@ -27,7 +27,7 @@ const TRUST_NODES: readonly TrustNode[] = [
 
 const TrustBadge = () => {
   const [visible, setVisible] = useState(false);
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -44,30 +44,30 @@ const TrustBadge = () => {
   }, []);
 
   return (
-    <section
+    <div
       ref={ref}
-      className="flex w-full flex-col items-center justify-center py-16 md:py-24"
+      className="flex w-full flex-col items-center justify-center"
       aria-label="Trust Signals"
     >
       {/* --- 01. STATUS HEADER: Blueprint Alignment --- */}
       <div
         className={cn(
-          "mb-14 flex w-full max-w-2xl items-center justify-center gap-6 px-4 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "mb-10 flex w-full max-w-2xl items-center justify-center gap-6 px-4 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
           visible ? "scale-x-100 opacity-60" : "scale-x-75 opacity-0",
         )}
       >
-        <div className="via-border/50 h-px flex-1 bg-gradient-to-r from-transparent to-transparent" />
+        <div className="bg-border/20 h-px flex-1" />
         <span
           suppressHydrationWarning
           className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] whitespace-nowrap uppercase italic md:text-[10px]"
         >
           Infrastructure_Verified.v{SITE_CONFIG.project.version}
         </span>
-        <div className="via-border/50 h-px flex-1 bg-gradient-to-r from-transparent to-transparent" />
+        <div className="bg-border/20 h-px flex-1" />
       </div>
 
       {/* --- 02. NODES GRID: Balanced Kinetic Chips --- */}
-      <div className="flex flex-wrap justify-center gap-4 px-4 md:gap-5 lg:gap-6">
+      <div className="flex flex-wrap justify-center gap-4 px-4 md:gap-5">
         {TRUST_NODES.map((node, index) => (
           <div
             key={node.label}
@@ -127,7 +127,7 @@ const TrustBadge = () => {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

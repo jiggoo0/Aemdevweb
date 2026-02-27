@@ -1,220 +1,240 @@
 /**
- * [FEATURE]: AUDIT_REPORT_GENERATOR v18.0.7 (SERVER_OPTIMIZED)
- * [STRATEGY]: Scanning Simulation | Pure CSS Transitions | Zero-Framer
+ * [SPECIALIST COMPONENT]: AUDIT_NEURAL_ENGINE v18.5.0 (TACTICAL_READY)
+ * [STRATEGY]: Realistic Terminal Simulation | Multi-Stage Synthesis | Zero-JS Feel
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { useState, useEffect, useCallback, memo } from "react";
+import React, { useState, useEffect, useCallback, memo, useRef } from "react";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from "@/constants/site-config";
+
+interface AuditLog {
+  timestamp: string;
+  msg: string;
+  status: "ok" | "warn" | "fail";
+}
 
 export const AuditReportGenerator = memo(() => {
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState<"idle" | "scanning" | "completed">("idle");
   const [progress, setProgress] = useState(0);
+  const [logs, setLogs] = useState<AuditLog[]>([]);
+  const logContainerRef = useRef<HTMLDivElement>(null);
 
-  // [LOGIC]: Scanning Simulation - ประมวลผลแบบ Non-linear
+  const addLog = useCallback((msg: string, status: "ok" | "warn" | "fail" = "ok") => {
+    const timestamp = new Date().toLocaleTimeString("en-GB", {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    setLogs((prev) => [...prev.slice(-8), { timestamp, msg, status }]);
+  }, []);
+
   useEffect(() => {
-    let interval: ReturnType<typeof setInterval>;
-
-    if (status === "scanning") {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setTimeout(() => setStatus("completed"), 600);
-            return 100;
-          }
-          const increment = Math.random() * (prev > 80 ? 5 : 15);
-          return Math.min(prev + increment, 100);
-        });
-      }, 400);
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = logContainerRef.current.scrollHeight;
     }
+  }, [logs]);
 
-    return () => clearInterval(interval);
-  }, [status]);
+  useEffect(() => {
+    if (status === "scanning") {
+      const steps: { p: number; msg: string; s: "ok" | "warn" | "fail" }[] = [
+        { p: 10, msg: "Initializing Neural Search Protocol...", s: "ok" },
+        { p: 25, msg: "Tracing Core Web Vitals (LCP/CLS)...", s: "ok" },
+        { p: 40, msg: "Analyzing Semantic Document Object Model...", s: "ok" },
+        { p: 55, msg: "WARN: Found Unoptimized Assets Path.", s: "warn" },
+        { p: 70, msg: "Simulating Latency from 12 Regional Nodes...", s: "ok" },
+        { p: 85, msg: "Synthesizing Competitor Gap Report...", s: "ok" },
+        { p: 100, msg: "Finalizing Technical Audit Ledger.", s: "ok" },
+      ];
 
-  const handleStartScan = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!url || !url.includes(".")) return;
-      setStatus("scanning");
-      setProgress(0);
-    },
-    [url],
-  );
+      let currentStep = 0;
+      const interval = setInterval(() => {
+        if (currentStep < steps.length) {
+          const step = steps[currentStep];
+          setProgress(step.p);
+          addLog(step.msg, step.s);
+          currentStep++;
+        } else {
+          clearInterval(interval);
+          setTimeout(() => setStatus("completed"), 1000);
+        }
+      }, 1200);
+
+      return () => clearInterval(interval);
+    }
+  }, [status, addLog]);
+
+  const handleStartScan = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!url.includes(".")) return;
+    setStatus("scanning");
+    setLogs([]);
+    setProgress(0);
+  };
 
   return (
-    <section id="audit-simulator" className="container mx-auto px-4 py-24 md:py-32">
+    <section id="audit-simulator" className="mx-auto w-full px-4 py-24 md:py-32">
       <div
         className={cn(
-          "border-border/10 bg-surface-card relative overflow-hidden border transition-all duration-700",
-          "rounded-card-lg shadow-2xl",
-          status === "scanning" ? "ring-brand-primary/30 ring-2" : "ring-1 ring-white/5",
+          "border-border/50 bg-surface-card relative overflow-hidden border transition-all duration-700",
+          "rounded-card-lg shadow-pro-xl mx-auto max-w-6xl",
+          status === "scanning" && "ring-brand-primary/20 ring-2",
         )}
       >
-        <div
-          className="pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black,transparent)] opacity-[0.05]"
-          style={{
-            backgroundImage: `radial-gradient(var(--text-primary) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        <div className="relative z-10 flex min-h-[400px] items-center justify-center p-8 md:p-20">
-          {/* --- STAGE 01: IDLE --- */}
-          <div
-            className={cn(
-              "w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-              status === "idle"
-                ? "translate-y-0 scale-100 opacity-100"
-                : "pointer-events-none absolute translate-y-4 scale-95 opacity-0",
-            )}
-          >
-            <div className="mx-auto max-w-3xl space-y-12 text-center">
+        <div className="relative z-10 grid min-h-[500px] grid-cols-1 lg:grid-cols-12">
+          {/* LEFT: Interaction Zone */}
+          <div className="flex flex-col justify-center p-8 md:p-16 lg:col-span-7">
+            <div
+              className={cn(
+                "space-y-10 transition-all duration-700",
+                status !== "idle" && "pointer-events-none scale-95 opacity-40 blur-[2px]",
+              )}
+            >
               <div className="space-y-6">
-                <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-6 py-2">
-                  <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-                  <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase italic">
-                    Domain_Feasibility_Analysis
+                <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
+                  <span className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+                  <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+                    Neural_Diagnosis_Engine
                   </span>
                 </div>
-                <h2 className="text-4xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
-                  Scan your <br /> <span className="text-brand-primary">Competitor.</span>
+                <h2 className="text-text-primary text-4xl leading-tight font-black tracking-tighter uppercase italic md:text-6xl">
+                  Analyze your <br /> <span className="text-brand-primary">Digital Edge.</span>
                 </h2>
-                <p className="mx-auto max-w-xl text-lg font-medium italic opacity-60 md:text-xl">
-                  ป้อน URL เว็บไซต์เพื่อเข้าถึงรายงานวิเคราะห์โครงสร้างพื้นฐาน{" "}
-                  <br className="hidden md:block" />
-                  และโอกาสในการทำอันดับเหนือคู่แข่ง
+                <p className="text-text-secondary text-lg font-medium italic opacity-80">
+                  ระบุช่องโหว่ทางเทคนิคที่คุณอาจมองข้าม <br className="hidden md:block" />
+                  ด้วยระบบตรวจสอบโครงสร้างพื้นฐานระดับเอ็นเตอร์ไพรส์
                 </p>
               </div>
 
-              <form onSubmit={handleStartScan} className="relative mx-auto max-w-2xl space-y-6">
+              <form onSubmit={handleStartScan} className="max-w-xl space-y-4">
                 <div className="group relative">
                   <input
                     type="text"
                     required
-                    placeholder="example-domain.com"
+                    placeholder="https://your-domain.com"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="bg-surface-main/50 focus:border-brand-primary focus:ring-brand-primary/10 w-full rounded-3xl border border-white/10 px-8 py-8 pl-16 text-xl font-bold italic transition-all outline-none focus:ring-4"
+                    className="bg-surface-offset focus:border-brand-primary focus:ring-brand-primary/10 text-text-primary border-border w-full rounded-2xl border px-6 py-6 pl-14 text-lg font-bold italic transition-all outline-none"
                   />
-                  <div className="text-brand-primary/50 group-focus-within:text-brand-primary absolute top-1/2 left-6 -translate-y-1/2 transition-colors">
-                    <IconRenderer name="Globe" size={28} />
+                  <div className="text-brand-primary/40 group-focus-within:text-brand-primary absolute top-1/2 left-5 -translate-y-1/2 transition-colors">
+                    <IconRenderer name="Activity" size={24} />
                   </div>
                 </div>
                 <Button
                   type="submit"
-                  className="bg-text-primary text-surface-main hover:bg-brand-primary h-20 w-full rounded-3xl text-xl font-black tracking-[0.2em] uppercase italic transition-all duration-500"
+                  className="bg-text-primary text-surface-main hover:bg-brand-primary h-16 w-full rounded-2xl text-[11px] font-black tracking-[0.3em] uppercase italic transition-all duration-500"
                 >
-                  เริ่มการ Audit ระบบ (Initialize)
+                  Execute System Audit
                 </Button>
               </form>
             </div>
-          </div>
 
-          {/* --- STAGE 02: SCANNING --- */}
-          <div
-            className={cn(
-              "w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-              status === "scanning"
-                ? "translate-y-0 scale-100 opacity-100"
-                : "pointer-events-none absolute translate-y-4 scale-95 opacity-0",
-            )}
-          >
-            <div className="space-y-16 py-12 text-center">
-              <div className="relative mx-auto flex h-40 w-40 items-center justify-center">
-                <div className="border-brand-primary absolute inset-0 animate-[spin_3s_linear_infinite] rounded-full border-b-2" />
-                <div className="bg-surface-main absolute inset-4 flex items-center justify-center rounded-full border border-white/5">
-                  <IconRenderer
-                    name="Search"
-                    size={48}
-                    className="text-brand-primary animate-pulse"
-                  />
-                </div>
-              </div>
-
-              <div className="mx-auto max-w-md space-y-6">
-                <div className="space-y-2">
-                  <h3 className="text-brand-primary font-mono text-3xl font-black italic">
-                    {Math.round(progress)}%
-                  </h3>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/5">
-                    <div
-                      className="bg-brand-primary h-full shadow-[0_0_15px_var(--brand-primary)] transition-all duration-300 ease-out"
-                      style={{ width: `${progress}%` }}
-                    />
+            {/* Completed Result Overlay */}
+            {status === "completed" && (
+              <div className="bg-surface-card/90 absolute inset-0 z-20 flex items-center justify-center p-8 backdrop-blur-md">
+                <div className="animate-in fade-in zoom-in max-w-md space-y-8 text-center duration-500">
+                  <div className="shadow-glow-sm mx-auto flex h-20 w-20 items-center justify-center rounded-3xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-500">
+                    <IconRenderer name="CheckCircle" size={40} />
+                  </div>
+                  <div className="space-y-4">
+                    <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic">
+                      Audit Sequence <span className="text-emerald-500">Complete.</span>
+                    </h3>
+                    <p className="text-text-secondary font-medium italic">
+                      เราพบโอกาสในการปรับปรุงโครงสร้างเพื่อเพิ่ม ROI ให้ธุรกิจคุณทันที
+                      คุณต้องการรับรายงานฉบับเต็มทาง Line หรือไม่?
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <Button
+                      href={SITE_CONFIG.links.line}
+                      className="bg-brand-primary h-14 rounded-xl text-[10px] font-black tracking-widest uppercase italic"
+                    >
+                      Connect with Specialist
+                    </Button>
+                    <button
+                      onClick={() => setStatus("idle")}
+                      className="text-text-muted hover:text-text-primary text-[9px] font-black tracking-widest uppercase transition-colors"
+                    >
+                      [ Reboot_Audit_Cycle ]
+                    </button>
                   </div>
                 </div>
-                <p className="font-mono text-[9px] font-bold tracking-[0.3em] uppercase opacity-40">
-                  Scanning: Core_Web_Vitals | Semantic_Mapping | Link_Equity
-                </p>
+              </div>
+            )}
+          </div>
+
+          {/* RIGHT: Data Feed (The 'Authentic' Feel) */}
+          <div className="bg-surface-offset lg:border-border/50 relative flex min-h-[450px] flex-col overflow-hidden border-t p-8 lg:col-span-5 lg:border-t-0 lg:border-l">
+            <div className="border-border mb-6 flex items-center justify-between border-b pb-4">
+              <div className="flex flex-col gap-1">
+                <span className="text-text-muted font-mono text-[9px] font-black uppercase opacity-40">
+                  System_Live_Feed
+                </span>
+                <span className="text-brand-primary font-mono text-[7px] font-bold tracking-widest uppercase">
+                  Secure_Link_Established
+                </span>
+              </div>
+              <div className="flex gap-1.5">
+                <div className="h-2 w-2 rounded-full bg-red-500/40" />
+                <div className="h-2 w-2 rounded-full bg-amber-500/40" />
+                <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
               </div>
             </div>
-          </div>
 
-          {/* --- STAGE 03: COMPLETED --- */}
-          <div
-            className={cn(
-              "w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
-              status === "completed"
-                ? "translate-y-0 scale-100 opacity-100"
-                : "pointer-events-none absolute translate-y-4 scale-95 opacity-0",
-            )}
-          >
-            <div className="grid grid-cols-1 items-center gap-12 md:gap-20 lg:grid-cols-2">
-              <div className="space-y-10">
-                <div className="space-y-6">
-                  <div className="inline-flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-2 text-emerald-500">
-                    <IconRenderer name="CheckCircle" size={20} />
-                    <span className="font-mono text-[10px] font-black tracking-widest uppercase italic">
-                      Analysis_Complete
-                    </span>
-                  </div>
-                  <h3 className="text-4xl leading-none font-black uppercase italic md:text-6xl">
-                    พบช่องโหว่ <br /> <span className="text-emerald-500">เชิงเทคนิค.</span>
-                  </h3>
-                  <p className="text-lg font-medium italic opacity-70">
-                    เราตรวจพบจุดวิกฤตที่ทำให้เว็บไซต์ของคุณเสียเปรียบในการจัดอันดับ
-                    ต้องการรายงานสรุปแนวทางแก้ไขระดับ Enterprise หรือไม่?
-                  </p>
+            {/* LOG STREAM */}
+            <div
+              ref={logContainerRef}
+              className="scrollbar-thin scrollbar-thumb-border flex-1 space-y-4 overflow-y-auto pr-2 font-mono text-[10px]"
+            >
+              {logs.length === 0 && status === "idle" && (
+                <div className="space-y-2 opacity-20">
+                  <p className="animate-pulse">// Initializing_Environment...</p>
+                  <p className="animate-pulse delay-150">// Awaiting_Target_Handshake...</p>
                 </div>
+              )}
+              {logs.map((log, i) => (
+                <div key={i} className="animate-in slide-in-from-left-2 flex gap-3 duration-300">
+                  <span className="text-text-muted shrink-0 opacity-30">[{log.timestamp}]</span>
+                  <span
+                    className={cn(
+                      "flex-1 leading-relaxed",
+                      log.status === "warn" && "font-bold text-amber-500",
+                      log.status === "fail" && "font-bold text-red-500",
+                      log.status === "ok" && "text-text-secondary opacity-80",
+                    )}
+                  >
+                    {log.status === "ok" ? "❯ " : log.status === "warn" ? "⚠ " : "✖ "}
+                    {log.msg}
+                  </span>
+                </div>
+              ))}
+              {status === "scanning" && (
+                <div className="bg-brand-primary ml-12 h-3 w-1 animate-pulse" />
+              )}
+            </div>
 
-                <div className="flex flex-col gap-4 sm:flex-row">
-                  <Button
-                    size="lg"
-                    className="bg-brand-primary h-16 rounded-2xl px-10 text-xs font-black tracking-widest uppercase italic"
-                  >
-                    รับรายงาน PDF ฉบับเต็ม
-                  </Button>
-                  <button
-                    onClick={() => setStatus("idle")}
-                    className="text-[10px] font-black tracking-widest uppercase opacity-30 transition-opacity hover:opacity-100"
-                  >
-                    [ Scan_New_Target ]
-                  </button>
-                </div>
+            {/* PROGRESS METRIC */}
+            <div className="bg-surface-card border-border/50 mt-8 space-y-3 rounded-2xl border p-6">
+              <div className="flex items-center justify-between font-mono text-[9px] font-black">
+                <span className="text-text-muted uppercase">Audit_Synthesis</span>
+                <span className="text-brand-primary">{Math.round(progress)}%</span>
               </div>
-
-              {/* Technical Scoreboard Card */}
-              <div className="rounded-section space-y-6 border border-white/10 bg-black/40 p-10 backdrop-blur-xl">
-                {[
-                  { label: "Technical_Health", val: "62/100", color: "text-amber-500" },
-                  { label: "Indexing_Latency", val: "Critical", color: "text-red-500" },
-                  { label: "Semantic_Score", val: "Optimal", color: "text-emerald-500" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center justify-between border-b border-white/5 pb-6 last:border-0 last:pb-0"
-                  >
-                    <span className="font-mono text-[10px] font-bold tracking-widest uppercase opacity-40">
-                      {item.label}
-                    </span>
-                    <span className={cn("text-2xl font-black italic", item.color)}>{item.val}</span>
-                  </div>
-                ))}
+              <div className="bg-border/20 h-1 w-full overflow-hidden rounded-full">
+                <div
+                  className="bg-brand-primary h-full transition-all duration-700 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <div className="flex items-center justify-between font-mono text-[7px] font-bold tracking-tighter uppercase opacity-30">
+                <span>Buffer_Size: 512KB</span>
+                <span>Thread_Active: 04</span>
               </div>
             </div>
           </div>
