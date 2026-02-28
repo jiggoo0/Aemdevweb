@@ -46,4 +46,5 @@ Thumbs.db
 !.gemini/commands/
 !.gemini/skills/
 .geminiignore
-MISSION.md
+# MISSION.md (Un-ignored for Vercel/GitHub tracking)
+
