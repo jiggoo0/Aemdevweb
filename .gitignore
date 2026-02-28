@@ -42,6 +42,8 @@ Thumbs.db
 .aptly/
 .bash_history
 .termux/
-.gemini/
+.gemini/*
+!.gemini/commands/
+!.gemini/skills/
 .geminiignore
 MISSION.md
