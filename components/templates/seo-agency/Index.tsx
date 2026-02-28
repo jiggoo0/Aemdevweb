@@ -23,6 +23,7 @@ import { LocalSuccessNode } from "../sections/LocalSuccessNode";
 import { RegionalGallery } from "../sections/RegionalGallery";
 import { LocalInsight } from "../sections/LocalInsight";
 import { DirectTerminal } from "../sections/DirectTerminal";
+import RegionalNodeHub from "../sections/RegionalNodeHub";
 
 const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
   const schema = generateUniversalSchema(data);
@@ -136,7 +137,10 @@ const SeoAgencyTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           </section>
         )}
 
-        {/* [SEQUENCE_08]: INTELLIGENCE FAQ (Surface Offset) */}
+        {/* [SEQUENCE_08]: REGIONAL HUB (Internal Linking) */}
+        <RegionalNodeHub data={data} />
+
+        {/* [SEQUENCE_09]: INTELLIGENCE FAQ (Surface Offset) */}
         <section className="bg-surface-offset border-border/40 border-t">
           <DynamicFAQ
             items={data.faqs}

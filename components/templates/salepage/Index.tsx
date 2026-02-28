@@ -30,6 +30,7 @@ import { LocalSuccessNode } from "../sections/LocalSuccessNode";
 import { RegionalGallery } from "../sections/RegionalGallery";
 import { LocalInsight } from "../sections/LocalInsight";
 import { DirectTerminal } from "../sections/DirectTerminal";
+import RegionalNodeHub from "../sections/RegionalNodeHub";
 
 interface SalePageTemplateProps {
   readonly data: UniversalTemplateProps;
@@ -195,7 +196,10 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
             </section>
           )}
 
-          {/* [SEQUENCE_08]: OBJECTION BUSTER (Surface Offset) */}
+          {/* [SEQUENCE_08]: REGIONAL HUB (Internal Linking) */}
+          <RegionalNodeHub data={data} />
+
+          {/* [SEQUENCE_09]: OBJECTION BUSTER (Surface Offset) */}
           <section id="objection-buster" className="bg-surface-offset border-border/40 border-t">
             <DynamicFAQ
               items={data.faqs}
@@ -203,7 +207,6 @@ const SalePageTemplate = ({ data, suppressUI = false }: SalePageTemplateProps) =
               description="ตอบทุกข้อสงสัยเชิงเทคนิค เพื่อความมั่นใจสูงสุดก่อนการตัดสินใจของคุณ"
             />
           </section>
-
           {/* [SEQUENCE_09]: CONVERSION GATEWAY (Surface Main) */}
           <section
             id="order"

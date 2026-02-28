@@ -22,6 +22,7 @@ import { LocalSuccessNode } from "../sections/LocalSuccessNode";
 import { RegionalGallery } from "../sections/RegionalGallery";
 import { LocalInsight } from "../sections/LocalInsight";
 import { DynamicFAQ } from "../sections/DynamicFAQ";
+import RegionalNodeHub from "../sections/RegionalNodeHub";
 
 const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
   const schema = generateUniversalSchema(data);
@@ -126,7 +127,10 @@ const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           )}
         </section>
 
-        {/* [SEQUENCE_08]: DECISION INTELLIGENCE (Surface Offset) */}
+        {/* [SEQUENCE_08]: REGIONAL HUB (Internal Linking) */}
+        <RegionalNodeHub data={data} />
+
+        {/* [SEQUENCE_09]: DECISION INTELLIGENCE (Surface Offset) */}
         <section className="bg-surface-offset border-border/40 border-t">
           <DynamicFAQ
             items={data.faqs}
@@ -136,7 +140,7 @@ const CorporateTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           />
         </section>
 
-        {/* [SEQUENCE_09]: EXECUTIVE PORTAL (Surface Main) */}
+        {/* [SEQUENCE_10]: EXECUTIVE PORTAL (Surface Main) */}
         <section className="bg-surface-main">
           <UniversalPortal data={data} />
         </section>

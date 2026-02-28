@@ -352,6 +352,12 @@ export interface UniversalTemplateProps {
   }[];
   readonly primaryAction?: TemplateAction;
   readonly secondaryAction?: TemplateAction;
+
+  // --- Internal Linking & P-SEO Hub ---
+  /** [NEW]: ลิงก์กลับไปยังหน้าบริการหลัก (สำหรับหน้าจังหวัด) */
+  readonly masterServiceUrl?: string;
+  /** [NEW]: รายชื่อพื้นที่ที่ให้บริการ (สำหรับหน้าบริการหลัก) */
+  readonly servingAreas?: readonly string[];
 }
 
 export interface BaseTemplateProps {

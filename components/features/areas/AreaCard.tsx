@@ -48,7 +48,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
         <Image
           src={imagePath}
-          alt={`บริการรับทำเว็บไซต์ ${displayTitle}`}
+          alt={`บริการรับทำเว็บไซต์ ${displayTitle} - ออกแบบเว็บไซต์คุณภาพสูงโดย AEMDEVWEB`}
           fill
           priority={index < 4}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}

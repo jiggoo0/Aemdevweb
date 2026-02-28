@@ -4,6 +4,8 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
+// --- Infrastructure & Core Data ---
+import Link from "next/link";
 import { memo } from "react";
 import type { BaseTemplateProps } from "@/types/template-props";
 import { cn } from "@/lib/utils";
@@ -90,6 +92,31 @@ const UniversalHero = ({
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-6xl">
+        {/* --- BREADCRUMB: Geographic Context & Service Authority --- */}
+        {data?.masterServiceUrl && data?.province && (
+          <div
+            className={cn(
+              "mb-10 flex items-center gap-3 font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-60 transition-opacity hover:opacity-100",
+              align === "center" ? "justify-center" : "justify-start",
+            )}
+          >
+            <Link href="/" className="hover:text-[var(--brand-primary)]">
+              HOME
+            </Link>
+            <span className="text-text-muted">/</span>
+            <Link href="/areas" className="hover:text-[var(--brand-primary)]">
+              AREAS
+            </Link>
+            <span className="text-text-muted">/</span>
+            <Link
+              href={data.masterServiceUrl}
+              className="text-[var(--brand-primary)] hover:underline"
+            >
+              {data.category.toUpperCase()}
+            </Link>
+          </div>
+        )}
+
         {/* --- AUTHORITY MARKER: The Specialist Identity --- */}
         <div
           className={cn(

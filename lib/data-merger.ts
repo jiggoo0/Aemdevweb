@@ -105,5 +105,8 @@ export function mergeServiceData(
 
     // --- Final Optimized Theme ---
     theme: mergedTheme,
+
+    // --- Internal Linking ---
+    masterServiceUrl: `/services/${master.templateSlug}`,
   };
 }

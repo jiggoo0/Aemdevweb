@@ -107,7 +107,13 @@ export default async function ServicePage(props: PageProps) {
         ให้ TemplateRenderer เป็นผู้ดูแล เพื่อให้เกิดความสอดคล้องระหว่างหน้า Service และหน้า Area
       */}
       <TemplateRenderer
-        data={{ ...service, theme: activeTheme } as UniversalTemplateProps}
+        data={
+          {
+            ...service,
+            theme: activeTheme,
+            servingAreas: service.activeAreas,
+          } as unknown as UniversalTemplateProps
+        }
         renderMode="full"
       />
 

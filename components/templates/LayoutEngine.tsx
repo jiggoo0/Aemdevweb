@@ -20,6 +20,7 @@ import WorkProcess from "@/components/features/landing/WorkProcess";
 import PricingSection from "@/components/features/landing/PricingSection";
 import { RegionalGallery } from "./sections/RegionalGallery";
 import { DynamicFAQ } from "./sections/DynamicFAQ";
+import RegionalNodeHub from "./sections/RegionalNodeHub";
 
 // [TYPE_DEFINITION]: รายการ Section ที่รองรับ
 type SectionKey =
@@ -31,7 +32,8 @@ type SectionKey =
   | "pricing"
   | "gallery"
   | "faq"
-  | "cta";
+  | "cta"
+  | "nodes";
 
 const SECTION_MAP: Record<SectionKey, React.ComponentType<BaseTemplateProps>> = {
   hero: UniversalHero as any,
@@ -43,6 +45,7 @@ const SECTION_MAP: Record<SectionKey, React.ComponentType<BaseTemplateProps>> = 
   gallery: RegionalGallery as any,
   faq: DynamicFAQ as any,
   cta: ConversionCTA as any,
+  nodes: RegionalNodeHub as any,
 };
 
 type SpacingLevel = "none" | "small" | "medium" | "large" | "specialist";

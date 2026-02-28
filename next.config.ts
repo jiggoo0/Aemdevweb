@@ -1,6 +1,6 @@
 /**
- * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v16.1.6 (ULTIMATE_OPTIMIZED)
- * [STRATEGY]: Edge-Network Caching | Compiler Hardening | Termux Resource Guard
+ * [SYSTEM CORE]: NEXT.JS HYBRID CONFIG v16.2.1 (INTEGRITY_RESTORED)
+ * [STRATEGY]: Environment-Aware Logic | Full SEO Redirects | Security Hardening
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -10,7 +10,9 @@ import type { NextConfig } from "next";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
+// [ENVIRONMENT_SENSING]: ตรวจสอบสภาวะแวดล้อมเพื่อเลือก Engine ที่เหมาะสม
 const isVercel = process.env.VERCEL === "1";
+const isDev = process.env.NODE_ENV === "development";
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
@@ -28,26 +30,26 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   compress: true,
   reactCompiler: true,
-
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
-  },
-
-  productionBrowserSourceMaps: false,
   poweredByHeader: false,
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 
-  // [SEO_REDIRECTS_ENGINE]: จัดการหน้าเก่า (Legacy) ตามรายงาน Audit
+  compiler: {
+    removeConsole: !isDev ? { exclude: ["error"] } : false,
+  },
+
+  productionBrowserSourceMaps: false,
+
+  /**
+   * 1. [SEO_REDIRECTS_ENGINE]: กู้คืนระบบนำทางและ Canonical Links ทั้งหมด
+   */
   async redirects() {
     return [
-      // 1. [FORCE_WWW]: บังคับ non-www ไปที่ www ทันที (SEO Canonicalization)
       {
         source: "/:path*",
         has: [{ type: "host", value: "aemdevweb.com" }],
         destination: "https://www.aemdevweb.com/:path*",
         permanent: true,
       },
-      // 2. [LEGACY_MAPPING]: เปลี่ยนจาก Underscore (_) เป็น Hyphen (-) และโครงสร้างเก่า
       { source: "/services/corporate_pro", destination: "/services/corporate", permanent: true },
       { source: "/services/corporate_lite", destination: "/services/corporate", permanent: true },
       { source: "/services/seo_agency", destination: "/services/seo-agency", permanent: true },
@@ -58,66 +60,14 @@ const nextConfig: NextConfig = {
       },
       { source: "/services/local", destination: "/services/local-authority", permanent: true },
       { source: "/services/event_magic", destination: "/services/salepage", permanent: true },
-      {
-        source: "/seo/advanced-schema-markup",
-        destination: "/blog/advanced-schema-markup",
-        permanent: true,
-      },
-      {
-        source: "/seo/core-web-vitals-speed",
-        destination: "/blog/core-web-vitals-speed",
-        permanent: true,
-      },
-      {
-        source: "/seo/technical-structure-audit",
-        destination: "/blog/technical-audit-protocol",
-        permanent: true,
-      },
-      {
-        source: "/blog/technical-seo-guide",
-        destination: "/blog/technical-audit-protocol",
-        permanent: true,
-      },
-      {
-        source: "/blog/technical-structure-audit",
-        destination: "/blog/technical-audit-protocol",
-        permanent: true,
-      },
-      { source: "/case-studies/project-01", destination: "/case-studies", permanent: true },
+      { source: "/seo/:path*", destination: "/blog/:path*", permanent: true },
       { source: "/templates/:path*", destination: "/services", permanent: true },
     ];
   },
 
-  experimental: {
-    scrollRestoration: true,
-    workerThreads: false,
-    cpus: isVercel ? undefined : 1,
-    optimizePackageImports: [
-      "lucide-react",
-      "@radix-ui/react-slot",
-      "tailwindcss-animate",
-      "date-fns",
-      "clsx",
-      "tailwind-merge",
-    ],
-    mdxRs: isVercel,
-  },
-
-  images: {
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 31536000,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "www.aemdevweb.com", // ปรับเป็น www
-      },
-    ],
-  },
-
+  /**
+   * 2. [SECURITY_AND_CACHING]: กู้คืน Header ความปลอดภัยและกลยุทธ์ Cache
+   */
   async headers() {
     const securityHeaders = [
       { key: "X-DNS-Prefetch-Control", value: "on" },
@@ -132,17 +82,11 @@ const nextConfig: NextConfig = {
     ];
 
     if (process.env.VERCEL_ENV !== "production") {
-      securityHeaders.push({
-        key: "X-Robots-Tag",
-        value: "noindex, nofollow",
-      });
+      securityHeaders.push({ key: "X-Robots-Tag", value: "noindex, nofollow" });
     }
 
     return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
+      { source: "/:path*", headers: securityHeaders },
       {
         source: "/(about|services|areas|blog|case-studies|privacy|terms)",
         headers: [
@@ -153,27 +97,56 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/_next/image/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
-      },
-      {
         source: "/(images|fonts)/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
       },
     ];
   },
 
-  webpack: (config, { dev }) => {
-    if (!isVercel) {
+  /**
+   * 3. [ENVIRONMENT_ADAPTER]: ส่วนที่ปรับแต่งตามสภาวะแวดล้อม
+   */
+  experimental: {
+    scrollRestoration: true,
+    workerThreads: false,
+    cpus: isVercel ? undefined : 1,
+    mdxRs: isVercel,
+    optimizePackageImports: [
+      "lucide-react",
+      "@radix-ui/react-slot",
+      "tailwindcss-animate",
+      "date-fns",
+      "clsx",
+      "tailwind-merge",
+    ],
+  },
+
+  images: {
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
+    dangerouslyAllowSVG: true,
+    remotePatterns: [{ protocol: "https", hostname: "www.aemdevweb.com" }],
+  },
+
+  /**
+   * 4. [WEBPACK_INFRASTRUCTURE]: ปรับจูนระบบประมวลผล (Local Fix + Cloud Opt)
+   */
+  webpack: (config, { dev, isServer }) => {
+    if (!isVercel && dev) {
       config.cache = false;
-    }
-    if (dev && !isVercel) {
       config.watchOptions = {
         poll: 1000,
         aggregateTimeout: 300,
         ignored: ["**/node_modules/**", "**/.next/**", "**/.git/**"],
       };
     }
+
+    if (isVercel && isServer) {
+      config.optimization = { ...config.optimization, minimize: true };
+    }
+
     return config;
   },
 };
