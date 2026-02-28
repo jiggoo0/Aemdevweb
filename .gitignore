@@ -48,3 +48,4 @@ Thumbs.db
 .geminiignore
 # MISSION.md (Un-ignored for Vercel/GitHub tracking)
 
+.gemini/
