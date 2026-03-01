@@ -24,7 +24,7 @@ const StickyBuyButton = memo(
     const [isVisible, setIsVisible] = useState(false);
 
     // [LOGIC]: ดึงสีจากธีม ถ้าไม่มีให้ใช้สีแดงเป็น Fallback
-    const activeColor = theme?.primary || "#ef4444";
+    const activeColor = theme?.primary || "var(--color-brand-primary)";
 
     useEffect(() => {
       const timer = setTimeout(() => setIsVisible(true), 500);

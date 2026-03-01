@@ -27,7 +27,7 @@ export const FlashSaleTimer = memo(
     targetDate,
     title = "Offer Ends Soon!",
     subtitle = "ราคาพิเศษเฉพาะรอบนี้เท่านั้น",
-    color = "#e11d48",
+    color = "var(--color-brand-primary)",
     className,
   }: FlashSaleTimerProps) => {
     // [LOGIC]: Recurring Weekly Logic if no targetDate provided

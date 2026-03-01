@@ -98,7 +98,7 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
       {/* --- LAYER 08: CONVERSION GATEWAY --- */}
       <UniversalPortal data={data} />
 
-      <footer className="bg-[#020617] py-12 text-center">
+      <footer className="bg-text-primary py-12 text-center">
         <div className="inline-flex items-center gap-3 opacity-20">
           <div className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
           <p className="font-mono text-[8px] tracking-[0.5em] text-white uppercase">

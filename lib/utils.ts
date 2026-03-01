@@ -129,12 +129,12 @@ export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
     if (lch) {
       const raw = `${lch.l} ${lch.c} ${lch.h}`;
       styles[`--brand-${key}-raw`] = raw;
-      styles[`--brand-${key}`] = `oklch(${raw})`;
+      styles[`--color-brand-${key}`] = `oklch(${raw})`;
 
       // [CONTRAST_GUARD]: คำนวณสีตัวอักษรที่ต้องอยู่บนสีแบรนด์นี้ (White or Black)
-      styles[`--brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
+      styles[`--color-brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
     } else {
-      styles[`--brand-${key}`] = hex;
+      styles[`--color-brand-${key}`] = hex;
     }
   };
 
