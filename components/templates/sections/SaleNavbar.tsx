@@ -7,7 +7,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import type { Route } from "next";
-import type { ThemeConfig } from "@/types"; // [IMPORT]: นำเข้า Type มาตรฐาน
 import IconRenderer from "@/components/ui/IconRenderer";
 
 interface SaleNavbarProps {
@@ -16,32 +15,24 @@ interface SaleNavbarProps {
     label: string;
     href: string;
   };
-  readonly theme?: ThemeConfig; // [FIXED]: ใช้ ThemeConfig แทน Object Hardcode
 }
 
-export function SaleNavbar({ title, action, theme }: SaleNavbarProps) {
-  // [LOGIC]: ตรวจสอบโหมดสีจาก ThemeConfig โดยตรง (Single Source of Truth)
-  const isDark = theme?.mode === "dark";
-  const accentColor = theme?.primary || "#2563eb";
+export function SaleNavbar({ title, action }: SaleNavbarProps) {
+  // [LOGIC]: ดึงค่าสีจาก CSS Variables ที่ TemplateRenderer ฉีดไว้ให้
+  const accentColor = "var(--color-brand-primary)";
 
   return (
     <nav
       className={cn(
         "sticky top-0 z-[100] border-b backdrop-blur-xl transition-all duration-500",
-        // [DYNAMIC_STYLING]: ปรับตาม mode ที่ได้รับจาก Node
-        isDark
-          ? "border-white/10 bg-black/20 text-white"
-          : "border-slate-200 bg-white/80 text-slate-900",
+        "border-[var(--border)] bg-[var(--surface-card)]/80 text-[var(--text-primary)]",
       )}
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Brand Identity: Logo / Title */}
         <Link
           href="/"
-          className={cn(
-            "text-lg font-black tracking-tighter uppercase italic transition-all hover:scale-105 active:scale-95",
-            isDark ? "text-white drop-shadow-md" : "text-slate-900",
-          )}
+          className="text-lg font-black tracking-tighter text-[var(--text-primary)] uppercase italic drop-shadow-sm transition-all hover:scale-105 active:scale-95"
         >
           {title}
         </Link>
@@ -52,8 +43,7 @@ export function SaleNavbar({ title, action, theme }: SaleNavbarProps) {
             href={action.href as Route}
             style={{
               backgroundColor: accentColor,
-              // ฉีดเงาเรืองแสงเฉพาะใน Dark Mode เพื่อสร้างมิติ
-              boxShadow: isDark ? `0 0 20px ${accentColor}40` : "none",
+              boxShadow: "var(--shadow-glow-sm)",
             }}
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-2.5 text-[10px] font-black tracking-widest text-white uppercase italic transition-all hover:brightness-110 active:scale-95"
           >
@@ -66,7 +56,7 @@ export function SaleNavbar({ title, action, theme }: SaleNavbarProps) {
               />
             </span>
 
-            {/* Shimmer Effect: สร้างการเคลื่อนไหวเพื่อดึงดูดสายตา */}
+            {/* Shimmer Effect */}
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
           </Link>
         )}

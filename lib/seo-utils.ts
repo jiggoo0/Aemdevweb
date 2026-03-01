@@ -9,12 +9,16 @@ import { absoluteUrl } from "@/lib/utils";
 import type { Metadata } from "next";
 
 interface MetadataParams {
-  readonly title: string;
+  readonly title: Metadata["title"];
   readonly description: string;
   readonly path: string;
   readonly image?: string;
   readonly keywords?: readonly string[];
   readonly noIndex?: boolean;
+  readonly authors?: Array<{ name: string; url?: string }>;
+  readonly generator?: string;
+  readonly category?: string;
+  readonly classification?: string;
 }
 
 export function constructMetadata({
@@ -24,6 +28,10 @@ export function constructMetadata({
   image,
   keywords = [],
   noIndex = false,
+  authors,
+  generator,
+  category,
+  classification,
 }: MetadataParams): Metadata {
   // [CLEAN_URL]: มั่นใจว่า path ไม่สร้าง url ซ้ำซ้อน
   const url = absoluteUrl(path);
@@ -31,18 +39,38 @@ export function constructMetadata({
   // [STRATEGY]: Deduplicate Keywords เพื่อลดขนาด HTML Payload
   const mergedKeywords = Array.from(new Set([...keywords, ...SITE_CONFIG.keywords]));
 
+  // [TITLE_LOGIC]: จัดการ title ให้เหมาะสมสำหรับ OG และ Twitter
+  const ogTitle =
+    typeof title === "string"
+      ? `${title} | ${SITE_CONFIG.brandName}`
+      : title && typeof title === "object" && "default" in title
+        ? (title.default as string)
+        : SITE_CONFIG.brandName;
+
   return {
     title,
     description,
     keywords: mergedKeywords.join(", "), // แปลงเป็น String เพื่อความเป๊ะของ Meta Tag
     metadataBase: new URL(SITE_CONFIG.siteUrl),
+    applicationName: SITE_CONFIG.brandName,
+    authors: authors || [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
+    generator: generator || `AEMDEVWEB Engine v${SITE_CONFIG.project.version}`,
+    category: category || "Technology",
+    classification: classification || "Technical SEO Specialist",
+    referrer: "origin-when-cross-origin",
+
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
 
     alternates: {
       canonical: url,
     },
 
     openGraph: {
-      title: `${title} | ${SITE_CONFIG.brandName}`,
+      title: ogTitle,
       description,
       url,
       siteName: SITE_CONFIG.brandName,
@@ -51,7 +79,7 @@ export function constructMetadata({
           url: image || SITE_CONFIG.ogImage,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: typeof ogTitle === "string" ? ogTitle : SITE_CONFIG.brandName,
         },
       ],
       locale: SITE_CONFIG.locale,
@@ -60,7 +88,7 @@ export function constructMetadata({
 
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${SITE_CONFIG.brandName}`,
+      title: ogTitle,
       description,
       images: [image || SITE_CONFIG.ogImage],
       // [FIX]: มั่นใจว่า Handle มี @ นำหน้าตามมาตรฐาน Twitter

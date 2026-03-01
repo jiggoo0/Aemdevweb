@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: SATUN_GEOPARK_GATEWAY v18.0.1
- * [STRATEGY]: Marine Tourism | Global Geopark | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const satunNode: AreaNode = {
+export const satunNode = defineAreaNode(hotelResortService, {
+  // --- Basic Identity ---
   slug: "satun",
+  tier: 2,
   province: "สตูล",
   region: "South",
-  templateSlug: "hotelresort",
+  priority: 92,
+
   title: "รับทำเว็บไซต์ สตูล | ออกแบบเว็บรีสอร์ตหลีเป๊ะและธุรกิจท่องเที่ยวระดับโลก",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจในเขตอุทยานธรณีโลกสตูล สู่มาตรฐานสากลด้วยเว็บไซต์ที่โหลดไวและระบบจองที่ลื่นไหล",
-  seoTitle: "รับทำเว็บไซต์ สตูล หลีเป๊ะ ออกแบบเว็บรีสอร์ต ทัวร์ทะเล - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สตูล สำหรับรีสอร์ตหรูหลีเป๊ะ และทัวร์ทะเลอันดามัน เว็บสวยโหลดไว รองรับหลายภาษาและระบบจองตรงระดับสากล",
 
   longDescription:
     "สตูล เมืองแห่งอุทยานธรณีโลก (UNESCO Global Geopark) และที่ตั้งของอัญมณีแห่งอันดามันอย่างเกาะหลีเป๊ะ " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจท่องเที่ยวในสตูลด้วยเว็บไซต์ระดับ World-Class ที่สะท้อนความมหัศจรรย์ของธรรมชาติ " +
     "ไม่ว่าจะเป็นพูลวิลล่าบนหลีเป๊ะ หรือธุรกิจดำน้ำในหมู่เกาะตะรุเตา เราออกแบบระบบที่เน้นความเร็วระดับสากลและระบบจองที่ลื่นไหล " +
     "เพื่อให้แบรนด์สตูลของคุณ ครองใจนักท่องเที่ยวกลุ่มคุณภาพจากทั่วโลกและสร้างรายได้จากยอดจองตรงอย่างมั่นคง",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/satun-node.webp",
+  coordinates: { lat: 6.6233, lng: 100.0667 },
+  districts: ["เมืองสตูล", "ละงู", "ควนโดน", "ทุ่งหว้า", "มะนัง", "ควนกาหลง", "ท่าแพ", "หลีเป๊ะ"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +32,10 @@ export const satunNode: AreaNode = {
     "Geopark Authority SEO: วางรากฐานการค้นหาเพื่อครองอันดับหนึ่งในคีย์เวิร์ดแหล่งท่องเที่ยวและที่พักในจังหวัดสตูลและเกาะหลีเป๊ะ",
   ],
 
-  priority: 92,
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
-  heroImage: "/images/areas/satun-node.webp",
-  coordinates: { lat: 6.6233, lng: 100.0667 },
   isTourismHeavy: true,
   marketSaturation: 65,
   regionalLatency: 26,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +55,8 @@ export const satunNode: AreaNode = {
       description: "วางโครงสร้าง SEO ภาษาอังกฤษและจีน ครอบคลุมคีย์เวิร์ด 'Koh Lipe Luxury Resort'",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "สตูล โดยเฉพาะหลีเป๊ะ มีการแข่งขันสูงในตลาดสากล เว็บไซต์ที่โหลดรูปไวและดูแพงจะสร้างความได้เปรียบสูงสุด",
@@ -77,13 +73,43 @@ export const satunNode: AreaNode = {
       "ขาดระบบจองออนไลน์ที่เสถียรในช่วงฤดูท่องเที่ยว",
     ],
     competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 48,
+      localClient: "พูลวิลล่าชื่อดัง บนเกาะหลีเป๊ะ",
+    },
+    regionalPricing: {
+      startPrice: `${hotelResortService.price} บาท`,
+      timeline: "21-45 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตหรูหลีเป๊ะ",
+      result:
+        "วางระบบจองตรงและทำ SEO หลายภาษา ยอดจองจากนักท่องเที่ยวโซนยุโรปและเอเชียเพิ่มขึ้น 220%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ หลีเป๊ะ",
       "ออกแบบเว็บรีสอร์ต สตูล",
       "จ้างทำ SEO สตูล",
       "ทำเว็บทัวร์ดำน้ำ สตูล",
     ],
+    promotions: [
+      {
+        title: "UNESCO Geopark Digital Launch",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจท่องเที่ยวในสตูล รับฟรีบริการวางแผน Global Performance และระบบจองตรงมูลค่า 10,000 บาท",
+        discount: "Free Global Booking Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/satun-node.webp",
+      gallery: [
+        "/images/templates/hotelresort/hotel-resort-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองสตูล", "ละงู", "ควนโดน", "ทุ่งหว้า", "มะนัง"],
+
   keywords: ["รับทำเว็บไซต์ สตูล", "ทำเว็บหลีเป๊ะ", "จ้างทำเว็บที่พัก", "รับทำ SEO สตูล"],
-};
+});

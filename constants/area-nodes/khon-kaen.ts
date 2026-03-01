@@ -1,33 +1,109 @@
-/**
- * [SERVICE_NODE]: KHON_KAEN_CONVERSION_HUB v18.0.2 (DYNAMIC_LINKED)
- * [STRATEGY]: Localized Conversion | Clinic & SME Expert | Dynamic Inheritance
- * [MARKET]: Khon Kaen Smart City & University Zone
- */
-
 import { defineAreaNode } from "./node-factory";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
-import { localAuthorityService } from "@/constants/services/local-authority";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Hub Standard)
+import { corporateService } from "@/constants/services/corporate";
 
-export const khonKaenNode = defineAreaNode(localAuthorityService, {
+export const khonKaenNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "khon-kaen",
+  tier: 1,
   province: "ขอนแก่น",
   region: "Northeast",
   priority: 95,
 
-  title: "รับทำเว็บไซต์ ขอนแก่น | Digital Infrastructure สำหรับสถานพยาบาลและสถาบันการศึกษา",
+  title: "รับทำเว็บไซต์ ขอนแก่น | Digital Infrastructure สำหรับองค์กรและ Smart City Hub",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐานสูงในขอนแก่น เน้นความน่าเชื่อถือระดับสถาบัน รองรับระบบ E-Service และการทำ Local SEO เพื่อครองอันดับหนึ่งในภาคอีสาน",
 
   longDescription:
-    "ขอนแก่นคือ 'ศูนย์กลางการแพทย์และการศึกษา' ของภาคตะวันออกเฉียงเหนือ " +
-    "เราให้บริการออกแบบเว็บไซต์สำหรับคลินิกเฉพาะทาง โรงพยาบาล และสถาบันกวดวิชาที่ต้องการความสมบูรณ์แบบ " +
+    "ขอนแก่นคือ 'ศูนย์กลางการแพทย์และการศึกษา' และเมืองอัจฉริยะ (Smart City) ของภาคอีสาน " +
+    "เราให้บริการออกแบบเว็บไซต์สำหรับคลินิกเฉพาะทาง สถาบันการศึกษา และธุรกิจบริการที่ต้องการความสมบูรณ์แบบ " +
     "เราเน้นโครงสร้างข้อมูลที่สะอาด ปลอดภัย และมีการทำ Entity Mapping เพื่อให้ธุรกิจของคุณเป็นที่รู้จักในฐานะผู้เชี่ยวชาญตัวจริงในภูมิภาค",
 
   // --- Visual & Location ---
   heroImage: "/images/areas/khon-kaen-node.webp",
   coordinates: { lat: 16.4322, lng: 102.8236 },
-  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ"],
+  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ", "กระนวน"],
+
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าขอนแก่นเน้น "ความเชี่ยวชาญและตัวตน (E-E-A-T)"
+  layoutOrder: [
+    "hero",
+    "map", // ยืนยันที่ตั้งในฐานะ Hub
+    "insight",
+    "intelligence", // วิเคราะห์เจาะลึกตลาดท้องถิ่น
+    "success",
+    "faq",
+    "nodes", // แสดงเครือข่ายความร่วมมือ
+    "portal",
+  ],
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Regional Market Analysis",
+      description:
+        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
+    },
+    {
+      step: "02",
+      title: "High-Performance Deployment",
+      description:
+        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
+    },
+    {
+      step: "03",
+      title: "Strategic Growth & Scaling",
+      description:
+        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
+    },
+  ],
+
+  // --- Localized Benefits ---
+  benefits: [
+    "Professional Identity: สร้างภาพลักษณ์ที่น่าเชื่อถือระดับสถาบัน เพื่อโดดเด่นในฐานะผู้เชี่ยวชาญในภูมิภาคอีสาน",
+    "Smart City Integration: ระบบเว็บไซต์ที่รองรับเทคโนโลยียุคใหม่และการเชื่อมต่อข้อมูลที่รวดเร็ว (Low Latency)",
+    "Regional SEO Dominance: วางโครงสร้างการค้นหาครอบคลุมขอนแก่นและจังหวัดใกล้เคียง เพื่อดึงดูดลูกค้าจากทั่วภาคอีสานตอนบน",
+  ],
+
+  // --- Core Features (Service & Institutional Specific) ---
+  coreFeatures: [
+    {
+      title: "Appointment & E-Service",
+      description:
+        "ระบบจองนัดหมายออนไลน์หรือติดต่อรับบริการที่เชื่อมต่อตรงสู่ LINE แจ้งเตือนทันทีไม่พลาดทุกโอกาส",
+      icon: "CalendarCheck",
+    },
+    {
+      title: "Compliance & Data Privacy",
+      description:
+        "มาตรฐานความปลอดภัยสูงสุด รองรับ PDPA และการแสดงผลข้อมูลที่ถูกต้องตามระเบียบวิชาชีพและการแพทย์",
+      icon: "ShieldCheck",
+    },
+    {
+      title: "Knowledge Graph SEO",
+      description:
+        "การทำ Schema Markup ขั้นสูงเพื่อให้ Google แสดงผลข้อมูลธุรกิจและตัวตนผู้เชี่ยวชาญได้อย่างถูกต้อง",
+      icon: "TrendingUp",
+    },
+  ],
+
+  // --- Localized FAQs ---
+  faqs: [
+    {
+      question: "รับทำระบบนัดหมายออนไลน์สำหรับคลินิกไหม?",
+      answer:
+        "รับครับ เราสามารถเขียนระบบนัดหมายที่เชื่อมต่อกับ Line Notify เพื่อให้เจ้าหน้าที่คลินิกทราบทันทีที่มีคนจองคิวเข้ามาครับ",
+    },
+    {
+      question: "นัดคุยงานในตัวเมืองขอนแก่นได้ไหม?",
+      answer:
+        "ได้แน่นอนครับ ผมมีทีมงานที่สามารถเข้าไปคุยรายละเอียดที่ออฟฟิศ หรือคาเฟ่ย่านกังสดาล/หลังมอ ได้เลยครับ",
+    },
+    {
+      question: "รองรับการทำ SEO สำหรับธุรกิจบริการโดยเฉพาะไหม?",
+      answer:
+        "รองรับครับ เราเน้นการทำ Local Entity Mapping เพื่อให้ธุรกิจบริการของคุณเป็นศูนย์กลางการค้นหาในขอนแก่นครับ",
+    },
+  ],
 
   // --- Context Data ---
   localContext: {
@@ -55,7 +131,7 @@ export const khonKaenNode = defineAreaNode(localAuthorityService, {
       localClient: "คลินิกทันตกรรมชั้นนำ ย่านกังสดาล",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`,
+      startPrice: `${corporateService.price} บาท`,
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
@@ -83,43 +159,10 @@ export const khonKaenNode = defineAreaNode(localAuthorityService, {
     },
   },
 
-  faqs: [
-    {
-      question: "รับทำระบบนัดหมายออนไลน์ไหม?",
-      answer:
-        "รับครับ เราสามารถเขียนระบบนัดหมายที่เชื่อมต่อกับ Line Notify เพื่อให้เจ้าหน้าที่คลินิกทราบทันทีที่มีคนจองคิวเข้ามาครับ",
-    },
-  ],
-
   keywords: [
     "รับทำเว็บไซต์ ขอนแก่น",
     "ออกแบบเว็บไซต์ ขอนแก่น",
     "ทำเว็บคลินิก",
     "Local SEO ขอนแก่น",
-  ],
-
-  isTourismHeavy: false,
-  marketSaturation: 85,
-  regionalLatency: 8,
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Regional Market Analysis",
-      description:
-        "วิเคราะห์พฤติกรรมการค้นหาและคู่แข่งในพื้นที่เพื่อวางโครงสร้างเว็บไซต์ที่ตอบโจทย์ท้องถิ่น",
-    },
-    {
-      step: "02",
-      title: "High-Performance Deployment",
-      description:
-        "ติดตั้งระบบเว็บไซต์ที่โหลดไวและรองรับ SEO เชิงลึกเพื่อสร้างความได้เปรียบทางเทคโนโลยี",
-    },
-    {
-      step: "03",
-      title: "Strategic Growth & Scaling",
-      description:
-        "ขยายฐานลูกค้าด้วย Content Marketing และระบบปิดการขายที่มีประสิทธิภาพเพื่อความเป็นผู้นำในภูมิภาค",
-    },
   ],
 });

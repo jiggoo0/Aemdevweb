@@ -8,7 +8,7 @@
  */
 
 import { memo } from "react";
-import type { BaseTemplateProps } from "@/types/template-props";
+import type { BaseTemplateProps } from "@/types";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
 
@@ -22,36 +22,36 @@ const UniversalPortal = ({ data }: BaseTemplateProps) => {
   return (
     <section
       id="universal-portal"
-      className="relative overflow-hidden border-t bg-[#020617] py-24 text-white sm:py-32"
+      className="relative overflow-hidden border-t bg-[var(--surface-main)] py-24 text-[var(--text-primary)] sm:py-32"
     >
       {/* Visual Infrastructure Layer */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: "radial-gradient(var(--brand-primary) 1px, transparent 0)",
+            backgroundImage: "radial-gradient(var(--color-brand-primary) 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
-        <div className="absolute bottom-0 left-1/2 h-[500px] w-full -translate-x-1/2 transform-gpu rounded-full bg-[var(--brand-primary)]/10 blur-[120px]" />
+        <div className="absolute bottom-0 left-1/2 h-[500px] w-full -translate-x-1/2 transform-gpu rounded-full bg-[var(--color-brand-primary)]/10 blur-[120px]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
         {/* Authority Marker */}
         <div className="mb-10 flex flex-col items-center gap-3">
-          <div className="shadow-glow-sm flex h-20 w-20 items-center justify-center rounded-3xl border border-white/10 bg-white/5 text-[var(--brand-primary)] ring-1 ring-[var(--brand-primary)]/20 backdrop-blur-2xl">
+          <div className="shadow-glow-sm flex h-20 w-20 items-center justify-center rounded-3xl border border-[var(--border)] bg-[var(--surface-card)] text-[var(--color-brand-primary)] ring-1 ring-[var(--color-brand-primary)]/20 backdrop-blur-2xl">
             <IconRenderer name="Target" size={48} />
           </div>
-          <span className="font-mono text-[10px] font-black tracking-[0.5em] text-[var(--brand-primary)] uppercase opacity-80">
+          <span className="font-mono text-[10px] font-black tracking-[0.5em] text-[var(--color-brand-primary)] uppercase opacity-80">
             Conversion_Master_Node
           </span>
         </div>
 
-        <h2 className="mb-8 text-4xl leading-[0.9] font-black tracking-tighter uppercase italic sm:text-6xl lg:text-7xl">
+        <h2 className="mb-8 text-4xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic sm:text-6xl lg:text-7xl">
           {portalTitle}
         </h2>
 
-        <p className="text-text-secondary mx-auto mb-12 max-w-2xl text-lg leading-relaxed font-semibold italic opacity-80 md:text-xl">
+        <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed font-semibold text-[var(--text-secondary)] italic opacity-80 md:text-xl">
           “{portalDescription}”
         </p>
 
@@ -60,7 +60,7 @@ const UniversalPortal = ({ data }: BaseTemplateProps) => {
             <Button
               href={primaryAction.href}
               size="lg"
-              className="shadow-glow-md h-16 rounded-2xl px-10 text-[11px] font-black tracking-widest uppercase italic"
+              className="shadow-glow-md h-16 rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-widest text-white uppercase italic"
               variant="default"
             >
               <IconRenderer name={primaryAction.icon || "Zap"} className="mr-2 h-5 w-5" />
@@ -72,7 +72,7 @@ const UniversalPortal = ({ data }: BaseTemplateProps) => {
               href={secondaryAction.href}
               size="lg"
               variant="outline"
-              className="hover:border-brand-primary/60 h-16 rounded-2xl border-white/20 px-10 text-[11px] font-black tracking-widest text-white uppercase italic backdrop-blur-sm"
+              className="h-16 rounded-2xl border-[var(--border)] bg-[var(--surface-card)]/50 px-10 text-[11px] font-black tracking-widest text-[var(--text-primary)] uppercase italic backdrop-blur-sm hover:border-[var(--color-brand-primary)]/60"
             >
               <IconRenderer
                 name={secondaryAction.icon || "MessageCircle"}

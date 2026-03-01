@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: SA_KAEO_BORDER_GATEWAY v18.0.1
- * [STRATEGY]: Border Logistics | SEZ Hub | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const saKaeoNode: AreaNode = {
+export const saKaeoNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "sa-kaeo",
+  tier: 2,
   province: "สระแก้ว",
   region: "East",
-  templateSlug: "local-authority",
+  priority: 86,
+
   title: "รับทำเว็บไซต์ สระแก้ว | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและโลจิสติกส์อาเซียน",
   description:
     "ยกระดับธุรกิจในสระแก้วสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าชายแดนที่รวดเร็ว",
-  seoTitle: "รับทำเว็บไซต์ สระแก้ว ออกแบบเว็บชิปปิ้ง การค้าชายแดน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สระแก้ว สำหรับธุรกิจนำเข้า-ส่งออก คลังสินค้าในเขตเศรษฐกิจพิเศษ และ SME อรัญประเทศ ดีไซน์สวยโหลดไว รองรับ SEO",
 
   longDescription:
     "สระแก้ว ประตูการค้าชายแดนที่ใหญ่ที่สุดของภาคตะวันออกที่เป็นจุดเชื่อมต่อสำคัญบนเส้นทางเศรษฐกิจไทย-กัมพูชา " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจในสระแก้วด้วยเว็บไซต์ระดับสากลที่เน้นความมั่นคงและรวดเร็ว " +
     "ไม่ว่าจะเป็นธุรกิจชิปปิ้งในอรัญประเทศ หรือคลังสินค้าในเขตเศรษฐกิจพิเศษ (SEZ) เราออกแบบระบบที่รองรับการสื่อสารหลายภาษา " +
     "เพื่อให้คู่ค้าข้ามพรมแดนมั่นใจในมาตรฐานความเป็นมืออาชีพของธุรกิจสระแก้วของคุณ",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/sa-kaeo-node.webp",
+  coordinates: { lat: 13.824, lng: 102.064 },
+  districts: [
+    "เมืองสระแก้ว",
+    "อรัญประเทศ",
+    "คลองหาด",
+    "ตาพระยา",
+    "วัฒนานคร",
+    "วังน้ำเย็น",
+    "เขาฉกรรจ์",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const saKaeoNode: AreaNode = {
     "Border Trade SEO mastery: วางโครงสร้างการค้นหาเพื่อครองอันดับหนึ่งในคีย์เวิร์ดด้านการขนส่งและการค้าชายแดนในสระแก้ว",
   ],
 
-  priority: 86,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/sa-kaeo-node.webp",
-  coordinates: { lat: 13.824, lng: 102.064 },
   marketSaturation: 42,
   regionalLatency: 18,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -60,6 +62,8 @@ export const saKaeoNode: AreaNode = {
         "ทำ SEO เจาะกลุ่มคีย์เวิร์ดการค้าชายแดนและเขตเศรษฐกิจพิเศษเพื่อให้คู่ค้าหาคุณเจอ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "สระแก้วเป็นด่านการค้าสำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'หน้าตาทางการค้า' ที่สะท้อนความซื่อสัตย์และความมั่นคง",
@@ -75,18 +79,47 @@ export const saKaeoNode: AreaNode = {
       "ต้องการสื่อสารกับคู่ค้าต่างชาติที่เป็นทางการ",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 48,
+      localClient: "บริษัทชิปปิ้งข้ามแดน ย่านอรัญประเทศ",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: ธุรกิจนำเข้า-ส่งออกสระแก้ว",
+      result: "วางระบบระบบแคตตาล็อกบริการและ SEO 3 ภาษา ยอดคู่ค้าต่างชาติทักสอบถามเพิ่มขึ้น 200%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ อรัญประเทศ",
       "ออกแบบเว็บชิปปิ้ง สระแก้ว",
       "จ้างทำ SEO ด่านคลองลึก",
       "ทำเว็บธุรกิจ SEZ สระแก้ว",
     ],
+    promotions: [
+      {
+        title: "ASEAN Trade Accelerator",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจโลจิสติกส์และ SEZ ในสระแก้ว รับฟรีบริการออกแบบ Digital Profile 3 ภาษา และระบบปักหมุดจุดกระจายสินค้ามูลค่า 10,000 บาท",
+        discount: "Free Multi-lang Profile Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/sa-kaeo-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองสระแก้ว", "อรัญประเทศ", "คลองหาด", "ตาพระยา", "วัฒนานคร"],
+
   keywords: [
     "รับทำเว็บไซต์ สระแก้ว",
     "ทำเว็บชิปปิ้ง สระแก้ว",
     "จ้างทำเว็บอรัญประเทศ",
     "รับทำ SEO สระแก้ว",
   ],
-};
+});

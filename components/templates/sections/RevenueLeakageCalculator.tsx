@@ -62,12 +62,12 @@ export default function RevenueLeakageCalculator({
         <header className="mb-20 space-y-6 text-center md:text-left">
           <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2">
             <span className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
-            <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
-              Financial_Leakage_Analysis_v18.5
+            <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+              เครื่องมือประเมินความเสี่ยงธุรกิจ
             </span>
           </div>
           <h2 className="text-text-primary text-4xl leading-tight font-black tracking-tighter uppercase italic md:text-7xl">
-            Analyze your <br /> <span className="text-brand-primary">Revenue Drain.</span>
+            ประเมิน <br /> <span className="text-brand-primary">รายได้ที่สูญเสีย.</span>
           </h2>
           <p className="text-text-secondary max-w-2xl text-lg font-medium italic opacity-80 md:text-xl">
             “ทุกมิลลิวินาทีที่เว็บคุณช้า คือกำไรสุทธิที่กำลังไหลออกจากธุรกิจโดยไม่รู้ตัว”
@@ -79,7 +79,7 @@ export default function RevenueLeakageCalculator({
           <div className="glass-card rounded-section border-border/50 bg-surface-card/80 shadow-pro-xl border p-8 backdrop-blur-3xl md:p-16 lg:col-span-7">
             <div className="border-border/10 mb-12 flex items-center justify-between border-b pb-6">
               <h3 className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
-                System_Parameter_Input
+                ระบุข้อมูลธุรกิจของคุณ
               </h3>
               <div className="flex gap-1">
                 <div className="bg-border h-1 w-4 rounded-full" />
@@ -89,7 +89,7 @@ export default function RevenueLeakageCalculator({
 
             <div className="space-y-12">
               <InputGroup
-                label="Monthly_Traffic"
+                label="จำนวนผู้เข้าชม (ต่อเดือน)"
                 value={mounted ? traffic.toLocaleString() : "0"}
                 unit="Users"
                 min={1000}
@@ -99,7 +99,7 @@ export default function RevenueLeakageCalculator({
                 onChange={setTraffic}
               />
               <InputGroup
-                label="Average_Order_Value"
+                label="มูลค่าเฉลี่ย (ต่อออเดอร์)"
                 value={mounted ? `฿${aov.toLocaleString()}` : "0"}
                 unit="THB"
                 min={100}
@@ -109,7 +109,7 @@ export default function RevenueLeakageCalculator({
                 onChange={setAov}
               />
               <InputGroup
-                label="Conversion_Target"
+                label="อัตราการปิดการขาย (%)"
                 value={`${conversionRate.toFixed(1)}%`}
                 unit="Rate"
                 min={0.5}
@@ -120,7 +120,7 @@ export default function RevenueLeakageCalculator({
               />
               <div className="border-border/10 border-t pt-10">
                 <InputGroup
-                  label="Current_Latency_Index"
+                  label="ความเร็วเว็บไซต์เดิม (วินาที)"
                   value={`${currentSpeed.toFixed(1)}s`}
                   unit="Delay"
                   min={1.0}
@@ -149,8 +149,8 @@ export default function RevenueLeakageCalculator({
 
               <div className="relative z-10 flex h-full flex-col">
                 <div className="mb-10 flex items-center justify-between">
-                  <span className="text-brand-primary font-mono text-[9px] font-black tracking-widest uppercase">
-                    Result_Ledger
+                  <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+                    ผลลัพธ์การคำนวณ
                   </span>
                   <div
                     className={cn(
@@ -161,8 +161,8 @@ export default function RevenueLeakageCalculator({
                 </div>
 
                 <div className="mb-12 space-y-2">
-                  <p className="font-mono text-[10px] text-white/40 uppercase">
-                    Estimated_Monthly_Loss
+                  <p className="font-sans text-[11px] font-bold text-white/80 uppercase">
+                    รายได้ที่อาจสูญเสีย (ต่อเดือน)
                   </p>
                   <h4
                     className={cn(
@@ -176,28 +176,28 @@ export default function RevenueLeakageCalculator({
 
                 <div className="mb-16 space-y-6">
                   <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                    <span className="text-[10px] font-bold text-white/40 uppercase italic">
-                      Yearly_Trajectory
+                    <span className="text-[12px] font-bold text-white/80 uppercase italic">
+                      ความสูญเสียสะสมต่อปี
                     </span>
                     <span className="text-brand-primary text-xl font-black italic tabular-nums">
                       ฿{(yearlyLoss / 1000000).toFixed(2)}M
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed font-medium text-white/60 italic">
-                    “วิเคราะห์ความสูญเสียสะสมเชิงเทคนิคผ่านสมการ Revenue Matrix v18.5
-                    พบโอกาสการกู้คืนยอดขายในระดับวิศวกรรม”
+                  <p className="text-sm leading-relaxed font-medium text-white/90 italic">
+                    “การปล่อยให้เว็บไซต์ทำงานช้า ไม่ใช่แค่ปัญหาทางเทคนิค
+                    แต่คือการสูญเสียลูกค้ารายสำคัญไปให้คู่แข่งทุกๆ วัน”
                   </p>
                 </div>
 
                 <div className="mt-auto space-y-6">
                   <Button
                     href={SITE_CONFIG.links.line}
-                    className="bg-brand-primary h-16 w-full rounded-2xl text-[11px] font-black tracking-[0.3em] uppercase italic transition-all hover:scale-[1.02] active:scale-95"
+                    className="bg-brand-primary h-16 w-full rounded-2xl text-[13px] font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-95"
                   >
-                    Recover Revenue Strategy
+                    ปรึกษาแนวทางแก้ไข (ฟรี)
                   </Button>
-                  <p className="text-center text-[8px] font-black tracking-widest text-white/20 uppercase">
-                    Protocol_Awaiting_Specialist_Signal
+                  <p className="text-center font-sans text-[10px] font-bold tracking-widest text-white/60 uppercase">
+                    พร้อมให้คำปรึกษาตลอด 24 ชั่วโมง
                   </p>
                 </div>
               </div>
@@ -226,8 +226,8 @@ const InputGroup = memo(
     <div className="space-y-4">
       <div className="flex items-end justify-between">
         <div className="space-y-1">
-          <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-40">
-            // {label}
+          <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-80">
+            {label}
           </span>
           <div className="flex items-center gap-3">
             <span

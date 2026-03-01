@@ -16,6 +16,8 @@
       "next.config.ts",
       "app/**/*.{ts,tsx}",
       "lib/cms.ts",
+      "core/**/*.{ts,tsx}",
+      "constants/**/*.{ts,tsx}",
       "mdx-components.tsx",
       "scripts/test-schema.ts"
     ]

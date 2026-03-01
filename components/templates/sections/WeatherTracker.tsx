@@ -27,9 +27,11 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
     requestRate: 45,
     indexingStatus: "Active",
   });
+  const [syncId, setSyncId] = useState<string>("0.0000");
 
   // [LOGIC]: จำลองการผันผวนของประสิทธิภาพโหนด
   useEffect(() => {
+    setSyncId(`0.${Math.floor(Date.now() / 1000000)}`);
     const interval = setInterval(() => {
       setStats((prev) => ({
         ...prev,
@@ -119,7 +121,7 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
 
         {/* --- 4. Technical Footer: Metadata --- */}
         <div className="flex items-center justify-between pt-4 font-mono text-[8px] tracking-widest uppercase opacity-30">
-          <p>Registry_Sync: 0.{Math.floor(Date.now() / 1000000)}s</p>
+          <p>Registry_Sync: {syncId}s</p>
           <p>STABLE_INFRASTRUCTURE</p>
         </div>
       </div>

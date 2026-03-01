@@ -11,6 +11,7 @@ import { hotelResortService } from "@/constants/services/hotel-resort";
 export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "prachuap-khiri-khan",
+  tier: 2,
   province: "ประจวบคีรีขันธ์",
   region: "West",
   priority: 96,

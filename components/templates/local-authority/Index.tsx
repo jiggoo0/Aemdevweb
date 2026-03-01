@@ -1,121 +1,132 @@
 /**
- * [TEMPLATE]: LOCAL_AUTHORITY_ORCHESTRATOR v18.5.0 (SEO_HARDENED)
- * [STRATEGY]: Sequence-First Layout | Hyper-Local Authority | Identity Guard
+ * [TEMPLATE]: LOCAL_AUTHORITY_v20.0.0 (FLAGSHIP_READY)
+ * [STRATEGY]: Hyper-Local Authority | Consistent Visual Rhythm | Identity Guard
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React from "react";
+import dynamic from "next/dynamic";
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";
 
-// --- 1. Modular Component Registry ---
-import UniversalHero from "@/components/templates/sections/UniversalHero";
-import { LocalMapNode } from "../sections/LocalMapNode";
-import { LocalInsight } from "../sections/LocalInsight";
-import { MarketIntelligence } from "../sections/MarketIntelligence";
-import UniversalPortal from "@/components/templates/sections/UniversalPortal";
-import { RegionalRoadmap } from "../sections/RegionalRoadmap";
-import { LocalSuccessNode } from "../sections/LocalSuccessNode";
-import { DirectTerminal } from "../sections/DirectTerminal";
-import { DynamicFAQ } from "../sections/DynamicFAQ";
+// --- Specialized Internal Components (Flagship Layering) ---
+const UniversalHero = dynamic(() => import("@/components/templates/sections/UniversalHero"));
+const LocalMapNode = dynamic(() => import("../sections/LocalMapNode").then((m) => m.LocalMapNode));
+const LocalInsight = dynamic(() => import("../sections/LocalInsight").then((m) => m.LocalInsight));
+const MarketIntelligence = dynamic(() =>
+  import("../sections/MarketIntelligence").then((m) => m.MarketIntelligence),
+);
+const RegionalRoadmap = dynamic(() =>
+  import("../sections/RegionalRoadmap").then((m) => m.RegionalRoadmap),
+);
+const LocalSuccessNode = dynamic(() =>
+  import("../sections/LocalSuccessNode").then((m) => m.LocalSuccessNode),
+);
+const DirectTerminal = dynamic(() =>
+  import("../sections/DirectTerminal").then((m) => m.DirectTerminal),
+);
+const DynamicFAQ = dynamic(() => import("../sections/DynamicFAQ").then((m) => m.DynamicFAQ));
+const RegionalNodeHub = dynamic(() => import("../sections/RegionalNodeHub"));
+const UniversalPortal = dynamic(() => import("../sections/UniversalPortal"));
+
+// --- Shared Assets ---
+const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"));
 
 const LocalAuthorityTemplate = ({ data }: { data: UniversalTemplateProps }) => {
   const schema = generateUniversalSchema(data);
-  const { theme } = data;
-  const provinceName = data.province || "THAILAND";
-
-  const context = data.localContext || {
-    marketInsight: `บริการรับทำเว็บไซต์และตลาดยุคใหม่สำหรับพื้นที่ ${provinceName} โดยผู้เชี่ยวชาญเฉพาะทาง`,
-    painPoints: [],
-    competitorLevel: "medium",
-    nicheIndustries: [],
-  };
+  const provinceName = data.province || "Thailand";
 
   return (
-    <LayoutEngine spacing="none" theme={theme}>
-      <JsonLd data={schema} />
+    <LayoutEngine spacing="none" theme={data.theme} className="template-local-authority-v2">
+      <JsonLd data={schema} id={`schema-pseo-${data.slug}`} />
 
-      <main className="relative flex flex-col antialiased">
-        <h2 className="sr-only">Hyper-Local Authority & Provincial SEO Hub</h2>
+      {/* --- LAYER 01: HERO GATEWAY --- */}
+      <UniversalHero data={data} align="center" />
 
-        {/* [SEQUENCE_00]: CORE HERO (Surface Main) */}
-        <section className="bg-surface-main">
-          <UniversalHero data={data} />
-        </section>
+      {/* --- LAYER 02: GEOSPATIAL TRUST --- */}
+      <section className="bg-surface-offset border-border/40 border-y py-12 md:py-20">
+        <LocalMapNode
+          lat={data.coordinates?.lat || 13.7563}
+          lng={data.coordinates?.lng || 100.5018}
+          province={provinceName}
+        />
+      </section>
 
-        {/* [SEQUENCE_01]: GEOGRAPHICAL PROOF (Surface Main) */}
-        <section className="bg-surface-main py-12">
-          <LocalMapNode
-            lat={data.coordinates?.lat || 13.7563}
-            lng={data.coordinates?.lng || 100.5018}
+      {/* --- LAYER 03: REGIONAL INTELLIGENCE --- */}
+      <div className="bg-surface-main relative space-y-0">
+        <LocalInsight
+          insight={data.localContext?.marketInsight || ""}
+          painPoints={(data.localContext?.painPoints as string[]) || []}
+          marketSaturation={data.marketSaturation}
+        />
+
+        <MarketIntelligence
+          level={data.localContext?.competitorLevel || "medium"}
+          industries={(data.localContext?.nicheIndustries as string[]) || []}
+        />
+      </div>
+
+      {/* --- LAYER 04: EXECUTION BLUEPRINT --- */}
+      <section className="bg-surface-offset border-border/40 border-y py-32 md:py-48">
+        <RegionalRoadmap province={provinceName} steps={data.regionalRoadmap} />
+
+        <div className="container mx-auto mt-24 max-w-2xl px-4">
+          <DirectTerminal
+            mode="health-check"
+            province={provinceName}
+            latency={data.regionalLatency}
+          />
+        </div>
+      </section>
+
+      {/* --- LAYER 05: SOCIAL PROOF & SUCCESS --- */}
+      <section className="bg-surface-main py-24 md:py-40">
+        <div className="container mx-auto mb-20 text-center">
+          <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-60">
+            Validated_Evidence
+          </span>
+          <h2 className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+            Success <span className="text-brand-primary">Evidence.</span>
+          </h2>
+        </div>
+
+        {data.localSuccessStory && (
+          <LocalSuccessNode
+            title={data.localSuccessStory.title}
+            result={data.localSuccessStory.result}
             province={provinceName}
           />
-        </section>
-
-        {/* [SEQUENCE_02]: MARKET ANALYSIS (Surface Offset) */}
-        <section className="bg-surface-offset border-border/40 border-y py-24 md:py-40">
-          <LocalInsight
-            insight={context.marketInsight}
-            painPoints={(context.painPoints as string[]) || []}
-            marketSaturation={data.marketSaturation}
-          />
-        </section>
-
-        {/* [SEQUENCE_03]: INTELLIGENCE MATRIX (Surface Main) */}
-        <section className="bg-surface-main space-y-40 py-24 md:py-40">
-          <MarketIntelligence
-            level={context.competitorLevel || "medium"}
-            industries={(context.nicheIndustries as string[]) || []}
-          />
-          <RegionalRoadmap province={provinceName} steps={data.regionalRoadmap} />
-        </section>
-
-        {/* [SEQUENCE_04]: REGIONAL TERMINAL (Surface Offset) */}
-        <section className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
-          <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-2xl">
-              <DirectTerminal
-                mode="health-check"
-                province={provinceName}
-                latency={data.regionalLatency}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* [SEQUENCE_05]: LOCAL PROOF (Surface Main) */}
-        {data.localSuccessStory && (
-          <section className="bg-surface-main py-24 md:py-32">
-            <LocalSuccessNode
-              title={data.localSuccessStory.title}
-              result={data.localSuccessStory.result}
-              province={provinceName}
-            />
-          </section>
         )}
 
-        {/* [SEQUENCE_06]: REGIONAL FAQ (Surface Offset) */}
-        <section className="bg-surface-offset border-border/40 border-t py-24">
-          <DynamicFAQ
-            items={data.faqs || []}
-            title={`Regional_FAQ: ${provinceName}`}
-            description={`ข้อมูลทางเทคนิคและการให้บริการที่ปรับแต่งเพื่อความต้องการของชาว ${provinceName} โดยเฉพาะ`}
-          />
-        </section>
+        <div className="mt-24">
+          <TrustBadge />
+        </div>
+      </section>
 
-        {/* [SEQUENCE_07]: LOCAL PORTAL (Surface Main) */}
-        <section className="bg-surface-main">
-          <UniversalPortal data={data} />
-        </section>
+      {/* --- LAYER 06: GLOBAL SERVICE NETWORK --- */}
+      <RegionalNodeHub data={data} />
 
-        <footer className="bg-surface-main border-border/5 border-t py-8 text-center opacity-10">
-          <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
-            PSEO_Node_Protocol.v18.5.0_{provinceName.toUpperCase()}
+      {/* --- LAYER 07: STRATEGIC KNOWLEDGE --- */}
+      <DynamicFAQ
+        items={data.faqs || []}
+        title={`Regional_FAQ: ${provinceName}`}
+        description={`ตอบทุกข้อสงสัยเชิงเทคนิคและการให้บริการสำหรับพื้นที่ ${provinceName}`}
+        className="bg-surface-offset border-border/40 border-t py-32"
+      />
+
+      {/* --- LAYER 08: CONVERSION PORTAL --- */}
+      <UniversalPortal data={data} />
+
+      <footer className="bg-[#020617] py-12 text-center">
+        <div className="inline-flex items-center gap-3 opacity-20">
+          <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+          <p className="font-mono text-[8px] tracking-[0.5em] text-white uppercase">
+            PSEO_Protocol_v20.0.0_HARDENED_{provinceName.toUpperCase()}
           </p>
-        </footer>
-      </main>
+        </div>
+      </footer>
     </LayoutEngine>
   );
 };

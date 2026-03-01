@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: NONG_BUA_LAMPHU_AGRI v18.0.1
- * [STRATEGY]: Agri-Craft | Local Economy | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const nongBuaLamphuNode: AreaNode = {
+export const nongBuaLamphuNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "nong-bua-lamphu",
+  tier: 2,
   province: "หนองบัวลำภู",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 80,
+
   title: "รับทำเว็บไซต์ หนองบัวลำภู | พัฒนาเว็บไซต์วิสาหกิจชุมชนและธุรกิจเกษตรยุคใหม่",
   description:
     "ยกระดับสินค้าชุมชนและที่พักสายธรรมชาติของหนองบัวลำภูสู่โลกออนไลน์ ด้วยเว็บไซต์ที่เน้นงานดีไซน์ที่ดูอบอุ่นและเข้าถึงง่าย",
-  seoTitle: "รับทำเว็บไซต์ หนองบัวลำภู ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์หนองบัวลำภู สำหรับ SME ท้องถิ่น วิสาหกิจชุมชน และแหล่งท่องเที่ยวเชิงวิถีชีวิต ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "หนองบัวลำภู จังหวัดที่มีมนต์เสน่ห์แห่งขุนเขาและงานหัตถศิลป์ผ้าทอพื้นเมืองที่เป็นเอกลักษณ์ " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับแบรนด์ท้องถิ่นและวิสาหกิจชุมชนในหนองบัวลำภูสู่ตลาดออนไลน์ที่กว้างขึ้น " +
     "ด้วยการออกแบบเว็บไซต์ที่สะท้อนถึงความอบอุ่นและประณีตของผลิตภัณฑ์ชุมชน " +
     "เราเน้นโครงสร้างที่โหลดไวและระบบการจัดการที่เรียบง่าย เพื่อให้ธุรกิจ SME และเกษตรยุคใหม่ในพื้นที่ เติบโตได้อย่างมั่นคงบนโลกดิจิทัล",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/nong-bua-lamphu-node.webp",
+  coordinates: { lat: 17.203, lng: 102.441 },
+  districts: ["เมืองหนองบัวลำภู", "ศรีบุญเรือง", "นากลาง", "นาวัง", "สุวรรณคูหา", "โนนสัง"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +32,9 @@ export const nongBuaLamphuNode: AreaNode = {
     "Regional Market SEO: วางรากฐานการค้นหาเพื่อดักจับลูกค้าที่กำลังมองหาของดีหนองบัวลำภูและที่พักสายธรรมชาติ",
   ],
 
-  priority: 80,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/nong-bua-lamphu-node.webp",
-  coordinates: { lat: 17.203, lng: 102.441 },
   marketSaturation: 22,
   regionalLatency: 24,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,12 +55,14 @@ export const nongBuaLamphuNode: AreaNode = {
         "ทำ Local SEO ดักจับคำค้นหาธุรกิจและแหล่งท่องเที่ยวในหนองบัวลำภูเพื่อสร้างตัวตนที่แข็งแรง",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "หนองบัวลำภูเป็นเมืองที่มีเสน่ห์ด้านหัตถกรรมและธรรมชาติที่เรียบง่าย เว็บไซต์ที่ดูจริงใจจะได้รับการตอบรับที่ดี",
     technicalApproach:
-      "เน้นการแสดงผลที่โหลดไวและระบบการติดต่อสื่อสารผ่าน LINE ที่นักธุรกิจท้องถิ่นคุ้นเคย",
-    localStrength: "มีความเข้มแข็งด้านวิสาหกิจชุมชนผ้าทอและกลุ่มเกษตรปลอดภัย",
+      "เน้นการแสดงผลที่โหลดไวและระบบการติดต่อสอบถามผ่าน LINE ที่นักธุรกิจท้องถิ่นคุ้นเคย",
+    localStrength: "มีความโดดเด่นด้านวิสาหกิจชุมชนผ้าทอและกลุ่มเกษตรปลอดภัย",
     nicheIndustries: [
       "วิสาหกิจชุมชนผ้าพื้นเมืองพรีเมียม",
       "ธุรกิจเกษตรปลอดภัยและออร์แกนิก",
@@ -77,18 +73,47 @@ export const nongBuaLamphuNode: AreaNode = {
       "เว็บไซต์เดิมไม่อัปเดตและใช้งานยาก",
     ],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 24,
+      localClient: "กลุ่มวิสาหกิจชุมชนผ้าทอหนองบัวลำภู",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: วิสาหกิจสินค้าเกษตรแปรรูป",
+      result: "พัฒนาหน้าร้านออนไลน์ใหม่ ยอดสั่งซื้อผ่านเพจและเว็บรวมกันเพิ่มขึ้น 150% ใน 4 เดือน",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ หนองบัวลำภู",
       "ออกแบบเว็บสินค้า OTOP",
       "จ้างทำ SEO นากลาง",
       "ทำเว็บวิสาหกิจชุมชน หนองบัว",
     ],
+    promotions: [
+      {
+        title: "Community Growth Digital Start",
+        description:
+          "สิทธิพิเศษสำหรับวิสาหกิจชุมชนในหนองบัวลำภู รับฟรีบริการถ่ายภาพสินค้าเบื้องต้นและแผนงานโปรโมทผ่าน Google Maps มูลค่า 5,000 บาท",
+        discount: "Free Product Photos & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nong-bua-lamphu-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองหนองบัวลำภู", "ศรีบุญเรือง", "นากลาง", "นาวัง", "สุวรรณคูหา"],
+
   keywords: [
     "รับทำเว็บไซต์ หนองบัวลำภู",
     "ทำเว็บสินค้า OTOP",
     "จ้างทำเว็บหนองบัว",
     "รับทำ SEO หนองบัวลำภู",
   ],
-};
+});

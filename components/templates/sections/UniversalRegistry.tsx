@@ -1,58 +1,106 @@
 /**
  * [AEMZA_MACKS_SYSTEM_ARCHITECT]
- * [MISSION]: CONSOLIDATE_ALL_REGISTRY_VARIANTS (Features, Products, Items)
+ * [MISSION]: CONSOLIDATE_ALL_REGISTRY_VARIANTS (Elite Edition)
  * [COMPONENT_ID]: UniversalRegistry.tsx
- * [VERSION]: 1.0.0
- * [STATUS]: PRODUCTION_READY
- * [STRATEGY]: RSC-First, Data-Driven Rendering, Strict Type Safety
+ * [VERSION]: 2.0.0
+ * [STRATEGY]: Technical Hierarchy | High-Fidelity Feedback | Zero-CLS
  */
 
 import { memo } from "react";
-import type { BaseTemplateProps } from "@/types/template-props";
-import type { ServiceFeature, CatalogItem } from "@/types";
+import type { BaseTemplateProps, ServiceFeature, CatalogItem } from "@/types";
 import IconRenderer from "@/components/ui/IconRenderer";
+import type { IconName } from "@/components/ui/IconRenderer";
+import { cn } from "@/lib/utils";
 
-// Sub-component for rendering Core Features
+// --- [01] Core Capabilities (FeatureGrid) ---
 export const FeatureGrid = memo(({ features }: { features: readonly ServiceFeature[] }) => (
   <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-    {features.map((feature) => (
+    {features.map((feature, idx) => (
       <div
         key={feature.title}
-        className="transform rounded-xl border border-gray-700 bg-gray-800/50 p-6 shadow-lg transition-transform hover:-translate-y-1 hover:shadow-cyan-500/10"
+        className={cn(
+          "group rounded-card border-border relative flex flex-col overflow-hidden border p-10 transition-all duration-700",
+          "bg-surface-card hover:shadow-glow-sm hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
+          "transform-gpu will-change-transform",
+        )}
       >
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-700 text-cyan-400">
-          <IconRenderer name={feature.icon} className="h-6 w-6" />
+        {/* Background Aura */}
+        <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-[var(--color-brand-primary)] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-10" />
+
+        <div className="bg-surface-offset border-border group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-2xl border text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+          <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
         </div>
-        <h3 className="mt-4 text-xl font-bold text-white">{feature.title}</h3>
-        <p className="mt-2 text-gray-300">{feature.description}</p>
+
+        <div className="relative z-10 space-y-4">
+          <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
+            Node_Capability.0{idx + 1}
+          </span>
+          <h3 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic">
+            {feature.title}
+          </h3>
+          <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-70">
+            “{feature.description}”
+          </p>
+        </div>
+
+        {/* Decorative Grid Trace */}
+        <div
+          className="absolute inset-0 z-0 opacity-[0.02] mix-blend-overlay transition-opacity duration-700 group-hover:opacity-[0.05]"
+          style={{ backgroundImage: "url(/grid-pattern.svg)", backgroundSize: "20px 20px" }}
+        />
       </div>
     ))}
   </div>
 ));
 FeatureGrid.displayName = "FeatureGrid";
 
-// Sub-component for rendering Catalog Items (Products/Services)
+// --- [02] Specialized Units (ItemGrid) ---
 const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    {items.map((item) => (
+    {items.map((item, idx) => (
       <div
         key={item.name}
-        className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-700 bg-gray-800 text-center shadow-md transition-all hover:border-cyan-500/50 hover:shadow-xl"
+        className={cn(
+          "group rounded-section border-border bg-surface-card relative flex flex-col overflow-hidden border p-2 transition-all duration-700",
+          "hover:shadow-glow-sm hover:scale-[1.02] hover:border-[var(--color-brand-primary)]/40",
+        )}
       >
-        <div className="flex h-32 items-center justify-center bg-gray-900">
+        <div className="bg-surface-offset flex h-48 items-center justify-center overflow-hidden rounded-[calc(var(--radius-section)-0.5rem)] transition-colors duration-700 group-hover:bg-[var(--color-brand-primary)]/5">
           <IconRenderer
-            name={item.icon}
-            className="h-16 w-16 text-cyan-400 transition-transform group-hover:scale-110"
+            name={item.icon as IconName}
+            size={80}
+            strokeWidth={1}
+            className="text-[var(--color-brand-primary)] opacity-20 transition-all duration-1000 group-hover:scale-110 group-hover:opacity-100"
           />
         </div>
-        <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-lg font-semibold text-white">{item.name}</h3>
-          <p className="mt-2 flex-1 text-sm text-gray-400">{item.description}</p>
+
+        <div className="flex flex-1 flex-col p-8">
+          <div className="mb-6 space-y-2">
+            <span className="text-text-muted font-mono text-[8px] font-bold tracking-[0.3em] uppercase opacity-40">
+              Unit_Registry.v18.{idx.toString().padStart(2, "0")}
+            </span>
+            <h3 className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
+              {item.name}
+            </h3>
+            <p className="text-text-secondary line-clamp-2 text-sm leading-relaxed font-medium italic opacity-60">
+              {item.description}
+            </p>
+          </div>
+
           {item.price && (
-            <div className="mt-4">
-              <span className="rounded-full bg-cyan-900/50 px-3 py-1 text-sm font-medium text-cyan-300">
-                {item.price} {item.unit && `/ ${item.unit}`}
-              </span>
+            <div className="border-border mt-auto flex items-center justify-between border-t pt-6">
+              <div className="flex flex-col">
+                <span className="text-text-muted text-[8px] font-black tracking-widest uppercase opacity-40">
+                  Status_Price
+                </span>
+                <span className="text-lg font-black text-[var(--color-brand-primary)] italic">
+                  {item.price}{" "}
+                  {item.unit && <span className="text-xs opacity-50">/ {item.unit}</span>}
+                </span>
+              </div>
+              <div className="bg-surface-offset text-text-muted rounded-xl p-3 transition-all duration-500 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+                <IconRenderer name="ArrowUpRight" size={16} />
+              </div>
             </div>
           )}
         </div>
@@ -63,76 +111,66 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
 ItemGrid.displayName = "ItemGrid";
 
 const UniversalRegistry = ({ data }: BaseTemplateProps) => {
-  const { items, coreFeatures, templateSlug } = data;
+  const { items, coreFeatures, title } = data;
 
   const hasItems = items && items.length > 0;
   const hasFeatures = coreFeatures && coreFeatures.length > 0;
 
-  // Determine which content to render based on priority and template type
-  const renderContent = () => {
-    // For catalog-type templates, always prioritize items.
-    if (templateSlug === "catalog" && hasItems) {
-      return (
-        <div className="space-y-12">
-          <div>
-            <h2 className="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Our Service Catalog
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-gray-400">
-              Explore our comprehensive range of solutions tailored for your success.
-            </p>
-          </div>
-          <ItemGrid items={items!} />
-        </div>
-      );
-    }
-
-    // For other templates, render features if they exist.
-    if (hasFeatures) {
-      return (
-        <div className="space-y-12">
-          <div>
-            <h2 className="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Core Capabilities
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-gray-400">
-              Leverage our powerful features designed to deliver maximum impact and results.
-            </p>
-          </div>
-          <FeatureGrid features={coreFeatures} />
-        </div>
-      );
-    }
-
-    // Fallback to items if features are not present but items are.
-    if (hasItems) {
-      return (
-        <div className="space-y-12">
-          <div>
-            <h2 className="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Available Packages
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-center text-lg text-gray-400">
-              Choose the perfect package that fits your needs.
-            </p>
-          </div>
-          <ItemGrid items={items!} />
-        </div>
-      );
-    }
-
-    return null; // Render nothing if no relevant data is available
-  };
-
-  const content = renderContent();
-
-  if (!content) {
-    return null;
-  }
+  if (!hasItems && !hasFeatures) return null;
 
   return (
-    <section className="bg-black py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{content}</div>
+    <section className="relative overflow-hidden py-32 md:py-48">
+      <div className="container mx-auto px-4 md:px-8">
+        {/* --- SECTION HEADER --- */}
+        <header className="mb-24 space-y-8">
+          <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2.5 text-[var(--color-brand-primary)] backdrop-blur-md">
+            <div className="shadow-glow h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-brand-primary)]" />
+            <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+              Registry_Orchestration.sys
+            </span>
+          </div>
+
+          <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl">
+            System <br /> <span className="text-[var(--color-brand-primary)]">Architecture.</span>
+          </h2>
+
+          <div className="border-l-[6px] border-[var(--color-brand-primary)]/40 pl-8 md:pl-14">
+            <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-medium italic opacity-80 md:text-3xl">
+              โครงสร้างพื้นฐานและโมดูลการทำงานที่ขับเคลื่อนระบบ <br className="hidden md:block" />
+              <span className="text-text-primary font-black not-italic underline decoration-[var(--color-brand-primary)] decoration-4 underline-offset-8">
+                {title.split("|")[0].trim()}
+              </span>
+            </p>
+          </div>
+        </header>
+
+        {/* --- CONTENT HUB --- */}
+        <div className="space-y-32">
+          {hasFeatures && (
+            <div className="space-y-16">
+              <div className="flex items-center gap-8">
+                <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-4xl">
+                  Technical <span className="text-[var(--color-brand-primary)]">Capabilities.</span>
+                </h3>
+                <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-brand-primary)]/30 to-transparent" />
+              </div>
+              <FeatureGrid features={coreFeatures} />
+            </div>
+          )}
+
+          {hasItems && (
+            <div className="space-y-16">
+              <div className="flex items-center gap-8">
+                <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-4xl">
+                  Deployment <span className="text-[var(--color-brand-primary)]">Units.</span>
+                </h3>
+                <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-brand-primary)]/30 to-transparent" />
+              </div>
+              <ItemGrid items={items!} />
+            </div>
+          )}
+        </div>
+      </div>
     </section>
   );
 };

@@ -1,19 +1,14 @@
-/**
- * [SERVICE_NODE]: LAMPANG_CRAFT_INDUSTRIAL_HUB v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: Craftsmanship Authority | Tourism Storytelling | Dynamic Inheritance
- * [MARKET]: Lampang City, Koh Kha, Mae Moh (Ceramics & Energy Hub)
- */
-
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const lampangNode: AreaNode = {
+export const lampangNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "lampang",
+  tier: 2,
   province: "ลำปาง",
   region: "North",
-  templateSlug: "local-authority", // ยึดตาม Template หลัก
+  priority: 88,
 
   title: "รับทำเว็บไซต์ ลำปาง | ออกแบบเว็บเซรามิกและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
   description:
@@ -25,18 +20,20 @@ export const lampangNode: AreaNode = {
     "แต่แฝงไปด้วยความแข็งแรงของระบบหลังบ้านที่รองรับการขายส่งและกลุ่มลูกค้าต่างชาติ พร้อมวางโครงสร้าง SEO ให้คนค้นหาคุณเจอจากทั่วไทย " +
     "เพื่อให้ธุรกิจในลำปางของคุณเติบโตได้อย่างยั่งยืนในยุคดิจิทัลครับ",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ ลำปาง จ้างทำเว็บโรงงานเซรามิก ที่พัก รถเช่า - เอ็มซ่ามากส์",
-  seoDescription:
-    "บริการรับทำเว็บไซต์ลำปาง ครบวงจร สำหรับโรงงานเซรามิก SME และธุรกิจท่องเที่ยว เน้นเว็บสวยสะอาดตา รองรับภาษาอังกฤษ/จีน เพิ่มยอดขายและภาพลักษณ์แบรนด์",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
+  heroImage: "/images/areas/lampang-node.webp",
+  coordinates: { lat: 18.2855, lng: 99.4927 },
+  districts: [
+    "เมืองลำปาง",
+    "เกาะคา",
+    "แม่เมาะ",
+    "ห้างฉัตร",
+    "เถิน",
+    "แจ้ห่ม",
+    "งาว",
+    "แม่ทะ",
+    "สบปราบ",
+  ],
 
   isTourismHeavy: true,
   marketSaturation: 42,
@@ -61,13 +58,6 @@ export const lampangNode: AreaNode = {
         "วางโครงสร้าง SEO ให้สอดรับกับการค้นหาในเขตภาคเหนือตอนบนเพื่อดึงดูดกลุ่มนักท่องเที่ยวคุณภาพสูง",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/lampang-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Crafted for Export: เบื้องหลังความสำเร็จของโรงงานเซรามิกส่งออกและ SME คุณภาพในลำปาง",
 
   // --- Localized Benefits ---
   benefits: [
@@ -115,15 +105,6 @@ export const lampangNode: AreaNode = {
       answer:
         "ได้ครับ ผมชอบไปดูหน้างานจริงเพื่อให้เข้าใจกระบวนการผลิตและบรรยากาศร้าน จะได้ออกแบบเว็บออกมาได้ตรงโจทย์ที่สุดครับ",
     },
-    {
-      question: "เว็บไซต์จะติดหน้าแรก Google นานไหม?",
-      answer:
-        "ถ้าทำ SEO อย่างถูกต้อง อันดับจะอยู่ค่อนข้างยั่งยืนครับ ยิ่งเป็นคำค้นหาเฉพาะทางในลำปาง คู่แข่งยังไม่เยอะ โอกาสติดอันดับยาวยิ่งสูงครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("ดูแลหลังการขาย") || f.question.includes("ค่าใช้จ่าย"),
-    ),
   ],
 
   // --- Context Data ---
@@ -147,13 +128,13 @@ export const lampangNode: AreaNode = {
     ],
     competitorLevel: "low",
     socialProof: {
-      rating: 4.9,
+      rating: 5.0,
       reviewCount: 42,
       localClient: "โรงงานเซรามิกส่งออก ย่านเกาะคา",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
-      timeline: "10-14 วัน",
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
     },
     localSuccessStory: {
       title: "Case Study: โรงงานเซรามิกเกาะคา",
@@ -166,11 +147,24 @@ export const lampangNode: AreaNode = {
       "คนทำเว็บ SEO แม่เมาะ",
       "ทำเว็บไซต์โรงแรม ลำปาง",
     ],
+    promotions: [
+      {
+        title: "Lampang Ceramic Export Boost",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานเซรามิกในลำปาง รับฟรีบริการถ่ายภาพสินค้าพรีเมียม 10 รายการ และแผนงาน Multi-language SEO มูลค่า 7,500 บาท",
+        discount: "Free Product Photography",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/lampang-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 88,
-  districts: ["เมืองลำปาง", "เกาะคา", "แม่เมาะ", "ห้างฉัตร", "เถิน", "แจ้ห่ม", "งาว"],
   keywords: [
     "รับทำเว็บไซต์ ลำปาง",
     "จ้างทำเว็บไซต์",
@@ -179,5 +173,4 @@ export const lampangNode: AreaNode = {
     "รับทำ SEO ลำปาง",
     "คนทำเว็บ ลำปาง",
   ],
-  coordinates: { lat: 18.2855, lng: 99.4927 },
-};
+});

@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: KALASIN_PREMIUM_AGRI v18.0.1
- * [STRATEGY]: Paleontology Tourism | Silk & Agri | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const kalasinNode: AreaNode = {
+export const kalasinNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "kalasin",
+  tier: 2,
   province: "กาฬสินธุ์",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 82,
+
   title: "รับทำเว็บไซต์ กาฬสินธุ์ | ยกระดับแบรนด์ผ้าไหมแพรวาและธุรกิจท่องเที่ยวเชิงประวัติศาสตร์",
   description:
     "เปลี่ยนงานหัตถศิลป์ 'ราชินีแห่งไหม' และเสน่ห์เมืองไดโนเสาร์ ให้เป็นยอดขายดิจิทัลที่ดูพรีเมียมและน่าเชื่อถือ",
-  seoTitle: "รับทำเว็บไซต์ กาฬสินธุ์ ออกแบบเว็บผ้าไหมแพรวา ที่พัก - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กาฬสินธุ์ สำหรับวิสาหกิจชุมชนผ้าไหมแพรวา SME และแหล่งท่องเที่ยว ดีไซน์ประณีต โหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "กาฬสินธุ์ เมืองแห่งหัตถศิลป์ชั้นสูงและดินแดนบรรพชีวินวิทยาที่น่าตื่นตาตื่นใจ " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับ 'ผ้าไหมแพรวา' ราชินีแห่งไหม ให้โดดเด่นบนเวทีดิจิทัลด้วยเว็บไซต์ที่สะท้อนความพรีเมียม " +
     "ควบคู่ไปกับการสร้างระบบประชาสัมพันธ์แหล่งท่องเที่ยวเมืองไดโนเสาร์และเขื่อนลำปาว " +
     "เพื่อเปลี่ยนคุณค่าทางวัฒนธรรมและประวัติศาสตร์ให้กลายเป็นรายได้ที่ยั่งยืนสำหรับวิสาหกิจชุมชนและ SME ในพื้นที่",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/kalasin-node.webp",
+  coordinates: { lat: 16.432, lng: 103.506 },
+  districts: [
+    "เมืองกาฬสินธุ์",
+    "ยางตลาด",
+    "กมลาไสย",
+    "สหัสขันธ์",
+    "สมเด็จ",
+    "กุฉินารายณ์",
+    "เขาวง",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +40,10 @@ export const kalasinNode: AreaNode = {
     "Digital Identity for SMEs: สร้างตัวตนดิจิทัลที่น่าเชื่อถือให้กลุ่มโรงงานน้ำตาลและธุรกิจเกษตรแปรรูปประจำภูมิภาค",
   ],
 
-  priority: 82,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/kalasin-node.webp",
-  coordinates: { lat: 16.432, lng: 103.506 },
   isTourismHeavy: true,
   marketSaturation: 32,
   regionalLatency: 25,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +64,8 @@ export const kalasinNode: AreaNode = {
         "ทำ Local SEO ดักจับคำค้นหา 'ผ้าไหมแพรวาแท้', 'ที่พักกาฬสินธุ์' เพื่อเพิ่มโอกาสการขาย",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "กาฬสินธุ์มีสินค้าภูมิปัญญาที่เป็นที่สุด เว็บไซต์ที่ดูมีระดับและเล่าเรื่องได้ดีจะดึงดูดลูกค้ากำลังซื้อสูงได้จริง",
@@ -78,18 +82,47 @@ export const kalasinNode: AreaNode = {
       "นักท่องเที่ยวหาข้อมูลสินค้าภูมิปัญญาได้ยาก",
     ],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 32,
+      localClient: "แบรนด์ผ้าไหมแพรวาพรีเมียม ย่านคำม่วง",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: วิสาหกิจแพรวากาฬสินธุ์",
+      result: "วางระบบ Digital Storytelling และ E-catalog ยอดสั่งซื้อคอลเลกชันพิเศษเพิ่มขึ้น 200%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ผ้าไหมแพรวา",
       "ออกแบบเว็บธุรกิจ กาฬสินธุ์",
       "จ้างทำ SEO กาฬสินธุ์",
       "ทำเว็บท่องเที่ยว ไดโนเสาร์",
     ],
+    promotions: [
+      {
+        title: "Kalasin Heritage Digitalization",
+        description:
+          "สิทธิพิเศษสำหรับแบรนด์ผ้าไหมและแหล่งท่องเที่ยว รับฟรีบริการออกแบบ Storytelling Template และระบบปักหมุดแหล่งท่องเที่ยว Unseen มูลค่า 7,500 บาท",
+        discount: "Free Story & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/kalasin-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองกาฬสินธุ์", "ยางตลาด", "กมลาไสย", "สหัสขันธ์", "สมเด็จ"],
+
   keywords: [
     "รับทำเว็บไซต์ กาฬสินธุ์",
     "ทำเว็บผ้าไหมแพรวา",
     "จ้างทำเว็บกาฬสินธุ์",
     "รับทำ SEO กาฬสินธุ์",
   ],
-};
+});

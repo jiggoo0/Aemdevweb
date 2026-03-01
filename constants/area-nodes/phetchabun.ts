@@ -1,94 +1,47 @@
-/**
- * [SERVICE_NODE]: PHETCHABUN_HIGHLAND v18.0.1
- * [STRATEGY]: Eco-Tourism | Highland Agriculture | Dynamic Inheritance
- * [MARKET]: Phetchabun, Khao Kho, Phu Thap Boek
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const phetchabunNode: AreaNode = {
+export const phetchabunNode = defineAreaNode(localAuthorityService, {
   slug: "phetchabun",
+  tier: 2,
   province: "เพชรบูรณ์",
   region: "North",
-  templateSlug: "local-authority",
-  title: "รับทำเว็บไซต์ เพชรบูรณ์ | ออกแบบเว็บรีสอร์ตเขาค้อและธุรกิจเกษตรเมืองหนาว",
+  priority: 85,
+  title: "รับทำเว็บไซต์ เพชรบูรณ์ | ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
   description:
-    "ยกระดับธุรกิจท่องเที่ยวและเกษตรกรรมในเพชรบูรณ์ สู่มาตรฐานดิจิทัลที่ปิดการขายได้จริงบนยอดดอย พร้อมระบบจองที่ลื่นไหล",
-  longDescription:
-    "เพชรบูรณ์คือสวิตเซอร์แลนด์เมืองไทยที่มีศักยภาพการท่องเที่ยวสูงมาก นายเอ็มซ่ามากส์ พร้อมช่วยคุณเปลี่ยนบรรยากาศหลักล้านให้กลายเป็นยอดจองตรง " +
-    "เราเน้นทำเว็บไซต์ที่โหลดไวแม้บนพื้นที่สูง มีระบบจองที่พักที่แม่นยำ และงานดีไซน์ที่เน้นความโปร่ง สบายตา เข้ากับบรรยากาศเขาค้อและภูทับเบิก เพื่อดึงดูดนักท่องเที่ยวคุณภาพตลอดทั้งปีครับ",
-  seoTitle: "รับทำเว็บไซต์ เพชรบูรณ์ ออกแบบเว็บรีสอร์ตเขาค้อ ธุรกิจเกษตร - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์เพชรบูรณ์ ครบวงจร สำหรับรีสอร์ต โฮมสเตย์ และสินค้าเกษตรเมืองหนาว ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่และระบบจองตรง",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Highland-Resilient Design: สถาปัตยกรรมเว็บไซต์ที่ออกแบบมาให้โหลดได้รวดเร็วแม้ในพื้นที่สูงที่มีสัญญาณจำกัด",
-    "Scenic-Visual Mastery: ระบบแสดงผลภาพบรรยากาศหลักล้านที่คมชัดและลื่นไหล เพื่อดึงดูดนักท่องเที่ยวกลุ่มพรีเมียม",
-    "Khao Kho Dominance SEO: วางรากฐานการค้นหาเพื่อครองอันดับหนึ่งในคีย์เวิร์ดที่พักและแหล่งท่องเที่ยวเขาค้อและภูทับเบิก",
-  ],
-
-  priority: 88,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+    "เปลี่ยนไอหมอกเขาค้อให้เป็นยอดจองตรง ด้วยเว็บไซต์ที่เน้น Visual สวยงามและระบบจองที่ลื่นไหล",
   heroImage: "/images/areas/phetchabun-node.webp",
-  coordinates: { lat: 16.419, lng: 101.155 },
-  isTourismHeavy: true,
-  marketSaturation: 48,
-  regionalLatency: 24,
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Highland Brand Audit",
-      description:
-        "วิเคราะห์จุดเด่นของที่พักหรือสินค้าเกษตรเมืองหนาวเพื่อสร้างตัวตนที่ดูพรีเมียมและน่าเชื่อถือ",
-    },
-    {
-      step: "02",
-      title: "Resilient Network Deployment",
-      description:
-        "ติดตั้งโครงสร้างเว็บที่รองรับการใช้งานผ่านเน็ตมือถือบนดอยสูงได้อย่างเสถียรและรวดเร็ว",
-    },
-    {
-      step: "03",
-      title: "Eco-Tourism SEO Sync",
-      description:
-        "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักเขาค้อ', 'รีสอร์ตภูทับเบิก' เพื่อชิงอันดับหนึ่งในช่วงฤดูกาลท่องเที่ยว",
-    },
+  coordinates: { lat: 16.4167, lng: 101.15 },
+  districts: [
+    "เมืองเพชรบูรณ์",
+    "เขาค้อ",
+    "หล่มสัก",
+    "หล่มเก่า",
+    "วิเชียรบุรี",
+    "บึงสามพัน",
+    "หนองไผ่",
   ],
   localContext: {
     marketInsight:
-      "เพชรบูรณ์มีจุดเด่นด้านการท่องเที่ยวธรรมชาติระดับประเทศ เว็บไซต์ที่ภาพสวยและจองง่ายคือหัวใจสำคัญในการแข่งขัน",
-    technicalApproach:
-      "เน้น Image Optimization สำหรับภาพวิวทิวทัศน์และระบบ Booking Engine ที่เชื่อมต่อกับสมาร์ทโฟน",
-    localStrength:
-      "มีความโดดเด่นด้านภูมิประเทศ (เขาค้อ/ภูทับเบิก) และเป็นแหล่งเกษตรกรรมเมืองหนาวที่สำคัญ",
+      "เพชรบูรณ์มีนักท่องเที่ยวหนาแน่นตลอดปี เว็บไซต์ที่โหลดรูปสวยๆ ได้ไวจะช่วยปิดการขายที่พักได้ดีที่สุด",
+    localStrength: "ความเป็น 'สวิตเซอร์แลนด์เมืองไทย' ของเขาค้อและภูทับเบิกดึงดูดคนมหาศาล",
     nicheIndustries: [
-      "รีสอร์ตและที่พักระดับพรีเมียม",
-      "วิสาหกิจชุมชนสินค้าเกษตรเมืองหนาว",
-      "คาเฟ่และร้านอาหารวิวหลักล้าน",
+      "รีสอร์ตและที่พักบนเขาค้อ/ภูทับเบิก",
+      "วิสาหกิจชุมชนมะขามหวาน",
+      "ธุรกิจผักเมืองหนาว",
     ],
-    painPoints: [
-      "นักท่องเที่ยวหาข้อมูลที่พักในช่วงเทศกาลยาก",
-      "เว็บไซต์เดิมโหลดช้าเมื่อใช้งานผ่านเน็ตบนดอย",
-    ],
+    technicalApproach:
+      "เน้น Image Optimization สำหรับภาพทะเลหมอก และระบบจองที่พักที่รองรับ High Traffic ในหน้าหนาว",
+    painPoints: ["หน้าเว็บโหลดช้าในช่วง High Season", "ลูกค้าหาข้อมูลการเดินทางขึ้นเขาไม่เจอ"],
     competitorLevel: "medium",
-    hyperLocalKeywords: [
-      "รับทำเว็บไซต์ เขาค้อ",
-      "ออกแบบเว็บรีสอร์ต ภูทับเบิก",
-      "จ้างทำ SEO เพชรบูรณ์",
-      "ทำเว็บสินค้าเกษตร เพชรบูรณ์",
-    ],
+    socialProof: { rating: 5.0, reviewCount: 56, localClient: "รีสอร์ตหรูชื่อดัง ย่านเขาค้อ" },
+    regionalPricing: { startPrice: `${localAuthorityService.price} บาท`, timeline: "14-21 วัน" },
   },
-  districts: ["เมืองเพชรบูรณ์", "เขาค้อ", "หล่มสัก", "หล่มเก่า", "วิเชียรบุรี"],
   keywords: [
     "รับทำเว็บไซต์ เพชรบูรณ์",
-    "ทำเว็บรีสอร์ต เขาค้อ",
+    "ทำเว็บที่พัก เขาค้อ",
     "จ้างทำเว็บเพชรบูรณ์",
     "รับทำ SEO เพชรบูรณ์",
   ],
-};
+});

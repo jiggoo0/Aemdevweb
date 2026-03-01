@@ -11,6 +11,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const kanchanaburiNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "kanchanaburi",
+  tier: 2,
   province: "กาญจนบุรี",
   region: "West",
   priority: 92,

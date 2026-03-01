@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: NONG_KHAI_BORDER v18.0.1
- * [STRATEGY]: Border Trade | Cultural Tourism | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const nongKhaiNode: AreaNode = {
+export const nongKhaiNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "nong-khai",
+  tier: 2,
   province: "หนองคาย",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 88,
+
   title: "รับทำเว็บไซต์ หนองคาย | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและการท่องเที่ยวริมโขง",
   description:
     "ยกระดับธุรกิจในหนองคายสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลที่รวดเร็วสายฟ้าแลบ",
-  seoTitle: "รับทำเว็บไซต์ หนองคาย ออกแบบเว็บธุรกิจ การค้าชายแดน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์หนองคาย สำหรับธุรกิจนำเข้า-ส่งออก โรงแรม และ SME ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่และคู่ค้าต่างชาติ",
 
   longDescription:
     "หนองคาย ประตูการค้าชายแดนที่สำคัญที่สุดที่เชื่อมโยงกรุงเทพฯ-เวียงจันทน์-คุนหมิง " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์ของคุณให้เป็น 'Digital Border Hub' ที่ล้ำสมัยที่สุดในภูมิภาค " +
     "ไม่ว่าจะเป็นธุรกิจชิปปิ้ง โลจิสติกส์ หรือโรงแรมริมโขงที่ต้องการยอดจองตรง เราออกแบบระบบที่รองรับการสื่อสารข้ามพรมแดน " +
     "เพื่อให้คู่ค้าและนักท่องเที่ยว มั่นใจในมาตรฐานระดับสากลของธุรกิจหนองคายของคุณและครองอันดับหนึ่งบนหน้าแรก Google",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/nong-khai-node.webp",
+  coordinates: { lat: 17.8785, lng: 102.7412 },
+  districts: [
+    "เมืองหนองคาย",
+    "ท่าบ่อ",
+    "โพนพิสัย",
+    "ศรีเชียงใหม่",
+    "สระใคร",
+    "เฝ้าไร่",
+    "รัตนวาปี",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +40,9 @@ export const nongKhaiNode: AreaNode = {
     "Riverside Authority SEO: วางโครงสร้างการค้นหาเพื่อครองพื้นที่ในคีย์เวิร์ดด้านการท่องเที่ยวริมโขงและการค้าชายแดนไทย-ลาว",
   ],
 
-  priority: 88,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/nong-khai-node.webp",
-  coordinates: { lat: 17.8785, lng: 102.7412 },
-  isTourismHeavy: true,
   marketSaturation: 52,
   regionalLatency: 22,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +63,8 @@ export const nongKhaiNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ดด้านการค้าและการเดินทางข้ามแดนเพื่อครองอันดับหนึ่งในหนองคาย",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "หนองคายคือจุดยุทธศาสตร์การค้าที่สำคัญ เว็บไซต์ต้องทำหน้าที่เป็น 'หน้าตาทางการค้า' ที่สะท้อนความมั่นคงและรวดเร็ว",
@@ -76,18 +79,47 @@ export const nongKhaiNode: AreaNode = {
     ],
     painPoints: ["เว็บไซต์ดูไม่เป็นสากลสำหรับคู่ค้าต่างชาติ", "ระบบการติดต่อสอบถามไม่ทันใจ"],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 48,
+      localClient: "บริษัทชิปปิ้งข้ามแดน ย่านด่านหนองคาย",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงแรมริมโขงหนองคาย",
+      result: "วางระบบจองตรงและทำ SEO ภาษาลาว ยอดจองจากนักธุรกิจฝั่งเวียงจันทน์เพิ่มขึ้น 180%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ หนองคาย",
       "ออกแบบเว็บธุรกิจ ชายแดน",
       "จ้างทำ SEO หนองคาย",
       "ทำเว็บโรงแรม ริมโขง",
     ],
+    promotions: [
+      {
+        title: "Indochina Border Accelerator",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจโลจิสติกส์และโรงแรมในหนองคาย รับฟรีบริการออกแบบ Digital Profile 2 ภาษา (ไทย-ลาว) และระบบ Local SEO มูลค่า 10,000 บาท",
+        discount: "Free Bilingual Profile Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nong-khai-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองหนองคาย", "ท่าบ่อ", "โพนพิสัย", "ศรีเชียงใหม่", "สระใคร"],
+
   keywords: [
     "รับทำเว็บไซต์ หนองคาย",
     "ทำเว็บธุรกิจ ชายแดน",
     "จ้างทำเว็บหนองคาย",
     "รับทำ SEO หนองคาย",
   ],
-};
+});

@@ -1,20 +1,14 @@
-/**
- * [SERVICE_NODE]: SUKHOTHAI_HERITAGE_STORYTELLER v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: Premium Branding | Aesthetic Storytelling | Dynamic Inheritance
- * [MARKET]: Sukhothai, Sri Satchanalai, Sawankhalok (Heritage & Craft)
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const sukhothaiNode: AreaNode = {
+export const sukhothaiNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "sukhothai",
+  tier: 2,
   province: "สุโขทัย",
   region: "North",
-  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและความยั่งยืน
+  priority: 84,
 
   title: "รับทำเว็บไซต์ สุโขทัย | ออกแบบเว็บไซต์ให้งานฝีมือดูพรีเมียม ติดหน้าแรก Google",
   description:
@@ -25,18 +19,19 @@ export const sukhothaiNode: AreaNode = {
     "ผมพร้อมช่วยเปลี่ยนธุรกิจของคุณให้มีตัวตนที่สง่างามบนโลกออนไลน์ เน้นการเล่าเรื่อง (Storytelling) ที่ทรงพลัง เพื่อเพิ่มมูลค่าให้เครื่องเงินศรีสัชนาลัย เครื่องสังคโลก หรือที่พักบูทีคโฮเต็ล " +
     "ให้เข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูงและโหยหาคุณค่าทางวัฒนธรรมอย่างแท้จริงครับ",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ สุโขทัย ออกแบบเว็บเครื่องเงิน สังคโลก ที่พักพรีเมียม - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สุโขทัย ครบวงจร เน้นดีไซน์สวยงามเพิ่มมูลค่าสินค้า OTOP พรีเมียม และธุรกิจท่องเที่ยวในเขตมรดกโลก ติดหน้าแรก Google",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
+  heroImage: "/images/areas/sukhothai-node.webp",
+  coordinates: { lat: 17.0078, lng: 99.8235 },
+  districts: [
+    "เมืองสุโขทัย",
+    "ศรีสัชนาลัย",
+    "กงไกรลาศ",
+    "สวรรคโลก",
+    "ศรีสำโรง",
+    "คีรีมาศ",
+    "บ้านด่านลานหอย",
+    "ทุ่งเสลี่ยม",
+  ],
 
   isTourismHeavy: true,
   marketSaturation: 42,
@@ -61,13 +56,6 @@ export const sukhothaiNode: AreaNode = {
         "เน้นคีย์เวิร์ดเฉพาะทางเพื่อดักจับกลุ่มนักท่องเที่ยวและผู้สะสมงานศิลปะจากทั่วโลก",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/sukhothai-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Aesthetic Authority: เบื้องหลังการสร้างตัวตนดิจิทัลให้แบรนด์เครื่องเงินโบราณและที่พักระดับพรีเมียมในสุโขทัย",
 
   // --- Localized Benefits ---
   benefits: [
@@ -115,10 +103,6 @@ export const sukhothaiNode: AreaNode = {
       answer:
         "คุ้มมากครับ เพราะจะช่วยให้คุณรับจองโดยตรง (Direct Booking) ไม่ต้องเสียค่าคอมมิชชั่นให้แอปอื่น และสร้างฐานลูกค้าประจำของคุณเองครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
-    ),
   ],
 
   // --- Context Data ---
@@ -147,7 +131,7 @@ export const sukhothaiNode: AreaNode = {
       localClient: "แบรนด์เครื่องเงินโบราณชื่อดังในศรีสัชนาลัย",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${localAuthorityService.price} บาท`,
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
@@ -161,19 +145,24 @@ export const sukhothaiNode: AreaNode = {
       "จ้างทำเว็บที่พักเมืองเก่า",
       "ทำ SEO สินค้า OTOP สุโขทัย",
     ],
+    promotions: [
+      {
+        title: "Heritage Aesthetic Blueprint",
+        description:
+          "สิทธิพิเศษสำหรับแบรนด์งานฝีมือและที่พักสุโขทัย รับฟรีบริการออกแบบ Storytelling Template และแผนงาน High-Value Niche SEO มูลค่า 10,000 บาท",
+        discount: "Free Storytelling & SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/sukhothai-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 84,
-  districts: [
-    "เมืองสุโขทัย",
-    "ศรีสัชนาลัย",
-    "กงไกรลาศ",
-    "สวรรคโลก",
-    "ศรีสำโรง",
-    "คีรีมาศ",
-    "บ้านด่านลานหอย",
-  ],
   keywords: [
     "รับทำเว็บไซต์ สุโขทัย",
     "จ้างทำเว็บไซต์",
@@ -181,5 +170,4 @@ export const sukhothaiNode: AreaNode = {
     "รับทำ SEO สุโขทัย",
     "ทำเว็บขายเครื่องเงิน",
   ],
-  coordinates: { lat: 17.0078, lng: 99.8235 },
-};
+});

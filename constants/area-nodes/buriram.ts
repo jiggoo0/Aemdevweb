@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: BURIRAM_EVENT_CITY v18.0.1
- * [STRATEGY]: Sports & Events | Regional Tourism | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const buriramNode: AreaNode = {
+export const buriramNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "buriram",
+  tier: 2,
   province: "บุรีรัมย์",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 92,
+
   title: "รับทำเว็บไซต์ บุรีรัมย์ | พัฒนาเว็บไซต์ธุรกิจท่องเที่ยว กีฬา และการจัดงานระดับประเทศ",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจในบุรีรัมย์สู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความทันสมัยสำหรับที่พัก ร้านอาหาร และศูนย์กีฬา ติดหน้าแรก Google",
-  seoTitle: "รับทำเว็บไซต์ บุรีรัมย์ ออกแบบเว็บโรงแรม ร้านอาหาร - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์บุรีรัมย์ สำหรับธุรกิจในเมืองกีฬาและท่องเที่ยวทางประวัติศาสตร์ ดีไซน์ล้ำสมัย โหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "บุรีรัมย์ เมืองแห่งปราสาทหินและศูนย์กลางกีฬามาตรฐานโลก (Sport City) " +
     "นายเอ็มซ่ามากส์ ออกแบบโครงสร้างเว็บไซต์ที่รองรับพฤติกรรมผู้ใช้งานช่วงอีเวนต์ระดับโลก " +
     "ด้วยระบบ High-Traffic Deployment ที่มั่นใจได้ว่าเว็บจะไม่ล่มแม้มีคนเข้าใช้งานพร้อมกันหลักแสน " +
     "เปลี่ยนโรงแรม ร้านอาหาร และคาเฟ่ของคุณให้กลายเป็นจุดเช็คอินอันดับหนึ่งบน Google Maps ทั่วจังหวัด",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/buriram-node.webp",
+  coordinates: { lat: 14.993, lng: 103.109 },
+  districts: ["เมืองบุรีรัมย์", "นางรอง", "ประโคนชัย", "สตึก", "ลำปลายมาศ", "บ้านกรวด", "พุทไธสง"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +32,10 @@ export const buriramNode: AreaNode = {
     "Event-Driven SEO: ครองพื้นที่การค้นหารายอีเวนต์ด้วยโครงสร้างข้อมูลที่ปรับตัวตามกระแสการแข่งขันกีฬาในบุรีรัมย์",
   ],
 
-  priority: 92,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/buriram-node.webp",
-  coordinates: { lat: 14.993, lng: 103.109 },
   isTourismHeavy: true,
   marketSaturation: 55,
   regionalLatency: 21,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +56,8 @@ export const buriramNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักบุรีรัมย์ใกล้สนาม', 'ร้านอาหารบุรีรัมย์' เพื่อดึงดูดกลุ่มแฟนกีฬา",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "บุรีรัมย์เติบโตอย่างรวดเร็วด้วยกลยุทธ์ Sport Tourism เว็บไซต์ต้องดูตื่นเต้น ทันสมัย และรองรับการจองที่รวดเร็ว",
@@ -78,18 +74,47 @@ export const buriramNode: AreaNode = {
       "เว็บไซต์เดิมไม่อัปเดตข้อมูลกิจกรรมล่าสุด",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 4.9,
+      reviewCount: 99,
+      localClient: "บูทีคโฮเต็ลพรีเมียม ใกล้สนามช้างอารีนา",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงแรมใกล้สนามแข่ง",
+      result: "วางระบบจองตรงและระบบ High-Traffic ยอดจองห้องพักเต็มเร็วขึ้น 2 เท่าในช่วง MotoGP",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ บุรีรัมย์",
       "ออกแบบเว็บโรงแรม บุรีรัมย์",
       "จ้างทำ SEO บุรีรัมย์",
       "ทำเว็บคาเฟ่ บุรีรัมย์",
     ],
+    promotions: [
+      {
+        title: "Sport City Velocity Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจท่องเที่ยวในบุรีรัมย์ รับฟรีบริการจัดทำ High-Traffic Performance Audit และแผนงาน Event SEO มูลค่า 12,000 บาท",
+        discount: "Free Performance & Event Audit",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/buriram-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองบุรีรัมย์", "นางรอง", "ประโคนชัย", "สตึก", "ลำปลายมาศ"],
+
   keywords: [
     "รับทำเว็บไซต์ บุรีรัมย์",
     "ทำเว็บโรงแรม บุรีรัมย์",
     "จ้างทำเว็บบุรีรัมย์",
     "รับทำ SEO บุรีรัมย์",
   ],
-};
+});

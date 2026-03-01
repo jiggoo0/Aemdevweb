@@ -10,6 +10,7 @@ import { seoAgencyService } from "@/constants/services/seo-agency";
 export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
   // --- Basic Identity ---
   slug: "nakhon-pathom",
+  tier: 2,
   province: "นครปฐม",
   region: "Central",
   priority: 92,

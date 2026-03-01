@@ -1,19 +1,13 @@
-/**
- * [SERVICE_NODE]: CHON_BURI_INDUSTRIAL_HUB v18.0.2 (DYNAMIC_LINKED)
- * [STRATEGY]: Industrial Authority | EEC B2B Conversion | Dynamic Inheritance
- * [MARKET]: Chon Buri, Sriracha, Laem Chabang, Amata Nakorn (EEC Zone)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
 import { corporateService } from "@/constants/services/corporate";
 
-export const chonBuriNode: AreaNode = {
+export const chonBuriNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "chon-buri",
   province: "ชลบุรี",
   region: "East",
-  templateSlug: "corporate", // เชื่อมโยงกับ Corporate Template
+  tier: 1,
 
   title: "รับทำเว็บไซต์ ชลบุรี | บริษัทรับทำเว็บไซต์โรงงานและธุรกิจ EEC ติดอันดับ Google",
   description:
@@ -24,26 +18,33 @@ export const chonBuriNode: AreaNode = {
     "นายเอ็มซ่ามากส์ เชี่ยวชาญการออกแบบ Industrial Web Design ที่เน้นความน่าเชื่อถือ แสดงมาตรฐาน ISO ชัดเจน " +
     "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรกในคีย์เวิร์ดอุตสาหกรรม",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ ชลบุรี ออกแบบเว็บโรงงาน นิคมอมตะ พัทยา ศรีราชา - เอ็มซ่ามากส์",
-  seoDescription:
-    "บริษัทรับทำเว็บไซต์ชลบุรี รับทำ SEO โรงงาน โลจิสติกส์ และธุรกิจใน EEC เว็บไซต์มาตรฐานสากล รองรับมือถือและหลายภาษา เพิ่มยอดขอใบเสนอราคา (RFQ)",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก corporateService เพื่อความเป็นมาตรฐาน Enterprise เดียวกัน
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Visual & Location ---
+  heroImage: "/images/areas/chon-buri-node.webp",
+  coordinates: { lat: 13.3611, lng: 100.9847 },
+  districts: [
+    "เมืองพัทยา",
+    "ศรีราชา",
+    "แหลมฉบัง",
+    "นิคมอมตะนคร",
+    "บางแสน",
+    "บ่อวิน",
+    "นิคมเหมราช",
+    "บ้านบึง",
+  ],
 
   // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าชลบุรีดูเป็น "เว็บไซต์โรงงานอิสระ" สำหรับ EEC
-  layoutOrder: ["hero", "gallery", "process", "stats", "insight", "trust", "pricing", "faq", "cta"],
-  theme: {
-    primary: "oklch(60% 0.12 230)", // Industrial Steel Blue
-    secondary: "oklch(50% 0.1 230)",
-    mode: "light", // ชลบุรีเน้นความสะอาด โปร่งใส (Light Mode)
-    radius: "0.75rem", // ขอบมนน้อยลงเพื่อให้ดูเป็นงานอุตสาหกรรม (Hardened)
-  },
+  layoutOrder: [
+    "hero",
+    "process",
+    "stats",
+    "gallery",
+    "insight",
+    "trust",
+    "pricing",
+    "faq",
+    "nodes",
+    "cta",
+  ],
 
   regionalRoadmap: [
     {
@@ -65,13 +66,6 @@ export const chonBuriNode: AreaNode = {
         "ปักหมุดธุรกิจบนแผนที่อุตสาหกรรมและทำ Local Schema เพื่อให้โรงงานของคุณถูกค้นพบก่อนใครใน EEC",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/chon-buri-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Industrial Standard: ผู้อยู่เบื้องหลังเว็บไซต์โรงงานและโลจิสติกส์กว่า 30 แห่งในนิคมอมตะและแหลมฉบัง",
 
   // --- Localized Benefits ---
   benefits: [
@@ -117,10 +111,6 @@ export const chonBuriNode: AreaNode = {
       answer:
         "มีครับ ผมมีทีมช่างภาพสาย Industrial ที่เชี่ยวชาญการถ่ายไลน์ผลิตและเครื่องจักร เพื่อให้ภาพออกมาดูเป็นมืออาชีพครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก (Corporate)
-    ...corporateService.faqs.filter(
-      (f) => f.question.includes("ใบกำกับภาษี") || f.question.includes("PDPA"),
-    ),
   ],
 
   // --- Context Data ---
@@ -149,7 +139,7 @@ export const chonBuriNode: AreaNode = {
       localClient: "บริษัทโลจิสติกส์รายใหญ่ ในนิคมฯ แหลมฉบัง",
     },
     regionalPricing: {
-      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
+      startPrice: `${corporateService.price} บาท`,
       timeline: "14-30 วัน",
     },
     localSuccessStory: {
@@ -181,18 +171,7 @@ export const chonBuriNode: AreaNode = {
     },
   },
 
-  // --- System Metadata ---
   priority: 99,
-  districts: [
-    "เมืองพัทยา",
-    "ศรีราชา",
-    "แหลมฉบัง",
-    "นิคมอมตะนคร",
-    "บางแสน",
-    "บ่อวิน",
-    "นิคมเหมราช",
-    "บ้านบึง",
-  ],
   keywords: [
     "รับทำเว็บไซต์ ชลบุรี",
     "บริษัทรับทำเว็บไซต์",
@@ -200,5 +179,4 @@ export const chonBuriNode: AreaNode = {
     "รับทำ SEO ชลบุรี",
     "ออกแบบเว็บไซต์ พัทยา",
   ],
-  coordinates: { lat: 13.3611, lng: 100.9847 },
-};
+});

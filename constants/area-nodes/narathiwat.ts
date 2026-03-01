@@ -1,28 +1,38 @@
-/**
- * [SERVICE_NODE]: NARATHIWAT_BORDER_GATEWAY v18.0.1
- * [STRATEGY]: Border Trade | Logistics | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const narathiwatNode: AreaNode = {
+export const narathiwatNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "narathiwat",
+  tier: 2,
   province: "นราธิวาส",
   region: "South",
-  templateSlug: "local-authority",
+  priority: 86,
+
   title: "รับทำเว็บไซต์ นราธิวาส | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและ SME ยุคใหม่",
   description:
     "ยกระดับธุรกิจในนราธิวาสสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าที่รวดเร็ว",
-  seoTitle: "รับทำเว็บไซต์ นราธิวาส สุไหงโก-ลก ออกแบบเว็บชิปปิ้ง - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์นราธิวาส สำหรับธุรกิจนำเข้า-ส่งออก ด่านศุลกากร และ SME พรีเมียม ดีไซน์สวยโหลดไว รองรับ SEO และความปลอดภัยสูงสุด",
 
   longDescription:
     "นราธิวาส จุดยุทธศาสตร์ประตูการค้าภาคใต้ตอนล่างที่เป็นศูนย์กลางสำคัญในการเชื่อมโยงเศรษฐกิจไทย-มาเลเซีย " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจในนราธิวาสด้วยเทคโนโลยีเว็บไซต์ระดับสากลที่เน้นความมั่นคงและรวดเร็ว " +
     "ไม่ว่าจะเป็นธุรกิจชิปปิ้งในสุไหงโก-ลก หรือโลจิสติกส์ในตากใบ เราออกแบบระบบที่รองรับภาษาต่างชาติ " +
     "เพื่อช่วยให้คุณเจรจาธุรกิจข้ามพรมแดนได้อย่างเป็นมืออาชีพ และครองอันดับหนึ่งในพื้นที่การค้าชายแดน",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/narathiwat-node.webp",
+  coordinates: { lat: 6.425, lng: 101.8233 },
+  districts: [
+    "เมืองนราธิวาส",
+    "สุไหงโก-ลก",
+    "ตากใบ",
+    "ระแงะ",
+    "รือเสาะ",
+    "บาเจาะ",
+    "ยี่งอ",
+    "ระแงะ",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +41,9 @@ export const narathiwatNode: AreaNode = {
     "Southern Border SEO mastery: วางโครงสร้างการค้นหาเพื่อครองพื้นที่ในคำค้นหาด้านการค้าและการขนส่งในเขตเศรษฐกิจชายแดน",
   ],
 
-  priority: 86,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/narathiwat-node.webp",
-  coordinates: { lat: 6.425, lng: 101.8233 },
   marketSaturation: 38,
   regionalLatency: 30,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +64,8 @@ export const narathiwatNode: AreaNode = {
         "ทำ SEO เจาะกลุ่มคีย์เวิร์ดการค้าชายแดนในเขตสุไหงโก-ลกและตากใบเพื่อให้คู่ค้าหาคุณเจอ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "นราธิวาสเป็นจุดยุทธศาสตร์การค้าชายแดน เว็บไซต์ต้องเน้นความน่าเชื่อถือ ความรวดเร็ว และการสื่อสารได้หลายภาษา",
@@ -78,18 +83,48 @@ export const narathiwatNode: AreaNode = {
       "ต้องการเครื่องมือในการสื่อสารกับลูกค้ามาเลเซียที่ดูเป็นทางการ",
     ],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 38,
+      localClient: "บริษัทชิปปิ้งพรีเมียม ย่านสุไหงโก-ลก",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: ธุรกิจนำเข้า-ส่งออกสุไหงโก-ลก",
+      result:
+        "วางระบบ Company Profile 2 ภาษาและ SEO ชายแดน ยอดคู่ค้าจากมาเลเซียทักสอบถามเพิ่มขึ้น 150%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ สุไหงโก-ลก",
       "ออกแบบเว็บชิปปิ้ง นราธิวาส",
       "จ้างทำ SEO นราธิวาส",
       "ทำเว็บสินค้าพรีเมียม ตากใบ",
     ],
+    promotions: [
+      {
+        title: "Southern Border Digital Gateway",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจโลจิสติกส์และ SME ในนราธิวาส รับฟรีบริการออกแบบ Company Profile 2 ภาษา (ไทย-มลายู) และระบบปักหมุดจุดกระจายสินค้ามูลค่า 10,000 บาท",
+        discount: "Free Multilingual Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/narathiwat-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองนราธิวาส", "สุไหงโก-ลก", "ตากใบ", "ระแงะ", "รือเสาะ"],
+
   keywords: [
     "รับทำเว็บไซต์ นราธิวาส",
     "ทำเว็บสุไหงโก-ลก",
     "จ้างทำเว็บชิปปิ้ง",
     "รับทำ SEO นราธิวาส",
   ],
-};
+});

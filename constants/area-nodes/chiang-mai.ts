@@ -1,28 +1,24 @@
 /**
- * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v18.0.1 (DYNAMIC_LINKED)
- * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | Dynamic Inheritance
+ * [SERVICE_NODE]: CHIANG_MAI_CREATIVE_HUB v19.0.0 (IDENTITY_INTEGRATED)
+ * [STRATEGY]: Elegant Hospitality | Tourism P-SEO | DNA Inheritance
  * [MARKET]: Chiang Mai Tourism, Wellness & Creative Arts
+ * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Theme/Price)
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const chiangMaiNode: AreaNode = {
+export const chiangMaiNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "chiang-mai",
   province: "เชียงใหม่",
   region: "North",
-  templateSlug: "hotelresort", // เชื่อมโยง Logic การ Render กับ Template โรงแรม
+  tier: 1,
 
   title: "รับทำเว็บไซต์ เชียงใหม่ | ออกแบบเว็บโรงแรมและรีสอร์ต เพิ่มยอดจองตรง ไม่ผ่าน OTA",
   description:
     "บริการรับทำเว็บไซต์โรงแรมในเชียงใหม่ ดีไซน์หรูหราแบบล้านนาร่วมสมัย โหลดไว ดึงดูดนักท่องเที่ยวทั่วโลก พร้อมระบบจองตรงที่ช่วยลดค่าคอมมิชชั่น OTA ทันที",
-
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ เชียงใหม่ ออกแบบเว็บโรงแรม รีสอร์ต ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์เชียงใหม่ เน้นธุรกิจท่องเที่ยว โรงแรม และ Wellness เว็บสวยโหลดไว รองรับหลายภาษา ช่วยดึงลูกค้าต่างชาติและเพิ่มยอดจองตรง (Direct Booking)",
 
   longDescription:
     "เชียงใหม่ 'กุหลาบเหนือ' คือจุดหมายปลายทางระดับโลกที่ธุรกิจต้องมีตัวตนดิจิทัลที่แข็งแกร่ง " +
@@ -30,60 +26,17 @@ export const chiangMaiNode: AreaNode = {
     "ที่ผสานความอ่อนช้อยของศิลปะล้านนากับเทคโนโลยี Next.js ที่โหลดไวที่สุด เพื่อดึงดูดนักท่องเที่ยวคุณภาพ " +
     "และเพิ่มสัดส่วนการจองตรง (Direct Booking) ให้คุณมีอิสระจากการพึ่งพา OTA อย่างยั่งยืน",
 
+  // --- Visual & Assets ---
+  heroImage: "/images/areas/chiang-mai-node.webp",
+  coordinates: { lat: 18.7883, lng: 98.9853 },
+  districts: ["นิมมานเหมินท์", "เขตเมืองเก่า", "สันกำแพง", "แม่ริม", "หางดง", "แม่แตง", "สันทราย"],
+
   // --- Localized Benefits ---
   benefits: [
-    "Lanna Digital Authority: สร้างตัวตนออนไลน์ที่ผสานศิลปะล้านนาเข้ากับความทันสมัย เพื่อสร้างความประทับใจระดับสากล",
+    "Lanna Digital Authority: สร้างตัวตนออนไลน์ที่ผสานศิลปะล้านนาเข้ากับความสมัยใหม่ เพื่อสร้างความประทับใจระดับสากล",
     "Maximized Direct Profit: ระบบจองตรงที่ทรงพลัง ช่วยลดการพึ่งพา OTA และเพิ่มกำไรสุทธิให้ธุรกิจโรงแรมและที่พัก",
     "Global Search Visibility: วางโครงสร้าง SEO หลายภาษาเพื่อดักจับนักท่องเที่ยวจากยุโรป อเมริกา และกลุ่มนักท่องเที่ยวจีน",
   ],
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก hotelResortService เพื่อความเป็นมาตรฐานเดียวกันทั้งระบบ
-  // (Chiang Mai Gold & Lanna Dark Theme)
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
-
-  isTourismHeavy: true,
-  marketSaturation: 70,
-
-  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าเชียงใหม่ดูเป็น "เว็บไซต์โรงแรมล้านนาหรูหรา"
-  layoutOrder: ["hero", "gallery", "trust", "insight", "process", "pricing", "faq", "cta"],
-  theme: {
-    primary: "oklch(75% 0.1 85)", // Elegant Lanna Gold
-    secondary: "oklch(65% 0.08 85)",
-    mode: "light",
-    radius: "2.5rem",
-  },
-
-  regionalRoadmap: [
-    {
-      step: "01",
-      title: "Lanna Branding Sync",
-      description:
-        "ผสมผสานอัตลักษณ์ล้านนาร่วมสมัยเข้ากับงานดีไซน์สมัยใหม่เพื่อให้เว็บไซต์โดดเด่นในสายตานักท่องเที่ยว",
-    },
-    {
-      step: "02",
-      title: "Direct Booking Integration",
-      description:
-        "ติดตั้งระบบจองที่พักตรงที่ไม่ผ่านเอเย่นต์ (OTA) เพื่อรักษาผลกำไรของธุรกิจไว้ได้เต็มเม็ดเต็มหน่วย",
-    },
-    {
-      step: "03",
-      title: "Tourism SEO Layering",
-      description:
-        "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพจากกลุ่มนักท่องเที่ยวต่างชาติ",
-    },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/chiang-mai-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Trusted Hospitality: เบื้องหลังความสำเร็จของ 20+ บูทีครีสอร์ตและสปาชั้นนำในเชียงใหม่",
 
   // --- Core Features (Tourism Specific) ---
   coreFeatures: [
@@ -127,10 +80,6 @@ export const chiangMaiNode: AreaNode = {
       answer:
         "รองรับครับ เชียงใหม่เป็นจุดหมายหลักของนักท่องเที่ยวจีน ผมวางระบบรองรับภาษาจีนและ WeChat Pay ได้ครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานเรื่อง OTA จาก Template หลักมาผสม
-    ...hotelResortService.faqs.filter(
-      (f) => f.question.includes("Channel Manager") || f.question.includes("OTA"),
-    ),
   ],
 
   // --- Context Data ---
@@ -191,9 +140,43 @@ export const chiangMaiNode: AreaNode = {
     },
   },
 
-  // --- System Metadata ---
+  // --- Identity & DNA Overrides ---
   priority: 98,
-  districts: ["นิมมานเหมินท์", "เขตเมืองเก่า", "สันกำแพง", "แม่ริม", "หางดง", "แม่แตง", "สันทราย"],
+  isTourismHeavy: true,
+  marketSaturation: 70,
+  clientTrust:
+    "Trusted Hospitality: เบื้องหลังความสำเร็จของ 20+ บูทีครีสอร์ตและสปาชั้นนำในเชียงใหม่",
+
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าเชียงใหม่ดูเป็น "เว็บไซต์โรงแรมล้านนาหรูหรา"
+  layoutOrder: ["hero", "gallery", "trust", "insight", "process", "pricing", "faq", "cta"],
+  theme: {
+    primary: "oklch(75% 0.1 85)", // Elegant Lanna Gold
+    secondary: "oklch(65% 0.08 85)",
+    mode: "light",
+    radius: "2.5rem",
+  },
+
+  regionalRoadmap: [
+    {
+      step: "01",
+      title: "Lanna Branding Sync",
+      description:
+        "ผสมผสานอัตลักษณ์ล้านนารร่วมสมัยเข้ากับงานดีไซน์สมัยใหม่เพื่อให้เว็บไซต์โดดเด่นในสายตานักท่องเที่ยว",
+    },
+    {
+      step: "02",
+      title: "Direct Booking Integration",
+      description:
+        "ติดตั้งระบบจองที่พักตรงที่ไม่ผ่านเอเย่นต์ (OTA) เพื่อรักษาผลกำไรของธุรกิจไว้ได้เต็มเม็ดเต็มหน่วย",
+    },
+    {
+      step: "03",
+      title: "Tourism SEO Layering",
+      description:
+        "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพจากกลุ่มนักท่องเที่ยวต่างชาติ",
+    },
+  ],
+
   keywords: [
     "รับทำเว็บไซต์ เชียงใหม่",
     "ออกแบบเว็บไซต์ เชียงใหม่",
@@ -201,5 +184,4 @@ export const chiangMaiNode: AreaNode = {
     "ทำเว็บ SEO เชียงใหม่",
     "บริษัทรับทำเว็บไซต์",
   ],
-  coordinates: { lat: 18.7883, lng: 98.9853 },
-};
+});

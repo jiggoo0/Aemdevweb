@@ -57,18 +57,16 @@ interface ButtonProps
   href?: string; // Standardize href for both button and link behaviors
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    // [POLYMORPHISM]: รองรับการเปลี่ยน Tag ผ่าน Radix Slot (เช่น ใช้เป็น <Link>)
-    const Comp = asChild ? Slot : "button";
+const Button = ({ className, variant, size, asChild = false, ref, ...props }: ButtonProps) => {
+  // [POLYMORPHISM]: รองรับการเปลี่ยน Tag ผ่าน Radix Slot (เช่น ใช้เป็น <Link>)
+  const Comp = asChild ? Slot : "button";
 
-    return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
-        {props.children}
-      </Comp>
-    );
-  },
-);
+  return (
+    <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>
+      {props.children}
+    </Comp>
+  );
+};
 
 Button.displayName = "Button";
 

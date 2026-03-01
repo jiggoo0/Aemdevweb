@@ -1,6 +1,6 @@
 /**
- * [COMPONENT]: CONVERSION_CTA_SYSTEM v18.0.2 (DYNAMIC_SYNC)
- * [STRATEGY]: CSS Variable Implementation | Identity Overriding | Production Ready
+ * [COMPONENT]: CONVERSION_CTA_SYSTEM v19.0.0 (SSOT_INTEGRATED)
+ * [STRATEGY]: UI Strings Registry | Dynamic Prop Mapping | Production Ready
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -10,6 +10,7 @@ import React, { memo } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { Button } from "@/components/ui/Button";
+import { UI_STRINGS } from "@/constants/ui-strings";
 
 interface ConversionCTAProps {
   readonly title?: string;
@@ -20,9 +21,9 @@ interface ConversionCTAProps {
 }
 
 const ConversionCTA = ({
-  title = "พร้อมรีดประสิทธิภาพธุรกิจของคุณหรือยังครับ?",
-  description = "ไม่ว่าคุณจะต้องการดันอันดับ Google หรือสร้างเครื่องจักรทำเงินที่ทำงาน 24 ชม. ผมพร้อมวางกลยุทธ์ให้ทันที",
-  buttonLabel = "เริ่มวางกลยุทธ์ฟรี",
+  title = UI_STRINGS.cta.readyTitle,
+  description = UI_STRINGS.cta.defaultSupportText,
+  buttonLabel = UI_STRINGS.cta.consultToday,
   buttonHref = "#",
   className,
 }: ConversionCTAProps) => {
@@ -32,25 +33,25 @@ const ConversionCTA = ({
         <div
           className={cn(
             "rounded-section relative overflow-hidden p-8 md:p-16 lg:p-24",
-            "border border-[var(--brand-primary)]/20 bg-[var(--surface-main)] shadow-2xl",
-            "transition-all duration-500 hover:border-[var(--brand-primary)]/40",
+            "border border-[var(--color-brand-primary)]/20 bg-[var(--surface-main)] shadow-2xl",
+            "transition-all duration-500 hover:border-[var(--color-brand-primary)]/40",
           )}
         >
           {/* Atmospheric Background (Dynamic) */}
           <div
-            className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-[var(--brand-primary)] opacity-5 blur-[120px]"
+            className="absolute -top-20 -right-20 h-96 w-96 rounded-full bg-[var(--color-brand-primary)] opacity-5 blur-[120px]"
             aria-hidden="true"
           />
 
           <div className="relative z-10 flex flex-col items-center gap-8 text-center">
-            {/* สถานะ Node (Dynamic Color) */}
-            <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-5 py-2">
+            {/* สถานะความพร้อม (Human-Friendly Status) */}
+            <div className="flex items-center gap-3 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-5 py-2">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand-primary)] opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand-primary)]"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-brand-primary)] opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-brand-primary)]"></span>
               </span>
-              <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-[var(--brand-primary)] uppercase">
-                Specialist_Active
+              <span className="font-sans text-[10px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
+                {UI_STRINGS.cta.availabilityStatus}
               </span>
             </div>
 
@@ -67,7 +68,7 @@ const ConversionCTA = ({
               size="lg"
               className={cn(
                 "h-16 rounded-2xl px-12 md:h-20 md:px-16",
-                "bg-[var(--brand-primary)] text-white hover:opacity-95",
+                "bg-[var(--color-brand-primary)] text-white hover:opacity-95",
                 "shadow-glow-md transition-all hover:scale-[1.02] active:scale-95",
               )}
             >
@@ -77,8 +78,8 @@ const ConversionCTA = ({
                 rel="noopener noreferrer"
                 className="flex items-center gap-4"
               >
-                <IconRenderer name="Zap" size={24} />
-                <span className="text-[12px] font-bold tracking-[0.2em] uppercase">
+                <IconRenderer name="MessageSquare" size={24} />
+                <span className="text-[13px] font-bold tracking-widest uppercase">
                   {buttonLabel}
                 </span>
               </a>

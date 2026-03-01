@@ -34,13 +34,13 @@ export const DirectTerminal = ({
   const runCheck = () => {
     setStatus("running");
     const steps = [
-      "Initializing_Regional_Node...",
+      "กำลังเชื่อมต่อข้อมูลพื้นที่...",
       `Target_Geo: ${province}`,
       "Measuring_Network_Latencies...",
       `Syncing_Local_Registry_v18.4...`,
       "Verifying_SSL_End-to-End...",
       "Firewall_Audit: PASS",
-      `Success: Node_${province}_Online`,
+      `ตรวจสอบสำเร็จ: พื้นที่ ${province} พร้อมให้บริการ`,
     ];
 
     let currentStep = 0;
@@ -84,7 +84,9 @@ export const DirectTerminal = ({
           <div className="h-2 w-2 rounded-full bg-amber-500/40" />
           <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
           <span className="text-text-muted ml-2 text-[9px] font-black tracking-widest uppercase opacity-40">
-            {mode === "health-check" ? `GEO_NODE: ${province}` : "DEPLOY_TERMINAL_v18"}
+            {mode === "health-check"
+              ? `พื้นที่เป้าหมาย: ${province}`
+              : "ระบบพร้อมให้คำปรึกษาตลอด 24 ชม."}
           </span>
         </div>
         {status === "complete" && (

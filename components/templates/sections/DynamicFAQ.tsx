@@ -130,7 +130,7 @@ export const DynamicFAQ = memo(
                     <AccordionTrigger className="flex w-full items-center justify-between px-8 py-8 text-left transition-all hover:no-underline [&[data-state=open]>div>svg]:rotate-180">
                       <div className="flex flex-col gap-2">
                         <span className="text-brand-primary hidden font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-0 transition-all data-[state=open]:block data-[state=open]:opacity-40">
-                          Active_Registry_Node
+                          ข้อมูลบริการอัปเดตล่าสุด
                         </span>
                         <span className="pr-6 text-xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--brand-primary)] md:text-3xl">
                           {item.question}

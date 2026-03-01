@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: SAMUT_SONGKHRAM_STORY v18.0.1
- * [STRATEGY]: Eco-Tourism | Agricultural Branding | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const samutSongkhramNode: AreaNode = {
+export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "samut-songkhram",
+  tier: 2,
   province: "สมุทรสงคราม",
   region: "Central",
-  templateSlug: "local-authority",
+  priority: 86,
+
   title: "รับทำเว็บไซต์ สมุทรสงคราม | ออกแบบเว็บที่พักอัมพวาและสินค้าเกษตรพรีเมียม",
   description:
     "ยกระดับเสน่ห์เมืองแม่กลองสู่ตลาดบน ด้วยเว็บไซต์ที่เน้นดีไซน์สวยแพงและการเล่าเรื่องวิถีชุมชนที่น่าสนใจ",
-  seoTitle: "รับทำเว็บไซต์ สมุทรสงคราม ออกแบบเว็บที่พักอัมพวา สวนส้มโอ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สมุทรสงคราม สำหรับโฮมสเตย์อัมพวา สวนผลไม้ และสินค้า SME แม่กลอง ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "สมุทรสงคราม 'เมืองสามน้ำ' ที่เปี่ยมด้วยเสน่ห์ของวิถีริมน้ำแม่กลองและตลาดน้ำอัมพวาที่เป็นแม่เหล็กดึงดูดนักท่องเที่ยว " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนบรรยากาศความสงบของสวนส้มโอและที่พักริมน้ำ ให้กลายเป็นยอดขายที่วัดผลได้จริง " +
     "เราออกแบบเว็บไซต์ที่เน้นการเล่าเรื่องผ่านภาพบรรยากาศ (Riverside Storytelling) และระบบจองที่เรียบง่าย " +
     "เพื่อให้ธุรกิจโฮมสเตย์และสินค้า SME พรีเมียมของสมุทรสงคราม ครองใจลูกค้ากลุ่มคุณภาพที่กำลังมองหาประสบการณ์ที่แตกต่าง",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/samut-songkhram-node.webp",
+  coordinates: { lat: 13.4111, lng: 100.0022 },
+  districts: ["เมืองสมุทรสงคราม", "อัมพวา", "บางคนที"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +32,9 @@ export const samutSongkhramNode: AreaNode = {
     "Riverside SEO Authority: วางรากฐานการค้นหาครอบคลุมคีย์เวิร์ดแหล่งท่องเที่ยวและที่พักในจังหวัดสมุทรสงครามอันดับหนึ่ง",
   ],
 
-  priority: 86,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/samut-songkhram-node.webp",
-  coordinates: { lat: 13.4111, lng: 100.0022 },
-  isTourismHeavy: true,
   marketSaturation: 58,
   regionalLatency: 8,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +55,8 @@ export const samutSongkhramNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักอัมพวา' และ 'สินค้าแม่กลอง' เพื่อชิงอันดับหนึ่งในใจนักท่องเที่ยว",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "สมุทรสงครามมีนักท่องเที่ยวกลุ่มครอบครัวและคนรุ่นใหม่หนาแน่น เว็บไซต์ที่ภาพสวยและเล่าเรื่องเก่งจะได้รับความสนใจสูง",
@@ -75,18 +70,47 @@ export const samutSongkhramNode: AreaNode = {
     ],
     painPoints: ["ลูกค้าหาพิกัดสวนหรือที่พักไม่เจอ", "ภาพลักษณ์เว็บดูธรรมดาไม่สมกับคุณภาพสินค้า"],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 58,
+      localClient: "ที่พักริมน้ำพรีเมียม ย่านอัมพวา",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โฮมสเตย์ริมน้ำอัมพวา",
+      result: "วางระบบจองตรงและทำ SEO ท้องถิ่น ยอดจองห้องพักในวันธรรมดาเพิ่มขึ้น 120%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ อัมพวา",
       "ออกแบบเว็บโฮมสเตย์ สมุทรสงคราม",
       "จ้างทำ SEO แม่กลอง",
       "ทำเว็บสวนส้มโอ สมุทรสงคราม",
     ],
+    promotions: [
+      {
+        title: "Mae Klong Riverside Digital Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจที่พักและสินค้าเกษตรในสมุทรสงคราม รับฟรีบริการถ่ายภาพมุมสูงด้วยโดรน และระบบปักหมุดจุดเช็คอินมูลค่า 7,500 บาท",
+        discount: "Free Drone Photo & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/samut-songkhram-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองสมุทรสงคราม", "อัมพวา", "บางคนที"],
+
   keywords: [
     "รับทำเว็บไซต์ สมุทรสงคราม",
     "ทำเว็บที่พัก อัมพวา",
     "จ้างทำเว็บแม่กลอง",
     "รับทำ SEO สมุทรสงคราม",
   ],
-};
+});

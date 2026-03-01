@@ -1,0 +1,26 @@
+# ==========================================
+# [AEM-CORE] LLM CONTEXT COMPRESSION (v4.1.0 - PRECISION)
+# ==========================================
+# Objective: Ultimate Token Pruning & Logical Accuracy.
+
+## 🧠 1. LAYER ALIASING (Precision Tags)
+@core       -> .gemini/core/         # Identity & Supreme Rules
+@rules      -> .gemini/config/       # Architecture & Topology
+@directives -> .gemini/directives/   # Strict Operational SOPs
+@intel      -> .gemini/knowledge/    # Domain Knowledge & SEO
+@infra      -> .gemini/bin/          # Automation & Scripts
+@nodes      -> constants/area-nodes/  # READ-ONLY Data Nodes
+@schema     -> lib/schema.ts         # SSOT for Data Structure
+
+## 📊 2. ATTENTION MECHANISM (Priority)
+# P1: @core/GEMINI.md, @directives/STRICT_EXECUTION.md, MISSION.md
+# P2: @schema, @rules/architecture-topology.yaml
+# P3: @intel/business-strategy/INDEX.md
+# P4: (Lazy Load) @app, @ui
+
+## 🗜️ 3. ABSTRACTION PROTOCOL
+- **SCHEMA_AUTHORITY**: ห้ามอ่าน @nodes ทั้งหมด. ให้อ้างอิง @schema และ INDEX ใน @intel เท่านั้น.
+- **ZERO_CHITCHAT**: ตัดการสนทนาที่ไม่เกี่ยวกับผลลัพธ์เชิงเทคนิค 100%.
+- **ATOMIC_AUDIT**: ก่อนสรุปงาน ต้องรัน @infra/aipc.sh เพื่อยืนยันคุณภาพ.
+
+[SYSTEM_DNA_LOCK: REINFORCED]

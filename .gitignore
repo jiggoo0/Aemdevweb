@@ -1,51 +1,52 @@
-# [AEM-ENGINE]: CENTRAL_GIT_EXCLUSION_LIST
-# ------------------------------------------
+# ==========================================
+# [AEM-CORE] CONSOLIDATED EXCLUSION LIST
+# ==========================================
 
-# dependencies
+# 1. DEPENDENCIES & RUNTIME
 node_modules/
 .pnpm-store/
-jspm_packages/
-.pnpm-debug.log*
-
-# next.js (Build & Output)
 .next/
 out/
 build/
-
-# logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environmental secrets (Strict Exclusion)
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env*.local
-
-# vercel & infrastructure
 .vercel/
-service-account.json
-credentials.json
-
-# typescript / system
 *.tsbuildinfo
 next-env.d.ts
-.DS_Store
-*.pem
-Thumbs.db
 
-# termux & android specific (Added for mobile dev)
-.aptly/
+# 2. ENVIRONMENTAL SECRETS (ZERO-TRUST)
+.env*
+*.pem
+*.key
+service-account*.json
+credentials.json
+
+# 3. TERMUX & ANDROID SYSTEM NOISE
 .bash_history
+.aptly/
 .termux/
+Thumbs.db
+.DS_Store
+*.log
+
+# 4. AI TRANSIENT PAYLOADS (CLEAN CONTEXT)
+# ไฟล์ชั่วคราวที่สร้างส่งให้ AI ตรวจ ห้ามขึ้น Git
+ai-audit-payload.md
+ai-structure.txt
+ai-context-snapshot.json
+structure.txt
+
+# 5. [BRAIN LAYER]: .GEMINI PROTECTION
+# จัดการส่วนสมองกลโดยเฉพาะ
 .gemini/*
+# Whitelist: อนุญาตให้เก็บเฉพาะไฟล์ Matrix หลัก
+!.gemini/architecture-topology.yaml
+!.gemini/llm-context-compression.txt
+!.gemini/performance-benchmarks.json
+!.gemini/security-strict.config
+# อนุญาตโฟลเดอร์ย่อย (ถ้ามีเนื้อหาสำคัญ)
 !.gemini/commands/
 !.gemini/skills/
-.geminiignore
-# MISSION.md (Un-ignored for Vercel/GitHub tracking)
 
-.gemini/
+# 6. CACHE & TRACES
+.knip/
+.cache/
+.parcel-cache/

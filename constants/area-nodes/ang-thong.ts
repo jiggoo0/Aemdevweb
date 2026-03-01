@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: ANG_THONG_CRAFT v18.0.1
- * [STRATEGY]: Local Authority | Traditional Craft | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const angThongNode: AreaNode = {
+export const angThongNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "ang-thong",
+  tier: 2,
   province: "อ่างทอง",
   region: "Central",
-  templateSlug: "local-authority",
+  priority: 80,
+
   title: "รับทำเว็บไซต์ อ่างทอง | พัฒนาเว็บไซต์วิสาหกิจชุมชนและงานหัตถกรรมพื้นบ้าน",
   description:
     "ยกระดับสินค้าชุมชนอ่างทองสู่ตลาดพรีเมียม ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องคุณค่าและระบบขายออนไลน์ที่ใช้งานง่าย",
-  seoTitle: "รับทำเว็บไซต์ อ่างทอง ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์อ่างทอง สำหรับกลุ่มแม่บ้าน วิสาหกิจชุมชน และ SME ท้องถิ่น ดีไซน์สะอาดตา โหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "อ่างทอง เมืองแห่งวิถีเกษตรประณีตและงานหัตถกรรมจักสานระดับพรีเมียม " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับสินค้าชุมชนและธุรกิจ OTOP ในอ่างทองสู่โลกออนไลน์ " +
     "ด้วยการสร้างเว็บไซต์ที่เน้นการเล่าเรื่อง (Storytelling) เพื่อเพิ่มมูลค่าสินค้า " +
     "พร้อมระบบ Micro-E-commerce ที่ใช้ง่ายผ่านมือถือ ช่วยให้คุณเข้าถึงลูกค้าในกรุงเทพฯ และปริมณฑลได้อย่างรวดเร็ว",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/ang-thong-node.webp",
+  coordinates: { lat: 14.5896, lng: 100.4551 },
+  districts: ["เมืองอ่างทอง", "วิเศษชัยชาญ", "โพธิ์ทอง", "ป่าโมก", "ไชโย", "สามโก้", "แสวงหา"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +32,9 @@ export const angThongNode: AreaNode = {
     "Central SEO Authority: วางโครงสร้าง SEO เพื่อดักจับลูกค้าจากกลุ่มจังหวัดภาคกลางที่กำลังมองหาสินค้าคุณภาพ",
   ],
 
-  priority: 80,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/ang-thong-node.webp",
-  coordinates: { lat: 14.5896, lng: 100.4551 },
   marketSaturation: 28,
   regionalLatency: 13,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -60,6 +54,8 @@ export const angThongNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ดของดีอ่างทองเพื่อให้ลูกค้าจากกรุงเทพฯ และปริมณฑลหาคุณเจอ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "อ่างทองเป็นเมืองแห่งงานฝีมือและเกษตรกรรมประณีต เว็บไซต์ที่ดูเข้าถึงง่ายและเล่าเรื่องเก่งจะช่วยเพิ่มมูลค่าสินค้าได้มาก",
@@ -73,18 +69,47 @@ export const angThongNode: AreaNode = {
     ],
     painPoints: ["สินค้าดีแต่คนนอกพื้นที่ไม่รู้จัก", "หาช่องทางการตลาดออนไลน์ไม่เจอ"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 42,
+      localClient: "กลุ่มวิสาหกิจชุมชนจักสาน ย่านโพธิ์ทอง",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: วิสาหกิจชุมชนหัตถกรรม",
+      result: "พัฒนาเว็บไซต์ Storytelling ใหม่ ยอดสั่งซื้อผ่านช่องทางออนไลน์เพิ่มขึ้น 200%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ วิเศษชัยชาญ",
       "ออกแบบเว็บสินค้า OTOP อ่างทอง",
       "จ้างทำ SEO อ่างทอง",
       "ทำเว็บวิสาหกิจชุมชน อ่างทอง",
     ],
+    promotions: [
+      {
+        title: "Community Craft Digital Boost",
+        description:
+          "สิทธิพิเศษสำหรับวิสาหกิจชุมชนในอ่างทอง รับฟรีบริการออกแบบ Storytelling Page และระบบจัดการสินค้าเบื้องต้นมูลค่า 5,000 บาท",
+        discount: "Free Storytelling Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/ang-thong-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองอ่างทอง", "วิเศษชัยชาญ", "โพธิ์ทอง", "ป่าโมก", "ไชโย"],
+
   keywords: [
     "รับทำเว็บไซต์ อ่างทอง",
     "ทำเว็บสินค้า OTOP",
     "จ้างทำเว็บอ่างทอง",
     "รับทำ SEO อ่างทอง",
   ],
-};
+});

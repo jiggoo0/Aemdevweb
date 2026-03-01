@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: TRANG_GOURMET_TOURISM v18.0.1
- * [STRATEGY]: Gastronomy | Marine Tourism | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const trangNode: AreaNode = {
+export const trangNode = defineAreaNode(hotelResortService, {
+  // --- Basic Identity ---
   slug: "trang",
+  tier: 2,
   province: "ตรัง",
   region: "South",
-  templateSlug: "hotelresort",
+  priority: 91,
+
   title: "รับทำเว็บไซต์ ตรัง | ออกแบบเว็บรีสอร์ตชายฝั่งและธุรกิจอาหารสร้างสรรค์",
   description:
     "เปลี่ยนมนต์เสน่ห์เมืองตรังให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือและการเล่าเรื่องที่น่าดึงดูด",
-  seoTitle: "รับทำเว็บไซต์ ตรัง ออกแบบเว็บที่พัก รีสอร์ต ร้านอาหาร - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ตรัง สำหรับธุรกิจท่องเที่ยวชายฝั่ง ร้านอาหารชื่อดัง และ SME พรีเมียม ดีไซน์สวยโหลดไว ติดหน้าแรก Google",
 
   longDescription:
     "ตรัง เมืองแห่งเสน่ห์อันดามันและสวรรค์ของนักชิมที่เป็นเจ้าของชายหาดที่สวยที่สุดในโลกอย่าง 'เกาะกระดาน' " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจโรงแรม ร้านอาหาร และสินค้า SME ในตรังด้วยเว็บไซต์ที่สะท้อนภาพลักษณ์ 'Elegant Local Experience' " +
     "เราออกแบบระบบที่เปลี่ยน 'รสชาติ' และ 'บรรยากาศ' ให้กลายเป็นยอดจองตรงและยอดสั่งซื้อออนไลน์ " +
     "เพื่อให้แบรนด์ตรังของคุณ ครองอันดับหนึ่งบน Google และดึงดูดนักท่องเที่ยวคุณภาพที่ต้องการความสงบและรสนิยม",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/trang-node.webp",
+  coordinates: { lat: 7.5583, lng: 99.6111 },
+  districts: ["เมืองตรัง", "กันตัง", "ย่านตาขาว", "ห้วยยอด", "สิเกา", "ปะเหลียน", "หาดสำราญ"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +32,10 @@ export const trangNode: AreaNode = {
     "Southern Coastal SEO: วางรากฐานการค้นหาเพื่อสนับสนุนสินค้าเกษตรส่งออกและธุรกิจบริการพรีเมียมประจำภูมิภาค",
   ],
 
-  priority: 91,
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
-  heroImage: "/images/areas/trang-node.webp",
-  coordinates: { lat: 7.5583, lng: 99.6111 },
   isTourismHeavy: true,
   marketSaturation: 58,
   regionalLatency: 23,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +55,8 @@ export const trangNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักเกาะกระดาน', 'หมูย่างเมืองตรัง' เพื่อชิงอันดับหนึ่ง",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ตรังมีกลุ่มลูกค้าที่รักสงบและต้องการคุณภาพ เว็บไซต์ที่ดูภูมิฐานและให้ข้อมูลชัดเจนจะปิดการขายได้ง่าย",
@@ -74,13 +70,43 @@ export const trangNode: AreaNode = {
     ],
     painPoints: ["เว็บไซต์ดูเก่าไม่สะท้อนมาตรฐานสากล", "ระบบสั่งซื้อของฝากออนไลน์ไม่เป็นระบบ"],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 58,
+      localClient: "ร้านอาหารชื่อดังย่านเมืองตรัง",
+    },
+    regionalPricing: {
+      startPrice: `${hotelResortService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตย่านสิเกา",
+      result:
+        "วางระบบจองตรงและทำ SEO เกาะกระดาน ยอดจองห้องพักจากนักท่องเที่ยวต่างชาติเพิ่มขึ้น 200%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ เมืองตรัง",
       "ออกแบบเว็บรีสอร์ต เกาะกระดาน",
       "จ้างทำ SEO ตรัง",
       "ทำเว็บร้านอาหารชื่อดัง ตรัง",
     ],
+    promotions: [
+      {
+        title: "Trang Gourmet & Marine Boost",
+        description:
+          "สิทธิพิเศษสำหรับร้านอาหารและรีสอร์ตในตรัง รับฟรีบริการถ่ายภาพสินค้า Gourmet และระบบปักหมุดจุดเช็คอินมูลค่า 7,500 บาท",
+        discount: "Free Gourmet Photos & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/trang-node.webp",
+      gallery: [
+        "/images/templates/hotelresort/hotel-resort-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองตรัง", "กันตัง", "ย่านตาขาว", "ห้วยยอด", "สิเกา"],
+
   keywords: ["รับทำเว็บไซต์ ตรัง", "ทำเว็บร้านอาหาร ตรัง", "จ้างทำเว็บที่พัก", "รับทำ SEO ตรัง"],
-};
+});

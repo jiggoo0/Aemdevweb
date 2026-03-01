@@ -1,20 +1,14 @@
-/**
- * [SERVICE_NODE]: TAK_MAESOT_GATEWAY v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: Corporate Authority | International Logistics | Dynamic Inheritance
- * [MARKET]: Mae Sot, Tak City, Border Trade Special Economic Zone
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
 import { corporateService } from "@/constants/services/corporate";
 
-export const takNode: AreaNode = {
+export const takNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "tak",
+  tier: 2,
   province: "ตาก",
   region: "North",
-  templateSlug: "corporate", // เชื่อมโยงกับแม่แบบธุรกิจระดับ Enterprise
+  priority: 83,
 
   title: "รับทำเว็บไซต์ ตาก แม่สอด | ออกแบบเว็บธุรกิจขนส่งและนำเข้า-ส่งออก ติดหน้าแรก Google",
   description:
@@ -25,19 +19,26 @@ export const takNode: AreaNode = {
     "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนภาพลักษณ์ธุรกิจของคุณให้ดูน่าเกรงขามและมั่นคง เราเน้นการทำเว็บไซต์ที่โชว์ศักยภาพการบริการ (Credentials) " +
     "พร้อมวางรากฐาน SEO ให้คู่ค้าทั่วโลกค้นหาคุณเจอ เพื่อให้ธุรกิจของคุณเป็นเบอร์หนึ่งในเขตเศรษฐกิจพิเศษตาก",
 
-  // --- SEO Metadata ---
-  seoTitle:
-    "รับทำเว็บไซต์ ตาก แม่สอด ออกแบบเว็บชิปปิ้งและโลจิสติกส์ ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์จังหวัดตาก และแม่สอด ครบวงจร เน้นดีไซน์ที่ดูน่าเชื่อถือสำหรับธุรกิจ Logistics และนำเข้า-ส่งออก รองรับหลายภาษา ติดหน้าแรก Google เพื่อปิดดีลระดับสากล",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/tak-node.webp",
+  coordinates: { lat: 16.8831, lng: 99.1258 },
+  districts: [
+    "แม่สอด",
+    "เมืองตาก",
+    "พบพระ",
+    "แม่ระมาด",
+    "ท่าสองยาง",
+    "อุ้มผาง",
+    "สามเงา",
+    "บ้านตาก",
+  ],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก corporateService เพื่อมาตรฐานความน่าเชื่อถือระดับสากล
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
+  // --- Localized Benefits ---
+  benefits: [
+    "International Credibility: เปลี่ยนภาพลักษณ์บริษัทท้องถิ่นให้ดูเป็นพาร์ทเนอร์ระดับสากล ช่วยให้นักลงทุนต่างชาติกล้าตัดสินใจร่วมงานกับคุณ",
+    "Bilingual Expansion: ระบบรองรับหลายภาษา (ไทย-อังกฤษ) เพื่อสื่อสารมาตรฐานความปลอดภัยให้คู่ค้าจากทุกประเทศเข้าใจอย่างถูกต้อง",
+    "Logistics-Focused SEO: เจาะกลุ่มคีย์เวิร์ดทรงพลัง เช่น 'ชิปปิ้งแม่สอด', 'ขนส่งสินค้าไปพม่า' เพื่อให้คนหาคุณเจอในจังหวะที่เขาต้องการบริการ",
+  ],
 
   marketSaturation: 46,
 
@@ -60,20 +61,6 @@ export const takNode: AreaNode = {
       description:
         "วางโครงสร้างคีย์เวิร์ดด้านโลจิสติกส์และโรงงานเพื่อครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษแม่สอด",
     },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/tak-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Border Trade Authority: เบื้องหลังความสำเร็จของบริษัทขนส่งข้ามพรมแดนและโรงงานในเขตเศรษฐกิจพิเศษแม่สอด",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "International Credibility: เปลี่ยนภาพลักษณ์บริษัทท้องถิ่นให้ดูเป็นพาร์ทเนอร์ระดับสากล ช่วยให้นักลงทุนต่างชาติกล้าตัดสินใจร่วมงานกับคุณ",
-    "Bilingual Expansion: ระบบรองรับหลายภาษา (ไทย-อังกฤษ) เพื่อสื่อสารมาตรฐานความปลอดภัยให้คู่ค้าจากทุกประเทศเข้าใจอย่างถูกต้อง",
-    "Logistics-Focused SEO: เจาะกลุ่มคีย์เวิร์ดทรงพลัง เช่น 'ชิปปิ้งแม่สอด', 'ขนส่งสินค้าไปพม่า' เพื่อให้คนหาคุณเจอในจังหวะที่เขาต้องการบริการ",
   ],
 
   // --- Core Features (Logistics & Border Trade Specific) ---
@@ -114,10 +101,6 @@ export const takNode: AreaNode = {
       answer:
         "ในแพ็กเกจระดับ Corporate ผมมีบริการช่วยเกลาเนื้อหาภาษาอังกฤษให้ดูเป็นทางการ (Business English) เพื่อสร้างความเชื่อถือในระดับสากลครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...corporateService.faqs.filter(
-      (f) => f.question.includes("ออกใบกำกับภาษี") || f.question.includes("PDPA"),
-    ),
   ],
 
   // --- Context Data ---
@@ -146,7 +129,7 @@ export const takNode: AreaNode = {
       localClient: "บริษัทขนส่งรายใหญ่ เขตเศรษฐกิจพิเศษแม่สอด",
     },
     regionalPricing: {
-      startPrice: `${corporateService.price} บาท`, // Dynamic Reference
+      startPrice: `${corporateService.price} บาท`,
       timeline: "14-25 วัน",
     },
     localSuccessStory: {
@@ -160,11 +143,24 @@ export const takNode: AreaNode = {
       "ทำ SEO ขนส่ง แม่สอด",
       "ปักหมุด Google Maps ธุรกิจแม่สอด",
     ],
+    promotions: [
+      {
+        title: "Mae Sot SEZ Expansion Offer",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจในเขตเศรษฐกิจพิเศษ รับฟรีบริการออกแบบ Company Profile 2 ภาษา และระบบ RFQ สำหรับคู่ค้าต่างชาติมูลค่า 10,000 บาท",
+        discount: "Free Bilingual Profile Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/tak-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 83,
-  districts: ["แม่สอด", "เมืองตาก", "พบพระ", "แม่ระมาด", "ท่าสองยาง", "อุ้มผาง"],
   keywords: [
     "รับทำเว็บไซต์ ตาก",
     "รับทำเว็บไซต์ แม่สอด",
@@ -172,5 +168,4 @@ export const takNode: AreaNode = {
     "ทำเว็บชิปปิ้ง",
     "รับทำ SEO ตาก",
   ],
-  coordinates: { lat: 16.8831, lng: 99.1258 },
-};
+});

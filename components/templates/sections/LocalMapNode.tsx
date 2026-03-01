@@ -43,40 +43,40 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
         <div
           className={cn(
             "relative aspect-[21/9] overflow-hidden transition-all duration-700",
-            "border border-[var(--foreground)]/10 bg-black shadow-2xl",
-            "rounded-[var(--radius)] group-hover:border-[var(--brand-primary)]/40",
+            "border border-[var(--border)] bg-[var(--surface-offset)] shadow-2xl",
+            "rounded-[var(--radius)] group-hover:border-[var(--color-brand-primary)]/40",
           )}
         >
           {/* Blueprint Grid Overlay */}
           <div
-            className="pointer-events-none absolute inset-0 z-10 opacity-20"
+            className="pointer-events-none absolute inset-0 z-10 opacity-30"
             style={{
-              backgroundImage: `radial-gradient(var(--brand-primary) 1px, transparent 0)`,
+              backgroundImage: `radial-gradient(var(--color-brand-primary) 1px, transparent 0)`,
               backgroundSize: "24px 24px",
             }}
           />
 
-          {/* Map Visual (Monochromatic Style) */}
-          <div className="absolute inset-0 z-0 opacity-40 brightness-50 contrast-125 grayscale invert transition-opacity duration-1000 group-hover:opacity-60">
-            <div className="flex h-full w-full items-center justify-center bg-[var(--brand-primary)]/5">
+          {/* Map Visual (Context-Aware Style) */}
+          <div className="absolute inset-0 z-0 opacity-40 transition-opacity duration-1000 group-hover:opacity-60">
+            <div className="flex h-full w-full items-center justify-center bg-[var(--color-brand-primary)]/5">
               <IconRenderer
                 name="Map"
                 size={80}
-                className="animate-pulse text-[var(--brand-primary)] opacity-10"
+                className="animate-pulse text-[var(--color-brand-primary)] opacity-20"
               />
             </div>
           </div>
 
           {/* Crosshair UI */}
           <div className="pointer-events-none absolute inset-0 z-20">
-            <div className="absolute top-1/2 left-0 h-px w-full bg-[var(--brand-primary)]/20" />
-            <div className="absolute top-0 left-1/2 h-full w-px bg-[var(--brand-primary)]/20" />
+            <div className="absolute top-1/2 left-0 h-px w-full bg-[var(--color-brand-primary)]/20" />
+            <div className="absolute top-0 left-1/2 h-full w-px bg-[var(--color-brand-primary)]/20" />
 
             {/* Corner Markers */}
-            <div className="absolute top-4 left-4 h-4 w-4 border-t-2 border-l-2 border-[var(--brand-primary)]" />
-            <div className="absolute top-4 right-4 h-4 w-4 border-t-2 border-r-2 border-[var(--brand-primary)]" />
-            <div className="absolute bottom-4 left-4 h-4 w-4 border-b-2 border-l-2 border-[var(--brand-primary)]" />
-            <div className="absolute right-4 bottom-4 h-4 w-4 border-r-2 border-b-2 border-[var(--brand-primary)]" />
+            <div className="absolute top-4 left-4 h-4 w-4 border-t-2 border-l-2 border-[var(--color-brand-primary)]" />
+            <div className="absolute top-4 right-4 h-4 w-4 border-t-2 border-r-2 border-[var(--color-brand-primary)]" />
+            <div className="absolute bottom-4 left-4 h-4 w-4 border-b-2 border-l-2 border-[var(--color-brand-primary)]" />
+            <div className="absolute right-4 bottom-4 h-4 w-4 border-r-2 border-b-2 border-[var(--color-brand-primary)]" />
           </div>
 
           {/* Target Marker */}
@@ -87,8 +87,8 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
                 visible ? "scale-100 opacity-100" : "scale-0 opacity-0",
               )}
             >
-              <div className="absolute h-20 w-20 animate-ping rounded-full border-2 border-[var(--brand-primary)] opacity-20" />
-              <div className="h-4 w-4 rotate-45 bg-[var(--brand-primary)] shadow-[0_0_20px_var(--brand-primary)]" />
+              <div className="absolute h-20 w-20 animate-ping rounded-full border-2 border-[var(--color-brand-primary)] opacity-20" />
+              <div className="shadow-glow-sm h-4 w-4 rotate-45 bg-[var(--color-brand-primary)]" />
             </div>
           </div>
         </div>
@@ -100,32 +100,32 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
             visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
           )}
         >
-          <div className="space-y-4 rounded-[calc(var(--radius)*0.5)] border border-[var(--brand-primary)]/30 bg-black/80 p-6 backdrop-blur-xl">
+          <div className="shadow-pro-xl space-y-4 rounded-[calc(var(--radius)*0.5)] border border-[var(--color-brand-primary)]/30 bg-[var(--surface-card)]/90 p-6 backdrop-blur-xl">
             <div className="flex items-center gap-3">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]" />
-              <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
+              <div className="shadow-glow-sm h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase">
                 Local_Registry_Synched
               </p>
             </div>
 
             <div className="space-y-1">
-              <p className="font-mono text-[9px] tracking-widest text-white uppercase opacity-40">
-                Active_Node_Location
+              <p className="font-mono text-[9px] tracking-widest text-[var(--text-muted)] uppercase opacity-60">
+                ตำแหน่งพื้นที่ให้บริการ
               </p>
-              <p className="font-[family-name:var(--font-primary)] text-xl font-black text-white uppercase italic">
+              <p className="text-xl font-black text-[var(--text-primary)] uppercase italic">
                 {province}_HUB.sys
               </p>
             </div>
 
-            <div className="flex gap-6 border-t border-white/10 pt-2 text-white">
+            <div className="flex gap-6 border-t border-[var(--border)] pt-4 text-[var(--text-primary)]">
               <div>
-                <p className="font-mono text-[8px] tracking-widest uppercase opacity-30">
+                <p className="font-mono text-[8px] tracking-widest uppercase opacity-40">
                   Lat_Coord
                 </p>
                 <p className="font-mono text-xs font-bold">{safeLat.toFixed(4)}</p>
               </div>
               <div>
-                <p className="font-mono text-[8px] tracking-widest uppercase opacity-30">
+                <p className="font-mono text-[8px] tracking-widest uppercase opacity-40">
                   Lng_Coord
                 </p>
                 <p className="font-mono text-xs font-bold">{safeLng.toFixed(4)}</p>

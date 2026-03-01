@@ -10,9 +10,21 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { cn } from "@/lib/utils";
-
 // [INTERNAL INFRASTRUCTURE]
 import { Callout } from "@/components/ui/Callout";
+import { slugify } from "@/lib/utils";
+
+/** [INTERNAL_HELPER]: Extract Text from Children */
+function extractText(children: React.ReactNode): string {
+  return React.Children.toArray(children)
+    .map((child) => {
+      if (typeof child === "string" || typeof child === "number") return child.toString();
+      if (React.isValidElement(child) && child.props.children)
+        return extractText(child.props.children);
+      return "";
+    })
+    .join("");
+}
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -26,15 +38,38 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    h2: ({ className, ...props }: ComponentPropsWithoutRef<"h2">) => (
-      <h2
-        className={cn(
-          "text-text-primary border-brand-primary mt-12 mb-6 border-l-4 pl-4 text-2xl font-black italic md:text-4xl",
-          className,
-        )}
-        {...props}
-      />
-    ),
+    h2: ({ className, children, ...props }: ComponentPropsWithoutRef<"h2">) => {
+      const id = slugify(extractText(children));
+      return (
+        <h2
+          id={id}
+          className={cn(
+            "text-text-primary border-brand-primary mt-12 mb-6 border-l-4 pl-4 text-2xl font-black italic md:text-4xl",
+            "scroll-mt-32", // Offset for sticky navbar
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </h2>
+      );
+    },
+    h3: ({ className, children, ...props }: ComponentPropsWithoutRef<"h3">) => {
+      const id = slugify(extractText(children));
+      return (
+        <h3
+          id={id}
+          className={cn(
+            "text-text-primary mt-10 mb-4 text-xl font-black italic md:text-2xl",
+            "scroll-mt-32",
+            className,
+          )}
+          {...props}
+        >
+          {children}
+        </h3>
+      );
+    },
 
     // --- [02. NAVIGATION: TS2783 RESOLVED] ---
     a: ({ href, className, children, ...props }: ComponentPropsWithoutRef<"a">) => {

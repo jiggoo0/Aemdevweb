@@ -11,6 +11,7 @@ import { catalogService } from "@/constants/services/catalog";
 export const chanthaburiNode = defineAreaNode(catalogService, {
   // --- Basic Identity ---
   slug: "chanthaburi",
+  tier: 2,
   province: "จันทบุรี",
   region: "East",
   priority: 94,

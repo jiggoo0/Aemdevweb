@@ -31,14 +31,7 @@ export const FlashSaleTimer = memo(
     className,
   }: FlashSaleTimerProps) => {
     // [LOGIC]: Recurring Weekly Logic if no targetDate provided
-    const getNextSunday = () => {
-      const d = new Date();
-      d.setDate(d.getDate() + (7 - d.getDay()));
-      d.setHours(23, 59, 59, 0);
-      return d.toISOString();
-    };
-
-    const finalTarget = targetDate || getNextSunday();
+    const finalTarget = targetDate; // จะถูกตรวจสอบใน calculateTimeLeft
 
     const [timeLeft, setTimeLeft] = useState<{
       days: number;
@@ -55,7 +48,18 @@ export const FlashSaleTimer = memo(
     const [isMounted, setIsMounted] = useState(false);
 
     const calculateTimeLeft = useCallback(() => {
-      const difference = +new Date(finalTarget) - +new Date();
+      // [PERFORMANCE]: ป้องกันการใช้ new Date() ระหว่าง Prerendering บน Server
+      if (typeof window === "undefined") return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
+      const getNextSunday = () => {
+        const d = new Date();
+        d.setDate(d.getDate() + (7 - d.getDay()));
+        d.setHours(23, 59, 59, 0);
+        return d.toISOString();
+      };
+
+      const target = finalTarget || getNextSunday();
+      const difference = +new Date(target) - +new Date();
       if (difference > 0) {
         return {
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),

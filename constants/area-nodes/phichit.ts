@@ -1,19 +1,14 @@
-/**
- * [SERVICE_NODE]: PHICHIT_AGRO_INDUSTRIAL_HUB v18.0.2 (STRICT_SYNC)
- * [STRATEGY]: Industrial Reliability | Agro-B2B SEO | Dynamic Inheritance
- * [MARKET]: Phichit City, Taphan Hin, Bang Mun Nak (Rice Mill Belt)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const phichitNode: AreaNode = {
+export const phichitNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "phichit",
+  tier: 2,
   province: "พิจิตร",
   region: "North",
-  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความมั่นคงและท้องถิ่น
+  priority: 82,
 
   title: "รับทำเว็บไซต์ พิจิตร | ออกแบบเว็บโรงสีและธุรกิจเกษตรแปรรูป สร้างความเชื่อถือระดับสากล",
   description:
@@ -24,19 +19,25 @@ export const phichitNode: AreaNode = {
     "นายเอ็มซ่ามากส์ พร้อมช่วยเปลี่ยนธุรกิจของคุณให้ทันสมัยขึ้น เราเน้นทำเว็บไซต์ที่โชว์ผลงาน มาตรฐานโรงงาน และใบรับรองต่างๆ ให้ชัดเจน เพื่อให้คู่ค้าตัดสินใจร่วมงานกับคุณได้ทันทีโดยไม่ต้องเดินทางมาดูหน้างาน " +
     "เราวางระบบให้คนค้นหาธุรกิจของคุณเจอใน Google ทันที ช่วยเพิ่มโอกาสในการปิดดีลใหม่ๆ และสร้างการเติบโตที่ยั่งยืนให้ธุรกิจในท้องถิ่นครับ",
 
-  // --- SEO Metadata ---
-  seoTitle:
-    "รับทำเว็บไซต์ พิจิตร ออกแบบเว็บโรงสีข้าวและธุรกิจเกษตร ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์พิจิตร ครบวงจร สำหรับโรงงาน โรงสี และ SME การเกษตร เน้นความน่าเชื่อถือ โหลดเร็ว รองรับการแสดงผลบนมือถือ พร้อมระบบช่วยดันอันดับ Google SEO",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/phichit-node.webp",
+  coordinates: { lat: 16.4428, lng: 100.3501 },
+  districts: [
+    "เมืองพิจิตร",
+    "ตะพานหิน",
+    "บางมูลนาก",
+    "โพทะเล",
+    "สามง่าม",
+    "โพธิ์ประทับช้าง",
+    "วชิรบารมี",
+  ],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Localized Benefits ---
+  benefits: [
+    "National Credibility: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้คู่ค้าต่างจังหวัดหรือบริษัทส่งออก มั่นใจในมาตรฐานโรงงานของคุณตั้งแต่วินาทีแรก",
+    "Capacity Showcase: โชว์ศักยภาพกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้าให้ลูกค้าเห็นได้ทั่วโลกผ่านหน้าเว็บตลอด 24 ชั่วโมง",
+    "B2B SEO Domination: เน้นคีย์เวิร์ดเฉพาะทาง เช่น 'โรงสีข้าว พิจิตร', 'ขายเครื่องจักรเกษตร' เพื่อดักกลุ่มลูกค้าที่มองหาซัพพลายเออร์ตัวจริง",
+  ],
 
   marketSaturation: 32,
 
@@ -59,20 +60,6 @@ export const phichitNode: AreaNode = {
       description:
         "วางโครงสร้างคีย์เวิร์ดเฉพาะทางเพื่อดักกลุ่มคู่ค้าที่มองหาโรงสีและโรงงานแปรรูปเกษตรตัวจริง",
     },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/phichit-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Agro-Reliability: ผู้อยู่เบื้องหลังเว็บไซต์โรงสีรายใหญ่และตัวแทนจำหน่ายเครื่องจักรเกษตรในพิจิตร",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "National Credibility: เว็บไซต์ที่ดูเป็นมืออาชีพช่วยให้คู่ค้าต่างจังหวัดหรือบริษัทส่งออก มั่นใจในมาตรฐานโรงงานของคุณตั้งแต่วินาทีแรก",
-    "Capacity Showcase: โชว์ศักยภาพกำลังการผลิต มาตรฐาน ISO หรือคลังสินค้าให้ลูกค้าเห็นได้ทั่วโลกผ่านหน้าเว็บตลอด 24 ชั่วโมง",
-    "B2B SEO Domination: เน้นคีย์เวิร์ดเฉพาะทาง เช่น 'โรงสีข้าว พิจิตร', 'ขายเครื่องจักรเกษตร' เพื่อดักกลุ่มลูกค้าที่มองหาซัพพลายเออร์ตัวจริง",
   ],
 
   // --- Core Features (Industrial & Agro Specific) ---
@@ -114,15 +101,6 @@ export const phichitNode: AreaNode = {
       answer:
         "รวมอยู่ในบริการครับ ผมจะช่วยปรับแต่งหมุดธุรกิจของคุณให้แม่นยำ เพื่อให้รถขนส่งหรือคู่ค้าหาตำแหน่งโรงงานได้ง่ายที่สุดครับ",
     },
-    {
-      question: "นัดคุยรายละเอียดที่บริษัทในพิจิตรได้ไหม?",
-      answer:
-        "ยินดีครับ ผมเดินทางไปพบคุณลูกค้าที่โรงงานในเขตพิจิตร, ตะพานหิน หรือบางมูลนาก เพื่อให้เข้าใจโจทย์ธุรกิจที่สุดครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
-    ),
   ],
 
   // --- Context Data ---
@@ -151,7 +129,7 @@ export const phichitNode: AreaNode = {
       localClient: "โรงสีข้าวขนาดใหญ่ ย่านตะพานหิน",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${localAuthorityService.price} บาท`,
       timeline: "10-14 วัน",
     },
     localSuccessStory: {
@@ -165,11 +143,24 @@ export const phichitNode: AreaNode = {
       "คนทำเว็บโรงสี พิจิตร",
       "ปักหมุด Google Maps พิจิตร",
     ],
+    promotions: [
+      {
+        title: "Agro-Industrial Authority Offer",
+        description:
+          "สิทธิพิเศษสำหรับโรงสีและโรงงานในพิจิตร รับฟรีบริการจัดทำ Business Credential Profile และแผนงาน Technical SEO มูลค่า 7,500 บาท",
+        discount: "Free Credential Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/phichit-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 82,
-  districts: ["เมืองพิจิตร", "ตะพานหิน", "บางมูลนาก", "โพทะเล", "สามง่าม", "โพธิ์ประทับช้าง"],
   keywords: [
     "รับทำเว็บไซต์ พิจิตร",
     "จ้างทำเว็บพิจิตร",
@@ -178,5 +169,4 @@ export const phichitNode: AreaNode = {
     "รับทำ SEO พิจิตร",
     "ปักหมุด Google Maps พิจิตร",
   ],
-  coordinates: { lat: 16.4428, lng: 100.3501 },
-};
+});

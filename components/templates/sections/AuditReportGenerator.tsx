@@ -26,6 +26,9 @@ export const AuditReportGenerator = memo(() => {
   const logContainerRef = useRef<HTMLDivElement>(null);
 
   const addLog = useCallback((msg: string, status: "ok" | "warn" | "fail" = "ok") => {
+    // [PERFORMANCE]: ป้องกันการเรียกใช้ new Date() ระหว่างขั้นตอน Prerendering บน Server
+    if (typeof window === "undefined") return;
+
     const timestamp = new Date().toLocaleTimeString("en-GB", {
       hour12: false,
       hour: "2-digit",
@@ -44,7 +47,7 @@ export const AuditReportGenerator = memo(() => {
   useEffect(() => {
     if (status === "scanning") {
       const steps: { p: number; msg: string; s: "ok" | "warn" | "fail" }[] = [
-        { p: 10, msg: "Initializing Neural Search Protocol...", s: "ok" },
+        { p: 10, msg: "กำลังเตรียมระบบตรวจสอบเว็บไซต์...", s: "ok" },
         { p: 25, msg: "Tracing Core Web Vitals (LCP/CLS)...", s: "ok" },
         { p: 40, msg: "Analyzing Semantic Document Object Model...", s: "ok" },
         { p: 55, msg: "WARN: Found Unoptimized Assets Path.", s: "warn" },
@@ -100,7 +103,7 @@ export const AuditReportGenerator = memo(() => {
                 <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
                   <span className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
                   <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
-                    Neural_Diagnosis_Engine
+                    ระบบวิเคราะห์ประสิทธิภาพเว็บไซต์
                   </span>
                 </div>
                 <h2 className="text-text-primary text-4xl leading-tight font-black tracking-tighter uppercase italic md:text-6xl">

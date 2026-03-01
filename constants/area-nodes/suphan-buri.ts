@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: SUPHAN_BURI_AGRO v18.0.1
- * [STRATEGY]: Agriculture 4.0 | Local Business | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const suphanBuriNode: AreaNode = {
+export const suphanBuriNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "suphan-buri",
+  tier: 2,
   province: "สุพรรณบุรี",
   region: "Central",
-  templateSlug: "local-authority",
+  priority: 88,
+
   title: "รับทำเว็บไซต์ สุพรรณบุรี | ยกระดับสินค้าเกษตรและ SME สู่ตลาดออนไลน์",
   description:
     "บริการรับทำเว็บไซต์ในสุพรรณบุรี เน้นการสร้างตัวตนให้สินค้าเกษตรและธุรกิจท้องถิ่น ติดหน้าแรก Google เพื่อกระจายรายได้สู่ชุมชน",
-  seoTitle: "รับทำเว็บไซต์ สุพรรณบุรี ออกแบบเว็บเกษตร SME - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์สุพรรณบุรี ครบวงจร สำหรับธุรกิจเกษตรกรรมและร้านค้าท้องถิ่น โหลดไว รองรับ SEO พื้นที่สุพรรณบุรี",
 
   longDescription:
     "สุพรรณบุรี เมืองอู่ข้าวอู่น้ำที่เปี่ยมด้วยศักยภาพด้านเกษตรกรรมแปรรูปและ SME ท้องถิ่นที่เข้มแข็ง " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจในสุพรรณบุรีด้วยเว็บไซต์ที่เปลี่ยน 'ของดีเมืองสุพรรณ' ให้กลายเป็นยอดโอนออนไลน์ " +
     "เราออกแบบระบบที่เน้นความเรียบง่ายแต่ทรงพลัง ผสานกับเทคโนโลยี E-commerce ที่จัดการง่ายผ่านมือถือ " +
     "เพื่อให้วิสาหกิจชุมชนและร้านค้าของคุณ ครองอันดับหนึ่งบน Google และเข้าถึงลูกค้ากลุ่มใหญ่ในกรุงเทพฯ และปริมณฑล",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/suphan-buri-node.webp",
+  coordinates: { lat: 14.4745, lng: 100.1222 },
+  districts: [
+    "เมืองสุพรรณบุรี",
+    "ศรีประจันต์",
+    "ดอนเจดีย์",
+    "เดิมบางนางบวช",
+    "อู่ทอง",
+    "สองพี่น้อง",
+    "สามชุก",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const suphanBuriNode: AreaNode = {
     "Strategic Central SEO: วางรากฐานการค้นหาเพื่อดักจับ Traffic ในพื้นที่ภาคกลางและเครือข่ายการจำหน่ายสินค้าทั่วประเทศ",
   ],
 
-  priority: 88,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/suphan-buri-node.webp",
-  coordinates: { lat: 14.4745, lng: 100.1222 },
   marketSaturation: 42,
   regionalLatency: 12,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -59,6 +61,8 @@ export const suphanBuriNode: AreaNode = {
       description: "ทำ Local SEO เจาะจงคีย์เวิร์ดในจังหวัดสุพรรณบุรีเพื่อให้คนในพื้นที่หาคุณเจอ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "สุพรรณบุรีเป็นแหล่งเกษตรกรรมและแหล่งท่องเที่ยวใกล้กรุงเทพฯ ธุรกิจที่นี่ต้องการการเชื่อมโยงกับลูกค้าจากเมืองหลวง",
@@ -71,18 +75,48 @@ export const suphanBuriNode: AreaNode = {
     ],
     painPoints: ["ขาดช่องทางการขายออนไลน์ที่เป็นระบบ", "เว็บไซต์เดิมไม่อัปเดต"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 42,
+      localClient: "แบรนด์สินค้าเกษตรแปรรูปรายใหญ่ สุพรรณบุรี",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: ร้านของฝากสามชุก",
+      result:
+        "วางระบบหน้าร้านออนไลน์และ SEO ท้องถิ่น ยอดสั่งซื้อจากลูกค้าต่างจังหวัดเพิ่มขึ้น 180%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ เมืองสุพรรณบุรี",
       "ออกแบบเว็บเกษตร สุพรรณบุรี",
       "จ้างทำ SEO อู่ทอง",
       "ทำเว็บสินค้า OTOP สุพรรณบุรี",
     ],
+    promotions: [
+      {
+        title: "Suphan SME Digital Launch",
+        description:
+          "สิทธิพิเศษสำหรับวิสาหกิจชุมชนและ SME ในสุพรรณบุรี รับฟรีบริการจัดทำหน้า Digital Catalog และระบบปักหมุดจุดจำหน่ายสินค้ามูลค่า 5,000 บาท",
+        discount: "Free Catalog & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/suphan-buri-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองสุพรรณบุรี", "ศรีประจันต์", "ดอนเจดีย์", "เดิมบางนางบวช", "อู่ทอง"],
+
   keywords: [
     "รับทำเว็บไซต์ สุพรรณบุรี",
     "ทำเว็บเกษตร สุพรรณ",
     "จ้างทำเว็บสุพรรณ",
     "รับทำ SEO สุพรรณบุรี",
   ],
-};
+});

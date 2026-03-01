@@ -44,7 +44,7 @@ const InteractiveCatalog = ({ items, features }: InteractiveCatalogProps) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search services and features..."
-          className="w-full rounded-lg border-2 border-gray-600 bg-gray-800 px-4 py-3 text-white placeholder-gray-500 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
+          className="w-full rounded-xl border-2 border-[var(--border)] bg-[var(--surface-offset)] px-6 py-4 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all focus:border-[var(--color-brand-primary)] focus:ring-2 focus:ring-[var(--color-brand-primary)]/20 focus:outline-none"
         />
       </div>
       <ClientRegistry items={filteredItems} coreFeatures={filteredFeatures} />

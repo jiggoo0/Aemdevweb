@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: CHAIYAPHUM_NATURE v18.0.1
- * [STRATEGY]: Eco-Tourism | Agri-Craft | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const chaiyaphumNode: AreaNode = {
+export const chaiyaphumNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "chaiyaphum",
+  tier: 2,
   province: "ชัยภูมิ",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 82,
+
   title: "รับทำเว็บไซต์ ชัยภูมิ | ออกแบบเว็บท่องเที่ยวธรรมชาติและสินค้าภูมิปัญญาป่าหินงาม",
   description:
     "เปลี่ยนบรรยากาศทุ่งดอกกระเจียวและเทือกเขาพังเหย ให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นความสดชื่นและระบบที่ใช้งานง่าย",
-  seoTitle: "รับทำเว็บไซต์ ชัยภูมิ ออกแบบเว็บที่พัก ทุ่งดอกกระเจียว - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ชัยภูมิ สำหรับรีสอร์ต โฮมสเตย์ และวิสาหกิจชุมชนผ้าไหมมัดหมี่ ดีไซน์สวยโหลดไว รองรับ SEO พื้นที่ชัยภูมิ",
 
   longDescription:
     "ชัยภูมิ จังหวัดแห่งเทือกเขาและทุ่งดอกไม้งามที่เป็นสวรรค์ของนักท่องเที่ยวสายธรรมชาติ " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเสน่ห์ของ 'ทุ่งดอกกระเจียว' และ 'ป่าหินงาม' ให้เป็นเครื่องมือสร้างรายได้ผ่านหน้าเว็บไซต์ " +
     "ด้วยการออกแบบที่เน้น Visual Storytelling ดึงดูดนักท่องเที่ยว และระบบจองที่พักที่ทำงานลื่นไหล " +
     "รวมถึงการยกระดับสินค้าภูมิปัญญาอย่างผ้าไหมมัดหมี่สู่ตลาดออนไลน์ระดับพรีเมียมด้วยโครงสร้าง SEO พื้นที่",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/chaiyaphum-node.webp",
+  coordinates: { lat: 15.806, lng: 102.031 },
+  districts: [
+    "เมืองชัยภูมิ",
+    "เทพสถิต",
+    "คอนสาร",
+    "ภูเขียว",
+    "ภักดีชุมพล",
+    "เกษตรสมบูรณ์",
+    "แก้งคร้อ",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +40,10 @@ export const chaiyaphumNode: AreaNode = {
     "Mudmee Digital Identity: ระบบนำเสนอสินค้าหัตถกรรมที่เน้นความประณีตและรายละเอียดเชิงลึกเพื่อเพิ่มมูลค่าผ้าไหม",
   ],
 
-  priority: 82,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/chaiyaphum-node.webp",
-  coordinates: { lat: 15.806, lng: 102.031 },
   isTourismHeavy: true,
   marketSaturation: 35,
   regionalLatency: 20,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +64,8 @@ export const chaiyaphumNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักชัยภูมิ', 'ป่าหินงาม' เพื่อครองอันดับหนึ่งในใจคนรักธรรมชาติ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ชัยภูมิเป็นจุดหมายเด่นด้านการท่องเที่ยวเชิงนิเวศ เว็บไซต์ที่แสดงภาพบรรยากาศได้สวยงามจะดึงดูดลูกค้าได้ดีที่สุด",
@@ -75,18 +79,48 @@ export const chaiyaphumNode: AreaNode = {
     ],
     painPoints: ["นักท่องเที่ยวหาพิกัดที่พักในจุดลับยาก", "ภาพลักษณ์แบรนด์ท้องถิ่นดูไม่พรีเมียม"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 42,
+      localClient: "โฮมสเตย์เชิงนิเวศ ย่านเทพสถิต",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตทุ่งดอกกระเจียว",
+      result:
+        "วางระบบจองตรงและปรับปรุง Visual ยอดจองห้องพักเต็มเร็วขึ้น 2 เท่าในช่วงฤดูกาลท่องเที่ยว",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ทุ่งดอกกระเจียว",
       "ออกแบบเว็บรีสอร์ต ชัยภูมิ",
       "จ้างทำ SEO ชัยภูมิ",
       "ทำเว็บสินค้าภูมิปัญญา ชัยภูมิ",
     ],
+    promotions: [
+      {
+        title: "Nature Destination Boost",
+        description:
+          "สิทธิพิเศษสำหรับที่พักและวิสาหกิจชุมชนในชัยภูมิ รับฟรีบริการถ่ายภาพบรรยากาศ 360 องศา และระบบปักหมุด Google Maps มูลค่า 5,000 บาท",
+        discount: "Free Virtual Tour & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chaiyaphum-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองชัยภูมิ", "เทพสถิต", "คอนสาร", "ภูเขียว", "ภักดีชุมพล"],
+
   keywords: [
     "รับทำเว็บไซต์ ชัยภูมิ",
     "ทำเว็บที่พัก ชัยภูมิ",
     "จ้างทำเว็บชัยภูมิ",
     "รับทำ SEO ชัยภูมิ",
   ],
-};
+});

@@ -11,6 +11,7 @@ import { catalogService } from "@/constants/services/catalog";
 export const rayongNode = defineAreaNode(catalogService, {
   // --- Basic Identity ---
   slug: "rayong",
+  tier: 2,
   province: "ระยอง",
   region: "East",
   priority: 98,
@@ -105,6 +106,19 @@ export const rayongNode = defineAreaNode(catalogService, {
   isTourismHeavy: false,
   marketSaturation: 88,
   regionalLatency: 6,
+
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าระยองเน้น "เทคโนโลยีอุตสาหกรรมและความคุ้มค่า (ROI)"
+  layoutOrder: [
+    "hero",
+    "insight",
+    "audit", // วิเคราะห์จุดอ่อนเว็บไซต์เดิม
+    "catalog", // แสดงระบบบริหารจัดการสินค้า
+    "revenue", // คำนวณความคุ้มค่าเชิงธุรกิจ
+    "visuals", // Roadmap & Terminal
+    "success",
+    "faq",
+    "portal",
+  ],
 
   regionalRoadmap: [
     {

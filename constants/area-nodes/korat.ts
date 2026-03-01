@@ -1,19 +1,13 @@
-/**
- * [SERVICE_NODE]: KORAT_INDUSTRIAL_HUB v18.0.3 (PRODUCTION_FINAL)
- * [STRATEGY]: Industrial Authority | B2B Engineering | Dynamic Inheritance
- * [MARKET]: Nakhon Ratchasima (Korat), Sung Noen, Pak Chong
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Industrial Standard)
 import { catalogService } from "@/constants/services/catalog";
 
-export const koratNode: AreaNode = {
+export const koratNode = defineAreaNode(catalogService, {
   // --- Basic Identity ---
   slug: "korat",
   province: "นครราชสีมา",
   region: "Northeast",
-  templateSlug: "catalog", // เชื่อมโยงกับ Catalog Template
+  tier: 1,
 
   title: "รับทำเว็บไซต์ โคราช | เว็บไซต์โรงงานและแคตตาล็อกสินค้าอุตสาหกรรม",
   description:
@@ -24,20 +18,31 @@ export const koratNode: AreaNode = {
     "นายเอ็มซ่ามากส์ ให้บริการออกแบบเว็บไซต์เชิงวิศวกรรม (Engineering Web Design) ที่เน้นการจัดระเบียบข้อมูลสินค้าจำนวนมาก (SKU) ให้ค้นหาง่าย " +
     "ลดความผิดพลาดในการสั่งซื้อ และช่วยให้ทีมขายของคุณปิดดีลกับฝ่ายจัดซื้อของโรงงานในนวนครและสุรนารีได้ง่ายขึ้น",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ โคราช ออกแบบเว็บโรงงาน แคตตาล็อกอะไหล่ - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์โคราช สำหรับโรงงาน ร้านวัสดุก่อสร้าง และธุรกิจ B2B ระบบค้นหาอะไหล่แม่นยำ รองรับ SEO อุตสาหกรรม ติดหน้าแรก Google",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/korat-monolith.webp",
+  coordinates: { lat: 14.9759, lng: 102.1177 },
+  districts: [
+    "เมืองนครราชสีมา",
+    "ปากช่อง",
+    "สีคิ้ว",
+    "สูงเนิน",
+    "ขามทะเลสอ",
+    "โชคชัย",
+    "นิคมอุตสาหกรรมนวนคร",
+    "นิคมอุตสาหกรรมสุรนารี",
+  ],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก catalogService เพื่อความเป็นมาตรฐาน Industrial Grade
-  theme: catalogService.theme,
-  price: catalogService.price,
-  priceValue: catalogService.priceValue,
-  currency: catalogService.currency,
-  unit: catalogService.unit,
-
-  marketSaturation: 72,
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าโคราชเน้น "ประสิทธิภาพและการจัดระเบียบข้อมูล"
+  layoutOrder: [
+    "hero",
+    "insight", // วิเคราะห์ Pain Point โรงงาน
+    "catalog", // โชว์ระบบแคตตาล็อกที่เป็นจุดเด่น
+    "promotions",
+    "matrix", // Roadmap & Terminal
+    "success", // บทพิสูจน์ความสำเร็จ B2B
+    "faq",
+    "portal",
+  ],
 
   regionalRoadmap: [
     {
@@ -59,13 +64,6 @@ export const koratNode: AreaNode = {
         "วางรากฐานคีย์เวิร์ดเฉพาะทางเพื่อดักจับ Traffic จากฝ่ายจัดซื้อโรงงานทั่วเขตโคราชและอีสาน",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/korat-monolith.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Heavy Duty Certified: ระบบที่ผ่านการใช้งานจริงในโรงงานผลิตและไซต์ก่อสร้างชั้นนำในโคราช",
 
   // --- Localized Benefits ---
   benefits: [
@@ -110,10 +108,6 @@ export const koratNode: AreaNode = {
       answer:
         "ทำได้สบายมากครับ ระบบของเราออกแบบมาเพื่อจัดการ Product Variant ที่ซับซ้อนโดยเฉพาะครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...catalogService.faqs.filter(
-      (f) => f.question.includes("ออกใบกำกับภาษี") || f.question.includes("ลงสินค้า"),
-    ),
   ],
 
   // --- Context Data ---
@@ -135,14 +129,14 @@ export const koratNode: AreaNode = {
       "ส่งไฟล์แคตตาล็อก PDF ทางไลน์แล้วลูกค้าหาของไม่เจอ",
       "สต็อกหน้าเว็บไม่ตรงกับของจริง",
     ],
-    competitorLevel: "high", // โคราชการแข่งขันสูง
+    competitorLevel: "high",
     socialProof: {
       rating: 4.9,
       reviewCount: 99,
       localClient: "โรงงานเหล็กรายใหญ่ อ.สีคิ้ว",
     },
     regionalPricing: {
-      startPrice: `${catalogService.price} บาท`, // Dynamic Reference
+      startPrice: `${catalogService.price} บาท`,
       timeline: "20-30 วัน",
     },
     localSuccessStory: {
@@ -173,9 +167,7 @@ export const koratNode: AreaNode = {
     },
   },
 
-  // --- System Metadata ---
   priority: 99,
-  districts: ["เมืองนครราชสีมา", "ปากช่อง", "สีคิ้ว", "สูงเนิน", "ขามทะเลสอ", "โชคชัย"],
   keywords: [
     "รับทำเว็บไซต์ โคราช",
     "ทำเว็บโรงงาน นครราชสีมา",
@@ -183,5 +175,4 @@ export const koratNode: AreaNode = {
     "รับทำเว็บไซต์ B2B",
     "Web Design Korat",
   ],
-  coordinates: { lat: 14.9759, lng: 102.1177 },
-};
+});

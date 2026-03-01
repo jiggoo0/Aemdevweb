@@ -10,7 +10,6 @@ import React, { memo, useEffect, useState, useRef } from "react";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
-import { cn } from "@/lib/utils";
 
 export const AEMSpecialistHero = memo(() => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -62,54 +61,47 @@ export const AEMSpecialistHero = memo(() => {
       {/* --- LAYER 03: CONTENT HUB --- */}
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="flex flex-col items-center text-center">
-          {/* Status Architecture: High-Authority Meta-Data */}
+          {/* Status Architecture: Trust & Reliability Meta-Data */}
           <div className="mb-16 flex flex-wrap items-center justify-center gap-4 px-4 md:gap-8">
             {[
-              { label: "ENGINE", value: "NEXT.JS 16.1.6", status: "emerald" },
-              { label: "RUNTIME", value: "REACT 19.0.0", status: "emerald" },
-              { label: "SECURITY", value: "HARDENED", status: "amber" },
-              { label: "LOCATION", value: "BANGKOK CBD", status: "emerald" },
+              { label: "ความปลอดภัย", value: "มาตรฐานสากล", status: "emerald" },
+              { label: "ความเร็ว", value: "สูงสุด (Grade A)", status: "emerald" },
+              { label: "การดูแล", value: "ผู้เชี่ยวชาญโดยตรง", status: "emerald" },
+              { label: "สถานะ", value: "พร้อมรับงานใหม่", status: "emerald" },
             ].map((node, i) => (
               <div
                 key={i}
                 className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-3xl transition-all"
               >
-                <div
-                  className={cn(
-                    "h-1.5 w-1.5 rounded-full",
-                    node.status === "emerald"
-                      ? "bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"
-                      : "bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]",
-                  )}
-                />
-                <span className="text-text-muted font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-40 transition-opacity group-hover:opacity-100">
+                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                <span className="text-text-muted font-sans text-[10px] font-bold tracking-wide uppercase opacity-60 transition-opacity group-hover:opacity-100">
                   {node.label}: <span className="text-text-primary ml-1">{node.value}</span>
                 </span>
               </div>
             ))}
           </div>
 
-          {/* Main Title: Fluid Precision Scaling */}
+          {/* Main Title: Outcome-Oriented Branding */}
           <h1 className="text-text-primary mb-12 max-w-6xl text-6xl leading-[0.8] font-black tracking-tighter uppercase italic drop-shadow-2xl md:text-9xl lg:text-[11rem]">
-            Hyper <br />
+            Dominate <br />
             <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
-              Authority.
+              Results.
             </span>
           </h1>
 
-          {/* Core Vision: Tactical Copywriting */}
+          {/* Core Vision: Human-Centric Tactical Copywriting */}
           <div className="mb-20 flex max-w-4xl flex-col items-center gap-10">
             <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
-              “สถาปัตยกรรมเว็บไซต์เพื่อสร้าง{" "}
-              <span className="text-text-primary">อำนาจการจัดอันดับ</span> ที่ยั่งยืนในยุค AI-Search
-              Domination”
+              “เปลี่ยนเว็บไซต์ของคุณให้เป็น{" "}
+              <span className="text-text-primary">เครื่องจักรทำเงิน</span> ด้วยสถาปัตยกรรมระดับสากล
+              ที่ครองอันดับ 1 ในยุค AI Search”
             </p>
             <div className="bg-border/20 relative h-px w-48 overflow-hidden">
               <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full animate-[shimmer_2s_infinite]" />
             </div>
           </div>
 
-          {/* Conversion Actions: Weighted Response */}
+          {/* Conversion Actions: Simplified Response */}
           <div className="flex flex-col items-center gap-8 sm:flex-row">
             <Button
               size="lg"
@@ -117,7 +109,7 @@ export const AEMSpecialistHero = memo(() => {
               href={SITE_CONFIG.links.line}
               className="shadow-glow-lg group glow-primary h-20 min-w-[320px] rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic transition-all duration-500 hover:scale-[1.02] active:scale-95"
             >
-              <span className="mr-6">Initialize Specialist Audit</span>
+              <span className="mr-6">ปรึกษาผู้เชี่ยวชาญ (ฟรี)</span>
               <IconRenderer
                 name="Zap"
                 size={20}
@@ -131,32 +123,16 @@ export const AEMSpecialistHero = memo(() => {
               href="/services"
               className="border-border hover:border-brand-primary/40 h-20 min-w-[280px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-3xl transition-all duration-500"
             >
-              Expertise Registry
+              ดูบริการทั้งหมด
             </Button>
           </div>
         </div>
       </div>
 
-      {/* --- LAYER 04: NAVIGATION DECOR (The Dashboard Feel) --- */}
-      <div className="pointer-events-none absolute bottom-12 left-12 hidden flex-col gap-4 font-mono md:flex">
-        <div className="flex items-center gap-3">
-          <span className="text-text-muted text-[8px] font-bold uppercase opacity-40">
-            Lat_Node:
-          </span>
-          <span className="text-text-primary text-[10px] font-black">{mousePos.x.toFixed(2)}</span>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-text-muted text-[8px] font-bold uppercase opacity-40">
-            Lng_Node:
-          </span>
-          <span className="text-text-primary text-[10px] font-black">{mousePos.y.toFixed(2)}</span>
-        </div>
-      </div>
-
-      {/* Scroll Indicator: Haptic Feed */}
+      {/* Scroll Indicator: Friendly Feed */}
       <div className="absolute bottom-12 flex flex-col items-center gap-4">
-        <span className="text-text-muted font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-30">
-          Scroll_Exploration
+        <span className="text-text-muted font-sans text-[9px] font-bold tracking-widest uppercase opacity-40">
+          เลื่อนลงเพื่อดูข้อมูลเพิ่ม
         </span>
         <div className="border-border/40 flex h-10 w-6 items-start justify-center rounded-full border p-2">
           <div className="bg-brand-primary h-1.5 w-1 animate-bounce rounded-full" />

@@ -1,10 +1,17 @@
 /**
- * [SYSTEM CORE]: NODE_FACTORY_ENGINE v18.2.0 (COMPREHENSIVE)
- * [STRATEGY]: Blueprint Inheritance | Deep Merging | SEO Keyword Orchestration
+ * [SYSTEM CORE]: NODE_FACTORY_ENGINE v19.0.0 (IDENTITY_SOVEREIGNTY)
+ * [STRATEGY]: Blueprint Inheritance | Provincial DNA Injection | Identity Merging
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import type { AreaNode, TemplateMasterData, ServiceFaq, ServiceFeature } from "@/types";
+import type {
+  AreaNode,
+  TemplateMasterData,
+  ServiceFaq,
+  ServiceFeature,
+  ThemeConfig,
+} from "@/types";
+import { getProvinceDna } from "../provinces/config";
 
 /**
  * [TYPE_HELPER]: กำหนด Contract การสืบทอดข้อมูล
@@ -50,12 +57,18 @@ type LocalNodeConfig = Omit<
   >;
 
 /**
- * [FACTORY]: เครื่องยนต์หลักในการประกอบร่าง Area Node (Master + Local)
+ * [FACTORY]: เครื่องยนต์หลักในการประกอบร่าง Area Node (Master + Provincial DNA + Local)
+ * @version 19.0.0 (Supports Unique Regional Identity)
  */
 export function defineAreaNode(
   masterService: TemplateMasterData,
   localConfig: LocalNodeConfig,
 ): AreaNode {
+  // ==========================================
+  // 0. [DNA_INJECTION]: ดึงอัตลักษณ์ท้องถิ่นตามภูมิภาค
+  // ==========================================
+  const provinceDna = getProvinceDna(localConfig.slug, localConfig.region);
+
   // ==========================================
   // 1. [SMART MERGE]: FAQs (รวมคำถาม Local และ Master โดยไม่ให้ซ้ำกัน)
   // ==========================================
@@ -97,7 +110,13 @@ export function defineAreaNode(
     unit: masterService.unit,
 
     // --- [FALLBACK & OVERRIDE DATA] ---
-    theme: localConfig.theme ?? masterService.theme,
+    // [DNA_THEME_MERGE]: ผสานธีม 3 เลเยอร์ (Master -> Province DNA -> Local Override)
+    theme: {
+      ...masterService.theme,
+      ...provinceDna.theme,
+      ...(localConfig.theme as Partial<ThemeConfig>),
+    },
+
     price: localConfig.price ?? masterService.price,
     priceValue: localConfig.priceValue ?? masterService.priceValue,
     priority: localConfig.priority ?? masterService.priority,
@@ -107,6 +126,10 @@ export function defineAreaNode(
 
     // --- [LOCAL UNIQUE DATA] ---
     ...localConfig,
+
+    // --- [IDENTITY OVERRIDES] ---
+    tier: localConfig.tier ?? provinceDna.tier,
+    layoutOrder: localConfig.layoutOrder ?? provinceDna.layoutOrder,
 
     // --- [INJECTED MERGED ARRAYS] ---
     faqs: mergedFaqs,

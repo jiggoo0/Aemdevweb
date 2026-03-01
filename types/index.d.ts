@@ -1,11 +1,10 @@
 /**
- * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v18.1.1 (STABILIZED_EEAT)
+ * [SYSTEM CORE]: GLOBAL_TYPE_DEFINITIONS v19.0.0 (UNITY_STABILIZED)
  * [STRATEGY]: Strict Type Contract | E-E-A-T Knowledge Graph | Next.js 16 Sync
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import type { ReactNode } from "react";
-import type { TemplateAction } from "./template-props";
 
 // =========================================
 // [00] GLOBAL AUGMENTATION
@@ -305,8 +304,21 @@ export interface BioProject {
   readonly thumbnail?: string;
 }
 
+/** [STRICT]: มาตรฐานปุ่มกดและการนำทางทั่วทั้งระบบ */
+export interface TemplateAction {
+  readonly label: string;
+  readonly href: string;
+  readonly icon?: IconName;
+  readonly variant?: "default" | "outline" | "ghost" | "link" | "brand";
+}
+
+/**
+ * [STRATEGIC]: Bridge Interface สำหรับ Data Normalization
+ * ทำหน้าที่รวม Master Data และ Area Nodes ให้เป็นก้อนเดียวที่ TemplateRenderer เข้าใจ
+ */
 export interface UniversalTemplateProps {
   readonly id: string;
+  readonly tier: number; // [NEW]: ลำดับความสำคัญของพื้นที่
   readonly templateSlug: TemplateSlug;
   readonly category: string;
   readonly title: string;
@@ -350,7 +362,7 @@ export interface UniversalTemplateProps {
     readonly title: string;
     readonly description: string;
   }[];
-  readonly primaryAction?: TemplateAction;
+  readonly primaryAction: TemplateAction;
   readonly secondaryAction?: TemplateAction;
 
   // --- Internal Linking & P-SEO Hub ---
@@ -403,6 +415,7 @@ export interface TemplateMasterData {
 
 export interface AreaNode {
   readonly id?: string;
+  readonly tier?: number; // [NEW]: ลำดับความสำคัญ (1 = Major City, 2 = Province)
   readonly slug: string;
   readonly province: string;
   readonly title: string;
@@ -441,5 +454,3 @@ export interface AreaNode {
   readonly coreFeatures?: readonly ServiceFeature[];
   readonly faqs?: readonly ServiceFaq[];
 }
-
-export * from "./template-props";

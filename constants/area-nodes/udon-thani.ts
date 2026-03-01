@@ -11,6 +11,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const udonThaniNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "udon-thani",
+  tier: 2,
   province: "อุดรธานี",
   region: "Northeast",
   priority: 95,

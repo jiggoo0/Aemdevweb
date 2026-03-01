@@ -12,6 +12,7 @@ import { hotelResortService } from "@/constants/services/hotel-resort";
 export const suratThaniNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "surat-thani",
+  tier: 2,
   province: "สุราษฎร์ธานี",
   region: "South",
   priority: 96,

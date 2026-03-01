@@ -1,28 +1,38 @@
-/**
- * [SERVICE_NODE]: PATTANI_INDUSTRIAL_HUB v18.0.1
- * [STRATEGY]: Halal Industry | Logistics | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Standard)
 import { corporateService } from "@/constants/services/corporate";
 
-export const pattaniNode: AreaNode = {
+export const pattaniNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "pattani",
+  tier: 2,
   province: "ปัตตานี",
   region: "South",
-  templateSlug: "corporate",
+  priority: 87,
+
   title: "รับทำเว็บไซต์ ปัตตานี | ยกระดับอุตสาหกรรมฮาลาลและธุรกิจส่งออกสู่ตลาดโลก",
   description:
     "บริการรับทำเว็บไซต์มาตรฐานสากลสำหรับนิคมอุตสาหกรรมในปัตตานี เน้นความเชื่อมั่น B2B และมาตรฐานฮาลาลดิจิทัล",
-  seoTitle: "รับทำเว็บไซต์ ปัตตานี ออกแบบเว็บโรงงาน ฮาลาล - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ปัตตานี สำหรับธุรกิจโรงงานผลิต อุตสาหกรรมประมง และ SME พรีเมียม มาตรฐานความปลอดภัยสูง รองรับ SEO ระดับโลก",
 
   longDescription:
     "ปัตตานี ศูนย์กลางอุตสาหกรรมฮาลาลและประมงอุตสาหกรรมที่สำคัญของภาคใต้ตอนล่างที่มีความเชื่อมโยงกับตลาดโลก " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์องค์กรและโรงงานของคุณให้เป็น 'Export Gateway' ที่ทรงพลัง " +
     "เราออกแบบระบบที่เน้นการสร้าง Trust ระดับสากล รองรับมาตรฐาน Halal Digital และความปลอดภัยข้อมูลสูงสุด " +
     "เพื่อให้ธุรกิจในปัตตานีของคุณ ครองอันดับหนึ่งในสายตาคู่ค้าจากกลุ่มประเทศมุสลิมและอาเซียน",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/pattani-node.webp",
+  coordinates: { lat: 6.8681, lng: 101.2501 },
+  districts: [
+    "เมืองปัตตานี",
+    "โคกโพธิ์",
+    "หนองจิก",
+    "ยะรัง",
+    "สายบุรี",
+    "ปะนาเระ",
+    "มายอ",
+    "ทุ่งยางแดง",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +41,9 @@ export const pattaniNode: AreaNode = {
     "Fishery Logistics SEO: วางรากฐานการค้นหาเพื่อสนับสนุนธุรกิจประมงแปรรูปและโลจิสติกส์ส่งออกประจำภูมิภาค",
   ],
 
-  priority: 87,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
-  heroImage: "/images/areas/pattani-node.webp",
-  coordinates: { lat: 6.8681, lng: 101.2501 },
   marketSaturation: 40,
   regionalLatency: 27,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +64,8 @@ export const pattaniNode: AreaNode = {
         "วางโครงสร้างคีย์เวิร์ดเฉพาะทางอุตสาหกรรมเพื่อให้ฝ่ายจัดซื้อทั่วโลกหาคุณเจอเป็นอันดับแรก",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ปัตตานีมีจุดแข็งด้านอุตสาหกรรมฮาลาลและการประมง เว็บไซต์ต้องสะท้อนถึงมาตรฐานสากลและความถูกต้องตามหลักการ",
@@ -76,18 +81,47 @@ export const pattaniNode: AreaNode = {
       "ขาดเครื่องมือดิจิทัลในการปิดดีลกับคู่ค้าต่างชาติ",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 38,
+      localClient: "โรงงานแปรรูปอาหารฮาลาลรายใหญ่ ปัตตานี",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานส่งออกอาหารทะเลแช่แข็ง",
+      result: "วางระบบแคตตาล็อกฮาลาลและ SEO หลายภาษา ยอด RFQ จากคู่ค้าในตะวันออกกลางเพิ่มขึ้น 180%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ปัตตานี",
       "ออกแบบเว็บโรงงาน ฮาลาล",
       "จ้างทำ SEO สายบุรี",
       "ทำเว็บประมง ปัตตานี",
     ],
+    promotions: [
+      {
+        title: "Halal Digital Transformation",
+        description:
+          "สิทธิพิเศษสำหรับโรงงานและธุรกิจในปัตตานี รับฟรีบริการวิเคราะห์มาตรฐาน Halal Digital และระบบ Company Profile 3 ภาษา มูลค่า 10,000 บาท",
+        discount: "Free Halal Profile Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/pattani-node.webp",
+      gallery: [
+        "/images/services/corporate-node.webp",
+        "/images/case-studies/industrial-catalog.webp",
+      ],
+    },
   },
-  districts: ["เมืองปัตตานี", "โคกโพธิ์", "หนองจิก", "ยะรัง", "สายบุรี"],
+
   keywords: [
     "รับทำเว็บไซต์ ปัตตานี",
     "ทำเว็บโรงงาน ฮาลาล",
     "จ้างทำเว็บธุรกิจ",
     "รับทำ SEO ปัตตานี",
   ],
-};
+});

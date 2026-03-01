@@ -20,7 +20,7 @@ import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
  * @description รวบรวมและแจกจ่ายพิกัด URL ทั้งหมดในระบบไปยัง Search Engine Bots
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date();
+  const lastModified = "2026-03-01T00:00:00.000Z";
   const baseUrl = SITE_CONFIG.siteUrl;
 
   /* [A] DATA_RESOLUTION: ดึงข้อมูลจาก CMS แบบขนานเพื่อ Performance สูงสุด */

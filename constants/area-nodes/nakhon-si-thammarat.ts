@@ -10,6 +10,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "nakhon-si-thammarat",
+  tier: 2,
   province: "นครศรีธรรมราช",
   region: "South",
   priority: 96,

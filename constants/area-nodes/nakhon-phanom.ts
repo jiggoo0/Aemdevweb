@@ -1,28 +1,38 @@
-/**
- * [SERVICE_NODE]: NAKHON_PHANOM_MEKONG v18.0.1
- * [STRATEGY]: Religious Tourism | Border Trade | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const nakhonPhanomNode: AreaNode = {
+export const nakhonPhanomNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "nakhon-phanom",
+  tier: 2,
   province: "นครพนม",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 87,
+
   title: "รับทำเว็บไซต์ นครพนม | ออกแบบเว็บท่องเที่ยวเชิงศรัทธาและธุรกิจริมโขงที่ทันสมัย",
   description:
     "ยกระดับภาพลักษณ์เมืองพระธาตุและวิถีริมโขง สู่มาตรฐานดิจิทัลพรีเมียม ด้วยเว็บไซต์ที่เน้นความศรัทธาและระบบจองที่ลื่นไหล",
-  seoTitle: "รับทำเว็บไซต์ นครพนม ออกแบบเว็บที่พัก พระธาตุพนม - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์นครพนม สำหรับโรงแรม รีสอร์ตริมโขง และธุรกิจบริการ ดีไซน์ภูมิฐาน โหลดไว รองรับ SEO พื้นที่นครพนม",
 
   longDescription:
     "นครพนม เมืองแห่งพระธาตุศักดิ์สิทธิ์และทัศนียภาพริมโขงที่เป็นประตูสู่เขตเศรษฐกิจอินโดจีน " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนพลังแห่งศรัทธาและความงามของวิถีริมโขง ให้กลายเป็นโอกาสทางธุรกิจที่ยั่งยืน " +
     "เราออกแบบเว็บไซต์ที่เน้นความภูมิฐาน (Dignified Design) ผสานกับเทคโนโลยีที่รองรับนักท่องเที่ยวทั่วโลก " +
     "เพื่อช่วยให้โรงแรม รีสอร์ต และธุรกิจการค้าในนครพนมของคุณ ครองอันดับหนึ่งบน Google และเติบโตไปพร้อมกับเศรษฐกิจลุ่มน้ำโขง",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/nakhon-phanom-node.webp",
+  coordinates: { lat: 17.392, lng: 104.769 },
+  districts: [
+    "เมืองนครพนม",
+    "ธาตุพนม",
+    "บ้านแพง",
+    "ท่าอุเทน",
+    "ศรีสงคราม",
+    "เรณูนคร",
+    "ปลาปาก",
+    "นาแก",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +41,10 @@ export const nakhonPhanomNode: AreaNode = {
     "Mekong Visual SEO: วางกลยุทธ์การค้นหาเจาะกลุ่มคีย์เวิร์ดที่พักและร้านอาหารริมโขง เพื่อเพิ่มยอดจองตรงตลอดทั้งปี",
   ],
 
-  priority: 87,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/nakhon-phanom-node.webp",
-  coordinates: { lat: 17.392, lng: 104.769 },
   isTourismHeavy: true,
   marketSaturation: 42,
   regionalLatency: 28,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +65,8 @@ export const nakhonPhanomNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักนครพนม', 'ไหว้พระธาตุพนม' เพื่อครองอันดับหนึ่งในภูมิภาค",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "นครพนมมีการเติบโตด้านการท่องเที่ยวเชิงศาสนาและวิถีชีวิต เว็บไซต์ที่ดูคลีนและน่าเชื่อถือจะปิดการขายได้ดี",
@@ -74,13 +79,43 @@ export const nakhonPhanomNode: AreaNode = {
       "เว็บไซต์เดิมไม่อัปเดตข้อมูลกิจกรรมประจำจังหวัด",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 42,
+      localClient: "โรงแรมพรีเมียม ริมโขงนครพนม",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตย่านพระธาตุพนม",
+      result:
+        "วางระบบจองตรงและปรับปรุงการนำเสนออัตลักษณ์ ยอดจองห้องพักเพิ่มขึ้น 150% ในฤดูท่องเที่ยว",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ธาตุพนม",
       "ออกแบบเว็บที่พัก นครพนม",
       "จ้างทำ SEO นครพนม",
       "ทำเว็บร้านอาหาร ริมโขง",
     ],
+    promotions: [
+      {
+        title: "Spiritual City Digital Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจท่องเที่ยวและบริการในนครพนม รับฟรีบริการจัดทำ Virtual Tour แหล่งท่องเที่ยวสำคัญและระบบ Local SEO มูลค่า 7,500 บาท",
+        discount: "Free Virtual Tour & SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nakhon-phanom-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองนครพนม", "ธาตุพนม", "บ้านแพง", "ท่าอุเทน", "ศรีสงคราม"],
+
   keywords: ["รับทำเว็บไซต์ นครพนม", "ทำเว็บโรงแรม นครพนม", "จ้างทำเว็บนครพนม", "รับทำ SEO นครพนม"],
-};
+});

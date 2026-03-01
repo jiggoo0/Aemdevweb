@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: PATHUM_THANI_TECH_VALLEY v18.0.1
- * [STRATEGY]: Tech & Research Hub | Industrial Support | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Hub Standard)
 import { corporateService } from "@/constants/services/corporate";
 
-export const pathumThaniNode: AreaNode = {
+export const pathumThaniNode = defineAreaNode(corporateService, {
+  // --- Basic Identity ---
   slug: "pathum-thani",
+  tier: 2,
   province: "ปทุมธานี",
   region: "Central",
-  templateSlug: "corporate",
+  priority: 97,
+
   title: "รับทำเว็บไซต์ ปทุมธานี | พัฒนาเว็บไซต์โรงงานและธุรกิจนวัตกรรม ศูนย์กลางเทคโนโลยี",
   description:
     "บริการรับทำเว็บไซต์ในปทุมธานี เน้นความโปรระดับสากลสำหรับโรงงานในนิคมอุตสาหกรรมและสถาบันวิจัย ติดหน้าแรก Google ทั่วประเทศ",
-  seoTitle: "รับทำเว็บไซต์ ปทุมธานี ออกแบบเว็บโรงงาน นวนคร รังสิต - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ปทุมธานี สำหรับนิคมอุตสาหกรรมบางกะดี นวนคร และธุรกิจนวัตกรรม มาตรฐานสากล รองรับ SEO อุตสาหกรรมและ Multilingual",
 
   longDescription:
     "ปทุมธานี ศูนย์กลางแห่งนวัตกรรมและการวิจัยที่เชื่อมโยงนิคมอุตสาหกรรมขนาดใหญ่และสถาบันการศึกษาระดับแนวหน้า " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์บริษัทและโรงงานของคุณให้กลายเป็น 'Digital Innovation Hub' ที่สะท้อนความโปรระดับ Enterprise " +
     "เราออกแบบระบบที่เน้นความมั่นคงปลอดภัย (Security) และความสามารถในการขยายตัว (Scalability) " +
     "เพื่อให้ธุรกิจในเขตนวนครและรังสิตของคุณ ครองความได้เปรียบในตลาด B2B ทั้งในไทยและต่างประเทศ",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/pathum-thani-node.webp",
+  coordinates: { lat: 14.0208, lng: 100.525 },
+  districts: [
+    "เมืองปทุมธานี",
+    "คลองหลวง",
+    "ธัญบุรี",
+    "ลำลูกกา",
+    "ลาดหลุมแก้ว",
+    "หนองเสือ",
+    "สามโคก",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const pathumThaniNode: AreaNode = {
     "Tech-First Visual Identity: งานดีไซน์ที่สะท้อนถึงความเป็นผู้นำทางเทคโนโลยีและความเป็นมืออาชีพตามมาตรฐานสากล",
   ],
 
-  priority: 97,
-  theme: corporateService.theme,
-  price: corporateService.price,
-  priceValue: corporateService.priceValue,
-  currency: corporateService.currency,
-  unit: corporateService.unit,
-  heroImage: "/images/areas/pathum-thani-node.webp",
-  coordinates: { lat: 14.0208, lng: 100.525 },
   marketSaturation: 75,
   regionalLatency: 7,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -59,6 +61,8 @@ export const pathumThaniNode: AreaNode = {
       description: "ทำ SEO เจาะกลุ่มคู่ค้า B2B ทั่วโลกและฝ่ายจัดซื้อโรงงานในเขตปทุมธานี",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ปทุมธานีเป็นศูนย์กลางเทคโนโลยีและงานวิจัย เว็บไซต์ต้องดูเป็นทางการ มั่นคง และมีข้อมูลที่ถูกต้องแม่นยำที่สุด",
@@ -76,6 +80,19 @@ export const pathumThaniNode: AreaNode = {
       "ต้องการระบบรองรับหลายภาษาสำหรับคู่ค้าต่างชาติ",
     ],
     competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 142,
+      localClient: "บริษัทนวัตกรรมยาและเวชภัณฑ์ ย่านคลองหลวง",
+    },
+    regionalPricing: {
+      startPrice: `${corporateService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงงานอิเล็กทรอนิกส์บางกะดี",
+      result: "วางระบบเทคนิคอลเซ็ตอัพใหม่และทำ SEO 2 ภาษา ยอดคู่ค้าต่างชาติทักสอบถามเพิ่มขึ้น 180%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ รังสิต",
       "ออกแบบเว็บโรงงาน นวนคร",
@@ -99,11 +116,11 @@ export const pathumThaniNode: AreaNode = {
       ],
     },
   },
-  districts: ["เมืองปทุมธานี", "คลองหลวง", "ธัญบุรี", "ลำลูกกา", "ลาดหลุมแก้ว"],
+
   keywords: [
     "รับทำเว็บไซต์ ปทุมธานี",
     "ทำเว็บโรงงาน นวนคร",
     "จ้างทำเว็บรังสิต",
     "รับทำ SEO ปทุมธานี",
   ],
-};
+});

@@ -11,6 +11,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const lamphunNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "lamphun",
+  tier: 2,
   province: "ลำพูน",
   region: "North",
   priority: 92,

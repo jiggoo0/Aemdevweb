@@ -11,6 +11,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const ubonRatchathaniNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "ubon-ratchathani",
+  tier: 2,
   province: "อุบลราชธานี",
   region: "Northeast",
   priority: 95,

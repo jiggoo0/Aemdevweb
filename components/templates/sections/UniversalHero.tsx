@@ -7,7 +7,7 @@
 // --- Infrastructure & Core Data ---
 import Link from "next/link";
 import { memo } from "react";
-import type { BaseTemplateProps } from "@/types/template-props";
+import type { BaseTemplateProps } from "@/types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import TrustBadge from "@/components/shared/TrustBadge";
@@ -39,7 +39,6 @@ const UniversalHero = ({
   const title = directTitle || data?.title || SITE_CONFIG.hero.title;
   const description =
     directDescription || directSubtitle || data?.description || SITE_CONFIG.hero.description;
-  const templateSlug = data?.templateSlug;
 
   const theme = data?.theme || {
     primary: SITE_CONFIG.themeColor,
@@ -49,99 +48,64 @@ const UniversalHero = ({
 
   const isDark = theme.mode === "dark";
 
-  const getHeroIcon = () => {
-    const iconSize = 48; // md:h-12 is 48px
-    switch (templateSlug) {
-      case "salepage":
-      case "seo-agency":
-        return <IconRenderer name="Target" size={iconSize} />;
-      case "local":
-      case "local-authority":
-        return <IconRenderer name="MapPin" size={iconSize} />;
-      case "corporate":
-        return <IconRenderer name="Building2" size={iconSize} />;
-      case "catalog":
-        return <IconRenderer name="FileText" size={iconSize} />;
-      default:
-        return <IconRenderer name="Zap" size={iconSize} />;
-    }
-  };
-
   return (
     <section
       className={cn(
-        "relative overflow-hidden border-b transition-all duration-700",
-        "flex min-h-[70vh] flex-col justify-center", // Increased height for prominence
-        isDark ? "bg-[#020617] text-white" : "bg-surface-main text-text-primary",
+        "relative overflow-hidden transition-all duration-1000",
+        "flex min-h-[85dvh] flex-col justify-center", // [AESTHETIC]: ความสูงระดับพรีเมียม
+        "bg-[var(--surface-main)] text-[var(--text-primary)]",
         align === "center" ? "items-center text-center" : "items-start text-left",
-        "px-4 py-24 md:py-40", // More breathing room
+        "px-6 py-32 md:py-52 lg:py-64", // [SPACE]: ระยะห่างระดับ Flagship
       )}
-      style={{ borderColor: "var(--border)" }}
     >
-      {/* --- INFRASTRUCTURE SHELL (The Visual Layer) --- */}
+      {/* --- INFRASTRUCTURE SHELL (Enhanced Visual Layer) --- */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.04]" />
-        {/* Modern Depth Aura */}
+        <div className="bg-grid-white/[0.02] absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] opacity-40" />
+
+        {/* [MESH_AURAS]: แสงฟุ้งที่เคลื่อนไหวได้แบบพริ้วไหว */}
+        <div className="animate-aura-1 absolute top-[-20%] left-[-10%] h-[1200px] w-[1200px] rounded-full bg-[var(--color-brand-primary)]/5 opacity-40 blur-[200px]" />
+        <div className="animate-aura-2 absolute right-[-10%] bottom-[-10%] h-[1000px] w-[1000px] rounded-full bg-[var(--color-brand-secondary)]/5 opacity-30 blur-[160px]" />
+
+        {/* [DYNAMIC_GRADIENT]: ไล่สีที่นุ่มนวลตามโหมด */}
         <div
           className={cn(
-            "absolute inset-0 bg-gradient-to-b via-transparent to-transparent",
-            isDark ? "from-[var(--brand-primary)]/15" : "from-[var(--brand-primary)]/5",
+            "absolute inset-0 bg-gradient-to-br via-transparent to-transparent opacity-30",
+            isDark
+              ? "from-[var(--color-brand-primary)]/30"
+              : "from-[var(--color-brand-primary)]/10",
           )}
         />
-        <div className="absolute top-0 left-1/2 h-[500px] w-full -translate-x-1/2 rounded-full bg-[var(--brand-primary)]/5 blur-[120px]" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl">
-        {/* --- BREADCRUMB: Geographic Context & Service Authority --- */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
+        {/* --- BREADCRUMB: Geographic Authority --- */}
         {data?.masterServiceUrl && data?.province && (
           <div
             className={cn(
-              "mb-10 flex items-center gap-3 font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-60 transition-opacity hover:opacity-100",
+              "mb-16 flex items-center gap-4 font-sans text-[10px] font-black tracking-[0.5em] uppercase opacity-40 transition-all hover:opacity-100",
               align === "center" ? "justify-center" : "justify-start",
+              "text-[var(--text-primary)]",
             )}
           >
-            <Link href="/" className="hover:text-[var(--brand-primary)]">
+            <Link href="/" className="hover:text-[var(--color-brand-primary)]">
               HOME
             </Link>
-            <span className="text-text-muted">/</span>
-            <Link href="/areas" className="hover:text-[var(--brand-primary)]">
+            <div className="h-px w-8 bg-[var(--border)] opacity-30" />
+            <Link href="/areas" className="hover:text-[var(--color-brand-primary)]">
               AREAS
             </Link>
-            <span className="text-text-muted">/</span>
-            <Link
-              href={data.masterServiceUrl}
-              className="text-[var(--brand-primary)] hover:underline"
-            >
-              {data.category.toUpperCase()}
-            </Link>
+            <div className="h-px w-8 bg-[var(--border)] opacity-30" />
+            <span className="text-[var(--color-brand-primary)]">{data.province.toUpperCase()}</span>
           </div>
         )}
 
-        {/* --- AUTHORITY MARKER: The Specialist Identity --- */}
-        <div
-          className={cn(
-            "mb-12 flex items-center gap-5 transition-all duration-700",
-            align === "center" ? "justify-center" : "justify-start",
-          )}
-        >
-          <div className="bg-surface-offset border-border/50 shadow-pro-lg flex h-20 w-20 items-center justify-center rounded-3xl border text-[var(--brand-primary)] ring-1 ring-[var(--brand-primary)]/20 backdrop-blur-2xl">
-            {getHeroIcon()}
-          </div>
-          <div className="flex flex-col items-start gap-1 text-left">
-            <span className="font-sans text-[10px] font-bold tracking-[0.3em] text-[var(--brand-primary)] uppercase opacity-90">
-              Expertise_Engine_Active
-            </span>
-            <div className="h-[2px] w-12 bg-[var(--brand-primary)]/40" />
-          </div>
-        </div>
-
         {/* --- MAIN TITLE: Executive Typography --- */}
-        <h1 className="mb-10 max-w-5xl text-5xl leading-[0.95] font-black tracking-tight sm:text-7xl lg:text-8xl">
+        <h1 className="mb-14 max-w-6xl text-6xl leading-[0.85] font-black tracking-tighter text-[var(--text-primary)] uppercase italic drop-shadow-sm sm:text-8xl lg:text-[11rem]">
           {typeof title === "string"
             ? title.split(" ").map((word, i) => (
                 <span
                   key={i}
-                  className={i % 2 === 1 ? "text-[var(--brand-primary)] drop-shadow-sm" : ""}
+                  className={i % 2 === 1 ? "text-[var(--color-brand-primary)] drop-shadow-xl" : ""}
                 >
                   {word}{" "}
                 </span>
@@ -149,31 +113,31 @@ const UniversalHero = ({
             : title}
         </h1>
 
-        {/* --- SUBTITLE: Professional Insight --- */}
+        {/* --- SUBTITLE: Professional Narrative --- */}
         <div
           className={cn(
-            "text-text-secondary mb-14 max-w-3xl text-xl leading-relaxed font-medium opacity-90 md:text-2xl",
-            align === "center" ? "mx-auto" : "mr-auto",
+            "mb-20 max-w-4xl text-2xl leading-[1.4] font-medium text-[var(--text-secondary)] opacity-90 md:text-4xl",
+            align === "center" ? "mx-auto" : "mr-auto text-left",
           )}
         >
           {description}
         </div>
 
-        {/* --- ACTION SEQUENCE: High-Conversion Flow --- */}
+        {/* --- ACTION SEQUENCE: Strategic Conversion --- */}
         <div
           className={cn(
-            "flex flex-wrap gap-6",
+            "flex flex-wrap gap-10",
             align === "center" ? "justify-center" : "justify-start",
           )}
         >
           <Button
             size="lg"
             href={primaryHref || SITE_CONFIG.links.line}
-            className="shadow-glow-md h-16 rounded-2xl px-10 text-[12px] font-bold tracking-widest uppercase"
+            className="shadow-glow-lg h-24 rounded-[2.5rem] border-none bg-[var(--color-brand-primary)] px-16 text-sm font-black tracking-[0.3em] text-white uppercase transition-all hover:scale-105 active:scale-95"
           >
-            <span className="flex items-center gap-2">
-              {primaryActionLabel || "Start Your Project"}
-              <IconRenderer name="ArrowRight" size={20} />
+            <span className="flex items-center gap-4">
+              {primaryActionLabel || "Contact Specialist"}
+              <IconRenderer name="ArrowUpRight" size={28} />
             </span>
           </Button>
 
@@ -181,9 +145,9 @@ const UniversalHero = ({
             <Button
               variant="outline"
               href={secondaryHref || "#"}
-              className="border-border hover:border-brand-primary/60 h-16 rounded-2xl px-10 text-[12px] font-bold tracking-widest uppercase backdrop-blur-sm"
+              className="h-24 rounded-[2.5rem] border-[var(--border)] px-16 text-sm font-black tracking-[0.3em] text-[var(--text-primary)] uppercase backdrop-blur-3xl transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)]"
             >
-              {secondaryActionLabel || data?.secondaryAction?.label || "View Solutions"}
+              {secondaryActionLabel || data?.secondaryAction?.label || "Explore Solutions"}
             </Button>
           )}
         </div>

@@ -66,13 +66,13 @@ export const MarketIntelligence = ({
             <div className="space-y-8">
               <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
                 <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-                <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-                  Market_Saturation_Matrix.v18
+                <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+                  วิเคราะห์การแข่งขันในพื้นที่
                 </span>
               </div>
 
               <h3 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl">
-                Competitive <br /> <span className="text-brand-primary">Hardened.</span>
+                วิเคราะห์ <br /> <span className="text-brand-primary">คู่แข่ง.</span>
               </h3>
             </div>
 
@@ -87,8 +87,8 @@ export const MarketIntelligence = ({
             {/* Performance HUD */}
             <div className="bg-surface-card border-border/10 rounded-card shadow-pro-xl relative overflow-hidden border p-8">
               <div className="mb-6 flex items-end justify-between">
-                <span className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase opacity-40">
-                  // Displacement_Index
+                <span className="text-text-muted font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
+                  ระดับการแข่งขันในตลาด
                 </span>
                 <div className="text-right">
                   <p className="text-brand-primary text-4xl leading-none font-black tracking-tighter uppercase italic">
@@ -104,10 +104,10 @@ export const MarketIntelligence = ({
                 />
               </div>
 
-              <div className="text-text-primary/20 mt-6 flex justify-between font-mono text-[8px] font-bold tracking-widest uppercase">
-                <span>Baseline</span>
-                <span>Saturation_Node</span>
-                <span>Optimized</span>
+              <div className="text-text-primary/40 mt-6 flex justify-between font-sans text-[10px] font-bold tracking-widest uppercase">
+                <span>เริ่มต้น</span>
+                <span>เกณฑ์เฉลี่ย</span>
+                <span>เป้าหมาย</span>
               </div>
             </div>
           </div>
@@ -117,11 +117,11 @@ export const MarketIntelligence = ({
             <div className="grid grid-cols-1 gap-4">
               <p
                 className={cn(
-                  "mb-4 font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-30 transition-all duration-1000",
-                  visible ? "translate-y-0 opacity-30" : "translate-y-4 opacity-0",
+                  "mb-4 font-sans text-[11px] font-bold tracking-widest uppercase opacity-80 transition-all duration-1000",
+                  visible ? "translate-y-0 opacity-80" : "translate-y-4 opacity-0",
                 )}
               >
-                // High_Intensity_Focus_Nodes
+                อุตสาหกรรมที่น่าจับตามอง
               </p>
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

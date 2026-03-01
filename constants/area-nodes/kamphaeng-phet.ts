@@ -1,19 +1,14 @@
-/**
- * [SERVICE_NODE]: KAMPHAENG_PHET_GOV_HUB v18.0.6 (DYNAMIC_LINKED)
- * [STRATEGY]: Local Authority | Government Trust | Dynamic Inheritance
- * [MARKET]: Kamphaeng Phet Government & Local Business
- */
-
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const kamphaengPhetNode: AreaNode = {
+export const kamphaengPhetNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "kamphaeng-phet",
+  tier: 2,
   province: "กำแพงเพชร",
   region: "North",
-  templateSlug: "local-authority", // เชื่อมโยง Logic การ Render
+  priority: 96,
 
   title: "รับทำเว็บไซต์ กำแพงเพชร | ออกแบบระบบเว็บไซต์หน่วยงานราชการ และธุรกิจท้องถิ่น",
   description:
@@ -23,18 +18,25 @@ export const kamphaengPhetNode: AreaNode = {
     "การพัฒนาเว็บไซต์สำหรับหน่วยงานท้องถิ่นในกำแพงเพชร ต้องอาศัยความเข้าใจในระเบียบราชการและพฤติกรรมการใช้งานของประชาชน เว็บไซต์ที่ดีต้องเป็น 'ศาลากลางดิจิทัล' ที่ทำงานได้ตลอด 24 ชั่วโมง " +
     "นายเอ็มซ่ามากส์ พร้อมให้บริการออกแบบและพัฒนาเว็บไซต์ที่ถูกต้องตามระเบียบภาครัฐ และช่วยธุรกิจท้องถิ่นให้เติบโตด้วย Local SEO",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ กำแพงเพชร ออกแบบเว็บ อบต. เทศบาล และธุรกิจท้องถิ่น - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กำแพงเพชร สำหรับหน่วยงานราชการ อบต. เทศบาล และธุรกิจ SME รองรับมาตรฐานความปลอดภัยระดับสูง ระบบ e-Service และ ITA",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/kamphaeng-phet-node.webp",
+  coordinates: { lat: 16.4828, lng: 99.5227 },
+  districts: [
+    "เมืองกำแพงเพชร",
+    "คลองขลุง",
+    "ขาณุวรลักษบุรี",
+    "พรานกระต่าย",
+    "ไทรงาม",
+    "ลานกระบือ",
+    "พรานกระต่าย",
+  ],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // รับค่าโดยตรงจาก localAuthorityService เพื่อความเป็นมาตรฐานเดียวกัน
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Localized Benefits ---
+  benefits: [
+    "Public Accessibility: ออกแบบโครงสร้างตามหลักสากล (WCAG) เพื่อให้ประชาชนทุกช่วงวัยใช้งานได้ง่าย",
+    "Compliance Verified: รองรับมาตรฐานการประเมิน ITA และระเบียบการเปิดเผยข้อมูลภาครัฐ (OIT) ครบถ้วน",
+    "Local Growth: ช่วยธุรกิจท้องถิ่นและวิสาหกิจชุมชนให้ค้นหาเจอใน Google Maps เพิ่มโอกาสการขาย",
+  ],
 
   marketSaturation: 38,
 
@@ -57,20 +59,6 @@ export const kamphaengPhetNode: AreaNode = {
       description:
         "วางรากฐานการค้นหาเพื่อสนับสนุนแหล่งท่องเที่ยวทางประวัติศาสตร์และสินค้า OTOP ของจังหวัด",
     },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/kamphaeng-phet-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Government Integrity: มาตรฐานเว็บไซต์ที่ได้รับการยอมรับจากหน่วยงานท้องถิ่นและวิสาหกิจชุมชนในกำแพงเพชร",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Public Accessibility: ออกแบบโครงสร้างตามหลักสากล (WCAG) เพื่อให้ประชาชนทุกช่วงวัยใช้งานได้ง่าย",
-    "Compliance Verified: รองรับมาตรฐานการประเมิน ITA และระเบียบการเปิดเผยข้อมูลภาครัฐ (OIT) ครบถ้วน",
-    "Local Growth: ช่วยธุรกิจท้องถิ่นและวิสาหกิจชุมชนให้ค้นหาเจอใน Google Maps เพิ่มโอกาสการขาย",
   ],
 
   // --- Core Features (Gov & Local Specific) ---
@@ -108,10 +96,6 @@ export const kamphaengPhetNode: AreaNode = {
       answer:
         "รองรับครับ เราออกแบบตัวอักษรให้อ่านง่ายและเมนูไม่ซับซ้อน ตามหลัก Universal Design ครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
-    ),
   ],
 
   // --- Context Data ---
@@ -139,7 +123,7 @@ export const kamphaengPhetNode: AreaNode = {
       localClient: "วิสาหกิจชุมชนแปรรูปกล้วยไข่",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${localAuthorityService.price} บาท`,
       timeline: "20-30 วัน",
     },
     localSuccessStory: {
@@ -152,16 +136,28 @@ export const kamphaengPhetNode: AreaNode = {
       "จ้างทำเว็บ คลองขลุง",
       "ออกแบบเว็บ พรานกระต่าย",
     ],
+    promotions: [
+      {
+        title: "Digital Gov Acceleration (Kamphaeng)",
+        description:
+          "สิทธิพิเศษสำหรับหน่วยงาน อปท. รับฟรีบริการจัดทำคู่มือการใช้งานระบบ e-Service และแผนผัง OIT มาตรฐานใหม่มูลค่า 7,500 บาท",
+        discount: "Free Gov Manual & Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/kamphaeng-phet-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 96,
-  districts: ["เมืองกำแพงเพชร", "คลองขลุง", "ขาณุวรลักษบุรี", "พรานกระต่าย", "ไทรงาม", "ลานกระบือ"],
   keywords: [
     "รับทำเว็บไซต์ กำแพงเพชร",
     "ทำเว็บไซต์ อบต กำแพงเพชร",
     "รับทำเว็บราชการ",
     "บริษัทรับทำเว็บไซต์",
   ],
-  coordinates: { lat: 16.4828, lng: 99.5227 },
-};
+});

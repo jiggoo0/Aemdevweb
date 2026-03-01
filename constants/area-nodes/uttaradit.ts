@@ -1,20 +1,14 @@
-/**
- * [SERVICE_NODE]: UTTARADIT_D2C_HUB v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: D2C Empowerment | Agricultural Branding | Dynamic Inheritance
- * [MARKET]: Uttaradit City, Lablae, Phichai (Premium Agro-Trading)
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const uttaraditNode: AreaNode = {
+export const uttaraditNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "uttaradit",
+  tier: 2,
   province: "อุตรดิตถ์",
   region: "North",
-  templateSlug: "local-authority", // ใช้โครงสร้างท้องถิ่นเป็นฐานรองรับ SME/Agro
+  priority: 81,
 
   title: "รับทำเว็บไซต์ อุตรดิตถ์ | เปลี่ยนผลผลิตจากสวนเป็นแบรนด์พรีเมียม ขายตรงไม่ผ่านคนกลาง",
   description:
@@ -26,18 +20,27 @@ export const uttaraditNode: AreaNode = {
     "เราจึงเน้นทำเว็บไซต์ที่ไม่ได้แค่สวยงามพรีเมียม แต่ต้องใช้งานง่ายทั้งคนขายและคนซื้อ มีระบบ Pre-order ที่จัดระเบียบออเดอร์ได้แม่นยำ " +
     "เพื่อให้คุณขายสินค้าได้ราคาเต็มเม็ดเต็มหน่วย และสร้างฐานลูกค้าขาประจำที่จะอุดหนุนแบรนด์ของคุณอย่างยั่งยืนครับ",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ อุตรดิตถ์ ออกแบบเว็บขายทุเรียนลับแลและสินค้า SME - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์อุตรดิตถ์ ครบวงจร สำหรับสวนผลไม้และร้านค้าออนไลน์ เน้นระบบสั่งซื้อ D2C ที่สะดวก รวดเร็ว ช่วยให้แบรนด์เกษตรพรีเมียมติดหน้าแรก Google",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/uttaradit-node.webp",
+  coordinates: { lat: 17.6256, lng: 100.0993 },
+  districts: [
+    "เมืองอุตรดิตถ์",
+    "ลับแล",
+    "พิชัย",
+    "ตรอน",
+    "ทองแสนขัน",
+    "ฟากท่า",
+    "น้ำปาด",
+    "ท่าปลา",
+    "บ้านโคก",
+  ],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานความน่าเชื่อถือเดียวกัน (Emerald/Civil Theme)
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Localized Benefits ---
+  benefits: [
+    "Direct-to-Consumer Mastery: การมีหน้าเว็บขายตรงช่วยให้คุณกำหนดราคาเองได้ตามคุณภาพจริง และรับกำไรเต็มเม็ดเต็มหน่วยโดยไม่ต้องผ่านคนกลาง",
+    "Order Management System: เปลี่ยนจากการจดกระดาษเป็นระบบหลังบ้านที่สรุปยอดสั่งจอง ชื่อที่อยู่ และหลักฐานการโอนเงินให้คุณดูง่ายในที่เดียว",
+    "Premium Branding: สร้างภาพลักษณ์ให้สินค้าเกษตรดูแพงและมีสตอรี่ เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากทั่วประเทศ",
+  ],
 
   marketSaturation: 35,
 
@@ -60,20 +63,6 @@ export const uttaraditNode: AreaNode = {
       description:
         "ทำ Local Business Schema และ SEO เจาะจงผลไม้ฤดูกาลเพื่อให้สวนของคุณถูกค้นพบโดยตรง",
     },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/uttaradit-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "D2C Pioneer: ผู้อยู่เบื้องหลังระบบสั่งจองผลไม้พรีเมียมและเว็บไซต์วิสาหกิจชุมชนในจังหวัดอุตรดิตถ์",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "Direct-to-Consumer Mastery: การมีหน้าเว็บขายตรงช่วยให้คุณกำหนดราคาเองได้ตามคุณภาพจริง และรับกำไรเต็มเม็ดเต็มหน่วยโดยไม่ต้องผ่านคนกลาง",
-    "Order Management System: เปลี่ยนจากการจดกระดาษเป็นระบบหลังบ้านที่สรุปยอดสั่งจอง ชื่อที่อยู่ และหลักฐานการโอนเงินให้คุณดูง่ายในที่เดียว",
-    "Premium Branding: สร้างภาพลักษณ์ให้สินค้าเกษตรดูแพงและมีสตอรี่ เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงจากทั่วประเทศ",
   ],
 
   // --- Core Features (Agro-D2C Specific) ---
@@ -115,10 +104,6 @@ export const uttaraditNode: AreaNode = {
       answer:
         "ยินดีครับ! ผมชอบลงพื้นที่จริงเพื่อให้เข้าใจจุดเด่นของแต่ละสวน นัดคุยกันที่สวนหรือร้านกาแฟในอุตรดิตถ์ได้เลยครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("Google Maps") || f.question.includes("ดูแลหลังการขาย"),
-    ),
   ],
 
   // --- Context Data ---
@@ -147,13 +132,13 @@ export const uttaraditNode: AreaNode = {
       localClient: "สวนทุเรียนพรีเมียมชื่อดัง ย่านลับแล",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${localAuthorityService.price} บาท`,
       timeline: "7-14 วัน",
     },
     localSuccessStory: {
       title: "Case Study: สวนลับแลยุคใหม่",
       result:
-        "เปลี่ยนมาใช้ระบบสั่งจองออนไลน์ 100% ลดเวลาตอบแชทลง 70% และเพิ่มยอดขายตรงสู่กรุงเทพฯ ได้มากกว่า 3 เท่าในฤดูกาลเดียว",
+        "เปลี่ยนมาใช้ระบบสั่งจองออนไลน์ 100% ลดเวลาตอบแชทลง 70% และเพิ่มยอดขายตรงสู่กรุงเทพฯ ได้มากกว่า 3 แถมในฤดูกาลเดียว",
     },
     hyperLocalKeywords: [
       "รับทำเว็บขายทุเรียน ลับแล",
@@ -161,21 +146,24 @@ export const uttaraditNode: AreaNode = {
       "คนทำเว็บ SEO อุตรดิตถ์",
       "ระบบสั่งจองผลไม้ออนไลน์",
     ],
+    promotions: [
+      {
+        title: "Lablae D2C Premium Offer",
+        description:
+          "สิทธิพิเศษสำหรับเจ้าของสวนทุเรียนและ SME อุตรดิตถ์ รับฟรีบริการปักหมุดสวนใน Google Maps และระบบจองสินค้าฤดูกาลมูลค่า 5,000 บาท",
+        discount: "Free Maps & Booking Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/uttaradit-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 81,
-  districts: [
-    "เมืองอุตรดิตถ์",
-    "ลับแล",
-    "พิชัย",
-    "ตรอน",
-    "ทองแสนขัน",
-    "ฟากท่า",
-    "น้ำปาด",
-    "ท่าปลา",
-    "บ้านโคก",
-  ],
   keywords: [
     "รับทำเว็บไซต์ อุตรดิตถ์",
     "จ้างทำเว็บไซต์",
@@ -183,5 +171,4 @@ export const uttaraditNode: AreaNode = {
     "ออกแบบเว็บไซต์ขายของ",
     "รับทำ SEO อุตรดิตถ์",
   ],
-  coordinates: { lat: 17.6256, lng: 100.0993 },
-};
+});

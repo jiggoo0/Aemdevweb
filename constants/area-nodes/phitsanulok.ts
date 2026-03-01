@@ -1,43 +1,38 @@
-/**
- * [SERVICE_NODE]: PHITSANULOK_SERVICE_HUB v18.0.2 (STRICT_SYNC)
- * [STRATEGY]: Regional Authority | Medical & Service SEO | Dynamic Inheritance
- * [MARKET]: Phitsanulok City, Indochina Intersection (Service & Healthcare Hub)
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Corporate Hub Standard)
+import { corporateService } from "@/constants/services/corporate";
 
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
-import { localAuthorityService } from "@/constants/services/local-authority";
-
-export const phitsanulokNode: AreaNode = {
+export const phitsanulokNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "phitsanulok",
+  tier: 2,
   province: "พิษณุโลก",
   region: "North",
-  templateSlug: "local-authority", // ยึดตาม Template หลักที่เน้นความน่าเชื่อถือและมาตรฐานราชการ/วิชาชีพ
 
-  title: "รับทำเว็บไซต์ พิษณุโลก | ออกแบบเว็บคลินิกและธุรกิจบริการ ศูนย์กลางภาคเหนือตอนล่าง",
+  title:
+    "รับทำเว็บไซต์ พิษณุโลก | Digital Architecture สำหรับธุรกิจและบริการ ศูนย์กลางภาคเหนือตอนล่าง",
   description:
-    "ยกระดับธุรกิจบริการและการแพทย์สู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือ โหลดไว และติดอันดับ Google ในฐานะผู้นำของภูมิภาคสี่แยกอินโดจีน",
+    "ยกระดับธุรกิจและองค์กรสู่มาตรฐานสากล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือ โหลดไว และติดอันดับ Google ในฐานะผู้นำของภูมิภาคสี่แยกอินโดจีน",
 
   longDescription:
     "พิษณุโลกคือหัวใจสำคัญของภาคเหนือตอนล่างครับ ไม่ว่าคุณจะบริหารคลินิกเฉพาะทาง ทำธุรกิจขนส่งระดับภูมิภาค หรือสถาบันการศึกษา เว็บไซต์ของคุณต้องสะท้อนถึง 'มาตรฐานสูงสุด' " +
     "นายเอ็มซ่ามากส์ เข้าใจดีว่าความเชื่อถือคือหัวใจของธุรกิจในเมืองนี้ เราจึงเน้นออกแบบเว็บไซต์ที่ดูสะอาดตา มั่นคง และเป็นมืออาชีพ เพื่อให้ลูกค้าหรือคนไข้ที่ค้นหาบริการของคุณใน Google " +
     "มั่นใจในศักยภาพและตัดสินใจเลือกคุณเป็นอันดับแรก เราพร้อมช่วยวางรากฐานดิจิทัลที่แข็งแรง เพื่อให้สมกับความเป็นเมืองศูนย์กลางเศรษฐกิจและบริการของพิษณุโลกครับ",
 
-  // --- SEO Metadata ---
-  seoTitle:
-    "รับทำเว็บไซต์ พิษณุโลก ออกแบบเว็บคลินิกและธุรกิจโลจิสติกส์ ติดหน้าแรก Google - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์พิษณุโลก ครบวงจร สำหรับคลินิก โรงแรม และธุรกิจบริการ เน้นความน่าเชื่อถือระดับมืออาชีพ รองรับ SEO พื้นที่ภาคเหนือตอนล่าง เพื่อครองความเป็นผู้นำในภูมิภาค",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService เพื่อมาตรฐานเดียวกันทั้งระบบ (Emerald/Civil Theme)
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Visual & Location ---
+  heroImage: "/images/areas/phitsanulok-node.webp",
+  coordinates: { lat: 16.8211, lng: 100.2659 },
+  districts: [
+    "เมืองพิษณุโลก",
+    "พรหมพิราม",
+    "บางระกำ",
+    "วังทอง",
+    "นครไทย",
+    "วัดโบสถ์",
+    "บางกระทุ่ม",
+    "ชาติตระการ",
+    "เนินมะปราง",
+  ],
 
   marketSaturation: 48,
 
@@ -61,13 +56,6 @@ export const phitsanulokNode: AreaNode = {
         "ปักหมุด Google Maps และทำ Local SEO ครอบคลุมจุดตัดสี่แยกอินโดจีนเพื่อชิงความเป็นผู้นำในภูมิภาค",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/phitsanulok-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Regional Hub Trust: เบื้องหลังเว็บไซต์คลินิกเฉพาะทางและบริษัทโลจิสติกส์ชั้นนำในพิษณุโลก",
 
   // --- Localized Benefits ---
   benefits: [
@@ -120,10 +108,6 @@ export const phitsanulokNode: AreaNode = {
       answer:
         "มีครับ เราสามารถทำตั้งแต่ระบบฟอร์มนัดหมายง่ายๆ ไปจนถึงระบบปฏิทินเช็คคิวว่าง เพื่อให้เจ้าหน้าที่หน้าเคาน์เตอร์ทำงานได้สะดวกขึ้นครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("ค่าใช้จ่าย") || f.question.includes("Google Maps"),
-    ),
   ],
 
   // --- Context Data ---
@@ -152,7 +136,7 @@ export const phitsanulokNode: AreaNode = {
       localClient: "คลินิกทันตกรรมพรีเมียม ในตัวเมืองพิษณุโลก",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${corporateService.price} บาท`,
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
@@ -168,19 +152,6 @@ export const phitsanulokNode: AreaNode = {
     ],
   },
 
-  // --- System Metadata ---
-  priority: 92,
-  districts: [
-    "เมืองพิษณุโลก",
-    "พรหมพิราม",
-    "บางระกำ",
-    "วังทอง",
-    "นครไทย",
-    "วัดโบสถ์",
-    "บางกระทุ่ม",
-    "ชาติตระการ",
-    "เนินมะปราง",
-  ],
   keywords: [
     "รับทำเว็บไซต์ พิษณุโลก",
     "จ้างทำเว็บไซต์",
@@ -188,5 +159,4 @@ export const phitsanulokNode: AreaNode = {
     "ออกแบบเว็บไซต์บริษัท",
     "รับทำ SEO พิษณุโลก",
   ],
-  coordinates: { lat: 16.8211, lng: 100.2659 },
-};
+});

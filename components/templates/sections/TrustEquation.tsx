@@ -32,17 +32,20 @@ export const TrustEquation = memo(() => {
   ];
 
   return (
-    <section ref={ref} className="bg-surface-main relative overflow-hidden py-32 md:py-48">
+    <section
+      ref={ref}
+      className="relative overflow-hidden bg-[var(--surface-main)] py-32 text-[var(--text-primary)] md:py-48"
+    >
       {/* 01. GRID LAYER */}
-      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.03]" />
+      <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.05]" />
 
       <div className="relative z-10 container mx-auto px-4 text-center md:px-8">
         <div className="mb-24 space-y-4">
-          <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
+          <span className="font-mono text-[10px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase">
             Authority_Calculus_v18.4
           </span>
-          <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-7xl">
-            The <span className="text-brand-primary">Trust</span> Equation.
+          <h2 className="text-4xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-7xl">
+            The <span className="text-[var(--color-brand-primary)]">Trust</span> Equation.
           </h2>
         </div>
 
@@ -51,23 +54,23 @@ export const TrustEquation = memo(() => {
             <React.Fragment key={item.label}>
               <div
                 className={cn(
-                  "group border-border/50 bg-surface-card shadow-pro-sm relative w-full max-w-[280px] rounded-2xl border p-8 transition-all duration-1000",
+                  "group shadow-pro-sm relative w-full max-w-[280px] rounded-2xl border border-[var(--border)] bg-[var(--surface-card)] p-8 transition-all duration-1000",
                   visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
                 )}
                 style={{ transitionDelay: `${idx * 200}ms` }}
               >
                 <div
                   className={cn(
-                    "bg-surface-offset mb-6 flex h-14 w-14 items-center justify-center rounded-2xl transition-all group-hover:scale-110",
+                    "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--surface-offset)] transition-all group-hover:scale-110",
                     item.color,
                   )}
                 >
                   <IconRenderer name={item.icon as IconName} size={32} />
                 </div>
-                <p className="text-text-muted mb-2 font-mono text-[8px] font-black tracking-widest uppercase opacity-40">
+                <p className="mb-2 font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase">
                   {item.label}
                 </p>
-                <h4 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic">
+                <h4 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
                   {item.value}
                 </h4>
               </div>
@@ -75,7 +78,7 @@ export const TrustEquation = memo(() => {
               {idx < 2 && (
                 <div
                   className={cn(
-                    "text-text-muted text-4xl font-black italic transition-all delay-500 duration-1000",
+                    "text-4xl font-black text-[var(--text-muted)] italic transition-all delay-500 duration-1000",
                     visible ? "scale-100 opacity-20" : "scale-0 opacity-0",
                   )}
                 >
@@ -87,7 +90,7 @@ export const TrustEquation = memo(() => {
 
           <div
             className={cn(
-              "text-text-muted text-4xl font-black italic transition-all delay-700 duration-1000",
+              "text-4xl font-black text-[var(--text-muted)] italic transition-all delay-700 duration-1000",
               visible ? "scale-100 opacity-20" : "scale-0 opacity-0",
             )}
           >
@@ -97,15 +100,15 @@ export const TrustEquation = memo(() => {
           {/* Result Node */}
           <div
             className={cn(
-              "group border-brand-primary/40 bg-brand-primary shadow-glow relative w-full max-w-[320px] rounded-2xl border p-10 transition-all delay-1000 duration-1000",
+              "group shadow-glow relative w-full max-w-[320px] rounded-2xl border border-[var(--color-brand-primary)]/40 bg-[var(--color-brand-primary)] p-10 transition-all delay-1000 duration-1000",
               visible ? "scale-100 opacity-100" : "scale-90 opacity-0",
             )}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
-            <span className="mb-4 block font-mono text-[10px] font-black tracking-widest text-white/40 uppercase">
+            <span className="mb-4 block font-mono text-[10px] font-black tracking-widest text-white/60 uppercase">
               // Final_Result
             </span>
-            <h4 className="text-surface-main font-[black] text-5xl tracking-tighter uppercase italic md:text-6xl">
+            <h4 className="text-5xl font-black tracking-tighter text-white uppercase italic drop-shadow-md md:text-6xl">
               AUTHORITY.
             </h4>
             <div className="mt-8 h-1 w-full overflow-hidden rounded-full bg-white/20">

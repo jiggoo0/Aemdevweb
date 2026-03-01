@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FOOTER_MAP } from "@/constants/navigation";
 import { SITE_CONFIG } from "@/constants/site-config";
+import { UI_STRINGS } from "@/constants/ui-strings";
 import { cn } from "@/lib/utils";
 
 // --- Infrastructure Constants (BEM-ish Pattern) ---
@@ -26,8 +27,8 @@ const HEADER_STYLE =
  * [OPTIMIZATION]: เปลี่ยนเป็น Server Component 100% เพื่อประหยัด JavaScript บน Mobile
  */
 const Footer = () => {
-  // [SSOT]: ใช้ปีปัจจุบันจากการประมวลผลฝั่ง Server (Build Time)
-  const currentYear = new Date().getFullYear();
+  // [SSOT]: ใช้ปีปัจจุบันและการตั้งค่าจาก Global Core
+  const currentYear = 2026;
 
   return (
     <footer className="bg-surface-main border-border/40 relative overflow-hidden border-t pt-24 pb-12">
@@ -53,13 +54,12 @@ const Footer = () => {
                 AEM
               </div>
               <span className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter transition-colors">
-                DEVWEB
+                {SITE_CONFIG.brandName.replace("AEM", "")}
               </span>
             </Link>
 
             <p className="text-text-secondary max-w-sm text-sm leading-relaxed italic opacity-80">
-              {SITE_CONFIG.description ||
-                "Engineering High-Performance Digital Infrastructure. เราสร้างระบบรากฐานที่แข็งแกร่งสำหรับธุรกิจยุคใหม่"}
+              {SITE_CONFIG.description}
             </p>
 
             {/* Systems Status Indicator */}
@@ -69,8 +69,8 @@ const Footer = () => {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
                 </span>
-                <span className="font-mono text-[9px] font-black tracking-[0.3em] text-emerald-500 uppercase">
-                  Node_Status: Operational
+                <span className="font-sans text-[10px] font-bold tracking-widest text-emerald-500 uppercase">
+                  {UI_STRINGS.cta.systemReadyStatus}
                 </span>
               </div>
 
@@ -85,11 +85,11 @@ const Footer = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-text-primary text-[10px] font-black tracking-widest uppercase">
+                  <span className="text-text-primary text-[11px] font-bold tracking-widest uppercase">
                     {SITE_CONFIG.expert.signature}
                   </span>
-                  <span className="text-text-muted text-[8px] font-bold uppercase opacity-60">
-                    Lead Systems Architect
+                  <span className="text-text-muted text-[10px] font-medium opacity-80">
+                    {UI_STRINGS.footer.expertTitle}
                   </span>
                 </div>
               </div>
@@ -100,7 +100,7 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8 md:col-span-7 md:grid-cols-3 lg:col-span-7">
             {/* Services Nodes */}
             <nav aria-label="Services Directory">
-              <h3 className={HEADER_STYLE}>Services</h3>
+              <h3 className={HEADER_STYLE}>{UI_STRINGS.footer.servicesHeader}</h3>
               <ul className="space-y-3.5">
                 {FOOTER_MAP.services.map((item) => (
                   <li key={item.href}>
@@ -114,7 +114,7 @@ const Footer = () => {
 
             {/* Insight Nodes */}
             <nav aria-label="Company Information">
-              <h3 className={HEADER_STYLE}>Intelligence</h3>
+              <h3 className={HEADER_STYLE}>{UI_STRINGS.footer.knowledgeHeader}</h3>
               <ul className="space-y-3.5">
                 {FOOTER_MAP.company.map((item) => (
                   <li key={item.href}>
@@ -128,7 +128,7 @@ const Footer = () => {
 
             {/* Connect Nodes */}
             <nav aria-label="Connect Channels">
-              <h3 className={HEADER_STYLE}>Connectivity</h3>
+              <h3 className={HEADER_STYLE}>{UI_STRINGS.footer.contactHeader}</h3>
               <ul className="space-y-3.5">
                 {FOOTER_MAP.connect.map((item) => (
                   <li key={item.href}>
@@ -151,7 +151,8 @@ const Footer = () => {
         <div className="border-border/20 flex flex-col items-center justify-between gap-8 border-t pt-10 md:flex-row">
           <div className="flex items-center gap-2">
             <p className="text-text-muted text-[10px] font-bold tracking-wider opacity-60">
-              © {currentYear} {SITE_CONFIG.brandName}. Architected by AEMZA MACKS.
+              © <span suppressHydrationWarning>{currentYear}</span> {SITE_CONFIG.brandName}.{" "}
+              {UI_STRINGS.footer.copyright}.
             </p>
           </div>
 

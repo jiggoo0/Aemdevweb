@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: LOPBURI_MILITARY_GOV v18.0.1
- * [STRATEGY]: Gov Trust | Historical Tourism | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const lopburiNode: AreaNode = {
+export const lopburiNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "lopburi",
+  tier: 2,
   province: "ลพบุรี",
   region: "Central",
-  templateSlug: "local-authority",
+  priority: 87,
+
   title: "รับทำเว็บไซต์ ลพบุรี | ระบบสารสนเทศสำหรับหน่วยงานและธุรกิจเมืองประวัติศาสตร์",
   description:
     "บริการจัดทำเว็บไซต์หน่วยงานราชการและธุรกิจในลพบุรี มาตรฐาน ITA และความปลอดภัยข้อมูลสูง พร้อมรองรับการท่องเที่ยวเมืองเก่า",
-  seoTitle: "รับทำเว็บไซต์ ลพบุรี ออกแบบเว็บราชการ ธุรกิจท้องถิ่น - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ลพบุรี ครบวงจร สำหรับหน่วยงาน อบต. เทศบาล และธุรกิจ SME มาตรฐาน ITA และความปลอดภัยระดับสูง",
 
   longDescription:
     "ลพบุรี เมืองแห่งประวัติศาสตร์และศูนย์กลางยุทธศาสตร์ความมั่นคงที่กำลังเปลี่ยนผ่านสู่ดิจิทัล " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับหน่วยงานราชการและธุรกิจในลพบุรีด้วยเว็บไซต์ที่เป็นเลิศทั้งในด้านความปลอดภัยและมาตรฐาน ITA " +
     "เราออกแบบระบบสารสนเทศที่ตอบโจทย์ทั้งการบริการประชาชนในเขตทหารและพลเรือน " +
     "ควบคู่ไปกับการทำ Local SEO เพื่อดันแหล่งท่องเที่ยวเมืองเก่าให้โดดเด่นบนหน้าแรก Google ต้อนรับนักท่องเที่ยวจากทั่วไทย",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/lopburi-node.webp",
+  coordinates: { lat: 14.7995, lng: 100.6534 },
+  districts: [
+    "เมืองลพบุรี",
+    "โคกสำโรง",
+    "ชัยบาดาล",
+    "พัฒนานิคม",
+    "บ้านหมี่",
+    "ท่าวุ้ง",
+    "สระโบสถ์",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const lopburiNode: AreaNode = {
     "Heritage Digital Authority: วางรากฐานการค้นหาเพื่อดึงดูด Traffic กลุ่มนักท่องเที่ยวเชิงประวัติศาสตร์และวัฒนธรรม",
   ],
 
-  priority: 87,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/lopburi-node.webp",
-  coordinates: { lat: 14.7995, lng: 100.6534 },
   marketSaturation: 40,
   regionalLatency: 15,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +63,8 @@ export const lopburiNode: AreaNode = {
         "ทำ Local SEO ครอบคลุมแหล่งท่องเที่ยวทางประวัติศาสตร์เพื่อดึงดูดนักท่องเที่ยวเข้าสู่พื้นที่",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ลพบุรีเป็นเมืองที่มีทั้งเขตทหาร หน่วยงานราชการ และแหล่งท่องเที่ยวประวัติศาสตร์ เว็บไซต์ต้องเน้นความภูมิฐานและถูกต้อง",
@@ -73,13 +77,42 @@ export const lopburiNode: AreaNode = {
     ],
     painPoints: ["เว็บไซต์ราชการเดิมใช้งานยาก", "ข้อมูลไม่เป็นระเบียบ"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 40,
+      localClient: "หน่วยงานท้องถิ่นในจังหวัดลพบุรี",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: เทศบาลในลพบุรี",
+      result: "ยกระดับการให้บริการประชาชนผ่านเว็บ และผ่านเกณฑ์การประเมิน ITA ระดับ AA",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ลพบุรี",
       "ออกแบบเว็บราชการ ลพบุรี",
       "จ้างทำ SEO ลพบุรี",
       "ทำเว็บ อบต ลพบุรี",
     ],
+    promotions: [
+      {
+        title: "Lopburi Integrity Booster",
+        description:
+          "สิทธิพิเศษสำหรับหน่วยงาน อปท. ในลพบุรี รับฟรีบริการจัดทำแผนผังข้อมูล OIT และระบบแจ้งข่าวสารประชาชนมูลค่า 7,500 บาท",
+        discount: "Free ITA & News Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/lopburi-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองลพบุรี", "โคกสำโรง", "ชัยบาดาล", "พัฒนานิคม", "บ้านหมี่"],
+
   keywords: ["รับทำเว็บไซต์ ลพบุรี", "ทำเว็บราชการ ลพบุรี", "จ้างทำเว็บลพบุรี", "รับทำ SEO ลพบุรี"],
-};
+});

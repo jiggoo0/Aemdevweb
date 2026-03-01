@@ -19,6 +19,7 @@ import { type LayoutProps } from "@/types";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import JsonLd from "@/components/seo/JsonLd";
 import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
+import { constructMetadata } from "@/lib/seo-utils";
 
 // --- 3. Style Engine ---
 import "./globals.css";
@@ -38,61 +39,14 @@ const fontThai = IBM_Plex_Sans_Thai({
   adjustFontFallback: true,
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_CONFIG.siteUrl),
+export const metadata: Metadata = constructMetadata({
   title: {
     default: SITE_CONFIG.project.title,
     template: `%s | ${SITE_CONFIG.brandName}`,
   },
   description: SITE_CONFIG.description,
-  applicationName: SITE_CONFIG.brandName,
-  authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
-  generator: "AEMDEVWEB Engine v18",
-  keywords: [...SITE_CONFIG.keywords],
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-    shortcut: "/favicon-32x32.png",
-  },
-  openGraph: {
-    type: "website",
-    locale: "th_TH",
-    url: SITE_CONFIG.siteUrl,
-    siteName: SITE_CONFIG.brandName,
-    images: [
-      {
-        url: SITE_CONFIG.ogImage,
-        width: 1200,
-        height: 630,
-        alt: SITE_CONFIG.brandName,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_CONFIG.project.title,
-    description: SITE_CONFIG.description,
-    creator: SITE_CONFIG.expert.twitterHandle,
-    images: [SITE_CONFIG.ogImage],
-  },
-  verification: {
-    google: SITE_CONFIG.verification.google,
-    other: {
-      "facebook-domain-verification": SITE_CONFIG.verification.facebook || "",
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-};
+  path: "/",
+});
 
 export const viewport: Viewport = {
   themeColor: [

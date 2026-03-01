@@ -1,28 +1,33 @@
 /**
- * [SYSTEM ENGINE]: UNIFIED_LAYOUT_ENGINE v19.1.0 (PRODUCTION_READY)
- * [STRATEGY]: Shell + Strategy Pattern | Theme Injection | Zero-Flicker
- * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
+ * [SYSTEM ENGINE]: UNIFIED_LAYOUT_ENGINE v20.0.0 (PRODUCTION_STABILIZED)
+ * [STRATEGY]: Shell + Strategy Pattern | Strict Type Integrity | Zero-Flicker
+ * [MAINTAINER]: [CENTRALIZED_IN_SITE_CONFIG]
  */
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { memo } from "react";
+import dynamic from "next/dynamic"; // [PERFORMANCE]: Dynamic Code Splitting
 import { cn, injectThemeVariables } from "@/lib/utils";
 import type { UniversalTemplateProps, BaseTemplateProps, ThemeConfig } from "@/types";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 
 // --- 01. SECTION REGISTRY (Strategy Mode) ---
-import UniversalHero from "./sections/UniversalHero";
-import ImpactStats from "@/components/shared/ImpactStats";
-import { LocalInsight } from "./sections/LocalInsight";
-import TrustBadge from "@/components/shared/TrustBadge";
-import ConversionCTA from "@/components/shared/ConversionCTA";
-import WorkProcess from "@/components/features/landing/WorkProcess";
-import PricingSection from "@/components/features/landing/PricingSection";
-import { RegionalGallery } from "./sections/RegionalGallery";
-import { DynamicFAQ } from "./sections/DynamicFAQ";
-import RegionalNodeHub from "./sections/RegionalNodeHub";
+// [DYNAMIC_IMPORT]: โหลดเฉพาะที่ใช้งานจริงเพื่อลด TBT และ Bundle Size
+const UniversalHero = dynamic(() => import("./sections/UniversalHero"));
+const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"));
+const LocalInsight = dynamic(() =>
+  import("./sections/LocalInsight").then((mod) => mod.LocalInsight),
+);
+const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"));
+const ConversionCTA = dynamic(() => import("@/components/shared/ConversionCTA"));
+const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"));
+const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"));
+const RegionalGallery = dynamic(() =>
+  import("./sections/RegionalGallery").then((mod) => mod.RegionalGallery),
+);
+const DynamicFAQ = dynamic(() => import("./sections/DynamicFAQ").then((mod) => mod.DynamicFAQ));
+const RegionalNodeHub = dynamic(() => import("./sections/RegionalNodeHub"));
 
-// [TYPE_DEFINITION]: รายการ Section ที่รองรับ
+// [TYPE_DEFINITION]: รายการ Section ที่รองรับ (Strict Union)
 type SectionKey =
   | "hero"
   | "stats"
@@ -36,16 +41,16 @@ type SectionKey =
   | "nodes";
 
 const SECTION_MAP: Record<SectionKey, React.ComponentType<BaseTemplateProps>> = {
-  hero: UniversalHero as any,
-  stats: ImpactStats as any,
-  insight: LocalInsight as any,
-  trust: TrustBadge as any,
-  process: WorkProcess as any,
-  pricing: PricingSection as any,
-  gallery: RegionalGallery as any,
-  faq: DynamicFAQ as any,
-  cta: ConversionCTA as any,
-  nodes: RegionalNodeHub as any,
+  hero: UniversalHero,
+  stats: ImpactStats as React.ComponentType<BaseTemplateProps>,
+  insight: LocalInsight,
+  trust: TrustBadge as React.ComponentType<BaseTemplateProps>,
+  process: WorkProcess as React.ComponentType<BaseTemplateProps>,
+  pricing: PricingSection as React.ComponentType<BaseTemplateProps>,
+  gallery: RegionalGallery,
+  faq: DynamicFAQ,
+  cta: ConversionCTA as React.ComponentType<BaseTemplateProps>,
+  nodes: RegionalNodeHub,
 };
 
 type SpacingLevel = "none" | "small" | "medium" | "large" | "specialist";
@@ -90,25 +95,43 @@ const LayoutEngine = ({
     specialist: "gap-y-40 md:gap-y-64",
   };
 
-  // [C] RENDER_STRATEGY: ลำดับการแสดงผล
-  const order = sectionOrder ||
-    (data as any)?.layoutOrder || [
-      "hero",
-      "stats",
-      "insight",
-      "trust",
-      "process",
-      "gallery",
-      "pricing",
-      "faq",
-      "cta",
-    ];
+  // [C] RENDER_STRATEGY: ลำดับการแสดงผลแบบ Context-Aware (เอกลักษณ์และอิสระ)
+  // หากมีการระบุ sectionOrder มาโดยตรง ให้ใช้ตามนั้น (Highest Priority)
+  // หากไม่มี ให้เลือกตามประเภทของโหนด (Area vs Service)
+  const defaultAreaOrder: SectionKey[] = [
+    "hero",
+    "nodes", // [IDENTITY]: โชว์โครงข่ายพื้นที่ทันที
+    "stats",
+    "insight", // [LOCAL]: ข้อมูลเฉพาะพื้นที่
+    "trust",
+    "gallery",
+    "faq",
+    "cta",
+  ];
+
+  const defaultServiceOrder: SectionKey[] = [
+    "hero",
+    "stats", // [AUTHORITY]: โชว์ตัวเลขความสำเร็จระดับมาสเตอร์
+    "process", // [TECHNICAL]: ขั้นตอนการทำงานระดับวิศวกรรม
+    "pricing",
+    "trust",
+    "faq",
+    "cta",
+  ];
+
+  // ตัดสินใจเลือกเลย์เอาต์ที่เหมาะสมที่สุด
+  const isAreaNode = !!data?.province;
+  const order =
+    sectionOrder || data?.layoutOrder || (isAreaNode ? defaultAreaOrder : defaultServiceOrder);
 
   return (
     <div
       className={cn(
-        "bg-surface-main text-text-primary relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden",
-        "isolate touch-pan-y antialiased selection:bg-[var(--brand-primary)]/20",
+        "relative flex min-h-[100dvh] w-full flex-col overflow-x-hidden",
+        "isolate touch-pan-y antialiased selection:bg-[var(--color-brand-primary)]/30",
+        "bg-[var(--surface-main)] text-[var(--text-primary)]",
+        // [VISUAL_IDENTITY]: แยกบรรยากาศผ่าน Class
+        isAreaNode ? "layout-mode-area-local" : "layout-mode-service-master",
         className,
       )}
       style={{ ...dynamicStyles, isolation: "isolate" } as React.CSSProperties}
@@ -118,12 +141,17 @@ const LayoutEngine = ({
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <AmbientBackground
           color={ambientColor}
-          opacity={activeTheme?.mode === "dark" ? 0.15 : 0.08}
+          opacity={activeTheme?.mode === "dark" ? 0.12 : 0.05}
         />
       </div>
 
       {/* --- LAYER 02: CONTENT CORE --- */}
-      <main className={cn("relative z-10 flex w-full flex-auto flex-col", spacingMap[spacing])}>
+      <main
+        className={cn(
+          "relative z-10 flex w-full flex-auto flex-col text-[var(--text-primary)]",
+          spacingMap[spacing],
+        )}
+      >
         {children
           ? children
           : data
@@ -135,7 +163,7 @@ const LayoutEngine = ({
                   <SectionComponent
                     key={`${key}-${index}`}
                     data={data}
-                    {...((data as any).sections?.[key] || {})}
+                    {...(data.sections?.[key as keyof typeof data.sections] || {})}
                   />
                 );
               })

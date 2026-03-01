@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: ROI_ET_COMMERCIAL v18.0.1
- * [STRATEGY]: Strategic Hub | Business Excellence | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const roiEtNode: AreaNode = {
+export const roiEtNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "roi-et",
+  tier: 2,
   province: "ร้อยเอ็ด",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 86,
+
   title: "รับทำเว็บไซต์ ร้อยเอ็ด | พัฒนาเว็บไซต์ธุรกิจและการค้า ศูนย์กลางการขยายตัวแห่งอีสานกลาง",
   description:
     "ยกระดับ SME และหน่วยงานในร้อยเอ็ด ด้วยเว็บไซต์ที่เน้นความเป็นมืออาชีพและระบบจัดการข้อมูลที่ทันสมัยที่สุด",
-  seoTitle: "รับทำเว็บไซต์ ร้อยเอ็ด ออกแบบเว็บธุรกิจ คลินิก หน่วยงาน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ร้อยเอ็ด สำหรับธุรกิจ SME คลินิกความงาม และหน่วยงานท้องถิ่น ดีไซน์ทันสมัย โหลดไว รองรับ SEO พื้นที่ร้อยเอ็ด",
 
   longDescription:
     "ร้อยเอ็ด เมืองศูนย์กลางการค้าที่กำลังเติบโตอย่างก้าวกระโดดด้วยแลนด์มาร์คใหม่อย่าง 'หอโหวต' และความเข้มแข็งของ SME ท้องถิ่น " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจและหน่วยงานในร้อยเอ็ดด้วยเว็บไซต์ที่สะท้อนความเป็นมืออาชีพ (Business Excellence) " +
     "เราออกแบบระบบที่เน้นความเร็วในการโหลดและการใช้งานที่ลื่นไหล เพื่อเปลี่ยนยอดผู้เข้าชมให้กลายเป็นยอดขาย " +
     "พร้อมวางกลยุทธ์ Local SEO เพื่อให้ธุรกิจของคุณเป็นอันดับหนึ่งในใจคนร้อยเอ็ดและจังหวัดใกล้เคียง",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/roi-et-node.webp",
+  coordinates: { lat: 16.054, lng: 103.652 },
+  districts: [
+    "เมืองร้อยเอ็ด",
+    "เสลภูมิ",
+    "โพนทอง",
+    "เกษตรวิสัย",
+    "ธวัชบุรี",
+    "อาจสามารถ",
+    "หนองพอก",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const roiEtNode: AreaNode = {
     "Central Isan SEO Hub: วางรากฐานการค้นหาเพื่อครองพื้นที่ในคีย์เวิร์ดสำคัญของภาคอีสานกลางและพื้นที่เศรษฐกิจร้อยเอ็ด",
   ],
 
-  priority: 86,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/roi-et-node.webp",
-  coordinates: { lat: 16.054, lng: 103.652 },
   marketSaturation: 48,
   regionalLatency: 23,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +63,8 @@ export const roiEtNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ดธุรกิจในร้อยเอ็ดและจังหวัดใกล้เคียงเพื่อครองความเป็นผู้นำ",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ร้อยเอ็ดมีการแข่งขันของธุรกิจบริการและคลินิกสูงขึ้น เว็บไซต์ที่ดูพรีเมียมและน่าเชื่อถือจะสร้างความได้เปรียบ",
@@ -77,18 +81,47 @@ export const roiEtNode: AreaNode = {
       "ต้องการระบบที่ลดภาระการตอบแชทของเซลล์",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 88,
+      localClient: "คลินิกทันตกรรมพรีเมียม ย่านหอโหวต",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: ธุรกิจ SME ร้อยเอ็ด",
+      result: "วางระบบ E-catalog และ SEO ท้องถิ่น ยอดติดต่อสอบถามเพิ่มขึ้น 150% ใน 4 เดือน",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ ร้อยเอ็ด",
       "ออกแบบเว็บคลินิก ร้อยเอ็ด",
       "จ้างทำ SEO ร้อยเอ็ด",
       "ทำเว็บสินค้า SME ร้อยเอ็ด",
     ],
+    promotions: [
+      {
+        title: "Isan Central Growth Offer",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจ SME และคลินิกในร้อยเอ็ด รับฟรีบริการปักหมุด GMB และระบบ Local Schema มูลค่า 7,500 บาท",
+        discount: "Free Local SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/roi-et-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองร้อยเอ็ด", "เสลภูมิ", "โพนทอง", "เกษตรวิสัย", "ธวัชบุรี"],
+
   keywords: [
     "รับทำเว็บไซต์ ร้อยเอ็ด",
     "ทำเว็บคลินิก ร้อยเอ็ด",
     "จ้างทำเว็บร้อยเอ็ด",
     "รับทำ SEO ร้อยเอ็ด",
   ],
-};
+});

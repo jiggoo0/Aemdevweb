@@ -11,6 +11,7 @@ import { hotelResortService } from "@/constants/services/hotel-resort";
 export const tratNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "trat",
+  tier: 2,
   province: "ตราด",
   region: "East",
   priority: 92,

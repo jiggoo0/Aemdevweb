@@ -12,6 +12,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const bangkokNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "bangkok",
+  tier: 2,
   province: "กรุงเทพมหานคร",
   region: "Central",
   priority: 100,
@@ -116,7 +117,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
   regionalLatency: 5,
 
   // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้ากรุงเทพฯ ดูเป็น "เว็บไซต์อิสระ" สำหรับองค์กรใหญ่
-  layoutOrder: ["hero", "stats", "trust", "insight", "process", "pricing", "faq", "cta"],
+  layoutOrder: ["hero", "stats", "process", "insight", "trust", "pricing", "faq", "nodes", "cta"],
   theme: {
     primary: "oklch(55% 0.18 260)", // Deep Enterprise Indigo
     secondary: "oklch(45% 0.15 260)",

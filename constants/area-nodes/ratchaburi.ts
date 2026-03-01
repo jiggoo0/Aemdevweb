@@ -11,6 +11,7 @@ import { catalogService } from "@/constants/services/catalog";
 export const ratchaburiNode = defineAreaNode(catalogService, {
   // --- Basic Identity ---
   slug: "ratchaburi",
+  tier: 2,
   province: "ราชบุรี",
   region: "West",
   priority: 94,

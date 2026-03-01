@@ -37,9 +37,9 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
       href={`/areas/${safeSlug}`}
       aria-label={`ดูรายละเอียดบริการรับทำเว็บไซต์ในพื้นที่ ${displayTitle}`}
       className={cn(
-        "group rounded-section relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden border transition-[transform,box-shadow,border-color,background-color] duration-700 ease-[0.16,1,0.3,1]",
-        "border-border bg-surface-card shadow-pro-sm",
-        "hover:border-brand-primary/40 hover:shadow-glow-lg hover:-translate-y-2",
+        "group rounded-section relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "shadow-pro-sm border-[var(--border)] bg-[var(--surface-card)]",
+        "hover:shadow-glow-lg hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
         "transform-gpu will-change-transform",
         className,
       )}
@@ -56,27 +56,27 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           className="object-cover opacity-60 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-30"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
-        <div className="from-surface-main via-surface-main/80 absolute inset-0 z-10 bg-gradient-to-t to-transparent" />
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-main)] via-[var(--surface-main)]/80 to-transparent" />
         <div
-          className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.04] mix-blend-overlay"
+          className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.05] mix-blend-overlay"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         />
       </div>
 
       <div className="relative z-30 flex flex-1 flex-col justify-between p-8 md:p-10">
         <header className="flex items-start justify-between">
-          <div className="border-border bg-surface-offset/80 text-brand-primary group-hover:bg-brand-primary group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-xl transition-all duration-500 group-hover:rotate-[15deg] group-hover:text-white">
+          <div className="group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)]/80 text-[var(--color-brand-primary)] backdrop-blur-xl transition-all duration-500 group-hover:rotate-[15deg] group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
             <IconRenderer name="MapPin" size={20} strokeWidth={2.5} />
           </div>
 
           <div className="flex flex-col items-end gap-2">
-            <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-60">
+            <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-60">
               {safeSlug.slice(0, 3).toUpperCase()}_NODE
             </span>
 
             {socialProof && (
-              <div className="border-brand-primary/20 bg-brand-primary/5 group-hover:border-brand-primary/40 group-hover:bg-brand-primary/10 flex items-center gap-1.5 rounded-full border px-3 py-1 backdrop-blur-md transition-colors">
-                <div className="text-brand-primary flex">
+              <div className="flex items-center gap-1.5 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-3 py-1 backdrop-blur-md transition-colors group-hover:border-[var(--color-brand-primary)]/40 group-hover:bg-[var(--color-brand-primary)]/10">
+                <div className="flex text-[var(--color-brand-primary)]">
                   {[...Array(5)].map((_, i) => (
                     <IconRenderer
                       key={`star-${i}`}
@@ -88,7 +88,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
                     />
                   ))}
                 </div>
-                <span className="text-brand-primary font-mono text-[8px] font-black">
+                <span className="font-mono text-[8px] font-black text-[var(--color-brand-primary)]">
                   {socialProof.rating}
                 </span>
               </div>
@@ -98,10 +98,10 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
 
         <section className="mt-auto space-y-6">
           <div className="space-y-3">
-            <h3 className="text-text-primary group-hover:text-brand-primary text-4xl font-black tracking-tighter uppercase italic transition-colors md:text-5xl">
+            <h3 className="text-4xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--color-brand-primary)] md:text-5xl">
               {displayTitle}
             </h3>
-            <div className="bg-brand-primary/20 group-hover:bg-brand-primary h-1 w-10 rounded-full transition-all duration-700 group-hover:w-full" />
+            <div className="h-1 w-10 rounded-full bg-[var(--color-brand-primary)]/20 transition-all duration-700 group-hover:w-full group-hover:bg-[var(--color-brand-primary)]" />
           </div>
 
           <div className="space-y-4">
@@ -110,7 +110,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
                 {districts.slice(0, 2).map((d) => (
                   <span
                     key={d}
-                    className="border-border bg-surface-card/40 text-text-secondary group-hover:border-brand-primary/20 rounded-lg border px-3 py-1 text-[9px] font-bold tracking-wider uppercase backdrop-blur-sm transition-colors"
+                    className="rounded-lg border border-[var(--border)] bg-[var(--surface-card)]/40 px-3 py-1 text-[9px] font-bold tracking-wider text-[var(--text-secondary)] uppercase backdrop-blur-sm transition-colors group-hover:border-[var(--color-brand-primary)]/20"
                   >
                     {d}
                   </span>
@@ -118,13 +118,19 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
               </div>
             )}
 
-            <div className="flex items-center gap-6 border-t border-[var(--brand-primary)]/10 pt-4">
+            <div className="flex items-center gap-6 border-t border-[var(--color-brand-primary)]/10 pt-4">
               <div className="space-y-1">
-                <p className="font-mono text-[8px] font-bold uppercase opacity-40">Saturation</p>
-                <p className="text-sm font-black italic">{data.marketSaturation || 45}%</p>
+                <p className="font-mono text-[8px] font-bold text-[var(--text-muted)] uppercase opacity-60">
+                  Saturation
+                </p>
+                <p className="text-sm font-black text-[var(--text-primary)] italic">
+                  {data.marketSaturation || 45}%
+                </p>
               </div>
               <div className="space-y-1">
-                <p className="font-mono text-[8px] font-bold uppercase opacity-40">Latency</p>
+                <p className="font-mono text-[8px] font-bold text-[var(--text-muted)] uppercase opacity-60">
+                  Latency
+                </p>
                 <p className="text-sm font-black text-emerald-500 italic">
                   {data.regionalLatency || 25}
                   <span className="ml-0.5 text-[8px]">ms</span>
@@ -133,25 +139,25 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             </div>
           </div>
 
-          <footer className="border-border flex items-center justify-between border-t pt-6">
+          <footer className="flex items-center justify-between border-t border-[var(--border)] pt-6">
             <div className="flex flex-col">
               {displayPrice && (
-                <span className="text-brand-primary text-xs font-black italic">
+                <span className="text-xs font-black text-[var(--color-brand-primary)] italic">
                   ฿{displayPrice} <span className="text-[8px] uppercase opacity-40">Start</span>
                 </span>
               )}
-              <span className="text-text-muted group-hover:text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40 transition-all group-hover:translate-x-1 group-hover:opacity-100">
+              <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--text-muted)] uppercase opacity-60 transition-all group-hover:translate-x-1 group-hover:text-[var(--color-brand-primary)] group-hover:opacity-100">
                 Analyze_Node
               </span>
             </div>
-            <div className="bg-surface-offset/50 group-hover:bg-brand-primary flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 group-hover:text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--surface-offset)] text-[var(--text-primary)] transition-all duration-300 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
               <IconRenderer name="ArrowRight" size={18} />
             </div>
           </footer>
         </section>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_right,var(--brand-primary)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-10" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_right,var(--color-brand-primary)_0%,transparent_70%)] opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-10" />
     </Link>
   );
 };

@@ -1,6 +1,6 @@
 /**
- * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.1.1 (IDENTITY_INTEGRATED)
- * [STRATEGY]: Blueprint Inheritance | Unified Identity Shell | Local SEO
+ * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.2.0 (CROSS_LINK_ENABLED)
+ * [STRATEGY]: Blueprint Inheritance | Unified Identity Shell | Dynamic SEO Nodes
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -25,9 +25,6 @@ import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
-
-/** [SSG]: รับประกันผล Build เป็น Static 100% ทั่วไทย */
-export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return AREA_NODES.map((area) => ({ slug: area.slug }));
@@ -88,6 +85,13 @@ export default async function AreaPage(props: PageProps) {
   /* [MERGER]: ผสาน Master Blueprint กับ Area Context (ราคา, ธีม, เนื้อหา) */
   const templateData = mergeServiceData(masterService, area) as UniversalTemplateProps;
 
+  /* [DYNAMIC_CROSS_LINKING]: ค้นหาพื้นที่อื่นๆ ที่ให้บริการแบบเดียวกัน (Nearby Nodes) */
+  const nearbyAreas = AREA_NODES.filter(
+    (a) => a.templateSlug === area.templateSlug && a.slug !== area.slug,
+  )
+    .map((a) => a.slug)
+    .slice(0, 12);
+
   /* [SCHEMA]: 100/100 Knowledge Graph */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
@@ -107,10 +111,14 @@ export default async function AreaPage(props: PageProps) {
     <>
       <JsonLd data={fullSchema} id={`schema-graph-${area.slug}`} />
 
-      {/* [SYSTEM_LAYOUT]: ใช้ TemplateRenderer เพื่อรองรับการแสดงผลเทมเพลตเฉพาะทาง (Corporate, SalePage, ฯลฯ) 
-          ช่วยให้การแสดงผลแต่ละจังหวัดมีฟีเจอร์ที่สมบูรณ์ตามประเภทบริการ
-      */}
-      <TemplateRenderer data={templateData} />
+      {/* [SYSTEM_LAYOUT]: แสดงผลในโหมด area เพื่ออัตลักษณ์โหนดท้องถิ่นเฉพาะพื้นที่ */}
+      <TemplateRenderer
+        data={{
+          ...templateData,
+          servingAreas: nearbyAreas,
+        }}
+        contextMode="area"
+      />
 
       {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">

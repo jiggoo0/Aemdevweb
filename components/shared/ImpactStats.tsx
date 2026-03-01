@@ -9,6 +9,7 @@ import React, { memo, useEffect, useRef, useState } from "react";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
 import { cn } from "@/lib/utils";
+import { UI_STRINGS } from "@/constants/ui-strings";
 
 interface MetricItem {
   readonly id: string;
@@ -25,41 +26,41 @@ interface MetricItem {
 const _SYSTEM_METRICS: readonly MetricItem[] = [
   {
     id: "PERF_CORE",
-    label: "Core Performance",
+    label: "ประสิทธิภาพสูงสุด",
     value: 99,
     unit: "/100",
     icon: "Zap",
-    description: "Lighthouse Speed Index",
+    description: "คะแนนความเร็วเต็ม 100",
     trend: "stable",
   },
   {
     id: "ROI_VELOCITY",
-    label: "Growth Velocity",
+    label: "การเติบโตของธุรกิจ",
     value: 300,
     unit: "%",
     icon: "TrendingUp",
     prefix: "+",
-    description: "Conversion Uplift",
+    description: "เพิ่มโอกาสปิดการขาย",
     trend: "up",
   },
   {
     id: "UPTIME_SHIELD",
-    label: "Security SLA",
+    label: "ความปลอดภัย",
     value: 99.99,
     decimals: 2,
     unit: "%",
     icon: "ShieldCheck",
-    description: "Uptime Guaranteed",
+    description: "ระบบเสถียรไม่มีสะดุด",
     trend: "stable",
   },
   {
     id: "AI_AUTHORITY",
-    label: "Entity Reach",
+    label: "เข้าถึงลูกค้า",
     value: 1.2,
     decimals: 1,
     unit: "M+",
     icon: "Globe",
-    description: "Digital Footprint",
+    description: "บนโลกออนไลน์",
     trend: "up",
   },
 ];
@@ -162,8 +163,8 @@ const MetricCard = ({
           <IconRenderer name={stat.icon} size={24} strokeWidth={2.5} />
         </div>
         <div className="flex flex-col items-end gap-1.5">
-          <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.4em] uppercase opacity-40">
-            Node_Stat.0{index + 1}
+          <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-60">
+            {UI_STRINGS.stats.statPrefix} 0{index + 1}
           </span>
           <div className="bg-brand-primary shadow-glow h-1.5 w-1.5 animate-pulse rounded-full" />
         </div>
@@ -228,40 +229,40 @@ const ImpactStats = ({ data, className }: ImpactStatsProps) => {
   const metrics: MetricItem[] = [
     {
       id: "LOCAL_TRAFFIC",
-      label: `${data?.province || "Global"} Reach`,
+      label: `${UI_STRINGS.stats.reachCustomers}${data?.province || UI_STRINGS.stats.allAreas}`,
       value: data?.socialProof?.reviewCount ? data.socialProof.reviewCount * 10 : 12000,
       unit: "P/M",
       icon: "TrendingUp",
-      description: "Regional Market Awareness",
+      description: UI_STRINGS.stats.brandAwareness,
       trend: "up",
     },
     {
       id: "SPEED_NODE",
-      label: "Node Latency",
+      label: UI_STRINGS.stats.fastLoad,
       value: data?.regionalLatency || 14,
       decimals: 1,
       unit: "MS",
       icon: "Zap",
-      description: "Infrastructure Response Time",
+      description: UI_STRINGS.stats.globalStandard,
       trend: "stable",
     },
     {
       id: "SATURATION",
-      label: "Market Presence",
+      label: UI_STRINGS.stats.expertise,
       value: data?.marketSaturation || 85,
       unit: "%",
       icon: "Target",
-      description: "Regional Service Coverage",
+      description: UI_STRINGS.stats.inYourBusiness,
       trend: "up",
     },
     {
       id: "TRUST_INDEX",
-      label: "Authority Score",
+      label: UI_STRINGS.stats.satisfaction,
       value: data?.socialProof?.rating || 4.9,
       decimals: 1,
       unit: "/5.0",
       icon: "Award",
-      description: "Partner Success Index",
+      description: UI_STRINGS.stats.fromOurClients,
       trend: "stable",
     },
   ];

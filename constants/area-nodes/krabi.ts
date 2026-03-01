@@ -1,29 +1,37 @@
-/**
- * [SERVICE_NODE]: KRABI_LUXURY_TOURISM v18.0.1
- * [STRATEGY]: Ultra-Luxury Experience | Global Reach | Dynamic Inheritance
- * [MARKET]: Krabi, Ao Nang, Phi Phi Islands (High-End Hospitality)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const krabiNode: AreaNode = {
+export const krabiNode = defineAreaNode(hotelResortService, {
+  // --- Basic Identity ---
   slug: "krabi",
+  tier: 2,
   province: "กระบี่",
   region: "South",
-  templateSlug: "hotelresort",
+  priority: 97,
+
   title: "รับทำเว็บไซต์ กระบี่ | ออกแบบเว็บไซต์ระดับ Ultra-Luxury สำหรับรีสอร์ตและทัวร์พรีเมียม",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจท่องเที่ยวในกระบี่สู่ระดับโลก ด้วยเว็บไซต์ที่เน้นประสบการณ์ความหรูหราและระบบจองที่ลื่นไหลสายฟ้าแลบ",
-  seoTitle: "รับทำเว็บไซต์ กระบี่ ออกแบบเว็บรีสอร์ตหรู พูลวิลล่า - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์กระบี่ อ่าวนาง เกาะพีพี ครบวงจร สำหรับโรงแรม 5 ดาว และเรือยอร์ชคลับ มาตรฐานสากล รองรับ SEO ท่องเที่ยวระดับโลก",
 
   longDescription:
     "กระบี่ มรกตแห่งอันดามันที่เป็นจุดหมายปลายทางระดับ Ultra-Luxury ของนักท่องเที่ยวทั่วโลก " +
     "นายเอ็มซ่ามากส์ พร้อมเปลี่ยนเว็บไซต์ของคุณให้เป็น 'Global Gateway' ที่สะท้อนความหรูหราเหนือระดับ " +
     "ไม่ว่าจะเป็นพูลวิลล่าบนเกาะพีพี หรือธุรกิจเรือยอร์ชคลับในอ่าวนาง เราเน้นการออกแบบที่โหลดภาพไวระดับเสถียร " +
     "พร้อมระบบจองตรงที่รองรับการชำระเงินสากล เพื่อให้ธุรกิจกระบี่ของคุณครองพื้นที่ในตลาดโลกอย่างสง่างาม",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/krabi-node.webp",
+  coordinates: { lat: 8.0863, lng: 98.9063 },
+  districts: [
+    "เมืองกระบี่",
+    "อ่าวนาง",
+    "เกาะพีพี",
+    "เกาะลันตา",
+    "เหนือคลอง",
+    "อ่าวลึก",
+    "คลองท่อม",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -32,17 +40,10 @@ export const krabiNode: AreaNode = {
     "Marine Authority SEO: วางโครงสร้างการค้นหาเพื่อครองอันดับหนึ่งในคีย์เวิร์ดการท่องเที่ยวทางทะเลระดับ World-Class",
   ],
 
-  priority: 97,
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
-  heroImage: "/images/areas/krabi-node.webp",
-  coordinates: { lat: 8.0863, lng: 98.9063 },
   isTourismHeavy: true,
   marketSaturation: 78,
   regionalLatency: 19,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -62,6 +63,8 @@ export const krabiNode: AreaNode = {
         "วางโครงสร้างคีย์เวิร์ดภาษาอังกฤษและจีนเพื่อดักจับ Traffic คุณภาพในสมรภูมิการแข่งขันระดับสากล",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "กระบี่เป็นจุดหมายปลายทางระดับโลก การแข่งขันอยู่ที่ 'Visual' และ 'Trust' เว็บไซต์ที่โหลดรูปไวและดูแพงจะปิดดีลได้สูงกว่า",
@@ -79,18 +82,47 @@ export const krabiNode: AreaNode = {
       "ภาพลักษณ์แบรนด์ดูไม่คุ้มราคากับบริการพรีเมียม",
     ],
     competitorLevel: "high",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 154,
+      localClient: "เรือยอร์ชคลับพรีเมียม ย่านอ่าวนาง",
+    },
+    regionalPricing: {
+      startPrice: `${hotelResortService.price} บาท`,
+      timeline: "21-45 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตหรูเกาะพีพี",
+      result: "วางระบบจองตรงและทำ SEO หลายภาษา ยอด Direct Booking เพิ่มขึ้น 250% ใน 1 ปี",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ อ่าวนาง",
       "ออกแบบเว็บรีสอร์ต กระบี่",
       "จ้างทำ SEO เกาะพีพี",
       "ทำเว็บทัวร์เรือยอร์ช กระบี่",
     ],
+    promotions: [
+      {
+        title: "Andaman Elite Package",
+        description:
+          "สิทธิพิเศษสำหรับโครงการ Luxury Resort และทัวร์พรีเมียม รับฟรีบริการ Global CDN Strategy และระบบจองตรงมูลค่า 20,000 บาท",
+        discount: "Free Global Infra Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/krabi-node.webp",
+      gallery: [
+        "/images/templates/hotelresort/hotel-resort-node.webp",
+        "/images/case-studies/phuket-luxury-seo.webp",
+      ],
+    },
   },
-  districts: ["เมืองกระบี่", "อ่าวนาง", "เกาะพีพี", "เกาะลันตา", "เหนือคลอง"],
+
   keywords: [
     "รับทำเว็บไซต์ กระบี่",
     "ทำเว็บโรงแรม กระบี่",
     "จ้างทำเว็บอ่าวนาง",
     "รับทำ SEO กระบี่",
   ],
-};
+});

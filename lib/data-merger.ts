@@ -1,5 +1,5 @@
 /**
- * [SYSTEM CORE]: DATA_MERGER_ENGINE v17.9.107 (ULTIMATE_HARDENED)
+ * [SYSTEM CORE]: DATA_MERGER_ENGINE v19.0.0 (IDENTITY_SOVEREIGNTY)
  * [STRATEGY]: Blueprint Inheritance | Smart Theme Fusion | SEO Aggregation
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
@@ -14,17 +14,32 @@ export function mergeServiceData(
   master: TemplateMasterData,
   area: AreaNode,
 ): UniversalTemplateProps {
-  // 1. [IDENTITY_FIRST_THEME]: ยึดโครงสร้างธีมจาก Master เป็นหลักเพื่อรักษา Visual Flow
-  const mergedTheme: ThemeConfig = {
-    ...master.theme,
-    // [ACCENT_OVERRIDE]: อนุญาตให้จังหวัดเปลี่ยนเฉพาะสีเน้น (Primary) เท่านั้น
-    primary: area.theme?.primary || master.theme?.primary || "#10b981",
+  // 1. [IDENTITY_FIRST_THEME]: ผสานธีม 3 เลเยอร์ (Defaults -> Master -> Area Override)
+  // [STRATEGY]: ยอมให้ Area Node เปลี่ยนแปลงอัตลักษณ์ (Mode/Color/Radius) ได้อย่างอิสระเพื่อ Provincial DNA
+  const defaultTheme = {
+    background: "#ffffff",
+    mode: "light" as const,
+    foreground: "#0f172a",
+    primary: "#10b981",
+  };
 
-    // [LAYOUT_GUARD]: ห้ามจังหวัดเปลี่ยน Background หรือ Mode เองเด็ดขาด
-    // เพื่อป้องกันอาการ "พื้นหลังสลับสีมั่วซั่ว" ระหว่าง Hero และ Sections
-    background: master.theme?.background || "#ffffff",
-    mode: master.theme?.mode || "light",
-    foreground: master.theme?.foreground || (master.theme?.mode === "dark" ? "#ffffff" : "#0f172a"),
+  const baseTheme = {
+    ...defaultTheme,
+    ...master.theme,
+    ...(area.theme as Partial<ThemeConfig>),
+  };
+
+  // [DYNAMIC_ADAPTATION]: คำนวณค่าที่ขาดหายไปตาม Mode
+  const finalTheme: ThemeConfig = {
+    ...baseTheme,
+    foreground:
+      area.theme?.foreground ||
+      master.theme?.foreground ||
+      (baseTheme.mode === "dark" ? "#ffffff" : "#0f172a"),
+    background:
+      area.theme?.background ||
+      master.theme?.background ||
+      (baseTheme.mode === "dark" ? "#020617" : "#ffffff"),
   };
 
   // 2. [SEO_KEYWORD_AGGREGATION]: ผสานคีย์เวิร์ด (Unique Only)
@@ -47,6 +62,7 @@ export function mergeServiceData(
   return {
     // --- Identity & Meta ---
     id: `NODE-${area.slug.toUpperCase()}`,
+    tier: area.tier || 2, // [PROVINCE_DNA]: Default เป็น Tier 2 (Province) หากไม่ได้ระบุ
     templateSlug: master.templateSlug,
     category: master.category,
     priority: area.priority || master.priority,
@@ -104,7 +120,7 @@ export function mergeServiceData(
     },
 
     // --- Final Optimized Theme ---
-    theme: mergedTheme,
+    theme: finalTheme,
 
     // --- Internal Linking ---
     masterServiceUrl: `/services/${master.templateSlug}`,

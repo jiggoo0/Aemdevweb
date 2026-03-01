@@ -84,14 +84,14 @@ export const PerformanceTrajectory = memo(() => {
           >
             <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
               <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-              <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-                Dominance_Protocol.v18.2
+              <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+                ความสำเร็จที่ยั่งยืน
               </span>
             </div>
 
             <h3 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
-              Growth <br />
-              <span className="text-brand-primary">Hardened.</span>
+              การเติบโต <br />
+              <span className="text-brand-primary">ของธุรกิจ.</span>
             </h3>
 
             <div className="border-brand-primary border-l-[6px] pl-8">
@@ -109,16 +109,16 @@ export const PerformanceTrajectory = memo(() => {
                 <span className="text-brand-primary text-5xl font-black tracking-tighter italic md:text-6xl">
                   +<DynamicCounter value={450} />
                 </span>
-                <p className="font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-40">
-                  Target_SEO_Yield
+                <p className="font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
+                  โอกาสเติบโต
                 </p>
               </div>
               <div className="border-border/20 space-y-2 border-l pl-12">
                 <span className="text-text-primary text-5xl font-black tracking-tighter italic md:text-6xl">
                   <DynamicCounter value={100} suffix="/100" />
                 </span>
-                <p className="font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-40">
-                  Performance_Score
+                <p className="font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
+                  คะแนนประสิทธิภาพ
                 </p>
               </div>
             </div>
@@ -184,11 +184,11 @@ export const PerformanceTrajectory = memo(() => {
                   )}
                 >
                   <div className="text-right">
-                    <span className="text-brand-primary block font-mono text-[10px] font-black tracking-[0.2em] uppercase">
-                      Target_Dominance
+                    <span className="text-brand-primary block font-sans text-[11px] font-bold tracking-widest uppercase">
+                      เป้าหมายระยะยาว
                     </span>
-                    <span className="text-text-muted text-[8px] font-bold uppercase opacity-40">
-                      Node_Verified_STABLE
+                    <span className="text-text-muted text-[9px] font-bold uppercase opacity-80">
+                      ความเสถียร 100%
                     </span>
                   </div>
                   <div className="bg-brand-primary shadow-glow h-3 w-3 animate-ping rounded-full" />
@@ -196,10 +196,10 @@ export const PerformanceTrajectory = memo(() => {
               </div>
 
               {/* Legend Matrix */}
-              <div className="text-text-primary/20 absolute right-12 bottom-8 left-12 flex justify-between font-mono text-[9px] font-black tracking-widest uppercase">
-                <span>Init_Phase</span>
-                <span>Optim_Path</span>
-                <span>Market_Dom</span>
+              <div className="text-text-primary/40 absolute right-12 bottom-8 left-12 flex justify-between font-sans text-[10px] font-bold tracking-widest uppercase">
+                <span>เริ่มต้น</span>
+                <span>ปรับปรุง</span>
+                <span>ครองตลาด</span>
               </div>
             </div>
 

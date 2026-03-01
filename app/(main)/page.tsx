@@ -89,9 +89,6 @@ const DirectTerminal = dynamic(
   },
 );
 
-// [ISR]: Optimal revalidation cycle for high-performance indexing
-export const revalidate = 3600;
-
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
     title: `Web Architect & Technical SEO Specialist | ${SITE_CONFIG.expert.displayName}`,
@@ -198,24 +195,24 @@ export default async function HomePage() {
         <div className="container mx-auto px-4 md:px-8">
           <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="space-y-2">
-              <span className="text-brand-primary block font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-                Expertise_Architecture
+              <span className="text-brand-primary block font-sans text-[12px] font-bold tracking-widest uppercase">
+                บริการหลักของเรา
               </span>
               <h2
                 id="services-heading"
                 className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl lg:text-8xl"
               >
-                Core <span className="text-brand-primary">Solutions.</span>
+                Core <span className="text-brand-primary">Services.</span>
               </h2>
             </div>
             <Link
               href="/services"
-              className="group border-brand-primary/20 bg-brand-primary/5 hover:bg-brand-primary text-text-primary hover:text-surface-main flex items-center gap-3 rounded-full border px-6 py-4 text-[10px] font-black tracking-widest uppercase transition-all duration-500"
+              className="group border-brand-primary/20 bg-brand-primary/5 hover:bg-brand-primary text-text-primary hover:text-surface-main flex items-center gap-3 rounded-full border px-6 py-4 text-[12px] font-bold tracking-widest uppercase transition-all duration-500"
             >
-              Master Services Registry
+              ดูบริการทั้งหมด
               <IconRenderer
                 name="ArrowRight"
-                size={14}
+                size={16}
                 className="transition-transform group-hover:translate-x-1"
               />
             </Link>
@@ -236,14 +233,14 @@ export default async function HomePage() {
       >
         <div className="container mx-auto px-4 md:px-8">
           <header className="mb-16 text-center">
-            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-              Technical_Diagnosis_Engine
+            <span className="text-brand-primary font-sans text-[12px] font-bold tracking-widest uppercase">
+              ตรวจสุขภาพเว็บไซต์ของคุณ
             </span>
             <h2
               id="audit-heading"
               className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl"
             >
-              Audit <br /> <span className="text-brand-primary">Laboratory.</span>
+              Website <br /> <span className="text-brand-primary">Health Check.</span>
             </h2>
           </header>
 
@@ -285,24 +282,24 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 md:px-8">
             <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div className="space-y-2">
-                <span className="text-text-muted block font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-50">
-                  Performance_Verified
+                <span className="text-text-muted block font-sans text-[12px] font-bold tracking-widest uppercase opacity-80">
+                  ผลงานที่ผ่านมา
                 </span>
                 <h2
                   id="success-heading"
                   className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl"
                 >
-                  Success <span className="text-text-secondary/30">Nodes.</span>
+                  Success <span className="text-text-secondary/30">Stories.</span>
                 </h2>
               </div>
               <Link
                 href="/case-studies"
-                className="group border-border bg-surface-card text-text-primary hover:border-brand-primary/40 hover:text-brand-primary flex items-center gap-3 rounded-full border px-6 py-4 text-[10px] font-black tracking-widest uppercase transition-all duration-500"
+                className="group border-border bg-surface-card text-text-primary hover:border-brand-primary/40 hover:text-brand-primary flex items-center gap-3 rounded-full border px-6 py-4 text-[12px] font-bold tracking-widest uppercase transition-all duration-500"
               >
-                View All Success Logs
+                ดูผลงานทั้งหมด
                 <IconRenderer
                   name="ArrowRight"
-                  size={14}
+                  size={16}
                   className="transition-transform group-hover:translate-x-1"
                 />
               </Link>
@@ -355,14 +352,14 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 md:px-8">
             <div className="mb-20 flex flex-col items-center justify-center gap-12">
               <div className="text-center">
-                <span className="text-text-muted font-mono text-[9px] font-black tracking-[0.5em] uppercase opacity-50">
-                  Network_Coverage_Index
+                <span className="text-text-muted font-sans text-[12px] font-bold tracking-widest uppercase opacity-80">
+                  พื้นที่ให้บริการ
                 </span>
                 <h2
                   id="coverage-heading"
                   className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-5xl"
                 >
-                  Regional <span className="text-brand-primary">Stability.</span>
+                  ครอบคลุม <span className="text-brand-primary">ทุกภูมิภาค.</span>
                 </h2>
               </div>
 
@@ -384,10 +381,10 @@ export default async function HomePage() {
             <div className="mt-12 text-center">
               <Link
                 href="/areas"
-                className="text-text-muted hover:text-brand-primary inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] uppercase transition-colors"
+                className="text-text-muted hover:text-brand-primary inline-flex items-center gap-2 text-[12px] font-bold tracking-widest uppercase transition-colors"
               >
-                Explore All Regional Nodes
-                <IconRenderer name="ArrowRight" size={14} />
+                ดูพื้นที่ให้บริการทั้งหมด
+                <IconRenderer name="ArrowRight" size={16} />
               </Link>
             </div>
           </div>

@@ -1,6 +1,6 @@
 /**
- * [SYSTEM COMPONENT]: NAV_BAR v18.1.9 (PRODUCTION_OPTIMIZED)
- * [STRATEGY]: Pure CSS Transitions | High-Performance Scroll Logic | Zero-Framer
+ * [SYSTEM COMPONENT]: NAV_BAR v19.0.0 (SSOT_INTEGRATED)
+ * [STRATEGY]: Pure CSS Transitions | High-Performance Scroll Logic | UI Strings Registry
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -10,6 +10,7 @@ import React, { useState, useEffect, memo, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MAIN_NAV } from "@/constants/navigation";
+import { UI_STRINGS } from "@/constants/ui-strings";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -98,8 +99,8 @@ const Navbar = () => {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_var(--brand-primary)]"></span>
               </div>
-              <span className="font-mono text-[7px] font-black tracking-[0.2em] text-emerald-500 uppercase opacity-60">
-                Node_Healthy_v18.4
+              <span className="font-sans text-[9px] font-bold tracking-widest text-emerald-500 uppercase opacity-80">
+                {UI_STRINGS.cta.systemActiveStatus}
               </span>
             </div>
           </div>

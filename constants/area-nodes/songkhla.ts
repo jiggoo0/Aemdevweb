@@ -11,6 +11,7 @@ import { seoAgencyService } from "@/constants/services/seo-agency";
 export const songkhlaNode = defineAreaNode(seoAgencyService, {
   // --- Basic Identity ---
   slug: "songkhla",
+  tier: 2,
   province: "สงขลา",
   region: "South",
   priority: 97,

@@ -10,6 +10,7 @@ import { corporateService } from "@/constants/services/corporate";
 export const chachoengsaoNode = defineAreaNode(corporateService, {
   // --- Basic Identity ---
   slug: "chachoengsao",
+  tier: 2,
   province: "ฉะเชิงเทรา",
   region: "East",
   priority: 94,

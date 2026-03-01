@@ -10,6 +10,7 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
+import { UI_STRINGS } from "@/constants/ui-strings";
 
 interface TrustNode {
   readonly label: string;
@@ -18,11 +19,11 @@ interface TrustNode {
 }
 
 const TRUST_NODES: readonly TrustNode[] = [
-  { label: "High-Speed Performance", icon: "Zap", status: "active" },
-  { label: "Modern SEO Structure", icon: "SearchCheck", status: "active" },
-  { label: "Secure Architecture", icon: "ShieldCheck", status: "active" },
-  { label: "Responsive Design", icon: "Layers", status: "active" },
-  { label: "Next.js 16 Optimized", icon: "Cpu", status: "active" },
+  { label: UI_STRINGS.trust.fastLoad, icon: "Zap", status: "active" },
+  { label: UI_STRINGS.trust.seoStandard, icon: "SearchCheck", status: "active" },
+  { label: UI_STRINGS.trust.highSecurity, icon: "ShieldCheck", status: "active" },
+  { label: UI_STRINGS.trust.mobileFriendly, icon: "Layers", status: "active" },
+  { label: UI_STRINGS.trust.modernTech, icon: "Cpu", status: "active" },
 ];
 
 const TrustBadge = () => {
@@ -59,9 +60,9 @@ const TrustBadge = () => {
         <div className="bg-border/20 h-px flex-1" />
         <span
           suppressHydrationWarning
-          className="text-text-muted font-sans text-[10px] font-bold tracking-[0.3em] whitespace-nowrap uppercase md:text-[11px]"
+          className="text-text-muted font-sans text-[12px] font-bold tracking-widest whitespace-nowrap uppercase opacity-80 md:text-[13px]"
         >
-          Technology Stack & Standards
+          {UI_STRINGS.trust.standardHeader}
         </span>
         <div className="bg-border/20 h-px flex-1" />
       </div>
@@ -96,7 +97,7 @@ const TrustBadge = () => {
                   {node.label}
                 </span>
                 <span className="text-brand-primary/40 group-hover:text-brand-primary/60 font-mono text-[8px] font-bold tracking-widest uppercase transition-all duration-500">
-                  Verified_Standard
+                  {UI_STRINGS.trust.verifiedStatus}
                 </span>
               </div>
             </div>

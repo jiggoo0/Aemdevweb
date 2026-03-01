@@ -70,7 +70,7 @@ const UniversalLogoCloud = ({ title, logos, theme = "full_section" }: UniversalL
             )}
           >
             {[...Array(logoCount)].map((_, i) => (
-              <div key={i} className="h-10 w-32 rounded-lg bg-gray-400 dark:bg-gray-700" />
+              <div key={i} className="h-10 w-32 rounded-lg bg-[var(--border)] opacity-50" />
             ))}
           </div>
         </div>

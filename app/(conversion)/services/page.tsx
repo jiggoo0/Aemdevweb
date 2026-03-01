@@ -10,7 +10,8 @@ import type { Metadata, Viewport } from "next";
 // --- UI Components & Layout ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import ServiceListingHub from "@/components/features/services/ServiceListingHub";
-import WorkProcess from "@/components/features/landing/WorkProcess"; // [RESOLVED]: Now in active use
+import WorkProcess from "@/components/features/landing/WorkProcess";
+import ImpactStats from "@/components/shared/ImpactStats";
 import IconRenderer, { type IconName } from "@/components/ui/IconRenderer";
 import SkeletonGrid from "@/components/ui/SkeletonGrid";
 import { constructMetadata } from "@/lib/seo-utils";
@@ -32,17 +33,29 @@ export const metadata: Metadata = constructMetadata({
   image: "/images/services/corporate-node.webp",
 });
 
+/**
+ * @component ServicesPage
+ * @description หน้า Hub กลางสำหรับบริการทั้งหมด (Conversion Optimized)
+ */
 export default function ServicesPage() {
+  /* [SCHEMA_ORCHESTRATION]: สร้าง Hierarchy สำหรับ AI Crawlers */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
       { name: "บริการ", item: "/services" },
     ]),
+    {
+      "@type": "CollectionPage",
+      "@id": `${SITE_CONFIG.siteUrl}/services/#collection`,
+      name: "High-Performance Digital Service Registry",
+      description: "Comprehensive suite of web infrastructure and SEO solutions.",
+      publisher: { "@id": `${SITE_CONFIG.siteUrl}/#organization` },
+    },
   ]);
 
   return (
     <LayoutEngine spacing="none">
-      <JsonLd data={fullSchema} id="schema-services-hub" />
+      <JsonLd data={fullSchema} id="schema-services-hub-v18" />
 
       <main className="relative min-h-screen pt-32 pb-24 md:pt-48 md:pb-32">
         <div className="relative z-10 container mx-auto px-4 md:px-6">
@@ -76,7 +89,26 @@ export default function ServicesPage() {
             </Suspense>
           </section>
 
-          {/* 03. WORK PROCESS: Integrated for Conversion Domination */}
+          {/* 03. ROI IMPACT HUB: Integrated Evidence */}
+          <section className="border-border/40 mt-32 border-t pt-24">
+            <header className="mb-16">
+              <span className="text-brand-primary font-sans text-[12px] font-bold tracking-widest uppercase">
+                หลักฐานความสำเร็จทางวิศวกรรม
+              </span>
+              <h2 className="text-text-primary mt-4 text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+                ROI <span className="text-brand-primary">Impact.</span>
+              </h2>
+            </header>
+            <Suspense
+              fallback={
+                <div className="bg-surface-card/20 h-64 w-full animate-pulse rounded-2xl" />
+              }
+            >
+              <ImpactStats className="mb-24" />
+            </Suspense>
+          </section>
+
+          {/* 04. WORK PROCESS: Integrated for Conversion Domination */}
           {/* [INJECTED]: แสดงขั้นตอนการทำงานเพื่อสร้างความมั่นใจก่อนปิดการขาย */}
           <WorkProcess />
 

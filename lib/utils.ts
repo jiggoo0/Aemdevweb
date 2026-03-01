@@ -79,40 +79,65 @@ function hexToOklch(hex: string): { l: number; c: number; h: number } | null {
     h: Math.round(H * 1000) / 1000,
   };
 }
+/**
+ * [SEO_HELPER]: slugify
+ * @description แปลงข้อความเป็น URL Slug ที่สะอาดตา รองรับภาษาไทยและอักขระพิเศษ
+ */
+export function slugify(text: string): string {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // แทนที่ช่องว่างด้วย -
+    .replace(/[^\u0E00-\u0E7F\w-]+/g, "") // ลบอักขระพิเศษที่ไม่ใช่ภาษาไทย/อังกฤษ/-
+    .replace(/--+/g, "-") // ลบ -- ที่ซ้ำซ้อน
+    .replace(/^-+/, "") // ลบ - ที่ต้นสาย
+    .replace(/-+$/, ""); // ลบ - ที่ปลายสาย
+}
 
 /**
  * [THEME]: injectThemeVariables
  * @description กลไกการฉีดค่าธีมพร้อมระบบ Identity Sync เข้าสู่ CSS Object Model
- * [FIX]: ยกเลิกการ Override --surface-main และ --text-primary เพื่อให้รองรับ Dark/Light Mode Toggle
+ * [STRATEGY]: Semantic Layering | OKLCH Precision | Readability Guard
  */
 export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
   const styles: Record<string, string> = {};
   if (!theme) return styles as React.CSSProperties;
 
-  // 1. Core Geometry
-  styles["--radius"] = theme.radius || "2.5rem";
+  const isDark = theme.mode === "dark";
 
-  // 2. [ENGINE]: OKLCH Dynamic Generator (Standardized Prefix)
+  // 1. Core Geometry & Mode Signal
+  styles["--radius"] = theme.radius || "2.5rem";
+  styles["--theme-mode"] = theme.mode || "light";
+
+  // 2. [SEMANTIC_SURFACES]: บังคับฉีดค่าพื้นหลังตามธีม
+  styles["--surface-main"] = theme.background || (isDark ? "#020617" : "#ffffff");
+  styles["--surface-card"] = isDark ? "oklch(20% 0.04 260 / 0.8)" : "#ffffff";
+  styles["--surface-offset"] = isDark ? "oklch(12% 0.03 260 / 0.5)" : "oklch(98% 0.01 260)";
+
+  // 3. [TYPOGRAPHY_SYSTEM]: บังคับฉีดค่าสีตัวอักษรที่ผ่านการตรวจสอบ Contrast แล้ว
+  styles["--text-primary"] = theme.foreground || (isDark ? "#f8fafc" : "#0f172a");
+  styles["--text-secondary"] = isDark ? "#94a3b8" : "#334155";
+  styles["--text-muted"] = isDark ? "#64748b" : "#64748b";
+
+  // 4. [ELEMENTS]: Border & Outlines
+  styles["--border"] = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.08)";
+
+  // 5. [ENGINE]: OKLCH Dynamic Generator for Brand Colors
   const processColor = (hex: string, key: string) => {
     const lch = hexToOklch(hex);
     if (lch) {
       const raw = `${lch.l} ${lch.c} ${lch.h}`;
-      // Standardize on --brand- prefix for consistency across all components
       styles[`--brand-${key}-raw`] = raw;
       styles[`--brand-${key}`] = `oklch(${raw})`;
 
-      // Inject legacy compatibility variable
-      styles[`--theme-${key}`] = `oklch(${raw})`;
-
-      // [CONTRAST_LOGIC]: Automatic Foreground Calculation
+      // [CONTRAST_GUARD]: คำนวณสีตัวอักษรที่ต้องอยู่บนสีแบรนด์นี้ (White or Black)
       styles[`--brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
     } else {
       styles[`--brand-${key}`] = hex;
-      styles[`--theme-${key}`] = hex;
     }
   };
 
-  // Execution of Color Matrix for Brand Nodes
   if (theme.primary) processColor(theme.primary, "primary");
   if (theme.secondary) processColor(theme.secondary, "secondary");
   if (theme.accent) processColor(theme.accent, "accent");

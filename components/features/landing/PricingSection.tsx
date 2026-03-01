@@ -109,13 +109,13 @@ const PricingSection = () => {
         <header className="mb-24 space-y-6 text-center md:text-left">
           <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
             <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-              Capital_Allocation_v18.2
+            <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+              แผนการลงทุนที่คุ้มค่า
             </span>
           </div>
 
           <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
-            Investment <br /> <span className="text-brand-primary">Matrix.</span>
+            แพ็กเกจ <br /> <span className="text-brand-primary">บริการ.</span>
           </h2>
 
           <div className="border-brand-primary/40 border-l-[6px] pl-8 md:pl-12">
@@ -144,15 +144,15 @@ const PricingSection = () => {
             >
               {plan.highlight && (
                 <div className="absolute top-8 right-10">
-                  <span className="text-brand-primary font-mono text-[8px] font-black tracking-widest uppercase">
-                    // HIGH_VELOCITY_NODE
+                  <span className="text-brand-primary font-sans text-[10px] font-bold tracking-widest uppercase">
+                    แนะนำสำหรับคุณ
                   </span>
                 </div>
               )}
 
               <div className="mb-12 space-y-2">
-                <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase opacity-40">
-                  INV_NODE.0{i + 1}
+                <span className="text-text-muted font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
+                  แพ็กเกจที่ 0{i + 1}
                 </span>
                 <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors md:text-4xl">
                   {plan.name}

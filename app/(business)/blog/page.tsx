@@ -1,15 +1,16 @@
 /**
- * [ROUTE_PAGE]: BLOG_HUB_SYSTEM v18.0.5 (STABILIZED)
- * [STRATEGY]: ISR Revalidation | Collection Schema | LCP Priority Optimization
+ * [ROUTE_PAGE]: BLOG_HUB_SYSTEM v18.1.0 (UPGRADED)
+ * [STRATEGY]: Async searchParams | Server-side Filter | Pagination v2
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React from "react";
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 
 // --- 1. Infrastructure & Core Data (SSOT) ---
 import { getAllPosts } from "@/lib/cms";
-import type { BlogPost } from "@/types";
+import type { PageProps, BlogPost } from "@/types";
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -20,9 +21,9 @@ import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 // --- 3. UI Render Engine ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import BlogCard from "@/components/features/blog/BlogCard";
-
-/** [STRATEGY]: บังคับอัปเดต Content ทุก 1 ชม. โดยไม่ต้อง Rebuild ทั้งระบบ (ISR) */
-export const revalidate = 3600;
+import BlogFilters from "@/components/features/blog/BlogFilters";
+import Pagination from "@/components/ui/Pagination";
+import { Button } from "@/components/ui/Button";
 
 /** [VIEWPORT]: Mobile-First Theme Integration */
 export const viewport: Viewport = {
@@ -31,9 +32,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-/** [SEO_METADATA]: BLOG_AUTHORITY_PROTOCOL
- * ดักจับหัวข้อ Technical SEO และ Modern Web Development
- */
+/** [SEO_METADATA]: BLOG_AUTHORITY_PROTOCOL */
 export const metadata: Metadata = constructMetadata({
   title: "Insights & Engineering Blog | AEMDEVWEB",
   description:
@@ -42,15 +41,41 @@ export const metadata: Metadata = constructMetadata({
   image: "/images/og-blog.webp",
 });
 
+const POSTS_PER_PAGE = 9;
+
 /**
  * @component BlogListingPage
  * @description หน้าแสดงรายการบทความทั้งหมด พร้อมระบบจัดการลำดับการโหลดเพื่อคะแนน LCP
  */
-export default async function BlogListingPage() {
+export default async function BlogListingPage({ searchParams }: PageProps) {
   /* [A] DATA_RESOLUTION: ดึงข้อมูลจาก CMS (Markdown/MDX) */
-  const posts: BlogPost[] = await getAllPosts().catch(() => []);
+  const allPosts: BlogPost[] = await getAllPosts().catch(() => []);
+  const params = await searchParams;
 
-  /* [B] SCHEMA_ORCHESTRATION: การสร้าง Hierarchy สำหรับ AI Crawlers */
+  const query = (params.q as string) || "";
+  const category = (params.category as string) || "all";
+  const page = Number(params.page) || 1;
+
+  /* [B] FILTER_LOGIC: กรองข้อมูลตาม Search และ Category */
+  const filteredPosts = allPosts.filter((post) => {
+    const matchesQuery =
+      query === "" ||
+      post.title.toLowerCase().includes(query.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(query.toLowerCase());
+
+    const matchesCategory = category === "all" || post.category === category;
+
+    return matchesQuery && matchesCategory;
+  });
+
+  /* [C] PAGINATION_LOGIC: แบ่งหน้าข้อมูล */
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+
+  /* [D] CATEGORY_EXTRACTION: รวบรวมหมวดหมู่ที่มีอยู่จริง */
+  const categories = Array.from(new Set(allPosts.map((p) => p.category))).sort();
+
+  /* [E] SCHEMA_ORCHESTRATION: การสร้าง Hierarchy สำหรับ AI Crawlers */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -73,7 +98,7 @@ export default async function BlogListingPage() {
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <section>
             {/* --- 01. STRATEGIC HUB HEADER --- */}
-            <header className="mb-24 max-w-6xl space-y-10 md:mb-32">
+            <header className="mb-20 max-w-6xl space-y-10">
               <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-4 rounded-full border px-6 py-2.5 font-mono text-[10px] font-black tracking-[0.4em] uppercase backdrop-blur-md">
                 <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_12px_var(--brand-primary)]" />
                 <span suppressHydrationWarning>
@@ -94,20 +119,28 @@ export default async function BlogListingPage() {
               </div>
             </header>
 
-            {/* --- 02. BLOG GRID: Optimized Rendering Path --- */}
+            {/* --- 02. INTERACTIVE CONTROLS: Filter & Search --- */}
+            <BlogFilters categories={categories} currentCategory={category} currentQuery={query} />
+
+            {/* --- 03. BLOG GRID: Optimized Rendering Path --- */}
             <h2 className="sr-only">Technical Engineering Insights & SEO Archive</h2>
-            {posts.length > 0 ? (
-              <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 xl:gap-16">
-                {posts.map((post, index) => (
-                  <BlogCard
-                    key={post.slug}
-                    post={post}
-                    index={index}
-                    // [PERFORMANCE]: บังคับ Priority สำหรับ 3 ใบแรกเพื่อลดค่า LCP ต่ำกว่า 1.2s
-                    priority={index < 3}
-                  />
-                ))}
-              </div>
+            {paginatedPosts.length > 0 ? (
+              <>
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-12 xl:gap-16">
+                  {paginatedPosts.map((post, index) => (
+                    <BlogCard
+                      key={post.slug}
+                      post={post}
+                      index={index}
+                      // [PERFORMANCE]: บังคับ Priority สำหรับ 3 ใบแรกเพื่อลดค่า LCP ต่ำกว่า 1.2s
+                      priority={index < 3 && page === 1}
+                    />
+                  ))}
+                </div>
+
+                {/* --- 04. NAVIGATION HUB --- */}
+                <Pagination totalPages={totalPages} currentPage={page} />
+              </>
             ) : (
               /* [EMPTY_STATE]: Technical Terminal Style */
               <div className="border-border/40 bg-surface-card/20 rounded-card-xl flex flex-col items-center justify-center border border-dashed py-40 text-center backdrop-blur-md">
@@ -115,8 +148,15 @@ export default async function BlogListingPage() {
                   <div className="bg-brand-primary h-3 w-3 rounded-full" />
                 </div>
                 <p className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-                  Status: Content_Node_Emptying...
+                  Status: Query_Result_Null_Pointer...
                 </p>
+                <p className="text-text-secondary mt-4 max-w-sm text-sm">
+                  ไม่พบผลลัพธ์ที่ตรงกับ "{query || (category !== "all" ? category : "")}" <br />
+                  ลองปรับเปลี่ยนคำค้นหาหรือเลือกหมวดหมู่ใหม่อีกครั้ง
+                </p>
+                <Button variant="outline" size="sm" className="mt-10" asChild>
+                  <Link href="/blog">Reset All Filters</Link>
+                </Button>
               </div>
             )}
           </section>

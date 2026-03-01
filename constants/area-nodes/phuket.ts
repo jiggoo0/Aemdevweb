@@ -1,20 +1,13 @@
-/**
- * [SERVICE_NODE]: PHUKET_LUXURY_DESTINATION v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: Exclusive Luxury Branding | Global P-SEO | Dynamic Inheritance
- * [MARKET]: Phuket, Laguna, Patong, Rawai (Luxury Real Estate & Hospitality)
- * [MAINTAINER]: AEMZA MACKS (Lead Architect)
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
 // [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Luxury Hotel & Resort Standard)
 import { hotelResortService } from "@/constants/services/hotel-resort";
 
-export const phuketNode: AreaNode = {
+export const phuketNode = defineAreaNode(hotelResortService, {
   // --- Basic Identity ---
   slug: "phuket",
   province: "ภูเก็ต",
   region: "South",
-  templateSlug: "hotelresort", // เชื่อมโยงกับแม่แบบที่เน้นงาน Visual ระดับ High-end
+  tier: 1,
 
   title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
   description:
@@ -25,23 +18,27 @@ export const phuketNode: AreaNode = {
     "นายเอ็มซ่ามากส์ พร้อมเนรมิตเว็บไซต์ที่สะท้อนถึงเอกลักษณ์ชั้นสูงและมอบความสะดวกสบายที่ไร้รอยต่อ (Seamless Experience) " +
     "เราเน้นโครงสร้างที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจของคุณครองอันดับหนึ่งบน Google Global",
 
-  // --- SEO Metadata ---
-  seoTitle:
-    "รับทำเว็บไซต์ ภูเก็ต ออกแบบเว็บวิลล่าหรู โรงแรม 5 ดาว ติดหน้าแรก Google Global - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ภูเก็ต มาตรฐานสากล เน้นดีไซน์ Minimal Luxury สำหรับอสังหาริมทรัพย์และท่องเที่ยวพรีเมียม รองรับภาษาอังกฤษและรัสเซีย ติด SEO ระดับโลก",
-
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก hotelResortService (Lanna Gold & Luxury Dark) เพื่อมาตรฐานพรีเมียมของระบบ
-  theme: hotelResortService.theme,
-  price: hotelResortService.price,
-  priceValue: hotelResortService.priceValue,
-  currency: hotelResortService.currency,
-  unit: hotelResortService.unit,
+  // --- Visual & Location ---
+  heroImage: "/images/areas/phuket-node.webp",
+  coordinates: { lat: 7.8804, lng: 98.3923 },
+  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล", "กะทู้"],
 
   isTourismHeavy: true,
   marketSaturation: 85,
   regionalLatency: 18,
+
+  // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าภูเก็ตดูเป็น "เว็บไซต์ระดับ Ultra-Luxury"
+  layoutOrder: [
+    "hero",
+    "promotions", // โชว์ดีลพิเศษระดับ Global ทันที
+    "experience", // เน้นประสบการณ์หรูหรา
+    "insight",
+    "roadmap-gallery", // แผนงานและภาพผลงาน
+    "weather-facilities",
+    "success",
+    "faq",
+    "portal",
+  ],
 
   regionalRoadmap: [
     {
@@ -63,13 +60,6 @@ export const phuketNode: AreaNode = {
         "เชื่อมต่อระบบ Booking Engine กับ Google Travel เพื่อดึงลูกค้าจาก OTA กลับมาจองตรง",
     },
   ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/phuket-node.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "World-Class Authority: ผู้อยู่เบื้องหลัง Digital Platform ของโครงการพูลวิลล่าหรูและยอร์ชคลับระดับแนวหน้าในภูเก็ต",
 
   // --- Localized Benefits ---
   benefits: [
@@ -117,10 +107,6 @@ export const phuketNode: AreaNode = {
       answer:
         "เรามีทีมงานและพาร์ทเนอร์ Copywriter ที่เชี่ยวชาญตลาด Luxury เพื่อเกลาเนื้อหาให้ดูแพงและโน้มน้าวใจลูกค้าต่างชาติได้จริงครับ",
     },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...hotelResortService.faqs.filter(
-      (f) => f.question.includes("ตัดบัตรเครดิต") || f.question.includes("คุ้มค่า"),
-    ),
   ],
 
   // --- Context Data ---
@@ -149,7 +135,7 @@ export const phuketNode: AreaNode = {
       localClient: "กลุ่มวิลล่าหรูระดับ Ultra-Luxury ย่านเชิงทะเล",
     },
     regionalPricing: {
-      startPrice: `${hotelResortService.price} บาท`, // Dynamic Reference
+      startPrice: `${hotelResortService.price} บาท`,
       timeline: "21-45 วัน",
     },
     localSuccessStory: {
@@ -181,9 +167,6 @@ export const phuketNode: AreaNode = {
     },
   },
 
-  // --- System Metadata ---
-  priority: 97,
-  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล", "กะทู้"],
   keywords: [
     "รับทำเว็บไซต์ ภูเก็ต",
     "Phuket Web Design",
@@ -192,5 +175,4 @@ export const phuketNode: AreaNode = {
     "รับทำ SEO ภูเก็ต",
     "บริษัทรับทำเว็บไซต์",
   ],
-  coordinates: { lat: 7.8804, lng: 98.3923 },
-};
+});

@@ -1,28 +1,38 @@
-/**
- * [SERVICE_NODE]: NAN_SLOW_LIVING v18.0.1
- * [STRATEGY]: Eco-Tourism | Cultural Storytelling | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const nanNode: AreaNode = {
+export const nanNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "nan",
+  tier: 2,
   province: "น่าน",
   region: "North",
-  templateSlug: "local-authority",
+  priority: 85,
+
   title: "รับทำเว็บไซต์ น่าน | ออกแบบเว็บที่พักและธุรกิจสร้างสรรค์ เมืองสโลว์ไลฟ์ระดับโลก",
   description:
     "เปลี่ยนความเรียบง่ายของน่านให้เป็นยอดจองตรงผ่านหน้าเว็บ ด้วยดีไซน์ที่เน้นการเล่าเรื่องทางวัฒนธรรมและความเป็นมิตร",
-  seoTitle: "รับทำเว็บไซต์ น่าน ออกแบบเว็บที่พัก ปัว สะปัน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์น่าน สำหรับรีสอร์ต โฮมสเตย์ และสินค้าพื้นเมือง เน้นความสวยงามพรีเมียม โหลดไว ติดหน้าแรก Google แม้เน็ตจำกัด",
 
   longDescription:
     "น่าน เมืองแห่งสุนทรียภาพและการใช้ชีวิตแบบสโลว์ไลฟ์ที่เป็นดั่งอัญมณีเม็ดงามของภาคเหนือ " +
     "นายเอ็มซ่ามากส์ พร้อมถ่ายทอดเรื่องราวของธุรกิจคุณผ่านเว็บไซต์ที่เน้น 'สุนทรียศาสตร์เชิงวัฒนธรรม' " +
     "ไม่ว่าจะเป็นที่พักบูทีคในสะปัน หรือโฮมสเตย์วิวหลักล้านในปัว เราออกแบบโครงสร้างที่โหลดไวเป็นพิเศษ " +
     "เพื่อให้ลูกค้าที่ใช้งานอินเทอร์เน็ตบนดอยสามารถเข้าถึงข้อมูลและจองที่พักของคุณได้ทันทีโดยไม่มีสะดุด",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/nan-node.webp",
+  coordinates: { lat: 18.7833, lng: 100.7833 },
+  districts: [
+    "เมืองน่าน",
+    "ปัว",
+    "บ่อเกลือ",
+    "ท่าวังผา",
+    "เชียงกลาง",
+    "เวียงสา",
+    "นาน้อย",
+    "แม่จริม",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +41,10 @@ export const nanNode: AreaNode = {
     "Unseen SEO Domination: วางโครงสร้างการค้นหาเจาะกลุ่มพื้นที่ท่องเที่ยวใหม่ๆ ในน่านเพื่อให้ธุรกิจของคุณถูกพบก่อนใคร",
   ],
 
-  priority: 85,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/nan-node.webp",
-  coordinates: { lat: 18.7833, lng: 100.7833 },
   isTourismHeavy: true,
   marketSaturation: 45,
   regionalLatency: 28,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +64,8 @@ export const nanNode: AreaNode = {
         "ทำ Local SEO และ Schema Markup เพื่อให้ธุรกิจของคุณขึ้นอันดับหนึ่งในใจนักท่องเที่ยว",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "น่านมีนักท่องเที่ยวกลุ่มคุณภาพที่ต้องการประสบการณ์ที่แตกต่าง เว็บไซต์ที่ดูจริงใจและเล่าเรื่องได้ดีจะปิดการขายได้ง่าย",
@@ -74,13 +79,42 @@ export const nanNode: AreaNode = {
     ],
     painPoints: ["ที่พักสวยแต่คนหาใน Google Maps ไม่เจอ", "เว็บไซต์เดิมโหลดช้ามาก"],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 56,
+      localClient: "บูทีครีสอร์ตชื่อดัง ย่านสะปัน",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โฮมสเตย์สะปัน",
+      result: "วางระบบจองตรงและทำ SEO คำค้นหาเฉพาะที่ ยอดจองห้องพักเต็มล่วงหน้า 3 เดือนในทุกฤดูกาล",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ สะปัน",
       "ออกแบบเว็บโฮมสเตย์ ปัว",
       "จ้างทำ SEO น่าน",
       "ทำเว็บสินค้าพื้นเมือง น่าน",
     ],
+    promotions: [
+      {
+        title: "Nan Slow-Living Acceleration",
+        description:
+          "สิทธิพิเศษสำหรับที่พักและสินค้าชุมชนน่าน รับฟรีบริการจัดทำ Storytelling Content และระบบปักหมุดแหล่งท่องเที่ยว Unseen มูลค่า 7,500 บาท",
+        discount: "Free Story & Maps Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/nan-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองน่าน", "ปัว", "บ่อเกลือ", "ท่าวังผา", "เชียงกลาง"],
+
   keywords: ["รับทำเว็บไซต์ น่าน", "ทำเว็บที่พัก น่าน", "จ้างทำเว็บน่าน", "รับทำ SEO น่าน"],
-};
+});

@@ -15,9 +15,6 @@ import { cn } from "@/lib/utils";
  * [STABILIZED]: แก้ไข Typed Routes Error โดยใช้แท็ก <a> สำหรับลิงก์ภายนอก
  */
 export default function NotFound() {
-  // [DETERMINISTIC]: Trace ID สำหรับการอ้างอิงสถานะระบบ
-  const traceDate = new Date().toISOString().split("T")[0];
-
   return (
     <div className="bg-surface-main selection:bg-brand-primary/20 relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-6 transition-colors duration-500">
       {/* --- 01. ATMOSPHERIC INFRASTRUCTURE: พื้นผิวทางวิศวกรรม --- */}
@@ -108,9 +105,7 @@ export default function NotFound() {
           >
             <span>Node_Status: 404_UNREACHABLE</span>
             <div className="bg-brand-primary/20 hidden h-1 w-1 rounded-full md:block" />
-            <span>
-              Trace_ID: {traceDate}_{SITE_CONFIG.project.version} // STABLE_RECOVERY
-            </span>
+            <span>Trace_ID: SYSTEM_NODE_V18 // STABLE_RECOVERY</span>
           </div>
         </div>
       </div>

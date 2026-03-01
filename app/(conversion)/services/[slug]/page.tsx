@@ -11,7 +11,7 @@ import type { Metadata, Viewport } from "next";
 import { MASTER_REGISTRY, getServiceBySlug } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, UniversalTemplateProps } from "@/types";
-import { absoluteUrl } from "@/lib/utils";
+import { constructMetadata } from "@/lib/seo-utils";
 
 // --- 2. SEO & Schema Protocols ---
 import {
@@ -23,9 +23,7 @@ import JsonLd from "@/components/seo/JsonLd";
 
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
-
-/** [SSG]: สร้างหน้า Static ล่วงหน้าสำหรับทุกบริการ */
-export const dynamicParams = false;
+import ServiceNavigationHUD from "@/components/features/services/ServiceNavigationHUD";
 
 export async function generateStaticParams() {
   return MASTER_REGISTRY.map((service) => ({
@@ -58,21 +56,12 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     };
   }
 
-  const canonicalUrl = absoluteUrl(`/services/${service.templateSlug}`);
-  const ogImage = absoluteUrl(service.image || SITE_CONFIG.ogImage);
-
-  return {
+  return constructMetadata({
     title: `${service.title} | ${SITE_CONFIG.brandName}`,
     description: service.description,
-    alternates: { canonical: canonicalUrl },
-    openGraph: {
-      title: service.title,
-      description: service.description,
-      url: canonicalUrl,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: service.title }],
-      type: "article",
-    },
-  };
+    path: `/services/${service.templateSlug}`,
+    image: service.image || SITE_CONFIG.ogImage,
+  });
 }
 
 export default async function ServicePage(props: PageProps) {
@@ -103,9 +92,7 @@ export default async function ServicePage(props: PageProps) {
     <>
       <JsonLd data={jsonLd} id={`schema-service-${service.templateSlug}`} />
 
-      {/* [ORCHESTRATION]: เราส่งต่อหน้าที่การจัดการ Visual Shell (CSS Variables, HUD, Spacing)
-        ให้ TemplateRenderer เป็นผู้ดูแล เพื่อให้เกิดความสอดคล้องระหว่างหน้า Service และหน้า Area
-      */}
+      {/* [ORCHESTRATION]: แสดงผลในโหมด service เพื่ออัตลักษณ์ที่เป็นอิสระ */}
       <TemplateRenderer
         data={
           {
@@ -114,20 +101,13 @@ export default async function ServicePage(props: PageProps) {
             servingAreas: service.activeAreas,
           } as unknown as UniversalTemplateProps
         }
-        renderMode="full"
+        contextMode="service"
       />
 
-      {/* [HUD]: ย้ายมาอยู่ระดับล่างสุดของ DOM และใช้ Fixed Position 
-        เพื่อให้แสดงผลทับทุกส่วนของเทมเพลตได้อย่างแม่นยำ 
+      {/* [SYSTEM_UI]: Elite Navigation HUD (Interactive Operating Hub)
+          [SYNC]: สร้างความต่อเนื่องของ UX ระหว่าง Node Area และ Node Service 
       */}
-      <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
-        <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/80 px-4 py-1.5 shadow-sm">
-          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
-          <span className="font-mono text-[9px] font-black tracking-[0.3em] text-[var(--text-primary)] uppercase opacity-70">
-            Service_Node: {service.templateSlug.replace(/-/g, "_")}
-          </span>
-        </div>
-      </div>
+      <ServiceNavigationHUD currentService={service} allServices={MASTER_REGISTRY} />
     </>
   );
 }

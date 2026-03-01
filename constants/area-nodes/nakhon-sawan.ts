@@ -5,6 +5,7 @@ import { catalogService } from "@/constants/services/catalog";
 export const nakhonSawanNode = defineAreaNode(catalogService, {
   // --- Basic Identity ---
   slug: "nakhon-sawan",
+  tier: 2,
   province: "นครสวรรค์",
   region: "North",
   priority: 94,

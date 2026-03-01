@@ -1,28 +1,29 @@
-/**
- * [SERVICE_NODE]: YALA_COMMERCIAL_HUB v18.0.1
- * [STRATEGY]: Border Trade | Smart City | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const yalaNode: AreaNode = {
+export const yalaNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "yala",
+  tier: 2,
   province: "ยะลา",
   region: "South",
-  templateSlug: "local-authority",
+  priority: 88,
+
   title: "รับทำเว็บไซต์ ยะลา | พัฒนาเว็บไซต์การค้าชายแดนและธุรกิจในเมืองต้นแบบ",
   description:
     "ยกระดับธุรกิจในยะลาและเบตงสู่โลกออนไลน์ ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลที่รวดเร็ว",
-  seoTitle: "รับทำเว็บไซต์ ยะลา เบตง ออกแบบเว็บธุรกิจ การค้าชายแดน - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์ยะลา สำหรับธุรกิจนำเข้า-ส่งออก คลินิก และ SME เบตง ดีไซน์สวยโหลดไว รองรับ SEO และมาตรฐานความปลอดภัยสูง",
 
   longDescription:
     "ยะลา เมืองผังเมืองที่สวยที่สุดในไทยและศูนย์กลางเศรษฐกิจใหม่ของภาคใต้ตอนล่างที่มีเบตงเป็นแม่เหล็กดึงดูดนักท่องเที่ยว " +
     "นายเอ็มซ่ามากส์ พร้อมขับเคลื่อนธุรกิจในยะลาด้วยเทคโนโลยีเว็บไซต์ที่เน้นความทันสมัยและความปลอดภัยสูงสุด " +
     "เราออกแบบระบบที่รองรับการสื่อสารหลายภาษา (Multilingual) เพื่อสนับสนุนการค้าชายแดนและธุรกิจการท่องเที่ยวในเขตเบตง " +
     "เพื่อเปลี่ยนยอดผู้เข้าชม (Traffic) ให้กลายเป็นยอดขายและสร้างตัวตนที่แข็งแกร่งบนโลกดิจิทัล",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/yala-node.webp",
+  coordinates: { lat: 6.5411, lng: 101.2811 },
+  districts: ["เมืองยะลา", "เบตง", "บันนังสตา", "รามัน", "ยะหา", "ธารโต", "กรงปินัง", "กาบัง"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +32,10 @@ export const yalaNode: AreaNode = {
     "Betong-Tourism SEO mastery: วางโครงสร้างการค้นหาครอบคลุมคีย์เวิร์ดแหล่งท่องเที่ยวและที่พักในเขตเบตงอันดับหนึ่ง",
   ],
 
-  priority: 88,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/yala-node.webp",
-  coordinates: { lat: 6.5411, lng: 101.2811 },
   isTourismHeavy: true,
   marketSaturation: 45,
   regionalLatency: 28,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -61,6 +55,8 @@ export const yalaNode: AreaNode = {
         "ทำ Local SEO เน้นพื้นที่เบตงและยะลาเพื่อดักจับ Traffic จากกลุ่มลูกค้าที่มีกำลังซื้อสูง",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "ยะลาและเบตงมีการเติบโตทางเศรษฐกิจใหม่ เว็บไซต์ต้องเน้นความปลอดภัย ความรวดเร็ว และการเข้าถึงประชาชนในพื้นที่",
@@ -77,13 +73,42 @@ export const yalaNode: AreaNode = {
       "ขาดการสื่อสารกับกลุ่มนักท่องเที่ยวต่างถิ่นที่เป็นระบบ",
     ],
     competitorLevel: "medium",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 45,
+      localClient: "ธุรกิจโรงแรมพรีเมียม ย่านเบตง",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-25 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: โรงแรมในเบตง",
+      result: "วางระบบจองตรงและทำ SEO ภาษาจีน/มลายู ยอดจองจากนักท่องเที่ยวต่างชาติเพิ่มขึ้น 200%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ เบตง",
       "ออกแบบเว็บธุรกิจ ยะลา",
       "จ้างทำ SEO เบตง",
       "ทำเว็บสินค้าพรีเมียม ยะลา",
     ],
+    promotions: [
+      {
+        title: "Betong Digital Hub Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจในเบตง รับฟรีบริการออกแบบ Company Profile 3 ภาษา และระบบปักหมุดแหล่งท่องเที่ยว Unseen มูลค่า 10,000 บาท",
+        discount: "Free Multilingual Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/yala-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองยะลา", "เบตง", "บันนังสตา", "รามัน", "ยะหา"],
+
   keywords: ["รับทำเว็บไซต์ ยะลา", "ทำเว็บเบตง", "จ้างทำเว็บธุรกิจ", "รับทำ SEO ยะลา"],
-};
+});

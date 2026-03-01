@@ -1,19 +1,14 @@
-/**
- * [SERVICE_NODE]: CHUMPHON_SMART_GATEWAY v18.0.1 (STRICT_SYNC)
- * [STRATEGY]: Smart Gateway | Government Trust | Dynamic Inheritance
- * [MARKET]: Chumphon Local Authorities (PAO/SAO) & Agriculture
- */
-
-import type { AreaNode } from "@/types";
-// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard)
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const chumphonNode: AreaNode = {
+export const chumphonNode = defineAreaNode(localAuthorityService, {
   // --- Basic Identity ---
   slug: "chumphon",
+  tier: 2,
   province: "ชุมพร",
   region: "South",
-  templateSlug: "local-authority", // ยึดตาม Template หลัก
+  priority: 85,
 
   title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
   description:
@@ -24,18 +19,17 @@ export const chumphonNode: AreaNode = {
     "ที่เปลี่ยนจากเมืองผ่านให้เป็นเมืองพักผ่อน (Stay-over City) ด้วยระบบ E-Service ที่ลดขั้นตอนเอกสาร และโมดูลประชาสัมพันธ์สินค้าเกษตรพรีเมียม " +
     "เพื่อให้ท้องถิ่นก้าวสู่การเป็น Smart City ที่แท้จริง พร้อมรองรับการประเมิน ITA ในระดับสูงสุด",
 
-  // --- SEO Metadata ---
-  seoTitle: "รับทำเว็บไซต์ชุมพร อบต. เทศบาล ราชการ - เอ็มซ่ามากส์ มาตรฐานภาครัฐ ITA",
-  seoDescription:
-    "บริการจัดทำเว็บไซต์หน่วยงานราชการในจังหวัดชุมพร รองรับมาตรฐาน ITA และ WCAG ครบถ้วน พร้อมระบบจัดการเรื่องร้องเรียนออนไลน์ และประชาสัมพันธ์แหล่งท่องเที่ยว Unseen ชุมพร",
+  // --- Visual & Location ---
+  heroImage: "/images/areas/chumphon-node.webp",
+  coordinates: { lat: 10.493, lng: 99.18 },
+  districts: ["เมืองชุมพร", "ท่าแซะ", "ปะทิว", "หลังสวน", "ละแม", "พะโต๊ะ", "สวี", "ทุ่งตะโก"],
 
-  // --- [DYNAMIC_INHERITANCE]: Theme & Pricing ---
-  // บังคับใช้ค่าจาก localAuthorityService (Emerald/Civil Theme) เพื่อมาตรฐานเดียวกัน
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
+  // --- Localized Benefits ---
+  benefits: [
+    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อ",
+    "Digital Service Gateway: ระบบรับเรื่องร้องเรียนและคำร้องออนไลน์ ช่วยลดภาระงานหน้าเคาน์เตอร์และอำนวยความสะดวกประชาชน",
+    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชน",
+  ],
 
   marketSaturation: 45,
 
@@ -57,65 +51,6 @@ export const chumphonNode: AreaNode = {
       title: "Southern Gateway SEO",
       description: "เน้นคีย์เวิร์ดดักจับกลุ่มนักท่องเที่ยวและคู่ค้าโลจิสติกส์ในฐานะประตูสู่ภาคใต้",
     },
-  ],
-
-  // --- Visual (Local Specific) ---
-  heroImage: "/images/areas/chumphon-gateway.webp",
-
-  // --- Trust Signals ---
-  clientTrust:
-    "Government Standard: ได้รับความไว้วางใจในการพัฒนาระบบดิจิทัลสำหรับ อปท. ในเขตภาคใต้ตอนบน",
-
-  // --- Localized Benefits ---
-  benefits: [
-    "ITA 100% Compliance: โครงสร้างเว็บไซต์ที่ออกแบบตามเกณฑ์การประเมินคุณธรรมและความโปร่งใส (OIT) ครบทุกหัวข้อ",
-    "Digital Service Gateway: ระบบรับเรื่องร้องเรียนและคำร้องออนไลน์ ช่วยลดภาระงานหน้าเคาน์เตอร์และอำนวยความสะดวกประชาชน",
-    "Agro-Tourism Link: โมดูลพิเศษเชื่อมโยงฐานข้อมูลเกษตรกรและจุดเช็คอินท่องเที่ยว เพื่อกระจายรายได้สู่ชุมชน",
-  ],
-
-  // --- Core Features (Gov & Agri Specific) ---
-  coreFeatures: [
-    {
-      title: "Smart Public Service",
-      description:
-        "ระบบบริการประชาชนออนไลน์ ชำระค่าน้ำ ค่าขยะ และยื่นขอใบอนุญาตผ่านหน้าเว็บ 24 ชม.",
-      icon: "Users",
-    },
-    {
-      title: "Tourism & OTOP Showcase",
-      description:
-        "ระบบ Interactive Map แนะนำแหล่งท่องเที่ยวและ Marketplace สำหรับสินค้าวิสาหกิจชุมชน",
-      icon: "Map",
-    },
-    {
-      title: "Disaster Alert System",
-      description:
-        "ระบบแจ้งเตือนภัยพิบัติและระดับน้ำแบบเรียลไทม์ เพื่อความปลอดภัยของประชาชนในพื้นที่เสี่ยง",
-      icon: "Bell",
-    },
-  ],
-
-  // --- Localized FAQs ---
-  faqs: [
-    {
-      question: "เว็บไซต์รองรับมาตรฐาน WCAG สำหรับผู้พิการหรือไม่?",
-      answer:
-        "รองรับครับ เราออกแบบโครงสร้างให้โปรแกรมอ่านหน้าจอ (Screen Reader) เข้าถึงได้ และปรับขนาดตัวอักษรได้ตามมาตรฐานสากลครับ",
-    },
-    {
-      question: "สามารถทำระบบแผนที่ภาษีและทะเบียนทรัพย์สินเชื่อมต่อได้ไหม?",
-      answer:
-        "ทำได้ครับ เราสามารถพัฒนาโมดูลเชื่อมโยงข้อมูลแผนที่เพื่อสนับสนุนการจัดเก็บรายได้ของท้องถิ่นให้แม่นยำขึ้นครับ",
-    },
-    {
-      question: "มีระบบจัดการข้อมูลผู้สูงอายุและคนพิการในพื้นที่ไหม?",
-      answer:
-        "เรามีระบบฐานข้อมูลสวัสดิการชุมชนที่เจ้าหน้าที่สามารถบริหารจัดการข้อมูลเบี้ยยังชีพผ่านระบบหลังบ้านได้โดยตรงครับ",
-    },
-    // [MERGE]: ดึงคำถามมาตรฐานจาก Template หลัก
-    ...localAuthorityService.faqs.filter(
-      (f) => f.question.includes("จัดซื้อจัดจ้าง") || f.question.includes("Google Maps"),
-    ),
   ],
 
   // --- Context Data ---
@@ -144,7 +79,7 @@ export const chumphonNode: AreaNode = {
       localClient: "อปท. ชั้นนำในเขตอำเภอหลังสวนและละแม",
     },
     regionalPricing: {
-      startPrice: `${localAuthorityService.price} บาท`, // Dynamic Reference
+      startPrice: `${localAuthorityService.price} บาท`,
       timeline: "14-21 วัน",
     },
     localSuccessStory: {
@@ -158,11 +93,24 @@ export const chumphonNode: AreaNode = {
       "ออกแบบเว็บราชการหลังสวน",
       "รับทำเว็บไซต์ อบต.ท่าแซะ",
     ],
+    promotions: [
+      {
+        title: "Smart Gateway Digital Boost",
+        description:
+          "สิทธิพิเศษสำหรับหน่วยงาน อปท. และวิสาหกิจเกษตรในชุมพร รับฟรีบริการจัดทำหน้า Profile แหล่งท่องเที่ยวชุมชนและระบบ E-Service เบื้องต้นมูลค่า 8,500 บาท",
+        discount: "Free Smart Gov & Tourism Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/chumphon-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
 
-  // --- System Metadata ---
-  priority: 85,
-  districts: ["เมืองชุมพร", "ท่าแซะ", "ปะทิว", "หลังสวน", "ละแม", "พะโต๊ะ", "สวี", "ทุ่งตะโก"],
   keywords: [
     "รับทำเว็บไซต์ อบต",
     "ทำเว็บไซต์เทศบาล",
@@ -170,5 +118,4 @@ export const chumphonNode: AreaNode = {
     "ระบบ E-Service ท้องถิ่น",
     "Smart City ชุมพร",
   ],
-  coordinates: { lat: 10.493, lng: 99.18 },
-};
+});

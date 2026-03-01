@@ -2,8 +2,8 @@
 @plugin "tailwindcss-animate";
 
 /**
- * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.0.6 (PRODUCTION_READY)
- * [STRATEGY]: Card Symmetry Protocol | OKLCH Precision | GPU-Accelerated
+ * [CORE INFRASTRUCTURE]: AEM-ULTIMATE-ENGINE v18.1.0 (PRODUCTION_OPTIMIZED)
+ * [STRATEGY]: Card Symmetry Protocol | OKLCH Precision | Native Tailwind 4
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -34,9 +34,13 @@
 
   /* --- 03. DEPTH & DYNAMIC LIGHTING --- */
   --shadow-glow: 0 0 40px -10px oklch(var(--brand-primary-raw) / 0.5);
+  --shadow-glow-sm: 0 0 20px -5px oklch(var(--brand-primary-raw) / 0.3);
+  --shadow-glow-destructive: 0 0 30px -10px oklch(60% 0.2 20 / 0.5);
   --shadow-pro: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --shadow-pro-sm: 0 4px 20px rgba(0, 0, 0, 0.02);
+  --shadow-pro-xl: 0 20px 60px rgba(0, 0, 0, 0.08);
 
-  /* --- 04. GEOMETRY & LAYERING (AUDIT REFACTOR) --- */
+  /* --- 04. GEOMETRY & LAYERING --- */
   --radius-section: 2.5rem;
   --radius-card: 2rem;
   --radius-card-lg: 3rem;
@@ -45,83 +49,8 @@
 
   --z-index-nav: 700;
   --z-index-overlay: 600;
-}
 
-@layer base {
-  :root {
-    --brand-primary-raw: 55% 0.18 260; /* Deep Professional Indigo */
-    --brand-secondary-raw: 45% 0.15 260;
-    --brand-accent-raw: 85% 0.1 260;
-    --surface-main: #ffffff;
-    --surface-offset: #f8fafc;
-    --surface-card: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #334155;
-    --text-muted: #64748b;
-    --border: #e2e8f0;
-    --radius: 0.75rem;
-  }
-
-  .dark {
-    --brand-primary-raw: 65% 0.2 260;
-    --brand-secondary-raw: 55% 0.15 260;
-    --brand-accent-raw: 80% 0.12 260;
-    --surface-main: #020617;
-    --surface-offset: #0b1120;
-    --surface-card: #0f172a;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border: rgba(255, 255, 255, 0.06);
-    color-scheme: dark;
-  }
-
-  html {
-    @apply antialiased;
-    background-color: var(--surface-main);
-    color: var(--text-primary);
-    overflow-y: scroll;
-    text-rendering: optimizeLegibility;
-  }
-
-  body {
-    font-family: var(--font-thai);
-    min-height: 100dvh;
-    position: relative;
-    background: var(--surface-main);
-    scrollbar-gutter: stable;
-  }
-}
-
-@layer components {
-  /* [AUDIT]: Unused legacy card structures removed. 
-     Switched to atomic utility-first approach for better performance. */
-}
-
-@layer utilities {
-  /* [OPTIMIZED]: Glassmorphism v3.0 - Balanced Depth */
-  .glass-card {
-    background-color: color-mix(in oklch, var(--surface-card), transparent 15%);
-    box-shadow: var(--shadow-pro);
-    @supports (backdrop-filter: blur(1px)) {
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      backface-visibility: hidden;
-      transform: translate3d(0, 0, 0);
-    }
-    border: 1px solid color-mix(in oklch, var(--border), transparent 40%);
-  }
-
-  .glow-primary {
-    box-shadow: 0 10px 40px -10px oklch(var(--brand-primary-raw) / 0.3);
-  }
-
-  .gpu-layer {
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-  }
-
-  /* [ANIMATIONS]: Compositor-Thread Optimizations */
+  /* --- 05. NATIVE ANIMATIONS --- */
   @keyframes aura-float-1 {
     0%,
     100% {
@@ -154,10 +83,87 @@
     }
   }
 
-  .animate-aura-1 {
-    animation: aura-float-1 20s infinite linear;
+  --animate-aura-1: aura-float-1 20s infinite linear;
+  --animate-aura-2: aura-float-2 25s infinite linear;
+  --animate-shimmer: shimmer 2s infinite linear;
+}
+
+@layer base {
+  :root {
+    --brand-primary-raw: 55% 0.18 260;
+    --brand-secondary-raw: 45% 0.15 260;
+    --brand-accent-raw: 85% 0.1 260;
+    --surface-main: #ffffff;
+    --surface-offset: #f8fafc;
+    --surface-card: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --radius: 0.75rem;
   }
-  .animate-aura-2 {
-    animation: aura-float-2 25s infinite linear;
+
+  .dark {
+    --brand-primary-raw: 65% 0.2 260;
+    --brand-secondary-raw: 55% 0.15 260;
+    --brand-accent-raw: 80% 0.12 260;
+    --surface-main: #020617;
+    --surface-offset: #0b1120;
+    --surface-card: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: rgba(255, 255, 255, 0.06);
+    color-scheme: dark;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    background-color: var(--surface-main);
+    color: var(--text-primary);
+    overflow-y: scroll;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-thai);
+    min-height: 100dvh;
+    position: relative;
+    background: var(--surface-main);
+    scrollbar-gutter: stable;
+  }
+}
+
+@layer utilities {
+  /* --- [FLAGSHIP_SECTION_ARCHITECTURE] --- */
+  .section-container {
+    @apply relative w-full px-4 py-24 md:px-8 md:py-40 lg:py-52;
+  }
+
+  .unified-grid-overlay {
+    @apply pointer-events-none absolute inset-0 z-0 opacity-[0.03] select-none;
+    background-image: radial-gradient(var(--color-brand-primary) 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+
+  .interactive-glow {
+    @apply absolute -z-10 rounded-full opacity-10 blur-[120px] transition-all duration-1000;
+  }
+
+  /* --- [SMART_CONTRAST_LAYER] --- */
+  .contrast-guard {
+    @apply relative z-10 antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* [OPTIMIZED]: Glassmorphism v4.0 (Thematic) */
+  .glass-card {
+    background-color: color-mix(in oklch, var(--surface-card), transparent 15%);
+    box-shadow: var(--shadow-pro-xl);
+    @supports (backdrop-filter: blur(1px)) {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+    border: 1px solid color-mix(in oklch, var(--border), transparent 50%);
   }
 }

@@ -10,6 +10,7 @@ import { seoAgencyService } from "@/constants/services/seo-agency";
 export const nonthaburiNode = defineAreaNode(seoAgencyService, {
   // --- Basic Identity ---
   slug: "nonthaburi",
+  tier: 2,
   province: "นนทบุรี",
   region: "Central",
   priority: 98,

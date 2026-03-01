@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import { cacheLife, cacheTag } from "next/cache"; // [NEW]: Next.js 16 Caching
 import { MASTER_REGISTRY } from "@/constants/master-registry";
 import ServiceCard from "./ServiceCard";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -21,27 +22,35 @@ interface ServiceListingHubProps {
 /**
  * @component ServiceListingHub
  * @description ศูนย์กลางการจัดระเบียบ Node บริการ (RSC Version)
+ * [STRATEGY]: Next.js 16 Data Caching | Semantic ItemList Support
  */
-const ServiceListingHub = ({
+const ServiceListingHub = async ({
   limit,
   category,
   className,
   showEmptyState = true,
 }: ServiceListingHubProps) => {
   /**
-   * [DATA_ORCHESTRATION]: Server-side sorting and filtering
+   * [DATA_ORCHESTRATION]: Server-side sorting and filtering with Next.js Cache
    */
-  const registry = Array.isArray(MASTER_REGISTRY) ? MASTER_REGISTRY : [];
+  const getServices = async () => {
+    "use cache";
+    cacheLife("hours");
+    cacheTag("service-registry");
 
-  const services = [...registry]
-    .filter((svc) => !category || svc.category === category)
-    .sort((a, b) => {
-      const pA = a.priority ?? 99;
-      const pB = b.priority ?? 99;
-      if (pA !== pB) return pA - pB;
-      return (a.title || "").localeCompare(b.title || "", "th");
-    })
-    .slice(0, limit || registry.length);
+    const registry = Array.isArray(MASTER_REGISTRY) ? MASTER_REGISTRY : [];
+    return [...registry]
+      .filter((svc) => !category || svc.category === category)
+      .sort((a, b) => {
+        const pA = a.priority ?? 99;
+        const pB = b.priority ?? 99;
+        if (pA !== pB) return pA - pB;
+        return (a.title || "").localeCompare(b.title || "", "th");
+      })
+      .slice(0, limit || registry.length);
+  };
+
+  const services = await getServices();
 
   /**
    * [UI_STATE]: STANDBY_NODE (Empty State Protocol)

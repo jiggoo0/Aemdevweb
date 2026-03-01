@@ -1,28 +1,39 @@
-/**
- * [SERVICE_NODE]: PHAYAO_LAKE_WELLNESS v18.0.1
- * [STRATEGY]: Eco-Tourism | Wellness | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const phayaoNode: AreaNode = {
+export const phayaoNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "phayao",
+  tier: 2,
   province: "พะเยา",
   region: "North",
-  templateSlug: "local-authority",
+  priority: 82,
+
   title: "รับทำเว็บไซต์ พะเยา | ออกแบบเว็บท่องเที่ยวเชิงนิเวศและธุรกิจริมกว๊านพะเยา",
   description:
     "เปลี่ยนความสงบของพะเยาให้เป็นจุดขายที่ทันสมัย ด้วยเว็บไซต์ที่เน้นความสวยงามของธรรมชาติและระบบจองที่ลื่นไหล",
-  seoTitle: "รับทำเว็บไซต์ พะเยา ออกแบบเว็บที่พักริมกว๊าน ธุรกิจเกษตร - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์พะเยา ครบวงจร สำหรับธุรกิจริมกว๊านพะเยา คาเฟ่ และรีสอร์ตเชิงนิเวศ เว็บสวยโหลดไว รองรับมือถือ 100%",
 
   longDescription:
     "พะเยา เมืองแห่งความสงบริมกว๊านที่เป็นจุดหมายปลายทางยอดนิยมของนักท่องเที่ยวสาย Wellness และธรรมชาติ " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจในพะเยาด้วยเว็บไซต์ที่สะท้อนเสน่ห์ของ 'กว๊านพะเยา' สู่โลกดิจิทัล " +
     "เราออกแบบระบบที่เน้นความสวยงามเชิง Visual และความรวดเร็วในการจองที่พัก เพื่อช่วยให้รีสอร์ต คาเฟ่ และธุรกิจเกษตรพรีเมียมในพื้นที่ " +
     "สามารถเปลี่ยนผู้เยี่ยมชมหน้าเว็บให้กลายเป็นยอดขายที่วัดผลได้จริง",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/phayao-node.webp",
+  coordinates: { lat: 19.1667, lng: 99.9 },
+  districts: [
+    "เมืองพะเยา",
+    "เชียงคำ",
+    "เชียงม่วน",
+    "ดอกคำใต้",
+    "ปง",
+    "จุน",
+    "แม่ใจ",
+    "ภูซาง",
+    "ภูกามยาว",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,17 +42,10 @@ export const phayaoNode: AreaNode = {
     "Northern Agri-SEO: วางรากฐานการค้นหาเพื่อสนับสนุนสินค้าเกษตรอินทรีย์และสินค้าพื้นเมืองคุณภาพของพะเยา",
   ],
 
-  priority: 82,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/phayao-node.webp",
-  coordinates: { lat: 19.1667, lng: 99.9 },
   isTourismHeavy: true,
   marketSaturation: 32,
   regionalLatency: 26,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -60,21 +64,52 @@ export const phayaoNode: AreaNode = {
         "ทำ Local SEO เน้นคีย์เวิร์ด 'ที่พักพะเยา' และ 'ร้านอาหารริมกว๊าน' เพื่อชิงพื้นที่หน้าแรก",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "พะเยาเป็นเมืองพักผ่อนที่กำลังเติบโต เว็บไซต์ที่ดูคลีนและเข้ากับบรรยากาศเมืองจะได้รับความนิยมสูง",
     technicalApproach: "เน้นความรวดเร็วในการโหลดและการปักหมุด Google Maps ในจุดท่องเที่ยวใหม่ๆ",
-    localStrength: "มีความโดดเด่นด้านกว๊านพะเยาซึ่งเป็นแม่เหล็กดึงดูดนักท่องเที่ยวได้ตลอดทั้งปี",
+    localStrength: "มีความโดดเด่นด้านกว๊านพะเยาซึ่งเป็นแม่เล็กดึงดูดนักท่องเที่ยวได้ตลอดทั้งปี",
     nicheIndustries: ["ที่พักและรีสอร์ตริมน้ำ", "คาเฟ่สายธรรมชาติ", "ธุรกิจเกษตรปลอดภัย (Organic)"],
     painPoints: ["เว็บไซต์เก่าไม่รองรับการแสดงผลรูปภาพสวยๆ", "ระบบจองไม่รองรับภาษาต่างชาติ"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 32,
+      localClient: "คาเฟ่ริมกว๊านพะเยาชื่อดัง",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: รีสอร์ตเชิงนิเวศพะเยา",
+      result: "วางระบบจองตรงหน้าเว็บ ยอดลูกค้าจองผ่านเพจและเว็บรวมกันเพิ่มขึ้น 120%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ กว๊านพะเยา",
       "ออกแบบเว็บที่พัก พะเยา",
       "จ้างทำ SEO พะเยา",
       "ทำเว็บสินค้าเกษตร พะเยา",
     ],
+    promotions: [
+      {
+        title: "Phayao Wellness Boost",
+        description:
+          "สิทธิพิเศษสำหรับธุรกิจริมกว๊านและสินค้าเกษตรปลอดภัย รับฟรีบริการปักหมุด GMB และระบบ Local Schema มูลค่า 5,000 บาท",
+        discount: "Free Maps & Local SEO Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/phayao-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองพะเยา", "เชียงคำ", "เชียงม่วน", "ดอกคำใต้", "ปง"],
+
   keywords: ["รับทำเว็บไซต์ พะเยา", "ทำเว็บที่พัก พะเยา", "จ้างทำเว็บพะเยา", "รับทำ SEO พะเยา"],
-};
+});

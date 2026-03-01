@@ -10,6 +10,7 @@ import React, { memo, useCallback } from "react";
 import { FloatingContainer } from "./FloatingContainer";
 import IconRenderer from "@/components/ui/IconRenderer";
 import { SITE_CONFIG } from "@/constants/site-config";
+import { UI_STRINGS } from "@/constants/ui-strings";
 import { cn } from "@/lib/utils";
 
 // --- [TYPE_DEFINITION]: Extend Global Window for DataLayer ---
@@ -70,7 +71,7 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
               <span className="bg-line-green relative inline-flex h-2 w-2 rounded-full shadow-[0_0_10px_var(--color-line-green)]"></span>
             </span>
             <p className="text-text-primary font-mono text-[9px] font-black tracking-[0.2em] uppercase">
-              Specialist_Online
+              {UI_STRINGS.cta.specialistOnline}
             </p>
           </div>
         </div>
@@ -110,7 +111,7 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
                 "shadow-pro border-border/40 bg-surface-main/95 text-text-primary translate-x-3 rounded-2xl border px-6 py-3 text-[11px] font-bold tracking-[0.2em] whitespace-nowrap uppercase opacity-0 backdrop-blur-xl transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
               )}
             >
-              Consult Expert
+              {UI_STRINGS.cta.consultExpert}
             </span>
             {/* Neural Linkage UI */}
             <div className="bg-brand-primary h-px w-6 origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />

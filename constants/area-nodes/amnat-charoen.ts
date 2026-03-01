@@ -1,28 +1,37 @@
-/**
- * [SERVICE_NODE]: AMNAT_CHAROEN_WELLNESS v18.0.1
- * [STRATEGY]: Slow Living | Local Agri-Craft | Dynamic Inheritance
- */
-
-import type { AreaNode } from "@/types";
+import { defineAreaNode } from "./node-factory";
+// [IMPORT]: นำเข้า Template หลักเพื่อดึงค่ากลาง (Local Authority Standard - ปรับให้ทันสมัย)
 import { localAuthorityService } from "@/constants/services/local-authority";
 
-export const amnatCharoenNode: AreaNode = {
+export const amnatCharoenNode = defineAreaNode(localAuthorityService, {
+  // --- Basic Identity ---
   slug: "amnat-charoen",
+  tier: 2,
   province: "อำนาจเจริญ",
   region: "Northeast",
-  templateSlug: "local-authority",
+  priority: 80,
+
   title: "รับทำเว็บไซต์ อำนาจเจริญ | พัฒนาเว็บไซต์วิสาหกิจชุมชนและธุรกิจท่องเที่ยววิถีสโลว์ไลฟ์",
   description:
     "ยกระดับธุรกิจในอำนาจเจริญสู่โลกออนไลน์ ด้วยเว็บไซต์ที่เน้นงานดีไซน์ที่เป็นมิตรและระบบจัดการข้อมูลที่ใช้งานง่าย",
-  seoTitle: "รับทำเว็บไซต์ อำนาจเจริญ ออกแบบเว็บสินค้า OTOP ที่พัก - เอ็มซ่ามากส์",
-  seoDescription:
-    "จ้างทำเว็บไซต์อำนาจเจริญ สำหรับ SME ท้องถิ่น วิสาหกิจชุมชน และที่พักสายธรรมชาติ ดีไซน์สวยสะอาดตา โหลดไว รองรับ SEO พื้นที่",
 
   longDescription:
     "อำนาจเจริญ เมืองแห่งความสงบและวิถีเกษตรอินทรีย์ที่เป็นดั่งอัญมณีลับของภาคอีสาน " +
     "นายเอ็มซ่ามากส์ พร้อมยกระดับธุรกิจและวิสาหกิจชุมชนในอำนาจเจริญด้วยเว็บไซต์ที่สะท้อน 'สุนทรียภาพแห่งความเรียบง่าย' " +
     "เราออกแบบระบบที่เน้นการเล่าเรื่องคุณค่าของงานคราฟต์ท้องถิ่นและสินค้าเกษตรปลอดภัย " +
     "เพื่อให้แบรนด์อำนาจเจริญของคุณ ครองพื้นที่บนโลกออนไลน์และเข้าถึงลูกค้ากลุ่มคุณภาพที่รักในวิถีสโลว์ไลฟ์",
+
+  // --- Visual & Location ---
+  heroImage: "/images/areas/amnat-charoen-node.webp",
+  coordinates: { lat: 15.858, lng: 104.625 },
+  districts: [
+    "เมืองอำนาจเจริญ",
+    "หัวตะพาน",
+    "ลืออำนาจ",
+    "พนา",
+    "เสนางคนิคม",
+    "ชานุมาน",
+    "ปทุมราชวงศา",
+  ],
 
   // --- Localized Benefits ---
   benefits: [
@@ -31,16 +40,9 @@ export const amnatCharoenNode: AreaNode = {
     "Organic Hub SEO: วางโครงสร้างการค้นหาเพื่อสนับสนุนสินค้าเกษตรอินทรีย์และแหล่งท่องเที่ยววิถีชุมชนอันดับหนึ่ง",
   ],
 
-  priority: 80,
-  theme: localAuthorityService.theme,
-  price: localAuthorityService.price,
-  priceValue: localAuthorityService.priceValue,
-  currency: localAuthorityService.currency,
-  unit: localAuthorityService.unit,
-  heroImage: "/images/areas/amnat-charoen-node.webp",
-  coordinates: { lat: 15.858, lng: 104.625 },
   marketSaturation: 25,
   regionalLatency: 26,
+
   regionalRoadmap: [
     {
       step: "01",
@@ -60,6 +62,8 @@ export const amnatCharoenNode: AreaNode = {
         "ทำ Local SEO ดักจับคำค้นหาธุรกิจและสินค้าสำคัญในอำนาจเจริญเพื่อให้คนหาเจอง่ายขึ้น",
     },
   ],
+
+  // --- Context Data ---
   localContext: {
     marketInsight:
       "อำนาจเจริญเป็นเมืองแห่งธรรมและวิถีเกษตรที่สงบ เว็บไซต์ที่ดูจริงใจและเข้าถึงง่ายจะตรงใจลูกค้าที่สุด",
@@ -74,18 +78,48 @@ export const amnatCharoenNode: AreaNode = {
     ],
     painPoints: ["หาข้อมูลสินค้า OTOP ในพื้นที่ยาก", "เว็บไซต์เดิมไม่อัปเดตข้อมูลและดูไม่ทันสมัย"],
     competitorLevel: "low",
+    socialProof: {
+      rating: 5.0,
+      reviewCount: 28,
+      localClient: "กลุ่มวิสาหกิจชุมชนสมุนไพรอำนาจเจริญ",
+    },
+    regionalPricing: {
+      startPrice: `${localAuthorityService.price} บาท`,
+      timeline: "14-21 วัน",
+    },
+    localSuccessStory: {
+      title: "Case Study: วิสาหกิจสมุนไพรท้องถิ่น",
+      result:
+        "วางระบบหน้าร้านออนไลน์และทำ SEO คำค้นหาเฉพาะทาง ยอดสั่งซื้อจากต่างจังหวัดเพิ่มขึ้น 120%",
+    },
     hyperLocalKeywords: [
       "รับทำเว็บไซต์ อำนาจเจริญ",
       "ออกแบบเว็บสินค้า OTOP",
       "จ้างทำ SEO ลืออำนาจ",
       "ทำเว็บวิสาหกิจชุมชน อำนาจเจริญ",
     ],
+    promotions: [
+      {
+        title: "Amnat Charoen Organic Boost",
+        description:
+          "สิทธิพิเศษสำหรับวิสาหกิจชุมชนและ SME ในอำนาจเจริญ รับฟรีบริการจัดทำหน้า Storytelling Content และระบบปักหมุดจุดจำหน่ายสินค้ามูลค่า 5,000 บาท",
+        discount: "Free Story & GMB Setup",
+        expiry: "2026-12-31",
+      },
+    ],
+    regionalVisuals: {
+      banner: "/images/areas/amnat-charoen-node.webp",
+      gallery: [
+        "/images/services/local-node.webp",
+        "/images/case-studies/provincial-domination.webp",
+      ],
+    },
   },
-  districts: ["เมืองอำนาจเจริญ", "หัวตะพาน", "ลืออำนาจ", "พนา", "เสนางคนิคม"],
+
   keywords: [
     "รับทำเว็บไซต์ อำนาจเจริญ",
     "ทำเว็บสินค้า OTOP",
     "จ้างทำเว็บอำนาจเจริญ",
     "รับทำ SEO อำนาจเจริญ",
   ],
-};
+});
