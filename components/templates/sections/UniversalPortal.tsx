@@ -39,11 +39,11 @@ const UniversalPortal = ({ data }: BaseTemplateProps) => {
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
         {/* Authority Marker */}
         <div className="mb-10 flex flex-col items-center gap-3">
-          <div className="shadow-glow-sm flex h-20 w-20 items-center justify-center rounded-3xl border border-[var(--border)] bg-[var(--surface-card)] text-[var(--color-brand-primary)] ring-1 ring-[var(--color-brand-primary)]/20 backdrop-blur-2xl">
+          <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[var(--border)] bg-[var(--surface-card)] text-[var(--color-brand-primary)] shadow-sm ring-1 ring-[var(--color-brand-primary)]/20 backdrop-blur-sm">
             <IconRenderer name="Target" size={48} />
           </div>
           <span className="font-mono text-[10px] font-black tracking-[0.5em] text-[var(--color-brand-primary)] uppercase opacity-80">
-            Conversion_Master_Node
+            พร้อมยกระดับธุรกิจ
           </span>
         </div>
 
@@ -60,7 +60,7 @@ const UniversalPortal = ({ data }: BaseTemplateProps) => {
             <Button
               href={primaryAction.href}
               size="lg"
-              className="shadow-glow-md h-16 rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-widest text-white uppercase italic"
+              className="shadow-md-md h-16 rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-widest text-white uppercase italic"
               variant="default"
             >
               <IconRenderer name={primaryAction.icon || "Zap"} className="mr-2 h-5 w-5" />

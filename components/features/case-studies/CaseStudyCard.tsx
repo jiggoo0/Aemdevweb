@@ -27,7 +27,7 @@ const CaseStudyCard = ({ data, index = 0 }: CaseStudyCardProps) => {
   return (
     <Link
       href={`/case-studies/${data.slug}`}
-      className="group rounded-section shadow-pro-sm hover:shadow-glow-lg relative flex h-full flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] transition-all duration-500 hover:border-[var(--color-brand-primary)]/40"
+      className="group rounded-section shadow-pro-sm relative flex h-full flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] transition-all duration-500 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm"
     >
       {/* 01. VISUAL CORE (Zero-CLS) */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-offset)]">
@@ -49,11 +49,11 @@ const CaseStudyCard = ({ data, index = 0 }: CaseStudyCardProps) => {
         <header className="mb-8 space-y-4">
           <div className="flex items-center gap-3">
             <span className="font-mono text-[9px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase">
-              {data.client || "Authority_Case"}
+              {data.client || "ลูกค้าที่ไว้วางใจ"}
             </span>
             <div className="h-3 w-px bg-[var(--border)]" />
             <span className="text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase">
-              Success_Protocol
+              ความสำเร็จที่ได้รับการพิสูจน์
             </span>
           </div>
 
@@ -76,13 +76,13 @@ const CaseStudyCard = ({ data, index = 0 }: CaseStudyCardProps) => {
         <div className="mt-auto flex items-center justify-between border-t border-[var(--border)] pt-8">
           <div className="flex flex-col gap-1">
             <span className="font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase opacity-60">
-              Validated_Outcome
+              ผลลัพธ์สุทธิ
             </span>
             <span className="text-xl font-black tracking-tight text-[var(--text-primary)] uppercase italic">
               {primaryResult}
             </span>
           </div>
-          <div className="group-hover:shadow-glow flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--surface-offset)] text-[var(--text-primary)] transition-all duration-300 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--surface-offset)] text-[var(--text-primary)] transition-all duration-300 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
             <IconRenderer name="ArrowRight" size={18} />
           </div>
         </div>

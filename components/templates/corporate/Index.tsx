@@ -64,7 +64,7 @@ const CORPORATE_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> 
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
-          marketSaturation={data.marketSaturation}
+          marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
         {/* [UX_OPTIMIZATION]: ลิงก์ไปยังหน้าบริการหลักเพื่อสร้างความมั่นใจระดับ Expert */}
         {data.masterServiceUrl && (
@@ -95,7 +95,7 @@ const CORPORATE_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> 
     return (
       <section className="bg-surface-offset border-border/40 border-y py-24">
         <div className="container mx-auto px-4">
-          <div className="shadow-pro-xl rounded-section bg-surface-card border-l-[6px] border-[var(--brand-primary)] p-10 backdrop-blur-3xl transition-all md:p-20">
+          <div className="shadow-pro-xl rounded-section bg-surface-card border-l-[6px] border-[var(--brand-primary)] p-10 backdrop-blur-md transition-all md:p-20">
             <div className="relative z-10 flex flex-col items-start justify-between gap-12 md:flex-row md:items-center">
               <div className="space-y-6">
                 <span className="font-sans text-[12px] font-bold tracking-widest text-[var(--brand-primary)] uppercase opacity-80">

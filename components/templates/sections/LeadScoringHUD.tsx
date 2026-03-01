@@ -76,7 +76,7 @@ export const LeadScoringHUD = memo(() => {
             <div className="text-brand-primary mb-4 flex items-center gap-3">
               <IconRenderer name="Activity" size={18} />
               <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-                Predictive_Lead_Scoring
+                ประเมินศักยภาพลูกค้า
               </span>
             </div>
             <h3 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic">
@@ -90,7 +90,7 @@ export const LeadScoringHUD = memo(() => {
                 {score}
               </span>
               <span className="text-text-muted mt-2 block font-mono text-[10px] font-bold tracking-[0.5em] uppercase opacity-40">
-                Conversion_Probability
+                โอกาสปิดการขาย
               </span>
             </div>
             {/* Circular Progress (Minimalist) */}
@@ -111,7 +111,7 @@ export const LeadScoringHUD = memo(() => {
           </div>
 
           <div className="flex items-center gap-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-6 py-4">
-            <div className="h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+            <div className="h-2 w-2 rounded-full bg-emerald-500" />
             <span className="font-mono text-[9px] leading-none font-black tracking-widest text-emerald-500 uppercase">
               Status: {status}
             </span>
@@ -134,7 +134,7 @@ export const LeadScoringHUD = memo(() => {
                 <div className="relative z-10 flex items-center justify-between">
                   <div className="space-y-1">
                     <span className="text-text-muted font-mono text-[8px] font-bold uppercase opacity-40">
-                      Signal_Node.0{i + 1}
+                      ปัจจัยที่ 0{i + 1}
                     </span>
                     <h4 className="text-text-primary text-sm font-black tracking-wide uppercase italic">
                       {sig.label}
@@ -144,9 +144,7 @@ export const LeadScoringHUD = memo(() => {
                     <span
                       className={cn(
                         "font-mono text-xs font-bold tracking-tight",
-                        sig.status === "analyzing"
-                          ? "text-text-muted animate-pulse"
-                          : "text-brand-primary",
+                        sig.status === "analyzing" ? "text-text-muted" : "text-brand-primary",
                       )}
                     >
                       {sig.value}

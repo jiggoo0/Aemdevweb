@@ -109,7 +109,7 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
                 >
                   <div className="group rounded-[var(--radius)] border-[var(--border-width)] border-[var(--foreground)]/10 bg-[var(--surface-card)]/50 p-8 backdrop-blur-sm transition-all hover:border-[var(--brand-primary)]/40">
                     <p className="mb-2 font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase italic">
-                      // Milestone_Node_{item.year}
+                      // ปี {item.year}
                     </p>
                     <h3 className="mb-3 font-[family-name:var(--font-primary)] text-2xl font-black uppercase italic">
                       {item.title}
@@ -126,12 +126,12 @@ export const SuccessTimeline = ({ items }: SuccessTimelineProps) => {
                     className={cn(
                       "h-4 w-4 rotate-45 border-2 transition-transform duration-700 group-hover:rotate-180",
                       item.status === "active"
-                        ? "animate-pulse border-[var(--brand-primary)] bg-[var(--brand-primary)]"
+                        ? "border-[var(--brand-primary)] bg-[var(--brand-primary)]"
                         : "border-[var(--brand-primary)] bg-[var(--surface-main)]",
                     )}
                   />
                   {item.status === "active" && (
-                    <div className="absolute inset-0 animate-ping rounded-full bg-[var(--brand-primary)] opacity-20 blur-lg" />
+                    <div className="absolute inset-0 rounded-full bg-[var(--brand-primary)] opacity-20 blur-lg" />
                   )}
                 </div>
 

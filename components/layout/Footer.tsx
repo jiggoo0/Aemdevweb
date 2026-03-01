@@ -50,7 +50,7 @@ const Footer = () => {
           {/* --- 02. BRAND IDENTITY HUB --- */}
           <div className="flex flex-col gap-6 pr-0 md:col-span-5 md:pr-12 lg:col-span-5">
             <Link href="/" className="group flex w-fit items-center gap-3">
-              <div className="bg-brand-primary shadow-glow flex h-9 w-9 items-center justify-center rounded-xl text-[10px] font-black text-white transition-transform group-hover:rotate-6">
+              <div className="bg-brand-primary flex h-9 w-9 items-center justify-center rounded-xl text-[10px] font-black text-white shadow-md transition-transform group-hover:rotate-6">
                 AEM
               </div>
               <span className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter transition-colors">
@@ -66,7 +66,7 @@ const Footer = () => {
             <div className="mt-4 flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                   <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"></span>
                 </span>
                 <span className="font-sans text-[10px] font-bold tracking-widest text-emerald-500 uppercase">

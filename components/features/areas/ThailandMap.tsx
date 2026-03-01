@@ -112,7 +112,7 @@ export default function ThailandMap({ allNodes, activeRegion, onRegionChange }: 
         <div className="flex flex-col justify-center space-y-8">
           <div className="space-y-3">
             <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.5em] uppercase">
-              System_Regional_Map.v18
+              โครงข่ายพื้นที่ให้บริการ
             </span>
             <h3 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-5xl lg:text-6xl">
               National_<span className="text-brand-primary">Graph</span>
@@ -130,7 +130,7 @@ export default function ThailandMap({ allNodes, activeRegion, onRegionChange }: 
                 className={cn(
                   "border-border bg-surface-offset/50 hover:border-brand-primary/40 flex flex-col gap-2 rounded-xl border p-4 text-left transition-all",
                   activeRegion === region.id
-                    ? "border-brand-primary bg-brand-primary/10 shadow-glow-sm"
+                    ? "border-brand-primary bg-brand-primary/10 shadow-sm"
                     : "opacity-60",
                 )}
               >

@@ -48,7 +48,7 @@ export const ValueBlueprint = () => {
       <div className="relative z-10 container mx-auto px-4 md:px-8">
         <div className="mb-24 space-y-4 text-center md:text-left">
           <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase italic">
-            Strategic_Authority_Blueprint
+            พิมพ์เขียวความสำเร็จ
           </span>
           <h2 className="text-text-primary text-4xl leading-none font-black tracking-tighter uppercase italic md:text-7xl">
             Success <span className="text-brand-primary">Hardened.</span>
@@ -87,7 +87,7 @@ export const ValueBlueprint = () => {
                 )}
                 style={{ transformOrigin: "left" }}
               >
-                <div className="bg-brand-primary shadow-glow animate-shimmer h-full w-1/3" />
+                <div className="bg-brand-primary h-full w-1/3 shadow-md" />
               </div>
             </div>
           ))}

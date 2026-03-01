@@ -74,7 +74,7 @@ const TrustBadge = () => {
             key={node.label}
             className={cn(
               "group relative flex cursor-default items-center gap-4 overflow-hidden rounded-[1.8rem] md:rounded-[2.2rem]",
-              "border-border bg-surface-card/30 shadow-pro border px-6 py-4 backdrop-blur-3xl md:px-8 md:py-5",
+              "border-border bg-surface-card/30 shadow-pro border px-6 py-4 backdrop-blur-md md:px-8 md:py-5",
               "hover:border-brand-primary/40 hover:bg-surface-offset/60 transition-all duration-500",
               "transform-gpu will-change-transform",
               "hover:-translate-y-1.5",
@@ -89,7 +89,7 @@ const TrustBadge = () => {
           >
             {/* Content Hub */}
             <div className="flex items-center gap-4">
-              <div className="text-brand-primary/80 group-hover:text-brand-primary transition-all duration-500 group-hover:scale-110">
+              <div className="text-brand-primary/80 group-hover:text-brand-primary transition-all duration-500 group-hover:scale-105">
                 <IconRenderer name={node.icon} size={20} strokeWidth={2} />
               </div>
               <div className="flex flex-col">

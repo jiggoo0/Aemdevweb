@@ -109,12 +109,12 @@ const WorkProcess = () => {
       >
         <div className="max-w-4xl space-y-6">
           <div className="text-brand-primary flex items-center gap-4">
-            <div className="bg-brand-primary shadow-glow h-2 w-2 animate-pulse rounded-full" />
+            <div className="bg-brand-primary h-2 w-2 rounded-full shadow-md" />
             <span
               suppressHydrationWarning
               className="font-mono text-[10px] font-black tracking-[0.4em] uppercase"
             >
-              Execution_Framework_v{SITE_CONFIG.project.version}
+              ขั้นตอนการทำงาน {SITE_CONFIG.project.version}
             </span>
           </div>
           <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
@@ -161,8 +161,8 @@ const WorkProcess = () => {
             <div
               className={cn(
                 "border-border bg-surface-card/60 relative z-10 flex h-full flex-col overflow-hidden border p-8 transition-all duration-700 md:p-10",
-                "rounded-section backdrop-blur-xl",
-                "hover:border-brand-primary/40 hover:shadow-glow-lg transform-gpu will-change-transform hover:-translate-y-2",
+                "rounded-section backdrop-blur-sm",
+                "hover:border-brand-primary/40 transform-gpu will-change-transform hover:-translate-y-1 hover:shadow-md hover:shadow-sm",
               )}
             >
               {/* Sequential ID Background */}
@@ -179,17 +179,17 @@ const WorkProcess = () => {
 
               {/* Icon Matrix */}
               <div className="relative z-10 mb-10 flex items-center justify-between">
-                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:rotate-[12deg] group-hover:text-white md:h-16 md:w-16">
+                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group- flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:text-white group-hover:shadow-md md:h-16 md:w-16">
                   <IconRenderer name={step.icon} size={28} strokeWidth={2.5} />
                 </div>
-                <div className="bg-brand-primary/20 group-hover:bg-brand-primary h-2 w-2 rounded-full group-hover:animate-ping" />
+                <div className="bg-brand-primary/20 group-hover:bg-brand-primary group-hover: h-2 w-2 rounded-full" />
               </div>
 
               {/* Information Hub */}
               <div className="relative z-10 flex-grow space-y-4">
                 <div className="space-y-1">
                   <p className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-60">
-                    Phase_0{index + 1}
+                    ขั้นตอน 0{index + 1}
                   </p>
                   <h3 className="text-text-primary group-hover:text-brand-primary text-xl font-black tracking-tight uppercase italic transition-colors md:text-2xl">
                     {step.title}
@@ -204,7 +204,7 @@ const WorkProcess = () => {
               <footer className="border-border relative z-10 mt-10 border-t pt-6">
                 <div className="flex items-center gap-3">
                   <div className="bg-brand-primary/10 flex h-5 w-5 items-center justify-center rounded-full">
-                    <div className="bg-brand-primary shadow-glow h-1.5 w-1.5 rounded-full" />
+                    <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-md" />
                   </div>
                   <span className="text-text-muted font-mono text-[9px] font-bold tracking-[0.3em] uppercase">
                     {step.metric}
@@ -236,7 +236,7 @@ const WorkProcess = () => {
               asChild
               size="lg"
               variant="neo"
-              className="group shadow-glow-lg h-16 w-full transform-gpu rounded-full px-12 transition-all duration-500 hover:scale-[1.03] active:scale-95 md:h-20 md:w-auto"
+              className="group h-16 w-full transform-gpu rounded-full px-12 shadow-sm transition-all duration-500 hover:scale-[1.03] hover:shadow-md active:scale-95 md:h-20 md:w-auto"
             >
               <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">
                 <span className="mr-4 text-[11px] font-black tracking-[0.3em] uppercase">
@@ -249,8 +249,8 @@ const WorkProcess = () => {
                 />
               </a>
             </Button>
-            <p className="text-text-muted animate-pulse font-mono text-[10px] font-black tracking-[0.5em] uppercase opacity-30">
-              Protocol_Awaiting_Signal
+            <p className="text-text-muted font-mono text-[10px] font-black tracking-[0.5em] uppercase opacity-30">
+              พร้อมให้บริการทันที
             </p>
           </div>
         </div>

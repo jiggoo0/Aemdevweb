@@ -24,7 +24,7 @@ export function SaleNavbar({ title, action }: SaleNavbarProps) {
   return (
     <nav
       className={cn(
-        "sticky top-0 z-[100] border-b backdrop-blur-xl transition-all duration-500",
+        "sticky top-0 z-[100] border-b backdrop-blur-sm transition-all duration-500",
         "border-[var(--border)] bg-[var(--surface-card)]/80 text-[var(--text-primary)]",
       )}
     >
@@ -43,7 +43,7 @@ export function SaleNavbar({ title, action }: SaleNavbarProps) {
             href={action.href as Route}
             style={{
               backgroundColor: accentColor,
-              boxShadow: "var(--shadow-glow-sm)",
+              boxShadow: "var(--shadow-sm)",
             }}
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-6 py-2.5 text-[10px] font-black tracking-widest text-white uppercase italic transition-all hover:brightness-110 active:scale-95"
           >

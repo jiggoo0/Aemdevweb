@@ -46,7 +46,7 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
     <div
       className={cn(
         "relative overflow-hidden transition-all duration-500",
-        "bg-[var(--surface-card)]/80 backdrop-blur-xl",
+        "bg-[var(--surface-card)]/80 backdrop-blur-sm",
         "border-[var(--border-width)] border-[var(--foreground)]/10 shadow-2xl hover:border-[var(--brand-primary)]/30",
         "group rounded-[var(--radius)]",
       )}
@@ -55,7 +55,7 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
       <div className="flex items-center justify-between border-b border-[var(--foreground)]/5 bg-[var(--brand-primary)]/5 p-5">
         <div className="flex items-center gap-3">
           <div className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
           </div>
           <span className="font-mono text-[9px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
@@ -70,7 +70,7 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <p className="font-mono text-[10px] tracking-widest uppercase italic opacity-40">
-              // Node_Identity
+              // ระบุพื้นที่
             </p>
             <h4 className="font-[family-name:var(--font-primary)] text-2xl leading-none font-black uppercase italic">
               {location}.node
@@ -122,7 +122,7 @@ export const WeatherTracker = ({ location = "Bangkok" }: { location?: string }) 
         {/* --- 4. Technical Footer: Metadata --- */}
         <div className="flex items-center justify-between pt-4 font-mono text-[8px] tracking-widest uppercase opacity-30">
           <p>Registry_Sync: {syncId}s</p>
-          <p>STABLE_INFRASTRUCTURE</p>
+          <p>เซิร์ฟเวอร์เสถียร</p>
         </div>
       </div>
 

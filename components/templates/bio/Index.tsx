@@ -45,7 +45,7 @@ const BIO_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
       <section className="relative z-10 w-full">
         <div className="rounded-card border-brand-primary/40 bg-brand-primary/5 border border-dashed p-8 text-center backdrop-blur-md">
           <div className="border-brand-primary/20 bg-surface-card shadow-pro-sm mb-6 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
-            <div className="bg-brand-primary shadow-glow-sm h-1.5 w-1.5 animate-pulse rounded-full" />
+            <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-sm" />
             <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
               สิทธิพิเศษสำหรับคุณ
             </span>
@@ -57,7 +57,7 @@ const BIO_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
             “{data.promotions[0].description}”
           </p>
           {data.promotions[0].discount && (
-            <div className="bg-brand-primary shadow-glow-sm inline-block rounded-2xl px-10 py-4">
+            <div className="bg-brand-primary inline-block rounded-2xl px-10 py-4 shadow-sm">
               <span className="text-surface-main text-3xl font-black italic">
                 {data.promotions[0].discount}
               </span>
@@ -79,7 +79,7 @@ const BIO_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
-          marketSaturation={data.marketSaturation}
+          marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
         {/* [UX_OPTIMIZATION]: ปุ่มกลับไปยังหน้าบริการหลักสำหรับผู้เชี่ยวชาญเฉพาะทาง */}
         {data.masterServiceUrl && (
@@ -103,7 +103,7 @@ const BIO_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
           <DirectTerminal
             mode="health-check"
             province={data.province}
-            latency={data.regionalLatency}
+            latency={data.regionalความเร็ว}
           />
         </div>
       </section>
@@ -165,7 +165,7 @@ const BioTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
           <footer className="pt-16 text-center opacity-20">
             <div className="inline-flex items-center gap-3">
-              <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+              <div className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
               <p className="font-mono text-[8px] tracking-[0.5em] uppercase">
                 Architected_By_AEMZA_v19.0.0_DYNAMIC
               </p>

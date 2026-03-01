@@ -50,7 +50,7 @@ const TableOfContents = ({ headings }: TOCProps) => {
   if (headings.length === 0) return null;
 
   return (
-    <nav className="border-border/40 bg-surface-card/40 rounded-2xl border p-8 backdrop-blur-xl">
+    <nav className="border-border/40 bg-surface-card/40 rounded-2xl border p-8 backdrop-blur-sm">
       <div className="mb-6 flex items-center gap-3">
         <IconRenderer name="Layers" className="text-brand-primary h-4 w-4" />
         <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase">

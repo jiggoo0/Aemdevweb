@@ -44,7 +44,7 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
               visible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0",
             )}
           >
-            <div className="absolute inset-0 z-0 opacity-40 transition-all duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-60">
+            <div className="absolute inset-0 z-0 opacity-40 transition-all duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-60">
               <Image
                 src={
                   isTourismHeavy
@@ -63,13 +63,13 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
               <span className="font-mono text-[10px] font-black tracking-[0.4em] text-white uppercase">
                 MASTER_NODE_V18
               </span>
-              <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+              <div className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
             </div>
 
             <div className="relative z-10 space-y-6 text-white">
               {isTourismHeavy && (
                 <div className="inline-flex items-center gap-3 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 backdrop-blur-sm">
-                  <span className="h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                   <span className="font-mono text-[9px] font-black tracking-widest text-emerald-400 uppercase">
                     GEO_Performance_Optimal
                   </span>
@@ -90,7 +90,7 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
           <div className="grid grid-rows-2 gap-8 lg:col-span-5">
             <div
               className={cn(
-                "group rounded-section bg-brand-primary shadow-pro-xl hover:shadow-glow text-surface-main relative flex flex-col justify-center p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-2",
+                "group rounded-section bg-brand-primary shadow-pro-xl text-surface-main relative flex flex-col justify-center p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-md",
                 visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
               style={{ transitionDelay: "300ms" }}

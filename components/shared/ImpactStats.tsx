@@ -144,8 +144,8 @@ const MetricCard = ({
     <div
       className={cn(
         "group rounded-section relative flex min-h-[280px] flex-col overflow-hidden border p-10 transition-all duration-1000",
-        "border-border bg-surface-card/30 shadow-pro-sm backdrop-blur-3xl",
-        "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:shadow-glow-sm hover:-translate-y-3",
+        "border-border bg-surface-card/30 shadow-pro-sm backdrop-blur-md",
+        "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:-translate-y-1 hover:shadow-sm",
         "transform-gpu will-change-transform",
         visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
       )}
@@ -154,19 +154,19 @@ const MetricCard = ({
       }}
     >
       <div
-        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03] mix-blend-overlay"
+        className="bg-infrastructure-grid pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
         style={{ backgroundImage: "url(/grid-pattern.svg)" }}
       />
 
       <div className="relative z-10 mb-auto flex items-start justify-between">
-        <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary border-border group-hover:text-surface-main group-hover:shadow-glow flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:rotate-[10deg]">
+        <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary border-border group-hover:text-surface-main group- flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:shadow-md">
           <IconRenderer name={stat.icon} size={24} strokeWidth={2.5} />
         </div>
         <div className="flex flex-col items-end gap-1.5">
           <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-60">
             {UI_STRINGS.stats.statPrefix} 0{index + 1}
           </span>
-          <div className="bg-brand-primary shadow-glow h-1.5 w-1.5 animate-pulse rounded-full" />
+          <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-md" />
         </div>
       </div>
 
@@ -178,11 +178,7 @@ const MetricCard = ({
             </h3>
             <div className="flex flex-col">
               {stat.trend === "up" && (
-                <IconRenderer
-                  name="ArrowUpRight"
-                  size={12}
-                  className="mb-1 animate-pulse text-emerald-500"
-                />
+                <IconRenderer name="ArrowUpRight" size={12} className="mb-1 text-emerald-500" />
               )}
               <span className="text-brand-primary text-lg leading-none font-black tracking-widest uppercase opacity-80">
                 {stat.unit}
@@ -239,7 +235,7 @@ const ImpactStats = ({ data, className }: ImpactStatsProps) => {
     {
       id: "SPEED_NODE",
       label: UI_STRINGS.stats.fastLoad,
-      value: data?.regionalLatency || 14,
+      value: data?.regionalความเร็ว || 14,
       decimals: 1,
       unit: "MS",
       icon: "Zap",
@@ -249,7 +245,7 @@ const ImpactStats = ({ data, className }: ImpactStatsProps) => {
     {
       id: "SATURATION",
       label: UI_STRINGS.stats.expertise,
-      value: data?.marketSaturation || 85,
+      value: data?.marketโอกาสเติบโต || 85,
       unit: "%",
       icon: "Target",
       description: UI_STRINGS.stats.inYourBusiness,

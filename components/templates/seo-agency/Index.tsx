@@ -64,7 +64,7 @@ const SEO_AGENCY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>>
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
-          marketSaturation={data.marketSaturation}
+          marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
         {/* [UX_OPTIMIZATION]: ปุ่มกลับไปยังหน้าบริการหลักสำหรับผู้ใช้ในพื้นที่ */}
         {data.masterServiceUrl && (
@@ -91,11 +91,11 @@ const SEO_AGENCY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>>
     return (
       <section className="bg-surface-offset border-border/40 border-y py-24">
         <div className="container mx-auto px-4">
-          <div className="shadow-pro-xl rounded-section border-border/50 bg-surface-card relative overflow-hidden p-10 backdrop-blur-3xl transition-all md:p-20">
+          <div className="shadow-pro-xl rounded-section border-border/50 bg-surface-card relative overflow-hidden p-10 backdrop-blur-md transition-all md:p-20">
             <div className="relative z-10 flex flex-col items-center justify-between gap-12 md:flex-row">
               <div className="space-y-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-brand-primary shadow-glow-sm h-2 w-2 animate-pulse rounded-full" />
+                  <div className="bg-brand-primary h-2 w-2 rounded-full shadow-sm" />
                   <span className="font-sans text-[12px] font-bold tracking-widest text-[var(--brand-primary)] uppercase">
                     รับสิทธิพิเศษเพิ่มเติม
                   </span>
@@ -153,7 +153,7 @@ const SEO_AGENCY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>>
                 <DirectTerminal
                   mode="health-check"
                   province={data.province}
-                  latency={data.regionalLatency}
+                  latency={data.regionalความเร็ว}
                 />
               </div>
             </div>

@@ -133,7 +133,7 @@ const UniversalHero = ({
           <Button
             size="lg"
             href={primaryHref || SITE_CONFIG.links.line}
-            className="shadow-glow-lg h-24 rounded-[2.5rem] border-none bg-[var(--color-brand-primary)] px-16 text-sm font-black tracking-[0.3em] text-white uppercase transition-all hover:scale-105 active:scale-95"
+            className="h-24 rounded-[2.5rem] border-none bg-[var(--color-brand-primary)] px-16 text-sm font-black tracking-[0.3em] text-white uppercase shadow-sm transition-all hover:scale-105 hover:shadow-md active:scale-95"
           >
             <span className="flex items-center gap-4">
               {primaryActionLabel || "Contact Specialist"}
@@ -145,7 +145,7 @@ const UniversalHero = ({
             <Button
               variant="outline"
               href={secondaryHref || "#"}
-              className="h-24 rounded-[2.5rem] border-[var(--border)] px-16 text-sm font-black tracking-[0.3em] text-[var(--text-primary)] uppercase backdrop-blur-3xl transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)]"
+              className="h-24 rounded-[2.5rem] border-[var(--border)] px-16 text-sm font-black tracking-[0.3em] text-[var(--text-primary)] uppercase backdrop-blur-md transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)]"
             >
               {secondaryActionLabel || data?.secondaryAction?.label || "Explore Solutions"}
             </Button>

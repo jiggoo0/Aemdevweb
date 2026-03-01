@@ -67,7 +67,7 @@ const BlogFilters = ({
       {/* --- 01. SEARCH INTERFACE: High-End Terminal Style --- */}
       <div className="group relative max-w-3xl">
         <div className="bg-brand-primary/20 group-within:opacity-100 absolute -inset-1 transform-gpu rounded-3xl opacity-0 blur-xl transition-opacity duration-700" />
-        <div className="bg-surface-card/40 border-border/40 focus-within:border-brand-primary/50 relative flex h-20 items-center gap-4 rounded-2xl border px-6 backdrop-blur-xl transition-all duration-500">
+        <div className="bg-surface-card/40 border-border/40 focus-within:border-brand-primary/50 relative flex h-20 items-center gap-4 rounded-2xl border px-6 backdrop-blur-sm transition-all duration-500">
           <IconRenderer
             name={isPending ? "Loader2" : "Search"}
             className={cn(

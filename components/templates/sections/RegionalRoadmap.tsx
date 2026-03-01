@@ -77,7 +77,7 @@ export const RegionalRoadmap = ({ province, steps = DEFAULT_STEPS }: RegionalRoa
       <div className="relative z-10 container mx-auto px-4 md:px-8">
         <div className="mb-24 space-y-6 text-center">
           <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-            <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
             <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.4em] uppercase">
               Deployment_Framework.v18.2
             </span>
@@ -102,7 +102,7 @@ export const RegionalRoadmap = ({ province, steps = DEFAULT_STEPS }: RegionalRoa
                 data-index={idx}
                 className={cn(
                   "group rounded-section border-border/10 bg-surface-card relative border p-12 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                  "hover:border-brand-primary/40 hover:shadow-glow-sm",
+                  "hover:border-brand-primary/40 hover:shadow-sm",
                   isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0",
                 )}
                 style={{ transitionDelay: `${idx * 200}ms` }}
@@ -125,7 +125,7 @@ export const RegionalRoadmap = ({ province, steps = DEFAULT_STEPS }: RegionalRoa
                 </p>
 
                 {idx < 2 && (
-                  <div className="text-brand-primary/10 absolute top-1/2 -right-6 z-10 hidden -translate-y-1/2 animate-pulse lg:block">
+                  <div className="text-brand-primary/10 absolute top-1/2 -right-6 z-10 hidden -translate-y-1/2 lg:block">
                     <IconRenderer name="ArrowRight" size={32} strokeWidth={3} />
                   </div>
                 )}

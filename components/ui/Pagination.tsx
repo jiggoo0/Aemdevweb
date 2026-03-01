@@ -114,7 +114,7 @@ const Pagination = ({ totalPages, currentPage, siblingCount = 1 }: PaginationPro
               onClick={() => handlePageChange(pageNum)}
               className={cn(
                 "min-w-[40px] rounded-full px-0 font-mono text-xs italic",
-                isActive ? "shadow-glow-sm" : "border-transparent",
+                isActive ? "shadow-sm" : "border-transparent",
               )}
             >
               {pageNum.toString().padStart(2, "0")}

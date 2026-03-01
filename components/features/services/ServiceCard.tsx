@@ -37,7 +37,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
 
   const priceValue = data.priceValue || 0;
   const priceDisplay =
-    priceValue === 0 ? "Premium_Quote" : new Intl.NumberFormat("th-TH").format(priceValue);
+    priceValue === 0 ? "ติดต่อประเมินราคา" : new Intl.NumberFormat("th-TH").format(priceValue);
 
   return (
     <Link
@@ -45,7 +45,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
       className={cn(
         "group rounded-section relative flex h-full w-full flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "shadow-pro-sm border-[var(--border)] bg-[var(--surface-card)]",
-        "hover:shadow-glow-lg hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
+        "hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm",
         "transform-gpu will-change-transform",
         className,
       )}
@@ -53,7 +53,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
       {/* --- LAYER 1: AUTHORITY BADGE --- */}
       {(isPopular || data.isPopular) && (
         <div className="absolute top-6 right-6 z-30">
-          <div className="shadow-glow-sm flex items-center gap-2 rounded-full border border-white/10 bg-[var(--color-brand-primary)] px-4 py-2 text-white backdrop-blur-xl">
+          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-[var(--color-brand-primary)] px-4 py-2 text-white shadow-sm backdrop-blur-sm">
             <IconRenderer name="Star" size={10} className="fill-current" />
             <span className="text-[8px] font-black tracking-widest uppercase md:text-[9px]">
               Specialist_Choice
@@ -71,11 +71,11 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
           priority={index < 3}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
-          className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-100"
+          className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div
-          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04] mix-blend-overlay"
+          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-card)] via-transparent to-transparent opacity-60" />
@@ -84,9 +84,9 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
       <div className="flex flex-1 flex-col p-8 md:p-10">
         <header className="mb-8 space-y-4">
           <div className="flex items-center gap-2">
-            <div className="shadow-glow h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-brand-primary)]" />
+            <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
             <span className="font-mono text-[8px] font-black tracking-[0.3em] text-[var(--text-muted)] uppercase opacity-60">
-              Service_Node.v18.{(index + 1).toString().padStart(2, "0")}
+              บริการที่ {(index + 1).toString().padStart(2, "0")}
             </span>
           </div>
 
@@ -115,7 +115,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
         <div className="mt-auto flex items-end justify-between border-t border-[var(--border)] pt-8">
           <div className="space-y-1">
             <span className="font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase opacity-50">
-              {priceValue ? "Starting_Investment" : "Inquiry_Status"}
+              {priceValue ? "เริ่มต้นที่" : "สอบถามข้อมูล"}
             </span>
             <div className="flex items-baseline font-black text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-brand-primary)]">
               {priceValue > 0 && <span className="mr-1 font-sans text-xs opacity-50">฿</span>}
@@ -130,7 +130,7 @@ const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps
             </div>
           </div>
 
-          <div className="group-hover:shadow-glow rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)] p-4 text-[var(--text-primary)] transition-all duration-500 group-hover:-rotate-45 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)] p-4 text-[var(--text-primary)] transition-all duration-500 group-hover:-rotate-45 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
             <IconRenderer name="ArrowRight" size={20} />
           </div>
         </div>

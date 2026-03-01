@@ -19,41 +19,41 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
     const totalNodes = allNodes.length;
     if (totalNodes === 0) return [];
 
-    const avgLatency = (
-      allNodes.reduce((acc, n) => acc + (n.regionalLatency || 25), 0) / totalNodes
+    const avgความเร็ว = (
+      allNodes.reduce((acc, n) => acc + (n.regionalความเร็ว || 25), 0) / totalNodes
     ).toFixed(1);
     const totalDistricts = allNodes.reduce((acc, n) => acc + (n.districts?.length || 0), 0);
     const highPriorityNodes = allNodes.filter((n) => (n.priority || 0) >= 90).length;
 
     return [
       {
-        label: "Active_Nodes",
+        label: "สาขาที่ให้บริการ",
         value: totalNodes,
         unit: "Provinces",
         icon: "Globe" as const,
-        description: "Coverage_Verified",
+        description: "ครอบคลุมทั่วประเทศ",
       },
       {
-        label: "Avg_Latency",
-        value: avgLatency,
+        label: "ความเร็วเฉลี่ย",
+        value: avgความเร็ว,
         unit: "ms",
         icon: "Zap" as const,
-        description: "Fiber_Optimized",
+        description: "ระบบเซิร์ฟเวอร์ความเร็วสูง",
         color: "text-emerald-500",
       },
       {
-        label: "Service_Points",
+        label: "เขตพื้นที่บริการ",
         value: totalDistricts,
         unit: "Districts",
         icon: "MapPin" as const,
-        description: "Hyper_Local_Reach",
+        description: "เข้าถึงระดับชุมชน",
       },
       {
-        label: "High_Priority",
+        label: "พื้นที่สำคัญ",
         value: highPriorityNodes,
         unit: "Zones",
         icon: "ShieldCheck" as const,
-        description: "Tier_1_Authority",
+        description: "ระดับมาตรฐานสากล",
       },
     ];
   }, [allNodes]);
@@ -67,18 +67,18 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
           key={stat.label}
           className={cn(
             "group border-border/40 bg-surface-card/30 relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-500",
-            "hover:border-brand-primary/40 hover:bg-surface-offset/50 hover:shadow-glow-sm",
+            "hover:border-brand-primary/40 hover:bg-surface-offset/50 hover:shadow-sm",
           )}
         >
           {/* Decorative Grid */}
           <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.03] select-none" />
 
           <div className="relative z-10 mb-4 flex items-start justify-between">
-            <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main group-hover:shadow-glow border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500">
+            <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500 group-hover:shadow-md">
               <IconRenderer name={stat.icon} size={18} />
             </div>
             <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-30">
-              SYS_METRIC.0{i + 1}
+              สถิติที่ 0{i + 1}
             </span>
           </div>
 
@@ -102,7 +102,7 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
           </div>
 
           <div className="bg-border/20 relative z-10 mt-4 h-px w-full overflow-hidden">
-            <div className="bg-brand-primary absolute h-full w-1/3 animate-[shimmer_2s_infinite]" />
+            <div className="bg-brand-primary absolute h-full w-1/3" />
           </div>
           <p className="text-text-muted mt-2 text-[8px] font-medium italic opacity-40">
             {stat.description}

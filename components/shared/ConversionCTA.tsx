@@ -47,7 +47,7 @@ const ConversionCTA = ({
             {/* สถานะความพร้อม (Human-Friendly Status) */}
             <div className="flex items-center gap-3 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-5 py-2">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-brand-primary)] opacity-75"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-brand-primary)] opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-brand-primary)]"></span>
               </span>
               <span className="font-sans text-[10px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
@@ -69,7 +69,7 @@ const ConversionCTA = ({
               className={cn(
                 "h-16 rounded-2xl px-12 md:h-20 md:px-16",
                 "bg-[var(--color-brand-primary)] text-white hover:opacity-95",
-                "shadow-glow-md transition-all hover:scale-[1.02] active:scale-95",
+                "shadow-md-md transition-all hover:scale-[1.02] active:scale-95",
               )}
             >
               <a

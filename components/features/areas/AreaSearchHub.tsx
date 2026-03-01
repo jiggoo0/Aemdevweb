@@ -116,7 +116,7 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
                   className={cn(
                     "rounded-xl px-5 py-2.5 text-[10px] font-black tracking-widest uppercase transition-all",
                     activeRegion === region
-                      ? "bg-brand-primary text-surface-main shadow-glow-sm"
+                      ? "bg-brand-primary text-surface-main shadow-sm"
                       : "bg-surface-offset/50 text-text-muted hover:bg-surface-offset border-border/20 border",
                   )}
                 >
@@ -149,7 +149,7 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
               </h2>
               <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
               <span className="font-mono text-[10px] font-bold opacity-30">
-                FOUND: {filteredNodes.length.toString().padStart(2, "0")}
+                พบเนื้อหา: {filteredNodes.length.toString().padStart(2, "0")}
               </span>
             </div>
 
@@ -181,7 +181,7 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
                   </h2>
                   <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
                   <span className="font-mono text-[10px] font-bold opacity-30">
-                    NODES: {nodes.length.toString().padStart(2, "0")}
+                    จำนวน: {nodes.length.toString().padStart(2, "0")}
                   </span>
                 </div>
 

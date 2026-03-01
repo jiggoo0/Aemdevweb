@@ -62,7 +62,7 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
               <IconRenderer
                 name="Map"
                 size={80}
-                className="animate-pulse text-[var(--color-brand-primary)] opacity-20"
+                className="text-[var(--color-brand-primary)] opacity-20"
               />
             </div>
           </div>
@@ -87,8 +87,8 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
                 visible ? "scale-100 opacity-100" : "scale-0 opacity-0",
               )}
             >
-              <div className="absolute h-20 w-20 animate-ping rounded-full border-2 border-[var(--color-brand-primary)] opacity-20" />
-              <div className="shadow-glow-sm h-4 w-4 rotate-45 bg-[var(--color-brand-primary)]" />
+              <div className="absolute h-20 w-20 rounded-full border-2 border-[var(--color-brand-primary)] opacity-20" />
+              <div className="h-4 w-4 rotate-45 bg-[var(--color-brand-primary)] shadow-sm" />
             </div>
           </div>
         </div>
@@ -100,9 +100,9 @@ export const LocalMapNode = memo(({ lat, lng, province }: LocalMapNodeProps) => 
             visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
           )}
         >
-          <div className="shadow-pro-xl space-y-4 rounded-[calc(var(--radius)*0.5)] border border-[var(--color-brand-primary)]/30 bg-[var(--surface-card)]/90 p-6 backdrop-blur-xl">
+          <div className="shadow-pro-xl space-y-4 rounded-[calc(var(--radius)*0.5)] border border-[var(--color-brand-primary)]/30 bg-[var(--surface-card)]/90 p-6 backdrop-blur-sm">
             <div className="flex items-center gap-3">
-              <div className="shadow-glow-sm h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
+              <div className="h-2 w-2 rounded-full bg-emerald-500 shadow-sm" />
               <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase">
                 Local_Registry_Synched
               </p>

@@ -18,7 +18,7 @@ const FeatureGrid = memo(({ features }: { features: readonly ServiceFeature[] })
         key={feature.title}
         className={cn(
           "group border-border bg-surface-card rounded-card relative overflow-hidden border p-8 transition-all duration-500",
-          "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-glow",
+          "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-md",
           "animate-in fade-in slide-in-from-bottom-2 fill-mode-both",
         )}
         style={{ animationDelay: `${idx * 100}ms` }}
@@ -35,7 +35,7 @@ const FeatureGrid = memo(({ features }: { features: readonly ServiceFeature[] })
 
         {/* Decorative ID */}
         <span className="text-text-muted absolute top-6 right-8 font-mono text-[8px] font-black uppercase opacity-20">
-          CAP_NODE_{idx.toString().padStart(2, "0")}
+          CAP_{idx.toString().padStart(2, "0")}
         </span>
       </div>
     ))}
@@ -51,7 +51,7 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
         key={item.name}
         className={cn(
           "group border-border bg-surface-card rounded-card relative flex flex-col overflow-hidden border p-1 text-center transition-all duration-500",
-          "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-glow",
+          "hover:border-brand-primary/40 hover:bg-surface-offset hover:shadow-md",
         )}
       >
         <div className="bg-surface-offset group-hover:bg-brand-primary/5 flex h-40 items-center justify-center overflow-hidden rounded-2xl transition-colors">
@@ -59,7 +59,7 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
             name={item.icon as IconName}
             size={64}
             strokeWidth={1}
-            className="text-brand-primary/20 group-hover:text-brand-primary transition-all duration-700 group-hover:scale-110 group-hover:opacity-100"
+            className="text-brand-primary/20 group-hover:text-brand-primary transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
           />
         </div>
         <div className="flex flex-1 flex-col p-6">

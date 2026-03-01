@@ -83,7 +83,7 @@ export const PerformanceTrajectory = memo(() => {
             )}
           >
             <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-              <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+              <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
               <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
                 ความสำเร็จที่ยั่งยืน
               </span>
@@ -131,7 +131,7 @@ export const PerformanceTrajectory = memo(() => {
               visible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0",
             )}
           >
-            <div className="border-border/10 bg-surface-card/80 shadow-pro-xl rounded-section relative h-[350px] w-full overflow-hidden border p-12 backdrop-blur-3xl md:h-[450px]">
+            <div className="border-border/10 bg-surface-card/80 shadow-pro-xl rounded-section relative h-[350px] w-full overflow-hidden border p-12 backdrop-blur-md md:h-[450px]">
               {/* Engineering Grid */}
               <div
                 className="absolute inset-0 opacity-[0.05]"
@@ -191,7 +191,7 @@ export const PerformanceTrajectory = memo(() => {
                       ความเสถียร 100%
                     </span>
                   </div>
-                  <div className="bg-brand-primary shadow-glow h-3 w-3 animate-ping rounded-full" />
+                  <div className="bg-brand-primary h-3 w-3 rounded-full shadow-md" />
                 </div>
               </div>
 

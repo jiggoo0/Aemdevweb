@@ -81,7 +81,7 @@ export const FlashSaleTimer = memo(
     if (!isMounted) {
       return (
         <div className={cn("mx-auto max-w-4xl px-4", className)}>
-          <div className="rounded-card h-32 w-full animate-pulse border border-white/10 bg-white/5" />
+          <div className="rounded-card h-32 w-full border border-white/10 bg-white/5" />
         </div>
       );
     }
@@ -109,7 +109,7 @@ export const FlashSaleTimer = memo(
 
           <div className="relative z-10 flex flex-col items-center gap-4 text-center md:flex-row md:text-left">
             <div
-              className="shadow-glow flex h-14 w-14 items-center justify-center rounded-2xl transition-transform hover:rotate-12"
+              className="flex h-14 w-14 items-center justify-center rounded-2xl shadow-md transition-transform hover:rotate-12"
               style={{ backgroundColor: color, color: "white" }}
             >
               <IconRenderer

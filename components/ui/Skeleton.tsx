@@ -16,7 +16,7 @@ function Skeleton({ className, ...props }: SkeletonProps) {
     <div
       className={cn(
         /* [PHYSICS]: ระบบ Pulse ที่ปรับตามพื้นหลังของแต่ละธีมอัตโนมัติ */
-        "bg-surface-offset/60 animate-pulse rounded-md",
+        "bg-surface-offset/60 rounded-md",
         /* [PERFORMANCE]: ผลักภาระการคำนวณแอนิเมชันไปที่ GPU Layer */
         "will-change-opacity",
         className,

@@ -51,7 +51,7 @@ export const AuditReportGenerator = memo(() => {
         { p: 25, msg: "Tracing Core Web Vitals (LCP/CLS)...", s: "ok" },
         { p: 40, msg: "Analyzing Semantic Document Object Model...", s: "ok" },
         { p: 55, msg: "WARN: Found Unoptimized Assets Path.", s: "warn" },
-        { p: 70, msg: "Simulating Latency from 12 Regional Nodes...", s: "ok" },
+        { p: 70, msg: "Simulating ความเร็ว from 12 Regional Nodes...", s: "ok" },
         { p: 85, msg: "Synthesizing Competitor Gap Report...", s: "ok" },
         { p: 100, msg: "Finalizing Technical Audit Ledger.", s: "ok" },
       ];
@@ -101,7 +101,7 @@ export const AuditReportGenerator = memo(() => {
             >
               <div className="space-y-6">
                 <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
-                  <span className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+                  <span className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
                   <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
                     ระบบวิเคราะห์ประสิทธิภาพเว็บไซต์
                   </span>
@@ -142,7 +142,7 @@ export const AuditReportGenerator = memo(() => {
             {status === "completed" && (
               <div className="bg-surface-card/90 absolute inset-0 z-20 flex items-center justify-center p-8 backdrop-blur-md">
                 <div className="animate-in fade-in zoom-in max-w-md space-y-8 text-center duration-500">
-                  <div className="shadow-glow-sm mx-auto flex h-20 w-20 items-center justify-center rounded-3xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-500">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-500 shadow-sm">
                     <IconRenderer name="CheckCircle" size={40} />
                   </div>
                   <div className="space-y-4">
@@ -178,10 +178,10 @@ export const AuditReportGenerator = memo(() => {
             <div className="border-border mb-6 flex items-center justify-between border-b pb-4">
               <div className="flex flex-col gap-1">
                 <span className="text-text-muted font-mono text-[9px] font-black uppercase opacity-40">
-                  System_Live_Feed
+                  บันทึกการทำงาน
                 </span>
                 <span className="text-brand-primary font-mono text-[7px] font-bold tracking-widest uppercase">
-                  Secure_Link_Established
+                  เชื่อมต่ออย่างปลอดภัย
                 </span>
               </div>
               <div className="flex gap-1.5">
@@ -198,8 +198,8 @@ export const AuditReportGenerator = memo(() => {
             >
               {logs.length === 0 && status === "idle" && (
                 <div className="space-y-2 opacity-20">
-                  <p className="animate-pulse">// Initializing_Environment...</p>
-                  <p className="animate-pulse delay-150">// Awaiting_Target_Handshake...</p>
+                  <p className="">// Initializing_Environment...</p>
+                  <p className="delay-150">// Awaiting_Target_Handshake...</p>
                 </div>
               )}
               {logs.map((log, i) => (
@@ -218,9 +218,7 @@ export const AuditReportGenerator = memo(() => {
                   </span>
                 </div>
               ))}
-              {status === "scanning" && (
-                <div className="bg-brand-primary ml-12 h-3 w-1 animate-pulse" />
-              )}
+              {status === "scanning" && <div className="bg-brand-primary ml-12 h-3 w-1" />}
             </div>
 
             {/* PROGRESS METRIC */}
@@ -236,8 +234,8 @@ export const AuditReportGenerator = memo(() => {
                 />
               </div>
               <div className="flex items-center justify-between font-mono text-[7px] font-bold tracking-tighter uppercase opacity-30">
-                <span>Buffer_Size: 512KB</span>
-                <span>Thread_Active: 04</span>
+                <span></span>
+                <span></span>
               </div>
             </div>
           </div>

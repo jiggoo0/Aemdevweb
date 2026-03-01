@@ -46,7 +46,7 @@ export const RegionalGallery = ({ data, images: directImages }: RegionalGalleryP
         )}
       >
         <p className="font-mono text-xs font-black tracking-[0.4em] text-[var(--brand-primary)] uppercase">
-          Regional_Visual_Assets
+          ภาพบรรยากาศ
         </p>
         <h2 className="font-[family-name:var(--font-primary)] text-4xl font-black uppercase italic md:text-6xl">
           Visual <span className="text-[var(--brand-primary)]">Context.</span>

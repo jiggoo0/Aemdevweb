@@ -76,7 +76,7 @@ const SALEPAGE_MAP: Record<
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
-          marketSaturation={data.marketSaturation}
+          marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
       </section>
     );
@@ -86,7 +86,7 @@ const SALEPAGE_MAP: Record<
     return (
       <section className="bg-surface-offset border-border/40 border-y py-24">
         <div className="container mx-auto px-4">
-          <div className="rounded-card-lg border-brand-primary/20 bg-surface-card shadow-pro-xl relative overflow-hidden border p-8 backdrop-blur-3xl md:p-12">
+          <div className="rounded-card-lg border-brand-primary/20 bg-surface-card shadow-pro-xl relative overflow-hidden border p-8 backdrop-blur-md md:p-12">
             <div className="relative z-10 flex flex-col items-center justify-between gap-8 md:flex-row">
               <div className="flex items-center gap-6">
                 <div className="bg-brand-primary/10 flex h-16 w-16 items-center justify-center rounded-2xl text-[var(--brand-primary)]">
@@ -167,7 +167,7 @@ const SALEPAGE_MAP: Record<
                 <DirectTerminal
                   mode="health-check"
                   province={data.province}
-                  latency={data.regionalLatency}
+                  latency={data.regionalความเร็ว}
                 />
               </div>
             </div>
@@ -253,7 +253,7 @@ const SALEPAGE_MAP: Record<
               Initialize <br /> <span className="text-brand-primary">Growth.</span>
             </h3>
             {data.regionalPricing ? (
-              <div className="relative z-10 mt-10 inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-10 py-4 backdrop-blur-xl">
+              <div className="relative z-10 mt-10 inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/5 px-10 py-4 backdrop-blur-sm">
                 <span className="text-[10px] font-black tracking-widest text-white/40 uppercase">
                   Special_Start_Rate
                 </span>

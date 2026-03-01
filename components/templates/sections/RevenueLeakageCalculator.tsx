@@ -61,7 +61,7 @@ export default function RevenueLeakageCalculator({
         {/* --- STRATEGIC HEADER --- */}
         <header className="mb-20 space-y-6 text-center md:text-left">
           <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2">
-            <span className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+            <span className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
             <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
               เครื่องมือประเมินความเสี่ยงธุรกิจ
             </span>
@@ -76,7 +76,7 @@ export default function RevenueLeakageCalculator({
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
           {/* LEFT: Matrix Inputs */}
-          <div className="glass-card rounded-section border-border/50 bg-surface-card/80 shadow-pro-xl border p-8 backdrop-blur-3xl md:p-16 lg:col-span-7">
+          <div className="glass-card rounded-section border-border/50 bg-surface-card/80 shadow-pro-xl border p-8 backdrop-blur-md md:p-16 lg:col-span-7">
             <div className="border-border/10 mb-12 flex items-center justify-between border-b pb-6">
               <h3 className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
                 ระบุข้อมูลธุรกิจของคุณ
@@ -152,12 +152,7 @@ export default function RevenueLeakageCalculator({
                   <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
                     ผลลัพธ์การคำนวณ
                   </span>
-                  <div
-                    className={cn(
-                      "h-2 w-2 rounded-full bg-emerald-500",
-                      isCalculating && "animate-ping",
-                    )}
-                  />
+                  <div className={cn("h-2 w-2 rounded-full bg-emerald-500", isCalculating && "")} />
                 </div>
 
                 <div className="mb-12 space-y-2">

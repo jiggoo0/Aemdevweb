@@ -39,7 +39,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
       className={cn(
         "group rounded-section relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "shadow-pro-sm border-[var(--border)] bg-[var(--surface-card)]",
-        "hover:shadow-glow-lg hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
+        "hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm",
         "transform-gpu will-change-transform",
         className,
       )}
@@ -53,19 +53,19 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
           priority={index < 4}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}
           blurDataURL={imgData?.blurDataURL}
-          className="object-cover opacity-60 transition-transform duration-[2s] ease-out group-hover:scale-110 group-hover:opacity-30"
+          className="object-cover opacity-60 transition-transform duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-30"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
         <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-main)] via-[var(--surface-main)]/80 to-transparent" />
         <div
-          className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.05] mix-blend-overlay"
+          className="bg-infrastructure-grid absolute inset-0 z-20 opacity-[0.05]"
           style={{ backgroundImage: "url(/grid-pattern.svg)" }}
         />
       </div>
 
       <div className="relative z-30 flex flex-1 flex-col justify-between p-8 md:p-10">
         <header className="flex items-start justify-between">
-          <div className="group-hover:shadow-glow flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)]/80 text-[var(--color-brand-primary)] backdrop-blur-xl transition-all duration-500 group-hover:rotate-[15deg] group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+          <div className="group- flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)]/80 text-[var(--color-brand-primary)] backdrop-blur-sm transition-all duration-500 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
             <IconRenderer name="MapPin" size={20} strokeWidth={2.5} />
           </div>
 
@@ -121,18 +121,18 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
             <div className="flex items-center gap-6 border-t border-[var(--color-brand-primary)]/10 pt-4">
               <div className="space-y-1">
                 <p className="font-mono text-[8px] font-bold text-[var(--text-muted)] uppercase opacity-60">
-                  Saturation
+                  โอกาสเติบโต
                 </p>
                 <p className="text-sm font-black text-[var(--text-primary)] italic">
-                  {data.marketSaturation || 45}%
+                  {data.marketโอกาสเติบโต || 45}%
                 </p>
               </div>
               <div className="space-y-1">
                 <p className="font-mono text-[8px] font-bold text-[var(--text-muted)] uppercase opacity-60">
-                  Latency
+                  ความเร็ว
                 </p>
                 <p className="text-sm font-black text-emerald-500 italic">
-                  {data.regionalLatency || 25}
+                  {data.regionalความเร็ว || 25}
                   <span className="ml-0.5 text-[8px]">ms</span>
                 </p>
               </div>
@@ -147,7 +147,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
                 </span>
               )}
               <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--text-muted)] uppercase opacity-60 transition-all group-hover:translate-x-1 group-hover:text-[var(--color-brand-primary)] group-hover:opacity-100">
-                Analyze_Node
+                ดูรายละเอียด
               </span>
             </div>
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--surface-offset)] text-[var(--text-primary)] transition-all duration-300 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">

@@ -26,7 +26,7 @@ const BlogCard = ({ post, index = 0, priority = false }: BlogCardProps) => {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group rounded-section shadow-pro-sm hover:shadow-glow-lg relative flex h-full flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] transition-all duration-500 hover:border-[var(--color-brand-primary)]/40"
+      className="group rounded-section shadow-pro-sm relative flex h-full flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] transition-all duration-500 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm"
     >
       {/* 01. VISUAL CORE (Zero-CLS) */}
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-offset)]">
@@ -76,7 +76,7 @@ const BlogCard = ({ post, index = 0, priority = false }: BlogCardProps) => {
           <div className="flex items-center gap-3">
             <div className="h-2 w-2 rounded-full bg-[var(--color-brand-primary)]" />
             <span className="text-[10px] font-black tracking-[0.2em] text-[var(--text-primary)] uppercase">
-              Read_Protocol
+              อ่านบทความ
             </span>
           </div>
           <IconRenderer

@@ -60,12 +60,12 @@ export const DirectOrderForm = memo(({ price, unit = "โปรเจกต์" 
   // [UI]: Success Transition Node
   if (isSuccess) {
     return (
-      <div className="animate-in fade-in zoom-in shadow-pro-xl rounded-section flex flex-col items-center justify-center border border-[var(--border)] bg-[var(--surface-card)] p-8 text-center backdrop-blur-xl duration-500 md:p-12">
+      <div className="animate-in fade-in zoom-in shadow-pro-xl rounded-section flex flex-col items-center justify-center border border-[var(--border)] bg-[var(--surface-card)] p-8 text-center backdrop-blur-sm duration-500 md:p-12">
         <div
           style={{ backgroundColor: "var(--color-brand-primary)", opacity: 0.1 }}
           className="absolute inset-0 z-0"
         />
-        <div className="shadow-glow-sm relative z-10 mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--color-brand-primary)] text-white">
+        <div className="relative z-10 mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[var(--color-brand-primary)] text-white shadow-sm">
           <IconRenderer name="CheckCircle" size={48} strokeWidth={2} className="animate-bounce" />
         </div>
         <h3 className="relative z-10 text-3xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
@@ -189,7 +189,7 @@ export const DirectOrderForm = memo(({ price, unit = "โปรเจกต์" 
         <button
           type="submit"
           disabled={isPending}
-          className="group shadow-glow-sm relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-[var(--color-brand-primary)] py-6 text-xl font-black text-white transition-all hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
+          className="group relative flex w-full items-center justify-center overflow-hidden rounded-2xl bg-[var(--color-brand-primary)] py-6 text-xl font-black text-white shadow-sm transition-all hover:scale-[1.01] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 disabled:grayscale"
         >
           {isPending ? (
             <IconRenderer name="Loader2" className="h-7 w-7 animate-spin" />
@@ -210,7 +210,7 @@ export const DirectOrderForm = memo(({ price, unit = "โปรเจกต์" 
           )}
 
           {/* High-end Shimmer Effect */}
-          <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+          <div className="group-hover: absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent" />
         </button>
 
         {/* Security Indicator */}

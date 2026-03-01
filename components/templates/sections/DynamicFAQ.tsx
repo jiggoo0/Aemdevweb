@@ -79,7 +79,7 @@ export const DynamicFAQ = memo(
             {/* --- 02. HEADER NODE: Sticky Narrative --- */}
             <div className="space-y-10 lg:sticky lg:top-32 lg:col-span-5 lg:h-fit">
               <div className="inline-flex items-center gap-4 rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
-                <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]" />
+                <div className="h-1.5 w-1.5 rounded-full bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]" />
                 <span className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
                   Knowledge_Hub.v18.2
                 </span>
@@ -102,7 +102,7 @@ export const DynamicFAQ = memo(
                   rel="noopener noreferrer"
                   className="group flex items-center gap-5 opacity-40 transition-all hover:opacity-100"
                 >
-                  <div className="border-border/10 group-hover:shadow-glow-sm flex h-12 w-12 items-center justify-center rounded-2xl border bg-[var(--surface-main)] transition-all group-hover:border-[var(--brand-primary)]/40 group-hover:text-[var(--brand-primary)]">
+                  <div className="border-border/10 flex h-12 w-12 items-center justify-center rounded-2xl border bg-[var(--surface-main)] transition-all group-hover:border-[var(--brand-primary)]/40 group-hover:text-[var(--brand-primary)] group-hover:shadow-sm">
                     <IconRenderer name="MessageCircle" size={20} />
                   </div>
                   <span className="font-mono text-[10px] font-black tracking-widest text-[var(--text-primary)] uppercase">
@@ -123,7 +123,7 @@ export const DynamicFAQ = memo(
                       "group relative overflow-hidden border transition-all duration-500",
                       "border-border/10 bg-[var(--surface-main)] shadow-sm",
                       "rounded-card md:rounded-section",
-                      "data-[state=open]:shadow-glow-sm data-[state=open]:border-[var(--brand-primary)]/40",
+                      "data-[state=open]:border-[var(--brand-primary)]/40 data-[state=open]:shadow-sm",
                       "hover:border-[var(--brand-primary)]/20",
                     )}
                   >

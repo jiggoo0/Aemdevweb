@@ -108,7 +108,7 @@ const PricingSection = () => {
         {/* --- HEADER_NODE --- */}
         <header className="mb-24 space-y-6 text-center md:text-left">
           <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-            <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
             <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
               แผนการลงทุนที่คุ้มค่า
             </span>
@@ -137,7 +137,7 @@ const PricingSection = () => {
                 "translate-y-16 opacity-0",
                 visibleItems.has(i) && "translate-y-0 opacity-100",
                 plan.highlight
-                  ? "border-brand-primary bg-surface-card shadow-glow-lg z-10 lg:-translate-y-4"
+                  ? "border-brand-primary bg-surface-card z-10 shadow-sm hover:shadow-md lg:-translate-y-4"
                   : "bg-surface-card border-border/10 hover:border-brand-primary/40",
               )}
               style={{ transitionDelay: `${i * 200}ms` }}
@@ -172,7 +172,7 @@ const PricingSection = () => {
                     </span>
                   </div>
                   <div className="mt-4 inline-flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/10 px-3 py-1">
-                    <div className="h-1 w-1 animate-pulse rounded-full bg-emerald-500" />
+                    <div className="h-1 w-1 rounded-full bg-emerald-500" />
                     <span className="font-mono text-[9px] font-black tracking-widest text-emerald-500 uppercase">
                       {plan.roi}
                     </span>

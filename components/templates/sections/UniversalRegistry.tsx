@@ -20,20 +20,20 @@ export const FeatureGrid = memo(({ features }: { features: readonly ServiceFeatu
         key={feature.title}
         className={cn(
           "group rounded-card border-border relative flex flex-col overflow-hidden border p-10 transition-all duration-700",
-          "bg-surface-card hover:shadow-glow-sm hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
+          "bg-surface-card hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-sm",
           "transform-gpu will-change-transform",
         )}
       >
         {/* Background Aura */}
         <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-[var(--color-brand-primary)] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-10" />
 
-        <div className="bg-surface-offset border-border group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-2xl border text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
+        <div className="bg-surface-offset border-border mb-10 flex h-16 w-16 items-center justify-center rounded-2xl border text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
           <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
         </div>
 
         <div className="relative z-10 space-y-4">
           <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
-            Node_Capability.0{idx + 1}
+            คุณสมบัติที่ 0{idx + 1}
           </span>
           <h3 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic">
             {feature.title}
@@ -45,7 +45,7 @@ export const FeatureGrid = memo(({ features }: { features: readonly ServiceFeatu
 
         {/* Decorative Grid Trace */}
         <div
-          className="absolute inset-0 z-0 opacity-[0.02] mix-blend-overlay transition-opacity duration-700 group-hover:opacity-[0.05]"
+          className="absolute inset-0 z-0 opacity-[0.02] transition-opacity duration-700 group-hover:opacity-[0.05]"
           style={{ backgroundImage: "url(/grid-pattern.svg)", backgroundSize: "20px 20px" }}
         />
       </div>
@@ -62,7 +62,7 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
         key={item.name}
         className={cn(
           "group rounded-section border-border bg-surface-card relative flex flex-col overflow-hidden border p-2 transition-all duration-700",
-          "hover:shadow-glow-sm hover:scale-[1.02] hover:border-[var(--color-brand-primary)]/40",
+          "hover:scale-[1.02] hover:border-[var(--color-brand-primary)]/40 hover:shadow-sm",
         )}
       >
         <div className="bg-surface-offset flex h-48 items-center justify-center overflow-hidden rounded-[calc(var(--radius-section)-0.5rem)] transition-colors duration-700 group-hover:bg-[var(--color-brand-primary)]/5">
@@ -70,14 +70,14 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
             name={item.icon as IconName}
             size={80}
             strokeWidth={1}
-            className="text-[var(--color-brand-primary)] opacity-20 transition-all duration-1000 group-hover:scale-110 group-hover:opacity-100"
+            className="text-[var(--color-brand-primary)] opacity-20 transition-all duration-1000 group-hover:scale-105 group-hover:opacity-100"
           />
         </div>
 
         <div className="flex flex-1 flex-col p-8">
           <div className="mb-6 space-y-2">
             <span className="text-text-muted font-mono text-[8px] font-bold tracking-[0.3em] uppercase opacity-40">
-              Unit_Registry.v18.{idx.toString().padStart(2, "0")}
+              รหัสสินค้า {idx.toString().padStart(2, "0")}
             </span>
             <h3 className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
               {item.name}
@@ -91,7 +91,7 @@ const ItemGrid = memo(({ items }: { items: readonly CatalogItem[] }) => (
             <div className="border-border mt-auto flex items-center justify-between border-t pt-6">
               <div className="flex flex-col">
                 <span className="text-text-muted text-[8px] font-black tracking-widest uppercase opacity-40">
-                  Status_Price
+                  ราคาอ้างอิง
                 </span>
                 <span className="text-lg font-black text-[var(--color-brand-primary)] italic">
                   {item.price}{" "}
@@ -124,9 +124,9 @@ const UniversalRegistry = ({ data }: BaseTemplateProps) => {
         {/* --- SECTION HEADER --- */}
         <header className="mb-24 space-y-8">
           <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2.5 text-[var(--color-brand-primary)] backdrop-blur-md">
-            <div className="shadow-glow h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-brand-primary)]" />
+            <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
             <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
-              Registry_Orchestration.sys
+              ระบบหลังบ้าน
             </span>
           </div>
 

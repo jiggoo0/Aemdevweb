@@ -13,20 +13,20 @@ interface DirectTerminalProps {
 export const DirectTerminal = ({
   mode = "contact",
   province = "Global",
-  latency: providedLatency,
+  latency: providedความเร็ว,
 }: DirectTerminalProps) => {
   const [status, setStatus] = React.useState<"idle" | "running" | "complete">("idle");
   const [output, setOutput] = React.useState<string[]>([]);
-  const [_latency, setLatency] = React.useState<number>(providedLatency || 25);
+  const [_latency, setความเร็ว] = React.useState<number>(providedความเร็ว || 25);
 
   // [HYDRATION_SAFE]: Generate stable simulated latency on mount if not provided
   React.useEffect(() => {
-    if (!providedLatency) {
+    if (!providedความเร็ว) {
       const base = province.length * 2;
       const variance = Math.floor(Math.abs(Math.sin(province.length) * 15));
-      setLatency(10 + base + variance);
+      setความเร็ว(10 + base + variance);
     }
-  }, [providedLatency, province]);
+  }, [providedความเร็ว, province]);
 
   const [email, setEmail] = React.useState("");
   const [error, setError] = React.useState("");
@@ -80,7 +80,7 @@ export const DirectTerminal = ({
 
       <div className="border-border/10 relative z-10 flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 animate-pulse rounded-full bg-red-500/50" />
+          <div className="h-2 w-2 rounded-full bg-red-500/50" />
           <div className="h-2 w-2 rounded-full bg-amber-500/40" />
           <div className="h-2 w-2 rounded-full bg-emerald-500/40" />
           <span className="text-text-muted ml-2 text-[9px] font-black tracking-widest uppercase opacity-40">
@@ -91,7 +91,7 @@ export const DirectTerminal = ({
         </div>
         {status === "complete" && (
           <div className="flex items-center gap-2 text-emerald-500">
-            <div className="h-1.5 w-1.5 animate-ping rounded-full bg-emerald-500" />
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             <span className="text-[8px] font-black tracking-widest uppercase">Authenticated</span>
           </div>
         )}
@@ -112,7 +112,7 @@ export const DirectTerminal = ({
                   <span className="text-brand-primary mr-2 opacity-30">❯</span>
                   {line}
                   {i === output.length - 1 && status === "running" && (
-                    <span className="bg-brand-primary ml-1 inline-block h-3 w-1.5 animate-pulse" />
+                    <span className="bg-brand-primary ml-1 inline-block h-3 w-1.5" />
                   )}
                 </p>
               ))}

@@ -67,17 +67,17 @@ const ServiceListingHub = async ({
           aria-hidden="true"
         />
 
-        <div className="border-border bg-surface-offset shadow-glow-sm rounded-card relative z-10 mb-8 flex h-20 w-20 items-center justify-center border">
-          <IconRenderer name="Layers" size={32} className="text-brand-primary/40 animate-pulse" />
+        <div className="border-border bg-surface-offset rounded-card relative z-10 mb-8 flex h-20 w-20 items-center justify-center border shadow-sm">
+          <IconRenderer name="Layers" size={32} className="text-brand-primary/40" />
         </div>
 
         <div className="relative z-10 space-y-4">
           <h3 className="text-text-primary font-mono text-sm font-black tracking-[0.5em] uppercase opacity-90">
-            Node_Inquiry.Standby
+            รอข้อมูล
           </h3>
           <p className="text-text-secondary mx-auto max-w-sm text-xs font-medium italic opacity-70">
             ระบบกำลังเตรียมการ Deploy ชุดข้อมูล <br />
-            <span className="text-brand-primary font-bold">READY_FOR_ORCHESTRATION</span>
+            <span className="text-brand-primary font-bold">พร้อมให้บริการเร็วๆ นี้</span>
           </p>
         </div>
       </div>

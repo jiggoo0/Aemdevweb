@@ -105,7 +105,7 @@ export function ThaiTrustBadge({ clientTrust }: ThaiTrustBadgeProps) {
 function TrustItem({ icon, title, description }: TrustItemProps) {
   return (
     <div className="group rounded-section hover:shadow-pro-xl flex flex-col items-center border border-[var(--border)] bg-[var(--surface-card)] p-8 text-center transition-all duration-500 hover:border-[var(--color-brand-primary)]/30">
-      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)] transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+      <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-[1.5rem] bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)] transition-all duration-500 group-hover:scale-105 group-hover:rotate-6">
         <IconRenderer name={icon as IconName} size={32} strokeWidth={2} />
       </div>
 

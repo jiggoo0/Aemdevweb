@@ -34,7 +34,7 @@ const RegionalNodeHub = ({ data }: { data: UniversalTemplateProps }) => {
 
               <Link
                 href={masterServiceUrl}
-                className="group bg-brand-primary shadow-glow-md relative z-10 flex h-20 items-center gap-6 rounded-2xl px-12 text-[12px] font-black tracking-[0.2em] text-white uppercase transition-all hover:scale-105 active:scale-95"
+                className="group bg-brand-primary shadow-md-md relative z-10 flex h-20 items-center gap-6 rounded-2xl px-12 text-[12px] font-black tracking-[0.2em] text-white uppercase transition-all hover:scale-105 active:scale-95"
               >
                 <IconRenderer name="ArrowRight" size={24} />
                 <span>Full_Service_Details</span>
@@ -72,7 +72,7 @@ const RegionalNodeHub = ({ data }: { data: UniversalTemplateProps }) => {
                 <Link
                   key={slug}
                   href={`/areas/${slug}`}
-                  className="group border-border/50 bg-surface-card hover:border-brand-primary/40 hover:shadow-glow-sm relative flex items-center justify-between overflow-hidden rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1"
+                  className="group border-border/50 bg-surface-card hover:border-brand-primary/40 relative flex items-center justify-between overflow-hidden rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
                 >
                   <span className="text-text-primary group-hover:text-brand-primary text-[11px] font-black tracking-widest uppercase transition-colors">
                     {slug.replace(/-/g, " ")}

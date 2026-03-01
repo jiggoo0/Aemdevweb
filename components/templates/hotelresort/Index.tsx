@@ -60,7 +60,7 @@ const HOSPITALITY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
-          marketSaturation={data.marketSaturation}
+          marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
         {/* [UX_OPTIMIZATION]: ลิงก์ไปยังหน้าบริการระดับ Master เพื่อดูมาตรฐาน Hospitality ทั่วประเทศ */}
         {data.masterServiceUrl && (
@@ -87,11 +87,11 @@ const HOSPITALITY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>
     return (
       <section className="bg-surface-offset border-border/40 border-y py-24">
         <div className="container mx-auto px-4">
-          <div className="shadow-pro-xl rounded-section border-border/50 bg-surface-card relative overflow-hidden p-10 backdrop-blur-3xl transition-all md:p-20">
+          <div className="shadow-pro-xl rounded-section border-border/50 bg-surface-card relative overflow-hidden p-10 backdrop-blur-md transition-all md:p-20">
             <div className="relative z-10 flex flex-col items-center justify-between gap-12 md:flex-row">
               <div className="space-y-6 text-center md:text-left">
                 <div className="flex items-center justify-center gap-3 md:justify-start">
-                  <div className="bg-brand-primary h-2 w-2 animate-pulse rounded-full" />
+                  <div className="bg-brand-primary h-2 w-2 rounded-full" />
                   <span className="font-sans text-[12px] font-bold tracking-widest text-[var(--brand-primary)] uppercase">
                     ข้อเสนอสุดพิเศษ
                   </span>

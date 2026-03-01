@@ -40,7 +40,7 @@ const StickyBuyButton = memo(
           isVisible ? "translate-y-0" : "translate-y-[150%]",
         )}
       >
-        <div className="rounded-card flex items-center justify-between gap-4 border border-white/20 bg-white/80 p-3 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-xl supports-[backdrop-filter]:bg-white/60 dark:border-white/10 dark:bg-black/60 dark:text-white">
+        <div className="rounded-card flex items-center justify-between gap-4 border border-white/20 bg-white/80 p-3 shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-sm supports-[backdrop-filter]:bg-white/60 dark:border-white/10 dark:bg-black/60 dark:text-white">
           <div className="flex flex-col pl-4">
             <span className="text-[9px] font-black tracking-widest text-slate-400 uppercase">
               Total
@@ -72,7 +72,7 @@ const StickyBuyButton = memo(
               <IconRenderer name="ShoppingBag" size={18} strokeWidth={2.5} className="mb-0.5" />
               {label}
             </div>
-            <div className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+            <div className="group-hover: absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
           </Link>
         </div>
       </div>

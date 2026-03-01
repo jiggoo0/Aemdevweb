@@ -61,7 +61,7 @@ export const TrustEquation = memo(() => {
               >
                 <div
                   className={cn(
-                    "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--surface-offset)] transition-all group-hover:scale-110",
+                    "mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--surface-offset)] transition-all group-hover:scale-105",
                     item.color,
                   )}
                 >
@@ -100,7 +100,7 @@ export const TrustEquation = memo(() => {
           {/* Result Node */}
           <div
             className={cn(
-              "group shadow-glow relative w-full max-w-[320px] rounded-2xl border border-[var(--color-brand-primary)]/40 bg-[var(--color-brand-primary)] p-10 transition-all delay-1000 duration-1000",
+              "group relative w-full max-w-[320px] rounded-2xl border border-[var(--color-brand-primary)]/40 bg-[var(--color-brand-primary)] p-10 shadow-md transition-all delay-1000 duration-1000",
               visible ? "scale-100 opacity-100" : "scale-90 opacity-0",
             )}
           >
@@ -112,7 +112,7 @@ export const TrustEquation = memo(() => {
               AUTHORITY.
             </h4>
             <div className="mt-8 h-1 w-full overflow-hidden rounded-full bg-white/20">
-              <div className="animate-shimmer h-full w-full bg-white" />
+              <div className="h-full w-full bg-white" />
             </div>
           </div>
         </div>

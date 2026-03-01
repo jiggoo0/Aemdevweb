@@ -76,7 +76,7 @@ const Navbar = () => {
           isHidden ? "-translate-y-[120%]" : "translate-y-0",
         )}
       >
-        <div className="bg-surface-main/80 border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border px-5 shadow-lg backdrop-blur-xl md:h-16 md:px-8">
+        <div className="bg-surface-main/80 border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border px-5 shadow-lg backdrop-blur-sm md:h-16 md:px-8">
           {/* Logo Section */}
           <div className="flex items-center gap-4">
             <Link
@@ -85,7 +85,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
               aria-label="Home"
             >
-              <div className="bg-brand-primary shadow-glow flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-black text-white uppercase transition-transform group-hover:rotate-6">
+              <div className="bg-brand-primary flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-black text-white uppercase shadow-md transition-transform group-hover:rotate-6">
                 AEM
               </div>
               <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
@@ -96,7 +96,7 @@ const Navbar = () => {
             {/* System Intelligence HUD */}
             <div className="hidden items-center gap-2 border-l border-white/10 pl-4 md:flex">
               <div className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_var(--brand-primary)]"></span>
               </div>
               <span className="font-sans text-[9px] font-bold tracking-widest text-emerald-500 uppercase opacity-80">
@@ -120,7 +120,7 @@ const Navbar = () => {
                       )}
                     >
                       {isActive && (
-                        <span className="bg-brand-primary shadow-glow-sm absolute inset-0 z-[-1] rounded-full transition-all duration-300" />
+                        <span className="bg-brand-primary absolute inset-0 z-[-1] rounded-full shadow-sm transition-all duration-300" />
                       )}
                       {link.label}
                     </Link>
@@ -188,7 +188,7 @@ const Navbar = () => {
 
         <nav
           className={cn(
-            "bg-surface-main/95 rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-2xl transition-all duration-500",
+            "bg-surface-main/95 rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-sm transition-all duration-500",
             isOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-5 scale-95 opacity-0",
           )}
         >

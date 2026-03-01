@@ -72,7 +72,7 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
           <LocalInsight
             insight={data.localContext?.marketInsight || ""}
             painPoints={(data.localContext?.painPoints as string[]) || []}
-            marketSaturation={data.marketSaturation}
+            marketโอกาสเติบโต={data.marketโอกาสเติบโต}
           />
         </section>
       )}
@@ -100,7 +100,7 @@ const CatalogTemplate = ({ data }: { data: UniversalTemplateProps }) => {
 
       <footer className="bg-[#020617] py-12 text-center">
         <div className="inline-flex items-center gap-3 opacity-20">
-          <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+          <div className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
           <p className="font-mono text-[8px] tracking-[0.5em] text-white uppercase">
             Catalog_System_Protocol_v20.0.0_HARDENED
           </p>

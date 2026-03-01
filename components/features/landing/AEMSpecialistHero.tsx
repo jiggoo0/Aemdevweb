@@ -71,7 +71,7 @@ export const AEMSpecialistHero = memo(() => {
             ].map((node, i) => (
               <div
                 key={i}
-                className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-3xl transition-all"
+                className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md transition-all"
               >
                 <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                 <span className="text-text-muted font-sans text-[10px] font-bold tracking-wide uppercase opacity-60 transition-opacity group-hover:opacity-100">
@@ -97,7 +97,7 @@ export const AEMSpecialistHero = memo(() => {
               ที่ครองอันดับ 1 ในยุค AI Search”
             </p>
             <div className="bg-border/20 relative h-px w-48 overflow-hidden">
-              <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full animate-[shimmer_2s_infinite]" />
+              <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full" />
             </div>
           </div>
 
@@ -107,13 +107,13 @@ export const AEMSpecialistHero = memo(() => {
               size="lg"
               variant="default"
               href={SITE_CONFIG.links.line}
-              className="shadow-glow-lg group glow-primary h-20 min-w-[320px] rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic transition-all duration-500 hover:scale-[1.02] active:scale-95"
+              className="group glow-primary h-20 min-w-[320px] rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic shadow-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-md active:scale-95"
             >
               <span className="mr-6">ปรึกษาผู้เชี่ยวชาญ (ฟรี)</span>
               <IconRenderer
                 name="Zap"
                 size={20}
-                className="transition-transform group-hover:scale-125 group-hover:rotate-12"
+                className="transition-transform group-hover:scale-105 group-hover:rotate-12"
               />
             </Button>
 
@@ -121,7 +121,7 @@ export const AEMSpecialistHero = memo(() => {
               size="lg"
               variant="outline"
               href="/services"
-              className="border-border hover:border-brand-primary/40 h-20 min-w-[280px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-3xl transition-all duration-500"
+              className="border-border hover:border-brand-primary/40 h-20 min-w-[280px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-md transition-all duration-500"
             >
               ดูบริการทั้งหมด
             </Button>

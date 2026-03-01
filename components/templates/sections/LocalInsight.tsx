@@ -13,18 +13,18 @@ interface LocalInsightProps {
   data?: UniversalTemplateProps;
   insight?: string;
   painPoints?: string[];
-  marketSaturation?: number;
+  marketโอกาสเติบโต?: number;
 }
 
 export const LocalInsight = ({
   data,
   insight: directInsight,
   painPoints: directPainPoints,
-  marketSaturation: directSaturation,
+  marketโอกาสเติบโต: directโอกาสเติบโต,
 }: LocalInsightProps) => {
   const insight = directInsight || data?.localContext?.marketInsight || data?.description || "";
   const painPoints = directPainPoints || (data?.localContext?.painPoints as string[]) || [];
-  const saturation = directSaturation || data?.marketSaturation || 45;
+  const saturation = directโอกาสเติบโต || data?.marketโอกาสเติบโต || 45;
   const competitorIndex = (saturation * 1.2).toFixed(1);
   const opportunityScore = (100 - saturation * 0.8).toFixed(1);
 
@@ -39,7 +39,7 @@ export const LocalInsight = ({
           <div className="space-y-12 lg:col-span-7">
             <div className="space-y-8">
               <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/30 bg-[var(--color-brand-primary)]/10 px-6 py-2.5 backdrop-blur-md">
-                <div className="shadow-glow-sm h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)]" />
+                <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-sm" />
                 <span className="font-sans text-[11px] font-bold tracking-[0.2em] text-[var(--color-brand-primary)] uppercase">
                   Market Analysis & Strategy
                 </span>
@@ -60,7 +60,7 @@ export const LocalInsight = ({
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {[
                 {
-                  label: "Digital Saturation",
+                  label: "Digital โอกาสเติบโต",
                   val: `${saturation}%`,
                   color: "text-[var(--color-brand-primary)]",
                 },
