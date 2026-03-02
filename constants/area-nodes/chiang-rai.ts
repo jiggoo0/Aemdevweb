@@ -16,7 +16,7 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
   region: "North",
   priority: 92,
 
-  title: "รับทำเว็บไซต์ เชียงราย | Digital Infrastructure สำหรับการค้าข้ามแดนและธุรกิจสร้างสรรค์",
+  title: "วางระบบเว็บไซต์ เชียงราย | Digital Infrastructure สำหรับการค้าข้ามแดนและธุรกิจสร้างสรรค์",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐานสากลในเชียงราย เจาะกลุ่มธุรกิจนำเข้า-ส่งออก แบรนด์กาแฟ Specialty และรีสอร์ตพรีเมียม เน้นดีไซน์เชิงศิลปะ โหลดไว และครองอันดับหนึ่งในเขตลุ่มน้ำโขง",
 
@@ -65,7 +65,7 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
         "วางระบบระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ/จีน ยอดสั่งซื้อจากพาร์ทเนอร์ต่างชาติเพิ่มขึ้น 280% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ เชียงราย",
+      "วางระบบเว็บไซต์ เชียงราย",
       "จ้างทำ SEO แม่สาย",
       "ทำเว็บกาแฟ Specialty",
       "GMS Trade Web Solution",
@@ -97,7 +97,7 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ เชียงราย",
+    "วางระบบเว็บไซต์ เชียงราย",
     "ออกแบบเว็บไซต์ แม่สาย",
     "จ้างทำเว็บกาแฟ",
     "Technical SEO Northern Thailand",

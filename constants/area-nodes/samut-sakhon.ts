@@ -15,7 +15,7 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
   region: "Central",
   priority: 96,
 
-  title: "รับทำเว็บไซต์ สมุทรสาคร | Digital Seafood Hub สำหรับโรงงานและธุรกิจห้องเย็นอุตสาหกรรม",
+  title: "วางระบบเว็บไซต์ สมุทรสาคร | Digital Seafood Hub สำหรับโรงงานและธุรกิจห้องเย็นอุตสาหกรรม",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในสมุทรสาคร (มหาชัย) เจาะกลุ่มแปรรูปอาหารทะเลและโรงงานอุตสาหกรรม เน้นความโปรระดับส่งออก โหลดไว และระบบ RFQ ที่แม่นยำ",
 
@@ -63,7 +63,7 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
       result: "ทำแคตตาล็อกบริการและ SEO ใหม่ ยอดขอใบเสนอราคาจากลูกค้า B2B เพิ่มขึ้น 240%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ มหาชัย",
+      "วางระบบเว็บไซต์ มหาชัย",
       "จ้างทำเว็บโรงงาน สมุทรสาคร",
       "Cold Storage SEO Thailand",
       "ทำแคตตาล็อกสินค้าอุตสาหกรรม",
@@ -95,7 +95,7 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ สมุทรสาคร",
+    "วางระบบเว็บไซต์ สมุทรสาคร",
     "ทำเว็บโรงงาน มหาชัย",
     "Web Design Mahachai",
     "Seafood Industry SEO",

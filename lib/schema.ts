@@ -91,6 +91,14 @@ const personNode: Person = {
   sameAs: [SITE_CONFIG.links.linkedin, SITE_CONFIG.links.twitter, SITE_CONFIG.links.github].filter(
     Boolean,
   ) as string[],
+  knowsAbout: [
+    "AI Agent Integration",
+    "Next.js 16 Performance Architecture",
+    "Technical SEO Engineering",
+    "Generative Engine Optimization (GEO)",
+    "B2B Digital Transformation",
+  ],
+  knowsLanguage: ["Thai", "English"],
 };
 
 // =========================================
@@ -230,13 +238,13 @@ export function generateUniversalSchema(
   } as ProfessionalService;
 }
 
-export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService {
-  const url = absoluteUrl(`/areas/${data.slug}`);
+export function generateLocalBusinessSchema(data?: Partial<AreaNode>): ProfessionalService {
+  const url = data?.slug ? absoluteUrl(`/areas/${data.slug}`) : absoluteUrl("/contact");
 
   const ratingNode = {
     "@type": "AggregateRating",
-    ratingValue: data.socialProof?.rating?.toString() || "4.9",
-    reviewCount: data.socialProof?.reviewCount?.toString() || "12",
+    ratingValue: data?.socialProof?.rating?.toString() || "4.9",
+    reviewCount: data?.socialProof?.reviewCount?.toString() || "12",
     bestRating: "5",
     worstRating: "1",
   };
@@ -244,25 +252,25 @@ export function generateLocalBusinessSchema(data: AreaNode): ProfessionalService
   return {
     "@type": "ProfessionalService",
     "@id": `${url}/#localbusiness`,
-    name: data.title || `${SITE_CONFIG.brandName} - ${data.province}`,
+    name: data?.title || `${SITE_CONFIG.brandName} - ${SITE_CONFIG.business.location}`,
     telephone: SITE_CONFIG.contact.phone,
     priceRange: SITE_CONFIG.business.priceRange,
     url: url,
-    image: absoluteUrl(data.heroImage || SITE_CONFIG.ogImage),
-    description: data.description,
+    image: absoluteUrl(data?.heroImage || SITE_CONFIG.ogImage),
+    description: data?.description || SITE_CONFIG.description,
     address: {
       "@type": "PostalAddress",
       "@id": `${url}/#localaddress`,
       streetAddress: SITE_CONFIG.contact.streetAddress || SITE_CONFIG.contact.address,
-      addressLocality: data.province,
-      addressRegion: data.province,
+      addressLocality: data?.province || SITE_CONFIG.business.location,
+      addressRegion: data?.province || SITE_CONFIG.business.region,
       addressCountry: "TH",
       postalCode: SITE_CONFIG.contact.postalCode,
     } as PostalAddress,
     parentOrganization: { "@id": absoluteUrl("/#organization") },
     aggregateRating: ratingNode,
     openingHoursSpecification: openingHours,
-    ...(data.coordinates && {
+    ...(data?.coordinates && {
       geo: {
         "@type": "GeoCoordinates",
         latitude: data.coordinates.lat,

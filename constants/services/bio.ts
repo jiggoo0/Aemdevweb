@@ -119,7 +119,7 @@ export const bioService: TemplateMasterData = {
     "อลงกรณ์ ยมเกิด",
     "Alongkorn Yomkerd",
     "นายเอ็มซ่ามากส์ ตัวจริง",
-    "รับทำเว็บไซต์ Personal Branding",
+    "วางระบบเว็บไซต์ Personal Branding",
     "สร้างตัวตนบน Google AI",
     "แก้ปัญหาชื่อไม่ตรงใน Google",
   ],

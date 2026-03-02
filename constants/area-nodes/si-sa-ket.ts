@@ -8,7 +8,7 @@ export const siSaKetNode = defineAreaNode(localAuthorityService, {
   province: "ศรีสะเกษ",
   region: "Northeast",
   priority: 82,
-  title: "รับทำเว็บไซต์ ศรีสะเกษ | ยกระดับสินค้าเกษตรภูเขาไฟและธุรกิจท่องเที่ยวเชิงวัฒนธรรม",
+  title: "วางระบบเว็บไซต์ ศรีสะเกษ | ยกระดับสินค้าเกษตรภูเขาไฟและธุรกิจท่องเที่ยวเชิงวัฒนธรรม",
   description:
     "เปลี่ยนชื่อเสียงทุเรียนภูเขาไฟให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือและการเล่าเรื่องวิถีชุมชน",
   heroImage: "/images/areas/si-sa-ket-node.webp",
@@ -44,7 +44,7 @@ export const siSaKetNode = defineAreaNode(localAuthorityService, {
     regionalPricing: { startPrice: `${localAuthorityService.price} บาท`, timeline: "14-21 วัน" },
   },
   keywords: [
-    "รับทำเว็บไซต์ ศรีสะเกษ",
+    "วางระบบเว็บไซต์ ศรีสะเกษ",
     "ทำเว็บทุเรียนภูเขาไฟ",
     "จ้างทำเว็บศรีสะเกษ",
     "รับทำ SEO ศรีสะเกษ",

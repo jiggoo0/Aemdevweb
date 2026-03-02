@@ -10,7 +10,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
   region: "Central",
   priority: 86,
 
-  title: "รับทำเว็บไซต์ สมุทรสงคราม | ออกแบบเว็บที่พักอัมพวาและสินค้าเกษตรพรีเมียม",
+  title: "วางระบบเว็บไซต์ สมุทรสงคราม | ออกแบบเว็บที่พักอัมพวาและสินค้าเกษตรพรีเมียม",
   description:
     "ยกระดับเสน่ห์เมืองแม่กลองสู่ตลาดบน ด้วยเว็บไซต์ที่เน้นดีไซน์สวยแพงและการเล่าเรื่องวิถีชุมชนที่น่าสนใจ",
 
@@ -84,7 +84,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
       result: "วางระบบจองตรงและทำ SEO ท้องถิ่น ยอดจองห้องพักในวันธรรมดาเพิ่มขึ้น 120%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ อัมพวา",
+      "วางระบบเว็บไซต์ อัมพวา",
       "ออกแบบเว็บโฮมสเตย์ สมุทรสงคราม",
       "จ้างทำ SEO แม่กลอง",
       "ทำเว็บสวนส้มโอ สมุทรสงคราม",
@@ -108,7 +108,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ สมุทรสงคราม",
+    "วางระบบเว็บไซต์ สมุทรสงคราม",
     "ทำเว็บที่พัก อัมพวา",
     "จ้างทำเว็บแม่กลอง",
     "รับทำ SEO สมุทรสงคราม",

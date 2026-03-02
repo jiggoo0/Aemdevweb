@@ -35,7 +35,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
   return (
     <Link
       href={`/areas/${safeSlug}`}
-      aria-label={`ดูรายละเอียดบริการรับทำเว็บไซต์ในพื้นที่ ${displayTitle}`}
+      aria-label={`ดูรายละเอียดบริการวางระบบเว็บไซต์องค์กรในพื้นที่ ${displayTitle}`}
       className={cn(
         "group rounded-section relative flex h-full min-h-[520px] w-full flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
         "shadow-pro-sm border-[var(--border)] bg-[var(--surface-card)]",
@@ -48,7 +48,7 @@ const AreaCard = ({ data, index = 0, className }: AreaCardProps) => {
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
         <Image
           src={imagePath}
-          alt={`บริการรับทำเว็บไซต์ ${displayTitle} - ออกแบบเว็บไซต์คุณภาพสูงโดย AEMDEVWEB`}
+          alt={`บริการวางระบบเว็บไซต์องค์กร ${displayTitle} - โครงสร้างดิจิทัลประสิทธิภาพสูงโดย AEMDEVWEB`}
           fill
           priority={index < 4}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}

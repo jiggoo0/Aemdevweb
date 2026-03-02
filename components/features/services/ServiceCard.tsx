@@ -1,143 +1,123 @@
 /**
- * [FEATURE COMPONENT]: SERVICE_CARD_NODE v18.2.1 (SERVER_OPTIMIZED)
- * [STRATEGY]: Pure Server Component | Zero-JS Payload | CLS Stability
+ * [FEATURE COMPONENT]: SERVICE_CARD_NODE v18.5.0 (AI_OPTIMIZED)
+ * [STRATEGY]: Zero-Jank Animation | Semantic Richness | Lazy Load Protection
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React, { memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
-// --- Infrastructure & Utilities ---
-import { IMAGE_BLUR_DATA } from "@/constants/image-blur-data";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { TemplateMasterData } from "@/types";
 
 interface ServiceCardProps {
   readonly data: TemplateMasterData;
+  readonly index?: number;
   readonly className?: string;
   readonly isPopular?: boolean;
-  readonly index?: number;
 }
 
-const ServiceCard = ({ data, className, isPopular, index = 0 }: ServiceCardProps) => {
-  // [SERVER_ONLY]: Pure logic for RSC execution
-  const sourceFeatures = data.benefits?.length
-    ? data.benefits
-    : data.coreFeatures?.map((f) => f.title);
-  const displayFeatures = sourceFeatures?.slice(0, 3) || [
-    "High-End Architecture",
-    "Technical SEO Strategy",
-    "ROI-Focused Design",
-  ];
-
+const ServiceCard = ({ data, index = 0, className, isPopular }: ServiceCardProps) => {
   const imageSource = data.image || "/images/services/default.webp";
-  const imgData = IMAGE_BLUR_DATA[imageSource as keyof typeof IMAGE_BLUR_DATA] || null;
-
-  const priceValue = data.priceValue || 0;
-  const priceDisplay =
-    priceValue === 0 ? "ติดต่อประเมินราคา" : new Intl.NumberFormat("th-TH").format(priceValue);
+  const priceDisplay = data.priceValue
+    ? `฿${new Intl.NumberFormat("th-TH").format(data.priceValue)}`
+    : "Price_Inquiry";
 
   return (
-    <Link
-      href={`/services/${data.templateSlug}`}
+    <article
       className={cn(
-        "group rounded-section relative flex h-full w-full flex-col justify-between overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
-        "shadow-pro-sm border-[var(--border)] bg-[var(--surface-card)]",
-        "hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm",
+        "group rounded-card-lg border-border bg-surface-card relative flex h-full w-full flex-col overflow-hidden border transition-all duration-700 ease-[0.16,1,0.3,1]",
+        "hover:border-brand-primary/40 hover:shadow-pro-xl hover:-translate-y-1",
         "transform-gpu will-change-transform",
         className,
       )}
     >
-      {/* --- LAYER 1: AUTHORITY BADGE --- */}
-      {(isPopular || data.isPopular) && (
-        <div className="absolute top-6 right-6 z-30">
-          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-[var(--color-brand-primary)] px-4 py-2 text-white shadow-sm backdrop-blur-sm">
-            <IconRenderer name="Star" size={10} className="fill-current" />
-            <span className="text-[8px] font-black tracking-widest uppercase md:text-[9px]">
-              Specialist_Choice
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* --- LAYER 2: VISUAL CORE (Zero-CLS Guard) --- */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-offset)] select-none">
+      {/* 01. Visual Engine: 16:10 Ratio for Visual Balance */}
+      <div className="bg-surface-offset relative aspect-[16/10] w-full overflow-hidden select-none">
         <Image
           src={imageSource}
-          alt={`Solution: ${data.title}`}
+          alt={`Solution Architecture: ${data.title}`}
           fill
           priority={index < 3}
-          placeholder={imgData?.blurDataURL ? "blur" : "empty"}
-          blurDataURL={imgData?.blurDataURL}
-          className="object-cover opacity-90 transition-transform duration-[2s] ease-out group-hover:scale-105 group-hover:opacity-100"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
         />
-        <div
-          className="bg-infrastructure-grid absolute inset-0 z-10 opacity-[0.04]"
-          style={{ backgroundImage: "url(/grid-pattern.svg)" }}
-        />
-        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[var(--surface-card)] via-transparent to-transparent opacity-60" />
+        {/* Popular Badge Injection */}
+        {(isPopular || data.isPopular) && (
+          <div className="absolute top-4 right-4 z-20">
+            <div className="bg-brand-primary flex items-center gap-2 rounded-full px-3 py-1.5 text-white shadow-lg backdrop-blur-sm">
+              <IconRenderer name="Star" size={10} className="fill-current text-white" />
+              <span className="font-mono text-[8px] font-black tracking-widest uppercase">
+                Expert_Choice
+              </span>
+            </div>
+          </div>
+        )}
+        <div className="from-surface-card absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-60" />
       </div>
 
+      {/* 02. Intelligence Node: Semantic Content */}
       <div className="flex flex-1 flex-col p-8 md:p-10">
-        <header className="mb-8 space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
-            <span className="font-mono text-[8px] font-black tracking-[0.3em] text-[var(--text-muted)] uppercase opacity-60">
-              บริการที่ {(index + 1).toString().padStart(2, "0")}
+        <header className="mb-6">
+          <div className="mb-3 flex items-center gap-2">
+            <div className="bg-brand-primary h-1.5 w-1.5 animate-pulse rounded-full" />
+            <span className="text-text-muted font-mono text-[9px] font-black tracking-widest uppercase opacity-60">
+              SERVICE_NODE: {data.templateSlug.replace(/-/g, "_").toUpperCase()}
             </span>
           </div>
-
-          <h3 className="line-clamp-1 text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors duration-300 group-hover:text-[var(--color-brand-primary)] md:text-3xl">
+          <h3 className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter uppercase italic transition-colors duration-500 md:text-3xl">
             {data.title.split("|")[0].trim()}
           </h3>
-
-          <p className="line-clamp-2 min-h-[3rem] text-sm leading-relaxed font-medium text-[var(--text-secondary)] italic opacity-90">
-            “{data.description}”
-          </p>
         </header>
 
-        <ul className="mb-10 space-y-3.5">
-          {displayFeatures.map((feature, i) => (
-            <li key={i} className="flex items-center gap-4">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:border-[var(--color-brand-primary)]/20">
-                <IconRenderer name="Check" size={12} strokeWidth={4} />
+        <p className="text-text-secondary mb-8 line-clamp-2 min-h-[3rem] text-sm leading-relaxed font-medium italic opacity-80">
+          “{data.description}”
+        </p>
+
+        {/* 03. Performance Metrics: Benefit Registry */}
+        <ul className="mb-10 space-y-3">
+          {(data.benefits || []).slice(0, 3).map((benefit, i) => (
+            <li key={i} className="flex items-center gap-3">
+              <div className="border-border bg-surface-offset text-brand-primary group-hover:border-brand-primary/20 flex h-5 w-5 shrink-0 items-center justify-center rounded-lg border transition-colors">
+                <IconRenderer name="Check" size={10} strokeWidth={4} />
               </div>
-              <span className="text-xs leading-relaxed font-bold text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)] md:text-sm">
-                {feature}
+              <span className="text-text-secondary group-hover:text-text-primary text-xs font-bold transition-colors">
+                {benefit}
               </span>
             </li>
           ))}
         </ul>
 
-        <div className="mt-auto flex items-end justify-between border-t border-[var(--border)] pt-8">
+        {/* 04. Conversion Anchor: ROI Display */}
+        <footer className="border-border mt-auto flex items-end justify-between border-t pt-8">
           <div className="space-y-1">
-            <span className="font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase opacity-50">
-              {priceValue ? "เริ่มต้นที่" : "สอบถามข้อมูล"}
+            <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-50">
+              Value_Investment
             </span>
-            <div className="flex items-baseline font-black text-[var(--text-primary)] transition-colors group-hover:text-[var(--color-brand-primary)]">
-              {priceValue > 0 && <span className="mr-1 font-sans text-xs opacity-50">฿</span>}
-              <span
-                className={cn(
-                  "tracking-tight uppercase italic tabular-nums",
-                  priceValue ? "text-3xl md:text-4xl" : "text-xl md:text-2xl",
-                )}
-              >
+            <div className="text-text-primary group-hover:text-brand-primary flex items-baseline font-black transition-colors">
+              <span className="text-3xl tracking-tight uppercase italic tabular-nums md:text-4xl">
                 {priceDisplay}
               </span>
+              {data.unit && (
+                <span className="ml-1 text-[10px] uppercase opacity-40">/{data.unit}</span>
+              )}
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-offset)] p-4 text-[var(--text-primary)] transition-all duration-500 group-hover:-rotate-45 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
-            <IconRenderer name="ArrowRight" size={20} />
-          </div>
-        </div>
+          <Link
+            href={`/services/${data.templateSlug}`}
+            className="bg-surface-offset text-text-primary group-hover:bg-brand-primary flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-500 group-hover:rotate-[-45deg] group-hover:text-white group-hover:shadow-lg"
+            aria-label={`Execute Deep Dive into ${data.title}`}
+          >
+            <IconRenderer name="ArrowRight" size={24} />
+          </Link>
+        </footer>
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-[var(--color-brand-primary)]/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-    </Link>
+      {/* Atmospheric Aura: Hover State Only */}
+      <div className="from-brand-primary/5 pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+    </article>
   );
 };
 

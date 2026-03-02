@@ -16,7 +16,7 @@ export const songkhlaNode = defineAreaNode(seoAgencyService, {
   region: "South",
   priority: 97,
 
-  title: "รับทำเว็บไซต์ สงขลา หาดใหญ่ | Digital Strategy สำหรับศูนย์กลางเศรษฐกิจภาคใต้ตอนล่าง",
+  title: "วางระบบเว็บไซต์ สงขลา หาดใหญ่ | Digital Strategy สำหรับศูนย์กลางเศรษฐกิจภาคใต้ตอนล่าง",
   description:
     "บริการวางระบบเว็บไซต์และกลยุทธ์ SEO ในหาดใหญ่-สงขลา เจาะกลุ่มการค้าข้ามแดนและบริการทางการแพทย์ระดับพรีเมียม เน้นความน่าเชื่อถือสูง โหลดไว และครองอันดับหนึ่งในหัวเมืองใต้",
 
@@ -64,7 +64,7 @@ export const songkhlaNode = defineAreaNode(seoAgencyService, {
       result: "ทำ SEO 3 ภาษา และระบบ Tracking ใหม่ ยอดคู่ค้ามาเลเซียเพิ่มขึ้น 400% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ หาดใหญ่",
+      "วางระบบเว็บไซต์ หาดใหญ่",
       "จ้างทำ SEO สงขลา",
       "ทำเว็บคลินิก หาดใหญ่",
       "Web Design Southern Thailand",
@@ -89,14 +89,14 @@ export const songkhlaNode = defineAreaNode(seoAgencyService, {
 
   faqs: [
     {
-      question: "รับทำเว็บไซต์รองรับระบบสมาชิกสำหรับคู่ค้ามาเลเซียไหม?",
+      question: "วางระบบเว็บไซต์รองรับระบบสมาชิกสำหรับคู่ค้ามาเลเซียไหม?",
       answer:
         "รับครับ เราสามารถทำระบบ Portal สำหรับคู่ค้าต่างชาติ เพื่อให้เช็คราคาส่งหรือติดตามสถานะชิปปิ้งได้แบบ Real-time ครับ",
     },
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ หาดใหญ่",
+    "วางระบบเว็บไซต์ หาดใหญ่",
     "ออกแบบเว็บไซต์ สงขลา",
     "รับทำ SEO ภาคใต้",
     "Local SEO Hat Yai",

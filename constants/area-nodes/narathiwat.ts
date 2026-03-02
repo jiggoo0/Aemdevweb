@@ -10,7 +10,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
   region: "South",
   priority: 86,
 
-  title: "รับทำเว็บไซต์ นราธิวาส | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและ SME ยุคใหม่",
+  title: "วางระบบเว็บไซต์ นราธิวาส | ศูนย์กลางดิจิทัลเพื่อการค้าชายแดนและ SME ยุคใหม่",
   description:
     "ยกระดับธุรกิจในนราธิวาสสู่ตลาดอาเซียน ด้วยเว็บไซต์ที่รองรับหลายภาษาและระบบจัดการข้อมูลการค้าที่รวดเร็ว",
 
@@ -98,7 +98,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
         "วางระบบ Company Profile 2 ภาษาและ SEO ชายแดน ยอดคู่ค้าจากมาเลเซียทักสอบถามเพิ่มขึ้น 150%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ สุไหงโก-ลก",
+      "วางระบบเว็บไซต์ สุไหงโก-ลก",
       "ออกแบบเว็บชิปปิ้ง นราธิวาส",
       "จ้างทำ SEO นราธิวาส",
       "ทำเว็บสินค้าพรีเมียม ตากใบ",
@@ -122,7 +122,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ นราธิวาส",
+    "วางระบบเว็บไซต์ นราธิวาส",
     "ทำเว็บสุไหงโก-ลก",
     "จ้างทำเว็บชิปปิ้ง",
     "รับทำ SEO นราธิวาส",

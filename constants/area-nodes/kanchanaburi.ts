@@ -16,7 +16,8 @@ export const kanchanaburiNode = defineAreaNode(corporateService, {
   region: "West",
   priority: 92,
 
-  title: "รับทำเว็บไซต์ กาญจนบุรี | Digital Infrastructure สำหรับโรงงานและธุรกิจท่องเที่ยวพรีเมียม",
+  title:
+    "วางระบบเว็บไซต์ กาญจนบุรี | Digital Infrastructure สำหรับโรงงานและธุรกิจท่องเที่ยวพรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในกาญจนบุรี เจาะกลุ่มอุตสาหกรรมพลังงานสะอาดและรีสอร์ตหรูริมน้ำ เน้นความมั่นคงระดับวิศวกรรม โหลดไว และครองอันดับหนึ่งในภาคตะวันตก",
 
@@ -65,7 +66,7 @@ export const kanchanaburiNode = defineAreaNode(corporateService, {
         "วางโครงสร้าง SEO และระบบ ESG Reporting ใหม่ ยอดนักลงทุนทักสอบถามเพิ่มขึ้น 200% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ กาญจนบุรี",
+      "วางระบบเว็บไซต์ กาญจนบุรี",
       "จ้างทำ SEO ท่าม่วง",
       "ทำเว็บโรงงาน กาญ",
       "Sustainable Web Solution",
@@ -97,7 +98,7 @@ export const kanchanaburiNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ กาญจนบุรี",
+    "วางระบบเว็บไซต์ กาญจนบุรี",
     "ออกแบบเว็บไซต์ ท่าม่วง",
     "จ้างทำเว็บโรงแรม กาญ",
     "Technical SEO Western Thailand",

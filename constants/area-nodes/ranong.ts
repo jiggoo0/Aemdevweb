@@ -10,7 +10,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
   region: "South",
   priority: 92,
 
-  title: "รับทำเว็บไซต์ระนอง | สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
+  title: "วางระบบเว็บไซต์ระนอง | สร้าง Digital Infrastructure สู่เมือง Smart Wellness",
   description:
     "ยกระดับแพลตฟอร์มดิจิทัลจังหวัดระนอง รองรับยุทธศาสตร์ 'Wellness City' เชื่อมโยงระบบบริการประชาชน (E-Service) และฐานข้อมูลการค้าชายแดนไทย-เมียนมา",
 
@@ -113,7 +113,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ระนอง",
+    "วางระบบเว็บไซต์ระนอง",
     "Web Design Ranong",
     "Wellness Tourism Platform",
     "เว็บราชการภาษาพม่า",

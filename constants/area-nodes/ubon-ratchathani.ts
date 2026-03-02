@@ -17,7 +17,7 @@ export const ubonRatchathaniNode = defineAreaNode(corporateService, {
   priority: 95,
 
   title:
-    "รับทำเว็บไซต์ อุบลราชธานี | Digital Infrastructure สำหรับธุรกิจการค้าและบริการทางการแพทย์",
+    "วางระบบเว็บไซต์ อุบลราชธานี | Digital Infrastructure สำหรับธุรกิจการค้าและบริการทางการแพทย์",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอุบลราชธานี เจาะกลุ่มธุรกิจค้าส่ง คลินิกเฉพาะทาง และโลจิสติกส์อีสานใต้ เน้นความภูมิฐาน โหลดไว และครองอันดับหนึ่งในเขตสามเหลี่ยมมรกต",
 
@@ -73,7 +73,7 @@ export const ubonRatchathaniNode = defineAreaNode(corporateService, {
         "วางระบบนัดหมายออนไลน์และทำ SEO เจาะกลุ่มคำค้นหาทางการแพทย์ ยอดคนไข้ใหม่เพิ่มขึ้น 250% ใน 6 เดือน",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ อุบลราชธานี",
+      "วางระบบเว็บไซต์ อุบลราชธานี",
       "จ้างทำ SEO หาดใหญ่",
       "ทำเว็บคลินิก อุบล",
       "Lower Isan Digital Strategy",
@@ -105,7 +105,7 @@ export const ubonRatchathaniNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ อุบลราชธานี",
+    "วางระบบเว็บไซต์ อุบลราชธานี",
     "ออกแบบเว็บไซต์ วารินชำราบ",
     "จ้างทำเว็บคลินิก อุบล",
     "Technical SEO Northeast Thailand",

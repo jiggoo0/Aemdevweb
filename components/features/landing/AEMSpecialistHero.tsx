@@ -81,7 +81,7 @@ export const AEMSpecialistHero = memo(() => {
             ))}
           </div>
 
-          {/* Main Title: Outcome-Oriented Branding */}
+          {/* Main Title: Outcome-Oriented Branding (Copywriting Crew Formula) */}
           <h1 className="text-text-primary mb-12 max-w-6xl text-6xl leading-[0.8] font-black tracking-tighter uppercase italic drop-shadow-2xl md:text-9xl lg:text-[11rem]">
             Dominate <br />
             <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
@@ -89,19 +89,19 @@ export const AEMSpecialistHero = memo(() => {
             </span>
           </h1>
 
-          {/* Core Vision: Human-Centric Tactical Copywriting */}
+          {/* Core Vision: Executive B2B Copywriting */}
           <div className="mb-20 flex max-w-4xl flex-col items-center gap-10">
             <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
-              “เปลี่ยนเว็บไซต์ของคุณให้เป็น{" "}
-              <span className="text-text-primary">เครื่องจักรทำเงิน</span> ด้วยสถาปัตยกรรมระดับสากล
-              ที่ครองอันดับ 1 ในยุค AI Search”
+              “ยกระดับธุรกิจ B2B และ SME ของคุณด้วย{" "}
+              <span className="text-text-primary">Digital Infrastructure</span> ระดับสากล <br />
+              ลดต้นทุน เพิ่มยอดขาย และสร้าง ROI ที่จับต้องได้จริง 100%”
             </p>
             <div className="bg-border/20 relative h-px w-48 overflow-hidden">
               <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full" />
             </div>
           </div>
 
-          {/* Conversion Actions: Simplified Response */}
+          {/* Conversion Actions: Strategic Funnel */}
           <div className="flex flex-col items-center gap-8 sm:flex-row">
             <Button
               size="lg"
@@ -120,10 +120,11 @@ export const AEMSpecialistHero = memo(() => {
             <Button
               size="lg"
               variant="outline"
-              href="/services"
-              className="border-border hover:border-brand-primary/40 h-20 min-w-[280px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-md transition-all duration-500"
+              href="/ai-consultant"
+              className="border-brand-primary/30 hover:border-brand-primary bg-surface-card/50 hover:bg-brand-primary/5 h-20 min-w-[320px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-md transition-all duration-500"
             >
-              ดูบริการทั้งหมด
+              <IconRenderer name="Activity" size={18} className="text-brand-primary mr-4" />
+              วิเคราะห์ธุรกิจด้วย AI (ฟรี)
             </Button>
           </div>
         </div>

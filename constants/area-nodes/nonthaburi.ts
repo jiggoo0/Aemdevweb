@@ -15,7 +15,7 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
   region: "Central",
   priority: 98,
 
-  title: "รับทำเว็บไซต์ นนทบุรี | Digital Strategy สำหรับธุรกิจบริการและ SME พรีเมียม",
+  title: "วางระบบเว็บไซต์ นนทบุรี | Digital Strategy สำหรับธุรกิจบริการและ SME พรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์และกลยุทธ์ SEO ในนนทบุรี เจาะกลุ่มราชพฤกษ์-แจ้งวัฒนะ เน้นความหรูหรา โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งบน Google Maps ท้องถิ่น",
 
@@ -63,7 +63,7 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
       result: "ทำ SEO และปรับ GMB ใหม่ ยอด Traffic จากคนในพื้นที่เพิ่มขึ้น 400% จนต้องขยายสาขา",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ราชพฤกษ์",
+      "วางระบบเว็บไซต์ ราชพฤกษ์",
       "จ้างทำ SEO นนทบุรี",
       "ปักหมุด Google Maps แจ้งวัฒนะ",
       "Web Design Nonthaburi",
@@ -95,7 +95,7 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ นนทบุรี",
+    "วางระบบเว็บไซต์ นนทบุรี",
     "ออกแบบเว็บไซต์ ราชพฤกษ์",
     "รับทำ SEO นนทบุรี",
     "Local SEO Thailand",

@@ -104,7 +104,7 @@ export default async function AreaPage(props: PageProps) {
     .map((a) => a.slug)
     .slice(0, 12);
 
-  /* [SCHEMA]: 100/100 Knowledge Graph */
+  /* [SCHEMA]: 100/100 Knowledge Graph (GEO Optimized) */
   const fullSchema = generateSchemaGraph([
     generateBreadcrumbSchema([
       { name: "หน้าแรก", item: "/" },
@@ -117,14 +117,14 @@ export default async function AreaPage(props: PageProps) {
       telephone: SITE_CONFIG.contact.phone,
       priceRange: area.price ? `THB ${area.price}` : SITE_CONFIG.business.priceRange,
     }),
-    // [E-E-A-T_SYNC]: เชื่อมโยงตัวตนผู้เชี่ยวชาญเข้ากับบริการในพื้นที่นี้
+    // [E-E-A-T_SYNC]: เชื่อมโยงตัวตนผู้เชี่ยวชาญเข้ากับบริการในพื้นที่นี้โดยใช้ @id จาก masterIdentity
     {
       "@type": "ProfessionalService",
       "@id": absoluteUrl(`/areas/${area.slug}/#service`),
       name: area.title,
-      provider: { "@id": absoluteUrl("/#organization") },
-      author: { "@id": absoluteUrl("/#expert") },
-      description: templateData.aiSignal?.summary,
+      provider: { "@id": SITE_CONFIG.siteUrl + "/#organization" },
+      author: { "@id": SITE_CONFIG.siteUrl + "/#expert" },
+      description: templateData.aiSignal?.summary || area.seoDescription,
     },
   ]);
 

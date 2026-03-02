@@ -19,7 +19,7 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
   siteUrl: "https://www.aemdevweb.com",
   description:
-    "AEMDEVWEB | โดย นายเอ็มซ่ามากส์ (AEMZA MACKS) ผู้เชี่ยวชาญด้าน Next.js และ Technical SEO ระดับวิศวกรรมโครงสร้างพื้นฐาน พัฒนาเว็บไซต์ประสิทธิภาพสูงที่โหลดเร็วและติดหน้าแรก Google อย่างยั่งยืน",
+    "AEMDEVWEB | พาร์ทเนอร์ด้าน Digital Infrastructure สำหรับธุรกิจ B2B และ SME วางระบบ Next.js 16, AI Agent และ Server-Side Tracking เพื่อสร้างยอดขายและ ROI ที่วัดผลได้จริง โดย นายเอ็มซ่ามากส์",
   logo: "/images/logo-main.webp",
 
   // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
@@ -28,11 +28,11 @@ export const SITE_CONFIG: SiteConfig = {
   themeColor: "#ef4444", // Tailwind Red 500 (HEX Standard)
 
   hero: {
-    title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
+    title: "AEMDEVWEB AI-NATIVE PERFORMANCE ARCHITECTURE",
     description:
-      "ปลดล็อกศักยภาพธุรกิจด้วยโครงสร้างเว็บไซต์และกลยุทธ์ Technical SEO ระดับวิศวกรรม เพื่อยึดครองพื้นที่บน Google และ AI Search 2026 โดย นายเอ็มซ่ามากส์",
-    primaryAction: "วางแผนระบบกับ Specialist",
-    secondaryAction: "วิเคราะห์โซลูชันทั้งหมด",
+      "ขยายธุรกิจให้โตขึ้น 10 เท่าด้วยเว็บไซต์ที่เร็วระดับเสี้ยววินาทีและระบบ AI Agent อัจฉริยะที่ครองอันดับ 1 ในยุค AI Search 2026 โดย นายเอ็มซ่ามากส์",
+    primaryAction: "เริ่มต้นสร้าง AI Agent",
+    secondaryAction: "วิเคราะห์โซลูชัน 2026",
   },
 
   persona: {
@@ -47,16 +47,18 @@ export const SITE_CONFIG: SiteConfig = {
   keywords: [
     "AEMZA MACKS",
     "นายเอ็มซ่ามากส์ AEMDEVWEB",
-    "Technical SEO Specialist Thailand",
-    "System Architect Thailand",
-    "รับทำเว็บไซต์ Next.js 16",
-    "พัฒนาเว็บไซต์ประสิทธิภาพสูง",
-    "จ้างทำ SEO สายขาว 2026",
-    "รับทำ Sale Page ยิงแอด ประสิทธิภาพสูง",
+    "AI Agent Integration Thailand",
+    "B2B Web Development",
+    "วางระบบเว็บไซต์องค์กร",
+    "Next.js 16 Specialist",
+    "รับทำระบบ AI สำหรับธุรกิจ",
+    "Generative Engine Optimization (GEO)",
+    "พัฒนาเว็บไซต์ประสิทธิภาพสูง 2026",
+    "Digital Transformation SME",
+    "Server-Side Tracking GTM",
     "AI Search Optimization Expert",
     "โครงสร้างพื้นฐานดิจิทัล",
     "อลงกรณ์ ยมเกิด",
-    "Alongkorn Yomkerd",
     "Web Infrastructure Specialist",
   ],
 

@@ -33,7 +33,7 @@ const CaseStudyCard = ({ data, index = 0 }: CaseStudyCardProps) => {
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--surface-offset)]">
         <Image
           src={imageSource}
-          alt={`ผลงานรับทำเว็บไซต์ ${data.title} - เคสความสำเร็จจาก AEMDEVWEB`}
+          alt={`ผลงานวางระบบเว็บไซต์ ${data.title} - เคสความสำเร็จจาก AEMDEVWEB`}
           fill
           priority={index === 0}
           placeholder={imgData?.blurDataURL ? "blur" : "empty"}

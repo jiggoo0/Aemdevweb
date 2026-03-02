@@ -8,7 +8,7 @@ export const surinNode = defineAreaNode(localAuthorityService, {
   province: "สุรินทร์",
   region: "Northeast",
   priority: 84,
-  title: "รับทำเว็บไซต์ สุรินทร์ | ยกระดับแบรนด์ผ้าไหมพรีเมียมและข้าวหอมมะลิโลก",
+  title: "วางระบบเว็บไซต์ สุรินทร์ | ยกระดับแบรนด์ผ้าไหมพรีเมียมและข้าวหอมมะลิโลก",
   description:
     "เปลี่ยนภูมิปัญญาผ้าไหมสุรินทร์ให้เป็นแบรนด์ดิจิทัลที่น่าดึงดูด ด้วยดีไซน์ประณีตและระบบจัดการสินค้าที่ทันสมัย",
   heroImage: "/images/areas/surin-node.webp",
@@ -36,7 +36,7 @@ export const surinNode = defineAreaNode(localAuthorityService, {
     regionalPricing: { startPrice: `${localAuthorityService.price} บาท`, timeline: "14-21 วัน" },
   },
   keywords: [
-    "รับทำเว็บไซต์ สุรินทร์",
+    "วางระบบเว็บไซต์ สุรินทร์",
     "ทำเว็บผ้าไหม สุรินทร์",
     "จ้างทำเว็บสุรินทร์",
     "รับทำ SEO สุรินทร์",

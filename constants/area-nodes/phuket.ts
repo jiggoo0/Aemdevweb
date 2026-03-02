@@ -9,7 +9,7 @@ export const phuketNode = defineAreaNode(hotelResortService, {
   region: "South",
   tier: 1,
 
-  title: "รับทำเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
+  title: "วางระบบเว็บไซต์ ภูเก็ต | Digital Architecture สำหรับวิลล่าหรูและธุรกิจระดับพรีเมียม",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจสู่ระดับสากลด้วยเว็บไซต์ที่มอบประสบการณ์ระดับ Ultra-Luxury โหลดไวจากทั่วโลกด้วย Edge Computing และเปลี่ยนผู้ชมให้เป็นลูกค้ากำลังซื้อสูง",
 
@@ -168,11 +168,11 @@ export const phuketNode = defineAreaNode(hotelResortService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ ภูเก็ต",
+    "วางระบบเว็บไซต์ ภูเก็ต",
     "Phuket Web Design",
     "ทำเว็บวิลล่าหรู",
     "จ้างทำเว็บไซต์โรงแรม",
     "รับทำ SEO ภูเก็ต",
-    "บริษัทรับทำเว็บไซต์",
+    "บริษัทวางระบบเว็บไซต์",
   ],
 });

@@ -18,7 +18,7 @@ export const suratThaniNode = defineAreaNode(hotelResortService, {
   priority: 96,
 
   title:
-    "รับทำเว็บไซต์ สุราษฎร์ธานี | Digital Architecture สำหรับโรงแรมหรูและธุรกิจท่องเที่ยวระดับโลก",
+    "วางระบบเว็บไซต์ สุราษฎร์ธานี | Digital Architecture สำหรับโรงแรมหรูและธุรกิจท่องเที่ยวระดับโลก",
   description:
     "บริการวางระบบเว็บไซต์ระดับสากลในสุราษฎร์ธานี สมุย พะงัน และเต่า เน้นงานดีไซน์หรูหรา โหลดไวจากทั่วโลกด้วย Global CDN และเพิ่มยอดจองตรง (Direct Booking) ทันที",
 
@@ -66,7 +66,7 @@ export const suratThaniNode = defineAreaNode(hotelResortService, {
       result: "วางระบบจองตรงและทำ SEO หลายภาษา ยอด Direct Booking จากยุโรปเพิ่มขึ้น 280%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์เกาะสมุย",
+      "วางระบบเว็บไซต์เกาะสมุย",
       "จ้างทำเว็บโรงแรม พะงัน",
       "ทำเว็บโรงเรียนดำน้ำ เกาะเต่า",
       "Phuket/Surat SEO Agency",
@@ -98,7 +98,7 @@ export const suratThaniNode = defineAreaNode(hotelResortService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์เกาะสมุย",
+    "วางระบบเว็บไซต์เกาะสมุย",
     "ออกแบบเว็บไซต์ สุราษฎร์ธานี",
     "จ้างทำเว็บโรงแรม",
     "Direct Booking System",

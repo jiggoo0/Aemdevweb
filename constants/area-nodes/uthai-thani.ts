@@ -8,7 +8,7 @@ export const uthaiThaniNode = defineAreaNode(localAuthorityService, {
   province: "อุทัยธานี",
   region: "Central",
   priority: 80,
-  title: "รับทำเว็บไซต์ อุทัยธานี | ออกแบบเว็บท่องเที่ยววิถีสโลว์ไลฟ์และสินค้าภูมิปัญญา",
+  title: "วางระบบเว็บไซต์ อุทัยธานี | ออกแบบเว็บท่องเที่ยววิถีสโลว์ไลฟ์และสินค้าภูมิปัญญา",
   description:
     "เปลี่ยนความสงบของอุทัยธานีให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องธรรมชาติและวิถีลุ่มน้ำสะแกกรัง",
   heroImage: "/images/areas/uthai-thani-node.webp",
@@ -40,7 +40,7 @@ export const uthaiThaniNode = defineAreaNode(localAuthorityService, {
     regionalPricing: { startPrice: `${localAuthorityService.price} บาท`, timeline: "14-21 วัน" },
   },
   keywords: [
-    "รับทำเว็บไซต์ อุทัยธานี",
+    "วางระบบเว็บไซต์ อุทัยธานี",
     "ทำเว็บที่พัก อุทัยธานี",
     "จ้างทำเว็บอุทัยธานี",
     "รับทำ SEO อุทัยธานี",

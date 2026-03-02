@@ -6,13 +6,45 @@
 
 import { SITE_CONFIG } from "./site-config";
 
-export const MAIN_NAV = [
+export interface NavItem {
+  label: string;
+  href: string;
+  description?: string;
+  children?: readonly NavItem[];
+}
+
+export const MAIN_NAV: readonly NavItem[] = [
   { label: "หน้าแรก", href: "/" },
-  { label: "บริการ & ราคา", href: "/services" },
+  {
+    label: "บริการ & ราคา",
+    href: "/services",
+    children: [
+      {
+        label: "ทำเว็บไซต์บริษัท",
+        href: "/services/corporate",
+        description: "ออกแบบเว็บไซต์มาตรฐานองค์กร",
+      },
+      {
+        label: "ทำ Sale Page",
+        href: "/services/salepage",
+        description: "หน้าขายสินค้าเน้น Conversion สูง",
+      },
+      {
+        label: "บริการ SEO",
+        href: "/services/seo-agency",
+        description: "ดันอันดับธุรกิจบน Google",
+      },
+      {
+        label: "ระบบแคตตาล็อก",
+        href: "/services/catalog",
+        description: "จัดการสินค้าและบริการอย่างเป็นระบบ",
+      },
+    ],
+  },
   { label: "ผลงานลูกค้า", href: "/case-studies" },
   { label: "พื้นที่ให้บริการ", href: "/areas" },
   { label: "บทความ", href: "/blog" },
-  // [REMOVED]: /contact ถูกถอดออกเนื่องจากไม่มี Module ใน app/
+  { label: "ติดต่อเรา", href: "/contact" },
 ] as const;
 
 export const FOOTER_MAP = {
@@ -27,6 +59,7 @@ export const FOOTER_MAP = {
     { label: "เกี่ยวกับเรา", href: "/about" },
     { label: "ผลงานของเรา", href: "/case-studies" },
     { label: "พื้นที่ให้บริการ", href: "/areas" },
+    { label: "ติดต่อเรา", href: "/contact" },
     // [REMOVED]: /careers ถูกถอดออกเนื่องจากไม่มีหน้าเพจรองรับ
   ],
   connect: [

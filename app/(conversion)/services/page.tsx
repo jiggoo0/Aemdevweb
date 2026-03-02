@@ -26,9 +26,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = constructMetadata({
-  title: "บริการรับทำเว็บไซต์ครบวงจร | ออกแบบระบบเพื่อกำไรสูงสุด",
+  title: "บริการวางระบบเว็บไซต์สำหรับองค์กร (Digital Infrastructure) | เน้น ROI สูงสุด",
   description:
-    "โซลูชันเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจยุคใหม่ เน้นโหลดไว ติดหน้าแรก Google และปิดการขายได้จริง โดยทีมวิศวกรซอฟต์แวร์และผู้เชี่ยวชาญ SEO",
+    "โซลูชันระบบเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจ B2B และ SME ยุคใหม่ เน้นโหลดไว เสถียรสูง ติดหน้าแรก Google และปิดการขายได้จริง โดยทีมวิศวกรซอฟต์แวร์",
   path: "/services",
   image: "/images/services/corporate-node.webp",
 });

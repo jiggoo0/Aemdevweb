@@ -10,7 +10,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
   region: "South",
   priority: 85,
 
-  title: "รับทำเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
+  title: "วางระบบเว็บไซต์หน่วยงานราชการ ชุมพร - ยกระดับบริการภาครัฐสู่ Smart City",
   description:
     "พัฒนาระบบเว็บไซต์ อบต. และเทศบาลในจังหวัดชุมพร รองรับยุทธศาสตร์ประตูสู่ภาคใต้ เชื่อมโยง E-Service และส่งเสริมการท่องเที่ยวชุมชนอย่างยั่งยืน",
 
@@ -91,7 +91,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
       "ทำเว็บไซต์ชุมพร",
       "ระบบ E-Service ท้องถิ่น",
       "ออกแบบเว็บราชการหลังสวน",
-      "รับทำเว็บไซต์ อบต.ท่าแซะ",
+      "วางระบบเว็บไซต์ อบต.ท่าแซะ",
     ],
     promotions: [
       {
@@ -112,7 +112,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ อบต",
+    "วางระบบเว็บไซต์ อบต",
     "ทำเว็บไซต์เทศบาล",
     "Web Design Chumphon",
     "ระบบ E-Service ท้องถิ่น",

@@ -16,7 +16,7 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
   priority: 94,
 
   title:
-    "รับทำเว็บไซต์ ฉะเชิงเทรา | Digital Infrastructure สำหรับโรงงาน EEC และโครงการ Smart Living",
+    "วางระบบเว็บไซต์ ฉะเชิงเทรา | Digital Infrastructure สำหรับโรงงาน EEC และโครงการ Smart Living",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐานสูงในฉะเชิงเทรา เจาะกลุ่มโรงงานบางปะกงและอสังหาฯ แนวราบ เน้นความปลอดภัยข้อมูลระดับวิศวกรรม โหลดไว และครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษ",
 
@@ -64,7 +64,7 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
       result: "วางโครงสร้าง SEO เจาะกลุ่มครอบครัวรุ่นใหม่ ยอดจองดูบ้านผ่านเว็บเพิ่มขึ้น 200%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ บางปะกง",
+      "วางระบบเว็บไซต์ บางปะกง",
       "จ้างทำ SEO ฉะเชิงเทรา",
       "ออกแบบเว็บโครงการหมู่บ้าน",
       "Industrial Web Design EEC",
@@ -89,14 +89,14 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
 
   faqs: [
     {
-      question: "รับทำเว็บไซต์ที่รองรับระบบสมาชิกสำหรับโครงการหมู่บ้านไหม?",
+      question: "วางระบบเว็บไซต์ที่รองรับระบบสมาชิกสำหรับโครงการหมู่บ้านไหม?",
       answer:
         "รับครับ เราสามารถทำระบบนิติบุคคลออนไลน์ ระบบแจ้งซ่อม หรือดาวน์โหลดเอกสารสำหรับลูกบ้านได้ครับ",
     },
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ ฉะเชิงเทรา",
+    "วางระบบเว็บไซต์ ฉะเชิงเทรา",
     "ออกแบบเว็บไซต์ บางปะกง",
     "รับทำ SEO ฉะเชิงเทรา",
     "Smart City Web Solution",

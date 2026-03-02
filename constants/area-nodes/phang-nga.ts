@@ -10,7 +10,8 @@ export const phangNgaNode = defineAreaNode(hotelResortService, {
   region: "South",
   priority: 95,
 
-  title: "รับทำเว็บไซต์ พังงา | Digital Architecture สำหรับรีสอร์ตหรูและธุรกิจท่องเที่ยวเชิงนิเวศ",
+  title:
+    "วางระบบเว็บไซต์ พังงา | Digital Architecture สำหรับรีสอร์ตหรูและธุรกิจท่องเที่ยวเชิงนิเวศ",
   description:
     "ยกระดับธุรกิจท่องเที่ยวในพังงา เขาหลัก และเกาะยาว สู่ระดับสากล ด้วยเว็บไซต์ที่เน้นความหรูหราแบบ Quiet Luxury โหลดไว และระบบจองตรงที่ทรงพลัง",
 
@@ -99,7 +100,7 @@ export const phangNgaNode = defineAreaNode(hotelResortService, {
         "วางระบบ Direct Booking และปรับปรุง Visual ใหม่ ยอดจองจากยุโรปเพิ่มขึ้น 220% ใน 6 เดือน",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ เขาหลัก",
+      "วางระบบเว็บไซต์ เขาหลัก",
       "ออกแบบเว็บรีสอร์ต พังงา",
       "จ้างทำ SEO เกาะยาว",
       "Premium Web Design Phang Nga",
@@ -123,7 +124,7 @@ export const phangNgaNode = defineAreaNode(hotelResortService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ พังงา",
+    "วางระบบเว็บไซต์ พังงา",
     "ออกแบบเว็บไซต์ เขาหลัก",
     "ทำเว็บรีสอร์ต พังงา",
     "Global SEO Phang Nga",

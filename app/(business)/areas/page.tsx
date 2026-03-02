@@ -37,10 +37,11 @@ export const metadata: Metadata = constructMetadata({
     "วิศวกรรมการออกแบบเว็บไซต์และวางโครงสร้าง Local SEO เพื่อการครองพื้นที่การค้นหาในระดับภูมิภาค โดยทีมงาน Technical SEO Specialist",
   path: "/areas",
   keywords: [
-    "รับทำเว็บไซต์รายจังหวัด",
+    "วางระบบเว็บไซต์องค์กร",
     "Local SEO Thailand Specialist",
-    "บริษัทออกแบบเว็บไซต์ มืออาชีพ",
-    ...AREA_NODES.map((area) => `รับทำเว็บไซต์ ${area.province}`),
+    "บริษัทรับวางระบบเว็บไซต์ มืออาชีพ",
+    "B2B Digital Infrastructure",
+    ...AREA_NODES.map((area) => `วางระบบเว็บไซต์ ${area.province}`),
   ],
 });
 

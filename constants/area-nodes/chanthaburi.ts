@@ -16,7 +16,8 @@ export const chanthaburiNode = defineAreaNode(catalogService, {
   region: "East",
   priority: 94,
 
-  title: "รับทำเว็บไซต์ จันทบุรี | Digital Infrastructure สำหรับแบรนด์ผลไม้ส่งออกและอัญมณีพรีเมียม",
+  title:
+    "วางระบบเว็บไซต์ จันทบุรี | Digital Infrastructure สำหรับแบรนด์ผลไม้ส่งออกและอัญมณีพรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในจันทบุรี เจาะกลุ่มล้งทุเรียนส่งออกและธุรกิจพลอยพรีเมียม เน้นดีไซน์สวยแพง โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งในตลาดโลก",
 
@@ -65,7 +66,7 @@ export const chanthaburiNode = defineAreaNode(catalogService, {
         "วางโครงสร้างระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ ยอดสั่งซื้อจากต่างชาติเพิ่มขึ้น 300% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ จันทบุรี",
+      "วางระบบเว็บไซต์ จันทบุรี",
       "จ้างทำ SEO ทุเรียนจันท์",
       "ทำเว็บพลอยพรีเมียม",
       "Global Fruit Export Web",
@@ -97,7 +98,7 @@ export const chanthaburiNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ จันทบุรี",
+    "วางระบบเว็บไซต์ จันทบุรี",
     "ออกแบบเว็บไซต์ ท่าใหม่",
     "จ้างทำเว็บทุเรียน",
     "Gemstone Trade SEO",

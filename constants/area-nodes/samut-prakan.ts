@@ -15,7 +15,7 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
   region: "Central",
   priority: 99,
 
-  title: "รับทำเว็บไซต์ สมุทรปราการ | Digital Monolith สำหรับโรงงานและธุรกิจ Maritime Logistics",
+  title: "วางระบบเว็บไซต์ สมุทรปราการ | Digital Monolith สำหรับโรงงานและธุรกิจ Maritime Logistics",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าอุตสาหกรรมในสมุทรปราการ เจาะกลุ่มบางปู-บางพลี เน้นความเชื่อมั่นระดับสากล โหลดไว และระบบ RFQ ที่แม่นยำเพื่อปิดดีลส่งออก",
 
@@ -64,7 +64,7 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
         "วางระบบ Tracking และแคตตาล็อกบริการใหม่ ยอดลูกค้าองค์กรข้ามชาติเพิ่มขึ้น 300% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ บางปู",
+      "วางระบบเว็บไซต์ บางปู",
       "จ้างทำเว็บโรงงาน บางพลี",
       "Maritime SEO Thailand",
       "ทำแคตตาล็อกออนไลน์ สมุทรปราการ",
@@ -96,7 +96,7 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ สมุทรปราการ",
+    "วางระบบเว็บไซต์ สมุทรปราการ",
     "ทำเว็บโรงงาน บางปู",
     "Web Design Bangphli",
     "Maritime Logistics SEO",

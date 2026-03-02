@@ -10,7 +10,7 @@ export const nakhonSawanNode = defineAreaNode(catalogService, {
   region: "North",
   priority: 94,
 
-  title: "รับทำเว็บไซต์ นครสวรรค์ | Digital Hub สำหรับธุรกิจค้าส่งและโลจิสติกส์ภาคเหนือตอนล่าง",
+  title: "วางระบบเว็บไซต์ นครสวรรค์ | Digital Hub สำหรับธุรกิจค้าส่งและโลจิสติกส์ภาคเหนือตอนล่าง",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในนครสวรรค์ เจาะกลุ่มร้านค้าส่ง (ยี่ปั๊ว) และธุรกิจขนส่งสินค้าเกษตร เน้นความน่าเชื่อถือระดับกงสี โหลดไว และครองอันดับหนึ่งในปากน้ำโพ",
 
@@ -58,7 +58,7 @@ export const nakhonSawanNode = defineAreaNode(catalogService, {
       result: "สร้างระบบแคตตาล็อกออนไลน์ 5,000 รายการ ยอดลูกค้าใหม่จากต่างจังหวัดเพิ่มขึ้น 250%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ปากน้ำโพ",
+      "วางระบบเว็บไซต์ ปากน้ำโพ",
       "จ้างทำเว็บร้านค้า นครสวรรค์",
       "Wholesale SEO Thailand",
       "ทำแคตตาล็อกสินค้า นครสวรรค์",
@@ -90,7 +90,7 @@ export const nakhonSawanNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ นครสวรรค์",
+    "วางระบบเว็บไซต์ นครสวรรค์",
     "ทำเว็บร้านค้าส่ง",
     "Web Design Pak Nam Pho",
     "Logistics SEO Thailand",

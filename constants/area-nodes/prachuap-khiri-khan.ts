@@ -16,7 +16,7 @@ export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
   region: "West",
   priority: 96,
 
-  title: "รับทำเว็บไซต์ หัวหิน ประจวบฯ | Digital Architecture สำหรับวิลล่าหรูและอสังหาฯ พรีเมียม",
+  title: "วางระบบเว็บไซต์ หัวหิน ประจวบฯ | Digital Architecture สำหรับวิลล่าหรูและอสังหาฯ พรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์ระดับสากลในหัวหินและปราณบุรี เน้นดีไซน์ Luxury Coastal โหลดไวสายฟ้าแลบจากทั่วโลก และระบบจองตรง (Direct Booking) เพื่อกลุ่มลูกค้ากำลังซื้อสูง",
 
@@ -97,7 +97,7 @@ export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ หัวหิน",
+    "วางระบบเว็บไซต์ หัวหิน",
     "ออกแบบเว็บไซต์ ประจวบคีรีขันธ์",
     "จ้างทำเว็บพูลวิลล่า",
     "Global SEO Hua Hin",

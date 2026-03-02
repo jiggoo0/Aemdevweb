@@ -16,7 +16,7 @@ export const rayongNode = defineAreaNode(catalogService, {
   region: "East",
   priority: 98,
 
-  title: "รับทำเว็บไซต์ ระยอง | Digital Infrastructure สำหรับโรงงานอุตสาหกรรมหนักและพลังงาน",
+  title: "วางระบบเว็บไซต์ ระยอง | Digital Infrastructure สำหรับโรงงานอุตสาหกรรมหนักและพลังงาน",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกเทคนิคในระยอง เจาะกลุ่มนิคมมาบตาพุด-ปลวกแดง เน้นความปลอดภัยระดับ Enterprise โหลดไว และครองอันดับหนึ่งในใจฝ่ายจัดซื้อ B2B",
 
@@ -65,7 +65,7 @@ export const rayongNode = defineAreaNode(catalogService, {
         "วางระบบเทคนิคแคตตาล็อกและ SEO เจาะจงคีย์เวิร์ดวิศวกรรม ยอด RFQ จากคู่ค้าต่างชาติเพิ่มขึ้น 200%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ มาบตาพุด",
+      "วางระบบเว็บไซต์ มาบตาพุด",
       "จ้างทำเว็บโรงงาน ระยอง",
       "Industrial SEO Rayong",
       "ออกแบบเว็บอุตสาหกรรมหนัก",
@@ -97,7 +97,7 @@ export const rayongNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ ระยอง",
+    "วางระบบเว็บไซต์ ระยอง",
     "ทำเว็บโรงงาน มาบตาพุด",
     "Web Design Rayong",
     "Industrial Authority SEO",

@@ -17,7 +17,7 @@ export const lamphunNode = defineAreaNode(corporateService, {
   priority: 92,
 
   title:
-    "รับทำเว็บไซต์ ลำพูน | Digital Infrastructure สำหรับนิคมอุตสาหกรรมและแบรนด์หัตถศิลป์ล้านนา",
+    "วางระบบเว็บไซต์ ลำพูน | Digital Infrastructure สำหรับนิคมอุตสาหกรรมและแบรนด์หัตถศิลป์ล้านนา",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในลำพูน เจาะกลุ่มโรงงานอุตสาหกรรมและแบรนด์ผ้าไหมพรีเมียม เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในใจคู่ค้า B2B",
 
@@ -66,7 +66,7 @@ export const lamphunNode = defineAreaNode(corporateService, {
         "วางระบบแกลเลอรี่พรีเมียมและ SEO ภาษาอังกฤษ ยอดสั่งซื้อจากต่างประเทศเพิ่มขึ้น 300% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ลำพูน",
+      "วางระบบเว็บไซต์ ลำพูน",
       "จ้างทำ SEO ป่าซาง",
       "ทำเว็บโรงงาน ลำพูน",
       "Lanna Craft Web Solution",
@@ -98,7 +98,7 @@ export const lamphunNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ ลำพูน",
+    "วางระบบเว็บไซต์ ลำพูน",
     "ออกแบบเว็บไซต์ ป่าซาง",
     "จ้างทำเว็บโรงงาน ลำพูน",
     "หัตถศิลป์ล้านนา SEO",

@@ -100,7 +100,7 @@ export const localAuthorityService: TemplateMasterData = {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ อบต",
+    "วางระบบเว็บไซต์ อบต",
     "ทำเว็บเทศบาล",
     "รับทำ Local SEO",
     "ออกแบบเว็บไซต์ราชการ",

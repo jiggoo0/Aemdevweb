@@ -16,7 +16,7 @@ export const udonThaniNode = defineAreaNode(corporateService, {
   region: "Northeast",
   priority: 95,
 
-  title: "รับทำเว็บไซต์ อุดรธานี | Digital Hub สำหรับการค้าชายแดนและธุรกิจ Indo-China",
+  title: "วางระบบเว็บไซต์ อุดรธานี | Digital Hub สำหรับการค้าชายแดนและธุรกิจ Indo-China",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอุดรธานี เจาะกลุ่มธุรกิจนำเข้า-ส่งออก คลินิกพรีเมียม และโลจิสติกส์อาเซียน เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในอีสานตอนบน",
 
@@ -65,7 +65,7 @@ export const udonThaniNode = defineAreaNode(corporateService, {
         "วางระบบ Tracking และ SEO ใหม่ ยอดคู่ค้าจาก สปป.ลาว ติดต่อผ่านเว็บเพิ่มขึ้น 300% ใน 6 เดือน",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ อุดรธานี",
+      "วางระบบเว็บไซต์ อุดรธานี",
       "จ้างทำ SEO อุดร",
       "ทำเว็บโรงงาน อีสานตอนบน",
       "Border Trade Web Solution",
@@ -97,7 +97,7 @@ export const udonThaniNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ อุดรธานี",
+    "วางระบบเว็บไซต์ อุดรธานี",
     "ออกแบบเว็บไซต์ อุดร",
     "จ้างทำเว็บคลินิก อุดร",
     "Logistics SEO Udon Thani",

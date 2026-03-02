@@ -16,7 +16,8 @@ export const ratchaburiNode = defineAreaNode(catalogService, {
   region: "West",
   priority: 94,
 
-  title: "รับทำเว็บไซต์ ราชบุรี | Digital Infrastructure สำหรับโรงงานเกษตรแปรรูปและอุตสาหกรรมหนัก",
+  title:
+    "วางระบบเว็บไซต์ ราชบุรี | Digital Infrastructure สำหรับโรงงานเกษตรแปรรูปและอุตสาหกรรมหนัก",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าในราชบุรี เจาะกลุ่มอุตสาหกรรมแปรรูปอาหาร ฟาร์มอัจฉริยะ และโรงงานเซรามิกพรีเมียม เน้นความโปรระดับส่งออก โหลดไว และระบบ RFQ ที่แม่นยำ",
 
@@ -65,7 +66,7 @@ export const ratchaburiNode = defineAreaNode(catalogService, {
         "สร้างระบบแคตตาล็อกพรีเมียมและ SEO ภาษาอังกฤษ ยอด RFQ จากคู่ค้าโซนยุโรปเพิ่มขึ้น 250% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ บ้านโป่ง",
+      "วางระบบเว็บไซต์ บ้านโป่ง",
       "จ้างทำเว็บโรงงาน ราชบุรี",
       "Agri-Tech SEO Thailand",
       "ทำแคตตาล็อกสินค้า ราชบุรี",
@@ -97,7 +98,7 @@ export const ratchaburiNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ ราชบุรี",
+    "วางระบบเว็บไซต์ ราชบุรี",
     "ทำเว็บโรงงาน บ้านโป่ง",
     "Web Design Ratchaburi",
     "Agri-Industrial SEO",

@@ -1,5 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
+  "ignore": ["types/genkit.d.ts"],
   "ignoreDependencies": [
     "madge",
     "sharp",
@@ -9,7 +10,12 @@
     "vercel",
     "@swc/helpers",
     "google-auth-library",
-    "eslint-plugin-tailwindcss"
+    "eslint-plugin-tailwindcss",
+    "@axe-core/react",
+    "@genkit-ai/ai",
+    "@genkit-ai/core",
+    "@genkit-ai/dotprompt",
+    "@genkit-ai/googleai"
   ],
   "next": {
     "entry": [

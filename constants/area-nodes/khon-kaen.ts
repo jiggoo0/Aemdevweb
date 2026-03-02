@@ -10,7 +10,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
   region: "Northeast",
   priority: 95,
 
-  title: "รับทำเว็บไซต์ ขอนแก่น | Digital Infrastructure สำหรับองค์กรและ Smart City Hub",
+  title: "วางระบบเว็บไซต์ ขอนแก่น | Digital Infrastructure สำหรับองค์กรและ Smart City Hub",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐานสูงในขอนแก่น เน้นความน่าเชื่อถือระดับสถาบัน รองรับระบบ E-Service และการทำ Local SEO เพื่อครองอันดับหนึ่งในภาคอีสาน",
 
@@ -160,7 +160,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ ขอนแก่น",
+    "วางระบบเว็บไซต์ ขอนแก่น",
     "ออกแบบเว็บไซต์ ขอนแก่น",
     "ทำเว็บคลินิก",
     "Local SEO ขอนแก่น",

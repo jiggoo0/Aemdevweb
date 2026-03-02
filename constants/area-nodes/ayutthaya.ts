@@ -16,7 +16,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
   region: "Central",
   priority: 94,
 
-  title: "รับทำเว็บไซต์ อยุธยา | Digital Infrastructure สำหรับโรงงาน High-Tech และธุรกิจมรดกโลก",
+  title: "วางระบบเว็บไซต์ อยุธยา | Digital Infrastructure สำหรับโรงงาน High-Tech และธุรกิจมรดกโลก",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอยุธยา เจาะกลุ่มนิคมโรจนะ-ไฮเทค เน้นความมั่นคงระดับวิศวกรรม โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งในเมืองอุตสาหกรรม",
 
@@ -65,7 +65,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
         "วางโครงสร้าง SEO และระบบ RFQ ใหม่ ยอดคู่ค้าต่างชาติทักสอบถามเพิ่มขึ้น 300% ใน 6 เดือน",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ โรจนะ",
+      "วางระบบเว็บไซต์ โรจนะ",
       "จ้างทำ SEO อยุธยา",
       "ออกแบบเว็บโรงงาน ไฮเทค",
       "Web Design Ayutthaya",
@@ -97,7 +97,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ อยุธยา",
+    "วางระบบเว็บไซต์ อยุธยา",
     "ทำเว็บโรงงาน โรจนะ",
     "Web Design Ayutthaya",
     "Technical SEO Central Thailand",

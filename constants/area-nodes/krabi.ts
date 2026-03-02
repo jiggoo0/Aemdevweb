@@ -10,7 +10,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
   region: "South",
   priority: 97,
 
-  title: "รับทำเว็บไซต์ กระบี่ | ออกแบบเว็บไซต์ระดับ Ultra-Luxury สำหรับรีสอร์ตและทัวร์พรีเมียม",
+  title: "วางระบบเว็บไซต์ กระบี่ | ออกแบบเว็บไซต์ระดับ Ultra-Luxury สำหรับรีสอร์ตและทัวร์พรีเมียม",
   description:
     "ยกระดับภาพลักษณ์ธุรกิจท่องเที่ยวในกระบี่สู่ระดับโลก ด้วยเว็บไซต์ที่เน้นประสบการณ์ความหรูหราและระบบจองที่ลื่นไหลสายฟ้าแลบ",
 
@@ -96,7 +96,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
       result: "วางระบบจองตรงและทำ SEO หลายภาษา ยอด Direct Booking เพิ่มขึ้น 250% ใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ อ่าวนาง",
+      "วางระบบเว็บไซต์ อ่าวนาง",
       "ออกแบบเว็บรีสอร์ต กระบี่",
       "จ้างทำ SEO เกาะพีพี",
       "ทำเว็บทัวร์เรือยอร์ช กระบี่",
@@ -120,7 +120,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ กระบี่",
+    "วางระบบเว็บไซต์ กระบี่",
     "ทำเว็บโรงแรม กระบี่",
     "จ้างทำเว็บอ่าวนาง",
     "รับทำ SEO กระบี่",

@@ -8,7 +8,7 @@ export const phetchabunNode = defineAreaNode(localAuthorityService, {
   province: "เพชรบูรณ์",
   region: "North",
   priority: 85,
-  title: "รับทำเว็บไซต์ เพชรบูรณ์ | ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
+  title: "วางระบบเว็บไซต์ เพชรบูรณ์ | ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
   description:
     "เปลี่ยนไอหมอกเขาค้อให้เป็นยอดจองตรง ด้วยเว็บไซต์ที่เน้น Visual สวยงามและระบบจองที่ลื่นไหล",
   heroImage: "/images/areas/phetchabun-node.webp",
@@ -39,7 +39,7 @@ export const phetchabunNode = defineAreaNode(localAuthorityService, {
     regionalPricing: { startPrice: `${localAuthorityService.price} บาท`, timeline: "14-21 วัน" },
   },
   keywords: [
-    "รับทำเว็บไซต์ เพชรบูรณ์",
+    "วางระบบเว็บไซต์ เพชรบูรณ์",
     "ทำเว็บที่พัก เขาค้อ",
     "จ้างทำเว็บเพชรบูรณ์",
     "รับทำ SEO เพชรบูรณ์",

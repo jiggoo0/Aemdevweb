@@ -16,7 +16,7 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
   priority: 96,
 
   title:
-    "รับทำเว็บไซต์ นครศรีธรรมราช | Digital Infrastructure สำหรับธุรกิจการค้าและอุตสาหกรรมภาคใต้",
+    "วางระบบเว็บไซต์ นครศรีธรรมราช | Digital Infrastructure สำหรับธุรกิจการค้าและอุตสาหกรรมภาคใต้",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในนครศรีธรรมราช เจาะกลุ่มธุรกิจค้าส่ง ขนส่ง และอสังหาริมทรัพย์พรีเมียม เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในเมืองคอน",
 
@@ -64,7 +64,7 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
       result: "วางระบบ SEO และการนำเสนออัตลักษณ์ใหม่ ยอดจองตรงเพิ่มขึ้น 250% ภายใน 1 ซีซั่น",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ นครศรีธรรมราช",
+      "วางระบบเว็บไซต์ นครศรีธรรมราช",
       "จ้างทำ SEO ทุ่งสง",
       "ทำเว็บโรงแรม ขนอม",
       "Southern Commercial Web Solution",
@@ -96,7 +96,7 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ นครศรีธรรมราช",
+    "วางระบบเว็บไซต์ นครศรีธรรมราช",
     "ออกแบบเว็บไซต์ ทุ่งสง",
     "จ้างทำเว็บโรงแรม นครศรี",
     "Technical SEO Southern Thailand",

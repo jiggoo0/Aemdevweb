@@ -15,7 +15,7 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
   region: "Central",
   priority: 92,
 
-  title: "รับทำเว็บไซต์ นครปฐม | Digital Infrastructure สำหรับธุรกิจบริการและการศึกษาพรีเมียม",
+  title: "วางระบบเว็บไซต์ นครปฐม | Digital Infrastructure สำหรับธุรกิจบริการและการศึกษาพรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์และกลยุทธ์ Local SEO ในนครปฐม เจาะกลุ่มศาลายา-สามพราน เน้นดีไซน์ทันสมัย โหลดไวสายฟ้าแลบ และการสร้างความเชื่อมั่นระดับสถาบัน",
 
@@ -63,7 +63,7 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
       result: "ทำ SEO และระบบจองคิวออนไลน์ ยอดนักเรียนใหม่จากต่างอำเภอเพิ่มขึ้น 350%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ ศาลายา",
+      "วางระบบเว็บไซต์ ศาลายา",
       "จ้างทำ SEO นครปฐม",
       "ทำเว็บคาเฟ่ พุทธมณฑล",
       "Web Design Nakhon Pathom",
@@ -95,7 +95,7 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ นครปฐม",
+    "วางระบบเว็บไซต์ นครปฐม",
     "ออกแบบเว็บไซต์ ศาลายา",
     "รับทำ SEO พุทธมณฑล",
     "Local SEO Nakhon Pathom",

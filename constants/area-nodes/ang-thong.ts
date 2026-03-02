@@ -10,7 +10,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
   region: "Central",
   priority: 80,
 
-  title: "รับทำเว็บไซต์ อ่างทอง | พัฒนาเว็บไซต์วิสาหกิจชุมชนและงานหัตถกรรมพื้นบ้าน",
+  title: "วางระบบเว็บไซต์ อ่างทอง | พัฒนาเว็บไซต์วิสาหกิจชุมชนและงานหัตถกรรมพื้นบ้าน",
   description:
     "ยกระดับสินค้าชุมชนอ่างทองสู่ตลาดพรีเมียม ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องคุณค่าและระบบขายออนไลน์ที่ใช้งานง่าย",
 
@@ -83,7 +83,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
       result: "พัฒนาเว็บไซต์ Storytelling ใหม่ ยอดสั่งซื้อผ่านช่องทางออนไลน์เพิ่มขึ้น 200%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ วิเศษชัยชาญ",
+      "วางระบบเว็บไซต์ วิเศษชัยชาญ",
       "ออกแบบเว็บสินค้า OTOP อ่างทอง",
       "จ้างทำ SEO อ่างทอง",
       "ทำเว็บวิสาหกิจชุมชน อ่างทอง",
@@ -107,7 +107,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
   },
 
   keywords: [
-    "รับทำเว็บไซต์ อ่างทอง",
+    "วางระบบเว็บไซต์ อ่างทอง",
     "ทำเว็บสินค้า OTOP",
     "จ้างทำเว็บอ่างทอง",
     "รับทำ SEO อ่างทอง",

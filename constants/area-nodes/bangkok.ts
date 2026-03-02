@@ -17,7 +17,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
   region: "Central",
   priority: 100,
 
-  title: "รับทำเว็บไซต์ กรุงเทพฯ | Digital Architecture & AI-Strategy สำหรับองค์กรชั้นนำ",
+  title: "วางระบบเว็บไซต์ กรุงเทพฯ | Digital Architecture & AI-Strategy สำหรับองค์กรชั้นนำ",
   description:
     "ยกระดับธุรกิจสู่ยุค Autonomous ด้วยเว็บไซต์มาตรฐาน Enterprise ในกรุงเทพฯ เน้นความปลอดภัยสูงสุด (ISO Standard Ready) และกลยุทธ์ AI-Search Domination",
 
@@ -73,7 +73,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
         "วางระบบ Security Hardening และ SEO ใหม่ ยอดนักลงทุนทักสอบถามเพิ่มขึ้น 400% ภายใน 1 ปี",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ สาทร",
+      "วางระบบเว็บไซต์ สาทร",
       "จ้างทำ SEO สุขุมวิท",
       "ออกแบบเว็บองค์กร พระราม 9",
       "Enterprise Web Solution Bangkok",
@@ -106,8 +106,8 @@ export const bangkokNode = defineAreaNode(corporateService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ กรุงเทพ",
-    "บริษัทรับทำเว็บไซต์",
+    "วางระบบเว็บไซต์ กรุงเทพ",
+    "บริษัทวางระบบเว็บไซต์",
     "ออกแบบเว็บไซต์ องค์กร",
     "Technical SEO Specialist Bangkok",
   ],

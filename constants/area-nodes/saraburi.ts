@@ -15,7 +15,7 @@ export const saraburiNode = defineAreaNode(catalogService, {
   region: "Central",
   priority: 94,
 
-  title: "รับทำเว็บไซต์ สระบุรี | Digital Infrastructure สำหรับอุตสาหกรรมก่อสร้างและโลจิสติกส์",
+  title: "วางระบบเว็บไซต์ สระบุรี | Digital Infrastructure สำหรับอุตสาหกรรมก่อสร้างและโลจิสติกส์",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าอุตสาหกรรมในสระบุรี เจาะกลุ่มโรงงานปูนซีเมนต์และวัสดุก่อสร้างย่านแก่งคอย-หนองแค เน้นความโปรระดับ B2B โหลดไว และระบบ RFQ ที่แม่นยำ",
 
@@ -63,7 +63,7 @@ export const saraburiNode = defineAreaNode(catalogService, {
       result: "สร้างระบบแคตตาล็อกสินค้าและ SEO ใหม่ ยอด RFQ จากโครงการก่อสร้างภาครัฐเพิ่มขึ้น 200%",
     },
     hyperLocalKeywords: [
-      "รับทำเว็บไซต์ แก่งคอย",
+      "วางระบบเว็บไซต์ แก่งคอย",
       "จ้างทำเว็บโรงงาน สระบุรี",
       "Construction SEO Thailand",
       "ทำแคตตาล็อกสินค้าก่อสร้าง",
@@ -95,7 +95,7 @@ export const saraburiNode = defineAreaNode(catalogService, {
   ],
 
   keywords: [
-    "รับทำเว็บไซต์ สระบุรี",
+    "วางระบบเว็บไซต์ สระบุรี",
     "ทำเว็บโรงงาน แก่งคอย",
     "Web Design Saraburi",
     "Construction Industry SEO",
