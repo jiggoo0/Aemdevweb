@@ -151,7 +151,7 @@ const PricingSection = () => {
               )}
 
               <div className="mb-12 space-y-2">
-                <span className="text-text-muted font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
+                <span className="text-text-muted font-sans text-[11px] font-bold tracking-widest uppercase opacity-100">
                   แพ็กเกจที่ 0{i + 1}
                 </span>
                 <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors md:text-4xl">
@@ -167,7 +167,7 @@ const PricingSection = () => {
                           : plan.price
                         : "---"}
                     </span>
-                    <span className="text-text-muted text-xs font-black uppercase opacity-40">
+                    <span className="text-text-muted text-xs font-black uppercase opacity-60">
                       {plan.unit}
                     </span>
                   </div>

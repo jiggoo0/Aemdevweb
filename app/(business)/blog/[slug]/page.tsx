@@ -40,7 +40,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return constructMetadata({
     title: `${post.title} | ${SITE_CONFIG.brandName} Insights`,
-    description: post.description || `${post.title} โดย ${SITE_CONFIG.expert.displayName} - เจาะลึกเทคนิคและกลยุทธ์จากผู้เชี่ยวชาญ`,
+    description:
+      post.description ||
+      `${post.title} โดย ${SITE_CONFIG.expert.displayName} - เจาะลึกเทคนิคและกลยุทธ์จากผู้เชี่ยวชาญ`,
     path: `/blog/${slug}`,
     image: post.thumbnail,
     keywords: strategicKeywords,
@@ -224,7 +226,6 @@ export default async function BlogDetailPage({ params }: PageProps) {
     </LayoutEngine>
   );
 }
-
 
 /** [SUB_COMPONENT]: RelatedPosts */
 async function RelatedPosts({ currentSlug, category }: { currentSlug: string; category?: string }) {

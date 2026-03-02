@@ -67,12 +67,12 @@ export const TrustEquation = memo(() => {
                 >
                   <IconRenderer name={item.icon as IconName} size={32} />
                 </div>
-                <p className="mb-2 font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase">
+                <p className="mb-2 font-mono text-[8px] font-black tracking-widest text-[var(--text-muted)] uppercase opacity-100">
                   {item.label}
                 </p>
-                <h4 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
+                <h3 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
                   {item.value}
-                </h4>
+                </h3>
               </div>
 
               {idx < 2 && (

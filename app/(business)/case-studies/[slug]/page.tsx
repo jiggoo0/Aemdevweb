@@ -42,7 +42,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return constructMetadata({
     title: `${data.title} | ผลงาน AEMDEVWEB โดย ${SITE_CONFIG.expert.displayName}`,
-    description: data.description || `เจาะลึกความสำเร็จโครงการ ${data.title} - ${data.client} พัฒนาโดย ${SITE_CONFIG.expert.displayName} Technical SEO Specialist`,
+    description:
+      data.description ||
+      `เจาะลึกความสำเร็จโครงการ ${data.title} - ${data.client} พัฒนาโดย ${SITE_CONFIG.expert.displayName} Technical SEO Specialist`,
     path: `/case-studies/${slug}`,
     image: data.thumbnail,
     keywords: strategicKeywords,
@@ -112,7 +114,10 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
           <div className="flex items-center justify-center gap-6">
             <div className="bg-text-muted/20 h-px w-12" />
-            <time dateTime={isoDate} className="text-text-secondary font-mono text-[10px] font-black tracking-widest uppercase opacity-60">
+            <time
+              dateTime={isoDate}
+              className="text-text-secondary font-mono text-[10px] font-black tracking-widest uppercase opacity-60"
+            >
               {displayDate}
             </time>
             <div className="bg-text-muted/20 h-px w-12" />
@@ -120,7 +125,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
           {data.result && (
             <div className="shadow-glow-sm border-brand-primary/20 bg-surface-card mt-8 inline-block rounded-2xl border px-10 py-4">
-              <span className="text-brand-primary font-mono text-2xl font-black italic tracking-tighter md:text-3xl">
+              <span className="text-brand-primary font-mono text-2xl font-black tracking-tighter italic md:text-3xl">
                 {data.result}
               </span>
             </div>
@@ -140,7 +145,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </div>
 
         <div className="mx-auto max-w-4xl">
-          <div className="prose prose-invert prose-brand lg:prose-xl prose-img:rounded-3xl prose-img:border prose-img:border-border max-w-none mb-24">
+          <div className="prose prose-invert prose-brand lg:prose-xl prose-img:rounded-3xl prose-img:border prose-img:border-border mb-24 max-w-none">
             <MDXRemote source={data.content || ""} components={useMDXComponents({})} />
           </div>
 

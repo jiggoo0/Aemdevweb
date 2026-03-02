@@ -173,14 +173,14 @@ const MetricCard = ({
       <div className="relative z-10 mt-10 space-y-6">
         <div className="space-y-2">
           <div className="flex items-baseline gap-2">
-            <h3 className="text-text-primary font-mono text-5xl font-black tracking-tighter italic md:text-6xl">
+            <p className="text-text-primary font-mono text-5xl font-black tracking-tighter italic md:text-6xl">
               <Counter value={stat.value} decimals={stat.decimals} prefix={stat.prefix} />
-            </h3>
+            </p>
             <div className="flex flex-col">
               {stat.trend === "up" && (
                 <IconRenderer name="ArrowUpRight" size={12} className="mb-1 text-emerald-500" />
               )}
-              <span className="text-brand-primary text-lg leading-none font-black tracking-widest uppercase opacity-80">
+              <span className="text-brand-primary text-lg leading-none font-black tracking-widest uppercase opacity-100">
                 {stat.unit}
               </span>
             </div>
@@ -192,7 +192,7 @@ const MetricCard = ({
 
         <div className="space-y-3">
           <div className="bg-border/50 group-hover:bg-brand-primary/20 h-px w-full transition-all duration-700" />
-          <p className="text-text-muted font-mono text-[10px] leading-relaxed tracking-wider uppercase opacity-60">
+          <p className="text-text-muted font-mono text-[10px] leading-relaxed tracking-wider uppercase opacity-100">
             {stat.description}
           </p>
         </div>

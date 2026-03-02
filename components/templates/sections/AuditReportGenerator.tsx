@@ -224,7 +224,7 @@ export const AuditReportGenerator = memo(() => {
             {/* PROGRESS METRIC */}
             <div className="bg-surface-card border-border/50 mt-8 space-y-3 rounded-2xl border p-6">
               <div className="flex items-center justify-between font-mono text-[9px] font-black">
-                <span className="text-text-muted uppercase">Audit_Synthesis</span>
+                <span className="text-text-muted uppercase opacity-100">Audit_Synthesis</span>
                 <span className="text-brand-primary">{Math.round(progress)}%</span>
               </div>
               <div className="bg-border/20 h-1 w-full overflow-hidden rounded-full">
@@ -233,7 +233,7 @@ export const AuditReportGenerator = memo(() => {
                   style={{ width: `${progress}%` }}
                 />
               </div>
-              <div className="flex items-center justify-between font-mono text-[7px] font-bold tracking-tighter uppercase opacity-30">
+              <div className="flex items-center justify-between font-mono text-[7px] font-bold tracking-tighter uppercase opacity-50">
                 <span></span>
                 <span></span>
               </div>

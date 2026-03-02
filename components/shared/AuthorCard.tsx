@@ -36,7 +36,7 @@ export default function AuthorCard() {
               {SITE_CONFIG.expert.jobTitle}
             </p>
           </div>
-          
+
           <p className="text-text-secondary text-sm leading-relaxed italic opacity-80 md:max-w-xl">
             {SITE_CONFIG.expert.bio}
           </p>

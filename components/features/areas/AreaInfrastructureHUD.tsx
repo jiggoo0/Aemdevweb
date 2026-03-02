@@ -77,7 +77,7 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
             <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500 group-hover:shadow-md">
               <IconRenderer name={stat.icon} size={18} />
             </div>
-            <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-30">
+            <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-100">
               สถิติที่ 0{i + 1}
             </span>
           </div>
@@ -92,11 +92,11 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
               >
                 {stat.value}
               </span>
-              <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase opacity-60">
+              <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase opacity-80">
                 {stat.unit}
               </span>
             </div>
-            <p className="text-text-muted font-mono text-[9px] font-bold tracking-[0.2em] uppercase">
+            <p className="text-text-muted font-mono text-[9px] font-bold tracking-[0.2em] uppercase opacity-100">
               {stat.label}
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
           <div className="bg-border/20 relative z-10 mt-4 h-px w-full overflow-hidden">
             <div className="bg-brand-primary absolute h-full w-1/3" />
           </div>
-          <p className="text-text-muted mt-2 text-[8px] font-medium italic opacity-40">
+          <p className="text-text-muted mt-2 text-[8px] font-medium italic opacity-100">
             {stat.description}
           </p>
         </div>

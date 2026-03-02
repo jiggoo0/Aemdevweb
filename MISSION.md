@@ -18,6 +18,7 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 12. [x] [Completed] จัดทำฐานข้อมูลยุทธศาสตร์ SEO ปี 2026 (SEO Strategy Database) จากแหล่งข้อมูลผู้เชี่ยวชาญ เพื่อเป็นแนวทางทางเทคนิคและกลยุทธ์สำหรับโครงการ
 13. [x] [Completed] ยกระดับ E-E-A-T และ Identity Synchronization เชื่อมโยงตัวตนผู้เชี่ยวชาญ (#expert) เข้ากับทุกบทความ, บริการ และผลงานผ่าน AuthorCard และ Linked Schema
 14. [x] [Completed] ฉีดกลยุทธ์ Strategic Keywords และ aiSignal (GEO/AEO Optimization) เข้าสู่ระบบ Metadata และ Schema.org ทั่วทั้งไซต์ เพื่อครองอันดับบน AI Answer Engines
+15. [x] [Completed] ปรับปรุง PageSpeed Insights & Rich Results (Mobile Contrast, Heading Hierarchy, LCP/Aura Optimization) ผ่าน Full Validation (aipc) 100%
 
 ## 🛠️ Tech Stack Status:
 

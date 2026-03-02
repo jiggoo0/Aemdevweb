@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-export interface HeadingNode {
+interface HeadingNode {
   readonly id: string;
   readonly text: string;
   readonly level: number;

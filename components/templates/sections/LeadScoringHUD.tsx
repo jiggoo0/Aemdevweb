@@ -133,7 +133,7 @@ export const LeadScoringHUD = memo(() => {
               >
                 <div className="relative z-10 flex items-center justify-between">
                   <div className="space-y-1">
-                    <span className="text-text-muted font-mono text-[8px] font-bold uppercase opacity-40">
+                    <span className="text-text-muted font-mono text-[8px] font-bold uppercase opacity-80">
                       ปัจจัยที่ 0{i + 1}
                     </span>
                     <h4 className="text-text-primary text-sm font-black tracking-wide uppercase italic">
@@ -144,7 +144,9 @@ export const LeadScoringHUD = memo(() => {
                     <span
                       className={cn(
                         "font-mono text-xs font-bold tracking-tight",
-                        sig.status === "analyzing" ? "text-text-muted" : "text-brand-primary",
+                        sig.status === "analyzing"
+                          ? "text-text-muted opacity-80"
+                          : "text-brand-primary",
                       )}
                     >
                       {sig.value}
@@ -158,7 +160,7 @@ export const LeadScoringHUD = memo(() => {
           </div>
 
           <div className="bg-surface-offset border-border/50 mt-8 rounded-2xl border border-dashed p-6">
-            <p className="text-text-muted text-[10px] leading-relaxed font-medium italic opacity-60">
+            <p className="text-text-muted text-[10px] leading-relaxed font-medium italic opacity-100">
               "AI Agent is currently orchestrating decision paths based on 142 historical success
               nodes. Expected ROI trajectory verified."
             </p>

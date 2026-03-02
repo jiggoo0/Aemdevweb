@@ -52,10 +52,10 @@ export const AEMSpecialistHero = memo(() => {
         />
       </div>
 
-      {/* --- LAYER 02: ATMOSPHERIC NODES --- */}
+      {/* --- LAYER 02: ATMOSPHERIC NODES (Desktop Only for LCP) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="bg-brand-primary/5 animate-aura-1 absolute -top-1/4 -left-1/4 h-[600px] w-[600px] rounded-full blur-[140px]" />
-        <div className="bg-brand-secondary/5 animate-aura-2 absolute -right-1/4 bottom-0 h-[500px] w-[500px] rounded-full blur-[120px]" />
+        <div className="bg-brand-primary/5 md:animate-aura-1 absolute -top-1/4 -left-1/4 h-[600px] w-[600px] rounded-full blur-[80px] md:blur-[140px]" />
+        <div className="bg-brand-secondary/5 md:animate-aura-2 absolute -right-1/4 bottom-0 h-[500px] w-[500px] rounded-full blur-[60px] md:blur-[120px]" />
       </div>
 
       {/* --- LAYER 03: CONTENT HUB --- */}
@@ -74,7 +74,7 @@ export const AEMSpecialistHero = memo(() => {
                 className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md transition-all"
               >
                 <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                <span className="text-text-muted font-sans text-[10px] font-bold tracking-wide uppercase opacity-60 transition-opacity group-hover:opacity-100">
+                <span className="text-text-muted font-sans text-[10px] font-bold tracking-wide uppercase opacity-100 transition-opacity group-hover:opacity-100">
                   {node.label}: <span className="text-text-primary ml-1">{node.value}</span>
                 </span>
               </div>
@@ -131,7 +131,7 @@ export const AEMSpecialistHero = memo(() => {
 
       {/* Scroll Indicator: Friendly Feed */}
       <div className="absolute bottom-12 flex flex-col items-center gap-4">
-        <span className="text-text-muted font-sans text-[9px] font-bold tracking-widest uppercase opacity-40">
+        <span className="text-text-muted font-sans text-[9px] font-bold tracking-widest uppercase opacity-80">
           เลื่อนลงเพื่อดูข้อมูลเพิ่ม
         </span>
         <div className="border-border/40 flex h-10 w-6 items-start justify-center rounded-full border p-2">

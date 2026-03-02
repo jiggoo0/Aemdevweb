@@ -60,12 +60,34 @@
     }
   }
 
+  @keyframes aura-1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(5%, 5%) scale(1.1);
+    }
+  }
+
+  @keyframes aura-2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-5%, -5%) scale(1.05);
+    }
+  }
+
   --animate-shimmer: shimmer 2s infinite linear;
+  --animate-aura-1: aura-1 20s infinite ease-in-out;
+  --animate-aura-2: aura-2 25s infinite ease-in-out;
 }
 
 @layer base {
   :root {
-    --brand-primary-raw: 55% 0.18 260;
+    --brand-primary-raw: 50% 0.18 260;
     --brand-secondary-raw: 45% 0.15 260;
     --brand-accent-raw: 85% 0.1 260;
     --surface-main: #ffffff;
@@ -74,7 +96,7 @@
     --text-primary: #0f172a;
     --foreground: #0f172a;
     --text-secondary: #475569;
-    --text-muted: #64748b;
+    --text-muted: #475569;
     --border: #e2e8f0;
     --radius: 0.75rem;
   }

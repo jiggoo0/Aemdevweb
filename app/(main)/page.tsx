@@ -163,6 +163,7 @@ export default async function HomePage() {
           className="relative z-20 -mt-20 px-4 md:-mt-28 lg:-mt-36"
           aria-label="Authority Metrics"
         >
+          <h2 className="sr-only">สถิติความสำเร็จและความน่าเชื่อถือ</h2>
           <div className="mx-auto max-w-7xl">
             <div className="glass-card shadow-pro-xl rounded-section border-border/50 bg-surface-card/80 relative overflow-hidden border p-10 backdrop-blur-3xl md:p-20">
               <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24">
@@ -282,14 +283,14 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 md:px-8">
             <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div className="space-y-2">
-                <span className="text-text-muted block font-sans text-[12px] font-bold tracking-widest uppercase opacity-80">
+                <span className="text-text-muted block font-sans text-[12px] font-bold tracking-widest uppercase">
                   ผลงานที่ผ่านมา
                 </span>
                 <h2
                   id="success-heading"
                   className="text-text-primary text-5xl font-black tracking-tighter uppercase italic md:text-7xl"
                 >
-                  Success <span className="text-text-secondary/30">Stories.</span>
+                  Success <span className="text-text-secondary/50">Stories.</span>
                 </h2>
               </div>
               <Link
