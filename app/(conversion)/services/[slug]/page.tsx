@@ -58,9 +58,18 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
   return constructMetadata({
     title: `${service.title} | ${SITE_CONFIG.brandName}`,
-    description: service.description,
+    description: service.description || SITE_CONFIG.description,
     path: `/services/${service.templateSlug}`,
     image: service.image || SITE_CONFIG.ogImage,
+    // [SEO_OPTIMIZATION]: ฉีด Keyword เฉพาะทางของบริการนั้นๆ พร้อมตัวตนผู้เชี่ยวชาญ
+    keywords: [
+      ...(service.keywords || []),
+      SITE_CONFIG.expert.displayName,
+      `บริการโดย ${SITE_CONFIG.expert.legalNameThai}`,
+      `${service.title} Next.js`,
+      "Technical SEO Infrastructure",
+    ],
+    authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
   });
 }
 

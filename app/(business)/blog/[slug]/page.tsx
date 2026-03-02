@@ -13,15 +13,15 @@ import { getPostBySlug, getAllPosts } from "@/lib/cms";
 import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { useMDXComponents } from "@/mdx-components";
-import { slugify } from "@/lib/utils";
 import type { PageProps } from "@/types";
 
 import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import BlogCard from "@/components/features/blog/BlogCard";
-import TableOfContents, { type HeadingNode } from "@/components/features/blog/TableOfContents";
+import TableOfContents from "@/components/features/blog/TableOfContents";
 import IconRenderer from "@/components/ui/IconRenderer";
+import AuthorCard from "@/components/shared/AuthorCard";
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -33,29 +33,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = await getPostBySlug(slug);
   if (!post) return { title: "Article Not Found" };
 
+  // [SEO_HYPER_LINKING]: เชื่อมโยง Tag บทความ เข้ากับ Global Keywords ยอดนิยม
+  const strategicKeywords = Array.from(
+    new Set([...(post.tags || []), ...SITE_CONFIG.keywords.slice(0, 5)]),
+  );
+
   return constructMetadata({
-    title: post.title,
-    description: post.description || "",
+    title: `${post.title} | ${SITE_CONFIG.brandName} Insights`,
+    description: post.description || `${post.title} โดย ${SITE_CONFIG.expert.displayName} - เจาะลึกเทคนิคและกลยุทธ์จากผู้เชี่ยวชาญ`,
     path: `/blog/${slug}`,
     image: post.thumbnail,
-    keywords: post.tags,
+    keywords: strategicKeywords,
+    // [CTR_LANGUAGE]: ใช้ภาษาที่แสดงถึงความเป็นเจ้าของงานที่ทรงพลัง
+    authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
   });
 }
 
 /** [INTERNAL_HELPER]: ดึงหัวข้อจาก Markdown Content */
-function extractHeadings(content: string): HeadingNode[] {
-  const headingRegex = /^(#{2,3})\s+(.*)$/gm;
-  const headings: HeadingNode[] = [];
+function extractHeadings(content: string) {
+  const headingRegex = /^(#{2,4})\s+(.*)$/gm;
+  const headings = [];
   let match;
 
   while ((match = headingRegex.exec(content)) !== null) {
     const level = match[1].length;
-    const text = match[2].trim();
-    headings.push({
-      id: slugify(text),
-      text,
-      level,
-    });
+    const text = match[2];
+    const id = text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\u0E00-\u0E7F\w\s-]/g, "")
+      .replace(/\s+/g, "-");
+    headings.push({ id, text, level });
   }
 
   return headings;
@@ -91,7 +99,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
       image: post.thumbnail,
       datePublished: isoDate,
       dateModified: isoDate,
-      author: { "@id": `${SITE_CONFIG.siteUrl}/#expert` },
+      // [E-E-A-T_SYNC]: เชื่อมโยง Person Schema ตรงเข้าสู่บทความ
+      author: {
+        "@type": "Person",
+        "@id": `${SITE_CONFIG.siteUrl}/#expert`,
+        name: SITE_CONFIG.expert.displayName,
+        jobTitle: SITE_CONFIG.expert.jobTitle,
+        url: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.expert.bioUrl}`,
+      },
       publisher: { "@id": `${SITE_CONFIG.siteUrl}/#organization` },
       mainEntityOfPage: {
         "@type": "WebPage",
@@ -151,6 +166,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
               <div className="prose prose-invert prose-brand lg:prose-xl prose-headings:italic prose-headings:tracking-tighter max-w-none">
                 <MDXRemote source={post.content || ""} components={useMDXComponents({})} />
               </div>
+
+              {/* [AUTHOR_CARD]: 🚩 การแสดงตัวตนเจ้าของผลงาน (Identity Sovereignty) */}
+              <AuthorCard />
             </div>
 
             {/* RIGHT: SMART STICKY SIDEBAR (TOC) */}
@@ -165,14 +183,14 @@ export default async function BlogDetailPage({ params }: PageProps) {
                   </h4>
                   <p className="text-text-secondary mb-8 text-sm leading-relaxed italic opacity-80">
                     มีข้อสงสัยเกี่ยวกับเทคโนโลยีหรือต้องการยกระดับธุรกิจของคุณ?
-                    ทีมวิศวกรของเราพร้อมให้คำปรึกษาเชิงลึก
+                    {SITE_CONFIG.expert.displayName} พร้อมให้คำปรึกษาเชิงลึกโดยตรง
                   </p>
                   <a
                     href={SITE_CONFIG.links.line}
                     className="bg-brand-primary text-surface-main shadow-glow-sm flex items-center justify-center gap-3 rounded-xl py-4 font-mono text-[10px] font-black tracking-widest uppercase transition-transform hover:scale-105 active:scale-95"
                   >
                     <IconRenderer name="MessageCircle" size={16} />
-                    Get_Support_Now
+                    Consult_Specialist
                   </a>
                 </div>
               </div>
@@ -206,6 +224,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
     </LayoutEngine>
   );
 }
+
 
 /** [SUB_COMPONENT]: RelatedPosts */
 async function RelatedPosts({ currentSlug, category }: { currentSlug: string; category?: string }) {

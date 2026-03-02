@@ -72,6 +72,7 @@
     --surface-offset: #f8fafc;
     --surface-card: #ffffff;
     --text-primary: #0f172a;
+    --foreground: #0f172a;
     --text-secondary: #475569;
     --text-muted: #64748b;
     --border: #e2e8f0;
@@ -86,6 +87,7 @@
     --surface-offset: #0f172a;
     --surface-card: #0b1120;
     --text-primary: #f8fafc;
+    --foreground: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
     --border: rgba(255, 255, 255, 0.08);

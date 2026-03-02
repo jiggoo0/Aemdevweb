@@ -51,6 +51,12 @@ const mapToBlogPost = (slug: string, content: string, data: MDXAttributes): Blog
     excerpt: data.excerpt || data.description || "",
     tags: Array.isArray(data.tags) ? data.tags : [],
     readingTime: data.readingTime || "5 min read",
+    // [E-E-A-T]: บังคับฉีดข้อมูลผู้เชี่ยวชาญ (Author Identity) เข้าไปในทุกบทความ
+    author: {
+      name: MASTER_REGISTRY[0]?.expert?.displayName || "นายเอ็มซ่ามากส์",
+      role: MASTER_REGISTRY[0]?.expert?.jobTitle || "Technical SEO Specialist",
+      image: "/images/avatar.webp",
+    },
   };
 };
 
@@ -69,6 +75,12 @@ const mapToCaseStudy = (slug: string, content: string, data: MDXAttributes): Cas
       ? new Date(data.date as string | Date).toISOString()
       : "2026-01-01T00:00:00.000Z",
     results: Array.isArray(data.results) ? data.results : [],
+    // [E-E-A-T]: บังคับฉีดข้อมูลผู้เชี่ยวชาญ (Author Identity) เข้าไปในทุก Case Study
+    author: {
+      name: MASTER_REGISTRY[0]?.expert?.displayName || "นายเอ็มซ่ามากส์",
+      role: MASTER_REGISTRY[0]?.expert?.jobTitle || "Technical SEO Specialist",
+      image: "/images/avatar.webp",
+    },
   };
 };
 

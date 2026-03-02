@@ -7,6 +7,7 @@
 import type { TemplateMasterData, TemplateSlug, ServiceCategory } from "@/types";
 
 // --- 1. Infrastructure: Import Core Blueprint Services ---
+import { SITE_CONFIG } from "./site-config";
 import { AREA_NODES } from "./area-nodes/index";
 import { seoAgencyService } from "./services/seo-agency";
 import { salePageService } from "./services/salepage";
@@ -38,6 +39,11 @@ export const MASTER_REGISTRY: readonly TemplateMasterData[] = [
 
     return {
       ...service,
+      expert: {
+        displayName: SITE_CONFIG.expert.displayName,
+        jobTitle: SITE_CONFIG.expert.jobTitle,
+        avatar: SITE_CONFIG.expert.avatar,
+      },
       activeAreas: finalActiveAreas || [],
       benefits: service.benefits || [],
       coreFeatures: service.coreFeatures || [],

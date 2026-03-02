@@ -229,6 +229,14 @@ export interface CatalogItem {
   readonly technicalID?: string;
 }
 
+/** [E-E-A-T]: Author Identity for Expertise Verification */
+export interface Author {
+  readonly name: string;
+  readonly role: string;
+  readonly image: string;
+  readonly bio?: string;
+}
+
 export interface BlogPost {
   readonly slug: string;
   readonly title: string;
@@ -241,6 +249,7 @@ export interface BlogPost {
   readonly tags?: readonly string[];
   readonly readingTime?: string;
   readonly content?: string;
+  readonly author?: Author;
 }
 
 export interface CaseStudy {
@@ -254,6 +263,7 @@ export interface CaseStudy {
   readonly image: string;
   readonly thumbnail?: string;
   readonly content?: string;
+  readonly author?: Author;
 }
 
 export interface ImageBlurMetadata {
@@ -411,6 +421,11 @@ export interface TemplateMasterData {
   };
   readonly items?: readonly CatalogItem[];
   readonly activeAreas?: readonly string[];
+  readonly expert?: {
+    readonly displayName: string;
+    readonly jobTitle: string;
+    readonly avatar: string;
+  };
 }
 
 export interface AreaNode {

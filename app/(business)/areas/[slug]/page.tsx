@@ -55,16 +55,28 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
     };
   }
 
+  const masterService = getServiceBySlug(area.templateSlug);
+  const templateData = masterService ? mergeServiceData(masterService, area) : null;
   const canonicalUrl = absoluteUrl(`/areas/${area.slug}`);
   const ogImage = absoluteUrl(area.heroImage || SITE_CONFIG.ogImage);
 
+  // [AI_INTENT_SIGNALING]: ดึงข้อมูลสรุปสำหรับ AI Search (GEO/AEO)
+  const aiDescription = templateData?.aiSignal?.summary || area.seoDescription;
+
   return {
-    title: area.seoTitle,
-    description: area.seoDescription,
+    title: `${area.seoTitle} | บริการโดย ${SITE_CONFIG.expert.displayName}`,
+    description: `${aiDescription}. ${area.seoDescription}`,
+    keywords: [
+      ...(area.keywords || []),
+      ...(templateData?.keywords || []),
+      SITE_CONFIG.expert.displayName,
+      `บริการในพื้นที่ ${area.province}`,
+    ],
+    authors: [{ name: SITE_CONFIG.expert.displayName, url: SITE_CONFIG.expert.bioUrl }],
     alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: area.seoTitle,
-      description: area.seoDescription,
+      title: `${area.seoTitle} - ${SITE_CONFIG.expert.displayName}`,
+      description: aiDescription,
       url: canonicalUrl,
       images: [{ url: ogImage, width: 1200, height: 630 }],
       type: "website",
@@ -105,6 +117,15 @@ export default async function AreaPage(props: PageProps) {
       telephone: SITE_CONFIG.contact.phone,
       priceRange: area.price ? `THB ${area.price}` : SITE_CONFIG.business.priceRange,
     }),
+    // [E-E-A-T_SYNC]: เชื่อมโยงตัวตนผู้เชี่ยวชาญเข้ากับบริการในพื้นที่นี้
+    {
+      "@type": "ProfessionalService",
+      "@id": absoluteUrl(`/areas/${area.slug}/#service`),
+      name: area.title,
+      provider: { "@id": absoluteUrl("/#organization") },
+      author: { "@id": absoluteUrl("/#expert") },
+      description: templateData.aiSignal?.summary,
+    },
   ]);
 
   return (

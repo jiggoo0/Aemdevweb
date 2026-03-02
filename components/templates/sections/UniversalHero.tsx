@@ -9,7 +9,6 @@ import Link from "next/link";
 import { memo } from "react";
 import type { BaseTemplateProps } from "@/types";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
 import TrustBadge from "@/components/shared/TrustBadge";
 import { SITE_CONFIG } from "@/constants/site-config";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -100,7 +99,7 @@ const UniversalHero = ({
         )}
 
         {/* --- MAIN TITLE: Executive Typography --- */}
-        <h1 className="mb-14 max-w-6xl text-6xl leading-[0.85] font-black tracking-tighter text-[var(--text-primary)] uppercase italic drop-shadow-sm sm:text-8xl lg:text-[11rem]">
+        <h1 className="mb-14 max-w-6xl text-5xl leading-[1.1] font-black tracking-tighter text-[var(--text-primary)] uppercase italic drop-shadow-sm sm:text-7xl lg:text-8xl xl:text-9xl">
           {typeof title === "string"
             ? title.split(" ").map((word, i) => (
                 <span
@@ -116,7 +115,7 @@ const UniversalHero = ({
         {/* --- SUBTITLE: Professional Narrative --- */}
         <div
           className={cn(
-            "mb-20 max-w-4xl text-2xl leading-[1.4] font-medium text-[var(--text-secondary)] opacity-90 md:text-4xl",
+            "mb-20 max-w-4xl text-xl leading-relaxed font-medium text-[var(--text-secondary)] opacity-90 md:text-3xl",
             align === "center" ? "mx-auto" : "mr-auto text-left",
           )}
         >
@@ -126,29 +125,34 @@ const UniversalHero = ({
         {/* --- ACTION SEQUENCE: Strategic Conversion --- */}
         <div
           className={cn(
-            "flex flex-wrap gap-10",
+            "flex flex-wrap gap-6 md:gap-8",
             align === "center" ? "justify-center" : "justify-start",
           )}
         >
-          <Button
-            size="lg"
+          <a
             href={primaryHref || SITE_CONFIG.links.line}
-            className="h-24 rounded-[2.5rem] border-none bg-[var(--color-brand-primary)] px-16 text-sm font-black tracking-[0.3em] text-white uppercase shadow-sm transition-all hover:scale-105 hover:shadow-md active:scale-95"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex h-16 items-center justify-center overflow-hidden rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-[0.3em] text-white uppercase shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95 md:h-18 md:px-14 md:text-xs"
           >
-            <span className="flex items-center gap-4">
+            <span className="relative z-10 flex items-center gap-3">
               {primaryActionLabel || "Contact Specialist"}
-              <IconRenderer name="ArrowUpRight" size={28} />
+              <IconRenderer
+                name="ArrowUpRight"
+                size={22}
+                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
             </span>
-          </Button>
+            <div className="absolute inset-0 z-0 -translate-x-full bg-gradient-to-r from-white/0 via-white/10 to-white/0 transition-transform duration-1000 group-hover:translate-x-full" />
+          </a>
 
           {(secondaryActionLabel || data?.secondaryAction) && (
-            <Button
-              variant="outline"
+            <a
               href={secondaryHref || "#"}
-              className="h-24 rounded-[2.5rem] border-[var(--border)] px-16 text-sm font-black tracking-[0.3em] text-[var(--text-primary)] uppercase backdrop-blur-md transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)]"
+              className="flex h-16 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-card)]/30 px-10 text-[11px] font-black tracking-[0.3em] text-[var(--text-primary)] uppercase backdrop-blur-md transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)] md:h-18 md:px-14 md:text-xs"
             >
               {secondaryActionLabel || data?.secondaryAction?.label || "Explore Solutions"}
-            </Button>
+            </a>
           )}
         </div>
 

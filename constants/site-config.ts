@@ -19,7 +19,7 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
   siteUrl: "https://www.aemdevweb.com",
   description:
-    "AEMDEVWEB | Web Infrastructure & Technical SEO Specialist พัฒนาเว็บไซต์ประสิทธิภาพสูงเพื่อยึดครองพื้นที่บน Google และ AI Answer Engines อย่างยั่งยืน",
+    "AEMDEVWEB | โดย นายเอ็มซ่ามากส์ (AEMZA MACKS) ผู้เชี่ยวชาญด้าน Next.js และ Technical SEO ระดับวิศวกรรมโครงสร้างพื้นฐาน พัฒนาเว็บไซต์ประสิทธิภาพสูงที่โหลดเร็วและติดหน้าแรก Google อย่างยั่งยืน",
   logo: "/images/logo-main.webp",
 
   // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
@@ -30,7 +30,7 @@ export const SITE_CONFIG: SiteConfig = {
   hero: {
     title: "AEMDEVWEB HYPER-PERFORMANCE ARCHITECTURE",
     description:
-      "โครงสร้างเว็บไซต์และกลยุทธ์ Technical SEO ระดับวิศวกรรม เพื่อสร้างอำนาจการจัดอันดับในยุค AI-Search 2026 โดย นายเอ็มซ่ามากส์",
+      "ปลดล็อกศักยภาพธุรกิจด้วยโครงสร้างเว็บไซต์และกลยุทธ์ Technical SEO ระดับวิศวกรรม เพื่อยึดครองพื้นที่บน Google และ AI Search 2026 โดย นายเอ็มซ่ามากส์",
     primaryAction: "วางแผนระบบกับ Specialist",
     secondaryAction: "วิเคราะห์โซลูชันทั้งหมด",
   },
@@ -45,19 +45,19 @@ export const SITE_CONFIG: SiteConfig = {
    * [SEO_REGISTRY]: คำค้นหาที่มีนัยสำคัญต่อการทำ Conversion รายภูมิภาค
    */
   keywords: [
-    "รับทำเว็บไซต์",
-    "รับทำ SEO สายขาว",
-    "Technical SEO Specialist Thailand",
-    "รับออกแบบเว็บไซต์ บริษัท",
-    "รับทำ Sale Page ยิงแอด",
-    "จ้างทำเว็บไซต์ ติดหน้าแรก Google",
-    "รับทำเว็บไซต์ Next.js",
-    "AEMDEVWEB",
+    "AEMZA MACKS",
     "นายเอ็มซ่ามากส์ AEMDEVWEB",
+    "Technical SEO Specialist Thailand",
+    "System Architect Thailand",
+    "รับทำเว็บไซต์ Next.js 16",
+    "พัฒนาเว็บไซต์ประสิทธิภาพสูง",
+    "จ้างทำ SEO สายขาว 2026",
+    "รับทำ Sale Page ยิงแอด ประสิทธิภาพสูง",
+    "AI Search Optimization Expert",
+    "โครงสร้างพื้นฐานดิจิทัล",
     "อลงกรณ์ ยมเกิด",
     "Alongkorn Yomkerd",
     "Web Infrastructure Specialist",
-    "AI Search Optimization 2026",
   ],
 
   project: {

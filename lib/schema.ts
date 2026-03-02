@@ -214,6 +214,15 @@ export function generateUniversalSchema(
     telephone: SITE_CONFIG.contact.phone,
     priceRange: price ? `THB ${price}` : SITE_CONFIG.business.priceRange,
     provider: { "@id": absoluteUrl("/#organization") },
+    // [E-E-A-T]: ระบุตัวตนผู้เชี่ยวชาญ (Expert) เป็นผู้ดูแลหลักของบริการนี้
+    author: { "@id": absoluteUrl("/#expert") },
+    award: "Technical SEO Excellence 2026",
+    knowsAbout: [
+      "Next.js Performance Optimization",
+      "Technical SEO Architecture",
+      "AI Search Engines (GEO/AEO)",
+      "High-Traffic Digital Infrastructure",
+    ],
     offers: offerNode,
     aggregateRating: ratingNode,
     review: reviewNode,

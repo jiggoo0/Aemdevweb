@@ -16,7 +16,7 @@ const AccordionItem = ({
 }) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn("border-b border-[var(--foreground)]/10", className)}
+    className={cn("border-b border-[var(--border)]", className)}
     {...props}
   />
 );
@@ -34,13 +34,13 @@ const AccordionTrigger = ({
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "flex flex-1 items-center justify-between py-6 font-black uppercase italic transition-all hover:text-[var(--brand-primary)] [&[data-state=open]>svg]:rotate-180",
+        "flex flex-1 items-center justify-between py-6 text-left leading-snug font-black uppercase italic transition-all hover:text-[var(--color-brand-primary)] [&[data-state=open]>svg]:rotate-180",
         className,
       )}
       {...props}
     >
       {children}
-      <ChevronDown className="h-4 w-4 shrink-0 opacity-50 transition-transform duration-200" />
+      <ChevronDown className="text-text-muted h-4 w-4 shrink-0 transition-transform duration-300" />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 );

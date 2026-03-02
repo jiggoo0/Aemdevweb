@@ -205,7 +205,7 @@ const CORPORATE_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> 
       <DynamicFAQ
         items={data.faqs}
         title="Executive_FAQ"
-        description="รวบรวมข้อมูลเชิงเทคนิคและมาตรฐานการดำเนินงานเพื่อความโปร่งใสสูงสุด"
+        description="ฐานข้อมูลเชิงเทคนิคและมาตรฐานการปฏิบัติงานระดับสากล เพื่อความโปร่งใสและประสิทธิภาพสูงสุด"
         className="py-24"
       />
     </section>

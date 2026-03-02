@@ -19,25 +19,34 @@ export function Callout({ children, type = "info", icon }: CalloutProps) {
   if (!children) return null;
 
   const styles = {
-    info: "border-brand-primary bg-brand-primary/5 text-text-primary",
-    warning: "border-yellow-500/50 bg-yellow-500/5 text-yellow-200",
-    success: "border-emerald-500/50 bg-emerald-500/5 text-emerald-200",
-    danger: "border-red-500/50 bg-red-500/5 text-red-200",
+    info: "border-[var(--border)] bg-surface-offset/40 text-text-primary",
+    warning: "border-amber-500/20 bg-amber-500/5 text-amber-600 dark:text-amber-400",
+    success: "border-emerald-500/20 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400",
+    danger: "border-rose-500/20 bg-rose-500/5 text-rose-600 dark:text-rose-400",
+  };
+
+  const iconColors = {
+    info: "text-[var(--color-brand-primary)]",
+    warning: "text-amber-500",
+    success: "text-emerald-500",
+    danger: "text-rose-500",
   };
 
   return (
     <div
       className={cn(
-        "rounded-card my-8 flex gap-4 border p-6 backdrop-blur-md transition-all duration-500",
+        "my-8 flex gap-5 rounded-2xl border p-6 backdrop-blur-sm transition-all duration-500 md:gap-6 md:p-8",
         styles[type],
       )}
     >
       {icon && (
-        <div className="mt-1 shrink-0">
+        <div className={cn("mt-1 shrink-0", iconColors[type])}>
           <IconRenderer name={icon} size={22} strokeWidth={2.5} />
         </div>
       )}
-      <div className="text-base leading-relaxed font-medium italic opacity-90">{children}</div>
+      <div className="text-base leading-relaxed font-medium text-balance md:text-lg">
+        {children}
+      </div>
     </div>
   );
 }

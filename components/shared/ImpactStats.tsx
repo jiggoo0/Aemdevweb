@@ -185,14 +185,14 @@ const MetricCard = ({
               </span>
             </div>
           </div>
-          <p className="text-text-primary group-hover:text-brand-primary text-sm font-black tracking-[0.2em] uppercase italic transition-colors">
+          <p className="text-text-primary group-hover:text-brand-primary text-sm leading-relaxed font-black tracking-[0.1em] uppercase italic transition-colors md:text-base">
             {stat.label}
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="bg-border/50 group-hover:bg-brand-primary/20 h-px w-full transition-all duration-700" />
-          <p className="text-text-muted font-mono text-[9px] leading-relaxed tracking-widest uppercase opacity-60">
+          <p className="text-text-muted font-mono text-[10px] leading-relaxed tracking-wider uppercase opacity-60">
             {stat.description}
           </p>
         </div>

@@ -104,12 +104,15 @@ export const seoAgencyService: TemplateMasterData = {
   ],
 
   keywords: [
-    "รับทำ SEO สายขาว",
-    "บริษัทรับทำ SEO",
-    "ปรับปรุงเว็บไซต์ติดหน้าแรก",
-    "Technical SEO Specialist",
-    "SEO Audit เว็บไซต์",
-    "Content Marketing SEO",
+    "รับทำ SEO สายขาว 2026",
+    "Technical SEO Specialist Thailand",
+    "ดันอันดับ Google ด้วย AI Search Optimization",
+    "นายเอ็มซ่ามากส์ SEO Expert",
+    "รับแก้ไขปัญหาเว็บไซต์ไม่ติดอันดับ",
+    "SEO Next.js 16 Architecture",
+    "AEMZA MACKS SEO Authority",
+    "จ้างทำ SEO รายเดือน เห็นผลจริง",
+    "โครงสร้างพื้นฐานเว็บไซต์เพื่อ SEO",
   ],
 
   priority: 1,

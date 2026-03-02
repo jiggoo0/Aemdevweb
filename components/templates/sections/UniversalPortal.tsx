@@ -8,77 +8,88 @@
  */
 
 import { memo } from "react";
+import Link from "next/link";
 import type { BaseTemplateProps } from "@/types";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 const UniversalPortal = ({ data }: BaseTemplateProps) => {
-  const { primaryAction, secondaryAction, theme: _theme } = data;
+  const { primaryAction, secondaryAction } = data;
 
-  // Use a generic title/description if the main ones are too long or not fitting
-  const portalTitle = `Ready to Elevate ${data.category}?`;
-  const portalDescription = `Take the next step. Our specialists are ready to assist you with tailored solutions that drive results.`;
+  // [CONTENT_STRATEGY]: Professional & Engaging Copy
+  const portalTitle = data.category
+    ? `พร้อมยกระดับธุรกิจ ${data.category} ของคุณหรือยัง?`
+    : "พร้อมยกระดับธุรกิจของคุณสู่มาตรฐานสากลหรือยัง?";
+
+  const portalDescription =
+    "ก้าวไปอีกขั้นกับโซลูชันที่ออกแบบมาเพื่อผลลัพธ์ที่จับต้องได้ ทีมผู้เชี่ยวชาญของเราพร้อมให้คำปรึกษาและสนับสนุนคุณในทุกขั้นตอน";
 
   return (
     <section
       id="universal-portal"
-      className="relative overflow-hidden border-t bg-[var(--surface-main)] py-24 text-[var(--text-primary)] sm:py-32"
+      className="relative overflow-hidden border-t bg-[var(--surface-main)] py-24 text-[var(--text-primary)] sm:py-32 lg:py-40"
     >
       {/* Visual Infrastructure Layer */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: "radial-gradient(var(--color-brand-primary) 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
-        <div className="absolute bottom-0 left-1/2 h-[500px] w-full -translate-x-1/2 transform-gpu rounded-full bg-[var(--color-brand-primary)]/10 blur-[120px]" />
+        <div className="absolute bottom-0 left-1/2 h-[500px] w-full -translate-x-1/2 transform-gpu rounded-full bg-[var(--color-brand-primary)]/5 blur-[120px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         {/* Authority Marker */}
-        <div className="mb-10 flex flex-col items-center gap-3">
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[var(--border)] bg-[var(--surface-card)] text-[var(--color-brand-primary)] shadow-sm ring-1 ring-[var(--color-brand-primary)]/20 backdrop-blur-sm">
-            <IconRenderer name="Target" size={48} />
+        <div className="mb-12 flex flex-col items-center gap-4">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--border)] bg-[var(--surface-card)] text-[var(--color-brand-primary)] shadow-sm ring-1 ring-[var(--color-brand-primary)]/20 backdrop-blur-sm md:h-20 md:w-20">
+            <IconRenderer name="Target" size={32} className="md:size-10" />
           </div>
-          <span className="font-mono text-[10px] font-black tracking-[0.5em] text-[var(--color-brand-primary)] uppercase opacity-80">
-            พร้อมยกระดับธุรกิจ
+          <span className="font-sans text-[10px] font-bold tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-80 md:text-[11px]">
+            Ready to Elevate
           </span>
         </div>
 
-        <h2 className="mb-8 text-4xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic sm:text-6xl lg:text-7xl">
+        <h2 className="mb-10 text-4xl leading-[1.2] font-black tracking-tighter text-[var(--text-primary)] uppercase italic sm:text-6xl lg:text-7xl">
           {portalTitle}
         </h2>
 
-        <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed font-semibold text-[var(--text-secondary)] italic opacity-80 md:text-xl">
+        <p className="mx-auto mb-16 max-w-3xl text-lg leading-relaxed font-medium text-[var(--text-secondary)] opacity-90 md:text-2xl">
           “{portalDescription}”
         </p>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
-          {primaryAction && (
+        <div className="flex flex-wrap items-center justify-center gap-6">
+          <Button
+            asChild
+            size="lg"
+            className="h-16 rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-widest text-white uppercase shadow-lg transition-all hover:scale-105 hover:shadow-xl active:scale-95 md:h-18 md:px-14 md:text-xs"
+          >
+            <Link href={primaryAction?.href || SITE_CONFIG.links.line}>
+              <IconRenderer
+                name={primaryAction?.icon || "Zap"}
+                className="mr-3 h-5 w-5 md:h-6 md:w-6"
+              />
+              {primaryAction?.label || "ปรึกษาผู้เชี่ยวชาญ"}
+            </Link>
+          </Button>
+
+          {(secondaryAction || data.category) && (
             <Button
-              href={primaryAction.href}
-              size="lg"
-              className="shadow-md-md h-16 rounded-2xl bg-[var(--color-brand-primary)] px-10 text-[11px] font-black tracking-widest text-white uppercase italic"
-              variant="default"
-            >
-              <IconRenderer name={primaryAction.icon || "Zap"} className="mr-2 h-5 w-5" />
-              {primaryAction.label}
-            </Button>
-          )}
-          {secondaryAction && (
-            <Button
-              href={secondaryAction.href}
+              asChild
               size="lg"
               variant="outline"
-              className="h-16 rounded-2xl border-[var(--border)] bg-[var(--surface-card)]/50 px-10 text-[11px] font-black tracking-widest text-[var(--text-primary)] uppercase italic backdrop-blur-sm hover:border-[var(--color-brand-primary)]/60"
+              className="h-16 rounded-2xl border-[var(--border)] bg-[var(--surface-card)]/50 px-10 text-[11px] font-black tracking-widest text-[var(--text-primary)] uppercase backdrop-blur-sm transition-all hover:border-[var(--color-brand-primary)]/50 hover:bg-[var(--surface-offset)] md:h-18 md:px-14 md:text-xs"
             >
-              <IconRenderer
-                name={secondaryAction.icon || "MessageCircle"}
-                className="mr-2 h-5 w-5"
-              />
-              {secondaryAction.label}
+              <Link href={secondaryAction?.href || "#"}>
+                <IconRenderer
+                  name={secondaryAction?.icon || "MessageCircle"}
+                  className="mr-3 h-5 w-5 md:h-6 md:w-6"
+                />
+                {secondaryAction?.label || "ดูรายละเอียดบริการ"}
+              </Link>
             </Button>
           )}
         </div>

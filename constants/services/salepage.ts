@@ -92,11 +92,14 @@ export const salePageService: TemplateMasterData = {
   ],
 
   keywords: [
-    "รับทำ Sale Page ยิงแอด",
-    "ทำ Landing Page TikTok",
-    "ติดตั้ง Conversion API",
-    "Sale Page Next.js",
-    "เว็บหน้าเดียว ขายของออนไลน์",
+    "รับทำ Sale Page ยิงแอด 2026",
+    "Sale Page Next.js 16 โหลดไวที่สุด",
+    "ติดตั้ง Conversion API (CAPI) แม่นยำ 100%",
+    "Landing Page ปิดการขายอัตโนมัติ",
+    "นายเอ็มซ่ามากส์ Sale Page Specialist",
+    "รับทำหน้าปิดการขาย Facebook TikTok",
+    "เทคนิคยิงแอดให้แม่นด้วย Server-Side Tracking",
+    "AEMDEVWEB Sale Page Engine",
   ],
 
   priority: 1, // สินค้าขายดีอันดับ 1

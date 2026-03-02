@@ -13,8 +13,11 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 7. [x] [Completed] ปรับปรุงระบบ Local SEO (Areas) ให้มีการเชื่อมโยงกับ Services แบบ Dynamic Cross-linking
 8. [x] [Completed] ตรวจสอบ Performance (Core Web Vitals) และปรับปรุง Tailwind 4 Implementation ให้เป็นแบบ Native @theme
 9. [x] [Completed] แก้ไข Build Error (Date/Time conflict) และผ่าน Full Validation (aipc) 100%
-
 10. [x] [Completed] จัดทำกลยุทธ์ Area Template Strategy (77 จังหวัด) และรีแฟคเตอร์ Area Nodes ให้เป็นมาตรฐานเดียวกัน (defineAreaNode)
+11. [x] [Completed] ปรับปรุง UI/UX (Typography & Spacing) สำหรับ Hero, Insights และ Portal เพื่อรองรับภาษาไทยระดับ Professional และลด Visual Clutter บนมือถือ
+12. [x] [Completed] จัดทำฐานข้อมูลยุทธศาสตร์ SEO ปี 2026 (SEO Strategy Database) จากแหล่งข้อมูลผู้เชี่ยวชาญ เพื่อเป็นแนวทางทางเทคนิคและกลยุทธ์สำหรับโครงการ
+13. [x] [Completed] ยกระดับ E-E-A-T และ Identity Synchronization เชื่อมโยงตัวตนผู้เชี่ยวชาญ (#expert) เข้ากับทุกบทความ, บริการ และผลงานผ่าน AuthorCard และ Linked Schema
+14. [x] [Completed] ฉีดกลยุทธ์ Strategic Keywords และ aiSignal (GEO/AEO Optimization) เข้าสู่ระบบ Metadata และ Schema.org ทั่วทั้งไซต์ เพื่อครองอันดับบน AI Answer Engines
 
 ## 🛠️ Tech Stack Status:
 
@@ -26,6 +29,8 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 
 ## 📝 Recent Changes & AI Instructions:
 
-- [AI Note] แก้ไข Prerender Error ใน SaleFooter, FlashSaleTimer, AuditReportGenerator
-- [AI Note] ระบบอยู่ในสถานะ Flagship Ready พร้อมสำหรับการ Deploy
+- [AI Note] เพิ่ม AuthorCard Component เพื่อแสดงตัวตนเจ้าของผลงานและสร้างความน่าเชื่อถือระดับ Specialist
+- [AI Note] รีแฟคเตอร์ระบบ Schema.org ใน lib/schema.ts ให้มีการเชื่อมโยง Graph (@id) ระหว่าง Person, Organization และ Service อย่างสมบูรณ์
+- [AI Note] อัปเกรด Metadata Generator ให้รองรับการฉีด Keywords แบบเจาะจงและ Author Identity ตามมาตรฐาน E-E-A-T
+- [AI Note] ติดตั้งระบบ aiSignal ใน lib/data-merger.ts เพื่อป้อนข้อมูลสรุปที่เหมาะสมให้กับ AI Crawlers และ Answer Engines (Gemini, Perplexity)
 - [AI Note] บังคับใช้นโยบาย "Skill Reference" จาก Home เสมอ

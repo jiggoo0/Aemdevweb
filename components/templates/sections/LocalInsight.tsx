@@ -45,19 +45,19 @@ export const LocalInsight = ({
                 </span>
               </div>
 
-              <h2 className="text-5xl leading-tight font-black tracking-tight text-[var(--text-primary)] sm:text-6xl md:text-7xl">
+              <h2 className="text-4xl leading-[1.2] font-black tracking-tight text-[var(--text-primary)] sm:text-5xl md:text-6xl lg:text-7xl">
                 Regional <span className="text-[var(--color-brand-primary)]">Insight.</span>
               </h2>
 
-              <div className="border-l-[6px] border-[var(--color-brand-primary)] pl-8 md:pl-12">
-                <p className="text-xl leading-relaxed font-medium text-[var(--text-primary)] md:text-2xl">
+              <div className="border-l-[6px] border-[var(--color-brand-primary)] pl-6 md:pl-10">
+                <p className="text-lg leading-relaxed font-medium text-[var(--text-primary)] md:text-xl lg:text-2xl">
                   {insight}
                 </p>
               </div>
             </div>
 
             {/* Matrix Display Units */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 md:gap-6">
               {[
                 {
                   label: "Digital โอกาสเติบโต",
@@ -77,17 +77,19 @@ export const LocalInsight = ({
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="rounded-card shadow-pro-sm relative overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] p-8 transition-all hover:border-[var(--color-brand-primary)]/50"
+                  className="shadow-pro-sm relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface-card)] p-6 transition-all hover:border-[var(--color-brand-primary)]/40 hover:bg-[var(--surface-offset)]/50 md:p-8"
                 >
-                  <span className="mb-4 block font-sans text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase">
+                  <span className="mb-3 block font-sans text-[9px] font-bold tracking-widest text-[var(--text-muted)] uppercase opacity-70">
                     {item.label}
                   </span>
                   <div className="flex items-end gap-2">
-                    <span className={cn("text-4xl font-black tracking-tighter", item.color)}>
+                    <span
+                      className={cn("text-3xl font-black tracking-tighter md:text-4xl", item.color)}
+                    >
                       {item.val}
                     </span>
                     {i === 2 && (
-                      <span className="mb-1 text-xs font-bold text-[var(--text-muted)] opacity-30">
+                      <span className="mb-1 text-[10px] font-bold text-[var(--text-muted)] opacity-30">
                         /100
                       </span>
                     )}
@@ -99,18 +101,18 @@ export const LocalInsight = ({
 
           {/* --- DIAGNOSTIC_NODE: Pain Points --- */}
           <div className="lg:col-span-5">
-            <div className="rounded-section shadow-pro-xl relative overflow-hidden border border-[var(--border)] bg-[var(--surface-card)] p-10 md:p-14">
-              <span className="mb-12 block font-sans text-[11px] font-bold tracking-[0.3em] text-[var(--text-muted)] uppercase">
+            <div className="shadow-pro-xl relative overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-[var(--surface-card)] p-8 md:p-12 lg:p-14">
+              <span className="mb-10 block font-sans text-[10px] font-bold tracking-[0.3em] text-[var(--text-muted)] uppercase opacity-60 md:text-[11px]">
                 Key Market Challenges
               </span>
 
-              <div className="space-y-8">
+              <div className="space-y-6 md:space-y-8">
                 {painPoints?.map((point, idx) => (
-                  <div key={idx} className="group flex items-start gap-6">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)] transition-all group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
-                      <IconRenderer name="CheckCircle2" size={20} />
+                  <div key={idx} className="group flex items-start gap-5 md:gap-6">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 text-[var(--color-brand-primary)] transition-all group-hover:bg-[var(--color-brand-primary)] group-hover:text-white md:h-10 md:w-10">
+                      <IconRenderer name="CheckCircle2" size={18} className="md:size-20" />
                     </div>
-                    <p className="text-lg leading-relaxed font-medium text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)]">
+                    <p className="text-base leading-relaxed font-medium text-[var(--text-secondary)] transition-colors group-hover:text-[var(--text-primary)] md:text-lg">
                       {point}
                     </p>
                   </div>
@@ -118,9 +120,9 @@ export const LocalInsight = ({
               </div>
 
               {/* Secure Signature */}
-              <div className="mt-16 border-t border-[var(--border)] pt-10">
-                <p className="font-sans text-[10px] font-medium tracking-wide text-[var(--text-muted)] opacity-50">
-                  Data-driven strategy verified for regional growth standards.
+              <div className="mt-12 border-t border-[var(--border)] pt-8 md:mt-16 md:pt-10">
+                <p className="font-sans text-[9px] font-medium tracking-widest text-[var(--text-muted)] uppercase opacity-40 md:text-[10px]">
+                  Verified Strategic Regional Growth Protocol
                 </p>
               </div>
             </div>
