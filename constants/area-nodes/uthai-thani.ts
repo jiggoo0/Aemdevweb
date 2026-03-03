@@ -8,7 +8,8 @@ export const uthaiThaniNode = defineAreaNode(localAuthorityService, {
   province: "อุทัยธานี",
   region: "Central",
   priority: 80,
-  title: "วางระบบเว็บไซต์ อุทัยธานี | ออกแบบเว็บท่องเที่ยววิถีสโลว์ไลฟ์และสินค้าภูมิปัญญา",
+  title:
+    "รับทำเว็บไซต์ อุทัยธานี | โหลดเร็วพิเศษ ออกแบบเว็บท่องเที่ยววิถีสโลว์ไลฟ์และสินค้าภูมิปัญญา",
   description:
     "เปลี่ยนความสงบของอุทัยธานีให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องธรรมชาติและวิถีลุ่มน้ำสะแกกรัง",
   heroImage: "/images/areas/uthai-thani-node.webp",

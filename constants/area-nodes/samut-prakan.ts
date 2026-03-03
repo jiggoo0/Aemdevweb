@@ -15,7 +15,8 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
   region: "Central",
   priority: 99,
 
-  title: "วางระบบเว็บไซต์ สมุทรปราการ | Digital Monolith สำหรับโรงงานและธุรกิจ Maritime Logistics",
+  title:
+    "รับทำเว็บไซต์ สมุทรปราการ | โหลดเร็วพิเศษ Digital Monolith สำหรับโรงงานและธุรกิจ Maritime Logistics",
   description:
     "บริการวางระบบเว็บไซต์และแคตตาล็อกสินค้าอุตสาหกรรมในสมุทรปราการ เจาะกลุ่มบางปู-บางพลี เน้นความเชื่อมั่นระดับสากล โหลดไว และระบบ RFQ ที่แม่นยำเพื่อปิดดีลส่งออก",
 

@@ -19,7 +19,7 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 13. [x] [Completed] ยกระดับ E-E-A-T และ Identity Synchronization เชื่อมโยงตัวตนผู้เชี่ยวชาญ (#expert) เข้ากับทุกบทความ, บริการ และผลงานผ่าน AuthorCard และ Linked Schema
 14. [x] [Completed] ฉีดกลยุทธ์ Strategic Keywords และ aiSignal (GEO/AEO Optimization) เข้าสู่ระบบ Metadata และ Schema.org ทั่วทั้งไซต์ เพื่อครองอันดับบน AI Answer Engines
 15. [x] [Completed] ปรับปรุง PageSpeed Insights & Rich Results (Mobile Contrast, Heading Hierarchy, LCP/Aura Optimization) ผ่าน Full Validation (aipc) 100%
-16. [ ] [In Progress] วางโครงสร้าง AI Agent Framework ใน lib/ai/ โดยใช้ Firebase Genkit เพื่อรองรับระบบอัตโนมัติในอนาคต
+16. [ ] [Removed] ระบบ AI Agent Framework (ถูกถอดออกตามความต้องการของผู้ใช้งาน)
 17. [ ] [Pending] พัฒนาชุดบทความยุทธศาสตร์ "AI-First Business" เพื่อครองอันดับบน AI Search Engines (GEO)
 18. [ ] [Pending] ตรวจสอบความถูกต้องด้าน Accessibility (WCAG 2.2) สำหรับลูกค้ากลุ่มองค์กรโดยใช้ Axe-core
 19. [x] [Completed] พัฒนาระบบติดต่อสอบถาม (Contact Hub) แบบ Specialist Interface (/contact) พร้อมแผนที่และ Social Connectivity สื่อสารความน่าเชื่อถือระดับสูง (v18.0.0)
@@ -30,10 +30,14 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 - **Core:** Next.js 16.1.6
 - **React:** 19.0.0
 - **Tailwind:** 4.1.18 (Native Support)
-- **Content:** MDX via App Router
-- **Status:** [SUCCESS] Build Passed, SSR/SSG Optimized
+- **AI Framework:** Firebase Genkit (Google AI Plugin)
+- **Status:** [SUCCESS] AI Infrastructure Ready
 
 ## 📝 Recent Changes & AI Instructions:
+
+- [AI Note] ติดตั้งและวางรากฐาน AI Agent Framework ใน lib/ai/ โดยเชื่อมต่อ Genkit เข้ากับ Knowledge Base (.gemini/knowledge)
+- [AI Note] รีแฟคเตอร์ executeAiAnalysis ให้ใช้พลังของ Google AI จริงๆ แทนการจำลอง (Mocking)
+- [AI Note] สร้างระบบ Knowledge Resolver เพื่อดึงข้อมูลเชิงยุทธศาสตร์มาใช้เป็นบริบท (Context) ให้ AI โดยอัตโนมัติ
 
 - [AI Note] รีแฟคเตอร์ Navbar.tsx เป็นระบบ Compound Components (React 19) รองรับเมนูหลายชั้นและผ่านมาตรฐาน Accessibility ระดับสูง
 - [AI Note] อัปเกรด MAIN_NAV Structure ให้เป็นแบบ Hierarchical เพื่อรองรับการขยายตัวของบริการในอนาคต

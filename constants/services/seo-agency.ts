@@ -1,6 +1,6 @@
 /**
  * [SERVICE_NODE]: SEO_AUTHORITY_ENGINE v18.0.2 (HUMAN_CENTRIC_PATCH)
- * [STRATEGY]: Business Partnership | Sustainable Growth | Reliable Emerald Theme
+ * [STRATEGY]: Business Partnership | เติบโตอย่างยั่งยืน | Reliable Emerald Theme
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,7 +8,7 @@ import type { TemplateMasterData } from "@/types";
 
 export const seoAgencyService: TemplateMasterData = {
   id: "AEM-SVC-SEO-07",
-  title: "Technical SEO & Authority Building | สร้างรากฐานธุรกิจให้เติบโตบน Google อย่างยั่งยืน",
+  title: "บริการทำ SEO ยุคใหม่ | สร้างรากฐานธุรกิจให้เติบโตบน Google อย่างยั่งยืน",
   description:
     "การทำ SEO ไม่ใช่แค่เรื่องเทคนิค แต่คือการสร้าง 'ความน่าเชื่อถือ' ให้ธุรกิจของคุณบนโลกออนไลน์ เราช่วยปรับปรุงโครงสร้างเว็บไซต์และเนื้อหา เพื่อให้ Google เข้าใจว่าคุณคือตัวจริงในอุตสาหกรรม และส่งลูกค้าคุณภาพมาหาคุณในวันที่เขาพร้อมตัดสินใจ",
 
@@ -36,7 +36,7 @@ export const seoAgencyService: TemplateMasterData = {
 
   // [TRUST_SIGNAL]
   clientTrust:
-    "Sustainable Growth: เน้นผลลัพธ์ระยะยาวด้วยเทคนิคสายขาว (White Hat) ที่ปลอดภัย 100% ไม่เสี่ยงโดนแบน",
+    "เติบโตอย่างยั่งยืน: เน้นผลลัพธ์ระยะยาวด้วยเทคนิคสายขาว (White Hat) ที่ปลอดภัย 100% ไม่เสี่ยงโดนแบน",
 
   benefits: [
     "Long-Term Asset: เปลี่ยนค่าโฆษณาที่จ่ายแล้วหมดไป เป็นการลงทุนสร้าง 'สินทรัพย์ดิจิทัล' ที่จะอยู่กับธุรกิจคุณตลอดไป ยิ่งนานวันต้นทุนต่อลูกค้าใหม่ยิ่งลดลง",

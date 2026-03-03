@@ -8,7 +8,7 @@ export const phetchabunNode = defineAreaNode(localAuthorityService, {
   province: "เพชรบูรณ์",
   region: "North",
   priority: 85,
-  title: "วางระบบเว็บไซต์ เพชรบูรณ์ | ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
+  title: "รับทำเว็บไซต์ เพชรบูรณ์ | โหลดเร็วพิเศษ ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
   description:
     "เปลี่ยนไอหมอกเขาค้อให้เป็นยอดจองตรง ด้วยเว็บไซต์ที่เน้น Visual สวยงามและระบบจองที่ลื่นไหล",
   heroImage: "/images/areas/phetchabun-node.webp",

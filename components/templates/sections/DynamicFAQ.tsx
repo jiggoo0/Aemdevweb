@@ -86,7 +86,7 @@ export const DynamicFAQ = memo(
               </div>
 
               <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl">
-                Technical <br /> <span className="text-[var(--brand-primary)]">Insights.</span>
+                Expert <br /> <span className="text-[var(--brand-primary)]">Insights.</span>
               </h2>
 
               <div className="border-l-[6px] border-[var(--brand-primary)]/40 pl-8">

@@ -8,7 +8,7 @@ export const surinNode = defineAreaNode(localAuthorityService, {
   province: "สุรินทร์",
   region: "Northeast",
   priority: 84,
-  title: "วางระบบเว็บไซต์ สุรินทร์ | ยกระดับแบรนด์ผ้าไหมพรีเมียมและข้าวหอมมะลิโลก",
+  title: "รับทำเว็บไซต์ สุรินทร์ | โหลดเร็วพิเศษ ยกระดับแบรนด์ผ้าไหมพรีเมียมและข้าวหอมมะลิโลก",
   description:
     "เปลี่ยนภูมิปัญญาผ้าไหมสุรินทร์ให้เป็นแบรนด์ดิจิทัลที่น่าดึงดูด ด้วยดีไซน์ประณีตและระบบจัดการสินค้าที่ทันสมัย",
   heroImage: "/images/areas/surin-node.webp",

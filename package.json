@@ -62,10 +62,6 @@
   "devDependencies": {
     "@axe-core/react": "^4.11.1",
     "@eslint/js": "^9.39.2",
-    "@genkit-ai/ai": "^1.29.0",
-    "@genkit-ai/core": "^1.29.0",
-    "@genkit-ai/dotprompt": "^0.9.12",
-    "@genkit-ai/googleai": "^1.28.0",
     "@img/sharp-wasm32": "^0.34.5",
     "@next/eslint-plugin-next": "16.1.6",
     "@swc/helpers": "^0.5.18",

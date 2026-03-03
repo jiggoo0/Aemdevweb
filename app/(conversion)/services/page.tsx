@@ -26,9 +26,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = constructMetadata({
-  title: "บริการวางระบบเว็บไซต์สำหรับองค์กร (Digital Infrastructure) | เน้น ROI สูงสุด",
+  title: "บริการรับทำเว็บไซต์โหลดเร็วพิเศษและระบบ SEO | เพิ่มยอดขายให้ธุรกิจคุณ",
   description:
-    "โซลูชันระบบเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจ B2B และ SME ยุคใหม่ เน้นโหลดไว เสถียรสูง ติดหน้าแรก Google และปิดการขายได้จริง โดยทีมวิศวกรซอฟต์แวร์",
+    "โซลูชันเว็บไซต์ที่ออกแบบมาเพื่อธุรกิจ B2B และ SME โดยเฉพาะ เน้นโหลดไว ลื่นไหลไม่ค้าง ติดหน้าแรก Google และปิดการขายได้จริง โดยผู้เชี่ยวชาญ",
   path: "/services",
   image: "/images/services/corporate-node.webp",
 });
@@ -72,11 +72,11 @@ export default function ServicesPage() {
 
             <div className="border-brand-primary border-l-4 pl-8 md:pl-14">
               <p className="text-text-secondary max-w-4xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
-                เราไม่ได้แค่เขียนโค้ด แต่เราออกแบบ{" "}
+                เราไม่ได้แค่เขียนโค้ด แต่เราสร้าง{" "}
                 <span className="text-text-primary decoration-brand-primary font-black not-italic underline decoration-4 underline-offset-8">
-                  ระบบสร้างยอดขาย
+                  ระบบช่วยขาย
                 </span>{" "}
-                ที่ทำให้ Google และลูกค้าตัวจริงยอมรับในแบรนด์ของคุณ
+                ที่ทำให้ Google และลูกค้าตัวจริง มั่นใจในแบรนด์ของคุณ
               </p>
             </div>
           </header>

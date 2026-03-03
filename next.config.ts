@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
   // ใช้ Standalone เพื่อประสิทธิภาพสูงสุดบน Vercel และประหยัดพื้นที่ใน Termux
   output: "standalone",
 
-  // เปิดใช้งานฟีเจอร์ขั้นสูงสำหรับ React 19 และ Next 16
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",

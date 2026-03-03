@@ -16,7 +16,8 @@ export const udonThaniNode = defineAreaNode(corporateService, {
   region: "Northeast",
   priority: 95,
 
-  title: "วางระบบเว็บไซต์ อุดรธานี | Digital Hub สำหรับการค้าชายแดนและธุรกิจ Indo-China",
+  title:
+    "รับทำเว็บไซต์ อุดรธานี | โหลดเร็วพิเศษ Digital Hub สำหรับการค้าชายแดนและธุรกิจ Indo-China",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอุดรธานี เจาะกลุ่มธุรกิจนำเข้า-ส่งออก คลินิกพรีเมียม และโลจิสติกส์อาเซียน เน้นความน่าเชื่อถือระดับสากล โหลดไว และครองอันดับหนึ่งในอีสานตอนบน",
 

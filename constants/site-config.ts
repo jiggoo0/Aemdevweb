@@ -19,7 +19,7 @@ export const SITE_CONFIG: SiteConfig = {
   brandName: "AEMDEVWEB",
   siteUrl: "https://www.aemdevweb.com",
   description:
-    "AEMDEVWEB | พาร์ทเนอร์ด้าน Digital Infrastructure สำหรับธุรกิจ B2B และ SME วางระบบ Next.js 16, AI Agent และ Server-Side Tracking เพื่อสร้างยอดขายและ ROI ที่วัดผลได้จริง โดย นายเอ็มซ่ามากส์",
+    "AEMDEVWEB | พาร์ทเนอร์ด้านการทำเว็บไซต์และระบบ SEO สำหรับธุรกิจ B2B และ SME รับทำเว็บไซต์โหลดเร็วพิเศษ และปรับแต่งให้ธุรกิจของคุณถูกแนะนำโดย AI (GEO) เพื่อสร้างยอดขายที่จับต้องได้จริง โดย นายเอ็มซ่ามากส์",
   logo: "/images/logo-main.webp",
 
   // [INFRASTRUCTURE]: Assets must use Relative Paths for Next.js Optimization
@@ -28,11 +28,11 @@ export const SITE_CONFIG: SiteConfig = {
   themeColor: "#ef4444", // Tailwind Red 500 (HEX Standard)
 
   hero: {
-    title: "AEMDEVWEB AI-NATIVE PERFORMANCE ARCHITECTURE",
+    title: "ยกระดับธุรกิจคุณด้วยเว็บไซต์โหลดเร็วพิเศษและ SEO ยุคใหม่",
     description:
-      "ขยายธุรกิจให้โตขึ้น 10 เท่าด้วยเว็บไซต์ที่เร็วระดับเสี้ยววินาทีและระบบ AI Agent อัจฉริยะที่ครองอันดับ 1 ในยุค AI Search 2026 โดย นายเอ็มซ่ามากส์",
-    primaryAction: "เริ่มต้นสร้าง AI Agent",
-    secondaryAction: "วิเคราะห์โซลูชัน 2026",
+      "สร้างความแตกต่างให้ธุรกิจด้วยเว็บไซต์ที่ลื่นไหลไม่ค้าง และเทคนิคทำให้ AI แนะนำธุรกิจคุณ (GEO) เพื่อดึงดูดลูกค้าและเพิ่มยอดขายอย่างยั่งยืนในปี 2026 ดูแลโดย นายเอ็มซ่ามากส์",
+    primaryAction: "ทักแชทปรึกษาฟรี",
+    secondaryAction: "ดูผลงานและบริการ",
   },
 
   persona: {
@@ -46,20 +46,18 @@ export const SITE_CONFIG: SiteConfig = {
    */
   keywords: [
     "AEMZA MACKS",
-    "นายเอ็มซ่ามากส์ AEMDEVWEB",
-    "AI Agent Integration Thailand",
-    "B2B Web Development",
-    "วางระบบเว็บไซต์องค์กร",
-    "Next.js 16 Specialist",
+    "นายเอ็มซ่ามากส์",
+    "รับทำเว็บไซต์บริษัท ราคาคุ้มค่า",
+    "จ้างทำเว็บ SEO ติดหน้าแรก Google",
+    "ระบบพนักงาน AI ช่วยขายของ",
+    "รับทำเว็บไซต์โหลดเร็วพิเศษ",
+    "จ้างทำเว็บไซต์ Next.js มืออาชีพ",
+    "วิธีทำให้ AI แนะนำธุรกิจคุณ (GEO)",
     "รับทำระบบ AI สำหรับธุรกิจ",
-    "Generative Engine Optimization (GEO)",
-    "พัฒนาเว็บไซต์ประสิทธิภาพสูง 2026",
-    "Digital Transformation SME",
-    "Server-Side Tracking GTM",
-    "AI Search Optimization Expert",
-    "โครงสร้างพื้นฐานดิจิทัล",
-    "อลงกรณ์ ยมเกิด",
-    "Web Infrastructure Specialist",
+    "พัฒนาเว็บแอปพลิเคชันเทคโนโลยีล่าสุด",
+    "บริการทำ SEO ยุคใหม่",
+    "โปรโมทธุรกิจบน Google Gemini",
+    "ผู้เชี่ยวชาญด้านเว็บไซต์และ SEO",
   ],
 
   project: {

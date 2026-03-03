@@ -92,9 +92,9 @@ export const AEMSpecialistHero = memo(() => {
           {/* Core Vision: Executive B2B Copywriting */}
           <div className="mb-20 flex max-w-4xl flex-col items-center gap-10">
             <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
-              “ยกระดับธุรกิจ B2B และ SME ของคุณด้วย{" "}
-              <span className="text-text-primary">Digital Infrastructure</span> ระดับสากล <br />
-              ลดต้นทุน เพิ่มยอดขาย และสร้าง ROI ที่จับต้องได้จริง 100%”
+              “ยกระดับธุรกิจของคุณให้เหนือกว่าคู่แข่งด้วย{" "}
+              <span className="text-text-primary">เว็บไซต์โหลดเร็วพิเศษ</span> <br />
+              ที่ลื่นไหล รองรับลูกค้าได้มหาศาล และเพิ่มยอดขายได้จริง”
             </p>
             <div className="bg-border/20 relative h-px w-48 overflow-hidden">
               <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full" />
@@ -120,11 +120,11 @@ export const AEMSpecialistHero = memo(() => {
             <Button
               size="lg"
               variant="outline"
-              href="/ai-consultant"
+              href="/services"
               className="border-brand-primary/30 hover:border-brand-primary bg-surface-card/50 hover:bg-brand-primary/5 h-20 min-w-[320px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-md transition-all duration-500"
             >
-              <IconRenderer name="Activity" size={18} className="text-brand-primary mr-4" />
-              วิเคราะห์ธุรกิจด้วย AI (ฟรี)
+              <IconRenderer name="ArrowRight" size={18} className="text-brand-primary mr-4" />
+              ดูบริการทั้งหมดของเรา
             </Button>
           </div>
         </div>

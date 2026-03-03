@@ -16,7 +16,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
   region: "Central",
   priority: 94,
 
-  title: "วางระบบเว็บไซต์ อยุธยา | Digital Infrastructure สำหรับโรงงาน High-Tech และธุรกิจมรดกโลก",
+  title: "วางระบบเว็บไซต์ อยุธยา | ระบบเว็บไซต์และ SEO สำหรับโรงงาน High-Tech และธุรกิจมรดกโลก",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐาน Enterprise ในอยุธยา เจาะกลุ่มนิคมโรจนะ-ไฮเทค เน้นความมั่นคงระดับวิศวกรรม โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งในเมืองอุตสาหกรรม",
 

@@ -16,7 +16,7 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
   priority: 94,
 
   title:
-    "วางระบบเว็บไซต์ ฉะเชิงเทรา | Digital Infrastructure สำหรับโรงงาน EEC และโครงการ Smart Living",
+    "วางระบบเว็บไซต์ ฉะเชิงเทรา | ระบบเว็บไซต์และ SEO สำหรับโรงงาน EEC และโครงการ Smart Living",
   description:
     "บริการวางระบบเว็บไซต์มาตรฐานสูงในฉะเชิงเทรา เจาะกลุ่มโรงงานบางปะกงและอสังหาฯ แนวราบ เน้นความปลอดภัยข้อมูลระดับวิศวกรรม โหลดไว และครองอันดับหนึ่งในเขตเศรษฐกิจพิเศษ",
 

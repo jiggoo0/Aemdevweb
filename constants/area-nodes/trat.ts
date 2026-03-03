@@ -16,7 +16,8 @@ export const tratNode = defineAreaNode(hotelResortService, {
   region: "East",
   priority: 92,
 
-  title: "วางระบบเว็บไซต์ ตราด | Digital Architecture สำหรับรีสอร์ตหรูและธุรกิจท่องเที่ยวหมู่เกาะ",
+  title:
+    "รับทำเว็บไซต์ ตราด | โหลดเร็วพิเศษ Digital Architecture สำหรับรีสอร์ตหรูและธุรกิจท่องเที่ยวหมู่เกาะ",
   description:
     "บริการวางระบบเว็บไซต์ระดับสากลในตราด เกาะช้าง และเกาะกูด เน้นดีไซน์ Island Luxury โหลดไวแม้ในพื้นที่จำกัด และระบบจองตรงที่ช่วยรักษาผลกำไร 100%",
 

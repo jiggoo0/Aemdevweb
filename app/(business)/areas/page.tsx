@@ -32,16 +32,16 @@ export const viewport: Viewport = {
  * สร้าง Metadata เชิงรุกเพื่อดักจับ High-Intent Keywords รายภูมิภาค
  */
 export const metadata: Metadata = constructMetadata({
-  title: "พื้นที่ให้บริการและโครงสร้างพื้นฐานดิจิทัลรายจังหวัด | AEMDEVWEB",
+  title: "พื้นที่ให้บริการรับทำเว็บไซต์และ SEO ครอบคลุมทั่วไทย | AEMDEVWEB",
   description:
-    "วิศวกรรมการออกแบบเว็บไซต์และวางโครงสร้าง Local SEO เพื่อการครองพื้นที่การค้นหาในระดับภูมิภาค โดยทีมงาน Technical SEO Specialist",
+    "บริการรับทำเว็บไซต์โหลดเร็วพิเศษและวางแผน Local SEO เพื่อเพิ่มโอกาสในการค้นหาและสร้างยอดขายรายจังหวัด โดยผู้เชี่ยวชาญตัวจริง",
   path: "/areas",
   keywords: [
-    "วางระบบเว็บไซต์องค์กร",
-    "Local SEO Thailand Specialist",
-    "บริษัทรับวางระบบเว็บไซต์ มืออาชีพ",
-    "B2B Digital Infrastructure",
-    ...AREA_NODES.map((area) => `วางระบบเว็บไซต์ ${area.province}`),
+    "รับทำเว็บไซต์รายจังหวัด",
+    "Local SEO Thailand",
+    "บริษัทรับทำเว็บไซต์พรีเมียม",
+    "เพิ่มยอดขายรายพื้นที่",
+    ...AREA_NODES.map((area) => `รับทำเว็บไซต์ ${area.province}`),
   ],
 });
 

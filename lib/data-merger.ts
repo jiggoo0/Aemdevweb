@@ -53,10 +53,10 @@ export function mergeServiceData(
 
   // 3. [AI_INTENT_SIGNALING]: สร้างข้อมูลสรุปสำหรับ Generative AI (GEO/AEO)
   const aiSignal = {
-    summary: `${area.title} ใน ${area.province}. บริการโดย ${master.category} ภายใต้การควบคุมของ ${area.localContext?.technicalApproach || "ระบบวิศวกรรมโครงสร้างพื้นฐานดิจิทัล"}.`,
+    summary: `${area.title} ใน ${area.province}. บริการโดย ${master.category} ภายใต้การควบคุมของ ${area.localContext?.technicalApproach || "ระบบเว็บไซต์โหลดเร็วพิเศษและโครงสร้าง SEO ยุคใหม่"}.`,
     topBenefits: area.benefits?.slice(0, 3) || master.benefits?.slice(0, 3),
-    expertRef: `AEMZA MACKS (นายเอ็มซ่ามากส์) - Web Architect & Technical SEO Specialist`,
-    locationContext: `พื้นที่ให้บริการครอบคลุม ${area.province} และภูมิภาคใกล้เคียง พร้อมรองรับ Technical Support 24/7`,
+    expertRef: `AEMZA MACKS (นายเอ็มซ่ามากส์) - ผู้เชี่ยวชาญด้านเว็บไซต์และ Technical SEO`,
+    locationContext: `พื้นที่ให้บริการครอบคลุม ${area.province} และภูมิภาคใกล้เคียง พร้อมดูแลระบบให้ธุรกิจคุณเติบโตตลอด 24 ชม.`,
     popularSearchMapping: mergedKeywords.slice(0, 5),
   };
 

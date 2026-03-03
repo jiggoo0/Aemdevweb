@@ -15,7 +15,8 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
   region: "Central",
   priority: 98,
 
-  title: "วางระบบเว็บไซต์ นนทบุรี | Digital Strategy สำหรับธุรกิจบริการและ SME พรีเมียม",
+  title:
+    "รับทำเว็บไซต์ นนทบุรี | โหลดเร็วพิเศษ Digital Strategy สำหรับธุรกิจบริการและ SME พรีเมียม",
   description:
     "บริการวางระบบเว็บไซต์และกลยุทธ์ SEO ในนนทบุรี เจาะกลุ่มราชพฤกษ์-แจ้งวัฒนะ เน้นความหรูหรา โหลดไวสายฟ้าแลบ และการครองอันดับหนึ่งบน Google Maps ท้องถิ่น",
 
