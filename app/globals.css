@@ -14,38 +14,32 @@
   --font-mono: var(--font-mono), ui-monospace, SFMono-Regular;
 
   /* --- 02. COLOR PALETTE (OKLCH Dynamic Mapping) --- */
-  --color-brand-primary: oklch(var(--brand-primary-raw));
-  --color-brand-secondary: oklch(var(--brand-secondary-raw));
-  --color-brand-accent: oklch(var(--brand-accent-raw));
+  --color-brand-primary: oklch(var(--brand-primary-raw, 50% 0.18 260));
+  --color-brand-secondary: oklch(var(--brand-secondary-raw, 45% 0.15 260));
+  --color-brand-accent: oklch(var(--brand-accent-raw, 85% 0.1 260));
 
-  --color-surface-main: var(--surface-main);
-  --color-surface-offset: var(--surface-offset);
-  --color-surface-card: var(--surface-card);
+  /* Surface tokens reacting to injectThemeVariables */
+  --color-surface-main: var(--surface-main, #ffffff);
+  --color-surface-offset: var(--surface-offset, #f8fafc);
+  --color-surface-card: var(--surface-card, #ffffff);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
+  --color-text-primary: var(--text-primary, #0f172a);
+  --color-text-secondary: var(--text-secondary, #475569);
+  --color-text-muted: var(--text-muted, #475569);
 
-  --color-border: var(--border);
+  --color-border: var(--border, rgba(0, 0, 0, 0.08));
 
-  /* --- 02.1 BRAND SPECIFIC (Third-Party) --- */
-  --color-line-green: oklch(73.5% 0.21 145);
-  --color-line-dark: oklch(68% 0.2 145);
-
-  /* --- 03. DEPTH & DYNAMIC LIGHTING --- */
-  --shadow-glow: 0 4px 14px 0 oklch(var(--brand-primary-raw) / 0.15);
-  --shadow-glow-sm: 0 2px 8px 0 oklch(var(--brand-primary-raw) / 0.1);
-  --shadow-glow-destructive: 0 4px 14px 0 oklch(60% 0.2 20 / 0.15);
-  --shadow-pro: 0 4px 14px rgba(0, 0, 0, 0.03);
-  --shadow-pro-sm: 0 2px 8px rgba(0, 0, 0, 0.02);
-  --shadow-pro-xl: 0 10px 30px rgba(0, 0, 0, 0.06);
+  /* --- 03. DEPTH & DYNAMIC LIGHTING (Brand-Aware) --- */
+  --shadow-glow: 0 4px 24px 0 oklch(var(--brand-primary-raw) / 0.15);
+  --shadow-glow-sm: 0 2px 12px 0 oklch(var(--brand-primary-raw) / 0.1);
+  --shadow-pro: 0 10px 30px -10px oklch(var(--brand-primary-raw) / 0.12);
+  --shadow-pro-sm: 0 4px 12px oklch(var(--brand-primary-raw) / 0.05);
+  --shadow-pro-xl: 0 20px 60px -15px oklch(var(--brand-primary-raw) / 0.15);
 
   /* --- 04. GEOMETRY & LAYERING --- */
-  --radius-section: 1.5rem;
-  --radius-card: 1rem;
-  --radius-card-lg: 1.5rem;
-  --radius-card-xl: 2rem;
-  --radius-button: 0.75rem;
+  --radius-section: var(--radius-section, 1.5rem);
+  --radius-card: var(--radius-card, 1rem);
+  --radius-button: 0.85rem;
 
   --z-index-nav: 700;
   --z-index-overlay: 600;
@@ -60,29 +54,20 @@
     }
   }
 
-  @keyframes aura-1 {
+  @keyframes aura-pulse {
     0%,
     100% {
-      transform: translate(0, 0) scale(1);
+      transform: scale(1) translate(0, 0);
+      opacity: 0.4;
     }
     50% {
-      transform: translate(5%, 5%) scale(1.1);
+      transform: scale(1.1) translate(2%, 2%);
+      opacity: 0.6;
     }
   }
 
-  @keyframes aura-2 {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    50% {
-      transform: translate(-5%, -5%) scale(1.05);
-    }
-  }
-
-  --animate-shimmer: shimmer 2s infinite linear;
-  --animate-aura-1: aura-1 20s infinite ease-in-out;
-  --animate-aura-2: aura-2 25s infinite ease-in-out;
+  --animate-shimmer: shimmer 2.5s infinite linear;
+  --animate-aura: aura-pulse 15s infinite ease-in-out;
 }
 
 @layer base {

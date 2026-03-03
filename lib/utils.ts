@@ -107,32 +107,44 @@ export function injectThemeVariables(theme?: ThemeConfig): React.CSSProperties {
   const isDark = theme.mode === "dark";
 
   // 1. Core Geometry & Mode Signal
-  styles["--radius"] = theme.radius || "2.5rem";
+  styles["--radius-section"] = theme.radius || "2.5rem";
+  styles["--radius-card"] = "1.25rem";
   styles["--theme-mode"] = theme.mode || "light";
 
-  // 2. [SEMANTIC_SURFACES]: บังคับฉีดค่าพื้นหลังตามธีม
-  styles["--surface-main"] = theme.background || (isDark ? "#020617" : "#ffffff");
-  styles["--surface-card"] = isDark ? "oklch(20% 0.04 260 / 0.8)" : "#ffffff";
-  styles["--surface-offset"] = isDark ? "oklch(12% 0.03 260 / 0.5)" : "oklch(98% 0.01 260)";
+  // 2. [SEMANTIC_SURFACES]: Dynamic Depth Mapping via OKLCH
+  if (isDark) {
+    styles["--surface-main"] = theme.background || "oklch(12% 0.015 260)";
+    styles["--surface-offset"] = "oklch(15% 0.02 260)";
+    styles["--surface-card"] = "oklch(18% 0.02 260 / 0.8)";
+    styles["--border"] = "oklch(100% 0 0 / 0.08)";
+    styles["--text-primary"] = theme.foreground || "oklch(98% 0.01 260)";
+    styles["--text-secondary"] = "oklch(85% 0.02 260)";
+    styles["--text-muted"] = "oklch(65% 0.02 260)";
+  } else {
+    styles["--surface-main"] = theme.background || "oklch(99% 0.005 260)";
+    styles["--surface-offset"] = "oklch(97% 0.01 260)";
+    styles["--surface-card"] = "#ffffff";
+    styles["--border"] = "oklch(0% 0 0 / 0.08)";
+    styles["--text-primary"] = theme.foreground || "oklch(15% 0.02 260)";
+    styles["--text-secondary"] = "oklch(35% 0.02 260)";
+    styles["--text-muted"] = "oklch(55% 0.02 260)";
+  }
 
-  // 3. [TYPOGRAPHY_SYSTEM]: บังคับฉีดค่าสีตัวอักษรที่ผ่านการตรวจสอบ Contrast แล้ว
-  styles["--text-primary"] = theme.foreground || (isDark ? "#f8fafc" : "#0f172a");
-  styles["--text-secondary"] = isDark ? "#94a3b8" : "#334155";
-  styles["--text-muted"] = isDark ? "#64748b" : "#64748b";
-
-  // 4. [ELEMENTS]: Border & Outlines
-  styles["--border"] = isDark ? "rgba(255, 255, 255, 0.08)" : "rgba(0, 0, 0, 0.08)";
-
-  // 5. [ENGINE]: OKLCH Dynamic Generator for Brand Colors
+  // 3. [ENGINE]: OKLCH Dynamic Generator for Brand Colors
   const processColor = (hex: string, key: string) => {
     const lch = hexToOklch(hex);
     if (lch) {
       const raw = `${lch.l} ${lch.c} ${lch.h}`;
+      // ฉีดค่าดิบสำหรับอ้างอิงใน globals.css
+      styles[`--${key}-raw`] = raw;
       styles[`--brand-${key}-raw`] = raw;
       styles[`--color-brand-${key}`] = `oklch(${raw})`;
 
       // [CONTRAST_GUARD]: คำนวณสีตัวอักษรที่ต้องอยู่บนสีแบรนด์นี้ (White or Black)
-      styles[`--color-brand-${key}-fg`] = lch.l < 0.6 ? "#ffffff" : "#000000";
+      styles[`--color-brand-${key}-fg`] = lch.l < 0.6 ? "oklch(99% 0 0)" : "oklch(15% 0 0)";
+
+      // [ACCENT_MUTED]: สร้างสีโทนอ่อนสำหรับใช้เป็นพื้นหลัง Hover/Card
+      styles[`--color-brand-${key}-muted`] = `oklch(${lch.l} ${lch.c * 0.3} ${lch.h} / 0.1)`;
     } else {
       styles[`--color-brand-${key}`] = hex;
     }

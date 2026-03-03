@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": ["types/genkit.d.ts"],
+  "ignore": [],
   "ignoreDependencies": [
     "madge",
     "sharp",
@@ -11,11 +11,7 @@
     "@swc/helpers",
     "google-auth-library",
     "eslint-plugin-tailwindcss",
-    "@axe-core/react",
-    "@genkit-ai/ai",
-    "@genkit-ai/core",
-    "@genkit-ai/dotprompt",
-    "@genkit-ai/googleai"
+    "@axe-core/react"
   ],
   "next": {
     "entry": [

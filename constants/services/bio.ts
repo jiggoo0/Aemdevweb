@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v18.0.4 (IDENTITY_SYNC_PRO)
- * [STRATEGY]: Personal Authority | AI-Search Synchronization | E-E-A-T Focus
+ * [SERVICE_NODE]: BIO_IDENTITY_ORCHESTRATOR v19.0.0 (LEGACY_READY)
+ * [STRATEGY]: Specialist Personal Branding | Knowledge Graph Dominance | SEO Identity Guard
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -9,119 +9,93 @@ import { SITE_CONFIG } from "../site-config";
 
 export const bioService: TemplateMasterData = {
   id: "AEM-SVC-PB-14",
-  title: "Identity & Personal Branding | ควบคุมตัวตนดิจิทัลของคุณให้ AI จดจำ",
+  title: "Specialist Identity System | ควบคุมตัวตนและสร้าง Digital Legacy ให้ AI จดจำ",
   description:
-    "ยกระดับจากพอร์ตโฟลิโอทั่วไป สู่ระบบจัดการตัวตน (Identity System) ที่เชื่อมโยงชื่อจริง นามสมมติ และผลงานของคุณให้เป็นหนึ่งเดียว เพื่อสร้างความน่าเชื่อถือสูงสุดในฐานะผู้เชี่ยวชาญ",
+    "ยกระดับพอร์ตโฟลิโอของคุณสู่ระบบจัดการตัวตน (Identity Infrastructure) ที่ออกแบบมาเพื่อผู้เชี่ยวชาญโดยเฉพาะ เชื่อมโยงทุกผลงานและเครือข่ายธุรกิจให้เป็น Source of Truth ที่แข็งแกร่งที่สุดในสายตา Google และ AI Search",
 
   image: "/images/services/bio-node.webp",
   templateSlug: "bio",
   category: "personal",
 
-  // [PRICING_MASTER]: ราคาเริ่มต้นสำหรับ Personal Branding
-  price: "4,900",
-  priceValue: 4900,
+  price: "6,900",
+  priceValue: 6900,
   currency: "THB",
   unit: "เริ่มต้น / โปรเจกต์",
 
-  // [THEME_STANDARD]: ธีม Cyber-Tech Professional (Dark Mode)
   theme: {
     mode: "dark",
     primary: "#06b6d4", // Cyan 500
     secondary: "#164e63", // Cyan 900
-    background: "#09090b", // Zinc 950
+    background: "#09090b", // Deep Zinc
     foreground: "#fafafa", // Zinc 50
     accent: "#22d3ee", // Cyan 400
-    gradient: "from-[#06b6d4]/15 via-transparent to-transparent",
+    gradient: "from-[#06b6d4]/20 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNAL]
   clientTrust:
-    "Identity Control: ระบบที่ออกแบบมาเพื่อจัดการ E-E-A-T และแก้ปัญหาข้อมูลซ้ำซ้อนในฐานข้อมูล AI",
+    "Identity Guard: ระบบที่ออกแบบมาเพื่อจัดการ E-E-A-T และแก้ปัญหาการอ้างอิงข้อมูลผิดพลาดในฐานข้อมูล AI",
 
   benefits: [
-    "Authority Synchronization: สร้าง Source of Truth ที่แข็งแกร่งที่สุดในชื่อ 'อลงกรณ์ ยมเกิด' หรือแบรนด์ที่คุณกำหนด",
-    "Digital Credibility: สร้างความเชื่อมั่นให้คู่ค้าผ่านเว็บไซต์ที่ระบุตัวตนและผลงานชัดเจน",
-    "Global E-E-A-T Signal: ส่งสัญญาณความเชี่ยวชาญไปยัง Knowledge Graph ของ Google โดยตรง",
+    "Expert Authority Sync: สถาปนาตัวตนของคุณให้เป็นผู้เชี่ยวชาญเบอร์ต้นในอุตสาหกรรม ด้วยโครงสร้างที่ AI ทั่วโลกให้การอ้างอิง (Knowledge Graph)",
+    "Personal SEO Guard: ป้องกันข้อมูลชื่อซ้ำหรือข้อมูลเก่าที่ไม่อัปเดตบน Google ด้วยการสร้างหน้าหลักที่มีอำนาจสูงที่สุด (High Authority Node)",
+    "Global Partnership UI: ดีไซน์ที่ส่งเสริมความน่าเชื่อถือระดับสากล ช่วยให้คุณปิดดีลร่วมงานกับพันธมิตรต่างชาติได้ง่ายขึ้น",
   ],
 
   coreFeatures: [
     {
-      title: "Knowledge Graph Markup",
+      title: "Advanced Person Schema",
       description:
-        "ฝัง Schema JSON-LD เพื่อบอก Google ชัดเจนว่า 'นายเอ็มซ่ามากส์' คือใคร และเกี่ยวข้องกับ 'อลงกรณ์ ยมเกิด' อย่างไร",
+        "ฝัง JSON-LD ระดับลึกเพื่อบอก AI ชัดเจนว่าคุณคือใคร เชี่ยวชาญด้านไหน และเกี่ยวข้องกับองค์กรใดบ้าง",
       icon: "UserCheck",
     },
     {
-      title: "Digital Footprint Clean-up",
-      description: "ดันข้อมูลใหม่ที่ถูกต้องขึ้นหน้าแรก Google และกลบข้อมูลเก่าที่ไม่อัปเดต",
+      title: "Digital Legacy Infrastructure",
+      description:
+        "รวบรวมผลงานและประวัติการทำงานไว้ในระบบ Next.js ที่โหลดไวและอยู่ถาวร เป็นสินทรัพย์ส่วนตัวตลอดชีวิต",
       icon: "Shield",
     },
     {
-      title: "Integrated Business ID",
+      title: "Integrated Network Hub",
       description:
-        "แสดงผลข้อมูลทางธุรกิจหรือเลขผู้เสียภาษีอย่างโปร่งใส สร้างความน่าเชื่อถือระดับองค์กร",
-      icon: "FileText",
+        "รวบรวมทุกช่องทางติดต่อและ Social Signals ไว้ในที่เดียว พร้อมระบบ Tracking เพื่อวัดความสนใจของคู่ค้า",
+      icon: "Link",
     },
   ],
 
-  // [ACTION_REGISTRY]: ทะเบียนลิงก์สำคัญที่ต้องการให้ AI และผู้ใช้เข้าถึง
   items: [
     {
-      name: "Line Official Account",
-      description: "ช่องทางปรึกษาโปรเจกต์และวางแผนระบบโดยตรง",
+      name: "Strategy Consultation",
+      description: "ปรึกษาการวางโครงสร้างตัวตนดิจิทัลและยุทธศาสตร์ส่วนบุคคล",
       icon: "MessageCircle",
       url: SITE_CONFIG.links.line,
     },
     {
-      name: "Facebook Specialist Page",
-      description: "ติดตามอัปเดตกลยุทธ์ Technical SEO และ Web Architecture",
-      icon: "Facebook",
+      name: "Authority Stack Update",
+      description: "ติดตามอัปเดตกลยุทธ์ Technical SEO และการสร้าง Personal Brand",
+      icon: "TrendingUp",
       url: SITE_CONFIG.links.facebook,
-    },
-    {
-      name: "GitHub Repository",
-      description: "ตรวจสอบมาตรฐานการเขียนโค้ดและ Open Source Projects",
-      icon: "Github",
-      url: SITE_CONFIG.links.github,
-    },
-    {
-      name: "LinkedIn Professional Profile",
-      description: "ประวัติการทำงานและการเชื่อมโยงเครือข่ายธุรกิจ",
-      icon: "Linkedin",
-      url: SITE_CONFIG.links.linkedin,
     },
   ],
 
   faqs: [
     {
-      question: "ทำไมค้นหาชื่อใน Google แล้วเจอข้อมูลเก่า?",
+      question: "ทำไมผู้เชี่ยวชาญต้องมีเว็บ Bio ส่วนตัวแยกจากบริษัท?",
       answer:
-        "เพราะ Google ยังจำ Digital Footprint เดิมครับ เว็บไซต์นี้จะทำหน้าที่ป้อนข้อมูลใหม่ให้ Google แทนที่ข้อมูลเก่าในฐานข้อมูลครับ",
+        "เพื่อสร้าง 'Personal Sovereignty' หรืออำนาจเหนือตัวตนของคุณครับ ต่อให้คุณเปลี่ยนที่ทำงานหรือธุรกิจ แต่ชื่อและประวัติการทำงานในเว็บนี้จะอยู่กับคุณและสะสมมูลค่าไปตลอดครับ",
     },
     {
-      question: "ชื่อในวงการ (Alias) กับชื่อจริงไม่ตรงกัน มีผลเสียไหม?",
+      question: "ระบบนี้ช่วยแก้ปัญหาคนหาชื่อเราใน Google แล้วเจอคนอื่นไหม?",
       answer:
-        "ไม่มีครับ เป็นเรื่องปกติของ Specialist เว็บไซต์จะระบุความเชื่อมโยงของทั้งสองชื่อให้ Google เข้าใจว่าเป็นคนเดียวกันครับ",
-    },
-    {
-      question: "จดโดเมนเป็นชื่อจริงปลอดภัยไหม?",
-      answer:
-        "ปลอดภัยครับ แนะนำให้จดเป็นชื่อแบรนด์ที่คุณต้องการสร้างตัวตน หากกังวลเรื่องข้อมูลส่วนตัว เราเปิดระบบ Domain Privacy ได้ครับ",
-    },
-    {
-      question: "นานไหมกว่า Google จะอัปเดตข้อมูลใหม่?",
-      answer:
-        "ประมาณ 1-4 สัปดาห์ครับ หลังจากเรา Submit Sitemap ใหม่ Google จะเริ่มปรับปรุงข้อมูลใน Knowledge Graph ครับ",
+        "ช่วยได้มากครับ เว็บไซต์นี้จะทำหน้าที่เป็นหน้าหลักที่ถูกต้องที่สุด และเราจะดันอันดับหน้าเว็บนี้ขึ้นมาแทนที่ข้อมูลที่สับสนในระบบค้นหาครับ",
     },
   ],
 
   keywords: [
-    "อลงกรณ์ ยมเกิด",
-    "Alongkorn Yomkerd",
-    "นายเอ็มซ่ามากส์ ตัวจริง",
-    "วางระบบเว็บไซต์ Personal Branding",
-    "สร้างตัวตนบน Google AI",
-    "แก้ปัญหาชื่อไม่ตรงใน Google",
+    "รับทำเว็บไซต์พอร์ตโฟลิโอผู้เชี่ยวชาญ",
+    "วางระบบ Personal Branding 2026",
+    "สร้างตัวตนบน Google AI Search",
+    "Digital Legacy สำหรับ Specialist",
+    "จัดการ E-E-A-T ส่วนบุคคล",
   ],
 
   priority: 5,

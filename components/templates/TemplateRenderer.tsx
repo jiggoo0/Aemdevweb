@@ -39,7 +39,10 @@ const TEMPLATE_MAP: Record<string, React.ComponentType<{ data: UniversalTemplate
  * @description ด่านหน้าในการเลือกเทมเพลตที่เหมาะสมที่สุดตาม templateSlug
  * [CENTRALIZED_CONTROL]: ใช้ injectThemeVariables เพื่อความสอดคล้องของระบบสีทั่วทั้งโปรเจกต์
  */
-export const TemplateRenderer = ({ data, contextMode = "service" }: TemplateRendererProps) => {
+export const TemplateRenderer = ({
+  data,
+  contextMode: _contextMode = "service",
+}: TemplateRendererProps) => {
   if (!data || !data.templateSlug) {
     console.error("[RENDERER_ERROR]: Data or TemplateSlug is missing");
     return null;
@@ -48,16 +51,66 @@ export const TemplateRenderer = ({ data, contextMode = "service" }: TemplateRend
   const { theme } = data;
   const isDarkMode = theme?.mode === "dark";
 
-  // [CENTRALIZED_THEME_ENGINE]: เรียกใช้เครื่องยนต์ฉีดสีกลางจาก lib/utils
+  // [CENTRALIZED_THEME_ENGINE]: ฉีดค่าสีและพื้นผิวหลัก
   const semanticStyles = injectThemeVariables(theme);
 
-  // [DYNAMIC_AURA_OVERRIDE]: จัดการ Aura เฉพาะสำหรับระดับ Renderer
-  const auraStyles = {
-    "--context-aura-opacity": contextMode === "service" ? (isDarkMode ? "0.4" : "0.2") : "0.1",
-    "--context-aura-blur": contextMode === "service" ? "160px" : "80px",
-  } as React.CSSProperties;
+  // [DNA_ROUTER]: กำหนดพารามิเตอร์การออกแบบเฉพาะตามประเภทเทมเพลต (Aesthetic Differentiation)
+  const templateDna = {
+    corporate: {
+      "--dna-blur": "40px",
+      "--dna-opacity": "0.05",
+      "--dna-grid": "0.1",
+      "--dna-radius": "1rem",
+    },
+    hotelresort: {
+      "--dna-blur": "180px",
+      "--dna-opacity": "0.12",
+      "--dna-grid": "0.02",
+      "--dna-radius": "3rem",
+    },
+    salepage: {
+      "--dna-blur": "120px",
+      "--dna-opacity": "0.20",
+      "--dna-grid": "0.05",
+      "--dna-radius": "2rem",
+    },
+    catalog: {
+      "--dna-blur": "60px",
+      "--dna-opacity": "0.08",
+      "--dna-grid": "0.12",
+      "--dna-radius": "1.5rem",
+    },
+    bio: {
+      "--dna-blur": "100px",
+      "--dna-opacity": "0.15",
+      "--dna-grid": "0.03",
+      "--dna-radius": "5rem",
+    },
+    "local-authority": {
+      "--dna-blur": "30px",
+      "--dna-opacity": "0.04",
+      "--dna-grid": "0.15",
+      "--dna-radius": "0.75rem",
+    },
+    "seo-agency": {
+      "--dna-blur": "150px",
+      "--dna-opacity": "0.10",
+      "--dna-grid": "0.08",
+      "--dna-radius": "2.5rem",
+    },
+  }[data.templateSlug as string] || {
+    "--dna-blur": "100px",
+    "--dna-opacity": "0.1",
+    "--dna-grid": "0.05",
+    "--dna-radius": "1.5rem",
+  };
 
-  const finalStyles = { ...semanticStyles, ...auraStyles } as React.CSSProperties;
+  const finalStyles = {
+    ...semanticStyles,
+    ...(templateDna as React.CSSProperties),
+    "--context-aura-blur": "var(--dna-blur)",
+    "--context-aura-opacity": "var(--dna-opacity)",
+  } as React.CSSProperties;
 
   const SpecificTemplate = TEMPLATE_MAP[data.templateSlug];
 
@@ -72,15 +125,24 @@ export const TemplateRenderer = ({ data, contextMode = "service" }: TemplateRend
         `template-${data.templateSlug}`,
       )}
     >
-      {/* [DYNAMIC_ATMOSPHERE]: Adaptive Background Layers */}
-      <div className="pointer-events-none fixed inset-0 z-0">
+      {/* [DYNAMIC_ATMOSPHERE]: Adaptive Background Layers based on DNA */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
         <div
-          className="absolute -top-[10%] -right-[10%] h-[1000px] w-[1000px] rounded-full opacity-[var(--context-aura-opacity)] blur-[var(--context-aura-blur)] transition-all duration-1000"
+          className="animate-aura absolute -top-[10%] -right-[10%] h-[1000px] w-[1000px] rounded-full opacity-[var(--dna-opacity)] blur-[var(--dna-blur)] transition-all duration-1000"
           style={{ backgroundColor: "var(--color-brand-primary)" }}
         />
         <div
-          className="absolute -bottom-[10%] -left-[10%] h-[800px] w-[800px] rounded-full opacity-[calc(var(--context-aura-opacity)*0.5)] blur-[var(--context-aura-blur)] transition-all duration-1000"
+          className="animate-aura absolute -bottom-[10%] -left-[10%] h-[800px] w-[800px] rounded-full opacity-[calc(var(--dna-opacity)*0.6)] blur-[var(--dna-blur)] transition-all duration-1000"
           style={{ backgroundColor: "var(--color-brand-secondary)" }}
+          delay-700
+        />
+        {/* [BLUEPRINT_GRID]: ตารางฉากหลังที่ความเข้มเปลี่ยนตาม DNA */}
+        <div
+          className="absolute inset-0 opacity-[var(--dna-grid)]"
+          style={{
+            backgroundImage: "radial-gradient(var(--color-brand-primary) 0.5px, transparent 0.5px)",
+            backgroundSize: "48px 48px",
+          }}
         />
       </div>
 

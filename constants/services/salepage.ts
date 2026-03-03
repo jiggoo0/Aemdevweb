@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: SALE_PAGE_CONVERSION_ENGINE v18.0.1 (ROAS_OPTIMIZED)
- * [STRATEGY]: Aggressive Conversion | Server-Side Tracking | Neon Rose Theme
+ * [SERVICE_NODE]: SALE_PAGE_CONVERSION_ENGINE v19.0.0 (ROI_MAXIMIZED)
+ * [STRATEGY]: Neuro-Marketing UX | Zero-Latency Path | Algorithm-First Delivery
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,100 +8,85 @@ import type { TemplateMasterData } from "@/types";
 
 export const salePageService: TemplateMasterData = {
   id: "AEM-SVC-SP-01",
-  title: "High-Performance Sale Page | หน้าปิดการขายอัจฉริยะ ยอดทักแชทแตก แอดแม่นยำ",
+  title: "High-Performance Conversion Engine | หน้าปิดการขายอัจฉริยะที่ AI โฆษณาหลงรัก",
   description:
-    "เปลี่ยนคลิกเป็นยอดโอนด้วย Sale Page โครงสร้าง Next.js ที่โหลดไวระดับมิลลิวินาที พร้อมระบบ Conversion API (CAPI) ที่ส่งข้อมูลลูกค้าตัวจริงกลับไปเทรน AI โฆษณาให้ฉลาดขึ้น 10 เท่า เลิกตำน้ำพริกละลายแม่น้ำกับเว็บสำเร็จรูปที่โหลดช้า",
+    "หยุดตำน้ำพริกละลายแม่น้ำกับค่าแอด ยกระดับสู่ Sale Page สถาปัตยกรรม Hardened Next.js ที่โหลดเสร็จใน 0.5s พร้อมระบบ Server-Side Tracking (CAPI) 100% เพื่อป้อน Data คุณภาพสูงกลับไปเทรน AI ให้หาลูกค้าแม่นยำขึ้น 10 เท่า",
 
   image: "/images/services/salepage-node.webp",
   templateSlug: "salepage",
   category: "landing",
 
-  // [PRICING_MASTER]: ราคากลางสำหรับ Sale Page (คุ้มค่าเมื่อเทียบกับผลลัพธ์)
-  price: "3,500",
-  priceValue: 3500,
+  price: "4,500",
+  priceValue: 4500,
   currency: "THB",
   unit: "เริ่มต้น / หน้า",
 
-  // [THEME_STANDARD]: ธีม Neon Rose (Vibrant Pink/Dark)
-  // จิตวิทยา: สีแดง/ชมพูสดกระตุ้น Heart Rate และความอยากซื้อ (Impulse Buying)
   theme: {
-    mode: "dark", // Dark Mode ช่วยให้สินค้าและปุ่ม CTA ดูโดดเด่นที่สุด
-    primary: "#f43f5e", // Rose 500: สีหลักสดใส กระตุ้น Action
-    secondary: "#881337", // Rose 900: สีพื้นหลังส่วนลึก
-    background: "#0f0505", // Obsidian: ดำเกือบสนิท (Premium Dark)
-    foreground: "#fff1f2", // Rose 50: ตัวหนังสืออ่านง่าย
-    accent: "#fb7185", // Rose 400: สีปุ่มรองหรือ Highlight
-    gradient: "from-[#f43f5e]/20 via-transparent to-transparent", // Glow Effect
+    mode: "dark",
+    primary: "#f43f5e", // Rose 500
+    secondary: "#881337", // Rose 900
+    background: "#0f0505", // Deep Obsidian
+    foreground: "#fff1f2", // Soft Rose White
+    accent: "#fb7185", // Rose 400
+    gradient: "from-[#f43f5e]/25 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNAL]
   clientTrust:
-    "Performance Proven: ช่วยธุรกิจลดต้นทุนต่อการทัก (Cost per Message) เฉลี่ย 40% หลังเปลี่ยนมาใช้โครงสร้างนี้",
+    "Conversion Proven: ช่วยธุรกิจลด Cost per Result ได้เฉลี่ย 35-50% ทันทีหลังติดตั้งระบบสถาปัตยกรรมใหม่",
 
   benefits: [
-    "Instant Load: โหลดเสร็จในพริบตา (0.5s) ลูกค้าไม่กดออกเพราะรอนาน ช่วยดันคะแนน Quality Score ของโฆษณา",
-    "Smart Pixel Integration: ฝัง Facebook Pixel & TikTok Pixel แบบ Advanced Matching เก็บ Data ลูกค้าได้แม่นยำกว่าคู่แข่ง",
-    "Bot-Friendly: โครงสร้าง Clean Code ที่ AI ของแพลตฟอร์มโฆษณาชอบ ช่วยให้คอนเทนต์ถูกนำส่งได้ดีขึ้น",
+    "Zero-Latency Conversion: เส้นทางตัดสินใจที่ไร้รอยต่อ โหลดไวกว่าคู่แข่ง 5 เท่า เพื่อดักจับทุกความอยากซื้อของลูกค้า",
+    "Precision Pixel CAPI: ติดตามทุก Micro-conversion อย่างแม่นยำ แก้ปัญหา iOS 14+ บล็อกข้อมูล เพื่อลดค่าแอดให้ต่ำที่สุด",
+    "Psychological Trigger UX: ดีไซน์ที่ผ่านการวิจัยพฤติกรรมผู้บริโภคยุค AI เพื่อกระตุ้นการตัดสินใจซื้อในครั้งแรกที่เห็น",
   ],
 
   coreFeatures: [
     {
-      title: "Server-Side CAPI",
-      description: "ส่ง Event การซื้อจากเซิร์ฟเวอร์โดยตรง แก้ปัญหา iOS 14+ บล็อกการติดตาม",
-      icon: "Activity",
+      title: "Hardened CAPI Node",
+      description:
+        "ระบบส่ง Event การซื้อผ่านเซิร์ฟเวอร์โดยตรง ไม่พึ่งพาคุกกี้เบราว์เซอร์ เพื่อความแม่นยำ 100%",
+      icon: "Zap",
     },
     {
-      title: "Auto-Line Notification",
-      description: "แจ้งเตือนออเดอร์ใหม่เข้า LINE OA ทันที (Real-time) ไม่พลาดทุกยอดขาย",
+      title: "Direct-Line CRM Hub",
+      description:
+        "ระบบแจ้งเตือนและเก็บข้อมูลลูกค้าเข้า LINE OA และ Google Sheet อัตโนมัติ พร้อมปิดการขายได้ทันที",
       icon: "MessageCircle",
     },
     {
-      title: "Sticky CTA Bar",
+      title: "Sticky Action Dock",
       description:
-        "แถบปุ่ม 'ซื้อเลย / แอดไลน์' ที่ตามติดหน้าจอโทรศัพท์ตลอดเวลา เพิ่มโอกาสกด 2 เท่า",
+        "แถบปุ่มสั่งซื้อที่ติดตามสายตาลูกค้าตลอดเวลา (iOS/Android) ออกแบบมาเพื่อกระตุ้น Conversion โดยเฉพาะ",
       icon: "MousePointerClick",
     },
   ],
 
   faqs: [
     {
-      question: "ทำไมต้อง Next.js ไม่ใช้ WordPress หรือเว็บสำเร็จรูป?",
+      question: "ทำไมต้องจ้างทำหน้า Sale Page แพงกว่าเว็บสำเร็จรูป?",
       answer:
-        "เพราะ 'ความเร็ว' คือเงินครับ Next.js โหลดไวกว่ามาก และไม่มีปัญหาระบบล่มหรือโดนแฮกเหมือน CMS เก่าๆ ที่สำคัญคือจ่ายครั้งเดียวจบ เป็นกรรมสิทธิ์ของคุณ 100%",
+        "เพราะเว็บสำเร็จรูปโหลดช้าและ Data รั่วครับ ระบบเราเป็นโค้ดดิ้งเพียวๆ ที่ AI โฆษณา (FB/TikTok) เข้าใจง่ายกว่า ทำให้ค่าส่งคอนเทนต์ถูกลงและเจอคนซื้อจริงได้มากกว่าครับ",
     },
     {
-      question: "Conversion API (CAPI) สำคัญแค่ไหน?",
+      question: "ติดพิกเซลได้กี่ตัว?",
       answer:
-        "สำคัญที่สุดในยุคนี้ครับ เพราะ Browser เริ่มบล็อกการเก็บข้อมูล (Cookie) การใช้ CAPI จะช่วยกู้คืนข้อมูลลูกค้าที่หายไปกลับมาได้ถึง 30-40% ทำให้แอดแม่นขึ้น",
+        "ไม่จำกัดครับ และเราตั้งค่าแบบ Advanced Matching ให้ครบทุกช่องทางเพื่อให้คุณเป็นเจ้าของ Data ลูกค้าอย่างแท้จริง",
     },
     {
-      question: "ไม่มีพื้นฐานเทคนิคเลย ดูแลยากไหม?",
+      question: "ระบบนี้แก้ไขเองได้ไหม?",
       answer:
-        "ไม่ต้องดูแลเลยครับ ผมเซ็ตระบบให้จบพร้อมใช้งาน หน้าที่ของคุณคือแค่เอาลิงก์ไปยิงแอด แล้วรอตอบแชทลูกค้าครับ",
-    },
-    {
-      question: "แก้ไขข้อมูลสินค้าเองได้ไหม?",
-      answer:
-        "ได้ครับ ผมมีระบบหลังบ้าน (Admin Panel) ให้คุณเข้าไปแก้ราคา เปลี่ยนรูป หรือแก้ข้อความโปรโมชั่นได้เองง่ายๆ ผ่านมือถือครับ",
-    },
-    {
-      question: "รวมโดเมนและโฮสติ้งไหม?",
-      answer:
-        "แพ็กเกจนี้ยังไม่รวมครับ แต่ผมมีบริการจดโดเมนและเช่า Cloud Server ความเร็วสูงให้ในราคาต้นทุน พร้อมดูแลความปลอดภัยให้ฟรีครับ",
+        "เรามีระบบ Mini-CMS ที่คุณสามารถเปลี่ยนราคา แก้โปรโมชั่น หรืออัปรูปใหม่ผ่านมือถือได้ง่ายๆ ใน 1 นาทีครับ",
     },
   ],
 
   keywords: [
-    "รับทำ Sale Page ยิงแอด 2026",
-    "Sale Page Next.js 16 โหลดไวที่สุด",
-    "ติดตั้ง Conversion API (CAPI) แม่นยำ 100%",
-    "Landing Page ปิดการขายอัตโนมัติ",
-    "นายเอ็มซ่ามากส์ Sale Page Specialist",
-    "รับทำหน้าปิดการขาย Facebook TikTok",
-    "เทคนิคยิงแอดให้แม่นด้วย Server-Side Tracking",
-    "AEMDEVWEB Sale Page Engine",
+    "รับทำ Sale Page โหลดไวที่สุด",
+    "ติดตั้ง Conversion API Facebook 2026",
+    "หน้าปิดการขาย Next.js 16",
+    "เทคนิคยิงแอดให้แม่นด้วย Data",
+    "Sale Page Specialist Thailand",
   ],
 
-  priority: 1, // สินค้าขายดีอันดับ 1
+  priority: 1,
   isFeatured: true,
 };

@@ -1,6 +1,6 @@
 /**
- * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v18.0.1 (HUMAN_OPTIMIZED)
- * [STRATEGY]: Direct Booking Focus | High-End Imagery | Zero-Emoji | Lanna Gold Theme
+ * [SERVICE_NODE]: LUXURY_HOSPITALITY_ENGINE v19.0.0 (IMMERSIVE_DNA)
+ * [STRATEGY]: Emotional UX | Direct-Booking Dominance | Sensory Branding
  * [MAINTAINER]: AEMZA MACKS
  */
 
@@ -8,102 +8,82 @@ import type { TemplateMasterData } from "@/types";
 
 export const hotelResortService: TemplateMasterData = {
   id: "AEM-SVC-HR-08",
-  title: "Luxury Hotel & Resort Website | เปลี่ยนยอดวิวเป็นยอดจองตรง",
+  title: "Hospitality Direct-Booking Engine | เปลี่ยนผู้ชมให้เป็นแขกผู้เข้าพัก",
   description:
-    "หยุดจ่ายค่าคอมมิชชั่น OTA โดยไม่จำเป็น สร้างอาณาจักรดิจิทัลของคุณเองด้วยเว็บไซต์โรงแรมระดับ High-End ที่ถ่ายทอดประสบการณ์การพักผ่อนเหนือระดับ และเปลี่ยนผู้ชมให้กลายเป็นแขกที่กดจองตรงกับคุณทันที",
+    "หยุดแบ่งกำไรให้ OTA โดยไม่จำเป็น ยกระดับโรงแรมของคุณด้วยเว็บไซต์ที่ถ่ายทอด 'Sense of Place' ผ่านสถาปัตยกรรมดิจิทัลที่เน้นความรู้สึก และระบบจองตรงที่ออกแบบมาเพื่อเพิ่ม Net Profit สูงสุดให้กับธุรกิจ",
   image: "/images/services/hotel-resort-node.webp",
   templateSlug: "hotelresort",
   category: "business",
 
-  // [PRICING_MASTER]: ราคากลางสำหรับบริการโรงแรม (พื้นที่อื่นจะดึงค่านี้ไปใช้)
-  price: "16,900",
-  priceValue: 16900,
+  price: "19,900",
+  priceValue: 19900,
   currency: "THB",
-  unit: "เริ่มต้น / โปรเจกต์",
+  unit: "เริ่มต้น / โครงการ",
 
-  // [THEME_STANDARD]: ธีม Lanna Luxury (Gold/Dark Stone)
-  // สื่อถึงความหรูหรา วัฒนธรรม และความเงียบสงบ
   theme: {
-    mode: "dark", // เน้น Dark Mode เพื่อขับให้รูปห้องพักดูเด่น
-    primary: "#c5a358", // Chiang Mai Gold: สีทองคำเปลว (ด้าน) ดูแพงไม่ลิเก
-    secondary: "#453a1f", // Dark Gold Brown: สีน้ำตาลไหม้ทอง
-    background: "#1c1917", // Stone 900: สีถ่านหิน (Warm Black) ดูอบอุ่นกว่าดำสนิท
-    foreground: "#fafaf9", // Stone 50: สีขาวครีม อ่านสบายตา
-    accent: "#eab308", // Yellow 500: สีทองสว่างสำหรับปุ่มจอง (Call to Action)
-    gradient: "from-[#c5a358]/10 via-transparent to-transparent", // Gradient บางๆ สร้างมิติ
+    mode: "dark",
+    primary: "#c5a358", // Lanna Gold
+    secondary: "#453a1f", // Deep Umber
+    background: "#1c1917", // Warm Stone
+    foreground: "#fafaf9", // Ivory
+    accent: "#eab308", // Sunlit Gold
+    gradient: "from-[#c5a358]/15 via-transparent to-transparent",
   },
 
-  // [TRUST_SIGNAL]
   clientTrust:
-    "Luxury Standard: ยกระดับภาพลักษณ์ที่พักให้ดูแพงสมราคา สร้างความมั่นใจให้นักท่องเที่ยวทั่วโลก",
+    "Profit Optimized: เพิ่มอัตราการจองตรง (Direct Booking) ได้มากกว่า 20-30% พร้อมลดการพึ่งพาเอเย่นต์ 100%",
 
   benefits: [
-    "Maximize Profit: ลดการพึ่งพา OTA และประหยัดค่าคอมมิชชั่น 15-20% ด้วยระบบจองตรง",
-    "Visual Storytelling: ดีไซน์ที่ให้รูปภาพและวิดีโอทำงานหนักเพื่อขายประสบการณ์การพักผ่อน",
-    "Data Ownership: เก็บฐานข้อมูลลูกค้า (Email/Tel) เพื่อทำ CRM และส่งโปรโมชั่นได้เองในอนาคต",
+    "Emotional Storytelling UX: ดีไซน์ที่ใช้รูปภาพและวิดีโอทำงานหนักเพื่อขายประสบการณ์ ไม่ใช่แค่ขายห้องพัก",
+    "OTA-Bypass Strategy: สร้างเส้นทางจองตรงที่ง่ายและคุ้มค่ากว่า เพื่อเก็บกำไรสุทธิเข้ากระเป๋าธุรกิจโดยตรง",
+    "Global Visibility Node: โครงสร้าง SEO นานาชาติที่ดักจับนักท่องเที่ยวจากทั่วโลกก่อนที่เขาจะไปถึงแพลตฟอร์มอื่น",
   ],
 
   coreFeatures: [
     {
-      title: "Immersive Gallery",
-      description: "ระบบแกลเลอรี่ห้องพักความละเอียดสูงที่โหลดไว เพื่อสร้างความประทับใจแรกพบ",
+      title: "Immersive Visual Gallery",
+      description:
+        "ระบบแกลเลอรี่อัจฉริยะที่โหลดไวระดับมิลลิวินาที ถ่ายทอดความงามของห้องพักและบรรยากาศได้ทุกรายละเอียด",
       icon: "Camera",
     },
     {
-      title: "Direct Booking",
-      description: "ปุ่มจองที่เด่นชัดและเชื่อมต่อระบบเช็คห้องว่างแบบ Real-time",
+      title: "Seamless Booking Integration",
+      description:
+        "เชื่อมต่อกับระบบเช็คห้องว่างและตัดบัตรเครดิตระดับสากล มอบประสบการณ์จองที่ปลอดภัยและลื่นไหล",
       icon: "CalendarCheck",
     },
     {
-      title: "Multi-Language SEO",
-      description: "โครงสร้างรองรับภาษาอังกฤษ/จีน/รัสเซีย เพื่อดักจับนักท่องเที่ยวทั่วโลก",
+      title: "Multi-Language Authority",
+      description:
+        "รองรับการทำเนื้อหาหลายภาษา (Eng/CN/TH) เพื่อเข้าถึงกลุ่มเป้าหมายนักท่องเที่ยวคุณภาพทุกมุมโลก",
       icon: "Globe",
     },
   ],
 
   faqs: [
     {
-      question: "ทำไมต้องมีเว็บ ในเมื่อมี Agoda แล้ว?",
+      question: "จองผ่านเว็บเราต่างจากจองผ่าน Agoda อย่างไร?",
       answer:
-        "OTA คือช่องทางหารู้จัก แต่เว็บไซต์คือช่องทางทำกำไรครับ ลูกค้าจำนวนมากชอบมาเช็คราคาจองตรงที่หน้าเว็บ ถ้าคุณไม่มีเว็บรองรับ คุณกำลังทิ้งกำไรก้อนโต",
+        "จองผ่านเว็บตรงจะทำให้โรงแรมได้รับ Data ลูกค้าทันทีและไม่ต้องเสียค่าคอมมิชชั่น 15-20% ครับ เราสามารถตั้งราคาพิเศษหรือของแถมเพื่อจูงใจลูกค้าได้โดยตรงครับ",
     },
     {
-      question: "เชื่อมต่อ Channel Manager ได้ไหม?",
+      question: "เว็บไซต์รองรับการเชื่อมต่อสต็อกห้องพักไหม?",
       answer:
-        "ได้ครับ รองรับการเชื่อมต่อกับระบบชั้นนำเช่น SiteMinder หรือ Cloudbeds เพื่อให้สต็อกห้องพักตัดตรงกัน",
+        "รองรับครับ เราเชื่อมต่อกับ Channel Manager ชั้นนำได้ทุกเจ้า เพื่อให้สต็อกหน้าเว็บและ OTA ตรงกัน 100% ครับ",
     },
     {
-      question: "ไม่มีรูปสวยๆ ทีมงานช่วยถ่ายให้ไหม?",
-      answer: "มีพาร์ทเนอร์ช่างภาพสายโรงแรมมืออาชีพแนะนำครับ รูปภาพคือหัวใจสำคัญของการขายห้องพัก",
-    },
-    {
-      question: "รองรับหลายภาษาไหม?",
+      question: "รูปภาพไม่สวย ทีมงานช่วยได้ไหม?",
       answer:
-        "ทำได้ครับ โครงสร้างรองรับ Multi-language เต็มรูปแบบเพื่อเจาะกลุ่มนักท่องเที่ยวเฉพาะชาติ",
-    },
-    {
-      question: "อัปเดตราคาเองยากไหม?",
-      answer:
-        "ง่ายครับ เรามีระบบหลังบ้านให้ฝ่าย Reservation ปรับราคาหรือเปลี่ยนแบนเนอร์โปรโมชั่นได้เองทันที",
-    },
-    {
-      question: "รองรับการตัดบัตรเครดิตไหม?",
-      answer:
-        "รองรับครับ เชื่อมต่อ Payment Gateway (เช่น Stripe, 2C2P) ให้ลูกค้าต่างชาติรูดจองได้เลย",
-    },
-    {
-      question: "คุ้มค่าการลงทุนไหม?",
-      answer:
-        "แค่ลูกค้าจองตรงไม่กี่คืนก็คืนทุนค่าทำเว็บแล้วครับ ที่เหลือคือกำไรระยะยาวจากการไม่ต้องเสียค่าคอม OTA",
+        "เรามีทีมพาร์ทเนอร์ช่างภาพสายโรงแรมระดับพรีเมียมคอยให้คำปรึกษาและลงพื้นที่ถ่ายทำเพื่อให้ภาพออกมา 'แพง' ที่สุดครับ",
     },
   ],
 
   keywords: [
-    "วางระบบเว็บไซต์โรงแรม",
-    "ออกแบบเว็บไซต์รีสอร์ตหรู",
-    "ทำเว็บวิลล่า พูลวิลล่า",
-    "ระบบจองที่พักออนไลน์",
-    "Hotel Website Design",
+    "รับทำเว็บไซต์โรงแรมระดับพรีเมียม",
+    "ระบบจองที่พักออนไลน์ 2026",
+    "Luxury Hotel Web Design Thailand",
+    "จดทะเบียนจองตรงไม่เสียคอมมิชชั่น",
+    "วางระบบ Digital Marketing โรงแรม",
   ],
 
   priority: 6,

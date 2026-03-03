@@ -6,24 +6,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "focus-visible:ring-brand-primary inline-flex items-center justify-center gap-2 rounded-xl text-sm font-bold whitespace-nowrap transition-colors focus-visible:ring-1 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "focus-visible:ring-brand-primary inline-flex items-center justify-center gap-2 rounded-[var(--radius-button,0.75rem)] text-sm font-bold whitespace-nowrap transition-all duration-300 focus-visible:ring-1 focus-visible:outline-none active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-text-primary text-surface-main hover:bg-brand-primary shadow-sm",
-        neo: "bg-brand-primary text-surface-main hover:bg-brand-primary/90 shadow-sm",
+        default:
+          "shadow-glow bg-[var(--color-brand-primary)] text-[var(--color-brand-primary-fg)] hover:brightness-110",
+        neo: "shadow-glow hover:shadow-pro bg-[var(--color-brand-primary)] text-[var(--color-brand-primary-fg)] hover:translate-y-[-2px]",
         destructive: "bg-red-500 text-white shadow-sm hover:bg-red-500/90",
-        outline: "border-border hover:bg-surface-offset text-text-primary border bg-transparent",
-        secondary: "bg-surface-offset text-text-primary hover:bg-border/50",
-        ghost: "hover:bg-surface-offset hover:text-text-primary text-text-secondary",
-        link: "text-brand-primary underline-offset-4 hover:underline",
+        outline:
+          "border border-[var(--border)] bg-transparent text-[var(--text-primary)] hover:bg-[var(--surface-offset)]",
+        secondary:
+          "bg-[var(--surface-offset)] text-[var(--text-primary)] hover:bg-[var(--border)]/50",
+        ghost:
+          "text-[var(--text-secondary)] hover:bg-[var(--surface-offset)] hover:text-[var(--text-primary)]",
+        link: "text-[var(--color-brand-primary)] underline-offset-4 hover:underline",
         specialist:
-          "border-brand-primary/30 bg-brand-primary/5 text-brand-primary hover:bg-brand-primary/10 border",
+          "border border-[var(--color-brand-primary)]/30 bg-[var(--color-brand-primary)]/5 text-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary)]/10",
       },
       size: {
         default: "h-12 px-6 py-2",
         sm: "h-9 rounded-lg px-4 text-xs",
-        lg: "h-14 rounded-xl px-8 text-base",
+        lg: "h-14 rounded-[1rem] px-8 text-base",
         icon: "h-10 w-10",
       },
     },

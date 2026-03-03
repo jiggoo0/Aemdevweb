@@ -19,35 +19,29 @@ export const FeatureGrid = memo(({ features }: { features: readonly ServiceFeatu
       <div
         key={feature.title}
         className={cn(
-          "group rounded-card border-border relative flex flex-col overflow-hidden border p-10 transition-all duration-700",
-          "bg-surface-card hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-sm",
-          "transform-gpu will-change-transform",
+          "group relative flex flex-col overflow-hidden border border-[var(--border)] p-10 transition-all duration-700",
+          "hover:shadow-pro bg-[var(--surface-card)] hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40",
+          "transform-gpu rounded-[var(--dna-radius,1.25rem)] will-change-transform",
         )}
       >
         {/* Background Aura */}
         <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-[var(--color-brand-primary)] opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-10" />
 
-        <div className="bg-surface-offset border-border mb-10 flex h-16 w-16 items-center justify-center rounded-2xl border text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md">
+        <div className="group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-[calc(var(--dna-radius,1.25rem)*0.8)] border border-[var(--border)] bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-[var(--color-brand-primary-fg)]">
           <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
         </div>
 
         <div className="relative z-10 space-y-4">
           <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
-            คุณสมบัติที่ 0{idx + 1}
+            Node_{idx.toString().padStart(2, "0")}
           </span>
-          <h3 className="text-text-primary text-2xl font-black tracking-tighter uppercase italic">
+          <h3 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
             {feature.title}
           </h3>
-          <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-70">
+          <p className="text-lg leading-relaxed font-medium text-[var(--text-secondary)] italic opacity-70">
             “{feature.description}”
           </p>
         </div>
-
-        {/* Decorative Grid Trace */}
-        <div
-          className="absolute inset-0 z-0 opacity-[0.02] transition-opacity duration-700 group-hover:opacity-[0.05]"
-          style={{ backgroundImage: "url(/grid-pattern.svg)", backgroundSize: "20px 20px" }}
-        />
       </div>
     ))}
   </div>
