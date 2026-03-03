@@ -26,7 +26,7 @@ const NavLogo = memo(({ onClick }: { onClick?: () => void }) => (
       onClick={onClick}
       aria-label="Home - AEMDEVWEB"
     >
-      <div className="bg-brand-primary flex h-8 w-8 items-center justify-center rounded-lg text-[10px] font-black text-white uppercase shadow-md transition-transform group-hover:rotate-6">
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-brand-primary)] text-[10px] font-black text-white uppercase shadow-md transition-transform group-hover:rotate-6">
         AEM
       </div>
       <span className="text-text-primary text-xl font-black tracking-tighter uppercase italic">
@@ -70,12 +70,12 @@ const DesktopMenu = memo(
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "focus-visible:text-brand-primary relative flex items-center gap-1 px-5 py-2 text-[10px] leading-relaxed font-black tracking-[0.2em] uppercase transition-all outline-none",
+                    "relative flex items-center gap-1 px-5 py-2 text-[10px] leading-relaxed font-black tracking-[0.2em] uppercase transition-all outline-none focus-visible:text-[var(--color-brand-primary)]",
                     isActive ? "text-white" : "text-text-secondary hover:text-text-primary",
                   )}
                 >
                   {isActive && (
-                    <span className="bg-brand-primary absolute inset-0 z-[-1] rounded-full shadow-sm transition-all duration-300" />
+                    <span className="absolute inset-0 z-[-1] rounded-full bg-[var(--color-brand-primary)] shadow-sm transition-all duration-300" />
                   )}
                   {link.label}
                   {hasChildren && (
@@ -96,9 +96,9 @@ const DesktopMenu = memo(
                           <Link
                             href={child.href}
                             className={cn(
-                              "hover:bg-brand-primary/10 hover:text-brand-primary block rounded-lg px-4 py-3 text-[10px] font-bold tracking-widest uppercase transition-colors",
+                              "block rounded-lg px-4 py-3 text-[10px] font-bold tracking-widest uppercase transition-colors hover:bg-[var(--color-brand-primary)]/10 hover:text-[var(--color-brand-primary)]",
                               pathname === child.href
-                                ? "text-brand-primary bg-brand-primary/5"
+                                ? "bg-[var(--color-brand-primary)]/5 text-[var(--color-brand-primary)]"
                                 : "text-text-secondary",
                             )}
                           >
@@ -181,7 +181,7 @@ const Navbar = () => {
           isHidden ? "-translate-y-[120%]" : "translate-y-0",
         )}
       >
-        <div className="bg-surface-main/80 border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border px-5 shadow-lg backdrop-blur-md md:h-16 md:px-8">
+        <div className="border-border/40 pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between rounded-full border bg-[var(--surface-main)]/80 px-5 shadow-lg backdrop-blur-md md:h-16 md:px-8">
           <NavLogo onClick={() => setIsOpen(false)} />
 
           <DesktopMenu navigationItems={MAIN_NAV} pathname={pathname} />
@@ -194,7 +194,8 @@ const Navbar = () => {
               type="button"
               className={cn(
                 "group border-border/40 bg-surface-card/50 focus-visible:ring-brand-primary relative z-[720] flex h-10 w-10 items-center justify-center rounded-full border transition-all outline-none focus-visible:ring-2 active:scale-90",
-                isOpen && "border-brand-primary/50 bg-brand-primary/10",
+                isOpen &&
+                  "border-[var(--color-brand-primary)]/50 bg-[var(--color-brand-primary)]/10",
               )}
               aria-expanded={isOpen}
               aria-label={isOpen ? "Close Menu" : "Open Menu"}
@@ -239,7 +240,7 @@ const Navbar = () => {
 
         <nav
           className={cn(
-            "bg-surface-main/95 rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-sm transition-all duration-500",
+            "rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border bg-[var(--surface-main)]/95 p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-sm transition-all duration-500",
             isOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-5 scale-95 opacity-0",
           )}
         >
@@ -262,7 +263,7 @@ const Navbar = () => {
                     className={cn(
                       "flex items-center justify-between rounded-2xl px-5 py-4 text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-all",
                       isActive
-                        ? "text-brand-primary bg-brand-primary/10"
+                        ? "bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)]"
                         : "text-text-primary hover:bg-white/5",
                     )}
                   >
@@ -280,7 +281,7 @@ const Navbar = () => {
                             className={cn(
                               "block py-2 text-sm font-bold tracking-widest uppercase transition-colors",
                               pathname === child.href
-                                ? "text-brand-primary"
+                                ? "text-[var(--color-brand-primary)]"
                                 : "text-text-secondary",
                             )}
                           >

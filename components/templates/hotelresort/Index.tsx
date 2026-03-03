@@ -1,20 +1,20 @@
 /**
- * [TEMPLATE]: HOTEL_RESORT_ORCHESTRATOR v19.0.0 (DYNAMIC_DNA)
+ * [TEMPLATE]: HOSPITALITY_MASTER_ORCHESTRATOR (DYNAMIC_V2)
  * [STRATEGY]: Composition-First Layout | Province Identity Guard | Performance Optimized
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import React from "react";
-import dynamic from "next/dynamic"; // [PERFORMANCE]: Code Splitting
-import Link from "next/link";
+"use client";
+
+import React, { memo } from "react";
+import dynamic from "next/dynamic";
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { generateUniversalSchema } from "@/lib/schema";
 import type { UniversalTemplateProps } from "@/types";
-import { Button } from "@/components/ui/Button";
-import IconRenderer from "@/components/ui/IconRenderer";
+import { motion } from "framer-motion";
 
-// --- 1. Modular Component Registry (Dynamic) ---
+// --- 1. Modular Section Architecture (Premium Ready) ---
 const UniversalHero = dynamic(() => import("@/components/templates/sections/UniversalHero"));
 const UniversalRegistry = dynamic(
   () => import("@/components/templates/sections/UniversalRegistry"),
@@ -40,89 +40,75 @@ const LocalInsight = dynamic(() =>
 );
 const DynamicFAQ = dynamic(() => import("../sections/DynamicFAQ").then((mod) => mod.DynamicFAQ));
 
-// --- 2. Shared Component Registry (Dynamic) ---
+// --- 2. Shared High-Performance Components ---
 const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"));
 const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"));
 const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"));
 const ConversionCTA = dynamic(() => import("@/components/shared/ConversionCTA"));
 
-// [DYNAMIC_MAP]: นิยาม Component สำหรับกลุ่ม Hospitality เพื่อการจัดเรียงที่อิสระ
-const HOSPITALITY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
-  hero: ({ data }) => (
-    <section className="bg-surface-main">
-      <UniversalHero data={data} />
-    </section>
-  ),
+// [MASTER_MAP]: Strict Component Mapping for Hospitality DNA
+const HOSPITALITY_SECTIONS: Record<string, React.FC<{ data: UniversalTemplateProps }>> = {
+  hero: ({ data }) => <UniversalHero data={data} />,
+
   insight: ({ data }) => {
     if (!data.province) return null;
     return (
-      <section className="bg-surface-main py-24 md:py-32">
+      <section className="border-y border-[var(--border)] bg-[var(--surface-main)] py-24 md:py-40">
         <LocalInsight
           insight={data.localContext?.marketInsight || ""}
           painPoints={(data.localContext?.painPoints as string[]) || []}
           marketโอกาสเติบโต={data.marketโอกาสเติบโต}
         />
-        {/* [UX_OPTIMIZATION]: ลิงก์ไปยังหน้าบริการระดับ Master เพื่อดูมาตรฐาน Hospitality ทั่วประเทศ */}
-        {data.masterServiceUrl && (
-          <div className="container mx-auto mt-12 px-4 text-center">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-full border-[var(--brand-primary)]/20 px-8 py-6"
-            >
-              <a href={data.masterServiceUrl} className="flex items-center gap-3">
-                <IconRenderer name="Globe" size={16} className="text-[var(--brand-primary)]" />
-                <span className="font-sans text-[11px] font-bold tracking-widest uppercase">
-                  Hospitality Standards
-                </span>
-              </a>
-            </Button>
-          </div>
-        )}
       </section>
     );
   },
+
   promotions: ({ data }) => {
     if (!data.promotions || data.promotions.length === 0) return null;
     return (
-      <section className="bg-surface-offset border-border/40 border-y py-24">
-        <div className="container mx-auto px-4">
-          <div className="shadow-pro-xl rounded-section border-border/50 bg-surface-card relative overflow-hidden p-10 backdrop-blur-md transition-all md:p-20">
+      <section className="border-y border-[var(--border)] bg-[var(--surface-offset)] py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="glass-card shadow-pro-xl relative overflow-hidden rounded-[var(--radius-section,2.5rem)] border-l-[8px] border-[var(--color-brand-primary)] p-10 backdrop-blur-3xl md:p-20"
+          >
             <div className="relative z-10 flex flex-col items-center justify-between gap-12 md:flex-row">
               <div className="space-y-6 text-center md:text-left">
                 <div className="flex items-center justify-center gap-3 md:justify-start">
-                  <div className="bg-brand-primary h-2 w-2 rounded-full" />
-                  <span className="font-sans text-[12px] font-bold tracking-widest text-[var(--brand-primary)] uppercase">
-                    ข้อเสนอสุดพิเศษ
+                  <div className="h-2 w-2 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--color-brand-primary)]" />
+                  <span className="font-sans text-[12px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase">
+                    HOSPITALITY_SPECIAL_OFFER
                   </span>
                 </div>
-                <h3 className="text-text-primary text-3xl leading-[0.9] font-black tracking-tighter uppercase italic md:text-6xl">
+                <h3 className="text-4xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-7xl">
                   {data.promotions[0].title}
                 </h3>
-                <p className="text-text-secondary max-w-xl text-lg font-medium italic opacity-80">
+                <p className="max-w-xl text-xl font-bold text-[var(--text-secondary)] italic opacity-90">
                   “{data.promotions[0].description}”
                 </p>
               </div>
               {data.promotions[0].discount && (
-                <div className="rounded-3xl border-2 border-dashed border-[var(--brand-primary)]/30 bg-[var(--brand-primary)]/5 px-12 py-8 text-center shadow-inner">
-                  <p className="text-text-muted mb-2 text-[10px] font-bold tracking-widest uppercase opacity-40">
-                    Save_Rate
+                <div className="min-w-[240px] rounded-[2rem] border-2 border-dashed border-[var(--color-brand-primary)]/30 bg-[var(--color-brand-primary)]/5 px-12 py-10 text-center shadow-inner">
+                  <p className="mb-2 text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase opacity-60">
+                    EXCLUSIVE_SAVING
                   </p>
-                  <p className="text-brand-primary text-5xl font-black italic">
+                  <p className="text-6xl font-black tracking-tighter text-[var(--color-brand-primary)] italic">
                     {data.promotions[0].discount}
                   </p>
                 </div>
               )}
             </div>
-            <div className="bg-brand-primary/5 absolute inset-0 -z-0" />
-          </div>
+          </motion.div>
         </div>
       </section>
     );
   },
+
   "weather-facilities": ({ data }) => (
-    <section className="bg-surface-main space-y-24 py-24 md:py-40">
-      <div className="container mx-auto px-4">
+    <section className="space-y-24 bg-[var(--surface-main)] py-24 md:py-40">
+      <div className="container mx-auto px-6">
         <div className="ml-auto max-w-md">
           <WeatherTracker location={data.province || "Thailand"} />
         </div>
@@ -130,31 +116,26 @@ const HOSPITALITY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>
       <UniversalRegistry data={data} />
     </section>
   ),
+
   experience: ({ data }) => (
-    <section className="bg-surface-offset border-border/40 border-y py-24 md:py-40">
+    <section className="border-y border-[var(--border)] bg-[var(--surface-offset)] py-24 md:py-40">
       <ExperienceNodes isTourismHeavy={data.isTourismHeavy} />
     </section>
   ),
+
   "roadmap-gallery": ({ data }) => (
-    <section className="bg-surface-main space-y-32 py-24 md:py-32">
+    <div className="space-y-32 bg-[var(--surface-main)] py-24 md:py-40">
       {data.province && data.regionalRoadmap && (
         <RegionalRoadmap province={data.province} steps={data.regionalRoadmap} />
       )}
       {data.regionalVisuals?.gallery && <RegionalGallery images={data.regionalVisuals.gallery} />}
-    </section>
+    </div>
   ),
-  gallery: ({ data }) => {
-    if (!data.regionalVisuals?.gallery) return null;
-    return (
-      <section className="bg-surface-main py-24">
-        <RegionalGallery images={data.regionalVisuals.gallery} />
-      </section>
-    );
-  },
+
   success: ({ data }) => {
     if (!data.localSuccessStory) return null;
     return (
-      <section className="bg-surface-offset border-border/40 border-y py-24 md:py-32">
+      <section className="border-y border-[var(--border)] bg-[var(--surface-offset)] py-24 md:py-40">
         <LocalSuccessNode
           title={data.localSuccessStory.title}
           result={data.localSuccessStory.result}
@@ -163,101 +144,77 @@ const HOSPITALITY_MAP: Record<string, React.FC<{ data: UniversalTemplateProps }>
       </section>
     );
   },
+
   faq: ({ data }) => (
-    <section className="bg-surface-main py-24">
+    <section className="border-t border-[var(--border)] bg-[var(--surface-main)] py-24 md:py-40">
       <DynamicFAQ
         items={data.faqs}
-        title="Essential_Intelligence"
-        description={`ข้อมูลสำคัญสำหรับการเตรียมตัวเข้าพักที่ ${data.title} ณ ${data.province || "Thailand"}`}
+        title="Essential_Hospitality_FAQ"
+        description={`Critical operational intelligence for your stay at ${data.title}.`}
       />
     </section>
   ),
-  portal: ({ data }) => (
-    <section className="bg-surface-main">
-      <UniversalPortal data={data} />
-      {/* [P-SEO_OPTIMIZATION]: แสดงพื้นที่พักผ่อนยอดนิยม */}
-      {!data.province && data.servingAreas && data.servingAreas.length > 0 && (
-        <div className="container mx-auto px-4 pb-24 text-center">
-          <div className="flex flex-wrap justify-center gap-4">
-            {data.servingAreas.slice(0, 10).map((area) => (
-              <Link
-                key={area}
-                href={`/areas/${area.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-text-secondary hover:text-brand-primary text-[12px] font-black tracking-tighter italic transition-all"
-              >
-                {area}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </section>
-  ),
-  // --- Shared Components ---
+
+  portal: ({ data }) => <UniversalPortal data={data} />,
+
+  // --- Infrastructure Sections ---
   trust: () => (
-    <section className="bg-surface-main py-24">
+    <section className="py-24">
       <TrustBadge />
     </section>
   ),
   process: () => (
-    <section className="bg-surface-offset py-24">
+    <section className="bg-[var(--surface-offset)] py-24">
       <WorkProcess />
     </section>
   ),
   pricing: () => (
-    <section className="bg-surface-main py-24">
+    <section className="py-24">
       <PricingSection />
     </section>
   ),
-  cta: () => (
-    <section className="bg-surface-main pb-24">
-      <ConversionCTA />
-    </section>
-  ),
+  cta: () => <ConversionCTA />,
 };
 
-const HotelResortTemplate = ({ data }: { data: UniversalTemplateProps }) => {
+const HotelResortTemplate = memo(({ data }: { data: UniversalTemplateProps }) => {
   const schema = generateUniversalSchema(data);
   const { theme } = data;
 
-  // [DNA_ROUTER]: Default Sequence
-  const defaultSequence = [
-    "hero",
-    "insight",
-    "promotions",
-    "weather-facilities",
-    "experience",
-    "roadmap-gallery",
-    "success",
-    "faq",
-    "portal",
-  ];
-
   const renderSequence =
-    data.layoutOrder && data.layoutOrder.length > 0 ? data.layoutOrder : defaultSequence;
+    data.layoutOrder && data.layoutOrder.length > 0
+      ? data.layoutOrder
+      : [
+          "hero",
+          "insight",
+          "promotions",
+          "weather-facilities",
+          "experience",
+          "roadmap-gallery",
+          "success",
+          "faq",
+          "portal",
+        ];
 
   return (
-    <LayoutEngine spacing="none" theme={theme} className="template-hotelresort">
+    <LayoutEngine data={data} theme={theme} className="template-hospitality-orchestrator">
       <JsonLd data={schema} />
 
       <main className="relative flex flex-col antialiased">
-        <h2 className="sr-only">Hospitality Experience & Facility Architecture</h2>
-
-        {/* [DYNAMIC_RENDERER]: ประกอบร่างหน้าเว็บตาม DNA */}
         {renderSequence.map((key) => {
-          const SectionComponent = HOSPITALITY_MAP[key];
+          const SectionComponent = HOSPITALITY_SECTIONS[key];
           if (!SectionComponent) return null;
           return <SectionComponent key={key} data={data} />;
         })}
 
-        <footer className="bg-surface-main border-border/5 border-t py-12 text-center opacity-10">
-          <p className="font-mono text-[8px] tracking-[0.4em] uppercase">
-            Hospitality_Node_Protocol.v19.0.0_DYNAMIC
+        <footer className="border-t border-[var(--border)] bg-[var(--surface-main)] py-12 text-center opacity-20">
+          <p className="font-mono text-[9px] tracking-[0.5em] uppercase">
+            HOSPITALITY_PROTOCOL.v20.5.0_DYNAMIC
           </p>
         </footer>
       </main>
     </LayoutEngine>
   );
-};
+});
 
+HotelResortTemplate.displayName = "HotelResortTemplate";
 export default HotelResortTemplate;

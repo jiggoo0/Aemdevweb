@@ -74,7 +74,7 @@ export const DirectTerminal = ({
   };
 
   return (
-    <div className="group border-border/50 bg-surface-card/90 hover:border-brand-primary/30 relative overflow-hidden rounded-2xl border p-6 font-mono shadow-2xl transition-all duration-500">
+    <div className="group border-border/50 bg-surface-card/90 relative overflow-hidden rounded-2xl border p-6 font-mono shadow-2xl transition-all duration-500 hover:border-[var(--color-brand-primary)]/30">
       {/* [VISUAL]: CRT Scanline Effect */}
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.05)_50%),linear-gradient(90deg,rgba(255,0,0,0.02),rgba(0,255,0,0.01),rgba(0,0,255,0.02))] bg-[length:100%_4px,3px_100%] opacity-20" />
 
@@ -109,10 +109,10 @@ export const DirectTerminal = ({
                     line.includes("Success") ? "text-emerald-500" : "text-text-secondary",
                   )}
                 >
-                  <span className="text-brand-primary mr-2 opacity-30">❯</span>
+                  <span className="mr-2 text-[var(--color-brand-primary)] opacity-30">❯</span>
                   {line}
                   {i === output.length - 1 && status === "running" && (
-                    <span className="bg-brand-primary ml-1 inline-block h-3 w-1.5" />
+                    <span className="ml-1 inline-block h-3 w-1.5 bg-[var(--color-brand-primary)]" />
                   )}
                 </p>
               ))}
@@ -147,13 +147,13 @@ export const DirectTerminal = ({
           <div className="space-y-4">
             <div className="flex flex-col gap-2">
               <div className="border-border/20 flex gap-3 border-b pb-2 text-sm">
-                <span className="text-brand-primary font-bold">❯</span>
+                <span className="font-bold text-[var(--color-brand-primary)]">❯</span>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter_Access_ID (Email)..."
-                  className="text-text-primary selection:bg-brand-primary/30 w-full border-none bg-transparent font-bold outline-none placeholder:opacity-20"
+                  className="text-text-primary w-full border-none bg-transparent font-bold outline-none selection:bg-[var(--color-brand-primary)]/30 placeholder:opacity-20"
                 />
               </div>
               {error && (
@@ -164,7 +164,7 @@ export const DirectTerminal = ({
               <div className="text-text-muted/60 min-h-[40px] text-[10px] leading-tight italic">
                 {output.map((line, i) => (
                   <p key={i}>
-                    <span className="text-brand-primary/30 mr-2">⌁</span>
+                    <span className="mr-2 text-[var(--color-brand-primary)]/30">⌁</span>
                     {line}
                   </p>
                 ))}

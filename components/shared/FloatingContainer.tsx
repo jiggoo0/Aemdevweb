@@ -47,8 +47,8 @@ const FloatingContainerBase = ({
       <div className={cn("pointer-events-auto relative", !isVisible && "pointer-events-none")}>
         {showStatus && (
           <div className="absolute -top-2 -right-2 z-10 flex h-4 w-4 items-center justify-center">
-            <span className="bg-brand-primary absolute inline-flex h-full w-full rounded-full opacity-40" />
-            <span className="bg-brand-primary relative inline-flex h-2 w-2 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[var(--color-brand-primary)] opacity-40" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
           </div>
         )}
         {children}

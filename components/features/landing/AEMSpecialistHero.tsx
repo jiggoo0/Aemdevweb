@@ -1,145 +1,253 @@
 /**
- * [SPECIALIST COMPONENT]: AEM_SPECIALIST_HERO v18.5.0 (EXECUTIVE_STEALTH)
- * [STRATEGY]: Layered Atmosphere | Tactical Grid | Fluid Precision
+ * [SPECIALIST COMPONENT]: AEM_SPECIALIST_HERO v20.0.0 (MASTER_ARCHITECT)
+ * [STRATEGY]: Framer Motion Orchestration | Magnetic Physics | Depth & Texture
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo, useEffect, useState, useRef } from "react";
+import React, { memo, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 export const AEMSpecialistHero = memo(() => {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      setMousePos({
-        x: ((e.clientX - rect.left) / rect.width) * 100,
-        y: ((e.clientY - rect.top) / rect.height) * 100,
-      });
+  // --- 01. COORDINATE TRACKING (Zero-Jank Performance) ---
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = containerRef.current?.getBoundingClientRect() || {
+      left: 0,
+      top: 0,
+      width: 1,
+      height: 1,
     };
+    mouseX.set((clientX - left) / width);
+    mouseY.set((clientY - top) / height);
+  };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  // --- 02. PARALLAX & ATMOSPHERIC EFFECTS ---
+  const yParallax = useTransform(scrollY, [0, 500], [0, -100]);
+  const opacityParallax = useTransform(scrollY, [0, 400], [1, 0]);
+  const scaleParallax = useTransform(scrollY, [0, 400], [1, 1.1]);
+
+  const glowX = useTransform(smoothMouseX, [0, 1], ["20%", "80%"]);
+  const glowY = useTransform(smoothMouseY, [0, 1], ["20%", "80%"]);
+
+  // --- 03. ANIMATION VARIANTS (Luxury Orchestration) ---
+  const containerVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1, // Reduced for faster LCP
+        delayChildren: 0.05, // Minimal delay for critical paint
+      },
+    },
+  };
+
+  const itemVariants = {
+    initial: { y: 20, opacity: 0, filter: "blur(4px)" }, // Reduced y and blur for faster perceived load
+    animate: {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.8, // Faster duration for LCP element
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  const statusNodes = [
+    { label: "Infrastructure", value: "Enterprise Grade", icon: "ShieldCheck" },
+    { label: "Performance", value: "99+ Mobile PSI", icon: "Zap" },
+    { label: "Expertise", value: "Senior Architect", icon: "Crown" },
+    { label: "Availability", value: "Ready for Q2 2026", icon: "Calendar" },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-surface-main border-border/40 relative flex min-h-[90dvh] w-full flex-col items-center justify-center overflow-hidden border-b px-4 py-32"
+    <motion.section
+      ref={containerRef}
+      initial="initial"
+      animate="animate"
+      variants={containerVariants}
+      onMouseMove={handleMouseMove}
+      className="relative flex min-h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[var(--surface-main)] px-4 py-20 selection:bg-[var(--color-brand-primary)]/30"
     >
-      {/* --- LAYER 01: TACTICAL INFRASTRUCTURE (The Grid) --- */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, var(--text-primary) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div
-          className="absolute inset-0 transition-opacity duration-1000"
-          style={{
-            background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, var(--brand-primary) 0%, transparent 40%)`,
-            opacity: 0.03,
-          }}
-        />
-      </div>
-
-      {/* --- LAYER 02: ATMOSPHERIC NODES (Desktop Only for LCP) --- */}
+      {/* --- LAYER 01: TEXTURE & ATMOSPHERE (High-End Depth) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="bg-brand-primary/5 md:animate-aura-1 absolute -top-1/4 -left-1/4 h-[600px] w-[600px] rounded-full blur-[80px] md:blur-[140px]" />
-        <div className="bg-brand-secondary/5 md:animate-aura-2 absolute -right-1/4 bottom-0 h-[500px] w-[500px] rounded-full blur-[60px] md:blur-[120px]" />
+        {/* Grainy Noise Texture (Subtle Luxury) */}
+        <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply brightness-100 contrast-150 dark:mix-blend-overlay">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
+            <filter id="noiseFilter">
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.65"
+                numOctaves="3"
+                stitchTiles="stitch"
+              />
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+          </svg>
+        </div>
+
+        {/* Dynamic Glow Mesh */}
+        <motion.div
+          style={{ x: glowX, y: glowY, opacity: opacityParallax }}
+          className="absolute h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/15 blur-[160px]"
+        />
+
+        {/* Floating Accents */}
+        <motion.div style={{ y: yParallax, scale: scaleParallax }} className="absolute inset-0 z-0">
+          <div className="bg-brand-secondary/5 absolute top-1/4 right-0 h-[600px] w-[600px] rounded-full blur-[120px]" />
+          <div className="bg-brand-accent/5 absolute bottom-1/4 -left-1/4 h-[500px] w-[500px] rounded-full blur-[100px]" />
+        </motion.div>
+
+        {/* Tactical Grid (Sub-pixel Precision) */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: `linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
       </div>
 
-      {/* --- LAYER 03: CONTENT HUB --- */}
+      {/* --- LAYER 02: CONTENT ARCHITECTURE --- */}
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="flex flex-col items-center text-center">
-          {/* Status Architecture: Trust & Reliability Meta-Data */}
-          <div className="mb-16 flex flex-wrap items-center justify-center gap-4 px-4 md:gap-8">
-            {[
-              { label: "ความปลอดภัย", value: "มาตรฐานสากล", status: "emerald" },
-              { label: "ความเร็ว", value: "สูงสุด (Grade A)", status: "emerald" },
-              { label: "การดูแล", value: "ผู้เชี่ยวชาญโดยตรง", status: "emerald" },
-              { label: "สถานะ", value: "พร้อมรับงานใหม่", status: "emerald" },
-            ].map((node, i) => (
+          {/* Status Nodes: Credibility HUD */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-12 flex flex-wrap items-center justify-center gap-3 md:gap-6"
+          >
+            {statusNodes.map((node, i) => (
               <div
                 key={i}
-                className="border-border/10 bg-surface-card/30 shadow-pro-sm group hover:border-brand-primary/40 flex items-center gap-3 rounded-full border px-5 py-2 backdrop-blur-md transition-all"
+                className="glass-card flex items-center gap-3 rounded-full border px-4 py-2 backdrop-blur-2xl transition-all duration-500 hover:scale-105 hover:border-[var(--color-brand-primary)]/40"
               >
-                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                <span className="text-text-muted font-sans text-[10px] font-bold tracking-wide uppercase opacity-100 transition-opacity group-hover:opacity-100">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-500">
+                  <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+                </div>
+                <span className="text-text-muted font-sans text-[10px] font-bold tracking-[0.1em] uppercase">
                   {node.label}: <span className="text-text-primary ml-1">{node.value}</span>
                 </span>
               </div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Main Title: Outcome-Oriented Branding (Copywriting Crew Formula) */}
-          <h1 className="text-text-primary mb-12 max-w-6xl text-6xl leading-[0.8] font-black tracking-tighter uppercase italic drop-shadow-2xl md:text-9xl lg:text-[11rem]">
-            Dominate <br />
-            <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
-              Results.
-            </span>
-          </h1>
+          {/* Main Title: Narrative Dominance */}
+          <motion.div variants={itemVariants} className="relative mb-12 flex flex-col items-center">
+            <h1 className="text-text-primary relative max-w-[14ch] text-7xl leading-[0.85] font-black tracking-tighter uppercase italic drop-shadow-sm md:text-9xl lg:text-[12rem]">
+              Maximize <br />
+              <span className="relative">
+                <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
+                  Performance.
+                </span>
+                {/* Decorative underline */}
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ delay: 1.5, duration: 1, ease: "circOut" }}
+                  className="absolute -bottom-4 left-0 h-2 bg-[var(--color-brand-primary)] opacity-30 md:h-4"
+                />
+              </span>
+            </h1>
+          </motion.div>
 
-          {/* Core Vision: Executive B2B Copywriting */}
-          <div className="mb-20 flex max-w-4xl flex-col items-center gap-10">
-            <p className="text-text-secondary max-w-3xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
-              “ยกระดับธุรกิจของคุณให้เหนือกว่าคู่แข่งด้วย{" "}
-              <span className="text-text-primary">เว็บไซต์โหลดเร็วพิเศษ</span> <br />
-              ที่ลื่นไหล รองรับลูกค้าได้มหาศาล และเพิ่มยอดขายได้จริง”
+          {/* Executive Vision & Sub-Copy */}
+          <motion.div
+            variants={itemVariants}
+            className="mb-20 flex max-w-4xl flex-col items-center"
+          >
+            <p className="text-text-secondary max-w-2xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
+              “ปลดล็อกศักยภาพสูงสุดของเว็บไซต์ ด้วยโครงสร้างทางเทคนิคระดับ
+              <span className="text-text-primary"> Enterprise</span> เพื่อประสบการณ์ที่ลื่นไหล
+              และยอดขายที่เติบโตอย่างไร้ขีดจำกัด”
             </p>
-            <div className="bg-border/20 relative h-px w-48 overflow-hidden">
-              <div className="bg-brand-primary absolute inset-0 h-full w-full -translate-x-full" />
-            </div>
-          </div>
-
-          {/* Conversion Actions: Strategic Funnel */}
-          <div className="flex flex-col items-center gap-8 sm:flex-row">
-            <Button
-              size="lg"
-              variant="default"
-              href={SITE_CONFIG.links.line}
-              className="group glow-primary h-20 min-w-[320px] rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic shadow-sm transition-all duration-500 hover:scale-[1.02] hover:shadow-md active:scale-95"
-            >
-              <span className="mr-6">ปรึกษาผู้เชี่ยวชาญ (ฟรี)</span>
-              <IconRenderer
-                name="Zap"
-                size={20}
-                className="transition-transform group-hover:scale-105 group-hover:rotate-12"
+            <div className="mt-12 h-[2px] w-32 overflow-hidden rounded-full bg-[var(--color-brand-primary)]/20">
+              <motion.div
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                className="h-full w-full bg-[var(--color-brand-primary)]"
               />
-            </Button>
+            </div>
+          </motion.div>
 
-            <Button
-              size="lg"
-              variant="outline"
-              href="/services"
-              className="border-brand-primary/30 hover:border-brand-primary bg-surface-card/50 hover:bg-brand-primary/5 h-20 min-w-[320px] rounded-2xl px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-md transition-all duration-500"
-            >
-              <IconRenderer name="ArrowRight" size={18} className="text-brand-primary mr-4" />
-              ดูบริการทั้งหมดของเรา
-            </Button>
-          </div>
+          {/* Conversion Actions: Strategic Call-to-Action */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col items-center gap-8 sm:flex-row"
+          >
+            <Magnetic distance={0.3}>
+              <Button
+                size="lg"
+                variant="default"
+                href={SITE_CONFIG.links.line}
+                className="group glow-primary relative h-20 min-w-[320px] overflow-hidden rounded-2xl px-12 text-[12px] font-black tracking-[0.4em] uppercase italic shadow-2xl transition-all duration-700"
+              >
+                <div className="absolute inset-0 bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
+                <span className="relative z-10 mr-6">คุยกับสถาปนิกเว็บ</span>
+                <IconRenderer
+                  name="Zap"
+                  size={20}
+                  className="relative z-10 transition-transform group-hover:scale-125 group-hover:rotate-12"
+                />
+              </Button>
+            </Magnetic>
+
+            <Magnetic distance={0.15}>
+              <Button
+                size="lg"
+                variant="outline"
+                href="/services"
+                className="bg-surface-card/20 h-20 min-w-[320px] rounded-2xl border-[var(--color-brand-primary)]/30 px-12 text-[11px] font-black tracking-[0.4em] uppercase italic backdrop-blur-xl transition-all duration-700 hover:border-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary)]/5"
+              >
+                <IconRenderer
+                  name="ArrowRight"
+                  size={18}
+                  className="mr-4 text-[var(--color-brand-primary)]"
+                />
+                สำรวจโซลูชันทั้งหมด
+              </Button>
+            </Magnetic>
+          </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator: Friendly Feed */}
-      <div className="absolute bottom-12 flex flex-col items-center gap-4">
-        <span className="text-text-muted font-sans text-[9px] font-bold tracking-widest uppercase opacity-80">
-          เลื่อนลงเพื่อดูข้อมูลเพิ่ม
+      {/* --- LAYER 03: SCROLL INDICATOR (Tactical Feedback) --- */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+        style={{ opacity: opacityParallax }}
+        className="absolute bottom-10 flex flex-col items-center gap-4"
+      >
+        <span className="text-text-muted font-sans text-[9px] font-bold tracking-[0.3em] uppercase opacity-60">
+          SYSTEM SCANNING BELOW
         </span>
-        <div className="border-border/40 flex h-10 w-6 items-start justify-center rounded-full border p-2">
-          <div className="bg-brand-primary h-1.5 w-1 animate-bounce rounded-full" />
+        <div className="border-border/40 flex h-12 w-7 items-start justify-center rounded-full border p-2 backdrop-blur-sm">
+          <motion.div
+            animate={{ y: [0, 20, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="h-2 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--color-brand-primary)]"
+          />
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 });
 

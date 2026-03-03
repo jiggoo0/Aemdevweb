@@ -176,7 +176,7 @@ function TimeUnit({
     <div className="flex flex-col items-center gap-1.5">
       <div
         className={cn(
-          "bg-surface-main text-text-primary flex h-14 w-14 items-center justify-center rounded-2xl border text-2xl font-black shadow-2xl backdrop-blur-md transition-all md:h-16 md:w-16 md:text-3xl",
+          "text-text-primary flex h-14 w-14 items-center justify-center rounded-2xl border bg-[var(--surface-main)] text-2xl font-black shadow-2xl backdrop-blur-md transition-all md:h-16 md:w-16 md:text-3xl",
           isWarning && "animate-[pulse_1s_ease-in-out_infinite]",
         )}
         style={{

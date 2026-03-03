@@ -22,16 +22,16 @@ export const CapabilityGraph = ({ skills }: CapabilityGraphProps) => {
       {skills.map((skill) => (
         <div
           key={skill.title}
-          className="bg-surface-card border-border/10 hover:border-brand-primary/40 group relative overflow-hidden rounded-2xl border p-6 transition-all duration-500"
+          className="bg-surface-card border-border/10 group relative overflow-hidden rounded-2xl border p-6 transition-all duration-500 hover:border-[var(--color-brand-primary)]/40"
         >
-          <div className="bg-brand-primary/10 text-brand-primary group-hover:bg-brand-primary mb-4 flex h-12 w-12 items-center justify-center rounded-xl transition-colors group-hover:text-white">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)] transition-colors group-hover:bg-[var(--color-brand-primary)] group-hover:text-white">
             <IconRenderer name={skill.icon} size={24} />
           </div>
           <h3 className="text-text-primary text-lg font-bold tracking-tight">{skill.title}</h3>
           <p className="text-text-muted mt-2 text-sm leading-relaxed opacity-80">
             {skill.description || "ความเชี่ยวชาญระดับสูงในการวางโครงสร้างและปรับแต่งประสิทธิภาพ"}
           </p>
-          <div className="bg-brand-primary/5 absolute -right-4 -bottom-4 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
+          <div className="absolute -right-4 -bottom-4 h-24 w-24 rounded-full bg-[var(--color-brand-primary)]/5 opacity-0 blur-2xl transition-opacity group-hover:opacity-100" />
         </div>
       ))}
     </div>

@@ -67,14 +67,14 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
           key={stat.label}
           className={cn(
             "group border-border/40 bg-surface-card/30 relative flex flex-col overflow-hidden rounded-2xl border p-6 transition-all duration-500",
-            "hover:border-brand-primary/40 hover:bg-surface-offset/50 hover:shadow-sm",
+            "hover:border-[var(--color-brand-primary)]/40 hover:bg-[var(--surface-offset)]/50 hover:shadow-sm",
           )}
         >
           {/* Decorative Grid */}
           <div className="bg-infrastructure-grid absolute inset-0 opacity-[0.03] select-none" />
 
           <div className="relative z-10 mb-4 flex items-start justify-between">
-            <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary group-hover:text-surface-main border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-500 group-hover:shadow-md">
+            <div className="group-hover:text-surface-main border-border/50 flex h-10 w-10 items-center justify-center rounded-xl border bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:bg-[var(--color-brand-primary)] group-hover:shadow-md">
               <IconRenderer name={stat.icon} size={18} />
             </div>
             <span className="text-text-muted font-mono text-[8px] font-black tracking-widest uppercase opacity-100">
@@ -92,7 +92,7 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
               >
                 {stat.value}
               </span>
-              <span className="text-brand-primary text-[10px] font-black tracking-widest uppercase opacity-80">
+              <span className="text-[10px] font-black tracking-widest text-[var(--color-brand-primary)] uppercase opacity-80">
                 {stat.unit}
               </span>
             </div>
@@ -102,7 +102,7 @@ export default function AreaInfrastructureHUD({ allNodes }: AreaInfrastructureHU
           </div>
 
           <div className="bg-border/20 relative z-10 mt-4 h-px w-full overflow-hidden">
-            <div className="bg-brand-primary absolute h-full w-1/3" />
+            <div className="absolute h-full w-1/3 bg-[var(--color-brand-primary)]" />
           </div>
           <p className="text-text-muted mt-2 text-[8px] font-medium italic opacity-100">
             {stat.description}

@@ -100,14 +100,15 @@ export const AuditReportGenerator = memo(() => {
               )}
             >
               <div className="space-y-6">
-                <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-3 rounded-full border px-5 py-1.5">
-                  <span className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
-                  <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.4em] uppercase">
+                <div className="inline-flex items-center gap-3 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-5 py-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)]" />
+                  <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase">
                     ระบบวิเคราะห์ประสิทธิภาพเว็บไซต์
                   </span>
                 </div>
                 <h2 className="text-text-primary text-4xl leading-tight font-black tracking-tighter uppercase italic md:text-6xl">
-                  Analyze your <br /> <span className="text-brand-primary">Digital Edge.</span>
+                  Analyze your <br />{" "}
+                  <span className="text-[var(--color-brand-primary)]">Digital Edge.</span>
                 </h2>
                 <p className="text-text-secondary text-lg font-medium italic opacity-80">
                   ระบุช่องโหว่ทางเทคนิคที่คุณอาจมองข้าม <br className="hidden md:block" />
@@ -123,15 +124,15 @@ export const AuditReportGenerator = memo(() => {
                     placeholder="https://your-domain.com"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="bg-surface-offset focus:border-brand-primary focus:ring-brand-primary/10 text-text-primary border-border w-full rounded-2xl border px-6 py-6 pl-14 text-lg font-bold italic transition-all outline-none"
+                    className="focus:ring-brand-primary/10 text-text-primary border-border w-full rounded-2xl border bg-[var(--surface-offset)] px-6 py-6 pl-14 text-lg font-bold italic transition-all outline-none focus:border-[var(--color-brand-primary)]"
                   />
-                  <div className="text-brand-primary/40 group-focus-within:text-brand-primary absolute top-1/2 left-5 -translate-y-1/2 transition-colors">
+                  <div className="absolute top-1/2 left-5 -translate-y-1/2 text-[var(--color-brand-primary)]/40 transition-colors group-focus-within:text-[var(--color-brand-primary)]">
                     <IconRenderer name="Activity" size={24} />
                   </div>
                 </div>
                 <Button
                   type="submit"
-                  className="bg-text-primary text-surface-main hover:bg-brand-primary h-16 w-full rounded-2xl text-[11px] font-black tracking-[0.3em] uppercase italic transition-all duration-500"
+                  className="bg-text-primary h-16 w-full rounded-2xl text-[11px] font-black tracking-[0.3em] text-[var(--surface-main)] uppercase italic transition-all duration-500 hover:bg-[var(--color-brand-primary)]"
                 >
                   Execute System Audit
                 </Button>
@@ -157,7 +158,7 @@ export const AuditReportGenerator = memo(() => {
                   <div className="flex flex-col gap-4">
                     <Button
                       href={SITE_CONFIG.links.line}
-                      className="bg-brand-primary h-14 rounded-xl text-[10px] font-black tracking-widest uppercase italic"
+                      className="h-14 rounded-xl bg-[var(--color-brand-primary)] text-[10px] font-black tracking-widest uppercase italic"
                     >
                       Connect with Specialist
                     </Button>
@@ -174,13 +175,13 @@ export const AuditReportGenerator = memo(() => {
           </div>
 
           {/* RIGHT: Data Feed (The 'Authentic' Feel) */}
-          <div className="bg-surface-offset lg:border-border/50 relative flex min-h-[450px] flex-col overflow-hidden border-t p-8 lg:col-span-5 lg:border-t-0 lg:border-l">
+          <div className="lg:border-border/50 relative flex min-h-[450px] flex-col overflow-hidden border-t bg-[var(--surface-offset)] p-8 lg:col-span-5 lg:border-t-0 lg:border-l">
             <div className="border-border mb-6 flex items-center justify-between border-b pb-4">
               <div className="flex flex-col gap-1">
                 <span className="text-text-muted font-mono text-[9px] font-black uppercase opacity-40">
                   บันทึกการทำงาน
                 </span>
-                <span className="text-brand-primary font-mono text-[7px] font-bold tracking-widest uppercase">
+                <span className="font-mono text-[7px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
                   เชื่อมต่ออย่างปลอดภัย
                 </span>
               </div>
@@ -218,18 +219,20 @@ export const AuditReportGenerator = memo(() => {
                   </span>
                 </div>
               ))}
-              {status === "scanning" && <div className="bg-brand-primary ml-12 h-3 w-1" />}
+              {status === "scanning" && (
+                <div className="ml-12 h-3 w-1 bg-[var(--color-brand-primary)]" />
+              )}
             </div>
 
             {/* PROGRESS METRIC */}
             <div className="bg-surface-card border-border/50 mt-8 space-y-3 rounded-2xl border p-6">
               <div className="flex items-center justify-between font-mono text-[9px] font-black">
                 <span className="text-text-muted uppercase opacity-100">Audit_Synthesis</span>
-                <span className="text-brand-primary">{Math.round(progress)}%</span>
+                <span className="text-[var(--color-brand-primary)]">{Math.round(progress)}%</span>
               </div>
               <div className="bg-border/20 h-1 w-full overflow-hidden rounded-full">
                 <div
-                  className="bg-brand-primary h-full transition-all duration-700 ease-out"
+                  className="h-full bg-[var(--color-brand-primary)] transition-all duration-700 ease-out"
                   style={{ width: `${progress}%` }}
                 />
               </div>

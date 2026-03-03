@@ -111,11 +111,11 @@ export default function ThailandMap({ allNodes, activeRegion, onRegionChange }: 
         {/* --- RIGHT: REGION HUD --- */}
         <div className="flex flex-col justify-center space-y-8">
           <div className="space-y-3">
-            <span className="text-brand-primary font-mono text-[9px] font-black tracking-[0.5em] uppercase">
+            <span className="font-mono text-[9px] font-black tracking-[0.5em] text-[var(--color-brand-primary)] uppercase">
               โครงข่ายพื้นที่ให้บริการ
             </span>
             <h3 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-5xl lg:text-6xl">
-              National_<span className="text-brand-primary">Graph</span>
+              National_<span className="text-[var(--color-brand-primary)]">Graph</span>
             </h3>
             <p className="text-text-muted text-sm font-medium italic opacity-60">
               วิเคราะห์ความหนาแน่นและศักยภาพของ Digital Infrastructure ในแต่ละภูมิภาครายจังหวัด
@@ -128,9 +128,9 @@ export default function ThailandMap({ allNodes, activeRegion, onRegionChange }: 
                 key={region.id}
                 onClick={() => onRegionChange(region.id)}
                 className={cn(
-                  "border-border bg-surface-offset/50 hover:border-brand-primary/40 flex flex-col gap-2 rounded-xl border p-4 text-left transition-all",
+                  "border-border flex flex-col gap-2 rounded-xl border bg-[var(--surface-offset)]/50 p-4 text-left transition-all hover:border-[var(--color-brand-primary)]/40",
                   activeRegion === region.id
-                    ? "border-brand-primary bg-brand-primary/10 shadow-sm"
+                    ? "border-[var(--color-brand-primary)] bg-[var(--color-brand-primary)]/10 shadow-sm"
                     : "opacity-60",
                 )}
               >
@@ -154,7 +154,7 @@ export default function ThailandMap({ allNodes, activeRegion, onRegionChange }: 
 
           <button
             onClick={() => onRegionChange("All")}
-            className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary hover:bg-brand-primary hover:text-surface-main group flex w-full items-center justify-center gap-3 rounded-xl border py-4 font-mono text-[10px] font-black tracking-[0.4em] uppercase transition-all"
+            className="hover:text-surface-main group flex w-full items-center justify-center gap-3 rounded-xl border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 py-4 font-mono text-[10px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase transition-all hover:bg-[var(--color-brand-primary)]"
           >
             Reset_National_View
           </button>

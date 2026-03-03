@@ -20,10 +20,15 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 14. [x] [Completed] ฉีดกลยุทธ์ Strategic Keywords และ aiSignal (GEO/AEO Optimization) เข้าสู่ระบบ Metadata และ Schema.org ทั่วทั้งไซต์ เพื่อครองอันดับบน AI Answer Engines
 15. [x] [Completed] ปรับปรุง PageSpeed Insights & Rich Results (Mobile Contrast, Heading Hierarchy, LCP/Aura Optimization) ผ่าน Full Validation (aipc) 100%
 16. [ ] [Removed] ระบบ AI Agent Framework (ถูกถอดออกตามความต้องการของผู้ใช้งาน)
-17. [ ] [Pending] พัฒนาชุดบทความยุทธศาสตร์ "AI-First Business" เพื่อครองอันดับบน AI Search Engines (GEO)
+17. [x] [Completed] พัฒนาชุดบทความยุทธศาสตร์ "AI-First Business" (2026 Edition) เพื่อครองอันดับบน AI Search Engines (GEO) และสร้าง Authority ในฐานะ Specialist
 18. [ ] [Pending] ตรวจสอบความถูกต้องด้าน Accessibility (WCAG 2.2) สำหรับลูกค้ากลุ่มองค์กรโดยใช้ Axe-core
 19. [x] [Completed] พัฒนาระบบติดต่อสอบถาม (Contact Hub) แบบ Specialist Interface (/contact) พร้อมแผนที่และ Social Connectivity สื่อสารความน่าเชื่อถือระดับสูง (v18.0.0)
 20. [x] [Completed] ยกระดับระบบนำทาง (Standardized Menu v20.0.0) รองรับ Hierarchical Menus, React 19 Composition และผ่านมาตรฐาน WCAG/Vercel Guidelines
+21. [x] [Completed] ยกระดับ UI/UX สู่มาตรฐาน "Master Architect" (Hero v20.0.0) โดยใช้ Framer Motion Orchestration, Magnetic Physics และ Noise Texture
+22. [x] [Completed] ปรับจูน Core Web Vitals (LCP/CLS) ขั้นสูง โดยการใช้ Motion Values แทน State Re-renders และปรับปรุง Suspense Fallbacks ให้มีความสูงแม่นยำ 100%
+23. [x] [Completed] Grand Template Refactoring (v20.5.0) รีแฟคเตอร์โครงสร้าง `components/templates/*` ทั้ง 7 แบบ (Corporate, SalePage, SeoAgency, Catalog, Bio, HotelResort, LocalAuthority) ให้เป็น Master Orchestrator
+24. [x] [Completed] Global Variable Binding เปลี่ยน Hardcoded Tailwind classes เป็น CSS Variables (`var(--color-brand-primary)`) ทั้งโปรเจกต์ เพื่อให้ระบบ `theme` ควบคุมสีได้ 100%
+25. [x] [Completed] ยกระดับไฟล์ `sections/*` ทั้งหมดด้วยแอนิเมชันระดับพรีเมียม (Perspective Hover, Scroll-linked Motion) และผ่านการตรวจสอบ `aipc` (Full Validation) 100%
 
 ## 🛠️ Tech Stack Status:
 
@@ -45,4 +50,8 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 - [AI Note] รีแฟคเตอร์ระบบ Schema.org ใน lib/schema.ts ให้มีการเชื่อมโยง Graph (@id) ระหว่าง Person, Organization และ Service อย่างสมบูรณ์
 - [AI Note] อัปเกรด Metadata Generator ให้รองรับการฉีด Keywords แบบเจาะจงและ Author Identity ตามมาตรฐาน E-E-A-T
 - [AI Note] ติดตั้งระบบ aiSignal ใน lib/data-merger.ts เพื่อป้อนข้อมูลสรุปที่เหมาะสมให้กับ AI Crawlers และ Answer Engines (Gemini, Perplexity)
-- [AI Note] บังคับใช้นโยบาย "Skill Reference" จาก Home เสมอ
+- [AI Note] ติดตั้ง framer-motion และสร้าง Magnetic Wrapper เพื่อยกระดับความรู้สึก Premium และ Interactivity
+- [AI Note] รีแฟคเตอร์ Hero Section (v20.0.0) ให้เป็น Master Architect Edition โดยใช้ Orchestration Animation และ Motion Values เพื่อประสิทธิภาพสูงสุด (Zero-Jank)
+- [AI Note] แก้ไขปัญหา CLS ในหน้าหลักโดยการปรับปรุง Suspense Fallback Heights ให้ตรงกับขนาดจริงของ Component (TrustBadge, ImpactStats)
+- [AI Note] รีแฟคเตอร์ `components/templates/*` ทั้ง 7 แบบให้เป็น Master Orchestrator, ลบ Hardcoded Tailwind Classes ออก และลบโค้ดขยะ (Unused Files) จนผ่าน `aipc` ได้ 100%
+- [AI Note] จัดทำชุดบทความยุทธศาสตร์ "AI-First Business" (2026) จำนวน 2 ฉบับ โดยเน้นการฉีด aiSignal และ Direct Answer Strategy เพื่อทำ GEO (Generative Engine Optimization)

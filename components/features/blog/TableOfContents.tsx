@@ -52,7 +52,7 @@ const TableOfContents = ({ headings }: TOCProps) => {
   return (
     <nav className="border-border/40 bg-surface-card/40 rounded-2xl border p-8 backdrop-blur-sm">
       <div className="mb-6 flex items-center gap-3">
-        <IconRenderer name="Layers" className="text-brand-primary h-4 w-4" />
+        <IconRenderer name="Layers" className="h-4 w-4 text-[var(--color-brand-primary)]" />
         <span className="text-text-muted font-mono text-[10px] font-black tracking-[0.4em] uppercase">
           Article_Navigation
         </span>
@@ -78,7 +78,7 @@ const TableOfContents = ({ headings }: TOCProps) => {
               className={cn(
                 "block text-sm transition-all duration-300",
                 activeId === heading.id
-                  ? "text-brand-primary translate-x-1 font-bold"
+                  ? "translate-x-1 font-bold text-[var(--color-brand-primary)]"
                   : "text-text-secondary hover:text-text-primary group-hover:translate-x-1",
               )}
             >
@@ -87,7 +87,7 @@ const TableOfContents = ({ headings }: TOCProps) => {
                   className={cn(
                     "h-px transition-all duration-500",
                     activeId === heading.id
-                      ? "bg-brand-primary w-4"
+                      ? "w-4 bg-[var(--color-brand-primary)]"
                       : "bg-text-muted/20 w-2 group-hover:w-3",
                   )}
                 />

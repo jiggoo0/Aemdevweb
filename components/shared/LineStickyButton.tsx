@@ -108,13 +108,13 @@ const LineStickyButton = ({ className, source = "general_conversion" }: LineStic
           <div className="pointer-events-none absolute right-full mr-6 hidden transform-gpu items-center md:flex">
             <span
               className={cn(
-                "shadow-pro border-border/40 bg-surface-main/95 text-text-primary translate-x-3 rounded-2xl border px-6 py-3 text-[11px] font-bold tracking-[0.2em] whitespace-nowrap uppercase opacity-0 backdrop-blur-sm transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
+                "shadow-pro border-border/40 text-text-primary translate-x-3 rounded-2xl border bg-[var(--surface-main)]/95 px-6 py-3 text-[11px] font-bold tracking-[0.2em] whitespace-nowrap uppercase opacity-0 backdrop-blur-sm transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100",
               )}
             >
               {UI_STRINGS.cta.consultExpert}
             </span>
             {/* Neural Linkage UI */}
-            <div className="bg-brand-primary h-px w-6 origin-right scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
+            <div className="h-px w-6 origin-right scale-x-0 bg-[var(--color-brand-primary)] transition-transform duration-500 group-hover:scale-x-100" />
           </div>
         </a>
       </div>

@@ -31,7 +31,10 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
   }, []);
 
   return (
-    <section ref={ref} className="bg-surface-offset relative overflow-hidden py-24 md:py-48">
+    <section
+      ref={ref}
+      className="relative overflow-hidden bg-[var(--surface-offset)] py-24 md:py-48"
+    >
       {/* 01. MATRIX INFRASTRUCTURE */}
       <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.02]" />
 
@@ -40,7 +43,7 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
           {/* Main Specialist Node */}
           <div
             className={cn(
-              "group rounded-section hover:border-brand-primary/40 border-border/10 bg-surface-card relative flex flex-col justify-end overflow-hidden border p-12 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] lg:col-span-7",
+              "group rounded-section border-border/10 bg-surface-card relative flex flex-col justify-end overflow-hidden border p-12 transition-all duration-[1500ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[var(--color-brand-primary)]/40 lg:col-span-7",
               visible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0",
             )}
           >
@@ -63,7 +66,7 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
               <span className="font-mono text-[10px] font-black tracking-[0.4em] text-white uppercase">
                 MASTER_NODE_V18
               </span>
-              <div className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
+              <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)]" />
             </div>
 
             <div className="relative z-10 space-y-6 text-white">
@@ -90,7 +93,7 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
           <div className="grid grid-rows-2 gap-8 lg:col-span-5">
             <div
               className={cn(
-                "group rounded-section bg-brand-primary shadow-pro-xl text-surface-main relative flex flex-col justify-center p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-md",
+                "group rounded-section shadow-pro-xl relative flex flex-col justify-center bg-[var(--color-brand-primary)] p-12 text-[var(--surface-main)] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-md",
                 visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
               style={{ transitionDelay: "300ms" }}
@@ -110,15 +113,15 @@ export const ExperienceNodes = ({ isTourismHeavy }: ExperienceNodesProps) => {
 
             <div
               className={cn(
-                "group rounded-section border-brand-primary/30 hover:border-brand-primary bg-surface-card relative flex flex-col justify-center border p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
+                "group rounded-section bg-surface-card relative flex flex-col justify-center border border-[var(--color-brand-primary)]/30 p-12 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-[var(--color-brand-primary)]",
                 visible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0",
               )}
               style={{ transitionDelay: "500ms" }}
             >
-              <span className="text-brand-primary absolute top-8 right-8 font-mono text-[10px] font-black opacity-20">
+              <span className="absolute top-8 right-8 font-mono text-[10px] font-black text-[var(--color-brand-primary)] opacity-20">
                 REF_ID: SEC_02
               </span>
-              <h4 className="text-brand-primary mb-4 text-3xl font-black uppercase italic">
+              <h4 className="mb-4 text-3xl font-black text-[var(--color-brand-primary)] uppercase italic">
                 {isTourismHeavy ? "Edge_Network" : "Security_Ledger"}
               </h4>
               <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-80">

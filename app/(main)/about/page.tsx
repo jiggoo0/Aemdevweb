@@ -9,7 +9,6 @@ import type { Metadata } from "next";
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import UniversalHero from "@/components/templates/sections/UniversalHero";
-import { FeatureGrid } from "@/components/templates/sections/UniversalRegistry";
 import { CapabilityGraph } from "@/components/templates/sections/CapabilityGraph";
 import { SuccessTimeline } from "@/components/templates/sections/SuccessTimeline";
 import { TrustEquation } from "@/components/templates/sections/TrustEquation";
@@ -24,6 +23,7 @@ import ImpactStats from "@/components/shared/ImpactStats";
 import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
+import type { IconName } from "@/components/ui/IconRenderer";
 
 export const metadata: Metadata = {
   title: `รู้จักกับ ${SITE_CONFIG.expert.displayName} | ผู้ออกแบบกลยุทธ์เว็บไซต์เพื่อธุรกิจ`,
@@ -198,7 +198,29 @@ export default function AboutPage() {
               สัมผัสประสบการณ์การทำงานกับพาร์ทเนอร์ที่ให้ความสำคัญกับเป้าหมายของคุณ
             </p>
           </div>
-          <FeatureGrid features={ABOUT_CONTENT.coreValues} />
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {ABOUT_CONTENT.coreValues.map((feature, idx) => (
+              <div
+                key={feature.title}
+                className="group hover:shadow-pro relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--surface-card)] p-10 transition-all duration-700 hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40"
+              >
+                <div className="group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-[1rem] border border-[var(--border)] bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-[var(--color-brand-primary-fg)]">
+                  <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
+                    Value_{idx.toString().padStart(2, "0")}
+                  </span>
+                  <h3 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
+                    {feature.title}
+                  </h3>
+                  <p className="text-lg leading-relaxed font-medium text-[var(--text-secondary)] italic opacity-70">
+                    “{feature.description}”
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -13,26 +13,26 @@ export default function AuthorCard() {
     <div className="shadow-glow-sm border-border/40 bg-surface-card/60 mt-16 rounded-3xl border p-8 backdrop-blur-lg md:p-10">
       <div className="flex flex-col items-center gap-8 md:flex-row">
         {/* Profile Image with Glow Effect */}
-        <div className="bg-brand-primary/10 relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl p-1 md:h-32 md:w-32">
+        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-[var(--color-brand-primary)]/10 p-1 md:h-32 md:w-32">
           <Image
             src={SITE_CONFIG.expert.avatar}
             alt={SITE_CONFIG.expert.displayName}
             fill
             className="rounded-xl object-cover grayscale transition-all duration-500 hover:grayscale-0"
           />
-          <div className="bg-brand-primary/20 absolute inset-0 animate-pulse rounded-xl" />
+          <div className="absolute inset-0 animate-pulse rounded-xl bg-[var(--color-brand-primary)]/20" />
         </div>
 
         {/* Content Section */}
         <div className="text-center md:text-left">
           <div className="flex flex-col items-center gap-2 md:items-start">
-            <span className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase italic">
+            <span className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase italic">
               Verified_Expert_Identity
             </span>
             <h3 className="text-text-primary text-2xl font-black tracking-tight uppercase italic md:text-3xl">
               {SITE_CONFIG.expert.displayName}
             </h3>
-            <p className="text-brand-primary/80 mb-2 font-mono text-[10px] font-bold tracking-widest uppercase italic">
+            <p className="mb-2 font-mono text-[10px] font-bold tracking-widest text-[var(--color-brand-primary)]/80 uppercase italic">
               {SITE_CONFIG.expert.jobTitle}
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function AuthorCard() {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-text-muted hover:text-brand-primary flex items-center gap-2 transition-all hover:-translate-y-1"
+                className="text-text-muted flex items-center gap-2 transition-all hover:-translate-y-1 hover:text-[var(--color-brand-primary)]"
                 aria-label={link.label}
               >
                 <IconRenderer name={link.icon as IconName} size={18} />

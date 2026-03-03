@@ -75,7 +75,7 @@ const TrustBadge = () => {
             className={cn(
               "group relative flex cursor-default items-center gap-4 overflow-hidden rounded-[1.8rem] md:rounded-[2.2rem]",
               "border-border bg-surface-card/30 shadow-pro border px-6 py-4 backdrop-blur-md md:px-8 md:py-5",
-              "hover:border-brand-primary/40 hover:bg-surface-offset/60 transition-all duration-500",
+              "transition-all duration-500 hover:border-[var(--color-brand-primary)]/40 hover:bg-[var(--surface-offset)]/60",
               "transform-gpu will-change-transform",
               "hover:-translate-y-1.5",
               "transition-all duration-700 ease-[0.23,1,0.32,1]",
@@ -89,14 +89,14 @@ const TrustBadge = () => {
           >
             {/* Content Hub */}
             <div className="flex items-center gap-4">
-              <div className="text-brand-primary/80 group-hover:text-brand-primary transition-all duration-500 group-hover:scale-105">
+              <div className="text-[var(--color-brand-primary)]/80 transition-all duration-500 group-hover:scale-105 group-hover:text-[var(--color-brand-primary)]">
                 <IconRenderer name={node.icon} size={20} strokeWidth={2} />
               </div>
               <div className="flex flex-col">
                 <span className="text-text-secondary group-hover:text-text-primary font-sans text-[11px] font-bold tracking-wider uppercase transition-colors duration-500 md:text-[12px]">
                   {node.label}
                 </span>
-                <span className="text-brand-primary/40 group-hover:text-brand-primary/60 font-mono text-[8px] font-bold tracking-widest uppercase transition-all duration-500">
+                <span className="font-mono text-[8px] font-bold tracking-widest text-[var(--color-brand-primary)]/40 uppercase transition-all duration-500 group-hover:text-[var(--color-brand-primary)]/60">
                   {UI_STRINGS.trust.verifiedStatus}
                 </span>
               </div>

@@ -145,7 +145,7 @@ const MetricCard = ({
       className={cn(
         "group rounded-section relative flex min-h-[280px] flex-col overflow-hidden border p-10 transition-all duration-1000",
         "border-border bg-surface-card/30 shadow-pro-sm backdrop-blur-md",
-        "hover:border-brand-primary/40 hover:bg-surface-offset/60 hover:-translate-y-1 hover:shadow-sm",
+        "hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:bg-[var(--surface-offset)]/60 hover:shadow-sm",
         "transform-gpu will-change-transform",
         visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
       )}
@@ -159,14 +159,14 @@ const MetricCard = ({
       />
 
       <div className="relative z-10 mb-auto flex items-start justify-between">
-        <div className="bg-surface-offset text-brand-primary group-hover:bg-brand-primary border-border group-hover:text-surface-main group- flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:shadow-md">
+        <div className="border-border group-hover:text-surface-main group- flex h-14 w-14 items-center justify-center rounded-2xl border bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:bg-[var(--color-brand-primary)] group-hover:shadow-md">
           <IconRenderer name={stat.icon} size={24} strokeWidth={2.5} />
         </div>
         <div className="flex flex-col items-end gap-1.5">
           <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-60">
             {UI_STRINGS.stats.statPrefix} 0{index + 1}
           </span>
-          <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-md" />
+          <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
         </div>
       </div>
 
@@ -180,18 +180,18 @@ const MetricCard = ({
               {stat.trend === "up" && (
                 <IconRenderer name="ArrowUpRight" size={12} className="mb-1 text-emerald-500" />
               )}
-              <span className="text-brand-primary text-lg leading-none font-black tracking-widest uppercase opacity-100">
+              <span className="text-lg leading-none font-black tracking-widest text-[var(--color-brand-primary)] uppercase opacity-100">
                 {stat.unit}
               </span>
             </div>
           </div>
-          <p className="text-text-primary group-hover:text-brand-primary text-sm leading-relaxed font-black tracking-[0.1em] uppercase italic transition-colors md:text-base">
+          <p className="text-text-primary text-sm leading-relaxed font-black tracking-[0.1em] uppercase italic transition-colors group-hover:text-[var(--color-brand-primary)] md:text-base">
             {stat.label}
           </p>
         </div>
 
         <div className="space-y-3">
-          <div className="bg-border/50 group-hover:bg-brand-primary/20 h-px w-full transition-all duration-700" />
+          <div className="bg-border/50 h-px w-full transition-all duration-700 group-hover:bg-[var(--color-brand-primary)]/20" />
           <p className="text-text-muted font-mono text-[10px] leading-relaxed tracking-wider uppercase opacity-100">
             {stat.description}
           </p>

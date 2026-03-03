@@ -95,13 +95,13 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
           <div className="border-border/40 bg-surface-card/80 shadow-pro-lg flex flex-col gap-6 rounded-3xl border p-2 md:flex-row md:items-center">
             {/* SEARCH INPUT */}
             <div className="relative flex-grow">
-              <div className="text-brand-primary absolute top-1/2 left-5 -translate-y-1/2 opacity-40">
+              <div className="absolute top-1/2 left-5 -translate-y-1/2 text-[var(--color-brand-primary)] opacity-40">
                 <IconRenderer name="Search" size={18} />
               </div>
               <input
                 type="text"
                 placeholder="ค้นหาจังหวัด หรือพื้นที่ให้บริการ (Search Nodes...)"
-                className="bg-surface-offset/50 text-text-primary w-full rounded-2xl border-none py-4 pr-6 pl-14 font-bold outline-none placeholder:opacity-30 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
+                className="text-text-primary w-full rounded-2xl border-none bg-[var(--surface-offset)]/50 py-4 pr-6 pl-14 font-bold outline-none placeholder:opacity-30 focus:ring-2 focus:ring-[var(--brand-primary)]/20"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -116,8 +116,8 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
                   className={cn(
                     "rounded-xl px-5 py-2.5 text-[10px] font-black tracking-widest uppercase transition-all",
                     activeRegion === region
-                      ? "bg-brand-primary text-surface-main shadow-sm"
-                      : "bg-surface-offset/50 text-text-muted hover:bg-surface-offset border-border/20 border",
+                      ? "text-surface-main bg-[var(--color-brand-primary)] shadow-sm"
+                      : "text-text-muted border-border/20 border bg-[var(--surface-offset)]/50 hover:bg-[var(--surface-offset)]",
                   )}
                 >
                   {region}
@@ -129,8 +129,8 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
           {/* NEAR ME NOTIFICATION */}
           {nearMeNode && !searchQuery && activeRegion === "All" && (
             <div className="mt-4 flex animate-bounce items-center justify-center gap-3">
-              <div className="bg-brand-primary h-2 w-2 rounded-full" />
-              <span className="text-brand-primary font-mono text-[9px] font-black tracking-widest uppercase opacity-80">
+              <div className="h-2 w-2 rounded-full bg-[var(--color-brand-primary)]" />
+              <span className="font-mono text-[9px] font-black tracking-widest text-[var(--color-brand-primary)] uppercase opacity-80">
                 Near_Me_Detected: {nearMeNode} | Node_Recommendation_Active
               </span>
             </div>
@@ -145,7 +145,7 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
           <section className="space-y-12">
             <div className="flex items-center gap-6">
               <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
-                Search_<span className="text-brand-primary">Results</span>
+                Search_<span className="text-[var(--color-brand-primary)]">Results</span>
               </h2>
               <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
               <span className="font-mono text-[10px] font-bold opacity-30">
@@ -177,7 +177,7 @@ export default function AreaSearchHub({ allNodes, regions }: AreaSearchHubProps)
               <section key={region} id={`region-${region}`} className="scroll-mt-48 space-y-12">
                 <div className="flex items-center gap-6">
                   <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
-                    {region}_<span className="text-brand-primary">Region</span>
+                    {region}_<span className="text-[var(--color-brand-primary)]">Region</span>
                   </h2>
                   <div className="from-brand-primary/30 h-px flex-1 bg-gradient-to-r to-transparent" />
                   <span className="font-mono text-[10px] font-bold opacity-30">

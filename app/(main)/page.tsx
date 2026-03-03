@@ -53,6 +53,32 @@ const LoadingSkeleton = ({ height, className }: { height: string; className?: st
   />
 );
 
+// [OPTIMIZED]: Specific Fallbacks for CLS Mitigation
+const TrustBadgeFallback = () => (
+  <div className="flex w-full flex-col items-center gap-10">
+    <div className="bg-border/10 h-6 w-1/3 animate-pulse rounded-full" />
+    <div className="flex flex-wrap justify-center gap-4">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <div
+          key={i}
+          className="bg-surface-card/30 border-border/10 h-16 w-40 animate-pulse rounded-full border"
+        />
+      ))}
+    </div>
+  </div>
+);
+
+const ImpactStatsFallback = () => (
+  <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {[1, 2, 3, 4].map((i) => (
+      <div
+        key={i}
+        className="bg-surface-card/30 rounded-section border-border/10 h-[280px] animate-pulse border"
+      />
+    ))}
+  </div>
+);
+
 const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), {
   ssr: true,
 });
@@ -167,21 +193,13 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl">
             <div className="glass-card shadow-pro-xl rounded-section border-border/50 bg-surface-card/80 relative overflow-hidden border p-10 backdrop-blur-3xl md:p-20">
               <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24">
-                <Suspense
-                  fallback={
-                    <div className="bg-surface-card/10 h-20 w-full animate-pulse rounded-full" />
-                  }
-                >
+                <Suspense fallback={<TrustBadgeFallback />}>
                   <TrustBadge />
                 </Suspense>
 
                 <div className="bg-border/20 h-px w-full" />
 
-                <Suspense
-                  fallback={
-                    <div className="rounded-section bg-surface-card/10 h-64 w-full animate-pulse" />
-                  }
-                >
+                <Suspense fallback={<ImpactStatsFallback />}>
                   <ImpactStats />
                 </Suspense>
               </div>

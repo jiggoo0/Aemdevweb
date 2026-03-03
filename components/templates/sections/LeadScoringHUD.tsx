@@ -73,18 +73,18 @@ export const LeadScoringHUD = memo(() => {
         {/* LEFT: Neural Readout */}
         <div className="space-y-10 lg:col-span-5">
           <div>
-            <div className="text-brand-primary mb-4 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3 text-[var(--color-brand-primary)]">
               <IconRenderer name="Activity" size={18} />
               <span className="font-mono text-[10px] font-black tracking-[0.4em] uppercase">
                 ประเมินศักยภาพลูกค้า
               </span>
             </div>
             <h3 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic">
-              Lead <span className="text-brand-primary">Intelligence.</span>
+              Lead <span className="text-[var(--color-brand-primary)]">Intelligence.</span>
             </h3>
           </div>
 
-          <div className="bg-surface-offset border-border/50 relative flex items-center justify-center rounded-3xl border p-10 shadow-inner">
+          <div className="border-border/50 relative flex items-center justify-center rounded-3xl border bg-[var(--surface-offset)] p-10 shadow-inner">
             <div className="text-center">
               <span className="text-text-primary text-8xl font-black tracking-tighter italic tabular-nums transition-all duration-700">
                 {score}
@@ -127,8 +127,8 @@ export const LeadScoringHUD = memo(() => {
                 className={cn(
                   "group border-border/50 relative overflow-hidden rounded-2xl border p-6 transition-all duration-500",
                   sig.status === "analyzing"
-                    ? "bg-surface-offset/50"
-                    : "bg-surface-card hover:border-brand-primary/30",
+                    ? "bg-[var(--surface-offset)]/50"
+                    : "bg-surface-card hover:border-[var(--color-brand-primary)]/30",
                 )}
               >
                 <div className="relative z-10 flex items-center justify-between">
@@ -146,7 +146,7 @@ export const LeadScoringHUD = memo(() => {
                         "font-mono text-xs font-bold tracking-tight",
                         sig.status === "analyzing"
                           ? "text-text-muted opacity-80"
-                          : "text-brand-primary",
+                          : "text-[var(--color-brand-primary)]",
                       )}
                     >
                       {sig.value}
@@ -159,7 +159,7 @@ export const LeadScoringHUD = memo(() => {
             ))}
           </div>
 
-          <div className="bg-surface-offset border-border/50 mt-8 rounded-2xl border border-dashed p-6">
+          <div className="border-border/50 mt-8 rounded-2xl border border-dashed bg-[var(--surface-offset)] p-6">
             <p className="text-text-muted text-[10px] leading-relaxed font-medium italic opacity-100">
               "AI Agent is currently orchestrating decision paths based on 142 historical success
               nodes. Expected ROI trajectory verified."

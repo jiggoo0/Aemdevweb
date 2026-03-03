@@ -26,7 +26,12 @@ export const TrustEquation = memo(() => {
   }, []);
 
   const components = [
-    { label: "EEAT_Identity", value: "Expertise", icon: "UserCheck", color: "text-brand-primary" },
+    {
+      label: "EEAT_Identity",
+      value: "Expertise",
+      icon: "UserCheck",
+      color: "text-[var(--color-brand-primary)]",
+    },
     { label: "System_Health", value: "Performance", icon: "Zap", color: "text-amber-500" },
     { label: "Data_Safety", value: "Security", icon: "ShieldCheck", color: "text-emerald-500" },
   ];

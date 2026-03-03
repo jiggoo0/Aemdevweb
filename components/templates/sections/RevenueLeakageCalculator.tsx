@@ -52,22 +52,23 @@ export default function RevenueLeakageCalculator({
   if (suppressUI) return null;
 
   return (
-    <section className="bg-surface-main border-border/40 relative overflow-hidden border-y py-24 md:py-40">
+    <section className="border-border/40 relative overflow-hidden border-y bg-[var(--surface-main)] py-24 md:py-40">
       {/* 01. MATRIX INFRASTRUCTURE */}
       <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.02]" />
-      <div className="bg-brand-primary/5 pointer-events-none absolute top-0 -left-1/4 h-[600px] w-[600px] rounded-full blur-[140px]" />
+      <div className="pointer-events-none absolute top-0 -left-1/4 h-[600px] w-[600px] rounded-full bg-[var(--color-brand-primary)]/5 blur-[140px]" />
 
       <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-8">
         {/* --- STRATEGIC HEADER --- */}
         <header className="mb-20 space-y-6 text-center md:text-left">
-          <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2">
-            <span className="bg-brand-primary h-1.5 w-1.5 rounded-full" />
-            <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)]" />
+            <span className="font-sans text-[11px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
               เครื่องมือประเมินความเสี่ยงธุรกิจ
             </span>
           </div>
           <h2 className="text-text-primary text-4xl leading-tight font-black tracking-tighter uppercase italic md:text-7xl">
-            ประเมิน <br /> <span className="text-brand-primary">รายได้ที่สูญเสีย.</span>
+            ประเมิน <br />{" "}
+            <span className="text-[var(--color-brand-primary)]">รายได้ที่สูญเสีย.</span>
           </h2>
           <p className="text-text-secondary max-w-2xl text-lg font-medium italic opacity-80 md:text-xl">
             “ทุกมิลลิวินาทีที่เว็บคุณช้า คือกำไรสุทธิที่กำลังไหลออกจากธุรกิจโดยไม่รู้ตัว”
@@ -83,7 +84,7 @@ export default function RevenueLeakageCalculator({
               </h3>
               <div className="flex gap-1">
                 <div className="bg-border h-1 w-4 rounded-full" />
-                <div className="bg-brand-primary h-1 w-8 rounded-full" />
+                <div className="h-1 w-8 rounded-full bg-[var(--color-brand-primary)]" />
               </div>
             </div>
 
@@ -145,11 +146,11 @@ export default function RevenueLeakageCalculator({
                   backgroundSize: "30px 30px",
                 }}
               />
-              <div className="bg-brand-primary absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-20 blur-[100px]" />
+              <div className="absolute -top-20 -right-20 h-64 w-64 rounded-full bg-[var(--color-brand-primary)] opacity-20 blur-[100px]" />
 
               <div className="relative z-10 flex h-full flex-col">
                 <div className="mb-10 flex items-center justify-between">
-                  <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+                  <span className="font-sans text-[11px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
                     ผลลัพธ์การคำนวณ
                   </span>
                   <div className={cn("h-2 w-2 rounded-full bg-emerald-500", isCalculating && "")} />
@@ -174,7 +175,7 @@ export default function RevenueLeakageCalculator({
                     <span className="text-[12px] font-bold text-white/80 uppercase italic">
                       ความสูญเสียสะสมต่อปี
                     </span>
-                    <span className="text-brand-primary text-xl font-black italic tabular-nums">
+                    <span className="text-xl font-black text-[var(--color-brand-primary)] italic tabular-nums">
                       ฿{(yearlyLoss / 1000000).toFixed(2)}M
                     </span>
                   </div>
@@ -187,7 +188,7 @@ export default function RevenueLeakageCalculator({
                 <div className="mt-auto space-y-6">
                   <Button
                     href={SITE_CONFIG.links.line}
-                    className="bg-brand-primary h-16 w-full rounded-2xl text-[13px] font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-95"
+                    className="h-16 w-full rounded-2xl bg-[var(--color-brand-primary)] text-[13px] font-bold tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-95"
                   >
                     ปรึกษาแนวทางแก้ไข (ฟรี)
                   </Button>
@@ -228,7 +229,7 @@ const InputGroup = memo(
             <span
               className={cn(
                 "text-2xl font-black tracking-tighter uppercase italic md:text-3xl",
-                isWarning ? "text-brand-primary" : "text-text-primary",
+                isWarning ? "text-[var(--color-brand-primary)]" : "text-text-primary",
               )}
             >
               {value}

@@ -20,7 +20,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
     "โดยเน้นความเสถียรสูงสุดด้วยเทคโนโลยี Static Site Generation (SSG) ที่ช่วยให้เว็บเข้าถึงได้รวดเร็วแม้ในช่วงฤดูมรสุมที่มีสัญญาณอินเทอร์เน็ตจำกัด",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/ranong-node.webp",
+  heroImage: "/images/areas/ranong-hotspring.webp",
   coordinates: { lat: 9.9528, lng: 98.6084 },
   districts: ["เมืองระนอง", "ละอุ่น", "กะเปอร์", "กระบุรี", "สุขสำราญ"],
 
@@ -104,7 +104,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/ranong-node.webp",
+      banner: "/images/areas/ranong-hotspring.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

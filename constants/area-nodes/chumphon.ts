@@ -20,7 +20,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้ท้องถิ่นก้าวสู่การเป็น Smart City ที่แท้จริง พร้อมรองรับการประเมิน ITA ในระดับสูงสุด",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chumphon-node.webp",
+  heroImage: "/images/areas/chumphon-gateway.webp",
   coordinates: { lat: 10.493, lng: 99.18 },
   districts: ["เมืองชุมพร", "ท่าแซะ", "ปะทิว", "หลังสวน", "ละแม", "พะโต๊ะ", "สวี", "ทุ่งตะโก"],
 
@@ -103,7 +103,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chumphon-node.webp",
+      banner: "/images/areas/chumphon-gateway.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

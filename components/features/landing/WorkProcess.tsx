@@ -108,8 +108,8 @@ const WorkProcess = () => {
         )}
       >
         <div className="max-w-4xl space-y-6">
-          <div className="text-brand-primary flex items-center gap-4">
-            <div className="bg-brand-primary h-2 w-2 rounded-full shadow-md" />
+          <div className="flex items-center gap-4 text-[var(--color-brand-primary)]">
+            <div className="h-2 w-2 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
             <span
               suppressHydrationWarning
               className="font-mono text-[10px] font-black tracking-[0.4em] uppercase"
@@ -125,7 +125,7 @@ const WorkProcess = () => {
           </h2>
         </div>
 
-        <div className="border-brand-primary/50 max-w-md border-l-[4px] pl-6 md:border-l-[6px] md:pl-10">
+        <div className="max-w-md border-l-[4px] border-[var(--color-brand-primary)]/50 pl-6 md:border-l-[6px] md:pl-10">
           <p className="text-text-secondary text-lg leading-relaxed font-medium italic opacity-80 md:text-2xl">
             “เปลี่ยนโครงสร้างธุรกิจให้เป็น <br />
             <span className="text-text-primary decoration-brand-primary font-black underline underline-offset-[8px]">
@@ -162,7 +162,7 @@ const WorkProcess = () => {
               className={cn(
                 "border-border bg-surface-card/60 relative z-10 flex h-full flex-col overflow-hidden border p-8 transition-all duration-700 md:p-10",
                 "rounded-section backdrop-blur-sm",
-                "hover:border-brand-primary/40 transform-gpu will-change-transform hover:-translate-y-1 hover:shadow-md hover:shadow-sm",
+                "transform-gpu will-change-transform hover:-translate-y-1 hover:border-[var(--color-brand-primary)]/40 hover:shadow-md hover:shadow-sm",
               )}
             >
               {/* Sequential ID Background */}
@@ -170,7 +170,7 @@ const WorkProcess = () => {
                 suppressHydrationWarning
                 className={cn(
                   "pointer-events-none absolute top-4 right-6 z-0 font-mono text-6xl font-black italic transition-all duration-700 md:text-8xl",
-                  "text-border/10 group-hover:text-brand-primary/10",
+                  "text-border/10 group-hover:text-[var(--color-brand-primary)]/10",
                   !mounted && "opacity-0",
                 )}
               >
@@ -179,19 +179,19 @@ const WorkProcess = () => {
 
               {/* Icon Matrix */}
               <div className="relative z-10 mb-10 flex items-center justify-between">
-                <div className="border-border bg-surface-offset text-brand-primary group-hover:bg-brand-primary group- flex h-14 w-14 items-center justify-center rounded-2xl border transition-all duration-500 group-hover:text-white group-hover:shadow-md md:h-16 md:w-16">
+                <div className="border-border group- flex h-14 w-14 items-center justify-center rounded-2xl border bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:bg-[var(--color-brand-primary)] group-hover:text-white group-hover:shadow-md md:h-16 md:w-16">
                   <IconRenderer name={step.icon} size={28} strokeWidth={2.5} />
                 </div>
-                <div className="bg-brand-primary/20 group-hover:bg-brand-primary group-hover: h-2 w-2 rounded-full" />
+                <div className="group-hover: h-2 w-2 rounded-full bg-[var(--color-brand-primary)]/20 group-hover:bg-[var(--color-brand-primary)]" />
               </div>
 
               {/* Information Hub */}
               <div className="relative z-10 flex-grow space-y-4">
                 <div className="space-y-1">
-                  <p className="text-brand-primary font-mono text-[10px] font-black tracking-[0.3em] uppercase opacity-60">
+                  <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase opacity-60">
                     ขั้นตอน 0{index + 1}
                   </p>
-                  <h3 className="text-text-primary group-hover:text-brand-primary text-xl font-black tracking-tight uppercase italic transition-colors md:text-2xl">
+                  <h3 className="text-text-primary text-xl font-black tracking-tight uppercase italic transition-colors group-hover:text-[var(--color-brand-primary)] md:text-2xl">
                     {step.title}
                   </h3>
                 </div>
@@ -203,8 +203,8 @@ const WorkProcess = () => {
               {/* Metric Verification */}
               <footer className="border-border relative z-10 mt-10 border-t pt-6">
                 <div className="flex items-center gap-3">
-                  <div className="bg-brand-primary/10 flex h-5 w-5 items-center justify-center rounded-full">
-                    <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-md" />
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--color-brand-primary)]/10">
+                    <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
                   </div>
                   <span className="text-text-muted font-mono text-[9px] font-bold tracking-[0.3em] uppercase">
                     {step.metric}
@@ -228,7 +228,7 @@ const WorkProcess = () => {
         <div className="max-w-3xl space-y-12">
           <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-6xl lg:text-7xl">
             Ready to Build Your <br />
-            <span className="text-brand-primary">Digital Legacy?</span>
+            <span className="text-[var(--color-brand-primary)]">Digital Legacy?</span>
           </h3>
 
           <div className="flex flex-col items-center gap-8">

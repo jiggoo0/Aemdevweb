@@ -99,7 +99,7 @@ const PricingSection = () => {
     <section
       id="pricing"
       ref={sectionRef}
-      className="bg-surface-offset border-border/10 relative overflow-hidden border-y py-24 md:py-48"
+      className="border-border/10 relative overflow-hidden border-y bg-[var(--surface-offset)] py-24 md:py-48"
     >
       {/* 01. BLUEPRINT INFRASTRUCTURE */}
       <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.03]" />
@@ -107,18 +107,18 @@ const PricingSection = () => {
       <div className="relative z-10 container mx-auto px-4 md:px-8">
         {/* --- HEADER_NODE --- */}
         <header className="mb-24 space-y-6 text-center md:text-left">
-          <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-            <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-            <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+          <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
+            <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
+            <span className="font-sans text-[11px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
               แผนการลงทุนที่คุ้มค่า
             </span>
           </div>
 
           <h2 className="text-text-primary text-5xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
-            แพ็กเกจ <br /> <span className="text-brand-primary">บริการ.</span>
+            แพ็กเกจ <br /> <span className="text-[var(--color-brand-primary)]">บริการ.</span>
           </h2>
 
-          <div className="border-brand-primary/40 border-l-[6px] pl-8 md:pl-12">
+          <div className="border-l-[6px] border-[var(--color-brand-primary)]/40 pl-8 md:pl-12">
             <p className="text-text-primary max-w-3xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
               “เราเปลี่ยนงบประมาณโฆษณา ให้เป็นสินทรัพย์ดิจิทัลที่ทำงานแทนคุณได้ตลอด 24 ชม.”
             </p>
@@ -137,14 +137,14 @@ const PricingSection = () => {
                 "translate-y-16 opacity-0",
                 visibleItems.has(i) && "translate-y-0 opacity-100",
                 plan.highlight
-                  ? "border-brand-primary bg-surface-card z-10 shadow-sm hover:shadow-md lg:-translate-y-4"
-                  : "bg-surface-card border-border/10 hover:border-brand-primary/40",
+                  ? "bg-surface-card z-10 border-[var(--color-brand-primary)] shadow-sm hover:shadow-md lg:-translate-y-4"
+                  : "bg-surface-card border-border/10 hover:border-[var(--color-brand-primary)]/40",
               )}
               style={{ transitionDelay: `${i * 200}ms` }}
             >
               {plan.highlight && (
                 <div className="absolute top-8 right-10">
-                  <span className="text-brand-primary font-sans text-[10px] font-bold tracking-widest uppercase">
+                  <span className="font-sans text-[10px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
                     แนะนำสำหรับคุณ
                   </span>
                 </div>
@@ -154,13 +154,13 @@ const PricingSection = () => {
                 <span className="text-text-muted font-sans text-[11px] font-bold tracking-widest uppercase opacity-100">
                   แพ็กเกจที่ 0{i + 1}
                 </span>
-                <h3 className="text-text-primary group-hover:text-brand-primary text-3xl font-black tracking-tighter uppercase italic transition-colors md:text-4xl">
+                <h3 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic transition-colors group-hover:text-[var(--color-brand-primary)] md:text-4xl">
                   {plan.name}
                 </h3>
 
                 <div className="pt-8">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-brand-primary text-5xl font-black tracking-tighter italic tabular-nums md:text-7xl">
+                    <span className="text-5xl font-black tracking-tighter text-[var(--color-brand-primary)] italic tabular-nums md:text-7xl">
                       {isMounted
                         ? typeof plan.price === "number"
                           ? `฿${plan.price.toLocaleString()}`
@@ -184,7 +184,7 @@ const PricingSection = () => {
                 <ul className="border-border/5 mb-16 space-y-6 border-t pt-12">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-4">
-                      <div className="text-brand-primary mt-1 shrink-0">
+                      <div className="mt-1 shrink-0 text-[var(--color-brand-primary)]">
                         <IconRenderer name="CheckCircle2" size={16} />
                       </div>
                       <span className="text-text-secondary text-sm leading-relaxed font-medium italic opacity-80 md:text-base">
@@ -201,7 +201,7 @@ const PricingSection = () => {
                     className={cn(
                       "h-16 w-full text-[11px] font-black tracking-[0.3em] uppercase transition-all duration-500",
                       !plan.highlight &&
-                        "border-border hover:border-brand-primary hover:text-brand-primary",
+                        "border-border hover:border-[var(--color-brand-primary)] hover:text-[var(--color-brand-primary)]",
                     )}
                   >
                     <a href={SITE_CONFIG.links.line} target="_blank" rel="noopener noreferrer">

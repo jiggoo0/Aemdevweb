@@ -38,7 +38,7 @@ const ServiceNavigationHUD = ({ currentService, allServices }: ServiceNavigation
       <nav
         className={cn(
           "pointer-events-auto relative flex flex-col items-center gap-2",
-          "border-brand-primary/10 bg-surface-main/80 rounded-full border px-4 py-2 shadow-sm backdrop-blur-sm transition-all duration-500",
+          "rounded-full border border-[var(--color-brand-primary)]/10 bg-[var(--surface-main)]/80 px-4 py-2 shadow-sm backdrop-blur-sm transition-all duration-500",
           isOpen ? "rounded-[2rem] px-6 py-6" : "rounded-full",
         )}
       >
@@ -50,8 +50,8 @@ const ServiceNavigationHUD = ({ currentService, allServices }: ServiceNavigation
           aria-label="Toggle Service Navigation"
         >
           <div className="relative flex h-2.5 w-2.5 items-center justify-center">
-            <div className="bg-brand-primary absolute h-full w-full rounded-full opacity-40" />
-            <div className="bg-brand-primary relative h-2 w-2 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
+            <div className="absolute h-full w-full rounded-full bg-[var(--color-brand-primary)] opacity-40" />
+            <div className="relative h-2 w-2 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
           </div>
 
           <div className="flex items-baseline gap-2">
@@ -82,8 +82,8 @@ const ServiceNavigationHUD = ({ currentService, allServices }: ServiceNavigation
                   className={cn(
                     "group flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300",
                     isActive
-                      ? "bg-brand-primary text-surface-main shadow-sm"
-                      : "hover:bg-brand-primary/5 text-text-secondary hover:text-brand-primary",
+                      ? "text-surface-main bg-[var(--color-brand-primary)] shadow-sm"
+                      : "text-text-secondary hover:bg-[var(--color-brand-primary)]/5 hover:text-[var(--color-brand-primary)]",
                   )}
                 >
                   <div
@@ -91,7 +91,7 @@ const ServiceNavigationHUD = ({ currentService, allServices }: ServiceNavigation
                       "flex h-7 w-7 items-center justify-center rounded-lg border text-[10px] font-black transition-all",
                       isActive
                         ? "border-white/20 bg-white/10"
-                        : "border-border bg-surface-offset group-hover:border-brand-primary/20",
+                        : "border-border bg-[var(--surface-offset)] group-hover:border-[var(--color-brand-primary)]/20",
                     )}
                   >
                     {service.templateSlug.substring(0, 2).toUpperCase()}

@@ -68,7 +68,7 @@ export const PerformanceTrajectory = memo(() => {
     <section
       ref={ref}
       id="growth-trajectory"
-      className="border-border/10 bg-surface-main relative overflow-hidden border-y py-24 md:py-48"
+      className="border-border/10 relative overflow-hidden border-y bg-[var(--surface-main)] py-24 md:py-48"
     >
       {/* 01. KINETIC INFRASTRUCTURE */}
       <div className="bg-infrastructure-grid pointer-events-none absolute inset-0 opacity-[0.03]" />
@@ -82,19 +82,19 @@ export const PerformanceTrajectory = memo(() => {
               visible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0",
             )}
           >
-            <div className="border-brand-primary/20 bg-brand-primary/5 inline-flex items-center gap-4 rounded-full border px-6 py-2.5 backdrop-blur-md">
-              <div className="bg-brand-primary h-1.5 w-1.5 rounded-full shadow-[0_0_8px_var(--brand-primary)]" />
-              <span className="text-brand-primary font-sans text-[11px] font-bold tracking-widest uppercase">
+            <div className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
+              <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
+              <span className="font-sans text-[11px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
                 ความสำเร็จที่ยั่งยืน
               </span>
             </div>
 
             <h3 className="text-text-primary text-6xl leading-[0.85] font-black tracking-tighter uppercase italic md:text-8xl lg:text-9xl">
               การเติบโต <br />
-              <span className="text-brand-primary">ของธุรกิจ.</span>
+              <span className="text-[var(--color-brand-primary)]">ของธุรกิจ.</span>
             </h3>
 
-            <div className="border-brand-primary border-l-[6px] pl-8">
+            <div className="border-l-[6px] border-[var(--color-brand-primary)] pl-8">
               <p className="text-text-secondary max-w-xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
                 เราเปลี่ยน "กราฟพุ่ง" ให้เป็น "ผลกำไรที่ยั่งยืน" ผ่านสถาปัตยกรรมที่{" "}
                 <span className="text-text-primary decoration-brand-primary font-black not-italic underline decoration-4 underline-offset-8">
@@ -106,7 +106,7 @@ export const PerformanceTrajectory = memo(() => {
 
             <div className="flex flex-wrap gap-12 pt-6">
               <div className="space-y-2">
-                <span className="text-brand-primary text-5xl font-black tracking-tighter italic md:text-6xl">
+                <span className="text-5xl font-black tracking-tighter text-[var(--color-brand-primary)] italic md:text-6xl">
                   +<DynamicCounter value={450} />
                 </span>
                 <p className="font-sans text-[11px] font-bold tracking-widest uppercase opacity-80">
@@ -184,14 +184,14 @@ export const PerformanceTrajectory = memo(() => {
                   )}
                 >
                   <div className="text-right">
-                    <span className="text-brand-primary block font-sans text-[11px] font-bold tracking-widest uppercase">
+                    <span className="block font-sans text-[11px] font-bold tracking-widest text-[var(--color-brand-primary)] uppercase">
                       เป้าหมายระยะยาว
                     </span>
                     <span className="text-text-muted text-[9px] font-bold uppercase opacity-80">
                       ความเสถียร 100%
                     </span>
                   </div>
-                  <div className="bg-brand-primary h-3 w-3 rounded-full shadow-md" />
+                  <div className="h-3 w-3 rounded-full bg-[var(--color-brand-primary)] shadow-md" />
                 </div>
               </div>
 
@@ -204,7 +204,7 @@ export const PerformanceTrajectory = memo(() => {
             </div>
 
             {/* Ambient Shadow */}
-            <div className="bg-brand-primary/10 absolute -inset-10 -z-10 rounded-full opacity-0 blur-[120px] transition-opacity duration-[3000ms] group-hover:opacity-100" />
+            <div className="absolute -inset-10 -z-10 rounded-full bg-[var(--color-brand-primary)]/10 opacity-0 blur-[120px] transition-opacity duration-[3000ms] group-hover:opacity-100" />
           </div>
         </div>
       </div>

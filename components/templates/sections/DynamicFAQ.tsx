@@ -1,12 +1,13 @@
 /**
- * [SECTION COMPONENT]: DYNAMIC_FAQ_ENGINE v18.0.6 (THEME_AGNOSTIC_STABILIZED)
- * [STRATEGY]: CSS Variable Strict Mapping | Identity-Aware UI | SEO Optimized
+ * [SECTION COMPONENT]: DYNAMIC_FAQ_V2 (MASTER_ARCHITECT)
+ * [STRATEGY]: Framer Motion Transitions | Knowledge Hierarchy | Tactical Depth
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
 import React, { memo, useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -31,8 +32,7 @@ export const DynamicFAQ = memo(
   ({
     data,
     items: directItems,
-    title: _title = "Specialist FAQ",
-    description = "ข้อมูลเชิงลึกและคำแนะนำทางเทคนิคจากทีมผู้เชี่ยวชาญ เพื่อให้คุณตัดสินใจได้แม่นยำที่สุด",
+    description = "ข้อมูลเชิงลึกและคำแนะนำทางเทคนิคจากทีมผู้เชี่ยวชาญ เพื่อการตัดสินใจระดับ Enterprise",
     className,
   }: DynamicFAQProps) => {
     const items = directItems || data?.faqs || [];
@@ -44,10 +44,7 @@ export const DynamicFAQ = memo(
         mainEntity: items.map((item) => ({
           "@type": "Question",
           name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
         })),
       };
     }, [items]);
@@ -58,94 +55,123 @@ export const DynamicFAQ = memo(
       <section
         id="intelligence-hub"
         className={cn(
-          "relative overflow-hidden bg-[var(--surface-main)] py-24 md:py-36",
+          "relative overflow-hidden bg-[var(--surface-main)] py-32 md:py-48",
           className,
         )}
       >
         {faqSchema && <JsonLd data={faqSchema} id="schema-faq-dynamic" />}
 
-        {/* --- 01. INFRASTRUCTURE LAYER (Strict Variable Usage) --- */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `radial-gradient(var(--brand-primary) 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,var(--brand-primary)_0%,transparent_60%)] opacity-[0.05] blur-3xl" />
+        {/* --- LAYER 01: ATMOSPHERIC ENGINE --- */}
+        <div className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay contrast-125">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
+              <filter id="noiseFAQ">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.7"
+                  numOctaves="3"
+                  stitchTiles="stitch"
+                />
+              </filter>
+              <rect width="100%" height="100%" filter="url(#noiseFAQ)" />
+            </svg>
+          </div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,var(--color-brand-primary)_0%,transparent_60%)] opacity-[0.03]" />
+        </div>
 
-        <div className="relative z-10 container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-24">
-            {/* --- 02. HEADER NODE: Sticky Narrative --- */}
-            <div className="space-y-10 lg:sticky lg:top-32 lg:col-span-5 lg:h-fit">
-              <div className="inline-flex items-center gap-4 rounded-full border border-[var(--brand-primary)]/20 bg-[var(--brand-primary)]/5 px-6 py-2.5 backdrop-blur-md">
-                <div className="h-1.5 w-1.5 rounded-full bg-[var(--brand-primary)] shadow-[0_0_10px_var(--brand-primary)]" />
-                <span className="font-mono text-[10px] font-black tracking-[0.3em] text-[var(--brand-primary)] uppercase">
-                  Knowledge_Hub.v18.2
+        <div className="relative z-10 container mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 gap-20 lg:grid-cols-12 lg:gap-24">
+            {/* --- HEADER NODE --- */}
+            <div className="space-y-12 lg:sticky lg:top-32 lg:col-span-5 lg:h-fit">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="inline-flex items-center gap-4 rounded-full border border-[var(--color-brand-primary)]/20 bg-[var(--color-brand-primary)]/5 px-6 py-2 backdrop-blur-md"
+              >
+                <div className="h-2 w-2 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--color-brand-primary)]" />
+                <span className="font-sans text-[11px] font-black tracking-[0.3em] text-[var(--color-brand-primary)] uppercase italic">
+                  KNOWLEDGE_HUB.v20
                 </span>
-              </div>
+              </motion.div>
 
-              <h2 className="text-5xl leading-[0.85] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl">
-                Expert <br /> <span className="text-[var(--brand-primary)]">Insights.</span>
-              </h2>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-5xl leading-[0.9] font-black tracking-tighter text-[var(--text-primary)] uppercase italic md:text-8xl"
+              >
+                Expert <br /> <span className="text-[var(--color-brand-primary)]">Insights.</span>
+              </motion.h2>
 
-              <div className="border-l-[6px] border-[var(--brand-primary)]/40 pl-8">
-                <p className="text-xl leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-2xl">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="border-l-[8px] border-[var(--color-brand-primary)]/40 pl-8"
+              >
+                <p className="text-2xl leading-relaxed font-bold text-[var(--text-primary)] italic opacity-80 md:text-3xl">
                   “{description}”
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="hidden pt-12 lg:block">
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="hidden pt-12 lg:block"
+              >
                 <a
                   href={SITE_CONFIG.links.line}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-5 opacity-40 transition-all hover:opacity-100"
+                  className="group flex items-center gap-6 opacity-50 transition-all hover:opacity-100"
                 >
-                  <div className="border-border/10 flex h-12 w-12 items-center justify-center rounded-2xl border bg-[var(--surface-main)] transition-all group-hover:border-[var(--brand-primary)]/40 group-hover:text-[var(--brand-primary)] group-hover:shadow-sm">
-                    <IconRenderer name="MessageCircle" size={20} />
+                  <div className="group-hover:shadow-glow-sm flex h-14 w-14 items-center justify-center rounded-2xl border-[var(--border)] bg-[var(--surface-card)] transition-all group-hover:border-[var(--color-brand-primary)]/40 group-hover:text-[var(--color-brand-primary)]">
+                    <IconRenderer name="MessageCircle" size={24} />
                   </div>
-                  <span className="font-mono text-[10px] font-black tracking-widest text-[var(--text-primary)] uppercase">
-                    Technical_Inquiry_Line
+                  <span className="font-mono text-[11px] font-black tracking-widest text-[var(--text-primary)] uppercase">
+                    TECHNICAL_DIRECT_LINE
                   </span>
                 </a>
-              </div>
+              </motion.div>
             </div>
 
-            {/* --- 03. INTERACTION NODE: The Accordion Matrix --- */}
+            {/* --- INTERACTION MATRIX --- */}
             <div className="lg:col-span-7">
-              <Accordion type="single" collapsible className="flex flex-col gap-6">
+              <Accordion type="single" collapsible className="flex flex-col gap-8">
                 {items.map((item, index) => (
-                  <AccordionItem
-                    key={`faq-${index}`}
-                    value={`item-${index}`}
-                    className={cn(
-                      "group relative overflow-hidden border transition-all duration-500",
-                      "border-border/10 bg-[var(--surface-main)] shadow-sm",
-                      "rounded-card md:rounded-section",
-                      "data-[state=open]:border-[var(--brand-primary)]/40 data-[state=open]:shadow-sm",
-                      "hover:border-[var(--brand-primary)]/20",
-                    )}
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <AccordionTrigger className="flex w-full items-center justify-between px-8 py-8 text-left transition-all hover:no-underline [&[data-state=open]>div>svg]:rotate-180">
-                      <div className="flex flex-col gap-2">
-                        <span className="text-brand-primary hidden font-mono text-[8px] font-black tracking-[0.4em] uppercase opacity-0 transition-all data-[state=open]:block data-[state=open]:opacity-40">
-                          ข้อมูลบริการอัปเดตล่าสุด
-                        </span>
-                        <span className="pr-6 text-xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--brand-primary)] md:text-3xl">
-                          {item.question}
-                        </span>
-                      </div>
-                    </AccordionTrigger>
+                    <AccordionItem
+                      value={`item-${index}`}
+                      className="group glass-card shadow-pro-xl overflow-hidden rounded-[2.5rem] border border-[var(--border)] bg-[var(--surface-card)] transition-all duration-500 hover:border-[var(--color-brand-primary)]/20 data-[state=open]:border-[var(--color-brand-primary)]/40"
+                    >
+                      <AccordionTrigger className="flex w-full items-center justify-between px-10 py-10 text-left hover:no-underline [&[data-state=open]>div>svg]:rotate-180">
+                        <div className="flex flex-col gap-3">
+                          <span className="hidden font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-0 transition-all data-[state=open]:block data-[state=open]:opacity-60">
+                            UPDATED_KNOWLEDGE_PROTOCOL
+                          </span>
+                          <span className="pr-8 text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic transition-colors group-hover:text-[var(--color-brand-primary)] md:text-4xl">
+                            {item.question}
+                          </span>
+                        </div>
+                      </AccordionTrigger>
 
-                    <AccordionContent className="px-8 pt-0 pb-10">
-                      <div className="border-border/5 border-t pt-8">
-                        <p className="text-lg leading-relaxed font-medium text-[var(--text-primary)] italic opacity-80 md:text-2xl">
-                          {item.answer}
-                        </p>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
+                      <AccordionContent className="px-10 pt-0 pb-12">
+                        <div className="border-t border-[var(--border)] pt-10">
+                          <p className="text-xl leading-relaxed font-bold text-[var(--text-secondary)] italic opacity-90 md:text-2xl">
+                            {item.answer}
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </motion.div>
                 ))}
               </Accordion>
             </div>

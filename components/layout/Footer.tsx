@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 // --- Infrastructure Constants (BEM-ish Pattern) ---
 const LINK_STYLE = cn(
-  "text-text-secondary hover:text-brand-primary text-sm leading-relaxed transition-all duration-300",
+  "text-text-secondary text-sm leading-relaxed transition-all duration-300 hover:text-[var(--color-brand-primary)]",
   "inline-block hover:translate-x-1",
 );
 
@@ -31,7 +31,7 @@ const Footer = () => {
   const currentYear = 2026;
 
   return (
-    <footer className="bg-surface-main border-border/40 relative overflow-hidden border-t pt-24 pb-12">
+    <footer className="border-border/40 relative overflow-hidden border-t bg-[var(--surface-main)] pt-24 pb-12">
       {/* --- 01. VISUAL ENGINE: Background Matrix --- */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] select-none"
@@ -50,10 +50,10 @@ const Footer = () => {
           {/* --- 02. BRAND IDENTITY HUB --- */}
           <div className="flex flex-col gap-6 pr-0 md:col-span-5 md:pr-12 lg:col-span-5">
             <Link href="/" className="group flex w-fit items-center gap-3">
-              <div className="bg-brand-primary flex h-9 w-9 items-center justify-center rounded-xl text-[10px] font-black text-white shadow-md transition-transform group-hover:rotate-6">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--color-brand-primary)] text-[10px] font-black text-white shadow-md transition-transform group-hover:rotate-6">
                 AEM
               </div>
-              <span className="text-text-primary group-hover:text-brand-primary text-2xl font-black tracking-tighter transition-colors">
+              <span className="text-text-primary text-2xl font-black tracking-tighter transition-colors group-hover:text-[var(--color-brand-primary)]">
                 {SITE_CONFIG.brandName.replace("AEM", "")}
               </span>
             </Link>
@@ -75,8 +75,8 @@ const Footer = () => {
               </div>
 
               {/* Expert Signature Injection */}
-              <div className="border-border/10 bg-surface-offset/50 flex items-center gap-4 rounded-2xl border p-4 backdrop-blur-md">
-                <div className="bg-brand-primary relative h-8 w-8 overflow-hidden rounded-full ring-2 ring-white/10">
+              <div className="border-border/10 flex items-center gap-4 rounded-2xl border bg-[var(--surface-offset)]/50 p-4 backdrop-blur-md">
+                <div className="relative h-8 w-8 overflow-hidden rounded-full bg-[var(--color-brand-primary)] ring-2 ring-white/10">
                   <Image
                     src={SITE_CONFIG.expert.avatar}
                     alt={SITE_CONFIG.expert.displayName}
@@ -161,7 +161,7 @@ const Footer = () => {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-text-muted hover:text-brand-primary text-[10px] leading-relaxed font-black tracking-widest uppercase transition-colors"
+                className="text-text-muted text-[10px] leading-relaxed font-black tracking-widest uppercase transition-colors hover:text-[var(--color-brand-primary)]"
               >
                 {item.label}
               </Link>
