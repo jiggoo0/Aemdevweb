@@ -60,7 +60,7 @@ const TrustBadge = () => {
         <div className="bg-border/20 h-px flex-1" />
         <span
           suppressHydrationWarning
-          className="text-text-muted font-sans text-[12px] font-bold tracking-widest whitespace-nowrap uppercase opacity-80 md:text-[13px]"
+          className="text-text-muted font-sans text-[12px] font-bold tracking-widest whitespace-nowrap uppercase opacity-100 md:text-[13px]"
         >
           {UI_STRINGS.trust.standardHeader}
         </span>
@@ -96,7 +96,7 @@ const TrustBadge = () => {
                 <span className="text-text-secondary group-hover:text-text-primary font-sans text-[11px] font-bold tracking-wider uppercase transition-colors duration-500 md:text-[12px]">
                   {node.label}
                 </span>
-                <span className="font-mono text-[8px] font-bold tracking-widest text-[var(--color-brand-primary)]/40 uppercase transition-all duration-500 group-hover:text-[var(--color-brand-primary)]/60">
+                <span className="font-mono text-[10px] font-bold tracking-widest text-[var(--color-brand-primary)]/80 uppercase transition-all duration-500 group-hover:text-[var(--color-brand-primary)]">
                   {UI_STRINGS.trust.verifiedStatus}
                 </span>
               </div>

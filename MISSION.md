@@ -21,7 +21,7 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 15. [x] [Completed] ปรับปรุง PageSpeed Insights & Rich Results (Mobile Contrast, Heading Hierarchy, LCP/Aura Optimization) ผ่าน Full Validation (aipc) 100%
 16. [ ] [Removed] ระบบ AI Agent Framework (ถูกถอดออกตามความต้องการของผู้ใช้งาน)
 17. [x] [Completed] พัฒนาชุดบทความยุทธศาสตร์ "AI-First Business" (2026 Edition) เพื่อครองอันดับบน AI Search Engines (GEO) และสร้าง Authority ในฐานะ Specialist
-18. [ ] [Pending] ตรวจสอบความถูกต้องด้าน Accessibility (WCAG 2.2) สำหรับลูกค้ากลุ่มองค์กรโดยใช้ Axe-core
+18. [x] [Completed] ตรวจสอบความถูกต้องด้าน Accessibility (WCAG 2.2) สำหรับลูกค้ากลุ่มองค์กรโดยใช้ Axe-core และแก้ไข Contrast/Semantic (2026-03-07)
 19. [x] [Completed] พัฒนาระบบติดต่อสอบถาม (Contact Hub) แบบ Specialist Interface (/contact) พร้อมแผนที่และ Social Connectivity สื่อสารความน่าเชื่อถือระดับสูง (v18.0.0)
 20. [x] [Completed] ยกระดับระบบนำทาง (Standardized Menu v20.0.0) รองรับ Hierarchical Menus, React 19 Composition และผ่านมาตรฐาน WCAG/Vercel Guidelines
 21. [x] [Completed] ยกระดับ UI/UX สู่มาตรฐาน "Master Architect" (Hero v20.0.0) โดยใช้ Framer Motion Orchestration, Magnetic Physics และ Noise Texture
@@ -55,4 +55,5 @@ Status: Production Ready | Tech: Next.js 16 (App Router)
 - [AI Note] รีแฟคเตอร์ Hero Section (v20.0.0) ให้เป็น Master Architect Edition โดยใช้ Orchestration Animation และ Motion Values เพื่อประสิทธิภาพสูงสุด (Zero-Jank)
 - [AI Note] แก้ไขปัญหา CLS ในหน้าหลักโดยการปรับปรุง Suspense Fallback Heights ให้ตรงกับขนาดจริงของ Component (TrustBadge, ImpactStats)
 - [AI Note] รีแฟคเตอร์ `components/templates/*` ทั้ง 7 แบบให้เป็น Master Orchestrator, ลบ Hardcoded Tailwind Classes ออก และลบโค้ดขยะ (Unused Files) จนผ่าน `aipc` ได้ 100%
-- [AI Note] ติดตั้งระบบ ReputationShield.tsx และวางใน Root Layout เพื่อทำ Identity Verification (E-E-A-T) และแก้ปัญหาข้อมูลเท็จจากภายนอก
+- [AI Note] ติดตั้งและเปิดใช้งาน Axe-core ใน ClientInfrastructure สำหรับการตรวจสอบ Accessibility (WCAG 2.2) อัตโนมัติในโหมด Development
+- [AI Note] รีแฟคเตอร์ Button.tsx ให้รองรับ Semantic HTML (Link vs Button) ตามมาตรฐานการเข้าถึง และปรับปรุง Contrast Ratio ทั่วทั้งโปรเจกต์ (Navbar, Footer, Cards)

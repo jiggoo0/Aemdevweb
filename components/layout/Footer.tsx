@@ -58,7 +58,7 @@ const Footer = () => {
               </span>
             </Link>
 
-            <p className="text-text-secondary max-w-sm text-sm leading-relaxed italic opacity-80">
+            <p className="text-text-secondary max-w-sm text-sm leading-relaxed italic">
               {SITE_CONFIG.description}
             </p>
 
@@ -88,7 +88,7 @@ const Footer = () => {
                   <span className="text-text-primary text-[11px] font-bold tracking-widest uppercase">
                     {SITE_CONFIG.expert.signature}
                   </span>
-                  <span className="text-text-muted text-[10px] font-medium opacity-80">
+                  <span className="text-text-muted text-[10px] font-medium">
                     {UI_STRINGS.footer.expertTitle}
                   </span>
                 </div>
@@ -150,7 +150,7 @@ const Footer = () => {
         {/* --- 04. LEGAL BASELINE & COMPLIANCE --- */}
         <div className="border-border/20 flex flex-col items-center justify-between gap-8 border-t pt-10 md:flex-row">
           <div className="flex items-center gap-2">
-            <p className="text-text-muted text-[10px] font-bold tracking-wider opacity-60">
+            <p className="text-text-muted text-[10px] font-bold tracking-wider opacity-90">
               © <span suppressHydrationWarning>{currentYear}</span> {SITE_CONFIG.brandName}.{" "}
               {UI_STRINGS.footer.copyright}.
             </p>

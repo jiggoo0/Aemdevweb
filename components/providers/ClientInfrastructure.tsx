@@ -1,12 +1,13 @@
 /**
- * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.6 (HYDRATION_FIXED)
- * [STRATEGY]: De-coupled Hydration | Next.js 16 Compatibility | TBT Optimization
+ * [INFRASTRUCTURE]: CLIENT_BRIDGE_NODE v18.0.7 (ACCESSIBILITY_AUDIT_ENABLED)
+ * [STRATEGY]: De-coupled Hydration | Next.js 16 Compatibility | Axe-core Integration
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 "use client";
 
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
+import ReactDOM from "react-dom";
 import dynamic from "next/dynamic";
 import { SITE_CONFIG } from "@/constants/site-config";
 
@@ -25,6 +26,15 @@ const Toaster = dynamic(() => import("@/components/ui/Sonner").then((mod) => mod
 });
 
 const ClientInfrastructure = () => {
+  useEffect(() => {
+    // [ACCESSIBILITY]: Initialize Axe-core for real-time WCAG auditing in Development
+    if (process.env.NODE_ENV !== "production") {
+      import("@axe-core/react").then((axe) => {
+        axe.default(React, ReactDOM, 1000);
+      });
+    }
+  }, []);
+
   return (
     <>
       {/* [CORE]: Navigation Progress Indicator */}

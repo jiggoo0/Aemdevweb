@@ -4,7 +4,7 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import { createClient, type InValue } from "@libsql/client/web";
+import { createClient } from "@libsql/client/web";
 
 // [ENVIRONMENT_CHECK]: ป้องกันการรัน Client โดยไม่มีการตั้งค่า Key
 const url = process.env.TURSO_DATABASE_URL;
@@ -19,15 +19,3 @@ export const db = createClient({
   url: url || "libsql://default-placeholder.turso.io",
   authToken: authToken || "placeholder-token",
 });
-
-export async function executeQuery<T>(sql: string, args: InValue[] = []): Promise<T[]> {
-  try {
-    const result = await db.execute({ sql, args });
-    return result.rows as unknown as T[];
-  } catch (error) {
-    console.error("❌ [DB_QUERY_ERROR]:", error);
-    return [];
-  }
-}
-
-export default db;

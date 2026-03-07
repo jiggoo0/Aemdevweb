@@ -57,7 +57,7 @@ const AreaCard = ({ data, index = 0 }: AreaCardProps) => {
           <h3 className="text-text-primary mb-2 text-2xl font-black tracking-tighter uppercase italic md:text-3xl">
             {data.province}
           </h3>
-          <p className="text-text-secondary line-clamp-2 text-[11px] leading-relaxed font-medium opacity-80">
+          <p className="text-text-secondary line-clamp-2 text-[11px] leading-relaxed font-medium opacity-95">
             {data.description}
           </p>
 

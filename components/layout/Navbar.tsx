@@ -39,7 +39,7 @@ const NavLogo = memo(({ onClick }: { onClick?: () => void }) => (
         <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_var(--brand-primary)]"></span>
       </div>
-      <span className="font-sans text-[9px] font-bold tracking-widest text-emerald-500 uppercase opacity-80">
+      <span className="font-sans text-[9px] font-bold tracking-widest text-emerald-500 uppercase">
         {UI_STRINGS.cta.systemActiveStatus}
       </span>
     </div>
@@ -104,7 +104,7 @@ const DesktopMenu = memo(
                           >
                             {child.label}
                             {child.description && (
-                              <span className="mt-1 block text-[8px] font-medium normal-case italic opacity-50">
+                              <span className="mt-1 block text-[10px] font-medium normal-case italic opacity-90">
                                 {child.description}
                               </span>
                             )}

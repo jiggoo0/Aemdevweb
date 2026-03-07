@@ -221,7 +221,7 @@ export const AEMSpecialistHero = memo(() => {
         style={{ opacity: opacityParallax }}
         className="absolute bottom-10 flex flex-col items-center gap-4"
       >
-        <span className="text-text-muted font-sans text-[9px] font-bold tracking-[0.3em] uppercase opacity-60">
+        <span className="text-text-muted font-sans text-[9px] font-bold tracking-[0.3em] uppercase opacity-90">
           SYSTEM SCANNING BELOW
         </span>
         <div className="border-border/40 flex h-12 w-7 items-start justify-center rounded-full border p-2 backdrop-blur-sm">

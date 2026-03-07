@@ -163,7 +163,7 @@ const MetricCard = ({
           <IconRenderer name={stat.icon} size={24} strokeWidth={2.5} />
         </div>
         <div className="flex flex-col items-end gap-1.5">
-          <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-60">
+          <span className="text-text-muted font-sans text-[10px] font-bold tracking-widest uppercase opacity-90">
             {UI_STRINGS.stats.statPrefix} 0{index + 1}
           </span>
           <div className="h-1.5 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-md" />

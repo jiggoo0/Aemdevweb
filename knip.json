@@ -10,18 +10,18 @@
     "vercel",
     "@swc/helpers",
     "google-auth-library",
-    "eslint-plugin-tailwindcss",
-    "@axe-core/react"
+    "eslint-plugin-tailwindcss"
   ],
   "next": {
     "entry": [
       "next.config.ts",
       "app/**/*.{ts,tsx}",
       "lib/cms.ts",
+      "lib/blob.ts",
       "core/**/*.{ts,tsx}",
       "constants/**/*.{ts,tsx}",
       "mdx-components.tsx",
-      "scripts/test-schema.ts"
+      "scripts/*.ts"
     ]
   },
   "project": ["**/*.{ts,tsx}"]

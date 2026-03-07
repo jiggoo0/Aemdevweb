@@ -6,11 +6,16 @@ const nextConfig: NextConfig = {
   /* 🚀 Hybrid Architecture Strategy */
   reactStrictMode: true,
 
+  // [MAX_SPEED]: ปิดการใช้ Console.log ใน Production เพื่อความคลีนและเบาที่สุด
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
   // [NEW]: Next.js 16 - High-Performance Caching
   experimental: {
     mdxRs: true,
-    // [PPR]: Partial Prerendering - เปิดใช้งานเพื่อความเร็วสูงสุดในหน้าที่มีทั้ง Static และ Dynamic
-    // ppr: 'incremental',
+    // [PPR]: Partial Prerendering ใน Next.js 16 - เปิดใช้งานผ่าน cacheComponents
+    cacheComponents: true,
   },
 
   images: {

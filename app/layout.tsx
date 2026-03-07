@@ -73,11 +73,12 @@ export default function RootLayout({ children }: LayoutProps) {
       className={cn("scroll-smooth focus-within:scroll-auto", fontSans.variable, fontThai.variable)}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
         <ReputationShield />
       </head>
       <body
-        suppressHydrationWarning
         className={cn(
           "bg-surface-main text-text-primary min-h-dvh antialiased",
           "selection:bg-brand-primary/30 selection:text-brand-primary",
