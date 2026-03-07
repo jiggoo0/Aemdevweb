@@ -20,8 +20,8 @@ export const ABOUT_CONTENT = {
       "Technical Lead at UNLINK-GLOBAL",
       "Expert in Next.js 16 & React 19 Ecosystem",
       "Specialist in AI Agent Integration for Business",
-      "Certified in Cyber Security & System Architecture"
-    ]
+      "Certified in Cyber Security & System Architecture",
+    ],
   },
   vision: {
     title: "ยกระดับธุรกิจไทยด้วยเทคโนโลยีระดับโลก",
@@ -52,7 +52,7 @@ export const ABOUT_CONTENT = {
   socialLinks: [
     { label: "Facebook", url: "https://www.facebook.com/share/16jjyWbPyG/", icon: "Facebook" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/alongkorl-aemdevweb", icon: "Linkedin" },
-    { label: "GitHub", url: "https://github.com/mza-marks", icon: "Github" }
+    { label: "GitHub", url: "https://github.com/mza-marks", icon: "Github" },
   ],
   cta: {
     title: "เริ่มวางรากฐานธุรกิจที่แข็งแกร่งไปกับผม",

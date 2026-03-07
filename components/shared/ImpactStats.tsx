@@ -214,52 +214,54 @@ const MetricCard = ({
 
 interface ImpactStatsProps {
   readonly data?: UniversalTemplateProps;
+  readonly liveMetrics?: Record<string, number>;
   readonly className?: string;
 }
 
-const ImpactStats = ({ data, className }: ImpactStatsProps) => {
+const ImpactStats = ({ data, liveMetrics, className }: ImpactStatsProps) => {
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // [DYNAMIC_DATA]: ดึงข้อมูลจาก Province DNA หากไม่มีให้ใช้ค่ามาตรฐานที่สมเหตุสมผล
+  // [DYNAMIC_DATA]: ลำดับความสำคัญ: Database Metrics > Context Data > Standard Fallbacks
   const metrics: MetricItem[] = [
     {
-      id: "LOCAL_TRAFFIC",
-      label: `${UI_STRINGS.stats.reachCustomers}${data?.province || UI_STRINGS.stats.allAreas}`,
-      value: data?.socialProof?.reviewCount ? data.socialProof.reviewCount * 10 : 12000,
-      unit: "P/M",
-      icon: "TrendingUp",
-      description: UI_STRINGS.stats.brandAwareness,
-      trend: "up",
-    },
-    {
-      id: "SPEED_NODE",
+      id: "PERF_CORE",
       label: UI_STRINGS.stats.fastLoad,
-      value: data?.regionalความเร็ว || 14,
-      decimals: 1,
-      unit: "MS",
+      value: liveMetrics?.PERF_CORE || 99.8,
+      unit: "/100",
       icon: "Zap",
       description: UI_STRINGS.stats.globalStandard,
       trend: "stable",
     },
     {
-      id: "SATURATION",
-      label: UI_STRINGS.stats.expertise,
-      value: data?.marketโอกาสเติบโต || 85,
+      id: "ROI_VELOCITY",
+      label: UI_STRINGS.stats.brandAwareness,
+      value: liveMetrics?.ROI_VELOCITY || 300,
       unit: "%",
-      icon: "Target",
-      description: UI_STRINGS.stats.inYourBusiness,
+      icon: "TrendingUp",
+      prefix: "+",
+      description: UI_STRINGS.stats.reachCustomers + (data?.province || UI_STRINGS.stats.allAreas),
       trend: "up",
     },
     {
-      id: "TRUST_INDEX",
-      label: UI_STRINGS.stats.satisfaction,
-      value: data?.socialProof?.rating || 4.9,
-      decimals: 1,
-      unit: "/5.0",
-      icon: "Award",
-      description: UI_STRINGS.stats.fromOurClients,
+      id: "UPTIME_SHIELD",
+      label: UI_STRINGS.stats.expertise,
+      value: liveMetrics?.UPTIME_SHIELD || 99.99,
+      decimals: 2,
+      unit: "%",
+      icon: "ShieldCheck",
+      description: UI_STRINGS.stats.inYourBusiness,
       trend: "stable",
+    },
+    {
+      id: "AI_AUTHORITY",
+      label: UI_STRINGS.stats.satisfaction,
+      value: liveMetrics?.AI_AUTHORITY || 1.2,
+      decimals: 1,
+      unit: "M+",
+      icon: "Globe",
+      description: UI_STRINGS.stats.fromOurClients,
+      trend: "up",
     },
   ];
 

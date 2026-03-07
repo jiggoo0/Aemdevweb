@@ -15,48 +15,43 @@ export default function ReputationShield() {
       "@context": "https://schema.org",
       "@type": "Person",
       "@id": `${siteUrl}/#person`,
-      "name": founderNameTh,
-      "alternateName": [founderName, "Mza-Marks", "Alongkorl AemDevWeb"],
-      "jobTitle": "Full Stack Developer & Software Architect",
-      "url": siteUrl,
-      "image": `${siteUrl}/images/owner.jpg`,
-      "description": "Founder of AemDevWeb and Technical Lead at UNLINK-GLOBAL. Professional software engineer specializing in Next.js, AI Integration, and Cyber Security.",
-      "sameAs": [
+      name: founderNameTh,
+      alternateName: [founderName, "Mza-Marks", "Alongkorl AemDevWeb"],
+      jobTitle: "Full Stack Developer & Software Architect",
+      url: siteUrl,
+      image: `${siteUrl}/images/owner.jpg`,
+      description:
+        "Founder of AemDevWeb and Technical Lead at UNLINK-GLOBAL. Professional software engineer specializing in Next.js, AI Integration, and Cyber Security.",
+      sameAs: [
         "https://www.facebook.com/share/16jjyWbPyG/",
         "https://www.linkedin.com/in/alongkorl-aemdevweb",
-        "https://github.com/mza-marks"
+        "https://github.com/mza-marks",
       ],
-      "worksFor": {
+      worksFor: {
         "@type": "Organization",
-        "@id": `${siteUrl}/#organization`
-      }
+        "@id": `${siteUrl}/#organization`,
+      },
     },
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      "name": "AemDevWeb Studio",
-      "url": siteUrl,
-      "logo": {
+      name: "AemDevWeb Studio",
+      url: siteUrl,
+      logo: {
         "@type": "ImageObject",
-        "url": `${siteUrl}/logo.png`
+        url: `${siteUrl}/logo.png`,
       },
-      "description": "Premium Web Development and SEO Engineering Studio based in Thailand.",
-      "founder": { "@id": `${siteUrl}/#person` },
-      "contactPoint": {
+      description: "Premium Web Development and SEO Engineering Studio based in Thailand.",
+      founder: { "@id": `${siteUrl}/#person` },
+      contactPoint: {
         "@type": "ContactPoint",
-        "contactType": "customer support",
-        "email": "contact@aemdevweb.com",
-        "url": siteUrl
+        contactType: "customer support",
+        email: "contact@aemdevweb.com",
+        url: siteUrl,
       },
-      "knowsAbout": [
-        "Web Development",
-        "SEO Engineering",
-        "System Security",
-        "AI Agents",
-        "Next.js"
-      ]
-    }
+      knowsAbout: ["Web Development", "SEO Engineering", "System Security", "AI Agents", "Next.js"],
+    },
   ];
 
   return (

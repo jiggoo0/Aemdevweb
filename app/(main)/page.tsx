@@ -1,7 +1,7 @@
 /**
- * [CORE PAGE]: HOMEPAGE v18.1.6 (INTERACTIVE_MAXIMIZED)
- * [STRATEGY]: Static-First Rendering | Narrative Conversion | Interactive Lead Magnets
- * [UPDATED]: 2026-02-24
+ * [CORE PAGE]: HOMEPAGE v18.3.0 (LIVE_METRICS_ENABLED)
+ * [STRATEGY]: Static-First Rendering | Real-time Authority Dashboards | Hybrid CMS
+ * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
 import React, { Suspense } from "react";
@@ -11,12 +11,11 @@ import dynamic from "next/dynamic";
 
 // --- 1. Infrastructure & Core Constants ---
 import { AREA_NODES } from "@/constants/area-nodes";
-import { getFeaturedServices } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { cn } from "@/lib/utils";
 
 // --- 2. Data Access Layer ---
-import { getAllPosts, getAllCaseStudies } from "@/lib/cms";
+import { getAllPosts, getAllCaseStudies, getAllServices, getLiveMetrics } from "@/lib/cms";
 import type { BlogPost, CaseStudy } from "@/types";
 
 // --- 3. SEO & Technical Schema ---
@@ -25,14 +24,14 @@ import { constructMetadata } from "@/lib/seo-utils";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 
-// --- 4. Critical UI (Synchronous for LCP) ---
+// --- 4. Critical UI ---
 import { AEMSpecialistHero } from "@/components/features/landing/AEMSpecialistHero";
 import ServiceCard from "@/components/features/services/ServiceCard";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
 
-// --- 5. Deferred UI (Dynamic Imports for TBT Optimization) ---
+// --- 5. Deferred UI ---
 const LeadScoringHUD = dynamic(
   () => import("@/components/templates/sections/LeadScoringHUD").then((mod) => mod.LeadScoringHUD),
   { ssr: true },
@@ -53,7 +52,6 @@ const LoadingSkeleton = ({ height, className }: { height: string; className?: st
   />
 );
 
-// [OPTIMIZED]: Specific Fallbacks for CLS Mitigation
 const TrustBadgeFallback = () => (
   <div className="flex w-full flex-col items-center gap-10">
     <div className="bg-border/10 h-6 w-1/3 animate-pulse rounded-full" />
@@ -79,21 +77,12 @@ const ImpactStatsFallback = () => (
   </div>
 );
 
-const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), {
-  ssr: true,
-});
-
-const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), {
-  ssr: true,
-});
-
+const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), { ssr: true });
+const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), { ssr: true });
 const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
-  loading: () => <LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />,
   ssr: true,
 });
-
 const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"), {
-  loading: () => <LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />,
   ssr: true,
 });
 
@@ -102,17 +91,12 @@ const AuditReportGenerator = dynamic(
     import("@/components/templates/sections/AuditReportGenerator").then(
       (mod) => mod.AuditReportGenerator,
     ),
-  {
-    loading: () => <LoadingSkeleton height="h-[400px]" className="mx-auto max-w-7xl" />,
-    ssr: true,
-  },
+  { ssr: true },
 );
 
 const DirectTerminal = dynamic(
   () => import("@/components/templates/sections/DirectTerminal").then((mod) => mod.DirectTerminal),
-  {
-    ssr: true,
-  },
+  { ssr: true },
 );
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -126,23 +110,18 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   /** [PERFORMANCE]: Parallel Prefetching with Fail-Safe Fallbacks */
-  const [caseStudies, blogPosts] = await Promise.all([
-    getAllCaseStudies().catch((err) => {
-      console.error("Critical: CaseStudies Fetch Failed", err);
-      return [] as CaseStudy[];
-    }),
-    getAllPosts().catch((err) => {
-      console.error("Critical: BlogPosts Fetch Failed", err);
-      return [] as BlogPost[];
-    }),
+  const [caseStudies, blogPosts, allServices, liveMetrics] = await Promise.all([
+    getAllCaseStudies().catch(() => [] as CaseStudy[]),
+    getAllPosts().catch(() => [] as BlogPost[]),
+    getAllServices().catch(() => []),
+    getLiveMetrics().catch(() => ({})),
   ]);
 
-  const featuredServices = getFeaturedServices().slice(0, 3);
+  const featuredServices = allServices.filter((s) => s.isFeatured).slice(0, 3);
   const recentCases = caseStudies.slice(0, 2);
   const recentPosts = blogPosts.slice(0, 3);
   const featuredAreas = AREA_NODES.filter((n) => (n.priority ?? 0) >= 95).slice(0, 4);
 
-  /** [SEO]: Deep Schema Integration for Knowledge Graph */
   const homeSchema = generateSchemaGraph([
     {
       "@type": "WebSite",
@@ -150,19 +129,6 @@ export default async function HomePage() {
       url: SITE_CONFIG.siteUrl,
       name: SITE_CONFIG.brandName,
       publisher: { "@id": `${SITE_CONFIG.siteUrl}/#organization` },
-    },
-    {
-      "@type": "Organization",
-      "@id": `${SITE_CONFIG.siteUrl}/#organization`,
-      name: SITE_CONFIG.brandName,
-      url: SITE_CONFIG.siteUrl,
-      logo: { "@type": "ImageObject", url: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.logo}` },
-      sameAs: [
-        SITE_CONFIG.links.facebook,
-        SITE_CONFIG.links.github,
-        SITE_CONFIG.links.linkedin,
-        SITE_CONFIG.links.youtube,
-      ].filter(Boolean) as string[],
     },
     {
       "@type": "ItemList",
@@ -179,12 +145,8 @@ export default async function HomePage() {
     <main className="bg-surface-main flex w-full flex-col overflow-hidden">
       <JsonLd data={homeSchema} id="schema-homepage" />
 
-      {/* --- 01. INTRODUCTORY SEQUENCE --- */}
       <header className="relative w-full">
-        {/* HERO GATEWAY: Specialist Dedicated Design */}
         <AEMSpecialistHero />
-
-        {/* AUTHORITY HUB: Micro-interaction ready */}
         <section
           className="relative z-20 -mt-20 px-4 md:-mt-28 lg:-mt-36"
           aria-label="Authority Metrics"
@@ -196,11 +158,9 @@ export default async function HomePage() {
                 <Suspense fallback={<TrustBadgeFallback />}>
                   <TrustBadge />
                 </Suspense>
-
                 <div className="bg-border/20 h-px w-full" />
-
                 <Suspense fallback={<ImpactStatsFallback />}>
-                  <ImpactStats />
+                  <ImpactStats liveMetrics={liveMetrics} />
                 </Suspense>
               </div>
               <div className="bg-brand-primary/5 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
@@ -209,7 +169,6 @@ export default async function HomePage() {
         </section>
       </header>
 
-      {/* --- 02. CORE EXPERTISE --- */}
       <section id="services" className="py-24 md:py-32" aria-labelledby="services-heading">
         <div className="container mx-auto px-4 md:px-8">
           <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -236,7 +195,6 @@ export default async function HomePage() {
               />
             </Link>
           </header>
-
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {featuredServices.map((service, i) => (
               <ServiceCard key={service.id} data={service} index={i} />
@@ -245,7 +203,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- 03. DIAGNOSTIC LABORATORY --- */}
       <section
         className="bg-surface-offset border-border/40 border-y py-24 md:py-32"
         aria-labelledby="audit-heading"
@@ -262,15 +219,12 @@ export default async function HomePage() {
               Website <br /> <span className="text-brand-primary">Health Check.</span>
             </h2>
           </header>
-
           <div className="space-y-24">
             <Suspense
               fallback={<LoadingSkeleton height="h-[400px]" className="mx-auto max-w-5xl" />}
             >
               <AuditReportGenerator />
             </Suspense>
-
-            {/* Neural Authority Layer */}
             <div className="mx-auto max-w-5xl">
               <Suspense fallback={<LoadingSkeleton height="h-[300px]" />}>
                 <LeadScoringHUD />
@@ -280,23 +234,19 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* --- 04. AUTHORITY EQUATION --- */}
       <section className="bg-black py-24">
         <Suspense fallback={<LoadingSkeleton height="h-[500px]" />}>
           <TrustEquation />
         </Suspense>
       </section>
 
-      {/* --- 05. EXECUTION FRAMEWORK --- */}
       <section className="bg-surface-main py-24" aria-label="Working Process">
         <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
           <WorkProcess />
         </Suspense>
       </section>
 
-      {/* --- 05. EVIDENCE & INSIGHTS --- */}
       <div className="bg-surface-offset border-border/40 border-y">
-        {/* Success Evidence */}
         <section id="success" className="py-24 md:py-32" aria-labelledby="success-heading">
           <div className="container mx-auto px-4 md:px-8">
             <header className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -331,7 +281,6 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* Technical Insights */}
         <section
           className="border-border/40 border-t py-24 md:py-32"
           aria-labelledby="insights-heading"
@@ -354,16 +303,13 @@ export default async function HomePage() {
         </section>
       </div>
 
-      {/* --- 06. CONVERSION & REGIONAL COVERAGE --- */}
       <div className="bg-surface-main">
-        {/* Pricing Strategy */}
         <section className="pb-24">
           <Suspense fallback={<LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />}>
             <PricingSection />
           </Suspense>
         </section>
 
-        {/* Geographic Terminal */}
         <section
           className="bg-surface-offset border-border/60 border-t py-24"
           aria-labelledby="coverage-heading"
@@ -381,7 +327,6 @@ export default async function HomePage() {
                   ครอบคลุม <span className="text-brand-primary">ทุกภูมิภาค.</span>
                 </h2>
               </div>
-
               <div className="w-full max-w-2xl">
                 <Suspense
                   fallback={<div className="h-48 w-full animate-pulse rounded-2xl bg-black/20" />}
@@ -390,13 +335,11 @@ export default async function HomePage() {
                 </Suspense>
               </div>
             </div>
-
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
               {featuredAreas.map((area, i) => (
                 <AreaCard key={area.slug} data={area} index={i} />
               ))}
             </div>
-
             <div className="mt-12 text-center">
               <Link
                 href="/areas"

@@ -45,26 +45,26 @@ export const AEMSpecialistHero = memo(() => {
   const glowX = useTransform(smoothMouseX, [0, 1], ["20%", "80%"]);
   const glowY = useTransform(smoothMouseY, [0, 1], ["20%", "80%"]);
 
-  // --- 03. ANIMATION VARIANTS (Luxury Orchestration) ---
+  // --- 03. ANIMATION VARIANTS (LCP-Maximized Orchestration) ---
   const containerVariants = {
-    initial: { opacity: 0 },
+    initial: { opacity: 1 }, // Visible by default for SSR/LCP
     animate: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Reduced for faster LCP
-        delayChildren: 0.05, // Minimal delay for critical paint
+        staggerChildren: 0.05, // Faster stagger
+        delayChildren: 0, // No delay for critical paint
       },
     },
   };
 
   const itemVariants = {
-    initial: { y: 20, opacity: 0, filter: "blur(4px)" }, // Reduced y and blur for faster perceived load
+    initial: { y: 0, opacity: 1, filter: "blur(0px)" }, // Static by default to pass LCP check
     animate: {
       y: 0,
       opacity: 1,
       filter: "blur(0px)",
       transition: {
-        duration: 0.8, // Faster duration for LCP element
+        duration: 0.4,
         ease: [0.16, 1, 0.3, 1],
       },
     },
@@ -88,20 +88,13 @@ export const AEMSpecialistHero = memo(() => {
     >
       {/* --- LAYER 01: TEXTURE & ATMOSPHERE (High-End Depth) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {/* Grainy Noise Texture (Subtle Luxury) */}
-        <div className="absolute inset-0 opacity-[0.03] mix-blend-multiply brightness-100 contrast-150 dark:mix-blend-overlay">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="h-full w-full">
-            <filter id="noiseFilter">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.65"
-                numOctaves="3"
-                stitchTiles="stitch"
-              />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-          </svg>
-        </div>
+        {/* Optimized Grainy Noise Texture (Pure CSS Strategy) */}
+        <div
+          className="absolute inset-0 opacity-[0.02] mix-blend-overlay brightness-100 contrast-150"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          }}
+        ></div>
 
         {/* Dynamic Glow Mesh */}
         <motion.div
@@ -148,8 +141,8 @@ export const AEMSpecialistHero = memo(() => {
             ))}
           </motion.div>
 
-          {/* Main Title: Narrative Dominance */}
-          <motion.div variants={itemVariants} className="relative mb-12 flex flex-col items-center">
+          {/* Main Title: Narrative Dominance (Static for LCP) */}
+          <div className="relative mb-12 flex flex-col items-center">
             <h1 className="text-text-primary relative max-w-[14ch] text-7xl leading-[0.85] font-black tracking-tighter uppercase italic drop-shadow-sm md:text-9xl lg:text-[12rem]">
               Maximize <br />
               <span className="relative">
@@ -157,21 +150,13 @@ export const AEMSpecialistHero = memo(() => {
                   Performance.
                 </span>
                 {/* Decorative underline */}
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: "100%" }}
-                  transition={{ delay: 1.5, duration: 1, ease: "circOut" }}
-                  className="absolute -bottom-4 left-0 h-2 bg-[var(--color-brand-primary)] opacity-30 md:h-4"
-                />
+                <div className="absolute -bottom-4 left-0 h-2 w-full bg-[var(--color-brand-primary)] opacity-30 md:h-4" />
               </span>
             </h1>
-          </motion.div>
+          </div>
 
           {/* Executive Vision & Sub-Copy */}
-          <motion.div
-            variants={itemVariants}
-            className="mb-20 flex max-w-4xl flex-col items-center"
-          >
+          <div className="mb-20 flex max-w-4xl flex-col items-center">
             <p className="text-text-secondary max-w-2xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
               “ปลดล็อกศักยภาพสูงสุดของเว็บไซต์ ด้วยโครงสร้างทางเทคนิคระดับ
               <span className="text-text-primary"> Enterprise</span> เพื่อประสบการณ์ที่ลื่นไหล
@@ -185,7 +170,7 @@ export const AEMSpecialistHero = memo(() => {
                 className="h-full w-full bg-[var(--color-brand-primary)]"
               />
             </div>
-          </motion.div>
+          </div>
 
           {/* Conversion Actions: Strategic Call-to-Action */}
           <motion.div

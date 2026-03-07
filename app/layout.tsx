@@ -30,6 +30,7 @@ const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  preload: true,
 });
 
 const fontThai = IBM_Plex_Sans_Thai({
@@ -38,6 +39,7 @@ const fontThai = IBM_Plex_Sans_Thai({
   variable: "--font-thai",
   display: "swap",
   adjustFontFallback: true,
+  preload: true,
 });
 
 export const metadata: Metadata = constructMetadata({

@@ -5,24 +5,24 @@ const isTermux = process.env.TERMUX_VERSION !== undefined || process.env.SHELL?.
 const nextConfig: NextConfig = {
   /* 🚀 Hybrid Architecture Strategy */
   reactStrictMode: true,
-  reactCompiler: true,
-  cacheComponents: true,
 
-  // ใช้ Standalone เพื่อประสิทธิภาพสูงสุดบน Vercel และประหยัดพื้นที่ใน Termux
-  output: "standalone",
-
+  // [NEW]: Next.js 16 - High-Performance Caching
   experimental: {
-    serverActions: {
-      bodySizeLimit: "2mb",
-    },
-    // ปรับแต่งการระบุประเภทไฟล์สำหรับ MDX และไฟล์เทคนิค
     mdxRs: true,
+    // [PPR]: Partial Prerendering - เปิดใช้งานเพื่อความเร็วสูงสุดในหน้าที่มีทั้ง Static และ Dynamic
+    // ppr: 'incremental',
   },
 
-  // การจัดการรูปภาพ (Hybrid Optimization)
   images: {
     formats: ["image/avif", "image/webp"],
+    // [SECURITY_OPTIMIZED]: ระบุ Hostname ของ Vercel Blob ให้แม่นยำ
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "fme2ovv5az8x4yqg.public.blob.vercel-storage.com",
+        port: "",
+        pathname: "/**",
+      },
       {
         protocol: "https",
         hostname: "**",
@@ -32,16 +32,20 @@ const nextConfig: NextConfig = {
     unoptimized: isTermux,
   },
 
-  // 🛠️ Environment Specific Tuning (Surgical Fix for Termux/Android)
-  webpack: (config, { isServer }) => {
-    if (isTermux && !isServer) {
-      // ลดจำนวน Worker ลงเพื่อไม่ให้ RAM ของมือถือเต็มระหว่าง Build
-      config.parallelism = 2;
+  // ปรับแต่งการสร้าง Static Page ให้เหมาะสมกับทรัพยากร (Android/Termux)
+  staticPageGenerationTimeout: 180,
 
-      // จัดการปัญหา Watcher ในระดับ Kernel ของ Android
-      config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300,
+  webpack: (config, { isServer }) => {
+    if (!isServer && isTermux) {
+      config.parallelism = 1;
+      config.optimization = {
+        ...config.optimization,
+        minimize: true,
+      };
+      config.cache = {
+        type: "filesystem",
+        allowCollectingMemory: true,
+        maxMemoryGenerations: 1,
       };
     }
     return config;

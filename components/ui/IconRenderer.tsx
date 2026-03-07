@@ -1,6 +1,6 @@
 /**
- * [UI COMPONENT]: ICON_RENDERER_SYSTEM v18.0.6 (STABILIZED_FINAL)
- * [STRATEGY]: Static Tree-Shaking | Compile-Time Safety | Zero-CLS Infrastructure
+ * [UI COMPONENT]: ICON_RENDERER_SYSTEM v18.0.7 (BUNDLE_OPTIMIZED)
+ * [STRATEGY]: Aggressive Tree-Shaking | Used-Icons Only | Next.js 16 Ready
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
@@ -21,7 +21,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   Search,
-  SearchX,
   MoreHorizontal,
   Plus,
   Minus,
@@ -31,12 +30,14 @@ import {
   Moon,
   Loader2,
   Timer,
+  RefreshCcw,
   // 2. Connectivity & Mapping
   Home,
   MapPin,
   Map,
   Navigation,
   Calendar,
+  CalendarCheck,
   Clock,
   Phone,
   Mail,
@@ -45,7 +46,6 @@ import {
   Link,
   Briefcase,
   Send,
-  Wifi,
   // 3. High-End Tech & Intelligence Nodes
   Cpu,
   Layers,
@@ -56,69 +56,48 @@ import {
   ShieldAlert,
   Zap,
   Activity,
-  BarChart,
-  BarChart3,
   TrendingUp,
   Target,
   Rocket,
-  Code,
   Code2,
   FileText,
   FileDown,
   SearchCheck,
   Globe,
-  Users,
   Building2,
   ShoppingBag,
-  ShoppingCart,
-  Lock,
-  Unlock,
   Gauge,
   Smartphone,
   Layout,
-  Monitor,
-  Laptop,
   Image as ImageIcon,
   Box,
   Fingerprint,
   Hash,
-  Newspaper,
-  Bell,
   MousePointerClick,
   Network,
   Settings,
-  Disc,
   // 4. Conversion & Social Signals
   MessageCircle,
+  MessageSquare,
   Facebook,
   Github,
   Youtube,
   Twitter,
-  Instagram,
   Linkedin,
-  MessageSquare,
   // 5. Specialist Authority Elements
-  User,
   UserCheck,
-  UserCircle2,
   BookOpen,
   Quote,
   Lightbulb,
   Award,
   Star,
-  ThumbsUp,
-  MoveRight,
   Sparkles,
-  Landmark,
-  Wallet,
-  CreditCard,
-  Truck,
   type LucideProps,
 } from "lucide-react";
 
 /**
- * [REGISTRY]: ทะเบียนสัญลักษณ์มาตรฐาน (Centralized Registry)
- * ออกแบบมาเพื่อให้ Bundler สามารถทำ Static Analysis และตัด Code ที่ไม่ใช้ออกได้จริง 100%
+ * [REGISTRY]: ทะเบียนสัญลักษณ์ที่ใช้จริง (Consolidated Registry)
+ * ลดจำนวนไอคอนจาก 100+ เหลือเฉพาะที่ใช้งานจริง เพื่อลด Bundle Size
  */
 export const ICON_MAP = {
   Menu,
@@ -132,7 +111,6 @@ export const ICON_MAP = {
   CheckCircle2,
   AlertTriangle,
   Search,
-  SearchX,
   MoreHorizontal,
   Plus,
   Minus,
@@ -142,11 +120,13 @@ export const ICON_MAP = {
   Moon,
   Loader2,
   Timer,
+  RefreshCcw,
   Home,
   MapPin,
   Map,
   Navigation,
   Calendar,
+  CalendarCheck,
   Clock,
   Phone,
   Mail,
@@ -155,7 +135,6 @@ export const ICON_MAP = {
   Link,
   Briefcase,
   Send,
-  Wifi,
   Cpu,
   Layers,
   Database,
@@ -165,64 +144,42 @@ export const ICON_MAP = {
   ShieldAlert,
   Zap,
   Activity,
-  BarChart,
-  BarChart3,
   TrendingUp,
   Target,
   Rocket,
-  Code,
   Code2,
   FileText,
   FileDown,
   SearchCheck,
   Globe,
-  Users,
   Building2,
   ShoppingBag,
-  ShoppingCart,
-  Lock,
-  Unlock,
   Gauge,
   Smartphone,
   Layout,
-  Monitor,
-  Laptop,
   Image: ImageIcon,
   Box,
   Fingerprint,
   Hash,
-  Newspaper,
-  Bell,
   MousePointerClick,
   Network,
   Settings,
-  Disc,
   MessageCircle,
   MessageSquare,
   Facebook,
   Github,
   Youtube,
   Twitter,
-  Instagram,
   Linkedin,
-  User,
   UserCheck,
-  UserCircle2,
   BookOpen,
   Quote,
   Lightbulb,
   Award,
   Star,
-  ThumbsUp,
-  MoveRight,
   Sparkles,
-  Landmark,
-  Wallet,
-  CreditCard,
-  Truck,
 } as const;
 
-/** [STRICT_TYPE]: บังคับใช้เฉพาะ Key ที่มีอยู่ใน Registry เท่านั้น เพื่อความปลอดภัยระดับ Type-Safe */
 export type IconName = keyof typeof ICON_MAP;
 
 interface IconRendererProps extends Omit<LucideProps, "ref"> {
@@ -233,10 +190,6 @@ interface IconRendererProps extends Omit<LucideProps, "ref"> {
   readonly title?: string;
 }
 
-/**
- * @component IconRenderer
- * @description หน่วยเรนเดอร์สัญลักษณ์แบบ Optimized สำหรับ Next.js 16 และ Tailwind 4
- */
 const IconRenderer = ({
   name,
   size = 24,
@@ -245,20 +198,17 @@ const IconRenderer = ({
   title,
   ...props
 }: IconRendererProps) => {
-  // [LOGIC]: O(1) Registry Lookup
   const IconComponent = ICON_MAP[name];
 
-  // [FALLBACK_STRATEGY]: เมื่อหาไอคอนไม่พบ (Safe-Guard Node)
   if (!IconComponent) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn(`[SYSTEM_CORE]: Icon "${name}" missing in ICON_MAP Registry.`);
+      console.warn(`[SYSTEM_CORE]: Icon "${name}" missing in ICON_MAP.`);
     }
     return (
       <AlertTriangle
         size={size}
         className={cn("shrink-0 text-rose-500/40", className)}
         strokeWidth={1.5}
-        aria-hidden="true"
       />
     );
   }
@@ -267,15 +217,10 @@ const IconRenderer = ({
     <IconComponent
       size={size}
       className={cn(
-        // [LAYOUT_STABILITY]: ป้องกันไอคอนบีบอัด (Zero-CLS Strategy)
         "shrink-0 transform-gpu transition-all duration-300 will-change-transform",
-        "text-text-primary",
         className,
       )}
-      style={{
-        minWidth: size,
-        minHeight: size,
-      }}
+      style={{ minWidth: size, minHeight: size }}
       strokeWidth={strokeWidth}
       aria-hidden={!title}
       {...(title ? { title } : {})}
@@ -286,8 +231,4 @@ const IconRenderer = ({
 
 IconRenderer.displayName = "IconRenderer";
 
-/**
- * [STABILIZED_EXPORT]: ใช้ Default Export เพียงอย่างเดียว เพื่อกำจัดรายงาน Duplicate Exports จาก Knip
- * โดยห่อหุ้มด้วย memo เพื่อประสิทธิภาพสูงสุดในการลด Re-renders
- */
 export default memo(IconRenderer);

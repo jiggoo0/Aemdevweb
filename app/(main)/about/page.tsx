@@ -5,13 +5,11 @@
 
 import React from "react";
 import type { Metadata } from "next";
-import Image from "next/image";
 
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
 import UniversalHero from "@/components/templates/sections/UniversalHero";
 import { CapabilityGraph } from "@/components/templates/sections/CapabilityGraph";
-import { SuccessTimeline } from "@/components/templates/sections/SuccessTimeline";
 import { TrustEquation } from "@/components/templates/sections/TrustEquation";
 
 import { SITE_CONFIG } from "@/constants/site-config";
@@ -25,7 +23,6 @@ import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
-import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: `สถาปนิกเว็บ ${ABOUT_CONTENT.founder.name} | Founder of ${SITE_CONFIG.brandName}`,
@@ -61,70 +58,85 @@ export default function AboutPage() {
         <div className="relative z-10 container mx-auto px-4 md:px-6">
           <div className="flex flex-col gap-16 lg:flex-row lg:items-start">
             {/* Visual Identity Profile Card */}
-            <div className="lg:sticky lg:top-32 w-full max-w-[450px] mx-auto lg:mx-0">
+            <div className="mx-auto w-full max-w-[450px] lg:sticky lg:top-32 lg:mx-0">
               <div className="bg-surface-card border-border shadow-pro-xl rounded-card-lg relative flex flex-col overflow-hidden border backdrop-blur-3xl">
                 {/* Profile Image Container */}
-                <div className="relative aspect-square w-full overflow-hidden bg-surface-offset">
-                   <div className="absolute inset-0 flex items-center justify-center">
-                      <IconRenderer
-                        name="UserCircle2"
-                        size={160}
-                        className="text-brand-primary/20"
-                      />
-                   </div>
-                   {/* Overlay info */}
-                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
-                      <p className="text-white/60 font-mono text-[9px] font-black tracking-[0.3em] uppercase">
-                        Verified.Identity
-                      </p>
-                      <h3 className="text-white text-2xl font-black tracking-tighter uppercase italic">
-                        {ABOUT_CONTENT.founder.name}
-                      </h3>
-                   </div>
+                <div className="bg-surface-offset relative aspect-square w-full overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <IconRenderer name="UserCircle2" size={160} className="text-brand-primary/20" />
+                  </div>
+                  {/* Overlay info */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                    <p className="font-mono text-[9px] font-black tracking-[0.3em] text-white/60 uppercase">
+                      Verified.Identity
+                    </p>
+                    <h3 className="text-2xl font-black tracking-tighter text-white uppercase italic">
+                      {ABOUT_CONTENT.founder.name}
+                    </h3>
+                  </div>
                 </div>
 
                 {/* Profile Details */}
-                <div className="p-6 space-y-6">
-                   <div className="space-y-1">
-                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Current_Role</p>
-                      <p className="text-text-primary text-sm font-bold">{ABOUT_CONTENT.founder.role}</p>
-                   </div>
-                   
-                   <div className="space-y-1">
-                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Experience</p>
-                      <p className="text-text-primary text-sm font-bold">{ABOUT_CONTENT.founder.experience}</p>
-                   </div>
+                <div className="space-y-6 p-6">
+                  <div className="space-y-1">
+                    <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">
+                      Current_Role
+                    </p>
+                    <p className="text-text-primary text-sm font-bold">
+                      {ABOUT_CONTENT.founder.role}
+                    </p>
+                  </div>
 
-                   <div className="space-y-3">
-                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Verified_Credentials</p>
-                      <ul className="space-y-2">
-                        {ABOUT_CONTENT.founder.credentials.map((cred, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-text-secondary font-medium italic">
-                            <IconRenderer name="CheckCircle2" size={14} className="text-green-500 shrink-0" />
-                            {cred}
-                          </li>
-                        ))}
-                      </ul>
-                   </div>
+                  <div className="space-y-1">
+                    <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">
+                      Experience
+                    </p>
+                    <p className="text-text-primary text-sm font-bold">
+                      {ABOUT_CONTENT.founder.experience}
+                    </p>
+                  </div>
 
-                   {/* Social Verification Hub */}
-                   <div className="pt-4 border-t border-border">
-                      <p className="text-text-muted mb-4 font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-60">Digital_Signature</p>
-                      <div className="flex gap-4">
-                        {ABOUT_CONTENT.socialLinks.map((link) => (
-                          <a 
-                            key={link.label}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-text-muted hover:text-brand-primary transition-colors duration-300"
-                            title={link.label}
-                          >
-                            <IconRenderer name={link.icon as IconName} size={20} />
-                          </a>
-                        ))}
-                      </div>
-                   </div>
+                  <div className="space-y-3">
+                    <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">
+                      Verified_Credentials
+                    </p>
+                    <ul className="space-y-2">
+                      {ABOUT_CONTENT.founder.credentials.map((cred, i) => (
+                        <li
+                          key={i}
+                          className="text-text-secondary flex items-start gap-2 text-xs font-medium italic"
+                        >
+                          <IconRenderer
+                            name="CheckCircle2"
+                            size={14}
+                            className="shrink-0 text-green-500"
+                          />
+                          {cred}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Social Verification Hub */}
+                  <div className="border-border border-t pt-4">
+                    <p className="text-text-muted mb-4 font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-60">
+                      Digital_Signature
+                    </p>
+                    <div className="flex gap-4">
+                      {ABOUT_CONTENT.socialLinks.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-muted hover:text-brand-primary transition-colors duration-300"
+                          title={link.label}
+                        >
+                          <IconRenderer name={link.icon as IconName} size={20} />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -139,29 +151,35 @@ export default function AboutPage() {
                   </span>
                 </div>
                 <h2 className="text-text-primary text-5xl leading-tight font-black tracking-tighter uppercase italic md:text-7xl">
-                   {ABOUT_CONTENT.vision.title.split(' ').slice(0, -1).join(' ')} <br />
-                   <span className="from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent">
-                      {ABOUT_CONTENT.vision.title.split(' ').slice(-1)}
-                   </span>
+                  {ABOUT_CONTENT.vision.title.split(" ").slice(0, -1).join(" ")} <br />
+                  <span className="from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent">
+                    {ABOUT_CONTENT.vision.title.split(" ").slice(-1)}
+                  </span>
                 </h2>
                 <div className="text-text-secondary max-w-2xl text-xl leading-relaxed font-medium italic opacity-90">
-                   “{ABOUT_CONTENT.founder.bio}”
+                  “{ABOUT_CONTENT.founder.bio}”
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-border">
-                  <div className="space-y-4">
-                     <h4 className="text-brand-primary font-black tracking-widest uppercase italic">Transparency.</h4>
-                     <p className="text-text-muted text-sm leading-relaxed italic">
-                        ผมยึดมั่นในความโปร่งใส 100% ชื่อเสียงและการยอมรับในวงการคืองานของผม ข้อมูลทุกอย่างที่ระบุที่นี่คือความจริงที่ตรวจสอบได้จาก Digital Footprint ทั่วโลก
-                     </p>
-                  </div>
-                  <div className="space-y-4">
-                     <h4 className="text-brand-primary font-black tracking-widest uppercase italic">Security.</h4>
-                     <p className="text-text-muted text-sm leading-relaxed italic">
-                        ในฐานะ Specialist ผมให้ความสำคัญกับความปลอดภัยทางข้อมูลสูงสุด ไม่มีการประนีประนอมในเรื่องมาตรฐานความปลอดภัยของระบบที่คุณไว้วางใจ
-                     </p>
-                  </div>
+              <div className="border-border grid grid-cols-1 gap-6 border-t pt-8 md:grid-cols-2">
+                <div className="space-y-4">
+                  <h4 className="text-brand-primary font-black tracking-widest uppercase italic">
+                    Transparency.
+                  </h4>
+                  <p className="text-text-muted text-sm leading-relaxed italic">
+                    ผมยึดมั่นในความโปร่งใส 100% ชื่อเสียงและการยอมรับในวงการคืองานของผม
+                    ข้อมูลทุกอย่างที่ระบุที่นี่คือความจริงที่ตรวจสอบได้จาก Digital Footprint ทั่วโลก
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-brand-primary font-black tracking-widest uppercase italic">
+                    Security.
+                  </h4>
+                  <p className="text-text-muted text-sm leading-relaxed italic">
+                    ในฐานะ Specialist ผมให้ความสำคัญกับความปลอดภัยทางข้อมูลสูงสุด
+                    ไม่มีการประนีประนอมในเรื่องมาตรฐานความปลอดภัยของระบบที่คุณไว้วางใจ
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-wrap gap-3 pt-4">
@@ -209,10 +227,12 @@ export default function AboutPage() {
       <section className="py-24">
         <div className="container mx-auto px-4">
           <div className="mb-20 text-center">
-             <p className="text-brand-primary mb-4 font-mono text-[10px] font-black tracking-[0.5em] uppercase">Engineering_Standards</p>
-             <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-                Why <span className="text-brand-primary">Work With Me?</span>
-             </h2>
+            <p className="text-brand-primary mb-4 font-mono text-[10px] font-black tracking-[0.5em] uppercase">
+              Engineering_Standards
+            </p>
+            <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+              Why <span className="text-brand-primary">Work With Me?</span>
+            </h2>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {ABOUT_CONTENT.coreValues.map((feature, idx) => (

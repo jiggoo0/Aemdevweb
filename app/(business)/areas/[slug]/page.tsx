@@ -1,6 +1,6 @@
 /**
- * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.2.0 (CROSS_LINK_ENABLED)
- * [STRATEGY]: Blueprint Inheritance | Unified Identity Shell | Dynamic SEO Nodes
+ * [PAGE_ENGINE]: AREA_DETAIL_SYSTEM v18.3.0 (TURSO_CLOUD_POWERED)
+ * [STRATEGY]: Blueprint Inheritance | Unified Identity Shell | SQL-First Rendering
  * [MAINTAINER]: AEMZA MACKS (Lead Systems Architect)
  */
 
@@ -8,12 +8,12 @@ import { notFound } from "next/navigation";
 import type { Metadata, Viewport } from "next";
 
 // --- 1. Infrastructure & Core Data (SSOT) ---
-import { AREA_NODES } from "@/constants/area-nodes";
 import { getServiceBySlug } from "@/constants/master-registry";
 import { SITE_CONFIG } from "@/constants/site-config";
 import type { PageProps, UniversalTemplateProps } from "@/types";
 import { absoluteUrl } from "@/lib/utils";
 import { mergeServiceData } from "@/lib/data-merger";
+import { getAreaBySlug, getAllAreas } from "@/lib/cms";
 
 // --- 2. SEO & Schema Protocols ---
 import {
@@ -26,14 +26,16 @@ import JsonLd from "@/components/seo/JsonLd";
 // --- 3. UI Render Engine ---
 import { TemplateRenderer } from "@/components/templates/TemplateRenderer";
 
+/** [TURSO_PREGENERATION]: ดึงข้อมูลจาก Cloud เพื่อทำ Static Page Generation */
 export async function generateStaticParams() {
-  return AREA_NODES.map((area) => ({ slug: area.slug }));
+  const areas = await getAllAreas();
+  return areas.map((area) => ({ slug: area.slug }));
 }
 
 /** [VIEWPORT]: ปรับสี Browser ตามอัตลักษณ์พื้นที่ */
 export async function generateViewport(props: PageProps): Promise<Viewport> {
   const { slug } = await props.params;
-  const area = AREA_NODES.find((a) => a.slug === slug);
+  const area = await getAreaBySlug(slug);
 
   return {
     themeColor: area?.theme?.primary || SITE_CONFIG.themeColor,
@@ -46,7 +48,7 @@ export async function generateViewport(props: PageProps): Promise<Viewport> {
 /** [SEO_ENGINE]: Metadata Generation */
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const { slug } = await props.params;
-  const area = AREA_NODES.find((a) => a.slug === slug);
+  const area = await getAreaBySlug(slug);
 
   if (!area) {
     return {
@@ -87,7 +89,7 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
 
 export default async function AreaPage(props: PageProps) {
   const { slug } = await props.params;
-  const area = AREA_NODES.find((a) => a.slug === slug);
+  const area = await getAreaBySlug(slug);
 
   if (!area) notFound();
 
@@ -98,9 +100,9 @@ export default async function AreaPage(props: PageProps) {
   const templateData = mergeServiceData(masterService, area) as UniversalTemplateProps;
 
   /* [DYNAMIC_CROSS_LINKING]: ค้นหาพื้นที่อื่นๆ ที่ให้บริการแบบเดียวกัน (Nearby Nodes) */
-  const nearbyAreas = AREA_NODES.filter(
-    (a) => a.templateSlug === area.templateSlug && a.slug !== area.slug,
-  )
+  const allAreas = await getAllAreas();
+  const nearbyAreas = allAreas
+    .filter((a) => a.templateSlug === area.templateSlug && a.slug !== area.slug)
     .map((a) => a.slug)
     .slice(0, 12);
 
@@ -117,7 +119,6 @@ export default async function AreaPage(props: PageProps) {
       telephone: SITE_CONFIG.contact.phone,
       priceRange: area.price ? `THB ${area.price}` : SITE_CONFIG.business.priceRange,
     }),
-    // [E-E-A-T_SYNC]: เชื่อมโยงตัวตนผู้เชี่ยวชาญเข้ากับบริการในพื้นที่นี้โดยใช้ @id จาก masterIdentity
     {
       "@type": "ProfessionalService",
       "@id": absoluteUrl(`/areas/${area.slug}/#service`),
@@ -132,7 +133,6 @@ export default async function AreaPage(props: PageProps) {
     <>
       <JsonLd data={fullSchema} id={`schema-graph-${area.slug}`} />
 
-      {/* [SYSTEM_LAYOUT]: แสดงผลในโหมด area เพื่ออัตลักษณ์โหนดท้องถิ่นเฉพาะพื้นที่ */}
       <TemplateRenderer
         data={{
           ...templateData,
@@ -141,7 +141,6 @@ export default async function AreaPage(props: PageProps) {
         contextMode="area"
       />
 
-      {/* HUD Layer: Visual Geographic Status Indicator (Fixed Position) */}
       <div className="pointer-events-none fixed top-24 left-0 z-[100] flex w-full justify-center select-none md:top-28">
         <div className="flex items-center gap-3 rounded-full border border-[var(--brand-primary)]/10 bg-[var(--surface-main)]/80 px-5 py-2 shadow-sm">
           <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--brand-primary)] shadow-[0_0_8px_var(--brand-primary)]" />
