@@ -1,47 +1,64 @@
 /**
- * [DATA_NODE]: ABOUT_PAGE_CONTENT v18.0.1 (DATA_DRIVEN)
- * [STRATEGY]: Identity Consolidation | Specialist Authority | RSC Sync
+ * [DATA_NODE]: ABOUT_PAGE_CONTENT v21.0.0 (AUTHORITY_MAXIMIZED)
+ * [STRATEGY]: Identity Consolidation | Specialist Authority | E-E-A-T Signaling
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import { SITE_CONFIG } from "./site-config";
-
 export const ABOUT_CONTENT = {
   hero: {
-    title: 'มากกว่าการทำเว็บไซต์ คือการวาง "รากฐานธุรกิจ" ให้เติบโตบนโลกออนไลน์',
-    subtitle: `"เพราะเว็บไซต์ที่ดีต้องไม่ใช่แค่สวย แต่ต้องช่วยหาเงินและแก้ปัญหาให้ธุรกิจได้ ผมจึงสร้าง ${SITE_CONFIG.brandName} เพื่อเป็นพาร์ทเนอร์ด้านเทคโนโลยีให้ผู้ประกอบการไทยครับ"`,
+    title: 'อลงกรณ์ ยมเกิด | สถาปนิกเว็บผู้วาง "รากฐานดิจิทัล" ให้ธุรกิจยุคใหม่',
+    subtitle: `"ผมเชื่อว่าเว็บไซต์ที่ทรงพลัง ต้องเกิดจากการผสานระหว่าง วิศวกรรมซอฟต์แวร์ระดับสูง และ กลยุทธ์การเติบโตทางธุรกิจ ที่วัดผลได้จริง"`,
+  },
+  founder: {
+    name: "Alongkorl Yomkerd (อลงกรณ์ ยมเกิด)",
+    alias: "Mza-Marks / AemZa Macks",
+    role: "Founder of AemDevWeb & Full Stack Architect",
+    experience: "10+ Years in Software Engineering",
+    bio: "ผู้เชี่ยวชาญด้านการพัฒนา Modern Web Stack (Next.js/React) และการวางโครงสร้าง Technical SEO (GEO) ที่ช่วยให้ธุรกิจครองอันดับบน AI Search Engines ด้วยประสบการณ์การทำงานร่วมกับองค์กรชั้นนำและสตาร์ทอัพ ผมจึงเข้าใจถึงความต้องการที่แท้จริงของผู้ประกอบการที่ต้องการความรวดเร็ว ความปลอดภัย และผลลัพธ์ทางธุรกิจที่จับต้องได้",
+    image: "/images/owner.jpg",
+    credentials: [
+      "Technical Lead at UNLINK-GLOBAL",
+      "Expert in Next.js 16 & React 19 Ecosystem",
+      "Specialist in AI Agent Integration for Business",
+      "Certified in Cyber Security & System Architecture"
+    ]
   },
   vision: {
-    title: "ผสมผสานดีไซน์เข้ากับเทคโนโลยีที่ดีที่สุด",
+    title: "ยกระดับธุรกิจไทยด้วยเทคโนโลยีระดับโลก",
     description:
-      "ภารกิจของผมคือการใช้ความเชี่ยวชาญด้านเทคโนโลยี เพื่อเปลี่ยนเว็บไซต์ธรรมดาให้กลายเป็น 'พนักงานขายที่เก่งที่สุด' ที่ทำงานให้คุณตลอด 24 ชั่วโมง",
-    tags: ["สร้างยอดขาย", "ดันอันดับ_Google", "แก้ปัญหาธุรกิจ", "วัดผลได้จริง"],
+      "ภารกิจของผมที่ AemDevWeb คือการทำลายกำแพงความซับซ้อนของเทคโนโลยี และเปลี่ยนเว็บไซต์ธรรมดาให้กลายเป็น 'พนักงานขายอัจฉริยะ' ที่ทำงานให้คุณตลอด 24 ชั่วโมง โดยไม่มีข้อผิดพลาด",
+    tags: ["High-End_Development", "Technical_SEO", "Business_Automation", "Identity_Trust"],
   },
   coreValues: [
     {
-      title: "เน้นผลลัพธ์ที่จับต้องได้ (Performance Driven)",
+      title: "ความโปร่งใสและน่าเชื่อถือ (Trust & Integrity)",
       description:
-        "ทุกระบบที่เราสร้างต้องวัดผลได้ โค้ดทุกบรรทัดต้องมีหน้าที่สนับสนุนยอดขายและการเติบโตของธุรกิจคุณ ไม่ทำอะไรที่เสียเปล่า",
-      icon: "TrendingUp",
-    },
-    {
-      title: "ดูแลแบบพาร์ทเนอร์ (Strategic Partnership)",
-      description:
-        "เราไม่ใช่แค่คนรับจ้างทำเว็บ แต่เราคือเพื่อนร่วมคิดที่พร้อมให้คำแนะนำอย่างตรงไปตรงมา เพื่อให้คุณลงทุนได้อย่างคุ้มค่าที่สุด",
+        "ทุกโปรเจกต์ดำเนินการโดยผู้เชี่ยวชาญตัวจริง มีตัวตนชัดเจน ตรวจสอบได้ และไม่มีประวัติการกระทำผิดในระบบใดๆ ความสำเร็จของคุณคือชื่อเสียงของผม",
       icon: "ShieldCheck",
     },
     {
-      title: "ใช้เทคโนโลยีล่าสุดเสมอ (Future-Ready)",
+      title: "เน้นผลลัพธ์ที่จับต้องได้ (Performance Driven)",
       description:
-        "เราเลือกใช้เครื่องมือระดับสากล (Next.js) แบบเดียวกับบริษัทใหญ่ เพื่อให้เว็บไซต์ของคุณเร็ว ปลอดภัย และพร้อมรองรับ AI Search ในอนาคต",
+        "โค้ดทุกบรรทัดต้องมีหน้าที่สนับสนุนยอดขายและการเติบโตของธุรกิจคุณ เราไม่ทำเว็บเพียงแค่ให้สวยงาม แต่เราทำเว็บเพื่อให้ธุรกิจคุณชนะคู่แข่ง",
+      icon: "TrendingUp",
+    },
+    {
+      title: "เทคโนโลยีระดับ Flagship (Future-Ready)",
+      description:
+        "เราเลือกใช้ Next.js 16 และ React 19 แบบเดียวกับบริษัทระดับโลก เพื่อให้เว็บไซต์ของคุณเร็วที่สุด ปลอดภัยที่สุด และพร้อมรับมือกับ AI Agents ในปี 2026",
       icon: "Cpu",
     },
   ],
+  socialLinks: [
+    { label: "Facebook", url: "https://www.facebook.com/share/16jjyWbPyG/", icon: "Facebook" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/alongkorl-aemdevweb", icon: "Linkedin" },
+    { label: "GitHub", url: "https://github.com/mza-marks", icon: "Github" }
+  ],
   cta: {
-    title: "พร้อมสร้างความได้เปรียบให้ธุรกิจของคุณหรือยังครับ?",
+    title: "เริ่มวางรากฐานธุรกิจที่แข็งแกร่งไปกับผม",
     description:
-      "ให้ผมร่วมเป็นส่วนหนึ่งในการวางรากฐานดิจิทัลที่แข็งแกร่ง เพื่อการเติบโตอย่างก้าวกระโดดของธุรกิจคุณ",
-    primaryLabel: "ปรึกษาคุณเอ็มผ่าน Line",
-    secondaryLabel: "ศึกษาบริการและแนวทาง",
+      "ไม่ว่าจะเป็นการสร้างระบบใหม่ หรือการกู้คืนความน่าเชื่อถือทางดิจิทัล ผมพร้อมเป็นที่ปรึกษาทางเทคนิคให้คุณครับ",
+    primaryLabel: "ปรึกษาคุณอลงกรณ์ (LINE)",
+    secondaryLabel: "ดูผลงานที่ผ่านมา",
   },
 };

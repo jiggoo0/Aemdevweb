@@ -1,10 +1,11 @@
 /**
- * [ROUTE PAGE]: ABOUT_US v18.0.0 (INTERACTIVE_MAXIMIZED)
+ * [ROUTE PAGE]: ABOUT_US v21.0.0 (IDENTITY_AUTHORITY_MAXIMIZED)
  * [STRATEGY]: High-Authority Positioning | Digital Strategist | E-E-A-T Optimized
  */
 
 import React from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
@@ -24,10 +25,11 @@ import ConversionCTA from "@/components/shared/ConversionCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import IconRenderer from "@/components/ui/IconRenderer";
 import type { IconName } from "@/components/ui/IconRenderer";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: `รู้จักกับ ${SITE_CONFIG.expert.displayName} | ผู้ออกแบบกลยุทธ์เว็บไซต์เพื่อธุรกิจ`,
-  description: `รู้จักกับคุณ${SITE_CONFIG.expert.displayName} และทีม ${SITE_CONFIG.brandName} ผู้อยู่เบื้องหลังการวางโครงสร้าง Digital Infrastructure ที่ช่วยให้ธุรกิจไทยเติบโตอย่างยั่งยืนบน Google`,
+  title: `สถาปนิกเว็บ ${ABOUT_CONTENT.founder.name} | Founder of ${SITE_CONFIG.brandName}`,
+  description: `รู้จักกับ ${ABOUT_CONTENT.founder.name} (${ABOUT_CONTENT.founder.alias}) ผู้เชี่ยวชาญด้าน Modern Web Stack และ Technical SEO ผู้อยู่เบื้องหลังความสำเร็จของธุรกิจในยุค AI-First`,
   alternates: { canonical: `${SITE_CONFIG.siteUrl}/about` },
 };
 
@@ -47,76 +49,119 @@ export default function AboutPage() {
       <UniversalHero
         title={ABOUT_CONTENT.hero.title}
         subtitle={ABOUT_CONTENT.hero.subtitle}
-        primaryActionLabel="ปรึกษาแผนงานกับผมโดยตรง"
+        primaryActionLabel={ABOUT_CONTENT.cta.primaryLabel}
         primaryHref={SITE_CONFIG.links.line}
-        secondaryActionLabel="ดูผลงานทั้งหมด"
-        secondaryHref="/case-studies"
+        secondaryActionLabel={ABOUT_CONTENT.cta.secondaryLabel}
+        secondaryHref="/services"
         align="left"
       />
 
-      {/* 02. SPECIALIST IDENTITY: ตอกย้ำภาพลักษณ์ที่ปรึกษาตัวจริง */}
+      {/* 02. FOUNDER IDENTITY: ตอกย้ำตัวตนและประวัติที่สะอาด (E-E-A-T) */}
       <section className="relative overflow-hidden py-24 md:py-32">
         <div className="relative z-10 container mx-auto px-4 md:px-6">
-          <div className="flex flex-col gap-16 lg:flex-row lg:items-center">
-            {/* Visual Identity Profile */}
-            <div className="relative mx-auto h-[400px] w-full max-w-[400px] md:h-[500px] md:max-w-[500px]">
-              <div className="bg-surface-card border-border shadow-pro-xl rounded-card-lg relative flex h-full w-full items-center justify-center overflow-hidden border backdrop-blur-3xl">
-                <div className="via-surface-main/20 to-surface-main/80 flex h-full w-full flex-col items-center justify-center gap-6 bg-gradient-to-b from-transparent">
-                  <IconRenderer
-                    name="UserCircle2"
-                    size={140}
-                    className="text-brand-primary/80 drop-shadow-2xl"
-                  />
-
-                  <div className="bg-surface-card/90 border-border absolute right-6 bottom-6 left-6 rounded-2xl border p-6 backdrop-blur-xl">
-                    <div className="mb-2 flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75"></span>
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500"></span>
-                      </span>
-                      <p className="text-brand-primary font-mono text-[9px] font-black tracking-[0.3em] uppercase">
-                        Verified.Strategist
+          <div className="flex flex-col gap-16 lg:flex-row lg:items-start">
+            {/* Visual Identity Profile Card */}
+            <div className="lg:sticky lg:top-32 w-full max-w-[450px] mx-auto lg:mx-0">
+              <div className="bg-surface-card border-border shadow-pro-xl rounded-card-lg relative flex flex-col overflow-hidden border backdrop-blur-3xl">
+                {/* Profile Image Container */}
+                <div className="relative aspect-square w-full overflow-hidden bg-surface-offset">
+                   <div className="absolute inset-0 flex items-center justify-center">
+                      <IconRenderer
+                        name="UserCircle2"
+                        size={160}
+                        className="text-brand-primary/20"
+                      />
+                   </div>
+                   {/* Overlay info */}
+                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
+                      <p className="text-white/60 font-mono text-[9px] font-black tracking-[0.3em] uppercase">
+                        Verified.Identity
                       </p>
-                    </div>
-                    <h3 className="text-text-primary mt-1 text-2xl font-black tracking-tighter uppercase italic">
-                      {SITE_CONFIG.expert.displayName}
-                    </h3>
-                    <p className="text-text-muted mt-1 text-[11px] font-bold tracking-widest uppercase opacity-80">
-                      {SITE_CONFIG.expert.jobTitle}
-                    </p>
-                  </div>
+                      <h3 className="text-white text-2xl font-black tracking-tighter uppercase italic">
+                        {ABOUT_CONTENT.founder.name}
+                      </h3>
+                   </div>
+                </div>
+
+                {/* Profile Details */}
+                <div className="p-6 space-y-6">
+                   <div className="space-y-1">
+                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Current_Role</p>
+                      <p className="text-text-primary text-sm font-bold">{ABOUT_CONTENT.founder.role}</p>
+                   </div>
+                   
+                   <div className="space-y-1">
+                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Experience</p>
+                      <p className="text-text-primary text-sm font-bold">{ABOUT_CONTENT.founder.experience}</p>
+                   </div>
+
+                   <div className="space-y-3">
+                      <p className="text-brand-primary font-mono text-[10px] font-black tracking-widest uppercase">Verified_Credentials</p>
+                      <ul className="space-y-2">
+                        {ABOUT_CONTENT.founder.credentials.map((cred, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-text-secondary font-medium italic">
+                            <IconRenderer name="CheckCircle2" size={14} className="text-green-500 shrink-0" />
+                            {cred}
+                          </li>
+                        ))}
+                      </ul>
+                   </div>
+
+                   {/* Social Verification Hub */}
+                   <div className="pt-4 border-t border-border">
+                      <p className="text-text-muted mb-4 font-mono text-[9px] font-black tracking-[0.3em] uppercase opacity-60">Digital_Signature</p>
+                      <div className="flex gap-4">
+                        {ABOUT_CONTENT.socialLinks.map((link) => (
+                          <a 
+                            key={link.label}
+                            href={link.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-text-muted hover:text-brand-primary transition-colors duration-300"
+                            title={link.label}
+                          >
+                            <IconRenderer name={link.icon as IconName} size={20} />
+                          </a>
+                        ))}
+                      </div>
+                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Content Narrative */}
-            <div className="flex-1 space-y-10">
-              <div className="space-y-4">
+            {/* Content Narrative & Vision */}
+            <div className="flex-1 space-y-12">
+              <div className="space-y-6">
                 <div className="border-brand-primary/20 bg-brand-primary/5 text-brand-primary inline-flex items-center gap-3 rounded-full border px-4 py-1.5">
                   <IconRenderer name="Fingerprint" size={16} />
                   <span className="font-mono text-[10px] font-black tracking-[0.3em] uppercase">
-                    Our_Vision
+                    Core_Values_&_Integrity
                   </span>
                 </div>
-                <h2 className="text-text-primary text-5xl leading-tight font-black tracking-tighter uppercase italic md:text-6xl">
-                  Strategic Design <br />
-                  <span className="from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent">
-                    {ABOUT_CONTENT.vision.title}
-                  </span>
+                <h2 className="text-text-primary text-5xl leading-tight font-black tracking-tighter uppercase italic md:text-7xl">
+                   {ABOUT_CONTENT.vision.title.split(' ').slice(0, -1).join(' ')} <br />
+                   <span className="from-brand-primary to-brand-secondary bg-gradient-to-r bg-clip-text text-transparent">
+                      {ABOUT_CONTENT.vision.title.split(' ').slice(-1)}
+                   </span>
                 </h2>
+                <div className="text-text-secondary max-w-2xl text-xl leading-relaxed font-medium italic opacity-90">
+                   “{ABOUT_CONTENT.founder.bio}”
+                </div>
               </div>
 
-              <div className="text-text-secondary space-y-6 text-lg leading-relaxed font-medium md:text-xl">
-                <p>
-                  สวัสดีครับ ผม{" "}
-                  <span className="text-text-primary font-bold">
-                    คุณ{SITE_CONFIG.expert.displayName}
-                  </span>{" "}
-                  ผู้ก่อตั้ง {SITE_CONFIG.brandName} ครับ
-                </p>
-                <div className="border-brand-primary/50 text-text-primary/80 border-l-4 pl-4 leading-relaxed italic">
-                  “{ABOUT_CONTENT.vision.description}”
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 border-t border-border">
+                  <div className="space-y-4">
+                     <h4 className="text-brand-primary font-black tracking-widest uppercase italic">Transparency.</h4>
+                     <p className="text-text-muted text-sm leading-relaxed italic">
+                        ผมยึดมั่นในความโปร่งใส 100% ชื่อเสียงและการยอมรับในวงการคืองานของผม ข้อมูลทุกอย่างที่ระบุที่นี่คือความจริงที่ตรวจสอบได้จาก Digital Footprint ทั่วโลก
+                     </p>
+                  </div>
+                  <div className="space-y-4">
+                     <h4 className="text-brand-primary font-black tracking-widest uppercase italic">Security.</h4>
+                     <p className="text-text-muted text-sm leading-relaxed italic">
+                        ในฐานะ Specialist ผมให้ความสำคัญกับความปลอดภัยทางข้อมูลสูงสุด ไม่มีการประนีประนอมในเรื่องมาตรฐานความปลอดภัยของระบบที่คุณไว้วางใจ
+                     </p>
+                  </div>
               </div>
 
               <div className="flex flex-wrap gap-3 pt-4">
@@ -141,7 +186,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
             <div className="space-y-8">
               <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-                Technical <br /> <span className="text-brand-primary">Command.</span>
+                Technical <br /> <span className="text-brand-primary">Authority.</span>
               </h2>
               <p className="text-text-secondary max-w-xl text-lg leading-relaxed font-medium italic opacity-80">
                 เราใช้ทักษะทางวิศวกรรมซอฟต์แวร์ระดับลึก เพื่อสร้างระบบที่ไม่ใช่แค่สวยงาม
@@ -150,24 +195,49 @@ export default function AboutPage() {
             </div>
             <CapabilityGraph
               skills={[
-                { title: "Web Architecture (Next.js)", description: "", icon: "Layers" },
-                { title: "Technical SEO Engineering", description: "", icon: "SearchCheck" },
-                { title: "Data-Driven Conversion", description: "", icon: "Activity" },
-                { title: "Core Web Vitals Mastery", description: "", icon: "Zap" },
+                { title: "Software Architecture", description: "", icon: "Layers" },
+                { title: "SEO Engineering (GEO)", description: "", icon: "SearchCheck" },
+                { title: "AI Agent Integration", description: "", icon: "BrainCircuit" },
+                { title: "Zero-Jank UI/UX", description: "", icon: "Zap" },
               ]}
             />
           </div>
         </div>
       </section>
 
-      {/* 04. MILESTONES: The Success Journey */}
+      {/* 04. CORE VALUES: มอบคุณค่าที่หาไม่ได้จากที่อื่น */}
       <section className="py-24">
-        <div className="container mx-auto mb-16 px-4 text-center">
-          <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
-            Success <span className="text-brand-primary">Roadmap.</span>
-          </h2>
+        <div className="container mx-auto px-4">
+          <div className="mb-20 text-center">
+             <p className="text-brand-primary mb-4 font-mono text-[10px] font-black tracking-[0.5em] uppercase">Engineering_Standards</p>
+             <h2 className="text-text-primary text-4xl font-black tracking-tighter uppercase italic md:text-6xl">
+                Why <span className="text-brand-primary">Work With Me?</span>
+             </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {ABOUT_CONTENT.coreValues.map((feature, idx) => (
+              <div
+                key={feature.title}
+                className="group hover:shadow-pro relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--surface-card)] p-10 transition-all duration-700 hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40"
+              >
+                <div className="group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-[1rem] border border-[var(--border)] bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-[var(--color-brand-primary-fg)]">
+                  <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
+                    Standard_{idx.toString().padStart(2, "0")}
+                  </span>
+                  <h3 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
+                    {feature.title}
+                  </h3>
+                  <p className="text-lg leading-relaxed font-medium text-[var(--text-secondary)] italic opacity-70">
+                    “{feature.description}”
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <SuccessTimeline />
       </section>
 
       {/* 05. TRUST INFRASTRUCTURE */}
@@ -187,51 +257,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 06. CORE VALUES */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-16 text-center">
-            <h2 className="text-text-primary text-3xl font-black tracking-tighter uppercase italic md:text-5xl">
-              Why AEMDEVWEB?
-            </h2>
-            <p className="text-text-secondary mx-auto mt-4 max-w-2xl text-lg font-medium opacity-60">
-              สัมผัสประสบการณ์การทำงานกับพาร์ทเนอร์ที่ให้ความสำคัญกับเป้าหมายของคุณ
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {ABOUT_CONTENT.coreValues.map((feature, idx) => (
-              <div
-                key={feature.title}
-                className="group hover:shadow-pro relative flex flex-col overflow-hidden rounded-[1.25rem] border border-[var(--border)] bg-[var(--surface-card)] p-10 transition-all duration-700 hover:-translate-y-2 hover:border-[var(--color-brand-primary)]/40"
-              >
-                <div className="group-hover:shadow-glow mb-10 flex h-16 w-16 items-center justify-center rounded-[1rem] border border-[var(--border)] bg-[var(--surface-offset)] text-[var(--color-brand-primary)] transition-all duration-500 group-hover:rotate-6 group-hover:bg-[var(--color-brand-primary)] group-hover:text-[var(--color-brand-primary-fg)]">
-                  <IconRenderer name={feature.icon as IconName} size={32} strokeWidth={2.5} />
-                </div>
-                <div className="relative z-10 space-y-4">
-                  <span className="font-mono text-[9px] font-black tracking-[0.4em] text-[var(--color-brand-primary)] uppercase opacity-40">
-                    Value_{idx.toString().padStart(2, "0")}
-                  </span>
-                  <h3 className="text-2xl font-black tracking-tighter text-[var(--text-primary)] uppercase italic">
-                    {feature.title}
-                  </h3>
-                  <p className="text-lg leading-relaxed font-medium text-[var(--text-secondary)] italic opacity-70">
-                    “{feature.description}”
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 07. CALL TO ACTION: ยกระดับการเรียกขานให้เป็นระดับมืออาชีพ */}
+      {/* 06. CALL TO ACTION */}
       <ConversionCTA
         title={ABOUT_CONTENT.cta.title}
         description={ABOUT_CONTENT.cta.description}
         buttonLabel={ABOUT_CONTENT.cta.primaryLabel}
         buttonHref={SITE_CONFIG.links.line}
         secondaryLabel={ABOUT_CONTENT.cta.secondaryLabel}
-        secondaryHref="/services"
+        secondaryHref="/case-studies"
       />
     </LayoutEngine>
   );

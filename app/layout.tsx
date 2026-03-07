@@ -18,6 +18,7 @@ import { type LayoutProps } from "@/types";
 // --- 2. Providers & SEO ---
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import JsonLd from "@/components/seo/JsonLd";
+import ReputationShield from "@/components/seo/ReputationShield";
 import ClientInfrastructure from "@/components/providers/ClientInfrastructure";
 import { constructMetadata } from "@/lib/seo-utils";
 
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: LayoutProps) {
     >
       <head>
         <JsonLd data={schemaGraph} id="global-knowledge-graph" />
+        <ReputationShield />
       </head>
       <body
         suppressHydrationWarning
