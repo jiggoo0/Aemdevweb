@@ -31,6 +31,7 @@ import {
   Loader2,
   Timer,
   RefreshCcw,
+  Crown,
   // 2. Connectivity & Mapping
   Home,
   MapPin,
@@ -98,8 +99,9 @@ import {
 /**
  * [REGISTRY]: ทะเบียนสัญลักษณ์ที่ใช้จริง (Consolidated Registry)
  * ลดจำนวนไอคอนจาก 100+ เหลือเฉพาะที่ใช้งานจริง เพื่อลด Bundle Size
+ * [OPTIMIZED]: เปลี่ยนเป็น internal const เพื่อให้ Tree-shaking ทำงานได้ดีขึ้น
  */
-export const ICON_MAP = {
+const ICON_MAP = {
   Menu,
   X,
   ChevronRight,
@@ -121,6 +123,7 @@ export const ICON_MAP = {
   Loader2,
   Timer,
   RefreshCcw,
+  Crown,
   Home,
   MapPin,
   Map,
@@ -213,6 +216,7 @@ const IconRenderer = ({
     );
   }
 
+  // [PERFORMANCE]: Use transform-gpu and will-change to offload rendering to GPU
   return (
     <IconComponent
       size={size}

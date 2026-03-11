@@ -34,12 +34,34 @@ import AreaCard from "@/components/features/areas/AreaCard";
 // --- 5. Deferred UI ---
 const LeadScoringHUD = dynamic(
   () => import("@/components/templates/sections/LeadScoringHUD").then((mod) => mod.LeadScoringHUD),
-  { ssr: true },
+  { ssr: false },
 );
 
 const TrustEquation = dynamic(
   () => import("@/components/templates/sections/TrustEquation").then((mod) => mod.TrustEquation),
-  { ssr: true },
+  { ssr: false },
+);
+
+const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), { ssr: false });
+const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), { ssr: false });
+const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
+  ssr: false,
+});
+const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"), {
+  ssr: false,
+});
+
+const AuditReportGenerator = dynamic(
+  () =>
+    import("@/components/templates/sections/AuditReportGenerator").then(
+      (mod) => mod.AuditReportGenerator,
+    ),
+  { ssr: false },
+);
+
+const DirectTerminal = dynamic(
+  () => import("@/components/templates/sections/DirectTerminal").then((mod) => mod.DirectTerminal),
+  { ssr: false },
 );
 
 const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (
@@ -75,28 +97,6 @@ const ImpactStatsFallback = () => (
       />
     ))}
   </div>
-);
-
-const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), { ssr: true });
-const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), { ssr: true });
-const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
-  ssr: true,
-});
-const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"), {
-  ssr: true,
-});
-
-const AuditReportGenerator = dynamic(
-  () =>
-    import("@/components/templates/sections/AuditReportGenerator").then(
-      (mod) => mod.AuditReportGenerator,
-    ),
-  { ssr: true },
-);
-
-const DirectTerminal = dynamic(
-  () => import("@/components/templates/sections/DirectTerminal").then((mod) => mod.DirectTerminal),
-  { ssr: true },
 );
 
 export async function generateMetadata(): Promise<Metadata> {

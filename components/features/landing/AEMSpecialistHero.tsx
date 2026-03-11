@@ -26,6 +26,7 @@ export const AEMSpecialistHero = memo(() => {
   const smoothMouseY = useSpring(mouseY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (window.matchMedia("(pointer: coarse)").matches) return; // Skip for touch devices
     const { clientX, clientY } = e;
     const { left, top, width, height } = containerRef.current?.getBoundingClientRect() || {
       left: 0,
@@ -51,8 +52,8 @@ export const AEMSpecialistHero = memo(() => {
     animate: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05, // Faster stagger
-        delayChildren: 0, // No delay for critical paint
+        staggerChildren: 0.02, // Dramatically faster stagger for 95+ PSI
+        delayChildren: 0, // Zero delay for critical paint
       },
     },
   };
@@ -88,19 +89,20 @@ export const AEMSpecialistHero = memo(() => {
     >
       {/* --- LAYER 01: TEXTURE & ATMOSPHERE (High-End Depth) --- */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        {/* Optimized Grainy Noise Texture (Pure CSS Strategy) */}
+        {/* Optimized Grainy Noise Texture (Pure CSS Strategy) - Restricted to MD+ for LCP */}
         <div
-          className="absolute inset-0 opacity-[0.02] mix-blend-overlay brightness-100 contrast-150"
+          className="absolute inset-0 opacity-[0.02] mix-blend-overlay brightness-100 contrast-150 hidden md:block"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           }}
         ></div>
 
-        {/* Dynamic Glow Mesh */}
+        {/* Dynamic Glow Mesh - Optimized for Mobile Performance */}
         <motion.div
           style={{ x: glowX, y: glowY, opacity: opacityParallax }}
-          className="absolute h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/15 blur-[160px]"
+          className="absolute h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/15 blur-[160px] hidden md:block"
         />
+        <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/5 blur-[120px] md:hidden" />
 
         {/* Floating Accents */}
         <motion.div style={{ y: yParallax, scale: scaleParallax }} className="absolute inset-0 z-0">
@@ -146,7 +148,7 @@ export const AEMSpecialistHero = memo(() => {
             <h1 className="text-text-primary relative max-w-[14ch] text-7xl leading-[0.85] font-black tracking-tighter uppercase italic drop-shadow-sm md:text-9xl lg:text-[12rem]">
               Maximize <br />
               <span className="relative">
-                <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent saturate-150 filter">
+                <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent">
                   Performance.
                 </span>
                 {/* Decorative underline */}
