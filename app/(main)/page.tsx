@@ -4,15 +4,13 @@
  * [MAINTAINER]: AEMZA MACKS (Lead Architect)
  */
 
-import React, { Suspense } from "react";
+import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 
 // --- 1. Infrastructure & Core Constants ---
 import { AREA_NODES } from "@/constants/area-nodes";
 import { SITE_CONFIG } from "@/constants/site-config";
-import { cn } from "@/lib/utils";
 
 // --- 2. Data Access Layer ---
 import { getAllPosts, getAllCaseStudies, getAllServices, getLiveMetrics } from "@/lib/cms";
@@ -30,74 +28,7 @@ import ServiceCard from "@/components/features/services/ServiceCard";
 import CaseStudyCard from "@/components/features/case-studies/CaseStudyCard";
 import BlogCard from "@/components/features/blog/BlogCard";
 import AreaCard from "@/components/features/areas/AreaCard";
-
-// --- 5. Deferred UI ---
-const LeadScoringHUD = dynamic(
-  () => import("@/components/templates/sections/LeadScoringHUD").then((mod) => mod.LeadScoringHUD),
-  { ssr: false },
-);
-
-const TrustEquation = dynamic(
-  () => import("@/components/templates/sections/TrustEquation").then((mod) => mod.TrustEquation),
-  { ssr: false },
-);
-
-const TrustBadge = dynamic(() => import("@/components/shared/TrustBadge"), { ssr: false });
-const ImpactStats = dynamic(() => import("@/components/shared/ImpactStats"), { ssr: false });
-const WorkProcess = dynamic(() => import("@/components/features/landing/WorkProcess"), {
-  ssr: false,
-});
-const PricingSection = dynamic(() => import("@/components/features/landing/PricingSection"), {
-  ssr: false,
-});
-
-const AuditReportGenerator = dynamic(
-  () =>
-    import("@/components/templates/sections/AuditReportGenerator").then(
-      (mod) => mod.AuditReportGenerator,
-    ),
-  { ssr: false },
-);
-
-const DirectTerminal = dynamic(
-  () => import("@/components/templates/sections/DirectTerminal").then((mod) => mod.DirectTerminal),
-  { ssr: false },
-);
-
-const LoadingSkeleton = ({ height, className }: { height: string; className?: string }) => (
-  <div
-    className={cn(
-      "bg-surface-card/30 border-border/10 rounded-section animate-pulse border",
-      height,
-      className,
-    )}
-  />
-);
-
-const TrustBadgeFallback = () => (
-  <div className="flex w-full flex-col items-center gap-10">
-    <div className="bg-border/10 h-6 w-1/3 animate-pulse rounded-full" />
-    <div className="flex flex-wrap justify-center gap-4">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <div
-          key={i}
-          className="bg-surface-card/30 border-border/10 h-16 w-40 animate-pulse rounded-full border"
-        />
-      ))}
-    </div>
-  </div>
-);
-
-const ImpactStatsFallback = () => (
-  <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-    {[1, 2, 3, 4].map((i) => (
-      <div
-        key={i}
-        className="bg-surface-card/30 rounded-section border-border/10 h-[280px] animate-pulse border"
-      />
-    ))}
-  </div>
-);
+import { DeferredHomeWidgets } from "@/components/features/landing/DeferredHomeWidgets";
 
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
@@ -155,13 +86,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-7xl">
             <div className="glass-card shadow-pro-xl rounded-section border-border/50 bg-surface-card/80 relative overflow-hidden border p-10 backdrop-blur-3xl md:p-20">
               <div className="relative z-10 flex flex-col items-center gap-16 md:gap-24">
-                <Suspense fallback={<TrustBadgeFallback />}>
-                  <TrustBadge />
-                </Suspense>
-                <div className="bg-border/20 h-px w-full" />
-                <Suspense fallback={<ImpactStatsFallback />}>
-                  <ImpactStats liveMetrics={liveMetrics} />
-                </Suspense>
+                <DeferredHomeWidgets section="trust-metrics" liveMetrics={liveMetrics} />
               </div>
               <div className="bg-brand-primary/5 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[120px]" />
             </div>
@@ -220,30 +145,20 @@ export default async function HomePage() {
             </h2>
           </header>
           <div className="space-y-24">
-            <Suspense
-              fallback={<LoadingSkeleton height="h-[400px]" className="mx-auto max-w-5xl" />}
-            >
-              <AuditReportGenerator />
-            </Suspense>
+            <DeferredHomeWidgets section="audit-generator" />
             <div className="mx-auto max-w-5xl">
-              <Suspense fallback={<LoadingSkeleton height="h-[300px]" />}>
-                <LeadScoringHUD />
-              </Suspense>
+              <DeferredHomeWidgets section="lead-scoring" />
             </div>
           </div>
         </div>
       </section>
 
       <section className="bg-black py-24">
-        <Suspense fallback={<LoadingSkeleton height="h-[500px]" />}>
-          <TrustEquation />
-        </Suspense>
+        <DeferredHomeWidgets section="trust-equation" />
       </section>
 
       <section className="bg-surface-main py-24" aria-label="Working Process">
-        <Suspense fallback={<LoadingSkeleton height="h-[500px]" className="mx-auto max-w-7xl" />}>
-          <WorkProcess />
-        </Suspense>
+        <DeferredHomeWidgets section="work-process" />
       </section>
 
       <div className="bg-surface-offset border-border/40 border-y">
@@ -305,9 +220,7 @@ export default async function HomePage() {
 
       <div className="bg-surface-main">
         <section className="pb-24">
-          <Suspense fallback={<LoadingSkeleton height="h-[650px]" className="mx-auto max-w-7xl" />}>
-            <PricingSection />
-          </Suspense>
+          <DeferredHomeWidgets section="pricing" />
         </section>
 
         <section
@@ -328,11 +241,7 @@ export default async function HomePage() {
                 </h2>
               </div>
               <div className="w-full max-w-2xl">
-                <Suspense
-                  fallback={<div className="h-48 w-full animate-pulse rounded-2xl bg-black/20" />}
-                >
-                  <DirectTerminal mode="health-check" province="Thailand" />
-                </Suspense>
+                <DeferredHomeWidgets section="terminal-health" />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">

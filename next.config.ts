@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
   },
 
   // [NEW]: Next.js 16 - High-Performance Caching
-  output: 'standalone',
+  output: "standalone",
   experimental: {
     mdxRs: true,
     // [PPR]: Partial Prerendering ใน Next.js 16 - เปิดใช้งานผ่าน cacheComponents
