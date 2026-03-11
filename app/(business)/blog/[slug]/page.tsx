@@ -81,11 +81,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
   const headings = extractHeadings(post.content || "");
   const isoDate = post.date || "2026-03-01T00:00:00.000Z";
   const displayDate = post.date
-    ? new Date(post.date).toLocaleDateString("th-TH", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+    ? formatDate(post.date)
     : "Recently Published";
 
   // [B] SCHEMA_ORCHESTRATION: Article Authority Graph

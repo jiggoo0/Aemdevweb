@@ -61,10 +61,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
   // [SEMANTIC DATA]: เตรียมข้อมูลวันที่และ Schema
   const projectDate = data.date ? new Date(data.date) : new Date("2026-03-01");
   const isoDate = projectDate.toISOString();
-  const displayDate = projectDate.toLocaleDateString("th-TH", {
-    year: "numeric",
-    month: "long",
-  });
+  const displayDate = formatDate(projectDate);
 
   // [SCHEMA]: CreativeWork / Article Graph สำหรับ Portfolio
   const fullSchema = generateSchemaGraph([

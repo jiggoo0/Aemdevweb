@@ -5,6 +5,7 @@ const isTermux = process.env.TERMUX_VERSION !== undefined || process.env.SHELL?.
 const nextConfig: NextConfig = {
   /* 🚀 Hybrid Architecture Strategy */
   reactStrictMode: true,
+  cacheComponents: true,
 
   // [MAX_SPEED]: ปิดการใช้ Console.log ใน Production เพื่อความคลีนและเบาที่สุด
   compiler: {
@@ -15,8 +16,6 @@ const nextConfig: NextConfig = {
   output: "standalone",
   experimental: {
     mdxRs: true,
-    // [PPR]: Partial Prerendering ใน Next.js 16 - เปิดใช้งานผ่าน cacheComponents
-    cacheComponents: true,
   },
 
   images: {
@@ -35,7 +34,7 @@ const nextConfig: NextConfig = {
       },
     ],
     // ใน Termux เราอาจไม่มี Sharp Library ที่สมบูรณ์ จึงอนุญาตให้รันแบบ unoptimized ได้หากจำเป็น
-    unoptimized: isTermux,
+    unoptimized: process.env.NODE_ENV === "development" && isTermux,
   },
 
   // ปรับแต่งการสร้าง Static Page ให้เหมาะสมกับทรัพยากร (Android/Termux)
