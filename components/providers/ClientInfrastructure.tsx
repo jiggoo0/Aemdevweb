@@ -26,7 +26,10 @@ const Toaster = dynamic(() => import("@/components/ui/Sonner").then((mod) => mod
 });
 
 const ClientInfrastructure = () => {
+  const [mounted, setMounted] = React.useState(false);
+
   useEffect(() => {
+    setMounted(true);
     // [ACCESSIBILITY]: Initialize Axe-core for real-time WCAG auditing in Development
     if (process.env.NODE_ENV !== "production") {
       import("@axe-core/react").then((axe) => {
@@ -34,6 +37,8 @@ const ClientInfrastructure = () => {
       });
     }
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <>

@@ -225,78 +225,80 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* MOBILE OVERLAY */}
-      <div
-        className={cn(
-          "z-overlay fixed inset-0 flex flex-col items-center justify-start px-4 pt-28 transition-all duration-500",
-          isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-        )}
-      >
+      {/* MOBILE OVERLAY - Client Only to prevent Error #418 */}
+      {mounted && (
         <div
-          className="absolute inset-0 bg-black/60 backdrop-blur-md"
-          onClick={() => setIsOpen(false)}
-          aria-hidden="true"
-        />
-
-        <nav
           className={cn(
-            "rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border bg-[var(--surface-main)]/95 p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-sm transition-all duration-500",
-            isOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-5 scale-95 opacity-0",
+            "z-overlay fixed inset-0 flex flex-col items-center justify-start px-4 pt-28 transition-all duration-500",
+            isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
           )}
         >
-          <ul className="flex flex-col gap-2">
-            {MAIN_NAV.map((link, index) => {
-              const isActive = pathname === link.href;
-              return (
-                <li
-                  key={link.href}
-                  style={{ transitionDelay: `${index * 50}ms` }}
-                  className={cn(
-                    "transition-all duration-500",
-                    isOpen ? "translate-x-0 opacity-100" : "-translate-x-5 opacity-0",
-                  )}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    aria-current={isActive ? "page" : undefined}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-md"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+
+          <nav
+            className={cn(
+              "rounded-section border-border/40 relative w-full max-w-sm overflow-hidden border bg-[var(--surface-main)]/95 p-6 shadow-2xl ring-1 ring-white/5 backdrop-blur-sm transition-all duration-500",
+              isOpen ? "translate-y-0 scale-100 opacity-100" : "translate-y-5 scale-95 opacity-0",
+            )}
+          >
+            <ul className="flex flex-col gap-2">
+              {MAIN_NAV.map((link, index) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li
+                    key={link.href}
+                    style={{ transitionDelay: `${index * 50}ms` }}
                     className={cn(
-                      "flex items-center justify-between rounded-2xl px-5 py-4 text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-all",
-                      isActive
-                        ? "bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)]"
-                        : "text-text-primary hover:bg-white/5",
+                      "transition-all duration-500",
+                      isOpen ? "translate-x-0 opacity-100" : "-translate-x-5 opacity-0",
                     )}
                   >
-                    {link.label}
-                  </Link>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={cn(
+                        "flex items-center justify-between rounded-2xl px-5 py-4 text-3xl leading-relaxed font-black tracking-tighter uppercase italic transition-all",
+                        isActive
+                          ? "bg-[var(--color-brand-primary)]/10 text-[var(--color-brand-primary)]"
+                          : "text-text-primary hover:bg-white/5",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
 
-                  {/* Mobile Sub-menu Indicator */}
-                  {link.children && (
-                    <ul className="border-border mt-2 ml-6 space-y-1 border-l-2 pl-4">
-                      {link.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            onClick={() => setIsOpen(false)}
-                            className={cn(
-                              "block py-2 text-sm font-bold tracking-widest uppercase transition-colors",
-                              pathname === child.href
-                                ? "text-[var(--color-brand-primary)]"
-                                : "text-text-secondary",
-                            )}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
+                    {/* Mobile Sub-menu Indicator */}
+                    {link.children && (
+                      <ul className="border-border mt-2 ml-6 space-y-1 border-l-2 pl-4">
+                        {link.children.map((child) => (
+                          <li key={child.href}>
+                            <Link
+                              href={child.href}
+                              onClick={() => setIsOpen(false)}
+                              className={cn(
+                                "block py-2 text-sm font-bold tracking-widest uppercase transition-colors",
+                                pathname === child.href
+                                  ? "text-[var(--color-brand-primary)]"
+                                  : "text-text-secondary",
+                              )}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        </div>
+      )}
     </>
   );
 };
