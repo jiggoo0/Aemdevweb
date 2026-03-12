@@ -13,6 +13,7 @@ import { getCaseStudyBySlug, getAllCaseStudies } from "@/lib/cms";
 import { constructMetadata } from "@/lib/seo-utils";
 import { useMDXComponents } from "@/mdx-components";
 import type { PageProps } from "@/types";
+import { formatDate } from "@/lib/utils";
 
 import { SITE_CONFIG } from "@/constants/site-config";
 import JsonLd from "@/components/seo/JsonLd";

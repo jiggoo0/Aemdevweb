@@ -41,7 +41,7 @@ export function formatDate(date: string | number | Date) {
       day: "numeric",
       year: "numeric",
     }).format(d);
-  } catch (e) {
+  } catch {
     return "";
   }
 }

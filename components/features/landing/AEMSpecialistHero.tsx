@@ -145,7 +145,7 @@ export const AEMSpecialistHero = memo(() => {
 
           {/* Main Title: Narrative Dominance (Static for LCP Optimization) */}
           <div className="relative mb-12 flex flex-col items-center">
-            <h1 className="text-text-primary relative max-w-[14ch] text-7xl leading-[0.85] font-black tracking-tighter uppercase italic drop-shadow-sm md:text-9xl lg:text-[12rem] opacity-100 transition-none">
+            <h1 className="text-text-primary relative max-w-[14ch] text-7xl leading-[0.85] font-black tracking-tighter uppercase italic opacity-100 drop-shadow-sm transition-none md:text-9xl lg:text-[12rem]">
               Maximize <br />
               <span className="relative">
                 <span className="from-brand-primary via-brand-primary/80 to-brand-accent bg-gradient-to-r bg-clip-text text-transparent">

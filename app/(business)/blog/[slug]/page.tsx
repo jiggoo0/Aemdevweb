@@ -14,6 +14,7 @@ import { constructMetadata } from "@/lib/seo-utils";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { useMDXComponents } from "@/mdx-components";
 import type { PageProps } from "@/types";
+import { formatDate } from "@/lib/utils";
 
 import JsonLd from "@/components/seo/JsonLd";
 import { generateBreadcrumbSchema, generateSchemaGraph } from "@/lib/schema";
@@ -80,9 +81,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
   // [A] CONTENT_EXTRACTION: เตรียมข้อมูลเสริมสำหรับการนำทาง
   const headings = extractHeadings(post.content || "");
   const isoDate = post.date || "2026-03-01T00:00:00.000Z";
-  const displayDate = post.date
-    ? formatDate(post.date)
-    : "Recently Published";
+  const displayDate = post.date ? formatDate(post.date) : "Recently Published";
 
   // [B] SCHEMA_ORCHESTRATION: Article Authority Graph
   const fullSchema = generateSchemaGraph([
