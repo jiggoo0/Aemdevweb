@@ -9,6 +9,7 @@
 import React, { memo, useEffect } from "react";
 import ReactDOM from "react-dom";
 import dynamic from "next/dynamic";
+import { LazyMotion, domMax } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
 
 // --- [OPTIMIZED]: Dynamic Imports (Client-Side Only) ---
@@ -41,7 +42,27 @@ const ClientInfrastructure = () => {
   if (!mounted) return null;
 
   return (
-    <>
+    <LazyMotion features={domMax} strict>
+      {/* [MODERN_WEB_OPTIMIZATION]: Speculation Rules API for Instant Navigation */}
+      <script
+        type="speculationrules"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            prerender: [
+              {
+                source: "list",
+                urls: ["/services", "/contact", "/blog", "/about"],
+                score: 0.5,
+              },
+              {
+                where: { href_matches: "/*" },
+                eagerness: "moderate",
+              },
+            ],
+          }),
+        }}
+      />
+
       {/* [CORE]: Navigation Progress Indicator */}
       <TopLoader color={SITE_CONFIG.themeColor} />
 
@@ -50,7 +71,7 @@ const ClientInfrastructure = () => {
 
       {/* [UI]: Global Notification System */}
       <Toaster position="top-center" richColors expand={false} closeButton theme="system" />
-    </>
+    </LazyMotion>
   );
 };
 

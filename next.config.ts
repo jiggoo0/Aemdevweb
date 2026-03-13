@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
   output: "standalone",
   experimental: {
     mdxRs: true,
+    ppr: "incremental",
+    dynamicIO: true,
+    authInterrupts: true,
   },
 
   images: {

@@ -7,7 +7,7 @@
 "use client";
 
 import React, { memo, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { m, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site-config";
 import { Button } from "@/components/ui/Button";
 import IconRenderer from "@/components/ui/IconRenderer";
@@ -79,7 +79,7 @@ export const AEMSpecialistHero = memo(() => {
   ];
 
   return (
-    <motion.section
+    <m.section
       ref={containerRef}
       initial="initial"
       animate="animate"
@@ -98,17 +98,17 @@ export const AEMSpecialistHero = memo(() => {
         ></div>
 
         {/* Dynamic Glow Mesh - Optimized for Mobile Performance */}
-        <motion.div
+        <m.div
           style={{ x: glowX, y: glowY, opacity: opacityParallax }}
           className="absolute hidden h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/15 blur-[160px] md:block"
         />
         <div className="absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-brand-primary)]/5 blur-[120px] md:hidden" />
 
         {/* Floating Accents */}
-        <motion.div style={{ y: yParallax, scale: scaleParallax }} className="absolute inset-0 z-0">
+        <m.div style={{ y: yParallax, scale: scaleParallax }} className="absolute inset-0 z-0">
           <div className="bg-brand-secondary/5 absolute top-1/4 right-0 h-[600px] w-[600px] rounded-full blur-[120px]" />
           <div className="bg-brand-accent/5 absolute bottom-1/4 -left-1/4 h-[500px] w-[500px] rounded-full blur-[100px]" />
-        </motion.div>
+        </m.div>
 
         {/* Tactical Grid (Sub-pixel Precision) */}
         <div
@@ -124,7 +124,7 @@ export const AEMSpecialistHero = memo(() => {
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="flex flex-col items-center text-center">
           {/* Status Nodes: Credibility HUD */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="mb-12 flex flex-wrap items-center justify-center gap-3 md:gap-6"
           >
@@ -141,7 +141,7 @@ export const AEMSpecialistHero = memo(() => {
                 </span>
               </div>
             ))}
-          </motion.div>
+          </m.div>
 
           {/* Main Title: Narrative Dominance (Static for LCP Optimization) */}
           <div className="relative mb-12 flex flex-col items-center">
@@ -165,7 +165,7 @@ export const AEMSpecialistHero = memo(() => {
               ที่เร็วทะลุขีดจำกัด และออกแบบมาเพื่อปิดการขายให้คุณโดยเฉพาะ”
             </p>
             <div className="mt-12 h-[2px] w-32 overflow-hidden rounded-full bg-[var(--color-brand-primary)]/20">
-              <motion.div
+              <m.div
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
@@ -175,7 +175,7 @@ export const AEMSpecialistHero = memo(() => {
           </div>
 
           {/* Conversion Actions: Strategic Call-to-Action */}
-          <motion.div
+          <m.div
             variants={itemVariants}
             className="flex flex-col items-center gap-8 sm:flex-row"
           >
@@ -211,12 +211,12 @@ export const AEMSpecialistHero = memo(() => {
                 สำรวจโซลูชันทั้งหมด
               </Button>
             </Magnetic>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* --- LAYER 03: SCROLL INDICATOR (Tactical Feedback) --- */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 1 }}
@@ -227,14 +227,14 @@ export const AEMSpecialistHero = memo(() => {
           SYSTEM SCANNING BELOW
         </span>
         <div className="border-border/40 flex h-12 w-7 items-start justify-center rounded-full border p-2 backdrop-blur-sm">
-          <motion.div
+          <m.div
             animate={{ y: [0, 20, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="h-2 w-1.5 rounded-full bg-[var(--color-brand-primary)] shadow-[0_0_8px_var(--color-brand-primary)]"
           />
         </div>
-      </motion.div>
-    </motion.section>
+      </m.div>
+    </m.section>
   );
 });
 
