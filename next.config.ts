@@ -17,7 +17,6 @@ const nextConfig: NextConfig = {
   experimental: {
     mdxRs: true,
     ppr: "incremental",
-    dynamicIO: true,
     authInterrupts: true,
   },
 
