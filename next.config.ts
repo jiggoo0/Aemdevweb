@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
   output: "standalone",
   experimental: {
     mdxRs: true,
-    ppr: "incremental",
     authInterrupts: true,
   },
 
