@@ -30,12 +30,11 @@ export const suratThaniNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/surat-ratchaprapha.webp",
   coordinates: { lat: 9.1389, lng: 99.33 },
-  districts: ["เกาะสมุย", "เกาะพะงัน", "เกาะเต่า", "เมืองสุราษฎร์ธานี", "ดอนสัก", "พุนพิน"],
+  districts: ["เมืองสุราษฎร์ธานี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ลูกค้าในกลุ่มเกาะท่องเที่ยว (Samui/Phangan/Tao) เป็นกลุ่มที่มีกำลังซื้อสูงและต้องการความรวดเร็วในการจอง เว็บไซต์ที่รองรับภาษาต่างประเทศและ Mobile-friendly จะปิดการขายได้สูงที่สุด",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "ใช้ Cloud Infrastructure พร้อมระบบ Global CDN เพื่อรองรับ Traffic จากยุโรปและรัสเซีย และเน้นระบบ Booking Engine ที่แม่นยำ",
     localStrength:

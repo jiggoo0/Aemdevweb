@@ -67,8 +67,7 @@ export const mahaSarakhamNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "มหาสารคามมีการเติบโตของธุรกิจรอบสถาบันการศึกษาสูงมาก เว็บไซต์ที่โหลดไวและจองง่ายจะได้รับความนิยมสูงสุด",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Mobile-First Speed และการทำ Local Business Schema สำหรับย่านธุรกิจกันทรวิชัยและเมือง",
     localStrength: "ความเป็น 'เมืองตักศิลา' ที่มีประชากรคนรุ่นใหม่หนาแน่นและมีกำลังซื้อต่อเนื่อง",

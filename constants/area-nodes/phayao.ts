@@ -67,8 +67,7 @@ export const phayaoNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "พะเยาเป็นเมืองพักผ่อนที่กำลังเติบโต เว็บไซต์ที่ดูคลีนและเข้ากับบรรยากาศเมืองจะได้รับความนิยมสูง",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach: "เน้นความรวดเร็วในการโหลดและการปักหมุด Google Maps ในจุดท่องเที่ยวใหม่ๆ",
     localStrength: "มีความโดดเด่นด้านกว๊านพะเยาซึ่งเป็นแม่เล็กดึงดูดนักท่องเที่ยวได้ตลอดทั้งปี",
     nicheIndustries: ["ที่พักและรีสอร์ตริมน้ำ", "คาเฟ่สายธรรมชาติ", "ธุรกิจเกษตรปลอดภัย (Organic)"],

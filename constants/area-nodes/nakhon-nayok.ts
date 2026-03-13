@@ -23,7 +23,7 @@ export const nakhonNayokNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/nakhon-nayok-node.webp",
   coordinates: { lat: 14.2069, lng: 101.2139 },
-  districts: ["เมืองนครนายก", "ปากพลี", "บ้านนา", "องครักษ์"],
+  districts: ["เมืองนครนายก", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const nakhonNayokNode = defineAreaNode(hotelResortService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "นครนายกมีนักท่องเที่ยวกลุ่มครอบครัวหนาแน่น เว็บไซต์ที่แสดงภาพกิจกรรมที่ชัดเจนและจองง่ายจะปิดการขายได้เร็วที่สุด",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach:
       "เน้น Image Optimization สำหรับภาพถ่ายธรรมชาติและระบบปักหมุดแหล่งท่องเที่ยวใกล้เคียง",
     localStrength: "ทำเลที่ตั้งใกล้กรุงเทพฯ และมีแหล่งท่องเที่ยวทางน้ำที่เป็นแม่เหล็กดึงดูดตลอดปี",

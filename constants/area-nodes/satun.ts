@@ -23,7 +23,7 @@ export const satunNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/satun-node.webp",
   coordinates: { lat: 6.6233, lng: 100.0667 },
-  districts: ["เมืองสตูล", "ละงู", "ควนโดน", "ทุ่งหว้า", "มะนัง", "ควนกาหลง", "ท่าแพ", "หลีเป๊ะ"],
+  districts: ["เมืองสตูล", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const satunNode = defineAreaNode(hotelResortService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "สตูล โดยเฉพาะหลีเป๊ะ มีการแข่งขันสูงในตลาดสากล เว็บไซต์ที่โหลดรูปไวและดูแพงจะสร้างความได้เปรียบสูงสุด",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูงและระบบ CDN ทั่วโลกเพื่อให้เข้าถึงได้เร็วจากยุโรปและอเมริกา",
     localStrength: "ทรัพยากรธรรมชาติระดับโลก (Geopark/Lipe) คือจุดขายหลักที่ต้องนำเสนอบนหน้าเว็บ",

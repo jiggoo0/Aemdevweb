@@ -109,7 +109,7 @@ export const sukhothaiNode = defineAreaNode(localAuthorityService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่มพรีเมียมที่ซื้องานฝีมือหรือท่องเที่ยวสุโขทัย ตัดสินใจด้วย 'Story' และ 'Aesthetic' เว็บไซต์ที่ดูสวยงามจะช่วยปิดการขายได้ง่ายขึ้น",
+      "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป - Story' และ 'Aesthetic' เว็บไซต์ที่ดูสวยงามจะช่วยปิดการขายได้ง่ายขึ้น",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูงเพื่อโชว์รายละเอียดสินค้าให้คมชัดที่สุด และการจัดวาง Typography ที่สื่อถึงความภูมิฐาน",
     localStrength:

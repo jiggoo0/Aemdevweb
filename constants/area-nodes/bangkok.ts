@@ -29,7 +29,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/bangkok-node.webp",
   coordinates: { lat: 13.7563, lng: 100.5018 },
-  districts: ["สาทร", "สีลม", "สุขุมวิท", "พระราม 9", "ทองหล่อ", "อโศก", "ปทุมวัน", "รัชดา"],
+  districts: ["สาทร", "สุขุมวิท", "พระราม 9"],
 
   // --- P-SEO Localized Content ---
   benefits: [
@@ -41,7 +41,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "กรุงเทพฯ คือสมรภูมิที่มีการแข่งขันด้านเทคโนโลยีสูงที่สุด เว็บไซต์ต้องทำหน้าที่เป็น 'Trust Hub' ที่มีความเสถียร 99.99% และรองรับพฤติกรรมการค้นหาผ่าน AI Search ยุคใหม่",
+      "Global CBD & Financial Center - Trust Hub' ที่มีความเสถียร 99.99% และรองรับพฤติกรรมการค้นหาผ่าน AI Search ยุคใหม่",
     technicalApproach:
       "เน้นสถาปัตยกรรม Partial Prerendering (PPR) และ Zero-JS Core เพื่อประสิทธิภาพ Core Web Vitals ที่ดีที่สุดในอุตสาหกรรม",
     localStrength:

@@ -69,8 +69,7 @@ export const loeiNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "เลยมีนักท่องเที่ยวกลุ่มครอบครัวและคนรุ่นใหม่ที่มองหาความเป็นส่วนตัว เว็บไซต์ที่ภาพสวยและจองง่ายจะปิดการขายได้เร็ว",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Image Optimization สำหรับภาพบรรยากาศเมืองและภูเขา และระบบการจองที่ไม่ซับซ้อน",
     localStrength:

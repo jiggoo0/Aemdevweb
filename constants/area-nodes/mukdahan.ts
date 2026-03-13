@@ -24,7 +24,7 @@ export const mukdahanNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/mukdahan-node.webp",
   coordinates: { lat: 16.543, lng: 104.724 },
-  districts: ["เมืองมุกดาหาร", "คำชะอี", "นิคมคำสร้อย", "ดอนตาล", "หว้านใหญ่", "หนองสูง", "ดงหลวง"],
+  districts: ["เมืองมุกดาหาร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -60,8 +60,7 @@ export const mukdahanNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "มุกดาหารเป็นประตูการค้าสู่เวียดนามและจีนตอนใต้ เว็บไซต์ต้องเน้นความน่าเชื่อถือและการสื่อสารได้หลายภาษา",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้นระบบ Multilingual (ไทย/ลาว/อังกฤษ) และความรวดเร็วในการเข้าถึงจากฝั่งประเทศเพื่อนบ้าน",
     localStrength: "ทำเลที่ตั้งที่เป็นจุดยุทธศาสตร์โลจิสติกส์ที่สำคัญของภูมิภาคอินโดจีน",

@@ -28,12 +28,11 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/nakhon-pathom-node.webp",
   coordinates: { lat: 13.814, lng: 100.0373 },
-  districts: ["ศาลายา", "พุทธมณฑล", "สามพราน", "นครชัยศรี", "เมืองนครปฐม", "พุทธมณฑลสาย 4"],
+  districts: ["เมืองนครปฐม", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ลูกค้าในนครปฐม (โดยเฉพาะโซนศาลายา) มีความต้องการบริการที่รวดเร็วและดูเป็นมืออาชีพ เว็บไซต์ที่มีข้อมูลชัดเจนและจองนัดหมายง่าย (Mobile-friendly) จะได้รับความนิยมสูงสุด",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach:
       "เน้นระบบ Search Generative Experience (SGE) และการปักหมุด Google Maps ในย่านธุรกิจรอบมหาวิทยาลัยและแหล่งท่องเที่ยวสำคัญ",
     localStrength:

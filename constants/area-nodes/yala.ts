@@ -23,7 +23,7 @@ export const yalaNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/yala-node.webp",
   coordinates: { lat: 6.5411, lng: 101.2811 },
-  districts: ["เมืองยะลา", "เบตง", "บันนังสตา", "รามัน", "ยะหา", "ธารโต", "กรงปินัง", "กาบัง"],
+  districts: ["เมืองยะลา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const yalaNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ยะลาและเบตงมีการเติบโตทางเศรษฐกิจใหม่ เว็บไซต์ต้องเน้นความปลอดภัย ความรวดเร็ว และการเข้าถึงประชาชนในพื้นที่",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "เน้นระบบความปลอดภัยระดับองค์กรและการทำ Image Optimization สำหรับแหล่งท่องเที่ยว Unseen",
     localStrength: "เป็นเมืองยุทธศาสตร์การค้าชายแดนและมีแหล่งท่องเที่ยวระดับแม่เหล็ก (เบตง)",

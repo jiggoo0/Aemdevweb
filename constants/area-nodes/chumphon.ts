@@ -22,7 +22,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/chumphon-gateway.webp",
   coordinates: { lat: 10.493, lng: 99.18 },
-  districts: ["เมืองชุมพร", "ท่าแซะ", "ปะทิว", "หลังสวน", "ละแม", "พะโต๊ะ", "สวี", "ทุ่งตะโก"],
+  districts: ["เมืองชุมพร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -56,7 +56,7 @@ export const chumphonNode = defineAreaNode(localAuthorityService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ในฐานะเมืองผ่านที่กำลังกลายเป็นเมืองพักผ่อน เว็บไซต์ราชการชุมพรต้องทำหน้าที่เป็น 'Virtual Concierge' ที่ดึงเอกลักษณ์การเกษตรและการท่องเที่ยวออกมาให้เด่นชัด",
+      "ทรัพยากรการท่องเที่ยวระดับโลก - Virtual Concierge' ที่ดึงเอกลักษณ์การเกษตรและการท่องเที่ยวออกมาให้เด่นชัด",
     technicalApproach:
       "เน้น Mobile-First และสถาปัตยกรรมแบบ Lightweight เพื่อให้โหลดได้รวดเร็วแม้ในพื้นที่อำเภอห่างไกลที่สัญญาณมือถือไม่สม่ำเสมอ",
     localStrength:

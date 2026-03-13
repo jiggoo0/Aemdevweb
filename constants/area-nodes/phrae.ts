@@ -66,8 +66,7 @@ export const phraeNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "แพร่มีชื่อเสียงด้านงานไม้และผ้าหม้อห้อม เว็บไซต์ที่ดูคลาสสิกแต่ทันสมัยจะช่วยเพิ่มมูลค่าสินค้าได้มหาศาล",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้นการแสดงผล Portfolio สินค้าและระบบการติดต่อสอบถามที่รวดเร็ว (Fast Response)",
     localStrength: "เป็นแหล่งผลิตเฟอร์นิเจอร์ไม้สักคุณภาพสูงที่สุดในประเทศไทย",

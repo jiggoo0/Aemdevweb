@@ -160,9 +160,9 @@ export const AEMSpecialistHero = memo(() => {
           {/* Executive Vision & Sub-Copy */}
           <div className="mb-20 flex max-w-4xl flex-col items-center">
             <p className="text-text-secondary max-w-2xl text-xl leading-relaxed font-bold italic opacity-95 md:text-3xl">
-              “ปลดล็อกศักยภาพสูงสุดของเว็บไซต์ ด้วยโครงสร้างทางเทคนิคระดับ
-              <span className="text-text-primary"> Enterprise</span> เพื่อประสบการณ์ที่ลื่นไหล
-              และยอดขายที่เติบโตอย่างไร้ขีดจำกัด”
+              “บอกลาเว็บไซต์ที่โหลดช้าจนลูกค้าหนี และระบบ SEO ที่ AI ไม่เคยค้นเจอ... เราสร้าง
+              <span className="text-text-primary"> โครงสร้างดิจิทัลระดับ Enterprise</span>{" "}
+              ที่เร็วทะลุขีดจำกัด และออกแบบมาเพื่อปิดการขายให้คุณโดยเฉพาะ”
             </p>
             <div className="mt-12 h-[2px] w-32 overflow-hidden rounded-full bg-[var(--color-brand-primary)]/20">
               <motion.div

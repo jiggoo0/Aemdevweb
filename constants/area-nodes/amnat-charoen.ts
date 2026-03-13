@@ -66,8 +66,7 @@ export const amnatCharoenNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "อำนาจเจริญเป็นเมืองแห่งธรรมและวิถีเกษตรที่สงบ เว็บไซต์ที่ดูจริงใจและเข้าถึงง่ายจะตรงใจลูกค้าที่สุด",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้นการใช้งานผ่านมือถือเป็นหลัก (Mobile-First) และโครงสร้างเว็บที่เบาเพื่อการโหลดที่รวดเร็ว",
     localStrength:

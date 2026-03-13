@@ -67,8 +67,7 @@ export const sakonNakhonNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "สกลนครมีสินค้าเอกลักษณ์ที่คนทั่วโลกต้องการ เว็บไซต์ที่ดูเป็นงานศิลปะจะช่วยเพิ่มมูลค่าสินค้าได้มหาศาล",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach: "เน้น Image Optimization สำหรับงานคราฟต์พรีเมียมและระบบสั่งจองที่ใช้งานง่าย",
     localStrength:
       "มีความโดดเด่นด้าน 'เมืองคราม' และพระป่าวิปัสสนาที่เป็นศูนย์รวมจิตใจและดึงดูดคนคุณภาพ",

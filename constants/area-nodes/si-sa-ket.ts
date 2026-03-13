@@ -24,8 +24,7 @@ export const siSaKetNode = defineAreaNode(localAuthorityService, {
     "ปรางค์กู่",
   ],
   localContext: {
-    marketInsight:
-      "ศรีสะเกษมีสินค้าเกษตรที่เป็น Unique Selling Point (ทุเรียนภูเขาไฟ) เว็บไซต์ที่สร้าง Trust ได้ดีจะปิดการขายได้ง่าย",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     localStrength:
       "ความเป็นแหล่งปลูกทุเรียนภูเขาไฟเพียงแห่งเดียวและมีแหล่งท่องเที่ยวปราสาทขอมโบราณ",
     nicheIndustries: [

@@ -23,7 +23,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/samut-songkhram-node.webp",
   coordinates: { lat: 13.4111, lng: 100.0022 },
-  districts: ["เมืองสมุทรสงคราม", "อัมพวา", "บางคนที"],
+  districts: ["เมืองสมุทรสงคราม", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "สมุทรสงครามมีนักท่องเที่ยวกลุ่มครอบครัวและคนรุ่นใหม่หนาแน่น เว็บไซต์ที่ภาพสวยและเล่าเรื่องเก่งจะได้รับความสนใจสูง",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach:
       "เน้น Image Optimization และการปักหมุด Google Maps ในจุดท่องเที่ยวริมน้ำและสวนผลไม้",
     localStrength: "มีความโดดเด่นด้านตลาดน้ำและสินค้าเกษตรที่มีชื่อเสียงระดับประเทศ",

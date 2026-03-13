@@ -72,11 +72,12 @@ export default function ServicesPage() {
 
             <div className="border-brand-primary border-l-4 pl-8 md:pl-14">
               <p className="text-text-secondary max-w-4xl text-xl leading-relaxed font-medium italic opacity-90 md:text-3xl">
-                เราไม่ได้แค่เขียนโค้ด แต่เราสร้าง{" "}
+                เบื่อไหมครับ? กับเว็บที่โหลดช้าจนลูกค้าหนี... ที่นี่เราไม่ได้รับจ้างทำหน้ากระดาษ
+                แต่เราสร้าง{" "}
                 <span className="text-text-primary decoration-brand-primary font-black not-italic underline decoration-4 underline-offset-8">
-                  ระบบช่วยขาย
+                  Digital Infrastructure
                 </span>{" "}
-                ที่ทำให้ Google และลูกค้าตัวจริง มั่นใจในแบรนด์ของคุณ
+                ที่ทำให้ทั้ง AI และลูกค้าตัวจริง ต้องเลือกคุณเป็นอันดับแรก
               </p>
             </div>
           </header>

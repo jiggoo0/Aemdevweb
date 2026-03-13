@@ -67,8 +67,7 @@ export const lopburiNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ลพบุรีเป็นเมืองที่มีทั้งเขตทหาร หน่วยงานราชการ และแหล่งท่องเที่ยวประวัติศาสตร์ เว็บไซต์ต้องเน้นความภูมิฐานและถูกต้อง",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach: "เน้นระบบ Security ป้องกันการแฮก และโครงสร้างข้อมูลที่รองรับ ITA และ PDPA",
     localStrength: "มีความโดดเด่นด้านแหล่งท่องเที่ยวเชิงประวัติศาสตร์ที่ดึงดูดคนจากทั่วประเทศ",
     nicheIndustries: [

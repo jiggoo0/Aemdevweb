@@ -69,8 +69,7 @@ export const nakhonPhanomNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "นครพนมมีการเติบโตด้านการท่องเที่ยวเชิงศาสนาและวิถีชีวิต เว็บไซต์ที่ดูคลีนและน่าเชื่อถือจะปิดการขายได้ดี",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Image Optimization สำหรับภาพถ่ายมุมกว้างริมโขงและการทำ Schema สำหรับสถานที่สำคัญ",
     localStrength: "ชื่อเสียงของพระธาตุพนมและทัศนียภาพริมโขงที่สวยงามที่สุดแห่งหนึ่งในไทย",

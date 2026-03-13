@@ -23,7 +23,7 @@ export const trangNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/trang-node.webp",
   coordinates: { lat: 7.5583, lng: 99.6111 },
-  districts: ["เมืองตรัง", "กันตัง", "ย่านตาขาว", "ห้วยยอด", "สิเกา", "ปะเหลียน", "หาดสำราญ"],
+  districts: ["เมืองตรัง", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const trangNode = defineAreaNode(hotelResortService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ตรังมีกลุ่มลูกค้าที่รักสงบและต้องการคุณภาพ เว็บไซต์ที่ดูภูมิฐานและให้ข้อมูลชัดเจนจะปิดการขายได้ง่าย",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "เน้น Mobile Optimization และการปักหมุด Google Maps ในแหล่งท่องเที่ยวทางทะเลและร้านอาหารชื่อดัง",
     localStrength: "มีความโดดเด่นด้านอาหาร (Gastronomy) และเกาะที่สวยติดอันดับโลก (เกาะกระดาน)",

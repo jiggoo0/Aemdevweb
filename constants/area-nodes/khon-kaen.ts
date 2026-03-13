@@ -22,7 +22,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/khon-kaen-node.webp",
   coordinates: { lat: 16.4322, lng: 102.8236 },
-  districts: ["เมืองขอนแก่น", "กังสดาล", "หลังมอ (มข.)", "บ้านไผ่", "ชุมแพ", "กระนวน"],
+  districts: ["ในเมือง", "มข.", "ชุมแพ"],
 
   // [DNA_OVERRIDE]: ปรับแต่งเพื่อให้หน้าขอนแก่นเน้น "ความเชี่ยวชาญและตัวตน (E-E-A-T)"
   layoutOrder: [
@@ -108,7 +108,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ผู้ใช้ในขอนแก่นให้ความสำคัญกับ 'วิชาชีพ' และ 'ความเชี่ยวชาญ' เว็บไซต์ที่ระบุตัวตนแพทย์หรืออาจารย์ชัดเจน (E-E-A-T) จะได้รับความไว้วางใจสูงมาก",
+      "Medical & Education Smart City - วิชาชีพ' และ 'ความเชี่ยวชาญ' เว็บไซต์ที่ระบุตัวตนแพทย์หรืออาจารย์ชัดเจน (E-E-A-T) จะได้รับความไว้วางใจสูงมาก",
     technicalApproach:
       "เน้น Schema Markup (MedicalOrganization / EducationOrganization) เพื่อให้ Google แสดงผลในฐานะสถาบันที่น่าเชื่อถือ",
     localStrength:

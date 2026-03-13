@@ -68,7 +68,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "กระบี่เป็นจุดหมายปลายทางระดับโลก การแข่งขันอยู่ที่ 'Visual' และ 'Trust' เว็บไซต์ที่โหลดรูปไวและดูแพงจะปิดดีลได้สูงกว่า",
+      "ทรัพยากรการท่องเที่ยวระดับโลก - Visual' และ 'Trust' เว็บไซต์ที่โหลดรูปไวและดูแพงจะปิดดีลได้สูงกว่า",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูงและระบบ CDN ทั่วโลกเพื่อให้ลูกค้าจากยุโรปเข้าเว็บคุณได้เร็วที่สุด",
     localStrength:

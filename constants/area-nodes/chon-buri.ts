@@ -117,7 +117,7 @@ export const chonBuriNode = defineAreaNode(corporateService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าใน EEC ให้ความสำคัญกับ 'มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบ (Spec Sheet, Certificate) และดูโปร จะปิดดีล B2B ได้ง่ายกว่า",
+      "Tourism & Export Hub - มาตรฐาน' และ 'ความชัดเจน' เว็บไซต์ที่ข้อมูลครบ (Spec Sheet, Certificate) และดูโปร จะปิดดีล B2B ได้ง่ายกว่า",
     technicalApproach:
       "เน้นโครงสร้าง Clean Code เพื่อความปลอดภัยข้อมูลสูงสุด และรองรับการทำ SEO ในตลาด B2B ที่การแข่งขันสูง",
     localStrength:

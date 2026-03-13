@@ -24,7 +24,7 @@ export const yasothonNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/yasothon-node.webp",
   coordinates: { lat: 15.793, lng: 104.145 },
-  districts: ["เมืองยโสธร", "คำเขื่อนแก้ว", "เลิงนกทา", "กุดชุม", "ไทยเจริญ", "ทรายมูล", "ป่าติ้ว"],
+  districts: ["เมืองยโสธร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -59,8 +59,7 @@ export const yasothonNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ยโสธรมีชื่อเสียงด้านเกษตรอินทรีย์ในระดับประเทศ เว็บไซต์ที่แสดงถึงมาตรฐานและ 'ความจริงใจ' จะได้รับความยอมรับสูง",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน - ความจริงใจ' จะได้รับความยอมรับสูง",
     technicalApproach:
       "เน้น Image Optimization สำหรับขั้นตอนการผลิตแบบอินทรีย์และระบบการติดต่อสื่อสารที่รวดเร็ว",
     localStrength:

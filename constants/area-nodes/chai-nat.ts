@@ -23,7 +23,7 @@ export const chaiNatNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/chai-nat-node.webp",
   coordinates: { lat: 15.1851, lng: 100.1251 },
-  districts: ["เมืองชัยนาท", "สรรพยา", "หันคา", "วัดสิงห์", "มโนรมย์", "สรรคบุรี", "หนองมะโมง"],
+  districts: ["เมืองชัยนาท", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -56,8 +56,7 @@ export const chaiNatNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ชัยนาทเป็นเมืองเกษตรกรรมและศูนย์กลางเมล็ดพันธุ์ เว็บไซต์ต้องเน้นความน่าเชื่อถือและการให้ข้อมูลที่ชัดเจน",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach: "เน้นระบบโครงสร้างที่ปลอดภัยและรองรับการแสดงผลข้อมูล ITA แบบเรียลไทม์",
     localStrength: "มีสินค้าเกษตรที่เป็นเอกลักษณ์และหน่วยงานท้องถิ่นที่ต้องการยกระดับสู่ดิจิทัล",
     nicheIndustries: [

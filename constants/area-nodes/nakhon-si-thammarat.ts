@@ -28,12 +28,12 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/nakhon-si-thammarat-node.webp",
   coordinates: { lat: 8.4333, lng: 99.9667 },
-  districts: ["เมืองนครศรีธรรมราช", "ทุ่งสง", "ขนอม", "สิชล", "ปากพนัง", "ฉวาง"],
+  districts: ["เมืองนครศรีธรรมราช", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้าในนครศรีธรรมราชให้ความสำคัญกับ 'ความศรัทธา' และ 'ความมั่นคงของบริษัท' เว็บไซต์ที่ดูภูมิฐาน แสดงตัวตนชัดเจน (E-E-A-T) และโหลดไวจะได้รับความไว้วางใจสูงสุดในกลุ่มธุรกิจ B2B",
+      "ทรัพยากรการท่องเที่ยวระดับโลก - ความศรัทธา' และ 'ความมั่นคงของบริษัท' เว็บไซต์ที่ดูภูมิฐาน แสดงตัวตนชัดเจน (E-E-A-T) และโหลดไวจะได้รับความไว้วางใจสูงสุดในกลุ่มธุรกิจ B2B",
     technicalApproach:
       "เน้นระบบ Security Hardening และการทำ Local Entity Mapping สำหรับตลาดภาคใต้ตอนล่างและกลุ่มนักท่องเที่ยวพรีเมียม",
     localStrength:

@@ -28,12 +28,12 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/ayutthaya-node.webp",
   coordinates: { lat: 14.3532, lng: 100.5689 },
-  districts: ["นิคมโรจนะ", "นิคมไฮเทค", "บางปะอิน", "พระนครศรีอยุธยา", "วังน้อย", "อุทัย"],
+  districts: ["เมืองพระนครศรีอยุธยา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าในอยุธยา (โดยเฉพาะนิคมอุตสาหกรรม) ต้องการความชัดเจนของ 'ข้อมูลเทคนิค' และ 'ภาพลักษณ์ที่มั่นคง' เว็บไซต์ที่แสดงมาตรฐาน ISO ชัดเจนและโหลดไวในระดับ Enterprise จะปิดดีลได้ง่ายกว่า",
+      "ศูนย์กลางธุรกิจและการค้า - ข้อมูลเทคนิค' และ 'ภาพลักษณ์ที่มั่นคง' เว็บไซต์ที่แสดงมาตรฐาน ISO ชัดเจนและโหลดไวในระดับ Enterprise จะปิดดีลได้ง่ายกว่า",
     technicalApproach:
       "เน้นระบบ Security Hardening และการทำ Local SEO เจาะจงกลุ่มคู่ค้า B2B ในเขตนิคมอุตสาหกรรมหลัก",
     localStrength:

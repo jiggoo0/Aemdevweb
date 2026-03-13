@@ -69,8 +69,7 @@ export const buengKanNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "บึงกาฬมีนักท่องเที่ยวสาย Adventure และสายมูหนาแน่น เว็บไซต์ที่ภาพสวยและให้ข้อมูลการเดินทางที่ถูกต้องจะได้รับความเชื่อถือสูง",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Image Optimization สำหรับภาพโดรนและระบบการจัดการข้อมูลที่รองรับ Mobile Users สูง",
     localStrength:

@@ -23,7 +23,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/ang-thong-node.webp",
   coordinates: { lat: 14.5896, lng: 100.4551 },
-  districts: ["เมืองอ่างทอง", "วิเศษชัยชาญ", "โพธิ์ทอง", "ป่าโมก", "ไชโย", "สามโก้", "แสวงหา"],
+  districts: ["เมืองอ่างทอง", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -57,8 +57,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "อ่างทองเป็นเมืองแห่งงานฝีมือและเกษตรกรรมประณีต เว็บไซต์ที่ดูเข้าถึงง่ายและเล่าเรื่องเก่งจะช่วยเพิ่มมูลค่าสินค้าได้มาก",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach:
       "เน้นระบบ Mobile-First และการแสดงผลแกลเลอรี่รูปภาพที่คมชัดเพื่อโชว์ความประณีตของสินค้า",
     localStrength: "มีความโดดเด่นด้านสินค้าจักสาน ตุ๊กตาชาววัง และวิถีชุมชนที่เข้มแข็ง",

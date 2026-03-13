@@ -69,8 +69,7 @@ export const phetchaburiNode = defineAreaNode(hotelResortService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "เพชรบุรีมีจุดแข็งด้าน Gastronomy และแหล่งท่องเที่ยวประวัติศาสตร์ เว็บไซต์ที่ 'เล่าเรื่อง' เก่งจะปิดการขายได้เร็วกว่า",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า - เล่าเรื่อง' เก่งจะปิดการขายได้เร็วกว่า",
     technicalApproach:
       "เน้น Mobile Optimization และการเชื่อมโยงระบบ Social Media สำหรับธุรกิจอาหาร",
     localStrength: "ชื่อเสียงด้านอาหารระดับโลกและการท่องเที่ยวชายฝั่งที่เข้มแข็ง",

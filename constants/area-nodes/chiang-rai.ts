@@ -29,12 +29,12 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/chiang-rai-node.webp",
   coordinates: { lat: 19.9101, lng: 99.8405 },
-  districts: ["เมืองเชียงราย", "แม่สาย", "เชียงแสน", "แม่จัน", "แม่สรวย", "เชียงของ"],
+  districts: ["เมืองเชียงราย", "แม่สาย", "เชียงของ"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้าในเชียงรายและคู่ค้า GMS ให้ความสำคัญกับ 'สุนทรียภาพ' ควบคู่ไปกับ 'ความน่าเชื่อถือ' เว็บไซต์ที่ภาพสวยระดับ Art Gallery และข้อมูลเทคนิคครบถ้วนจะปิดดีลธุรกิจมูลค่าสูงได้ง่ายกว่า",
+      "Art & Border Trade Economy - สุนทรียภาพ' ควบคู่ไปกับ 'ความน่าเชื่อถือ' เว็บไซต์ที่ภาพสวยระดับ Art Gallery และข้อมูลเทคนิคครบถ้วนจะปิดดีลธุรกิจมูลค่าสูงได้ง่ายกว่า",
     technicalApproach:
       "เน้นระบบ Image-Optimization ขั้นสูงสำหรับโชว์อัตลักษณ์แบรนด์ และการทำ Local Entity Mapping สำหรับตลาดภาคเหนือตอนบนและคู่ค้าข้ามแดน",
     localStrength:

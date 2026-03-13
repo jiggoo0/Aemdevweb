@@ -23,7 +23,7 @@ export const maeHongSonNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/mae-hong-son-node.webp",
   coordinates: { lat: 19.302, lng: 97.9685 },
-  districts: ["เมืองแม่ฮ่องสอน", "ปาย", "แม่สะเรียง", "ขุนยวม", "ปางมะผ้า", "สบเมย", "แม่ลาน้อย"],
+  districts: ["เมืองแม่ฮ่องสอน", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,8 +58,7 @@ export const maeHongSonNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "กลุ่มลูกค้าของแม่ฮ่องสอนคือคนที่ต้องการความสงบ เว็บไซต์ต้องเน้นภาพบรรยากาศที่สื่อถึง Slow Living และระบบจองที่เชื่อถือได้",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูงเพื่อให้เว็บโหลดเร็ว และระบบ Booking Engine ที่เชื่อมต่อกับปฏิทินมือถือได้ทันที",
     localStrength:

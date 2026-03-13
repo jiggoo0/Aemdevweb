@@ -67,8 +67,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "นราธิวาสเป็นจุดยุทธศาสตร์การค้าชายแดน เว็บไซต์ต้องเน้นความน่าเชื่อถือ ความรวดเร็ว และการสื่อสารได้หลายภาษา",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "เน้นระบบ Multilingual และโครงสร้างที่เบาเพื่อให้โหลดได้ไวในทุกพื้นที่แม้สัญญาณเน็ตจำกัด",
     localStrength:

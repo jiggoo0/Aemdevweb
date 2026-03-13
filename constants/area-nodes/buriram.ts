@@ -24,7 +24,7 @@ export const buriramNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/buriram-node.webp",
   coordinates: { lat: 14.993, lng: 103.109 },
-  districts: ["เมืองบุรีรัมย์", "นางรอง", "ประโคนชัย", "สตึก", "ลำปลายมาศ", "บ้านกรวด", "พุทไธสง"],
+  districts: ["เมืองบุรีรัมย์", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -60,8 +60,7 @@ export const buriramNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "บุรีรัมย์เติบโตอย่างรวดเร็วด้วยกลยุทธ์ Sport Tourism เว็บไซต์ต้องดูตื่นเต้น ทันสมัย และรองรับการจองที่รวดเร็ว",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Mobile Optimization และระบบ Cache ประสิทธิภาพสูงเพื่อรองรับการใช้งานผ่านเน็ตมือถือในสนามแข่ง",
     localStrength: "ความเป็น 'เมืองกีฬา' และ 'อารยธรรมขอม' ที่ดึงดูดนักท่องเที่ยวได้หลากหลายกลุ่ม",

@@ -28,12 +28,12 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/samut-sakhon-node.webp",
   coordinates: { lat: 13.5475, lng: 100.2744 },
-  districts: ["มหาชัย", "กระทุ่มแบน", "บ้านแพ้ว", "เมืองสมุทรสาคร", "นิคมอุตสาหกรรมสมุทรสาคร"],
+  districts: ["เมืองสมุทรสาคร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าในมหาชัยให้ความสำคัญกับ 'มาตรฐาน ISO' และ 'ความพร้อมในการส่งออก' เว็บไซต์ที่โชว์ Certificate ชัดเจนและมีระบบแคตตาล็อกภาษาอังกฤษจะได้รับความไว้วางใจสูงสุด",
+      "ศูนย์กลางธุรกิจและการค้า - มาตรฐาน ISO' และ 'ความพร้อมในการส่งออก' เว็บไซต์ที่โชว์ Certificate ชัดเจนและมีระบบแคตตาล็อกภาษาอังกฤษจะได้รับความไว้วางใจสูงสุด",
     technicalApproach:
       "เน้นระบบจัดการแคตตาล็อกสินค้าที่รองรับการอัปเดตสต็อก Real-time และการทำ SEO สำหรับตลาดอุตสาหกรรมประมง",
     localStrength:

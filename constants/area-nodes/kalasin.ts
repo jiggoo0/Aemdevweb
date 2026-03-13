@@ -68,8 +68,7 @@ export const kalasinNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "กาฬสินธุ์มีสินค้าภูมิปัญญาที่เป็นที่สุด เว็บไซต์ที่ดูมีระดับและเล่าเรื่องได้ดีจะดึงดูดลูกค้ากำลังซื้อสูงได้จริง",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูงสำหรับภาพถ่ายผ้าไหมที่เห็นรายละเอียดลายผ้าชัดเจน",
     localStrength: "ความเป็นที่สุดของ 'ผ้าไหมแพรวา' และแหล่งขุดค้นไดโนเสาร์ที่มีชื่อเสียงระดับสากล",

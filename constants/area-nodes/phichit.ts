@@ -106,8 +106,7 @@ export const phichitNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "เจ้าของธุรกิจในพิจิตรมีรากฐานมั่นคง เว็บไซต์ที่ทันสมัยจะช่วยสร้างความแตกต่างและพิสูจน์มาตรฐานโรงงานให้คู่ค้าเห็นได้ทันที",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้น Industrial Schema และการนำเสนอระบบการผลิตที่ชัดเจน พร้อมโครงสร้างเว็บที่เบาและโหลดเร็วเพื่อรองรับพื้นที่ห่างไกล",
     localStrength:

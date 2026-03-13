@@ -29,12 +29,12 @@ export const tratNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/trat-node.webp",
   coordinates: { lat: 12.2428, lng: 102.5175 },
-  districts: ["เกาะช้าง", "เกาะกูด", "แหลมงอบ", "เมืองตราด", "เกาะหมาก", "คลองใหญ่"],
+  districts: ["เมืองตราด", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "นักท่องเที่ยวกลุ่มเกาะ (Koh Kood/Koh Chang) มีพฤติกรรมการจองล่วงหน้าและให้ความสำคัญกับ 'ความน่าเชื่อถือของรูปภาพ' เว็บไซต์ที่มอบประสบการณ์แบบ Immersive และโหลดไวบนมือถือจะปิดการขายได้สูงที่สุด",
+      "เขตเศรษฐกิจพิเศษและอุตสาหกรรม - ความน่าเชื่อถือของรูปภาพ' เว็บไซต์ที่มอบประสบการณ์แบบ Immersive และโหลดไวบนมือถือจะปิดการขายได้สูงที่สุด",
     technicalApproach:
       "เน้นระบบ Image-Optimization ขั้นสูงและการใช้ Global CDN เพื่อรองรับ Traffic จากยุโรปและเอเชียที่เข้าถึงในพื้นที่เกาะ",
     localStrength:

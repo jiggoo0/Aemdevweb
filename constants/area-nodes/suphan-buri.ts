@@ -64,8 +64,7 @@ export const suphanBuriNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "สุพรรณบุรีเป็นแหล่งเกษตรกรรมและแหล่งท่องเที่ยวใกล้กรุงเทพฯ ธุรกิจที่นี่ต้องการการเชื่อมโยงกับลูกค้าจากเมืองหลวง",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach: "เน้นการใช้งานง่าย (User-Friendly) และระบบรองรับการขายสินค้าเกษตรออนไลน์",
     localStrength: "มีความเข้มแข็งด้านวิสาหกิจชุมชนและสินค้า OTOP ที่พร้อมขยายตลาด",
     nicheIndustries: [

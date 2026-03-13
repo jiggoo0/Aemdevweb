@@ -109,8 +109,7 @@ export const uttaraditNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "อุตรดิตถ์มีสินค้า Rare Item สูงมาก เว็บไซต์ที่รองรับระบบ Pre-order และโชว์ Story ของสวน จะช่วยให้ขายสินค้าได้ราคาสูงกว่าตลาดทั่วไป",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้น Mobile-First Ordering System และสถาปัตยกรรมที่โหลดไวเพื่อรองรับลูกค้าที่เข้าชมผ่าน Social Media มายังหน้าสวนโดยตรง",
     localStrength:

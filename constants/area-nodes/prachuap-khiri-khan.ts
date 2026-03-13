@@ -28,12 +28,12 @@ export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/prachuap-khiri-khan-node.webp",
   coordinates: { lat: 11.8124, lng: 99.797 },
-  districts: ["หัวหิน", "ปราณบุรี", "กุยบุรี", "เมืองประจวบคีรีขันธ์", "ทับสะแก", "สามร้อยยอด"],
+  districts: ["เมืองประจวบคีรีขันธ์", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้าในตลาดหัวหิน (UHNW) ตัดสินใจด้วย 'สุนทรียภาพ' และ 'ความสะดวกสบาย' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless ตั้งแต่การโหลดรูปภาพความละเอียดสูงไปจนถึงการจองออนไลน์ จะได้รับความเชื่อถือสูงสุด",
+      "ศูนย์กลางธุรกิจและการค้า - สุนทรียภาพ' และ 'ความสะดวกสบาย' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless ตั้งแต่การโหลดรูปภาพความละเอียดสูงไปจนถึงการจองออนไลน์ จะได้รับความเชื่อถือสูงสุด",
     technicalApproach:
       "เน้นระบบ Edge Computing (Global CDN) และ Image-Optimization ระดับวิศวกรรมเพื่อรองรับการเข้าชมจากยุโรปและอเมริกา",
     localStrength:

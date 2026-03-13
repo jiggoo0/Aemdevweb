@@ -68,8 +68,7 @@ export const nanNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "น่านมีนักท่องเที่ยวกลุ่มคุณภาพที่ต้องการประสบการณ์ที่แตกต่าง เว็บไซต์ที่ดูจริงใจและเล่าเรื่องได้ดีจะปิดการขายได้ง่าย",
+    marketInsight: "Boutique Tourism & Slow Life",
     technicalApproach:
       "เน้น Image Optimization และการปักหมุด Google Maps ในพื้นที่ Unseen อย่างปัวและสะปัน",
     localStrength: "มีความโดดเด่นด้านศิลปวัฒนธรรมและธรรมชาติที่สมบูรณ์แบบที่สุดแห่งหนึ่งในไทย",

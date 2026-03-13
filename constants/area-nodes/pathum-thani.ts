@@ -65,8 +65,7 @@ export const pathumThaniNode = defineAreaNode(corporateService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ปทุมธานีเป็นศูนย์กลางเทคโนโลยีและงานวิจัย เว็บไซต์ต้องดูเป็นทางการ มั่นคง และมีข้อมูลที่ถูกต้องแม่นยำที่สุด",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     technicalApproach:
       "เน้นระบบการจัดการข้อมูล (Data Management) และความปลอดภัยข้อมูลสูงสุด (ISO Standard Ready)",
     localStrength:

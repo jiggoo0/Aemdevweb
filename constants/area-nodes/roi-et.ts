@@ -67,8 +67,7 @@ export const roiEtNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ร้อยเอ็ดมีการแข่งขันของธุรกิจบริการและคลินิกสูงขึ้น เว็บไซต์ที่ดูพรีเมียมและน่าเชื่อถือจะสร้างความได้เปรียบ",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้นความรวดเร็วในการแสดงผล (Core Web Vitals) และการทำ Local Entity Mapping ในตัวเมือง",
     localStrength: "เป็นศูนย์กลางการกระจายสินค้าและมีแลนด์มาร์คใหม่อย่างหอโหวตที่ดึงคนเข้าพื้นที่",

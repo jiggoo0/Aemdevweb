@@ -101,8 +101,7 @@ export const kamphaengPhetNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ประชาชนในพื้นที่ต้องการความสะดวกในการเข้าถึงข้อมูล เว็บไซต์ที่รวดเร็วและเป็นระเบียบจะสร้างภาพลักษณ์ที่ดีให้องค์กร",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้นการใช้ Open-source Stack ที่มีความเสถียร ปลอดภัย และไม่มีค่าใช้จ่ายลิขสิทธิ์รายเดือนที่เป็นภาระผูกพัน",
     localStrength: "เข้าใจวัฒนธรรมท้องถิ่นกำแพงเพชร ทำงานรวดเร็ว มีเอกสารประกอบการดำเนินงานครบถ้วน",

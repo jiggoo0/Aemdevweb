@@ -23,8 +23,7 @@ export const phetchabunNode = defineAreaNode(localAuthorityService, {
     "หนองไผ่",
   ],
   localContext: {
-    marketInsight:
-      "เพชรบูรณ์มีนักท่องเที่ยวหนาแน่นตลอดปี เว็บไซต์ที่โหลดรูปสวยๆ ได้ไวจะช่วยปิดการขายที่พักได้ดีที่สุด",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     localStrength: "ความเป็น 'สวิตเซอร์แลนด์เมืองไทย' ของเขาค้อและภูทับเบิกดึงดูดคนมหาศาล",
     nicheIndustries: [
       "รีสอร์ตและที่พักบนเขาค้อ/ภูทับเบิก",

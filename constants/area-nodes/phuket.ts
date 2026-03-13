@@ -22,7 +22,7 @@ export const phuketNode = defineAreaNode(hotelResortService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/phuket-node.webp",
   coordinates: { lat: 7.8804, lng: 98.3923 },
-  districts: ["ป่าตอง", "กะรน", "ลากูน่า", "ราไวย์", "ไม้ขาว", "ฉลอง", "เชิงทะเล", "กะทู้"],
+  districts: ["เมืองภูเก็ต", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   isTourismHeavy: true,
   marketSaturation: 85,
@@ -113,7 +113,7 @@ export const phuketNode = defineAreaNode(hotelResortService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ลูกค้ากลุ่ม Luxury ในภูเก็ตตัดสินใจด้วย 'อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ย 3 เท่า",
+      "ทรัพยากรการท่องเที่ยวระดับโลก - อารมณ์' และ 'ความเชื่อมั่น' เว็บไซต์ที่มอบประสบการณ์แบบ Seamless จะปิดการขายได้สูงกว่าค่าเฉลี่ย 3 เท่า",
     technicalApproach:
       "เน้นสถาปัตยกรรมแบบ Edge Computing และการทำ Image Optimization ขั้นสูงเพื่อรองรับความเร็วระดับโลก",
     localStrength:

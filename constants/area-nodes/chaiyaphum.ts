@@ -68,8 +68,7 @@ export const chaiyaphumNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ชัยภูมิเป็นจุดหมายเด่นด้านการท่องเที่ยวเชิงนิเวศ เว็บไซต์ที่แสดงภาพบรรยากาศได้สวยงามจะดึงดูดลูกค้าได้ดีที่สุด",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้น Mobile Optimization และระบบการติดต่อสอบถามที่รวดเร็วเพื่อรองรับนักท่องเที่ยว",
     localStrength: "มีความโดดเด่นด้านอุทยานแห่งชาติและผ้าไหมมัดหมี่ที่มีเอกลักษณ์เฉพาะตัว",

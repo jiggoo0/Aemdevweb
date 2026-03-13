@@ -27,7 +27,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     title: "Audit & Strategy",
     thTitle: "วิเคราะห์เชิงวิศวกรรม",
     description:
-      "Audit โครงสร้างพื้นฐานเดิมและคู่แข่ง เพื่อวางแผน Technical SEO และ Schema ให้แม่นยำที่สุด",
+      "เจาะลึกถึงรากฐานธุรกิจคุณและคู่แข่ง เพื่อหาช่องว่างและวางแผนรุกตลาดด้วย Technical SEO ที่แม่นยำที่สุด",
     icon: "Search",
     metric: "Deep_Infra_Audit_Done",
   },
@@ -36,7 +36,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     title: "High-Performance Build",
     thTitle: "พัฒนาระบบพลังสูง",
     description:
-      "พัฒนาด้วย Next.js 16 และ React 19 เน้นความเร็วระดับ LCP < 1s เพื่อครองใจทั้งคนและบอท",
+      "สร้างโครงสร้างเว็บด้วย Next.js 16 โหลดไวปรู๊ดปร๊าด ลูกค้าไม่ต้องรอนาน พร้อมรับคนเข้าชมหลักแสนได้สบายๆ",
     icon: "Code2",
     metric: "Core_Web_Vitals_100",
   },
@@ -45,7 +45,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     title: "SEO Schema Injection",
     thTitle: "ฝังโครงสร้างข้อมูล",
     description:
-      "ฉีด JSON-LD Schema และจัดระเบียบ Semantic HTML เพื่อสร้างความน่าเชื่อถือระดับ Authority",
+      "เราฝังข้อมูลความเชี่ยวชาญ (E-E-A-T) ลงลึกระดับโค้ด เพื่อให้ AI ยักษ์ใหญ่มั่นใจและกล้าแนะนำแบรนด์คุณ",
     icon: "ShieldCheck",
     metric: "Knowledge_Graph_Active",
   },
@@ -54,7 +54,7 @@ const PROCESS_STEPS: readonly ProcessStep[] = [
     title: "Authority Monitoring",
     thTitle: "ดูแลการเติบโต",
     description:
-      "ติดตามผลผ่าน Search Console และ Analytics เพื่อรีดประสิทธิภาพ ROI ให้สูงที่สุดอย่างยั่งยืน",
+      "ทิ้งเรื่องเทคนิคให้เราดูแล เราคอยมอนิเตอร์และปรับจูนระบบให้ธุรกิจของคุณสร้างยอดขายได้อย่างต่อเนื่อง",
     icon: "TrendingUp",
     metric: "ROI_Dominance",
   },

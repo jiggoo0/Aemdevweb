@@ -22,7 +22,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/ranong-hotspring.webp",
   coordinates: { lat: 9.9528, lng: 98.6084 },
-  districts: ["เมืองระนอง", "ละอุ่น", "กะเปอร์", "กระบุรี", "สุขสำราญ"],
+  districts: ["เมืองระนอง", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -58,7 +58,7 @@ export const ranongNode = defineAreaNode(localAuthorityService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ระนองมีนักท่องเที่ยวกลุ่ม Wellness คุณภาพสูง เว็บไซต์ท้องถิ่นต้องทำหน้าที่เป็น 'Digital Concierge' ที่คอยแนะนำบริการสุขภาพและการเดินทางข้ามแดน",
+      "ทรัพยากรการท่องเที่ยวระดับโลก - Digital Concierge' ที่คอยแนะนำบริการสุขภาพและการเดินทางข้ามแดน",
     technicalApproach:
       "ใช้ Next.js ร่วมกับ Static Site Generation เพื่อลดภาระ Server ในช่วงภัยพิบัติหรือพายุเข้า ช่วยให้ประชาชนเข้าถึงข้อมูลฉุกเฉินได้เสถียรที่สุด",
     localStrength:

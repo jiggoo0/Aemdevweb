@@ -105,8 +105,7 @@ export const takNode = defineAreaNode(corporateService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "การค้าข้ามพรมแดนตัดสินที่ความน่าเชื่อถือ (Credentials) เว็บไซต์คือใบเบิกทางระดับสากลในการทำดีลธุรกิจระดับองค์กรใหญ่",
+    marketInsight: "การท่องเที่ยวเชิงวัฒนธรรมและเกษตรแปรรูป",
     technicalApproach:
       "เน้นระบบความปลอดภัยข้อมูลและโครงสร้างที่รองรับ Multilingual เพื่อนำเสนอข้อมูลชิปปิ้งที่ซับซ้อนให้เข้าใจง่ายในหน้าเดียว",
     localStrength:

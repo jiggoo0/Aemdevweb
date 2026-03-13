@@ -25,8 +25,7 @@ export const uthaiThaniNode = defineAreaNode(localAuthorityService, {
     "สว่างอารมณ์",
   ],
   localContext: {
-    marketInsight:
-      "อุทัยธานีเป็นเมืองแห่งสโลว์ไลฟ์ที่แท้จริง เว็บไซต์ที่ดูเป็นมิตรและเล่าเรื่องเก่งจะได้รับความนิยม",
+    marketInsight: "ศูนย์กลางธุรกิจและการค้า",
     localStrength: "มีความโดดเด่นด้านวิถีชีวิตชาวแพและป่าห้วยขาแข้งที่เป็นมรดกโลก",
     nicheIndustries: ["ที่พักโฮมสเตย์ริมน้ำ", "สินค้าเกษตรอินทรีย์", "ผลิตภัณฑ์ผ้าทอบ้านไร่"],
     technicalApproach:

@@ -67,8 +67,7 @@ export const pattaniNode = defineAreaNode(corporateService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ปัตตานีมีจุดแข็งด้านอุตสาหกรรมฮาลาลและการประมง เว็บไซต์ต้องสะท้อนถึงมาตรฐานสากลและความถูกต้องตามหลักการ",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach: "เน้นระบบ Security มาตรฐานสูงและโครงสร้าง Multilingual (ไทย/อังกฤษ/อาหรับ)",
     localStrength: "เป็นศูนย์กลางอุตสาหกรรมฮาลาลของภูมิภาคและมีทรัพยากรประมงที่อุดมสมบูรณ์",
     nicheIndustries: [

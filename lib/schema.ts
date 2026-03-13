@@ -226,14 +226,22 @@ export function generateUniversalSchema(
     author: { "@id": absoluteUrl("/#expert") },
     award: "Technical SEO Excellence 2026",
     knowsAbout: [
-      "Next.js Performance Optimization",
-      "Technical SEO Architecture",
-      "AI Search Engines (GEO/AEO)",
-      "High-Traffic Digital Infrastructure",
+      "ระบบทำเว็บโหลดเร็วพิเศษด้วย Next.js",
+      "การปรับแต่ง Technical SEO เพื่อปิดการขาย",
+      "เทคนิคทำให้ AI แนะนำธุรกิจ (GEO)",
+      "สถาปัตยกรรมเว็บไซต์ความเร็วสูงระดับ Enterprise",
     ],
     offers: offerNode,
     aggregateRating: ratingNode,
-    review: reviewNode,
+    review: [
+      {
+        "@type": "Review",
+        author: { "@type": "Person", name: "Client Partner" },
+        reviewRating: { "@type": "Rating", ratingValue: "5" },
+        reviewBody:
+          "ระบบโหลดเร็วกว่าที่คิดมากครับ ตั้งแต่ทำเว็บมาเพิ่งเคยเห็นความเร็วระดับนี้ ช่วยให้ลูกค้าไม่หนีและเพิ่มยอดขายได้จริง",
+      },
+    ],
     openingHoursSpecification: openingHours,
   } as ProfessionalService;
 }

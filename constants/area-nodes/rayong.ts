@@ -29,12 +29,12 @@ export const rayongNode = defineAreaNode(catalogService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/rayong-node.webp",
   coordinates: { lat: 12.6814, lng: 101.2813 },
-  districts: ["มาบตาพุด", "ปลวกแดง", "บ้านฉาง", "เมืองระยอง", "แกลง", "บ้านเพ"],
+  districts: ["มาบตาพุด", "บ้านฉาง", "ปลวกแดง"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "คู่ค้าในระยอง (โดยเฉพาะมาบตาพุด) ให้ความสำคัญกับ 'ความโปร่งใส' และ 'มาตรฐานวิศวกรรม' เว็บไซต์ที่ข้อมูลเทคนิคครบถ้วนและระบบความปลอดภัยสูงจะได้รับการยอมรับในระดับ Executive",
+      "EEC Industrial & Sea Resources - ความโปร่งใส' และ 'มาตรฐานวิศวกรรม' เว็บไซต์ที่ข้อมูลเทคนิคครบถ้วนและระบบความปลอดภัยสูงจะได้รับการยอมรับในระดับ Executive",
     technicalApproach:
       "เน้นระบบจัดการแคตตาล็อกสำหรับสินค้าเทคนิค (Part Number Search) และการทำ SEO สำหรับตลาดอุตสาหกรรมหนัก",
     localStrength:

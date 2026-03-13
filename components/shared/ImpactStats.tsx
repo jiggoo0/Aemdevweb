@@ -30,7 +30,7 @@ const _SYSTEM_METRICS: readonly MetricItem[] = [
     value: 99,
     unit: "/100",
     icon: "Zap",
-    description: "คะแนนประสิทธิภาพสูงสุด",
+    description: "ลูกค้าไม่ต้องรอนาน ยอดขายไม่สะดุด",
     trend: "stable",
   },
   {
@@ -40,7 +40,7 @@ const _SYSTEM_METRICS: readonly MetricItem[] = [
     unit: "%",
     icon: "TrendingUp",
     prefix: "+",
-    description: "โอกาสปิดการขายที่มากขึ้น",
+    description: "เปลี่ยนคนดูให้เป็นคนจ่ายเงิน",
     trend: "up",
   },
   {
@@ -50,7 +50,7 @@ const _SYSTEM_METRICS: readonly MetricItem[] = [
     decimals: 2,
     unit: "%",
     icon: "ShieldCheck",
-    description: "ธุรกิจลื่นไหลไม่มีสะดุด",
+    description: "ออนไลน์พร้อมรับลูกค้าตลอด 24 ชม.",
     trend: "stable",
   },
   {
@@ -60,7 +60,7 @@ const _SYSTEM_METRICS: readonly MetricItem[] = [
     decimals: 1,
     unit: "M+",
     icon: "Globe",
-    description: "ดึงดูดลูกค้าคุณภาพ",
+    description: "ประหยัดค่าแอดด้วย Organic Traffic",
     trend: "up",
   },
 ];

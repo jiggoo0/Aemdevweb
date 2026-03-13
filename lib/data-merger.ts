@@ -5,6 +5,7 @@
  */
 
 import type { AreaNode, TemplateMasterData, UniversalTemplateProps, ThemeConfig } from "@/types";
+import { SITE_CONFIG } from "@/constants/site-config";
 
 /**
  * @description ฟังก์ชันรวมร่างข้อมูลระหว่าง "Blueprint (Master)" และ "Context (Area)"
@@ -52,12 +53,18 @@ export function mergeServiceData(
   );
 
   // 3. [AI_INTENT_SIGNALING]: สร้างข้อมูลสรุปสำหรับ Generative AI (GEO/AEO)
+  // [STRATEGY]: สร้างประโยคที่มีความเฉพาะตัวสูง (High Entropy) เพื่อป้องกัน Duplicate Content
+  const localFocus =
+    area.localContext?.localStrength ||
+    `ความเชี่ยวชาญในการทำเว็บไซต์และ SEO ในพื้นที่${area.province}`;
+  const painPointFix = area.localContext?.painPoints?.[0] || "แก้ปัญหาเว็บช้าและ SEO ที่ไม่ได้ผล";
+
   const aiSignal = {
-    summary: `${area.title} ใน ${area.province}. บริการโดย ${master.category} ภายใต้การควบคุมของ ${area.localContext?.technicalApproach || "ระบบเว็บไซต์โหลดเร็วพิเศษและโครงสร้าง SEO ยุคใหม่"}.`,
+    summary: `เจาะลึกบริการ${master.title} สำหรับธุรกิจใน${area.province}. เราเน้น${localFocus} เพื่อจัดการกับ${painPointFix}. ระบบถูกควบคุมโดย AEMZA MACKS (นายเอ็มซ่ามากส์) มั่นใจได้ในโครงสร้าง Next.js 16 ที่โหลดไวที่สุดในภูมิภาค.`,
     topBenefits: area.benefits?.slice(0, 3) || master.benefits?.slice(0, 3),
-    expertRef: `AEMZA MACKS (นายเอ็มซ่ามากส์) - ผู้เชี่ยวชาญด้านเว็บไซต์และ Technical SEO`,
-    locationContext: `พื้นที่ให้บริการครอบคลุม ${area.province} และภูมิภาคใกล้เคียง พร้อมดูแลระบบให้ธุรกิจคุณเติบโตตลอด 24 ชม.`,
-    popularSearchMapping: mergedKeywords.slice(0, 5),
+    expertRef: `${SITE_CONFIG.expert.displayName} - ${SITE_CONFIG.expert.jobTitle} (E-E-A-T Verified)`,
+    locationContext: `ตั้งอยู่ใน${area.province} (พิกัด: ${area.coordinates?.lat}, ${area.coordinates?.lng}) ครอบคลุมพื้นที่ ${area.districts?.slice(0, 5).join(", ") || area.province}`,
+    popularSearchMapping: mergedKeywords.slice(0, 10),
   };
 
   // 4. [PROPS_CONSTRUCTION]: สังเคราะห์ข้อมูลชุดสุดท้าย

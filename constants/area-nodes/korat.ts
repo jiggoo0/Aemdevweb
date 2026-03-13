@@ -113,7 +113,7 @@ export const koratNode = defineAreaNode(catalogService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ธุรกิจ B2B ในโคราชตัดสินใจด้วย 'ความเชื่อมั่น' และ 'สเปกที่ถูกต้อง' เว็บไซต์ที่ข้อมูลชัดเจนจะช่วยลดเวลาการตอบคำถามลูกค้าได้มหาศาล",
+      "Logistics Gateway & Industry - ความเชื่อมั่น' และ 'สเปกที่ถูกต้อง' เว็บไซต์ที่ข้อมูลชัดเจนจะช่วยลดเวลาการตอบคำถามลูกค้าได้มหาศาล",
     technicalApproach:
       "เน้นระบบ Search และ Filtering ที่แม่นยำ เพื่อให้ฝ่ายจัดซื้อหาสินค้าเจอเร็วที่สุด",
     localStrength:

@@ -28,12 +28,11 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/nonthaburi-node.webp",
   coordinates: { lat: 13.8591, lng: 100.4986 },
-  districts: ["ราชพฤกษ์", "แจ้งวัฒนะ", "ปากเกร็ด", "บางใหญ่", "เมืองนนทบุรี", "รัตนาธิเบศร์"],
+  districts: ["ปากเกร็ด", "งามวงศ์วาน", "บางใหญ่"],
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "ลูกค้าในนนทบุรีมีพฤติกรรมการค้นหาผ่านมือถือสูงมาก และมักตัดสินใจจากรีวิวบน Google Maps ความสมบูรณ์ของข้อมูลท้องถิ่น (Local Authority) คือกุญแจสู่ Conversion",
+    marketInsight: "Residential & Service Hub",
     technicalApproach:
       "เน้นระบบ Search Generative Experience (SGE) และการปักหมุดธุรกิจในโซนหมู่บ้านหรูและห้างสรรพสินค้าชั้นนำ",
     localStrength:

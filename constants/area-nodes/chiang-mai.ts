@@ -30,7 +30,7 @@ export const chiangMaiNode = defineAreaNode(hotelResortService, {
   // --- Visual & Assets ---
   heroImage: "/images/areas/chiang-mai-node.webp",
   coordinates: { lat: 18.7883, lng: 98.9853 },
-  districts: ["นิมมานเหมินท์", "เขตเมืองเก่า", "สันกำแพง", "แม่ริม", "หางดง", "แม่แตง", "สันทราย"],
+  districts: ["นิมมาน", "แม่ริม", "หางดง"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -86,7 +86,7 @@ export const chiangMaiNode = defineAreaNode(hotelResortService, {
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "นักท่องเที่ยวเชียงใหม่ตัดสินใจจองจาก 'อารมณ์และภาพ' เป็นหลัก เว็บไซต์ที่สวยและสื่อสารถูกจุดจะปิดการขายได้ง่ายกว่า",
+      "Digital Nomad Hub & Cafe Culture - อารมณ์และภาพ' เป็นหลัก เว็บไซต์ที่สวยและสื่อสารถูกจุดจะปิดการขายได้ง่ายกว่า",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูง เพื่อให้ภาพสวยคมชัดแต่โหลดเร็ว แม้เปิดผ่านมือถือในจุดที่สัญญาณเน็ตไม่แรง",
     localStrength:

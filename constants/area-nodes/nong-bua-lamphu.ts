@@ -24,7 +24,7 @@ export const nongBuaLamphuNode = defineAreaNode(localAuthorityService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/nong-bua-lamphu-node.webp",
   coordinates: { lat: 17.203, lng: 102.441 },
-  districts: ["เมืองหนองบัวลำภู", "ศรีบุญเรือง", "นากลาง", "นาวัง", "สุวรรณคูหา", "โนนสัง"],
+  districts: ["เมืองหนองบัวลำภู", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Localized Benefits ---
   benefits: [
@@ -59,8 +59,7 @@ export const nongBuaLamphuNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "หนองบัวลำภูเป็นเมืองที่มีเสน่ห์ด้านหัตถกรรมและธรรมชาติที่เรียบง่าย เว็บไซต์ที่ดูจริงใจจะได้รับการตอบรับที่ดี",
+    marketInsight: "ตลาดผู้บริโภคขนาดใหญ่และการค้าชายแดน",
     technicalApproach:
       "เน้นการแสดงผลที่โหลดไวและระบบการติดต่อสอบถามผ่าน LINE ที่นักธุรกิจท้องถิ่นคุ้นเคย",
     localStrength: "มีความโดดเด่นด้านวิสาหกิจชุมชนผ้าทอและกลุ่มเกษตรปลอดภัย",

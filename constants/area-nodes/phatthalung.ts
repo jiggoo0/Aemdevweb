@@ -67,8 +67,7 @@ export const phatthalungNode = defineAreaNode(localAuthorityService, {
 
   // --- Context Data ---
   localContext: {
-    marketInsight:
-      "พัทลุงมีนักท่องเที่ยวสาย Slow Life และครอบครัวหนาแน่น เว็บไซต์ที่ภาพสวยและเล่าเรื่องได้ดีจะได้รับความนิยมสูง",
+    marketInsight: "ทรัพยากรการท่องเที่ยวระดับโลก",
     technicalApproach:
       "เน้น Image Optimization สำหรับบรรยากาศธรรมชาติและการทำ Local Schema สำหรับจุดเช็คอิน",
     localStrength:

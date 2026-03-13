@@ -28,12 +28,12 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
   // --- Visual & Location ---
   heroImage: "/images/areas/chachoengsao-node.webp",
   coordinates: { lat: 13.6904, lng: 101.0772 },
-  districts: ["บางปะกง", "เมืองฉะเชิงเทรา", "บ้านโพธิ์", "พนมสารคาม", "บางคล้า", "แปลงยาว"],
+  districts: ["เมืองฉะเชิงเทรา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
   // --- Context Data ---
   localContext: {
     marketInsight:
-      "ฉะเชิงเทรากำลังเปลี่ยนผ่านสู่ Smart City เว็บไซต์ต้องทำหน้าที่เป็น 'สำนักงานดิจิทัล' ที่สะท้อนทั้งงานวิศวกรรมและการใช้ชีวิตสมัยใหม่ (Modern Lifestyle) พร้อมกัน",
+      "เขตเศรษฐกิจพิเศษและอุตสาหกรรม - สำนักงานดิจิทัล' ที่สะท้อนทั้งงานวิศวกรรมและการใช้ชีวิตสมัยใหม่ (Modern Lifestyle) พร้อมกัน",
     technicalApproach:
       "เน้นระบบ Security Hardening และการปักหมุด Google Maps ในเขตอุตสาหกรรมและโครงการอสังหาฯ ใหม่ๆ ทั่วทั้งจังหวัด",
     localStrength:
