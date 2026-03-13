@@ -22,10 +22,11 @@ export const LINE_RESPONSES = {
 
   SERVICES: `🛠️ [1] โซลูชันเว็บไซต์ & AI
 เราสร้าง "เครื่องจักรทำเงิน" ไม่ใช่แค่หน้าเว็บครับ:
-• Next.js 16 Web Corporate: โหลดไวที่สุดในไทย
-• AI Agent Integration: ระบบบอทช่วยขายอัจฉริยะ
+• Corporate Identity Hub: เว็บองค์กรระดับพรีเมียม
+• Specialist BIO System: สร้าง Digital Legacy ส่วนตัว
+• Local SEO Domination: ครองพื้นที่ทุกจังหวัดทั่วไทย
 • High-Conversion Sale Page: เน้นปิดยอดขาย
-• Custom Web Dashboard: ระบบจัดการหลังบ้าน
+• Precision B2B Catalog: ระบบจัดการสินค้าอุตสาหกรรม
 
 รายละเอียด: https://www.aemdevweb.com/services`,
 

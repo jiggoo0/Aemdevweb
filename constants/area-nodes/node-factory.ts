@@ -122,10 +122,11 @@ export function defineAreaNode(
     priority: localConfig.priority ?? masterService.priority,
     clientTrust: localConfig.clientTrust ?? masterService.clientTrust,
     socialProof: localConfig.socialProof ?? masterService.socialProof,
-    heroImage: "/images/areas/universal-node.webp",
-
     // --- [LOCAL UNIQUE DATA] ---
     ...localConfig,
+
+    // [ENFORCED]: บังคับใช้ภาพพื้นที่บริการเดียวกันทั้งระบบตามคำสั่ง
+    heroImage: "/images/areas/universal-node.webp",
 
     // --- [IDENTITY OVERRIDES] ---
     tier: localConfig.tier ?? provinceDna.tier,
