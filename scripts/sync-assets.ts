@@ -52,6 +52,7 @@ async function sync() {
       const { url } = await put(relativePath, fileBuffer, {
         access: "public",
         addRandomSuffix: false, // ใช้ชื่อเดิมเพื่อให้จัดการง่ายในการอัปเดต DB
+        allowOverwrite: true, // อนุญาตให้เขียนทับไฟล์เดิมได้
       });
       results[relativePath] = url;
       console.log(`✅ Success: ${url}`);

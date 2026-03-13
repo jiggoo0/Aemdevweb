@@ -12,19 +12,23 @@ export function cn(...inputs: ClassValue[]) {
 
 /**
  * [ASSET_RESOLVER]: แปลง Path รูปภาพเป็น Cloud URL (Vercel Blob)
- * @strategy Fallback-First | Edge-Optimized
+ * @strategy Fallback-First | Edge-Optimized | Cache-Busting
  */
 export function getAssetUrl(path: string | undefined): string {
   if (!path) return "/images/shared/placeholder.webp";
   if (path.startsWith("http")) return path;
 
   const BLOB_BASE = "https://fme2ovv5az8x4yqg.public.blob.vercel-storage.com";
+  
+  // [CACHE_BUSTER]: ใช้ Timestamp หรือ Version เพื่อบังคับให้อัปเดตรูปภาพใหม่
+  // ในที่นี้ใช้การสร้างเลขสุ่มสั้นๆ หรือจะใช้ Version จาก SITE_CONFIG ก็ได้
+  const version = Date.now().toString().slice(-6);
 
   // จัดการ Path ให้สะอาด (ลบ / นำหน้าถ้ามี)
   const cleanPath = path.startsWith("/") ? path.slice(1) : path;
 
-  // คืนค่า URL เต็มที่ชี้ไปยัง Vercel Blob
-  return `${BLOB_BASE}/${cleanPath}`;
+  // คืนค่า URL เต็มพร้อม Query Parameter เพื่อล้าง Cache
+  return `${BLOB_BASE}/${cleanPath}?v=${version}`;
 }
 
 export function absoluteUrl(path: string) {

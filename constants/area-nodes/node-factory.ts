@@ -122,7 +122,7 @@ export function defineAreaNode(
     priority: localConfig.priority ?? masterService.priority,
     clientTrust: localConfig.clientTrust ?? masterService.clientTrust,
     socialProof: localConfig.socialProof ?? masterService.socialProof,
-    heroImage: localConfig.heroImage ?? masterService.image ?? "/images/shared/placeholder.webp",
+    heroImage: "/images/areas/universal-node.webp",
 
     // --- [LOCAL UNIQUE DATA] ---
     ...localConfig,

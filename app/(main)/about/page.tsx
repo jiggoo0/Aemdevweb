@@ -5,6 +5,7 @@
 
 import React from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 // --- 1. Infrastructure & Engines ---
 import LayoutEngine from "@/components/templates/LayoutEngine";
@@ -62,9 +63,13 @@ export default function AboutPage() {
               <div className="bg-surface-card border-border shadow-pro-xl rounded-card-lg relative flex flex-col overflow-hidden border backdrop-blur-3xl">
                 {/* Profile Image Container */}
                 <div className="bg-surface-offset relative aspect-square w-full overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <IconRenderer name="UserCircle2" size={160} className="text-brand-primary/20" />
-                  </div>
+                  <Image
+                    src={SITE_CONFIG.expert.avatar}
+                    alt={ABOUT_CONTENT.founder.name}
+                    fill
+                    priority
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
                   {/* Overlay info */}
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 pt-20">
                     <p className="font-mono text-[9px] font-black tracking-[0.3em] text-white/60 uppercase">
