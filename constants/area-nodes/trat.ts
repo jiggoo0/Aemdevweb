@@ -27,7 +27,7 @@ export const tratNode = defineAreaNode(hotelResortService, {
     "เราเน้นโครงสร้างที่โหลดไวสายฟ้าแลบผ่านเทคโนโลยี Edge Computing และการทำ Global SEO เพื่อให้แบรนด์ของคุณครองอันดับหนึ่งในสายตานักท่องเที่ยวทั่วโลก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/trat-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 12.2428, lng: 102.5175 },
   districts: ["เมืองตราด", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const tratNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/trat-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/phuket-luxury-seo.webp",

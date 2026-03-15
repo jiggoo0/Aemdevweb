@@ -21,7 +21,7 @@ export const phichitNode = defineAreaNode(localAuthorityService, {
     "เราวางระบบให้คนค้นหาธุรกิจของคุณเจอใน Google ทันที ช่วยเพิ่มโอกาสในการปิดดีลใหม่ๆ และสร้างการเติบโตที่ยั่งยืนให้ธุรกิจในท้องถิ่นครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phichit-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.4428, lng: 100.3501 },
   districts: [
     "เมืองพิจิตร",
@@ -153,7 +153,7 @@ export const phichitNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phichit-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

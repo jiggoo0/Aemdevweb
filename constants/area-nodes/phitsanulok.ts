@@ -20,7 +20,7 @@ export const phitsanulokNode = defineAreaNode(corporateService, {
     "มั่นใจในศักยภาพและตัดสินใจเลือกคุณเป็นอันดับแรก เราพร้อมช่วยวางรากฐานดิจิทัลที่แข็งแรง เพื่อให้สมกับความเป็นเมืองศูนย์กลางเศรษฐกิจและบริการของพิษณุโลกครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phitsanulok-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.8211, lng: 100.2659 },
   districts: [
     "เมืองพิษณุโลก",

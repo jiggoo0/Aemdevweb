@@ -22,7 +22,7 @@ export const nakhonPhanomNode = defineAreaNode(localAuthorityService, {
     "เพื่อช่วยให้โรงแรม รีสอร์ต และธุรกิจการค้าในนครพนมของคุณ ครองอันดับหนึ่งบน Google และเติบโตไปพร้อมกับเศรษฐกิจลุ่มน้ำโขง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nakhon-phanom-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.392, lng: 104.769 },
   districts: [
     "เมืองนครพนม",
@@ -109,7 +109,7 @@ export const nakhonPhanomNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nakhon-phanom-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

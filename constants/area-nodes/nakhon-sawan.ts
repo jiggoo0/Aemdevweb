@@ -21,7 +21,7 @@ export const nakhonSawanNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลสินค้าที่ค้นหาง่าย และการทำ Local Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยคู่ค้าและผู้ประกอบการทั่วภูมิภาค",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nakhon-sawan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.7042, lng: 100.1372 },
   districts: ["เมืองนครสวรรค์", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -74,7 +74,7 @@ export const nakhonSawanNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nakhon-sawan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/catalog-node.webp",
         "/images/case-studies/industrial-catalog.webp",

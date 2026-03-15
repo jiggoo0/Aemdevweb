@@ -22,7 +22,7 @@ export const mukdahanNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้คู่ค้าจากลาว เวียดนาม และจีนตอนใต้ มั่นใจในมาตรฐานความเป็นมืออาชีพของธุรกิจมุกดาหารของคุณ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/mukdahan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.543, lng: 104.724 },
   districts: ["เมืองมุกดาหาร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -104,7 +104,7 @@ export const mukdahanNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/mukdahan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

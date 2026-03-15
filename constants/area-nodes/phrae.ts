@@ -22,7 +22,7 @@ export const phraeNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนยอดผู้เข้าชมให้กลายเป็นคำสั่งซื้อ และสร้างชื่อเสียงให้ธุรกิจท้องถิ่นของคุณโดดเด่นบนหน้าแรก Google",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phrae-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.1446, lng: 100.1403 },
   districts: [
     "เมืองแพร่",
@@ -107,7 +107,7 @@ export const phraeNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phrae-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

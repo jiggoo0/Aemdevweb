@@ -21,7 +21,7 @@ export const suphanBuriNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้วิสาหกิจชุมชนและร้านค้าของคุณ ครองอันดับหนึ่งบน Google และเข้าถึงลูกค้ากลุ่มใหญ่ในกรุงเทพฯ และปริมณฑล",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/suphan-buri-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.4745, lng: 100.1222 },
   districts: [
     "เมืองสุพรรณบุรี",
@@ -104,7 +104,7 @@ export const suphanBuriNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/suphan-buri-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

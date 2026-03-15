@@ -20,7 +20,7 @@ export const kamphaengPhetNode = defineAreaNode(localAuthorityService, {
     "นายเอ็มซ่ามากส์ พร้อมให้บริการออกแบบและพัฒนาเว็บไซต์ที่ถูกต้องตามระเบียบภาครัฐ และช่วยธุรกิจท้องถิ่นให้เติบโตด้วย Local SEO",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/kamphaeng-phet-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.4828, lng: 99.5227 },
   districts: [
     "เมืองกำแพงเพชร",
@@ -146,7 +146,7 @@ export const kamphaengPhetNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/kamphaeng-phet-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

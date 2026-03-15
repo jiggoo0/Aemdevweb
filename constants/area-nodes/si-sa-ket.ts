@@ -12,7 +12,7 @@ export const siSaKetNode = defineAreaNode(localAuthorityService, {
     "รับทำเว็บไซต์ ศรีสะเกษ | โหลดเร็วพิเศษ ยกระดับสินค้าเกษตรภูเขาไฟและธุรกิจท่องเที่ยวเชิงวัฒนธรรม",
   description:
     "เปลี่ยนชื่อเสียงทุเรียนภูเขาไฟให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นความน่าเชื่อถือและการเล่าเรื่องวิถีชุมชน",
-  heroImage: "/images/areas/si-sa-ket-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.1167, lng: 104.3333 },
   districts: [
     "เมืองศรีสะเกษ",

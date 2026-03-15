@@ -26,7 +26,7 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ Local SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรอง เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในย่านเศรษฐกิจหลัก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nakhon-si-thammarat-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 8.4333, lng: 99.9667 },
   districts: ["เมืองนครศรีธรรมราช", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -79,7 +79,7 @@ export const nakhonSiThammaratNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nakhon-si-thammarat-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

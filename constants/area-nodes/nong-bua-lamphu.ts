@@ -22,7 +22,7 @@ export const nongBuaLamphuNode = defineAreaNode(localAuthorityService, {
     "เราเน้นโครงสร้างที่โหลดไวและระบบการจัดการที่เรียบง่าย เพื่อให้ธุรกิจ SME และเกษตรยุคใหม่ในพื้นที่ เติบโตได้อย่างมั่นคงบนโลกดิจิทัล",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nong-bua-lamphu-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.203, lng: 102.441 },
   districts: ["เมืองหนองบัวลำภู", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -102,7 +102,7 @@ export const nongBuaLamphuNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nong-bua-lamphu-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

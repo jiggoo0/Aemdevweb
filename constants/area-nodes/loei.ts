@@ -22,7 +22,7 @@ export const loeiNode = defineAreaNode(localAuthorityService, {
     "เพื่อช่วยให้โฮมสเตย์ รีสอร์ต และธุรกิจสินค้าเกษตรพรีเมียมในเลย ครองใจลูกค้าและสร้างยอดขายได้ตลอดทั้งปี",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/loei-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.486, lng: 101.7223 },
   districts: [
     "เมืองเลย",
@@ -113,7 +113,7 @@ export const loeiNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/loei-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

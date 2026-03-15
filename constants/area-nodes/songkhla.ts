@@ -26,7 +26,7 @@ export const songkhlaNode = defineAreaNode(seoAgencyService, {
     "เราเน้นโครงสร้างที่รองรับการทำ SEO ภาษาอังกฤษและมลายู รวมถึงการทำ Entity Mapping เพื่อยืนยันตัวตนธุรกิจของคุณในระดับภูมิภาคอาเซียน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/songkhla-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 7.1898, lng: 100.5954 },
   districts: ["เมืองสงขลา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -79,7 +79,7 @@ export const songkhlaNode = defineAreaNode(seoAgencyService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/songkhla-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/seo-agency-node.webp",
         "/images/case-studies/industrial-catalog.webp",

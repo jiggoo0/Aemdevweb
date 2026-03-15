@@ -21,7 +21,7 @@ export const phayaoNode = defineAreaNode(localAuthorityService, {
     "สามารถเปลี่ยนผู้เยี่ยมชมหน้าเว็บให้กลายเป็นยอดขายที่วัดผลได้จริง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phayao-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 19.1667, lng: 99.9 },
   districts: [
     "เมืองพะเยา",
@@ -102,7 +102,7 @@ export const phayaoNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phayao-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -22,7 +22,7 @@ export const singBuriNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนของดีเมืองสิงห์ให้เป็นยอดขายที่ขยายตัวสู่ลูกค้าทั่วประเทศผ่านระบบจัดการสินค้าและกลยุทธ์ SEO ที่แม่นยำ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/sing-buri-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.891, lng: 100.3967 },
   districts: [
     "เมืองสิงห์บุรี",
@@ -102,7 +102,7 @@ export const singBuriNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/sing-buri-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

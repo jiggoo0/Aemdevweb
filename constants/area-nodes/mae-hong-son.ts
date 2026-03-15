@@ -21,7 +21,7 @@ export const maeHongSonNode = defineAreaNode(localAuthorityService, {
     "เราเน้นทำเว็บไซต์ที่โหลดเร็วแม้ในพื้นที่ที่สัญญาณอินเทอร์เน็ตจำกัด มีระบบจองที่ง่ายไม่ซับซ้อน และงานดีไซน์ที่เน้นความสงบ เรียบง่าย แต่ดูแพงแบบ Minimal เพื่อดึงดูดกลุ่มลูกค้ากำลังซื้อสูงครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/mae-hong-son-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 19.302, lng: 97.9685 },
   districts: ["เมืองแม่ฮ่องสอน", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -104,7 +104,7 @@ export const maeHongSonNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/mae-hong-son-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

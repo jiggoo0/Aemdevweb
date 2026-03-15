@@ -27,7 +27,7 @@ export const rayongNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลที่รองรับการแสดงผลสเปกเครื่องจักร (Spec Sheets) และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยคู่ค้าทั่วโลก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/rayong-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 12.6814, lng: 101.2813 },
   districts: ["มาบตาพุด", "บ้านฉาง", "ปลวกแดง"],
 
@@ -81,7 +81,7 @@ export const rayongNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/rayong-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/catalog-node.webp",
         "/images/case-studies/industrial-catalog.webp",

@@ -26,7 +26,7 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
     "เราเน้นการทำ Local Entity Mapping และ GMB Optimization เพื่อให้ลูกค้าในพื้นที่ค้นหาคุณเจอเป็นอันดับแรกทันทีที่ต้องการรับบริการ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nonthaburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.8591, lng: 100.4986 },
   districts: ["ปากเกร็ด", "งามวงศ์วาน", "บางใหญ่"],
 
@@ -78,7 +78,7 @@ export const nonthaburiNode = defineAreaNode(seoAgencyService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nonthaburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/seo-agency-node.webp",
         "/images/case-studies/ecommerce-nextjs-migration.webp",

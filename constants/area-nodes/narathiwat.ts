@@ -21,7 +21,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
     "เพื่อช่วยให้คุณเจรจาธุรกิจข้ามพรมแดนได้อย่างเป็นมืออาชีพ และครองอันดับหนึ่งในพื้นที่การค้าชายแดน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/narathiwat-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 6.425, lng: 101.8233 },
   districts: [
     "เมืองนราธิวาส",
@@ -112,7 +112,7 @@ export const narathiwatNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/narathiwat-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

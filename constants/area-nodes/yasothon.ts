@@ -22,7 +22,7 @@ export const yasothonNode = defineAreaNode(localAuthorityService, {
     "เราออกแบบระบบที่เน้นการสร้าง Trust และความสะดวกในการสั่งจองสินค้าออนไลน์ เพื่อช่วยให้ธุรกิจในยโสธรของคุณ เติบโตอย่างยั่งยืนบนหน้าแรก Google",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/yasothon-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.793, lng: 104.145 },
   districts: ["เมืองยโสธร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -104,7 +104,7 @@ export const yasothonNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/yasothon-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

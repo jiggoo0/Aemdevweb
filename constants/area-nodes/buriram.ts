@@ -22,7 +22,7 @@ export const buriramNode = defineAreaNode(localAuthorityService, {
     "เปลี่ยนโรงแรม ร้านอาหาร และคาเฟ่ของคุณให้กลายเป็นจุดเช็คอินอันดับหนึ่งบน Google Maps ทั่วจังหวัด",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/buriram-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.993, lng: 103.109 },
   districts: ["เมืองบุรีรัมย์", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -103,7 +103,7 @@ export const buriramNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/buriram-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

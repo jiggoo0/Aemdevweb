@@ -22,7 +22,7 @@ export const amnatCharoenNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้แบรนด์อำนาจเจริญของคุณ ครองพื้นที่บนโลกออนไลน์และเข้าถึงลูกค้ากลุ่มคุณภาพที่รักในวิถีสโลว์ไลฟ์",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/amnat-charoen-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.858, lng: 104.625 },
   districts: [
     "เมืองอำนาจเจริญ",
@@ -108,7 +108,7 @@ export const amnatCharoenNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/amnat-charoen-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -20,7 +20,7 @@ export const chonBuriNode = defineAreaNode(corporateService, {
     "พร้อมวางระบบ SEO ให้ฝ่ายจัดซื้อทั่วโลกค้นหาคุณเจอเป็นอันดับแรกในคีย์เวิร์ดอุตสาหกรรม",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chon-buri-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.3611, lng: 100.9847 },
   districts: [
     "เมืองพัทยา",
@@ -164,7 +164,7 @@ export const chonBuriNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chon-buri-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/case-studies/industrial-catalog.webp",
         "/images/services/catalog-node.webp",

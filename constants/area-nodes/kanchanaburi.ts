@@ -26,7 +26,7 @@ export const kanchanaburiNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ Technical SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรอง เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในย่านเศรษฐกิจใหม่",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/kanchanaburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.0227, lng: 99.5328 },
   districts: ["เมืองกาญจนบุรี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const kanchanaburiNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/kanchanaburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

@@ -26,7 +26,7 @@ export const ubonRatchathaniNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ Local SEO เชิงลึก และการทำ Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยลูกค้ากำลังซื้อสูงจากทั่วภูมิภาคและประเทศเพื่อนบ้าน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/ubon-ratchathani-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.2287, lng: 104.8564 },
   districts: [
     "เมืองอุบลราชธานี",
@@ -87,7 +87,7 @@ export const ubonRatchathaniNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/ubon-ratchathani-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

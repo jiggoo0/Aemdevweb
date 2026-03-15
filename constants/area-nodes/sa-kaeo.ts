@@ -22,7 +22,7 @@ export const saKaeoNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้คู่ค้าข้ามพรมแดนมั่นใจในมาตรฐานความเป็นมืออาชีพของธุรกิจสระแก้วของคุณ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/sa-kaeo-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.824, lng: 102.064 },
   districts: [
     "เมืองสระแก้ว",
@@ -109,7 +109,7 @@ export const saKaeoNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/sa-kaeo-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

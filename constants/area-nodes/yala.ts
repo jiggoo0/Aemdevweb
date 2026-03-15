@@ -21,7 +21,7 @@ export const yalaNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนยอดผู้เข้าชม (Traffic) ให้กลายเป็นยอดขายและสร้างตัวตนที่แข็งแกร่งบนโลกดิจิทัล",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/yala-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 6.5411, lng: 101.2811 },
   districts: ["เมืองยะลา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -101,7 +101,7 @@ export const yalaNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/yala-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

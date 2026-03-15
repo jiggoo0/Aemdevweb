@@ -21,7 +21,7 @@ export const phatthalungNode = defineAreaNode(localAuthorityService, {
     "เพื่อยกระดับโฮมสเตย์และแบรนด์กระจูดพรีเมียมในพัทลุง ให้ครองใจลูกค้ากลุ่มคุณภาพและสร้างรายได้อย่างยั่งยืน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phatthalung-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 7.6167, lng: 100.0833 },
   districts: [
     "เมืองพัทลุง",
@@ -112,7 +112,7 @@ export const phatthalungNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phatthalung-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

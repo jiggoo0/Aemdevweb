@@ -21,7 +21,7 @@ export const trangNode = defineAreaNode(hotelResortService, {
     "เพื่อให้แบรนด์ตรังของคุณ ครองอันดับหนึ่งบน Google และดึงดูดนักท่องเที่ยวคุณภาพที่ต้องการความสงบและรสนิยม",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/trang-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 7.5583, lng: 99.6111 },
   districts: ["เมืองตรัง", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -99,7 +99,7 @@ export const trangNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/trang-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/provincial-domination.webp",

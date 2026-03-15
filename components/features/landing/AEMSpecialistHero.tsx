@@ -175,10 +175,7 @@ export const AEMSpecialistHero = memo(() => {
           </div>
 
           {/* Conversion Actions: Strategic Call-to-Action */}
-          <m.div
-            variants={itemVariants}
-            className="flex flex-col items-center gap-8 sm:flex-row"
-          >
+          <m.div variants={itemVariants} className="flex flex-col items-center gap-8 sm:flex-row">
             <Magnetic distance={0.3}>
               <Button
                 size="lg"

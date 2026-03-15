@@ -26,7 +26,7 @@ export const saraburiNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Local Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาฝ่ายจัดซื้อทั่วประเทศ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/saraburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.5289, lng: 100.9101 },
   districts: ["เมืองสระบุรี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -79,7 +79,7 @@ export const saraburiNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/saraburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/catalog-node.webp",
         "/images/case-studies/industrial-catalog.webp",

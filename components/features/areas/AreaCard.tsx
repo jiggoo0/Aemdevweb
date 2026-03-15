@@ -20,9 +20,9 @@ interface AreaCardProps {
 }
 
 const AreaCard = ({ data, index = 0 }: AreaCardProps) => {
-  const safeSlug = data.slug || "thailand";
-  // [OPTIMIZED]: ดึงรูปภาพจาก Vercel Blob
-  const imagePath = getAssetUrl(data.heroImage || `/images/areas/${safeSlug}-node.webp`);
+  // [OPTIMIZED]: ดึงรูปภาพจาก Vercel Blob หรือใช้ Universal Node เป็นพื้นฐาน
+  // ปัจจุบันระบบใช้ภาพกลางไปก่อนจนกว่าจะมีภาพเฉพาะจังหวัดครบ 77 จังหวัด
+  const imagePath = getAssetUrl(data.heroImage || "/images/areas/universal-node.webp");
 
   return (
     <Link href={`/areas/${data.slug}`} className="group block">

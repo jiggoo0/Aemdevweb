@@ -26,7 +26,7 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
     "เราเน้นการทำ Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในใจคนท้องถิ่นและเป็นที่รู้จักในวงกว้างบน Google Global",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nakhon-pathom-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.814, lng: 100.0373 },
   districts: ["เมืองนครปฐม", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -78,7 +78,7 @@ export const nakhonPathomNode = defineAreaNode(seoAgencyService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nakhon-pathom-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/seo-agency-node.webp",
         "/images/case-studies/industrial-catalog.webp",

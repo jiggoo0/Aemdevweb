@@ -22,7 +22,7 @@ export const roiEtNode = defineAreaNode(localAuthorityService, {
     "พร้อมวางกลยุทธ์ Local SEO เพื่อให้ธุรกิจของคุณเป็นอันดับหนึ่งในใจคนร้อยเอ็ดและจังหวัดใกล้เคียง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/roi-et-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.054, lng: 103.652 },
   districts: [
     "เมืองร้อยเอ็ด",
@@ -110,7 +110,7 @@ export const roiEtNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/roi-et-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

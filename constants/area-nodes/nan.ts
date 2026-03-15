@@ -22,7 +22,7 @@ export const nanNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้ลูกค้าที่ใช้งานอินเทอร์เน็ตบนดอยสามารถเข้าถึงข้อมูลและจองที่พักของคุณได้ทันทีโดยไม่มีสะดุด",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.7833, lng: 100.7833 },
   districts: [
     "เมืองน่าน",
@@ -108,7 +108,7 @@ export const nanNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -5,4 +5,4 @@ This file tracks all major tracks for the project. Each track has its own detail
 ---
 
 - [ ] **Track: Initialize & Optimize AI-Driven Infrastructure**
-  *Link: [./tracks/init_infra_20260315/](./tracks/init_infra_20260315/)*
+      _Link: [./tracks/init_infra_20260315/](./tracks/init_infra_20260315/)_

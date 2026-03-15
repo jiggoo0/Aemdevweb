@@ -20,7 +20,7 @@ export const phuketNode = defineAreaNode(hotelResortService, {
     "เราเน้นโครงสร้างที่รองรับภาษาต่างประเทศสมบูรณ์แบบ โหลดรูปภาพความละเอียดสูงได้รวดเร็วสายฟ้าแลบจากทุกมุมโลก และวางโครงสร้าง SEO เชิงลึกเพื่อให้ธุรกิจของคุณครองอันดับหนึ่งบน Google Global",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phuket-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 7.8804, lng: 98.3923 },
   districts: ["เมืองภูเก็ต", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -160,7 +160,7 @@ export const phuketNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phuket-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/provincial-domination.webp",

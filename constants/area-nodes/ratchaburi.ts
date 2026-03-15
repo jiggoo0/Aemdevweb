@@ -26,7 +26,7 @@ export const ratchaburiNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Local Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาฝ่ายจัดซื้อทั่วประเทศ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/ratchaburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.5283, lng: 99.8133 },
   districts: ["เมืองราชบุรี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const ratchaburiNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/ratchaburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/catalog-node.webp",
         "/images/case-studies/industrial-catalog.webp",

@@ -22,7 +22,7 @@ export const sakonNakhonNode = defineAreaNode(localAuthorityService, {
     "เราสร้างระบบที่เน้น Visual Storytelling และการจัดการสินค้าออนไลน์ที่ง่าย เพื่อเปลี่ยนคุณค่าท้องถิ่นให้เป็นยอดขายในตลาดสากล",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/sakon-nakhon-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.1617, lng: 104.1486 },
   districts: [
     "เมืองสกลนคร",
@@ -111,7 +111,7 @@ export const sakonNakhonNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/sakon-nakhon-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

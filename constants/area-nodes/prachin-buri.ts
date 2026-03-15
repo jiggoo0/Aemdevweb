@@ -22,7 +22,7 @@ export const prachinBuriNode = defineAreaNode(corporateService, {
     "เพื่อให้โรงงานในเขตนิคมฯ 304 และโรจนะ ของคุณ ครองความได้เปรียบในตลาดคู่ค้าทั้งในไทยและต่างประเทศ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/prachin-buri-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.0501, lng: 101.3733 },
   districts: [
     "เมืองปราจีนบุรี",

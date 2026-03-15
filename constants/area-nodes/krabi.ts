@@ -22,7 +22,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
     "พร้อมระบบจองตรงที่รองรับการชำระเงินสากล เพื่อให้ธุรกิจกระบี่ของคุณครองพื้นที่ในตลาดโลกอย่างสง่างาม",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/krabi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 8.0863, lng: 98.9063 },
   districts: [
     "เมืองกระบี่",
@@ -112,7 +112,7 @@ export const krabiNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/krabi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/phuket-luxury-seo.webp",

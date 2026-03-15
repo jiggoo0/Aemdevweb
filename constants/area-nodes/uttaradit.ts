@@ -22,7 +22,7 @@ export const uttaraditNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้คุณขายสินค้าได้ราคาเต็มเม็ดเต็มหน่วย และสร้างฐานลูกค้าขาประจำที่จะอุดหนุนแบรนด์ของคุณอย่างยั่งยืนครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/uttaradit-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.6256, lng: 100.0993 },
   districts: [
     "เมืองอุตรดิตถ์",
@@ -156,7 +156,7 @@ export const uttaraditNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/uttaradit-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -21,7 +21,7 @@ export const chaiNatNode = defineAreaNode(localAuthorityService, {
     "พร้อมชูโรงสินค้าพรีเมียมอย่างส้มโอขาวแตงกวาให้โดดเด่นบนโลกออนไลน์ผ่านกลยุทธ์ Local SEO",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chai-nat-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.1851, lng: 100.1251 },
   districts: ["เมืองชัยนาท", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -96,7 +96,7 @@ export const chaiNatNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chai-nat-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

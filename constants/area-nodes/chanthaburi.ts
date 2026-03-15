@@ -26,7 +26,7 @@ export const chanthaburiNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลที่รองรับการโชว์รายละเอียดสินค้า (High-Res) และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณถูกค้นพบโดยคู่ค้าทั่วโลก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chanthaburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 12.6112, lng: 102.1039 },
   districts: ["เมืองจันทบุรี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const chanthaburiNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chanthaburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/catalog-node.webp",
         "/images/case-studies/industrial-catalog.webp",

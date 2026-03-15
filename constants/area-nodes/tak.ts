@@ -20,7 +20,7 @@ export const takNode = defineAreaNode(corporateService, {
     "พร้อมวางรากฐาน SEO ให้คู่ค้าทั่วโลกค้นหาคุณเจอ เพื่อให้ธุรกิจของคุณเป็นเบอร์หนึ่งในเขตเศรษฐกิจพิเศษตาก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/tak-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.8831, lng: 99.1258 },
   districts: [
     "แม่สอด",
@@ -152,7 +152,7 @@ export const takNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/tak-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

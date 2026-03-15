@@ -22,7 +22,7 @@ export const lopburiNode = defineAreaNode(localAuthorityService, {
     "ควบคู่ไปกับการทำ Local SEO เพื่อดันแหล่งท่องเที่ยวเมืองเก่าให้โดดเด่นบนหน้าแรก Google ต้อนรับนักท่องเที่ยวจากทั่วไทย",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/lopburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.7995, lng: 100.6534 },
   districts: [
     "เมืองลพบุรี",
@@ -106,7 +106,7 @@ export const lopburiNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/lopburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

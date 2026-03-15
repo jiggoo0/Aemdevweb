@@ -27,7 +27,7 @@ export const udonThaniNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างข้อมูลที่รองรับหลายภาษา การทำ Entity Mapping และระบบความปลอดภัยระดับสูงเพื่อสร้างความมั่นใจให้คู่ค้าข้ามพรมแดน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/udon-thani-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.4138, lng: 102.7872 },
   districts: ["เมืองอุดรธานี", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -81,7 +81,7 @@ export const udonThaniNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/udon-thani-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

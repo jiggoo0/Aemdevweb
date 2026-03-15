@@ -27,7 +27,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
     "เราเน้นการปกป้องข้อมูลระดับสูงสุดและสร้างความน่าเชื่อถือให้แบรนด์ของคุณ เพื่อให้องค์กรครองอันดับหนึ่งบน Google และ AI Search ได้อย่างยั่งยืน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/bangkok-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.7563, lng: 100.5018 },
   districts: ["สาทร", "สุขุมวิท", "พระราม 9"],
 
@@ -88,7 +88,7 @@ export const bangkokNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/bangkok-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/case-studies/industrial-catalog.webp",
         "/images/case-studies/phuket-luxury-seo.webp",

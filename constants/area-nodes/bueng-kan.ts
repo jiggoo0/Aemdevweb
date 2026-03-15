@@ -22,7 +22,7 @@ export const buengKanNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนกระแสความสนใจในโลกโซเชียลให้กลายเป็นยอดจองตรง และสร้างตัวตนที่แข็งแกร่งในฐานะจังหวัดท่องเที่ยวมาแรง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/bueng-kan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.362, lng: 103.654 },
   districts: [
     "เมืองบึงกาฬ",
@@ -114,7 +114,7 @@ export const buengKanNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/bueng-kan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -12,7 +12,7 @@ export const uthaiThaniNode = defineAreaNode(localAuthorityService, {
     "รับทำเว็บไซต์ อุทัยธานี | โหลดเร็วพิเศษ ออกแบบเว็บท่องเที่ยววิถีสโลว์ไลฟ์และสินค้าภูมิปัญญา",
   description:
     "เปลี่ยนความสงบของอุทัยธานีให้เป็นยอดขายดิจิทัล ด้วยเว็บไซต์ที่เน้นการเล่าเรื่องธรรมชาติและวิถีลุ่มน้ำสะแกกรัง",
-  heroImage: "/images/areas/uthai-thani-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.3833, lng: 100.0167 },
   districts: [
     "เมืองอุทัยธานี",

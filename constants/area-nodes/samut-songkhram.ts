@@ -21,7 +21,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้ธุรกิจโฮมสเตย์และสินค้า SME พรีเมียมของสมุทรสงคราม ครองใจลูกค้ากลุ่มคุณภาพที่กำลังมองหาประสบการณ์ที่แตกต่าง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/samut-songkhram-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.4111, lng: 100.0022 },
   districts: ["เมืองสมุทรสงคราม", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -98,7 +98,7 @@ export const samutSongkhramNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/samut-songkhram-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

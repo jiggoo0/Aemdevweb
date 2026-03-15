@@ -21,7 +21,7 @@ export const lampangNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้ธุรกิจในลำปางของคุณเติบโตได้อย่างยั่งยืนในยุคดิจิทัลครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/lampang-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.2855, lng: 99.4927 },
   districts: [
     "เมืองลำปาง",
@@ -157,7 +157,7 @@ export const lampangNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/lampang-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

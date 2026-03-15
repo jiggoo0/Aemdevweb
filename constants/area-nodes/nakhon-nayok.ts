@@ -21,7 +21,7 @@ export const nakhonNayokNode = defineAreaNode(hotelResortService, {
     "เพื่อให้รีสอร์ตและธุรกิจคาเฟ่ของคุณ ครองอันดับหนึ่งในใจนักท่องเที่ยวกลุ่มครอบครัวและวัยทำงาน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nakhon-nayok-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.2069, lng: 101.2139 },
   districts: ["เมืองนครนายก", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 

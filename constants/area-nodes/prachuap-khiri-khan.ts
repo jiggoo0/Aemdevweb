@@ -26,7 +26,7 @@ export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
     "เราเน้นโครงสร้างที่รองรับ Global Traffic และการทำ Multi-language SEO เชิงลึก เพื่อให้แบรนด์ของคุณครองอันดับหนึ่งในคีย์เวิร์ดระดับ High-intent ทั้งไทยและต่างชาติ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/prachuap-khiri-khan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 11.8124, lng: 99.797 },
   districts: ["เมืองประจวบคีรีขันธ์", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const prachuapKhiriKhanNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/prachuap-khiri-khan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/phuket-luxury-seo.webp",

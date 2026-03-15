@@ -21,7 +21,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
     "พร้อมระบบ Micro-E-commerce ที่ใช้ง่ายผ่านมือถือ ช่วยให้คุณเข้าถึงลูกค้าในกรุงเทพฯ และปริมณฑลได้อย่างรวดเร็ว",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/ang-thong-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.5896, lng: 100.4551 },
   districts: ["เมืองอ่างทอง", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -97,7 +97,7 @@ export const angThongNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/ang-thong-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

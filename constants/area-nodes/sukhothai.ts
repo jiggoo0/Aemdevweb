@@ -21,7 +21,7 @@ export const sukhothaiNode = defineAreaNode(localAuthorityService, {
     "ให้เข้าถึงกลุ่มลูกค้าที่มีกำลังซื้อสูงและโหยหาคุณค่าทางวัฒนธรรมอย่างแท้จริงครับ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/sukhothai-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.0078, lng: 99.8235 },
   districts: [
     "เมืองสุโขทัย",
@@ -156,7 +156,7 @@ export const sukhothaiNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/sukhothai-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

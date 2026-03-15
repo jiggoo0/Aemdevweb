@@ -22,7 +22,7 @@ export const phetchaburiNode = defineAreaNode(hotelResortService, {
     "เพื่อให้แบรนด์เพชรบุรีของคุณ ครองความโดดเด่นบนโลกออนไลน์และเป็นอันดับหนึ่งในใจนักท่องเที่ยวคุณภาพ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/phetchaburi-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.113, lng: 99.9442 },
   districts: [
     "เมืองเพชรบุรี",
@@ -109,7 +109,7 @@ export const phetchaburiNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/phetchaburi-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/provincial-domination.webp",

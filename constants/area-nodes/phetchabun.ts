@@ -11,7 +11,7 @@ export const phetchabunNode = defineAreaNode(localAuthorityService, {
   title: "รับทำเว็บไซต์ เพชรบูรณ์ | โหลดเร็วพิเศษ ยกระดับธุรกิจท่องเที่ยวเขาค้อและเกษตรเมืองหนาว",
   description:
     "เปลี่ยนไอหมอกเขาค้อให้เป็นยอดจองตรง ด้วยเว็บไซต์ที่เน้น Visual สวยงามและระบบจองที่ลื่นไหล",
-  heroImage: "/images/areas/phetchabun-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.4167, lng: 101.15 },
   districts: [
     "เมืองเพชรบูรณ์",

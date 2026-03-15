@@ -26,7 +26,7 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการแสดงผลบนมือถือที่รวดเร็ว (Mobile-First) และระบบความปลอดภัยระดับ Enterprise เพื่อสร้างความเชื่อมั่นสูงสุดให้คู่ค้า B2B",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chachoengsao-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.6904, lng: 101.0772 },
   districts: ["เมืองฉะเชิงเทรา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -79,7 +79,7 @@ export const chachoengsaoNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chachoengsao-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

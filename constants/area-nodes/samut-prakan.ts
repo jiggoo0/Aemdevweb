@@ -26,7 +26,7 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Global Entity Mapping เพื่อให้ธุรกิจของคุณครองอันดับหนึ่งในสายตาคู่ค้าทั่วโลก",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/samut-prakan-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.5991, lng: 100.5967 },
   districts: ["เมืองสมุทรปราการ", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const samutPrakanNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/samut-prakan-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/case-studies/industrial-catalog.webp",
         "/images/services/catalog-node.webp",

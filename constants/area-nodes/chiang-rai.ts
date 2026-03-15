@@ -27,7 +27,7 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ SEO หลายภาษา (ไทย/อังกฤษ/จีน) และระบบความปลอดภัยระดับสากล เพื่อสร้างอำนาจทางการค้าในย่านเศรษฐกิจ GMS",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chiang-rai-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 19.9101, lng: 99.8405 },
   districts: ["เมืองเชียงราย", "แม่สาย", "เชียงของ"],
 
@@ -81,7 +81,7 @@ export const chiangRaiNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chiang-rai-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

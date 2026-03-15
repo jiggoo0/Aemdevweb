@@ -21,7 +21,7 @@ export const pattaniNode = defineAreaNode(corporateService, {
     "เพื่อให้ธุรกิจในปัตตานีของคุณ ครองอันดับหนึ่งในสายตาคู่ค้าจากกลุ่มประเทศมุสลิมและอาเซียน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/pattani-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 6.8681, lng: 101.2501 },
   districts: [
     "เมืองปัตตานี",
@@ -109,7 +109,7 @@ export const pattaniNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/pattani-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

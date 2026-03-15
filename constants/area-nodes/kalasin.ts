@@ -22,7 +22,7 @@ export const kalasinNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนคุณค่าทางวัฒนธรรมและประวัติศาสตร์ให้กลายเป็นรายได้ที่ยั่งยืนสำหรับวิสาหกิจชุมชนและ SME ในพื้นที่",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/kalasin-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.432, lng: 103.506 },
   districts: [
     "เมืองกาฬสินธุ์",
@@ -111,7 +111,7 @@ export const kalasinNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/kalasin-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

@@ -26,7 +26,7 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
     "เราเน้นโครงสร้างข้อมูลสินค้า (SKU) ที่ค้นหาง่าย และการทำ Entity Mapping เพื่อให้โรงงานของคุณครองอันดับหนึ่งในสายตาคู่ค้าข้ามชาติ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/samut-sakhon-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 13.5475, lng: 100.2744 },
   districts: ["เมืองสมุทรสาคร", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -79,7 +79,7 @@ export const samutSakhonNode = defineAreaNode(catalogService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/samut-sakhon-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/case-studies/industrial-catalog.webp",
         "/images/services/catalog-node.webp",

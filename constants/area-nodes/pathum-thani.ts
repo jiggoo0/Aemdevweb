@@ -22,7 +22,7 @@ export const pathumThaniNode = defineAreaNode(corporateService, {
     "เพื่อให้ธุรกิจในเขตนวนครและรังสิตของคุณ ครองความได้เปรียบในตลาด B2B ทั้งในไทยและต่างประเทศ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/pathum-thani-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.0208, lng: 100.525 },
   districts: [
     "เมืองปทุมธานี",
@@ -109,7 +109,7 @@ export const pathumThaniNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/pathum-thani-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/case-studies/industrial-catalog.webp",
         "/images/services/corporate-node.webp",

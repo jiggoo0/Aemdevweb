@@ -28,7 +28,7 @@ export const chiangMaiNode = defineAreaNode(hotelResortService, {
     "และเพิ่มยอดจองตรง (Direct Booking) ให้ธุรกิจของคุณเติบโตได้อย่างอิสระและยั่งยืน",
 
   // --- Visual & Assets ---
-  heroImage: "/images/areas/chiang-mai-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.7883, lng: 98.9853 },
   districts: ["นิมมาน", "แม่ริม", "หางดง"],
 
@@ -133,7 +133,7 @@ export const chiangMaiNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chiang-mai-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/hotel-resort-node.webp",
         "/images/case-studies/provincial-domination.webp",

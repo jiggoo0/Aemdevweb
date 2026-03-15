@@ -26,7 +26,7 @@ export const lamphunNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ Technical SEO เชิงลึก และการนำเสนออัตลักษณ์แบรนด์ที่สง่างาม เพื่อสร้างอำนาจทางการค้าในตลาดภาคเหนือตอนบน",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/lamphun-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 18.5772, lng: 99.0083 },
   districts: ["เมืองลำพูน", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const lamphunNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/lamphun-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

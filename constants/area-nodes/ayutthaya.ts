@@ -26,7 +26,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างที่รองรับการทำ B2B SEO เชิงลึก และระบบความปลอดภัยข้อมูลที่ผ่านการรับรองมาตรฐานสากล เพื่อสร้างความได้เปรียบให้ธุรกิจของคุณในเขตอุตสาหกรรมชั้นนำ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/ayutthaya-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 14.3532, lng: 100.5689 },
   districts: ["เมืองพระนครศรีอยุธยา", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -80,7 +80,7 @@ export const ayutthayaNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/ayutthaya-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/corporate-node.webp",
         "/images/case-studies/industrial-catalog.webp",

@@ -22,7 +22,7 @@ export const chaiyaphumNode = defineAreaNode(localAuthorityService, {
     "รวมถึงการยกระดับสินค้าภูมิปัญญาอย่างผ้าไหมมัดหมี่สู่ตลาดออนไลน์ระดับพรีเมียมด้วยโครงสร้าง SEO พื้นที่",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/chaiyaphum-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 15.806, lng: 102.031 },
   districts: [
     "เมืองชัยภูมิ",
@@ -109,7 +109,7 @@ export const chaiyaphumNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/chaiyaphum-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

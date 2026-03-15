@@ -20,7 +20,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
     "เราเน้นโครงสร้างข้อมูลที่สะอาด ปลอดภัย และมีการทำ Entity Mapping เพื่อให้ธุรกิจของคุณเป็นที่รู้จักในฐานะผู้เชี่ยวชาญตัวจริงในภูมิภาค",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/khon-kaen-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.4322, lng: 102.8236 },
   districts: ["ในเมือง", "มข.", "ชุมแพ"],
 
@@ -154,7 +154,7 @@ export const khonKaenNode = defineAreaNode(corporateService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/khon-kaen-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: ["/images/services/local-node.webp", "/images/case-studies/industrial-catalog.webp"],
     },
   },

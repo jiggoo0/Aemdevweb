@@ -22,7 +22,7 @@ export const mahaSarakhamNode = defineAreaNode(localAuthorityService, {
     "เพื่อเปลี่ยนยอดผู้เข้าชม (Traffic) รอบสถาบันการศึกษาให้กลายเป็นลูกค้าจริงด้วยกลยุทธ์ Local SEO ที่แม่นยำ",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/maha-sarakham-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 16.184, lng: 103.301 },
   districts: [
     "เมืองมหาสารคาม",
@@ -108,7 +108,7 @@ export const mahaSarakhamNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/maha-sarakham-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

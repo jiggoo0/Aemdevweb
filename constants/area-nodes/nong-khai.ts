@@ -22,7 +22,7 @@ export const nongKhaiNode = defineAreaNode(localAuthorityService, {
     "เพื่อให้คู่ค้าและนักท่องเที่ยว มั่นใจในมาตรฐานระดับสากลของธุรกิจหนองคายของคุณและครองอันดับหนึ่งบนหน้าแรก Google",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/nong-khai-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 17.8785, lng: 102.7412 },
   districts: [
     "เมืองหนองคาย",
@@ -109,7 +109,7 @@ export const nongKhaiNode = defineAreaNode(localAuthorityService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/nong-khai-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/services/local-node.webp",
         "/images/case-studies/provincial-domination.webp",

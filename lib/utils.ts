@@ -19,7 +19,7 @@ export function getAssetUrl(path: string | undefined): string {
   if (path.startsWith("http")) return path;
 
   const BLOB_BASE = "https://fme2ovv5az8x4yqg.public.blob.vercel-storage.com";
-  
+
   // [CACHE_BUSTER]: ใช้ Timestamp หรือ Version เพื่อบังคับให้อัปเดตรูปภาพใหม่
   // ในที่นี้ใช้การสร้างเลขสุ่มสั้นๆ หรือจะใช้ Version จาก SITE_CONFIG ก็ได้
   const version = Date.now().toString().slice(-6);

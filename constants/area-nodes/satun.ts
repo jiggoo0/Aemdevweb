@@ -21,7 +21,7 @@ export const satunNode = defineAreaNode(hotelResortService, {
     "เพื่อให้แบรนด์สตูลของคุณ ครองใจนักท่องเที่ยวกลุ่มคุณภาพจากทั่วโลกและสร้างรายได้จากยอดจองตรงอย่างมั่นคง",
 
   // --- Visual & Location ---
-  heroImage: "/images/areas/satun-node.webp",
+  heroImage: "/images/areas/universal-node.webp",
   coordinates: { lat: 6.6233, lng: 100.0667 },
   districts: ["เมืองสตูล", "ย่านธุรกิจสำคัญ", "ย่านการค้า"],
 
@@ -102,7 +102,7 @@ export const satunNode = defineAreaNode(hotelResortService, {
       },
     ],
     regionalVisuals: {
-      banner: "/images/areas/satun-node.webp",
+      banner: "/images/areas/universal-node.webp",
       gallery: [
         "/images/templates/hotelresort/hotel-resort-node.webp",
         "/images/case-studies/provincial-domination.webp",
