@@ -279,6 +279,12 @@ export type ImageBlurRegistry = Record<string, ImageBlurMetadata>;
 
 export interface LocalContext {
   readonly marketInsight: string;
+  /** [NEW]: Unique characteristics or slogan of the province (e.g., "เมืองรถม้า", "ไข่มุกแห่งอันดามัน") */
+  readonly localIdentity?: string;
+  /** [NEW]: Personal observation from "นายเอ็มซ่ามากส์" about the local digital landscape */
+  readonly expertObservation?: string;
+  /** [NEW]: Specific business culture or behavior in this province */
+  readonly localBusinessCulture?: string;
   readonly technicalApproach: string;
   readonly localStrength: string;
   readonly nicheIndustries: readonly string[];
@@ -357,11 +363,13 @@ export interface UniversalTemplateProps {
     readonly summary: string;
     readonly topBenefits: readonly string[];
     readonly expertRef: string;
+    readonly expertNote?: string;
   };
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
   readonly regionalVisuals?: LocalContext["regionalVisuals"];
+  readonly promotions?: LocalContext["promotions"];
   readonly promotions?: LocalContext["promotions"];
   readonly marketSaturation?: number;
   readonly isTourismHeavy?: boolean;
@@ -451,6 +459,7 @@ export interface AreaNode {
   readonly socialProof?: LocalContext["socialProof"];
   readonly regionalPricing?: LocalContext["regionalPricing"];
   readonly localSuccessStory?: LocalContext["localSuccessStory"];
+  readonly promotions?: LocalContext["promotions"];
   readonly marketSaturation?: number;
   readonly isTourismHeavy?: boolean;
   readonly regionalLatency?: number;

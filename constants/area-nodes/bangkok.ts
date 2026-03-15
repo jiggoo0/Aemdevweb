@@ -42,6 +42,11 @@ export const bangkokNode = defineAreaNode(corporateService, {
   localContext: {
     marketInsight:
       "Global CBD & Financial Center - Trust Hub' ที่มีความเสถียร 99.99% และรองรับพฤติกรรมการค้นหาผ่าน AI Search ยุคใหม่",
+    localIdentity: "Global Hub of Southeast Asia | ศูนย์กลางธุรกิจระดับโลก",
+    expertObservation:
+      "กรุงเทพฯ คือสมรภูมิที่มีการแข่งขันสูงที่สุด การทำ SEO แบบเดิมไม่เพียงพออีกต่อไป ต้องเน้นที่ Entity Validation และ Technical Hardening เพื่อให้ AI มั่นใจที่จะแนะนำธุรกิจคุณในฐานะผู้นำตลาด",
+    localBusinessCulture:
+      "เน้นความเร็วในการตอบสนอง มาตรฐานความเป็นมืออาชีพ และความน่าเชื่อถือระดับสากล (Corporate Trust)",
     technicalApproach:
       "เน้นสถาปัตยกรรม Partial Prerendering (PPR) และ Zero-JS Core เพื่อประสิทธิภาพ Core Web Vitals ที่ดีที่สุดในอุตสาหกรรม",
     localStrength:

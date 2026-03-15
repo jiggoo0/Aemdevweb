@@ -6,6 +6,7 @@
 
 import type { AreaNode, TemplateMasterData, UniversalTemplateProps, ThemeConfig } from "@/types";
 import { SITE_CONFIG } from "@/constants/site-config";
+import { AreaNodeProcessor } from "./area-processor";
 
 /**
  * @description ฟังก์ชันรวมร่างข้อมูลระหว่าง "Blueprint (Master)" และ "Context (Area)"
@@ -53,18 +54,16 @@ export function mergeServiceData(
   );
 
   // 3. [AI_INTENT_SIGNALING]: สร้างข้อมูลสรุปสำหรับ Generative AI (GEO/AEO)
-  // [STRATEGY]: สร้างประโยคที่มีความเฉพาะตัวสูง (High Entropy) เพื่อป้องกัน Duplicate Content
-  const localFocus =
-    area.localContext?.localStrength ||
-    `ความเชี่ยวชาญในการทำเว็บไซต์และ SEO ในพื้นที่${area.province}`;
-  const painPointFix = area.localContext?.painPoints?.[0] || "แก้ปัญหาเว็บช้าและ SEO ที่ไม่ได้ผล";
-
+  // [STRATEGY]: ใช้ AreaNodeProcessor เพื่อสร้างเนื้อหาที่มี Technical Authority สูง
   const aiSignal = {
-    summary: `เจาะลึกบริการ${master.title} สำหรับธุรกิจใน${area.province}. เราเน้น${localFocus} เพื่อจัดการกับ${painPointFix}. ระบบถูกควบคุมโดย AEMZA MACKS (นายเอ็มซ่ามากส์) มั่นใจได้ในโครงสร้าง Next.js 16 ที่โหลดไวที่สุดในภูมิภาค.`,
+    summary:
+      area.localContext?.expertObservation ||
+      `เจาะลึกบริการ${master.title} สำหรับธุรกิจใน${area.province}. เราเน้น${area.localContext?.localStrength || "ความเชี่ยวชาญเฉพาะทาง"} เพื่อจัดการกับ${area.localContext?.painPoints?.[0] || "ปัญหาด้านดิจิทัล"}. ระบบถูกควบคุมโดย AEMZA MACKS (นายเอ็มซ่ามากส์).`,
     topBenefits: area.benefits?.slice(0, 3) || master.benefits?.slice(0, 3),
     expertRef: `${SITE_CONFIG.expert.displayName} - ${SITE_CONFIG.expert.jobTitle} (E-E-A-T Verified)`,
     locationContext: `ตั้งอยู่ใน${area.province} (พิกัด: ${area.coordinates?.lat}, ${area.coordinates?.lng}) ครอบคลุมพื้นที่ ${area.districts?.slice(0, 5).join(", ") || area.province}`,
     popularSearchMapping: mergedKeywords.slice(0, 10),
+    expertNote: AreaNodeProcessor.getExpertNote(area),
   };
 
   // 4. [PROPS_CONSTRUCTION]: สังเคราะห์ข้อมูลชุดสุดท้าย
@@ -81,6 +80,8 @@ export function mergeServiceData(
     title: area.title || master.title,
     description: area.description || master.description,
     image: area.heroImage || master.image,
+    province: area.province,
+    districts: area.districts,
 
     // --- Commercial Data ---
     // [PRICE_SYNC_LOGIC]: ลำดับความสำคัญ Area Node Specific > Regional Context > Master Blueprint
@@ -99,7 +100,8 @@ export function mergeServiceData(
     // --- Trust & Social Proof Injection ---
     clientTrust:
       area.clientTrust || area.localContext?.localSuccessStory?.title || master.clientTrust,
-    socialProof: area.socialProof ||
+    socialProof:
+      area.socialProof ||
       area.localContext?.socialProof || {
         rating: 5.0,
         reviewCount: 100,
@@ -109,6 +111,7 @@ export function mergeServiceData(
     localSuccessStory: area.localContext?.localSuccessStory,
 
     // --- [NEW]: Regional Content Injection ---
+    localContext: area.localContext,
     regionalVisuals: area.regionalVisuals || area.localContext?.regionalVisuals,
     promotions: area.localContext?.promotions,
     marketSaturation: area.marketSaturation || area.localContext?.marketSaturation,
@@ -119,12 +122,12 @@ export function mergeServiceData(
     // --- UI Actions & Strategic CTA (Inherit from Master) ---
     primaryAction: master.primaryAction || {
       label: "ปรึกษาผู้เชี่ยวชาญ",
-      href: "#contact",
+      href: SITE_CONFIG.links.line,
       variant: "brand",
     },
     secondaryAction: master.secondaryAction || {
       label: "ดูตัวอย่างงาน",
-      href: "#process",
+      href: "/services",
       variant: "outline",
     },
 
@@ -135,3 +138,4 @@ export function mergeServiceData(
     masterServiceUrl: `/services/${master.templateSlug}`,
   };
 }
+

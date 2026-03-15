@@ -87,6 +87,11 @@ export const chiangMaiNode = defineAreaNode(hotelResortService, {
   localContext: {
     marketInsight:
       "Digital Nomad Hub & Cafe Culture - อารมณ์และภาพ' เป็นหลัก เว็บไซต์ที่สวยและสื่อสารถูกจุดจะปิดการขายได้ง่ายกว่า",
+    localIdentity: "Creative & Wellness Capital | เมืองศิลปะและสุขภาพ",
+    expertObservation:
+      "เชียงใหม่เป็นเมืองที่ขายอารมณ์และไลฟ์สไตล์ เว็บไซต์ที่นี่ต้อง 'สวยสะกด' ในทุกหน้าเพจ แต่ต้องไม่ทิ้งความเร็ว เพราะนักท่องเที่ยวต่างชาติมักมีอินเทอร์เน็ตที่ไม่เสถียรขณะเดินทางท่องเที่ยว",
+    localBusinessCulture:
+      "การสื่อสารที่นุ่มนวลแต่จริงใจ การโชว์บรรยากาศ (Visual Storytelling) และความใส่ใจในดีเทลของงานดีไซน์",
     technicalApproach:
       "เน้น Image Optimization ขั้นสูง เพื่อให้ภาพสวยคมชัดแต่โหลดเร็ว แม้เปิดผ่านมือถือในจุดที่สัญญาณเน็ตไม่แรง",
     localStrength:
